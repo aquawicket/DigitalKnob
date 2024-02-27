@@ -47,11 +47,11 @@ int DKNavigator::onLine(duk_context* ctx){
 int DKNavigator::platform(duk_context* ctx){
 	//TODO - complete this for all OS's
 	DKDEBUGFUNC(ctx);
-#ifdef WIN64
-	duk_push_string(ctx, "Win32");
+#ifdef WIN_X86_64
+	duk_push_string(ctx, "WIN_X86_64");
 	return true;
-#elif WIN32
-	duk_push_string(ctx, "Win64");
+#elif WIN_X86
+	duk_push_string(ctx, "WIN_X86");
 	return true;
 #elif MAC
 	duk_push_string(ctx, "MacIntel");

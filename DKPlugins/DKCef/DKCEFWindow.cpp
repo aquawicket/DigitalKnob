@@ -70,7 +70,7 @@ DKCEFWindow::DKCEFWindow(){
 void DKCEFWindow::DoFrame(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 /*
-#if WIN32
+#if WIN
 	//Display FPS
 	HWND win = dkCef->current_browser->GetHost()->GetWindowHandle();
 	HWND hwnd = GetWindow(win, GW_CHILD);
@@ -131,7 +131,7 @@ bool DKCEFWindow::TestReturnString(const void* input, void* output){
 
 bool DKCEFWindow::Fullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd failed\n");
@@ -167,7 +167,7 @@ bool DKCEFWindow::Fullscreen(const void* input, void* output){
 
 bool DKCEFWindow::GetHandle(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -196,7 +196,7 @@ bool DKCEFWindow::GetHandle(const void* input, void* output){
 
 bool DKCEFWindow::GetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -230,7 +230,7 @@ bool DKCEFWindow::GetHeight(const void* input, void* output){
 
 bool DKCEFWindow::GetMouseX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	POINT p;
 	if (!GetCursorPos(&p))
 		return DKERROR("GetCursorPos() failed\n");
@@ -260,7 +260,7 @@ bool DKCEFWindow::GetMouseX(const void* input, void* output){
 
 bool DKCEFWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	POINT p;
 	if (!GetCursorPos(&p))
 		return DKERROR("GetCursorPos() failed\n");
@@ -290,7 +290,7 @@ bool DKCEFWindow::GetMouseY(const void* input, void* output){
 
 bool DKCEFWindow::GetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -324,7 +324,7 @@ bool DKCEFWindow::GetWidth(const void* input, void* output){
 
 bool DKCEFWindow::GetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -358,7 +358,7 @@ bool DKCEFWindow::GetX(const void* input, void* output){
 
 bool DKCEFWindow::GetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -392,7 +392,7 @@ bool DKCEFWindow::GetY(const void* input, void* output){
 
 bool DKCEFWindow::Hide(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd)
 		return DKERROR("hwnd invalid\n")
@@ -420,7 +420,7 @@ bool DKCEFWindow::Hide(const void* input, void* output){
 
 bool DKCEFWindow::IsFullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -455,7 +455,7 @@ bool DKCEFWindow::IsFullscreen(const void* input, void* output){
 
 bool DKCEFWindow::IsVisible(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -483,7 +483,7 @@ bool DKCEFWindow::IsVisible(const void* input, void* output){
 
 bool DKCEFWindow::Maximize(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -511,7 +511,7 @@ bool DKCEFWindow::Maximize(const void* input, void* output){
 
 bool DKCEFWindow::MessageBox(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-//#if WIN32
+//#if WIN
 	//TODO
 //#elif MAC
 	//TODO
@@ -525,7 +525,7 @@ bool DKCEFWindow::MessageBox(const void* input, void* output){
 
 bool DKCEFWindow::Minimize(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -553,7 +553,7 @@ bool DKCEFWindow::Minimize(const void* input, void* output){
 
 bool DKCEFWindow::Restore(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -583,7 +583,7 @@ bool DKCEFWindow::Restore(const void* input, void* output){
 
 bool DKCEFWindow::SetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -620,11 +620,11 @@ bool DKCEFWindow::SetHeight(const void* input, void* output){
 
 bool DKCEFWindow::SetIcon(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd)
 		return DKERROR("hwnd is invalid\n");
-	HINSTANCE hinstance = (HINSTANCE)(LONG_PTR)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
+	HINSTANCE hinstance = (HINSTANCE)(LONG_PTR)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN may require GWL_HINSTANCE
 	if(!hinstance)
 		return DKERROR("hinstance is invalid\n");
 	DKString file = *(DKString*)input;
@@ -653,7 +653,7 @@ bool DKCEFWindow::SetIcon(const void* input, void* output){
 
 bool DKCEFWindow::SetTitle(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -681,7 +681,7 @@ bool DKCEFWindow::SetTitle(const void* input, void* output){
 
 bool DKCEFWindow::SetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid");
@@ -718,7 +718,7 @@ bool DKCEFWindow::SetWidth(const void* input, void* output){
 
 bool DKCEFWindow::SetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -756,7 +756,7 @@ bool DKCEFWindow::SetX(const void* input, void* output){
 
 bool DKCEFWindow::SetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -793,7 +793,7 @@ bool DKCEFWindow::SetY(const void* input, void* output){
 
 bool DKCEFWindow::Show(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -823,7 +823,7 @@ bool DKCEFWindow::Show(const void* input, void* output){
 
 bool DKCEFWindow::Windowed(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
-#if WIN32
+#if WIN
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if (!hwnd)
 		return DKERROR("hwnd invalid\n");
@@ -902,7 +902,7 @@ bool DKCEFWindow::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<
 
 void DKCEFWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info){
 	DKDEBUGFUNC(browser, cursor, type, custom_cursor_info);
-#if WIN32
+#if WIN
 	HWND hwnd;
 	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)) {
 		DKERROR("DKClass::CallFunc() failed\n");
@@ -944,7 +944,7 @@ bool DKCEFWindow::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::
 void DKCEFWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen){
 	DKDEBUGFUNC(browser, fullscreen);
 	CEF_REQUIRE_UI_THREAD();
-#if WIN32
+#if WIN
 	HWND hwnd = GetActiveWindow();
 	if (!hwnd) {
 		DKERROR("hwnd invalid\n");

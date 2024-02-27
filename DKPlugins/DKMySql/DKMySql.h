@@ -29,7 +29,7 @@
 #define DKMySql_H
 
 //WARNING_DISABLE
-//#if defined (WIN32) || defined (WIN64)
+//#if WIN
   //#include <winsock.h>
   //#pragma warning (disable: 4514 4786)
   //#pragma warning( push, 3 )
@@ -38,7 +38,7 @@
 //#include <stdio.h>
 //#include <string.h>
 
-#if !defined (WIN32) && !defined (WIN64)
+#if !WIN
   #include <unistd.h>
 #endif
 //WARNING_ENABLE

@@ -31,7 +31,7 @@
 #include "DK/DKString.h"
 
 //WARNING_DISABLE
-#ifndef WIN32
+#ifndef WIN
 	#include <limits.h>
 	#include <stdlib.h>
 #endif

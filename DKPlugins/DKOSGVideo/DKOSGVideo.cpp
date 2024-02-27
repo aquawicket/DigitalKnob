@@ -132,7 +132,7 @@ void DKOSGVideo::unloaddlls(){
 		DKERROR("DKOSGVideo::loaddlls(): swresample-1.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avutil-54.dll"))
 		DKERROR("DKOSGVideo::loaddlls(): avutil-54.dll did not unload \n");
-#endif //WIN32
+#endif //WIN
 }
 */
 

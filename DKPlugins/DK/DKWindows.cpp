@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-#if WIN32
+#if WIN
 #include "DK/DKWindows.h"
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
@@ -52,7 +52,7 @@ HWND DKWindows::consoleWindow;
 
 extern int main(int argc, char **argv);
 
-//////////// WIN32 MAIN ////////////////////////////////////////////////////////////////////////////
+//////////// WIN MAIN ////////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 	DKDEBUGFUNC(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	UNREFERENCED_PARAMETER(hPrevInstance);
@@ -707,9 +707,9 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 
 	// https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4334?view=msvc-170
 	// Get size of color table.
-#if WIN32 && !WIN64
+#if WIN_X86
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
-#elif WIN64
+#elif WIN_X86_64
 	#if _MSC_VER
 		SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
 	#else
@@ -912,4 +912,4 @@ bool DKWindows::PrintStack(){
 }
 */
 
-#endif //WIN32
+#endif //WIN

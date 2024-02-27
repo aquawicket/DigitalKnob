@@ -107,4 +107,4 @@ public:
 };
 
 #endif //DKWindows_H
-#endif //WIN32
+#endif //WIN

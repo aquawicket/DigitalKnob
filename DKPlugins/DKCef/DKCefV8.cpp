@@ -491,7 +491,7 @@ bool DKCefV8::SetVolume(CefArgs args, CefReturn retval){
 
 bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-#if WIN32
+#if WIN
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_RESTORE);
 #endif 

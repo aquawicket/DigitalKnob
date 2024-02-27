@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifndef WIN32 //UNIX
+#ifndef WIN //UNIX
 #pragma once
 #ifndef DKUnix_H
 #define DKUnix_H
@@ -44,4 +44,4 @@ public:
 };
 
 #endif //DKUnix_H
-#endif //!WIN32
+#endif //!WIN

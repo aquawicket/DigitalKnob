@@ -59,7 +59,7 @@ bool DKAssets::Init(){
 		DKLog::log_file = false;
 	}
 
-#if WIN32
+#if WIN
 	DKString console;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
 #	if DEBUG
@@ -165,7 +165,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets
 	
-#if WIN32
+#if WIN
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
 	    DKFile::PathExists(DKFile::app_path + "../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
@@ -218,7 +218,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 
 bool DKAssets::GetDataPath(DKString& path){
 	DKDEBUGFUNC(path);
-#if WIN32
+#if WIN
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -321,7 +321,7 @@ bool DKAssets::DeployAssets(){
 #endif
 
 //Windows will use the resources interface
-#if WIN32
+#if WIN
 	DKINFO("Extracting assets from executable windows resources . . . \n");	
 	HGLOBAL hResourceLoaded;	// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 

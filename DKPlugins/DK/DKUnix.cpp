@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifndef WIN32
+#ifndef WIN
 #include "DK/DKUnix.h"
 #include "DK/DKFile.h"
 
@@ -154,4 +154,4 @@ void DKUnix::restoreTermios(void) {
 	// system("stty cooked"); // Reset terminal to normal "cooked" mode
 }
 
-#endif //!WIN32
+#endif //!WIN

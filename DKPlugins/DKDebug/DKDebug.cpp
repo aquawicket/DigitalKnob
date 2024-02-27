@@ -36,7 +36,7 @@
 #endif
 #include <stdio.h>
 
-#if WIN32
+#if WIN
 	#include "StackWalker.h"
 #include <tchar.h>
 #include <fstream>
@@ -152,10 +152,10 @@ static void InitUnhandledExceptionFilter(){
 		s_bUnhandledExeptionFilterSet = TRUE;
 	}
 }
-#endif //WIN32
+#endif //WIN
 
 // https://panthema.net/2008/0901-stacktrace-demangled/
-#if !WIN32 && !ANDROID
+#if !WIN && !ANDROID
 #include <execinfo.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -225,7 +225,7 @@ bool DKDebug::Init(){
 #endif
 	InitUnhandledExceptionFilter();
 #endif
-#if !WIN32 && !ANDROID
+#if !WIN && !ANDROID
 	signal(SIGABRT, handler);
 	signal(SIGSEGV, handler);
 	signal(SIGBUS,  handler);
@@ -257,7 +257,7 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	//DKDEBUGFUNC(input, output);  //EXCESSIVE LOGGING
 	DK_UNUSED(input);
 	DK_UNUSED(output);
-#if WIN32
+#if WIN
 	DKWARN("########## C++ CALL STACK ##########\n");
 	StackWalkerToConsole sw;
 	sw.ShowCallstack(GetCurrentThread(), NULL); // output to console

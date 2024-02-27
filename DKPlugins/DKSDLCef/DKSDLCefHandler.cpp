@@ -228,14 +228,14 @@ bool DKSDLCefHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRef
 void DKSDLCefHandler::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info){
 	DKDEBUGFUNC(browser, cursor, type, custom_cursor_info);
 	//FIXME
-#	ifdef WIN32
+#	if WIN
 		HWND hwnd;
 		if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
 		if(!::IsWindow(hwnd)){ return; }
 		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
 		SetCursor(cursor);
 #	endif
-#	ifdef LINUX
+#	if LINUX
 		//Display* dpy;// = glfwGetX11Display();
 		//Cursor c;
 		//c = XCreateFontCursor(dpy, XC_xterm); 

@@ -10,7 +10,7 @@
 # Debug Information Format:         C7 compatible (/Z7)
 # Enable Enhanced Instruction Set:  Streaming SIMD Extensions (/arch:SSE)
 # Inline function expansion:        Default
-# Preprocessor Definitions:         _DEBUG WIN32 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
+# Preprocessor Definitions:         _DEBUG WIN_X86 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
 #
 # RELEASE flags)
 # Debug information format:         Program Database (/Zi)

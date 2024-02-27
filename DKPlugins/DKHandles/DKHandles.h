@@ -106,4 +106,4 @@ public:
 
 REGISTER_OBJECT(DKHandles, true);
 #endif //DKHandles_H
-#endif //WIN32 || WIN64
+#endif //WIN

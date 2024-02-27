@@ -36,8 +36,8 @@
 //WARNING_ENABLE
 
 bool GetOSFlag(DKString& flag){
-#if WIN32
-	flag = "WIN32";
+#if WIN_X86
+	flag = "WIN_X86";
 #endif
 #if WIN64
 	flag = "WIN64";

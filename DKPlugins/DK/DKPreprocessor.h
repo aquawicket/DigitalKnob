@@ -119,18 +119,18 @@
 #	ifndef WIN
 #		define WIN 1
 #	endif
-#   ifndef WIN32
-#		define WIN32 1
+#   ifndef WIN_X86
+#		define WIN_X86 1
 #	endif
 #	if DKBITS == 32
-#		define DKOS "WIN32"
+#		define DKOS "WIN_X86"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #	if DKBITS == 64
-#		ifndef WIN64
-#			define WIN64 1
+#		ifndef WIN_X86_64
+#			define WIN_X86_64 1
 #		endif
-#		define DKOS "WIN64"
+#		define DKOS "WIN_X86_64"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #elif __APPLE__ && __MACH__

@@ -32,7 +32,7 @@
 #include <math.h>
 #include <assert.h>
 //#include <boost/asio.hpp> //Boost deprecated in the DKCore library
-#ifndef WIN32
+#ifndef WIN
 	#include <sys/time.h>
 #endif
 #if WIN
@@ -46,7 +46,7 @@
 #include "DK/DKUtil.h"
 #include "DK/DKLog.h"
 #include "DK/DKFile.h"
-#if WIN32
+#if WIN
 	#include "DKWindows.h"
 #else
 	#include "DKUnix.h"
@@ -178,7 +178,7 @@ bool DKUtil::CallExit(){
 #	if ANDROID
 		CallJavaFunction("Exit","");
 #	endif
-#	if WIN32
+#	if WIN
 		if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
 			DKWARN("DKApp::Exit(): Not called from the main thread\n");
 		}
@@ -189,7 +189,7 @@ bool DKUtil::CallExit(){
 
 bool DKUtil::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
-#	if WIN32
+#	if WIN
 		return DKWindows::CpuUsed(cpu);
 #	elif MAC
 		return DKMac::CpuUsed(cpu);
@@ -202,7 +202,7 @@ bool DKUtil::CpuUsed(int& cpu){
 
 bool DKUtil::CpuUsedByApp(int& cpu){
 	DKDEBUGFUNC(cpu);
-#	if WIN32
+#	if WIN
 		return DKWindows::CpuUsedByApp(cpu);
 #	elif MAC
 		return DKMac::CpuUsedByApp(cpu);
@@ -215,7 +215,7 @@ bool DKUtil::CpuUsedByApp(int& cpu){
 
 bool DKUtil::DoubleClick(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		DKWindows::LeftClick();
 		return DKWindows::LeftClick();
 #	else
@@ -225,7 +225,7 @@ bool DKUtil::DoubleClick(){
 
 bool DKUtil::DrawTextOnScreen(const DKString& text){
 	DKDEBUGFUNC(text);
-#	if WIN32
+#	if WIN
 		return DKWindows::DrawTextOnScreen(text);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -243,7 +243,7 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 // rtncode:        The return code of the command at exit. Default -1 is set and will evaluate the return error. May be overwritten. I.E. set to 0 to ignore errors 
 bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& stdouterr, int& rtncode){
 	DKDEBUGFUNC(command, mode, stdouterr, rtncode);
-#	if WIN32
+#	if WIN
 		auto& dk_popen = _popen;
 		auto& dk_pclose = _pclose;
 #	else
@@ -272,7 +272,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& st
 
 bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y){
 	DKDEBUGFUNC(file, x, y);
-#	if WIN32
+#	if WIN
 		return DKWindows::FindImageOnScreen(file, x, y);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -281,7 +281,7 @@ bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y){
 
 bool DKUtil::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetClipboard(text);
 #	elif LINUX
 		return DKLinux::GetClipboard(text);
@@ -326,9 +326,9 @@ bool DKUtil::GetFrames(unsigned long& frames){
 
 bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
-#	if WIN32
+#	if WIN
 		return DKWindows::GetKey(key);
-#	elif !WIN32
+#	elif !WIN
 		return DKUnix::GetKey(key);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -352,7 +352,7 @@ bool DKUtil::GetLocalIP(DKString& ip){
 
 bool DKUtil::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetMousePos(x, y);
 #	elif MAC
 		return DKMac::GetMousePos(x, y);
@@ -367,7 +367,7 @@ bool DKUtil::GetMousePos(int& x, int& y){
 
 bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y){
 	DKDEBUGFUNC(image, x, y);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetPixelFromImage(image, x, y);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -376,7 +376,7 @@ bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y){
 
 bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b){
 	DKDEBUGFUNC(x, y, r, g, b);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetPixelFromScreen(x, y, r, g, b);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -384,7 +384,7 @@ bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b){
 }
 
 bool DKUtil::GetProcessList(DKString& list){
-#	if WIN32
+#	if WIN
 		return DKWindows::GetProcessList(list) && DKDEBUGRETURN(list);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -392,7 +392,7 @@ bool DKUtil::GetProcessList(DKString& list){
 }
 
 bool DKUtil::GetScreenHeight(int& h){
-#	if WIN32
+#	if WIN
 		return DKWindows::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif MAC
 		return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
@@ -408,7 +408,7 @@ bool DKUtil::GetScreenHeight(int& h){
 }
 
 bool DKUtil::GetScreenWidth(int& w){
-#	if WIN32
+#	if WIN
 		return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif MAC
 		return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
@@ -440,7 +440,7 @@ bool DKUtil::GetTicks(long& ticks){
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::time_duration diff = tick - now;
 	//return (double)diff.total_milliseconds();
-#	if WIN32
+#	if WIN
 		ticks = GetTickCount();
 		return true; //&& DKDEBUGRETURN(ticks)
 #	else
@@ -477,7 +477,7 @@ bool DKUtil::GetTime(DKString& _time){
 
 bool DKUtil::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetUsername(username) && DKDEBUGRETURN(username);
 #	else
 		return DKUnix::GetUsername(username) && DKDEBUGRETURN(username);
@@ -486,7 +486,7 @@ bool DKUtil::GetUsername(DKString& username){
 
 bool DKUtil::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetVolume(percent) && DKDEBUGRETURN(percent);
 #	elif LINUX
 		return DKLinux::GetVolume(percent) && DKDEBUGRETURN(percent);
@@ -497,7 +497,7 @@ bool DKUtil::GetVolume(int& percent){
 
 bool DKUtil::InMainThread(){
 	//DKDEBUGFUNC(); // DON'T DO THIS
-#	if WIN32
+#	if WIN
 		return mainThreadId == GetCurrentThreadId();
 #	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
@@ -522,7 +522,7 @@ bool DKUtil::InitFramerate(){
 
 bool DKUtil::KeyIsDown(int& key){
 	DKDEBUGFUNC(key);
-#	if WIN32
+#	if WIN
 		return DKWindows::KeyIsDown(key) && DKDEBUGRETURN(key);
 #	elif LINUX
 		return DKLinux::KeyIsDown(key) && DKDEBUGRETURN(key);
@@ -533,7 +533,7 @@ bool DKUtil::KeyIsDown(int& key){
 
 bool DKUtil::LeftClick(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::LeftClick();
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -542,7 +542,7 @@ bool DKUtil::LeftClick(){
 
 bool DKUtil::LeftPress(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::LeftPress();
 #	elif MAC
 		return DKMac::LeftPress();
@@ -555,7 +555,7 @@ bool DKUtil::LeftPress(){
 
 bool DKUtil::LeftRelease(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::LeftRelease();
 #	elif MAC
 		return DKMac::LeftRelease();
@@ -584,7 +584,7 @@ bool DKUtil::LimitFramerate(){
 
 bool DKUtil::LowPowerMonitor(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::LowPowerMonitor();
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -593,7 +593,7 @@ bool DKUtil::LowPowerMonitor(){
 
 bool DKUtil::MiddlePress(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::MiddlePress();
 #	elif MAC
 		return DKMac::MiddlePress();
@@ -606,7 +606,7 @@ bool DKUtil::MiddlePress(){
 
 bool DKUtil::MiddleRelease(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::MiddleRelease();
 #	elif MAC
 		return DKMac::MiddleRelease();
@@ -619,7 +619,7 @@ bool DKUtil::MiddleRelease(){
 
 bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	elif MAC
 		return DKMac::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
@@ -632,7 +632,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 
 bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::PhysicalMemoryUsed(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	elif MAC
 		return DKMac::PhysicalMemoryUsed(physicalMemory) && DKDEBUGRETURN(physicalMemory);
@@ -645,7 +645,7 @@ bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 
 bool DKUtil::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::PhysicalMemoryUsedByApp(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	elif MAC
 		return DKMac::PhysicalMemoryUsedByApp(physicalMemory) && DKDEBUGRETURN(physicalMemory);
@@ -658,7 +658,7 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
 
 bool DKUtil::PressKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
-#	if WIN32
+#	if WIN
 		return DKWindows::PressKey(key);
 #	elif MAC
 		return DKMac::PressKey(key);
@@ -671,7 +671,7 @@ bool DKUtil::PressKey(const unsigned short& key){
 
 bool DKUtil::ReleaseKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
-#	if WIN32
+#	if WIN
 		return DKWindows::ReleaseKey(key);
 #	elif MAC
 		return DKMac::ReleaseKey(key);
@@ -684,7 +684,7 @@ bool DKUtil::ReleaseKey(const unsigned short& key){
 
 bool DKUtil::RightClick(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::RightClick();
 //#	elif MAC
 //		return DKMac::RightClick();
@@ -697,7 +697,7 @@ bool DKUtil::RightClick(){
 
 bool DKUtil::RightPress(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::RightPress();
 #	elif MAC
 		return DKMac::RightPress();
@@ -710,7 +710,7 @@ bool DKUtil::RightPress(){
 
 bool DKUtil::RightRelease(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::RightRelease();
 #	elif MAC
 		return DKMac::RightRelease();
@@ -729,7 +729,7 @@ bool DKUtil::Round(double& num){
 
 bool DKUtil::Run(const DKString& command, const DKString& params /*, rtnvalue*/) {
 	DKDEBUGFUNC(command, params/*, rtnvalue*/);
-#	if WIN32
+#	if WIN
 		DKString error;
 		PVOID OldValue = NULL;
 		//  Disable redirection immediately prior to the native API function call.
@@ -758,7 +758,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params /*, rtnvalue*/)
 
 bool DKUtil::SetBrightness(const int& percent){
 	DKDEBUGFUNC(percent);
-#	if WIN32
+#	if WIN
 		return DKWindows::SetBrightness(percent);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -779,7 +779,7 @@ bool DKUtil::SendTick(){
 
 bool DKUtil::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
-#	if WIN32
+#	if WIN
 		return DKWindows::SetClipboard(text);
 //#	elif MAC
 //		return DKMac::SetClipboard(text);
@@ -792,7 +792,7 @@ bool DKUtil::SetClipboard(const DKString& text){
 
 bool DKUtil::SetClipboardFiles(const DKString& filelist){
 	DKDEBUGFUNC(filelist);
-#	if WIN32
+#	if WIN
 		return DKWindows::SetClipboardFiles(filelist);
 //#	elif MAC
 //		return DKMac::SetClipboardFiles(filelist);
@@ -805,7 +805,7 @@ bool DKUtil::SetClipboardFiles(const DKString& filelist){
 
 bool DKUtil::SetClipboardImage(const DKString& file){
 	DKDEBUGFUNC(file);
-#	if WIN32
+#	if WIN
 		return DKWindows::SetClipboardImage(file);
 //#	elif MAC
 //		return DKMac::SetClipboardImage(file);
@@ -843,7 +843,7 @@ bool DKUtil::SetMainThreadNow(){
 
 bool DKUtil::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
-#	if WIN32
+#	if WIN
 			return DKWindows::SetMousePos(x, y);
 #	elif MAC
 		return DKMac::SetMousePos(x, y);
@@ -856,7 +856,7 @@ bool DKUtil::SetMousePos(const int& x, const int& y){
 
 bool DKUtil::SetVolume(int& percent){
 	DKDEBUGFUNC(percent);
-#	if WIN32
+#	if WIN
 		return DKWindows::SetVolume(percent);
 #	elif LINUX
 		return DKLinux::SetVolume(percent);
@@ -867,7 +867,7 @@ bool DKUtil::SetVolume(int& percent){
 
 bool DKUtil::Sleep(const int& milliseconds){
 	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
-#	if WIN32
+#	if WIN
 		return DKWindows::Sleep(milliseconds);
 #	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return DKUnix::Sleep(milliseconds);
@@ -878,7 +878,7 @@ bool DKUtil::Sleep(const int& milliseconds){
 
 bool DKUtil::StrokeKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
-#	if WIN32
+#	if WIN
 		return DKWindows::StrokeKey(key);
 #	elif LINUX
 		return DKLinux::StrokeKey(key);
@@ -899,7 +899,7 @@ bool DKUtil::System(const DKString& command, int& rtnvalue){
 
 bool DKUtil::TurnOffMonitor(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::TurnOffMonitor();
 #	elif MAC
 		return DKMac::TurnOffMonitor();
@@ -913,7 +913,7 @@ bool DKUtil::TurnOffMonitor(){
 
 bool DKUtil::TurnOnMonitor(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::TurnOnMonitor();
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -950,7 +950,7 @@ bool DKUtil::UpdateFps(){
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::VirtualMemory(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
 		return DKMac::VirtualMemory(virtualMemory) && DKDEBUGRETURN(virtualMemory);
@@ -963,7 +963,7 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 
 bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::VirtualMemoryUsed(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
 		return DKMac::VirtualMemoryUsed(virtualMemory) && DKDEBUGRETURN(virtualMemory);
@@ -976,7 +976,7 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 
 bool DKUtil::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
-#	if WIN32
+#	if WIN
 		return DKWindows::VirtualMemoryUsedByApp(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
 		return DKMac::VirtualMemoryUsedByApp(virtualMemory) && DKDEBUGRETURN(virtualMemory);
@@ -989,7 +989,7 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 
 bool DKUtil::WaitForImage(const DKString& file, int timeout){
 	DKDEBUGFUNC(file, timeout);
-#	if WIN32
+#	if WIN
 		return DKWindows::WaitForImage(file, timeout);
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -998,7 +998,7 @@ bool DKUtil::WaitForImage(const DKString& file, int timeout){
 
 bool DKUtil::WheelDown(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::WheelDown();
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -1007,7 +1007,7 @@ bool DKUtil::WheelDown(){
 
 bool DKUtil::WheelUp(){
 	DKDEBUGFUNC();
-#	if WIN32
+#	if WIN
 		return DKWindows::WheelUp();
 #	else
 		return DKERROR("not implemented on this OS\n");

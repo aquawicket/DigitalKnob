@@ -64,19 +64,19 @@ bool DKUpdate::Init(){
 	//DKFile::RemoveExtention(app);
 	DKString downloads = "http://DigitalKnob.com/Download/";
 	
-#ifdef WIN32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]", url);
+#if WIN_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN_X86]", url);
 	if(url.empty()){ url = downloads+app; }
 #endif
-#ifdef WIN64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", url);
+#if WIN_X86_64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN_X86_64]", url);
 	if(url.empty()){ url = downloads+app; }
 #endif
-#ifdef MAC_X86
+#if MAC_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86]", url);
 	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
 #endif
-#ifdef MAC_X86_64
+#if MAC_X86_64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86_64]", url);
 	if(url.empty()){ url = downloads+app+"_mac_x86_64.zip"; }
 #endif
@@ -84,23 +84,23 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
 	if(url.empty()){ url = downloads+app+"_linux_x86.zip"; }
 #endif
-#ifdef LINUX_X86_64
+#if LINUX_X86_64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86_64]", url);
 	if(url.empty()){ url = downloads+app+"_linux_x86_64.zip"; }
 #endif
-#ifdef IOS_ARM32
+#if IOS_ARM32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM32]", url);
 	if(url.empty()){ url = downloads+app+"_ios_arm32.zip"; }
 #endif
-#ifdef IOS_ARM64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", url);
+#if IOS_ARM64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM64]", url);
 	if(url.empty()){ url = downloads+app+"_ios_arm64.zip"; }
 #endif
-#ifdef ANDROID_ARM32
+#if ANDROID_ARM32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
-#ifdef ANDROID_ARM64
+#if ANDROID_ARM64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM64]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif

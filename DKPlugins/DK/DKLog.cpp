@@ -245,7 +245,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	out_stream << input;
 
 	/////// Main Console Color Decorators ///////
-#	if WIN32
+#	if WIN
 		WORD color = 0;
 		if (!color_override){
 			//if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
@@ -336,7 +336,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 
 	// // // Restore Default Color Decorators
-#	if WIN32
+#	if WIN
 		DKTextColor::RestoreColor();
 #	endif
 

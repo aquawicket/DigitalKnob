@@ -63,7 +63,7 @@ public:
 #if WIN
 LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam);
-#endif //WIN32
+#endif //WIN
 
 REGISTER_OBJECT(DKHook, true);
 #endif //DKHook_H

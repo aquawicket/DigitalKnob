@@ -29,7 +29,7 @@
 #include "DKAssets/DKAssets.h"
 #include "DKHook/DKHook.h"
 
-#if WIN32
+#if WIN
 HHOOK DKHook::hook;
 #endif
 
@@ -41,7 +41,7 @@ HHOOK DKHook::hook;
 
 bool DKHook::Init() {
 	DKDEBUGFUNC();
-#if WIN32
+#if WIN
 	InstallHook();
 #endif
 	/*
@@ -86,7 +86,7 @@ void DKHook::LinuxHook() {
 }
 #endif
 
-#if WIN32
+#if WIN
 int DKHook::Messsages() {
 	DKDEBUGFUNC();
 	while(msg.message != WM_QUIT){ //while we do not close our application
@@ -169,4 +169,4 @@ LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam) {
 	return CallNextHookEx(DKHook::hook, nCode, wParam, lParam);
 }
 
-#endif //WIN32
+#endif //WIN

@@ -39,7 +39,7 @@
 
 //WARNING_DISABLE
 #include <signal.h>
-#if WIN32
+#if WIN
 	#include "conio.h"          //getch, getche
 #endif
 //WARNING_ENABLE
@@ -445,7 +445,7 @@ int DKDuktapeJS::CpuUsedByApp(duk_context* ctx){
 
 int DKDuktapeJS::Crash(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-#if	WIN32
+#if	WIN
 	abort();
 	//return 1;
 #else
@@ -561,7 +561,7 @@ int DKDuktapeJS::GetClipboard(duk_context* ctx){
 
 int DKDuktapeJS::_getch(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-#if WIN32
+#if WIN
 	int key = ::_getch();
 #else
 	int key = getch();	
@@ -571,7 +571,7 @@ int DKDuktapeJS::_getch(duk_context* ctx){
 }
 int DKDuktapeJS::_getche(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-#if WIN32
+#if WIN
 	int key = ::_getche();
 #else
 	int key = getche();

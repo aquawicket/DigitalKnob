@@ -48,10 +48,10 @@ int DKDomNavigator::onLine(duk_context* ctx){
 int DKDomNavigator::platform(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//TODO - complete this for all OS's
-#ifdef WIN64
+#ifdef WIN_X86_64
 	duk_push_string(ctx, "Win64");
 	return true;
-#elif WIN32
+#elif WIN_X86
 	duk_push_string(ctx, "Win32");
 	return true;
 #elif MAC

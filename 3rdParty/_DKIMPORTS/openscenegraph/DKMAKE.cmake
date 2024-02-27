@@ -34,7 +34,7 @@ dk_set(OSG_PLUGINS osgPlugins-3.7.0)
 ### LINK ###
 dk_define						(OSG_LIBRARY_STATIC)
 dk_include						(${OPENSCENEGRAPH}/include)
-WIN32_dk_include				(${OPENSCENEGRAPH}/${OS}/include)
+WIN_X86_dk_include				(${OPENSCENEGRAPH}/${OS}/include)
 WIN64_dk_include				(${OPENSCENEGRAPH}/${OS}/include)
 MAC_dk_include					(${OPENSCENEGRAPH}/${OS}/include)
 MAC_dk_include					(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/include)

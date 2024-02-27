@@ -349,4 +349,4 @@ int DKHandlesJS::WindowExists(duk_context* ctx){
 }
 
 #endif //HAVE_DKDuktape
-#endif //WIN32
+#endif //WIN

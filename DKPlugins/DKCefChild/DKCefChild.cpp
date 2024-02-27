@@ -63,7 +63,7 @@ int main(int argc, char* argv[]){
 		return 1;
 #endif
 
-#if WIN32
+#if WIN
 	CefMainArgs main_args;
 #else
 	CefMainArgs main_args(argc, argv);

@@ -173,4 +173,4 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam){
 	return 0;
 }
 
-#endif //WIN32
+#endif //WIN

@@ -11,7 +11,7 @@ if(ANDROID OR IOS OR IOSSIM OR MAC)
 	dk_return()
 endif()
 
-WIN32_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip)
+WIN_X86_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip)
 WIN64_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip)
 LINUX_X86_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-i386_linux.tar.xz)
 LINUX_X86_64_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz)

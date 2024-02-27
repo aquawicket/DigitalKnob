@@ -143,7 +143,7 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output){
 
 bool DKSFMLWindow::Fullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
 	MONITORINFO mi = { sizeof(mi) };
@@ -183,7 +183,7 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output){
 
 bool DKSFMLWindow::GetHandle(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	*(HWND*)output = hwnd;
 	return true;
@@ -212,7 +212,7 @@ bool DKSFMLWindow::GetHeight(const void* input, void* output){
 
 bool DKSFMLWindow::GetMouseX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	POINT p;
 	if(!GetCursorPos(&p))
 		return DKERROR("GetCursorPos() failed! \n");
@@ -293,7 +293,7 @@ bool DKSFMLWindow::Hide(const void* input, void* output){
 
 bool DKSFMLWindow::IsFullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	RECT a, b;
 	if(!GetWindowRect(hwnd, &a))
@@ -325,7 +325,7 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output){
 
 bool DKSFMLWindow::IsVisible(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	*(bool*)output = (IsWindowVisible(hwnd) != 0);
 	return true;
@@ -354,7 +354,7 @@ bool DKSFMLWindow::MessageBox(const void* input, void* output){
 
 bool DKSFMLWindow::Minimize(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
 	return true;
@@ -375,7 +375,7 @@ bool DKSFMLWindow::Minimize(const void* input, void* output){
 
 bool DKSFMLWindow::Restore(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd)
 		return DKERROR("hwnd is invalid! \n");
@@ -415,11 +415,11 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output){
 
 bool DKSFMLWindow::SetIcon(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd)
 		return DKERROR("hwnd is invalid\n");
-	HINSTANCE hinstance = (HINSTANCE)(LONG_PTR)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
+	HINSTANCE hinstance = (HINSTANCE)(LONG_PTR)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN may require GWL_HINSTANCE
 	if(!hinstance)
 		return DKERROR("hinstance is invalid\n");
 	DKString file = *(DKString*)input;
@@ -468,7 +468,7 @@ bool DKSFMLWindow::SetY(const void* input, void* output){
 
 bool DKSFMLWindow::Show(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_SHOW);
 	return true;
@@ -489,7 +489,7 @@ bool DKSFMLWindow::Show(const void* input, void* output){
 
 bool DKSFMLWindow::Windowed(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#if WIN32
+#if WIN
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
 	SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);

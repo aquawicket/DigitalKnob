@@ -140,7 +140,7 @@ void DKClass::CloseAll(){
 			(*classes)[rit->first]->Close("");
 		}
 	}
-#if WIN32
+#if WIN
 		if(IsWindowVisible(GetConsoleWindow()))
 			ShowWindow(GetConsoleWindow(),SW_HIDE);
 #endif

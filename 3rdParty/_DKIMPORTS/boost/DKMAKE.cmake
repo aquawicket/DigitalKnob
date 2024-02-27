@@ -104,8 +104,8 @@ endforeach()
 foreach(lib ${boost_targets})
 	if(boost_${lib} AND NOT boost_${lib}_nolib)
 		if(MSVC)
-			WIN32_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
-			WIN32_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
+			WIN_X86_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
+			WIN_X86_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
 			WIN64_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
 			WIN64_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
 		else()
@@ -392,7 +392,7 @@ RASPBERRY_ARM64_RELEASE_dk_queueCommand(${BOOST}/b2
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 if(MSVC)
-	WIN32_DEBUG_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_DEBUG_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=32
 		variant=debug
@@ -406,7 +406,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 		--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-	WIN32_RELEASE_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_RELEASE_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=32
 		variant=release
@@ -487,17 +487,17 @@ endif(STATIC)
 if(SHARED)
 
 #if(boost_filesystem)
-#	WIN32_dk_libDebug(${BOOST}/${OS}/lib/boost_filesystem.lib)
-#	WIN32_dk_libRelease(${BOOST}/${OS}/lib/boost_filesystem.lib)
+#	WIN_X86_dk_libDebug(${BOOST}/${OS}/lib/boost_filesystem.lib)
+#	WIN_X86_dk_libRelease(${BOOST}/${OS}/lib/boost_filesystem.lib)
 #endif()
 
 #if(boost_system)
-#	WIN32_dk_libDebug(${BOOST}/${OS}/lib/boost_system.lib)
-#	WIN32_dk_libRelease(${BOOST}/${OS}/lib/boost_system.lib)
+#	WIN_X86_dk_libDebug(${BOOST}/${OS}/lib/boost_system.lib)
+#	WIN_X86_dk_libRelease(${BOOST}/${OS}/lib/boost_system.lib)
 #endif()
 
 #WIN_dk_setPath(${BOOST})
-#WIN32_dk_queueCommand(${BOOST}/bootstrap.bat)
+#WIN_X86_dk_queueCommand(${BOOST}/bootstrap.bat)
 #WIN_dk_queueCommand(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 #WIN_dk_queueCommand(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 

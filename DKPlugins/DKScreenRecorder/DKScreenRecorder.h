@@ -30,7 +30,7 @@
 #include "DK/DK.h"
 
 //DirectX Capture
-#if WIN32
+#if WIN
 //WARNING_DISABLE
 #	include <Wincodec.h>             // we use WIC for saving images
 #	include <d3d9.h>                 // DirectX 9 header

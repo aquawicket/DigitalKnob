@@ -80,7 +80,7 @@ bool DKFile::NormalizePath(DKString& path){
 	return false;
 }
 
-#if WIN32
+#if WIN
 bool DKFile::AppendSystemPath(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
@@ -263,7 +263,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out) {
 	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in))
 		return DKERROR("("+in+"): Path does not exits \n");
-#	if WIN32
+#	if WIN
 		char *fileExt;
 		char resolved_path[256];
 		GetFullPathName(in.c_str(), 256, resolved_path, &fileExt);
@@ -296,7 +296,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	std::string::size_type found = 0;
-#if WIN32
+#if WIN
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end()); 
@@ -374,7 +374,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 
 bool DKFile::GetDrives(DKStringArray& strings){
 	DKDEBUGFUNC(strings);
-#if WIN32
+#if WIN
 	//TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
 	if(!drives)
@@ -413,7 +413,7 @@ bool DKFile::GetExePath(DKString& exepath){
 		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start \n");
 		DKClass::DKCreate("DKDebug");
 		DKClass::CallFunc("DKDebug::ShowStackTrace");
-#		if WIN32
+#		if WIN
 			TCHAR fullpath[MAX_PATH];
 			GetModuleFileName(NULL, fullpath, MAX_PATH);
 			DKFile::exe_path = fullpath;
@@ -477,7 +477,7 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#if WIN32 || MAC || LINUX //|| ANDROID	
+#if WIN || MAC || LINUX //|| ANDROID	
 		struct stat attrib;             // create a file attribute structure
 		stat(path.c_str(), &attrib);    // get the attributes of afile.txt
 		struct tm* clock = localtime(&(attrib.st_ctime));
@@ -506,7 +506,7 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#if WIN32 || MAC || LINUX //|| ANDROID
+#if WIN || MAC || LINUX //|| ANDROID
 	struct stat attrib;         // create a file attribute structure
 	stat(path.c_str(), &attrib);     // get the attributes of afile.txt
 	struct tm* clock = localtime(&(attrib.st_mtime));
@@ -535,7 +535,7 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#if WIN32 
+#if WIN 
 	WIN32_FILE_ATTRIBUTE_DATA fileInfo = WIN32_FILE_ATTRIBUTE_DATA();
 	if(GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fileInfo)){
 		FILETIME localFiletime;
@@ -753,7 +753,7 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname){
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
-#	if WIN32
+#	if WIN
 		long length = 0;
 		TCHAR* buffer = NULL;
 		length = GetShortPathName(file.c_str(), NULL, 0);

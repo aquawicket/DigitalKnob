@@ -69,4 +69,4 @@ REGISTER_OBJECT(DKHandlesJS, true)
 
 #endif //DKHandlesJS_H
 #endif //HAVE_DKDuktape
-#endif //WIN32
+#endif //WIN

@@ -7,8 +7,8 @@ dk_depend(emsdk)
 
 dk_set(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)
 dk_set(QUEUE_BUILD ON)
-##WIN32_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
+##WIN_X86_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
 
 if(EXISTS ${EMSCRIPTEN}/emscripten/1.37.33/emcc)
-	WIN32_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS}/DKEmscripten/test.cpp)
+	WIN_X86_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS}/DKEmscripten/test.cpp)
 endif()

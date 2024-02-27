@@ -37,7 +37,7 @@
 	#if MAC
 		#include "include/wrapper/cef_library_loader.h"
 	#endif
-	#if WIN32
+	#if WIN
 		#include <delayimp.h>
 		#include <include/cef_sandbox_win.h>
 	#endif
@@ -50,7 +50,7 @@
 #include "DKCef/DKCef.h"
 #include "DKCef/DKCEFWindow.h"
 #include "DKDuktape/DKDuktape.h"
-#if WIN32
+#if WIN
 	#include "DK/DKWindows.h"
 #endif
 
@@ -103,7 +103,7 @@ bool DKCef::Init(){
 	}
 	*/
 	fullscreen = false;
-#if WIN32 && !WIN64
+#if WIN_X86
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
@@ -263,7 +263,7 @@ bool DKCef::Init(){
 	//CefString(&settings.log_file) = lf.c_str();
 
 #	if WIN
-#		if WIN32 && !WIN64
+#		if WIN_X86
 #			ifdef DEBUG
 				DKString ep = DKFile::local_assets + "/DKCef/win_x86_Debug/DKCefChild.exe";
 #			else
@@ -359,7 +359,7 @@ bool DKCef::End(){
 	DKINFO("CefShutdown();\n");
 	//FIXME - many crashes at CefShutdown
 	CefShutdown(); //call on same thread as CefInitialize
-#if WIN32
+#if WIN
 		//FreeLibrary(libcef);
 #endif
 	return true;
@@ -588,19 +588,19 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKString title; 
 		DKFile::GetExeName(title);
 		DKFile::RemoveExtention(title);
-#		if WIN32 && !WIN64
-			title += " - WIN32";
+#		if WIN_X86
+			title += " - WIN_X86";
 #		endif
-#		ifdef WIN64
-			title += " - WIN64";
+#		if WIN_X86_64
+			title += " - WIN_X86_64";
 #		endif
-#		ifdef MAC
+#		if MAC
 			title += " - MAC";
 #		endif
-#		ifdef LINUX
+#		if LINUX
 			title += " - LINUX";
 #		endif
-#		ifdef DEBUG
+#		if DEBUG
 			title += " DEBUG ";
 #		else
 			title += " RELEASE ";
@@ -610,7 +610,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKFile::GetExePath(file);
 		DKFile::GetModifiedTime(file, mTime);
 		title += mTime;
-#		ifdef WIN32
+#		ifdef WIN
 			window_info.SetAsPopup(NULL, title.c_str());
 #		endif
 		window_info.y = top;
@@ -747,7 +747,7 @@ bool DKCef::ShowDevTools(const int& browser){
 	CefWindowInfo window_info;
 	CefBrowserSettings settings;
 	CefPoint inspectElementAt;
-#	if WIN32
+#	if WIN
 		window_info.SetAsPopup(NULL, "DevTools"); //FIXME for mac
 #	endif
 	window_info.width = 800;

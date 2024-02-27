@@ -115,7 +115,7 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
 	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
 
-	#if WIN32
+	#if WIN
 		DKWindows::CreateConsoleHandler();
 		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
 	#endif

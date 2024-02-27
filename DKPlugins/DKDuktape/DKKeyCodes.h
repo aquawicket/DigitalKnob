@@ -381,7 +381,7 @@ static const int KeyboardModifiers[] = {
     NoModifier,                                             // Fall-back to raw Key_*
 };
 */
-//#endif  //WIN32
+//#endif  //WIN
 
 
 /*

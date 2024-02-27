@@ -681,4 +681,4 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam) {
 	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
 
-#endif //WIN32
+#endif //WIN

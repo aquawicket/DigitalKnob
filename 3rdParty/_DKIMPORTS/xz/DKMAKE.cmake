@@ -114,12 +114,12 @@ UNIX_RELEASE_dk_setPath			(${XZ}/${OS}/${RELEASE_DIR})
 UNIX_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 UNIX_RELEASE_dk_build			(${XZ})
 
-WIN32_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
-WIN32_DEBUG_dk_build			(${XZ})
-WIN32_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-WIN32_RELEASE_dk_build			(${XZ})
+WIN_X86_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
+WIN_X86_DEBUG_dk_build			(${XZ})
+WIN_X86_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+WIN_X86_RELEASE_dk_build			(${XZ})
 
 # look at xz/windows/build.bash for details
 WIN64_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
