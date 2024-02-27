@@ -476,58 +476,6 @@ function Generate_Project() {
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
 	
 	
-	
-	#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Debug
-	#fi
-	#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Release
-	#fi
-	
-	###### GENERATOR ######
-	#if [[ $TARGET_OS == "android"* ]]; then
-	#	GENERATOR="Unix Makefiles"
-	#elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
-	#	GENERATOR="Xcode"
-	#elif [[ $TARGET_OS == "emscripten" ]]; then
-	#	validate_emscripten
-	#	GENERATOR="$EMSDK_GENERATOR"
-	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
-	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
-	#	CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
-	#	MSYSTEM=""
-	#elif [[ -n "$MSYSTEM" ]]; then
-	#	GENERATOR="MSYS Makefiles"
-	#else
-	#	GENERATOR="Unix Makefiles"
-	#fi
-
-	###### MAKE_PROGRAM ######
-	#validate_make
-	#if [[ -n "$MAKE_PROGRAM" ]]; then
-	#	CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
-	#fi
-	
-	###### C_COMPILER; CXX_COMPILER ######
-	### GCC ###
-	#if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $TARGET_OS == "linux"* ]] || [[ $MODEL == "Raspberry"* ]]; then
-	#	validate_gcc
-	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-	#fi
-	### CLANG ###
-	#if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
-	#	validate_clang
-	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
-	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
-	#fi
-	
-	###### EXE_LINKER_FLAGS ######
-	#if [[ -n "$MSYSTEM" ]]; then
-	#	EXE_LINKER_FLAGS="-static -mconsole"		
-	#	#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
-	#fi
-
 	#TODO: turn into a cmake_eval
 	# build-essential for Tiny Core Linux
 	#if command_exists tce-load; then
@@ -541,21 +489,13 @@ function Generate_Project() {
 	#fi
 	
 	#dk_call export SHELL="/bin/bash"
-	
-	#mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS
-	#cd /
-	
-	#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	#	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Debug
-	#fi
-	#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	#	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Release
-	#fi
+
 	
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		validate_android_ndk
-	
-		#CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		#validate_make
+		#CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
 		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/linux-x86_64/bin/make" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
@@ -566,21 +506,14 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
-	
-		echo ""
-		echo "****** CMAKE COMMAND ******"
-		echo $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-		echo ""
-		dk_call $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-	
-		TARGET="main"	
+		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
+		#dk_call $CMAKE -G "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+		dk_call $CMAKE -G "${CMAKE_ARGS[@]}"
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
 		validate_android_ndk
-	
-		#CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/linux-x86_64/bin/make" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=arm64-v8a" )
@@ -592,57 +525,62 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
 		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
-	
-		echo ""
-		echo "****** CMAKE COMMAND ******"
-		echo $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-		echo ""
-		dk_call $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-	
-		TARGET="main"
+		dk_call $CMAKE "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	fi
 	
 	
 	if [[ $TARGET_OS == "emscripten" ]]; then
 		#setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
 		validate_emscripten
-	
 		CMAKE_ARGS+=( "-G $EMSDK_GENERATOR" )
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
-	
-		echo ""
-		echo "****** CMAKE COMMAND ******"
-		echo "$EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}""
-		echo ""
 		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
-	
-		set TARGET=${APP}_APP
 	fi
 	
 	
 	if [[ "$TARGET_OS" == "ios_arm32" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=TARGET_OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DPLATFORM=TARGET_OS" )
+		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
+		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
+	
 	if [[ "$TARGET_OS" == "ios_arm64" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DPLATFORM=OS64" )
+		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
+		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
+	
 	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR -DSDK_VERSION=15.0" )
+		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
+	
 	if [[ "$TARGET_OS" == "iossim_x86_64" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR64" )
+		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
+		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		validate_gcc
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
@@ -650,51 +588,40 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-	
-		echo ""
-		echo "****** CMAKE COMMAND ******"
-		echo "$CMAKE "${CMAKE_ARGS[@]}""
-		echo ""
 		dk_call $CMAKE "${CMAKE_ARGS[@]}"
-	
-		set TARGET=${APP}_APP
-		
-		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		#	dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		#fi
-		#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		#	dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		#fi
-		#TARGET=${APP}_APP
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DMAC_X86=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DMAC_X86=ON" )
+		CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=i686" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86_64" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DMAC_X86_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
-		TARGET=${APP}_APP
+		#validate_clang
+		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
+		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
+		CMAKE_ARGS+=( "-G Xcode" )
+		CMAKE_ARGS+=( "-DMAC_X86_64=ON" )
+		CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=x86_64" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm32" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		validate_gcc
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm64" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		validate_gcc
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86" ]]; then
@@ -702,13 +629,9 @@ function Generate_Project() {
 		validate_make
 		dk_call export PATH=${MSYS2}/mingw32/bin:$PATH
 		dk_call export PATH=${MSYS2}/usr/bin:$PATH
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		CMAKE_ARGS+=( "-G MSYS Makefiles" )
+		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86_64" ]]; then
@@ -716,13 +639,9 @@ function Generate_Project() {
 		validate_make
 		dk_call export PATH=${MSYS2}/mingw64/bin:$PATH
 		dk_call export PATH=${MSYS2}/usr/bin:$PATH
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		CMAKE_ARGS+=( "-G MSYS Makefiles" )
+		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 }
 	
