@@ -560,7 +560,7 @@ function Generate_Project() {
 		validate_android_ndk
 	
 		#CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
-		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe" )
+		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/windows-x86_64/bin/make.exe" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
