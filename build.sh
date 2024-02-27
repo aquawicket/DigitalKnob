@@ -475,13 +475,14 @@ function Generate_Project() {
 	
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
 	
+	
+	
 	#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Debug
 	#fi
 	#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Release
 	#fi
-	
 	
 	###### GENERATOR ######
 	#if [[ $TARGET_OS == "android"* ]]; then
@@ -617,7 +618,7 @@ function Generate_Project() {
 		echo ""
 		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
 	
-		#set TARGET=${APP}_APP
+		set TARGET=${APP}_APP
 	fi
 	
 	
@@ -645,13 +646,26 @@ function Generate_Project() {
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		validate_gcc
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
+	
+		echo ""
+		echo "****** CMAKE COMMAND ******"
+		echo "$CMAKE "${CMAKE_ARGS[@]}""
+		echo ""
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+	
+		set TARGET=${APP}_APP
+		
+		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+		#	dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
+		#fi
+		#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+		#	dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
+		#fi
+		#TARGET=${APP}_APP
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
