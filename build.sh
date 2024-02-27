@@ -606,7 +606,7 @@ function Generate_Project() {
 		#setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
 		validate_emscripten
 	
-		CMAKE_ARGS+=( "-G \"$EMSDK_GENERATOR\"" )
+		CMAKE_ARGS+=( "-G $EMSDK_GENERATOR" )
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
@@ -614,7 +614,7 @@ function Generate_Project() {
 		echo ""
 		echo "****** CMAKE COMMAND ******"
 		#echo $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
-		echo $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
+		#echo $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
 		echo ""
 		#dk_call $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
 		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
