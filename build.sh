@@ -307,11 +307,11 @@ function Pick_OS() {
 	elif [ "$input" == "10" ]; then
 		TARGET_OS="ios_x64"
 	elif [ "$input" == "11" ]; then
-		TARGET_OS="iossim32"
+		TARGET_OS="iossim_x86"
 	elif [ "$input" == "12" ]; then
 		TARGET_OS="iossim64"
 	elif [ "$input" == "13" ]; then
-		TARGET_OS="iossim32"
+		TARGET_OS="iossim_x86"
 	elif [ "$input" == "14" ]; then
 		TARGET_OS="iossim64"
 	elif [ "$input" == "15" ]; then
@@ -563,7 +563,7 @@ function Generate_Project() {
 	if [[ "$TARGET_OS" == "ios_arm64" ]]; then
 		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
-	if [[ "$TARGET_OS" == "iossim32" ]]; then
+	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
 		dk_call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
 	if [[ "$TARGET_OS" == "iossim64" ]]; then

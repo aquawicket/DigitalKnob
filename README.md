@@ -324,7 +324,7 @@ android_arm64 <br>
 emscripten <br>
 ios_arm32 <br>
 ios_arm64 <br>
-iossim32 <br>
+iossim_x86 <br>
 iossim64 <br>
 linux32 <br>
 linux64 <br>
