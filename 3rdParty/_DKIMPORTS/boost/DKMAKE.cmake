@@ -136,7 +136,7 @@ endif()
 
 ### COMPILE ###
 ANDROID_dk_command(${BOOST}/SetupAndroid.sh)
-ANDROID32_DEBUG_dk_queueCommand(
+ANDROID_ARM32_DEBUG_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-armeabiv7a
@@ -155,7 +155,7 @@ ANDROID32_DEBUG_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID32_RELEASE_dk_queueCommand(
+ANDROID_ARM32_RELEASE_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-armeabiv7a

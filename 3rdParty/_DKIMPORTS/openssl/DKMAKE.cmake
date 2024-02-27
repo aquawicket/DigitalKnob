@@ -73,7 +73,7 @@ endif()
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID32_DEBUG_dk_queueBash(
+ANDROID_ARM32_DEBUG_dk_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin:$PATH\n"
 	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-aarch64/bin:$PATH\n"
@@ -107,7 +107,7 @@ endif()
 
 
 RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID32_RELEASE_dk_queueBash(
+ANDROID_ARM32_RELEASE_dk_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"

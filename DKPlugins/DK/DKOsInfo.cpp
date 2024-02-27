@@ -66,8 +66,8 @@ bool GetOSFlag(DKString& flag){
 #if RASPBERRY64
 	flag = "RASPBERRY64";
 #endif
-#if ANDROID32
-	flag = "ANDROID32";
+#if ANDROID_ARM32
+	flag = "ANDROID_ARM32";
 #endif
 #if ANDROID64
 	flag = "ANDROID64";
