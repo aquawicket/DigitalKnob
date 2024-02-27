@@ -285,7 +285,8 @@ goto:eof
 	
 	call:create_cache
 	
-	if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+	::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+	set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
 	echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
@@ -625,7 +626,6 @@ goto:eof
 	if exist "%DKPATH%\3rdParty\_DKIMPORTS\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\3rdParty\_DKIMPORTS\%input%"
 	if exist "%DKPATH%\DKPlugins\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKPlugins\%input%"
 	if exist "%DKPATH%\DKApps\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKApps\%input%"
-	
 	::echo TARGET_PATH = %TARGET_PATH%
 	
 	call:get_parent_folder %TARGET_PATH% parent
@@ -633,11 +633,12 @@ goto:eof
 	
 	if %parent%==DKApps goto:eof
 	call:make_directory  %DKPATH%\DKApps\%APP%
+	
+	:: create DKApps/<APP>/DKMAKE.cmake 
 	echo dk_depend(%input%)> %DKPATH%\DKApps\%APP%\DKMAKE.cmake
 	
-	echo.
-	::echo %input%
-	echo %TARGET_PATH%
+	:: create DKApps/<APP>/main.cpp
+	echo int main(int argc, char** argv) { return 0; } > %DKPATH%\DKApps\%APP%\main.cpp
 goto:eof
 
 :: get_parent_folder
