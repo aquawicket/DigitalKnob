@@ -319,14 +319,13 @@ endif()
 ## Raspberry will listen to LINUX x86/64 and RPI x86/64.   The RASPBERRY flags will do nothing
 ## and we should be able to remove them once everythng is working.
 
-# RASPBERRY 32
+# raspberry_arm32
 string(FIND "${CMAKE_BINARY_DIR}" "/raspberry_arm32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating RASPBERRY x32 Project Files ***")
 	dk_set(RASPBERRY ON)     #To be disabled
-	dk_set(RASPBERRY_32 ON)  #To be disabled
+	dk_set(RASPBERRY_ARM32 ON)  #To be disabled
 	#dk_set(LINUX ON)
-	#dk_set(LINUX_X86 ON)
 	dk_set(RPI ON)
 	dk_set(RPI32 ON)
 	dk_set(OS "raspberry_arm32")

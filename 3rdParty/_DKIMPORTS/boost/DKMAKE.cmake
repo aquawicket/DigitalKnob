@@ -339,7 +339,7 @@ MAC_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-RASPBERRY32_DEBUG_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM32_DEBUG_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=debug
@@ -352,7 +352,7 @@ RASPBERRY32_DEBUG_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-RASPBERRY32_RELEASE_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM32_RELEASE_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=release

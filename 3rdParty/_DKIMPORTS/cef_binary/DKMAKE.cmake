@@ -90,7 +90,7 @@ LINUX_X86_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5
 LINUX_X86_64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
 # LINUXARM32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 # LINUXARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
-RASPBERRY32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
+RASPBERRY_ARM32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 RASPBERRY64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 ANDROID_ARM32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 ANDROID_ARM64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)

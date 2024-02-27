@@ -132,7 +132,7 @@ if(NOT RASPBERRY)
 endif()
 endif()
 
-if(RASPBERRY_32)
+if(RASPBERRY_ARM32)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug ${DKPROJECT}/assets/DKCef OVERWRITE)
 		dk_copy(${CEF_BINARY}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef OVERWRITE)
