@@ -418,7 +418,7 @@ goto:eof
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	echo "%EMSDK_ENV%" ^&^& "%CMAKE%" %CMAKE_ARGS%
 	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
 	echo.
 	
