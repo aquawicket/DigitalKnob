@@ -373,7 +373,7 @@ goto:eof
 	"%CMAKE%" %CMAKE_ARGS%
 	echo.
 	
-	set TARGET=main
+	::set TARGET=main
 	goto build
 goto:eof
 
@@ -403,7 +403,7 @@ goto:eof
 	"%CMAKE%" %CMAKE_ARGS%
 	echo.
     
-	set TARGET=main
+	::set TARGET=main
 	goto build
 goto:eof
 
@@ -422,7 +422,7 @@ goto:eof
 	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
 	echo.
 	
-	set TARGET=%APP%_APP
+	::set TARGET=%APP%_APP
 	goto build
 goto:eof
 
@@ -462,7 +462,7 @@ goto:eof
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
 	echo.
 		
-    set TARGET=%APP%_APP
+    ::set TARGET=%APP%_APP
     goto build
     
     ::call:validate_visual_studio
@@ -508,7 +508,7 @@ goto:eof
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
 	echo.
 		
-    set TARGET=%APP%_APP
+    ::set TARGET=%APP%_APP
     goto build
     
     ::call:validate_visual_studio
@@ -1061,7 +1061,7 @@ goto:eof
 
     set command=%command:_QUOTE_="%
 
-    for /F "tokens=*" %%g in ('%command%') do (
+    for /F "tokens=*" %%g in ('%command% 2^> nul') do (
         set %variable_name%=%%g
         set "variable_value=%%g"
     )
