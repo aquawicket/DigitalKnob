@@ -27,11 +27,13 @@ DEBUG_dk_queueCommand	(autoupdate)
 DEBUG_dk_queueCommand	(autoconf)
 DEBUG_dk_setPath		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-DEBUG_dk_build			(${FONTCONFIG})
+
 
 RELEASE_dk_setPath		(${FONTCONFIG})
 RELEASE_dk_queueCommand	(autoupdate)
 RELEASE_dk_queueCommand	(autoconf)
 RELEASE_dk_setPath		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
 RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-RELEASE_dk_build		(${FONTCONFIG})
+
+
+dk_build				(${FONTCONFIG})

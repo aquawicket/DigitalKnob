@@ -85,7 +85,5 @@ endif()
 #endif()
 
 
-#DEBUG_dk_build   	(${FLAC})
-#RELEASE_dk_build   (${FLAC})
 dk_build   			(${FLAC})
 

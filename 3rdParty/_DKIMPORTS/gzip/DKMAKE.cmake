@@ -37,10 +37,12 @@ string(REPLACE "  " 				" " GZIP_CONFIGURE "${GZIP_CONFIGURE}")
 
 ANDROID_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 ANDROID_DEBUG_dk_queueCommand		(${GZIP_CONFIGURE})
-ANDROID_DEBUG_dk_build				(${GZIP})
+
 ANDROID_RELEASE_dk_setPath			(${GZIP}/${OS}/${RELEASE_DIR})
 ANDROID_RELEASE_dk_queueCommand		(${GZIP_CONFIGURE})
-ANDROID_RELEASE_dk_build			(${GZIP})
+
+ANDROID_dk_build					(${GZIP})
+
 
 APPLE_dk_setPath					(${GZIP})
 APPLE_dk_queueCommand				(chmod 777 configure)
@@ -50,12 +52,14 @@ APPLE_DEBUG_dk_setPath				(${GZIP}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand			(${GZIP_CONFIGURE} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP}/${OS}/${DEBUG_DIR}/lib")
 #APPLE_DEBUG_dk_queueCommand		(make version)
 #APPLE_DEBUG_dk_queueCommand		(make gzip)
-APPLE_DEBUG_dk_build				(${GZIP})
+
 APPLE_RELEASE_dk_setPath			(${GZIP}/${OS}/${RELEASE_DIR})
 APPLE_RELEASE_dk_queueCommand		(${GZIP_CONFIGURE} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP}/${OS}/${RELEASE_DIR}/lib")
 #APPLE_RELEASE_dk_queueCommand		(make version)
 #APPLE_RELEASE_dk_queueCommand		(make gzip)
-APPLE_RELEASE_dk_build				(${GZIP})
+
+APPLE_dk_build						(${GZIP})
+
 
 EMSCRIPTEN_dk_setPath				(${GZIP})
 EMSCRIPTEN_dk_queueCommand			(chmod 777 configure)
@@ -63,10 +67,12 @@ EMSCRIPTEN_dk_queueCommand			(chmod 777 build-aux/git-version-gen)
 EMSCRIPTEN_dk_queueCommand			(chmod 777 build-aux/install-sh)
 EMSCRIPTEN_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 EMSCRIPTEN_DEBUG_dk_queueCommand	(${GZIP_CONFIGURE})
-EMSCRIPTEN_DEBUG_dk_build			(${GZIP})
+
 EMSCRIPTEN_RELEASE_dk_setPath		(${GZIP}/${OS}/${RELEASE_DIR})
 EMSCRIPTEN_RELEASE_dk_queueCommand	(${GZIP_CONFIGURE})
-EMSCRIPTEN_RELEASE_dk_build			(${GZIP})
+
+EMSCRIPTEN_dk_build					(${GZIP})
+
 
 LINUX_dk_setPath					(${GZIP})
 LINUX_dk_queueCommand				(chmod 777 configure)
@@ -74,10 +80,12 @@ LINUX_dk_queueCommand				(chmod 777 build-aux/git-version-gen)
 LINUX_dk_queueCommand				(chmod 777 build-aux/install-sh)
 LINUX_DEBUG_dk_setPath				(${GZIP}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand			(${GZIP_CONFIGURE})
-LINUX_DEBUG_dk_build				(${GZIP})
+
 LINUX_RELEASE_dk_setPath			(${GZIP}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_dk_queueCommand		(${GZIP_CONFIGURE})
-LINUX_RELEASE_dk_build				(${GZIP})
+
+LINUX_dk_build						(${GZIP})
+
 
 RASPBERRY_dk_setPath				(${GZIP})
 RASPBERRY_dk_queueCommand			(chmod 777 configure)
@@ -85,16 +93,19 @@ RASPBERRY_dk_queueCommand			(chmod 777 build-aux/git-version-gen)
 RASPBERRY_dk_queueCommand			(chmod 777 build-aux/install-sh)
 RASPBERRY_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_dk_queueCommand		(${GZIP_CONFIGURE})
-RASPBERRY_DEBUG_dk_build			(${GZIP})
+
 RASPBERRY_RELEASE_dk_setPath		(${GZIP}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_dk_queueCommand	(${GZIP_CONFIGURE})
-RASPBERRY_RELEASE_dk_build			(${GZIP})
+
+RASPBERRY_dk_build					(${GZIP})
+
 
 WIN_dk_setPath						(${GZIP})
 WIN_dk_queueCommand					(touch aclocal.m4 configure Makefile.am Makefile.in)
 WIN_DEBUG_dk_setPath				(${GZIP}/${OS}/${DEBUG_DIR})
 WIN_DEBUG_dk_queueCommand			(${GZIP_CONFIGURE} --disable-dependency-tracking CFLAGS="-I${GZIP}/include -I${GZIP}/${OS}/${DEBUG_DIR}/lib")
-WIN_DEBUG_dk_build					(${GZIP} gzip)
+
 WIN_RELEASE_dk_setPath				(${GZIP}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_queueCommand			(${GZIP_CONFIGURE} --disable-dependency-tracking CFLAGS="-I${GZIP}/include -I${GZIP}/${OS}/${RELEASE_DIR}/lib")
-WIN_RELEASE_dk_build				(${GZIP} gzip)
+
+WIN_dk_build						(${GZIP} gzip)

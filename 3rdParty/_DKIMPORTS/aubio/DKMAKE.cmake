@@ -18,11 +18,13 @@ endif()
 
 
 
-### GENERATE / COMPILE ###
+### GENERATE ###
 DEBUG_dk_setPath		(${AUBIO}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-DEBUG_dk_build			(${AUBIO})
 
 RELEASE_dk_setPath		(${AUBIO}/${OS}/${RELEASE_DIR})
 RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-RELEASE_dk_build		(${AUBIO})
+
+
+### COMPILE ###
+dk_build				(${AUBIO})

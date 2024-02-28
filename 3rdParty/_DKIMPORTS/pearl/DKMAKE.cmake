@@ -1,4 +1,5 @@
 # pearl
+# https://packages.msys2.org/package/mingw-w64-x86_64-perl
 
 if(ANDROID_HOST)
 	dk_command(pkg install perl)
@@ -38,6 +39,5 @@ if(MSYSTEM)
 	dk_set(PEARL_EXE pearl)
 	dk_debug("PEARL_EXE = ${PEARL_EXE}")
 	#dk_command(${PEARL_EXE} --version)
-	
-	return()
+
 endif()

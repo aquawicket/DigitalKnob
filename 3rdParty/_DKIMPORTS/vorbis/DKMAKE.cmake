@@ -69,6 +69,4 @@ RELEASE_dk_set	(VORBIS_CMAKE -DVORBIS_INCLUDE_DIR=${VORBIS_INCLUDE_DIR} -DVORBIS
 #endif()
 
 
-#DEBUG_dk_build		(${VORBIS})
-#RELEASE_dk_build	(${VORBIS})
 dk_build		(${VORBIS})

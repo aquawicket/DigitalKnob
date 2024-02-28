@@ -35,9 +35,9 @@ else()
 	
 	DEBUG_dk_setPath		(${LIBMD}/${OS}/${DEBUG_DIR})
 	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	DEBUG_dk_build			(${LIBMD})
 	
 	RELEASE_dk_setPath		(${LIBMD}/${OS}/${RELEASE_DIR})
 	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	RELEASE_dk_build		(${LIBMD})
+	
+	dk_build				(${LIBMD})
 endif()

@@ -171,5 +171,5 @@ RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_TH
 
 
 ### COMPILE ###
-dk_build(${LIBXML2})# LibXml2)
+dk_build(${LIBXML2} libxml2) #LibXml2)
 

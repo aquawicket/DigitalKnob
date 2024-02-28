@@ -59,9 +59,7 @@ RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${
 #	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #endif()
 
-### BUILD ###
-#DEBUG_dk_build		(${OGG})
-#RELEASE_dk_build	(${OGG})
 
+### BUILD ###
 dk_build			(${OGG})
 

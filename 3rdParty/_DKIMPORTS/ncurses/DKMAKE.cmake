@@ -23,7 +23,8 @@ dk_libRelease		(${NCURSES}/${OS}/${RELEASE_DIR}/lib/libncurses.a)
 
 DEBUG_dk_setPath		(${NCURSES}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-DEBUG_dk_build			(${NCURSES}) # ncurses)
+
 RELEASE_dk_setPath		(${NCURSES}/${OS}/${RELEASE_DIR})
 RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-RELEASE_dk_build		(${NCURSES}) # ncurses)
+
+dk_build				(${NCURSES}) # ncurses)
