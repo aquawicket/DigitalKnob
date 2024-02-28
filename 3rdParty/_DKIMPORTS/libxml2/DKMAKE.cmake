@@ -157,7 +157,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	-DLIBXML2_WITH_PATTERN=ON			# Add the xmlPattern selection interface ON
 	-DLIBXML2_WITH_PROGRAMS=OFF			# Build programs ON
 	-DLIBXML2_WITH_PUSH=ON				# Add the PUSH parser interfaces ON
-	-DLIBXML2_WITH_PYTHON=${PYTHON}		# Build Python bindings ON
+	-DLIBXML2_WITH_PYTHON=OFF	#${PYTHON}		# Build Python bindings ON
 	-DLIBXML2_WITH_READER=ON			# Add the xmlReader parsing interface ON
 	-DLIBXML2_WITH_REGEXPS=ON			# Add Regular Expressions support ON
 	-DLIBXML2_WITH_SAX1=ON				# Add the older SAX1 interface ON
@@ -175,7 +175,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	-DLIBXML2_WITH_XPTR=ON				# Add the XPointer support ON
 	-DLIBXML2_WITH_XPTR_LOCS=OFF		# Add support for XPointer locations OFF
 	-DLIBXML2_WITH_ZLIB=${ZLIB}			# Use libz ON
-	-DPython_EXECUTABLE=${PYTHON_APP}
+	#-DPython_EXECUTABLE=${PYTHON_APP}
 	${LIBICONV_CMAKE} 
 	${PYTHON_CMAKE}
 	${XZ_CMAKE} 
