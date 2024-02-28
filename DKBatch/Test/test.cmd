@@ -26,7 +26,7 @@
 
 :: https://github.com/ClicketyClickDK/Underscore
 set TEST_DKVARIABLES=1
-::set TEST_DKERRORS=1
+set TEST_DKERRORS=1
 set TEST_DKNESTING=1
 set TEST_DKPRINT=1
 set TEST_DKTEMPLATE=1
