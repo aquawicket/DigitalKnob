@@ -365,7 +365,7 @@ goto:eof
 	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
 	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
 	call:add_cmake_arg -DANDROID_STL=c++_static
-	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexception
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
