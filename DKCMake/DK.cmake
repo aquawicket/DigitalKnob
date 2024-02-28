@@ -175,11 +175,6 @@ include(${DKCMAKE}/functions/dk_load.cmake)
 #dk_load(dk_executeProcess)
 #dk_load(dk_command)
 
-### include CMakeDetermineSystem.cmake if needed 
-#if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
-#	include(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
-#	include(${CMAKE_MODULES}/CMakeDetermineSystem.cmake)
-#endif()
 
 ### Set HOST_ARCH
 if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
@@ -214,7 +209,10 @@ endif()
 message(STATUS "HOST_ARCH = ${HOST_ARCH}")
 
 
-
+string(TOUPPER ${HOST} HOST_UPPER)
+string(TOUPPER ${HOST_ARCH} HOST_ARCH_UPPER)
+set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
+message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}")
 
 
 
