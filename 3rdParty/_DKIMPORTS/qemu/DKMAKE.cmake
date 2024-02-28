@@ -1,7 +1,9 @@
 # https://www.qemu.org
 # https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe
 
-# TODO
+# https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi
+
+
 
 
 ##### EAMPLE with tinycorelinux #####
