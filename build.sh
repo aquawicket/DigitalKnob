@@ -476,14 +476,14 @@ function Generate_Project() {
 	#fi
 	
 	#dk_call export SHELL="/bin/bash"
-
+	
 	
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		validate_android_ndk
-		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#validate_make
-		#CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
-		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/linux-x86_64/bin/make" )
+		CMAKE_ARGS+=( "-G $ANDROID_GENERATOR" )
+		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_MAKE_PROGRAM" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$ANDROID_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$ANDROID_CXX_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
@@ -499,8 +499,10 @@ function Generate_Project() {
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
 		validate_android_ndk
-		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/linux-x86_64/bin/make" )
+		CMAKE_ARGS+=( "-G $ANDROID_GENERATOR" )
+		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_MAKE_PROGRAM" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$ANDROID_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$ANDROID_CXX_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=arm64-v8a" )
 		CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
@@ -513,7 +515,6 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
 		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
-	
 	
 	if [[ $TARGET_OS == "emscripten" ]]; then
 		#setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
@@ -977,10 +978,14 @@ function validate_emscripten() {
 
 ###### validate_android_ndk ######
 function validate_android_ndk() {
-	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"	
-	print_var ANDROID_API
+	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 	print_var ANDROID_NDK
+	print_var ANDROID_GENERATOR
 	print_var ANDROID_TOOLCHAIN_FILE
+	print_var ANDROID_API
+	print_var ANDROID_MAKE_PROGRAM
+	print_var ANDROID_C_COMPILER
+	print_var ANDROID_CXX_COMPILER
 }
 
 ###### validate_clang ######

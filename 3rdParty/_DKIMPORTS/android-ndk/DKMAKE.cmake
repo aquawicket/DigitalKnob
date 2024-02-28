@@ -160,8 +160,8 @@ dk_debug("ANDROID_MIN_API = ${ANDROID_MIN_API}")
 dk_set(ANDROID_MAKE_PROGRAM "${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make.exe")
 dk_debug("ANDROID_MAKE_PROGRAM = ${ANDROID_MAKE_PROGRAM}")
 
-dk_set(ANDROID_C_COMPILER		${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang.exe)
+dk_set(ANDROID_C_COMPILER		${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang)
 dk_debug("ANDROID_C_COMPILER = ${ANDROID_C_COMPILER}")
 
-dk_set(ANDROID_CXX_COMPILER	${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang.exe)
+dk_set(ANDROID_CXX_COMPILER	${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang)
 dk_debug("ANDROID_CXX_COMPILER = ${ANDROID_CXX_COMPILER}")
