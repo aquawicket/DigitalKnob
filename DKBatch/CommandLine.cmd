@@ -21,7 +21,10 @@
 :: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
+@echo off & call dkbatch.cmd %%~f0 %%* & @setlocal enableextensions enabledelayedexpansion
 %DKBATCH%
+
+@echo off
 
 COLOR 1A
 

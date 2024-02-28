@@ -1139,6 +1139,7 @@ if(ANDROID)
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Debug/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Debug/gradlew")
+			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		if(RELEASE)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
@@ -1148,6 +1149,7 @@ if(ANDROID)
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Release/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Release/gradlew")
+			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		
 		# https://stackoverflow.com/a/53806411/688352
