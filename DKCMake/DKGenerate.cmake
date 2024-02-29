@@ -1216,7 +1216,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_PROJECT_DIR}/${OS}/Debug/gradlew --gradle-user-home ${DIGITALKNOB} --project-dir ${DK_PROJECT_DIR}/${OS}/Debug --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${OS}/Debug/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${OS}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -1226,7 +1226,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_PROJECT_DIR}/${OS}/Release/gradlew --gradle-user-home ${DIGITALKNOB} --project-dir ${DK_PROJECT_DIR}/${OS}/Release --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${OS}/Release/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${OS}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
