@@ -40,7 +40,10 @@ if "%*" NEQ "" call %*
 	set SCRIPTNAME=%~nx0
 	echo %SCRIPTPATH%\%SCRIPTNAME%
 
-	set CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
+	set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi
+	set CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
+	set CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi
+
 	set GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe
 
     set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
@@ -51,17 +54,7 @@ if "%*" NEQ "" call %*
     call:make_directory "%DKDOWNLOAD%"
     echo DKDOWNLOAD = %DKDOWNLOAD%
 
-    call:validate_git
-    call:validate_branch
-
-    echo DKPATH = %DKPATH%
-    echo DKCMAKE = %DKCMAKE%
-    echo DK3RDPARTY = %DK3RDPARTY%
-    echo DKIMPORTS = %DKIMPORTS%
-	
-	call:validate_cmake
-	
-	set NATIVE_OS=win
+    set NATIVE_OS=win
 	echo NATIVE_OS = %NATIVE_OS%
 	
 	if %PROCESSOR_ARCHITECTURE%==x86 set NATIVE_ARCH=x86
@@ -74,6 +67,16 @@ if "%*" NEQ "" call %*
 	set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
 	echo NATIVE_TRIPLE = %NATIVE_TRIPLE%
 
+	call:validate_git
+    call:validate_branch
+
+    echo DKPATH = %DKPATH%
+    echo DKCMAKE = %DKCMAKE%
+    echo DK3RDPARTY = %DK3RDPARTY%
+    echo DKIMPORTS = %DKIMPORTS%
+	
+	call:validate_cmake
+	
 	:while_loop             
         if "%UPDATE%"==""     call:pick_update & goto:while_loop
         if "%APP%"==""        call:pick_app    & goto:while_loop
@@ -949,6 +952,11 @@ goto:eof
 
 :: validate_cmake()
 :validate_cmake
+	if "%NATIVE_ARCH%"=="arm32"	set CMAKE_DL=
+	if "%NATIVE_ARCH%"=="arm64"	set CMAKE_DL=%CMAKE_DL_WIN_ARM64%
+	if "%NATIVE_ARCH%"=="x86" set CMAKE_DL=%CMAKE_DL_WIN_X86%
+	if "%NATIVE_ARCH%"=="x86_64" set CMAKE_DL=%CMAKE_DL_WIN_X86_64%
+	
 	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
 	echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
 	

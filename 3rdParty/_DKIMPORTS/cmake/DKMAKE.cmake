@@ -8,10 +8,10 @@
 
 ### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
-LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
+#LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
 MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
-WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi)
+#WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi)
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
 
@@ -60,14 +60,17 @@ if(MSYSTEM)
 	
 else()
 	if(WIN_HOST)
-		dk_set(CMAKE_EXE ${3RDPARTY}/${CMAKE_FOLDER}/bin/cmake)
+		dk_set(CMAKE_EXE ${3RDPARTY}/${CMAKE_FOLDER}/bin/cmake.exe)
 		if(NOT EXISTS ${CMAKE_EXE})
 			### INSTALL ###
 			dk_info("Installing CMake . . .")
 			dk_download(${CMAKE_DL} ${DKDOWNLOAD})
 			get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+			
+			file(TO_NATIVE_PATH "${DKDOWNLOAD}/${CMAKE_DL_FILE}" CMAKE_INSTALL_FILE)
 			file(TO_NATIVE_PATH "${3RDPARTY}/${CMAKE_FOLDER}" CMAKE_INSTALL_PATH)
-			dk_command(MsiExec.exe /i ${DKDOWNLOAD}/${CMAKE_DL_FILE} INSTALL_ROOT=${CMAKE_INSTALL_PATH}) #/qn
+			execute_process(COMMAND cmd /c echo MsiExec.exe /i "${CMAKE_INSTALL_FILE}" INSTALL_ROOT=${CMAKE_INSTALL_PATH})
+			execute_process(COMMAND cmd /c MsiExec.exe /i "${CMAKE_INSTALL_FILE}" INSTALL_ROOT=${CMAKE_INSTALL_PATH})
 		endif()
 		if(NOT EXISTS ${CMAKE_EXE})
 			dk_error("cannot find cmake")
