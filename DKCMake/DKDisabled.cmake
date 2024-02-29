@@ -122,7 +122,7 @@ if(ANDROID)
 	dk_disable(aubio)				# build errors	
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
-	dk_disable(bzip2)				# 'make' can't find ar
+	#dk_disable(bzip2)				# 'make' can't find ar
 	dk_disable(cryptopp)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
@@ -137,7 +137,7 @@ if(ANDROID)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	dk_disable(libxml2)				# ../../configure: No such file or directory
+	#dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
@@ -146,9 +146,9 @@ if(ANDROID)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
-	if(WIN_HOST)
-		dk_disable(openssl)
-	endif()
+	#if(WIN_HOST)
+	#	dk_disable(openssl)
+	#endif()
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error: can't find "fontconfig/fontconfig.h"
 	dk_disable(rmlui-d3d11)
@@ -156,7 +156,6 @@ if(ANDROID)
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "Sdl_gpu" does not exist in the project
 	dk_disable(sdl_rtf)
-	#dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 	dk_disable(wasm3)
@@ -207,7 +206,7 @@ if(EMSCRIPTEN)
 	dk_disable(av_kit)
 	dk_disable(avf_audio)
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
-	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
+	#dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
 	dk_disable(cef_binary)
 	dk_disable(core_audio)
 	dk_disable(core_foundation)
@@ -228,12 +227,12 @@ if(EMSCRIPTEN)
 	dk_disable(iokit)
 	dk_disable(jasper)
 	dk_disable(kdevelop)
-	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
+	#dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
 	dk_disable(libcaca)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)
 	dk_disable(libtorrent)
-	dk_disable(libxml2)				# fatal error: 'config.h' file not found
+	#dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(m)
 	dk_disable(media_player)
@@ -255,7 +254,7 @@ if(EMSCRIPTEN)
 	dk_disable(sdl_mixer)			# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(sdl_net)				# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(sdl_rtf)
-	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
+	#dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
 	dk_disable(uwebsockets)
@@ -263,7 +262,7 @@ if(EMSCRIPTEN)
 	dk_disable(wasm3)
 	dk_disable(x265)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
-	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
+	#dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
 endif(EMSCRIPTEN) 
 
 
@@ -288,7 +287,7 @@ if(IOS OR IOSSIM)
 	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
 	dk_disable(boxer)				# COCOA_LIBRARY not found
 	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
-	dk_disable(bzip2)
+	#dk_disable(bzip2)
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
@@ -300,7 +299,7 @@ if(IOS OR IOSSIM)
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
-	dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
+	#dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)				# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
@@ -308,7 +307,7 @@ if(IOS OR IOSSIM)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
-	dk_disable(libxml2)				# fatal error: 'config.h' file not found
+	#dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
@@ -329,7 +328,7 @@ if(IOS OR IOSSIM)
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(wasm3)				# CMake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executbale target "wasm3"
 	dk_disable(x265)
-	dk_disable(zstd)
+	#dk_disable(zstd)
 endif(IOS OR IOSSIM)
 
 
@@ -367,7 +366,6 @@ if(LINUX)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
-	#dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
@@ -400,7 +398,7 @@ if(MAC)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
-	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
+	#dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openblas)
@@ -449,7 +447,7 @@ if(RASPBERRY)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libwebp)
 	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
-	dk_disable(libxml2)
+	#dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(openblas)
@@ -538,7 +536,7 @@ if(MSYS)
 	dk_disable(boost)
 	dk_disable(glew)
 	dk_disable(libexpat)
-	dk_disable(libiconv)
+	#dk_disable(libiconv)
 	dk_disable(stackwalker)
 endif(MSYS)
 

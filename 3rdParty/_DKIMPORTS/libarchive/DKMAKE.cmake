@@ -17,7 +17,7 @@ dk_depend(libiconv)
 dk_depend(libxml2)
 dk_depend(lz4)
 dk_depend(lzo)
-dk_depend(openssl)
+#dk_depend() 
 dk_depend(pcre2)
 dk_depend(xz)
 dk_depend(zlib)
@@ -72,7 +72,7 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD}
 	-DENABLE_LZO=${LZO}
 	-DENABLE_MBEDTLS=OFF
 	-DENABLE_NETTLE=OFF
-	-DENABLE_OPENSSL=${OPENSSL}
+	#-DENABLE_OPENSSL=${OPENSSL}
 	-DENABLE_PCREPOSIX=OFF
 	-DENABLE_SAFESEH="AUTO"
 	-DENABLE_TAR=ON
@@ -102,7 +102,7 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
 	${LZO_CMAKE}
-	${OPENSSL_CMAKE}
+	#${OPENSSL_CMAKE}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
