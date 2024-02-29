@@ -15,7 +15,6 @@ WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/downl
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
 
-
 get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 
@@ -70,6 +69,14 @@ else()
 			file(TO_NATIVE_PATH "${3RDPARTY}/${CMAKE_FOLDER}" CMAKE_INSTALL_PATH)
 			dk_command(MsiExec.exe /i ${DKDOWNLOAD}/${CMAKE_DL_FILE} INSTALL_ROOT=${CMAKE_INSTALL_PATH}) #/qn
 		endif()
+		if(NOT EXISTS ${CMAKE_EXE})
+			dk_error("cannot find cmake")
+		endif()
+	else()
+		execute_process (
+			COMMAND which cmake
+			OUTPUT_VARIABLE CMAKE_EXE
+		)
 		if(NOT EXISTS ${CMAKE_EXE})
 			dk_error("cannot find cmake")
 		endif()
