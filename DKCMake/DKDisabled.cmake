@@ -217,7 +217,6 @@ if(EMSCRIPTEN)
 	dk_disable(core_services)
 	dk_disable(core_video)
 	dk_disable(dukluv)
-	#dk_disable(flac)				# ERROR: src/libFLAC/cpu.c:91:43 error: invalid output constraint '=a' in asm
 	dk_disable(fontconfig)
 	dk_disable(foundation)
 	dk_disable(game_controller)
@@ -243,7 +242,6 @@ if(EMSCRIPTEN)
 	dk_disable(msinttypes)
 	dk_disable(nasm)
 	dk_disable(ncurses)
-	#dk_disable(ogg)
 	dk_disable(openblas)			# CMake Error: When cross compiling, a TARGET is required
 	dk_disable(opencv)				# ittnotify_config.h:376:12: error: call to undeclared function '__TBB_machine_fetchadd4'
 	dk_disable(openframeworks)
@@ -261,7 +259,6 @@ if(EMSCRIPTEN)
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
 	dk_disable(uwebsockets)
-	#dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
 	dk_disable(x265)
@@ -338,9 +335,7 @@ endif(IOS OR IOSSIM)
 
 # Disabled for iOS targets
 if(IOS AND NOT IOSSIM)  
-	#dk_disable(flac)				# configure: error: C compiler cannot create executables
-	#dk_disable(ogg)					# configure: error: C compiler cannot create executables
-	#dk_disable(vorbis)				# configure: error: C compiler cannot create executables
+	#TODO
 endif(IOS AND NOT IOSSIM)
 
 
@@ -397,7 +392,6 @@ if(MAC)
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(aubio)				# breaks DKCefV8
 	dk_disable(dukluv)
-	#dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)

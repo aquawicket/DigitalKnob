@@ -8,26 +8,21 @@ dk_depend(ogg)
 
 
 ### IMPORT ###
-#dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.4.3.tar.xz)
 #dk_import(https://github.com/xiph/flac.git)
 dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz)
 
 
 
 ### LINK ###
-dk_include		(${FLAC}/include														FLAC_INCLUDE_DIR)
-#if(ANDROID)
+dk_include		(${FLAC}/include											FLAC_INCLUDE_DIR)
+
 if(MULTI_CONFIG)
-	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a					FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/src/libFLAC/${RELEASE_DIR}/libFLAC.a					FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a					FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a					FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
 endif()
-#else()
-#	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a		FLAC_LIBRARY_DEBUG)
-#	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a	FLAC_LIBRARY_RELEASE)
-#endif()
 
 
 ### 3rd Party Link ###
@@ -59,31 +54,23 @@ endif()
 
 
 ### GENERATE ###
-#if(ANDROID)
-	dk_queueCommand(${DKCMAKE_BUILD}
-					-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
-					-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
-					-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
-					-DBUILD_PROGRAMS=OFF 				# "Build and install programs" ON
-					#-DBUILD_SHARED_LIBS=OFF			# "Build shared instead of static libraries" OFF
-					-DBUILD_TESTING=OFF					# "Build tests" ON
-					-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
-					-DINSTALL_MANPAGES=OFF				# "Install MAN pages" ON
-					-DINSTALL_PKGCONFIG_MODULES=ON		# "Install PkgConfig modules" ON
-					-DWITH_FORTIFY_SOURCE=ON			# "Enable protection against buffer overflows" ON
-					-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
-					-DWITH_STACK_PROTECTOR=ON			# "Enable GNU GCC stack smash protection" ON
-					${OGG_CMAKE} 
-					${FLAC})
-#else()
-#	string(REPLACE "-std=c++17" "" 	FLAC_BUILD "${DKCONFIGURE_BUILD}")
-#	string(REPLACE "  "         " " FLAC_BUILD "${FLAC_BUILD}")
-#	DEBUG_dk_setPath		(${FLAC}/${OS}/${DEBUG_DIR})
-#	DEBUG_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
-#	RELEASE_dk_setPath		(${FLAC}/${OS}/${RELEASE_DIR})
-#	RELEASE_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
-#endif()
+dk_queueCommand(${DKCMAKE_BUILD}
+	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
+	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
+	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
+	-DBUILD_PROGRAMS=OFF 				# "Build and install programs" ON
+	-DBUILD_TESTING=OFF					# "Build tests" ON
+	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
+	-DINSTALL_MANPAGES=OFF				# "Install MAN pages" ON
+	-DINSTALL_PKGCONFIG_MODULES=ON		# "Install PkgConfig modules" ON
+	-DWITH_FORTIFY_SOURCE=ON			# "Enable protection against buffer overflows" ON
+	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
+	-DWITH_STACK_PROTECTOR=ON			# "Enable GNU GCC stack smash protection" ON
+	${OGG_CMAKE} 
+	${FLAC})
 
 
-dk_build   			(${FLAC})
+
+### BUILD ###
+dk_build(${FLAC})
 
