@@ -21,7 +21,11 @@ if(NOT EXISTS ${ANDROID_SDK})
 	dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
 	dk_makeDirectory(${ANDROID_SDK})
 	dk_patch(android-sdk ${ANDROID_SDK})
+	
+	# https://developer.android.com/tools/variables#envar
 	dk_setEnv("ANDROID_HOME" ${ANDROID_SDK})
+	dk_setEnv("ANDROID_USER_HOME" ${DIGITALKNOB}/.android)
+	dk_setEnv("ANDROID_SDK_HOME" ${DIGITALKNOB}/.android)
 	dk_setEnv("VS_AndroidHome" ${ANDROID_SDK})
 
 	# FIXME:  more work to be done on killing tasks
