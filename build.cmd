@@ -54,14 +54,16 @@ if "%*" NEQ "" call %*
     call:make_directory "%DKDOWNLOAD%"
     echo DKDOWNLOAD = %DKDOWNLOAD%
 
-    call:validate_cmake
     call:validate_git
     call:validate_branch
+	
 
     echo DKPATH = %DKPATH%
     echo DKCMAKE = %DKCMAKE%
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
+	
+	call:validate_cmake
 	
 	set NATIVE_OS=win
 	echo NATIVE_OS = %NATIVE_OS%
@@ -950,35 +952,25 @@ goto:eof
 
 :: validate_cmake()
 :validate_cmake
-    if NOT exist "%CMAKE%" (
-        call:command_to_variable where cmake.exe CMAKE
-    )
-    if NOT exist "%CMAKE%" (
-        call:command_to_variable where /R "%ProgramFiles%\CMake" cmake.exe CMAKE
-    )
-    if NOT exist "%CMAKE%" (
-        call:command_to_variable where /R "%ProgramFiles(x86)%\CMake" cmake.exe CMAKE
-    )
-    call:get_filename %CMAKE_DL% CMAKE_DL_FILE
-    if NOT exist "%CMAKE%" (
-        echo "installing cmake"
-        echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
-        call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
-
-        MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" /qn
-        
-        if NOT exist "%CMAKE%" (
-            call:command_to_variable where /R "%ProgramFiles%\CMake\bin" cmake.exe CMAKE
-        )
-        if NOT exist "%CMAKE%" (
-            call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
-        )
-    )
-    if NOT exist "%CMAKE%" (
+	set "CMAKE_FOLDER=cmake-3.21.1-windows-i386"
+	set "CMAKE=%DK3RDPARTY%\%CMAKE_FOLDER%\bin\cmake.exe"
+	echo CMAKE = %CMAKE%
+	if exist "%CMAKE%" goto:eof
+	
+	echo.	
+	echo "Installing cmake . . ."
+	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
+	echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
+	call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
+	echo MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%" /qn
+	MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%"
+	
+	if NOT exist "%CMAKE%" (
         call:assert "cannot find cmake"
     )
-    echo CMAKE = %CMAKE%
-    call:check_error
+	
+	call:check_error
+	goto:eof
 goto:eof
 
 
