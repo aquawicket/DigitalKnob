@@ -7,11 +7,18 @@
 
 
 ### DOWNLOAD ###
-WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
-if(WIN)
-	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
-	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-endif()
+# https://github.com/Kitware/CMake/releases
+LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
+LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
+MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
+WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi)
+WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
+WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
+
+
+get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+
 
 if(MSYSTEM)
 	dk_depend(msys2)
@@ -108,6 +115,5 @@ endif()
 dk_debug("CMAKE_COMMAND = ${CMAKE_COMMAND}")
 dk_debug("CMAKE = ${CMAKE}")
 dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
-dk_debug("CMAKE_MODULES = ${CMAKE_MODULES}")
 dk_command(${CMAKE_EXE} --version)
 
