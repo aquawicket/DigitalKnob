@@ -40,11 +40,8 @@ if "%*" NEQ "" call %*
 	set SCRIPTNAME=%~nx0
 	echo %SCRIPTPATH%\%SCRIPTNAME%
 
-	set CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
+	set CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
 	set GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe
-	set GIT_USER_EMAIL=aquawicket@hotmail.com
-	set GIT_USER_NAME=aquawicket
-	
 
     set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call:make_directory "%DIGITALKNOB%"
@@ -56,7 +53,6 @@ if "%*" NEQ "" call %*
 
     call:validate_git
     call:validate_branch
-	
 
     echo DKPATH = %DKPATH%
     echo DKCMAKE = %DKCMAKE%
@@ -872,11 +868,12 @@ goto:eof
     echo Downloading %~1
     if exist "%~2" (
         echo %~2 already exist
+		goto:eof
     )
-    if NOT exist "%~2" (
-        echo please wait . . .
-        certutil.exe -urlcache -split -f %~1 %~2
-    )
+
+	echo please wait . . .
+	::certutil.exe -urlcache -split -f %~1 %~2
+	powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%~2')"
     call:check_error
 goto:eof
 
@@ -952,15 +949,19 @@ goto:eof
 
 :: validate_cmake()
 :validate_cmake
-	set "CMAKE_FOLDER=cmake-3.21.1-windows-i386"
+	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
+	echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
+	
+	set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
+	echo CMAKE_FOLDER = %CMAKE_FOLDER%
+
 	set "CMAKE=%DK3RDPARTY%\%CMAKE_FOLDER%\bin\cmake.exe"
 	echo CMAKE = %CMAKE%
+	
 	if exist "%CMAKE%" goto:eof
 	
 	echo.	
 	echo "Installing cmake . . ."
-	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
-	echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
 	call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
 	echo MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%" /qn
 	MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%"

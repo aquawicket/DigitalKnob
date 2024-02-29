@@ -7,7 +7,7 @@
 
 
 ### DOWNLOAD ###
-WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)
+WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 if(WIN)
 	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
@@ -54,15 +54,17 @@ if(MSYSTEM)
 	
 else()
 	if(WIN_HOST)
-		dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-		if(NOT EXISTS ${3RDPARTY}/${CMAKE_FOLDER}/bin/cmake)
-		
+		dk_set(CMAKE_EXE ${3RDPARTY}/${CMAKE_FOLDER}/bin/cmake)
+		if(NOT EXISTS ${CMAKE_EXE})
 			### INSTALL ###
 			dk_info("Installing CMake . . .")
 			dk_download(${CMAKE_DL} ${DKDOWNLOAD})
 			get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 			file(TO_NATIVE_PATH "${3RDPARTY}/${CMAKE_FOLDER}" CMAKE_INSTALL_PATH)
 			dk_command(MsiExec.exe /i ${DKDOWNLOAD}/${CMAKE_DL_FILE} INSTALL_ROOT=${CMAKE_INSTALL_PATH}) #/qn
+		endif()
+		if(NOT EXISTS ${CMAKE_EXE})
+			dk_error("cannot find cmake")
 		endif()
 	endif()
 	
@@ -78,10 +80,6 @@ else()
 
 #		### INSTALL ###
 #		dk_info("Installing CMake . . .")
-#		if(MSVC)
-#			WIN_HOST_dk_download(${CMAKE_DL_FILE} ${DKDOWNLOAD})
-#			WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_DL_FILE})
-#		endif()
 #		MAC_HOST_dk_command(brew install cmake)
 #		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
 #			dk_set(APT "apt")
@@ -100,26 +98,10 @@ else()
 #	elseif(EXISTS /data/data/com.termux/files/usr/bin/cmake)
 #		dk_set(CMAKE /data/data/com.termux/files/usr/bin)
 #		dk_set(CMAKE_EXE /data/data/com.termux/files/usr/bin/cmake)
-#	elseif(EXISTS "C:/Progra~1/CMake/bin/cmake.exe")
-#		dk_set(CMAKE "C:/Progra~1/CMake/bin")
-#		dk_set(CMAKE_EXE "C:/Progra~1/CMake/bin/cmake.exe")
-#		dk_set(CMAKE_MODULES "C:/Progra~1/CMake/share/cmake-3.21/Modules")
-#	elseif(EXISTS "C:/Progra~2/CMake/bin/cmake.exe")
-#		dk_set(CMAKE "C:/Progra~2/CMake/bin")
-#		dk_set(CMAKE_EXE "C:/Progra~2/CMake/bin/cmake.exe")
-#		dk_set(CMAKE_MODULES "C:/Progra~2/CMake/share/cmake-3.21/Modules")
-#	elseif(EXISTS "${ProgramFiles}/CMake/bin/cmake.exe")
-#		dk_set(CMAKE "${ProgramFiles}/CMake/bin")
-#		dk_set(CMAKE_EXE "${ProgramFiles}/CMake/bin/cmake.exe")
-#		dk_set(CMAKE_MODULES "${ProgramFiles}/CMake/share/cmake-3.21/Modules")
-#	elseif(EXISTS "${ProgramFiles_x86}/CMake/bin/cmake.exe")
-#		dk_set(CMAKE "${ProgramFiles_x86}/CMake/bin")
-#		dk_set(CMAKE_EXE "${ProgramFiles_x86}/CMake/bin/cmake.exe")
-#		dk_set(CMAKE_MODULES "${ProgramFiles_x86}/CMake/share/cmake-3.21/Modules")
 #	else()
 #		dk_error("CMAKE NOT FOUND!")
 #	endif()
-#endif()
+endif()
 
 
 ###### CMake variables #######
