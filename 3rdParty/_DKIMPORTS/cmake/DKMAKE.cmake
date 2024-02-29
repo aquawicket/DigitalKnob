@@ -76,10 +76,8 @@ else()
 			dk_error("cannot find cmake")
 		endif()
 	else()
-		execute_process (
-			COMMAND which cmake
-			OUTPUT_VARIABLE CMAKE_EXE
-		)
+		execute_process(COMMAND which cmake OUTPUT_VARIABLE CMAKE_EXE)
+		dk_info("which cmake = ${CMAKE_EXE}")
 		if(NOT EXISTS ${CMAKE_EXE})
 			dk_error("cannot find cmake")
 		endif()
