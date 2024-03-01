@@ -63,7 +63,6 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-
 include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 

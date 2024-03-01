@@ -506,6 +506,7 @@ goto:eof
                 
     call:add_cmake_arg -G %MSYS2_GENERATOR%
     call:add_cmake_arg -DMSYSTEM=MINGW64
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
                 
     echo.
     echo ****** CMAKE COMMAND ******
