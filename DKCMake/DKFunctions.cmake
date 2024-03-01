@@ -1936,6 +1936,9 @@ function(dk_executeProcess)
 	
 
 	set(commands ${ARGV})
+	list(REMOVE_ITEM commands COMMAND)
+	list(REMOVE_ITEM commands "cmd /c ")
+	
 	
 	### DO NOT DO THIS ###
 	#string(REPLACE ";" " " ARGV "${ARGV}")
@@ -1944,9 +1947,6 @@ function(dk_executeProcess)
 		string(REPLACE ";" " " print_commands "${ARGV}")
 		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
 	endif()
-
-	list(REMOVE_ITEM commands COMMAND)
-	list(REMOVE_ITEM commands "cmd /c ")
 	
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)

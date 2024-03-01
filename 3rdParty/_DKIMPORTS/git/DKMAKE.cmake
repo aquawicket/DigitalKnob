@@ -24,7 +24,7 @@ if(MSYSTEM)
 		dk_error("MSYS2:${MSYS2} does not exist")
 	endif()
 	
-	dk_command(sh -c "command -v git.exe" OUTPUT_VARIABLE GIT_EXE NOASSERT)
+	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NOASSERT)
 	if(GIT_EXE)
 	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
 	endif()
@@ -34,7 +34,7 @@ if(MSYSTEM)
 		dk_command(pacman -S git --needed --noconfirm)
 	endif()
 	
-	dk_command(sh -c "command -v git.exe" OUTPUT_VARIABLE GIT_EXE)
+	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE)
 	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
 
 else()
