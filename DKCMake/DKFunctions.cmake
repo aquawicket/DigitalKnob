@@ -1849,21 +1849,68 @@ function(dk_getShortPath path RESULT)
 	endif()
 endfunction()
 
+###############################################################################
+# dk_print_prefix_vars(_prefix) 
+#
+#	Example: dk_print_prefix_vars("CMAKE_")
+#
+function(dk_print_prefix_vars _prefix)
+    get_cmake_property(_vars VARIABLES)
+    string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
+    set(_resultVars "")
+    foreach(_variable ${_matchedVars})
+		list(APPEND _resultVars "${_variable}")
+    endforeach()
+
+	foreach(_var IN LISTS _resultVars)
+        message(STATUS "${_var} = ${${_var}}")
+    endforeach()
+endfunction()
+
+macro(dk_get_option name)
+	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
+	set(${name} ${ARG_${name}})
+	list(REMOVE_ITEM ARGV ${name})	# remove item from parents ARGV list
+endmacro()
+
+macro(dk_get_option_value name)
+	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
+	set(${name} ${ARG_${name}})
+	list(REMOVE_ITEM ARGV ${name})
+	list(REMOVE_ITEM ARGV ${ARG_${name}})
+endmacro()
+
+macro(dk_get_option_values name)
+	cmake_parse_arguments(ARG "" "" "${name}" ${ARGN})
+	set(${name} ${ARG_${name}})
+	list(REMOVE_ITEM ARGV ${name})
+	list(REMOVE_ITEM ARGV ${ARG_${name}})
+	#FIXME: TODO:  remove each value from ARGV
+endmacro()
 
 ###############################################################################
-# dk_executeProcess(commands) NOASSERT
+# dk_executeProcess(commands) NOASSERT NOECHO OUTPUT <output_variable>
 #
 #	TODO
 #
 #	@commands	- TODO
 #	@NOASSERT	- will not halt cmake if an error occurs
 #
-function(dk_executeProcess commands) #NOASSERT #NOECHO
+function(dk_executeProcess) #commands NOASSERT #NOECHO
 	DKDEBUGFUNC(${ARGV})
 
-	dk_includes("${ARGV}" "NOASSERT" NOASSERT)
-	dk_includes("${ARGV}" "NOECHO" NOECHO)
+	dk_get_option(NOASSERT ${ARGV})
+	dk_get_option(NOECHO ${ARGV})
+	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+	if(OUTPUT_VARIABLE)
+		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	dk_get_option_value(WORKING_DIRECTORY ${ARGV})
+	if(WORKING_DIRECTORY)
+		set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${WORKING_DIRECTORY})
+	endif()
 	
+
 	set(commands ${ARGV})
 	
 	### DO NOT DO THIS ###
@@ -1874,20 +1921,30 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
 	endif()
 
-	list(REMOVE_ITEM commands NOASSERT)
-	list(REMOVE_ITEM commands NOECHO)
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
 	
-	list(FIND commands "WORKING_DIRECTORY" index)
-	if(index EQUAL -1)
-		set(commands ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+	#list(FIND commands "WORKING_DIRECTORY" index)
+	#if(index EQUAL -1)
+	#	set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+	#endif()
+	
+	if(OUTPUT_VARIABLE)
+		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
+	set(EXTRA_ARGS ${EXTRA_ARGS} RESULT_VARIABLE result)
+	set(EXTRA_ARGS ${EXTRA_ARGS} ERROR_VARIABLE error)
+	set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_STRIP_TRAILING_WHITESPACE)
+	
 	if(MSVC)	#FIXME: detect cmd instead of msvc
-		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
+		execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})
 	else()
-		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
+		execute_process(COMMAND ${commands} ${EXTRA_ARGS})
+	endif()
+	
+	if(OUTPUT_VARIABLE)
+		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()
 
 	if(NOT ${result} EQUAL 0)
@@ -1895,9 +1952,12 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 		dk_error(" 							" NOASSERT)
 		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
 		dk_error("command = ${commands}		" NOASSERT)
-		dk_error("result  = ${result}		" NOASSERT)     
+		dk_error("result  = ${result}		" NOASSERT)
+		dk_error("output  = ${output}		" NOASSERT) 		
 		dk_error("error   = ${error}		" NOASSERT)
-		dk_error(" 							" ${NOASSERT})
+		if(NOT ${NOASSERT})
+			dk_error("")
+		endif()
 	endif()
 endfunction()
 dk_createOsMacros("dk_executeProcess")
@@ -2030,35 +2090,6 @@ function(dk_queueBash)
 endfunction()
 dk_createOsMacros("dk_queueBash")
 
-###############################################################################
-# dk_commandToVariable(result args)
-#
-#	TODO
-#
-#	@result	- TODO
-#	@args	- TODO
-#
-function(dk_commandToVariable result)
-	DKDEBUGFUNC(${ARGN})
-	
-	dk_info("\n${CLR}${magenta} dk_commandToVariable> ${ARGN}\n")
-	execute_process(COMMAND ${ARGN}
-		RESULT_VARIABLE result
-		OUTPUT_VARIABLE output
-		ERROR_VARIABLE error)
-		
-	#if(NOT ${result} EQUAL 0)
-		dk_info("command: ${ARGN}")
-		dk_info("      output: ${output}")
-		dk_info("        result: ${result}")
-		dk_info("         error: ${error}")
-	#else()
-	#	dk_debug("output = ${output}")
-	#	set(${result} ${output} PARENT_SCOPE)
-	#endif()
-endfunction()
-	
-	
 	
 ###############################################################################
 # dk_msys2(args)
@@ -2099,13 +2130,25 @@ function(dk_msys2_bash)
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
 	
-	dk_includes("${ARGN}" "NOASSERT" NOASSERT)
-	if(${NOASSERT})
-		set(NOASSERT NOASSERT)
+	dk_get_option(NOASSERT ${ARGV})
+	if(NOASSERT)
+		set(EXTRA_ARGS ${EXTRA_ARGS} NOASSERT)
 	endif()
 	
-	string(REPLACE ";" " " ARGV "${ARGV}")
-	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV}\n")
+	dk_get_option(NOECHO ${ARGV})
+	if(NOECHO)
+		set(EXTRA_ARGS ${EXTRA_ARGS} NOECHO)
+	endif()
+	
+	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+	if(OUTPUT_VARIABLE)
+		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	
+	if(NOT ${NOECHO})
+		string(REPLACE ";" " " ARGV "${ARGV}")
+		dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV}\n")
+	endif()
 
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${CURRENT_DIR}")
@@ -2141,7 +2184,11 @@ function(dk_msys2_bash)
 	
 	### run bash as a string parameter
 	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
-	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${NOASSERT})
+	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${EXTRA_ARGS})
+	
+	if(OUTPUT_VARIABLE)
+		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+	endif()
 endfunction()
 dk_createOsMacros("dk_msys2_bash")
 
@@ -2218,7 +2265,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_command(args) NOASSERT
+# dk_command(args) NOASSERT OUTPUT
 #
 #	TODO
 #
@@ -2227,10 +2274,20 @@ endfunction()
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
 	
-	#dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
-	#if(${has_NOASSERT})
-	#	set(NOASSERT NOASSERT)
-	#endif()
+	dk_get_option(NOASSERT ${ARGV})
+	if(NOASSERT)
+		set(EXTRA_ARGS ${EXTRA_ARGS} NOASSERT)
+	endif()
+	
+	dk_get_option(NOECHO ${ARGV})
+	if(NOECHO)
+		set(EXTRA_ARGS ${EXTRA_ARGS} NOECHO)
+	endif()
+	
+	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+	if(OUTPUT_VARIABLE)
+		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
 	
 	dk_mergeFlags("${ARGV}" merged_args)
 	#string(REPLACE ";" " " spaced_args "${merged_args}")
@@ -2241,9 +2298,13 @@ function(dk_command)
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		dk_msys2_bash(${merged_args})
+		dk_msys2_bash(${merged_args} ${EXTRA_ARGS})
 	else()
-		dk_executeProcess(${merged_args})
+		dk_executeProcess(${merged_args} ${EXTRA_ARGS})
+	endif()
+	
+	if(OUTPUT_VARIABLE)
+		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()
 endfunction()
 dk_createOsMacros("dk_command")

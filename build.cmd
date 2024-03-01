@@ -962,6 +962,9 @@ goto:eof
 	
 	set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
 	echo CMAKE_FOLDER = %CMAKE_FOLDER%
+	
+	::MAKE_C_IDENTIFIER
+	call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
 
 	set "CMAKE=%DK3RDPARTY%\%CMAKE_FOLDER%\bin\cmake.exe"
 	echo CMAKE = %CMAKE%
@@ -1314,7 +1317,24 @@ goto:eof
 	set _LEVEL_=%_LEVEL_: =%
 goto:eof
 
+:: convert_to_c_identifier <in> <out>
+:convert_to_c_identifier
+    set "_input=%1"
+    set "_output="
+    set "map=abcdefghijklmnopqrstuvwxyz 1234567890"
 
+	:c_identifier_loop
+	if not defined _input goto c_identifier_endLoop    
+	for /F "delims=*~ eol=*" %%C in ("!_input:~0,1!") do (
+		if "!map:%%C=!" NEQ "!map!" set "_output=!_output!%%C"
+		if "!map:%%C=!" EQU "!map!" set "_output=!_output!_"
+	)
+	set "_input=!_input:~1!"
+		goto c_identifier_loop
+
+	:c_identifier_endLoop
+	set %2=!_output!
+goto:eof
 
 :end
 	echo "ERROR: reached the end of the script"

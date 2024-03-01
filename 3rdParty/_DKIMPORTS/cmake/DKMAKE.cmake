@@ -10,6 +10,7 @@ if(EXISTS ${CMAKE_EXE})
 	return()
 endif()
 
+
 ### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
 #LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
@@ -18,16 +19,17 @@ MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/
 #WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi)
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
-
 if(CMAKE_DL)
 	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+	string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
 endif()
+
 
 if(MSYSTEM)
 	dk_depend(msys2)
-	if(NOT MSYS2)
-		dk_error("MSYS2:${MSYS2} is empty")
+	if(NOT EXISTS ${MSYS2})
+		dk_error("MSYS2:${MSYS2} does not exist")
 	endif()
 	
 	execute_process(COMMAND which cmake.exe OUTPUT_VARIABLE CMAKE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -40,24 +42,30 @@ if(MSYSTEM)
 		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 		if(CLANG32)
 			dk_command("pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm")		# CLANG32
-			dk_set(CMAKE_EXE ${MSYS2}/clang32/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/clang32/bin/cmake.exe)
 		elseif(CLANG64)
 			dk_command("pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm")	# CLANG64
-			dk_set(CMAKE_EXE ${MSYS2}/clang64/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/clang64/bin/cmake.exe)
 		elseif(CLANGARM64)
 			dk_command("pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm")	# CLANGARM64
-			dk_set(CMAKE_EXE ${MSYS2}/clangarm64/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/clangarm64/bin/cmake.exe)
 		elseif(MINGW32)
 			dk_command("pacman -S mingw-w64-i686-cmake --needed --noconfirm")			# MINGW32
-			dk_set(CMAKE_EXE ${MSYS2}/mingw32/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/mingw32/bin/cmake.exe)
 		elseif(MINGW64)
 			dk_command("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# MINGW64
-			dk_set(CMAKE_EXE ${MSYS2}/mingw64/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/mingw64/bin/cmake.exe)
 		elseif(UCRT64)
 			dk_command("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")	# UCRT64
-			dk_set(CMAKE_EXE ${MSYS2}/ucrt64/bin/cmake.exe)
+			#dk_set(CMAKE_EXE ${MSYS2}/ucrt64/bin/cmake.exe)
 		endif()
 	endif()
+	
+	execute_process(COMMAND which cmake.exe OUTPUT_VARIABLE CMAKE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_debug("which cmake.exe = ${CMAKE_EXE}")
+	
+	execute_process(COMMAND cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_debug("cygpath -m = ${CMAKE_EXE}")
 else()
 	if(WIN_HOST)
 		dk_set(CMAKE_EXE ${3RDPARTY}/${CMAKE_FOLDER}/bin/cmake.exe)
