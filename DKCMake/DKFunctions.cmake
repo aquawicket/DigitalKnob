@@ -1929,10 +1929,10 @@ function(dk_executeProcess)
 	if(OUTPUT_VARIABLE)
 		set(EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
-	dk_get_option_value(WORKING_DIRECTORY ${ARGV})
-	if(WORKING_DIRECTORY)
-		set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${WORKING_DIRECTORY})
-	endif()
+	#dk_get_option_value(WORKING_DIRECTORY ${ARGV})
+	#if(WORKING_DIRECTORY)
+	#	set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${WORKING_DIRECTORY})
+	#endif()
 	
 
 	set(commands ${ARGV})
@@ -1948,10 +1948,10 @@ function(dk_executeProcess)
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
 	
-	#list(FIND commands "WORKING_DIRECTORY" index)
-	#if(index EQUAL -1)
-	#	set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
-	#endif()
+	list(FIND commands "WORKING_DIRECTORY" index)
+	if(index EQUAL -1)
+		set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+	endif()
 	
 	if(OUTPUT_VARIABLE)
 		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
