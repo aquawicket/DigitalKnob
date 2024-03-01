@@ -70,6 +70,7 @@ if(NOT EXISTS ${GIT_EXE})
 	dk_error("GIT_EXE:${GIT_EXE} does not exist")
 endif()
 
+dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent
 
 ### print GIT info ###
 dk_debug("GIT_EXE = ${GIT_EXE}")

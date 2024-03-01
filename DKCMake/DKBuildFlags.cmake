@@ -39,6 +39,11 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 # Difference between Clang LLVM GCC G++			https://stackoverflow.com/a/24836566/688352
 # CRT and C++ STL .lib files 					https://docs.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
 # Get started with the NDK						https://developer.android.com/ndk/guides
+# target XP										https://tedwvc.wordpress.com/2014/01/01/how-to-target-xp-with-vc2012-or-vc2013-and-continue-to-use-the-windows-8-x-sdk
+# GCC optimizations								https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Optimize-Options.html
+# LLVM optimizations							https://www.incredibuild.com/blog/compiling-with-clang-optimization-flags
+# MSVC optimizations							https://learn.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=msvc-170
+
 
 # Target Operating Systems
 # https://en.wikipedia.org/wiki/Comparison_of_operating_systems
@@ -51,10 +56,10 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 # CPU Architectures
 # https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures
-# x86_32
+# x86
 # x86_64
-# arm_32
-# arm_64
+# arm32
+# arm64
 
 # C/C++ Compilers
 # https://en.wikipedia.org/wiki/List_of_compilers#C_compilers
@@ -91,18 +96,15 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 # No Experimental filesystem warning											/D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 # Enable CRT Secure functions extension											/D__STDC_WANT_LIB_EXT1__
 # supress CRT Secure function warnings											/D_CRT_SECURE_NO_WARNINGS
-# precompiled headers															/Yu<file>												<file> = file name  EXAMPLE: /Yustdafx.h
+# precompiled headers															/Yu<file>												<file> = file name  EXAMPLE: /Yustdafx.h																
 
-# Optimizations																	
-# MSVC	https://learn.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=msvc-170
-# GCC	https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Optimize-Options.html
 
 ############ CORE DEPENDENCIES ############
 if(MSVC)
 	include(${DKIMPORTS}/visualstudio/DKMAKE.cmake)
 endif()
 if(MSYS)
-	set(INCLUDE_DKPLUGINS 0) # TODO - INCLUDE_DKPLUGINS not working on MSYS
+	set(INCLUDE_DKPLUGINS 0) 						# TODO - INCLUDE_DKPLUGINS not working on MSYS
 	unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 	include(${DKIMPORTS}/msys2/DKMAKE.cmake)
 	include(${DKIMPORTS}/gcc/DKMAKE.cmake)
@@ -337,26 +339,26 @@ IOS_ARM64_dk_append(DKCONFIGURE_CXXFLAGS			"-arch arm64 -DIOS -DIOS_ARM64 -mios-
 # iOS Simulator i686 (x32) - XCODE
 IOSSIM_X86_dk_append(DKCMAKE_FLAGS					-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=i686)
 #IOSSIM_X86_dk_set(DKCMAKE_C_COMPILER				${XCODE_C_COMPILER})
-IOSSIM_X86_dk_append(DKCMAKE_C_FLAGS				"-DIOS -DIOS_ARM32 -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c")
+IOSSIM_X86_dk_append(DKCMAKE_C_FLAGS				"-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c")
 #IOSSIM_X86_dk_set(DKCMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
-IOSSIM_X86_dk_append(DKCMAKE_CXX_FLAGS				"-DIOS -DIOS_ARM32 -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++")
+IOSSIM_X86_dk_append(DKCMAKE_CXX_FLAGS				"-DIOS -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++")
 IOSSIM_X86_dk_append(DKCONFIGURE_FLAGS				--host i686-apple-${IOS_DARWIN})
 IOSSIM_X86_dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
-IOSSIM_X86_dk_append(DKCONFIGURE_CFLAGS				"-arch i686 -DIOS -DIOS_ARM32 -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
+IOSSIM_X86_dk_append(DKCONFIGURE_CFLAGS				"-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 IOSSIM_X86_dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
-IOSSIM_X86_dk_append(DKCONFIGURE_CXXFLAGS			"-arch i686 -DIOS -DIOS_ARM32 -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
+IOSSIM_X86_dk_append(DKCONFIGURE_CXXFLAGS			"-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 
 # iOS Simulator x86_64 (x64) - XCODE
 IOSSIM_X86_64_dk_append(DKCMAKE_FLAGS				-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=x86_64)
 #IOSSIM_X86_64_dk_set(DKCMAKE_C_COMPILER			${XCODE_C_COMPILER})
-IOSSIM_X86_64_dk_append(DKCMAKE_C_FLAGS				"-DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c")
+IOSSIM_X86_64_dk_append(DKCMAKE_C_FLAGS				"-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c")
 #IOSSIM_X86_64_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CXX_COMPILER})
-IOSSIM_X86_64_dk_append(DKCMAKE_CXX_FLAGS			"-DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++")
+IOSSIM_X86_64_dk_append(DKCMAKE_CXX_FLAGS			"-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++")
 IOSSIM_X86_64_dk_append(DKCONFIGURE_FLAGS			--host x86_64-apple-${IOS_DARWIN})
 IOSSIM_X86_64_dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
-IOSSIM_X86_64_dk_append(DKCONFIGURE_CFLAGS			"-arch x86_64 -DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
+IOSSIM_X86_64_dk_append(DKCONFIGURE_CFLAGS			"-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 IOSSIM_X86_64_dk_set(DKCONFIGURE_CXX				${XCODE_CXX_COMPILER})
-IOSSIM_X86_64_dk_append(DKCONFIGURE_CXXFLAGS		"-arch x86_64 -DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
+IOSSIM_X86_64_dk_append(DKCONFIGURE_CXXFLAGS		"-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 
 # Linux i686 (x32) - GCC
 LINUX_X86_dk_set(DKCMAKE_C_COMPILER					${GCC_C_COMPILER})
@@ -380,23 +382,23 @@ LINUX_X86_64_dk_append(DKCONFIGURE_CXXFLAGS			"-march=x86-64 -DLINUX -DLINUX_X86
 
 # Raspbery arm (x32) - GCC
 RASPBERRY_ARM32_dk_set(DKCMAKE_C_COMPILER			${GCC_C_COMPILER})
-RASPBERRY_ARM32_dk_append(DKCMAKE_C_FLAGS			"-DLINUX -DLINUX_X86 -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11") #-march=armv7l
+RASPBERRY_ARM32_dk_append(DKCMAKE_C_FLAGS			"-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11") 				#-march=armv7l
 RASPBERRY_ARM32_dk_set(DKCMAKE_CXX_COMPILER			${GCC_CXX_COMPILER})
-RASPBERRY_ARM32_dk_append(DKCMAKE_CXX_FLAGS			"-DLINUX -DLINUX_X86 -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs") #-march=armv7l 
+RASPBERRY_ARM32_dk_append(DKCMAKE_CXX_FLAGS			"-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs") 	#-march=armv7l 
 RASPBERRY_ARM32_dk_set(DKCONFIGURE_CC				${GCC_C_COMPILER})
-RASPBERRY_ARM32_dk_append(DKCONFIGURE_CFLAGS		"-DLINUX -DLINUX_X86 -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11") #-march=armv7l 
+RASPBERRY_ARM32_dk_append(DKCONFIGURE_CFLAGS		"-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11") 				#-march=armv7l 
 RASPBERRY_ARM32_dk_set(DKCONFIGURE_CXX				${GCC_CXX_COMPILER})
-RASPBERRY_ARM32_dk_append(DKCONFIGURE_CXXFLAGS		"-DLINUX -DLINUX_X86 -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs") #-march=armv7l 
+RASPBERRY_ARM32_dk_append(DKCONFIGURE_CXXFLAGS		"-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs") 	#-march=armv7l 
 
 # Raspbery arm64 (x64) - GCC
 RASPBERRY_ARM64_dk_set(DKCMAKE_C_COMPILER			${GCC_C_COMPILER})
-RASPBERRY_ARM64_dk_append(DKCMAKE_C_FLAGS			"-DLINUX -DLINUX_X86_64 -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11") #-march=armv7l 
+RASPBERRY_ARM64_dk_append(DKCMAKE_C_FLAGS			"-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11") 				#-march=armv7l 
 RASPBERRY_ARM64_dk_set(DKCMAKE_CXX_COMPILER			${GCC_CXX_COMPILER})
-RASPBERRY_ARM64_dk_append(DKCMAKE_CXX_FLAGS			"-DLINUX -DLINUX_X86_64 -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs") #-march=armv7l 
+RASPBERRY_ARM64_dk_append(DKCMAKE_CXX_FLAGS			"-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs") 	#-march=armv7l 
 RASPBERRY_ARM64_dk_set(DKCONFIGURE_CC				${GCC_C_COMPILER})
-RASPBERRY_ARM64_dk_append(DKCONFIGURE_CFLAGS		"-DLINUX -DLINUX_X86_64 -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11") #-march=armv7l 
+RASPBERRY_ARM64_dk_append(DKCONFIGURE_CFLAGS		"-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11") 				#-march=armv7l 
 RASPBERRY_ARM64_dk_set(DKCONFIGURE_CXX				${GCC_CXX_COMPILER})
-RASPBERRY_ARM64_dk_append(DKCONFIGURE_CXXFLAGS		"-DLINUX -DLINUX_X86_64 -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs") #-march=armv7l 
+RASPBERRY_ARM64_dk_append(DKCONFIGURE_CXXFLAGS		"-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs") 	#-march=armv7l 
 
 # Android armeabi-v7a (x32) - CLANG
 ANDROID_ARM32_dk_set(CMAKE_GENERATOR				"Unix Makefiles")
@@ -436,12 +438,8 @@ ANDROID_ARM64_dk_append(DKCMAKE_FLAGS
 	-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM})
 #ANDROID_ARM64_dk_set(DKCMAKE_C_COMPILER			${ANDROID_NDK_C_COMPILER})
 ANDROID_ARM64_dk_append(DKCMAKE_C_FLAGS				"-DANDROID -DANDROID_ARM64 -std=c17")
-#ANDROID_ARM64_dk_append(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
-#ANDROID_ARM64_dk_append(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 #ANDROID_ARM64_dk_set(DKCMAKE_CXX_COMPILER			${ANDROID_NDK_CXX_COMPILER})
 ANDROID_ARM64_dk_append(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID_ARM64 -std=c++1z")
-#ANDROID_ARM64_dk_append(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
-#ANDROID_ARM64_dk_append(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 #ANDROID_ARM64_dk_set(DKCONFIGURE_CC				${ANDROID_NDK_C_COMPILER})
 ANDROID_ARM64_dk_append(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID_ARM64 -std=c17")
 #ANDROID_ARM64_dk_set(DKCONFIGURE_CXX				${ANDROID_NDK_CXX_COMPILER})
@@ -509,29 +507,13 @@ endif()
 if(DKCMAKE_CXX_COMPILER)
 	dk_set					(CMAKE_CXX_COMPILER			${DKCMAKE_CXX_COMPILER})
 endif()
-
 dk_set						(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS})
 dk_set						(CMAKE_C_FLAGS_DEBUG		${DKCMAKE_C_FLAGS_DEBUG})
 dk_set						(CMAKE_C_FLAGS_RELEASE		${DKCMAKE_C_FLAGS_RELEASE})
-
 dk_set						(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS})
 dk_set						(CMAKE_CXX_FLAGS_DEBUG		${DKCMAKE_CXX_FLAGS_DEBUG})
 dk_set						(CMAKE_CXX_FLAGS_RELEASE	${DKCMAKE_CXX_FLAGS_RELEASE})
-
 dk_set						(CMAKE_EXE_LINKER_FLAGS		${DKCMAKE_EXE_LINKER_FLAGS})
-
-#LINUX_DEBUG_dk_append		(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_DEBUG})
-#LINUX_DEBUG_dk_append		(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_DEBUG})
-#LINUX_RELEASE_dk_append	(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_RELEASE})
-#LINUX_RELEASE_dk_append	(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_RELEASE})
-#RASPBERRY_DEBUG_dk_append	(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_DEBUG})
-#RASPBERRY_DEBUG_dk_append	(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_DEBUG})
-#RASPBERRY_RELEASE_dk_append(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_RELEASE})
-#RASPBERRY_RELEASE_dk_append(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_RELEASE})
-#EMSCRIPTEN_DEBUG_dk_append	(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_DEBUG})
-#EMSCRIPTEN_DEBUG_dk_append	(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_DEBUG})
-#EMSCRIPTEN_RELEASE_dk_append(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS_RELEASE})
-#EMSCRIPTEN_RELEASE_dk_append(CMAKE_CXX_FLAGS			${DKCMAKE_CXX_FLAGS_RELEASE})
 
 
 if(DKCMAKE_C_FLAGS)
@@ -540,7 +522,6 @@ endif()
 if(DKCMAKE_CXX_FLAGS)
 	dk_append		(DKCMAKE_FLAGS -DCMAKE_CXX_FLAGS=${DKCMAKE_CXX_FLAGS})
 endif()
-#if(NOT LINUX AND NOT RASPBERRY)
 if(DKCMAKE_C_FLAGS_DEBUG)
 	dk_append	(DKCMAKE_FLAGS -DCMAKE_C_FLAGS_DEBUG=${DKCMAKE_C_FLAGS_DEBUG})
 endif()
@@ -556,7 +537,6 @@ endif()
 if(DKCMAKE_EXE_LINKER_FLAGS)
 	dk_append	(DKCMAKE_FLAGS -DCMAKE_EXE_LINKER_FLAGS=${DKCMAKE_EXE_LINKER_FLAGS})
 endif()
-#endif()
 
 
 
@@ -566,21 +546,12 @@ endif()
 if(DKCONFIGURE_CXX)
 	dk_append		(DKCONFIGURE_FLAGS CXX=${DKCONFIGURE_CXX})
 endif()
-#if(MSVC)
-#	if(DKCONFIGURE_CFLAGS)
-#		WIN_dk_append	(DKCONFIGURE_FLAGS CFLAGS="${DKCONFIGURE_CFLAGS}")
-#	endif()
-#	if(DKCONFIGURE_CXXFLAGS)
-#		WIN_dk_append	(DKCONFIGURE_FLAGS CXXFLAGS="${DKCONFIGURE_CXXFLAGS}")
-#	endif()
-#else()
 if(DKCONFIGURE_CFLAGS)
-	dk_append	(DKCONFIGURE_FLAGS CFLAGS=${DKCONFIGURE_CFLAGS})
+	dk_append		(DKCONFIGURE_FLAGS CFLAGS=${DKCONFIGURE_CFLAGS})
 endif()
 if(DKCONFIGURE_CXXFLAGS)
-	dk_append	(DKCONFIGURE_FLAGS CXXFLAGS=${DKCONFIGURE_CXXFLAGS})
+	dk_append		(DKCONFIGURE_FLAGS CXXFLAGS=${DKCONFIGURE_CXXFLAGS})
 endif()
-#endif()
 
 
 
