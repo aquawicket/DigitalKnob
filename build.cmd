@@ -941,6 +941,7 @@ goto:eof
 
         set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
         call:convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
+        call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
         echo GIT_FOLDER = %GIT_FOLDER%
         
         set "GIT_EXE=%DKTOOLS%\%GIT_FOLDER%\bin\git.exe"
@@ -974,6 +975,7 @@ goto:eof
         
         set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
         call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
+		call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
         echo CMAKE_FOLDER = %CMAKE_FOLDER%
         
         set "CMAKE_EXE=%DKTOOLS%\%CMAKE_FOLDER%\bin\cmake.exe"
@@ -1343,6 +1345,21 @@ goto:eof
 
     :c_identifier_endLoop
         set %2=!_output!
+goto:eof
+
+::convert_to_lowercase <in> <out>
+:convert_to_lowercase
+    set _string=%1
+    set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    set "_LCASE=abcdefghijklmnopqrstuvwxyz"
+	
+	for /l %%a in (0,1,25) do (
+        call set "_FROM=%%_UCASE:~%%a,1%%
+        call set "_TO=%%_LCASE:~%%a,1%%
+        call set "_string=%%_string:!_FROM!=!_TO!%%
+    )
+	::echo _string = %_string%
+	set %2=%_string%
 goto:eof
 
 :end
