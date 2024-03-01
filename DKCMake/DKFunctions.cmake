@@ -1962,8 +1962,10 @@ function(dk_executeProcess)
 	set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
 	if(MSVC)	#FIXME: detect cmd instead of msvc
+		message(STATUS "execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})")
 		execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})
 	else()
+		message(STATUS "execute_process(COMMAND ${commands} ${EXTRA_ARGS})")
 		execute_process(COMMAND ${commands} ${EXTRA_ARGS})
 	endif()
 	
