@@ -110,7 +110,7 @@ function main() {
 		validate_homebrew
 	fi
 
-	validate_which
+	#validate_which
 	validate_cmake
 	validate_git
 	validate_branch
@@ -747,14 +747,14 @@ function file_exists() {
 }
 
 ###### validate_which ######
-function validate_which() {
-	if ! command_exists which; then
-		install which
-	fi
-	
-	WHICH=$(which which)
-	print_var WHICH
-}
+#function validate_which() {
+#	if ! command_exists which; then
+#		install which
+#	fi
+#	
+#	WHICH=$(which which)
+#	print_var WHICH
+#}
 
 ###### validate_cmake ######
 function validate_cmake() {
@@ -776,7 +776,8 @@ function validate_cmake() {
 		fi
 	fi
 	
-	CMAKE=$(which cmake)
+	#CMAKE=$(which cmake)
+	CMAKE=$(command -v cmake)
 	print_var CMAKE
 }
 
@@ -786,7 +787,8 @@ function validate_git() {
 		install git
 	fi
 	
-	GIT=$(which git)
+	#GIT=$(which git)
+	GIT=$(command -v git)
 	print_var GIT
 }
 
@@ -805,7 +807,8 @@ function validate_homebrew() {
 		brew tap homebrew/core
 	fi
 	
-	BREW=$(which brew)
+	#BREW=$(which brew)
+	BREW=$(command -v brew)
 	print_var BREW
 }
 

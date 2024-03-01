@@ -67,7 +67,7 @@ else()
 	#	dk_wait()
 	#endif()
 	
-	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2) # wait 2 seconds for files to copy over
+	dk_sleep(2) # wait 2 seconds for files to copy over
 	dk_queueCommand	(make libbz2.a)
 endif()
 

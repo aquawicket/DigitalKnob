@@ -32,8 +32,10 @@ if(MSYSTEM)
 		dk_error("MSYS2:${MSYS2} does not exist")
 	endif()
 	
-	dk_command(which cmake.exe OUTPUT_VARIABLE CMAKE_EXE)
-	dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
+	if(CMAKE_EXE)
+		dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+	endif()
 	
 	if(NOT EXISTS ${CMAKE_EXE})
 		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
@@ -58,7 +60,7 @@ if(MSYSTEM)
 		endif()
 	endif()
 	
-	dk_command(which cmake.exe OUTPUT_VARIABLE CMAKE_EXE)
+	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE)
 	dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
 	
 else()
@@ -74,12 +76,12 @@ else()
 			dk_command(MsiExec.exe /i "${CMAKE_INSTALL_FILE}" INSTALL_ROOT=${CMAKE_INSTALL_PATH})
 		endif()
 	else()
-		dk_command(which cmake OUTPUT_VARIABLE CMAKE_EXE)
+		dk_command(command -v cmake OUTPUT_VARIABLE CMAKE_EXE)
 		if(NOT EXISTS ${CMAKE_EXE})
 			MAC_HOST_dk_command(brew install cmake)
 			ANDROID_HOST_dk_command(apt -y install cmake)
 			LINUX_HOST_dk_command(sudo apt-get -y install cmake)
-			dk_command(which cmake OUTPUT_VARIABLE CMAKE_EXE)
+			dk_command(command -v cmake OUTPUT_VARIABLE CMAKE_EXE)
 		endif()
 	endif()
 endif()
@@ -103,8 +105,10 @@ if(NOT EXISTS ${CMAKE_EXE})
 	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
 endif()
 
+dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent
 
 ### print CMAKE info ###
 dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 dk_debug("CMAKE_VERSION = ${CMAKE_VERSION}")
+

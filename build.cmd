@@ -370,8 +370,8 @@ goto:eof
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%CMAKE%" %CMAKE_ARGS%
-	"%CMAKE%" %CMAKE_ARGS%
+	echo "%CMAKE_EXE%" %CMAKE_ARGS%
+	"%CMAKE_EXE%" %CMAKE_ARGS%
 	echo.
 	
 	::set TARGET=main
@@ -400,8 +400,8 @@ goto:eof
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%CMAKE%" %CMAKE_ARGS%
-	"%CMAKE%" %CMAKE_ARGS%
+	echo "%CMAKE_EXE%" %CMAKE_ARGS%
+	"%CMAKE_EXE%" %CMAKE_ARGS%
 	echo.
     
 	::set TARGET=main
@@ -419,8 +419,8 @@ goto:eof
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%EMSDK_ENV%" ^&^& "%CMAKE%" %CMAKE_ARGS%
-	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	echo "%EMSDK_ENV%" ^&^& "%CMAKE_EXE%" %CMAKE_ARGS%
+	"%EMSDK_ENV%" && "%CMAKE_EXE%" %CMAKE_ARGS%
 	echo.
 	
 	::set TARGET=%APP%_APP
@@ -469,7 +469,7 @@ goto:eof
     ::call:validate_visual_studio
     ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
 goto:eof
 
@@ -515,7 +515,7 @@ goto:eof
     ::call:validate_visual_studio
     ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
 goto:eof
 
@@ -554,16 +554,16 @@ goto:eof
     )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
-        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
+		::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+		echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
-        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
+		::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+		echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
     )
 	
 	if %TYPE%==All goto:build_release
@@ -582,16 +582,16 @@ goto:eof
     )
 	
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
-		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
-        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
+		::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+		echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
-        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
+		::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+		echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
     )
 goto:eof
 
@@ -961,15 +961,13 @@ goto:eof
 	echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
 	
 	set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
+	call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
 	echo CMAKE_FOLDER = %CMAKE_FOLDER%
 	
-	::MAKE_C_IDENTIFIER
-	call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
-
-	set "CMAKE=%DK3RDPARTY%\%CMAKE_FOLDER%\bin\cmake.exe"
-	echo CMAKE = %CMAKE%
+	set "CMAKE_EXE=%DK3RDPARTY%\%CMAKE_FOLDER%\bin\cmake.exe"
+	echo CMAKE_EXE = %CMAKE_EXE%
 	
-	if exist "%CMAKE%" goto:eof
+	if exist "%CMAKE_EXE%" goto:eof
 	
 	echo.	
 	echo "Installing cmake . . ."
@@ -977,7 +975,7 @@ goto:eof
 	echo MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%" /qn
 	MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DK3RDPARTY%\%CMAKE_FOLDER%"
 	
-	if NOT exist "%CMAKE%" (
+	if NOT exist "%CMAKE_EXE%" (
         call:assert "cannot find cmake"
     )
 	
@@ -1187,8 +1185,8 @@ goto:eof
         echo "ERROR: cmake_eval() parameter1 is invalid"
         goto:eof
     )
-    if not exist "%CMAKE%" ( 
-        echo "ERROR: Could not locate CMAKE" 
+    if not exist "%CMAKE_EXE%" ( 
+        echo "ERROR: Could not locate CMAKE_EXE" 
         goto:eof
     )
     if not exist "%DKCMAKE%" ( 
@@ -1207,17 +1205,17 @@ goto:eof
     set "EVAL_VARS=%DKCMAKE%\cmake_vars.cmd"
     call set DKCMAKE=%%DKCMAKE:^\=^/%%
         
-    ::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+    ::echo "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 
     if [%2] == [] goto no_return_values
     goto with_return_values
 
     :no_return_values
-        "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
+        "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
         goto:eof
 
     :with_return_values
-        "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE%/dev/cmake_eval.cmake
+        "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE%/dev/cmake_eval.cmake
         if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%
         ::del %EVAL_VARS%

@@ -1920,14 +1920,14 @@ endmacro()
 #	@commands	- TODO
 #	@NOASSERT	- will not halt cmake if an error occurs
 #
-function(dk_executeProcess) #commands NOASSERT #NOECHO
+function(dk_executeProcess)
 	DKDEBUGFUNC(${ARGV})
 
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 	if(OUTPUT_VARIABLE)
-		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+		set(EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	dk_get_option_value(WORKING_DIRECTORY ${ARGV})
 	if(WORKING_DIRECTORY)
@@ -1972,7 +1972,7 @@ function(dk_executeProcess) #commands NOASSERT #NOECHO
 	endif()
 
 	if(NOT ${result} EQUAL 0)
-		execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2) # wait 2 seconds for the stdout to flush before printing error
+		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
 		dk_error(" 							" NOASSERT)
 		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
 		dk_error("command = ${commands}		" NOASSERT)
@@ -2156,7 +2156,7 @@ function(dk_msys2_bash)
 	
 	dk_get_option(NOASSERT ${ARGV})
 	if(NOASSERT)
-		set(EXTRA_ARGS ${EXTRA_ARGS} NOASSERT)
+		set(EXTRA_ARGS NOASSERT)
 	endif()
 	
 	dk_get_option(NOECHO ${ARGV})
@@ -2289,9 +2289,11 @@ endfunction()
 
 
 ###############################################################################
-# dk_command(args) NOASSERT OUTPUT
+# dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO])
 #
-#	TODO
+#	<cmd>			The command to run
+#	[<arguments>]	command arguments 
+#	[OUTPUT_VARIABLE <variable>]
 #
 #	@args	- TODO
 #
@@ -2300,7 +2302,7 @@ function(dk_command)
 	
 	dk_get_option(NOASSERT ${ARGV})
 	if(NOASSERT)
-		set(EXTRA_ARGS ${EXTRA_ARGS} NOASSERT)
+		set(EXTRA_ARGS NOASSERT)
 	endif()
 	
 	dk_get_option(NOECHO ${ARGV})
@@ -5359,6 +5361,16 @@ function(is_list RESULT)
 		set(${RESULT} FALSE PARENT_SCOPE)
 	endif()
 endfunction()
+
+###############################################################################
+# dk_sleep(seconds)
+#
+#	TODO
+#
+function(dk_sleep seconds)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
+endfunction()
+
 
 
 include(${DKFunctions_ext})
