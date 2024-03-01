@@ -8,7 +8,8 @@ endif()
 
 
 ### DOWNLOAD ###
-WIN_HOST_dk_set(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe)
+WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe)
+WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe)
 if(GIT_DL)
 	get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
 	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
@@ -37,15 +38,14 @@ if(MSYSTEM)
 
 else()
 	if(WIN_HOST)
-		dk_set(GIT_EXE ${3RDPARTY}/${GIT_FOLDER}/bin/git.exe)
+		dk_set(GIT_EXE ${DKTOOLS_DIR}/${GIT_FOLDER}/bin/git.exe)
 		if(NOT EXISTS ${GIT_EXE})
 			### INSTALL ###
 			dk_info("Installing Git . . .")
 			dk_download(${GIT_DL} ${DKDOWNLOAD})			
 			file(TO_NATIVE_PATH "${DKDOWNLOAD}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
-			file(TO_NATIVE_PATH "${3RDPARTY}/${GIT_FOLDER}" GIT_INSTALL_PATH)
+			file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
 			message(STATUS "${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH}")
-			#execute_process(COMMAND ${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
 			dk_command(${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
 		endif()
 	else()
