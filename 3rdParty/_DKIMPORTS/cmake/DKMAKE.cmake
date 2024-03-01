@@ -19,8 +19,10 @@ MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
 
-get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
-dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+if(CMAKE_DL)
+	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+endif()
 
 if(MSYSTEM)
 	dk_depend(msys2)
@@ -81,40 +83,26 @@ else()
 endif()
 
 
+### validate CMAKE variables ###
 if(NOT CMAKE_COMMAND)
 	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} is empty")
-#else()
-#	dk_debug("CMAKE_COMMAND = ${CMAKE_COMMAND}")
 endif()
-
 if(NOT EXISTS ${CMAKE_COMMAND})
 	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
-#else()
-#	dk_debug("CMAKE_COMMAND = ${CMAKE_COMMAND}")
 endif()
-
 if(NOT CMAKE_EXE)
 	dk_warn("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
 	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
-	#dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
 endif()
-
 if(NOT CMAKE_EXE)
-	dk_warn("CMAKE_EXE:${CMAKE_EXE} is empty")
-#else()
-#	dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
+	dk_error("CMAKE_EXE:${CMAKE_EXE} is empty")
 endif()
-
 if(NOT EXISTS ${CMAKE_EXE})
 	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
-#else()
-#	dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
 endif()
-		
-###### CMake variables #######
-#dk_debug("CMAKE_COMMAND = ${CMAKE_COMMAND}")
-#dk_command(${CMAKE_COMMAND} --version)
 
+
+### print CMAKE info ###
 dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
-dk_command(${CMAKE_EXE} --version)
-
+execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+dk_debug("CMAKE_VERSION = ${CMAKE_VERSION}")
