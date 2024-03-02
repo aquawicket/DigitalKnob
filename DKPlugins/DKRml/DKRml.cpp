@@ -557,7 +557,17 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		
 		DKERROR(address+" is invalid hex notation\n");
+		
+		//print which oh the evaluators failed.
+		if(address.compare(0, 2, "0x") != 0)
+			DKERROR("address.compare(0, 2, \"0x\") != 0 \n");
+		if(address.size() <= 2)
+			DKERROR("(address.size() <= 2 \n");
+		if(address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos)
+			DKERROR("address.find_first_not_of(\"0x123456789abcdefABCDEF\", 2) != std::string::npos");
+
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
@@ -585,19 +595,31 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(event);
-#if WIN
-	ss << "0x" << address;
-#else 
 	ss << address;
-#endif
+	if(ss.str().compare(0, 2, "0x") != 0){
+		ss.str().insert(0, "0x");
+	}
 	return ss.str();
 }
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	
+	//FIXME:  Error example (win_x86_64_mingw64_gcc)
+	//		0x0x23aefc8: the address is not a valid hex notation
+	//
 	Rml::Element* element = nullptr;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		
 		DKERROR(address+": the address is not a valid hex notation\n");
+		
+		//print which oh the evaluators failed.
+		if(address.compare(0, 2, "0x") != 0)
+			DKERROR("address.compare(0, 2, \"0x\") != 0 \n");
+		if(address.size() <= 2)
+			DKERROR("(address.size() <= 2 \n");
+		if(address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos)
+			DKERROR("address.find_first_not_of(\"0x123456789abcdefABCDEF\", 2) != std::string::npos");
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
@@ -627,11 +649,11 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(element);
-#if WIN
-	ss << "0x" << address;
-#else 
 	ss << address;
-#endif
+	if(ss.str().compare(0, 2, "0x") != 0){
+		ss.str().insert(0, "0x");
+	}
+
 	if (same("0xDDDDDDDD", ss.str())) {
 		DKERROR("ss = 0xDDDDDDDD\n");
 		return "";
