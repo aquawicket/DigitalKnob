@@ -35,11 +35,11 @@ endif(COMMAND cmake_policy)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins)
-dk_set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty)
-dk_set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS)
-dk_set(DKDOWNLOAD_DIR ${DIGITALKNOB_DIR}/download)
-dk_set(DKWEB "http://127.0.0.1")
+#dk_set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins)
+#dk_set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty)
+#dk_set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS)
+#dk_set(DKDOWNLOAD_DIR ${DIGITALKNOB_DIR}/download)
+#dk_set(DKWEB "http://127.0.0.1")
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)

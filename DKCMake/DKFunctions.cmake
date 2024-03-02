@@ -2046,6 +2046,7 @@ function(dk_setPath path)
 	
 	dk_set(CURRENT_DIR ${path})
 	
+	
 	# TODO https://stackoverflow.com/a/6595001/688352
 	# NOTE: Some 3rdParty projects break when their binary output path is changed. It may be better to compile the project normally, then do a library install to a final common location 
 #	if(WIN_HOST)

@@ -24,16 +24,15 @@
 include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-if(DKCMAKE_DIR)
-	message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
+if(NOT DKCMAKE_DIR)
+	message(FATAL_ERROR "cmake_eval requires the DKCMAKE_DIR variable")
 endif()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 
-if(DKCMAKE_DIR)
-	include(${DKCMAKE_DIR}/DK.cmake)
-endif()
+include(${DKCMAKE_DIR}/DK.cmake)
+
 
 
 # Evaluate expression (faster version)

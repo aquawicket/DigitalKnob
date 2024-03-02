@@ -322,7 +322,7 @@ goto:eof
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
-    cd "%TARGET_PATH%\%TARGET_OS%"
+    ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
     echo CMAKE_SOURCE_DIR = %CMAKE_SOURCE_DIR%
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
@@ -1199,7 +1199,7 @@ goto:eof
 :: cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 :cmake_eval
 	echo.
-	echo      cmake_eval (%*)
+	echo  $ cmake_eval (%*)
 	echo.
 	
     if [%1] == [] (

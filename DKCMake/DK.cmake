@@ -2,6 +2,16 @@ include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
+
+if(CMAKE_SCRIPT_MODE_FILE)
+message(STATUS "")
+message(STATUS "##################################################")
+message(STATUS "################# SCRIPT MODE ####################")
+message(STATUS "##################################################")
+message(STATUS "")
+endif()
+
+
 #################### GLOBAL DKCMake SETTINGS ############################
 set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
 set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
@@ -34,20 +44,29 @@ if(${DKOFFLINE})
 endif()
 
 
-###### Get CMAKE_SOURCE_DIR ######
-if(NOT CMAKE_SOURCE_DIR)
-	message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
-endif()
-get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
-message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
+###### Get CURRENT_DIRECTORY ######
+#if(NOT CURRENT_DIR)
+#	get_filename_component(CURRENT_DIR ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
+#	message(STATUS "CURRENT_DIR = ${CURRENT_DIR}")
+#endif()
+	
+if(NOT CMAKE_SCRIPT_MODE_FILE)
+	###### Get CMAKE_SOURCE_DIR ######
+	if(NOT CMAKE_SOURCE_DIR)
+		message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
+	endif()
+	get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
 
 
-###### Get CMAKE_BINARY_DIR ######
-if(NOT CMAKE_BINARY_DIR)
-	message(FATAL_ERROR "CMAKE_BINARY_DIR invalid!")
+	###### Get CMAKE_BINARY_DIR ######
+	if(NOT CMAKE_BINARY_DIR)
+		message(FATAL_ERROR "CMAKE_BINARY_DIR invalid!")
+	endif()
+	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
+	message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 endif()
-get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
 
 ###### Set DKCMAKE_DIR ######
@@ -96,6 +115,13 @@ message(STATUS "DKAPPS_DIR = ${DKAPPS_DIR}")
 set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins CACHE INTERNAL "" FORCE)
 message(STATUS "DKPLUGINS_DIR = ${DKPLUGINS_DIR}")
 
+###### Set DKDOWNLOAD_DIR ######
+set(DKDOWNLOAD_DIR ${DIGITALKNOB_DIR}/download CACHE INTERNAL "" FORCE)
+message(STATUS "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}")
+
+###### Set DKWEB ######
+set(DKWEB "http://127.0.0.1" CACHE INTERNAL "" FORCE)
+message(STATUS "DKWEB = ${DKWEB}")
 
 
 ###### Set <SYSTEM_NAME>_HOST variables ######
@@ -117,7 +143,7 @@ endif()
 
 
 ###### Set HOST ######
-message(STATUS "CMAKE_HOST_SYSTEM_NAME = ${CMAKE_HOST_SYSTEM_NAME}")
+#message(STATUS "CMAKE_HOST_SYSTEM_NAME = ${CMAKE_HOST_SYSTEM_NAME}")
 if(CMAKE_HOST_WIN32)
 	set(HOST		WIN			CACHE INTERNAL "")
 elseif(CMAKE_HOST_APPLE)
@@ -232,9 +258,10 @@ else()
 	message(FATAL_ERROR "CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 endif()
 #string(STRIP "${HOST_ARCH}" HOST_ARCH)
-message(STATUS "HOST_ARCH = \"${HOST_ARCH}\"")
+message(STATUS "HOST_ARCH = ${HOST_ARCH}")
 
 
+### set [HOST]_[HOST_ARCH] variable
 string(TOUPPER ${HOST} HOST_UPPER)
 string(TOUPPER ${HOST_ARCH} HOST_ARCH_UPPER)
 set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
@@ -285,6 +312,6 @@ include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)
 
 
 ##### Load 3rdParty Tools #################
-dk_depend(cmake)
-dk_depend(git)
-dk_depend(msys2)
+#dk_depend(cmake)
+#dk_depend(git)
+#dk_depend(msys2)

@@ -10,6 +10,10 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 #	@filename	- TODO
 #
 macro(dk_load filename)
+	if(NOT EXISTS ${DKCMAKE_DIR})
+		message(FATAL_ERROR "DKCMAKE_DIR does not exist!  \n    DKCMAKE_DIR = ${DKCMAKE_DIR} \n")
+	endif()
+
 	if(EXISTS ${DKCMAKE_DIR}/${filename}.cmake)
 		include(${DKCMAKE_DIR}/${filename}.cmake)
 	elseif(EXISTS ${DKCMAKE_DIR}/functions/${filename}.cmake)
