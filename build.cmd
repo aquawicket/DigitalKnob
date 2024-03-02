@@ -910,9 +910,10 @@ goto:eof
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 	set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
+	set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
     set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
-	set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
+	
 
     :: make sure script is running from DKBRANCH_DIR
     ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
@@ -934,18 +935,18 @@ goto:eof
 
 :: validate_git()
 :validate_git
-    if "%NATIVE_ARCH%"=="arm32"     set GIT_DL=
-    if "%NATIVE_ARCH%"=="arm64"     set GIT_DL=%GIT_DL_WIN_ARM64%
+    if "%NATIVE_ARCH%"=="arm32" set GIT_DL=
+    if "%NATIVE_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%
     if "%NATIVE_ARCH%"=="x86" set GIT_DL=%GIT_DL_WIN_X86%
     if "%NATIVE_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
     call:get_filename %GIT_DL% GIT_DL_FILE
-    echo GIT_DL_FILE = %GIT_DL_FILE%
+    ::echo GIT_DL_FILE = %GIT_DL_FILE%
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
     call:convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
     call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
-    echo GIT_FOLDER = %GIT_FOLDER%
+    ::echo GIT_FOLDER = %GIT_FOLDER%
         
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
     echo GIT_EXE = %GIT_EXE%
@@ -1197,6 +1198,10 @@ goto:eof
 
 :: cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 :cmake_eval
+	echo.
+	echo      cmake_eval (%*)
+	echo.
+	
     if [%1] == [] (
         echo "ERROR: cmake_eval() parameter1 is invalid"
         goto:eof
@@ -1231,6 +1236,7 @@ goto:eof
     goto:eof
 
     :with_return_values
+		echo 
         "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
         if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%

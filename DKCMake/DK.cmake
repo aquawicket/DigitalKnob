@@ -33,12 +33,14 @@ if(${DKOFFLINE})
 	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
 endif()
 
+
 ###### Get CMAKE_SOURCE_DIR ######
 if(NOT CMAKE_SOURCE_DIR)
 	message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
 endif()
 get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
 message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
 
 ###### Get CMAKE_BINARY_DIR ######
 if(NOT CMAKE_BINARY_DIR)
@@ -47,9 +49,13 @@ endif()
 get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
+
 ###### Set DKCMAKE_DIR ######
-set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+if(NOT DKCMAKE_DIR)
+	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+endif()
 message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
+
 
 ###### Set DKBRANCH_DIR ######
 string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
@@ -58,27 +64,33 @@ string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
 set(DKBRANCH_DIR ${DKBRANCH_DIR} CACHE INTERNAL "" FORCE)
 message(STATUS "DKBRANCH_DIR = ${DKBRANCH_DIR}")
 
+
 ###### Set DIGITALKNOB_DIR ######
 string(FIND "${DKBRANCH_DIR}" "digitalknob" pos)
 string(SUBSTRING ${DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
 set(DIGITALKNOB_DIR ${DIGITALKNOB_DIR}digitalknob CACHE INTERNAL "" FORCE)
 message(STATUS "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
 
+
 ##### Set DKTOOLS_DIR ######
 set(DKTOOLS_DIR ${DIGITALKNOB_DIR}/DKTools CACHE INTERNAL "" FORCE)
 message(STATUS "DKTOOLS_DIR = ${DKTOOLS_DIR}")
+
 
 ##### Set DK3RDPARTY_DIR ######
 set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty CACHE INTERNAL "" FORCE)
 message(STATUS "DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
 
+
 ###### Set DKIMPORTS_DIR ######
 set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS CACHE INTERNAL "" FORCE)
 message(STATUS "DKIMPORTS_DIR = ${DKIMPORTS_DIR}")
 
+
 ###### Set DKAPPS_DIR ######
 set(DKAPPS_DIR ${DKBRANCH_DIR}/DKApps CACHE INTERNAL "" FORCE)
 message(STATUS "DKAPPS_DIR = ${DKAPPS_DIR}")
+
 
 ###### Set DKPLUGINS_DIR ######
 set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins CACHE INTERNAL "" FORCE)
@@ -103,6 +115,7 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	endif()
 endif()
 
+
 ###### Set HOST ######
 message(STATUS "CMAKE_HOST_SYSTEM_NAME = ${CMAKE_HOST_SYSTEM_NAME}")
 if(CMAKE_HOST_WIN32)
@@ -116,9 +129,10 @@ elseif(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 		set(HOST	LINUX		CACHE INTERNAL "")
 	endif()
 else()
-	message("CMAKE_HOST: Unknown host")
+	message(FATAL_ERROR "CMAKE_HOST: Unknown host")
 endif()
 message(STATUS "HOST = ${HOST}")
+
 
 ###### Set MSYSTEM and ${MSYSTEM} variables ######
 if(DEFINED "ENV{MSYSTEM}")
@@ -129,6 +143,7 @@ if(MSYSTEM)
 endif()
 message(STATUS "MSYSTEM = ${MSYSTEM}")
 message(STATUS "${MSYSTEM} = ${${MSYSTEM}}")
+
 
 ##### Set ProgramFiles_<> variables ######
 if(DEFINED "ENV{HOMEDRIVE}")
@@ -148,6 +163,7 @@ endif()
 message(STATUS "ProgramFiles = ${ProgramFiles}")
 message(STATUS "ProgramFiles_x86 = ${ProgramFiles_x86}")
 
+
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(MULTI_CONFIG)
@@ -163,7 +179,7 @@ message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
 
 
 
-### load DKCMake function
+### load DKCMake functions
 include(${DKCMAKE_DIR}/functions/dk_load.cmake)
 #dk_load(DKDEBUGFUNC)
 #dk_load(dk_updateLogInfo)
@@ -213,7 +229,7 @@ elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
 	set(X86_64 TRUE CACHE INTERNAL "")
 	set(HOST_ARCH x86_64 CACHE INTERNAL "")
 else()
-	message("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
+	message(FATAL_ERROR "CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 endif()
 #string(STRIP "${HOST_ARCH}" HOST_ARCH)
 message(STATUS "HOST_ARCH = \"${HOST_ARCH}\"")
