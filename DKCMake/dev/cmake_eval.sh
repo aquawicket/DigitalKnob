@@ -47,8 +47,8 @@ red="\033[31m"
 
 DIGITALKNOB=/c/Users/aquawicket/digitalknob
 DKCMAKE_DIR="$DIGITALKNOB/Development/DKCMake"
-CMAKE=$(which cmake)
-#echo "CMAKE = $CMAKE"
+CMAKE_EXE=$(which cmake)
+#echo "CMAKE_EXE = $CMAKE_EXE"
 
 commands="$@"
 #echo "commands = $commands"
@@ -57,8 +57,8 @@ DKCOMMAND="$commands"
 #echo "DKCOMMAND = $DKCOMMAND"
 
 
-#$CMAKE -DDKCMAKE_DIR=$DKCMAKE_DIR "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR_DIR/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-$CMAKE "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR/dev/cmake_eval.cmake
+#$CMAKE_EXE -DDKCMAKE_DIR=$DKCMAKE_DIR "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR_DIR/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+$CMAKE_EXE "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR/dev/cmake_eval.cmake
 echo return code: $? 
 
 

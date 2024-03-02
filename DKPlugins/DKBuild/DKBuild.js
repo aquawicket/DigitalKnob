@@ -7,7 +7,7 @@ var LINK = "Static" //, Dynamic
 var LEVEL = ""  //Build, Rebuild, RebuildAll
 var DIGITALKNOB = ""
 var DKDOWNLOAD = ""
-var CMAKE = ""
+var CMAKE_EXE = ""
 var ANDROID_NDK = ""  //filled by DKBuild_ValidateNDK()
 var VISUALSTUDIO_VERSION = "2022"
 var VISUALSTUDIO = ""
@@ -66,31 +66,31 @@ function DKBuild_init(){
 	if(CPP_DK_GetOS() === "Windows"){
 		DIGITALKNOB = "C:/Users/"+USERNAME+"/digitalknob/"
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
+			CMAKE_EXE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
 		if(CPP_DK_GetOSArchitecture() === "64"){
-			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
+			CMAKE_EXE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
-		//CMAKE = CPP_DKFile_GetShortName(CMAKE)
-		CMAKE = DKBuild_GetShortPath(CMAKE)
+		//CMAKE_EXE = CPP_DKFile_GetShortName(CMAKE_EXE)
+		CMAKE_EXE = DKBuild_GetShortPath(CMAKE_EXE)
 		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe"
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DIGITALKNOB = "/Users/"+USERNAME+"/digitalknob/"
-		CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
+		CMAKE_EXE = "/Applications/CMake.app/Contents/bin/cmake"
 		XCODE = "/Applications/Xcode.app"
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
-		CMAKE = "/usr/bin/cmake"
+		CMAKE_EXE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
-		CMAKE = "/usr/bin/cmake"
+		CMAKE_EXE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	
@@ -150,12 +150,12 @@ function DKBuild_DeleteTmpFiles(){
 
 function DKBuild_ValidateCmake(){
 	console.log("Looking for CMake")
-	if(!CPP_DKFile_Exists(CMAKE))
+	if(!CPP_DKFile_Exists(CMAKE_EXE))
 		DKBuild_InstallCmake()
-	if(CPP_DKFile_Exists(CMAKE))
+	if(CPP_DKFile_Exists(CMAKE_EXE))
 		console.log("Found CMake")
 	if(CPP_DK_GetOS() === "Mac")
-		CMAKE = "cmake"
+		CMAKE_EXE = "cmake"
 }
 
 function DKBuild_InstallCmake(){
@@ -420,14 +420,14 @@ function DKBuild_DoResults(){
 	if(OS === "win_x86"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -436,15 +436,15 @@ function DKBuild_DoResults(){
 	if(OS === "win_x86_64"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -458,15 +458,15 @@ function DKBuild_DoResults(){
 	if(OS === "mac_x86_64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -475,16 +475,16 @@ function DKBuild_DoResults(){
 	if(OS === "ios_arm32"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false				
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -493,15 +493,15 @@ function DKBuild_DoResults(){
 	if(OS === "ios_arm64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -510,15 +510,15 @@ function DKBuild_DoResults(){
 	if(OS === "iossim_x86"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -526,15 +526,15 @@ function DKBuild_DoResults(){
 	///// IOSSIM_X86_64 ///////
 	if(OS === "iossim_x86_64"){
 		DKBuild_ValidateXcode()
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE_EXE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -548,9 +548,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 				return false
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -558,9 +558,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 				return false
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -575,20 +575,20 @@ function DKBuild_DoResults(){
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm32"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm32"))
 				return false
 		}
 		else{
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm32"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm32"))
 				return false
 		}
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target main --config Debug"))	
 				return false
 		}
 		else if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
 		
@@ -623,21 +623,21 @@ function DKBuild_DoResults(){
 				return false
 		}
 		if(CPP_DK_GetOS() === "Windows"){
-			//if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
+			//if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
 				return false
 		}
 		else{
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
+			if(!DKBuild_Command(CMAKE_EXE+" -G \"Unix Makefiles\" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android_arm64"))
 				return false
 		}
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Debug"))	
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target main --config Debug"))	
 				return false
 		}
 		else if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
+			if(!DKBuild_Command(CMAKE_EXE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
 		
@@ -677,19 +677,19 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE_EXE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
-				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE_EXE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE_EXE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 					return false
 			}
 			else{
-				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE_EXE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 					return false
 			}
 		}
@@ -699,19 +699,19 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE_EXE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
-				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE_EXE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE_EXE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 					return false
 			}
 			else{
-				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE_EXE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 					return false
 			}
 		}

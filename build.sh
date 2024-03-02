@@ -14,9 +14,9 @@ GIT_USER_EMAIL="aquawicket@hotmail.com"
 GIT_USER_NAME="aquawicket"
 	
 ###### Global Script Variables ######
-SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-SCRIPTNAME=$(basename "$0")
-echo $SCRIPTPATH/$SCRIPTNAME
+SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+SCRIPT_NAME=$(basename "$0")
+echo $SCRIPT_DIR/$SCRIPT_NAME
 true=0
 false=1
 CLR="\033[0m"
@@ -49,8 +49,8 @@ function main() {
 	print_var MODEL
 	print_var MSYSTEM
 	print_var OSTYPE
-	print_var SCRIPTNAME
-	print_var SCRIPTPATH
+	print_var SCRIPT_NAME
+	print_var SCRIPT_DIR
 	print_var USER
 	print_var USERNAME
 	echo ""
@@ -92,19 +92,19 @@ function main() {
 	
 
 	if [[ -n "$USERPROFILE" ]]; then
-		DIGITALKNOB="$USERPROFILE\digitalknob"
-		DIGITALKNOB=$(sed 's.C:./c.g' <<< $DIGITALKNOB)
-		DIGITALKNOB=$(sed 's.\\./.g' <<< $DIGITALKNOB)
+		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
+		DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 	else
-		DIGITALKNOB="$HOME/digitalknob"
+		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 
-	mkdir -p $DIGITALKNOB;
-	print_var DIGITALKNOB
+	mkdir -p $DIGITALKNOB_DIR;
+	print_var DIGITALKNOB_DIR
 
-	DKDOWNLOAD="$DIGITALKNOB/download"
-	mkdir -p $DKDOWNLOAD;
-	print_var DKDOWNLOAD
+	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
+	mkdir -p $DKDOWNLOAD_DIR;
+	print_var DKDOWNLOAD_DIR
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		validate_homebrew
@@ -114,17 +114,19 @@ function main() {
 	validate_git
 	validate_branch
 
-	print_var DKPATH
+	print_var DKBRANCH_DIR
+	print_var DKAPPS_DIR
 	print_var DKCMAKE_DIR
-	print_var DK3RDPARTY
-	print_var DKIMPORTS
+	print_var DK3RDPARTY_DIR
+	print_var DKIMPORTS_DIR
+	print_var DKPLUGINS_DIR
 
-	if [ $SCRIPTPATH == $DKPATH ]; then
-		echo "SCRIPTPATH and DKPATH are the same"
+	if [ $SCRIPT_DIR == $DKBRANCH_DIR ]; then
+		echo "SCRIPT_DIR and DKBRANCH_DIR are the same"
 	else
-		warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
-		warning "$SCRIPTNAME path = $SCRIPTPATH"
-		warning "DKPATH path = $DKPATH"
+		warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		warning "$SCRIPT_NAME path = $SCRIPT_DIR"
+		warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
 	fi
 	
 	while :
@@ -405,7 +407,7 @@ function Generate_Project() {
 	clear_cmake_cache
 	delete_temp_files
 
-	TARGET_PATH=$DKPATH/DKApps/$APP
+	TARGET_PATH=$DKAPPS_DIR/$APP
 	print_var TARGET_PATH
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
@@ -642,23 +644,23 @@ function Build_Project() {
 	echo ""
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
-			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --config Debug --verbose
-			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
-		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Debug --verbose
-			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
+		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
+			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Debug --config Debug --verbose
+			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
+		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
+			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Debug --verbose
+			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Release/CMakeCache.txt; then
-			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --config Release --verbose
-			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
-		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Release --verbose
-			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
+		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt; then
+			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Release --config Release --verbose
+			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
+		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
+			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Release --verbose
+			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
@@ -692,8 +694,8 @@ function dk_call() {
 
 ###### reload ######
 function reload() {
-	echo "reloading $SCRIPTPATH/$SCRIPTNAME"
-	clear && $SCRIPTPATH/$SCRIPTNAME && exit
+	echo "reloading $SCRIPT_DIR/$SCRIPT_NAME"
+	clear && $SCRIPT_DIR/$SCRIPT_NAME && exit
 }
 
 ###### warning <string> ######
@@ -765,8 +767,8 @@ function validate_cmake() {
 		fi
 	fi
 	
-	CMAKE=$(command -v cmake)
-	print_var CMAKE
+	CMAKE_EXE=$(command -v cmake)
+	print_var CMAKE_EXE
 }
 
 ###### validate_git ######
@@ -868,19 +870,19 @@ function validate_ostype() {
 	fi
 
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		DIGITALKNOB="/home/$USER/digitalknob"
+		DIGITALKNOB_DIR="/home/$USER/digitalknob"
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		DIGITALKNOB="/Users/$USER/digitalknob"
+		DIGITALKNOB_DIR="/Users/$USER/digitalknob"
 	elif [[ "$OSTYPE" == "cygwin" ]]; then
-		DIGITALKNOB="/c/Users/$USERNAME/digitalknob"
+		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		DIGITALKNOB="/c/Users/$USERNAME/digitalknob"
+		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
 	elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-		DIGITALKNOB="/c/Users/$USERNAME/digitalknob" 
+		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
 	elif [[ "$OSTYPE" == "freebsd"* ]]; then
 		echo "TODO: freebsd builder incomplete"
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
+		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
 	else
 		error "UNKNOWN OS ($OSTYPE)"
 	fi
@@ -901,25 +903,26 @@ function validate_branch() {
 	fi
 	
 	print_var DKBRANCH
-	DKPATH="$DIGITALKNOB/$DKBRANCH"
-	DKCMAKE_DIR="$DKPATH/DKCMake"
-	DK3RDPARTY="$DKPATH/3rdParty"
-	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
+	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
+	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
+	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
+	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
+	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
 
-	# make sure script is running from DKPATH
-	#if ! [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
-	#	if ! file_exists $DKPATH/$SCRIPTNAME; then
-	#		echo "$DKPATH/$SCRIPTNAME"
-	#		cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
+	# make sure script is running from DKBRANCH_DIR
+	#if ! [[ "$SCRIPT_DIR" == "$DKBRANCH_DIR" ]]; then
+	#	if ! file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#		echo "$DKBRANCH_DIR/$SCRIPT_NAME"
+	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
 	#	fi
 	#	echo .
-	#	echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
+	#	echo "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if file_exists $DKPATH/$SCRIPTNAME; then
-	#		rm $SCRIPTPATH/$SCRIPTNAME
+	#	if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#		rm $SCRIPT_DIR/$SCRIPT_NAME
 	#	fi
-	#	$DKPATH/$SCRIPTNAME
+	#	$DKBRANCH_DIR/$SCRIPT_NAME
 	#	exit
 	#fi
 }
@@ -927,7 +930,7 @@ function validate_branch() {
 ###### clear_cmake_cache ######
 function clear_cmake_cache() {
 	echo "Clearing CMake cache . . ."
-	cd $DIGITALKNOB
+	cd $DIGITALKNOB_DIR
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
 }
@@ -935,7 +938,7 @@ function clear_cmake_cache() {
 ###### delete_temp_files ######
 function delete_temp_files() {
 	echo "Deleting .TMP files . . ."
-	cd $DIGITALKNOB
+	cd $DIGITALKNOB_DIR
 	rm -rf `find . -type d -name *.tmp`
 	rm -rf `find . -type d -name *.TMP`
 	find . -name "*.tmp" -delete
@@ -944,19 +947,19 @@ function delete_temp_files() {
 
 ###### validate_msys2 ######
 function validate_msys2() {
-	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')" "MSYS2"
+	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 	print_var MSYS2
 }
 
 ###### validate_make ######
 function validate_make() {
-	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 	print_var MAKE_PROGRAM
 }
 
 ###### validate_emscripten ######
 function validate_emscripten() {
-	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 	print_var EMSDK
 	print_var EMSDK_ENV
 	print_var EMSDK_GENERATOR
@@ -967,7 +970,7 @@ function validate_emscripten() {
 
 ###### validate_android_ndk ######
 function validate_android_ndk() {
-	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 	print_var ANDROID_NDK
 	print_var ANDROID_GENERATOR
 	print_var ANDROID_TOOLCHAIN_FILE
@@ -979,14 +982,14 @@ function validate_android_ndk() {
 
 ###### validate_clang ######
 function validate_clang() {
-	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 	print_var CLANG_C_COMPILER
 	print_var CLANG_CXX_COMPILER
 }
 
 ###### validate_gcc ######
 function validate_gcc() {
-	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 	print_var GCC_C_COMPILER
 	print_var GCC_CXX_COMPILER
 }
@@ -1033,21 +1036,21 @@ function pull_assets() {
 function reset_apps() {
 	if CONFIRM; then return; fi
 	
-	cd $DKPATH/DKApps
+	cd $DKAPPS_DIR
 	$GIT clean -f -d
 }
 
 function reset_3rdpaty() {
 	if CONFIRM; then return; fi
 	
-	cd $DKPATH/3rdParty
+	cd $DK3RDPARTY_DIR
 	$GIT clean -f -d
 }
 
 function reset_plugins() {
 	if CONFIRM; then return; fi
 	
-	cd $DKPATH/DKPlugins
+	cd $DKPLUGINS_DIR
 	$GIT clean -f -d
 }
 
@@ -1067,18 +1070,18 @@ function reset_all() {
 		if CONFIRM; then return; fi
 		
 		# first we need to relocate this file up one directory
-		# make sure script is running from DKPATH
-		if ! [ $SCRIPTPATH == $DKPATH ]; then
+		# make sure script is running from DKBRANCH_DIR
+		if ! [ $SCRIPT_DIR == $DKBRANCH_DIR ]; then
 			echo "WARNING: this file isn't running from the branch directory"
 			echo "Is must be in the branch directory to continue."
-			echo "SCRIPTPATH = $SCRIPTPATH"
-			print_var DKPATH
+			echo "SCRIPT_DIR = $SCRIPT_DIR"
+			print_var DKBRANCH_DIR
 			return 1;
 		fi
 		
-		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
-		cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
-		source "$DIGITALKNOB/$SCRIPTNAME" reset_all wipe
+		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		cp $SCRIPT_DIR/$SCRIPT_NAME $DIGITALKNOB_DIR/$SCRIPT_NAME
+		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1094,26 +1097,26 @@ function reset_all() {
 		#do we need to remove any environment variables?
 		
 		#should we do a git clean first?
-		#cd %DKPATH%
+		#cd %DKBRANCH_DIR%
 		#"%GIT%" clean -f -d
 		
-		cd $DIGITALKNOB
+		cd $DIGITALKNOB_DIR
 		echo ""
-		echo "DELETING $DKDOWNLOAD . . . ."
-		rm -r -f $DKDOWNLOAD
+		echo "DELETING $DKDOWNLOAD_DIR . . . ."
+		rm -r -f $DKDOWNLOAD_DIR
 		echo "done."
 		echo ""
-		echo "DELETING $DKPATH . . . ."
-		rm -r -f $DKPATH
+		echo "DELETING $DKBRANCH_DIR . . . ."
+		rm -r -f $DKBRANCH_DIR
 		echo "done."
 		
 		# wait 10 seconds at lease for the folders to get deleted
 		sleep 10
 		
-		if file_exists $DKDOWNLOAD; then
+		if file_exists $DKDOWNLOAD_DIR; then
 			echo "Oh no, the downloads folder is still there! :( "
 		fi
-		if file_exists $DKPATH; then
+		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
@@ -1122,9 +1125,9 @@ function reset_all() {
 		# wait a few seconds for build.sh to show up
 		sleep 5
 		
-		if file_exists $DKPATH/$SCRIPTNAME; then
+		if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 			clear
-			source $DKPATH/$SCRIPTNAME rm -r $DIGITALKNOB/$SCRIPTNAME
+			source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
 			exit
 		else
 			echo "Oh no, the git cloned build.sh still isn't here! :( "
@@ -1146,18 +1149,18 @@ function remove_all() {
 		if CONFIRM; then return; fi
 		
 		# first we need to relocate this file up one directory
-		# make sure script is running from DKPATH
-		if ! [ $SCRIPTPATH == $DKPATH ]; then
+		# make sure script is running from DKBRANCH_DIR
+		if ! [ $SCRIPT_DIR == $DKBRANCH_DIR ]; then
 			echo "WARNING: this file isn't running from the branch directory"
 			echo "Is must be in the branch directory to continue."
-			echo "SCRIPTPATH = $SCRIPTPATH"
-			print_var DKPATH
+			echo "SCRIPT_DIR = $SCRIPT_DIR"
+			print_var DKBRANCH_DIR
 			return 1;
 		fi
 		
-		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
-		cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
-		source "$DIGITALKNOB/$SCRIPTNAME" remove_all wipe
+		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		cp $SCRIPT_DIR/$SCRIPT_NAME $DIGITALKNOB_DIR/$SCRIPT_NAME
+		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" remove_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1173,26 +1176,26 @@ function remove_all() {
 		#do we need to remove any environment variables?
 		
 		#should we do a git clean first?
-		#cd %DKPATH%
+		#cd %DKBRANCH_DIR%
 		#"%GIT%" clean -f -d
 		
-		cd $DIGITALKNOB
+		cd $DIGITALKNOB_DIR
 		echo ""
-		echo "DELETING $DKDOWNLOAD . . . ."
-		rm -r -f $DKDOWNLOAD
+		echo "DELETING $DKDOWNLOAD_DIR . . . ."
+		rm -r -f $DKDOWNLOAD_DIR
 		echo "done."
 		echo ""
-		echo "DELETING $DKPATH . . . ."
-		rm -r -f $DKPATH
+		echo "DELETING $DKBRANCH_DIR . . . ."
+		rm -r -f $DKBRANCH_DIR
 		echo "done."
 		
 		# wait 10 seconds at lease for the folders to get deleted
 		sleep 10
 		
-		if file_exists $DKDOWNLOAD; then
+		if file_exists $DKDOWNLOAD_DIR; then
 			echo "Oh no, the downloads folder is still there! :( "
 		fi
-		if file_exists $DKPATH; then
+		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi
@@ -1206,10 +1209,10 @@ function git_update() {
 		if CONFIRM; then return; fi
 	fi
 
-	if [[ ! -d "$DKPATH/.git" ]]; then
-		dk_call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+	if [[ ! -d "$DKBRANCH_DIR/.git" ]]; then
+		dk_call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	fi
-	dk_call cd $DKPATH
+	dk_call cd $DKBRANCH_DIR
 	dk_call $GIT pull --all
 	dk_call $GIT checkout -- .
 	dk_call $GIT checkout $DKBRANCH
@@ -1220,7 +1223,7 @@ function git_update() {
 		dk_call $GIT checkout -b $DKBRANCH main
 		dk_call $GIT push --set-upstream origin $DKBRANCH
 	fi
-	dk_call chmod +x $DKPATH/build.sh
+	dk_call chmod +x $DKBRANCH_DIR/build.sh
 }
 
 function git_commit() {	
@@ -1228,7 +1231,7 @@ function git_commit() {
 	echo "Please enter some details about this commit, Then press enter."
 	read message
 	
-	cd $DKPATH
+	cd $DKBRANCH_DIR
 	
 	STORE=$($GIT config credential.helper)
 	print_var STORE
@@ -1282,27 +1285,27 @@ function enter_manually() {
 	APP="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if test -f $DKPATH/3rdParty/_DKIMPORTS/$input/DKMAKE.cmake; then
-		TARGET_PATH=$DKPATH/3rdParty/_DKIMPORTS/$input
+	if test -f $DKIMPORTS_DIR/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKIMPORTS_DIR/$input
 	fi
-	if test -f $DKPATH/DKPlugins/$input/DKMAKE.cmake; then
-		TARGET_PATH=$DKPATH/DKPlugins/$input
+	if test -f $DKPLUGINS_DIR/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKPLUGINS_DIR/$input
 	fi
-	if test -f $DKPATH/DKApps/$input/DKMAKE.cmake; then
-		TARGET_PATH=$DKPATH/DKApps/$input
+	if test -f $DKAPPS_DIR/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKAPPS_DIR/$input
 		return 0
 	fi
 	print_var TARGET_PATH
 	
-	if [ ! -d $DKPATH/DKApps/$APP ]; then
-		mkdir -p $DKPATH/DKApps/$APP;
+	if [ ! -d $DKAPPS_DIR/$APP ]; then
+		mkdir -p $DKAPPS_DIR/$APP;
 	fi
 	
 	# create DKApps/<APP>/DKMAKE.cmake 
-	echo "dk_depend($input)" > $DKPATH/DKApps/$APP/DKMAKE.cmake
+	echo "dk_depend($input)" > $DKAPPS_DIR/$APP/DKMAKE.cmake
 	
 	# create DKApps/<APP>/main.cpp
-	echo "int main(int argc, char** argv) { return 0; }" > $DKPATH/DKApps/$APP/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > $DKAPPS_DIR/$APP/main.cpp
 }
 
 function create_cache() {
@@ -1313,10 +1316,10 @@ function create_cache() {
 	#print_var DKLEVEL
 	
 	# write variable values line by line
-	echo "$APP">"$DKPATH/cache"
-	echo "$TARGET_OS">>"$DKPATH/cache"
-	echo "$TYPE">>"$DKPATH/cache"
-	#echo "$DKLEVEL">>"$DKPATH/cache"
+	echo "$APP">"$DKBRANCH_DIR/cache"
+	echo "$TARGET_OS">>"$DKBRANCH_DIR/cache"
+	echo "$TYPE">>"$DKBRANCH_DIR/cache"
+	#echo "$DKLEVEL">>"$DKBRANCH_DIR/cache"
 }
 
 function read_cache() {
@@ -1338,7 +1341,7 @@ function read_cache() {
 		#fi
 
 		(( count++ ))
-	done < $DKPATH/cache
+	done < $DKBRANCH_DIR/cache
 	
 	#print_var _APP_
 	#print_var _TARGET_OS_

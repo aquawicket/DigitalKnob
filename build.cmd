@@ -35,10 +35,10 @@ if "%*" NEQ "" call %*
     ::--------------------------------------------------------
     :: GLOBAL USER VARIABLES
     ::--------------------------------------------------------
-    set SCRIPTPATH=%~dp0
-    set SCRIPTPATH=%SCRIPTPATH:~0,-1%
-    set SCRIPTNAME=%~nx0
-    echo %SCRIPTPATH%\%SCRIPTNAME%
+    set SCRIPT_DIR=%~dp0
+    set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
+    set SCRIPT_NAME=%~nx0
+    echo %SCRIPT_DIR%\%SCRIPT_NAME%
 
     set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi
     set CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
@@ -47,17 +47,17 @@ if "%*" NEQ "" call %*
     set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe
     set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe
 
-    set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-    call:make_directory "%DIGITALKNOB%"
-    echo DIGITALKNOB = %DIGITALKNOB%
+    set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+    call:make_directory "%DIGITALKNOB_DIR%"
+    echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%
 
-    set "DKTOOLS=%DIGITALKNOB%\DKTools"
-    call:make_directory "%DKTOOLS%"
-    echo DKTOOLS = %DKTOOLS%
+    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+    call:make_directory "%DKTOOLS_DIR%"
+    echo DKTOOLS_DIR = %DKTOOLS_DIR%
         
-    set "DKDOWNLOAD=%DIGITALKNOB%\download"
-    call:make_directory "%DKDOWNLOAD%"
-    echo DKDOWNLOAD = %DKDOWNLOAD%
+    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
+    call:make_directory "%DKDOWNLOAD_DIR%"
+    echo DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%
 
     set NATIVE_OS=win
     echo NATIVE_OS = %NATIVE_OS%
@@ -75,10 +75,12 @@ if "%*" NEQ "" call %*
     call:validate_git
     call:validate_branch
 
-    echo DKPATH = %DKPATH%
+	echo DKBRANCH_DIR = %DKBRANCH_DIR%
+	echo DKAPPS_DIR = %DKAPPS_DIR%
     echo DKCMAKE_DIR = %DKCMAKE_DIR%
-    echo DK3RDPARTY = %DK3RDPARTY%
-    echo DKIMPORTS = %DKIMPORTS%
+    echo DK3RDPARTY_DIR = %DK3RDPARTY_DIR%
+    echo DKIMPORTS_DIR = %DKIMPORTS_DIR%
+	echo DKPLUGINS_DIR = %DKPLUGINS_DIR%
         
     call:validate_cmake
         
@@ -115,7 +117,7 @@ goto:eof
     call:read_cache
     
     echo.
-    if exist "%DKPATH%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
+    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
@@ -188,8 +190,8 @@ goto:eof
 
 
 :checkApp
-    if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
-        echo ERROR: "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" file not found
+    if NOT exist "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" (
+        echo ERROR: "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" file not found
         set APP=
     ) 
 goto:eof
@@ -316,8 +318,8 @@ goto:eof
         
     call:create_cache
         
-    ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
-    set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+    ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
+    set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
@@ -436,26 +438,26 @@ goto:eof
     set COMPILER=MINGW32
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
     echo MSYS2 = %MSYS2%
     echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
                 
     ::call:validate_cmake
-    call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
     echo CMAKE_EXE = %CMAKE_EXE%
                 
     ::call:validate_gcc
-    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
     echo GCC_C_COMPILER = %GCC_C_COMPILER%
     echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
     call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
     call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
                 
     ::call:validate_make
-    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
     echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
     call:add_cmake_arg -G %MSYS2_GENERATOR%
@@ -482,26 +484,26 @@ goto:eof
     set COMPILER=MINGW64
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
     echo MSYS2 = %MSYS2%
     echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
                 
     ::call:validate_cmake
-    call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
     echo CMAKE_EXE = %CMAKE_EXE%
                 
     ::call:validate_gcc
-    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
     echo GCC_C_COMPILER = %GCC_C_COMPILER%
     echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
     call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
     call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
                 
     ::call:validate_make
-    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
     echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
     call:add_cmake_arg -G %MSYS2_GENERATOR%
@@ -641,26 +643,26 @@ goto:eof
     set APP=_%input%_
   
     ::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-    ::cd %DIGITALKNOB%
+    ::cd %DIGITALKNOB_DIR%
     ::for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
     ::set "TARGET_PATH=%path:~0,-13%"
     
-    if exist "%DKPATH%\3rdParty\_DKIMPORTS\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\3rdParty\_DKIMPORTS\%input%"
-    if exist "%DKPATH%\DKPlugins\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKPlugins\%input%"
-    if exist "%DKPATH%\DKApps\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKApps\%input%"
+    if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
+    if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
+    if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
     ::echo TARGET_PATH = %TARGET_PATH%
     
     call:get_parent_folder %TARGET_PATH% parent
     ::echo parent = %parent%
     
     if %parent%==DKApps goto:eof
-    call:make_directory  %DKPATH%\DKApps\%APP%
+    call:make_directory  %DKAPPS_DIR%\%APP%
     
     :: create DKApps/<APP>/DKMAKE.cmake 
-    echo dk_depend(%input%)> %DKPATH%\DKApps\%APP%\DKMAKE.cmake
+    echo dk_depend(%input%)> %DKAPPS_DIR%\%APP%\DKMAKE.cmake
     
     :: create DKApps/<APP>/main.cpp
-    echo int main(int argc, char** argv) { return 0; } > %DKPATH%\DKApps\%APP%\main.cpp
+    echo int main(int argc, char** argv) { return 0; } > %DKAPPS_DIR%\%APP%\main.cpp
 goto:eof
 
 :: get_parent_folder
@@ -689,7 +691,7 @@ goto:eof
     set /P CONFIRM="Are you sure? [Y] "
     if /I "%CONFIRM%" NEQ "Y" goto:eof
 
-    cd %DKPATH%\DKApps
+    cd %DKAPPS_DIR%
     "%GIT_EXE%" clean -f -d
 goto:eof
 
@@ -701,7 +703,7 @@ goto:eof
     set /P CONFIRM="Are you sure? [Y] "
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
-    cd %DKPATH%\DKPlugins
+    cd %DKPLUGINS_DIR%
     "%GIT_EXE%" clean -f -d
 goto:eof
 
@@ -713,7 +715,7 @@ goto:eof
     set /P CONFIRM="Are you sure? [Y] "
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
-    cd %DKPATH%\3rdParty
+    cd %DK3RDPARTY_DIR%
     "%GIT_EXE%" clean -f -d
 goto:eof
 
@@ -736,18 +738,18 @@ goto:eof
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     :: first we need to relocate this file up one directory
-    :: make sure script is running from DKPATH
-    if not "%SCRIPTPATH%" == "%DKPATH%" (
+    :: make sure script is running from DKBRANCH_DIR
+    if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        echo SCRIPTPATH = %SCRIPTPATH%
-        echo DKPATH = %DKPATH%
+        echo SCRIPT_DIR = %SCRIPT_DIR%
+        echo DKBRANCH_DIR = %DKBRANCH_DIR%
         goto:eof
     )
         
-    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
-    copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
-    start "" "%DIGITALKNOB%\%SCRIPTNAME%" :reset_all wipe
+    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
+    copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :reset_all wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -762,29 +764,29 @@ goto:eof
     ::do we need to remove any environment variables?
        
     ::should we do a git clean first?
-    ::cd %DKPATH%
+    ::cd %DKBRANCH_DIR%
     ::"%GIT_EXE%" clean -f -d
     
-    cd %DIGITALKNOB%
+    cd %DIGITALKNOB_DIR%
     echo.
-    echo DELETING %DKDOWNLOAD% . . . .
-    call rmdir %DKDOWNLOAD% /s /q
+    echo DELETING %DKDOWNLOAD_DIR% . . . .
+    call rmdir %DKDOWNLOAD_DIR% /s /q
     echo done.
     echo.
-    echo DELETING %DKPATH% . . . .
-    call rmdir %DKPATH% /s /q
+    echo DELETING %DKBRANCH_DIR% . . . .
+    call rmdir %DKBRANCH_DIR% /s /q
     echo done.
         
     :: wait 10 seconds at lease for the folders to get deleted
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( "
-    if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( "
+    if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
+    if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
     call:git_update NO_CONFIRM
         
-    start "" "%DKPATH%\%SCRIPTNAME%" & del /f %DIGITALKNOB%\%SCRIPTNAME% & exit
+    start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%SCRIPT_NAME% & exit
 goto:eof
 
 
@@ -804,18 +806,18 @@ goto:eof
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     :: first we need to relocate this file up one directory
-    :: make sure script is running from DKPATH
-    if not "%SCRIPTPATH%" == "%DKPATH%" (
+    :: make sure script is running from DKBRANCH_DIR
+    if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        echo SCRIPTPATH = %SCRIPTPATH%
-        echo DKPATH = %DKPATH%
+        echo SCRIPT_DIR = %SCRIPT_DIR%
+        echo DKBRANCH_DIR = %DKBRANCH_DIR%
         goto:eof
     )
         
-    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
-    copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
-    start "" "%DIGITALKNOB%\%SCRIPTNAME%" :remove_all wipe
+    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
+    copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :remove_all wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -830,33 +832,33 @@ goto:eof
     ::do we need to remove any environment variables?
         
     ::should we do a git clean first?
-    ::cd %DKPATH%
+    ::cd %DKBRANCH_DIR%
     ::"%GIT_EXE%" clean -f -d
         
-    cd %DIGITALKNOB%
+    cd %DIGITALKNOB_DIR%
     echo.
-    echo DELETING %DKDOWNLOAD% . . . .
-    call rmdir %DKDOWNLOAD% /s /q
+    echo DELETING %DKDOWNLOAD_DIR% . . . .
+    call rmdir %DKDOWNLOAD_DIR% /s /q
     echo done.
     echo.
-    echo DELETING %DKPATH% . . . .
-    call rmdir %DKPATH% /s /q
+    echo DELETING %DKBRANCH_DIR% . . . .
+    call rmdir %DKBRANCH_DIR% /s /q
     echo done.
         
     :: wait 10 seconds at lease for the folders to get deleted
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( "
-    if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( "
+    if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
+    if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
 goto:eof
 
 
 :: reload()
 :reload
     echo .
-    echo reloading %SCRIPTNAME%
-    start "" "%SCRIPTPATH%\%SCRIPTNAME%"
+    echo reloading %SCRIPT_NAME%
+    start "" "%SCRIPT_DIR%\%SCRIPT_NAME%"
     exit
 goto:eof
 
@@ -904,23 +906,25 @@ goto:eof
         )
     )
 
-    ::echo DKBRANCH = %DKBRANCH%
-    set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
-    set "DKCMAKE_DIR=%DKPATH%\DKCMake"
-    set "DK3RDPARTY=%DKPATH%\3rdParty"
-    set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
+    echo DKBRANCH = %DKBRANCH%
+	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+	set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
+    set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
+    set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
+    set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
+	set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
 
-    :: make sure script is running from DKPATH
-    ::if not %SCRIPTPATH% == %DKPATH% (
-    ::      if not exist %DKPATH%\%SCRIPTNAME% (
-    ::              copy %SCRIPTPATH%\%SCRIPTNAME% %DKPATH%\%SCRIPTNAME%
+    :: make sure script is running from DKBRANCH_DIR
+    ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
+    ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
+    ::              copy %SCRIPT_DIR%\%SCRIPT_NAME% %DKBRANCH_DIR%\%SCRIPT_NAME%
     ::      )
     ::      echo .
-    ::      echo "RELOADING SCRIPT TO -> %DKPATH%\%SCRIPTNAME%"
+    ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%SCRIPT_NAME%"
     ::      pause
-    ::      start "" "%DKPATH%\%SCRIPTNAME%"
-    ::      if exist %DKPATH%\%SCRIPTNAME% (
-    ::              del "%SCRIPTPATH%\%SCRIPTNAME%"
+    ::      start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%"
+    ::      if exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
+    ::              del "%SCRIPT_DIR%\%SCRIPT_NAME%"
     ::      )
     ::      exit
     ::)
@@ -943,16 +947,16 @@ goto:eof
     call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
     echo GIT_FOLDER = %GIT_FOLDER%
         
-    set "GIT_EXE=%DKTOOLS%\%GIT_FOLDER%\bin\git.exe"
+    set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
     echo GIT_EXE = %GIT_EXE%
         
     if exist "%GIT_EXE%" goto:eof
         
     echo.   
     echo "Installing git . . ."
-    call:download %GIT_DL% "%DKDOWNLOAD%\%GIT_DL_FILE%"
-    echo "%DKDOWNLOAD%\%GIT_DL_FILE%" /DIR=%DKTOOLS%\%GIT_FOLDER%
-    "%DKDOWNLOAD%\%GIT_DL_FILE%" /DIR=%DKTOOLS%\%GIT_FOLDER%
+    call:download %GIT_DL% "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%"
+    echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
+    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
         
     if NOT exist "%GIT_EXE%" (
         call:assert "cannot find git"
@@ -977,16 +981,16 @@ goto:eof
 	call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
     echo CMAKE_FOLDER = %CMAKE_FOLDER%
         
-    set "CMAKE_EXE=%DKTOOLS%\%CMAKE_FOLDER%\bin\cmake.exe"
+    set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
     echo CMAKE_EXE = %CMAKE_EXE%
         
     if exist "%CMAKE_EXE%" goto:eof
        
     echo.   
     echo "Installing cmake . . ."
-    call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
-    echo MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS%\%CMAKE_FOLDER%" /qn
-    MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS%\%CMAKE_FOLDER%"
+    call:download %CMAKE_DL% "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
+    echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
+    MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%"
         
     if NOT exist "%CMAKE_EXE%" (
         call:assert "cannot find cmake"
@@ -998,37 +1002,37 @@ goto:eof
 
 :: validate_visual_studio()
 :validate_visual_studio
-    call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
     call:check_error
 goto:eof
 
 :: validate_msys2()
 :validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
     call:check_error
 goto:eof
 
 :: validate_gcc()
 :validate_gcc
-    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
     call:check_error
 goto:eof
 
 :: validate_make()
 :validate_make
-    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
     call:check_error
 goto:eof
 
 :: validate_openjdk()
 :validate_openjdk
-    call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')" "OPENJDK"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
     call:check_error
 goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-    call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     echo ANDROID_GENERATOR = %ANDROID_GENERATOR%
     echo ANDROID_API = %ANDROID_API%
     echo ANDROID_NDK = %ANDROID_NDK%
@@ -1039,7 +1043,7 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-    call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     echo EMSDK = %EMSDK%
     echo EMSDK_ENV = %EMSDK_ENV%
     echo EMSDK_GENERATOR = %EMSDK_GENERATOR%
@@ -1090,7 +1094,7 @@ goto:eof
 :dk_deleteCache
     ::call:cmake_eval "dk_deleteCache()"
     echo Deleteing CMake cache . . .
-    cd "%DIGITALKNOB%"
+    cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
     call:check_error
@@ -1101,7 +1105,7 @@ goto:eof
 :delete_temp_files
     ::call:cmake_eval "dk_deleteTempFiles()"
     echo Deleteing .tmp files . . .
-    cd "%DIGITALKNOB%"
+    cd "%DIGITALKNOB_DIR%"
     for /r %%i in (*.tmp) do del "%%i"
     for /r %%i in (*.TMP) do del "%%i"
     call:check_error
@@ -1116,12 +1120,12 @@ goto:eof
     )
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
-    if NOT exist "%DKPATH%\.git" (
-        "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+    if NOT exist "%DKBRANCH_DIR%\.git" (
+        "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
     )
     call:check_error
 
-    cd "%DKPATH%"
+    cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" pull --all
     "%GIT_EXE%" checkout -- .
     call:check_error
@@ -1142,7 +1146,7 @@ goto:eof
     echo "Please enter some details about this commit, then press enter."
     set /p message=">"
         
-    cd %DKPATH%
+    cd %DKBRANCH_DIR%
         
     call:command_to_variable "%GIT_EXE%" config --global credential.helper STORE
     if not "%STORE%"=="store" (
@@ -1300,18 +1304,18 @@ goto:eof
     ::echo LEVEL = %LEVEL%
         
     :: https://stackoverflow.com/a/5143293/688352
-    echo %APP%>"%DKPATH%\cache"
-    echo %TARGET_OS%>>"%DKPATH%\cache"
-    echo %TYPE%>>"%DKPATH%\cache"
-    ::echo %LEVEL%>>"%DKPATH%\cache"
+    echo %APP%>"%DKBRANCH_DIR%\cache"
+    echo %TARGET_OS%>>"%DKBRANCH_DIR%\cache"
+    echo %TYPE%>>"%DKBRANCH_DIR%\cache"
+    ::echo %LEVEL%>>"%DKBRANCH_DIR%\cache"
 goto:eof
 
 :: read_cache
 :read_cache
     echo reading cache...
-    if not exist %DKPATH%\cache goto:eof
+    if not exist %DKBRANCH_DIR%\cache goto:eof
     set /a count = 0
-    for /f "tokens=*" %%a in (%DKPATH%\cache) do (
+    for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
         set a=%%a: =%
         ::echo !count!: %%a
         if !count! == 0 set "_APP_=%%a"

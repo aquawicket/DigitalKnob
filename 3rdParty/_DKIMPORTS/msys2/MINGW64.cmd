@@ -5,8 +5,8 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 
 ::cls
 set "DIGITALKNOB=C:/Users/%USERNAME%/digitalknob"
-set "DKBRANCH=%DIGITALKNOB%/Development"
-set "MSYS2=%DKBRANCH%/3rdParty/msys2-x86_64-20221216"
+set "DKBRANCH_DIR=%DIGITALKNOB%/Development"
+set "MSYS2=%DKBRANCH_DIR%/3rdParty/msys2-x86_64-20221216"
 
 goto:main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"

@@ -70,8 +70,8 @@ call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files (x86)/CMake/bin/cmake.exe"
+if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
+if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"

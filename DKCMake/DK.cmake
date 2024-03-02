@@ -153,21 +153,21 @@ message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
 
 
 ###### LEGACY PATH VARIABLES (DEPRECATED) ##################
-###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables ######
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-set(DKCMAKE ${path} CACHE INTERNAL "")
-message(STATUS "DKCMAKE = ${DKCMAKE}")
+###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE_DIR variables ######
+#get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
+#message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
 
-string(FIND "${DKCMAKE}" "DKCMake" pos)
-math(EXPR pos "${pos}-1")
-string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH)
-set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
-message(STATUS "DKBRANCH = ${DKBRANCH}")
+#string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
+#math(EXPR pos "${pos}-1")
+#string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH)
+#set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
+#message(STATUS "DKBRANCH = ${DKBRANCH}")
 
-string(FIND "${DKBRANCH}" "digitalknob" pos)
-string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
-set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
-message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
+#string(FIND "${DKBRANCH}" "digitalknob" pos)
+#string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
+#set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
+#message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
 ##################################################################
 
 

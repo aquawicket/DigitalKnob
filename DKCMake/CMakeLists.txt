@@ -48,8 +48,8 @@ include_guard()
 ###
 
 #Load all cmake flags prior to calling PROJECT()
-#get_filename_component(DKCMAKE ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#include(${DKCMAKE}/DKInit.cmake)
+#get_filename_component(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#include(${DKCMAKE_DIR}/DKInit.cmake)
 
 
 message(STATUS "########################################")

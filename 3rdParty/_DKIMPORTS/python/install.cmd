@@ -1,21 +1,21 @@
 set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
-set "DKBRANCH=Development"
-set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
+set "DKBRANCH_DIR=Development"
+set "DKPATH=%DIGITALKNOB%\%DKBRANCH_DIR%"
 
 :: validate_branch()
 :::validate_branch
 ::	:: https://stackoverflow.com/a/33662275
-::	:: If the current folder matches the current branch set DKBRANCH, default to Development
+::	:: If the current folder matches the current branch set DKBRANCH_DIR, default to Development
 ::	for %%I in (.) do set "FOLDER=%%~nxI"
 ::	git branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
-::		set "DKBRANCH=Development"
+::		set "DKBRANCH_DIR=Development"
 ::	) else (
-::		set "DKBRANCH=%FOLDER%"
+::		set "DKBRANCH_DIR=%FOLDER%"
 ::	)
-::	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
-::	set "DKCMAKE_DIR=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
-::	echo DKBRANCH = %DKBRANCH%
+::	set "DKPATH=%DIGITALKNOB%\%DKBRANCH_DIR%"
+::	set "DKCMAKE_DIR=%DIGITALKNOB%\%DKBRANCH_DIR%\DKCMake"
+::	echo DKBRANCH_DIR = %DKBRANCH_DIR%
 ::goto:eof
 
 ::call::validate_branch

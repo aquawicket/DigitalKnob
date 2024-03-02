@@ -33,7 +33,7 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 DKPATH="$DIGITALKNOB/DK"
-DKCMAKE="$DIGITALKNOB/Development/DKCMake"
+DKCMAKE_DIR="$DIGITALKNOB/Development/DKCMake"
 
 sudo echo
 
@@ -72,7 +72,7 @@ while :
 				git pull
 				
 				chmod +x $DKPATH/build.sh
-				chmod +x $DKCMAKE/dkbuild.sh
+				chmod +x $DKCMAKE_DIR/dkbuild.sh
 				;;
 			"Git Commit")
 				echo "$opt"
@@ -183,7 +183,7 @@ while :
 		#brew install cmake		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		cd $DKPATH/DKApps/$APP/$OS
-		cmake -G "Xcode" -DMAC_X86_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
+		cmake -G "Xcode" -DMAC_X86_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE_DIR
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
 	else #Linux, Raspberry Pi
@@ -200,13 +200,13 @@ while :
 		mkdir $DKPATH/DKApps/$APP/$OS
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE_DIR
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE_DIR
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
 	fi
