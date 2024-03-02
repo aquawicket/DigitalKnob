@@ -25,10 +25,10 @@ include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-set(DKCMAKE ${path} CACHE INTERNAL "")
+set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
 
-include("${DKCMAKE}/DK.cmake")
-include("${DKCMAKE}/DKDisabled.cmake")
+include("${DKCMAKE_DIR}/DK.cmake")
+include("${DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
 dk_info("############################################################")
@@ -43,7 +43,7 @@ set(APP_NAME ${APP_NAME}_APP)
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
-	include(${DKCMAKE}/DKBuildFlags.cmake)
+	include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 	PROJECT(${APP_NAME})
 	dk_set(DKAPP ON)
 endif()
@@ -71,6 +71,7 @@ dk_buildLog("\n")
 
 foreach(plugin ${dkdepend_list})
 	dk_set(QUEUE_BUILD OFF)
+	dk_set(PREBUILD OFF)
 	dk_set(LIBLIST "") # used for double checking
 	
 	dk_info("############################################################")
@@ -114,11 +115,21 @@ foreach(plugin ${dkdepend_list})
 	#endif()
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
-	#string(TOUPPER ${plugin} PLUGIN_NAME)
-	#if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
-	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
-	#	dk_info("add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
-	#endif()
+	if(PROJECT_INCLUDE_3RDPARTY)
+		string(TOUPPER ${plugin} PLUGIN_NAME)
+		if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
+			#if(MULTI_CONFIG)
+			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
+			#else()
+			#	if(DEBUG)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+			#	elseif(RELEASE)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+			#	endif()
+			#endif()
+			add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${BUILD_DIR})
+		endif()
+	endif()
 	
 	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
 	#install(FILES file.h DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
@@ -129,14 +140,16 @@ foreach(plugin ${dkdepend_list})
 	string(TOLOWER "${plugin}" plugin_lower)	
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
+	
 	# Install 3rd Party Libs
-	#if(INSTALL_DKLIBS)
-	#	if(${isDKPlugin} EQUAL -1)
-	#		if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-	#			dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
-	#		endif()
-	#	endif()
-	#endif()
+	if(INSTALL_DKLIBS)
+		if(${isDKPlugin} EQUAL -1)
+			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+			endif()
+		endif()
+	endif()
+	
 	
 	if(${isDKPlugin} GREATER -1)
 		# Install header files for DKPlugin
@@ -147,36 +160,37 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		#Add the DKPlugin to the app project
-		if(INCLUDE_DKPLUGINS)
+		if(PROJECT_INCLUDE_DKPLUGINS)
 			if(EXISTS "${plugin_path}/CMakeLists.txt")
-				if(MULTI_CONFIG)
-					add_subdirectory(${plugin_path} ${plugin_path}/${OS})
-				else()
-					if(DEBUG)
-						add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
-					elseif(RELEASE)
-						add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
-					endif()
-				endif()
+				#if(MULTI_CONFIG)
+				#	add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+				#else()
+				#	if(DEBUG)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+				#	elseif(RELEASE)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+				#	endif()
+				#endif()
+				add_subdirectory(${plugin_path} ${plugin_path}/${BUILD_DIR})
 			endif()
 		endif()
 		
-		
-		if(NOT INCLUDE_DKPLUGINS)
-		
-			## Prebuild DKPlugins switch
-			## Only prebuild if the library binaries are missing
+		## Prebuild DKPlugins prior to app
+		if(NOT PROJECT_INCLUDE_DKPLUGINS)
+			dk_set(PREBUILD ON) ## Always prebuild all DKPlugins
+			
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
 					dk_warn("MISSING: ${lib}")
-					dk_set(PREBUILD ON)
-					#dk_set(QUEUE_BUILD ON)
+					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
+				else()
+					dk_debug("FOUND: ${lib}")
 				endif()
-				dk_debug("FOUND: ${lib}")
 			endforeach()
 		
-			if(${PREBUILD})
-				dk_info("******* Prebuilding ${plugin} *******")
+			if(PREBUILD)
+				dk_set(QUEUE_BUILD ON)
+				dk_info("************* Building ${plugin} *************")
 				dk_setPath(${plugin_path}/${BUILD_DIR})
 				
 				if(MULTI_CONFIG)
@@ -250,10 +264,9 @@ foreach(plugin ${dkdepend_list})
 						
 					endif()
 				endforeach()
-			
-				set(PREBUILD OFF)
+
 			endif() # PREBUILD ON
-		endif() # NOT INCLUDE_DKPLUGINS)
+		endif() # NOT PROJECT_INCLUDE_DKPLUGINS)
 	endif() # isDKPlugin
 	
 	#foreach(lib ${LIBLIST})
@@ -292,7 +305,7 @@ if(PLUGINS_FILE)
 endif()
 
 if(HAVE_DK)
-	## copy app default files recursivly without overwrite
+	## copy app default files without overwrite
 	dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
 	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DK_PROJECT_DIR}/icons) 
 	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h)
@@ -304,6 +317,7 @@ endif()
 file(GLOB App_SRC
 	${DK_PROJECT_DIR}/*.h
 	${DK_PROJECT_DIR}/*.c
+	${DK_PROJECT_DIR}/*.hpp
 	${DK_PROJECT_DIR}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/assets/*")
 list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${OS}/*")
@@ -377,7 +391,7 @@ if(WIN_X86)
 	endif()
 	
 	########################## Add Dependencies ########################
-	if(INCLUDE_DKPLUGINS)
+	if(PROJECT_INCLUDE_DKPLUGINS)
 		foreach(plugin ${dkdepend_list})
 			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 				add_dependencies(${APP_NAME} ${plugin})
@@ -514,7 +528,7 @@ if(WIN_X86_64)
 	endif()
 
 	########################## Add Dependencies ########################
-	if(INCLUDE_DKPLUGINS)
+	if(PROJECT_INCLUDE_DKPLUGINS)
 		foreach(plugin ${dkdepend_list})
 			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 				add_dependencies(${APP_NAME} ${plugin})

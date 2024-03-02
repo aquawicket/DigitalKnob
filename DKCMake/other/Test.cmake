@@ -25,7 +25,7 @@ include_guard()
 
 message(STATUS "running Test.cmake . . .")
 message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
-get_filename_component(DKCMAKE "${CMAKE_SOURCE_DIR}/.." ABSOLUTE)
-include(${DKCMAKE}/DK.cmake)
+get_filename_component(DKCMAKE_DIR "${CMAKE_SOURCE_DIR}/.." ABSOLUTE)
+include(${DKCMAKE_DIR}/DK.cmake)
 
 include(C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/far/DKMAKE.cmake)

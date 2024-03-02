@@ -12,7 +12,7 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 function(dk_createOsMacros func)
 	DKDEBUGFUNC(${ARGV})
 	
-	set(${func}_ext ${DKCMAKE}/${func}_ext.cmake)
+	set(${func}_ext ${DKCMAKE_DIR}/${func}_ext.cmake)
 	if(NOT EXISTS ${func}_ext)
 		file(APPEND ${func}_ext "### Don't make changes in this file. They will be overwritten. ###\n")
 		file(APPEND ${func}_ext "### This file was automatically generated from dk_createOsMacros.cmake ###\n")

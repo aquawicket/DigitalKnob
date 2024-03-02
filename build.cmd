@@ -76,7 +76,7 @@ if "%*" NEQ "" call %*
     call:validate_branch
 
     echo DKPATH = %DKPATH%
-    echo DKCMAKE = %DKCMAKE%
+    echo DKCMAKE_DIR = %DKCMAKE_DIR%
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
         
@@ -321,7 +321,7 @@ goto:eof
     echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
-    call set CMAKE_SOURCE_DIR=%%DKCMAKE:^\=^/%%
+    call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
     echo CMAKE_SOURCE_DIR = %CMAKE_SOURCE_DIR%
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
     echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%
@@ -474,7 +474,7 @@ goto:eof
     ::call:validate_visual_studio
     ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE_DIR%
     ::set TARGET=%APP%_APP
 goto:eof
 
@@ -521,7 +521,7 @@ goto:eof
     ::call:validate_visual_studio
     ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE_DIR%
     ::set TARGET=%APP%_APP
 goto:eof
 
@@ -906,7 +906,7 @@ goto:eof
 
     ::echo DKBRANCH = %DKBRANCH%
     set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
-    set "DKCMAKE=%DKPATH%\DKCMake"
+    set "DKCMAKE_DIR=%DKPATH%\DKCMake"
     set "DK3RDPARTY=%DKPATH%\3rdParty"
     set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
 
@@ -1201,8 +1201,8 @@ goto:eof
         echo "ERROR: Could not locate CMAKE_EXE" 
         goto:eof
     )
-    if not exist "%DKCMAKE%" ( 
-        echo "ERROR: Could not locate DKCMAKE" 
+    if not exist "%DKCMAKE_DIR%" ( 
+        echo "ERROR: Could not locate DKCMAKE_DIR" 
         goto:eof
     )
 
@@ -1214,21 +1214,21 @@ goto:eof
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
     ::echo DKCOMMAND = %DKCOMMAND%
 
-    set "EVAL_VARS=%DKCMAKE%\cmake_vars.cmd"
-    call set DKCMAKE=%%DKCMAKE:^\=^/%%
+    set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
+    call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
         
-    ::echo "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+    ::echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 
     if [%2] == [] goto no_return_values
     goto with_return_values
 
     :no_return_values
-        "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
+        "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
     goto:eof
 
     :with_return_values
-        "%CMAKE_EXE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE%/dev/cmake_eval.cmake
-        if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
+        "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
+        if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%
         ::del %EVAL_VARS%
     goto:eof

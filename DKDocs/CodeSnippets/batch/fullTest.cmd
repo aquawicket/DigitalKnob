@@ -4,10 +4,10 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\Development"
-set "DKCMAKE=%DIGITALKNOB%\Development\DKCMake"
+set "DKCMAKE_DIR=%DIGITALKNOB%\Development\DKCMake"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
+set "CMAKE_EXE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 ::set "MSBUILD_DL=https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe"
 set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
 set "download=certutil.exe -urlcache -split -f"
@@ -81,17 +81,17 @@ for /r %%i in (*.TMP) do del "%%i"
 
 
 :checkCmake
-if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-if NOT exist "%CMAKE%" (
+if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
+if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+if NOT exist "%CMAKE_EXE%" (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
 	if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 )
 
 
@@ -121,8 +121,8 @@ ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%APP_PATH%\%OS%"
-::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+::"%CMAKE_EXE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE_DIR%
+"%CMAKE_EXE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE_DIR%
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 "%MSBUILD%" %APP%.sln /p:Configuration=Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error

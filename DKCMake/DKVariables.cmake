@@ -24,7 +24,7 @@
 include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-include("${DKCMAKE}/DK.cmake")
+include("${DKCMAKE_DIR}/DK.cmake")
 
 # FIXME: work to remove this
 if(COMMAND cmake_policy)
@@ -71,9 +71,9 @@ endif()
 #	#else()
 #		project(${TARGET})
 #		dk_set(DKAPP 1)
-#		#file(WRITE ${DKCMAKE}/temp/${TARGET}.cmd "\"${MSBUILD}\" ${CMAKE_BINARY_DIR}/DigitalKnob.sln /p:Configuration=Debug\n")
-#		#file(WRITE ${DKCMAKE}/temp/${TARGET}.cmd "%CMAKE_COMMAND%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target ${TARGET} --config Debug --verbose
-#		#file(APPEND ${DKCMAKE}/temp/${TARGET}.cmd "${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${TARGET}.exe")
+#		#file(WRITE ${DKCMAKE_DIR}/temp/${TARGET}.cmd "\"${MSBUILD}\" ${CMAKE_BINARY_DIR}/DigitalKnob.sln /p:Configuration=Debug\n")
+#		#file(WRITE ${DKCMAKE_DIR}/temp/${TARGET}.cmd "%CMAKE_COMMAND%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target ${TARGET} --config Debug --verbose
+#		#file(APPEND ${DKCMAKE_DIR}/temp/${TARGET}.cmd "${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${TARGET}.exe")
 #	#endif()
 #endif()
 

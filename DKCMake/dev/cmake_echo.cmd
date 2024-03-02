@@ -41,16 +41,15 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	
 	set "DKBRANCH=Development"
 	set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
-	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-	if not exist "%CMAKE%" 									echo "ERROR: Could not locate CMAKE" & goto:eof
-	if not exist "%CMAKE%"		echo "ERROR: Could not locate CMAKE" 	& goto:eof
-	if not exist "%DKCMAKE%" 	echo "ERROR: Could not locate DKCMAKE" 	& goto:eof
+	set "DKCMAKE_DIR=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
+	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	if not exist "%CMAKE_EXE%" 								echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
+	if not exist "%DKCMAKE_DIR%" 							echo "ERROR: Could not locate DKCMAKE_DIR" 	& goto:eof
 
-	call set DKCMAKE_DIR=%%DKCMAKE:^\=^/%%
+	call set DKCMAKE_DIR_DIR=%%DKCMAKE_DIR:^\=^/%%
 	
-	"%CMAKE%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
+	"%CMAKE_EXE%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
 
 	::echo return code: %ERRORLEVEL%
 goto:eof

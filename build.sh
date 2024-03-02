@@ -115,7 +115,7 @@ function main() {
 	validate_branch
 
 	print_var DKPATH
-	print_var DKCMAKE
+	print_var DKCMAKE_DIR
 	print_var DK3RDPARTY
 	print_var DKIMPORTS
 
@@ -409,7 +409,7 @@ function Generate_Project() {
 	print_var TARGET_PATH
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
-	CMAKE_SOURCE_DIR=$DKCMAKE
+	CMAKE_SOURCE_DIR=$DKCMAKE_DIR
 	print_var CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
 	print_var CMAKE_TARGET_PATH
@@ -493,7 +493,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
@@ -512,7 +512,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ $TARGET_OS == "emscripten" ]]; then
@@ -522,44 +522,44 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
-		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $EMSDK_ENV && $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	
 	if [[ "$TARGET_OS" == "ios_arm32" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
 		CMAKE_ARGS+=( "-DPLATFORM=TARGET_OS" )
 		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
 		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "ios_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
 		CMAKE_ARGS+=( "-DPLATFORM=OS64" )
 		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
 		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
 		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR" )
 		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
 		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
 		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR64" )
 		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
 		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86" ]]; then
@@ -567,7 +567,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
@@ -575,14 +575,14 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
 		CMAKE_ARGS+=( "-DMAC_X86=ON" )
 		CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=i686" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86_64" ]]; then
@@ -592,7 +592,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Xcode" )
 		CMAKE_ARGS+=( "-DMAC_X86_64=ON" )
 		CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=x86_64" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm32" ]]; then
@@ -600,7 +600,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm64" ]]; then
@@ -608,7 +608,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86" ]]; then
@@ -618,7 +618,7 @@ function Generate_Project() {
 		dk_call export PATH=${MSYS2}/usr/bin:$PATH
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86_64" ]]; then
@@ -628,7 +628,7 @@ function Generate_Project() {
 		dk_call export PATH=${MSYS2}/usr/bin:$PATH
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		dk_call $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 }
 	
@@ -643,22 +643,22 @@ function Build_Project() {
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --config Debug --verbose
-			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
+			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --config Debug --verbose
+			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
 		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Debug --verbose
-			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
+			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Debug --verbose
+			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Release/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --config Release --verbose
-			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
+			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --config Release --verbose
+			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
 		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Release --verbose
-			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
+			dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Release --verbose
+			#dk_call $CMAKE_EXE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
@@ -902,7 +902,7 @@ function validate_branch() {
 	
 	print_var DKBRANCH
 	DKPATH="$DIGITALKNOB/$DKBRANCH"
-	DKCMAKE="$DKPATH/DKCMake"
+	DKCMAKE_DIR="$DKPATH/DKCMake"
 	DK3RDPARTY="$DKPATH/3rdParty"
 	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
 
@@ -1005,14 +1005,14 @@ function cmake_eval() {
 	print_var DKCOMMAND
 	
 	if [[ -n "$variables" ]]; then
-		dk_call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" $3 -P $DKCMAKE/dev/cmake_eval.cmake
-		if file_exists $DKCMAKE/cmake_vars.sh; then
+		dk_call $CMAKE_EXE "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" $3 -P $DKCMAKE_DIR/dev/cmake_eval.cmake
+		if file_exists $DKCMAKE_DIR/cmake_vars.sh; then
 	    	echo "executing cmake_vars.sh"
-			source $DKCMAKE/cmake_vars.sh
-			#rm $DKCMAKE/cmake_vars.sh
+			source $DKCMAKE_DIR/cmake_vars.sh
+			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
-		dk_call $CMAKE -DDKCMAKE=$DKCMAKE -DDKCOMMAND=$DKCOMMAND -P $DKCMAKE/dev/cmake_eval.cmake
+		dk_call $CMAKE_EXE -DDKCMAKE_DIR=$DKCMAKE_DIR -DDKCOMMAND=$DKCOMMAND -P $DKCMAKE_DIR/dev/cmake_eval.cmake
 	fi
 	
 	#echo return code: $?

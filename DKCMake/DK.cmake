@@ -10,7 +10,7 @@ set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
 set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the current cmake file
-set(DELETE_DOWNLOADS			1		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
+set(DELETE_DOWNLOADS			0		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")	# enable dk_verbose() functions
 set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
@@ -25,7 +25,8 @@ set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line 
 set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
-set(INCLUDE_DKPLUGINS			1		CACHE INTERNAL "")  # Include the DKPlugins to the main app project
+set(PROJECT_INCLUDE_DKPLUGINS	1		CACHE INTERNAL "")  # Include DKPlugin libraries in the app project
+set(PROJECT_INCLUDE_3RDPARTY	0		CACHE INTERNAL "")  # Include 3rdParty libraries in the app project
 
 ###### DKOFFLINE Warning ######
 if(${DKOFFLINE})
@@ -51,9 +52,9 @@ set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
 message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
 
 ###### Set DKBRANCH_DIR ######
-string(FIND "${DKCMAKE}" "DKCMake" pos)
+string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
 math(EXPR pos "${pos}-1")
-string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH_DIR)
+string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
 set(DKBRANCH_DIR ${DKBRANCH_DIR} CACHE INTERNAL "" FORCE)
 message(STATUS "DKBRANCH_DIR = ${DKBRANCH_DIR}")
 
@@ -149,6 +150,9 @@ endif()
 message(STATUS "MULTI_CONFIG = ${MULTI_CONFIG}")
 message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
 
+
+
+###### LEGACY PATH VARIABLES (DEPRECATED) ##################
 ###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables ######
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 set(DKCMAKE ${path} CACHE INTERNAL "")
@@ -164,10 +168,12 @@ string(FIND "${DKBRANCH}" "digitalknob" pos)
 string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
 set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
 message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
+##################################################################
+
 
 
 ### load DKCMake function
-include(${DKCMAKE}/functions/dk_load.cmake)
+include(${DKCMAKE_DIR}/functions/dk_load.cmake)
 #dk_load(DKDEBUGFUNC)
 #dk_load(dk_updateLogInfo)
 #dk_load(dk_debug)
@@ -246,8 +252,8 @@ message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_A
 
 
 ##### Load Function files #################
-#include(${DKCMAKE}/functions/dk_load.cmake)
-#include(${DKCMAKE}/functions/dk_call.cmake)
+#include(${DKCMAKE_DIR}/functions/dk_load.cmake)
+#include(${DKCMAKE_DIR}/functions/dk_call.cmake)
 #dk_load(dk_listReplace)
 #dk_load(dk_getArgIdentifiers)
 #dk_load(dk_debugFunc)
@@ -267,7 +273,7 @@ dk_load(DKVariables)
 #dk_load(DKDisabled)
 #dk_load(dk_findLibrary)
 #dk_load(dk_importVariables)
-include(${DKCMAKE}/functions/dk_importVariables.cmake)
+include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)
 #dk_load(dk_findFiles)
 
 

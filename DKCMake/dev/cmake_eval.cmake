@@ -26,8 +26,8 @@ include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 
-if(DKCMAKE)
-	include(${DKCMAKE}/DK.cmake)
+if(DKCMAKE_DIR)
+	include(${DKCMAKE_DIR}/DK.cmake)
 endif()
 
 
@@ -48,7 +48,7 @@ function(cmake_eval eval_code)
 		#fwrite_temp("" ".cmake")
 		#ans(__eval_temp_file)
 		# speedup: statically write filename so eval boils down to 3 function calls
-		set(__eval_temp_file ${DKCMAKE}/__eval_temp_file.cmake)
+		set(__eval_temp_file ${DKCMAKE_DIR}/__eval_temp_file.cmake)
 		file(WRITE "${__eval_temp_file}" "
 			function(eval eval_code)
 			file(WRITE ${__eval_temp_file} \"\${eval_code}\")
@@ -70,18 +70,18 @@ if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
 	
 	## create windows cmd to set variables
-	dk_remove(${DKCMAKE}/cmake_vars.cmd NOERROR)
+	dk_remove(${DKCMAKE_DIR}/cmake_vars.cmd NOERROR)
 	foreach(item ${DKRETURN})
 		set(line "set \"${item}=${${item}}\" \n")
-		file(APPEND ${DKCMAKE}/cmake_vars.cmd "${line}\n")
+		file(APPEND ${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
 	endforeach()
 	
 	## create unix shell to set variables 
-	dk_remove(${DKCMAKE}/cmake_vars.sh NOERROR)
-	file(APPEND ${DKCMAKE}/cmake_vars.sh "#!/bin/bash \n")
+	dk_remove(${DKCMAKE_DIR}/cmake_vars.sh NOERROR)
+	file(APPEND ${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/bash \n")
 	foreach(var ${DKRETURN})
 	    string(MAKE_C_IDENTIFIER ${var} var_)
 		set(line "export ${var_}=\"${${var}}\" \n")
-        file(APPEND ${DKCMAKE}/cmake_vars.sh "${line}\n")
+        file(APPEND ${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 	endforeach()
 endif()

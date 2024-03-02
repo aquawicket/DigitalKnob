@@ -72,8 +72,8 @@ call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files (x86)/CMake/bin/cmake.exe"
+if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
+if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -158,9 +158,9 @@ echo Compiling with CMAKE
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
-"%CMAKE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
+"%CMAKE_EXE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 %IF_ERROR% "CMAKE failed to generate the project files."
-"%CMAKE%" --build %CMAKE_BINARY_DIR% --target main
+"%CMAKE_EXE%" --build %CMAKE_BINARY_DIR% --target main
 ::call CopyPath %CMAKE_BINARY_DIR%/%BUILD_TYPE%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

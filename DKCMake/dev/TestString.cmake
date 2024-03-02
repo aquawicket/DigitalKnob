@@ -25,10 +25,10 @@ include_guard()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
-include(${DKCMAKE}/DK.cmake)
+include(${DKCMAKE_DIR}/DK.cmake)
 
 dk_set(string_Ext ON)
-include(${DKCMAKE}/DKString.cmake)
+include(${DKCMAKE_DIR}/DKString.cmake)
 dk_clearScreen()
 
 message(STATUS " ")
