@@ -10,10 +10,10 @@ IF(HAVE_DKCef)
 ENDIF()
 
 if(MSVC)
-	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp)
+	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS_DIR}/DKDebug/StackWalker.cpp)
 	WIN_dk_include(${STACKWALKER}/StackWalker)
 else()
-	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp NOERROR)
+	dk_remove(${DKPLUGINS_DIR}/DKDebug/StackWalker.cpp NOERROR)
 endif()
 
 dk_generateCmake(DKDebug)

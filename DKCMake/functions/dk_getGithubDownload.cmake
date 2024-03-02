@@ -95,9 +95,9 @@ function(dk_getGithubDownload url) #install_path #Patch
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	# check current folder name
-	dk_debug("\${DKIMPORTS}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
-	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
+	dk_debug("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
+	if(NOT "${DKIMPORTS_DIR}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
 	endif()
 	
 	math(EXPR last "${url_length}-1")
@@ -158,9 +158,9 @@ function(dk_getGithubDownload url) #install_path #Patch
 		
 		dk_error("The url doesn't end in .zip or .tar.gz")
 		dk_info("We will try to get the master commit id from the page")
-		dk_download(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
-		file(READ ${DKDOWNLOAD}/TEMP/${FOLDER}.html PAGE)
-		file(REMOVE ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
+		dk_download(${url} ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
+		file(READ ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html PAGE)
+		file(REMOVE ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
 		string(FIND "${PAGE}" "spoofed_commit_check" index)
 		if(${index} EQUAL -1)
 			dk_error("The page doesn't contain a 'spoofed_commit_check' variable")
@@ -192,7 +192,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 	if(install_path)
 		dk_set(${LIBVAR} ${install_path})
 	else()
-		dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
+		dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	endif()
 	
 	if(NOT ${LIBVAR})

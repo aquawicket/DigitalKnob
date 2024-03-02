@@ -4,7 +4,7 @@
 # https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi
 
 WIN_HOST_dk_set	(QEUM_DL https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe)
-dk_set			(QEUM ${3RDPARTY}/qeum)
+dk_set			(QEUM ${DK3RDPARTY_DIR}/qeum)
 
 ### INSTALL ###
 if(NOT EXISTS ${QEUM}/qemu-img.exe)
@@ -12,7 +12,7 @@ if(NOT EXISTS ${QEUM}/qemu-img.exe)
 	get_filename_component(QEUM_DL_FILE ${QEUM_DL} NAME)
 
 	file(TO_NATIVE_PATH ${QEUM} QEUM_INSTALL_PATH)
-	set(command_string "${DKDOWNLOAD}/${QEUM_DL_FILE}" /D=${QEUM_INSTALL_PATH})
+	set(command_string "${DKDOWNLOAD_DIR}/${QEUM_DL_FILE}" /D=${QEUM_INSTALL_PATH})
 
 	execute_process(COMMAND cmd /c echo ${command_string})
 	execute_process(COMMAND cmd /c ${command_string})

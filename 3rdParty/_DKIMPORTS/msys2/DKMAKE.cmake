@@ -11,12 +11,12 @@ dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-
 
 get_filename_component(MSYS2_DL_FILE ${MSYS2_DL} NAME)
 dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
-dk_set(MSYS2 ${3RDPARTY}/${MSYS2_FOLDER})
+dk_set(MSYS2 ${DK3RDPARTY_DIR}/${MSYS2_FOLDER})
 
 if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_info("Installing ${MSYS2_FOLDER}")
-	dk_download(${MSYS2_DL} ${DKDOWNLOAD})
-	dk_command(${DKDOWNLOAD}/${MSYS2_DL_FILE} install --root ${MSYS2} --confirm-command)
+	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
+	dk_command(${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE} install --root ${MSYS2} --confirm-command)
 endif()	
 
 dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")

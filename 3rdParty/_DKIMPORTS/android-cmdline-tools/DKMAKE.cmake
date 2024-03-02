@@ -11,7 +11,7 @@
 
 #dk_depend(openjdk-8u41)
 
-dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
+dk_set(ANDROID_SDK ${DK3RDPARTY_DIR}/android-sdk)
 dk_makeDirectory(${ANDROID_SDK})
 dk_makeDirectory(${ANDROID_SDK}/cmdline-tools)
 

@@ -7,7 +7,7 @@
 #endif()
 
 
-dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
+dk_set(ANDROID_SDK ${DK3RDPARTY_DIR}/android-sdk)
 
 #NOTE: it's actually building android gui apps that depend
 #	on java. So we can push these further up the dependencies list. 
@@ -18,7 +18,7 @@ dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
 
 if(NOT EXISTS ${ANDROID_SDK})
 	dk_info("Installing android-sdk")
-	dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
+	dk_set(ANDROID_SDK ${DK3RDPARTY_DIR}/android-sdk)
 	dk_makeDirectory(${ANDROID_SDK})
 	dk_patch(android-sdk ${ANDROID_SDK})
 	
@@ -52,14 +52,14 @@ endif()
 
 ### SignLicenses ###
 if(NOT EXISTS ${ANDROID_SDK}/SignLicenses.cmd)
-	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID_SDK}/SignLicenses.cmd OVERWRITE)
+	dk_copy(${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd ${ANDROID_SDK}/SignLicenses.cmd OVERWRITE)
 	dk_sleep(2) # wait 2 seconds for the file to become available
 	
 	WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
 endif()
 
 if(NOT EXISTS ${ANDROID_SDK}/SignLicenses.sh)
-	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.sh ${ANDROID_SDK}/SignLicenses.sh OVERWRITE)
+	dk_copy(${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh ${ANDROID_SDK}/SignLicenses.sh OVERWRITE)
 	dk_sleep(2) # wait 2 seconds for the file to become available
 	
 	UNIX_HOST_dk_executeProcess(chmod 777 ${ANDROID_SDK}/SignLicenses.sh)

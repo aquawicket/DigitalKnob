@@ -76,6 +76,16 @@ message(STATUS "DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
 set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS CACHE INTERNAL "" FORCE)
 message(STATUS "DKIMPORTS_DIR = ${DKIMPORTS_DIR}")
 
+###### Set DKAPPS_DIR ######
+set(DKAPPS_DIR ${DKBRANCH_DIR}/DKApps CACHE INTERNAL "" FORCE)
+message(STATUS "DKAPPS_DIR = ${DKAPPS_DIR}")
+
+###### Set DKPLUGINS_DIR ######
+set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins CACHE INTERNAL "" FORCE)
+message(STATUS "DKPLUGINS_DIR = ${DKPLUGINS_DIR}")
+
+
+
 ###### Set <SYSTEM_NAME>_HOST variables ######
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 				TRUE 							CACHE INTERNAL "")
@@ -150,25 +160,6 @@ endif()
 message(STATUS "MULTI_CONFIG = ${MULTI_CONFIG}")
 message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
 
-
-
-###### LEGACY PATH VARIABLES (DEPRECATED) ##################
-###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE_DIR variables ######
-#get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
-#message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
-
-#string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
-#math(EXPR pos "${pos}-1")
-#string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH)
-#set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
-#message(STATUS "DKBRANCH = ${DKBRANCH}")
-
-#string(FIND "${DKBRANCH}" "digitalknob" pos)
-#string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
-#set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
-#message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
-##################################################################
 
 
 

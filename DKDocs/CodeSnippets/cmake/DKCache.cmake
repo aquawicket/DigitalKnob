@@ -17,11 +17,11 @@ endif()
 #cmake_policy(SET CMP0074 NEW)
 #project(HelloWorld C CXX)
 ##set(OS win_x86 CACHE PATH "" FORCE)
-set(3RDPARTY "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
+set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
 
 ##${STDINT}
 
-set(ZLIB ${3RDPARTY}/zlib-1.2.11 CACHE PATH "" FORCE)
+set(ZLIB ${DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
 if(EXISTS ${ZLIB}/${OS}/Release/zlibstatic.lib)
 	SET(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
 	SET(ZLIB_LIBRARY ${ZLIB}/${OS}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
@@ -31,7 +31,7 @@ endif()
 
 #EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
-set(BZIP2 ${3RDPARTY}/bzip2-1.0.6 CACHE PATH "" FORCE)
+set(BZIP2 ${DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
 if(EXISTS ${BZIP2}/${OS}/libbz2.lib)
 set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
 set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
@@ -42,35 +42,35 @@ set(LIBGCC_LIBRARY ${BZIP2}/${OS}/libgcc.lib CACHE FILEPATH "" FORCE)
 endif()
 
 
-set(TIFF ${3RDPARTY}/tiff-4.0.3 CACHE PATH "" FORCE)
+set(TIFF ${DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
 if(EXISTS ${TIFF}/${OS}/Release/tiff-static.lib)
 	set(TIFF_INCLUDE_DIR ${TIFF}/libtiff CACHE PATH "" FORCE)
 	set(TIFF_INCLUDE_DIR2 ${TIFF}/${OS} CACHE PATH "" FORCE)
 endif()
 
 
-set(PNG ${3RDPARTY}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
+set(PNG ${DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
 if(EXISTS ${PNG}/${OS}/Release/libpng17_static.lib)
 	set(PNG_INCLUDE_DIR ${PNG} CACHE PATH "" FORCE)
 	set(PNG_INCLUDE_DIR2 ${PNG}/${OS} CACHE PATH "" FORCE)
 endif()
 
 
-set(JPEG ${3RDPARTY}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
+set(JPEG ${DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
 if(EXISTS ${JPEG}/${OS}/Release/turbojpeg-static.lib)
 	set(JPEG_INCLUDE_DIR ${JPEG} CACHE PATH "" FORCE)
 	set(JPEG_INCLUDE_DIR2 ${JPEG}/${OS} CACHE PATH "" FORCE)
 endif()
 
 
-set(GIF ${3RDPARTY}/ CACHE PATH "" FORCE)
+set(GIF ${DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
 if(EXISTS ${GIF}/${OS}/Release/lib/.libs/libgif.lib)
 	set(GIF_INCLUDE_DIR ${GIF} CACHE PATH "" FORCE)
 	set(GIF_INCLUDE_DIR2 ${GIF}/${OS} CACHE PATH "" FORCE)
 endif()
 
 
-set(FREETYPE ${3RDPARTY}/freetype-2.5.5 CACHE PATH "" FORCE)
+set(FREETYPE ${DK3RDPARTY_DIR}/freetype-2.5.5 CACHE PATH "" FORCE)
 if(EXISTS ${FREETYPE}/${OS}/Release/freetype.lib)
 	set(FREETYPE_INCLUDE_DIRS ${FREETYPE}/include CACHE PATH "" FORCE)
 	set(FREETYPE_INCLUDE_DIR_freetype2 ${FREETYPE}/include CACHE PATH "" FORCE)
@@ -80,7 +80,7 @@ if(EXISTS ${FREETYPE}/${OS}/Release/freetype.lib)
 	set(FREETYPE_LIBRARY_RELEASE ${FREETYPE}/${OS}/Release/freetype.lib CACHE FILEPATH "" FORCE)
 endif()
 
-set(SDL2 ${3RDPARTY}/SDL2-2.0.14 CACHE PATH "" FORCE)
+set(SDL2 ${DK3RDPARTY_DIR}/SDL2-2.0.14 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2}/${OS}/Release/SDL2.lib)
 	set(SDL2_DIR ${SDL2} CACHE PATH "" FORCE)
 	set(SDL2_INCLUDE_DIR ${SDL2}/include CACHE PATH "" FORCE)
@@ -95,7 +95,7 @@ if(EXISTS ${SDL2}/${OS}/Release/SDL2.lib)
 endif()
 
 
-set(SDL2_IMAGE ${3RDPARTY}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
+set(SDL2_IMAGE ${DK3RDPARTY_DIR}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2_IMAGE}/${OS}/lib/Release/SDL_image.lib)
 	set(SDL2_IMAGE_INCLUDE_DIR ${SDL2_IMAGE} CACHE PATH "" FORCE)
 	set(SDL2_IMAGE_LIBRARY_TEMP ${SDL2_IMAGE}/${OS}/lib/Release/SDL_image.lib CACHE FILEPATH "" FORCE)
@@ -105,7 +105,7 @@ if(EXISTS ${SDL2_IMAGE}/${OS}/lib/Release/SDL_image.lib)
 endif()
 
 
-set(SFML ${3RDPARTY}/SFML-2.4.2 CACHE PATH "" FORCE)
+set(SFML ${DK3RDPARTY_DIR}/SFML-2.4.2 CACHE PATH "" FORCE)
 if(EXISTS ${SFML}/${OS}/lib/Release/sfml-main.lib)
 	set(SFML_INCLUDE_DIR ${SFML}/include CACHE FILEPATH "" FORCE)
 	set(SFML_MAIN_LIBRARY_DEBUG ${SFML}/${OS}/lib/Debug/sfml-main-d.lib CACHE FILEPATH "" FORCE)
@@ -121,7 +121,7 @@ if(EXISTS ${SFML}/${OS}/lib/Release/sfml-main.lib)
 endif()
 
 # https://cmake.org/cmake/help/latest/module/FindGLEW.html
-set(GLEW ${3RDPARTY}/glew-2.2.0 CACHE PATH "" FORCE)
+set(GLEW ${DK3RDPARTY_DIR}/glew-2.2.0 CACHE PATH "" FORCE)
 if(EXISTS ${GLEW}/${OS}/lib/Release/libglew32.lib)
 	##set(GLEW_DIR ${GLEW}/build/cmake CACHE PATH "" FORCE)
 	set(GLEW_USE_STATIC_LIBS ON CACHE BOOL "" FORCE)
@@ -137,7 +137,7 @@ if(EXISTS ${GLEW}/${OS}/lib/Release/libglew32.lib)
 endif()
 
 
-set(OPENSSL ${3RDPARTY}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
+set(OPENSSL ${DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
 if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
 	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
 	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
@@ -148,7 +148,7 @@ if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
 endif()
 
 
-set(OPENAL ${3RDPARTY}/openal-1.15.1 CACHE PATH "" FORCE)
+set(OPENAL ${DK3RDPARTY_DIR}/openal-1.15.1 CACHE PATH "" FORCE)
 if(EXISTS ${OPENAL}/${OS}/Release/OpenAL32.lib)
 # /I${OPENAL}/include/AL
 	set(OPENAL_INCLUDE_DIR ${OPENAL}/include CACHE PATH "" FORCE)
@@ -158,19 +158,19 @@ if(EXISTS ${OPENAL}/${OS}/Release/OpenAL32.lib)
 endif()
 
 
-set(VORBIS ${3RDPARTY}/libvorbis-1.3.5 CACHE PATH "" FORCE)
+set(VORBIS ${DK3RDPARTY_DIR}/libvorbis-1.3.5 CACHE PATH "" FORCE)
 if(EXISTS ${VORBIS}/${OS}/Release/lib/.libs/libvorbis.lib)
 	set(VORBIS_INCLUDE_DIR ${VORBIS}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(OGG ${3RDPARTY}/libogg-1.3.2 CACHE PATH "" FORCE)
+set(OGG ${DK3RDPARTY_DIR}/libogg-1.3.2 CACHE PATH "" FORCE)
 if(EXISTS ${OGG}/${OS}/Release/src/.libs/libogg.lib)
 	set(OGG_INCLUDE_DIR ${OGG}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(SMPEG2 ${3RDPARTY}/smpeg2-2.0.0 CACHE PATH "" FORCE)
+set(SMPEG2 ${DK3RDPARTY_DIR}/smpeg2-2.0.0 CACHE PATH "" FORCE)
 if(EXISTS ${SMPEG2}/${OS}/lib/Release/libsmpeg2.lib)
 	set(SMPEG_INCLUDE_DIR ${SMPEG2} CACHE PATH "" FORCE)
 endif()

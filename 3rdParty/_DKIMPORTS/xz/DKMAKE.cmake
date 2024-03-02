@@ -15,7 +15,7 @@ dk_import(https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.
 #dk_set(XZ_VERSION 5.2.5)
 #dk_set(XZ_DL https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
-#dk_set(XZ ${3RDPARTY}/${XZ_FOLDER})
+#dk_set(XZ ${DK3RDPARTY_DIR}/${XZ_FOLDER})
 #dk_import(${XZ_DL} ${XZ})
 
 #if(NOT WIN)

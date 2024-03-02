@@ -35,18 +35,18 @@ endif(COMMAND cmake_policy)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_set(DKPLUGINS ${DKBRANCH}/DKPlugins)
-dk_set(3RDPARTY ${DKBRANCH}/3rdParty)
-dk_set(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
-dk_set(DKDOWNLOAD ${DIGITALKNOB}/download)
+dk_set(DKPLUGINS_DIR ${DKBRANCH_DIR}/DKPlugins)
+dk_set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty)
+dk_set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS)
+dk_set(DKDOWNLOAD_DIR ${DIGITALKNOB_DIR}/download)
 dk_set(DKWEB "http://127.0.0.1")
-dk_set(CURRENT_DIR ${DIGITALKNOB})
+dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
-	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB}/DKBIN)
+	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
 endif()
 
 

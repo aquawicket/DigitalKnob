@@ -25,6 +25,6 @@ dk_set(VC_REDIST "C:/Windows/SysWOW64/vcruntime140.dll")
 ### INSTALL ###
 IF(NOT EXISTS "${VC_REDIST}")
 	MESSAGE(STATUS "Installing Visual Studio ${VC_REDIST_VERSION} ${VC_REDIST_PLATFORM} Redistributable")
-	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD}/${VC_REDIST_NAME}.exe)
-	dk_command(${DKDOWNLOAD}/${VC_REDIST_NAME}.exe)
+	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_NAME}.exe)
+	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_NAME}.exe)
 ENDIF()

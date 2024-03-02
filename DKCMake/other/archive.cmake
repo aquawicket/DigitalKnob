@@ -37,7 +37,7 @@ include_guard()
 #add_custom_command(TARGET ${APP_NAME}
 #   # Run after all other rules within the target have been executed
 #    POST_BUILD
-#    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.exe"
+#    COMMAND "${DK3RDPARTY_DIR}/upx-3.96/upx.exe" "-9 -v ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.exe"
 #    COMMENT "This command will be executed after building target"
 #    VERBATIM
 #)
@@ -75,7 +75,7 @@ include_guard()
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "DK_DIR := C:/Users/$ENV{USERNAME}/digitalknob\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "NDKLIBDIR := ${ANDROID_NDK}/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "DKPLUGINS := $(DK_DIR)/DKPlugins\n")
-#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "3RDPARTY := $(DKPLUGINS)/3rdParty\n\n")
+#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "DK3RDPARTY_DIR := $(DKPLUGINS)/3rdParty\n\n")
 #
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES := $(LOCAL_PATH)\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += $(SRC_DIR)\n")
@@ -114,7 +114,7 @@ include_guard()
 #   foreach(each_define ${DKDEFINES_LIST})
 #		dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
 #	endforeach()
-#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
+#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += ${DKPLUGINS_DIR}\n")
 #	foreach(each_include ${DKINCLUDES_LIST})
 #		dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
 #	endforeach()

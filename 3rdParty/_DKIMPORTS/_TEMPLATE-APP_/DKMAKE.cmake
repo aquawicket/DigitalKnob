@@ -22,8 +22,8 @@ dk_return()
 ### INSTALL ###
 #IF(NOT EXISTS "${APP_EXE}")
 #	MESSAGE(STATUS "Installing ${APP_NAME}")
-#	dk_download(${APP_DL} ${DKDOWNLOAD}/${APP_NAME})
-#	dk_command(${DKDOWNLOAD}/${APP_NAME})
+#	dk_download(${APP_DL} ${DKDOWNLOAD_DIR}/${APP_NAME})
+#	dk_command(${DKDOWNLOAD_DIR}/${APP_NAME})
 #ENDIF()
 
 

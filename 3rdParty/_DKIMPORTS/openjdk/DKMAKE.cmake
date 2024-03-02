@@ -18,10 +18,10 @@ WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x
 # MAC Install
 if(MAC_HOST)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
-		dk_download(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz ${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
-		dk_command(tar xf ${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
-		dk_command(sudo mv ${DKDOWNLOAD}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
-		dk_remove(${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_download(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_command(tar xf ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_command(sudo mv ${DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
+		dk_remove(${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
 	
 	dk_command(java --version)

@@ -307,9 +307,9 @@ endif()
 if(HAVE_DK)
 	## copy app default files without overwrite
 	dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
-	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DK_PROJECT_DIR}/icons) 
-	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h)
-	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DK_PROJECT_DIR}/main.cpp)
+	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/icons ${DK_PROJECT_DIR}/icons) 
+	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h)
+	dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/main.cpp ${DK_PROJECT_DIR}/main.cpp)
 endif()
 	
 ### Include all source files from the app folder for the compilers
@@ -334,7 +334,7 @@ endif()
 	
 add_definitions(-DDKAPP)
 include_directories(${DK_PROJECT_DIR})
-include_directories(${DKPLUGINS})
+include_directories(${DKPLUGINS_DIR})
 
 ##########
 if(WIN_X86)
@@ -358,7 +358,7 @@ if(WIN_X86)
 		# Restore the backed up files, excluded from assets
 		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NOERROR)
 		file(REMOVE ${DK_PROJECT_DIR}/Backup)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE) #required
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE) #required
 	endif()	
 		
 	###################### Backup Executable ###########################
@@ -374,8 +374,8 @@ if(WIN_X86)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${DK_PROJECT_DIR}/*.manifest
 			${DK_PROJECT_DIR}/*.rc
@@ -393,7 +393,7 @@ if(WIN_X86)
 	########################## Add Dependencies ########################
 	if(PROJECT_INCLUDE_DKPLUGINS)
 		foreach(plugin ${dkdepend_list})
-			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 				add_dependencies(${APP_NAME} ${plugin})
 			endif()	
 		endforeach()
@@ -495,7 +495,7 @@ if(WIN_X86_64)
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
 		file(REMOVE ${DK_PROJECT_DIR}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
 	endif()
 
 	###################### Backup Executable ###########################
@@ -511,8 +511,8 @@ if(WIN_X86_64)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${DK_PROJECT_DIR}/*.manifest
 			${DK_PROJECT_DIR}/*.rc
@@ -530,7 +530,7 @@ if(WIN_X86_64)
 	########################## Add Dependencies ########################
 	if(PROJECT_INCLUDE_DKPLUGINS)
 		foreach(plugin ${dkdepend_list})
-			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 				add_dependencies(${APP_NAME} ${plugin})
 			endif()	
 		endforeach()
@@ -649,7 +649,7 @@ if(MAC)
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			if(NOT ${plugin} MATCHES "DKCefChild")
 				add_dependencies(${APP_NAME} ${plugin})
 			endif()
@@ -683,7 +683,7 @@ if(MAC)
 	set_target_properties(${APP_NAME} PROPERTIES 
 		MACOSX_BUNDLE TRUE 
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
+		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS_DIR}/_DKIMPORT/mac/Info.plist)
 		
 	############## Delete Exlusions and Copy Assets to Bundle #######################
 	if(EXISTS ${DK_PROJECT_DIR}/assets)
@@ -714,10 +714,10 @@ if(MAC)
 	endif()
 	
 	# Copy the DKCefChild.app into the app bundle as "DKAppName Helper.app"
-	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
+	if(EXISTS "${DKPLUGINS_DIR}/DKCefChild/${OS}/Release/DKCefChild.app")
 		dk_info("Adding ${APP_NAME} Helper to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS_DIR}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS_DIR}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
 	endif()
 	
 	# Make bundle open with Terminal
@@ -826,14 +826,14 @@ if(IOS OR IOSSIM)
 	${DK_PROJECT_DIR}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	#if(HAVE_DK)
-	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.h)
-	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.m)
+	#	list(APPEND App_SRC ${DKPLUGINS_DIR}/DK/DKAppDelegate.h)
+	#	list(APPEND App_SRC ${DKPLUGINS_DIR}/DK/DKAppDelegate.m)
 	#endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
@@ -857,7 +857,7 @@ if(IOS OR IOSSIM)
 	dk_set(NSMainNibFile "")
 	#dk_set(UILaunchStoryboardName dk)
 	#dk_set(UIMainStoryboardFile dk.storyboard)
-	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
+	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS_DIR}/_DKIMPORT/ios/Info.plist)
 	
 	###################### Disable bitcode ############################
 	set_target_properties(${APP_NAME} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "NO")
@@ -953,7 +953,7 @@ if(NOT RASPBERRY)
 	
 	###################### Add Build Dependencies ######################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
@@ -1045,7 +1045,7 @@ if(RASPBERRY)
 
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
@@ -1152,8 +1152,8 @@ if(ANDROID)
 	
 		####### Import Android Gui Build files ############################################
 		if(DEBUG)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Debug)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Debug)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/assets OVERWRITE)
 			file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
@@ -1162,8 +1162,8 @@ if(ANDROID)
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		if(RELEASE)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/assets OVERWRITE)
 			file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
@@ -1188,7 +1188,7 @@ if(ANDROID)
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			add_dependencies(main ${plugin})
 		endif()	
 	endforeach()
@@ -1334,7 +1334,7 @@ if(EMSCRIPTEN)
 	
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+		if(EXISTS "${DKPLUGINS_DIR}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()

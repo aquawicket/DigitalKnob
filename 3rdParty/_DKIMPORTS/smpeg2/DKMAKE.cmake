@@ -10,7 +10,7 @@ dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATC
 
 
 ### PATCH ###
-dk_applyPatch(${SMPEG2} ${DKIMPORTS}/smpeg2/gcc6.patch.txt)
+dk_applyPatch(${SMPEG2} ${DKIMPORTS_DIR}/smpeg2/gcc6.patch.txt)
 
 
 ### LINK ###

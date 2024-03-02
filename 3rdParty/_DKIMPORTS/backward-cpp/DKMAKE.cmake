@@ -14,9 +14,9 @@ dk_include			(${BACKWARD_CPP})
 #WIN_dk_libRelease	(${BACKWARD_CPP}/${OS}/${RELEASE_DIR}/backward.lib)
 
 if(ANDROID)
-	dk_remove(${DKPLUGINS}/DK/backward.cpp NOERROR)
+	dk_remove(${DKPLUGINS_DIR}/DK/backward.cpp NOERROR)
 else()
-	dk_copy(${BACKWARD_CPP}/backward.cpp ${DKPLUGINS}/DK/backward.cpp OVERWRITE)
+	dk_copy(${BACKWARD_CPP}/backward.cpp ${DKPLUGINS_DIR}/DK/backward.cpp OVERWRITE)
 endif()
 
 

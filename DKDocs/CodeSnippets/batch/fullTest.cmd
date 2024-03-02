@@ -2,10 +2,11 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\Development"
-set "DKCMAKE_DIR=%DIGITALKNOB%\Development\DKCMake"
-set "DKDOWNLOAD=%DIGITALKNOB%\download"
+set "DKBRANCH=Development"
+set "DIGITALKNOB_DIR=C:\Users\%USERNAME%\digitalknob"
+set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
+set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "CMAKE_EXE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 ::set "MSBUILD_DL=https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe"
@@ -15,32 +16,32 @@ set "download=certutil.exe -urlcache -split -f"
 set "APP="
 set "OS="
 set "TYPE="
-if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
-if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
+if NOT exist "%DIGITALKNOB_DIR%" mkdir "%DIGITALKNOB_DIR%"
+if NOT exist "%DKDOWNLOAD_DIR%" mkdir "%DKDOWNLOAD_DIR%"
 
-cd "%DIGITALKNOB%"
-rmdir /s "%DKPATH%"
-rmdir /s "%DKDOWNLOAD%"
+cd "%DIGITALKNOB_DIR%"
+rmdir /s "%DKBRANCH_DIR%"
+rmdir /s "%DKDOWNLOAD_DIR%"
 
 :checkGit
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if NOT exist "%GIT%" (
 	ECHO "installing git"
-	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
+	%download% %GIT_DL% "%DKDOWNLOAD_DIR%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
+	"%DKDOWNLOAD_DIR%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 )
 
 :gitupdate
-if NOT exist "%DKPATH%\.git" (
-	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+if NOT exist "%DKBRANCH_DIR%\.git" (
+	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 )
 if NOT "%ERRORLEVEL%" == "0" goto error
-cd "%DKPATH%"
+cd "%DKBRANCH_DIR%"
 "%GIT%" pull --all
 "%GIT%" checkout -- .
 if NOT "%ERRORLEVEL%" == "0" goto error
@@ -66,14 +67,14 @@ set TYPE="All"
 
 :deleteCache
 echo Deleteing CMake cache . . .
-cd "%DIGITALKNOB%"
+cd "%DIGITALKNOB_DIR%"
 for /r %%i in (CMakeCache.*) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 echo Deleteing .tmp files . . .
-cd "%DIGITALKNOB%"
+cd "%DIGITALKNOB_DIR%"
 for /r %%i in (*.tmp) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 for /r %%i in (*.TMP) do del "%%i"
@@ -86,9 +87,9 @@ if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program 
 if NOT exist "%CMAKE_EXE%" (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
-	%download% %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+	%download% %CMAKE_DL% "%DKDOWNLOAD_DIR%\cmake-3.21.1-windows-i386.msi"
 	if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+	"%DKDOWNLOAD_DIR%\cmake-3.21.1-windows-i386.msi"
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"
@@ -104,9 +105,9 @@ if NOT exist "%MSBUILD%" (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	
-	%download% %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
+	%download% %MSBUILD_DL% "%DKDOWNLOAD_DIR%\vs_Community.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\vs_Community.exe"
+	"%DKDOWNLOAD_DIR%\vs_Community.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -116,7 +117,7 @@ if NOT exist "%MSBUILD%" (
 
 :build
 echo ****** BUILDING %APP% - %OS% ******
-set "APP_PATH=%DKPATH%\DKApps\%APP%"
+set "APP_PATH=%DKBRANCH_DIR%\DKApps\%APP%"
 ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error

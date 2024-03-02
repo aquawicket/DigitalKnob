@@ -6,7 +6,7 @@
 
 
 dk_set				(PYTHON_FOLDER python-2.7.18)
-dk_set				(PYTHON ${3RDPARTY}/${PYTHON_FOLDER})
+dk_set				(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
 APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 WIN_HOST_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
@@ -21,13 +21,13 @@ UNIX_HOST_dk_set	(PYTHON_APP python)
 if(WIN_HOST)
 	dk_makeDirectory(${PYTHON})
 	if(NOT EXISTS ${PYTHON_APP})
-		dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18.msi)
+		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18.msi)
 		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
-		#dk_executeProcess(${DKDOWNLOAD}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})
+		#dk_executeProcess(${DKDOWNLOAD_DIR}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})
 		
 		#NOTE:	TargetDir requires the path to use backslashes, yet I cannot figure out how to send this command
 		#		from cmake successfully. So, the command is placed in 'python/install.cmd' and called instead.
-		dk_executeProcess(${DKIMPORTS}/python/install.cmd)
+		dk_executeProcess(${DKIMPORTS_DIR}/python/install.cmd)
 		dk_setEnv("PATH" "${PYTHON}") # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 	endif()
 	if(EXISTS ${PYTHON_APP})
@@ -38,8 +38,8 @@ if(WIN_HOST)
 	endif()
 endif()
 if(MAC AND NOT EXISTS "/Applications/Python\ 2.7")
-	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg)
-	dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg -target /)
+	dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
+	dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
 endif()
 if(LINUX AND NOT EXISTS ${PYTHON_APP}) #FIXME
 	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
