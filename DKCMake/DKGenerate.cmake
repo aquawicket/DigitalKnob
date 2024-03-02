@@ -43,7 +43,7 @@ set(APP_NAME ${APP_NAME}_APP)
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
-	include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
+	#include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 	PROJECT(${APP_NAME})
 	dk_set(DKAPP ON)
 endif()

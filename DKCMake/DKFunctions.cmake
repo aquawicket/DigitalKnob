@@ -4354,6 +4354,7 @@ endfunction()
 function(dk_importGit url) #branch #id #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
+	include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	DKASSERT(GIT_EXE)
 	
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
@@ -4665,6 +4666,10 @@ function(dk_import url)
 		### .git
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
+			
+			include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+			DKASSERT(GIT_EXE)
+			
 			if(NOT EXISTS ${${plugin_var}}/.git)
 				dk_set(CURRENT_DIR ${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})
 				if(EXISTS ${${plugin_var}})
@@ -4977,6 +4982,10 @@ endfunction()
 #
 function(dk_getGitBranchName url RESULT)
 	DKDEBUGFUNC(${ARGV})
+	
+	include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+	DKASSERT(GIT_EXE)
+			
 	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)
 	set(${RESULT} ${output} PARENT_SCOPE)
 endfunction()	

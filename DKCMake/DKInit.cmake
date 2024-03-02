@@ -288,31 +288,3 @@ if(${DK_BINARY_OSARCH} MATCHES 	"raspberry_arm64")
 	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
 	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
 endif()
-
-# win_x86
-if(${DK_BINARY_OSARCH} MATCHES "win_x86")
-	set(MSYS2							"${DK3RDPARTY_DIR}/msys2-x86_64-20231026"								CACHE INTERNAL "" FORCE)
-	set(MSYS2_GENERATOR					"MSYS Makefiles"														CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"${MSYS2}/mingw32/bin/gcc.exe"											CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"${MSYS2}/mingw32/bin/g++.exe"											CACHE INTERNAL "" FORCE)
-	set(MAKE_PROGRAM					"${MSYS2}/mingw32/bin/make.exe"											CACHE INTERNAL "" FORCE)
-	
-	set(CMAKE_GENERATOR 				"${MSYS2_GENERATOR}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_MAKE_PROGRAM 				"${MAKE_PROGRAM}" 														CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()
-
-# win_x86_64
-if(${DK_BINARY_OSARCH} MATCHES "win_x86_64")
-	set(MSYS2							"${DK3RDPARTY_DIR}/msys2-x86_64-20231026"								CACHE INTERNAL "" FORCE)
-	set(MSYS2_GENERATOR					"MSYS Makefiles"														CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"${MSYS2}/mingw64/bin/gcc.exe"											CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"${MSYS2}/mingw64/bin/g++.exe"											CACHE INTERNAL "" FORCE)
-	set(MAKE_PROGRAM					"${MSYS2}/mingw64/bin/make.exe"											CACHE INTERNAL "" FORCE)
-	
-	set(CMAKE_GENERATOR 				"${MSYS2_GENERATOR}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_MAKE_PROGRAM 				"${MAKE_PROGRAM}" 														CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()

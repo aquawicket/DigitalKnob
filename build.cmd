@@ -438,29 +438,14 @@ goto:eof
     set COMPILER=MINGW32
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
-                
-    ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
-    echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
                 
     ::call:validate_cmake
     call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
     echo CMAKE_EXE = %CMAKE_EXE%
                 
-    ::call:validate_gcc
-    call:cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
-    echo GCC_C_COMPILER = %GCC_C_COMPILER%
-    echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
-    call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
-    call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
-                
-    ::call:validate_make
-    call:cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
-    echo MAKE_PROGRAM = %MAKE_PROGRAM%
-                
-    call:add_cmake_arg -G %MSYS2_GENERATOR%
+    call:add_cmake_arg -G MSYS Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW32
                 
     echo.
@@ -484,31 +469,15 @@ goto:eof
     set COMPILER=MINGW64
                 
     ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
-                
-    ::call:validate_msys2
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
-    echo MSYS2 = %MSYS2%
-    echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+	echo MSYS2 = %MSYS2%
                 
     ::call:validate_cmake
     call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
     echo CMAKE_EXE = %CMAKE_EXE%
                 
-    ::call:validate_gcc
-    call:cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
-    echo GCC_C_COMPILER = %GCC_C_COMPILER%
-    echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
-    call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
-    call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
-                
-    ::call:validate_make
-    call:cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
-    echo MAKE_PROGRAM = %MAKE_PROGRAM%
-                
-    call:add_cmake_arg -G %MSYS2_GENERATOR%
+    call:add_cmake_arg -G MSYS Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW64
-	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
                 
     echo.
     echo ****** CMAKE COMMAND ******
@@ -1236,7 +1205,6 @@ goto:eof
     goto:eof
 
     :with_return_values
-		echo 
         "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
         if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%

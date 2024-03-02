@@ -309,9 +309,3 @@ dk_load(DKVariables)
 #dk_load(dk_importVariables)
 include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)
 #dk_load(dk_findFiles)
-
-
-##### Load 3rdParty Tools #################
-#dk_depend(cmake)
-#dk_depend(git)
-#dk_depend(msys2)

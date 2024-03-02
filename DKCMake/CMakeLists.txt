@@ -1,5 +1,4 @@
 include_guard()
-
 ### CMakeLists.txt for DKCMake ###
 ###
 ### 	source_path = thisDirectory
@@ -46,12 +45,6 @@ include_guard()
 ###
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
-
-#Load all cmake flags prior to calling PROJECT()
-#get_filename_component(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#include(${DKCMAKE_DIR}/DKInit.cmake)
-
-
 message(STATUS "##############################################################")
 message(STATUS "################# DigitalKnob CMakeLists.txt #################")
 message(STATUS "##############################################################")
@@ -67,12 +60,17 @@ include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
+#Load all cmake flags prior to calling PROJECT()
+include(${CMAKE_SOURCE_DIR}/DK.cmake)
+include(${DKCMAKE_DIR}/DKInit.cmake)
+include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
-
-
-
 include(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)
+
+
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+
+
 
