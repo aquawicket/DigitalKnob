@@ -1,8 +1,8 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
-::set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-::set "DKPATH=%DIGITALKNOB%\DK"
+::set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+::set "DKPATH=%DIGITALKNOB_DIR%\DK"
 ::set "EXECUTABLE=%DKPATH%\DKApps\DKBuilder\win_x86\Release\DKBuilder.exe"
 
 

@@ -91,34 +91,34 @@ function DKGit_PullBranch(branch){
 
 function DKGit_GitUpdate() {
     console.log("Git Update DigitalKnob...\n")
-	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB+"DK")
+	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB_DIR+"DK")
 	DKGit_PullBranch("Development")
 	
     //Multipe user folders
-	CPP_DKFile_ChDir(DIGITALKNOB)
-    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	CPP_DKFile_ChDir(DIGITALKNOB_DIR)
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
     if (contents) {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
 			//Look for text files that contain [MYGIT] in them. The rest of the line is the repository address
-            if (CPP_DKFile_IsDirectory(DIGITALKNOB+files[i]))
+            if (CPP_DKFile_IsDirectory(DIGITALKNOB_DIR+files[i]))
                 continue
 			if(files[i].indexOf(".txt") <= 1)
 				continue
-            var url = CPP_DKFile_GetSetting(DIGITALKNOB+files[i], "[MYGIT]")
+            var url = CPP_DKFile_GetSetting(DIGITALKNOB_DIR+files[i], "[MYGIT]")
             if (url) {
 				var folder = files[i].replace(".txt", "")
-				DKGit_Clone(url, DIGITALKNOB+folder)
+				DKGit_Clone(url, DIGITALKNOB_DIR+folder)
 				DKGit_PullBranch("Development")
             }
         }
     }
 
 	if (CPP_DK_GetOS() != "Windows"){
-		if (CPP_DKFile_Exists(DIGITALKNOB+"/Development/build.sh"))
-			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/Development/build.sh")
-		if (CPP_DKFile_Exists(DIGITALKNOB+"/Development/DKCMake/dev/dkbuild.sh"))
-			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/Development/DKCMake/dev/dkbuild.sh")
+		if (CPP_DKFile_Exists(DIGITALKNOB_DIR+"/Development/build.sh"))
+			CPP_DK_Execute("chmod +x "+DIGITALKNOB_DIR+"/Development/build.sh")
+		if (CPP_DKFile_Exists(DIGITALKNOB_DIR+"/Development/DKCMake/dev/dkbuild.sh"))
+			CPP_DK_Execute("chmod +x "+DIGITALKNOB_DIR+"/Development/DKCMake/dev/dkbuild.sh")
 	}
 	
     if (CPP_DK_Available("DKAudio"))
@@ -129,14 +129,14 @@ function DKGit_GitUpdate() {
 
 function DKGit_GitCommit() {
     //Multipe folders in digitalknob/
-    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
     if (contents) {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
-			if(CPP_DKFile_Exists(DIGITALKNOB + files[i] + "/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB_DIR + files[i] + "/.git")){
 				console.log("\n\n")
                 console.log("### Git Commit " + files[i] + "... \n")
-                CPP_DKFile_ChDir(DIGITALKNOB + files[i])
+                CPP_DKFile_ChDir(DIGITALKNOB_DIR + files[i])
                 //CPP_DK_Execute(GIT + " init")
 				DKGit_SetCredentials()
 				const branch = DKGit_GetCurrentBranch()
@@ -231,11 +231,11 @@ function DKGit_DeleteLocalBranch(branch){
 // the total number of "different" commits between the current branch and server branch
 function DKGit_CheckForDiff(){
 	//console.log("DKGit_CheckForDiff()")
-	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
-				CPP_DKFile_ChDir(DIGITALKNOB + files[i])
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKApps")){
+				CPP_DKFile_ChDir(DIGITALKNOB_DIR + files[i])
 				console.log("Checking "+files[i]+" . . . ")
 				
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
@@ -258,11 +258,11 @@ function DKGit_CheckForDiff(){
 
 function DKGit_DiffCount(){
 	console.log("DKGit_DiffCount()")
-	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR)
 	var files = contents.split(",")
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
-			CPP_DKFile_ChDir(DIGITALKNOB + "/" + files[i])
+		if(CPP_DKFile_Exists(DIGITALKNOB_DIR+files[i]+"/DKApps")){
+			CPP_DKFile_ChDir(DIGITALKNOB_DIR + "/" + files[i])
 			const default_branch = DKGit_GetDefaultBranch()
 			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/"+default_branch+" --count", "rt")
 			//const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count", "rt")

@@ -3,27 +3,22 @@
 # to run this script requires privledges 
 # > chmod 777 build.sh
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	DIGITALKNOB="/home/$USER/digitalknob"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	DIGITALKNOB="/Users/$USER/digitalknob"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
+### set DIGITALKNOB_DIR
+if [[ -n "$USERPROFILE" ]]; then
+	DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+	DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
+	DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 else
-    echo "UNKNOWN OS TYPE ($OSTYPE)"
+	DIGITALKNOB_DIR="$HOME/digitalknob"
 fi
+mkdir -p $DIGITALKNOB_DIR
+print_var DIGITALKNOB_DIR
 
 
 PACKAGE_NAME="com.digitalknob.dk"
 #if not "%1"=="" set PACKAGE_NAME=%~1
 APP_ROOT="$PWD"
-ANDROID_HOME="$DIGITALKNOB/Development/3rdParty/android-sdk"
+ANDROID_HOME="$DIGITALKNOB_DIR/Development/3rdParty/android-sdk"
 
 
 if [[ -f "$ANDROID_HOME" ]]; then

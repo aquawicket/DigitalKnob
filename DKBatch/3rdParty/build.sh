@@ -12,23 +12,21 @@ echo "ostype =   $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	DIGITALKNOB="/home/$USER/digitalknob"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	DIGITALKNOB="/Users/$USER/digitalknob"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
+### set DIGITALKNOB_DIR
+if [[ -n "$USERPROFILE" ]]; then
+	DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+	DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
+	DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 else
-    echo "UNKNOWN OS TYPE ($OSTYPE)"
+	DIGITALKNOB_DIR="$HOME/digitalknob"
 fi
-DKPATH="$DIGITALKNOB/DK"
-DKCMAKE_DIR="$DIGITALKNOB/Development/DKCMake"
+mkdir -p $DIGITALKNOB_DIR
+print_var DIGITALKNOB_DIR
+
+
+DKBRANCH=Development
+DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
+DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
 
 sudo echo
 
@@ -55,10 +53,10 @@ while :
 				else
 					sudo apt-get -y install git
 				fi
-				if [[ ! -d "$DKPATH/.git" ]]; then
-					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+				if [[ ! -d "$DKBRANCH_DIR/.git" ]]; then
+					git clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 				fi
-				cd $DKPATH
+				cd $DKBRANCH_DIR
 				
 				#git checkout -- .
 				#git pull origin master
@@ -66,7 +64,7 @@ while :
 				git checkout Development
 				git pull
 				
-				chmod +x $DKPATH/build.sh
+				chmod +x $DKBRANCH_DIR/build.sh
 				chmod +x $DKCMAKE_DIR/dkbuild.sh
 				;;
 			"Git Commit")
@@ -81,7 +79,7 @@ while :
 				else
 					sudo apt-get -y install git
 				fi
-				cd $DKPATH
+				cd $DKBRANCH_DIR
 				git commit -a -m "git commit"
 				git push
 				;;
@@ -159,7 +157,7 @@ while :
 		REPLY=
 	done
 
-	cd $DIGITALKNOB
+	cd $DIGITALKNOB_DIR
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
@@ -176,8 +174,8 @@ while :
 		#echo "CLANG_PATH = $CLANG_PATH"
 		#echo "CLANGPP_PATH = $CLANGPP_PATH"
 		#brew install cmake		
-		mkdir $DKPATH/DKApps/$APP/$OS
-		cd $DKPATH/DKApps/$APP/$OS
+		mkdir $DKAPPS_DIR/$APP/$OS
+		cd $DKAPPS_DIR/$APP/$OS
 		cmake -G "Xcode" -DMAC_X86_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE_DIR
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
@@ -192,18 +190,18 @@ while :
 		sudo apt-get -y install gcc
 		sudo apt-get -y install g++
 		
-		mkdir $DKPATH/DKApps/$APP/$OS
-		mkdir $DKPATH/DKApps/$APP/$OS/Debug
-		cd $DKPATH/DKApps/$APP/$OS/Debug
+		mkdir $DKAPPS_DIR/$APP/$OS
+		mkdir $DKAPPS_DIR/$APP/$OS/Debug
+		cd $DKAPPS_DIR/$APP/$OS/Debug
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE_DIR
 		make $APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+		chmod +x $DKAPPS_DIR/$APP/$OS/Debug/$APP
 		
-		mkdir $DKPATH/DKApps/$APP/$OS/Release
-		cd $DKPATH/DKApps/$APP/$OS/Release
+		mkdir $DKAPPS_DIR/$APP/$OS/Release
+		cd $DKAPPS_DIR/$APP/$OS/Release
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE_DIR
 		make $APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+		chmod +x $DKAPPS_DIR/$APP/$OS/Release/$APP
 	fi
 
     unset APP

@@ -27,8 +27,8 @@
 
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "DIGITALKNOB=C:/Users/%USERNAME%/digitalknob"
-set "DKCMAKE_DIR=%DIGITALKNOB%/Development/DKCMake"
+set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
 if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
 if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
 if not exist %CMAKE_EXE% ( ERROR "Could not locate CMAKE_EXE" )

@@ -24,8 +24,8 @@ if(NOT EXISTS ${ANDROID_SDK})
 	
 	# https://developer.android.com/tools/variables#envar
 	dk_setEnv("ANDROID_HOME" ${ANDROID_SDK})
-	dk_setEnv("ANDROID_USER_HOME" ${DIGITALKNOB}/.android)
-	dk_setEnv("ANDROID_SDK_HOME" ${DIGITALKNOB}/.android)
+	dk_setEnv("ANDROID_USER_HOME" ${DIGITALKNOB_DIR}/.android)
+	dk_setEnv("ANDROID_SDK_HOME" ${DIGITALKNOB_DIR}/.android)
 	dk_setEnv("VS_AndroidHome" ${ANDROID_SDK})
 
 	# FIXME:  more work to be done on killing tasks

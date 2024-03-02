@@ -45,8 +45,8 @@ fi
 red="\033[31m"
 
 
-DIGITALKNOB=/c/Users/aquawicket/digitalknob
-DKCMAKE_DIR="$DIGITALKNOB/Development/DKCMake"
+DIGITALKNOB_DIR=/c/Users/aquawicket/digitalknob
+DKCMAKE_DIR="$DIGITALKNOB_DIR/Development/DKCMake"
 CMAKE_EXE=$(which cmake)
 #echo "CMAKE_EXE = $CMAKE_EXE"
 

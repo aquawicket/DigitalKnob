@@ -957,7 +957,7 @@ char            fullpath[_MAX_PATH];
     } else if (var_DISPLAY_PROG == L_DISPLAY_WITH_OPEN) {
         snprintf(buffer, L_BUF_SIZE, "open %s &", tempname);
     }
-    //ignore = system(buffer);    ##CHANGED BY DIGITALKNOB
+    //ignore = system(buffer);    ##CHANGED BY DigitalKnob
 
 #else  /* _WIN32 */
 

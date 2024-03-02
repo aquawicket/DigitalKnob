@@ -33,26 +33,26 @@ echo Repository: %repository%
 echo     Branch: %branch%
 echo Merging To: %destination%
 
-
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\DK"
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if NOT exist "%GIT%" (
+set DKBRANCH=Development
+set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+if exist "C:\Program Files\Git\bin\git.exe" set "GIT_EXE=C:\Program Files\Git\bin\git.exe"
+if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT_EXE=C:\Program Files (x86)\Git\bin\git.exe"
+if NOT exist "%GIT_EXE%" (
 	ERROR "Could not find git"
 )
-cd %DKPATH%
+cd %DKBRANCH_DIR%
 pause
 echo Merging %branch% into %destination% and pushing to remote
-"%GIT%" checkout %branch%
+"%GIT_EXE%" checkout %branch%
 pause
-"%GIT%" pull
+"%GIT_EXE%" pull
 pause
-"%GIT%" checkout %destination%
+"%GIT_EXE%" checkout %destination%
 pause
-"%GIT%" pull origin %destination%
+"%GIT_EXE%" pull origin %destination%
 pause
-"%GIT%" merge --no-ff --no-commit %branch%
+"%GIT_EXE%" merge --no-ff --no-commit %branch%
 pause
 
 if NOT "%ERRORLEVEL%" == "0" (
@@ -67,7 +67,7 @@ goto eof:
 :conflicts
 echo You will need to fix any existing conflicts to complete the merge.
 pause
-CPP_DK_Execute(GIT + " git status")
+CPP_DK_Execute(GIT_EXE + " git status")
 
 echo AFTER ALL CONFLICTS ARE RESOLVED, CONTINUE.
 pause 
@@ -78,18 +78,18 @@ goto :resolved
 :resolved
 :: push merge to %destination%
 echo Pushing merge to %destination%
-"%GIT%" commit -a -m "Merge %branch% Branch in to %destination%"
+"%GIT_EXE%" commit -a -m "Merge %branch% Branch in to %destination%"
 if NOT "%ERRORLEVEL%" == "0" (
 	echo THERE WAN AN ERROR COMMITING.
 	goto :conflicts
 ) 
-"%GIT%" push origin %destination%
+"%GIT_EXE%" push origin %destination%
 
 :: Bring branch up to date with %destination%
 echo Bringing %branch% up to date with %destination%
-"%GIT%" checkout %branch%
-"%GIT%" merge %destination%
-"%GIT%" push
+"%GIT_EXE%" checkout %branch%
+"%GIT_EXE%" merge %destination%
+"%GIT_EXE%" push
  
 echo THE MERGE IS COMPLETE.
 %DKEND% 

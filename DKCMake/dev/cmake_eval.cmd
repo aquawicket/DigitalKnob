@@ -41,8 +41,8 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	if [%1] == [] 				echo "ERROR: cmake_eval() parameter1 is invalid" & goto:eof
 	
 	set "DKBRANCH=Development"
-	set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-	set "DKCMAKE_DIR=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
+	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%\DKCMake"
 	
 	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"

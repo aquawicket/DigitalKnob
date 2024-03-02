@@ -3,7 +3,7 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 set "DKBRANCH=Development"
-set "DIGITALKNOB_DIR=C:\Users\%USERNAME%\digitalknob"
+set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
 set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
@@ -24,32 +24,32 @@ rmdir /s "%DKBRANCH_DIR%"
 rmdir /s "%DKDOWNLOAD_DIR%"
 
 :checkGit
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if NOT exist "%GIT%" (
+if exist "C:\Program Files\Git\bin\git.exe" set "GIT_EXE=C:\Program Files\Git\bin\git.exe"
+if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT_EXE=C:\Program Files (x86)\Git\bin\git.exe"
+if NOT exist "%GIT_EXE%" (
 	ECHO "installing git"
 	%download% %GIT_DL% "%DKDOWNLOAD_DIR%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD_DIR%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+	if exist "C:\Program Files\Git\bin\git.exe" set "GIT_EXE=C:\Program Files\Git\bin\git.exe"
+	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT_EXE=C:\Program Files (x86)\Git\bin\git.exe"
 )
 
 :gitupdate
 if NOT exist "%DKBRANCH_DIR%\.git" (
-	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
+	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 )
 if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKBRANCH_DIR%"
-"%GIT%" pull --all
-"%GIT%" checkout -- .
+"%GIT_EXE%" pull --all
+"%GIT_EXE%" checkout -- .
 if NOT "%ERRORLEVEL%" == "0" goto error
-"%GIT%" checkout Development
+"%GIT_EXE%" checkout Development
 if NOT "%ERRORLEVEL%" == "0" (
 	echo Remote has no Development branch. Creating...
-	"%GIT%" checkout -b Development main
-	"%GIT%" push --set-upstream origin Development
+	"%GIT_EXE%" checkout -b Development main
+	"%GIT_EXE%" push --set-upstream origin Development
 )
 
 

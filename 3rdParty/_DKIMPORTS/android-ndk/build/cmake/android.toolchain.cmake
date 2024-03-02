@@ -525,7 +525,7 @@ if(ANDROID_STL MATCHES "^c\\+\\+_")
   endif()
 endif()
 
-#########################   ALTERED BY DIGITALKNOB ##############################
+#########################   ALTERED BY DigitalKnob ##############################
 #set(CMAKE_C_STANDARD_LIBRARIES_INIT "-latomic -lm")
 set(CMAKE_C_STANDARD_LIBRARIES_INIT "-lm")
 #################################################################################

@@ -105,22 +105,22 @@ function SvnMenu_GitUpdate()
 	}
 	
 	SVN("Git Update DigitalKnob...\n");
-	DK_Execute(SVN +" clone https://github.com/aquawicket/DigitalKnob.git "+DIGITALKNOB+"/DK");
-	DKFile_ChDir(DIGITALKNOB+"/DK");
+	DK_Execute(SVN +" clone https://github.com/aquawicket/DigitalKnob.git "+DIGITALKNOB_DIR+"/DK");
+	DKFile_ChDir(DIGITALKNOB_DIR+"/DK");
 	DK_Execute(SVN +" checkout -- .");
 	DK_Execute(SVN +" pull origin master");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DIGITALKNOB);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //SVN("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DIGITALKNOB);
+		DKFile_ChDir(DIGITALKNOB_DIR);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYSVN]");
 		if(url){ //SVN("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //SVN("folder = "+folder+"\n");
 			SVN("Git Update "+folder+"...\n");
-			DK_Execute(SVN +" clone "+url+" "+DIGITALKNOB+"/"+folder);
+			DK_Execute(SVN +" clone "+url+" "+DIGITALKNOB_DIR+"/"+folder);
 			DK_Execute(SVN +" checkout -- .");
 			DK_Execute(SVN +" pull origin master");
 		}
@@ -142,7 +142,7 @@ function SvnMenu_GitCommit()
 	}
 	
 	SVN("Git Commit DigitalKnob...\n");
-	DKFile_ChDir(DIGITALKNOB+"/DK");
+	DKFile_ChDir(DIGITALKNOB_DIR+"/DK");
 	DK_Execute(SVN +" init");
 	DK_Execute(SVN +" config user.name \"dkuser\"");
 	DK_Execute(SVN +" config user.email \"dkuser@TODO.com\"");
@@ -151,16 +151,16 @@ function SvnMenu_GitCommit()
 	DK_Execute(SVN +" push");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DIGITALKNOB);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB_DIR);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //SVN("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DIGITALKNOB);
+		DKFile_ChDir(DIGITALKNOB_DIR);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYSVN]");
 		if(url){ //SVN("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //SVN("folder = "+folder+"\n");
 			SVN("Git Commit "+folder+"...\n");
-			DKFile_ChDir(DIGITALKNOB+"/"+folder);
+			DKFile_ChDir(DIGITALKNOB_DIR+"/"+folder);
 			DK_Execute(SVN +" init");
 			DK_Execute(SVN +" config user.name \"dkuser\"");
 			DK_Execute(SVN +" config user.email \"dkuser@TODO.com\"");

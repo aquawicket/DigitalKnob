@@ -16,6 +16,7 @@ set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 ::	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 ::	set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
 ::	echo DKBRANCH = %DKBRANCH%
+::	echo DKBRANCH_DIR = %DKBRANCH_DIR%
 ::goto:eof
 
 ::call::validate_branch

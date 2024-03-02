@@ -52,9 +52,9 @@ include_guard()
 #include(${DKCMAKE_DIR}/DKInit.cmake)
 
 
-message(STATUS "########################################")
-message(STATUS "###### DIGITALKNOB CMakeLists.txt ######")
-message(STATUS "########################################")
+message(STATUS "####################################################")
+message(STATUS "############ DigitalKnob CMakeLists.txt ############")
+message(STATUS "####################################################")
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0054 NEW)

@@ -9,26 +9,19 @@ echo "ostype =   $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	DIGITALKNOB="/home/$USER/digitalknob"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	DIGITALKNOB="/Users/$USER/digitalknob"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: freebsd builder incomplete"
-elif [[ "$OSTYPE" == "linux-android" ]]; then
-	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
+### set DIGITALKNOB_DIR
+if [[ -n "$USERPROFILE" ]]; then
+	DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+	DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
+	DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 else
-    echo "UNKNOWN OS TYPE ($OSTYPE)"
+	DIGITALKNOB_DIR="$HOME/digitalknob"
 fi
+mkdir -p $DIGITALKNOB_DIR
+print_var DIGITALKNOB_DIR
 
 BRANCH="Development"
-SDKMANAGER="$DIGITALKNOB/$BRANCH/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager"
+SDKMANAGER="$DIGITALKNOB_DIR/$BRANCH/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager"
 yes | $SDKMANAGER --licenses
 #$SDKMANAGER --licenses
  

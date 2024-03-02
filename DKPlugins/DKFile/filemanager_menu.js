@@ -216,7 +216,7 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
     DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
         var git = GIT;
         //from DKBuild.js
-        var dk_path = DIGITALKNOB;
+        var dk_path = DIGITALKNOB_DIR;
         //from DKBuild.js
         //console.log("dk.solutionmenu.GitAdd(): git = "+git+"\n");
 
@@ -240,9 +240,9 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
 
 dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress() {
     DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
-        //for DIGITALKNOB
+        //for DIGITALKNOB_DIR
 
-        var dk_path = DIGITALKNOB;
+        var dk_path = DIGITALKNOB_DIR;
         //from DKBuild.js
         var upx = dk_path + "/Development/3rdParty/upx-3.95-win64/upx.exe";
         console.log("upx = " + upx + "\n");

@@ -396,7 +396,7 @@ l_int32  ignore;
     snprintf(buf, L_BUF_SIZE, "wgnuplot %s", cmdname);
 #endif  /* _WIN32 */
 
-    //ignore = system(buf);  /* gnuplot || wgnuplot */     ##CHANGED BY DIGITALKNOB
+    //ignore = system(buf);  /* gnuplot || wgnuplot */     ##CHANGED BY DigitalKnob
     LEPT_FREE(cmdname);
     return 0;
 }

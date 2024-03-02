@@ -100,21 +100,21 @@ if (!DUKTAPE) {
             search = search.substring(0, n);
             console.log(search + "");
         }
-        DIGITALKNOB = search;
-        if (!CPP_DKFile_Exists(DIGITALKNOB)) {
+        DIGITALKNOB_DIR = search;
+        if (!CPP_DKFile_Exists(DIGITALKNOB_DIR)) {
             return error("Could not find search");
         }
-        var temp = CPP_DKFile_DirectoryContents(DIGITALKNOB);
+        var temp = CPP_DKFile_DirectoryContents(DIGITALKNOB_DIR);
         if (!temp) {
             console.log("dk.debug.PushDKFiles() variable temp is invalid");
             return false;
         }
         var folders = temp.split(",");
         var plugin_folders = [];
-        plugin_folders.push(DIGITALKNOB + "/Development/DKPlugins");
+        plugin_folders.push(DIGITALKNOB_DIR + "/Development/DKPlugins");
         for (var n = 0; n < folders.length; n++) {
-            if (CPP_DKFile_Exists(DIGITALKNOB + "/" + folders[n] + "/DKPlugins"))
-                plugin_folders.push(DIGITALKNOB + "/" + folders[n] + "/DKPlugins");
+            if (CPP_DKFile_Exists(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins"))
+                plugin_folders.push(DIGITALKNOB_DIR + "/" + folders[n] + "/DKPlugins");
         }
         for (var n = 0; n < plugin_folders.length; n++) {
             plugin_folders[n] = CPP_DKFile_GetAbsolutePath(plugin_folders[n]);

@@ -777,8 +777,8 @@ function validate_git() {
 		install git
 	fi
 	
-	GIT=$(command -v git)
-	print_var GIT
+	GIT_EXE=$(command -v git)
+	print_var GIT_EXE
 }
 
 ###### validate_homebrew ######
@@ -896,7 +896,7 @@ function validate_branch() {
 	DKBRANCH="Development"
 	
 	if file_exists .git; then
-		BRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
+		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [[ "$BRANCH" == "$FOLDER" ]]; then
 			DKBRANCH="$FOLDER"
 		fi
@@ -1037,21 +1037,21 @@ function reset_apps() {
 	if CONFIRM; then return; fi
 	
 	cd $DKAPPS_DIR
-	$GIT clean -f -d
+	$GIT_EXE clean -f -d
 }
 
 function reset_3rdpaty() {
 	if CONFIRM; then return; fi
 	
 	cd $DK3RDPARTY_DIR
-	$GIT clean -f -d
+	$GIT_EXE clean -f -d
 }
 
 function reset_plugins() {
 	if CONFIRM; then return; fi
 	
 	cd $DKPLUGINS_DIR
-	$GIT clean -f -d
+	$GIT_EXE clean -f -d
 }
 
 function reset_all() {
@@ -1098,7 +1098,7 @@ function reset_all() {
 		
 		#should we do a git clean first?
 		#cd %DKBRANCH_DIR%
-		#"%GIT%" clean -f -d
+		#"%GIT_EXE%" clean -f -d
 		
 		cd $DIGITALKNOB_DIR
 		echo ""
@@ -1177,7 +1177,7 @@ function remove_all() {
 		
 		#should we do a git clean first?
 		#cd %DKBRANCH_DIR%
-		#"%GIT%" clean -f -d
+		#"%GIT_EXE%" clean -f -d
 		
 		cd $DIGITALKNOB_DIR
 		echo ""
@@ -1210,18 +1210,18 @@ function git_update() {
 	fi
 
 	if [[ ! -d "$DKBRANCH_DIR/.git" ]]; then
-		dk_call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
+		dk_call $GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	fi
 	dk_call cd $DKBRANCH_DIR
-	dk_call $GIT pull --all
-	dk_call $GIT checkout -- .
-	dk_call $GIT checkout $DKBRANCH
+	dk_call $GIT_EXE pull --all
+	dk_call $GIT_EXE checkout -- .
+	dk_call $GIT_EXE checkout $DKBRANCH
 	if [[ "$?" == "0" ]]; then
 		echo "$DKBRANCH branch selected"
 	else
 	echo "Remote has no $DKBRANCH branch. Creating..."
-		dk_call $GIT checkout -b $DKBRANCH main
-		dk_call $GIT push --set-upstream origin $DKBRANCH
+		dk_call $GIT_EXE checkout -b $DKBRANCH main
+		dk_call $GIT_EXE push --set-upstream origin $DKBRANCH
 	fi
 	dk_call chmod +x $DKBRANCH_DIR/build.sh
 }
@@ -1233,32 +1233,32 @@ function git_commit() {
 	
 	cd $DKBRANCH_DIR
 	
-	STORE=$($GIT config credential.helper)
+	STORE=$($GIT_EXE config credential.helper)
 	print_var STORE
 	if [ -z "$STORE" ]; then
-		$GIT config --global credential.helper store
+		$GIT_EXE config --global credential.helper store
 		echo ""
 		echo "git credential.helper is now set to store"
 		echo ""
 	fi
 	
-	USER_EMAIL=$($GIT config --global user.email)
+	USER_EMAIL=$($GIT_EXE config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
 		echo ""
 		echo "please enter an email address"
 		read input
-		$GIT config --global user.email "$input"
+		$GIT_EXE config --global user.email "$input"
 		echo ""
 		echo "git user.email '$input' saved"
 		echo ""
 	fi
 
-	USER_NAME=$($GIT config --global user.name)
+	USER_NAME=$($GIT_EXE config --global user.name)
 	if [ -z "USER_NAME" ]; then
 		echo ""
 		echo "please enter a username"
 		read input
-		$GIT config --global user.name "$input"
+		$GIT_EXE config --global user.name "$input"
 		echo ""
 		echo "git user.name '$input' saved"
 		echo ""
@@ -1273,8 +1273,8 @@ function git_commit() {
 	echo "git commit \"${message}\""
 	if CONFIRM; then return; fi
 	
-	dk_call $GIT commit -a -m "${message}"
-    dk_call $GIT push
+	dk_call $GIT_EXE commit -a -m "${message}"
+    dk_call $GIT_EXE push
 }
 
 function enter_manually() {

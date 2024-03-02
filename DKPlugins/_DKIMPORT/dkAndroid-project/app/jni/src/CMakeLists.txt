@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.6)
 
-set(DIGITALKNOB C:/Users/Administrator/digitalknob)
-set(DK3RDPARTY_DIR ${DIGITALKNOB}/Development/3rdParty)
-set(DKPLUGINS ${DIGITALKNOB}/Development/DKPlugins)
+set(DIGITALKNOB_DIR C:/Users/Administrator/digitalknob)
+set(DK3RDPARTY_DIR ${DIGITALKNOB_DIR}/Development/3rdParty)
+set(DKPLUGINS_DIR ${DIGITALKNOB_DIR}/Development/DKPlugins)
 
 set(FREETYPE 	${DK3RDPARTY_DIR}/freetype-2.5.5)
 set(SDL 		${DK3RDPARTY_DIR}/sdl-release-2.26.0)

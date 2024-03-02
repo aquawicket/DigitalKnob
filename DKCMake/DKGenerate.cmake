@@ -131,8 +131,8 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif()
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
 	
 	####################### DKPlugins #######################
 	# Libraries in the /DKPlugins folder
@@ -373,7 +373,7 @@ if(WIN_X86)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
@@ -468,7 +468,7 @@ if(WIN_X86)
     #)
 	
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+	#CPP_DK_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_X86)
 	
 	
@@ -510,7 +510,7 @@ if(WIN_X86_64)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
@@ -585,7 +585,7 @@ if(WIN_X86_64)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+	#CPP_DK_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_X86_64)
 
 
@@ -606,27 +606,27 @@ if(MAC)
 	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac)
 		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac/icons.iconset)
-		#dk_executeProcess(sips -z 16 16 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 16 16 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 16 16 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png)
-		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png)
-		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png)
-		#dk_executeProcess(sips -z 64 64 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 64 64 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 64 64 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png)
-		#dk_executeProcess(sips -z 128 128 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 128 128 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 128 128 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png)
-		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png)
-		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png)
-		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png)
-		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png)
-		#dk_executeProcess(sips -z 1024 1024 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(sips -z 1024 1024 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 1024 1024 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png)
-		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/mac/icons.icns ${DK_PROJECT_DIR}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/mac/icons.icns ${DK_PROJECT_DIR}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
 		set(app_ICONS ${DK_PROJECT_DIR}/icons/mac/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
@@ -738,8 +738,8 @@ if(MAC)
 #			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework")){
 #				CPP_DKFile_MkDir(app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks")
 #				CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-#				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac_x86_64/Debug/DKCefChild.app")){
-#					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac_x86_64/Debug/DKCefChild.app", app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
+#				if(CPP_DKFile_Exists(DIGITALKNOB_DIR+"DK/DKPlugins/DKCefChild/mac_x86_64/Debug/DKCefChild.app")){
+#					CPP_DKFile_Copy(DIGITALKNOB_DIR+"DK/DKPlugins/DKCefChild/mac_x86_64/Debug/DKCefChild.app", app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
 #					CPP_DKFile_Rename(app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
 #				}
 #			}

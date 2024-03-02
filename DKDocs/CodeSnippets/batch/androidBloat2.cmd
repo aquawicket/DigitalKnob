@@ -1,8 +1,8 @@
 @echo off
 %dkbatch%
 
-set "DIGITALKNOB=C:\Users\Administrator\digitalknob"
-set "ADB=%DIGITALKNOB%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
+set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
 
 ::set /p Y=Enter adb.exe folder path:    
 ::cd %Y%

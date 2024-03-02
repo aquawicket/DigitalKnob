@@ -25,11 +25,11 @@ include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
-#     dk.filesystem.js - %DIGITALKNOB%/Development/Api/filesystem/filesystem.js
-#    dk.filesystem.cpp - %DIGITALKNOB%/Development/Api/filesystem/filesystem.cpp
-#   DKBatch filesystem - %DIGITALKNOB%/DKBatch/filesystem
-#    DKBash filesystem - %DIGITALKNOB%/DKBash/filesystem
-#   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/DKFileSystem.cmake
+#     dk.filesystem.js - %DIGITALKNOB_DIR%/Development/Api/filesystem/filesystem.js
+#    dk.filesystem.cpp - %DIGITALKNOB_DIR%/Development/Api/filesystem/filesystem.cpp
+#   DKBatch filesystem - %DIGITALKNOB_DIR%/DKBatch/filesystem
+#    DKBash filesystem - %DIGITALKNOB_DIR%/DKBash/filesystem
+#   DKCMake filesystem - %DIGITALKNOB_DIR%/DKCMake/filesystem/DKFileSystem.cmake
 #      javascript FSAA - https://developer.mozilla.org/en-US/docs/Web/API/filesystem
 #       Php filesystem - https://www.php.net/manual/en/book.filesystem.php
 #    NodeJS filesystem - https://nodejs.org/api/fs.html
