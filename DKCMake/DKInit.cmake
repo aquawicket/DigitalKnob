@@ -95,6 +95,7 @@ get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
 message(STATUS "DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 	
 	
+return()
 	
 # android_arm32
 if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
@@ -148,34 +149,12 @@ if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
 	set(CMAKE_CXX_FLAGS 				"${ANDROID_NDK_CXX_FLAGS}" 												CACHE INTERNAL "" FORCE)
 endif()
 
-# emscripten
-if(${DK_BINARY_OS} MATCHES "emscripten")
-	set(EMSDK 							"${DK3RDPARTY_DIR}/emsdk-main" 											CACHE INTERNAL "" FORCE)
-	if(WIN32)
-		set(EMSDK_GENERATOR 			"MinGW Makefiles" 														CACHE INTERNAL "" FORCE)
-	elseif(UNIX)
-		set(EMSDK_GENERATOR 			"Unix Makefiles" 														CACHE INTERNAL "" FORCE)
-	endif()
-	set(EMSDK_TOOLCHAIN_FILE 			"${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" 	CACHE INTERNAL "" FORCE)
-	set(EMSDK_C_COMPILER 				"${EMSDK}/upstream/emscripten/emcc" 									CACHE INTERNAL "" FORCE)
-	set(EMSDK_CXX_COMPILER 				"${EMSDK}/upstream/emscripten/em++" 									CACHE INTERNAL "" FORCE)
-	
-	
-	set(CMAKE_GENERATOR 				"${EMSDK_GENERATOR}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_TOOLCHAIN_FILE 			"${EMSDK_TOOLCHAIN_FILE}" 												CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${EMSDK_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${EMSDK_CXX_COMPILER}" 												CACHE INTERNAL "" FORCE)
-endif()
-
 # ios_arm32
 if(${DK_BINARY_OSARCH} MATCHES "ios_arm32")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
-	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 										CACHE INTERNAL "" FORCE)
 	set(IOS_PLATFORM 					"OS"																	CACHE INTERNAL "" FORCE)
 	set(IOS_SDK_VERSION					"15.0"																	CACHE INTERNAL "" FORCE)
 	set(IOS_DEPLOYMENT_TARGET			"13.0"																	CACHE INTERNAL "" FORCE)
 		
-	set(CMAKE_GENERATOR 				"${XCODE_GENERATOR}" 													CACHE INTERNAL "" FORCE)
 	set(CMAKE_TOOLCHAIN_FILE 			"${IOS_TOOLCHAIN_FILE}" 												CACHE INTERNAL "" FORCE)
 	set(PLATFORM 						"${IOS_PLATFORM}"														CACHE INTERNAL "" FORCE)
 	set(SDK_VERSION						"${IOS_SDK_VERSION}"													CACHE INTERNAL "" FORCE)
@@ -184,13 +163,11 @@ endif()
 
 # ios_arm64
 if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
-	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 										CACHE INTERNAL "" FORCE)
+	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 									CACHE INTERNAL "" FORCE)
 	set(IOS_PLATFORM 					"OS64"																	CACHE INTERNAL "" FORCE)
 	set(IOS_SDK_VERSION					"15.0"																	CACHE INTERNAL "" FORCE)
 	set(IOS_DEPLOYMENT_TARGET			"13.0"																	CACHE INTERNAL "" FORCE)
 		
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
 	set(CMAKE_TOOLCHAIN_FILE 			"${IOS_TOOLCHAIN_FILE}" 												CACHE INTERNAL "" FORCE)
 	set(PLATFORM 						"${IOS_PLATFORM}"														CACHE INTERNAL "" FORCE)
 	set(SDK_VERSION						"${IOS_SDK_VERSION}"													CACHE INTERNAL "" FORCE)
@@ -199,7 +176,6 @@ endif()
 
 # iossim_x86
 if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
 	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 										CACHE INTERNAL "" FORCE)
 	set(IOS_PLATFORM 					"SIMULATOR"																CACHE INTERNAL "" FORCE)
 	set(IOS_SDK_VERSION					"15.0"																	CACHE INTERNAL "" FORCE)
@@ -213,9 +189,8 @@ if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
 endif()
 
 # iossim_x86_64
-if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
-	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 										CACHE INTERNAL "" FORCE)
+if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")	
+	set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake" 									CACHE INTERNAL "" FORCE)
 	set(IOS_PLATFORM 					"SIMULATOR64"															CACHE INTERNAL "" FORCE)
 	set(IOS_SDK_VERSION					"15.0"																	CACHE INTERNAL "" FORCE)
 	set(IOS_DEPLOYMENT_TARGET			"13.0"																	CACHE INTERNAL "" FORCE)
@@ -227,64 +202,16 @@ if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")
 	set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}"												CACHE INTERNAL "" FORCE)
 endif()
 
-# linux_x86
-if(${DK_BINARY_OSARCH} MATCHES "linux_x86")
-	set(GENERATOR						"Unix Makefiles"	 													CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"/usr/bin/gcc"	 														CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"/usr/bin/g++"	 														CACHE INTERNAL "" FORCE)
-
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()
-
-# linux_x86_64
-if(${DK_BINARY_OSARCH} MATCHES "linux_x86")
-	set(GENERATOR						"Unix Makefiles"	 													CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"/usr/bin/gcc"	 														CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"/usr/bin/g++"	 														CACHE INTERNAL "" FORCE)
-
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()
 
 # mac_x86
 if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
-
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
 	set(CMAKE_OSX_ARCHITECTURES			"i686"																	CACHE INTERNAL "" FORCE)
 	set(MAC_X86							"ON"																	CACHE INTERNAL "" FORCE)
 endif()
 
 # mac_x86_64
 if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86_64")
-	set(GENERATOR						"Xcode"	 																CACHE INTERNAL "" FORCE)
-
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
 	set(CMAKE_OSX_ARCHITECTURES			"x86_64"																CACHE INTERNAL "" FORCE)
 	set(MAC_X86_64						"ON"																	CACHE INTERNAL "" FORCE)
 endif()
 
-# raspberry_arm32
-if(${DK_BINARY_OSARCH} MATCHES 	"raspberry_arm32")
-	set(GENERATOR						"Unix Makefiles"	 													CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"/usr/bin/gcc"	 														CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"/usr/bin/g++"	 														CACHE INTERNAL "" FORCE)
-	
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()
-
-# raspberry_arm64
-if(${DK_BINARY_OSARCH} MATCHES 	"raspberry_arm64")
-	set(GENERATOR						"Unix Makefiles"	 													CACHE INTERNAL "" FORCE)
-	set(GCC_C_COMPILER					"/usr/bin/gcc"	 														CACHE INTERNAL "" FORCE)
-	set(GCC_CXX_COMPILER				"/usr/bin/g++"	 														CACHE INTERNAL "" FORCE)
-	
-	set(CMAKE_GENERATOR 				"${GENERATOR}" 															CACHE INTERNAL "" FORCE)
-	set(CMAKE_C_COMPILER				"${GCC_C_COMPILER}" 													CACHE INTERNAL "" FORCE)
-	set(CMAKE_CXX_COMPILER				"${GCC_CXX_COMPILER}" 													CACHE INTERNAL "" FORCE)
-endif()
