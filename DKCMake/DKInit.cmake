@@ -95,7 +95,7 @@ get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
 message(STATUS "DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 	
 	
-return()
+if(1)
 	
 # android_arm32
 if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
@@ -215,3 +215,4 @@ if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86_64")
 	set(MAC_X86_64						"ON"																	CACHE INTERNAL "" FORCE)
 endif()
 
+endif()

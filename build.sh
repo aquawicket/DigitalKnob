@@ -112,6 +112,7 @@ function main() {
 
 	validate_cmake
 	validate_git
+	
 	validate_branch
 
 	print_var DKBRANCH_DIR
@@ -901,13 +902,25 @@ function validate_branch() {
 			DKBRANCH="$FOLDER"
 		fi
 	fi
-	
 	print_var DKBRANCH
+	
 	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
-	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
+	print_var  DKBRANCH_DIR
+	
 	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
+	print_var  DKCMAKE_DIR
+	
 	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
+	print_var DK3RDPARTY_DIR
+	
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
+	print_var DKIMPORTS_DIR
+	
+	DKAPPS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKApps"
+	print_var DKAPPS_DIR
+	
+	DKPLUGINS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKPlugins"
+	print_var DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [[ "$SCRIPT_DIR" == "$DKBRANCH_DIR" ]]; then

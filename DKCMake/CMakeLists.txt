@@ -62,7 +62,7 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 #Load all cmake flags prior to calling PROJECT()
 include(${CMAKE_SOURCE_DIR}/DK.cmake)
-include(${DKCMAKE_DIR}/DKInit.cmake)
+#include(${DKCMAKE_DIR}/DKInit.cmake)
 include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 
 PROJECT(DigitalKnob)
