@@ -95,14 +95,14 @@ if "%*" NEQ "" call %*
 	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
 	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
-	if %TARGET_OS%==win_arm64									call:generate_msys_makefiles_clangarm64
-	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang32
-	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw32
+	if %TARGET_OS%==win_arm64									call:generate_mingw_makefiles_clangarm64
+	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="CLANG"		call:generate_mingw_makefiles_clang32
+	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MINGW"		call:generate_mingw_makefiles_mingw32
 	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
-    if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang64
-	if %TARGET_OS%==win_x86_64      if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw64
+    if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="CLANG"		call:generate_mingw_makefiles_clang64
+	if %TARGET_OS%==win_x86_64      if "%TOOLSET%"=="MINGW"		call:generate_mingw_makefiles_mingw64
 	if %TARGET_OS%==win_x86_64    	if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
-	if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="UCRT"		call:generate_msys_makefiles_ucrt64
+	if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="UCRT"		call:generate_mingw_makefiles_ucrt64
 	
     call:build
     if %TYPE%==All      call:build_all
@@ -375,13 +375,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clang32
+:generate_mingw_makefiles_clang32
     set COMPILER=CLANG32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANG32
                 
     echo.
@@ -392,13 +392,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clang64
+:generate_mingw_makefiles_clang64
     set COMPILER=CLANG64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -G MinGW Makefiless
     call:add_cmake_arg -DMSYSTEM=CLANG64
                 
     echo.
@@ -409,13 +409,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clangarm64
+:generate_mingw_makefiles_clangarm64
     set COMPILER=CLANGARM64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANGARM64
                 
     echo.
@@ -426,13 +426,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_ucrt64
+:generate_mingw_makefiles_ucrt64
     set COMPILER=UCRT64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=UCRT64
                 
     echo.
@@ -443,13 +443,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_mingw32
+:generate_mingw_makefiles_mingw32
     set COMPILER=MINGW32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW32
                 
     echo.
@@ -460,13 +460,13 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_mingw64
+:generate_mingw_makefiles_mingw64
     set COMPILER=MINGW64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 	echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW64
                 
     echo.
