@@ -226,7 +226,7 @@ endmacro()
 macro(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
 	
-	dk_includes("${ARGV}" "NOASSERT" NOASSERT)
+	dk_get_option(NOASSERT ${ARGV})
 	
 	dk_updateLogInfo()
 	if(${HALT_ON_ERRORS} AND NOT ${NOASSERT})
@@ -1877,7 +1877,12 @@ endfunction()
 macro(dk_get_option name)
 	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
 	#dk_print_prefix_vars("ARG_")
-	set(${name} ${ARG_${name}})
+	#set(${name} ${ARG_${name}})
+	if(${ARG_${name}})
+		set(${name} ${name})
+	else()
+		unset(${name})	
+	endif()
 	list(REMOVE_ITEM ARGV ${name})	# remove item from parents ARGV list
 endmacro()
 
@@ -1980,10 +1985,7 @@ function(dk_executeProcess)
 		dk_error("command = ${commands}		" NOASSERT)
 		dk_error("result  = ${result}		" NOASSERT)
 		dk_error("output  = ${output}		" NOASSERT) 		
-		dk_error("error   = ${error}		" NOASSERT)
-		if(NOT ${NOASSERT})
-			dk_error("")
-		endif()
+		dk_error("error   = ${error}		" ${NOASSERT})
 	endif()
 endfunction()
 dk_createOsMacros("dk_executeProcess")
@@ -2158,14 +2160,7 @@ function(dk_msys2_bash)
 	DKASSERT(MSYSTEM)
 	
 	dk_get_option(NOASSERT ${ARGV})
-	if(NOASSERT)
-		set(EXTRA_ARGS NOASSERT)
-	endif()
-	
 	dk_get_option(NOECHO ${ARGV})
-	if(NOECHO)
-		set(EXTRA_ARGS ${EXTRA_ARGS} NOECHO)
-	endif()
 	
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 	if(OUTPUT_VARIABLE)
@@ -2211,7 +2206,7 @@ function(dk_msys2_bash)
 	
 	### run bash as a string parameter
 	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
-	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${EXTRA_ARGS})
+	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
@@ -5073,7 +5068,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_findLibrary(name)
+# dk_findLibrary(name) NOASSERT
 #
 #	Search for a library and include it with dk_lib
 #
@@ -5081,16 +5076,21 @@ endfunction()
 #
 function(dk_findLibrary name)
 	DKDEBUGFUNC(${ARGV})
+	message(STATUS "dk_findLibrary(${ARGV})")
+	
+	dk_get_option(NOASSERT ${ARGV})
+	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
-			dk_error("Could not locate ${name} Library")
+				dk_error("Could not locate ${name} Library" ${NOASSERT})
+				if(NOASSERT)
+					set(${name}_LIBRARY ${name})
+				endif()
 		endif()
-		#dk_debug(${name}_LIBRARY)
 		dk_lib(${${name}_LIBRARY})
 	else()
-		#FIXME: no error control for non-windows library search
-		#dk_debug(${name})
+		#FIXME: no error control for windows library search
 		dk_lib(${name})
 	endif()
 endfunction()

@@ -5,4 +5,4 @@ endif()
 
 dk_depend(android-ndk)
 
-dk_findLibrary(log)
+dk_findLibrary(log NOASSERT)
