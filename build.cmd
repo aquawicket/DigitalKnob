@@ -91,11 +91,11 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-    if %TARGET_OS%==win_x86       call:generate_win_x86
-    if %TARGET_OS%==win_x86_64       call:generate_win_x86_64
-    if %TARGET_OS%==android_arm32   call:generate_android_arm32
-    if %TARGET_OS%==android_arm64   call:generate_android_arm64
-    if %TARGET_OS%==emscripten  call:generate_emscripten
+    if %TARGET_OS%==win_x86			call:generate_msys_makefiles_mingw32
+    if %TARGET_OS%==win_x86_64      call:generate_msys_makefiles_mingw64
+    if %TARGET_OS%==android_arm32   call:generate_unix_makefiles
+    if %TARGET_OS%==android_arm64   call:generate_unix_makefiles
+    if %TARGET_OS%==emscripten  	call:generate_mingw_makefiles
                 
     call:build
     if %TYPE%==All      call:build_all
@@ -359,27 +359,8 @@ goto:eof
     ::call:add_cmake_arg --warn-unused-vars"
 goto:eof
 
-:generate_android_arm32
+:generate_unix_makefiles
 	call:add_cmake_arg -G Unix Makefiles
-	
-    ::call:validate_android_ndk
-        
-    ::call:validate_visual_studio
-    ::call:add_cmake_arg -G %VISUALSTUDIO_GENERATOR%
-    ::call:add_cmake_arg -A %VISUALSTUDIO_GENERATOR_PLATFORM%
-        
-    ::call:add_cmake_arg -G %ANDROID_GENERATOR%
-    ::call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
-    ::call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
-    ::call:add_cmake_arg -DANDROID_ABI=armeabi-v7a
-    ::call:add_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
-    ::call:add_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
-    ::call:add_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
-    ::call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
-    ::call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
-    ::call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
-    ::call:add_cmake_arg -DANDROID_STL=c++_static
-    ::call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
         
     echo.
     echo ****** CMAKE COMMAND ******
@@ -387,58 +368,11 @@ goto:eof
     "%CMAKE_EXE%" %CMAKE_ARGS%
     echo.
         
-    ::set TARGET=main
     goto build
 goto:eof
 
-:generate_android_arm64
-	call:add_cmake_arg -G Unix Makefiles
-    
-	::call:validate_android_ndk
-        
-    ::call:validate_visual_studio
-    ::call:add_cmake_arg -G %VISUALSTUDIO_GENERATOR%
-    ::call:add_cmake_arg -A %VISUALSTUDIO_GENERATOR_PLATFORM%
-    
-    ::call:add_cmake_arg -G %ANDROID_GENERATOR%
-    ::call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
-    ::call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
-    ::call:add_cmake_arg -DANDROID_ABI=arm64-v8a
-    ::call:add_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
-    ::call:add_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
-    ::call:add_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
-    ::call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
-    ::call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
-    ::call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
-    ::call:add_cmake_arg -DANDROID_STL=c++_static
-    ::call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
-        
-    echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-    
-    ::set TARGET=main
-    goto build
-goto:eof
-
-:generate_emscripten
+:generate_mingw_makefiles
 	call:add_cmake_arg -G MinGW Makefiles
-
-    ::setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
-    ::call:validate_emscripten
-        
-    ::call:add_cmake_arg -G %EMSDK_GENERATOR%
-    ::call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%
-    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%
-    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%
-        
-    ::echo.
-    ::echo ****** CMAKE COMMAND ******
-    ::echo "%EMSDK_ENV%" ^&^& "%CMAKE_EXE%" %CMAKE_ARGS%
-    ::"%EMSDK_ENV%" && "%CMAKE_EXE%" %CMAKE_ARGS%
-    ::echo.
 	
 	echo.
     echo ****** CMAKE COMMAND ******
@@ -450,7 +384,7 @@ goto:eof
     goto build
 goto:eof
 
-:generate_win_x86
+:generate_msys_makefiles_mingw32
     set COMPILER=MINGW32
                 
     ::call:validate_msys2
@@ -477,7 +411,7 @@ goto:eof
     ::set TARGET=%APP%_APP
 goto:eof
 
-:generate_win_x86_64
+:generate_msys_makefiles_mingw64
     set COMPILER=MINGW64
                 
     ::call:validate_msys2
