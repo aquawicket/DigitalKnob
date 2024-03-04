@@ -91,12 +91,19 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-    if %TARGET_OS%==win_x86			call:generate_msys_makefiles_mingw32
-    if %TARGET_OS%==win_x86_64      call:generate_msys_makefiles_mingw64
-    if %TARGET_OS%==android_arm32   call:generate_unix_makefiles
-    if %TARGET_OS%==android_arm64   call:generate_unix_makefiles
-    if %TARGET_OS%==emscripten  	call:generate_mingw_makefiles
-                
+	set TOOLSET=MINGW
+	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
+	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
+	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
+	if %TARGET_OS%==win_arm64									call:generate_msys_makefiles_clangarm64
+	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang32
+	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw32
+	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
+    if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang64
+	if %TARGET_OS%==win_x86_64      if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw64
+	if %TARGET_OS%==win_x86_64    	if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
+	if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="UCRT"		call:generate_msys_makefiles_ucrt64
+	
     call:build
     if %TYPE%==All      call:build_all
     if %TYPE%==Release  call:build_release
@@ -111,8 +118,6 @@ goto:eof
 
 :pick_update
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    ::echo.
-    ::echo %APP% %TARGET_OS% %TYPE%
     
     call:read_cache
     
@@ -130,9 +135,10 @@ goto:eof
     echo  10) Exit
     echo. 
     echo  Press Enter To Skip
-        
     set choice=
     set /p "choice=Choose a selection: "
+	
+	::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
     if "%choice%"=="1"  call:git_update
     if "%choice%"=="2"  call:git_commit
@@ -150,8 +156,6 @@ goto:eof
 
 :pick_app
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    ::echo.
-    ::echo %APP% %TARGET_OS% %TYPE%
      
 	call:read_cache
 	 
@@ -172,6 +176,7 @@ goto:eof
     echo 13) Exit
     set choice=
     set /p choice=Please select an app to build:
+	
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
 	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
     if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
@@ -243,6 +248,7 @@ goto:eof
     echo 33) Exit
     set choice=
     set /p choice=Please select an OS to build for: 
+	
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"              & goto:eof
     if "%choice%"=="2" set "TARGET_OS=android_arm32"                & goto:eof
@@ -296,8 +302,8 @@ goto:eof
     echo 6) Exit
     set choice=
     set /p choice=Please select a build type: 
-    ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-        
+	
+    ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do? 
     if "%choice%"=="1" set "TYPE=Debug"    & goto:eof
     if "%choice%"=="2" set "TYPE=Release"  & goto:eof
     if "%choice%"=="3" set "TYPE=All"      & goto:eof
@@ -359,18 +365,6 @@ goto:eof
     ::call:add_cmake_arg --warn-unused-vars"
 goto:eof
 
-:generate_unix_makefiles
-	call:add_cmake_arg -G Unix Makefiles
-        
-    echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-        
-    goto build
-goto:eof
-
 :generate_mingw_makefiles
 	call:add_cmake_arg -G MinGW Makefiles
 	
@@ -379,15 +373,79 @@ goto:eof
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     "%CMAKE_EXE%" %CMAKE_ARGS%
     echo.
-        
-    ::set TARGET=%APP%_APP
-    goto build
+goto:eof
+
+:generate_msys_makefiles_clang32
+    set COMPILER=CLANG32
+                
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+    echo MSYS2 = %MSYS2%
+                
+    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -DMSYSTEM=CLANG32
+                
+    echo.
+    echo ****** CMAKE COMMAND ******
+    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
+    echo %MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    %MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    echo.
+goto:eof
+
+:generate_msys_makefiles_clang64
+    set COMPILER=CLANG64
+                
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+    echo MSYS2 = %MSYS2%
+                
+    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -DMSYSTEM=CLANG64
+                
+    echo.
+    echo ****** CMAKE COMMAND ******
+    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
+    echo %MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    %MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    echo.
+goto:eof
+
+:generate_msys_makefiles_clangarm64
+    set COMPILER=CLANGARM64
+                
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+    echo MSYS2 = %MSYS2%
+                
+    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -DMSYSTEM=CLANGARM64
+                
+    echo.
+    echo ****** CMAKE COMMAND ******
+    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
+    echo %MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    %MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    echo.
+goto:eof
+
+:generate_msys_makefiles_ucrt64
+    set COMPILER=UCRT64
+                
+    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+    echo MSYS2 = %MSYS2%
+                
+    call:add_cmake_arg -G MSYS Makefiles
+    call:add_cmake_arg -DMSYSTEM=UCRT64
+                
+    echo.
+    echo ****** CMAKE COMMAND ******
+    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
+    echo %MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    %MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    echo.
 goto:eof
 
 :generate_msys_makefiles_mingw32
     set COMPILER=MINGW32
                 
-    ::call:validate_msys2
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
@@ -400,21 +458,11 @@ goto:eof
     echo %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
     %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
     echo.
-                
-    ::set TARGET=%APP%_APP
-    goto build
-    
-    ::call:validate_visual_studio
-    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE_DIR%
-    ::set TARGET=%APP%_APP
 goto:eof
 
 :generate_msys_makefiles_mingw64
     set COMPILER=MINGW64
                 
-    ::call:validate_msys2
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 	echo MSYS2 = %MSYS2%
                 
@@ -427,15 +475,29 @@ goto:eof
     echo %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
     %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
     echo.
-                
-    ::set TARGET=%APP%_APP
-    goto build
-    
-    ::call:validate_visual_studio
-    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"%CMAKE_EXE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE_DIR%
-    ::set TARGET=%APP%_APP
+goto:eof
+
+:generate_unix_makefiles
+	call:add_cmake_arg -G Unix Makefiles
+        
+    echo.
+    echo ****** CMAKE COMMAND ******
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    "%CMAKE_EXE%" %CMAKE_ARGS%
+    echo.
+goto:eof
+
+:generate_visualstudio
+	::call:validate_visual_studio
+	::call:add_cmake_arg -G Visual Studio -A x64
+    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
+    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
+	
+	echo.
+    echo ****** CMAKE COMMAND ******
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    "%CMAKE_EXE%" %CMAKE_ARGS%
+    echo.
 goto:eof
 
 
