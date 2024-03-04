@@ -152,8 +152,11 @@ goto:eof
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     ::echo.
     ::echo %APP% %TARGET_OS% %TYPE%
-        
+     
+	call:read_cache
+	 
     echo.
+	if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) HelloWorld
     echo  2) DKCore
     echo  3) DKJavascript
@@ -170,6 +173,7 @@ goto:eof
     set choice=
     set /p choice=Please select an app to build:
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
+	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
     if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
     if "%choice%"=="2"  set "APP=DKCore"       & goto:eof
     if "%choice%"=="3"  set "APP=DKJavascript" & goto:eof

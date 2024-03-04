@@ -103,12 +103,12 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 if(MSVC)
 	include(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
 endif()
-if(MSYS OR MINGW OR MSYSTEM)
-#	set(PROJECT_INCLUDE_DKPLUGINS 0) 		# FIXME - PROJECT_INCLUDE_DKPLUGINS not working on MSYS
-#	unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
-#	include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-#	include(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
-#	include(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
+if(MSYSTEM)
+	dk_set(PROJECT_INCLUDE_DKPLUGINS 0) 	# FIXME - PROJECT_INCLUDE_DKPLUGINS not working on MSYS
+	include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
+	include(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	include(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
+	unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
 if(XCODE)
 	include(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
@@ -132,7 +132,7 @@ dk_set(BUILD_SHARED_LIBS				OFF)
 dk_set(BUILD_STATIC_LIBS				ON)
 dk_set(ENABLE_EXCEPTIONS				ON)    
 dk_set(ENABLE_RTTI						ON)
-dk_set(POSITION_INDEPENDENT_CODE 		ON)		# breaks android
+dk_set(POSITION_INDEPENDENT_CODE 		ON)
 dk_set(POSITION_INDEPENDENT_EXECUTABLE 	OFF)                                        
 dk_set(WARNINGS_AS_ERRORS				OFF)
 dk_set(WARNING_4244						OFF)	# /wd4244 - Warning: possible loss of data 
@@ -171,6 +171,9 @@ dk_set(DKCONFIGURE_CFLAGS_RELEASE				-O3 -DNDEBUG)
 dk_set(DKCONFIGURE_CXXFLAGS_DEBUG				-DDEBUG -D_DEBUG -g)
 dk_set(DKCONFIGURE_CXXFLAGS_RELEASE				-O3 -DNDEBUG)
 
+###### POSITION_INDEPENDENT_CODE ######
+# https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
+# https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
 if(WIN_HOST)
 	dk_set(POSITION_INDEPENDENT_CODE OFF)
 endif()
@@ -194,26 +197,29 @@ else()
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-pic) 
 endif()
 
+###### POSITION_INDEPENDENT_EXECUTABLE ######
+# https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fpie
 if(POSITION_INDEPENDENT_EXECUTABLE)
 	if(MSVC AND WIN)
 	
 	else()
-		dk_append(CMAKE_C_FLAGS -pie)
-		dk_append(CMAKE_CXX_FLAGS -pie)
+		dk_append(CMAKE_C_FLAGS -fPIE)
+		dk_append(CMAKE_CXX_FLAGS -fPIE)
 	endif()
-	dk_append(DKCONFIGURE_CFLAGS -pie) 
-	dk_append(DKCONFIGURE_CXXFLAGS -pie) 
+	dk_append(DKCONFIGURE_CFLAGS -fPIE)
+	dk_append(DKCONFIGURE_CXXFLAGS -fPIE)
 else()
 	if(MSVC AND WIN)
 	
 	else()
-		dk_append(CMAKE_C_FLAGS -no-pie)
-		dk_append(CMAKE_CXX_FLAGS -no-pie)
+		dk_append(CMAKE_C_FLAGS -fno-pie)
+		dk_append(CMAKE_CXX_FLAGS -fno-pie)
 	endif()
-	dk_append(DKCONFIGURE_CFLAGS -no-pie) 
-	dk_append(DKCONFIGURE_CXXFLAGS -no-pie) 
+	dk_append(DKCONFIGURE_CFLAGS -fno-pie) 
+	dk_append(DKCONFIGURE_CXXFLAGS -fno-pie) 
 endif()
 
+###### RUN-TIME TYPE IDENTIFICATION ######
 if(ENABLE_RTTI)
 	if(MSVC AND WIN)
 		dk_append(CMAKE_CXX_FLAGS /GR)
@@ -226,6 +232,7 @@ else()
 		dk_append(CMAKE_C_FLAGS /GR-)
 		dk_append(CMAKE_CXX_FLAGS /GR-)
 	else()
+		# https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html#index-fno-rtti
 		dk_append(CMAKE_C_FLAGS -fno-rtti)
 		dk_append(CMAKE_CXX_FLAGS -fno-rtti)
 	endif()
@@ -233,6 +240,7 @@ else()
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-rtti)
 endif()
 
+###### EXCEPTIONS ######
 if(ENABLE_EXCEPTIONS)
 	if(MSVC AND WIN)
 		dk_append(CMAKE_C_FLAGS /EHsc)
@@ -261,17 +269,20 @@ endif()
 
 #### Android arm32
 if(ANDROID_ARM32)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+	dk_set(CMAKE_GENERATOR					${ANDROID_GENERATOR})
 	dk_set(CMAKE_TOOLCHAIN_FILE				${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+	dk_set(ANDROID_PLATFORM					${ANDROID_API})
 	dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
 	dk_set(CMAKE_C_COMPILER					${ANDROID_C_COMPILER})
-	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_set(CMAKE_CXX_COMPILER				${ANDROID_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
+	
 	dk_set(DKCONFIGURE_CC					${ANDROID_C_COMPILER})
-	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_set(DKCONFIGURE_CXX					${ANDROID_CXX_COMPILER})
+	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM32 -std=c17)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
+	
 	dk_append(DKCMAKE_FLAGS
 		-DANDROID_ABI=armeabi-v7a
 		"-DANDROID_CPP_FEATURES=rtti exceptions"
@@ -282,24 +293,25 @@ if(ANDROID_ARM32)
 		-DANDROID_STL_FORCE_FEATURES=1
 		-DANDROID_TOOLCHAIN=clang
 		-DCMAKE_ANDROID_STL_TYPE=c++_static
-		-DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake
-		#-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}
 	)
 endif()
 
 ### Android arm64
 if(ANDROID_ARM64)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+	dk_set(CMAKE_GENERATOR					${ANDROID_GENERATOR})
 	dk_set(CMAKE_TOOLCHAIN_FILE				${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+	dk_set(ANDROID_PLATFORM					${ANDROID_API})
 	dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
 	dk_set(CMAKE_C_COMPILER					${ANDROID_C_COMPILER})
-	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_set(CMAKE_CXX_COMPILER				${ANDROID_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z)
+	
 	dk_set(DKCONFIGURE_CC					${ANDROID_C_COMPILER})
-	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_set(DKCONFIGURE_CXX					${ANDROID_CXX_COMPILER})
+	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM64 -std=c17)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM64 -std=c++1z)
+	
 	dk_append(DKCMAKE_FLAGS 
 		-DANDROID_ABI=arm64-v8a
 		"-DANDROID_CPP_FEATURES=rtti exceptions"
@@ -310,226 +322,240 @@ if(ANDROID_ARM64)
 		-DANDROID_STL_FORCE_FEATURES=1
 		-DANDROID_TOOLCHAIN=clang
 		-DCMAKE_ANDROID_STL_TYPE=c++_static
-		-DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake
-		#-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}
 	)
 endif()
 
 ### Emscripten ###
 if(EMSCRIPTEN)
-	set(EMSDK 								"${DK3RDPARTY_DIR}/emsdk-main")
-	if(WIN32)
-		dk_set(CMAKE_GENERATOR 				"MinGW Makefiles")
-	elseif()
-		dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
-	endif()
-	dk_set(CMAKE_TOOLCHAIN_FILE 			${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
-	dk_append(DKCMAKE_FLAGS					-DEMSCRIPTEN=ON)
-	dk_set(CMAKE_C_COMPILER					${EMSDK}/upstream/emscripten/emcc)
+	dk_set(CMAKE_GENERATOR					${EMSCRIPTEN_GENERATOR})
+	dk_set(CMAKE_TOOLCHAIN_FILE				${EMSCRIPTEN_TOOLCHAIN_FILE})
+	#dk_set(CMAKE_MAKE_PROGRAM				${EMSCRIPTEN_MAKE_PROGRAM})
+	dk_set(CMAKE_C_COMPILER					${EMSCRIPTEN_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${EMSCRIPTEN_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DEMSCRIPTEN -std=gnu11)
-	dk_set(CMAKE_CXX_COMPILER				${EMSDK}/upstream/emscripten/em++)
 	dk_append(CMAKE_CXX_FLAGS				-DEMSCRIPTEN -std=gnu++17)
-	dk_set(DKCONFIGURE_CC					${EMSDK}/upstream/emscripten/emcc)
+	
+	dk_set(DKCONFIGURE_CC					${EMSCRIPTEN_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${EMSCRIPTEN_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DEMSCRIPTEN -std=gnu11)
-	dk_set(DKCONFIGURE_CXX					${EMSDK}/upstream/emscripten/em++)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DEMSCRIPTEN -std=gnu++17)
+	
+	dk_append(DKCMAKE_FLAGS					-DEMSCRIPTEN=ON)
 endif()
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_set(IOS_TOOLCHAIN_FILE				${DKCMAKE_DIR}/ios.toolchain.cmake)
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE_DIR}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
+	#dk_set(CMAKE_MAKE_PROGRAM				${IOS_MAKE_PROGRAM})
+	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++)
+
+	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host arm-apple-${IOS_DARWIN})
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	
+	dk_append(DKCMAKE_FLAGS					-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
+	
 endif()
 
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE_DIR}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm64)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
+	#dk_set(CMAKE_MAKE_PROGRAM				${IOS_MAKE_PROGRAM})
+	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOS_ARM64 -std=c++17 -x objective-c++)
+	
+	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host arm64-apple-${IOS_DARWIN})
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
+	
+	dk_append(DKCMAKE_FLAGS					-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm64)
 endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE_DIR}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=i686)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
+	#dk_set(CMAKE_MAKE_PROGRAM				${IOS_MAKE_PROGRAM})
+	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++)
+	
+	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host i686-apple-${IOS_DARWIN})
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	
+	dk_append(DKCMAKE_FLAGS					-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=i686)
 endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE_DIR}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=x86_64)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
+	#dk_set(CMAKE_MAKE_PROGRAM				${IOS_MAKE_PROGRAM})
+	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++)
+	
+	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host x86_64-apple-${IOS_DARWIN})
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
+	
+	dk_append(DKCMAKE_FLAGS					-DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=SIMULATOR64 -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=x86_64)
 endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
+	dk_set(CMAKE_GENERATOR					${LINUX_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${LINUX_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${LINUX_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
-	dk_set(CMAKE_CXX_COMPILER				/usr/bin/g++)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
-	dk_set(DKCONFIGURE_CC					/usr/bin/gcc)
+	
+	dk_set(DKCONFIGURE_CC					${LINUX_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${LINUX_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
-	dk_set(DKCONFIGURE_CXX					/usr/bin/g++)
 	dk_append(DKCONFIGURE_CXXFLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 endif()
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
+	dk_set(CMAKE_GENERATOR					${LINUX_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${LINUX_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${LINUX_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
-	dk_set(CMAKE_CXX_COMPILER				/usr/bin/g++)
 	dk_append(CMAKE_CXX_FLAGS				-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
-	dk_set(DKCONFIGURE_CC					/usr/bin/gcc)
+	
+	dk_set(DKCONFIGURE_CC					${LINUX_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${LINUX_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
-	dk_set(DKCONFIGURE_CXX					/usr/bin/g++)
 	dk_append(DKCONFIGURE_CXXFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_OSX_ARCHITECTURES=x86)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
-	dk_append(CMAKE_C_FLAGS					-DMAC -DMAC_X86 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
-	dk_append(CMAKE_CXX_FLAGS				-DMAC -DMAC_X86 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${MAC_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${MAC_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${MAC_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
+	dk_append(CMAKE_CXX_FLAGS				-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
+	
+	dk_set(DKCONFIGURE_CC					${MAC_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${MAC_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch i686 -DMAC -DMAC_X86 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch i686 -DMAC -DMAC_X86 -std=c++17) #-x objective-c++) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	
+	dk_append(DKCMAKE_FLAGS					-DCMAKE_OSX_ARCHITECTURES=x86)
 endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
-	dk_set(CMAKE_GENERATOR					"Xcode")
-	dk_append(DKCMAKE_FLAGS					-DCMAKE_OSX_ARCHITECTURES=x86_64)
-	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_GENERATOR					${MAC_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${MAC_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${MAC_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
-	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_CXX_FLAGS				-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+
+	dk_set(DKCONFIGURE_CC					${MAC_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${MAC_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DMAC -DMAC_X86_64 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CXXFLAGS			-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++) #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	
+	dk_append(DKCMAKE_FLAGS					-DCMAKE_OSX_ARCHITECTURES=x86_64)
 endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
+	dk_set(CMAKE_GENERATOR					${RASPBERRY_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${RASPBERRY_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${RASPBERRY_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
-	dk_set(CMAKE_CXX_COMPILER				/usr/bin/g++)
 	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
-	dk_set(DKCONFIGURE_CC					/usr/bin/gcc)
+	
+	dk_set(DKCONFIGURE_CC					${RASPBERRY_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${RASPBERRY_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
-	dk_set(DKCONFIGURE_CXX					/usr/bin/g++)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
-	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
-	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
-	dk_set(CMAKE_CXX_COMPILER				/usr/bin/g++)
-	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
-	dk_set(DKCONFIGURE_CC					/usr/bin/gcc)
-	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
-	dk_set(DKCONFIGURE_CXX					/usr/bin/g++)
-	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+	dk_set(CMAKE_GENERATOR					${RASPBERRY_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${RASPBERRY_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${RASPBERRY_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
+	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+	
+	dk_set(DKCONFIGURE_CC					${RASPBERRY_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${RASPBERRY_CXX_COMPILER})
+	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
+	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
 
 ### Windows x86 - MSVC ###
 if(WIN_X86 AND MSVC)
 	dk_set(CMAKE_GENERATOR 					${VISUALSTUDIO_GENERATOR})
 	dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_X86_C_COMPILER})
-	dk_append(CMAKE_C_FLAGS					/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 	dk_set(CMAKE_CXX_COMPILER				${VISUALSTUDIO_X86_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS				/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 endif()
 
 ### Windows x86 - MINGW32 ###
 if(WIN_X86 AND MINGW32)
 	dk_set(MSYSTEM MINGW32)
-	dk_set(PROJECT_INCLUDE_DKPLUGINS 0) 	# FIXME - PROJECT_INCLUDE_DKPLUGINS not working on MSYS
-	include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-	include(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
-	include(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
-	unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
-	dk_set(CMAKE_GENERATOR					"MSYS Makefiles") 
-	dk_set(CMAKE_C_COMPILER					${MSYS2}/mingw32/bin/gcc.exe)
+	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR}) 
+	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
-	dk_set(CMAKE_CXX_COMPILER				${MSYS2}/mingw32/bin/g++.exe)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(DKCMAKE_EXE_LINKER_FLAGS		-s)
+	
+	dk_append(DKCONFIGURE_FLAGS				--build=i686-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS			${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS			${CMAKE_CXX_FLAGS})
 endif()
-WIN_X86_dk_append(DKCONFIGURE_FLAGS			--build=i686-w64-mingw32)
-WIN_X86_dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
-WIN_X86_dk_append(DKCONFIGURE_CXXFLAGS		${CMAKE_CXX_FLAGS})
+
 
 ### Windows x86_64 - MSVC ###
 if(WIN_X86_64 AND MSVC)
 	dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_X64_C_COMPILER})
-	dk_append(CMAKE_C_FLAGS					/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	dk_set(CMAKE_CXX_COMPILER				${VISUALSTUDIO_X64_CXX_COMPILER})
+	dk_append(CMAKE_C_FLAGS					/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS				/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 endif()
 
 ### Windows x86_64 - MINGW64 ###
 if(WIN_X86_64 AND MINGW64)
 	dk_set(MSYSTEM MINGW64)
-	dk_set(PROJECT_INCLUDE_DKPLUGINS 0) 	# FIXME - PROJECT_INCLUDE_DKPLUGINS not working on MSYS
-	include(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-	include(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
-	include(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
-	unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
-	dk_set(CMAKE_GENERATOR					"MSYS Makefiles") 
-	dk_set(CMAKE_C_COMPILER					${MSYS2}/mingw64/bin/gcc.exe)
+	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR}) 
+	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_ -std=gnu17)
-	dk_set(CMAKE_CXX_COMPILER				${MSYS2}/mingw64/bin/g++.exe)
 	dk_append(CMAKE_CXX_FLAGS				-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(CMAKE_EXE_LINKER_FLAGS		-s)
+	
+	dk_append(DKCONFIGURE_FLAGS				--build=x86_64-w64-mingw32)
+	dk_append(DKCONFIGURE_CFLAGS			${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS			${CMAKE_CXX_FLAGS})
 endif()
-WIN_X86_64_dk_append(DKCONFIGURE_FLAGS		--build=x86_64-w64-mingw32)
-WIN_X86_64_dk_append(DKCONFIGURE_CFLAGS		${CMAKE_C_FLAGS})
-WIN_X86_64_dk_append(DKCONFIGURE_CXXFLAGS	${CMAKE_CXX_FLAGS})
+
 
 
 
@@ -578,6 +604,12 @@ string(REPLACE ";" " " CONFIGURE_CXXFLAGS "${CONFIGURE_CXXFLAGS}")
 
 
 ############## Setup continued by cmake from here ##############
+if(CMAKE_TOOLCHAIN_FILE)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
+endif()
+if(CMAKE_MAKE_PROGRAM)
+	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM})
+endif()
 if(CMAKE_C_COMPILER)
 	dk_append				(DKCMAKE_FLAGS		-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER})
 endif()
@@ -605,6 +637,7 @@ endif()
 if(CMAKE_EXE_LINKER_FLAGS)
 	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS})
 endif()
+
 
 
 

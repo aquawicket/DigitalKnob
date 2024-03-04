@@ -46,3 +46,14 @@ if(LINUX_HOST)
 		dk_set(GCC_CXX_COMPILER	/usr/local/bin/g++)
 	endif()
 endif()
+
+
+###### LINUX variables ######
+dk_set(LINUX_GENERATOR			"Unix Makefiles")
+dk_set(LINUX_C_COMPILER			/usr/bin/gcc)
+dk_set(LINUX_CXX_COMPILER		/usr/bin/g++)
+
+###### LINUX variables ######
+dk_set(RASPBERRY_GENERATOR		"Unix Makefiles")
+dk_set(RASPBERRY_C_COMPILER		/usr/bin/gcc)
+dk_set(RASPBERRY_CXX_COMPILER	/usr/bin/g++)

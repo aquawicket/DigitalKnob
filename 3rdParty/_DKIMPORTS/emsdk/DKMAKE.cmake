@@ -42,18 +42,16 @@ dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS 
 
 WIN_HOST_dk_set	(EMSDK_ENV 				${EMSDK}/emsdk_env.bat)
 UNIX_HOST_dk_set(EMSDK_ENV 				${EMSDK}/emsdk_env.sh)
-dk_set			(EMSDK_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
-WIN_HOST_dk_set	(EMSDK_GENERATOR 		"MinGW Makefiles")
-UNIX_HOST_dk_set(EMSDK_GENERATOR 		"Unix Makefiles")
 
 
-dk_set(EMAR 		${EMSDK}/upstream/emscripten/emar)
-dk_set(EMCC 		${EMSDK}/upstream/emscripten/emcc)
-dk_set(EMCMAKE 		${EMSDK}/upstream/emscripten/emcmake)
-dk_set(EMCONFIGURE 	${EMSDK}/upstream/emscripten/emconfigure)
-dk_set(EMMAKE 		${EMSDK}/upstream/emscripten/emmake)
-dk_set(EMPP 		${EMSDK}/upstream/emscripten/em++)
-dk_set(EMRANLIB 	${EMSDK}/upstream/emscripten/emranlib)
+WIN_HOST_dk_set	(EMSCRIPTEN_GENERATOR 		"MinGW Makefiles")
+UNIX_HOST_dk_set(EMSCRIPTEN_GENERATOR 		"Unix Makefiles")
+dk_set			(EMSCRIPTEN_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+dk_set			(EMSCRIPTEN_AR 				${EMSDK}/upstream/emscripten/emar)
+dk_set			(EMSCRIPTEN_C_COMPILER 		${EMSDK}/upstream/emscripten/emcc)
+dk_set			(EMSCRIPTEN_CMAKE			${EMSDK}/upstream/emscripten/emcmake)
+dk_set			(EMSCRIPTEN_CONFIGURE 		${EMSDK}/upstream/emscripten/emconfigure)
+dk_set			(EMSCRIPTEN_MAKE_PROGRAM	${EMSDK}/upstream/emscripten/emmake)
+dk_set			(EMSCRIPTEN_CXX_COMPILER 	${EMSDK}/upstream/emscripten/em++)
+dk_set			(EMSCRIPTEN_RANLIB 			${EMSDK}/upstream/emscripten/emranlib)
 
-dk_set(EMSDK_C_COMPILER 	${EMSDK}/upstream/emscripten/emcc)
-dk_set(EMSDK_CXX_COMPILER 	${EMSDK}/upstream/emscripten/em++)

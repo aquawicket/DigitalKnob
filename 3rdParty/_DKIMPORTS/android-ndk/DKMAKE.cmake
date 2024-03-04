@@ -140,31 +140,24 @@ else()
 endif()
 
 
-
-
-###### ANDROID VARIABLES ######
-dk_set(ANDROID_GENERATOR "Unix Makefiles")
-dk_debug("ANDROID_GENERATOR = ${ANDROID_GENERATOR}")
-
-dk_set(ANDROID_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
-dk_debug("ANDROID_TOOLCHAIN_FILE = ${ANDROID_TOOLCHAIN_FILE}")
-
-#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
-
-dk_set(ANDROID_API 31)
-dk_debug("ANDROID_API = ${ANDROID_API}")
-
-dk_set(ANDROID_MIN_API 19)
-dk_debug("ANDROID_MIN_API = ${ANDROID_MIN_API}")
-
-dk_set(ANDROID_MAKE_PROGRAM "${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make")
-dk_debug("ANDROID_MAKE_PROGRAM = ${ANDROID_MAKE_PROGRAM}")
-
 if(WIN_HOST)
 	dk_set(EXE .exe)
 endif()
-dk_set(ANDROID_C_COMPILER	"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
-dk_debug("ANDROID_C_COMPILER = ${ANDROID_C_COMPILER}")
 
-dk_set(ANDROID_CXX_COMPILER	"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
-dk_debug("ANDROID_CXX_COMPILER = ${ANDROID_CXX_COMPILER}")
+###### ANDROID VARIABLES ######
+dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
+dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+dk_set(ANDROID_API 					31)
+dk_set(ANDROID_MIN_API 				19)
+dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make")
+dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
+dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
+
+dk_debug("ANDROID_GENERATOR = 		${ANDROID_GENERATOR}")
+dk_debug("ANDROID_TOOLCHAIN_FILE = 	${ANDROID_TOOLCHAIN_FILE}")
+dk_debug("ANDROID_API = 			${ANDROID_API}")
+dk_debug("ANDROID_MIN_API = 		${ANDROID_MIN_API}")
+dk_debug("ANDROID_MAKE_PROGRAM = 	${ANDROID_MAKE_PROGRAM}")
+dk_debug("ANDROID_C_COMPILER = 		${ANDROID_C_COMPILER}")
+dk_debug("ANDROID_CXX_COMPILER = 	${ANDROID_CXX_COMPILER}")

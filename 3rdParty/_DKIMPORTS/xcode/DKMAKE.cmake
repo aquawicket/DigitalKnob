@@ -15,11 +15,20 @@ dk_set(XCODE_CXX_COMPILER	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/u
 dk_set(XCODE_LIBTOOL		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 
 # iOS variables
-dk_set(IOS_DARWIN		darwin20.6.0)
-dk_set(IOS_SDK			15.0)
-dk_set(IOS_MIN_SDK		13.0)
-dk_set(IOS_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
-dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+dk_set(IOS_GENERATOR		"Xcode")
+dk_set(IOS_TOOLCHAIN_FILE	${DKCMAKE_DIR}/ios.toolchain.cmake)
+dk_set(IOS_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+dk_set(IOS_CXX_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+dk_set(IOS_DARWIN			darwin20.6.0)
+dk_set(IOS_SDK				15.0)
+dk_set(IOS_MIN_SDK			13.0)
+dk_set(IOS_SYSROOT			${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
+dk_set(IOSSIM_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+
+# MAC variables
+dk_set(MAC_GENERATOR		"Xcode")
+dk_set(MAC_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+dk_set(MAC_CXX_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
 
 
 ### VERSION ###
