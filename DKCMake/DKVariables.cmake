@@ -140,57 +140,73 @@ if(CMAKE_BINARY_DIR)
 	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 	
-	### Set DK_BINARY_DIR ###
+	### Get DK_BINARY_DIR ###
 	dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
 	dk_debug("DK_BINARY_DIR = ${DK_BINARY_DIR}")
 	
+	### Get DK_BINARY_FOLDER ###
+	get_filename_component(DK_BINARY_FOLDER ${DK_BINARY_DIR} NAME)     
+	dk_debug("DK_BINARY_FOLDER = ${DK_BINARY_FOLDER}")
 	
-	
-	
-	### Set DK_BINARY_OS_ARCH_ENV_DIR ###
-	#if(${CMAKE_BINARY_DIR} MATCHES "_gcc$")
-	#	get_filename_component(DK_BINARY_OS_ARCH_ENV_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
-	#elseif(${CMAKE_BINARY_DIR} MATCHES "_clang$")
-	#	get_filename_component(DK_BINARY_OS_ARCH_ENV_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
-	#else()
-	#	dk_set(DK_BINARY_OS_ARCH_ENV_DIR ${DK_BINARY_DIR})
-	#endif()
-	#dk_debug("DK_BINARY_OS_ARCH_ENV_DIR = ${DK_BINARY_OS_ARCH_ENV_DIR}")
-	
-	### Set DK_BINARY_OS_ARCH_ENV ###
-	#get_filename_component(DK_BINARY_OS_ARCH_ENV ${DK_BINARY_OS_ARCH_ENV_DIR} NAME)     
-	#dk_debug("DK_BINARY_OS_ARCH_ENV = ${DK_BINARY_OS_ARCH_ENV}")
-	
-	
-	
-	
-	### Set DK_BINARY_OS_ARCH_DIR ###
-	if(${CMAKE_BINARY_DIR} MATCHES "Debug$")
-		get_filename_component(DK_BINARY_OS_ARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
-	elseif(${CMAKE_BINARY_DIR} MATCHES "Release$")
-		get_filename_component(DK_BINARY_OS_ARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	### Get DK_BINARY_OS_DIR
+	### Get DK_BINARY_TYPE ###
+	if(${DK_BINARY_DIR} MATCHES "Debug$")
+		dk_set(DK_BINARY_TYPE Debug)
+		get_filename_component(DK_BINARY_OS_DIR ${DK_BINARY_DIR} DIRECTORY)
+	elseif(${DK_BINARY_DIR} MATCHES "Release$")
+		dk_set(DK_BINARY_TYPE Release)
+		get_filename_component(DK_BINARY_OS_DIR ${DK_BINARY_DIR} DIRECTORY)
 	else()
-		dk_set(DK_BINARY_OS_ARCH_DIR ${DK_BINARY_DIR})
+		dk_set(DK_BINARY_OS_DIR ${CMAKE_BINARY_DIR})
 	endif()
-	dk_debug("DK_BINARY_OS_ARCH_DIR = ${DK_BINARY_OS_ARCH_DIR}")
+	dk_debug("DK_BINARY_OS_DIR = ${DK_BINARY_OS_DIR}")
+	dk_debug("DK_BINARY_TYPE = ${DK_BINARY_TYPE}")
 	
-	### Set DK_BINARY_OS_ARCH ###
-	get_filename_component(DK_BINARY_OS_ARCH ${DK_BINARY_OS_ARCH_DIR} NAME)     
-	dk_debug("DK_BINARY_OS_ARCH = ${DK_BINARY_OS_ARCH}")
+	### Get DK_BINARY_OS_FOLDER
+	get_filename_component(DK_BINARY_OS_FOLDER ${DK_BINARY_OS_DIR} NAME)     
+	dk_debug("DK_BINARY_OS_FOLDER = ${DK_BINARY_OS_FOLDER}")
 	
-	### Set DK_BINARY_OS ###
-	string(FIND "${DK_BINARY_OS_ARCH}" "_" first_underscore)
-	string(SUBSTRING "${DK_BINARY_OS_ARCH}" 0 ${first_underscore} DK_BINARY_OS)
-	dk_debug("DK_BINARY_OS = ${DK_BINARY_OS}")
+	dk_set(DK_BINARY_OS ${DK_BINARY_OS_FOLDER})
+	### Get DK_BINARY_ENV 
+	if(${DK_BINARY_OS} MATCHES "_gcc$")
+		dk_set(DK_BINARY_ENV gcc)
+		string(REPLACE _gcc "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
+	if(${DK_BINARY_OS} MATCHES "_clang$")
+		dk_set(DK_BINARY_ENV clang)
+		string(REPLACE _clang "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
+	dk_debug("DK_BINARY_ENV = ${DK_BINARY_ENV}")
 	
-	### Set DK_BINARY_ARCH ###
-	string(FIND "${DK_BINARY_OS_ARCH}" "_" first_underscore)
-	math(EXPR after_underscore "${first_underscore}+1" OUTPUT_FORMAT DECIMAL)
-	string(SUBSTRING "${DK_BINARY_OS_ARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
+	### Get DK_BINARY_ARCH
+	if(${DK_BINARY_OS} MATCHES "_arm32$")
+		dk_set(DK_BINARY_ARCH arm32)
+		string(REPLACE _arm32 "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
+	if(${DK_BINARY_OS} MATCHES "_arm64$")
+		dk_set(DK_BINARY_ARCH arm64)
+		string(REPLACE _arm64 "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
+	if(${DK_BINARY_OS} MATCHES "_x86$")
+		dk_set(DK_BINARY_ARCH x86)
+		string(REPLACE _x86 "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
+	if(${DK_BINARY_OS} MATCHES "_x86_64$")
+		dk_set(DK_BINARY_ARCH x86_64)
+		string(REPLACE _x86_64 "" DK_BINARY_OS "${DK_BINARY_OS}")
+	endif()
 	dk_debug("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
 	
+	### Get DK_BINARY_OS
+	dk_debug("DK_BINARY_OS = ${DK_BINARY_OS}")
+	
+	
+	### Set DK_BINARY_OS_ARCH ###
+	dk_set(DK_BINARY_OS_ARCH "${DK_BINARY_OS}_${DK_BINARY_ARCH}")  
+	dk_debug("DK_BINARY_OS_ARCH = ${DK_BINARY_OS_ARCH}")
+	
 	### Set DK_PROJECT_DIR ###
-	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_ARCH_DIR} DIRECTORY)
+	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_DIR} DIRECTORY)
 	dk_debug("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 endif()
 
