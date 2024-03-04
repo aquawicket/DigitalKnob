@@ -91,7 +91,7 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-	set TOOLSET=CLANG
+	set TOOLSET=MINGW
 	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
 	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
@@ -103,6 +103,8 @@ if "%*" NEQ "" call %*
 	if %TARGET_OS%==win_x86_64      if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw64
 	if %TARGET_OS%==win_x86_64    	if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
 	if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="UCRT"		call:generate_msys_makefiles_ucrt64
+	if %TARGET_OS%==win_x86_64_gcc								call:generate_msys_makefiles_mingw64
+	if %TARGET_OS%==win_x86_64_clang							call:generate_msys_makefiles_clang64
 	
     call:build
     if %TYPE%==All      call:build_all
@@ -243,9 +245,11 @@ goto:eof
     echo 28) win arm64
     echo 29) win x86
     echo 30) win x86_64
-    echo 31) Clear Screen
-    echo 32) Go Back
-    echo 33) Exit
+	echo 31) win x86_64_gcc
+	echo 32) win x86_64_clang
+    echo 33) Clear Screen
+    echo 34) Go Back
+    echo 35) Exit
     set choice=
     set /p choice=Please select an OS to build for: 
 	
@@ -280,9 +284,11 @@ goto:eof
     if "%choice%"=="28" set "TARGET_OS=win_arm64"                   & goto:eof
     if "%choice%"=="29" set "TARGET_OS=win_x86"                     & goto:eof
     if "%choice%"=="30" set "TARGET_OS=win_x86_64"                  & goto:eof
-    if "%choice%"=="31" call:clear_screen                           & goto:eof
-    if "%choice%"=="32" set "APP="                                  & goto:eof
-    if "%choice%"=="33" exit                                        & goto:eof
+	if "%choice%"=="31" set "TARGET_OS=win_x86_64_gcc"              & goto:eof
+	if "%choice%"=="32" set "TARGET_OS=win_x86_64_clang"            & goto:eof
+    if "%choice%"=="33" call:clear_screen                           & goto:eof
+    if "%choice%"=="34" set "APP="                                  & goto:eof
+    if "%choice%"=="35" exit                                        & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof
@@ -381,7 +387,8 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    ::call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANG32
                 
     echo.
@@ -416,7 +423,8 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    ::call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANGARM64
                 
     echo.
@@ -433,7 +441,8 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    ::call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=UCRT64
                 
     echo.
@@ -450,7 +459,8 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    ::call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW32
                 
     echo.
@@ -468,7 +478,7 @@ goto:eof
 	echo MSYS2 = %MSYS2%
                 
     ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW64
                 
     echo.
@@ -523,18 +533,18 @@ goto:eof
 :build_all
 
 :build_debug
-    ::if "%COMPILER%"=="MINGW32" (
-    ::    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-    ::    %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-    ::    if %TYPE%==All goto:build_release
-    ::    goto:eof
-    ::)
-    ::if "%COMPILER%"=="MINGW64" (
-    ::    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-    ::    %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-    ::    if %TYPE%==All goto:build_release
-    ::    goto:eof
-    ::)
+    if "%COMPILER%"=="MINGW32" (
+        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+        if %TYPE%==All goto:build_release
+        goto:eof
+    )
+    if "%COMPILER%"=="MINGW64" (
+        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+        if %TYPE%==All goto:build_release
+        goto:eof
+    )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
         ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose

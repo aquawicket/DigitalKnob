@@ -46,34 +46,6 @@ endif()
 
 
 ###########################################################################
-## Bulid the TARGET passed from the command line
-###########################################################################
-#if(TARGET)
-#	dk_info("Building ${TARGET}\n")
-#	dk_findTarget("${TARGET}" target_path target_type)
-#	if(NOT target_path)
-#		dk_error("ERROR: Could not find target ${TARGET}")
-#		dk_wait("press any key to exit")
-#		dk_exit()
-#	endif()
-#	dk_info("found ${TARGET}:(${target_type}) at ${target_path}")
-#	dk_set(BYPASS_DISABLE ON)
-#	dk_set(QUEUE_BUILD ON)
-#
-#	#WIN_dk_depend(visualstudio)
-#	#if(NOT "${target_type}" STREQUAL "DKAPP")
-#	#	dk_depend(${TARGET})
-#	#else()
-#		project(${TARGET})
-#		dk_set(DKAPP 1)
-#		#file(WRITE ${DKCMAKE_DIR}/temp/${TARGET}.cmd "\"${MSBUILD}\" ${CMAKE_BINARY_DIR}/DigitalKnob.sln /p:Configuration=Debug\n")
-#		#file(WRITE ${DKCMAKE_DIR}/temp/${TARGET}.cmd "%CMAKE_COMMAND%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target ${TARGET} --config Debug --verbose
-#		#file(APPEND ${DKCMAKE_DIR}/temp/${TARGET}.cmd "${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${TARGET}.exe")
-#	#endif()
-#endif()
-
-
-###########################################################################
 ## Set the IDE variable
 ###########################################################################
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -172,38 +144,58 @@ if(CMAKE_BINARY_DIR)
 	dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
 	dk_debug("DK_BINARY_DIR = ${DK_BINARY_DIR}")
 	
-	### Set DK_BINARY_OSARCH_DIR ###
-	if(${CMAKE_BINARY_DIR} MATCHES "Debug$")
-		get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
-	elseif(${CMAKE_BINARY_DIR} MATCHES "Release$")
-		get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
-	else()
-		dk_set(DK_BINARY_OSARCH_DIR ${DK_BINARY_DIR})
-	endif()
-	dk_debug("DK_BINARY_OSARCH_DIR = ${DK_BINARY_OSARCH_DIR}")
 	
-	### Set DK_BINARY_OSARCH ###
-	get_filename_component(DK_BINARY_OSARCH ${DK_BINARY_OSARCH_DIR} NAME)     
-	dk_debug("DK_BINARY_OSARCH = ${DK_BINARY_OSARCH}")
+	
+	
+	### Set DK_BINARY_OS_ARCH_ENV_DIR ###
+	#if(${CMAKE_BINARY_DIR} MATCHES "_gcc$")
+	#	get_filename_component(DK_BINARY_OS_ARCH_ENV_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	#elseif(${CMAKE_BINARY_DIR} MATCHES "_clang$")
+	#	get_filename_component(DK_BINARY_OS_ARCH_ENV_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	#else()
+	#	dk_set(DK_BINARY_OS_ARCH_ENV_DIR ${DK_BINARY_DIR})
+	#endif()
+	#dk_debug("DK_BINARY_OS_ARCH_ENV_DIR = ${DK_BINARY_OS_ARCH_ENV_DIR}")
+	
+	### Set DK_BINARY_OS_ARCH_ENV ###
+	#get_filename_component(DK_BINARY_OS_ARCH_ENV ${DK_BINARY_OS_ARCH_ENV_DIR} NAME)     
+	#dk_debug("DK_BINARY_OS_ARCH_ENV = ${DK_BINARY_OS_ARCH_ENV}")
+	
+	
+	
+	
+	### Set DK_BINARY_OS_ARCH_DIR ###
+	if(${CMAKE_BINARY_DIR} MATCHES "Debug$")
+		get_filename_component(DK_BINARY_OS_ARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	elseif(${CMAKE_BINARY_DIR} MATCHES "Release$")
+		get_filename_component(DK_BINARY_OS_ARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	else()
+		dk_set(DK_BINARY_OS_ARCH_DIR ${DK_BINARY_DIR})
+	endif()
+	dk_debug("DK_BINARY_OS_ARCH_DIR = ${DK_BINARY_OS_ARCH_DIR}")
+	
+	### Set DK_BINARY_OS_ARCH ###
+	get_filename_component(DK_BINARY_OS_ARCH ${DK_BINARY_OS_ARCH_DIR} NAME)     
+	dk_debug("DK_BINARY_OS_ARCH = ${DK_BINARY_OS_ARCH}")
 	
 	### Set DK_BINARY_OS ###
-	string(FIND "${DK_BINARY_OSARCH}" "_" first_underscore)
-	string(SUBSTRING "${DK_BINARY_OSARCH}" 0 ${first_underscore} DK_BINARY_OS)
+	string(FIND "${DK_BINARY_OS_ARCH}" "_" first_underscore)
+	string(SUBSTRING "${DK_BINARY_OS_ARCH}" 0 ${first_underscore} DK_BINARY_OS)
 	dk_debug("DK_BINARY_OS = ${DK_BINARY_OS}")
 	
 	### Set DK_BINARY_ARCH ###
-	string(FIND "${DK_BINARY_OSARCH}" "_" first_underscore)
+	string(FIND "${DK_BINARY_OS_ARCH}" "_" first_underscore)
 	math(EXPR after_underscore "${first_underscore}+1" OUTPUT_FORMAT DECIMAL)
-	string(SUBSTRING "${DK_BINARY_OSARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
+	string(SUBSTRING "${DK_BINARY_OS_ARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
 	dk_debug("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
 	
 	### Set DK_PROJECT_DIR ###
-	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
+	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_ARCH_DIR} DIRECTORY)
 	dk_debug("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 endif()
 
 ### Set OS ###
-dk_set(OS "${DK_BINARY_OSARCH}")
+dk_set(OS "${DK_BINARY_OS_ARCH}")
 dk_debug("OS = ${OS}")
 
 ### Set ${OS} variable ON ##
@@ -237,14 +229,14 @@ dk_debug("RELEASE_DIR = ${RELEASE_DIR}")
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
-#if(${DK_BINARY_OSARCH} MATCHES "raspberry_arm32")
+#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
 #	dk_set(RPI ON)
 #	dk_set(RPI32 ON)
 #	dk_debug("RPI = ${RPI}")
 #	dk_debug("RPI32 = ${RPI32}")
 #endif()
 # RPI and RPI64
-#if(${DK_BINARY_OSARCH} MATCHES "raspberry_arm64")
+#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm64")
 #	dk_set(RPI ON)
 #	dk_set(RPI64 ON)
 #	dk_debug("RPI = ${RPI}")
