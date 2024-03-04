@@ -32,9 +32,9 @@ if(MSYSTEM)
 		dk_error("MSYS2:${MSYS2} does not exist")
 	endif()
 	
-	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
+	dk_command("command -v cmake.exe" OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
 	if(CMAKE_EXE)
-		dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+		dk_command("cygpath -m ${CMAKE_EXE}" OUTPUT_VARIABLE CMAKE_EXE)
 	endif()
 	
 	if(NOT EXISTS ${CMAKE_EXE})
@@ -60,8 +60,8 @@ if(MSYSTEM)
 		endif()
 	endif()
 	
-	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE)
-	dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+	dk_command("command -v cmake.exe" OUTPUT_VARIABLE CMAKE_EXE)
+	dk_command("cygpath -m ${CMAKE_EXE}" OUTPUT_VARIABLE CMAKE_EXE)
 	
 else()
 	if(WIN_HOST)

@@ -2182,18 +2182,19 @@ function(dk_msys2_bash)
 		list(APPEND bash "export PATH=${MSYS2}/clangarm64/bin:$PATH")
 	elseif(MINGW32)
 		list(APPEND bash "export PATH=${MSYS2}/mingw32/bin:$PATH")
-		#list(APPEND bash "export PATH=\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x86\":$PATH")
 	elseif(MINGW64)
 		list(APPEND bash "export PATH=${MSYS2}/mingw64/bin:$PATH")
-		#list(APPEND bash "export PATH=\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64\":$PATH")
 	elseif(UCRT64)
 		list(APPEND bash "export PATH=${MSYS2}/ucrt64/bin:$PATH")
 	else()
-		dk_error("dk_msys2(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64, UCRT64")
+		dk_error("dk_msys2_bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
 	endif()
 		
 	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
+	
+	string(REPLACE ";" " "	ARGV "${ARGV}")
 	list(APPEND bash "${ARGV}")
+	
 	list(APPEND bash "exit")
 	list(APPEND bash " ")
 	string(REPLACE ";" "\n"	bash "${bash}")
@@ -2205,7 +2206,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
-	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
+	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
 	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
@@ -2299,14 +2300,7 @@ function(dk_command)
 	DKDEBUGFUNC(${ARGV})
 	
 	dk_get_option(NOASSERT ${ARGV})
-	if(NOASSERT)
-		set(EXTRA_ARGS NOASSERT)
-	endif()
-	
 	dk_get_option(NOECHO ${ARGV})
-	if(NOECHO)
-		set(EXTRA_ARGS ${EXTRA_ARGS} NOECHO)
-	endif()
 	
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 	if(OUTPUT_VARIABLE)
@@ -2322,9 +2316,9 @@ function(dk_command)
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		dk_msys2_bash(${merged_args} ${EXTRA_ARGS})
+		dk_msys2_bash(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	else()
-		dk_executeProcess(${merged_args} ${EXTRA_ARGS})
+		dk_executeProcess(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	endif()
 	
 	if(OUTPUT_VARIABLE)
