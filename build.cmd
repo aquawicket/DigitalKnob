@@ -91,7 +91,7 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-	set TOOLSET=MINGW
+	set TOOLSET=CLANG
 	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
 	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
@@ -398,7 +398,7 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MinGW Makefiless
+    call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANG64
                 
     echo.
