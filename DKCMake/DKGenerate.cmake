@@ -24,10 +24,9 @@
 include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
+#get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
 
-include("${DKCMAKE_DIR}/DK.cmake")
 include("${DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
@@ -43,7 +42,6 @@ set(APP_NAME ${APP_NAME}_APP)
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
-	#include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 	PROJECT(${APP_NAME})
 	dk_set(DKAPP ON)
 endif()

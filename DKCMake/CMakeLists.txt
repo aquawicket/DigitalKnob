@@ -65,7 +65,7 @@ include(${CMAKE_SOURCE_DIR}/DK.cmake)
 include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
-include(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)
+include(${DKCMAKE_DIR}/DKGenerate.cmake)
 
 
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
