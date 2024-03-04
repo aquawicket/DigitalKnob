@@ -15,7 +15,7 @@ if(MSYSTEM)
 		dk_command(pacman -S mingw-w64-clang-aarch64-make --needed --noconfirm)			# CLANGARM64
 		dk_set(MAKE_PROGRAM ${MSYS2}/clangarm64/bin/mingw32-make.exe)
 	elseif(MINGW32)
-		dk_command(pacman -S mingw-w64-i686-make --needed --noconfirm")
+		dk_command(pacman -S mingw-w64-i686-make --needed --noconfirm)
 		dk_copy(${MSYS2}/mingw32/bin/mingw32-make.exe ${MSYS2}/mingw32/bin/make.exe)	# MINGW32
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
 	elseif(MINGW64)
