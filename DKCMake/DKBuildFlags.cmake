@@ -344,15 +344,15 @@ endif()
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
 	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
-	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++)
 
-	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host arm-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS			-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
@@ -363,15 +363,15 @@ endif()
 
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
-	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
 	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
-	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOS_ARM64 -std=c++17 -x objective-c++)
 	
-	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host arm64-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS			-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
@@ -381,15 +381,15 @@ endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
-	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
 	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
-	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++)
 	
-	dk_set(DKCONFIGURE_CC					${IOS_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${IOS_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS				--host i686-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS			-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
@@ -399,10 +399,10 @@ endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
-	dk_set(CMAKE_GENERATOR					${IOS_GENERATOR})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
 	dk_set(IOS_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
-	dk_set(CMAKE_C_COMPILER					${IOS_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${IOS_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++)
 	
@@ -445,14 +445,14 @@ endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
-	dk_set(CMAKE_GENERATOR					${MAC_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${MAC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${MAC_CXX_COMPILER})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
 	
-	dk_set(DKCONFIGURE_CC					${MAC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${MAC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-arch i686 -DMAC -DMAC_X86 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch i686 -DMAC -DMAC_X86 -std=c++17) #-x objective-c++) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	
@@ -461,14 +461,14 @@ endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
-	dk_set(CMAKE_GENERATOR					${MAC_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${MAC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${MAC_CXX_COMPILER})
+	dk_set(CMAKE_GENERATOR					${XCODE_GENERATOR})
+	dk_set(CMAKE_C_COMPILER					${XCODE_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${XCODE_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS				-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
 
-	dk_set(DKCONFIGURE_CC					${MAC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${MAC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${XCODE_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DMAC -DMAC_X86_64 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCONFIGURE_CXXFLAGS			-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++) #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	
