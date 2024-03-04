@@ -41,4 +41,3 @@ endif()
 
 
 dk_set(MSYS2_GENERATOR "MSYS Makefiles")
-
