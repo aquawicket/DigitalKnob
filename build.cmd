@@ -453,10 +453,6 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    ::call:validate_cmake
-    ::call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
-    :echo CMAKE_EXE = %CMAKE_EXE%
-                
     call:add_cmake_arg -G MSYS Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW32
                 
@@ -483,10 +479,6 @@ goto:eof
     ::call:validate_msys2
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 	echo MSYS2 = %MSYS2%
-                
-    ::call:validate_cmake
-    ::call:cmake_eval "include('%DKIMPORTS_DIR%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
-    ::echo CMAKE_EXE = %CMAKE_EXE%
                 
     call:add_cmake_arg -G MSYS Makefiles
     call:add_cmake_arg -DMSYSTEM=MINGW64

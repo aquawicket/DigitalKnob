@@ -306,8 +306,8 @@ if(ANDROID_ARM64) # AND CLANG)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM64 -std=c++1z)
 endif()
 
-### Emscripten x86 ###
-if(EMSCRIPTEN_X86 AND CLANG)
+### Emscripten ###
+if(EMSCRIPTEN)
 	set(EMSDK 								"${DK3RDPARTY_DIR}/emsdk-main")
 	if(WIN32)
 		dk_set(CMAKE_GENERATOR 				"MinGW Makefiles")
