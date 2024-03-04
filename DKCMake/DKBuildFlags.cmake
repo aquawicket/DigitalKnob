@@ -257,8 +257,8 @@ endif()
 
 
 
-#### Android arm32 - CLANG ###
-if(ANDROID_ARM32 AND CLANG)
+#### Android arm32
+if(ANDROID_ARM32) # AND CLANG)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_append(DKCMAKE_FLAGS
 		-DANDROID_ABI=armeabi-v7a
@@ -282,8 +282,8 @@ if(ANDROID_ARM32 AND CLANG)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
 endif()
 
-### Android arm64 - CLANG ###
-if(ANDROID_ARM64 AND CLANG)
+### Android arm64
+if(ANDROID_ARM64) # AND CLANG)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_append(DKCMAKE_FLAGS 
 		-DANDROID_ABI=arm64-v8a
@@ -388,7 +388,7 @@ if(IOSSIM_X86_64 AND XCODE)
 	dk_append(DKCONFIGURE_CXXFLAGS			-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
 endif()
 
-### Linux x86 - GCC ###
+### Linux x86 ###
 if(LINUX_X86) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
@@ -401,7 +401,7 @@ if(LINUX_X86) # AND GCC)
 	dk_append(DKCONFIGURE_CXXFLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 endif()
 
-#### Linux x86_64 - GCC ###
+#### Linux x86_64 ###
 if(LINUX_X86_64) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
@@ -411,7 +411,7 @@ if(LINUX_X86_64) # AND GCC)
 	dk_set(DKCONFIGURE_CC					/usr/bin/gcc)
 	dk_append(DKCONFIGURE_CFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_set(DKCONFIGURE_CXX					/usr/bin/g++)
-	append(DKCONFIGURE_CXXFLAGS				-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
+	dk_append(DKCONFIGURE_CXXFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 endif()
 
 ### Mac x86 - XCODE ###
@@ -442,7 +442,7 @@ if(MAC_X86_64 AND XCODE)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++) #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 endif()
 
-### Raspbery arm32 - GCC ###
+### Raspbery arm32 ###
 if(RASPBERRY_ARM32) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
@@ -455,7 +455,7 @@ if(RASPBERRY_ARM32) # AND GCC)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
 
-### Raspbery arm64 - GCC ###
+### Raspbery arm64 ###
 if(RASPBERRY_ARM64) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
