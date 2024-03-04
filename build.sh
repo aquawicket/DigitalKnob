@@ -521,7 +521,7 @@ function Generate_Project() {
 	fi
 	
 	if [[ $TARGET_OS == "emscripten" ]]; then
-		CMAKE_ARGS+=( "-G  Unix Makefiles" )
+		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		#setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
 		#validate_emscripten
 		#CMAKE_ARGS+=( "-G $EMSDK_GENERATOR" )
