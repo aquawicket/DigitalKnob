@@ -398,7 +398,8 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    call:add_cmake_arg -G MSYS Makefiles
+    ::call:add_cmake_arg -G MSYS Makefiles
+	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=CLANG64
                 
     echo.
@@ -522,18 +523,18 @@ goto:eof
 :build_all
 
 :build_debug
-    if "%COMPILER%"=="MINGW32" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-        if %TYPE%==All goto:build_release
-        goto:eof
-    )
-    if "%COMPILER%"=="MINGW64" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-        if %TYPE%==All goto:build_release
-        goto:eof
-    )
+    ::if "%COMPILER%"=="MINGW32" (
+    ::    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+    ::    %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+    ::    if %TYPE%==All goto:build_release
+    ::    goto:eof
+    ::)
+    ::if "%COMPILER%"=="MINGW64" (
+    ::    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+    ::    %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+    ::    if %TYPE%==All goto:build_release
+    ::    goto:eof
+    ::)
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
         ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose

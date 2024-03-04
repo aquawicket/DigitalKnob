@@ -40,4 +40,5 @@ if(MSYSTEM)
 endif()
 
 
-dk_set(MSYS2_GENERATOR "MSYS Makefiles")
+#dk_set(MSYS2_GENERATOR "MSYS Makefiles")
+dk_set(MSYS2_GENERATOR "MinGW Makefiles")
