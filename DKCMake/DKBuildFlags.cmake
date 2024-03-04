@@ -259,6 +259,7 @@ endif()
 #### Android arm32
 if(ANDROID_ARM32)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+	dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
 	dk_append(DKCMAKE_FLAGS
 		-DANDROID_ABI=armeabi-v7a
 		"-DANDROID_CPP_FEATURES=rtti exceptions"
@@ -284,6 +285,7 @@ endif()
 ### Android arm64
 if(ANDROID_ARM64)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+	dk_set(CMAKE_MAKE_PROGRAM				${ANDROID_MAKE_PROGRAM})
 	dk_append(DKCMAKE_FLAGS 
 		-DANDROID_ABI=arm64-v8a
 		"-DANDROID_CPP_FEATURES=rtti exceptions"
