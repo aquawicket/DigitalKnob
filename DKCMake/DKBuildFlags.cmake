@@ -389,7 +389,7 @@ if(IOSSIM_X86_64 AND XCODE)
 endif()
 
 ### Linux x86 - GCC ###
-if(LINUX_X86 AND GCC)
+if(LINUX_X86) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
@@ -402,7 +402,7 @@ if(LINUX_X86 AND GCC)
 endif()
 
 #### Linux x86_64 - GCC ###
-if(LINUX_X86_64 AND GCC)
+if(LINUX_X86_64) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
@@ -443,7 +443,7 @@ if(MAC_X86_64 AND XCODE)
 endif()
 
 ### Raspbery arm32 - GCC ###
-if(RASPBERRY_ARM32 AND GCC)
+if(RASPBERRY_ARM32) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
@@ -456,7 +456,7 @@ if(RASPBERRY_ARM32 AND GCC)
 endif()
 
 ### Raspbery arm64 - GCC ###
-if(RASPBERRY_ARM64 AND GCC)
+if(RASPBERRY_ARM64) # AND GCC)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					/usr/bin/gcc)
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
