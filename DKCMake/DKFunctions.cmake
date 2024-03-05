@@ -215,6 +215,21 @@ macro(DKASSERT expression)
 	endif()
 endmacro()
 
+##################################################################################
+# dk_printvar(var)
+#
+#	If the msg is a defined variable, print it's name and value
+#	@var	- The variable name to print
+#
+macro(dk_printvar var)
+	if(PRINTVAR)
+		if(DEFINED "${var}")
+			set(var "${var} = ${${var}}")
+		else()
+			return() #return out out calling function
+		endif()
+	endif()
+endmacro()
 
 ##################################################################################
 # dk_error(msg) NOASSERT
@@ -225,7 +240,6 @@ endmacro()
 #
 macro(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
-	
 	dk_get_option(NOASSERT ${ARGV})
 	
 	dk_updateLogInfo()
@@ -235,12 +249,7 @@ macro(dk_error msg)
 		#dk_exit()
 	endif()
 	
-	string(REPLACE " " "" var "${msg}")
-	if("${var}")
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-	endif()
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
 	
 	if(${WAIT_ON_ERRORS})
 		dk_wait(10)
@@ -249,7 +258,7 @@ endmacro()
 
 
 ##################################################################################
-# dk_warn(msg)
+# dk_warn(msg) PRINTVAR 
 #
 #	Print a warning message to the console
 #
@@ -257,7 +266,9 @@ endmacro()
 #
 macro(dk_warn msg)
 	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_warn(${ARGV})")
+	dk_get_option(PRINTVAR ${ARGV})
+	dk_printvar(msg)
+	
 	dk_updateLogInfo()
 	if(${HALT_ON_WARNINGS})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
@@ -265,101 +276,82 @@ macro(dk_warn msg)
 		dk_exit()
 	endif()
 	
-	string(REPLACE " " "" var "${msg}")
-	if("${var}")
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
-	endif()
-	
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+
 	if(${WAIT_ON_WARNINGS})
 		dk_wait(10)
 	endif()
 endmacro()
 
-
 ##################################################################################
-# dk_info(msg)
+# dk_info(msg) PRINTVAR
 #
 #	Print a info message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_info msg)
+function(dk_info msg)
 	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_info(${ARGV})")
-	string(REPLACE " " "" var "${msg}")
+	dk_get_option(PRINTVAR ${ARGV})
+	dk_printvar(msg)
+	
 	dk_updateLogInfo()
-	if("${var}")
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
-	endif()
-endmacro()
-
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
+endfunction()
 
 ##################################################################################
-# dk_debug(msg)
+# dk_debug(msg) PRINTVAR
 #
 #	Print a debug message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_debug msg)
+function(dk_debug msg)
 	#DKDEBUGFUNC(${ARGV})
 	if(DKDEBUG_ENABLED)
-		#message(STATUS "dk_debug(${ARGV})")
-		string(REPLACE " " "" var "${msg}")
+		dk_get_option(PRINTVAR ${ARGV})
+		dk_printvar(msg)
+		
 		dk_updateLogInfo()
-		if("${var}")
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} { \"${var}\" : \"${${var}}\" } ${CLR}")
-		else()
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
-		endif()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
 	endif()
-endmacro()
+endfunction()
 
 
 ##################################################################################
-# dk_verbose(msg)
+# dk_verbose(msg) PRINTVAR
 #
 #	Print a verbose message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_verbose msg)
+function(dk_verbose msg)
 	#DKDEBUGFUNC(${ARGV})
 	if(DKVERBOSE_ENABLED)
-		#message(STATUS "dk_verbose(${ARGV})")
-		string(REPLACE " " "" var "${msg}")
+		dk_get_option(PRINTVAR ${ARGV})
+		dk_printvar(msg)
+		
 		dk_updateLogInfo()
-		if("${var}")
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
-		else()
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
-		endif()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
 	endif()
-endmacro()
+endfunction()
 
 
 ##################################################################################
-# dk_trace(msg)
+# dk_trace(msg) PRINTVAR
 #
 #	Print the trace stack with a message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_trace msg)
+function(dk_trace msg)
 	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_trace(${ARGV})")
+	dk_get_option(PRINTVAR ${ARGV})
+	dk_printvar(msg)
+	
 	dk_updateLogInfo()
-	string(REPLACE " " "" var "${msg}")
-	if("${var}")
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
-	endif()
-endmacro()
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+endfunction()
 
 
 ###############################################################################
@@ -371,16 +363,15 @@ endmacro()
 #
 macro(dk_todo)
 	#DKDEBUGFUNC(${ARGV})
-	if(NOT DKTODO_ENABLED)
-		return()
+	if(DKTODO_ENABLED)
+		if(${ARGV})
+			set(msg "TODO: ${ARGV0}")
+		else()
+			set(msg "TODO:")
+		endif()
+		dk_debug(msg)
+		#dk_wait(10)
 	endif()
-	if(${ARGV})
-		set(msg "TODO: ${ARGV0}")
-	else()
-		set(msg "TODO:")
-	endif()
-	dk_debug(msg)
-	#dk_wait(10)
 endmacro()
 
 
@@ -441,7 +432,7 @@ endfunction()
 #	get a parameter by name from within a function
 #
 #	@name		-The input MARKER name for the parameter
-#	@RESULT		-The value of the next parameter after the MARKER
+#	@RESULT	-The value of the next parameter after the MARKER
 #	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name RESULT)
@@ -450,8 +441,8 @@ macro(dk_getParameter name RESULT)
 	#dk_debug("ARGN = ${ARGN}")
 	set(index 0)
 	foreach(arg ${ARGN})
-		#dk_debug("index = ${index}")
-		#dk_debug("arg = ${arg}")
+		#dk_debug(index PRINTVAR)
+		#dk_debug(arg PRINTVAR)
 		#dk_debug("ARGV${index} = ${ARGV${index}}")
 		if("${ARGV${index}}" STREQUAL "${name}")
 		#if("${arg}" STREQUAL "${name}")
@@ -485,16 +476,10 @@ function(dk_remove path)
 		endif()
 		return()
 	endif()
-	#file(REMOVE ${path})
 	file(REMOVE_RECURSE ${path})
 	if(EXISTS ${path})
 		dk_error("failed to remove ${path}")
 	endif()
-#	if(IS_DIRECTORY ${path})
-#		execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${path})
-#	else()
-#		execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${path})
-#	endif()
 endfunction()
 
 
@@ -933,7 +918,7 @@ endfunction()
 #
 function(dk_getEnv name RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_debug(ENV{${name}})
+	dk_debug(ENV{${name}} PRINTVAR)
 	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
 endfunction()
 
@@ -973,25 +958,25 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	if(NOT src_path)
 		dk_error("src_path is invalid")
 	endif()
-	dk_debug(src_path)
+	dk_debug(src_path PRINTVAR)
 	
 	get_filename_component(src_dir ${src_path} DIRECTORY)
 	if(NOT src_dir)
 		dk_error("src_dir is invalid")
 	endif()
-	dk_debug(src_dir)
+	dk_debug(src_dir PRINTVAR)
 	
 	get_filename_component(src_filename ${src_path} NAME)
 	if(NOT src_filename)
 		dk_error("src_filename is invalid")
 	endif()
-	dk_debug(src_filename)
+	dk_debug(src_filename PRINTVAR)
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
 		dk_error("src_ext is invalid")
 	endif()
-	dk_debug(src_ext)
+	dk_debug(src_ext PRINTVAR)
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
@@ -1003,7 +988,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
 	endif()
-	dk_debug(dest_path)
+	dk_debug(dest_path PRINTVAR)
 	
 	get_filename_component(dest_dir ${dest_path} DIRECTORY)
 	if(NOT dest_dir)
@@ -1014,20 +999,20 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 		dk_makeDirectory(${dest_dir})
 	endif()
 	dk_set(CURRENT_DIR ${dest_dir})
-	dk_debug(dest_dir)
+	dk_debug(dest_dir PRINTVAR)
 	
 	get_filename_component(dest_filename ${dest_path} NAME)
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()
 	endif()
-	dk_debug(dest_filename)
+	dk_debug(dest_filename PRINTVAR)
 	
 	dk_getExtension(${dest_path} dest_ext)
 	if(NOT dest_ext)
 		dk_error("dest_ext is invalid")
 	endif()
-	dk_debug(dest_ext)
+	dk_debug(dest_ext PRINTVAR)
 	
 	if(EXISTS ${dest_path})
 		if(NOT noerror)
@@ -1042,7 +1027,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path ${dest_dir}/${temp_filename})
-	dk_debug(temp_path)
+	dk_debug(temp_path PRINTVAR)
 	if(EXISTS ${temp_path})
 		dk_remove(${temp_path})
 	endif()
@@ -1668,21 +1653,21 @@ function(dk_install plugin) #PATCH
 		return()
 	endif()
 	dk_debug(" ")
-	dk_debug(url_path)
+	dk_debug(url_path PRINTVAR)
 	dk_getDirectory(${url_path} url_directory)
-	dk_debug(url_directory)
+	dk_debug(url_directory PRINTVAR)
 	dk_getFilename(${url_path} url_filename)
-	dk_debug(url_filename)
+	dk_debug(url_filename PRINTVAR)
 	dk_getExtension(${url_filename} url_extension)
-	dk_debug(url_extension)
+	dk_debug(url_extension PRINTVAR)
 	dk_debug(" ")
-	dk_debug(dest_path)
+	dk_debug(dest_path PRINTVAR)
 	dk_getDirectory(${dest_path} dest_directory)
-	dk_debug(dest_directory)
+	dk_debug(dest_directory PRINTVAR)
 	dk_getFilename(${dest_path} dest_filename)
-	dk_debug(dest_filename)
+	dk_debug(dest_filename PRINTVAR)
 	dk_getExtension(${dest_filename} dest_extension)
-	dk_debug(dest_extension)
+	dk_debug(dest_extension PRINTVAR)
 	dk_debug(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
@@ -2006,8 +1991,8 @@ dk_createOsMacros("dk_executeProcess")
 # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
-	dk_debug(ENV{${name}})
-	dk_debug(value)
+	dk_debug(ENV{${name}} PRINTVAR)
+	dk_debug(value PRINTVAR)
 	if(ENV{${name}})
 		string(FIND $ENV{${name}} ${value} index)
 	else()
@@ -3749,24 +3734,14 @@ endfunction()
 #
 #	TODO
 #
-#	@entry	- TODO
+#	@entry			- TODO
+#	@PRINTVAR	- TODO
 #
 function(dk_buildLog entry)
 	DKDEBUGFUNC(${ARGV})
 	
 	dk_get_option(PRINTVAR ${ARGV})
-	
-	# if the entry is a defined variable, print it's name and value
-	if(PRINTVAR)
-		#string(FIND "${entry}" "ENV(" index)
-		#if(${index} GREATER 0)
-		#	set(entry "${entry} = $${entry}")
-		if(DEFINED "${entry}")
-			set(entry "	${entry} = ${${entry}}")
-		else()
-			return()
-		endif()
-	endif()
+	dk_printvar(entry)
 	
 	dk_info("${entry}")
 	
@@ -4593,12 +4568,12 @@ function(dk_import url)
 	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
 	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	
-	#dk_debug("[${plugin_var}] =				${${plugin_var}}")
-	#dk_debug("[${plugin_var}_URL] =			${${plugin_var}_URL}")
-	#dk_debug("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
-	#dk_debug("[${plugin_var}_FOLDER] =			${${plugin_var}_FOLDER}")
-	#dk_debug("[${plugin_var}_BRANCH] =			${${plugin_var}_BRANCH}")
-	#dk_debug("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
+	#dk_debug(${plugin_var} 					PRINTVAR)
+	#dk_debug(${plugin_var}_URL			PRINTVAR)
+	#dk_debug(${plugin_var}_VERSION	PRINTVAR)
+	#dk_debug(${plugin_var}_FOLDER		PRINTVAR)
+	#dk_debug(${plugin_var}_BRANCH	PRINTVAR)
+	#dk_debug(${plugin_var}_TAG			PRINTVAR)
 	
 	if(NOT DKOFFLINE)
 		### .git

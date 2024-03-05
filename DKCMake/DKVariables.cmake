@@ -138,15 +138,15 @@ endif()
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
 if(CMAKE_BINARY_DIR)
 	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	dk_debug(CMAKE_BINARY_DIR	PRINTVAR)
 	
 	### Get DK_BINARY_DIR ###
 	dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
-	dk_debug("DK_BINARY_DIR = ${DK_BINARY_DIR}")
+	dk_debug(DK_BINARY_DIR	PRINTVAR)
 	
 	### Get DK_BINARY_FOLDER ###
 	get_filename_component(DK_BINARY_FOLDER ${DK_BINARY_DIR} NAME)     
-	dk_debug("DK_BINARY_FOLDER = ${DK_BINARY_FOLDER}")
+	dk_debug(DK_BINARY_FOLDER	PRINTVAR)
 	
 	### Get DK_BINARY_OS_DIR
 	### Get DK_BINARY_TYPE ###
@@ -159,12 +159,12 @@ if(CMAKE_BINARY_DIR)
 	else()
 		dk_set(DK_BINARY_OS_DIR ${CMAKE_BINARY_DIR})
 	endif()
-	dk_debug("DK_BINARY_OS_DIR = ${DK_BINARY_OS_DIR}")
-	dk_debug("DK_BINARY_TYPE = ${DK_BINARY_TYPE}")
+	dk_debug(DK_BINARY_OS_DIR	PRINTVAR)
+	dk_debug(DK_BINARY_TYPE	PRINTVAR)
 	
 	### Get DK_BINARY_OS_FOLDER
 	get_filename_component(DK_BINARY_OS_FOLDER ${DK_BINARY_OS_DIR} NAME)     
-	dk_debug("DK_BINARY_OS_FOLDER = ${DK_BINARY_OS_FOLDER}")
+	dk_debug(DK_BINARY_OS_FOLDER	PRINTVAR)
 	
 	dk_set(DK_BINARY_OS ${DK_BINARY_OS_FOLDER})
 	### Get DK_BINARY_ENV 
@@ -176,7 +176,7 @@ if(CMAKE_BINARY_DIR)
 		dk_set(DK_BINARY_ENV clang)
 		string(REPLACE _clang "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
-	dk_debug("DK_BINARY_ENV = ${DK_BINARY_ENV}")
+	dk_debug(DK_BINARY_ENV	PRINTVAR)
 	
 	### Get DK_BINARY_ARCH
 	if(${DK_BINARY_OS} MATCHES "_arm32$")
@@ -195,39 +195,39 @@ if(CMAKE_BINARY_DIR)
 		dk_set(DK_BINARY_ARCH x86_64)
 		string(REPLACE _x86_64 "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
-	dk_debug("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
+	dk_debug(DK_BINARY_ARCH	PRINTVAR)
 	
 	### Get DK_BINARY_OS
-	dk_debug("DK_BINARY_OS = ${DK_BINARY_OS}")
+	dk_debug(DK_BINARY_OS	PRINTVAR)
 	
 	
 	### Set DK_BINARY_OS_ARCH ###
 	dk_set(DK_BINARY_OS_ARCH "${DK_BINARY_OS}_${DK_BINARY_ARCH}")  
-	dk_debug("DK_BINARY_OS_ARCH = ${DK_BINARY_OS_ARCH}")
+	dk_debug(DK_BINARY_OS_ARCH	PRINTVAR)
 	
 	### Set DK_PROJECT_DIR ###
 	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_DIR} DIRECTORY)
-	dk_debug("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
+	dk_debug(DK_PROJECT_DIR	PRINTVAR)
 endif()
 
 ### Set OS ###
 dk_set(OS "${DK_BINARY_OS_ARCH}")
-dk_debug("OS = ${OS}")
+dk_debug(OS	PRINTVAR)
 
 ### Set ${OS} variable ON ##
 string(TOUPPER ${DK_BINARY_OS} DK_BINARY_OS_UPPER)
 dk_set(${DK_BINARY_OS_UPPER} ON)
-dk_debug("${DK_BINARY_OS_UPPER} = ${${DK_BINARY_OS_UPPER}}")
+dk_debug(${DK_BINARY_OS_UPPER}	PRINTVAR)
 
 ### Set ${ARCH} variable ON ##
 string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
 dk_set(${DK_BINARY_ARCH_UPPER} ON)
-dk_debug("${DK_BINARY_ARCH_UPPER} = ${${DK_BINARY_ARCH_UPPER}}")
+dk_debug(${DK_BINARY_ARCH_UPPER}	PRINTVAR)
 
 ### Set ${OS_ARCH} variable ON ##
 string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
 dk_set(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} ON)
-dk_debug("${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} = ${${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}}")
+dk_debug(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}	PRINTVAR)
 
 ### Set DEBUG_DIR and RELEASE_DIR variables
 if(${DK_BINARY_OS} MATCHES "ios")
@@ -240,30 +240,30 @@ else()
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
 endif()
-dk_debug("DEBUG_DIR = ${DEBUG_DIR}")
-dk_debug("RELEASE_DIR = ${RELEASE_DIR}")
+dk_debug(DEBUG_DIR	PRINTVAR)
+dk_debug(RELEASE_DIR	PRINTVAR)
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
 #	dk_set(RPI ON)
 #	dk_set(RPI32 ON)
-#	dk_debug("RPI = ${RPI}")
-#	dk_debug("RPI32 = ${RPI32}")
+#	dk_debug(RPI	PRINTVAR)
+#	dk_debug(RPI32	PRINTVAR)
 #endif()
 # RPI and RPI64
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm64")
 #	dk_set(RPI ON)
 #	dk_set(RPI64 ON)
-#	dk_debug("RPI = ${RPI}")
-#	dk_debug("RPI64 = ${RPI64}")
+#	dk_debug(RPI	PRINTVAR)
+#	dk_debug(RPI64	PRINTVAR)
 #endif()
 
 # TINYCORE
 string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
 if(${contains_tinycore} GREATER -1)
 	dk_set(TINYCORE ON)
-	dk_debug("TINYCORE = ${TINYCORE}")
+	dk_debug(TINYCORE	PRINTVAR)
 endif()	
 
 ### Display OS info to user ###
@@ -273,7 +273,7 @@ dk_info("*** Creating ${OS} Project Files ***")
 
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH ON)
-dk_debug("CMAKE_SKIP_RPATH = ${CMAKE_SKIP_RPATH}")
+dk_debug(CMAKE_SKIP_RPATH	PRINTVAR)
 
 
 
@@ -282,7 +282,7 @@ dk_debug("CMAKE_SKIP_RPATH = ${CMAKE_SKIP_RPATH}")
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
-		#dk_error(CMAKE_BINARY_DIR)
+		dk_debug(CMAKE_BINARY_DIR	PRINTVAR)
 		dk_error("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
