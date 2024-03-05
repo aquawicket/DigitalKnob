@@ -36,12 +36,14 @@ endif(COMMAND cmake_policy)
 ## Set variables for paths
 ###############################################################
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
+dk_debug(CURRENT_DIR	 PRINTVAR)
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
+	dk_debug(CMAKE_INSTALL_PREFIX	 PRINTVAR)
 endif()
 
 
@@ -200,7 +202,6 @@ if(CMAKE_BINARY_DIR)
 	### Get DK_BINARY_OS
 	dk_debug(DK_BINARY_OS	PRINTVAR)
 	
-	
 	### Set DK_BINARY_OS_ARCH ###
 	dk_set(DK_BINARY_OS_ARCH "${DK_BINARY_OS}_${DK_BINARY_ARCH}")  
 	dk_debug(DK_BINARY_OS_ARCH	PRINTVAR)
@@ -211,7 +212,8 @@ if(CMAKE_BINARY_DIR)
 endif()
 
 ### Set OS ###
-dk_set(OS "${DK_BINARY_OS_ARCH}")
+#dk_set(OS "${DK_BINARY_OS_ARCH}")
+dk_set(OS "${DK_BINARY_OS_FOLDER}")
 dk_debug(OS	PRINTVAR)
 
 ### Set ${OS} variable ON ##
