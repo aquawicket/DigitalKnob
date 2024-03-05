@@ -314,6 +314,15 @@ message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_A
 #dk_load(dk_trace)
 dk_load(DKColor)
 dk_load(DKFunctions)
+
+#### TEST PROMTVAR ###
+dk_set(TESTVAR "TESTVAR SUCCESSFUL")
+#dk_warn(TESTVAR 	PRINTVAR)
+dk_debug(TESTVAR 	PRINTVAR)
+#dk_info(TESTVAR 	PRINTVAR)
+#dk_buildLog(TESTVAR PRINTVAR)
+
+
 dk_load(DKFileSystem)
 dk_load(DKVariables)
 #dk_load(DKDisabled)

@@ -221,10 +221,10 @@ endmacro()
 #	If the msg is a defined variable, print it's name and value
 #	@var	- The variable name to print
 #
-macro(dk_printvar var)
+macro(dk_printvar var_name)
 	if(PRINTVAR)
-		if(DEFINED "${var}")
-			set(var "${var} = ${${var}}")
+		if(DEFINED "${${var}}")
+			set(${var} "${${var}} = ${${${var}}}")
 		else()
 			return() #return out out calling function
 		endif()
@@ -5308,12 +5308,5 @@ endfunction()
 
 
 
-
-#### TEST PROMTVAR ###
-dk_set(TESTVAR "TESTVAR SUCCESSFUL")
-dk_warn(TESTVAR 	PRINTVAR)
-#dk_debug(TESTVAR 	PRINTVAR)
-#dk_info(TESTVAR 	PRINTVAR)
-#dk_buildLog(TESTVAR PRINTVAR)
 
 include(${DKFunctions_ext})
