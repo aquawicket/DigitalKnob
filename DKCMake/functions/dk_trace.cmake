@@ -3,19 +3,17 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
 ##################################################################################
-# dk_trace(msg)
+# dk_trace(msg) PRINTVAR
 #
 #	Print the trace stack with a message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_trace msg)
-	#message(STATUS "dk_trace(${ARGV})")
+function(dk_trace msg)
+	#DKDEBUGFUNC(${ARGV})
+	dk_get_option(PRINTVAR ${ARGV})
+	dk_printvar(msg)
+	
 	dk_updateLogInfo()
-	string(REPLACE " " "" var ${msg})
-	if(${var})
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
-	endif()
-endmacro()
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+endfunction()

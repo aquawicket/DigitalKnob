@@ -3,21 +3,19 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
 ##################################################################################
-# dk_verbose(msg)
+# dk_verbose(msg) PRINTVAR
 #
 #	Print a verbose message to the console
 #
 #	@msg	- The message to print
 #
-macro(dk_verbose msg)
+function(dk_verbose msg)
+	#DKDEBUGFUNC(${ARGV})
 	if(DKVERBOSE_ENABLED)
-		#message(STATUS "dk_verbose(${ARGV})")
-		string(REPLACE " " "" var ${msg})
+		dk_get_option(PRINTVAR ${ARGV})
+		dk_printvar(msg)
+		
 		dk_updateLogInfo()
-		if(${var})
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
-		else()
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
-		endif()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
 	endif()
-endmacro()
+endfunction()

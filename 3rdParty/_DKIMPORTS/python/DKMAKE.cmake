@@ -60,15 +60,15 @@ if(ANDROID_HOST)
 
 	# /data/data/com.termux/files/usr/include/python3.11
 	dk_set(Python_INCLUDE_DIRS /data/data/com.termux/files/usr/include/python3.11)
-	dk_info("Python_INCLUDE_DIRS = ${Python_INCLUDE_DIRS}")
+	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
 
 	# /data/data/com.termux/files/usr/lib
 	dk_set(Python_LIBRARIES /data/data/com.termux/files/usr/lib)
-	dk_info("Python_LIBRARIES = ${Python_LIBRARIES}")
+	dk_debug(Python_LIBRARIES		PRINTVAR)
 
 	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_APP} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
 endif ()
 
 
-dk_debug("PYTHON_APP = ${PYTHON_APP}")
+dk_debug(PYTHON_APP		PRINTVAR)
 dk_command(${PYTHON_APP} --version)

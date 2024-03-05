@@ -93,7 +93,7 @@ foreach(plugin ${dkdepend_list})
 		Wait()
 		break()
 	endif()
-	#dk_debug(${plugin_path})
+	#dk_debug(plugin_path		PRINTVAR)
 	
 	
 	#dk_setPath(${plugin_path}/${BUILD_DIR}) # NO EFFECT

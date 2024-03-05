@@ -8,7 +8,7 @@ if(ANDROID_HOST)
 	if(NOT PEARL_EXE)
 		dk_warn("pearl not found!")
 	else()
-		dk_debug(${PEARL_EXE})
+		dk_debug(PEARL_EXE		PRINTVAR))
 		dk_command(${PEARL_EXE} --version)
 	endif()
 	
@@ -37,7 +37,7 @@ if(MSYSTEM)
 	endif()
 	
 	dk_set(PEARL_EXE pearl)
-	dk_debug("PEARL_EXE = ${PEARL_EXE}")
+	dk_debug(PEARL_EXE	PRINTVAR)
 	#dk_command(${PEARL_EXE} --version)
 
 endif()
