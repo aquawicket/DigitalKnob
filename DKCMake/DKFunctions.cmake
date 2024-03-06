@@ -870,28 +870,28 @@ dk_load(dk_deleteCache)
 #	endif()
 #endfunction()
 
-
+dk_load(dk_deleteTempFiles)
 ###############################################################################
 # dk_deleteTempFiles()
 #
 #	Delete all .tmp files recursivly thoughout the digitalknob directory
 #
-function(dk_deleteTempFiles)
-	DKDEBUGFUNC(${ARGV})
-	DKASSERT(DIGITALKNOB_DIR)
-	dk_info("Deleteing Temporary files . . .")
-	if(WIN_HOST)
-		dk_executeProcess(for /r %%i in (*.TMP) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		dk_executeProcess(for /r %%i in (*.tmp) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-	else()
-		dk_executeProcess("rm -rf `find . -name *.tmp`" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		dk_executeProcess(find . -name "*.TMP" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		dk_executeProcess(find . -name "*.tmp" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		
-	endif()
-endfunction()
+#function(dk_deleteTempFiles)
+#	DKDEBUGFUNC(${ARGV})
+#	DKASSERT(DIGITALKNOB_DIR)
+#	dk_info("Deleteing Temporary files . . .")
+#	if(WIN_HOST)
+#		dk_executeProcess(for /r %%i in (*.TMP) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		dk_executeProcess(for /r %%i in (*.tmp) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#	else()
+#		dk_executeProcess("rm -rf `find . -name *.tmp`" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		dk_executeProcess(find . -name "*.TMP" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		dk_executeProcess(find . -name "*.tmp" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		
+#	endif()
+#endfunction()
 
-
+dk_load(dk_deleteEmptyDirectories)
 ###############################################################################
 # dk_deleteEmptyDirectories(path)
 #
@@ -899,22 +899,22 @@ endfunction()
 #
 #	@path	- The path to remove all empty directories from
 #
-function(dk_deleteEmptyDirectories path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT EXISTS ${path})
-		dk_error("path:${path} does not exist")
-		dk_return()
-	endif()
-	if(WIN_HOST)
-		#execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
-		# https://stackoverflow.com/a/30138960/688352
-		execute_process(COMMAND ROBOCOPY ${path} ${path} /S /MOVE WORKING_DIRECTORY ${path})
-	else()
-		execute_process(COMMAND find ${path} -empty -type d -delete WORKING_DIRECTORY ${path})
-	endif()
-endfunction()
+#function(dk_deleteEmptyDirectories path)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT EXISTS ${path})
+#		dk_error("path:${path} does not exist")
+#		dk_return()
+#	endif()
+#	if(WIN_HOST)
+#		#execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
+#		# https://stackoverflow.com/a/30138960/688352
+#		execute_process(COMMAND ROBOCOPY ${path} ${path} /S /MOVE WORKING_DIRECTORY ${path})
+#	else()
+#		execute_process(COMMAND find ${path} -empty -type d -delete WORKING_DIRECTORY ${path})
+#	endif()
+#endfunction()
 
-
+dk_load(dk_getEnv)
 ###############################################################################
 # dk_getEnv(name RESULT)
 #
@@ -923,13 +923,13 @@ endfunction()
 #	@name		- The name of the system environment variable to get
 #	@RESULT		- Returns the value of the system environment vairable
 #
-function(dk_getEnv name RESULT)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug(ENV{${name}} PRINTVAR)
-	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
-endfunction()
+#function(dk_getEnv name RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_debug(ENV{${name}} PRINTVAR)
+#	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
+#endfunction()
 
-
+dk_load(dk_download)
 ###############################################################################
 # dk_download(src_path dest_path) #NOERROR
 #
@@ -941,132 +941,132 @@ endfunction()
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download src_path) # ARGV1 = dest_path #NOERROR
-	DKDEBUGFUNC(${ARGV})
-	#FIXME: Will not download if only 1 argument
-	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
-	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
-	#      Also, we will treat the url variable like a list. If it has more one item, treat them as alternative download links
-#	if(NOT PrimaryDownloadServer)
-#		dk_info("TODO: just set PrimaryDownloadServer to your mirror location and all file downoads will attempt that location first")
+#function(dk_download src_path) # ARGV1 = dest_path #NOERROR
+#	DKDEBUGFUNC(${ARGV})
+#	#FIXME: Will not download if only 1 argument
+#	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
+#	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
+#	#      Also, we will treat the url variable like a list. If it has more one item, treat them as alternative download links
+#	#if(NOT PrimaryDownloadServer)
+#	#	dk_info("TODO: just set PrimaryDownloadServer to your mirror location and all file downoads will attempt that location first")
+#	#endif()
+#	#if(NOT SecondaryDownloadServer)
+#	#	dk_info("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
+#	#endif()
+#
+#	set(dest_path ${ARGV1})
+#	
+#	dk_includes("${ARGN}" "NOERROR" includes)
+#	if(${includes})
+#		set(noerror true)
 #	endif()
-#	if(NOT SecondaryDownloadServer)
-#		dk_info("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
+#	
+#	# Setup all src_path variables
+#	if(NOT src_path)
+#		dk_error("src_path is invalid")
 #	endif()
+#	dk_debug(src_path PRINTVAR)
+#	
+#	get_filename_component(src_dir ${src_path} DIRECTORY)
+#	if(NOT src_dir)
+#		dk_error("src_dir is invalid")
+#	endif()
+#	dk_debug(src_dir PRINTVAR)
+#	
+#	get_filename_component(src_filename ${src_path} NAME)
+#	if(NOT src_filename)
+#		dk_error("src_filename is invalid")
+#	endif()
+#	dk_debug(src_filename PRINTVAR)
+#	
+#	dk_getExtension(${src_path} src_ext)	
+#	if(NOT src_ext)
+#		dk_error("src_ext is invalid")
+#	endif()
+#	dk_debug(src_ext PRINTVAR)
+#	
+#	# Setup all dest_path variables
+#	if(NOT dest_path)
+#		set(dest_path ${DKDOWNLOAD_DIR})
+#	endif()
+#	if(NOT dest_path)
+#		dk_error("dest_path is invalid")
+#	endif()	
+#	if(IS_DIRECTORY ${dest_path})
+#		set(dest_path "${dest_path}/${src_filename}")
+#	endif()
+#	dk_debug(dest_path PRINTVAR)
+#	
+#	get_filename_component(dest_dir ${dest_path} DIRECTORY)
+#	if(NOT dest_dir)
+#		dk_error("dest_dir is invalid")
+#	endif()
+#	if(NOT EXISTS ${dest_dir})
+#		dk_warn("dest_dir:(${dest_dir}) does not exists. It will be created")
+#		dk_makeDirectory(${dest_dir})
+#	endif()
+#	dk_set(CURRENT_DIR ${dest_dir})
+#	dk_debug(dest_dir PRINTVAR)
+#	
+#	get_filename_component(dest_filename ${dest_path} NAME)
+#	if(NOT dest_filename)
+#		dk_error("dest_filename is invalid")
+#		return()
+#	endif()
+#	dk_debug(dest_filename PRINTVAR)
+#	
+#	dk_getExtension(${dest_path} dest_ext)
+#	if(NOT dest_ext)
+#		dk_error("dest_ext is invalid")
+#	endif()
+#	dk_debug(dest_ext PRINTVAR)
+#	
+#	if(EXISTS ${dest_path})
+#		if(NOT noerror)
+#			dk_warn("dest_path:(${dest_path}) already exists")
+#		endif()
+#		return()
+#	endif()
+#	
+#	dk_debug("Downloading ${src_path}")
+#	dk_debug("      To -> ${dest_path}")
+#	
+#	# setup temp_path variables
+#	set(temp_filename "${dest_filename}.downloading")
+#	set(temp_path ${dest_dir}/${temp_filename})
+#	dk_debug(temp_path PRINTVAR)
+#	if(EXISTS ${temp_path})
+#		dk_remove(${temp_path})
+#	endif()
+#	if(EXISTS ${temp_path})
+#		dk_error("temp_path:(${temp_path}) could not be removed")
+#	endif()
+#	
+#	dk_info("Downloading ${src_filename}. . . please wait")
+#	file(DOWNLOAD ${src_path} ${temp_path} 
+#		SHOW_PROGRESS 
+#		INACTIVITY_TIMEOUT 70
+#		STATUS status 
+#	)
+#	list(GET status 0 status_code) 
+#	list(GET status 1 status_string)
+#	if(NOT status_code EQUAL 0)
+#		dk_remove(${temp_path})
+#		dk_error("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
+#	else()
+#		if(NOT EXISTS ${temp_path})
+#			dk_error("temp_path:(${temp_path}) could not locate temporary download file")
+#		endif()
+#		dk_rename(${temp_path} ${dest_path})
+#		if(NOT EXISTS ${dest_path})
+#			dk_error("dest_path:(${dest_path}) Could not locate downloaded file")
+#		endif()
+#		dk_info("${CLR}${green} Finnished downloading ${dest_filename}")
+#	endif() 
+#endfunction()
+#dk_createOsMacros("dk_download")
 
-	set(dest_path ${ARGV1})
-	
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
-	
-	# Setup all src_path variables
-	if(NOT src_path)
-		dk_error("src_path is invalid")
-	endif()
-	dk_debug(src_path PRINTVAR)
-	
-	get_filename_component(src_dir ${src_path} DIRECTORY)
-	if(NOT src_dir)
-		dk_error("src_dir is invalid")
-	endif()
-	dk_debug(src_dir PRINTVAR)
-	
-	get_filename_component(src_filename ${src_path} NAME)
-	if(NOT src_filename)
-		dk_error("src_filename is invalid")
-	endif()
-	dk_debug(src_filename PRINTVAR)
-	
-	dk_getExtension(${src_path} src_ext)	
-	if(NOT src_ext)
-		dk_error("src_ext is invalid")
-	endif()
-	dk_debug(src_ext PRINTVAR)
-	
-	# Setup all dest_path variables
-	if(NOT dest_path)
-		set(dest_path ${DKDOWNLOAD_DIR})
-	endif()
-	if(NOT dest_path)
-		dk_error("dest_path is invalid")
-	endif()	
-	if(IS_DIRECTORY ${dest_path})
-		set(dest_path "${dest_path}/${src_filename}")
-	endif()
-	dk_debug(dest_path PRINTVAR)
-	
-	get_filename_component(dest_dir ${dest_path} DIRECTORY)
-	if(NOT dest_dir)
-		dk_error("dest_dir is invalid")
-	endif()
-	if(NOT EXISTS ${dest_dir})
-		dk_warn("dest_dir:(${dest_dir}) does not exists. It will be created")
-		dk_makeDirectory(${dest_dir})
-	endif()
-	dk_set(CURRENT_DIR ${dest_dir})
-	dk_debug(dest_dir PRINTVAR)
-	
-	get_filename_component(dest_filename ${dest_path} NAME)
-	if(NOT dest_filename)
-		dk_error("dest_filename is invalid")
-		return()
-	endif()
-	dk_debug(dest_filename PRINTVAR)
-	
-	dk_getExtension(${dest_path} dest_ext)
-	if(NOT dest_ext)
-		dk_error("dest_ext is invalid")
-	endif()
-	dk_debug(dest_ext PRINTVAR)
-	
-	if(EXISTS ${dest_path})
-		if(NOT noerror)
-			dk_warn("dest_path:(${dest_path}) already exists")
-		endif()
-		return()
-	endif()
-	
-	dk_debug("Downloading ${src_path}")
-	dk_debug("      To -> ${dest_path}")
-	
-	# setup temp_path variables
-	set(temp_filename "${dest_filename}.downloading")
-	set(temp_path ${dest_dir}/${temp_filename})
-	dk_debug(temp_path PRINTVAR)
-	if(EXISTS ${temp_path})
-		dk_remove(${temp_path})
-	endif()
-	if(EXISTS ${temp_path})
-		dk_error("temp_path:(${temp_path}) could not be removed")
-	endif()
-	
-	dk_info("Downloading ${src_filename}. . . please wait")
-	file(DOWNLOAD ${src_path} ${temp_path} 
-		SHOW_PROGRESS 
-		INACTIVITY_TIMEOUT 70
-		STATUS status 
-	)
-	list(GET status 0 status_code) 
-	list(GET status 1 status_string)
-	if(NOT status_code EQUAL 0)
-		dk_remove(${temp_path})
-		dk_error("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
-	else()
-		if(NOT EXISTS ${temp_path})
-			dk_error("temp_path:(${temp_path}) could not locate temporary download file")
-		endif()
-		dk_rename(${temp_path} ${dest_path})
-		if(NOT EXISTS ${dest_path})
-			dk_error("dest_path:(${dest_path}) Could not locate downloaded file")
-		endif()
-		dk_info("${CLR}${green} Finnished downloading ${dest_filename}")
-	endif() 
-endfunction()
-dk_createOsMacros("dk_download")
-
-
+dk_load(dk_extract)
 ###############################################################################
 # dk_extract(src dest)
 #
@@ -1075,18 +1075,18 @@ dk_createOsMacros("dk_download")
 #	@src	- The full path of the archive file
 #	@dest	- The folder path to extract the archive to
 #
-function(dk_extract src dest)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT EXISTS ${dest})
-		dk_makeDirectory(${dest})
-	endif()
-	if(NOT EXISTS ${CMAKE_COMMAND})
-		dk_error("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
-	endif()
-	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
-endfunction()
+#function(dk_extract src dest)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT EXISTS ${dest})
+#		dk_makeDirectory(${dest})
+#	endif()
+#	if(NOT EXISTS ${CMAKE_COMMAND})
+#		dk_error("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
+#	endif()
+#	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
+#endfunction()
 
-
+dk_load(dk_zip)
 ###############################################################################
 # dk_zip(path)
 #
@@ -1094,16 +1094,16 @@ endfunction()
 #
 #	@path	- The full path to add to the archive file
 #
-function(dk_zip path)
-	DKDEBUGFUNC(${ARGV})
-	dk_info("Zipping: ${path}")
-	if(NOT EXISTS ${path})
-		dk_error("The path ${path} does not exist")
-	endif()
-	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DK_PROJECT_DIR}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
-endfunction()
+#function(dk_zip path)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_info("Zipping: ${path}")
+#	if(NOT EXISTS ${path})
+#		dk_error("The path ${path} does not exist")
+#	endif()
+#	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DK_PROJECT_DIR}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
+#endfunction()
 
-
+dk_load(dk_copy)
 ###############################################################################
 # dk_copy(from to) OVERWRITE NOERROR
 #
@@ -1114,64 +1114,64 @@ endfunction()
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
-function(dk_copy from to) # OVERWRITE NOERROR
-	DKDEBUGFUNC(${ARGV})
-	
-	dk_includes("${ARGN}" "OVERWRITE" includes)
-	if(${includes})
-		set(overwrite true)
-	endif()
-	
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
-	
-	if(EXISTS ${from})
-		if(IS_DIRECTORY ${from})
-			file(GLOB_RECURSE allfiles RELATIVE "${from}/" "${from}/*")
-			foreach(each_file ${allfiles})
-				if(${each_file} STREQUAL "DKMAKE.cmake")
-					continue()
-				endif()
-				if(${each_file} STREQUAL "DKMAKE.cmake.BACKUP")
-					continue()
-				endif()
-				set(sourcefile "${from}/${each_file}")
-				set(destinationfile "${to}/${each_file}")
-				if(overwrite)
-					execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${sourcefile} ${destinationfile} RESULT_VARIABLE compare_result)
-					if(compare_result EQUAL 1)
-						execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
-						dk_info("COPIED: ${sourcefile} to ${destinationfile}")
-					elseif(compare_result EQUAL 0)
-#						dk_info("${sourcefile} No Copy, The files are identical.")
-					else()
-						dk_error( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
-					endif()
-				elseif(NOT EXISTS ${destinationfile})
-					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
-					dk_info("COPIED: ${sourcefile} to ${destinationfile}")
-				endif()
-			endforeach()
-		else()
-			if(overwrite)
-				execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${from} ${to})
-				dk_info("COPIED: ${from} to ${to}")
-			elseif(NOT EXISTS ${to})
-				execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${from} ${to})
-				dk_info("COPIED: ${from} to ${to}")
-			endif()
-		endif()
-	else()
-		if(NOT noerror)
-			dk_error("from:(${from}) The source path does not exist")
-		endif()
-	endif()
-endfunction()
-dk_createOsMacros("dk_copy")
+#function(dk_copy from to) # OVERWRITE NOERROR
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	dk_includes("${ARGN}" "OVERWRITE" includes)
+#	if(${includes})
+#		set(overwrite true)
+#	endif()
+#	
+#	dk_includes("${ARGN}" "NOERROR" includes)
+#	if(${includes})
+#		set(noerror true)
+#	endif()
+#	
+#	if(EXISTS ${from})
+#		if(IS_DIRECTORY ${from})
+#			file(GLOB_RECURSE allfiles RELATIVE "${from}/" "${from}/*")
+#			foreach(each_file ${allfiles})
+#				if(${each_file} STREQUAL "DKMAKE.cmake")
+#					continue()
+#				endif()
+#				if(${each_file} STREQUAL "DKMAKE.cmake.BACKUP")
+#					continue()
+#				endif()
+#				set(sourcefile "${from}/${each_file}")
+#				set(destinationfile "${to}/${each_file}")
+#				if(overwrite)
+#					execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${sourcefile} ${destinationfile} RESULT_VARIABLE compare_result)
+#					if(compare_result EQUAL 1)
+#						execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
+#						dk_info("COPIED: ${sourcefile} to ${destinationfile}")
+#					elseif(compare_result EQUAL 0)
+#						#dk_info("${sourcefile} No Copy, The files are identical.")
+#					else()
+#						dk_error( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
+#					endif()
+#				elseif(NOT EXISTS ${destinationfile})
+#					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
+#					dk_info("COPIED: ${sourcefile} to ${destinationfile}")
+#				endif()
+#			endforeach()
+#		else()
+#			if(overwrite)
+#				execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${from} ${to})
+#				dk_info("COPIED: ${from} to ${to}")
+#			elseif(NOT EXISTS ${to})
+#				execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${from} ${to})
+#				dk_info("COPIED: ${from} to ${to}")
+#			endif()
+#		endif()
+#	else()
+#		if(NOT noerror)
+#			dk_error("from:(${from}) The source path does not exist")
+#		endif()
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_copy")
 
-
+dk_load(dk_filesMatch)
 ###############################################################################
 # dk_filesMatch(fileA fileB)
 #
@@ -1180,19 +1180,19 @@ dk_createOsMacros("dk_copy")
 #	@fileA	- TODO
 #	@fileB	- TODO
 #
-function(dk_filesMatch fileA fileB)
-	DKDEBUGFUNC(${ARGV})
-	execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
-	if(compare_result EQUAL 0)
-		dk_info("The files are identical.")
-	elseif(compare_result EQUAL 1)
-		dk_info("The files are different.")
-	else()
-		dk_info("Error while comparing the files.")
-	endif()
-endfunction()
+#function(dk_filesMatch fileA fileB)
+#	DKDEBUGFUNC(${ARGV})
+#	execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
+#	if(compare_result EQUAL 0)
+#		dk_info("The files are identical.")
+#	elseif(compare_result EQUAL 1)
+#		dk_info("The files are different.")
+#	else()
+#		dk_info("Error while comparing the files.")
+#	endif()
+#endfunction()
 
-
+dk_load(dk_rename)
 ###############################################################################
 # dk_rename(from to) OVERWRITE NOERROR
 #
@@ -1203,33 +1203,34 @@ endfunction()
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
-function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
-	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "OVERWRITE" includes)
-	if(${includes})
-		set(overwrite true)
-	endif()
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
-	dk_info("Renameing ${from} to ${to}")
-	if(NOT EXISTS ${from})
-		if(NOT noerror)
-			dk_error("from:${from} not found")
-		endif()
-		return()
-	endif()
-	if(EXISTS ${to})
-		if(NOT ${overwrite})
-			dk_error("Cannot rename file. Destiantion exists and not set to overwrite")
-		endif()
-		dk_remove(${to})
-	endif()
-	file(RENAME ${from} ${to})
-endfunction()
-dk_createOsMacros("dk_rename")
+#function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
+#	DKDEBUGFUNC(${ARGV})
+#	dk_includes("${ARGN}" "OVERWRITE" includes)
+#	if(${includes})
+#		set(overwrite true)
+#	endif()
+#	dk_includes("${ARGN}" "NOERROR" includes)
+#	if(${includes})
+#		set(noerror true)
+#	endif()
+#	dk_info("Renameing ${from} to ${to}")
+#	if(NOT EXISTS ${from})
+#		if(NOT noerror)
+#			dk_error("from:${from} not found")
+#		endif()
+#		return()
+#	endif()
+#	if(EXISTS ${to})
+#		if(NOT ${overwrite})
+#			dk_error("Cannot rename file. Destiantion exists and not set to overwrite")
+#		endif()
+#		dk_remove(${to})
+#	endif()
+#	file(RENAME ${from} ${to})
+#endfunction()
+#dk_createOsMacros("dk_rename")
 
+dk_load(dk_upxCompress)
 ###############################################################################
 # dk_upxCompress(path)
 #
@@ -1237,12 +1238,12 @@ dk_createOsMacros("dk_rename")
 #
 #	@path		- The full path to the binary file to compress with UPX
 #
-function(dk_upxCompress path)
-	DKDEBUGFUNC(${ARGV})
-	dk_info("UPX compressing ${path}...")
-	dk_info("Please wait...")
-	dk_executeProcess("${UPX_EXE} -9 -v ${path}")
-endfunction()
+#function(dk_upxCompress path)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_info("UPX compressing ${path}...")
+#	dk_info("Please wait...")
+#	dk_executeProcess("${UPX_EXE} -9 -v ${path}")
+#endfunction()
 
 
 ###############################################################################
