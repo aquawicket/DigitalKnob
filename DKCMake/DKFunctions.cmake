@@ -2236,7 +2236,7 @@ dk_createOsMacros("dk_msys2_bash")
 #
 function(dk_mergeFlags args RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_debug(args PRINTVAR)
+	#dk_debug(args PRINTVAR)
 	set(args ${args} ${RESULT} ${ARGN})
 	list(GET args -1 RESULT)
 	list(REMOVE_AT args -1)
