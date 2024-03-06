@@ -39,7 +39,7 @@ else()
 endif()
 
 
-#if(MSYS)
+#if(MINGW)
 #	dk_fileReplace("${TIFF}/CMakeLists.txt" "add_subdirectory(tools)" " ") # skip windres.exe (broken)
 #endif() 
 

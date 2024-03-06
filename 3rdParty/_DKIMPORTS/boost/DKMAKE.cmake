@@ -448,7 +448,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 		--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-elseif(MSYS)
+elseif(MINGW)
 	DEBUG_dk_queueCommand(${BOOST}/b2
 		toolset=gcc
 		target-os=windows

@@ -91,7 +91,7 @@ IOSSIM_DEBUG_dk_queueCommand	(../../Configure no-shared --debug iossimulator-xcr
 LINUX_DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
 MAC_DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_queueCommand	(../../Configure no-shared --debug)
-if(MSYS)
+if(MINGW)
 	DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
 endif()
 
@@ -123,7 +123,7 @@ IOSSIM_RELEASE_dk_queueCommand		(../../Configure no-shared --release iossimulato
 LINUX_RELEASE_dk_queueCommand		(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueCommand			(../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_queueCommand	(../../Configure no-shared --release)
-if(MSYS)
+if(MINGW)
 	RELEASE_dk_queueCommand			(../../Configure no-shared --release)
 endif()
 

@@ -431,7 +431,7 @@ dk_load(dk_includes)
 #	endif()
 #endfunction()
 
-dk_losd(dk_getParameter)
+dk_load(dk_getParameter)
 ###############################################################################
 # dk_getParameter(name RESULT ${ARGV})
 #
@@ -601,38 +601,38 @@ set(dk_disabled_list ""	CACHE INTERNAL "")
 set(DKFunctions_ext ${DKCMAKE_DIR}/DKFunctions_ext.cmake)
 dk_remove(${DKFunctions_ext} NOERROR)
 
-
+dk_load(dk_return)
 ###############################################################################
 # dk_return()
 #
 #	Print the current cmake file and return
 #
-macro(dk_return)
-	#DKDEBUGFUNC(${ARGV})
-	if(PRINT_DKRETURNS)
-		message(STATUS "${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
-	endif()
-	return()
-endmacro()
+#macro(dk_return)
+#	#DKDEBUGFUNC(${ARGV})
+#	if(PRINT_DKRETURNS)
+#		message(STATUS "${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
+#	endif()
+#	return()
+#endmacro()
 dk_createOsMacros("dk_return")
 
-
+dk_load(dk_printAllVariables)
 ###############################################################################
 # dk_printAllVariables()
 #
 #	Print all cmake varibles and save to /cmake_variables.temp 
 #
-macro(dk_printAllVariables)
-	DKDEBUGFUNC(${ARGV})
-	get_cmake_property(varNames VARIABLES)
-	list(SORT varNames)
-	foreach(varName ${varNames})
-		dk_debug(varName	PRINTVAR)
-		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
-	endforeach()
-endmacro()
+#macro(dk_printAllVariables)
+#	DKDEBUGFUNC(${ARGV})
+#	get_cmake_property(varNames VARIABLES)
+#	list(SORT varNames)
+#	foreach(varName ${varNames})
+#		dk_debug(varName	PRINTVAR)
+#		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
+#	endforeach()
+#endmacro()
 
-
+dk_load(dk_set)
 ###############################################################################
 # dk_set(variable value)
 #	
@@ -641,51 +641,51 @@ endmacro()
 #	@variable	- The name of a variable to declair
 #	@value		- The value to set the variable to. 
 #
-function(dk_set variable)# value)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT DEFINED ARGV0)
-		dk_error("dk_set(!INVALID!): ARGV0 is invalid")
-		return()
-	endif()
-	if(NOT DEFINED ARGV1)
-		dk_error("dk_set(${ARGV0} ARGV1): ARGV1 is invalid!")
-		return()
-	endif()
-
-	#set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	set(${ARGV} CACHE INTERNAL "")
-#	###### print library versions ############
-#	dk_includes(${variable} "_VERSION" includes)
-#	if(${includes})
-#		dk_debug(${variable}		PRINTVAR)
+#function(dk_set variable)# value)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT DEFINED ARGV0)
+#		dk_error("dk_set(!INVALID!): ARGV0 is invalid")
+#		return()
 #	endif()
-#	##########################################
-endfunction()
-dk_createOsMacros("dk_set")
+#	if(NOT DEFINED ARGV1)
+#		dk_error("dk_set(${ARGV0} ARGV1): ARGV1 is invalid!")
+#		return()
+#	endif()
+#
+#	#set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
+#	set(${ARGV} CACHE INTERNAL "")
+#	####### print library versions ############
+#	#dk_includes(${variable} "_VERSION" includes)
+#	#if(${includes})
+#	#	dk_debug(${variable}		PRINTVAR)
+#	#endif()
+#	###########################################
+#endfunction()
+#dk_createOsMacros("dk_set")
 
-
+dk_load(dk_append)
 ###############################################################################
 # dk_append(variable value)
 #
 #	@variable	- The name of a variable to declaire
 #	@value		- The value to add to the variable.
 #
-function(dk_append variable) #value
-	DKDEBUGFUNC(${ARGV})
-	if(NOT ARGN)
-		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
-		return()
-	endif()
-	if(${variable})
-		dk_set(${variable} ${${variable}} ${ARGN})
-	else()
-		dk_set(${variable} ${ARGN})
-	endif()
-	
-endfunction()
-dk_createOsMacros("dk_append")
+#function(dk_append variable) #value
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT ARGN)
+#		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
+#		return()
+#	endif()
+#	if(${variable})
+#		dk_set(${variable} ${${variable}} ${ARGN})
+#	else()
+#		dk_set(${variable} ${ARGN})
+#	endif()
+#	
+#endfunction()
+#dk_createOsMacros("dk_append")
 
-
+dk_load(dk_unset)
 ###############################################################################
 # dk_unset(variable)
 #
@@ -693,30 +693,30 @@ dk_createOsMacros("dk_append")
 #
 #	@variable	- The name of the variable to unset
 #
-function(dk_unset variable)
-	DKDEBUGFUNC(${ARGV})
-	set(${variable} "" CACHE INTERNAL "")
-	unset(${variable})
-endfunction()
-dk_createOsMacros("dk_unset")
+#function(dk_unset variable)
+#	DKDEBUGFUNC(${ARGV})
+#	set(${variable} "" CACHE INTERNAL "")
+#	unset(${variable})
+#endfunction()
+#dk_createOsMacros("dk_unset")
 
-
+dk_load(dk_exit)
 ###############################################################################
 # dk_exit()
 #
 #	Exit cmake
 #
-macro(dk_exit)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug("#################### dk_exit() ####################")
-	if(WIN_HOST)
-		execute_process(COMMAND taskkill /IM cmake.exe /F)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
-	else()
-		execute_process(COMMAND killall -9 cmake)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
-	endif()
-endmacro()
+#macro(dk_exit)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_debug("#################### dk_exit() ####################")
+#	if(WIN_HOST)
+#		execute_process(COMMAND taskkill /IM cmake.exe /F)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+#	else()
+#		execute_process(COMMAND killall -9 cmake)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+#	endif()
+#endmacro()
 
-
+dk_load(dk_isNumber)
 ##############################################################################
 # dk_isNumber(variable RESULT)
 # 
@@ -725,16 +725,16 @@ endmacro()
 #	@variable	- The variable to test
 #	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
-macro(dk_isNumber variable RESULT)
-	DKDEBUGFUNC(${ARGV})
-	if(${variable} MATCHES "^[0-9]+$")
-		set(${RESULT} TRUE)
-	else()
-		set(${RESULT} FALSE)
-	endif()
-endmacro()
+#macro(dk_isNumber variable RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	if(${variable} MATCHES "^[0-9]+$")
+#		set(${RESULT} TRUE)
+#	else()
+#		set(${RESULT} FALSE)
+#	endif()
+#endmacro()
 
-
+dk_load(dk_wait)
 ##############################################################################
 # dk_wait([timeout] [msg])
 # 
@@ -743,31 +743,31 @@ endmacro()
 #	@timeout:(Optional)	- default = 60
 #	@msg:(Optional)		- default = "press and key to continue."
 #
-macro(dk_wait) 
-	DKDEBUGFUNC(${ARGV})
-	
-	dk_isNumber("${ARGV0}" isNumber)
-	if(isNumber)
-		set(timeout ${ARGV0})
-		set(msg "${ARGV1}") 
-	else()
-		set(timeout 60) # default
-		set(msg "${ARGV0}")
-	endif()
-	
-	message(STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
-	
-	math(EXPR timeout_p1 ${timeout}+1)
-	if(WIN32)
-		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
-	elseif(UNIX_HOST OR MSYS)
-		execute_process(COMMAND bash -c "read -n 1 -r -s -t ${timeout}" TIMEOUT ${timeout_p1})
-	else()
-		dk_error("dk_wait(): Not implemented for this platform")
-	endif()	
-endmacro()
+#macro(dk_wait) 
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	dk_isNumber("${ARGV0}" isNumber)
+#	if(isNumber)
+#		set(timeout ${ARGV0})
+#		set(msg "${ARGV1}") 
+#	else()
+#		set(timeout 60) # default
+#		set(msg "${ARGV0}")
+#	endif()
+#	
+#	message(STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
+#	
+#	math(EXPR timeout_p1 ${timeout}+1)
+#	if(WIN32)
+#		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
+#	elseif(UNIX_HOST OR MINGW)
+#		execute_process(COMMAND bash -c "read -n 1 -r -s -t ${timeout}" TIMEOUT ${timeout_p1})
+#	else()
+#		dk_error("dk_wait(): Not implemented for this platform")
+#	endif()	
+#endmacro()
 
-
+dk_load(dk_dump)
 ##############################################################################
 # dk_dump(variable)
 # 
@@ -775,35 +775,35 @@ endmacro()
 #
 #	@variable	- The variable to print to the screen. Without variable brackets ${ }'
 #
-macro(dk_dump variable)
-	DKDEBUGFUNC(${ARGV})
-	message(STATUS "\n${cyan}############################### Variable DUMP ##############################################${CLR}")	
-	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
-		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	endif()
-	if(NOT DEFINED ${variable})
-		dk_error("variable not defined. The syntax may be incorrect if using brackets - > \$ { variable } ")
-		dk_info("${CLR}${green} dk_dump(variable): <- CORRECT SYNTAX")
-	else()
-		dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-		list(LENGTH ${variable} variableLength)
-		if(${variableLength} GREATER 1)
-			set(variableType "list")
-		elseif(variable MATCHES "^[0-9]+$")
-			set(variableType "number")
-		else()
-			set(variableType "string")
-		endif()
-		message(STATUS "${cyan}   NAME:    ${variable} ${CLR}")
-		message(STATUS "${cyan}   TYPE:    ${variableType} ${CLR}")
-		message(STATUS "${cyan}   LENGTH:  ${variableLength} ${CLR}")
-		message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
-		message(STATUS "${cyan}############################################################################################${CLR}\n")
-	endif()
-	#dk_wait()
-endmacro()
+#macro(dk_dump variable)
+#	DKDEBUGFUNC(${ARGV})
+#	message(STATUS "\n${cyan}############################### Variable DUMP ##############################################${CLR}")	
+#	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
+#		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+#	endif()
+#	if(NOT DEFINED ${variable})
+#		dk_error("variable not defined. The syntax may be incorrect if using brackets - > \$ { variable } ")
+#		dk_info("${CLR}${green} dk_dump(variable): <- CORRECT SYNTAX")
+#	else()
+#		dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
+#		list(LENGTH ${variable} variableLength)
+#		if(${variableLength} GREATER 1)
+#			set(variableType "list")
+#		elseif(variable MATCHES "^[0-9]+$")
+#			set(variableType "number")
+#		else()
+#			set(variableType "string")
+#		endif()
+#		message(STATUS "${cyan}   NAME:    ${variable} ${CLR}")
+#		message(STATUS "${cyan}   TYPE:    ${variableType} ${CLR}")
+#		message(STATUS "${cyan}   LENGTH:  ${variableLength} ${CLR}")
+#		message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
+#		message(STATUS "${cyan}############################################################################################${CLR}\n")
+#	endif()
+#	#dk_wait()
+#endmacro()
 
-
+dk_load(dk_watch)
 ##############################################################################
 # dk_watch(variable)
 # 
@@ -811,12 +811,12 @@ endmacro()
 #
 #	@variable	- The variable to watch
 #
-macro(dk_watch variable)
-	DKDEBUGFUNC(${ARGV})
-	variable_watch(variable dk_watchCallback)
-endmacro()
+#macro(dk_watch variable)
+#	DKDEBUGFUNC(${ARGV})
+#	variable_watch(variable dk_watchCallback)
+#endmacro()
 
-
+dk_load(dk_watchCallback)
 ##############################################################################
 # dk_watchCallback(variable access val 1st stack)
 # 
@@ -828,15 +828,15 @@ endmacro()
 #   @1st 		- TODO
 #	@stack 		- TODO
 #
-macro(dk_watchCallback variable access val lst stack)
-	DKDEBUGFUNC(${ARGV})
-	message(STATUS "${cyan}##################################################################################################${CLR}")
-	message(STATUS "${cyan}   Variable watch: variable=${${variable}} access=${access} val=${val} 1st=${1st} stack=${stack}  ${CLR}")
-	message(STATUS "${cyan}##################################################################################################${CLR}")
-	dk_wait()
-endmacro()
+#macro(dk_watchCallback variable access val lst stack)
+#	DKDEBUGFUNC(${ARGV})
+#	message(STATUS "${cyan}##################################################################################################${CLR}")
+#	message(STATUS "${cyan}   Variable watch: variable=${${variable}} access=${access} val=${val} 1st=${1st} stack=${stack}  ${CLR}")
+#	message(STATUS "${cyan}##################################################################################################${CLR}")
+#	dk_wait()
+#endmacro()
 
-
+dk_load(dk_setXcodeProperty)
 ##############################################################################
 # dk_setXcodeProperty(TARGET property value)
 # 
@@ -846,29 +846,29 @@ endmacro()
 #	@property	- The name of the property to set
 #   @value		- The value to set the property to
 #
-macro(dk_setXcodeProperty TARGET property value)
-	DKDEBUGFUNC(${ARGV})
-    set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
-endmacro()
+#macro(dk_setXcodeProperty TARGET property value)
+#	DKDEBUGFUNC(${ARGV})
+#	set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
+#endmacro()
 
-
+dk_load(dk_deleteCache)
 ###############################################################################
 # dk_deleteCache()
 #
 #	Delete all CMake cache files thoughout the digitalknob directory
 #
-function(dk_deleteCache)
-	DKDEBUGFUNC(${ARGV})
-	DKASSERT(DIGITALKNOB_DIR)
-	dk_info("Deleteing CMake cache . . .")
-	if(WIN_HOST)
-		dk_executeProcess(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		dk_executeProcess(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-	else()
-		dk_executeProcess(find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		dk_executeProcess("rm -rf `find . -type d -name CMakeFiles`" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-	endif()
-endfunction()
+#function(dk_deleteCache)
+#	DKDEBUGFUNC(${ARGV})
+#	DKASSERT(DIGITALKNOB_DIR)
+#	dk_info("Deleteing CMake cache . . .")
+#	if(WIN_HOST)
+#		dk_executeProcess(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		dk_executeProcess(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#	else()
+#		dk_executeProcess(find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		dk_executeProcess("rm -rf `find . -type d -name CMakeFiles`" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#	endif()
+#endfunction()
 
 
 ###############################################################################
@@ -2197,7 +2197,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
-	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
+	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
 	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
@@ -2306,7 +2306,7 @@ function(dk_command)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args})
 	#else()
 	
-	if(MSYS OR MINGW OR MSYSTEM)
+	if(MINGW)
 		dk_msys2_bash(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	else()
 		dk_executeProcess(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
@@ -2852,7 +2852,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
 		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
@@ -2900,7 +2900,7 @@ function(dk_libRelease lib_path)
 		return() # The library is already in the list
 	endif()	
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
 		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
@@ -3941,7 +3941,7 @@ function(dk_printSettings)
 	dk_buildLog(MINGW							PRINTVAR)
 	dk_buildLog(MSYS							PRINTVAR)
 	dk_buildLog(MSVC							PRINTVAR)
-	dk_buildLog(VISUAL_STUDIO					PRINTVAR)
+	#dk_buildLog(VISUAL_STUDIO					PRINTVAR)
 	dk_buildLog(XCODE							PRINTVAR)
 	
 	dk_buildLog("#################  TARGET VARIABLES  ################")

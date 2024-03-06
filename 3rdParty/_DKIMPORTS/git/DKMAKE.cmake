@@ -18,7 +18,7 @@ if(GIT_DL)
 endif()
 
 
-if(MSYSTEM)
+if(MINGW)
 	dk_depend(msys2)
 	if(NOT EXISTS ${MSYS2})
 		dk_error("MSYS2:${MSYS2} does not exist")

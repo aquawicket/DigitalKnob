@@ -1,4 +1,4 @@
-if(NOT MSYS)
+if(NOT MINGW)
 	dk_undepend(libbcrypt)
 	dk_return()
 endif()

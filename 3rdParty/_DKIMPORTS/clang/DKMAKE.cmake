@@ -1,6 +1,6 @@
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
-if(MSYSTEM)
+if(MINGW)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)

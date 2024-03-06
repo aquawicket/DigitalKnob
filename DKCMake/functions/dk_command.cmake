@@ -35,7 +35,7 @@ function(dk_command)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args})
 	#else()
 	
-	if(MSYS OR MINGW OR MSYSTEM)
+	if(MINGW)
 		dk_msys2_bash(${merged_args} ${EXTRA_ARGS})
 	else()
 		dk_executeProcess(${merged_args} ${EXTRA_ARGS})

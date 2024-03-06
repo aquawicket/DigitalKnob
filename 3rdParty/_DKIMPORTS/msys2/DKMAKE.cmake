@@ -21,7 +21,7 @@ endif()
 
 dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
-if(MSYSTEM)
+if(MINGW)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)						

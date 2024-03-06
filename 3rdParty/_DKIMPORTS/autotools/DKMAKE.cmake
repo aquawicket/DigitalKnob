@@ -8,7 +8,7 @@ MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
-if(MSYSTEM)
+if(MINGW)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
