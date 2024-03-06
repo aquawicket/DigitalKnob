@@ -726,9 +726,13 @@ endif()
 #string(REPLACE ";" " " CONFIGURE_CXXFLAGS "${CONFIGURE_CXXFLAGS}")
 
 
-if(MINGW)
-	set(quot "'")
-endif()
+## NOTE: the issues that arrive due to the need to quot depending on platform/build system do not actually stem from here.
+## 		 They stem from dk_mergeFlag located in DKFunctions.cmake. It's also worth noting that these variables go hand in hand
+## 		 with dk_mergeFlags.  I.E.  without calling dk_mergeFlags, we any need these quot symantics here and vice versa.
+##		 We will not remove these until we have worked out both this section and dk_mergeFlags to work more appropriatly 
+#if(MINGW)
+#	set(quot "'")
+#endif()
 ############## Setup continued by cmake from here ##############
 if(CMAKE_TOOLCHAIN_FILE)
 	dk_append				(DKCMAKE_FLAGS 		${quot}-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}${quot})
