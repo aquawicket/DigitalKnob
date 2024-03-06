@@ -1,0 +1,46 @@
+include_guard()
+
+###############################################################################
+# dk_is_list(result arg(s))
+#
+#	@RESULT     - returns true is the arg(s) is a list, false if not
+#	@arg		- The input argument(s) to be examined 
+#
+function(dk_is_list RESULT)
+	math(EXPR ARGC "${ARGC}-1")  
+
+	if(NOT "${${ARGN}}" STREQUAL "")
+		dk_get_arg_count(count ${${ARGN}})
+		message("count = ${count}")
+		if(${count} GREATER 1)
+			message("${ARGN} is a LIST variable")
+			set(${RESULT} TRUE PARENT_SCOPE)
+		elseif(${count} GREATER 0)
+			message("${ARGN} is a STRING variable")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		else()
+			message("${ARGN} is INVALID!")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		endif()
+		return()
+	endif()
+
+	if(NOT "${ARGN}" STREQUAL "")
+		dk_get_arg_count(count ${ARGN})
+		message("count = ${count}")
+		if(${count} GREATER 1)
+			message("${ARGN} is a LIST value")
+			set(${RESULT} TRUE PARENT_SCOPE)
+		elseif(${count} GREATER 0)
+			message("${ARGN} is a STRING value")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		else()
+			message("${ARGN} is INVALID!")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		endif()
+		return()
+	else()
+		message("${ARGN} is invalid")
+		set(${RESULT} FALSE PARENT_SCOPE)
+	endif()
+endfunction()

@@ -1402,7 +1402,7 @@ dk_load(dk_include)
 #endfunction()
 #dk_createOsMacros("dk_include")
 
-
+dk_load(dk_linkDir)
 ###############################################################################
 # dk_linkDir(path)
 #
@@ -1410,23 +1410,23 @@ dk_load(dk_include)
 #
 #	@path	The path to add to the compiler library paths
 #
-function(dk_linkDir path)
-	DKDEBUGFUNC(${ARGV})
-	#foreach(item ${ARGV})
-		#list(FIND DKLINKDIRS_LIST "${item}" index)
-		list(FIND DKLINKDIRS_LIST "${path}" index)
-		if(${index} GREATER -1)
-			continue()  # already in the list
-		endif()
-		#dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
-		dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${path})
-		#link_directories(${item})
-		link_directories(${path})
-	#endforeach()
-endfunction()
+#function(dk_linkDir path)
+#	DKDEBUGFUNC(${ARGV})
+#	#foreach(item ${ARGV})
+#		#list(FIND DKLINKDIRS_LIST "${item}" index)
+#		list(FIND DKLINKDIRS_LIST "${path}" index)
+#		if(${index} GREATER -1)
+#			continue()  # already in the list
+#		endif()
+#		#dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
+#		dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${path})
+#		#link_directories(${item})
+#		link_directories(${path})
+#	#endforeach()
+#endfunction()
 dk_createOsMacros("dk_linkDir")
 
-
+#dk_getCurrentDirectory(dk_getCurrentDirectory)
 ###############################################################################
 # dk_getCurrentDirectory(RESULT)
 #
@@ -5249,72 +5249,73 @@ macro(dk_applyPatch directory patch_file)
 	dk_info(output	PRINTVAR)
 endmacro()
 
-
+dk_load(dk_get_arg_count)
 ###############################################################################
-# get_arg_count(RESULT args)
+# dk_get_arg_count(RESULT args)
 #
 #	@RESULT  - Returns the number of args received (minus the result argument)
 #	@args 	 - a variable number of input arguments
 #
-function(get_arg_count RESULT)
-	math(EXPR ARGC "${ARGC}-1")
-	set(${RESULT} ${ARGC} PARENT_SCOPE)
-endfunction()
+#function(dk_get_arg_count RESULT)
+#	math(EXPR ARGC "${ARGC}-1")
+#	set(${RESULT} ${ARGC} PARENT_SCOPE)
+#endfunction()
 
-
+dk_load(dk_is_list)
 ###############################################################################
-# is_list(result arg(s))
+# dk_is_list(result arg(s))
 #
 #	@RESULT     - returns true is the arg(s) is a list, false if not
 #	@arg		- The input argument(s) to be examined 
 #
-function(is_list RESULT)
-	math(EXPR ARGC "${ARGC}-1")  
+#function(dk_is_list RESULT)
+#	math(EXPR ARGC "${ARGC}-1")  
+#
+#	if(NOT "${${ARGN}}" STREQUAL "")
+#		dk_get_arg_count(count ${${ARGN}})
+#		message("count = ${count}")
+#		if(${count} GREATER 1)
+#			message("${ARGN} is a LIST variable")
+#			set(${RESULT} TRUE PARENT_SCOPE)
+#		elseif(${count} GREATER 0)
+#			message("${ARGN} is a STRING variable")
+#			set(${RESULT} FALSE PARENT_SCOPE)
+#		else()
+#			message("${ARGN} is INVALID!")
+#			set(${RESULT} FALSE PARENT_SCOPE)
+#		endif()
+#		return()
+#	endif()
+#
+#	if(NOT "${ARGN}" STREQUAL "")
+#		dk_get_arg_count(count ${ARGN})
+#		message("count = ${count}")
+#		if(${count} GREATER 1)
+#			message("${ARGN} is a LIST value")
+#			set(${RESULT} TRUE PARENT_SCOPE)
+#		elseif(${count} GREATER 0)
+#			message("${ARGN} is a STRING value")
+#			set(${RESULT} FALSE PARENT_SCOPE)
+#		else()
+#			message("${ARGN} is INVALID!")
+#			set(${RESULT} FALSE PARENT_SCOPE)
+#		endif()
+#		return()
+#	else()
+#		message("${ARGN} is invalid")
+#		set(${RESULT} FALSE PARENT_SCOPE)
+#	endif()
+#endfunction()
 
-	if(NOT "${${ARGN}}" STREQUAL "")
-		get_arg_count(count ${${ARGN}})
-		message("count = ${count}")
-		if(${count} GREATER 1)
-			message("${ARGN} is a LIST variable")
-			set(${RESULT} TRUE PARENT_SCOPE)
-		elseif(${count} GREATER 0)
-			message("${ARGN} is a STRING variable")
-			set(${RESULT} FALSE PARENT_SCOPE)
-		else()
-			message("${ARGN} is INVALID!")
-			set(${RESULT} FALSE PARENT_SCOPE)
-		endif()
-		return()
-	endif()
-
-	if(NOT "${ARGN}" STREQUAL "")
-		get_arg_count(count ${ARGN})
-		message("count = ${count}")
-		if(${count} GREATER 1)
-			message("${ARGN} is a LIST value")
-			set(${RESULT} TRUE PARENT_SCOPE)
-		elseif(${count} GREATER 0)
-			message("${ARGN} is a STRING value")
-			set(${RESULT} FALSE PARENT_SCOPE)
-		else()
-			message("${ARGN} is INVALID!")
-			set(${RESULT} FALSE PARENT_SCOPE)
-		endif()
-		return()
-	else()
-		message("${ARGN} is invalid")
-		set(${RESULT} FALSE PARENT_SCOPE)
-	endif()
-endfunction()
-
+dk_load(dk_sleep)
 ###############################################################################
 # dk_sleep(seconds)
 #
 #	TODO
 #
-function(dk_sleep seconds)
-	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
-endfunction()
+#function(dk_sleep seconds)
+#	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
+#endfunction()
 
 
 
