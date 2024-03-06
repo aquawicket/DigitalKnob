@@ -91,20 +91,19 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-	set TOOLSET=MINGW
 	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
 	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
-	if %TARGET_OS%==win_arm64									call:generate_msys_makefiles_clangarm64
-	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang32
-	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw32
-	if %TARGET_OS%==win_x86			if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
-    if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="CLANG"		call:generate_msys_makefiles_clang64
-	if %TARGET_OS%==win_x86_64      if "%TOOLSET%"=="MINGW"		call:generate_msys_makefiles_mingw64
-	if %TARGET_OS%==win_x86_64    	if "%TOOLSET%"=="MSVC"		call:generate_visualstudio
-	if %TARGET_OS%==win_x86_64		if "%TOOLSET%"=="UCRT"		call:generate_msys_makefiles_ucrt64
-	if %TARGET_OS%==win_x86_64_gcc								call:generate_msys_makefiles_mingw64
-	if %TARGET_OS%==win_x86_64_clang							call:generate_msys_makefiles_clang64
+	if %TARGET_OS%==win_arm64									call:generate_clangarm64
+	if %TARGET_OS%==win_x86                                     call:generate_mingw32
+	if %TARGET_OS%==win_x86_mingw32								call:generate_mingw32
+	if %TARGET_OS%==win_x86_clang32								call:generate_clang32
+	if %TARGET_OS%==win_x86_msvc								call:generate_msvc
+	if %TARGET_OS%==win_x86_64                                  call:generate_mingw64
+	if %TARGET_OS%==win_x86_64_mingw64							call:generate_mingw64
+	if %TARGET_OS%==win_x86_64_clang64							call:generate_clang64
+	if %TARGET_OS%==win_x86_64_ucrt64							call:generate_ucrt64
+	if %TARGET_OS%==win_x86_64_msvc								call:generate_msvc
 	
     call:build
     if %TYPE%==All      call:build_all
@@ -244,15 +243,20 @@ goto:eof
     echo 27) win arm32
     echo 28) win arm64
     echo 29) win x86
-    echo 30) win x86_64
-	echo 31) win x86_64_gcc
-	echo 32) win x86_64_clang
-    echo 33) Clear Screen
-    echo 34) Go Back
-    echo 35) Exit
+	echo 30) win x86 mingw32
+	echo 31) win x86 clang32
+	echo 32) win x86 msvc
+    echo 33) win x86_64
+	echo 34) win x86_64 mingw64
+	echo 35) win x86_64 clang64
+	echo 36) win x86_64 ucrt64
+	echo 37) win x86_64 msvc
+    echo 38) Clear Screen
+    echo 39) Go Back
+    echo 40) Exit	
     set choice=
     set /p choice=Please select an OS to build for: 
-	
+		
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"              & goto:eof
     if "%choice%"=="2" set "TARGET_OS=android_arm32"                & goto:eof
@@ -283,12 +287,17 @@ goto:eof
     if "%choice%"=="27" set "TARGET_OS=win_arm32"                   & goto:eof
     if "%choice%"=="28" set "TARGET_OS=win_arm64"                   & goto:eof
     if "%choice%"=="29" set "TARGET_OS=win_x86"                     & goto:eof
-    if "%choice%"=="30" set "TARGET_OS=win_x86_64"                  & goto:eof
-	if "%choice%"=="31" set "TARGET_OS=win_x86_64_gcc"              & goto:eof
-	if "%choice%"=="32" set "TARGET_OS=win_x86_64_clang"            & goto:eof
-    if "%choice%"=="33" call:clear_screen                           & goto:eof
-    if "%choice%"=="34" set "APP="                                  & goto:eof
-    if "%choice%"=="35" exit                                        & goto:eof
+	if "%choice%"=="30" set "TARGET_OS=win_x86_mingw32"             & goto:eof
+	if "%choice%"=="31" set "TARGET_OS=win_x86_clang32"             & goto:eof
+	if "%choice%"=="32" set "TARGET_OS=win_x86_msvc"                & goto:eof
+    if "%choice%"=="33" set "TARGET_OS=win_x86_64"                  & goto:eof
+	if "%choice%"=="34" set "TARGET_OS=win_x86_64_mingw64"          & goto:eof
+	if "%choice%"=="35" set "TARGET_OS=win_x86_64_clang64"          & goto:eof
+	if "%choice%"=="36" set "TARGET_OS=win_x86_64_ucrt64"           & goto:eof
+	if "%choice%"=="37" set "TARGET_OS=win_x86_64_msvc"             & goto:eof
+    if "%choice%"=="38" call:clear_screen                           & goto:eof
+    if "%choice%"=="39" set "APP="                                  & goto:eof
+    if "%choice%"=="40" exit                                        & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof
@@ -381,7 +390,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clang32
+:generate_clang32
     set COMPILER=CLANG32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -399,7 +408,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clang64
+:generate_clang64
     set COMPILER=CLANG64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -417,7 +426,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_clangarm64
+:generate_clangarm64
     set COMPILER=CLANGARM64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -435,7 +444,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_ucrt64
+:generate_ucrt64
     set COMPILER=UCRT64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -453,7 +462,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_mingw32
+:generate_mingw32
     set COMPILER=MINGW32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -471,7 +480,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_msys_makefiles_mingw64
+:generate_mingw64
     set COMPILER=MINGW64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -499,7 +508,7 @@ goto:eof
     echo.
 goto:eof
 
-:generate_visualstudio
+:generate_msvc
 	::call:validate_visual_studio
 	::call:add_cmake_arg -G Visual Studio -A x64
     ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
