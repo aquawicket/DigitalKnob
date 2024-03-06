@@ -1111,10 +1111,10 @@ function reset_all() {
 		#"%GIT_EXE%" clean -f -d
 		
 		cd $DIGITALKNOB_DIR
-		echo ""
-		echo "DELETING $DKDOWNLOAD_DIR . . . ."
-		rm -r -f $DKDOWNLOAD_DIR
-		echo "done."
+		#echo ""
+		#echo "DELETING $DKDOWNLOAD_DIR . . . ."
+		#rm -r -f $DKDOWNLOAD_DIR
+		#echo "done."
 		echo ""
 		echo "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f $DKBRANCH_DIR
@@ -1123,9 +1123,9 @@ function reset_all() {
 		# wait 10 seconds at lease for the folders to get deleted
 		sleep 10
 		
-		if file_exists $DKDOWNLOAD_DIR; then
-			echo "Oh no, the downloads folder is still there! :( "
-		fi
+		#if file_exists $DKDOWNLOAD_DIR; then
+		#	echo "Oh no, the downloads folder is still there! :( "
+		#fi
 		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
@@ -1190,10 +1190,10 @@ function remove_all() {
 		#"%GIT_EXE%" clean -f -d
 		
 		cd $DIGITALKNOB_DIR
-		echo ""
-		echo "DELETING $DKDOWNLOAD_DIR . . . ."
-		rm -r -f $DKDOWNLOAD_DIR
-		echo "done."
+		#echo ""
+		#echo "DELETING $DKDOWNLOAD_DIR . . . ."
+		#rm -r -f $DKDOWNLOAD_DIR
+		#echo "done."
 		echo ""
 		echo "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f $DKBRANCH_DIR
@@ -1202,9 +1202,9 @@ function remove_all() {
 		# wait 10 seconds at lease for the folders to get deleted
 		sleep 10
 		
-		if file_exists $DKDOWNLOAD_DIR; then
-			echo "Oh no, the downloads folder is still there! :( "
-		fi
+		#if file_exists $DKDOWNLOAD_DIR; then
+		#	echo "Oh no, the downloads folder is still there! :( "
+		#fi
 		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi

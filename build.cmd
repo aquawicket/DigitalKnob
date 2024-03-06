@@ -646,10 +646,10 @@ goto:eof
     ::"%GIT_EXE%" clean -f -d
     
     cd %DIGITALKNOB_DIR%
-    echo.
-    echo DELETING %DKDOWNLOAD_DIR% . . . .
-    call rmdir %DKDOWNLOAD_DIR% /s /q
-    echo done.
+    ::echo.
+    ::echo DELETING %DKDOWNLOAD_DIR% . . . .
+    ::call rmdir %DKDOWNLOAD_DIR% /s /q
+    ::echo done.
     echo.
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
@@ -659,7 +659,7 @@ goto:eof
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
+    ::if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
     call:git_update NO_CONFIRM
@@ -714,10 +714,10 @@ goto:eof
     ::"%GIT_EXE%" clean -f -d
         
     cd %DIGITALKNOB_DIR%
-    echo.
-    echo DELETING %DKDOWNLOAD_DIR% . . . .
-    call rmdir %DKDOWNLOAD_DIR% /s /q
-    echo done.
+    ::echo.
+    ::echo DELETING %DKDOWNLOAD_DIR% . . . .
+    ::call rmdir %DKDOWNLOAD_DIR% /s /q
+    ::echo done.
     echo.
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
@@ -727,7 +727,7 @@ goto:eof
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
+    ::if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
 goto:eof
 
