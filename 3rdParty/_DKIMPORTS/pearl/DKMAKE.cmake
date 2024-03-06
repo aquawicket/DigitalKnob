@@ -8,7 +8,7 @@ if(ANDROID_HOST)
 	if(NOT PEARL_EXE)
 		dk_warn("pearl not found!")
 	else()
-		dk_debug(PEARL_EXE		PRINTVAR))
+		dk_debug(PEARL_EXE		PRINTVAR)
 		dk_command(${PEARL_EXE} --version)
 	endif()
 	
