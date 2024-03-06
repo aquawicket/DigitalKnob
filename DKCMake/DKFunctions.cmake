@@ -29,8 +29,9 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 # https://foonathan.net/2016/03/cmake-install/ 
 
 
-#include("${DKCMAKE_DIR}/DK.cmake")
 dk_load(DK)
+#include("${DKCMAKE_DIR}/DK.cmake")
+
 
 
 dk_load(dk_call)
@@ -1245,7 +1246,7 @@ dk_load(dk_upxCompress)
 #	dk_executeProcess("${UPX_EXE} -9 -v ${path}")
 #endfunction()
 
-
+dk_load(dk_enable)
 ###############################################################################
 # dk_enable(plugin)
 #
@@ -1253,26 +1254,26 @@ dk_load(dk_upxCompress)
 #
 #	@plugin		- TODO
 #
-function(dk_enable plugin)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT ${plugin})
-		if(${ARGC} GREATER 1)
-			dk_set(${${ARGV1}} ON)
-			dk_set(HAVE_${${ARGV1}} ON)
-			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-			string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
-			dk_define(HAVE_${argv1_macro})
-		else()
-			dk_set(${plugin} ON)
-			dk_set(HAVE_${plugin} ON)
-			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-			string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
-			dk_define(HAVE_${plugin_macro})
-		endif()
-	endif()
-endfunction()
+#function(dk_enable plugin)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT ${plugin})
+#		if(${ARGC} GREATER 1)
+#			dk_set(${${ARGV1}} ON)
+#			dk_set(HAVE_${${ARGV1}} ON)
+#			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+#			string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
+#			dk_define(HAVE_${argv1_macro})
+#		else()
+#			dk_set(${plugin} ON)
+#			dk_set(HAVE_${plugin} ON)
+#			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+#			string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
+#			dk_define(HAVE_${plugin_macro})
+#		endif()
+#	endif()
+#endfunction()
 
-
+dk_load(dk_disable)
 ###############################################################################
 # dk_disable(plugin) #target
 #
@@ -1281,49 +1282,49 @@ endfunction()
 #	@plugin				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_disable plugin)
-	DKDEBUGFUNC(${ARGV})
-	set(target ${ARGV1})
-	
-	if(BYPASS_DISABLE)
-		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
-		return()
-	endif()
-	
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE_DIR})
-		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DK_PROJECT_DIR})
-			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS_DIR}/${plugin})
-				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS_DIR}/${plugin})
-					dk_error("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
-				endif()
-			endif()
-		endif()
-	endif()
-	
-	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake)
-		if(NOT EXISTS ${DKPLUGINS_DIR}/${plugin}/DKMAKE.cmake)
-			dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
-			return()
-		endif()
-	endif()
-	
-	if(${ARGC} GREATER 1)
-	#if(target)
-		dk_unset(${ARGV1})
-		dk_unset(HAVE_${ARGV1})
-		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-		dk_undefine(HAVE_${argv1_macro})
-		dk_undepend(${ARGV1})
-	else()
-		dk_unset(${plugin})
-		dk_unset(HAVE_${plugin})
-		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)	# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-		dk_undefine(HAVE_${plugin_macro})
-		dk_undepend(${plugin})
-	endif()
-endfunction()
+#function(dk_disable plugin)
+#	DKDEBUGFUNC(${ARGV})
+#	set(target ${ARGV1})
+#	
+#	if(BYPASS_DISABLE)
+#		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
+#		return()
+#	endif()
+#	
+#	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE_DIR})
+#		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DK_PROJECT_DIR})
+#			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS_DIR}/${plugin})
+#				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS_DIR}/${plugin})
+#					dk_error("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+#				endif()
+#			endif()
+#		endif()
+#	endif()
+#	
+#	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake)
+#		if(NOT EXISTS ${DKPLUGINS_DIR}/${plugin}/DKMAKE.cmake)
+#			dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
+#			return()
+#		endif()
+#	endif()
+#	
+#	if(${ARGC} GREATER 1)
+#	#if(target)
+#		dk_unset(${ARGV1})
+#		dk_unset(HAVE_${ARGV1})
+#		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+#		dk_undefine(HAVE_${argv1_macro})
+#		dk_undepend(${ARGV1})
+#	else()
+#		dk_unset(${plugin})
+#		dk_unset(HAVE_${plugin})
+#		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)	# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+#		dk_undefine(HAVE_${plugin_macro})
+#		dk_undepend(${plugin})
+#	endif()
+#endfunction()
 
-
+dk_load(dk_define)
 ###############################################################################
 # dk_define(str)
 #
@@ -1331,21 +1332,21 @@ endfunction()
 #
 #	@str	- TODO
 #
-function(dk_define str)
-	DKDEBUGFUNC(${ARGV})
-	if(CMAKE_SCRIPT_MODE_FILE)
-		return()
-	endif()
-	list(FIND DKDEFINES_LIST "${str}" index)
-	if(${index} GREATER -1)
-		return() # already in the list
-	endif()
-	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
-	add_definitions(-D${str})
-endfunction()
-dk_createOsMacros("dk_define")
+#function(dk_define str)
+#	DKDEBUGFUNC(${ARGV})
+#	if(CMAKE_SCRIPT_MODE_FILE)
+#		return()
+#	endif()
+#	list(FIND DKDEFINES_LIST "${str}" index)
+#	if(${index} GREATER -1)
+#		return() # already in the list
+#	endif()
+#	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
+#	add_definitions(-D${str})
+#endfunction()
+#dk_createOsMacros("dk_define")
 
-
+dk_load(dk_undefine)
 ###############################################################################
 # dk_undefine(str)
 #
@@ -1353,16 +1354,16 @@ dk_createOsMacros("dk_define")
 #
 #	@str	- TODO
 #
-function(dk_undefine str)
-	DKDEBUGFUNC(${ARGV})
-	remove_definitions(${str})
-	if(NOT DKDEFINES_LIST)
-		return()
-	endif()
-	list(REMOVE_ITEM DKDEFINES_LIST ${str})
-endfunction()
+#function(dk_undefine str)
+#	DKDEBUGFUNC(${ARGV})
+#	remove_definitions(${str})
+#	if(NOT DKDEFINES_LIST)
+#		return()
+#	endif()
+#	list(REMOVE_ITEM DKDEFINES_LIST ${str})
+#endfunction()
 
-
+dk_load(dk_include)
 ###############################################################################
 # dk_include(path) variable
 #
@@ -1371,35 +1372,35 @@ endfunction()
 #	@path					- The path to add to the compiler include paths
 #   @variable (optional)	- Create a variable to store the path in.
 #
-function(dk_include path)
-	DKDEBUGFUNC(${ARGV})
-	
-	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_warn("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
-		return()
-	endif()
-	
-	list(FIND DKINCLUDES_LIST "${path}" index)
-	if(${index} GREATER -1)
-		dk_return()	# path is already in the list
-	endif()
-		
-	if(INSTALL_DKLIBS)
-		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-		file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
-		dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
-	endif()
-		
-	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
-
-	include_directories(${path})
-		
-	if(ARGV1)
-		dk_set(${ARGV1} ${path}) # add the path to the supplied variable
-	endif()
-
-endfunction()
-dk_createOsMacros("dk_include")
+#function(dk_include path)
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(CMAKE_SCRIPT_MODE_FILE)
+#		dk_warn("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
+#		return()
+#	endif()
+#	
+#	list(FIND DKINCLUDES_LIST "${path}" index)
+#	if(${index} GREATER -1)
+#		dk_return()	# path is already in the list
+#	endif()
+#		
+#	if(INSTALL_DKLIBS)
+#		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+#		file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
+#		dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
+#	endif()
+#		
+#	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+#
+#	include_directories(${path})
+#		
+#	if(ARGV1)
+#		dk_set(${ARGV1} ${path}) # add the path to the supplied variable
+#	endif()
+#
+#endfunction()
+#dk_createOsMacros("dk_include")
 
 
 ###############################################################################
