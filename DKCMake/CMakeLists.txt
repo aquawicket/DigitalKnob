@@ -64,6 +64,8 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 include(${CMAKE_SOURCE_DIR}/DK.cmake)
 include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
+
+message(STATUS "################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 include(${DKCMAKE_DIR}/DKGenerate.cmake)

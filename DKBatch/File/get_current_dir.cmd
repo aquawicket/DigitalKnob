@@ -33,6 +33,11 @@
 :: Example:  call get_current_dir rval
 ::           echo get_current_dir returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-endlocal & set %1=%cd%
+
+:: with trailing backslash
+::endlocal & set %1=%cd%
+
+:: without trailing backslash
+endlocal & set %1=%~dp0
 
 %DKEND%

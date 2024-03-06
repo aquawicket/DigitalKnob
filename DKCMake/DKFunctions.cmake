@@ -32,21 +32,22 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 include("${DKCMAKE_DIR}/DK.cmake")
 
 
+dk_load(dk_call)
 ##################################################################################
-# dk_Call(func) args
+# dk_call(func) args
 #
 #	load a ${func}.cmake file located in the DKCMake path and call the function with arguments
 #
 #	@func				- The name of the .cmake function file as well as the name of the function
 #	@args (optional) 	- The arguments to pass to the function
 #
-macro(dk_call func) #parameters
-	#DKDEBUGFUNC(${ARGV})
-	dk_load(${func})
-	dk_cmakeLanguage("${func}($ARGN)")
-endmacro()
+#macro(dk_call func) #parameters
+#	#DKDEBUGFUNC(${ARGV})
+#	dk_load(${func})
+#	dk_cmakeLanguage("${func}($ARGN)")
+#endmacro()
 
-
+dk_load(dk_listReplace)
 ###############################################################################
 # dk_listReplace(LIST old_value new_value)
 #  
@@ -56,16 +57,16 @@ endmacro()
 #	@old_value	- The value to replace
 #	@new_value	- The new value to replace with
 #
-macro(dk_listReplace LIST old_value new_value)
-	#DKDEBUGFUNC(${ARGV})
-    list(FIND ${LIST} ${old_value} old_value_INDEX)
-    if(old_value_INDEX GREATER_EQUAL 0)
-        list(REMOVE_AT ${LIST} ${old_value_INDEX})
-        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
-    endif()
-endmacro()
+#macro(dk_listReplace LIST old_value new_value)
+#	#DKDEBUGFUNC(${ARGV})
+#	list(FIND ${LIST} ${old_value} old_value_INDEX)
+#	if(old_value_INDEX GREATER_EQUAL 0)
+#		list(REMOVE_AT ${LIST} ${old_value_INDEX})
+#	list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
+#	endif()
+#endmacro()
 
-
+dk_load(dk_getArgIdentifiers)
 ###############################################################################
 # dk_getArgIdentifiers(ARGV)
 #  
@@ -73,41 +74,41 @@ endmacro()
 #
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
-function(dk_getArgIdentifiers ARGV)
-	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
-	list(LENGTH ARGV ARGV_LENGTH)
-	if(ARGV_LENGTH LESS 1)
-		return()
-	endif()
-	get_cmake_property(varNames VARIABLES)
-	set(index 0)
-	unset(names)
-	unset(ARGI)
-	while(${index} LESS ${ARGV_LENGTH})
-		list(APPEND names ARGV${index})
-		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
-		foreach(varName ${varNames} REVERSE)
-			if(ARGV${index} STREQUAL ${varName})
-				if("ARGV${index}" STREQUAL "${varName}") #exclude variables with the same name like ARGV0
-					continue()
-				endif()
-				if("ARGN" STREQUAL "${varName}")
-					continue()
-				endif()
-				#if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
-				#	continue()
-				#endif()
-				dk_listReplace(names ARGV${index} ${varName})
-				set(ARGI${index} ${varName} CACHE INTERNAL "")
-				#message(STATUS "ARGI${index} == ${ARGI${index}}")
-				break()
-			endif()
-		endforeach()
-		math(EXPR index "${index}+1")
-	endwhile()
-	set(ARGI ${names} CACHE INTERNAL "")
-endfunction()
+#function(dk_getArgIdentifiers ARGV)
+#	#DKDEBUGFUNC(${ARGV})
+#	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+#	list(LENGTH ARGV ARGV_LENGTH)
+#	if(ARGV_LENGTH LESS 1)
+#		return()
+#	endif()
+#	get_cmake_property(varNames VARIABLES)
+#	set(index 0)
+#	unset(names)
+#	unset(ARGI)
+#	while(${index} LESS ${ARGV_LENGTH})
+#		list(APPEND names ARGV${index})
+#		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
+#		foreach(varName ${varNames} REVERSE)
+#			if(ARGV${index} STREQUAL ${varName})
+#				if("ARGV${index}" STREQUAL "${varName}") #exclude variables with the same name like ARGV0
+#					continue()
+#				endif()
+#				if("ARGN" STREQUAL "${varName}")
+#					continue()
+#				endif()
+#				#if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
+#				#	continue()
+#				#endif()
+#				dk_listReplace(names ARGV${index} ${varName})
+#				set(ARGI${index} ${varName} CACHE INTERNAL "")
+#				#message(STATUS "ARGI${index} == ${ARGI${index}}")
+#				break()
+#			endif()
+#		endforeach()
+#		math(EXPR index "${index}+1")
+#	endwhile()
+#	set(ARGI ${names} CACHE INTERNAL "")
+#endfunction()
 
 
 ##################################################################################
@@ -191,7 +192,7 @@ macro(dk_updateLogInfo)
 	endif()
 endmacro()
 
-
+dk_load(DKASSERT)
 ##################################################################################
 # DKASSERT(expression)
 #
@@ -199,21 +200,21 @@ endmacro()
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-macro(DKASSERT expression)
-	#DKDEBUGFUNC(${ARGV})
-	
-	if(NOT ${expression})
-		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
-		string(REPLACE " " "" var "${expression}")
-		
-		if("${var}")
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
-		else()
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
-		endif()
-		dk_exit() #FIXME:  is this needed?
-	endif()
-endmacro()
+#macro(DKASSERT expression)
+#	#DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT ${expression})
+#		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
+#		string(REPLACE " " "" var "${expression}")
+#		
+#		if("${var}")
+#			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+#		else()
+#			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
+#		endif()
+#		dk_exit() #FIXME:  is this needed?
+#	endif()
+#endmacro()
 
 ##################################################################################
 # dk_printvar(var)
@@ -231,6 +232,7 @@ macro(dk_printvar var)
 	endif()
 endmacro()
 
+dk_load(dk_error)
 ##################################################################################
 # dk_error(msg) NOASSERT
 #
@@ -238,25 +240,25 @@ endmacro()
 #
 #	@msg	- The message to print
 #
-macro(dk_error msg)
-	#DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOASSERT ${ARGV})
-	
-	dk_updateLogInfo()
-	if(${HALT_ON_ERRORS} AND NOT ${NOASSERT})
-		message(STATUS "\n${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-		dk_exit()
-	endif()
-	
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-	
-	if(${WAIT_ON_ERRORS})
-		dk_wait(10)
-	endif()
-endmacro()
+#macro(dk_error msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	dk_get_option(NOASSERT ${ARGV})
+#	
+#	dk_updateLogInfo()
+#	if(${HALT_ON_ERRORS} AND NOT ${NOASSERT})
+#		message(STATUS "\n${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
+#		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+#		dk_exit()
+#	endif()
+#	
+#	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+#	
+#	if(${WAIT_ON_ERRORS})
+#		dk_wait(10)
+#	endif()
+#endmacro()
 
-
+dk_load(dk_warn)
 ##################################################################################
 # dk_warn(msg) PRINTVAR 
 #
@@ -264,25 +266,26 @@ endmacro()
 #
 #	@msg	- The message to print
 #
-macro(dk_warn msg)
-	#DKDEBUGFUNC(${ARGV})
-	dk_get_option(PRINTVAR ${ARGV})
-	dk_printvar(msg)
-	
-	dk_updateLogInfo()
-	if(${HALT_ON_WARNINGS})
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
-		dk_exit()
-	endif()
-	
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+#macro(dk_warn msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	dk_get_option(PRINTVAR ${ARGV})
+#	dk_printvar(msg)
+#	
+#	dk_updateLogInfo()
+#	if(${HALT_ON_WARNINGS})
+#		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
+#		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+#		dk_exit()
+#	endif()
+#	
+#	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+#
+#	if(${WAIT_ON_WARNINGS})
+#		dk_wait(10)
+#	endif()
+#endmacro()
 
-	if(${WAIT_ON_WARNINGS})
-		dk_wait(10)
-	endif()
-endmacro()
-
+dk_load(dk_info)
 ##################################################################################
 # dk_info(msg) PRINTVAR
 #
@@ -290,15 +293,16 @@ endmacro()
 #
 #	@msg	- The message to print
 #
-function(dk_info msg)
-	#DKDEBUGFUNC(${ARGV})
-	dk_get_option(PRINTVAR ${ARGV})
-	dk_printvar(msg)
-	
-	dk_updateLogInfo()
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
-endfunction()
+#function(dk_info msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	dk_get_option(PRINTVAR ${ARGV})
+#	dk_printvar(msg)
+#	
+#	dk_updateLogInfo()
+#	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
+#endfunction()
 
+dk_load(dk_debug)
 ##################################################################################
 # dk_debug(msg) PRINTVAR
 #
@@ -306,18 +310,18 @@ endfunction()
 #
 #	@msg	- The message to print
 #
-function(dk_debug msg)
-	#DKDEBUGFUNC(${ARGV})
-	if(DKDEBUG_ENABLED)
-		dk_get_option(PRINTVAR ${ARGV})
-		dk_printvar(msg)
-		
-		dk_updateLogInfo()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
-	endif()
-endfunction()
+#function(dk_debug msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	if(DKDEBUG_ENABLED)
+#		dk_get_option(PRINTVAR ${ARGV})
+#		dk_printvar(msg)
+#		
+#		dk_updateLogInfo()
+#		message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
+#	endif()
+#endfunction()
 
-
+dk_load(dk_verbose)
 ##################################################################################
 # dk_verbose(msg) PRINTVAR
 #
@@ -325,18 +329,18 @@ endfunction()
 #
 #	@msg	- The message to print
 #
-function(dk_verbose msg)
-	#DKDEBUGFUNC(${ARGV})
-	if(DKVERBOSE_ENABLED)
-		dk_get_option(PRINTVAR ${ARGV})
-		dk_printvar(msg)
-		
-		dk_updateLogInfo()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
-	endif()
-endfunction()
+#function(dk_verbose msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	if(DKVERBOSE_ENABLED)
+#		dk_get_option(PRINTVAR ${ARGV})
+#		dk_printvar(msg)
+#		
+#		dk_updateLogInfo()
+#		message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
+#	endif()
+#endfunction()
 
-
+dk_load(dk_trace)
 ##################################################################################
 # dk_trace(msg) PRINTVAR
 #
@@ -344,14 +348,14 @@ endfunction()
 #
 #	@msg	- The message to print
 #
-function(dk_trace msg)
-	#DKDEBUGFUNC(${ARGV})
-	dk_get_option(PRINTVAR ${ARGV})
-	dk_printvar(msg)
-	
-	dk_updateLogInfo()
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
-endfunction()
+#function(dk_trace msg)
+#	#DKDEBUGFUNC(${ARGV})
+#	dk_get_option(PRINTVAR ${ARGV})
+#	dk_printvar(msg)
+#	
+#	dk_updateLogInfo()
+#	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+#endfunction()
 
 
 ###############################################################################
@@ -702,10 +706,11 @@ dk_createOsMacros("dk_unset")
 #
 macro(dk_exit)
 	DKDEBUGFUNC(${ARGV})
+	dk_debug("#################### dk_exit() ####################")
 	if(WIN_HOST)
-		execute_process(COMMAND taskkill /IM cmake.exe /F WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+		execute_process(COMMAND taskkill /IM cmake.exe /F)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	else()
-		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+		execute_process(COMMAND killall -9 cmake)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
 endmacro()
 

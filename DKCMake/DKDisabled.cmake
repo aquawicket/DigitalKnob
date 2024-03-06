@@ -531,13 +531,13 @@ if(MSVC AND WIN_X86_64)
 endif(MSVC AND WIN_X86_64)
 
 
-# Disabled for Windows (MSYS2) targets
-if(MSYS)
+# Disabled for Windows (MINGW) targets
+if(MINGW)
 	dk_disable(boost)
 	dk_disable(glew)
 	dk_disable(flac)
 	dk_disable(libexpat)
 	dk_disable(libiconv)
 	dk_disable(stackwalker)
-endif(MSYS)
+endif(MINGW)
 

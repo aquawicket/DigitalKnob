@@ -7,21 +7,20 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
 #
-#	@expression:  Expression to be evaluated. If this expression evaluates to false, this causes an assertion
+#	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 macro(DKASSERT expression)
 	#DKDEBUGFUNC(${ARGV})
-	if(expression)
-		return()
-	endif()
 	
-	message(STATUS "Assertion failed: ${expression}, ${STACK_HEADER}")
-	string(REPLACE " " "" var ${msg})
-	dk_updateLogInfo()
-	if(${var})
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${msg} ${CLR}")
+	if(NOT ${expression})
+		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
+		string(REPLACE " " "" var "${expression}")
+		
+		if("${var}")
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+		else()
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
+		endif()
+		dk_exit() #FIXME:  is this needed?
 	endif()
-	dk_exit() #FIXME:  is this needed?
 endmacro()

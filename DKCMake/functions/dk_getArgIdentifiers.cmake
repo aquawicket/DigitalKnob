@@ -10,6 +10,7 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)

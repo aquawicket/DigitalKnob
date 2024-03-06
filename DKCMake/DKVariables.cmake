@@ -39,6 +39,7 @@ dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
 dk_debug(CURRENT_DIR	 PRINTVAR)
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
+dk_debug(CMAKE_SUPPRESS_REGENERATION	 PRINTVAR)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
@@ -50,13 +51,22 @@ endif()
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
+dk_debug(CMAKE_CXX_COMPILER_ID	PRINTVAR)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	dk_set(GNU ON)
+	dk_set(GNU 1)
+	dk_debug(GNU	PRINTVAR)
 endif()
-string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
+#string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 #if(${index} GREATER -1)
-#	dk_set(VISUAL_STUDIO ON)
+#	dk_set(MSVC 1)
+#	dk_debug(MSVC	PRINTVAR)
 #endif()
+#if(CMAKE_CXX_COMPILER_ID STREQUAL "MinGW Makefiles")
+dk_debug(CMAKE_GENERATOR	PRINTVAR)
+if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
+	dk_set(MINGW 1)
+	dk_debug(MINGW	PRINTVAR)
+endif()
 
 
 ###########################################################################
@@ -68,7 +78,9 @@ if(NOT DEBUG)
 if(NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
 	dk_set(DEBUG ON)
+	dk_debug(DEBUG	 PRINTVAR)
 	dk_set(RELEASE ON)
+	dk_debug(RELEASE	 PRINTVAR)
 endif()
 endif()
 
@@ -84,6 +96,7 @@ if(NOT REBUILD)
 if(NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
 	dk_set(REBUILDALL ON)
+	dk_debug(REBUILDALL	 PRINTVAR)
 endif()
 endif()
 endif()
@@ -97,6 +110,7 @@ option(SHARED "Build Shared Libraries and Plugins" OFF)
 if(NOT STATIC)
 if(NOT SHARED)
 	dk_set(STATIC ON)
+	dk_debug(STATIC	 PRINTVAR)
 endif()
 endif()
 
@@ -115,6 +129,7 @@ endif()
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")
 #	dk_set(DKAPP ON)
+#	dk_debug(DKAPP	 PRINTVAR)
 #	add_definitions(-DDKAPP)
 #endif()
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKPlugin/" index)
@@ -138,7 +153,8 @@ endif()
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
-if(CMAKE_BINARY_DIR)
+#if(CMAKE_BINARY_DIR)
+if(NOT CMAKE_SCRIPT_MODE_FILE)
 	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 	dk_debug(CMAKE_BINARY_DIR	PRINTVAR)
 	
@@ -209,42 +225,41 @@ if(CMAKE_BINARY_DIR)
 	### Set DK_PROJECT_DIR ###
 	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_DIR} DIRECTORY)
 	dk_debug(DK_PROJECT_DIR	PRINTVAR)
+
+	### Set OS ###
+	#dk_set(OS "${DK_BINARY_OS_ARCH}")
+	dk_set(OS "${DK_BINARY_OS_FOLDER}")
+	dk_debug(OS	PRINTVAR)
+
+	### Set ${OS} variable ON ##
+	string(TOUPPER ${DK_BINARY_OS} DK_BINARY_OS_UPPER)
+	dk_set(${DK_BINARY_OS_UPPER} ON)
+	dk_debug(${DK_BINARY_OS_UPPER}	PRINTVAR)
+
+	### Set ARCH variable ON ##
+	string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
+	dk_set(${DK_BINARY_ARCH_UPPER} ON)
+	dk_debug(${DK_BINARY_ARCH_UPPER}	PRINTVAR)
+
+	### Set ${OS_ARCH} variable ON ##
+	string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
+	dk_set(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} ON)
+	dk_debug(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}	PRINTVAR)
+
+	### Set DEBUG_DIR and RELEASE_DIR variables
+	if(${DK_BINARY_OS} MATCHES "ios")
+		dk_set(DEBUG_DIR Debug-iphoneos)
+		dk_set(RELEASE_DIR Release-iphoneos)
+	elseif(${DK_BINARY_OS} MATCHES "iossim")
+		dk_set(DEBUG_DIR Debug-iphonesimulator)
+		dk_set(RELEASE_DIR Release-iphonesimulator)
+	else()
+		dk_set(DEBUG_DIR Debug)
+		dk_set(RELEASE_DIR Release)
+	endif()
+	dk_debug(DEBUG_DIR	PRINTVAR)
+	dk_debug(RELEASE_DIR	PRINTVAR)
 endif()
-
-### Set OS ###
-#dk_set(OS "${DK_BINARY_OS_ARCH}")
-dk_set(OS "${DK_BINARY_OS_FOLDER}")
-dk_debug(OS	PRINTVAR)
-
-### Set ${OS} variable ON ##
-string(TOUPPER ${DK_BINARY_OS} DK_BINARY_OS_UPPER)
-dk_set(${DK_BINARY_OS_UPPER} ON)
-dk_debug(${DK_BINARY_OS_UPPER}	PRINTVAR)
-
-### Set ${ARCH} variable ON ##
-string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
-dk_set(${DK_BINARY_ARCH_UPPER} ON)
-dk_debug(${DK_BINARY_ARCH_UPPER}	PRINTVAR)
-
-### Set ${OS_ARCH} variable ON ##
-string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
-dk_set(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} ON)
-dk_debug(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}	PRINTVAR)
-
-### Set DEBUG_DIR and RELEASE_DIR variables
-if(${DK_BINARY_OS} MATCHES "ios")
-	dk_set(DEBUG_DIR Debug-iphoneos)
-	dk_set(RELEASE_DIR Release-iphoneos)
-elseif(${DK_BINARY_OS} MATCHES "iossim")
-	dk_set(DEBUG_DIR Debug-iphonesimulator)
-	dk_set(RELEASE_DIR Release-iphonesimulator)
-else()
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-endif()
-dk_debug(DEBUG_DIR	PRINTVAR)
-dk_debug(RELEASE_DIR	PRINTVAR)
-
 ### Set other OS Specific variables ###
 # RPI and RPI32
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
@@ -269,8 +284,10 @@ if(${contains_tinycore} GREATER -1)
 endif()	
 
 ### Display OS info to user ###
+dk_info("")
+dk_info("")
 dk_info("*** Creating ${OS} Project Files ***")
-
+dk_info("")
 
 
 ### Set CMAKE_SKIP_RPATH ###
