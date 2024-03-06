@@ -1876,7 +1876,7 @@ macro(dk_get_option name)
 		dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
 	else()
 		unset(${name})
-		dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
+		message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
 	list(REMOVE_ITEM ARGV ${name})	# remove item from parents ARGV list
 endmacro()
