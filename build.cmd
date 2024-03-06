@@ -91,19 +91,19 @@ if "%*" NEQ "" call %*
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
     call:generate
-	if %TARGET_OS%==android_arm32 								call:generate_unix_makefiles
-	if %TARGET_OS%==android_arm64 								call:generate_unix_makefiles
-	if %TARGET_OS%==emscripten  								call:generate_mingw_makefiles
-	if %TARGET_OS%==win_arm64									call:generate_clangarm64
-	if %TARGET_OS%==win_x86                                     call:generate_mingw32
-	if %TARGET_OS%==win_x86_mingw32								call:generate_mingw32
-	if %TARGET_OS%==win_x86_clang32								call:generate_clang32
-	if %TARGET_OS%==win_x86_msvc								call:generate_msvc
-	if %TARGET_OS%==win_x86_64                                  call:generate_mingw64
-	if %TARGET_OS%==win_x86_64_mingw64							call:generate_mingw64
-	if %TARGET_OS%==win_x86_64_clang64							call:generate_clang64
-	if %TARGET_OS%==win_x86_64_ucrt64							call:generate_ucrt64
-	if %TARGET_OS%==win_x86_64_msvc								call:generate_msvc
+	if %TARGET_OS%==android_arm32 		call:generate_unix_makefiles
+	if %TARGET_OS%==android_arm64 		call:generate_unix_makefiles
+	if %TARGET_OS%==emscripten  		call:generate_mingw_makefiles
+	if %TARGET_OS%==win_arm64			call:generate_clangarm64
+	if %TARGET_OS%==win_x86             set MSYSTEM=MINGW32	& call:generate_msystem
+	if %TARGET_OS%==win_x86_mingw32		set MSYSTEM=MINGW32	& call:generate_msystem
+	if %TARGET_OS%==win_x86_clang32		set MSYSTEM=CLANG32	& call:generate_msystem
+	if %TARGET_OS%==win_x86_msvc		call:generate_msvc
+	if %TARGET_OS%==win_x86_64          set MSYSTEM=MINGW64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_mingw64	set MSYSTEM=MINGW64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_clang64	set MSYSTEM=CLANG64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_ucrt64	set MSYSTEM=UCRT64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_msvc		call:generate_msvc
 	
     call:build
     if %TYPE%==All      call:build_all
@@ -390,111 +390,17 @@ goto:eof
     echo.
 goto:eof
 
-:generate_clang32
-    set MSYSTEM=CLANG32
-                
+:generate_msystem
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
                 
-    ::call:add_cmake_arg -G MSYS Makefiles
 	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=CLANG32
+    call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
                 
     echo.
     echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    echo.
-goto:eof
-
-:generate_clang64
-    set MSYSTEM=CLANG64
-                
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
-                
-    ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=CLANG64
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    echo.
-goto:eof
-
-:generate_clangarm64
-    set MSYSTEM=CLANGARM64
-                
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
-                
-    ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=CLANGARM64
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    echo.
-goto:eof
-
-:generate_ucrt64
-    set MSYSTEM=UCRT64
-                
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
-                
-    ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=UCRT64
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    echo.
-goto:eof
-
-:generate_mingw32
-    set MSYSTEM=MINGW32
-                
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
-                
-    ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=MINGW32
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    echo.
-goto:eof
-
-:generate_mingw64
-    set MSYSTEM=MINGW64
-                
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-	echo MSYS2 = %MSYS2%
-                
-    ::call:add_cmake_arg -G MSYS Makefiles
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=MINGW64
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
-    echo %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-    %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    "%CMAKE_EXE%" %CMAKE_ARGS%
     echo.
 goto:eof
 
@@ -544,21 +450,18 @@ goto:eof
 :build_debug
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-        ::if %TYPE%==All goto:build_release
         goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
-        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
+        echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
 		goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
-        "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
+        echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
 		goto:eof
     )
-        
-    ::if %TYPE%==All goto:build_release
 goto:eof
 
 :build_release

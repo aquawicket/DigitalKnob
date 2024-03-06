@@ -1,6 +1,4 @@
 include_guard()
-message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
-
 
 macro(dk_dumpAllVariables file)
 	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
