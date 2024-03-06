@@ -359,7 +359,7 @@ dk_load(dk_trace)
 #	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
 #endfunction()
 
-
+dk_load(dk_todo)
 ###############################################################################
 # dk_todo(msg)
 #
@@ -367,20 +367,20 @@ dk_load(dk_trace)
 #
 #	@msg (optional)	- A header message to print
 #
-macro(dk_todo)
-	#DKDEBUGFUNC(${ARGV})
-	if(DKTODO_ENABLED)
-		if(${ARGV})
-			set(msg "TODO: ${ARGV0}")
-		else()
-			set(msg "TODO:")
-		endif()
-		dk_debug(msg)
-		#dk_wait(10)
-	endif()
-endmacro()
+#macro(dk_todo)
+#	#DKDEBUGFUNC(${ARGV})
+#	if(DKTODO_ENABLED)
+#		if(${ARGV})
+#			set(msg "TODO: ${ARGV0}")
+#		else()
+#			set(msg "TODO:")
+#		endif()
+#		dk_debug(msg)
+#		#dk_wait(10)
+#	endif()
+#endmacro()
 
-
+dk_load(dk_pad)
 ###############################################################################
 # dk_pad(str padchar length RESULT)
 #
@@ -391,25 +391,25 @@ endmacro()
 #	@length		- The number of spaces to pad
 #	@RESULT		- The returned string w/padding
 #
-function(dk_pad str padchar length RESULT)
-	#DKDEBUGFUNC(${ARGV})
-	string(LENGTH "${str}" _strlen)
-	math(EXPR _strlen "${length} - ${_strlen}")
-
-	if(_strlen GREATER 0)
-		if(${CMAKE_VERSION} VERSION_LESS "3.14")
-			unset(_pad)
-			foreach(_i RANGE 1 ${_strlen}) # inclusive
-				string(APPEND _pad ${padchar})
-			endforeach()
-		else()
-			string(REPEAT ${padchar} ${_strlen} _pad)
-		endif()
-    string(APPEND str ${_pad})
-  endif()
-
-  set(${RESULT} "${str}" PARENT_SCOPE)
-endfunction()
+#function(dk_pad str padchar length RESULT)
+#	#DKDEBUGFUNC(${ARGV})
+#	string(LENGTH "${str}" _strlen)
+#	math(EXPR _strlen "${length} - ${_strlen}")
+#
+#	if(_strlen GREATER 0)
+#		if(${CMAKE_VERSION} VERSION_LESS "3.14")
+#			unset(_pad)
+#			foreach(_i RANGE 1 ${_strlen}) # inclusive
+#				string(APPEND _pad ${padchar})
+#			endforeach()
+#		else()
+#			string(REPEAT ${padchar} ${_strlen} _pad)
+#		endif()
+#	string(APPEND str ${_pad})
+#	endif()
+#
+#  set(${RESULT} "${str}" PARENT_SCOPE)
+#endfunction()
 
 
 ###############################################################################

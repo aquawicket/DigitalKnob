@@ -1,5 +1,13 @@
 ECHO off && cls
 
-"C:\Program Files (x86)\Git\bin\git.exe" add %1
+echo adding %1 to the git repository . . .
+
+set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+::echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%
+
+set GIT_EXE=git
+
+"%GIT_EXE%" add %1
 @echo Added %1 to repository
-:: @echo press and key to continue && timeout /t 60 > nul
+
+pause
