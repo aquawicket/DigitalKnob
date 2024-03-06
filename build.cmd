@@ -391,7 +391,7 @@ goto:eof
 goto:eof
 
 :generate_clang32
-    set COMPILER=CLANG32
+    set MSYSTEM=CLANG32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
@@ -409,7 +409,7 @@ goto:eof
 goto:eof
 
 :generate_clang64
-    set COMPILER=CLANG64
+    set MSYSTEM=CLANG64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
@@ -427,7 +427,7 @@ goto:eof
 goto:eof
 
 :generate_clangarm64
-    set COMPILER=CLANGARM64
+    set MSYSTEM=CLANGARM64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
@@ -445,7 +445,7 @@ goto:eof
 goto:eof
 
 :generate_ucrt64
-    set COMPILER=UCRT64
+    set MSYSTEM=UCRT64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
@@ -463,7 +463,7 @@ goto:eof
 goto:eof
 
 :generate_mingw32
-    set COMPILER=MINGW32
+    set MSYSTEM=MINGW32
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
     echo MSYS2 = %MSYS2%
@@ -481,7 +481,7 @@ goto:eof
 goto:eof
 
 :generate_mingw64
-    set COMPILER=MINGW64
+    set MSYSTEM=MINGW64
                 
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 	echo MSYS2 = %MSYS2%
@@ -542,58 +542,39 @@ goto:eof
 :build_all
 
 :build_debug
-    if "%COMPILER%"=="MINGW32" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-        if %TYPE%==All goto:build_release
+    if "%MSYSTEM%" NEQ "" (
+        %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+        ::if %TYPE%==All goto:build_release
         goto:eof
     )
-    if "%COMPILER%"=="MINGW64" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
-        if %TYPE%==All goto:build_release
-        goto:eof
-    )
-        
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
-        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
+		goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
-        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
+		goto:eof
     )
         
-    if %TYPE%==All goto:build_release
+    ::if %TYPE%==All goto:build_release
 goto:eof
 
 :build_release
-    if "%COMPILER%"=="MINGW32" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"
+    if "%MSYSTEM%" NEQ "" (
+        %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"
         goto:eof
     )
-    if "%COMPILER%"=="MINGW64" (
-        ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"
-        goto:eof
-    )
-        
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
-        ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
-        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
+		goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        ::echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
-        ::"%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
+		goto:eof
     )
 goto:eof
 
