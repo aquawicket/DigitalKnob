@@ -542,7 +542,7 @@ endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
-	dk_set(CMAKE_GENERATOR					${RASPBERRY_GENERATOR})
+	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
 	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
@@ -556,14 +556,14 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
-	dk_set(CMAKE_GENERATOR					${RASPBERRY_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${RASPBERRY_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${RASPBERRY_CXX_COMPILER})
+	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
+	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
 	
-	dk_set(DKCONFIGURE_CC					${RASPBERRY_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${RASPBERRY_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${GCC_C_COMPILER})
+	dk_set(DKCONFIGURE_CXX					${GCC_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
 	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
