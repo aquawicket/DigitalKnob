@@ -165,16 +165,15 @@ goto:eof
     echo  1) HelloWorld
     echo  2) DKCore
     echo  3) DKJavascript
-    echo  4) DKBuilder
-    echo  5) DKSDL
-    echo  6) DKSDLRml
-    echo  7) DKDomTest
-    echo  8) DKTestAll
-    echo  9) Enter Manually
-    echo 10) Clear Screen
-    echo 11) Reload
-    echo 12) Go Back
-    echo 13) Exit
+    echo  4) DKSDL
+    echo  5) DKSDLRml
+    echo  6) DKDomTest
+    echo  7) DKTestAll
+    echo  8) Enter Manually
+    echo  9) Clear Screen
+    echo 10) Reload
+    echo 11) Go Back
+    echo 12) Exit
     set choice=
     set /p choice=Please select an app to build:
 	
@@ -183,16 +182,15 @@ goto:eof
     if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
     if "%choice%"=="2"  set "APP=DKCore"       & goto:eof
     if "%choice%"=="3"  set "APP=DKJavascript" & goto:eof
-    if "%choice%"=="4"  set "APP=DKBuilder"    & goto:eof
-    if "%choice%"=="5"  set "APP=DKSDL"        & goto:eof
-    if "%choice%"=="6"  set "APP=DKSDLRml"     & goto:eof
-    if "%choice%"=="7"  set "APP=DKDomTest"    & goto:eof
-    if "%choice%"=="8"  set "APP=DKTestAll"    & goto:eof
-    if "%choice%"=="9"  call:enter_manually    & goto:eof
-    if "%choice%"=="10" call:clear_screen      & goto:eof
-    if "%choice%"=="11" call:reload            & goto:eof
-    if "%choice%"=="12" set "UPDATE="          & goto:eof
-    if "%choice%"=="13" exit                   & goto:eof
+    if "%choice%"=="4"  set "APP=DKSDL"        & goto:eof
+    if "%choice%"=="5"  set "APP=DKSDLRml"     & goto:eof
+    if "%choice%"=="6"  set "APP=DKDomTest"    & goto:eof
+    if "%choice%"=="7"  set "APP=DKTestAll"    & goto:eof
+    if "%choice%"=="8"  call:enter_manually    & goto:eof
+    if "%choice%"=="9" call:clear_screen       & goto:eof
+    if "%choice%"=="10" call:reload            & goto:eof
+    if "%choice%"=="11" set "UPDATE="          & goto:eof
+    if "%choice%"=="12" exit                   & goto:eof
         
     echo %choice%: invalid selection, please try again
     set APP=

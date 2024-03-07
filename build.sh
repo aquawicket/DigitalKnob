@@ -151,9 +151,20 @@ function main() {
 ###### Pick_Update ######
 function Pick_Update() {
 	
-	#read_cache
+	read_cache
+	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
+		echo "cache:"
+		echo "	$_APP_"
+		echo "	$_TARGET_OS_"
+		echo "	$_TYPE_"
+	fi
 	
-	echo ""	
+	echo ""
+if file_exists $DKBRANCH_DIR/cache; then
+	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
+		echo " 0) Repeat cache"
+	fi
+fi
     echo " 1) Git Update"
     echo " 2) Git Commit"
     echo " 3) Push assets"
@@ -168,7 +179,11 @@ function Pick_Update() {
     echo " Press Enter To Skip"
 	
 	read input
-	if [ "$input" == "1" ]; then
+	if [ "$input" == "0" ]; then
+		APP=$_APP_
+		TARGET_OS=$_TARGET_OS_
+		TYPE=$_TYPE_
+	elif [ "$input" == "1" ]; then
 		git_update
 	elif [ "$input" == "2" ]; then
 		git_commit
@@ -205,16 +220,15 @@ function Pick_App() {
     echo " 1) HelloWorld"
     echo " 2) DKCore"
     echo " 3) DKJavascript"
-    echo " 4) DKBuilder"
-    echo " 5) DKSDL"
-    echo " 6) DKSDLRml"
-    echo " 7) DKDomTest"
-    echo " 8) DKTestAll"
-    echo " 9) Enter Manually"
-    echo "10) Clear Screen"
-    echo "11) Go Back"
-    echo "12) Reload"
-	echo "13) Exit"
+    echo " 4) DKSDL"
+    echo " 5) DKSDLRml"
+    echo " 6) DKDomTest"
+    echo " 7) DKTestAll"
+    echo " 8) Enter Manually"
+    echo " 9) Clear Screen"
+    echo "10) Go Back"
+    echo "11) Reload"
+	echo "12) Exit"
     echo "" 
 	
 	read input
@@ -225,24 +239,22 @@ function Pick_App() {
 	elif [ "$input" == "3" ]; then
 		APP="DKJavascript"
 	elif [ "$input" == "4" ]; then
-		APP="DKBuilder"
-	elif [ "$input" == "5" ]; then
 		APP="DKSDL"
-	elif [ "$input" == "6" ]; then
+	elif [ "$input" == "5" ]; then
 		APP="DKSDLRml"
-	elif [ "$input" == "7" ]; then
+	elif [ "$input" == "6" ]; then
 		APP="DKDomTest"
-	elif [ "$input" == "8" ]; then
+	elif [ "$input" == "7" ]; then
 		APP="DKTestAll"
-	elif [ "$input" == "9" ]; then
+	elif [ "$input" == "8" ]; then
 		enter_manually
-	elif [ "$input" == "10" ]; then
+	elif [ "$input" == "9" ]; then
 		clear
-	elif [ "$input" == "11" ]; then
+	elif [ "$input" == "10" ]; then
 		UPDATE=
-	elif [ "$input" == "12" ]; then
+	elif [ "$input" == "11" ]; then
 		dk_call reload
-	elif [ "$input" == "13" ]; then
+	elif [ "$input" == "12" ]; then
 		exit 0
 	else
 		echo "invalid selection"
