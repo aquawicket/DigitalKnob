@@ -10,6 +10,8 @@ macro(dk_printvar var)
 	if(PRINTVAR)
 		if(DEFINED "${${var}}")
 			set(${var} "${${var}} = ${${${var}}}")
+		elseif(DEFINED "${var}")
+			message(STATUS "${var} is defined")
 		else()
 			return() #return out out calling function
 		endif()

@@ -57,8 +57,8 @@ endif()
 
 
 ### GENERATE ###
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_queueCommand(../../autogen.sh)
+#if(NOT EXISTS ${LIBXML2}/configure)
+#	dk_queueCommand(../../autogen.sh)
 	#--with-c14n             Canonical XML 1.0 support (on)
 	#--with-catalog          XML Catalogs support (on)
 	#--with-debug            debugging module and shell (on)
@@ -93,7 +93,7 @@ if(NOT EXISTS ${LIBXML2}/configure)
 	#--with-zlib[=DIR]       use libz in DIR (on)
 	#--with-minimum          build a minimally sized library (off)
 	#--with-legacy           maximum ABI compatibility (off)
-endif()
+#endif()
 
 
 ##ANDROID_dk_queueCommand(${DKCONFIGURE_BUILD})
