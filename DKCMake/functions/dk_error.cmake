@@ -9,7 +9,14 @@ include_guard()
 #
 macro(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
+	
 	dk_get_option(NOASSERT ${ARGV})
+	#dk_info("dk_error(): NOASSERT = ${NOASSERT}")
+	#if(NOASSERT)
+	#	dk_debug("dk_error(): NOASSERT = TRUE")
+	#else()
+	#	dk_debug("dk_error(): NOASSERT = FALSE")
+	#endif()
 	
 	dk_updateLogInfo()
 	if(NOASSERT)
