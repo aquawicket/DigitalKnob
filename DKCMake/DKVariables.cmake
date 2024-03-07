@@ -67,6 +67,10 @@ if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	dk_set(MINGW 1)
 	dk_debug(MINGW	PRINTVAR)
 endif()
+if(CMAKE_GENERATOR STREQUAL "Xcode")
+	dk_set(XCODE 1)
+	dk_debug(XCODE	PRINTVAR)
+endif()
 
 
 ###########################################################################
