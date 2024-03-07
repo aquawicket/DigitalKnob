@@ -1,6 +1,6 @@
 # https://packages.msys2.org/base/make
 
-if(MINGW)
+if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)

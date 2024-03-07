@@ -15,7 +15,7 @@ if(ANDROID_HOST)
 endif()
 
 
-if(MINGW)
+if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)

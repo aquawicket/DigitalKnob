@@ -26,7 +26,7 @@ if(CMAKE_DL)
 endif()
 
 
-if(MINGW)
+if(MSYSTEM)
 	dk_depend(msys2)
 	if(NOT EXISTS ${MSYS2})
 		dk_error("MSYS2:${MSYS2} does not exist")
@@ -61,7 +61,9 @@ if(MINGW)
 	endif()
 	
 	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE)
-	dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+	if(CMAKE_EXE)
+		dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
+	endif()
 	
 else()
 	if(WIN_HOST)
