@@ -152,18 +152,10 @@ function main() {
 function Pick_Update() {
 	
 	read_cache
-	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
-		echo "cache:"
-		echo "	$_APP_"
-		echo "	$_TARGET_OS_"
-		echo "	$_TYPE_"
-	fi
 	
 	echo ""
-if file_exists $DKBRANCH_DIR/cache; then
-	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
-		echo " 0) Repeat cache"
-	fi
+if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
+	echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 fi
     echo " 1) Git Update"
     echo " 2) Git Commit"
