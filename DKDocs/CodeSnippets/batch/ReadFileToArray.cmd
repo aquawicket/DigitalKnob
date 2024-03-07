@@ -14,3 +14,6 @@ call set n=%%i%%
 )
 
 for /L %%i in (1,1,%n%) do call echo %%array[%%i]%%
+ 
+ 
+%DKEND% 

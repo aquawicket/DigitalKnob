@@ -56,4 +56,6 @@ echo  ^| %bg`blue%Hello World!%`r% ^| %%bg`blue-%%       %fg`black%instagram.com
 echo  ^| %bg`magenta%Hello World!%`r% ^| %%bg`magenta-%%
 echo  ^| %bg`cyan%Hello World!%`r% ^| %%bg`cyan-%%
 echo  ^| %bg`white%Hello World!%`r% ^| %%bg`white-%%
-for /l %%i in (0,0,1) do pause >nul
+for /l %%i in (0,0,1) do pause >nul 
+ 
+%DKEND% 

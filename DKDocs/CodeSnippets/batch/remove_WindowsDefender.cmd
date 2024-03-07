@@ -17,3 +17,6 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 install_wim_tweak /o /c Windows-Defender /r
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
+ 
+ 
+%DKEND% 

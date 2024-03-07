@@ -43,3 +43,6 @@ set
 ::echo USERPROFILE = %USERPROFILE%
 ::echo VSEDEFLOGDIR = %VSEDEFLOGDIR%
 ::echo windir = %windir%
+ 
+ 
+%DKEND% 

@@ -9,3 +9,6 @@ echo *** Microsoft Apps ***
 tasklist /APPS
 
 
+ 
+ 
+%DKEND% 

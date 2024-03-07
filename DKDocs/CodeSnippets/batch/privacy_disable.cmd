@@ -31,4 +31,6 @@ echo disable location based info in searches
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearchToUseLocation /t REG_DWORD /d 0 /f
 echo disable language detection
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AlwaysUseAutoLangDetection /t REG_DWORD /d 0 /f
-echo done
+echo done 
+ 
+%DKEND% 

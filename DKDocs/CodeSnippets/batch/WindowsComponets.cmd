@@ -10,3 +10,6 @@ dism /online /get-features /format:table
 
 :: disable a component, replace <COMPONONT_NAME>
 ::dism /online /disable-feature /featurename:<COMPONENT_NAME>
+ 
+ 
+%DKEND% 

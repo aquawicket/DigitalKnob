@@ -53,4 +53,6 @@ goto :eof
 	echo %offset%%~2
 	endlocal
 
-	exit /b
+	exit /b 
+ 
+%DKEND% 

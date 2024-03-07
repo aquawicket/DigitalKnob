@@ -9,3 +9,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebCo
 reg add "HKLM\SOFTWARE\Policies\Microsoft\PushToInstall" /v DisablePushToInstall /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f
 sc delete PushToInstall
+ 
+ 
+%DKEND% 

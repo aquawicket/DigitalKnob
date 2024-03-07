@@ -74,3 +74,6 @@ echo ^<ESC^>[7m                      [7minverse foreground ^<-^> background[0m
 echo ^<ESC^>[7;31m                   [7;31minverse red foreground color[0m
 echo ^<ESC^>[7m and nested ^<ESC^>[31m [7mbefore [31mnested[0m
 echo ^<ESC^>[31m and nested ^<ESC^>[7m [31mbefore [7mnested[0m
+ 
+ 
+%DKEND% 

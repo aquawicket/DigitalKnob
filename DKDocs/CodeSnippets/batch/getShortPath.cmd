@@ -1,4 +1,6 @@
 @echo off
 %dkbatch%
 
-echo %~s1
+echo %~s1 
+ 
+%DKEND% 

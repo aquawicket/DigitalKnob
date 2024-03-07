@@ -8,3 +8,6 @@ ie4uinit.exe -ClearIconCache
 
 :: for windows 10+
 ie4uinit.exe -show
+ 
+ 
+%DKEND% 
