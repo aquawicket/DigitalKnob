@@ -138,7 +138,7 @@ dk_set(BUILD_STATIC_LIBS				ON)
 dk_set(ENABLE_EXCEPTIONS				ON)    
 dk_set(ENABLE_RTTI						ON)
 dk_set(POSITION_INDEPENDENT_CODE 		ON)
-dk_set(POSITION_INDEPENDENT_EXECUTABLE 	OFF)                                        
+dk_set(POSITION_INDEPENDENT_EXECUTABLE 	ON)                                        
 dk_set(WARNINGS_AS_ERRORS				OFF)
 dk_set(WARNING_4244						OFF)	# /wd4244 - Warning: possible loss of data 
 dk_set(WARNING_5105						OFF)	# /wd5105 - macro producing defined is undefined behaviour
