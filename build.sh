@@ -136,6 +136,8 @@ function main() {
 		if ! [[ -n "$APP" ]]; 		then Pick_App;		continue; fi
 		if ! [[ -n "$TARGET_OS" ]]; then Pick_OS;		continue; fi
 		if ! [[ -n "$TYPE" ]];		then Pick_Type;		continue; fi
+		
+		create_cache
 		Generate_Project
 		Build_Project
 		

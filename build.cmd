@@ -90,6 +90,8 @@ if "%*" NEQ "" call %*
     if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
+	call:create_cache
+	
     call:generate
 	if %TARGET_OS%==android_arm32 		call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 		call:generate_unix_makefiles
@@ -335,12 +337,10 @@ goto:eof
     echo ****** Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
     echo ##########################################################
     echo.
-
+	
     call:dk_deleteCache
     call:delete_temp_files
-        
-    call:create_cache
-        
+    
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     echo TARGET_PATH = %TARGET_PATH%
