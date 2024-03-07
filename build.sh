@@ -180,9 +180,11 @@ fi
 	
 	read input
 	if [ "$input" == "0" ]; then
+		echo "repeating last selection"
 		APP=$_APP_
 		TARGET_OS=$_TARGET_OS_
 		TYPE=$_TYPE_
+		UPDATE=1
 	elif [ "$input" == "1" ]; then
 		git_update
 	elif [ "$input" == "2" ]; then
@@ -1345,21 +1347,21 @@ function create_cache() {
 }
 
 function read_cache() {
-	echo "reading cache..."
+	#echo "reading cache..."
 	count=0
 	while read p; do
 		#echo "$count: $p"
 		if [ $count == 0 ]; then 
-			_APP_="$p"
+			_APP_=$(echo $p | tr -d '\r')
 		fi
 		if [ $count == 1 ]; then
-			_TARGET_OS_="$p"
+			_TARGET_OS_=$(echo $p | tr -d '\r')
 		fi
 		if [ $count == 2 ]; then
-			_TYPE_="$p"
+			_TYPE_=$(echo $p | tr -d '\r')
 		fi
 		#if [ $count == 3 ]; then
-		#	_DKLEVEL_="$p"
+		#	_DKLEVEL_=$(echo $p | tr -d '\r')
 		#fi
 
 		(( count++ ))
@@ -1380,6 +1382,11 @@ function print_var() {
 	fi
 }
 
+function remove_carrage_returns(){
+	in=$1
+	out=$(echo $in | tr -d '\r')
+	# carrage returns are removed from <out>
+}
 
 main "$@"
 
