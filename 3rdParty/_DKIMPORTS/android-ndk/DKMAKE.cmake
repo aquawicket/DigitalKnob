@@ -77,6 +77,7 @@ endif()
 dk_setEnv					("NDK_ROOT" ${ANDROID_NDK})
 dk_setEnv					("VS_NdkRoot" ${ANDROID_NDK})
 
+
 if(APPLE_ARM32_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-armv7a)
 elseif(APPLE_ARM64_HOST)
@@ -139,6 +140,15 @@ else()
 	dk_error("could not set ANDROID_HOST_TAG!")
 endif()
 
+
+
+
+# Set PATH environment  variables
+file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin" ANDROID_ENV_PATH)
+dk_debug("ENV{PATH} = $ENV{PATH}")
+set(ENV{PATH} "$ENV{PATH}:${ANDROID_ENV_PATH}")
+dk_debug("ENV{PATH} = $ENV{PATH}")
+dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar")
 
 if(WIN_HOST)
 	dk_set(EXE .exe)

@@ -12,14 +12,13 @@ macro(dk_error msg)
 	dk_get_option(NOASSERT ${ARGV})
 	
 	dk_updateLogInfo()
-	if(${HALT_ON_ERRORS} AND NOT ${NOASSERT})
-		message(STATUS "\n${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
+	if(NOASSERT)
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+		#dk_exit()
+	else()
 		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-		dk_exit()
 	endif()
-	
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-	
+
 	if(${WAIT_ON_ERRORS})
 		dk_wait(10)
 	endif()
