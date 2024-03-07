@@ -19,7 +19,8 @@ dk_depend(zlib)
 
 ### IMPORT ###
 #dk_import(https://github.com/GNOME/libxml2.git)
-dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
+#dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
+dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
 
 
 
