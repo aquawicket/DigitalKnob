@@ -4,12 +4,12 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Users/aquawicket/digitalknob/Development/DKPlugins",
-                "C:/Users/aquawicket/digitalknob/Development/3rdParty/libarchive-master/contrib/android/include",
-                "C:/Users/aquawicket/digitalknob/Development/3rdParty/msys2-x86_64-20231026/clang64/include"
+                "C:/Users/aquawicket/digitalknob/Development/DKPlugins"
             ],
             "defines": [
-                "_DEBUG"
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
             ]
         }
     ],
