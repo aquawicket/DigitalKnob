@@ -12,27 +12,33 @@ include_guard()
 #
 function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "OVERWRITE" includes)
-	if(${includes})
-		set(overwrite true)
-	endif()
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
+	dk_get_option(OVERWRITE ${ARGV})
+	dk_get_option(NOERROR ${ARGV})
+	
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		if(NOT noerror)
+		#if(NOT noerror)
+		if(NOT NOERROR)
 			dk_error("from:${from} not found")
 		endif()
 		return()
 	endif()
 	if(EXISTS ${to})
-		if(NOT ${overwrite})
+		#if(NOT ${overwrite})
+		if(NOT OVERWRITE)
 			dk_error("Cannot rename file. Destiantion exists and not set to overwrite")
 		endif()
 		dk_remove(${to})
 	endif()
+	
+	#FIXME: the base directory of the ${to} path must exist.    
+	# EXAMPLE:   to = MyDir/Something/MustExist/myfile.text
+	#							or
+	#		     to = MyDir/Something/MustExist/newdir
+	#
+	# So we need to get path one level up..   MyDir/Something/MustExist
+	# then make sure it exists, and if it doesn't, we need to create it. 
+	
 	file(RENAME ${from} ${to})
 endfunction()
 dk_createOsMacros("dk_rename")
