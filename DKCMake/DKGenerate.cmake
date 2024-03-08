@@ -448,7 +448,6 @@ if(WIN_X86)
 	endif()
 	
 	
-	#dk_set(CMAKE_BUILD_TYPE "")
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST

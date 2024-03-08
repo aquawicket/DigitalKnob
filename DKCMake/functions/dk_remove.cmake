@@ -1,5 +1,6 @@
 include_guard()
 
+
 ###############################################################################
 # dk_remove(path [NOERROR])
 #
@@ -10,18 +11,21 @@ include_guard()
 #
 function(dk_remove path)
 	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "NOERROR" has_NOERROR)
-	if(${has_NOERROR})
-		set(noerror true)
-	endif()
+	
+	dk_get_option(NOERROR ${ARGV})
+
 	if(NOT EXISTS ${path})
-		if(NOT noerror)
-			dk_error("${path} does not exist")
+		if(NOT NOERROR)
+			dk_warn("${path} does not exist")
 		endif()
 		return()
 	endif()
 	file(REMOVE_RECURSE ${path})
+	#execute_process(COMMAND -E rm ${path})
+	dk_sleep(1)	# give the file a second to delete
 	if(EXISTS ${path})
-		dk_error("failed to remove ${path}")
+		if(NOT NOERROR)
+			dk_error("failed to remove ${path}")
+		endif()
 	endif()
 endfunction()

@@ -28,6 +28,37 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 # https://foonathan.net/2016/03/cmake-install/ 
 
+dk_load(dk_sleep)
+###############################################################################
+# dk_sleep(seconds)
+#
+#	TODO
+#
+#function(dk_sleep seconds)
+#	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
+#endfunction()
+
+###############################################################################
+# dk_get_option(name ${ARGV})  
+#
+#	TODO
+#
+#	EXAMPLE: dk_get_option(MY_ARG ${ARGV})
+#
+macro(dk_get_option name)
+	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
+	#dk_print_prefix_vars("ARG_")
+	#set(${name} ${ARG_${name}})
+	if(${ARG_${name}})
+		set(${name} ${name})
+		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
+	else()
+		unset(${name})
+		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
+	endif()
+	list(REMOVE_ITEM ARGV ${name})	# remove item from parents ARGV list
+endmacro()
+
 
 dk_load(DK)
 #include("${DKCMAKE_DIR}/DK.cmake")
@@ -1861,27 +1892,6 @@ function(dk_print_prefix_vars _prefix)
 endfunction()
 
 ###############################################################################
-# dk_get_option(name ${ARGV})  
-#
-#	TODO
-#
-#	EXAMPLE: dk_get_option(MY_ARG ${ARGV})
-#
-macro(dk_get_option name)
-	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
-	#dk_print_prefix_vars("ARG_")
-	#set(${name} ${ARG_${name}})
-	if(${ARG_${name}})
-		set(${name} ${name})
-		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
-	else()
-		unset(${name})
-		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
-	endif()
-	list(REMOVE_ITEM ARGV ${name})	# remove item from parents ARGV list
-endmacro()
-
-###############################################################################
 # dk_get_option_value(name ${ARGV}) 
 #
 #	TODO
@@ -2684,22 +2694,6 @@ function(dk_build path)
 	#	list(APPEND BUILD_MODE multi_config)
 	#endif()
 	#list(APPEND BUILD_MODE single_config)
-		
-	#foreach(mode ${BUILD_MODE})
-	#	if(${mode} STREQUAL multi_config)
-	#		dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-	#		dk_set		(BUILD_DIR ${OS})
-	#	elseif(${mode} STREQUAL single_config)
-	#		if(DEBUG)
-	#			dk_set	(CMAKE_BUILD_TYPE DEBUG)
-	#			dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
-	#		elseif(RELEASE)
-	#			dk_set	(CMAKE_BUILD_TYPE RELEASE)
-	#			dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
-	#		endif()
-	#	else()
-	#		dk_error("BUILD_MODE invalid!")
-	#	endif()
 		
 		dk_setPath(${path}/${BUILD_DIR})
 
@@ -3963,7 +3957,7 @@ function(dk_printSettings)
 	dk_buildLog(CMAKE_CXX_COMPILER_ID         	PRINTVAR)
 	dk_buildLog(ENV{USERNAME}                 	PRINTVAR)
 	dk_buildLog(ENV{USER}						PRINTVAR)
-	dk_buildLog(ENV{PATH}						PRINTVAR)
+	#dk_buildLog(ENV{PATH}						PRINTVAR)
 	execute_process(COMMAND uname OUTPUT_VARIABLE UNAME OUTPUT_STRIP_TRAILING_WHITESPACE)
 	dk_buildLog(UNAME							PRINTVAR)
 	dk_buildLog(MINGW							PRINTVAR)
@@ -5332,15 +5326,7 @@ dk_load(dk_is_list)
 #	endif()
 #endfunction()
 
-dk_load(dk_sleep)
-###############################################################################
-# dk_sleep(seconds)
-#
-#	TODO
-#
-#function(dk_sleep seconds)
-#	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
-#endfunction()
+
 
 
 

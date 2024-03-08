@@ -218,7 +218,11 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		string(REPLACE _msvc "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
 	dk_debug(DK_BINARY_ENV	PRINTVAR)
-	
+
+	string(TOUPPER ${DK_BINARY_ENV} MSYSTEM)
+	dk_debug(MSYSTEM	PRINTVAR)
+	dk_set(${MSYSTEM} 1)
+
 	### Get DK_BINARY_ARCH
 	if(${DK_BINARY_OS} MATCHES "_arm32$")
 		dk_set(DK_BINARY_ARCH arm32)
