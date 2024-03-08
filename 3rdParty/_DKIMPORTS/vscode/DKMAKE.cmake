@@ -10,7 +10,7 @@ endif()
 
 
 ### DOWNLOAD ###
-LINUX_X86_64_HOST_dk_set	(https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz)
+LINUX_X86_64_HOST_dk_set	(VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz)
 #WIN_ARM64_HOST_dk_set		(VSCODE_DL VSCode-win32-arm64-1.87.1.zip)
 WIN_X86_64_HOST_dk_set		(VSCODE_DL https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip)
 if(VSCODE_DL)
