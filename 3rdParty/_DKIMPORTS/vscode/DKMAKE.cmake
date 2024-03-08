@@ -30,13 +30,14 @@ endif()
 
 ### IMPORT ###
 if(NOT EXISTS ${VSCODE_EXE})
-	#dk_import		(${VSCODE_DL} PATH ${VSCODE})
-	dk_download		(${VSCODE_DL} ${DKDOWNLOAD_DIR})
+	dk_import		(${VSCODE_DL} PATH ${VSCODE})
 	
-	dk_info("Extracting ${VSCODE_DL_FILE}")
-	dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED NOERROR)
-	dk_extract(${DKDOWNLOAD_DIR}/${VSCODE_DL_FILE} ${DKDOWNLOAD_DIR}/UNZIPPED)
-	dk_rename(${DKDOWNLOAD_DIR}/UNZIPPED/VSCode-linux-x64 ${VSCODE} OVERWRITE)
+	#dk_download		(${VSCODE_DL} ${DKDOWNLOAD_DIR})
+	#dk_info("Extracting ${VSCODE_DL_FILE}")
+	#dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED NOERROR)
+	#dk_extract(${DKDOWNLOAD_DIR}/${VSCODE_DL_FILE} ${DKDOWNLOAD_DIR}/UNZIPPED)
+	#dk_rename(${DKDOWNLOAD_DIR}/UNZIPPED/VSCode-linux-x64 ${VSCODE} OVERWRITE)
+	## FIXME: the base must already exist to rename.  If DKTools doesn't exist, this will fail. 
 endif()
 
 
