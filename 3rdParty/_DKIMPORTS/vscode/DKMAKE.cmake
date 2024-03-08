@@ -23,6 +23,8 @@ endif()
 dk_set(VSCODE ${DKTOOLS_DIR}/${VSCODE_FOLDER})
 if(WIN_HOST)
 	dk_set(VSCODE_EXE ${VSCODE}/Code.exe)
+else()
+	dk_set(VSCODE_EXE ${VSCODE}/Code)
 endif()
 
 
