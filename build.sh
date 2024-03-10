@@ -1,8 +1,8 @@
-#!/bin/bash
+#! /bin/bash
 if ! [[ "$@" == "" ]]; then
 	"$@"
 fi
-	
+
 ###### Global Script Variables ######
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPT_NAME=$(basename "$0")
@@ -579,7 +579,8 @@ function dk_call() {
 ###### reload ######
 function reload() {
 	echo "reloading $SCRIPT_DIR/$SCRIPT_NAME"
-	clear && $SCRIPT_DIR/$SCRIPT_NAME && exit
+	clear
+	exec "$SCRIPT_DIR/$SCRIPT_NAME"
 }
 
 ###### warning <string> ######
