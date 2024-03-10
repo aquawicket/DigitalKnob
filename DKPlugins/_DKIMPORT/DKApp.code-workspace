@@ -1,0 +1,82 @@
+{
+	"folders": [
+		{
+			"path": "${fileDirname}/../"
+		},
+		{
+			"path": "${fileDirname}/../../../DKPlugins"
+		},
+		{
+			"path": "${fileDirname}/../../../3rdParty"
+		}
+	],
+	"settings": {
+		//"MSYS2": "${fileDirname}/../../../3rdParty/msys2-x86_64-20231026"
+		"MSYS2": "C:/Users/aquawicket/digitalknob/Development/3rdParty/msys2-x86_64-20231026"
+	},
+	"launch": {
+		"configurations": [
+			{
+				"name": "windows_x86_clang",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_x86_clang/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/clang32/bin/gdb.exe",
+			},
+			{
+				"name": "windows_x86_64_clang",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_x86_64_clang/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/clang64/bin/gdb.exe",
+			},
+			{
+				"name": "windows_arm64_clang",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_arm64_clang/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/clangarm64/bin/gdb.exe",
+			},
+			{
+				"name": "windows_x86_mingw",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_x86_mingw/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/mingw32/bin/gdb.exe",
+			},
+			{
+				"name": "windows_x86_64_mingw",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_x86_64_mingw/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/mingw64/bin/gdb.exe",
+			},
+			{
+				"name": "windows_x86_64_ucrt",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/win_x86_64_ucrt/Debug/${fileDirnameBasename}_APP.exe",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "${config:MSYS2}/ucrt64/bin/gdb.exe",
+			},
+		],
+		"version": "2.0.0"
+	}
+}
