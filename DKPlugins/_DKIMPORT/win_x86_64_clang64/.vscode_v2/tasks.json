@@ -1,12 +1,33 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-	// for the documentation about the tasks.json format
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "echo",
+			"label": "PRINT VARIABLES",
 			"type": "shell",
-			"command": "echo DK 'buildTargetName: ${command:cmake.buildTargetName}\nbuildType: ${command:cmake.buildType}\ntasksBuildCommand: ${command:cmake.tasksBuildCommand}\nbuildDirectory: ${command:cmake.buildDirectory}\n'"
-		}
-	]
+			"presentation": {
+				"echo": false,
+				"showReuseMessage": false
+			},
+			"command": [
+				"\n echo",
+				"userHome=${userHome}",
+				"workspaceFolder=${workspaceFolder}",
+				"workspaceFolderBasename=${workspaceFolderBasename}",
+				"file=${file}",
+				"fileWorkspaceFolder=${fileWorkspaceFolder}",
+				"relativeFile=${relativeFile}",
+				"relativeFileDirname=${relativeFileDirname}",
+				"fileBasename=${fileBasename}",
+				"fileBasenameNoExtension=${fileBasenameNoExtension}",
+				"fileDirname=${fileDirname}",
+				"fileExtname=${fileExtname}",
+				"lineNumber=${lineNumber}",
+				//"selectedText=${selectedText}",
+				"execPath=${execPath}",
+				"pathSeparator=${pathSeparator}",
+				"\n",
+			],
+			"problemMatcher": [],
+		},
+	],
 }

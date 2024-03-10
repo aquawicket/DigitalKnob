@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "${fileDirname}/../../"
+		},
+		{
+			"path": "${fileDirname}/../../../../DKPlugins"
+		},
+		{
+			"path": "${fileDirname}/../../../../3rdParty"
+		}
+	],
+	"settings": {
+		//"MSYS2": "${fileDirname}/../../../../3rdParty/msys2-x86_64-20231026"
+		"MSYS2": "C:/Users/aquawicket/digitalknob/Development/3rdParty/msys2-x86_64-20231026"
+	}
+}

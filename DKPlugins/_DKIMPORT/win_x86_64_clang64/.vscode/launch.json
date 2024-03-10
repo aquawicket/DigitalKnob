@@ -1,30 +1,65 @@
 {
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "windows_x86_clang",
             "type": "cppdbg",
             "request": "launch",
-            "program": "C:/Users/aquawicket/digitalknob/Development/DKApps/DKCore/win_x86_64_clang64/Debug/DKCore_APP.exe",
-            "args": [],
-            "stopAtEntry": false,
+            "program": "${workspaceFolder}/win_x86_clang/Debug/${workspaceFolderBasename}_APP.exe",
             "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:/Users/aquawicket/digitalknob/Development/3rdParty/msys2-x86_64-20231026/clang64/bin/gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ]
-        }
+            "miDebuggerPath": "${config:MSYS2}/clang32/bin/gdb.exe",
+        },
+        {
+            "name": "windows_x86_64_clang",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/win_x86_64_clang/Debug/${workspaceFolderBasename}_APP.exe",
+            "cwd": "${fileDirname}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:MSYS2}/clang64/bin/gdb.exe",
+        },
+        {
+            "name": "windows_arm64_clang",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/win_arm64_clang/Debug/${workspaceFolderBasename}_APP.exe",
+            "cwd": "${fileDirname}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:MSYS2}/clangarm64/bin/gdb.exe",
+        },
+        {
+            "name": "windows_x86_mingw",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/win_x86_mingw/Debug/${workspaceFolderBasename}_APP.exe",
+            "cwd": "${fileDirname}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:MSYS2}/mingw32/bin/gdb.exe",
+        },
+        {
+            "name": "windows_x86_64_mingw",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/win_x86_64_mingw/Debug/${workspaceFolderBasename}_APP.exe",
+            "cwd": "${fileDirname}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:MSYS2}/mingw64/bin/gdb.exe",
+        },
+        {
+            "name": "windows_x86_64_ucrt",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/win_x86_64_ucrt/Debug/${workspaceFolderBasename}_APP.exe",
+            "cwd": "${fileDirname}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${config:MSYS2}/ucrt64/bin/gdb.exe",
+        },
     ],
     "version": "2.0.0"
 }

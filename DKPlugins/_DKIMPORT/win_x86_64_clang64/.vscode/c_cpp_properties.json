@@ -1,17 +1,66 @@
 {
+    "enableConfigurationSquiggles": false,
+    "version": 4,
+    "env": {
+        "baseIncludePaths": [
+            "${workspaceFolder}/**", 
+            "${workspaceFolder}/../../DKPlugins"
+        ]
+    },
     "configurations": [
         {
-            "name": "Win32",
+            "name": "windows_x86_clang",
+            "compilerPath": "${config:MSYS2}/clang32/bin/clang++.exe",
+            "intelliSenseMode": "windows-clang-x86",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/Users/aquawicket/digitalknob/Development/DKPlugins"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "${baseIncludePaths}",
+                "${config:MSYS2}/clang32/include"
+            ]
+        },
+        {
+            "name": "windows_x86_64_clang",
+            "compilerPath": "${config:MSYS2}/clang64/bin/clang++.exe",
+            "intelliSenseMode": "windows-clang-x64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "${config:MSYS2}/clang64/include"
+            ]
+        },
+        {
+            "name": "windows_arm64_clang",
+            "compilerPath": "${config:MSYS2}/clangarm64/bin/clang++.exe",
+            "intelliSenseMode": "windows-clang-arm64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "${config:MSYS2}/clangarm64/include"
+            ]
+        },
+        {
+            "name": "windows_x86_mingw",
+            "compilerPath": "${config:MSYS2}/mingw32/bin/g++.exe",
+            "intelliSenseMode": "windows-gcc-x86",
+            "includePath": [
+                "${baseIncludePaths}",
+                "${config:MSYS2}/mingw32/include"
+            ]        
+        },
+        {
+            "name": "windows_x86_64_mingw",
+            "compilerPath": "${config:MSYS2}/mingw64/bin/g++.exe",
+            "intelliSenseMode": "windows-gcc-x64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "${config:MSYS2}/mingw64/include"
+            ]
+        },
+        {
+            "name": "windows_x86_64_ucrt",
+            "compilerPath": "${config:MSYS2}/ucrt64/bin/g++.exe",
+            "intelliSenseMode": "windows-gcc-x64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "${config:MSYS2}/ucrt64/include"
             ]
         }
-    ],
-    "version": 4
+    ]
 }
