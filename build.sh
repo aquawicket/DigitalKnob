@@ -4,7 +4,7 @@
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 
 # fix for reset_all
-cd $SCRIPT_DIR
+trap "cd $SCRIPT_DIR" EXIT
 
 SCRIPT_NAME=$(basename "$0")
 echo $SCRIPT_DIR/$SCRIPT_NAME
