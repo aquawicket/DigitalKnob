@@ -1,18 +1,27 @@
 dk_depend(msys2)
 
-dk_set(LIBGCC_NAME libgcc)
-if(WIN_X86)
-	dk_set(LIBGCC  ${MSYS2}/mingw32/lib/gcc/i686-w64-mingw32/13.2.0)
-endif()
-if(WIN_X86_64)
-	dk_set(LIBGCC  ${MSYS2}/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0)
-endif()
 
-
-### LINK ###
-WIN_dk_libDebug(${LIBGCC}/libgcc.a)
-WIN_dk_libRelease(${LIBGCC}/libgcc.a)
+if(MSYSTEM)
+	dk_depend(msys2)
+	
+	if(CLANG32)
+		# TODO
+	elseif(CLANG64)
+		# TODO
+	elseif(CLANGARM64)
+		# TODO
+	elseif(MINGW32) # OR WIN_X86
+		WIN_dk_libDebug(${MSYS2}/mingw32/lib/gcc/i686-w64-mingw32/13.2.0/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+		WIN_dk_libRelease(${MSYS2}/mingw32/lib/gcc/i686-w64-mingw32/13.2.0/libgcc.a		LIBGCC_LIBRARY_RELEASE)
+	elseif(MINGW64)	# OR WIN_X86_64
+		WIN_dk_libDebug(${MSYS2}/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/libgcc.a		LIBGCC_LIBRARY_DEBUG)
+		WIN_dk_libRelease(${MSYS2}/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/libgcc.a	LIBGCC_LIBRARY_RELEASE)
+	elseif(UCRT64)
+		# TODO
+	endif()
+endif()
 
 
 ### 3RDPARTY LINK ###
 WIN_dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES=${LIBGCC})
+

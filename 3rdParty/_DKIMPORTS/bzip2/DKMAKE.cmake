@@ -6,7 +6,7 @@
 
 
 ### DEPEND ###
-dk_depend(libgcc)
+#dk_depend(libgcc)
 dk_depend(msys2)
 
 
@@ -19,15 +19,15 @@ endif()
 
 
 ### LINK ###
-dk_include(${BZIP2}/${OS}														BZIP2_INCLUDE_DIR)
+dk_include(${BZIP2}/${OS}																BZIP2_INCLUDE_DIR)
 if(MSVC)
-	WIN_X86_dk_libDebug	(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
-	WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
-	WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
-	WIN_X86_64_dk_libRelease	(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+	WIN_X86_dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib				BZIP2_LIBRARY_DEBUG)
+	WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib			BZIP2_LIBRARY_RELEASE)
+	WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
+	WIN_X86_64_dk_libRelease(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_DEBUG)
-	dk_libRelease		(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_RELEASE)
+	dk_libDebug				(${BZIP2}/${OS}/libbz2.a									BZIP2_LIBRARY_DEBUG)
+	dk_libRelease			(${BZIP2}/${OS}/libbz2.a									BZIP2_LIBRARY_RELEASE)
 endif()
 
 
@@ -68,7 +68,8 @@ else()
 	#endif()
 	
 	dk_sleep(2) # wait 2 seconds for files to copy over
-	dk_queueCommand	(make libbz2.a)
+	#dk_queueCommand(make libbz2.a)
+	dk_queueCommand(${CMAKE_MAKE_PROGRAM} libbz2.a)
 endif()
 
 

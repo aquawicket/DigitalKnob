@@ -8,7 +8,7 @@
 ### DEPEND ###
 WIN_dk_depend(msys2)
 dk_depend(autotools)
-dk_depend(gcc)
+#dk_depend(gcc)
 
 
 ### IMPORT ###
