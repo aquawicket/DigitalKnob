@@ -17,6 +17,16 @@
 	"launch": {
 		"configurations": [
 			{
+				"name": "linux_x86_64",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${fileDirname}/linux_x86_64/Debug/${fileDirnameBasename}_APP",
+				"cwd": "${fileDirname}",
+				"externalConsole": true,
+				"MIMode": "gdb",
+				"miDebuggerPath": "/usr/bin/gdb",
+			},
+			{
 				"name": "windows_x86_clang",
 				"type": "cppdbg",
 				"request": "launch",

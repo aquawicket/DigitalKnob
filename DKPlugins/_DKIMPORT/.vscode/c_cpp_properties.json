@@ -9,6 +9,15 @@
     },
     "configurations": [
         {
+            "name": "linux_x86_64",
+            "compilerPath": "/usr/bin/g++.exe",
+            "intelliSenseMode": "linux-gcc-x64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "usr/bin/include"
+            ]
+        },
+        {
             "name": "windows_x86_clang",
             "compilerPath": "${config:MSYS2}/clang32/bin/clang++.exe",
             "intelliSenseMode": "windows-clang-x86",
