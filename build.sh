@@ -1,7 +1,4 @@
 #! /bin/bash
-if ! [[ "$@" == "" ]]; then
-	"$@"
-fi
 
 ###### Global Script Variables ######
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
@@ -954,9 +951,8 @@ function reset_all() {
 		
 		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp $SCRIPT_DIR/$SCRIPT_NAME $DIGITALKNOB_DIR/$SCRIPT_NAME
-		#source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
-		#exit
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
+		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
+		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
@@ -973,10 +969,11 @@ function reset_all() {
 		echo "done."
 		
 		# wait for the folders to get deleted
-		sleep 5
+		sleep 10
 
 		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
+			exit 1
 		fi
 		
 		git_update NO_CONFIRM
@@ -986,11 +983,11 @@ function reset_all() {
 		
 		if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 			clear
-			#source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
-			#exit
-			exec $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
+			source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
+			exit
 		else
 			echo "Oh no, the git cloned build.sh still isn't here! :( "
+			exit 1
 		fi
 	fi
 }
@@ -1203,6 +1200,10 @@ function remove_carrage_returns(){
 	out=$(echo $in | tr -d '\r')
 	# carrage returns are removed from <out>
 }
+
+if ! [[ "$@" == "" ]]; then
+	"$@"
+fi
 
 main "$@"
 
