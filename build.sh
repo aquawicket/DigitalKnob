@@ -1,17 +1,7 @@
 #!/bin/bash
-#{
-
 if ! [[ "$@" == "" ]]; then
 	"$@"
 fi
-
-
-############ DigitalKnob builder script ############
-# to run this script requires privledges, use $ chmod 777 build.sh
-
-###### GLOBAL USER VARIABLES ######
-GIT_USER_EMAIL="aquawicket@hotmail.com"
-GIT_USER_NAME="aquawicket"
 	
 ###### Global Script Variables ######
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
@@ -20,7 +10,7 @@ echo $SCRIPT_DIR/$SCRIPT_NAME
 true=0
 false=1
 CLR="\033[0m"
-black="100m"
+black="\033[100m"
 red="\033[31m"
 green="\033[32m"
 yellow="\033[33m"
@@ -32,13 +22,11 @@ white="\033[37m"
 
 ###### main ######
 function main() {
-
 	validate_sudo
 
 	# log to stdout and file
 	#exec |& tee file.log 
 
-	# UNIX Environment Variables
 	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
 	print_var HOSTNAME
 	print_var HOSTTYPE
@@ -53,11 +41,8 @@ function main() {
 	print_var SCRIPT_DIR
 	print_var USER
 	print_var USERNAME
-	echo ""
 	
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	# NATIVE_OS
-	
 	if [[ "$MODEL" == "Raspberry"* ]]; then
 		NATIVE_OS="raspberry"
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -73,7 +58,6 @@ function main() {
 	fi
 	print_var NATIVE_OS
 	
-	# NATIVE_ARCH
 	if [[ "$HOSTTYPE" == "x86" ]]; then
 		NATIVE_ARCH="x86"
 	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
@@ -85,12 +69,9 @@ function main() {
 	fi
 	print_var NATIVE_ARCH
 	
-	# NATIVE_TRIPLE
 	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
-	echo ""
 	
-
 	if [[ -n "$USERPROFILE" ]]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
@@ -98,7 +79,6 @@ function main() {
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
-
 	mkdir -p $DIGITALKNOB_DIR;
 	print_var DIGITALKNOB_DIR
 
@@ -112,7 +92,6 @@ function main() {
 
 	validate_cmake
 	validate_git
-	
 	validate_branch
 
 	print_var DKBRANCH_DIR
@@ -122,9 +101,7 @@ function main() {
 	print_var DKIMPORTS_DIR
 	print_var DKPLUGINS_DIR
 
-	if [ $SCRIPT_DIR == $DKBRANCH_DIR ]; then
-		echo "SCRIPT_DIR and DKBRANCH_DIR are the same"
-	else
+	if [ ! $SCRIPT_DIR == $DKBRANCH_DIR ]; then
 		warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		warning "$SCRIPT_NAME path = $SCRIPT_DIR"
 		warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
@@ -132,10 +109,10 @@ function main() {
 	
 	while :
 	do
-		if ! [[ -n "$UPDATE" ]];	then Pick_Update;	continue; fi
-		if ! [[ -n "$APP" ]]; 		then Pick_App;		continue; fi
+		if ! [[ -n "$UPDATE" ]]; then Pick_Update;	continue; fi
+		if ! [[ -n "$APP" ]]; then Pick_App;		continue; fi
 		if ! [[ -n "$TARGET_OS" ]]; then Pick_OS;		continue; fi
-		if ! [[ -n "$TYPE" ]];		then Pick_Type;		continue; fi
+		if ! [[ -n "$TYPE" ]]; then Pick_Type;		continue; fi
 		
 		create_cache
 		Generate_Project
@@ -146,19 +123,16 @@ function main() {
 		unset TARGET_OS
 		unset TYPE
 	done
-	
-	
 }
 
 ###### Pick_Update ######
 function Pick_Update() {
-	
+	echo ""
 	read_cache
 	
-	echo ""
-if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
-	echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
-fi
+	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
+		echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+	fi
     echo " 1) Git Update"
     echo " 2) Git Commit"
     echo " 3) Push assets"
@@ -210,7 +184,7 @@ fi
 ###### Pick_App ######
 function Pick_App() {
 	echo ""
-	echo "${APP} ${TARGET_OS} ${TYPE}"
+	echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
     echo " 1) HelloWorld"
@@ -369,7 +343,6 @@ function Pick_OS() {
 	else
 		echo "invalid selection"
 	fi
-	return 0
 }
 
 ###### Pick_Type ######
@@ -406,10 +379,9 @@ function Pick_Type() {
 
 ###### Generate_Project ######
 function Generate_Project() {
-	
 	echo ""
 	echo "##################################################################"
-	echo "****** Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
+	echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
 	echo "##################################################################"
 	echo ""
 
@@ -470,179 +442,89 @@ function Generate_Project() {
 	#CMAKE_ARGS+=( "--trace" )
 	#CMAKE_ARGS+=( "--warn-unused-vars" )
 	
-	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
-	
-	
-	#TODO: turn into a cmake_eval
-	# build-essential for Tiny Core Linux
-	#if command_exists tce-load; then
-	#	validate_package libzstd libzstd
-	#fi
-	
-    #TODO: turn into a cmake_eval
-	# build-essential for Tiny Core Linux
-	#if command_exists tce-load; then
-	#	validate_package gcc compiletc
-	#fi
-	
-	#dk_call export SHELL="/bin/bash"
-	
-	
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		CMAKE_ARGS+=( -G "Unix Makefiles" )
-		#validate_android_ndk
-		#CMAKE_ARGS+=( "-G $ANDROID_GENERATOR" )
-		#CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_MAKE_PROGRAM" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$ANDROID_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$ANDROID_CXX_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
-		#CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
-		#CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_NDK=$ANDROID_NDK" )
-		#CMAKE_ARGS+=( "-DANDROID_NDK=$ANDROID_NDK" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE" )
-		#CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
-		#CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#validate_android_ndk
-		#CMAKE_ARGS+=( "-G $ANDROID_GENERATOR" )
-		#CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_MAKE_PROGRAM" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$ANDROID_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$ANDROID_CXX_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a" )
-		#CMAKE_ARGS+=( "-DANDROID_ABI=arm64-v8a" )
-		#CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_NDK=$ANDROID_NDK" )
-		#CMAKE_ARGS+=( "-DANDROID_NDK=$ANDROID_NDK" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE" )
-		#CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
-		#CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
-		#CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
-	if [[ $TARGET_OS == "emscripten" ]]; then
+	if [[ "$TARGET_OS" == "emscripten" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
-	
 	if [[ "$TARGET_OS" == "ios_arm32" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
-		#CMAKE_ARGS+=( "-DPLATFORM=TARGET_OS" )
-		#CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
-		#CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "ios_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
-		#CMAKE_ARGS+=( "-DPLATFORM=OS64" )
-		#CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
-		#CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
-		#CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR" )
-		#CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
-		#CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/ios.toolchain.cmake" )
-		#CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR64" )
-		#CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
-		#CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86" ]]; then
 		validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
-		validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#CMAKE_ARGS+=( "-DMAC_X86=ON" )
-		#CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=i686" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		#validate_clang
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
-		#CMAKE_ARGS+=( "-DMAC_X86_64=ON" )
-		#CMAKE_ARGS+=( "-DCMAKE_OSX_ARCHITECTURES=x86_64" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm32" ]]; then
-		validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm64" ]]; then
-		validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-		#CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86" ]]; then
-		validate_msys2
-		validate_make
-		dk_call export PATH=${MSYS2}/mingw32/bin:$PATH
-		dk_call export PATH=${MSYS2}/usr/bin:$PATH
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86_64" ]]; then
-		validate_msys2
-		validate_make
-		dk_call export PATH=${MSYS2}/mingw64/bin:$PATH
-		dk_call export PATH=${MSYS2}/usr/bin:$PATH
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
+
+	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}
 }
 	
 ###### Build_Project ######
 function Build_Project() {
-
 	echo ""
 	echo "##################################################################"
 	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
@@ -652,10 +534,8 @@ function Build_Project() {
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Debug --config Debug --verbose
-			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
 		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Debug --verbose
-			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
@@ -663,10 +543,8 @@ function Build_Project() {
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Release --config Release --verbose
-			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
 		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Release --verbose
-			#dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
@@ -712,6 +590,7 @@ function warning() {
 ###### error <string> ######
 function error() {
 	echo -e "${red} ERROR: $1 ${CLR}"
+	return $false
 }
 
 ###### message <string> ######
@@ -727,11 +606,9 @@ function message() {
 function CONFIRM() {
 	echo -e "${yellow} Are you sure ? [Y/N] ${CLR}"
 	read -p " " -n 1 -r
-	echo
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then 
-		return 1; 
-	fi
+	echo ""
+	echo ""
+	[[ $REPLY =~ ^[Yy]$ ]]
 }
 
 ###### string_contains <string> <substring> ######
@@ -789,7 +666,6 @@ function validate_git() {
 
 ###### validate_homebrew ######
 function validate_homebrew() {
-	
 	if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		return
 	fi
@@ -846,15 +722,15 @@ function install() {
 	echo "installing $1"
 
 	if command_exists brew; then
-		dk_call $SUDO brew install $1
+		dk_call brew install $1
 	elif command_exists apt; then
-		dk_call $SUDO apt -y install $1
+		dk_call apt -y install $1
 	elif command_exists apt-get; then
-		dk_call $SUDO apt-get -y install $1
+		dk_call apt-get -y install $1
 	elif command_exists pkg; then
-		dk_call $SUDO pkg install $1
+		dk_call pkg install $1
 	elif command_exists pacman; then
-		dk_call $SUDO pacman -S $1 --noconfirm
+		dk_call pacman -S $1 --noconfirm
 	elif command_exists tce-load; then
 		dk_call tce-load -wi $1
 	else
@@ -1033,48 +909,26 @@ function cmake_eval() {
 			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
-		dk_call $CMAKE_EXE -DDKCMAKE_DIR=$DKCMAKE_DIR -DDKCOMMAND=$DKCOMMAND -P $DKCMAKE_DIR/dev/cmake_eval.cmake
+		dk_call $CMAKE_EXE "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR/dev/cmake_eval.cmake
 	fi
-	
 	#echo return code: $?
 }
 
+###### push_assets ######
 function push_assets() {
-	if CONFIRM; then return; fi
-	
+	if ! CONFIRM; then return; fi
 	echo "not implemented,  TODO"
 }
 
+###### pull_assets ######
 function pull_assets() {
-	if CONFIRM; then return; fi
-	
+	if ! CONFIRM; then return; fi
 	echo "not implemented,  TODO"
 }
 
-function reset_apps() {
-	if CONFIRM; then return; fi
-	
-	cd $DKAPPS_DIR
-	$GIT_EXE clean -f -d
-}
-
-function reset_3rdpaty() {
-	if CONFIRM; then return; fi
-	
-	cd $DK3RDPARTY_DIR
-	$GIT_EXE clean -f -d
-}
-
-function reset_plugins() {
-	if CONFIRM; then return; fi
-	
-	cd $DKPLUGINS_DIR
-	$GIT_EXE clean -f -d
-}
-
+###### reset_all ######
 function reset_all() {
 	if ! [ "$1" == "wipe" ]; then
-			
 		clear
 		echo ""
 		echo ""
@@ -1085,7 +939,7 @@ function reset_all() {
 		echo "you wish to commit or save beforehand."
 		echo ""
 		
-		if CONFIRM; then return; fi
+		if ! CONFIRM; then return; fi
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1094,7 +948,7 @@ function reset_all() {
 			echo "Is must be in the branch directory to continue."
 			echo "SCRIPT_DIR = $SCRIPT_DIR"
 			print_var DKBRANCH_DIR
-			return 1;
+			return $false;
 		fi
 		
 		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
@@ -1105,43 +959,28 @@ function reset_all() {
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
 		
-		#do we need admin rights?
-		#runas /user:Administrator cmd
-		
+		#do we need sudo rights?
 		#do we need to kill any processes?
-		
 		#do we need to uninstall any apps?
-		
 		#do we need to remove any environment variables?
 		
-		#should we do a git clean first?
-		#cd %DKBRANCH_DIR%
-		#"%GIT_EXE%" clean -f -d
-		
 		cd $DIGITALKNOB_DIR
-		#echo ""
-		#echo "DELETING $DKDOWNLOAD_DIR . . . ."
-		#rm -r -f $DKDOWNLOAD_DIR
-		#echo "done."
 		echo ""
 		echo "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f $DKBRANCH_DIR
 		echo "done."
 		
-		# wait 10 seconds at lease for the folders to get deleted
-		sleep 10
-		
-		#if file_exists $DKDOWNLOAD_DIR; then
-		#	echo "Oh no, the downloads folder is still there! :( "
-		#fi
+		# wait for the folders to get deleted
+		sleep 5
+
 		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
 		git_update NO_CONFIRM
 		
-		# wait a few seconds for build.sh to show up
-		sleep 5
+		# wait for build.sh to show up
+		sleep 2
 		
 		if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 			clear
@@ -1153,7 +992,7 @@ function reset_all() {
 	fi
 }
 
-
+###### remove_all ######
 function remove_all() {
 	if ! [ "$1" == "wipe" ]; then	
 		clear
@@ -1164,7 +1003,7 @@ function remove_all() {
 		echo "you wish to commit or save beforehand."
 		echo ""
 		
-		if CONFIRM; then return; fi
+		if ! CONFIRM; then return; fi
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1184,47 +1023,31 @@ function remove_all() {
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
 		
-		#do we need admin rights?
-		#runas /user:Administrator cmd
-		
+		#do we need sudo rights?
 		#do we need to kill any processes?
-		
 		#do we need to uninstall any apps?
-		
 		#do we need to remove any environment variables?
 		
-		#should we do a git clean first?
-		#cd %DKBRANCH_DIR%
-		#"%GIT_EXE%" clean -f -d
-		
 		cd $DIGITALKNOB_DIR
-		#echo ""
-		#echo "DELETING $DKDOWNLOAD_DIR . . . ."
-		#rm -r -f $DKDOWNLOAD_DIR
-		#echo "done."
 		echo ""
 		echo "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f $DKBRANCH_DIR
 		echo "done."
 		
-		# wait 10 seconds at lease for the folders to get deleted
-		sleep 10
+		# wait for the folders to get deleted
+		sleep 3
 		
-		#if file_exists $DKDOWNLOAD_DIR; then
-		#	echo "Oh no, the downloads folder is still there! :( "
-		#fi
 		if file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi
 }
 
-
+###### git_update ######
 function git_update() {
-	
 	if ! [ "$1" == "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
-		if CONFIRM; then return; fi
+		if ! CONFIRM; then return; fi
 	fi
 
 	if [[ ! -d "$DKBRANCH_DIR/.git" ]]; then
@@ -1244,9 +1067,9 @@ function git_update() {
 	dk_call chmod +x $DKBRANCH_DIR/build.sh
 }
 
+###### git_commit ######
 function git_commit() {	
-	
-	echo "Please enter some details about this commit, Then press enter."
+	echo "Please enter some details about this commit, Then press ENTER."
 	read message
 	
 	cd $DKBRANCH_DIR
@@ -1282,23 +1105,22 @@ function git_commit() {
 		echo ""
 	fi
 	
-    
 	if [ -z "$message" ]; then
 		message="git commit"
 	fi
 	
 	echo ""
 	echo "git commit \"${message}\""
-	if CONFIRM; then return; fi
+	if ! CONFIRM; then return; fi
 	
 	dk_call $GIT_EXE commit -a -m "${message}"
     dk_call $GIT_EXE push
 }
 
+###### enter_manually ######
 function enter_manually() {
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
-	#print_var input
 	
 	APP="_${input}_"
 	
@@ -1311,7 +1133,7 @@ function enter_manually() {
 	fi
 	if test -f $DKAPPS_DIR/$input/DKMAKE.cmake; then
 		TARGET_PATH=$DKAPPS_DIR/$input
-		return 0
+		return $true
 	fi
 	print_var TARGET_PATH
 	
@@ -1326,25 +1148,26 @@ function enter_manually() {
 	echo "int main(int argc, char** argv) { return 0; }" > $DKAPPS_DIR/$APP/main.cpp
 }
 
+###### create_cache ######
 function create_cache() {
 	echo "creating cache..."
-	#print_var APP
-	#print_var TARGET_OS
-	#print_var TYPE
-	#print_var DKLEVEL
 	
 	# write variable values line by line
 	echo "$APP">"$DKBRANCH_DIR/cache"
 	echo "$TARGET_OS">>"$DKBRANCH_DIR/cache"
 	echo "$TYPE">>"$DKBRANCH_DIR/cache"
-	#echo "$DKLEVEL">>"$DKBRANCH_DIR/cache"
+	#echo "$DKENV">>"$DKBRANCH_DIR/cache"
 }
 
+###### reset_all ######
 function read_cache() {
-	#echo "reading cache..."
+	if ! file_exists $DKBRANCH_DIR/cache; then
+		return
+	fi
+
+	echo "reading cache..."
 	count=0
 	while read p; do
-		#echo "$count: $p"
 		if [ $count == 0 ]; then 
 			_APP_=$(echo $p | tr -d '\r')
 		fi
@@ -1355,27 +1178,23 @@ function read_cache() {
 			_TYPE_=$(echo $p | tr -d '\r')
 		fi
 		#if [ $count == 3 ]; then
-		#	_DKLEVEL_=$(echo $p | tr -d '\r')
+		#	_DKENV_=$(echo $p | tr -d '\r')
 		#fi
-
 		(( count++ ))
 	done < $DKBRANCH_DIR/cache
-	
-	#print_var _APP_
-	#print_var _TARGET_OS_
-	#print_var _TYPE_
-	#print_var _DKLEVEL_
 }
 
+###### print_var ######
 function print_var() {
 	var=$1
-	if [ -z "${!var}" ]; then
-		echo "$1 = !!!INVALID!!!"
-	else
+	if [ -n "${!var}" ]; then
 		echo "$1 = ${!var}"
+	#else
+		#echo "$1 = !!!INVALID!!!"
 	fi
 }
 
+###### remove_carrage_returns ######
 function remove_carrage_returns(){
 	in=$1
 	out=$(echo $in | tr -d '\r')
@@ -1383,7 +1202,5 @@ function remove_carrage_returns(){
 }
 
 main "$@"
-
-#} |& tee build.log
 
 #exec $SHELL		# keep terminal open
