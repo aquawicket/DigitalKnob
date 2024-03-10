@@ -205,9 +205,9 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		dk_set(DK_BINARY_ENV mingw64)
 		string(REPLACE _mingw64 "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
-	if(${DK_BINARY_OS} MATCHES "_clang64$")
-		dk_set(DK_BINARY_ENV clang64)
-		string(REPLACE _clang64 "" DK_BINARY_OS "${DK_BINARY_OS}")
+	if(${DK_BINARY_OS} MATCHES "_clang$")
+		dk_set(DK_BINARY_ENV clang)
+		string(REPLACE _clang "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
 	if(${DK_BINARY_OS} MATCHES "_clangarm64$")
 		dk_set(DK_BINARY_ENV clangarm64)
@@ -222,13 +222,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		string(REPLACE _msvc "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
 	dk_debug(DK_BINARY_ENV	PRINTVAR)
-
-	if(DK_BINARY_ENV)
-		string(TOUPPER ${DK_BINARY_ENV} MSYSTEM)
-		dk_debug(MSYSTEM	PRINTVAR)
-		dk_set(${MSYSTEM} 1)
-	endif()
-
+	
 	### Get DK_BINARY_ARCH
 	if(${DK_BINARY_OS} MATCHES "_arm32$")
 		dk_set(DK_BINARY_ARCH arm32)
@@ -247,6 +241,25 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		string(REPLACE _x86_64 "" DK_BINARY_OS "${DK_BINARY_OS}")
 	endif()
 	dk_debug(DK_BINARY_ARCH	PRINTVAR)
+	
+	### Set MSYSTEM
+	if(DK_BINARY_ENV)
+		string(TOUPPER ${DK_BINARY_ENV} DK_BINARY_ENV_UPPER)
+		#if(${DK_BINARY_ARCH} MATCHES "arm32")
+		#	dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}ARM32")
+		#endif()
+		if(${DK_BINARY_ARCH} MATCHES "arm64")
+			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}ARM64")	# CLANGARM64
+		endif()
+		if(${DK_BINARY_ARCH} MATCHES "x86")
+			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}32")		# CLANG32, MINGW32
+		endif()
+		if(${DK_BINARY_ARCH} MATCHES "x86_64")
+			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}64")		# CLANG64, MINGW64, UCRT64
+		endif()
+		dk_debug(MSYSTEM	PRINTVAR)
+		dk_set(${MSYSTEM} 1)
+	endif()
 	
 	### Get DK_BINARY_OS
 	dk_debug(DK_BINARY_OS	PRINTVAR)

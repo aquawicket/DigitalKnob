@@ -98,13 +98,13 @@ if "%*" NEQ "" call %*
 	if %TARGET_OS%==emscripten  		call:generate_mingw_makefiles
 	if %TARGET_OS%==win_arm64			call:generate_clangarm64
 	if %TARGET_OS%==win_x86             set MSYSTEM=MINGW32	& call:generate_msystem
-	if %TARGET_OS%==win_x86_mingw32		set MSYSTEM=MINGW32	& call:generate_msystem
-	if %TARGET_OS%==win_x86_clang32		set MSYSTEM=CLANG32	& call:generate_msystem
+	if %TARGET_OS%==win_x86_mingw		set MSYSTEM=MINGW32	& call:generate_msystem
+	if %TARGET_OS%==win_x86_clang		set MSYSTEM=CLANG32	& call:generate_msystem
 	if %TARGET_OS%==win_x86_msvc		call:generate_msvc
 	if %TARGET_OS%==win_x86_64          set MSYSTEM=MINGW64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_mingw64	set MSYSTEM=MINGW64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_clang64	set MSYSTEM=CLANG64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_ucrt64	set MSYSTEM=UCRT64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_mingw	set MSYSTEM=MINGW64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_clang	set MSYSTEM=CLANG64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_ucrt	set MSYSTEM=UCRT64	& call:generate_msystem
 	if %TARGET_OS%==win_x86_64_msvc		call:generate_msvc
 	
     call:build
@@ -248,7 +248,7 @@ goto:eof
 	echo 32) win x86 msvc
     echo 33) win x86_64
 	echo 34) win x86_64 mingw64
-	echo 35) win x86_64 clang64
+	echo 35) win x86_64 clang
 	echo 36) win x86_64 ucrt64
 	echo 37) win x86_64 msvc
     echo 38) Clear Screen
@@ -287,13 +287,13 @@ goto:eof
     if "%choice%"=="27" set "TARGET_OS=win_arm32"                   & goto:eof
     if "%choice%"=="28" set "TARGET_OS=win_arm64"                   & goto:eof
     if "%choice%"=="29" set "TARGET_OS=win_x86"                     & goto:eof
-	if "%choice%"=="30" set "TARGET_OS=win_x86_mingw32"             & goto:eof
-	if "%choice%"=="31" set "TARGET_OS=win_x86_clang32"             & goto:eof
+	if "%choice%"=="30" set "TARGET_OS=win_x86_mingw"               & goto:eof
+	if "%choice%"=="31" set "TARGET_OS=win_x86_clang"               & goto:eof
 	if "%choice%"=="32" set "TARGET_OS=win_x86_msvc"                & goto:eof
     if "%choice%"=="33" set "TARGET_OS=win_x86_64"                  & goto:eof
-	if "%choice%"=="34" set "TARGET_OS=win_x86_64_mingw64"          & goto:eof
-	if "%choice%"=="35" set "TARGET_OS=win_x86_64_clang64"          & goto:eof
-	if "%choice%"=="36" set "TARGET_OS=win_x86_64_ucrt64"           & goto:eof
+	if "%choice%"=="34" set "TARGET_OS=win_x86_64_mingw"            & goto:eof
+	if "%choice%"=="35" set "TARGET_OS=win_x86_64_clang"            & goto:eof
+	if "%choice%"=="36" set "TARGET_OS=win_x86_64_ucrt"             & goto:eof
 	if "%choice%"=="37" set "TARGET_OS=win_x86_64_msvc"             & goto:eof
     if "%choice%"=="38" call:clear_screen                           & goto:eof
     if "%choice%"=="39" set "APP="                                  & goto:eof
