@@ -316,6 +316,7 @@ if(HAVE_DK)
 endif()
 
 # Copy VSCode project files to app
+dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/DKApp.code-workspace ${DK_PROJECT_DIR}/DKApp.code-workspace)
 dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/.vscode ${DK_PROJECT_DIR}/.vscode)
 	
 ### Include all source files from the app folder for the compilers

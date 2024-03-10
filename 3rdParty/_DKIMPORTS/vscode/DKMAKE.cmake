@@ -33,7 +33,8 @@ endif()
 
 ### IMPORT ###
 if(NOT EXISTS ${VSCODE_EXE})
-	dk_import		(${VSCODE_DL} PATH ${VSCODE})
+	dk_import			(${VSCODE_DL} PATH ${VSCODE})
+	dk_makeDirectory	(${VSCODE_DL}/data)
 endif()
 
 
