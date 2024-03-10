@@ -2,6 +2,10 @@
 
 ###### Global Script Variables ######
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+
+# fix for reset_all
+cd $SCRIPT_DIR
+
 SCRIPT_NAME=$(basename "$0")
 echo $SCRIPT_DIR/$SCRIPT_NAME
 true=0
@@ -1159,7 +1163,7 @@ function create_cache() {
 	#echo "$DKENV">>"$DKBRANCH_DIR/cache"
 }
 
-###### reset_all ######
+###### read_cache ######
 function read_cache() {
 	if ! file_exists $DKBRANCH_DIR/cache; then
 		return
