@@ -954,8 +954,9 @@ function reset_all() {
 		
 		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp $SCRIPT_DIR/$SCRIPT_NAME $DIGITALKNOB_DIR/$SCRIPT_NAME
-		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
-		exit
+		#source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
+		#exit
+		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
@@ -985,8 +986,9 @@ function reset_all() {
 		
 		if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 			clear
-			source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
-			exit
+			#source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
+			#exit
+			exec $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
 		else
 			echo "Oh no, the git cloned build.sh still isn't here! :( "
 		fi
