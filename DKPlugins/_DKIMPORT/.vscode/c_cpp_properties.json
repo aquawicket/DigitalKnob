@@ -17,6 +17,15 @@
                 "usr/bin/include"
             ]
         },
+		{
+            "name": "mac_x86_64",
+            "compilerPath": "/usr/bin/clang++.exe",
+            "intelliSenseMode": "macos-clang-x64",
+            "includePath": [
+                "${baseIncludePaths}",
+                "usr/bin/include"
+            ]
+        },
         {
             "name": "windows_x86_clang",
             "compilerPath": "${config:MSYS2}/clang32/bin/clang++.exe",
