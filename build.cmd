@@ -37,7 +37,9 @@ if "%*" NEQ "" call %*
     ::--------------------------------------------------------
     set SCRIPT_DIR=%~dp0
     set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
+	call:print_var SCRIPT_DIR
     set SCRIPT_NAME=%~nx0
+	call:print_var SCRIPT_NAME
     echo %SCRIPT_DIR%\%SCRIPT_NAME%
 
     set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi
@@ -49,38 +51,38 @@ if "%*" NEQ "" call %*
 
     set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call:make_directory "%DIGITALKNOB_DIR%"
-    echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%
+    call:print_var DIGITALKNOB_DIR
 
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
     call:make_directory "%DKTOOLS_DIR%"
-    echo DKTOOLS_DIR = %DKTOOLS_DIR%
+    call:print_var DKTOOLS_DIR
         
     set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
     call:make_directory "%DKDOWNLOAD_DIR%"
-    echo DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%
+    call:print_var DKDOWNLOAD_DIR
 
     set NATIVE_OS=win
-    echo NATIVE_OS = %NATIVE_OS%
+    call:print_var NATIVE_OS
         
     if %PROCESSOR_ARCHITECTURE%==x86 set NATIVE_ARCH=x86
     if %PROCESSOR_ARCHITECTURE%==AMD64 set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==IA64  set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==EM64T set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==ARM64  set NATIVE_ARCH=arm64
-    echo NATIVE_ARCH = %NATIVE_ARCH%
+    call:print_var NATIVE_ARCH
         
     set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
-    echo NATIVE_TRIPLE = %NATIVE_TRIPLE%
+    call:print_var NATIVE_TRIPLE
 
     call:validate_git
     call:validate_branch
 
-	echo DKBRANCH_DIR = %DKBRANCH_DIR%
-	echo DKAPPS_DIR = %DKAPPS_DIR%
-    echo DKCMAKE_DIR = %DKCMAKE_DIR%
-    echo DK3RDPARTY_DIR = %DK3RDPARTY_DIR%
-    echo DKIMPORTS_DIR = %DKIMPORTS_DIR%
-	echo DKPLUGINS_DIR = %DKPLUGINS_DIR%
+	call:print_var DKBRANCH_DIR
+	call:print_var DKAPPS_DIR
+    call:print_var DKCMAKE_DIR
+    call:print_var DK3RDPARTY_DIR
+    call:print_var DKIMPORTS_DIR
+	call:print_var DKPLUGINS_DIR
         
     call:validate_cmake
         
@@ -96,15 +98,13 @@ if "%*" NEQ "" call %*
 	if %TARGET_OS%==android_arm32 		call:generate_unix_makefiles
 	if %TARGET_OS%==android_arm64 		call:generate_unix_makefiles
 	if %TARGET_OS%==emscripten  		call:generate_mingw_makefiles
-	if %TARGET_OS%==win_arm64			call:generate_clangarm64
-	if %TARGET_OS%==win_x86             set MSYSTEM=MINGW32	& call:generate_msystem
+	if %TARGET_OS%==win_arm64_clang		call:generate_clangarm64
 	if %TARGET_OS%==win_x86_mingw		set MSYSTEM=MINGW32	& call:generate_msystem
 	if %TARGET_OS%==win_x86_clang		set MSYSTEM=CLANG32	& call:generate_msystem
 	if %TARGET_OS%==win_x86_msvc		call:generate_msvc
-	if %TARGET_OS%==win_x86_64          set MSYSTEM=MINGW64	& call:generate_msystem
 	if %TARGET_OS%==win_x86_64_mingw	set MSYSTEM=MINGW64	& call:generate_msystem
 	if %TARGET_OS%==win_x86_64_clang	set MSYSTEM=CLANG64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_ucrt	set MSYSTEM=UCRT64	& call:generate_msystem
+	if %TARGET_OS%==win_x86_64_ucrt	    set MSYSTEM=UCRT64	& call:generate_msystem
 	if %TARGET_OS%==win_x86_64_msvc		call:generate_msvc
 	
     call:build
@@ -215,89 +215,85 @@ goto:eof
     echo.
     echo  1) %NATIVE_TRIPLE%
     echo.
-    echo  2) android arm32
-    echo  3) android arm64
-    echo  4) android x86
-    echo  5) android x86_64
-    echo  6) emscripten
-    echo  7) ios arm32
-    echo  8) ios arm64
-    echo  9) ios x86
-    echo 10) ios x86_64
-    echo 11) iossim arm32
-    echo 12) iossim arm64
-    echo 13) iossim x86
-    echo 14) iossim x86_64
-    echo 15) linux arm32
-    echo 16) linux arm64
-    echo 17) linux x86
-    echo 18) linux x86_64
-    echo 19) mac arm32
-    echo 20) mac arm64
-    echo 21) mac x86
-    echo 22) mac x86_64
-    echo 23) raspberry arm32
-    echo 24) raspberry arm64
-    echo 25) raspberry x86
-    echo 26) raspberry x86_64
-    echo 27) win arm32
-    echo 28) win arm64
-    echo 29) win x86
-	echo 30) win x86 mingw32
-	echo 31) win x86 clang32
-	echo 32) win x86 msvc
-    echo 33) win x86_64
-	echo 34) win x86_64 mingw64
-	echo 35) win x86_64 clang
-	echo 36) win x86_64 ucrt64
-	echo 37) win x86_64 msvc
-    echo 38) Clear Screen
-    echo 39) Go Back
-    echo 40) Exit	
+    echo  2) Android arm32
+    echo  3) Android arm64
+    echo  4) Android x86
+    echo  5) Android x86_64
+    echo  6) Emscripten
+    echo  7) Ios arm32
+    echo  8) Ios arm64
+    echo  9) Ios x86
+    echo 10) Ios x86_64
+    echo 11) Iossim arm32
+    echo 12) Iossim arm64
+    echo 13) Iossim x86
+    echo 14) Iossim x86_64
+    echo 15) Linux arm32
+    echo 16) Linux arm64
+    echo 17) Linux x86
+    echo 18) Linux x86_64
+    echo 19) Mac arm32
+    echo 20) Mac arm64
+    echo 21) Mac x86
+    echo 22) Mac x86_64
+    echo 23) Raspberry arm32
+    echo 24) Raspberry arm64
+    echo 25) Raspberry x86
+    echo 26) Raspberry x86_64
+    echo 27) Windows arm32
+    echo 28) Windows arm64 (clang)
+	echo 29) Windows x86 (mingw)
+	echo 30) Windows x86 (clang)
+	echo 31) Windows x86 (msvc)
+	echo 32) Windows x86_64 (mingw)
+	echo 33) Windows x86_64 (clang)
+	echo 34) Windows x86_64 (ucrt)
+	echo 35) Windows x86_64 (msvc)
+    echo 36) Clear Screen
+    echo 37) Go Back
+    echo 38) Exit	
     set choice=
     set /p choice=Please select an OS to build for: 
 		
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"              & goto:eof
-    if "%choice%"=="2" set "TARGET_OS=android_arm32"                & goto:eof
-    if "%choice%"=="3" set "TARGET_OS=android_arm64"                & goto:eof
-    if "%choice%"=="4" set "TARGET_OS=android_x86"                  & goto:eof
-    if "%choice%"=="5" set "TARGET_OS=android_x86_64"               & goto:eof
-    if "%choice%"=="6" set "TARGET_OS=emscripten"                   & goto:eof
-    if "%choice%"=="7" set "TARGET_OS=ios_arm32"                    & goto:eof
-    if "%choice%"=="8" set "TARGET_OS=ios_arm64"                    & goto:eof
-    if "%choice%"=="9" set "TARGET_OS=ios_x86"                      & goto:eof
-    if "%choice%"=="10" set "TARGET_OS=ios_x86_64"                  & goto:eof
-    if "%choice%"=="11" set "TARGET_OS=iossim_arm32"                & goto:eof
-    if "%choice%"=="12" set "TARGET_OS=iossim_arm64"                & goto:eof
-    if "%choice%"=="13" set "TARGET_OS=iossim_x86"                  & goto:eof
-    if "%choice%"=="14" set "TARGET_OS=iossim_x86_64"               & goto:eof
-    if "%choice%"=="15" set "TARGET_OS=linux_arm32"                 & goto:eof
-    if "%choice%"=="16" set "TARGET_OS=linux_arm64"                 & goto:eof
-    if "%choice%"=="17" set "TARGET_OS=linux_x86"                   & goto:eof
-    if "%choice%"=="18" set "TARGET_OS=linux_x86_64"                & goto:eof
-    if "%choice%"=="19" set "TARGET_OS=mac_arm32"                   & goto:eof
-    if "%choice%"=="20" set "TARGET_OS=mac_arm64"                   & goto:eof
-    if "%choice%"=="21" set "TARGET_OS=mac_x86"                     & goto:eof
-    if "%choice%"=="22" set "TARGET_OS=mac_x86_64"                  & goto:eof
-    if "%choice%"=="23" set "TARGET_OS=raspberry_arm32"             & goto:eof
-    if "%choice%"=="24" set "TARGET_OS=raspberry_arm64"             & goto:eof
-    if "%choice%"=="25" set "TARGET_OS=raspberry_x86"               & goto:eof
-    if "%choice%"=="26" set "TARGET_OS=raspberry_x86_64"            & goto:eof
-    if "%choice%"=="27" set "TARGET_OS=win_arm32"                   & goto:eof
-    if "%choice%"=="28" set "TARGET_OS=win_arm64"                   & goto:eof
-    if "%choice%"=="29" set "TARGET_OS=win_x86"                     & goto:eof
-	if "%choice%"=="30" set "TARGET_OS=win_x86_mingw"               & goto:eof
-	if "%choice%"=="31" set "TARGET_OS=win_x86_clang"               & goto:eof
-	if "%choice%"=="32" set "TARGET_OS=win_x86_msvc"                & goto:eof
-    if "%choice%"=="33" set "TARGET_OS=win_x86_64"                  & goto:eof
-	if "%choice%"=="34" set "TARGET_OS=win_x86_64_mingw"            & goto:eof
-	if "%choice%"=="35" set "TARGET_OS=win_x86_64_clang"            & goto:eof
-	if "%choice%"=="36" set "TARGET_OS=win_x86_64_ucrt"             & goto:eof
-	if "%choice%"=="37" set "TARGET_OS=win_x86_64_msvc"             & goto:eof
-    if "%choice%"=="38" call:clear_screen                           & goto:eof
-    if "%choice%"=="39" set "APP="                                  & goto:eof
-    if "%choice%"=="40" exit                                        & goto:eof
+    if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"     & goto:eof
+    if "%choice%"=="2" set "TARGET_OS=android_arm32"       & goto:eof
+    if "%choice%"=="3" set "TARGET_OS=android_arm64"       & goto:eof
+    if "%choice%"=="4" set "TARGET_OS=android_x86"         & goto:eof
+    if "%choice%"=="5" set "TARGET_OS=android_x86_64"      & goto:eof
+    if "%choice%"=="6" set "TARGET_OS=emscripten"          & goto:eof
+    if "%choice%"=="7" set "TARGET_OS=ios_arm32"           & goto:eof
+    if "%choice%"=="8" set "TARGET_OS=ios_arm64"           & goto:eof
+    if "%choice%"=="9" set "TARGET_OS=ios_x86"             & goto:eof
+    if "%choice%"=="10" set "TARGET_OS=ios_x86_64"         & goto:eof
+    if "%choice%"=="11" set "TARGET_OS=iossim_arm32"       & goto:eof
+    if "%choice%"=="12" set "TARGET_OS=iossim_arm64"       & goto:eof
+    if "%choice%"=="13" set "TARGET_OS=iossim_x86"         & goto:eof
+    if "%choice%"=="14" set "TARGET_OS=iossim_x86_64"      & goto:eof
+    if "%choice%"=="15" set "TARGET_OS=linux_arm32"        & goto:eof
+    if "%choice%"=="16" set "TARGET_OS=linux_arm64"        & goto:eof
+    if "%choice%"=="17" set "TARGET_OS=linux_x86"          & goto:eof
+    if "%choice%"=="18" set "TARGET_OS=linux_x86_64"       & goto:eof
+    if "%choice%"=="19" set "TARGET_OS=mac_arm32"          & goto:eof
+    if "%choice%"=="20" set "TARGET_OS=mac_arm64"          & goto:eof
+    if "%choice%"=="21" set "TARGET_OS=mac_x86"            & goto:eof
+    if "%choice%"=="22" set "TARGET_OS=mac_x86_64"         & goto:eof
+    if "%choice%"=="23" set "TARGET_OS=raspberry_arm32"    & goto:eof
+    if "%choice%"=="24" set "TARGET_OS=raspberry_arm64"    & goto:eof
+    if "%choice%"=="25" set "TARGET_OS=raspberry_x86"      & goto:eof
+    if "%choice%"=="26" set "TARGET_OS=raspberry_x86_64"   & goto:eof
+    if "%choice%"=="27" set "TARGET_OS=win_arm32"          & goto:eof
+    if "%choice%"=="28" set "TARGET_OS=win_arm64_clang"    & goto:eof
+	if "%choice%"=="29" set "TARGET_OS=win_x86_mingw"      & goto:eof
+	if "%choice%"=="30" set "TARGET_OS=win_x86_clang"      & goto:eof
+	if "%choice%"=="31" set "TARGET_OS=win_x86_msvc"       & goto:eof
+	if "%choice%"=="32" set "TARGET_OS=win_x86_64_mingw"   & goto:eof
+	if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
+	if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
+	if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
+    if "%choice%"=="36" call:clear_screen                  & goto:eof
+    if "%choice%"=="37" set "APP="                         & goto:eof
+    if "%choice%"=="38" exit                               & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof
@@ -343,13 +339,13 @@ goto:eof
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    echo TARGET_PATH = %TARGET_PATH%
+    call:print_var TARGET_PATH
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
-    echo CMAKE_SOURCE_DIR = %CMAKE_SOURCE_DIR%
+    call:print_var CMAKE_SOURCE_DIR
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-    echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%
+    call:print_var CMAKE_TARGET_PATH
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -366,7 +362,7 @@ goto:eof
     if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
-    echo CMAKE_BINARY_DIR = %CMAKE_BINARY_DIR%
+    call:print_var CMAKE_BINARY_DIR
         
     call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
     call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
@@ -390,7 +386,7 @@ goto:eof
 
 :generate_msystem
     call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
+    call:print_var MSYS2
                 
 	call:add_cmake_arg -G MinGW Makefiles
     call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
@@ -526,10 +522,10 @@ goto:eof
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
-    ::echo TARGET_PATH = %TARGET_PATH%
+    ::call:print_var TARGET_PATH
     
     call:get_parent_folder %TARGET_PATH% parent
-    ::echo parent = %parent%
+    ::call:print_var parent
     
     if %parent%==DKApps goto:eof
     call:make_directory  %DKAPPS_DIR%\%APP%
@@ -618,8 +614,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        echo SCRIPT_DIR = %SCRIPT_DIR%
-        echo DKBRANCH_DIR = %DKBRANCH_DIR%
+        call:print_var SCRIPT_DIR
+        call:print_var DKBRANCH_DIR
         goto:eof
     )
         
@@ -632,32 +628,21 @@ goto:eof
     :wipe   
     ::do we need admin rights?
     ::runas /user:Administrator cmd
-     
     ::do we need to kill any processes?
-    
     ::do we need to uninstall any apps?
-    
     ::do we need to remove any environment variables?
        
-    ::should we do a git clean first?
-    ::cd %DKBRANCH_DIR%
-    ::"%GIT_EXE%" clean -f -d
-    
     cd %DIGITALKNOB_DIR%
-    ::echo.
-    ::echo DELETING %DKDOWNLOAD_DIR% . . . .
-    ::call rmdir %DKDOWNLOAD_DIR% /s /q
-    ::echo done.
+
     echo.
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
     echo done.
         
-    :: wait 10 seconds at lease for the folders to get deleted
+    :: wait for the folders to get deleted
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    ::if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
     call:git_update NO_CONFIRM
@@ -686,8 +671,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        echo SCRIPT_DIR = %SCRIPT_DIR%
-        echo DKBRANCH_DIR = %DKBRANCH_DIR%
+        call:print_var SCRIPT_DIR
+        call:print_var DKBRANCH_DIR
         goto:eof
     )
         
@@ -699,33 +684,21 @@ goto:eof
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     :wipe   
     ::do we need admin rights?
-    ::runas /user:Administrator cmd
-        
-    ::do we need to kill any processes?
-        
-    ::do we need to uninstall any apps?
-        
+    ::runas /user:Administrator cmd   
+    ::do we need to kill any processes? 
+    ::do we need to uninstall any apps?  
     ::do we need to remove any environment variables?
         
-    ::should we do a git clean first?
-    ::cd %DKBRANCH_DIR%
-    ::"%GIT_EXE%" clean -f -d
-        
     cd %DIGITALKNOB_DIR%
-    ::echo.
-    ::echo DELETING %DKDOWNLOAD_DIR% . . . .
-    ::call rmdir %DKDOWNLOAD_DIR% /s /q
-    ::echo done.
     echo.
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
     echo done.
         
-    :: wait 10 seconds at lease for the folders to get deleted
+    :: wait for the folders to get deleted
     ping 127.0.0.1 -n 6 >nul
     ping 127.0.0.1 -n 6 >nul
         
-    ::if exist %DKDOWNLOAD_DIR% echo "Oh no, the downloads folder is still there! :( "
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
 goto:eof
 
@@ -782,7 +755,7 @@ goto:eof
         )
     )
 
-    echo DKBRANCH = %DKBRANCH%
+    call:print_var DKBRANCH
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 	set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
@@ -790,7 +763,6 @@ goto:eof
     set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 	
-
     :: make sure script is running from DKBRANCH_DIR
     ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
@@ -817,15 +789,15 @@ goto:eof
     if "%NATIVE_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
     call:get_filename %GIT_DL% GIT_DL_FILE
-    ::echo GIT_DL_FILE = %GIT_DL_FILE%
+    ::call:print_var GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
     call:convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
     call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
-    ::echo GIT_FOLDER = %GIT_FOLDER%
+    ::call:print_var GIT_FOLDER
         
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
-    echo GIT_EXE = %GIT_EXE%
+    call:print_var GIT_EXE
         
     if exist "%GIT_EXE%" goto:eof
         
@@ -851,15 +823,15 @@ goto:eof
     if "%NATIVE_ARCH%"=="x86_64" set CMAKE_DL=%CMAKE_DL_WIN_X86_64%
         
     call:get_filename %CMAKE_DL% CMAKE_DL_FILE
-    echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
+    call:print_var CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
 	call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
-    echo CMAKE_FOLDER = %CMAKE_FOLDER%
+    call:print_var CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
-    echo CMAKE_EXE = %CMAKE_EXE%
+    call:print_var CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
        
@@ -910,10 +882,10 @@ goto:eof
 :: validate_android_ndk()
 :validate_android_ndk
     call:cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-    echo ANDROID_GENERATOR = %ANDROID_GENERATOR%
-    echo ANDROID_API = %ANDROID_API%
-    echo ANDROID_NDK = %ANDROID_NDK%
-    echo ANDROID_TOOLCHAIN_FILE = %ANDROID_TOOLCHAIN_FILE%
+    call:print_var ANDROID_GENERATOR
+    call:print_var ANDROID_API
+    call:print_var ANDROID_NDK
+    call:print_var ANDROID_TOOLCHAIN_FILE
     call:check_error
 goto:eof
 
@@ -921,12 +893,12 @@ goto:eof
 :: validate_emscripten()
 :validate_emscripten
     call:cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-    echo EMSDK = %EMSDK%
-    echo EMSDK_ENV = %EMSDK_ENV%
-    echo EMSDK_GENERATOR = %EMSDK_GENERATOR%
-    echo EMSDK_TOOLCHAIN_FILE = %EMSDK_TOOLCHAIN_FILE%
-    echo EMSDK_C_COMPILER = %EMSDK_C_COMPILER%
-    echo EMSDK_CXX_COMPILER = %EMSDK_CXX_COMPILER%
+    call:print_var EMSDK
+    call:print_var EMSDK_ENV
+    call:print_var EMSDK_GENERATOR
+    call:print_var EMSDK_TOOLCHAIN_FILE
+    call:print_var EMSDK_C_COMPILER
+    call:print_var EMSDK_CXX_COMPILER
     call:check_error
 goto:eof
 
@@ -1097,7 +1069,7 @@ goto:eof
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    ::echo DKCOMMAND = %DKCOMMAND%
+    ::call:print_var DKCOMMAND
 
     set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
     call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
@@ -1118,7 +1090,7 @@ goto:eof
         ::del %EVAL_VARS%
     goto:eof
 
-    ::echo return code: %ERRORLEVEL%
+    ::call:print_var ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out
@@ -1179,10 +1151,10 @@ goto:eof
 :: create_cache
 :create_cache
     echo creating cache...
-    ::echo APP = %APP%
-    ::echo TARGET_OS = %TARGET_OS%
-    ::echo TYPE = %TYPE%
-    ::echo LEVEL = %LEVEL%
+    ::call:print_var APP
+    ::call:print_var TARGET_OS
+    ::call:print_var TYPE
+    ::call:print_var LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
     echo %APP%>"%DKBRANCH_DIR%\cache"
@@ -1242,8 +1214,17 @@ goto:eof
         call set "_TO=%%_LCASE:~%%a,1%%
         call set "_string=%%_string:!_FROM!=!_TO!%%
     )
-	::echo _string = %_string%
+	::call:print_var _string
 	set %2=%_string%
+goto:eof
+
+:::::::: print_var ::::::::
+:print_var
+	set var=%1
+	call set value=%%%var%%%
+	if "%var%" NEQ "" echo %var% = %value%
+	::else
+		::echo %1 = !!!INVALID!!!
 goto:eof
 
 :end
