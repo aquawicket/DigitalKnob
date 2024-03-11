@@ -44,32 +44,35 @@ dk_debug(CMAKE_SUPPRESS_REGENERATION	 PRINTVAR)
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
-	dk_debug(CMAKE_INSTALL_PREFIX	 PRINTVAR)
 endif()
-
+dk_debug(CMAKE_INSTALL_PREFIX	 PRINTVAR)
 
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
 dk_debug(CMAKE_CXX_COMPILER_ID	PRINTVAR)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	dk_set(GNU 1)
-	dk_debug(GNU	PRINTVAR)
+	dk_set(GNU ON)
 endif()
+dk_debug(GNU	PRINTVAR)
+
+dk_debug(CMAKE_GENERATOR	PRINTVAR)
+
 string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 if(${index} GREATER -1)
-	dk_set(MSVC 1)
-	dk_debug(MSVC	PRINTVAR)
+	dk_set(MSVC ON)
 endif()
-dk_debug(CMAKE_GENERATOR	PRINTVAR)
+dk_debug(MSVC	PRINTVAR)
+
 if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
-	dk_set(MINGW 1)
-	dk_debug(MINGW	PRINTVAR)
+	dk_set(MINGW ON)
 endif()
+dk_debug(MINGW	PRINTVAR)
+
 if(CMAKE_GENERATOR STREQUAL "Xcode")
-	dk_set(XCODE 1)
-	dk_debug(XCODE	PRINTVAR)
+	dk_set(XCODE ON)
 endif()
+dk_debug(XCODE	PRINTVAR)
 
 
 ###########################################################################
@@ -81,11 +84,11 @@ if(NOT DEBUG)
 if(NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
 	dk_set(DEBUG ON)
-	dk_debug(DEBUG	 PRINTVAR)
 	dk_set(RELEASE ON)
-	dk_debug(RELEASE	 PRINTVAR)
 endif()
 endif()
+dk_debug(DEBUG	 PRINTVAR)
+dk_debug(RELEASE	 PRINTVAR)
 
 
 ###########################################################################
@@ -99,10 +102,10 @@ if(NOT REBUILD)
 if(NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
 	dk_set(REBUILDALL ON)
-	dk_debug(REBUILDALL	 PRINTVAR)
 endif()
 endif()
 endif()
+dk_debug(REBUILDALL	 PRINTVAR)
 
 
 ###########################################################################
@@ -113,9 +116,9 @@ option(SHARED "Build Shared Libraries and Plugins" OFF)
 if(NOT STATIC)
 if(NOT SHARED)
 	dk_set(STATIC ON)
-	dk_debug(STATIC	 PRINTVAR)
 endif()
 endif()
+dk_debug(STATIC	 PRINTVAR)
 
 
 ###########################################################################
@@ -246,7 +249,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}64")		# CLANG64, MINGW64, UCRT64
 		endif()
 		dk_debug(MSYSTEM	PRINTVAR)
-		dk_set(${MSYSTEM} 1)
+		dk_set(${MSYSTEM} ON)
 	endif()
 	
 	### Get DK_BINARY_OS

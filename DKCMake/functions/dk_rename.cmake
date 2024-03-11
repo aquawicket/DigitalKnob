@@ -17,27 +17,21 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		#if(NOT noerror)
 		if(NOT NOERROR)
 			dk_error("from:${from} not found")
 		endif()
 		return()
 	endif()
 	if(EXISTS ${to})
-		#if(NOT ${overwrite})
 		if(NOT OVERWRITE)
 			dk_error("Cannot rename file. Destiantion exists and not set to overwrite")
 		endif()
 		dk_remove(${to})
 	endif()
 	
-	#FIXME: the base directory of the ${to} path must exist.    
-	# EXAMPLE:   to = MyDir/Something/MustExist/myfile.text
-	#							or
-	#		     to = MyDir/Something/MustExist/newdir
-	#
-	# So we need to get path one level up..   MyDir/Something/MustExist
-	# then make sure it exists, and if it doesn't, we need to create it. 
+	# the base directory of the ${to} path must exist.    
+	get_filename_component(PARENT_DIR ${to} DIRECTORY)
+	dk_makeDirectory(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})
 endfunction()

@@ -46,8 +46,9 @@ dk_load(dk_sleep)
 #	EXAMPLE: dk_get_option(MY_ARG ${ARGV})
 #
 macro(dk_get_option name)
-	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
-	if(${ARG_${name}})
+	cmake_parse_arguments(ARG ${name} "" "" ${ARGN})
+	#message("${name} = ${ARG_${name}}")
+	if(ARG_${name})
 		set(${name} ${name})
 		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
 	else()
@@ -1146,16 +1147,8 @@ dk_load(dk_copy)
 #
 #function(dk_copy from to) # OVERWRITE NOERROR
 #	DKDEBUGFUNC(${ARGV})
-#	
-#	dk_includes("${ARGN}" "OVERWRITE" includes)
-#	if(${includes})
-#		set(overwrite true)
-#	endif()
-#	
-#	dk_includes("${ARGN}" "NOERROR" includes)
-#	if(${includes})
-#		set(noerror true)
-#	endif()
+#	dk_get_option(OVERWRITE ${ARGV)}
+#	dk_get_option(NOERROR ${ARGV)}
 #	
 #	if(EXISTS ${from})
 #		if(IS_DIRECTORY ${from})
@@ -1169,15 +1162,15 @@ dk_load(dk_copy)
 #				endif()
 #				set(sourcefile "${from}/${each_file}")
 #				set(destinationfile "${to}/${each_file}")
-#				if(overwrite)
+#				if(OVERWRITE)
 #					execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${sourcefile} ${destinationfile} RESULT_VARIABLE compare_result)
 #					if(compare_result EQUAL 1)
 #						execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
 #						dk_info("COPIED: ${sourcefile} to ${destinationfile}")
 #					elseif(compare_result EQUAL 0)
-#						#dk_info("${sourcefile} No Copy, The files are identical.")
+#						dk_info("${sourcefile} No Copy, The files are identical.")
 #					else()
-#						dk_error( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
+#						dk_error( "dk_copy(${from} ${to} ${OVERWRITE}): \n ERROR: compare_result = ${compare_result}")
 #					endif()
 #				elseif(NOT EXISTS ${destinationfile})
 #					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
@@ -1185,7 +1178,7 @@ dk_load(dk_copy)
 #				endif()
 #			endforeach()
 #		else()
-#			if(overwrite)
+#			if(OVERWRITE)
 #				execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${from} ${to})
 #				dk_info("COPIED: ${from} to ${to}")
 #			elseif(NOT EXISTS ${to})
@@ -1194,7 +1187,7 @@ dk_load(dk_copy)
 #			endif()
 #		endif()
 #	else()
-#		if(NOT noerror)
+#		if(NOT NOERROR)
 #			dk_error("from:(${from}) The source path does not exist")
 #		endif()
 #	endif()
@@ -1991,7 +1984,7 @@ dk_load(dk_executeProcess)
 #		dk_error("output  = ${output}		" NOASSERT) 		
 #		dk_error("error   = ${error}		" ${NOASSERT})
 #	endif()
-e#ndfunction()
+#ndfunction()
 #dk_createOsMacros("dk_executeProcess")
 
 
@@ -2247,7 +2240,7 @@ dk_createOsMacros("dk_msys2_bash")
 #
 function(dk_mergeFlags args RESULT)
 	DKDEBUGFUNC(${ARGV})
-	#dk_debug(args PRINTVAR)
+	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
 	set(args ${args} ${RESULT} ${ARGN})
 	list(GET args -1 RESULT)
 	list(REMOVE_AT args -1)
@@ -2287,12 +2280,13 @@ function(dk_mergeFlags args RESULT)
 			list(INSERT args ${placeholder} "${DK_${word}}")	# https://stackoverflow.com/a/61948012
 		endif()
 	endforeach()
+	#dk_debug("AFTER: dk_mergeFlags(${args})")
 	set(${RESULT} ${args} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO])
+# dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO] [NOMERGE])
 #
 #	<cmd>			The command to run
 #	[<arguments>]	command arguments 
@@ -2304,18 +2298,21 @@ function(dk_command)
 	DKDEBUGFUNC(${ARGV})	
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
+	dk_get_option(NOMERGE ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 
 	if(OUTPUT_VARIABLE)
 		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
-	dk_mergeFlags("${ARGV}" merged_args)
+	if(NOT NOMERGE)
+		dk_mergeFlags("${ARGV}" ARGV)
+	endif()
 	
 	if(MINGW)
-		dk_msys2_bash(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
+		dk_msys2_bash(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	else()
-		dk_executeProcess(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
+		dk_executeProcess(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	endif()
 	
 	if(OUTPUT_VARIABLE)
@@ -2327,7 +2324,7 @@ dk_createOsMacros("dk_command")
 
 
 ###############################################################################
-# dk_queueCommand(args) NOASSERT NOECHO
+# dk_queueCommand(args) NOASSERT NOECHO NOMERGE
 #
 #	TODO
 #
@@ -2337,11 +2334,12 @@ function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
+	dk_get_option(NOMERGE ${ARGV})
 	
 	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	if(QUEUE_BUILD)
-		dk_command(${ARGV} ${NOASSERT} ${NOECHO})
+		dk_command(${ARGV} ${NOASSERT} ${NOECHO} ${NOMERGE})
 	endif()	
 endfunction()
 dk_createOsMacros("dk_queueCommand")
@@ -3503,7 +3501,7 @@ function(dk_runDepends plugin)
 		if(${ARGC} GREATER 1)
 			dk_enable(${ARGV1})
 		else()
-			dk_set(${ARGV0}_all 1)
+			dk_set(${ARGV0}_all ON)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
@@ -3744,13 +3742,7 @@ function(dk_buildLog entry)
 	
 	dk_info("${entry}")
 	
-	if(MULTI_CONFIG)
-		file(APPEND ${DK_PROJECT_DIR}/${OS}/DKBUILD.log "${entry}\n")
-	elseif(DEBUG)
-		file(APPEND ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/DKBUILD.log "${entry}\n")
-	elseif(RELEASE)
-		file(APPEND ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/DKBUILD.log "${entry}\n")
-	endif()
+	file(APPEND ${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${entry}\n")
 endfunction()
 
 
@@ -4022,8 +4014,8 @@ function(dk_addTarget plugin target)
 		dk_set(${plugin}_targets ${target})
 	endif()
 	if(${plugin}_all)
-		dk_set(${plugin}_${target} 1)
-		#dk_set(${plugin}::${target} 1) # TESTME
+		dk_set(${plugin}_${target} ON)
+		#dk_set(${plugin}::${target} ON) # TESTME
 	endif()
 endfunction()
 
@@ -4266,6 +4258,7 @@ endfunction()
 #
 function(dk_importGit url) #branch #id #PATCH
 	DKDEBUGFUNC(${ARGV})
+	dk_get_option(PATCH ${ARGV})
 	
 	include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	DKASSERT(GIT_EXE)
@@ -4391,9 +4384,8 @@ function(dk_importGit url) #branch #id #PATCH
 	#		dk_patch(${Lib} ${${LIBVAR}})
 	#	endif()
 	#endforeach()
-	
-	dk_includes("${ARGN}" "PATCH" includes)
-	if(${includes})
+
+	if(PATCH)
 		dk_patch(${Lib} ${${LIBVAR}})
 	endif()	
 endfunction()
