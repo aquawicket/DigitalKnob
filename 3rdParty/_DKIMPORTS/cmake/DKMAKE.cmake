@@ -9,7 +9,7 @@
 #	dk_debug("CMAKE_EXE already set to: ${CMAKE_EXE}")
 #	return()
 #endif()
-
+dk_wait()
 
 ### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
@@ -27,6 +27,64 @@ if(CMAKE_DL)
 endif()
 
 
+
+### COMPILE CMAKE ###
+set(COMPILE_CMAKE 1)
+if(COMPILE_CMAKE)
+	if(NOT CMAKE_EXE)
+		dk_set(CMAKE_EXE ${CMAKE_COMMAND})
+	else()
+		dk_import(https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3.tar.gz)
+		if(ANDROID_HOST)
+			dk_download(https://raw.githubusercontent.com/libarchive/libarchive/master/contrib/android/include/android_lf.h ${CMAKE}/Utilities/cmlibarchive/libarchive)
+		endif()
+		
+		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
+		dk_include				(${CMAKE}/${OS})
+		DEBUG_dk_include		(${CMAKE}/${OS}/${DEBUG_DIR})
+		RELEASE_dk_include		(${CMAKE}/${OS}/${RELEASE_DIR})
+
+		dk_libDebug		(${CMAKE}/${OS}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
+		dk_libRelease	(${CMAKE}/${OS}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
+		
+		string(REPLACE "--DDEBUG" 	""	CMAKE_BUILD "${DKCMAKE_BUILD}")
+		string(REPLACE "  " 		" " CMAKE_BUILD "${CMAKE_BUILD}")
+		dk_queueCommand(${DKCMAKE_BUILD} 
+			-DCMake_INSTALL_COMPONENTS=OFF 			# "Using components when installing" OFF
+			-DCMake_INSTALL_DEPENDENCIES=OFF		# "Whether to install 3rd-party runtime dependencies" OFF
+			-DCMake_BUILD_DEVELOPER_REFERENCE=OFF	# "Build CMake Developer Reference" OFF
+			-DCMake_BUILD_LTO=OFF 					# "Compile CMake with link-time optimization if supported" OFF
+			-DCMake_BUILD_PCH=OFF 					# "Compile CMake with precompiled headers" OFF
+			#-DCMAKE_USE_SYSTEM_LIBARCHIVE 			# "Use system-installed libarchive" "${CMAKE_USE_SYSTEM_LIBRARY_LIBARCHIVE}"
+			#-DCMAKE_USE_SYSTEM_CPPDAP 				# "Use system-installed cppdap" "${CMAKE_USE_SYSTEM_LIBRARY_CPPDAP}"
+			#-DCMAKE_USE_SYSTEM_CURL 				# "Use system-installed curl" "${CMAKE_USE_SYSTEM_LIBRARY_CURL}"
+			#-DCMAKE_USE_SYSTEM_EXPAT 				# "Use system-installed expat" "${CMAKE_USE_SYSTEM_LIBRARY_EXPAT}"
+			#-DCMAKE_USE_SYSTEM_FORM 				# "Use system-installed libform" "${CMAKE_USE_SYSTEM_LIBRARY_FORM}"
+			#-DCMAKE_USE_SYSTEM_LIBRHASH 			# "Use system-installed librhash" "${CMAKE_USE_SYSTEM_LIBRARY_LIBRHASH}"
+			#-DCMAKE_USE_SYSTEM_LIBUV 				# "Use system-installed libuv" "${CMAKE_USE_SYSTEM_LIBRARY_LIBUV}"
+			#-DCMAKE_USE_SYSTEM_KWIML 				# "Use system-installed KWIML" OFF
+			#-DCMAKE_USE_FOLDERS 					# "Enable folder grouping of projects in IDEs." ON
+			#-DCMake_RUN_CLANG_TIDY 				# "Run clang-tidy with the compiler." OFF
+			#-DCMake_USE_CLANG_TIDY_MODULE 			# "Use CMake's clang-tidy module." OFF
+			#-DCMake_RUN_IWYU 						# "Run include-what-you-use with the compiler." OFF
+			#-DCMake_IWYU_VERBOSE 					# "Run include-what-you-use in verbose mode" OFF
+			-DBUILD_TESTING=OFF
+			${CMAKE})
+			 
+		#dk_build(${CMAKE} cmake)
+		dk_command(${CMAKE_MAKE_PROGRAM})
+		
+		return()
+	endif()
+endif()
+	
+	
+
+### OR ###	
+
+
+	
+### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_depend(msys2)
 	if(NOT EXISTS ${MSYS2})
@@ -67,44 +125,19 @@ if(MSYSTEM)
 	endif()
 	
 else()
-	if(ANDROID_HOST)
+	if(WIN_HOST)
 		if(NOT CMAKE_EXE)
 			dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 		else()
-			
-			#dk_import(https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3.tar.gz)
-			dk_import(https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4.tar.gz)
-			dk_download(https://raw.githubusercontent.com/libarchive/libarchive/master/contrib/android/include/android_lf.h ${CMAKE}/Utilities/cmlibarchive/libarchive)
-			dk_debug(CMAKE PRINTVAR)
-			dk_debug(CMAKE_EXE PRINTVAR)
-
-			dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
-			dk_include				(${CMAKE}/${OS})
-			DEBUG_dk_include		(${CMAKE}/${OS}/${DEBUG_DIR})
-			RELEASE_dk_include		(${CMAKE}/${OS}/${RELEASE_DIR})
-	
-			dk_libDebug		(${CMAKE}/${OS}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
-			dk_libRelease	(${CMAKE}/${OS}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
-
-			message(STATUS "dk_queueCommand(${DKCMAKE_BUILD}	${CMAKE})")
-			dk_queueCommand(${DKCMAKE_BUILD} 
-					"-DCMAKE_CXX_FLAGS=-I${CMAKE}"
-					#-DCMAKE_USE_SYSTEM_LIBUV=ON
-					#-DCMAKE_USE_SYSTEM_LIBARCHIVE=ON
-					${CMAKE})
-
-			#dk_build(${CMAKE} cmake)
-			dk_command(${CMAKE_MAKE_PROGRAM})
-		endif()
-	elseif(WIN_HOST)
-		dk_set(CMAKE_EXE ${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe)
-		if(NOT EXISTS ${CMAKE_EXE})
-			### INSTALL ###
-			dk_info("Installing CMake . . .")
-			dk_download(${CMAKE_DL} ${DKDOWNLOAD_DIR})			
-			file(TO_NATIVE_PATH "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" CMAKE_INSTALL_FILE)
-			file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${CMAKE_FOLDER}" CMAKE_INSTALL_PATH)
-			dk_command(MsiExec.exe /i "${CMAKE_INSTALL_FILE}" INSTALL_ROOT=${CMAKE_INSTALL_PATH})
+			dk_set(CMAKE_EXE ${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe)
+			if(NOT EXISTS ${CMAKE_EXE})
+				### INSTALL ###
+				dk_info("Installing CMake . . .")
+				dk_download(${CMAKE_DL} ${DKDOWNLOAD_DIR})			
+				file(TO_NATIVE_PATH "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" CMAKE_INSTALL_FILE)
+				file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${CMAKE_FOLDER}" CMAKE_INSTALL_PATH)
+				dk_command(MsiExec.exe /i "${CMAKE_INSTALL_FILE}" INSTALL_ROOT=${CMAKE_INSTALL_PATH})
+			endif()
 		endif()
 	else()
 		dk_command(sh -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
@@ -142,4 +175,3 @@ dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent
 dk_debug(CMAKE_EX	PRINTVAR)
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 dk_debug(CMAKE_VERSION	PRINTVAR)
-

@@ -73,6 +73,9 @@ if "%*" NEQ "" call %*
         
     set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
     call:print_var NATIVE_TRIPLE
+	
+	set NATIVE_ENV=clang
+	set NATIVE_TRIPLE=%NATIVE_TRIPLE%_%NATIVE_ENV%
 
     call:validate_git
     call:validate_branch

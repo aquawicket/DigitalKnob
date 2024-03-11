@@ -1455,9 +1455,9 @@ dk_load(dk_linkDir)
 #		link_directories(${path})
 #	#endforeach()
 #endfunction()
-dk_createOsMacros("dk_linkDir")
+#dk_createOsMacros("dk_linkDir")
 
-#dk_getCurrentDirectory(dk_getCurrentDirectory)
+dk_load(dk_getCurrentDirectory)
 ###############################################################################
 # dk_getCurrentDirectory(RESULT)
 #
@@ -1477,7 +1477,7 @@ dk_createOsMacros("dk_linkDir")
 #	set(${RESULT} ${output} PARENT_SCOPE)
 #endfunction()
 
-
+dk_load(dk_makeDirectory)
 ###############################################################################
 # dk_makeDirectory(path)
 #
@@ -1485,34 +1485,35 @@ dk_createOsMacros("dk_linkDir")
 #
 #	@path	- The full path to the direcotory to be created
 #
-function(dk_makeDirectory path)
-	DKDEBUGFUNC(${ARGV})
-	make_directory(${path})  # requires full path
-	return()
-	
-	# build missing directory parents recursivley
-#	if(MAC_HOST)
-#		file(RELATIVE_PATH rel_path "${DIGITALKNOB_DIR}/DK" ${path})
-#		dk_info("RELATIVE_PATH(${path}) OF (${DIGITALKNOB_DIR}/DK) =-> ${rel_path}")
-#		dk_info("MAKE_DIRECTORY ${rel_path}")
-#		file(MAKE_DIRECTORY ${rel_path})
-#	else()
-#		string(REPLACE "/" ";" path_list ${path})
-#		foreach(item ${path_list})
-#			string(REPLACE "home" "/home" item ${item})
-#			if(path2)
-#				set(path2 "${path2}/${item}")
-#				if(NOT EXISTS ${path2})
-#					file(MAKE_DIRECTORY ${path2})
-#				endif()
-#			else()
-#				set(path2 "${item}")
-#			endif()
-#		endforeach()
-#	endif()
-endfunction()
-dk_createOsMacros("dk_makeDirectory")
+#function(dk_makeDirectory path)
+#	DKDEBUGFUNC(${ARGV})
+#	make_directory(${path})  # requires full path
+#	return()
+#	
+#	# build missing directory parents recursivley
+#	#	if(MAC_HOST)
+#	#		file(RELATIVE_PATH rel_path "${DIGITALKNOB_DIR}/DK" ${path})
+#	#		dk_info("RELATIVE_PATH(${path}) OF (${DIGITALKNOB_DIR}/DK) =-> ${rel_path}")
+#	#		dk_info("MAKE_DIRECTORY ${rel_path}")
+#	#		file(MAKE_DIRECTORY ${rel_path})
+#	#	else()
+#	#		string(REPLACE "/" ";" path_list ${path})
+#	#		foreach(item ${path_list})
+#	#			string(REPLACE "home" "/home" item ${item})
+#	#			if(path2)
+#	#				set(path2 "${path2}/${item}")
+#	#				if(NOT EXISTS ${path2})
+#	#					file(MAKE_DIRECTORY ${path2})
+#	#				endif()
+#	#			else()
+#	#				set(path2 "${item}")
+#	#			endif()
+#	#		endforeach()
+#	#	endif()
+#endfunction()
+#dk_createOsMacros("dk_makeDirectory")
 
+dk_load(dk_getDirectory)
 ###############################################################################
 # dk_getDirectory(path RESULT)
 #
@@ -1521,19 +1522,19 @@ dk_createOsMacros("dk_makeDirectory")
 #	@path		- The path to use
 #	@RESULT		- Returns the directory upon success: False upon error
 #
-function(dk_getDirectory path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	string(FIND ${path} "/" index REVERSE)
-	if(${index} EQUAL -1)
-	#dk_includes(${path} "/" index REVERSE)
-	#if(NOT ${index})
-		return() # no path dividers found
-	endif()
-	string(SUBSTRING ${path} 0 ${index} directory) 
-    set(${RESULT} ${directory} PARENT_SCOPE)
-endfunction()
+#function(dk_getDirectory path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	string(FIND ${path} "/" index REVERSE)
+#	if(${index} EQUAL -1)
+#	#dk_includes(${path} "/" index REVERSE)
+#	#if(NOT ${index})
+#		return() # no path dividers found
+#	endif()
+#	string(SUBSTRING ${path} 0 ${index} directory) 
+#   set(${RESULT} ${directory} PARENT_SCOPE)
+#endfunction()
 
-
+dk_load(dk_getFilename)
 # FIXME:  not working
 ###############################################################################
 # dk_getFilename(path RESULT)
@@ -1543,20 +1544,20 @@ endfunction()
 #	@path		- The path to use
 #	@RESULT:	- Returns the file name upon success: False upon error
 #
-function(dk_getFilename path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	string(FIND ${path} "/" index REVERSE)
-	if(${index} EQUAL -1)
-	#dk_includes(${path} "/" index REVERSE)
-	#if(NOT ${index})
-		dk_error("No Path Dividers found")
-	endif()
-	MATH(EXPR index "${index}+1")
-	string(SUBSTRING ${path} ${index} -1 filename) 
-    set(${RESULT} ${filename} PARENT_SCOPE)
-endfunction()
+#function(dk_getFilename path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	string(FIND ${path} "/" index REVERSE)
+#	if(${index} EQUAL -1)
+#	#dk_includes(${path} "/" index REVERSE)
+#	#if(NOT ${index})
+#		dk_error("No Path Dividers found")
+#	endif()
+#	MATH(EXPR index "${index}+1")
+#	string(SUBSTRING ${path} ${index} -1 filename) 
+#   set(${RESULT} ${filename} PARENT_SCOPE)
+#endfunction()
 
-
+dk_load(dk_getExtension)
 ###############################################################################
 # dk_getExtension(path RESULT)
 #
@@ -1565,31 +1566,32 @@ endfunction()
 #	@path		- The path to use
 #	@RESULT:	- Returns the extension upon success: False upon error
 #
-function(dk_getExtension path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	# WHY A NEW GET EXTENSION FUNCTION ?
-#	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
-#	get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
-#	cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
-	string(FIND ${path} "." index REVERSE)
-	if(${index} EQUAL -1)
-	#dk_includes(${path} "." index REVERSE)
-	#if(NOT ${index})
-		return() # no extension found
-	endif()
-	string(SUBSTRING ${path} ${index} -1 ext)
+#function(dk_getExtension path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	# WHY A NEW GET EXTENSION FUNCTION ?
+#	#	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
+#	#	get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
+#	#	cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
+#	string(FIND ${path} "." index REVERSE)
+#	if(${index} EQUAL -1)
+#	#dk_includes(${path} "." index REVERSE)
+#	#if(NOT ${index})
+#		return() # no extension found
+#	endif()
+#	string(SUBSTRING ${path} ${index} -1 ext)
+#
+#	#look for .tar
+#	math(EXPR tar ${index}-4)
+#	if(${tar} GREATER -1)
+#		string(SUBSTRING ${path} ${tar} -1 tarext)
+#		if("${tarext}" STREQUAL ".tar${ext}")
+#			set(ext ${tarext})
+#		endif()
+#	endif()
+#   set(${RESULT} ${ext} PARENT_SCOPE)
+#endfunction()
 
-	#look for .tar
-	math(EXPR tar ${index}-4)
-	if(${tar} GREATER -1)
-		string(SUBSTRING ${path} ${tar} -1 tarext)
-		if("${tarext}" STREQUAL ".tar${ext}")
-			set(ext ${tarext})
-		endif()
-	endif()
-    set(${RESULT} ${ext} PARENT_SCOPE)
-endfunction()
-
+dk_load(dk_dirIsEmpty)
 ###############################################################################
 # dk_dirIsEmpty(path RESULT)
 #
@@ -1598,18 +1600,18 @@ endfunction()
 #	@path		- The full path to the directory to check
 #	@RESULT		- Returns true if the directory is empty. False if the directory is not empty
 #
-function(dk_dirIsEmpty path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	if(EXISTS ${path})
-		file(GLOB items RELATIVE "${path}/" "${path}/*")
-		list(LENGTH items count)
-		if(${count} GREATER 0)
-			set(${RESULT} false PARENT_SCOPE)
-			return()
-		endif()
-	endif()
-	set(${RESULT} true PARENT_SCOPE)
-endfunction()
+#function(dk_dirIsEmpty path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	if(EXISTS ${path})
+#		file(GLOB items RELATIVE "${path}/" "${path}/*")
+#		list(LENGTH items count)
+#		if(${count} GREATER 0)
+#			set(${RESULT} false PARENT_SCOPE)
+#			return()
+#		endif()
+#	endif()
+#	set(${RESULT} true PARENT_SCOPE)
+#endfunction()
 
 
 ###############################################################################
@@ -3477,6 +3479,12 @@ function(dk_runDepends plugin)
 			endif()
 		endforeach()
 		
+		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
+		dk_includes("${line}" "#" hasCommentSign)
+		if(${hasCommentSign})
+			set(KEEPLINE 0)
+		endif()
+		
 		if(KEEPLINE)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
@@ -3506,6 +3514,12 @@ function(dk_runDepends plugin)
 				set(KEEPLINE 1)
 			endif()
 		endforeach()
+		
+		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
+		dk_includes("${line}" "#" hasCommentSign)
+		if(${hasCommentSign})
+			set(KEEPLINE 0)
+		endif()
 		
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")

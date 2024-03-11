@@ -22,6 +22,9 @@ macro(dk_wait)
 	
 	message(STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
 	
+	# FIXME: This needs to adhear to the shell type we are in. Not the host OS. Hence, we can be on a WIN32 host 
+	# yet, still be in a unix environment.. and timeout wont work, and vice versa. 
+	# We need to find a true way to determine if we are in a cmd, powershell or unix sh / bash type shell.
 	math(EXPR timeout_p1 ${timeout}+1)
 	if(WIN32)
 		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
