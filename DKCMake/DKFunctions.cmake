@@ -1837,7 +1837,7 @@ dk_load(dk_install)
 #		dk_info("deleting ${DKDOWNLOAD_DIR}/${dl_filename}. . .")
 #		dk_remove(${DKDOWNLOAD_DIR}/${dl_filename})
 #	endif()
-e#ndfunction()
+#endfunction()
 #dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
