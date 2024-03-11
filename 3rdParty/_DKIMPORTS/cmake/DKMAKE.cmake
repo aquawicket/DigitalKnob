@@ -5,15 +5,10 @@
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 
-#if(EXISTS ${CMAKE_EXE})
-#	dk_debug("CMAKE_EXE already set to: ${CMAKE_EXE}")
-#	return()
-#endif()
-dk_wait()
 
 ### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
-#ANDROID_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
+#ANDROID_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 #LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
 MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
@@ -29,7 +24,7 @@ endif()
 
 
 ### COMPILE CMAKE ###
-set(COMPILE_CMAKE 1)
+set(COMPILE_CMAKE 0)
 if(COMPILE_CMAKE)
 	if(NOT CMAKE_EXE)
 		dk_set(CMAKE_EXE ${CMAKE_COMMAND})
@@ -87,9 +82,7 @@ endif()
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_depend(msys2)
-	if(NOT EXISTS ${MSYS2})
-		dk_error("MSYS2:${MSYS2} does not exist")
-	endif()
+	DKASSERT(MSYS2)
 	
 	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
 	if(CMAKE_EXE)
@@ -152,9 +145,8 @@ endif()
 
 
 ### validate CMAKE variables ###
-if(NOT CMAKE_COMMAND)
-	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} is empty")
-endif()
+DKASSERT(CMAKE_COMMAND)
+
 if(NOT EXISTS ${CMAKE_COMMAND})
 	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
 endif()
@@ -162,9 +154,8 @@ if(NOT CMAKE_EXE)
 	dk_warn("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
 	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
 endif()
-if(NOT CMAKE_EXE)
-	dk_error("CMAKE_EXE:${CMAKE_EXE} is empty")
-endif()
+
+DKASSERT(CMAKE_EXE)
 if(NOT EXISTS ${CMAKE_EXE})
 	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
 endif()

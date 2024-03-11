@@ -142,7 +142,7 @@ goto:eof
     echo. 
     echo  Press Enter To Skip
     set choice=
-    set /p "choice=Choose a selection: "
+    set /p "choice=Choose a selection: " 
 	
 	::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
@@ -180,7 +180,7 @@ goto:eof
     echo 11) Go Back
     echo 12) Exit
     set choice=
-    set /p choice=Please select an app to build:
+    set /p choice=Please select an app to build: 
 	
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
 	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
@@ -513,7 +513,7 @@ goto:eof
 ::enter_manually()
 :enter_manually
     echo Please type the name of the library, tool or app to build. Then press enter.
-    set /p input=
+    set /p input= 
 
     set APP=_%input%_
   
@@ -563,7 +563,7 @@ goto:eof
 :reset_apps
     echo Resetting Apps . . .
 
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
 
     cd %DKAPPS_DIR%
@@ -575,7 +575,7 @@ goto:eof
 :reset_plugins
     echo Resetting DKPlugins . . .
 
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     cd %DKPLUGINS_DIR%
@@ -587,7 +587,7 @@ goto:eof
 :reset_3rdparty
     echo Resetting 3rdParty Libraries . . .
         
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     cd %DK3RDPARTY_DIR%
@@ -609,7 +609,7 @@ goto:eof
     echo. you wish to commit or save beforehand.
     echo. 
         
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     :: first we need to relocate this file up one directory
@@ -666,7 +666,7 @@ goto:eof
     echo. you wish to commit or save beforehand.
     echo. 
         
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     :: first we need to relocate this file up one directory
@@ -968,7 +968,7 @@ goto:eof
 :git_update
     if "%1" NEQ "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
-        set /P CONFIRM="Are you sure? [Y] "
+        set /P CONFIRM="Are you sure? [Y] " 
     )
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
@@ -996,7 +996,7 @@ goto:eof
 :: git_commit()
 :git_commit
     echo "Please enter some details about this commit, then press enter."
-    set /p message=">"
+    set /p message=">" 
         
     cd %DKBRANCH_DIR%
         
@@ -1010,7 +1010,7 @@ goto:eof
     if "%USER_EMAIL%"=="" (
         echo.
         echo please enter an email address
-        set /p input=">"
+        set /p input=">" 
         "%GIT_EXE%" config --global user.email "%input%"
         echo.
         echo "git user.email %input% saved"
@@ -1021,7 +1021,7 @@ goto:eof
     if "%USER_NAME%"=="" (
         echo.
         echo please enter a username
-        set /p input=">"
+        set /p input=">" 
         "%GIT_EXE%" config --global user.name "%input%"
         echo.
         echo "git user.name %input% saved"
@@ -1032,7 +1032,7 @@ goto:eof
         
     echo.
     echo git commit "%message%"
-    set /P CONFIRM="Are you sure? [Y] "
+    set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
     "%GIT_EXE%" commit -a -m "%message%"

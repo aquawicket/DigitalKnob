@@ -1,4 +1,4 @@
-include(${DKCMAKE_DIR}/DKFunctions.cmake)
+include(${DKCMAKE_DIR}/DK.cmake)
 
 
 

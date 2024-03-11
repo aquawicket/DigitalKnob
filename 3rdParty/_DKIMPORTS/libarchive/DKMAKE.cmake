@@ -13,6 +13,7 @@ dk_depend(bzip2)
 #dk_depend(libb2)
 #dk_depend(libbcrypt)
 dk_depend(libexpat)
+dk_depend(libgcc)
 dk_depend(libiconv)
 dk_depend(libxml2)
 dk_depend(lz4)
@@ -29,10 +30,10 @@ dk_import(https://github.com/libarchive/libarchive.git)
 
 
 ### LINK ###
-dk_define				(LIBARCHIVE_STATIC)
-dk_include				(${LIBARCHIVE}/libarchive)
-dk_include				(${LIBARCHIVE}/${OS})
-ANDROID_dk_include		(${LIBARCHIVE}/contrib/android/include)
+dk_define					(LIBARCHIVE_STATIC)
+dk_include					(${LIBARCHIVE}/libarchive)
+dk_include					(${LIBARCHIVE}/${OS})
+ANDROID_dk_include			(${LIBARCHIVE}/contrib/android/include)
 
 if(MULTI_CONFIG)
 	if(MSVC)
@@ -43,8 +44,8 @@ if(MULTI_CONFIG)
 		dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
 	endif()
 else()
-	dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
-	dk_libRelease	(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
+	dk_libDebug				(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
+	dk_libRelease			(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
 endif()
 
 
@@ -97,6 +98,7 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -155,6 +157,7 @@ EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -214,6 +217,7 @@ IOS_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -281,6 +285,7 @@ IOSSIM_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -347,6 +352,7 @@ LINUX_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -405,6 +411,7 @@ MAC_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -463,6 +470,7 @@ RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBB2_CMAKE}
 	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
+	${LIBGCC_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}
 	${LZ4_CMAKE}
@@ -522,6 +530,7 @@ if(MSVC)
 		${LIBB2_CMAKE}
 		${LIBBCRYPT_CMAKE}
 		${LIBEXPAT_CMAKE}
+		${LIBGCC_CMAKE}
 		${LIBICONV_CMAKE}
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
@@ -560,7 +569,7 @@ else()
 		-DENABLE_ICONV=${LIBICONV}
 		-DENABLE_INSTALL=OFF
 		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
+		#-DENABLE_LIBGCC=${LIBGCC}
 		-DENABLE_LIBXML2=${LIBXML2} 
 		-DENABLE_LZ4=${LZ4} 
 		-DENABLE_LZMA=${XZ}
@@ -593,6 +602,7 @@ else()
 		${LIBB2_CMAKE}
 		${LIBBCRYPT_CMAKE}
 		${LIBEXPAT_CMAKE}
+		${LIBGCC_CMAKE}
 		${LIBICONV_CMAKE}
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}

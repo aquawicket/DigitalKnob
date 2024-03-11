@@ -1,3 +1,4 @@
+include_guard()
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -21,15 +22,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 include("${DKCMAKE_DIR}/DK.cmake")
 
 # FIXME: work to remove this
-if(COMMAND cmake_policy)
-	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
-endif(COMMAND cmake_policy)
+#if(COMMAND cmake_policy)
+#	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
+#endif(COMMAND cmake_policy)
 
 
 ###############################################################

@@ -47,8 +47,6 @@ dk_load(dk_sleep)
 #
 macro(dk_get_option name)
 	cmake_parse_arguments(ARG "${name}" "" "" ${ARGN})
-	#dk_print_prefix_vars("ARG_")
-	#set(${name} ${ARG_${name}})
 	if(${ARG_${name}})
 		set(${name} ${name})
 		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
@@ -1840,7 +1838,7 @@ dk_load(dk_install)
 #endfunction()
 #dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_validatePath)
 ###############################################################################
 # dk_validatePath(path RESULT)
 #
@@ -1849,13 +1847,13 @@ dk_load(dk_install)
 #	@path		- TODO
 #	@RESULT		- TODO
 #
-function(dk_validatePath path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	get_filename_component(path ${path} ABSOLUTE)
-	set(${RESULT} ${path} PARENT_SCOPE)
-endfunction()
+#function(dk_validatePath path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	get_filename_component(path ${path} ABSOLUTE)
+#	set(${RESULT} ${path} PARENT_SCOPE)
+#endfunction()
 
-
+dk_load(dk_getShortPath)
 ###############################################################################
 # dk_getShortPath(path RESULT)
 #
@@ -1864,35 +1862,37 @@ endfunction()
 #	@path		- TODO
 #	@RESULT		- TODO
 #
-function(dk_getShortPath path RESULT)
-	DKDEBUGFUNC(${ARGV})
-	if(WIN_HOST)
-		file(WRITE ${DKCMAKE_DIR}/dk_getShortPath.cmd "@ECHO OFF \necho %~s1")
-		execute_process(COMMAND ${DKCMAKE_DIR}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		string(REPLACE "\\" "/" path ${path})
-		string(REPLACE "\n" "" path ${path})
-		set(${RESULT} ${path} PARENT_SCOPE)
-	endif()
-endfunction()
+#function(dk_getShortPath path RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	if(WIN_HOST)
+#		file(WRITE ${DKCMAKE_DIR}/dk_getShortPath.cmd "@ECHO OFF \necho %~s1")
+#		execute_process(COMMAND ${DKCMAKE_DIR}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		string(REPLACE "\\" "/" path ${path})
+#		string(REPLACE "\n" "" path ${path})
+#		set(${RESULT} ${path} PARENT_SCOPE)
+#	endif()
+#endfunction()
 
+dk_load(dk_print_prefix_vars)
 ###############################################################################
 # dk_print_prefix_vars(_prefix) 
 #
 #	Example: dk_print_prefix_vars("CMAKE_")
 #
-function(dk_print_prefix_vars _prefix)
-    get_cmake_property(_vars VARIABLES)
-    string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
-    set(_resultVars "")
-    foreach(_variable ${_matchedVars})
-		list(APPEND _resultVars "${_variable}")
-    endforeach()
+#function(dk_print_prefix_vars _prefix)
+#   get_cmake_property(_vars VARIABLES)
+#   string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
+#   set(_resultVars "")
+#    foreach(_variable ${_matchedVars})
+#		list(APPEND _resultVars "${_variable}")
+#   endforeach()
+#
+#	foreach(_var IN LISTS _resultVars)
+#        message(STATUS "${_var} = ${${_var}}")
+#    endforeach()
+#endfunction()
 
-	foreach(_var IN LISTS _resultVars)
-        message(STATUS "${_var} = ${${_var}}")
-    endforeach()
-endfunction()
-
+dk_load(dk_get_option_value)
 ###############################################################################
 # dk_get_option_value(name ${ARGV}) 
 #
@@ -1900,14 +1900,15 @@ endfunction()
 #
 #	EXAMPLE: dk_get_option_value(MY_ARG ${ARGV})
 #
-macro(dk_get_option_value name)
-	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
-	#dk_print_prefix_vars("ARG_")
-	set(${name} ${ARG_${name}})
-	list(REMOVE_ITEM ARGV ${name})
-	list(REMOVE_ITEM ARGV ${ARG_${name}})
-endmacro()
+#macro(dk_get_option_value name)
+#	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
+#	#dk_print_prefix_vars("ARG_")
+#	set(${name} ${ARG_${name}})
+#	list(REMOVE_ITEM ARGV ${name})
+#	list(REMOVE_ITEM ARGV ${ARG_${name}})
+#endmacro()
 
+dk_load(dk_get_option_values)
 ###############################################################################
 # dk_get_option_values(name ${ARGV}) 
 #
@@ -1915,15 +1916,16 @@ endmacro()
 #
 #	EXAMPLE: dk_get_option_values(MY_ARG ${ARGV})
 #
-macro(dk_get_option_values name)
-	cmake_parse_arguments(ARG "" "" "${name}" ${ARGN})
-	#dk_print_prefix_vars("ARG_")
-	set(${name} ${ARG_${name}})
-	list(REMOVE_ITEM ARGV ${name})
-	list(REMOVE_ITEM ARGV ${ARG_${name}})
-	#FIXME: TODO:  remove each value from ARGV
-endmacro()
+#macro(dk_get_option_values name)
+#	cmake_parse_arguments(ARG "" "" "${name}" ${ARGN})
+#	#dk_print_prefix_vars("ARG_")
+#	set(${name} ${ARG_${name}})
+#	list(REMOVE_ITEM ARGV ${name})
+#	list(REMOVE_ITEM ARGV ${ARG_${name}})
+#	#FIXME: TODO:  remove each value from ARGV
+#endmacro()
 
+dk_load(dk_executeProcess)
 ###############################################################################
 # dk_executeProcess(commands) NOASSERT NOECHO OUTPUT <output_variable>
 #
@@ -1932,77 +1934,65 @@ endmacro()
 #	@commands	- TODO
 #	@NOASSERT	- will not halt cmake if an error occurs
 #
-function(dk_executeProcess)
-	DKDEBUGFUNC(${ARGV})
-
-	dk_get_option(NOASSERT ${ARGV})
-	#dk_info("dk_executeProcess(): NOASSERT = ${NOASSERT}")
-	#if(NOASSERT)
-	#	dk_debug("dk_executeProcess(): NOASSERT = TRUE")
-	#else()
-	#	dk_debug("dk_executeProcess(): NOASSERT = FALSE")
-	#endif()
-	
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
-	if(OUTPUT_VARIABLE)
-		set(EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-	endif()
-	#dk_get_option_value(WORKING_DIRECTORY ${ARGV})
-	#if(WORKING_DIRECTORY)
-	#	set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${WORKING_DIRECTORY})
-	#endif()
-	
-
-	set(commands ${ARGV})
-	list(REMOVE_ITEM commands COMMAND)
-	list(REMOVE_ITEM commands "cmd /c ")
-	
-	
-	### DO NOT DO THIS ###
-	#string(REPLACE ";" " " ARGV "${ARGV}")
-
-	if(NOT ${NOECHO})
-		string(REPLACE ";" " " print_commands "${ARGV}")
-		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
-	endif()
-	
-	list(FIND commands "WORKING_DIRECTORY" index)
-	if(index EQUAL -1)
-		set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
-	endif()
-	
-	if(OUTPUT_VARIABLE)
-		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-	endif()
-	
-	set(EXTRA_ARGS ${EXTRA_ARGS} RESULT_VARIABLE result)
-	set(EXTRA_ARGS ${EXTRA_ARGS} ERROR_VARIABLE error)
-	set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-	if(MSVC)	#FIXME: detect cmd instead of msvc
-		#dk_info("\n${CLR}${magenta} execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})")
-		execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})
-	else()
-		#dk_info("\n${CLR}${magenta} execute_process(COMMAND ${commands} ${EXTRA_ARGS})")
-		execute_process(COMMAND ${commands} ${EXTRA_ARGS})
-	endif()
-	
-	if(OUTPUT_VARIABLE)
-		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
-	endif()
-
-	if(NOT ${result} EQUAL 0)
-		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
-		dk_error(" 							" NOASSERT)
-		dk_error("command = ${commands}		" NOASSERT)
-		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
-		dk_error("result  = ${result}		" NOASSERT)
-		dk_error("output  = ${output}		" NOASSERT) 		
-		dk_error("error   = ${error}		" ${NOASSERT})
-	endif()
-endfunction()
-dk_createOsMacros("dk_executeProcess")
+#function(dk_executeProcess)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_get_option(NOASSERT ${ARGV})
+#	dk_get_option(NOECHO ${ARGV})
+#	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+#	
+#	if(OUTPUT_VARIABLE)
+#		set(EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#	endif()
+#	#dk_get_option_value(WORKING_DIRECTORY ${ARGV})
+#	#if(WORKING_DIRECTORY)
+#	#	set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${WORKING_DIRECTORY})
+#	#endif()
+#
+#	set(commands ${ARGV})
+#	list(REMOVE_ITEM commands COMMAND)
+#	list(REMOVE_ITEM commands "cmd /c ")
+#
+#	if(NOT ${NOECHO})
+#		string(REPLACE ";" " " print_commands "${ARGV}")
+#		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
+#	endif()
+#	
+#	list(FIND commands "WORKING_DIRECTORY" index)
+#	if(index EQUAL -1)
+#		set(EXTRA_ARGS ${EXTRA_ARGS} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+#	endif()
+#	
+#	if(OUTPUT_VARIABLE)
+#		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#	endif()
+#	
+#	set(EXTRA_ARGS ${EXTRA_ARGS} RESULT_VARIABLE result)
+#	set(EXTRA_ARGS ${EXTRA_ARGS} ERROR_VARIABLE error)
+#	set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	
+#	if(MSVC)	#FIXME: detect cmd instead of msvc
+#		#dk_info("\n${CLR}${magenta} execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})")
+#		execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})
+#	else()
+#		#dk_info("\n${CLR}${magenta} execute_process(COMMAND ${commands} ${EXTRA_ARGS})")
+#		execute_process(COMMAND ${commands} ${EXTRA_ARGS})
+#	endif()
+#	
+#	if(OUTPUT_VARIABLE)
+#		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+#	endif()
+#
+#	if(NOT ${result} EQUAL 0)
+#		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
+#		dk_error(" 							" NOASSERT)
+#		dk_error("command = ${commands}		" NOASSERT)
+#		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
+#		dk_error("result  = ${result}		" NOASSERT)
+#		dk_error("output  = ${output}		" NOASSERT) 		
+#		dk_error("error   = ${error}		" ${NOASSERT})
+#	endif()
+e#ndfunction()
+#dk_createOsMacros("dk_executeProcess")
 
 
 
@@ -2172,19 +2162,10 @@ function(dk_msys2_bash)
 	DKDEBUGFUNC(${ARGV})
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
-	
 	dk_get_option(NOASSERT ${ARGV})
-	#dk_info("dk_msys2_bash(): NOASSERT = ${NOASSERT}")
-	#if(NOASSERT)
-	#	dk_debug("dk_msys2_bash(): NOASSERT = TRUE")
-	#else()
-	#	dk_debug("dk_msys2_bash(): NOASSERT = FALSE")
-	#endif()
-	
-
 	dk_get_option(NOECHO ${ARGV})
-	
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+
 	if(OUTPUT_VARIABLE)
 		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
@@ -2320,30 +2301,16 @@ endfunction()
 #	@args	- TODO
 #
 function(dk_command)
-	DKDEBUGFUNC(${ARGV})
-	
+	DKDEBUGFUNC(${ARGV})	
 	dk_get_option(NOASSERT ${ARGV})
-	#dk_info("dk_command(): NOASSERT = ${NOASSERT}")
-	#if(NOASSERT)
-	#	dk_debug("dk_command(): NOASSERT = TRUE")
-	#else()
-	#	dk_debug("dk_command(): NOASSERT = FALSE")
-	#endif()
-	
 	dk_get_option(NOECHO ${ARGV})
-	
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+
 	if(OUTPUT_VARIABLE)
 		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
 	dk_mergeFlags("${ARGV}" merged_args)
-	#string(REPLACE ";" " " spaced_args "${merged_args}")
-	#dk_info("\n${CLR}${magenta} dk_command> ${spaced_args}\n")
-	
-	#if(EMSCRIPTEN)
-	#	dk_executeProcess(${EMMAKE} bash ${merged_args})
-	#else()
 	
 	if(MINGW)
 		dk_msys2_bash(${merged_args} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
@@ -2360,7 +2327,7 @@ dk_createOsMacros("dk_command")
 
 
 ###############################################################################
-# dk_queueCommand(args) NOASSERT
+# dk_queueCommand(args) NOASSERT NOECHO
 #
 #	TODO
 #
@@ -2368,16 +2335,13 @@ dk_createOsMacros("dk_command")
 #
 function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
-	
-	#dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
-	#if(${has_NOASSERT})
-	#	set(NOASSERT NOASSERT)
-	#endif()
+	dk_get_option(NOASSERT ${ARGV})
+	dk_get_option(NOECHO ${ARGV})
 	
 	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	if(QUEUE_BUILD)
-		dk_command(${ARGV})
+		dk_command(${ARGV} ${NOASSERT} ${NOECHO})
 	endif()	
 endfunction()
 dk_createOsMacros("dk_queueCommand")
@@ -2641,24 +2605,28 @@ function(dk_make path) #lib
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
-		dk_error("No proper dk_make() implemented for emscripten")
+		dk_error("No proper dk_make() implemented for emscripten" NOASSERT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+		
+		#set(lib ${ARGV1})
 		#if(${ARGC} GREATER 1)
 		#	dk_queueCommand(${EMMAKE} make ${lib})
 		#else()
 		#	dk_queueCommand(${EMMAKE} make)
 		#endif()
+		
 		DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
 		RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
 		#dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
-			dk_queueCommand(make ${lib})
+			#dk_queueCommand(make ${lib})
+			dk_queueCommand(${CMAKE_MAKE_PROGRAM} ${lib})
 		else()
-			dk_queueCommand(make)
+			#dk_queueCommand(make)
+			dk_queueCommand(${CMAKE_MAKE_PROGRAM})
 		endif()
 	endif()
 endfunction()
@@ -2672,17 +2640,12 @@ endfunction()
 #	@path 				- TODO
 #	@target (optional)	- TODO
 #
-function(dk_build path)
+function(dk_build path) #target NOASSERT
 	DKDEBUGFUNC(${ARGV})
-	
 	if(NOT QUEUE_BUILD)
 		return()
 	endif()
-	
-	dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
-	if(${has_NOASSERT})
-		set(NOASSERT NOASSERT)
-	endif()
+	dk_get_option(NOASSERT ${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_build(${path}) path does not exist")
@@ -2963,8 +2926,6 @@ function(dk_generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0002 OLD)\n")
-	#file(APPEND ${plugin_path}/CMakeLists.txt "include(\${DKCMAKE_DIR}/DK.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${DKPLUGINS_DIR})\n")
 	foreach(each_include ${DKINCLUDES_LIST})
@@ -3480,10 +3441,10 @@ function(dk_runDepends plugin)
 		endforeach()
 		
 		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
-		dk_includes("${line}" "#" hasCommentSign)
-		if(${hasCommentSign})
-			set(KEEPLINE 0)
-		endif()
+		#dk_includes("${line}" "#" hasCommentSign)
+		#if(${hasCommentSign})
+		#	set(KEEPLINE 0)
+		#endif()
 		
 		if(KEEPLINE)
 			set(disable_script "${disable_script}${line}\n")
@@ -3516,10 +3477,10 @@ function(dk_runDepends plugin)
 		endforeach()
 		
 		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
-		dk_includes("${line}" "#" hasCommentSign)
-		if(${hasCommentSign})
-			set(KEEPLINE 0)
-		endif()
+		#dk_includes("${line}" "#" hasCommentSign)
+		#if(${hasCommentSign})
+		#	set(KEEPLINE 0)
+		#endif()
 		
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
@@ -3650,9 +3611,7 @@ endfunction()
 #
 function(dk_fileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
-	
-	dk_includes("${ARGN}" "NOERROR" NOERROR)
-
+	dk_get_option(NOERROR ${ARGV})
 	
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
@@ -3662,7 +3621,7 @@ function(dk_fileReplace filePath find replace)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		file(WRITE ${filePath} "${fileString}")
 	else()
-		if(NOT ${NOERROR})
+		if(NOT NOERROR)
 			dk_error("cannot find \"${find}\"  in  (${filePath})")
 		endif()
 	endif()
@@ -4649,8 +4608,8 @@ function(dk_import url)
 		endif()
 	endif()
 	
-	dk_includes("${ARGN}" "PATCH" has_patch)
-	if(${has_patch})
+	dk_get_option(PATCH ${ARGV})
+	if(PATCH)
 		#dk_debug("dk_patch(${plugin} ${${plugin_var}})")
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
@@ -4862,16 +4821,17 @@ endfunction()
 #
 #	@path				- TODO
 #	@RESULT				- TODO
-#   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#   NOERROR (optional)	- if one of the parameters is NOERROR, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
+	dk_get_option(NOERROR ${ARGV})
+	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
 	#dk_includes(${path} "." includes REVERSE)
 	#if(NOT includes)
-		dk_includes("${ARGN}" "NOERROR" includes)
-		if(${includes})
+		if(NOT NOERROR)
 			dk_error("no extension found")
 		endif()
 		return()
@@ -5035,8 +4995,6 @@ endfunction()
 #
 function(dk_findLibrary name)
 	DKDEBUGFUNC(${ARGV})
-	message(STATUS "dk_findLibrary(${ARGV})")
-	
 	dk_get_option(NOASSERT ${ARGV})
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
@@ -5068,8 +5026,9 @@ dk_createOsMacros("dk_findLibrary")
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "RECURSE" recurse)
-	if(${recurse})
+	dk_get_option(RECURSE ${ARGV})
+
+	if(RECURSE)
 		file(GLOB_RECURSE files "${path}/" "${path}/${pattern}")
 	else()
 		file(GLOB files "${path}/" "${path}/${pattern}")

@@ -24,7 +24,11 @@
 include_guard()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+
+# https://cmake.org/cmake/help/latest/policy/CMP0007.html
+# "Do not ignore empty list items"
 CMAKE_POLICY(SET CMP0007 NEW)
+
 include(${DKCMAKE_DIR}/DK.cmake)
 
 dk_set(string_Ext ON)

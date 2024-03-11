@@ -50,7 +50,7 @@ message(STATUS "################# DigitalKnob CMakeLists.txt #################")
 message(STATUS "##############################################################")
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-CMAKE_POLICY(SET CMP0054 NEW)
+#CMAKE_POLICY(SET CMP0054 NEW)
 
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
