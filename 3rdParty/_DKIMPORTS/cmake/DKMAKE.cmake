@@ -5,14 +5,15 @@
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 
-if(EXISTS ${CMAKE_EXE})
-	dk_debug("CMAKE_EXE already set to: ${CMAKE_EXE}")
-	return()
-endif()
+#if(EXISTS ${CMAKE_EXE})
+#	dk_debug("CMAKE_EXE already set to: ${CMAKE_EXE}")
+#	return()
+#endif()
 
 
 ### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
+#ANDROID_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 #LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
 MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
@@ -66,7 +67,36 @@ if(MSYSTEM)
 	endif()
 	
 else()
-	if(WIN_HOST)
+	if(ANDROID_HOST)
+		if(NOT CMAKE_EXE)
+			dk_set(CMAKE_EXE ${CMAKE_COMMAND})
+		else()
+			
+			#dk_import(https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3.tar.gz)
+			dk_import(https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4.tar.gz)
+			dk_download(https://raw.githubusercontent.com/libarchive/libarchive/master/contrib/android/include/android_lf.h ${CMAKE}/Utilities/cmlibarchive/libarchive)
+			dk_debug(CMAKE PRINTVAR)
+			dk_debug(CMAKE_EXE PRINTVAR)
+
+			dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
+			dk_include				(${CMAKE}/${OS})
+			DEBUG_dk_include		(${CMAKE}/${OS}/${DEBUG_DIR})
+			RELEASE_dk_include		(${CMAKE}/${OS}/${RELEASE_DIR})
+	
+			dk_libDebug		(${CMAKE}/${OS}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
+			dk_libRelease	(${CMAKE}/${OS}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
+
+			message(STATUS "dk_queueCommand(${DKCMAKE_BUILD}	${CMAKE})")
+			dk_queueCommand(${DKCMAKE_BUILD} 
+					"-DCMAKE_CXX_FLAGS=-I${CMAKE}"
+					#-DCMAKE_USE_SYSTEM_LIBUV=ON
+					#-DCMAKE_USE_SYSTEM_LIBARCHIVE=ON
+					${CMAKE})
+
+			#dk_build(${CMAKE} cmake)
+			dk_command(${CMAKE_MAKE_PROGRAM})
+		endif()
+	elseif(WIN_HOST)
 		dk_set(CMAKE_EXE ${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe)
 		if(NOT EXISTS ${CMAKE_EXE})
 			### INSTALL ###

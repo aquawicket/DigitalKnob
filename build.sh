@@ -2,10 +2,6 @@
 
 ###### Global Script Variables ######
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-
-# fix for reset_all
-trap "cd $SCRIPT_DIR" EXIT
-
 SCRIPT_NAME=$(basename "$0")
 echo $SCRIPT_DIR/$SCRIPT_NAME
 true=0
@@ -479,7 +475,7 @@ function Generate_Project() {
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86" ]]; then
-		validate_gcc
+		#validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
 		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
@@ -842,53 +838,53 @@ function delete_temp_files() {
 }
 
 ###### validate_msys2 ######
-function validate_msys2() {
-	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
-	print_var MSYS2
-}
+#function validate_msys2() {
+#	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
+#	print_var MSYS2
+#}
 
 ###### validate_make ######
-function validate_make() {
-	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	print_var MAKE_PROGRAM
-}
+#function validate_make() {
+#	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+#	print_var MAKE_PROGRAM
+#}
 
 ###### validate_emscripten ######
-function validate_emscripten() {
-	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-	print_var EMSDK
-	print_var EMSDK_ENV
-	print_var EMSDK_GENERATOR
-	print_var EMSDK_TOOLCHAIN_FILE
-	print_var EMSDK_C_COMPILER
-	print_var EMSDK_CXX_COMPILER
-}
+#function validate_emscripten() {
+#	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+#	print_var EMSDK
+#	print_var EMSDK_ENV
+#	print_var EMSDK_GENERATOR
+#	print_var EMSDK_TOOLCHAIN_FILE
+#	print_var EMSDK_C_COMPILER
+#	print_var EMSDK_CXX_COMPILER
+#}
 
 ###### validate_android_ndk ######
-function validate_android_ndk() {
-	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
-	print_var ANDROID_NDK
-	print_var ANDROID_GENERATOR
-	print_var ANDROID_TOOLCHAIN_FILE
-	print_var ANDROID_API
-	print_var ANDROID_MAKE_PROGRAM
-	print_var ANDROID_C_COMPILER
-	print_var ANDROID_CXX_COMPILER
-}
+#function validate_android_ndk() {
+#	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+#	print_var ANDROID_NDK
+#	print_var ANDROID_GENERATOR
+#	print_var ANDROID_TOOLCHAIN_FILE
+#	print_var ANDROID_API
+#	print_var ANDROID_MAKE_PROGRAM
+#	print_var ANDROID_C_COMPILER
+#	print_var ANDROID_CXX_COMPILER
+#}
 
 ###### validate_clang ######
-function validate_clang() {
-	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-	print_var CLANG_C_COMPILER
-	print_var CLANG_CXX_COMPILER
-}
+#function validate_clang() {
+#	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+#	print_var CLANG_C_COMPILER
+#	print_var CLANG_CXX_COMPILER
+#}
 
 ###### validate_gcc ######
-function validate_gcc() {
-	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-	print_var GCC_C_COMPILER
-	print_var GCC_CXX_COMPILER
-}
+#function validate_gcc() {
+#	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+#	print_var GCC_C_COMPILER
+#	print_var GCC_CXX_COMPILER
+#}
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 function cmake_eval() {
