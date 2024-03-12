@@ -15,25 +15,16 @@ dk_depend(python)
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
-#WIN_HOST_dk_command(${EMSDK}/emsdk.bat install latest)
-#UNIX_HOST_dk_command(${EMSDK}/emsdk install latest)
 dk_command(${EMSDK}/emsdk${bat} install latest)
 
-#WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate latest --permanent)
-#UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-#UNIX_HOST_dk_command(${EMSDK}/emsdk activate latest --permanent)
+UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
 dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
 
 #FIXME: add python dir to the path environment variable before calling emsdk.bat
-#WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
-#UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
 dk_command(${EMSDK}/emsdk_env${bat})
 
-WIN_HOST_dk_command(${EMSDK}/emsdk.bat install mingw-4.6.2-32bit)
-#UNIX_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
-
-WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate mingw-4.6.2-32bit)
-#UNIX_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
+WIN_HOST_dk_command(${EMSDK}/emsdk${bat} install mingw-4.6.2-32bit)
+WIN_HOST_dk_command(${EMSDK}/emsdk${bat} activate mingw-4.6.2-32bit)
 
 
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NOERROR)
