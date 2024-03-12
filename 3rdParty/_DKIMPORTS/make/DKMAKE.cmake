@@ -25,3 +25,7 @@ if(MSYSTEM)
 		dk_set(MAKE_PROGRAM ${MSYS2}/ucrt64/bin/mingw32-make.exe)
 	endif()
 endif()
+
+#if(EMSCRIPTEN)
+#	dk_set(MAKE_PROGRAM ${EMSDK}/mingw/4.6.2_32bi/mingw32-make.exe)
+#endif()

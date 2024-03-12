@@ -204,6 +204,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-pic) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-pic) 
 endif()
+dk_debug(POSITION_INDEPENDENT_CODE PRINTVAR)
 
 ###### POSITION_INDEPENDENT_EXECUTABLE ######
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fpie
@@ -226,6 +227,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-pie) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-pie) 
 endif()
+dk_debug(POSITION_INDEPENDENT_EXECUTABLE PRINTVAR)
 
 ###### RUN-TIME TYPE IDENTIFICATION ######
 if(ENABLE_RTTI)
@@ -247,6 +249,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-rtti) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-rtti)
 endif()
+dk_debug(ENABLE_RTTI PRINTVAR)
 
 ###### EXCEPTIONS ######
 if(ENABLE_EXCEPTIONS)
@@ -270,7 +273,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-exceptions) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-exceptions)
 endif()
-
+dk_debug(ENABLE_EXCEPTIONS PRINTVAR)
 
 
 
@@ -406,14 +409,14 @@ endif()
 if(EMSCRIPTEN)
 	dk_set(CMAKE_GENERATOR					${EMSCRIPTEN_GENERATOR})
 	dk_set(CMAKE_TOOLCHAIN_FILE				${EMSCRIPTEN_TOOLCHAIN_FILE})
-	dk_set(CMAKE_MAKE_PROGRAM				${EMSCRIPTEN_MAKE_PROGRAM})
-	dk_set(CMAKE_C_COMPILER					${EMSCRIPTEN_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${EMSCRIPTEN_CXX_COMPILER})
+	dk_set(CMAKE_VERBOSE_MAKEFILE			ON)
+	#dk_set(CMAKE_MAKE_PROGRAM				${EMSCRIPTEN_MAKE_PROGRAM})
+	#dk_set(CMAKE_C_COMPILER				${EMSCRIPTEN_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER				${EMSCRIPTEN_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-DEMSCRIPTEN -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS				-DEMSCRIPTEN -std=gnu++17)
-	
-	dk_set(DKCONFIGURE_CC					${EMSCRIPTEN_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${EMSCRIPTEN_CXX_COMPILER})
+	#dk_set(DKCONFIGURE_CC					${EMSCRIPTEN_C_COMPILER})
+	#dk_set(DKCONFIGURE_CXX					${EMSCRIPTEN_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS			-DEMSCRIPTEN -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS			-DEMSCRIPTEN -std=gnu++17)
 	
