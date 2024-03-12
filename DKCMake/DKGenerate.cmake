@@ -46,10 +46,18 @@ if(NOT TARGET)
 	dk_set(DKAPP ON)
 endif()
 
+
+### initialize variables
+set(dkdepend_list "")
+set(LIBS "")
+set(DEBUG_LIBS "")
+set(RELEASE_LIBS "")
+set(DKINCLUDES_LIST "")
+set(DISABLED_LIBS "")
+
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-
 include(${DK_PROJECT_DIR}/DKMAKE.cmake)
 file(REMOVE ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
 dk_printSettings()
@@ -1426,17 +1434,17 @@ endif()
 
 dk_buildLog("\n\n")
 dk_buildLog("########### ${APP_NAME} Post-Generated Compiler Settings ###########")
-dk_buildLog("     COMPILE_DEFINITIONS:  ${COMPILE_DEFINITIONS}")
-dk_buildLog("           DEFINE_SYMBOL:  ${DEFINE_SYMBOL}")
-dk_buildLog("         COMPILE_OPTIONS:  ${COMPILE_OPTIONS}")
-dk_buildLog("     INCLUDE_DIRECTORIES:  ${INCLUDE_DIRECTORIES}")
-dk_buildLog("        LINK_DIRECTORIES:  ${LINK_DIRECTORIES}")
-dk_buildLog("  STATIC_LIBRARY_OPTIONS:  ${STATIC_LIBRARY_OPTIONS}")
-dk_buildLog("             DEBUG_FLAGS:  ${DEBUG_FLAGS}")
-dk_buildLog("           RELEASE_FLAGS:  ${RELEASE_FLAGS}")
-dk_buildLog("                   FLAGS:  ${FLAGS}")
-dk_buildLog("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
-dk_buildLog("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
+dk_buildLog(COMPILE_DEFINITIONS		PRINTVAR)
+dk_buildLog(DEFINE_SYMBOL			PRINTVAR)
+dk_buildLog(COMPILE_OPTIONS			PRINTVAR)
+dk_buildLog(INCLUDE_DIRECTORIES		PRINTVAR)
+dk_buildLog(LINK_DIRECTORIES		PRINTVAR)
+dk_buildLog(STATIC_LIBRARY_OPTIONS	PRINTVAR)
+dk_buildLog(DEBUG_FLAGS				PRINTVAR)
+dk_buildLog(RELEASE_FLAGS			PRINTVAR)
+dk_buildLog(FLAGS					PRINTVAR)
+dk_buildLog(DKDEFINES_LIST			PRINTVAR)
+dk_buildLog(DKLINKDIRS_LIST			PRINTVAR)
 
 dk_buildLog("\n\n")
 dk_buildLog("###################  ${APP_NAME} Source Files  ##################")

@@ -10,7 +10,6 @@ include_guard()
 #
 function(dk_disable plugin)
 	DKDEBUGFUNC(${ARGV})
-	set(target ${ARGV1})
 	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
@@ -35,7 +34,6 @@ function(dk_disable plugin)
 	endif()
 	
 	if(${ARGC} GREATER 1)
-	#if(target)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
 		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _

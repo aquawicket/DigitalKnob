@@ -3299,7 +3299,6 @@ function(dk_depend plugin)
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		list(FIND init_list ${plugin} index)
 		if(${index} GREATER -1)
-			#dk_debug("${plugin} is allready in the init_list")
 			return()  #plugin is already in the init_list
 		endif()
 		#dk_set(init_list ${init_list} "${plugin}")
@@ -3371,7 +3370,6 @@ dk_createOsMacros("dk_depend")
 #
 function(dk_undepend plugin)
 	DKDEBUGFUNC(${ARGV})
-	set(target ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE_DIR})
@@ -3529,7 +3527,8 @@ function(dk_runDepends plugin)
 		endif()
 	endif()
 	
-	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add target to list
+	#dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add target to list
+	list(APPEND dkdepend_list "${ARGV}")  #Add target to list
 #	if(${ARGC} GREATER 1)
 #		dk_set(dkdepend_list ${dkdepend_list} "${plugin} ${ARGV1}")  #Add target to list
 #	else()
