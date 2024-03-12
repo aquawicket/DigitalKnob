@@ -15,15 +15,19 @@ dk_depend(python)
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
-WIN_HOST_dk_command(${EMSDK}/emsdk.bat install latest)
-UNIX_HOST_dk_command(${EMSDK}/emsdk install latest)
+#WIN_HOST_dk_command(${EMSDK}/emsdk.bat install latest)
+#UNIX_HOST_dk_command(${EMSDK}/emsdk install latest)
+dk_command(${EMSDK}/emsdk${bat} install latest)
 
-WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate latest --permanent)
-UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-UNIX_HOST_dk_command(${EMSDK}/emsdk activate latest --permanent)
+#WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate latest --permanent)
+#UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
+#UNIX_HOST_dk_command(${EMSDK}/emsdk activate latest --permanent)
+dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
 
-WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
-UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
+#FIXME: add python dir to the path environment variable before calling emsdk.bat
+#WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
+#UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
+dk_command(${EMSDK}/emsdk_env${bat})
 
 WIN_HOST_dk_command(${EMSDK}/emsdk.bat install mingw-4.6.2-32bit)
 #UNIX_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
@@ -39,19 +43,18 @@ dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET =
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 		"var USE_SDL_MIXER = false;"	NOERROR)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;"	"var USE_PTHREADS = true;"		NOERROR)
 
-
-WIN_HOST_dk_set	(EMSDK_ENV 				${EMSDK}/emsdk_env.bat)
-UNIX_HOST_dk_set(EMSDK_ENV 				${EMSDK}/emsdk_env.sh)
-
+#WIN_HOST_dk_set	(EMSDK_ENV 				${EMSDK}/emsdk_env.bat)
+#UNIX_HOST_dk_set(EMSDK_ENV 				${EMSDK}/emsdk_env.sh)
+dk_set(EMSDK_ENV 							${EMSDK}/emsdk_env${bat})
 
 WIN_HOST_dk_set	(EMSCRIPTEN_GENERATOR 		"MinGW Makefiles")
 UNIX_HOST_dk_set(EMSCRIPTEN_GENERATOR 		"Unix Makefiles")
 dk_set			(EMSCRIPTEN_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
-dk_set			(EMSCRIPTEN_AR 				${EMSDK}/upstream/emscripten/emar)
-dk_set			(EMSCRIPTEN_C_COMPILER 		${EMSDK}/upstream/emscripten/emcc)
-dk_set			(EMSCRIPTEN_CMAKE			${EMSDK}/upstream/emscripten/emcmake)
-dk_set			(EMSCRIPTEN_CONFIGURE 		${EMSDK}/upstream/emscripten/emconfigure)
-dk_set			(EMSCRIPTEN_MAKE_PROGRAM	${EMSDK}/upstream/emscripten/emmake)
-dk_set			(EMSCRIPTEN_CXX_COMPILER 	${EMSDK}/upstream/emscripten/em++)
-dk_set			(EMSCRIPTEN_RANLIB 			${EMSDK}/upstream/emscripten/emranlib)
+dk_set			(EMSCRIPTEN_AR 				${EMSDK}/upstream/emscripten/emar${bat})
+dk_set			(EMSCRIPTEN_C_COMPILER 		${EMSDK}/upstream/emscripten/emcc${bat})
+dk_set			(EMSCRIPTEN_CMAKE			${EMSDK}/upstream/emscripten/emcmake${bat})
+dk_set			(EMSCRIPTEN_CONFIGURE 		${EMSDK}/upstream/emscripten/emconfigure${bat})
+dk_set			(EMSCRIPTEN_MAKE_PROGRAM	${EMSDK}/upstream/emscripten/emmake${bat})
+dk_set			(EMSCRIPTEN_CXX_COMPILER 	${EMSDK}/upstream/emscripten/em++${bat})
+dk_set			(EMSCRIPTEN_RANLIB 			${EMSDK}/upstream/emscripten/emranlib${bat})
 

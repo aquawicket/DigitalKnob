@@ -122,7 +122,9 @@ if(ANDROID)
 	dk_disable(aubio)				# build errors	
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
-	#dk_disable(bzip2)				# 'make' can't find ar
+	if(WIN_HOST)
+		dk_disable(bzip2)				# 'make' can't find ar
+	endif()
 	dk_disable(cryptopp)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)

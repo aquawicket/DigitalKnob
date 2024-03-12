@@ -2309,7 +2309,7 @@ function(dk_command)
 		dk_mergeFlags("${ARGV}" ARGV)
 	endif()
 	
-	if(MINGW)
+	if(MSYSTEM)
 		dk_msys2_bash(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
 	else()
 		dk_executeProcess(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
