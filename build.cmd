@@ -372,9 +372,19 @@ goto:eof
 
     :::::::::::: CMake Options :::::::::::::
     ::call:add_cmake_arg -DCMAKE_VERBOSE_MAKEFILE=1
-    ::call:add_cmake_arg --debug-output"
-    ::call:add_cmake_arg --trace"
-    ::call:add_cmake_arg --warn-unused-vars"
+	call:add_cmake_arg -Wdev
+	::call:add_cmake_arg -Werror=dev
+	call:add_cmake_arg -Wdeprecated
+	::call:add_cmake_arg -Werror=deprecated
+	::call:add_cmake_arg --graphviz=graphviz.txt
+	::call:add_cmake_arg --system-information system_information.txt
+	::call:add_cmake_arg --debug-trycompile
+	::call:add_cmake_arg --debug-output
+	::call:add_cmake_arg --trace
+	::call:add_cmake_arg --trace-expand
+	call:add_cmake_arg --warn-uninitialized
+	call:add_cmake_arg --warn-unused-vars
+	call:add_cmake_arg --check-system-vars
 goto:eof
 
 :generate_mingw_makefiles

@@ -2160,8 +2160,10 @@ function(dk_msys2_bash)
 	dk_get_option(NOECHO ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 
+	set(EXTRA_ARGS "")
 	if(OUTPUT_VARIABLE)
-		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
 	if(NOT ${NOECHO})
@@ -2302,18 +2304,20 @@ function(dk_command)
 	dk_get_option(NOMERGE ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 
-	if(OUTPUT_VARIABLE)
-		set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-	endif()
-	
 	if(NOT NOMERGE)
 		dk_mergeFlags("${ARGV}" ARGV)
 	endif()
 	
+	if(OUTPUT_VARIABLE)
+		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	
+	
 	if(MINGW AND MSYSTEM)
-		dk_msys2_bash(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
+		dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
 	else()
-		dk_executeProcess(${ARGV} ${EXTRA_ARGS} ${NOASSERT} ${NOECHO})
+		dk_executeProcess(${ARGV} ${NOASSERT} ${NOECHO})
 	endif()
 	
 	if(OUTPUT_VARIABLE)
@@ -3298,7 +3302,8 @@ function(dk_depend plugin)
 			#dk_debug("${plugin} is allready in the init_list")
 			return()  #plugin is already in the init_list
 		endif()
-		dk_set(init_list ${init_list} "${plugin}")
+		#dk_set(init_list ${init_list} "${plugin}")
+		list(APPEND init_list "${plugin}")
 		
 		dk_getPathToPlugin(${plugin} plugin_path)
 		include(${plugin_path}/DKMAKE.cmake)

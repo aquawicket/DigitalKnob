@@ -318,11 +318,13 @@ endif()
 #endif()
 
 # TINYCORE
-string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
-if(${contains_tinycore} GREATER -1)
-	dk_set(TINYCORE ON)
-	dk_debug(TINYCORE	PRINTVAR)
-endif()	
+if(CMAKE_HOST_SYSTEM_VERSION)
+	string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
+	if(${contains_tinycore} GREATER -1)
+		dk_set(TINYCORE ON)
+		dk_debug(TINYCORE	PRINTVAR)
+	endif()
+endif()
 
 ### Display OS info to user ###
 dk_info("")
