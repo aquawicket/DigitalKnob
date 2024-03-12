@@ -335,6 +335,11 @@ dk_info("")
 dk_set(CMAKE_SKIP_RPATH ON)
 dk_debug(CMAKE_SKIP_RPATH	PRINTVAR)
 
+if(WIN_HOST)
+	dk_set(exe .exe)
+endif()
+dk_debug(exe PRINTVAR)
+
 
 
 

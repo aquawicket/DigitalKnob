@@ -61,14 +61,7 @@ else()
 	endif()
 	dk_setPath		(${BZIP2}/${OS})
 	
-	# This doesn't work..    /bin/sh needs to be able to find ar
-	#if(ANDROID_HOST)
-	#	dk_copy(${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/llvm-ar ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/ar)
-	#	dk_wait()
-	#endif()
-	
 	dk_sleep(2) # wait 2 seconds for files to copy over
-	#dk_queueCommand(make libbz2.a)
 	dk_queueCommand(${CMAKE_MAKE_PROGRAM} libbz2.a)
 endif()
 

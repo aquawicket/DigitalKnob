@@ -145,14 +145,10 @@ endif()
 
 # Set PATH environment  variables
 file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin" ANDROID_ENV_PATH)
-dk_debug("ENV{PATH} = $ENV{PATH}")
 set(ENV{PATH} "$ENV{PATH}:${ANDROID_ENV_PATH}")
-dk_debug("ENV{PATH} = $ENV{PATH}")
-dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar")
+message(STATUS "ENV{PATH} = $ENV{PATH}")
+dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar${exe}")
 
-if(WIN_HOST)
-	dk_set(EXE .exe)
-endif()
 
 ###### ANDROID VARIABLES ######
 dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
@@ -160,10 +156,10 @@ dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cm
 #dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
 dk_set(ANDROID_API 					31)
 dk_set(ANDROID_MIN_API 				19)
-dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make")
-dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
-dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${EXE}")
-dk_set(ANDROID_AR								"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${EXE}")
+dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
+dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
 
 dk_debug(ANDROID_GENERATOR		PRINTVAR)
 dk_debug(ANDROID_TOOLCHAIN_FILE	PRINTVAR)
@@ -172,4 +168,4 @@ dk_debug(ANDROID_MIN_API		PRINTVAR)
 dk_debug(ANDROID_MAKE_PROGRAM	PRINTVAR)
 dk_debug(ANDROID_C_COMPILER		PRINTVAR)
 dk_debug(ANDROID_CXX_COMPILER	PRINTVAR)
-dk_debug(ANDROID_AR							PRINTVAR)
+dk_debug(ANDROID_AR				PRINTVAR)
