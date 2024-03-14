@@ -27,7 +27,11 @@ function(dk_include path)
 		dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
 	endif()
 		
-	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+	if(DKINCLUDES_LIST)
+		dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+	else()
+		dk_set(DKINCLUDES_LIST ${path})
+	endif()
 
 	include_directories(${path})
 		
