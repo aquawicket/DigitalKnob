@@ -22,14 +22,12 @@ dk_depend(android-sdk)
 # 33.0.3
 WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
 MAC_HOST_dk_import(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r33.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
-if(NOT ANDROID_HOST)
-	LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
-else()
-	ANDROID_HOST_dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)
-	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)	# move termux/build-tools to android-sdk
-	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# move termux/platform-tools to android-sdk
+if(ANDROID_HOST)
+	dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)
+	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
+	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
 	
-	## Repackage Gradle's aapt2.jar with out version of aapt
+	## Repackage Gradle's aapt2.jar with termux version of aapt
 	dk_set(GRADLE_USER_HOME ${DIGITALKNOB_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)
@@ -43,6 +41,8 @@ else()
 		dk_executeProcess(jar cvf aapt2-7.0.3-7396180-linux.jar . WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
 	endif()
+else()
+	LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
 endif()
 
 # 34.0.3

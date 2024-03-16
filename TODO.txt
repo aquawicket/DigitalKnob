@@ -14,10 +14,6 @@ We need to start bridging the gap between the 2 source versions.
 We may need to follow the directory structure that CPP_DOM uses for each WebApi
 We may want to create a new JS_DOM branch and rename CPP_DOM to CPP_JS_DOM as well
 
-
-
-
-
 remove the hard coded need for imagemagick
 
 Change javascript entry point file name from "/assets/app.js" to "/assets/main.js"
