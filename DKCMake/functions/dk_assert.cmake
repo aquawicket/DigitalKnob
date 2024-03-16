@@ -1,13 +1,13 @@
 include_guard()
 
 ##################################################################################
-# dk_assert(expression)
+# DK_ASSERT(expression)
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-macro(dk_assert expression)
+macro(DK_ASSERT expression)
 	#DKDEBUGFUNC(${ARGV})
 	
 	if(NOT ${expression})
@@ -22,6 +22,3 @@ macro(dk_assert expression)
 		dk_exit() #FIXME:  is this needed?
 	endif()
 endmacro()
-#macro(DK_ASSERT)
-#	dk_assert(${ARGV})
-#endmacro()
