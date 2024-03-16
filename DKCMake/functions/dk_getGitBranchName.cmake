@@ -13,7 +13,8 @@ include_guard()
 function(dk_getGitBranchName url RESULT)
 	DKDEBUGFUNC(${ARGV})
 	
-	include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+	#include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+	dk_load(git)
 	DKASSERT(GIT_EXE)
 			
 	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)

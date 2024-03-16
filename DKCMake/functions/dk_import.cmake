@@ -34,8 +34,9 @@ function(dk_import url)
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
-			include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
-			DKASSERT(GIT_EXE)
+			#include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+			dk_load(git)
+			DK_ASSERT(GIT_EXE)
 			
 			if(NOT EXISTS ${${plugin_var}}/.git)
 				dk_set(CURRENT_DIR ${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})

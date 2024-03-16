@@ -1,5 +1,5 @@
 include_guard()
-
+dk_load(dk_eval)
 ##################################################################################
 # dk_call(func) args
 #
@@ -11,5 +11,5 @@ include_guard()
 macro(dk_call func) #parameters
 	#DKDEBUGFUNC(${ARGV})
 	dk_load(${func})
-	dk_cmakeLanguage("${func}($ARGN)")
+	dk_eval("${func}($ARGN)")
 endmacro()

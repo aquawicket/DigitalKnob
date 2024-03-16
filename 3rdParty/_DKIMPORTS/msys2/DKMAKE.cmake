@@ -1,3 +1,8 @@
+dk_load(dk_removeExtension)
+dk_load(dk_addFirewallAllow)
+dk_load(dk_remove)
+dk_load(dk_command)
+
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 if(NOT WIN_HOST)

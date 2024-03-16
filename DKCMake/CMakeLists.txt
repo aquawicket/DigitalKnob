@@ -56,19 +56,30 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
+###### Set DKCMAKE_DIR ######
+if(NOT DKCMAKE_DIR)
+	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+endif()
+message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
+include(${DKCMAKE_DIR}/functions/dk_load.cmake)
+
+#include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
+dk_load(dk_dumpAllVariables)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 #Load all cmake flags prior to calling PROJECT()
-include(${CMAKE_SOURCE_DIR}/DK.cmake)
-include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
+#include(${CMAKE_SOURCE_DIR}/DK.cmake)
+dk_load(DK)
+#include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
+dk_load(DKBuildFlags)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
 message(STATUS "################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
-include(${DKCMAKE_DIR}/DKGenerate.cmake)
+#include(${DKCMAKE_DIR}/DKGenerate.cmake)
+dk_load(DKGenerate)
 
 
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

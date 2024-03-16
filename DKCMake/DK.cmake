@@ -1,7 +1,13 @@
 include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
+###### Set DKCMAKE_DIR ######
+if(NOT DKCMAKE_DIR)
+	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+endif()
+message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
 
+include(${DKCMAKE_DIR}/functions/dk_load.cmake)
 
 if(CMAKE_SCRIPT_MODE_FILE)
 message(STATUS "")
@@ -15,7 +21,7 @@ endif()
 #################### GLOBAL DKCMake SETTINGS ############################
 set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
 set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
-#set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
+set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
@@ -37,6 +43,9 @@ set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warni
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(PROJECT_INCLUDE_DKPLUGINS	1		CACHE INTERNAL "")  # Include DKPlugin libraries in the app project
 set(PROJECT_INCLUDE_3RDPARTY	0		CACHE INTERNAL "")  # Include 3rdParty libraries in the app project
+
+dk_load(DKColor)
+#include(${DKCMAKE_DIR}/DKColor.cmake)
 
 ###### DKOFFLINE Warning ######
 if(${DKOFFLINE})
@@ -69,11 +78,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 endif()
 
 
-###### Set DKCMAKE_DIR ######
-if(NOT DKCMAKE_DIR)
-	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
-endif()
-message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
+
 
 
 ###### Set DKBRANCH_DIR ######
@@ -212,22 +217,6 @@ if(SINGLE_CONFIG)
 endif()
 
 
-
-
-### load DKCMake functions
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-#dk_load(DKDEBUGFUNC)
-#dk_load(dk_updateLogInfo)
-#dk_load(dk_debug)
-#dk_load(dk_createOsMacros)
-#dk_load(dk_set)
-#dk_load(dk_mergeFlags)
-#dk_load(dk_includes)
-#dk_load(dk_info)
-#dk_load(dk_executeProcess)
-#dk_load(dk_command)
-
-
 ### Set HOST_ARCH
 if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
 	if(CMAKE_HOST_WIN32)
@@ -283,38 +272,10 @@ message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_A
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ##### Load Function files #################
-#include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-#include(${DKCMAKE_DIR}/functions/dk_call.cmake)
-#dk_load(dk_listReplace)
-#dk_load(dk_getArgIdentifiers)
-#dk_load(dk_debugFunc)
-#dk_load(dk_color)
-#dk_load(dk_updateLogInfo)
-#dk_load(DKASSERT)
-#dk_load(dk_error)
-#dk_load(dk_warn)
-#dk_load(dk_info)
-#dk_load(dk_debug)
-#dk_load(dk_verbose)
-#dk_load(dk_trace)
-dk_load(DKColor)
-dk_load(DKFunctions)
-dk_load(DKFileSystem)
+
+#dk_load(DKFunctions)
+#dk_load(DKFileSystem)
 dk_load(DKVariables)
-#dk_load(DKDisabled)
-#dk_load(dk_findLibrary)
-#dk_load(dk_importVariables)
-include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)
-#dk_load(dk_findFiles)
+dk_load(dk_importVariables)
+#include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)

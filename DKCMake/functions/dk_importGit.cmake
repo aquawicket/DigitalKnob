@@ -13,7 +13,8 @@ function(dk_importGit url) #branch #id #PATCH
 	DKDEBUGFUNC(${ARGV})
 	dk_get_option(PATCH ${ARGV})
 	
-	include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+	#include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+	dk_load(git)
 	DKASSERT(GIT_EXE)
 	
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list

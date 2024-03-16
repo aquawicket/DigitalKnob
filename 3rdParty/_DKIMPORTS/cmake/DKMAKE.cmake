@@ -82,7 +82,7 @@ endif()
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_depend(msys2)
-	DKASSERT(MSYS2)
+	DK_ASSERT(MSYS2)
 	
 	dk_command(command -v cmake.exe OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
 	if(CMAKE_EXE)
@@ -145,7 +145,7 @@ endif()
 
 
 ### validate CMAKE variables ###
-DKASSERT(CMAKE_COMMAND)
+DK_ASSERT(CMAKE_COMMAND)
 
 if(NOT EXISTS ${CMAKE_COMMAND})
 	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
@@ -155,7 +155,7 @@ if(NOT CMAKE_EXE)
 	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
 endif()
 
-DKASSERT(CMAKE_EXE)
+DK_ASSERT(CMAKE_EXE)
 if(NOT EXISTS ${CMAKE_EXE})
 	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
 endif()

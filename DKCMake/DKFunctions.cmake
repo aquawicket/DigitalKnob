@@ -22,7 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
@@ -50,7 +49,6 @@ dk_load(dk_includes)
 dk_load(dk_getParameter)
 dk_load(dk_remove)
 dk_load(dk_createOsMacros)
-#set(dk_disabled_list ""	CACHE INTERNAL "")
 dk_load(dk_return)
 dk_load(dk_printAllVariables)
 dk_load(dk_set)

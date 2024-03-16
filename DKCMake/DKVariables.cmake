@@ -22,9 +22,8 @@ include_guard()
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-include("${DKCMAKE_DIR}/DK.cmake")
+#include("${DKCMAKE_DIR}/DK.cmake")
 
 # FIXME: work to remove this
 #if(COMMAND cmake_policy)
@@ -261,6 +260,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 	
 	### Set DK_PROJECT_DIR ###
 	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_DIR} DIRECTORY)
+	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
 	dk_debug(DK_PROJECT_DIR	PRINTVAR)
 
 	### Set OS ###

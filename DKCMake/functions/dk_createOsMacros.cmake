@@ -1,4 +1,5 @@
 include_guard()
+dk_load(DKDEBUGFUNC)
 dk_load(dk_error)
 dk_load(dk_eval)
 

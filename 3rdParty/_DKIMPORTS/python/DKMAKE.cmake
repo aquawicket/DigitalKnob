@@ -55,9 +55,9 @@ ANDROID_HOST_dk_command(pkg install python)
 
 if(ANDROID_HOST)
 	# https://stackoverflow.com/a/38121972
-	#dk_commandToVariable(PYTHON_VERSION "python" "--version")
-	#dk_commandToVariable(PYTHON_INCLUDE_DIR "python" -c "import sysconfig; print(sysconfig.get_path('include'))" )
-	#dk_commandToVariable(PYTHON_LIBRARY $(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"))
+	#d_k_commandToVariable(PYTHON_VERSION "python" "--version")
+	#d_k_commandToVariable(PYTHON_INCLUDE_DIR "python" -c "import sysconfig; print(sysconfig.get_path('include'))" )
+	#d_k_commandToVariable(PYTHON_LIBRARY $(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"))
 	#find_package(Python)
 	#find_package(Python COMPONENTS Development)
 

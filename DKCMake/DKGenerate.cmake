@@ -22,12 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 #get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 #set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
 
-include("${DKCMAKE_DIR}/DKDisabled.cmake")
+#include(${DKCMAKE_DIR}/DKDisabled.cmake)
+dk_load(DKDisabled.cmake)
 
 dk_info("\n")
 dk_info("############################################################")
@@ -99,7 +99,8 @@ foreach(plugin ${dkdepend_list})
 	#dk_setPath(${plugin_path}/${BUILD_DIR}) # NO EFFECT
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
-	include(${plugin_path}/DKMAKE.cmake)
+	#include(${plugin_path}/DKMAKE.cmake)
+	dk_load(${plugin})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
@@ -474,7 +475,7 @@ if(WIN_X86)
     #)
 	
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_DK_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_X86)
 	
 	
@@ -591,7 +592,7 @@ if(WIN_X86_64)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_DK_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+	#CPP_Execute(DIGITALKNOB_DIR+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_X86_64)
 
 
@@ -740,7 +741,7 @@ if(MAC)
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 #			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework")){
 #				CPP_DKFile_MkDir(app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks")
 #				CPP_DKFile_Copy(app_path+"assets/DKCef/mac_x86_64_Debug/Chromium Embedded Framework.framework", app_path+"mac_x86_64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
@@ -760,16 +761,16 @@ if(MAC)
 #				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
 #				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 #				console.log(command)
-#				CPP_DK_Execute(command)
+#				CPP_Execute(command)
 #				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 #				console.log(command)
-#				CPP_DK_Execute(command)
+#				CPP_Execute(command)
 #				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
 #				console.log(command)
-#				CPP_DK_Execute(command)
+#				CPP_Execute(command)
 #				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/MacOS/"+APP+"\""
 #				console.log(command)
-#				CPP_DK_Execute(command)
+#				CPP_Execute(command)
 #			}
 #			*/
 endif()
@@ -1004,7 +1005,7 @@ if(NOT RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 endif()
 
@@ -1099,7 +1100,7 @@ if(RASPBERRY)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+	#CPP_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 ###########

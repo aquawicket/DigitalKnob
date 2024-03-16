@@ -1,5 +1,5 @@
 include_guard()
-
+dk_load(dk_createOsMacros)
 ###############################################################################
 # dk_set(variable value)
 #	
