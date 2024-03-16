@@ -27,7 +27,18 @@ if(ANDROID_HOST)
 	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
 	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
 	
-	## Repackage Gradle's aapt2.jar with termux version of aapt
+	###### Fix for Android aapt2 (Termux) #######
+	# https://github.com/Hax4us/flutter_in_termux/issues/1#issuecomment-1245508442
+	# cd ~/.gradle
+	# cd caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff
+	# unzip aapt2-7.0.3-7396180-linux.jar
+	# rm aapt2
+	# cp /data/data/com.termux/files/home/digitalknob/Development/3rdParty/android-sdk/build-tools/30.0.3/aapt2 .
+	# rm aapt2-7.0.3-7396180-linux.jar
+	# zip aapt2-7.0.3-7396180-linux.jar *     #Zip everything back
+	# rm -rf META-INF NOTICE aapt2
+
+	## Repackage Gradle's aapt2.jar with termux version of aapt2
 	dk_set(GRADLE_USER_HOME ${DIGITALKNOB_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)

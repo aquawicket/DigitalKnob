@@ -57,5 +57,4 @@ endif()
 
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
-dk_build(${DUKTAPE})
-
+dk_build(${DUKTAPE}) # duktape)

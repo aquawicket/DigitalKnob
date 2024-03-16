@@ -1,10 +1,10 @@
-~! THE LIST !~    11/20/23
+3/16/2024
 
 *******************
 *** DIGITALKNOB ***
 *******************
 
-WE NEED TO BE ABLE TO BUILD DIFFERENT BRANCHES INDEPENDENTLY.    aka.   seperate directories per branch
+TEST ABILITY TO BUILD DIFFERENT BRANCHES INDEPENDENTLY.    aka.   seperate directories per branch
 
 There are currently 2 branches that implement the DOM.
 1. Javascript DOM, (located in the main and Development branches)
@@ -46,7 +46,7 @@ DK3:   DK C++ w/Javascript (DKDuktape)  =  OM  "Object Model"
 DK4:   DK C++ w/ javascript (DKDuktape) +  DKRml = DOM "Document Object Model"
 * This is how DKTestApps should be named *
 
-If you get DKDom as a seperate RmlUi Library, poeple might chip in.
+If we create DKDom as a seperate RmlUi Library, poeple might chip in.
 
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
@@ -73,28 +73,3 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js, then DK
 * add removeEventListener everywhere neccesary 
 * Make EVERY event go through DKDomEventTarget.js event without a DOM
 * keep track of events in DKDomEventTarget.js
-
-
-###### Download Termux ######
-https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk
-
-###### Termux/Digitalknob setup ######
-apt update
-apt upgrade -y
-apt install wget -y
-wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh
-chmod 777 build.sh
-sed -i -e 's/\r$//' build.sh
-./build.sh
-
-
-###### Fix for Android aapt2 (Termux) #######
-https://github.com/Hax4us/flutter_in_termux/issues/1#issuecomment-1245508442
-cd ~/.gradle
-cd caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff
-unzip aapt2-7.0.3-7396180-linux.jar
-rm aapt2
-cp /data/data/com.termux/files/home/digitalknob/Development/3rdParty/android-sdk/build-tools/30.0.3/aapt2 .
-rm aapt2-7.0.3-7396180-linux.jar
-zip aapt2-7.0.3-7396180-linux.jar *     #Zip everything back
-rm -rf META-INF NOTICE aapt2

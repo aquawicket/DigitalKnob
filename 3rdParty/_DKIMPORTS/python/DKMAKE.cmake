@@ -12,6 +12,9 @@ APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-
 WIN_HOST_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
 UNIX_HOST_dk_set	(PYTHON_APP python)
 
+## TODO: change all PYTHON_APP occurences to PYTHON_EXE
+dk_set				(PYTHON_EXE ${PYTHON_APP})
+
 #PYTHON_CFLAGS
 #PYTHON_LIBS
 #${PYTHON}/include
