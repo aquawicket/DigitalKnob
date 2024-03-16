@@ -2073,6 +2073,7 @@ dk_load(dk_setPath)
 #endfunction()
 #dk_createOsMacros("dk_setPath")
 
+dk_load(dk_bash)
 ###############################################################################
 # dk_bash(args)
 #
@@ -2080,24 +2081,25 @@ dk_load(dk_setPath)
 #
 #	@args	- TODO
 #
-function(dk_bash)
-	DKDEBUGFUNC(${ARGV})
-	dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
-	
-	execute_process(COMMAND bash -c "${ARGV}"
-		RESULT_VARIABLE result 
-		ERROR_VARIABLE error 
-		WORKING_DIRECTORY ${CURRENT_DIR} 
-		OUTPUT_STRIP_TRAILING_WHITESPACE)
-		
-	if(NOT ${result} EQUAL 0)
-		dk_debug(command	PRINTVAR)
-		dk_debug(result		PRINTVAR)
-		dk_debug(error		PRINTVAR)
-	endif()
-endfunction()
-dk_createOsMacros("dk_bash")
+#function(dk_bash)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
+#	
+#	execute_process(COMMAND bash -c "${ARGV}"
+#		RESULT_VARIABLE result 
+#		ERROR_VARIABLE error 
+#		WORKING_DIRECTORY ${CURRENT_DIR} 
+#		OUTPUT_STRIP_TRAILING_WHITESPACE)
+#		
+#	if(NOT ${result} EQUAL 0)
+#		dk_debug(command	PRINTVAR)
+#		dk_debug(result		PRINTVAR)
+#		dk_debug(error		PRINTVAR)
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_bash")
 
+dk_load(dk_queueBash)
 ###############################################################################
 # dk_queueBash(args)
 #
@@ -2105,15 +2107,15 @@ dk_createOsMacros("dk_bash")
 #
 #	@args	- TODO
 #
-function(dk_queueBash)
-	DKDEBUGFUNC(${ARGV})
-	if(QUEUE_BUILD)
-		dk_bash(${ARGV})
-	endif()	
-endfunction()
-dk_createOsMacros("dk_queueBash")
+#function(dk_queueBash)
+#	DKDEBUGFUNC(${ARGV})
+#	if(QUEUE_BUILD)
+#		dk_bash(${ARGV})
+#	endif()	
+#endfunction()
+#dk_createOsMacros("dk_queueBash")
 
-	
+dk_load(dk_msys2)
 ###############################################################################
 # dk_msys2(args)
 #
@@ -2121,26 +2123,26 @@ dk_createOsMacros("dk_queueBash")
 #
 #	@args	- TODO
 #
-function(dk_msys2)
-	DKDEBUGFUNC(${ARGV})
-	#string(REPLACE "C:/" "/c/" ARGV "${ARGV}")
-	dk_info("\n${CLR}${magenta} msys2> ${ARGV}\n")
-	
-	execute_process(COMMAND ${MSYS2}/usr/bin/bash -c "export PATH=${MSYS2}/mingw64/bin:$PATH; export PATH=${MSYS2}/usr/bin:$PATH;" ${ARGV}
-		RESULT_VARIABLE result 
-		ERROR_VARIABLE error 
-		WORKING_DIRECTORY ${CURRENT_DIR} 
-		OUTPUT_STRIP_TRAILING_WHITESPACE)
-		
-	if(NOT ${result} EQUAL 0)
-		dk_debug(command	PRINTVAR)
-		dk_debug(result		PRINTVAR)
-		dk_debug(error		PRINTVAR)
-	endif()
-endfunction()
-dk_createOsMacros("dk_msys2")
+#function(dk_msys2)
+#	DKDEBUGFUNC(${ARGV})
+#	#string(REPLACE "C:/" "/c/" ARGV "${ARGV}")
+#	dk_info("\n${CLR}${magenta} msys2> ${ARGV}\n")
+#	
+#	execute_process(COMMAND ${MSYS2}/usr/bin/bash -c "export PATH=${MSYS2}/mingw64/bin:$PATH; export PATH=${MSYS2}/usr/bin:$PATH;" ${ARGV}
+#		RESULT_VARIABLE result 
+#		ERROR_VARIABLE error 
+#		WORKING_DIRECTORY ${CURRENT_DIR} 
+#		OUTPUT_STRIP_TRAILING_WHITESPACE)
+#		
+#	if(NOT ${result} EQUAL 0)
+#		dk_debug(command	PRINTVAR)
+#		dk_debug(result		PRINTVAR)
+#		dk_debug(error		PRINTVAR)
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_msys2")
 
-
+dk_load(dk_msys2_bash)
 ###############################################################################
 # dk_msys2_bash(args) NOASSERT
 #
@@ -2148,88 +2150,70 @@ dk_createOsMacros("dk_msys2")
 #
 #	@args	- TODO
 #
-function(dk_msys2_bash)
-	DKDEBUGFUNC(${ARGV})
-	DKASSERT(MINGW)
-	DKASSERT(MSYSTEM)
-	DKASSERT(MSYS2)
-	dk_get_option(NOASSERT ${ARGV})
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
-
-	set(EXTRA_ARGS "")
-	if(OUTPUT_VARIABLE)
-		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-	endif()
-	
-	if(NOT ${NOECHO})
-		string(REPLACE ";" " " ARGV_STRING "${ARGV}")
-		dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV_STRING}\n")
-	endif()
-
-	set(bash "#!/bin/bash")
-	list(APPEND bash "cd ${CURRENT_DIR}")
-	if(CLANG32)
-		list(APPEND bash "export PATH=${MSYS2}/clang32/bin:$PATH")
-	elseif(CLANG64)
-		list(APPEND bash "export PATH=${MSYS2}/clang64/bin:$PATH")
-	elseif(CLANGARM64)
-		list(APPEND bash "export PATH=${MSYS2}/clangarm64/bin:$PATH")
-	elseif(MINGW32)
-		list(APPEND bash "export PATH=${MSYS2}/mingw32/bin:$PATH")
-	elseif(MINGW64)
-		list(APPEND bash "export PATH=${MSYS2}/mingw64/bin:$PATH")
-	elseif(UCRT64)
-		list(APPEND bash "export PATH=${MSYS2}/ucrt64/bin:$PATH")
-	else()
-		dk_error("dk_msys2_bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
-	endif()
-		
-	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
-	
-	string(REPLACE ";" " "	ARGV "${ARGV}")
-	list(APPEND bash "${ARGV}")
-	
-	list(APPEND bash "exit")
-	list(APPEND bash " ")
-	string(REPLACE ";" "\n"	bash "${bash}")
-	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
-	string(REPLACE "C:/" "/c/" bash "${bash}")
-	
-	### run bash as a file
-	#file(WRITE ${MSYS2}/dkscript.tmp ${bash})
-	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
-	
-	### run bash as a string parameter
-	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
-	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
-	
-	if(OUTPUT_VARIABLE)
-		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
-	endif()
-endfunction()
-dk_createOsMacros("dk_msys2_bash")
-
-
-
-
-###############################################################################
-# dk_queueMsys2(args)
-#
-#	TODO
-#
-#	@args	- TODO
-#
-#function(dk_queueMsys2)
+#function(dk_msys2_bash)
 #	DKDEBUGFUNC(${ARGV})
-#	if(QUEUE_BUILD)
-#		dk_msys2(${ARGV})
-#	endif()	
+#	DKASSERT(MINGW)
+#	DKASSERT(MSYSTEM)
+#	DKASSERT(MSYS2)
+#	dk_get_option(NOASSERT ${ARGV})
+#	dk_get_option(NOECHO ${ARGV})
+#	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+#
+#	set(EXTRA_ARGS "")
+#	if(OUTPUT_VARIABLE)
+#		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#	endif()
+#	
+#	if(NOT ${NOECHO})
+#		string(REPLACE ";" " " ARGV_STRING "${ARGV}")
+#		dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV_STRING}\n")
+#	endif()
+#
+#	set(bash "#!/bin/bash")
+#	list(APPEND bash "cd ${CURRENT_DIR}")
+#	if(CLANG32)
+#		list(APPEND bash "export PATH=${MSYS2}/clang32/bin:$PATH")
+#	elseif(CLANG64)
+#		list(APPEND bash "export PATH=${MSYS2}/clang64/bin:$PATH")
+#	elseif(CLANGARM64)
+#		list(APPEND bash "export PATH=${MSYS2}/clangarm64/bin:$PATH")
+#	elseif(MINGW32)
+#		list(APPEND bash "export PATH=${MSYS2}/mingw32/bin:$PATH")
+#	elseif(MINGW64)
+#		list(APPEND bash "export PATH=${MSYS2}/mingw64/bin:$PATH")
+#	elseif(UCRT64)
+#		list(APPEND bash "export PATH=${MSYS2}/ucrt64/bin:$PATH")
+#	else()
+#		dk_error("dk_msys2_bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
+#	endif()
+#		
+#	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
+#	
+#	string(REPLACE ";" " "	ARGV "${ARGV}")
+#	list(APPEND bash "${ARGV}")
+#	
+#	list(APPEND bash "exit")
+#	list(APPEND bash " ")
+#	string(REPLACE ";" "\n"	bash "${bash}")
+#	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
+#	string(REPLACE "C:/" "/c/" bash "${bash}")
+#	
+#	### run bash as a file
+#	#file(WRITE ${MSYS2}/dkscript.tmp ${bash})
+#	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
+#	
+#	### run bash as a string parameter
+#	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
+#	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+#	
+#	if(OUTPUT_VARIABLE)
+#		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+#	endif()
 #endfunction()
-#dk_createOsMacros("dk_queueMsys2")
+#dk_createOsMacros("dk_msys2_bash")
 
-
+dk_load(dk_mergeFlags)
 ###############################################################################
 # dk_mergeFlags(args RESULT)
 #
@@ -2238,51 +2222,51 @@ dk_createOsMacros("dk_msys2_bash")
 #	@args		- TODO
 #	@RESULT		- TODO
 #
-function(dk_mergeFlags args RESULT)
-	DKDEBUGFUNC(${ARGV})
-	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
-	set(args ${args} ${RESULT} ${ARGN})
-	list(GET args -1 RESULT)
-	list(REMOVE_AT args -1)
-	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
-	foreach(word ${search})
-		set(DK_${word} "${word}")
-		if(MINGW)
-			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
-		endif()
-		set(index 0)
-		set(placeholder 0)
-		foreach(arg ${args})
-			math(EXPR index "${index}+1")
-			string(FIND ${arg} ${word} hasWord)
-			if(${hasWord} GREATER -1)
-				if(${placeholder} EQUAL 0)
-					math(EXPR placeholder "${index}-1")
-				endif()				
-				list(REMOVE_ITEM args ${arg})
-				string(REPLACE ${word} "" arg ${arg})
-				if(DK_${word} STREQUAL "${word}" OR DK_${word} STREQUAL "${word}'")
-					set(DK_${word} "${DK_${word}}${arg}")
-				else()
-					set(DK_${word} "${DK_${word}} ${arg}")
-				endif()
-			endif()
-		endforeach()
-		if(MINGW)
-			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
-		endif()
-		if(${placeholder} GREATER 0)
-			list(LENGTH args args_length)
-			if(${placeholder} GREATER ${args_length})
-				math(EXPR placeholder "${args_length}-1")
-			endif()
-
-			list(INSERT args ${placeholder} "${DK_${word}}")	# https://stackoverflow.com/a/61948012
-		endif()
-	endforeach()
-	#dk_debug("AFTER: dk_mergeFlags(${args})")
-	set(${RESULT} ${args} PARENT_SCOPE)
-endfunction()
+#function(dk_mergeFlags args RESULT)
+#	DKDEBUGFUNC(${ARGV})
+#	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
+#	set(args ${args} ${RESULT} ${ARGN})
+#	list(GET args -1 RESULT)
+#	list(REMOVE_AT args -1)
+#	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
+#	foreach(word ${search})
+#		set(DK_${word} "${word}")
+#		if(MINGW)
+#			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
+#		endif()
+#		set(index 0)
+#		set(placeholder 0)
+#		foreach(arg ${args})
+#			math(EXPR index "${index}+1")
+#			string(FIND ${arg} ${word} hasWord)
+#			if(${hasWord} GREATER -1)
+#				if(${placeholder} EQUAL 0)
+#					math(EXPR placeholder "${index}-1")
+#				endif()				
+#				list(REMOVE_ITEM args ${arg})
+#				string(REPLACE ${word} "" arg ${arg})
+#				if(DK_${word} STREQUAL "${word}" OR DK_${word} STREQUAL "${word}'")
+#					set(DK_${word} "${DK_${word}}${arg}")
+#				else()
+#					set(DK_${word} "${DK_${word}} ${arg}")
+#				endif()
+#			endif()
+#		endforeach()
+#		if(MINGW)
+#			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
+#		endif()
+#		if(${placeholder} GREATER 0)
+#			list(LENGTH args args_length)
+#			if(${placeholder} GREATER ${args_length})
+#				math(EXPR placeholder "${args_length}-1")
+#			endif()
+#
+#			list(INSERT args ${placeholder} "${DK_${word}}")	# https://stackoverflow.com/a/61948012
+#		endif()
+#	endforeach()
+#	#dk_debug("AFTER: dk_mergeFlags(${args})")
+#	set(${RESULT} ${args} PARENT_SCOPE)
+#endfunction()
 
 
 ###############################################################################
