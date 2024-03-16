@@ -1,17 +1,20 @@
 include_guard()
 
 ###############################################################################
-# dk_findFiles(path pattern) RECURSE RELATIVE
+# dk_findFiles(path pattern RESULT) RECURSE
 #
-#	Search for a file using a pattern I.E. *.txt
+#	Search for files within a path matching a pattern
 #
-#	@pattern		- The pattern to search for
+#	@path				- The path to search 
+#	@pattern			- The pattern to search for
+#	@RESULT				- Returns the list of file(s) if found
+#   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
-	
-	dk_includes("${ARGN}" "RECURSE" recurse)
-	if(${recurse})
+	dk_get_option(RECURSE ${ARGV})
+
+	if(RECURSE)
 		file(GLOB_RECURSE files "${path}/" "${path}/${pattern}")
 	else()
 		file(GLOB files "${path}/" "${path}/${pattern}")
