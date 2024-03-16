@@ -17,6 +17,45 @@ function(dk_assets plugin)
 		dk_error("${plugin} plugin not found")
 	endif()
 	dk_info("Importing ${plugin} assets...")
+	
+	set(ASSETS 
+		PATTERN *.h EXCLUDE
+		PATTERN *.c EXCLUDE
+		PATTERN *.cmake EXCLUDE
+		PATTERN *.cpp EXCLUDE
+		PATTERN *.dir EXCLUDE
+		PATTERN *.filters EXCLUDE
+		PATTERN *.lib EXCLUDE
+		PATTERN *.manifest EXCLUDE
+		PATTERN *.mm EXCLUDE
+		PATTERN *.pdb EXCLUDE
+		PATTERN *.plist EXCLUDE
+		PATTERN *.rc EXCLUDE
+		PATTERN *.sln EXCLUDE
+		PATTERN *.tmp EXCLUDE
+		PATTERN *.TMP EXCLUDE
+		PATTERN *.temp EXCLUDE
+		PATTERN *.TEMP EXCLUDE
+		PATTERN *.vcxproj EXCLUDE
+		PATTERN CMakeFiles EXCLUDE
+		PATTERN CMakeLists.txt EXCLUDE
+		PATTERN temp.txt EXCLUDE
+		PATTERN win_x86 EXCLUDE
+		PATTERN win_x86_64 EXCLUDE
+		PATTERN mac_x86 EXCLUDE
+		PATTERN mac_x86_64 EXCLUDE
+		PATTERN ios_arm32 EXCLUDE
+		PATTERN ios_arm64 EXCLUDE
+		PATTERN iossim_x86 EXCLUDE
+		PATTERN iossim_x86_64 EXCLUDE
+		PATTERN linux_x86 EXCLUDE
+		PATTERN linux_x86_64 EXCLUDE
+		PATTERN android_arm32 EXCLUDE
+		PATTERN android_arm64 EXCLUDE
+		PATTERN raspberry_arm32 EXCLUDE
+		PATTERN raspberry_arm64 EXCLUDE
+		PATTERN emscripten EXCLUDE
+		PATTERN dktest EXCLUDE)
+	
 	file(COPY ${plugin_path} DESTINATION ${DK_PROJECT_DIR}/assets ${ASSETS})
-	#file(COPY ${plugin_path}/${OS}/${DEBUG_DIR}/*.exe DESTINATION ${DK_PROJECT_DIR}/assets/${OS}/Debug)
 endfunction()
