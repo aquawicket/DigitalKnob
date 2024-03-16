@@ -383,7 +383,7 @@ goto:eof
 	::call:add_cmake_arg --debug-output
 	::call:add_cmake_arg --trace
 	::call:add_cmake_arg --trace-expand
-	call:add_cmake_arg --warn-uninitialized
+	::call:add_cmake_arg --warn-uninitialized
 	call:add_cmake_arg --warn-unused-vars
 	::call:add_cmake_arg --check-system-vars
 goto:eof
