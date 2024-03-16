@@ -2503,7 +2503,7 @@ dk_load(dk_xcode)
 #endfunction()
 #dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_ndkDebug)
 ###############################################################################
 # dk_ndkDebug(path)
 #
@@ -2511,25 +2511,25 @@ dk_load(dk_xcode)
 #
 #	@path		- TODO
 #
-function(dk_ndkDebug path)
-	DKDEBUGFUNC(${ARGV})
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_ndkDebug(${path}) path does not exist")
-	endif()
-	
-	if(DEBUG AND QUEUE_BUILD)
-		if(WIN_HOST)
-			dk_executeProcess(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Debug)
-		endif()
-		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Debug)
-		endif()
-	endif()
-endfunction()
-dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_ndkDebug path)
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_ndkDebug(${path}) path does not exist")
+#	endif()
+#	
+#	if(DEBUG AND QUEUE_BUILD)
+#		if(WIN_HOST)
+#			dk_executeProcess(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Debug)
+#		endif()
+#		if(UNIX_HOST)
+#			dk_executeProcess(${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Debug)
+#		endif()
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_ndkRelease)
 ###############################################################################
 # dk_ndkRelease(path)
 #
@@ -2537,25 +2537,25 @@ dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 #	@path		- TODO
 #
-function(dk_ndkRelease path)
-	DKDEBUGFUNC(${ARGV})
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_ndkRelease(${path}) path does not exist")
-	endif()
-	
-	if(RELEASE AND QUEUE_BUILD)
-		if(WIN_HOST)
-			dk_executeProcess(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Release)
-		endif()
-		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Release)
-		endif()
-	endif()
-endfunction()
-dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_ndkRelease path)
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_ndkRelease(${path}) path does not exist")
+#	endif()
+#	
+#	if(RELEASE AND QUEUE_BUILD)
+#		if(WIN_HOST)
+#			dk_executeProcess(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Release)
+#		endif()
+#		if(UNIX_HOST)
+#			dk_executeProcess(${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Release)
+#		endif()
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_ndk)
 ###############################################################################
 # dk_ndk(path)
 #
@@ -2563,14 +2563,14 @@ dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	@path		- TODO
 #
-function(dk_ndk)
-	DKDEBUGFUNC(${ARGV})
-	dk_ndkDebug(${ARGV})
-	dk_ndkRelease(${ARGV})
-endfunction()
-dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_ndk)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_ndkDebug(${ARGV})
+#	dk_ndkRelease(${ARGV})
+#endfunction()
+#dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_make)
 ###############################################################################
 # dk_make(path lib)
 #
@@ -2579,42 +2579,42 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 #	@path 				- TODO
 #	@lib (optional)		- TODO
 #
-function(dk_make path) #lib
-	DKDEBUGFUNC(${ARGV})
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_make(${path}) path does not exist")
-	endif()
-	
-	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
-	if(EMSCRIPTEN)
-		dk_error("No proper dk_make() implemented for emscripten" NOASSERT)
-		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
-		
-		#set(lib ${ARGV1})
-		#if(${ARGC} GREATER 1)
-		#	dk_queueCommand(${EMMAKE} make ${lib})
-		#else()
-		#	dk_queueCommand(${EMMAKE} make)
-		#endif()
-		
-		DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
-		RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
-	else()
-		set(lib ${ARGV1})
-		#dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
-		if(${ARGC} GREATER 1)
-			#dk_queueCommand(make ${lib})
-			dk_queueCommand(${CMAKE_MAKE_PROGRAM} ${lib})
-		else()
-			#dk_queueCommand(make)
-			dk_queueCommand(${CMAKE_MAKE_PROGRAM})
-		endif()
-	endif()
-endfunction()
+#function(dk_make path) #lib
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_make(${path}) path does not exist")
+#	endif()
+#	
+#	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
+#	if(EMSCRIPTEN)
+#		dk_error("No proper dk_make() implemented for emscripten" NOASSERT)
+#		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
+#		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+#		
+#		#set(lib ${ARGV1})
+#		#if(${ARGC} GREATER 1)
+#		#	dk_queueCommand(${EMMAKE} make ${lib})
+#		#else()
+#		#	dk_queueCommand(${EMMAKE} make)
+#		#endif()
+#		
+#		DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
+#		RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
+#	else()
+#		set(lib ${ARGV1})
+#		#dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+#		if(${ARGC} GREATER 1)
+#			#dk_queueCommand(make ${lib})
+#			dk_queueCommand(${CMAKE_MAKE_PROGRAM} ${lib})
+#		else()
+#			#dk_queueCommand(make)
+#			dk_queueCommand(${CMAKE_MAKE_PROGRAM})
+#		endif()
+#	endif()
+#endfunction()
 
-
+dk_load(dk_build)
 ###############################################################################
 # dk_build(path target) NOASSERT
 #
@@ -2623,146 +2623,146 @@ endfunction()
 #	@path 				- TODO
 #	@target (optional)	- TODO
 #
-function(dk_build path) #target NOASSERT
-	DKDEBUGFUNC(${ARGV})
-	if(NOT QUEUE_BUILD)
-		return()
-	endif()
-	dk_get_option(NOASSERT ${ARGV})
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_build(${path}) path does not exist")
-	endif()
-	
-	set(target ${ARGV1})
-	
-	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
-	# still built in SINGLE_CONFIG mode event though the main project isn't 
-	#if(MULTI_CONFIG)
-	#	list(APPEND BUILD_MODE multi_config)
-	#endif()
-	#list(APPEND BUILD_MODE single_config)
-		
-		dk_setPath(${path}/${BUILD_DIR})
+#function(dk_build path) #target NOASSERT
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT QUEUE_BUILD)
+#		return()
+#	endif()
+#	dk_get_option(NOASSERT ${ARGV})
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_build(${path}) path does not exist")
+#	endif()
+#	
+#	set(target ${ARGV1})
+#	
+#	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
+#	# still built in SINGLE_CONFIG mode event though the main project isn't 
+#	#if(MULTI_CONFIG)
+#	#	list(APPEND BUILD_MODE multi_config)
+#	#endif()
+#	#list(APPEND BUILD_MODE single_config)
+#		
+#		dk_setPath(${path}/${BUILD_DIR})
+#
+#		# Build with CMake			(multi_config)
+#		if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
+#			dk_info("Building with CMake")
+#			if(${ARGC} GREATER 1)
+#				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
+#				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
+#			else()
+#				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
+#				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
+#			endif()
+#			return()
+#		endif()
+#		if(MULTI_CONFIG)
+#			if(DEBUG)
+#				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/cmake_install.cmake)
+#					dk_setPath(${path}/${OS}/${DEBUG_DIR})
+#					dk_info("Building with CMake")
+#					if(${ARGC} GREATER 1)
+#						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
+#					else()
+#						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
+#					endif()
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			elseif(RELEASE)
+#				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/cmake_install.cmake)
+#					dk_setPath(${path}/${OS}/${RELEASE_DIR})
+#					dk_info("Building with CMake")
+#					if(${ARGC} GREATER 1)
+#						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
+#					else()
+#						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
+#					endif()
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			endif()
+#		endif()
+#		
+#		# Build with MSBuild		(multi_config)
+#		file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
+#		if(sln)
+#			dk_info("Building with MSBuild")
+#			dk_visualStudio(${ARGV})
+#			return()
+#		endif()
+#		
+#		# Build with XCode			(multi_config)
+#		file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
+#		if(xcodeproj)
+#			dk_info("Building with XCode")
+#			dk_xcode(${ARGV})
+#			return()
+#		endif()
+#		
+#		
+#		# Build with make			(single_config)
+#		if(EXISTS ${path}/${BUILD_DIR}/Makefile)
+#			dk_info("Building with make")
+#			dk_make(${ARGV})
+#			return()
+#		endif()
+#		if(MULTI_CONFIG)
+#			if(DEBUG)
+#				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/Makefile)
+#					dk_setPath(${path}/${OS}/${DEBUG_DIR})
+#					dk_info("Building with make")
+#					dk_make(${ARGV})
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			elseif(RELEASE)
+#				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/Makefile)
+#					dk_setPath(${path}/${OS}/${RELEASE_DIR})
+#					dk_info("Building with make")
+#					dk_make(${ARGV})
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			endif()
+#		endif()
+#		
+#		
+#		# Build with Android NDK	(single_config)
+#		if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
+#			dk_info("Building with Android NDK")
+#			dk_ndk(${ARGV})
+#			return()
+#		endif()
+#		if(MULTI_CONFIG)
+#			if(DEBUG)
+#				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/AndroidManifest.xml)
+#					dk_setPath(${path}/${OS}/${DEBUG_DIR})
+#					dk_info("Building with Android NDK")
+#					dk_ndk(${ARGV})
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			elseif(RELEASE)
+#				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/AndroidManifest.xml)
+#					dk_setPath(${path}/${OS}/${RELEASE_DIR})
+#					dk_info("Building with Android NDK")
+#					dk_ndk(${ARGV})
+#					dk_setPath(${path}/${BUILD_DIR})
+#					return()
+#				endif()
+#			endif()
+#		endif()
+#		
+#		
+#	#endforeach()
+#	
+#	dk_error("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
+#endfunction()
+#dk_createOsMacros("dk_build")
 
-		# Build with CMake			(multi_config)
-		if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
-			dk_info("Building with CMake")
-			if(${ARGC} GREATER 1)
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
-				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
-			else()
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
-				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
-			endif()
-			return()
-		endif()
-		if(MULTI_CONFIG)
-			if(DEBUG)
-				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/cmake_install.cmake)
-					dk_setPath(${path}/${OS}/${DEBUG_DIR})
-					dk_info("Building with CMake")
-					if(${ARGC} GREATER 1)
-						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
-					else()
-						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
-					endif()
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			elseif(RELEASE)
-				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/cmake_install.cmake)
-					dk_setPath(${path}/${OS}/${RELEASE_DIR})
-					dk_info("Building with CMake")
-					if(${ARGC} GREATER 1)
-						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
-					else()
-						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
-					endif()
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			endif()
-		endif()
-		
-		# Build with MSBuild		(multi_config)
-		file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
-		if(sln)
-			dk_info("Building with MSBuild")
-			dk_visualStudio(${ARGV})
-			return()
-		endif()
-		
-		# Build with XCode			(multi_config)
-		file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
-		if(xcodeproj)
-			dk_info("Building with XCode")
-			dk_xcode(${ARGV})
-			return()
-		endif()
-		
-		
-		# Build with make			(single_config)
-		if(EXISTS ${path}/${BUILD_DIR}/Makefile)
-			dk_info("Building with make")
-			dk_make(${ARGV})
-			return()
-		endif()
-		if(MULTI_CONFIG)
-			if(DEBUG)
-				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/Makefile)
-					dk_setPath(${path}/${OS}/${DEBUG_DIR})
-					dk_info("Building with make")
-					dk_make(${ARGV})
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			elseif(RELEASE)
-				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/Makefile)
-					dk_setPath(${path}/${OS}/${RELEASE_DIR})
-					dk_info("Building with make")
-					dk_make(${ARGV})
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			endif()
-		endif()
-		
-		
-		# Build with Android NDK	(single_config)
-		if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
-			dk_info("Building with Android NDK")
-			dk_ndk(${ARGV})
-			return()
-		endif()
-		if(MULTI_CONFIG)
-			if(DEBUG)
-				if(EXISTS ${path}/${OS}/${DEBUG_DIR}/AndroidManifest.xml)
-					dk_setPath(${path}/${OS}/${DEBUG_DIR})
-					dk_info("Building with Android NDK")
-					dk_ndk(${ARGV})
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			elseif(RELEASE)
-				if(EXISTS ${path}/${OS}/${RELEASE_DIR}/AndroidManifest.xml)
-					dk_setPath(${path}/${OS}/${RELEASE_DIR})
-					dk_info("Building with Android NDK")
-					dk_ndk(${ARGV})
-					dk_setPath(${path}/${BUILD_DIR})
-					return()
-				endif()
-			endif()
-		endif()
-		
-		
-	#endforeach()
-	
-	dk_error("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
-endfunction()
-dk_createOsMacros("dk_build")
-
-
+dk_load(dk_lib)
 ###############################################################################
 # dk_lib(lib_path)
 #
@@ -2770,30 +2770,30 @@ dk_createOsMacros("dk_build")
 #
 #	@lib_path	- TODO
 #
-function(dk_lib lib_path)
-	DKDEBUGFUNC(${ARGV})
-	foreach(item ${ARGV})
-#		dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
-		dk_includes("${LIBS}" "${item}" result)
-		if(${result})
-			continue() # item is already in the list
-		endif()
-		dk_set(LIBS "${LIBS};${item}")
+#function(dk_lib lib_path)
+#	DKDEBUGFUNC(${ARGV})
+#	foreach(item ${ARGV})
+#		#dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
+#		dk_includes("${LIBS}" "${item}" result)
+#		if(${result})
+#			continue() # item is already in the list
+#		endif()
+#		dk_set(LIBS "${LIBS};${item}")
+#
+#		if(INSTALL_DKLIBS)
+#			if(EXISTS ${lib_path})
+#				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+#				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS})
+#			else()
+#				dk_error("DKINSTALL: Could not locate ${lib_path}")
+#			endif()
+#		endif()
+#		
+#	endforeach()
+#endfunction()
+#dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
-		if(INSTALL_DKLIBS)
-			if(EXISTS ${lib_path})
-				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS})
-			else()
-				dk_error("DKINSTALL: Could not locate ${lib_path}")
-			endif()
-		endif()
-		
-	endforeach()
-endfunction()
-dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
-
-
+dk_load(dk_libDebug)
 ###############################################################################
 # dk_libDebug(lib_path)
 #
@@ -2802,46 +2802,46 @@ dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 #	@lib_path	- TODO
 #	@variable (optional)	- Create a variable to store the lib_path in.
 #
-function(dk_libDebug lib_path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT DEBUG)
-		return()
-	endif()	
-	
-	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
-	if(NOT EXISTS ${lib_path})
-		dk_info("MISSING: ${lib_path}")
-		dk_set(QUEUE_BUILD ON) 
-	endif()
-	
-	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	if(${index} GREATER -1)
-	#dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
-	#if(${result})
-		return() # The library is already in the list
-	endif()
-	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
-		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
-	else()
-		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
-	endif()
+#function(dk_libDebug lib_path)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT DEBUG)
+#		return()
+#	endif()	
+#	
+#	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
+#	if(NOT EXISTS ${lib_path})
+#		dk_info("MISSING: ${lib_path}")
+#		dk_set(QUEUE_BUILD ON) 
+#	endif()
+#	
+#	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
+#	if(${index} GREATER -1)
+#	#dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
+#	#if(${result})
+#		return() # The library is already in the list
+#	endif()
+#	
+#	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
+#		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
+#	else()
+#		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
+#	endif()
+#
+#	if(INSTALL_DKLIBS)
+#		if(EXISTS ${lib_path})
+#			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+#			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Debug)
+#		endif()
+#	endif()
+#	
+#	if(ARGV1)
+#		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
+#	endif()
+#	
+#endfunction()
+#dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
-	if(INSTALL_DKLIBS)
-		if(EXISTS ${lib_path})
-			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Debug)
-		endif()
-	endif()
-	
-	if(ARGV1)
-		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
-	endif()
-	
-endfunction()
-dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
-
-
+dk_load(dk_libRelease)
 ###############################################################################
 # dk_libRelease(lib_path)
 #
@@ -2850,44 +2850,44 @@ dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 #	@lib_path		- TODO
 #	@variable (optional)	- Create a variable to store the lib_path in.
 #
-function(dk_libRelease lib_path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT RELEASE)
-		return()
-	endif()
-	
-	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
-	if(NOT EXISTS ${lib_path})
-		dk_info("MISSING: ${lib_path}")
-		dk_set(QUEUE_BUILD ON)
-	endif()
-	
-	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
-	if(${index} GREATER -1)
-	#dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
-	#if(${result})
-		return() # The library is already in the list
-	endif()	
-	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW)
-		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
-	else()
-		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
-	endif()
-	
-	if(INSTALL_DKLIBS)
-		if(EXISTS ${lib_path})
-			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Release)
-		endif()
-	endif()
-	
-	if(ARGV1)
-		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
-	endif()
-	
-endfunction()
-dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_libRelease lib_path)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT RELEASE)
+#		return()
+#	endif()
+#	
+#	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
+#	if(NOT EXISTS ${lib_path})
+#		dk_info("MISSING: ${lib_path}")
+#		dk_set(QUEUE_BUILD ON)
+#	endif()
+#	
+#	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
+#	if(${index} GREATER -1)
+#	#dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
+#	#if(${result})
+#		return() # The library is already in the list
+#	endif()	
+#	
+#	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW)
+#		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
+#	else()
+#		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
+#	endif()
+#	
+#	if(INSTALL_DKLIBS)
+#		if(EXISTS ${lib_path})
+#			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+#			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Release)
+#		endif()
+#	endif()
+#	
+#	if(ARGV1)
+#		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
+#	endif()
+#	
+#endfunction()
+#dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
