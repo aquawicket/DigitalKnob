@@ -2429,7 +2429,7 @@ dk_load(dk_visualStudioRelease)
 #endfunction()
 #dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_xcodeDebug)
 ###############################################################################
 # dk_xcodeDebug(path) #target
 #
@@ -2438,27 +2438,27 @@ dk_load(dk_visualStudioRelease)
 #	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeDebug path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT MAC_HOST)
-		return()
-	endif()
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_xcodeDebug(${path}) path does not exist")
-	endif()
-	
-	if(DEBUG AND QUEUE_BUILD)
-		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
-		else()
-			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
-		endif()
-	endif()
-endfunction()
-dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_xcodeDebug path)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT MAC_HOST)
+#		return()
+#	endif()
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_xcodeDebug(${path}) path does not exist")
+#	endif()
+#	
+#	if(DEBUG AND QUEUE_BUILD)
+#		if(${ARGC} GREATER 1)
+#			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
+#		else()
+#			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
+#		endif()
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_xcodeRelease)
 ###############################################################################
 # dk_xcodeRelease(path) #target
 #
@@ -2467,27 +2467,27 @@ dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 #	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeRelease path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT MAC_HOST)
-		return()
-	endif()
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_xcodeDebug(${path}) path does not exist")
-	endif()
-	
-	if(RELEASE AND QUEUE_BUILD)
-		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${path}/${OS})
-		else()
-			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${path}/${OS})
-		endif()
-	endif()
-endfunction()
-dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_xcodeRelease path)
+#	DKDEBUGFUNC(${ARGV})
+#	if(NOT MAC_HOST)
+#		return()
+#	endif()
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_xcodeDebug(${path}) path does not exist")
+#	endif()
+#	
+#	if(RELEASE AND QUEUE_BUILD)
+#		if(${ARGC} GREATER 1)
+#			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${path}/${OS})
+#		else()
+#			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${path}/${OS})
+#		endif()
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_xcode)
 ###############################################################################
 # dk_xcode(args) #target
 #
@@ -2496,12 +2496,12 @@ dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 #	@args				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcode)
-	DKDEBUGFUNC(${ARGV})
-	dk_xcodeDebug(${ARGV})
-	dk_xcodeRelease(${ARGV})
-endfunction()
-dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_xcode)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_xcodeDebug(${ARGV})
+#	dk_xcodeRelease(${ARGV})
+#endfunction()
+#dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
