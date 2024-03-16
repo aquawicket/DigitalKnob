@@ -1988,11 +1988,7 @@ dk_load(dk_executeProcess)
 #ndfunction()
 #dk_createOsMacros("dk_executeProcess")
 
-
-
-# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
-# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
-# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
+dk_load(dk_setEnv)
 ###############################################################################
 # dk_setEnv(name value)
 #
@@ -2002,29 +1998,29 @@ dk_load(dk_executeProcess)
 #	@value	- The value to set the system environment vairable to
 #
 # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
-function(dk_setEnv name value)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug(ENV{${name}} PRINTVAR)
-	dk_debug(value PRINTVAR)
-	if(ENV{${name}})
-		string(FIND $ENV{${name}} ${value} index)
-	else()
-		set(index -1)
-	endif()
-	if(${index} EQUAL -1)
-#		if(NOT "$ENV{${name}}" STREQUAL "${value}")
-		if(WIN_HOST)
-			dk_info("Setting %${name}% environment variable to ${value}")
-			set(ENV{${name}} ${value})
-			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810		#FIXME
-			#execute_process(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
-		else()
-			dk_warn("dk_setEnv() not implemented on this system")
-		endif()
-	endif()
-endfunction()
+#function(dk_setEnv name value)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_debug(ENV{${name}} PRINTVAR)
+#	dk_debug(value PRINTVAR)
+#	if(ENV{${name}})
+#		string(FIND $ENV{${name}} ${value} index)
+#	else()
+#		set(index -1)
+#	endif()
+#	if(${index} EQUAL -1)
+#		#if(NOT "$ENV{${name}}" STREQUAL "${value}")
+#		if(WIN_HOST)
+#			dk_info("Setting %${name}% environment variable to ${value}")
+#			set(ENV{${name}} ${value})
+#			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810		#FIXME
+#			#execute_process(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
+#		else()
+#			dk_warn("dk_setEnv() not implemented on this system")
+#		endif()
+#	endif()
+#endfunction()
 
-
+dk_load(dk_setPath)
 ###############################################################################
 # dk_setPath(path)
 #
@@ -2032,23 +2028,23 @@ endfunction()
 #
 #	@path	- TODO
 #
-function(dk_setPath path)
-	DKDEBUGFUNC(${ARGV})
-	#if(path STREQUAL "OFF")
-	#	return() 
-	#endif()	
-	
-	if(NOT EXISTS ${path})
-		dk_warn("path:${path} does not exist.")
-		dk_warn("Creating directory: ${path})")
-		dk_makeDirectory(${path})
-	endif()
-	
-	dk_set(CURRENT_DIR ${path})
-	
-	
-	# TODO https://stackoverflow.com/a/6595001/688352
-	# NOTE: Some 3rdParty projects break when their binary output path is changed. It may be better to compile the project normally, then do a library install to a final common location 
+#function(dk_setPath path)
+#	DKDEBUGFUNC(${ARGV})
+#	#if(path STREQUAL "OFF")
+#	#	return() 
+#	#endif()	
+#	
+#	if(NOT EXISTS ${path})
+#		dk_warn("path:${path} does not exist.")
+#		dk_warn("Creating directory: ${path})")
+#		dk_makeDirectory(${path})
+#	endif()
+#	
+#	dk_set(CURRENT_DIR ${path})
+#	
+#	
+#	# TODO https://stackoverflow.com/a/6595001/688352
+#	# NOTE: Some 3rdParty projects break when their binary output path is changed. It may be better to compile the project normally, then do a library install to a final common location 
 #	if(WIN_HOST)
 #		foreach(item ${DKCMAKE_BUILD})
 #			#string(FIND "${item}" "-DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=" index)
@@ -2074,8 +2070,8 @@ function(dk_setPath path)
 #		endforeach()
 #		dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 #	endif()
-endfunction()
-dk_createOsMacros("dk_setPath")
+#endfunction()
+#dk_createOsMacros("dk_setPath")
 
 ###############################################################################
 # dk_bash(args)
