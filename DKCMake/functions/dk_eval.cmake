@@ -1,12 +1,5 @@
 include_guard()
 
-# Evaluate expression (faster version)
-# Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
-# Unfortunately, no built-in stuff for this: http://public.kitware.com/Bug/view.php?id=4034
-# eval will not modify ans (the code evaluated may modify ans)
-# vars starting with __eval should not be used in code
-
-
 ###############################################################################
 # dk_eval(code)
 #
@@ -22,6 +15,12 @@ function(dk_eval code)
 		#message(STATUS "code = ${code}")
 		cmake_language(EVAL CODE "${code}")
 	else()
+		# Evaluate expression (faster version)
+		# Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
+		# Unfortunately, no built-in stuff for this: http://public.kitware.com/Bug/view.php?id=4034
+		# eval will not modify ans (the code evaluated may modify ans)
+		# vars starting with __eval should not be used in code
+
 		# one file per execution of cmake (if this file were in memory it would probably be faster...)
 		#fwrite_temp("" ".cmake")
 		#ans(__eval_temp_file)
