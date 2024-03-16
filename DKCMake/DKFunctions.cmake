@@ -2268,7 +2268,7 @@ dk_load(dk_mergeFlags)
 #	set(${RESULT} ${args} PARENT_SCOPE)
 #endfunction()
 
-
+dk_load(dk_command)
 ###############################################################################
 # dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO] [NOMERGE])
 #
@@ -2278,37 +2278,36 @@ dk_load(dk_mergeFlags)
 #
 #	@args	- TODO
 #
-function(dk_command)
-	DKDEBUGFUNC(${ARGV})	
-	dk_get_option(NOASSERT ${ARGV})
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option(NOMERGE ${ARGV})
-	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+#function(dk_command)
+#	DKDEBUGFUNC(${ARGV})	
+#	dk_get_option(NOASSERT ${ARGV})
+#	dk_get_option(NOECHO ${ARGV})
+#	dk_get_option(NOMERGE ${ARGV})
+#	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+#
+#	if(NOT NOMERGE)
+#		dk_mergeFlags("${ARGV}" ARGV)
+#	endif()
+#	
+#	if(OUTPUT_VARIABLE)
+#		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+#	endif()
+#	
+#	
+#	if(MINGW AND MSYSTEM)
+#		dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
+#	else()
+#		dk_executeProcess(${ARGV} ${NOASSERT} ${NOECHO})
+#	endif()
+#	
+#	if(OUTPUT_VARIABLE)
+#		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_command")
 
-	if(NOT NOMERGE)
-		dk_mergeFlags("${ARGV}" ARGV)
-	endif()
-	
-	if(OUTPUT_VARIABLE)
-		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-	endif()
-	
-	
-	if(MINGW AND MSYSTEM)
-		dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
-	else()
-		dk_executeProcess(${ARGV} ${NOASSERT} ${NOECHO})
-	endif()
-	
-	if(OUTPUT_VARIABLE)
-		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
-	endif()
-endfunction()
-dk_createOsMacros("dk_command")
-
-
-
+dk_load(dk_queueCommand)
 ###############################################################################
 # dk_queueCommand(args) NOASSERT NOECHO NOMERGE
 #
@@ -2316,21 +2315,21 @@ dk_createOsMacros("dk_command")
 #
 #	@args	- TODO
 #
-function(dk_queueCommand)
-	DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOASSERT ${ARGV})
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option(NOMERGE ${ARGV})
-	
-	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
-	
-	if(QUEUE_BUILD)
-		dk_command(${ARGV} ${NOASSERT} ${NOECHO} ${NOMERGE})
-	endif()	
-endfunction()
-dk_createOsMacros("dk_queueCommand")
+#function(dk_queueCommand)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_get_option(NOASSERT ${ARGV})
+#	dk_get_option(NOECHO ${ARGV})
+#	dk_get_option(NOMERGE ${ARGV})
+#	
+#	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+#	
+#	if(QUEUE_BUILD)
+#		dk_command(${ARGV} ${NOASSERT} ${NOECHO} ${NOMERGE})
+#	endif()	
+#endfunction()
+#dk_createOsMacros("dk_queueCommand")
 
-
+dk_load(dk_visualStudioDebug)
 ###############################################################################
 # dk_visualStudioDebug(path) #target #arch
 #
@@ -2338,41 +2337,41 @@ dk_createOsMacros("dk_queueCommand")
 #
 #	@path		- TODO
 #
-function(dk_visualStudioDebug path) #target #arch
-	DKDEBUGFUNC(${ARGV})
-	
-	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
-		return()
-	endif()
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_visualStudioDebug(${path}) path does not exist")
-	endif()
-	
-	dk_findFiles(${path}/${OS} *.sln sln_file)
-	dk_getFilename(${sln_file} sln_file)
-	dk_getExtension(${sln_file} extension)
-	if(NOT ${extension} STREQUAL ".sln")
-		dk_error("extension does not equal .sln")
-	endif()
-	
-	if(DEBUG AND QUEUE_BUILD)
-		if(NOT EXISTS ${path}/${OS}/${sln_file})
-			dk_error("CANNOT FIND: ${path}/${OS}/${sln_file}" )
-		endif()
-		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
-		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
-		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Debug)
-		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
-	endif()
-endfunction()
-dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_visualStudioDebug path) #target #arch
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
+#		return()
+#	endif()
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_visualStudioDebug(${path}) path does not exist")
+#	endif()
+#	
+#	dk_findFiles(${path}/${OS} *.sln sln_file)
+#	dk_getFilename(${sln_file} sln_file)
+#	dk_getExtension(${sln_file} extension)
+#	if(NOT ${extension} STREQUAL ".sln")
+#		dk_error("extension does not equal .sln")
+#	endif()
+#	
+#	if(DEBUG AND QUEUE_BUILD)
+#		if(NOT EXISTS ${path}/${OS}/${sln_file})
+#			dk_error("CANNOT FIND: ${path}/${OS}/${sln_file}" )
+#		endif()
+#		if(${ARGC} GREATER 2)
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+#		elseif(${ARGC} GREATER 1)
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+#		else()
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Debug)
+#		endif()
+#		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_visualStudioRelease)
 ###############################################################################
 # dk_visualStudioRelease(path) #target #arch
 #
@@ -2380,42 +2379,42 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 #	@path		- TODO
 #
-function(dk_visualStudioRelease path) #target #arch
-	DKDEBUGFUNC(${ARGV})
-	
-	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
-		return()
-	endif()
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_visualStudioRelease(${path}) path does not exist")
-	endif()
-	
-	dk_findFiles(${path}/${OS} *.sln sln_file)
-	dk_getFilename(${sln_file} sln_file)
-	
-	dk_getExtension(${sln_file} extension)
-	if(NOT ${extension} STREQUAL ".sln")
-		dk_error("extension does not equal .sln")
-	endif()
-	
-	if(RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${path}/${OS}/${sln_file})
-			dk_error("CANNOT FIND: ${path}/${OS}/${sln_file}")
-		endif()
-		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
-		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
-		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Release)
-		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
-	endif()
-endfunction()
-dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_visualStudioRelease path) #target #arch
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
+#		return()
+#	endif()
+#	
+#	if(NOT EXISTS ${path})
+#		dk_error("dk_visualStudioRelease(${path}) path does not exist")
+#	endif()
+#	
+#	dk_findFiles(${path}/${OS} *.sln sln_file)
+#	dk_getFilename(${sln_file} sln_file)
+#	
+#	dk_getExtension(${sln_file} extension)
+#	if(NOT ${extension} STREQUAL ".sln")
+#		dk_error("extension does not equal .sln")
+#	endif()
+#	
+#	if(RELEASE AND QUEUE_BUILD)
+#		if(NOT EXISTS ${path}/${OS}/${sln_file})
+#			dk_error("CANNOT FIND: ${path}/${OS}/${sln_file}")
+#		endif()
+#		if(${ARGC} GREATER 2)
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+#		elseif(${ARGC} GREATER 1)
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+#		else()
+#			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Release)
+#		endif()
+#		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
-
+dk_load(dk_visualStudioRelease)
 ###############################################################################
 # dk_visualStudio(path sln_file)
 #
@@ -2423,12 +2422,12 @@ dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	@args	- TODO
 #
-function(dk_visualStudio)
-	DKDEBUGFUNC(${ARGV})
-	dk_visualStudioDebug(${ARGV})
-	dk_visualStudioRelease(${ARGV})
-endfunction()
-dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
+#function(dk_visualStudio)
+#	DKDEBUGFUNC(${ARGV})
+#	dk_visualStudioDebug(${ARGV})
+#	dk_visualStudioRelease(${ARGV})
+#endfunction()
+#dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
