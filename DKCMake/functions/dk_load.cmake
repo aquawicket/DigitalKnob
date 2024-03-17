@@ -8,7 +8,7 @@ include_guard()
 #
 macro(dk_load fn)
 	string(STRIP ${fn} fn)
-	#message("dk_load(${fn})")
+	message("dk_load(${fn})")
 	
 	#get_filename_component(fnDir "${var}" DIRECTORY)
 	#message("fnDir = ${fnDir}")
@@ -68,19 +68,30 @@ macro(dk_load fn)
 				
 				#message("${fn}_file = ${${fn}_file}")
 				file(READ ${${fn}_file} ${fn}_contents)
-				string(REGEX MATCHALL "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
+				#string(REGEX MATCHALL "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
+				
+				## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
+				string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
 				list(REMOVE_DUPLICATES ${fn}_matches)
 				foreach(${fn}_item ${${fn}_matches})
 					if(NOT ${fn}_item)
 						continue()
 					endif()
+					
+					message("item-in = ${${fn}_item}")
+					
+					## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+					string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_item ${${fn}_item})
+					message("item-out = ${${fn}_item}")
+					
 					string(STRIP ${${fn}_item} ${fn}_item)
 					string(REPLACE "\t" "" ${fn}_item ${${fn}_item})
 					string(REPLACE "\r" "" ${fn}_item ${${fn}_item})
 					string(REPLACE "\n" "" ${fn}_item ${${fn}_item})
 					string(REPLACE "(" "" ${fn}_item ${${fn}_item})
-					#message("${fn}_item  ${${fn}_item}")
+					message("item-stripped = ${${fn}_item}")
 					
+					message("${fn}_item  ${${fn}_item}")
 					list(FIND dk_load_list ${${fn}_item} index)
 					if(${index} GREATER -1)
 						message(STATUS "${fn} -> ${${fn}_item} already in list")
