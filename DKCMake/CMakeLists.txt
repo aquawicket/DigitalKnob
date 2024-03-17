@@ -70,16 +70,16 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 #Load all cmake flags prior to calling PROJECT()
 #include(${CMAKE_SOURCE_DIR}/DK.cmake)
-dk_load(DK.cmake)
+dk_load(${DKCMAKE_DIR}/DK.cmake)
 #include(${DKCMAKE_DIR}/DKBuildFlags.cmake)
-dk_load(DKBuildFlags.cmake)
+dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
 message(STATUS "################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 #include(${DKCMAKE_DIR}/DKGenerate.cmake)
-dk_load(DKGenerate.cmake)
+dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
 
 
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

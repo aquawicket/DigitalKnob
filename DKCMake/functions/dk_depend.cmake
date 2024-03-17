@@ -19,9 +19,8 @@ function(dk_depend plugin)
 		#dk_set(init_list ${init_list} "${plugin}")
 		list(APPEND init_list "${plugin}")
 		
-		#dk_getPathToPlugin(${plugin} plugin_path)
-		#include(${plugin_path}/DKMAKE.cmake)
-		dk_load(${plugin})
+		dk_getPathToPlugin(${plugin} plugin_path)
+		dk_load(${plugin_path}/DKMAKE.cmake)
 		#return()
 	endif()
 	

@@ -44,7 +44,7 @@ set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(PROJECT_INCLUDE_DKPLUGINS	1		CACHE INTERNAL "")  # Include DKPlugin libraries in the app project
 set(PROJECT_INCLUDE_3RDPARTY	0		CACHE INTERNAL "")  # Include 3rdParty libraries in the app project
 
-dk_load(DKColor.cmake)
+dk_load(${DKCMAKE_DIR}/DKColor.cmake)
 #include(${DKCMAKE_DIR}/DKColor.cmake)
 
 ###### DKOFFLINE Warning ######
@@ -276,6 +276,6 @@ message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_A
 
 #dk_load(DKFunctions)
 #dk_load(DKFileSystem)
-dk_load(DKVariables.cmake)
+dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(dk_importVariables)
 #include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)

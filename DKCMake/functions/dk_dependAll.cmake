@@ -9,7 +9,6 @@ function(dk_dependAll)
 	DKDEBUGFUNC(${ARGV})
 	set(DEPENDALL_FILE "")
 	
-	
 	if(IS_DIRECTORY ${DKIMPORTS_DIR})
 		file(GLOB allfiles RELATIVE "${DKIMPORTS_DIR}/" "${DKIMPORTS_DIR}/*")
 		foreach(each_file ${allfiles})
