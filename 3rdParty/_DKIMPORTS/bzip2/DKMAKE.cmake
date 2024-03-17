@@ -99,7 +99,7 @@ else()
 		#/work/src/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64//bin/arm-linux-androideabi-ar cq libbz2.a blocksort.o huffman.o crctable.o randtable.o compress.o decompress.o bzlib.o
 		#/work/src/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64//bin/arm-linux-androideabi-ranlib libbz2.a
 		#/work/src/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64//bin/armv7a-linux-androideabi16-clang -Wall -Winline -O2 -g -D_FILE_OFFSET_BITS=64  -o bzip2 bzip2.o -L. -lbz2
-	endif()
+	#endif()
 endif()
 
 
