@@ -5,8 +5,8 @@ include_guard()
 #
 #	TODO
 #
-#	@path 				- TODO
-#	@target (optional)	- TODO
+#	@path 				- path to the library root 	 I.E. ${MyLibrary_Dir} 
+#	@target (optional)	- The target of the project to build
 #
 function(dk_build path) #target NOASSERT
 	DKDEBUGFUNC(${ARGV})
@@ -30,7 +30,7 @@ function(dk_build path) #target NOASSERT
 		
 		dk_setPath(${path}/${BUILD_DIR})
 
-		# Build with CMake			(multi_config)
+		# Build with CMake		(multi_config / single_config)
 		if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
 			dk_info("Building with CMake")
 			if(${ARGC} GREATER 1)

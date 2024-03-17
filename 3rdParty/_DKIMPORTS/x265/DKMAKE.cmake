@@ -13,7 +13,7 @@ dk_libRelease	(${X265}/${OS}/${RELEASE_DIR}/libx265.a)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${X265})
+dk_configure(${X265})
 
 
 ### COMPILE ###

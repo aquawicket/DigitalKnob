@@ -46,3 +46,6 @@ if(LINUX_HOST)
 		dk_set(CLANG_CXX_COMPILER	/usr/local/bin/clang++)
 	endif()
 endif()
+
+#dk_command(sh -c "command -v clang" OUTPUT_VARIABLE CLANG_C_COMPILER)
+#dk_command(sh -c "command -v clang++" OUTPUT_VARIABLE CLANG_CXX_COMPILER)

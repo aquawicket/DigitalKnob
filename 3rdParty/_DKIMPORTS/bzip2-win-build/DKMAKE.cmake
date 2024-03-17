@@ -17,11 +17,11 @@ dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
 
 
 ### LINK ###
-dk_include			(${BZIP2_WIN_BUILD}												BZIP2_INCLUDE_DIR)
-WIN_X86_dk_libDebug	(${BZIP2_WIN_BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+dk_include				(${BZIP2_WIN_BUILD}												BZIP2_INCLUDE_DIR)
+WIN_X86_dk_libDebug		(${BZIP2_WIN_BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
 WIN_X86_dk_libRelease	(${BZIP2_WIN_BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
 WIN_X86_64_dk_libDebug	(${BZIP2_WIN_BUILD}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
-WIN_X86_64_dk_libRelease	(${BZIP2_WIN_BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+WIN_X86_64_dk_libRelease(${BZIP2_WIN_BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 
 
 ### 3RDPARTY LINK ###

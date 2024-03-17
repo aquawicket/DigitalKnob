@@ -24,7 +24,7 @@ WIN_dk_libRelease	(${_TEMPLATE_LIB_}/${OS}/${RELEASE_DIR}/package.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${_TEMPLATE_LIB_})
+dk_configure(${_TEMPLATE_LIB_})
 
 
 ### COMPILE ###

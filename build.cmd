@@ -363,6 +363,7 @@ goto:eof
     if %DKLEVEL%==RebuildAll    call:add_cmake_arg -DREBUILDALL=ON
     if %DKLINK%==Static         call:add_cmake_arg -DSTATIC=ON
     if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
+	::if %TARGET_OS%==emscripten	call:add_cmake_arg -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
     call:print_var CMAKE_BINARY_DIR

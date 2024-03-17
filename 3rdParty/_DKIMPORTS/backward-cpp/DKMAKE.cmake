@@ -21,7 +21,7 @@ endif()
 
 
 ### GENERATE ###
-#dk_queueCommand(${DKCMAKE_BUILD} ${BACKWARD_CPP})
+#dk_configure(${BACKWARD_CPP})
 
 
 ### COMPILE ###

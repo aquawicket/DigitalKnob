@@ -14,7 +14,7 @@ WIN_dk_libRelease	(${AOM}/${OS}/${RELEASE_DIR}/aom.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} -DAOM_TARGET_CPU=generic ${AOM})
+dk_configure(${AOM} -DAOM_TARGET_CPU=generic)
 
 
 ### COMPILE ###

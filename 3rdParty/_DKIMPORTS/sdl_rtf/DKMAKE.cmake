@@ -30,7 +30,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_RTF})
+dk_configure(${SDL_RTF} ${SDL_CMAKE})
 
 
 ### COMPILE ###

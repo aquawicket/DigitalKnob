@@ -14,7 +14,7 @@ dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz
 
 
 ### LINK ###
-dk_include		(${FLAC}/include											FLAC_INCLUDE_DIR)
+dk_include			(${FLAC}/include										FLAC_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
 	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
@@ -55,7 +55,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD}
+dk_configure(${FLAC}
 	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
 	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
 	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
@@ -67,8 +67,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	-DWITH_FORTIFY_SOURCE=ON			# "Enable protection against buffer overflows" ON
 	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
 	-DWITH_STACK_PROTECTOR=ON			# "Enable GNU GCC stack smash protection" ON
-	${OGG_CMAKE} 
-	${FLAC})
+	${OGG_CMAKE})
 
 
 

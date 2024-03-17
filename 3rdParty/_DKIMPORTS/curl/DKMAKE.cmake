@@ -65,7 +65,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_queueCommand(${DKCMAKE_BUILD}
+	WIN_dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
@@ -143,10 +143,9 @@ if(MSVC)
 		${PTHREAD_CMAKE}
 		${WS2_32_LIB_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 elseif(ANDROID)
-	dk_queueCommand(${DKCMAKE_BUILD} 
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -159,10 +158,9 @@ elseif(ANDROID)
 		-DHAVE_POSIX_STRERROR_R=0	#ANDROID_HOST
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 elseif(IOS OR IOSSIM)
-	dk_queueCommand(${DKCMAKE_BUILD}
+	dk_configure(${CURL}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
@@ -179,10 +177,9 @@ elseif(IOS OR IOSSIM)
 		-DHAVE_POSIX_STRERROR_R=0
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 elseif(MAC)
-	dk_queueCommand(${DKCMAKE_BUILD}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
@@ -255,10 +252,9 @@ elseif(MAC)
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 elseif(LINUX)
-	dk_queueCommand(${DKCMAKE_BUILD}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
@@ -331,10 +327,9 @@ elseif(LINUX)
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 else()
-	dk_queueCommand(${DKCMAKE_BUILD}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
@@ -406,8 +401,7 @@ else()
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${CURL})
+		${ZSTD_CMAKE})
 endif()
 
 

@@ -20,7 +20,7 @@ dk_include(${FMT}/include)
 
 
 ### GENERATE ###
-#dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
+#dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
 
 
 ### COMPILE ###

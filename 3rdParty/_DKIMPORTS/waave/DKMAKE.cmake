@@ -21,7 +21,7 @@ WIN_dk_libRelease	(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
 
 
 ### COMPILE ###

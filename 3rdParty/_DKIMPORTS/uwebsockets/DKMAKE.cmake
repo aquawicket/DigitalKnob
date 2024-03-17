@@ -27,26 +27,18 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
-	${LIBUV_CMAKE}
-	${OPENSSL_CMAKE}
-	${ZLIB_CMAKE}
-	${UWEBSOCKETS})
+dk_configure(${UWEBSOCKETS}
+			${LIBUV_CMAKE}
+			${OPENSSL_CMAKE}
+			${ZLIB_CMAKE})
+
 
 ### COMPILE ###
 dk_build(${UWEBSOCKETS} uWS)
 
+
 ###### NON CMAKE #########
-### GENERATE / COMPILE ###
-#DEBUG_dk_setPath			(${UWEBSOCKETS}/${OS}/${DEBUG_DIR})
-#DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
+#DEBUG_dk_configure			(${UWEBSOCKETS})
 #DEBUG_dk_build				(${UWEBSOCKETS})
-
-#RELEASE_dk_setPath			(${UWEBSOCKETS}/${OS}/${RELEASE_DIR})
-#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_build			(${UWEBSOCKETS})
-
-#dk_setPath		(${UWEBSOCKETS})
-#dk_queueShell	(make)
 ##########################
 

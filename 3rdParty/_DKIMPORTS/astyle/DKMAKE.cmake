@@ -20,7 +20,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${ASTYLE})
+dk_configure(${ASTYLE})
 
 
 ### COMPILE ###

@@ -57,7 +57,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD}
+dk_configure(${TIFF}
 	-DBUILD_SHARED_LIBS=OFF
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
@@ -69,8 +69,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBJPEG_TURBO_CMAKE} 
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${TIFF})
+	${ZSTD_CMAKE})
 
 
 ### COMPILE ###

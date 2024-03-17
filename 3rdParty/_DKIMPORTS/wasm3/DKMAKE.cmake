@@ -19,7 +19,7 @@ WIN_dk_libRelease		(${WASM3}/${OS}/source/${RELEASE_DIR}/m3.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${WASM3})
+dk_configure(${WASM3})
 
 
 ### COMPILE ###

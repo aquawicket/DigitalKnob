@@ -19,8 +19,6 @@ dk_import		(https://gitlab.com/bzip2/bzip2.git)
 
 
 
-
-
 set(BZIP2_USE_CMAKE 1)
 if(BZIP2_USE_CMAKE)
 	dk_include(${BZIP2}/													BZIP2_INCLUDE_DIR)
@@ -33,10 +31,7 @@ if(BZIP2_USE_CMAKE)
 	dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	
 	### CONFIGURE ###
-	dk_queueCommand(${DKCMAKE_BUILD}
-					-DENABLE_SHARED_LIB=OFF
-					-DENABLE_STATIC_LIB=ON
-					${BZIP2})
+	dk_configure(${BZIP2} -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON)
 	
 	### COMPILE ###
 	dk_build(${BZIP2})
@@ -47,15 +42,15 @@ else()
 	endif()
 
 	### LINK ###
-	dk_include(${BZIP2}/${OS}																BZIP2_INCLUDE_DIR)
+	dk_include(${BZIP2}/${OS}															BZIP2_INCLUDE_DIR)
 	if(MSVC)
-		WIN_X86_dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib				BZIP2_LIBRARY_DEBUG)
-		WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib			BZIP2_LIBRARY_RELEASE)
-		WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
-		WIN_X86_64_dk_libRelease(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
+		WIN_X86_dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
+		WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
+		WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+		WIN_X86_64_dk_libRelease(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 	else()
-		dk_libDebug				(${BZIP2}/${OS}/libbz2.a									BZIP2_LIBRARY_DEBUG)
-		dk_libRelease			(${BZIP2}/${OS}/libbz2.a									BZIP2_LIBRARY_RELEASE)
+		dk_libDebug				(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_DEBUG)
+		dk_libRelease			(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_RELEASE)
 	endif()
 
 
@@ -84,9 +79,9 @@ else()
 	else()
 		if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 			dk_copy		(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
+			dk_sleep(2) # wait 2 seconds for files to copy over
 		endif()
 		dk_setPath		(${BZIP2}/${OS})
-		dk_sleep(2) # wait 2 seconds for files to copy over
-		dk_queueCommand(${CMAKE_MAKE_PROGRAM} libbz2.a)
+		dk_build		(${BZIP2} libbz2.a)
 	endif()
 endif()

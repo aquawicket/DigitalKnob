@@ -5,5 +5,4 @@ if(NOT APPLE)
 	dk_return()
 endif()
 
-
 dk_findLibrary(CoreAudio)

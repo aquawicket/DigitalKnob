@@ -59,8 +59,9 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 
 ### GENERATE / COMPILE ###
 
-DEBUG_dk_setPath(${FFMPEG}/${OS}/${DEBUG_DIR})
-EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
+#DEBUG_dk_setPath(${FFMPEG}/${OS}/${DEBUG_DIR})
+#EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
+EMSCRIPTEN_DEBUG_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -83,8 +84,10 @@ EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS_ARM32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
-IOS_ARM64_DEBUG_dk_queueCommand(../../configure 
+#IOS_ARM32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
+IOS_ARM32_DEBUG_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
+#IOS_ARM64_DEBUG_dk_queueCommand(../../configure
+IOS_ARM64_DEBUG_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -99,8 +102,10 @@ IOS_ARM64_DEBUG_dk_queueCommand(../../configure
 	--cc=${XCODE_CLANG}
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT}")
-IOSSIM_X86_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM_X86_64_DEBUG_dk_queueCommand(../../configure
+#IOSSIM_X86_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM_X86_DEBUG_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+#IOSSIM_X86_64_DEBUG_dk_queueCommand(../../configure
+IOSSIM_X86_64_DEBUG_dk_queueCommand(${FFMPEG}
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -114,24 +119,36 @@ IOSSIM_X86_64_DEBUG_dk_queueCommand(../../configure
 	--cc=${XCODE_CLANG}
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch x86_64 -DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
-LINUX_X86_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-LINUX_X86_64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-MAC_X86_64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY_ARM32_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY_ARM64_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
-#WIN_X86_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
-WIN_X86_64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+#LINUX_X86_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+#LINUX_X86_64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+#MAC_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+#MAC_X86_64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+#RASPBERRY_ARM32_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+#RASPBERRY_ARM64_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+#WIN_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
+#WIN_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
+#WIN_X86_64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
-EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)
-if(NOT EMSCRIPTEN)
+LINUX_X86_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+LINUX_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC_X86_DEBUG_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+MAC_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY_ARM32_DEBUG_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY_ARM64_DEBUG_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+WIN_X86_DEBUG_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
+#WIN_X86_DEBUG_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
+WIN_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+
+
+#EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)
+#if(NOT EMSCRIPTEN)
 	DEBUG_dk_build(${FFMPEG})
-endif()
+#endif()
 
 
-RELEASE_dk_setPath(${FFMPEG}/${OS}/${RELEASE_DIR})
-EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure 
+#RELEASE_dk_setPath(${FFMPEG}/${OS}/${RELEASE_DIR})
+#EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure
+EMSCRIPTEN_RELEASE_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -155,21 +172,35 @@ EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS_ARM32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
-IOS_ARM64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
-IOSSIM_X86_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM_X86_64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-LINUX_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-LINUX_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-MAC_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY_ARM32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY_ARM64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
+#IOS_ARM32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
+#IOS_ARM64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
+#IOSSIM_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+#IOSSIM_X86_64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+#LINUX_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+#LINUX_X86_64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+#MAC_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+#MAC_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+#RASPBERRY_ARM32_RELEASE_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+#RASPBERRY_ARM64_RELEASE_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+#WIN_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
 #WIN_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
-WIN_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
+#WIN_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
-EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
-if(NOT EMSCRIPTEN)
+IOS_ARM32_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
+IOS_ARM64_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
+IOSSIM_X86_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM_X86_64_RELEASE_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX_X86_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+LINUX_X86_64_RELEASE_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC_X86_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+MAC_X86_64_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY_ARM32_RELEASE_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY_ARM64_RELEASE_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+WIN_X86_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
+#WIN_X86_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
+WIN_X86_64_RELEASE_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
+
+#EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
+#if(NOT EMSCRIPTEN)
 	RELEASE_dk_build(${FFMPEG})
-endif()
+#endif()

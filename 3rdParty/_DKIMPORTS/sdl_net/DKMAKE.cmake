@@ -25,9 +25,8 @@ endif()
 
 
 
-
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_NET})
+dk_configure(${SDL_NET} ${SDL_CMAKE})
 
 
 ### COMPILE ###

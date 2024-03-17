@@ -26,7 +26,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE} ${DUKLUV})
+dk_configure(${DUKLUV} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
 
 
 ### COMPILE ###

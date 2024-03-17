@@ -17,7 +17,7 @@ WIN_dk_libRelease	(${BGFX}/${OS}/${RELEASE_DIR}/bgfx.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${BGFX})
+dk_configure(${BGFX})
 
 
 ### COMPILE ###

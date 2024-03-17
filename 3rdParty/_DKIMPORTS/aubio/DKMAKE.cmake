@@ -16,15 +16,9 @@ else()
 endif()
 
 
-
-
 ### GENERATE ###
-DEBUG_dk_setPath		(${AUBIO}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-
-RELEASE_dk_setPath		(${AUBIO}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+dk_configure(${AUBIO})
 
 
 ### COMPILE ###
-dk_build				(${AUBIO})
+dk_build	(${AUBIO})

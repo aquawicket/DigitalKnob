@@ -25,7 +25,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB_CMAKE} ${SDL_CMAKE} ${SDL2_GIFLIB_SA})
+dk_configure(${SDL2_GIFLIB_SA} ${GIFLIB_CMAKE} ${SDL_CMAKE})
 
 
 ### COMPILE ###

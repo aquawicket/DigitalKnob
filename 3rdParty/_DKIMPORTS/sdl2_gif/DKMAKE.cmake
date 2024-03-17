@@ -29,7 +29,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL2_GIF})
+dk_configure(${SDL2_GIF} ${SDL_CMAKE})
 
 
 ### COMPILE ###

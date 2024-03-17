@@ -27,13 +27,13 @@ else()
 	dk_libRelease		(${SDL_TTF}/${OS}/${RELEASE_DIR}/lib/SDL_ttf.a)
 endif()
 
+
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD}
+dk_configure(${SDL_TTF}
 	-DSDLTTF_SUPPORT_WEBP=${LIBWEBP}
 	${FREETYPE_CMAKE}
 	${LIBWEBP_CMAKE}
-	${SDL_CMAKE}
-	${SDL_TTF}) 
+	${SDL_CMAKE}) 
 
 
 ### COMPILE ###

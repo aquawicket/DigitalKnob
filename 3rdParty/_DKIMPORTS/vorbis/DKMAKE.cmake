@@ -51,10 +51,9 @@ RELEASE_dk_set	(VORBIS_CMAKE -DVORBIS_INCLUDE_DIR=${VORBIS_INCLUDE_DIR} -DVORBIS
 	
 ### GENERATE ###
 #if(ANDROID)
-	dk_queueCommand(${DKCMAKE_BUILD}
-					#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
-					${OGG_CMAKE} 
-					${VORBIS})
+	dk_configure(${VORBIS}
+				#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
+				${OGG_CMAKE})
 #else()
 #	if(DEBUG)
 #		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")

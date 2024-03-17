@@ -55,6 +55,9 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
-dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
+#dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
+dk_configure(${DUKTAPE})
 
+
+### COMPILE ###
 dk_build(${DUKTAPE}) # duktape)

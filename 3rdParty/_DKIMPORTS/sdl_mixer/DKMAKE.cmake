@@ -29,7 +29,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
+dk_configure(${SDL_MIXER} 
 	#-DCMAKE_POSITION_INDEPENDENT_CODE=ON	# "Build static libraries with -fPIC" ON
 	#-DSDL2MIXER_CMD=OFF					# "Support an external music player" ${sdl2mixer_cmd_default}
 	-DSDL2MIXER_DEPS_SHARED=OFF				# "Default value for loading dependencies dynamically" ON
@@ -46,8 +46,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	${OGG_CMAKE} 
 	${SDL_CMAKE} 
 	${SMPEG2_CMAKE} 
-	${VORBIS_CMAKE} 
-	${SDL_MIXER})
+	${VORBIS_CMAKE})
 
 
 ### COMPILE ###

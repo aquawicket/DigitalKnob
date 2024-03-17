@@ -16,5 +16,6 @@ dk_libRelease	(${SIMPLE_GETCH}/getch/libgetch.a)
 
 
 ### COMPILE ###
-DEBUG_dk_queueCommand	(../../make)
-RELEASE_dk_queueCommand	(../../make)
+#DEBUG_dk_queueCommand	(../../make)
+#RELEASE_dk_queueCommand(../../make)
+dk_build(${SIMPLE_GETCH})

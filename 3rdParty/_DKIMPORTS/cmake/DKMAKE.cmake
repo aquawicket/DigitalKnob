@@ -66,8 +66,8 @@ if(COMPILE_CMAKE)
 			-DBUILD_TESTING=OFF
 			${CMAKE})
 			 
-		#dk_build(${CMAKE} cmake)
-		dk_command(${CMAKE_MAKE_PROGRAM})
+		dk_build(${CMAKE}) # cmake)
+		#dk_command(${CMAKE_MAKE_PROGRAM})
 		
 		return()
 	endif()

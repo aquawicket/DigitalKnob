@@ -21,7 +21,7 @@ WIN_dk_libRelease	(${STACKWALKER}/${OS}/${RELEASE_DIR}/stackwalker.lib)
 
 
 ### GENERATE ###
-WIN_dk_queueCommand(${DKCMAKE_BUILD} ${STACKWALKER})
+WIN_dk_configure	(${STACKWALKER})
 
 
 ### COMPILE ###
