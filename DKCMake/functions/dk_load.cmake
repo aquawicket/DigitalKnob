@@ -62,7 +62,7 @@ macro(dk_load fn)
 			list(FIND dk_load_list ${${fn}_file} index)
 			if(${index} GREATER -1)
 				message(STATUS "dk_load(${fn}) function already in list @ ${${fn}_file}")
-				message(STATUS "dk_load_list = ${dk_load_list}")
+				#message(STATUS "dk_load_list = ${dk_load_list}")
 			else()
 				set(dk_load_list ${dk_load_list} ${${fn}_file} CACHE INTERNAL "")
 				

@@ -19,26 +19,28 @@ if(GIT_DL)
 endif()
 
 
-if(MSYSTEM)
-	dk_depend(msys2)
-	if(NOT EXISTS ${MSYS2})
-		dk_error("MSYS2:${MSYS2} does not exist")
-	endif()
-	
-	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NOASSERT)
-	if(GIT_EXE)
-	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
-	endif()
-	
-	if(NOT EXISTS ${GIT_EXE})
-		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
-		dk_command(pacman -S git --needed --noconfirm)
-	endif()
-	
-	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE)
-	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
-
-else()
+#if(MSYSTEM)
+#	dk_depend(msys2)
+#	if(NOT EXISTS ${MSYS2})
+#		dk_error("MSYS2:${MSYS2} does not exist")
+#	endif()
+#	
+#	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NOASSERT)
+#	if(GIT_EXE)
+#	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
+#	endif()
+#	
+#	if(NOT EXISTS ${GIT_EXE})
+#		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+#		dk_command(pacman -S git --needed --noconfirm)
+#	endif()
+#	
+#	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE)
+#	if(GIT_EXE)
+#		dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
+#	endif()
+#
+#else()
 	if(WIN_HOST)
 		dk_set(GIT_EXE ${DKTOOLS_DIR}/${GIT_FOLDER}/bin/git.exe)
 		message(STATUS "GIT_EXE = ${GIT_EXE}")
@@ -61,7 +63,7 @@ else()
 			dk_command(sh -c "command -v git" OUTPUT_VARIABLE GIT_EXE)
 		endif()
 	endif()
-endif()
+#endif()
 
 ### validate GIT variables ###
 if(NOT GIT_EXE)
