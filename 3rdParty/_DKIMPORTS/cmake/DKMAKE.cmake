@@ -48,7 +48,7 @@ if(COMPILE_CMAKE)
 			-DCMake_INSTALL_COMPONENTS=OFF 			# "Using components when installing" OFF
 			-DCMake_INSTALL_DEPENDENCIES=OFF		# "Whether to install 3rd-party runtime dependencies" OFF
 			-DCMake_BUILD_DEVELOPER_REFERENCE=OFF	# "Build CMake Developer Reference" OFF
-			-DCMake_BUILD_LTO=OFF 					# "Compile CMake with link-time optimization if supported" OFF
+			-DCMake_BUILD_LTO=OFF 					# "Compile CMake with link-time optimization" OFF
 			-DCMake_BUILD_PCH=OFF 					# "Compile CMake with precompiled headers" OFF
 			#-DCMAKE_USE_SYSTEM_LIBARCHIVE 			# "Use system-installed libarchive" "${CMAKE_USE_SYSTEM_LIBRARY_LIBARCHIVE}"
 			#-DCMAKE_USE_SYSTEM_CPPDAP 				# "Use system-installed cppdap" "${CMAKE_USE_SYSTEM_LIBRARY_CPPDAP}"
