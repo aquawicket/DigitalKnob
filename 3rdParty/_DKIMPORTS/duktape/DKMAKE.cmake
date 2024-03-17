@@ -43,7 +43,7 @@ endif()
 ### GENERATE ###
 if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator	
-	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+	dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/tools/configure.py
 		--output-directory ${DUKTAPE}/src
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT
 		-DDUK_USE_DEBUGGER_DUMPHEAP

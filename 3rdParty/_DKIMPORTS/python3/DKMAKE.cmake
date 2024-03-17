@@ -3,5 +3,5 @@
 
 
 dk_import(https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
-WIN_HOST_dk_set	(PYTHON3_APP ${PYTHON3}/python.exe)
+WIN_HOST_dk_set	(PYTHON3_EXE ${PYTHON3}/python.exe)
 

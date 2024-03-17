@@ -9,11 +9,9 @@ dk_set				(PYTHON_FOLDER python-2.7.18)
 dk_set				(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
 APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-WIN_HOST_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
-UNIX_HOST_dk_set	(PYTHON_APP python)
+WIN_HOST_dk_set		(PYTHON_EXE ${PYTHON}/python.exe)
+UNIX_HOST_dk_set	(PYTHON_EXE python)
 
-## TODO: change all PYTHON_APP occurences to PYTHON_EXE
-dk_set				(PYTHON_EXE ${PYTHON_APP})
 
 #PYTHON_CFLAGS
 #PYTHON_LIBS
@@ -23,7 +21,7 @@ dk_set				(PYTHON_EXE ${PYTHON_APP})
 ### INSTALL ###
 if(WIN_HOST)
 	dk_makeDirectory(${PYTHON})
-	if(NOT EXISTS ${PYTHON_APP})
+	if(NOT EXISTS ${PYTHON_EXE})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18.msi)
 		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
 		#dk_executeProcess(${DKDOWNLOAD_DIR}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})
@@ -33,10 +31,9 @@ if(WIN_HOST)
 		dk_executeProcess(${DKIMPORTS_DIR}/python/install.cmd)
 		dk_setEnv("PATH" "${PYTHON}") # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 	endif()
-	if(EXISTS ${PYTHON_APP})
+	if(EXISTS ${PYTHON_EXE})
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
-			#dk_executeProcess(cmd /c ${PYTHON_APP} -m ensurepip)
-			dk_executeProcess(${PYTHON_APP} -m ensurepip)
+			dk_executeProcess(${PYTHON_EXE} -m ensurepip)
 		endif()
 	endif()
 endif()
@@ -44,10 +41,10 @@ if(MAC AND NOT EXISTS "/Applications/Python\ 2.7")
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
 	dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
 endif()
-if(LINUX AND NOT EXISTS ${PYTHON_APP}) #FIXME
+if(LINUX AND NOT EXISTS ${PYTHON_EXE}) #FIXME
 	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 endif()
-if(RASPBERRY AND NOT EXISTS ${PYTHON_APP}) #FIXME
+if(RASPBERRY AND NOT EXISTS ${PYTHON_EXE}) #FIXME
 	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 endif()
 
@@ -69,9 +66,9 @@ if(ANDROID_HOST)
 	dk_set(Python_LIBRARIES /data/data/com.termux/files/usr/lib)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
 
-	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_APP} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
+	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
 endif ()
 
 
-dk_debug(PYTHON_APP		PRINTVAR)
-dk_command(${PYTHON_APP} --version)
+dk_debug(PYTHON_EXE		PRINTVAR)
+dk_command(${PYTHON_EXE} --version)

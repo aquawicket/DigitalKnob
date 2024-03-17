@@ -84,7 +84,7 @@ DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
 #	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
 #	"../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
-#EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_APP} ${OPENSSL})
+#EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE} ${OPENSSL})
 
 ANDROID_ARM32_DEBUG_dk_queueBash(../../Configure no-shared --debug android-arm -D__ANDROID_API__=31)
 ANDROID_ARM64_DEBUG_dk_queueBash(../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31)

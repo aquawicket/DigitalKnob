@@ -176,7 +176,7 @@ dk_configure(${LIBXML2}
 	-DLIBXML2_WITH_XPTR=ON				# Add the XPointer support ON
 	-DLIBXML2_WITH_XPTR_LOCS=OFF		# Add support for XPointer locations OFF
 	-DLIBXML2_WITH_ZLIB=${ZLIB}			# Use libz ON
-	#-DPython_EXECUTABLE=${PYTHON_APP}
+	#-DPython_EXECUTABLE=${PYTHON_EXE}
 	${LIBICONV_CMAKE} 
 	${PYTHON_CMAKE}
 	${XZ_CMAKE} 
