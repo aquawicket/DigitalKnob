@@ -110,5 +110,4 @@ function(dk_createOsMacros func)
 		dk_createPrefixMacro(${func} EMSCRIPTEN RELEASE)
 	endif()
 	
-	dk_eval(${ext_string})
 endfunction()

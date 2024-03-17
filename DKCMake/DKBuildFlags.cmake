@@ -102,7 +102,7 @@ include_guard()
 ############ CORE DEPENDENCIES ############
 if(MSVC)
 	#include(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
-	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	dk_load(visualstudio)
 endif()
 if(MINGW)
 	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
@@ -705,8 +705,14 @@ if(WIN_ARM64 AND CLANGARM64)
 endif()
 
 
-
-
+dk_debug(MSYSTEM				PRINTVAR)
+dk_debug(CMAKE_GENERATOR		PRINTVAR)
+dk_debug(CMAKE_MAKE_PROGRAM		PRINTVAR)
+dk_debug(CMAKE_C_COMPILER		PRINTVAR)
+dk_debug(CMAKE_CXX_COMPILER		PRINTVAR)
+dk_debug(CMAKE_C_FLAGS			PRINTVAR)
+dk_debug(CMAKE_CXX_FLAGS		PRINTVAR)
+dk_debug(CMAKE_EXE_LINKER_FLAGS	PRINTVAR)
 
 
 ######### Extra Flags and Settings #########

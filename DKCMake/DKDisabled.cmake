@@ -147,9 +147,9 @@ if(ANDROID)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
-	#if(WIN_HOST)
-	#	dk_disable(openssl)
-	#endif()
+	if(WIN_HOST)
+		dk_disable(openssl)
+	endif()
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error: can't find "fontconfig/fontconfig.h"
 	dk_disable(rmlui-d3d11)
