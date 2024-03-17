@@ -22,20 +22,19 @@ function(dk_import url)
 	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
 	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	
-	#dk_debug(${plugin_var} 					PRINTVAR)
-	#dk_debug(${plugin_var}_URL			PRINTVAR)
+	#dk_debug(${plugin_var} 		PRINTVAR)
+	#dk_debug(${plugin_var}_URL		PRINTVAR)
 	#dk_debug(${plugin_var}_VERSION	PRINTVAR)
-	#dk_debug(${plugin_var}_FOLDER		PRINTVAR)
+	#dk_debug(${plugin_var}_FOLDER	PRINTVAR)
 	#dk_debug(${plugin_var}_BRANCH	PRINTVAR)
-	#dk_debug(${plugin_var}_TAG			PRINTVAR)
+	#dk_debug(${plugin_var}_TAG		PRINTVAR)
 	
 	if(NOT DKOFFLINE)
 		### .git
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
-			#include(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
-			dk_load(git)
+			dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 			DK_ASSERT(GIT_EXE)
 			
 			if(NOT EXISTS ${${plugin_var}}/.git)

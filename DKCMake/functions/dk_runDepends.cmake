@@ -17,47 +17,47 @@ function(dk_runDepends plugin)
 	endif()
 	dk_verbose("FOUND ${plugin} DK makefile at ${plugin_path}")
 	
-		
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)
 	unset(depends_script)
 	unset(index)
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")
-	set(KEEPLINE 0)
-	foreach(line ${lines})
-		
-		foreach(keepCommand ${keepCommands})
-			dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
-			if(${hasCommand})
-				set(KEEPLINE 1)
-			endif()
-			dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
-			if(${hasCommand})
-				set(KEEPLINE 1)
-			endif()
-			dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
-			if(${hasCommand})
-				set(KEEPLINE 1)
-			endif()
-		endforeach()
-		
-		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
-		#dk_includes("${line}" "#" hasCommentSign)
-		#if(${hasCommentSign})
-		#	set(KEEPLINE 0)
-		#endif()
-		
-		if(KEEPLINE)
-			set(disable_script "${disable_script}${line}\n")
-		endif()
-		
-		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
-		dk_includes("${line}" ")" includes)
-		if(${includes})
-			set(KEEPLINE 0)
-		endif()
-	endforeach()
+	
+	#set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")
+	#set(KEEPLINE 0)
+	#foreach(line ${lines})
+	#	
+	#	foreach(keepCommand ${keepCommands})
+	#		dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
+	#		if(${hasCommand})
+	#			set(KEEPLINE 1)
+	#		endif()
+	#		dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
+	#		if(${hasCommand})
+	#			set(KEEPLINE 1)
+	#		endif()
+	#		dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
+	#		if(${hasCommand})
+	#			set(KEEPLINE 1)
+	#		endif()
+	#	endforeach()
+	#	
+	#	# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
+	#	#dk_includes("${line}" "#" hasCommentSign)
+	#	#if(${hasCommentSign})
+	#	#	set(KEEPLINE 0)
+	#	#endif()
+	#	
+	#	if(KEEPLINE)
+	#		set(disable_script "${disable_script}${line}\n")
+	#	endif()
+	#	
+	#	# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
+	#	dk_includes("${line}" ")" includes)
+	#	if(${includes})
+	#		set(KEEPLINE 0)
+	#	endif()
+	#endforeach()
 	
 	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_require;dk_undepend")
 	set(KEEPLINE 0)
@@ -95,11 +95,11 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
-	if(disable_script)
-		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
-		INCLUDE(${plugin_path}/DISABLES.TMP)
-		#dk_remove(${plugin_path}/DISABLES.TMP)
-	endif()
+	#if(disable_script)
+	#	file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
+	#	INCLUDE(${plugin_path}/DISABLES.TMP)
+	#	#dk_remove(${plugin_path}/DISABLES.TMP)
+	#endif()
 	
 	if(depends_script)
 		if(${ARGC} GREATER 1)
@@ -109,7 +109,7 @@ function(dk_runDepends plugin)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
-		#dk_remove(${plugin_path}/DEPENDS.TMP)
+		dk_remove(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			dk_set(${ARGV1} OFF)
 		endif()
