@@ -20,8 +20,8 @@ UNIX_HOST_dk_set	(PYTHON_EXE python)
 
 ### INSTALL ###
 if(WIN_HOST)
-	dk_makeDirectory(${PYTHON})
 	if(NOT EXISTS ${PYTHON_EXE})
+		dk_makeDirectory(${PYTHON})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18.msi)
 		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
 		#dk_executeProcess(${DKDOWNLOAD_DIR}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})

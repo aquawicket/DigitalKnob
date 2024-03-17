@@ -1239,6 +1239,10 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	if(CMAKE_ANDROID_GUI)
+		if(WIN_HOST)
+			dk_command(${DKIMPORTS_DIR}/openjdk-8u41/registerJDK.cmd)
+		endif()
+		dk_load(${DKIMPORTS_DIR}/gradle/DKMAKE.cmake)
 		if(DEBUG)
 			add_custom_command(
 				TARGET main
