@@ -23,7 +23,7 @@ dk_import		(https://gitlab.com/bzip2/bzip2.git)
 
 set(BZIP2_USE_CMAKE 1)
 if(BZIP2_USE_CMAKE)
-	dk_include(${BZIP2}/${OS}												BZIP2_INCLUDE_DIR)
+	dk_include(${BZIP2}/													BZIP2_INCLUDE_DIR)
 
 	dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2_static.a			BZIP2_LIBRARY_DEBUG)
 	dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2_static.a			BZIP2_LIBRARY_RELEASE)
