@@ -33,11 +33,12 @@ else()
 	DEBUG_dk_setPath		(${LIBMD})
 	DEBUG_dk_queueCommand	(aclocal)
 	
-	DEBUG_dk_setPath		(${LIBMD}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#DEBUG_dk_setPath		(${LIBMD}/${OS}/${DEBUG_DIR})
+	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_setPath		(${LIBMD}/${OS}/${RELEASE_DIR})
+	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	dk_configure			(${LIBMD})
 	
-	RELEASE_dk_setPath		(${LIBMD}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	
 	dk_build				(${LIBMD})
 endif()

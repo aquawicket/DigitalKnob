@@ -16,7 +16,7 @@ WIN_dk_libRelease	(${OSGRMLUI}/${OS}/${RELEASE_DIR}/osgrmlui.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${OSGRMLUI})
+dk_configure(${OSGRMLUI})
 
 
 ### COMPILE ###

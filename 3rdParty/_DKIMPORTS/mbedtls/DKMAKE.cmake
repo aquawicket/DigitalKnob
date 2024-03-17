@@ -41,7 +41,7 @@ WIN_dk_set(MBEDTLS_CMAKE
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${MBEDTLS})
+dk_configure(${MBEDTLS})
 
 
 ### COMPILE ###

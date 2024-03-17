@@ -17,9 +17,12 @@ else()
 endif()
 
 
+### 3RDPARTY LINK ###
+dk_set(RLOTTIE_CMAKE --Drlottie_DIR=${RLOTTIE_INCLUDE_DIR})
+
 
 ### GENERATE ###
-UNIX_dk_queueCommand(${DKCMAKE_BUILD}
+UNIX_dk_configure(${RLOTTIE}
 	-DBUILD_SHARED_LIBS=OFF 
 	-DBUILD_STATIC_LIBS=ON
 	-DLOTTIE_MODULE=ON		# "Enable LOTTIE MODULE SUPPORT" ON
@@ -27,9 +30,9 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD}
 	-DLOTTIE_CACHE=ON  		# "Enable LOTTIE CACHE SUPPORT" ON
 	-DLOTTIE_TEST=OFF 		# "Build LOTTIE AUTOTESTS" OFF
 	-DLOTTIE_CCACHE=OFF 	# "Enable LOTTIE ccache SUPPORT" OFF
-	-DLOTTIE_ASAN=OFF 		# "Compile with asan" OFF
-	${RLOTTIE})
-WIN_dk_queueCommand(${DKCMAKE_BUILD} #/EHsc
+	-DLOTTIE_ASAN=OFF) 		# "Compile with asan" OFF
+
+WIN_dk_configure(${RLOTTIE} #/EHsc
 	-DBUILD_SHARED_LIBS=OFF 
 	-DBUILD_STATIC_LIBS=ON
 	-DLOTTIE_MODULE=ON		# "Enable LOTTIE MODULE SUPPORT" ON
@@ -37,11 +40,8 @@ WIN_dk_queueCommand(${DKCMAKE_BUILD} #/EHsc
 	-DLOTTIE_CACHE=ON  		# "Enable LOTTIE CACHE SUPPORT" ON
 	-DLOTTIE_TEST=OFF 		# "Build LOTTIE AUTOTESTS" OFF
 	-DLOTTIE_CCACHE=OFF 	# "Enable LOTTIE ccache SUPPORT" OFF
-	-DLOTTIE_ASAN=OFF 		# "Compile with asan" OFF
-	${RLOTTIE})
+	-DLOTTIE_ASAN=OFF) 		# "Compile with asan" OFF
 
-
-dk_set(RLOTTIE_CMAKE --Drlottie_DIR=${RLOTTIE_INCLUDE_DIR})
 
 ### COMPILE ###
 dk_build(${RLOTTIE} rlottie)

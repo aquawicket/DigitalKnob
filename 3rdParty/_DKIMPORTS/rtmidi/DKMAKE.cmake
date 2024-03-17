@@ -22,7 +22,7 @@ WIN_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
+dk_configure(${RTMIDI})
 
 
 ### COMPILE ###

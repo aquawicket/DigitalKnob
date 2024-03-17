@@ -16,7 +16,7 @@ WIN_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
+dk_configure(${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###

@@ -33,7 +33,7 @@ elseif(APPLE)
 	dk_libDebug				(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng16d.a											PNG_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	dk_libDebug				(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
 endif()
 
@@ -55,7 +55,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD}
+dk_configure(${LIBPNG}
 		-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
 		-DPNG_STATIC=ON					# "Build shared lib" ON
 		-DPNG_SHARED=OFF				# "Build static lib" ON
@@ -69,8 +69,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 		-Dld-version-script=ON			# "Enable linker version script" ON
 		-DSKIP_INSTALL_LIBRARIES=ON 
 		-DSKIP_INSTALL_ALL=ON
-		${ZLIB_CMAKE} 
-		${LIBPNG})   
+		${ZLIB_CMAKE})  
 
 
 

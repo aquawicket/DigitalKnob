@@ -17,7 +17,7 @@ WIN_dk_libRelease	(${LIBEXPAT}/${OS}/${RELEASE_DIR}/libexpat.lib	LIBEXPAT_LIBRAR
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBEXPAT})
+dk_configure(${LIBEXPAT})
 
 
 ### COMPILE ###

@@ -38,9 +38,7 @@ endif*(
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
-	${SDL_CMAKE} 
-	${SDL_GPU})
+dk_configure(${SDL_GPU} ${SDL_CMAKE})
 
 
 ### COMPILE ###

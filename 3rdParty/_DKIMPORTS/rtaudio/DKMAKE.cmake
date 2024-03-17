@@ -22,7 +22,7 @@ WIN_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/rtaudio.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${RTAUDIO})
+dk_configure(${RTAUDIO})
 
 
 ### COMPILE ###

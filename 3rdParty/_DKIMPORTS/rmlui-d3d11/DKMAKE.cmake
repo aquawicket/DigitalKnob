@@ -15,7 +15,7 @@ UNIX_dk_libRelease	(${RMLUI_D3D11}/${OS}/${RELEASE_DIR}/librmlui-d3d11.a)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${RMLUI_D3D11})
+dk_configure(${RMLUI_D3D11})
 
 
 ### COMPILE ###

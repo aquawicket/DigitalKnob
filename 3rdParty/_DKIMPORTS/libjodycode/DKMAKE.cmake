@@ -14,7 +14,7 @@ WIN_dk_libRelease	(${LIBJODYCODE}/${OS}/${RELEASE_DIR}/libjodycode.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBJODYCODE})
+dk_configure(${LIBJODYCODE})
 
 
 ### COMPILE ###

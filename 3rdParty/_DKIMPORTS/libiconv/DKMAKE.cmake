@@ -71,9 +71,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
-
-				${LIBICONV})
+dk_configure(${LIBICONV})
 
 
 ### COMPILE ###

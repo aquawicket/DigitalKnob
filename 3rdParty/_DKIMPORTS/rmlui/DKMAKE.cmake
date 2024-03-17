@@ -65,7 +65,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_queueCommand(${DKCMAKE_BUILD}
+	WIN_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
@@ -95,10 +95,9 @@ if(MSVC)
 		${LUNASVG_CMAKE}
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE} 
-		${RMLUI})
+		${SFML_CMAKE})
 	
-	ANDROID_dk_queueCommand(${DKCMAKE_BUILD} 
+	ANDROID_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
@@ -128,10 +127,9 @@ if(MSVC)
 		${LUNASVG_CMAKE}
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE} 
-		${RMLUI}) 
+		${SFML_CMAKE}) 
 else()
-	dk_queueCommand(${DKCMAKE_BUILD} 
+	dk_configure(${RMLUI}
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
@@ -161,8 +159,7 @@ else()
 		${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE} 
-		${RMLUI})
+		${SFML_CMAKE})
 endif()
 
 

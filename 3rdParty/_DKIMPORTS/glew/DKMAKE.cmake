@@ -52,7 +52,7 @@ endif()
 
 	
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+dk_configure(${GLEW}/build/cmake)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)

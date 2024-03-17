@@ -17,7 +17,7 @@ WIN_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 
 
 ### GENERATE ####
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBCACA})
+dk_configure(${LIBCACA})
 
 
 ### COMPILE ###

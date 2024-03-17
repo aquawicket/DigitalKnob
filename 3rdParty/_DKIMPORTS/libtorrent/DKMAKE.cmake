@@ -30,7 +30,7 @@ WIN_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE} ${LIBTORRENT})
+dk_configure(${LIBTORRENT} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE})
 
 
 ### COMPILE ###

@@ -140,7 +140,7 @@ endif()
 #	${LIBXML2})
 
 #WIN_dk_queueCommand(${DKCONFIGURE_BUILD})
-dk_queueCommand(${DKCMAKE_BUILD} 
+dk_configure(${LIBXML2} 
 	-DBUILD_SHARED_LIBS=OFF				# Build shared libraries ON	
 	-DLIBXML2_WITH_C14N=ON				# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON			# Add the Catalog support ON
@@ -180,8 +180,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	${LIBICONV_CMAKE} 
 	${PYTHON_CMAKE}
 	${XZ_CMAKE} 
-	${ZLIB_CMAKE} 
-	${LIBXML2})
+	${ZLIB_CMAKE})
 
 
 ### COMPILE ###

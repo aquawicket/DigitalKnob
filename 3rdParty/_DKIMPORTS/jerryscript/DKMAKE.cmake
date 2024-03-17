@@ -69,12 +69,12 @@ WIN_dk_libRelease			(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-port.lib)
 
 
 ### GENERATE ###
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${JERRYSCRIPT})
-APPLE_dk_queueCommand		(${DKCMAKE_BUILD} ${JERRYSCRIPT})
-EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized" ${JERRYSCRIPT})
-LINUX_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized" ${JERRYSCRIPT})
-RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized" ${JERRYSCRIPT})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${JERRYSCRIPT})
+ANDROID_dk_configure		(${JERRYSCRIPT})
+APPLE_dk_configure			(${JERRYSCRIPT})
+EMSCRIPTEN_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+LINUX_dk_configure			(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+RASPBERRY_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+WIN_dk_configure			(${JERRYSCRIPT})
 
 
 ### COMPILE ###

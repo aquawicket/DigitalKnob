@@ -12,7 +12,7 @@ dk_libRelease	(${HARFBUZZ}/${OS}/${RELEASE_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
+dk_configure(${HARFBUZZ} 
 		-DHB_HAVE_CAIRO=OFF 		# "Enable cairo interop helpers" OFF
 		-DHB_HAVE_FREETYPE=OFF 		# "Enable freetype interop helpers" OFF
 		-DHB_HAVE_GRAPHITE2=OFF 	# "Enable Graphite2 complementary shaper" OFF
@@ -25,8 +25,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 		-DHB_BUILD_UTILS=OFF		# "Build harfbuzz utils, needs cairo, freetype, and glib properly be installed" OFF
 		-DHB_BUILD_SUBSET=ON		# "Build harfbuzz-subset" ON
 		-DHB_HAVE_GOBJECT=OFF		# "Enable GObject Bindings" OFF
-		-DHB_HAVE_INTROSPECTION=OFF	# "Enable building introspection (.gir/.typelib) files" OFF
-		${HARFBUZZ})
+		-DHB_HAVE_INTROSPECTION=OFF)# "Enable building introspection (.gir/.typelib) files" OFF
 
 
 ### 3RDPARTY LINK ###

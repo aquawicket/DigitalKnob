@@ -53,7 +53,7 @@ WIN_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
+dk_configure(${OPENFRAMEWORKS} -DOF_PATH=${OPENFRAMEWORKS})
 
 
 ### COMPILE ###

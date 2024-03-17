@@ -515,20 +515,17 @@ endif()
 
 
 ### GENERATE ###
-ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
-EMSCRIPTEN_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENCV})
-EMSCRIPTEN_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENCV})
-IOSSIM_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
-IOS_dk_queueCommand					(${DKCMAKE_BUILD} ${OPENCV})
-LINUX_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} ${OPENCV})
-LINUX_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} ${OPENCV})
-MAC_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
-RASPBERRY_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
-RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
+ANDROID_dk_configure				(${OPENCV})
+EMSCRIPTEN_dk_configure				(${OPENCV})
+IOSSIM_dk_configure					(${OPENCV})
+IOS_dk_configure					(${OPENCV})
+LINUX_dk_configure					(${OPENCV})
+MAC_dk_configure					(${OPENCV}"-DCMAKE_CXX_FLAGS=-stdlib=libc++")
+RASPBERRY_dk_configure				(${OPENCV} -DWITH_IPP=ON)
 string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 WIN_X86_dk_queueCommand				(${OPENCV_BUILD} ${OPENCV})
-WIN_X86_64_dk_queueCommand				(${OPENCV_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
+WIN_X86_64_dk_queueCommand			(${OPENCV_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
 
 
 ### COMPILE ###

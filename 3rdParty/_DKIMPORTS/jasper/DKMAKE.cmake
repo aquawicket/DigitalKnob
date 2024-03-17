@@ -23,7 +23,7 @@ WIN_dk_libRelease		(${JASPER}/${OS}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${JASPER})
+dk_configure(${JASPER})
 
 
 ### COMPILE ###

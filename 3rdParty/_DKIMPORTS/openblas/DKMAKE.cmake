@@ -18,7 +18,7 @@ WIN_dk_libRelease		(${OPENBLAS}/${OS}/lib/RELEASE/openblas.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${OPENBLAS})
+dk_configure(${OPENBLAS})
 
 
 ### COMPILE ###

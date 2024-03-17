@@ -50,7 +50,7 @@ endif()
 
 
 ### GENERATE ###
-ANDROID_dk_queueCommand(${DKCMAKE_BUILD}
+ANDROID_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${OS} -I${LIBARCHIVE}/contrib/android/include"
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
@@ -107,10 +107,9 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 
-EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD}
+EMSCRIPTEN_dk_configure(${LIBARCHIVE}
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -166,10 +165,9 @@ EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 	
-IOS_dk_queueCommand(${DKCMAKE_BUILD}
+IOS_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
@@ -226,8 +224,7 @@ IOS_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 if(IOS)
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
@@ -237,7 +234,7 @@ if(IOS)
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-IOSSIM_dk_queueCommand(${DKCMAKE_BUILD}
+IOSSIM_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
@@ -294,8 +291,7 @@ IOSSIM_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 if(IOSSIM)
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
@@ -305,7 +301,7 @@ if(IOSSIM)
 	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-LINUX_dk_queueCommand(${DKCMAKE_BUILD}
+LINUX_dk_configure(${LIBARCHIVE}
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -361,10 +357,9 @@ LINUX_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 
-MAC_dk_queueCommand(${DKCMAKE_BUILD}
+MAC_dk_configure(${LIBARCHIVE}
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -420,10 +415,9 @@ MAC_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 	
-RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD}
+RASPBERRY_dk_configure(${LIBARCHIVE}
 	-DBUILD_TESTING=OFF 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -479,11 +473,10 @@ RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD}
 	${PCRE2_CMAKE}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${LIBARCHIVE})
+	${ZSTD_CMAKE})
 
 if(MSVC)
-	WIN_dk_queueCommand(${DKCMAKE_BUILD}
+	WIN_dk_configure(${LIBARCHIVE}
 		-DBUILD_TESTING=OFF 
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
@@ -539,11 +532,9 @@ if(MSVC)
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${LIBARCHIVE})
+		${ZSTD_CMAKE})
 else()
-	dk_debug("WIN_dk_queueCommand(libarchive)")
-	WIN_dk_queueCommand(${DKCMAKE_BUILD}
+	WIN_dk_configure(${LIBARCHIVE}
 		"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 		-DCMAKE_FIND_USE_CMAKE_PATH=FALSE
 		-DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE
@@ -611,8 +602,7 @@ else()
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-		${LIBARCHIVE})
+		${ZSTD_CMAKE})
 endif()
 
 

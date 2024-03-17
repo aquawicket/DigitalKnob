@@ -15,7 +15,7 @@ WIN_dk_libRelease	(${OPUS}/${OS}/${RELEASE_DIR}/opus.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${OPUS})
+dk_configure(${OPUS})
 
 
 ### COMPILE ###

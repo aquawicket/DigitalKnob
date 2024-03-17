@@ -29,7 +29,7 @@ WIN_RELEASE_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${L
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
+dk_configure(${LIBUV})
 
 
 ### COMPILE ###
