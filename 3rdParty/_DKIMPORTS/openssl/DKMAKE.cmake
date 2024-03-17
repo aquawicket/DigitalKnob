@@ -106,7 +106,7 @@ endif()
 #	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-aarch64/bin:$PATH"
 #	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH"
 #	"make")
-endif()
+#endif()
 
 
 RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
