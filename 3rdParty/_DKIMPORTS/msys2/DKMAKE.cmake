@@ -39,7 +39,7 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_command(${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE} install --root ${MSYS2} --confirm-command)
 endif()	
 
-dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
+#dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
 if(MSYSTEM)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
