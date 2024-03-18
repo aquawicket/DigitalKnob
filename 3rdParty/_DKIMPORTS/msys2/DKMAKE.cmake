@@ -22,6 +22,17 @@ dk_debug(MSYS2_DL_FILE	PRINTVAR)
 dk_debug(MSYS2_FOLDER	PRINTVAR)
 dk_debug(MSYS2			PRINTVAR)
 
+#dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")
+dk_set(MSYS2_GENERATOR			"MinGW Makefiles")
+dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
+dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2}/clang32/bin:$PATH")
+dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2}/clang64/bin:$PATH")
+dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2}/clangarm64/bin:$PATH")
+dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2}/mingw32/bin:$PATH")
+dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2}/mingw64/bin:$PATH")
+dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2}/ucrt64/bin:$PATH")
+
+
 if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_info("Installing ${MSYS2_FOLDER}")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
@@ -57,12 +68,4 @@ if(MSYSTEM)
 endif()
 
 
-#dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")
-dk_set(MSYS2_GENERATOR			"MinGW Makefiles")
-dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
-dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2}/clang32/bin:$PATH")
-dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2}/clang64/bin:$PATH")
-dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2}/clangarm64/bin:$PATH")
-dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2}/mingw32/bin:$PATH")
-dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2}/mingw64/bin:$PATH")
-dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2}/ucrt64/bin:$PATH")
+

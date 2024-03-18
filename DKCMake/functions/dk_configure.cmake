@@ -18,7 +18,7 @@ function(dk_configure path) #ARGN
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
-		dk_setPath(${path}/${BUILD_DIR})
+		#dk_setPath(${path}/${BUILD_DIR})
 		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 	# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
 		return()
 	
