@@ -86,9 +86,9 @@ DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 #EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE} ${OPENSSL})
 
-ANDROID_ARM32_DEBUG_dk_queueBash("export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
-	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH\n"
-	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH\n"
+ANDROID_ARM32_DEBUG_dk_queueBash("export ANDROID_NDK_ROOT=${ANDROID_NDK};"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;"
 	"../../Configure no-shared --debug android-arm -D__ANDROID_API__=31")
 ANDROID_ARM64_DEBUG_dk_queueBash(../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31)
 IOS_ARM64_DEBUG_dk_queueCommand	(../../Configure no-shared --debug ios64-xcrun)
