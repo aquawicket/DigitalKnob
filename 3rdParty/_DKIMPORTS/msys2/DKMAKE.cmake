@@ -1,8 +1,3 @@
-dk_load(dk_removeExtension)
-dk_load(dk_addFirewallAllow)
-dk_load(dk_remove)
-dk_load(dk_command)
-
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 if(NOT WIN_HOST)
@@ -14,9 +9,15 @@ endif()
 ### INSTALL ###
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
 
-get_filename_component(MSYS2_DL_FILE ${MSYS2_DL} NAME)
-dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
-dk_set(MSYS2 ${DK3RDPARTY_DIR}/${MSYS2_FOLDER})
+if(NOT MSYS2_DL_FILE)
+	get_filename_component(MSYS2_DL_FILE ${MSYS2_DL} NAME)
+endif()
+if(NOT MSYS2_FOLDER)
+	dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
+endif()
+if(NOT MSYS2)
+	dk_set(MSYS2 ${DK3RDPARTY_DIR}/${MSYS2_FOLDER})
+endif()
 
 if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_info("Installing ${MSYS2_FOLDER}")

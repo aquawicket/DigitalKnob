@@ -1,6 +1,6 @@
 include_guard()
+#dk_load(dk_color)
 
-dk_load(dk_color)
 ##################################################################################
 # dk_message(msg)
 #

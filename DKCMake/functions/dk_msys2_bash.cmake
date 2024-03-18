@@ -15,10 +15,9 @@ function(dk_msys2_bash)
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
-
 	set(EXTRA_ARGS "")
+	
 	if(OUTPUT_VARIABLE)
-		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	

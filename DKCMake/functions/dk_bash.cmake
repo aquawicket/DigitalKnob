@@ -9,18 +9,23 @@ include_guard()
 #
 function(dk_bash)
 	DKDEBUGFUNC(${ARGV})
-	
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
 	
-	string(REPLACE ";" " "	ARGV "${ARGV}")
-	dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
+	set(EXTRA_ARGS "")
+	if(OUTPUT_VARIABLE)
+		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	
+	if(NOT ${NOECHO})
+		dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
+	endif()
 	
 	### BASH_EXE ###
-	if(NOT BASH_EXE)
+	if(NOT EXISTS ${BASH_EXE})
 		if(WIN_HOST)
-			if(NOT MSYS2)
+			if(NOT EXISTS ${MSYS2}/msys2.exe)
 				dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
 			endif()
 			set(BASH_EXE ${MSYS2}/usr/bin/bash)
@@ -59,26 +64,37 @@ function(dk_bash)
 		DK_ASSERT(MSYS2_BASH_EXPORTS)
 		list(APPEND BASH_COMMANDS ${MSYS2_BASH_EXPORTS})
 	endif()
-	list(APPEND BASH_COMMANDS ${ARGV})
+	string(REPLACE ";" " "	ARGV "${ARGV}")
+	list(APPEND BASH_COMMANDS "${ARGV}")
 	
 	### BASH_COMMANDS Adjustments ###
 	if(WIN_HOST)
-		string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" BASH_COMMANDS "${BASH_COMMANDS}")
 		string(REPLACE "C:/" "/c/" BASH_COMMANDS "${BASH_COMMANDS}")
+		#string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" BASH_COMMANDS "${BASH_COMMANDS}")
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
-	dk_debug("execute_process(COMMAND ${BASH_EXE} -c '${BASH_COMMANDS}'")
-	execute_process(COMMAND ${BASH_EXE} -c "${BASH_COMMANDS}"
-		RESULT_VARIABLE result 
-		ERROR_VARIABLE error 
-		WORKING_DIRECTORY ${CURRENT_DIR} 
-		OUTPUT_STRIP_TRAILING_WHITESPACE)
-		
-	if(NOT ${result} EQUAL 0)
-		dk_debug(command	PRINTVAR)
-		dk_debug(result		PRINTVAR)
-		dk_debug(error		PRINTVAR)
+	string(REPLACE ";" "\n"	BASH_COMMANDS "${BASH_COMMANDS}")
+	
+	set(USE_dk_executeProcess 1)
+	if(USE_dk_executeProcess)
+		dk_executeProcess(${BASH_EXE} -c "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+	else()
+		execute_process(COMMAND ${BASH_EXE} -c "${BASH_COMMANDS}"
+			RESULT_VARIABLE result 
+			ERROR_VARIABLE error 
+			WORKING_DIRECTORY ${CURRENT_DIR} 
+			OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if(NOT ${result} EQUAL 0)
+			dk_debug(command	PRINTVAR)
+			dk_debug(result		PRINTVAR)
+			dk_debug(error		PRINTVAR)
+		endif()
 	endif()
+	
+	if(OUTPUT_VARIABLE)
+		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
+	endif()
+
 endfunction()
 dk_createOsMacros("dk_bash")

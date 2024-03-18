@@ -45,7 +45,6 @@ set(PROJECT_INCLUDE_DKPLUGINS	1		CACHE INTERNAL "")  # Include DKPlugin librarie
 set(PROJECT_INCLUDE_3RDPARTY	0		CACHE INTERNAL "")  # Include 3rdParty libraries in the app project
 
 dk_load(${DKCMAKE_DIR}/DKColor.cmake)
-#include(${DKCMAKE_DIR}/DKColor.cmake)
 
 ###### DKOFFLINE Warning ######
 if(${DKOFFLINE})
@@ -274,8 +273,7 @@ message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_A
 
 ##### Load Function files #################
 
-#dk_load(DKFunctions)
-#dk_load(DKFileSystem)
+#dk_load(${DKCMAKE_DIR}/DKFunctions.cmake)
+#dk_load(${DKCMAKE_DIR}/DKFileSystem.cmake)
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(dk_importVariables)
-#include(${DKCMAKE_DIR}/functions/dk_importVariables.cmake)
