@@ -73,24 +73,17 @@ endif()
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-#ANDROID_ARM32_DEBUG_dk_queueBash(
-#	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
-#	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH\n"
-#	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH\n"
-#	"${OPENSSL}/Configure no-shared --debug android-arm -D__ANDROID_API__=31")
-#ANDROID_ARM64_DEBUG_dk_queueBash(
-#	"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
-#	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
-#	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
-#	"../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
+
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 #EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE} ${OPENSSL})
-
 ANDROID_ARM32_DEBUG_dk_queueBash("export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
 	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;"
 	"../../Configure no-shared --debug android-arm -D__ANDROID_API__=31")
-ANDROID_ARM64_DEBUG_dk_queueBash(../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31)
+ANDROID_ARM64_DEBUG_dk_queueBash("export ANDROID_NDK_ROOT=${ANDROID_NDK};"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;"
+	"../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
 IOS_ARM64_DEBUG_dk_queueCommand	(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueCommand	(../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
@@ -113,20 +106,16 @@ endif()
 
 
 RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-#ANDROID_ARM32_RELEASE_dk_queueBash(
-#	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
-#	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
-#	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
-#	"../../Configure no-shared --release android-arm -D__ANDROID_API__=${ANDROID_API}")
-#ANDROID_ARM64_RELEASE_dk_queueBash(
-#	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
-#	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
-#	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
-#	"../../Configure no-shared --release android-arm64 -D__ANDROID_API__=${ANDROID_API}")
-#EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure)
 
-ANDROID_ARM32_RELEASE_dk_queueBash	(../../Configure no-shared --release android-arm -D__ANDROID_API__=31)
-ANDROID_ARM64_RELEASE_dk_queueBash	(../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31)
+#EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure)
+ANDROID_ARM32_RELEASE_dk_queueBash	("export ANDROID_NDK_ROOT=${ANDROID_NDK};"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;"
+	"../../Configure no-shared --release android-arm -D__ANDROID_API__=31")
+ANDROID_ARM64_RELEASE_dk_queueBash	("export ANDROID_NDK_ROOT=${ANDROID_NDK};"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
+	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;"
+	"../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31")
 IOS_ARM64_RELEASE_dk_queueCommand	(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueCommand		(../../Configure no-shared --release iossimulator-xcrun)
 LINUX_RELEASE_dk_queueCommand		(../../Configure no-shared --release)
