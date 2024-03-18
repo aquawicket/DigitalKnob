@@ -51,14 +51,14 @@ if(NOT EXISTS ${ANDROID_SDK})
 endif()
 
 ### SignLicenses ###
-if(NOT EXISTS ${ANDROID_SDK}/SignLicenses.cmd)
+if(NOT EXISTS ${ANDROID_SDK}/licenses OR NOT EXISTS ${ANDROID_SDK}/SignLicenses.cmd)
 	dk_copy(${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd ${ANDROID_SDK}/SignLicenses.cmd OVERWRITE)
 	dk_sleep(2) # wait 2 seconds for the file to become available
 	
 	WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
 endif()
 
-if(NOT EXISTS ${ANDROID_SDK}/SignLicenses.sh)
+if(NOT EXISTS ${ANDROID_SDK}/licenses OR NOT EXISTS ${ANDROID_SDK}/SignLicenses.sh)
 	dk_copy(${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh ${ANDROID_SDK}/SignLicenses.sh OVERWRITE)
 	dk_sleep(2) # wait 2 seconds for the file to become available
 	
