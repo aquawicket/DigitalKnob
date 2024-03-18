@@ -47,5 +47,5 @@ if(LINUX_HOST)
 	endif()
 endif()
 
-#dk_command(sh -c "command -v clang" OUTPUT_VARIABLE CLANG_C_COMPILER)
-#dk_command(sh -c "command -v clang++" OUTPUT_VARIABLE CLANG_CXX_COMPILER)
+#dk_command(command -v clang OUTPUT_VARIABLE CLANG_C_COMPILER BASH)
+#dk_command(command -v clang++ OUTPUT_VARIABLE CLANG_CXX_COMPILER BASH)

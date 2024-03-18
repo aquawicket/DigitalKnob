@@ -24,7 +24,7 @@ endif()
 
 
 ### COMPILE CMAKE ###
-set(COMPILE_CMAKE 0)
+#set(COMPILE_CMAKE 1)
 if(COMPILE_CMAKE)
 	if(NOT CMAKE_EXE)
 		dk_set(CMAKE_EXE ${CMAKE_COMMAND})
