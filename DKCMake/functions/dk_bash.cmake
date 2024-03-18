@@ -75,23 +75,8 @@ function(dk_bash)
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
 	string(REPLACE ";" "\n"	BASH_COMMANDS "${BASH_COMMANDS}")
-	
-	set(USE_dk_executeProcess 1)
-	if(USE_dk_executeProcess)
-		dk_executeProcess(${BASH_EXE} -c "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
-	else()
-		execute_process(COMMAND ${BASH_EXE} -c "${BASH_COMMANDS}"
-			RESULT_VARIABLE result 
-			ERROR_VARIABLE error 
-			WORKING_DIRECTORY ${CURRENT_DIR} 
-			OUTPUT_STRIP_TRAILING_WHITESPACE)
-		if(NOT ${result} EQUAL 0)
-			dk_debug(command	PRINTVAR)
-			dk_debug(result		PRINTVAR)
-			dk_debug(error		PRINTVAR)
-		endif()
-	endif()
-	
+	dk_executeProcess(${BASH_EXE} -c "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()

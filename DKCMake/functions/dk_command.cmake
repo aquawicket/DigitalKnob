@@ -11,8 +11,7 @@ include_guard()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_command(${ARGV})")
-	
+	dk_get_option(BASH ${ARGV})
 	dk_get_option(NOASSERT ${ARGV})
 	dk_get_option(NOECHO ${ARGV})
 	dk_get_option(NOMERGE ${ARGV})
@@ -23,12 +22,10 @@ function(dk_command)
 	endif()
 	
 	if(OUTPUT_VARIABLE)
-		#set(EXTRA_ARGS ${EXTRA_ARGS} OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
-	if(MINGW AND MSYSTEM) # OR ANDROID
-		#dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
+	if(BASH AND ((MINGW AND MSYSTEM) OR ANDROID))
 		dk_bash(${ARGV} ${NOASSERT} ${NOECHO})
 	else()
 		dk_executeProcess(${ARGV} ${NOASSERT} ${NOECHO})
