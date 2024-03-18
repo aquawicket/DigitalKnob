@@ -10,6 +10,10 @@ include_guard()
 function(dk_bash)
 	DKDEBUGFUNC(${ARGV})
 	
+	dk_get_option(NOASSERT ${ARGV})
+	dk_get_option(NOECHO ${ARGV})
+	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+	
 	string(REPLACE ";" " "	ARGV "${ARGV}")
 	dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
 	

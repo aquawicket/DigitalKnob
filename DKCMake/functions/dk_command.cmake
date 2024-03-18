@@ -27,7 +27,8 @@ function(dk_command)
 	
 	
 	if(MINGW AND MSYSTEM)
-		dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
+		#dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
+		dk_bash(${ARGV} ${NOASSERT} ${NOECHO})
 	else()
 		dk_executeProcess(${ARGV} ${NOASSERT} ${NOECHO})
 	endif()
