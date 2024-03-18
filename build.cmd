@@ -633,7 +633,10 @@ goto:eof
         call:print_var DKBRANCH_DIR
         goto:eof
     )
-        
+    
+    call:kill_process java.exe
+	call:kill_process adb.exe
+	
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :reset_all wipe
@@ -692,7 +695,10 @@ goto:eof
         call:print_var DKBRANCH_DIR
         goto:eof
     )
-        
+    
+	call:kill_process java.exe
+	call:kill_process adb.exe
+	
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :remove_all wipe
@@ -1244,6 +1250,12 @@ goto:eof
 		::echo %1 = !!!INVALID!!!
 goto:eof
 
+:: kill_process <name>
+:kill_process
+	taskkill /IM "%1" /F > nul
+goto:eof
+
+:: end
 :end
     echo "ERROR: reached the end of the script"
     pause

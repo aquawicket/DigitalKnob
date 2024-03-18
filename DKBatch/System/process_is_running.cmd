@@ -35,10 +35,9 @@
 ::           echo process_is_running calc.exe returned: %calculator_running%
 :: 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "name=%1"
-tasklist /fi "*.exe" /fo csv 2>NUL | find /I "%name%">NUL
+tasklist | find /i "%1" > nul
 if "%ERRORLEVEL%"=="0" set "%result%=1" & goto:eof
-set "%result%=0"
+set %result%=0
 
 endlocal & set "%2=%result%"
 %DKEND%
