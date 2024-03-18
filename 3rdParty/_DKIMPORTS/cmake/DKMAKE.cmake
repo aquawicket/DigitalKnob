@@ -164,5 +164,5 @@ dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent
 
 ### print CMAKE info ###
 dk_debug(CMAKE_EX	PRINTVAR)
-dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
+#dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 dk_debug(CMAKE_VERSION	PRINTVAR)

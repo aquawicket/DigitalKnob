@@ -27,7 +27,7 @@ function(dk_command)
 		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
-	if(MINGW AND MSYSTEM OR ANDROID)
+	if(MINGW AND MSYSTEM) # OR ANDROID
 		#dk_msys2_bash(${ARGV} ${NOASSERT} ${NOECHO})
 		dk_bash(${ARGV} ${NOASSERT} ${NOECHO})
 	else()

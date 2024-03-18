@@ -643,10 +643,12 @@ goto:eof
     :wipe   
     ::do we need admin rights?
     ::runas /user:Administrator cmd
-    ::do we need to kill any processes?
     ::do we need to uninstall any apps?
     ::do we need to remove any environment variables?
-       
+      
+	:: TODO: kill java.exe processes
+	:: TODO: kill adb.exe process
+	  
     cd %DIGITALKNOB_DIR%
 
     echo.
