@@ -24,7 +24,7 @@ function(dk_configure path) #ARGN
 	# Configure with Autotools	(single_config)	
 	elseif(EXISTS ${path}/configure.ac)
 		dk_info("Configuring with Autotools")
-		dk_setPath(${path}/${BUILD_DIR})
+		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		if(EXISTS ${path}/configure)
 			dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN} BASH)
 		else()
@@ -35,7 +35,7 @@ function(dk_configure path) #ARGN
 	# No Specific configure type. Just pass the arguments to dk_queueBash to run
 	else()
 		dk_info("configure type not detected. just run arguments")
-		dk_setPath(${path}/${BUILD_DIR})
+		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		dk_queueCommand(${ARGN} BASH)
 		return()
 	endif()

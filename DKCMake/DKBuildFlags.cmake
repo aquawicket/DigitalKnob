@@ -746,18 +746,44 @@ endif()
 # ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
+# https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
+# https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
+
 
 if(MULTI_CONFIG)
-	dk_set		(CMAKE_BUILD_TYPE Debug Release)
-	dk_set		(BUILD_DIR ${OS})
-else()
+	if(CMAKE_BUILD_TYPE)
+		dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
+	endif()
+	# dk_set	(CMAKE_CONFIGURATION_TYPES Debug Release)
+	dk_debug(CMAKE_CONFIGURATION_TYPES	PRINTVAR)
+	
+	dk_set	(BUILD_DIR ${OS})
+	
+elseif(SINGLE_CONFIG)
+	if(CMAKE_CONFIGURATION_TYPES)
+		dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
+	endif()
+	if(DEBUG AND RELEASE)
+		dk_error("Cannot use DEBUG and RELEASE mode at the same time in SINGLE_CONFIG mode.")
+	endif()
 	if(DEBUG)
 		dk_set	(CMAKE_BUILD_TYPE Debug)
 		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
 	elseif(RELEASE)
 		dk_set	(CMAKE_BUILD_TYPE Release)
 		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
+	else()
+		dk_error("CMAKE_BUILD_TYPE must be specified in SINGLE_CONFIG mode.")
 	endif()
+else()
+	dk_error("CONFIG not set to SINGLE_CONFIG or MULTI_CONFIG")
+endif()
+
+dk_set	(MULTI_CONFIG_BUILD_DIR ${OS})
+if(DEBUG)
+	dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${DEBUG_DIR})
+elseif(RELEASE)
+	dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${RELEASE_DIR})
 endif()
 
 
