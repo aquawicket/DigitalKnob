@@ -8,54 +8,127 @@ include_guard()
 #	@commands	- TODO
 #	@NOASSERT	- will not halt cmake if an error occurs
 #
+#	@options	- Takes in and passes the same options as execute_process
+#	execute_process(COMMAND <cmd1> [<arguments>]
+#					[COMMAND <cmd2> [<arguments>]]...
+#					[WORKING_DIRECTORY <directory>]
+#					[TIMEOUT <seconds>]
+#					[RESULT_VARIABLE <variable>]
+#					[RESULTS_VARIABLE <variable>]
+#					[OUTPUT_VARIABLE <variable>]
+#					[ERROR_VARIABLE <variable>]
+#					[INPUT_FILE <file>]
+#					[OUTPUT_FILE <file>]
+#					[ERROR_FILE <file>]
+#					[OUTPUT_QUIET]
+#					[ERROR_QUIET]
+#					[COMMAND_ECHO <where>]
+#					[OUTPUT_STRIP_TRAILING_WHITESPACE]
+#					[ERROR_STRIP_TRAILING_WHITESPACE]
+#					[ENCODING <name>]
+#					[ECHO_OUTPUT_VARIABLE]
+#					[ECHO_ERROR_VARIABLE]
+#					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
+#
 function(dk_executeProcess)
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOASSERT ${ARGV})
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
-	set(EXTRA_ARGS "")
-	set(commands ${ARGV})
-	list(REMOVE_ITEM commands COMMAND)
-	list(REMOVE_ITEM commands "cmd /c ")
-
-	if(NOT ${NOECHO})
-		string(REPLACE ";" " " print_commands "${ARGV}")
-		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
+	dk_debug("dk_executeProcess(${ARGV})")
+	dk_get_option_values(COMMAND 					${ARGV})
+	dk_get_option_value(WORKING_DIRECTORY 			${ARGV})
+	dk_get_option_value(TIMEOUT 					${ARGV})
+	dk_get_option_value(RESULT_VARIABLE 			${ARGV})
+	dk_get_option_value(RESULTS_VARIABLE 			${ARGV})
+	dk_get_option_value(OUTPUT_VARIABLE 			${ARGV})
+	dk_get_option_value(ERROR_VARIABLE 				${ARGV})
+	dk_get_option_value(INPUT_FILE 					${ARGV})
+	dk_get_option_value(OUTPUT_FILE 				${ARGV})
+	dk_get_option_value(ERROR_FILE 					${ARGV})
+	dk_get_option(OUTPUT_QUIET						${ARGV})
+	dk_get_option(ERROR_QUIET						${ARGV})
+	dk_get_option_value(COMMAND_ECHO 				${ARGV})
+	dk_get_option(OUTPUT_STRIP_TRAILING_WHITESPACE 	${ARGV})
+	dk_get_option(ERROR_STRIP_TRAILING_WHITESPACE 	${ARGV})
+	dk_get_option_value(ENCODING 					${ARGV})
+	dk_get_option(ECHO_OUTPUT_VARIABLE				${ARGV})
+	dk_get_option(ECHO_ERROR_VARIABLE				${ARGV})
+	dk_get_option_value(COMMAND_ERROR_IS_FATAL 		${ARGV})
+	
+	dk_get_option(NOASSERT 							${ARGV} REMOVE)
+	dk_get_option(NOECHO 							${ARGV} REMOVE)
+	dk_debug("dk_executeProcess(${ARGV})")
+	#if(NOT ${NOECHO})
+	#	string(REPLACE ";" " " print_commands "${ARGV}")
+	#	dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
+	#endif()
+	
+	if(NOT COMMAND)
+		list(INSERT ARGV 0 COMMAND)  # add COMMAND if missing
 	endif()
 	
-	list(FIND commands "WORKING_DIRECTORY" index)
-	if(index EQUAL -1)
-		list(APPEND EXTRA_ARGS WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+	# FIXME:  only in valid cmd shell
+	if(WIN_HOST)
+		list(FIND ARGV "cmd;/c" index)
+		if(${index} EQUAL -1)			# add cmd /c if missing
+			list(INSERT ARGV 1 "cmd;/c")
+		endif()
 	endif()
 	
-	if(OUTPUT_VARIABLE)
-		list(APPEND EXTRA_ARGS OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	if(NOT WORKING_DIRECTORY)
+		set(WORKING_DIRECTORY ${CURRENT_DIR})
+		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
 	endif()
 	
-	list(APPEND EXTRA_ARGS RESULT_VARIABLE result)
-	list(APPEND EXTRA_ARGS ERROR_VARIABLE error)
-	list(APPEND EXTRA_ARGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-	if(MSVC)	#FIXME: detect cmd instead of msvc
-		#dk_info("\n${CLR}${magenta} execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})")
-		execute_process(COMMAND cmd /c ${commands} ${EXTRA_ARGS})
-	else()
-		#dk_info("\n${CLR}${magenta} execute_process(COMMAND ${commands} ${EXTRA_ARGS})")
-		execute_process(COMMAND ${commands} ${EXTRA_ARGS})
+	if(NOT RESULT_VARIABLE)
+		set(RESULT_VARIABLE result_variable)
+		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
-	if(OUTPUT_VARIABLE)
+	if(NOT ERROR_VARIABLE)
+		set(ERROR_VARIABLE error_variable)
+		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
+	endif()
+	
+	if(NOT ECHO_OUTPUT_VARIABLE)
+		list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
+	endif()
+	
+	if(NOT ECHO_ERROR_VARIABLE)
+		list(APPEND ARGV ECHO_ERROR_VARIABLE)
+	endif()
+	
+	if(NOT OUTPUT_STRIP_TRAILING_WHITESPACE)
+		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
+	endif()
+	
+	
+	dk_info("\n${CLR}${magenta} execute_process(${ARGV})")
+	execute_process(${ARGV})
+	
+	
+	if(${OUTPUT_VARIABLE})
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
 	endif()
+	if(${ERROR_VARIABLE})
+		set(${ERROR_VARIABLE} ${${ERROR_VARIABLE}} PARENT_SCOPE)
+	endif()
 
-	if(NOT ${result} EQUAL 0)
+	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
-		dk_error(" 							" NOASSERT)
-		dk_error("command = ${commands}		" NOASSERT)
-		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
-		dk_error("result  = ${result}		" NOASSERT)
-		dk_error("output  = ${output}		" NOASSERT) 		
-		dk_error("error   = ${error}		" ${NOASSERT})
+		dk_error(" "				NOASSERT)
+		dk_error(ARGV				PRINTVAR NOASSERT)
+		dk_error(WORKING_DIRECTORY	PRINTVAR NOASSERT)
+		dk_error(RESULT_VARIABLE    PRINTVAR NOASSERT)
+		dk_error(OUTPUT_VARIABLE    PRINTVAR NOASSERT)
+		dk_error(ERROR_VARIABLE     PRINTVAR NOASSERT)
+		dk_error(" "				${NOASSERT})
+	else()
+		dk_debug(" ")
+		dk_debug(ARGV				PRINTVAR)
+		dk_debug(WORKING_DIRECTORY	PRINTVAR)
+		dk_debug(RESULT_VARIABLE    PRINTVAR)
+		dk_debug(OUTPUT_VARIABLE    PRINTVAR)
+		dk_debug(ERROR_VARIABLE     PRINTVAR)
+		dk_debug(" ")
 	endif()
 endfunction()
 dk_createOsMacros("dk_executeProcess")

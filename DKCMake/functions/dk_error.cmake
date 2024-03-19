@@ -7,19 +7,22 @@ include_guard()
 #
 #	@msg	- The message to print
 #
-macro(dk_error msg)
+function(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
 	dk_get_option(NOASSERT ${ARGV})
 	
+	dk_get_option(PRINTVAR ${ARGV})
+	dk_printvar(msg)
+	
 	dk_updateLogInfo()
 	if(NOASSERT)
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
 		#dk_exit()
 	else()
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
 	endif()
 
 	if(${WAIT_ON_ERRORS})
 		dk_wait(10)
 	endif()
-endmacro()
+endfunction()

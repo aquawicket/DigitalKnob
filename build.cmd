@@ -98,17 +98,17 @@ if "%*" NEQ "" call %*
 	call:create_cache
 	
     call:generate
-	if %TARGET_OS%==android_arm32 		call:generate_unix_makefiles
-	if %TARGET_OS%==android_arm64 		call:generate_unix_makefiles
-	if %TARGET_OS%==emscripten  		call:generate_mingw_makefiles
-	if %TARGET_OS%==win_arm64_clang		call:generate_clangarm64
-	if %TARGET_OS%==win_x86_mingw		set MSYSTEM=MINGW32	& call:generate_msystem
-	if %TARGET_OS%==win_x86_clang		set MSYSTEM=CLANG32	& call:generate_msystem
-	if %TARGET_OS%==win_x86_msvc		call:generate_msvc
-	if %TARGET_OS%==win_x86_64_mingw	set MSYSTEM=MINGW64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_clang	set MSYSTEM=CLANG64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_ucrt	    set MSYSTEM=UCRT64	& call:generate_msystem
-	if %TARGET_OS%==win_x86_64_msvc		call:generate_msvc
+	if %TARGET_OS%==android_arm32 		call:generate_toolchain android_arm32_toolchain
+	if %TARGET_OS%==android_arm64 		call:generate_toolchain android_arm64_toolchain
+	if %TARGET_OS%==emscripten  		call:generate_toolchain emscripten_toolchain
+	if %TARGET_OS%==win_arm64_clang		call:generate_toolchain windows_arm64_clang_toolchain
+	if %TARGET_OS%==win_x86_mingw		call:generate_toolchain windows_x86_mingw_toolchain
+	if %TARGET_OS%==win_x86_clang		call:generate_toolchain windows_x86_clang_toolchain
+	if %TARGET_OS%==win_x86_msvc		call:generate_toolchain windows_x86_msvc_toolchain
+	if %TARGET_OS%==win_x86_64_mingw	call:generate_toolchain windows_x86_64_mingw_toolchain
+	if %TARGET_OS%==win_x86_64_clang	call:generate_toolchain windows_x86_64_clang_toolchain
+	if %TARGET_OS%==win_x86_64_ucrt	    call:generate_toolchain windows_x86_64_ucrt_toolchain
+	if %TARGET_OS%==win_x86_64_msvc		call:generate_toolchain windows_x86_64_msvc_toolchain
 	
     call:build
     if %TYPE%==All      call:build_all
@@ -389,8 +389,66 @@ goto:eof
 	::call:add_cmake_arg --check-system-vars
 goto:eof
 
-:generate_mingw_makefiles
-	call:add_cmake_arg -G MinGW Makefiles
+:::generate_mingw_makefiles
+::	call:add_cmake_arg -G MinGW Makefiles
+::	
+::	echo.
+::  echo ****** CMAKE COMMAND ******
+::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
+::  "%CMAKE_EXE%" %CMAKE_ARGS%
+::  echo.
+::goto:eof
+
+:::generate_msystem
+::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
+::  call:print_var MSYS2
+::                
+::	call:add_cmake_arg -G MinGW Makefiles
+::  call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
+::                
+::  echo.
+::  echo ****** CMAKE COMMAND ******
+::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
+::  "%CMAKE_EXE%" %CMAKE_ARGS%
+::  echo.
+::goto:eof
+
+:::generate_unix_makefiles
+::	call:add_cmake_arg -G Unix Makefiles
+::        
+::    echo.
+::    echo ****** CMAKE COMMAND ******
+::    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+::    "%CMAKE_EXE%" %CMAKE_ARGS%
+::    echo.
+::goto:eof
+
+:::generate_msvc
+::	::call:validate_visual_studio
+::	::call:add_cmake_arg -G Visual Studio -A x64
+::  ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
+::    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
+::	
+::	echo.
+::  echo ****** CMAKE COMMAND ******
+::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
+::  "%CMAKE_EXE%" %CMAKE_ARGS%
+::  echo.
+::goto:eof
+
+:generate_toolchain <toolchain>
+	set toolchain=%1
+	
+	call:string_contains %toolchain% android hasAndroid
+	if "%hasAndroid%" == "1" set "CMAKE_GENERATOR=Unix Makefiles"
+	if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles"
+	::echo CMAKE_GENERATOR = %CMAKE_GENERATOR%
+	
+	call:add_cmake_arg -G %CMAKE_GENERATOR%
+	
+	call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
+	call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
+	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
 	
 	echo.
     echo ****** CMAKE COMMAND ******
@@ -398,44 +456,6 @@ goto:eof
     "%CMAKE_EXE%" %CMAKE_ARGS%
     echo.
 goto:eof
-
-:generate_msystem
-    call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-    call:print_var MSYS2
-                
-	call:add_cmake_arg -G MinGW Makefiles
-    call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
-                
-    echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-goto:eof
-
-:generate_unix_makefiles
-	call:add_cmake_arg -G Unix Makefiles
-        
-    echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-goto:eof
-
-:generate_msvc
-	::call:validate_visual_studio
-	::call:add_cmake_arg -G Visual Studio -A x64
-    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
-    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
-	
-	echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-goto:eof
-
 
 :add_cmake_arg <arg>
     if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
@@ -1149,6 +1169,13 @@ goto:eof
     cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
     if %ERRORLEVEL% EQU 0 echo "%command% found" & goto:eof
     echo "%command% NOT found"
+goto:eof
+
+:: string_contains <haystack> <needle> <result>
+:string_contains
+    call set "haystack=%1"
+	call set "needle=%2"
+	if not "x!haystack:%needle%=!"=="x%haystack%" set %3=1
 goto:eof
 
 :: get_filename <path> <output_variable>

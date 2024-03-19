@@ -36,6 +36,13 @@ if(WIN_HOST)
 			dk_executeProcess(${PYTHON_EXE} -m ensurepip)
 		endif()
 	endif()
+	
+	dk_appendEnvPath("${PYTHON}")
+
+	execute_process(COMMAND python --version)
+	dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
+	dk_debug(PYTHON_VERSION	PRINTVAR)
+	
 endif()
 if(MAC AND NOT EXISTS "/Applications/Python\ 2.7")
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
