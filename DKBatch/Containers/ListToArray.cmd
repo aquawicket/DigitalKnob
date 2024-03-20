@@ -38,4 +38,5 @@ endlocal & (for %%a in (%~1) do (
 	set "%3=!array_length!"
 ))
 
+set "array_length="
 %DKEND%

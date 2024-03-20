@@ -21,25 +21,43 @@
 :: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
-@echo off & call dkbatch.cmd %%~f0 %%* & @setlocal enableextensions enabledelayedexpansion
+::@echo off & call dkbatch.cmd %%~f0 %%* & @setlocal enableextensions enabledelayedexpansion
 %DKBATCH%
 
-@echo off
+:: background color
+::0 = Black       8 = Gray
+::1 = Blue        9 = Light Blue
+::2 = Green       A = Light Green
+::3 = Aqua        B = Light Aqua
+::4 = Red         C = Light Red
+::5 = Purple      D = Light Purple
+::6 = Yellow      E = Light Yellow
+::7 = White       F = Bright White
+::COLOR 1A
 
-COLOR 1A
+
+:main
+	call:enter_command
+    call:run_command
+	goto:main
+goto:end
 
 :enter_command
-echo Enter a command:
-set /p command=
+   echo Enter a command:
+   set /p command=
+goto:eof
 
-call ListToArray "%command%" command_arry length
-call PrintArray command_arry
-call DeleteArray command_arry
-set "length="
+:run_command
+   ::call ListToArray "%command%" command_arry length
+   ::call PrintArray command_arry
+   ::call CallArray command_arry
+   ::call DeleteArray command_arry
+   echo.
+   call %command%
+   echo.
+   set "command_arry="
+   set "length="
+goto:eof
 
-
-:::::::::::::::::::::::::
-set "command="
-goto :enter_command
 :end
 %DKEND%
