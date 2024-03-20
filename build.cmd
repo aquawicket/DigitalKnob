@@ -145,14 +145,14 @@ goto:eof
     set /p "choice=Choose a selection: " 
 	
 	::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
-    if "%choice%"=="1"  call:git_update
-    if "%choice%"=="2"  call:git_commit
-    if "%choice%"=="3"  call:push_assets
-    if "%choice%"=="4"  call:pull_assets
-    if "%choice%"=="5"  call:reset_all
-    if "%choice%"=="6"  call:remove_all
-    if "%choice%"=="7"  call:clear_screen
+    if "%choice%"=="0" set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
+    if "%choice%"=="1" call:git_update
+    if "%choice%"=="2" call:git_commit
+    if "%choice%"=="3" call:push_assets
+    if "%choice%"=="4" call:pull_assets
+    if "%choice%"=="5" call:reset_all
+    if "%choice%"=="6" call:remove_all
+    if "%choice%"=="7" call:clear_screen
     if "%choice%"=="8" call:dk_deleteCache & call:delete_temp_files
     if "%choice%"=="9" call:reload
     if "%choice%"=="10" exit
@@ -215,6 +215,7 @@ goto:eof
     echo.
     echo %APP% %TARGET_OS% %TYPE%
        
+    :: TODO: this list can be created using the DKCMake/toolchains files.
     echo.
     echo  1) %NATIVE_TRIPLE%
     echo.
@@ -329,6 +330,12 @@ goto:eof
     set TYPE=
 goto:eof
 
+:add_cmake_arg <arg>
+    if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
+    echo added %*
+    set CMAKE_ARGS=%CMAKE_ARGS% "%*"
+goto:eof
+
 :generate
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     echo.
@@ -389,16 +396,6 @@ goto:eof
 	::call:add_cmake_arg --check-system-vars
 goto:eof
 
-:::generate_mingw_makefiles
-::	call:add_cmake_arg -G MinGW Makefiles
-::	
-::	echo.
-::  echo ****** CMAKE COMMAND ******
-::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
-::  "%CMAKE_EXE%" %CMAKE_ARGS%
-::  echo.
-::goto:eof
-
 :::generate_msystem
 ::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 ::  call:print_var MSYS2
@@ -411,16 +408,6 @@ goto:eof
 ::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
 ::  "%CMAKE_EXE%" %CMAKE_ARGS%
 ::  echo.
-::goto:eof
-
-:::generate_unix_makefiles
-::	call:add_cmake_arg -G Unix Makefiles
-::        
-::    echo.
-::    echo ****** CMAKE COMMAND ******
-::    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-::    "%CMAKE_EXE%" %CMAKE_ARGS%
-::    echo.
 ::goto:eof
 
 :::generate_msvc
@@ -439,17 +426,19 @@ goto:eof
 :generate_toolchain <toolchain>
 	set toolchain=%1
 	
+	:: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
+	:::::: CMAKE_GENERATOR ::::::
 	call:string_contains %toolchain% android hasAndroid
 	if "%hasAndroid%" == "1" set "CMAKE_GENERATOR=Unix Makefiles"
 	if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles"
-	::echo CMAKE_GENERATOR = %CMAKE_GENERATOR%
-	
 	call:add_cmake_arg -G %CMAKE_GENERATOR%
 	
+	::::::: CMAKE_TOOLCHAIN_FILE :::::::
 	call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
 	call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
 	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
 	
+	::::::: CMake Configure :::::::
 	echo.
     echo ****** CMAKE COMMAND ******
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
@@ -457,11 +446,7 @@ goto:eof
     echo.
 goto:eof
 
-:add_cmake_arg <arg>
-    if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
-    echo added %*
-    set CMAKE_ARGS=%CMAKE_ARGS% "%*"
-goto:eof
+
 
 
 

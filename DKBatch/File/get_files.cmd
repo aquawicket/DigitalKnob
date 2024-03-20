@@ -24,18 +24,18 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:GetDirectories path
+:get_files path result
 ::
-:: GetDirectories: List the directories in the given path
+:: get_files: List the files in the given path
 ::
-:: path:  The path to list the directories in
+:: path:  	The path to list the files in
+:: result: 	file_list returned
 ::
-:: Example:  call GetDirectories C:/Windows/Sysem32
+:: Example:  call get_files C:/Windows/Sysem32 file_list
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "path=%~1"
 
-setlocal enabledelayedexpansion
-for /d %%D in (%path%*) do ( set "folders=!folders!;%%D" ) 
-endlocal & set "%1==%folders%"
+for %%f in ("%path%") do ( set "files=!files!;%%f" )
+endlocal & set "%2==%files%"
 
 %DKEND%

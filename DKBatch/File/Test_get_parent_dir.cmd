@@ -28,9 +28,9 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 goto:eof
 
 :: get_current_dir
-:get_current_dir
-    set %1=%cd%
-goto:eof
+:::get_current_dir
+::    set %1=%cd%
+::goto:eof
 
 :: get_parent_dir
 :get_parent_dir
