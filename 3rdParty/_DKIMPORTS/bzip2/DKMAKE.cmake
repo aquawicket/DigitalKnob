@@ -34,7 +34,7 @@ if(BZIP2_USE_CMAKE)
 	dk_configure(${BZIP2} -DENABLE_SHARED_LIB=OFF -DPython3_EXECUTABLE=${PYTHON3_EXE} -DENABLE_STATIC_LIB=ON)
 	
 	### COMPILE ###
-	dk_build(${BZIP2})
+	dk_build(${BZIP2} ${PYTHON3_CMAKE})
 	
 else()
 	if(NOT EXISTS ${BZIP2}/copy)
