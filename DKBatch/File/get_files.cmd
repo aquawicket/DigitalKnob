@@ -31,17 +31,11 @@
 :: path:  	The path to list the files in
 :: result: 	file_list returned
 ::
-:: Example:  call get_files C:\Windows\Sysem32 file_list
+:: Example:  call get_files C:/Windows/Sysem32 file_list
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "path=%~1"
 
-for %%f in (%path%\*) do ( 
-   set "files=!files!;%%f" 
-)
+for %%f in ("%path%") do ( set "files=!files!;%%f" )
 endlocal & set "%2==%files%"
 
-
-:: unset variables
-set "path="
-set "files="
 %DKEND%

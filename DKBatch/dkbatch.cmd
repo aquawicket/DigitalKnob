@@ -43,7 +43,7 @@ set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0
 
 ::: %DKEND% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
-if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto:eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
+if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto: eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto :eof ) )
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
 ::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
