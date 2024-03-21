@@ -41,7 +41,6 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	#message(VERBOSE "dk_parseFunctionsAndLoad(${ARGV})")
-
 	if(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})
@@ -109,6 +108,16 @@ if(dk_load IN_LIST dk_load_list)
 	set(dk_load_list dk_load CACHE INTERNAL "")
 endif()
 
+if(NOT DKCMAKE_DIR)
+	message("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
+	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+	get_filename_component(DKCMAKE ${CMAKE_CURRENT_LIST_DIR} NAME)
+	if(${DKCMAKE} STREQUAL "DKCMake")
+		set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "" FORCE)
+	endif()
+	message("DKCMAKE_DIR = ${DKCMAKE_DIR}")
+endif()
+	
 dk_load(dk_getDKPaths)
 dk_getDKPaths()
 
