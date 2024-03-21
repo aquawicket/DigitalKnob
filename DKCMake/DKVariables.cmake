@@ -55,8 +55,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 dk_debug(GNU	PRINTVAR)
 
-dk_debug(CMAKE_GENERATOR	PRINTVAR)
-
 string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 if(${index} GREATER -1)
 	dk_set(MSVC ON)
@@ -73,18 +71,20 @@ if(CMAKE_GENERATOR STREQUAL "Xcode")
 endif()
 dk_debug(XCODE	PRINTVAR)
 
+dk_debug(CMAKE_GENERATOR	PRINTVAR)
+
 
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
 option(DEBUG "Build Debug Output" OFF)
 option(RELEASE "Build Release Output" OFF)
-if(NOT DEBUG)
-if(NOT RELEASE)
+if(NOT DEBUG AND NOT RELEASE)
+#if(NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
 	dk_set(DEBUG ON)
 	dk_set(RELEASE ON)
-endif()
+#endif()
 endif()
 dk_debug(DEBUG	 PRINTVAR)
 dk_debug(RELEASE	 PRINTVAR)
@@ -96,13 +96,13 @@ dk_debug(RELEASE	 PRINTVAR)
 option(BUILD "Simpily build the app or library" OFF)
 option(REBUILD "Rebuild the app" OFF)
 option(REBUILDALL "Rebuild the app and all dependencies" ON)
-if(NOT BUILD)
-if(NOT REBUILD)
-if(NOT REBUILDALL)
+if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
+#if(NOT REBUILD)
+#if(NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
 	dk_set(REBUILDALL ON)
-endif()
-endif()
+#endif()
+#endif()
 endif()
 dk_debug(REBUILDALL	 PRINTVAR)
 
@@ -112,10 +112,10 @@ dk_debug(REBUILDALL	 PRINTVAR)
 ###########################################################################
 option(STATIC "Build Static Libraries and Plugins" OFF)
 option(SHARED "Build Shared Libraries and Plugins" OFF)
-if(NOT STATIC)
-if(NOT SHARED)
+if(NOT STATIC AND NOT SHARED)
+#if(NOT SHARED)
 	dk_set(STATIC ON)
-endif()
+#endif()
 endif()
 dk_debug(STATIC	 PRINTVAR)
 
@@ -158,149 +158,9 @@ endif()
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
-#if(CMAKE_BINARY_DIR)
-if(NOT CMAKE_SCRIPT_MODE_FILE)
-	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-	dk_debug(CMAKE_BINARY_DIR	PRINTVAR)
-	
-	### Get DK_BINARY_DIR ###
-	dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
-	dk_debug(DK_BINARY_DIR	PRINTVAR)
-	
-	### Get DK_BINARY_FOLDER ###
-	get_filename_component(DK_BINARY_FOLDER ${DK_BINARY_DIR} NAME)     
-	dk_debug(DK_BINARY_FOLDER	PRINTVAR)
-	
-	### Get DK_BINARY_OS_DIR
-	### Get DK_BINARY_TYPE ###
-	if(${DK_BINARY_DIR} MATCHES "Debug$")
-		dk_set(DK_BINARY_TYPE Debug)
-		dk_set(DEBUG ON)
-		dk_set(RELEASE OFF)
-		get_filename_component(DK_BINARY_OS_DIR ${DK_BINARY_DIR} DIRECTORY)
-	elseif(${DK_BINARY_DIR} MATCHES "Release$")
-		dk_set(DK_BINARY_TYPE Release)
-		dk_set(DEBUG OFF)
-		dk_set(RELEASE ON)
-		get_filename_component(DK_BINARY_OS_DIR ${DK_BINARY_DIR} DIRECTORY)
-	else()
-		dk_set(DK_BINARY_OS_DIR ${CMAKE_BINARY_DIR})
-	endif()
-	dk_debug(DK_BINARY_OS_DIR	PRINTVAR)
-	dk_debug(DK_BINARY_TYPE	PRINTVAR)
-	
-	### Get DK_BINARY_OS_FOLDER
-	get_filename_component(DK_BINARY_OS_FOLDER ${DK_BINARY_OS_DIR} NAME)     
-	dk_debug(DK_BINARY_OS_FOLDER	PRINTVAR)
-	
-	dk_set(DK_BINARY_OS ${DK_BINARY_OS_FOLDER})
-	### Get DK_BINARY_ENV
-	if(${DK_BINARY_OS} MATCHES "_clang$")
-		dk_set(DK_BINARY_ENV clang)
-		string(REPLACE _clang "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_mingw$")
-		dk_set(DK_BINARY_ENV mingw)
-		string(REPLACE _mingw "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_ucrt$")
-		dk_set(DK_BINARY_ENV ucrt)
-		string(REPLACE _ucrt "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_msvc$")
-		dk_set(DK_BINARY_ENV msvc)
-		string(REPLACE _msvc "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	dk_debug(DK_BINARY_ENV	PRINTVAR)
-	
-	### Get DK_BINARY_ARCH
-	if(${DK_BINARY_OS} MATCHES "_arm32$")
-		dk_set(DK_BINARY_ARCH arm32)
-		string(REPLACE _arm32 "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_arm64$")
-		dk_set(DK_BINARY_ARCH arm64)
-		string(REPLACE _arm64 "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_x86$")
-		dk_set(DK_BINARY_ARCH x86)
-		string(REPLACE _x86 "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	if(${DK_BINARY_OS} MATCHES "_x86_64$")
-		dk_set(DK_BINARY_ARCH x86_64)
-		string(REPLACE _x86_64 "" DK_BINARY_OS "${DK_BINARY_OS}")
-	endif()
-	dk_debug(DK_BINARY_ARCH	PRINTVAR)
-	
-	### Set MSYSTEM
-	if(DK_BINARY_ENV)
-		string(TOUPPER ${DK_BINARY_ENV} DK_BINARY_ENV_UPPER)
-		#if(${DK_BINARY_ARCH} MATCHES "arm32")
-		#	dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}ARM32")
-		#endif()
-		if(${DK_BINARY_ARCH} MATCHES "arm64")
-			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}ARM64")	# CLANGARM64
-		endif()
-		if(${DK_BINARY_ARCH} MATCHES "x86")
-			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}32")		# CLANG32, MINGW32
-		endif()
-		if(${DK_BINARY_ARCH} MATCHES "x86_64")
-			dk_set(MSYSTEM "${DK_BINARY_ENV_UPPER}64")		# CLANG64, MINGW64, UCRT64
-		endif()
-		dk_debug(MSYSTEM	PRINTVAR)
-		dk_set(${MSYSTEM} ON)
-	endif()
-	
-	### Get DK_BINARY_OS
-	dk_debug(DK_BINARY_OS	PRINTVAR)
-	
-	### Set DK_BINARY_OS_ARCH ###
-	dk_set(DK_BINARY_OS_ARCH "${DK_BINARY_OS}_${DK_BINARY_ARCH}")  
-	dk_debug(DK_BINARY_OS_ARCH	PRINTVAR)
-	
-	### Set DK_PROJECT_DIR ###
-	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OS_DIR} DIRECTORY)
-	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
-	dk_debug(DK_PROJECT_DIR	PRINTVAR)
+dk_getTargetTriple()
 
-	### Set OS ###
-	#dk_set(OS "${DK_BINARY_OS_ARCH}")
-	dk_set(OS "${DK_BINARY_OS_FOLDER}")
-	dk_debug(OS	PRINTVAR)
 
-	### Set ${OS} variable ON ##
-	string(TOUPPER ${DK_BINARY_OS} DK_BINARY_OS_UPPER)
-	dk_set(${DK_BINARY_OS_UPPER} ON)
-	dk_debug(${DK_BINARY_OS_UPPER}	PRINTVAR)
-
-	### Set ARCH variable ON ##
-	if(DK_BINARY_ARCH)
-		string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
-	endif()
-
-	if(DK_BINARY_ARCH_UPPER)
-		dk_set(${DK_BINARY_ARCH_UPPER} ON)
-	endif()
-	dk_debug(${DK_BINARY_ARCH_UPPER}	PRINTVAR)
-
-	### Set ${OS_ARCH} variable ON ##
-	dk_set(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} ON)
-	dk_debug(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}	PRINTVAR)
-
-	### Set DEBUG_DIR and RELEASE_DIR variables
-	if(${DK_BINARY_OS} MATCHES "ios")
-		dk_set(DEBUG_DIR Debug-iphoneos)
-		dk_set(RELEASE_DIR Release-iphoneos)
-	elseif(${DK_BINARY_OS} MATCHES "iossim")
-		dk_set(DEBUG_DIR Debug-iphonesimulator)
-		dk_set(RELEASE_DIR Release-iphonesimulator)
-	else()
-		dk_set(DEBUG_DIR Debug)
-		dk_set(RELEASE_DIR Release)
-	endif()
-	dk_debug(DEBUG_DIR	PRINTVAR)
-	dk_debug(RELEASE_DIR	PRINTVAR)
-endif()
 ### Set other OS Specific variables ###
 # RPI and RPI32
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")

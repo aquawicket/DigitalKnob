@@ -50,18 +50,13 @@ message(STATUS "################# DigitalKnob CMakeLists.txt #################")
 message(STATUS "##############################################################")
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-#CMAKE_POLICY(SET CMP0054 NEW)
 
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-set( CMAKE_MESSAGE_LOG_LEVEL "TRACE" )
+set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 
-###### Set DKCMAKE_DIR ######
-#if(NOT DKCMAKE_DIR)
-#	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
-#endif()
 include(${CMAKE_SOURCE_DIR}/functions/dk_load.cmake)
 
 

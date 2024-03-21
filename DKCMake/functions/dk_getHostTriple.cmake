@@ -90,4 +90,5 @@ macro(dk_getHostTriple)
 	set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
 	#string(STRIP "${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}" ${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
 	message(STATUS "${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST = ${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}")
+	
 endmacro()

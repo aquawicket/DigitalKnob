@@ -151,7 +151,7 @@ if(NOT EXISTS ${CMAKE_COMMAND})
 	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
 endif()
 if(NOT CMAKE_EXE)
-	dk_warn("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
+	dk_notice("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
 	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
 endif()
 

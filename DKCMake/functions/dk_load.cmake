@@ -40,7 +40,7 @@ macro(dk_load var)
 endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	message(VERBOSE "dk_parseFunctionsAndLoad(${ARGV})")
+	#message(VERBOSE "dk_parseFunctionsAndLoad(${ARGV})")
 
 	if(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)

@@ -1,11 +1,7 @@
 include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-###### Set DKCMAKE_DIR ######
-if(NOT DKCMAKE_DIR)
-	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
-endif()
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
+include($ENV{DKCMAKE_DIR}/functions/dk_load.cmake)
 
 if(CMAKE_SCRIPT_MODE_FILE)
 message(STATUS "")

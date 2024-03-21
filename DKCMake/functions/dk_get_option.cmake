@@ -23,7 +23,7 @@ macro(dk_get_option name)
 		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
 		if(ARG_REMOVE)
 			list(REMOVE_ITEM ARGV ${name})	# remove item from the functions ARGV list
-			dk_warn("${CMAKE_CURRENT_FUNCTION}(${name}) REMOVED")
+			dk_notice("${CMAKE_CURRENT_FUNCTION}(${name}) REMOVED")
 		endif()
 	else()
 		unset(${name})

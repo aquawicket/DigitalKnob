@@ -21,6 +21,9 @@ function(dk_getDKPaths)
 		get_filename_component(DKBRANCH_DIR ${DKBRANCH_DIR} DIRECTORY)
 		get_filename_component(DIGITALKNOB_DIR ${DKBRANCH_DIR} DIRECTORY)
 		get_filename_component(DIGITALKNOB ${DIGITALKNOB_DIR} NAME)
+		if(${DKBRANCH_DIR} STREQUAL ${DIGITALKNOB_DIR})
+			dk_error("could not locate digitalknob")
+		endif()
 	endwhile()
 	if(NOT EXISTS "${DKBRANCH_DIR}/.git")
 		message(FATAL_ERROR "Could not locate a .git folder in the branch directory")
@@ -35,19 +38,6 @@ function(dk_getDKPaths)
 	message(DEBUG "DKBRANCH = ${DKBRANCH}")
 	message(DEBUG "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
 	message(DEBUG "DIGITALKNOB = ${DIGITALKNOB}")
-
-	###### Set DKBRANCH_DIR ######
-	#string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
-	#math(EXPR pos "${pos}-1")
-	#string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} BRANCH_DIR)
-	#set(DKBRANCH_DIR ${BRANCH_DIR} CACHE INTERNAL "" FORCE)
-	#message(DEBUG DKBRANCH_DIR)
-	
-	###### Set DIGITALKNOB_DIR ######
-	#string(FIND "${DKBRANCH_DIR}" "digitalknob" pos)
-	#string(SUBSTRING ${DKBRANCH_DIR} 0 ${pos} DK_DIR)
-	#set(DIGITALKNOB_DIR ${DK_DIR}digitalknob CACHE INTERNAL "" FORCE)
-	#message(DEBUG DIGITALKNOB_DIR)
 	
 	##### Set DKCMAKE_DIR ######
 	set(DKCMAKE_DIR ${DKBRANCH_DIR}/DKCMake CACHE INTERNAL "" FORCE)
