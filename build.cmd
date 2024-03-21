@@ -438,7 +438,7 @@ goto:eof
 	::::::: CMAKE_TOOLCHAIN_FILE :::::::
 	call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
 	call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
-	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
+	if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
 	
 	::::::: CMake Configure :::::::
 	echo.

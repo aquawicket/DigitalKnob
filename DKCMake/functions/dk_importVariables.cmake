@@ -79,7 +79,7 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})
 	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
-	
+	dk_debug("PLUGIN_GIT_BRANCH = ${PLUGIN_GIT_BRANCH}")
 	set(PLUGIN_INSTALL_NAME ${NAME})
 	
 	if(PLUGIN_URL)																# PLUGIN_URL

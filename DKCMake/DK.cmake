@@ -124,10 +124,6 @@ endif()
 
 
 
-
-
-
-
 ##### Load Function files #################
 dk_getHostTriple()
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)

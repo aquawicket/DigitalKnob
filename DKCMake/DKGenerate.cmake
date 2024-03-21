@@ -23,9 +23,6 @@
 # SOFTWARE.
 include_guard()
 
-#get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#set(DKCMAKE_DIR ${path} CACHE INTERNAL "")
-
 dk_load(${DKCMAKE_DIR}/DKDisabled.cmake)
 
 dk_info("\n")
@@ -93,9 +90,6 @@ foreach(plugin ${dkdepend_list})
 		break()
 	endif()
 	#dk_debug(plugin_path		PRINTVAR)
-	
-	
-	#dk_setPath(${plugin_path}/${BUILD_DIR}) # NO EFFECT
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
 	dk_load(${plugin_path}/DKMAKE.cmake)
@@ -129,7 +123,7 @@ foreach(plugin ${dkdepend_list})
 			#endif()
 			add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${BUILD_DIR})
 		endif()
-	endif()
+	endif(PROJECT_INCLUDE_3RDPARTY)
 	
 	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
 	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
@@ -148,7 +142,7 @@ foreach(plugin ${dkdepend_list})
 				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
 			endif()
 		endif()
-	endif()
+	endif(INSTALL_DKLIBS)
 	
 	
 	if(${isDKPlugin} GREATER -1)
@@ -265,17 +259,16 @@ foreach(plugin ${dkdepend_list})
 					endif()
 				endforeach()
 
-			endif() # PREBUILD ON
-		endif() # NOT PROJECT_INCLUDE_DKPLUGINS)
-		
-	else() # isDKPlugin
+			endif(PREBUILD)
+		endif(NOT PROJECT_INCLUDE_DKPLUGINS) # NOT PROJECT_INCLUDE_DKPLUGINS)	
+	else()
 	
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
 				dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 			endif()
 		endforeach()
-	endif()
+	endif(${isDKPlugin} GREATER -1) # isDKPlugin
 	
 endforeach()
 
@@ -358,7 +351,7 @@ if(WIN_X86)
 	if(HAVE_DK)
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
-		#Compress the assets, they will be included by resource.rc
+		# Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compress_assets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files, excluded from assets
@@ -409,7 +402,6 @@ if(WIN_X86)
 	if(MULTI_CONFIG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
-		#target_link_libraries(${APP_NAME} -static gcc stdc++ winpthread)# -dynamic)
 		target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
 		if(DEBUG)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
@@ -611,25 +603,15 @@ if(MAC)
 	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac)
 		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac/icons.iconset)
-		#dk_executeProcess(sips -z 16 16 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 16 16 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png)
-		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png)
-		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png)
-		#dk_executeProcess(sips -z 64 64 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 64 64 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png)
-		#dk_executeProcess(sips -z 128 128 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 128 128 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png)
-		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png)
-		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png)
-		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png)
-		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png)
-		#dk_executeProcess(sips -z 1024 1024 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 1024 1024 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png)
 		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/mac/icons.icns ${DK_PROJECT_DIR}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
@@ -639,10 +621,8 @@ if(MAC)
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-	#file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 	dk_remove(${DK_PROJECT_DIR}/assets/USER NOERROR)
 	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
-	#file(REMOVE ${DK_PROJECT_DIR}/Backup)
 	dk_remove(${DK_PROJECT_DIR}/Backup NOERROR)
 	
 	####################### Create Executable Target ###################

@@ -11,9 +11,8 @@ include_guard()
 function(dk_resizeImage inpath width height outpath)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(outdir ${outpath} DIRECTORY)
-	if(NOT outdir)
-		dk_error("outdir is invalid")
-	endif()
+	DK_ASSERT(outdir)
+
 	dk_makeDirectory(${outdir})
 
 	if(MAC_HOST)

@@ -1,7 +1,7 @@
 include_guard()
 
 ###############################################################################
-# dk_getParameter(name RESULT ${ARGV})
+# dk_getParameter(name RESULT) ${ARGV}
 #
 #	get a parameter by name from within a function
 #
@@ -12,20 +12,5 @@ include_guard()
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
 	dk_get_option_value(${name} ${ARGN})
-	set(${RESULT} ${value})
-	
-	#set(index 0)
-	#foreach(arg ${ARGN})
-	#	#dk_debug(index PRINTVAR)
-	#	#dk_debug(arg PRINTVAR)
-	#	#dk_debug("ARGV${index} = ${ARGV${index}}")
-	#	if("${ARGV${index}}" STREQUAL "${name}")
-	#	#if("${arg}" STREQUAL "${name}")
-	#		math(EXPR value "${index}+1")
-	#		set(${RESULT} ${ARGV${value}})
-	#		#dk_debug("dk_getParameter(${name}) = ${${RESULT}}")
-	#	endif()
-	#	math(EXPR index "${index}+1")
-	#endforeach()
-	#dk_debug("dk_getParameter(${name}) = ${${RESULT}}")
+	set(${RESULT} ${${name}})
 endmacro()
