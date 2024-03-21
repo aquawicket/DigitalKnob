@@ -35,7 +35,8 @@
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "path=%~1"
 
-for %%f in ("%path%\*") do ( set "files=!files!;%%f" )
+for %%f in ("%path%\*") do set "files=!files!;%%f"
+
 ::echo files = %files%
 endlocal & set "%2==%files%"
 
