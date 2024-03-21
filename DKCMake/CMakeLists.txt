@@ -56,12 +56,15 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
+set( CMAKE_MESSAGE_LOG_LEVEL "TRACE" )
+
 ###### Set DKCMAKE_DIR ######
-if(NOT DKCMAKE_DIR)
-	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
-endif()
-message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
+#if(NOT DKCMAKE_DIR)
+#	set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+#endif()
+include(${CMAKE_SOURCE_DIR}/functions/dk_load.cmake)
+
+
 
 dk_load(dk_dumpAllVariables)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)

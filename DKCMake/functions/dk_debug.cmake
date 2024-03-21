@@ -14,6 +14,6 @@ function(dk_debug msg)
 		dk_printvar(msg)
 		
 		dk_updateLogInfo()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
+		message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
 	endif()
 endfunction()

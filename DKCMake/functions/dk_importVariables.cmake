@@ -80,6 +80,8 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})
 	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
 	
+	set(PLUGIN_INSTALL_NAME ${NAME})
+	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)			# PLUGIN_URL_FILENAME
 		string(REPLACE "/" ";" PLUGIN_URL_LIST ${PLUGIN_URL})					# PLUGIN_URL_LIST
@@ -103,7 +105,10 @@ function(dk_importVariables PLUGIN_URL RESULT)
 		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)							# PLUGIN_URL_LENGTH
 	endif()
 	
-	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)			# PLUGIN_IMPORT
+	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		# PLUGIN_IMPORT
+	#if(${DKIMPORTS_DIR} IN_LIST CMAKE_CURRENT_LIST_DIR)
+	#	set(PLUGIN_IMPORT 1)
+	#endif()
 	
 	### TEST
 	if(NOT PLUGIN_IMPORT)
@@ -252,7 +257,7 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	##### Warn if there are any non-alphanumeric characters in the PLUGIN_IMPORT_NAME ######
 	string(MAKE_C_IDENTIFIER ${PLUGIN_IMPORT_NAME_UPPER} PLUGIN_VAR_PREFIX)
 	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${PLUGIN_VAR_PREFIX})
-		dk_warn("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${PLUGIN_VAR_PREFIX}")
+		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${PLUGIN_VAR_PREFIX}")
 	endif()
 	
 	if(PLUGIN_INSTALL_PATH)

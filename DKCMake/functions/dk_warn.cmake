@@ -19,7 +19,7 @@ macro(dk_warn msg)
 		dk_exit()
 	endif()
 	
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+	message(WARNING "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
 
 	if(${WAIT_ON_WARNINGS})
 		dk_wait(10)

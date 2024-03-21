@@ -148,7 +148,7 @@ file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}
 set(ENV{PATH} "$ENV{PATH}:${ANDROID_ENV_PATH}")
 #message(STATUS "ENV{PATH} = $ENV{PATH}")
 dk_debug(ENV{PATH} PRINTVAR)
-dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar${exe}")
+#dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar${exe}")
 
 
 ###### ANDROID VARIABLES ######

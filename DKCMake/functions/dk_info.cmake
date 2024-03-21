@@ -13,5 +13,5 @@ function(dk_info msg)
 	dk_printvar(msg)
 	
 	dk_updateLogInfo()
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
+	message("${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
 endfunction()

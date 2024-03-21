@@ -430,10 +430,10 @@ goto:eof
 	
 	:: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
 	:::::: CMAKE_GENERATOR ::::::
-	call:string_contains %toolchain% android hasAndroid
-	if "%hasAndroid%" == "1" set "CMAKE_GENERATOR=Unix Makefiles"
-	if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles"
-	call:add_cmake_arg -G %CMAKE_GENERATOR%
+    call:string_contains %toolchain% android hasAndroid
+    if "%hasAndroid%" EQU "1" set "CMAKE_GENERATOR=Unix Makefiles"
+    if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles"
+    call:add_cmake_arg -G %CMAKE_GENERATOR%
 	
 	::::::: CMAKE_TOOLCHAIN_FILE :::::::
 	call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
@@ -1160,9 +1160,11 @@ goto:eof
 
 :: string_contains <haystack> <needle> <result>
 :string_contains
+	echo string_contains(%1 %2)
     call set "haystack=%1"
 	call set "needle=%2"
-	if not "x!haystack:%needle%=!"=="x%haystack%" set %3=1
+	if not "x!haystack:%needle%=!"=="x%haystack%" set "%3=1" & goto:eof
+	set "%3=0"
 goto:eof
 
 :: get_filename <path> <output_variable>

@@ -3,7 +3,7 @@ include_guard()
 ###############################################################################
 # dk_get_option_value(name ${ARGV}) 
 #
-#	TODO
+#	TODO: change to dk_get_option_value(name output ${ARGV}) so we change choose the variable to recieve the option in
 #
 #	EXAMPLE: dk_get_option_value(MY_ARG ${ARGV})
 #

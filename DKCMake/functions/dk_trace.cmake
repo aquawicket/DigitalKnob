@@ -13,5 +13,5 @@ function(dk_trace msg)
 	dk_printvar(msg)
 	
 	dk_updateLogInfo()
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+	message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
 endfunction()

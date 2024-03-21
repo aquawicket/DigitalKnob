@@ -94,7 +94,7 @@ function(dk_install plugin) #PATCH
 	endif()
 	
 	dk_download(${url_path} ${DKDOWNLOAD_DIR}/${dl_filename} NOERROR)
-	# TODO: delete downloaded file after extraction to conserve disk space
+	# TODO: option to delete downloaded file after extraction to conserve disk space
 	
 	if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
 		dk_error("The download files does not exist")

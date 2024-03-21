@@ -13,6 +13,9 @@ include_guard()
 #
 function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	DKDEBUGFUNC(${ARGV})
+	dk_debug("dk_download(${ARGV})")
+	dk_get_option(NOERROR ${ARGV})
+	
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
 	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
@@ -25,11 +28,6 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 #	endif()
 
 	set(dest_path ${ARGV1})
-	
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
 	
 	# Setup all src_path variables
 	if(NOT src_path)
@@ -92,8 +90,8 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	dk_debug(dest_ext PRINTVAR)
 	
 	if(EXISTS ${dest_path})
-		if(NOT noerror)
-			dk_warn("dest_path:(${dest_path}) already exists")
+		if(NOT NOERROR)
+			dk_notice("dest_path:(${dest_path}) already exists")
 		endif()
 		return()
 	endif()
@@ -113,6 +111,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	endif()
 	
 	dk_info("Downloading ${src_filename}. . . please wait")
+	message("Downloading ${src_filename}. . . please wait")
 	file(DOWNLOAD ${src_path} ${temp_path} 
 		SHOW_PROGRESS 
 		INACTIVITY_TIMEOUT 70
