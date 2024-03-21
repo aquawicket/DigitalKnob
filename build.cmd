@@ -362,8 +362,10 @@ goto:eof
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=OFF
-    if %TYPE%==Release          call:add_cmake_arg -DDEBUG=OFF & call:add_cmake_arg -DRELEASE=ON
+    ::if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=OFF
+	if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON
+    ::if %TYPE%==Release          call:add_cmake_arg -DDEBUG=OFF & call:add_cmake_arg -DRELEASE=ON
+	if %TYPE%==Release          call:add_cmake_arg -DRELEASE=ON
     if %TYPE%==All              call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=ON
     if %DKLEVEL%==Build         call:add_cmake_arg -DBUILD=ON
     if %DKLEVEL%==Rebuild       call:add_cmake_arg -DREBUILD=ON
@@ -387,7 +389,7 @@ goto:eof
 	::call:add_cmake_arg -Werror=deprecated
 	::call:add_cmake_arg --graphviz=graphviz.txt
 	::call:add_cmake_arg --system-information system_information.txt
-	::call:add_cmake_arg --debug-trycompile
+	call:add_cmake_arg --debug-trycompile
 	::call:add_cmake_arg --debug-output
 	::call:add_cmake_arg --trace
 	::call:add_cmake_arg --trace-expand

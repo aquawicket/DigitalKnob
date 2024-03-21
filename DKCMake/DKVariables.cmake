@@ -77,8 +77,8 @@ dk_debug(XCODE	PRINTVAR)
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
-option(DEBUG "Build Debug Output" ON)
-option(RELEASE "Build Release Output" ON)
+option(DEBUG "Build Debug Output" OFF)
+option(RELEASE "Build Release Output" OFF)
 if(NOT DEBUG)
 if(NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
