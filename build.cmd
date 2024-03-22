@@ -431,7 +431,7 @@ goto:eof
 ::goto:eof
 
 :generate_toolchain <toolchain>
-	set toolchain=%1
+	::set toolchain=%1
 	
 	:: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
 	:::::: CMAKE_GENERATOR ::::::
@@ -441,9 +441,9 @@ goto:eof
     call:add_cmake_arg -G %CMAKE_GENERATOR%
 	
 	::::::: CMAKE_TOOLCHAIN_FILE :::::::
-	call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
-	call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
-	if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
+	::call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
+	::call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
+	::if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
 	
 	::::::: CMake Configure :::::::
 	echo.
