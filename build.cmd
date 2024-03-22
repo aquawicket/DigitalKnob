@@ -88,8 +88,8 @@ if "%*" NEQ "" call %*
 	call:print_var DKPLUGINS_DIR
         
     call:validate_cmake
-        
-    :while_loop             
+    
+	:while_loop             
     if "%UPDATE%"==""     call:pick_update & goto:while_loop
     if "%APP%"==""        call:pick_app    & goto:while_loop
     if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
@@ -127,6 +127,9 @@ goto:eof
     
     call:read_cache
     
+	echo.
+	call:check_remote
+	
     echo.
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
@@ -520,7 +523,26 @@ goto:eof
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-::dk_call()
+:: check_remote()
+:check_remote
+	if not exist "%DKBRANCH_DIR%\.git" goto:eof
+    
+    :: git remote update > /dev/null 2> /dev/null
+	git remote update
+	
+	:: branch= $(git rev-parse --abbrev-ref HEAD)
+	call:command_to_variable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
+	
+	:: ahead= $(git rev-list --count origin/$branch..$branch)
+	call:command_to_variable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
+		
+	:: behind= $(git rev-list --count $branch..origin/$branch)
+	call:command_to_variable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
+	
+	echo %ahead% commits ahead, %behind% commits behind
+goto:eof
+
+:: dk_call()
 :dk_call
     ::TODO
     :: Here we try to use DK_call to pass on a call while echoing the call passed
@@ -529,7 +551,7 @@ goto:eof
     %*
 goto:eof
 
-::enter_manually()
+:: enter_manually()
 :enter_manually
     echo Please type the name of the library, tool or app to build. Then press enter.
     set /p input= 

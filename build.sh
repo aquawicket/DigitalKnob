@@ -124,8 +124,12 @@ function main() {
 
 ###### Pick_Update ######
 function Pick_Update() {
-	echo ""
+	#echo ""
 	read_cache
+	
+	echo ""
+	check_remote
+	echo ""
 	
 	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
 		echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
@@ -552,6 +556,17 @@ function Build_Project() {
 	echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	echo "##################################################################"
 	echo ""
+}
+
+###### check_remote ######
+function check_remote() {
+  if [ -d .git ]; then
+    git remote update > /dev/null 2> /dev/null
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    ahead=$(git rev-list --count origin/$branch..$branch)
+    behind=$(git rev-list --count $branch..origin/$branch)
+    echo "$ahead commits ahead, $behind commits behind"
+  fi
 }
 
 ###### validate_sudo ######
