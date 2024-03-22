@@ -114,9 +114,11 @@ if "%*" NEQ "" call %*
     if %TYPE%==All      call:build_all
     if %TYPE%==Release  call:build_release
     if %TYPE%==Debug    call:build_debug
-       
     call:end_message
-        
+    
+	:: TODO
+	call:post_build_menu
+    
     goto while_loop
     :while_loop_end
 goto:eof
@@ -128,7 +130,7 @@ goto:eof
     call:read_cache
     
 	echo.
-	call:check_remote
+	call:check_git_remote
 	
     echo.
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -516,6 +518,13 @@ goto:eof
 goto:eof
 
 
+:post_build_menu
+    TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    echo.
+    echo %APP% %TARGET_OS% %TYPE%
+        
+    echo.
+goto:eof
 
 
 ::--------------------------------------------------------
@@ -523,8 +532,8 @@ goto:eof
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-:: check_remote()
-:check_remote
+:: check_git_remote()
+:check_git_remote
 	if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
     :: git remote update > /dev/null 2> /dev/null

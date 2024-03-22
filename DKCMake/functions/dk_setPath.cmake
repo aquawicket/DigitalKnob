@@ -14,8 +14,8 @@ function(dk_setPath path)
 	#endif()	
 	
 	if(NOT EXISTS ${path})
-		dk_warn("path:${path} does not exist.")
-		dk_warn("Creating directory: ${path})")
+		dk_notice("path:${path} does not exist.")
+		dk_notice("Creating directory: ${path})")
 		dk_makeDirectory(${path})
 	endif()
 	

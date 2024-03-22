@@ -70,7 +70,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 		dk_error("dest_dir is invalid")
 	endif()
 	if(NOT EXISTS ${dest_dir})
-		dk_warn("dest_dir:(${dest_dir}) does not exists. It will be created")
+		dk_notice("dest_dir:(${dest_dir}) does not exists. It will be created")
 		dk_makeDirectory(${dest_dir})
 	endif()
 	dk_set(CURRENT_DIR ${dest_dir})

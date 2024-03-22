@@ -36,7 +36,7 @@ function(dk_depend plugin)
 		if(${indexb} LESS 0)
 			dk_set(DISABLED_LIBS ${DISABLED_LIBS} "${plugin}") #this list is for the build.log
 		endif()
-		dk_warn("${plugin} IS DISABLED")
+		dk_notice("${plugin} IS DISABLED")
 		return()
 	endif()
 	

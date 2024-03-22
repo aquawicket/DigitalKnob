@@ -184,7 +184,7 @@ function(dk_install plugin) #PATCH
 		file(GLOB ITEMS ${DKIMPORTS_DIR}/${plugin}/*)
 		list(LENGTH ITEMS count)
 		if(${count} GREATER 1)
-			dk_warn(" Found ${count} items in the ${plugin} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake ")
+			dk_notice(" Found ${count} items in the ${plugin} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake ")
 		endif()
 	endif()
 	
