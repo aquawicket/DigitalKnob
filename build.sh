@@ -445,83 +445,74 @@ function Generate_Project() {
 	
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		CMAKE_ARGS+=( -G "Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "emscripten" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "ios_arm32" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "ios_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "iossim_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86" ]]; then
-		#validate_gcc
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm32" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "raspberry_arm64" ]]; then
 		CMAKE_ARGS+=( "-G Unix Makefiles" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86" ]]; then
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
 	
 	if [[ "$TARGET_OS" == "win_x86_64" ]]; then
 		CMAKE_ARGS+=( "-G MSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 	fi
-
+	
+	#### CMAKE CALL ####
+	TOOLCHAIN="${TARGET_OS}_toolchain.cmake"
+	echo "TOOLCHAIN = $TOOLCHAIN"
+	if file_exists $TOOLCHAIN; then
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
+	fi
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}
+	dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
 }
 	
 ###### Build_Project ######
