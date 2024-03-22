@@ -27,11 +27,11 @@ set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
-set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")	# print function call details
-set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
-set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")	# print function call arguments
-set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")	# print function call function names
-set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line numbers
+set(PRINT_CALL_DETAILS 			0		CACHE INTERNAL "")	# print function call details
+set(PRINT_FILE_NAMES 			0 		CACHE INTERNAL "")	# print function call file names
+set(PRINT_FUNCTION_ARGUMENTS 	0 		CACHE INTERNAL "")	# print function call arguments
+set(PRINT_FUNCTION_NAMES 		0 		CACHE INTERNAL "")	# print function call function names
+set(PRINT_LINE_NUMBERS 			0		CACHE INTERNAL "")	# print function call file line numbers
 set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output

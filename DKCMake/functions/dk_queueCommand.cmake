@@ -16,7 +16,7 @@ function(dk_queueCommand)
 	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	if(QUEUE_BUILD)
-		dk_command(${ARGV} ${NOASSERT} ${NOECHO} ${NOMERGE})
+		dk_command(${ARGV})
 	endif()	
 endfunction()
 dk_createOsMacros("dk_queueCommand")

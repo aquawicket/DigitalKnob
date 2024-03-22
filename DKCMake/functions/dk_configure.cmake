@@ -32,9 +32,9 @@ function(dk_configure path) #ARGN
 		endif()
 		return()
 		
-	# No Specific configure type. Just pass the arguments to dk_queueBash to run
+	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_info("configure type not detected. just run arguments")
+		dk_notice("configure type not detected. just run arguments")
 		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		dk_queueCommand(${ARGN} BASH)
 		return()

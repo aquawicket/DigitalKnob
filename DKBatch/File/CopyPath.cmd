@@ -31,7 +31,7 @@
 ::
 :: path:  The path to the directory to create
 ::
-:: Example:  call MakeDirectory C:/Test/Folder
+:: Example:  call MakeDirectory C:\Test\Folder
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "src=%~1"
 set "dest=%~2"

@@ -11,7 +11,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 set "TINYCORELINUX_ISO=%cd%\CorePlus-current.iso"
 set "TINYCORELINUX_IMG=tinycore.img"
-set "QEMU=C:\Users\Administrator\digitalknob\Development\3rdParty\qemu"
+set "QEMU=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\qemu"
 set "QEMU_MEMORY=1G"
 set "QEMU_DRIVE_SIZE=10G"
 

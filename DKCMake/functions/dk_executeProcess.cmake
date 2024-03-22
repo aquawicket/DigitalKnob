@@ -6,7 +6,7 @@ include_guard()
 #	TODO
 #
 #	@commands	- TODO
-#	@NOASSERT	- will not halt cmake if an error occurs
+#	@NOASSERT	- don't halt cmake if an error occurs
 #
 #	@options	- Takes in and passes the same options as execute_process
 #	execute_process(COMMAND <cmd1> [<arguments>]
@@ -32,7 +32,6 @@ include_guard()
 #
 function(dk_executeProcess)
 	DKDEBUGFUNC(${ARGV})
-	dk_debug("dk_executeProcess(${ARGV})")
 	dk_get_option_values(COMMAND 					${ARGV})
 	dk_get_option_value(WORKING_DIRECTORY 			${ARGV})
 	dk_get_option_value(TIMEOUT 					${ARGV})
@@ -83,6 +82,11 @@ function(dk_executeProcess)
 		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
+	if(NOT OUTPUT_VARIABLE)
+		set(OUTPUT_VARIABLE output_variable)
+		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	
 	if(NOT ERROR_VARIABLE)
 		set(ERROR_VARIABLE error_variable)
 		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
@@ -100,9 +104,30 @@ function(dk_executeProcess)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	
+	#string(REPLACE ";" " " PRINT_ARGV "${ARGV}")
 	dk_info("\n${CLR}${magenta} execute_process(${ARGV})")
 	execute_process(${ARGV})
+	
+	
+	set(INPUT ${ARGV})
+	if(NOT ${result_variable} EQUAL 0)
+		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
+		dk_error(" "				NOASSERT)
+		dk_error(INPUT				PRINTVAR NOASSERT)
+		dk_error(WORKING_DIRECTORY	PRINTVAR NOASSERT)
+		dk_error(RESULT_VARIABLE    PRINTVAR NOASSERT)
+		dk_error(OUTPUT_VARIABLE    PRINTVAR NOASSERT)
+		dk_error(ERROR_VARIABLE     PRINTVAR NOASSERT)
+		dk_error(" "				${NOASSERT})
+	else()
+		dk_debug(" ")
+		dk_debug(INPUT		    	PRINTVAR)
+		dk_debug(WORKING_DIRECTORY	PRINTVAR)
+		dk_debug(RESULT_VARIABLE    PRINTVAR)
+		dk_debug(OUTPUT_VARIABLE    PRINTVAR)
+		dk_debug(ERROR_VARIABLE     PRINTVAR)
+		dk_debug(" ")
+	endif()
 	
 	
 	if(${OUTPUT_VARIABLE})
@@ -111,25 +136,6 @@ function(dk_executeProcess)
 	if(${ERROR_VARIABLE})
 		set(${ERROR_VARIABLE} ${${ERROR_VARIABLE}} PARENT_SCOPE)
 	endif()
-
-	set(CMND ${ARGV})
-	if(NOT ${result_variable} EQUAL 0)
-		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
-		dk_error(" "				NOASSERT)
-		dk_error(CMND				PRINTVAR NOASSERT)
-		dk_error(WORKING_DIRECTORY	PRINTVAR NOASSERT)
-		dk_error(RESULT_VARIABLE    PRINTVAR NOASSERT)
-		dk_error(OUTPUT_VARIABLE    PRINTVAR NOASSERT)
-		dk_error(ERROR_VARIABLE     PRINTVAR NOASSERT)
-		dk_error(" "				${NOASSERT})
-	else()
-		dk_debug(" ")
-		dk_debug(CMND				PRINTVAR)
-		dk_debug(WORKING_DIRECTORY	PRINTVAR)
-		dk_debug(RESULT_VARIABLE    PRINTVAR)
-		dk_debug(OUTPUT_VARIABLE    PRINTVAR)
-		dk_debug(ERROR_VARIABLE     PRINTVAR)
-		dk_debug(" ")
-	endif()
+	
 endfunction()
 dk_createOsMacros("dk_executeProcess")

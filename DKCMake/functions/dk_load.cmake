@@ -1,8 +1,5 @@
 include_guard()
 
-if(COMMAND dk_load)
-	message(FATAL_ERROR "dk_load is aleady loaded!")
-endif()
 ##################################################################################
 # dk_load(fn)
 #
@@ -65,6 +62,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 				
 		## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
 		string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
+		unset(${fn}_contents)
 		list(REMOVE_DUPLICATES ${fn}_matches)
 		foreach(${fn}_item ${${fn}_matches})
 			if(NOT ${fn}_item)
@@ -103,6 +101,10 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		message(DEBUG "include(${${fn}_file})")
 		include(${${fn}_file})
 		
+		### variable clean-up ###
+		unset(${fn}_file)
+		unset(${fn}_item)
+		unset(${fn}_matches)
 	endif()
 endmacro()
 
