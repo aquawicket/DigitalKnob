@@ -9,9 +9,9 @@ include_guard()
 #
 function(dk_bash)
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOASSERT ${ARGV})
-	dk_get_option(NOECHO ${ARGV})
-	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
+	dk_get_option(NOASSERT ${ARGV} REMOVE)
+	dk_get_option(NOECHO ${ARGV} REMOVE)
+	dk_get_option_value(OUTPUT_VARIABLE ${ARGV} REMOVE)
 	
 	set(EXTRA_ARGS "")
 	if(OUTPUT_VARIABLE)
@@ -74,8 +74,10 @@ function(dk_bash)
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
-	string(REPLACE ";" "\n"	BASH_COMMANDS "${BASH_COMMANDS}")
+	string(REPLACE ";" " & " BASH_COMMANDS "${BASH_COMMANDS}")
+	#string(REPLACE ";" "\n" BASH_COMMANDS "${BASH_COMMANDS}")
 	dk_executeProcess(${BASH_EXE} -c "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+
 
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
