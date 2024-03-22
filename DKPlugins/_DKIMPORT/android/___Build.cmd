@@ -191,7 +191,7 @@ call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%
 ::)
 if %GRADLE% NEQ 1 goto :end
 echo Compiling with Gradle
-set "GRADLE_USER_HOME=C:\Users\%USERNAME%\digitalknob\Development\3rdParty\gradle"
+set "GRADLE_USER_HOME=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\gradle"
 setx GRADLE_USER_HOME %GRADLE_USER_HOME%
 
 echo 2. Run gradle clean build

@@ -1235,7 +1235,7 @@ goto:eof
 
 :: read_cache
 :read_cache
-    echo reading cache...
+    ::echo reading cache...
     if not exist %DKBRANCH_DIR%\cache goto:eof
     set /a count = 0
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (

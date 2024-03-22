@@ -3,7 +3,7 @@
 
 setlocal enabledelayedexpansion
 
-set "dkdownload=C:\Users\%USERNAME%\digitalknob\Download"
+set "dkdownload=%HOMEDRIVE%%HOMEPATH%\digitalknob\Download"
 if not exist "%dkdownload%" (
 	set "errorlevel=The folder %dkdownload% does not exist" 
 	Goto :Error

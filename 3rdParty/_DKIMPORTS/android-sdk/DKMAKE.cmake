@@ -35,10 +35,10 @@ if(NOT EXISTS ${ANDROID_SDK})
 	#endif()
 	
 	### SignLicenses ###
-	if(OPENJDK_8U41)
+	if(EXISTS "${OPENJDK_8U41}/registerJDK.cmd")
 		WIN_HOST_dk_executeProcess(call "${OPENJDK_8U41}/registerJDK.cmd")
 	endif()
-	if(SDKMANAGER_BAT)
+	if(EXISTS "${SDKMANAGER_BAT}")
 		WIN_HOST_dk_executeProcess("${SDKMANAGER_BAT} --licenses")
 	endif()
 	#WIN_HOST_dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
