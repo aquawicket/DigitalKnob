@@ -1191,7 +1191,7 @@ goto:eof
 
 :: string_contains <haystack> <needle> <result>
 :string_contains
-	echo string_contains(%1 %2)
+	::echo string_contains(%1 %2)
     call set "haystack=%1"
 	call set "needle=%2"
 	if not "x!haystack:%needle%=!"=="x%haystack%" set "%3=1" & goto:eof
