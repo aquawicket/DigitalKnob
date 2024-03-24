@@ -74,9 +74,9 @@ function(dk_bash)
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
-	string(REPLACE ";" " & " BASH_COMMANDS "${BASH_COMMANDS}")
+	#string(REPLACE ";" " & " BASH_COMMANDS "${BASH_COMMANDS}")
 	#string(REPLACE ";" "\n" BASH_COMMANDS "${BASH_COMMANDS}")
-	dk_executeProcess(${BASH_EXE} -c "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
 
 
 	if(OUTPUT_VARIABLE)
