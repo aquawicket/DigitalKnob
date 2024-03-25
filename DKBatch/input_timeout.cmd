@@ -4,7 +4,14 @@ setlocal EnableDelayedExpansion
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 
-:::: INPUT_TIMEOUT ::::
+
+
+:: :main
+::	call::input_timeout
+::goto:eof
+
+
+::input_timeout <deadline>
 :input_timeout
 	set DEADLINE=10
 	set /a countdown=%DEADLINE%
