@@ -24,3 +24,4 @@ WIN_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win32/nasm
 WIN_HOST_dk_set(NASM_EXE ${NASM}/nasm.exe)
 
 #dk_setEnv("PATH" "${NASM_EXE}")
+dk_appendEnvPath(${NASM})

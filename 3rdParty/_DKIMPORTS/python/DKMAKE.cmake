@@ -8,10 +8,13 @@
 dk_set				(PYTHON_FOLDER python-2.7.18)
 dk_set				(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+MAC_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+LINUX_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 WIN_HOST_dk_set		(PYTHON_EXE ${PYTHON}/python.exe)
 UNIX_HOST_dk_set	(PYTHON_EXE python)
-
+if(PYTHON_DL)
+	get_filename_component(PYTHON_DL_FILE ${PYTHON_DL} NAME)
+endif()
 
 #PYTHON_CFLAGS
 #PYTHON_LIBS
@@ -22,14 +25,11 @@ UNIX_HOST_dk_set	(PYTHON_EXE python)
 if(WIN_HOST)
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_makeDirectory(${PYTHON})
-		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18.msi)
-		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
-		#dk_executeProcess(${DKDOWNLOAD_DIR}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})
-		
-		#NOTE:	TargetDir requires the path to use backslashes, yet I cannot figure out how to send this command
-		#		from cmake successfully. So, the command is placed in 'python/install.cmd' and called instead.
-		dk_executeProcess(${DKIMPORTS_DIR}/python/install.cmd)
-		dk_setEnv("PATH" "${PYTHON}") # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
+		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
+		string(REPLACE "/" "\\" DKDOWNLOAD_DIR_WINPATH "${DKDOWNLOAD_DIR}")
+		string(REPLACE "/" "\\" PYTHON_WINPATH "${PYTHON}")
+		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
+		dk_executeProcess(${PYTHON}/python_install.cmd)
 	endif()
 	if(EXISTS ${PYTHON_EXE})
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
@@ -39,7 +39,7 @@ if(WIN_HOST)
 	
 	dk_appendEnvPath("${PYTHON}")
 
-	execute_process(COMMAND python --version)
+	#execute_process(COMMAND python --version)
 	dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
 	dk_debug(PYTHON_VERSION	PRINTVAR)
 	

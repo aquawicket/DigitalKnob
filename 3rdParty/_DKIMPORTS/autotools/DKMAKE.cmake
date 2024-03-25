@@ -26,5 +26,7 @@ if(MSYSTEM)
 	elseif(UCRT64)
 		dk_command(pacman -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm)		# UCRT64
 	endif()
+	
+	set(ENV{ACLOCAL_PATH} "${MSYS2}/usr/share/aclocal")
 endif()
 

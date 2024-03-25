@@ -144,10 +144,14 @@ endif()
 
 
 # Set PATH environment  variables
-file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin" ANDROID_ENV_PATH)
-set(ENV{PATH} "$ENV{PATH}:${ANDROID_ENV_PATH}")
-#message(STATUS "ENV{PATH} = $ENV{PATH}")
-dk_debug(ENV{PATH} PRINTVAR)
+file(TO_NATIVE_PATH "${ANDROID_NDK}" ANDROID_NDK_ROOT)
+set(ENV{ANDROID_NDK_ROOT} ${ANDROID_NDK_ROOT})
+
+file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin" ANDROID_BIN)
+dk_prependEnvPath("${ANDROID_BIN}")
+
+file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include" ANDROID_INCLUDE)
+dk_prependEnvPath("${ANDROID_INCLUDE}")
 #dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar${exe}")
 
 

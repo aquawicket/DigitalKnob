@@ -5,7 +5,7 @@
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
 ### DEPEND ###
-#EMSCRIPTEN_dk_depend(openssl-cmake)
+#dk_depend(openssl-cmake)
 #EMSCRIPTEN_dk_depend(python3)
 dk_depend(dl)
 dk_depend(pthread)
@@ -13,6 +13,7 @@ dk_depend(ws2_32.lib)
 dk_depend(crypt32.lib)
 dk_depend(perl)
 WIN_HOST_dk_depend(msys2)
+dk_depend(nasm)
 
 ### IMPORT ###
 #if(MSVC)
@@ -83,9 +84,8 @@ IOSSIM_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug iossim
 LINUX_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug)
 MAC_DEBUG_dk_configure				(${OPENSSL} ../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug)
-#if(MINGW)
-WIN_DEBUG_dk_configure				(${OPENSSL} ../../Configure no-shared --debug)
-#endif()
+WIN_X86_DEBUG_dk_configure			(${OPENSSL} bash -c "../../Configure no-shared --debug mingw")
+WIN_X86_64_DEBUG_dk_configure		(${OPENSSL} bash -c "../../Configure no-shared --debug mingw64")
 
 DEBUG_dk_build(${OPENSSL})
 
@@ -99,9 +99,8 @@ IOSSIM_RELEASE_dk_configure			(${OPENSSL} ../../Configure no-shared --release io
 LINUX_RELEASE_dk_configure			(${OPENSSL} ../../Configure no-shared --release)
 MAC_RELEASE_dk_configure			(${OPENSSL} ../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_configure		(${OPENSSL} ../../Configure no-shared --release)
-if(MINGW)
-	RELEASE_dk_configure			(${OPENSSL} ../../Configure no-shared --release)
-endif()
+WIN_X86_RELEASE_dk_configure		(${OPENSSL} bash -c "../../Configure no-shared --release mingw")
+WIN_X86_64_RELEASE_dk_configure		(${OPENSSL} bash -c "../../Configure no-shared --release mingw64")
 
 RELEASE_dk_build(${OPENSSL})
 
