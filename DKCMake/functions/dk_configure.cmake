@@ -10,18 +10,13 @@ include_guard()
 function(dk_configure path) #ARGN
 	DKDEBUGFUNC(${ARGV})
 	
-	#if(NOT EXISTS ${path})
-	#	This could be a bash command then
-	#	dk_error("dk_configure(${path}): path does not exist")
-	#endif()
-	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
 		if(SINGLE_CONFIG)
 			dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		endif()
-		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 	# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
+		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
 		return()
 	
 	# Configure with Autotools	(single_config)	
@@ -29,8 +24,7 @@ function(dk_configure path) #ARGN
 		dk_info("Configuring with Autotools")
 		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		if(EXISTS ${path}/configure)
-			dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN}) # BASH_ENV)
-			#dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}") # BASH_ENV)
+			dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})	# ${DKCONFIGURE_FLAGS} from DKBuildFlags.cmake
 		else()
 			dk_warn("No configure file found. It needs to be generated with autotools")
 		endif()
@@ -40,9 +34,11 @@ function(dk_configure path) #ARGN
 	else()
 		dk_notice("configure type not detected. just run arguments")
 		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
-		dk_queueCommand(${ARGN}) # BASH_ENV)
-		#string(REPLACE ";" " " BASH_COMMANDS "${ARGN}")
-		#dk_queueCommand(bash -c "${BASH_COMMANDS}") # BASH_ENV)
+		if(MSYSTEM)
+			dk_queueCommand(bash -c "${ARGN}")
+		else()
+			dk_queueCommand(${ARGN})
+		endif()
 		return()
 	endif()
 endfunction()

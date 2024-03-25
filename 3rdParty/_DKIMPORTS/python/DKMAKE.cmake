@@ -10,19 +10,14 @@ dk_set				(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
 MAC_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 LINUX_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
-WIN_HOST_dk_set		(PYTHON_EXE ${PYTHON}/python.exe)
-UNIX_HOST_dk_set	(PYTHON_EXE python)
 if(PYTHON_DL)
 	get_filename_component(PYTHON_DL_FILE ${PYTHON_DL} NAME)
 endif()
 
-#PYTHON_CFLAGS
-#PYTHON_LIBS
-#${PYTHON}/include
-
 
 ### INSTALL ###
 if(WIN_HOST)
+	dk_set(PYTHON_EXE ${PYTHON}/python.exe)
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_makeDirectory(${PYTHON})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
@@ -31,33 +26,38 @@ if(WIN_HOST)
 		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_executeProcess(${PYTHON}/python_install.cmd)
 	endif()
-	if(EXISTS ${PYTHON_EXE})
-		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
-			dk_executeProcess(${PYTHON_EXE} -m ensurepip)
-		endif()
+	DK_ASSERT_PATH(${PYTHON_EXE})
+
+	if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
+		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
 	endif()
-	
+
 	dk_appendEnvPath("${PYTHON}")
-
-	#execute_process(COMMAND python --version)
-	dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
-	dk_debug(PYTHON_VERSION	PRINTVAR)
 	
-endif()
-if(MAC AND NOT EXISTS "/Applications/Python\ 2.7")
-	dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
-	dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
-endif()
-if(LINUX AND NOT EXISTS ${PYTHON_EXE}) #FIXME
-	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-endif()
-if(RASPBERRY AND NOT EXISTS ${PYTHON_EXE}) #FIXME
-	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-endif()
-
-ANDROID_HOST_dk_command(pkg install python)
-
-if(ANDROID_HOST)
+	dk_set(Python_INCLUDE_DIRS ${PYTHON}/include)
+	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
+	
+	dk_set(Python_LIBRARIES ${PYTHON}/libs)
+	dk_debug(Python_LIBRARIES		PRINTVAR)
+	
+elseif(MAC_HOST)
+	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	
+	if(NOT EXISTS "/Applications/Python\ 2.7")
+		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
+		dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
+		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	endif()
+	DK_ASSERT_PATH(${PYTHON_EXE})
+	
+elseif(ANDROID_HOST)
+	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	
+	if(NOT EXISTS ${PYTHON_EXE})
+		dk_command(pkg install python)
+		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	endif()
+	DK_ASSERT_PATH(${PYTHON_EXE})
 	# https://stackoverflow.com/a/38121972
 	#d_k_commandToVariable(PYTHON_VERSION "python" "--version")
 	#d_k_commandToVariable(PYTHON_INCLUDE_DIR "python" -c "import sysconfig; print(sysconfig.get_path('include'))" )
@@ -74,8 +74,25 @@ if(ANDROID_HOST)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
 
 	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
-endif ()
+	
+elseif(RASPBERRY)
+	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	if(NOT EXISTS ${PYTHON_EXE})
+		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	endif()
+	DK_ASSERT_PATH(${PYTHON_EXE})
+	
+elseif(LINUX AND NOT EXISTS ${PYTHON_EXE})
+	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	if(NOT EXISTS ${PYTHON_EXE})
+		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	endif()
+	DK_ASSERT_PATH(${PYTHON_EXE})
+endif()
 
 
 dk_debug(PYTHON_EXE		PRINTVAR)
-dk_command(${PYTHON_EXE} --version)
+dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
+dk_debug(PYTHON_VERSION	PRINTVAR)
