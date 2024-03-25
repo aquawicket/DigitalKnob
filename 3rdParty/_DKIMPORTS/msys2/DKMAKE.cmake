@@ -24,13 +24,6 @@ dk_debug(MSYS2			PRINTVAR)
 
 #dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")
 dk_set(MSYS2_GENERATOR			"MinGW Makefiles")
-dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
-dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2}/clang32/bin:$PATH")
-dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2}/clang64/bin:$PATH")
-dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2}/clangarm64/bin:$PATH")
-dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2}/mingw32/bin:$PATH")
-dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2}/mingw64/bin:$PATH")
-dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2}/ucrt64/bin:$PATH")
 
 
 if(NOT EXISTS ${MSYS2}/msys2.exe)
@@ -42,15 +35,28 @@ endif()
 #dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
 if(MSYSTEM)
-	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+	dk_set(CYGPATH_EXE ${MSYS2}/usr/bin/cygpath.exe)
 	
+	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+
 	# Set PATH environment  variables
-	if(MSYSTEM)
-		set(ENV{MSYSTEM} ${MSYSTEM})
-		string(TOLOWER ${MSYSTEM} msystem)
-		file(TO_NATIVE_PATH "${MSYS2}/usr/bin;${MSYS2}/${msystem}/bin" MSYS2_PATHS)
-		set(ENV{PATH} "${MSYS2_PATHS}")
-	endif()
+	set(ENV{MSYSTEM} ${MSYSTEM})
+	string(TOLOWER ${MSYSTEM} msystem)
+	file(TO_NATIVE_PATH "${MSYS2}/usr/bin" MSYS2_BIN)
+	file(TO_NATIVE_PATH "${MSYS2}/${msystem}/bin" MSYSTEM_BIN)
+	#set(ENV{PATH} "${MSYS2_PATHS}")
+	dk_prependEnvPath("${MSYS2_BIN}")
+	dk_prependEnvPath("${MSYSTEM_BIN}")
+	
+	dk_command(${CYGPATH_EXE} -m ${MSYS2} OUTPUT_VARIABLE MSYS2_CYGPATH)
+	#dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
+	#dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
+	#dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
+	#dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_CYGPATH}/clangarm64/bin:$PATH")
+	#dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw32/bin:$PATH")
+	#dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw64/bin:$PATH")
+	#dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
+
 
 	if(CLANG32)						
 		dk_command(pacman -S mingw-w64-clang-i686-toolchain --needed --noconfirm)		# toolchain
