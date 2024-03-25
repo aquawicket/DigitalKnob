@@ -8,7 +8,9 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 ::### call and arguments passed in ###
 ::if "%*" NEQ "" echo %%^* = %*
-if "%*" NEQ "" call %* 
+::if "%*" NEQ "" call %*
+echo %0(%*)
+if "%*" NEQ "" goto %* 
 
         
 :: https://stackoverflow.com/a/4095133/688352
