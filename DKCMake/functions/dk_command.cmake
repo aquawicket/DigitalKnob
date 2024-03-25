@@ -3,11 +3,12 @@ include_guard()
 ###############################################################################
 # dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO] [NOMERGE])
 #
-#	<cmd>			The command to run
+#	<cmd>				The command to run
 #	[<arguments>]	command arguments 
 #	[OUTPUT_VARIABLE <variable>]
-#
-#	@args	- TODO
+#	[NOASSERT]
+#	[NOECHO]
+#	[NOMERGE]
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
@@ -17,7 +18,6 @@ function(dk_command)
 	dk_get_option(NOASSERT 				${ARGV})
 	dk_get_option(NOECHO 				${ARGV})
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV})
-	dk_debug("dk_command(${ARGV})")
 	
 	if(NOT NOMERGE)
 		dk_mergeFlags("${ARGV}" ARGV)
