@@ -1,36 +1,24 @@
 @echo off
 setlocal EnableDelayedExpansion
-
 ::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 
-
-
-
 :::: INPUT_TIMEOUT ::::
 :input_timeout
-echo.
-echo A :::: INPUT_TIMEOUT :::: "%1"
-set DEADLINE=10
-set /a countdown=%DEADLINE%
+	set DEADLINE=10
+	set /a countdown=%DEADLINE%
+	if "%1" NEQ "" goto %1
+	::-------------------------------------------------------> call secondThread
 
-if "%1" NEQ "" goto %1
+	del input_timeout.tmp 2>nul >nul
+	start /b cmd /c %0 :input_timeout_secondThread
+	::-------------------------------------------------------> start secondThread
+	set n=0
+	echo Enter Text (%DEADLINE% second timeout):
 
-
-
-:input_timeout_mainthread
-echo B :input_timeout_mainthread
-del input_timeout.tmp 2>nul >nul
-
-start /b cmd /c %0 :input_timeout_secondThread
-set n=0
-echo Enter Text (%DEADLINE% second timeout):
-
-
-
-:input_timeout_loop
-	::echo C :input_timeout_loop
+	:input_timeout_loop
+	::echo :input_timeout_loop
 	set /a second+=1
 	TITLE !countdown!
 	set /a countdown-=1
@@ -48,21 +36,18 @@ echo Enter Text (%DEADLINE% second timeout):
 		set result=default
 		goto input_timeout_result
 	)
-goto:eof
+	goto:eof
+	
+	:input_timeout_secondThread
+		::echo :input_timeout_secondThread
+		set /p var=
+		> input_timeout.tmp echo !var!
+	goto:eof
 
-
-
-:input_timeout_secondThread
-	echo B :input_timeout_secondThread
-	set /p var=
-	> input_timeout.tmp echo !var!
-goto:eof
-
-
-
-:input_timeout_result
-	echo D :input_timeout_result
-	echo.
-	echo result = %result%
-	TITLE %result%
+	:input_timeout_result
+		::echo.
+		::echo :input_timeout_result
+		echo result = %result%
+		TITLE %result%
+	goto:eof
 goto:eof
