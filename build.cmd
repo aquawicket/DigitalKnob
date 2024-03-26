@@ -867,7 +867,7 @@ goto:eof
     echo "Installing git . . ."
     call:download %GIT_DL% "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%"
     echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
+    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR="%DKTOOLS_DIR%\%GIT_FOLDER%" /VERYSILENT
         
     if NOT exist "%GIT_EXE%" (
         call:assert "cannot find git"
@@ -901,7 +901,7 @@ goto:eof
     echo "Installing cmake . . ."
     call:download %CMAKE_DL% "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
     echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
-    MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%"
+    MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
         
     if NOT exist "%CMAKE_EXE%" (
         call:assert "cannot find cmake"
