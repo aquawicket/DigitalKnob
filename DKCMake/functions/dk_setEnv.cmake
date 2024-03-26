@@ -10,15 +10,15 @@ include_guard()
 #
 # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 function(dk_setEnv name value)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug("dk_setEnv(${ARGV})")
+	#DKDEBUGFUNC(${ARGV})
+	#dk_debug("dk_setEnv(${ARGV})")
 	
 	if(DEFINED ENV{${name}})
-		dk_warn("ENV{${name}} is already defined to: $ENV${name}")
+		dk_warn("ENV{${name}} is already defined") # to: $ENV{${name}}")
 	endif()
-	dk_info("Setting ENV{${name}} environment variable to ${value}")
+	#dk_info("Setting ENV{${name}} environment variable to ${value}")
 	set(ENV{${name}} ${value})
-	dk_debug(ENV${name} PRINTVAR)
+	#dk_debug(ENV{${name}} PRINTVAR)
 	
 	#dk_debug(ENV{${name}} PRINTVAR)
 	#dk_debug(value PRINTVAR)

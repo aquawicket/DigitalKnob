@@ -32,11 +32,11 @@ if(WIN_HOST)
 	dk_executeProcess(${registerJDK})
 	
 	### Set Environment Variables ###
-	#dk_setEnv(JAVA_VERSION ${JAVA_VERSION})
-	#dk_setEnv(JAVA_HOME ${JAVA_HOME})
-	#dk_setEnv(VS_JavaHome ${JAVA_HOME})
-	#dk_setEnv(STUDIO_JDK ${JAVA_HOME})
-	#dk_setEnv(STUDIO_GRADLE_JDK ${JAVA_HOME})
+	dk_setEnv(JAVA_VERSION ${JAVA_VERSION})
+	dk_setEnv(JAVA_HOME ${OPENJDK_8U41_WINPATH})
+	dk_setEnv(VS_JavaHome ${OPENJDK_8U41_WINPATH})
+	dk_setEnv(STUDIO_JDK ${OPENJDK_8U41_WINPATH})
+	dk_setEnv(STUDIO_GRADLE_JDK ${OPENJDK_8U41_WINPATH})
 endif()
 
 ### LINK ###
