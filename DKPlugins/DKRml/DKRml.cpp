@@ -609,7 +609,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	Rml::Element* element = nullptr;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos) {
 		
 		DKERROR(address+": the address is not a valid hex notation\n");
 		

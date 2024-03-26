@@ -436,8 +436,9 @@ goto:eof
 	:: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
 	:::::: CMAKE_GENERATOR ::::::
     call:string_contains %toolchain% android hasAndroid
-    if "%hasAndroid%" EQU "1" set "CMAKE_GENERATOR=Unix Makefiles"
-    if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles"
+    if "%hasAndroid%" == "1" ( 
+		set "CMAKE_GENERATOR=Unix Makefiles"
+	) else ( if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles" )
     call:add_cmake_arg -G %CMAKE_GENERATOR%
 	
 	::::::: CMAKE_TOOLCHAIN_FILE :::::::

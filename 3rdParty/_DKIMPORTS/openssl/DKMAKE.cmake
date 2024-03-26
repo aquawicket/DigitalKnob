@@ -82,7 +82,7 @@ ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug a
 IOS_ARM64_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_X86_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x32)
-LINUX_X86_64_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x64)
+LINUX_X86_64_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x86_64-clang)
 MAC_DEBUG_dk_configure				(${OPENSSL} ../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug)
 WIN_X86_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug mingw)
