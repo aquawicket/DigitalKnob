@@ -78,7 +78,7 @@ endif()
 
 EMSCRIPTEN_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 ANDROID_ARM32_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm -D__ANDROID_API__=${ANDROID_API})
-ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm64 CC=clang -D__ANDROID_API__=${ANDROID_API})
+ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=${ANDROID_API} ${DKCONFIGURE_FLAGS})
 IOS_ARM64_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_X86_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x32)

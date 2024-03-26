@@ -35,7 +35,11 @@ endif()
 
 #dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
+
+	dk_prependEnvPath("${MSYS2}/usr/bin")
 	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NOERROR)
+	dk_set(BASH_EXE "${MSYS2}/usr/bin/bash.exe")
+	dk_set(CYGPATH_EXE "${MSYS2}/usr/bin/cygpath.exe")
 	
 	if(MSYSTEM)
 		# Set PATH environment  variables
@@ -44,15 +48,6 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		string(TOLOWER ${MSYSTEM} msystem)
 		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
 	
-		dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
-		dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
-		dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
-		dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_CYGPATH}/clangarm64/bin:$PATH")
-		dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw32/bin:$PATH")
-		dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw64/bin:$PATH")
-		dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
-		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
-		
 		if(CLANG32)						
 			dk_command(pacman -S mingw-w64-clang-i686-toolchain --needed --noconfirm)
 		elseif(CLANG64)
@@ -70,10 +65,15 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
 	endif()
 	
-	dk_set(CYGPATH_EXE "${MSYS2}/usr/bin/cygpath.exe")
-	dk_set(BASH_EXE "${MSYS2}/usr/bin/bash.exe")
+	dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
-	dk_prependEnvPath("${MSYS2}/usr/bin")
+	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
+	dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
+	dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_CYGPATH}/clangarm64/bin:$PATH")
+	dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw32/bin:$PATH")
+	dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw64/bin:$PATH")
+	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
+	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
 endif()
 
 

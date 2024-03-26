@@ -505,6 +505,7 @@ function Generate_Project() {
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
 	fi
 	
+	validate_cmake
 	#### CMAKE CALL ####
 	TOOLCHAIN="${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
@@ -636,6 +637,8 @@ function file_exists() {
 
 ###### validate_cmake ######
 function validate_cmake() {
+	CMAKE_EXE=$(command -v cmake)
+	print_var CMAKE_EXE
 	if ! command_exists cmake; then
 		if [[ "$MSYSTEM" == "CLANG32" ]]; then
 			install mingw-w64-clang-i686-cmake
