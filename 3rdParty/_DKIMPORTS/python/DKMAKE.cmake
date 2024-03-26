@@ -42,7 +42,7 @@ if(WIN_HOST)
 	
 	dk_set(Python_LIBRARIES ${PYTHON}/libs)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
-	
+
 elseif(MAC_HOST)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	
@@ -51,7 +51,6 @@ elseif(MAC_HOST)
 		dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-	DK_ASSERT_PATH(${PYTHON_EXE})
 	
 elseif(ANDROID_HOST)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
@@ -77,25 +76,26 @@ elseif(ANDROID_HOST)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
 
 	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
-	
+
 elseif(RASPBERRY)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
+	
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-	DK_ASSERT_PATH(${PYTHON_EXE})
 	
-elseif(LINUX AND NOT EXISTS ${PYTHON_EXE})
+elseif(LINUX)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-	DK_ASSERT_PATH(${PYTHON_EXE})
+
 endif()
 
 
 dk_debug(PYTHON_EXE		PRINTVAR)
 dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
 dk_debug(PYTHON_VERSION	PRINTVAR)
+DK_ASSERT_PATH(${PYTHON_EXE})
