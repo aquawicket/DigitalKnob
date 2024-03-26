@@ -11,7 +11,7 @@ dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 dk_command(${EMSDK}/emsdk${bat} install latest)
 
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
+dk_command(${EMSDK}/emsdk${bat} activate latest) # --permanent)
 
 dk_command(${EMSDK}/emsdk_env${bat})
 
@@ -55,8 +55,11 @@ dk_debug(EMSCRIPTEN_MAKE_PROGRAM	PRINTVAR)
 
 ### Set Environmant Variables ###
 #set(ENV{EMSDK} 			${EMSDK})
-#set(ENV{EMSDK_NODE} 	${EMSDK_NODE})
-#set(ENV{EMSDK_PYTHON} 	${EMSDK_PYTHON})
-#dk_prependEnvPath(${EMSDK})
-#dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
-#dk_prependEnvPath(${EMSDK}/upstream/emscripten)
+#set(ENV{EMSDK_NODE} 		${EMSDK}/node/16.20.0_64bit/bin/node.exe)
+#set(ENV{EMSDK_PYTHON} 		${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
+dk_setEnv(EMSDK 		${EMSDK})
+dk_setEnv(EMSDK_NODE 	${EMSDK}/node/16.20.0_64bit/bin/node.exe)
+dk_setEnv(EMSDK_PYTHON 	${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
+dk_prependEnvPath(${EMSDK})
+dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
+dk_prependEnvPath(${EMSDK}/upstream/emscripten)

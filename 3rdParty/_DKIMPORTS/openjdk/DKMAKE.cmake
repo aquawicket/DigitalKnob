@@ -11,9 +11,28 @@
 
 #dk_set(OPENJDK_11_VERSION 11)
 
-WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip PATCH)
+WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip) # PATCH)
 #MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz PATCH)
 #LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
+
+if(WIN_HOST)
+	set(JAVA_VERSION 11)
+	set(registerJDK ${OPENJDK}/registerJDK.cmd)
+	string(REPLACE "/" "\\" OPENJDK_WINPATH "${OPENJDK}")
+	
+	file(WRITE ${registerJDK} "@echo off\n")
+	file(APPEND ${registerJDK} "set JAVA_VERSION=${JAVA_VERSION}\n")
+	file(APPEND ${registerJDK} "setx JAVA_VERSION ${JAVA_VERSION}\n")
+	file(APPEND ${registerJDK} "set JAVA_HOME=${OPENJDK_WINPATH}\n")
+	file(APPEND ${registerJDK} "setx JAVA_HOME ${OPENJDK_WINPATH}\n")
+	file(APPEND ${registerJDK} "setx VS_JavaHome ${OPENJDK_WINPATH}\n")
+	file(APPEND ${registerJDK} "setx STUDIO_JDK ${OPENJDK_WINPATH}\n")
+	file(APPEND ${registerJDK} "setx STUDIO_GRADLE_JDK ${OPENJDK_WINPATH}\n")
+	file(APPEND ${registerJDK} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d ${JAVA_VERSION} /f\n")
+	file(APPEND ${registerJDK} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"${OPENJDK_WINPATH}\" /f\n")
+	file(APPEND ${registerJDK} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"${OPENJDK_WINPATH}\\bin\\server\\jvm.dll\" /f\n")
+	dk_executeProcess(${registerJDK})
+endif()
 
 # MAC Install
 if(MAC_HOST)

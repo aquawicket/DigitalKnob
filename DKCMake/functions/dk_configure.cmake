@@ -9,12 +9,12 @@ include_guard()
 #
 function(dk_configure path) #ARGN
 	DKDEBUGFUNC(${ARGV})
-	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
 		if(SINGLE_CONFIG)
-			dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
+			string(TOUPPER ${plugin} PLUGIN_NAME)
+			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR})
 		endif()
 		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
 		return()
