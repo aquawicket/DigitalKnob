@@ -8,7 +8,7 @@ dk_import(https://github.com/madler/zlib.git)
 
 ### LINK ###
 dk_include				(${ZLIB}										ZLIB_INCLUDE_DIR)
-dk_include				(${ZLIB}/${BUILD_DIR})							ZLIB_INCLUDE_DIR2)
+dk_include				(${ZLIB}/${BUILD_DIR}							ZLIB_INCLUDE_DIR2)
 #dk_include				(${ZLIB}/${OS})
 #DEBUG_dk_include		(${ZLIB}/${OS}/${DEBUG_DIR})
 #RELEASE_dk_include		(${ZLIB}/${OS}/${RELEASE_DIR})

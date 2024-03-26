@@ -28,17 +28,9 @@ if(GIFLIB_USE_CMAKE)
 	### 3RDPARTY LINK ###
 	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
 	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
-	
-	### GENERATE / CONFIGURE ###
-	#dk_setPath			(${GIFLIB})
-		
-	# dk_queueCommand	(${GIFLIB}/autoreconf -f -i)
-	#dk_queueCommand	(bash -c "autoreconf -f -i")
 
 	dk_configure		(${GIFLIB})
-	dk_build			(${GIFLIB} giflib)
-	#dk_queueCommand	(make -C lib)
-	
+	dk_build			(${GIFLIB} giflib)	
 else()
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
@@ -54,26 +46,25 @@ else()
 	dk_setPath			(${GIFLIB})
 	dk_queueCommand		(bash -c "autoreconf -f -i")
 
-	
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 
 	if(ANDROID)
 		if(MSVC)
-			dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
-			dk_visualStudio(${GIFLIB} giflib)
+			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
+			dk_visualStudio		(${GIFLIB} giflib)
 		else()
-			dk_configure			(${GIFLIB})
-			dk_queueCommand			(make -C lib)
+			dk_configure		(${GIFLIB})
+			dk_queueCommand		(make -C lib)
 		endif()
 	else()
 		if(EMSCRIPTEN)
-			dk_queueCommand			(${DKCMAKE_BUILD} ${GIFLIB})
-			dk_build				(${GIFLIB})
+			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
+			dk_build			(${GIFLIB})
 		else()
-			dk_configure			(${GIFLIB})
-			dk_queueCommand			(make -C lib)
+			dk_configure		(${GIFLIB})
+			dk_queueCommand		(make -C lib)
 		endif()
 	endif()
 endif()

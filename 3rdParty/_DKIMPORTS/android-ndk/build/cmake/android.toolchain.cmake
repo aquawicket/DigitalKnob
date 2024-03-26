@@ -442,7 +442,6 @@ set(ANDROID_RANLIB
 set(ANDROID_STRIP
   "${ANDROID_TOOLCHAIN_ROOT}/bin/llvm-strip${ANDROID_TOOLCHAIN_SUFFIX}")
 
-message(CMAKE_VERSION = ${CMAKE_VERSION})
 if(${CMAKE_VERSION} VERSION_LESS "3.19")
     # Older CMake won't pass -target when running the compiler identification
     # test, which causes the test to fail on flags like -mthumb.

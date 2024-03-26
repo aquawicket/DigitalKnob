@@ -34,6 +34,8 @@ dk_set(EMCONFIGURE	${EMSDK}/upstream/emscripten/emconfigure${bat})
 dk_set(EMXX			${EMSDK}/upstream/emscripten/em++${bat})
 dk_set(EMRANLIB		${EMSDK}/upstream/emscripten/emranlib${bat})
 
+
+### Set Build Flag Variables ###
 WIN_HOST_dk_set	(EMSCRIPTEN_GENERATOR 		"MinGW Makefiles")
 UNIX_HOST_dk_set(EMSCRIPTEN_GENERATOR 		"Unix Makefiles")
 dk_set			(EMSCRIPTEN_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
@@ -46,6 +48,15 @@ dk_set			(EMSCRIPTEN_MAKE_PROGRAM	${EMSDK}/mingw/4.6.2_32bit/mingw32-make.exe)
 #dk_set			(EMSCRIPTEN_CONFIGURE 		)
 #dk_set			(EMSCRIPTEN_CXX_COMPILER 	)
 #dk_set			(EMSCRIPTEN_RANLIB 			)
-
 dk_debug(EMSCRIPTEN_GENERATOR		PRINTVAR)
 dk_debug(EMSCRIPTEN_TOOLCHAIN_FILE	PRINTVAR)
+dk_debug(EMSCRIPTEN_MAKE_PROGRAM	PRINTVAR)
+
+
+### Set Environmant Variables ###
+#set(ENV{EMSDK} 			${EMSDK})
+#set(ENV{EMSDK_NODE} 	${EMSDK_NODE})
+#set(ENV{EMSDK_PYTHON} 	${EMSDK_PYTHON})
+#dk_prependEnvPath(${EMSDK})
+#dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
+#dk_prependEnvPath(${EMSDK}/upstream/emscripten)

@@ -13,6 +13,24 @@ MAC_HOST_dk_import	(https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8
 LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz PATCH)
 
 
+# Create registerJDK.cmd and run it
+if(WIN_HOST)
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "@echo off")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "set \"Folder=openjdk-8u41-b04-windows-i586-14_jan_2020\"")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "set \"CurrentVersion=1.8.0_41\"")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "set \"JAVA_VERSION=%CurrentVersion%\"")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "setx JAVA_VERSION %CurrentVersion%")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "set \"JAVA_HOME=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\%Folder%\"")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "setx JAVA_HOME %JAVA_HOME%")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "setx VS_JavaHome %JAVA_HOME%")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "setx STUDIO_JDK %JAVA_HOME%")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "setx STUDIO_GRADLE_JDK %JAVA_HOME%")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "reg add \"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d %CurrentVersion% /f")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "reg add \"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%\" /v JavaHome /t REG_SZ /d \"%JAVA_HOME%\" /f")
+	file(WRITE ${OPENJDK_8U41}/registerJDK2.cmd "reg add \"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%\" /v RuntimeLib /t REG_SZ /d \"%JAVA_HOME%\bin\server\jvm.dll\" /f")
+	dk_executeProcess(${OPENJDK_8U41}/registerJDK2.cmd)
+endif()
+
 ### LINK ###
 #dk_include(${OPENJDK_8U41}/)	
 #dk_setEnv("JAVA_HOME" ${OPENJDK_8U41})
