@@ -1,7 +1,7 @@
 %dkbatch%
 
-call EndProcess java.exe
-call EndProcess adb.exe
+::call EndProcess java.exe
+::call EndProcess adb.exe
 
 call "%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\_DKIMPORTS\openjdk-8u41\registerJDK.cmd"
 

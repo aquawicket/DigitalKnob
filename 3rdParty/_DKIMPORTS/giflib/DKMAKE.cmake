@@ -68,3 +68,6 @@ else()
 		endif()
 	endif()
 endif()
+
+# FIX for other searchers
+dk_copy(${GIFLIB}/gif_lib.h ${GIFLIB}/lib/gif_lib.h)

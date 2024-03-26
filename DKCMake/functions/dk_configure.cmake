@@ -12,10 +12,15 @@ function(dk_configure path) #ARGN
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
+		
 		if(SINGLE_CONFIG)
+			# Make sure the plugin variable is alpha-numeric and uppercase
 			string(TOUPPER ${plugin} PLUGIN_NAME)
-			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR})
+			string(MAKE_C_IDENTIFIER ${PLUGIN_NAME} PLUGIN_NAME)
+			
+			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
 		endif()
+		
 		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
 		return()
 	
