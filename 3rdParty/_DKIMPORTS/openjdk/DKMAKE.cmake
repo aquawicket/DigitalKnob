@@ -18,7 +18,8 @@ WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x
 if(WIN_HOST)
 	set(JAVA_VERSION 11)
 	set(registerJDK11 ${OPENJDK}/registerJDK.cmd)
-	string(REPLACE "/" "\\" OPENJDK_WINPATH "${OPENJDK}")
+	#string(REPLACE "/" "\\" OPENJDK_WINPATH "${OPENJDK}")
+	file(TO_NATIVE_PATH "${OPENJDK}" OPENJDK_WINPATH)
 	
 	file(WRITE ${registerJDK11} "@echo off\n")
 	file(APPEND ${registerJDK11} "set JAVA_VERSION=${JAVA_VERSION}\n")

@@ -63,20 +63,17 @@ dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https:
 
 
 ###### INSTALL ######
-dk_set(ANDROID_NDK ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD})
+dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
 dk_debug(ANDROID_NDK	PRINTVAR)
 
-dk_makeDirectory			(${ANDROID_SDK}/ndk)
+dk_makeDirectory			("${ANDROID_SDK}/ndk")
 WIN_HOST_dk_import			(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} PATCH)
 MAC_HOST_dk_import			(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_NDK} PATCH)
 if(ANDROID_HOST OR LINUX_ARM64_HOST)
 	dk_import				(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK})
 else()
-	LINUX_HOST_dk_import		(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)
+	LINUX_HOST_dk_import	(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)
 endif()
-dk_setEnv					("NDK_ROOT" ${ANDROID_NDK})
-dk_setEnv					("VS_NdkRoot" ${ANDROID_NDK})
-
 
 if(APPLE_ARM32_HOST)
 	dk_set(ANDROID_HOST_TAG darwin-armv7a)
@@ -141,20 +138,6 @@ else()
 endif()
 
 
-
-
-# Set PATH environment  variables
-file(TO_NATIVE_PATH "${ANDROID_NDK}" ANDROID_NDK_ROOT)
-set(ENV{ANDROID_NDK_ROOT} ${ANDROID_NDK_ROOT})
-
-file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin" ANDROID_BIN)
-dk_prependEnvPath("${ANDROID_BIN}")
-
-file(TO_NATIVE_PATH "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include" ANDROID_INCLUDE)
-dk_prependEnvPath("${ANDROID_INCLUDE}")
-#dk_copy("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}" "${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/ar${exe}")
-
-
 ###### ANDROID VARIABLES ######
 dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
 dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
@@ -176,3 +159,15 @@ dk_debug(ANDROID_MAKE_PROGRAM	PRINTVAR)
 dk_debug(ANDROID_C_COMPILER		PRINTVAR)
 dk_debug(ANDROID_CXX_COMPILER	PRINTVAR)
 dk_debug(ANDROID_AR				PRINTVAR)
+
+
+###### ANDROID ENVIRONMENT VARIABLES ######
+dk_setEnv					("AR"				"${ANDROID_AR}")
+dk_setEnv					("CC" 				"clang")
+dk_setEnv					("CXX"				"clang++")
+dk_setEnv					("NDK_ROOT" 		"${ANDROID_NDK}")
+dk_setEnv					("VS_NdkRoot" 		"${ANDROID_NDK}")
+dk_setEnv					("ANDROID_NDK" 		"${ANDROID_NDK}")
+dk_setEnv					("ANDROID_NDK_ROOT" "${ANDROID_NDK}")
+dk_prependEnvPath("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin")
+dk_prependEnvPath("${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include")

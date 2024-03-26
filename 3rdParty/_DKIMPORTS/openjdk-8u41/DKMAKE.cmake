@@ -16,7 +16,8 @@ LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b
 if(WIN_HOST)
 	set(JAVA_VERSION 1.8.0_41)
 	set(registerJDK ${OPENJDK_8U41}/registerJDK.cmd)
-	string(REPLACE "/" "\\" OPENJDK_8U41_WINPATH "${OPENJDK_8U41}")
+	#string(REPLACE "/" "\\" OPENJDK_8U41_WINPATH "${OPENJDK_8U41}")
+	file(TO_NATIVE_PATH "${OPENJDK_8U41}" OPENJDK_8U41_WINPATH)
 	
 	file(WRITE ${registerJDK} "@echo off\n")
 	file(APPEND ${registerJDK} "set JAVA_VERSION=${JAVA_VERSION}\n")

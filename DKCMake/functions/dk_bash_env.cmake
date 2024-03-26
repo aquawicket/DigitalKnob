@@ -69,8 +69,10 @@ function(dk_bash_env)
 	
 	### BASH_COMMANDS Adjustments ###
 	if(WIN_HOST)
+	if(NOT ANDROID)
 		string(REPLACE "C:/" "/c/" BASH_COMMANDS "${BASH_COMMANDS}")
 		string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" BASH_COMMANDS "${BASH_COMMANDS}")
+	endif()
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###

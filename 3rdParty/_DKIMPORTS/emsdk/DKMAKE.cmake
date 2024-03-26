@@ -11,9 +11,9 @@ dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 dk_command(${EMSDK}/emsdk${bat} install latest)
 
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-dk_command(${EMSDK}/emsdk${bat} activate latest) # --permanent)
+dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
 
-dk_command(${EMSDK}/emsdk_env${bat})
+dk_command(set PATH=%PATH%;${PYTHON} & ${EMSDK}/emsdk_env${bat})
 
 WIN_HOST_dk_command(${EMSDK}/emsdk${bat} install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk${bat} activate mingw-4.6.2-32bit)
@@ -54,12 +54,9 @@ dk_debug(EMSCRIPTEN_MAKE_PROGRAM	PRINTVAR)
 
 
 ### Set Environmant Variables ###
-#set(ENV{EMSDK} 			${EMSDK})
-#set(ENV{EMSDK_NODE} 		${EMSDK}/node/16.20.0_64bit/bin/node.exe)
-#set(ENV{EMSDK_PYTHON} 		${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
-dk_setEnv(EMSDK 		${EMSDK})
-dk_setEnv(EMSDK_NODE 	${EMSDK}/node/16.20.0_64bit/bin/node.exe)
-dk_setEnv(EMSDK_PYTHON 	${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
-dk_prependEnvPath(${EMSDK})
-dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
-dk_prependEnvPath(${EMSDK}/upstream/emscripten)
+#dk_setEnv(EMSDK 		${EMSDK})
+#dk_setEnv(EMSDK_NODE 	${EMSDK}/node/16.20.0_64bit/bin/node.exe)
+#dk_setEnv(EMSDK_PYTHON 	${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
+#dk_prependEnvPath(${EMSDK})
+#dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
+#dk_prependEnvPath(${EMSDK}/upstream/emscripten)

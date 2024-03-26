@@ -16,12 +16,9 @@ WIN_HOST_dk_depend(msys2)
 dk_depend(nasm)
 
 ### IMPORT ###
-#if(MSVC)
-#	WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
-#else()
-#	dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
-#endif()
-dk_import			(https://github.com/openssl/openssl.git)
+#WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+#dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
+dk_import		(https://github.com/openssl/openssl.git)
 
 
 #if(EMSCRIPTEN)
@@ -81,7 +78,7 @@ endif()
 
 EMSCRIPTEN_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 ANDROID_ARM32_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm -D__ANDROID_API__=${ANDROID_API})
-ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=${ANDROID_API})
+ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug android-arm64 CC=clang -D__ANDROID_API__=${ANDROID_API})
 IOS_ARM64_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_configure			(${OPENSSL} ../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_X86_DEBUG_dk_configure		(${OPENSSL} ../../Configure no-shared --debug linux-x32)
@@ -100,8 +97,8 @@ LINUX_X86_RELEASE_dk_configure		(${OPENSSL} ../../Configure no-shared --release 
 LINUX_X86_64_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release linux-x64)
 MAC_RELEASE_dk_configure			(${OPENSSL} ../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_configure		(${OPENSSL} ../../Configure no-shared --release)
-WIN_X86_RELEASE_dk_configure		(${OPENSSL} bash -c "../../Configure no-shared --release mingw")
-WIN_X86_64_RELEASE_dk_configure		(${OPENSSL} bash -c "../../Configure no-shared --release mingw64")
+WIN_X86_RELEASE_dk_configure		(${OPENSSL} ../../Configure no-shared --release mingw)
+WIN_X86_64_RELEASE_dk_configure		(${OPENSSL} ../../Configure no-shared --release mingw64)
 
 
 ### COMPILE ###
