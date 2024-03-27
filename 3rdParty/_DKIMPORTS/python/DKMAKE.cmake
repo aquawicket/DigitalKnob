@@ -43,7 +43,7 @@ if(WIN_HOST)
 	
 	dk_set(Python_LIBRARIES ${PYTHON}/libs)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
-
+	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
 elseif(MAC_HOST)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	
@@ -52,7 +52,7 @@ elseif(MAC_HOST)
 		dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-	
+	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
 elseif(ANDROID_HOST)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	
@@ -77,7 +77,7 @@ elseif(ANDROID_HOST)
 	dk_debug(Python_LIBRARIES		PRINTVAR)
 
 	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
-
+	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
 elseif(RASPBERRY)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	
@@ -85,14 +85,14 @@ elseif(RASPBERRY)
 		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-	
+	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
 elseif(LINUX)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 		dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	endif()
-
+	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
 endif()
 
 #dk_debug(PYTHON_EXE		PRINTVAR)
