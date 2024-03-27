@@ -4,10 +4,16 @@
 # Linux		https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
 # https://silentinstallhq.com/python-2-7-silent-install-how-to-guide/
 
+# https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe/download
 
-dk_set				(PYTHON_FOLDER python-2.7.18)
+
+#dk_set				(PYTHON_FOLDER python-2.7.18)
+#WIN_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+
+WIN_dk_set			(PYTHON_FOLDER python-2.7.17)
+UNIX_dk_set			(PYTHON_FOLDER python-2.7.18)
 dk_set				(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
-WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+WIN_HOST_dk_set		(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
 MAC_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 LINUX_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 if(PYTHON_DL)
@@ -22,14 +28,13 @@ if(WIN_HOST)
 	if(NOT EXISTS ${PYTHON_EXE})
 		dk_makeDirectory(${PYTHON})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
-		#string(REPLACE "/" "\\" DKDOWNLOAD_DIR_WINPATH "${DKDOWNLOAD_DIR}")
-		#string(REPLACE "/" "\\" PYTHON_WINPATH "${PYTHON}")
-		#file(TO_NATIVE_PATH "${DKDOWNLOAD_DIR}" DKDOWNLOAD_DIR_WINPATH)
-		#file(TO_NATIVE_PATH "${PYTHON}" PYTHON_WINPATH)
-		cmake_path(NATIVE_PATH DKDOWNLOAD_DIR NORMALIZE DKDOWNLOAD_DIR_WINPATH)
-		cmake_path(NATIVE_PATH PYTHON NORMALIZE PYTHON_WINPATH)
-		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
-		dk_executeProcess(${PYTHON}/python_install.cmd)
+
+		#cmake_path(NATIVE_PATH DKDOWNLOAD_DIR NORMALIZE DKDOWNLOAD_DIR_WINPATH)
+		#cmake_path(NATIVE_PATH PYTHON NORMALIZE PYTHON_WINPATH)
+		#file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
+		#dk_executeProcess(${PYTHON}/python_install.cmd)
+		
+		dk_executeProcess(${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
 	endif()
 
 	if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
@@ -41,9 +46,9 @@ if(WIN_HOST)
 	dk_set(Python_INCLUDE_DIRS ${PYTHON}/include)
 	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
 	
-	dk_set(Python_LIBRARIES ${PYTHON}/libs)
-	dk_debug(Python_LIBRARIES		PRINTVAR)
-	dk_set(PYTHON_EXE ${PYTHON_EXE})	#cache the variable
+	dk_set(Python_LIBRARIES 	${PYTHON}/libs)
+	dk_debug(Python_LIBRARIES	PRINTVAR)
+	dk_set(PYTHON_EXE 			${PYTHON_EXE})	#cache the variable
 elseif(MAC_HOST)
 	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	

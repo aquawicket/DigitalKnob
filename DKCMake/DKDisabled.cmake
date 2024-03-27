@@ -23,9 +23,9 @@
 # SOFTWARE.
 include_guard()
 
-if(WIN_HOST)
-	dk_disable(python)
-endif()
+#if(WIN_HOST)
+#	dk_disable(python)
+#endif()
 # DISABLED FOR ALL TARGETS
 
 dk_disable(DKPlugin1)				# TODO
