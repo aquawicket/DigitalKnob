@@ -4,6 +4,8 @@
 # Linux		https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
 # https://silentinstallhq.com/python-2-7-silent-install-how-to-guide/
 
+# Portable Python 2.7.17
+# https://sourceforge.net/projects/portable-python/
 # https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe/download
 
 
