@@ -5,9 +5,10 @@
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 
-
-### DOWNLOAD ###
 # https://github.com/Kitware/CMake/releases
+### DOWNLOAD ###
+
+### INSTALLERS ###
 #ANDROID_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 #LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 #LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
@@ -16,12 +17,13 @@
 #WIN_X86_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
 #WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
 
+### BINARY DISTRIBUTIONS (PORTABLE) ###
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
-#LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)			# Unknown CMake command "LINUX_ARM64_HOST_dk_import"
+LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)			# Unknown CMake command "LINUX_ARM64_HOST_dk_import"
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz)
 #MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz)	# macOS 10.10 or later
 MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz)		# macOS 10.13 or later
-#WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)			# Unknown CMake command "WIN_ARM64_HOST_dk_import"
+WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)			# Unknown CMake command "WIN_ARM64_HOST_dk_import"
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
 if(NOT CMAKE_DL)
@@ -34,6 +36,7 @@ get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
 
+### IMPORT ###
 dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
 
 
@@ -109,7 +112,7 @@ if(MSYSTEM)
 	dk_depend(msys2)
 	DK_ASSERT(MSYS2)
 	
-	dk_command(bash -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE NOASSERT)
+	dk_find_program(CMAKE_EXE cmake)
 	if(CMAKE_EXE)
 		dk_command(${CYGPATH_EXE} -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
 	endif()
@@ -137,7 +140,7 @@ if(MSYSTEM)
 		endif()
 	endif()
 	
-	dk_command(bash -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
+	dk_find_program(CMAKE_EXE cmake)
 	if(CMAKE_EXE)
 		dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
 	endif()
@@ -158,7 +161,7 @@ else()
 			endif()
 		endif()
 	else()
-		dk_command(bash -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
+		dk_find_program(CMAKE_EXE cmake)
 		if(NOT EXISTS ${CMAKE_EXE})
 			if(MAC_HOST)
 				dk_command(brew install cmake)
@@ -167,31 +170,26 @@ else()
 			elseif(LINUX_HOST)
 				dk_command(sudo apt-get -y install cmake)
 			endif()
-			dk_command(bash -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
+			dk_find_program(CMAKE_EXE cmake)
 		endif()
 	endif()
 endif()
 
 
-### validate CMAKE variables ###
-DK_ASSERT(CMAKE_COMMAND)
 
-if(NOT EXISTS ${CMAKE_COMMAND})
-	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
-endif()
-if(NOT CMAKE_EXE)
-	dk_notice("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
-	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
-endif()
 
-DK_ASSERT(CMAKE_EXE)
-if(NOT EXISTS ${CMAKE_EXE})
-	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
-endif()
+#if(NOT EXISTS ${CMAKE_COMMAND})
+#	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
+#endif()
+#if(NOT CMAKE_EXE)
+#	dk_notice("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
+#	set(CMAKE_EXE "${CMAKE_COMMAND}" CACHE INTERNAL "" FORCE)
+#endif()
+#
+#if(NOT EXISTS ${CMAKE_EXE})
+#	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
+#endif()
+#
+#dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent
 
-dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent
 
-### print CMAKE info ###
-dk_debug(CMAKE_EXE	PRINTVAR)
-dk_command(${CMAKE_EXE} --version) #OUTPUT_VARIABLE CMAKE_VERSION)
-dk_debug(CMAKE_VERSION	PRINTVAR)
