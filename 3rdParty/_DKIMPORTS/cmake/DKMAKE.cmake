@@ -47,6 +47,7 @@ if(NOT CMAKE_EXE)
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 	return()
 endif()
+
 return()
 
 

@@ -30,8 +30,9 @@ dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 
 dk_find_program(PYTHON_EXE python ${PYTHON})
 
-# INSTALL 
+### INSTALL ###
 if(NOT PYTHON_EXE)
+	dk_debug(" Installing python . . . . ")
 	if(WIN_HOST)
 		#dk_makeDirectory(${PYTHON})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})

@@ -1,22 +1,49 @@
 # https://git-scm.com
 # https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe
 
-if(EXISTS ${GIT_EXE})
-	dk_debug("GIT_EXE already set to: ${GIT_EXE}")
+
+### DOWNLOAD ###
+#WIN_X86_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe)
+#WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe)
+WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
+WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
+if(NOT GIT_DL)
+	dk_error("GIT_DL is invalid!")
 	return()
 endif()
 
 
-### DOWNLOAD ###
-WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe)
-WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe)
+### Get GIT variables ###
+get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
+dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
+string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
+string(TOLOWER ${GIT_FOLDER} GIT_FOLDER)
+dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
 
-if(GIT_DL)
-	get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
-	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
-	string(TOLOWER ${GIT_FOLDER} GIT_FOLDER)
+
+### First Check ###
+dk_find_program(GIT_EXE git ${GIT}/bin)
+
+### INSTALL ###
+if(NOT GIT_EXE)
+	dk_debug(" Installing git . . . . ")
+	if(WIN_HOST)
+		dk_download(${GIT_DL} ${DKDOWNLOAD_DIR})			
+		file(TO_NATIVE_PATH "${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
+		file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
+		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
+	endif()
 endif()
+
+
+## Second Check ###
+dk_find_program(GIT_EXE git ${GIT}/bin)
+if(NOT GIT_EXE)
+	dk_error("COULD NOT FIND GIT_EXE")
+	return()
+endif()
+
+return()
 
 
 #if(MSYSTEM)
@@ -52,7 +79,8 @@ endif()
 			file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
 			message(STATUS "${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH}")
 			#dk_command(${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
-			execute_process(COMMAND ${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
+			#execute_process(COMMAND ${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
+			execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
 		endif()
 	else()
 		#dk_command(command -v git OUTPUT_VARIABLE GIT_EXE) # BASH_ENV)
@@ -72,16 +100,16 @@ endif()
 #endif()
 
 ### validate GIT variables ###
-if(NOT GIT_EXE)
-	dk_error("GIT_EXE:${GIT_EXE} is empty")
-endif()
-if(NOT EXISTS ${GIT_EXE})
-	dk_error("GIT_EXE:${GIT_EXE} does not exist")
-endif()
-
-dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent
-
-### print GIT info ###
-dk_debug(GIT_EXE		PRINTVAR)
-dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
-dk_debug(GIT_VERSION	PRINTVAR)
+#if(NOT GIT_EXE)
+#	dk_error("GIT_EXE:${GIT_EXE} is empty")
+#endif()
+#if(NOT EXISTS ${GIT_EXE})
+#	dk_error("GIT_EXE:${GIT_EXE} does not exist")
+#endif()
+#
+#dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent
+#
+#### print GIT info ###
+#dk_debug(GIT_EXE		PRINTVAR)
+#dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
+#dk_debug(GIT_VERSION	PRINTVAR)

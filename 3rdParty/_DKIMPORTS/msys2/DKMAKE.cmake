@@ -34,15 +34,14 @@ if(NOT MSYS2_EXE)
 endif()	
 
 
-#dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-
 	dk_prependEnvPath("${MSYS2}/usr/bin")
 	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NOERROR)
 
 	dk_find_program(BASH_EXE bash "${MSYS2}/usr/bin")
 	dk_find_program(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
 	dk_find_program(PACMAN_EXE pacman "${MSYS2}/usr/bin")
+	#dk_addFirewallAllow("pacman" "${PACMAN_EXE}")
 	
 	if(MSYSTEM)
 		# Set PATH environment  variables
