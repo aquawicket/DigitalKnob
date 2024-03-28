@@ -10,6 +10,8 @@ include_guard()
 #
 function(dk_importDownload url) #install_path #PATCH
 	DKDEBUGFUNC(${ARGV})
+	dk_debug("dk_importDownload(${ARGV})")
+	dk_wait()
 	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
 	#foreach(item ${url_list})
 	#	dk_verbose(item		PRINTVAR)

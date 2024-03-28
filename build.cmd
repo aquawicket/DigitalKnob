@@ -37,14 +37,22 @@ if "%*" NEQ "" call %*
     ::--------------------------------------------------------
     set SCRIPT_DIR=%~dp0
     set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
-	call:print_var SCRIPT_DIR
+    call:print_var SCRIPT_DIR
     set SCRIPT_NAME=%~nx0
-	call:print_var SCRIPT_NAME
+    call:print_var SCRIPT_NAME
     echo %SCRIPT_DIR%\%SCRIPT_NAME%
 
-    set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi
-    set CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
-    set CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi
+    ::set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi
+    ::set CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi
+    ::set CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi
+
+    set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
+    set "CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip"
+    set "CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
+    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz"
+    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
+    set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz"
+    set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
 
     set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe
     set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe
@@ -73,51 +81,51 @@ if "%*" NEQ "" call %*
         
     set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
     call:print_var NATIVE_TRIPLE
-	
-	set NATIVE_ENV=clang
-	set NATIVE_TRIPLE=%NATIVE_TRIPLE%_%NATIVE_ENV%
+    
+    set NATIVE_ENV=clang
+    set NATIVE_TRIPLE=%NATIVE_TRIPLE%_%NATIVE_ENV%
 
     call:validate_git
     call:validate_branch
 
-	call:print_var DKBRANCH_DIR
-	call:print_var DKAPPS_DIR
+    call:print_var DKBRANCH_DIR
+    call:print_var DKAPPS_DIR
     call:print_var DKCMAKE_DIR
     call:print_var DK3RDPARTY_DIR
     call:print_var DKIMPORTS_DIR
-	call:print_var DKPLUGINS_DIR
+    call:print_var DKPLUGINS_DIR
         
     call:validate_cmake
     
-	:while_loop             
+    :while_loop             
     if "%UPDATE%"==""     call:pick_update & goto:while_loop
     if "%APP%"==""        call:pick_app    & goto:while_loop
     if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
     if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
-	call:create_cache
-	
+    call:create_cache
+    
     call:generate
-	if %TARGET_OS%==android_arm32 		call:generate_toolchain android_arm32_toolchain
-	if %TARGET_OS%==android_arm64 		call:generate_toolchain android_arm64_toolchain
-	if %TARGET_OS%==emscripten  		call:generate_toolchain emscripten_toolchain
-	if %TARGET_OS%==win_arm64_clang		call:generate_toolchain windows_arm64_clang_toolchain
-	if %TARGET_OS%==win_x86_mingw		call:generate_toolchain windows_x86_mingw_toolchain
-	if %TARGET_OS%==win_x86_clang		call:generate_toolchain windows_x86_clang_toolchain
-	if %TARGET_OS%==win_x86_msvc		call:generate_toolchain windows_x86_msvc_toolchain
-	if %TARGET_OS%==win_x86_64_mingw	call:generate_toolchain windows_x86_64_mingw_toolchain
-	if %TARGET_OS%==win_x86_64_clang	call:generate_toolchain windows_x86_64_clang_toolchain
-	if %TARGET_OS%==win_x86_64_ucrt	    call:generate_toolchain windows_x86_64_ucrt_toolchain
-	if %TARGET_OS%==win_x86_64_msvc		call:generate_toolchain windows_x86_64_msvc_toolchain
-	
+    if %TARGET_OS%==android_arm32      call:generate_toolchain android_arm32_toolchain
+    if %TARGET_OS%==android_arm64      call:generate_toolchain android_arm64_toolchain
+    if %TARGET_OS%==emscripten         call:generate_toolchain emscripten_toolchain
+    if %TARGET_OS%==win_arm64_clang    call:generate_toolchain windows_arm64_clang_toolchain
+    if %TARGET_OS%==win_x86_mingw      call:generate_toolchain windows_x86_mingw_toolchain
+    if %TARGET_OS%==win_x86_clang      call:generate_toolchain windows_x86_clang_toolchain
+    if %TARGET_OS%==win_x86_msvc       call:generate_toolchain windows_x86_msvc_toolchain
+    if %TARGET_OS%==win_x86_64_mingw   call:generate_toolchain windows_x86_64_mingw_toolchain
+    if %TARGET_OS%==win_x86_64_clang   call:generate_toolchain windows_x86_64_clang_toolchain
+    if %TARGET_OS%==win_x86_64_ucrt    call:generate_toolchain windows_x86_64_ucrt_toolchain
+    if %TARGET_OS%==win_x86_64_msvc    call:generate_toolchain windows_x86_64_msvc_toolchain
+    
     call:build
     if %TYPE%==All      call:build_all
     if %TYPE%==Release  call:build_release
     if %TYPE%==Debug    call:build_debug
     call:end_message
     
-	:: TODO
-	call:post_build_menu
+    :: TODO
+    call:post_build_menu
     
     goto while_loop
     :while_loop_end
@@ -128,10 +136,10 @@ goto:eof
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     call:read_cache
-    
-	echo.
-	call:check_git_remote
-	
+
+    echo.
+    call:check_git_remote
+
     echo.
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
@@ -148,8 +156,8 @@ goto:eof
     echo  Press Enter To Skip
     set choice=
     set /p "choice=Choose a selection: " 
-	
-	::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
+    
+    ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0" set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
     if "%choice%"=="1" call:git_update
     if "%choice%"=="2" call:git_commit
@@ -167,11 +175,11 @@ goto:eof
 
 :pick_app
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-     
-	call:read_cache
-	 
+
+    call:read_cache
+
     echo.
-	if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
+    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) HelloWorld
     echo  2) DKCore
     echo  3) DKJavascript
@@ -186,9 +194,9 @@ goto:eof
     echo 12) Exit
     set choice=
     set /p choice=Please select an app to build: 
-	
+    
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
+    if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
     if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
     if "%choice%"=="2"  set "APP=DKCore"       & goto:eof
     if "%choice%"=="3"  set "APP=DKJavascript" & goto:eof
@@ -251,19 +259,19 @@ goto:eof
     echo 26) Raspberry x86_64
     echo 27) Windows arm32
     echo 28) Windows arm64 (clang)
-	echo 29) Windows x86 (mingw)
-	echo 30) Windows x86 (clang)
-	echo 31) Windows x86 (msvc)
-	echo 32) Windows x86_64 (mingw)
-	echo 33) Windows x86_64 (clang)
-	echo 34) Windows x86_64 (ucrt)
-	echo 35) Windows x86_64 (msvc)
+    echo 29) Windows x86 (mingw)
+    echo 30) Windows x86 (clang)
+    echo 31) Windows x86 (msvc)
+    echo 32) Windows x86_64 (mingw)
+    echo 33) Windows x86_64 (clang)
+    echo 34) Windows x86_64 (ucrt)
+    echo 35) Windows x86_64 (msvc)
     echo 36) Clear Screen
     echo 37) Go Back
-    echo 38) Exit	
+    echo 38) Exit    
     set choice=
     set /p choice=Please select an OS to build for: 
-		
+        
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"     & goto:eof
     if "%choice%"=="2" set "TARGET_OS=android_arm32"       & goto:eof
@@ -293,13 +301,13 @@ goto:eof
     if "%choice%"=="26" set "TARGET_OS=raspberry_x86_64"   & goto:eof
     if "%choice%"=="27" set "TARGET_OS=win_arm32"          & goto:eof
     if "%choice%"=="28" set "TARGET_OS=win_arm64_clang"    & goto:eof
-	if "%choice%"=="29" set "TARGET_OS=win_x86_mingw"      & goto:eof
-	if "%choice%"=="30" set "TARGET_OS=win_x86_clang"      & goto:eof
-	if "%choice%"=="31" set "TARGET_OS=win_x86_msvc"       & goto:eof
-	if "%choice%"=="32" set "TARGET_OS=win_x86_64_mingw"   & goto:eof
-	if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
-	if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
-	if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
+    if "%choice%"=="29" set "TARGET_OS=win_x86_mingw"      & goto:eof
+    if "%choice%"=="30" set "TARGET_OS=win_x86_clang"      & goto:eof
+    if "%choice%"=="31" set "TARGET_OS=win_x86_msvc"       & goto:eof
+    if "%choice%"=="32" set "TARGET_OS=win_x86_64_mingw"   & goto:eof
+    if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
+    if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
+    if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
     if "%choice%"=="36" call:clear_screen                  & goto:eof
     if "%choice%"=="37" set "APP="                         & goto:eof
     if "%choice%"=="38" exit                               & goto:eof
@@ -322,7 +330,7 @@ goto:eof
     echo 6) Exit
     set choice=
     set /p choice=Please select a build type: 
-	
+    
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do? 
     if "%choice%"=="1" set "TYPE=Debug"    & goto:eof
     if "%choice%"=="2" set "TYPE=Release"  & goto:eof
@@ -348,7 +356,7 @@ goto:eof
     echo ****** Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
     echo ##########################################################
     echo.
-	
+    
     call:dk_deleteCache
     call:delete_temp_files
     
@@ -368,16 +376,16 @@ goto:eof
 
     set CMAKE_ARGS=
     ::if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=OFF
-	if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON
+    if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON
     ::if %TYPE%==Release          call:add_cmake_arg -DDEBUG=OFF & call:add_cmake_arg -DRELEASE=ON
-	if %TYPE%==Release          call:add_cmake_arg -DRELEASE=ON
+    if %TYPE%==Release          call:add_cmake_arg -DRELEASE=ON
     if %TYPE%==All              call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=ON
     if %DKLEVEL%==Build         call:add_cmake_arg -DBUILD=ON
     if %DKLEVEL%==Rebuild       call:add_cmake_arg -DREBUILD=ON
     if %DKLEVEL%==RebuildAll    call:add_cmake_arg -DREBUILDALL=ON
     if %DKLINK%==Static         call:add_cmake_arg -DSTATIC=ON
     if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
-	::if %TARGET_OS%==emscripten	call:add_cmake_arg -DEMSCRIPTEN=ON
+    ::if %TARGET_OS%==emscripten    call:add_cmake_arg -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
     call:print_var CMAKE_BINARY_DIR
@@ -387,27 +395,27 @@ goto:eof
 
     :::::::::::: CMake Options :::::::::::::
     ::call:add_cmake_arg -DCMAKE_VERBOSE_MAKEFILE=1
-	::call:add_cmake_arg -DCMAKE_COLOR_DIAGNOSTICS=ON
-	call:add_cmake_arg -Wdev
-	::call:add_cmake_arg -Werror=dev
-	call:add_cmake_arg -Wdeprecated
-	::call:add_cmake_arg -Werror=deprecated
-	::call:add_cmake_arg --graphviz=graphviz.txt
-	::call:add_cmake_arg --system-information system_information.txt
-	call:add_cmake_arg --debug-trycompile
-	::call:add_cmake_arg --debug-output
-	::call:add_cmake_arg --trace
-	::call:add_cmake_arg --trace-expand
-	::call:add_cmake_arg --warn-uninitialized
-	call:add_cmake_arg --warn-unused-vars
-	::call:add_cmake_arg --check-system-vars
+    ::call:add_cmake_arg -DCMAKE_COLOR_DIAGNOSTICS=ON
+    call:add_cmake_arg -Wdev
+    ::call:add_cmake_arg -Werror=dev
+    call:add_cmake_arg -Wdeprecated
+    ::call:add_cmake_arg -Werror=deprecated
+    ::call:add_cmake_arg --graphviz=graphviz.txt
+    ::call:add_cmake_arg --system-information system_information.txt
+    call:add_cmake_arg --debug-trycompile
+    ::call:add_cmake_arg --debug-output
+    ::call:add_cmake_arg --trace
+    ::call:add_cmake_arg --trace-expand
+    ::call:add_cmake_arg --warn-uninitialized
+    call:add_cmake_arg --warn-unused-vars
+    ::call:add_cmake_arg --check-system-vars
 goto:eof
 
 :::generate_msystem
 ::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 ::  call:print_var MSYS2
 ::                
-::	call:add_cmake_arg -G MinGW Makefiles
+::    call:add_cmake_arg -G MinGW Makefiles
 ::  call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
 ::                
 ::  echo.
@@ -418,12 +426,12 @@ goto:eof
 ::goto:eof
 
 :::generate_msvc
-::	::call:validate_visual_studio
-::	::call:add_cmake_arg -G Visual Studio -A x64
+::    ::call:validate_visual_studio
+::    ::call:add_cmake_arg -G Visual Studio -A x64
 ::  ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
 ::    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
-::	
-::	echo.
+::    
+::    echo.
 ::  echo ****** CMAKE COMMAND ******
 ::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
 ::  "%CMAKE_EXE%" %CMAKE_ARGS%
@@ -431,23 +439,23 @@ goto:eof
 ::goto:eof
 
 :generate_toolchain <toolchain>
-	set toolchain=%1
-	
-	:: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
-	:::::: CMAKE_GENERATOR ::::::
+    set toolchain=%1
+    
+    :: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
+    :::::: CMAKE_GENERATOR ::::::
     call:string_contains %toolchain% android hasAndroid
     if "%hasAndroid%" == "1" ( 
-		set "CMAKE_GENERATOR=Unix Makefiles"
-	) else ( if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles" )
+        set "CMAKE_GENERATOR=Unix Makefiles"
+    ) else ( if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles" )
     call:add_cmake_arg -G %CMAKE_GENERATOR%
-	
-	::::::: CMAKE_TOOLCHAIN_FILE :::::::
-	::call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
-	::call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
-	::if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
-	
-	::::::: CMake Configure :::::::
-	echo.
+    
+    ::::::: CMAKE_TOOLCHAIN_FILE :::::::
+    ::call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
+    ::call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
+    ::if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
+    
+    ::::::: CMake Configure :::::::
+    echo.
     echo ****** CMAKE COMMAND ******
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     "%CMAKE_EXE%" %CMAKE_ARGS%
@@ -477,12 +485,12 @@ goto:eof
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
         echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
-		goto:eof
+        goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
         echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
-		goto:eof
+        goto:eof
     )
 goto:eof
 
@@ -494,12 +502,12 @@ goto:eof
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
-		goto:eof
+        goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
         echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
-		goto:eof
+        goto:eof
     )
 goto:eof
 
@@ -535,21 +543,21 @@ goto:eof
 
 :: check_git_remote()
 :check_git_remote
-	if not exist "%DKBRANCH_DIR%\.git" goto:eof
+    if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
     :: git remote update > /dev/null 2> /dev/null
-	git remote update
-	
-	:: branch= $(git rev-parse --abbrev-ref HEAD)
-	call:command_to_variable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
-	
-	:: ahead= $(git rev-list --count origin/$branch..$branch)
-	call:command_to_variable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
-		
-	:: behind= $(git rev-list --count $branch..origin/$branch)
-	call:command_to_variable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
-	
-	echo %ahead% commits ahead, %behind% commits behind
+    git remote update
+    
+    :: branch= $(git rev-parse --abbrev-ref HEAD)
+    call:command_to_variable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
+    
+    :: ahead= $(git rev-list --count origin/$branch..$branch)
+    call:command_to_variable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
+        
+    :: behind= $(git rev-list --count $branch..origin/$branch)
+    call:command_to_variable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
+    
+    echo %ahead% commits ahead, %behind% commits behind
 goto:eof
 
 :: dk_call()
@@ -674,8 +682,8 @@ goto:eof
     )
     
     call:kill_process java.exe
-	call:kill_process adb.exe
-	
+    call:kill_process adb.exe
+    
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :reset_all wipe
@@ -688,9 +696,9 @@ goto:eof
     ::do we need to uninstall any apps?
     ::do we need to remove any environment variables?
       
-	:: TODO: kill java.exe processes
-	:: TODO: kill adb.exe process
-	  
+    :: TODO: kill java.exe processes
+    :: TODO: kill adb.exe process
+      
     cd %DIGITALKNOB_DIR%
 
     echo.
@@ -735,9 +743,9 @@ goto:eof
         goto:eof
     )
     
-	call:kill_process java.exe
-	call:kill_process adb.exe
-	
+    call:kill_process java.exe
+    call:kill_process adb.exe
+    
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :remove_all wipe
@@ -783,7 +791,7 @@ goto:eof
 goto:eof
 
 
-:: download()
+:: download() <url> <destination>
 :download
     echo Downloading %~1
     if exist "%~2" (
@@ -818,13 +826,13 @@ goto:eof
     )
 
     call:print_var DKBRANCH
-	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
-	set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
+    set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+    set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
-	set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
+    set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
     set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
-	
+    
     :: make sure script is running from DKBRANCH_DIR
     ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
@@ -876,20 +884,37 @@ goto:eof
     call:check_error
 goto:eof
 
+:: extract()
+:extract <url> <destination>
+	echo Extracting %~1 to %2
+	if not exist "%~1" (
+        echo cannot find %~1
+        goto:eof
+    )
+	::if exist "%~2" (
+    ::    echo %~2 already exist
+    ::    goto:eof
+    ::)
+    powershell Expand-Archive "%1" -DestinationPath "%2"
+goto:eof
 
 :: validate_cmake()
 :validate_cmake
-    if "%NATIVE_ARCH%"=="arm32"     set CMAKE_DL=
-    if "%NATIVE_ARCH%"=="arm64"     set CMAKE_DL=%CMAKE_DL_WIN_ARM64%
-    if "%NATIVE_ARCH%"=="x86" set CMAKE_DL=%CMAKE_DL_WIN_X86%
-    if "%NATIVE_ARCH%"=="x86_64" set CMAKE_DL=%CMAKE_DL_WIN_X86_64%
-        
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_x86"      set "CMAKE_DL=%CMAKE_DL_WIN_X86%"
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_x86_64"   set "CMAKE_DL=%CMAKE_DL_WIN_X86_64%"
+    if "%NATIVE_OS%"=="mac"                        set "CMAKE_DL=%CMAKE_DL_MAC%"
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="linux_x86_64" set "CMAKE_DL=%CMAKE_DL_LINUX_X86_64%"
+    if "%NATIVE_OS%_%NATIVE_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
+    call:print_var CMAKE_DL
+    
     call:get_filename %CMAKE_DL% CMAKE_DL_FILE
     call:print_var CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
-	call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
+    call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
     call:print_var CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
@@ -899,10 +924,15 @@ goto:eof
        
     echo.   
     echo "Installing cmake . . ."
-    call:download %CMAKE_DL% "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
-    echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
-    MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
-        
+    ::echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
+    ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
+    call:download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
+	call:extract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%DKTOOLS_DIR%"
+	set CMAKE_DL_NAME=%CMAKE_DL_FILE:~0,-4%
+	rename "%DKTOOLS_DIR%\%CMAKE_DL_NAME%" "%CMAKE_FOLDER%"
+    ::copy NUL "%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
+	echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
+    
     if NOT exist "%CMAKE_EXE%" (
         call:assert "cannot find cmake"
     )
@@ -1108,10 +1138,10 @@ goto:eof
 
 :: cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 :cmake_eval
-	echo.
-	echo  $ cmake_eval (%*)
-	echo.
-	
+    echo.
+    echo  $ cmake_eval (%*)
+    echo.
+    
     if [%1] == [] (
         echo "ERROR: cmake_eval() parameter1 is invalid"
         goto:eof
@@ -1192,11 +1222,11 @@ goto:eof
 
 :: string_contains <haystack> <needle> <result>
 :string_contains
-	echo string_contains(%1 %2)
+    echo string_contains(%1 %2)
     call set "haystack=%1"
-	call set "needle=%2"
-	if not "x!haystack:%needle%=!"=="x%haystack%" set "%3=1"
-	::set "%3=0"
+    call set "needle=%2"
+    if not "x!haystack:%needle%=!"=="x%haystack%" set "%3=1"
+    ::set "%3=0"
 goto:eof
 
 :: get_filename <path> <output_variable>
@@ -1279,28 +1309,28 @@ goto:eof
     set _string=%1
     set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     set "_LCASE=abcdefghijklmnopqrstuvwxyz"
-	
-	for /l %%a in (0,1,25) do (
+    
+    for /l %%a in (0,1,25) do (
         call set "_FROM=%%_UCASE:~%%a,1%%
         call set "_TO=%%_LCASE:~%%a,1%%
         call set "_string=%%_string:!_FROM!=!_TO!%%
     )
-	::call:print_var _string
-	set %2=%_string%
+    ::call:print_var _string
+    set %2=%_string%
 goto:eof
 
 :::::::: print_var ::::::::
 :print_var
-	set var=%1
-	call set value=%%%var%%%
-	if "%var%" NEQ "" echo %var% = %value%
-	::else
-		::echo %1 = !!!INVALID!!!
+    set var=%1
+    call set value=%%%var%%%
+    if "%var%" NEQ "" echo %var% = %value%
+    ::else
+        ::echo %1 = !!!INVALID!!!
 goto:eof
 
 :: kill_process <name>
 :kill_process
-	taskkill /IM "%1" /F > nul
+    taskkill /IM "%1" /F > nul
 goto:eof
 
 :: end

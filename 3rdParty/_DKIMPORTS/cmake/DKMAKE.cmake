@@ -10,16 +10,41 @@
 # https://github.com/Kitware/CMake/releases
 #ANDROID_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
 #LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-aarch64.tar.gz)
-LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
-MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
+#LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.tar.gz)
+#MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-macos-universal.dmg)
 #WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-arm64.msi)
-WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
-WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
-if(CMAKE_DL)
-	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
-	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-	string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
+#WIN_X86_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-i386.msi)
+#WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
+
+ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
+#LINUX_ARM64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)			# Unknown CMake command "LINUX_ARM64_HOST_dk_import"
+LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz)
+#MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz)	# macOS 10.10 or later
+MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz)		# macOS 10.13 or later
+#WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)			# Unknown CMake command "WIN_ARM64_HOST_dk_import"
+WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip)
+WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
+if(NOT CMAKE_DL)
+	dk_error("CMAKE_DL is invalid!")
+	return()
 endif()
+
+## Get CMAKE_DL_FILE, CMAKE_FOLDER
+get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
+
+dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
+
+
+### VALIDATE ### (second check)
+dk_find_program(CMAKE_EXE cmake ${CMAKE}/bin)
+if(NOT CMAKE_EXE)
+	dk_error("COULD NOT FIND CMAKE_EXE" NOASSERT)
+	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
+	return()
+endif()
+return()
 
 
 
