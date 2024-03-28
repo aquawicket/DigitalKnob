@@ -12,11 +12,13 @@ endif()
 
 
 ### Get GIT variables ###
-get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
-dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
-string(TOLOWER ${GIT_FOLDER} GIT_FOLDER)
-dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
+if(GIT_DL)
+	get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
+	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
+	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
+	string(TOLOWER ${GIT_FOLDER} GIT_FOLDER)
+	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
+endif()
 
 
 ### First Check ###
