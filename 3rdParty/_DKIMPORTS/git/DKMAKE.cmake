@@ -36,7 +36,7 @@ if(NOT GIT_EXE)
 		#dk_command(sudo apt-get -y install --download-only git -o Dir::Cache::archives=${DKDOWNLOAD_DIR})
 		dk_command(sudo apt-get install apt-rdepends)
 		#dk_command("sudo apt-get download $(apt-rdepends git|grep -v '^ ')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
-		dk_command(bash c -"apt-get download $(apt-rdepends <package>|grep -v '^ ' |grep -v '^libc-dev$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
+		dk_command(bash c -"apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^libc-dev$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()
 
