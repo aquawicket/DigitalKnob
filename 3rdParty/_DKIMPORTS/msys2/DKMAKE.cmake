@@ -26,7 +26,8 @@ dk_debug(MSYS2			PRINTVAR)
 dk_set(MSYS2_GENERATOR			"MinGW Makefiles")
 
 
-if(NOT EXISTS ${MSYS2}/msys2.exe)
+dk_find_program(MSYS2_EXE msys2 ${MSYS2})
+if(NOT MSYS2_EXE)
 	dk_info("Installing ${MSYS2_FOLDER}")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
 	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)

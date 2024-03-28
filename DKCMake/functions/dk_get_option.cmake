@@ -13,20 +13,25 @@ include_guard()
 #
 #	EXAMPLE: dk_get_option(MY_ARG ${ARGV})
 #
-macro(dk_get_option name)
-	#message("dk_get_option(${name})")
+function(dk_get_option name)
 	#message("${CMAKE_CURRENT_FUNCTION}(${ARGN})")
 	cmake_parse_arguments(ARG ${name} "" "" ${ARGN})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})
+
 	if(ARG_${name})
-		set(${name} ${name})
+		set(${name} ${name} PARENT_SCOPE)
+		
 		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
 		if(ARG_REMOVE)
-			list(REMOVE_ITEM ARGV ${name})	# remove item from the functions ARGV list
-			dk_notice("${CMAKE_CURRENT_FUNCTION}(${name}) REMOVED")
+			set(ARG_LIST ${ARGN})
+			list(REMOVE_ITEM ARG_LIST ${name})	# remove item from the functions ARGV list
+			list(REMOVE_ITEM ARG_LIST REMOVE)	# remove item from the functions ARGV list
+			set(ARGV ${ARG_LIST} PARENT_SCOPE)
+			#dk_notice("${CMAKE_CURRENT_FUNCTION}(${name}) REMOVED")
+			dk_notice("${name} REMOVED")
 		endif()
 	else()
-		unset(${name})
+		unset(${name} PARENT_SCOPE)
 		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
-endmacro()
+endfunction()

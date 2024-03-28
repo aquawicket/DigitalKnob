@@ -156,6 +156,9 @@ if(EMSCRIPTEN)
 endif()
 dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
 
+if(NOT CMAKE_MAKE_PROGRAM)
+	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
+endif()
 
 
 
