@@ -5,7 +5,7 @@
 ### DOWNLOAD ###
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
 WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
-if(NOT GIT_DL)
+if(WIN_HOST AND NOT GIT_DL)
 	dk_error("GIT_DL is invalid!")
 	return()
 endif()
