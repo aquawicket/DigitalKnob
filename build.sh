@@ -81,6 +81,7 @@ function main() {
 	print_var NATIVE_TRIPLE
 	
 	if command_exists wslpath; then
+		WSL=1
 		#USERPROFILE=$(wslpath $(wslvar USERPROFILE))
 		#echo "USERPROFILE = $USERPROFILE"
 		DIGITALKNOB_DIR="$HOME/digitalknob"
@@ -97,6 +98,10 @@ function main() {
 	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
 	mkdir -p $DKDOWNLOAD_DIR;
 	print_var DKDOWNLOAD_DIR
+	
+	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
+	mkdir -p $DKTOOLS_DIR;
+	print_var DKTOOLS_DIR
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		validate_homebrew
@@ -452,7 +457,9 @@ function Generate_Project() {
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
 	print_var CMAKE_BINARY_DIR
 	
-	CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
+	if ! [[ $WSL == 1 ]]; then
+		CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
+	fi
 	CMAKE_ARGS+=( "-B=$CMAKE_BINARY_DIR" )
 	
 	############ CMake Options ############
@@ -531,8 +538,14 @@ function Generate_Project() {
 	if file_exists $TOOLCHAIN; then
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
 	fi
+	
+	if [[ $WSL == 1 ]]; then
+		cd $DKCMAKE_DIR
+		CMAKE_ARGS+=( .)
+	fi
+	
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}
-	dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}"
+	dk_call $CMAKE_EXE "${CMAKE_ARGS[@]}" 
 }
 	
 ###### Build_Project ######
@@ -662,56 +675,71 @@ function get_filename() {
 		return $false
 	fi
 	
-	#TODO
-	$2 == "output"
-	#[[ ? == "success" ]]
+	echo "get_filename($1, $2)"	
+	eval "$2=$(basename $1)"
+	#[[ $base_name == "" ]]
 }
 
 ###### convert_to_c_identifier <input> <output> ######
 function convert_to_c_identifier() {
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
-	
-	#TODO
-	$2 == "output"
-	#[[ ? == "success" ]]
+	input=$1
+	echo "convert_to_c_identifier($1, $2)"
+	input="${input//[^[:alnum:]]/_}"
+	#echo "input = $input"
+	eval "$2=$input"
+	#[[ $input == "" ]]
 }
 
 ###### convert_to_lowercase <input> <output> ######
 function convert_to_lowercase() {
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
-	
-	#TODO
-	$2 == "output"
-	#[[ ? == "success" ]]
+	input=$1
+	echo "convert_to_lowercase($1, $2)"
+	echo "$input" | tr '[:upper:]' '[:lower:]'
+	echo "input = $input"
+	eval "$2=$input"
+	#[[ $input == "" ]]
 }
 
 ###### download <url> <destination> ######
 function download() {
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
-	
-	#TODO
-	#[[ ? == "success" ]]
+	url=$1
+	dest=$2
+	echo "download($url, $dest)"
+	echo "Downloading $1 . . ."
+	olddir=$pwd
+	cd $dest
+	wget -P $2 $1 
+	cd $oldpwd
+	#[[ $input == "" ]]
 }
 
-###### extract <url> <destination> ######
+###### extract <file> <destination> ######
 function extract() {
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "extract <input> <output> requires 2 parameters"
 		return $false
 	fi
-	
+	#file=$1
+	#dest=$2
+	echo "extract($1, $2)"
+	echo "Extracting $1 . . ."
+	cd $DKDOWNLOAD_DIR
+	echo "tar -xf $1 -C $2"
+	tar -xf $1 -C $2
 	#TODO
-	$2 == "output"
-	#[[ ? == "success" ]]
+	#[[ $input == "" ]]
 }
 
 ###### rename <from> <to> ######
@@ -727,61 +755,73 @@ function rename() {
 
 ###### validate_cmake ######
 function validate_cmake() {
-	CMAKE_EXE=$(command -v cmake)
-	print_var CMAKE_EXE
-	if ! command_exists cmake; then
-		if [[ "$MSYSTEM" == "CLANG32" ]]; then
-			install mingw-w64-clang-i686-cmake
-		elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-			install mingw-w64-clang-x86_64-cmake
-		elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-			install mingw-w64-clang-aarch64-cmake
-		elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-			install mingw-w64-i686-cmake
-		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-			install mingw-w64-x86_64-cmake
-		elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-			install mingw-w64-ucrt-x86_64-cmake
-		else
-			install cmake
-		fi
-	fi	
-	CMAKE_EXE=$(command -v cmake)
-	print_var CMAKE_EXE
+	echo "Installing CMake System packages"
 	
-	## New method of obtaining cmake
-	######################################################################################################
-	if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm32" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86_64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
-    if [[ "${NATIVE_OS}" == "mac" ]];							then CMAKE_DL=$CMAKE_DL_MAC;			fi
-    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_x86_64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
-	#print_var CMAKE_DL
-	
-	#get_filename $CMAKE_DL CMAKE_DL_FILE
-	#print_var CMAKE_DL_FILE
-	
-	#CMAKE_FOLDER=$CMAKE_DL_FILE:~0,-4
-	#convert_to_c_identifier $CMAKE_FOLDER CMAKE_FOLDER
-	#convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
-	#print_var CMAKE_FOLDER
-	
-	#CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-	#print_var CMAKE_EXE
-	
-	#if ! file_exists $CMAKE_EXE; then return $false; fi
+	if [[ CMAKE_SYSTEM_INSTALL == 1 ]]; then
+		echo "Installing CMake System packages"
+		CMAKE_EXE=$(command -v cmake)
+		print_var CMAKE_EXE
+		if ! command_exists cmake; then
+			if [[ "$MSYSTEM" == "CLANG32" ]]; then
+				install mingw-w64-clang-i686-cmake
+			elif [[ "$MSYSTEM" == "CLANG64" ]]; then
+				install mingw-w64-clang-x86_64-cmake
+			elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
+				install mingw-w64-clang-aarch64-cmake
+			elif [[ "$MSYSTEM" == "MINGW32" ]]; then
+				install mingw-w64-i686-cmake
+			elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+				install mingw-w64-x86_64-cmake
+			elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+				install mingw-w64-ucrt-x86_64-cmake
+			else
+				install cmake
+			fi
+		fi	
+		CMAKE_EXE=$(command -v cmake)
+		print_var CMAKE_EXE
+	else
+		echo "Installing DK CMake packages"
+		## New method of obtaining cmake
+		######################################################################################################
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm32" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86_64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+		if [[ "${NATIVE_OS}" == "mac" ]];							then CMAKE_DL=$CMAKE_DL_MAC;			fi
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_x86_64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		print_var CMAKE_DL
+		
+		CMAKE_DL_FILE=return
+		get_filename $CMAKE_DL CMAKE_DL_FILE
+		print_var CMAKE_DL_FILE
+		
+		#CMAKE_FOLDER="${CMAKE_DL_FILE%%.*}"	# remove everything past first dot
+		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"
+		CMAKE_FOLDER="${CMAKE_FOLDER%.*}"
+		convert_to_c_identifier $CMAKE_FOLDER CMAKE_FOLDER
+		convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
+		print_var CMAKE_FOLDER
+		
+		CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		print_var CMAKE_EXE
+		
+		if file_exists $CMAKE_EXE; then return $true; fi
 
-	#echo ""   
-    #echo "Installing cmake . . ."
-	#download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
-	#extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
-	#CMAKE_DL_NAME=$CMAKE_DL_FILE:~0,-4
-	#rename $DKTOOLS_DIR/$CMAKE_DL_NAME $CMAKE_FOLDER
-	#echo $CMAKE_FOLDER>$DKTOOLS_DIR/$CMAKE_FOLDER/installed
-	
-	#if ! file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
+		echo ""   
+		echo "Installing cmake . . ."
+		#download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
+		download $CMAKE_DL $DKDOWNLOAD_DIR
+		#extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
+		echo "extract $CMAKE_DL_FILE $DKTOOLS_DIR"
+		extract $CMAKE_DL_FILE $DKTOOLS_DIR
+		#CMAKE_DL_NAME=$CMAKE_DL_FILE:~0,-4
+		#rename $DKTOOLS_DIR/$CMAKE_DL_NAME $CMAKE_FOLDER
+		#echo $CMAKE_FOLDER>$DKTOOLS_DIR/$CMAKE_FOLDER/installed
+		
+		#if ! file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
+	fi
 }
 
 
