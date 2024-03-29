@@ -689,7 +689,7 @@ function convert_to_c_identifier() {
 	input=$1
 	echo "convert_to_c_identifier($1, $2)"
 	input="${input//[^[:alnum:]]/_}"
-	#echo "input = $input"
+	echo "input = $input"
 	eval "$2=$input"
 	#[[ $input == "" ]]
 }
@@ -714,13 +714,22 @@ function download() {
 		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
-	url=$1
-	dest=$2
-	echo "download($url, $dest)"
+	
+	if file_exists $2; then
+		echo "download(): $2 already exists"
+		return 0
+	fi
+	#echo "download($1, $2)"
 	echo "Downloading $1 . . ."
+	parentdir="$(dirname "$2")"
+	#filename="$(basename "$2")"
+	echo "parentdir = $parentdir"
+	#echo "filename = $filename"
 	olddir=$pwd
-	cd $dest
-	wget -P $2 $1 
+	echo "cd $parentdir"
+	cd $parentdir
+	echo "wget -P $parentdir $1"
+	wget -P $parentdir $1 
 	cd $oldpwd
 	#[[ $input == "" ]]
 }
@@ -731,13 +740,35 @@ function extract() {
 		error "extract <input> <output> requires 2 parameters"
 		return $false
 	fi
-	#file=$1
-	#dest=$2
+
+	filename="$(basename "$1")"
+	destFolder="${filename%.*}"
+	destFolder="${destFolder%.*}"
+	echo "fulldest = $2/$destFolder"
+		
+	if file_exists $2/$destFolder; then
+		echo "extract(): $2/$destFolder already exists"
+		return 0
+	fi
 	echo "extract($1, $2)"
 	echo "Extracting $1 . . ."
-	cd $DKDOWNLOAD_DIR
-	echo "tar -xf $1 -C $2"
-	tar -xf $1 -C $2
+	parentdir="$(dirname "$1")"
+	parentdest="$(dirname "$2")"
+	echo "parentdir = $parentdir"
+	echo "filename = $filename"
+	#need to cd into parent directory of $1 and send tar the file name of $1
+	olddir=$pwd
+	echo "cd $parentdir"
+	cd $parentdir
+	echo "tar -xf $filename -C $2"
+	tar -xf $filename -C $2
+	
+	convert_to_c_identifier $destFolder destFolder_
+	echo "destFolder_ = $destFolder_"
+	echo "mv $2/$destFolder $2/$destFolder_"
+	mv $2/$destFolder $2/$destFolder_
+	echo $CMAKE_FOLDER>$2/$destFolder_/installed
+	cd $oldpwd
 	#TODO
 	#[[ $input == "" ]]
 }
@@ -811,14 +842,11 @@ function validate_cmake() {
 
 		echo ""   
 		echo "Installing cmake . . ."
-		#download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
-		download $CMAKE_DL $DKDOWNLOAD_DIR
-		#extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
+		download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
 		echo "extract $CMAKE_DL_FILE $DKTOOLS_DIR"
-		extract $CMAKE_DL_FILE $DKTOOLS_DIR
-		#CMAKE_DL_NAME=$CMAKE_DL_FILE:~0,-4
-		#rename $DKTOOLS_DIR/$CMAKE_DL_NAME $CMAKE_FOLDER
-		#echo $CMAKE_FOLDER>$DKTOOLS_DIR/$CMAKE_FOLDER/installed
+		extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
+
+		
 		
 		#if ! file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 	fi
