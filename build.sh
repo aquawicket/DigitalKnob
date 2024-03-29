@@ -80,13 +80,11 @@ function main() {
 	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
 	
-	#if [[ -n "$USERPROFILE" ]]; then
 	if command_exists wslpath; then
-		USERPROFILE=$(wslpath $(wslvar USERPROFILE))
-		echo "USERPROFILE = $USERPROFILE"
-	fi
-	
-	if file_exists $USERPROFILE; then
+		#USERPROFILE=$(wslpath $(wslvar USERPROFILE))
+		#echo "USERPROFILE = $USERPROFILE"
+		DIGITALKNOB_DIR="$HOME/digitalknob"
+	elif file_exists $USERPROFILE; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 		DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
