@@ -16,11 +16,22 @@ magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
 
+CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip
+CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip
+CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip
+CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz
+CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz
+CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
+CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz
+
 
 ###### main ######
 function main() {
 	validate_sudo
 
+	if command_exists bash; then
+		echo "bash exists"
+	fi
 	# log to stdout and file
 	#exec |& tee file.log 
 
@@ -69,11 +80,17 @@ function main() {
 	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
 	
-	if [[ -n "$USERPROFILE" ]]; then
+	#if [[ -n "$USERPROFILE" ]]; then
+	if command_exists wslpath; then
+		USERPROFILE=$(wslpath $(wslvar USERPROFILE))
+		echo "USERPROFILE = $USERPROFILE"
+	fi
+	
+	if file_exists $USERPROFILE; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 		DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
-	else
+	elif file_exists $HOME; then
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	mkdir -p $DIGITALKNOB_DIR;
@@ -394,6 +411,9 @@ function Generate_Project() {
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
 	CMAKE_SOURCE_DIR=$DKCMAKE_DIR
+	if ! file_exists $CMAKE_SOURCE_DIR; then
+		error "CMAKE_SOURCE_DIR does not exist"
+	fi
 	print_var CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
 	print_var CMAKE_TARGET_PATH
@@ -476,7 +496,8 @@ function Generate_Project() {
 	fi
 	
 	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
-		CMAKE_ARGS+=( "-G Unix Makefiles" )
+		CMAKE_ARGS+=(-G)
+		CMAKE_ARGS+=("Unix Makefiles")
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
@@ -627,12 +648,83 @@ function string_contains() {
 
 ###### command_exists <command> ######
 function command_exists() {
-	command -v "$1" >/dev/null 2>&1
+	#echo "command_exists($1)"
+	! [[ "$(command -v $1)" == "" ]]
 }
 	
 ###### file_exists <file> ######
 function file_exists() {
 	[ -e $1 ]
+}
+
+###### get_filename <path> <output> ######
+function get_filename() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	$2 == "output"
+	#[[ ? == "success" ]]
+}
+
+###### convert_to_c_identifier <input> <output> ######
+function convert_to_c_identifier() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	$2 == "output"
+	#[[ ? == "success" ]]
+}
+
+###### convert_to_lowercase <input> <output> ######
+function convert_to_lowercase() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	$2 == "output"
+	#[[ ? == "success" ]]
+}
+
+###### download <url> <destination> ######
+function download() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	#[[ ? == "success" ]]
+}
+
+###### extract <url> <destination> ######
+function extract() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	$2 == "output"
+	#[[ ? == "success" ]]
+}
+
+###### rename <from> <to> ######
+function rename() {
+	if [ -z "$2" ]; then
+		error "get_filename <path> <output> requires 2 parameters"
+		return $false
+	fi
+	
+	#TODO
+	#[[ ? == "success" ]]
 }
 
 ###### validate_cmake ######
@@ -655,11 +747,45 @@ function validate_cmake() {
 		else
 			install cmake
 		fi
-	fi
-	
+	fi	
 	CMAKE_EXE=$(command -v cmake)
 	print_var CMAKE_EXE
+	
+	## New method of obtaining cmake
+	######################################################################################################
+	if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm32" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86_64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+    if [[ "${NATIVE_OS}" == "mac" ]];							then CMAKE_DL=$CMAKE_DL_MAC;			fi
+    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_x86_64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+    if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+	#print_var CMAKE_DL
+	
+	#get_filename $CMAKE_DL CMAKE_DL_FILE
+	#print_var CMAKE_DL_FILE
+	
+	#CMAKE_FOLDER=$CMAKE_DL_FILE:~0,-4
+	#convert_to_c_identifier $CMAKE_FOLDER CMAKE_FOLDER
+	#convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
+	#print_var CMAKE_FOLDER
+	
+	#CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+	#print_var CMAKE_EXE
+	
+	#if ! file_exists $CMAKE_EXE; then return $false; fi
+
+	#echo ""   
+    #echo "Installing cmake . . ."
+	#download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
+	#extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
+	#CMAKE_DL_NAME=$CMAKE_DL_FILE:~0,-4
+	#rename $DKTOOLS_DIR/$CMAKE_DL_NAME $CMAKE_FOLDER
+	#echo $CMAKE_FOLDER>$DKTOOLS_DIR/$CMAKE_FOLDER/installed
+	
+	#if ! file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 }
+
 
 ###### validate_git ######
 function validate_git() {
@@ -721,6 +847,7 @@ function package_installed() {
 
 ###### install <package> ######
 function install() {
+	echo "install($1)"
 	#if package_installed $1; then
 	#	echo "$1 already installed"
 	#	return $false;
@@ -729,17 +856,18 @@ function install() {
 	echo "installing $1"
 
 	if command_exists brew; then
-		dk_call brew install $1
+		dk_call $SUDO brew install $1
 	elif command_exists apt; then
-		dk_call apt -y install $1
+		dk_call $SUDO apt -y install $1
 	elif command_exists apt-get; then
-		dk_call apt-get -y install $1
+		echo "found apt-get"
+		dk_call $SUDO apt-get -y install $1
 	elif command_exists pkg; then
-		dk_call pkg install $1
+		dk_call $SUDO pkg install $1
 	elif command_exists pacman; then
-		dk_call pacman -S $1 --noconfirm
+		dk_call $SUDO pacman -S $1 --noconfirm
 	elif command_exists tce-load; then
-		dk_call tce-load -wi $1
+		dk_call $SUDO tce-load -wi $1
 	else
 		error "ERROR: no package managers found"
 	fi

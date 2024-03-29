@@ -928,7 +928,6 @@ goto:eof
 	call:extract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%DKTOOLS_DIR%"
 	set CMAKE_DL_NAME=%CMAKE_DL_FILE:~0,-4%
 	rename "%DKTOOLS_DIR%\%CMAKE_DL_NAME%" "%CMAKE_FOLDER%"
-    ::copy NUL "%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
 	echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
     if NOT exist "%CMAKE_EXE%" (

@@ -33,10 +33,9 @@ if(NOT GIT_EXE)
 		file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
 		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
 	elseif(LINUX_HOST)
-		#dk_command(sudo apt-get -y install --download-only git -o Dir::Cache::archives=${DKDOWNLOAD_DIR})
+		# https://stackoverflow.com/a/27469489
 		dk_command(sudo apt-get install apt-rdepends)
-		#dk_command("sudo apt-get download $(apt-rdepends git|grep -v '^ ')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
-		dk_command(bash c -"apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^libc-dev$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
+		dk_command(bash c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()
 
@@ -50,6 +49,9 @@ endif()
 
 dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
 dk_set(GIT_VERSION ${GIT_VERSION})
+dk_info("###### git ######")
+dk_info("${GIT_EXE}")
+dk_info("${GIT_VERSION}")
 return()
 
 
