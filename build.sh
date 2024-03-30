@@ -27,6 +27,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 
 ###### main ######
 function main() {
+	debug "main()"
 	validate_sudo
 
 	if command_exists bash; then
@@ -144,7 +145,7 @@ function main() {
 
 ###### Pick_Update ######
 function Pick_Update() {
-	#echo ""
+	debug "Pick_Update()"
 	read_cache
 	
 	echo ""
@@ -204,6 +205,7 @@ function Pick_Update() {
 
 ###### Pick_App ######
 function Pick_App() {
+	debug "Pick_App()"
 	echo ""
 	echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
@@ -254,6 +256,7 @@ function Pick_App() {
 
 ###### Pick_OS ######
 function Pick_OS() {
+	debug "Pick_OS()"
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
@@ -368,6 +371,7 @@ function Pick_OS() {
 
 ###### Pick_Type ######
 function Pick_Type() {
+	debug "Pick_Type()"
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
@@ -400,6 +404,7 @@ function Pick_Type() {
 
 ###### Generate_Project ######
 function Generate_Project() {
+	debug "Generate_Project()"
 	echo ""
 	echo "##################################################################"
 	echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
@@ -550,6 +555,7 @@ function Generate_Project() {
 	
 ###### Build_Project ######
 function Build_Project() {
+	debug "Build_Project()"
 	echo ""
 	echo "##################################################################"
 	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
@@ -584,17 +590,19 @@ function Build_Project() {
 
 ###### check_remote ######
 function check_remote() {
-  if [ -d .git ]; then
-    git remote update > /dev/null 2> /dev/null
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    ahead=$(git rev-list --count origin/$branch..$branch)
-    behind=$(git rev-list --count $branch..origin/$branch)
-    echo "$ahead commits ahead, $behind commits behind"
-  fi
+	debug "check_remote()"
+	if [ -d .git ]; then
+		git remote update > /dev/null 2> /dev/null
+		branch=$(git rev-parse --abbrev-ref HEAD)
+		ahead=$(git rev-list --count origin/$branch..$branch)
+		behind=$(git rev-list --count $branch..origin/$branch)
+		echo "$ahead commits ahead, $behind commits behind"
+	fi
 }
 
 ###### validate_sudo ######
 function validate_sudo() {
+	debug "validate_sudo()"
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
 	fi
@@ -603,6 +611,7 @@ function validate_sudo() {
 
 ###### dk_call <command args> ######
 function dk_call() {
+	debug "dk_call()"
 	if [ -z "$1" ]; then
 		error "dk_call <command args> requires at least 1 parameter"
 		return $false
@@ -614,7 +623,7 @@ function dk_call() {
 
 ###### reload ######
 function reload() {
-	echo "reloading $SCRIPT_DIR/$SCRIPT_NAME"
+	debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
 	exec "$SCRIPT_DIR/$SCRIPT_NAME"
 }
@@ -622,6 +631,13 @@ function reload() {
 ###### warning <string> ######
 function warning() {
 	echo -e "${yellow} WARNING: $1 ${CLR}"
+	return $true
+}
+
+###### debug <string> ######
+function debug() {
+	echo -e "${blue} DEBUG: $1 ${CLR}"
+	return $true
 }
 
 ###### error <string> ######
@@ -641,6 +657,7 @@ function message() {
 
 ###### CONFIRM() ######
 function CONFIRM() {
+	debug "CONFIRM()"
 	echo -e "${yellow} Are you sure ? [Y/N] ${CLR}"
 	read -p " " -n 1 -r
 	echo ""
@@ -650,6 +667,7 @@ function CONFIRM() {
 
 ###### string_contains <string> <substring> ######
 function string_contains() {
+	debug "string_contains($1)"
 	if [ -z "$2" ]; then
 		error "string_contains <string> <substring> requires 2 parameters"
 		return $false
@@ -659,20 +677,22 @@ function string_contains() {
 
 ###### command_exists <command> ######
 function command_exists() {
-	#echo "command_exists($1)"
+	debug "command_exists($1)"
 	! [[ "$(command -v $1)" == "" ]]
 }
 	
 ###### file_exists <file> ######
 function file_exists() {
-	[ -e $1 ]
+	debug "file_exists($1)"
+	[ -e "$1" ]
 }
 
 ###### get_filename <path> <output> ######
 function get_filename() {
+	debug "get_filename()"
 	if [ -z "$2" ]; then
 		error "get_filename <path> <output> requires 2 parameters"
-		return $false
+		return "$false"
 	fi
 	
 	echo "get_filename($1, $2)"	
@@ -682,6 +702,7 @@ function get_filename() {
 
 ###### convert_to_c_identifier <input> <output> ######
 function convert_to_c_identifier() {
+	debug "convert_to_c_identifier()"
 	if [ -z "$2" ]; then
 		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -696,6 +717,7 @@ function convert_to_c_identifier() {
 
 ###### convert_to_lowercase <input> <output> ######
 function convert_to_lowercase() {
+	debug "convert_to_lowercase()"
 	if [ -z "$2" ]; then
 		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -710,6 +732,7 @@ function convert_to_lowercase() {
 
 ###### download <url> <destination> ######
 function download() {
+	debug "download()"
 	if [ -z "$2" ]; then
 		error "convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -736,6 +759,7 @@ function download() {
 
 ###### extract <file> <destination> ######
 function extract() {
+	debug "extract()"
 	if [ -z "$2" ]; then
 		error "extract <input> <output> requires 2 parameters"
 		return $false
@@ -775,6 +799,7 @@ function extract() {
 
 ###### rename <from> <to> ######
 function rename() {
+	debug "rename()"
 	if [ -z "$2" ]; then
 		error "get_filename <path> <output> requires 2 parameters"
 		return $false
@@ -786,6 +811,7 @@ function rename() {
 
 ###### validate_cmake ######
 function validate_cmake() {
+	debug "validate_cmake()"
 	echo "Installing CMake System packages"
 	
 	if [[ CMAKE_SYSTEM_INSTALL == 1 ]]; then
@@ -852,9 +878,9 @@ function validate_cmake() {
 	fi
 }
 
-
 ###### validate_git ######
 function validate_git() {
+	debug "validate_git()"
 	if ! command_exists git; then
 		install git
 	fi
@@ -865,6 +891,7 @@ function validate_git() {
 
 ###### validate_homebrew ######
 function validate_homebrew() {
+	debug "validate_homebrew()"
 	if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		return
 	fi
@@ -883,6 +910,7 @@ function validate_homebrew() {
 
 ###### package_installed <package> ######
 function package_installed() {
+	debug "package_installed()"
 	if command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
 			return $true
@@ -913,7 +941,7 @@ function package_installed() {
 
 ###### install <package> ######
 function install() {
-	echo "install($1)"
+	debug "install($1)"
 	#if package_installed $1; then
 	#	echo "$1 already installed"
 	#	return $false;
@@ -941,6 +969,7 @@ function install() {
 
 ###### validate_package <command> <package> ######
 function validate_package() {
+	debug "validate_package()"
 	if ! command_exists $1; then
 		install $2
 	fi
@@ -948,6 +977,7 @@ function validate_package() {
 
 ###### validate_ostype ######
 function validate_ostype() {
+	debug "validate_ostype()"
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
@@ -973,6 +1003,7 @@ function validate_ostype() {
 
 ###### validate_branch ######
 function validate_branch() {
+	debug "validate_branch()"
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	FOLDER="$(basename $(pwd))"
@@ -1024,6 +1055,7 @@ function validate_branch() {
 
 ###### clear_cmake_cache ######
 function clear_cmake_cache() {
+	debug "clear_cmake_cache()"
 	echo "Clearing CMake cache . . ."
 	cd $DIGITALKNOB_DIR
 	find . -name "CMakeCache.*" -delete
@@ -1032,6 +1064,7 @@ function clear_cmake_cache() {
 
 ###### delete_temp_files ######
 function delete_temp_files() {
+	debug "delete_temp_files()"
 	echo "Deleting .TMP files . . ."
 	cd $DIGITALKNOB_DIR
 	rm -rf `find . -type d -name *.tmp`
@@ -1042,18 +1075,21 @@ function delete_temp_files() {
 
 ###### validate_msys2 ######
 #function validate_msys2() {
+#	debug "validate_msys2()"
 #	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	print_var MSYS2
 #}
 
 ###### validate_make ######
 #function validate_make() {
+#	debug "validate_make()"
 #	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	print_var MAKE_PROGRAM
 #}
 
 ###### validate_emscripten ######
 #function validate_emscripten() {
+#	debug "validate_emscripten()"
 #	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	print_var EMSDK
 #	print_var EMSDK_ENV
@@ -1065,6 +1101,7 @@ function delete_temp_files() {
 
 ###### validate_android_ndk ######
 #function validate_android_ndk() {
+#	debug "validate_android_ndk()"
 #	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	print_var ANDROID_NDK
 #	print_var ANDROID_GENERATOR
@@ -1077,6 +1114,7 @@ function delete_temp_files() {
 
 ###### validate_clang ######
 #function validate_clang() {
+#	debug "validate_clang()"
 #	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	print_var CLANG_C_COMPILER
 #	print_var CLANG_CXX_COMPILER
@@ -1084,6 +1122,7 @@ function delete_temp_files() {
 
 ###### validate_gcc ######
 #function validate_gcc() {
+#	debug "validate_gcc()"
 #	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	print_var GCC_C_COMPILER
 #	print_var GCC_CXX_COMPILER
@@ -1091,6 +1130,7 @@ function delete_temp_files() {
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 function cmake_eval() {
+	debug "cmake_eval()"
 	if [ -z "$1" ]; then
 		echo "ERROR: cmake_eval() parameter 1 is invalid"
 		return $false
@@ -1117,18 +1157,21 @@ function cmake_eval() {
 
 ###### push_assets ######
 function push_assets() {
+	debug "push_assets()"
 	if ! CONFIRM; then return; fi
 	echo "not implemented,  TODO"
 }
 
 ###### pull_assets ######
 function pull_assets() {
+	debug "pull_assets()"
 	if ! CONFIRM; then return; fi
 	echo "not implemented,  TODO"
 }
 
 ###### reset_all ######
 function reset_all() {
+	debug "reset_all()"
 	if ! [ "$1" == "wipe" ]; then
 		clear
 		echo ""
@@ -1197,6 +1240,7 @@ function reset_all() {
 
 ###### remove_all ######
 function remove_all() {
+	debug "remove_all()"
 	if ! [ "$1" == "wipe" ]; then	
 		clear
 		echo ""
@@ -1248,6 +1292,7 @@ function remove_all() {
 
 ###### git_update ######
 function git_update() {
+	debug "git_update()"
 	if ! [ "$1" == "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
 		if ! CONFIRM; then return; fi
@@ -1272,6 +1317,7 @@ function git_update() {
 
 ###### git_commit ######
 function git_commit() {	
+	debug "git_commit()"
 	echo "Please enter some details about this commit, Then press ENTER."
 	read message
 	
@@ -1322,6 +1368,7 @@ function git_commit() {
 
 ###### enter_manually ######
 function enter_manually() {
+	debug "enter_manually()"
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
@@ -1353,6 +1400,7 @@ function enter_manually() {
 
 ###### create_cache ######
 function create_cache() {
+	debug "create_cache()"
 	echo "creating cache..."
 	
 	# write variable values line by line
@@ -1364,6 +1412,7 @@ function create_cache() {
 
 ###### read_cache ######
 function read_cache() {
+	debug "read_cache()"
 	if ! file_exists $DKBRANCH_DIR/cache; then
 		return
 	fi
@@ -1389,6 +1438,7 @@ function read_cache() {
 
 ###### print_var ######
 function print_var() {
+	debug "print_var()"
 	var=$1
 	if [ -n "${!var}" ]; then
 		echo "$1 = ${!var}"
@@ -1399,6 +1449,7 @@ function print_var() {
 
 ###### remove_carrage_returns ######
 function remove_carrage_returns(){
+	debug "remove_carrage_returns()"
 	in=$1
 	out=$(echo $in | tr -d '\r')
 	# carrage returns are removed from <out>
