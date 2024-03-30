@@ -373,11 +373,13 @@ if(LINUX)
 	dk_disable(nasm)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(podofo)				# build errors
+	dk_disable(python)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 	dk_disable(x265)
+	dk_disable(zstd)
 endif(LINUX)
 
 

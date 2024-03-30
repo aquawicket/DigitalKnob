@@ -22,7 +22,12 @@ endif()
 
 
 ### First Check ###
-dk_find_program(GIT_EXE git ${GIT}/bin)
+if(WIN_HOST)
+	dk_find_program(GIT_EXE git ${GIT}/bin)
+else()
+	dk_find_program(GIT_EXE git)
+endif()
+
 
 ### INSTALL ###
 if(NOT GIT_EXE)
@@ -34,14 +39,19 @@ if(NOT GIT_EXE)
 		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
 	elseif(LINUX_HOST)
 		# https://stackoverflow.com/a/27469489
-		dk_command(sudo apt-get install apt-rdepends)
-		dk_command(bash c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
+		dk_command(sudo apt-get -y install git)
+		#dk_command(sudo apt-get install apt-rdepends)
+		#dk_command(bash c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()
 
 
 ## Second Check ###
-dk_find_program(GIT_EXE git ${GIT}/bin)
+if(WIN_HOST)
+	dk_find_program(GIT_EXE git ${GIT}/bin)
+else()
+	dk_find_program(GIT_EXE git)
+endif()
 if(NOT GIT_EXE)
 	dk_error("COULD NOT FIND GIT_EXE")
 	return()

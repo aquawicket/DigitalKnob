@@ -52,6 +52,8 @@ message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
 if(CMAKE_HOST_UNIX)
+	message("calling sudo at beginning of script . . .")
+	#execute_process(COMMAND sudo -s WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 

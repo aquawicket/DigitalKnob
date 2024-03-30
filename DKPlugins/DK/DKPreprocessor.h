@@ -41,8 +41,9 @@
 	//#endif
 #endif
 
-#define STR(x) #x
-#define STRS(str1,str2) str1 ## str2
+#define STR_EXPAND(tok) #tok
+#define STR(tok) STR_EXPAND(tok)
+//#define STRS(str1,str2) str1 ## str2
 //#define JOIN(a,b) a ## b
 // https://stackoverflow.com/a/59157875/688352
 //#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
@@ -264,28 +265,28 @@
 
 #if __clang__ && __GNUG__
 #	define DKCOMPILER "clang++"
-#   define DKCOMPILER_VERSION "UNKNOWN" //STR(__clang_version__)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
 #elif __clang__
 #	define DKCOMPILER "clang"
-#   define DKCOMPILER_VERSION "UNKNOWN" //STR(__clang_version__)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__clang_major__) "." STR(__clang_minor__) "." STR(__clang_patchlevel__)
 #elif __llvm__
 #	define DKCOMPILER "llvm"
 #   define DKCOMPILER_VERSION "UNKNOWN" //STR(__llvm__)  FIXME: defining from another macro
 #elif __MINGW64__
 #	define DKCOMPILER "Mingw64"
-#   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_TWO(__MINGW64_MAJOR_VERSION, __MINGW64_MINOR_VERSION)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__MINGW64_VERSION_MAJOR) "." STR(__MINGW64_VERSION_MINOR) "." STR(__MINGW64_VERSION_BUGFIX)
 #elif __MINGW32__
 #	define DKCOMPILER "Mingw32"
-#   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__MINGW32_VERSION_MAJOR) "." STR(__MINGW32_VERSION_MINOR) "." STR(__MINGW32_VERSION_BUGFIX)
 #elif _MSC_VER	// https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #	define DKCOMPILER "Microsoft Visual C++"
 #   define DKCOMPILER_VERSION _MSC_FULL_VER
 #elif __GNUG__
 #	define DKCOMPILER "GNU G++"
-#   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_THREE(__GNUC__, __GNUC_MINOR_, __GNUC_PATCHLEVEL__)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__GNUC__) "." STR(__GNUC_MINOR__) "." STR(__GNUC_PATCHLEVEL__)
 #elif __GNUC__
 #	define DKCOMPILER "GNU GCC"
-#   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_THREE(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)  FIXME: defining from another macro
+#	define DKCOMPILER_VERSION STR(__GNUC__) "." STR(__GNUC_MINOR__) "." STR(__GNUC_PATCHLEVEL__)
 #else
 #	define DKCOMPILER "UNKNOWN"
 #   define DKCOMPILER_VERSION "UNKNOWN"

@@ -26,6 +26,10 @@ if(MSYSTEM)
 	endif()
 endif()
 
+if(LINUX_HOST)
+	dk_find_program(MAKE_PROGRAM make)
+endif()
+
 #if(EMSCRIPTEN)
 #	dk_find_program(MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
 #endif()
