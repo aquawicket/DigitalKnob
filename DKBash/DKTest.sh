@@ -9,9 +9,11 @@ echo "clear" && clear && clear
 ###### Load Function files ######
 . ./dk_load.sh
 dk_load DK
+dk_load dk_crlf
 dk_load dk_color
 dk_load dk_debug
 
+exit 0
 dk_debug "SCRIPT($@)" 
 
 
