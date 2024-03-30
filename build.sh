@@ -30,10 +30,8 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 function main() {
 	debug "main("$@")"
 	validate_sudo
-
-	if command_exists bash; then
-		echo "bash exists"
-	fi
+	
+	# if command_exists bash; then echo "bash exists"; fi
 	# log to stdout and file
 	#exec |& tee file.log 
 
