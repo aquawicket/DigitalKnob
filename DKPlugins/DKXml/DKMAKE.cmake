@@ -1,11 +1,11 @@
 dk_depend(libxml2)
 dk_depend(pugixml)
-IF(HAVE_DKDuktape)
+if(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
-ENDIF()
-IF(HAVE_DKCef)
+endif()
+if(HAVE_DKCef)
 	dk_depend(DKCef)
-ENDIF()
+endif()
 
 
 #dk_copy(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS_DIR}/DKXml/pugixml.hpp)
