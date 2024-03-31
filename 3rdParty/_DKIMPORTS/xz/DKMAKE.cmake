@@ -4,7 +4,9 @@
 
 ### IMPORT ###
 #dk_import(https://github.com/tukaani-project/xz.git)
-dk_import(https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz)
+#dk_import(https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz)
+#dk_import(https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz)
+dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz)
 
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")

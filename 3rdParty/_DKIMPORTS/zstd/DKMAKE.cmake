@@ -2,7 +2,7 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/facebook/zstd.git)
+dk_import(https://github.com/facebook/zstd.git BRANCH release)
 
 
 ### LINK ###

@@ -27,6 +27,8 @@ string(MAKE_C_IDENTIFIER ${PYTHON_FOLDER} PYTHON_FOLDER)
 dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 
 
+
+
 if(ANDROID_HOST)
 	dk_find_program(PYTHON_EXE python)
 else()
@@ -44,6 +46,12 @@ if(NOT PYTHON_EXE)
 		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_executeProcess(${PYTHON}/python_install.cmd)
 		
+		if(ANDROID_HOST)
+			dk_find_program(PYTHON_EXE python)
+		else()
+			dk_find_program(PYTHON_EXE python ${PYTHON})
+		endif()
+
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
 			dk_executeProcess(${PYTHON_EXE} -m ensurepip)
 		endif()
