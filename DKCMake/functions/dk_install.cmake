@@ -161,7 +161,7 @@ function(dk_install plugin) #PATCH
 					endif()
 				endforeach()
 				dk_debug(dest_path PRINTVAR)
-				dk_wait()
+				#dk_wait()
 				dk_rename(${DKDOWNLOAD_DIR}/UNZIPPED/${items} ${dest_path} OVERWRITE)
 				dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED)
 			endif() 

@@ -8,7 +8,7 @@ include_guard()
 #	@fn	- TODO
 #
 macro(dk_load var)
-	#message(DEBUG "dk_load(${var})")
+	message(DEBUG "dk_load(${var})")
 	string(STRIP ${var} fn)
 	
 	get_filename_component(name_we "${fn}" NAME_WE)

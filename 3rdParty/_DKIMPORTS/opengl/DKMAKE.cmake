@@ -25,6 +25,9 @@ if(LINUX)
 endif()
 
 if(RASPBERRY)
+	dk_depend(mesa-common-dev)
+	dk_depend(libgl1-mesa-dev)
+	
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
