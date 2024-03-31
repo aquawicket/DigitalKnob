@@ -27,8 +27,11 @@ string(MAKE_C_IDENTIFIER ${PYTHON_FOLDER} PYTHON_FOLDER)
 dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 
 
-
-dk_find_program(PYTHON_EXE python ${PYTHON})
+if(ANDROID_HOST)
+	dk_find_program(PYTHON_EXE python)
+else()
+	dk_find_program(PYTHON_EXE python ${PYTHON})
+endif()
 
 ### INSTALL ###
 if(NOT PYTHON_EXE)
@@ -55,6 +58,7 @@ if(NOT PYTHON_EXE)
 		dk_todo("python install for MAC_HOST")
 	elseif(ANDROID_HOST)
 		dk_todo("python install for ANDROID_HOST")
+		dk_command(pkg install python)
 	elseif(RASPBERRY_HOST)
 		dk_todo("python install for RASPBERRY_HOST")
 	elseif(LINUX_HOST)
@@ -65,8 +69,13 @@ if(NOT PYTHON_EXE)
 endif()
 
 ## Try to find it after the install
-dk_find_program(PYTHON_EXE python ${PYTHON})
-if(NOT PYTHON_EXE)
+if(ANDROID_HOST)
+	dk_find_program(PYTHON_EXE python)
+else ()
+	dk_find_program(PYTHON_EXE python ${PYTHON})
+endif ()
+dk_debug(PYTHON_EXE PRINTVAR)
+if(NOT EXISTS ${PYTHON_EXE})
 	dk_error("COULD NOT FIND PYTHON_EXE")
 	return()
 endif()

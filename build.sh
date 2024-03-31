@@ -816,9 +816,11 @@ function rename() {
 ###### validate_cmake ######
 function validate_cmake() {
 	debug "validate_cmake("$@")"
-	echo "Installing CMake System packages"
 	
-	if [[ CMAKE_SYSTEM_INSTALL == 1 ]]; then
+	if [[ $NATIVE_OS == "android" ]]; then
+		CMAKE_SYSTEM_INSTALL=1
+	fi
+	if [[ $CMAKE_SYSTEM_INSTALL == 1 ]]; then
 		echo "Installing CMake System packages"
 		CMAKE_EXE=$(command -v cmake)
 		print_var CMAKE_EXE
@@ -854,7 +856,7 @@ function validate_cmake() {
 		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		print_var CMAKE_DL
 		
-		CMAKE_DL_FILE=return
+		#CMAKE_DL_FILE=return
 		get_filename $CMAKE_DL CMAKE_DL_FILE
 		print_var CMAKE_DL_FILE
 		

@@ -19,11 +19,11 @@
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
-LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)			# Unknown CMake command "LINUX_ARM64_HOST_dk_import"
+LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz)
 #MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz)	# macOS 10.10 or later
 MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz)		# macOS 10.13 or later
-WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)			# Unknown CMake command "WIN_ARM64_HOST_dk_import"
+WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
 if(NOT CMAKE_DL)
@@ -37,11 +37,16 @@ dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
 
 ### IMPORT ###
-dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
-
+if(ANDROID_HOST)
+	dk_command(pkg install cmake -y)
+	dk_find_program(CMAKE_EXE cmake)
+else()
+	dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
+	dk_find_program(CMAKE_EXE cmake ${CMAKE}/bin)
+endif()
 
 ### VALIDATE ### (second check)
-dk_find_program(CMAKE_EXE cmake ${CMAKE}/bin)
+
 if(NOT CMAKE_EXE)
 	dk_error("COULD NOT FIND CMAKE_EXE" NOASSERT)
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
@@ -148,6 +153,8 @@ if(MSYSTEM)
 		dk_command(cygpath -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
 	endif()
 	
+elseif(ANDROID_HOST)
+	dk_command(pkg install cmake -y)
 else()
 	if(WIN_HOST)
 		if(NOT CMAKE_EXE)
