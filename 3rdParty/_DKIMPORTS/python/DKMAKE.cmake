@@ -14,21 +14,17 @@ WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.
 MAC_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 LINUX_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 
-if(NOT PYTHON_DL)
-	dk_error("PYTHON_DL is invalid!")
-	return()
+
+## Get PYTHON_DL_FILE, PYTHON_FOLDER and PYTHON variables
+if(PYTHON_DL)
+	get_filename_component(PYTHON_DL_FILE ${PYTHON_DL} NAME)
+	dk_removeExtension(${PYTHON_DL_FILE} PYTHON_FOLDER)
+	string(MAKE_C_IDENTIFIER ${PYTHON_FOLDER} PYTHON_FOLDER)
+	dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 endif()
 
 
-## Get PYTHON_DL_FILE, PYTHON_FOLDER and PYTHON variables
-get_filename_component(PYTHON_DL_FILE ${PYTHON_DL} NAME)
-dk_removeExtension(${PYTHON_DL_FILE} PYTHON_FOLDER)
-string(MAKE_C_IDENTIFIER ${PYTHON_FOLDER} PYTHON_FOLDER)
-dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
-
-
-
-
+###### PYTHON_EXE ######
 if(ANDROID_HOST)
 	dk_find_program(PYTHON_EXE python)
 else()
@@ -36,7 +32,7 @@ else()
 endif()
 
 ### INSTALL ###
-if(NOT PYTHON_EXE)
+if(NOT EXISTS ${PYTHON_EXE})
 	dk_debug(" Installing python . . . . ")
 	if(WIN_HOST)
 		#dk_makeDirectory(${PYTHON})
@@ -52,10 +48,6 @@ if(NOT PYTHON_EXE)
 			dk_find_program(PYTHON_EXE python ${PYTHON})
 		endif()
 
-		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
-			dk_executeProcess(${PYTHON_EXE} -m ensurepip)
-		endif()
-		
 		if(EXISTS ${PYTHON}/include)
 			dk_set(Python_INCLUDE_DIRS ${PYTHON}/include)
 		endif()
@@ -82,7 +74,7 @@ if(ANDROID_HOST)
 else ()
 	dk_find_program(PYTHON_EXE python ${PYTHON})
 endif ()
-dk_debug(PYTHON_EXE PRINTVAR)
+
 if(NOT EXISTS ${PYTHON_EXE})
 	dk_error("COULD NOT FIND PYTHON_EXE")
 	return()
@@ -91,6 +83,28 @@ endif()
 if(EXISTS ${PYTHON})
 	dk_prependEnvPath("${PYTHON}")
 endif()
+dk_debug(PYTHON_EXE PRINTVAR)
+
+
+
+
+###### PIP_EXE ######
+if(WIN_HOST)
+	dk_find_program(PIP_EXE pip ${PYTHON}/Scripts)
+	if(NOT EXISTS ${PIP_EXE})
+		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
+	endif()
+	dk_find_program(PIP_EXE pip ${PYTHON}/Scripts)
+	
+	if(NOT EXISTS ${PIP_EXE})
+		dk_error("COULD NOT FIND PIP_EXE")
+		return()
+	endif()
+	dk_debug(PIP_EXE PRINTVAR)
+endif()
+
+
+
 
 
 
