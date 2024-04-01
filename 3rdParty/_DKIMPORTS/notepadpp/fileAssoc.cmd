@@ -1,0 +1,47 @@
+:: https://ss64.com/nt/ftype.html
+@echo off
+
+FTYPE txtfile=%HOMEDRIVE%%HOMEPATH%\digitalknob\DKTools\npp.8.6.5.portable\notepad++.exe "%%1"
+
+assoc .1=txtfile
+assoc .2=txtfile
+assoc .3=txtfile
+assoc .=txtfile
+assoc .androidproj=txtfile
+assoc .backup=txtfile
+assoc .c=txtfile
+assoc .cmake=txtfile
+assoc .code-workspace=txtfile
+assoc .cpp=txtfile
+assoc .css=txtfile
+assoc .data=txtfile
+assoc .gitattributes=txtfile
+assoc .gitconfig=txtfile
+assoc .glsl=txtfile
+assoc .gradle=txtfile
+assoc .h=txtfile
+assoc .htm=txtfile
+assoc .html=txtfile
+assoc .java=txtfile
+assoc .js=txtfile
+assoc .json=txtfile
+assoc .make=txtfile
+assoc .marks=txtfile
+assoc .md=txtfile
+assoc .mk=txtfile
+assoc .php=txtfile
+assoc .plist=txtfile
+assoc .pro=txtfile
+assoc .properties=txtfile
+assoc .rc=txtfile
+assoc .reference=txtfile
+assoc .rsp=txtfile
+assoc .sed=txtfile
+assoc .sh=txtfile
+assoc .storyboard=txtfile
+assoc .targets=txtfile
+assoc .traineddata=txtfile
+assoc .ts=txtfile
+assoc .ts=txtfile
+assoc .txt=txtfile
+assoc .xml=txtfile
