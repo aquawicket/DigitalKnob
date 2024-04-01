@@ -101,7 +101,7 @@ function main() {
 		validate_homebrew
 	fi
 
-	validate_cmake
+	#validate_cmake
 	validate_git
 	validate_branch
 
@@ -411,7 +411,8 @@ function Generate_Project() {
 	print_var TARGET_PATH
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
-	CMAKE_SOURCE_DIR=$DKCMAKE_DIR
+	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
+	print_var CMAKE_SOURCE_DIR
 	if ! dk_file_exists $CMAKE_SOURCE_DIR; then
 		error "CMAKE_SOURCE_DIR does not exist"
 	fi
@@ -529,8 +530,8 @@ function Generate_Project() {
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
 	fi
 	
-	validate_cmake
 	#### CMAKE CALL ####
+	validate_cmake
 	TOOLCHAIN="${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists $TOOLCHAIN; then
@@ -684,7 +685,12 @@ function dk_command_exists() {
 ###### dk_file_exists <file> ######
 function dk_file_exists() {
 	dk_debug "dk_file_exists("$@")"
-	[ -e "$~1" ]
+	if [ -e "$1" ]; then
+		dk_debug "dk_file_exists("$@"): FOUND"
+	else
+		dk_error "dk_file_exists("$@"): NOT FOUND!" 
+	fi
+	[ -e "$1" ]
 }
 
 ###### dk_get_filename <path> <output> ######
@@ -758,7 +764,7 @@ function download() {
 
 ###### extract <file> <destination> ######
 function extract() {
-	dk_debug "extract("$@")"
+	dk_debug "extract($@)"
 	if [ -z "$2" ]; then
 		error "extract <input> <output> requires 2 parameters"
 		return $false
@@ -767,12 +773,13 @@ function extract() {
 	filename="$(basename "$1")"
 	destFolder="${filename%.*}"
 	destFolder="${destFolder%.*}"
-	echo "fulldest = $2/$destFolder"
+	fulldest="$2/$destFolder"
+	printvar fulldest
 		
-	if dk_file_exists $2/$destFolder; then
-		echo "extract(): $2/$destFolder already exists"
-		return 0
-	fi
+	#if dk_file_exists $fulldest; then
+	#	echo "extract(): $fulldest already exists"
+	#	return 0
+	#fi
 	echo "Extracting $1 . . ."
 	parentdir="$(dirname "$1")"
 	parentdest="$(dirname "$2")"
@@ -784,13 +791,13 @@ function extract() {
 	cd $parentdir
 	echo "tar -xf $filename -C $2"
 	tar -xf $filename -C $2
-	
+	cd $oldpwd
 	dk_convert_to_c_identifier $destFolder destFolder_
-	echo "destFolder_ = $destFolder_"
+	printvar destFolder_
 	echo "mv $2/$destFolder $2/$destFolder_"
 	mv $2/$destFolder $2/$destFolder_
 	echo $CMAKE_FOLDER>$2/$destFolder_/installed
-	cd $oldpwd
+	
 	#TODO
 	#[[ $input == "" ]]
 }
@@ -850,13 +857,16 @@ function validate_cmake() {
 		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		print_var CMAKE_DL
 		
-		#CMAKE_DL_FILE=return
 		dk_get_filename $CMAKE_DL CMAKE_DL_FILE
 		print_var CMAKE_DL_FILE
 		
 		#CMAKE_FOLDER="${CMAKE_DL_FILE%%.*}"	# remove everything past first dot
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"
-		CMAKE_FOLDER="${CMAKE_FOLDER%.*}"
+		print_var CMAKE_FOLDER
+		
+		#CMAKE_FOLDER="${CMAKE_FOLDER%.*}"
+		#print_var CMAKE_FOLDER
+		
 		dk_convert_to_c_identifier $CMAKE_FOLDER CMAKE_FOLDER
 		convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
 		print_var CMAKE_FOLDER
