@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++]
+"Icon"="C:\\Users\\aquawicket\\digitalknob\\DKTools\\npp.8.6.5.portable\\notepad++.exe"
+
+[HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command]
+@="\"C:\\Users\\aquawicket\\digitalknob\\DKTools\\npp.8.6.5.portable\\notepad++.exe\" \"%1\""

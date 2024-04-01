@@ -24,7 +24,7 @@ SourceFiles=SourceFiles
 InstallPrompt=
 DisplayLicense=
 FinishMessage=
-TargetName=C:\Users\aquawicket\digitalknob\Development\DigitalKnob.exe
+TargetName=DKBuilder.exe
 FriendlyName=DigitalKnob
 AppLaunched=cmd /c build.cmd
 PostInstallCmd=<None>
@@ -32,6 +32,6 @@ AdminQuietInstCmd=
 UserQuietInstCmd=
 FILE0="build.cmd"
 [SourceFiles]
-SourceFiles0=C:\Users\aquawicket\digitalknob\Development\
+SourceFiles0=..\..\..\
 [SourceFiles0]
 %FILE0%=
