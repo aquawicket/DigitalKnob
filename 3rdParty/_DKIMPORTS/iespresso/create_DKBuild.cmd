@@ -1,1 +1,0 @@
-iexpress.exe /N DigitalKnob.sed

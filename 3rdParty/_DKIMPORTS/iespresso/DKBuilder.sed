@@ -25,13 +25,19 @@ InstallPrompt=
 DisplayLicense=
 FinishMessage=
 TargetName=DKBuilder.exe
-FriendlyName=DigitalKnob
-AppLaunched=cmd /c build.cmd
+FriendlyName=DKBuilder
+AppLaunched=cmd.exe /c iespress.bat build.cmd
 PostInstallCmd=<None>
 AdminQuietInstCmd=
 UserQuietInstCmd=
-FILE0="build.cmd"
+FILE0="iespress.bat"
+FILE1="iespress.vbs"
+FILE2="build.cmd"
 [SourceFiles]
-SourceFiles0=..\..\..\
+SourceFiles0=
+SourceFiles1=..\..\..\
 [SourceFiles0]
 %FILE0%=
+%FILE1%=
+[SourceFiles1]
+%FILE2%=
