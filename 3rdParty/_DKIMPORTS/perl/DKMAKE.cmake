@@ -2,7 +2,7 @@
 # https://packages.msys2.org/package/mingw-w64-x86_64-perl
 
 if(ANDROID_HOST)
-	dk_command(pkg install perl)
+	dk_command(pkg install perl -y)
 	
 	find_program(PERL_EXE perl)
 	if(NOT PERL_EXE)
