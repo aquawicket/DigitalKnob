@@ -113,9 +113,9 @@ function main() {
 	print_var DKPLUGINS_DIR
 
 	if [ ! $SCRIPT_DIR == $DKBRANCH_DIR ]; then
-		warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		warning "$SCRIPT_NAME path = $SCRIPT_DIR"
-		warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
+		dk_warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "$SCRIPT_NAME path = $SCRIPT_DIR"
+		dk_warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
 	fi
 	
 	while :
@@ -414,7 +414,7 @@ function Generate_Project() {
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	print_var CMAKE_SOURCE_DIR
 	if ! dk_file_exists $CMAKE_SOURCE_DIR; then
-		error "CMAKE_SOURCE_DIR does not exist"
+		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
 	print_var CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
@@ -562,7 +562,7 @@ function Build_Project() {
 		elif dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Debug --verbose
 		else
-			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
+			dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
@@ -571,7 +571,7 @@ function Build_Project() {
 		elif dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Release --verbose
 		else
-			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
+			dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
 	fi
 	
@@ -594,14 +594,14 @@ function dk_debug() {
 	fi
 }
 
-###### warning <string> ######
-function warning() {
+###### dk_warning <string> ######
+function dk_warning() {
 	echo -e "${yellow} WARNING: $1 ${CLR}"
 	return $true
 }
 
-###### error <string> ######
-function error() {
+###### dk_error <string> ######
+function dk_error() {
 	echo -e "${red} ERROR: $1 ${CLR}"
 	return $false
 }
@@ -609,7 +609,7 @@ function error() {
 ###### message <string> ######
 function message() {
 	if [ -z "$1" ]; then
-		error "message <string> requires 1 parameter"
+		dk_error "message <string> requires 1 parameter"
 		return $false
 	fi
 	echo "$@"	
@@ -619,7 +619,7 @@ function message() {
 function dk_call() {
 	dk_debug "dk_call("$@")"
 	if [ -z "$1" ]; then
-		error "dk_call <command args> requires at least 1 parameter"
+		dk_error "dk_call <command args> requires at least 1 parameter"
 		return $false
 	fi
 	
@@ -670,7 +670,7 @@ function dk_confirm() {
 function dk_string_contains() {
 	dk_debug "dk_string_contains("$@")"
 	if [ -z "$2" ]; then
-		error "dk_string_contains <string> <substring> requires 2 parameters"
+		dk_error "dk_string_contains <string> <substring> requires 2 parameters"
 		return $false
 	fi
 	[[ $1 == *"$2"* ]]
@@ -697,7 +697,7 @@ function dk_file_exists() {
 function dk_get_filename() {
 	dk_debug "dk_get_filename("$@")"
 	if [ -z "$2" ]; then
-		error "dk_get_filename <path> <output> requires 2 parameters"
+		dk_error "dk_get_filename <path> <output> requires 2 parameters"
 		return "$false"
 	fi
 	
@@ -709,7 +709,7 @@ function dk_get_filename() {
 function dk_convert_to_c_identifier() {
 	dk_debug "dk_convert_to_c_identifier("$@")"
 	if [ -z "$2" ]; then
-		error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
+		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
 	input=$1
@@ -724,7 +724,7 @@ function dk_convert_to_c_identifier() {
 function convert_to_lowercase() {
 	dk_debug "convert_to_lowercase("$@")"
 	if [ -z "$2" ]; then
-		error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
+		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
 	input=$1
@@ -739,7 +739,7 @@ function convert_to_lowercase() {
 function download() {
 	dk_debug "download("$@")"
 	if [ -z "$2" ]; then
-		error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
+		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
 	
@@ -766,7 +766,7 @@ function download() {
 function extract() {
 	dk_debug "extract($@)"
 	if [ -z "$2" ]; then
-		error "extract <input> <output> requires 2 parameters"
+		dk_error "extract <input> <output> requires 2 parameters"
 		return $false
 	fi
 
@@ -806,7 +806,7 @@ function extract() {
 function rename() {
 	dk_debug "rename("$@")"
 	if [ -z "$2" ]; then
-		error "dk_get_filename <path> <output> requires 2 parameters"
+		dk_error "dk_get_filename <path> <output> requires 2 parameters"
 		return $false
 	fi
 	
@@ -936,21 +936,21 @@ function package_installed() {
 			return $true
 		fi
 	elif dk_command_exists apt; then
-		error "package_installed() apt-get not implemented"
+		dk_error "package_installed() apt-get not implemented"
 	elif dk_command_exists apt-get; then
-		error "package_installed() apt-get not implemented"
+		dk_error "package_installed() apt-get not implemented"
 	elif dk_command_exists pkg; then
-		error "package_installed() pkg not implemented"
+		dk_error "package_installed() pkg not implemented"
 	elif dk_command_exists pacman; then
 		if pacman -Qs $1 > /dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
 	elif dk_command_exists tce-load; then
-		#error "package_installed() tce-load not implemented"
+		#dk_error "package_installed() tce-load not implemented"
 		return $false
 	else
-		error "ERROR: no package managers found"
+		dk_error "ERROR: no package managers found"
 	fi
 	return $false
 }
@@ -979,7 +979,7 @@ function install() {
 	elif dk_command_exists tce-load; then
 		dk_call $SUDO tce-load -wi $1
 	else
-		error "ERROR: no package managers found"
+		dk_error "ERROR: no package managers found"
 	fi
 }
 
@@ -1013,7 +1013,7 @@ function validate_ostype() {
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
 		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
 	else
-		error "UNKNOWN OS ($OSTYPE)"
+		dk_error "UNKNOWN OS ($OSTYPE)"
 	fi
 }
 
