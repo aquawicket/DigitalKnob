@@ -3,7 +3,6 @@ include_guard()
 ###############################################################################
 # dk_executeProcess(commands) NOASSERT NOECHO OUTPUT <output_variable>
 #
-#	TODO
 #
 #	@commands	- TODO
 #	@NOASSERT	- don't halt cmake if an error occurs
@@ -120,13 +119,13 @@ function(dk_executeProcess)
 		dk_error(ERROR_VARIABLE     PRINTVAR NOASSERT)
 		dk_error(" "				${NOASSERT})
 	else()
-		dk_debug(" ")
-		dk_debug(cmd1		    	PRINTVAR)
-		dk_debug(WORKING_DIRECTORY	PRINTVAR)
-		dk_debug(RESULT_VARIABLE    PRINTVAR)
-		dk_debug(OUTPUT_VARIABLE    PRINTVAR)
-		dk_debug(ERROR_VARIABLE     PRINTVAR)
-		dk_debug(" ")
+		dk_verbose(" ")
+		dk_verbose(cmd1		    		PRINTVAR)
+		dk_verbose(WORKING_DIRECTORY	PRINTVAR)
+		dk_verbose(RESULT_VARIABLE    	PRINTVAR)
+		dk_verbose(OUTPUT_VARIABLE    	PRINTVAR)
+		dk_verbose(ERROR_VARIABLE     	PRINTVAR)
+		dk_verbose(" ")
 	endif()
 	
 	

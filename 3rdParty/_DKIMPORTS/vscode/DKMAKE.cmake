@@ -39,17 +39,6 @@ if(NOT EXISTS ${VSCODE_EXE})
 endif()
 
 
-
-### validate VSCODE variables ###
-if(NOT VSCODE_EXE)
-	dk_error("VSCODE_EXE:${VSCODE_EXE} is empty" NOASSERT)
-endif()
-if(NOT EXISTS ${VSCODE_EXE})
-	dk_error("VSCODE_EXE:${VSCODE_EXE} does not exist" NOASSERT)
-endif()
-
-
 dk_set(VSCODE_EXE ${VSCODE_EXE}) # make the variable persistent
 
-### print GIT info ###
 dk_debug(VSCODE_EXE		PRINTVAR)

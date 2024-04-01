@@ -37,6 +37,7 @@ if(NOT GIT_EXE)
 		file(TO_NATIVE_PATH "${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
 		file(TO_NATIVE_PATH "${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
 		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
+		# setx PATH
 	elseif(LINUX_HOST)
 		# https://stackoverflow.com/a/27469489
 		dk_command(sudo apt-get -y install git)
