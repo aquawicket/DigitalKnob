@@ -861,7 +861,13 @@ function validate_cmake() {
 		convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
 		print_var CMAKE_FOLDER
 		
-		CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		if [[ "${NATIVE_OS}" == "win" ]]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
+		elif [[ "${NATIVE_OS}" == "mac" ]]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Content/bin/cmake
+		elif [[ "${NATIVE_OS}" == "linux" ]]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		fi
 		print_var CMAKE_EXE
 		
 		if dk_file_exists $CMAKE_EXE; then return $true; fi
