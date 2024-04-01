@@ -1,13 +1,6 @@
 ::############ DigitalKnob builder script ############
-set "digitalknob=digitalknob"
-set "DKTools=DKTools"
-set "download=download"
-
-
-
-
 @echo off
-setlocal EnableDelayedExpansion EnableExtensions
+setlocal EnableDelayedExpansion
 
 ::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
@@ -39,52 +32,42 @@ if "%*" NEQ "" call %*
 :: Main
 ::--------------------------------------------------------
 :main
-	call:dk_debug main()
     ::--------------------------------------------------------
     :: GLOBAL USER VARIABLES
     ::--------------------------------------------------------
     set SCRIPT_DIR=%~dp0
     set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
-    call:dk_debug SCRIPT_DIR
+    call:print_var SCRIPT_DIR
     set SCRIPT_NAME=%~nx0
-    call:dk_debug SCRIPT_NAME
+    call:print_var SCRIPT_NAME
     echo %SCRIPT_DIR%\%SCRIPT_NAME%
 
-    set CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip
-    set CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip
-    set CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip
-    set CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz
-    set CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz
-    set CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
-    set CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz
+    set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
+    set "CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip"
+    set "CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
+    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz"
+    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
+    set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz"
+    set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
 
 	set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
 	set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
-    set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\%digitalknob%"
-    call:make_directory "%DIGITALKNOB_DIR%"
-    call:dk_debug DIGITALKNOB_DIR
-
-    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\%DKTools%"
-    call:make_directory "%DKTOOLS_DIR%"
-    call:dk_debug DKTOOLS_DIR
-        
-    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\%download%"
-    call:make_directory "%DKDOWNLOAD_DIR%"
-    call:dk_debug DKDOWNLOAD_DIR
+	call:get_dkpaths
+    
 
     set NATIVE_OS=win
-    call:dk_debug NATIVE_OS
+    call:print_var NATIVE_OS
         
     if %PROCESSOR_ARCHITECTURE%==x86 set NATIVE_ARCH=x86
     if %PROCESSOR_ARCHITECTURE%==AMD64 set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==IA64  set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==EM64T set NATIVE_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==ARM64  set NATIVE_ARCH=arm64
-    call:dk_debug NATIVE_ARCH
+    call:print_var NATIVE_ARCH
         
     set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
-    call:dk_debug NATIVE_TRIPLE
+    call:print_var NATIVE_TRIPLE
     
     set NATIVE_ENV=clang
     set NATIVE_TRIPLE=%NATIVE_TRIPLE%_%NATIVE_ENV%
@@ -92,12 +75,12 @@ if "%*" NEQ "" call %*
     call:validate_git
     call:validate_branch
 
-    call:dk_debug DKBRANCH_DIR
-    call:dk_debug DKAPPS_DIR
-    call:dk_debug DKCMAKE_DIR
-    call:dk_debug DK3RDPARTY_DIR
-    call:dk_debug DKIMPORTS_DIR
-    call:dk_debug DKPLUGINS_DIR
+    call:print_var DKBRANCH_DIR
+    call:print_var DKAPPS_DIR
+    call:print_var DKCMAKE_DIR
+    call:print_var DK3RDPARTY_DIR
+    call:print_var DKIMPORTS_DIR
+    call:print_var DKPLUGINS_DIR
         
     call:validate_cmake
     
@@ -135,10 +118,37 @@ if "%*" NEQ "" call %*
     :while_loop_end
 goto:eof
 
+:get_dkpaths
+	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+    call:make_directory "%DIGITALKNOB_DIR%"
+    call:print_var DIGITALKNOB_DIR
+
+    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+    call:make_directory "%DKTOOLS_DIR%"
+    call:print_var DKTOOLS_DIR
+        
+    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
+    call:make_directory "%DKDOWNLOAD_DIR%"
+    call:print_var DKDOWNLOAD_DIR
+	goto:eof
+	
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	:: TODO - 
+goto:eof
+	
+:: get_parent_dir <input> <output>
+:get_parent_dir
+	for %%A in (%1.) do set "parent=%%~dpA"
+    set "%2=%parent%"
+goto:eof
+
+:: get_parent_folder <input> <output>
+:get_parent_folder
+    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
+    set "%2=%parent%"
+goto:eof
 
 :pick_update
-	echo pick_update()
-	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     call:read_cache
@@ -180,8 +190,6 @@ goto:eof
 goto:eof
 
 :pick_app
-	echo pick_app()
-	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
     call:read_cache
@@ -224,8 +232,6 @@ goto:eof
 
 
 :checkApp
-	echo checkApp()
-	
     if NOT exist "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" (
         echo ERROR: "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" file not found
         set APP=
@@ -234,8 +240,6 @@ goto:eof
 
 
 :pick_os
-	echo pick_os()
-	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
     echo %APP% %TARGET_OS% %TYPE%
@@ -374,13 +378,13 @@ goto:eof
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    call:dk_debug TARGET_PATH
+    call:print_var TARGET_PATH
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
-    call:dk_debug CMAKE_SOURCE_DIR
+    call:print_var CMAKE_SOURCE_DIR
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-    call:dk_debug CMAKE_TARGET_PATH
+    call:print_var CMAKE_TARGET_PATH
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -400,7 +404,7 @@ goto:eof
     ::if %TARGET_OS%==emscripten    call:add_cmake_arg -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
-    call:dk_debug CMAKE_BINARY_DIR
+    call:print_var CMAKE_BINARY_DIR
         
     call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
     call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
@@ -425,7 +429,7 @@ goto:eof
 
 :::generate_msystem
 ::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-::  call:dk_debug MSYS2
+::  call:print_var MSYS2
 ::                
 ::    call:add_cmake_arg -G MinGW Makefiles
 ::  call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
@@ -540,8 +544,6 @@ goto:eof
 
 
 :post_build_menu
-	echo "post_build_menu"
-	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
     echo %APP% %TARGET_OS% %TYPE%
@@ -557,12 +559,10 @@ goto:eof
 
 :: check_git_remote()
 :check_git_remote
-	echo check_git_remote()
-	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
     :: git remote update > /dev/null 2> /dev/null
-    "%GIT_EXE%" remote update
+    %GIT_EXE% remote update
     
     :: branch= $(git rev-parse --abbrev-ref HEAD)
     call:command_to_variable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
@@ -600,10 +600,10 @@ goto:eof
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
-    ::call:dk_debug TARGET_PATH
+    ::call:print_var TARGET_PATH
     
     call:get_parent_folder %TARGET_PATH% parent
-    ::call:dk_debug parent
+    ::call:print_var parent
     
     if %parent%==DKApps goto:eof
     call:make_directory  %DKAPPS_DIR%\%APP%
@@ -614,13 +614,6 @@ goto:eof
     :: create DKApps/<APP>/main.cpp
     echo int main(int argc, char** argv) { return 0; } > %DKAPPS_DIR%\%APP%\main.cpp
 goto:eof
-
-:: get_parent_folder
-:get_parent_folder
-    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
-    set "%2=%parent%"
-goto:eof
-
 
 :: push_assets()
 :push_assets
@@ -692,8 +685,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:dk_debug SCRIPT_DIR
-        call:dk_debug DKBRANCH_DIR
+        call:print_var SCRIPT_DIR
+        call:print_var DKBRANCH_DIR
         goto:eof
     )
     
@@ -754,8 +747,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:dk_debug SCRIPT_DIR
-        call:dk_debug DKBRANCH_DIR
+        call:print_var SCRIPT_DIR
+        call:print_var DKBRANCH_DIR
         goto:eof
     )
     
@@ -841,7 +834,7 @@ goto:eof
         )
     )
 
-    call:dk_debug DKBRANCH
+    call:print_var DKBRANCH
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
@@ -869,29 +862,27 @@ goto:eof
 
 :: validate_git()
 :validate_git
-    if "%NATIVE_ARCH%"=="arm32" set "GIT_DL="
-    if "%NATIVE_ARCH%"=="arm64" set "GIT_DL=%GIT_DL_WIN_ARM64%"
-    if "%NATIVE_ARCH%"=="x86" set "GIT_DL=%GIT_DL_WIN_X86%"
-    if "%NATIVE_ARCH%"=="x86_64" set "GIT_DL=%GIT_DL_WIN_X86_64%"
+    if "%NATIVE_ARCH%"=="arm32" set GIT_DL=
+    if "%NATIVE_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%
+    if "%NATIVE_ARCH%"=="x86" set GIT_DL=%GIT_DL_WIN_X86%
+    if "%NATIVE_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
     call:get_filename %GIT_DL% GIT_DL_FILE
-    ::call:dk_debug GIT_DL_FILE
+    ::call:print_var GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
-	call:dk_debug GIT_FOLDER
     call:convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
-	call:dk_debug GIT_FOLDER
     call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
-    call:dk_debug GIT_FOLDER
+    ::call:print_var GIT_FOLDER
         
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
-    call:dk_debug GIT_EXE
+    call:print_var GIT_EXE
         
     if exist "%GIT_EXE%" goto:eof
         
     echo.   
     echo "Installing git . . ."
-    call:download "%GIT_DL%" "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%"
+    call:download %GIT_DL% "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%"
     ::echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
     ::"%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR="%DKTOOLS_DIR%\%GIT_FOLDER%" /VERYSILENT
 	echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
@@ -906,13 +897,13 @@ goto:eof
 
 :: extract()
 :extract <url> <destination>
-	echo Extracting %~1 to "%2"
+	echo Extracting %~1 to %2
 	if not exist "%~1" (
-        echo cannot find "%~1"
+        echo cannot find %~1
         goto:eof
     )
 	::if exist "%~2" (
-    ::    echo "%~2" already exist
+    ::    echo %~2 already exist
     ::    goto:eof
     ::)
     powershell Expand-Archive "%1" -DestinationPath "%2"
@@ -920,8 +911,6 @@ goto:eof
 
 :: validate_cmake()
 :validate_cmake
-	echo validate_cmake()
-
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_x86"      set "CMAKE_DL=%CMAKE_DL_WIN_X86%"
@@ -929,18 +918,18 @@ goto:eof
     if "%NATIVE_OS%"=="mac"                        set "CMAKE_DL=%CMAKE_DL_MAC%"
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="linux_x86_64" set "CMAKE_DL=%CMAKE_DL_LINUX_X86_64%"
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
-    call:dk_debug CMAKE_DL
+    call:print_var CMAKE_DL
     
     call:get_filename %CMAKE_DL% CMAKE_DL_FILE
-    call:dk_debug CMAKE_DL_FILE
+    call:print_var CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
     call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
-    call:dk_debug CMAKE_FOLDER
+    call:print_var CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
-    call:dk_debug CMAKE_EXE
+    call:print_var CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
        
@@ -995,10 +984,10 @@ goto:eof
 :: validate_android_ndk()
 :validate_android_ndk
     call:cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-    call:dk_debug ANDROID_GENERATOR
-    call:dk_debug ANDROID_API
-    call:dk_debug ANDROID_NDK
-    call:dk_debug ANDROID_TOOLCHAIN_FILE
+    call:print_var ANDROID_GENERATOR
+    call:print_var ANDROID_API
+    call:print_var ANDROID_NDK
+    call:print_var ANDROID_TOOLCHAIN_FILE
     call:check_error
 goto:eof
 
@@ -1006,12 +995,12 @@ goto:eof
 :: validate_emscripten()
 :validate_emscripten
     call:cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-    call:dk_debug EMSDK
-    call:dk_debug EMSDK_ENV
-    call:dk_debug EMSDK_GENERATOR
-    call:dk_debug EMSDK_TOOLCHAIN_FILE
-    call:dk_debug EMSDK_C_COMPILER
-    call:dk_debug EMSDK_CXX_COMPILER
+    call:print_var EMSDK
+    call:print_var EMSDK_ENV
+    call:print_var EMSDK_GENERATOR
+    call:print_var EMSDK_TOOLCHAIN_FILE
+    call:print_var EMSDK_C_COMPILER
+    call:print_var EMSDK_CXX_COMPILER
     call:check_error
 goto:eof
 
@@ -1182,7 +1171,7 @@ goto:eof
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    ::call:dk_debug DKCOMMAND
+    ::call:print_var DKCOMMAND
 
     set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
     call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
@@ -1203,7 +1192,7 @@ goto:eof
         ::del %EVAL_VARS%
     goto:eof
 
-    ::call:dk_debug ERRORLEVEL
+    ::call:print_var ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out
@@ -1272,12 +1261,11 @@ goto:eof
 
 :: create_cache
 :create_cache
-    echo create_cache()
-	
-    ::call:dk_debug APP
-    ::call:dk_debug TARGET_OS
-    ::call:dk_debug TYPE
-    ::call:dk_debug LEVEL
+    echo creating cache...
+    ::call:print_var APP
+    ::call:print_var TARGET_OS
+    ::call:print_var TYPE
+    ::call:print_var LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
     echo %APP%>"%DKBRANCH_DIR%\cache"
@@ -1288,12 +1276,10 @@ goto:eof
 
 :: read_cache
 :read_cache
-	echo read_cache()
-	
     ::echo reading cache...
-    if not exist "%DKBRANCH_DIR%\cache" goto:eof
+    if not exist %DKBRANCH_DIR%\cache goto:eof
     set /a count = 0
-    for /f "tokens=*" %%a in ("%DKBRANCH_DIR%\cache") do (
+    for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
         set a=%%a: =%
         ::echo !count!: %%a
         if !count! == 0 set "_APP_=%%a"
@@ -1311,8 +1297,6 @@ goto:eof
 
 :: convert_to_c_identifier <in> <out>
 :convert_to_c_identifier
-	echo convert_to_c_identifier()
-	
     set "_input=%1"
     set "_output="
     set "map=abcdefghijklmnopqrstuvwxyz 1234567890"
@@ -1341,22 +1325,18 @@ goto:eof
         call set "_TO=%%_LCASE:~%%a,1%%
         call set "_string=%%_string:!_FROM!=!_TO!%%
     )
-    ::call:dk_debug _string
+    ::call:print_var _string
     set %2=%_string%
 goto:eof
 
-:::::::: dk_debug ::::::::
-:dk_debug
-	set blue=[94m
-	set clr=[0m
-	::echo %blue%Blue%clr%
+:::::::: print_var ::::::::
+:print_var
+    set "var=%1"
+    call set "value=%%%var%%%"
+	if "%value%" == "" echo %var%
+    if "%value%" NEQ "" echo %var%: %value%
 	
-    set var=%1
-    call set value=%%%var%%%
-	::if "%value%"=="" (echo "%1 is NOT defined") else (echo "%1 IS defined")
-    if "%value%" NEQ "" echo %blue%%var% = %value%%clr% & goto:eof
-    
-    echo %blue% %1 %clr%
+    ::echo %1 = !!!INVALID!!!
 goto:eof
 
 :: kill_process <name>
