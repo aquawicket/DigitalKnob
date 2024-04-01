@@ -1059,6 +1059,13 @@ function validate_branch() {
 	#fi
 }
 
+###### dk_pause ######
+function dk_pause() {
+	read -rsp $'Press any key to continue...\n' -n 1 key
+	# echo $key
+}
+
+
 ###### clear_cmake_cache ######
 function clear_cmake_cache() {
 	dk_debug "clear_cmake_cache("$@")"
