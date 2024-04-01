@@ -690,7 +690,7 @@ function dk_command_exists() {
 ###### dk_file_exists <file> ######
 function dk_file_exists() {
 	dk_debug "dk_file_exists("$@")"
-	[ -e "$1" ]
+	[ -e "$~1" ]
 }
 
 ###### dk_get_filename <path> <output> ######
