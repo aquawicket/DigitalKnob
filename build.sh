@@ -4,7 +4,6 @@
 LOG_DEBUG=1
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPT_NAME=$(basename "$0")
-echo $SCRIPT_DIR/$SCRIPT_NAME
 true=0
 false=1
 CLR="\033[0m"
@@ -80,16 +79,11 @@ function main() {
 	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
 	
-	if dk_command_exists wslpath; then
-		WSL=1
-		#USERPROFILE=$(wslpath $(wslvar USERPROFILE))
-		#echo "USERPROFILE = $USERPROFILE"
-		DIGITALKNOB_DIR="$HOME/digitalknob"
-	elif dk_file_exists $USERPROFILE; then
+	if [[ -n "$USERPROFILE" ]]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 		DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
-	elif dk_file_exists $HOME; then
+	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	mkdir -p $DIGITALKNOB_DIR;

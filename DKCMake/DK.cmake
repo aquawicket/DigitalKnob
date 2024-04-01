@@ -3,6 +3,8 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 include($ENV{DKCMAKE_DIR}/functions/dk_load.cmake)
 
+#dk_watch(DIGITALKNOB_DIR)
+
 if(CMAKE_SCRIPT_MODE_FILE)
 message(STATUS "")
 message(STATUS "##################################################")

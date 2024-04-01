@@ -1,5 +1,6 @@
 include_guard()
 
+dk_load(dk_watchCallback)
 ##############################################################################
 # dk_watch(variable)
 # 
