@@ -186,7 +186,7 @@ function Pick_Update() {
 		clear_cmake_cache
 		delete_temp_files
 	elif [ "$input" == "9" ]; then
-		reload
+		dk_reload
 	elif [ "$input" == "10" ]; then
 		exit 0	
 	elif [ "$input" == "" ]; then
