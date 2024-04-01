@@ -10,26 +10,18 @@ dk_load () {
 	#echo "dk_load($@)"
 	[ -z $@ ] && return 0 #true
 	#echo "DKBASH_DIR = $DKBASH_DIR"
-	filename=$DKBASH_DIR/$1.sh
-	#cat -A $filename    $ line_endings = UNIX
-	#echo "filename = $filename"
+	filename=$DKBASH_DIR/functions/$1.sh
 	
-	#if file $filename | grep -q '^ASCII text.*with CRLF'
+	[[ $(file myfile.txt) =~ CRLF ]] && echo dos1
+	[[ $(file -b - < $filename) =~ CRLF ]] && echo dos2
 	
-	#if file $filename | grep -q '^ASCII text.*with CRLF'
-	#echo $(file $filename)
-	#echo "str = $str"
-	#if [ -e $filename ];then
-		dos2unix $filename
-	#fi
-	
-	#echo "$filename: has_crlf = $has_crlf"
-	
+	# Convert to unix line endings if CRLF found
+	if [[ $(file -b - < $filename) =~ CRLF ]]; then
+		echo Converting file to Unix line endings
+		sed -i -e 's/\r$//' $filename
+	fi
 	
 	[ -f $filename ] && . $filename && $echo "loaded $filename"
-
-	#dos2unix -ihp $filename
-	#dos2unix < $filename|bash -s
 	
 	return 0 #true
 }

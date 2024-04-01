@@ -33,26 +33,26 @@ function dk_get_uname() {
 	dk_print_var DK_UNAME
 }
 
-###### get_dk_host ######
-function get_dk_host() {
+###### dk_get_host ######
+function dk_get_host() {
 	DK_HOST=$(uname -s)
 	dk_print_var DK_HOST
 }
 
-###### get_dk_arch ######
-function get_dk_arch() {
+###### dk_get_arch ######
+function dk_get_arch() {
 	DK_ARCH=$(uname -m)
 	dk_print_var DK_ARCH
 }
 
-###### get_dk_version ######
-function get_dk_version() {
+###### dk_get_version ######
+function dk_get_version() {
 	DK_VERSION=$(uname -v)
 	dk_print_var DK_VERSION
 }
 
-###### get_dk_ostype ######
-function get_dk_ostype() {
+###### dk_get_ostype ######
+function dk_get_ostype() {
 	DK_OSTYPE=$OSTYPE
 	dk_print_var DK_OSTYPE
 }
@@ -73,20 +73,20 @@ function dk_get_model() {
 	dk_print_var DK_MODEL
 }
 
-###### get_dk_machtype ######
-function get_dk_machtype() {
+###### dk_get_machtype ######
+function dk_get_machtype() {
 	DK_MACHTYPE=$MACHTYPE
 	dk_print_var DK_MACHTYPE
 }
 
-###### get_dk_lang ######
-function get_dk_lang() {
+###### dk_get_lang ######
+function dk_get_lang() {
 	DK_LANG=$LANG
 	dk_print_var DK_LANG
 }
 
-###### get_dk_username ######
-function get_dk_username() {
+###### dk_get_username ######
+function dk_get_username() {
 	if [ -n "$USER" ]; then
 		DK_USERNAME=$USER
 	elif [ -n "$USERNAME" ]; then
@@ -95,44 +95,44 @@ function get_dk_username() {
 	dk_print_var DK_USERNAME
 }
 
-###### get_dk_logname ######
-function get_dk_logname() {
+###### dk_get_logname ######
+function dk_get_logname() {
 	DK_LOGNAME=$LOGNAME
 	dk_print_var DK_LOGNAME
 }
 
-###### get_dk_home ######
-function get_dk_home() {
+###### dk_get_home ######
+function dk_get_home() {
 	DK_HOME=$HOME
 	dk_print_var DK_HOME
 }
 
-###### get_dk_prefix ######
-function get_dk_prefix() {
+###### dk_get_prefix ######
+function dk_get_prefix() {
 	DK_PREFIX=$PREFIX
 	dk_print_var DK_PREFIX
 }
 
-###### get_dk_term ######
-function get_dk_term() {
+###### dk_get_term ######
+function dk_get_term() {
 	DK_TERM=$TERM
 	dk_print_var DK_TERM
 }
 
-###### get_dk_shell ######
-function get_dk_shell() {
+###### dk_get_shell ######
+function dk_get_shell() {
 	DK_SHELL=$SHELL
 	dk_print_var DK_SHELL
 }
 
-###### get_dk_path ######
-function get_dk_path() {
+###### dk_get_path ######
+function dk_get_path() {
 	DK_PATH=$PATH
 	dk_print_var DK_PATH
 }
 
-###### get_dk_pwd ######
-function get_dk_pwd() {
+###### dk_get_pwd ######
+function dk_get_pwd() {
 	DK_PWD=$PWD
 	dk_print_var DK_PWD
 }
@@ -160,8 +160,8 @@ function set_dk_root(){
 	dk_print_var DK_ROOT
 }
 
-###### get_dk_root ######
-function get_dk_root() {
+###### dk_get_root ######
+function dk_get_root() {
 	load_dkenv
 	
 	if [ -n "$DK_ROOT" ]; then
@@ -172,8 +172,8 @@ function get_dk_root() {
 	fi
 }
 
-###### clear_dk_root ######
-function clear_dk_root() {
+###### dk_clear_root ######
+function dk_clear_root() {
 	export -n DK_ROOT
 	unset DK_ROOT
 	
@@ -188,26 +188,26 @@ function clear_dk_root() {
 function main() {
 
 	dk_get_uname
-	get_dk_host
-	get_dk_arch
-	get_dk_version
-	get_dk_ostype
+	dk_get_host
+	dk_get_arch
+	dk_get_version
+	dk_get_ostype
 	#dk_get_cpuinfo
 	dk_get_model
-	get_dk_machtype
-	get_dk_lang
-	get_dk_username
-	get_dk_logname
-	get_dk_home
-	get_dk_prefix
-	get_dk_term
-	get_dk_shell
-	get_dk_path
-	get_dk_pwd
+	dk_get_machtype
+	dk_get_lang
+	dk_get_username
+	dk_get_logname
+	dk_get_home
+	dk_get_prefix
+	dk_get_term
+	dk_get_shell
+	dk_get_path
+	dk_get_pwd
 	echo ""
 	
-	#clear_dk_root
-	get_dk_root
+	#dk_clear_root
+	dk_get_root
 	
 	#TODO: Here we need to test that we have enough information to determin what environment we exist on
 	
@@ -282,8 +282,8 @@ if [ $# -ne 0 ]; then
 		echo ""
 		echo -e "-> returned false"
 	fi
-	wait_for_key
+	dk_wait_for_key
 	exit
 fi
 main
-wait_for_key
+dk_wait_for_key
