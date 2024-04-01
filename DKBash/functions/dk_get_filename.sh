@@ -1,8 +1,8 @@
 #include_guard()
 
 ###### dk_get_filename <path> <output> ######
-function get_filename() {
-	dk_debug "get_filename($@)"
+function dk_get_filename() {
+	dk_debug "get_filename("$@")"
 	if [ -z "$2" ]; then
 		error "dk_get_filename <path> <output> requires 2 parameters"
 		return "$false"

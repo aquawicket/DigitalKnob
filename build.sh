@@ -31,7 +31,7 @@ function main() {
 	dk_debug "main("$@")"
 	dk_validate_sudo
 	
-	# if command_exists bash; then echo "bash exists"; fi
+	# if dk_command_exists bash; then echo "bash exists"; fi
 	# log to stdout and file
 	#exec |& tee file.log 
 
@@ -80,16 +80,16 @@ function main() {
 	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
 	
-	if command_exists wslpath; then
+	if dk_command_exists wslpath; then
 		WSL=1
 		#USERPROFILE=$(wslpath $(wslvar USERPROFILE))
 		#echo "USERPROFILE = $USERPROFILE"
 		DIGITALKNOB_DIR="$HOME/digitalknob"
-	elif file_exists $USERPROFILE; then
+	elif dk_file_exists $USERPROFILE; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 		DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
-	elif file_exists $HOME; then
+	elif dk_file_exists $HOME; then
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	mkdir -p $DIGITALKNOB_DIR;
@@ -245,7 +245,7 @@ function Pick_App() {
 	elif [ "$input" == "10" ]; then
 		UPDATE=
 	elif [ "$input" == "11" ]; then
-		dk_call reload
+		dk_call dk_reload
 	elif [ "$input" == "12" ]; then
 		exit 0
 	else
@@ -418,7 +418,7 @@ function Generate_Project() {
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
 	CMAKE_SOURCE_DIR=$DKCMAKE_DIR
-	if ! file_exists $CMAKE_SOURCE_DIR; then
+	if ! dk_file_exists $CMAKE_SOURCE_DIR; then
 		error "CMAKE_SOURCE_DIR does not exist"
 	fi
 	print_var CMAKE_SOURCE_DIR
@@ -539,7 +539,7 @@ function Generate_Project() {
 	#### CMAKE CALL ####
 	TOOLCHAIN="${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
-	if file_exists $TOOLCHAIN; then
+	if dk_file_exists $TOOLCHAIN; then
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
 	fi
 	
@@ -562,18 +562,18 @@ function Build_Project() {
 	echo ""
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
+		if dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Debug --config Debug --verbose
-		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
+		elif dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Debug --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt; then
+		if dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS/Release --config Release --verbose
-		elif file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
+		elif dk_file_exists $DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt; then
 			dk_call $CMAKE_EXE --build $DKAPPS_DIR/$APP/$TARGET_OS --config Release --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
@@ -633,7 +633,7 @@ function dk_call() {
 }
 
 ###### dk_check_remote ######
-function dk_dk_check_remote() {
+function dk_check_remote() {
 	dk_debug "dk_check_remote("$@")"
 	if [ -d .git ]; then
 		git remote update > /dev/null 2> /dev/null
@@ -653,17 +653,17 @@ function dk_validate_sudo() {
 	$SUDO echo
 }
 
-###### reload ######
-function reload() {
-	dk_debug "reload("$@")"
+###### dk_reload ######
+function dk_reload() {
+	dk_debug "dk_reload("$@")"
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
 	exec "$SCRIPT_DIR/$SCRIPT_NAME"
 }
 
-###### CONFIRM() ######
-function CONFIRM() {
-	dk_debug "CONFIRM("$@")"
+###### dk_confirm() ######
+function dk_confirm() {
+	dk_debug "dk_confirm("$@")"
 	echo -e "${yellow} Are you sure ? [Y/N] ${CLR}"
 	read -p " " -n 1 -r
 	echo ""
@@ -671,33 +671,33 @@ function CONFIRM() {
 	[[ $REPLY =~ ^[Yy]$ ]]
 }
 
-###### string_contains <string> <substring> ######
-function string_contains() {
-	dk_debug "string_contains("$@")"
+###### dk_string_contains <string> <substring> ######
+function dk_string_contains() {
+	dk_debug "dk_string_contains("$@")"
 	if [ -z "$2" ]; then
-		error "string_contains <string> <substring> requires 2 parameters"
+		error "dk_string_contains <string> <substring> requires 2 parameters"
 		return $false
 	fi
 	[[ $1 == *"$2"* ]]
 }
 
-###### command_exists <command> ######
-function command_exists() {
-	dk_debug "command_exists("$@")"
+###### dk_command_exists <command> ######
+function dk_command_exists() {
+	dk_debug "dk_command_exists("$@")"
 	! [[ "$(command -v $1)" == "" ]]
 }
 	
-###### file_exists <file> ######
-function file_exists() {
-	dk_debug "file_exists("$@")"
+###### dk_file_exists <file> ######
+function dk_file_exists() {
+	dk_debug "dk_file_exists("$@")"
 	[ -e "$1" ]
 }
 
-###### get_filename <path> <output> ######
-function get_filename() {
-	dk_debug "get_filename("$@")"
+###### dk_get_filename <path> <output> ######
+function dk_get_filename() {
+	dk_debug "dk_get_filename("$@")"
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "dk_get_filename <path> <output> requires 2 parameters"
 		return "$false"
 	fi
 	
@@ -705,7 +705,7 @@ function get_filename() {
 	#[[ $base_name == "" ]]
 }
 
-###### dk_dk_convert_to_c_identifier <input> <output> ######
+###### dk_convert_to_c_identifier <input> <output> ######
 function dk_convert_to_c_identifier() {
 	dk_debug "dk_convert_to_c_identifier("$@")"
 	if [ -z "$2" ]; then
@@ -743,7 +743,7 @@ function download() {
 		return $false
 	fi
 	
-	if file_exists $2; then
+	if dk_file_exists $2; then
 		echo "download(): $2 already exists"
 		return 0
 	fi
@@ -775,7 +775,7 @@ function extract() {
 	destFolder="${destFolder%.*}"
 	echo "fulldest = $2/$destFolder"
 		
-	if file_exists $2/$destFolder; then
+	if dk_file_exists $2/$destFolder; then
 		echo "extract(): $2/$destFolder already exists"
 		return 0
 	fi
@@ -805,7 +805,7 @@ function extract() {
 function rename() {
 	dk_debug "rename("$@")"
 	if [ -z "$2" ]; then
-		error "get_filename <path> <output> requires 2 parameters"
+		error "dk_get_filename <path> <output> requires 2 parameters"
 		return $false
 	fi
 	
@@ -824,7 +824,7 @@ function validate_cmake() {
 		echo "Installing CMake System packages"
 		CMAKE_EXE=$(command -v cmake)
 		print_var CMAKE_EXE
-		if ! command_exists cmake; then
+		if ! dk_command_exists cmake; then
 			if [[ "$MSYSTEM" == "CLANG32" ]]; then
 				install mingw-w64-clang-i686-cmake
 			elif [[ "$MSYSTEM" == "CLANG64" ]]; then
@@ -857,7 +857,7 @@ function validate_cmake() {
 		print_var CMAKE_DL
 		
 		#CMAKE_DL_FILE=return
-		get_filename $CMAKE_DL CMAKE_DL_FILE
+		dk_get_filename $CMAKE_DL CMAKE_DL_FILE
 		print_var CMAKE_DL_FILE
 		
 		#CMAKE_FOLDER="${CMAKE_DL_FILE%%.*}"	# remove everything past first dot
@@ -870,7 +870,7 @@ function validate_cmake() {
 		CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		print_var CMAKE_EXE
 		
-		if file_exists $CMAKE_EXE; then return $true; fi
+		if dk_file_exists $CMAKE_EXE; then return $true; fi
 
 		echo ""   
 		echo "Installing cmake . . ."
@@ -880,14 +880,14 @@ function validate_cmake() {
 
 		
 		
-		#if ! file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
+		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 	fi
 }
 
 ###### validate_git ######
 function validate_git() {
 	dk_debug "validate_git("$@")"
-	if ! command_exists git; then
+	if ! dk_command_exists git; then
 		install git
 	fi
 	
@@ -902,7 +902,7 @@ function validate_homebrew() {
 		return
 	fi
 		
-	if ! command_exists brew; then
+	if ! dk_command_exists brew; then
 		echo "installing Homebrew"
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		# https://github.com/Homebrew/brew/issues/10368
@@ -917,26 +917,26 @@ function validate_homebrew() {
 ###### package_installed <package> ######
 function package_installed() {
 	dk_debug "package_installed("$@")"
-	if command_exists dpkg-query; then
+	if dk_command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
 			return $true
 		fi
-	elif command_exists brew; then
+	elif dk_command_exists brew; then
 		if brew list $1 &>/dev/null; then
 			return $true
 		fi
-	elif command_exists apt; then
+	elif dk_command_exists apt; then
 		error "package_installed() apt-get not implemented"
-	elif command_exists apt-get; then
+	elif dk_command_exists apt-get; then
 		error "package_installed() apt-get not implemented"
-	elif command_exists pkg; then
+	elif dk_command_exists pkg; then
 		error "package_installed() pkg not implemented"
-	elif command_exists pacman; then
+	elif dk_command_exists pacman; then
 		if pacman -Qs $1 > /dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
-	elif command_exists tce-load; then
+	elif dk_command_exists tce-load; then
 		#error "package_installed() tce-load not implemented"
 		return $false
 	else
@@ -955,18 +955,18 @@ function install() {
 	
 	echo "installing $1"
 
-	if command_exists brew; then
+	if dk_command_exists brew; then
 		dk_call $SUDO brew install $1
-	elif command_exists apt; then
+	elif dk_command_exists apt; then
 		dk_call $SUDO apt -y install $1
-	elif command_exists apt-get; then
+	elif dk_command_exists apt-get; then
 		echo "found apt-get"
 		dk_call $SUDO apt-get -y install $1
-	elif command_exists pkg; then
+	elif dk_command_exists pkg; then
 		dk_call $SUDO pkg install $1
-	elif command_exists pacman; then
+	elif dk_command_exists pacman; then
 		dk_call $SUDO pacman -S $1 --noconfirm
-	elif command_exists tce-load; then
+	elif dk_command_exists tce-load; then
 		dk_call $SUDO tce-load -wi $1
 	else
 		error "ERROR: no package managers found"
@@ -976,7 +976,7 @@ function install() {
 ###### validate_package <command> <package> ######
 function validate_package() {
 	dk_debug "validate_package("$@")"
-	if ! command_exists $1; then
+	if ! dk_command_exists $1; then
 		install $2
 	fi
 }
@@ -1015,7 +1015,7 @@ function validate_branch() {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	if file_exists .git; then
+	if dk_file_exists .git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [[ "$BRANCH" == "$FOLDER" ]]; then
 			DKBRANCH="$FOLDER"
@@ -1043,7 +1043,7 @@ function validate_branch() {
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [[ "$SCRIPT_DIR" == "$DKBRANCH_DIR" ]]; then
-	#	if ! file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#	if ! dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 	#		echo "$DKBRANCH_DIR/$SCRIPT_NAME"
 	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
 	#	fi
@@ -1051,7 +1051,7 @@ function validate_branch() {
 	#	echo "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#	if dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 	#		rm $SCRIPT_DIR/$SCRIPT_NAME
 	#	fi
 	#	$DKBRANCH_DIR/$SCRIPT_NAME
@@ -1150,7 +1150,7 @@ function cmake_eval() {
 	
 	if [[ -n "$variables" ]]; then
 		dk_call $CMAKE_EXE "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" $3 -P $DKCMAKE_DIR/dev/cmake_eval.cmake
-		if file_exists $DKCMAKE_DIR/cmake_vars.sh; then
+		if dk_file_exists $DKCMAKE_DIR/cmake_vars.sh; then
 	    	echo "executing cmake_vars.sh"
 			source $DKCMAKE_DIR/cmake_vars.sh
 			#rm $DKCMAKE_DIR/cmake_vars.sh
@@ -1164,14 +1164,14 @@ function cmake_eval() {
 ###### push_assets ######
 function push_assets() {
 	dk_debug "push_assets("$@")"
-	if ! CONFIRM; then return; fi
+	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
 ###### pull_assets ######
 function pull_assets() {
 	dk_debug "pull_assets("$@")"
-	if ! CONFIRM; then return; fi
+	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
@@ -1189,7 +1189,7 @@ function reset_all() {
 		echo "you wish to commit or save beforehand."
 		echo ""
 		
-		if ! CONFIRM; then return; fi
+		if ! dk_confirm; then return; fi
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1223,7 +1223,7 @@ function reset_all() {
 		# wait for the folders to get deleted
 		sleep 10
 
-		if file_exists $DKBRANCH_DIR; then
+		if dk_file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 			exit 1
 		fi
@@ -1233,7 +1233,7 @@ function reset_all() {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+		if dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
 			clear
 			source $DKBRANCH_DIR/$SCRIPT_NAME rm -r $DIGITALKNOB_DIR/$SCRIPT_NAME
 			exit
@@ -1256,7 +1256,7 @@ function remove_all() {
 		echo "you wish to commit or save beforehand."
 		echo ""
 		
-		if ! CONFIRM; then return; fi
+		if ! dk_confirm; then return; fi
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1290,7 +1290,7 @@ function remove_all() {
 		# wait for the folders to get deleted
 		sleep 3
 		
-		if file_exists $DKBRANCH_DIR; then
+		if dk_file_exists $DKBRANCH_DIR; then
 			echo "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi
@@ -1301,7 +1301,7 @@ function git_update() {
 	dk_debug "git_update("$@")"
 	if ! [ "$1" == "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
-		if ! CONFIRM; then return; fi
+		if ! dk_confirm; then return; fi
 	fi
 
 	if [[ ! -d "$DKBRANCH_DIR/.git" ]]; then
@@ -1366,7 +1366,7 @@ function git_commit() {
 	
 	echo ""
 	echo "git commit \"${message}\""
-	if ! CONFIRM; then return; fi
+	if ! dk_confirm; then return; fi
 	
 	dk_call $GIT_EXE commit -a -m "${message}"
     dk_call $GIT_EXE push
@@ -1419,7 +1419,7 @@ function create_cache() {
 ###### read_cache ######
 function read_cache() {
 	dk_debug "read_cache("$@")"
-	if ! file_exists $DKBRANCH_DIR/cache; then
+	if ! dk_file_exists $DKBRANCH_DIR/cache; then
 		return
 	fi
 
