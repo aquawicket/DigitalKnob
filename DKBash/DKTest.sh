@@ -1,15 +1,13 @@
 #!/bin/sh
 
-#!/bin/sh
-#!/bin/sh -v
-#!/bin/bash
-#!/bin/bash -v
 echo "clear" && clear && clear
-
+echo "after clear"
+SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+SCRIPT_NAME=$(basename "$0")
+echo $SCRIPT_DIR/$SCRIPT_NAME
 ###### Load Function files ######
-. functions/dk_load.sh
+. functions/dk_load.sh $SCRIPT_DIR/$SCRIPT_NAME
 dk_load DK
-dk_load dk_crlf
 dk_load dk_color
 dk_load dk_debug
 

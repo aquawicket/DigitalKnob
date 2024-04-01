@@ -5,6 +5,24 @@
 
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
+echo "clear" && clear && clear
+
+###### Load Function files ######
+. functions/dk_load.sh
+dk_load dk_print_var
+dk_load dk_remove_from_file
+dk_load dk_debug
+dk_load dk_append_file
+dk_load dk_error
+dk_load dk_wait_for_key
+
+
+
+
+
+
+
+
 
 
 
