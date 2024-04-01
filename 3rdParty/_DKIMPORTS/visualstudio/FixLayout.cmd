@@ -1,3 +1,3 @@
 @echo off & %dkbatch%
 
-start /wait C:\Users\Administrator\digitalknob\Download\vs_Community.exe --layout "C:\Users\Administrator\digitalknob\Download\VisualStudio" --fix
+start /wait %HOMEDRIVE%%HOMEPATH%\digitalknob\Download\vs_Community.exe --layout "%HOMEDRIVE%%HOMEPATH%\digitalknob\Download\VisualStudio" --fix

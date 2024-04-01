@@ -1,6 +1,6 @@
 @echo off & %dkbatch%
 
-start /wait C:\Users\Administrator\digitalknob\Download\vs_Community.exe --layout "C:\Users\Administrator\digitalknob\Download\VisualStudio" ^
+start /wait %HOMEDRIVE%%HOMEPATH%\digitalknob\download\vs_Community.exe --layout "%HOMEDRIVE%%HOMEPATH%\digitalknob\download\VisualStudio" ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.Net.Component.4.7.2.TargetingPack ^

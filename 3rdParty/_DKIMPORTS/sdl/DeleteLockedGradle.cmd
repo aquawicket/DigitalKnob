@@ -1,1 +1,1 @@
-del C:\Users\Administrator\digitalknob\Development\3rdParty\sdl-release-2.26.0 /F /S /Q
+del %HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\sdl-release-2.26.0 /F /S /Q

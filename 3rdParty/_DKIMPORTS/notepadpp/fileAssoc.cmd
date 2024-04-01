@@ -1,7 +1,8 @@
-:: https://ss64.com/nt/ftype.html
 @echo off
+set "DIGITALKNOB_DIR=C:\\Users\\aquawicket\\digitalknob"
 
-FTYPE txtfile=%HOMEDRIVE%%HOMEPATH%\digitalknob\DKTools\npp.8.6.5.portable\notepad++.exe "%%1"
+:: https://ss64.com/nt/ftype.html
+FTYPE txtfile=%DIGITALKNOB_DIR%\DKTools\npp.8.6.5.portable\notepad++.exe "%%1"
 
 assoc .1=txtfile
 assoc .2=txtfile

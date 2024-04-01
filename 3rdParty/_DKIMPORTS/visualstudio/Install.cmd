@@ -1,6 +1,6 @@
 @echo off & %dkbatch%
 
-C:\Users\Administrator\digitalknob\Download\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
+%HOMEDRIVE%%HOMEPATH%\digitalknob\Download\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.Net.Component.4.7.2.TargetingPack ^
