@@ -1,24 +1,21 @@
 #!/bin/bash
 
-echo "clear" && clear && clear
-echo "after clear"
-SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-SCRIPT_NAME=$(basename "$0")
-echo $SCRIPT_DIR/$SCRIPT_NAME
 ###### Load Function files ######
-. functions/dk_load.sh $SCRIPT_DIR/$SCRIPT_NAME
-dk_load DK
-dk_load dk_color
-dk_load dk_debug
+source functions/DK.sh || echo "SOURCE_LOAD_ERROR"
 
-dk_debug "SCRIPT($@)" 
 
+dk_message "dk_message"
+dk_debug "dk_debug"
+dk_warning "dk_warning"
+dk_debug "SCRIPT($@)"
+TEST_VAR="this is a test variable"
+dk_print_var TEST_VAR
 
 
 ###### main ######
 main() {
 	dk_debug "main($@)"	
-
+	
 	$echo "\n######################## TEST FIELD ########################\n"
 
 	: '
@@ -26,7 +23,8 @@ main() {
 	very neat comment
 	in bash
 	'
-
+	printenv
+	
 	# https://www.baeldung.com/linux/find-current-shell
 	$echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"
 	$echo "cat /proc/\$\$/cmdline = cat /proc/$$/cmdline"
@@ -173,13 +171,14 @@ main() {
 	$echo "\n############################################################\n"
 	
 	print_stack
+	dk_stacktrack
 }
 
 ###### print_stack() ######
 print_stack () {
 	dk_debug "print_stack($@)"
     if [ $BASH ]; then
-		echo "stack_size: ${#FUNCNAME[@]}"
+		#echo "stack_size: ${#FUNCNAME[@]}"
 		(( n=${#FUNCNAME[@]}-1 ))
         for I in ${FUNCNAME[@]}
 	    do
@@ -200,14 +199,14 @@ evaluate () {
 }
 
 test_function () {
-	dk_debug "test_function("$@")"
+	dk_debug "test_function($@)"
 	#args=( "$@" )
 	loop_array "$@"
 	exit_code="$?"
 }
 
 loop_array () {
-	dk_debug "loop_array("$@")"
+	dk_debug "loop_array($@)"
 	for I in "${@}"
 	do
 		echo "Param: $I"

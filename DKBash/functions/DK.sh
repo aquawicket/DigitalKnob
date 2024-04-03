@@ -1,7 +1,10 @@
 #!/bin/sh
 
+echo "clear" && clear && clear
+
 ###### Global Script Variables ######
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+export SCRIPT_NAME=$(basename "$0")
 shell_type=$(basename $(readlink /proc/$$/exe))
 [ $shell_type = dash ] && export SH=1 && export DASH=1 && unset BASH
 [ $shell_type = bash ] && export BASH=1 && unset SH && unset DASH
@@ -12,3 +15,6 @@ shell_type=$(basename $(readlink /proc/$$/exe))
 [ $BASH ] && export echo="echo -e"
 export true=0
 export false=1
+
+. functions/dk_load.sh
+dk_load dk_color

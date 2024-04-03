@@ -10,9 +10,9 @@ LOG_DEBUG=1
 #
 dk_debug () {
 	#echo "dk_debug($@)"
-	if [ $LOG_DEBUG ]; then 
+	#if [ $LOG_DEBUG = 1 ]; then 
 		#$echo ${blue}DEBUG: $1 ${clr}
 		$echo ${blue}$1 ${clr}
 		return 0 #true
-	fi
+	#fi
 }

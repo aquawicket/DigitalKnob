@@ -1,5 +1,6 @@
-#include_guard()
-echo "entry($@)"
+[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
+
+#echo "entry($0)"
 
 
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
@@ -9,15 +10,16 @@ export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 #
 #
 dk_load () {
-	echo "dk_load($1)"
-	[ -z $@ ] && return 0 #true
+	echo "dk_load($@)"
+	[ -z $1 ] && return 0 #true
 	
 	if [ -f "$1" ]; then
 		fpath=$1
 		fn=$(basename ${fpath})
-		fn="${fn%.*}"
+		declare fn="${fn%.*}"
 	else
 		fn=$1
+		declare fnB=$1
 		fpath=$DKBASH_DIR/functions/$fn.sh
 	fi
 	
@@ -27,61 +29,50 @@ dk_load () {
 		sed -i -e 's/\r$//' $fpath
 	fi
 	
-	dk_parseFunctionsAndLoad $fn $fpath
-	#return 0 #true
-}
-
-dk_parseFunctionsAndLoad () {
-	echo "dk_parseFunctionsAndLoad($1, $2)"
-	fn=$1
-	fpath=$2
-	
-	if [ -f "$DKBASH_DIR/functions/$fpath.sh" ]; then
-		declare ${fn}_file="$DKBASH_DIR/functions/$fpath.sh"
-	elif [ -f $fpath ]; then
-		declare ${fn}_file=$fpath
+	if [ -f $fpath ]; then
+		declare ${fn}=$fpath
     else
-        dk_error "$fpath: file not found"
+        echo "$fpath: file not found"
     fi
-    #elif [ -f $ENV_DKBASH_DIR_/functions/$fpath.cmake ]; then
-    #	set(${fn}_file $ENV_DKBASH_DIR_/functions/$fpath.sh
-    #	dk_error "$fpath: file not found"
-    #fi
 	
-    fn_file=${fn}_file
-    #echo ""
-    #echo fn_file = ${!fn_file}
-	
-    if [[ $dk_load_list =~ "$fn_file" ]]; then
-        #echo "already in the list" 	# if allready in list, do nothing
+	if [[ $dk_load_list =~ "$fn" ]]; then
+        echo "$fn: already in the list" 	# if allready in list, do nothing
         return 0
     else
-        dk_load_list="${dk_load_list};$fn_file" # Add to list
+		echo "$fn made it to phase 2"
+		dk_load_list="${dk_load_list};$fn" # Add to list
 
-        targets=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t] " ${!fn_file}))
-		
+		funcs=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]* " ${!fn}))
+		targets=($(printf "%s\n" "${funcs[@]}" | sort -u));
         for value in "${targets[@]}"
         do
-            value=${value::-1}
-			echo $value
+			echo "phase 3"
+			echo "${fn}: $value"
 				
             if [[ $dk_load_list =~ "$value" ]]; then
-               echo "skipping $value.    already in load_list"
+                echo "${fn}: skipping $value.    already in load_list"
+				continue
             elif [[ $fn_file == ${fn} ]]; then
-               echo "skipping $value.    already matches fn"
+			   echo "${fn}: skipping $value.    already matches fn"
+			   continue
             elif [[ $(command -v $value) != "" ]]; then
-               echo "skipping $value.    command already recognized"
+			   echo "${fn}: skipping $value.    command already recognized"
+			   continue
             else
-               echo "loading $value"
+               echo "$fn: dk_load( $value )"
                dk_load $value
             fi
         done
 		
-		if [ -f "${!fn_file}" ]; then
-			echo "include(${!fn_file})"
-			. "${!fn_file}"
+		if [ -f "${!fn}" ]; then
+			echo "$fn: include(${!fn})"
+			source "${!fn}" || echo "SOURCE_LOAD_ERROR"
+			return 0
 		fi
     fi
+	
+	
 }
 
-dk_load "$@"
+#dk_load "$@"
+dk_load "$0"
