@@ -1,7 +1,10 @@
 #! /bin/bash
 
 ###### Global Script Variables ######
+LOG_VERBOSE=0
 LOG_DEBUG=1
+HALT_ON_WARNINGS=1
+HALT_ON_ERRORS=1
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPT_NAME=$(basename "$0")
 true=0
@@ -30,8 +33,7 @@ function main() {
 	dk_debug "main("$@")"
 	dk_validate_sudo
 	
-	# if WSL
-	if ! [ -z ${WSLENV+x} ]; then 
+	if dk_defined WSLENV; then 
 		echo "WSLENV is on"
 		echo "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		sudo chown -R $LOGNAME $HOME
@@ -58,33 +60,33 @@ function main() {
 	
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if [[ "$MODEL" == "Raspberry"* ]]; then
-		NATIVE_OS="raspberry"
+		HOST_OS="raspberry"
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		NATIVE_OS="linux"
+		HOST_OS="linux"
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		NATIVE_OS="mac"
+		HOST_OS="mac"
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		NATIVE_OS="android"
+		HOST_OS="android"
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		NATIVE_OS="win"
+		HOST_OS="win"
 	else
-		echo "Unknown NATIVE_OS"
+		echo "Unknown HOST_OS"
 	fi
-	print_var NATIVE_OS
+	print_var HOST_OS
 	
 	if [[ "$HOSTTYPE" == "x86" ]]; then
-		NATIVE_ARCH="x86"
+		HOST_ARCH="x86"
 	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		NATIVE_ARCH="x86_64"
+		HOST_ARCH="x86_64"
 	elif [[ "$HOSTTYPE" == "aarch64"* ]]; then
-		NATIVE_ARCH="arm64"
+		HOST_ARCH="arm64"
 	else
-		echo "Unknown NATIVE_ARCH"
+		echo "Unknown HOST_ARCH"
 	fi
-	print_var NATIVE_ARCH
+	print_var HOST_ARCH
 	
-	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
-	print_var NATIVE_TRIPLE
+	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
+	print_var HOST_TRIPLE
 	
 	if [[ -n "$USERPROFILE" ]]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
@@ -129,7 +131,7 @@ function main() {
 	do
 		if ! [[ -n "$UPDATE" ]]; then Pick_Update;	continue; fi
 		if ! [[ -n "$APP" ]]; then Pick_App;		continue; fi
-		if ! [[ -n "$TARGET_OS" ]]; then Pick_OS;		continue; fi
+		if ! [[ -n "$TARGET_OS" ]]; then Pick_OS;	continue; fi
 		if ! [[ -n "$TYPE" ]]; then Pick_Type;		continue; fi
 		
 		create_cache
@@ -261,7 +263,7 @@ function Pick_OS() {
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
-    echo " 1) $NATIVE_TRIPLE"
+    echo " 1) $HOST_TRIPLE"
 	echo ""
 	echo " 2) android arm32"
 	echo " 3) android arm64"
@@ -299,7 +301,7 @@ function Pick_OS() {
 	
 	read input
 	if [ "$input" == "1" ]; then
-		TARGET_OS="$NATIVE_TRIPLE"
+		TARGET_OS="$HOST_TRIPLE"
 	elif [ "$input" == "2" ]; then
 		TARGET_OS="android_arm32"
 	elif [ "$input" == "3" ]; then
@@ -589,42 +591,80 @@ function Build_Project() {
 	echo ""
 }
 
+###### dk_require <var> ######
+function dk_require() {
+	#echo "dk_require($@)"
+	if [ -z "$1" ]; then
+		dk_error "dk_require(<func_name> <$n>) requires 2 parameters. Example dk_require my_func \$1"
+		return $false
+	fi
+	if [ -z "$2" ]; then
+		dk_error "$1() requires at least 1 parameter"
+		return $false
+	fi
+}
 
-
-
+###### dk_verbose <string> ######
+function dk_verbose() {
+	#echo "dk_verbose($@)"
+	if [ $LOG_VERBOSE == 1 ]; then 
+		echo -e "${blue} VERBOSE: $1 ${CLR}"
+	fi
+}
 
 ###### dk_debug <string> ######
 function dk_debug() {
+	#echo "dk_debug($@)"
 	if [ $LOG_DEBUG == 1 ]; then 
 		echo -e "${blue} DEBUG: $1 ${CLR}"
-		return $true
 	fi
+}
+
+###### dk_info <string> ######
+function dk_info() {
+	#echo "dk_info($@)"
+	dk_require dk_info $1
+	echo -e "${white} INFO: $1 ${white}"
 }
 
 ###### dk_warning <string> ######
 function dk_warning() {
+	#echo "dk_warning($@)"
 	echo -e "${yellow} WARNING: $1 ${CLR}"
-	return $true
 }
 
 ###### dk_error <string> ######
 function dk_error() {
+	#echo "dk_error($@)"
 	echo -e "${red} ERROR: $1 ${CLR}"
-	return $false
+	dk_stacktrace
+	if [ $HALT_ON_ERRORS == 1 ]; then
+		exit 1
+	fi
 }
 
-###### message <string> ######
-function message() {
+###### dk_stacktrace ######
+function dk_stacktrace() { 
+   local i=1 line file func
+   while read -r line func file < <(caller $i); do
+      echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
+      ((i++))
+   done
+}
+
+###### dk_defined <var> ######
+function dk_defined() {
+	#dk_defined "dk_defined("$@")"
 	if [ -z "$1" ]; then
-		dk_error "message <string> requires 1 parameter"
-		return $false
+		return 1
 	fi
-	echo "$@"	
+	var=$1
+	! [ -z ${!var+x} ]
 }
 
 ###### dk_call <command args> ######
 function dk_call() {
-	dk_debug "dk_call("$@")"
+	dk_debug "dk_call($@)"
 	if [ -z "$1" ]; then
 		dk_error "dk_call <command args> requires at least 1 parameter"
 		return $false
@@ -695,7 +735,7 @@ function dk_file_exists() {
 	if [ -e "$1" ]; then
 		dk_debug "dk_file_exists("$@"): FOUND"
 	else
-		dk_error "dk_file_exists("$@"): NOT FOUND!" 
+		dk_warning "dk_file_exists("$@"): NOT FOUND!" 
 	fi
 	[ -e "$1" ]
 }
@@ -825,7 +865,7 @@ function rename() {
 function validate_cmake() {
 	dk_debug "validate_cmake("$@")"
 	
-	if [[ $NATIVE_OS == "android" ]]; then
+	if [[ $HOST_OS == "android" ]]; then
 		CMAKE_SYSTEM_INSTALL=1
 	fi
 	if [[ $CMAKE_SYSTEM_INSTALL == 1 ]]; then
@@ -855,13 +895,13 @@ function validate_cmake() {
 		echo "Installing DK CMake packages"
 		## New method of obtaining cmake
 		######################################################################################################
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm32" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_arm64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "win_x86_64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
-		if [[ "${NATIVE_OS}" == "mac" ]];							then CMAKE_DL=$CMAKE_DL_MAC;			fi
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_x86_64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-		if [[ "${NATIVE_OS}_${NATIVE_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "win_arm32" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "win_arm64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "win_x86" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "win_x86_64" ]];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+		if [[ "${HOST_OS}" == "mac" ]];							then CMAKE_DL=$CMAKE_DL_MAC;			fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "linux_x86_64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+		if [[ "${HOST_OS}_${HOST_ARCH}" == "linux_arm64" ]];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		print_var CMAKE_DL
 		
 		dk_get_filename $CMAKE_DL CMAKE_DL_FILE
@@ -879,11 +919,11 @@ function validate_cmake() {
 		convert_to_lowercase $CMAKE_FOLDER CMAKE_FOLDER
 		print_var CMAKE_FOLDER
 		
-		if [[ "${NATIVE_OS}" == "win" ]]; then
+		if [[ "${HOST_OS}" == "win" ]]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
-		elif [[ "${NATIVE_OS}" == "mac" ]]; then
+		elif [[ "${HOST_OS}" == "mac" ]]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		elif [[ "${NATIVE_OS}" == "linux" ]]; then
+		elif [[ "${HOST_OS}" == "linux" ]]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		fi
 		print_var CMAKE_EXE
@@ -895,8 +935,6 @@ function validate_cmake() {
 		download $CMAKE_DL $DKDOWNLOAD_DIR/$CMAKE_DL_FILE
 		echo "extract $CMAKE_DL_FILE $DKTOOLS_DIR"
 		extract $DKDOWNLOAD_DIR/$CMAKE_DL_FILE $DKTOOLS_DIR
-
-		
 		
 		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 	fi
@@ -1027,13 +1065,13 @@ function validate_ostype() {
 
 ###### validate_branch ######
 function validate_branch() {
-	dk_debug "validate_branch("$@")"
+	dk_debug "validate_branch($@)"
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	if dk_file_exists .git; then
+	if dk_file_exists $DIGITALKNOB_DIR/$FOLDER.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [[ "$BRANCH" == "$FOLDER" ]]; then
 			DKBRANCH="$FOLDER"
