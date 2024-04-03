@@ -9,36 +9,37 @@ export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 #
 #
 dk_load () {
-	echo "dk_load($@)"
-	fn="$1"
-	
+	echo "dk_load($1)"
 	[ -z $@ ] && return 0 #true
-
-	if [ -f "$@" ]; then
-		filename=$1
+	
+	if [ -f "$1" ]; then
+		fpath=$1
+		fn=$(basename ${fpath})
+		fn="${fn%.*}"
 	else
-		filename=$DKBASH_DIR/functions/$1.sh
+		fn=$1
+		fpath=$DKBASH_DIR/functions/$fn.sh
 	fi
 	
 	# Convert to unix line endings if CRLF found
-	if [[ $(file -b - < $filename) =~ CRLF ]]; then
+	if [[ $(file -b - < $fpath) =~ CRLF ]]; then
 		echo Converting file to Unix line endings
-		sed -i -e 's/\r$//' $filename
+		sed -i -e 's/\r$//' $fpath
 	fi
 	
-	dk_parseFunctionsAndLoad $fn $1
+	dk_parseFunctionsAndLoad $fn $fpath
 	#return 0 #true
 }
 
 dk_parseFunctionsAndLoad () {
-	#echo "dk_parseFunctionsAndLoad($@)"
+	echo "dk_parseFunctionsAndLoad($1, $2)"
 	fn=$1
 	fpath=$2
 	
 	if [ -f "$DKBASH_DIR/functions/$fpath.sh" ]; then
 		declare ${fn}_file="$DKBASH_DIR/functions/$fpath.sh"
 	elif [ -f $fpath ]; then
-		declare ${fn}_file $fpath
+		declare ${fn}_file=$fpath
     else
         dk_error "$fpath: file not found"
     fi
@@ -57,7 +58,7 @@ dk_parseFunctionsAndLoad () {
     else
         dk_load_list="${dk_load_list};$fn_file" # Add to list
 
-        targets=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]*(" ${!fn_file}))
+        targets=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t] " ${!fn_file}))
 		
         for value in "${targets[@]}"
         do
