@@ -862,10 +862,11 @@ function validate_cmake() {
 		
 		echo "CMAKE_DL_FILE extension = ${CMAKE_DL_FILE#*.}"
 		
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past first dot
+		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
 		print_var CMAKE_FOLDER
-		
-		#CMAKE_FOLDER="${CMAKE_FOLDER%.*}"
+		if [ "${CMAKE_DL_FILE##*.}" == "tar" ]; then
+			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
+		fi
 		#print_var CMAKE_FOLDER
 		
 		dk_convert_to_c_identifier $CMAKE_FOLDER CMAKE_FOLDER
