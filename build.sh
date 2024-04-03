@@ -860,8 +860,9 @@ function validate_cmake() {
 		dk_get_filename $CMAKE_DL CMAKE_DL_FILE
 		print_var CMAKE_DL_FILE
 		
-		#CMAKE_FOLDER="${CMAKE_DL_FILE%%.*}"	# remove everything past first dot
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"
+		echo "CMAKE_DL_FILE extension = ${CMAKE_DL_FILE#*.}"
+		
+		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past first dot
 		print_var CMAKE_FOLDER
 		
 		#CMAKE_FOLDER="${CMAKE_FOLDER%.*}"
