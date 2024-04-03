@@ -532,7 +532,7 @@ function Generate_Project() {
 	
 	#### CMAKE CALL ####
 	validate_cmake
-	TOOLCHAIN="${TARGET_OS}_toolchain.cmake"
+	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists $TOOLCHAIN; then
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )

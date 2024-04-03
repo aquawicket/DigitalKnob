@@ -76,7 +76,7 @@ else ()
 endif ()
 
 if(NOT EXISTS ${PYTHON_EXE})
-	dk_error("COULD NOT FIND PYTHON_EXE")
+	dk_error("COULD NOT FIND PYTHON_EXE:${PYTHON_EXE}")
 	return()
 endif()
 
@@ -97,7 +97,7 @@ if(WIN_HOST)
 	dk_find_program(PIP_EXE pip ${PYTHON}/Scripts)
 	
 	if(NOT EXISTS ${PIP_EXE})
-		dk_error("COULD NOT FIND PIP_EXE")
+		dk_error("COULD NOT FIND PIP_EXE:${PIP_EXE}")
 		return()
 	endif()
 	dk_debug(PIP_EXE PRINTVAR)
