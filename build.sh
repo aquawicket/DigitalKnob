@@ -1071,7 +1071,7 @@ function validate_branch() {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	if dk_file_exists $DIGITALKNOB_DIR/$FOLDER.git; then
+	if dk_file_exists $DIGITALKNOB_DIR/$FOLDER/.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [[ "$BRANCH" == "$FOLDER" ]]; then
 			DKBRANCH="$FOLDER"
