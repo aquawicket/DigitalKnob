@@ -30,6 +30,13 @@ function main() {
 	dk_debug "main("$@")"
 	dk_validate_sudo
 	
+	# if WSL
+	if ! [ -z ${WSLENV+x} ]; then 
+		echo "WSLENV is on"
+		echo "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+		sudo chown -R $LOGNAME $HOME
+	fi
+	
 	# if dk_command_exists bash; then echo "bash exists"; fi
 	# log to stdout and file
 	#exec |& tee file.log 
@@ -860,11 +867,10 @@ function validate_cmake() {
 		dk_get_filename $CMAKE_DL CMAKE_DL_FILE
 		print_var CMAKE_DL_FILE
 		
-		echo "CMAKE_DL_FILE extension = ${CMAKE_DL_FILE#*.}"
-		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
 		print_var CMAKE_FOLDER
-		if [ "${CMAKE_DL_FILE##*.}" == "tar" ]; then
+		echo "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
+		if [ "${CMAKE_FOLDER##*.}" == "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
 		#print_var CMAKE_FOLDER
