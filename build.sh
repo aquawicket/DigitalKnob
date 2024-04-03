@@ -882,7 +882,7 @@ function validate_cmake() {
 		if [[ "${NATIVE_OS}" == "win" ]]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
 		elif [[ "${NATIVE_OS}" == "mac" ]]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Content/bin/cmake
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
 		elif [[ "${NATIVE_OS}" == "linux" ]]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		fi
