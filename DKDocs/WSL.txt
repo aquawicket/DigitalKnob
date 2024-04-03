@@ -1,0 +1,4 @@
+# 	https://stackoverflow.com/a/73449375   and   https://stackoverflow.com/a/65293474/688352
+	Fix write access of wsl mnt drive from windows
+	
+
