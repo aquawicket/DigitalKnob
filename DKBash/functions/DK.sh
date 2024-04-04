@@ -13,6 +13,13 @@ shell_type=$(basename $(readlink /proc/$$/exe))
 [ $BASH ] && echo "BASH"
 [ $SH ]   && export echo="echo "
 [ $BASH ] && export echo="echo -e"
+
+
+###### Global Script Variables ######
+export LOG_VERBOSE=0
+export LOG_DEBUG=1
+export HALT_ON_WARNINGS=1
+export HALT_ON_ERRORS=1
 export true=0
 export false=1
 
