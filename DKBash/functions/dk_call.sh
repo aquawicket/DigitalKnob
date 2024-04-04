@@ -11,6 +11,6 @@ function dk_call() {
 		return $false
 	fi
 	
-	echo -e "${magenta} $ $@ ${CLR}"
+	echo -e "${magenta} $ $@ ${clr}"
 	"$@"
 }

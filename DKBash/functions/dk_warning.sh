@@ -9,5 +9,5 @@
 #
 function dk_warning() {
 	#echo "dk_warning($@)"
-	echo -e "${yellow} WARNING: $1 ${CLR}"
+	echo -e "${yellow} WARNING: $1 ${clr}"
 }

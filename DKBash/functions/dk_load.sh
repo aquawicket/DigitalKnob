@@ -1,9 +1,6 @@
 [ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
-
-#echo "entry($0)"
-
-
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+
 ##################################################################################
 # dk_load()
 #
@@ -47,7 +44,7 @@ dk_load () {
 		targets=($(printf "%s\n" "${funcs[@]}" | sort -u));
         for value in "${targets[@]}"
         do
-			echo "${fn}: $value"
+			#echo "${fn}: $value"
             if [[ $dk_load_list =~ "$value" ]]; then
                 #echo "${fn}: skipping $value.    already in load_list"
 				continue
@@ -69,14 +66,11 @@ dk_load () {
 			if ! [ $@ == ${!fn} ]; then
 				#echo "source $fn"
 				echo "$fn: include(${!fn})"
-				source "${!fn}" || echo "SOURCE_LOAD_ERROR"
+				source "${!fn}"
 			fi
 			return 0
 		fi
     fi
-	
-	
 }
 
-#dk_load "$@"
 dk_load "$0"

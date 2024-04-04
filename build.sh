@@ -608,7 +608,7 @@ function dk_require() {
 function dk_verbose() {
 	#echo "dk_verbose($@)"
 	if [ $LOG_VERBOSE == 1 ]; then 
-		echo -e "${blue} VERBOSE: $1 ${CLR}"
+		echo -e "${blue} VERBOSE: $1 ${clr}"
 	fi
 }
 
@@ -616,7 +616,7 @@ function dk_verbose() {
 function dk_debug() {
 	#echo "dk_debug($@)"
 	if [ $LOG_DEBUG == 1 ]; then 
-		echo -e "${blue} DEBUG: $1 ${CLR}"
+		echo -e "${blue} DEBUG: $1 ${clr}"
 	fi
 }
 
@@ -630,13 +630,13 @@ function dk_info() {
 ###### dk_warning <string> ######
 function dk_warning() {
 	#echo "dk_warning($@)"
-	echo -e "${yellow} WARNING: $1 ${CLR}"
+	echo -e "${yellow} WARNING: $1 ${clr}"
 }
 
 ###### dk_error <string> ######
 function dk_error() {
 	#echo "dk_error($@)"
-	echo -e "${red} ERROR: $1 ${CLR}"
+	echo -e "${red} ERROR: $1 ${clr}"
 	dk_stacktrace
 	if [ $HALT_ON_ERRORS == 1 ]; then
 		exit 1
@@ -670,7 +670,7 @@ function dk_call() {
 		return $false
 	fi
 	
-	echo -e "${magenta} $ $@ ${CLR}"
+	echo -e "${magenta} $ $@ ${clr}"
 	"$@"
 }
 
@@ -706,7 +706,7 @@ function dk_reload() {
 ###### dk_confirm() ######
 function dk_confirm() {
 	dk_debug "dk_confirm($@)"
-	echo -e "${yellow} Are you sure ? [Y/N] ${CLR}"
+	echo -e "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -p " " -n 1 -r
 	echo ""
 	echo ""

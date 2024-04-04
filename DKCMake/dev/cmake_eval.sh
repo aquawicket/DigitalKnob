@@ -76,7 +76,7 @@ err=""
 while IFS= read -r errline
     do
 		err="$err $errline"
-		echo -e "${red} $errline ${CLR}"
+		echo -e "${red} $errline ${clr}"
     done < cmake_eval.err
 #err contains all of the lines
 #echo "$err"	

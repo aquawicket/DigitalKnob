@@ -11,6 +11,6 @@ LOG_DEBUG=1
 function dk_debug() {
 	#echo "dk_debug($@)"
 	if [ $LOG_DEBUG == 1 ]; then 
-		echo -e "${blue} DEBUG: $1 ${CLR}"
+		echo -e "${blue} DEBUG: $1 ${clr}"
 	fi
 }

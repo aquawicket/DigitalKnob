@@ -9,7 +9,7 @@
 #
 function dk_error() {
 	#echo "dk_error($@)"
-	echo -e "${red} ERROR: $1 ${CLR}"
+	echo -e "${red} ERROR: $1 ${clr}"
 	dk_stacktrace
 	if [ $HALT_ON_ERRORS == 1 ]; then
 		exit 1
