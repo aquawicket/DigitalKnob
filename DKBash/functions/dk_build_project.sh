@@ -5,7 +5,7 @@
 #
 #
 function dk_build_project() {
-	dk_debug "dk_build_project("$@")"
+	dk_debug "dk_build_project($@)"
 	echo ""
 	echo "##################################################################"
 	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"

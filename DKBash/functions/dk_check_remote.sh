@@ -5,7 +5,7 @@
 #
 #
 function dk_check_remote() {
-	dk_debug "dk_check_remote("$@")"
+	dk_debug "dk_check_remote($@)"
 	if [ -d .git ]; then
 		git remote update > /dev/null 2> /dev/null
 		branch=$(git rev-parse --abbrev-ref HEAD)

@@ -5,8 +5,8 @@
 #
 #
 function dk_pick_update() {
-	dk_debug "dk_pick_update("$@")"
-	read_cache
+	dk_debug "dk_pick_update($@)"
+	dk_read_cache
 	
 	echo ""
 	dk_check_remote
@@ -36,22 +36,22 @@ function dk_pick_update() {
 		TYPE=$_TYPE_
 		UPDATE=1
 	elif [ "$input" == "1" ]; then
-		git_update
+		dk_git_update
 	elif [ "$input" == "2" ]; then
-		git_commit
+		dk_git_commit
 	elif [ "$input" == "3" ]; then
-		push_assets
+		dk_push_assets
 	elif [ "$input" == "4" ]; then
-		pull_assets
+		dk_pull_assets
 	elif [ "$input" == "5" ]; then
-		reset_all
+		dk_reset_all
 	elif [ "$input" == "6" ]; then
-		remove_all
+		dk_remove_all
 	elif [ "$input" == "7" ]; then
 		clear
 	elif [ "$input" == "8" ]; then
-		clear_cmake_cache
-		delete_temp_files
+		dk_clear_cmake_cache
+		dk_delete_temp_files
 	elif [ "$input" == "9" ]; then
 		dk_reload
 	elif [ "$input" == "10" ]; then

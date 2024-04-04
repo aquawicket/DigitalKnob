@@ -6,7 +6,7 @@
 #
 ###### dk_dk_convert_to_c_identifier <input> <output> ######
 function dk_convert_to_c_identifier() {
-	dk_debug "dk_convert_to_c_identifier("$@")"
+	dk_debug "dk_convert_to_c_identifier($@)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false

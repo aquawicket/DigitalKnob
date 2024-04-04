@@ -5,8 +5,8 @@
 #
 #
 function dk_install() {
-	dk_debug "dk_install("$@")"
-	#if package_installed $1; then
+	dk_debug "dk_install($@)"
+	#if dk_package_installed $1; then
 	#	echo "$1 already installed"
 	#	return $false;
 	#fi

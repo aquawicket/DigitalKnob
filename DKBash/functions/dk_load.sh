@@ -41,11 +41,11 @@ dk_load () {
     else
 		dk_load_list="${dk_load_list};$fn" # Add to list
 
-		funcs=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]* " ${!fn}))
+		funcs=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]*" ${!fn}))
 		targets=($(printf "%s\n" "${funcs[@]}" | sort -u));
         for value in "${targets[@]}"
         do
-			#echo "${fn}: $value"
+			echo "${fn}: $value"
             if [[ $dk_load_list =~ "$value" ]]; then
                 #echo "${fn}: skipping $value.    already in load_list"
 				continue
@@ -62,9 +62,13 @@ dk_load () {
         done
 		
 		if [ -f "${!fn}" ]; then
-			#echo "source $fn"
-			echo "$fn: include(${!fn})"
-			source "${!fn}" || echo "SOURCE_LOAD_ERROR"
+			#echo "{@}: ${@}"
+			#echo "{fn}: ${!fn}"
+			if ! [ $@ == ${!fn} ]; then
+				#echo "source $fn"
+				echo "$fn: include(${!fn})"
+				source "${!fn}" || echo "SOURCE_LOAD_ERROR"
+			fi
 			return 0
 		fi
     fi

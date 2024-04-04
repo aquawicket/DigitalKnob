@@ -5,7 +5,7 @@
 #
 #
 function dk_generate_project() {
-	dk_debug "dk_generate_project("$@")"
+	dk_debug "dk_generate_project($@)"
 	echo ""
 	echo "##################################################################"
 	echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"

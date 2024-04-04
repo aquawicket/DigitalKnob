@@ -5,7 +5,7 @@
 #
 #
 function dk_validate_homebrew() {
-	dk_debug "dk_validate_homebrew("$@")"
+	dk_debug "dk_validate_homebrew($@)"
 	if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		return
 	fi
@@ -19,5 +19,5 @@ function dk_validate_homebrew() {
 	fi
 	
 	BREW=$(command -v brew)
-	print_var BREW
+	dk_print_var BREW
 }

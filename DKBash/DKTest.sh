@@ -1,9 +1,10 @@
 #!/bin/bash
+echo "DKTest.sh()"
 
 echo "clear" && clear && clear
 
 ###### Load Function files ######
-source functions/DK.sh || echo "SOURCE_LOAD_ERROR"
+source functions/DK.sh
 
 
 dk_message "dk_message"
@@ -12,7 +13,7 @@ dk_warning "dk_warning"
 dk_debug "SCRIPT($@)"
 TEST_VAR="this is a test variable"
 dk_print_var TEST_VAR
-exit
+
 
 ###### main ######
 main() {
@@ -173,7 +174,7 @@ main() {
 	$echo "\n############################################################\n"
 	
 	print_stack
-	dk_stacktrack
+	dk_stacktrace
 }
 
 ###### print_stack() ######
@@ -229,4 +230,4 @@ escape_quotes () {
 #[ "$@" -ne "" ] && "$@"
 main "$@"
 
-exit $?  #exitcode
+#exit $?  #exitcode

@@ -6,7 +6,7 @@
 #
 ###### dk_validate_branch ######
 function dk_validate_branch() {
-	dk_debug dk_validate_branch($@)
+	dk_debug "dk_validate_branch($@)"
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	FOLDER=$(basename $(pwd))
@@ -18,25 +18,25 @@ function dk_validate_branch() {
 			DKBRANCH=$FOLDER
 		fi
 	fi
-	print_var DKBRANCH
+	dk_print_var DKBRANCH
 	
 	DKBRANCH_DIR=$DIGITALKNOB_DIR$DKBRANCH
-	print_var  DKBRANCH_DIR
+	dk_print_var  DKBRANCH_DIR
 	
 	DKCMAKE_DIR=$DKBRANCH_DIRDKCMake
-	print_var  DKCMAKE_DIR
+	dk_print_var  DKCMAKE_DIR
 	
 	DK3RDPARTY_DIR=$DKBRANCH_DIR3rdParty
-	print_var DK3RDPARTY_DIR
+	dk_print_var DK3RDPARTY_DIR
 	
 	DKIMPORTS_DIR=$DK3RDPARTY_DIR_DKIMPORTS
-	print_var DKIMPORTS_DIR
+	dk_print_var DKIMPORTS_DIR
 	
 	DKAPPS_DIR=$DIGITALKNOB_DIR$DKBRANCHDKApps
-	print_var DKAPPS_DIR
+	dk_print_var DKAPPS_DIR
 	
 	DKPLUGINS_DIR=$DIGITALKNOB_DIR$DKBRANCHDKPlugins
-	print_var DKPLUGINS_DIR
+	dk_print_var DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [[ $SCRIPT_DIR == $DKBRANCH_DIR ]]; then

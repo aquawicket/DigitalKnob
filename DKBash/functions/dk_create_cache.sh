@@ -5,7 +5,7 @@
 #
 #
 function dk_create_cache() {
-	dk_debug "dk_create_cache("$@")"
+	dk_debug "dk_create_cache($@)"
 	echo "creating cache..."
 	
 	# write variable values line by line

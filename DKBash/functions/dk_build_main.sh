@@ -7,7 +7,7 @@
 #
 #
 function dk_build_main() {
-	dk_debug "dk_build_main("$@")"
+	dk_debug "dk_build_main($@)"
 	dk_validate_sudo
 	
 	if dk_defined WSLENV; then 
@@ -20,20 +20,20 @@ function dk_build_main() {
 	# log to stdout and file
 	#exec |& tee file.log 
 
-	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
-	print_var HOSTNAME
-	print_var HOSTTYPE
-	print_var MACHTYPE
+	dk_print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
+	dk_print_var HOSTNAME
+	dk_print_var HOSTTYPE
+	dk_print_var MACHTYPE
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
-	print_var MODEL
-	print_var MSYSTEM
-	print_var OSTYPE
-	print_var SCRIPT_NAME
-	print_var SCRIPT_DIR
-	print_var USER
-	print_var USERNAME
+	dk_print_var MODEL
+	dk_print_var MSYSTEM
+	dk_print_var OSTYPE
+	dk_print_var SCRIPT_NAME
+	dk_print_var SCRIPT_DIR
+	dk_print_var USER
+	dk_print_var USERNAME
 	
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if [[ "$MODEL" == "Raspberry"* ]]; then
@@ -49,7 +49,7 @@ function dk_build_main() {
 	else
 		echo "Unknown HOST_OS"
 	fi
-	print_var HOST_OS
+	dk_print_var HOST_OS
 	
 	if [[ "$HOSTTYPE" == "x86" ]]; then
 		HOST_ARCH="x86"
@@ -60,10 +60,10 @@ function dk_build_main() {
 	else
 		echo "Unknown HOST_ARCH"
 	fi
-	print_var HOST_ARCH
+	dk_print_var HOST_ARCH
 	
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	print_var HOST_TRIPLE
+	dk_print_var HOST_TRIPLE
 	
 	if [[ -n "$USERPROFILE" ]]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
@@ -73,30 +73,30 @@ function dk_build_main() {
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	mkdir -p $DIGITALKNOB_DIR;
-	print_var DIGITALKNOB_DIR
+	dk_print_var DIGITALKNOB_DIR
 
 	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
 	mkdir -p $DKDOWNLOAD_DIR;
-	print_var DKDOWNLOAD_DIR
+	dk_print_var DKDOWNLOAD_DIR
 	
 	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
 	mkdir -p $DKTOOLS_DIR;
-	print_var DKTOOLS_DIR
+	dk_print_var DKTOOLS_DIR
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
-		validate_homebrew
+		dk_validate_homebrew
 	fi
 
 	#validate_cmake
-	validate_git
-	validate_branch
+	dk_validate_git
+	dk_validate_branch
 
-	print_var DKBRANCH_DIR
-	print_var DKAPPS_DIR
-	print_var DKCMAKE_DIR
-	print_var DK3RDPARTY_DIR
-	print_var DKIMPORTS_DIR
-	print_var DKPLUGINS_DIR
+	dk_print_var DKBRANCH_DIR
+	dk_print_var DKAPPS_DIR
+	dk_print_var DKCMAKE_DIR
+	dk_print_var DK3RDPARTY_DIR
+	dk_print_var DKIMPORTS_DIR
+	dk_print_var DKPLUGINS_DIR
 
 	if [ ! $SCRIPT_DIR == $DKBRANCH_DIR ]; then
 		dk_warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
@@ -106,14 +106,14 @@ function dk_build_main() {
 	
 	while :
 	do
-		if ! [[ -n "$UPDATE" ]]; then Pick_Update;	continue; fi
-		if ! [[ -n "$APP" ]]; then Pick_App;		continue; fi
-		if ! [[ -n "$TARGET_OS" ]]; then Pick_OS;	continue; fi
-		if ! [[ -n "$TYPE" ]]; then Pick_Type;		continue; fi
+		if ! [[ -n "$UPDATE" ]]; then dk_pick_update;	continue; fi
+		if ! [[ -n "$APP" ]]; then dk_pick_app;		continue; fi
+		if ! [[ -n "$TARGET_OS" ]]; then dk_pick_os;	continue; fi
+		if ! [[ -n "$TYPE" ]]; then dk_pick_type;		continue; fi
 		
-		create_cache
-		Generate_Project
-		Build_Project
+		dk_create_cache
+		dk_generate_project
+		dk_build_project
 		
 		unset UPDATE
 		unset APP

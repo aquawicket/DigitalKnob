@@ -5,7 +5,7 @@
 #
 #
 function dk_pick_app() {
-	dk_debug "dk_pick_app("$@")"
+	dk_debug "dk_pick_app($@)"
 	echo ""
 	echo "${APP}  ${TARGET_OS} ${TYPE}"
 	

@@ -5,7 +5,7 @@
 #
 #
 function download() {
-	dk_debug "download("$@")"
+	dk_debug "download($@)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false

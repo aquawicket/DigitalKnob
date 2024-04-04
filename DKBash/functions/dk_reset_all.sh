@@ -5,7 +5,7 @@
 #
 #
 function dk_reset_all() {
-	dk_debug "dk_reset_all("$@")"
+	dk_debug "dk_reset_all($@)"
 	if ! [ "$1" == "wipe" ]; then
 		clear
 		echo ""
