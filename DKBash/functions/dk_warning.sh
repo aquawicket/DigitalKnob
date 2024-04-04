@@ -7,6 +7,7 @@
 #
 #	@msg	- The message to print
 #
-dk_warning () {
+function dk_warning() {
+	#echo "dk_warning($@)"
 	echo -e "${yellow} WARNING: $1 ${CLR}"
 }

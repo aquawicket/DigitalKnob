@@ -8,11 +8,9 @@ LOG_DEBUG=1
 #
 #	@msg	- The message to print
 #
-dk_debug () {
+function dk_debug() {
 	#echo "dk_debug($@)"
-	#if [ $LOG_DEBUG = 1 ]; then 
-		#$echo ${blue}DEBUG: $1 ${clr}
-		$echo ${blue}$1 ${clr}
-		return 0 #true
-	#fi
+	if [ $LOG_DEBUG == 1 ]; then 
+		echo -e "${blue} DEBUG: $1 ${CLR}"
+	fi
 }

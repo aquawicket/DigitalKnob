@@ -4,7 +4,7 @@
 # dk_reload()
 #
 #
-dk_reload () {
+function dk_reload() {
 	dk_debug "dk_reload("$@")"
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear

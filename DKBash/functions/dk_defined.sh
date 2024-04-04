@@ -9,7 +9,7 @@
 #
 #	reference: https://stackoverflow.com/a/13864829/688352
 #
-dk_defined () {
+function dk_defined() {
 	#dk_defined "dk_defined("$@")"
 	if [ -z "$1" ]; then
 		return 1

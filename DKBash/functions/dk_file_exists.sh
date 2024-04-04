@@ -4,10 +4,12 @@
 # dk_file_exists()
 #
 #
-dk_file_exists () {
-	if [ -z "$1" ]; then
-		dk_error "file_exists <file> requires 1 parameter"
-		return $false
+function dk_file_exists() {
+	dk_debug "dk_file_exists("$@")"
+	if [ -e "$1" ]; then
+		dk_debug "dk_file_exists("$@"): FOUND"
+	else
+		dk_warning "dk_file_exists("$@"): NOT FOUND!" 
 	fi
-	[ -e "$1" ]	
+	[ -e "$1" ]
 }

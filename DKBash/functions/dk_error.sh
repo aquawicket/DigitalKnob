@@ -7,11 +7,11 @@
 #
 #	@msg	- The message to print
 #
-dk_error () {
-	if [ -z "$1" ]; then
-		echo -e "error <string> requires 1 parameter"
-		return $false
-	fi
-	
+function dk_error() {
+	#echo "dk_error($@)"
 	echo -e "${red} ERROR: $1 ${CLR}"
+	dk_stacktrace
+	if [ $HALT_ON_ERRORS == 1 ]; then
+		exit 1
+	fi
 }
