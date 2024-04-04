@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "clear" && clear && clear
+#[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
 
 ###### Global Script Variables ######
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
@@ -15,6 +15,7 @@ shell_type=$(basename $(readlink /proc/$$/exe))
 [ $BASH ] && export echo="echo -e"
 export true=0
 export false=1
+
 
 . functions/dk_load.sh
 dk_load dk_color

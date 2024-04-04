@@ -5,6 +5,7 @@
 #
 #
 dk_print_var () {
+	dk_debug "dk_print_var($@)"
 	if [ -z "$1" ]; then
 		dk_error "print_var <variable> requires 1 parameter"
 		return $false

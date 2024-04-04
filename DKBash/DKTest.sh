@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "clear" && clear && clear
+
 ###### Load Function files ######
 source functions/DK.sh || echo "SOURCE_LOAD_ERROR"
 
@@ -10,7 +12,7 @@ dk_warning "dk_warning"
 dk_debug "SCRIPT($@)"
 TEST_VAR="this is a test variable"
 dk_print_var TEST_VAR
-
+exit
 
 ###### main ######
 main() {
@@ -23,7 +25,7 @@ main() {
 	very neat comment
 	in bash
 	'
-	printenv
+	#printenv
 	
 	# https://www.baeldung.com/linux/find-current-shell
 	$echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"

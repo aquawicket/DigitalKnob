@@ -10,16 +10,16 @@ export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 #
 #
 dk_load () {
-	echo "dk_load($@)"
+	#echo "dk_load($@)"
+	local fn=
 	[ -z $1 ] && return 0 #true
 	
 	if [ -f "$1" ]; then
 		fpath=$1
 		fn=$(basename ${fpath})
-		declare fn="${fn%.*}"
+	    fn="${fn%.*}"
 	else
 		fn=$1
-		declare fnB=$1
 		fpath=$DKBASH_DIR/functions/$fn.sh
 	fi
 	
@@ -39,32 +39,30 @@ dk_load () {
         echo "$fn: already in the list" 	# if allready in list, do nothing
         return 0
     else
-		echo "$fn made it to phase 2"
 		dk_load_list="${dk_load_list};$fn" # Add to list
 
 		funcs=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]* " ${!fn}))
 		targets=($(printf "%s\n" "${funcs[@]}" | sort -u));
         for value in "${targets[@]}"
         do
-			echo "phase 3"
-			echo "${fn}: $value"
-				
+			#echo "${fn}: $value"
             if [[ $dk_load_list =~ "$value" ]]; then
-                echo "${fn}: skipping $value.    already in load_list"
+                #echo "${fn}: skipping $value.    already in load_list"
 				continue
-            elif [[ $fn_file == ${fn} ]]; then
-			   echo "${fn}: skipping $value.    already matches fn"
+            elif [[ ${fn} == $value ]]; then
+			   #echo "${fn}: skipping $value.    already matches fn"
 			   continue
             elif [[ $(command -v $value) != "" ]]; then
-			   echo "${fn}: skipping $value.    command already recognized"
+			   #echo "${fn}: skipping $value.    command already recognized"
 			   continue
             else
-               echo "$fn: dk_load( $value )"
+               #echo "$fn: dk_load( $value )"
                dk_load $value
             fi
         done
 		
 		if [ -f "${!fn}" ]; then
+			#echo "source $fn"
 			echo "$fn: include(${!fn})"
 			source "${!fn}" || echo "SOURCE_LOAD_ERROR"
 			return 0
