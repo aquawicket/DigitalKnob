@@ -107,7 +107,7 @@ function dk_build_main() {
 	while :
 	do
 		if ! [[ -n "$UPDATE" ]]; then dk_pick_update;	continue; fi
-		if ! [[ -n "$APP" ]]; then dk_pick_app;		continue; fi
+		if ! [[ -n "$APP" ]]; then dk_pick_app;			continue; fi
 		if ! [[ -n "$TARGET_OS" ]]; then dk_pick_os;	continue; fi
 		if ! [[ -n "$TYPE" ]]; then dk_pick_type;		continue; fi
 		

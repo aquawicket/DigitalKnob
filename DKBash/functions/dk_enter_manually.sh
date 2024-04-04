@@ -22,7 +22,7 @@ function dk_enter_manually() {
 		TARGET_PATH=$DKAPPS_DIR/$input
 		return $true
 	fi
-	print_var TARGET_PATH
+	dk_print_var TARGET_PATH
 	
 	if [ ! -d $DKAPPS_DIR/$APP ]; then
 		mkdir -p $DKAPPS_DIR/$APP;

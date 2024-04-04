@@ -24,10 +24,12 @@ dk_load () {
 	fi
 	
 	# Convert to unix line endings if CRLF found
-	if [[ $(file -b - < $fpath) =~ CRLF ]]; then
-		echo Converting file to Unix line endings
-		sed -i -e 's/\r$//' $fpath
-	fi
+	#if file_exists $fpath; then
+		if [[ $(file -b - < $fpath) =~ CRLF ]]; then
+			echo Converting file to Unix line endings
+			sed -i -e 's/\r$//' $fpath
+		fi
+	#fi
 	
 	if [ -f $fpath ]; then
 		declare ${fn}=$fpath

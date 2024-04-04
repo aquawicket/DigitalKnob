@@ -12,7 +12,7 @@ function dk_git_commit() {
 	cd $DKBRANCH_DIR
 	
 	STORE=$($GIT_EXE config credential.helper)
-	print_var STORE
+	dk_print_var STORE
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
 		echo ""

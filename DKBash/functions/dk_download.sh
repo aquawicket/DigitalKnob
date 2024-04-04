@@ -1,21 +1,21 @@
 #include_guard()
 
 ##################################################################################
-# dk_function()
+# dk_download()
 #
 #
-function download() {
-	dk_debug "download($@)"
+function dk_download() {
+	dk_debug "dk_download($@)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
 	fi
 	
 	if dk_file_exists $2; then
-		echo "download(): $2 already exists"
+		echo "dk_download(): $2 already exists"
 		return 0
 	fi
-	#echo "download($1, $2)"
+	#echo "dk_download($1, $2)"
 	echo "Downloading $1 . . ."
 	parentdir="$(dirname "$2")"
 	#filename="$(basename "$2")"

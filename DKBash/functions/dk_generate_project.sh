@@ -12,21 +12,21 @@ function dk_generate_project() {
 	echo "##################################################################"
 	echo ""
 
-	clear_cmake_cache
-	delete_temp_files
+	dk_clear_cmake_cache
+	dk_delete_temp_files
 
 	TARGET_PATH=$DKAPPS_DIR/$APP
-	print_var TARGET_PATH
+	dk_print_var TARGET_PATH
 	mkdir -p $TARGET_PATH/$TARGET_OS
 	cd $TARGET_PATH/$TARGET_OS
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
-	print_var CMAKE_SOURCE_DIR
+	dk_print_var CMAKE_SOURCE_DIR
 	if ! dk_file_exists $CMAKE_SOURCE_DIR; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
-	print_var CMAKE_SOURCE_DIR
+	dk_print_var CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
-	print_var CMAKE_TARGET_PATH
+	dk_print_var CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	DKLEVEL="RebuildAll"
@@ -62,7 +62,7 @@ function dk_generate_project() {
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
-	print_var CMAKE_BINARY_DIR
+	dk_print_var CMAKE_BINARY_DIR
 	
 	if ! [[ $WSL == 1 ]]; then
 		CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
@@ -139,7 +139,7 @@ function dk_generate_project() {
 	fi
 	
 	#### CMAKE CALL ####
-	validate_cmake
+	dk_validate_cmake
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists $TOOLCHAIN; then

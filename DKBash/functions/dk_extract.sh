@@ -15,7 +15,7 @@ function dk_extract() {
 	destFolder="${filename%.*}"
 	destFolder="${destFolder%.*}"
 	fulldest="$2/$destFolder"
-	print_var fulldest
+	dk_print_var fulldest
 		
 	#if dk_file_exists $fulldest; then
 	#	echo "extract(): $fulldest already exists"
@@ -34,7 +34,7 @@ function dk_extract() {
 	tar -xf $filename -C $2
 	cd $oldpwd
 	dk_convert_to_c_identifier $destFolder destFolder_
-	print_var destFolder_
+	dk_print_var destFolder_
 	echo "mv $2/$destFolder $2/$destFolder_"
 	mv $2/$destFolder $2/$destFolder_
 	echo $CMAKE_FOLDER>$2/$destFolder_/installed

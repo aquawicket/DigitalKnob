@@ -5,7 +5,7 @@
 #
 #
 dk_print_var () {
-	dk_debug "dk_print_var($@)"
+	dk_verbose "dk_print_var($@)"
 	if [ -z "$1" ]; then
 		dk_error "print_var <variable> requires 1 parameter"
 		return $false
@@ -26,7 +26,7 @@ dk_print_var () {
 			return $true
 		fi
 			
-		dk_error "${red} \$$1 is not set ${CLR}"
+		dk_warning "${red} \$$1 is not set ${CLR}"
 		return $false
 	fi
 		

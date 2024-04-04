@@ -1,7 +1,7 @@
 #include_guard()
 
 ##################################################################################
-# dk_function()
+# dk_clear_cmake_cache()
 #
 #
 function dk_clear_cmake_cache() {
