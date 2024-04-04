@@ -125,8 +125,3 @@ function dk_build_main() {
 
 
 
-if ! [[ "$@" == "" ]]; then
-	"$@"
-fi
-
-main "$@"
