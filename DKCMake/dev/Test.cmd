@@ -15,7 +15,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	echo DKCMAKE_DIR = %DKCMAKE_DIR%
 		
 	:: find cmake directory
-	set CMAKE_EXE=%DKTOOLS_DIR%\cmake_3_28_3_windows_x86_64\bin\cmake.exe
+	set CMAKE_EXE=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
 	echo CMAKE_EXE = %CMAKE_EXE%
 	%CMAKE_EXE% --version
 	:: we should actullly find the first folder that starts with cmake in the DKTools directory.	

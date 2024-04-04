@@ -2,6 +2,7 @@ include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 include($ENV{DKCMAKE_DIR}/functions/dk_load.cmake)
+#message("ENV{DKCMAKE_DIR} = $ENV{DKCMAKE_DIR}")
 
 #dk_watch(DIGITALKNOB_DIR)
 
@@ -124,9 +125,12 @@ if(SINGLE_CONFIG)
 	message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
 endif()
 
-
+dk_load(dk_get_subdirectories)
+dk_get_subdirectories("${DKTOOLS_DIR}" DIR_LIST)
+message("DIR_LIST = ${DIR_LIST}")
 
 ##### Load Function files #################
+dk_load(dk_getHostTriple)
 dk_getHostTriple()
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(dk_importVariables)

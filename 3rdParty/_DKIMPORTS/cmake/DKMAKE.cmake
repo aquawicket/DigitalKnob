@@ -45,7 +45,7 @@ else()
 	if(MAC_HOST)
 		dk_find_program(CMAKE_EXE cmake ${CMAKE}/CMake.app/Contents/bin)
 	else()
-		dk_find_program(CMAKE_EXE cmake ${CMAKE}/bin)
+		dk_find_program(CMAKE_EXE cmake ${DKTOOLS_DIR})#${CMAKE}/bin)
 	endif()
 endif()
 

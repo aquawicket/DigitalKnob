@@ -7,7 +7,7 @@ include_guard()
 #
 #
 function(dk_get_subdirectories input_dir dir_list)
-	file(GLOB children ${input_dir}/*) # This was changed
+	file(GLOB_RECURSE children LIST_DIRECTORIES true ${input_dir}/*) # This was changed
     set(dirlist "")
     foreach(child ${children})
         if(IS_DIRECTORY ${child})
