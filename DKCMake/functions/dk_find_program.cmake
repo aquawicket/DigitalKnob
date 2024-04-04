@@ -25,6 +25,15 @@ function(dk_find_program VAR name)
 		dk_error("error {VAR} already set to ${VAR}")
 	endif()
 	
+	################### Recursive paths builder ##############################
+	file(GLOB V_GLOB LIST_DIRECTORIES true "*")
+	foreach(item ${V_GLOB})
+		if(IS_DIRECTORY ${item})
+			add_subdirectory(${item})
+		endif()
+	endforeach()
+	##########################################################################
+	
 	if(ARGN)
 		find_program(${VAR} "${name}" ${ARGN} NO_DEFAULT_PATH)
 	else()
