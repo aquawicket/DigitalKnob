@@ -826,7 +826,7 @@ goto:eof
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
     for %%I in (.) do set FOLDER=%%~nxI
-        
+
     set DKBRANCH=Development
     if exist .git (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 0 (
@@ -841,7 +841,7 @@ goto:eof
     set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
     set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
-    
+
     :: make sure script is running from DKBRANCH_DIR
     ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (

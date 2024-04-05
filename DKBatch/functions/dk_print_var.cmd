@@ -4,8 +4,9 @@
 :: dk_print_var(variable)
 ::
 ::
-:dk_print_var() {
-	call dk_verbose dk_print_var(%*)
+:dk_print_var () {
+	::call dk_verbose dk_print_var(%*)
+	
 	if "" == "$1" (
 		call dk_error "dk_print_var <variable> requires 1 parameter"
 		echo return $false

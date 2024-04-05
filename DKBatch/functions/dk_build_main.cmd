@@ -5,7 +5,7 @@
 ::
 ::
 :dk_build_main () {
-	call dk_debug "dk_build_main(%*)"
+	call dk_verbose "dk_build_main(%*)"
 	:: call dk_validate_sudo
 	
 	::--------------------------------------------------------
@@ -31,7 +31,6 @@
 
 	call dk_get_dkpaths
     
-
     set NATIVE_OS=win
     call dk_print_var NATIVE_OS
         
@@ -61,35 +60,34 @@
     call dk_validate_cmake
     
     :while_loop             
-    if "%UPDATE%"==""     call dk_pick_update & goto:while_loop
-    if "%APP%"==""        call dk_pick_app    & goto:while_loop
-    if "%TARGET_OS%"==""  call dk_pick_os     & goto:while_loop
-    if "%TYPE%"==""       call dk_pick_type   & goto:while_loop
+		if "%UPDATE%"==""     call dk_pick_update & goto:while_loop
+		if "%APP%"==""        call dk_pick_app    & goto:while_loop
+		if "%TARGET_OS%"==""  call dk_pick_os     & goto:while_loop
+		if "%TYPE%"==""       call dk_pick_type   & goto:while_loop
 
-    call dk_create_cache
-    
-    call dk_generate
-    if %TARGET_OS%==android_arm32      call dk_generate_toolchain android_arm32_toolchain
-    if %TARGET_OS%==android_arm64      call dk_generate_toolchain android_arm64_toolchain
-    if %TARGET_OS%==emscripten         call dk_generate_toolchain emscripten_toolchain
-    if %TARGET_OS%==win_arm64_clang    call dk_generate_toolchain windows_arm64_clang_toolchain
-    if %TARGET_OS%==win_x86_mingw      call dk_generate_toolchain windows_x86_mingw_toolchain
-    if %TARGET_OS%==win_x86_clang      call dk_generate_toolchain windows_x86_clang_toolchain
-    if %TARGET_OS%==win_x86_msvc       call dk_generate_toolchain windows_x86_msvc_toolchain
-    if %TARGET_OS%==win_x86_64_mingw   call dk_generate_toolchain windows_x86_64_mingw_toolchain
-    if %TARGET_OS%==win_x86_64_clang   call dk_generate_toolchain windows_x86_64_clang_toolchain
-    if %TARGET_OS%==win_x86_64_ucrt    call dk_generate_toolchain windows_x86_64_ucrt_toolchain
-    if %TARGET_OS%==win_x86_64_msvc    call dk_generate_toolchain windows_x86_64_msvc_toolchain
-    
-    call dk_build
-    if %TYPE%==All      call dk_build_all
-    if %TYPE%==Release  call dk_build_release
-    if %TYPE%==Debug    call dk_build_debug
-    call dk_end_message
-    
-    :: TODO
-    call dk_post_build_menu
-    
+		call dk_create_cache
+		
+		call dk_generate
+		if %TARGET_OS%==android_arm32      call dk_generate_toolchain android_arm32_toolchain
+		if %TARGET_OS%==android_arm64      call dk_generate_toolchain android_arm64_toolchain
+		if %TARGET_OS%==emscripten         call dk_generate_toolchain emscripten_toolchain
+		if %TARGET_OS%==win_arm64_clang    call dk_generate_toolchain windows_arm64_clang_toolchain
+		if %TARGET_OS%==win_x86_mingw      call dk_generate_toolchain windows_x86_mingw_toolchain
+		if %TARGET_OS%==win_x86_clang      call dk_generate_toolchain windows_x86_clang_toolchain
+		if %TARGET_OS%==win_x86_msvc       call dk_generate_toolchain windows_x86_msvc_toolchain
+		if %TARGET_OS%==win_x86_64_mingw   call dk_generate_toolchain windows_x86_64_mingw_toolchain
+		if %TARGET_OS%==win_x86_64_clang   call dk_generate_toolchain windows_x86_64_clang_toolchain
+		if %TARGET_OS%==win_x86_64_ucrt    call dk_generate_toolchain windows_x86_64_ucrt_toolchain
+		if %TARGET_OS%==win_x86_64_msvc    call dk_generate_toolchain windows_x86_64_msvc_toolchain
+		
+		call dk_build
+		if %TYPE%==All      call dk_build_all
+		if %TYPE%==Release  call dk_build_release
+		if %TYPE%==Debug    call dk_build_debug
+		call dk_end_message
+		
+		:: TODO
+		call dk_post_build_menu
     goto while_loop
     :while_loop_end
 goto:eof

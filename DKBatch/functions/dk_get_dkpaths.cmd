@@ -5,7 +5,7 @@
 ::
 ::
 :dk_check_remote () {
-	call dk_debug "dk_check_remote(%*)"
+	call dk_verbose "dk_check_remote(%*)"
 	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call dk_make_directory "%DIGITALKNOB_DIR%"
