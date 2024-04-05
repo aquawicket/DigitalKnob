@@ -1,4 +1,4 @@
-::dk_include_guard()
+:: dk_include_guard()
 
 ::#################################################################################
 :: dk_string_contains() <haystack> <needle> <result>

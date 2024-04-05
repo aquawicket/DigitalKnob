@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
+#[ -n "$dk_load" ] && return || readonly dk_load=1     # dk_include_guard()
 
 ###### Global Script Variables ######
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )

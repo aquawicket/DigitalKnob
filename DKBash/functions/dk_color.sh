@@ -1,4 +1,4 @@
-#include_guard()
+# dk_include_guard()
 
 export clr="\033[0m"
 export black="\033[100m"

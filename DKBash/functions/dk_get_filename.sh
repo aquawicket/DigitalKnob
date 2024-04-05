@@ -1,4 +1,4 @@
-#include_guard()
+# dk_include_guard()
 
 ###### dk_get_filename <path> <output> ######
 function dk_get_filename() {

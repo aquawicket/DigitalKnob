@@ -1,10 +1,10 @@
-#dk_include_guard()
-#if [ -n "$dk_include_guard" ]; then
-#	echo "dk_include_guard already included"
-#	return
-#fi
-#echo "including dk_include_guard"
-#readonly dk_include_guard=1
+# dk_include_guard()
+# if [ -n "$dk_include_guard" ]; then
+# 	echo "dk_include_guard already included"
+# 	return
+# fi
+# echo "including dk_include_guard"
+# readonly dk_include_guard=1
 
 ##################################################################################
 # dk_include_guard()
