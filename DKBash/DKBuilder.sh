@@ -6,7 +6,6 @@ echo "clear" && clear && clear
 source functions/DK.sh
 
 ### Load Main Program ###
-#dk_build_main
 
 #if ! [[ "$@" == "" ]]; then
 #	"$@"

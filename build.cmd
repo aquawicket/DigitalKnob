@@ -1239,7 +1239,7 @@ goto:eof
     ::set "%3=0"
 goto:eof
 
-:: get_filename <path> <output_variable>
+:: dk_get_filename <path> <output_variable>
 :get_filename
     if [%1] == [] (
         echo "ERROR: get_filename() parameter 1 is invalid"
