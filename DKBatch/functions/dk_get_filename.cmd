@@ -5,7 +5,7 @@
 ::
 ::
 :dk_get_filename () {
-	call dk_verbose "dk_get_filename(%*)"
+	call dk_verbose "%0(%*)"
 	
     if [%1] == [] (
         echo "ERROR: dk_get_filename() parameter 1 is invalid"

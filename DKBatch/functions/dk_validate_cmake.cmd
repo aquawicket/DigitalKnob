@@ -5,7 +5,7 @@
 ::
 ::
 :dk_validate_cmake
-	call dk_verbose "dk_validate_cmake(%*)"
+	call dk_verbose "%0(%*)"
 	
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
     if "%NATIVE_OS%_%NATIVE_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"

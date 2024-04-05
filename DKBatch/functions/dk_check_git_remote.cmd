@@ -5,6 +5,8 @@
 ::
 ::
 :dk_check_git_remote
+	call dk_verbose "%0(%*)"
+	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
     :: git remote update > /dev/null 2> /dev/null

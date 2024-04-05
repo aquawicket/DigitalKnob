@@ -5,6 +5,8 @@
 ::
 ::
 :download () {
+	call dk_verbose "%0(%*)"
+	
     echo Downloading %~1
     if exist "%~2" (
         echo %~2 already exist

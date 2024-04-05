@@ -5,7 +5,7 @@
 ::
 ::
 :dk_generate_toolchain () {
-	call dk_verbose "dk_generate_toolchain(%*)"
+	call dk_verbose "%0(%*)"
 	
     set toolchain=%1
     

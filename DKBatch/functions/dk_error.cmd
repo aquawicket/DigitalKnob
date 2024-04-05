@@ -8,7 +8,8 @@
 ::	@msg	- The message to print
 ::
 :dk_error() {
-	::echo "dk_error(%*)"
+	::call dk_verbose "%0(%*)"
+	
 	echo %red% ERROR: %1 %clr%
 ::	dk_stacktrace
 ::	if [ $HALT_ON_ERRORS == 1 ]; then

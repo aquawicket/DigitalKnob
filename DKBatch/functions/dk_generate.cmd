@@ -5,7 +5,7 @@
 ::
 ::
 :dk_generate
-	call dk_verbose "dk_generate(%*)"
+	call dk_verbose "%0(%*)"
 	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     echo.

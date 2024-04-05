@@ -5,7 +5,7 @@
 ::
 ::
 :dk_string_contains () {
-	call dk_verbose "dk_string_contains(%*)"
+	call dk_verbose "%0(%*)"
 	
     call set "haystack=%1"
     call set "needle=%2"

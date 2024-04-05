@@ -1,14 +1,10 @@
 @echo off
+cls
+echo %0(%*)
 
-echo "cls" && cls
-
-::###### Load DK Function files ######
+:::::: Load DK Function files (DK_INIT) ::::::
 call functions/DK.cmd
 
-::### Load Main Program ###
-
-::#if ! [[ "$@" == "" ]]; then
-::#	"$@"
-::#fi
-
+:::::: Load Main Program ::::::
+::if "%*" NEQ "" call %* 
 dk_build_main "%*"

@@ -5,7 +5,7 @@
 ::
 ::
 :dk_build
-	call dk_verbose "dk_build(%*)"
+	call dk_verbose "%0(%*)"
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
     echo.

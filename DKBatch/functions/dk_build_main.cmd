@@ -5,7 +5,8 @@
 ::
 ::
 :dk_build_main () {
-	call dk_verbose "dk_build_main(%*)"
+	call dk_verbose "%0(%*)"
+	
 	:: call dk_validate_sudo
 	
 	::--------------------------------------------------------

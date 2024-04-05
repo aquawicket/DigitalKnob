@@ -6,7 +6,7 @@ setlocal EnableDelayedExpansion
 ::
 ::
 :dk_convert_to_c_identifier () {
-	call dk_verbose "dk_convert_to_c_identifier(%*)"
+	call dk_verbose "%0(%*)"
 
     set "_input=%1"
     set "_output="

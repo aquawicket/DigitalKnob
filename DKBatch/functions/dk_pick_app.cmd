@@ -5,7 +5,7 @@
 ::
 ::
 :dk_pick_app () {
-	call dk_verbose "dk_pick_app(%*)"
+	call dk_verbose "%0(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 

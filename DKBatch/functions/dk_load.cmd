@@ -1,8 +1,5 @@
 ::[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
-for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
-set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-set "PATH=%PATH%;%DKBATCH_DIR%\functions"
-
+echo %0(%*)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: dk_load()
@@ -10,7 +7,8 @@ set "PATH=%PATH%;%DKBATCH_DIR%\functions"
 ::
 ::
 :dk_load() {
-	::echo "dk_load(%*)"
+	::call dk_verbose "%0(%*)"
+	echo %cyan% %0(%*) %clr%
 	call %*
 	
 ::	local fn=

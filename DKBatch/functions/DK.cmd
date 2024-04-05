@@ -1,5 +1,5 @@
 ::@echo off
-:: [ -n "$DK_INIT" ] && return || readonly DK_INIT=1     # dk_include_guard()
+:: if "$DK_INIT" == "" return else set DK_INIT=1     # dk_include_guard()
 
 :::::: Global Script Variables ::::::
 set LOG_VERBOSE=1
@@ -8,7 +8,6 @@ set HALT_ON_WARNINGS=1
 set HALT_ON_ERRORS=1
 ::set true=0
 ::set false=1
-
 
 :::::: Script internal setup ::::::
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
@@ -23,4 +22,8 @@ set "PATH=%PATH%;%DKBATCH_DIR%\functions"
 
 :::::: Script loader ::::::
 call functions/dk_load.cmd
-call dk_load dk_color
+
+::doskey DKDEBUGFUNCB = echo %0(%*)  FIXME
+
+doskey dk_load = call dk_load
+dk_load dk_color

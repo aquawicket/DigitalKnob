@@ -5,7 +5,7 @@
 ::
 ::
 :dk_validate_branch
-	call dk_verbose "dk_validate_branch(%*)"
+	call dk_verbose "%0(%*)"
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development

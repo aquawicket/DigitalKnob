@@ -5,7 +5,7 @@
 ::
 ::
 :dk_validate_git () {
-    call dk_verbose "dk_validate_git(%*)"
+    call dk_verbose "%0(%*)"
 
     if "%NATIVE_ARCH%"=="arm32" set GIT_DL=
     if "%NATIVE_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%

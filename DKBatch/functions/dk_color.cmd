@@ -1,4 +1,5 @@
 :: dk_include_guard()
+:: call dk_verbose "%0(%*)"
 
 :::::: STYLES ::::::
 set "clr=[0m"
@@ -53,7 +54,7 @@ set "BG_WHITE=[107m"
 ::
 ::
 :dk_color () {
-    echo "dk_color(%*)"
+    ::call dk_verbose "%0(%*)"
     call :dk_print_colors
 goto:eof
 
@@ -63,7 +64,7 @@ goto:eof
 ::
 ::
 :dk_print_colors () {
-	echo "dk_print_colors(%*)"
+	::call dk_verbose "%0(%*)"
 	echo.
 	echo [101;93m STYLES %clr%
 	echo %%clr%%        %clr%Reset%clr%

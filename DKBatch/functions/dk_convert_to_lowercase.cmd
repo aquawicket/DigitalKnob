@@ -5,6 +5,8 @@
 ::
 ::
 :dk_convert_to_lowercase
+	call dk_verbose "%0(%*)"
+	
     set _string=%1
     set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     set "_LCASE=abcdefghijklmnopqrstuvwxyz"

@@ -5,7 +5,7 @@
 ::
 ::
 :dk_command_to_variable () {
-	call dk_verbose "dk_command_to_variable(%*)"
+	call dk_verbose "%0(%*)"
 	
     if [%2] == [] (
         echo "ERROR: command_to_variable() requires at least 2 parameters"

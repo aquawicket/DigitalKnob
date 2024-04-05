@@ -5,7 +5,7 @@
 ::
 ::
 :dk_create_cache
-	call dk_verbose "dk_create_cache(%*)"
+	call dk_verbose "%0(%*)"
 	
     echo creating cache...
     ::call dk_print_var APP

@@ -5,7 +5,7 @@
 ::
 ::
 :dk_print_var () {
-	::call dk_verbose dk_print_var(%*)
+	::call dk_verbose "%0(%*)"
 	
 	if "" == "$1" (
 		call dk_error "dk_print_var <variable> requires 1 parameter"

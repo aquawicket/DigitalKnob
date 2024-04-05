@@ -5,7 +5,7 @@
 ::
 ::
 :dk_deleteCache () {
-	call dk_verbose "dk_deleteCache(%*)"
+	call dk_verbose "%0(%*)"
 	
     ::call dk_cmake_eval "dk_deleteCache()"
     echo Deleteing CMake cache . . .

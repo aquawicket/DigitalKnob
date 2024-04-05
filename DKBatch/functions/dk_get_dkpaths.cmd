@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::#################################################################################
-:: dk_check_remote()
+:: dk_get_dkpaths()
 ::
 ::
-:dk_check_remote () {
-	call dk_verbose "dk_check_remote(%*)"
+:dk_get_dkpaths () {
+	call dk_verbose "%0(%*)"
 	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call dk_make_directory "%DIGITALKNOB_DIR%"

@@ -1,6 +1,5 @@
 ::dk_include_guard()
 
-set LOG_DEBUG=1
 ::##################################################################################
 :: dk_debug(msg)
 ::
@@ -9,7 +8,8 @@ set LOG_DEBUG=1
 ::	@msg	- The message to print
 ::
 :dk_debug() {
-	::echo dk_debug(%*)
+	::call dk_verbose "%0(%*)"
+	
 	if %LOG_DEBUG% == 1 ( 
 		echo %blue% DEBUG: %1 %clr%
 	)

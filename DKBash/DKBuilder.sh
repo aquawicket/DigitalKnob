@@ -1,14 +1,9 @@
 #!/bin/bash
+clear && clear
 
-echo "clear" && clear && clear
-
-###### Load DK Function files ######
+###### Load DK Function files (DK_INIT) ######
 source functions/DK.sh
 
-### Load Main Program ###
-
-#if ! [[ "$@" == "" ]]; then
-#	"$@"
-#fi
-
+###### Load Main Program ######
+! [[ "$@" == "" ]] && "$@"
 dk_build_main "$@"

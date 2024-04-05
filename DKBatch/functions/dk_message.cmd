@@ -5,6 +5,7 @@
 ::
 ::
 :dk_message () {
-	echo dk_message(%*)
+	::call dk_verbose "%0(%*)"
+	
 	echo %1
 goto:eof
