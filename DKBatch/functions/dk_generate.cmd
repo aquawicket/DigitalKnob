@@ -14,7 +14,7 @@
     echo ##########################################################
     echo.
     
-    call dk_dk_deleteCache
+    call dk_deleteCache
     call dk_delete_temp_files
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
