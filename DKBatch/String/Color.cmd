@@ -23,7 +23,7 @@
 :: SOFTWARE.
 
 %DKBATCH%
-
+@echo off
 :: Check arg1 for valid sub-fnction and goto it
 ::set z=%1
 ::if not "!z::=!"=="%z%" goto %1

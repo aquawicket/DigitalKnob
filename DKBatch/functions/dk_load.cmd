@@ -10,7 +10,8 @@ set "PATH=%PATH%;%DKBATCH_DIR%\functions"
 ::
 ::
 :dk_load() {
-	echo "dk_load(%*)"
+	::echo "dk_load(%*)"
+	call %*
 	
 ::	local fn=
 ::	[ -z $1 ] && return 0 #true

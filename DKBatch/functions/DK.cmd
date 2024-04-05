@@ -1,32 +1,26 @@
-::::!/bin/sh
-echo DK.cmd
+::@echo off
+:: [ -n "$DK_INIT" ] && return || readonly DK_INIT=1     # dk_include_guard()
+
+:::::: Global Script Variables ::::::
+set LOG_VERBOSE=1
+set LOG_DEBUG=1
+set HALT_ON_WARNINGS=1
+set HALT_ON_ERRORS=1
+::set true=0
+::set false=1
 
 
+:::::: Script internal setup ::::::
+for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
+set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+set "PATH=%PATH%;%DKBATCH_DIR%\functions"
+::set SCRIPT_NAME=$(basename "$0")
+::shell_type=cmd
+::if $shell_type == cmd set CMD=1
+::if $CMD echo "CMD"
+::if $POWERSHELL echo "POWERSHELL"
 
-::
-::::[ -n "$dk_load" ] && return || readonly dk_load=1     ::include_guard()
-::
-:::::::: Global Script Variables ::::::::
-::export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-::export SCRIPT_NAME=$(basename "$0")
-::shell_type=$(basename $(readlink /proc/$$/exe))
-::[ $shell_type = dash ] && export SH=1 && export DASH=1 && unset BASH
-::[ $shell_type = bash ] && export BASH=1 && unset SH && unset DASH
-::[ $SH ]   && echo "SH"
-::[ $DASH ] && echo "DASH"
-::[ $BASH ] && echo "BASH"
-::[ $SH ]   && export echo="echo "
-::[ $BASH ] && export echo="echo -e"
-::
-::
-:::::::: Global Script Variables ::::::::
-::export LOG_VERBOSE=0
-::export LOG_DEBUG=1
-::export HALT_ON_WARNINGS=1
-::export HALT_ON_ERRORS=1
-::export true=0
-::export false=1
-::
-::
+
+:::::: Script loader ::::::
 call functions/dk_load.cmd
-::dk_load dk_color
+call dk_load dk_color

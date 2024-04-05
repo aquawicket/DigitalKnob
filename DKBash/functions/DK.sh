@@ -1,8 +1,16 @@
 #!/bin/sh
-
-#[ -n "$dk_load" ] && return || readonly dk_load=1     # dk_include_guard()
+# [ -n "$DK_INIT" ] && return || readonly DK_INIT=1     # dk_include_guard()
 
 ###### Global Script Variables ######
+export LOG_VERBOSE=0
+export LOG_DEBUG=1
+export HALT_ON_WARNINGS=1
+export HALT_ON_ERRORS=1
+export true=0
+export false=1
+
+
+###### Script internal setup ######
 export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 export SCRIPT_NAME=$(basename "$0")
 shell_type=$(basename $(readlink /proc/$$/exe))
@@ -15,14 +23,6 @@ shell_type=$(basename $(readlink /proc/$$/exe))
 [ $BASH ] && export echo="echo -e"
 
 
-###### Global Script Variables ######
-export LOG_VERBOSE=0
-export LOG_DEBUG=1
-export HALT_ON_WARNINGS=1
-export HALT_ON_ERRORS=1
-export true=0
-export false=1
-
-
+###### Script loader ######
 . functions/dk_load.sh
 dk_load dk_color
