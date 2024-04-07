@@ -4,9 +4,9 @@
 # dk_verbose()
 #
 #
-function dk_verbose() {
+dk_verbose () {
 	#echo "dk_verbose($@)"
-	if [ $LOG_VERBOSE == 1 ]; then 
+	if [ $LOG_VERBOSE = 1 ]; then 
 		$echo "${cyan} VERBOSE: $1 ${clr}"
 	fi
 }

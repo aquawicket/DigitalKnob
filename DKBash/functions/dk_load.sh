@@ -46,13 +46,21 @@ dk_load () {
 		#shopt -s lastpipe
 			
 		oldIFS=$IFS
-		IFS=$'\n' 
-		lines=$(array $(grep -E "(dk|DK)_[a-zA-Z0-9]*" $fpath))
-		IFS=$oldIFS
+		IFS=$'\n'
+		grep_raw=$(grep "dk_[a-zA-Z0-9]*" $fpath)
+		echo "############ grep_raw #############"
+		echo $grep_raw
+		#exit
+		lines=$(array $grep_raw)
+		echo "############ lines #############"
+		echo $lines
+		#exit
 		printf_lines=$(printf '%s\n' "$lines")
+		echo "$printf_lines"
+		#exit
 		
         #printf '%s\n' "$lines" | while read value; do 
-        while read value; do 
+        while IFS= read value; do 
             #value=${value%%N*}   # cut off everything from the first N to end
 			#value=${value%N*}   # cut off everything from the last N to end
 			#value=${value#*N}   # cut off everything from begining to first N
@@ -60,14 +68,14 @@ dk_load () {
 
 			value=${value%%#*}
 			value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
-			[ "$value" == "" ] && continue
+			[ "${value}" = "" ] && continue
 			echo "${fn}:lines $value"
 				
 			if echo $dk_load_list | grep -q "$value"; then				# POSIX REGEX MATCH
 			    #echo "${fn}: skipping $value.    already in load_list"
 			    continue
 			#elif [[ ${fn} == $value ]]; then
-			elif [ "${fn}" == "$value" ]; then
+			elif [ "${fn}" = "${value}" ]; then
 			    #echo "${fn}: skipping $value.    already matches fn"
 			    continue
  			#elif [[ $(command -v $value) != "" ]]; then
@@ -75,7 +83,7 @@ dk_load () {
 			    #echo "${fn}: skipping $value.    command already recognized"
 			    continue
 			#elif [[ "$value" == "" ]]; then
-			elif [ "$value" == "" ]; then
+			elif [ "$value" = "" ]; then
 			    continue
 			else
 			    #echo "$fn: dk_load( $value )"
@@ -87,14 +95,20 @@ dk_load () {
 "$printf_lines"
 EOF
 		
-		if [ -f "${!fn}" ]; then
+		#if [ -f "${!fn}" ]; then
+		if [ -f "${fpath}" ]; then
 			#echo "{@}: ${@}"
 			#echo "{fn}: ${!fn}"
-			if ! [ $@ == ${!fn} ]; then
-				echo "$fn: source ${!fn}"
-				. "${!fn}"
+			#if ! [ $@ == ${!fn} ]; then
+			if [ "$@" = "${fpath}" ]; then
+				return 0
 			fi
-			return 0
+				#echo "$fn: source ${!fn}"
+				echo "${fn}: source ${fpath}"
+				#. "${!fn}"
+				. "${fpath}"
+			#fi
+			#return 0
 		fi	
 	fi
 }

@@ -1,5 +1,5 @@
 # dk_include_guard()
-echo "dk_echo.sh:2 ENTER"
+
 ##################################################################################
 # dk_echo(msg)
 #
@@ -11,4 +11,3 @@ dk_echo () {
 	#echo "dk_echo($@)"
 	echo -e "$@"
 }
-echo "dk_echo.sh:2 EXIT"
