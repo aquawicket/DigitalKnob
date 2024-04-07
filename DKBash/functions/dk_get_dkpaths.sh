@@ -4,7 +4,7 @@
 # dk_get_dkpaths()
 #
 #
-dk_get_dkpaths () {
+dk_get_dkpaths() {
 	dk_debug "dk_get_dkpaths($@)"
 	
 	# [[ $0 != $BASH_SOURCE ]] && echo "Script is being sourced" || echo "Script is being run"

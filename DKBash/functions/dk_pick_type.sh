@@ -4,7 +4,7 @@
 # dk_pick_type()
 #
 #
-function dk_pick_type() {
+dk_pick_type() {
 	dk_debug "Pick_Type($@)"
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"

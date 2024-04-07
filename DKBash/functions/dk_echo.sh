@@ -7,7 +7,7 @@
 #
 #	@msg	- The message to print
 #
-dk_echo () {
+dk_echo() {
 	#echo "dk_echo($@)"
 	echo -e "$@"
 }

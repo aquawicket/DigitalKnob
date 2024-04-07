@@ -4,7 +4,7 @@
 # dk_validate_ostype()
 #
 #
-function dk_validate_ostype() {
+dk_validate_ostype() {
 	dk_debug "dk_validate_ostype($@)"
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)

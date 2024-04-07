@@ -4,7 +4,7 @@
 # dk_enter_manually()
 #
 #
-function dk_enter_manually() {
+dk_enter_manually() {
 	dk_debug "dk_enter_manually($@)"
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input

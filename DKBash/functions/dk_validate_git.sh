@@ -4,7 +4,7 @@
 # dk_validate_git()
 #
 #
-function dk_validate_git() {
+dk_validate_git() {
 	dk_debug "dk_validate_git($@)"
 	if ! dk_command_exists git; then
 		dk_install git

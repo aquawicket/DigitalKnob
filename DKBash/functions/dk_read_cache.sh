@@ -4,7 +4,7 @@
 # dk_read_cache()
 #
 #
-function dk_read_cache() {
+dk_read_cache() {
 	dk_debug "dk_read_cache($@)"
 	if ! dk_file_exists $DKBRANCH_DIR/cache; then
 		return

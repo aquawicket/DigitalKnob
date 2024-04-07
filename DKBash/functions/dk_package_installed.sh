@@ -4,7 +4,7 @@
 # dk_package_installed()
 #
 #
-function dk_package_installed() {
+dk_package_installed() {
 	dk_debug "dk_package_installed($@)"
 	if dk_command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then

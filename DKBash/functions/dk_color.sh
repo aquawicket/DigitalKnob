@@ -52,6 +52,6 @@ export BG_WHITE="[107m"
 #
 #
 #
-#dk_color () {
+#dk_color() {
 #	echo "dk_color($@)"
 #}

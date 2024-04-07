@@ -6,7 +6,7 @@ echo "dk_load.bash"
 #
 #
 #
-dk_load () {
+dk_load() {
 	#echo "dk_load($@)"
 	local fn=
 	[ -z $1 ] && return 0 #true

@@ -4,7 +4,7 @@
 # dk_download()
 #
 #
-function dk_download() {
+dk_download() {
 	dk_debug "dk_download($@)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"

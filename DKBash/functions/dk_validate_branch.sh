@@ -5,7 +5,7 @@
 #
 #
 ###### dk_validate_branch ######
-function dk_validate_branch() {
+dk_validate_branch() {
 	dk_debug "dk_validate_branch($@)"
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	

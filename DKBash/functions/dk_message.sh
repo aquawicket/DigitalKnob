@@ -4,6 +4,6 @@
 # dk_message(msg)
 #
 #
-dk_message () {
+dk_message() {
 	echo -e "$1"
 }

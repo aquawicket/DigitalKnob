@@ -7,7 +7,7 @@
 #
 #	@msg	- The message to print
 #
-dk_error () {
+dk_error() {
 	#echo "dk_error($@)"
 	echo -e "${red} ERROR: $1 ${clr}"
 	dk_stacktrace

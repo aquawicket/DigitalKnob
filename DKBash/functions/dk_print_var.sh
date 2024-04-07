@@ -4,7 +4,7 @@
 # dk_print_var(variable)
 #
 #
-dk_print_var () {
+dk_print_var() {
 	#dk_verbose "dk_print_var($@)"
 	if [ -z "$1" ]; then
 		dk_error "dk_print_var <variable> requires 1 parameter"

@@ -7,7 +7,7 @@
 #
 #	@msg	- The message to print
 #
-function dk_debug() {
+dk_debug() {
 	#echo "dk_debug($@)"
 	if [ $LOG_DEBUG == 1 ]; then 
 		dk_load dk_color

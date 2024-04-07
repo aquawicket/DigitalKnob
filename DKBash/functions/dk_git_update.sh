@@ -4,7 +4,7 @@
 # dk_git_update()
 #
 #
-function dk_git_update() {
+dk_git_update() {
 	dk_debug "dk_git_update($@)"
 	if ! [ "$1" == "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."

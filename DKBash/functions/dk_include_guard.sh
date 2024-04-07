@@ -10,7 +10,7 @@
 # dk_include_guard()
 #
 #
-dk_include_guard () {
+dk_include_guard() {
 	dk_debug "dk_include_guard($0)"
 	#DIR=$( cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P )
 	echo "BASH_SOURCE = $BASH_SOURCE"

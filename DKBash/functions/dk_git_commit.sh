@@ -4,7 +4,7 @@
 # dk_git_commit()
 #
 #
-function dk_git_commit() {	
+dk_git_commit() {	
 	dk_debug "dk_git_commit($@)"
 	echo "Please enter some details about this commit, Then press ENTER."
 	read message

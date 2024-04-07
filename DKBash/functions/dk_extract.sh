@@ -4,7 +4,7 @@
 # dk_extract()
 #
 #
-function dk_extract() {
+dk_extract() {
 	dk_debug "dk_extract($@)"
 	if [ -z "$2" ]; then
 		dk_error "extract <input> <output> requires 2 parameters"

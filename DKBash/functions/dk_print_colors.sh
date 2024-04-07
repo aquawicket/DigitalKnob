@@ -5,7 +5,7 @@
 #
 #
 #
-dk_print_colors () {
+dk_print_colors() {
 	echo "dk_print_colors($@)"
 	
 	#dk_color

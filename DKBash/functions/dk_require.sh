@@ -4,7 +4,7 @@
 # dk_require()
 #
 #
-function dk_require() {
+dk_require() {
 	#echo "dk_require($@)"
 	if [ -z "$1" ]; then
 		dk_error "dk_require(<func_name> <$n>) requires 2 parameters. Example dk_require my_func \$1"

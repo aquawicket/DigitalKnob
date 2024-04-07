@@ -3,7 +3,7 @@
 #
 #
 #
-dk_crlf () {
+dk_crlf() {
 	echo "dk_crlf($@)"
 
 	return 0 #true

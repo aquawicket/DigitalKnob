@@ -4,7 +4,7 @@
 # dk_pick_update()
 #
 #
-function dk_pick_update() {
+dk_pick_update() {
 	dk_debug "dk_pick_update($@)"
 	dk_read_cache
 	

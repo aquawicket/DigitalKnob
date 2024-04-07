@@ -4,7 +4,7 @@
 # dk_validate_homebrew()
 #
 #
-function dk_validate_homebrew() {
+dk_validate_homebrew() {
 	dk_debug "dk_validate_homebrew($@)"
 	if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		return

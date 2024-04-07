@@ -13,7 +13,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 # dk_validate_cmake()
 #
 #
-function dk_validate_cmake() {
+dk_validate_cmake() {
 	dk_debug "dk_validate_cmake($@)"
 	
 	if [[ $HOST_OS == "android" ]]; then

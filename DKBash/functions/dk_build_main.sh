@@ -6,7 +6,7 @@
 # dk_build_main()
 #
 #
-dk_build_main () {
+dk_build_main() {
 	dk_debug "dk_build_main($@)"
 	dk_validate_sudo
 	
