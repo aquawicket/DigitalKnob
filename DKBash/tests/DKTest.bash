@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###### Load Function files ######
 . ../functions/DK.sh

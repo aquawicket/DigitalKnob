@@ -41,7 +41,8 @@ dk_load () {
 
 #: '
 		oldIFS=$IFS
-		IFS=$'\n' lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" $fpath) ) 
+		IFS=$'\n' 
+		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" $fpath) )
 		IFS=$oldIFS
 		for value in "${lines[@]}"; do
 			#value=${value%%N*}   # cut off everything from the first N to end
