@@ -42,15 +42,17 @@ dk_load () {
 		dk_load_list="${dk_load_list};$fn" # Add to list
 		
 		# https://stackoverflow.com/a/26144107/688352
-		shopt -s lastpipe
+		#set +m
+		#shopt -s lastpipe
 			
 		oldIFS=$IFS
 		IFS=$'\n' 
 		lines=$(array $(grep -E "(dk|DK)_[a-zA-Z0-9]*" $fpath))
 		IFS=$oldIFS
-			
-        printf '%s\n' "$lines" | while read value; do 
-        #while read value; do 
+		printf_lines=$(printf '%s\n' "$lines")
+		
+        #printf '%s\n' "$lines" | while read value; do 
+        while read value; do 
             #value=${value%%N*}   # cut off everything from the first N to end
 			#value=${value%N*}   # cut off everything from the last N to end
 			#value=${value#*N}   # cut off everything from begining to first N
@@ -79,7 +81,8 @@ dk_load () {
 			    #echo "$fn: dk_load( $value )"
 			    dk_load $value
 			fi
-		done
+		#done
+		done <<< "$printf_lines"
 		
 		if [ -f "${!fn}" ]; then
 			#echo "{@}: ${@}"

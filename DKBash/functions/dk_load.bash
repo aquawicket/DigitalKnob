@@ -117,9 +117,9 @@ dk_load () {
 			IFS=$'\n' 
 			lines=$(array $(grep -E "(dk|DK)_[a-zA-Z0-9]*" $fpath))
 			IFS=$oldIFS
-			
-			printf '%s\n' "$lines" | while read value; do 
-			#while read value; do 
+			printf_lines=$(printf '%s\n' "$lines")
+			#echo "$printf_lines" | while read value; do 
+			while read value; do 
 				#value=${value%%N*}   # cut off everything from the first N to end
 				#value=${value%N*}   # cut off everything from the last N to end
 				#value=${value#*N}   # cut off everything from begining to first N
@@ -148,8 +148,8 @@ dk_load () {
                     #echo "$fn: dk_load( $value )"
                     dk_load $value
 				fi
-			done
-			#done < printf '%s\n' "$lines"
+			#done
+			done < echo "$printf_lines"
 		fi
 		
 		if [ -f "${!fn}" ]; then
