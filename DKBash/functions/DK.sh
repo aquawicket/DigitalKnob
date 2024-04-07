@@ -11,7 +11,20 @@ export false=1
 
 
 ###### Script internal setup ######
-export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+DIRNAME=$(dirname $PWD)
+BASENAME=$(basename $DIRNAME)
+while [ "${BASENAME}" != "DKBash" ]
+do
+	echo "DIRNAME = ${DIRNAME}"
+	echo "BASENAME = ${BASENAME}"
+	DIRNAME=$(dirname $DIRNAME)
+	BASENAME=$(basename $DIRNAME)
+done
+echo "DIRNAME = ${DIRNAME}"
+echo "BASENAME = ${BASENAME}"
+export DKBASH_DIR=${DIRNAME}
+
+#export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 export SCRIPT_NAME=$(basename "$0")
 shell_type=$(basename $(readlink /proc/$$/exe))
 [ $shell_type = dash ] && export SH=1 && export DASH=1 && unset BASH
@@ -24,5 +37,5 @@ shell_type=$(basename $(readlink /proc/$$/exe))
 
 
 ###### Script loader ######
-. functions/dk_load.sh
+source ${DKBASH_DIR}/functions/dk_load.sh
 dk_load dk_color

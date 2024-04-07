@@ -16,7 +16,7 @@ dk_load () {
 	    fn="${fn%.*}"
 	else
 		fn=$1
-		fpath=$DKBASH_DIR/functions/$fn.sh
+		fpath=${DKBASH_DIR}/functions/$fn.sh
 	fi
 	
 	# Convert to unix line endings if CRLF found

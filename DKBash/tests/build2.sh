@@ -1,14 +1,16 @@
 #!/bin/bash
 
-# to run this script requires privledges
-# > chmod 777 build.sh
-
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
-echo "clear" && clear && clear
+clear && clear
 
-###### Load Function files ######
-. functions/dk_load.sh
+###### Load DK Function files (DKINIT) ######
+source ../functions/DK.sh
+
+###### Load Main Program ######
+#! [[ "$@" == "" ]] && "$@"
+#dk_build_main "$@"
+
 dk_load dk_print_var
 dk_load dk_remove_from_file
 dk_load dk_debug
@@ -45,114 +47,114 @@ function test() {
 #		Functions
 #################################
 
-###### dk_get_uname ######
-function dk_get_uname() {
-	DK_UNAME=$(uname -a)
-	dk_print_var DK_UNAME
+###### get_uname ######
+function get_uname() {
+	DKUNAME=$(uname -a)
+	dk_print_var DKUNAME
 }
 
-###### dk_get_host ######
-function dk_get_host() {
-	DK_HOST=$(uname -s)
-	dk_print_var DK_HOST
+###### get_host ######
+function get_host() {
+	DKHOST=$(uname -s)
+	dk_print_var DKHOST
 }
 
-###### dk_get_arch ######
-function dk_get_arch() {
-	DK_ARCH=$(uname -m)
-	dk_print_var DK_ARCH
+###### get_arch ######
+function get_arch() {
+	DKARCH=$(uname -m)
+	dk_print_var DKARCH
 }
 
-###### dk_get_version ######
-function dk_get_version() {
-	DK_VERSION=$(uname -v)
-	dk_print_var DK_VERSION
+###### get_version ######
+function get_version() {
+	DKVERSION=$(uname -v)
+	dk_print_var DKVERSION
 }
 
-###### dk_get_ostype ######
-function dk_get_ostype() {
-	DK_OSTYPE=$OSTYPE
-	dk_print_var DK_OSTYPE
+###### get_ostype ######
+function get_ostype() {
+	DKOSTYPE=$OSTYPE
+	dk_print_var DKOSTYPE
 }
 
-###### dk_get_cpuinfo ######
-function dk_get_cpuinfo() {
+###### get_cpuinfo ######
+function get_cpuinfo() {
 	if [ -e /proc/cpuinfo ]; then
-		DK_CPUINFO=$(tr -d '\0' </proc/cpuinfo)
+		DKCPUINFO=$(tr -d '\0' </proc/cpuinfo)
 	fi
-	dk_print_var DK_CPUINFO
+	dk_print_var DKCPUINFO
 }
 
-###### dk_get_model ######
-function dk_get_model() {
+###### get_model ######
+function get_model() {
 	if [ -e /proc/device-tree/model ]; then
-		DK_MODEL=$(tr -d '\0' </proc/device-tree/model)
+		DKMODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
-	dk_print_var DK_MODEL
+	dk_print_var DKMODEL
 }
 
-###### dk_get_machtype ######
-function dk_get_machtype() {
-	DK_MACHTYPE=$MACHTYPE
-	dk_print_var DK_MACHTYPE
+###### get_machtype ######
+function get_machtype() {
+	DKMACHTYPE=$MACHTYPE
+	dk_print_var DKMACHTYPE
 }
 
-###### dk_get_lang ######
-function dk_get_lang() {
-	DK_LANG=$LANG
-	dk_print_var DK_LANG
+###### get_lang ######
+function get_lang() {
+	DKLANG=$LANG
+	dk_print_var DKLANG
 }
 
-###### dk_get_username ######
-function dk_get_username() {
+###### get_username ######
+function get_username() {
 	if [ -n "$USER" ]; then
-		DK_USERNAME=$USER
+		DKUSERNAME=$USER
 	elif [ -n "$USERNAME" ]; then
-		DK_USERNAME=$USERNAME
+		DKUSERNAME=$USERNAME
 	fi
-	dk_print_var DK_USERNAME
+	dk_print_var DKUSERNAME
 }
 
-###### dk_get_logname ######
-function dk_get_logname() {
-	DK_LOGNAME=$LOGNAME
-	dk_print_var DK_LOGNAME
+###### get_logname ######
+function get_logname() {
+	DKLOGNAME=$LOGNAME
+	dk_print_var DKLOGNAME
 }
 
-###### dk_get_home ######
-function dk_get_home() {
-	DK_HOME=$HOME
-	dk_print_var DK_HOME
+###### get_home ######
+function get_home() {
+	DKHOME=$HOME
+	dk_print_var DKHOME
 }
 
-###### dk_get_prefix ######
-function dk_get_prefix() {
-	DK_PREFIX=$PREFIX
-	dk_print_var DK_PREFIX
+###### get_prefix ######
+function get_prefix() {
+	DKPREFIX=$PREFIX
+	dk_print_var DKPREFIX
 }
 
-###### dk_get_term ######
-function dk_get_term() {
-	DK_TERM=$TERM
-	dk_print_var DK_TERM
+###### get_term ######
+function get_term() {
+	DKTERM=$TERM
+	dk_print_var DKTERM
 }
 
-###### dk_get_shell ######
-function dk_get_shell() {
-	DK_SHELL=$SHELL
-	dk_print_var DK_SHELL
+###### get_shell ######
+function get_shell() {
+	DKSHELL=$SHELL
+	dk_print_var DKSHELL
 }
 
-###### dk_get_path ######
-function dk_get_path() {
-	DK_PATH=$PATH
-	dk_print_var DK_PATH
+###### get_path ######
+function get_path() {
+	DKPATH=$PATH
+	dk_print_var DKPATH
 }
 
-###### dk_get_pwd ######
-function dk_get_pwd() {
-	DK_PWD=$PWD
-	dk_print_var DK_PWD
+###### get_pwd ######
+function get_pwd() {
+	DKPWD=$PWD
+	dk_print_var DKPWD
 }
 
 ###### load_dkenv ######
@@ -161,42 +163,42 @@ function load_dkenv() {
 	source ~/.dkenv
 }
 
-###### set_dk_root <path> ######
-function set_dk_root(){
+###### set_dkroot <path> ######
+function set_dkroot(){
 	if [ -z "$1" ]; then
-		dk_error "set_dk_root <path> requires 1 parameter"
+		dk_error "set_dkroot <path> requires 1 parameter"
 		return $false
 	fi
 	
-	DK_ROOT=$1
-	export DK_ROOT=$DK_ROOT
+	DKROOT=$1
+	export DKROOT=$DKROOT
 	
 	touch ~/.dkenv
-	dk_remove_from_file DK_ROOT ~/.dkenv
-	dk_append_file "export DK_ROOT=$DK_ROOT" ~/.dkenv
+	dk_remove_from_file DKROOT ~/.dkenv
+	dk_append_file "export DKROOT=$DKROOT" ~/.dkenv
 	
-	dk_print_var DK_ROOT
+	dk_print_var DKROOT
 }
 
-###### dk_get_root ######
-function dk_get_root() {
+###### get_root ######
+function get_root() {
 	load_dkenv
 	
-	if [ -n "$DK_ROOT" ]; then
-		dk_print_var DK_ROOT
+	if [ -n "$DKROOT" ]; then
+		dk_print_var DKROOT
 	else
-		echo "setting DK_ROOT to default directory"
-		set_dk_root $DK_HOME/digitalknob
+		echo "setting DKROOT to default directory"
+		set_dkroot $DKHOME/digitalknob
 	fi
 }
 
-###### dk_clear_root ######
-function dk_clear_root() {
-	export -n DK_ROOT
-	unset DK_ROOT
+###### clear_root ######
+function clear_root() {
+	export -n DKROOT
+	unset DKROOT
 	
 	touch ~/.dkenv
-	remove_from_file DK_ROOT ~/.dkenv
+	remove_from_file DKROOT ~/.dkenv
 }
 
 
@@ -205,27 +207,27 @@ function dk_clear_root() {
 #################################
 function main() {
 
-	dk_get_uname
-	dk_get_host
-	dk_get_arch
-	dk_get_version
-	dk_get_ostype
-	#dk_get_cpuinfo
-	dk_get_model
-	dk_get_machtype
-	dk_get_lang
-	dk_get_username
-	dk_get_logname
-	dk_get_home
-	dk_get_prefix
-	dk_get_term
-	dk_get_shell
-	dk_get_path
-	dk_get_pwd
+	get_uname
+	get_host
+	get_arch
+	get_version
+	get_ostype
+	#get_cpuinfo
+	get_model
+	get_machtype
+	get_lang
+	get_username
+	get_logname
+	get_home
+	get_prefix
+	get_term
+	get_shell
+	get_path
+	get_pwd
 	echo ""
 	
-	#dk_clear_root
-	dk_get_root
+	#clear_root
+	get_root
 	
 	#TODO: Here we need to test that we have enough information to determin what environment we exist on
 	
