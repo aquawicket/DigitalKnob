@@ -42,7 +42,7 @@ dk_load () {
 		dk_load_list="${dk_load_list};$fn" # Add to list
 		
 		# https://stackoverflow.com/a/26144107/688352
-		shopt -s lastpipe
+		#shopt -s lastpipe
 			
 		oldIFS=$IFS
 		IFS=$'\n' 
