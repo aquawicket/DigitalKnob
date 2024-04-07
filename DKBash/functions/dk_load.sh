@@ -17,7 +17,7 @@ dk_load () {
 	    fn="${fn%.*}"
 	else
 		fn=$1
-		fpath=${DKBASH_DIR}/functions/$fn.sh
+		fpath=${DKBASH_DIR}/functions/${fn}.sh
 	fi
 	
 	# Convert to unix line endings if CRLF found
@@ -28,18 +28,19 @@ dk_load () {
 		fi
 	#fi
 	
-	if [ -f $fpath ]; then
+	if [ -f ${fpath} ]; then
 		#declare ${fn}=$fpath
-		local ${fn}=$fpath
+		local ${fn}=${fpath}
     else
         echo "$fpath: file not found"
+		exit
     fi
 	
-	if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
+	if echo $dk_load_list | grep -q "${fn}"; then		# POSIX REGEX MATCH
         echo "$fn: already in the list" 	# if already in list, do nothing
         return 0
     else
-		dk_load_list="${dk_load_list};$fn" # Add to list
+		dk_load_list="${dk_load_list};${fn}" # Add to list
 		
 		# https://stackoverflow.com/a/26144107/688352
 		#set +m
@@ -48,15 +49,17 @@ dk_load () {
 		oldIFS=$IFS
 		IFS=$'\n'
 		grep_raw=$(grep "dk_[a-zA-Z0-9]*" $fpath)
-		echo "############ grep_raw #############"
+		
 		echo $grep_raw
 		#exit
+		
 		lines=$(array $grep_raw)
-		echo "############ lines #############"
+		IFS=$oldIFS
 		echo $lines
 		#exit
-		printf_lines=$(printf '%s\n' "$lines")
-		echo "$printf_lines"
+		
+		#printf_lines=$(printf '%s\n' "$lines")
+		#echo $printf_lines
 		#exit
 		
         #printf '%s\n' "$lines" | while read value; do 
@@ -92,22 +95,15 @@ dk_load () {
 		#done
 		#done <<< "$printf_lines"
 		done <<EOF
-"$printf_lines"
+"$lines"
 EOF
 		
-		#if [ -f "${!fn}" ]; then
 		if [ -f "${fpath}" ]; then
-			#echo "{@}: ${@}"
-			#echo "{fn}: ${!fn}"
-			#if ! [ $@ == ${!fn} ]; then
 			if [ "$@" = "${fpath}" ]; then
 				return 0
 			fi
-				#echo "$fn: source ${!fn}"
 				echo "${fn}: source ${fpath}"
-				#. "${!fn}"
 				. "${fpath}"
-			#fi
 			#return 0
 		fi	
 	fi

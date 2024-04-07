@@ -2,12 +2,12 @@
 clear && clear
 
 ###### Global Script Variables ######
-export LOG_VERBOSE=0
+export LOG_VERBOSE=1
 export LOG_DEBUG=1
 export HALT_ON_WARNINGS=1
 export HALT_ON_ERRORS=1
-export true=0
-export false=1
+readonly true=0
+readonly false=1
 
 
 ###### Script internal setup ######

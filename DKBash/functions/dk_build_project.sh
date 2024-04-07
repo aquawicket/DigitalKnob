@@ -4,7 +4,7 @@
 # dk_build_project()
 #
 #
-function dk_build_project() {
+dk_build_project () {
 	dk_debug "dk_build_project($@)"
 	echo ""
 	echo "##################################################################"

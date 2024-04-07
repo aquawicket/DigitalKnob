@@ -5,7 +5,7 @@
 #
 #
 dk_print_var () {
-	dk_verbose "dk_print_var($@)"
+	#dk_verbose "dk_print_var($@)"
 	if [ -z "$1" ]; then
 		dk_error "dk_print_var <variable> requires 1 parameter"
 		return $false
@@ -14,7 +14,7 @@ dk_print_var () {
 	var_name=$1
 	exists=0
 	
-	if [[ $(type -t $1) == function ]]; then
+	if [ "$(type -t $1)" = "function" ]; then
 		dk_debug "${blue} \$$var_name = function $1() ${clr}"
 		func=$(type $1 | sed '1,2d')
 		dk_debug "${blue} $func ${clr}"

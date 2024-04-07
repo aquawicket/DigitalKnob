@@ -4,7 +4,7 @@
 # dk_check_remote()
 #
 #
-function dk_check_remote() {
+dk_check_remote () {
 	dk_debug "dk_check_remote($@)"
 	if [ -d .git ]; then
 		git remote update > /dev/null 2> /dev/null

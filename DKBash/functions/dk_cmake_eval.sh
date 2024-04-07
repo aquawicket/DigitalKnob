@@ -4,7 +4,7 @@
 # dk_cmake_eval()
 #
 #
-function dk_cmake_eval() {
+dk_cmake_eval () {
 	dk_debug "dk_cmake_eval($@)"
 	if [ -z "$1" ]; then
 		echo "ERROR: cmake_eval() parameter 1 is invalid"
