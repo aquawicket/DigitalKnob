@@ -3,6 +3,7 @@
 ###### Load Function files ######
 . ../functions/DK.sh
 
+
 dk_echo "TEST"
 
 dk_message "message"
@@ -14,7 +15,7 @@ dk_print_var TEST_VAR
 
 ###### main ######
 main() {
-	#dk_debug "main($@)"	
+	dk_debug "main($@)"	
 	
 	dk_echo "\n######################## TEST FIELD ########################\n"
 
@@ -169,28 +170,12 @@ main() {
 
 	dk_echo "\n############################################################\n"
 	
-	#print_stack
 	func_2
-	
 }
 
 func_2 () {
 	dk_debug "func_2($@)"
 	dk_stacktrace
-}
-
-###### print_stack() ######
-print_stack () {
-	#dk_debug "print_stack($@)"
-    if [ $DKBASH ]; then
-		#echo "stack_size: ${#FUNCNAME[@]}"
-		(( n=${#FUNCNAME[@]}-1 ))
-        for I in ${FUNCNAME[@]}
-	    do
-		    echo "FUNCNAME[$n]: $I"
-			(( n-- ))
-	    done
-    fi
 }
 
 ###### evaluate() ######
@@ -225,8 +210,6 @@ escape_quotes () {
 	eval $2=$output
 }
 
-
-#str='The dog is "very" beautiful'
 
 
 #[ "$@" -ne "" ] && "$@"
