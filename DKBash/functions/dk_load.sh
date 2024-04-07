@@ -82,7 +82,10 @@ dk_load () {
 			    dk_load $value
 			fi
 		#done
-		done <<< "$printf_lines"
+		#done <<< "$printf_lines"
+		done <<EOF
+"$printf_lines"
+EOF
 		
 		if [ -f "${!fn}" ]; then
 			#echo "{@}: ${@}"
