@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash --posix
 
 ###### Load Function files ######
-source ../functions/DK.sh
+. ../functions/DK.sh
 
 dk_echo "TEST"
 
