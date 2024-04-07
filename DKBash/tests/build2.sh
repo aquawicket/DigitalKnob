@@ -2,31 +2,9 @@
 
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
-clear && clear
 
 ###### Load DK Function files (DKINIT) ######
 source ../functions/DK.sh
-
-###### Load Main Program ######
-#! [[ "$@" == "" ]] && "$@"
-#dk_build_main "$@"
-
-dk_load dk_print_var
-dk_load dk_remove_from_file
-dk_load dk_debug
-dk_load dk_append_file
-dk_load dk_error
-dk_load dk_wait_for_key
-
-
-
-
-
-
-
-
-
-
 
 
 ###### test <...> ######

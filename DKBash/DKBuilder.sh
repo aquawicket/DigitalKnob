@@ -1,7 +1,7 @@
 #!/bin/bash
 clear && clear
 
-###### Load DK Function files (DK_INIT) ######
+###### Load DK Function files (DKINIT) ######
 source functions/DK.sh
 
 ###### Load Main Program ######

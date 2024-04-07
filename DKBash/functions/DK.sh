@@ -1,5 +1,5 @@
-#!/bin/sh
-# [ -n "$DK_INIT" ] && return || readonly DK_INIT=1     # dk_include_guard()
+[ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
+clear && clear
 
 ###### Global Script Variables ######
 export LOG_VERBOSE=0
@@ -11,31 +11,18 @@ export false=1
 
 
 ###### Script internal setup ######
-DIRNAME=$(dirname $PWD)
-BASENAME=$(basename $DIRNAME)
-while [ "${BASENAME}" != "DKBash" ]
-do
-	echo "DIRNAME = ${DIRNAME}"
-	echo "BASENAME = ${BASENAME}"
-	DIRNAME=$(dirname $DIRNAME)
-	BASENAME=$(basename $DIRNAME)
-done
-echo "DIRNAME = ${DIRNAME}"
-echo "BASENAME = ${BASENAME}"
-export DKBASH_DIR=${DIRNAME}
-
-#export DKBASH_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-export SCRIPT_NAME=$(basename "$0")
 shell_type=$(basename $(readlink /proc/$$/exe))
-[ $shell_type = dash ] && export SH=1 && export DASH=1 && unset BASH
-[ $shell_type = bash ] && export BASH=1 && unset SH && unset DASH
-[ $SH ]   && echo "SH"
-[ $DASH ] && echo "DASH"
-[ $BASH ] && echo "BASH"
-[ $SH ]   && export echo="echo "
-[ $BASH ] && export echo="echo -e"
+echo "shell_type = $shell_type"
+[ $shell_type = sh ] && export DKSH=1
+[ $shell_type = dash ] && export DKDASH=1
+[ $shell_type = bash ] && export DKBASH=1
+[ $DKSH ]   && echo "DKSH"
+[ $DKDASH ] && echo "DKDASH"
+[ $DKBASH ] && echo "DKBASH"
 
+###### get DKBASH_DIR ######
+export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
+export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 
 ###### Script loader ######
 source ${DKBASH_DIR}/functions/dk_load.sh
-dk_load dk_color

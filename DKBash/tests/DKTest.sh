@@ -1,56 +1,52 @@
-#!/bin/bash
-echo "DKTest.sh()"
-
-echo "clear" && clear && clear
+#!/bin/sh
 
 ###### Load Function files ######
-source functions/DK.sh
+source ../functions/DK.sh
 
+dk_echo "TEST"
 
-dk_message "dk_message"
-dk_debug "dk_debug"
-dk_warning "dk_warning"
+dk_message "message"
+dk_debug "debug"
+dk_warning "warning"
 dk_debug "SCRIPT($@)"
 TEST_VAR="this is a test variable"
 dk_print_var TEST_VAR
 
-
 ###### main ######
 main() {
-	dk_debug "main($@)"	
+	#dk_debug "main($@)"	
 	
-	$echo "\n######################## TEST FIELD ########################\n"
+	dk_echo "\n######################## TEST FIELD ########################\n"
 
 	: '
 	This is a
 	very neat comment
 	in bash
 	'
-	#printenv
-	
+
 	# https://www.baeldung.com/linux/find-current-shell
-	$echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"
-	$echo "cat /proc/\$\$/cmdline = cat /proc/$$/cmdline"
-	$echo "\$0 = $0"
-	$echo "\$SHELL = $SHELL"
-	$echo "\$BASH = $BASH"
-	$echo "\$PS1 = $PS1"
-	$echo "\$PS2 = $PS2"
-	$echo "\$PS3 = $PS3"
-	$echo "\$PS4 = $PS4"
-	$echo "\$version = $version"
-	$echo "\$shell = $shell"
-	$echo "\$ERRNO = $ERRNO"
-	$echo "\$FCEDIT = $FCEDIT"
-	$echo "\$LINENO = $LINENO"
-	$echo "\$PPID = $PPID"
-	$echo "\$RANDOM = $RANDOM"
-	$echo "\$SECONDS = $SECONDS"
-	$echo "\$TMOU = $TMOU"
-	$echo "ps -p \$\$ -o 'comm=' = $(ps -p $$ -o 'comm=')"
-	$echo "ps -p \$\$ -o 'args=' = $(ps -p $$ -o 'args=')"
-	$echo "ps -o fname --no-headers \$\$ = $(ps -o fname --no-headers $$)"
-	$echo ""
+	dk_echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"
+	dk_echo "cat /proc/\$\$/cmdline = cat /proc/$$/cmdline"
+	dk_echo "\$0 = $0"
+	dk_echo "\$SHELL = $SHELL"
+	dk_echo "\$BASH = $BASH"
+	dk_echo "\$PS1 = $PS1"
+	dk_echo "\$PS2 = $PS2"
+	dk_echo "\$PS3 = $PS3"
+	dk_echo "\$PS4 = $PS4"
+	dk_echo "\$version = $version"
+	dk_echo "\$shell = $shell"
+	dk_echo "\$ERRNO = $ERRNO"
+	dk_echo "\$FCEDIT = $FCEDIT"
+	dk_echo "\$LINENO = $LINENO"
+	dk_echo "\$PPID = $PPID"
+	dk_echo "\$RANDOM = $RANDOM"
+	dk_echo "\$SECONDS = $SECONDS"
+	dk_echo "\$TMOU = $TMOU"
+	dk_echo "ps -p \$\$ -o 'comm=' = $(ps -p $$ -o 'comm=')"
+	dk_echo "ps -p \$\$ -o 'args=' = $(ps -p $$ -o 'args=')"
+	dk_echo "ps -o fname --no-headers \$\$ = $(ps -o fname --no-headers $$)"
+	dk_echo ""
 
 	####################### Test Constructs #######################
 	# https://tldp.org/LDP/abs/html/testconstructs.html#TTESTREF
@@ -61,12 +57,12 @@ main() {
 	v_1=1
 	v_abc=abc
 
-	$echo "\$unset = $unset"
-	$echo "\$empty = $empty"
-	$echo "\$v_0 =   $v_0"
-	$echo "\$v_1 =   $v_1"
-	$echo "\$v_abc = $v_abc"
-	$echo ""
+	dk_echo "\$unset = $unset"
+	dk_echo "\$empty = $empty"
+	dk_echo "\$v_0 =   $v_0"
+	dk_echo "\$v_1 =   $v_1"
+	dk_echo "\$v_abc = $v_abc"
+	dk_echo ""
 
 
 	### test ###
@@ -93,7 +89,7 @@ main() {
 	evaluate test "v_0"
 	evaluate test "v_1"
 	evaluate test "v_abc"
-	$echo ""
+	dk_echo ""
 	
 	evaluate [        ] 
 	evaluate [ 0      ]
@@ -107,80 +103,86 @@ main() {
 	evaluate [ $v_0   ]
 	evaluate [ $v_1   ]
 	evaluate [ $v_abc ]
-	$echo ""
+	dk_echo ""
 	
 	### if [ ] ###
-	if [   ]; then $echo 'if [   ] is $true'; else $echo 'if [   ] is $false'; fi
-	if [ 0 ]; then $echo "if [ 0 ] is $true"; else $echo "if [ 0 ] is $false"; fi
-	if [ 1 ]; then $echo "if [ 1 ] is $true"; else $echo "if [ 1 ] is $false"; fi
-	$echo ""
+	if [   ]; then dk_echo 'if [   ] is $true'; else dk_echo 'if [   ] is $false'; fi
+	if [ 0 ]; then dk_echo "if [ 0 ] is $true"; else dk_echo "if [ 0 ] is $false"; fi
+	if [ 1 ]; then dk_echo "if [ 1 ] is $true"; else dk_echo "if [ 1 ] is $false"; fi
+	dk_echo ""
 
 	### [ -e ] ###
-	[ -e        ] && $echo "[ -e        ] is $true" || $echo "[ -e        ] is $false"
-	[ -e $BLANK ] && $echo "[ -e \$BLANK ] is $true" || $echo "[ -e \$BLANK ] is $false"
-	[ -e $HOME  ] && $echo "[ -e \$HOME  ] is $true" || $echo "[ -e \$HOME  ] is $false"
-	$echo ""
+	[ -e        ] && dk_echo "[ -e        ] is $true" || dk_echo "[ -e        ] is $false"
+	[ -e $BLANK ] && dk_echo "[ -e \$BLANK ] is $true" || dk_echo "[ -e \$BLANK ] is $false"
+	[ -e $HOME  ] && dk_echo "[ -e \$HOME  ] is $true" || dk_echo "[ -e \$HOME  ] is $false"
+	dk_echo ""
 
 	################ (BASH ONLY) #################
 	### [[ ]] ### (BASH ONLY) 
-	#           $echo "[[   ]] is $error"
-	#[[ 0 ]] && $echo "[[ 0 ]] is $true" || $echo "[[ 0 ]] is $false"
-	#[[ 1 ]] && $echo "[[ 1 ]] is $true" || $echo "[[ 1 ]] is $false"
-	#$echo ""
+	#           dk_echo "[[   ]] is $error"
+	#[[ 0 ]] && dk_echo "[[ 0 ]] is $true" || dk_echo "[[ 0 ]] is $false"
+	#[[ 1 ]] && dk_echo "[[ 1 ]] is $true" || dk_echo "[[ 1 ]] is $false"
+	#dk_echo ""
 
 	### (( )) ### (BASH ONLY)
-	#((          )) && $echo "((          )) is $true" || $echo "((          )) is $false"	# sh error
-	#((   0      )) && $echo "((   0      )) is $true" || $echo "((   0      )) is $false"
-	#((   1      )) && $echo "((   1      )) is $true" || $echo "((   1      )) is $false"
-	#((  abc     )) && $echo "((  abc     )) is $true" || $echo "((  abc     )) is $false"
-	#((  v_    )) && $echo "((  v_    )) is $true" || $echo "((  v_    )) is $false"
-	#((  v_0   )) && $echo "((  v_0   )) is $true" || $echo "((  v_0   )) is $false"
-	#(( $v_0   )) && $echo "(( \$v_0   )) is $true"|| $echo "(( \$v_0   )) is $false"
-	#((  v_1   )) && $echo "((  v_1   )) is $true" || $echo "((  v_1   )) is $false"
-	#(( $v_1   )) && $echo "(( \$v_1   )) is $true"|| $echo "(( \$v_1   )) is $false"
-	#((  v_abc )) && $echo "((  v_abc )) is $true" || $echo "((  v_abc )) is $false"
-	#(( $v_abc )) && $echo "(( \$v_abc )) is $true"|| $echo "(( \$v_abc )) is $false"
-	#((  ' '     )) && $echo "((  ' '     )) is $true" || $echo "((  ' '     )) is $false"
-	#((  '0'     )) && $echo "((  '0'     )) is $true" || $echo "((  '0'     )) is $false"
-	#((  '1'     )) && $echo "((  '1'     )) is $true" || $echo "((  '1'     )) is $false"
-	#((  'abc'   )) && $echo "(( 'abc '   )) is $true" || $echo "(( 'abc'    )) is $false"
-	#$echo ""
+	#((          )) && dk_echo "((          )) is $true" || dk_echo "((          )) is $false"	# sh error
+	#((   0      )) && dk_echo "((   0      )) is $true" || dk_echo "((   0      )) is $false"
+	#((   1      )) && dk_echo "((   1      )) is $true" || dk_echo "((   1      )) is $false"
+	#((  abc     )) && dk_echo "((  abc     )) is $true" || dk_echo "((  abc     )) is $false"
+	#((  v_    )) && dk_echo "((  v_    )) is $true" || dk_echo "((  v_    )) is $false"
+	#((  v_0   )) && dk_echo "((  v_0   )) is $true" || dk_echo "((  v_0   )) is $false"
+	#(( $v_0   )) && dk_echo "(( \$v_0   )) is $true"|| dk_echo "(( \$v_0   )) is $false"
+	#((  v_1   )) && dk_echo "((  v_1   )) is $true" || dk_echo "((  v_1   )) is $false"
+	#(( $v_1   )) && dk_echo "(( \$v_1   )) is $true"|| dk_echo "(( \$v_1   )) is $false"
+	#((  v_abc )) && dk_echo "((  v_abc )) is $true" || dk_echo "((  v_abc )) is $false"
+	#(( $v_abc )) && dk_echo "(( \$v_abc )) is $true"|| dk_echo "(( \$v_abc )) is $false"
+	#((  ' '     )) && dk_echo "((  ' '     )) is $true" || dk_echo "((  ' '     )) is $false"
+	#((  '0'     )) && dk_echo "((  '0'     )) is $true" || dk_echo "((  '0'     )) is $false"
+	#((  '1'     )) && dk_echo "((  '1'     )) is $true" || dk_echo "((  '1'     )) is $false"
+	#((  'abc'   )) && dk_echo "(( 'abc '   )) is $true" || dk_echo "(( 'abc'    )) is $false"
+	#dk_echo ""
 
 	### if [[ ]] ### (BASH ONLY)
-	#                $echo "if [[   ]] is $error"
-	#if [[ 0 ]]; then $echo "if [[ 0 ]] is $true"; else $echo "if [[ 0 ]] is $false"; fi
-	#if [[ 1 ]]; then $echo "if [[ 1 ]] is $true"; else $echo "if [[ 1 ]] is $false"; fi
-	#$echo ""
+	#                dk_echo "if [[   ]] is $error"
+	#if [[ 0 ]]; then dk_echo "if [[ 0 ]] is $true"; else dk_echo "if [[ 0 ]] is $false"; fi
+	#if [[ 1 ]]; then dk_echo "if [[ 1 ]] is $true"; else dk_echo "if [[ 1 ]] is $false"; fi
+	#dk_echo ""
 
 	### if (( )) ### (BASH ONLY)
-	#if ((   )); then $echo "if ((   )) is $true"; else $echo "if ((   )) is $false"; fi    sh error
-	#if (( 0 )); then $echo "if (( 0 )) is $true"; else $echo "if (( 0 )) is $false"; fi
-	#if (( 1 )); then $echo "if (( 1 )) is $true"; else $echo "if (( 1 )) is $false"; fi
-	#$echo ""
+	#if ((   )); then dk_echo "if ((   )) is $true"; else dk_echo "if ((   )) is $false"; fi    sh error
+	#if (( 0 )); then dk_echo "if (( 0 )) is $true"; else dk_echo "if (( 0 )) is $false"; fi
+	#if (( 1 )); then dk_echo "if (( 1 )) is $true"; else dk_echo "if (( 1 )) is $false"; fi
+	#dk_echo ""
 
 	### [[ -e ]] ### (BASH ONLY)
-	#                   $echo "[[ -e        ]] is $error"
-	#[[ -e $BLANK ]] && $echo "[[ -e \$BLANK ]] is $true" || $echo "[[ -e \$BLANK ]] is $false"
-	#[[ -e $HOME  ]] && $echo "[[ -e \$HOME  ]] is $true" || $echo "[[ -e \$HOME  ]] is $false"
-	#$echo ""
+	#                   dk_echo "[[ -e        ]] is $error"
+	#[[ -e $BLANK ]] && dk_echo "[[ -e \$BLANK ]] is $true" || dk_echo "[[ -e \$BLANK ]] is $false"
+	#[[ -e $HOME  ]] && dk_echo "[[ -e \$HOME  ]] is $true" || dk_echo "[[ -e \$HOME  ]] is $false"
+	#dk_echo ""
 
 	### (( -e )) ### (BASH ONLY)
-	#(( -e        )) && $echo "(( -e        )) is $true" || $echo "(( -e        )) is $false"
-	#(( -e $BLANK )) && $echo "(( -e \$BLANK )) is $true" || $echo "(( -e \$BLANK )) is $false"
-	#				   $echo "(( -e HOME    )) is $error"
-	#				   $echo "(( -e \$HOME  )) is $error"
-	#$echo ""
+	#(( -e        )) && dk_echo "(( -e        )) is $true" || dk_echo "(( -e        )) is $false"
+	#(( -e $BLANK )) && dk_echo "(( -e \$BLANK )) is $true" || dk_echo "(( -e \$BLANK )) is $false"
+	#				   dk_echo "(( -e HOME    )) is $error"
+	#				   dk_echo "(( -e \$HOME  )) is $error"
+	#dk_echo ""
 
-	$echo "\n############################################################\n"
+	dk_echo "\n############################################################\n"
 	
-	print_stack
+	#print_stack
+	func_2
+	
+}
+
+func_2 () {
+	dk_debug "func_2($@)"
 	dk_stacktrace
 }
 
 ###### print_stack() ######
 print_stack () {
-	dk_debug "print_stack($@)"
-    if [ $BASH ]; then
+	#dk_debug "print_stack($@)"
+    if [ $DKBASH ]; then
 		#echo "stack_size: ${#FUNCNAME[@]}"
 		(( n=${#FUNCNAME[@]}-1 ))
         for I in ${FUNCNAME[@]}
@@ -197,19 +199,19 @@ evaluate () {
 	export _true="${green}true${clr}"
 	export _false="${red}false${clr}"
 	export _error="${red}!! SYNTAX ERROR !!${clr}"
-	$@ && $echo "evaluate($@) is $_true" || $echo "evaluate($@) is $_false"
+	$@ && dk_echo "evaluate($@) is $_true" || dk_echo "evaluate($@) is $_false"
 	return $?
 }
 
 test_function () {
-	dk_debug "test_function($@)"
+	#dk_debug "test_function($@)"
 	#args=( "$@" )
 	loop_array "$@"
 	exit_code="$?"
 }
 
 loop_array () {
-	dk_debug "loop_array($@)"
+	#dk_debug "loop_array($@)"
 	for I in "${@}"
 	do
 		echo "Param: $I"
@@ -217,7 +219,7 @@ loop_array () {
 }
 
 escape_quotes () {
-	dk_debug "escape_quotes($@)"
+	#dk_debug "escape_quotes($@)"
 	input=$1
 	output=$(echo $input  | sed 's/"/\\"/g')
 	eval $2=$output

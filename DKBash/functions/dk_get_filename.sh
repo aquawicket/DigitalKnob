@@ -1,6 +1,9 @@
 # dk_include_guard()
 
-###### dk_get_filename <path> <output> ######
+##################################################################################
+# dk_get_filename(<path> <output>)
+#
+#
 function dk_get_filename() {
 	dk_debug "dk_get_filename($@)"
 	if [ -z "$2" ]; then
