@@ -42,7 +42,7 @@ dk_load () {
 		dk_load_list="${dk_load_list};$fn" # Add to list
 		
 		# https://stackoverflow.com/a/26144107/688352
-		#shopt -s lastpipe
+		shopt -s lastpipe
 			
 		oldIFS=$IFS
 		IFS=$'\n' 
@@ -64,13 +64,16 @@ dk_load () {
 			if echo $dk_load_list | grep -q "$value"; then				# POSIX REGEX MATCH
 			    #echo "${fn}: skipping $value.    already in load_list"
 			    continue
-			elif [[ ${fn} == $value ]]; then
+			#elif [[ ${fn} == $value ]]; then
+			elif [ "${fn}" == "$value" ]; then
 			    #echo "${fn}: skipping $value.    already matches fn"
 			    continue
- 			elif [[ $(command -v $value) != "" ]]; then
+ 			#elif [[ $(command -v $value) != "" ]]; then
+			elif [ "$(command -v $value)" != "" ]; then
 			    #echo "${fn}: skipping $value.    command already recognized"
 			    continue
-			elif [[ "$value" == "" ]]; then
+			#elif [[ "$value" == "" ]]; then
+			elif [ "$value" == "" ]; then
 			    continue
 			else
 			    #echo "$fn: dk_load( $value )"
