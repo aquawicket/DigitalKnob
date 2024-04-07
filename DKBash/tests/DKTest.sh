@@ -1,4 +1,4 @@
-#!/bin/bash --posix
+#!/bin/bash
 
 ###### Load Function files ######
 . ../functions/DK.sh
