@@ -21,20 +21,23 @@ dk_load () {
 	
 	# Convert to unix line endings if CRLF found
 	#if file_exists $fpath; then
-		if [[ $(file -b - < $fpath) =~ CRLF ]]; then
+		#if [[ $(file -b - < $fpath) =~ CRLF ]]; then		# BASH REGEX MATCH
+		if echo $(file -b - < $fpath) | grep -q CRLF; then	# POSIX REGEX MATCH
 			echo Converting file to Unix line endings
 			sed -i -e 's/\r$//' $fpath
 		fi
 	#fi
 	
 	if [ -f $fpath ]; then
-		declare ${fn}=$fpath
+		#declare ${fn}=$fpath
+		local ${fn}=$fpath
     else
         echo "$fpath: file not found"
     fi
 	
-	if [[ $dk_load_list =~ "$fn" ]]; then
-        #echo "$fn: already in the list" 	# if already in list, do nothing
+	#if [[ $dk_load_list =~ "$fn" ]]; then			# BASH REGEX MATCH
+	if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
+        echo "$fn: already in the list" 	# if already in list, do nothing
         return 0
     else
 		dk_load_list="${dk_load_list};$fn" # Add to list
@@ -52,12 +55,14 @@ dk_load () {
 				#value=${value##*N}   # cut off everything from begining to last N
 				
 				value=${value%%#*}
-				[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]
-				value=${BASH_REMATCH[0]}	
+				[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]						# BASH REGEX MATCH
+				value=${BASH_REMATCH[0]}									# BASH REGEX VALUE
+				#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 				[ "$value" == "" ] && continue
 				echo "${fn}:lines '$value'"
 				
-				if [[ $dk_load_list =~ "$value" ]]; then
+				if [[ $dk_load_list =~ "$value" ]]; then		# BASH REGEX MATCH
+				#if echo $dk_load_list | grep -q "$value"; then	# POSIX REGEX MATCH
 				  #echo "${fn}: skipping $value.    already in load_list"
 					continue
 				elif [[ ${fn} == $value ]]; then
@@ -116,27 +121,29 @@ dk_load () {
 				#value=${value%N*}   # cut off everything from the last N to end
 				#value=${value#*N}   # cut off everything from begining to first N
 				#value=${value##*N}   # cut off everything from begining to last N
-				
+
 				value=${value%%#*}
-				[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]
-				value=${BASH_REMATCH[0]}	
+				#[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]						# BASH REGEX MATCH
+				#value=${BASH_REMATCH[0]}									# BASH REGEX VALUE
+				value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 				[ "$value" == "" ] && continue
 				echo "${fn}:lines $value"
 				
-				if [[ $dk_load_list =~ "$value" ]]; then
-				  #echo "${fn}: skipping $value.    already in load_list"
+				#if [[ $dk_load_list =~ "$value" ]]; then					# BASH REGEX MATCH
+				if echo $dk_load_list | grep -q "$value"; then				# POSIX REGEX MATCH
+                    #echo "${fn}: skipping $value.    already in load_list"
 					continue
 				elif [[ ${fn} == $value ]]; then
-				   #echo "${fn}: skipping $value.    already matches fn"
-				   continue
+                    #echo "${fn}: skipping $value.    already matches fn"
+                    continue
 				elif [[ $(command -v $value) != "" ]]; then
-				   #echo "${fn}: skipping $value.    command already recognized"
-				   continue
+                    #echo "${fn}: skipping $value.    command already recognized"
+                    continue
 				elif [[ "$value" == "" ]]; then
-				   continue
+                    continue
 				else
-				   #echo "$fn: dk_load( $value )"
-				   dk_load $value
+                    #echo "$fn: dk_load( $value )"
+                    dk_load $value
 				fi
 			done
 			#done < printf '%s\n' "$lines"

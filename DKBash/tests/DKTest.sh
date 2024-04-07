@@ -16,7 +16,6 @@ dk_print_var TEST_VAR
 ###### main ######
 main() {
 	dk_debug "main($@)"	
-	
 	dk_echo "\n######################## TEST FIELD ########################\n"
 
 	: '
