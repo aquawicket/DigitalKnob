@@ -14,6 +14,7 @@ include_guard()
 #
 macro(dk_debugFunc)
 	#DKDEBUGFUNC(${ARGV})
+	
 	if(DKDEBUGFUNC_ENABLED)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")

@@ -21,6 +21,7 @@ include_guard()
 #
 function(dk_bin2h)
 	DKDEBUGFUNC(${ARGV})
+	
     set(options APPEND NULL_TERMINATE)
     set(oneValueArgs SOURCE_FILE VARIABLE_NAME HEADER_FILE)
     cmake_parse_arguments(dk_bin2h "${options}" "${oneValueArgs}" "" ${ARGN})

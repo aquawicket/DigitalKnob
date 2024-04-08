@@ -13,7 +13,7 @@ include_guard()
 #
 function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	DKDEBUGFUNC(${ARGV})
-	dk_debug("dk_download(${ARGV})")
+	
 	dk_get_option(NOERROR ${ARGV})
 	
 	#FIXME: Will not download if only 1 argument

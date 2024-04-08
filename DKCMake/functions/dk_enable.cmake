@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_enable plugin)
 	DKDEBUGFUNC(${ARGV})
+	
 	if(NOT ${plugin})
 		if(${ARGC} GREATER 1)
 			dk_set(${${ARGV1}} ON)

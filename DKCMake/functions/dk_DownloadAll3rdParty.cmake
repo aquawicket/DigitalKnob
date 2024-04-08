@@ -7,6 +7,7 @@ include_guard()
 #
 function(dk_DownloadAll3rdParty)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_dependAll()
 	
 	# Get a list of all /3rdParty/DKMAKE.cmake paths

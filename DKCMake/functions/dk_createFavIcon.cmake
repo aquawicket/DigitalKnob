@@ -8,6 +8,7 @@ include_guard()
 #
 function(dk_createFavIcon inpath outpath)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
 	if(IMAGEMAGICK_CONVERT)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -define icon:auto-resize=16 ${outpath})

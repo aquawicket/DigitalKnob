@@ -7,6 +7,7 @@ include_guard()
 #
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
+	
 	DKASSERT(DIGITALKNOB_DIR)
 	dk_info("Deleteing CMake cache . . .")
 	if(WIN_HOST)

@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_assets plugin)
 	DKDEBUGFUNC(${ARGV})
+	
 	if(NOT DKAPP)
 		return()
 	endif()	

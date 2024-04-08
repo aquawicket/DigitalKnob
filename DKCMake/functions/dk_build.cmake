@@ -10,6 +10,7 @@ include_guard()
 #
 function(dk_build path) #target NOASSERT
 	DKDEBUGFUNC(${ARGV})
+	
 	if(NOT QUEUE_BUILD)
 		return()
 	endif()

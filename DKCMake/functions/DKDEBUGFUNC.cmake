@@ -1,7 +1,7 @@
 include_guard()
 
 ##################################################################################
-# dk_debugFunc(${ARGV})
+# DKDEBUGFUNC(${ARGV})
 #
 #	Prints the current file name, line number, function or macro and arguments
 #	Place this at the first line of every function you want to see debug output for.
@@ -12,9 +12,8 @@ include_guard()
 #			## user code
 #		endfunction()
 #
-function(DKDEBUGFUNC)
-#macro(dk_debugFunc)
-	#DKDEBUGFUNC(${ARGV})
+macro(DKDEBUGFUNC)
+	
 	if(DKDEBUGFUNC_ENABLED)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
@@ -36,11 +35,8 @@ function(DKDEBUGFUNC)
 				math(EXPR argIndex "${argIndex}+1")
 			endforeach()
 			set(argString "${argString}} ")
-			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
+			#message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
+			message(STATUS "->${cyan}${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
 		endif()
 	endif()
-endfunction()
-#endmacro()
-#macro(DKDEBUGFUNC)
-#	dk_debugFunc(${ARGV})
-#endmacro()
+endmacro()

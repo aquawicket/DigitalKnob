@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_define str)
 	DKDEBUGFUNC(${ARGV})
+	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		return()
 	endif()

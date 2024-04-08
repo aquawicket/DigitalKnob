@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
+	
 	if(NOT EXISTS ${path})
 		dk_wait("path:${path} does not exist")
 		dk_return()

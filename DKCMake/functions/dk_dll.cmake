@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_dll plugin_name)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		dk_error("${plugin_name} plugin not found")

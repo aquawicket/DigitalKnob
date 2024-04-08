@@ -8,6 +8,7 @@ include_guard()
 #
 function(dk_addFirewallAllow name executable)
 	DKDEBUGFUNC(${ARGV})
+	
 	return()	# this function is disabled for now
 	
 	if(NOT WIN_HOST)

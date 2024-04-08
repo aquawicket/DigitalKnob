@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_createPlugin url)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_todo() #TODO
 	dk_getAppName(${url} App_Name)
 	dk_verbose(App_Name		PRINTVAR)					# My_App

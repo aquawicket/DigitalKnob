@@ -12,6 +12,7 @@ include_guard()
 #
 function(dk_copy from to) # OVERWRITE NOERROR
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_get_option(OVERWRITE ${ARGV})
 	dk_get_option(NOERROR ${ARGV})
 	

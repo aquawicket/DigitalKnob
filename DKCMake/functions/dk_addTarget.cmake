@@ -10,7 +10,7 @@ include_guard()
 #
 function(dk_addTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
-	dk_verbose("dk_addTarget( ${ARGV} )")
+	
 	if(${plugin}_targets_OFF)
 		list(REMOVE_ITEM ${plugin}_targets_OFF ${target})
 	endif()

@@ -12,6 +12,7 @@ include_guard()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_debug("dk_command(${ARGV})")
 	dk_get_option(NOMERGE 				${ARGV} REMOVE)
 	dk_get_option(BASH_ENV				${ARGV} REMOVE)

@@ -10,6 +10,7 @@ include_guard()
 #
 function(dk_dirIsEmpty path RESULT)
 	DKDEBUGFUNC(${ARGV})
+	
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")
 		list(LENGTH items count)

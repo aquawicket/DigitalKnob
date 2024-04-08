@@ -10,7 +10,8 @@ include_guard()
 # 	[path1 path2 ...]	- TODO
 #
 function(dk_find_program VAR name)
-	dk_verbose("dk_find_program(${ARGV})")
+	DKDEBUGFUNC(${ARGV})
+	
 	if(EXISTS ${${VAR}})
 		dk_debug("already FOUND ${name} at ${${VAR}}")
 		return()

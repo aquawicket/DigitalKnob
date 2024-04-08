@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_bash_env)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_get_option(NOASSERT ${ARGV} REMOVE)
 	dk_get_option(NOECHO ${ARGV} REMOVE)
 	dk_get_option_value(OUTPUT_VARIABLE ${ARGV} REMOVE)

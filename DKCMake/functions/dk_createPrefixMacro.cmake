@@ -10,7 +10,8 @@ dk_load(DKDEBUGFUNC)
 #	@func	- The func of the function to create aliases for
 #
 function(dk_createPrefixMacro func) #ARGN
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
+	
 	set(${ARGN})
 	string(REPLACE ";" "_" prefix_name "${ARGN}")
 	string(REPLACE ";" " AND " prefix_if "${ARGN}")

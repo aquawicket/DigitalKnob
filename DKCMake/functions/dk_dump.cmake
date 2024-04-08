@@ -9,6 +9,7 @@ include_guard()
 #
 macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
+	
 	message(STATUS "\n${cyan}############################### Variable DUMP ##############################################${CLR}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)

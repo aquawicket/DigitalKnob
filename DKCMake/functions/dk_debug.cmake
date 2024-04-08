@@ -9,6 +9,7 @@ include_guard()
 #
 function(dk_debug msg)
 	#DKDEBUGFUNC(${ARGV})
+	
 	if(DKDEBUG_ENABLED)
 		dk_get_option(PRINTVAR ${ARGV})
 		dk_printvar(msg)

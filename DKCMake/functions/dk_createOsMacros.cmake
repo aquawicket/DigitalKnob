@@ -8,7 +8,7 @@ include_guard()
 #	@func	- The func of the function to create aliases for
 #
 function(dk_createOsMacros func)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 
 	if(ext_string)
 		dk_error("ext_string variable already in use")

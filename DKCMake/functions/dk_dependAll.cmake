@@ -7,6 +7,7 @@ include_guard()
 #
 function(dk_dependAll)
 	DKDEBUGFUNC(${ARGV})
+	
 	set(DEPENDALL_FILE "")
 	
 	if(IS_DIRECTORY ${DKIMPORTS_DIR})
