@@ -59,9 +59,13 @@ GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.
 GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
 
-###### main() ######
+##################################################################################
+# main()
+#
+#
 main() {
 	dk_verbose "main($*)"
+	
 	dk_validate_sudo
 	
 	if dk_defined WSLENV; then 
@@ -232,7 +236,11 @@ main() {
 	done
 }
 
-###### pick_update() ######
+
+##################################################################################
+# pick_update()
+#
+#
 pick_update() {
 	dk_verbose "pick_update($*)"
 	
@@ -293,9 +301,14 @@ pick_update() {
 	fi
 }
 
-###### pick_app() ######
+
+##################################################################################
+# pick_app()
+#
+#
 pick_app() {
 	dk_verbose "pick_app($*)"
+	
 	echo ""
 	echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
@@ -344,7 +357,11 @@ pick_app() {
 	fi
 }
 
-###### pick_os() ######
+
+##################################################################################
+# pick_os()
+#
+#
 pick_os() {
 	dk_verbose "pick_os($*)"
 	
@@ -475,9 +492,14 @@ pick_os() {
 	fi
 }
 
-###### pick_type() ######
+
+##################################################################################
+# pick_type()
+#
+#
 pick_type() {
 	dk_verbose "pick_type($*)"
+	
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
@@ -509,15 +531,23 @@ pick_type() {
 }
 
 
-###### add_cmake_arg() ######
+##################################################################################
+# add_cmake_arg(<string>)
+#
+#
 #add_cmake_arg() {
+#	dk_verbose "add_cmake_arg($*)"
+#
 #   if [ "$*" = "" ]; then echo "ERROR: add_cmake_arg is empty!" & return 1
 #    echo added $*
 #    CMAKE_ARGS="${CMAKE_ARGS} %*"
 #}
 
 
-###### generate() ######
+##################################################################################
+# generate(<toolchain>)
+#
+#
 generate() {
 	dk_verbose "generate($*)"
 	
@@ -682,8 +712,14 @@ generate() {
 	dk_call "$CMAKE_EXE" "${CMAKE_ARGS}" 
 }
 
-###### generate_toolchain() <toolchain> ######
+
+##################################################################################
+# generate_toolchain(<toolchain>)
+#
+#
 #generate_toolchain() {
+#	dk_verbose "generate_toolchain($*)"
+#
 #	toolchain=$1
 #	
 #	# TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
@@ -709,7 +745,11 @@ generate() {
 #    echo ""
 #}
 	
-###### build() ######
+
+##################################################################################
+# build()
+#
+#
 build () {
 	dk_verbose "build($*)"
 	
@@ -745,9 +785,14 @@ build () {
 	echo ""
 }
 
-###### dk_require() <var> ######
+
+##################################################################################
+# dk_echo(<variable>)
+#
+#
 dk_require () {
-	#dk_verbose "dk_require($*)"
+	dk_verbose "dk_require($*)"
+	
 	if [ -z "$1" ]; then
 		dk_error "dk_require(<func_name> <n>) requires 2 parameters. Example dk_require my_func \$1"
 		return $false
@@ -758,38 +803,64 @@ dk_require () {
 	fi
 }
 
-###### dk_echo <string> ######
+
+##################################################################################
+# dk_echo(<message>)
+#
+#
 dk_echo () {
+	#dk_verbose "dk_echo($*)"
+	
 	#echo "dk_echo($*)"
 	echo -e "$1"
 }
 
-###### dk_verbose <string> ######
+
+##################################################################################
+# dk_verbose(<message>)
+#
+#
 dk_verbose () {
-	#echo "dk_verbose($*)"
+	#dk_verbose "dk_verbose($*)"
+	
 	if [ "$LOG_VERBOSE" = "1" ]; then 
 		dk_echo "${cyan}VERBOSE: $1 ${clr}"
 	fi
 }
 
-###### dk_debug <string> ######
+
+##################################################################################
+# dk_debug(<message>)
+#
+#
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
+	
 	if [ "$LOG_DEBUG" = "1" ]; then 
 		dk_echo "${blue}  DEBUG: $1 ${clr}"
 	fi
 }
 
-###### dk_info <string> ######
+
+##################################################################################
+# dk_info(<message>)
+#
+#
 dk_info () {
 	#dk_verbose "dk_info($*)"
+	
 	dk_require dk_info "$1"
 	dk_echo "${white}   INFO: $1 ${white}"
 }
 
-###### dk_warning <string> ######
+
+##################################################################################
+# dk_warning(<message>)
+#
+#
 dk_warning () {
 	#dk_verbose "dk_warning($*)"
+	
 	dk_echo "${yellow}WARNING: $1 ${clr}"
 	dk_stacktrace
 	if [ $HALT_ON_WARNINGS = 1 ]; then
@@ -797,9 +868,14 @@ dk_warning () {
 	fi
 }
 
-###### dk_error <string> ######
+
+##################################################################################
+# dk_error(<message>)
+#
+#
 dk_error () {
 	#dk_verbose "dk_error($*)"
+	
 	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
 	if [ $HALT_ON_ERRORS = 1 ]; then
@@ -807,9 +883,14 @@ dk_error () {
 	fi
 }
 
-###### dk_stacktrace ######
+
+##################################################################################
+# dk_stacktrace()
+#
+#
 dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
+	
     local i=1 line file func											# FIXME: n POSIX sh, 'local' is undefined.
     #while read -r line func file < <(caller $i); do
     #   echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
@@ -817,9 +898,14 @@ dk_stacktrace () {
     #done
 }
 
-###### dk_defined <var> ######
+
+##################################################################################
+# dk_defined(<variable>)
+#
+#
 dk_defined () {
 	dk_verbose "dk_defined($*)"
+	
 	if [ -z "$1" ]; then
 		return $false
 	fi
@@ -835,9 +921,14 @@ dk_defined () {
 	return $true;
 }
 
-###### dk_call <command args> ######
+
+##################################################################################
+# dk_call(<command args>)
+#
+#
 dk_call () {
 	dk_verbose "dk_call($*)"
+	
 	if [ -z "$1" ]; then
 		dk_error "dk_call <command args> requires at least 1 parameter"
 		return $false
@@ -847,9 +938,14 @@ dk_call () {
 	"$@"
 }
 
-###### dk_check_remote ######
+
+##################################################################################
+# dk_check_remote()
+#
+#
 dk_check_remote () {
 	dk_verbose "dk_check_remote($*)"
+	
 	#if [ -d .git ]; then
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		git remote update > /dev/null 2> /dev/null
@@ -860,37 +956,58 @@ dk_check_remote () {
 	fi
 }
 
-###### dk_validate_sudo ######
+
+##################################################################################
+# dk_validate_sudo()
+#
+#
 dk_validate_sudo () {
 	dk_verbose "dk_validate_sudo($*)"
+	
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
 	fi
 	$SUDO echo
 }
 
-###### dk_reload ######
+
+##################################################################################
+# dk_reload()
+#
+#
 dk_reload () {
 	dk_verbose "dk_reload($*)"
+	
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
 	exec "$SCRIPT_DIR/$SCRIPT_NAME"
 }
 
-###### dk_confirm() ######
-dk_confirm () {
-	dk_verbose "dk_confirm($*)"
-	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
-	read -p " " -n 1 -r								# FIXME:   In POSIX sh, read -p is undefined.
+
+##################################################################################
+# dk_confirm()
+#
+#
+dk_confirm() {
+	dk_debug "dk_confirm($@)"
+	echo -e "${yellow} Are you sure ? [Y/N] ${clr}"
+	read -p " " -n 1 -r REPLY
 	echo ""
 	echo ""
-	#[[ $REPLY =~ ^[Yy]$ ]]							# BASH REGEX
-	[ echo $REPLY | grep -q "^[Yy]$" ]				# FIXME:	POSIX REGEX MATCH
+	#result=$(echo $REPLY | grep "^[Yy]$")
+	[ "$REPLY" = "y" ] && return $true
+	[ "$REPLY" = "Y" ] && return $true
+	return $false;
 }
 
-###### dk_string_contains <string> <substring> ######
+
+##################################################################################
+# dk_string_contains(<string> <substring>)
+#
+#
 dk_string_contains () {
 	dk_verbose "dk_string_contains($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_string_contains <string> <substring> requires 2 parameters"
 		return $false
@@ -902,15 +1019,25 @@ dk_string_contains () {
 	return $false
 }
 
-###### dk_command_exists <command> ######
+
+##################################################################################
+# dk_command_exists(<command>)
+#
+#
 dk_command_exists () {
 	dk_verbose "dk_command_exists($*)"
+	
 	! [ "$(command -v "$1")" = "" ]
 }
 	
-###### dk_file_exists <file> ######
+
+##################################################################################
+# dk_file_exists(<file>)
+#
+#
 dk_file_exists () {
 	dk_verbose "dk_file_exists($*)"
+	
 	if [ -e "$1" ]; then
 		dk_debug "dk_file_exists($*): FOUND"
 	else
@@ -919,9 +1046,14 @@ dk_file_exists () {
 	[ -e "$1" ]
 }
 
-###### dk_get_filename <path> <output> ######
+
+##################################################################################
+# dk_get_filename(<path> <output>)
+#
+#
 dk_get_filename () {
 	dk_verbose "dk_get_filename($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
 		return "$false"
@@ -931,9 +1063,14 @@ dk_get_filename () {
 	#[ $base_name = "" ]
 }
 
-###### dk_convert_to_c_identifier <input> <output> ######
+
+##################################################################################
+# dk_convert_to_c_identifier(<input> <output>)
+#
+#
 dk_convert_to_c_identifier () {
 	dk_verbose "dk_convert_to_c_identifier($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -957,6 +1094,7 @@ dk_convert_to_c_identifier () {
 #
 dk_replace_all () {
 	dk_verbose "dk_replace_all($*)"
+	
     input=$1
 	searchValue=$2
 	newValue=$3
@@ -978,9 +1116,14 @@ dk_replace_all () {
 	eval "$4=$output"
 }
 
-###### convert_to_lowercase <input> <output> ######
+
+##################################################################################
+# convert_to_lowercase(<input> <output>)
+#
+#
 convert_to_lowercase () {
 	dk_verbose "convert_to_lowercase($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -993,9 +1136,14 @@ convert_to_lowercase () {
 	#[ $input = "" ]
 }
 
-###### download <url> <destination> ######
+
+##################################################################################
+# download(<url> <destination>)
+#
+#
 download () {
 	dk_verbose "download($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -1019,9 +1167,14 @@ download () {
 	#[ $input = "" ]
 }
 
-###### extract <file> <destination> ######
+
+##################################################################################
+# extract(<file> <destination>)
+#
+#
 extract () {
 	dk_verbose "extract($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "extract <input> <output> requires 2 parameters"
 		return $false
@@ -1058,9 +1211,14 @@ extract () {
 	#[ $input = "" ]
 }
 
-###### rename <from> <to> ######
+
+##################################################################################
+# rename(<from> <to>)
+#
+#
 rename () {
 	dk_verbose "rename($*)"
+	
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
 		return $false
@@ -1070,7 +1228,11 @@ rename () {
 	#[ ? = "success" ]
 }
 
-###### validate_cmake ######
+
+##################################################################################
+# validate_cmake()
+#
+#
 validate_cmake () {
 	dk_verbose "validate_cmake($*)"
 	
@@ -1149,9 +1311,14 @@ validate_cmake () {
 	fi
 }
 
-###### validate_git ######
+
+##################################################################################
+# validate_git()
+#
+#
 validate_git () {
 	dk_verbose "validate_git($*)"
+	
 	if ! dk_command_exists git; then
 		install git
 	fi
@@ -1160,9 +1327,14 @@ validate_git () {
 	print_var GIT_EXE
 }
 
-###### validate_homebrew ######
+
+##################################################################################
+# validate_homebrew()
+#
+#
 validate_homebrew () {
 	dk_verbose "validate_homebrew($*)"
+	
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
 	fi
@@ -1179,9 +1351,14 @@ validate_homebrew () {
 	print_var BREW
 }
 
-###### package_installed <package> ######
+
+##################################################################################
+# package_installed(<package>)
+#
+#
 package_installed () {
 	dk_verbose "package_installed($*)"
+	
 	if dk_command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
 			return $true
@@ -1210,9 +1387,14 @@ package_installed () {
 	return $false
 }
 
-###### install <package> ######
+
+##################################################################################
+# install(<package>)
+#
+#
 install () {
 	dk_verbose "install($*)"
+	
 	#if package_installed $1; then
 	#	echo "$1 already installed"
 	#	return $false;
@@ -1238,17 +1420,27 @@ install () {
 	fi
 }
 
-###### validate_package <command> <package> ######
+
+##################################################################################
+# validate_package(<command> <package>)
+#
+#
 validate_package () {
 	dk_verbose "validate_package($*)"
+	
 	if ! dk_command_exists "$1"; then
 		install "$2"
 	fi
 }
 
-###### validate_ostype ######
+
+##################################################################################
+# validate_ostype()
+#
+#
 validate_ostype () {
 	dk_verbose "validate_ostype($*)"
+	
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
@@ -1272,9 +1464,14 @@ validate_ostype () {
 	fi
 }
 
-###### validate_branch ######
+
+##################################################################################
+# validate_branch()
+#
+#
 validate_branch () {
 	dk_verbose "validate_branch($*)"
+	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	FOLDER="$(basename $(pwd))"
@@ -1324,26 +1521,40 @@ validate_branch () {
 	#fi
 }
 
-###### dk_pause ######
+
+##################################################################################
+# dk_pause()
+#
+#
 dk_pause () {
 	dk_verbose "dk_pause($*)"
+	
 	read -rsp $'Press any key to continue...\n' -n 1 key
 	# echo $key
 }
 
 
-###### clear_cmake_cache ######
+##################################################################################
+# clear_cmake_cache()
+#
+#
 clear_cmake_cache () {
 	dk_verbose "clear_cmake_cache($*)"
+	
 	echo "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 	find . -name "CMakeCache.*" -delete
 	rm -rf $(find . -type d -name CMakeFiles)
 }
 
-###### delete_temp_files ######
+
+##################################################################################
+# delete_temp_files()
+#
+#
 delete_temp_files () {
 	dk_verbose "delete_temp_files($*)"
+	
 	echo "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 	rm -rf $(find . -type d -name *.tmp)
@@ -1352,23 +1563,38 @@ delete_temp_files () {
 	find . -name "*.TMP" -delete
 }
 
-###### validate_msys2 ######
+
+##################################################################################
+# validate_msys2()
+#
+#
 #validate_msys2 () {
 #	dk_verbose "validate_msys2($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	print_var MSYS2
 #}
 
-###### validate_make ######
+
+##################################################################################
+# validate_make()
+#
+#
 #validate_make () {
 #	dk_verbose "validate_make($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	print_var MAKE_PROGRAM
 #}
 
-###### validate_emscripten ######
+
+##################################################################################
+# validate_emscripten()
+#
+#
 #validate_emscripten () {
 #	dk_verbose "validate_emscripten($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	print_var EMSDK
 #	print_var EMSDK_ENV
@@ -1378,9 +1604,14 @@ delete_temp_files () {
 #	print_var EMSDK_CXX_COMPILER
 #}
 
-###### validate_android_ndk ######
+
+##################################################################################
+# validate_android_ndk()
+#
+#
 #validate_android_ndk () {
 #	dk_verbose "validate_android_ndk($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	print_var ANDROID_NDK
 #	print_var ANDROID_GENERATOR
@@ -1391,25 +1622,40 @@ delete_temp_files () {
 #	print_var ANDROID_CXX_COMPILER
 #}
 
-###### validate_clang ######
+
+##################################################################################
+# validate_clang()
+#
+#
 #validate_clang () {
 #	dk_verbose "validate_clang($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	print_var CLANG_C_COMPILER
 #	print_var CLANG_CXX_COMPILER
 #}
 
-###### validate_gcc ######
+
+##################################################################################
+# validate_gcc()
+#
+#
 #validate_gcc () {
 #	dk_verbose "validate_gcc($*)"
+#
 #	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	print_var GCC_C_COMPILER
 #	print_var GCC_CXX_COMPILER
 #}
-			
-### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
+
+
+##################################################################################
+# cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+#
+#			
 cmake_eval () {
 	dk_verbose "cmake_eval($*)"
+	
 	if [ -z "$1" ]; then
 		echo "ERROR: cmake_eval() parameter 1 is invalid"
 		return $false
@@ -1434,23 +1680,38 @@ cmake_eval () {
 	#echo return code: $?
 }
 
-###### push_assets ######
+
+##################################################################################
+# push_assets()
+#
+#
 push_assets () {
 	dk_verbose "push_assets($*)"
+	
 	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
-###### pull_assets ######
+
+##################################################################################
+# pull_assets()
+#
+#
 pull_assets () {
 	dk_verbose "pull_assets($*)"
+	
 	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
-###### reset_all ######
+
+##################################################################################
+# reset_all()
+#
+#
 reset_all () {
 	dk_verbose "reset_all($*)"
+	
 	if ! [ "$1" = "wipe" ]; then
 		clear
 		echo ""
@@ -1517,9 +1778,14 @@ reset_all () {
 	fi
 }
 
-###### remove_all ######
+
+##################################################################################
+# remove_all()
+#
+#
 remove_all () {
 	dk_verbose "remove_all($*)"
+	
 	if ! [ "$1" = "wipe" ]; then	
 		clear
 		echo ""
@@ -1569,9 +1835,14 @@ remove_all () {
 	fi
 }
 
-###### git_update ######
+
+##################################################################################
+# git_update()
+#
+#
 git_update () {
 	dk_verbose "git_update($*)"
+	
 	if ! [ "$1" = "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
 		if ! dk_confirm; then return; fi
@@ -1594,9 +1865,14 @@ git_update () {
 	dk_call chmod +x "$DKBRANCH_DIR"/build.sh
 }
 
-###### git_commit ######
+
+##################################################################################
+# git_commit()
+#
+#
 git_commit () {	
 	dk_verbose "git_commit($*)"
+	
 	echo "Please enter some details about this commit, Then press ENTER."
 	read message
 	
@@ -1645,9 +1921,14 @@ git_commit () {
     dk_call "$GIT_EXE" push
 }
 
-###### enter_manually ######
+
+##################################################################################
+# enter_manually()
+#
+#
 enter_manually () {
 	dk_verbose "enter_manually($*)"
+	
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
@@ -1677,9 +1958,14 @@ enter_manually () {
 	echo "int main(int argc, char** argv) { return 0; }" > "$DKAPPS_DIR"/"$APP"/main.cpp
 }
 
-###### create_cache ######
+
+##################################################################################
+# create_cache()
+#
+#
 create_cache () {
 	dk_verbose "create_cache($*)"
+	
 	echo "creating cache..."
 	
 	# write variable values line by line
@@ -1689,9 +1975,14 @@ create_cache () {
 	#echo "$DKENV">>"$DKBRANCH_DIR/cache"
 }
 
-###### read_cache ######
+
+##################################################################################
+# read_cache()
+#
+#
 read_cache() {
 	dk_verbose "read_cache($*)"
+	
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then
 		return
 	fi
@@ -1715,12 +2006,14 @@ read_cache() {
 	done < "$DKBRANCH_DIR"/cache
 }
 
+
 ##################################################################################
 # print_var(<variable>)
 #
 #
 print_var () {
 	#dk_verbose "print_var($*)"
+	
 	var=$1
 	#if [ -n "${!var}" ]; then #BASH
 	if [ -n "${var}" ]; then
@@ -1732,12 +2025,14 @@ print_var () {
 	fi	
 }
 
+
 ##################################################################################
 # remove_carrage_returns(<input>)
 #
 #
 remove_carrage_returns (){
 	dk_verbose "remove_carrage_returns($*)"
+	
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
 	# carrage returns are removed from <out>
