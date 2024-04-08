@@ -1,5 +1,5 @@
 [ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
-clear && clear
+#clear && clear
 
 ###### Global Script Variables ######
 export LOG_VERBOSE=1

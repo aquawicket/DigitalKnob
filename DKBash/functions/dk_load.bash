@@ -7,7 +7,7 @@ echo "dk_load.bash"
 #
 #
 dk_load() {
-	#echo "dk_load($@)"
+	echo "dk_load($@)"
 	local fn=
 	[ -z $1 ] && return 0 #true
 	
@@ -35,9 +35,9 @@ dk_load() {
     else
         echo "$fpath: file not found"
     fi
-	
-	#if [[ $dk_load_list =~ "$fn" ]]; then			# BASH REGEX MATCH
-	if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
+
+	if [[ $dk_load_list =~ ";$fn" ]]; then			# BASH REGEX MATCH
+	#if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
         echo "$fn: already in the list" 	# if already in list, do nothing
         return 0
     else
@@ -61,22 +61,23 @@ dk_load() {
 			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 			[ "$value" == "" ] && continue
 			echo "${fn}:lines '$value'"
-				
-			if [[ $dk_load_list =~ "$value" ]]; then		# BASH REGEX MATCH
+			#echo "dk_load_list: $dk_load_list"	
+			if [[ $dk_load_list =~ ";$value" ]]; then		# BASH REGEX MATCH
 			#if echo $dk_load_list | grep -q "$value"; then	# POSIX REGEX MATCH
-            #echo "${fn}: skipping $value.    already in load_list"
+				echo "${fn}: skipping $value.    already in load_list"
 				continue
 			elif [[ ${fn} == $value ]]; then
-			   #echo "${fn}: skipping $value.    already matches fn"
-			   continue
+				echo "${fn}: skipping $value.    already matches fn"
+				continue
 			elif [[ $(command -v $value) != "" ]]; then
-			   #echo "${fn}: skipping $value.    command already recognized"
-			   continue
+				echo "${fn}: skipping $value.    command already recognized"
+				continue
 			elif [[ "$value" == "" ]]; then
-			   continue
+				echo "${fn}: skipping $value.    empty"
+				continue
 			else
-			   #echo "$fn: dk_load( $value )"
-			   dk_load $value
+				echo "$fn: dk_load( $value )"
+				dk_load $value
 			fi
 		done
 

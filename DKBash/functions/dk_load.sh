@@ -75,25 +75,21 @@ dk_load() {
 			echo "${fn}:lines $value"
 				
 			if echo $dk_load_list | grep -q "$value"; then				# POSIX REGEX MATCH
-			    #echo "${fn}: skipping $value.    already in load_list"
+			    echo "${fn}: skipping $value.    already in load_list"
 			    continue
-			#elif [[ ${fn} == $value ]]; then
 			elif [ "${fn}" = "${value}" ]; then
-			    #echo "${fn}: skipping $value.    already matches fn"
+			    echo "${fn}: skipping $value.    already matches fn"
 			    continue
- 			#elif [[ $(command -v $value) != "" ]]; then
 			elif [ "$(command -v $value)" != "" ]; then
-			    #echo "${fn}: skipping $value.    command already recognized"
+			    echo "${fn}: skipping $value.    command already recognized"
 			    continue
-			#elif [[ "$value" == "" ]]; then
 			elif [ "$value" = "" ]; then
+				echo "${fn}: skipping $value.    empty"
 			    continue
 			else
-			    #echo "$fn: dk_load( $value )"
+			    echo "$fn: dk_load( $value )"
 			    dk_load $value
 			fi
-		#done
-		#done <<< "$printf_lines"
 		done <<EOF
 "$lines"
 EOF
