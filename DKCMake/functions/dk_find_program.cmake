@@ -10,8 +10,7 @@ include_guard()
 # 	[path1 path2 ...]	- TODO
 #
 function(dk_find_program VAR name)
-	dk_debug(" ")
-	dk_debug("dk_find_program(${ARGV})")
+	dk_verbose("dk_find_program(${ARGV})")
 	if(EXISTS ${${VAR}})
 		dk_debug("already FOUND ${name} at ${${VAR}}")
 		return()
@@ -25,8 +24,7 @@ function(dk_find_program VAR name)
 		dk_error("error {VAR} already set to ${VAR}")
 	endif()
 	
-	#dk_info("dk_find_program(${ARGN}, ${SEARCH_DIRS}): recursive")
-	#dk_load(dk_get_subdirectories)
+
 	dk_get_subdirectories("${ARGN}" SEARCH_DIRS) # Recursive search
 	list(REMOVE_DUPLICATES SEARCH_DIRS)
 	if(SEARCH_DIRS)

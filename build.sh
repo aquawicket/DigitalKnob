@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ############# DigitalKnob builder script ############
 
 # shellcheck disable=SC2034
