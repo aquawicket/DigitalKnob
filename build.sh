@@ -1,16 +1,39 @@
 #!/bin/sh
+############# DigitalKnob builder script ############
 
 # shellcheck disable=SC2034
 # shellcheck disable=SC3028
 # shellcheck disable=SC2119
 # shellcheck disable=SC2120
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###### Global Script Variables ######
 LOG_VERBOSE=1
 LOG_DEBUG=1
-HALT_ON_WARNINGS=1
-HALT_ON_ERRORS=1
+HALT_ON_WARNINGS=0
+HALT_ON_ERRORS=0
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
+
 SCRIPT_NAME=$(basename "$0")
 true=0
 false=1
@@ -32,15 +55,18 @@ CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.
 CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
 CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz
 
+GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
+GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
-###### main ######
+
+###### main() ######
 main() {
 	dk_verbose "main($*)"
 	dk_validate_sudo
 	
 	if dk_defined WSLENV; then 
-		echo "WSLENV is on"
-		echo "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+		dk_info "WSLENV is on"
+		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 	
@@ -116,7 +142,7 @@ main() {
 	elif [ "$OSTYPE" = "msys" ]; then			# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
 	else
-		echo "Unknown HOST_OS"
+		dk_error "Unknown HOST_OS"
 	fi
 	print_var HOST_OS
 	
@@ -127,7 +153,7 @@ main() {
 	elif [ "$HOSTTYPE" = "aarch64" ]; then		# FIXME:  $HOSTTYPE not POSIX
 		HOST_ARCH="arm64"
 	else
-		echo "Unknown HOST_ARCH"
+		dk_error "Unknown HOST_ARCH"
 	fi
 	print_var HOST_ARCH
 	
@@ -177,14 +203,27 @@ main() {
 	
 	while :
 	do
-		if [ -z "$UPDATE" ]; then Pick_Update;	continue; fi
-		if [ -z "$APP" ]; then Pick_App;		continue; fi
-		if [ -z "$TARGET_OS" ]; then Pick_OS;	continue; fi
-		if [ -z "$TYPE" ]; then Pick_Type;		continue; fi
+		if [ -z "$UPDATE" ]; then pick_update;	continue; fi
+		if [ -z "$APP" ]; then pick_app;		continue; fi
+		if [ -z "$TARGET_OS" ]; then pick_os;	continue; fi
+		if [ -z "$TYPE" ]; then pick_type;		continue; fi
 		
 		create_cache
-		Generate_Project
-		Build_Project
+		
+		generate
+		#if [ "$TARGET_OS" = "android_arm32" ]     generate_toolchain android_arm32_toolchain
+		#if [ "$TARGET_OS" = "android_arm64" ]     generate_toolchain android_arm64_toolchain
+		#if [ "$TARGET_OS" = "emscripten" ]        generate_toolchain emscripten_toolchain
+		#if [ "$TARGET_OS" = "win_arm64_clang" ]   generate_toolchain windows_arm64_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_mingw" ]     generate_toolchain windows_x86_mingw_toolchain
+		#if [ "$TARGET_OS" = "win_x86_clang" ]     generate_toolchain windows_x86_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_msvc" ]      generate_toolchain windows_x86_msvc_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_mingw" ]  generate_toolchain windows_x86_64_mingw_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_clang" ]  generate_toolchain windows_x86_64_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_ucrt" ]   generate_toolchain windows_x86_64_ucrt_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_msvc" ]   generate_toolchain windows_x86_64_msvc_toolchain
+		
+		build
 		
 		unset UPDATE
 		unset APP
@@ -193,9 +232,10 @@ main() {
 	done
 }
 
-###### Pick_Update ######
-Pick_Update() {
-	dk_verbose "Pick_Update($*)"
+###### pick_update() ######
+pick_update() {
+	dk_verbose "pick_update($*)"
+	
 	read_cache
 	
 	echo ""
@@ -249,13 +289,13 @@ Pick_Update() {
 	elif [ "$input" = "" ]; then
 		UPDATE=1
 	else
-		echo "invalid selection"
+		dk_warning "invalid selection"
 	fi
 }
 
-###### Pick_App ######
-Pick_App() {
-	dk_verbose "Pick_App($*)"
+###### pick_app() ######
+pick_app() {
+	dk_verbose "pick_app($*)"
 	echo ""
 	echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
@@ -300,51 +340,57 @@ Pick_App() {
 	elif [ "$input" = "12" ]; then
 		exit 0
 	else
-		echo "invalid selection"
+		dk_warning "invalid selection"
 	fi
 }
 
-###### Pick_OS ######
-Pick_OS() {
-	dk_verbose "Pick_OS($*)"
+###### pick_os() ######
+pick_os() {
+	dk_verbose "pick_os($*)"
+	
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
     echo " 1) $HOST_TRIPLE"
 	echo ""
-	echo " 2) android arm32"
-	echo " 3) android arm64"
-	echo " 4) android x86"
-	echo " 5) android x86_64"
-	echo " 6) emscripten"
-	echo " 7) ios arm32"
-	echo " 8) ios arm64"
-	echo " 9) ios x86"
-	echo "10) ios x86_64"
-	echo "11) iossim arm32"
-	echo "12) iossim arm64"
-	echo "13) iossim x86"
-	echo "14) iossim x86_64"
-	echo "15) linux arm32"
-	echo "16) linux arm64"
-	echo "17) linux x86"
-	echo "18) linux x86_64"
-	echo "19) mac arm32"
-	echo "20) mac arm64"
-	echo "21) mac x86"
-	echo "22) mac x86_64"
-	echo "23) raspberry arm32"
-	echo "24) raspberry arm64"
-	echo "25) raspberry x86"
-	echo "26) raspberry x86_64"
-	echo "27) win arm32"
-	echo "28) win arm64"
-	echo "29) win x86"
-	echo "30) win x86_64"
-	echo "31) Clear Screen"
-	echo "32) Go Back"
-	echo "33) Exit"
+	echo " 2) Android arm32"
+	echo " 3) Android arm64"
+	echo " 4) Android x86"
+	echo " 5) Android x86_64"
+	echo " 6) Emscripten"
+	echo " 7) Ios arm32"
+	echo " 8) Ios arm64"
+	echo " 9) Ios x86"
+	echo "10) Ios x86_64"
+	echo "11) Iossim arm32"
+	echo "12) Iossim arm64"
+	echo "13) Iossim x86"
+	echo "14) Iossim x86_64"
+	echo "15) Linux arm32"
+	echo "16) Linux arm64"
+	echo "17) Linux x86"
+	echo "18) Linux x86_64"
+	echo "19) Mac arm32"
+	echo "20) Mac arm64"
+	echo "21) Mac x86"
+	echo "22) Mac x86_64"
+	echo "23) Raspberry arm32"
+	echo "24) Raspberry arm64"
+	echo "25) Raspberry x86"
+	echo "26) Raspberry x86_64"
+	echo "27) Windows arm32"
+	echo "28) Windows arm64 (clang)"
+	echo "29) Windows x86 (mingw)"
+	echo "30) Windows x86 (clang)"
+	echo "31) Windows x86 (msvc)"
+	echo "32) Windows x86_64 (mingw)"
+    echo "33) Windows x86_64 (clang)"
+    echo "34) Windows x86_64 (ucrt)"
+    echo "35) Windows x86_64 (msvc)"
+	echo "36) Clear Screen"
+	echo "37) Go Back"
+	echo "38) Exit"
 	echo "" 
 	
 	read input
@@ -401,27 +447,37 @@ Pick_OS() {
 	elif [ "$input" = "26" ]; then
 		TARGET_OS="raspberry_x64"
 	elif [ "$input" = "27" ]; then
-		TARGET_OS="windows_arm32"
+		TARGET_OS="win_arm32"
 	elif [ "$input" = "28" ]; then
-		TARGET_OS="windows_arm64"
+		TARGET_OS="win_arm64_clang"
 	elif [ "$input" = "29" ]; then
-		TARGET_OS="windows_x86"
+		TARGET_OS="win_x86_mingw"
 	elif [ "$input" = "30" ]; then
-		TARGET_OS="windows_x86_64"
+		TARGET_OS="win_x86_clang"
 	elif [ "$input" = "31" ]; then
-		clear
+		TARGET_OS="win_x86_msvc"
 	elif [ "$input" = "32" ]; then
-		APP=
+		TARGET_OS="win_x86_64_mingw"
 	elif [ "$input" = "33" ]; then
+		TARGET_OS="win_x86_64_clang"
+	elif [ "$input" = "34" ]; then
+		TARGET_OS="win_x86_64_ucrt"
+	elif [ "$input" = "35" ]; then
+		TARGET_OS="win_x86_64_msvc"
+	elif [ "$input" = "36" ]; then
+		clear
+	elif [ "$input" = "37" ]; then
+		APP=
+	elif [ "$input" = "38" ]; then
 		exit 0
 	else
-		echo "invalid selection"
+		dk_warning "invalid selection"
 	fi
 }
 
-###### Pick_Type ######
-Pick_Type() {
-	dk_verbose "Pick_Type($*)"
+###### pick_type() ######
+pick_type() {
+	dk_verbose "pick_type($*)"
 	echo ""
 	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
@@ -448,13 +504,23 @@ Pick_Type() {
 	elif [ "$input" = "6" ]; then
 		exit 0
 	else
-		echo "invalid selection"
+		dk_warning "invalid selection"
 	fi
 }
 
-###### Generate_Project ######
-Generate_Project() {
-	dk_verbose "Generate_Project($*)"
+
+###### add_cmake_arg() ######
+#add_cmake_arg() {
+#   if [ "$*" = "" ]; then echo "ERROR: add_cmake_arg is empty!" & return 1
+#    echo added $*
+#    CMAKE_ARGS="${CMAKE_ARGS} %*"
+#}
+
+
+###### generate() ######
+generate() {
+	dk_verbose "generate($*)"
+	
 	echo ""
 	echo "##################################################################"
 	echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
@@ -464,10 +530,10 @@ Generate_Project() {
 	clear_cmake_cache
 	delete_temp_files
 
-	TARGET_PATH=$DKAPPS_DIR/$APP
+	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	print_var TARGET_PATH
-	mkdir -p "$TARGET_PATH/$TARGET_OS"
-	cd "$TARGET_PATH/$TARGET_OS" || dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
+	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
+	cd "$TARGET_PATH"/"$TARGET_OS" || dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	print_var CMAKE_SOURCE_DIR
 	if ! dk_file_exists "$CMAKE_SOURCE_DIR"; then
@@ -484,47 +550,58 @@ Generate_Project() {
 	#declare -a CMAKE_ARGS
 	local CMAKE_ARGS=""								# FIXME:  In POSIX sh, 'local' is undefined.
 	if [ "$TYPE" = "Debug" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON "
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=OFF "
+		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON"
+		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=OFF"
 	fi
 	if [ "$TYPE" = "Release" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=OFF "
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=OFF"
+		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON"
 	fi
 	if [ "$TYPE" = "All" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON "
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON"
+		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON"
 	fi
 	if [ $DKLEVEL = "Build" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DBUILD=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DBUILD=ON"
 	fi
 	if [ $DKLEVEL = "Rebuild" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILD=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILD=ON"
 	fi
 	if [ $DKLEVEL = "RebuildAll" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILDALL=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILDALL=ON"
 	fi
 	if [ $DKLINK = "Static" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DSTATIC=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DSTATIC=ON"
 	fi
 	if [ $DKLINK = "Shared" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DSHARED=ON "
+		CMAKE_ARGS="${CMAKE_ARGS} -DSHARED=ON"
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
 	print_var CMAKE_BINARY_DIR
 	
-	#if ! [ "$WSL" = "1" ]; then
 	if ! dk_defined WSLENV; then 
-		CMAKE_ARGS="${CMAKE_ARGS} -S=$CMAKE_SOURCE_DIR "
+		CMAKE_ARGS="${CMAKE_ARGS} -S=$CMAKE_SOURCE_DIR"
 	fi
-	CMAKE_ARGS="${CMAKE_ARGS} -B=$CMAKE_BINARY_DIR "
+	CMAKE_ARGS="${CMAKE_ARGS} -B=$CMAKE_BINARY_DIR"
 	
 	############ CMake Options ############
-    #CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_VERBOSE_MAKEFILE=1 " 
-    #CMAKE_ARGS="${CMAKE_ARGS} --debug-output "
-	#CMAKE_ARGS="${CMAKE_ARGS} --trace "
-	#CMAKE_ARGS="${CMAKE_ARGS} --warn-unused-vars "
+    #CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_VERBOSE_MAKEFILE=1"
+	#CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_COLOR_DIAGNOSTICS=ON"
+	#CMAKE_ARGS="${CMAKE_ARGS} -Wdev"
+	#CMAKE_ARGS="${CMAKE_ARGS} -Werror=dev"
+	#CMAKE_ARGS="${CMAKE_ARGS} -Wdeprecated"
+	#CMAKE_ARGS="${CMAKE_ARGS} -Werror=deprecated"
+	#CMAKE_ARGS="${CMAKE_ARGS} --graphviz=graphviz.txt"
+	#CMAKE_ARGS="${CMAKE_ARGS} --system-information system_information.txt"
+	#CMAKE_ARGS="${CMAKE_ARGS} --debug-trycompile"
+	#CMAKE_ARGS="${CMAKE_ARGS} --debug-output"
+	#CMAKE_ARGS="${CMAKE_ARGS} --trace"
+	#CMAKE_ARGS="${CMAKE_ARGS} --trace-expand"
+	#CMAKE_ARGS="${CMAKE_ARGS} --warn-uninitialized"
+	#CMAKE_ARGS="${CMAKE_ARGS} --warn-unused-vars"
+	#CMAKE_ARGS="${CMAKE_ARGS} --check-system-vars"
+
 	
 	if [ "$TARGET_OS" = "android_arm32" ]; then
 		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
@@ -587,7 +664,7 @@ Generate_Project() {
 		CMAKE_ARGS="${CMAKE_ARGS} -G MSYS Makefiles"
 		#CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 	fi
-	
+		
 	#### CMAKE CALL ####
 	validate_cmake
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
@@ -596,8 +673,6 @@ Generate_Project() {
 		CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 	fi
 	
-	#echo "WSL = '${WSL}'"
-	#if [ "$WSL" = "1" ]; then
 	if dk_defined WSLENV; then 
 		cd "$DKCMAKE_DIR" || dk_error "cd $DKCMAKE_DIR failed!"
 		CMAKE_ARGS="${CMAKE_ARGS} ."
@@ -606,10 +681,38 @@ Generate_Project() {
 	#echo "CMAKE_ARGS = ${CMAKE_ARGS}"
 	dk_call "$CMAKE_EXE" "${CMAKE_ARGS}" 
 }
+
+###### generate_toolchain() <toolchain> ######
+#generate_toolchain() {
+#	toolchain=$1
+#	
+#	# TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
+#   ###### CMAKE_GENERATOR ######
+#    string_contains $toolchain android hasAndroid
+#    if "$hasAndroid" == "1"; then 
+#        CMAKE_GENERATOR="Unix Makefiles"
+#    elif [ ! "$hasAndroid" == "1" ]; then
+#		CMAKE_GENERATOR="MinGW Makefiles"
+#	fi
+#	CMAKE_ARGS="-G ${CMAKE_GENERATOR} ${CMAKE_ARGS}"
+#    
+#    ###### CMAKE_TOOLCHAIN_FILE ######
+#	# dk_call set CMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/toolchains/$1.cmake
+#    # dk_call replace_all $CMAKE_TOOLCHAIN_FILE "\\" "/" CMAKE_TOOLCHAIN_FILE
+#    # if exist $CMAKE_TOOLCHAIN_FILE CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE"
+#   
+#    ###### CMake Configure ######
+#    echo ""
+#    echo "****** CMAKE COMMAND ******"
+#    echo "${CMAKE_EXE}" "$CMAKE_ARGS"
+#    "$CMAKE_EXE" "$CMAKE_ARGS"
+#    echo ""
+#}
 	
-###### Build_Project ######
-Build_Project() {
-	dk_verbose "Build_Project($*)"
+###### build() ######
+build () {
+	dk_verbose "build($*)"
+	
 	echo ""
 	echo "##################################################################"
 	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
@@ -642,8 +745,8 @@ Build_Project() {
 	echo ""
 }
 
-###### dk_require <var> ######
-dk_require() {
+###### dk_require() <var> ######
+dk_require () {
 	#dk_verbose "dk_require($*)"
 	if [ -z "$1" ]; then
 		dk_error "dk_require(<func_name> <n>) requires 2 parameters. Example dk_require my_func \$1"
@@ -656,44 +759,48 @@ dk_require() {
 }
 
 ###### dk_echo <string> ######
-dk_echo() {
+dk_echo () {
 	#echo "dk_echo($*)"
 	echo -e "$1"
 }
 
 ###### dk_verbose <string> ######
-dk_verbose() {
+dk_verbose () {
 	#echo "dk_verbose($*)"
 	if [ "$LOG_VERBOSE" = "1" ]; then 
-		dk_echo "${cyan} VERBOSE: $1 ${clr}"
+		dk_echo "${cyan}VERBOSE: $1 ${clr}"
 	fi
 }
 
 ###### dk_debug <string> ######
-dk_debug() {
+dk_debug () {
 	#dk_verbose "dk_debug($*)"
 	if [ "$LOG_DEBUG" = "1" ]; then 
-		dk_echo "${blue} DEBUG: $1 ${clr}"
+		dk_echo "${blue}  DEBUG: $1 ${clr}"
 	fi
 }
 
 ###### dk_info <string> ######
-dk_info() {
+dk_info () {
 	#dk_verbose "dk_info($*)"
 	dk_require dk_info "$1"
-	dk_echo "${white} INFO: $1 ${white}"
+	dk_echo "${white}   INFO: $1 ${white}"
 }
 
 ###### dk_warning <string> ######
-dk_warning() {
+dk_warning () {
 	#dk_verbose "dk_warning($*)"
-	dk_echo "${yellow} WARNING: $1 ${clr}"
+	dk_echo "${yellow}WARNING: $1 ${clr}"
+	dk_stacktrace
+	if [ $HALT_ON_WARNINGS = 1 ]; then
+		exit 1
+	fi
 }
 
 ###### dk_error <string> ######
-dk_error() {
+dk_error () {
 	#dk_verbose "dk_error($*)"
-	dk_echo "${red} ERROR: $1 ${clr}"
+	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
 	if [ $HALT_ON_ERRORS = 1 ]; then
 		exit 1
@@ -701,7 +808,7 @@ dk_error() {
 }
 
 ###### dk_stacktrace ######
-dk_stacktrace() {
+dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
     local i=1 line file func											# FIXME: n POSIX sh, 'local' is undefined.
     #while read -r line func file < <(caller $i); do
@@ -711,7 +818,7 @@ dk_stacktrace() {
 }
 
 ###### dk_defined <var> ######
-dk_defined() {
+dk_defined () {
 	dk_verbose "dk_defined($*)"
 	if [ -z "$1" ]; then
 		return $false
@@ -729,19 +836,19 @@ dk_defined() {
 }
 
 ###### dk_call <command args> ######
-dk_call() {
+dk_call () {
 	dk_verbose "dk_call($*)"
 	if [ -z "$1" ]; then
 		dk_error "dk_call <command args> requires at least 1 parameter"
 		return $false
 	fi
 	
-	echo "${magenta} $ $* ${clr}"
+	dk_echo "${magenta} $ $* ${clr}"
 	"$@"
 }
 
 ###### dk_check_remote ######
-dk_check_remote() {
+dk_check_remote () {
 	dk_verbose "dk_check_remote($*)"
 	#if [ -d .git ]; then
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
@@ -754,7 +861,7 @@ dk_check_remote() {
 }
 
 ###### dk_validate_sudo ######
-dk_validate_sudo() {
+dk_validate_sudo () {
 	dk_verbose "dk_validate_sudo($*)"
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
@@ -763,7 +870,7 @@ dk_validate_sudo() {
 }
 
 ###### dk_reload ######
-dk_reload() {
+dk_reload () {
 	dk_verbose "dk_reload($*)"
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
@@ -771,7 +878,7 @@ dk_reload() {
 }
 
 ###### dk_confirm() ######
-dk_confirm() {
+dk_confirm () {
 	dk_verbose "dk_confirm($*)"
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -p " " -n 1 -r								# FIXME:   In POSIX sh, read -p is undefined.
@@ -782,7 +889,7 @@ dk_confirm() {
 }
 
 ###### dk_string_contains <string> <substring> ######
-dk_string_contains() {
+dk_string_contains () {
 	dk_verbose "dk_string_contains($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_string_contains <string> <substring> requires 2 parameters"
@@ -796,13 +903,13 @@ dk_string_contains() {
 }
 
 ###### dk_command_exists <command> ######
-dk_command_exists() {
+dk_command_exists () {
 	dk_verbose "dk_command_exists($*)"
 	! [ "$(command -v "$1")" = "" ]
 }
 	
 ###### dk_file_exists <file> ######
-dk_file_exists() {
+dk_file_exists () {
 	dk_verbose "dk_file_exists($*)"
 	if [ -e "$1" ]; then
 		dk_debug "dk_file_exists($*): FOUND"
@@ -813,7 +920,7 @@ dk_file_exists() {
 }
 
 ###### dk_get_filename <path> <output> ######
-dk_get_filename() {
+dk_get_filename () {
 	dk_verbose "dk_get_filename($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
@@ -825,7 +932,7 @@ dk_get_filename() {
 }
 
 ###### dk_convert_to_c_identifier <input> <output> ######
-dk_convert_to_c_identifier() {
+dk_convert_to_c_identifier () {
 	dk_verbose "dk_convert_to_c_identifier($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -848,7 +955,7 @@ dk_convert_to_c_identifier() {
 # dk_replace_all(<input> <searchValue> <newValue> <output>)
 #
 #
-dk_replace_all() {
+dk_replace_all () {
 	dk_verbose "dk_replace_all($*)"
     input=$1
 	searchValue=$2
@@ -872,7 +979,7 @@ dk_replace_all() {
 }
 
 ###### convert_to_lowercase <input> <output> ######
-convert_to_lowercase() {
+convert_to_lowercase () {
 	dk_verbose "convert_to_lowercase($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -887,7 +994,7 @@ convert_to_lowercase() {
 }
 
 ###### download <url> <destination> ######
-download() {
+download () {
 	dk_verbose "download($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -913,7 +1020,7 @@ download() {
 }
 
 ###### extract <file> <destination> ######
-extract() {
+extract () {
 	dk_verbose "extract($*)"
 	if [ -z "$2" ]; then
 		dk_error "extract <input> <output> requires 2 parameters"
@@ -952,7 +1059,7 @@ extract() {
 }
 
 ###### rename <from> <to> ######
-rename() {
+rename () {
 	dk_verbose "rename($*)"
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
@@ -964,7 +1071,7 @@ rename() {
 }
 
 ###### validate_cmake ######
-validate_cmake() {
+validate_cmake () {
 	dk_verbose "validate_cmake($*)"
 	
 	if [ "$HOST_OS" = "android" ]; then
@@ -1043,7 +1150,7 @@ validate_cmake() {
 }
 
 ###### validate_git ######
-validate_git() {
+validate_git () {
 	dk_verbose "validate_git($*)"
 	if ! dk_command_exists git; then
 		install git
@@ -1054,7 +1161,7 @@ validate_git() {
 }
 
 ###### validate_homebrew ######
-validate_homebrew() {
+validate_homebrew () {
 	dk_verbose "validate_homebrew($*)"
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
@@ -1073,7 +1180,7 @@ validate_homebrew() {
 }
 
 ###### package_installed <package> ######
-package_installed() {
+package_installed () {
 	dk_verbose "package_installed($*)"
 	if dk_command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
@@ -1104,7 +1211,7 @@ package_installed() {
 }
 
 ###### install <package> ######
-install() {
+install () {
 	dk_verbose "install($*)"
 	#if package_installed $1; then
 	#	echo "$1 already installed"
@@ -1132,7 +1239,7 @@ install() {
 }
 
 ###### validate_package <command> <package> ######
-validate_package() {
+validate_package () {
 	dk_verbose "validate_package($*)"
 	if ! dk_command_exists "$1"; then
 		install "$2"
@@ -1140,7 +1247,7 @@ validate_package() {
 }
 
 ###### validate_ostype ######
-validate_ostype() {
+validate_ostype () {
 	dk_verbose "validate_ostype($*)"
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -1166,7 +1273,7 @@ validate_ostype() {
 }
 
 ###### validate_branch ######
-validate_branch() {
+validate_branch () {
 	dk_verbose "validate_branch($*)"
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -1218,7 +1325,7 @@ validate_branch() {
 }
 
 ###### dk_pause ######
-dk_pause() {
+dk_pause () {
 	dk_verbose "dk_pause($*)"
 	read -rsp $'Press any key to continue...\n' -n 1 key
 	# echo $key
@@ -1226,7 +1333,7 @@ dk_pause() {
 
 
 ###### clear_cmake_cache ######
-clear_cmake_cache() {
+clear_cmake_cache () {
 	dk_verbose "clear_cmake_cache($*)"
 	echo "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1235,7 +1342,7 @@ clear_cmake_cache() {
 }
 
 ###### delete_temp_files ######
-delete_temp_files() {
+delete_temp_files () {
 	dk_verbose "delete_temp_files($*)"
 	echo "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1246,21 +1353,21 @@ delete_temp_files() {
 }
 
 ###### validate_msys2 ######
-#validate_msys2() {
+#validate_msys2 () {
 #	dk_verbose "validate_msys2($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	print_var MSYS2
 #}
 
 ###### validate_make ######
-#validate_make() {
+#validate_make () {
 #	dk_verbose "validate_make($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	print_var MAKE_PROGRAM
 #}
 
 ###### validate_emscripten ######
-#validate_emscripten() {
+#validate_emscripten () {
 #	dk_verbose "validate_emscripten($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	print_var EMSDK
@@ -1272,7 +1379,7 @@ delete_temp_files() {
 #}
 
 ###### validate_android_ndk ######
-#validate_android_ndk() {
+#validate_android_ndk () {
 #	dk_verbose "validate_android_ndk($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	print_var ANDROID_NDK
@@ -1285,7 +1392,7 @@ delete_temp_files() {
 #}
 
 ###### validate_clang ######
-#validate_clang() {
+#validate_clang () {
 #	dk_verbose "validate_clang($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	print_var CLANG_C_COMPILER
@@ -1293,7 +1400,7 @@ delete_temp_files() {
 #}
 
 ###### validate_gcc ######
-#validate_gcc() {
+#validate_gcc () {
 #	dk_verbose "validate_gcc($*)"
 #	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	print_var GCC_C_COMPILER
@@ -1301,7 +1408,7 @@ delete_temp_files() {
 #}
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
-cmake_eval() {
+cmake_eval () {
 	dk_verbose "cmake_eval($*)"
 	if [ -z "$1" ]; then
 		echo "ERROR: cmake_eval() parameter 1 is invalid"
@@ -1328,21 +1435,21 @@ cmake_eval() {
 }
 
 ###### push_assets ######
-push_assets() {
+push_assets () {
 	dk_verbose "push_assets($*)"
 	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
 ###### pull_assets ######
-pull_assets() {
+pull_assets () {
 	dk_verbose "pull_assets($*)"
 	if ! dk_confirm; then return; fi
 	echo "not implemented,  TODO"
 }
 
 ###### reset_all ######
-reset_all() {
+reset_all () {
 	dk_verbose "reset_all($*)"
 	if ! [ "$1" = "wipe" ]; then
 		clear
@@ -1411,7 +1518,7 @@ reset_all() {
 }
 
 ###### remove_all ######
-remove_all() {
+remove_all () {
 	dk_verbose "remove_all($*)"
 	if ! [ "$1" = "wipe" ]; then	
 		clear
@@ -1463,7 +1570,7 @@ remove_all() {
 }
 
 ###### git_update ######
-git_update() {
+git_update () {
 	dk_verbose "git_update($*)"
 	if ! [ "$1" = "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
@@ -1488,7 +1595,7 @@ git_update() {
 }
 
 ###### git_commit ######
-git_commit() {	
+git_commit () {	
 	dk_verbose "git_commit($*)"
 	echo "Please enter some details about this commit, Then press ENTER."
 	read message
@@ -1539,7 +1646,7 @@ git_commit() {
 }
 
 ###### enter_manually ######
-enter_manually() {
+enter_manually () {
 	dk_verbose "enter_manually($*)"
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -1571,7 +1678,7 @@ enter_manually() {
 }
 
 ###### create_cache ######
-create_cache() {
+create_cache () {
 	dk_verbose "create_cache($*)"
 	echo "creating cache..."
 	
@@ -1608,8 +1715,11 @@ read_cache() {
 	done < "$DKBRANCH_DIR"/cache
 }
 
-###### print_var ######
-print_var() {
+##################################################################################
+# print_var(<variable>)
+#
+#
+print_var () {
 	#dk_verbose "print_var($*)"
 	var=$1
 	#if [ -n "${!var}" ]; then #BASH
@@ -1619,14 +1729,14 @@ print_var() {
 		echo "$1 = ${value}"
 	#else
 		#echo "$1 = !!!INVALID!!!"
-	fi
-	
-	
-	
+	fi	
 }
 
-###### remove_carrage_returns ######
-remove_carrage_returns(){
+##################################################################################
+# remove_carrage_returns(<input>)
+#
+#
+remove_carrage_returns (){
 	dk_verbose "remove_carrage_returns($*)"
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
