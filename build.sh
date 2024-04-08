@@ -68,6 +68,23 @@ main() {
 	
 	dk_validate_sudo
 	
+	
+	set -- One Two Three Four
+	myarrayA=$(save_args "$@")
+	set -- aaa bbb ccc ddd
+	myarrayB=$(save_args "$@")
+	set -- zzz yyy xxx ttt
+	myarrayC=$(save_args "$@")
+	
+	eval "set -- $myarrayA"
+	echo "$1 $2 $3 $4"
+	
+	eval "set -- $myarrayB"
+	echo "$1 $2 $3 $4"
+	
+	eval "set -- $myarrayC"
+	echo "$1 $2 $3 $4"
+	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
@@ -540,7 +557,7 @@ pick_type() {
 #
 #   if [ "$*" = "" ]; then echo "ERROR: add_cmake_arg is empty!" & return 1
 #    echo added $*
-#    CMAKE_ARGS="${CMAKE_ARGS} %*"
+#    CMAKE_ARGS+=( "%*" )
 #}
 
 
@@ -578,121 +595,149 @@ generate() {
 	DKLINK="Static"
 	
 	#declare -a CMAKE_ARGS
-	local CMAKE_ARGS=""								# FIXME:  In POSIX sh, 'local' is undefined.
+	set --											#clear the positional parameters
 	if [ "$TYPE" = "Debug" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON"
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=OFF"
+		#CMAKE_ARGS+=( "-DDEBUG=ON" )
+		#CMAKE_ARGS+=( "-DRELEASE=OFF" )
+		set -- "$@" "-DDEBUG=ON"
+		set -- "$@" "-DRELEASE=OFF"
 	fi
 	if [ "$TYPE" = "Release" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=OFF"
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON"
+		#CMAKE_ARGS+=( "-DDEBUG=OFF" )
+		#CMAKE_ARGS+=( "-DRELEASE=ON" )
+		set -- "$@" "-DDEBUG=OFF"
+		set -- "$@" "-DRELEASE=ON"
 	fi
 	if [ "$TYPE" = "All" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DDEBUG=ON"
-		CMAKE_ARGS="${CMAKE_ARGS} -DRELEASE=ON"
+		#CMAKE_ARGS+=( "-DDEBUG=ON" )
+		#CMAKE_ARGS+=( "-DRELEASE=ON" )
+		set -- "$@" "-DDEBUG=ON"
+		set -- "$@" "-DRELEASE=ON"
 	fi
 	if [ $DKLEVEL = "Build" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DBUILD=ON"
+		#CMAKE_ARGS+=( "-DBUILD=ON" )
+		set -- "$@" "-DBUILD=ON"
 	fi
 	if [ $DKLEVEL = "Rebuild" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILD=ON"
+		#CMAKE_ARGS+=( "-DREBUILD=ON" )
+		set -- "$@" "-DREBUILD=ON"
 	fi
 	if [ $DKLEVEL = "RebuildAll" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DREBUILDALL=ON"
+		#CMAKE_ARGS+=( "-DREBUILDALL=ON" )
+		set -- "$@" "-DREBUILDALL=ON"
 	fi
 	if [ $DKLINK = "Static" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DSTATIC=ON"
+		#CMAKE_ARGS+=( "-DSTATIC=ON" )
+		set -- "$@" "-DSTATIC=ON"
 	fi
 	if [ $DKLINK = "Shared" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DSHARED=ON"
+		#CMAKE_ARGS+=( "-DSHARED=ON" )
+		set -- "$@" "-DSHARED=ON"
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
 	print_var CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
-		CMAKE_ARGS="${CMAKE_ARGS} -S=$CMAKE_SOURCE_DIR"
+		#CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
+		set -- "$@" "-S=$CMAKE_SOURCE_DIR"
 	fi
-	CMAKE_ARGS="${CMAKE_ARGS} -B=$CMAKE_BINARY_DIR"
+	#CMAKE_ARGS+=( "-B=$CMAKE_BINARY_DIR" )
+	set -- "$@" "-B=$CMAKE_BINARY_DIR"
 	
 	############ CMake Options ############
-    #CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_VERBOSE_MAKEFILE=1"
-	#CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_COLOR_DIAGNOSTICS=ON"
-	#CMAKE_ARGS="${CMAKE_ARGS} -Wdev"
-	#CMAKE_ARGS="${CMAKE_ARGS} -Werror=dev"
-	#CMAKE_ARGS="${CMAKE_ARGS} -Wdeprecated"
-	#CMAKE_ARGS="${CMAKE_ARGS} -Werror=deprecated"
-	#CMAKE_ARGS="${CMAKE_ARGS} --graphviz=graphviz.txt"
-	#CMAKE_ARGS="${CMAKE_ARGS} --system-information system_information.txt"
-	#CMAKE_ARGS="${CMAKE_ARGS} --debug-trycompile"
-	#CMAKE_ARGS="${CMAKE_ARGS} --debug-output"
-	#CMAKE_ARGS="${CMAKE_ARGS} --trace"
-	#CMAKE_ARGS="${CMAKE_ARGS} --trace-expand"
-	#CMAKE_ARGS="${CMAKE_ARGS} --warn-uninitialized"
-	#CMAKE_ARGS="${CMAKE_ARGS} --warn-unused-vars"
-	#CMAKE_ARGS="${CMAKE_ARGS} --check-system-vars"
+    #CMAKE_ARGS+=( "-DCMAKE_VERBOSE_MAKEFILE=1" )
+	#CMAKE_ARGS+=( "-DCMAKE_COLOR_DIAGNOSTICS=ON" )
+	#CMAKE_ARGS+=( "-Wdev" )
+	#CMAKE_ARGS+=( "-Werror=dev" )
+	#CMAKE_ARGS+=( "-Wdeprecated" )
+	#CMAKE_ARGS+=( "-Werror=deprecated" )
+	#CMAKE_ARGS+=( "--graphviz=graphviz.txt" )
+	#CMAKE_ARGS+=( "--system-information system_information.txt" )
+	#CMAKE_ARGS+=( "--debug-trycompile" )
+	#CMAKE_ARGS+=( "--debug-output" )
+	#CMAKE_ARGS+=( "--trace" )
+	#CMAKE_ARGS+=( "--trace-expand" )
+	#CMAKE_ARGS+=( "--warn-uninitialized" )
+	#CMAKE_ARGS+=( "--warn-unused-vars" )
+	#CMAKE_ARGS+=( "--check-system-vars" )
 
 	
 	if [ "$TARGET_OS" = "android_arm32" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 
 	if [ "$TARGET_OS" = "android_arm64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "emscripten" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm32" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86_64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86_64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86_64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Xcode"
+		#CMAKE_ARGS+=( "-G Xcode" )
+		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm32" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G Unix Makefiles"
+		#CMAKE_ARGS+=( "-G Unix Makefiles" )
+		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G MSYS Makefiles"
-		#CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
+		#CMAKE_ARGS+=( "-G MSYS Makefiles" )
+		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64" ]; then
-		CMAKE_ARGS="${CMAKE_ARGS} -G MSYS Makefiles"
-		#CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
+		#CMAKE_ARGS="${CMAKE_ARGS}\n-G\nMSYS Makefiles" )
+		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 		
 	#### CMAKE CALL ####
@@ -700,16 +745,18 @@ generate() {
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 	echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists "$TOOLCHAIN"; then
-		CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
+		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
+		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 	fi
 	
 	if dk_defined WSLENV; then 
 		cd "$DKCMAKE_DIR" || dk_error "cd $DKCMAKE_DIR failed!"
-		CMAKE_ARGS="${CMAKE_ARGS} ."
+		#$CMAKE_ARGS+=( "." )
+		set -- "$@" "."
 	fi
 	
-	#echo "CMAKE_ARGS = ${CMAKE_ARGS}"
-	dk_call "$CMAKE_EXE" "${CMAKE_ARGS}" 
+	echo "CMAKE_ARGS = $@"	
+	dk_call "$CMAKE_EXE" "$@"
 }
 
 
@@ -730,12 +777,12 @@ generate() {
 #    elif [ ! "$hasAndroid" == "1" ]; then
 #		CMAKE_GENERATOR="MinGW Makefiles"
 #	fi
-#	CMAKE_ARGS="-G ${CMAKE_GENERATOR} ${CMAKE_ARGS}"
+#	CMAKE_ARGS+=( "-G ${CMAKE_GENERATOR}" )
 #    
 #    ###### CMAKE_TOOLCHAIN_FILE ######
 #	# dk_call set CMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/toolchains/$1.cmake
 #    # dk_call replace_all $CMAKE_TOOLCHAIN_FILE "\\" "/" CMAKE_TOOLCHAIN_FILE
-#    # if exist $CMAKE_TOOLCHAIN_FILE CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE"
+#    # if exist $CMAKE_TOOLCHAIN_FILE CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE" )
 #   
 #    ###### CMake Configure ######
 #    echo ""
@@ -1986,24 +2033,35 @@ read_cache() {
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then
 		return
 	fi
-
+	_APP_=
+	_TARGET_OS_=
+	_TYPE_=
+	
 	echo "reading cache..."
 	count=0
 	while read p; do
 		if [ $count = 0 ]; then 
 			_APP_=$(echo "$p" | tr -d '\r')
+			#print_var _APP_
 		fi
 		if [ $count = 1 ]; then
 			_TARGET_OS_=$(echo "$p" | tr -d '\r')
+			#print_var _TARGET_OS_
 		fi
 		if [ $count = 2 ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
+			#print_var _TYPE_
 		fi
 		#if [ $count = 3 ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')
 		#fi
-		( count=$count+1 )
+		(( count++ ))
+		#( count=$count+1 )
 	done < "$DKBRANCH_DIR"/cache
+	
+	#print_var _APP_
+	#print_var _TARGET_OS_
+	#print_var _TYPE_
 }
 
 
@@ -2030,13 +2088,36 @@ print_var () {
 # remove_carrage_returns(<input>)
 #
 #
-remove_carrage_returns (){
+remove_carrage_returns () {
 	dk_verbose "remove_carrage_returns($*)"
 	
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
 	# carrage returns are removed from <out>
 }
+
+
+##################################################################################
+# save_args(<input>)
+#
+# reference: https://www.etalabs.net/sh_tricks.html
+#
+# usage:
+#   set -- One Two Three Four
+#   myarrayA=$(save_args "$@")
+#   eval "set -- $myarrayA"
+#	echo "$1 $2 $3 $4"
+#
+save_args () {
+	for i do 
+		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"
+	done
+	echo " "
+}
+
+
+
+
 
 #echo "@ = $@"
 [ "$*" = "" ] && "$@"
