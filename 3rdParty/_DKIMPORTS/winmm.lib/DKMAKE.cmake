@@ -7,3 +7,5 @@ endif()
 
 dk_define(__WINDOWS_MM__)
 dk_findLibrary(winmm.lib)
+
+dk_lib(Winmm)

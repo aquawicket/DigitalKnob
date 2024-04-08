@@ -16,8 +16,6 @@ dk_depend(sdl_image)
 set(RMLUI_BUILD_SAMPLES ON)
 if(RMLUI_BUILD_SAMPLES)
 	dk_depend(glew)
-	dk_depend(sdl)
-	dk_depend(sdl_image)
 	dk_depend(sfml)
 endif()
 

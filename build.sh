@@ -1032,10 +1032,16 @@ dk_string_contains () {
 		return $false
 	fi
 	#[ $1 = *"$2"* ]						
-	if echo "$1" | grep -q '*"$2"*'; then
-		return $true
-	fi
-	return $false
+	#if echo "$1" | grep -q '*"$2"*'; then
+	#	return $true
+	#fi
+	#return $false
+	
+	# https://stackoverflow.com/a/8811800/688352
+	string=$1
+	substring=$2
+	[ "${string#*"$substring"}" != "$string" ] && return $true
+	return $false;
 }
 
 
@@ -2106,13 +2112,15 @@ get_host_triple () {
 	
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if [ "$MODEL" = "Raspberry"* ]; then		#							  [ .. ] can't match globs. Use [[ .. ]] or grep.
+	#if [ "$MODEL" = "Raspberry"* ]; then		#							  [ .. ] can't match globs. Use [[ .. ]] or grep.
+	if dk_string_contains "$MODEL" "raspberry"; then
 		HOST_OS="raspberry"
 	elif [ "$DKHOST" = "Linux" ]; then
 		HOST_OS="linux"
 	elif [ "$OSTYPE" = "linux-gnu"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
 		HOST_OS="linux"
-	elif [ "$OSTYPE" = "darwin"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
+	#elif [ "$OSTYPE" = "darwin"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
+	if dk_string_contains "$OSTYPE" "mac"; then
 		HOST_OS="mac"
 	elif [ "$OSTYPE" = "linux-android" ]; then	# FIXME:  $OSTYPE not POSIX
 		HOST_OS="android"
