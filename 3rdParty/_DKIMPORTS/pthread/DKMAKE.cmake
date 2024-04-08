@@ -1,3 +1,4 @@
 
-LINUX_dk_lib		(pthread)
-RASPBERRY_dk_lib	(pthread)
+find_package( Threads )
+dk_lib		(${CMAKE_THREAD_LIBS_INIT})
+

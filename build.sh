@@ -1784,7 +1784,7 @@ reset_all () {
 		
 		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
+		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -2120,7 +2120,7 @@ save_args () {
 
 
 #echo "@ = $@"
-[ "$*" = "" ] && "$@"
+[ "$*" = "" ] || "$@"
 main "$@"
 
 #exec $SHELL		# keep terminal open

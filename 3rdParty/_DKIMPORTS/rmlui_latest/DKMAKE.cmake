@@ -4,10 +4,11 @@
 
 ### DEPEND ###
 dk_depend(freetype)
-dk_depend(harfbuzz)
+#dk_depend(harfbuzz)
 dk_depend(lua)
 dk_depend(lunasvg)
 dk_depend(rlottie)
+#dk_depend(pthread)
 
 # BUILD_SAMPLES
 set(RMLUI_BUILD_SAMPLES ON)
@@ -18,16 +19,19 @@ if(RMLUI_BUILD_SAMPLES)
 	dk_depend(sfml)
 endif()
 
+set(rmlui_all 1)
+set(rmlui_RmlCore 1)
+set(rmlui_RmlDebugger 1)
 
 ### IMPORT ###
-dk_import(https://github.com/mikke89/RmlUi.git BRANCH master)
+dk_import(https://github.com/mikke89/RmlUi.git)
 
 # Version fix #
-dk_fileReplace(${RMLUI_MASTER}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
+dk_fileReplace(${RMLUI_LATEST}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # ANDROID FIX
 if(ANDROID)
-	dk_fileReplace(${RMLUI_MASTER}/CMakeLists.txt "target_compile_features" "#target_compile_features")
+	dk_fileReplace(${RMLUI_LATEST}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
 
 
@@ -36,43 +40,44 @@ dk_define(RMLUI_STATIC_LIB)
 ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
 ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
-dk_include		(${RMLUI_MASTER}/Include					RML_INCLUDE_DIR)
-dk_include		(${RMLUI_MASTER}/Source)
+dk_include		(${RMLUI_LATEST}/Include					RML_INCLUDE_DIR)
+dk_include		(${RMLUI_LATEST}/Source)
 
 dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-		WIN_dk_libRelease	(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+		WIN_dk_libDebug		(${RMLUI_LATEST}/${OS}/${DEBUG_DIR}/RmlCore.lib)
+		WIN_dk_libRelease	(${RMLUI_LATEST}/${OS}/${RELEASE_DIR}/RmlCore.lib)
 	else()
-		dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-		dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+		dk_libDebug			(${RMLUI_LATEST}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+		dk_libRelease		(${RMLUI_LATEST}/${OS}/${RELEASE_DIR}/libRmlCore.a)
 	endif()
 endif()
 
 if(rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
-		WIN_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+		WIN_dk_libRelease	(${RMLUI_LATEST}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
+		WIN_dk_libDebug		(${RMLUI_LATEST}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	else()
-		dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-		dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+		dk_libDebug			(${RMLUI_LATEST}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+		dk_libDebug			(${RMLUI_LATEST}/${OS}/${DEBUG_DIR}/dummy_trigger.a)
+		dk_libRelease		(${RMLUI_LATEST}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 	endif()
 endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${RMLUI_MASTER}
+	WIN_dk_configure(${RMLUI_LATEST}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
+		-DBUILD_SAMPLES=ON 						# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
+		-DBUILD_TESTING=ON 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -88,6 +93,7 @@ if(MSVC)
 		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
+		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
@@ -98,14 +104,14 @@ if(MSVC)
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 	
-	ANDROID_dk_configure(${RMLUI_MASTER}
+	ANDROID_dk_configure(${RMLUI_LATEST}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
+		-DBUILD_SAMPLES=ON 						# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
+		-DBUILD_TESTING=ON 					    #  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -120,6 +126,7 @@ if(MSVC)
 		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
+		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
@@ -130,7 +137,7 @@ if(MSVC)
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE}) 
 else()
-	dk_configure(${RMLUI_MASTER}
+	dk_configure(${RMLUI_LATEST}
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
@@ -151,6 +158,7 @@ else()
 		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
+		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
@@ -166,10 +174,14 @@ endif()
 
 
 ### COMPILE ###
-if(rmlui_RmlCore)
-	dk_build(${RMLUI_MASTER} RmlCore)
-endif()
+if(rmlui_all)
+	dk_build(${RMLUI_LATEST})
+else()
+	if(rmlui_RmlCore)
+		dk_build(${RMLUI_LATEST} RmlCore)
+	endif()
 
-if(rmlui_RmlDebugger)
-	dk_build(${RMLUI_MASTER} RmlDebugger)
+	if(rmlui_RmlDebugger)
+		dk_build(${RMLUI_LATEST} RmlDebugger)
+	endif()
 endif()
