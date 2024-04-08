@@ -9,6 +9,8 @@ dk_depend(lua)
 dk_depend(lunasvg)
 dk_depend(rlottie)
 #dk_depend(pthread)
+dk_depend(sdl)
+dk_depend(sdl_image)
 
 # BUILD_SAMPLES
 set(RMLUI_BUILD_SAMPLES ON)
