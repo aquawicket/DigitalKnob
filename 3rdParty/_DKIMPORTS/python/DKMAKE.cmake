@@ -26,7 +26,7 @@ endif()
 
 ###### PYTHON_EXE ######
 if(ANDROID_HOST)
-	dk_find_program(PYTHON_EXE python)
+	dk_find_program(PYTHON_EXE python.exe)
 else()
 	dk_find_program(PYTHON_EXE python ${PYTHON})
 endif()
@@ -41,6 +41,8 @@ if(NOT EXISTS ${PYTHON_EXE})
 		cmake_path(NATIVE_PATH PYTHON NORMALIZE PYTHON_WINPATH)
 		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_executeProcess(${PYTHON}/python_install.cmd)
+		
+		#dk_sleep(60)
 		
 		if(ANDROID_HOST)
 			dk_find_program(PYTHON_EXE python)
