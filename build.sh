@@ -68,23 +68,6 @@ main() {
 	
 	dk_validate_sudo
 	
-	
-	set -- One Two Three Four
-	myarrayA=$(save_args "$@")
-	set -- aaa bbb ccc ddd
-	myarrayB=$(save_args "$@")
-	set -- zzz yyy xxx ttt
-	myarrayC=$(save_args "$@")
-	
-	eval "set -- $myarrayA"
-	echo "$1 $2 $3 $4"
-	
-	eval "set -- $myarrayB"
-	echo "$1 $2 $3 $4"
-	
-	eval "set -- $myarrayC"
-	echo "$1 $2 $3 $4"
-	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
@@ -2120,7 +2103,7 @@ get_host_triple () {
 	elif [ "$OSTYPE" = "linux-gnu"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
 		HOST_OS="linux"
 	#elif [ "$OSTYPE" = "darwin"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
-	if dk_string_contains "$OSTYPE" "mac"; then
+	elif dk_string_contains "$OSTYPE" "mac"; then
 		HOST_OS="mac"
 	elif [ "$OSTYPE" = "linux-android" ]; then	# FIXME:  $OSTYPE not POSIX
 		HOST_OS="android"

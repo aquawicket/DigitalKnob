@@ -9,6 +9,7 @@ dk_depend(lua)
 dk_depend(lunasvg)
 dk_depend(rlottie)
 #dk_depend(pthread)
+dk_depend(libjpeg-turbo)
 dk_depend(sdl)
 dk_depend(sdl_image)
 
@@ -136,8 +137,28 @@ if(MSVC)
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE}) 
-else()
+else()									
+	
+	# https://stackoverflow.com/a/37038641/688352
+	# The first line of the configure below "-DCMAKE_EXE_LINKER_FLAGS=-lWinmm -lsetupapi -lversion"  provides the linker 
+	# libraries for the executable rmlui samples. Most of the time, we don't compile test apps and executables in
+	# other libraries that require their own linkage. This is just an example of how to deal with those missing link time libs.
+	# In Fact, If you look in Genererate.cmake, you'll see how the collection of link time library's are provided to the DK app.
+	# So all in all, That list of needed targetd already exists by the time we get here.
+
+	string(APPEND SampleDependencies "-DCMAKE_EXE_LINKER_FLAGS=")
+	string(APPEND SampleDependencies " -lWinmm")
+	string(APPEND SampleDependencies " -lsetupapi")
+	string(APPEND SampleDependencies " -lversion")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/libjpeg-turbo-main/win_x86_64_clang/Debug -lturbojpeg")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/libpng-v1.6.35/win_x86_64_clang/Debug -lpng16d")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/tiff-lib/win_x86_64_clang/Debug/libtiff -ltiff")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug -lzlibstatic")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/xz-5.4.6/win_x86_64_clang/Debug -llzma")
+	string(APPEND SampleDependencies " -LC:/Users/aquawicket/digitalknob/Development/3rdParty/zstd-release/win_x86_64_clang/Debug/lib -lzstd")
+	
 	dk_configure(${RMLUI_LATEST}
+		${SampleDependencies}
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
@@ -171,7 +192,9 @@ else()
 		${SFML_CMAKE})
 endif()
 
-
+# winmm version
+# imagehlp dinput8 dxguid dxerr8 user32 gdi32  imm32 ole32
+# oleaut32 shell32 uuid
 
 ### COMPILE ###
 if(rmlui_all)
