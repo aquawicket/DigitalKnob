@@ -86,6 +86,7 @@ if(NOT CMAKE_EXE)
 endif()
 
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
+string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 dk_set(CMAKE_VERSION ${CMAKE_VERSION})
 
 return()
