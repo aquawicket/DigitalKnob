@@ -39,7 +39,6 @@ function(dk_find_program VAR name)
 		find_program(${VAR} ${name} ${ARGN} NO_DEFAULT_PATH)
 	else()
 		dk_info("Searching Default Paths. . .")
-		dk_error("dk_find_program() broken on WSL without NO_DEFAULT_PATH")
 		find_program(${VAR} ${name})
 	endif()
 	
