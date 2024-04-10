@@ -7,5 +7,8 @@ endif()
 
 dk_findLibrary(Setupapi.lib)
 
+
 # MSYS2 (-lsetupapi)
-#"-DCMAKE_EXE_LINKER_FLAGS=-lsetupapi"
+if(MSYSTEM)
+	dk_set(SETUPAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lsetupapi")
+endif()

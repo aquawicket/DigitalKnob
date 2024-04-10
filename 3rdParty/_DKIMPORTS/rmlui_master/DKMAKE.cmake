@@ -16,8 +16,11 @@ dk_depend(libpng)
 dk_depend(pthread)
 dk_depend(sdl)
 dk_depend(sdl_image)
+dk_depend(setupapi.lib)
 dk_depend(sfml)
 dk_depend(tiff)
+dk_depend(version.lib)
+dk_depend(winmm.lib)
 dk_depend(xz)
 dk_depend(zlib)
 dk_depend(zstd)
@@ -153,51 +156,61 @@ else()
 	# In Fact, If you look in Genererate.cmake, you'll see how the collection of link time library's are provided to the DK app.
 	# So all in all, That list of needed targetd already exists by the time we get here.
 
-	string(APPEND SampleDependencies "-DCMAKE_EXE_LINKER_FLAGS=")
-	string(APPEND SampleDependencies " -lpthread")
-	string(APPEND SampleDependencies " -lsetupapi")
-	string(APPEND SampleDependencies " -lversion")
-	string(APPEND SampleDependencies " -lWinmm")
-	string(APPEND SampleDependencies " -L${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR} -lturbojpeg")
-	string(APPEND SampleDependencies " -L${LIBPNG}/${OS}/${DEBUG_DIR} -lpng16d")
-	string(APPEND SampleDependencies " -L${TIFF}/${OS}/${DEBUG_DIR}/libtiff -ltiff")
-	string(APPEND SampleDependencies " -L${XZ}/${OS}/${DEBUG_DIR} -llzma")
-	string(APPEND SampleDependencies " -L${ZLIB}/${OS}/${DEBUG_DIR} -lzlibstatic")
-	string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
+	#string(APPEND SampleDependencies "-DCMAKE_EXE_LINKER_FLAGS=")
+	#string(APPEND SampleDependencies " -lpthread")
+	#string(APPEND SampleDependencies " -lsetupapi")
+	#string(APPEND SampleDependencies " -lversion")
+	#string(APPEND SampleDependencies " -lWinmm")
+	#string(APPEND SampleDependencies " -L${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR} -lturbojpeg")
+	#string(APPEND SampleDependencies " -L${LIBPNG}/${OS}/${DEBUG_DIR} -lpng16d")
+	#string(APPEND SampleDependencies " -L${TIFF}/${OS}/${DEBUG_DIR}/libtiff -ltiff")
+	#string(APPEND SampleDependencies " -L${XZ}/${OS}/${DEBUG_DIR} -llzma")
+	#string(APPEND SampleDependencies " -L${ZLIB}/${OS}/${DEBUG_DIR} -lzlibstatic")
+	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
 	
 	dk_configure(${RMLUI_MASTER}
 		"-DSAMPLES_BACKEND=SDL_SDLrenderer"			# "Backend platform and renderer used for the samples." "auto" 
-		-DBUILD_FRAMEWORK=OFF 						# "Build Framework bundle for OSX" OFF
-		-DBUILD_LUA_BINDINGS=${LUAJIT}	 			# "Build Lua bindings" OFF
-		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=${LUAJIT} 	# "Build Lua bindings using luajit" OFF
+		#-DBUILD_FRAMEWORK=OFF 						# "Build Framework bundle for OSX" OFF
+		#-DBUILD_LUA_BINDINGS=${LUAJIT}	 			# "Build Lua bindings" OFF
+		#-DBUILD_LUA_BINDINGS_FOR_LUAJIT=${LUAJIT} 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_SAMPLES=ON 							# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=ON 							#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 				# "Build universal binaries for all architectures supported" ON
-		-DCUSTOM_CONFIGURATION=OFF					# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF			# "Build with rtti and exceptions disabled." OFF
+		#-DCUSTOM_CONFIGURATION=OFF					# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
+		#-DDISABLE_RTTI_AND_EXCEPTIONS=OFF			# "Build with rtti and exceptions disabled." OFF
 		-DENABLE_HARFBUZZ=${HARFBUZZ}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 			# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG}				# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 						# "Use row-major matrices. Column-major matrices are used by default." OFF
-		-DNO_FONT_INTERFACE_DEFAULT=OFF				# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		-DNO_THIRDPARTY_CONTAINERS=OFF				# "Only use standard library containers." OFF
+		#-DENABLE_SVG_PLUGIN=${LUNASVG}				# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		#-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
+		#-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
+		#-DNO_THIRDPARTY_CONTAINERS=OFF				# "Only use standard library containers." OFF
 		-DRMLUI_TRACY_CONFIGURATION=OFF				# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
 		-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		-DRMLUI_TRACY_PROFILING=OFF					# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		-DRMLUI_VK_DEBUG=OFF						# "Enable debugging mode for Vulkan renderer." OFF
-		-DWARNINGS_AS_ERRORS=OFF					# "Treat compiler warnings as errors." OFF
-		${SampleDependencies}
+		#-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
+		#-DRMLUI_VK_DEBUG=OFF						# "Enable debugging mode for Vulkan renderer." OFF
+		#-DWARNINGS_AS_ERRORS=OFF					# "Treat compiler warnings as errors." OFF
+		#${SampleDependencies}
 		${FREETYPE_CMAKE} 
 		${HARFBUZZ_CMAKE}
+		${LIBJPEG_TURBO_CMAKE}
+		${LIBPNG_CMAKE}
 		#${LUA_CMAKE}
 		#${LUAJIT_CMAKE}
 		${LUNASVG_CMAKE}
+		${PTHREAD_CMAKE}
 		${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE})
+		${SDL_IMAGE_CMAKE}
+		${SETUPAPI_CMAKE}
+		${SFML_CMAKE}
+		${TIFF_CMAKE}
+		${VERSION_CMAKE}
+		${WINMM_CMAKE}
+		${XZ_CMAKE}
+		${ZLIB_CMAKE}
+		${ZSTD_CMAKE})
 endif()
 
 
