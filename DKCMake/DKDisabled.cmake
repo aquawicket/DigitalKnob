@@ -23,6 +23,7 @@
 # SOFTWARE.
 include_guard()
 
+dk_disable(zstd)
 
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO

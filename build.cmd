@@ -343,10 +343,10 @@ goto:eof
     echo 26) Raspberry x86_64
     echo 27) Windows arm32
     echo 28) Windows arm64 (clang)
-    echo 29) Windows x86 (mingw)
+    echo 29) Windows x86 (gcc)
     echo 30) Windows x86 (clang)
     echo 31) Windows x86 (msvc)
-    echo 32) Windows x86_64 (mingw)
+    echo 32) Windows x86_64 (gcc)
     echo 33) Windows x86_64 (clang)
     echo 34) Windows x86_64 (ucrt)
     echo 35) Windows x86_64 (msvc)

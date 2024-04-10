@@ -20,13 +20,14 @@ function(dk_configure path) #ARGN
 			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
 		endif()
 		
-		dk_mergeFlags("${ARGN}" ARGN)
-		set(file_output "${DKCMAKE_BUILD};${ARGN};${path}")
-		string(REPLACE ";" "\n" file_output "${file_output}")
-		message(file_output = "${file_output}")
-		file(WRITE ${CURRENT_DIR}/DKBUILD.log "${file_output}\n\n")
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} ${path})				
+		dk_mergeFlags("${command_list}" command_list)		
+		string(REPLACE ";" "\" \n\"" command_string "${command_list}")
 		
-		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
+		file(WRITE ${CURRENT_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
+		
+		#dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
 		return()
@@ -41,7 +42,7 @@ function(dk_configure path) #ARGN
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 				dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}")
 			else()
-				dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})	# ${DKCONFIGURE_FLAGS} from DKBuildFlags.cmake
+				dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})
 			endif()
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
