@@ -379,7 +379,7 @@ if(LINUX)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 	dk_disable(x265)
-	dk_disable(zstd)
+	#dk_disable(zstd)
 endif(LINUX)
 
 

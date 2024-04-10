@@ -7,14 +7,15 @@ WIN_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/3.11.8/python-3.11.
 MAC_HOST_dk_set (PYTHON_DL ttps://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
 
 
-dk_find_program(PYTHON3_EXE python ${PYTHON3})
+dk_find_program(PYTHON3_EXE python3 ${PYTHON3})
 
 if(NOT EXISTS ${PYTHON3_EXE})
 	ANDROID_HOST_dk_command(pkg install python -y)
-	WIN_HOST_dk_import(${PYTHON_DL})
+	LINUX_HOST_dk_command(apt-get install python3)
 	MAC_HOST_dk_import(${PYTHON_DL})
+	WIN_HOST_dk_import(${PYTHON_DL})
 	
-	dk_find_program(PYTHON3_EXE python ${PYTHON3})
+	dk_find_program(PYTHON3_EXE python3 ${PYTHON3})
 endif()
 
 
