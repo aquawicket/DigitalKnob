@@ -25,9 +25,10 @@ function(dk_find_program VAR name)
 		dk_error("error {VAR} already set to ${VAR}")
 	endif()
 	
-
-	dk_get_subdirectories("${ARGN}" SEARCH_DIRS) # Recursive search
-	list(REMOVE_DUPLICATES SEARCH_DIRS)
+	if(ARGN)
+		dk_get_subdirectories("${ARGN}" SEARCH_DIRS) # Recursive search
+		list(REMOVE_DUPLICATES SEARCH_DIRS)
+	endif()
 	if(SEARCH_DIRS)
 		dk_info("Searching Provided Paths recursivley with NO_DEFAULT_PATH set . . .")
 		dk_debug("find_program(${VAR} ${name} ${ARGN};${SEARCH_DIRS} NO_DEFAULT_PATH)")
@@ -38,9 +39,7 @@ function(dk_find_program VAR name)
 		find_program(${VAR} ${name} ${ARGN} NO_DEFAULT_PATH)
 	else()
 		dk_info("Searching Default Paths. . .")
-		if(DEFINED "ENV{WSLENV}")
-			dk_error("dk_find_program() broken on WSL without NO_DEFAULT_PATH")
-		endif()
+		dk_error("dk_find_program() broken on WSL without NO_DEFAULT_PATH")
 		find_program(${VAR} ${name})
 	endif()
 	
