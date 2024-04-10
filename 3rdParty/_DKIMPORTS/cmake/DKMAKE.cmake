@@ -26,15 +26,13 @@ MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/
 WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
-if(NOT CMAKE_DL)
-	dk_error("CMAKE_DL is invalid!")
-	return()
-endif()
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
-get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
-dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
+if(NOT CMAKE_DL)
+	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+	string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
+endif()
 
 ### IMPORT ###
 if(ANDROID_HOST)
@@ -89,6 +87,7 @@ endif()
 
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 dk_set(CMAKE_VERSION ${CMAKE_VERSION})
+
 return()
 
 

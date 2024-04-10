@@ -540,13 +540,13 @@ endif()
 ### Linux x86 ###
 if(LINUX_X86)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 	
-	dk_set(DKCONFIGURE_CC					${GCC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${GCC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${GCC_PROGRAM})
+	dk_set(DKCONFIGURE_CXX					${GXX_PROGRAM})
 	dk_append(DKCONFIGURE_CFLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 endif()
@@ -554,13 +554,13 @@ endif()
 #### Linux x86_64 ###
 if(LINUX_X86_64)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS				-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 	
-	dk_set(DKCONFIGURE_CC					${GCC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${GCC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${GCC_PROGRAM})
+	dk_set(DKCONFIGURE_CXX					${GXX_PROGRAM})
 	dk_append(DKCONFIGURE_CFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 endif()
@@ -600,13 +600,13 @@ endif()
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
 	
-	dk_set(DKCONFIGURE_CC					${GCC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${GCC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${GCC_PROGRAM})
+	dk_set(DKCONFIGURE_CXX					${GXX_PROGRAM})
 	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
 	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
@@ -614,13 +614,13 @@ endif()
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
 	dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
 	
-	dk_set(DKCONFIGURE_CC					${GCC_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX					${GCC_CXX_COMPILER})
+	dk_set(DKCONFIGURE_CC					${GCC_PROGRAM})
+	dk_set(DKCONFIGURE_CXX					${GXX_PROGRAM})
 	dk_append(DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
 	dk_append(DKCONFIGURE_CXXFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
@@ -639,8 +639,8 @@ endif()
 if(WIN_X86 AND MINGW32)
 	dk_set(MSYSTEM MINGW32)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR}) 
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(DKCMAKE_EXE_LINKER_FLAGS		-static) # -s)
@@ -679,8 +679,8 @@ if(WIN_X86_64 AND MINGW64)
 	dk_set(MSYSTEM MINGW64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
 	dk_set(CMAKE_MAKE_PROGRAM				${MAKE_PROGRAM})
-	dk_set(CMAKE_C_COMPILER					${GCC_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${GCC_CXX_COMPILER})
+	dk_set(CMAKE_C_COMPILER					${GCC_PROGRAM})
+	dk_set(CMAKE_CXX_COMPILER				${GXX_PROGRAM})
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS				-march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS		-static) # -s)
