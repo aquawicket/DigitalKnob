@@ -27,9 +27,29 @@ dk_depend(zstd)
 
 
 
-set(rmlui_all 1)
+set(rmlui_all 0)
 set(rmlui_RmlCore 1)
 set(rmlui_RmlDebugger 1)
+set(rmlui_shell 1)
+set(rmlui_treeview 1)
+set(rmlui_customlog 1)
+set(rmlui_drag 1)
+set(rmlui_loaddocument 1)
+set(rmlui_transform 1)
+set(rmlui_bitmapfont 1)
+set(rmlui_animation 1)
+set(rmlui_benchmark 1)
+set(rmlui_demo 1)
+set(rmlui_databinding 1)
+set(rmlui_effects 1)
+set(rmlui_lottie 1)
+set(rmlui_harfbuzzshaping 1)
+set(rmlui_tutorial_template 1)
+set(rmlui_tutorial_drag 1)
+set(rmlui_invaders 1)
+set(rmlui_UnitTests 1)
+set(rmlui_VisualTests 1)
+set(rmlui_Benchmarks 1)
 
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi.git)
@@ -48,11 +68,14 @@ dk_define(RMLUI_STATIC_LIB)
 ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
 ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
-dk_include		(${RMLUI_MASTER}/Include					RML_INCLUDE_DIR)
+dk_include		(${RMLUI_MASTER}/Include			RML_INCLUDE_DIR)
 dk_include		(${RMLUI_MASTER}/Source)
 
 dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
+dk_addTarget	(rmlui shell)
+dk_addTarget	(rmlui treeview)
+dk_addTarget	(rmlui invaders)
 
 if(rmlui_RmlCore)
 	if(MSVC)
@@ -65,7 +88,7 @@ if(rmlui_RmlCore)
 endif()
 
 if(rmlui_RmlDebugger)
-	dk_define				(HAVE_rmlui_debugger)
+	dk_define				(HAVE_rmlui_RmlDebugger)
 	if(MSVC)
 		WIN_dk_libRelease	(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
 		WIN_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
@@ -73,6 +96,33 @@ if(rmlui_RmlDebugger)
 		dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
 		dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 	endif()
+endif()
+
+if(rmlui_shell)
+	dk_define				(HAVE_rmlui_shell)
+	if(MSVC)
+		WIN_dk_libRelease	(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/shell.lib)
+		WIN_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/shell.lib)
+	else()
+		dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/libshell.a)
+		dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/libshell.a)
+	endif()
+endif()
+
+if(rmlui_treeview)
+	dk_define				(HAVE_rmlui_treeview)
+	WIN_dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/treeview.exe)
+	WIN_dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/treeview.exe)
+	UNIX_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/treeview)
+	UNIX_dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/treeview)
+endif()
+
+if(rmlui_invaders)
+	dk_define				(HAVE_rmlui_invaders)
+	WIN_dk_libDebug			(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/invaders.exe)
+	WIN_dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/invaders.exe)
+	UNIX_dk_libDebug		(${RMLUI_MASTER}/${OS}/${DEBUG_DIR}/invaders)
+	UNIX_dk_libRelease		(${RMLUI_MASTER}/${OS}/${RELEASE_DIR}/invaders)
 endif()
 
 ### GENERATE ###
@@ -102,16 +152,25 @@ if(MSVC)
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${SampleDependencies}
 		${FREETYPE_CMAKE} 
 		${HARFBUZZ_CMAKE}
+		${LIBJPEG_TURBO_CMAKE}
+		${LIBPNG_CMAKE}
 		#${LUA_CMAKE}
 		#${LUAJIT_CMAKE}
 		${LUNASVG_CMAKE}
+		${PTHREAD_CMAKE}
 		${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE})
+		${SDL_IMAGE_CMAKE}
+		${SETUPAPI_CMAKE}
+		${SFML_CMAKE}
+		${TIFF_CMAKE}
+		${VERSION_CMAKE}
+		${WINMM_CMAKE}
+		${XZ_CMAKE}
+		${ZLIB_CMAKE}
+		${ZSTD_CMAKE})
 	
 	ANDROID_dk_configure(${RMLUI_MASTER}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
@@ -137,16 +196,25 @@ if(MSVC)
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${SampleDependencies}
 		${FREETYPE_CMAKE} 
 		${HARFBUZZ_CMAKE}
+		${LIBJPEG_TURBO_CMAKE}
+		${LIBPNG_CMAKE}
 		#${LUA_CMAKE}
 		#${LUAJIT_CMAKE}
 		${LUNASVG_CMAKE}
+		${PTHREAD_CMAKE}
 		${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE})
+		${SDL_IMAGE_CMAKE}
+		${SETUPAPI_CMAKE}
+		${SFML_CMAKE}
+		${TIFF_CMAKE}
+		${VERSION_CMAKE}
+		${WINMM_CMAKE}
+		${XZ_CMAKE}
+		${ZLIB_CMAKE}
+		${ZSTD_CMAKE})
 else()									
 	
 	# https://stackoverflow.com/a/37038641/688352
@@ -191,7 +259,6 @@ else()
 		#-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		#-DRMLUI_VK_DEBUG=OFF						# "Enable debugging mode for Vulkan renderer." OFF
 		#-DWARNINGS_AS_ERRORS=OFF					# "Treat compiler warnings as errors." OFF
-		#${SampleDependencies}
 		${FREETYPE_CMAKE} 
 		${HARFBUZZ_CMAKE}
 		${LIBJPEG_TURBO_CMAKE}
@@ -224,5 +291,17 @@ else()
 
 	if(rmlui_RmlDebugger)
 		dk_build(${RMLUI_MASTER} RmlDebugger)
+	endif()
+	
+	if(rmlui_shell)
+		dk_build(${RMLUI_MASTER} shell)
+	endif()
+	
+	if(rmlui_treeview)
+		dk_build(${RMLUI_MASTER} treeview)
+	endif()
+	
+	if(rmlui_invaders)
+		dk_build(${RMLUI_MASTER} invaders)
 	endif()
 endif()

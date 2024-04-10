@@ -23,11 +23,8 @@
 # SOFTWARE.
 include_guard()
 
-#if(WIN_HOST)
-#	dk_disable(python)
-#endif()
-# DISABLED FOR ALL TARGETS
 
+# DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRmlAudio)				# build errors
@@ -93,9 +90,6 @@ dk_disable(ffmpeg)
 dk_disable(diff-match-patch)
 
 dk_disable(boxer)
-#dk_disable(rlottie)
-#dk_disable(lua)
-#dk_disable(lunasvg)
 dk_disable(lz4)
 dk_disable(libb2)
 
@@ -123,9 +117,6 @@ if(ANDROID)
 	dk_disable(aubio)				# build errors	
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
-	#if(WIN_HOST)
-	#	dk_disable(bzip2)				# 'make' can't find ar
-	#endif()
 	dk_disable(cryptopp)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
@@ -140,7 +131,6 @@ if(ANDROID)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	#dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
@@ -209,7 +199,6 @@ if(EMSCRIPTEN)
 	dk_disable(av_kit)
 	dk_disable(avf_audio)
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
-	#dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
 	dk_disable(cef_binary)
 	dk_disable(core_audio)
 	dk_disable(core_foundation)
