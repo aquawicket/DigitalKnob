@@ -13,10 +13,13 @@ dk_include			(${LUA}/${OS}							LUA_INCLUDE_DIR2)
 DEBUG_dk_include	(${LUA}/${OS}/${DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
 RELEASE_dk_include	(${LUA}/${OS}/${RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
 
-UNIX_dk_libDebug	(${LUA}/${OS}/${DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
-UNIX_dk_libRelease	(${LUA}/${OS}/${RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
-WIN_dk_libDebug		(${LUA}/${OS}/${DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
-WIN_dk_libRelease	(${LUA}/${OS}/${RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
+if(MSVC)
+	WIN_dk_libDebug		(${LUA}/${OS}/${DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
+	WIN_dk_libRelease	(${LUA}/${OS}/${RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
+else()
+	dk_libDebug			(${LUA}/${OS}/${DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
+	dk_libRelease		(${LUA}/${OS}/${RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
+endif()
 
 
 ### 3RDPARTY LINK ###

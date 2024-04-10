@@ -15,7 +15,7 @@ function(dk_runDepends plugin)
 	if(NOT plugin_path)
 		dk_error("${plugin} plugin not found")
 	endif()
-	dk_verbose("FOUND ${plugin} DK makefile at ${plugin_path}")
+	dk_verbose("FOUND ${plugin} DKMAKE.cmake at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)

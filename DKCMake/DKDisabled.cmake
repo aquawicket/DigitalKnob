@@ -93,9 +93,9 @@ dk_disable(ffmpeg)
 dk_disable(diff-match-patch)
 
 dk_disable(boxer)
-dk_disable(rlottie)
-dk_disable(lua)
-dk_disable(lunasvg)
+#dk_disable(rlottie)
+#dk_disable(lua)
+#dk_disable(lunasvg)
 dk_disable(lz4)
 dk_disable(libb2)
 
@@ -312,7 +312,7 @@ if(IOS OR IOSSIM)
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
 	#dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
+	#dk_disable(lua)					# error:'system' is unavailable: not available on iOS
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(ncurses)				# CMake Error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openblas)			# CMake Error: if given arguments: "STREQUAL" "CORE2" Unknown arguments specified
