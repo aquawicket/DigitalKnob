@@ -27,7 +27,7 @@ if(MSYSTEM)
 endif()
 
 if(LINUX_HOST)
-	dk_find_program(MAKE_PROGRAM make)
+	dk_find_program(MAKE_PROGRAM make /usr/bin)
 endif()
 
 #if(EMSCRIPTEN)
