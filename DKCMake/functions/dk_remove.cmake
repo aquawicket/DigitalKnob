@@ -15,7 +15,7 @@ function(dk_remove path)
 
 	if(NOT EXISTS ${path})
 		if(NOT NOERROR)
-			dk_warn("${path} does not exist")
+			dk_warning("${path} does not exist")
 		endif()
 		return()
 	endif()

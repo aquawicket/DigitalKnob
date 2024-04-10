@@ -10,7 +10,7 @@ function(dk_append variable) #value
 	DKDEBUGFUNC(${ARGV})
 	
 	if(NOT ARGN)
-		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
+		dk_warning("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
 	endif()
 	if(${variable})

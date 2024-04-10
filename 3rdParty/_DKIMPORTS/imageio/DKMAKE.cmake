@@ -8,6 +8,6 @@ endif()
 
 find_library(ImageIO_lib ImageIO)
 if(NOT ImageIO_lib)
-	dk_warn("Could not locate ImageIO framework")
+	dk_warning("Could not locate ImageIO framework")
 endif()
 APPLE_dk_lib(${ImageIO_lib})

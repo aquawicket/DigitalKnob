@@ -12,7 +12,7 @@ function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_warn("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
+		dk_warning("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
 		return()
 	endif()
 	

@@ -6,7 +6,7 @@ if(ANDROID_HOST)
 	
 	find_program(PERL_EXE perl)
 	if(NOT PERL_EXE)
-		dk_warn("perl not found!")
+		dk_warning("perl not found!")
 	else()
 		dk_debug(PERL_EXE		PRINTVAR)
 		dk_command(${PERL_EXE} --version)

@@ -36,7 +36,7 @@ function(dk_configure path) #ARGN
 				dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})	# ${DKCONFIGURE_FLAGS} from DKBuildFlags.cmake
 			endif()
 		else()
-			dk_warn("No configure file found. It needs to be generated with autotools")
+			dk_warning("No configure file found. It needs to be generated with autotools")
 		endif()
 		return()
 		

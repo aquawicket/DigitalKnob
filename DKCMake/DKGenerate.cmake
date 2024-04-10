@@ -175,7 +175,7 @@ foreach(plugin ${dkdepend_list})
 			
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
-					dk_warn("MISSING: ${lib}")
+					dk_warning("MISSING: ${lib}")
 					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
 				else()
 					dk_debug("FOUND: ${lib}")
