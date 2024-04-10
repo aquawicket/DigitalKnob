@@ -28,7 +28,7 @@ WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/downlo
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
-if(NOT CMAKE_DL)
+if(CMAKE_DL)
 	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
 	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 	string(MAKE_C_IDENTIFIER ${CMAKE_FOLDER} CMAKE_FOLDER)
