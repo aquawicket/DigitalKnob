@@ -18,7 +18,7 @@ function(dk_mergeFlags args RESULT)
 	foreach(word ${search})
 		set(DK_${word} "${word}")
 		if(MINGW)
-			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
+		#	set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
 		endif()
 		set(index 0)
 		set(placeholder 0)
@@ -39,7 +39,7 @@ function(dk_mergeFlags args RESULT)
 			endif()
 		endforeach()
 		if(MINGW)
-			set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
+		#	set(DK_${word} "${DK_${word}}'")	# NOTE:  This issue is related to DKBuildFlags.cmake:736
 		endif()
 		if(${placeholder} GREATER 0)
 			list(LENGTH args args_length)

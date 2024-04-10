@@ -13,22 +13,30 @@ function(dk_configure path) #ARGN
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
-		
 		if(SINGLE_CONFIG)
 			# Make sure the plugin variable is alpha-numeric and uppercase
 			string(TOUPPER ${plugin} PLUGIN_NAME)
 			string(MAKE_C_IDENTIFIER ${PLUGIN_NAME} PLUGIN_NAME)
-			
 			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
 		endif()
 		
-		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path}) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
+		dk_mergeFlags("${ARGN}" ARGN)
+		set(file_output "${DKCMAKE_BUILD};${ARGN};${path}")
+		string(REPLACE ";" "\n" file_output "${file_output}")
+		message(file_output = "${file_output}")
+		file(WRITE ${CURRENT_DIR}/DKBUILD.log "${file_output}\n\n")
+		
+		dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE) 					# ${DKCMAKE_BUILD} from DKBuildFlags.cmake
+		file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		
 		return()
 	
-	# Configure with Autotools	(single_config)	
+	# Configure with Autotools	(single_config)
 	elseif(EXISTS ${path}/configure.ac)
 		dk_info("Configuring with Autotools")
 		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
+		
+		file(APPEND ${CURRENT_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${path}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 				dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}")
@@ -44,6 +52,8 @@ function(dk_configure path) #ARGN
 	else()
 		dk_notice("configure type not detected. just run arguments")
 		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
+		
+		file(APPEND ${CURRENT_DIR}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#string(REPLACE ";" " " BASH_COMMANDS "${ARGN}")
 			#dk_queueCommand(bash -c "${ANDROID_BASH_EXPORTS} ${BASH_COMMANDS}")

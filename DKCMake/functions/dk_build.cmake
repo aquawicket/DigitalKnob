@@ -35,10 +35,16 @@ function(dk_build path) #target NOASSERT
 		if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
 			dk_info("Building with CMake")
 			if(${ARGC} GREATER 1)
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
+				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
+				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+				
 				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
 			else()
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
+				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
+				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+				
 				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
 			endif()
 			return()
