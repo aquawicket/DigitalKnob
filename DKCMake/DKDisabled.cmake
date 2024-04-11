@@ -23,7 +23,6 @@
 # SOFTWARE.
 include_guard()
 
-dk_disable(zstd)
 
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
@@ -293,9 +292,9 @@ if(IOS OR IOSSIM)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	#dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
-	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
+	#dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)				# dk_getExtension Function invoked with incorrect arguments
-	dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
+	#dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
 	dk_disable(libsndfile)			# Cmake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "sndfile-info"
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -317,7 +316,7 @@ if(IOS OR IOSSIM)
 	dk_disable(sdl_rtf)
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
+	#dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(wasm3)				# CMake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executbale target "wasm3"
 	dk_disable(x265)
@@ -457,7 +456,7 @@ if(RASPBERRY)
 	dk_disable(sdl_rtf)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(tiff)
+	#dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(waave)
 	dk_disable(x265)
