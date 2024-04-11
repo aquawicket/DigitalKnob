@@ -1279,13 +1279,13 @@ validate_cmake () {
 		echo "Installing DK CMake packages"
 		## New method of obtaining cmake
 		######################################################################################################
-		if [ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-		if [ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-		if [ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-		if [ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ];	then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
-		if [ "${HOST_OS}" = "mac" ];						then CMAKE_DL=$CMAKE_DL_MAC;			fi
-		if [ "${HOST_OS}_${HOST_ARCH}" = "linux_x86_64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-		if [ "${HOST_OS}_${HOST_ARCH}" = "linux_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [ "${HOST_TRIPLE}" = "win_arm32" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+		if [ "${HOST_TRIPLE}" = "win_arm64" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+		if [ "${HOST_TRIPLE}" = "win_x86" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+		if [ "${HOST_TRIPLE}" = "win_x86_64" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+		if [ "${HOST_OS}" = "mac" ];				then CMAKE_DL=$CMAKE_DL_MAC;			fi
+		if [ "${HOST_TRIPLE}" = "linux_x86_64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+		if [ "${HOST_TRIPLE}" = "linux_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		print_var CMAKE_DL
 		
 		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
@@ -2100,17 +2100,15 @@ get_host_triple () {
 	
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	#if [ "$MODEL" = "Raspberry"* ]; then		#							  [ .. ] can't match globs. Use [[ .. ]] or grep.
 	if dk_string_contains "$MODEL" "Raspberry"; then
 		HOST_OS="raspberry"
 	elif [ "$OSTYPE" = "linux-android" ]; then				# FIXME:  $OSTYPE not POSIX
 		HOST_OS="android"
 	elif [ "$DKHOST" = "Linux" ]; then
 		HOST_OS="linux"
-	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.	
-		HOST_OS="linux"
-	#elif [ "$OSTYPE" = "darwin"* ]; then				
-	elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
+	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX
+		HOST_OS="linux"		
+	elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX
 		HOST_OS="mac"
 	elif [ "$OSTYPE" = "msys" ]; then						# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
