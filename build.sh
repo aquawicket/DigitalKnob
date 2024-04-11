@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ############# DigitalKnob builder script ############
 
 # shellcheck disable=SC2034
@@ -74,7 +74,6 @@ main() {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 	
-	# if dk_command_exists bash; then echo "bash exists"; fi
 	# log to stdout and file
 	#exec |& tee file.log 
 
@@ -121,9 +120,7 @@ main() {
 	print_var HOSTNAME
 	print_var HOSTTYPE
 	print_var MACHTYPE
-	if [ -e /proc/device-tree/model ]; then
-		MODEL=$(tr -d '\0' </proc/device-tree/model)
-	fi
+	[ -e /proc/device-tree/model ] && MODEL=$(tr -d '\0' </proc/device-tree/model)
 	print_var MODEL
 	print_var MSYSTEM
 	print_var OSTYPE
@@ -133,7 +130,7 @@ main() {
 	print_var USERNAME
 	
 	## Get the HOST_TRIPLE and other HOST variables
-	get_host_triple || dk_error "Could not determine HOST_TRIPLE" && pause && exit
+	get_host_triple || dk_error "Could not determine HOST_TRIPLE"
 	
 	
 	if [ -n "$USERPROFILE" ]; then
@@ -220,23 +217,27 @@ pick_update() {
 	echo ""
 	dk_check_remote
 	echo ""
-	
+
+	dk_debug "_APP_ = $_APP_"
+	dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
+	dk_debug "_TYPE_ = $_TYPE_" 
+
 	if [ "$behind" = "0" ]; then
 		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
-			echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 		fi
-		echo " 1) Git Update"   
-		echo " 2) Git Commit"
-		echo " 3) Push assets"
-		echo " 4) Pull assets"
-		echo " 5) Reset All"
-		echo " 6) Remove All"
-		echo " 7) Clear Screen"
-		echo " 8) Clear cmake cache and .tmp files"
-		echo " 9) Reload"
-		echo "10) Exit"
-		echo "" 
-		echo " Press Enter To Skip"
+		dk_echo " 1) Git Update"   
+		dk_echo " 2) Git Commit"
+		dk_echo " 3) Push assets"
+		dk_echo " 4) Pull assets"
+		dk_echo " 5) Reset All"
+		dk_echo " 6) Remove All"
+		dk_echo " 7) Clear Screen"
+		dk_echo " 8) Clear cmake cache and .tmp files"
+		dk_echo " 9) Reload"
+		dk_echo "10) Exit"
+		dk_echo "" 
+		dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo ""
@@ -263,7 +264,7 @@ pick_update() {
 	
 	read input
 	if [ "$input" = "0" ]; then
-		echo "repeating last selection"
+		dk_echo "repeating last selection"
 		APP=$_APP_
 		TARGET_OS=$_TARGET_OS_
 		TYPE=$_TYPE_
@@ -305,21 +306,21 @@ pick_app() {
 	dk_verbose "pick_app($*)"
 	
 	echo ""
-	echo "${APP}  ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
-    echo " 1) HelloWorld"
-    echo " 2) DKCore"
-    echo " 3) DKJavascript"
-    echo " 4) DKSDL"
-    echo " 5) DKSDLRml"
-    echo " 6) DKDomTest"
-    echo " 7) DKTestAll"
-    echo " 8) Enter Manually"
-    echo " 9) Clear Screen"
-    echo "10) Go Back"
-    echo "11) Reload"
-	echo "12) Exit"
+    dk_echo " 1) HelloWorld"
+    dk_echo " 2) DKCore"
+    dk_echo " 3) DKJavascript"
+    dk_echo " 4) DKSDL"
+    dk_echo " 5) DKSDLRml"
+    dk_echo " 6) DKDomTest"
+    dk_echo " 7) DKTestAll"
+    dk_echo " 8) Enter Manually"
+    dk_echo " 9) Clear Screen"
+    dk_echo "10) Go Back"
+    dk_echo "11) Reload"
+	dk_echo "12) Exit"
     echo "" 
 	
 	read input
@@ -361,48 +362,48 @@ pick_os() {
 	dk_verbose "pick_os($*)"
 	
 	echo ""
-	echo "${APP} ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
-    echo " 1) $HOST_TRIPLE"
+    dk_echo " 1) $HOST_TRIPLE"
 	echo ""
-	echo " 2) Android arm32"
-	echo " 3) Android arm64"
-	echo " 4) Android x86"
-	echo " 5) Android x86_64"
-	echo " 6) Emscripten"
-	echo " 7) Ios arm32"
-	echo " 8) Ios arm64"
-	echo " 9) Ios x86"
-	echo "10) Ios x86_64"
-	echo "11) Iossim arm32"
-	echo "12) Iossim arm64"
-	echo "13) Iossim x86"
-	echo "14) Iossim x86_64"
-	echo "15) Linux arm32"
-	echo "16) Linux arm64"
-	echo "17) Linux x86"
-	echo "18) Linux x86_64"
-	echo "19) Mac arm32"
-	echo "20) Mac arm64"
-	echo "21) Mac x86"
-	echo "22) Mac x86_64"
-	echo "23) Raspberry arm32"
-	echo "24) Raspberry arm64"
-	echo "25) Raspberry x86"
-	echo "26) Raspberry x86_64"
-	echo "27) Windows arm32"
-	echo "28) Windows arm64 (clang)"
-	echo "29) Windows x86 (gcc)"
-	echo "30) Windows x86 (clang)"
-	echo "31) Windows x86 (msvc)"
-	echo "32) Windows x86_64 (gcc)"
-    echo "33) Windows x86_64 (clang)"
-    echo "34) Windows x86_64 (ucrt)"
-    echo "35) Windows x86_64 (msvc)"
-	echo "36) Clear Screen"
-	echo "37) Go Back"
-	echo "38) Exit"
+	dk_echo " 2) Android arm32"
+	dk_echo " 3) Android arm64"
+	dk_echo " 4) Android x86"
+	dk_echo " 5) Android x86_64"
+	dk_echo " 6) Emscripten"
+	dk_echo " 7) Ios arm32"
+	dk_echo " 8) Ios arm64"
+	dk_echo " 9) Ios x86"
+	dk_echo "10) Ios x86_64"
+	dk_echo "11) Iossim arm32"
+	dk_echo "12) Iossim arm64"
+	dk_echo "13) Iossim x86"
+	dk_echo "14) Iossim x86_64"
+	dk_echo "15) Linux arm32"
+	dk_echo "16) Linux arm64"
+	dk_echo "17) Linux x86"
+	dk_echo "18) Linux x86_64"
+	dk_echo "19) Mac arm32"
+	dk_echo "20) Mac arm64"
+	dk_echo "21) Mac x86"
+	dk_echo "22) Mac x86_64"
+	dk_echo "23) Raspberry arm32"
+	dk_echo "24) Raspberry arm64"
+	dk_echo "25) Raspberry x86"
+	dk_echo "26) Raspberry x86_64"
+	dk_echo "27) Windows arm32"
+	dk_echo "28) Windows arm64 (clang)"
+	dk_echo "29) Windows x86 (gcc)"
+	dk_echo "30) Windows x86 (clang)"
+	dk_echo "31) Windows x86 (msvc)"
+	dk_echo "32) Windows x86_64 (gcc)"
+    dk_echo "33) Windows x86_64 (clang)"
+    dk_echo "34) Windows x86_64 (ucrt)"
+    dk_echo "35) Windows x86_64 (msvc)"
+	dk_echo "36) Clear Screen"
+	dk_echo "37) Go Back"
+	dk_echo "38) Exit"
 	echo "" 
 	
 	read input
@@ -496,15 +497,15 @@ pick_type() {
 	dk_verbose "pick_type($*)"
 	
 	echo ""
-	echo "${APP} ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
-    echo " 1) Debug"
-	echo " 2) Release"
-	echo " 3) All"
-	echo " 4) Clear Screen"
-	echo " 5) Go Back"
-	echo " 6) Exit"
+    dk_echo " 1) Debug"
+	dk_echo " 2) Release"
+	dk_echo " 3) All"
+	dk_echo " 4) Clear Screen"
+	dk_echo " 5) Go Back"
+	dk_echo " 6) Exit"
 	echo ""
 	
 	read input
@@ -533,8 +534,8 @@ pick_type() {
 #add_cmake_arg() {
 #	dk_verbose "add_cmake_arg($*)"
 #
-#   if [ "$*" = "" ]; then echo "ERROR: add_cmake_arg is empty!" & return 1
-#    echo added $*
+#   if [ "$*" = "" ]; then dk_error "add_cmake_arg is empty!" & return 1
+#    dk_echo added $*
 #    CMAKE_ARGS+=( "%*" )
 #}
 
@@ -547,9 +548,9 @@ generate() {
 	dk_verbose "generate($*)"
 	
 	echo ""
-	echo "##################################################################"
-	echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
-	echo "##################################################################"
+	dk_echo "##################################################################"
+	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
+	dk_echo "##################################################################"
 	echo ""
 
 	clear_cmake_cache
@@ -721,7 +722,7 @@ generate() {
 	#### CMAKE CALL ####
 	validate_cmake
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
-	echo "TOOLCHAIN = $TOOLCHAIN"
+	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists "$TOOLCHAIN"; then
 		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
 		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
@@ -733,7 +734,7 @@ generate() {
 		set -- "$@" "."
 	fi
 	
-	echo "CMAKE_ARGS = $@"	
+	dk_echo "CMAKE_ARGS = $@"	
 	dk_call "$CMAKE_EXE" "$@"
 }
 
@@ -764,8 +765,8 @@ generate() {
 #   
 #    ###### CMake Configure ######
 #    echo ""
-#    echo "****** CMAKE COMMAND ******"
-#    echo "${CMAKE_EXE}" "$CMAKE_ARGS"
+#    dk_echo "****** CMAKE COMMAND ******"
+#    dk_echo "${CMAKE_EXE}" "$CMAKE_ARGS"
 #    "$CMAKE_EXE" "$CMAKE_ARGS"
 #    echo ""
 #}
@@ -779,9 +780,9 @@ build () {
 	dk_verbose "build($*)"
 	
 	echo ""
-	echo "##################################################################"
-	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
-	echo "##################################################################"
+	dk_echo "##################################################################"
+	dk_echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
+	dk_echo "##################################################################"
 	echo ""
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
@@ -804,9 +805,9 @@ build () {
 	fi
 	
 	echo ""
-	echo "##################################################################"
-	echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
-	echo "##################################################################"
+	dk_echo "##################################################################"
+	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
+	dk_echo "##################################################################"
 	echo ""
 }
 
@@ -820,11 +821,9 @@ dk_require () {
 	
 	if [ -z "$1" ]; then
 		dk_error "dk_require(<func_name> <n>) requires 2 parameters. Example dk_require my_func \$1"
-		return $false
 	fi
 	if [ -z "$2" ]; then
 		dk_error "$1() requires at least 1 parameter"
-		return $false
 	fi
 }
 
@@ -834,10 +833,18 @@ dk_require () {
 #
 #
 dk_echo () {
-	#dk_verbose "dk_echo($*)"
-	
 	#echo "dk_echo($*)"
-	echo -e "$1"
+
+	shell_type=$(basename $(readlink /proc/$$/exe))
+	#dk_debug "shell_type = $shell_type"
+
+	if [ "$shell_type" = "sh" ]; then  
+		echo "$1"
+	elif [ "$shell_type" = "dash" ]; then
+		echo "$1"
+	else	
+		echo -e "$1"
+	fi
 }
 
 
@@ -875,7 +882,7 @@ dk_info () {
 	#dk_verbose "dk_info($*)"
 	
 	dk_require dk_info "$1"
-	dk_echo "${white}   INFO: $1 ${white}"
+	dk_echo "${white}   INFO: $1 ${clr}"
 }
 
 
@@ -905,7 +912,7 @@ dk_error () {
 	
 	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
-	if [ $HALT_ON_ERRORS = 1 ]; then
+	if [ "$HALT_ON_ERRORS" = "1" ]; then
 		exit 1
 	fi
 }
@@ -919,10 +926,10 @@ dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
 	
     local i=1 line file func											# FIXME: n POSIX sh, 'local' is undefined.
-    while read -r line func file < <(caller $i); do
-       echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
-       ((i++))
-    done
+    #while read -r line func file < <(caller $i); do
+    #   echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
+    #   ((i++))
+    #done
 }
 
 
@@ -940,11 +947,12 @@ dk_defined () {
 	var=$1
 	#! [ -z ${!var+x} ]				# BASH
 	eval value=\${"${var}"+x}		# POSIX
+
 	if [ -z "$value" ]; then
-		#echo "$1 is NOT DEFINED"
+		#dk_debug "$1 is NOT DEFINED"
 		return $false;
 	fi
-	#echo "$1 is DEFINED"
+	#dk_debug "$1 is DEFINED"
 	return $true;
 }
 
@@ -958,7 +966,6 @@ dk_call () {
 	
 	if [ -z "$1" ]; then
 		dk_error "dk_call <command args> requires at least 1 parameter"
-		return $false
 	fi
 	
 	dk_echo "${magenta} $ $* ${clr}"
@@ -979,7 +986,7 @@ dk_check_remote () {
 		branch=$(git rev-parse --abbrev-ref HEAD)
 		ahead=$(git rev-list --count origin/$branch..$branch)
 		behind=$(git rev-list --count $branch..origin/$branch)
-		echo "$ahead commits ahead, $behind commits behind"
+		dk_info "$ahead commits ahead, $behind commits behind"
 	fi
 }
 
@@ -1017,8 +1024,9 @@ dk_reload () {
 #
 dk_confirm() {
 	dk_debug "dk_confirm($@)"
-	echo -e "${yellow} Are you sure ? [Y/N] ${clr}"
-	read -p " " -n 1 -r REPLY
+	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
+	#read -p " " -n 1 -r REPLY
+	read -rp $" " REPLY
 	echo ""
 	echo ""
 	#result=$(echo $REPLY | grep "^[Yy]$")
@@ -1034,25 +1042,16 @@ dk_confirm() {
 #
 dk_string_contains () {
 	dk_verbose "dk_string_contains($*)"
-	
+
 	if [ -z "$2" ]; then
 		dk_error "dk_string_contains <string> <substring> requires 2 parameters"
 		return $false
 	fi
-	#[ $1 = *"$2"* ]						
-	#if echo "$1" | grep -q '*"$2"*'; then
-	#	return $true
-	#fi
-	#return $false
 	
 	# https://stackoverflow.com/a/8811800/688352
 	string=$1
 	substring=$2
-	[ "${string#*"$substring"}" != "$string" ]
-	#[ "${string#*"$substring"}" != "$string" ] && echo "${string} contains ${substring}" && return $true
-	#echo "${string} does not contain ${substring}"
-	#return $false;
-	
+	[ "${string#*"$substring"}" != "$string" ]	
 	#[[ ${string} == *"${substring}"* ]]		# bash version
 }
 
@@ -1098,7 +1097,7 @@ dk_get_filename () {
 	fi
 	
 	eval "$2=$(basename "$1")"
-	#[ $base_name = "" ]
+	#[ "$base_name" = "" ]
 }
 
 
@@ -1114,14 +1113,13 @@ dk_convert_to_c_identifier () {
 		return $false
 	fi
 	input=$1
-	echo "dk_convert_to_c_identifier($1, $2)"
-	echo "input = $input"
+	dk_debug "input = $input"
 	
 	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
 	dk_replace_all "$input" "-" "_" input		# POSIX replace
 	dk_replace_all "$input" "." "_" output		# POSIX replace
 	
-	echo "output = $output"
+	dk_debug "output = $output"
 	eval "$2=$output"
 	#[ $input = "" ]
 }
@@ -1150,7 +1148,7 @@ dk_replace_all () {
         input=${input#*"$searchValue"}
     done
 	
-	echo "output = '$output'"
+	dk_debug "output = '$output'"
 	eval "$4=$output"
 }
 
@@ -1167,11 +1165,10 @@ convert_to_lowercase () {
 		return $false
 	fi
 	input=$1
-	echo "convert_to_lowercase($1, $2)"
 	echo "$input" | tr '[:upper:]' '[:lower:]'
-	echo "input = $input"
+	dk_debug "input = $input"
 	eval "$2=$input"
-	#[ $input = "" ]
+	#[ "$input" = "" ]
 }
 
 
@@ -1188,21 +1185,17 @@ download () {
 	fi
 	
 	if dk_file_exists "$2"; then
-		echo "download(): $2 already exists"
+		dk_warning "download(): $2 already exists"
 		return 0
 	fi
-	#echo "download($1, $2)"
-	echo "Downloading $1 . . ."
+	dk_info "Downloading $1 . . ."
 	parentdir="$(dirname "$2")"
-	#filename="$(basename "$2")"
-	echo "parentdir = $parentdir"
-	#echo "filename = $filename"
+	dk_debug "parentdir = $parentdir"
 	olddir=$PWD
 	cd "$parentdir" || dk_error "cd $parentdir failed!"
-	echo "wget -P $parentdir $1"
 	wget -P "$parentdir" "$1" 
 	cd "$oldpwd" || dk_error "cd $oldpwd failed!"
-	#[ $input = "" ]
+	#[ "$input" = "" ]
 }
 
 
@@ -1225,28 +1218,27 @@ extract () {
 	print_var fulldest
 		
 	#if dk_file_exists $fulldest; then
-	#	echo "extract(): $fulldest already exists"
+	#	dk_warning "extract(): $fulldest already exists"
 	#	return 0
 	#fi
-	echo "Extracting $1 . . ."
+	dk_info "Extracting $1 . . ."
 	parentdir="$(dirname "$1")"
 	parentdest="$(dirname "$2")"
-	echo "parentdir = $parentdir"
-	echo "filename = $filename"
+	dk_debug "parentdir = $parentdir"
+	dk_debug "filename = $filename"
 	#need to cd into parent directory of $1 and send tar the file name of $1
 	olddir=$PWD
 	cd "$parentdir" || dk_error "cd $$parentdir failed!"
-	echo "tar -xf $filename -C $2"
 	tar -xf "$filename" -C "$2"
 	cd "$oldpwd" || dk_error "cd $$oldpwd failed!"
 	dk_convert_to_c_identifier "$destFolder" destFolder_
 	print_var destFolder_
-	echo "mv $2/$destFolder $2/$destFolder_"
 	mv "$2"/"$destFolder" "$2"/"$destFolder_"
-	echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/installed
-	
+
+	#echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/installed
+
 	#TODO
-	#[ $input = "" ]
+	#[ "$input" = "" ]
 }
 
 
@@ -1278,7 +1270,7 @@ validate_cmake () {
 		CMAKE_SYSTEM_INSTALL=1
 	fi
 	if [ "$CMAKE_SYSTEM_INSTALL" = "1" ]; then
-		echo "Installing CMake System packages"
+		dk_info "Installing CMake System packages"
 		CMAKE_EXE=$(command -v cmake)
 		print_var CMAKE_EXE
 		if ! dk_command_exists cmake; then
@@ -1301,7 +1293,7 @@ validate_cmake () {
 		CMAKE_EXE=$(command -v cmake)
 		print_var CMAKE_EXE
 	else
-		echo "Installing DK CMake packages"
+		dk_info "Installing DK CMake packages"
 		######################################################################################################
 		if [ "${HOST_TRIPLE}" = "win_arm32" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
 		if [ "${HOST_TRIPLE}" = "win_arm64" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
@@ -1318,7 +1310,7 @@ validate_cmake () {
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
 		print_var CMAKE_FOLDER
-		echo "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
+		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
@@ -1343,9 +1335,8 @@ validate_cmake () {
 		if dk_file_exists "$CMAKE_EXE"; then return $true; fi
 
 		echo ""   
-		echo "Installing cmake . . ."
+		dk_info "Installing cmake . . ."
 		download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
-		echo "extract $CMAKE_DL_FILE $DKTOOLS_DIR"
 		extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
 		
 		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
@@ -1381,7 +1372,7 @@ validate_homebrew () {
 	fi
 		
 	if ! dk_command_exists brew; then
-		echo "installing Homebrew"
+		dk_info "installing Homebrew"
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		# https://github.com/Homebrew/brew/issues/10368
 		rm -fr $(brew --repo homebrew/core)
@@ -1437,18 +1428,18 @@ install () {
 	dk_verbose "install($*)"
 	
 	#if package_installed $1; then
-	#	echo "$1 already installed"
+	#	dk_warning "$1 already installed"
 	#	return $false;
 	#fi
 	
-	echo "installing $1"
+	dk_info "installing $1"
 
 	if dk_command_exists brew; then
 		dk_call "$SUDO" brew install "$1"
 	elif dk_command_exists apt; then
 		dk_call "$SUDO" apt -y install "$1"
 	elif dk_command_exists apt-get; then
-		echo "found apt-get"
+		dk_info "found apt-get"
 		dk_call "$SUDO" apt-get -y install "$1"
 	elif dk_command_exists pkg; then
 		dk_call "$SUDO" pkg install "$1"
@@ -1497,7 +1488,7 @@ validate_ostype () {
 	elif [ "$OSTYPE" = "win32" ]; then #I'm not sure this can happen
 		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
 	elif [ "$OSTYPE" = "freebsd"* ]; then
-		echo "TODO: freebsd builder incomplete"
+		dk_error "TODO: freebsd builder incomplete"
 	elif [ "$OSTYPE" = "linux-android" ]; then
 		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
 	else
@@ -1547,11 +1538,11 @@ validate_branch () {
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 	#	if ! dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
-	#		echo "$DKBRANCH_DIR/$SCRIPT_NAME"
+	#		dk_debug "$DKBRANCH_DIR/$SCRIPT_NAME"
 	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
 	#	fi
-	#	echo .
-	#	echo "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
+	#	echo ""
+	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
 	#	if dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
@@ -1564,14 +1555,13 @@ validate_branch () {
 
 
 ##################################################################################
-# dk_pause()
+# dk_wait_for_key()
 #
 #
-dk_pause () {
-	dk_verbose "dk_pause($*)"
+dk_wait_for_key () {
+	dk_verbose "dk_wait_for_key($*)"
 	
 	read -rsp $'Press any key to continue...\n' -n 1 key
-	# echo $key
 }
 
 
@@ -1582,7 +1572,7 @@ dk_pause () {
 clear_cmake_cache () {
 	dk_verbose "clear_cmake_cache($*)"
 	
-	echo "Clearing CMake cache . . ."
+	dk_info "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 	find . -name "CMakeCache.*" -delete
 	rm -rf $(find . -type d -name CMakeFiles)
@@ -1596,7 +1586,7 @@ clear_cmake_cache () {
 delete_temp_files () {
 	dk_verbose "delete_temp_files($*)"
 	
-	echo "Deleting .TMP files . . ."
+	dk_info "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 	rm -rf $(find . -type d -name *.tmp)
 	rm -rf $(find . -type d -name *.TMP)
@@ -1698,8 +1688,7 @@ cmake_eval () {
 	dk_verbose "cmake_eval($*)"
 	
 	if [ -z "$1" ]; then
-		echo "ERROR: cmake_eval() parameter 1 is invalid"
-		return $false
+		dk_error "cmake_eval() parameter 1 is invalid"
 	fi
 	
 	commands="$1"
@@ -1711,14 +1700,14 @@ cmake_eval () {
 	if [ -n "$variables" ]; then
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/cmake_eval.cmake
 		if dk_file_exists "$DKCMAKE_DIR"/cmake_vars.sh; then
-	    	echo "executing cmake_vars.sh"
+	    	dk_info "executing cmake_vars.sh"
 			source "$DKCMAKE_DIR"/cmake_vars.sh
 			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/cmake_eval.cmake
 	fi
-	#echo return code: $?
+	#dk_debug return code: $?
 }
 
 
@@ -1730,7 +1719,7 @@ push_assets () {
 	dk_verbose "push_assets($*)"
 	
 	if ! dk_confirm; then return; fi
-	echo "not implemented,  TODO"
+	dk_error "not implemented,  TODO"
 }
 
 
@@ -1742,7 +1731,7 @@ pull_assets () {
 	dk_verbose "pull_assets($*)"
 	
 	if ! dk_confirm; then return; fi
-	echo "not implemented,  TODO"
+	dk_error "not implemented,  TODO"
 }
 
 
@@ -1757,11 +1746,11 @@ reset_all () {
 		clear
 		echo ""
 		echo ""
-		echo "Do you want to reset the entire local repository . . . ?"
-		echo "This will delete digitalknob, everything will be reset,"
-		echo "and the repository will be re-cloned. All libraries and tools"
-		echo "will be redownloaded and rebuild from start. Save any changes"
-		echo "you wish to commit or save beforehand."
+		dk_info "Do you want to reset the entire local repository . . . ?"
+		dk_info "This will delete digitalknob, everything will be reset,"
+		dk_info "and the repository will be re-cloned. All libraries and tools"
+		dk_info "will be redownloaded and rebuild from start. Save any changes"
+		dk_info "you wish to commit or save beforehand."
 		echo ""
 		
 		if ! dk_confirm; then return; fi
@@ -1769,14 +1758,16 @@ reset_all () {
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
 		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-			echo "WARNING: this file isn't running from the branch directory"
-			echo "Is must be in the branch directory to continue."
-			echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "${yellow}"
+			dk_echo "WARNING: this file isn't running from the branch directory"
+			dk_echo "Is must be in the branch directory to continue."
+			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "${clr}"			
 			print_var DKBRANCH_DIR
 			return $false;
 		fi
 		
-		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
 		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
 		exit
@@ -1791,16 +1782,15 @@ reset_all () {
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 		echo ""
-		echo "DELETING $DKBRANCH_DIR . . . ."
+		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
-		echo "done."
+		dk_info "done."
 		
 		# wait for the folders to get deleted
 		sleep 10
 
 		if dk_file_exists "$DKBRANCH_DIR"; then
-			echo "Oh no, the BRANCH folder is still there! :( "
-			exit 1
+			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
 		git_update NO_CONFIRM
@@ -1813,8 +1803,7 @@ reset_all () {
 			source "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
 			exit
 		else
-			echo "Oh no, the git cloned build.sh still isn't here! :( "
-			exit 1
+			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
 		fi
 	fi
 }
@@ -1830,10 +1819,10 @@ remove_all () {
 	if ! [ "$1" = "wipe" ]; then	
 		clear
 		echo ""
-		echo ""
-		echo "Do you want to remove the entire local repository . . . ?"
-		echo "This will delete digitalknob, Save any changes"
-		echo "you wish to commit or save beforehand."
+		echo ""	
+		dk_echo "Do you want to remove the entire local repository . . . ?"
+		dk_echo "This will delete digitalknob, Save any changes"
+		dk_echo "you wish to commit or save beforehand."		
 		echo ""
 		
 		if ! dk_confirm; then return; fi
@@ -1841,14 +1830,16 @@ remove_all () {
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
 		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-			echo "WARNING: this file isn't running from the branch directory"
-			echo "Is must be in the branch directory to continue."
-			echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "${yellow}"				
+			dk_echo "WARNING: this file isn't running from the branch directory"
+			dk_echo "Is must be in the branch directory to continue."
+			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "${clr}"			
 			print_var DKBRANCH_DIR
 			return 1;
 		fi
 		
-		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
 		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" remove_all wipe
 		exit
@@ -1863,15 +1854,15 @@ remove_all () {
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 		echo ""
-		echo "DELETING $DKBRANCH_DIR . . . ."
+		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
-		echo "done."
+		dk_info "done."
 		
 		# wait for the folders to get deleted
 		sleep 3
 		
 		if dk_file_exists "$DKBRANCH_DIR"; then
-			echo "Oh no, the BRANCH folder is still there! :( "
+			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi
 }
@@ -1885,7 +1876,7 @@ git_update () {
 	dk_verbose "git_update($*)"
 	
 	if ! [ "$1" = "NO_CONFIRM" ]; then
-		echo "Git Update? Any local changes will be lost."
+		dk_info "Git Update? Any local changes will be lost."
 		if ! dk_confirm; then return; fi
 	fi
 
@@ -1897,9 +1888,9 @@ git_update () {
 	dk_call "$GIT_EXE" checkout -- .
 	dk_call "$GIT_EXE" checkout "$DKBRANCH"
 	if [ "$?" = "0" ]; then
-		echo "$DKBRANCH branch selected"
+		dk_info "$DKBRANCH branch selected"
 	else
-	echo "Remote has no $DKBRANCH branch. Creating..."
+	dk_info "Remote has no $DKBRANCH branch. Creating..."
 		dk_call "$GIT_EXE" checkout -b "$DKBRANCH" main
 		dk_call "$GIT_EXE" push --set-upstream origin "$DKBRANCH"
 	fi
@@ -1914,7 +1905,7 @@ git_update () {
 git_commit () {	
 	dk_verbose "git_commit($*)"
 	
-	echo "Please enter some details about this commit, Then press ENTER."
+	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
 	
 	cd "$DKBRANCH_DIR" || dk_error "cd $$DKBRANCH_DIR failed!"
@@ -1924,29 +1915,29 @@ git_commit () {
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
 		echo ""
-		echo "git credential.helper is now set to store"
+		dk_info "git credential.helper is now set to store"
 		echo ""
 	fi
 	
 	USER_EMAIL=$($GIT_EXE config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
 		echo ""
-		echo "please enter an email address"
+		dk_info "please enter an email address"
 		read input
 		$GIT_EXE config --global user.email "$input"
 		echo ""
-		echo "git user.email '$input' saved"
+		dk_info "git user.email '$input' saved"
 		echo ""
 	fi
 
 	USER_NAME=$($GIT_EXE config --global user.name)
 	if [ -z "USER_NAME" ]; then
 		echo ""
-		echo "please enter a username"
+		dk_info "please enter a username"
 		read input
 		$GIT_EXE config --global user.name "$input"
 		echo ""
-		echo "git user.name '$input' saved"
+		dk_info "git user.name '$input' saved"
 		echo ""
 	fi
 	
@@ -1955,7 +1946,7 @@ git_commit () {
 	fi
 	
 	echo ""
-	echo "git commit \"${message}\""
+	dk_info "git commit \"${message}\""
 	if ! dk_confirm; then return; fi
 	
 	dk_call "$GIT_EXE" commit -a -m "${message}"
@@ -1970,7 +1961,7 @@ git_commit () {
 enter_manually () {
 	dk_verbose "enter_manually($*)"
 	
-	echo "Please type the name of the library, tool or app to build. Then press enter."
+	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
 	APP="_${input}_"
@@ -2034,28 +2025,28 @@ read_cache() {
 	echo "reading cache..."
 	count=0
 	while read p; do
-		if [ $count = 0 ]; then 
+		if [ "$count" = "0" ]; then 
 			_APP_=$(echo "$p" | tr -d '\r')
-			#print_var _APP_
+			#dk_debug "_APP_ = $_APP_"
 		fi
-		if [ $count = 1 ]; then
+		if [ "$count" = "1" ]; then
 			_TARGET_OS_=$(echo "$p" | tr -d '\r')
-			#print_var _TARGET_OS_
+			#dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
 		fi
-		if [ $count = 2 ]; then
+		if [ "$count" = "2" ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
-			#print_var _TYPE_
+			#dk_debug "_TYPE_ = $_TYPE_"
 		fi
-		#if [ $count = 3 ]; then
+		#if [ "$count" = "3" ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')
 		#fi
-		(( count++ ))
-		#( count=$count+1 )
-	done < "$DKBRANCH_DIR"/cache
+		#(( count++ ))						#FIXME:  NOT POSIX
+		( count=${count}+1 )
+	done < "${DKBRANCH_DIR}"/cache
 	
-	#print_var _APP_
-	#print_var _TARGET_OS_
-	#print_var _TYPE_
+	dk_debug "_APP_ = $_APP_"
+	dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
+	dk_debug "_TYPE_ = $_TYPE_" 
 }
 
 
@@ -2152,6 +2143,8 @@ get_host_triple () {
 	elif [ "$HOSTTYPE" = "x86_64" ]; then		# FIXME:  $HOSTTYPE not POSIX
 		HOST_ARCH="x86_64"
 	elif [ "$HOSTTYPE" = "aarch64" ]; then		# FIXME:  $HOSTTYPE not POSIX
+		HOST_ARCH="arm64"
+	elif [ "$(uname -m)" = "aarch64" ]; then
 		HOST_ARCH="arm64"
 	else
 		dk_error "Unknown HOST_ARCH"
