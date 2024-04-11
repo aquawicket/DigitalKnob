@@ -405,6 +405,7 @@ if(MAC)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
 	dk_disable(x265)
+	dk_disable(zstd)				# https://github.com/facebook/zstd/issues/3622
 endif(MAC)
 
 
