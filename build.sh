@@ -2098,6 +2098,8 @@ get_host_triple () {
 	#if [ "$MODEL" = "Raspberry"* ]; then		#							  [ .. ] can't match globs. Use [[ .. ]] or grep.
 	if dk_string_contains "$MODEL" "raspberry"; then
 		HOST_OS="raspberry"
+	elif [ "$OSTYPE" = "linux-android" ]; then	# FIXME:  $OSTYPE not POSIX
+		HOST_OS="android"
 	elif [ "$DKHOST" = "Linux" ]; then
 		HOST_OS="linux"
 	elif [ "$OSTYPE" = "linux-gnu"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
@@ -2105,8 +2107,6 @@ get_host_triple () {
 	#elif [ "$OSTYPE" = "darwin"* ]; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
 	elif dk_string_contains "$OSTYPE" "mac"; then
 		HOST_OS="mac"
-	elif [ "$OSTYPE" = "linux-android" ]; then	# FIXME:  $OSTYPE not POSIX
-		HOST_OS="android"
 	elif [ "$OSTYPE" = "msys" ]; then			# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
 	else
