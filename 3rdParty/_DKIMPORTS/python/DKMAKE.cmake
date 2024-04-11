@@ -8,6 +8,9 @@
 # https://sourceforge.net/projects/portable-python/
 # https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe/download
 
+# Uninstall
+# https://stackoverflow.com/a/3819829
+
 
 #WIN_HOST_dk_set	(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
 WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
@@ -27,6 +30,8 @@ endif()
 ###### PYTHON_EXE ######
 if(ANDROID_HOST)
 	dk_find_program(PYTHON_EXE python)
+elseif(MAC_HOST)
+	dk_find_program(PYTHON_EXE python /usr/local/bin)
 else()
 	dk_find_program(PYTHON_EXE python ${PYTHON})
 endif()
@@ -57,7 +62,9 @@ if(NOT EXISTS ${PYTHON_EXE})
 			dk_set(Python_LIBRARIES 	${PYTHON}/libs)
 		endif()
 	elseif(MAC_HOST)
-		dk_error("TODO: python install for MAC_HOST")
+		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
+		dk_command(sudo installer -pkg ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE} -target /)
+		#dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 	elseif(ANDROID_HOST)
 		dk_todo("python install for ANDROID_HOST")
 		dk_command(pkg install python)
@@ -73,6 +80,8 @@ endif()
 ## Try to find it after the install
 if(ANDROID_HOST)
 	dk_find_program(PYTHON_EXE python)
+elseif(MAC_HOST)
+	dk_find_program(PYTHON_EXE python /usr/local/bin)
 else ()
 	dk_find_program(PYTHON_EXE python ${PYTHON})
 endif ()
@@ -107,6 +116,19 @@ endif()
 
 
 
+### MAC UNINTALL ###
+# Remove the third-party Python 2.7 framework
+# sudo rm -rf /Library/Frameworks/Python.framework/Versions/2.7
+	
+# Remove the Python 2.7 applications directory
+# sudo rm -rf "/Applications/Python 2.7"
+
+# Remove the symbolic links	
+# ls -l /usr/local/bin | grep '../Library/Frameworks/Python.framework/Versions/2.7'
+	
+# remove all the links
+# cd /usr/local/bin/
+# ls -l /usr/local/bin | grep '../Library/Frameworks/Python.framework/Versions/2.7' | awk '{print $9}' | tr -d @ | xargs rm
 
 
 
