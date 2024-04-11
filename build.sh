@@ -215,28 +215,51 @@ main() {
 #
 pick_update() {
 	dk_verbose "pick_update($*)"
-	
 	read_cache
 	
 	echo ""
 	dk_check_remote
 	echo ""
 	
-	if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
-		echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+	if [ "$behind" = "0" ]; then
+		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
+			echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		fi
+		echo " 1) Git Update"   
+		echo " 2) Git Commit"
+		echo " 3) Push assets"
+		echo " 4) Pull assets"
+		echo " 5) Reset All"
+		echo " 6) Remove All"
+		echo " 7) Clear Screen"
+		echo " 8) Clear cmake cache and .tmp files"
+		echo " 9) Reload"
+		echo "10) Exit"
+		echo "" 
+		echo " Press Enter To Skip"
+	else
+		dk_warning "Your local repository is behind, please git update"
+		dk_echo ""
+		dk_echo "${red}" 
+		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
+			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		fi
+		dk_echo "${green}"
+		dk_echo " 1) Git Update"
+		dk_echo "${red}"  
+		dk_echo " 2) Git Commit"
+		dk_echo " 3) Push assets"
+		dk_echo " 4) Pull assets"
+		dk_echo " 5) Reset All"
+		dk_echo " 6) Remove All"
+		dk_echo " 7) Clear Screen"
+		dk_echo " 8) Clear cmake cache and .tmp files"
+		dk_echo " 9) Reload"
+		dk_echo "10) Exit"
+		dk_echo "" 
+		dk_echo "Press Enter To Skip"
+		dk_echo "${clr}"
 	fi
-    echo " 1) Git Update"
-    echo " 2) Git Commit"
-    echo " 3) Push assets"
-    echo " 4) Pull assets"
-    echo " 5) Reset All"
-	echo " 6) Remove All"
-    echo " 7) Clear Screen"
-    echo " 8) Clear cmake cache and .tmp files"
-    echo " 9) Reload"
-    echo "10) Exit"
-    echo "" 
-    echo " Press Enter To Skip"
 	
 	read input
 	if [ "$input" = "0" ]; then
@@ -864,8 +887,10 @@ dk_warning () {
 	#dk_verbose "dk_warning($*)"
 	
 	dk_echo "${yellow}WARNING: $1 ${clr}"
-	dk_stacktrace
-	if [ $HALT_ON_WARNINGS = 1 ]; then
+	if [ "$TRACE_ON_WARNINGS" = "1" ]; then
+		dk_stacktrace
+	fi
+	if [ "$HALT_ON_WARNINGS" = "1" ]; then
 		exit 1
 	fi
 }
