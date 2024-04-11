@@ -9,7 +9,7 @@
 #
 dk_debug() {
 	#echo "dk_debug($@)"
-	if [ $LOG_DEBUG == 1 ]; then 
+	if [ "$LOG_DEBUG" == "1" ]; then 
 		dk_load dk_color
 		echo -e "${blue} DEBUG: $1 ${clr}"
 	fi
