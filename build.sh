@@ -1023,9 +1023,14 @@ dk_string_contains () {
 	# https://stackoverflow.com/a/8811800/688352
 	string=$1
 	substring=$2
-	[ "${string#*"$substring"}" != "$string" ] && return $true
-	return $false;
+	[ "${string#*"$substring"}" != "$string" ]
+	#[ "${string#*"$substring"}" != "$string" ] && echo "${string} contains ${substring}" && return $true
+	#echo "${string} does not contain ${substring}"
+	#return $false;
+	
+	#[[ ${string} == *"${substring}"* ]]		# bash version
 }
+
 
 
 ##################################################################################

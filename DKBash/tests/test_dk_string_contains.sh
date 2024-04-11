@@ -9,9 +9,6 @@ export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P 
 . ${DKBASH_DIR}/functions/dk_error.sh
 . ${DKBASH_DIR}/functions/dk_print_var.sh
 
-
-
-
 echo ""
 echo ""
 echo ""
