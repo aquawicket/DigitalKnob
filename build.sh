@@ -894,10 +894,10 @@ dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
 	
     local i=1 line file func											# FIXME: n POSIX sh, 'local' is undefined.
-    #while read -r line func file < <(caller $i); do
-    #   echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
-    #   ((i++))
-    #done
+    while read -r line func file < <(caller $i); do
+       echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
+       ((i++))
+    done
 }
 
 
@@ -914,7 +914,7 @@ dk_defined () {
 	
 	var=$1
 	#! [ -z ${!var+x} ]				# BASH
-	eval value=\${"${var}"+x}			# POSIX
+	eval value=\${"${var}"+x}		# POSIX
 	if [ -z "$value" ]; then
 		#echo "$1 is NOT DEFINED"
 		return $false;
@@ -1310,6 +1310,8 @@ validate_cmake () {
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		elif [ "${HOST_OS}" = "raspberry" ]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		else
+			dk_error "no cmake for this OS"
 		fi
 		print_var CMAKE_EXE
 		
