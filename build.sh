@@ -1277,15 +1277,15 @@ validate_cmake () {
 		print_var CMAKE_EXE
 	else
 		echo "Installing DK CMake packages"
-		## New method of obtaining cmake
 		######################################################################################################
-		if [ "${HOST_TRIPLE}" = "win_arm32" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-		if [ "${HOST_TRIPLE}" = "win_arm64" ];		then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-		if [ "${HOST_TRIPLE}" = "win_x86" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-		if [ "${HOST_TRIPLE}" = "win_x86_64" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
-		if [ "${HOST_OS}" = "mac" ];				then CMAKE_DL=$CMAKE_DL_MAC;			fi
-		if [ "${HOST_TRIPLE}" = "linux_x86_64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-		if [ "${HOST_TRIPLE}" = "linux_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [ "${HOST_TRIPLE}" = "win_arm32" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+		if [ "${HOST_TRIPLE}" = "win_arm64" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+		if [ "${HOST_TRIPLE}" = "win_x86" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+		if [ "${HOST_TRIPLE}" = "win_x86_64" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+		if [ "${HOST_OS}" = "mac" ];					then CMAKE_DL=$CMAKE_DL_MAC;			fi
+		if [ "${HOST_TRIPLE}" = "linux_x86_64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+		if [ "${HOST_TRIPLE}" = "linux_arm64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [ "${HOST_TRIPLE}" = "raspberry_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		print_var CMAKE_DL
 		
 		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
@@ -1297,7 +1297,6 @@ validate_cmake () {
 		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
-		#print_var CMAKE_FOLDER
 		
 		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		convert_to_lowercase "$CMAKE_FOLDER" CMAKE_FOLDER
@@ -1308,6 +1307,8 @@ validate_cmake () {
 		elif [ "${HOST_OS}" = "mac" ]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
 		elif [ "${HOST_OS}" = "linux" ]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		elif [ "${HOST_OS}" = "raspberry" ]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		fi
 		print_var CMAKE_EXE
