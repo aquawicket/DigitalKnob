@@ -2101,18 +2101,18 @@ get_host_triple () {
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	#if [ "$MODEL" = "Raspberry"* ]; then		#							  [ .. ] can't match globs. Use [[ .. ]] or grep.
-	if dk_string_contains "$MODEL" "raspberry"; then
+	if dk_string_contains "$MODEL" "Raspberry"; then
 		HOST_OS="raspberry"
-	elif [ "$OSTYPE" = "linux-android" ]; then			# FIXME:  $OSTYPE not POSIX
+	elif [ "$OSTYPE" = "linux-android" ]; then				# FIXME:  $OSTYPE not POSIX
 		HOST_OS="android"
 	elif [ "$DKHOST" = "Linux" ]; then
 		HOST_OS="linux"
-	elif dk_string_contains "$OSTYPE" "linux-gnu"; then	# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.	
+	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.	
 		HOST_OS="linux"
 	#elif [ "$OSTYPE" = "darwin"* ]; then				
-	elif dk_string_contains "$OSTYPE" "mac"; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
+	elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX   [ .. ] can't match globs. Use [[ .. ]] or grep.
 		HOST_OS="mac"
-	elif [ "$OSTYPE" = "msys" ]; then					# FIXME:  $OSTYPE not POSIX
+	elif [ "$OSTYPE" = "msys" ]; then						# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
 	else
 		dk_error "Unknown HOST_OS"
