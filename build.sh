@@ -64,6 +64,11 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 main() {
+	#TEST="HaPpY"
+	#dk_to_lower $TEST TEST
+	#dk_debug TEST
+	#exit
+
 	dk_verbose "main($*)"
 
 	dk_validate_sudo
@@ -1130,13 +1135,25 @@ dk_replace_all () {
 #
 dk_to_lower () {
 	dk_verbose "dk_to_lower($*)"
-	[ -z "$2" ] && dk_error "dk_to_lower($*): requires 2 parameters"
+	[ -z "$1" ] && dk_error "dk_to_lower($*): requires 2 parameters"
 	[ -n "$3" ] && dk_error "dk_to_lower($*): Too many parameters"
-
-	input=$1
+	
+	var=$1
+	if dk_defined ${var}; then 
+		eval input='$'{$var}
+	else
+		[ -z "$2" ] && dk_error "dk_to_lower($*): requires 2 parameters"
+		input="$var"
+	fi
+		
 	output=$(echo "$input" | tr '[:upper:]' '[:lower:]')
-	#dk_debug output
-	eval "$2=$output"
+	dk_debug "dk_to_lower($*): output = $output"
+	
+	if dk_defined ${var}; then
+		eval "$1=$output"
+	else
+		eval "$2=$output"
+	fi
 	#[ "$output" = "" ]
 }
 
@@ -2080,6 +2097,14 @@ dk_save_args () {
 	echo " "
 }
 
+##################################################################################
+# try(<args..>)
+#
+try() { 
+	#$@ >/dev/null 2>&1
+	$@ 2>&1
+}
+
 
 ##################################################################################
 # dk_get_host_triple(<input>)
@@ -2107,77 +2132,117 @@ dk_get_host_triple () {
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
-	CLANG_TRIPLE=$(clang -dumpmachine)
-	dk_debug CLANG_TRIPLE
+	if dk_command_exists clang; then  
+		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_debug CLANG_TRIPLE	
 
-	GCC_TRIPLE=$(gcc -dumpmachine)
-	dk_debug GCC_TRIPLE
+		remainder="$CLANG_TRIPLE"
+		CLANG_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug CLANG_ARCH
+		CLANG_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug CLANG_VENDOR
+		CLANG_OS="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug CLANG_OS
+		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug CLANG_ENV
 
-	BASH_Arch=$(bash -c "echo \$HOSTTYPE")
-	dk_debug BASH_Arch
-	BASH_Vendor=$(bash -c "echo \$VENDOR")
-	[ -z $BASH_Vendor ] && BASH_Vendor="unknown"
-	dk_debug BASH_Vendor
-	BASH_OS_Env=$(bash -c "echo \$OSTYPE")
-	dk_debug BASH_OS_Env
-	BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
-	dk_debug BASH_TRIPLE
-
-	UNAME="$(uname)"
-	dk_debug UNAME	
-	UNAME_a="$(uname -a)"
-	dk_debug UNAME_a
-	UNAME_s="$(uname -s)"
-	dk_debug UNAME_s
-	UNAME_n="$(uname -n)"
-	dk_debug UNAME_n
-	UNAME_r="$(uname -r)"
-	dk_debug UNAME_r
-	UNAME_v="$(uname -v)"
-	dk_debug UNAME_v
-	UNAME_m="$(uname -m)"
-	dk_debug UNAME_m
-	UNAME_p="$(uname -p)"
-	dk_debug UNAME_p
-	UNAME_i="$(uname -i)"
-	dk_debug UNAME_i
-	UNAME_o="$(uname -o)"
-	dk_debug UNAME_o
-
-
-	# ARCHITECTURE-VENDOR-OPERATING_SYSTEM
-	#		or
-	# ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT
-	# Arch
-	UNAME_Arch="$(uname -m)"
-	# SubArch	
-	UNAME_SubArch=""
-	# Vendor
-	if [ "$(uname -s)" = "Darwin" ]; then
-		UNAME_Vendor="-apple"
-	else
-		UNAME_Vendor="-unknown"
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$CLANG_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$CLANG_ARCH && dk_debug HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$CLANG_VENDOR && dk_debug HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$CLANG_OS && dk_debug HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$CLANG_ENV && dk_debug HOST_ENV
 	fi
-	# OS
-	if [ "$(uname -s)" = "Darwin" ]; then
-		UNAME_OS="-darwin$(uname -r)"
-	elif [ "$(uname -s)" = "Linux" ]; then
-		UNAME_OS="-linux"
-	else
-		UNAME_OS="-unknown"
+	if dk_command_exists gcc; then
+		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_debug GCC_TRIPLE
+
+		remainder="$GCC_TRIPLE"
+		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug GCC_ARCH
+		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug GCC_VENDOR
+		GCC_OS="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug GCC_OS
+		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug GCC_ENV
+
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$GCC_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$GCC_ARCH && dk_debug HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$GCC_VENDOR && dk_debug HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
 	fi
-	# Environment
-	if dk_string_contains "$(uname -o)" "GNU"; then
-		UNAME_Environment="-gnu"
-	elif dk_string_contains "$(uname -o)" "Android"; then
-		UNAME_Environment="-android" #FIXME: need abi number I.E. -android24
-	else
-		UNAME_Environment=""
+	if dk_command_exists bash; then
+		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
+		dk_debug BASH_TRIPLE
+
+		remainder="$BASH_TRIPLE"
+		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug BASH_ARCH
+		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug BASH_VENDOR
+		BASH_OS="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug BASH_OS
+		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_debug BASH_ENV
+
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$BASH_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$BASH_ARCH && dk_debug HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$BASH_VENDOR && dk_debug HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$BASH_OS && dk_debug HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$BASH_ENV && dk_debug HOST_ENV
+	fi	
+	
+	if dk_command_exists uname; then
+		
+		UNAME="$(try uname)" && dk_debug UNAME	
+		UNAME_a="$(try uname -a)" && dk_debug UNAME_a
+		UNAME_s="$(try uname -s)" && dk_debug UNAME_s
+		UNAME_n="$(try uname -n)" && dk_debug UNAME_n	
+		UNAME_r="$(try uname -r)" && dk_debug UNAME_r
+		UNAME_v="$(try uname -v)" && dk_debug UNAME_v
+		UNAME_m="$(try uname -m)" && dk_debug UNAME_m
+		UNAME_p="$(try uname -p)" && dk_debug UNAME_p
+		UNAME_i="$(try uname -i)" && dk_debug UNAME_i
+		UNAME_o="$(try uname -o)" && dk_debug UNAME_o
+		
+		UNAME_ARCH=$(try uname -m) && dk_to_lower UNAME_ARCH
+		UNAME_SUBARCH=""
+		
+		if [ "$(try uname -s)" = "Darwin" ]; then
+			UNAME_VENDOR="-apple"
+		else
+			UNAME_VENDOR="-unknown"
+		fi
+
+
+		if [ "$(try uname -s)" = "darwin" ]; then
+			UNAME_OS="-$(try uname -s)$(try uname -r)"
+		else
+			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
+		fi
+
+		#if $(try uname -o); then
+			if dk_string_contains "$(try uname -o)" "GNU"; then
+				UNAME_ENV="-gnu"
+			elif dk_string_contains "$(try uname -o)" "Android"; then
+				UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
+			else
+				UNAME_ENV=""
+			fi
+		#fi
+
+		#UNAME_ObjectFormat=""
+
+		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
+		#dk_to_lower "${UNAME_TRIPLE}" UNAME_TRIPLE
+		dk_debug UNAME_TRIPLE
+
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_debug HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_debug HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_debug HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_debug HOST_ENV
 	fi
-	#UNAME_ObjectFormat=""
-	UNAME_TRIPLE=${UNAME_Arch}${UNAME_SubArch}${UNAME_Vendor}${UNAME_OS}${UNAME_Environment}
-	dk_to_lower "${UNAME_TRIPLE}" UNAME_TRIPLE
-	dk_debug UNAME_TRIPLE
+	
 
 
 	### Get the HOST_OS ###
