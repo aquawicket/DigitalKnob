@@ -800,14 +800,16 @@ dk_build () {
 #
 dk_echo () {
 	#echo "dk_echo($*)"
-	#[ -z "$1" ] && dk_error "dk_echo($*): requires at least 1 parameter"
 
-	shell_type=$(basename $(readlink /proc/$$/exe))
-	#dk_debug "shell_type = $shell_type"
+	[ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
+	[ "$SHELL" = "/bin/zsh" ] && shell_type="zsh" 
+	#echo "shell_type = $shell_type"
 
 	if [ "$shell_type" = "sh" ]; then  
 		echo "$1"
 	elif [ "$shell_type" = "dash" ]; then
+		echo "$1"
+	elif [ "$shell_type" = "zsh" ]; then
 		echo "$1"
 	else	
 		echo -e "$1"
