@@ -47,16 +47,16 @@ magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
 
-CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip
-CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip
-CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip
-CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz
-#CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz
-CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
-CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz
+CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-windows-i386.zip
+CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-windows-x86_64.zip
+CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-windows-arm64.zip
+CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz
+#CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz
+CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz
+CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/dk_download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz
 
-GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
-GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
+GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
+GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
 
 ##################################################################################
@@ -78,60 +78,59 @@ main() {
 	#exec |& tee file.log 
 
 	DKUNAME=$(uname -a)
-	print_var DKUNAME
+	dk_debug DKUNAME
 	DKHOST=$(uname -s)
-	print_var DKHOST
+	dk_debug DKHOST
 	DKARCH=$(uname -m)
-	print_var DKARCH
+	dk_debug DKARCH
 	DKVERSION=$(uname -v)
-	print_var DKVERSION
+	dk_debug DKVERSION
 	DKOSTYPE=$OSTYPE
-	print_var DKOSTYPE
+	dk_debug DKOSTYPE
 	#[ -e /proc/cpuinfo ] && DKCPUINFO=$(tr -d '\0' </proc/cpuinfo)
-	#print_var DKCPUINFO
+	#dk_debug DKCPUINFO
 	[ -e /proc/device-tree/model ] && DKMODEL=$(tr -d '\0' </proc/device-tree/model)
-	print_var DKMODEL
+	dk_debug DKMODEL
 	DKMACHTYPE=$MACHTYPE
-	print_var DKMACHTYPE
+	dk_debug DKMACHTYPE
 	DKLANG=$LANG
-	print_var DKLANG
+	dk_debug DKLANG
 	if [ -n "$USER" ]; then
 		DKUSERNAME=$USER
 	elif [ -n "$USERNAME" ]; then
 		DKUSERNAME=$USERNAME
 	fi
-	print_var DKUSERNAME
+	dk_debug DKUSERNAME
 	DKLOGNAME=$LOGNAME
-	print_var DKLOGNAME
+	dk_debug DKLOGNAME
 	DKHOME=$HOME
-	print_var DKHOME
+	dk_debug DKHOME
 	DKPREFIX=$PREFIX
-	print_var DKPREFIX
+	dk_debug DKPREFIX
 	DKTERM=$TERM
-	print_var DKTERM
+	dk_debug DKTERM
 	DKSHELL=$SHELL
-	print_var DKSHELL
+	dk_debug DKSHELL
 	DKPATH=$PATH
-	print_var DKPATH
+	dk_debug DKPATH
 	DKPWD=$PWD
-	print_var DKPWD
+	dk_debug DKPWD
 	
-	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
-	print_var HOSTNAME
-	print_var HOSTTYPE
-	print_var MACHTYPE
+	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
+	dk_debug HOSTNAME
+	dk_debug HOSTTYPE
+	dk_debug MACHTYPE
 	[ -e /proc/device-tree/model ] && MODEL=$(tr -d '\0' </proc/device-tree/model)
-	print_var MODEL
-	print_var MSYSTEM
-	print_var OSTYPE
-	print_var SCRIPT_NAME
-	print_var SCRIPT_DIR
-	print_var USER
-	print_var USERNAME
+	dk_debug MODEL
+	dk_debug MSYSTEM
+	dk_debug OSTYPE
+	dk_debug SCRIPT_NAME
+	dk_debug SCRIPT_DIR
+	dk_debug USER
+	dk_debug USERNAME
 	
 	## Get the HOST_TRIPLE and other HOST variables
-	get_host_triple || dk_error "Could not determine HOST_TRIPLE"
-	
+	dk_get_host_triple || dk_error "Could not determine HOST_TRIPLE"
 	
 	if [ -n "$USERPROFILE" ]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
@@ -143,30 +142,29 @@ main() {
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	mkdir -p "$DIGITALKNOB_DIR";
-	print_var DIGITALKNOB_DIR
+	dk_debug DIGITALKNOB_DIR
 
-	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
+	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/dk_download"
 	mkdir -p "$DKDOWNLOAD_DIR";
-	print_var DKDOWNLOAD_DIR
+	dk_debug DKDOWNLOAD_DIR
 	
 	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
 	mkdir -p "$DKTOOLS_DIR";
-	print_var DKTOOLS_DIR
+	dk_debug DKTOOLS_DIR
 
 	if [ "$OSTYPE" = "darwin"* ]; then
-		validate_homebrew
+		dk_validate_homebrew
 	fi
 
-	#validate_cmake
-	validate_git
-	validate_branch
+	dk_validate_git
+	dk_validate_branch
 
-	print_var DKBRANCH_DIR
-	print_var DKAPPS_DIR
-	print_var DKCMAKE_DIR
-	print_var DK3RDPARTY_DIR
-	print_var DKIMPORTS_DIR
-	print_var DKPLUGINS_DIR
+	dk_debug DKBRANCH_DIR
+	dk_debug DKAPPS_DIR
+	dk_debug DKCMAKE_DIR
+	dk_debug DK3RDPARTY_DIR
+	dk_debug DKIMPORTS_DIR
+	dk_debug DKPLUGINS_DIR
 
 	if [ ! "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 		dk_warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
@@ -176,27 +174,27 @@ main() {
 	
 	while :
 	do
-		if [ -z "$UPDATE" ]; then pick_update;	continue; fi
-		if [ -z "$APP" ]; then pick_app;		continue; fi
-		if [ -z "$TARGET_OS" ]; then pick_os;	continue; fi
-		if [ -z "$TYPE" ]; then pick_type;		continue; fi
+		if [ -z "$UPDATE" ]; then dk_pick_update;	continue; fi
+		if [ -z "$APP" ]; then dk_pick_app;		continue; fi
+		if [ -z "$TARGET_OS" ]; then dk_pick_os;	continue; fi
+		if [ -z "$TYPE" ]; then dk_pick_type;		continue; fi
 		
-		create_cache
+		dk_create_cache
 		
-		generate
-		#if [ "$TARGET_OS" = "android_arm32" ]     generate_toolchain android_arm32_toolchain
-		#if [ "$TARGET_OS" = "android_arm64" ]     generate_toolchain android_arm64_toolchain
-		#if [ "$TARGET_OS" = "emscripten" ]        generate_toolchain emscripten_toolchain
-		#if [ "$TARGET_OS" = "win_arm64_clang" ]   generate_toolchain windows_arm64_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_mingw" ]     generate_toolchain windows_x86_mingw_toolchain
-		#if [ "$TARGET_OS" = "win_x86_clang" ]     generate_toolchain windows_x86_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_msvc" ]      generate_toolchain windows_x86_msvc_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_mingw" ]  generate_toolchain windows_x86_64_mingw_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_clang" ]  generate_toolchain windows_x86_64_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_ucrt" ]   generate_toolchain windows_x86_64_ucrt_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_msvc" ]   generate_toolchain windows_x86_64_msvc_toolchain
+		dk_generate
+		#if [ "$TARGET_OS" = "android_arm32" ]     dk_generate_toolchain android_arm32_toolchain
+		#if [ "$TARGET_OS" = "android_arm64" ]     dk_generate_toolchain android_arm64_toolchain
+		#if [ "$TARGET_OS" = "emscripten" ]        dk_generate_toolchain emscripten_toolchain
+		#if [ "$TARGET_OS" = "win_arm64_clang" ]   dk_generate_toolchain windows_arm64_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_mingw" ]     dk_generate_toolchain windows_x86_mingw_toolchain
+		#if [ "$TARGET_OS" = "win_x86_clang" ]     dk_generate_toolchain windows_x86_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_msvc" ]      dk_generate_toolchain windows_x86_msvc_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_mingw" ]  dk_generate_toolchain windows_x86_64_mingw_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_clang" ]  dk_generate_toolchain windows_x86_64_clang_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_ucrt" ]   dk_generate_toolchain windows_x86_64_ucrt_toolchain
+		#if [ "$TARGET_OS" = "win_x86_64_msvc" ]   dk_generate_toolchain windows_x86_64_msvc_toolchain
 		
-		build
+		dk_build
 		
 		unset UPDATE
 		unset APP
@@ -207,12 +205,12 @@ main() {
 
 
 ##################################################################################
-# pick_update()
+# dk_pick_update()
 #
 #
-pick_update() {
-	dk_verbose "pick_update($*)"
-	read_cache
+dk_pick_update() {
+	dk_verbose "dk_pick_update($*)"
+	dk_read_cache
 	
 	echo ""
 	dk_check_remote
@@ -270,22 +268,22 @@ pick_update() {
 		TYPE=$_TYPE_
 		UPDATE=1
 	elif [ "$input" = "1" ]; then
-		git_update
+		dk_git_update
 	elif [ "$input" = "2" ]; then
-		git_commit
+		dk_git_commit
 	elif [ "$input" = "3" ]; then
-		push_assets
+		dk_push_assets
 	elif [ "$input" = "4" ]; then
-		pull_assets
+		dk_pull_assets
 	elif [ "$input" = "5" ]; then
-		reset_all
+		dk_reset_all
 	elif [ "$input" = "6" ]; then
-		remove_all
+		dk_remove_all
 	elif [ "$input" = "7" ]; then
 		clear
 	elif [ "$input" = "8" ]; then
-		clear_cmake_cache
-		delete_temp_files
+		dk_clear_cmake_cache
+		dk_delete_temp_files
 	elif [ "$input" = "9" ]; then
 		dk_reload
 	elif [ "$input" = "10" ]; then
@@ -299,11 +297,11 @@ pick_update() {
 
 
 ##################################################################################
-# pick_app()
+# dk_pick_app()
 #
 #
-pick_app() {
-	dk_verbose "pick_app($*)"
+dk_pick_app() {
+	dk_verbose "dk_pick_app($*)"
 	
 	echo ""
 	dk_echo "${APP}  ${TARGET_OS} ${TYPE}"
@@ -339,7 +337,7 @@ pick_app() {
 	elif [ "$input" = "7" ]; then
 		APP="DKTestAll"
 	elif [ "$input" = "8" ]; then
-		enter_manually
+		dk_enter_manually
 	elif [ "$input" = "9" ]; then
 		clear
 	elif [ "$input" = "10" ]; then
@@ -355,11 +353,11 @@ pick_app() {
 
 
 ##################################################################################
-# pick_os()
+# dk_pick_os()
 #
 #
-pick_os() {
-	dk_verbose "pick_os($*)"
+dk_pick_os() {
+	dk_verbose "dk_pick_os($*)"
 	
 	echo ""
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
@@ -490,11 +488,11 @@ pick_os() {
 
 
 ##################################################################################
-# pick_type()
+# dk_pick_type()
 #
 #
-pick_type() {
-	dk_verbose "pick_type($*)"
+dk_pick_type() {
+	dk_verbose "dk_pick_type($*)"
 	
 	echo ""
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
@@ -528,24 +526,24 @@ pick_type() {
 
 
 ##################################################################################
-# add_cmake_arg(<string>)
+# dk_add_cmake_arg(<string>)
 #
 #
-#add_cmake_arg() {
-#	dk_verbose "add_cmake_arg($*)"
+#dk_add_cmake_arg() {
+#	dk_verbose "dk_add_cmake_arg($*)"
 #
-#   if [ "$*" = "" ]; then dk_error "add_cmake_arg is empty!" & return 1
+#   if [ "$*" = "" ]; then dk_error "dk_add_cmake_arg is empty!" & return 1
 #    dk_echo added $*
 #    CMAKE_ARGS+=( "%*" )
 #}
 
 
 ##################################################################################
-# generate(<toolchain>)
+# dk_generate(<toolchain>)
 #
 #
-generate() {
-	dk_verbose "generate($*)"
+dk_generate() {
+	dk_verbose "dk_generate($*)"
 	
 	echo ""
 	dk_echo "##################################################################"
@@ -553,21 +551,21 @@ generate() {
 	dk_echo "##################################################################"
 	echo ""
 
-	clear_cmake_cache
-	delete_temp_files
+	dk_clear_cmake_cache
+	dk_delete_temp_files
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
-	print_var TARGET_PATH
+	dk_debug TARGET_PATH
 	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
 	cd "$TARGET_PATH"/"$TARGET_OS" || dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
-	print_var CMAKE_SOURCE_DIR
+	dk_debug CMAKE_SOURCE_DIR
 	if ! dk_file_exists "$CMAKE_SOURCE_DIR"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
-	print_var CMAKE_SOURCE_DIR
+	dk_debug CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
-	print_var CMAKE_TARGET_PATH
+	dk_debug CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	DKLEVEL="RebuildAll"
@@ -615,7 +613,7 @@ generate() {
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
-	print_var CMAKE_BINARY_DIR
+	dk_debug CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
 		#CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
@@ -640,7 +638,6 @@ generate() {
 	#CMAKE_ARGS+=( "--warn-uninitialized" )
 	#CMAKE_ARGS+=( "--warn-unused-vars" )
 	#CMAKE_ARGS+=( "--check-system-vars" )
-
 	
 	if [ "$TARGET_OS" = "android_arm32" ]; then
 		#CMAKE_ARGS+=( "-G Unix Makefiles" )
@@ -720,7 +717,7 @@ generate() {
 	fi
 		
 	#### CMAKE CALL ####
-	validate_cmake
+	dk_validate_cmake
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists "$TOOLCHAIN"; then
@@ -740,11 +737,11 @@ generate() {
 
 
 ##################################################################################
-# generate_toolchain(<toolchain>)
+# dk_generate_toolchain(<toolchain>)
 #
 #
-#generate_toolchain() {
-#	dk_verbose "generate_toolchain($*)"
+#dk_generate_toolchain() {
+#	dk_verbose "dk_generate_toolchain($*)"
 #
 #	toolchain=$1
 #	
@@ -773,11 +770,11 @@ generate() {
 	
 
 ##################################################################################
-# build()
+# dk_build()
 #
 #
-build () {
-	dk_verbose "build($*)"
+dk_build () {
+	dk_verbose "dk_build($*)"
 	
 	echo ""
 	dk_echo "##################################################################"
@@ -813,7 +810,7 @@ build () {
 
 
 ##################################################################################
-# dk_echo(<variable>)
+# dk_require(<variable>)
 #
 #
 dk_require () {
@@ -867,10 +864,9 @@ dk_verbose () {
 #
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
+	[ ! "$LOG_DEBUG" = "1" ] && return 0
 	
-	if [ "$LOG_DEBUG" = "1" ]; then 
-		dk_echo "${blue}  DEBUG: $1 ${clr}"
-	fi
+	dk_echo "${blue}  DEBUG: $1 ${clr}"
 }
 
 
@@ -1154,11 +1150,11 @@ dk_replace_all () {
 
 
 ##################################################################################
-# convert_to_lowercase(<input> <output>)
+# dk_convert_to_lowercase(<input> <output>)
 #
 #
-convert_to_lowercase () {
-	dk_verbose "convert_to_lowercase($*)"
+dk_convert_to_lowercase () {
+	dk_verbose "dk_convert_to_lowercase($*)"
 	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -1173,11 +1169,11 @@ convert_to_lowercase () {
 
 
 ##################################################################################
-# download(<url> <destination>)
+# dk_download(<url> <destination>)
 #
 #
-download () {
-	dk_verbose "download($*)"
+dk_download () {
+	dk_verbose "dk_download($*)"
 	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -1185,7 +1181,7 @@ download () {
 	fi
 	
 	if dk_file_exists "$2"; then
-		dk_warning "download(): $2 already exists"
+		dk_warning "dk_download(): $2 already exists"
 		return 0
 	fi
 	dk_info "Downloading $1 . . ."
@@ -1200,14 +1196,14 @@ download () {
 
 
 ##################################################################################
-# extract(<file> <destination>)
+# dk_extract(<file> <destination>)
 #
 #
-extract () {
-	dk_verbose "extract($*)"
+dk_extract () {
+	dk_verbose "dk_extract($*)"
 	
 	if [ -z "$2" ]; then
-		dk_error "extract <input> <output> requires 2 parameters"
+		dk_error "dk_extract <input> <output> requires 2 parameters"
 		return $false
 	fi
 
@@ -1215,10 +1211,10 @@ extract () {
 	destFolder="${filename%.*}"
 	destFolder="${destFolder%.*}"
 	fulldest="$2/$destFolder"
-	print_var fulldest
+	dk_debug fulldest
 		
 	#if dk_file_exists $fulldest; then
-	#	dk_warning "extract(): $fulldest already exists"
+	#	dk_warning "dk_extract(): $fulldest already exists"
 	#	return 0
 	#fi
 	dk_info "Extracting $1 . . ."
@@ -1232,10 +1228,10 @@ extract () {
 	tar -xf "$filename" -C "$2"
 	cd "$oldpwd" || dk_error "cd $$oldpwd failed!"
 	dk_convert_to_c_identifier "$destFolder" destFolder_
-	print_var destFolder_
+	dk_debug destFolder_
 	mv "$2"/"$destFolder" "$2"/"$destFolder_"
 
-	#echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/installed
+	#echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/dk_installed
 
 	#TODO
 	#[ "$input" = "" ]
@@ -1243,11 +1239,11 @@ extract () {
 
 
 ##################################################################################
-# rename(<from> <to>)
+# dk_rename(<from> <to>)
 #
 #
-rename () {
-	dk_verbose "rename($*)"
+dk_rename () {
+	dk_verbose "dk_rename($*)"
 	
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
@@ -1260,11 +1256,11 @@ rename () {
 
 
 ##################################################################################
-# validate_cmake()
+# dk_validate_cmake()
 #
 #
-validate_cmake () {
-	dk_verbose "validate_cmake($*)"
+dk_validate_cmake () {
+	dk_verbose "dk_validate_cmake($*)"
 	
 	if [ "$HOST_OS" = "android" ]; then
 		CMAKE_SYSTEM_INSTALL=1
@@ -1272,26 +1268,26 @@ validate_cmake () {
 	if [ "$CMAKE_SYSTEM_INSTALL" = "1" ]; then
 		dk_info "Installing CMake System packages"
 		CMAKE_EXE=$(command -v cmake)
-		print_var CMAKE_EXE
+		dk_debug CMAKE_EXE
 		if ! dk_command_exists cmake; then
 			if [ "$MSYSTEM" = "CLANG32" ]; then
-				install mingw-w64-clang-i686-cmake
+				dk_install mingw-w64-clang-i686-cmake
 			elif [ "$MSYSTEM" = "CLANG64" ]; then
-				install mingw-w64-clang-x86_64-cmake
+				dk_install mingw-w64-clang-x86_64-cmake
 			elif [ "$MSYSTEM" = "CLANGARM64" ]; then
-				install mingw-w64-clang-aarch64-cmake
+				dk_install mingw-w64-clang-aarch64-cmake
 			elif [ "$MSYSTEM" = "MINGW32" ]; then
-				install mingw-w64-i686-cmake
+				dk_install mingw-w64-i686-cmake
 			elif [ "$MSYSTEM" = "MINGW64" ]; then
-				install mingw-w64-x86_64-cmake
+				dk_install mingw-w64-x86_64-cmake
 			elif [ "$MSYSTEM" = "UCRT64" ]; then
-				install mingw-w64-ucrt-x86_64-cmake
+				dk_install mingw-w64-ucrt-x86_64-cmake
 			else
-				install cmake
+				dk_install cmake
 			fi
 		fi	
 		CMAKE_EXE=$(command -v cmake)
-		print_var CMAKE_EXE
+		dk_debug CMAKE_EXE
 	else
 		dk_info "Installing DK CMake packages"
 		######################################################################################################
@@ -1303,21 +1299,21 @@ validate_cmake () {
 		if [ "${HOST_TRIPLE}" = "linux_x86_64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
 		if [ "${HOST_TRIPLE}" = "linux_arm64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		if [ "${HOST_TRIPLE}" = "raspberry_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
-		print_var CMAKE_DL
+		dk_debug CMAKE_DL
 		
 		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
-		print_var CMAKE_DL_FILE
+		dk_debug CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
-		print_var CMAKE_FOLDER
+		dk_debug CMAKE_FOLDER
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
 		
 		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		convert_to_lowercase "$CMAKE_FOLDER" CMAKE_FOLDER
-		print_var CMAKE_FOLDER
+		dk_convert_to_lowercase "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_debug CMAKE_FOLDER
 		
 		if [ "${HOST_OS}" = "win" ]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
@@ -1330,14 +1326,14 @@ validate_cmake () {
 		else
 			dk_error "no cmake for this OS"
 		fi
-		print_var CMAKE_EXE
+		dk_debug CMAKE_EXE
 		
 		if dk_file_exists "$CMAKE_EXE"; then return $true; fi
 
 		echo ""   
 		dk_info "Installing cmake . . ."
-		download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
-		extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
+		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
+		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
 		
 		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 	fi
@@ -1345,54 +1341,54 @@ validate_cmake () {
 
 
 ##################################################################################
-# validate_git()
+# dk_validate_git()
 #
 #
-validate_git () {
-	dk_verbose "validate_git($*)"
+dk_validate_git () {
+	dk_verbose "dk_validate_git($*)"
 	
 	if ! dk_command_exists git; then
-		install git
+		dk_install git
 	fi
 	
 	GIT_EXE=$(command -v git)
-	print_var GIT_EXE
+	dk_debug GIT_EXE
 }
 
 
 ##################################################################################
-# validate_homebrew()
+# dk_validate_homebrew()
 #
 #
-validate_homebrew () {
-	dk_verbose "validate_homebrew($*)"
+dk_validate_homebrew () {
+	dk_verbose "dk_validate_homebrew($*)"
 	
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
 	fi
 		
 	if ! dk_command_exists brew; then
-		dk_info "installing Homebrew"
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		dk_info "dk_installing Homebrew"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/dk_install/master/dk_install)"
 		# https://github.com/Homebrew/brew/issues/10368
 		rm -fr $(brew --repo homebrew/core)
 		brew tap homebrew/core
 	fi
 	
 	BREW=$(command -v brew)
-	print_var BREW
+	dk_debug BREW
 }
 
 
 ##################################################################################
-# package_installed(<package>)
+# dk_package_installed(<package>)
 #
 #
-package_installed () {
-	dk_verbose "package_installed($*)"
+dk_package_installed () {
+	dk_verbose "dk_package_installed($*)"
 	
 	if dk_command_exists dpkg-query; then
-		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
+		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
 			return $true
 		fi
 	elif dk_command_exists brew; then
@@ -1400,18 +1396,18 @@ package_installed () {
 			return $true
 		fi
 	elif dk_command_exists apt; then
-		dk_error "package_installed() apt-get not implemented"
+		dk_error "dk_package_installed() apt-get not implemented"
 	elif dk_command_exists apt-get; then
-		dk_error "package_installed() apt-get not implemented"
+		dk_error "dk_package_installed() apt-get not implemented"
 	elif dk_command_exists pkg; then
-		dk_error "package_installed() pkg not implemented"
+		dk_error "dk_package_installed() pkg not implemented"
 	elif dk_command_exists pacman; then
 		if pacman -Qs "$1" > /dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
 	elif dk_command_exists tce-load; then
-		#dk_error "package_installed() tce-load not implemented"
+		#dk_error "dk_package_installed() tce-load not implemented"
 		return $false
 	else
 		dk_error "ERROR: no package managers found"
@@ -1421,28 +1417,28 @@ package_installed () {
 
 
 ##################################################################################
-# install(<package>)
+# dk_install(<package>)
 #
 #
-install () {
-	dk_verbose "install($*)"
+dk_install () {
+	dk_verbose "dk_install($*)"
 	
-	#if package_installed $1; then
-	#	dk_warning "$1 already installed"
+	#if dk_package_installed $1; then
+	#	dk_warning "$1 already dk_installed"
 	#	return $false;
 	#fi
 	
-	dk_info "installing $1"
+	dk_info "dk_installing $1"
 
 	if dk_command_exists brew; then
-		dk_call "$SUDO" brew install "$1"
+		dk_call "$SUDO" brew dk_install "$1"
 	elif dk_command_exists apt; then
-		dk_call "$SUDO" apt -y install "$1"
+		dk_call "$SUDO" apt -y dk_install "$1"
 	elif dk_command_exists apt-get; then
 		dk_info "found apt-get"
-		dk_call "$SUDO" apt-get -y install "$1"
+		dk_call "$SUDO" apt-get -y dk_install "$1"
 	elif dk_command_exists pkg; then
-		dk_call "$SUDO" pkg install "$1"
+		dk_call "$SUDO" pkg dk_install "$1"
 	elif dk_command_exists pacman; then
 		dk_call "$SUDO" pacman -S "$1" --noconfirm
 	elif dk_command_exists tce-load; then
@@ -1454,24 +1450,24 @@ install () {
 
 
 ##################################################################################
-# validate_package(<command> <package>)
+# dk_validate_package(<command> <package>)
 #
 #
-validate_package () {
-	dk_verbose "validate_package($*)"
+dk_validate_package () {
+	dk_verbose "dk_validate_package($*)"
 	
 	if ! dk_command_exists "$1"; then
-		install "$2"
+		dk_install "$2"
 	fi
 }
 
 
 ##################################################################################
-# validate_ostype()
+# dk_validate_ostype()
 #
 #
-validate_ostype () {
-	dk_verbose "validate_ostype($*)"
+dk_validate_ostype () {
+	dk_verbose "dk_validate_ostype($*)"
 	
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -1498,11 +1494,11 @@ validate_ostype () {
 
 
 ##################################################################################
-# validate_branch()
+# dk_validate_branch()
 #
 #
-validate_branch () {
-	dk_verbose "validate_branch($*)"
+dk_validate_branch () {
+	dk_verbose "dk_validate_branch($*)"
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -1515,25 +1511,25 @@ validate_branch () {
 			DKBRANCH="$FOLDER"
 		fi
 	fi
-	print_var DKBRANCH
+	dk_debug DKBRANCH
 	
 	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
-	print_var  DKBRANCH_DIR
+	dk_debug  DKBRANCH_DIR
 	
 	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
-	print_var  DKCMAKE_DIR
+	dk_debug  DKCMAKE_DIR
 	
 	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
-	print_var DK3RDPARTY_DIR
+	dk_debug DK3RDPARTY_DIR
 	
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
-	print_var DKIMPORTS_DIR
+	dk_debug DKIMPORTS_DIR
 	
 	DKAPPS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKApps"
-	print_var DKAPPS_DIR
+	dk_debug DKAPPS_DIR
 	
 	DKPLUGINS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKPlugins"
-	print_var DKPLUGINS_DIR
+	dk_debug DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
@@ -1566,11 +1562,11 @@ dk_wait_for_key () {
 
 
 ##################################################################################
-# clear_cmake_cache()
+# dk_clear_cmake_cache()
 #
 #
-clear_cmake_cache () {
-	dk_verbose "clear_cmake_cache($*)"
+dk_clear_cmake_cache () {
+	dk_verbose "dk_clear_cmake_cache($*)"
 	
 	dk_info "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1580,11 +1576,11 @@ clear_cmake_cache () {
 
 
 ##################################################################################
-# delete_temp_files()
+# dk_delete_temp_files()
 #
 #
-delete_temp_files () {
-	dk_verbose "delete_temp_files($*)"
+dk_delete_temp_files () {
+	dk_verbose "dk_delete_temp_files($*)"
 	
 	dk_info "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1596,127 +1592,127 @@ delete_temp_files () {
 
 
 ##################################################################################
-# validate_msys2()
+# dk_validate_msys2()
 #
 #
-#validate_msys2 () {
-#	dk_verbose "validate_msys2($*)"
+#dk_validate_msys2 () {
+#	dk_verbose "dk_validate_msys2($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
-#	print_var MSYS2
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
+#	dk_debug MSYS2
 #}
 
 
 ##################################################################################
-# validate_make()
+# dk_validate_make()
 #
 #
-#validate_make () {
-#	dk_verbose "validate_make($*)"
+#dk_validate_make () {
+#	dk_verbose "dk_validate_make($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-#	print_var MAKE_PROGRAM
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+#	dk_debug MAKE_PROGRAM
 #}
 
 
 ##################################################################################
-# validate_emscripten()
+# dk_validate_emscripten()
 #
 #
-#validate_emscripten () {
-#	dk_verbose "validate_emscripten($*)"
+#dk_validate_emscripten () {
+#	dk_verbose "dk_validate_emscripten($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-#	print_var EMSDK
-#	print_var EMSDK_ENV
-#	print_var EMSDK_GENERATOR
-#	print_var EMSDK_TOOLCHAIN_FILE
-#	print_var EMSDK_C_COMPILER
-#	print_var EMSDK_CXX_COMPILER
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+#	dk_debug EMSDK
+#	dk_debug EMSDK_ENV
+#	dk_debug EMSDK_GENERATOR
+#	dk_debug EMSDK_TOOLCHAIN_FILE
+#	dk_debug EMSDK_C_COMPILER
+#	dk_debug EMSDK_CXX_COMPILER
 #}
 
 
 ##################################################################################
-# validate_android_ndk()
+# dk_validate_android_ndk()
 #
 #
-#validate_android_ndk () {
-#	dk_verbose "validate_android_ndk($*)"
+#dk_validate_android_ndk () {
+#	dk_verbose "dk_validate_android_ndk($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
-#	print_var ANDROID_NDK
-#	print_var ANDROID_GENERATOR
-#	print_var ANDROID_TOOLCHAIN_FILE
-#	print_var ANDROID_API
-#	print_var ANDROID_MAKE_PROGRAM
-#	print_var ANDROID_C_COMPILER
-#	print_var ANDROID_CXX_COMPILER
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+#	dk_debug ANDROID_NDK
+#	dk_debug ANDROID_GENERATOR
+#	dk_debug ANDROID_TOOLCHAIN_FILE
+#	dk_debug ANDROID_API
+#	dk_debug ANDROID_MAKE_PROGRAM
+#	dk_debug ANDROID_C_COMPILER
+#	dk_debug ANDROID_CXX_COMPILER
 #}
 
 
 ##################################################################################
-# validate_clang()
+# dk_validate_clang()
 #
 #
-#validate_clang () {
-#	dk_verbose "validate_clang($*)"
+#dk_validate_clang () {
+#	dk_verbose "dk_validate_clang($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-#	print_var CLANG_C_COMPILER
-#	print_var CLANG_CXX_COMPILER
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+#	dk_debug CLANG_C_COMPILER
+#	dk_debug CLANG_CXX_COMPILER
 #}
 
 
 ##################################################################################
-# validate_gcc()
+# dk_validate_gcc()
 #
 #
-#validate_gcc () {
-#	dk_verbose "validate_gcc($*)"
+#dk_validate_gcc () {
+#	dk_verbose "dk_validate_gcc($*)"
 #
-#	cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-#	print_var GCC_C_COMPILER
-#	print_var GCC_CXX_COMPILER
+#	dk_cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+#	dk_debug GCC_C_COMPILER
+#	dk_debug GCC_CXX_COMPILER
 #}
 
 
 ##################################################################################
-# cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 #
 #			
-cmake_eval () {
-	dk_verbose "cmake_eval($*)"
+dk_cmake_eval () {
+	dk_verbose "dk_cmake_eval($*)"
 	
 	if [ -z "$1" ]; then
-		dk_error "cmake_eval() parameter 1 is invalid"
+		dk_error "dk_cmake_eval() parameter 1 is invalid"
 	fi
 	
 	commands="$1"
 	variables="$2"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	print_var DKCOMMAND
+	dk_debug DKCOMMAND
 	
 	if [ -n "$variables" ]; then
-		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/cmake_eval.cmake
+		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmake_eval.cmake
 		if dk_file_exists "$DKCMAKE_DIR"/cmake_vars.sh; then
 	    	dk_info "executing cmake_vars.sh"
 			source "$DKCMAKE_DIR"/cmake_vars.sh
 			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
-		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/cmake_eval.cmake
+		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/dk_cmake_eval.cmake
 	fi
 	#dk_debug return code: $?
 }
 
 
 ##################################################################################
-# push_assets()
+# dk_push_assets()
 #
 #
-push_assets () {
-	dk_verbose "push_assets($*)"
+dk_push_assets () {
+	dk_verbose "dk_push_assets($*)"
 	
 	if ! dk_confirm; then return; fi
 	dk_error "not implemented,  TODO"
@@ -1724,11 +1720,11 @@ push_assets () {
 
 
 ##################################################################################
-# pull_assets()
+# dk_pull_assets()
 #
 #
-pull_assets () {
-	dk_verbose "pull_assets($*)"
+dk_pull_assets () {
+	dk_verbose "dk_pull_assets($*)"
 	
 	if ! dk_confirm; then return; fi
 	dk_error "not implemented,  TODO"
@@ -1736,11 +1732,11 @@ pull_assets () {
 
 
 ##################################################################################
-# reset_all()
+# dk_reset_all()
 #
 #
-reset_all () {
-	dk_verbose "reset_all($*)"
+dk_reset_all () {
+	dk_verbose "dk_reset_all($*)"
 	
 	if ! [ "$1" = "wipe" ]; then
 		clear
@@ -1749,7 +1745,7 @@ reset_all () {
 		dk_info "Do you want to reset the entire local repository . . . ?"
 		dk_info "This will delete digitalknob, everything will be reset,"
 		dk_info "and the repository will be re-cloned. All libraries and tools"
-		dk_info "will be redownloaded and rebuild from start. Save any changes"
+		dk_info "will be redk_downloaded and rebuild from start. Save any changes"
 		dk_info "you wish to commit or save beforehand."
 		echo ""
 		
@@ -1763,13 +1759,13 @@ reset_all () {
 			dk_echo "Is must be in the branch directory to continue."
 			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
 			dk_echo "${clr}"			
-			print_var DKBRANCH_DIR
+			dk_debug DKBRANCH_DIR
 			return $false;
 		fi
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" reset_all wipe
+		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_reset_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1777,7 +1773,7 @@ reset_all () {
 		
 		#do we need sudo rights?
 		#do we need to kill any processes?
-		#do we need to uninstall any apps?
+		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1793,7 +1789,7 @@ reset_all () {
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
-		git_update NO_CONFIRM
+		dk_git_update NO_CONFIRM
 		
 		# wait for build.sh to show up
 		sleep 2
@@ -1810,11 +1806,11 @@ reset_all () {
 
 
 ##################################################################################
-# remove_all()
+# dk_remove_all()
 #
 #
-remove_all () {
-	dk_verbose "remove_all($*)"
+dk_remove_all () {
+	dk_verbose "dk_remove_all($*)"
 	
 	if ! [ "$1" = "wipe" ]; then	
 		clear
@@ -1835,13 +1831,13 @@ remove_all () {
 			dk_echo "Is must be in the branch directory to continue."
 			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
 			dk_echo "${clr}"			
-			print_var DKBRANCH_DIR
+			dk_debug DKBRANCH_DIR
 			return 1;
 		fi
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" remove_all wipe
+		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_remove_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1849,7 +1845,7 @@ remove_all () {
 		
 		#do we need sudo rights?
 		#do we need to kill any processes?
-		#do we need to uninstall any apps?
+		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1869,11 +1865,11 @@ remove_all () {
 
 
 ##################################################################################
-# git_update()
+# dk_git_update()
 #
 #
-git_update () {
-	dk_verbose "git_update($*)"
+dk_git_update () {
+	dk_verbose "dk_git_update($*)"
 	
 	if ! [ "$1" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."
@@ -1899,11 +1895,11 @@ git_update () {
 
 
 ##################################################################################
-# git_commit()
+# dk_git_commit()
 #
 #
-git_commit () {	
-	dk_verbose "git_commit($*)"
+dk_git_commit () {	
+	dk_verbose "dk_git_commit($*)"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
@@ -1911,7 +1907,7 @@ git_commit () {
 	cd "$DKBRANCH_DIR" || dk_error "cd $$DKBRANCH_DIR failed!"
 	
 	STORE=$($GIT_EXE config credential.helper)
-	print_var STORE
+	dk_debug STORE
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
 		echo ""
@@ -1955,11 +1951,11 @@ git_commit () {
 
 
 ##################################################################################
-# enter_manually()
+# dk_enter_manually()
 #
 #
-enter_manually () {
-	dk_verbose "enter_manually($*)"
+dk_enter_manually () {
+	dk_verbose "dk_enter_manually($*)"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -1977,7 +1973,7 @@ enter_manually () {
 		TARGET_PATH=$DKAPPS_DIR/$input
 		return $true
 	fi
-	print_var TARGET_PATH
+	dk_debug TARGET_PATH
 	
 	if [ ! -d "$DKAPPS_DIR"/"$APP" ]; then
 		mkdir -p "$DKAPPS_DIR"/"$APP";
@@ -1992,11 +1988,11 @@ enter_manually () {
 
 
 ##################################################################################
-# create_cache()
+# dk_create_cache()
 #
 #
-create_cache () {
-	dk_verbose "create_cache($*)"
+dk_create_cache () {
+	dk_verbose "dk_create_cache($*)"
 	
 	echo "creating cache..."
 	
@@ -2009,11 +2005,11 @@ create_cache () {
 
 
 ##################################################################################
-# read_cache()
+# dk_read_cache()
 #
 #
-read_cache() {
-	dk_verbose "read_cache($*)"
+dk_read_cache() {
+	dk_verbose "dk_read_cache($*)"
 	
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then
 		return
@@ -2070,11 +2066,11 @@ print_var () {
 
 
 ##################################################################################
-# remove_carrage_returns(<input>)
+# dk_remove_carrage_returns(<input>)
 #
 #
-remove_carrage_returns () {
-	dk_verbose "remove_carrage_returns($*)"
+dk_remove_carrage_returns () {
+	dk_verbose "dk_remove_carrage_returns($*)"
 	
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
@@ -2083,18 +2079,18 @@ remove_carrage_returns () {
 
 
 ##################################################################################
-# save_args(<input>)
+# dk_save_args(<input>)
 #
 # reference: https://www.etalabs.net/sh_tricks.html
 #
 # usage:
 #   set -- One Two Three Four
-#   myarrayA=$(save_args "$@")
+#   myarrayA=$(dk_save_args "$@")
 #   eval "set -- $myarrayA"
 #	echo "$1 $2 $3 $4"
 #
-save_args () {
-	dk_verbose "save_args($*)"
+dk_save_args () {
+	dk_verbose "dk_save_args($*)"
 	
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"
@@ -2104,13 +2100,13 @@ save_args () {
 
 
 ##################################################################################
-# get_host_triple(<input>)
+# dk_get_host_triple(<input>)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
-get_host_triple () {
-	dk_verbose "get_host_triple($*)"
+dk_get_host_triple () {
+	dk_verbose "dk_get_host_triple($*)"
 	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
@@ -2135,7 +2131,7 @@ get_host_triple () {
 		dk_error "Unknown HOST_OS"
 	fi
 	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable" && return $false
-	print_var HOST_OS
+	dk_debug HOST_OS
 	
 	# Get the HOST_ARCH
 	if [ "$HOSTTYPE" = "x86" ]; then			# FIXME:  $HOSTTYPE not POSIX	
@@ -2150,10 +2146,10 @@ get_host_triple () {
 		dk_error "Unknown HOST_ARCH"
 	fi
 	[ -z "$HOST_ARCH" ] && dk_error "Failed to get HOST_ARCH variable" && return $false
-	print_var HOST_ARCH
+	dk_debug HOST_ARCH
 	
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	print_var HOST_TRIPLE
+	dk_debug HOST_TRIPLE
 }
 
 
