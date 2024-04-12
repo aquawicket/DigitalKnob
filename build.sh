@@ -2106,13 +2106,15 @@ dk_get_host_triple () {
 
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
-	bash -c "set"
-	HOSTNAME=$(bash -c "echo \$HOSTNAME")
-	dk_debug HOSTNAME	
-	HOSTTYPE=$(bash -c "echo \$HOSTTYPE")
-	dk_debug HOSTTYPE
-	OSTYPE=$(bash -c "echo \$OSTYPE")
-	dk_debug OSTYPE
+
+	BASH_Arch=$(bash -c "echo \$HOSTTYPE")
+	dk_debug BASH_Arch
+	BASH_Vendor="unknown"
+	dk_debug BASH_Vendor
+	BASH_OS_Env=$(bash -c "echo \$OSTYPE")
+	dk_debug BASH_OS_Env
+	BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
+	dk_debug BASH_TRIPLE
 
 
 
