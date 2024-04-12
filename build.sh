@@ -65,7 +65,7 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 main() {
 	dk_verbose "main($*)"
-	
+
 	dk_validate_sudo
 	
 	if dk_defined WSLENV; then 
@@ -77,24 +77,6 @@ main() {
 	# log to stdout and file
 	#exec |& tee file.log 
 
-	DKUNAME=$(uname -a)
-	dk_debug DKUNAME
-	DKHOST=$(uname -s)
-	dk_debug DKHOST
-	DKARCH=$(uname -m)
-	dk_debug DKARCH
-	DKVERSION=$(uname -v)
-	dk_debug DKVERSION
-	DKOSTYPE=$OSTYPE
-	dk_debug DKOSTYPE
-	#[ -e /proc/cpuinfo ] && DKCPUINFO=$(tr -d '\0' </proc/cpuinfo)
-	#dk_debug DKCPUINFO
-	[ -e /proc/device-tree/model ] && DKMODEL=$(tr -d '\0' </proc/device-tree/model)
-	dk_debug DKMODEL
-	DKMACHTYPE=$MACHTYPE
-	dk_debug DKMACHTYPE
-	DKLANG=$LANG
-	dk_debug DKLANG
 	if [ -n "$USER" ]; then
 		DKUSERNAME=$USER
 	elif [ -n "$USERNAME" ]; then
@@ -120,8 +102,6 @@ main() {
 	dk_debug HOSTNAME
 	dk_debug HOSTTYPE
 	dk_debug MACHTYPE
-	[ -e /proc/device-tree/model ] && MODEL=$(tr -d '\0' </proc/device-tree/model)
-	dk_debug MODEL
 	dk_debug MSYSTEM
 	dk_debug OSTYPE
 	dk_debug SCRIPT_NAME
@@ -152,7 +132,7 @@ main() {
 	mkdir -p "$DKTOOLS_DIR";
 	dk_debug DKTOOLS_DIR
 
-	if [ "$OSTYPE" = "darwin"* ]; then
+	if [ "$HOST_OS" = "mac" ]; then
 		dk_validate_homebrew
 	fi
 
@@ -210,15 +190,17 @@ main() {
 #
 dk_pick_update() {
 	dk_verbose "dk_pick_update($*)"
+	[ -n "$1" ] && dk_error "dk_pick_update($*): Too many parameters"
+
 	dk_read_cache
 	
-	echo ""
+	dk_echo
 	dk_check_remote
-	echo ""
+	dk_echo
 
-	dk_debug "_APP_ = $_APP_"
-	dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
-	dk_debug "_TYPE_ = $_TYPE_" 
+	#dk_debug _APP_
+	#dk_debug _TARGET_OS_ 
+	#dk_debug _TYPE_
 
 	if [ "$behind" = "0" ]; then
 		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
@@ -234,11 +216,11 @@ dk_pick_update() {
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo "" 
+		dk_echo
 		dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
-		dk_echo ""
+		dk_echo
 		dk_echo "${red}" 
 		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
@@ -255,7 +237,7 @@ dk_pick_update() {
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo "" 
+		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
 	fi
@@ -302,11 +284,12 @@ dk_pick_update() {
 #
 dk_pick_app() {
 	dk_verbose "dk_pick_app($*)"
-	
-	echo ""
+	[ -n "$1" ] && dk_error "dk_pick_app($*): Too many parameters"
+
+	dk_echo
 	dk_echo "${APP}  ${TARGET_OS} ${TYPE}"
 	
-	echo ""	
+	dk_echo
     dk_echo " 1) HelloWorld"
     dk_echo " 2) DKCore"
     dk_echo " 3) DKJavascript"
@@ -319,7 +302,7 @@ dk_pick_app() {
     dk_echo "10) Go Back"
     dk_echo "11) Reload"
 	dk_echo "12) Exit"
-    echo "" 
+    dk_echo 
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -358,13 +341,13 @@ dk_pick_app() {
 #
 dk_pick_os() {
 	dk_verbose "dk_pick_os($*)"
-	
-	echo ""
+	[ -n "$1" ] && dk_error "dk_pick_os($*): Too many parameters"
+
+	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
-	
-	echo ""	
+	dk_echo	
     dk_echo " 1) $HOST_TRIPLE"
-	echo ""
+	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
 	dk_echo " 4) Android x86"
@@ -402,7 +385,7 @@ dk_pick_os() {
 	dk_echo "36) Clear Screen"
 	dk_echo "37) Go Back"
 	dk_echo "38) Exit"
-	echo "" 
+	dk_echo
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -493,18 +476,18 @@ dk_pick_os() {
 #
 dk_pick_type() {
 	dk_verbose "dk_pick_type($*)"
-	
-	echo ""
+	[ -n "$1" ] && dk_error "dk_pick_type($*): Too many parameters"
+
+	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
-	
-	echo ""	
+	dk_echo	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
 	dk_echo " 3) All"
 	dk_echo " 4) Clear Screen"
 	dk_echo " 5) Go Back"
 	dk_echo " 6) Exit"
-	echo ""
+	dk_echo
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -544,12 +527,13 @@ dk_pick_type() {
 #
 dk_generate() {
 	dk_verbose "dk_generate($*)"
+	[ -n "$2" ] && dk_error "dk_generate($*): Too many parameters"
 	
-	echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
 	dk_echo "##################################################################"
-	echo ""
+	dk_echo
 
 	dk_clear_cmake_cache
 	dk_delete_temp_files
@@ -761,11 +745,11 @@ dk_generate() {
 #    # if exist $CMAKE_TOOLCHAIN_FILE CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE" )
 #   
 #    ###### CMake Configure ######
-#    echo ""
+#    dk_echo
 #    dk_echo "****** CMAKE COMMAND ******"
 #    dk_echo "${CMAKE_EXE}" "$CMAKE_ARGS"
 #    "$CMAKE_EXE" "$CMAKE_ARGS"
-#    echo ""
+#    dk_echo
 #}
 	
 
@@ -775,12 +759,13 @@ dk_generate() {
 #
 dk_build () {
 	dk_verbose "dk_build($*)"
-	
-	echo ""
+	[ -n "$1" ] && dk_error "dk_build($*): Too many parameters"
+
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	echo ""
+	dk_echo
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
 		if dk_file_exists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
@@ -801,27 +786,11 @@ dk_build () {
 		fi
 	fi
 	
-	echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	echo ""
-}
-
-
-##################################################################################
-# dk_require(<variable>)
-#
-#
-dk_require () {
-	dk_verbose "dk_require($*)"
-	
-	if [ -z "$1" ]; then
-		dk_error "dk_require(<func_name> <n>) requires 2 parameters. Example dk_require my_func \$1"
-	fi
-	if [ -z "$2" ]; then
-		dk_error "$1() requires at least 1 parameter"
-	fi
+	dk_echo
 }
 
 
@@ -831,6 +800,7 @@ dk_require () {
 #
 dk_echo () {
 	#echo "dk_echo($*)"
+	#[ -z "$1" ] && dk_error "dk_echo($*): requires at least 1 parameter"
 
 	shell_type=$(basename $(readlink /proc/$$/exe))
 	#dk_debug "shell_type = $shell_type"
@@ -851,6 +821,7 @@ dk_echo () {
 #
 dk_verbose () {
 	#dk_verbose "dk_verbose($*)"
+	[ -z "$1" ] && dk_error "dk_verbose($*): requires at least 1 parameter"
 	
 	if [ "$LOG_VERBOSE" = "1" ]; then 
 		dk_echo "${cyan}VERBOSE: $1 ${clr}"
@@ -864,9 +835,16 @@ dk_verbose () {
 #
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
+	[ -z "$1" ] && dk_error "dk_debug($*): requires at least 1 parameter"
+
 	[ ! "$LOG_DEBUG" = "1" ] && return 0
-	
-	dk_echo "${blue}  DEBUG: $1 ${clr}"
+	msg="$1"
+	if dk_defined ${msg}; then
+		eval value='$'{$msg}
+		msg="${msg}: ${value}"
+	fi
+
+	dk_echo "${blue}  DEBUG: $msg ${clr}"
 }
 
 
@@ -877,7 +855,6 @@ dk_debug () {
 dk_info () {
 	#dk_verbose "dk_info($*)"
 	
-	dk_require dk_info "$1"
 	dk_echo "${white}   INFO: $1 ${clr}"
 }
 
@@ -908,9 +885,8 @@ dk_error () {
 	
 	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
-	if [ "$HALT_ON_ERRORS" = "1" ]; then
-		exit 1
-	fi
+	[ "$HALT_ON_ERRORS" = "1" ] && exit 1
+	exit 1
 }
 
 
@@ -920,8 +896,9 @@ dk_error () {
 #
 dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
+	[ -n "$1" ] && dk_error "dk_stacktrace($*): Too many parameters"
 	
-    local i=1 line file func											# FIXME: n POSIX sh, 'local' is undefined.
+    #local i=1 line file func								# FIXME: n POSIX sh, 'local' is undefined.
     #while read -r line func file < <(caller $i); do
     #   echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
     #   ((i++))
@@ -935,20 +912,12 @@ dk_stacktrace () {
 #
 dk_defined () {
 	dk_verbose "dk_defined($*)"
+	[ -z "$1" ] && dk_error "dk_defined($*): requires at least 1 parameter"
+	[ -n "$2" ] && return $false
 	
-	if [ -z "$1" ]; then
-		return $false
-	fi
-	
-	var=$1
-	#! [ -z ${!var+x} ]				# BASH
-	eval value=\${"${var}"+x}		# POSIX
-
-	if [ -z "$value" ]; then
-		#dk_debug "$1 is NOT DEFINED"
-		return $false;
-	fi
-	#dk_debug "$1 is DEFINED"
+	var="$1"
+	eval value='$'{${var}+x}
+	[ -z "$value" ] && return $false
 	return $true;
 }
 
@@ -959,11 +928,8 @@ dk_defined () {
 #
 dk_call () {
 	dk_verbose "dk_call($*)"
-	
-	if [ -z "$1" ]; then
-		dk_error "dk_call <command args> requires at least 1 parameter"
-	fi
-	
+	[ -z "$1" ] && dk_error "dk_call($*): requires at least 1 parameter"
+
 	dk_echo "${magenta} $ $* ${clr}"
 	"$@"
 }
@@ -975,7 +941,8 @@ dk_call () {
 #
 dk_check_remote () {
 	dk_verbose "dk_check_remote($*)"
-	
+	[ -n "$1" ] && dk_error "dk_check_remote($*): Too many parameters"
+
 	#if [ -d .git ]; then
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		git remote update > /dev/null 2> /dev/null
@@ -993,6 +960,7 @@ dk_check_remote () {
 #
 dk_validate_sudo () {
 	dk_verbose "dk_validate_sudo($*)"
+	[ -n "$1" ] && dk_error "dk_pick_update($*): Too many parameters"
 	
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
@@ -1007,6 +975,7 @@ dk_validate_sudo () {
 #
 dk_reload () {
 	dk_verbose "dk_reload($*)"
+	[ -n "$1" ] && dk_error "dk_reload($*): Too many parameters"
 	
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
@@ -1019,12 +988,14 @@ dk_reload () {
 #
 #
 dk_confirm() {
-	dk_debug "dk_confirm($@)"
+	dk_debug "dk_confirm($*)"
+	[ -n "$1" ] && dk_error "dk_confirm($*): Too many parameters"
+
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	#read -p " " -n 1 -r REPLY
 	read -rp $" " REPLY
-	echo ""
-	echo ""
+	dk_echo
+	dk_echo
 	#result=$(echo $REPLY | grep "^[Yy]$")
 	[ "$REPLY" = "y" ] && return $true
 	[ "$REPLY" = "Y" ] && return $true
@@ -1038,6 +1009,7 @@ dk_confirm() {
 #
 dk_string_contains () {
 	dk_verbose "dk_string_contains($*)"
+	[ -n "$3" ] && dk_error "dk_string_contains($*): Too many parameters"
 
 	if [ -z "$2" ]; then
 		dk_error "dk_string_contains <string> <substring> requires 2 parameters"
@@ -1059,6 +1031,7 @@ dk_string_contains () {
 #
 dk_command_exists () {
 	dk_verbose "dk_command_exists($*)"
+	[ -n "$2" ] && dk_error "dk_command_exists($*): Too many parameters"
 	
 	! [ "$(command -v "$1")" = "" ]
 }
@@ -1070,12 +1043,13 @@ dk_command_exists () {
 #
 dk_file_exists () {
 	dk_verbose "dk_file_exists($*)"
-	
-	if [ -e "$1" ]; then
-		dk_debug "dk_file_exists($*): FOUND"
-	else
-		dk_warning "dk_file_exists($*): NOT FOUND!" 
-	fi
+	[ -n "$2" ] && dk_error "dk_file_exists($*): Too many parameters"
+
+	#if [ -e "$1" ]; then
+	#	dk_debug "dk_file_exists($*): FOUND"
+	#else
+	#	dk_warning "dk_file_exists($*): NOT FOUND!" 
+	#fi
 	[ -e "$1" ]
 }
 
@@ -1086,6 +1060,7 @@ dk_file_exists () {
 #
 dk_get_filename () {
 	dk_verbose "dk_get_filename($*)"
+	[ -n "$3" ] && dk_error "dk_file_exists($*): Too many parameters"
 	
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
@@ -1103,6 +1078,7 @@ dk_get_filename () {
 #
 dk_convert_to_c_identifier () {
 	dk_verbose "dk_convert_to_c_identifier($*)"
+	[ -n "$3" ] && dk_error "dk_convert_to_c_identifier($*): Too many parameters"
 	
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
@@ -1126,6 +1102,7 @@ dk_convert_to_c_identifier () {
 #
 dk_replace_all () {
 	dk_verbose "dk_replace_all($*)"
+	[ -n "$5" ] && dk_error "dk_replace_all($*): Too many parameters"
 	
     input=$1
 	searchValue=$2
@@ -1155,7 +1132,8 @@ dk_replace_all () {
 #
 dk_convert_to_lowercase () {
 	dk_verbose "dk_convert_to_lowercase($*)"
-	
+	[ -n "$3" ] && dk_error "dk_convert_to_lowercase($*): Too many parameters"
+
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -1174,7 +1152,8 @@ dk_convert_to_lowercase () {
 #
 dk_download () {
 	dk_verbose "dk_download($*)"
-	
+	[ -n "$3" ] && dk_error "dk_download($*): Too many parameters"
+
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false
@@ -1201,7 +1180,8 @@ dk_download () {
 #
 dk_extract () {
 	dk_verbose "dk_extract($*)"
-	
+	[ -n "$3" ] && dk_error "dk_extract($*): Too many parameters"
+
 	if [ -z "$2" ]; then
 		dk_error "dk_extract <input> <output> requires 2 parameters"
 		return $false
@@ -1244,7 +1224,8 @@ dk_extract () {
 #
 dk_rename () {
 	dk_verbose "dk_rename($*)"
-	
+	[ -n "$3" ] && dk_error "dk_rename($*): Too many parameters"
+
 	if [ -z "$2" ]; then
 		dk_error "dk_get_filename <path> <output> requires 2 parameters"
 		return $false
@@ -1261,6 +1242,7 @@ dk_rename () {
 #
 dk_validate_cmake () {
 	dk_verbose "dk_validate_cmake($*)"
+	[ -n "$1" ] && dk_error "dk_validate_cmake($*): Too many parameters"
 	
 	if [ "$HOST_OS" = "android" ]; then
 		CMAKE_SYSTEM_INSTALL=1
@@ -1330,7 +1312,7 @@ dk_validate_cmake () {
 		
 		if dk_file_exists "$CMAKE_EXE"; then return $true; fi
 
-		echo ""   
+		dk_echo 
 		dk_info "Installing cmake . . ."
 		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
 		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
@@ -1346,6 +1328,7 @@ dk_validate_cmake () {
 #
 dk_validate_git () {
 	dk_verbose "dk_validate_git($*)"
+	[ -n "$1" ] && dk_error "dk_validate_git($*): Too many parameters"
 	
 	if ! dk_command_exists git; then
 		dk_install git
@@ -1362,7 +1345,8 @@ dk_validate_git () {
 #
 dk_validate_homebrew () {
 	dk_verbose "dk_validate_homebrew($*)"
-	
+	[ -n "$1" ] && dk_error "dk_validate_homebrew($*): Too many parameters"
+
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
 	fi
@@ -1386,7 +1370,8 @@ dk_validate_homebrew () {
 #
 dk_package_installed () {
 	dk_verbose "dk_package_installed($*)"
-	
+	[ -n "$2" ] && dk_error "dk_package_installed($*): Too many parameters"
+
 	if dk_command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
 			return $true
@@ -1422,7 +1407,8 @@ dk_package_installed () {
 #
 dk_install () {
 	dk_verbose "dk_install($*)"
-	
+	[ -n "$2" ] && dk_error "dk_install($*): Too many parameters"
+
 	#if dk_package_installed $1; then
 	#	dk_warning "$1 already dk_installed"
 	#	return $false;
@@ -1455,6 +1441,7 @@ dk_install () {
 #
 dk_validate_package () {
 	dk_verbose "dk_validate_package($*)"
+	[ -n "$3" ] && dk_error "dk_validate_package($*): Too many parameters"
 	
 	if ! dk_command_exists "$1"; then
 		dk_install "$2"
@@ -1466,31 +1453,32 @@ dk_validate_package () {
 # dk_validate_ostype()
 #
 #
-dk_validate_ostype () {
-	dk_verbose "dk_validate_ostype($*)"
-	
-	if [ -e /proc/device-tree/model ]; then
-		MODEL=$(tr -d '\0' </proc/device-tree/model)
-	fi
-
-	if [ "$OSTYPE" = "linux-gnu"* ]; then
-		DIGITALKNOB_DIR="/home/$USER/digitalknob"
-	elif [ "$OSTYPE" = "darwin"* ]; then
-		DIGITALKNOB_DIR="/Users/$USER/digitalknob"
-	elif [ "$OSTYPE" = "cygwin" ]; then
-		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
-	elif [ "$OSTYPE" = "msys" ]; then
-		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
-	elif [ "$OSTYPE" = "win32" ]; then #I'm not sure this can happen
-		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
-	elif [ "$OSTYPE" = "freebsd"* ]; then
-		dk_error "TODO: freebsd builder incomplete"
-	elif [ "$OSTYPE" = "linux-android" ]; then
-		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
-	else
-		dk_error "UNKNOWN OS ($OSTYPE)"
-	fi
-}
+#dk_validate_ostype () {
+#	dk_verbose "dk_validate_ostype($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_ostype($*): Too many parameters"
+#	
+#	if [ -e /proc/device-tree/model ]; then
+#		MODEL=$(tr -d '\0' </proc/device-tree/model)
+#	fi
+#
+#	if [ "$OSTYPE" = "linux-gnu"* ]; then
+#		DIGITALKNOB_DIR="/home/$USER/digitalknob"
+#	elif [ "$OSTYPE" = "darwin"* ]; then
+#		DIGITALKNOB_DIR="/Users/$USER/digitalknob"
+#	elif [ "$OSTYPE" = "cygwin" ]; then
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#	elif [ "$OSTYPE" = "msys" ]; then
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob"
+#	elif [ "$OSTYPE" = "win32" ]; then #I'm not sure this can happen
+#		DIGITALKNOB_DIR="/c/Users/$USERNAME/digitalknob" 
+#	elif [ "$OSTYPE" = "freebsd"* ]; then
+#		dk_error "TODO: freebsd builder incomplete"
+#	elif [ "$OSTYPE" = "linux-android" ]; then
+#		DIGITALKNOB_DIR="/data/data/com.termux/files/home/digitalknob"
+#	else
+#		dk_error "UNKNOWN OS ($OSTYPE)"
+#	fi
+#}
 
 
 ##################################################################################
@@ -1499,7 +1487,8 @@ dk_validate_ostype () {
 #
 dk_validate_branch () {
 	dk_verbose "dk_validate_branch($*)"
-	
+	[ -n "$1" ] && dk_error "dk_validate_branch($*): Too many parameters"
+
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	FOLDER="$(basename $(pwd))"
@@ -1537,7 +1526,7 @@ dk_validate_branch () {
 	#		dk_debug "$DKBRANCH_DIR/$SCRIPT_NAME"
 	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
 	#	fi
-	#	echo ""
+	#	dk_echo
 	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
@@ -1556,6 +1545,7 @@ dk_validate_branch () {
 #
 dk_wait_for_key () {
 	dk_verbose "dk_wait_for_key($*)"
+	[ -n "$1" ] && dk_error "dk_wait_for_key($*): Too many parameters"
 	
 	read -rsp $'Press any key to continue...\n' -n 1 key
 }
@@ -1567,6 +1557,7 @@ dk_wait_for_key () {
 #
 dk_clear_cmake_cache () {
 	dk_verbose "dk_clear_cmake_cache($*)"
+	[ -n "$1" ] && dk_error "dk_clear_cmake_cache($*): Too many parameters"
 	
 	dk_info "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1581,7 +1572,8 @@ dk_clear_cmake_cache () {
 #
 dk_delete_temp_files () {
 	dk_verbose "dk_delete_temp_files($*)"
-	
+	[ -n "$1" ] && dk_error "dk_delete_temp_files($*): Too many parameters"
+
 	dk_info "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 	rm -rf $(find . -type d -name *.tmp)
@@ -1597,6 +1589,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_msys2 () {
 #	dk_verbose "dk_validate_msys2($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_msys2($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	dk_debug MSYS2
@@ -1609,6 +1602,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_make () {
 #	dk_verbose "dk_validate_make($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_make($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	dk_debug MAKE_PROGRAM
@@ -1621,6 +1615,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_emscripten () {
 #	dk_verbose "dk_validate_emscripten($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_emscripten($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	dk_debug EMSDK
@@ -1638,6 +1633,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_android_ndk () {
 #	dk_verbose "dk_validate_android_ndk($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_android_ndk($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	dk_debug ANDROID_NDK
@@ -1656,6 +1652,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_clang () {
 #	dk_verbose "dk_validate_clang($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_clang($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	dk_debug CLANG_C_COMPILER
@@ -1669,6 +1666,7 @@ dk_delete_temp_files () {
 #
 #dk_validate_gcc () {
 #	dk_verbose "dk_validate_gcc($*)"
+#	[ -n "$1" ] && dk_error "dk_validate_gcc($*): Too many parameters"
 #
 #	dk_cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	dk_debug GCC_C_COMPILER
@@ -1713,6 +1711,7 @@ dk_cmake_eval () {
 #
 dk_push_assets () {
 	dk_verbose "dk_push_assets($*)"
+	[ -n "$1" ] && dk_error "dk_push_assets($*): Too many parameters"
 	
 	if ! dk_confirm; then return; fi
 	dk_error "not implemented,  TODO"
@@ -1725,6 +1724,7 @@ dk_push_assets () {
 #
 dk_pull_assets () {
 	dk_verbose "dk_pull_assets($*)"
+	[ -n "$1" ] && dk_error "dk_pull_assets($*): Too many parameters"
 	
 	if ! dk_confirm; then return; fi
 	dk_error "not implemented,  TODO"
@@ -1737,17 +1737,18 @@ dk_pull_assets () {
 #
 dk_reset_all () {
 	dk_verbose "dk_reset_all($*)"
+	[ -n "$2" ] && dk_error "dk_reset_all($*): Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then
 		clear
-		echo ""
-		echo ""
+		dk_echo
+		dk_echo
 		dk_info "Do you want to reset the entire local repository . . . ?"
 		dk_info "This will delete digitalknob, everything will be reset,"
 		dk_info "and the repository will be re-cloned. All libraries and tools"
 		dk_info "will be redk_downloaded and rebuild from start. Save any changes"
 		dk_info "you wish to commit or save beforehand."
-		echo ""
+		dk_echo
 		
 		if ! dk_confirm; then return; fi
 		
@@ -1777,7 +1778,7 @@ dk_reset_all () {
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
-		echo ""
+		dk_echo
 		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
 		dk_info "done."
@@ -1811,15 +1812,16 @@ dk_reset_all () {
 #
 dk_remove_all () {
 	dk_verbose "dk_remove_all($*)"
+	[ -n "$1" ] && dk_error "dk_reset_all($*): Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then	
 		clear
-		echo ""
-		echo ""	
+		dk_echo
+		dk_echo
 		dk_echo "Do you want to remove the entire local repository . . . ?"
 		dk_echo "This will delete digitalknob, Save any changes"
 		dk_echo "you wish to commit or save beforehand."		
-		echo ""
+		dk_echo
 		
 		if ! dk_confirm; then return; fi
 		
@@ -1849,7 +1851,7 @@ dk_remove_all () {
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
-		echo ""
+		dk_echo
 		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
 		dk_info "done."
@@ -1870,7 +1872,8 @@ dk_remove_all () {
 #
 dk_git_update () {
 	dk_verbose "dk_git_update($*)"
-	
+	[ -n "$1" ] && dk_error "dk_git_update($*): Too many parameters"
+
 	if ! [ "$1" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."
 		if ! dk_confirm; then return; fi
@@ -1900,50 +1903,52 @@ dk_git_update () {
 #
 dk_git_commit () {	
 	dk_verbose "dk_git_commit($*)"
+	[ -n "$1" ] && dk_error "dk_git_commit($*): Too many parameters"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
 	
-	cd "$DKBRANCH_DIR" || dk_error "cd $$DKBRANCH_DIR failed!"
+	cd "$DKBRANCH_DIR" || dk_error "cd \$DKBRANCH_DIR failed!"
 	
 	STORE=$($GIT_EXE config credential.helper)
 	dk_debug STORE
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
-		echo ""
+		dk_echo
 		dk_info "git credential.helper is now set to store"
-		echo ""
+		dk_echo
 	fi
 	
 	USER_EMAIL=$($GIT_EXE config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
-		echo ""
+		dk_echo
 		dk_info "please enter an email address"
 		read input
 		$GIT_EXE config --global user.email "$input"
-		echo ""
+		dk_echo
 		dk_info "git user.email '$input' saved"
-		echo ""
+		dk_echo
 	fi
 
 	USER_NAME=$($GIT_EXE config --global user.name)
 	if [ -z "USER_NAME" ]; then
-		echo ""
+		dk_echo
 		dk_info "please enter a username"
 		read input
 		$GIT_EXE config --global user.name "$input"
-		echo ""
+		dk_echo
 		dk_info "git user.name '$input' saved"
-		echo ""
+		dk_echo
 	fi
 	
 	if [ -z "$message" ]; then
 		message="git commit"
 	fi
 	
-	echo ""
+	dk_echo
 	dk_info "git commit \"${message}\""
-	if ! dk_confirm; then return; fi
+	#if ! dk_confirm; then return 0; fi
+	[ dk_confirm ] || return 0
 	
 	dk_call "$GIT_EXE" commit -a -m "${message}"
     dk_call "$GIT_EXE" push
@@ -1956,6 +1961,7 @@ dk_git_commit () {
 #
 dk_enter_manually () {
 	dk_verbose "dk_enter_manually($*)"
+	[ -n "$1" ] && dk_error "dk_enter_manually($*): Too many parameters"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -1993,8 +1999,9 @@ dk_enter_manually () {
 #
 dk_create_cache () {
 	dk_verbose "dk_create_cache($*)"
+	[ -n "$1" ] && dk_error "dk_create_cache($*): Too many parameters"
 	
-	echo "creating cache..."
+	dk_echo "creating cache..."
 	
 	# write variable values line by line
 	echo "$APP">"$DKBRANCH_DIR/cache"
@@ -2010,58 +2017,36 @@ dk_create_cache () {
 #
 dk_read_cache() {
 	dk_verbose "dk_read_cache($*)"
+	[ -n "$1" ] && dk_error "dk_read_cache($*): Too many parameters"
 	
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then
-		return
+		return 0
 	fi
 	_APP_=
 	_TARGET_OS_=
 	_TYPE_=
 	
-	echo "reading cache..."
+	dk_echo "reading cache..."
 	count=0
 	while read p; do
 		if [ "$count" = "0" ]; then 
 			_APP_=$(echo "$p" | tr -d '\r')
-			#dk_debug "_APP_ = $_APP_"
+			#dk_debug _APP_
 		fi
 		if [ "$count" = "1" ]; then
 			_TARGET_OS_=$(echo "$p" | tr -d '\r')
-			#dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
+			#dk_debug _TARGET_OS_ 
 		fi
 		if [ "$count" = "2" ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
-			#dk_debug "_TYPE_ = $_TYPE_"
+			#dk_debug _TYPE_
 		fi
 		#if [ "$count" = "3" ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')
+		#	#dk_debug _DKENV_
 		#fi
-		#(( count++ ))						#FIXME:  NOT POSIX
-		( count=${count}+1 )
+		count=$((count + 1))
 	done < "${DKBRANCH_DIR}"/cache
-	
-	dk_debug "_APP_ = $_APP_"
-	dk_debug "_TARGET_OS_ = $_TARGET_OS_" 
-	dk_debug "_TYPE_ = $_TYPE_" 
-}
-
-
-##################################################################################
-# print_var(<variable>)
-#
-#
-print_var () {
-	#dk_verbose "print_var($*)"
-	
-	var=$1
-	#if [ -n "${!var}" ]; then #BASH
-	if [ -n "${var}" ]; then
-		#value=${var}
-		eval value=\${"$var"}
-		echo "$1 = ${value}"
-	#else
-		#echo "$1 = !!!INVALID!!!"
-	fi	
 }
 
 
@@ -2071,7 +2056,8 @@ print_var () {
 #
 dk_remove_carrage_returns () {
 	dk_verbose "dk_remove_carrage_returns($*)"
-	
+	[ -n "$1" ] && dk_error "dk_remove_carrage_returns($*): Too many parameters"
+
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
 	# carrage returns are removed from <out>
@@ -2079,7 +2065,7 @@ dk_remove_carrage_returns () {
 
 
 ##################################################################################
-# dk_save_args(<input>)
+# dk_save_args(<args..>)
 #
 # reference: https://www.etalabs.net/sh_tricks.html
 #
@@ -2091,7 +2077,7 @@ dk_remove_carrage_returns () {
 #
 dk_save_args () {
 	dk_verbose "dk_save_args($*)"
-	
+
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"
 	done
@@ -2107,19 +2093,31 @@ dk_save_args () {
 #
 dk_get_host_triple () {
 	dk_verbose "dk_get_host_triple($*)"
-	
+	[ -n "$1" ] && dk_error "dk_get_host_triple($*): Too many parameters"
+
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	
+	dk_debug "\$(uname) = $(uname)"
+	dk_debug "\$(uname -a) = $(uname -a)"
+	dk_debug "\$(uname -m) = $(uname -m)"
+	dk_debug "\$(uname -n) = $(uname -n)"
+	dk_debug "\$(uname -r) = $(uname -r)"
+	dk_debug "\$(uname -s) = $(uname -s)"
+	dk_debug "\$(uname -v) = $(uname -v)"
+	[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
+	[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
+
+
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_string_contains "$MODEL" "Raspberry"; then
+	if [ "$(uname -n)" = "raspberrypi" ]; then
 		HOST_OS="raspberry"
 	elif [ "$OSTYPE" = "linux-android" ]; then				# FIXME:  $OSTYPE not POSIX
 		HOST_OS="android"
-	elif [ "$DKHOST" = "Linux" ]; then
+	elif [ "$(uname -s)" = "Linux" ]; then
 		HOST_OS="linux"
 	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX
 		HOST_OS="linux"		
@@ -2151,6 +2149,8 @@ dk_get_host_triple () {
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	dk_debug HOST_TRIPLE
 }
+
+
 
 
 #echo "@ = $@"
