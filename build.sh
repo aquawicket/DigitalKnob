@@ -2155,8 +2155,10 @@ dk_get_host_triple () {
 		UNAME_OS="-unknown"
 	fi
 	# Environment
-	if dk_string_contains "$(uname -a)" "GNU"; then
+	if dk_string_contains "$(uname -o)" "GNU"; then
 		UNAME_Environment="-gnu"
+	elif dk_string_contains "$(uname -o)" "Android"; then
+		UNAME_Environment="android"
 	else
 		UNAME_Environment=""
 	fi
