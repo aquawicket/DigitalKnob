@@ -988,7 +988,7 @@ dk_reload () {
 #
 #
 dk_confirm() {
-	dk_debug "dk_confirm($*)"
+	dk_verbose "dk_confirm($*)"
 	[ -n "$1" ] && dk_error "dk_confirm($*): Too many parameters"
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
@@ -1947,8 +1947,9 @@ dk_git_commit () {
 	
 	dk_echo
 	dk_info "git commit \"${message}\""
-	#if ! dk_confirm; then return 0; fi
-	[ dk_confirm ] || return 0
+	if ! dk_confirm; then
+		return 0
+	fi
 	
 	dk_call "$GIT_EXE" commit -a -m "${message}"
     dk_call "$GIT_EXE" push
