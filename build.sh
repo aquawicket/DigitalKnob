@@ -2116,23 +2116,20 @@ dk_get_host_triple () {
 
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if [ "$(uname -n)" = "raspberrypi" ]; then
-		HOST_OS="raspberry"
-	elif dk_string_contains "$(uname -a)" "Android"; then
+	if dk_string_contains "$(uname -a)" "Android"; then			# android
 		HOST_OS="android"
-	elif [ "$(uname -s)" = "Linux" ]; then
-		HOST_OS="linux"
-	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX
-		HOST_OS="linux"		
-	elif [ "$(uname -s)" = "Darwins" ]; then	
-	#elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX
+	elif dk_string_contains "$(uname -a)" "Darwin"; then		# mac
 		HOST_OS="mac"
-	elif [ "$OSTYPE" = "msys" ]; then						# FIXME:  $OSTYPE not POSIX
+	elif dk_string_contains "$(uname -a)" "raspberrypi"; then	# raspberry 
+		HOST_OS="raspberry"
+	elif dk_string_contains "$(uname -a)" "Linux"; then			# linux 
+		HOST_OS="linux"	
+	elif [ "$OSTYPE" = "msys" ]; then							# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
 	else
 		dk_error "Unknown HOST_OS"
 	fi
-	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable" && return $false
+	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
 	dk_debug HOST_OS
 	
 	# Get the HOST_ARCH
@@ -2147,7 +2144,7 @@ dk_get_host_triple () {
 	else
 		dk_error "Unknown HOST_ARCH"
 	fi
-	[ -z "$HOST_ARCH" ] && dk_error "Failed to get HOST_ARCH variable" && return $false
+	[ -z "$HOST_ARCH" ] && dk_error "Failed to get HOST_ARCH variable"
 	dk_debug HOST_ARCH
 	
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
