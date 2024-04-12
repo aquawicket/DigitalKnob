@@ -2108,40 +2108,84 @@ dk_get_host_triple () {
 	# clang++ -print-effective-triple
 	# clang++ -print-target-triple
 
-	dk_debug "\$(uname) = $(uname)"
-	dk_debug "\$(uname -a) = $(uname -a)" # kernel-name, nodename, kernel-release, kernel-version, machine, processor, hardware-platform, operating-system
-	dk_debug "\$(uname -m) = $(uname -m)"
-	dk_debug "\$(uname -n) = $(uname -n)"
-	dk_debug "\$(uname -r) = $(uname -r)"
-	dk_debug "\$(uname -s) = $(uname -s)"
-	dk_debug "\$(uname -v) = $(uname -v)"
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
-	# Get the HOST_OS
+	UNAME="$(uname)"
+	dk_debug UNAME	
+	UNAME_a="$(uname -a)"
+	dk_debug UNAME_a
+	UNAME_s="$(uname -s)"
+	dk_debug UNAME_s
+	UNAME_n="$(uname -n)"
+	dk_debug UNAME_n
+	UNAME_r="$(uname -r)"
+	dk_debug UNAME_r
+	UNAME_v="$(uname -v)"
+	dk_debug UNAME_v
+	UNAME_m="$(uname -m)"
+	dk_debug UNAME_m
+	UNAME_p="$(uname -p)"
+	dk_debug UNAME_p
+	UNAME_i="$(uname -i)"
+	dk_debug UNAME_i
+	UNAME_o="$(uname -o)"
+	dk_debug UNAME_o
+
+
+	# ARCHITECTURE-VENDOR-OPERATING_SYSTEM
+	#		or
+	# ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT
+	# Arch
+	UNAME_Arch="$(uname -m)"
+	# SubArch	
+	UNAME_SubArch=""
+	# Vendor
+	if [ "$(uname -s)" = "Darwin" ]; then
+		UNAME_Vendor="-apple"
+	else
+		UNAME_Vendor="-unknown"
+	fi
+	# OS
+	if [ "$(uname -s)" = "Darwin" ]; then
+		UNAME_OS="-darwin$(uname -r)"
+	elif [ "$(uname -s)" = "Linux" ]; then
+		UNAME_OS="-linux"
+	else
+		UNAME_OS="-unknown"
+	fi
+	# Environment
+	if dk_string_contains "$(uname -a)" "GNU"; then
+		UNAME_Environment="-gnu"
+	else
+		UNAME_Environment=""
+	fi
+	#UNAME_ObjectFormat=""
+	UNAME_TRIPLE=${UNAME_Arch}${UNAME_SubArch}${UNAME_Vendor}${UNAME_OS}${UNAME_Environment}
+	dk_to_lower "${UNAME_TRIPLE}" UNAME_TRIPLE
+	dk_debug UNAME_TRIPLE
+
+
+	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_string_contains "$(uname -a)" "Android"; then			# android
+	if dk_string_contains "${UNAME_a}" "Android"; then			# android
 		HOST_OS="android"
-	elif dk_string_contains "$(uname -a)" "Darwin"; then		# mac
+	elif dk_string_contains "${UNAME_a}" "Darwin"; then			# mac
 		HOST_OS="mac"
-	elif dk_string_contains "$(uname -a)" "raspberrypi"; then	# raspberry
+	elif dk_string_contains "${UNAME_a}" "raspberrypi"; then	# raspberry
 		HOST_OS="raspberry"
- 	elif dk_string_contains "$(uname -a)" "Linux"; then			# linux
+ 	elif dk_string_contains "${UNAME_a}" "Linux"; then			# linux
 		HOST_OS="linux"
-	elif dk_string_contains "$(uname -a)" "Msys"; then			# win
+	elif dk_string_contains "${UNAME_a}" "Msys"; then			# win
 		HOST_OS="win"
 	else
-		dk_error "Unsupported HOST_OS: $(uname)"
+		dk_error "Unsupported HOST_OS: ${UNAME_a}"
 	fi
 	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
 	dk_debug HOST_OS
 
-	#dk_to_lower "$(uname)" HOST_OS
-	#[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
-	#dk_debug HOST_OS
 
-
-	# Get the HOST_ARCH
+	### Get the HOST_ARCH ###
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)
@@ -2215,44 +2259,41 @@ dk_get_host_triple () {
     # x86-64    	- 64-bit X86: EM64T and AMD64
     # xcore     	- XCore
 	# xtensa		-
-	HOST_ARCH="$(uname -m)"
-	[ -z "$HOST_ARCH" ] && dk_error "Failed to get HOST_ARCH variable"
-	dk_debug HOST_ARCH
 	
-	if [ "$HOST_ARCH" = "arm" ]; then
+	if [ "$UNAME_m" = "arm" ]; then
 		HOST_ARCH="arm"
-	elif [ "$HOST_ARCH" = "armeb" ]; then
+	elif [ "$UNAME_m" = "armeb" ]; then
 		HOST_ARCH="arm"
-	elif [ "$HOST_ARCH" = "armv7l" ]; then
+	elif [ "$UNAME_m" = "armv7l" ]; then
 		HOST_ARCH="arm"
-	elif [ "$HOST_ARCH" = "aarch64" ]; then
+	elif [ "$UNAME_m" = "aarch64" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "aarch64_32" ]; then
+	elif [ "$UNAME_m" = "aarch64_32" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "aarch64_be" ]; then
+	elif [ "$UNAME_m" = "aarch64_be" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "arm64" ]; then
+	elif [ "$UNAME_m" = "arm64" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "arm64_32" ]; then
+	elif [ "$UNAME_m" = "arm64_32" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "armv8b" ]; then
+	elif [ "$UNAME_m" = "armv8b" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "armv8l" ]; then
+	elif [ "$UNAME_m" = "armv8l" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$HOST_ARCH" = "x86" ]; then
+	elif [ "$UNAME_m" = "x86" ]; then
 		HOST_ARCH="x86"
-	elif [ "$HOST_ARCH" = "i386" ]; then
+	elif [ "$UNAME_m" = "i386" ]; then
 		HOST_ARCH="x86"
-	elif [ "$HOST_ARCH" = "i686" ]; then
+	elif [ "$UNAME_m" = "i686" ]; then
 		HOST_ARCH="x86"
-	elif [ "$HOST_ARCH" = "x86_64" ]; then
+	elif [ "$UNAME_m" = "x86_64" ]; then
 		HOST_ARCH="x86_64"
-	elif [ "$HOST_ARCH" = "x86-64" ]; then
+	elif [ "$UNAME_m" = "x86-64" ]; then
 		HOST_ARCH="x86_64"
-	elif [ "$HOST_ARCH" = "ia64" ]; then
+	elif [ "$UNAME_m" = "ia64" ]; then
 		HOST_ARCH="x86_64"
 	else
-		dk_error "Unsupported HOST_ARCH: ${HOST_ARCH}"
+		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
