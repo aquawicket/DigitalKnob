@@ -2118,13 +2118,14 @@ dk_get_host_triple () {
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if [ "$(uname -n)" = "raspberrypi" ]; then
 		HOST_OS="raspberry"
-	elif [ "$OSTYPE" = "linux-android" ]; then				# FIXME:  $OSTYPE not POSIX
+	elif dk_string_contains "$(uname -a)" "Android"; then
 		HOST_OS="android"
 	elif [ "$(uname -s)" = "Linux" ]; then
 		HOST_OS="linux"
 	elif dk_string_contains "$OSTYPE" "linux-gnu"; then		# FIXME:  $OSTYPE not POSIX
 		HOST_OS="linux"		
-	elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX
+	elif [ "$(uname -s)" = "Darwins" ]; then	
+	#elif dk_string_contains "$OSTYPE" "darwin"; then		# FIXME:  $OSTYPE not POSIX
 		HOST_OS="mac"
 	elif [ "$OSTYPE" = "msys" ]; then						# FIXME:  $OSTYPE not POSIX
 		HOST_OS="win"
