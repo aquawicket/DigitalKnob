@@ -99,11 +99,7 @@ main() {
 	dk_debug DKPWD
 	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
-	dk_debug HOSTNAME
-	dk_debug HOSTTYPE
-	dk_debug MACHTYPE
 	dk_debug MSYSTEM
-	dk_debug OSTYPE
 	dk_debug SCRIPT_NAME
 	dk_debug SCRIPT_DIR
 	dk_debug USER
@@ -2110,6 +2106,15 @@ dk_get_host_triple () {
 
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
+	bash -c "set"
+	HOSTNAME=$(bash -c "echo \$HOSTNAME")
+	dk_debug HOSTNAME	
+	HOSTTYPE=$(bash -c "echo \$HOSTTYPE")
+	dk_debug HOSTTYPE
+	OSTYPE=$(bash -c "echo \$OSTYPE")
+	dk_debug OSTYPE
+
+
 
 	UNAME="$(uname)"
 	dk_debug UNAME	
@@ -2158,7 +2163,7 @@ dk_get_host_triple () {
 	if dk_string_contains "$(uname -o)" "GNU"; then
 		UNAME_Environment="-gnu"
 	elif dk_string_contains "$(uname -o)" "Android"; then
-		UNAME_Environment="android"
+		UNAME_Environment="-android" #FIXME: need abi number I.E. -android24
 	else
 		UNAME_Environment=""
 	fi
