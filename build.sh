@@ -1129,22 +1129,19 @@ dk_replace_all () {
 
 
 ##################################################################################
-# dk_convert_to_lowercase(<input> <output>)
+# dk_to_lower(<input> <output>)
 #
 #
-dk_convert_to_lowercase () {
-	dk_verbose "dk_convert_to_lowercase($*)"
-	[ -n "$3" ] && dk_error "dk_convert_to_lowercase($*): Too many parameters"
+dk_to_lower () {
+	dk_verbose "dk_to_lower($*)"
+	[ -z "$2" ] && dk_error "dk_to_lower($*): requires 2 parameters"
+	[ -n "$3" ] && dk_error "dk_to_lower($*): Too many parameters"
 
-	if [ -z "$2" ]; then
-		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
-		return $false
-	fi
 	input=$1
-	echo "$input" | tr '[:upper:]' '[:lower:]'
-	dk_debug "input = $input"
-	eval "$2=$input"
-	#[ "$input" = "" ]
+	output=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+	#dk_debug output
+	eval "$2=$output"
+	#[ "$output" = "" ]
 }
 
 
@@ -1296,7 +1293,7 @@ dk_validate_cmake () {
 		fi
 		
 		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		dk_convert_to_lowercase "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_to_lower "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
 		if [ "${HOST_OS}" = "win" ]; then
@@ -2102,17 +2099,24 @@ dk_get_host_triple () {
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
+	# https://en.wikipedia.org/wiki/Uname
 	
+	# g++ -dumpmachine
+	# gcc -print-multiarch
+	# clang -print-effective-triple
+	# clang -print-target-triple
+	# clang++ -print-effective-triple
+	# clang++ -print-target-triple
+
 	dk_debug "\$(uname) = $(uname)"
-	dk_debug "\$(uname -a) = $(uname -a)"
+	dk_debug "\$(uname -a) = $(uname -a)" # kernel-name, nodename, kernel-release, kernel-version, machine, processor, hardware-platform, operating-system
 	dk_debug "\$(uname -m) = $(uname -m)"
 	dk_debug "\$(uname -n) = $(uname -n)"
 	dk_debug "\$(uname -r) = $(uname -r)"
 	dk_debug "\$(uname -s) = $(uname -s)"
 	dk_debug "\$(uname -v) = $(uname -v)"
-	[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
-	[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
-
+	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
+	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
 	# Get the HOST_OS
 	# https://llvm.org/doxygen/Triple_8h_source.html
@@ -2120,33 +2124,137 @@ dk_get_host_triple () {
 		HOST_OS="android"
 	elif dk_string_contains "$(uname -a)" "Darwin"; then		# mac
 		HOST_OS="mac"
-	elif dk_string_contains "$(uname -a)" "raspberrypi"; then	# raspberry 
+	elif dk_string_contains "$(uname -a)" "raspberrypi"; then	# raspberry
 		HOST_OS="raspberry"
-	elif dk_string_contains "$(uname -a)" "Linux"; then			# linux 
-		HOST_OS="linux"	
-	elif [ "$OSTYPE" = "msys" ]; then							# FIXME:  $OSTYPE not POSIX
+ 	elif dk_string_contains "$(uname -a)" "Linux"; then			# linux
+		HOST_OS="linux"
+	elif dk_string_contains "$(uname -a)" "Msys"; then			# win
 		HOST_OS="win"
 	else
-		dk_error "Unknown HOST_OS"
+		dk_error "Unsupported HOST_OS: $(uname)"
 	fi
 	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
 	dk_debug HOST_OS
-	
+
+	#dk_to_lower "$(uname)" HOST_OS
+	#[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
+	#dk_debug HOST_OS
+
+
 	# Get the HOST_ARCH
-	if [ "$HOSTTYPE" = "x86" ]; then			# FIXME:  $HOSTTYPE not POSIX	
-		HOST_ARCH="x86"
-	elif [ "$HOSTTYPE" = "x86_64" ]; then		# FIXME:  $HOSTTYPE not POSIX
-		HOST_ARCH="x86_64"
-	elif [ "$HOSTTYPE" = "aarch64" ]; then		# FIXME:  $HOSTTYPE not POSIX
-		HOST_ARCH="arm64"
-	elif [ "$(uname -m)" = "aarch64" ]; then
-		HOST_ARCH="arm64"
-	else
-		dk_error "Unknown HOST_ARCH"
-	fi
+	# https://stackoverflow.com/a/45125525
+	# aarch64    	- AArch64 (little endian)
+    # aarch64_32 	- AArch64 (little endian ILP32)
+    # aarch64_be 	- AArch64 (big endian)
+	# alpha			-
+    # amdgcn     	- AMD GCN GPUs
+	# arc			-
+    # arm        	- ARM
+    # arm64      	- ARM64 (little endian)
+    # arm64_32   	- ARM64 (little endian ILP32)
+    # armeb      	- ARM (big endian)
+	# armv7l	 	- 	
+	# armv8b 	 	- (arm64 compat)
+	# armv8l 	 	- (arm64 compat)
+    # avr        	- Atmel AVR Microcontroller
+	# blackfin		-
+    # bpf        	- BPF (host endian)
+    # bpfeb      	- BPF (big endian)
+    # bpfel      	- BPF (little endian)
+	# cris			- 
+	# frv			-
+	# h8300			-
+    # hexagon    	- Hexagon
+	# ia64			-
+	# i386 		 	- (x86)
+	# i686 		 	- (x86 compat)	
+    # lanai      	- Lanai
+	# m32r			-
+    # m68k			- Motorola 68000 family
+	# metag			-
+	# microblaze	-
+    # mips       	- MIPS (32-bit big endian)
+    # mips64     	- MIPS (64-bit big endian)
+    # mips64el   	- MIPS (64-bit little endian)
+    # mipsel     	- MIPS (32-bit little endian)
+	# mn10300		-
+    # msp430     	- MSP430 [experimental]
+	# nios2			-
+    # nvptx      	- NVIDIA PTX 32-bit
+    # nvptx64    	- NVIDIA PTX 64-bit
+	# openrisc		- 
+	# parisc 		- (native or compat)
+	# parisc64 		- (parisc)
+	# ppc 			- (powerpc native or compat)
+    # ppc32      	- PowerPC 32
+    # ppc32le    	- PowerPC 32 LE
+    # ppc64      	- PowerPC 64
+    # ppc64le    	- PowerPC 64 LE
+	# ppcle 		- (powerpc native or compat)
+    # r600       	- AMD GPUs HD2XXX-HD6XXX
+    # riscv32    	- 32-bit RISC-V
+    # riscv64    	- 64-bit RISC-V
+	# s390 			- (s390x compat)
+	# s390x			-
+	# score			-
+	# sh			-
+	# sh64 (sh)		-
+    # sparc      	- Sparc
+	# sparc64		-
+    # sparcel   	- Sparc LE
+    # sparcv9   	- Sparc V9
+    # systemz   	- SystemZ
+    # thumb     	- Thumb
+    # thumbeb   	- Thumb (big endian)
+	# tile			-
+	# unicore32		-
+    # ve        	- VE
+    # wasm32    	- WebAssembly 32-bit
+    # wasm64    	- WebAssembly 64-bit
+    # x86       	- 32-bit X86: Pentium-Pro and above
+    # x86-64    	- 64-bit X86: EM64T and AMD64
+    # xcore     	- XCore
+	# xtensa		-
+	HOST_ARCH="$(uname -m)"
 	[ -z "$HOST_ARCH" ] && dk_error "Failed to get HOST_ARCH variable"
 	dk_debug HOST_ARCH
 	
+	if [ "$HOST_ARCH" = "arm" ]; then
+		HOST_ARCH="arm"
+	elif [ "$HOST_ARCH" = "armeb" ]; then
+		HOST_ARCH="arm"
+	elif [ "$HOST_ARCH" = "armv7l" ]; then
+		HOST_ARCH="arm"
+	elif [ "$HOST_ARCH" = "aarch64" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "aarch64_32" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "aarch64_be" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "arm64" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "arm64_32" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "armv8b" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "armv8l" ]; then
+		HOST_ARCH="arm64"
+	elif [ "$HOST_ARCH" = "x86" ]; then
+		HOST_ARCH="x86"
+	elif [ "$HOST_ARCH" = "i386" ]; then
+		HOST_ARCH="x86"
+	elif [ "$HOST_ARCH" = "i686" ]; then
+		HOST_ARCH="x86"
+	elif [ "$HOST_ARCH" = "x86_64" ]; then
+		HOST_ARCH="x86_64"
+	elif [ "$HOST_ARCH" = "x86-64" ]; then
+		HOST_ARCH="x86_64"
+	elif [ "$HOST_ARCH" = "ia64" ]; then
+		HOST_ARCH="x86_64"
+	else
+		dk_error "Unsupported HOST_ARCH: ${HOST_ARCH}"
+	fi
+
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	dk_debug HOST_TRIPLE
 }
