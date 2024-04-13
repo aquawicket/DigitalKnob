@@ -1692,7 +1692,7 @@ dk_cmake_eval () {
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmake_eval.cmake
 		if dk_file_exists "$DKCMAKE_DIR"/cmake_vars.sh; then
 	    	dk_info "executing cmake_vars.sh"
-			source "$DKCMAKE_DIR"/cmake_vars.sh
+			. "$DKCMAKE_DIR"/cmake_vars.sh
 			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
@@ -1794,7 +1794,7 @@ dk_reset_all () {
 		
 		if dk_file_exists "$DKBRANCH_DIR"/"$SCRIPT_NAME"; then
 			clear
-			source "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
+			. "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
 			exit
 		else
 			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
@@ -1836,7 +1836,7 @@ dk_remove_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		source "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_remove_all wipe
+		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_remove_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
