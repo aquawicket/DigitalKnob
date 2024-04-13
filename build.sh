@@ -1009,7 +1009,6 @@ dk_string_contains () {
 	string=$1
 	substring=$2
 	[ "${string#*"$substring"}" != "$string" ]	
-	#[[ ${string} == *"${substring}"* ]]		# bash version
 }
 
 
