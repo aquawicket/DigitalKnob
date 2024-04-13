@@ -64,11 +64,10 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 main() {
-	#TEST="HaPpY"
-	#dk_to_lower $TEST TEST
-	#dk_debug TEST
-	#exit
 
+# log to stdout and file
+#exec |& tee file.log 
+	
 	dk_verbose "main($*)"
 
 	dk_validate_sudo
@@ -78,9 +77,6 @@ main() {
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
-	
-	# log to stdout and file
-	#exec |& tee file.log 
 
 	if [ -n "$USER" ]; then
 		DKUSERNAME=$USER
@@ -115,8 +111,6 @@ main() {
 	
 	if [ -n "$USERPROFILE" ]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		#DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
-		#DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
 		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
 	else
@@ -802,16 +796,11 @@ dk_build () {
 dk_echo () {
 	#echo "dk_echo($*)"
 
-	#[ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
-	#[ "$SHELL" = "/bin/zsh" ] && shell_type="zsh" 
-	#echo "shell_type = $shell_type"
-
-	if $(try echo -e " "); then
+	if [ "$(echo -e)" = "" ]; then
 		echo -e "$1"
 	else
 		echo "$1"
 	fi
-	return 0
 }
 
 
