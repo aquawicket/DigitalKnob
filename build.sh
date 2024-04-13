@@ -802,19 +802,16 @@ dk_build () {
 dk_echo () {
 	#echo "dk_echo($*)"
 
-	[ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
-	[ "$SHELL" = "/bin/zsh" ] && shell_type="zsh" 
+	#[ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
+	#[ "$SHELL" = "/bin/zsh" ] && shell_type="zsh" 
 	#echo "shell_type = $shell_type"
 
-	if [ "$shell_type" = "sh" ]; then  
-		echo "$1"
-	elif [ "$shell_type" = "dash" ]; then
-		echo "$1"
-	elif [ "$shell_type" = "zsh" ]; then
-		echo "$1"
-	else	
+	if $(try echo -e " "); then
 		echo -e "$1"
+	else
+		echo "$1"
 	fi
+	return 0
 }
 
 
@@ -1306,7 +1303,7 @@ dk_validate_cmake () {
 		fi
 		
 		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		dk_to_lower "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_to_lower CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
 		if [ "${HOST_OS}" = "win" ]; then
