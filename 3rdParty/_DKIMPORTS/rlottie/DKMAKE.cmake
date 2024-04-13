@@ -22,7 +22,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-dk_set(RLOTTIE_CMAKE -Drlottie_DIR=${RLOTTIE} -Drlottie_INCLUDE_DIR=${RLOTTIE}/inc)
+dk_set(RLOTTIE_CMAKE -Drlottie_DIR=${RLOTTIE}/${OS}/${DEBUG_DIR} -Drlottie_INCLUDE_DIR=${RLOTTIE}/inc)
 
 
 ### GENERATE ###

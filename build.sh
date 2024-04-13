@@ -125,7 +125,7 @@ main() {
 	mkdir -p "$DIGITALKNOB_DIR";
 	dk_debug DIGITALKNOB_DIR
 
-	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/dk_download"
+	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
 	mkdir -p "$DKDOWNLOAD_DIR";
 	dk_debug DKDOWNLOAD_DIR
 	
@@ -2220,20 +2220,17 @@ dk_get_host_triple () {
 			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
 		fi
 
-		#if $(try uname -o); then
-			if dk_string_contains "$(try uname -o)" "GNU"; then
-				UNAME_ENV="-gnu"
-			elif dk_string_contains "$(try uname -o)" "Android"; then
-				UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
-			else
-				UNAME_ENV=""
-			fi
-		#fi
+		if dk_string_contains "$(try uname -o)" "GNU"; then
+			UNAME_ENV="-gnu"
+		elif dk_string_contains "$(try uname -o)" "Android"; then
+			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
+		else
+			UNAME_ENV=""
+		fi
 
 		#UNAME_ObjectFormat=""
 
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
-		#dk_to_lower "${UNAME_TRIPLE}" UNAME_TRIPLE
 		dk_debug UNAME_TRIPLE
 
 		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_debug HOST_TRIPLE
