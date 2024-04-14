@@ -207,7 +207,7 @@ dk_pick_update() {
 	#dk_debug _TYPE_
 
 	if [ "$behind" = "0" ]; then
-		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
+		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 		fi
 		dk_echo " 1) Git Update"   
