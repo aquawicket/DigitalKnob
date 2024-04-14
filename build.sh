@@ -1961,7 +1961,8 @@ dk_git_commit () {
 		return 0
 	fi
 	
-	dk_call "$GIT_EXE" commit -a -m "${message}"
+	#dk_call "$GIT_EXE" commit -a -m "${message}"
+	"$GIT_EXE" commit -a -m "${message}"
     dk_call "$GIT_EXE" push
 }
 
