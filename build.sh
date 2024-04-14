@@ -116,15 +116,15 @@ main() {
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
-	mkdir -p "$DIGITALKNOB_DIR";
+	mkdir -p "$DIGITALKNOB_DIR"
 	dk_debug DIGITALKNOB_DIR
 
 	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
-	mkdir -p "$DKDOWNLOAD_DIR";
+	mkdir -p "$DKDOWNLOAD_DIR"
 	dk_debug DKDOWNLOAD_DIR
 	
 	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
-	mkdir -p "$DKTOOLS_DIR";
+	mkdir -p "$DKTOOLS_DIR"
 	dk_debug DKTOOLS_DIR
 
 	if [ "$HOST_OS" = "mac" ]; then
@@ -887,7 +887,7 @@ dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
 	[ -n "$1" ] && dk_error "dk_stacktrace($*): Too many parameters"
 	
-    #local i=1 line file func								# FIXME: n POSIX sh, 'local' is undefined.
+    local i=1 line file func								# FIXME: n POSIX sh, 'local' is undefined.
     #while read -r line func file < <(caller $i); do
     #   echo >&2 "[$i] $file:$line $func(): $(sed -n ${line}p $file)"
     #   ((i++))
@@ -920,7 +920,7 @@ dk_call () {
 	[ -z "$1" ] && dk_error "dk_call($*): requires at least 1 parameter"
 
 	dk_echo "${magenta} $ $* ${clr}"
-	"$@"
+	"$@" || dk_error "'$*: failed!'"
 }
 
 
@@ -1763,7 +1763,7 @@ dk_reset_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_reset_all wipe
+		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_reset_all wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1776,12 +1776,12 @@ dk_reset_all () {
 		
 		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
 		dk_echo
-		dk_info "DELETING $DKBRANCH_DIR . . . ."
-		rm -r -f "$DKBRANCH_DIR"
-		dk_info "done."
+		dk_echo "DELETING $DKBRANCH_DIR . . . ."
+		dk_call rm -r -f "$DKBRANCH_DIR" || dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
+		dk_echo "done."
 		
 		# wait for the folders to get deleted
-		sleep 10
+		sleep 5
 
 		if dk_file_exists "$DKBRANCH_DIR"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
