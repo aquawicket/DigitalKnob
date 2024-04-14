@@ -23,15 +23,18 @@
 
 
 
-
-
-
+###### Set and check posix mode ######
+set -o posix
+case :$SHELLOPTS: in
+  *:posix:*) echo "POSIX mode enabled" ;;
+  *)         echo "POSIX mode not enabled" ;;
+esac
 
 ###### Global Script Variables ######
 LOG_VERBOSE=1
 LOG_DEBUG=1
 HALT_ON_WARNINGS=0
-HALT_ON_ERRORS=0
+CONTINUE_ON_ERRORS=0
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
 
 SCRIPT_NAME=$(basename "$0")
@@ -64,12 +67,11 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 main() {
-
-# log to stdout and file
-#exec |& tee file.log 
-	
 	dk_verbose "main($*)"
-
+	
+	# log to stdout and file
+	#exec |& tee file.log 
+	
 	dk_validate_sudo
 	
 	if dk_defined WSLENV; then 
@@ -826,9 +828,9 @@ dk_debug () {
 	#dk_verbose "dk_debug($*)"
 	[ -z "$1" ] && dk_error "dk_debug($*): requires at least 1 parameter"
 
-	[ ! "$LOG_DEBUG" = "1" ] && return 0
+	[ "$LOG_DEBUG" = "1" ] || return 0
 	msg="$1"
-	if dk_defined ${msg}; then
+	if dk_defined $msg; then
 		eval value='$'{$msg}
 		msg="${msg}: ${value}"
 	fi
@@ -874,7 +876,8 @@ dk_error () {
 	
 	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
-	[ "$HALT_ON_ERRORS" = "1" ] && exit 1
+	[ "$CONTINUE_ON_ERRORS" = "1" ] && return 1
+	dk_wait_for_key
 	exit 1
 }
 
@@ -898,16 +901,30 @@ dk_stacktrace () {
 ##################################################################################
 # dk_defined(<variable>)
 #
+# Evaluates to true if the parameter is a variable that exists.
 #
 dk_defined () {
 	dk_verbose "dk_defined($*)"
 	[ -z "$1" ] && dk_error "dk_defined($*): requires at least 1 parameter"
-	[ -n "$2" ] && return $false
+	[ -n "$2" ] && return $false # dk_defined requires only 1 parameter
 	
-	var="$1"
-	eval value='$'{${var}+x}
-	[ -z "$value" ] && return $false
-	return $true;
+	eval value='$'{$1+x} # value will = 'x' if the variable is defined
+	[ -n "$value" ]
+}
+
+
+##################################################################################
+# dk_hasValue(<variable>)
+#
+# Evaluates to true if the parameter is a variable that exists and has value
+#
+dk_hasValue () {
+	dk_verbose "dk_hasValue($*)"
+	[ -z "$1" ] && dk_error "dk_hasValue($*): requires at least 1 parameter"
+	[ -n "$2" ] && return $false # dk_hasValue requires only 1 parameter
+	
+	eval value='$'{$1}
+	[ -n "${value//[[:blank:]]/}" ] # remove spaces and check if empty
 }
 
 
@@ -981,7 +998,6 @@ dk_confirm() {
 	[ -n "$1" ] && dk_error "dk_confirm($*): Too many parameters"
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
-	#read -p " " -n 1 -r REPLY
 	read -rp $" " REPLY
 	dk_echo
 	dk_echo
@@ -1115,31 +1131,20 @@ dk_replace_all () {
 
 
 ##################################################################################
-# dk_to_lower(<input> <output>)
+# dk_to_lower(<variable>)
 #
 #
 dk_to_lower () {
 	dk_verbose "dk_to_lower($*)"
-	[ -z "$1" ] && dk_error "dk_to_lower($*): requires 2 parameters"
-	[ -n "$3" ] && dk_error "dk_to_lower($*): Too many parameters"
+	[ -z "$1" ] && dk_error "dk_to_lower($*): requires 1 parameter"
+	[ -n "$2" ] && dk_error "dk_to_lower($*): Too many parameters"
 	
-	var=$1
-	if dk_defined ${var}; then 
-		eval input='$'{$var}
-	else
-		[ -z "$2" ] && dk_error "dk_to_lower($*): requires 2 parameters"
-		input="$var"
-	fi
-		
-	output=$(echo "$input" | tr '[:upper:]' '[:lower:]')
-	dk_debug "dk_to_lower($*): output = $output"
-	
-	if dk_defined ${var}; then
-		eval "$1=$output"
-	else
-		eval "$2=$output"
-	fi
-	#[ "$output" = "" ]
+	dk_defined $1 || dk_error "dk_to_lower($*): $1 is not defined"
+
+	eval value='$'{$1}
+	value=$(echo "$value" | tr '[:upper:]' '[:lower:]')
+
+	eval "$1=$value"
 }
 
 
@@ -1307,7 +1312,9 @@ dk_validate_cmake () {
 		fi
 		dk_debug CMAKE_EXE
 		
-		if dk_file_exists "$CMAKE_EXE"; then return $true; fi
+		if dk_file_exists "$CMAKE_EXE"; then 
+			return $true;
+		fi
 
 		dk_echo 
 		dk_info "Installing cmake . . ."
@@ -1316,6 +1323,20 @@ dk_validate_cmake () {
 		
 		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
 	fi
+}
+
+
+##################################################################################
+# dk_remove_extension(<filepath>)
+#
+#
+dk_remove_extension () {
+	dk_verbose "dk_validate_git($*)"
+	
+	filepath="$1"
+	filepath="${filepath%.*}"									    # remove everything past last dot
+	[ "${filepath##*.}" = "tar" ] &&	filepath="${filepath%.*}"	# if .tar remove everything past last dot
+
 }
 
 
@@ -2189,7 +2210,9 @@ dk_get_host_triple () {
 		UNAME_i="$(try uname -i)" && dk_debug UNAME_i
 		UNAME_o="$(try uname -o)" && dk_debug UNAME_o
 		
-		UNAME_ARCH=$(try uname -m) && dk_to_lower UNAME_ARCH
+		UNAME_ARCH=$(uname -m)
+		#dk_debug "UNAME_ARCH = ${UNAME_ARCH}"
+		dk_to_lower UNAME_ARCH
 		UNAME_SUBARCH=""
 		
 		if [ "$(try uname -s)" = "Darwin" ]; then
@@ -2362,10 +2385,29 @@ dk_get_host_triple () {
 }
 
 
+##################################################################################
+# DK_TRY_CATCH(<function> <args>)
+#
+#
+DK_TRY_CATCH () {
+	# Don't pipe the subshell into anything or we won't be able to see its exit status
+	set +e; ( set -e
+		"$@" 
+	); err_status=$?; set -e
 
+	if [ "$err_status" ]; then
+		echo "ERROR: $err_status"
+		dk_wait_for_key
+	fi
+}
 
 #echo "@ = $@"
 [ "$*" = "" ] || "$@"
-main "$@"
+#main "$@"
+DK_TRY_CATCH main "$@"
 
-#exec $SHELL		# keep terminal open
+
+
+
+
+
