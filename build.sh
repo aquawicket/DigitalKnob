@@ -7,11 +7,6 @@
 # shellcheck disable=SC2120
 
 
-PS1="1"
-PS2="2"
-PS3="3"
-PS4="4"
-PS5="5"
 
 #set -x
 
@@ -84,10 +79,10 @@ main() {
 	  *:posix:*) echo "POSIX mode enabled" ;;
 	  *)         echo "POSIX mode not enabled" ;;
 	esac
-	#$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
-	#$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
-	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
-	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+	$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+	$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
 
 
@@ -820,7 +815,7 @@ dk_echo () {
 	#echo "dk_echo($*)"
 
 	if [ "$(echo -e)" = "" ]; then
-		echo -e "$1"
+		echo -e "${1-}"
 	else
 		echo "${1-}"
 	fi
