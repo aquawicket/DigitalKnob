@@ -6,6 +6,7 @@
 # shellcheck disable=SC2119
 # shellcheck disable=SC2120
 
+
 PS1="1"
 PS2="2"
 PS3="3"
@@ -13,8 +14,6 @@ PS4="4"
 PS5="5"
 
 #set -x
-
-
 
 
 #echo "\$$ = $$"								# Process ID of the current shell instance.
@@ -30,11 +29,7 @@ PS5="5"
 #exit
 
 
-###### Set and check posix mode ######
-$(set -o posix >/dev/null 2>&1) && case :$SHELLOPTS: in
-  *:posix:*) echo "POSIX mode enabled" ;;
-  *)         echo "POSIX mode not enabled" ;;
-esac
+
 
 ###### Global Script Variables ######
 LOG_VERBOSE=1
@@ -75,8 +70,26 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 main() {
 	dk_verbose "main($*)"
-	
+
 	dk_get_shell_type
+	
+
+	echo "BASH = $BASH"
+	if ! dk_defined BASH; then
+		dk_command_exists bash && exec /bin/bash "$0"	# Change to bash
+	fi
+
+	###### Set and check posix mode ######
+	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+	  *:posix:*) echo "POSIX mode enabled" ;;
+	  *)         echo "POSIX mode not enabled" ;;
+	esac
+	#$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+	#$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+
+
 
 	# log to stdout and file
 	#exec |& tee file.log 
@@ -1872,7 +1885,7 @@ dk_remove_all () {
 
 
 ##################################################################################
-# dk_git_update()
+# dk_git_update(<NO_CONFIRM:optional>)
 #
 #
 dk_git_update () {
@@ -1898,7 +1911,7 @@ dk_git_update () {
 		dk_call "$GIT_EXE" checkout -b "$DKBRANCH" main
 		dk_call "$GIT_EXE" push --set-upstream origin "$DKBRANCH"
 	fi
-	dk_call chmod +x "$DKBRANCH_DIR"/build.sh
+	#dk_call chmod +x "$DKBRANCH_DIR"/build.sh
 }
 
 
@@ -2397,7 +2410,7 @@ dk_get_shell_type () {
 	dk_verbose "dk_get_shell_type($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
-	[ -e "/procd" ] || dk_warning "/proc does not exist" && return 0 
+	[ -e "/proc" ] || dk_warning "/proc does not exist" && return 0 
 	PID_EXE=$(readlink /proc/$$/exe);
 	SHELL_TYPE=${PID_EXE##*/};           
 	echo "SHELL_TYPE   = $SHELL_TYPE"
@@ -2424,18 +2437,9 @@ dk_get_shell_type () {
 #}
 
 
-dk_call set -o pipefail  # trace ERR through pipes
-dk_call set -o errtrace  # trace ERR through 'time command' and other functions
-dk_call set -o nounset   ## set -u : exit the script if you try to use an uninitialised variable
-dk_call set -o errexit   ## set -e : exit the script if any statement returns a non-true
 
 
-# command -v bash >/dev/null 2>&1 || { echo >&2 "I require bash but it's not installed.  Aborting."; exit 1; }
 
-
-#	if [ ! "$SHELL_TYPE" = "bash" ]; then
-#		exec /bin/bash "$0"	# Change to bash
-#	fi
 
 
 #echo "@ = $@"
