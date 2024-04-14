@@ -1877,9 +1877,9 @@ dk_remove_all () {
 #
 dk_git_update () {
 	dk_verbose "dk_git_update($*)"
-	[ -n "$2" ] && dk_error "dk_git_update($*): Too many parameters"
+	[ $# -gt 1 ] && dk_error "Too many parameters"
 
-	if ! [ "$1" = "NO_CONFIRM" ]; then
+	if ! [ "${1-}" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."
 		dk_confirm || return 0
 	fi
