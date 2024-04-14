@@ -68,7 +68,7 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 main() {
 	dk_verbose "main($*)"
-	
+
 	# log to stdout and file
 	#exec |& tee file.log 
 	
@@ -109,7 +109,7 @@ main() {
 	dk_debug USERNAME
 	
 	## Get the HOST_TRIPLE and other HOST variables
-	dk_get_host_triple || dk_error "Could not determine HOST_TRIPLE"
+	dk_get_host_triple #|| dk_error "Could not determine HOST_TRIPLE"
 	
 	if [ -n "$USERPROFILE" ]; then
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
@@ -194,7 +194,7 @@ dk_pick_update() {
 	dk_echo
 	dk_check_remote
 	dk_echo
-
+	
 	#dk_debug _APP_
 	#dk_debug _TARGET_OS_ 
 	#dk_debug _TYPE_
@@ -538,7 +538,7 @@ dk_generate() {
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	dk_debug TARGET_PATH
 	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
-	cd "$TARGET_PATH"/"$TARGET_OS" || dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
+	cd "$TARGET_PATH"/"$TARGET_OS" #|| dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_debug CMAKE_SOURCE_DIR
 	if ! dk_file_exists "$CMAKE_SOURCE_DIR"; then
@@ -707,7 +707,7 @@ dk_generate() {
 	fi
 	
 	if dk_defined WSLENV; then 
-		cd "$DKCMAKE_DIR" || dk_error "cd $DKCMAKE_DIR failed!"
+		cd "$DKCMAKE_DIR" #|| dk_error "cd $DKCMAKE_DIR failed!"
 		#$CMAKE_ARGS+=( "." )
 		set -- "$@" "."
 	fi
@@ -937,7 +937,7 @@ dk_call () {
 	[ -z "$1" ] && dk_error "dk_call($*): requires at least 1 parameter"
 
 	dk_echo "${magenta} $ $* ${clr}"
-	"$@" || dk_error "'$*: failed!'"
+	"$@" #|| dk_error "'$*: failed!'"
 }
 
 
@@ -949,9 +949,9 @@ dk_check_remote () {
 	dk_verbose "dk_check_remote($*)"
 	[ -n "$1" ] && dk_error "dk_check_remote($*): Too many parameters"
 
-	#if [ -d .git ]; then
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
-		git remote update > /dev/null 2> /dev/null
+		cd "${DKBRANCH_DIR}"
+		git remote update
 		branch=$(git rev-parse --abbrev-ref HEAD)
 		ahead=$(git rev-list --count origin/$branch..$branch)
 		behind=$(git rev-list --count $branch..origin/$branch)
@@ -1037,7 +1037,8 @@ dk_command_exists () {
 	dk_verbose "dk_command_exists($*)"
 	[ -n "$2" ] && dk_error "dk_command_exists($*): Too many parameters"
 	
-	! [ "$(command -v "$1")" = "" ]
+	#! [ "$(command -v "$1")" = "" ]
+	[ -n "$(command -v "$1")" ]
 }
 	
 
@@ -1169,9 +1170,9 @@ dk_download () {
 	parentdir="$(dirname "$2")"
 	dk_debug "parentdir = $parentdir"
 	olddir=$PWD
-	cd "$parentdir" || dk_error "cd $parentdir failed!"
+	cd "$parentdir" #|| dk_error "cd $parentdir failed!"
 	wget -P "$parentdir" "$1" 
-	cd "$oldpwd" || dk_error "cd $oldpwd failed!"
+	cd "$oldpwd" #|| dk_error "cd $oldpwd failed!"
 	#[ "$input" = "" ]
 }
 
@@ -1206,9 +1207,9 @@ dk_extract () {
 	dk_debug "filename = $filename"
 	#need to cd into parent directory of $1 and send tar the file name of $1
 	olddir=$PWD
-	cd "$parentdir" || dk_error "cd $$parentdir failed!"
+	cd "$parentdir" #|| dk_error "cd $$parentdir failed!"
 	tar -xf "$filename" -C "$2"
-	cd "$oldpwd" || dk_error "cd $$oldpwd failed!"
+	cd "$oldpwd" #|| dk_error "cd $$oldpwd failed!"
 	dk_convert_to_c_identifier "$destFolder" destFolder_
 	dk_debug destFolder_
 	mv "$2"/"$destFolder" "$2"/"$destFolder_"
@@ -1578,7 +1579,7 @@ dk_clear_cmake_cache () {
 	[ -n "$1" ] && dk_error "dk_clear_cmake_cache($*): Too many parameters"
 	
 	dk_info "Clearing CMake cache . . ."
-	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
+	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 	find . -name "CMakeCache.*" -delete
 	rm -rf $(find . -type d -name CMakeFiles)
 }
@@ -1593,7 +1594,7 @@ dk_delete_temp_files () {
 	[ -n "$1" ] && dk_error "dk_delete_temp_files($*): Too many parameters"
 
 	dk_info "Deleting .TMP files . . ."
-	cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
+	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 	rm -rf $(find . -type d -name *.tmp)
 	rm -rf $(find . -type d -name *.TMP)
 	find . -name "*.tmp" -delete
@@ -1795,10 +1796,10 @@ dk_reset_all () {
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
-		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
+		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		dk_echo
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
-		dk_call rm -r -f "$DKBRANCH_DIR" || dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
+		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
 		dk_echo "done."
 		
 		# wait for the folders to get deleted
@@ -1868,7 +1869,7 @@ dk_remove_all () {
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
-		cd "$DIGITALKNOB_DIR" || dk_error "cd $$DIGITALKNOB_DIR failed!"
+		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		dk_echo
 		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
@@ -1900,7 +1901,7 @@ dk_git_update () {
 	if [ ! -d "$DKBRANCH_DIR/.git" ]; then
 		dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git "$DKBRANCH_DIR"
 	fi
-	dk_call cd "$DKBRANCH_DIR" || dk_error "cd $$DKBRANCH_DIR failed!"
+	dk_call cd "$DKBRANCH_DIR" #|| dk_error "cd $$DKBRANCH_DIR failed!"
 	dk_call "$GIT_EXE" pull --all
 	dk_call "$GIT_EXE" checkout -- .
 	dk_call "$GIT_EXE" checkout "$DKBRANCH"
@@ -1926,7 +1927,7 @@ dk_git_commit () {
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
 	
-	cd "$DKBRANCH_DIR" || dk_error "cd \$DKBRANCH_DIR failed!"
+	cd "$DKBRANCH_DIR" #|| dk_error "cd \$DKBRANCH_DIR failed!"
 	
 	STORE=$($GIT_EXE config credential.helper)
 	dk_debug STORE
@@ -2388,6 +2389,7 @@ dk_get_host_triple () {
 ##################################################################################
 # DK_TRY_CATCH(<function> <args>)
 #
+#	reference: https://stackoverflow.com/a/11092989/688352
 #
 DK_TRY_CATCH () {
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
