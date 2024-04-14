@@ -6,8 +6,6 @@
 # shellcheck disable=SC2119
 # shellcheck disable=SC2120
 
-
-
 #set -x
 
 
@@ -25,8 +23,8 @@
 
 
 
-
 ###### Global Script Variables ######
+RELOAD_WITH_BASH=1
 LOG_VERBOSE=1
 LOG_DEBUG=1
 TRACE_ON_WARNINGS=1
@@ -67,12 +65,12 @@ main() {
 	dk_verbose "main($*)"
 
 	dk_get_shell_type
-	
 
 	echo "BASH = $BASH"
-	if ! dk_defined BASH; then
+	if [ $RELOAD_WITH_BASH = 1 ] && ! dk_defined BASH; then
 		dk_command_exists bash && exec /bin/bash "$0"	# Change to bash
 	fi
+	export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
@@ -830,9 +828,9 @@ dk_verbose () {
 	#dk_verbose "dk_verbose($*)"
 	[ -z "$1" ] && dk_error "dk_verbose($*): requires at least 1 parameter"
 	
-	if [ "$LOG_VERBOSE" = "1" ]; then 
-		dk_echo "${cyan}VERBOSE: $1 ${clr}"
-	fi
+	[ $LOG_VERBOSE = 1 ] || return 0
+
+	dk_echo "${cyan}VERBOSE: $1 ${clr}"
 }
 
 
@@ -843,8 +841,8 @@ dk_verbose () {
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
 	[ -z "$1" ] && dk_error "dk_debug($*): requires at least 1 parameter"
-
-	[ "$LOG_DEBUG" = "1" ] || return 0
+	
+	[ $LOG_DEBUG = 1 ] || return 0
 
 	if dk_defined $1; then
 		eval value='$'{$1}
@@ -874,15 +872,8 @@ dk_warning () {
 	#dk_verbose "dk_warning($*)"
 	
 	dk_echo "${yellow}WARNING: $1 ${clr}"
-	
-	echo "${TRACE_ON_WARNINGS-}"
-	if [ "${TRACE_ON_WARNINGS-}" = "1" ]; then
-		dk_stacktrace
-	fi
-
-	if [ "$HALT_ON_WARNINGS" = "1" ]; then
-		exit 1
-	fi
+	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
+	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
 }
 
 
@@ -895,7 +886,7 @@ dk_error () {
 	
 	dk_echo "${red}  ERROR: $1 ${clr}"
 	dk_stacktrace
-	[ "$CONTINUE_ON_ERRORS" = "1" ] && return 1
+	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
 	dk_wait_for_key
 	exit 1
 }
@@ -906,12 +897,29 @@ dk_error () {
 #
 #
 dk_stacktrace () {
-    dk_verbose "dk_stacktrace($*)"
+    #dk_verbose "dk_stacktrace($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
+	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
+
+
+	### USE BASH_SOURCE ###
+	[ "${FUNCNAME-}" = "" ] && return 0
+	#[ "${BASH_SOURCE-}" = "" ] && return 0
+
+	local i=${1:-1} size=${#FUNCNAME[@]}
+  	((i<size)) && echo "STACKTRACE"
+	i=0
+	while [ "$i" -le "$size" ]; do
+		((frame=${#FUNCNAME[@]}-i-2 ))
+		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
+		i=$(( i + 1 ))
+	done 
+
+	### USE Caller ###	
 	#local i=1 line file func
 	#while read -r line func file < <(caller $i); do
-	#	echo >&2 '[$i] $file:$line $func(): $(sed -n ${line}p $file)
+	#	echo >&2 [$i] $file:$line $func(): $(sed -n ${line}p $file)
 	#	((i++))
 	#done
 }
@@ -2391,7 +2399,7 @@ DK_TRY_CATCH () {
 	); err_status=$?; set -e
 
 	if [ "$err_status" -ne "0" ]; then
-		echo "ERROR: $err_status"
+		echo "ERROR_STATUS: $err_status"
 		dk_wait_for_key
 	fi
 }
