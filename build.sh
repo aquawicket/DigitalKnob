@@ -78,13 +78,6 @@ main() {
 	
 	dk_get_shell_type
 
-	testA=hello
-	if dk_defined testA; then 
-		echo "testA defined"
-	else
-		echo "testA NOT defined"
-	fi 
-
 	# log to stdout and file
 	#exec |& tee file.log 
 	
@@ -1723,7 +1716,8 @@ dk_push_assets () {
 	dk_verbose "dk_push_assets($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_confirm; then return; fi
+	dk_confirm || return 0
+	
 	dk_error "not implemented,  TODO"
 }
 
@@ -1736,7 +1730,8 @@ dk_pull_assets () {
 	dk_verbose "dk_pull_assets($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_confirm; then return; fi
+	dk_confirm || return 0
+
 	dk_error "not implemented,  TODO"
 }
 
@@ -1760,7 +1755,7 @@ dk_reset_all () {
 		dk_info "you wish to commit or save beforehand."
 		dk_echo
 		
-		if ! dk_confirm; then return; fi
+		dk_confirm || return 0
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1833,7 +1828,7 @@ dk_remove_all () {
 		dk_echo "you wish to commit or save beforehand."		
 		dk_echo
 		
-		if ! dk_confirm; then return; fi
+		dk_confirm || return 0
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
@@ -1886,7 +1881,7 @@ dk_git_update () {
 
 	if ! [ "$1" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."
-		if ! dk_confirm; then return; fi
+		dk_confirm || return 0
 	fi
 
 	if [ ! -d "$DKBRANCH_DIR/.git" ]; then
@@ -1957,9 +1952,7 @@ dk_git_commit () {
 	
 	dk_echo
 	dk_info "git commit \"${message}\""
-	if ! dk_confirm; then
-		return 0
-	fi
+	dk_confirm || return 0
 	
 	#dk_call "$GIT_EXE" commit -a -m "${message}"
 	"$GIT_EXE" commit -a -m "${message}"
