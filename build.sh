@@ -6,25 +6,11 @@
 # shellcheck disable=SC2119
 # shellcheck disable=SC2120
 
-#set -x
-
-
-#echo "\$$ = $$"								# Process ID of the current shell instance.
-#echo "PID = $(ps -p $$ -o pid=)"							
-#echo "PPID = $(ps -p $$ -o ppid=)"				
-#echo "SH_PID = $(sh -c 'ps -p $$ -o pid=')"		
-#echo "SH_PPID = $(sh -c 'ps -p $$ -o ppid=')"	
-#echo "EXE = $(readlink /proc/$$/exe)"			# exe path of the current shell instance. 
-
-#PID=$$;                             echo "PID          = $PID"
-#PID_EXE=$(readlink /proc/$PID/exe); echo "PID_EXE      = $PID_EXE"
-#SHELL_TYPE=${PID_EXE##*/};          echo "SHELL_TYPE   = $SHELL_TYPE"
-#exit
-
-
 
 ###### Global Script Variables ######
-RELOAD_WITH_BASH=1
+echo "RELOAD_WITH_BASH = $RELOAD_WITH_BASH"
+[ -z ${RELOAD_WITH_BASH-} ] && export RELOAD_WITH_BASH=1
+echo "RELOAD_WITH_BASH = $RELOAD_WITH_BASH"
 LOG_VERBOSE=1
 LOG_DEBUG=1
 TRACE_ON_WARNINGS=1
@@ -67,10 +53,11 @@ main() {
 	dk_get_shell_type
 
 	echo "BASH = $BASH"
-	if [ $RELOAD_WITH_BASH = 1 ] && ! dk_defined BASH; then
-		dk_command_exists bash && exec /bin/bash "$0"	# Change to bash
+	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
+		export RELOAD_WITH_BASH=0
+		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
 	fi
-	export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
@@ -79,8 +66,8 @@ main() {
 	esac
 	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
 	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
-	$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
-	$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
 
 
@@ -212,7 +199,7 @@ dk_pick_update() {
 	#dk_debug _TARGET_OS_ 
 	#dk_debug _TYPE_
 
-	if [ "$behind" = "0" ]; then
+	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 		fi
@@ -356,7 +343,7 @@ dk_pick_os() {
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
 	dk_echo	
-    dk_echo " 1) $HOST_TRIPLE"
+    dk_echo " 1) ${HOST_TRIPLE-}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
@@ -399,7 +386,7 @@ dk_pick_os() {
 	
 	read input
 	if [ "$input" = "1" ]; then
-		TARGET_OS="$HOST_TRIPLE"
+		TARGET_OS="${HOST_TRIPLE-}"
 	elif [ "$input" = "2" ]; then
 		TARGET_OS="android_arm32"
 	elif [ "$input" = "3" ]; then
@@ -726,7 +713,7 @@ dk_generate() {
 	fi
 	
 	dk_echo "CMAKE_ARGS = $@"	
-	dk_call "$CMAKE_EXE" "$@" 2>&1
+	dk_call "$CMAKE_EXE" "$@"
 }
 
 
@@ -780,9 +767,9 @@ dk_build () {
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
 		if dk_file_exists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS/Debug" --config Debug --verbose
+			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS/Debug" "--config Debug" "--verbose"
 		elif dk_file_exists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"; then
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS" --config Debug --verbose
+			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS" "--config Debug" "--verbose"
 		else
 			dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
@@ -897,33 +884,59 @@ dk_error () {
 #
 #
 dk_stacktrace () {
-    #dk_verbose "dk_stacktrace($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+    dk_verbose "dk_stacktrace($*)"
+	#[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
 
+	### VERSION 1 ###
+#	[ "${FUNCNAME-}" = "" ] && return 0
+#	#[ "${BASH_SOURCE-}" = "" ] && return 0
+#	#[ "${BASH_LINENO-}" = "" ] && return 0
+#	local i=${1:-1} size=${#FUNCNAME[@]}
+# 	((i<size)) && echo "STACKTRACE[$size]" 
+#	i=0
+#	while [ "$i" -le "$size" ]; do
+#		((frame=${#FUNCNAME[@]}-i-2 ))
+#		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
+#		i=$(( i + 1 ))
+#	done 
 
-	### USE BASH_SOURCE ###
+
+#	### VERSION 2 ###
 	[ "${FUNCNAME-}" = "" ] && return 0
-	#[ "${BASH_SOURCE-}" = "" ] && return 0
+#	[ "${BASH_SOURCE-}" = "" ] && return 0
+#	[ "${BASH_LINENO-}" = "" ] && return 0
+	local status_code="${1}" 
+	local -a stack=("Stack trace of error code '${status_code}':")
+	local stack_size=${#FUNCNAME[@]}
+	local -i i
+	local indent="    "
+	# to avoid noise we start with 1 to skip the stack function
+	for (( i = 1; i < stack_size; i++ )); do
+	    local func="${FUNCNAME[$i]:-(top level)}"
+	    local -i line="${BASH_LINENO[$(( i - 1 ))]}"
+	    local src="${BASH_SOURCE[$i]:-(no file)}"
+	    stack+=("$indent └ $src:$line ($func)")
+	    indent="${indent}    "
+	done
+	(IFS=$'\n'; echo "${stack[*]}")
 
-	local i=${1:-1} size=${#FUNCNAME[@]}
-  	((i<size)) && echo "STACKTRACE"
-	i=0
-	while [ "$i" -le "$size" ]; do
-		((frame=${#FUNCNAME[@]}-i-2 ))
-		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
-		i=$(( i + 1 ))
-	done 
 
-	### USE Caller ###	
-	#local i=1 line file func
-	#while read -r line func file < <(caller $i); do
-	#	echo >&2 [$i] $file:$line $func(): $(sed -n ${line}p $file)
-	#	((i++))
-	#done
+#	### VERSION 3 ###
+#	local i=1 line file func
+#	while read -r line func file < <(caller $i); do
+#		echo >&2 [$i] $file:$line $func(): $(sed -n ${line}p $file)
+#		((i++))
+#	done
 }
 
+##################################################################################
+# dk_callstack() {
+#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+
+
+#}
 
 ##################################################################################
 # dk_defined(<variable>)
@@ -959,10 +972,11 @@ dk_hasValue () {
 #
 dk_call () {
 	#dk_verbose "dk_call($*)"
-	[ -z "$1" ] && dk_error "dk_call($*): requires at least 1 parameter"
+	[ "$#" -lt "1" ] && dk_error "Incorrect number of parameters"
 
 	dk_echo "${magenta} $ $* ${clr}"
-	$("$@") && "$@" 2>&1 #|| dk_verbose "'$*: failed!'"
+	#$("$@") && "$@" 2>&1 #|| dk_verbose "'$*: failed!'"
+	"$@"
 }
 
 
@@ -976,10 +990,10 @@ dk_check_remote () {
 
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		cd "${DKBRANCH_DIR}"
-		git remote update
-		branch=$(git rev-parse --abbrev-ref HEAD)
-		ahead=$(git rev-list --count origin/$branch..$branch)
-		behind=$(git rev-list --count $branch..origin/$branch)
+		${GIT_EXE} remote update
+		branch=$(${GIT_EXE} rev-parse --abbrev-ref HEAD)
+		ahead=$(${GIT_EXE} rev-list --count origin/$branch..$branch)
+		behind=$(${GIT_EXE} rev-list --count $branch..origin/$branch)
 		dk_info "$ahead commits ahead, $behind commits behind"
 	fi
 }
@@ -1249,7 +1263,7 @@ dk_validate_cmake () {
 	if [ "$HOST_OS" = "android" ]; then
 		CMAKE_SYSTEM_INSTALL=1
 	fi
-	if [ "$CMAKE_SYSTEM_INSTALL" = "1" ]; then
+	if [ "${CMAKE_SYSTEM_INSTALL-}" = "1" ]; then
 		dk_info "Installing CMake System packages"
 		CMAKE_EXE=$(command -v cmake)
 		dk_debug CMAKE_EXE
@@ -1275,14 +1289,14 @@ dk_validate_cmake () {
 	else
 		dk_info "Installing DK CMake packages"
 		######################################################################################################
-		if [ "${HOST_TRIPLE}" = "win_arm32" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-		if [ "${HOST_TRIPLE}" = "win_arm64" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-		if [ "${HOST_TRIPLE}" = "win_x86" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-		if [ "${HOST_TRIPLE}" = "win_x86_64" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
+		if [ "${HOST_TRIPLE-}" = "win_arm32" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
+		if [ "${HOST_TRIPLE-}" = "win_arm64" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
+		if [ "${HOST_TRIPLE-}" = "win_x86" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
+		if [ "${HOST_TRIPLE-}" = "win_x86_64" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
 		if [ "${HOST_OS}" = "mac" ];					then CMAKE_DL=$CMAKE_DL_MAC;			fi
-		if [ "${HOST_TRIPLE}" = "linux_x86_64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-		if [ "${HOST_TRIPLE}" = "linux_arm64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
-		if [ "${HOST_TRIPLE}" = "raspberry_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [ "${HOST_TRIPLE-}" = "linux_x86_64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
+		if [ "${HOST_TRIPLE-}" = "linux_arm64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
+		if [ "${HOST_TRIPLE-}" = "raspberry_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
 		dk_debug CMAKE_DL
 		
 		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
@@ -1331,7 +1345,7 @@ dk_validate_cmake () {
 #
 #
 dk_remove_extension () {
-	dk_verbose "dk_validate_git($*)"
+	dk_verbose "dk_remove_extension($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
 	filepath="$1"
@@ -1354,6 +1368,8 @@ dk_validate_git () {
 	fi
 	
 	GIT_EXE=$(command -v git)
+	[ -e ${GIT_EXE} ] || dk_error "GIT_EXE is invalid"
+	
 	dk_debug GIT_EXE
 }
 
@@ -1436,18 +1452,17 @@ dk_install () {
 	dk_info "dk_installing $1"
 
 	if dk_command_exists brew; then
-		dk_call "$SUDO" brew dk_install "$1"
+		dk_call $SUDO brew dk_install "$1"
 	elif dk_command_exists apt; then
-		dk_call "$SUDO" apt -y dk_install "$1"
+		dk_call $SUDO apt -y dk_install "$1"
 	elif dk_command_exists apt-get; then
-		dk_info "found apt-get"
-		dk_call "$SUDO" apt-get -y dk_install "$1"
+		dk_call $SUDO apt-get -y dk_install "$1"
 	elif dk_command_exists pkg; then
-		dk_call "$SUDO" pkg dk_install "$1"
+		dk_call $SUDO pkg dk_install "$1"
 	elif dk_command_exists pacman; then
-		dk_call "$SUDO" pacman -S "$1" --noconfirm
+		dk_call $SUDO pacman -S "$1" --noconfirm
 	elif dk_command_exists tce-load; then
-		dk_call "$SUDO" tce-load -wi "$1"
+		dk_call $SUDO tce-load -wi "$1"
 	else
 		dk_error "ERROR: no package managers found"
 	fi
@@ -2172,11 +2187,11 @@ dk_get_host_triple () {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_debug GCC_ENV
 
-		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$GCC_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z $HOST_ARCH ] && HOST_ARCH=$GCC_ARCH && dk_debug HOST_ARCH
-		[ -z $HOST_VENDOR ] && HOST_VENDOR=$GCC_VENDOR && dk_debug HOST_VENDOR
-		[ -z $HOST_OS ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
-		[ -z $HOST_ENV ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$GCC_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$GCC_ARCH && dk_debug HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$GCC_VENDOR && dk_debug HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
 	fi
 	if dk_command_exists bash; then
 		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
@@ -2192,11 +2207,11 @@ dk_get_host_triple () {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_debug BASH_ENV
 
-		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$BASH_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z $HOST_ARCH ] && HOST_ARCH=$BASH_ARCH && dk_debug HOST_ARCH
-		[ -z $HOST_VENDOR ] && HOST_VENDOR=$BASH_VENDOR && dk_debug HOST_VENDOR
-		[ -z $HOST_OS ] && HOST_OS=$BASH_OS && dk_debug HOST_OS
-		[ -z $HOST_ENV ] && HOST_ENV=$BASH_ENV && dk_debug HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_debug HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_debug HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_debug HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_debug HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_debug HOST_ENV
 	fi	
 	
 	if dk_command_exists uname; then
@@ -2401,6 +2416,7 @@ DK_TRY_CATCH () {
 	if [ "$err_status" -ne "0" ]; then
 		echo "ERROR_STATUS: $err_status"
 		dk_wait_for_key
+		dk_error "test"
 	fi
 }
 
@@ -2412,6 +2428,9 @@ DK_TRY_CATCH () {
 dk_get_shell_type () {
 	dk_verbose "dk_get_shell_type($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	echo "SHELL = $SHELL"
+	echo "BASH_SOURCE = $BASH_SOURCE"
+	echo "BASH_LINENO = $BASH_LINENO"
 
 	[ -e "/proc" ] || dk_warning "/proc does not exist" && return 0 
 	PID_EXE=$(readlink /proc/$$/exe);
@@ -2419,36 +2438,28 @@ dk_get_shell_type () {
 	echo "SHELL_TYPE   = $SHELL_TYPE"
 }
 
-##################################################################################
-# dk_callstack() {
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
-#   local status_code="${1}" 
-#
-#   local -a stack=("Stack trace of error code '${status_code}':")
-#   local stack_size=${#FUNCNAME[@]}
-#   local -i i
-#   local indent="    "
-#   # to avoid noise we start with 1 to skip the stack function
-#   for (( i = 1; i < stack_size; i++ )); do
-#       local func="${FUNCNAME[$i]:-(top level)}"
-#       local -i line="${BASH_LINENO[$(( i - 1 ))]}"
-#       local src="${BASH_SOURCE[$i]:-(no file)}"
-#       stack+=("$indent └ $src:$line ($func)")
-#       indent="${indent}    "
-#   done
-#   (IFS=$'\n'; echo "${stack[*]}")
-#}
 
 
 
+#set -x
+
+#echo "\$$ = $$"								# Process ID of the current shell instance.
+#echo "PID = $(ps -p $$ -o pid=)"							
+#echo "PPID = $(ps -p $$ -o ppid=)"				
+#echo "SH_PID = $(sh -c 'ps -p $$ -o pid=')"		
+#echo "SH_PPID = $(sh -c 'ps -p $$ -o ppid=')"	
+#echo "EXE = $(readlink /proc/$$/exe)"			# exe path of the current shell instance. 
+#PID=$$;                             echo "PID          = $PID"
+#PID_EXE=$(readlink /proc/$PID/exe); echo "PID_EXE      = $PID_EXE"
+#SHELL_TYPE=${PID_EXE##*/};          echo "SHELL_TYPE   = $SHELL_TYPE"
 
 
 
-
-#echo "@ = $@"
+echo "* = $*"
+#[ "$*" = "" ] || DK_TRY_CATCH "$@"
+#DK_TRY_CATCH main "$@"
 [ "$*" = "" ] || "$@"
-DK_TRY_CATCH main "$@"
-
+main "$@"
 
 
 
