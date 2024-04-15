@@ -1773,7 +1773,7 @@ dk_pull_assets () {
 #
 dk_reset_all () {
 	dk_verbose "dk_reset_all($*)"
-	[ -n "$2" ] && dk_error "Too many parameters"
+	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then
 		clear
@@ -1848,7 +1848,7 @@ dk_reset_all () {
 #
 dk_remove_all () {
 	dk_verbose "dk_remove_all($*)"
-	[ -n "$1" ] && dk_error "Too many parameters"
+	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then	
 		clear
