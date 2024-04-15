@@ -8,12 +8,10 @@
 
 
 ###### Global Script Variables ######
-echo "RELOAD_WITH_BASH = $RELOAD_WITH_BASH"
 [ -z ${RELOAD_WITH_BASH-} ] && export RELOAD_WITH_BASH=1
-echo "RELOAD_WITH_BASH = $RELOAD_WITH_BASH"
 LOG_VERBOSE=1
 LOG_DEBUG=1
-TRACE_ON_WARNINGS=1
+TRACE_ON_WARNINGS=0
 HALT_ON_WARNINGS=0
 CONTINUE_ON_ERRORS=0
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
@@ -83,44 +81,32 @@ main() {
 	fi
 
 	if [ -n "${USER-}" ]; then
+		dk_debug USER
 		DKUSERNAME=$USER
 	elif [ -n "${USERNAME-}" ]; then
+		dk_debug USERNAME
 		DKUSERNAME=$USERNAME
 	fi
 	dk_debug DKUSERNAME
-	DKLOGNAME=${LOGNAME-}
-	dk_debug DKLOGNAME
-	DKHOME=$HOME
-	dk_debug DKHOME
-	DKTERM=$TERM
-	dk_debug DKTERM
-	DKSHELL=$SHELL
-	dk_debug DKSHELL
-	DKPATH=$PATH
-	dk_debug DKPATH
-	DKPWD=$PWD
-	dk_debug DKPWD
-	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_NAME
 	dk_debug SCRIPT_DIR
-	dk_debug USER
-	dk_debug USERNAME
 	
 	## Get the HOST_TRIPLE and other HOST variables
-	dk_get_host_triple #|| dk_error "Could not determine HOST_TRIPLE"
+	dk_get_host_triple #HOST_TRIPLE"
 	
 	if [ -n "${USERPROFILE-}" ]; then
+		dk_debug USERPROFILE
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
 		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
-	mkdir -p "$DIGITALKNOB_DIR"
 	dk_debug DIGITALKNOB_DIR
-
+	mkdir -p "$DIGITALKNOB_DIR"
+	
 	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
 	mkdir -p "$DKDOWNLOAD_DIR"
 	dk_debug DKDOWNLOAD_DIR
@@ -159,17 +145,6 @@ main() {
 		dk_create_cache
 		
 		dk_generate
-		#if [ "$TARGET_OS" = "android_arm32" ]     dk_generate_toolchain android_arm32_toolchain
-		#if [ "$TARGET_OS" = "android_arm64" ]     dk_generate_toolchain android_arm64_toolchain
-		#if [ "$TARGET_OS" = "emscripten" ]        dk_generate_toolchain emscripten_toolchain
-		#if [ "$TARGET_OS" = "win_arm64_clang" ]   dk_generate_toolchain windows_arm64_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_mingw" ]     dk_generate_toolchain windows_x86_mingw_toolchain
-		#if [ "$TARGET_OS" = "win_x86_clang" ]     dk_generate_toolchain windows_x86_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_msvc" ]      dk_generate_toolchain windows_x86_msvc_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_mingw" ]  dk_generate_toolchain windows_x86_64_mingw_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_clang" ]  dk_generate_toolchain windows_x86_64_clang_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_ucrt" ]   dk_generate_toolchain windows_x86_64_ucrt_toolchain
-		#if [ "$TARGET_OS" = "win_x86_64_msvc" ]   dk_generate_toolchain windows_x86_64_msvc_toolchain
 		
 		dk_build
 		
@@ -198,7 +173,7 @@ dk_pick_update() {
 	#dk_debug _APP_
 	#dk_debug _TARGET_OS_ 
 	#dk_debug _TYPE_
-
+	
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
@@ -827,14 +802,20 @@ dk_verbose () {
 #
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
-	[ -z "$1" ] && dk_error "dk_debug($*): requires at least 1 parameter"
+	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
-	[ $LOG_DEBUG = 1 ] || return 0
-
-	if dk_defined $1; then
-		eval value='$'{$1}
-		msg="$1: ${value}"
-	fi
+	[ $LOG_DEBUG -eq 1 ] || return 0
+	
+	### print variable ###
+	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
+		if dk_defined $1; then
+			eval value='$'{$1}
+			msg="$1: ${value}"
+		else
+			msg="$1: ${red}NOT DEFINED${clr}"
+		fi
+	fi 
+	### print variable ###
 
 	dk_echo "${blue}  DEBUG: ${msg-} ${clr}"
 }
@@ -932,13 +913,6 @@ dk_stacktrace () {
 }
 
 ##################################################################################
-# dk_callstack() {
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
-
-
-#}
-
-##################################################################################
 # dk_defined(<variable>)
 #
 # Evaluates to true if the parameter is a variable that exists.
@@ -946,6 +920,7 @@ dk_stacktrace () {
 dk_defined () {
 	dk_verbose "dk_defined($*)"
 	[ $# -ne 1 ] && return $false # Incorrect number of parameters
+	string=$1
 	
 	eval value='$'{$1+x} # value will = 'x' if the variable is defined
 	[ -n "$value" ]
@@ -988,6 +963,8 @@ dk_check_remote () {
 	dk_verbose "dk_check_remote($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
+	ahead=0
+	behind=0
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		cd "${DKBRANCH_DIR}"
 		${GIT_EXE} remote update
@@ -1100,13 +1077,7 @@ dk_get_filename () {
 	dk_verbose "dk_get_filename($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if [ -z "$2" ]; then
-		dk_error "dk_get_filename <path> <output> requires 2 parameters"
-		return "$false"
-	fi
-	
 	eval "$2=$(basename "$1")"
-	#[ "$base_name" = "" ]
 }
 
 
@@ -1119,7 +1090,6 @@ dk_convert_to_c_identifier () {
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	input=$1
-	dk_debug "input = $input"
 	
 	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
 	dk_replace_all "$input" "-" "_" input		# POSIX replace
