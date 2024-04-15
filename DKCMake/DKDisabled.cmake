@@ -102,7 +102,7 @@ if(ANDROID)
 	dk_disable(DKMySql)				# requires curl			
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLCef)			# requires cef_binary
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
@@ -180,7 +180,7 @@ if(EMSCRIPTEN)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)
@@ -260,7 +260,7 @@ if(IOS OR IOSSIM)
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLCef)			# requires cef_binary
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
@@ -321,7 +321,7 @@ if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
@@ -360,7 +360,7 @@ endif(LINUX)
 # Disabled for Mac targets
 if(MAC) 
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
@@ -399,7 +399,7 @@ if(RASPBERRY)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
@@ -464,7 +464,7 @@ if(MSVC)
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKScreenRecorder)    # requires opencv
 	dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
-	dk_disable(DKSDLWaave)			# requires waave
+	#dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errorsE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent

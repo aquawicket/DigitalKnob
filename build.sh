@@ -95,13 +95,13 @@ main() {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	if [ -n "$USER" ]; then
+	if [ -n "${USER-}" ]; then
 		DKUSERNAME=$USER
-	elif [ -n "$USERNAME" ]; then
+	elif [ -n "${USERNAME-}" ]; then
 		DKUSERNAME=$USERNAME
 	fi
 	dk_debug DKUSERNAME
-	DKLOGNAME=$LOGNAME
+	DKLOGNAME=${LOGNAME-}
 	dk_debug DKLOGNAME
 	DKHOME=$HOME
 	dk_debug DKHOME
@@ -297,7 +297,7 @@ dk_pick_app() {
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
-	dk_echo "${APP}  ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
 	
 	dk_echo
     dk_echo " 1) HelloWorld"
@@ -354,7 +354,7 @@ dk_pick_os() {
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
-	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
 	dk_echo	
     dk_echo " 1) $HOST_TRIPLE"
 	dk_echo
@@ -489,7 +489,7 @@ dk_pick_type() {
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
-	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
+	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
 	dk_echo	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
@@ -541,7 +541,7 @@ dk_generate() {
 	
 	dk_echo
 	dk_echo "##################################################################"
-	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
+	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - ${DKLEVEL-}"
 	dk_echo "##################################################################"
 	dk_echo
 
@@ -726,7 +726,7 @@ dk_generate() {
 	fi
 	
 	dk_echo "CMAKE_ARGS = $@"	
-	dk_call "$CMAKE_EXE" "$@"
+	dk_call "$CMAKE_EXE" "$@" 2>&1
 }
 
 
@@ -849,7 +849,7 @@ dk_debug () {
 		msg="$1: ${value}"
 	fi
 
-	dk_echo "${blue}  DEBUG: $msg ${clr}"
+	dk_echo "${blue}  DEBUG: ${msg-} ${clr}"
 }
 
 
@@ -958,11 +958,11 @@ dk_hasValue () {
 #
 #
 dk_call () {
-	dk_verbose "dk_call($*)"
+	#dk_verbose "dk_call($*)"
 	[ -z "$1" ] && dk_error "dk_call($*): requires at least 1 parameter"
 
 	dk_echo "${magenta} $ $* ${clr}"
-	$("$@") && "$@" || dk_warning "'$*: failed!'"
+	$("$@") && "$@" 2>&1 #|| dk_verbose "'$*: failed!'"
 }
 
 
@@ -996,7 +996,7 @@ dk_validate_sudo () {
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
 	fi
-	$SUDO echo
+	${SUDO-} echo
 }
 
 
@@ -1904,9 +1904,9 @@ dk_git_update () {
 		dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git "$DKBRANCH_DIR"
 	fi
 	dk_call cd "$DKBRANCH_DIR" #|| dk_error "cd $$DKBRANCH_DIR failed!"
-	dk_call "$GIT_EXE" pull --all
+	"$GIT_EXE" pull --all
 	dk_call "$GIT_EXE" checkout -- .
-	dk_call "$GIT_EXE" checkout "$DKBRANCH"
+	"$GIT_EXE" checkout "$DKBRANCH"
 	if [ "$?" = "0" ]; then
 		dk_info "$DKBRANCH branch selected"
 	else
