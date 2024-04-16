@@ -489,7 +489,7 @@ dk_pick_type() {
 #
 #   if [ "$*" = "" ]; then dk_error "dk_add_cmake_arg is empty!" & return 1
 #    dk_echo added $*
-#    CMAKE_ARGS+=( "%*" )
+#    set -- "%*" )
 #}
 
 
@@ -513,7 +513,7 @@ dk_generate() {
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	dk_debug TARGET_PATH
 	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
-	cd "$TARGET_PATH"/"$TARGET_OS" #|| dk_error "cd $TARGET_PATH/$TARGET_OS failed!"
+	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_debug CMAKE_SOURCE_DIR
 	if ! dk_file_exists "$CMAKE_SOURCE_DIR"; then
@@ -530,41 +530,31 @@ dk_generate() {
 	#declare -a CMAKE_ARGS
 	set --											#clear the positional parameters
 	if [ "$TYPE" = "Debug" ]; then
-		#CMAKE_ARGS+=( "-DDEBUG=ON" )
-		#CMAKE_ARGS+=( "-DRELEASE=OFF" )
+		#set -- "-DDEBUG=ON" )
 		set -- "$@" "-DDEBUG=ON"
 		set -- "$@" "-DRELEASE=OFF"
 	fi
 	if [ "$TYPE" = "Release" ]; then
-		#CMAKE_ARGS+=( "-DDEBUG=OFF" )
-		#CMAKE_ARGS+=( "-DRELEASE=ON" )
 		set -- "$@" "-DDEBUG=OFF"
 		set -- "$@" "-DRELEASE=ON"
 	fi
 	if [ "$TYPE" = "All" ]; then
-		#CMAKE_ARGS+=( "-DDEBUG=ON" )
-		#CMAKE_ARGS+=( "-DRELEASE=ON" )
 		set -- "$@" "-DDEBUG=ON"
 		set -- "$@" "-DRELEASE=ON"
 	fi
 	if [ $DKLEVEL = "Build" ]; then
-		#CMAKE_ARGS+=( "-DBUILD=ON" )
 		set -- "$@" "-DBUILD=ON"
 	fi
 	if [ $DKLEVEL = "Rebuild" ]; then
-		#CMAKE_ARGS+=( "-DREBUILD=ON" )
 		set -- "$@" "-DREBUILD=ON"
 	fi
 	if [ $DKLEVEL = "RebuildAll" ]; then
-		#CMAKE_ARGS+=( "-DREBUILDALL=ON" )
 		set -- "$@" "-DREBUILDALL=ON"
 	fi
 	if [ $DKLINK = "Static" ]; then
-		#CMAKE_ARGS+=( "-DSTATIC=ON" )
 		set -- "$@" "-DSTATIC=ON"
 	fi
 	if [ $DKLINK = "Shared" ]; then
-		#CMAKE_ARGS+=( "-DSHARED=ON" )
 		set -- "$@" "-DSHARED=ON"
 	fi
 	
@@ -572,106 +562,108 @@ dk_generate() {
 	dk_debug CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
-		#CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
 		set -- "$@" "-S=$CMAKE_SOURCE_DIR"
 	fi
-	#CMAKE_ARGS+=( "-B=$CMAKE_BINARY_DIR" )
 	set -- "$@" "-B=$CMAKE_BINARY_DIR"
 	
 	############ CMake Options ############
-    #CMAKE_ARGS+=( "-DCMAKE_VERBOSE_MAKEFILE=1" )
-	#CMAKE_ARGS+=( "-DCMAKE_COLOR_DIAGNOSTICS=ON" )
-	#CMAKE_ARGS+=( "-Wdev" )
-	#CMAKE_ARGS+=( "-Werror=dev" )
-	#CMAKE_ARGS+=( "-Wdeprecated" )
-	#CMAKE_ARGS+=( "-Werror=deprecated" )
-	#CMAKE_ARGS+=( "--graphviz=graphviz.txt" )
-	#CMAKE_ARGS+=( "--system-information system_information.txt" )
-	#CMAKE_ARGS+=( "--debug-trycompile" )
-	#CMAKE_ARGS+=( "--debug-output" )
-	#CMAKE_ARGS+=( "--trace" )
-	#CMAKE_ARGS+=( "--trace-expand" )
-	#CMAKE_ARGS+=( "--warn-uninitialized" )
-	#CMAKE_ARGS+=( "--warn-unused-vars" )
-	#CMAKE_ARGS+=( "--check-system-vars" )
+    #set -- "$@" "-DCMAKE_VERBOSE_MAKEFILE=1"
+	#set -- "$@" "-DCMAKE_COLOR_DIAGNOSTICS=ON"
+	#set -- "$@" "-Wdev"
+	#set -- "$@" "-Werror=dev"
+	#set -- "$@" "-Wdeprecated"
+	#set -- "$@" "-Werror=deprecated"
+	#set -- "$@" "--graphviz=graphviz.txt"
+	#set -- "$@" "--system-information system_information.txt"
+	#set -- "$@" "--debug-trycompile"
+	#set -- "$@" "--debug-output"
+	#set -- "$@" "--trace"
+	#set -- "$@" "--trace-expand"
+	#set -- "$@" "--warn-uninitialized"
+	#set -- "$@" "--warn-unused-vars"
+	#set -- "$@" "--check-system-vars"
 	
 	if [ "$TARGET_OS" = "android_arm32" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 
 	if [ "$TARGET_OS" = "android_arm64" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "emscripten" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm32" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm64" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86_64" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86_64" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86_64" ]; then
-		#CMAKE_ARGS+=( "-G Xcode" )
 		set -- "-G Xcode" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm32" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm64" ]; then
-		#CMAKE_ARGS+=( "-G Unix Makefiles" )
 		set -- "-G Unix Makefiles" "$@"
 	fi
 	
-	if [ "$TARGET_OS" = "win_x86" ]; then
-		#CMAKE_ARGS+=( "-G MSYS Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		set -- "-G MSYS Makefiles" "$@"
+	if [ "$TARGET_OS" = "win_arm64_clang" ]; then
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
+		set -- "-G" "MSYS Makefiles" "$@"
+	fi
+	
+	if [ "$TARGET_OS" = "win_x86_clang" ]; then
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
+		set -- "-G" "MSYS Makefiles" "$@"
+	fi
+	
+	if [ "$TARGET_OS" = "win_x86_mingw" ]; then
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
+		set -- "-G" "MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_clang" ]; then
-		#CMAKE_ARGS="${CMAKE_ARGS}\n-G\nMSYS Makefiles" )
-		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		#set -- "-G MSYS Makefiles" "$@"
-		set -- "MSYS Makefiles" "$@"
-		set -- "-G" "$@"
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
+		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
+		set -- "-G" "MSYS Makefiles" "$@"
+	fi
+	
+	if [ "$TARGET_OS" = "win_x86_64_mingw" ]; then
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
+		set -- "-G" "MSYS Makefiles" "$@"
+	fi
+	
+	if [ "$TARGET_OS" = "win_x86_64_ucrt" ]; then
+		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
+		set -- "-G" "MSYS Makefiles" "$@"
 	fi
 		
 	#### CMAKE CALL ####
@@ -679,13 +671,11 @@ dk_generate() {
 	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 	if dk_file_exists "$TOOLCHAIN"; then
-		#CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" )
 		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 	fi
 	
 	if dk_defined WSLENV; then 
-		cd "$DKCMAKE_DIR" #|| dk_error "cd $DKCMAKE_DIR failed!"
-		#$CMAKE_ARGS+=( "." )
+		cd "$DKCMAKE_DIR"
 		set -- "$@" "."
 	fi
 	
@@ -712,12 +702,12 @@ dk_generate() {
 #    elif [ ! "$hasAndroid" == "1" ]; then
 #		CMAKE_GENERATOR="MinGW Makefiles"
 #	fi
-#	CMAKE_ARGS+=( "-G ${CMAKE_GENERATOR}" )
+#	set -- "-G ${CMAKE_GENERATOR}" )
 #    
 #    ###### CMAKE_TOOLCHAIN_FILE ######
 #	# dk_call set CMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/toolchains/$1.cmake
 #    # dk_call replace_all $CMAKE_TOOLCHAIN_FILE "\\" "/" CMAKE_TOOLCHAIN_FILE
-#    # if exist $CMAKE_TOOLCHAIN_FILE CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE" )
+#    # if exist $CMAKE_TOOLCHAIN_FILE set -- "-DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE" )
 #   
 #    ###### CMake Configure ######
 #    dk_echo
@@ -795,11 +785,11 @@ dk_validate_cmake () {
 	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
 	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${TARGET_OS}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
 	if [ "${TARGET_OS}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${TARGET_OS}" 	= "win_x86_gcc" ]; 		then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${TARGET_OS}" 	= "win_x86_64_gcc" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${TARGET_OS}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${TARGET_OS}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${TARGET_OS}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
 	if [ "${TARGET_OS}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_debug CMAKE_IMPORT
