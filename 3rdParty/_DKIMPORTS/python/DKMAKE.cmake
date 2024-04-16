@@ -94,7 +94,7 @@ endif()
 if(EXISTS ${PYTHON})
 	dk_prependEnvPath("${PYTHON}")
 endif()
-dk_debug(PYTHON_EXE PRINTVAR)
+dk_debug(PYTHON_EXE)
 
 
 
@@ -111,7 +111,7 @@ if(WIN_HOST)
 		dk_error("COULD NOT FIND PIP_EXE:${PIP_EXE}")
 		return()
 	endif()
-	dk_debug(PIP_EXE PRINTVAR)
+	dk_debug(PIP_EXE)
 endif()
 
 
@@ -151,9 +151,9 @@ endif()
 #	endif()
 #
 #	dk_set(Python_INCLUDE_DIRS ${PYTHON}/include)
-#	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
+#	dk_debug(Python_INCLUDE_DIRS)
 #	dk_set(Python_LIBRARIES 	${PYTHON}/libs)
-#	dk_debug(Python_LIBRARIES	PRINTVAR)
+#	dk_debug(Python_LIBRARIES)
 #elseif(MAC_HOST)
 #	dk_command(bash -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NOASSERT)
 #	
@@ -178,11 +178,11 @@ endif()
 #
 #	# /data/data/com.termux/files/usr/include/python3.11
 #	dk_set(Python_INCLUDE_DIRS /data/data/com.termux/files/usr/include/python3.11)
-#	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
+#	dk_debug(Python_INCLUDE_DIRS)
 #
 #	# /data/data/com.termux/files/usr/lib
 #	dk_set(Python_LIBRARIES /data/data/com.termux/files/usr/lib)
-#	dk_debug(Python_LIBRARIES		PRINTVAR)
+#	dk_debug(Python_LIBRARIES)
 #
 #	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
 #elseif(RASPBERRY)

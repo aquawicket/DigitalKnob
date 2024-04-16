@@ -1,7 +1,7 @@
 include_guard()
 
 ##################################################################################
-# dk_verbose(msg) PRINTVAR
+# dk_verbose(msg)
 #
 #	Print a verbose message to the console
 #
@@ -9,8 +9,8 @@ include_guard()
 #
 function(dk_verbose msg)
 	#DKDEBUGFUNC(${ARGV})
+	
 	if(DKVERBOSE_ENABLED)
-		dk_get_option(PRINTVAR ${ARGV})
 		dk_printvar(msg)
 		
 		dk_updateLogInfo()

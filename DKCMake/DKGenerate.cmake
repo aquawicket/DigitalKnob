@@ -89,7 +89,7 @@ foreach(plugin ${dkdepend_list})
 		Wait()
 		break()
 	endif()
-	#dk_debug(plugin_path		PRINTVAR)
+	#dk_debug(plugin_path)
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
 	dk_load(${plugin_path}/DKMAKE.cmake)

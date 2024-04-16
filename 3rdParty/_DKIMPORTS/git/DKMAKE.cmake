@@ -137,6 +137,6 @@ return()
 #dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent
 #
 #### print GIT info ###
-#dk_debug(GIT_EXE		PRINTVAR)
+#dk_debug(GIT_EXE)
 #dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
-#dk_debug(GIT_VERSION	PRINTVAR)
+#dk_debug(GIT_VERSION)

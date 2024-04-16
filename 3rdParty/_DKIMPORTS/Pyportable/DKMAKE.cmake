@@ -14,14 +14,14 @@ if(WIN_HOST)
 	dk_prependEnvPath("${pyportable}")
 	
 	dk_set(Python_INCLUDE_DIRS ${pyportable}/include)
-	dk_debug(Python_INCLUDE_DIRS	PRINTVAR)
+	dk_debug(Python_INCLUDE_DIRS)
 	
 	dk_set(Python_LIBRARIES ${pyportable}/libs)
-	dk_debug(Python_LIBRARIES		PRINTVAR)
+	dk_debug(Python_LIBRARIES)
 
 endif()
 
-#dk_debug(PYTHON_EXE		PRINTVAR)
+#dk_debug(PYTHON_EXE)
 #dk_command(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
-#dk_debug(PYTHON_VERSION	PRINTVAR)
+#dk_debug(PYTHON_VERSION)
 DK_ASSERT_PATH(PYTHON_EXE)

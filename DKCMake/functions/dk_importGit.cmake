@@ -18,11 +18,11 @@ function(dk_importGit url) #branch #id #PATCH
 	
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	foreach(item ${url_list})
-		dk_verbose(item	PRINTVAR)
+		dk_verbose(item)
 	endforeach()
 	
 	list(LENGTH url_list url_list_size)
-	dk_verbose(url_list_size	PRINTVAR)
+	dk_verbose(url_list_size)
 
 	# GITHUB
 	if(${url_list_size} LESS 5)
@@ -50,10 +50,10 @@ function(dk_importGit url) #branch #id #PATCH
 		endif()
 	
 		list(GET url_list 3 org)
-		dk_verbose(org	PRINTVAR)
+		dk_verbose(org)
 	
 		list(GET url_list 4 Lib)
-		dk_verbose(Lib	PRINTVAR)
+		dk_verbose(Lib)
 		
 		string(FIND ${Lib} ".git" index)
 		if(${index} GREATER -1)
@@ -64,7 +64,7 @@ function(dk_importGit url) #branch #id #PATCH
 	endif()
 	
 	string(TOLOWER ${Lib} Lib)
-	dk_verbose(Lib	PRINTVAR)
+	dk_verbose(Lib)
 	
 	math(EXPR last "${url_list_size}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
@@ -76,7 +76,7 @@ function(dk_importGit url) #branch #id #PATCH
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 			string(TOLOWER ${ID} FOLDER)
-			dk_verbose(FOLDER	PRINTVAR)
+			dk_verbose(FOLDER)
 		endif()
 	endif()
 	
@@ -89,31 +89,31 @@ function(dk_importGit url) #branch #id #PATCH
 	if(NOT LIBVAR)
 		dk_error("$(LIBVAR) is invalid")
 	endif()
-	dk_verbose(LIBVAR	PRINTVAR)
+	dk_verbose(LIBVAR)
 	
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_error("${LIBVAR}_FOLDER is invalid")
 	endif()
-	dk_verbose(${LIBVAR}_FOLDER		PRINTVAR)
+	dk_verbose(${LIBVAR}_FOLDER	)
 	
 	dk_set(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
 		dk_error("${LIBVAR}_BRANCH is invalid")
 	endif()
-	dk_verbose(${LIBVAR}_BRANCH		PRINTVAR)
+	dk_verbose(${LIBVAR}_BRANCH	)
 	
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
 		dk_error("${LIBVAR}_NAME is invalid")
 	endif()
-	dk_verbose(${LIBVAR}_NAME	PRINTVAR)
+	dk_verbose(${LIBVAR}_NAME)
 	
 	dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
 		dk_error("${${LIBVAR}} is invalid")
 	endif()
-	dk_verbose(${${LIBVAR}}	PRINTVAR)
+	dk_verbose(${${LIBVAR}})
 	
 	if(NOT EXISTS ${${LIBVAR}}/.git)
 		dk_set(CURRENT_DIR ${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})

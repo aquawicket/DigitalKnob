@@ -14,39 +14,39 @@ function(dk_importDownload url) #install_path #PATCH
 	#dk_wait()
 	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
 	#foreach(item ${url_list})
-	#	dk_verbose(item		PRINTVAR)
+	#	dk_verbose(item)
 	#endforeach()
 	list(LENGTH url_list url_length)
-	#dk_verbose(url_length	PRINTVAR)
+	#dk_verbose(url_length)
 	
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
 			set(install_path ${ARGV1})
-			dk_verbose(install_path		PRINTVAR)
+			dk_verbose(install_path)
 		endif()
 	endif()
 	
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(tag ${ARGV2})
-			dk_verbose(tag		PRINTVAR)
+			dk_verbose(tag)
 		endif()
 	endif()
 	
-	dk_verbose(CMAKE_CURRENT_LIST_DIR	PRINTVAR)
+	dk_verbose(CMAKE_CURRENT_LIST_DIR)
 	get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
-	dk_verbose(Lib	PRINTVAR)
+	dk_verbose(Lib)
 	
 	string(TOUPPER ${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
-	dk_verbose(LIBVAR	PRINTVAR)
+	dk_verbose(LIBVAR)
 	
 	string(TOLOWER ${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_error("${LIBVAR}_FOLDER invalid")
 	endif()
-	dk_verbose(${LIBVAR}_FOLDER		PRINTVAR)
+	dk_verbose(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_verbose("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")

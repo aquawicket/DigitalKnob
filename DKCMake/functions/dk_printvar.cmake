@@ -7,7 +7,7 @@ include_guard()
 #	@var	- The variable name to print
 #
 macro(dk_printvar var)
-	if(PRINTVAR)
+	#if(PRINTVAR)
 		if(DEFINED "${${var}}")
 			if(${${var}} MATCHES "ENV{")
 				set(ENV_VAR ${${var}})
@@ -30,5 +30,5 @@ macro(dk_printvar var)
 			#message("returning from ${CMAKE_CURRENT_FUNCTION}()")
 			#return() #return out out calling function
 		endif()
-	endif()
+	#endif()
 endmacro()

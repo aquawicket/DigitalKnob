@@ -27,7 +27,7 @@ macro(dk_applyPatch directory patch_file)
 		#dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 		return()	# RETURN if the patch check failed, it may have already been patched
 	endif()
-	dk_debug(output	PRINTVAR)
+	dk_debug(output)
 	
 	## THen do the actual patch 
 	set(COMMAND_ARGS "")
@@ -36,7 +36,7 @@ macro(dk_applyPatch directory patch_file)
 	#set(COMMAND_ARGS ${COMMAND_ARGS} --check)
 	set(COMMAND_ARGS ${COMMAND_ARGS} --verbose)
 	set(COMMAND_ARGS ${COMMAND_ARGS} ${patch_file})
-	dk_debug(COMMAND_ARGS	PRINTVAR)
+	dk_debug(COMMAND_ARGS)
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${directory}
 					RESULT_VARIABLE result
@@ -45,5 +45,5 @@ macro(dk_applyPatch directory patch_file)
 	if(NOT ${result} EQUAL 0)
 		dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
-	dk_info(output	PRINTVAR)
+	dk_info(output)
 endmacro()

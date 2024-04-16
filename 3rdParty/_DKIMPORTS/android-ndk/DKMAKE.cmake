@@ -64,7 +64,7 @@ dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https:
 
 ###### INSTALL ######
 dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
-dk_debug(ANDROID_NDK	PRINTVAR)
+dk_debug(ANDROID_NDK)
 
 dk_makeDirectory			("${ANDROID_SDK}/ndk")
 WIN_HOST_dk_import			(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} PATCH)
@@ -151,14 +151,14 @@ dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TA
 dk_set(ANDROID_BASH_EXPORTS			"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;")
-dk_debug(ANDROID_GENERATOR		PRINTVAR)
-dk_debug(ANDROID_TOOLCHAIN_FILE	PRINTVAR)
-dk_debug(ANDROID_API			PRINTVAR)
-dk_debug(ANDROID_MIN_API		PRINTVAR)
-dk_debug(ANDROID_MAKE_PROGRAM	PRINTVAR)
-dk_debug(ANDROID_C_COMPILER		PRINTVAR)
-dk_debug(ANDROID_CXX_COMPILER	PRINTVAR)
-dk_debug(ANDROID_AR				PRINTVAR)
+dk_debug(ANDROID_GENERATOR)
+dk_debug(ANDROID_TOOLCHAIN_FILE)
+dk_debug(ANDROID_API)
+dk_debug(ANDROID_MIN_API)
+dk_debug(ANDROID_MAKE_PROGRAM)
+dk_debug(ANDROID_C_COMPILER)
+dk_debug(ANDROID_CXX_COMPILER)
+dk_debug(ANDROID_AR)
 
 
 ###### ANDROID ENVIRONMENT VARIABLES ######

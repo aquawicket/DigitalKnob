@@ -26,7 +26,7 @@ function(dk_getCmakeCommandLine RESULT)
 		math(EXPR ARG_NUM "${ARG_NUM}+1") 							# incrementing current index
 	endwhile()
 	
-	dk_debug(PASSED_PARAMETERS	PRINTVAR)
+	dk_debug(PASSED_PARAMETERS)
 	dk_wait()
 	
 	set(${RESULT} "${PASSED_PARAMETERS}" PARENT_SCOPE) #return RESULT

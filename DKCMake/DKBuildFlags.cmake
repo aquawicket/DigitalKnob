@@ -112,7 +112,7 @@ include_guard()
 #message("CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
 #if(DKCMAKE_COMMAND_LINE_TOOLCHAIN)
 #	dk_debug("DKCMAKE_COMMAND_LINE_TOOLCHAIN")
-#	dk_debug(CMAKE_TOOLCHAIN_FILE PRINTVAR)
+#	dk_debug(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_debug("DKCMAKE_LOAD_FILE_TOOLCHAIN")
 #	#dk_load(${DKCMAKE_DIR}/toolchains/windows_x86_64_clang_toolchain.cmake)
@@ -241,7 +241,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-pic) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-pic) 
 endif()
-dk_debug(POSITION_INDEPENDENT_CODE PRINTVAR)
+dk_debug(POSITION_INDEPENDENT_CODE)
 
 ###### POSITION_INDEPENDENT_EXECUTABLE ######
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fpie
@@ -264,7 +264,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-pie) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-pie) 
 endif()
-dk_debug(POSITION_INDEPENDENT_EXECUTABLE PRINTVAR)
+dk_debug(POSITION_INDEPENDENT_EXECUTABLE)
 
 ###### RUN-TIME TYPE IDENTIFICATION ######
 if(ENABLE_RTTI)
@@ -286,7 +286,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-rtti) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-rtti)
 endif()
-dk_debug(ENABLE_RTTI PRINTVAR)
+dk_debug(ENABLE_RTTI )
 
 ###### EXCEPTIONS ######
 if(ENABLE_EXCEPTIONS)
@@ -310,7 +310,7 @@ else()
 	dk_append(DKCONFIGURE_CFLAGS -fno-exceptions) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fno-exceptions)
 endif()
-dk_debug(ENABLE_EXCEPTIONS PRINTVAR)
+dk_debug(ENABLE_EXCEPTIONS)
 
 
 
@@ -742,14 +742,14 @@ if(WIN_ARM64 AND CLANGARM64)
 endif()
 
 
-dk_debug(MSYSTEM				PRINTVAR)
-dk_debug(CMAKE_GENERATOR		PRINTVAR)
-dk_debug(CMAKE_MAKE_PROGRAM		PRINTVAR)
-dk_debug(CMAKE_C_COMPILER		PRINTVAR)
-dk_debug(CMAKE_CXX_COMPILER		PRINTVAR)
-dk_debug(CMAKE_C_FLAGS			PRINTVAR)
-dk_debug(CMAKE_CXX_FLAGS		PRINTVAR)
-dk_debug(CMAKE_EXE_LINKER_FLAGS	PRINTVAR)
+dk_debug(MSYSTEM)
+dk_debug(CMAKE_GENERATOR)
+dk_debug(CMAKE_MAKE_PROGRAM)
+dk_debug(CMAKE_C_COMPILER)
+dk_debug(CMAKE_CXX_COMPILER)
+dk_debug(CMAKE_C_FLAGS)
+dk_debug(CMAKE_CXX_FLAGS)
+dk_debug(CMAKE_EXE_LINKER_FLAGS)
 
 
 ######### Extra Flags and Settings #########
@@ -802,7 +802,7 @@ if(MULTI_CONFIG)
 		dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
 	endif()
 	# dk_set	(CMAKE_CONFIGURATION_TYPES Debug Release)
-	dk_debug(CMAKE_CONFIGURATION_TYPES	PRINTVAR)
+	dk_debug(CMAKE_CONFIGURATION_TYPES)
 	
 	dk_set	(BUILD_DIR ${OS})
 	
@@ -910,7 +910,7 @@ endif()
 
 ###### Set DKCMAKE_BUILD variable ######
 dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
-dk_debug(DKCMAKE_BUILD	PRINTVAR)
+dk_debug(DKCMAKE_BUILD)
 
 
 ###### Set DKCONFIGURE_BUILD variable ######

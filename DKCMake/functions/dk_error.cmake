@@ -9,9 +9,9 @@ include_guard()
 #
 function(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
+	
 	dk_get_option(NOASSERT ${ARGV})
 	
-	dk_get_option(PRINTVAR ${ARGV})
 	dk_printvar(msg)
 	
 	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)

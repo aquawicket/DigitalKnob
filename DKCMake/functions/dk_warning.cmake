@@ -1,7 +1,7 @@
 include_guard()
 
 ##################################################################################
-# dk_warning(msg) PRINTVAR 
+# dk_warning(msg)
 #
 #	Print a warning message to the console
 #
@@ -9,7 +9,7 @@ include_guard()
 #
 macro(dk_warning msg)
 	#DKDEBUGFUNC(${ARGV})
-	dk_get_option(PRINTVAR ${ARGV})
+	
 	dk_printvar(msg)
 	
 	dk_updateLogInfo()

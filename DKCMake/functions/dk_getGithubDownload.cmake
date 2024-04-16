@@ -14,11 +14,11 @@ function(dk_getGithubDownload url) #install_path #Patch
 	# split into list converting / to divider ;
 	string(REPLACE "/" ";" url_list ${url})
 	foreach(item ${url_list})
-		dk_debug(item	PRINTVAR)
+		dk_debug(item)
 	endforeach()
 
 	list(LENGTH url_list url_length)
-	dk_debug(url_length	PRINTVAR)
+	dk_debug(url_length)
 	
 	if(${url_length} LESS 5)
 		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
@@ -28,21 +28,21 @@ function(dk_getGithubDownload url) #install_path #Patch
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
 			set(install_path ${ARGV1})
-			dk_debug(install_path	PRINTVAR)
+			dk_debug(install_path)
 		endif()
 	endif()
 	
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(tag ${ARGV2})
-			dk_debug(tag	PRINTVAR)
+			dk_debug(tag)
 		endif()
 	endif()
 	
 	if(NOT Lib)
-		dk_debug(CMAKE_CURRENT_LIST_DIR		PRINTVAR)
+		dk_debug(CMAKE_CURRENT_LIST_DIR)
 		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
-		dk_debug(Lib	PRINTVAR)
+		dk_debug(Lib)
 		
 		string(FIND ${url} "github.com" includes)
 		if(${includes} EQUAL -1)
@@ -53,21 +53,21 @@ function(dk_getGithubDownload url) #install_path #Patch
 			endif()
 		endif()
 		list(GET url_list 3 org)
-		dk_debug(org	PRINTVAR)
+		dk_debug(org)
 		list(GET url_list 4 Lib)
-		dk_debug(Lib	PRINTVAR)
+		dk_debug(Lib)
 	endif()
 	
 	string(TOUPPER ${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
-	dk_debug(LIBVAR		PRINTVAR)
+	dk_debug(LIBVAR)
 	
 	string(TOLOWER ${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_error("${LIBVAR}_FOLDER invalid")
 	endif()
-	dk_debug(${LIBVAR}_FOLDER	PRINTVAR)
+	dk_debug(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_debug("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
@@ -146,7 +146,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		set(ZIP ${tag}.zip)
 		string(SUBSTRING ${ZIP} 0 7 TAG)
 		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-		dk_debug(tag	PRINTVAR)
+		dk_debug(tag)
 		
 		## update DKMAKE.cmake file
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)

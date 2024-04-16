@@ -25,7 +25,7 @@ function(dk_set variable)# value)
 #	###### print library versions ############
 #	dk_includes(${variable} "_VERSION" includes)
 #	if(${includes})
-#		dk_debug(${variable}		PRINTVAR)
+#		dk_debug(${variable})
 #	endif()
 #	##########################################
 endfunction()

@@ -773,7 +773,7 @@ dk_build () {
 #
 #
 dk_url () {
-	[ dk_string_contains "$1" "://" ] && return $true
+	dk_string_contains $1 "://" && return $true
 	return $false
 }
 

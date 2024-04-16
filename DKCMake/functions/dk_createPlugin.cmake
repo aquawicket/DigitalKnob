@@ -12,11 +12,11 @@ function(dk_createPlugin url)
 	
 	dk_todo() #TODO
 	dk_getAppName(${url} App_Name)
-	dk_verbose(App_Name		PRINTVAR)					# My_App
+	dk_verbose(App_Name)					# My_App
 	dk_toLower(${App_Name} app_name)
-	dk_verbose(app_name		PRINTVAR)					# my_app
+	dk_verbose(app_name)					# my_app
 	dk_toUpper(${APP_NAME} APP_NAME)
-	dk_verbose(APP_NAME		PRINTVAR)					# MY_APP
+	dk_verbose(APP_NAME)					# MY_APP
 	dk_getAppDirectory(appDirectory)
 	if(NOT exe_path)
 		dk_set(exe_path ${appDirectory}/${App_Name}/${App_Name}.exe)

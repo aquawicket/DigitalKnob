@@ -41,4 +41,4 @@ endif()
 
 dk_set(VSCODE_EXE ${VSCODE_EXE}) # make the variable persistent
 
-dk_debug(VSCODE_EXE		PRINTVAR)
+dk_debug(VSCODE_EXE)

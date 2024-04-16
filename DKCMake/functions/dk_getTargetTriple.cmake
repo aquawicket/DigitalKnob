@@ -9,15 +9,15 @@ include_guard()
 macro(dk_getTargetTriple)
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
 		get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-		dk_debug(CMAKE_BINARY_DIR	PRINTVAR)
+		dk_debug(CMAKE_BINARY_DIR)
 		
 		### Get DK_TARGET_DIR ###
 		dk_set(DK_TARGET_DIR ${CMAKE_BINARY_DIR})
-		dk_debug(DK_TARGET_DIR	PRINTVAR)
+		dk_debug(DK_TARGET_DIR)
 		
 		### Get DK_TARGET_FOLDER ###
 		get_filename_component(DK_TARGET_FOLDER ${DK_TARGET_DIR} NAME)     
-		dk_debug(DK_TARGET_FOLDER	PRINTVAR)
+		dk_debug(DK_TARGET_FOLDER)
 		
 		### Get DK_TARGET_OS_DIR
 		### Get DK_TARGET_TYPE ###
@@ -34,12 +34,12 @@ macro(dk_getTargetTriple)
 		else()
 			dk_set(DK_TARGET_OS_DIR ${CMAKE_BINARY_DIR})
 		endif()
-		dk_debug(DK_TARGET_OS_DIR	PRINTVAR)
-		dk_debug(DK_TARGET_TYPE	PRINTVAR)
+		dk_debug(DK_TARGET_OS_DIR)
+		dk_debug(DK_TARGET_TYPE)
 		
 		### Get DK_TARGET_OS_FOLDER
 		get_filename_component(DK_TARGET_OS_FOLDER ${DK_TARGET_OS_DIR} NAME)     
-		dk_debug(DK_TARGET_OS_FOLDER	PRINTVAR)
+		dk_debug(DK_TARGET_OS_FOLDER)
 		
 		dk_set(DK_TARGET_OS ${DK_TARGET_OS_FOLDER})
 		### Get DK_TARGET_ENV
@@ -59,7 +59,7 @@ macro(dk_getTargetTriple)
 			dk_set(DK_TARGET_ENV msvc)
 			string(REPLACE _msvc "" DK_TARGET_OS "${DK_TARGET_OS}")
 		endif()
-		dk_debug(DK_TARGET_ENV	PRINTVAR)
+		dk_debug(DK_TARGET_ENV)
 		
 		### Get DK_TARGET_ARCH
 		if(${DK_TARGET_OS} MATCHES "_arm32$")
@@ -78,7 +78,7 @@ macro(dk_getTargetTriple)
 			dk_set(DK_TARGET_ARCH x86_64)
 			string(REPLACE _x86_64 "" DK_TARGET_OS "${DK_TARGET_OS}")
 		endif()
-		dk_debug(DK_TARGET_ARCH	PRINTVAR)
+		dk_debug(DK_TARGET_ARCH)
 		
 		### Set MSYSTEM
 		if(DK_TARGET_ENV)
@@ -95,31 +95,31 @@ macro(dk_getTargetTriple)
 			if(${DK_TARGET_ARCH} MATCHES "x86_64")
 				dk_set(MSYSTEM "${DK_TARGET_ENV_UPPER}64")		# CLANG64, MINGW64, UCRT64
 			endif()
-			dk_debug(MSYSTEM	PRINTVAR)
+			dk_debug(MSYSTEM)
 			dk_set(${MSYSTEM} ON)
 		endif()
 		
 		### Get DK_TARGET_OS
-		dk_debug(DK_TARGET_OS	PRINTVAR)
+		dk_debug(DK_TARGET_OS)
 		
 		### Set DK_TARGET_OS_ARCH ###
 		dk_set(DK_TARGET_OS_ARCH "${DK_TARGET_OS}_${DK_TARGET_ARCH}")  
-		dk_debug(DK_TARGET_OS_ARCH	PRINTVAR)
+		dk_debug(DK_TARGET_OS_ARCH)
 
 		### Set DK_PROJECT_DIR ###
 		get_filename_component(DK_PROJECT_DIR ${DK_TARGET_OS_DIR} DIRECTORY)
 		dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
-		dk_debug(DK_PROJECT_DIR	PRINTVAR)
+		dk_debug(DK_PROJECT_DIR)
 
 		### Set OS ###
 		#dk_set(OS "${DK_TARGET_OS_ARCH}")
 		dk_set(OS "${DK_TARGET_OS_FOLDER}")
-		dk_debug(OS	PRINTVAR)
+		dk_debug(OS)
 
 		### Set ${OS} variable ON ##
 		string(TOUPPER ${DK_TARGET_OS} DK_TARGET_OS_UPPER)
 		dk_set(${DK_TARGET_OS_UPPER} ON)
-		dk_debug(${DK_TARGET_OS_UPPER}	PRINTVAR)
+		dk_debug(${DK_TARGET_OS_UPPER})
 
 		### Set ARCH variable ON ##
 		if(DK_TARGET_ARCH)
@@ -129,11 +129,11 @@ macro(dk_getTargetTriple)
 		if(DK_TARGET_ARCH_UPPER)
 			dk_set(${DK_TARGET_ARCH_UPPER} ON)
 		endif()
-		dk_debug(${DK_TARGET_ARCH_UPPER}	PRINTVAR)
+		dk_debug(${DK_TARGET_ARCH_UPPER})
 
 		### Set ${OS_ARCH} variable ON ##
 		dk_set(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER} ON)
-		dk_debug(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER}	PRINTVAR)
+		dk_debug(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER})
 
 		### Set DEBUG_DIR and RELEASE_DIR variables
 		if(${DK_TARGET_OS} MATCHES "ios")
@@ -146,7 +146,7 @@ macro(dk_getTargetTriple)
 			dk_set(DEBUG_DIR Debug)
 			dk_set(RELEASE_DIR Release)
 		endif()
-		dk_debug(DEBUG_DIR	PRINTVAR)
-		dk_debug(RELEASE_DIR	PRINTVAR)
+		dk_debug(DEBUG_DIR)
+		dk_debug(RELEASE_DIR)
 	endif()
 endmacro()

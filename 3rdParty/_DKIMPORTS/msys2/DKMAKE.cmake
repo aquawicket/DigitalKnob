@@ -18,12 +18,12 @@ endif()
 if(MSYS2_FOLDER)
 	dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 endif()
-dk_debug(MSYS2_DL_FILE	PRINTVAR)
-dk_debug(MSYS2_FOLDER	PRINTVAR)
-dk_debug(MSYS2			PRINTVAR)
+dk_debug(MSYS2_DL_FILE)
+dk_debug(MSYS2_FOLDER)
+dk_debug(MSYS2)
 
-#dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")
-dk_set(MSYS2_GENERATOR			"MinGW Makefiles")
+dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")	# if in Shell
+#dk_set(MSYS2_GENERATOR		"MinGW Makefiles")	# if in cmd
 
 
 if(NOT EXISTS ${MSYS2}/msys2.exe)
@@ -38,11 +38,11 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NOERROR)
 
 	dk_find_program(BASH_EXE bash "${MSYS2}/usr/bin")
-	dk_debug(BASH_EXE PRINTVAR)
+	dk_debug(BASH_EXE)
 	dk_find_program(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
-	dk_debug(CYGPATH_EXE PRINTVAR)
+	dk_debug(CYGPATH_EXE)
 	dk_find_program(PACMAN_EXE pacman "${MSYS2}/usr/bin")
-	dk_debug(PACMAN_EXE PRINTVAR)
+	dk_debug(PACMAN_EXE)
 	#dk_addFirewallAllow("pacman" "${PACMAN_EXE}")
 	
 	if(MSYSTEM)
