@@ -666,10 +666,12 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
-	if [ "$TARGET_OS" = "win_x86_64" ]; then
+	if [ "$TARGET_OS" = "win_x86_64_clang" ]; then
 		#CMAKE_ARGS="${CMAKE_ARGS}\n-G\nMSYS Makefiles" )
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole" )
-		set -- "-G MSYS Makefiles" "$@"
+		#set -- "-G MSYS Makefiles" "$@"
+		set -- "MSYS Makefiles" "$@"
+		set -- "-G" "$@"
 	fi
 		
 	#### CMAKE CALL ####
@@ -764,6 +766,96 @@ dk_build () {
 	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
 	dk_echo
+}
+
+##################################################################################
+# dk_url()
+#
+#
+dk_url () {
+	[ dk_string_contains "$1" "://" ] && return $true
+	return $false
+}
+
+##################################################################################
+# dk_validate_cmake()
+#
+#
+dk_validate_cmake () {
+	dk_verbose "dk_validate_cmake($*)"
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	
+	######################################################################################################
+	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
+	if [ "${HOST_TRIPLE}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
+	if [ "${HOST_TRIPLE}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
+	if [ "${HOST_TRIPLE}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
+	if [ "${HOST_TRIPLE}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
+	if [ "${HOST_OS}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
+	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
+	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${TARGET_OS}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${TARGET_OS}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${TARGET_OS}" 	= "win_x86_gcc" ]; 		then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${TARGET_OS}" 	= "win_x86_64_gcc" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${TARGET_OS}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	
+	dk_debug CMAKE_IMPORT
+	if dk_url ${CMAKE_IMPORT}; then
+		dk_info "Installing CMake from dl files"
+		dk_debug CMAKE_IMPORT
+		
+		dk_get_filename "$CMAKE_IMPORT" CMAKE_DL_FILE
+		dk_debug CMAKE_DL_FILE
+		
+		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		dk_debug CMAKE_FOLDER
+		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
+		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
+			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
+		fi
+		
+		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_to_lower CMAKE_FOLDER
+		dk_debug CMAKE_FOLDER
+		
+		if [ "${HOST_OS}" = "win" ]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
+		elif [ "${HOST_OS}" = "mac" ]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
+		elif [ "${HOST_OS}" = "linux" ]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		elif [ "${HOST_OS}" = "raspberry" ]; then
+			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		else
+			dk_error "no cmake for this OS"
+		fi
+		dk_debug CMAKE_EXE
+		
+		if dk_file_exists "$CMAKE_EXE"; then 
+			return $true;
+		fi
+
+		dk_echo 
+		dk_info "Installing cmake . . ."
+		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
+		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
+		
+		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
+
+	else	# linux package
+		dk_info "Installing CMake from package managers"
+		
+		CMAKE_EXE=$(command -v cmake)
+		dk_debug CMAKE_EXE
+		if ! dk_command_exists cmake; then
+			dk_install ${CMAKE_IMPORT}
+		fi	
+		CMAKE_EXE=$(command -v cmake)
+		dk_debug CMAKE_EXE
+	fi
 }
 
 
@@ -871,37 +963,37 @@ dk_stacktrace () {
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
 
 	### VERSION 1 ###
-#	[ "${FUNCNAME-}" = "" ] && return 0
-#	#[ "${BASH_SOURCE-}" = "" ] && return 0
-#	#[ "${BASH_LINENO-}" = "" ] && return 0
-#	local i=${1:-1} size=${#FUNCNAME[@]}
-# 	((i<size)) && echo "STACKTRACE[$size]" 
-#	i=0
-#	while [ "$i" -le "$size" ]; do
-#		((frame=${#FUNCNAME[@]}-i-2 ))
-#		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
-#		i=$(( i + 1 ))
-#	done 
+	[ "${FUNCNAME-}" = "" ] && return 0
+	#[ "${BASH_SOURCE-}" = "" ] && return 0
+	#[ "${BASH_LINENO-}" = "" ] && return 0
+	local i=${1:-1} size=${#FUNCNAME[@]}
+ 	((i<size)) && echo "STACKTRACE[$size]" 
+	i=0
+	while [ "$i" -le "$size" ]; do
+		((frame=${#FUNCNAME[@]}-i-2 ))
+		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
+		i=$(( i + 1 ))
+	done 
 
 
 #	### VERSION 2 ###
-	[ "${FUNCNAME-}" = "" ] && return 0
+#	[ "${FUNCNAME-}" = "" ] && return 0
 #	[ "${BASH_SOURCE-}" = "" ] && return 0
 #	[ "${BASH_LINENO-}" = "" ] && return 0
-	local status_code="${1}" 
-	local -a stack=("Stack trace of error code '${status_code}':")
-	local stack_size=${#FUNCNAME[@]}
-	local -i i
-	local indent="    "
-	# to avoid noise we start with 1 to skip the stack function
-	for (( i = 1; i < stack_size; i++ )); do
-	    local func="${FUNCNAME[$i]:-(top level)}"
-	    local -i line="${BASH_LINENO[$(( i - 1 ))]}"
-	    local src="${BASH_SOURCE[$i]:-(no file)}"
-	    stack+=("$indent └ $src:$line ($func)")
-	    indent="${indent}    "
-	done
-	(IFS=$'\n'; echo "${stack[*]}")
+#	local status_code="${1}" 
+#	local -a stack=("Stack trace of error code '${status_code}':")
+#	local stack_size=${#FUNCNAME[@]}
+#	local -i i
+#	local indent="    "
+#	# to avoid noise we start with 1 to skip the stack function
+#	for (( i = 1; i < stack_size; i++ )); do
+#	    local func="${FUNCNAME[$i]:-(top level)}"
+#	    local -i line="${BASH_LINENO[$(( i - 1 ))]}"
+#	    local src="${BASH_SOURCE[$i]:-(no file)}"
+#	    stack+=("$indent └ $src:$line ($func)")
+#	    indent="${indent}    "
+#	done
+#	(IFS=$'\n'; echo "${stack[*]}")
 
 
 #	### VERSION 3 ###
@@ -1219,94 +1311,6 @@ dk_rename () {
 	
 	#TODO
 	#[ ? = "success" ]
-}
-
-
-##################################################################################
-# dk_validate_cmake()
-#
-#
-dk_validate_cmake () {
-	dk_verbose "dk_validate_cmake($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
-	
-	if [ "$HOST_OS" = "android" ]; then
-		CMAKE_SYSTEM_INSTALL=1
-	fi
-	if [ "${CMAKE_SYSTEM_INSTALL-}" = "1" ]; then
-		dk_info "Installing CMake System packages"
-		CMAKE_EXE=$(command -v cmake)
-		dk_debug CMAKE_EXE
-		if ! dk_command_exists cmake; then
-			if [ "$MSYSTEM" = "CLANG32" ]; then
-				dk_install mingw-w64-clang-i686-cmake
-			elif [ "$MSYSTEM" = "CLANG64" ]; then
-				dk_install mingw-w64-clang-x86_64-cmake
-			elif [ "$MSYSTEM" = "CLANGARM64" ]; then
-				dk_install mingw-w64-clang-aarch64-cmake
-			elif [ "$MSYSTEM" = "MINGW32" ]; then
-				dk_install mingw-w64-i686-cmake
-			elif [ "$MSYSTEM" = "MINGW64" ]; then
-				dk_install mingw-w64-x86_64-cmake
-			elif [ "$MSYSTEM" = "UCRT64" ]; then
-				dk_install mingw-w64-ucrt-x86_64-cmake
-			else
-				dk_install cmake
-			fi
-		fi	
-		CMAKE_EXE=$(command -v cmake)
-		dk_debug CMAKE_EXE
-	else
-		dk_info "Installing DK CMake packages"
-		######################################################################################################
-		if [ "${HOST_TRIPLE-}" = "win_arm32" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM32;		fi
-		if [ "${HOST_TRIPLE-}" = "win_arm64" ];			then CMAKE_DL=$CMAKE_DL_WIN_ARM64;		fi
-		if [ "${HOST_TRIPLE-}" = "win_x86" ];			then CMAKE_DL=$CMAKE_DL_WIN_X86;		fi
-		if [ "${HOST_TRIPLE-}" = "win_x86_64" ];		then CMAKE_DL=$CMAKE_DL_WIN_X86_64;		fi
-		if [ "${HOST_OS}" = "mac" ];					then CMAKE_DL=$CMAKE_DL_MAC;			fi
-		if [ "${HOST_TRIPLE-}" = "linux_x86_64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_X86_64;	fi
-		if [ "${HOST_TRIPLE-}" = "linux_arm64" ];		then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
-		if [ "${HOST_TRIPLE-}" = "raspberry_arm64" ];	then CMAKE_DL=$CMAKE_DL_LINUX_ARM64;	fi
-		dk_debug CMAKE_DL
-		
-		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
-		dk_debug CMAKE_DL_FILE
-		
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
-		dk_debug CMAKE_FOLDER
-		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
-		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
-			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
-		fi
-		
-		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		dk_to_lower CMAKE_FOLDER
-		dk_debug CMAKE_FOLDER
-		
-		if [ "${HOST_OS}" = "win" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
-		elif [ "${HOST_OS}" = "mac" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		elif [ "${HOST_OS}" = "linux" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		elif [ "${HOST_OS}" = "raspberry" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		else
-			dk_error "no cmake for this OS"
-		fi
-		dk_debug CMAKE_EXE
-		
-		if dk_file_exists "$CMAKE_EXE"; then 
-			return $true;
-		fi
-
-		dk_echo 
-		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
-		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
-		
-		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
-	fi
 }
 
 
