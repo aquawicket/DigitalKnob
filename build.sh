@@ -152,39 +152,6 @@ main () {
 }
 
 
-#####################################################################
-# dk_get_dkpaths()
-#
-#
-dk_get_dkpaths () {
-	dk_verbose "dk_get_dkpaths($*)"
-	
-	if [ -n "${USERPROFILE-}" ]; then
-		dk_debug USERPROFILE
-		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
-		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
-	else
-		DIGITALKNOB_DIR="$HOME/digitalknob"
-	fi
-	dk_debug DIGITALKNOB_DIR
-	mkdir -p "$DIGITALKNOB_DIR"
-	
-	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
-	mkdir -p "$DKTOOLS_DIR"
-	dk_debug DKTOOLS_DIR
-	
-	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
-	mkdir -p "$DKDOWNLOAD_DIR"
-	dk_debug DKDOWNLOAD_DIR
-	
-	
-	
-	#################################################
-	# TODO - 
-}
-
-
 ##################################################################################
 # dk_pick_update()
 #
@@ -510,20 +477,33 @@ dk_pick_type() {
 
 
 ##################################################################################
-# dk_add_cmake_arg(<string>)
+# dk_append_cmake_args(<string>)
 #
 #
-#dk_add_cmake_arg() {
-#	dk_verbose "dk_add_cmake_arg($*)"
+#dk_append_cmake_args() {
+#    dk_verbose "dk_append_cmake_args($*)"
 #
-#   if [ "$*" = "" ]; then dk_error "dk_add_cmake_arg is empty!" & return 1
-#    dk_echo added $*
-#    set -- "%*" )
+#    if [ "$*" = "" ]; then dk_error "dk_append_cmake_args is empty!" & return 1
+#    set -- "%*"
+#    dk_echo appended $*
+#}
+
+
+#####################################################################
+# prepend_cmake_args(<string>)
+#
+#
+#prepend_cmake_args () {
+#    call:dk_verbose "prepend_cmake_args(%*)"
+#	
+#    if [ "$*" = "" ]; then dk_error "dk_append_cmake_args is empty!" & return 1
+#    set -- "%*"
+#    dk_echo prepended $*
 #}
 
 
 ##################################################################################
-# dk_generate(<toolchain>)
+# dk_generate()
 #
 #
 dk_generate() {
@@ -694,13 +674,15 @@ dk_generate() {
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		set -- "-G MSYS Makefiles" "$@"
 	fi
-		
+
+	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if dk_file_exists "$TOOLCHAIN"; then
 #		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 #	fi
 	
+	###### WSL CMake Fix ######
 	if dk_defined WSLENV; then 
 		cd "$DKCMAKE_DIR"
 		set -- "$@" "."
@@ -715,40 +697,6 @@ dk_generate() {
 	dk_call "$CMAKE_EXE" "$@"
 	dk_echo
 }
-
-
-##################################################################################
-# dk_generate_toolchain(<toolchain>)
-#
-#
-#dk_generate_toolchain() {
-#	dk_verbose "dk_generate_toolchain($*)"
-#	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
-#
-#	toolchain=$1
-#	
-#	# TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
-#   ###### CMAKE_GENERATOR ######
-#    string_contains $toolchain android hasAndroid
-#    if "$hasAndroid" == "1"; then 
-#        CMAKE_GENERATOR="Unix Makefiles"
-#    elif [ ! "$hasAndroid" == "1" ]; then
-#		CMAKE_GENERATOR="MinGW Makefiles"
-#	fi
-#	set -- "-G ${CMAKE_GENERATOR}" )
-#    
-#    ###### CMAKE_TOOLCHAIN_FILE ######
-#	# dk_call set CMAKE_TOOLCHAIN_FILE=$DKCMAKE_DIR/toolchains/$1.cmake
-#    # dk_call replace_all $CMAKE_TOOLCHAIN_FILE "\\" "/" CMAKE_TOOLCHAIN_FILE
-#    # if exist $CMAKE_TOOLCHAIN_FILE set -- "-DCMAKE_TOOLCHAIN_FILE=$CMAKE_TOOLCHAIN_FILE" )
-#   
-#    ###### CMake Configure ######
-#    dk_echo
-#    dk_echo "****** CMAKE COMMAND ******"
-#    dk_echo "${CMAKE_EXE}" "$CMAKE_ARGS"
-#    "$CMAKE_EXE" "$CMAKE_ARGS"
-#    dk_echo
-#}
 	
 
 ##################################################################################
@@ -789,6 +737,39 @@ dk_build () {
 	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
 	dk_echo
+}
+
+
+####################################################################
+# DKBash FUNCTIONS
+# 
+#####################################################################
+
+#####################################################################
+# dk_get_dkpaths()
+#
+#
+dk_get_dkpaths () {
+	dk_verbose "dk_get_dkpaths($*)"
+	
+	if [ -n "${USERPROFILE-}" ]; then
+		dk_debug USERPROFILE
+		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
+		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
+	else
+		DIGITALKNOB_DIR="$HOME/digitalknob"
+	fi
+	dk_debug DIGITALKNOB_DIR
+	mkdir -p "$DIGITALKNOB_DIR"
+	
+	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
+	mkdir -p "$DKTOOLS_DIR"
+	dk_debug DKTOOLS_DIR
+	
+	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
+	mkdir -p "$DKDOWNLOAD_DIR"
+	dk_debug DKDOWNLOAD_DIR
 }
 
 ##################################################################################

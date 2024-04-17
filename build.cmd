@@ -143,112 +143,19 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 		call:dk_generate
 		
 		call:dk_build
-		::if %TYPE%==All      call:build_all
-		::if %TYPE%==Release  call:build_release
-		::if %TYPE%==Debug    call:build_debug
-		::call:end_message
-		
-		:: TODO
-		::call:post_build_menu
 		
 		set UPDATE=
 		set APP=
 		set TARGET_OS=
 		set TYPE=
-		
-		goto while_loop
-    :while_loop_end
+	goto while_loop
 goto:eof
 
 
-::####################################################################
-::# dk_get_dkpaths()
+::#####################################################################
+::# dk_pick_update()
 ::#
 ::#
-:dk_get_dkpaths () {
-	call:dk_verbose "dk_get_dkpaths(%*)"
-	
-	
-	
-	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-    call:make_directory "%DIGITALKNOB_DIR%"
-    call:dk_debug DIGITALKNOB_DIR
-
-
-
-
-
-
-    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
-    call:make_directory "%DKTOOLS_DIR%"
-    call:dk_debug DKTOOLS_DIR
-        
-    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
-    call:make_directory "%DKDOWNLOAD_DIR%"
-    call:dk_debug DKDOWNLOAD_DIR
-	
-	
-	
-	::############################################
-	::# TODO - 
-goto:eof
-
-
-::####################################################################
-:: dk_get_host_triple()
-::
-::
-:dk_get_host_triple () {
-	call:dk_verbose "dk_get_host_triple(%*)"
-	
-	set HOST_OS=win
-    call:dk_debug HOST_OS
-	
-	if %PROCESSOR_ARCHITECTURE%==x86 set HOST_ARCH=x86
-    if %PROCESSOR_ARCHITECTURE%==AMD64 set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==IA64  set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==EM64T set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==ARM64  set HOST_ARCH=arm64
-    call:dk_debug HOST_ARCH
-	
-	set HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%
-    call:dk_debug HOST_TRIPLE
-    
-    set HOST_ENV=clang
-    set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
-	call:dk_debug HOST_TRIPLE
-	
-goto:eof
-
-
-::####################################################################
-:: get_parent_dir(<input> <output>)
-::
-::
-:get_parent_dir () {
-	call:dk_verbose "get_parent_dir(%*)"
-	
-	for %%A in (%1.) do set "parent=%%~dpA"
-    set "%2=%parent%"
-goto:eof
-
-
-::####################################################################
-:: get_parent_folder(<input> <output>)
-::
-::
-:get_parent_folder () {
-	call:dk_verbose "get_parent_folder(%*)"
-	
-    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
-    set "%2=%parent%"
-goto:eof
-
-
-::####################################################################
-:: dk_pick_update()
-::
-::
 :dk_pick_update () {
 	call:dk_verbose "dk_pick_update(%*)"
 	
@@ -293,10 +200,10 @@ goto:eof
 goto:eof
 
 
-::####################################################################
-:: dk_pick_app()
-::
-::
+::#####################################################################
+::# dk_pick_app()
+::#
+::#
 :dk_pick_app () {
 	call:dk_verbose "dk_pick_app(%*)"
 	
@@ -342,23 +249,9 @@ goto:eof
 
 
 ::####################################################################
-:: checkApp()
-::
-::
-:checkApp () {
-	call:dk_verbose "checkApp(%*)"
-	
-    if NOT exist "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" (
-        echo ERROR: "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" file not found
-        set APP=
-    ) 
-goto:eof
-
-
-::####################################################################
-:: dk_pick_os()
-::
-::
+::# dk_pick_os()
+::#
+::#
 :dk_pick_os () {
 	call:dk_verbose "dk_pick_os(%*)"
 
@@ -456,17 +349,16 @@ goto:eof
 goto:eof
 
 
-::####################################################################
-:: dk_pick_type()
-::
-::
+::#####################################################################
+::# dk_pick_type()
+::#
+::#
 :dk_pick_type () {
 	call:dk_verbose "dk_pick_type(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
-    echo %APP% %TARGET_OS% %TYPE%
-        
+    echo %APP% %TARGET_OS% %TYPE%     
     echo.
     echo 1) Debug
     echo 2) Release
@@ -493,13 +385,13 @@ goto:eof
 
 
 ::####################################################################
-:: append_cmake_args(<string>)
+:: dk_append_cmake_args(<string>)
 ::
 ::
-:append_cmake_args () {
-	call:dk_verbose "append_cmake_args(%*)"
+:dk_append_cmake_args () {
+	call:dk_verbose "dk_append_cmake_args(%*)"
 	
-    if "%*" == "" echo ERROR: append_cmake_args is empty! & goto:eof
+    if "%*" == "" echo ERROR: dk_append_cmake_args is empty! & goto:eof
     set CMAKE_ARGS=%CMAKE_ARGS% "%*"
 	echo appended %*
 goto:eof
@@ -519,18 +411,18 @@ goto:eof
 
 
 ::####################################################################
-:: dk_generate()
-::
-::
+::# dk_generate()
+::#
+::#
 :dk_generate () {
 	call:dk_verbose "dk_generate(%*)"
 	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     echo.
-    echo ########################################################## 
-    echo ****** Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
-    echo ##########################################################
-    echo.
+	echo ##################################################################
+	echo      Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL%
+	echo ##################################################################
+	echo.
     
     call:dk_deleteCache
     call:delete_temp_files
@@ -550,40 +442,40 @@ goto:eof
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    ::if %TYPE%==Debug           call:append_cmake_args -DDEBUG=ON & call:append_cmake_args -DRELEASE=OFF
-    if %TYPE%==Debug             call:append_cmake_args -DDEBUG=ON
-    ::if %TYPE%==Release         call:append_cmake_args -DDEBUG=OFF & call:append_cmake_args -DRELEASE=ON
-    if %TYPE%==Release           call:append_cmake_args -DRELEASE=ON
-    if %TYPE%==All               call:append_cmake_args -DDEBUG=ON & call:append_cmake_args -DRELEASE=ON
-    if %DKLEVEL%==Build          call:append_cmake_args -DBUILD=ON
-    if %DKLEVEL%==Rebuild        call:append_cmake_args -DREBUILD=ON
-    if %DKLEVEL%==RebuildAll     call:append_cmake_args -DREBUILDALL=ON
-    if %DKLINK%==Static          call:append_cmake_args -DSTATIC=ON
-    if %DKLINK%==Shared          call:append_cmake_args -DSHARED=ON
-    ::if %TARGET_OS%==emscripten call:append_cmake_args -DEMSCRIPTEN=ON
+    ::if %TYPE%==Debug           call:dk_append_cmake_args -DDEBUG=ON & call:dk_append_cmake_args -DRELEASE=OFF
+    if %TYPE%==Debug             call:dk_append_cmake_args -DDEBUG=ON
+    ::if %TYPE%==Release         call:dk_append_cmake_args -DDEBUG=OFF & call:dk_append_cmake_args -DRELEASE=ON
+    if %TYPE%==Release           call:dk_append_cmake_args -DRELEASE=ON
+    if %TYPE%==All               call:dk_append_cmake_args -DDEBUG=ON & call:dk_append_cmake_args -DRELEASE=ON
+    if %DKLEVEL%==Build          call:dk_append_cmake_args -DBUILD=ON
+    if %DKLEVEL%==Rebuild        call:dk_append_cmake_args -DREBUILD=ON
+    if %DKLEVEL%==RebuildAll     call:dk_append_cmake_args -DREBUILDALL=ON
+    if %DKLINK%==Static          call:dk_append_cmake_args -DSTATIC=ON
+    if %DKLINK%==Shared          call:dk_append_cmake_args -DSHARED=ON
+    ::if %TARGET_OS%==emscripten call:dk_append_cmake_args -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
     call:dk_debug CMAKE_BINARY_DIR
         
-    call:append_cmake_args -S=%CMAKE_SOURCE_DIR%
-    call:append_cmake_args -B=%CMAKE_BINARY_DIR%
+    call:dk_append_cmake_args -S=%CMAKE_SOURCE_DIR%
+    call:dk_append_cmake_args -B=%CMAKE_BINARY_DIR%
 
-    :::::::::::: CMake Options :::::::::::::
-    ::call:append_cmake_args -DCMAKE_VERBOSE_MAKEFILE=1
-    ::call:append_cmake_args -DCMAKE_COLOR_DIAGNOSTICS=ON
-    call:append_cmake_args -Wdev
-    ::call:append_cmake_args -Werror=dev
-    call:append_cmake_args -Wdeprecated
-    ::call:append_cmake_args -Werror=deprecated
-    ::call:append_cmake_args --graphviz=graphviz.txt
-    ::call:append_cmake_args --system-information system_information.txt
-    ::call:append_cmake_args --debug-trycompile
-    ::call:append_cmake_args --debug-output
-    ::call:append_cmake_args --trace
-    ::call:append_cmake_args --trace-expand
-    ::call:append_cmake_args --warn-uninitialized
-    call:append_cmake_args --warn-unused-vars
-    ::call:append_cmake_args --check-system-vars
+    ::############ CMake Options ############
+    ::call:dk_append_cmake_args -DCMAKE_VERBOSE_MAKEFILE=1
+    ::call:dk_append_cmake_args -DCMAKE_COLOR_DIAGNOSTICS=ON
+    call:dk_append_cmake_args -Wdev
+    ::call:dk_append_cmake_args -Werror=dev
+    call:dk_append_cmake_args -Wdeprecated
+    ::call:dk_append_cmake_args -Werror=deprecated
+    ::call:dk_append_cmake_args --graphviz=graphviz.txt
+    ::call:dk_append_cmake_args --system-information system_information.txt
+    ::call:dk_append_cmake_args --debug-trycompile
+    ::call:dk_append_cmake_args --debug-output
+    ::call:dk_append_cmake_args --trace
+    ::call:dk_append_cmake_args --trace-expand
+    ::call:dk_append_cmake_args --warn-uninitialized
+    call:dk_append_cmake_args --warn-unused-vars
+    ::call:dk_append_cmake_args --check-system-vars
 	
 	if %TARGET_OS%==android_arm32      call:prepend_cmake_args -G Unix Makefiles
 	if %TARGET_OS%==android_arm64      call:prepend_cmake_args -G Unix Makefiles
@@ -605,86 +497,22 @@ goto:eof
 	if %TARGET_OS%==win_x86_64_mingw   call:prepend_cmake_args -G MinGW Makefiles
 	if %TARGET_OS%==win_x86_64_ucrt    call:prepend_cmake_args -G MinGW Makefiles
 	
-	::::::: CMAKE_TOOLCHAIN_FILE :::::::
-	::set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake
-	::echo "TOOLCHAIN = %TOOLCHAIN%"
-	::set TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%
-	::if exist %TOOLCHAIN% call:append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+::	###### CMAKE_TOOLCHAIN_FILE ######
+::	set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake
+::	echo "TOOLCHAIN = %TOOLCHAIN%"
+::	set TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%
+::	if exist %TOOLCHAIN% call:dk_append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
-    ::###### CMake Configure ######
+	
+::	###### WSL CMake Fix ######
+::  if dk_defined WSLENV; then 
+::		cd "$DKCMAKE_DIR"
+::		set -- "$@" "."
+::	fi
+	
+::	###### CMake Configure ######
 	call:dk_validate_cmake
 	
-    echo.
-    echo ****** CMAKE COMMAND ******
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
-goto:eof
-
-
-::####################################################################
-:: generate_msystem()
-::
-::
-::generate_msystem () {
-::	call:dk_verbose "generate_msystem(%*)"
-::
-::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-::  call:dk_debug MSYS2
-::                
-::    call:append_cmake_args -G MinGW Makefiles
-::  call:append_cmake_args -DMSYSTEM=%MSYSTEM%
-::                
-::  echo.
-::  echo ****** CMAKE COMMAND ******
-::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
-::  "%CMAKE_EXE%" %CMAKE_ARGS%
-::  echo.
-::goto:eof
-
-
-::####################################################################
-:: generate_msvc()
-::
-::
-::generate_msvc () {
-::	call:dk_verbose "generate_msvc(%*)"
-::    ::call:validate_visual_studio
-::    ::call:append_cmake_args -G Visual Studio -A x64
-::  ::call:append_cmake_args -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
-::    ::call:append_cmake_args -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
-::    
-::    echo.
-::  echo ****** CMAKE COMMAND ******
-::  echo "%CMAKE_EXE%" %CMAKE_ARGS%
-::  "%CMAKE_EXE%" %CMAKE_ARGS%
-::  echo.
-::goto:eof
-
-
-::####################################################################
-:: generate_toolchain(<toolchain>)
-::
-::
-:generate_toolchain () {
-	call:dk_verbose "generate_toolchain(%*)"
-	
-    set toolchain=%1
-    
-    :: TODO: we need a good way to pull the CMAKE_GENERATOR from the toolchain files.
-    :::::: CMAKE_GENERATOR ::::::
-    call:string_contains %toolchain% android hasAndroid
-    if "%hasAndroid%" == "1" ( 
-        set "CMAKE_GENERATOR=Unix Makefiles"
-    ) else ( if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles" )
-    call:append_cmake_args -G %CMAKE_GENERATOR%
-    
-    ::::::: CMAKE_TOOLCHAIN_FILE :::::::
-    ::call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
-    ::call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
-    ::if exist %CMAKE_TOOLCHAIN_FILE% call:append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
-    
-    ::::::: CMake Configure :::::::
     echo.
     echo ****** CMAKE COMMAND ******
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
@@ -710,9 +538,6 @@ goto:eof
 	if %TYPE%==All      call:build_all
 	if %TYPE%==Release  call:build_release
 	if %TYPE%==Debug    call:build_debug
-	
-	::call:end_message
-	::call:post_build_menu  :: TODO
 	
 	echo.
     echo ###########################################################        
@@ -771,44 +596,6 @@ goto:eof
 goto:eof
 
 
-::####################################################################
-:: end_message()
-::
-::
-:end_message () {
-	call:dk_verbose "end_message(%*)"
-	
-    TITLE DigitalKnob - Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
-    echo.
-    echo ###########################################################        
-    echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
-    echo ###########################################################
-    echo.
-        
-    set UPDATE=
-    set APP=
-    set TARGET_OS=
-    set TYPE=
-goto:eof
-
-
-::####################################################################
-:: post_build_menu()
-::
-::
-:post_build_menu () {
-	call:dk_verbose "post_build_menu(%*)"
-	
-    TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    echo.
-    echo %APP% %TARGET_OS% %TYPE%
-        
-    echo.
-goto:eof
-
-
-
-
 
 ::####################################################################
 :: DKBatch FUNCTIONS
@@ -816,9 +603,101 @@ goto:eof
 ::####################################################################
 
 ::####################################################################
-:: check_git_remote()
+::# checkApp()
+::#
+::#
+:checkApp () {
+	call:dk_verbose "checkApp(%*)"
+	
+    if NOT exist "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" (
+        echo ERROR: "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" file not found
+        set APP=
+    ) 
+goto:eof
+
+
+::####################################################################
+:: get_parent_folder(<input> <output>)
 ::
 ::
+:get_parent_folder () {
+	call:dk_verbose "get_parent_folder(%*)"
+	
+    for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
+    set "%2=%parent%"
+goto:eof
+
+
+::####################################################################
+::# dk_get_dkpaths()
+::#
+::#
+:dk_get_dkpaths () {
+	call:dk_verbose "dk_get_dkpaths(%*)"
+	
+	
+	
+	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+    call:make_directory "%DIGITALKNOB_DIR%"
+    call:dk_debug DIGITALKNOB_DIR
+
+
+
+
+
+
+    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+    call:make_directory "%DKTOOLS_DIR%"
+    call:dk_debug DKTOOLS_DIR
+        
+    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
+    call:make_directory "%DKDOWNLOAD_DIR%"
+    call:dk_debug DKDOWNLOAD_DIR
+goto:eof
+
+
+::#####################################################################
+::# get_parent_dir(<input> <output>)
+::#
+::#
+:get_parent_dir () {
+	call:dk_verbose "get_parent_dir(%*)"
+	
+	for %%A in (%1.) do set "parent=%%~dpA"
+    set "%2=%parent%"
+goto:eof
+
+
+::#####################################################################
+::# dk_get_host_triple()
+::#
+::#
+:dk_get_host_triple () {
+	call:dk_verbose "dk_get_host_triple(%*)"
+	
+	set HOST_OS=win
+    call:dk_debug HOST_OS
+	
+	if %PROCESSOR_ARCHITECTURE%==x86 set HOST_ARCH=x86
+    if %PROCESSOR_ARCHITECTURE%==AMD64 set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==IA64  set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==EM64T set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==ARM64  set HOST_ARCH=arm64
+    call:dk_debug HOST_ARCH
+	
+	set HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%
+    call:dk_debug HOST_TRIPLE
+    
+    set HOST_ENV=clang
+    set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
+	call:dk_debug HOST_TRIPLE
+goto:eof
+
+
+::##################################################################################
+::# check_git_remote()
+::#
+::#
 :check_git_remote () {
 	call:dk_verbose "check_git_remote(%*)"
 	
