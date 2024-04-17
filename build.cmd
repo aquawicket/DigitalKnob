@@ -28,10 +28,12 @@ if "%*" NEQ "" call %*
 
 
 ::###### Global Script Variables ######
+::[ -z ${RELOAD_WITH_BASH-} ] && export RELOAD_WITH_BASH=1
 set LOG_VERBOSE=1
 set LOG_DEBUG=1
+set TRACE_ON_WARNINGS=0
 set HALT_ON_WARNINGS=0
-set HALT_ON_ERRORS=0
+set CONTINUE_ON_ERRORS=0
 set SCRIPT_DIR=%~dp0
 set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
 set SCRIPT_NAME=%~nx0
@@ -47,21 +49,11 @@ set "magenta=[35m"
 set "cyan=[36m"
 set "white=[37m"
 
-
-
-
-
-
-
-
-
-
-
 set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
 set "CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip"
 set "CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
 set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz"
-set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
+::set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
 set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz"
 set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
 
@@ -70,30 +62,63 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 
 
 ::####################################################################
-:: main()
-::
-::
+::# main()
+::#
+::#
 :main () {
 	call:dk_verbose "main(%*)"
-	::dk_validate_sudo
-  
+	
+::	echo "BASH = $BASH"
+::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
+::		export RELOAD_WITH_BASH=0
+::		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+::	fi
+::	::export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+::
+::	::###### Set and check posix mode ######
+::	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+::	  *:posix:*) echo "POSIX mode enabled" ;;
+::	  *)         echo "POSIX mode not enabled" ;;
+::	esac
+::	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+::	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+::	::$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+::	::$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+::
+::	:: log to stdout and file
+::	::exec |& tee file.log 
+	
+	::call:dk_validate_sudo
+	
+::	if dk_defined WSLENV; then 
+::		dk_info "WSLENV is on"
+::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+::		sudo chown -R "$LOGNAME" "$HOME"
+::	fi
+	
+::	if [ -n "${USER-}" ]; then
+::		dk_debug USER
+::		DKUSERNAME=$USER
+::	elif [ -n "${USERNAME-}" ]; then
+::		dk_debug USERNAME
+::		DKUSERNAME=$USERNAME
+::	fi
+::	dk_debug DKUSERNAME
+	
+::	call:dk_debug SHLVL
+::  call:dk_debug MSYSTEM
+	call:dk_debug SCRIPT_NAME
+	call:dk_debug SCRIPT_DIR
+
+	:::::: Get the HOST_TRIPLE and other HOST variables
+	call:dk_get_host_triple
+
+
+
+
+
 	call:get_dkpaths
     
-    set HOST_OS=win
-    call:print_var HOST_OS
-        
-    if %PROCESSOR_ARCHITECTURE%==x86 set HOST_ARCH=x86
-    if %PROCESSOR_ARCHITECTURE%==AMD64 set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==IA64  set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==EM64T set HOST_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==ARM64  set HOST_ARCH=arm64
-    call:print_var HOST_ARCH
-        
-    set HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%
-    call:print_var HOST_TRIPLE
-    
-    set HOST_ENV=clang
-    set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
 
     call:validate_git
     call:validate_branch
@@ -116,17 +141,6 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     call:create_cache
     
     call:generate
-    if %TARGET_OS%==android_arm32      call:generate_toolchain android_arm32_toolchain
-    if %TARGET_OS%==android_arm64      call:generate_toolchain android_arm64_toolchain
-    if %TARGET_OS%==emscripten         call:generate_toolchain emscripten_toolchain
-    if %TARGET_OS%==win_arm64_clang    call:generate_toolchain windows_arm64_clang_toolchain
-    if %TARGET_OS%==win_x86_mingw      call:generate_toolchain windows_x86_mingw_toolchain
-    if %TARGET_OS%==win_x86_clang      call:generate_toolchain windows_x86_clang_toolchain
-    if %TARGET_OS%==win_x86_msvc       call:generate_toolchain windows_x86_msvc_toolchain
-    if %TARGET_OS%==win_x86_64_mingw   call:generate_toolchain windows_x86_64_mingw_toolchain
-    if %TARGET_OS%==win_x86_64_clang   call:generate_toolchain windows_x86_64_clang_toolchain
-    if %TARGET_OS%==win_x86_64_ucrt    call:generate_toolchain windows_x86_64_ucrt_toolchain
-    if %TARGET_OS%==win_x86_64_msvc    call:generate_toolchain windows_x86_64_msvc_toolchain
     
     call:build
     if %TYPE%==All      call:build_all
@@ -164,6 +178,33 @@ goto:eof
 	
 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	:: TODO - 
+goto:eof
+
+
+::####################################################################
+:: dk_get_host_triple()
+::
+::
+:dk_get_host_triple () {
+	call:dk_verbose "dk_get_host_triple(%*)"
+	
+	set HOST_OS=win
+    call:print_var HOST_OS
+	
+	if %PROCESSOR_ARCHITECTURE%==x86 set HOST_ARCH=x86
+    if %PROCESSOR_ARCHITECTURE%==AMD64 set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==IA64  set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==EM64T set HOST_ARCH=x86_64
+    if %PROCESSOR_ARCHITECTURE%==ARM64  set HOST_ARCH=arm64
+    call:print_var HOST_ARCH
+	
+	set HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%
+    call:print_var HOST_TRIPLE
+    
+    set HOST_ENV=clang
+    set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
+	call:print_var HOST_TRIPLE
+	
 goto:eof
 
 
@@ -350,14 +391,15 @@ goto:eof
     echo 33) Windows x86_64 (clang)
     echo 34) Windows x86_64 (ucrt)
     echo 35) Windows x86_64 (msvc)
-    echo 36) Clear Screen
-    echo 37) Go Back
-    echo 38) Exit    
+	echo 36) none
+    echo 37) Clear Screen
+    echo 38) Go Back
+    echo 39) Exit    
     set choice=
     set /p choice=Please select an OS to build for: 
         
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=%HOST_TRIPLE%"     & goto:eof
+    if "%choice%"=="1" set "TARGET_OS=%HOST_TRIPLE%"      & goto:eof
     if "%choice%"=="2" set "TARGET_OS=android_arm32"       & goto:eof
     if "%choice%"=="3" set "TARGET_OS=android_arm64"       & goto:eof
     if "%choice%"=="4" set "TARGET_OS=android_x86"         & goto:eof
@@ -392,9 +434,10 @@ goto:eof
     if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
     if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
     if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
-    if "%choice%"=="36" call:clear_screen                  & goto:eof
-    if "%choice%"=="37" set "APP="                         & goto:eof
-    if "%choice%"=="38" exit                               & goto:eof
+	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
+    if "%choice%"=="37" call:clear_screen                  & goto:eof
+    if "%choice%"=="38" set "APP="                         & goto:eof
+    if "%choice%"=="39" exit                               & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof
@@ -415,9 +458,10 @@ goto:eof
     echo 1) Debug
     echo 2) Release
     echo 3) All
-    echo 4) Clear Screen
-    echo 5) Go Back
-    echo 6) Exit
+	echo 4) none
+    echo 5) Clear Screen
+    echo 6) Go Back
+    echo 7) Exit
     set choice=
     set /p choice=Please select a build type: 
     
@@ -425,9 +469,10 @@ goto:eof
     if "%choice%"=="1" set "TYPE=Debug"    & goto:eof
     if "%choice%"=="2" set "TYPE=Release"  & goto:eof
     if "%choice%"=="3" set "TYPE=All"      & goto:eof
-    if "%choice%"=="4" call:clear_screen   & goto:eof
-    if "%choice%"=="5" set "TARGET_OS="    & goto:eof
-    if "%choice%"=="6" exit                & goto:eof
+	if "%choice%"=="4" set "TYPE=none"     & goto:eof
+    if "%choice%"=="5" call:clear_screen   & goto:eof
+    if "%choice%"=="6" set "TARGET_OS="    & goto:eof
+    if "%choice%"=="7" exit                & goto:eof
         
     echo %choice%: invalid selection, please try again
     set TYPE=
@@ -435,15 +480,28 @@ goto:eof
 
 
 ::####################################################################
-:: add_cmake_arg(<string>)
+:: append_cmake_args(<string>)
 ::
 ::
-:add_cmake_arg () {
-	call:dk_verbose "add_cmake_arg(%*)"
+:append_cmake_args () {
+	call:dk_verbose "append_cmake_args(%*)"
 	
-    if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
-    echo added %*
+    if "%*" == "" echo ERROR: append_cmake_args is empty! & goto:eof
     set CMAKE_ARGS=%CMAKE_ARGS% "%*"
+	echo appended %*
+goto:eof
+
+
+::####################################################################
+:: prepend_cmake_args(<string>)
+::
+::
+:prepend_cmake_args () {
+	call:dk_verbose "prepend_cmake_args(%*)"
+	
+    if "%*" == "" echo ERROR: prepend_cmake_args is empty! & goto:eof
+    set CMAKE_ARGS="%*" %CMAKE_ARGS%
+	echo prepended %*
 goto:eof
 
 
@@ -479,40 +537,73 @@ goto:eof
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    ::if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=OFF
-    if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON
-    ::if %TYPE%==Release          call:add_cmake_arg -DDEBUG=OFF & call:add_cmake_arg -DRELEASE=ON
-    if %TYPE%==Release          call:add_cmake_arg -DRELEASE=ON
-    if %TYPE%==All              call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=ON
-    if %DKLEVEL%==Build         call:add_cmake_arg -DBUILD=ON
-    if %DKLEVEL%==Rebuild       call:add_cmake_arg -DREBUILD=ON
-    if %DKLEVEL%==RebuildAll    call:add_cmake_arg -DREBUILDALL=ON
-    if %DKLINK%==Static         call:add_cmake_arg -DSTATIC=ON
-    if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
-    ::if %TARGET_OS%==emscripten    call:add_cmake_arg -DEMSCRIPTEN=ON
+    ::if %TYPE%==Debug           call:append_cmake_args -DDEBUG=ON & call:append_cmake_args -DRELEASE=OFF
+    if %TYPE%==Debug             call:append_cmake_args -DDEBUG=ON
+    ::if %TYPE%==Release         call:append_cmake_args -DDEBUG=OFF & call:append_cmake_args -DRELEASE=ON
+    if %TYPE%==Release           call:append_cmake_args -DRELEASE=ON
+    if %TYPE%==All               call:append_cmake_args -DDEBUG=ON & call:append_cmake_args -DRELEASE=ON
+    if %DKLEVEL%==Build          call:append_cmake_args -DBUILD=ON
+    if %DKLEVEL%==Rebuild        call:append_cmake_args -DREBUILD=ON
+    if %DKLEVEL%==RebuildAll     call:append_cmake_args -DREBUILDALL=ON
+    if %DKLINK%==Static          call:append_cmake_args -DSTATIC=ON
+    if %DKLINK%==Shared          call:append_cmake_args -DSHARED=ON
+    ::if %TARGET_OS%==emscripten call:append_cmake_args -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
     call:print_var CMAKE_BINARY_DIR
         
-    call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
-    call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
+    call:append_cmake_args -S=%CMAKE_SOURCE_DIR%
+    call:append_cmake_args -B=%CMAKE_BINARY_DIR%
 
     :::::::::::: CMake Options :::::::::::::
-    ::call:add_cmake_arg -DCMAKE_VERBOSE_MAKEFILE=1
-    ::call:add_cmake_arg -DCMAKE_COLOR_DIAGNOSTICS=ON
-    call:add_cmake_arg -Wdev
-    ::call:add_cmake_arg -Werror=dev
-    call:add_cmake_arg -Wdeprecated
-    ::call:add_cmake_arg -Werror=deprecated
-    ::call:add_cmake_arg --graphviz=graphviz.txt
-    ::call:add_cmake_arg --system-information system_information.txt
-    ::call:add_cmake_arg --debug-trycompile
-    ::call:add_cmake_arg --debug-output
-    ::call:add_cmake_arg --trace
-    ::call:add_cmake_arg --trace-expand
-    ::call:add_cmake_arg --warn-uninitialized
-    call:add_cmake_arg --warn-unused-vars
-    ::call:add_cmake_arg --check-system-vars
+    ::call:append_cmake_args -DCMAKE_VERBOSE_MAKEFILE=1
+    ::call:append_cmake_args -DCMAKE_COLOR_DIAGNOSTICS=ON
+    call:append_cmake_args -Wdev
+    ::call:append_cmake_args -Werror=dev
+    call:append_cmake_args -Wdeprecated
+    ::call:append_cmake_args -Werror=deprecated
+    ::call:append_cmake_args --graphviz=graphviz.txt
+    ::call:append_cmake_args --system-information system_information.txt
+    ::call:append_cmake_args --debug-trycompile
+    ::call:append_cmake_args --debug-output
+    ::call:append_cmake_args --trace
+    ::call:append_cmake_args --trace-expand
+    ::call:append_cmake_args --warn-uninitialized
+    call:append_cmake_args --warn-unused-vars
+    ::call:append_cmake_args --check-system-vars
+	
+	if %TARGET_OS%==android_arm32      call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==android_arm64      call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==emscripten         call:prepend_cmake_args -G Unix Makefiles	
+	if %TARGET_OS%==ios_arm32          call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==ios_arm64          call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==iossim_x86         call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==iossim_x86_64      call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==linux_x86          call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==linux_x86_64       call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==mac_x86            call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==mac_x86_64         call:prepend_cmake_args -G Xcode
+	if %TARGET_OS%==raspberry_arm32    call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==raspberry_arm64    call:prepend_cmake_args -G Unix Makefiles
+	if %TARGET_OS%==win_arm64_clang    call:prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_clang      call:prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_mingw      call:prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_clang   call:prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_mingw   call:prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_ucrt    call:prepend_cmake_args -G MinGW Makefiles
+	
+	::::::: CMAKE_TOOLCHAIN_FILE :::::::
+	::set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake
+	::echo "TOOLCHAIN = %TOOLCHAIN%"
+	::set TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%
+	::if exist %TOOLCHAIN% call:append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+    
+    ::::::: CMake Configure :::::::
+    echo.
+    echo ****** CMAKE COMMAND ******
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    "%CMAKE_EXE%" %CMAKE_ARGS%
+    echo.
 goto:eof
 
 
@@ -526,8 +617,8 @@ goto:eof
 ::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
 ::  call:print_var MSYS2
 ::                
-::    call:add_cmake_arg -G MinGW Makefiles
-::  call:add_cmake_arg -DMSYSTEM=%MSYSTEM%
+::    call:append_cmake_args -G MinGW Makefiles
+::  call:append_cmake_args -DMSYSTEM=%MSYSTEM%
 ::                
 ::  echo.
 ::  echo ****** CMAKE COMMAND ******
@@ -544,9 +635,9 @@ goto:eof
 ::generate_msvc () {
 ::	call:dk_verbose "generate_msvc(%*)"
 ::    ::call:validate_visual_studio
-::    ::call:add_cmake_arg -G Visual Studio -A x64
-::  ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
-::    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
+::    ::call:append_cmake_args -G Visual Studio -A x64
+::  ::call:append_cmake_args -DCMAKE_C_COMPILER=%VISUALSTUDIO_C_COMPILER%"
+::    ::call:append_cmake_args -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_CXX_COMPILER%"
 ::    
 ::    echo.
 ::  echo ****** CMAKE COMMAND ******
@@ -571,12 +662,12 @@ goto:eof
     if "%hasAndroid%" == "1" ( 
         set "CMAKE_GENERATOR=Unix Makefiles"
     ) else ( if "%hasAndroid%" NEQ "1" set "CMAKE_GENERATOR=MinGW Makefiles" )
-    call:add_cmake_arg -G %CMAKE_GENERATOR%
+    call:append_cmake_args -G %CMAKE_GENERATOR%
     
     ::::::: CMAKE_TOOLCHAIN_FILE :::::::
     ::call set CMAKE_TOOLCHAIN_FILE=%DKCMAKE_DIR%/toolchains/%1.cmake
     ::call set CMAKE_TOOLCHAIN_FILE=%%CMAKE_TOOLCHAIN_FILE:^\=^/%%
-    ::if exist %CMAKE_TOOLCHAIN_FILE% call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
+    ::if exist %CMAKE_TOOLCHAIN_FILE% call:append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%
     
     ::::::: CMake Configure :::::::
     echo.
@@ -1722,18 +1813,32 @@ goto:eof
 
 
 ::##################################################################################
-:: dk_debug(msg)
-::
-::	Print a debug message to the console
-::
-::	@msg	- The message to print
-::
+::# dk_debug(msg)
+::#
+::#   Print a debug message to the console
+::#
+::#   @msg	- The message to print
+::#
 :dk_debug () {
 	::call dk_verbose "dk_debug(%*)"
 	
-	if %LOG_DEBUG% == 1 ( 
-		echo %blue%   DEBUG: %1 %clr%
-	)
+::	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
+	
+	if NOT %LOG_DEBUG% == 1 goto:eof
+	
+	set "msg=%1"
+	
+	::### print variable ###
+::	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
+::		if dk_defined $1; then
+::			eval value='$'{$1}
+::			msg="$1: ${value}"
+::		else
+::			msg="$1: ${red}NOT DEFINED${clr}"
+::		fi
+::	fi 
+	
+	echo %blue%   DEBUG: %1 %clr%
 goto:eof
 
 ::################################################################################

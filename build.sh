@@ -45,10 +45,8 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 # main()
 #
 #
-main() {
+main () {
 	dk_verbose "main($*)"
-
-	dk_get_shell_type
 
 	echo "BASH = $BASH"
 	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
@@ -66,8 +64,6 @@ main() {
 	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
 	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
-
-
 
 	# log to stdout and file
 	#exec |& tee file.log 
@@ -88,13 +84,17 @@ main() {
 		DKUSERNAME=$USERNAME
 	fi
 	dk_debug DKUSERNAME
+	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_NAME
 	dk_debug SCRIPT_DIR
 	
-	## Get the HOST_TRIPLE and other HOST variables
-	dk_get_host_triple #HOST_TRIPLE"
+	### Get the HOST_TRIPLE and other HOST variables
+	dk_get_host_triple
+	
+	
+	
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE
@@ -882,12 +882,18 @@ dk_verbose () {
 ##################################################################################
 # dk_debug(<message>)
 #
+#	Print a debug message to the console
+#
+#	@msg	- The message to print
 #
 dk_debug () {
 	#dk_verbose "dk_debug($*)"
+	
 	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
 	[ $LOG_DEBUG -eq 1 ] || return 0
+	
+	msg="$1"
 	
 	### print variable ###
 	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
@@ -898,7 +904,6 @@ dk_debug () {
 			msg="$1: ${red}NOT DEFINED${clr}"
 		fi
 	fi 
-	### print variable ###
 
 	dk_echo "${blue}  DEBUG: ${msg-} ${clr}"
 }
