@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_pick_type () {
-	call:dk_verbose "dk_pick_type(%*)"
+	call dk_verbose "dk_pick_type(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -26,7 +26,7 @@
     if "%choice%"=="2" set "TYPE=Release"  & goto:eof
     if "%choice%"=="3" set "TYPE=All"      & goto:eof
 	if "%choice%"=="4" set "TYPE=none"     & goto:eof
-    if "%choice%"=="5" call:dk_clear_screen   & goto:eof
+    if "%choice%"=="5" call dk_clear_screen   & goto:eof
     if "%choice%"=="6" set "TARGET_OS="    & goto:eof
     if "%choice%"=="7" exit                & goto:eof
         

@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reset_plugins () {
-	call:dk_verbose "dk_reset_plugins(%*)"
+	call dk_verbose "dk_reset_plugins(%*)"
 	
     echo Resetting DKPlugins . . .
 

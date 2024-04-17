@@ -1,14 +1,12 @@
 ::[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
-echo %0(%*)
+::echo %0(%*)
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: dk_load()
-::
-::
-::
+::####################################################################
+::# dk_load()
+::#
+::#
 :dk_load() {
-	::call dk_verbose "%0(%*)"
-	echo %cyan% %0(%*) %clr%
+	::echo "%0(%*)"
 	call %*
 	
 ::	local fn=
@@ -77,4 +75,4 @@ echo %0(%*)
 ::    fi
 goto:eof
 
-::call:dk_load "%*"
+::call dk_load "%*"

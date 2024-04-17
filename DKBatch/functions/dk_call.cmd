@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_call () {
-	call:dk_verbose "dk_call(%*)"
+	call dk_verbose "dk_call(%*)"
 	
     ::TODO
     :: Here we try to use DK_call to pass on a call while echoing the call passed

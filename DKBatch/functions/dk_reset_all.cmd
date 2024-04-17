@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reset_all () {
-	call:dk_verbose "dk_reset_all(%*)"
+	call dk_verbose "dk_reset_all(%*)"
 	
     if "%1" EQU "wipe" goto:wipe
         
@@ -27,13 +27,13 @@
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:dk_debug SCRIPT_DIR
-        call:dk_debug DKBRANCH_DIR
+        call dk_debug SCRIPT_DIR
+        call dk_debug DKBRANCH_DIR
         goto:eof
     )
     
-    call:dk_kill_process java.exe
-    call:dk_kill_process adb.exe
+    call dk_kill_process java.exe
+    call dk_kill_process adb.exe
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
@@ -63,7 +63,7 @@
         
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
-    call:dk_git_update NO_CONFIRM
+    call dk_git_update NO_CONFIRM
         
     start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%SCRIPT_NAME% & exit
 goto:eof

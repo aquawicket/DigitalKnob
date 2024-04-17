@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_pick_os () {
-	call:dk_verbose "dk_pick_os(%*)"
+	call dk_verbose "dk_pick_os(%*)"
 
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -93,7 +93,7 @@
     if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
     if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
 	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
-    if "%choice%"=="37" call:dk_clear_screen                  & goto:eof
+    if "%choice%"=="37" call dk_clear_screen                  & goto:eof
     if "%choice%"=="38" set "APP="                         & goto:eof
     if "%choice%"=="39" exit                               & goto:eof
     echo %choice%: invalid selection, please try again

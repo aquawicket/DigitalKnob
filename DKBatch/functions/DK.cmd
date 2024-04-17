@@ -4,8 +4,12 @@
 :::::: Global Script Variables ::::::
 set LOG_VERBOSE=1
 set LOG_DEBUG=1
-set HALT_ON_WARNINGS=1
-set HALT_ON_ERRORS=1
+set TRACE_ON_WARNINGS=0
+set HALT_ON_WARNINGS=0
+set CONTINUE_ON_ERRORS=0
+::set SCRIPT_DIR=%~dp0
+::set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
+::set SCRIPT_NAME=%~nx0
 ::set true=0
 ::set false=1
 

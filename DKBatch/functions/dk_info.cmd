@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_info () {
-	::call:dk_verbose "dk_info(%*)"
+	::call dk_verbose "dk_info(%*)"
 	
 	echo %white%    INFO: %1 %clr%
 goto:eof

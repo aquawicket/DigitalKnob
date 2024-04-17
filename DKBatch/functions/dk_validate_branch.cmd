@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_validate_branch () {
-	call:dk_verbose "dk_validate_branch(%*)"
+	call dk_verbose "dk_validate_branch(%*)"
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
@@ -18,7 +18,7 @@
         )
     )
 
-    call:dk_debug DKBRANCH
+    call dk_debug DKBRANCH
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
@@ -40,5 +40,5 @@
     ::      )
     ::      exit
     ::)
-    call:dk_check_error
+    call dk_check_error
 goto:eof

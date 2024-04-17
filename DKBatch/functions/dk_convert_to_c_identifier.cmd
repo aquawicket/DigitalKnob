@@ -6,10 +6,11 @@ setlocal EnableDelayedExpansion
 ::#
 ::#
 :dk_convert_to_c_identifier () {
-	call:dk_verbose "dk_convert_to_c_identifier(%*)"
+	call dk_verbose "dk_convert_to_c_identifier(%*)"
 	
     set "_input=%1"
-    set "_output="
+	::call dk_debug _input
+
     set "map=abcdefghijklmnopqrstuvwxyz 1234567890"
 
     :c_identifier_loop
@@ -22,5 +23,7 @@ setlocal EnableDelayedExpansion
     goto c_identifier_loop
 
     :c_identifier_endLoop
-        set %2=!_output!
+	::call dk_debug _output
+
+endlocal & set "%2=%_output%"		
 goto:eof

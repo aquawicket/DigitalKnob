@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reset_apps () {
-	call:dk_verbose "dk_reset_apps(%*)"
+	call dk_verbose "dk_reset_apps(%*)"
 	
     echo Resetting Apps . . .
 

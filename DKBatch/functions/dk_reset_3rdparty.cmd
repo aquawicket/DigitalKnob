@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reset_3rdparty () {
-	call:dk_verbose "dk_reset_3rdparty(%*)"
+	call dk_verbose "dk_reset_3rdparty(%*)"
 	
     echo Resetting 3rdParty Libraries . . .
         

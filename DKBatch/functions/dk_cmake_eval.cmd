@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_cmake_eval () {
-	call:dk_verbose "dk_cmake_eval(%*)"
+	call dk_verbose "dk_cmake_eval(%*)"
 	
     echo.
     echo  $ dk_cmake_eval (%*)
@@ -30,7 +30,7 @@
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    ::#call:dk_debug DKCOMMAND
+    ::#call dk_debug DKCOMMAND
 
     set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
     call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
@@ -51,7 +51,7 @@
         ::del %EVAL_VARS%
     goto:eof
 
-    ::call:dk_debug ERRORLEVEL
+    ::call dk_debug ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out
@@ -78,5 +78,5 @@
     ::err contains all of the lines
     ::echo %err%
 
-    call:dk_check_error
+    call dk_check_error
 goto:eof

@@ -1080,7 +1080,7 @@ goto:eof
     call:dk_convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
     call:dk_convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
     ::call:dk_debug GIT_FOLDER
-        
+
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
     call:dk_debug GIT_EXE
         

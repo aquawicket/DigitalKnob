@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_enter_manually () {
-	call:dk_verbose "dk_enter_manually(%*)"
+	call dk_verbose "dk_enter_manually(%*)"
 	
     echo Please type the name of the library, tool or app to build. Then press enter.
     set /p input= 
@@ -20,13 +20,13 @@
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
-    ::call:dk_debug TARGET_PATH
+    ::call dk_debug TARGET_PATH
     
-    call:dk_get_parent_folder %TARGET_PATH% parent
-    ::call:dk_debug parent
+    call dk_get_parent_folder %TARGET_PATH% parent
+    ::call dk_debug parent
     
     if %parent%==DKApps goto:eof
-    call:dk_make_directory  %DKAPPS_DIR%\%APP%
+    call dk_make_directory  %DKAPPS_DIR%\%APP%
     
     :: create DKApps/<APP>/DKMAKE.cmake 
     echo dk_depend(%input%)> %DKAPPS_DIR%\%APP%\DKMAKE.cmake

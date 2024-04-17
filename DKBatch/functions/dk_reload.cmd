@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reload () {
-	call:dk_verbose "dk_reload(%*)"
+	call dk_verbose "dk_reload(%*)"
 	
     echo .
     echo reloading %SCRIPT_NAME%

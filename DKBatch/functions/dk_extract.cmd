@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_extract () {
-	call:dk_verbose "dk_extract(%*)"
+	call dk_verbose "dk_extract(%*)"
 	
 	echo Extracting %~1 to %2
 	if not exist "%~1" (
