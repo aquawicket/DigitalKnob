@@ -36,12 +36,12 @@ dk_load() {
         echo "$fpath: file not found"
     fi
 
-	if [[ $dk_load_list =~ ";$fn;" ]]; then			# BASH REGEX MATCH
-	#if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
+	if [[ $dk_load_list =~ "$fn;" ]]; then			# BASH REGEX MATCH
+	#if echo $dk_load_list | grep -q "$fn;"; then		# POSIX REGEX MATCH
         #echo "$fn: already in the list" 	# if already in list, do nothing
         return 0
     else
-		dk_load_list="${dk_load_list};$fn;" # Add to list
+		dk_load_list="${dk_load_list}$fn;" # Add to list
 		
 		#echo "USING BASH ARRAYS"
 		oldIFS=$IFS
@@ -55,15 +55,18 @@ dk_load() {
 			#value=${value#*N}   # cut off everything from begining to first N
 			#value=${value##*N}   # cut off everything from begining to last N
 				
-			value=${value%%#*}
+			value=${value%%#*}											# remove everything after #
+			
 			[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]						# BASH REGEX MATCH
 			value=${BASH_REMATCH[0]}									# BASH REGEX VALUE
-			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
-			[ "$value" == "" ] && continue
+			
+			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
+			[ -z "$value" ] && continue
+
 			#echo "${fn}:lines '$value'"
 			#echo "dk_load_list: $dk_load_list"	
-			if [[ $dk_load_list =~ ";$value;" ]]; then		# BASH REGEX MATCH
-			#if echo $dk_load_list | grep -q "$value"; then	# POSIX REGEX MATCH
+			if [[ $dk_load_list =~ "$value;" ]]; then		# BASH REGEX MATCH
+			#if echo $dk_load_list | grep -q "$value;"; then	# POSIX REGEX MATCH
 				#echo "${fn}: skipping $value.    already in load_list"
 				continue
 			elif [[ ${fn} == $value ]]; then
@@ -81,33 +84,6 @@ dk_load() {
 			fi
 		done
 
-: '	
-		funcs=($(grep -o "[Dd][Kk]_.[A-Za-z0-9_\t]*" ${!fn}))
-		#for funcs_value in "${funcs[@]}"
-		#do
-		#	echo "${fn}:funcs $funcs_value"
-		#done
-		
-		targets=($(printf "%s\n" "${funcs[@]}" | sort -u));
-		for value in "${targets[@]}"
-		do
-			echo "${fn}:targets $value"
-		    if [[ $dk_load_list =~ "$value" ]]; then
-			  #echo "${fn}: skipping $value.    already in load_list"
-				continue
-			elif [[ ${fn} == $value ]]; then
-			   #echo "${fn}: skipping $value.    already matches fn"
-			   continue
-			elif [[ $(command -v $value) != "" ]]; then
-			   #echo "${fn}: skipping $value.    command already recognized"
-			   continue
-			else
-			   #echo "$fn: dk_load( $value )"
-			   dk_load $value
-			fi
-		done
-'	
-		
 		if [ -f "${!fn}" ]; then
 			#echo "{@}: ${@}"
 			#echo "{fn}: ${!fn}"
