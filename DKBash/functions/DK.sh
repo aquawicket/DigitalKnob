@@ -1,5 +1,17 @@
+###### Reload Main Script with bash ######
+if [ ${RELOAD_WITH_BASH-1} = 1 ]; then # && ! dk_defined BASH; then
+	export RELOAD_WITH_BASH=0
+	if [ -n "$(command -v bash)" ]; then
+		exec /bin/bash "$0"
+	else
+		echo ""
+		echo "ERROR: This script requires bash. Please install it and try again.";
+		read -rp 'Press enter to exit...' key;
+		exit 1
+	fi
+fi
+
 [ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
-#clear && clear
 
 ###### Global Script Variables ######
 export LOG_VERBOSE=1
@@ -15,16 +27,16 @@ readonly false=1
 ###### Script internal setup ######
 [ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
 [ "$SHELL" = "/bin/zsh" ] && shell_type="zsh"
-echo "shell_type = $shell_type"
+#echo "shell_type = $shell_type"
 [ $shell_type = sh ] && export DKSH=1 && export ext=sh
 [ $shell_type = dash ] && export DKDASH=1 && export ext=sh
 [ $shell_type = zsh ] && export DKZSH=1 && export ext=sh
 [ $shell_type = bash ] && export DKBASH=1 && export ext=bash
 
-[ $DKSH ]   && echo "DKSH"
-[ $DKDASH ] && echo "DKDASH"
-[ $DKZSH ] && echo "DKZSH"
-[ $DKBASH ] && echo "DKBASH"
+#[ $DKSH ]   && echo "DKSH"
+#[ $DKDASH ] && echo "DKDASH"
+#[ $DKZSH ] && echo "DKZSH"
+#[ $DKBASH ] && echo "DKBASH"
 
 ###### get DKBASH_DIR ######
 export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )

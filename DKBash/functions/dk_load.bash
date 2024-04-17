@@ -7,7 +7,7 @@ echo "dk_load.bash"
 #
 #
 dk_load() {
-	echo "dk_load($@)"
+	#echo "dk_load($@)"
 	local fn=
 	[ -z $1 ] && return 0 #true
 	
@@ -21,10 +21,10 @@ dk_load() {
 	fi
 	
 	# Convert to unix line endings if CRLF found
-	#if file_exists $fpath; then
+	#if [ -e $fpath]; then
 		#if [[ $(file -b - < $fpath) =~ CRLF ]]; then		# BASH REGEX MATCH
 		if echo $(file -b - < $fpath) | grep -q CRLF; then	# POSIX REGEX MATCH
-			echo Converting file to Unix line endings
+			#echo Converting file to Unix line endings
 			sed -i -e 's/\r$//' $fpath
 		fi
 	#fi
@@ -38,7 +38,7 @@ dk_load() {
 
 	if [[ $dk_load_list =~ ";$fn" ]]; then			# BASH REGEX MATCH
 	#if echo $dk_load_list | grep -q "$fn"; then		# POSIX REGEX MATCH
-        echo "$fn: already in the list" 	# if already in list, do nothing
+        #echo "$fn: already in the list" 	# if already in list, do nothing
         return 0
     else
 		dk_load_list="${dk_load_list};$fn" # Add to list
@@ -60,23 +60,23 @@ dk_load() {
 			value=${BASH_REMATCH[0]}									# BASH REGEX VALUE
 			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 			[ "$value" == "" ] && continue
-			echo "${fn}:lines '$value'"
+			#echo "${fn}:lines '$value'"
 			#echo "dk_load_list: $dk_load_list"	
 			if [[ $dk_load_list =~ ";$value" ]]; then		# BASH REGEX MATCH
 			#if echo $dk_load_list | grep -q "$value"; then	# POSIX REGEX MATCH
-				echo "${fn}: skipping $value.    already in load_list"
+				#echo "${fn}: skipping $value.    already in load_list"
 				continue
 			elif [[ ${fn} == $value ]]; then
-				echo "${fn}: skipping $value.    already matches fn"
+				#echo "${fn}: skipping $value.    already matches fn"
 				continue
 			elif [[ $(command -v $value) != "" ]]; then
-				echo "${fn}: skipping $value.    command already recognized"
+				#echo "${fn}: skipping $value.    command already recognized"
 				continue
 			elif [[ "$value" == "" ]]; then
-				echo "${fn}: skipping $value.    empty"
+				#echo "${fn}: skipping $value.    empty"
 				continue
 			else
-				echo "$fn: dk_load( $value )"
+				#echo "$fn: dk_load( $value )"
 				dk_load $value
 			fi
 		done
@@ -112,7 +112,7 @@ dk_load() {
 			#echo "{@}: ${@}"
 			#echo "{fn}: ${!fn}"
 			if ! [ $@ == ${!fn} ]; then
-				echo "$fn: source ${!fn}"
+				#echo "$fn: source ${!fn}"
 				. "${!fn}"
 			fi
 			#return 0

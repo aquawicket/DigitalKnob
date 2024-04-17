@@ -7,11 +7,11 @@
 dk_build_main () {
 	dk_verbose "dk_build_main($*)"
 
-	echo "BASH = $BASH"
-	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
-		export RELOAD_WITH_BASH=0
-		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
-	fi
+	#echo "BASH = $BASH"
+	#if [ ${RELOAD_WITH_BASH-1} = 1 ]; then # && ! dk_defined BASH; then
+	#	export RELOAD_WITH_BASH=0
+	#	dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+	#fi
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 	###### Set and check posix mode ######
@@ -44,8 +44,6 @@ dk_build_main () {
 	#fi
 	#dk_debug DKUSERNAME
 	
-	dk_debug DUMMY
-	dk_debug 3jd-6
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_NAME

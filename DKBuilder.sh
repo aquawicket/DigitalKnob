@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 clear && clear
 echo "$0($*)"
 
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
-
 SCRIPT_NAME=$(basename "$0")
 true=0
 false=1

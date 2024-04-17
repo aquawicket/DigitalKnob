@@ -31,7 +31,7 @@ dk_enter_manually () {
 	fi
 	
 	# create DKApps/<APP>/DKMAKE.cmake 
-	echo "dk_depend($input)" > "$DKAPPS_DIR"/"$APP"/DKMAKE.cmake
+	echo "d\k_depend($input)" > "$DKAPPS_DIR"/"$APP"/DKMAKE.cmake
 	
 	# create DKApps/<APP>/main.cpp
 	echo "int main(int argc, char** argv) { return 0; }" > "$DKAPPS_DIR"/"$APP"/main.cpp
