@@ -62,11 +62,11 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 
 
 ##################################################################################
-# main()
+# dk_build_main()
 #
 #
-main () {
-	dk_verbose "main($*)"
+dk_build_main () {
+	dk_verbose "dk_build_main($*)"
 
 	echo "BASH = $BASH"
 	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
@@ -2487,9 +2487,9 @@ dk_get_shell_type () {
 
 echo "* = $*"
 #[ "$*" = "" ] || DK_TRY_CATCH "$@"
-#DK_TRY_CATCH main "$@"
+#DK_TRY_CATCH dk_build_main "$@"
 [ "$*" = "" ] || "$@"
-main "$@"
+dk_build_main "$@"
 
 
 

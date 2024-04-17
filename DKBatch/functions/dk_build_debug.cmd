@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_build_debug()
-::
-::
+::####################################################################
+::# dk_build_debug()
+::#
+::#
 :dk_build_debug () {
-	call dk_verbose "%0(%*)"
+	call:dk_verbose "dk_build_debug(%*)"
 	
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"

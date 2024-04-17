@@ -1,94 +1,91 @@
 ::dk_include_guard()
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: dk_build_main()
-::
-::
+::####################################################################
+::# dk_build_main()
+::#
+::#
 :dk_build_main () {
-	call dk_verbose "%0(%*)"
+	call:dk_verbose "dk_build_main(%*)"
 	
-	:: call dk_validate_sudo
+::	echo "BASH = $BASH"
+::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
+::		export RELOAD_WITH_BASH=0
+::		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+::	fi
+::	::export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+::
+::	::###### Set and check posix mode ######
+::	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+::	  *:posix:*) echo "POSIX mode enabled" ;;
+::	  *)         echo "POSIX mode not enabled" ;;
+::	esac
+::	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+::	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+::	::$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+::	::$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+::
+::	:: log to stdout and file
+::	::exec |& tee file.log 
 	
-	::--------------------------------------------------------
-    :: GLOBAL USER VARIABLES
-    ::--------------------------------------------------------
-    set SCRIPT_DIR=%~dp0
-    set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
-    call dk_print_var SCRIPT_DIR
-    set SCRIPT_NAME=%~nx0
-    call dk_print_var SCRIPT_NAME
-    echo %SCRIPT_DIR%\%SCRIPT_NAME%
+	::call:dk_validate_sudo
+	
+::	if dk_defined WSLENV; then 
+::		dk_info "WSLENV is on"
+::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+::		sudo chown -R "$LOGNAME" "$HOME"
+::	fi
+	
+::	if [ -n "${USER-}" ]; then
+::		dk_debug USER
+::		DKUSERNAME=$USER
+::	elif [ -n "${USERNAME-}" ]; then
+::		dk_debug USERNAME
+::		DKUSERNAME=$USERNAME
+::	fi
+::	dk_debug DKUSERNAME
+	
+::	call:dk_debug SHLVL
+::  call:dk_debug MSYSTEM
+	call:dk_debug SCRIPT_NAME
+	call:dk_debug SCRIPT_DIR
 
-    set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
-    set "CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip"
-    set "CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
-    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz"
-    set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
-    set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz"
-    set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
+	:::::: Get the HOST_TRIPLE and other HOST variables
+	call:dk_get_host_triple
 
-	set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
-	set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
+	call:dk_get_dkpaths
+   
+    call:dk_validate_git
+    call:dk_validate_branch
 
-	call dk_get_dkpaths
+    call:dk_debug DKBRANCH_DIR
+    call:dk_debug DKAPPS_DIR
+    call:dk_debug DKCMAKE_DIR
+    call:dk_debug DK3RDPARTY_DIR
+    call:dk_debug DKIMPORTS_DIR
+    call:dk_debug DKPLUGINS_DIR
     
-    set NATIVE_OS=win
-    call dk_print_var NATIVE_OS
-        
-    if %PROCESSOR_ARCHITECTURE%==x86 set NATIVE_ARCH=x86
-    if %PROCESSOR_ARCHITECTURE%==AMD64 set NATIVE_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==IA64  set NATIVE_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==EM64T set NATIVE_ARCH=x86_64
-    if %PROCESSOR_ARCHITECTURE%==ARM64  set NATIVE_ARCH=arm64
-    call dk_print_var NATIVE_ARCH
-        
-    set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
-    call dk_print_var NATIVE_TRIPLE
-    
-    set NATIVE_ENV=clang
-    set NATIVE_TRIPLE=%NATIVE_TRIPLE%_%NATIVE_ENV%
-
-    call dk_validate_git
-    call dk_validate_branch
-
-    call dk_print_var DKBRANCH_DIR
-    call dk_print_var DKAPPS_DIR
-    call dk_print_var DKCMAKE_DIR
-    call dk_print_var DK3RDPARTY_DIR
-    call dk_print_var DKIMPORTS_DIR
-    call dk_print_var DKPLUGINS_DIR
-        
-    call dk_validate_cmake
+	if NOT "%SCRIPT_DIR%"=="%DKBRANCH_DIR%" (
+		call:dk_warning "%SCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		call:dk_warning "%SCRIPT_NAME% path = %SCRIPT_DIR%"
+		call:dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
+	)
     
     :while_loop             
-		if "%UPDATE%"==""     call dk_pick_update & goto:while_loop
-		if "%APP%"==""        call dk_pick_app    & goto:while_loop
-		if "%TARGET_OS%"==""  call dk_pick_os     & goto:while_loop
-		if "%TYPE%"==""       call dk_pick_type   & goto:while_loop
+	
+		if "%UPDATE%"==""     call:dk_pick_update & goto:while_loop
+		if "%APP%"==""        call:dk_pick_app    & goto:while_loop
+		if "%TARGET_OS%"==""  call:dk_pick_os     & goto:while_loop
+		if "%TYPE%"==""       call:dk_pick_type   & goto:while_loop
 
-		call dk_create_cache
+		call:dk_create_cache
 		
-		call dk_generate
-		if %TARGET_OS%==android_arm32      call dk_generate_toolchain android_arm32_toolchain
-		if %TARGET_OS%==android_arm64      call dk_generate_toolchain android_arm64_toolchain
-		if %TARGET_OS%==emscripten         call dk_generate_toolchain emscripten_toolchain
-		if %TARGET_OS%==win_arm64_clang    call dk_generate_toolchain windows_arm64_clang_toolchain
-		if %TARGET_OS%==win_x86_mingw      call dk_generate_toolchain windows_x86_mingw_toolchain
-		if %TARGET_OS%==win_x86_clang      call dk_generate_toolchain windows_x86_clang_toolchain
-		if %TARGET_OS%==win_x86_msvc       call dk_generate_toolchain windows_x86_msvc_toolchain
-		if %TARGET_OS%==win_x86_64_mingw   call dk_generate_toolchain windows_x86_64_mingw_toolchain
-		if %TARGET_OS%==win_x86_64_clang   call dk_generate_toolchain windows_x86_64_clang_toolchain
-		if %TARGET_OS%==win_x86_64_ucrt    call dk_generate_toolchain windows_x86_64_ucrt_toolchain
-		if %TARGET_OS%==win_x86_64_msvc    call dk_generate_toolchain windows_x86_64_msvc_toolchain
+		call:dk_generate
 		
-		call dk_build
-		if %TYPE%==All      call dk_build_all
-		if %TYPE%==Release  call dk_build_release
-		if %TYPE%==Debug    call dk_build_debug
-		call dk_end_message
+		call:dk_build
 		
-		:: TODO
-		call dk_post_build_menu
-    goto while_loop
-    :while_loop_end
+		set UPDATE=
+		set APP=
+		set TARGET_OS=
+		set TYPE=
+	goto while_loop
 goto:eof

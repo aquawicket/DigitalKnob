@@ -62,11 +62,11 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 
 
 ::####################################################################
-::# main()
+::# dk_build_main()
 ::#
 ::#
-:main () {
-	call:dk_verbose "main(%*)"
+:dk_build_main () {
+	call:dk_verbose "dk_build_main(%*)"
 	
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
@@ -544,8 +544,8 @@ goto:eof
     echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
     echo ###########################################################
     echo.
-	
 goto:eof
+
 
 :dk_build_all () {
 ::####################################################################
@@ -601,20 +601,6 @@ goto:eof
 :: DKBatch FUNCTIONS
 :: https://www.dostips.com/DtTutoFunctions.php
 ::####################################################################
-
-::####################################################################
-::# dk_checkApp()
-::#
-::#
-:dk_checkApp () {
-	call:dk_verbose "dk_checkApp(%*)"
-	
-    if NOT exist "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" (
-        echo ERROR: "%DKBRANCH_DIR%\DKApps\%APP%\DKMAKE.cmake" file not found
-        set APP=
-    ) 
-goto:eof
-
 
 ::####################################################################
 ::# dk_get_parent_folder(<input> <output>)

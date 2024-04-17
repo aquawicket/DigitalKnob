@@ -1,19 +1,19 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_pick_os()
-::
-::
-:dk_pick_os
-	call dk_verbose "%0(%*)"
-	
+::####################################################################
+::# dk_pick_os()
+::#
+::#
+:dk_pick_os () {
+	call:dk_verbose "dk_pick_os(%*)"
+
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
     echo %APP% %TARGET_OS% %TYPE%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
     echo.
-    echo  1) %NATIVE_TRIPLE%
+    echo  1) %HOST_TRIPLE%
     echo.
     echo  2) Android arm32
     echo  3) Android arm64
@@ -42,21 +42,22 @@
     echo 26) Raspberry x86_64
     echo 27) Windows arm32
     echo 28) Windows arm64 (clang)
-    echo 29) Windows x86 (mingw)
+    echo 29) Windows x86 (gcc)
     echo 30) Windows x86 (clang)
     echo 31) Windows x86 (msvc)
-    echo 32) Windows x86_64 (mingw)
+    echo 32) Windows x86_64 (gcc)
     echo 33) Windows x86_64 (clang)
     echo 34) Windows x86_64 (ucrt)
     echo 35) Windows x86_64 (msvc)
-    echo 36) Clear Screen
-    echo 37) Go Back
-    echo 38) Exit    
+	echo 36) none
+    echo 37) Clear Screen
+    echo 38) Go Back
+    echo 39) Exit    
     set choice=
     set /p choice=Please select an OS to build for: 
         
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"     & goto:eof
+    if "%choice%"=="1" set "TARGET_OS=%HOST_TRIPLE%"      & goto:eof
     if "%choice%"=="2" set "TARGET_OS=android_arm32"       & goto:eof
     if "%choice%"=="3" set "TARGET_OS=android_arm64"       & goto:eof
     if "%choice%"=="4" set "TARGET_OS=android_x86"         & goto:eof
@@ -91,9 +92,10 @@
     if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
     if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
     if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
-    if "%choice%"=="36" call dk_clear_screen               & goto:eof
-    if "%choice%"=="37" set "APP="                         & goto:eof
-    if "%choice%"=="38" exit                               & goto:eof
+	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
+    if "%choice%"=="37" call:dk_clear_screen                  & goto:eof
+    if "%choice%"=="38" set "APP="                         & goto:eof
+    if "%choice%"=="39" exit                               & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof
