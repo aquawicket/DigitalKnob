@@ -1,12 +1,18 @@
 ::dk_include_guard()
+setlocal enableDelayedExpansion
 
 ::####################################################################
 ::# dk_build_main()
 ::#
 ::#
 :dk_build_main () {
-	call dk_verbose "dk_build_main(%*)"
+	call dk_verbose "%0(%*)"
+
+	call dk_verbose test()
 	
+
+::dk_verbose "%var%"
+
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 ::		export RELOAD_WITH_BASH=0
