@@ -105,8 +105,6 @@ dk_build_main () {
 	#fi
 	#dk_debug DKUSERNAME
 	
-	dk_debug DUMMY
-	dk_debug 3jd-6
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_NAME
@@ -661,9 +659,9 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
+	#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 	if [ "$TARGET_OS" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
-		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		set -- "-G MSYS Makefiles" "$@"
 	fi
 	

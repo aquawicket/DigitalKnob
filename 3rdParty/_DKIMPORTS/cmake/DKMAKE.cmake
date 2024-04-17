@@ -41,12 +41,12 @@ if(ANDROID_HOST)
 elseif(MSYSTEM)
 	
 	dk_debug(MSYSTEM)
-	if(MSYSTEM STREQUAL "MSYS")
-		dk_set(msystem usr)
-	else()
-		string(TOLOWER ${MSYSTEM} msystem)
-	endif()
-	dk_debug(msystem)
+	#if(MSYSTEM STREQUAL "MSYS")
+	#	dk_set(msystem usr)
+	#else()
+	#	string(TOLOWER ${MSYSTEM} msystem)
+	#endif()
+	#dk_debug(msystem)
 	
 	
 	dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
@@ -65,8 +65,8 @@ elseif(MSYSTEM)
 			dk_command(pacman -S mingw-w64-x86_64-cmake --needed --noconfirm)			# MINGW64
 		elseif(UCRT64)
 			dk_command(pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm)		# UCRT64
-		elseif(MSYS)
-			dk_command(pacman -S cmake --needed --noconfirm)							# MSYS2
+		#elseif(MSYS)
+		#	dk_command(pacman -S cmake --needed --noconfirm)							# MSYS2
 		endif()
 		
 		dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
