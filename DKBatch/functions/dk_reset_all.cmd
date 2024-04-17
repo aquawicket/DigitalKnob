@@ -37,7 +37,7 @@
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_reset_all wipe
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" dk_reset_all wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
