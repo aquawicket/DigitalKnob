@@ -10,5 +10,10 @@ dk_reload () {
 	
 	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
 	clear
-	exec "$SCRIPT_DIR/$SCRIPT_NAME"
+	
+	if [ -n "$(command -v bash)" ]; then
+		exec /bin/bash "$SCRIPT_DIR/$SCRIPT_NAME"
+	else
+		exec "$SCRIPT_DIR/$SCRIPT_NAME"
+	fi
 }
