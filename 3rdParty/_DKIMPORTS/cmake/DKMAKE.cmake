@@ -41,12 +41,12 @@ if(ANDROID_HOST)
 elseif(MSYSTEM)
 	
 	dk_debug(MSYSTEM)
-	#if(MSYSTEM STREQUAL "MSYS")
-	#	dk_set(msystem usr)
-	#else()
-	#	string(TOLOWER ${MSYSTEM} msystem)
-	#endif()
-	#dk_debug(msystem)
+	if(MSYSTEM STREQUAL "MSYS")
+		dk_set(msystem usr)
+	else()
+		string(TOLOWER ${MSYSTEM} msystem)
+	endif()
+	dk_debug(msystem)
 	
 	
 	dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
