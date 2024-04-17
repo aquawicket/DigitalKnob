@@ -4,10 +4,12 @@
 ###### Global Script Variables ######
 export LOG_VERBOSE=1
 export LOG_DEBUG=1
+export TRACE_ON_WARNINGS=0
 export HALT_ON_WARNINGS=1
-export HALT_ON_ERRORS=1
+export CONTINUE_ON_ERRORS=0
 readonly true=0
 readonly false=1
+
 
 
 ###### Script internal setup ######
