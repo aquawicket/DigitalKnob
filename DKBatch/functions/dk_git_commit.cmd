@@ -1,24 +1,24 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_git_commit()
-::
-::
-:dk_git_commit
-	call dk_verbose "%0(%*)"
+::################################################################################
+::# dk_git_commit()
+::#
+::#
+:dk_git_commit () {
+	call:dk_verbose "dk_git_commit(%*)"
 	
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 
         
     cd %DKBRANCH_DIR%
         
-    call dk_command_to_variable "%GIT_EXE%" config --global credential.helper STORE
+    call:dk_command_to_variable "%GIT_EXE%" config --global credential.helper STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
-    call dk_command_to_variable "%GIT_EXE%" config --global user.email USER_EMAIL
+    call:dk_command_to_variable "%GIT_EXE%" config --global user.email USER_EMAIL
     if "%USER_EMAIL%"=="" (
         echo.
         echo please enter an email address
@@ -29,7 +29,7 @@
         echo.
     )
         
-    call dk_command_to_variable "%GIT_EXE%" config --global user.email USER_NAME
+    call:dk_command_to_variable "%GIT_EXE%" config --global user.email USER_NAME
     if "%USER_NAME%"=="" (
         echo.
         echo please enter a username
@@ -50,5 +50,5 @@
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
         
-    call dk_check_error
+    call:dk_check_error
 goto:eof

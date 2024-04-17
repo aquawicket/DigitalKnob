@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::################################################################################
-::# dk_info(<message>)
+::# dk_kill_process(<name>)
 ::#
 ::#
-:dk_info () {
-	::call:dk_verbose "dk_info(%*)"
+:dk_kill_process () {
+	call:dk_verbose "dk_kill_process(%*)"
 	
-	echo %white%    INFO: %1 %clr%
+    taskkill /IM "%1" /F > nul
 goto:eof

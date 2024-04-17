@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_read_cache()
-::
-::
-:dk_read_cache
-	call dk_verbose "%0(%*)"
+::################################################################################
+::# dk_read_cache()
+::#
+::#
+:dk_read_cache () {
+	call:dk_verbose "dk_read_cache(%*)"
 	
     ::echo reading cache...
     if not exist %DKBRANCH_DIR%\cache goto:eof

@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_remove_all()
-::
-::
-:dk_remove_all
-	call dk_verbose "%0(%*)"
+::####################################################################
+::# dk_remove_all()
+::#
+::#
+:dk_remove_all () {
+	call:dk_verbose "dk_remove_all(%*)"
 	
     if "%1" EQU "wipe" goto:wipe
         
@@ -25,17 +25,17 @@
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call dk_print_var SCRIPT_DIR
-        call dk_print_var DKBRANCH_DIR
+        call:dk_debug SCRIPT_DIR
+        call:dk_debug DKBRANCH_DIR
         goto:eof
     )
     
-    call dk_kill_process java.exe
-    call dk_kill_process adb.exe
+    call:dk_kill_process java.exe
+    call:dk_kill_process adb.exe
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :remove_all wipe
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_remove_all wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

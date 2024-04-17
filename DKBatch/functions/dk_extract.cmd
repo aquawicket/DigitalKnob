@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
-::#################################################################################
-:: dk_extract()
-::
-::
+::####################################################################
+::# dk_extract(<url> <destination>)
+::#
+::#
 :dk_extract () {
-	call dk_verbose "%0(%*)"
+	call:dk_verbose "dk_extract(%*)"
 	
 	echo Extracting %~1 to %2
 	if not exist "%~1" (

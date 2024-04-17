@@ -1,11 +1,11 @@
-::include_guard()
+::dk_include_guard()
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: dk_verbose()
-::
-::
-:dk_verbose() {
-	::call dk_verbose "%0(%*)"
+::################################################################################
+::# dk_verbose(<message>)
+::#
+::#
+:dk_verbose () {
+	::call dk_verbose "dk_verbose(%*)"
 	
 	if %LOG_VERBOSE% == 1 ( 
 		echo %cyan% VERBOSE: %1 %clr%

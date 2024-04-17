@@ -1,11 +1,11 @@
 :: dk_include_guard()
 
-::#################################################################################
-:: dk_string_contains() <haystack> <needle> <result>
-::
-::
+::################################################################################
+::# dk_string_contains(<haystack> <needle> <result>)
+::#
+::#
 :dk_string_contains () {
-	call dk_verbose "%0(%*)"
+	call:dk_verbose "dk_string_contains(%*)"
 	
     call set "haystack=%1"
     call set "needle=%2"
