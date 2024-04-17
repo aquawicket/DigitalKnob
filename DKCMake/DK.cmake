@@ -2,9 +2,8 @@ include_guard()
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 include($ENV{DKCMAKE_DIR}/functions/dk_load.cmake)
-#message("ENV{DKCMAKE_DIR} = $ENV{DKCMAKE_DIR}")
+dk_debug(ENV{DKCMAKE_DIR})
 
-#dk_watch(DIGITALKNOB_DIR)
 
 if(CMAKE_SCRIPT_MODE_FILE)
 message(STATUS "")
@@ -59,18 +58,17 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
 	if(NOT CMAKE_SOURCE_DIR)
-		message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
+		dk_error("CMAKE_SOURCE_DIR invalid!")
 	endif()
 	get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
-
+	dk_debug(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
 	if(NOT CMAKE_BINARY_DIR)
-		message(FATAL_ERROR "CMAKE_BINARY_DIR invalid!")
+		dk_error("CMAKE_BINARY_DIR invalid!")
 	endif()
 	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-	message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	dk_debug(CMAKE_BINARY_DIR)
 endif()
 
 
@@ -79,10 +77,10 @@ if(DEFINED "ENV{MSYSTEM}")
 	set(MSYSTEM "$ENV{MSYSTEM}"	CACHE INTERNAL "")		
 endif()
 if(MSYSTEM)
-	message(STATUS "MSYSTEM = ${MSYSTEM}")
+	dk_debug(MSYSTEM)
 	
 	set(${MSYSTEM} TRUE			CACHE INTERNAL "")
-	message(STATUS "${MSYSTEM} = ${${MSYSTEM}}")
+	dk_debug(${MSYSTEM})
 endif()
 
 
@@ -101,11 +99,12 @@ endif()
 #	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
 #	set(ProgramFiles_x86 "${ProgramFiles_x86}")
 #endif()
+
 if(ProgramFiles)
-	message(STATUS "ProgramFiles = ${ProgramFiles}")
+	dk_debug(ProgramFiles)
 endif()
 if(ProgramFiles_x86)
-	message(STATUS "ProgramFiles_x86 = ${ProgramFiles_x86}")
+	dk_debug(ProgramFiles_x86)
 endif()
 
 
@@ -119,15 +118,11 @@ else()
 	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
 endif()
 if(MULTI_CONFIG)
-	message(STATUS "MULTI_CONFIG = ${MULTI_CONFIG}")
+	dk_debug(MULTI_CONFIG)
 endif()
 if(SINGLE_CONFIG)
-	message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
+	dk_debug(SINGLE_CONFIG)
 endif()
-
-dk_load(dk_get_subdirectories)
-dk_get_subdirectories("${DKTOOLS_DIR}" DIR_LIST)
-message("DIR_LIST = ${DIR_LIST}")
 
 ##### Load Function files #################
 dk_load(dk_getHostTriple)

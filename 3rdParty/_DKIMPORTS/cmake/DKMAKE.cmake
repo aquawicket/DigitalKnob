@@ -39,34 +39,37 @@ if(ANDROID_HOST)
 	dk_command(pkg install cmake -y)
 	dk_find_program(CMAKE_EXE cmake)
 elseif(MSYSTEM)
-	string(TOLOWER ${MSYSTEM} msystem)
+	
+	dk_debug(MSYSTEM)
+	if(MSYSTEM STREQUAL "MSYS")
+		dk_set(msystem usr)
+	else()
+		string(TOLOWER ${MSYSTEM} msystem)
+	endif()
+	dk_debug(msystem)
+	
+	
 	dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
-	#dk_command("command -v cmake" OUTPUT_VARIABLE CMAKE_EXE BASH_ENV NOASSERT)
 	
 	if(NOT EXISTS ${CMAKE_EXE})
 		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 		if(CLANG32)
 			dk_command(pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm)		# CLANG32
-			#dk_set(CMAKE_EXE ${MSYS2}/clang32/bin/cmake.exe)
 		elseif(CLANG64)
 			dk_command(pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm)		# CLANG64
-			#dk_set(CMAKE_EXE ${MSYS2}/clang64/bin/cmake.exe)
 		elseif(CLANGARM64)
 			dk_command(pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm)	# CLANGARM64
-			#dk_set(CMAKE_EXE ${MSYS2}/clangarm64/bin/cmake.exe)
 		elseif(MINGW32)
 			dk_command(pacman -S mingw-w64-i686-cmake --needed --noconfirm)				# MINGW32
-			#dk_set(CMAKE_EXE ${MSYS2}/mingw32/bin/cmake.exe)
 		elseif(MINGW64)
 			dk_command(pacman -S mingw-w64-x86_64-cmake --needed --noconfirm)			# MINGW64
-			#dk_set(CMAKE_EXE ${MSYS2}/mingw64/bin/cmake.exe)
 		elseif(UCRT64)
 			dk_command(pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm)		# UCRT64
-			#dk_set(CMAKE_EXE ${MSYS2}/ucrt64/bin/cmake.exe)
+		elseif(MSYS)
+			dk_command(pacman -S cmake --needed --noconfirm)							# MSYS2
 		endif()
 		
 		dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
-		#dk_command("command -v cmake" OUTPUT_VARIABLE CMAKE_EXE BASH_ENV NOASSERT)
 	endif()
 else()
 	dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
@@ -85,11 +88,41 @@ if(NOT CMAKE_EXE)
 	return()
 endif()
 
+
+dk_debug(CMAKE_EXE)
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 dk_set(CMAKE_VERSION ${CMAKE_VERSION})
 
 return()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

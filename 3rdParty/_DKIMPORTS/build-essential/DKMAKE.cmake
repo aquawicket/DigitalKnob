@@ -9,7 +9,7 @@
 
 if(ANDROID_HOST)
 	dk_command(pkg install build-essential)
-else()
+elseif(NOT ANDROID)
 	dk_set(CURRENT_DIR /usr)
 	dk_command(sudo apt -y install build-essential)
 endif()

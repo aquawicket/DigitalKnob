@@ -542,19 +542,19 @@ dk_generate() {
 		set -- "$@" "-DDEBUG=ON"
 		set -- "$@" "-DRELEASE=ON"
 	fi
-	if [ $DKLEVEL = "Build" ]; then
+	if [ "$DKLEVEL" = "Build" ]; then
 		set -- "$@" "-DBUILD=ON"
 	fi
-	if [ $DKLEVEL = "Rebuild" ]; then
+	if [ "$DKLEVEL" = "Rebuild" ]; then
 		set -- "$@" "-DREBUILD=ON"
 	fi
-	if [ $DKLEVEL = "RebuildAll" ]; then
+	if [ "$DKLEVEL" = "RebuildAll" ]; then
 		set -- "$@" "-DREBUILDALL=ON"
 	fi
-	if [ $DKLINK = "Static" ]; then
+	if [ "$DKLINK" = "Static" ]; then
 		set -- "$@" "-DSTATIC=ON"
 	fi
-	if [ $DKLINK = "Shared" ]; then
+	if [ "$DKLINK" = "Shared" ]; then
 		set -- "$@" "-DSHARED=ON"
 	fi
 	
@@ -637,42 +637,42 @@ dk_generate() {
 	
 	if [ "$TARGET_OS" = "win_arm64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
-		set -- "-G" "MSYS Makefiles" "$@"
+		set -- "-G MSYS Makefiles" "$@"
 	fi
 		
 	#### CMAKE CALL ####
 	dk_validate_cmake
-	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
-	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-	if dk_file_exists "$TOOLCHAIN"; then
-		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
-	fi
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
+#	dk_echo "TOOLCHAIN = $TOOLCHAIN"
+#	if dk_file_exists "$TOOLCHAIN"; then
+#		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
+#	fi
 	
 	if dk_defined WSLENV; then 
 		cd "$DKCMAKE_DIR"
@@ -785,6 +785,7 @@ dk_validate_cmake () {
 	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
 	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${TARGET_OS}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
 	if [ "${TARGET_OS}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
 	if [ "${TARGET_OS}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
