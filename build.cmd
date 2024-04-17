@@ -113,22 +113,39 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call:dk_get_host_triple
 
-
-
-
-
-	call:get_dkpaths
+	call:dk_get_dkpaths
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     call:validate_git
     call:validate_branch
 
-    call:print_var DKBRANCH_DIR
-    call:print_var DKAPPS_DIR
-    call:print_var DKCMAKE_DIR
-    call:print_var DK3RDPARTY_DIR
-    call:print_var DKIMPORTS_DIR
-    call:print_var DKPLUGINS_DIR
+    call:dk_debug DKBRANCH_DIR
+    call:dk_debug DKAPPS_DIR
+    call:dk_debug DKCMAKE_DIR
+    call:dk_debug DK3RDPARTY_DIR
+    call:dk_debug DKIMPORTS_DIR
+    call:dk_debug DKPLUGINS_DIR
         
     call:validate_cmake
     
@@ -157,24 +174,23 @@ goto:eof
 
 
 ::####################################################################
-:: get_dkpaths()
-::
-::
-:get_dkpaths () {
-	call:dk_verbose "get_dkpaths(%*)"
+::# dk_get_dkpaths()
+::#
+::#
+:dk_get_dkpaths () {
+	call:dk_verbose "dk_get_dkpaths(%*)"
 	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call:make_directory "%DIGITALKNOB_DIR%"
-    call:print_var DIGITALKNOB_DIR
+    call:dk_debug DIGITALKNOB_DIR
 
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
     call:make_directory "%DKTOOLS_DIR%"
-    call:print_var DKTOOLS_DIR
+    call:dk_debug DKTOOLS_DIR
         
     set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
     call:make_directory "%DKDOWNLOAD_DIR%"
-    call:print_var DKDOWNLOAD_DIR
-	goto:eof
+    call:dk_debug DKDOWNLOAD_DIR
 	
 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	:: TODO - 
@@ -189,21 +205,21 @@ goto:eof
 	call:dk_verbose "dk_get_host_triple(%*)"
 	
 	set HOST_OS=win
-    call:print_var HOST_OS
+    call:dk_debug HOST_OS
 	
 	if %PROCESSOR_ARCHITECTURE%==x86 set HOST_ARCH=x86
     if %PROCESSOR_ARCHITECTURE%==AMD64 set HOST_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==IA64  set HOST_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==EM64T set HOST_ARCH=x86_64
     if %PROCESSOR_ARCHITECTURE%==ARM64  set HOST_ARCH=arm64
-    call:print_var HOST_ARCH
+    call:dk_debug HOST_ARCH
 	
 	set HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%
-    call:print_var HOST_TRIPLE
+    call:dk_debug HOST_TRIPLE
     
     set HOST_ENV=clang
     set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
-	call:print_var HOST_TRIPLE
+	call:dk_debug HOST_TRIPLE
 	
 goto:eof
 
@@ -524,13 +540,13 @@ goto:eof
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    call:print_var TARGET_PATH
+    call:dk_debug TARGET_PATH
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
-    call:print_var CMAKE_SOURCE_DIR
+    call:dk_debug CMAKE_SOURCE_DIR
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-    call:print_var CMAKE_TARGET_PATH
+    call:dk_debug CMAKE_TARGET_PATH
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -550,7 +566,7 @@ goto:eof
     ::if %TARGET_OS%==emscripten call:append_cmake_args -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
-    call:print_var CMAKE_BINARY_DIR
+    call:dk_debug CMAKE_BINARY_DIR
         
     call:append_cmake_args -S=%CMAKE_SOURCE_DIR%
     call:append_cmake_args -B=%CMAKE_BINARY_DIR%
@@ -615,7 +631,7 @@ goto:eof
 ::	call:dk_verbose "generate_msystem(%*)"
 ::
 ::  call:cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2"
-::  call:print_var MSYS2
+::  call:dk_debug MSYS2
 ::                
 ::    call:append_cmake_args -G MinGW Makefiles
 ::  call:append_cmake_args -DMSYSTEM=%MSYSTEM%
@@ -846,10 +862,10 @@ goto:eof
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
-    ::call:print_var TARGET_PATH
+    ::call:dk_debug TARGET_PATH
     
     call:get_parent_folder %TARGET_PATH% parent
-    ::call:print_var parent
+    ::call:dk_debug parent
     
     if %parent%==DKApps goto:eof
     call:make_directory  %DKAPPS_DIR%\%APP%
@@ -962,8 +978,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:print_var SCRIPT_DIR
-        call:print_var DKBRANCH_DIR
+        call:dk_debug SCRIPT_DIR
+        call:dk_debug DKBRANCH_DIR
         goto:eof
     )
     
@@ -1029,8 +1045,8 @@ goto:eof
     if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:print_var SCRIPT_DIR
-        call:print_var DKBRANCH_DIR
+        call:dk_debug SCRIPT_DIR
+        call:dk_debug DKBRANCH_DIR
         goto:eof
     )
     
@@ -1141,7 +1157,7 @@ goto:eof
         )
     )
 
-    call:print_var DKBRANCH
+    call:dk_debug DKBRANCH
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
@@ -1180,15 +1196,15 @@ goto:eof
     if "%HOST_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
     call:get_filename %GIT_DL% GIT_DL_FILE
-    ::call:print_var GIT_DL_FILE
+    ::call:dk_debug GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
     call:convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
     call:convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
-    ::call:print_var GIT_FOLDER
+    ::call:dk_debug GIT_FOLDER
         
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
-    call:print_var GIT_EXE
+    call:dk_debug GIT_EXE
         
     if exist "%GIT_EXE%" goto:eof
         
@@ -1242,18 +1258,18 @@ goto:eof
     if "%HOST_OS%"=="mac"                        set "CMAKE_DL=%CMAKE_DL_MAC%"
     if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" set "CMAKE_DL=%CMAKE_DL_LINUX_X86_64%"
     if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
-    call:print_var CMAKE_DL
+    call:dk_debug CMAKE_DL
     
     call:get_filename %CMAKE_DL% CMAKE_DL_FILE
-    call:print_var CMAKE_DL_FILE
+    call:dk_debug CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
     call:convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
-    call:print_var CMAKE_FOLDER
+    call:dk_debug CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
-    call:print_var CMAKE_EXE
+    call:dk_debug CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
        
@@ -1343,10 +1359,10 @@ goto:eof
 	call:dk_verbose "validate_android_ndk(%*)"
 	
     call:cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-    call:print_var ANDROID_GENERATOR
-    call:print_var ANDROID_API
-    call:print_var ANDROID_NDK
-    call:print_var ANDROID_TOOLCHAIN_FILE
+    call:dk_debug ANDROID_GENERATOR
+    call:dk_debug ANDROID_API
+    call:dk_debug ANDROID_NDK
+    call:dk_debug ANDROID_TOOLCHAIN_FILE
     call:check_error
 goto:eof
 
@@ -1359,12 +1375,12 @@ goto:eof
 	call:dk_verbose "validate_emscripten(%*)"
 	
     call:cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-    call:print_var EMSDK
-    call:print_var EMSDK_ENV
-    call:print_var EMSDK_GENERATOR
-    call:print_var EMSDK_TOOLCHAIN_FILE
-    call:print_var EMSDK_C_COMPILER
-    call:print_var EMSDK_CXX_COMPILER
+    call:dk_debug EMSDK
+    call:dk_debug EMSDK_ENV
+    call:dk_debug EMSDK_GENERATOR
+    call:dk_debug EMSDK_TOOLCHAIN_FILE
+    call:dk_debug EMSDK_C_COMPILER
+    call:dk_debug EMSDK_CXX_COMPILER
     call:check_error
 goto:eof
 
@@ -1571,7 +1587,7 @@ goto:eof
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    ::call:print_var DKCOMMAND
+    ::call:dk_debug DKCOMMAND
 
     set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
     call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
@@ -1592,7 +1608,7 @@ goto:eof
         ::del %EVAL_VARS%
     goto:eof
 
-    ::call:print_var ERRORLEVEL
+    ::call:dk_debug ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out
@@ -1686,10 +1702,10 @@ goto:eof
 	call:dk_verbose "create_cache(%*)"
 	
     echo creating cache...
-    ::call:print_var APP
-    ::call:print_var TARGET_OS
-    ::call:print_var TYPE
-    ::call:print_var LEVEL
+    ::call:dk_debug APP
+    ::call:dk_debug TARGET_OS
+    ::call:dk_debug TYPE
+    ::call:dk_debug LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
     echo %APP%>"%DKBRANCH_DIR%\cache"
@@ -1767,7 +1783,7 @@ goto:eof
         call set "_TO=%%_LCASE:~%%a,1%%
         call set "_string=%%_string:!_FROM!=!_TO!%%
     )
-    ::call:print_var _string
+    ::call:dk_debug _string
     set %2=%_string%
 goto:eof
 
@@ -1813,6 +1829,23 @@ goto:eof
 
 
 ::##################################################################################
+::# dk_defined(<variable>)
+::#
+::# Evaluates to true if the parameter is a variable that exists.
+::#
+:dk_defined () {
+	call:dk_verbose "dk_defined($*)"
+::	[ $# -ne 1 ] && return $false # Incorrect number of parameters
+	
+::	eval value='$'{$1+x} # value will = 'x' if the variable is defined
+::	[ -n "$value" ]
+
+	if "%1"=="" echo "%1 is NOT defined"
+	if NOT "%1"=="" echo "%1 IS defined"
+goto:eof
+
+
+::##################################################################################
 ::# dk_debug(msg)
 ::#
 ::#   Print a debug message to the console
@@ -1829,16 +1862,16 @@ goto:eof
 	set "msg=%1"
 	
 	::### print variable ###
-::	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
-::		if dk_defined $1; then
-::			eval value='$'{$1}
-::			msg="$1: ${value}"
-::		else
-::			msg="$1: ${red}NOT DEFINED${clr}"
-::		fi
-::	fi 
+	call set "value=%%%msg%%%"
+    if "%value%" NEQ "" set "msg=%1 = '%value%'"
+	if "%value%" == "" set "msg=%1 = %red%NOT DEFINED%clr%"
 	
-	echo %blue%   DEBUG: %1 %clr%
+	
+	
+	
+	
+	
+	echo %blue%   DEBUG: %msg% %clr%
 goto:eof
 
 ::################################################################################

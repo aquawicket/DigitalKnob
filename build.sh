@@ -93,9 +93,7 @@ main () {
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_get_host_triple
 	
-	
-	
-	
+	#dk_get_dkpaths
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
@@ -153,6 +151,30 @@ main () {
 		unset TARGET_OS
 		unset TYPE
 	done
+}
+
+
+#####################################################################
+# dk_get_dkpaths()
+#
+#
+dk_get_dkpaths () {
+	dk_verbose "dk_get_dkpaths($*)"
+	
+	DIGITALKNOB_DIR="${HOMEDRIVE}${HOMEPATH}/digitalknob"
+    dk_make_directory "${DIGITALKNOB_DIR}"
+    dk_debug DIGITALKNOB_DIR
+
+    DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
+    dk_make_directory "${DKTOOLS_DIR}"
+    dk_debug DKTOOLS_DIR
+        
+    DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
+    dk_make_directory "${DKDOWNLOAD_DIR}"
+    dk_debug DKDOWNLOAD_DIR
+	
+	#################################################
+	# TODO - 
 }
 
 
@@ -899,9 +921,9 @@ dk_debug () {
 	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
 		if dk_defined $1; then
 			eval value='$'{$1}
-			msg="$1: ${value}"
+			msg="$1 = '${value}'"
 		else
-			msg="$1: ${red}NOT DEFINED${clr}"
+			msg="$1 = ${red}NOT DEFINED${clr}"
 		fi
 	fi 
 
@@ -1008,7 +1030,6 @@ dk_stacktrace () {
 dk_defined () {
 	dk_verbose "dk_defined($*)"
 	[ $# -ne 1 ] && return $false # Incorrect number of parameters
-	string=$1
 	
 	eval value='$'{$1+x} # value will = 'x' if the variable is defined
 	[ -n "$value" ]
