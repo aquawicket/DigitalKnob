@@ -7,7 +7,7 @@
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_error() {
+:dk_error () {
 	::call dk_verbose "dk_error(%*)"
 	
 	echo %red%   ERROR: %1 %clr%

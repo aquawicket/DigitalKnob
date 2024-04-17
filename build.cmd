@@ -1769,7 +1769,7 @@ goto:eof
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_warning() {
+:dk_warning () {
 	::call dk_verbose "dk_warning(%*)"
 	
 	echo %yellow% WARNING: %1 %clr%
@@ -1783,7 +1783,7 @@ goto:eof
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_error() {
+:dk_error () {
 	::call dk_verbose "dk_error(%*)"
 	
 	echo %red%   ERROR: %1 %clr%
