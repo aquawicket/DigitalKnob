@@ -3,6 +3,17 @@
 ##################################################################################
 # dk_to_variable_info(<var>)
 #
+#	If the parameter is a variable containing the name of a valid variable name
+#	Convert the contents to the details of said variable
+#
+#	Example:  
+#	myVar="this is my variable"
+#	message="myVar"
+#	dk_to_variable_info message
+#	echo $message
+#
+#	Output:
+#	myVar = 'this is my variable'
 #
 dk_to_variable_info () {
 	#echo "dk_to_variable_info($*)"
