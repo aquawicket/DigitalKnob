@@ -105,6 +105,8 @@ main () {
 	#fi
 	#dk_debug DKUSERNAME
 	
+	dk_debug DUMMY
+	dk_debug 3jd-6
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_NAME
@@ -901,25 +903,14 @@ dk_verbose () {
 #	@msg	- The message to print
 #
 dk_debug () {
-	#dk_verbose "dk_debug($*)"
-	
+	#dk_verbose "dk_debug($*)"	
 	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
 	[ $LOG_DEBUG -eq 1 ] || return 0
 	
 	msg="$1"
-	
-	### print variable ###
-	if expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null; then  # [A-Za-z0-9_] == [:word:]
-		if dk_defined $1; then
-			eval value='$'{$1}
-			msg="$1 = '${value}'"
-		else
-			msg="$1 = ${red}NOT DEFINED${clr}"
-		fi
-	fi 
-
-	dk_echo "${blue}  DEBUG: ${msg-} ${clr}"
+	dk_to_variable_info msg
+	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }
 
 
@@ -930,7 +921,9 @@ dk_debug () {
 dk_info () {
 	#dk_verbose "dk_info($*)"
 	
-	dk_echo "${white}   INFO: $1 ${clr}"
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${white}   INFO: ${msg} ${clr}"
 }
 
 
@@ -941,7 +934,9 @@ dk_info () {
 dk_warning () {
 	#dk_verbose "dk_warning($*)"
 	
-	dk_echo "${yellow}WARNING: $1 ${clr}"
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${yellow}WARNING: ${msg} ${clr}"
 	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
 	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
 }
@@ -954,11 +949,63 @@ dk_warning () {
 dk_error () {
 	#dk_verbose "dk_error($*)"
 	
-	dk_echo "${red}  ERROR: $1 ${clr}"
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
 	dk_wait_for_key
 	exit 1
+}
+
+
+##################################################################################
+# dk_variable_info(<name> <output>)
+#
+#
+dk_variable_info () {
+	echo "dk_variable_info($*)"
+	
+	[ $# -ne 2 ] && return $false										# if not exactly 2 parameters
+	$(expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	$(expr "$2" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	
+	if dk_defined $1; then
+		eval value='$'{$1}
+		eval "$2=\"$1 = '${value}'\""
+	else
+		eval "$2=\"$1 = ${red}NOT DEFINED${clr}\""
+	fi
+}
+
+##################################################################################
+# dk_to_variable_info(<var>)
+#
+#	If the parameter is a variable containing the name of a valid variable name
+#	Convert the contents to the details of said variable
+#
+#	Example:  
+#	myVar="this is my variable"
+#	message="myVar"
+#	dk_to_variable_info message
+#	echo $message
+#
+#	Output:
+#	myVar = 'this is my variable'
+#
+dk_to_variable_info () {
+	#echo "dk_to_variable_info($*)"
+	
+	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
+	eval name='$'{$1}
+	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	
+	if dk_defined $name; then
+		eval value='$'{$name}
+		eval "$1=\"$name = '${value}'\""
+	else
+		eval "$1=\"$name = ${red}NOT DEFINED${clr}\""
+	fi
 }
 
 

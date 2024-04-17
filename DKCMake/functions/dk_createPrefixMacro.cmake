@@ -16,6 +16,6 @@ function(dk_createPrefixMacro func) #ARGN
 	string(REPLACE ";" "_" prefix_name "${ARGN}")
 	string(REPLACE ";" " AND " prefix_if "${ARGN}")
 	set(MACRO_STRING "macro(${prefix_name}_${func})\n   if(${prefix_if})\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
-	#message("MACRO_STRING = ${MACRO_STRING}")
+	#dk_debug(MACRO_STRING)
 	dk_eval(${MACRO_STRING})
 endfunction()

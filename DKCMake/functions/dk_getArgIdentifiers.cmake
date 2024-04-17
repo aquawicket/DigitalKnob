@@ -9,7 +9,7 @@ include_guard()
 #
 function(dk_getArgIdentifiers ARGV)
 	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
 		return()

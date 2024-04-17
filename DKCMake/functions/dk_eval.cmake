@@ -8,11 +8,13 @@ include_guard()
 # 	WARNING: allowing eval can of course be dangerous.
 #
 function(dk_eval code)
+	DKDEBUGFUNC(${ARGV})
+	
 	string(REPLACE ";"  "\n" code "${code}")
 	string(REPLACE "'"  "\"" code "${code}")
-	#message(STATUS "code = ${code}")
+	#dk_debug(code)
 	if(COMMAND cmake_language)
-		#message(STATUS "code = ${code}")
+		#dk_debug(code)
 		cmake_language(EVAL CODE "${code}")
 	else()
 		# Evaluate expression (faster version)

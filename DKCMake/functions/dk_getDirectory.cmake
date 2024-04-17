@@ -10,6 +10,7 @@ include_guard()
 #
 function(dk_getDirectory path RESULT)
 	DKDEBUGFUNC(${ARGV})
+	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
 	#dk_includes(${path} "/" index REVERSE)

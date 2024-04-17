@@ -1,16 +1,19 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_debug(msg)
+# dk_debug(<message>)
 #
 #	Print a debug message to the console
 #
 #	@msg	- The message to print
 #
-dk_debug() {
-	#echo "dk_debug($@)"
-	if [ "$LOG_DEBUG" == "1" ]; then 
-		dk_load dk_color
-		echo -e "${blue} DEBUG: $1 ${clr}"
-	fi
+dk_debug () {
+	#dk_verbose "dk_debug($*)"	
+	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
+	
+	[ $LOG_DEBUG -eq 1 ] || return 0
+	
+	msg="$1"
+	dk_variable_info $msg
+	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }

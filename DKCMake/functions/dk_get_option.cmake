@@ -14,14 +14,15 @@ include_guard()
 #	EXAMPLE: dk_get_option(MY_ARG ${ARGV})
 #
 function(dk_get_option name)
-	#message("${CMAKE_CURRENT_FUNCTION}(${ARGN})")
+	#DKDEBUGFUNC(${ARGV})
+	
 	cmake_parse_arguments(ARG ${name} "" "" ${ARGN})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})
 
 	if(ARG_${name})
 		set(${name} ${name} PARENT_SCOPE)
 		
-		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
+		#dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=ON")
 		if(ARG_REMOVE)
 			set(ARG_LIST ${ARGN})
 			list(REMOVE_ITEM ARG_LIST ${name})	# remove item from the functions ARGV list
@@ -32,6 +33,6 @@ function(dk_get_option name)
 		endif()
 	else()
 		unset(${name} PARENT_SCOPE)
-		#message(STATUS "${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
+		#dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
 endfunction()

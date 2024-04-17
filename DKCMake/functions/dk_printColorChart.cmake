@@ -7,6 +7,7 @@ include_guard()
 #
 macro(dk_printColorChart)
 	DKDEBUGFUNC(${ARGV})
+	
 	message(" ")
 	message(      "Regualar")
 	message(      "${black}     black          ${CLR}")

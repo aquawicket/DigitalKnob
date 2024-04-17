@@ -111,7 +111,6 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	endif()
 	
 	dk_info("Downloading ${src_filename}. . . please wait")
-	message("Downloading ${src_filename}. . . please wait")
 	file(DOWNLOAD ${src_path} ${temp_path} 
 		SHOW_PROGRESS 
 		INACTIVITY_TIMEOUT 70
