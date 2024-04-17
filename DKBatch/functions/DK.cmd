@@ -16,7 +16,7 @@ set CONTINUE_ON_ERRORS=0
 :::::: Script internal setup ::::::
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-set "PATH=%PATH%;%DKBATCH_DIR%\functions"
+set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 ::set SCRIPT_NAME=$(basename "$0")
 ::shell_type=cmd
 ::if $shell_type == cmd set CMD=1
@@ -25,7 +25,7 @@ set "PATH=%PATH%;%DKBATCH_DIR%\functions"
 
 
 :::::: Script loader ::::::
-call functions/dk_load.cmd
+call dk_load
 
 ::doskey DKDEBUGFUNCB = echo %0(%*)  FIXME
 

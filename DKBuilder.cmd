@@ -19,7 +19,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 
 
 :::::: Load DK Function files (DK_INIT) ::::::
-call "functions/DK.cmd"
+call "DKBatch/functions/DK.cmd"
 
 :::::: Load Main Program ::::::
 ::if "%*" NEQ "" call %* 

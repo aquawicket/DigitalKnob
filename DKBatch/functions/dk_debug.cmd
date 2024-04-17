@@ -9,7 +9,7 @@ setlocal enableDelayedExpansion
 ::#   @msg	- The message to print
 ::#
 :dk_debug () {
-	::call dk_verbose "%0(%*)"
+	::call dk_verbose "dk_debug(%*)"
 	
 ::	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
@@ -17,7 +17,7 @@ setlocal enableDelayedExpansion
 	
 	set "msg=%*"
 	
-	:: if msg stats and ends with ", remove the first and last
+	:: if msg starts and ends with quotes, remove the first and last
 	if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
 	
 	::### print variable ###

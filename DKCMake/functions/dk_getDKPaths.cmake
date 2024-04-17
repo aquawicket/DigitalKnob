@@ -6,7 +6,7 @@ include_guard()
 #	Fill the cashe variables with DigitalKnob specfic directories
 #
 function(dk_getDKPaths)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 	
 	###### Get DKBRANCH_DIR ######
 	#dk_debug(CMAKE_SOURCE_DIR)
