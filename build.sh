@@ -7,6 +7,26 @@
 # shellcheck disable=SC2120
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###### Global Script Variables ######
 [ -z ${RELOAD_WITH_BASH-} ] && export RELOAD_WITH_BASH=1
 LOG_VERBOSE=1
@@ -76,14 +96,14 @@ main () {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	if [ -n "${USER-}" ]; then
-		dk_debug USER
-		DKUSERNAME=$USER
-	elif [ -n "${USERNAME-}" ]; then
-		dk_debug USERNAME
-		DKUSERNAME=$USERNAME
-	fi
-	dk_debug DKUSERNAME
+	#if [ -n "${USER-}" ]; then
+	#	dk_debug USER
+	#	DKUSERNAME=$USER
+	#elif [ -n "${USERNAME-}" ]; then
+	#	dk_debug USERNAME
+	#	DKUSERNAME=$USERNAME
+	#fi
+	#dk_debug DKUSERNAME
 	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
@@ -93,29 +113,7 @@ main () {
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_get_host_triple
 	
-	#dk_get_dkpaths
-	if [ -n "${USERPROFILE-}" ]; then
-		dk_debug USERPROFILE
-		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
-		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
-	else
-		DIGITALKNOB_DIR="$HOME/digitalknob"
-	fi
-	dk_debug DIGITALKNOB_DIR
-	mkdir -p "$DIGITALKNOB_DIR"
-	
-	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
-	mkdir -p "$DKDOWNLOAD_DIR"
-	dk_debug DKDOWNLOAD_DIR
-	
-	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
-	mkdir -p "$DKTOOLS_DIR"
-	dk_debug DKTOOLS_DIR
-
-	if [ "$HOST_OS" = "mac" ]; then
-		dk_validate_homebrew
-	fi
+	dk_get_dkpaths
 
 	dk_validate_git
 	dk_validate_branch
@@ -135,10 +133,10 @@ main () {
 	
 	while :
 	do
-		if [ -z "${UPDATE-}" ]; then dk_pick_update;	continue; fi
-		if [ -z "${APP-}" ]; then dk_pick_app;		continue; fi
-		if [ -z "${TARGET_OS-}" ]; then dk_pick_os;	continue; fi
-		if [ -z "${TYPE-}" ]; then dk_pick_type;		continue; fi
+		if [ -z "${UPDATE-}" ];     then dk_pick_update;  continue; fi
+		if [ -z "${APP-}" ];        then dk_pick_app;     continue; fi
+		if [ -z "${TARGET_OS-}" ];  then dk_pick_os;      continue; fi
+		if [ -z "${TYPE-}" ];       then dk_pick_type;    continue; fi
 		
 		dk_create_cache
 		
@@ -161,17 +159,26 @@ main () {
 dk_get_dkpaths () {
 	dk_verbose "dk_get_dkpaths($*)"
 	
-	DIGITALKNOB_DIR="${HOMEDRIVE}${HOMEPATH}/digitalknob"
-    dk_make_directory "${DIGITALKNOB_DIR}"
-    dk_debug DIGITALKNOB_DIR
-
-    DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
-    dk_make_directory "${DKTOOLS_DIR}"
-    dk_debug DKTOOLS_DIR
-        
-    DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
-    dk_make_directory "${DKDOWNLOAD_DIR}"
-    dk_debug DKDOWNLOAD_DIR
+	if [ -n "${USERPROFILE-}" ]; then
+		dk_debug USERPROFILE
+		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
+		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
+	else
+		DIGITALKNOB_DIR="$HOME/digitalknob"
+	fi
+	dk_debug DIGITALKNOB_DIR
+	mkdir -p "$DIGITALKNOB_DIR"
+	
+	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
+	mkdir -p "$DKTOOLS_DIR"
+	dk_debug DKTOOLS_DIR
+	
+	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
+	mkdir -p "$DKDOWNLOAD_DIR"
+	dk_debug DKDOWNLOAD_DIR
+	
+	
 	
 	#################################################
 	# TODO - 
@@ -688,8 +695,6 @@ dk_generate() {
 		set -- "-G MSYS Makefiles" "$@"
 	fi
 		
-	#### CMAKE CALL ####
-	dk_validate_cmake
 #	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if dk_file_exists "$TOOLCHAIN"; then
@@ -701,8 +706,14 @@ dk_generate() {
 		set -- "$@" "."
 	fi
 	
+	###### CMake Configure ######
+	dk_validate_cmake
+	
+	dk_echo
+	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = $@"	
 	dk_call "$CMAKE_EXE" "$@"
+	dk_echo
 }
 
 

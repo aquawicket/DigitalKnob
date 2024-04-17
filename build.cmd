@@ -114,31 +114,9 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 	call:dk_get_host_triple
 
 	call:dk_get_dkpaths
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    call:validate_git
-    call:validate_branch
+   
+    call:dk_validate_git
+    call:dk_validate_branch
 
     call:dk_debug DKBRANCH_DIR
     call:dk_debug DKAPPS_DIR
@@ -146,29 +124,39 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     call:dk_debug DK3RDPARTY_DIR
     call:dk_debug DKIMPORTS_DIR
     call:dk_debug DKPLUGINS_DIR
-        
-    call:validate_cmake
+    
+	if NOT "%SCRIPT_DIR%"=="%DKBRANCH_DIR%" (
+		call:dk_warning "%SCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		call:dk_warning "%SCRIPT_NAME% path = %SCRIPT_DIR%"
+		call:dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
+	)
     
     :while_loop             
-    if "%UPDATE%"==""     call:pick_update & goto:while_loop
-    if "%APP%"==""        call:pick_app    & goto:while_loop
-    if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
-    if "%TYPE%"==""       call:pick_type   & goto:while_loop
+	
+		if "%UPDATE%"==""     call:dk_pick_update & goto:while_loop
+		if "%APP%"==""        call:dk_pick_app    & goto:while_loop
+		if "%TARGET_OS%"==""  call:dk_pick_os     & goto:while_loop
+		if "%TYPE%"==""       call:dk_pick_type   & goto:while_loop
 
-    call:create_cache
-    
-    call:generate
-    
-    call:build
-    if %TYPE%==All      call:build_all
-    if %TYPE%==Release  call:build_release
-    if %TYPE%==Debug    call:build_debug
-    call:end_message
-    
-    :: TODO
-    call:post_build_menu
-    
-    goto while_loop
+		call:dk_create_cache
+		
+		call:dk_generate
+		
+		call:dk_build
+		::if %TYPE%==All      call:build_all
+		::if %TYPE%==Release  call:build_release
+		::if %TYPE%==Debug    call:build_debug
+		::call:end_message
+		
+		:: TODO
+		::call:post_build_menu
+		
+		set UPDATE=
+		set APP=
+		set TARGET_OS=
+		set TYPE=
+		
+		goto while_loop
     :while_loop_end
 goto:eof
 
@@ -180,9 +168,16 @@ goto:eof
 :dk_get_dkpaths () {
 	call:dk_verbose "dk_get_dkpaths(%*)"
 	
+	
+	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call:make_directory "%DIGITALKNOB_DIR%"
     call:dk_debug DIGITALKNOB_DIR
+
+
+
+
+
 
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
     call:make_directory "%DKTOOLS_DIR%"
@@ -192,8 +187,10 @@ goto:eof
     call:make_directory "%DKDOWNLOAD_DIR%"
     call:dk_debug DKDOWNLOAD_DIR
 	
-	:::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	:: TODO - 
+	
+	
+	::############################################
+	::# TODO - 
 goto:eof
 
 
@@ -249,11 +246,11 @@ goto:eof
 
 
 ::####################################################################
-:: pick_update()
+:: dk_pick_update()
 ::
 ::
-:pick_update () {
-	call:dk_verbose "pick_update(%*)"
+:dk_pick_update () {
+	call:dk_verbose "dk_pick_update(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
@@ -297,11 +294,11 @@ goto:eof
 
 
 ::####################################################################
-:: pick_app()
+:: dk_pick_app()
 ::
 ::
-:pick_app () {
-	call:dk_verbose "pick_app(%*)"
+:dk_pick_app () {
+	call:dk_verbose "dk_pick_app(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
@@ -359,11 +356,11 @@ goto:eof
 
 
 ::####################################################################
-:: pick_os()
+:: dk_pick_os()
 ::
 ::
-:pick_os () {
-	call:dk_verbose "pick_os(%*)"
+:dk_pick_os () {
+	call:dk_verbose "dk_pick_os(%*)"
 
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -460,11 +457,11 @@ goto:eof
 
 
 ::####################################################################
-:: pick_type()
+:: dk_pick_type()
 ::
 ::
-:pick_type () {
-	call:dk_verbose "pick_type(%*)"
+:dk_pick_type () {
+	call:dk_verbose "dk_pick_type(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -522,11 +519,11 @@ goto:eof
 
 
 ::####################################################################
-:: generate()
+:: dk_generate()
 ::
 ::
-:generate () {
-	call:dk_verbose "generate(%*)"
+:dk_generate () {
+	call:dk_verbose "dk_generate(%*)"
 	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     echo.
@@ -614,7 +611,9 @@ goto:eof
 	::set TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%
 	::if exist %TOOLCHAIN% call:append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
-    ::::::: CMake Configure :::::::
+    ::###### CMake Configure ######
+	call:dk_validate_cmake
+	
     echo.
     echo ****** CMAKE COMMAND ******
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
@@ -694,12 +693,12 @@ goto:eof
 goto:eof
 
 
-::####################################################################
-:: build()
-::
-::
-:build () {
-	call:dk_verbose "build(%*)"
+::#####################################################################
+::# dk_build()
+::#
+::#
+:dk_build () {
+	call:dk_verbose "dk_build(%*)"
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
     echo.
@@ -707,6 +706,20 @@ goto:eof
     echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
     echo ###########################################################
     echo.
+	
+	if %TYPE%==All      call:build_all
+	if %TYPE%==Release  call:build_release
+	if %TYPE%==Debug    call:build_debug
+	
+	::call:end_message
+	::call:post_build_menu  :: TODO
+	
+	echo.
+    echo ###########################################################        
+    echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
+    echo ###########################################################
+    echo.
+	
 goto:eof
 
 :build_all () {
@@ -1140,11 +1153,11 @@ goto:eof
 
 
 ::####################################################################
-:: validate_branch()
+:: dk_validate_branch()
 ::
 ::
-:validate_branch () {
-	call:dk_verbose "validate_branch(%*)"
+:dk_validate_branch () {
+	call:dk_verbose "dk_validate_branch(%*)"
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
@@ -1184,11 +1197,11 @@ goto:eof
 
 
 ::####################################################################
-:: validate_git()
+:: dk_validate_git()
 ::
 ::
-:validate_git () {
-	call:dk_verbose "validate_git(%*)"
+:dk_validate_git () {
+	call:dk_verbose "dk_validate_git(%*)"
 	
     if "%HOST_ARCH%"=="arm32" set GIT_DL=
     if "%HOST_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%
@@ -1245,11 +1258,11 @@ goto:eof
 
 
 ::####################################################################
-:: validate_cmake()
+:: dk_validate_cmake()
 ::
 ::
-:validate_cmake () {
-	call:dk_verbose "validate_cmake(%*)"
+:dk_validate_cmake () {
+	call:dk_verbose "dk_validate_cmake(%*)"
 	
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"
@@ -1695,11 +1708,11 @@ goto:eof
 
 
 ::################################################################################
-:: create_cache()
+:: dk_create_cache()
 ::
 ::
-:create_cache () {
-	call:dk_verbose "create_cache(%*)"
+:dk_create_cache () {
+	call:dk_verbose "dk_create_cache(%*)"
 	
     echo creating cache...
     ::call:dk_debug APP
