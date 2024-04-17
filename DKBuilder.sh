@@ -2,10 +2,6 @@
 clear && clear
 echo "$0($*)"
 
-#echo "$(type [[)"
-#echo "$(type declare)"
-#echo "$(type local)"
-
 SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
 SCRIPT_NAME=$(basename "$0")
 true=0
