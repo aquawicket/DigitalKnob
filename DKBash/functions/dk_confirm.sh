@@ -3,14 +3,15 @@
 ##################################################################################
 # dk_confirm()
 #
-# reference: https://bash.cyberciti.biz/guide/Getting_User_Input_Via_Keyboard
 #
 dk_confirm() {
-	echo "dk_confirm($@)"
-	echo -e "${yellow} Are you sure ? [Y/N] ${clr}"
-	read -p " " -n 1 -r REPLY
-	echo ""
-	echo ""
+	dk_verbose "dk_confirm($*)"
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+
+	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
+	read -rp $" " REPLY
+	dk_echo
+	dk_echo
 	#result=$(echo $REPLY | grep "^[Yy]$")
 	[ "$REPLY" = "y" ] && return $true
 	[ "$REPLY" = "Y" ] && return $true

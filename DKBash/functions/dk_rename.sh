@@ -1,16 +1,13 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_rename()
+# dk_rename(<from> <to>)
 #
 #
-dk_rename() {
-	dk_debug "rename($@)"
-	if [ -z "$2" ]; then
-		dk_error "dk_get_filename <path> <output> requires 2 parameters"
-		return $false
-	fi
+dk_rename () {
+	dk_verbose "dk_rename($*)"
+	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	#TODO
-	#[[ ? == "success" ]]
+	#[ ? = "success" ]
 }

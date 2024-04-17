@@ -1,14 +1,15 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_warning(msg)
+# dk_warning(<message>)
 #
-#	Print a warning message to the console
 #
-#	@msg	- The message to print
-#
-dk_warning() {
-	#echo "dk_warning($@)"
-	#dk_color
-	echo -e "${yellow} WARNING: $1 ${clr}"
+dk_warning () {
+	#dk_verbose "dk_warning($*)"
+	
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${yellow}WARNING: ${msg} ${clr}"
+	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
+	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
 }

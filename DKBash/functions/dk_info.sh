@@ -1,11 +1,13 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_info()
+# dk_info(<message>)
 #
 #
-dk_info() {
-	#echo "dk_info($@)"
-	dk_require dk_info $1
-	echo -e "${white} INFO: $1 ${white}"
+dk_info () {
+	#dk_verbose "dk_info($*)"
+	
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${white}   INFO: ${msg} ${clr}"
 }

@@ -14,6 +14,6 @@ dk_debug () {
 	[ $LOG_DEBUG -eq 1 ] || return 0
 	
 	msg="$1"
-	dk_variable_info $msg
+	dk_to_variable_info msg
 	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }

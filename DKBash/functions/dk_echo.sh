@@ -3,9 +3,6 @@
 ##################################################################################
 # dk_echo(<message>)
 #
-#    Print a message to the console
-#
-#    <msg> - The message to print
 #
 dk_echo () {
 	#echo "dk_echo($*)"

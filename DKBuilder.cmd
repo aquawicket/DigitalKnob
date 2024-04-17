@@ -1,6 +1,6 @@
 @echo off
 cls
-::echo %0(%*)
+echo %~0(%*)
 
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"

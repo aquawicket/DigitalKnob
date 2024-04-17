@@ -4,9 +4,11 @@
 # dk_create_cache()
 #
 #
-dk_create_cache() {
-	dk_debug "dk_create_cache($@)"
-	echo "creating cache..."
+dk_create_cache () {
+	dk_verbose "dk_create_cache($*)"
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	
+	dk_echo "creating cache..."
 	
 	# write variable values line by line
 	echo "$APP">"$DKBRANCH_DIR/cache"

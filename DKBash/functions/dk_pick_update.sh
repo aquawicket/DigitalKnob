@@ -5,60 +5,90 @@
 #
 #
 dk_pick_update() {
-	dk_debug "dk_pick_update($@)"
+	dk_verbose "dk_pick_update($*)"
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+
 	dk_read_cache
 	
-	echo ""
+	dk_echo
 	dk_check_remote
-	echo ""
+	dk_echo
 	
-	if [[ -n "$_APP_" ]] && [[ -n "$_TARGET_OS_" ]] && [[ -n "$_TYPE_" ]]; then
-		echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+	#dk_debug _APP_
+	#dk_debug _TARGET_OS_ 
+	#dk_debug _TYPE_
+	
+	if [ $behind -lt 1 ]; then
+		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then
+			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		fi
+		dk_echo " 1) Git Update"   
+		dk_echo " 2) Git Commit"
+		dk_echo " 3) Push assets"
+		dk_echo " 4) Pull assets"
+		dk_echo " 5) Reset All"
+		dk_echo " 6) Remove All"
+		dk_echo " 7) Clear Screen"
+		dk_echo " 8) Clear cmake cache and .tmp files"
+		dk_echo " 9) Reload"
+		dk_echo "10) Exit"
+		dk_echo
+		dk_echo " Press Enter To Skip"
+	else
+		dk_warning "Your local repository is behind, please git update"
+		dk_echo
+		dk_echo "${red}" 
+		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
+			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		fi
+		dk_echo "${green}"
+		dk_echo " 1) Git Update"
+		dk_echo "${red}"  
+		dk_echo " 2) Git Commit"
+		dk_echo " 3) Push assets"
+		dk_echo " 4) Pull assets"
+		dk_echo " 5) Reset All"
+		dk_echo " 6) Remove All"
+		dk_echo " 7) Clear Screen"
+		dk_echo " 8) Clear cmake cache and .tmp files"
+		dk_echo " 9) Reload"
+		dk_echo "10) Exit"
+		dk_echo
+		dk_echo "Press Enter To Skip"
+		dk_echo "${clr}"
 	fi
-    echo " 1) Git Update"
-    echo " 2) Git Commit"
-    echo " 3) Push assets"
-    echo " 4) Pull assets"
-    echo " 5) Reset All"
-	echo " 6) Remove All"
-    echo " 7) Clear Screen"
-    echo " 8) Clear cmake cache and .tmp files"
-    echo " 9) Reload"
-    echo "10) Exit"
-    echo "" 
-    echo " Press Enter To Skip"
 	
 	read input
-	if [ "$input" == "0" ]; then
-		echo "repeating last selection"
+	if [ "$input" = "0" ]; then
+		dk_echo "repeating last selection"
 		APP=$_APP_
 		TARGET_OS=$_TARGET_OS_
 		TYPE=$_TYPE_
 		UPDATE=1
-	elif [ "$input" == "1" ]; then
+	elif [ "$input" = "1" ]; then
 		dk_git_update
-	elif [ "$input" == "2" ]; then
+	elif [ "$input" = "2" ]; then
 		dk_git_commit
-	elif [ "$input" == "3" ]; then
+	elif [ "$input" = "3" ]; then
 		dk_push_assets
-	elif [ "$input" == "4" ]; then
+	elif [ "$input" = "4" ]; then
 		dk_pull_assets
-	elif [ "$input" == "5" ]; then
+	elif [ "$input" = "5" ]; then
 		dk_reset_all
-	elif [ "$input" == "6" ]; then
+	elif [ "$input" = "6" ]; then
 		dk_remove_all
-	elif [ "$input" == "7" ]; then
+	elif [ "$input" = "7" ]; then
 		clear
-	elif [ "$input" == "8" ]; then
+	elif [ "$input" = "8" ]; then
 		dk_clear_cmake_cache
 		dk_delete_temp_files
-	elif [ "$input" == "9" ]; then
+	elif [ "$input" = "9" ]; then
 		dk_reload
-	elif [ "$input" == "10" ]; then
+	elif [ "$input" = "10" ]; then
 		exit 0	
-	elif [ "$input" == "" ]; then
+	elif [ "$input" = "" ]; then
 		UPDATE=1
 	else
-		echo "invalid selection"
+		dk_warning "invalid selection"
 	fi
 }

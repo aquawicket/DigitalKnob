@@ -4,16 +4,17 @@
 # dk_convert_to_c_identifier(<input> <output>)
 #
 #
-dk_convert_to_c_identifier() {
-	dk_debug "dk_convert_to_c_identifier($@)"
-	if [ -z "$2" ]; then
-		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
-		return $false
-	fi
+dk_convert_to_c_identifier () {
+	dk_verbose "dk_convert_to_c_identifier($*)"
+	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	
 	input=$1
-	echo "dk_convert_to_c_identifier($1, $2)"
-	input="${input//[^[:alnum:]]/_}"
-	echo "input = $input"
-	eval "$2=$input"
-	#[[ $input == "" ]]
+	
+	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
+	dk_replace_all "$input" "-" "_" input		# POSIX replace
+	dk_replace_all "$input" "." "_" output		# POSIX replace
+	
+	dk_debug "output = $output"
+	eval "$2=$output"
+	#[ $input = "" ]
 }

@@ -4,14 +4,17 @@
 # dk_replace_all(<input> <searchValue> <newValue> <output>)
 #
 #
-dk_replace_all() {
+dk_replace_all () {
+	dk_verbose "dk_replace_all($*)"
+	[ $# -ne 4 ] && dk_error "Incorrect number of parameters"
+	
     input=$1
 	searchValue=$2
 	newValue=$3
     output=
 		
     while [ -n "$input" ]; do
-        LEFT=${input%%$searchValue*}
+        LEFT=${input%%"$searchValue"*}
 
         if [ "$LEFT" = "$input" ]; then
             output=$output$input
@@ -19,9 +22,9 @@ dk_replace_all() {
         fi
 
         output=$output$LEFT$newValue
-        input=${input#*$searchValue}
+        input=${input#*"$searchValue"}
     done
 	
-	echo "output = '$output'"
+	dk_debug "output = '$output'"
 	eval "$4=$output"
 }

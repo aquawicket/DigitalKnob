@@ -1,17 +1,17 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_error(msg)
+# dk_error(<message>)
 #
-#	Print a error message to the console
 #
-#	@msg	- The message to print
-#
-dk_error() {
-	#echo "dk_error($@)"
-	echo -e "${red} ERROR: $1 ${clr}"
+dk_error () {
+	#dk_verbose "dk_error($*)"
+	
+	msg="$1"
+	dk_to_variable_info msg
+	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
-	if [ $HALT_ON_ERRORS == 1 ]; then
-		exit 1
-	fi
+	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
+	dk_wait_for_key
+	exit 1
 }
