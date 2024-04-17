@@ -119,7 +119,7 @@ macro(dk_getTargetTriple)
 		### Set ${OS} variable ON ##
 		string(TOUPPER ${DK_TARGET_OS} DK_TARGET_OS_UPPER)
 		dk_set(${DK_TARGET_OS_UPPER} ON)
-		dk_debug(${DK_TARGET_OS_UPPER})
+		dk_debug(DK_TARGET_OS_UPPER)
 
 		### Set ARCH variable ON ##
 		if(DK_TARGET_ARCH)
@@ -129,7 +129,7 @@ macro(dk_getTargetTriple)
 		if(DK_TARGET_ARCH_UPPER)
 			dk_set(${DK_TARGET_ARCH_UPPER} ON)
 		endif()
-		dk_debug(${DK_TARGET_ARCH_UPPER})
+		dk_debug(DK_TARGET_ARCH_UPPER)
 
 		### Set ${OS_ARCH} variable ON ##
 		dk_set(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER} ON)
