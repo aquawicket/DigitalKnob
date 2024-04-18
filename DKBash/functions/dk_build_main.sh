@@ -8,7 +8,7 @@ dk_build_main () {
 	dk_verbose "dk_build_main($*)"
 
 	# log to stdout and file
-	#exec |& tee file.log 
+	# exec > >(tee DKBuilder.log)
 	
 	dk_validate_sudo
 	
@@ -17,17 +17,6 @@ dk_build_main () {
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
-
-	#if [ -n "${USER-}" ]; then
-	#	dk_debug USER
-	#	DKUSERNAME=$USER
-	#elif [ -n "${USERNAME-}" ]; then
-	#	dk_debug USERNAME
-	#	DKUSERNAME=$USERNAME
-	#fi
-	#dk_debug DKUSERNAME
-	# log to stdout and file
-exec > >(tee DKBuilder.log)
 
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM

@@ -3,8 +3,6 @@ clear && clear
 #echo "$0($*)"
 
 
-
-
 ###### Load DK Function files (DKINIT) ######
 . DKBash/functions/DK.sh
 
