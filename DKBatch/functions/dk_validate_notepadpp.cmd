@@ -11,11 +11,10 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
 ::#
 :dk_validate_notepadpp () {
     call dk_verbose "dk_validate_notepadpp(%*)"
-    call dk_get_host_triple
-    call dk_debug HOST_ARCH
-
-    if "%HOST_ARCH%"=="arm64" set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_ARM64%
-    if "%HOST_ARCH%"=="x86" set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_X86%
+    
+	if "%HOST_ARCH%"==""       call dk_get_host_triple
+    if "%HOST_ARCH%"=="arm64"  set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_ARM64%
+    if "%HOST_ARCH%"=="x86"    set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_X86_64%
     call dk_debug NOTEPADPP_DL
     
@@ -29,9 +28,9 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
     call dk_convert_to_lowercase %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
     call dk_debug NOTEPADPP_FOLDER
     
-    call dk_get_dkpaths
+    if "%DKTOOLS_DIR%"==""   call dk_get_dkpaths
     set "NOTEPADPP_EXE=%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%\notepad++.exe"
-    ::call dk_debug NOTEPADPP_EXE
+    call dk_debug NOTEPADPP_EXE
         
     if exist "%NOTEPADPP_EXE%" goto:eof
         

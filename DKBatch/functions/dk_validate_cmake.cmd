@@ -50,9 +50,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
 	rename "%DKTOOLS_DIR%\%CMAKE_DL_NAME%" "%CMAKE_FOLDER%"
 	echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
-    if NOT exist "%CMAKE_EXE%" (
-        call assert "cannot find cmake"
-    )
+    if NOT exist "%CMAKE_EXE%"   call dk_error "cannot find cmake"
         
     call dk_check_error
 goto:eof

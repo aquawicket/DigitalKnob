@@ -7,7 +7,8 @@
 :dk_validate_emscripten () {
 	call dk_verbose "dk_validate_emscripten(%*)"
 	
-    call dk_cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+    if "%DKIMPORTS_DIR%"=""   call dk_validate_branch
+    call dk_cmake_eval "dk_load('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     call dk_debug EMSDK
     call dk_debug EMSDK_ENV
     call dk_debug EMSDK_GENERATOR

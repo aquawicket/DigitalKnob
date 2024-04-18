@@ -7,7 +7,8 @@
 :dk_validate_android_ndk () {
 	call dk_verbose "dk_validate_android_ndk(%*)"
 	
-    call dk_cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
+    if "%DKIMPORTS_DIR%"=""   call dk_validate_branch
+    call dk_cmake_eval "dk_load('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     call dk_debug ANDROID_GENERATOR
     call dk_debug ANDROID_API
     call dk_debug ANDROID_NDK
