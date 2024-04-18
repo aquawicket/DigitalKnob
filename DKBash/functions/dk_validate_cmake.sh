@@ -40,7 +40,9 @@ dk_validate_cmake () {
 		dk_info "Installing CMake from dl files"
 		dk_debug CMAKE_IMPORT
 		
-		dk_get_filename "$CMAKE_IMPORT" CMAKE_DL_FILE
+		CMAKE_DL=${CMAKE_IMPORT}
+		
+		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
 		dk_debug CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
