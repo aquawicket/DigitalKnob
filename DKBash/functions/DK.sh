@@ -1,3 +1,21 @@
+#echo "$0($*)"
+
+###### Set and check posix mode ######
+$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+  *:posix:*) echo "POSIX mode enabled" ;;
+  *)         echo "POSIX mode not enabled" ;;
+esac
+$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+	
+SCRIPT_PATH=$(realpath $0)
+SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+SCRIPT_NAME=$(basename $SCRIPT_PATH)
+
+#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+
 ###### Reload Main Script with bash ######
 if [ ${RELOAD_WITH_BASH-1} = 1 ]; then # && ! dk_defined BASH; then
 	export RELOAD_WITH_BASH=0
@@ -23,7 +41,6 @@ readonly true=0
 readonly false=1
 
 
-
 ###### Script internal setup ######
 [ -d "/proc" ] && shell_type=$(basename $(readlink /proc/$$/exe))
 [ "$SHELL" = "/bin/zsh" ] && shell_type="zsh"
@@ -45,3 +62,4 @@ export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd
 ###### Script loader ######
 . ${DKBASH_DIR}/functions/array.sh
 . ${DKBASH_DIR}/functions/dk_load.${ext}
+. ${DKBASH_DIR}/functions/dk_color.sh
