@@ -19,6 +19,8 @@
     )
 
     call dk_debug DKBRANCH
+	
+	if "%DIGITALKNOB_DIR%"==""  call dk_get_dkpaths
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"

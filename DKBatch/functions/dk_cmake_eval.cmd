@@ -12,15 +12,18 @@
     echo.
     
     if [%1] == [] (
-        echo "ERROR: dk_cmake_eval() parameter1 is invalid"
+        call dk_error "dk_cmake_eval() parameter1 is invalid"
         goto:eof
     )
+	if "%CMAKE_EXE%"==""      call dk_validate_cmake
     if not exist "%CMAKE_EXE%" ( 
-        echo "ERROR: Could not locate CMAKE_EXE" 
+        call dk_error "Could not locate CMAKE_EXE" 
         goto:eof
     )
+	if "%DKCMAKE_DIR%"==""  call dk_validate_branch
+	call dk_debug DKCMAKE_DIR
     if not exist "%DKCMAKE_DIR%" ( 
-        echo "ERROR: Could not locate DKCMAKE_DIR" 
+        call dk_error "Could not locate DKCMAKE_DIR" 
         goto:eof
     )
 
