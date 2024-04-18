@@ -26,7 +26,9 @@ dk_build_main () {
 	#	DKUSERNAME=$USERNAME
 	#fi
 	#dk_debug DKUSERNAME
-	
+	# log to stdout and file
+exec > >(tee DKBuilder.log)
+
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug SCRIPT_PATH
