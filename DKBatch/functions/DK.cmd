@@ -1,6 +1,16 @@
-::@echo off
+@echo off
 :: if "$DK_INIT" == "" return else set DK_INIT=1     # dk_include_guard()
 ::echo %~0(%*)
+
+:::::: Global Script Variables ::::::
+set LOG_VERBOSE=1
+set LOG_DEBUG=1
+set TRACE_ON_WARNINGS=0
+set HALT_ON_WARNINGS=0
+set CONTINUE_ON_ERRORS=0
+::set true=0
+::set false=1
+
 
 echo %%CD%%            = %CD%
 echo %%DATE%%          = %DATE%
@@ -32,48 +42,21 @@ echo %%~a0             = %~a0
 echo %%~t0             = %~t0
 echo %%~z0             = %~z0
 
-echo %%~1              = %~1
-echo %%~f1             = %~f1
-echo %%~d1             = %~d1
-echo %%~p1             = %~p1
-echo %%~n1             = %~n1
-echo %%~x1             = %~x1
-echo %%~s1             = %~s1
-echo %%~a1             = %~a1
-echo %%~t1             = %~t1
-echo %%~z1             = %~z1
 
-set SCRIPT_PATH=%~f1
-set SCRIPT_DIR=%~dp1
-set SCRIPT_NAME=%~nx1
-set SCRIPT_ARGS=%*
-echo SCRIPT_PATH = %SCRIPT_PATH%
-echo SCRIPT_DIR = %SCRIPT_DIR%
-echo SCRIPT_NAME = %SCRIPT_NAME%
-:: SCRIPT_ARGS = %* after %1
-for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
-echo SCRIPT_ARGS = %SCRIPT_ARGS%
-
-:::::: Global Script Variables ::::::
-set LOG_VERBOSE=1
-set LOG_DEBUG=1
-set TRACE_ON_WARNINGS=0
-set HALT_ON_WARNINGS=0
-set CONTINUE_ON_ERRORS=0
-::set true=0
-::set false=1
 
 :::::: Script internal setup ::::::
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 echo DKBATCH_DIR = %DKBATCH_DIR%
 set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-::set SCRIPT_NAME=$(basename "$0")
 ::shell_type=cmd
 ::if $shell_type == cmd set CMD=1
 ::if $CMD echo "CMD"
 ::if $POWERSHELL echo "POWERSHELL"
 
+:: SCRIPT_ARGS = %* after %1
+::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
+::echo SCRIPT_ARGS = %SCRIPT_ARGS%
 
 :::::: Script loader ::::::
 call dk_load
@@ -81,4 +64,12 @@ call dk_load
 ::doskey DKDEBUGFUNCB = echo %0(%*)  FIXME
 
 doskey dk_load = call dk_load
-dk_load dk_color
+call dk_load dk_color
+
+<:GetCaller <nul call %DKBATCH_DIR%\functions\GetCaller.cmd SCRIPT_PATH
+echo SCRIPT_PATH = %SCRIPT_PATH%
+for %%A in ("%SCRIPT_PATH%.") do set SCRIPT_DIR=%%~dpA
+set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
+echo SCRIPT_DIR = %SCRIPT_DIR%
+for %%A in ("%SCRIPT_PATH%.") do set SCRIPT_NAME=%%~nxA
+echo SCRIPT_NAME = %SCRIPT_NAME%

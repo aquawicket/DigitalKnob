@@ -1,7 +1,7 @@
 @echo off
 
 ::###### Load Function files ######
-call "../functions/DK.cmd" %0 %*
+call "../functions/DK.cmd"
 ::call dk_keep_console_open %0 %*
 ::call dk_color
 ::call dk_echo
