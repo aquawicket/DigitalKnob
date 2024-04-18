@@ -11,12 +11,9 @@ $(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and ot
 #$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 	
 SCRIPT_PATH=$(realpath $0)
-SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
+[ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 SCRIPT_NAME=$(basename $SCRIPT_PATH)
-
-#SCRIPT_PATH=$(echo "/$SCRIPT_PATH" | sed -e 's/\\/\//g' -e 's/://')
-
 
 #export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
