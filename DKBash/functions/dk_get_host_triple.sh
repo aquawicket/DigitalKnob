@@ -278,4 +278,8 @@ dk_get_host_triple () {
 
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	dk_debug HOST_TRIPLE
+	
+	HOST_ENV=clang
+    HOST_TRIPLE=${HOST_TRIPLE}_${HOST_ENV}
+	dk_debug HOST_TRIPLE
 }
