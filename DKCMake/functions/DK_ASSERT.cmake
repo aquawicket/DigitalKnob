@@ -11,13 +11,13 @@ macro(DK_ASSERT expression)
 	#DKDEBUGFUNC(${ARGV})
 	
 	if(NOT ${expression})
-		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
+		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${clr}")
 		string(REPLACE " " "" var "${expression}")
 		
 		if("${var}")
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} ${expression} ${clr}")
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()

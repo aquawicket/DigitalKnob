@@ -56,7 +56,7 @@ function(dk_executeProcess)
 	dk_debug("dk_executeProcess(${ARGV})")
 	#if(NOT ${NOECHO})
 	#	string(REPLACE ";" " " print_commands "${ARGV}")
-	#	dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
+	#	dk_info("\n${clr}${magenta} dk_executeProcess> ${print_commands}\n")
 	#endif()
 	
 	if(NOT COMMAND)
@@ -109,7 +109,7 @@ function(dk_executeProcess)
 	endif()
 	
 	#string(REPLACE ";" " " PRINT_ARGV "${ARGV}")
-	dk_info("\n${CLR}${magenta} execute_process(${ARGV})")
+	dk_info("\n${clr}${magenta} execute_process(${ARGV})")
 	execute_process(${ARGV})
 	
 	

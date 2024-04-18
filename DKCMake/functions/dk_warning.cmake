@@ -14,12 +14,12 @@ macro(dk_warning msg)
 	
 	dk_updateLogInfo()
 	if(${HALT_ON_WARNINGS})
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${clr}${yellow} *** HALT_ON_WARNINGS *** ${clr}")
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${yellow} ${msg} ${clr}")
 		dk_exit()
 	endif()
 	
-	message(WARNING "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+	message(WARNING "${H_black}${STACK_HEADER}${clr}${yellow} ${msg} ${clr}")
 
 	if(${WAIT_ON_WARNINGS})
 		dk_wait(10)

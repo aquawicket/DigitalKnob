@@ -23,7 +23,7 @@ function(dk_msys2_bash)
 	
 	if(NOT ${NOECHO})
 		string(REPLACE ";" " " ARGV_STRING "${ARGV}")
-		dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV_STRING}\n")
+		dk_info("\n${clr}${magenta} dk_msys2_bash> ${ARGV_STRING}\n")
 	endif()
 
 	set(bash "#!/bin/bash")
@@ -60,7 +60,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
-	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
+	#dk_info("\n${clr}${magenta} dk_msys2_bash> ${bash}\n")
 	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)

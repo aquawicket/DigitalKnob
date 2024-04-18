@@ -14,6 +14,6 @@ function(dk_verbose msg)
 		dk_printvar(msg)
 		
 		dk_updateLogInfo()
-		message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
+		message(VERBOSE "${H_black}${STACK_HEADER}${clr}${cyan} ${msg} ${clr}")
 	endif()
 endfunction()

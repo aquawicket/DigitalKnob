@@ -9,11 +9,16 @@ include_guard()
 #
 function(dk_debug msg)
 	#DKDEBUGFUNC(${ARGV})
+	#message("dk_debug(${ARGV})")
 	
-	if(DKDEBUG_ENABLED)
-		dk_printvar(msg)
-		
-		dk_updateLogInfo()
-		message(DEBUG "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
+	if(NOT DKDEBUG_ENABLED)
+		return()
 	endif()
+		
+	dk_printvar(msg)
+		
+	#dk_updateLogInfo()
+	#message(DEBUG "${H_black}${STACK_HEADER}${clr}${blue} ${msg} ${clr}")
+
+	message("${blue}${msg}${clr}")
 endfunction()

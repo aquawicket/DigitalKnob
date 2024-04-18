@@ -20,7 +20,7 @@ function(dk_bash_env)
 	endif()
 	
 	if(NOT ${NOECHO})
-		dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
+		dk_info("\n${clr}${magenta} bash> ${ARGV}\n")
 	endif()
 	
 	### BASH_EXE ###

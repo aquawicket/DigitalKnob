@@ -129,7 +129,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 		if(NOT EXISTS ${dest_path})
 			dk_error("dest_path:(${dest_path}) Could not locate downloaded file")
 		endif()
-		dk_info("${CLR}${green} Finnished downloading ${dest_filename}")
+		dk_info("${clr}${green} Finnished downloading ${dest_filename}")
 	endif() 
 endfunction()
 dk_createOsMacros("dk_download")

@@ -15,5 +15,5 @@ function(dk_trace msg)
 	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)
 	
 	dk_updateLogInfo()
-	message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+	message(TRACE "${H_black}${STACK_HEADER}${clr}${B_blue} ${msg} ${clr}")
 endfunction()

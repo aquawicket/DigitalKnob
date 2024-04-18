@@ -18,10 +18,10 @@ function(dk_error msg)
 	
 	dk_updateLogInfo()
 	if(NOASSERT)
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${clr}${red} ${msg} ${clr}")
 		#dk_exit()
 	else()
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${red} ${msg} ${clr}")
 	endif()
 
 	if(${WAIT_ON_ERRORS})
