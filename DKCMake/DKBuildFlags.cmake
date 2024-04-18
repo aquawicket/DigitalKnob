@@ -125,6 +125,7 @@ include_guard()
 
 
 ########### CORE DEPENDENCIES ############
+dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
 if(MSVC)
 	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
 endif()
@@ -155,7 +156,7 @@ endif()
 if(EMSCRIPTEN)
 	dk_load(${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake)
 endif()
-dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
+
 
 if(NOT CMAKE_MAKE_PROGRAM)
 	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)

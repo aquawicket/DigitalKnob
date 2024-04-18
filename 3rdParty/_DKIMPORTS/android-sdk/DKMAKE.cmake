@@ -44,7 +44,8 @@ if(NOT EXISTS ${ANDROID_SDK})
 	
 	dk_sleep(2) # wait 2 seconds for the file to become available
 	if(EXISTS "${ANDROID_SDK}/SignLicenses.cmd")
-		WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
+		#WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
+		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
 	endif()
 	if(EXISTS "${OPENJDK}/registerJDK.cmd")
 		WIN_HOST_dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")

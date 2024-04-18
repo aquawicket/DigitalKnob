@@ -42,14 +42,11 @@ elseif(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_debug(MSYSTEM)
+	string(TOLOWER ${MSYSTEM} msystem)
 	if(MSYSTEM STREQUAL "MSYS")
-		#dk_set(msystem usr)
-		dk_set(msystem clang64)
-	else()
-		string(TOLOWER ${MSYSTEM} msystem)
+		dk_set(msystem clang64)		
 	endif()
 	dk_debug(msystem)
-	
 	
 	dk_find_program(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
 	

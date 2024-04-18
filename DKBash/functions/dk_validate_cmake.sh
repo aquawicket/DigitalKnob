@@ -27,7 +27,7 @@ dk_validate_cmake () {
 	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
 	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${TARGET_OS}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	#if [ "${TARGET_OS}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
 	if [ "${TARGET_OS}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
 	if [ "${TARGET_OS}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
@@ -84,11 +84,13 @@ dk_validate_cmake () {
 		dk_info "Installing CMake from package managers"
 		
 		CMAKE_EXE=$(command -v cmake)
+		CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_debug CMAKE_EXE
 		if ! dk_command_exists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
+		CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_debug CMAKE_EXE
 	fi
 }
