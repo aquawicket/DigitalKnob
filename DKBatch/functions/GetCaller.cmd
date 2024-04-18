@@ -1,7 +1,7 @@
 ::https://stackoverflow.com/a/43123617/688352
 
 @echo off
-setlocal DisableDelayedExpansion
+::setlocal DisableDelayedExpansion
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" (
@@ -12,11 +12,12 @@ REM *** STEP1
 REM *** Get the filename of the caller of this script, needed for later restart
 (
     (goto) 2>nul
-    setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%
+    ::setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%
     set "_returnVar=%~1"
     call set "_lastCaller=%%~f0"
     call set "_argToLastCaller=%%*"
     call "%~d0\:Step2\..%~pnx0" %*
+	endlocal
 )
 exit /b %= This is never reached =%
 
@@ -26,7 +27,7 @@ REM *** Get the filename/cmd-line of the caller of the script
 (
     (goto) 2>nul
     (goto) 2>nul
-    setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%    
+    ::setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%    
     set "_returnVar=%_returnVar%"
     set "_lastCaller=%_lastCaller%"
     set "_argToLastCaller=%_argToLastCaller%"
@@ -57,5 +58,8 @@ if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
 ::echo _lastCaller = %_lastCaller%
 ::echo _argToLastCaller = %_argToLastCaller%
 ::echo "%_lastCaller% %_argToLastCaller%"
+
+endlocal 
 %_lastCaller% %_argToLastCaller%
+
 echo #6 never reached
