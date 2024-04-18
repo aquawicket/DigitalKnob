@@ -7,8 +7,10 @@
 :dk_reload () {
 	call dk_verbose "dk_reload(%*)"
 	
+	if "%SCRIPT_PATH%" == "" dk_error "SCRIPT_PATH is invalid"; goto:eof
+	
     echo .
-    echo reloading %SCRIPT_NAME%
-    start "" "%SCRIPT_DIR%\%SCRIPT_NAME%"
+    echo reloading %SCRIPT_PATH%
+    start "" "%SCRIPT_PATH%"
     exit
 goto:eof
