@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
 
 ###### Load DK Function files (DKINIT) ######
-source ../functions/DK.sh
+. ../functions/DK.sh
 
 
 ###### test <...> ######
@@ -284,4 +284,5 @@ if [ $# -ne 0 ]; then
 	exit
 fi
 main
+
 dk_wait_for_key
