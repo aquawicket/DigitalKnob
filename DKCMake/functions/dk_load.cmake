@@ -38,7 +38,7 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	#message("dk_parseFunctionsAndLoad(${ARGV})")
-	if(NOT "${fn}" STREQUAL "DK")
+	if(NOT "${fn}" STREQUAL "DK" AND NOT "${fn}" STREQUAL "DKEval")
 		if(NOT "${fn}" MATCHES "[Dd][Kk]_[A-Za-z0-9_]")
 		#if(NOT "${fn}" MATCHES "[Dd][Kk]_.[A-Za-z0-9_\t]")
 			#break()
@@ -130,6 +130,6 @@ if(NOT DKCMAKE_DIR)
 	message("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 endif()
 	
-dk_load(dk_getDKPaths)
-dk_getDKPaths()
+#dk_load(dk_getDKPaths)
+#dk_getDKPaths()
 

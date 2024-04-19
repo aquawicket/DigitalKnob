@@ -61,6 +61,7 @@ export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pw
 export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 
 ###### Script loader ######
-. ${DKBASH_DIR}/functions/array.sh
+#. ${DKBASH_DIR}/functions/array.sh
 . ${DKBASH_DIR}/functions/dk_load.${ext}
-. ${DKBASH_DIR}/functions/dk_color.sh
+#dk_load $SCRIPT_PATH
+dk_load dk_color

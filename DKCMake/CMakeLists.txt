@@ -59,7 +59,8 @@ endif()
 
 set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 
-include(${CMAKE_SOURCE_DIR}/functions/dk_load.cmake)
+
+include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 
 
 

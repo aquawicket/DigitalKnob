@@ -17,23 +17,25 @@ dk_validate_cmake () {
 	dk_verbose "dk_validate_cmake($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
+	[ -z $HOST_OS ] && dk_get_host_triple
+	
 	######################################################################################################
-	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
-	if [ "${HOST_TRIPLE}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${HOST_TRIPLE}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${HOST_TRIPLE}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${HOST_TRIPLE}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
-	if [ "${HOST_OS}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	#if [ "${TARGET_OS}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
-	if [ "${TARGET_OS}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${TARGET_OS}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${TARGET_OS}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${TARGET_OS}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${TARGET_OS}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${TARGET_OS}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	[ "${HOST_OS}" 		= "android" ]              && CMAKE_IMPORT=cmake;						
+	[ "${HOST_TRIPLE}" 	= "win_arm32" ]            && CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32
+	[ "${HOST_TRIPLE}"          = "win_arm64" ]    && CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64
+	[ "${HOST_TRIPLE}" 	        = "win_x86" ]      && CMAKE_IMPORT=$CMAKE_DL_WIN_X86
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ]   && CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64
+	[ "${HOST_OS}" 		= "mac" ]                  && CMAKE_IMPORT=$CMAKE_DL_MAC
+	[ "${HOST_TRIPLE}" 	= "linux_x86_64" ]         && CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64
+	[ "${HOST_TRIPLE}" 	= "linux_arm64" ]          && CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64
+	[ "${HOST_TRIPLE}" 	= "raspberry_arm64" ]      && CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64
+	#[ "${TARGET_OS}" 	= "android_arm32" ]        && CMAKE_IMPORT=cmake
+	[ "${TARGET_OS}" 	= "win_arm64_clang" ]      && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	[ "${TARGET_OS}" 	= "win_x86_clang" ]        && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	[ "${TARGET_OS}" 	= "win_x86_mingw" ]        && CMAKE_IMPORT=mingw-w64-i686-cmake
+	[ "${TARGET_OS}"		= "win_x86_64_clang" ] && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	[ "${TARGET_OS}" 	= "win_x86_64_mingw" ]     && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	[ "${TARGET_OS}" 	= "win_x86_64_ucrt" ]      && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	
 	dk_debug CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
@@ -48,32 +50,25 @@ dk_validate_cmake () {
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
 		dk_debug CMAKE_FOLDER
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
-		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
-			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
-		fi
+		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		
 		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_to_lower CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
-		if [ "${HOST_OS}" = "win" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
-		elif [ "${HOST_OS}" = "mac" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		elif [ "${HOST_OS}" = "linux" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		elif [ "${HOST_OS}" = "raspberry" ]; then
-			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		else
-			dk_error "no cmake for this OS"
-		fi
+		[ -z $DKTOOLS_DIR ] && dk_get_dkpaths
+		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
+		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
+		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		[ -z $CMAKE_EXE ]              && dk_error "no cmake for this OS"
 		dk_debug CMAKE_EXE
 		
 		if dk_file_exists "$CMAKE_EXE"; then 
 			return $true;
 		fi
 
-		dk_echo 
+		dk_echo
 		dk_info "Installing cmake . . ."
 		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
 		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
