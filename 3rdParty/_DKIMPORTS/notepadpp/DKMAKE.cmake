@@ -1,15 +1,18 @@
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
 
+if(NOT HOST)
+	dk_getHostTriple()
+endif()
+
 if(NOT WIN_HOST)
 	dk_return()
 endif()
 	
-
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-WIN_ARM64_HOST_dk_set(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
-WIN_X86_HOST_dk_set(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
-WIN_X86_64_HOST_dk_set(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
+WIN_ARM64_HOST_dk_set	(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
+WIN_X86_HOST_dk_set		(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
+WIN_X86_64_HOST_dk_set	(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
 
 ## Get NOTEPADPP_DL_FILE, NOTEPADPP_FOLDER
 if(NOTEPADPP_DL)
@@ -20,10 +23,16 @@ endif()
 
 
 ### IMPORT ###
+if(NOT DKTOOLS_DIR)
+	dk_getDKPaths()
+endif()
 dk_import(${NOTEPADPP_DL} PATH ${DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
 dk_set(NOTEPADPP_EXE "${NOTEPADPP}/notepad++.exe")
 cmake_path(NATIVE_PATH NOTEPADPP_EXE NORMALIZE NOTEPADPP_EXE_WINPATH)
 
+
+### dark mode ###
+dk_copy(${DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP}/config.xml OVERWRITE)
 
 ### add_context_menu.cmd ###
 dk_set(NOTEPADPP_add_context_menu_cmd "${NOTEPADPP}/add_context_menu.cmd")

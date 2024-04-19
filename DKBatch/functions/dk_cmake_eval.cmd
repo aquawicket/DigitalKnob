@@ -18,9 +18,9 @@
 	set DKVARS=%3
 	:: remove double quotes
     if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:"=%%
+	if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
 	if [%DKRETURN%] NEQ []  call set DKRETURN=%%DKRETURN:"=%%
 	if [%DKVARS%] NEQ []    call set DKVARS=%%DKVARS:"=%%
-    ::call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
 	
 	::echo DKCOMMAND = %DKCOMMAND%
 	::echo DKRETURN = %DKRETURN%

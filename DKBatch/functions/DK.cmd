@@ -54,9 +54,7 @@ set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 
 :::::: Script loader ::::::
 call dk_load
-
-::doskey dk_load = call dk_load
-::call dk_load dk_color
+call dk_load dk_color
 
 <:GetCaller <nul call %DKBATCH_DIR%\functions\GetCaller.cmd SCRIPT_PATH
 
