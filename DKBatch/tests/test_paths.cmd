@@ -1,6 +1,5 @@
 @echo off
 
-echo before
 ::###### Load Function files ######
 call "../functions/DK.cmd"
 
@@ -19,11 +18,11 @@ call "../functions/DK.cmd"
 :: z -- size
 
 :main
-::	set "IN=%0"  																		:: DOES NOT WORK CORRECTLY 
+::	set "IN=%0"  																		
 ::	call :get_unquoted %0 IN 															:: WORKS
 	set "IN=%~0"																		:: WORKS
 ::	call :get_unquoted %~0 IN 															:: WORKS
-::	set "IN=C:\Program Files\WSL\wsl.exe"												:: WORKS
+::	set "IN=C:\Program Files\WSL\wsl.exe"
 ::	call :get_unquoted "C:\Program Files\WSL\wsl.exe" IN 								:: WORKS
 ::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\tests\test_blank.cmd"	:: WORKS
 ::	set "IN=C:/Program Files/WSL/wsl.exe"												:: WORKS
@@ -40,15 +39,17 @@ call "../functions/DK.cmd"
 ::	set "IN=..//functions//DK.cmd"														:: WORKS
 ::	set "IN=..\..\DKBatch\functions\DK.cmd"									            :: WORKS
 ::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"									:: DOES NOT WORK CORRECTLY 
+::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\"		
+::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/"	
+::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch"							
 
 	echo IN         = "%IN%"
 	
-	call :get_quoted "%IN%" quoted
-	echo quoted     = %quoted%
+	call :get_variable "%IN%" variable
+	echo variable   = %variable%
 	
 	call :get_unquoted "%IN%" unquoted
 	echo unquoted   = %unquoted%
-	
 	
 	call :get_drive "%IN%" drive
 	echo drive      = %drive%
@@ -80,76 +81,101 @@ call "../functions/DK.cmd"
 	pause
 goto:eof
 
-:: PATH
-::echo 0    = %~0
-::echo N    = %N%
+
 
 :: print all variable names
 ::for /f "usebackq delims==" %%i in (`set`) do @echo %%i
 
-:get_quoted
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%Z"
+:get_variable
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%Z"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_unquoted
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~Z"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~Z"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_drive
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~dZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~dZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_path
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~pZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~pZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_name
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~nZ"
+	::https://stackoverflow.com/a/59739663/688352
+	set _input=%1
+	set _input=%_input:""="%
+	::for /f "useback tokens=*" %%a in ('%1') do set _input=%%~a
+	:: if there is a trailing slash, remove it
+	if [%_input:~-2,1%] == [\] set _input=%_input:~0,-2%"
+	if [%_input:~-2,1%] == [/] set _input=%_input:~0,-2%"
+
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	for %%Z in (%_input%) do set "OUT=%%~nZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_extension
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~xZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set "_input=%1"
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~xZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_fullpath
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~fZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~fZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_shortpath
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~sZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~sZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_attributes
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~aZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~aZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_filetime
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~tZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~tZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
 :get_filesize
-	for %%Z in (%1) do set "OUT=%%~Z"
-	for %%Z in (%1) do set "OUT=%%~zZ"
+	::for %%Z in (%1) do set "OUT=%%~Z"
+	set _input=%1
+	set _input=%_input:""="%
+	for %%Z in (%_input%) do set "OUT=%%~zZ"
 	endlocal & set %2=%OUT%
 goto:eof
 
