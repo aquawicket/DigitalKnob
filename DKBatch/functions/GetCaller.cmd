@@ -1,6 +1,7 @@
 ::https://stackoverflow.com/a/43123617/688352
-
 @echo off
+::echo GetCaller.cmd
+
 ::setlocal DisableDelayedExpansion
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
@@ -8,7 +9,8 @@ if ":" == "%func:~0,1%" (
     goto %func%
 )
 
-REM *** STEP1
+:Step1
+::echo GetCaller.cmd: STEP1
 REM *** Get the filename of the caller of this script, needed for later restart
 (
     (goto) 2>nul
@@ -22,7 +24,7 @@ REM *** Get the filename of the caller of this script, needed for later restart
 exit /b %= This is never reached =%
 
 :Step2
-REM *** STEP2
+::echo GetCaller.cmd: STEP2
 REM *** Get the filename/cmd-line of the caller of the script
 (
     (goto) 2>nul
@@ -44,22 +46,41 @@ REM *** Get the filename/cmd-line of the caller of the script
 )
 exit /b %= This is never reached =%
 
+
 :Step3batch
-REM *** STEP3 Restart the requester batch, but jump to the label :GetCaller
-call :GetCaller
+	::echo GetCaller.cmd: STEP3
+	REM *** STEP3 Restart the requester batch, but jump to the label :GetCaller
+	
+	call :GetCaller
 exit /b %= This is never reached =%
 
+
 :GetCaller
-REM *** This uses the trick, that starting a batch without CALL will jump to the last used label
+	::echo GetCaller.cmd: :GetCaller
+	REM *** This uses the trick, that starting a batch without CALL will jump to the last used label
 
-if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
-::echo _returnVar = %_returnVar%
-::echo _caller = %_caller%
-::echo _lastCaller = %_lastCaller%
-::echo _argToLastCaller = %_argToLastCaller%
-::echo "%_lastCaller% %_argToLastCaller%"
+	if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
+	
+	::echo caller = %caller%
+	::echo callType = %callType%
+	::echo func = %func%
+	::echo _caller = %_caller%
+	::echo _returnVar = %_returnVar%
+	::echo _lastCaller = %_lastCaller%
+	::echo _argToLastCaller = %_argToLastCaller%
 
-endlocal 
-%_lastCaller% %_argToLastCaller%
+	set "caller="
+	set "callType="
+	set "func="
+	set "_caller="
+	set "_returnVar="
+	::set "_lastCaller="
+	::set "_argToLastCaller="
 
+	endlocal 
+	%_lastCaller% %_argToLastCaller%
+	
 echo #6 never reached
+
+
+

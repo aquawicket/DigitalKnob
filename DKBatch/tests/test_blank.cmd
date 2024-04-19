@@ -3,6 +3,6 @@
 ::###### Load Function files ######
 call "../functions/DK.cmd"
 
-call dk_validate_cmake
+call dk_print_variables
 
 pause

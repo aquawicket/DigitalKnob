@@ -7,76 +7,84 @@
 :dk_cmake_eval () {
 	call dk_verbose "dk_cmake_eval(%*)"
 	
-    echo.
-    echo  $ dk_cmake_eval (%*)
-    echo.
-    
-    if [%1] == [] (
-        call dk_error "dk_cmake_eval() parameter1 is invalid"
-        goto:eof
-    )
-	if "%CMAKE_EXE%"==""      call dk_validate_cmake
-    if not exist "%CMAKE_EXE%" ( 
-        call dk_error "Could not locate CMAKE_EXE" 
-        goto:eof
-    )
-	if "%DKCMAKE_DIR%"==""  call dk_validate_branch
-	call dk_debug DKCMAKE_DIR
-    if not exist "%DKCMAKE_DIR%" ( 
-        call dk_error "Could not locate DKCMAKE_DIR" 
-        goto:eof
-    )
+    if [%1]==[]                  call dk_error "dk_cmake_eval() parameter1 is invalid"
+	if [%CMAKE_EXE%]==[]         call dk_validate_cmake
+    if not exist "%CMAKE_EXE%"   call dk_error "Could not locate CMAKE_EXE" 
+	if [%DKCMAKE_DIR%]==[]       call dk_validate_branch
+    if not exist "%DKCMAKE_DIR%" call dk_error "Could not locate DKCMAKE_DIR" 
 
-    set commands=%1
-    set variables=%2
+    set DKCOMMAND=%1
+    set DKRETURN=%2
+	set DKVARS=%3
+	:: remove double quotes
+    if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:"=%%
+	if [%DKRETURN%] NEQ []  call set DKRETURN=%%DKRETURN:"=%%
+	if [%DKVARS%] NEQ []    call set DKVARS=%%DKVARS:"=%%
+    ::call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
+	
+	::echo DKCOMMAND = %DKCOMMAND%
+	::echo DKRETURN = %DKRETURN%
+	::echo DKVARS = %DKVARS%
+	
+	set "DK_EVAL=%DKCMAKE_DIR%\DKEval.cmake"
+	call set DK_EVAL=%%DK_EVAL:^\=^/%%
+	::echo DK_EVAL = %DK_EVAL%
+	
+	::### build cmake command ###
+	set "CMAKE_ARGS="
+	if "%DKCOMMAND%" NEQ "" set CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%DKCOMMAND%"
+	if "%DKRETURN%" NEQ ""  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
+	if "%DKVARS%" NEQ ""    set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
+	set CMAKE_ARGS=%CMAKE_ARGS% "-P"
+	set CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%"
+    ::echo "%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/DKEval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 
-    call set commands=%%commands:"=%%
-    set "DKCOMMAND=%commands%"
-    call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    ::#call dk_debug DKCOMMAND
+	::### call the cmake command
+	::echo "%CMAKE_EXE%" %CMAKE_ARGS%
+	"%CMAKE_EXE%" %CMAKE_ARGS%
+	
+	if "%DKRETURN%" == "" goto:eof
+	if not exist %DKCMAKE_DIR%\cmake_vars.cmd goto:eof
+    call %DKCMAKE_DIR%\cmake_vars.cmd
+	del %DKCMAKE_DIR%\cmake_vars.cmd
 
-    set "EVAL_VARS=%DKCMAKE_DIR%\cmake_vars.cmd"
-    call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
-        
-    ::echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/DKEval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+    ::if [%2] == [] goto no_return_values
+    ::goto with_return_values
 
-    if [%2] == [] goto no_return_values
-    goto with_return_values
-
-    :no_return_values
-		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
-    goto:eof
-
-    :with_return_values
-		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" "%~3" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
-        if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
-        call %EVAL_VARS%
-        ::del %EVAL_VARS%
-    goto:eof
+::    :no_return_values
+::		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+::  goto:eof
+::
+::    :with_return_values
+::		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" "%~3" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+::        ::if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
+::        call %EVAL_VARS%
+::        ::del %EVAL_VARS%
+::    goto:eof
 
     ::call dk_debug ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out
-    set out=
-    if exist "cmake_eval.out" (
-        for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-            set out=!out!%%x
-            echo %%x
-        )
-    )
+::    set out=
+::    if exist "cmake_eval.out" (
+::        for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+::            set out=!out!%%x
+::            echo %%x
+::        )
+::    )
     ::out contains all of the lines
     ::del cmake_eval.out
     ::echo %out%    
 
     :: std::err
-    set err=
-    if exist "cmake_eval.err" (
-        for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-            set err=!err!%%x
-            echo [91m %%x [0m
-        )
-    )
+::    set err=
+::    if exist "cmake_eval.err" (
+::        for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+::            set err=!err!%%x
+::            echo [91m %%x [0m
+::        )
+::    )
     ::del cmake_eval.out
     ::err contains all of the lines
     ::echo %err%

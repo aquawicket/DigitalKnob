@@ -8,4 +8,6 @@ if defined sFolderName (
 ) else (
     echo Folder isn't selected 
 )
+echo sFolderName = %sFolderName%
 cd %sFolderName%
+pause

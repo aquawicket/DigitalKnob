@@ -12,14 +12,13 @@ set SCRIPT_PATH=123
 ::set true=0
 ::set false=1
 
-
-echo %%CD%%            = %CD%
-echo %%DATE%%          = %DATE%
-echo %%TIME%%          = %TIME%
-echo %%RANDOM%%        = %RANDOM%
-echo %%ERRORLEVEL%%    = %ERRORLEVEL%
-echo %%CMDEXTVERSION%% = %CMDEXTVERSION%
-echo %%CMDCMDLINE%%    = %CMDCMDLINE%
+::echo %%CD%%            = %CD%
+::echo %%DATE%%          = %DATE%
+::echo %%TIME%%          = %TIME%
+::echo %%RANDOM%%        = %RANDOM%
+::echo %%ERRORLEVEL%%    = %ERRORLEVEL%
+::echo %%CMDEXTVERSION%% = %CMDEXTVERSION%
+::echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 
 :: http://cplusplus.bordoon.com/cmd_exe_variables.html
 :: d -- drive
@@ -32,16 +31,16 @@ echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 :: t -- time
 :: z -- size
 
-echo %%~0              = %~0
-echo %%~f0             = %~f0
-echo %%~d0             = %~d0
-echo %%~p0             = %~p0
-echo %%~n0             = %~n0
-echo %%~x0             = %~x0
-echo %%~s0             = %~s0
-echo %%~a0             = %~a0
-echo %%~t0             = %~t0
-echo %%~z0             = %~z0
+::echo %%~0              = %~0
+::echo %%~f0             = %~f0
+::echo %%~d0             = %~d0
+::echo %%~p0             = %~p0
+::echo %%~n0             = %~n0
+::echo %%~x0             = %~x0
+::echo %%~s0             = %~s0
+::echo %%~a0             = %~a0
+::echo %%~t0             = %~t0
+::echo %%~z0             = %~z0
 
 :::::: Script internal setup ::::::
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
@@ -56,11 +55,14 @@ set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 :::::: Script loader ::::::
 call dk_load
 
-doskey dk_load = call dk_load
-call dk_load dk_color
+::doskey dk_load = call dk_load
+::call dk_load dk_color
 
 <:GetCaller <nul call %DKBATCH_DIR%\functions\GetCaller.cmd SCRIPT_PATH
-::echo SCRIPT_PATH = %SCRIPT_PATH%
+
+
+echo SCRIPT_PATH = %SCRIPT_PATH%
+echo. 
 
 for %%A in ("%SCRIPT_PATH%.") do set SCRIPT_DIR=%%~dpA
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
@@ -72,4 +74,3 @@ for %%A in ("%SCRIPT_PATH%.") do set SCRIPT_NAME=%%~nxA
 :: SCRIPT_ARGS = %* after %1
 ::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
 ::echo SCRIPT_ARGS = %SCRIPT_ARGS%
-
