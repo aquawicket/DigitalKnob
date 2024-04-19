@@ -18,30 +18,32 @@ call "../functions/DK.cmd"
 :: z -- size
 
 :main
-::	set "IN=%0"  																															
-	set "IN=%~0"																															
-::	set "IN=C:\Program Files\WSL\wsl.exe"						
-::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\tests\test_blank.cmd"	
-::	set "IN=C:/Program Files/WSL/wsl.exe"												
-::  set "IN=test_dk_echo.cmd"															:: WORKS
-::  set "IN=/test_dk_echo.cmd"															:: DOES NOT WORK CORRECTLY 
-::  set "IN=\test_dk_echo.cmd"															:: DOES NOT WORK CORRECTLY 
-::	set "IN=../docs.txt"																:: WORKS
-::	set "IN=..\docs.txt"																:: WORKS
-::	set "IN=..\functions\DK.cmd"														:: WORKS
-::	set "IN=../functions/DK.cmd"														:: WORKS
-::	set "IN=../functions\DK.cmd"														:: WORKS
-::	set "IN=..\functions/DK.cmd"														:: WORKS
-::	set "IN=..\\functions\\DK.cmd"														:: WORKS
-::	set "IN=..//functions//DK.cmd"														:: WORKS
-::	set "IN=..\..\DKBatch\functions\DK.cmd"									            :: WORKS
-::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"									:: DOES NOT WORK CORRECTLY 
-::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\"		
-::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/"	
-::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch"							
+	set IN=%0
+::	set "IN=%0"
+::	set IN=%~0
+::	set "IN=%~0"
+::	set "IN=C:\Program Files\WSL\wsl.exe"
+::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\tests\test_blank.cmd"
+::	set "IN=C:/Program Files/WSL/wsl.exe"
+::  set "IN=test_dk_echo.cmd"
+::  set "IN=/test_dk_echo.cmd"
+::  set "IN=\test_dk_echo.cmd"
+::	set "IN=../docs.txt"
+::	set "IN=..\docs.txt"
+::	set "IN=..\functions\DK.cmd"
+::	set "IN=../functions/DK.cmd"
+::	set "IN=../functions\DK.cmd"
+::	set "IN=..\functions/DK.cmd"
+::	set "IN=..\\functions\\DK.cmd"
+::	set "IN=..//functions//DK.cmd"
+::	set "IN=..\..\DKBatch\functions\DK.cmd"
+::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
+::	set IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\
+::	set "IN=C:/Users/aquawicket/digitalknob/Development/DKBatch/"
+::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch"
 
 	echo IN         = "%IN%"
-	
+
 	call :get_variable "%IN%" variable
 	echo variable   = %variable%
 	
@@ -86,6 +88,8 @@ goto:eof
 :get_variable
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%Z"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -93,6 +97,8 @@ goto:eof
 :get_unquoted
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~Z"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -100,6 +106,8 @@ goto:eof
 :get_drive
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~dZ"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -126,7 +134,8 @@ goto:eof
 :get_extension
 	set "_input=%1"
 	set _input=%_input:"=%
-	
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~xZ"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -152,6 +161,8 @@ goto:eof
 :get_attributes
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~aZ"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -159,6 +170,8 @@ goto:eof
 :get_filetime
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~tZ"
 	endlocal & set %2=%OUT%
 goto:eof
@@ -166,8 +179,14 @@ goto:eof
 :get_filesize
 	set _input=%1
 	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~zZ"
 	endlocal & set %2=%OUT%
 goto:eof
+
+::%~dpI - drive and path
+::%~nxI - name and extansion
+
 
 pause
