@@ -1,18 +1,16 @@
 include_guard()
-message("dk_color.cmake")
 
-
-set(USE_COLOR 1)
+if(NOT DEFINED USE_COLOR)
+	set(USE_COLOR 1)
+endif()
 
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 # 
 # ←[0m←[37m     if these kinda symbols show up, escape characters are removed and color is not working 
 
 if(USE_COLOR)
-message("USE_COLOR = 1")
 	string(ASCII 27 ESC)
-	#set(CLR         "${ESC}[0m")    					 #reset color
-	set(clr         "${ESC}[0m"		CACHE INTERNAL "")   #reset color
+	set(clr         "${ESC}[0m")   #reset color
 	set(ColourBold  "${ESC}[1m")
 
 	# Regular Colors
@@ -20,7 +18,7 @@ message("USE_COLOR = 1")
 	set(red          "${ESC}[31m")
 	set(green        "${ESC}[32m")
 	set(yellow       "${ESC}[33m")
-	set(blue         "${ESC}[34m"	CACHE INTERNAL "") 
+	set(blue         "${ESC}[34m")
 	set(magenta      "${ESC}[35m")
 	set(cyan         "${ESC}[36m") 
 	set(white        "${ESC}[37m")
@@ -99,7 +97,6 @@ message("USE_COLOR = 1")
 	set(ESC_10   "${ESC}[10;37m")
 endif()
 if(NOT USE_COLOR)
-	#set(CLR          "")
 	set(clr          "")
 	set(ColourBold   "")
 	set(black        "")

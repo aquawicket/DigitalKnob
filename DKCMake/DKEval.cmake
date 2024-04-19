@@ -24,24 +24,24 @@
 include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW) # https://cmake.org/cmake/help/latest/policy/CMP0007.html # "Do not ignore empty list items"
-message("DKEval.cmake('${DKCOMMAND}')")
+#message("DKEval.cmake('${DKCOMMAND}')")
 
 include(${CMAKE_CURRENT_LIST_DIR}/functions/DK.cmake)
-dk_load(dk_eval)
+
 
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
 	
-	## create windows cmd to set variables
+	## create windows cmd script to set the return variables
 	dk_remove(${DKCMAKE_DIR}/cmake_vars.cmd NOERROR)
 	foreach(item ${DKRETURN})
 		set(line "set \"${item}=${${item}}\" \n")
 		file(APPEND ${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
 	endforeach()
 	
-	## create unix shell to set variables 
+	## create unis shell script to set the return variables
 	dk_remove(${DKCMAKE_DIR}/cmake_vars.sh NOERROR)
 	file(APPEND ${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
 	foreach(var ${DKRETURN})

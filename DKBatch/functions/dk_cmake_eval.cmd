@@ -44,11 +44,11 @@
     goto with_return_values
 
     :no_return_values
-        "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
     goto:eof
 
     :with_return_values
-        "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" "%~3" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+		"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" "%~3" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
         if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%
         ::del %EVAL_VARS%
