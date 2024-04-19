@@ -6,6 +6,7 @@ setlocal EnableDelayedExpansion
 ::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
+
 ::### call any arguments passed in ###
 echo %0(%*)
 if "%*" NEQ "" call %* 
