@@ -34,6 +34,10 @@ include_guard()
 ###############################################################
 ## Set variables for paths
 ###############################################################
+if(NOT DIGITALKNOB_DIR)
+	dk_getDKPaths()
+endif()
+
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
 dk_debug(CURRENT_DIR)
 
