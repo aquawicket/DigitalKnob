@@ -1,18 +1,18 @@
 include_guard()
 
 ##################################################################################
-# dk_debugFunc(${ARGV})
+# dk_debugfunc(${ARGV})
 #
 #	Prints the current file name, line number, function or macro and arguments
 #	Place this at the first line of every function you want to see debug output for.
 # 
 #	Example:
 #		function(MyFunction myArg1 myArg2)
-#			dk_debugFunc(${ARGV}) 
+#			dk_debugfunc(${ARGV}) 
 #			## user code
 #		endfunction()
 #
-macro(dk_debugFunc)
+macro(dk_debugfunc)
 	#DKDEBUGFUNC(${ARGV})
 	
 	if(DKDEBUGFUNC_ENABLED)
@@ -42,5 +42,5 @@ macro(dk_debugFunc)
 	endif()
 endmacro()
 macro(DKDEBUGFUNC)
-	dk_debugFunc(${ARGV})
+	dk_debugfunc(${ARGV})
 endmacro()
