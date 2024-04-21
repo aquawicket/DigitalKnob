@@ -65,7 +65,7 @@ readonly false=1
 #echo "shell_type = $shell_type"
 [ $shell_type = sh ] && export DKSH=1 && export ext=sh
 [ $shell_type = dash ] && export DKDASH=1 && export ext=sh
-[ $shell_type = zsh ] && export DKZSH=1 && export ext=sh
+[ $shell_type = zsh ] && export DKZSH=1 && export ext=bash
 [ $shell_type = bash ] && export DKBASH=1 && export ext=bash
 
 #[ $DKSH ]   && echo "DKSH"
