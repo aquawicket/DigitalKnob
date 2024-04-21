@@ -9,8 +9,25 @@ $(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
 $(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
 #$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 #$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+
+##################################################################################
+# dk_realpath()
+#
+#
+dk_realpath() (
+  OURPWD=$PWD
+  cd "$(dirname "$1")"
+  LINK=$(readlink "$(basename "$1")")
+  while [ "$LINK" ]; do
+    cd "$(dirname "$LINK")"
+    LINK=$(readlink "$(basename "$1")")
+  done
+  REALPATH="$PWD/$(basename "$1")"
+  cd "$OURPWD"
+  echo "$REALPATH"
+)
 	
-SCRIPT_PATH=$(realpath $0)
+SCRIPT_PATH=$(dk_realpath $0)
 [ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 SCRIPT_NAME=$(basename $SCRIPT_PATH)

@@ -1,11 +1,10 @@
 #!/bin/sh
 clear && clear
 echo "$0($*)"
-DKBASH_DIR=$HOME/digitalknob/Development/DKBash
 
 
 ###### Load DK Function files (DKINIT) ######
-. $DKBASH_DIR/functions/DK.sh
+. DKBash/functions/DK.sh
 
 	
 ###### Load Main Program ######
