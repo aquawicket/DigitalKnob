@@ -39,8 +39,8 @@ ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source)
 
-dk_addTarget	(rmlui RmlCore)
-dk_addTarget	(rmlui RmlDebugger)
+dk_add_target	(rmlui RmlCore)
+dk_add_target	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	if(MSVC)
