@@ -3,7 +3,7 @@ message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 if(EXISTS $ENV{DKCMAKE_DIR})
 	include($ENV{DKCMAKE_DIR}/functions/dk_load.cmake)
-elss()
+else()
 	include(${CMAKE_CURRENT_LIST_DIR}/functions/dk_load.cmake)
 endif()
 dk_debug(ENV{DKCMAKE_DIR})
