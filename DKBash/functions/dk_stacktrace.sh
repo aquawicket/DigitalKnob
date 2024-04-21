@@ -5,7 +5,7 @@
 #
 #
 dk_stacktrace () {
-    dk_verbose "dk_stacktrace($*)"
+    #dk_verbose "dk_stacktrace($*)"
 	#[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
@@ -19,7 +19,7 @@ dk_stacktrace () {
 	i=0
 	while [ "$i" -le "$size" ]; do
 		((frame=${#FUNCNAME[@]}-i-2 ))
-		echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
+		dk_echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
 		i=$(( i + 1 ))
 	done 
 

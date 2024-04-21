@@ -1,8 +1,11 @@
 # dk_include_guard()
 
 
-[ -z $LOG_DEBUG ] && LOG_DEBUG=1
-DKDEBUG_TAG="  DEBUG: "
+[ -z $ENABLE_dk_debug ] && ENABLE_dk_debug=1
+[ -z $TRACE_ON_DEBUG ]  && TRACE_ON_DEBUG=0
+[ -z $PAUSE_ON_DEBUG ]  && PAUSE_ON_DEBUG=0
+[ -z $HALT_ON_DEBUG ]   && HALT_ON_DEBUG=0
+#TAG="  DEBUG: "
 ##################################################################################
 # dk_debug(<message>)
 #
@@ -12,10 +15,13 @@ DKDEBUG_TAG="  DEBUG: "
 #
 dk_debug () {
 	#dk_verbose "dk_debug($*)"	
-	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
-	[ $LOG_DEBUG -eq 1 ] || return 0
-	debug_msg="$1"
-	dk_to_variable_info debug_msg
-	dk_echo "${blue}${DKDEBUG_TAG}${debug_msg}${clr}"
+	[ $ENABLE_dk_debug -eq 1 ] || return 0
+	msg="$1"
+	dk_to_variable_info msg
+	
+	dk_echo "${blue}${TAG}${msg}${clr}"
+	[ $TRACE_ON_DEBUG -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			
+	[ $HALT_ON_DEBUG -eq 1 ] && exec $SHELL #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_DEBUG -eq 1 ] && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }

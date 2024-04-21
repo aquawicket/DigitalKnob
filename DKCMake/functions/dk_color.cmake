@@ -1,4 +1,6 @@
 include_guard()
+# https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+
 
 if(NOT DEFINED USE_COLOR)
 	set(USE_COLOR 1)
@@ -15,8 +17,8 @@ if(USE_COLOR)
 	set(underline	"${ESC}[4m")
 	set(inverse		"${ESC}[7m")
 
-	# Regular Colors
-	set(black        "${ESC}[30;100m")
+	# Foreground Colors
+	set(black        "${ESC}[30m")
 	set(red          "${ESC}[31m")
 	set(green        "${ESC}[32m")
 	set(yellow       "${ESC}[33m")
@@ -24,6 +26,40 @@ if(USE_COLOR)
 	set(magenta      "${ESC}[35m")
 	set(cyan         "${ESC}[36m") 
 	set(white        "${ESC}[37m")
+	set(default      "${ESC}[39m")
+	
+	# Background Colors
+	set(bg_black     "${ESC}[40m")
+	set(bg_red       "${ESC}[41m")
+	set(bg_green     "${ESC}[42m")
+	set(bg_yellow    "${ESC}[43m")
+	set(bg_blue      "${ESC}[44m")
+	set(bg_magenta   "${ESC}[45m")
+	set(bg_cyan      "${ESC}[46m") 
+	set(bg_white     "${ESC}[47m")
+	set(bg_default   "${ESC}[49m")
+	
+	# Foreground Colors (Bright)
+	set(Black        "${ESC}[90m")
+	set(Red          "${ESC}[91m")
+	set(Green        "${ESC}[92m")
+	set(Yellow       "${ESC}[93m")
+	set(Blue         "${ESC}[94m")
+	set(Magenta      "${ESC}[95m")
+	set(Cyan         "${ESC}[96m") 
+	set(White        "${ESC}[97m")
+	set(Default      "${ESC}[99m")
+	
+	# Background Colors (Bright)
+	set(BG_Black     "${ESC}[100m")
+	set(BG_Red       "${ESC}[101m")
+	set(BG_Green     "${ESC}[102m")
+	set(BG_Yellow    "${ESC}[103m")
+	set(BG_Blue      "${ESC}[104m")
+	set(BG_Magenta   "${ESC}[105m")
+	set(BG_Cyan      "${ESC}[106m") 
+	set(BG_White     "${ESC}[107m")
+	set(BG_Default   "${ESC}[109m")
 
 	# Bold
 	set(B_black      "${ESC}[1;30m")

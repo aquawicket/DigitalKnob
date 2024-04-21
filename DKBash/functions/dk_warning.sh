@@ -1,22 +1,27 @@
 # dk_include_guard()
 
 
-[ -z ${TRACE_ON_WARNINGS-} ] && TRACE_ON_WARNINGS=0
-[ -z ${WAIT_ON_WARNINGS-} ]  && WAIT_ON_WARNINGS=0
-[ -z ${HALT_ON_WARNINGS-} ]  && HALT_ON_WARNINGS=0
-DKWARNING_TAG="WARNING: "
+[ -z $ENABLE_dk_warning ] && ENABLE_dk_warning=1
+[ -z $TRACE_ON_WARNING ]  && TRACE_ON_WARNING=0
+[ -z $PAUSE_ON_WARNING ]  && PAUSE_ON_WARNING=0
+[ -z $HALT_ON_WARNING ]   && HALT_ON_WARNING=0
+#TAG="  WARNING: "
 ##################################################################################
 # dk_warning(<message>)
 #
+#	Print a warning message to the console
+#
+#	@msg	- The message to print
 #
 dk_warning () {
-	#dk_verbose "dk_warning($*)"
-	[ $# -lt 1 ] && dk_error "dk_verbose($*): requires at least 1 parameter"
+	#dk_verbose "dk_warning($*)"	
 	
-	warning_msg="$1"
-	dk_to_variable_info warning_msg
-	dk_echo "${yellow}${DKWARNING_TAG}${warning_msg}${clr}"
-	[ $TRACE_ON_WARNINGS = 1 ] && dk_stacktrace
-	[ $WAIT_ON_WARNINGS = 1 ] && dk_pause
-	[ $HALT_ON_WARNINGS = 1 ] && exit 1
+	[ $ENABLE_dk_warning -eq 1 ] || return 0
+	msg="$1"
+	dk_to_variable_info msg
+	
+	dk_echo "${yellow}${TAG}${msg}${clr}"
+	[ $TRACE_ON_WARNING -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			
+	[ $HALT_ON_WARNING -eq 1 ] && exec $SHELL #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_WARNING -eq 1 ] && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }

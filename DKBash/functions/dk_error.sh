@@ -1,23 +1,28 @@
 # dk_include_guard()
 
 
-[ -z ${TRACE_ON_ERRORS-} ]    && TRACE_ON_ERRORS=1
-[ -z ${PAUSE_ON_ERRORS-} ]     && PAUSE_ON_ERRORS=1
-[ -z ${CONTINUE_ON_ERRORS-} ] && CONTINUE_ON_ERRORS=0
-DKERROR_TAG="  ERROR: "
+[ -z $ENABLE_dk_error ] && ENABLE_dk_error=1
+[ -z $TRACE_ON_ERROR ]  && TRACE_ON_ERROR=1
+[ -z $PAUSE_ON_ERROR ]  && PAUSE_ON_ERROR=0
+[ -z $HALT_ON_ERROR ]   && HALT_ON_ERROR=1
+ERROR_TAG="ERROR: "
 ##################################################################################
 # dk_error(<message>)
 #
+#	Print a error message to the console
+#
+#	@msg	- The message to print
 #
 dk_error () {
-	#dk_verbose "dk_error($*)"
-	[ $# -lt 1 ] && dk_echo "dk_verbose($*): requires at least 1 parameter"
+	#dk_verbose "dk_error($*)"	
 	
-	error_msg="$1"
-	dk_to_variable_info error_msg
-	dk_echo "${red}${DKERROR_TAG}${error_msg}${clr}"
-	[ $TRACE_ON_ERRORS = 1 ]    && dk_stacktrace
-	[ $PAUSE_ON_ERRORS = 1 ]    && dk_pause
-	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
-	exit 1
+	[ $ENABLE_dk_error -eq 1 ] || return 0
+	msg="$1"
+	dk_to_variable_info msg
+	
+	dk_echo "${red}${ERROR_TAG}${bg_red}${msg}${clr}${red}"
+	[ $TRACE_ON_ERROR -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
+	dk_echo "${clr}"	
+	[ $HALT_ON_ERROR -eq 1 ] && dk_echo "${red}*** HALT_ON_ERROR ***${clr}" && exec $SHELL #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_ERROR -eq 1 ] && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
