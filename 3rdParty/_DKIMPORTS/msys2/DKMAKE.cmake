@@ -44,7 +44,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_debug(CYGPATH_EXE)
 	dk_find_program(PACMAN_EXE pacman "${MSYS2}/usr/bin")
 	dk_debug(PACMAN_EXE)
-	#dk_addFirewallAllow("pacman" "${PACMAN_EXE}")
+	#dk_firewall_allow("pacman" "${PACMAN_EXE}")
 	
 	if(MSYSTEM)
 		# Set PATH environment  variables
