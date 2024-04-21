@@ -1,5 +1,8 @@
 include_guard()
 
+if(NOT DEFINED ENABLE_dk_verbose)
+	dk_set(ENABLE_dk_verbose 0)
+endif()
 ##################################################################################
 # dk_verbose(msg)
 #
@@ -10,7 +13,7 @@ include_guard()
 function(dk_verbose msg)
 	#DKDEBUGFUNC(${ARGV})
 	
-	if(DKVERBOSE_ENABLED)
+	if(ENABLE_dk_verbose)
 		dk_printvar(msg)
 		
 		dk_updateLogInfo()

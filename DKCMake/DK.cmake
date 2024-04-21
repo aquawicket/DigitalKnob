@@ -24,11 +24,11 @@ set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executab
 set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
-set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
 set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the current cmake file
 set(DELETE_DOWNLOADS			0		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
-set(DKVERBOSE_ENABLED			1		CACHE INTERNAL "")	# enable dk_verbose() functions
+#set(ENABLE_dk_debug			1		CACHE INTERNAL "")	# enable dk_debug() functions
+#set(ENABLE_dk_verbose			1		CACHE INTERNAL "")	# enable dk_verbose() functions
 set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
@@ -38,13 +38,12 @@ set(PRINT_FILE_NAMES 			0 		CACHE INTERNAL "")	# print function call file names
 set(PRINT_FUNCTION_ARGUMENTS 	0 		CACHE INTERNAL "")	# print function call arguments
 set(PRINT_FUNCTION_NAMES 		0 		CACHE INTERNAL "")	# print function call function names
 set(PRINT_LINE_NUMBERS 			0		CACHE INTERNAL "")	# print function call file line numbers
-set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
+set(PAUSE_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(PROJECT_INCLUDE_DKPLUGINS	1		CACHE INTERNAL "")  # Include DKPlugin libraries in the app project
 set(PROJECT_INCLUDE_3RDPARTY	0		CACHE INTERNAL "")  # Include 3rdParty libraries in the app project
 
-dk_load(${DKCMAKE_DIR}/DKColor.cmake)
 
 ###### DKOFFLINE Warning ######
 if(${DKOFFLINE})

@@ -2,7 +2,7 @@
 
 
 [ -z ${TRACE_ON_ERRORS-} ]    && TRACE_ON_ERRORS=1
-[ -z ${WAIT_ON_ERRORS-} ]     && WAIT_ON_ERRORS=1
+[ -z ${PAUSE_ON_ERRORS-} ]     && PAUSE_ON_ERRORS=1
 [ -z ${CONTINUE_ON_ERRORS-} ] && CONTINUE_ON_ERRORS=0
 DKERROR_TAG="  ERROR: "
 ##################################################################################
@@ -17,7 +17,7 @@ dk_error () {
 	dk_to_variable_info error_msg
 	dk_echo "${red}${DKERROR_TAG}${error_msg}${clr}"
 	[ $TRACE_ON_ERRORS = 1 ]    && dk_stacktrace
-	[ $WAIT_ON_ERRORS = 1 ]     && dk_wait_for_key
+	[ $PAUSE_ON_ERRORS = 1 ]    && dk_pause
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
 	exit 1
 }

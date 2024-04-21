@@ -69,6 +69,14 @@ function(dk_getDKPaths)
 	###### Set DKDOWNLOAD_DIR ######
 	set(DKDOWNLOAD_DIR ${DIGITALKNOB_DIR}/download CACHE INTERNAL "" FORCE)
 	dk_debug(DKDOWNLOAD_DIR)
+	
+	###### Set DKBATCH_DIR ######
+	set(DKBATCH_DIR ${DKBRANCH_DIR}/DKBatch CACHE INTERNAL "" FORCE)
+	dk_debug(DKBATCH_DIR)
+	
+	###### Set DKBASH_DIR ######
+	set(DKBASH_DIR ${DKBRANCH_DIR}/DKBash CACHE INTERNAL "" FORCE)
+	dk_debug(DKBASH_DIR)
 
 	###### Set DKWEB ######
 	set(DKWEB "http://127.0.0.1" CACHE INTERNAL "" FORCE)

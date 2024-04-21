@@ -3,9 +3,12 @@
 ##################################################################################
 # dk_pause()
 #
+#	Pause execution and wait for keypress to continue
 #
 dk_pause() {
-	dk_debug "dk_pause($@)"
-	read -rsp $'Press any key to continue...\n' -n 1 key
+	dk_verbose "dk_pause($@)"
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	
+	read -rp 'Press enter to continue...' key
 	# echo $key
 }

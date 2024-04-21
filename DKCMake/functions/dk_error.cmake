@@ -1,5 +1,14 @@
 include_guard()
 
+if(NOT DEFINED TRACE_ON_ERRORS)
+	set(TRACE_ON_ERRORS 1 CACHE INTERNAL "")
+endif()
+if(NOT DEFINED PAUSE_ON_ERRORS)
+	set(PAUSE_ON_ERRORS 1 CACHE INTERNAL "")
+endif()
+if(NOT DEFINED CONTINUE_ON_ERRORS)
+	set(CONTINUE_ON_ERRORS 0 CACHE INTERNAL "")
+endif()
 ##################################################################################
 # dk_error(msg) NOASSERT
 #
@@ -19,12 +28,12 @@ function(dk_error msg)
 	dk_updateLogInfo()
 	if(NOASSERT)
 		message(STATUS "${H_black}${STACK_HEADER}${clr}${red} ${msg} ${clr}")
-		#dk_exit()
 	else()
 		message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${red} ${msg} ${clr}")
+		#dk_exit(1)
 	endif()
 
-	if(${WAIT_ON_ERRORS})
-		dk_wait(10)
+	if(PAUSE_ON_ERRORS)
+		dk_pause()
 	endif()
 endfunction()

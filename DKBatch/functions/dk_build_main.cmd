@@ -66,6 +66,8 @@ setlocal enableDelayedExpansion
     call dk_debug DKIMPORTS_DIR
     call dk_debug DKPLUGINS_DIR
     
+	call dk_getDirectory "%SCRIPT_PATH%" SCRIPT_DIR
+	
 	if NOT "%SCRIPT_DIR%"=="%DKBRANCH_DIR%" (
 		call dk_warning "%SCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		call dk_warning "%SCRIPT_NAME% path = %SCRIPT_DIR%"

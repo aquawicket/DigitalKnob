@@ -1,5 +1,8 @@
 include_guard()
 
+if(NOT DEFINED ENABLE_dk_debug)
+	dk_set(ENABLE_dk_debug 1)
+endif()
 ##################################################################################
 # dk_debug(msg)
 #
@@ -11,7 +14,7 @@ function(dk_debug msg)
 	#DKDEBUGFUNC(${ARGV})
 	#message("dk_debug(${ARGV})")
 	
-	if(NOT DKDEBUG_ENABLED)
+	if(NOT ENABLE_dk_debug)
 		return()
 	endif()
 		
