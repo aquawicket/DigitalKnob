@@ -13,7 +13,7 @@ DK_TRY_CATCH () {
 
 	if [ "$err_status" -ne "0" ]; then
 		echo "ERROR_STATUS: $err_status"
-		dk_wait_for_key
+		dk_pause
 		dk_error "test"
 	fi
 }

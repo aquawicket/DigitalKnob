@@ -11,4 +11,4 @@ else
 	echo "the confimation has failed"
 fi
 
-dk_wait_for_key
+dk_pause

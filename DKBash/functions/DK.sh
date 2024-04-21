@@ -10,7 +10,10 @@ $(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and ot
 #$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 #$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
-. DKBash/functions/dk_realpath.sh
+#. DKBash/functions/dk_realpath.sh
+dk_realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
 SCRIPT_PATH=$(dk_realpath $0)
 [ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)

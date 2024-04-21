@@ -17,6 +17,6 @@ dk_warning () {
 	dk_to_variable_info warning_msg
 	dk_echo "${yellow}${DKWARNING_TAG}${warning_msg}${clr}"
 	[ $TRACE_ON_WARNINGS = 1 ] && dk_stacktrace
-	[ $WAIT_ON_WARNINGS = 1 ] && dk_wait_for_key
+	[ $WAIT_ON_WARNINGS = 1 ] && dk_pause
 	[ $HALT_ON_WARNINGS = 1 ] && exit 1
 }

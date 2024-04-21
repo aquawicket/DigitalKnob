@@ -2,7 +2,7 @@
 
 
 [ -z ${LOG_VERBOSE-} ] && LOG_VERBOSE=1
-DKVERBOSE_TAG="VERBOSE: "
+DKVERBOSE_TAG="BASH VERBOSE: "
 ##################################################################################
 # dk_verbose(<message>)
 #

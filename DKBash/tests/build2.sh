@@ -280,9 +280,9 @@ if [ $# -ne 0 ]; then
 		echo ""
 		echo -e "-> returned false"
 	fi
-	dk_wait_for_key
+	dk_pause
 	exit
 fi
 main
 
-dk_wait_for_key
+dk_pause

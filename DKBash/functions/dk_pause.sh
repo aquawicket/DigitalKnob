@@ -6,7 +6,8 @@
 #	Pause execution and wait for keypress to continue
 #
 dk_pause() {
-	dk_verbose "dk_pause($@)"
+	#dk_verbose "dk_pause($@)"
+	
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	read -rp 'Press enter to continue...' key

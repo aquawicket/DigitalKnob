@@ -72,6 +72,9 @@ function(dk_executeProcess)
 	endif()
 	
 	if(NOT WORKING_DIRECTORY)
+		if(NOT CURRENT_DIR)
+			dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
+		endif()
 		set(WORKING_DIRECTORY ${CURRENT_DIR})
 		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
 	endif()

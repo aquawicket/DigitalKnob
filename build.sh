@@ -952,7 +952,7 @@ dk_error () {
 	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
-	dk_wait_for_key
+	dk_pause
 	exit 1
 }
 
@@ -1602,11 +1602,11 @@ dk_validate_branch () {
 
 
 ##################################################################################
-# dk_wait_for_key()
+# dk_pause()
 #
 #
-dk_wait_for_key () {
-	dk_verbose "dk_wait_for_key($*)"
+dk_pause () {
+	dk_verbose "dk_pause($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	read -rp 'Press enter to continue...' key
@@ -2443,7 +2443,7 @@ DK_TRY_CATCH () {
 
 	if [ "$err_status" -ne "0" ]; then
 		echo "ERROR_STATUS: $err_status"
-		dk_wait_for_key
+		dk_pause
 		dk_error "test"
 	fi
 }

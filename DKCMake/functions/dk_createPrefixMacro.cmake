@@ -1,5 +1,7 @@
 include_guard()
+dk_load(dk_eval)
 dk_load(DKDEBUGFUNC)
+
 
 ###############################################################################
 # dk_createPrefixMacro(func prefix_list)

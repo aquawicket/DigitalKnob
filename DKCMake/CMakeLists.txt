@@ -61,7 +61,7 @@ set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 
 
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
-
+dk_pause()
 
 
 dk_load(dk_dumpAllVariables)

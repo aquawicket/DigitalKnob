@@ -35,5 +35,6 @@ function(dk_error msg)
 
 	if(PAUSE_ON_ERRORS)
 		dk_pause()
+		dk_wait()
 	endif()
 endfunction()

@@ -18,4 +18,4 @@ else
 	echo "2two2 does not contain tow"
 fi
 
-dk_wait_for_key
+dk_pause

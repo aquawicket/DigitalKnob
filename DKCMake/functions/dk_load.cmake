@@ -8,7 +8,7 @@ include_guard()
 #	@fn	- TODO
 #
 macro(dk_load var)
-	#message("dk_load(${var})")
+	message("dk_load(${var})")
 	string(STRIP ${var} fn)
 	
 	get_filename_component(name_we "${fn}" NAME_WE)
@@ -39,7 +39,7 @@ endmacro()
 macro(dk_parseFunctionsAndLoad fn fpath)
 	#message("dk_parseFunctionsAndLoad(${ARGV})")
 	if(NOT "${fn}" MATCHES "[Dd][Kk]_[A-Za-z0-9_]")
-		message(WARNING "${fn} is NOT a valid function name")
+		#message(WARNING "${fn} is NOT a valid function name")
 	endif()
 	
 	if(EXISTS ${DKCMAKE_DIR}/functions/${fpath}.cmake)
