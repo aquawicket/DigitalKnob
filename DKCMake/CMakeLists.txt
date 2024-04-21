@@ -57,11 +57,10 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
+
 
 
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
-dk_pause()
 
 
 dk_load(dk_dumpAllVariables)

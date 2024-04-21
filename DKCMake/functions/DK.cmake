@@ -1,11 +1,9 @@
 include_guard()
 
 ###### Global Script Variables ######
-set(ENABLE_dk_debug			1		CACHE INTERNAL "")	# enable dk_debug() functions
-set(ENABLE_dk_verbose		1		CACHE INTERNAL "")	# enable dk_verbose() functions
 
 
-
+set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 if(CMAKE_SCRIPT_MODE_FILE)
 	message("")
 	message("########################################################")

@@ -11,7 +11,9 @@ endif()
 if(USE_COLOR)
 	string(ASCII 27 ESC)
 	set(clr         "${ESC}[0m")   #reset color
-	set(ColourBold  "${ESC}[1m")
+	set(bold		"${ESC}[1m")
+	set(underline	"${ESC}[4m")
+	set(inverse		"${ESC}[7m")
 
 	# Regular Colors
 	set(black        "${ESC}[30;100m")
@@ -64,12 +66,12 @@ if(USE_COLOR)
 	set(U_white      "${ESC}[4;37m")
 
 	# Background
-	set(BG_black     "${ESC}[40m")
-	set(BG_red       "${ESC}[41m")
+	set(BG_black     "${ESC}[30;40m")
+	set(BG_red       "${ESC}[30;41m")
 	set(BG_green     "${ESC}[30;42m")
 	set(BG_yellow    "${ESC}[30;43m")
-	set(BG_blue      "${ESC}[44m")
-	set(BG_magenta   "${ESC}[45m")
+	set(BG_blue      "${ESC}[30;44m")
+	set(BG_magenta   "${ESC}[30;45m")
 	set(BG_cyan      "${ESC}[30;46m")
 	set(BG_white     "${ESC}[30;47m")
 

@@ -7,7 +7,7 @@ include_guard()
 #
 function(dk_pause) 
 	#DKDEBUGFUNC(${ARGV})
-	#dk_debug("dk_pause(${ARGV})")
+	dk_debug("dk_pause(${ARGV})")
 	
 	#if(${ARGC} GREATER 0) dk_error "Incorrect number of parameters" endif()
 	
@@ -25,10 +25,10 @@ function(dk_pause)
 		if(NOT DKBASH_DIR)
 			dk_getDKPaths()
 		endif()
-		#dk_debug("bash -c 'source ${DKBASH_DIR}/functions/dk_pause.sh; dk_pause'")
+		#execute_process(COMMAND bash -c 'source ${DKBASH_DIR}/functions/dk_pause.sh; dk_pause')
 		execute_process(COMMAND ${DKBASH_DIR}/functions/dk_pause.sh & dk_pause)
 		return()
 	endif()
 		
-	dk_error("dk_pause() failed!")
+	dk_error("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
 endfunction()

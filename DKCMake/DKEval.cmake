@@ -28,6 +28,7 @@ CMAKE_POLICY(SET CMP0007 NEW) # https://cmake.org/cmake/help/latest/policy/CMP00
 
 include(${CMAKE_CURRENT_LIST_DIR}/functions/DK.cmake)
 
+dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)

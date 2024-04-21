@@ -26,11 +26,11 @@ set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the current cmake file
 set(DELETE_DOWNLOADS			0		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
-set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
+set(ENABLE_dk_todo				1		CACHE INTERNAL "")	# enable dk_todo() functions
 #set(ENABLE_dk_debug			1		CACHE INTERNAL "")	# enable dk_debug() functions
 #set(ENABLE_dk_verbose			1		CACHE INTERNAL "")	# enable dk_verbose() functions
-set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
-set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
+#set(CONTINUE_ON_ERRORS			1		CACHE INTERNAL "")	# don't halt cmake build script on errors
+#set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
 set(PRINT_CALL_DETAILS 			0		CACHE INTERNAL "")	# print function call details

@@ -1,0 +1,58 @@
+include_guard()
+
+
+if(NOT DEFINED ENABLE_dk_fixme)
+	set(ENABLE_dk_fixme 1 CACHE INTERNAL "")
+endif()
+if(NOT DEFINED TRACE_ON_FIXME)
+	set(TRACE_ON_FIXME 0 CACHE INTERNAL "")
+endif()
+if(NOT DEFINED PAUSE_ON_FIXME)
+	set(PAUSE_ON_FIXME 0 CACHE INTERNAL "")
+endif()
+if(NOT DEFINED HALT_ON_FIXME)
+	set(HALT_ON_FIXME 0 CACHE INTERNAL "")
+endif()
+###############################################################################
+# dk_fixme(msg)
+#
+#	@msg (optional)	- A message to print
+#
+function(dk_fixme msg)
+	#DKDEBUGFUNC(${ARGV})
+
+	if(NOT ENABLE_dk_fixme)
+		return()
+	endif()
+	
+	dk_get_option(HALT ${ARGV})
+	dk_get_option(NO_HALT ${ARGV})
+	dk_get_option(TRACE ${ARGV})
+	dk_get_option(NO_TRACE ${ARGV})
+	dk_get_option(PAUSE ${ARGV})
+	dk_get_option(NO_PAUSE ${ARGV})
+	
+	dk_printvar(msg)
+	#dk_updateLogInfo()
+	#message("${H_black}${STACK_HEADER}${clr}${yellow}${msg}${clr}")	
+	if(HALT_ON_FIXME OR HALT AND NOT NO_HALT)
+		message("${yellow}*** HALT_ON_FIXME ***${clr}")
+		message("${red}")
+		message(FATAL_ERROR "${yellow}FIXME:${clr} ${H_yellow}${msg}${clr}${red}")
+		message("${clr}")
+		#dk_exit(1)
+	elseif(TRACE_ON_FIXME OR TRACE AND NOT NO_TRACE)
+		message("${yellow}")
+		message(WARNING "FIXME:${clr} ${H_yellow}${msg}${clr}${yellow}")
+		message("${clr}")
+	else()
+		message("${yellow}")
+		message("FIXME:${clr} ${H_yellow}${msg}${clr}${yellow}")
+		message("${clr}")
+	endif()
+	
+	if(PAUSE_ON_FIXME OR PAUSE AND NOT NO_PAUSE)
+		message("${yellow}*** PAUSE_ON_FIXME ***${clr}")
+		dk_pause()
+	endif()
+endfunction()

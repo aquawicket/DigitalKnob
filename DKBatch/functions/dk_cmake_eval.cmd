@@ -1,5 +1,5 @@
 ::dk_include_guard()
-
+::@echo on
 ::################################################################################
 ::# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 ::#
@@ -17,10 +17,10 @@
     set DKRETURN=%2
 	set DKVARS=%3
 	:: remove double quotes
-    if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:"=%%
+    ::if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:"=%%
 	if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-	if [%DKRETURN%] NEQ []  call set DKRETURN=%%DKRETURN:"=%%
-	if [%DKVARS%] NEQ []    call set DKVARS=%%DKVARS:"=%%
+	::if [%DKRETURN%] NEQ []  call set DKRETURN=%%DKRETURN:"=%%
+	::if [%DKVARS%] NEQ []    call set DKVARS=%%DKVARS:"=%%
 	
 	::echo DKCOMMAND = %DKCOMMAND%
 	::echo DKRETURN = %DKRETURN%
@@ -32,9 +32,9 @@
 	
 	::### build cmake command ###
 	set "CMAKE_ARGS="
-	if "%DKCOMMAND%" NEQ "" set CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%DKCOMMAND%"
-	if "%DKRETURN%" NEQ ""  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
-	if "%DKVARS%" NEQ ""    set CMAKE_ARGS=%CMAKE_ARGS% "%DKVARS%"
+	if %DKCOMMAND% NEQ ""  call set CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%"
+	if "%DKRETURN%" NEQ "" call set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%%DKRETURN:"=%%"
+	if "%DKVARS%" NEQ ""   call set CMAKE_ARGS=%CMAKE_ARGS% "%%DKVARS:"=%%"
 	set CMAKE_ARGS=%CMAKE_ARGS% "-P"
 	set CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%"
     ::echo "%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/DKEval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
