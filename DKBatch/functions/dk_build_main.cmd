@@ -49,8 +49,6 @@ setlocal enableDelayedExpansion
 	
 ::	call dk_debug SHLVL
 ::  call dk_debug MSYSTEM
-	call dk_debug SCRIPT_NAME
-	call dk_debug SCRIPT_DIR
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_get_host_triple

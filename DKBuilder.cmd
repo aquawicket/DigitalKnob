@@ -1,30 +1,17 @@
 @echo off
-cls
+::cls
 echo %~0(%*)
 if "%*" NEQ "" call %* 
 
-set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
-set "CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip"
-set "CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
-set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz"
-::set "CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz"
-set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz"
-set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
 
-set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
-set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
-
-
-:::::: Load DK Function files (DK_INIT) ::::::
+:::::: DK_INIT ::::::
 call "DKBatch/functions/DK.cmd"
 
-echo.
-echo **** GLOBAL VARIABLES ***
-echo DKBATCH_DIR = %DKBATCH_DIR%
+
+:::::: Global variables ::::::
 echo SCRIPT_PATH = %SCRIPT_PATH%
-echo SCRIPT_DIR = %SCRIPT_DIR%
-echo SCRIPT_NAME = %SCRIPT_NAME%
+echo DKBATCH_DIR = %DKBATCH_DIR%
+
 
 :::::: Load Main Program ::::::
-::if "%*" NEQ "" call %* 
 dk_build_main %*

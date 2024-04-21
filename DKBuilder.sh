@@ -1,14 +1,17 @@
 #!/bin/sh
-clear && clear
+#clear && clear
 echo "$0($*)"
+[ -n "$@" ] && "$@"
 
 
-###### Load DK Function files (DKINIT) ######
+###### DK_INIT ######
 . DKBash/functions/DK.sh
 
-	
-###### Load Main Program ######
-#! [ "$@" = "" ] && "$@"
-dk_build_main "$*"
 
-exec $SHELL		# keep terminal open
+###### Global variables ######
+echo SCRIPT_PATH = $SCRIPT_PATH
+echo DKBASH_DIR = $DKBASH_DIR
+
+
+###### Load Main Program ######
+dk_build_main "$*"

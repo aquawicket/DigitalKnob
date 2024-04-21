@@ -10,23 +10,7 @@ $(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and ot
 #$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 #$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
-##################################################################################
-# dk_realpath()
-#
-#
-dk_realpath() (
-  OURPWD=$PWD
-  cd "$(dirname "$1")"
-  LINK=$(readlink "$(basename "$1")")
-  while [ "$LINK" ]; do
-    cd "$(dirname "$LINK")"
-    LINK=$(readlink "$(basename "$1")")
-  done
-  REALPATH="$PWD/$(basename "$1")"
-  cd "$OURPWD"
-  echo "$REALPATH"
-)
-	
+. DKBash/functions/dk_realpath.sh
 SCRIPT_PATH=$(dk_realpath $0)
 [ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
@@ -35,9 +19,10 @@ SCRIPT_NAME=$(basename $SCRIPT_PATH)
 #export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 ###### Reload Main Script with bash ######
-if [ ${RELOAD_WITH_BASH-1} = 1 ]; then # && ! dk_defined BASH; then
+if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 	export RELOAD_WITH_BASH=0
 	if [ -n "$(command -v bash)" ]; then
+		echo "reloading with /bin/bash . . ."
 		exec /bin/bash "$0"
 	else
 		echo ""
@@ -50,11 +35,11 @@ fi
 [ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
 
 ###### Global Script Variables ######
-export LOG_VERBOSE=1
-export LOG_DEBUG=1
-export TRACE_ON_WARNINGS=0
-export HALT_ON_WARNINGS=1
-export CONTINUE_ON_ERRORS=0
+#export LOG_VERBOSE=1
+#export LOG_DEBUG=1
+#export TRACE_ON_WARNINGS=1
+#export HALT_ON_WARNINGS=0
+#export CONTINUE_ON_ERRORS=0
 readonly true=0
 readonly false=1
 
@@ -78,7 +63,6 @@ export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pw
 export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 
 ###### Script loader ######
-#. ${DKBASH_DIR}/functions/array.sh
 . ${DKBASH_DIR}/functions/dk_load.${ext}
 #dk_load $SCRIPT_PATH
 dk_load dk_color

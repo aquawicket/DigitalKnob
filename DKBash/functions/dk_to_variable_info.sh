@@ -16,13 +16,18 @@
 #	myVar = 'this is my variable'
 #
 dk_to_variable_info () {
-	#echo "dk_to_variable_info($*)"
-	
+	#dk_verbose "dk_to_variable_info($*)"
+	#dk_echo "${cyan}dk_to_variable_info($*)${clr}"
 	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
-	eval name='$'{$1}
-	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	
+	#echo "1 = $1"
+	eval name='$'{$1}
+	#echo "dk_to_variable_info():name1 = $name"
+	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	#echo "${green}$name is [:word:]${clr}"
+
 	if dk_defined $name; then
+		#echo "dk_to_variable_info():name = $name"
 		eval value='$'{$name}
 		eval "$1=\"$name = '${value}'\""
 	else

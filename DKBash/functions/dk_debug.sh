@@ -1,5 +1,8 @@
 # dk_include_guard()
 
+
+[ -z $LOG_DEBUG ] && LOG_DEBUG=1
+DKDEBUG_TAG="  DEBUG: "
 ##################################################################################
 # dk_debug(<message>)
 #
@@ -12,8 +15,7 @@ dk_debug () {
 	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
 	[ $LOG_DEBUG -eq 1 ] || return 0
-	
-	msg="$1"
-	dk_to_variable_info msg
-	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
+	debug_msg="$1"
+	dk_to_variable_info debug_msg
+	dk_echo "${blue}${DKDEBUG_TAG}${debug_msg}${clr}"
 }
