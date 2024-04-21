@@ -4,7 +4,7 @@ dk_depend(DKCef)
 dk_assets(DKCefChild)
 
 #dk_set(QUEUE_BUILD ON)
-dk_addToPluginList(DKCefChild)
+dk_add_to_plugin_list(DKCefChild)
 #dk_executable(DKCefChild)
 
 
