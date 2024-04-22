@@ -36,8 +36,12 @@
     call dk_killProcess adb.exe
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
-    copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" dk_resetAll wipe
+	xcopy /s /e /Y %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch\
+    copy /Y %SCRIPT_PATH% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
+    ::start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" dk_resetAll wipe
+	start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%"
+	pause
+	exit
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
