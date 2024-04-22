@@ -15,17 +15,17 @@ dk_install () {
 	
 	dk_info "dk_installing $1"
 
-	if dk_command_exists brew; then
+	if dk_commandExists brew; then
 		dk_call $SUDO brew dk_install "$1"
-	elif dk_command_exists apt; then
+	elif dk_commandExists apt; then
 		dk_call $SUDO apt -y dk_install "$1"
-	elif dk_command_exists apt-get; then
+	elif dk_commandExists apt-get; then
 		dk_call $SUDO apt-get -y dk_install "$1"
-	elif dk_command_exists pkg; then
+	elif dk_commandExists pkg; then
 		dk_call $SUDO pkg dk_install "$1"
-	elif dk_command_exists pacman; then
+	elif dk_commandExists pacman; then
 		dk_call $SUDO pacman -S "$1" --noconfirm
-	elif dk_command_exists tce-load; then
+	elif dk_commandExists tce-load; then
 		dk_call $SUDO tce-load -wi "$1"
 	else
 		dk_error "ERROR: no package managers found"

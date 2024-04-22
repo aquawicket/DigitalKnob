@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::################################################################################
-::# dk_create_cache()
+::# dk_createCache()
 ::#
 ::#
-:dk_create_cache () {
-	call dk_verbose "dk_create_cache(%*)"
+:dk_createCache () {
+	call dk_verbose "dk_createCache(%*)"
 	
     echo creating cache...
     ::call dk_debug APP

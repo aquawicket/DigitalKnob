@@ -1,13 +1,13 @@
 ::dk_include_guard()
 ::@echo on
 ::################################################################################
-::# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+::# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 ::#
 ::#
-:dk_cmake_eval () {
-	call dk_verbose "dk_cmake_eval(%*)"
+:dk_cmakeEval () {
+	call dk_verbose "dk_cmakeEval(%*)"
 	
-    if [%1]==[]                  call dk_error "dk_cmake_eval() parameter1 is invalid"
+    if [%1]==[]                  call dk_error "dk_cmakeEval() parameter1 is invalid"
 	if [%CMAKE_EXE%]==[]         call dk_validate_cmake
     if not exist "%CMAKE_EXE%"   call dk_error "Could not locate CMAKE_EXE" 
 	if [%DKCMAKE_DIR%]==[]       call dk_validate_branch
@@ -89,5 +89,5 @@
     ::err contains all of the lines
     ::echo %err%
 
-    call dk_check_error
+    call dk_checkError
 goto:eof

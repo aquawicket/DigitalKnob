@@ -8,12 +8,12 @@
 	call dk_verbose "dk_validate_emscripten(%*)"
 	
     if "%DKIMPORTS_DIR%"=""   call dk_validate_branch
-    call dk_cmake_eval "dk_load('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     call dk_debug EMSDK
     call dk_debug EMSDK_ENV
     call dk_debug EMSDK_GENERATOR
     call dk_debug EMSDK_TOOLCHAIN_FILE
     call dk_debug EMSDK_C_COMPILER
     call dk_debug EMSDK_CXX_COMPILER
-    call dk_check_error
+    call dk_checkError
 goto:eof

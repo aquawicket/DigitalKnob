@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::################################################################################
-::# dk_command_exists(<command> <result>)
+::# dk_commandExists(<command> <result>)
 ::#
 ::#
-:dk_command_exists () {
-	call dk_verbose "dk_command_exists(%*)"
+:dk_commandExists () {
+	call dk_verbose "dk_commandExists(%*)"
 	
     set "command=%1"
     cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"

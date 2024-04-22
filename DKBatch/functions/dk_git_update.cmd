@@ -16,12 +16,12 @@
     if NOT exist "%DKBRANCH_DIR%\.git" (
         "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
     )
-    call dk_check_error
+    call dk_checkError
 
     cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" pull --all
     "%GIT_EXE%" checkout -- .
-    call dk_check_error
+    call dk_checkError
 
     "%GIT_EXE%" checkout %DKBRANCH%
     if NOT "%ERRORLEVEL%" == "0" (
@@ -30,5 +30,5 @@
         "%GIT_EXE%" push --set-upstream origin %DKBRANCH%
     )
 
-    call dk_check_error
+    call dk_checkError
 goto:eof

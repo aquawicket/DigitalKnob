@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::####################################################################
-::# dk_build_release()
+::# dk_buildRelease()
 ::#
 ::#
-:dk_build_release () {
-	call dk_verbose "dk_build_release(%*)"
+:dk_buildRelease () {
+	call dk_verbose "dk_buildRelease(%*)"
 	
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"

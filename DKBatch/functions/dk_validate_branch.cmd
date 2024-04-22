@@ -42,5 +42,5 @@
     ::      )
     ::      exit
     ::)
-    call dk_check_error
+    call dk_checkError
 goto:eof

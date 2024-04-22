@@ -14,4 +14,4 @@ echo DKBATCH_DIR = %DKBATCH_DIR%
 
 
 :::::: Load Main Program ::::::
-dk_build_main %*
+dk_buildMain %*

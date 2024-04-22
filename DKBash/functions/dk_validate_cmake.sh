@@ -81,7 +81,7 @@ dk_validate_cmake () {
 		CMAKE_EXE=$(command -v cmake)
 		CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_debug CMAKE_EXE
-		if ! dk_command_exists cmake; then
+		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)

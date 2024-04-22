@@ -34,7 +34,7 @@ dk_get_host_triple () {
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
-	if dk_command_exists clang; then  
+	if dk_commandExists clang; then  
 		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_debug CLANG_TRIPLE	
 
 		remainder="$CLANG_TRIPLE"
@@ -53,7 +53,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_debug HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_debug HOST_ENV
 	fi
-	if dk_command_exists gcc; then
+	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_debug GCC_TRIPLE
 
 		remainder="$GCC_TRIPLE"
@@ -72,7 +72,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
 	fi
-	if dk_command_exists bash; then
+	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
 		dk_debug BASH_TRIPLE
 
@@ -93,7 +93,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_debug HOST_ENV
 	fi	
 	
-	if dk_command_exists uname; then
+	if dk_commandExists uname; then
 		
 		UNAME="$(uname)"
 		dk_debug UNAME	

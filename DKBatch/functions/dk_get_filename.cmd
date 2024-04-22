@@ -22,5 +22,5 @@
     )
     
     ::echo dk_get_filename(%*) -^> %2 = %val%
-    call dk_check_error
+    call dk_checkError
 goto:eof

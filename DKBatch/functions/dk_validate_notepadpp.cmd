@@ -41,5 +41,5 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
 	   
     if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find notepad++.exe"
         
-    call dk_check_error
+    call dk_checkError
 goto:eof

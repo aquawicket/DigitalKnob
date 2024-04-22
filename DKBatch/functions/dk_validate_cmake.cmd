@@ -52,5 +52,5 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     
     if NOT exist "%CMAKE_EXE%"   call dk_error "cannot find cmake"
         
-    call dk_check_error
+    call dk_checkError
 goto:eof

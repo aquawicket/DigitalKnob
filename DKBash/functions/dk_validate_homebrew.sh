@@ -12,7 +12,7 @@ dk_validate_homebrew () {
 		return
 	fi
 		
-	if ! dk_command_exists brew; then
+	if ! dk_commandExists brew; then
 		dk_info "dk_installing Homebrew"
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/dk_install/master/dk_install)"
 		# https://github.com/Homebrew/brew/issues/10368

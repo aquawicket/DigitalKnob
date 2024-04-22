@@ -8,7 +8,7 @@ dk_validate_git () {
 	dk_verbose "dk_validate_git($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_command_exists git; then
+	if ! dk_commandExists git; then
 		dk_install git
 	fi
 	

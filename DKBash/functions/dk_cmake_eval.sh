@@ -1,13 +1,13 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 #
 #			
-dk_cmake_eval () {
-	dk_verbose "dk_cmake_eval($*)"
+dk_cmakeEval () {
+	dk_verbose "dk_cmakeEval($*)"
 	
-	[ -z "$1" ]          && dk_error "dk_cmake_eval() parameter 1 is invalid"
+	[ -z "$1" ]          && dk_error "dk_cmakeEval() parameter 1 is invalid"
 	[ -z "$CMAKE_EXE" ]  && dk_validate_cmake
 	[ -z "$DKCMAKE_DIR"] && dk_validate_branch
 	

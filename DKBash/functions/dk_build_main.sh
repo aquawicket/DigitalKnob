@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_build_main()
+# dk_buildMain()
 #
 #
-dk_build_main () {
-	dk_verbose "dk_build_main($*)"
+dk_buildMain () {
+	dk_verbose "dk_buildMain($*)"
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
@@ -52,7 +52,7 @@ dk_build_main () {
 		if [ -z "${TARGET_OS-}" ];  then dk_pick_os;      continue; fi
 		if [ -z "${TYPE-}" ];       then dk_pick_type;    continue; fi
 		
-		dk_create_cache
+		dk_createCache
 		dk_generate	
 		dk_build
 		

@@ -7,7 +7,7 @@
 :dk_validate_openjdk () {
 	call dk_verbose "dk_validate_openjdk(%*)"
 	
-    call dk_cmake_eval "dk_load('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
 	call dk_debug OPENJDK
-    call dk_check_error
+    call dk_checkError
 goto:eof

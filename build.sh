@@ -62,16 +62,16 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 
 
 ##################################################################################
-# dk_build_main()
+# dk_buildMain()
 #
 #
-dk_build_main () {
-	dk_verbose "dk_build_main($*)"
+dk_buildMain () {
+	dk_verbose "dk_buildMain($*)"
 
 	echo "BASH = $BASH"
 	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 		export RELOAD_WITH_BASH=0
-		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+		dk_commandExists bash && exec /bin/bash "$0" # Change to bash
 	fi
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
@@ -138,7 +138,7 @@ dk_build_main () {
 		if [ -z "${TARGET_OS-}" ];  then dk_pick_os;      continue; fi
 		if [ -z "${TYPE-}" ];       then dk_pick_type;    continue; fi
 		
-		dk_create_cache
+		dk_createCache
 		
 		dk_generate
 		
@@ -855,7 +855,7 @@ dk_validate_cmake () {
 		
 		CMAKE_EXE=$(command -v cmake)
 		dk_debug CMAKE_EXE
-		if ! dk_command_exists cmake; then
+		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
@@ -1187,11 +1187,11 @@ dk_string_contains () {
 
 
 ##################################################################################
-# dk_command_exists(<command>)
+# dk_commandExists(<command>)
 #
 #
-dk_command_exists () {
-	dk_verbose "dk_command_exists($*)"
+dk_commandExists () {
+	dk_verbose "dk_commandExists($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	[ -n "$(command -v "$1")" ]
@@ -1391,7 +1391,7 @@ dk_validate_git () {
 	dk_verbose "dk_validate_git($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_command_exists git; then
+	if ! dk_commandExists git; then
 		dk_install git
 	fi
 	
@@ -1414,7 +1414,7 @@ dk_validate_homebrew () {
 		return
 	fi
 		
-	if ! dk_command_exists brew; then
+	if ! dk_commandExists brew; then
 		dk_info "dk_installing Homebrew"
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/dk_install/master/dk_install)"
 		# https://github.com/Homebrew/brew/issues/10368
@@ -1435,26 +1435,26 @@ dk_package_installed () {
 	dk_verbose "dk_package_installed($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	if dk_command_exists dpkg-query; then
+	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
 			return $true
 		fi
-	elif dk_command_exists brew; then
+	elif dk_commandExists brew; then
 		if brew list "$1" &>/dev/null; then
 			return $true
 		fi
-	elif dk_command_exists apt; then
+	elif dk_commandExists apt; then
 		dk_error "dk_package_installed() apt-get not implemented"
-	elif dk_command_exists apt-get; then
+	elif dk_commandExists apt-get; then
 		dk_error "dk_package_installed() apt-get not implemented"
-	elif dk_command_exists pkg; then
+	elif dk_commandExists pkg; then
 		dk_error "dk_package_installed() pkg not implemented"
-	elif dk_command_exists pacman; then
+	elif dk_commandExists pacman; then
 		if pacman -Qs "$1" > /dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
-	elif dk_command_exists tce-load; then
+	elif dk_commandExists tce-load; then
 		#dk_error "dk_package_installed() tce-load not implemented"
 		return $false
 	else
@@ -1479,17 +1479,17 @@ dk_install () {
 	
 	dk_info "dk_installing $1"
 
-	if dk_command_exists brew; then
+	if dk_commandExists brew; then
 		dk_call $SUDO brew dk_install "$1"
-	elif dk_command_exists apt; then
+	elif dk_commandExists apt; then
 		dk_call $SUDO apt -y dk_install "$1"
-	elif dk_command_exists apt-get; then
+	elif dk_commandExists apt-get; then
 		dk_call $SUDO apt-get -y dk_install "$1"
-	elif dk_command_exists pkg; then
+	elif dk_commandExists pkg; then
 		dk_call $SUDO pkg dk_install "$1"
-	elif dk_command_exists pacman; then
+	elif dk_commandExists pacman; then
 		dk_call $SUDO pacman -S "$1" --noconfirm
-	elif dk_command_exists tce-load; then
+	elif dk_commandExists tce-load; then
 		dk_call $SUDO tce-load -wi "$1"
 	else
 		dk_error "ERROR: no package managers found"
@@ -1505,7 +1505,7 @@ dk_validate_package () {
 	dk_verbose "dk_validate_package($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_command_exists "$1"; then
+	if ! dk_commandExists "$1"; then
 		dk_install "$2"
 	fi
 }
@@ -1653,7 +1653,7 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_msys2($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	dk_debug MSYS2
 #}
 
@@ -1666,7 +1666,7 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_make($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	dk_debug MAKE_PROGRAM
 #}
 
@@ -1679,7 +1679,7 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_emscripten($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	dk_debug EMSDK
 #	dk_debug EMSDK_ENV
 #	dk_debug EMSDK_GENERATOR
@@ -1697,7 +1697,7 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_android_ndk($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	dk_debug ANDROID_NDK
 #	dk_debug ANDROID_GENERATOR
 #	dk_debug ANDROID_TOOLCHAIN_FILE
@@ -1716,7 +1716,7 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_clang($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	dk_debug CLANG_C_COMPILER
 #	dk_debug CLANG_CXX_COMPILER
 #}
@@ -1730,21 +1730,21 @@ dk_delete_temp_files () {
 #	dk_verbose "dk_validate_gcc($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmake_eval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+#	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	dk_debug GCC_C_COMPILER
 #	dk_debug GCC_CXX_COMPILER
 #}
 
 
 ##################################################################################
-# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 #
 #			
-dk_cmake_eval () {
-	dk_verbose "dk_cmake_eval($*)"
+dk_cmakeEval () {
+	dk_verbose "dk_cmakeEval($*)"
 	
 	if [ -z "$1" ]; then
-		dk_error "dk_cmake_eval() parameter 1 is invalid"
+		dk_error "dk_cmakeEval() parameter 1 is invalid"
 	fi
 	
 	commands="$1"
@@ -1754,14 +1754,14 @@ dk_cmake_eval () {
 	dk_debug DKCOMMAND
 	
 	if [ -n "$variables" ]; then
-		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmake_eval.cmake
+		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
 		if dk_file_exists "$DKCMAKE_DIR"/cmake_vars.sh; then
 	    	dk_info "executing cmake_vars.sh"
 			. "$DKCMAKE_DIR"/cmake_vars.sh
 			#rm $DKCMAKE_DIR/cmake_vars.sh
 		fi
 	else
-		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/dk_cmake_eval.cmake
+		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
 	fi
 	#dk_debug return code: $?
 }
@@ -2058,11 +2058,11 @@ dk_enter_manually () {
 
 
 ##################################################################################
-# dk_create_cache()
+# dk_createCache()
 #
 #
-dk_create_cache () {
-	dk_verbose "dk_create_cache($*)"
+dk_createCache () {
+	dk_verbose "dk_createCache($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo "creating cache..."
@@ -2183,7 +2183,7 @@ dk_get_host_triple () {
 	#[ -e /proc/cpuinfo ] && dk_debug "\$(tr -d '\0' </proc/cpuinfo) = $(tr -d '\0' </proc/cpuinfo)"
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
-	if dk_command_exists clang; then  
+	if dk_commandExists clang; then  
 		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_debug CLANG_TRIPLE	
 
 		remainder="$CLANG_TRIPLE"
@@ -2202,7 +2202,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_debug HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_debug HOST_ENV
 	fi
-	if dk_command_exists gcc; then
+	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_debug GCC_TRIPLE
 
 		remainder="$GCC_TRIPLE"
@@ -2221,7 +2221,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
 		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
 	fi
-	if dk_command_exists bash; then
+	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
 		dk_debug BASH_TRIPLE
 
@@ -2242,7 +2242,7 @@ dk_get_host_triple () {
 		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_debug HOST_ENV
 	fi	
 	
-	if dk_command_exists uname; then
+	if dk_commandExists uname; then
 		
 		UNAME="$(uname)"
 		dk_debug UNAME	
@@ -2485,9 +2485,9 @@ dk_get_shell_type () {
 
 echo "* = $*"
 #[ "$*" = "" ] || DK_TRY_CATCH "$@"
-#DK_TRY_CATCH dk_build_main "$@"
+#DK_TRY_CATCH dk_buildMain "$@"
 [ "$*" = "" ] || "$@"
-dk_build_main "$@"
+dk_buildMain "$@"
 
 
 

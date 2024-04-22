@@ -2,18 +2,18 @@
 setlocal enableDelayedExpansion
 
 ::####################################################################
-::# dk_build_main()
+::# dk_buildMain()
 ::#
 ::#
-:dk_build_main () {
-	call dk_verbose "dk_build_main(%*)"	
+:dk_buildMain () {
+	call dk_verbose "dk_buildMain(%*)"	
 
 ::dk_verbose "%var%"
 
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 ::		export RELOAD_WITH_BASH=0
-::		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+::		dk_commandExists bash && exec /bin/bash "$0" # Change to bash
 ::	fi
 ::	::export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 ::
@@ -81,7 +81,7 @@ setlocal enableDelayedExpansion
 		if "%TARGET_OS%"==""  call dk_pick_os     & goto:while_loop
 		if "%TYPE%"==""       call dk_pick_type   & goto:while_loop
 
-		call dk_create_cache
+		call dk_createCache
 		
 		call dk_generate
 		

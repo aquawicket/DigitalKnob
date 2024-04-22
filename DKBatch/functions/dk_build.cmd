@@ -14,9 +14,9 @@
     echo ###########################################################
     echo.
 	
-	if %TYPE%==All      call dk_build_all
-	if %TYPE%==Release  call dk_build_release
-	if %TYPE%==Debug    call dk_build_debug
+	if %TYPE%==All      call dk_buildAll
+	if %TYPE%==Release  call dk_buildRelease
+	if %TYPE%==Debug    call dk_buildDebug
 	
 	echo.
     echo ###########################################################        

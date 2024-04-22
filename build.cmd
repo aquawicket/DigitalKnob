@@ -63,16 +63,16 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 
 
 ::####################################################################
-::# dk_build_main()
+::# dk_buildMain()
 ::#
 ::#
-:dk_build_main () {
-	call:dk_verbose "dk_build_main(%*)"
+:dk_buildMain () {
+	call:dk_verbose "dk_buildMain(%*)"
 	
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 ::		export RELOAD_WITH_BASH=0
-::		dk_command_exists bash && exec /bin/bash "$0" # Change to bash
+::		dk_commandExists bash && exec /bin/bash "$0" # Change to bash
 ::	fi
 ::	::export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 ::
@@ -139,7 +139,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 		if "%TARGET_OS%"==""  call:dk_pick_os     & goto:while_loop
 		if "%TYPE%"==""       call:dk_pick_type   & goto:while_loop
 
-		call:dk_create_cache
+		call:dk_createCache
 		
 		call:dk_generate
 		
@@ -165,7 +165,7 @@ goto:eof
     call:dk_read_cache
 
     echo.
-    call:dk_check_git_remote
+    call:dk_checkGitRemote
 
     echo.
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -192,7 +192,7 @@ goto:eof
     if "%choice%"=="4" call:dk_pull_assets
     if "%choice%"=="5" call:dk_reset_all
     if "%choice%"=="6" call:dk_remove_all
-    if "%choice%"=="7" call:dk_clear_screen
+    if "%choice%"=="7" call:dk_clearScreen
     if "%choice%"=="8" call:dk_deleteCache & call:dk_delete_temp_files
     if "%choice%"=="9" call:dk_reload
     if "%choice%"=="10" exit
@@ -239,7 +239,7 @@ goto:eof
     if "%choice%"=="6"  set "APP=DKDomTest"    & goto:eof
     if "%choice%"=="7"  set "APP=DKTestAll"    & goto:eof
     if "%choice%"=="8"  call:dk_enter_manually    & goto:eof
-    if "%choice%"=="9" call:dk_clear_screen       & goto:eof
+    if "%choice%"=="9" call:dk_clearScreen       & goto:eof
     if "%choice%"=="10" call:dk_reload            & goto:eof
     if "%choice%"=="11" set "UPDATE="          & goto:eof
     if "%choice%"=="12" exit                   & goto:eof
@@ -342,7 +342,7 @@ goto:eof
     if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
     if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
 	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
-    if "%choice%"=="37" call:dk_clear_screen                  & goto:eof
+    if "%choice%"=="37" call:dk_clearScreen                  & goto:eof
     if "%choice%"=="38" set "APP="                         & goto:eof
     if "%choice%"=="39" exit                               & goto:eof
     echo %choice%: invalid selection, please try again
@@ -376,7 +376,7 @@ goto:eof
     if "%choice%"=="2" set "TYPE=Release"  		& goto:eof
     if "%choice%"=="3" set "TYPE=All"      		& goto:eof
 	if "%choice%"=="4" set "TYPE=none"     		& goto:eof
-    if "%choice%"=="5" call:dk_clear_screen		& goto:eof
+    if "%choice%"=="5" call:dk_clearScreen		& goto:eof
     if "%choice%"=="6" set "TARGET_OS="			& goto:eof
     if "%choice%"=="7" exit						& goto:eof
         
@@ -386,13 +386,13 @@ goto:eof
 
 
 ::####################################################################
-::# dk_append_cmake_args(<string>)
+::# dk_appendCmakeArgs(<string>)
 ::#
 ::#
-:dk_append_cmake_args () {
-	call:dk_verbose "dk_append_cmake_args(%*)"
+:dk_appendCmakeArgs () {
+	call:dk_verbose "dk_appendCmakeArgs(%*)"
 	
-    if "%*" == "" echo ERROR: dk_append_cmake_args is empty! & goto:eof
+    if "%*" == "" echo ERROR: dk_appendCmakeArgs is empty! & goto:eof
     set CMAKE_ARGS=%CMAKE_ARGS% "%*"
 	echo appended %*
 goto:eof
@@ -443,40 +443,40 @@ goto:eof
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    ::if %TYPE%==Debug           call:dk_append_cmake_args -DDEBUG=ON & call:dk_append_cmake_args -DRELEASE=OFF
-    if %TYPE%==Debug             call:dk_append_cmake_args -DDEBUG=ON
-    ::if %TYPE%==Release         call:dk_append_cmake_args -DDEBUG=OFF & call:dk_append_cmake_args -DRELEASE=ON
-    if %TYPE%==Release           call:dk_append_cmake_args -DRELEASE=ON
-    if %TYPE%==All               call:dk_append_cmake_args -DDEBUG=ON & call:dk_append_cmake_args -DRELEASE=ON
-    if %DKLEVEL%==Build          call:dk_append_cmake_args -DBUILD=ON
-    if %DKLEVEL%==Rebuild        call:dk_append_cmake_args -DREBUILD=ON
-    if %DKLEVEL%==RebuildAll     call:dk_append_cmake_args -DREBUILDALL=ON
-    if %DKLINK%==Static          call:dk_append_cmake_args -DSTATIC=ON
-    if %DKLINK%==Shared          call:dk_append_cmake_args -DSHARED=ON
-    ::if %TARGET_OS%==emscripten call:dk_append_cmake_args -DEMSCRIPTEN=ON
+    ::if %TYPE%==Debug           call:dk_appendCmakeArgs -DDEBUG=ON & call:dk_appendCmakeArgs -DRELEASE=OFF
+    if %TYPE%==Debug             call:dk_appendCmakeArgs -DDEBUG=ON
+    ::if %TYPE%==Release         call:dk_appendCmakeArgs -DDEBUG=OFF & call:dk_appendCmakeArgs -DRELEASE=ON
+    if %TYPE%==Release           call:dk_appendCmakeArgs -DRELEASE=ON
+    if %TYPE%==All               call:dk_appendCmakeArgs -DDEBUG=ON & call:dk_appendCmakeArgs -DRELEASE=ON
+    if %DKLEVEL%==Build          call:dk_appendCmakeArgs -DBUILD=ON
+    if %DKLEVEL%==Rebuild        call:dk_appendCmakeArgs -DREBUILD=ON
+    if %DKLEVEL%==RebuildAll     call:dk_appendCmakeArgs -DREBUILDALL=ON
+    if %DKLINK%==Static          call:dk_appendCmakeArgs -DSTATIC=ON
+    if %DKLINK%==Shared          call:dk_appendCmakeArgs -DSHARED=ON
+    ::if %TARGET_OS%==emscripten call:dk_appendCmakeArgs -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
     call:dk_debug CMAKE_BINARY_DIR
         
-    call:dk_append_cmake_args -S=%CMAKE_SOURCE_DIR%
-    call:dk_append_cmake_args -B=%CMAKE_BINARY_DIR%
+    call:dk_appendCmakeArgs -S=%CMAKE_SOURCE_DIR%
+    call:dk_appendCmakeArgs -B=%CMAKE_BINARY_DIR%
 
     ::############ CMake Options ############
-    ::call:dk_append_cmake_args -DCMAKE_VERBOSE_MAKEFILE=1
-    ::call:dk_append_cmake_args -DCMAKE_COLOR_DIAGNOSTICS=ON
-    call:dk_append_cmake_args -Wdev
-    ::call:dk_append_cmake_args -Werror=dev
-    call:dk_append_cmake_args -Wdeprecated
-    ::call:dk_append_cmake_args -Werror=deprecated
-    ::call:dk_append_cmake_args --graphviz=graphviz.txt
-    ::call:dk_append_cmake_args --system-information system_information.txt
-    ::call:dk_append_cmake_args --debug-trycompile
-    ::call:dk_append_cmake_args --debug-output
-    ::call:dk_append_cmake_args --trace
-    ::call:dk_append_cmake_args --trace-expand
-    ::call:dk_append_cmake_args --warn-uninitialized
-    call:dk_append_cmake_args --warn-unused-vars
-    ::call:dk_append_cmake_args --check-system-vars
+    ::call:dk_appendCmakeArgs -DCMAKE_VERBOSE_MAKEFILE=1
+    ::call:dk_appendCmakeArgs -DCMAKE_COLOR_DIAGNOSTICS=ON
+    call:dk_appendCmakeArgs -Wdev
+    ::call:dk_appendCmakeArgs -Werror=dev
+    call:dk_appendCmakeArgs -Wdeprecated
+    ::call:dk_appendCmakeArgs -Werror=deprecated
+    ::call:dk_appendCmakeArgs --graphviz=graphviz.txt
+    ::call:dk_appendCmakeArgs --system-information system_information.txt
+    ::call:dk_appendCmakeArgs --debug-trycompile
+    ::call:dk_appendCmakeArgs --debug-output
+    ::call:dk_appendCmakeArgs --trace
+    ::call:dk_appendCmakeArgs --trace-expand
+    ::call:dk_appendCmakeArgs --warn-uninitialized
+    call:dk_appendCmakeArgs --warn-unused-vars
+    ::call:dk_appendCmakeArgs --check-system-vars
 	
 	if %TARGET_OS%==android_arm32      call:dk_prepend_cmake_args -G Unix Makefiles
 	if %TARGET_OS%==android_arm64      call:dk_prepend_cmake_args -G Unix Makefiles
@@ -502,7 +502,7 @@ goto:eof
 ::	set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake
 ::	echo "TOOLCHAIN = %TOOLCHAIN%"
 ::	set TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%
-::	if exist %TOOLCHAIN% call:dk_append_cmake_args -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+::	if exist %TOOLCHAIN% call:dk_appendCmakeArgs -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
 	
 ::	###### WSL CMake Fix ######
@@ -536,9 +536,9 @@ goto:eof
     echo ###########################################################
     echo.
 	
-	if %TYPE%==All      call:dk_build_all
-	if %TYPE%==Release  call:dk_build_release
-	if %TYPE%==Debug    call:dk_build_debug
+	if %TYPE%==All      call:dk_buildAll
+	if %TYPE%==Release  call:dk_buildRelease
+	if %TYPE%==Debug    call:dk_buildDebug
 	
 	echo.
     echo ###########################################################        
@@ -548,13 +548,13 @@ goto:eof
 goto:eof
 
 
-:dk_build_all () {
+:dk_buildAll () {
 ::####################################################################
-::# dk_build_debug()
+::# dk_buildDebug()
 ::#
 ::#
-:dk_build_debug () {
-	call:dk_verbose "dk_build_debug(%*)"
+:dk_buildDebug () {
+	call:dk_verbose "dk_buildDebug(%*)"
 	
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
@@ -574,11 +574,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_build_release()
+::# dk_buildRelease()
 ::#
 ::#
-:dk_build_release () {
-	call:dk_verbose "dk_build_release(%*)"
+:dk_buildRelease () {
+	call:dk_verbose "dk_buildRelease(%*)"
 	
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"
@@ -682,11 +682,11 @@ goto:eof
 
 
 ::##################################################################################
-::# dk_check_git_remote()
+::# dk_checkGitRemote()
 ::#
 ::#
-:dk_check_git_remote () {
-	call:dk_verbose "dk_check_git_remote(%*)"
+:dk_checkGitRemote () {
+	call:dk_verbose "dk_checkGitRemote(%*)"
 	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
@@ -694,13 +694,13 @@ goto:eof
     %GIT_EXE% remote update
     
     :: branch= $(git rev-parse --abbrev-ref HEAD)
-    call:dk_command_to_variable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
+    call:dk_commandToVariable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
     
     :: ahead= $(git rev-list --count origin/$branch..$branch)
-    call:dk_command_to_variable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
+    call:dk_commandToVariable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
         
     :: behind= $(git rev-list --count $branch..origin/$branch)
-    call:dk_command_to_variable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
+    call:dk_commandToVariable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
     
     echo %ahead% commits ahead, %behind% commits behind
 goto:eof
@@ -974,11 +974,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_check_error()
+::# dk_checkError()
 ::#
 ::#
-:dk_check_error () {
-	call:dk_verbose "dk_check_error(%*)"
+:dk_checkError () {
+	call:dk_verbose "dk_checkError(%*)"
 	
     if %ERRORLEVEL% EQU 0 goto:eof
     call:dk_error "ERRORLEVEL = %ERRORLEVEL%"
@@ -1003,7 +1003,7 @@ goto:eof
     echo please wait . . .
     ::certutil.exe -urlcache -split -f %~1 %~2
     powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%~2')"
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1058,7 +1058,7 @@ goto:eof
     ::      )
     ::      exit
     ::)
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1099,7 +1099,7 @@ goto:eof
         call:assert "cannot find git"
     )
         
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1166,7 +1166,7 @@ goto:eof
         call:assert "cannot find cmake"
     )
         
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1177,8 +1177,8 @@ goto:eof
 :dk_validate_visual_studio () {
 	call:dk_verbose "dk_validate_visual_studio(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
-    call:dk_check_error
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
+    call:dk_checkError
 goto:eof
 
 
@@ -1189,8 +1189,8 @@ goto:eof
 :dk_validate_msys2 () {
 	call:dk_verbose "dk_validate_msys2(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
-    call:dk_check_error
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
+    call:dk_checkError
 goto:eof
 
 
@@ -1201,8 +1201,8 @@ goto:eof
 :dk_validate_gcc () {
 	call:dk_verbose "dk_validate_gcc(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-    call:dk_check_error
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+    call:dk_checkError
 goto:eof
 
 
@@ -1213,8 +1213,8 @@ goto:eof
 :dk_validate_make () {
 	call:dk_verbose "dk_validate_make(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-    call:dk_check_error
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+    call:dk_checkError
 goto:eof
 
 
@@ -1225,8 +1225,8 @@ goto:eof
 :dk_validate_openjdk () {
 	call:dk_verbose "dk_validate_openjdk(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
-    call:dk_check_error
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
+    call:dk_checkError
 goto:eof
 
 
@@ -1237,12 +1237,12 @@ goto:eof
 :dk_validate_android_ndk () {
 	call:dk_verbose "dk_validate_android_ndk(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     call:dk_debug ANDROID_GENERATOR
     call:dk_debug ANDROID_API
     call:dk_debug ANDROID_NDK
     call:dk_debug ANDROID_TOOLCHAIN_FILE
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1253,26 +1253,26 @@ goto:eof
 :dk_validate_emscripten () {
 	call:dk_verbose "dk_validate_emscripten(%*)"
 	
-    call:dk_cmake_eval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+    call:dk_cmakeEval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     call:dk_debug EMSDK
     call:dk_debug EMSDK_ENV
     call:dk_debug EMSDK_GENERATOR
     call:dk_debug EMSDK_TOOLCHAIN_FILE
     call:dk_debug EMSDK_C_COMPILER
     call:dk_debug EMSDK_CXX_COMPILER
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
 ::####################################################################
-::# dk_command_to_variable(<command . .> <variable_name>)
+::# dk_commandToVariable(<command . .> <variable_name>)
 ::#
 ::#
-:dk_command_to_variable () {
-	call:dk_verbose "dk_command_to_variable(%*)"
+:dk_commandToVariable () {
+	call:dk_verbose "dk_commandToVariable(%*)"
 	
     if [%2] == [] (
-        echo "ERROR: dk_command_to_variable() requires at least 2 parameters"
+        echo "ERROR: dk_commandToVariable() requires at least 2 parameters"
         goto:eof
     )
     set command=
@@ -1299,8 +1299,8 @@ goto:eof
         set "variable_value=%%g"
     )
 
-    ::echo dk_command_to_variable(%*) -^> %%%variable_name%%% = %variable_value%
-    call:dk_check_error
+    ::echo dk_commandToVariable(%*) -^> %%%variable_name%%% = %variable_value%
+    call:dk_checkError
 goto:eof
 
 
@@ -1312,12 +1312,12 @@ goto:eof
 :dk_deleteCache () {
 	call:dk_verbose "dk_deleteCache(%*)"
 	
-    ::call:dk_cmake_eval "dk_deleteCache()"
+    ::call:dk_cmakeEval "dk_deleteCache()"
     echo Deleteing CMake cache . . .
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1328,12 +1328,12 @@ goto:eof
 :dk_delete_temp_files () {
 	call:dk_verbose "dk_delete_temp_files(%*)"
 	
-    ::call:dk_cmake_eval "dk_deleteTempFiles()"
+    ::call:dk_cmakeEval "dk_deleteTempFiles()"
     echo Deleteing .tmp files . . .
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (*.tmp) do del "%%i"
     for /r %%i in (*.TMP) do del "%%i"
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1353,12 +1353,12 @@ goto:eof
     if NOT exist "%DKBRANCH_DIR%\.git" (
         "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
     )
-    call:dk_check_error
+    call:dk_checkError
 
     cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" pull --all
     "%GIT_EXE%" checkout -- .
-    call:dk_check_error
+    call:dk_checkError
 
     "%GIT_EXE%" checkout %DKBRANCH%
     if NOT "%ERRORLEVEL%" == "0" (
@@ -1367,7 +1367,7 @@ goto:eof
         "%GIT_EXE%" push --set-upstream origin %DKBRANCH%
     )
 
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
@@ -1383,13 +1383,13 @@ goto:eof
         
     cd %DKBRANCH_DIR%
         
-    call:dk_command_to_variable "%GIT_EXE%" config --global credential.helper STORE
+    call:dk_commandToVariable "%GIT_EXE%" config --global credential.helper STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
-    call:dk_command_to_variable "%GIT_EXE%" config --global user.email USER_EMAIL
+    call:dk_commandToVariable "%GIT_EXE%" config --global user.email USER_EMAIL
     if "%USER_EMAIL%"=="" (
         echo.
         echo please enter an email address
@@ -1400,7 +1400,7 @@ goto:eof
         echo.
     )
         
-    call:dk_command_to_variable "%GIT_EXE%" config --global user.email USER_NAME
+    call:dk_commandToVariable "%GIT_EXE%" config --global user.email USER_NAME
     if "%USER_NAME%"=="" (
         echo.
         echo please enter a username
@@ -1421,34 +1421,34 @@ goto:eof
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
         
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
 ::################################################################################
-::# dk_clear_screen()
+::# dk_clearScreen()
 ::#
 ::#
-:dk_clear_screen () {
-	call:dk_verbose "dk_clear_screen(%*)"
+:dk_clearScreen () {
+	call:dk_verbose "dk_clearScreen(%*)"
 	
     cls
 goto:eof
 
 
 ::################################################################################
-::# dk_cmake_eval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+::# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 ::#
 ::#
-:dk_cmake_eval () {
-	call:dk_verbose "dk_cmake_eval(%*)"
+:dk_cmakeEval () {
+	call:dk_verbose "dk_cmakeEval(%*)"
 	
     echo.
-    echo  $ dk_cmake_eval (%*)
+    echo  $ dk_cmakeEval (%*)
     echo.
     
     if [%1] == [] (
-        echo "ERROR: dk_cmake_eval() parameter1 is invalid"
+        echo "ERROR: dk_cmakeEval() parameter1 is invalid"
         goto:eof
     )
     if not exist "%CMAKE_EXE%" ( 
@@ -1514,16 +1514,16 @@ goto:eof
     ::err contains all of the lines
     ::echo %err%
 
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
 ::################################################################################
-::# dk_command_exists(<command> <result>)
+::# dk_commandExists(<command> <result>)
 ::#
 ::#
-:dk_command_exists () {
-	call:dk_verbose "dk_command_exists(%*)"
+:dk_commandExists () {
+	call:dk_verbose "dk_commandExists(%*)"
 	
     set "command=%1"
     cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
@@ -1568,16 +1568,16 @@ goto:eof
     )
     
     ::echo dk_get_filename(%*) -^> %2 = %val%
-    call:dk_check_error
+    call:dk_checkError
 goto:eof
 
 
 ::################################################################################
-::# dk_create_cache()
+::# dk_createCache()
 ::#
 ::#
-:dk_create_cache () {
-	call:dk_verbose "dk_create_cache(%*)"
+:dk_createCache () {
+	call:dk_verbose "dk_createCache(%*)"
 	
     echo creating cache...
     ::call:dk_debug APP

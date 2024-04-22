@@ -1,11 +1,11 @@
 ::dk_include_guard()
 
 ::################################################################################
-::# dk_clear_screen()
+::# dk_clearScreen()
 ::#
 ::#
-:dk_clear_screen () {
-	call dk_verbose "dk_clear_screen(%*)"
+:dk_clearScreen () {
+	call dk_verbose "dk_clearScreen(%*)"
 	
     cls
 goto:eof

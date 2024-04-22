@@ -5,7 +5,7 @@
 #
 #
 dk_get_username () {
-	dk_verbose "dk_build_main($*)"
+	dk_verbose "dk_buildMain($*)"
 	
 	if [ -n "${USER-}" ]; then
 		dk_debug USER

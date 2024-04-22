@@ -42,5 +42,5 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
         call assert "cannot find git"
     )
         
-    call dk_check_error
+    call dk_checkError
 goto:eof

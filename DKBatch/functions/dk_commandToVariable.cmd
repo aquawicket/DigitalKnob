@@ -1,14 +1,14 @@
 ::dk_include_guard()
 
 ::####################################################################
-::# dk_command_to_variable(<command . .> <variable_name>)
+::# dk_commandToVariable(<command . .> <variable_name>)
 ::#
 ::#
-:dk_command_to_variable () {
-	call dk_verbose "dk_command_to_variable(%*)"
+:dk_commandToVariable () {
+	call dk_verbose "dk_commandToVariable(%*)"
 	
     if [%2] == [] (
-        echo "ERROR: dk_command_to_variable() requires at least 2 parameters"
+        echo "ERROR: dk_commandToVariable() requires at least 2 parameters"
         goto:eof
     )
     set command=
@@ -35,6 +35,6 @@
         set "variable_value=%%g"
     )
 
-    ::echo dk_command_to_variable(%*) -^> %%%variable_name%%% = %variable_value%
-    call dk_check_error
+    ::echo dk_commandToVariable(%*) -^> %%%variable_name%%% = %variable_value%
+    call dk_checkError
 goto:eof

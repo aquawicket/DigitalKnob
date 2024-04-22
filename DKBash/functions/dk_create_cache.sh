@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_create_cache()
+# dk_createCache()
 #
 #
-dk_create_cache () {
-	dk_verbose "dk_create_cache($*)"
+dk_createCache () {
+	dk_verbose "dk_createCache($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo "creating cache..."
