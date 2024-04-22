@@ -55,7 +55,7 @@ dk_resetAll () {
 		# wait for the folders to get deleted
 		sleep 5
 
-		if dk_file_exists "$DKBRANCH_DIR"; then
+		if dk_fileExists "$DKBRANCH_DIR"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
@@ -64,7 +64,7 @@ dk_resetAll () {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if dk_file_exists "$DKBRANCH_DIR"/"$SCRIPT_NAME"; then
+		if dk_fileExists "$DKBRANCH_DIR"/"$SCRIPT_NAME"; then
 			clear
 			. "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
 			exit

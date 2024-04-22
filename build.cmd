@@ -1078,7 +1078,7 @@ goto:eof
     ::call:dk_debug GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
-    call:dk_convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
+    call:dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     call:dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
     ::call:dk_debug GIT_FOLDER
 
@@ -1143,7 +1143,7 @@ goto:eof
     call:dk_debug CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
-    call:dk_convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
+    call:dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     call:dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
     call:dk_debug CMAKE_FOLDER
         
@@ -1621,11 +1621,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_convert_to_c_identifier(<in> <out>)
+::# dk_convertToCIdentifier(<in> <out>)
 ::#
 ::#
-:dk_convert_to_c_identifier () {
-	call:dk_verbose "dk_convert_to_c_identifier(%*)"
+:dk_convertToCIdentifier () {
+	call:dk_verbose "dk_convertToCIdentifier(%*)"
 	
     set "_input=%1"
     set "_output="

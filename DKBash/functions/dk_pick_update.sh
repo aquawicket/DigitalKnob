@@ -11,7 +11,7 @@ dk_pickUpdate() {
 	dk_readCache
 	
 	dk_echo
-	dk_check_remote
+	dk_checkRemote
 	dk_echo
 	
 	#dk_debug _APP_
@@ -80,7 +80,7 @@ dk_pickUpdate() {
 	elif [ "$input" = "7" ]; then
 		clear
 	elif [ "$input" = "8" ]; then
-		dk_clear_cmake_cache
+		dk_clearCmakeCache
 		dk_deleteTempFiles
 	elif [ "$input" = "9" ]; then
 		dk_reload

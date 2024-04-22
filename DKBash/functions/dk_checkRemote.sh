@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_check_remote()
+# dk_checkRemote()
 #
 #
-dk_check_remote () {
-	dk_verbose "dk_check_remote($*)"
+dk_checkRemote () {
+	dk_verbose "dk_checkRemote($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	ahead=0

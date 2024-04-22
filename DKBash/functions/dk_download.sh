@@ -8,7 +8,7 @@ dk_download () {
 	dk_verbose "dk_download($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if dk_file_exists "$2"; then
+	if dk_fileExists "$2"; then
 		dk_warning "dk_download(): $2 already exists"
 		return 0
 	fi

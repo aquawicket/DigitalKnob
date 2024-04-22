@@ -14,7 +14,7 @@ dk_validateBranch () {
 	DKBRANCH="Development"
 	
 	[ -z $DIGITALKNOB_DIR ] && dk_getDKPaths
-	if dk_file_exists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
+	if dk_fileExists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [ "$BRANCH" = "$FOLDER" ]; then
 			DKBRANCH="$FOLDER"
@@ -42,7 +42,7 @@ dk_validateBranch () {
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-	#	if ! dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#	if ! dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
 	#		dk_debug "$DKBRANCH_DIR/$SCRIPT_NAME"
 	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
 	#	fi
@@ -50,7 +50,7 @@ dk_validateBranch () {
 	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if dk_file_exists $DKBRANCH_DIR/$SCRIPT_NAME; then
+	#	if dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
 	#		rm $SCRIPT_DIR/$SCRIPT_NAME
 	#	fi
 	#	$DKBRANCH_DIR/$SCRIPT_NAME

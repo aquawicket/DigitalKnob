@@ -16,7 +16,7 @@ set CONTINUE_ON_ERRORS=0
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-<:GetCaller <nul call GetCaller.cmd SCRIPT_PATH
+<:dk_getCaller <nul call dk_getCaller.cmd SCRIPT_PATH
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
 :: & exit )

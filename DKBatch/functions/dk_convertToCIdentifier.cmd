@@ -2,11 +2,11 @@
 setlocal EnableDelayedExpansion
 
 ::################################################################################
-::# dk_convert_to_c_identifier(<in> <out>)
+::# dk_convertToCIdentifier(<in> <out>)
 ::#
 ::#
-:dk_convert_to_c_identifier () {
-	call dk_verbose "dk_convert_to_c_identifier(%*)"
+:dk_convertToCIdentifier () {
+	call dk_verbose "dk_convertToCIdentifier(%*)"
 	
     set "_input=%1"
 	::call dk_debug _input

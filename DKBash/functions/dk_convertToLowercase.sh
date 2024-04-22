@@ -7,7 +7,7 @@
 dk_convertToLowercase() {
 	dk_debug "dk_convertToLowercase($@)"
 	if [ -z "$2" ]; then
-		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
+		dk_error "dk_convertToCIdentifier <input> <output> requires 2 parameters"
 		return $false
 	fi
 	input=$1

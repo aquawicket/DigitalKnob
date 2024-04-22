@@ -14,7 +14,7 @@ dk_extract () {
 	fulldest="$2/$destFolder"
 	dk_debug fulldest
 		
-	#if dk_file_exists $fulldest; then
+	#if dk_fileExists $fulldest; then
 	#	dk_warning "dk_extract(): $fulldest already exists"
 	#	return 0
 	#fi
@@ -28,7 +28,7 @@ dk_extract () {
 	cd "$parentdir" #|| dk_error "cd $$parentdir failed!"
 	tar -xf "$filename" -C "$2"
 	cd "$oldpwd" #|| dk_error "cd $$oldpwd failed!"
-	dk_convert_to_c_identifier "$destFolder" destFolder_
+	dk_convertToCIdentifier "$destFolder" destFolder_
 	dk_debug destFolder_
 	mv "$2"/"$destFolder" "$2"/"$destFolder_"
 

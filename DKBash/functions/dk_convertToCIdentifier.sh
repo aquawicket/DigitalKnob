@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_convert_to_c_identifier(<input> <output>)
+# dk_convertToCIdentifier(<input> <output>)
 #
 #
-dk_convert_to_c_identifier () {
-	dk_verbose "dk_convert_to_c_identifier($*)"
+dk_convertToCIdentifier () {
+	dk_verbose "dk_convertToCIdentifier($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	input=$1

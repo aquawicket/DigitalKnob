@@ -1,10 +1,10 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_get_username()
+# dk_getUsername()
 #
 #
-dk_get_username () {
+dk_getUsername () {
 	dk_verbose "dk_buildMain($*)"
 	
 	if [ -n "${USER-}" ]; then

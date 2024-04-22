@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_clear_cmake_cache()
+# dk_clearCmakeCache()
 #
 #
-dk_clear_cmake_cache () {
-	dk_verbose "dk_clear_cmake_cache($*)"
+dk_clearCmakeCache () {
+	dk_verbose "dk_clearCmakeCache($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Clearing CMake cache . . ."

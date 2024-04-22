@@ -30,7 +30,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     call dk_debug CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
-    call dk_convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
+    call dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     call dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
     call dk_debug CMAKE_FOLDER
     

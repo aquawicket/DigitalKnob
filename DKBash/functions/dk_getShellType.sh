@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_get_shell_type()
+# dk_getShellType()
 #
 #
-dk_get_shell_type () {
-	dk_verbose "dk_get_shell_type($*)"
+dk_getShellType () {
+	dk_verbose "dk_getShellType($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	echo "SHELL = $SHELL"
 	echo "BASH_SOURCE = $BASH_SOURCE"

@@ -14,7 +14,7 @@ dk_generate() {
 	dk_echo "##################################################################"
 	dk_echo
 
-	dk_clear_cmake_cache
+	dk_clearCmakeCache
 	dk_deleteTempFiles
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
@@ -23,7 +23,7 @@ dk_generate() {
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_debug CMAKE_SOURCE_DIR
-	if ! dk_file_exists "$CMAKE_SOURCE_DIR"; then
+	if ! dk_fileExists "$CMAKE_SOURCE_DIR"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
 	dk_debug CMAKE_SOURCE_DIR
@@ -176,7 +176,7 @@ dk_generate() {
 	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-#	if dk_file_exists "$TOOLCHAIN"; then
+#	if dk_fileExists "$TOOLCHAIN"; then
 #		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 #	fi
 	

@@ -53,7 +53,7 @@ dk_removeAll () {
 		# wait for the folders to get deleted
 		sleep 3
 		
-		if dk_file_exists "$DKBRANCH_DIR"; then
+		if dk_fileExists "$DKBRANCH_DIR"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi

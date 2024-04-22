@@ -52,7 +52,7 @@ dk_validateCmake () {
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		
-		dk_convert_to_c_identifier "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_to_lower CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
@@ -64,7 +64,7 @@ dk_validateCmake () {
 		[ -z $CMAKE_EXE ]              && dk_error "no cmake for this OS"
 		dk_debug CMAKE_EXE
 		
-		if dk_file_exists "$CMAKE_EXE"; then 
+		if dk_fileExists "$CMAKE_EXE"; then 
 			return $true;
 		fi
 
@@ -73,7 +73,7 @@ dk_validateCmake () {
 		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
 		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
 		
-		#if ! dk_file_exists $CMAKE_EXE; then error "cannot find cmake"; fi
+		#if ! dk_fileExists $CMAKE_EXE; then error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"

@@ -1,10 +1,10 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_get_func_name()
+# dk_getFuncName()
 #
 #
-dk_get_func_name() {
+dk_getFuncName() {
 	if [ -z "$1" ]; then
 		dk_error "get_func_name <variable> requires 1 parameter"
 		return $false

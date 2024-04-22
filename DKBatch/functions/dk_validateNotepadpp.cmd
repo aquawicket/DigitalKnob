@@ -23,7 +23,7 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
 
     set NOTEPADPP_FOLDER=%NOTEPADPP_DL_FILE:~0,-4%
 	::call dk_debug NOTEPADPP_FOLDER
-    call dk_convert_to_c_identifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
+    call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	::call dk_debug NOTEPADPP_FOLDER
     call dk_convertToLowercase %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
     call dk_debug NOTEPADPP_FOLDER
