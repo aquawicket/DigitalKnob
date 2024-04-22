@@ -13,8 +13,8 @@ include_guard()
 function(dk_copy from to) # OVERWRITE NOERROR
 	DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option(OVERWRITE ${ARGV})
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(OVERWRITE ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 	
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})

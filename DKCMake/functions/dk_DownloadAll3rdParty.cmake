@@ -1,11 +1,11 @@
 include_guard()
 
 ###############################################################################
-# dk_DownloadAll3rdParty()
+# dk_downloadAll3rdParty()
 #
 #	TODO
 #
-function(dk_DownloadAll3rdParty)
+function(dk_downloadAll3rdParty)
 	DKDEBUGFUNC(${ARGV})
 	
 	dk_dependAll()

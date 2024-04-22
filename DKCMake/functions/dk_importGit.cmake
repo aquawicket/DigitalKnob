@@ -11,7 +11,7 @@ include_guard()
 #
 function(dk_importGit url) #branch #id #PATCH
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(PATCH ${ARGV})
+	dk_getOption(PATCH ${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	DKASSERT(GIT_EXE)

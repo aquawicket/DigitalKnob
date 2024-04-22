@@ -29,11 +29,11 @@ endif()
 
 ###### PYTHON_EXE ######
 if(ANDROID_HOST)
-	dk_find_program(PYTHON_EXE python)
+	dk_findProgram(PYTHON_EXE python)
 elseif(MAC_HOST)
-	dk_find_program(PYTHON_EXE python /usr/local/bin)
+	dk_findProgram(PYTHON_EXE python /usr/local/bin)
 else()
-	dk_find_program(PYTHON_EXE python ${PYTHON})
+	dk_findProgram(PYTHON_EXE python ${PYTHON})
 endif()
 
 ### INSTALL ###
@@ -50,9 +50,9 @@ if(NOT EXISTS ${PYTHON_EXE})
 		#dk_sleep(60)
 		
 		if(ANDROID_HOST)
-			dk_find_program(PYTHON_EXE python)
+			dk_findProgram(PYTHON_EXE python)
 		else()
-			dk_find_program(PYTHON_EXE python ${PYTHON})
+			dk_findProgram(PYTHON_EXE python ${PYTHON})
 		endif()
 
 		if(EXISTS ${PYTHON}/include)
@@ -79,11 +79,11 @@ endif()
 
 ## Try to find it after the install
 if(ANDROID_HOST)
-	dk_find_program(PYTHON_EXE python)
+	dk_findProgram(PYTHON_EXE python)
 elseif(MAC_HOST)
-	dk_find_program(PYTHON_EXE python /usr/local/bin)
+	dk_findProgram(PYTHON_EXE python /usr/local/bin)
 else ()
-	dk_find_program(PYTHON_EXE python ${PYTHON})
+	dk_findProgram(PYTHON_EXE python ${PYTHON})
 endif ()
 
 if(NOT EXISTS ${PYTHON_EXE})
@@ -101,11 +101,11 @@ dk_debug(PYTHON_EXE)
 
 ###### PIP_EXE ######
 if(WIN_HOST)
-	dk_find_program(PIP_EXE pip ${PYTHON}/Scripts)
+	dk_findProgram(PIP_EXE pip ${PYTHON}/Scripts)
 	if(NOT EXISTS ${PIP_EXE})
 		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
 	endif()
-	dk_find_program(PIP_EXE pip ${PYTHON}/Scripts)
+	dk_findProgram(PIP_EXE pip ${PYTHON}/Scripts)
 	
 	if(NOT EXISTS ${PIP_EXE})
 		dk_error("COULD NOT FIND PIP_EXE:${PIP_EXE}")

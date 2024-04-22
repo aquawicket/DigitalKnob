@@ -1,12 +1,12 @@
 include_guard()
 
 ###############################################################################
-# dk_firewall_allow(name executable)
+# dk_firewallAllow(name executable)
 #
 #	@name		 	- The name of the firewall rule
 #   @executable		- The path to the executable to allow
 #
-function(dk_firewall_allow name executable)
+function(dk_firewallAllow name executable)
 	DKDEBUGFUNC(${ARGV})
 	
 	return()	# this function is disabled for now

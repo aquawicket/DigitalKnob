@@ -14,7 +14,7 @@ function(dk_build path) #target NOASSERT
 	if(NOT QUEUE_BUILD)
 		return()
 	endif()
-	dk_get_option(NOASSERT ${ARGV})
+	dk_getOption(NOASSERT ${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_build(${path}) path does not exist")

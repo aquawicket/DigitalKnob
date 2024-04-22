@@ -10,6 +10,6 @@ include_guard()
 macro(dk_echo msg)
 	#DKDEBUGFUNC(${ARGV})
 	
-	dk_printvar(msg)
+	dk_printVar(msg)
 	message("${msg}")
 endmacro()

@@ -13,7 +13,7 @@ include_guard()
 function(dk_fileReplace filePath find replace)
 	#DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
 	if(${index} GREATER -1)

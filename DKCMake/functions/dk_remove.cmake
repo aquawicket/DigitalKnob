@@ -11,7 +11,7 @@ include_guard()
 function(dk_remove path)
 	#DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 
 	if(NOT EXISTS ${path})
 		if(NOT NOERROR)

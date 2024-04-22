@@ -12,8 +12,8 @@ include_guard()
 #
 function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(OVERWRITE ${ARGV})
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(OVERWRITE ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 	
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})

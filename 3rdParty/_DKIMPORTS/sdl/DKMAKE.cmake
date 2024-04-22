@@ -69,8 +69,8 @@ EMSCRIPTEN_dk_include	(${SDL}/${OS}/${DEBUG_DIR}/include)
 LINUX_dk_include		(${SDL}/${OS}/${RELEASE_DIR}/include)
 RASPBERRY_dk_include	(/opt/vc/lib)
 
-#dk_add_target(sdl SDL2static)	# TODO
-#dk_add_target(sdl SDL2main)		# TODO
+#dk_addTarget(sdl SDL2static)	# TODO
+#dk_addTarget(sdl SDL2main)		# TODO
 
 #if(sdl_SDL2static)
 if(MSVC)

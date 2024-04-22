@@ -1,14 +1,14 @@
 include_guard()
 
 ###############################################################################
-# dk_add_target(plugin target)
+# dk_addTarget(plugin target)
 #
 #	TODO
 #
 #	@plugin		- TODO
 #	@target		- TODO
 #
-function(dk_add_target plugin target)
+function(dk_addTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
 	
 	if(${plugin}_targets_OFF)

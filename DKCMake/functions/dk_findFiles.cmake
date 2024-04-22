@@ -12,7 +12,7 @@ include_guard()
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(RECURSE ${ARGV})
+	dk_getOption(RECURSE ${ARGV})
 
 	if(RECURSE)
 		file(GLOB_RECURSE files "${path}/" "${path}/${pattern}")

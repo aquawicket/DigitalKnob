@@ -1,12 +1,12 @@
 include_guard()
 
 ##################################################################################
-# dk_printvar(var)
+# dk_printVar(var)
 #
 #	If the msg is a defined variable, print it's name and value
 #	@var	- The variable name to print
 #
-macro(dk_printvar var)
+macro(dk_printVar var)
 	#if(PRINTVAR)
 		if(DEFINED "${${var}}")
 			if(${${var}} MATCHES "ENV{")

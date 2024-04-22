@@ -11,9 +11,9 @@ include_guard()
 function(dk_buildLog entry)
 	DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option_value(PATH ${ARGV})
-	dk_get_option(PRINTVAR ${ARGV})
-	dk_printvar(entry)
+	dk_getOption_value(PATH ${ARGV})
+	dk_getOption(PRINTVAR ${ARGV})
+	dk_printVar(entry)
 	
 	dk_info("${entry}")
 	

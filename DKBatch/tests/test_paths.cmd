@@ -53,8 +53,8 @@ call "../functions/DK.cmd"
 	call :get_drive "%IN%" drive
 	echo drive      = %drive%
 	
-	call :get_directory "%IN%" directory
-	echo directory  = %directory%
+	call :get_path "%IN%" path
+	echo path      = %path%
 	
 	call :get_name "%IN%" name
 	echo name       = %name%
@@ -62,20 +62,26 @@ call "../functions/DK.cmd"
 	call :get_extension "%IN%" extension
 	echo extension  = %extension%
 	
-	call :get_fullpath "%IN%" fullpath
-	echo fullpath   = %fullpath%
+	call :get_fullPath "%IN%" fullPath
+	echo fullPath   = %fullPath%
 	
-	call :get_shortpath "%IN%" shortpath
-	echo shortpath  = %shortpath%
+	call :get_shortPath "%IN%" shortPath
+	echo shortPath  = %shortPath%
 	
 	call :get_attributes "%IN%" attributes
 	echo attributes = %attributes%
 	
-	call :get_filetime "%IN%" filetime
-	echo filetime   = %filetime%
+	call :get_fileTime "%IN%" fileTime
+	echo fileTime   = %fileTime%
 	
-	call :get_filesize "%IN%" filesize
+	call :get_fileSize "%IN%" filesize
 	echo filesize   = %filesize% bytes
+	
+	call :get_fullName "%IN%" fullname
+	echo fullname   = %fullname%
+	
+	call :get_fullDirectory "%IN%" fullDirectory
+	echo fullDirectory   = %fullDirectory%
 	
 	pause
 goto:eof
@@ -112,7 +118,7 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_directory
+:get_path
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
@@ -140,7 +146,7 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_fullpath
+:get_fullPath
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
@@ -149,7 +155,7 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_shortpath
+:get_shortPath
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
@@ -167,7 +173,7 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_filetime
+:get_fileTime
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
@@ -176,7 +182,7 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_filesize
+:get_fileSize
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
@@ -185,8 +191,27 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-::%~dpI - drive and path
-::%~nxI - name and extansion
+:get_fullName :: %~nxI - name and extension
+	::https://stackoverflow.com/a/59739663/688352
+	set _input=%1
+	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
+	for %%Z in ("%_input%") do set "OUT=%%~nxZ"
+	endlocal & set %2=%OUT%
+goto:eof
+
+:get_fullDirectory :: %~dpI - drive and path
+	::https://stackoverflow.com/a/59739663/688352
+	set _input=%1
+	set _input=%_input:"=%
+	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
+	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
+	for %%Z in ("%_input%") do set "OUT=%%~dpZ"
+	endlocal & set %2=%OUT%
+goto:eof
+
+
 
 
 pause

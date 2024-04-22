@@ -38,13 +38,13 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")
 	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NOERROR)
 
-	dk_find_program(BASH_EXE bash "${MSYS2}/usr/bin")
+	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
 	dk_debug(BASH_EXE)
-	dk_find_program(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
+	dk_findProgram(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
 	dk_debug(CYGPATH_EXE)
-	dk_find_program(PACMAN_EXE pacman "${MSYS2}/usr/bin")
+	dk_findProgram(PACMAN_EXE pacman "${MSYS2}/usr/bin")
 	dk_debug(PACMAN_EXE)
-	#dk_firewall_allow("pacman" "${PACMAN_EXE}")
+	#dk_firewallAllow("pacman" "${PACMAN_EXE}")
 	
 	if(MSYSTEM)
 		# Set PATH environment  variables

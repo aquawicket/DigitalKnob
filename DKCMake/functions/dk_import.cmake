@@ -62,7 +62,7 @@ function(dk_import url)
 		endif()
 	endif()
 	
-	dk_get_option(PATCH ${ARGV})
+	dk_getOption(PATCH ${ARGV})
 	if(PATCH)
 		#dk_debug("dk_patch(${plugin} ${${plugin_var}})")
 		dk_patch(${plugin} ${${plugin_var}})

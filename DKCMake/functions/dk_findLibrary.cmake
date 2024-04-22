@@ -9,7 +9,7 @@ include_guard()
 #
 function(dk_findLibrary name)
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOASSERT ${ARGV})
+	dk_getOption(NOASSERT ${ARGV})
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)

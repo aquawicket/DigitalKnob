@@ -353,7 +353,7 @@ if(WIN_X86)
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		# Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
-		dk_compress_assets(${DK_PROJECT_DIR}/assets)
+		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files, excluded from assets
 		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NOERROR)
 		file(REMOVE ${DK_PROJECT_DIR}/Backup)
@@ -487,7 +487,7 @@ if(WIN_X86_64)
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
-		dk_compress_assets(${DK_PROJECT_DIR}/assets)
+		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
 		file(REMOVE ${DK_PROJECT_DIR}/Backup)
@@ -920,7 +920,7 @@ if(NOT RASPBERRY)
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		# Remove excluded files and folders before packaging
 		dk_info("Creating assets.zip . . .")
-		dk_compress_assets(${DK_PROJECT_DIR}/assets)
+		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
@@ -1003,7 +1003,7 @@ if(RASPBERRY)
 		# Remove excluded files and folders before packaging
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
-		dk_compress_assets(${DK_PROJECT_DIR}/assets)
+		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
@@ -1289,7 +1289,7 @@ if(EMSCRIPTEN)
 		# Remove excluded files and folders before packaging
 		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
-		dk_compress_assets(${DK_PROJECT_DIR}/assets)
+		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets

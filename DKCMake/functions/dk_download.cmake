@@ -14,7 +14,7 @@ include_guard()
 function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 	
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 

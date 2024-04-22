@@ -11,7 +11,7 @@ include_guard()
 #
 function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_get_option(NOERROR ${ARGV})
+	dk_getOption(NOERROR ${ARGV})
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)

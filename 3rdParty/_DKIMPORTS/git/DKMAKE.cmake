@@ -23,11 +23,11 @@ endif()
 
 ### First Check ###
 if(WIN_HOST)
-	dk_find_program(GIT_EXE git ${GIT}/bin)
+	dk_findProgram(GIT_EXE git ${GIT}/bin)
 elseif(ANDROID_HOST)
-	dk_find_program(GIT_EXE git $ENV{PREFIX}/bin)
+	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
 else()
-	dk_find_program(GIT_EXE git /usr/bin)
+	dk_findProgram(GIT_EXE git /usr/bin)
 endif()
 
 
@@ -53,11 +53,11 @@ endif()
 
 ## Second Check ###
 if(WIN_HOST)
-	dk_find_program(GIT_EXE git ${GIT}/bin)
+	dk_findProgram(GIT_EXE git ${GIT}/bin)
 elseif(ANDROID_HOST)
-	dk_find_program(GIT_EXE git $ENV{PREFIX}/bin)
+	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
 else()
-	dk_find_program(GIT_EXE git /usr/bin)
+	dk_findProgram(GIT_EXE git /usr/bin)
 endif()
 
 if(NOT GIT_EXE)

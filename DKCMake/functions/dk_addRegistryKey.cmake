@@ -1,7 +1,7 @@
 include_guard()
 
 ###############################################################################
-# dk_add_registry_key(key value data)
+# dk_addRegistryKey(key value data)
 #
 #	TODO
 #
@@ -9,7 +9,7 @@ include_guard()
 #	@value	- TODO
 #	@data	- TODO
 #
-function(dk_add_registry_key key value data)
+function(dk_addRegistryKey key value data)
 	DKDEBUGFUNC(${ARGV})
 	
 	if(WIN_HOST)

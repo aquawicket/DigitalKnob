@@ -10,8 +10,8 @@ include_guard()
 function(dk_notice msg)
 	#DKDEBUGFUNC(${ARGV})
 	
-	dk_get_option(PRINTVAR ${ARGV})
-	dk_printvar(msg)
+	dk_getOption(PRINTVAR ${ARGV})
+	dk_printVar(msg)
 	
 	dk_updateLogInfo()
 	message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
