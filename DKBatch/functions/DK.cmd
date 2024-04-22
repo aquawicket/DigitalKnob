@@ -4,7 +4,7 @@
 
 
 :::::: Global Script Variables ::::::
-set LOG_VERBOSE=1
+::set LOG_VERBOSE=1
 
 
 
@@ -18,10 +18,10 @@ call dk_getFilename %SCRIPT_PATH% SCRIPT_NAME
 call dk_debug DKBATCH_DIR
 call dk_debug SCRIPT_DIR
 call dk_debug SCRIPT_NAME
-pause 
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
+::pause 
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
 :: & exit )
-cls
+::cls
 ::set true=0
 ::set false=1
 
