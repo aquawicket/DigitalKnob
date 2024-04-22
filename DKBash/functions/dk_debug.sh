@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 
 [ -z $ENABLE_dk_debug ] && ENABLE_dk_debug=1
@@ -18,7 +18,7 @@ dk_debug () {
 	
 	[ $ENABLE_dk_debug -eq 1 ] || return 0
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	
 	dk_echo "${blue}${TAG}${msg}${clr}"
 	[ $TRACE_ON_DEBUG -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			

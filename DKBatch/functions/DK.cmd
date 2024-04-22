@@ -1,5 +1,5 @@
 @echo off
-:: if "$DK_INIT" == "" return else set DK_INIT=1     # dk_include_guard()
+:: if "$DK_INIT" == "" return else set DK_INIT=1     # dk_includeGuard()
 ::echo %~0(%*)
 
 

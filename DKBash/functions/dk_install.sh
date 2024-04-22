@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 ##################################################################################
 # dk_install(<package>)
@@ -8,7 +8,7 @@ dk_install () {
 	dk_verbose "dk_install($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	#if dk_package_installed $1; then
+	#if dk_packageInstalled $1; then
 	#	dk_warning "$1 already dk_installed"
 	#	return $false;
 	#fi

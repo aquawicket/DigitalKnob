@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 ##################################################################################
 # dk_pickUpdate()
@@ -72,7 +72,7 @@ dk_pickUpdate() {
 	elif [ "$input" = "3" ]; then
 		dk_pushAssets
 	elif [ "$input" = "4" ]; then
-		dk_pull_assets
+		dk_pullAssets
 	elif [ "$input" = "5" ]; then
 		dk_resetAll
 	elif [ "$input" = "6" ]; then

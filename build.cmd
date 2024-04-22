@@ -189,7 +189,7 @@ goto:eof
     if "%choice%"=="1" call:dk_gitUpdate
     if "%choice%"=="2" call:dk_gitCommit
     if "%choice%"=="3" call:dk_pushAssets
-    if "%choice%"=="4" call:dk_pull_assets
+    if "%choice%"=="4" call:dk_pullAssets
     if "%choice%"=="5" call:dk_resetAll
     if "%choice%"=="6" call:dk_removeAll
     if "%choice%"=="7" call:dk_clearScreen
@@ -769,11 +769,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_pull_assets()
+::# dk_pullAssets()
 ::#
 ::#
-:dk_pull_assets () {
-	call:dk_verbose "dk_pull_assets(%*)"
+:dk_pullAssets () {
+	call:dk_verbose "dk_pullAssets(%*)"
 	
     echo not implemented,  TODO
 goto:eof

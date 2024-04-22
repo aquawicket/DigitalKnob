@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 ##################################################################################
 # dk_convertToCIdentifier(<input> <output>)
@@ -11,8 +11,8 @@ dk_convertToCIdentifier () {
 	input=$1
 	
 	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
-	dk_replace_all "$input" "-" "_" input		# POSIX replace
-	dk_replace_all "$input" "." "_" output		# POSIX replace
+	dk_replaceAll "$input" "-" "_" input		# POSIX replace
+	dk_replaceAll "$input" "." "_" output		# POSIX replace
 	
 	dk_debug "output = $output"
 	eval "$2=$output"

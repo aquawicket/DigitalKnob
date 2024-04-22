@@ -31,7 +31,7 @@ if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 	fi
 fi
 
-[ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
+[ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_includeGuard()
 
 ###### Set and check posix mode ######
 $(set -o posix) && set -o posix && case :$SHELLOPTS: in

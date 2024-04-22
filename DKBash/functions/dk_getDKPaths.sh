@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 #####################################################################
 # dk_getDKPaths()
@@ -10,8 +10,8 @@ dk_getDKPaths () {
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
-		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
+		dk_replaceAll "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
+		dk_replaceAll "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi

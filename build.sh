@@ -224,7 +224,7 @@ dk_pickUpdate() {
 	elif [ "$input" = "3" ]; then
 		dk_pushAssets
 	elif [ "$input" = "4" ]; then
-		dk_pull_assets
+		dk_pullAssets
 	elif [ "$input" = "5" ]; then
 		dk_resetAll
 	elif [ "$input" = "6" ]; then
@@ -755,8 +755,8 @@ dk_getDKPaths () {
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		dk_replace_all "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
-		dk_replace_all "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
+		dk_replaceAll "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
+		dk_replaceAll "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
@@ -823,7 +823,7 @@ dk_validateCmake () {
 		fi
 		
 		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		dk_to_lower CMAKE_FOLDER
+		dk_toLower CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
 		if [ "${HOST_OS}" = "win" ]; then
@@ -907,7 +907,7 @@ dk_debug () {
 	[ $LOG_DEBUG -eq 1 ] || return 0
 	
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }
 
@@ -920,7 +920,7 @@ dk_info () {
 	#dk_verbose "dk_info($*)"
 	
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	dk_echo "${white}   INFO: ${msg} ${clr}"
 }
 
@@ -933,7 +933,7 @@ dk_warning () {
 	#dk_verbose "dk_warning($*)"
 	
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	dk_echo "${yellow}WARNING: ${msg} ${clr}"
 	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
 	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
@@ -948,7 +948,7 @@ dk_error () {
 	#dk_verbose "dk_error($*)"
 	
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
@@ -977,7 +977,7 @@ dk_variable_info () {
 }
 
 ##################################################################################
-# dk_to_variable_info(<var>)
+# dk_toVariableInfo(<var>)
 #
 #	If the parameter is a variable containing the name of a valid variable name
 #	Convert the contents to the details of said variable
@@ -985,14 +985,14 @@ dk_variable_info () {
 #	Example:  
 #	myVar="this is my variable"
 #	message="myVar"
-#	dk_to_variable_info message
+#	dk_toVariableInfo message
 #	echo $message
 #
 #	Output:
 #	myVar = 'this is my variable'
 #
-dk_to_variable_info () {
-	#echo "dk_to_variable_info($*)"
+dk_toVariableInfo () {
+	#echo "dk_toVariableInfo($*)"
 	
 	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
 	eval name='$'{$1}
@@ -1074,12 +1074,12 @@ dk_defined () {
 
 
 ##################################################################################
-# dk_has_value(<variable>)
+# dk_hasValue(<variable>)
 #
 # Evaluates to true if the parameter is a variable that exists and has value
 #
-dk_has_value () {
-	dk_verbose "dk_has_value($*)"
+dk_hasValue () {
+	dk_verbose "dk_hasValue($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
 	eval value='$'{$1}
@@ -1238,8 +1238,8 @@ dk_convertToCIdentifier () {
 	input=$1
 	
 	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
-	dk_replace_all "$input" "-" "_" input		# POSIX replace
-	dk_replace_all "$input" "." "_" output		# POSIX replace
+	dk_replaceAll "$input" "-" "_" input		# POSIX replace
+	dk_replaceAll "$input" "." "_" output		# POSIX replace
 	
 	dk_debug "output = $output"
 	eval "$2=$output"
@@ -1247,11 +1247,11 @@ dk_convertToCIdentifier () {
 }
 
 ##################################################################################
-# dk_replace_all(<input> <searchValue> <newValue> <output>)
+# dk_replaceAll(<input> <searchValue> <newValue> <output>)
 #
 #
-dk_replace_all () {
-	dk_verbose "dk_replace_all($*)"
+dk_replaceAll () {
+	dk_verbose "dk_replaceAll($*)"
 	[ $# -ne 4 ] && dk_error "Incorrect number of parameters"
 	
     input=$1
@@ -1277,14 +1277,14 @@ dk_replace_all () {
 
 
 ##################################################################################
-# dk_to_lower(<variable>)
+# dk_toLower(<variable>)
 #
 #
-dk_to_lower () {
-	dk_verbose "dk_to_lower($*)"
+dk_toLower () {
+	dk_verbose "dk_toLower($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
-	dk_defined $1 || dk_error "dk_to_lower($*): $1 is not defined"
+	dk_defined $1 || dk_error "dk_toLower($*): $1 is not defined"
 
 	eval value='$'{$1}
 	value=$(echo "$value" | tr '[:upper:]' '[:lower:]')
@@ -1369,11 +1369,11 @@ dk_rename () {
 
 
 ##################################################################################
-# dk_remove_extension(<filepath>)
+# dk_removeExtension(<filepath>)
 #
 #
-dk_remove_extension () {
-	dk_verbose "dk_remove_extension($*)"
+dk_removeExtension () {
+	dk_verbose "dk_removeExtension($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
 	filepath="$1"
@@ -1403,11 +1403,11 @@ dk_validateGit () {
 
 
 ##################################################################################
-# dk_validate_homebrew()
+# dk_validateHomebrew()
 #
 #
-dk_validate_homebrew () {
-	dk_verbose "dk_validate_homebrew($*)"
+dk_validateHomebrew () {
+	dk_verbose "dk_validateHomebrew($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	if ! [ "$OSTYPE" = "darwin"* ]; then
@@ -1428,11 +1428,11 @@ dk_validate_homebrew () {
 
 
 ##################################################################################
-# dk_package_installed(<package>)
+# dk_packageInstalled(<package>)
 #
 #
-dk_package_installed () {
-	dk_verbose "dk_package_installed($*)"
+dk_packageInstalled () {
+	dk_verbose "dk_packageInstalled($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	if dk_commandExists dpkg-query; then
@@ -1444,18 +1444,18 @@ dk_package_installed () {
 			return $true
 		fi
 	elif dk_commandExists apt; then
-		dk_error "dk_package_installed() apt-get not implemented"
+		dk_error "dk_packageInstalled() apt-get not implemented"
 	elif dk_commandExists apt-get; then
-		dk_error "dk_package_installed() apt-get not implemented"
+		dk_error "dk_packageInstalled() apt-get not implemented"
 	elif dk_commandExists pkg; then
-		dk_error "dk_package_installed() pkg not implemented"
+		dk_error "dk_packageInstalled() pkg not implemented"
 	elif dk_commandExists pacman; then
 		if pacman -Qs "$1" > /dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
 	elif dk_commandExists tce-load; then
-		#dk_error "dk_package_installed() tce-load not implemented"
+		#dk_error "dk_packageInstalled() tce-load not implemented"
 		return $false
 	else
 		dk_error "ERROR: no package managers found"
@@ -1472,7 +1472,7 @@ dk_install () {
 	dk_verbose "dk_install($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	#if dk_package_installed $1; then
+	#if dk_packageInstalled $1; then
 	#	dk_warning "$1 already dk_installed"
 	#	return $false;
 	#fi
@@ -1498,11 +1498,11 @@ dk_install () {
 
 
 ##################################################################################
-# dk_validate_package(<command> <package>)
+# dk_validatePackage(<command> <package>)
 #
 #
-dk_validate_package () {
-	dk_verbose "dk_validate_package($*)"
+dk_validatePackage () {
+	dk_verbose "dk_validatePackage($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists "$1"; then
@@ -1512,11 +1512,11 @@ dk_validate_package () {
 
 
 ##################################################################################
-# dk_validate_ostype()
+# dk_validateOstype()
 #
 #
-#dk_validate_ostype () {
-#	dk_verbose "dk_validate_ostype($*)"
+#dk_validateOstype () {
+#	dk_verbose "dk_validateOstype($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #	
 #	if [ -e /proc/device-tree/model ]; then
@@ -1709,11 +1709,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validate_clang()
+# dk_validateClang()
 #
 #
-#dk_validate_clang () {
-#	dk_verbose "dk_validate_clang($*)"
+#dk_validateClang () {
+#	dk_verbose "dk_validateClang($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
@@ -1782,11 +1782,11 @@ dk_pushAssets () {
 
 
 ##################################################################################
-# dk_pull_assets()
+# dk_pullAssets()
 #
 #
-dk_pull_assets () {
-	dk_verbose "dk_pull_assets($*)"
+dk_pullAssets () {
+	dk_verbose "dk_pullAssets($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
@@ -2115,11 +2115,11 @@ dk_readCache() {
 
 
 ##################################################################################
-# dk_remove_carrage_returns(<input>)
+# dk_removeCarrageReturns(<input>)
 #
 #
-dk_remove_carrage_returns () {
-	dk_verbose "dk_remove_carrage_returns($*)"
+dk_removeCarrageReturns () {
+	dk_verbose "dk_removeCarrageReturns($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	in=$1
@@ -2129,18 +2129,18 @@ dk_remove_carrage_returns () {
 
 
 ##################################################################################
-# dk_save_args(<args..>)
+# dk_saveArgs(<args..>)
 #
 # reference: https://www.etalabs.net/sh_tricks.html
 #
 # usage:
 #   set -- One Two Three Four
-#   myarrayA=$(dk_save_args "$@")
+#   myarrayA=$(dk_saveArgs "$@")
 #   eval "set -- $myarrayA"
 #	echo "$1 $2 $3 $4"
 #
-dk_save_args () {
-	dk_verbose "dk_save_args($*)"
+dk_saveArgs () {
+	dk_verbose "dk_saveArgs($*)"
 
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"
@@ -2257,7 +2257,7 @@ dk_getHostTriple () {
 		UNAME_o="$(try uname -o)" && dk_debug UNAME_o
 		
 		UNAME_ARCH="$(try uname -m)"
-		dk_to_lower UNAME_ARCH
+		dk_toLower UNAME_ARCH
 		UNAME_SUBARCH=""
 		
 		if [ "$(try uname -s)" = "Darwin" ]; then
@@ -2270,7 +2270,7 @@ dk_getHostTriple () {
 		if [ "$(try uname -s)" = "darwin" ]; then
 			UNAME_OS="-$(try uname -s)$(try uname -r)"
 		else
-			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
+			UNAME_OS="-$(try uname -s)" && dk_toLower UNAME_OS
 		fi
 
 		if dk_stringContains "$(try uname -o)" "GNU"; then

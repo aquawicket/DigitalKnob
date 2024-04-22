@@ -152,7 +152,7 @@ function set_dkroot(){
 	export DKROOT=$DKROOT
 	
 	touch ~/.dkenv
-	dk_remove_from_file DKROOT ~/.dkenv
+	dk_removeFromFile DKROOT ~/.dkenv
 	dk_appendFile "export DKROOT=$DKROOT" ~/.dkenv
 	
 	dk_printVar DKROOT

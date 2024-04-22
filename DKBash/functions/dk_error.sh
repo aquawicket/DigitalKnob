@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 
 [ -z $ENABLE_dk_error ] && ENABLE_dk_error=1
@@ -18,7 +18,7 @@ dk_error () {
 	
 	[ $ENABLE_dk_error -eq 1 ] || return 0
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	
 	dk_echo "${red}${ERROR_TAG}${bg_red}${msg}${clr}${red}"
 	[ $TRACE_ON_ERROR -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

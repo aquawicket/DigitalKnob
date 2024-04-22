@@ -1,4 +1,4 @@
-::dk_include_guard()
+::dk_includeGuard()
 
 ::### BINARY DISTRIBUTIONS (PORTABLE) ###
 set "NOTEPADPP_DL_WIN_ARM64=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"

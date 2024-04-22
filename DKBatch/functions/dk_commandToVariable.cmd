@@ -1,4 +1,4 @@
-::dk_include_guard()
+::dk_includeGuard()
 
 ::####################################################################
 ::# dk_commandToVariable(<command . .> <variable_name>)

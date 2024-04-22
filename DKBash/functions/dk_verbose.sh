@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 
 [ -z $ENABLE_dk_verbose ] && ENABLE_dk_verbose=1
@@ -18,7 +18,7 @@ dk_verbose () {
 	
 	[ $ENABLE_dk_verbose -eq 1 ] || return 0
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	
 	dk_echo "${cyan}${TAG}${msg}${clr}"
 	[ $TRACE_ON_VERBOSE -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			

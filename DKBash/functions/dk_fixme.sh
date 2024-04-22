@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 
 [ -z $ENABLE_dk_fixme ] && ENABLE_dk_fixme=1
@@ -18,7 +18,7 @@ dk_fixme () {
 	
 	[ $ENABLE_dk_fixme -eq 1 ] || return 0
 	msg="$1"
-	dk_to_variable_info msg
+	dk_toVariableInfo msg
 	
 	dk_echo "${yellow}${TAG}${msg}${clr}"
 	[ $TRACE_ON_FIXME -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			

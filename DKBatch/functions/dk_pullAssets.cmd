@@ -1,11 +1,11 @@
-::dk_include_guard()
+::dk_includeGuard()
 
 ::####################################################################
-::# dk_pull_assets()
+::# dk_pullAssets()
 ::#
 ::#
-:dk_pull_assets () {
-	call dk_verbose "dk_pull_assets(%*)"
+:dk_pullAssets () {
+	call dk_verbose "dk_pullAssets(%*)"
 	
     echo not implemented,  TODO
 goto:eof

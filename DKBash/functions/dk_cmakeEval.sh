@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 ##################################################################################
 # dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)

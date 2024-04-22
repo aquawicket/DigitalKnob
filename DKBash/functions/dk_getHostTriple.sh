@@ -1,4 +1,4 @@
-# dk_include_guard()
+# dk_includeGuard()
 
 ##################################################################################
 # try(<args..>)
@@ -108,7 +108,7 @@ dk_getHostTriple () {
 		UNAME_o="$(try uname -o)" && dk_debug UNAME_o
 		
 		UNAME_ARCH="$(try uname -m)"
-		dk_to_lower UNAME_ARCH
+		dk_toLower UNAME_ARCH
 		UNAME_SUBARCH=""
 		
 		if [ "$(try uname -s)" = "Darwin" ]; then
@@ -121,7 +121,7 @@ dk_getHostTriple () {
 		if [ "$(try uname -s)" = "darwin" ]; then
 			UNAME_OS="-$(try uname -s)$(try uname -r)"
 		else
-			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
+			UNAME_OS="-$(try uname -s)" && dk_toLower UNAME_OS
 		fi
 
 		if dk_stringContains "$(try uname -o)" "GNU"; then

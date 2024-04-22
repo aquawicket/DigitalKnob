@@ -1,4 +1,4 @@
-::dk_include_guard()
+::dk_includeGuard()
 
 ::####################################################################
 ::# dk_prepend_cmake_args(<string>)
