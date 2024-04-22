@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_remove_all()
+# dk_removeAll()
 #
 #
-dk_remove_all () {
-	dk_verbose "dk_remove_all($*)"
+dk_removeAll () {
+	dk_verbose "dk_removeAll($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then	
@@ -33,7 +33,7 @@ dk_remove_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_remove_all wipe
+		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_removeAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

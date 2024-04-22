@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_validate_git()
+# dk_validateGit()
 #
 #
-dk_validate_git () {
-	dk_verbose "dk_validate_git($*)"
+dk_validateGit () {
+	dk_verbose "dk_validateGit($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists git; then

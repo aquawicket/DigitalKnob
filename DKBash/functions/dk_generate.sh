@@ -15,7 +15,7 @@ dk_generate() {
 	dk_echo
 
 	dk_clear_cmake_cache
-	dk_delete_temp_files
+	dk_deleteTempFiles
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	dk_debug TARGET_PATH
@@ -187,7 +187,7 @@ dk_generate() {
 	fi
 	
 	###### CMake Configure ######
-	dk_validate_cmake
+	dk_validateCmake
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"

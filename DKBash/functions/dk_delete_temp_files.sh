@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_delete_temp_files()
+# dk_deleteTempFiles()
 #
 #
-dk_delete_temp_files () {
-	dk_verbose "dk_delete_temp_files($*)"
+dk_deleteTempFiles () {
+	dk_verbose "dk_deleteTempFiles($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_info "Deleting .TMP files . . ."

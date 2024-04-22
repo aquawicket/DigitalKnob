@@ -7,7 +7,7 @@ call ..\functions\DK.cmd
 
 :main
 	:: Get the PATH environment variable from registry
-	call dk_get_registry_key HKCU\Environment PATH PATH_VALUE
+	call dk_getRegistryKey HKCU\Environment PATH PATH_VALUE
 	echo PATH_VALUE = %PATH_VALUE%
 	echo.
 	pause
@@ -18,7 +18,7 @@ call ..\functions\DK.cmd
 	pause
 	
 	:: Set the PATH environment variable from registry
-	::call dk_set_registry_key HKCU\Environment PATH REG_EXPAND_SZ %PATH_VALUE%
+	::call dk_setRegistryKey HKCU\Environment PATH REG_EXPAND_SZ %PATH_VALUE%
 	echo.
 	pause
 goto:eof

@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_pick_app()
+# dk_pickApp()
 #
 #
-dk_pick_app() {
-	dk_verbose "dk_pick_app($*)"
+dk_pickApp() {
+	dk_verbose "dk_pickApp($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -42,7 +42,7 @@ dk_pick_app() {
 	elif [ "$input" = "7" ]; then
 		APP="DKTestAll"
 	elif [ "$input" = "8" ]; then
-		dk_enter_manually
+		dk_enterManually
 	elif [ "$input" = "9" ]; then
 		clear
 	elif [ "$input" = "10" ]; then

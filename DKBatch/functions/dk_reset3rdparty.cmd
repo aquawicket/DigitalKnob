@@ -1,0 +1,17 @@
+::dk_include_guard()
+
+::####################################################################
+::# dk_reset3rdparty()
+::#
+::#
+:dk_reset3rdparty () {
+	call dk_verbose "dk_reset3rdparty(%*)"
+	
+    echo Resetting 3rdParty Libraries . . .
+        
+    set /P CONFIRM="Are you sure? [Y] " 
+    if /I "%CONFIRM%" NEQ "Y" goto:eof
+        
+    cd %DK3RDPARTY_DIR%
+    "%GIT_EXE%" clean -f -d
+goto:eof

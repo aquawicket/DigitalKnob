@@ -111,12 +111,12 @@ dk_buildMain () {
 	dk_debug SCRIPT_DIR
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_get_host_triple
+	dk_getHostTriple
 	
-	dk_get_dkpaths
+	dk_getDKPaths
 
-	dk_validate_git
-	dk_validate_branch
+	dk_validateGit
+	dk_validateBranch
 
 	dk_debug DKBRANCH_DIR
 	dk_debug DKAPPS_DIR
@@ -133,10 +133,10 @@ dk_buildMain () {
 	
 	while :
 	do
-		if [ -z "${UPDATE-}" ];     then dk_pick_update;  continue; fi
-		if [ -z "${APP-}" ];        then dk_pick_app;     continue; fi
-		if [ -z "${TARGET_OS-}" ];  then dk_pick_os;      continue; fi
-		if [ -z "${TYPE-}" ];       then dk_pick_type;    continue; fi
+		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
+		if [ -z "${APP-}" ];        then dk_pickApp;     continue; fi
+		if [ -z "${TARGET_OS-}" ];  then dk_pickOs;      continue; fi
+		if [ -z "${TYPE-}" ];       then dk_pickType;    continue; fi
 		
 		dk_createCache
 		
@@ -153,14 +153,14 @@ dk_buildMain () {
 
 
 ##################################################################################
-# dk_pick_update()
+# dk_pickUpdate()
 #
 #
-dk_pick_update() {
-	dk_verbose "dk_pick_update($*)"
+dk_pickUpdate() {
+	dk_verbose "dk_pickUpdate($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
-	dk_read_cache
+	dk_readCache
 	
 	dk_echo
 	dk_check_remote
@@ -218,22 +218,22 @@ dk_pick_update() {
 		TYPE=$_TYPE_
 		UPDATE=1
 	elif [ "$input" = "1" ]; then
-		dk_git_update
+		dk_gitUpdate
 	elif [ "$input" = "2" ]; then
-		dk_git_commit
+		dk_gitCommit
 	elif [ "$input" = "3" ]; then
-		dk_push_assets
+		dk_pushAssets
 	elif [ "$input" = "4" ]; then
 		dk_pull_assets
 	elif [ "$input" = "5" ]; then
-		dk_reset_all
+		dk_resetAll
 	elif [ "$input" = "6" ]; then
-		dk_remove_all
+		dk_removeAll
 	elif [ "$input" = "7" ]; then
 		clear
 	elif [ "$input" = "8" ]; then
 		dk_clear_cmake_cache
-		dk_delete_temp_files
+		dk_deleteTempFiles
 	elif [ "$input" = "9" ]; then
 		dk_reload
 	elif [ "$input" = "10" ]; then
@@ -247,11 +247,11 @@ dk_pick_update() {
 
 
 ##################################################################################
-# dk_pick_app()
+# dk_pickApp()
 #
 #
-dk_pick_app() {
-	dk_verbose "dk_pick_app($*)"
+dk_pickApp() {
+	dk_verbose "dk_pickApp($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -288,7 +288,7 @@ dk_pick_app() {
 	elif [ "$input" = "7" ]; then
 		APP="DKTestAll"
 	elif [ "$input" = "8" ]; then
-		dk_enter_manually
+		dk_enterManually
 	elif [ "$input" = "9" ]; then
 		clear
 	elif [ "$input" = "10" ]; then
@@ -304,11 +304,11 @@ dk_pick_app() {
 
 
 ##################################################################################
-# dk_pick_os()
+# dk_pickOs()
 #
 #
-dk_pick_os() {
-	dk_verbose "dk_pick_os($*)"
+dk_pickOs() {
+	dk_verbose "dk_pickOs($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -439,11 +439,11 @@ dk_pick_os() {
 
 
 ##################################################################################
-# dk_pick_type()
+# dk_pickType()
 #
 #
-dk_pick_type() {
-	dk_verbose "dk_pick_type($*)"
+dk_pickType() {
+	dk_verbose "dk_pickType($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -517,7 +517,7 @@ dk_generate() {
 	dk_echo
 
 	dk_clear_cmake_cache
-	dk_delete_temp_files
+	dk_deleteTempFiles
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	dk_debug TARGET_PATH
@@ -689,7 +689,7 @@ dk_generate() {
 	fi
 	
 	###### CMake Configure ######
-	dk_validate_cmake
+	dk_validateCmake
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
@@ -746,11 +746,11 @@ dk_build () {
 #####################################################################
 
 #####################################################################
-# dk_get_dkpaths()
+# dk_getDKPaths()
 #
 #
-dk_get_dkpaths () {
-	dk_verbose "dk_get_dkpaths($*)"
+dk_getDKPaths () {
+	dk_verbose "dk_getDKPaths($*)"
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE
@@ -777,16 +777,16 @@ dk_get_dkpaths () {
 #
 #
 dk_url () {
-	dk_string_contains $1 "://" && return $true
+	dk_stringContains $1 "://" && return $true
 	return $false
 }
 
 ##################################################################################
-# dk_validate_cmake()
+# dk_validateCmake()
 #
 #
-dk_validate_cmake () {
-	dk_verbose "dk_validate_cmake($*)"
+dk_validateCmake () {
+	dk_verbose "dk_validateCmake($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	######################################################################################################
@@ -812,7 +812,7 @@ dk_validate_cmake () {
 		dk_info "Installing CMake from dl files"
 		dk_debug CMAKE_IMPORT
 		
-		dk_get_filename "$CMAKE_IMPORT" CMAKE_DL_FILE
+		dk_getFilename "$CMAKE_IMPORT" CMAKE_DL_FILE
 		dk_debug CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
@@ -1171,11 +1171,11 @@ dk_confirm() {
 
 
 ##################################################################################
-# dk_string_contains(<string> <substring>)
+# dk_stringContains(<string> <substring>)
 #
 #
-dk_string_contains () {
-	dk_verbose "dk_string_contains($*)"
+dk_stringContains () {
+	dk_verbose "dk_stringContains($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	# https://stackoverflow.com/a/8811800/688352
@@ -1216,11 +1216,11 @@ dk_file_exists () {
 
 
 ##################################################################################
-# dk_get_filename(<path> <output>)
+# dk_getFilename(<path> <output>)
 #
 #
-dk_get_filename () {
-	dk_verbose "dk_get_filename($*)"
+dk_getFilename () {
+	dk_verbose "dk_getFilename($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	eval "$2=$(basename "$1")"
@@ -1384,11 +1384,11 @@ dk_remove_extension () {
 
 
 ##################################################################################
-# dk_validate_git()
+# dk_validateGit()
 #
 #
-dk_validate_git () {
-	dk_verbose "dk_validate_git($*)"
+dk_validateGit () {
+	dk_verbose "dk_validateGit($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists git; then
@@ -1544,11 +1544,11 @@ dk_validate_package () {
 
 
 ##################################################################################
-# dk_validate_branch()
+# dk_validateBranch()
 #
 #
-dk_validate_branch () {
-	dk_verbose "dk_validate_branch($*)"
+dk_validateBranch () {
+	dk_verbose "dk_validateBranch($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
@@ -1629,11 +1629,11 @@ dk_clear_cmake_cache () {
 
 
 ##################################################################################
-# dk_delete_temp_files()
+# dk_deleteTempFiles()
 #
 #
-dk_delete_temp_files () {
-	dk_verbose "dk_delete_temp_files($*)"
+dk_deleteTempFiles () {
+	dk_verbose "dk_deleteTempFiles($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_info "Deleting .TMP files . . ."
@@ -1646,11 +1646,11 @@ dk_delete_temp_files () {
 
 
 ##################################################################################
-# dk_validate_msys2()
+# dk_validateMsys2()
 #
 #
-#dk_validate_msys2 () {
-#	dk_verbose "dk_validate_msys2($*)"
+#dk_validateMsys2 () {
+#	dk_verbose "dk_validateMsys2($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
@@ -1659,11 +1659,11 @@ dk_delete_temp_files () {
 
 
 ##################################################################################
-# dk_validate_make()
+# dk_validateMake()
 #
 #
-#dk_validate_make () {
-#	dk_verbose "dk_validate_make($*)"
+#dk_validateMake () {
+#	dk_verbose "dk_validateMake($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
@@ -1672,11 +1672,11 @@ dk_delete_temp_files () {
 
 
 ##################################################################################
-# dk_validate_emscripten()
+# dk_validateEmscripten()
 #
 #
-#dk_validate_emscripten () {
-#	dk_verbose "dk_validate_emscripten($*)"
+#dk_validateEmscripten () {
+#	dk_verbose "dk_validateEmscripten($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
@@ -1690,11 +1690,11 @@ dk_delete_temp_files () {
 
 
 ##################################################################################
-# dk_validate_android_ndk()
+# dk_validateAndroidNdk()
 #
 #
-#dk_validate_android_ndk () {
-#	dk_verbose "dk_validate_android_ndk($*)"
+#dk_validateAndroidNdk () {
+#	dk_verbose "dk_validateAndroidNdk($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
@@ -1723,11 +1723,11 @@ dk_delete_temp_files () {
 
 
 ##################################################################################
-# dk_validate_gcc()
+# dk_validateGcc()
 #
 #
-#dk_validate_gcc () {
-#	dk_verbose "dk_validate_gcc($*)"
+#dk_validateGcc () {
+#	dk_verbose "dk_validateGcc($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
@@ -1768,11 +1768,11 @@ dk_cmakeEval () {
 
 
 ##################################################################################
-# dk_push_assets()
+# dk_pushAssets()
 #
 #
-dk_push_assets () {
-	dk_verbose "dk_push_assets($*)"
+dk_pushAssets () {
+	dk_verbose "dk_pushAssets($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
@@ -1796,11 +1796,11 @@ dk_pull_assets () {
 
 
 ##################################################################################
-# dk_reset_all()
+# dk_resetAll()
 #
 #
-dk_reset_all () {
-	dk_verbose "dk_reset_all($*)"
+dk_resetAll () {
+	dk_verbose "dk_resetAll($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then
@@ -1830,7 +1830,7 @@ dk_reset_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_reset_all wipe
+		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1854,7 +1854,7 @@ dk_reset_all () {
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
-		dk_git_update NO_CONFIRM
+		dk_gitUpdate NO_CONFIRM
 		
 		# wait for build.sh to show up
 		sleep 2
@@ -1871,11 +1871,11 @@ dk_reset_all () {
 
 
 ##################################################################################
-# dk_remove_all()
+# dk_removeAll()
 #
 #
-dk_remove_all () {
-	dk_verbose "dk_remove_all($*)"
+dk_removeAll () {
+	dk_verbose "dk_removeAll($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then	
@@ -1903,7 +1903,7 @@ dk_remove_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_remove_all wipe
+		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_removeAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1931,11 +1931,11 @@ dk_remove_all () {
 
 
 ##################################################################################
-# dk_git_update(<NO_CONFIRM:optional>)
+# dk_gitUpdate(<NO_CONFIRM:optional>)
 #
 #
-dk_git_update () {
-	dk_verbose "dk_git_update($*)"
+dk_gitUpdate () {
+	dk_verbose "dk_gitUpdate($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then
@@ -1962,11 +1962,11 @@ dk_git_update () {
 
 
 ##################################################################################
-# dk_git_commit()
+# dk_gitCommit()
 #
 #
-dk_git_commit () {	
-	dk_verbose "dk_git_commit($*)"
+dk_gitCommit () {	
+	dk_verbose "dk_gitCommit($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
@@ -2020,11 +2020,11 @@ dk_git_commit () {
 
 
 ##################################################################################
-# dk_enter_manually()
+# dk_enterManually()
 #
 #
-dk_enter_manually () {
-	dk_verbose "dk_enter_manually($*)"
+dk_enterManually () {
+	dk_verbose "dk_enterManually($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
@@ -2076,11 +2076,11 @@ dk_createCache () {
 
 
 ##################################################################################
-# dk_read_cache()
+# dk_readCache()
 #
 #
-dk_read_cache() {
-	dk_verbose "dk_read_cache($*)"
+dk_readCache() {
+	dk_verbose "dk_readCache($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then
@@ -2158,13 +2158,13 @@ try() {
 
 
 ##################################################################################
-# dk_get_host_triple(<input>)
+# dk_getHostTriple(<input>)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
-dk_get_host_triple () {
-	dk_verbose "dk_get_host_triple($*)"
+dk_getHostTriple () {
+	dk_verbose "dk_getHostTriple($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
@@ -2273,9 +2273,9 @@ dk_get_host_triple () {
 			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
 		fi
 
-		if dk_string_contains "$(try uname -o)" "GNU"; then
+		if dk_stringContains "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
-		elif dk_string_contains "$(try uname -o)" "Android"; then
+		elif dk_stringContains "$(try uname -o)" "Android"; then
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV=""
@@ -2297,15 +2297,15 @@ dk_get_host_triple () {
 
 	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_string_contains "${UNAME_a}" "Android"; then			# android
+	if dk_stringContains "${UNAME_a}" "Android"; then			# android
 		HOST_OS="android"
-	elif dk_string_contains "${UNAME_a}" "Darwin"; then			# mac
+	elif dk_stringContains "${UNAME_a}" "Darwin"; then			# mac
 		HOST_OS="mac"
-	elif dk_string_contains "${UNAME_a}" "raspberrypi"; then	# raspberry
+	elif dk_stringContains "${UNAME_a}" "raspberrypi"; then	# raspberry
 		HOST_OS="raspberry"
- 	elif dk_string_contains "${UNAME_a}" "Linux"; then			# linux
+ 	elif dk_stringContains "${UNAME_a}" "Linux"; then			# linux
 		HOST_OS="linux"
-	elif dk_string_contains "${UNAME_a}" "Msys"; then			# win
+	elif dk_stringContains "${UNAME_a}" "Msys"; then			# win
 		HOST_OS="win"
 	else
 		dk_error "Unsupported HOST_OS: ${UNAME_a}"

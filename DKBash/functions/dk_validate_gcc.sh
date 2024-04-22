@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_validate_gcc()
+# dk_validateGcc()
 #
 #
-#dk_validate_gcc () {
-#	dk_verbose "dk_validate_gcc($*)"
+#dk_validateGcc () {
+#	dk_verbose "dk_validateGcc($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"

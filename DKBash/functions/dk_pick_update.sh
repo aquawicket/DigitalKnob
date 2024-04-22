@@ -1,14 +1,14 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_pick_update()
+# dk_pickUpdate()
 #
 #
-dk_pick_update() {
-	dk_verbose "dk_pick_update($*)"
+dk_pickUpdate() {
+	dk_verbose "dk_pickUpdate($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
-	dk_read_cache
+	dk_readCache
 	
 	dk_echo
 	dk_check_remote
@@ -66,22 +66,22 @@ dk_pick_update() {
 		TYPE=$_TYPE_
 		UPDATE=1
 	elif [ "$input" = "1" ]; then
-		dk_git_update
+		dk_gitUpdate
 	elif [ "$input" = "2" ]; then
-		dk_git_commit
+		dk_gitCommit
 	elif [ "$input" = "3" ]; then
-		dk_push_assets
+		dk_pushAssets
 	elif [ "$input" = "4" ]; then
 		dk_pull_assets
 	elif [ "$input" = "5" ]; then
-		dk_reset_all
+		dk_resetAll
 	elif [ "$input" = "6" ]; then
-		dk_remove_all
+		dk_removeAll
 	elif [ "$input" = "7" ]; then
 		clear
 	elif [ "$input" = "8" ]; then
 		dk_clear_cmake_cache
-		dk_delete_temp_files
+		dk_deleteTempFiles
 	elif [ "$input" = "9" ]; then
 		dk_reload
 	elif [ "$input" = "10" ]; then

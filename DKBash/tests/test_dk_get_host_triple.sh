@@ -6,7 +6,7 @@
 
 echo ""
 echo ""
-dk_get_host_triple
+dk_getHostTriple
 echo "HOST_TRIPLE = $HOST_TRIPLE"
 echo ""
 

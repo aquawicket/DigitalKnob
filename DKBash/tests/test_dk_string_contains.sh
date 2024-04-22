@@ -6,13 +6,13 @@
 echo ""
 echo ""
 
-if dk_string_contains "1one1" "one"; then
+if dk_stringContains "1one1" "one"; then
 	echo "1one1 contains one"
 else
 	echo "1one1 does not contains one"
 fi
 
-if dk_string_contains "2two2" "tow"; then
+if dk_stringContains "2two2" "tow"; then
 	echo "2two2 contains tow"
 else
 	echo "2two2 does not contain tow"

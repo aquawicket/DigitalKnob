@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_validate_branch()
+# dk_validateBranch()
 #
 #
-dk_validate_branch () {
-	dk_verbose "dk_validate_branch($*)"
+dk_validateBranch () {
+	dk_verbose "dk_validateBranch($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
@@ -13,7 +13,7 @@ dk_validate_branch () {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	[ -z $DIGITALKNOB_DIR ] && dk_get_dkpaths
+	[ -z $DIGITALKNOB_DIR ] && dk_getDKPaths
 	if dk_file_exists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [ "$BRANCH" = "$FOLDER" ]; then

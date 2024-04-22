@@ -15,12 +15,12 @@
 	echo.
     
     call dk_deleteCache
-    call dk_delete_temp_files
+    call dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     call dk_debug TARGET_PATH
-    call dk_make_directory "%TARGET_PATH%\%TARGET_OS%"
+    call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
     call dk_debug CMAKE_SOURCE_DIR
@@ -101,7 +101,7 @@
 ::	fi
 	
 ::	###### CMake Configure ######
-	call dk_validate_cmake
+	call dk_validateCmake
 	
     echo.
     echo ****** CMAKE COMMAND ******

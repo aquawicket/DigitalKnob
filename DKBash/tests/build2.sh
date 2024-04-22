@@ -10,14 +10,14 @@
 ###### test <...> ######
 function test() {
 	echo "############ test() ############"
-	dk_print_var BASH
-	dk_print_var BASHOPTS
-	dk_print_var FUNCNAME
-	dk_print_var FUNCNAME
-	dk_print_var FUNCNAME
-	dk_print_var LINENO
-	dk_print_var BASH_SOURCE
-	dk_print_var BASH_LINENO
+	dk_printVar BASH
+	dk_printVar BASHOPTS
+	dk_printVar FUNCNAME
+	dk_printVar FUNCNAME
+	dk_printVar FUNCNAME
+	dk_printVar LINENO
+	dk_printVar BASH_SOURCE
+	dk_printVar BASH_LINENO
 }
 
 
@@ -28,31 +28,31 @@ function test() {
 ###### get_uname ######
 function get_uname() {
 	DKUNAME=$(uname -a)
-	dk_print_var DKUNAME
+	dk_printVar DKUNAME
 }
 
 ###### get_host ######
 function get_host() {
 	DKHOST=$(uname -s)
-	dk_print_var DKHOST
+	dk_printVar DKHOST
 }
 
 ###### get_arch ######
 function get_arch() {
 	DKARCH=$(uname -m)
-	dk_print_var DKARCH
+	dk_printVar DKARCH
 }
 
 ###### get_version ######
 function get_version() {
 	DKVERSION=$(uname -v)
-	dk_print_var DKVERSION
+	dk_printVar DKVERSION
 }
 
 ###### get_ostype ######
 function get_ostype() {
 	DKOSTYPE=$OSTYPE
-	dk_print_var DKOSTYPE
+	dk_printVar DKOSTYPE
 }
 
 ###### get_cpuinfo ######
@@ -60,7 +60,7 @@ function get_cpuinfo() {
 	if [ -e /proc/cpuinfo ]; then
 		DKCPUINFO=$(tr -d '\0' </proc/cpuinfo)
 	fi
-	dk_print_var DKCPUINFO
+	dk_printVar DKCPUINFO
 }
 
 ###### get_model ######
@@ -68,19 +68,19 @@ function get_model() {
 	if [ -e /proc/device-tree/model ]; then
 		DKMODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
-	dk_print_var DKMODEL
+	dk_printVar DKMODEL
 }
 
 ###### get_machtype ######
 function get_machtype() {
 	DKMACHTYPE=$MACHTYPE
-	dk_print_var DKMACHTYPE
+	dk_printVar DKMACHTYPE
 }
 
 ###### get_lang ######
 function get_lang() {
 	DKLANG=$LANG
-	dk_print_var DKLANG
+	dk_printVar DKLANG
 }
 
 ###### get_username ######
@@ -90,49 +90,49 @@ function get_username() {
 	elif [ -n "$USERNAME" ]; then
 		DKUSERNAME=$USERNAME
 	fi
-	dk_print_var DKUSERNAME
+	dk_printVar DKUSERNAME
 }
 
 ###### get_logname ######
 function get_logname() {
 	DKLOGNAME=$LOGNAME
-	dk_print_var DKLOGNAME
+	dk_printVar DKLOGNAME
 }
 
 ###### get_home ######
 function get_home() {
 	DKHOME=$HOME
-	dk_print_var DKHOME
+	dk_printVar DKHOME
 }
 
 ###### get_prefix ######
 function get_prefix() {
 	DKPREFIX=$PREFIX
-	dk_print_var DKPREFIX
+	dk_printVar DKPREFIX
 }
 
 ###### get_term ######
 function get_term() {
 	DKTERM=$TERM
-	dk_print_var DKTERM
+	dk_printVar DKTERM
 }
 
 ###### get_shell ######
 function get_shell() {
 	DKSHELL=$SHELL
-	dk_print_var DKSHELL
+	dk_printVar DKSHELL
 }
 
 ###### get_path ######
 function get_path() {
 	DKPATH=$PATH
-	dk_print_var DKPATH
+	dk_printVar DKPATH
 }
 
 ###### get_pwd ######
 function get_pwd() {
 	DKPWD=$PWD
-	dk_print_var DKPWD
+	dk_printVar DKPWD
 }
 
 ###### load_dkenv ######
@@ -155,7 +155,7 @@ function set_dkroot(){
 	dk_remove_from_file DKROOT ~/.dkenv
 	dk_append_file "export DKROOT=$DKROOT" ~/.dkenv
 	
-	dk_print_var DKROOT
+	dk_printVar DKROOT
 }
 
 ###### get_root ######
@@ -163,7 +163,7 @@ function get_root() {
 	load_dkenv
 	
 	if [ -n "$DKROOT" ]; then
-		dk_print_var DKROOT
+		dk_printVar DKROOT
 	else
 		echo "setting DKROOT to default directory"
 		set_dkroot $DKHOME/digitalknob

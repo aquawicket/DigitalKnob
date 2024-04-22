@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_git_update(<NO_CONFIRM:optional>)
+# dk_gitUpdate(<NO_CONFIRM:optional>)
 #
 #
-dk_git_update () {
-	dk_verbose "dk_git_update($*)"
+dk_gitUpdate () {
+	dk_verbose "dk_gitUpdate($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then

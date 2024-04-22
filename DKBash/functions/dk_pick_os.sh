@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_pick_os()
+# dk_pickOs()
 #
 #
-dk_pick_os() {
-	dk_verbose "dk_pick_os($*)"
+dk_pickOs() {
+	dk_verbose "dk_pickOs($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo

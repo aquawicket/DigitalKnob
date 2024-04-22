@@ -2,7 +2,7 @@
 
 ::###### Load Function files ######
 call ../functions/DK.cmd
-::dk_keep_console_open
+::dk_keepConsoleOpen
 echo "%SCRIPT_PATH%"
 echo %0
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )	

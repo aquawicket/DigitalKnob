@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_validate_android_ndk()
+# dk_validateAndroidNdk()
 #
 #
-#dk_validate_android_ndk () {
-#	dk_verbose "dk_validate_android_ndk($*)"
+#dk_validateAndroidNdk () {
+#	dk_verbose "dk_validateAndroidNdk($*)"
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"

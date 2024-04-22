@@ -25,12 +25,12 @@ dk_buildMain () {
 	dk_debug SCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_get_host_triple
+	dk_getHostTriple
 	
-	dk_get_dkpaths
+	dk_getDKPaths
 
-	dk_validate_git
-	dk_validate_branch
+	dk_validateGit
+	dk_validateBranch
 
 	dk_debug DKBRANCH_DIR
 	dk_debug DKAPPS_DIR
@@ -47,10 +47,10 @@ dk_buildMain () {
 	
 	while :
 	do
-		if [ -z "${UPDATE-}" ];     then dk_pick_update;  continue; fi
-		if [ -z "${APP-}" ];        then dk_pick_app;     continue; fi
-		if [ -z "${TARGET_OS-}" ];  then dk_pick_os;      continue; fi
-		if [ -z "${TYPE-}" ];       then dk_pick_type;    continue; fi
+		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
+		if [ -z "${APP-}" ];        then dk_pickApp;     continue; fi
+		if [ -z "${TARGET_OS-}" ];  then dk_pickOs;      continue; fi
+		if [ -z "${TYPE-}" ];       then dk_pickType;    continue; fi
 		
 		dk_createCache
 		dk_generate	

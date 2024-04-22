@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 #####################################################################
-# dk_get_dkpaths()
+# dk_getDKPaths()
 #
 #
-dk_get_dkpaths () {
-	dk_verbose "dk_get_dkpaths($*)"
+dk_getDKPaths () {
+	dk_verbose "dk_getDKPaths($*)"
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE

@@ -112,12 +112,12 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 	call:dk_debug SCRIPT_DIR
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
-	call:dk_get_host_triple
+	call:dk_getHostTriple
 
-	call:dk_get_dkpaths
+	call:dk_getDKPaths
    
-    call:dk_validate_git
-    call:dk_validate_branch
+    call:dk_validateGit
+    call:dk_validateBranch
 
     call:dk_debug DKBRANCH_DIR
     call:dk_debug DKAPPS_DIR
@@ -134,10 +134,10 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     
     :while_loop             
 	
-		if "%UPDATE%"==""     call:dk_pick_update & goto:while_loop
-		if "%APP%"==""        call:dk_pick_app    & goto:while_loop
-		if "%TARGET_OS%"==""  call:dk_pick_os     & goto:while_loop
-		if "%TYPE%"==""       call:dk_pick_type   & goto:while_loop
+		if "%UPDATE%"==""     call:dk_pickUpdate & goto:while_loop
+		if "%APP%"==""        call:dk_pickApp    & goto:while_loop
+		if "%TARGET_OS%"==""  call:dk_pickOs     & goto:while_loop
+		if "%TYPE%"==""       call:dk_pickType   & goto:while_loop
 
 		call:dk_createCache
 		
@@ -154,15 +154,15 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_pick_update()
+::# dk_pickUpdate()
 ::#
 ::#
-:dk_pick_update () {
-	call:dk_verbose "dk_pick_update(%*)"
+:dk_pickUpdate () {
+	call:dk_verbose "dk_pickUpdate(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
-    call:dk_read_cache
+    call:dk_readCache
 
     echo.
     call:dk_checkGitRemote
@@ -186,14 +186,14 @@ goto:eof
     
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0" set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
-    if "%choice%"=="1" call:dk_git_update
-    if "%choice%"=="2" call:dk_git_commit
-    if "%choice%"=="3" call:dk_push_assets
+    if "%choice%"=="1" call:dk_gitUpdate
+    if "%choice%"=="2" call:dk_gitCommit
+    if "%choice%"=="3" call:dk_pushAssets
     if "%choice%"=="4" call:dk_pull_assets
-    if "%choice%"=="5" call:dk_reset_all
-    if "%choice%"=="6" call:dk_remove_all
+    if "%choice%"=="5" call:dk_resetAll
+    if "%choice%"=="6" call:dk_removeAll
     if "%choice%"=="7" call:dk_clearScreen
-    if "%choice%"=="8" call:dk_deleteCache & call:dk_delete_temp_files
+    if "%choice%"=="8" call:dk_deleteCache & call:dk_deleteTempFiles
     if "%choice%"=="9" call:dk_reload
     if "%choice%"=="10" exit
         
@@ -202,15 +202,15 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_pick_app()
+::# dk_pickApp()
 ::#
 ::#
-:dk_pick_app () {
-	call:dk_verbose "dk_pick_app(%*)"
+:dk_pickApp () {
+	call:dk_verbose "dk_pickApp(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
-    call:dk_read_cache
+    call:dk_readCache
 
     echo.
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -238,7 +238,7 @@ goto:eof
     if "%choice%"=="5"  set "APP=DKSDLRml"     & goto:eof
     if "%choice%"=="6"  set "APP=DKDomTest"    & goto:eof
     if "%choice%"=="7"  set "APP=DKTestAll"    & goto:eof
-    if "%choice%"=="8"  call:dk_enter_manually    & goto:eof
+    if "%choice%"=="8"  call:dk_enterManually    & goto:eof
     if "%choice%"=="9" call:dk_clearScreen       & goto:eof
     if "%choice%"=="10" call:dk_reload            & goto:eof
     if "%choice%"=="11" set "UPDATE="          & goto:eof
@@ -250,11 +250,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_pick_os()
+::# dk_pickOs()
 ::#
 ::#
-:dk_pick_os () {
-	call:dk_verbose "dk_pick_os(%*)"
+:dk_pickOs () {
+	call:dk_verbose "dk_pickOs(%*)"
 
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -351,11 +351,11 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_pick_type()
+::# dk_pickType()
 ::#
 ::#
-:dk_pick_type () {
-	call:dk_verbose "dk_pick_type(%*)"
+:dk_pickType () {
+	call:dk_verbose "dk_pickType(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.
@@ -426,12 +426,12 @@ goto:eof
 	echo.
     
     call:dk_deleteCache
-    call:dk_delete_temp_files
+    call:dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     call:dk_debug TARGET_PATH
-    call:dk_make_directory "%TARGET_PATH%\%TARGET_OS%"
+    call:dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
     call:dk_debug CMAKE_SOURCE_DIR
@@ -512,7 +512,7 @@ goto:eof
 ::	fi
 	
 ::	###### CMake Configure ######
-	call:dk_validate_cmake
+	call:dk_validateCmake
 	
     echo.
     echo ****** CMAKE COMMAND ******
@@ -604,11 +604,11 @@ goto:eof
 ::####################################################################
 
 ::####################################################################
-::# dk_get_parent_folder(<input> <output>)
+::# dk_getParentFolder(<input> <output>)
 ::#
 ::#
-:dk_get_parent_folder () {
-	call:dk_verbose "dk_get_parent_folder(%*)"
+:dk_getParentFolder () {
+	call:dk_verbose "dk_getParentFolder(%*)"
 	
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
     set "%2=%parent%"
@@ -616,16 +616,16 @@ goto:eof
 
 
 ::####################################################################
-::# dk_get_dkpaths()
+::# dk_getDKPaths()
 ::#
 ::#
-:dk_get_dkpaths () {
-	call:dk_verbose "dk_get_dkpaths(%*)"
+:dk_getDKPaths () {
+	call:dk_verbose "dk_getDKPaths(%*)"
 	
 	
 	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-    call:dk_make_directory "%DIGITALKNOB_DIR%"
+    call:dk_makeDirectory "%DIGITALKNOB_DIR%"
     call:dk_debug DIGITALKNOB_DIR
 
 
@@ -634,21 +634,21 @@ goto:eof
 
 
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
-    call:dk_make_directory "%DKTOOLS_DIR%"
+    call:dk_makeDirectory "%DKTOOLS_DIR%"
     call:dk_debug DKTOOLS_DIR
         
     set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
-    call:dk_make_directory "%DKDOWNLOAD_DIR%"
+    call:dk_makeDirectory "%DKDOWNLOAD_DIR%"
     call:dk_debug DKDOWNLOAD_DIR
 goto:eof
 
 
 ::#####################################################################
-::# dk_get_parent_dir(<input> <output>)
+::# dk_getParentDir(<input> <output>)
 ::#
 ::#
-:dk_get_parent_dir () {
-	call:dk_verbose "dk_get_parent_dir(%*)"
+:dk_getParentDir () {
+	call:dk_verbose "dk_getParentDir(%*)"
 	
 	for %%A in (%1.) do set "parent=%%~dpA"
     set "%2=%parent%"
@@ -656,11 +656,11 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_get_host_triple()
+::# dk_getHostTriple()
 ::#
 ::#
-:dk_get_host_triple () {
-	call:dk_verbose "dk_get_host_triple(%*)"
+:dk_getHostTriple () {
+	call:dk_verbose "dk_getHostTriple(%*)"
 	
 	set HOST_OS=win
     call:dk_debug HOST_OS
@@ -722,11 +722,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_enter_manually()
+::# dk_enterManually()
 ::#
 ::#
-:dk_enter_manually () {
-	call:dk_verbose "dk_enter_manually(%*)"
+:dk_enterManually () {
+	call:dk_verbose "dk_enterManually(%*)"
 	
     echo Please type the name of the library, tool or app to build. Then press enter.
     set /p input= 
@@ -743,11 +743,11 @@ goto:eof
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
     ::call:dk_debug TARGET_PATH
     
-    call:dk_get_parent_folder %TARGET_PATH% parent
+    call:dk_getParentFolder %TARGET_PATH% parent
     ::call:dk_debug parent
     
     if %parent%==DKApps goto:eof
-    call:dk_make_directory  %DKAPPS_DIR%\%APP%
+    call:dk_makeDirectory  %DKAPPS_DIR%\%APP%
     
     :: create DKApps/<APP>/DKMAKE.cmake 
     echo dk_depend(%input%)> %DKAPPS_DIR%\%APP%\DKMAKE.cmake
@@ -758,11 +758,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_push_assets()
+::# dk_pushAssets()
 ::#
 ::#
-:dk_push_assets () {
-	call:dk_verbose "dk_push_assets(%*)"
+:dk_pushAssets () {
+	call:dk_verbose "dk_pushAssets(%*)"
 	
     echo not implemented,  TODO
 goto:eof
@@ -780,11 +780,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_reset_apps()
+::# dk_resetApps()
 ::#
 ::#
-:dk_reset_apps () {
-	call:dk_verbose "dk_reset_apps(%*)"
+:dk_resetApps () {
+	call:dk_verbose "dk_resetApps(%*)"
 	
     echo Resetting Apps . . .
 
@@ -797,11 +797,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_reset_plugins()
+::# dk_resetPlugins()
 ::#
 ::#
-:dk_reset_plugins () {
-	call:dk_verbose "dk_reset_plugins(%*)"
+:dk_resetPlugins () {
+	call:dk_verbose "dk_resetPlugins(%*)"
 	
     echo Resetting DKPlugins . . .
 
@@ -814,11 +814,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_reset_3rdparty()
+::# dk_reset3rdparty()
 ::#
 ::#
-:dk_reset_3rdparty () {
-	call:dk_verbose "dk_reset_3rdparty(%*)"
+:dk_reset3rdparty () {
+	call:dk_verbose "dk_reset3rdparty(%*)"
 	
     echo Resetting 3rdParty Libraries . . .
         
@@ -831,11 +831,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_reset_all()
+::# dk_resetAll()
 ::#
 ::#
-:dk_reset_all () {
-	call:dk_verbose "dk_reset_all(%*)"
+:dk_resetAll () {
+	call:dk_verbose "dk_resetAll(%*)"
 	
     if "%1" EQU "wipe" goto:wipe
         
@@ -862,12 +862,12 @@ goto:eof
         goto:eof
     )
     
-    call:dk_kill_process java.exe
-    call:dk_kill_process adb.exe
+    call:dk_killProcess java.exe
+    call:dk_killProcess adb.exe
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_reset_all wipe
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_resetAll wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -893,18 +893,18 @@ goto:eof
         
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
-    call:dk_git_update NO_CONFIRM
+    call:dk_gitUpdate NO_CONFIRM
         
     start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%SCRIPT_NAME% & exit
 goto:eof
 
 
 ::####################################################################
-::# dk_remove_all()
+::# dk_removeAll()
 ::#
 ::#
-:dk_remove_all () {
-	call:dk_verbose "dk_remove_all(%*)"
+:dk_removeAll () {
+	call:dk_verbose "dk_removeAll(%*)"
 	
     if "%1" EQU "wipe" goto:wipe
         
@@ -929,12 +929,12 @@ goto:eof
         goto:eof
     )
     
-    call:dk_kill_process java.exe
-    call:dk_kill_process adb.exe
+    call:dk_killProcess java.exe
+    call:dk_killProcess adb.exe
     
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
     copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_remove_all wipe
+    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_removeAll wipe
     exit    
         
     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1008,22 +1008,22 @@ goto:eof
 
 
 ::####################################################################
-::# dk_make_directory(<path>)
+::# dk_makeDirectory(<path>)
 ::#
 ::#
-:dk_make_directory () {
-	call:dk_verbose "dk_make_directory(%*)"
+:dk_makeDirectory () {
+	call:dk_verbose "dk_makeDirectory(%*)"
 	
     if NOT exist "%~1" mkdir "%~1"
 goto:eof
 
 
 ::####################################################################
-::# dk_validate_branch()
+::# dk_validateBranch()
 ::#
 ::#
-:dk_validate_branch () {
-	call:dk_verbose "dk_validate_branch(%*)"
+:dk_validateBranch () {
+	call:dk_verbose "dk_validateBranch(%*)"
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
@@ -1063,23 +1063,23 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_git()
+::# dk_validateGit()
 ::#
 ::#
-:dk_validate_git () {
-	call:dk_verbose "dk_validate_git(%*)"
+:dk_validateGit () {
+	call:dk_verbose "dk_validateGit(%*)"
 	
     if "%HOST_ARCH%"=="arm32" set GIT_DL=
     if "%HOST_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%
     if "%HOST_ARCH%"=="x86" set GIT_DL=%GIT_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
-    call:dk_get_filename %GIT_DL% GIT_DL_FILE
+    call:dk_getFilename %GIT_DL% GIT_DL_FILE
     ::call:dk_debug GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
     call:dk_convert_to_c_identifier %GIT_FOLDER% GIT_FOLDER
-    call:dk_convert_to_lowercase %GIT_FOLDER% GIT_FOLDER
+    call:dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
     ::call:dk_debug GIT_FOLDER
 
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
@@ -1124,11 +1124,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_cmake()
+::# dk_validateCmake()
 ::#
 ::#
-:dk_validate_cmake () {
-	call:dk_verbose "dk_validate_cmake(%*)"
+:dk_validateCmake () {
+	call:dk_verbose "dk_validateCmake(%*)"
 	
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"
@@ -1139,12 +1139,12 @@ goto:eof
     if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
     call:dk_debug CMAKE_DL
     
-    call:dk_get_filename %CMAKE_DL% CMAKE_DL_FILE
+    call:dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
     call:dk_debug CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:dk_convert_to_c_identifier %CMAKE_FOLDER% CMAKE_FOLDER
-    call:dk_convert_to_lowercase %CMAKE_FOLDER% CMAKE_FOLDER
+    call:dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
     call:dk_debug CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
@@ -1171,11 +1171,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_visual_studio()
+::# dk_validateVisualStudio()
 ::#
 ::#
-:dk_validate_visual_studio () {
-	call:dk_verbose "dk_validate_visual_studio(%*)"
+:dk_validateVisualStudio () {
+	call:dk_verbose "dk_validateVisualStudio(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
     call:dk_checkError
@@ -1183,11 +1183,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_msys2()
+::# dk_validateMsys2()
 ::#
 ::#
-:dk_validate_msys2 () {
-	call:dk_verbose "dk_validate_msys2(%*)"
+:dk_validateMsys2 () {
+	call:dk_verbose "dk_validateMsys2(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
     call:dk_checkError
@@ -1195,11 +1195,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_gcc()
+::# dk_validateGcc()
 ::#
 ::#
-:dk_validate_gcc () {
-	call:dk_verbose "dk_validate_gcc(%*)"
+:dk_validateGcc () {
+	call:dk_verbose "dk_validateGcc(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
     call:dk_checkError
@@ -1207,11 +1207,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_make()
+::# dk_validateMake()
 ::#
 ::#
-:dk_validate_make () {
-	call:dk_verbose "dk_validate_make(%*)"
+:dk_validateMake () {
+	call:dk_verbose "dk_validateMake(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
     call:dk_checkError
@@ -1219,11 +1219,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_openjdk()
+::# dk_validateOpenjdk()
 ::#
 ::#
-:dk_validate_openjdk () {
-	call:dk_verbose "dk_validate_openjdk(%*)"
+:dk_validateOpenjdk () {
+	call:dk_verbose "dk_validateOpenjdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
     call:dk_checkError
@@ -1231,11 +1231,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_android_ndk()
+::# dk_validateAndroidNdk()
 ::#
 ::#
-:dk_validate_android_ndk () {
-	call:dk_verbose "dk_validate_android_ndk(%*)"
+:dk_validateAndroidNdk () {
+	call:dk_verbose "dk_validateAndroidNdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     call:dk_debug ANDROID_GENERATOR
@@ -1247,11 +1247,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validate_emscripten()
+::# dk_validateEmscripten()
 ::#
 ::#
-:dk_validate_emscripten () {
-	call:dk_verbose "dk_validate_emscripten(%*)"
+:dk_validateEmscripten () {
+	call:dk_verbose "dk_validateEmscripten(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     call:dk_debug EMSDK
@@ -1322,11 +1322,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_delete_temp_files()
+::# dk_deleteTempFiles()
 ::#
 ::#
-:dk_delete_temp_files () {
-	call:dk_verbose "dk_delete_temp_files(%*)"
+:dk_deleteTempFiles () {
+	call:dk_verbose "dk_deleteTempFiles(%*)"
 	
     ::call:dk_cmakeEval "dk_deleteTempFiles()"
     echo Deleteing .tmp files . . .
@@ -1338,11 +1338,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_git_update(NO_CONFIRM)
+::# dk_gitUpdate(NO_CONFIRM)
 ::#
 ::#
-:dk_git_update () {
-	call:dk_verbose "dk_git_update(%*)"
+:dk_gitUpdate () {
+	call:dk_verbose "dk_gitUpdate(%*)"
 	
     if "%1" NEQ "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
@@ -1372,11 +1372,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_git_commit()
+::# dk_gitCommit()
 ::#
 ::#
-:dk_git_commit () {
-	call:dk_verbose "dk_git_commit(%*)"
+:dk_gitCommit () {
+	call:dk_verbose "dk_gitCommit(%*)"
 	
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 
@@ -1533,11 +1533,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_string_contains(<haystack> <needle> <result>)
+::# dk_stringContains(<haystack> <needle> <result>)
 ::#
 ::#
-:dk_string_contains () {
-	call:dk_verbose "dk_string_contains(%*)"
+:dk_stringContains () {
+	call:dk_verbose "dk_stringContains(%*)"
 	
     call set "haystack=%1"
     call set "needle=%2"
@@ -1547,18 +1547,18 @@ goto:eof
 
 
 ::################################################################################
-::# dk_get_filename(<path> <output_variable>)
+::# dk_getFilename(<path> <output_variable>)
 ::#
 ::#
-:dk_get_filename () {
-	call:dk_verbose "dk_get_filename(%*)"
+:dk_getFilename () {
+	call:dk_verbose "dk_getFilename(%*)"
 	
     if [%1] == [] (
-        echo "ERROR: dk_get_filename() parameter 1 is invalid"
+        echo "ERROR: dk_getFilename() parameter 1 is invalid"
         goto:eof
     )
     if [%2] == [] (
-        echo "ERROR: dk_get_filename() parameter 2 is invalid"
+        echo "ERROR: dk_getFilename() parameter 2 is invalid"
         goto:eof
     )
     
@@ -1567,7 +1567,7 @@ goto:eof
         set val=%%~nxF
     )
     
-    ::echo dk_get_filename(%*) -^> %2 = %val%
+    ::echo dk_getFilename(%*) -^> %2 = %val%
     call:dk_checkError
 goto:eof
 
@@ -1594,11 +1594,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_read_cache()
+::# dk_readCache()
 ::#
 ::#
-:dk_read_cache () {
-	call:dk_verbose "dk_read_cache(%*)"
+:dk_readCache () {
+	call:dk_verbose "dk_readCache(%*)"
 	
     ::echo reading cache...
     if not exist %DKBRANCH_DIR%\cache goto:eof
@@ -1646,11 +1646,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_convert_to_lowercase(<in> <out>)
+::# dk_convertToLowercase(<in> <out>)
 ::#
 ::#
-:dk_convert_to_lowercase () {
-	call:dk_verbose "dk_convert_to_lowercase(%*)"
+:dk_convertToLowercase () {
+	call:dk_verbose "dk_convertToLowercase(%*)"
 	
     set _string=%1
     set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -1667,11 +1667,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_print_var(<variable>)
+::# dk_printVar(<variable>)
 ::#
 ::#
-:dk_print_var () {
-	::call:dk_verbose "dk_print_var(%*)"
+:dk_printVar () {
+	::call:dk_verbose "dk_printVar(%*)"
 	
     set "var=%1"
     call set "value=%%%var%%%"
@@ -1683,11 +1683,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_kill_process(<name>)
+::# dk_killProcess(<name>)
 ::#
 ::#
-:dk_kill_process () {
-	call:dk_verbose "dk_kill_process(%*)"
+:dk_killProcess () {
+	call:dk_verbose "dk_killProcess(%*)"
 	
     taskkill /IM "%1" /F > nul
 goto:eof

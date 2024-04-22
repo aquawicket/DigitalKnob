@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_pick_type()
+# dk_pickType()
 #
 #
-dk_pick_type() {
-	dk_verbose "dk_pick_type($*)"
+dk_pickType() {
+	dk_verbose "dk_pickType($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo

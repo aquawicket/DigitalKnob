@@ -10,14 +10,14 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 
 
 ##################################################################################
-# dk_validate_cmake()
+# dk_validateCmake()
 #
 #
-dk_validate_cmake () {
-	dk_verbose "dk_validate_cmake($*)"
+dk_validateCmake () {
+	dk_verbose "dk_validateCmake($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	[ -z $HOST_OS ] && dk_get_host_triple
+	[ -z $HOST_OS ] && dk_getHostTriple
 	
 	######################################################################################################
 	[ "${HOST_OS}" 		= "android" ]              && CMAKE_IMPORT=cmake;						
@@ -44,7 +44,7 @@ dk_validate_cmake () {
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
-		dk_get_filename "$CMAKE_DL" CMAKE_DL_FILE
+		dk_getFilename "$CMAKE_DL" CMAKE_DL_FILE
 		dk_debug CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
@@ -56,7 +56,7 @@ dk_validate_cmake () {
 		dk_to_lower CMAKE_FOLDER
 		dk_debug CMAKE_FOLDER
 		
-		[ -z $DKTOOLS_DIR ] && dk_get_dkpaths
+		[ -z $DKTOOLS_DIR ] && dk_getDKPaths
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake

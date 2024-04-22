@@ -1,0 +1,15 @@
+::dk_include_guard()
+
+::####################################################################
+::# dk_validateGcc()
+::#
+::#
+:dk_validateGcc () {
+	call dk_verbose "dk_validateGcc(%*)"
+	
+	if "%DKIMPORTS_DIR%"==""  call dk_validateBranch
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+	call dk_debug GCC_C_COMPILER
+	call dk_debug GCC_CXX_COMPILER
+    call dk_checkError
+goto:eof

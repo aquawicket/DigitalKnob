@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_read_cache()
+# dk_readCache()
 #
 #
-dk_read_cache() {
-	dk_verbose "dk_read_cache($*)"
+dk_readCache() {
+	dk_verbose "dk_readCache($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_file_exists "$DKBRANCH_DIR"/cache; then

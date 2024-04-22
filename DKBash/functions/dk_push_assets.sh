@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_push_assets()
+# dk_pushAssets()
 #
 #
-dk_push_assets () {
-	dk_verbose "dk_push_assets($*)"
+dk_pushAssets () {
+	dk_verbose "dk_pushAssets($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0

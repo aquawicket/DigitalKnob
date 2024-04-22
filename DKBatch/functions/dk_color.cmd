@@ -57,6 +57,6 @@ set "BG_White=[107m"
 ::
 :dk_color () {
     ::call dk_verbose "%0(%*)"
-    ::call :dk_print_colors
+    ::call :dk_printColors
 goto:eof
 

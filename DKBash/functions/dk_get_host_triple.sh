@@ -9,13 +9,13 @@ try() {
 }
 
 ##################################################################################
-# dk_get_host_triple(<input>)
+# dk_getHostTriple(<input>)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
-dk_get_host_triple () {
-	dk_verbose "dk_get_host_triple($*)"
+dk_getHostTriple () {
+	dk_verbose "dk_getHostTriple($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
@@ -124,9 +124,9 @@ dk_get_host_triple () {
 			UNAME_OS="-$(try uname -s)" && dk_to_lower UNAME_OS
 		fi
 
-		if dk_string_contains "$(try uname -o)" "GNU"; then
+		if dk_stringContains "$(try uname -o)" "GNU"; then
 			UNAME_ENV="-gnu"
-		elif dk_string_contains "$(try uname -o)" "Android"; then
+		elif dk_stringContains "$(try uname -o)" "Android"; then
 			UNAME_ENV="-android" #FIXME: need abi number I.E. -android24
 		else
 			UNAME_ENV=""
@@ -148,15 +148,15 @@ dk_get_host_triple () {
 
 	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
-	if dk_string_contains "${UNAME_a}" "Android"; then			# android
+	if dk_stringContains "${UNAME_a}" "Android"; then			# android
 		HOST_OS="android"
-	elif dk_string_contains "${UNAME_a}" "Darwin"; then			# mac
+	elif dk_stringContains "${UNAME_a}" "Darwin"; then			# mac
 		HOST_OS="mac"
-	elif dk_string_contains "${UNAME_a}" "raspberrypi"; then	# raspberry
+	elif dk_stringContains "${UNAME_a}" "raspberrypi"; then	# raspberry
 		HOST_OS="raspberry"
- 	elif dk_string_contains "${UNAME_a}" "Linux"; then			# linux
+ 	elif dk_stringContains "${UNAME_a}" "Linux"; then			# linux
 		HOST_OS="linux"
-	elif dk_string_contains "${UNAME_a}" "Msys"; then			# win
+	elif dk_stringContains "${UNAME_a}" "Msys"; then			# win
 		HOST_OS="win"
 	else
 		dk_error "Unsupported HOST_OS: ${UNAME_a}"

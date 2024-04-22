@@ -51,13 +51,13 @@ setlocal enableDelayedExpansion
 ::  call dk_debug MSYSTEM
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
-	call dk_get_host_triple
+	call dk_getHostTriple
 
-	call dk_get_dkpaths
+	call dk_getDKPaths
    
-    call dk_validate_git
+    call dk_validateGit
 	call dk_debug GIT_EXE
-    call dk_validate_branch
+    call dk_validateBranch
 
     call dk_debug DKBRANCH_DIR
     call dk_debug DKAPPS_DIR
@@ -76,10 +76,10 @@ setlocal enableDelayedExpansion
     
     :while_loop             
 	
-		if "%UPDATE%"==""     call dk_pick_update & goto:while_loop
-		if "%APP%"==""        call dk_pick_app    & goto:while_loop
-		if "%TARGET_OS%"==""  call dk_pick_os     & goto:while_loop
-		if "%TYPE%"==""       call dk_pick_type   & goto:while_loop
+		if "%UPDATE%"==""     call dk_pickUpdate & goto:while_loop
+		if "%APP%"==""        call dk_pickApp    & goto:while_loop
+		if "%TARGET_OS%"==""  call dk_pickOs     & goto:while_loop
+		if "%TYPE%"==""       call dk_pickType   & goto:while_loop
 
 		call dk_createCache
 		

@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_reset_all()
+# dk_resetAll()
 #
 #
-dk_reset_all () {
-	dk_verbose "dk_reset_all($*)"
+dk_resetAll () {
+	dk_verbose "dk_resetAll($*)"
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then
@@ -35,7 +35,7 @@ dk_reset_all () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_reset_all wipe
+		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -59,7 +59,7 @@ dk_reset_all () {
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
-		dk_git_update NO_CONFIRM
+		dk_gitUpdate NO_CONFIRM
 		
 		# wait for build.sh to show up
 		sleep 2

@@ -3,6 +3,6 @@
 ::###### Load Function files ######
 call "../functions/DK.cmd"
 
-call dk_cmake_notepadpp
+call dk_cmakeNotepadpp
 
 pause

@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_enter_manually()
+# dk_enterManually()
 #
 #
-dk_enter_manually () {
-	dk_verbose "dk_enter_manually($*)"
+dk_enterManually () {
+	dk_verbose "dk_enterManually($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."

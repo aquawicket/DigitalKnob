@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_convert_to_lowercase()
+# dk_convertToLowercase()
 #
 #
-dk_convert_to_lowercase() {
-	dk_debug "dk_convert_to_lowercase($@)"
+dk_convertToLowercase() {
+	dk_debug "dk_convertToLowercase($@)"
 	if [ -z "$2" ]; then
 		dk_error "dk_convert_to_c_identifier <input> <output> requires 2 parameters"
 		return $false

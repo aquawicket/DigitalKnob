@@ -1,11 +1,11 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_git_commit()
+# dk_gitCommit()
 #
 #
-dk_git_commit () {	
-	dk_verbose "dk_git_commit($*)"
+dk_gitCommit () {	
+	dk_verbose "dk_gitCommit($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."

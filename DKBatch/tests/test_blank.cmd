@@ -4,7 +4,7 @@ echo before
 ::###### Load Function files ######
 call "../functions/DK.cmd"
 
-::call dk_print_variables
+::call dk_printVariables
 ::echo SCRIPT_PATH = %SCRIPT_PATH%
 
 :: http://cplusplus.bordoon.com/cmd_exe_variables.html

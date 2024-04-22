@@ -1,13 +1,13 @@
 # dk_include_guard()
 
 ##################################################################################
-# dk_print_var(variable)
+# dk_printVar(variable)
 #
 #
-dk_print_var() {
-	#dk_verbose "dk_print_var($@)"
+dk_printVar() {
+	#dk_verbose "dk_printVar($@)"
 	if [ -z "$1" ]; then
-		dk_error "dk_print_var <variable> requires 1 parameter"
+		dk_error "dk_printVar <variable> requires 1 parameter"
 		return $false
 	fi
 	

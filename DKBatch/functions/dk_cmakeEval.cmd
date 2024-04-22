@@ -8,9 +8,9 @@
 	call dk_verbose "dk_cmakeEval(%*)"
 	
     if [%1]==[]                  call dk_error "dk_cmakeEval() parameter1 is invalid"
-	if [%CMAKE_EXE%]==[]         call dk_validate_cmake
+	if [%CMAKE_EXE%]==[]         call dk_validateCmake
     if not exist "%CMAKE_EXE%"   call dk_error "Could not locate CMAKE_EXE" 
-	if [%DKCMAKE_DIR%]==[]       call dk_validate_branch
+	if [%DKCMAKE_DIR%]==[]       call dk_validateBranch
     if not exist "%DKCMAKE_DIR%" call dk_error "Could not locate DKCMAKE_DIR" 
 
     set DKCOMMAND=%1

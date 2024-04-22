@@ -11,7 +11,7 @@ dk_debug "debug"
 dk_warning "warning"
 dk_debug "SCRIPT($@)"
 TEST_VAR="this is a test variable"
-dk_print_var TEST_VAR
+dk_printVar TEST_VAR
 
 ###### main ######
 main() {
