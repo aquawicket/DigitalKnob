@@ -13,6 +13,7 @@ dk_validate_branch () {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
+	[ -z $DIGITALKNOB_DIR ] && dk_get_dkpaths
 	if dk_file_exists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [ "$BRANCH" = "$FOLDER" ]; then

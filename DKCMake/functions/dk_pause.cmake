@@ -11,7 +11,7 @@ function(dk_pause)
 	
 	#if(${ARGC} GREATER 0) dk_error "Incorrect number of parameters" endif()
 	
-	find_program(CMD_EXE cmd)
+	find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		if(NOT DKBATCH_DIR)
 			dk_getDKPaths()

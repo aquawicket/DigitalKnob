@@ -1,18 +1,14 @@
+#!bin/bash
 #echo "$0($*)"
 
-###### Set and check posix mode ######
-$(set -o posix) && set -o posix && case :$SHELLOPTS: in
-  *:posix:*) echo "POSIX mode enabled" ;;
-  *)         echo "POSIX mode not enabled" ;;
-esac
-$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
-$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
-#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
-#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+echo "The script you are running has:"
+echo "basename: [$(basename "$0")]"
+echo "dirname : [$(dirname "$0")]"
+echo "pwd     : [$(pwd)]"
 
 #. DKBash/functions/dk_realpath.sh
 dk_realpath() {
-    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+    [ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
 }
 SCRIPT_PATH=$(dk_realpath $0)
 [ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
@@ -36,6 +32,16 @@ if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 fi
 
 [ -n "$DKINIT" ] && return || readonly DKINIT=1     # dk_include_guard()
+
+###### Set and check posix mode ######
+$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+  *:posix:*) echo "POSIX mode enabled" ;;
+  *)         echo "POSIX mode not enabled" ;;
+esac
+$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
 ###### Global Script Variables ######
 #export LOG_VERBOSE=1
