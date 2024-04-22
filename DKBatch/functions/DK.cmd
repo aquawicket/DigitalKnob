@@ -5,21 +5,21 @@
 
 :::::: Global Script Variables ::::::
 set LOG_VERBOSE=1
-set LOG_DEBUG=1
-set TRACE_ON_WARNINGS=0
-set HALT_ON_WARNINGS=0
-set CONTINUE_ON_ERRORS=0
 
 
 
 :::::: Script internal setup ::::::
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-<:dk_getCaller <nul call dk_getCaller.cmd SCRIPT_PATH
-dk_getDirectory %SCRIPT_PATH% SCRIPT_DIR
-dk_getFilename %SCRIPT_PATH% SCRIPT_NAME
 
+set "PATH=%DKBATCH_DIR%\functions;%PATH%"
+<:dk_getCaller <nul call %DKBATCH_DIR%\functions\dk_getCaller.cmd SCRIPT_PATH
+call dk_getDirectory %SCRIPT_PATH% SCRIPT_DIR
+call dk_getFilename %SCRIPT_PATH% SCRIPT_NAME
+call dk_debug DKBATCH_DIR
+call dk_debug SCRIPT_DIR
+call dk_debug SCRIPT_NAME
+pause 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
 :: & exit )
 cls
