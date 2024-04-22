@@ -14,7 +14,7 @@
 #	@msg	- The message to print
 #
 dk_verbose () {
-	#dk_verbose "dk_verbose($*)"	
+	#echo "dk_verbose($*)"	
 	
 	[ $ENABLE_dk_verbose -eq 1 ] || return 0
 	msg="$1"

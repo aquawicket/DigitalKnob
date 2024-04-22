@@ -5,6 +5,7 @@ if [%ENABLE_dk_debug%]==[] set ENABLE_dk_debug=1
 if [%TRACE_ON_DEBUG%]==[] set TRACE_ON_DEBUG=0
 if [%PAUSE_ON_DEBUG%]==[] set PAUSE_ON_DEBUG=0
 if [%HALT_ON_DEBUG%]==[] set HALT_ON_DEBUG=0
+::TAG="  VERBOSE: "
 ::##################################################################################
 ::# dk_debug(msg)
 ::#
@@ -14,8 +15,6 @@ if [%HALT_ON_DEBUG%]==[] set HALT_ON_DEBUG=0
 ::#
 :dk_debug () {
 	::call dk_verbose "dk_debug(%*)"
-	
-::	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
 	if NOT [%ENABLE_dk_debug%] == [1] goto:eof
 	set "msg=%*"
@@ -28,10 +27,9 @@ if [%HALT_ON_DEBUG%]==[] set HALT_ON_DEBUG=0
     if "%value%" NEQ "" set "msg=%1 = '%value%'"
 	if "%value%" == "" set "msg=%1 = %red%NOT DEFINED%clr%"
 	
-	::echo %blue%   DEBUG: !msg:~1,-1! %clr%
 	call dk_echo %blue%%TAG%%msg%%clr%
-	if [%TRACE_ON_DEBUG%]==[1] dk_stacktrace 		
+	if [%TRACE_ON_DEBUG%]==[1] call dk_stacktrace 		
 	if [%HALT_ON_DEBUG%]==[1] exit
-	if [%PAUSE_ON_DEBUG%]==[1] dk_pause
+	if [%PAUSE_ON_DEBUG%]==[1] call dk_pause
 	
 goto:eof
