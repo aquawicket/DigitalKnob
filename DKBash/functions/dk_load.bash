@@ -24,7 +24,7 @@ dk_load() {
 	#if [ -e $fpath]; then
 		#if [[ $(file -b - < $fpath) =~ CRLF ]]; then		# BASH REGEX MATCH
 		if echo $(file -b - < $fpath) | grep -q CRLF; then	# POSIX REGEX MATCH
-			#echo Converting file to Unix line endings
+			echo "Converting file to Unix line endings"
 			sed -i -e 's/\r$//' $fpath
 		fi
 	#fi
@@ -80,7 +80,7 @@ dk_load() {
 				echo "${fn}: skipping $value.    empty"
 				continue
 			else
-				#echo "$fn: dk_load( $value )"
+				echo "$fn: dk_load( $value )"
 				dk_load $value
 			fi
 		done

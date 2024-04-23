@@ -10,7 +10,7 @@ dk_buildMain () {
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
 	
-	dk_validate_sudo
+	dk_validateSudo
 	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"

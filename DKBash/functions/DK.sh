@@ -1,10 +1,10 @@
 #!bin/bash
 #echo "$0($*)"
 
-echo "The script you are running has:"
-echo "basename: [$(basename "$0")]"
-echo "dirname : [$(dirname "$0")]"
-echo "pwd     : [$(pwd)]"
+#echo "The script you are running has:"
+#echo "basename: [$(basename "$0")]"
+#echo "dirname : [$(dirname "$0")]"
+#echo "pwd     : [$(pwd)]"
 
 #. DKBash/functions/dk_realpath.sh
 dk_realpath() {
