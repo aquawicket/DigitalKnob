@@ -9,9 +9,39 @@ call:ASCII_ADD		SOH		1		001		0x01	01		"Start of Heading"
 call:ASCII_ADD		STX		2		002		0x02	02		"Start of Text"
 call:ASCII_ADD		ETX		3		003		0x03	03		"End of Text"
 call:ASCII_ADD		EOT		4		004		0x04	04		"End of Transmission"
+call:ASCII_ADD		ENQ		5		005		0x05	05		"Enquiry"
+call:ASCII_ADD		ACK		6		006		0x06	06		"Acknowledge"
+call:ASCII_ADD		BEL		7		007		0x07	07		"Bell, Alert"
+call:ASCII_ADD		BS		8		010		0x08	08		"Backspace"
+call:ASCII_ADD		HT		9		011		0x09	09		"Horizontal Tab"
+call:ASCII_ADD		LF		10		012		0x0a	10		"Line Feed"
+call:ASCII_ADD		VT		11		013		0x0b	11		"Vertical Tabulation"
+call:ASCII_ADD		FF		12		014		0x0c	12		"Form Feed"
+call:ASCII_ADD		CR		13		015		0x0d	13		"Carriage Return"
+call:ASCII_ADD		SO		14		016		0x0e	14		"Shift Out"
+call:ASCII_ADD		SI		15		017		0x0f	15		"Shift In"
+call:ASCII_ADD		DLE		16		020		0x10	16		"Data Link Escape"
+call:ASCII_ADD		DC1		17		021		0x11	17		"Device Control One (XON)"
+call:ASCII_ADD		DC2		18		022		0x12	18		"Device Control Two"
+call:ASCII_ADD		DC3		19		023		0x13	19		"Device Control Three (XOFF)"
+call:ASCII_ADD		DC4		20		024		0x14	20		"Device Control Four"
+call:ASCII_ADD		NAK		21		025		0x15	21		"Negative Acknowledge"
+call:ASCII_ADD		SYN		22		026		0x16	22		"Synchronous Idle"
+call:ASCII_ADD		ETB		23		027		0x17	23		"End of Transmission Block"
+call:ASCII_ADD		CAN		24		030		0x18	24		"Cancel"
+call:ASCII_ADD		EM		25		031		0x19	25		"End of medium"
+call:ASCII_ADD		SUB		26		032		0x1a	26		"Substitute"
+call:ASCII_ADD		ESC		27		033		0x1b	27		"Escape"
+call:ASCII_ADD		ZZZ		28		034		0x1c	28		"File Separator"
+call:ASCII_ADD		ZZZ		29		035		0x1d	29		"Group Separator"
+call:ASCII_ADD		ZZZ		30		036		0x1e	30		"Record Separator"
+call:ASCII_ADD		ZZZ		31		037		0x1f	31		"Unit Separator"
 
+call dk_hexToVariable NUL 0x00
+call dk_hexToVariable BEL 0x07
+call dk_hexToVariable TAB 0x09
+call dk_hexToVariable ESC 0x1b
 
-::call:ASCII_ADD		ZZZ		ZZZ		ZZZ		0x		ZZZ		"ZZZ"
 
 
 :::ASCII_length_Loop
@@ -26,24 +56,7 @@ for /L %%i IN (0,1,%ASCII_length%) DO (
 )
 echo.
 
-:ASCII_ADD
-	::echo ASCII_ADD (%*
-	::echo %~1	%~2		%~3		%~4		%~5		%~6
-	set ID=%~2
-	set ASCII[%ID%].SYMBOL=%~1
-	set ASCII[%ID%].DEC=%~2
-	set ASCII[%ID%].OCT=%~3
-	set ASCII[%ID%].HEX=%~4
-	set ASCII[%ID%].HTML=%~5
-	set ASCII[%ID%].INFO=%6
-	
-	set /a ASCII_length+=1
-goto:eof
 
-:ASCII_SHOW
-	set ID=%~1
-	call echo %%ASCII[%ID%].DEC%%	%%ASCII[%ID%].SYMBOL%%	%%ASCII[%ID%].DEC%%	%%ASCII[%ID%].OCT%%	%%ASCII[%ID%].HEX%%	%%ASCII[%ID%].HTML%%	%%ASCII[%ID%].INFO%%
-goto:eof
 
 call dk_hexToVariable NUL 0x00
 ::call dk_hexToVariable SOH 0x01
@@ -165,3 +178,23 @@ set "BG_Blue=%ESC%[104m"
 set "BG_Magenta=%ESC%[105m"
 set "BG_Cyan=%ESC%[106m"
 set "BG_White=%ESC%[107m"
+goto:eof
+
+:ASCII_ADD
+	::echo ASCII_ADD (%*
+	::echo %~1	%~2		%~3		%~4		%~5		%~6
+	set ID=%~2
+	set ASCII[%ID%].SYMBOL=%~1
+	set ASCII[%ID%].DEC=%~2
+	set ASCII[%ID%].OCT=%~3
+	set ASCII[%ID%].HEX=%~4
+	set ASCII[%ID%].HTML=%~5
+	set ASCII[%ID%].INFO=%6
+	
+	set /a ASCII_length+=1
+goto:eof
+
+:ASCII_SHOW
+	set ID=%~1
+	call echo %%ASCII[%ID%].DEC%%	%%ASCII[%ID%].SYMBOL%%	%%ASCII[%ID%].DEC%%	%%ASCII[%ID%].OCT%%	%%ASCII[%ID%].HEX%%	%%ASCII[%ID%].HTML%%	%%ASCII[%ID%].INFO%%
+goto:eof

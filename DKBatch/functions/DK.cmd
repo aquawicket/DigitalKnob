@@ -67,7 +67,8 @@ call dk_debug SCRIPT_NAME
 
 :::::: Script loader ::::::
 call dk_load
-call dk_load dk_color
+::call dk_load dk_color
+call dk_load dk_escapeSequences
 
 
 
