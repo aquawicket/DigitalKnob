@@ -4,19 +4,20 @@
 ::####################################################################
 ::# dk_hexToAscii(<hex_string>)
 ::#
+::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToAscii () {
-	call dk_verbose "dk_hexToAscii(%*)"
+	::call dk_verbose "dk_hexToAscii(%*)"
 	
     setlocal enabledelayedexpansion
-	set "hex=%1"
-	echo !hex!> temp.hex
-	call certutil -decodehex temp.hex str.txt >nul
-	set /p str=<str.txt
-	echo:
-	( del temp.hex & del str.txt )>nul
-	set "output=!str!"
-	endlocal & set %2=%output%
-goto:eof
+	set hex=%~1
+	echo !hex:~-2,2!> hex.tmp
 
+	call certutil -decodehex hex.tmp ascii.tmp >nul
+	set /p ascii=<ascii.tmp
+	( del hex.tmp & del ascii.tmp )>nul
+	
+	echo     dk_hexToAscii %hex% = %ascii%
+	endlocal & set %2=%ascii%
+goto:eof
 
