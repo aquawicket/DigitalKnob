@@ -11,6 +11,6 @@ include_guard()
 #
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
-	dk_getOption_value(${name} ${ARGN})
+	dk_getOptionValue(${name} ${ARGN})
 	set(${RESULT} ${${name}})
 endmacro()

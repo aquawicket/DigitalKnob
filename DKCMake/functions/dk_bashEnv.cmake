@@ -12,7 +12,7 @@ function(dk_bashEnv)
 	
 	dk_getOption(NOASSERT ${ARGV} REMOVE)
 	dk_getOption(NOECHO ${ARGV} REMOVE)
-	dk_getOption_value(OUTPUT_VARIABLE ${ARGV} REMOVE)
+	dk_getOptionValue(OUTPUT_VARIABLE ${ARGV} REMOVE)
 	
 	set(EXTRA_ARGS "")
 	if(OUTPUT_VARIABLE)

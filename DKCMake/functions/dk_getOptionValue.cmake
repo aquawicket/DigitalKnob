@@ -1,13 +1,13 @@
 include_guard()
 
 ###############################################################################
-# dk_getOption_value(name ${ARGV}) 
+# dk_getOptionValue(name ${ARGV}) 
 #
-#	TODO: change to dk_getOption_value(name output ${ARGV}) so we can choose the variable to recieve the option in
+#	TODO: change to dk_getOptionValue(name output ${ARGV}) so we can choose the variable to recieve the option in
 #
-#	EXAMPLE: dk_getOption_value(MY_ARG ${ARGV})
+#	EXAMPLE: dk_getOptionValue(MY_ARG ${ARGV})
 #
-function(dk_getOption_value name)
+function(dk_getOptionValue name)
 	#DKDEBUGFUNC(${ARGV})
 	
 	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})

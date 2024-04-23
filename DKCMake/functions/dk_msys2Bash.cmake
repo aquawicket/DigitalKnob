@@ -14,7 +14,7 @@ function(dk_msys2Bash)
 	DK_ASSERT(MSYS2)
 	dk_getOption(NOASSERT ${ARGV})
 	dk_getOption(NOECHO ${ARGV})
-	dk_getOption_value(OUTPUT_VARIABLE ${ARGV})
+	dk_getOptionValue(OUTPUT_VARIABLE ${ARGV})
 	set(EXTRA_ARGS "")
 	
 	if(OUTPUT_VARIABLE)

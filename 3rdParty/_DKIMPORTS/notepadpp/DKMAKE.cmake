@@ -34,10 +34,10 @@ cmake_path(NATIVE_PATH NOTEPADPP_EXE NORMALIZE NOTEPADPP_EXE_WINPATH)
 ### dark mode ###
 dk_copy(${DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP}/config.xml OVERWRITE)
 
-### add_context_menu.cmd ###
-dk_set(NOTEPADPP_add_context_menu_cmd "${NOTEPADPP}/add_context_menu.cmd")
-if(NOT EXISTS 	"${NOTEPADPP_add_context_menu_cmd}")
-	file(WRITE 	"${NOTEPADPP_add_context_menu_cmd}"
+### addContextMenu.cmd ###
+dk_set(NOTEPADPP_addContextMenu_cmd "${NOTEPADPP}/addContextMenu.cmd")
+if(NOT EXISTS 	"${NOTEPADPP_addContextMenu_cmd}")
+	file(WRITE 	"${NOTEPADPP_addContextMenu_cmd}"
 [================================================================================================[
 @echo off
 
@@ -47,22 +47,22 @@ REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"${NOTE
 
 echo complete
 ]================================================================================================])
-	dk_fileReplace("${NOTEPADPP_add_context_menu_cmd}" "\${NOTEPADPP_EXE_WINPATH}" "${NOTEPADPP_EXE_WINPATH}")
-	dk_command(	"${NOTEPADPP_add_context_menu_cmd}")
+	dk_fileReplace("${NOTEPADPP_addContextMenu_cmd}" "\${NOTEPADPP_EXE_WINPATH}" "${NOTEPADPP_EXE_WINPATH}")
+	dk_command(	"${NOTEPADPP_addContextMenu_cmd}")
 endif()
 
 
 
 
 
-### associate_files.cmd ###
+### associateFiles.cmd ###
 #
 #	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 #	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
 #
-dk_set(NOTEPADPP_associate_files_cmd "${NOTEPADPP}/associate_files.cmd")
-if(NOT EXISTS 	"${NOTEPADPP_associate_files_cmd}")
-	file(WRITE 	"${NOTEPADPP_associate_files_cmd}"
+dk_set(NOTEPADPP_associateFiles_cmd "${NOTEPADPP}/associateFiles.cmd")
+if(NOT EXISTS 	"${NOTEPADPP_associateFiles_cmd}")
+	file(WRITE 	"${NOTEPADPP_associateFiles_cmd}"
 	
 [====================================================================================================[
 @echo off
@@ -114,6 +114,6 @@ assoc .txt=dk_txtfile
 assoc .xml=dk_txtfile
 ]====================================================================================================])
 
-	dk_fileReplace("${NOTEPADPP_associate_files_cmd}" "\${NOTEPADPP_EXE_WINPATH}" "${NOTEPADPP_EXE_WINPATH}")
-	dk_command(	"${NOTEPADPP_associate_files_cmd}")
+	dk_fileReplace("${NOTEPADPP_associateFiles_cmd}" "\${NOTEPADPP_EXE_WINPATH}" "${NOTEPADPP_EXE_WINPATH}")
+	dk_command(	"${NOTEPADPP_associateFiles_cmd}")
 endif()

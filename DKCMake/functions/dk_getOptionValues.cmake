@@ -1,15 +1,15 @@
 include_guard()
 
-# FIXME: This is not fully functional. It take code from dk_getOption_value() 
+# FIXME: This is not fully functional. It take code from dk_getOptionValue() 
 # but has not yet ben set up to recieve multiple variables, or been tested
 ###############################################################################
-# dk_getOption_values(name ${ARGV}) 
+# dk_getOptionValues(name ${ARGV}) 
 #
-#	TODO: change to dk_getOption_value(name output ${ARGV}) so we ca choose the variable to recieve the option in
+#	TODO: change to dk_getOptionValue(name output ${ARGV}) so we ca choose the variable to recieve the option in
 #
-#	EXAMPLE: dk_getOption_values(MY_ARG ${ARGV})
+#	EXAMPLE: dk_getOptionValues(MY_ARG ${ARGV})
 #
-function(dk_getOption_values name)
+function(dk_getOptionValues name)
 	#DKDEBUGFUNC(${ARGV})
 	
 	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
