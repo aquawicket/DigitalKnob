@@ -6,6 +6,9 @@
 call "../functions/DK.cmd"
 
 
+call dk_hexToVariable ESC 0x1b
+echo %ESC%[34m test
+
 echo.
 call dk_hexToAscii 41 ascii
 echo dk_hexToAscii 41 = %ascii%
@@ -51,7 +54,6 @@ call dk_asciiToHex A hex
 echo dk_asciiToHex A = %hex%
 call dk_asciiToHex "B" hex
 echo dk_asciiToHex "B" = %hex%
-
 
 
 

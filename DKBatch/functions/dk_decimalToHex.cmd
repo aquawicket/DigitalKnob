@@ -10,6 +10,7 @@
 	::call dk_verbose "dk_decimalToHex(%*)"
 	
 	cmd /C exit %~1
+	set "hex="
 	set "hex=%=ExitCode%"
 	set "hex=0x%hex:~-2%"
 	
