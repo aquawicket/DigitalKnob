@@ -5,9 +5,8 @@
 ::###### Load Function files ######
 call "../functions/DK.cmd"
 
-
-call dk_hexToVariable ESC 0x1b
-echo %ESC%[34m test
+call dk_escapeSequences
+echo %ESC%[34m test %ESC%[0m
 
 echo.
 call dk_hexToAscii 41 ascii
