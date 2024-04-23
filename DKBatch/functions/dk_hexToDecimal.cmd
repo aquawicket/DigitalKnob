@@ -10,9 +10,9 @@
 	::call dk_verbose "dk_hexToDecimal(%*)"
 	
 	set "hex=%~1"
-	set /A decimal=0x%hex:~-2,2%
+	set /A decimal=0x%hex:~-2%
 	
-	echo     dk_hexToDecimal %hex% = %decimal%
+	::echo     dk_hexToDecimal %hex% = %decimal%
 	endlocal & set %2=%decimal%
 goto:eof
 

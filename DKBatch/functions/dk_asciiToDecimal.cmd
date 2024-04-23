@@ -12,7 +12,7 @@
 	call dk_asciiToHex %~1 hex
 	call dk_hexToDecimal %hex% decimal
 	
-	echo     dk_asciiToDecimal %~1 = %decimal%
+	::echo     dk_asciiToDecimal %~1 = %decimal%
 	endlocal & set %2=%decimal%
 goto:eof
 

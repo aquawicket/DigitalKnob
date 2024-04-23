@@ -17,15 +17,11 @@
     for %%a in (chr.tmp) do fsutil file createnew zero.tmp %%~Za > NUL
 
     :: Compare both files with FC /B and get the differences
-    ::set "hex="
-    ::for /F "skip=1 tokens=2" %%a in ('fc /B chr.tmp zero.tmp') do set "hex=!hex!%%a"
 	for /F "skip=1 tokens=2" %%a in ('fc /B chr.tmp zero.tmp') do set "hex=%%a"
-	set "hex=0x%hex:~-2,2%"
-	
     del chr.tmp zero.tmp
-    
-	::echo %hex%
-	echo     dk_asciiToHex %~1 = %hex%
+    set "hex=0x%hex:~-2%"
+	
+	::echo     dk_asciiToHex %~1 = %hex%
 	endlocal & set %2=%hex%
 goto:eof
 

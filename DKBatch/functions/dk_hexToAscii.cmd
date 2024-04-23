@@ -9,15 +9,14 @@
 :dk_hexToAscii () {
 	::call dk_verbose "dk_hexToAscii(%*)"
 	
-    setlocal enabledelayedexpansion
-	set hex=%~1
-	echo !hex:~-2,2!> hex.tmp
+	set "hex=%~1"
+	echo %hex:~-2%> hex.tmp
 
 	call certutil -decodehex hex.tmp ascii.tmp >nul
 	set /p ascii=<ascii.tmp
 	( del hex.tmp & del ascii.tmp )>nul
 	
-	echo     dk_hexToAscii %hex% = %ascii%
-	endlocal & set %2=%ascii%
+	::echo dk_hexToAscii %hex% = %ascii%
+	endlocal & set "%2=%ascii%"
 goto:eof
 
