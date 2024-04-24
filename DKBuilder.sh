@@ -13,5 +13,5 @@ echo DKBASH_DIR = $DKBASH_DIR
 
 
 ###### Load Main Program ######
-[ -n "$@" ] && "$@"
+[ "$#" -gt "0" ] && "$@"
 dk_buildMain "$*"
