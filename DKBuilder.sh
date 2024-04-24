@@ -1,7 +1,6 @@
 #!/bin/sh
 #clear && clear
 echo "$0($*)"
-[ -n "$@" ] && "$@"
 
 
 ###### DK_INIT ######
@@ -14,4 +13,5 @@ echo DKBASH_DIR = $DKBASH_DIR
 
 
 ###### Load Main Program ######
+[ -n "$@" ] && "$@"
 dk_buildMain "$*"
