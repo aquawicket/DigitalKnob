@@ -78,5 +78,4 @@ export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd
 ###### Script loader ######
 . ${DKBASH_DIR}/functions/dk_load.${ext}
 #dk_load $SCRIPT_PATH
-#dk_load dk_color
 dk_load dk_escapeSequences

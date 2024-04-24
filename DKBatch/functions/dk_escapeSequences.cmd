@@ -2,6 +2,7 @@
 
 :: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 :: call dk_verbose "%0(%*)"
+
 set ASCII_length=0
 :: ASCII control characters (character code 0-31)
 ::      			SYMBOL	DEC		OCT		HEX		HTML	Description

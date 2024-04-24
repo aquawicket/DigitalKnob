@@ -5,6 +5,6 @@
 #
 dk_crlf() {
 	echo "dk_crlf($@)"
-
-	return 0 #true
+	dk_todo 
+	return $true
 }
