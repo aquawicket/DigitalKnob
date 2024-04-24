@@ -36,7 +36,7 @@ dk_resetAll () {
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
 		cp "$SCRIPT_PATH" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
+		exec /bin/bash "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
