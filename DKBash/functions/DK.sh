@@ -2,9 +2,10 @@
 #echo "$0($*)"
 
 #echo "The script you are running has:"
-#echo "basename: [$(basename "$0")]"
-#echo "dirname : [$(dirname "$0")]"
-#echo "pwd     : [$(pwd)]"
+echo "0		  : $0"
+echo "basename: [$(basename "$0")]"
+echo "dirname : [$(dirname "$0")]"
+echo "pwd     : [$(pwd)]"
 #export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 
@@ -31,10 +32,15 @@ fi
 dk_realpath() {
     [ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
 }
-SCRIPT_PATH=$(dk_realpath $0)
+#readonly SCRIPT_PATH=$(dk_realpath $0)
+SCRIPT_PATH=$(pwd)/$(basename $0)
+[ ! -e $SCRIPT_PATH ] && dk_error "SCRIPT_PATH does not exist"
+echo "SCRIPT_PATH = $SCRIPT_PATH"
 [ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+echo "SCRIPT_DIR = $SCRIPT_DIR"
 SCRIPT_NAME=$(basename $SCRIPT_PATH)
+echo "SCRIPT_NAME = $SCRIPT_NAME"
 
 
 ###### Set and check posix mode ######
