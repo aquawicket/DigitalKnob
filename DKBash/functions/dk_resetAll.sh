@@ -34,8 +34,12 @@ dk_resetAll () {
 		fi
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
 		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
+		
+		export RELOAD_WITH_BASH=1
+		#exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
+		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME"
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
