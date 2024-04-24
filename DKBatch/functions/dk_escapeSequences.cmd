@@ -1,4 +1,5 @@
 :: dk_includeGuard()
+
 :: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 :: call dk_verbose "%0(%*)"
 set ASCII_length=0
@@ -118,8 +119,6 @@ call dk_hexToVariable ESC 0x1b
 ::call dk_decimalToVariable RS  30
 ::call dk_decimalToVariable US  31
 
-
-::set "SP 32
 
 
 
