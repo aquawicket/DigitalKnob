@@ -1,5 +1,5 @@
 ::dk_includeGuard()
-setlocal enableDelayedExpansion
+
 
 if [%ENABLE_dk_error%]==[] set ENABLE_dk_error=1
 if [%TRACE_ON_ERROR%]==[] set TRACE_ON_ERROR=1
@@ -7,14 +7,21 @@ if [%PAUSE_ON_ERROR%]==[] set PAUSE_ON_ERROR=1
 if [%HALT_ON_ERROR%]==[] set HALT_ON_ERROR=0
 :: ERROR_TAG="ERROR: "
 ::################################################################################
-::# dk_verbose(<message>)
+::# dk_error(<message>)
 ::#
 ::#	Print a error message to the console
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_verbose () {
-	::call dk_debugFunc
+:dk_error () {
+	setlocal enableDelayedExpansion
+	call dk_debugFunc
+	echo _callerpath = %_callerpath%
+	
+	
+	
+	
+	call dk_printError ERROR %_callerpath% %1
 	
 	if NOT [%ENABLE_dk_error%] == [1] goto:eof
 	set "msg=%1"
@@ -34,5 +41,7 @@ if [%HALT_ON_ERROR%]==[] set HALT_ON_ERROR=0
 	if [%HALT_ON_ERROR%]==[1] call dk_echo ${red}*** HALT_ON_ERROR ***${clr} && exit
 	if [%PAUSE_ON_ERROR%]==[1] call dk_pause
 	
+	
+	pause
 endlocal
 goto:eof

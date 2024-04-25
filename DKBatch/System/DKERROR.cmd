@@ -79,25 +79,29 @@ exit %ERROR_CODE%
 
 
 :print_error
-for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
-echo [91m  File: %~f2: !line! [0m
-set /A n=1
-set /A min=!line!-6
-set /A max=!line!+6
-for /f "delims=" %%a in ('findstr /n /r /c:"^" "%~f2"') do (
-	if !n! LSS !max! (
-		if !n! GTR !min! (
-			set str=%%a
-			set str=!str::=:	! 
-			if !n! EQU !line! (
-				echo [30;41m^>  !str![0m
-			) else (
-				echo    !str!
+	echo ~0 = %~0
+	echo ~1 = %~1
+	echo ~3 = %~2
+	echo ~3 = %~3
+	for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
+	echo [91m  File: %~f2: !line! [0m
+	set /A n=1
+	set /A min=!line!-6
+	set /A max=!line!+6
+	for /f "delims=" %%a in ('findstr /n /r /c:"^" "%~f2"') do (
+		if !n! LSS !max! (
+			if !n! GTR !min! (
+				set str=%%a
+				set str=!str::=:	! 
+				if !n! EQU !line! (
+					echo [30;41m^>  !str![0m
+				) else (
+					echo    !str!
+				)
 			)
-		)
-	)		
-	set /a n+=1
-)
-echo.
-echo.
+		)		
+		set /a n+=1
+	)
+	echo.
+	echo.
 goto :eof
