@@ -1,13 +1,7 @@
 #!bin/bash
 #echo "$0($*)"
 
-#echo "The script you are running has:"
-echo "0		  : $0"
-echo "basename: [$(basename "$0")]"
-echo "dirname : [$(dirname "$0")]"
-echo "pwd     : [$(pwd)]"
 #export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
-
 
 ###### Reload Main Script with bash ######
 if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
@@ -27,20 +21,15 @@ fi
 [ -n "$DKINIT" ] && return || readonly DKINIT=1
 
 
-###### get SCRIPT_ variables  ######
-#. DKBash/functions/dk_realpath.sh
-#dk_realpath() {
-#    [ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
-#}
-#readonly SCRIPT_PATH=$(dk_realpath $0)
-SCRIPT_PATH=$(pwd)/$(basename $0)
-[ ! -e $SCRIPT_PATH ] && dk_error "SCRIPT_PATH does not exist"
-echo "SCRIPT_PATH = $SCRIPT_PATH"
-[ -n "$(command -v "cygpath")" ] && SCRIPT_PATH=$(cygpath -u "$SCRIPT_PATH")
-SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-echo "SCRIPT_DIR = $SCRIPT_DIR"
-SCRIPT_NAME=$(basename $SCRIPT_PATH)
-echo "SCRIPT_NAME = $SCRIPT_NAME"
+###### get DKSCRIPT_ variables  ######
+DKSCRIPT_PATH=$(pwd)/$(basename $0)
+[ ! -e $DKSCRIPT_PATH ] && dk_error "DKSCRIPT_PATH does not exist"
+echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
+[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "$DKSCRIPT_PATH")
+DKSCRIPT_DIR=$(dirname $DKSCRIPT_PATH)
+echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+DKSCRIPT_NAME=$(basename $DKSCRIPT_PATH)
+echo "DKSCRIPT_NAME = $DKSCRIPT_NAME"
 
 
 ###### Set and check posix mode ######
@@ -83,5 +72,5 @@ export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd
 
 ###### Script loader ######
 . ${DKBASH_DIR}/functions/dk_load.${ext}
-#dk_load $SCRIPT_PATH
+#dk_load $DKSCRIPT_PATH
 dk_load dk_escapeSequences

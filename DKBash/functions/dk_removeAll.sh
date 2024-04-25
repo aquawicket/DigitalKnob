@@ -21,19 +21,19 @@ dk_removeAll () {
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
-		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 			dk_echo "${yellow}"				
 			dk_echo "WARNING: this file isn't running from the branch directory"
 			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_debug DKBRANCH_DIR
 			return 1;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
-		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_removeAll wipe
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
+		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

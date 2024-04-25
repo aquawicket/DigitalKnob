@@ -34,9 +34,9 @@ LOG_DEBUG=1
 TRACE_ON_WARNINGS=0
 HALT_ON_WARNINGS=0
 CONTINUE_ON_ERRORS=0
-SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
+DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
 
-SCRIPT_NAME=$(basename "$0")
+DKSCRIPT_NAME=$(basename "$0")
 true=0
 false=1
 clr="\033[0m"
@@ -107,8 +107,8 @@ dk_buildMain () {
 	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
-	dk_debug SCRIPT_NAME
-	dk_debug SCRIPT_DIR
+	dk_debug DKSCRIPT_NAME
+	dk_debug DKSCRIPT_DIR
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
@@ -125,9 +125,9 @@ dk_buildMain () {
 	dk_debug DKIMPORTS_DIR
 	dk_debug DKPLUGINS_DIR
 
-	if [ ! "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-		dk_warning "$SCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		dk_warning "$SCRIPT_NAME path = $SCRIPT_DIR"
+	if [ ! "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
 		dk_warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
 	fi
 	
@@ -1145,9 +1145,9 @@ dk_reload () {
 	dk_verbose "dk_reload($*)"
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	dk_debug "reloading $SCRIPT_DIR/$SCRIPT_NAME"
+	dk_debug "reloading $DKSCRIPT_DIR/$DKSCRIPT_NAME"
 	clear
-	exec "$SCRIPT_DIR/$SCRIPT_NAME"
+	exec "$DKSCRIPT_DIR/$DKSCRIPT_NAME"
 }
 
 
@@ -1583,19 +1583,19 @@ dk_validateBranch () {
 	dk_debug DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
-	#if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-	#	if ! dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
-	#		dk_debug "$DKBRANCH_DIR/$SCRIPT_NAME"
-	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
+	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+	#	if ! dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#		dk_debug "$DKBRANCH_DIR/$DKSCRIPT_NAME"
+	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME $DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	fi
 	#	dk_echo
-	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
+	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
-	#		rm $SCRIPT_DIR/$SCRIPT_NAME
+	#	if dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi
-	#	$DKBRANCH_DIR/$SCRIPT_NAME
+	#	$DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	exit
 	#fi
 }
@@ -1818,19 +1818,19 @@ dk_resetAll () {
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
-		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 			dk_echo "${yellow}"
 			dk_echo "WARNING: this file isn't running from the branch directory"
 			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_debug DKBRANCH_DIR
 			return $false;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
-		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
+		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		exec "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1859,9 +1859,9 @@ dk_resetAll () {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if dk_fileExists "$DKBRANCH_DIR"/"$SCRIPT_NAME"; then
+		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
 			clear
-			. "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
+			. "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 			exit
 		else
 			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
@@ -1891,19 +1891,19 @@ dk_removeAll () {
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
-		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 			dk_echo "${yellow}"				
 			dk_echo "WARNING: this file isn't running from the branch directory"
 			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_debug DKBRANCH_DIR
 			return 1;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
-		cp "$SCRIPT_DIR"/"$SCRIPT_NAME" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_removeAll wipe
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
+		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

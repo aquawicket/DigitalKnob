@@ -8,12 +8,12 @@ dk_reload () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	dk_debug "reloading $SCRIPT_PATH"
+	dk_debug "reloading $DKSCRIPT_PATH"
 	clear
 	
 	if [ -n "$(command -v bash)" ]; then
-		exec /bin/bash "$SCRIPT_PATH"
+		exec /bin/bash "$DKSCRIPT_PATH"
 	else
-		exec "$SCRIPT_PATH"
+		exec "$DKSCRIPT_PATH"
 	fi
 }

@@ -4,7 +4,7 @@ echo "$0($*)"
 
 
 ###### global variables ######
-ENABLE_dk_debugFunc=0
+#ENABLE_dk_debugFunc=1
 
 
 ###### DK_INIT ######
@@ -12,7 +12,7 @@ ENABLE_dk_debugFunc=0
 
 
 ###### generated global variables ######
-echo SCRIPT_PATH = $SCRIPT_PATH
+echo DKSCRIPT_PATH = $DKSCRIPT_PATH
 echo DKBASH_DIR = $DKBASH_DIR
 
 

@@ -41,19 +41,19 @@ dk_validateBranch () {
 	dk_debug DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
-	#if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-	#	if ! dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
-	#		dk_debug "$DKBRANCH_DIR/$SCRIPT_NAME"
-	#		cp $SCRIPT_DIR/$SCRIPT_NAME $DKBRANCH_DIR/$SCRIPT_NAME
+	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+	#	if ! dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#		dk_debug "$DKBRANCH_DIR/$DKSCRIPT_NAME"
+	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME $DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	fi
 	#	dk_echo
-	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$SCRIPT_NAME"
+	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if dk_fileExists $DKBRANCH_DIR/$SCRIPT_NAME; then
-	#		rm $SCRIPT_DIR/$SCRIPT_NAME
+	#	if dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi
-	#	$DKBRANCH_DIR/$SCRIPT_NAME
+	#	$DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	exit
 	#fi
 }

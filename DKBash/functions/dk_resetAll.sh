@@ -23,20 +23,20 @@ dk_resetAll () {
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
-		if ! [ "$SCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
 			dk_echo "${yellow}"
 			dk_echo "WARNING: this file isn't running from the branch directory"
 			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "SCRIPT_DIR = $SCRIPT_DIR"
+			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_debug DKBRANCH_DIR
 			return $false;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$SCRIPT_NAME"
+		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
-		cp "$SCRIPT_PATH" "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
-		exec /bin/bash "$DIGITALKNOB_DIR/$SCRIPT_NAME" dk_resetAll wipe
+		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -65,9 +65,9 @@ dk_resetAll () {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if dk_fileExists "$DKBRANCH_DIR"/"$SCRIPT_NAME"; then
+		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
 			clear
-			. "$DKBRANCH_DIR"/"$SCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$SCRIPT_NAME"
+			. "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 			exit
 		else
 			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
