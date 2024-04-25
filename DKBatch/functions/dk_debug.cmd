@@ -14,7 +14,7 @@ if [%HALT_ON_DEBUG%]==[] set HALT_ON_DEBUG=0
 ::#   @msg	- The message to print
 ::#
 :dk_debug () {
-	call dk_debugFunc
+	::call dk_debugFunc
 	
 	if NOT [%ENABLE_dk_debug%] == [1] goto:eof
 	set "msg=%*"

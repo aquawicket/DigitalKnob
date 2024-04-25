@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_printColors () {
-	::call dk_verbose "%0(%*)"
+	call dk_debugFunc
 	
 	echo.
 	echo [101;93m STYLES %clr%

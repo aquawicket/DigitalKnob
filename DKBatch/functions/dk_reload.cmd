@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_reload () {
-	call dk_verbose "dk_reload(%*)"
+	call dk_debugFunc
 	
 	if "%SCRIPT_PATH%" == "" dk_error "SCRIPT_PATH is invalid"; goto:eof
 	

@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_resetAll () {
-	call dk_verbose "dk_resetAll(%*)"
+	call dk_debugFunc
 	
     if "%1" EQU "wipe" goto:wipe
         

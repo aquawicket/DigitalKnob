@@ -1,6 +1,5 @@
 :: dk_includeGuard()
 :: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-:: call dk_verbose "%0(%*)"
 
 
 
@@ -60,7 +59,6 @@ set "BG_White=[107m"
 :dk_color () {
 	call dk_debugFunc
 	
-    ::call dk_verbose "%0(%*)"
     ::call :dk_printColors
 goto:eof
 

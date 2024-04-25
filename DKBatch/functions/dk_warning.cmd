@@ -8,7 +8,7 @@
 ::#	@msg	- The message to print
 ::#
 :dk_warning () {
-	::call dk_verbose "dk_warning(%*)"
+	::call dk_debugFunc
 	
 	echo %yellow% WARNING: %1 %clr%
 goto:eof

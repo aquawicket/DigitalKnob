@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_getHostTriple () {
-	call dk_verbose "dk_getHostTriple(%*)"
+	call dk_debugFunc
 	
 	set HOST_OS=win
     call dk_debug HOST_OS

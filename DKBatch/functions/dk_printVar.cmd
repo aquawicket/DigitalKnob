@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_printVar () {
-	::call dk_verbose "dk_printVar(%*)"
+	call dk_debugFunc
 	
     set "var=%1"
     call set "value=%%%var%%%"

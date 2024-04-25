@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_pullAssets () {
-	call dk_verbose "dk_pullAssets(%*)"
+	call dk_debugFunc
 	
     echo not implemented,  TODO
 goto:eof

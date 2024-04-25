@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_hexToVariable () {
-	::call dk_verbose "dk_hexToVariable(%*)"
+	call dk_debugFunc
 	::for /f %%b in ('forfiles /c "cmd /c echo 0x1b"') do set "ESC=%%b"    ::Test:  set ESC to 0x1b
 
 	set "hex=%~2"

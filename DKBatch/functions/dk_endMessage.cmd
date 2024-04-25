@@ -5,7 +5,7 @@
 ::
 ::
 :dk_endMessage
-	call dk_verbose "%0(%*)"
+	call dk_debugFunc
 	
     TITLE DigitalKnob - Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
     echo.

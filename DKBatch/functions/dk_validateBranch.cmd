@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_validateBranch () {
-	call dk_verbose "dk_validateBranch(%*)"
+	call dk_debugFunc
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development

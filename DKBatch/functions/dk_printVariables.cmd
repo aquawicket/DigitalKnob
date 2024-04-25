@@ -6,7 +6,7 @@
 ::#    reference: https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_printVariables () {
-	call dk_verbose "dk_printVariables(%*)"
+	call dk_debugFunc
 
 	setlocal enableextensions disabledelayedexpansion
 

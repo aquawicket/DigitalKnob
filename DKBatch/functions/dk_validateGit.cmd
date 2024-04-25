@@ -8,7 +8,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 ::#
 ::#
 :dk_validateGit () {
-	call dk_verbose "dk_validateGit(%*)"
+	call dk_debugFunc
 	
     if "%HOST_ARCH%"=="arm32" set GIT_DL=
     if "%HOST_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%

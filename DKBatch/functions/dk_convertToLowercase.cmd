@@ -1,5 +1,5 @@
 ::dk_includeGuard()
-setlocal EnableDelayedExpansion
+
 
 ::################################################################################
 ::# dk_convertToLowercase(<in> <out>)
@@ -8,6 +8,7 @@ setlocal EnableDelayedExpansion
 :dk_convertToLowercase () {
 	call dk_debugFunc
 	
+	setlocal EnableDelayedExpansion
     set "_input=%1"
 	::call dk_debug _input
 	
@@ -18,9 +19,9 @@ setlocal EnableDelayedExpansion
         call set "_FROM=%%_UCASE:~%%a,1%%
         call set "_TO=%%_LCASE:~%%a,1%%
         call set "_input=%%_input:!_FROM!=!_TO!%%
-		set "_output=!_input!"
+		call set "_output=!_input!"
     )
     ::call dk_debug _output
 	
-endlocal & set "%2=%_output%"	
+	endlocal & set "%2=%_output%"	
 goto:eof

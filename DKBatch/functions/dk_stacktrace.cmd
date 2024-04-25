@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_stacktrace () {
-	call dk_verbose "dk_stacktrace(%*)"
+	call dk_debugFunc
 	
     ::TODO
 goto:eof

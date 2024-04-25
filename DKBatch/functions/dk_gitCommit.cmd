@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_gitCommit () {
-	call dk_verbose "dk_gitCommit(%*)"
+	call dk_debugFunc
 	
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 

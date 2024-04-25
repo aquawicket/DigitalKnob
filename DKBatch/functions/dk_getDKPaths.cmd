@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_getDKPaths () {
-	call dk_verbose "dk_getDKPaths(%*)"
+	call dk_debugFunc
 	
 	
 	

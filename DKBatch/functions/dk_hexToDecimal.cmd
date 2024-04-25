@@ -7,7 +7,7 @@
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToDecimal () {
-	::call dk_verbose "dk_hexToDecimal(%*)"
+	call dk_debugFunc
 	
 	set "hex=%~1"
 	set "decimal="

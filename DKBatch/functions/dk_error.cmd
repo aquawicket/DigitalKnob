@@ -14,7 +14,7 @@ if [%HALT_ON_ERROR%]==[] set HALT_ON_ERROR=0
 ::#	@msg	- The message to print
 ::#
 :dk_verbose () {
-	::echo dk_verbose(%*)
+	::call dk_debugFunc
 	
 	if NOT [%ENABLE_dk_error%] == [1] goto:eof
 	set "msg=%1"

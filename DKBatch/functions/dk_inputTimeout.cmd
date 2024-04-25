@@ -8,7 +8,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 ::	reference: https://stackoverflow.com/a/7703584/688352
 ::
 :dk_inputTimeout <message> <timeout> <default>
-	call dk_verbose "%0(%*)"
+	call dk_debugFunc
 	
 	set "message=%1"
 	set /a timeout=%2

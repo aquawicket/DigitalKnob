@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_validateGcc () {
-	call dk_verbose "dk_validateGcc(%*)"
+	call dk_debugFunc
 	
 	if "%DKIMPORTS_DIR%"==""  call dk_validateBranch
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"

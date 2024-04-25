@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_end () {
-	call dk_verbose "dk_end(%*)"
+	call dk_debugFunc
 	
     call dk_error "reached the end of the script"
     pause

@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_removeAll () {
-	call dk_verbose "dk_removeAll(%*)"
+	call dk_debugFunc
 	
     if "%1" EQU "wipe" goto:wipe
         

@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_getFilename () {
-	call dk_verbose "dk_getFilename(%*)"
+	call dk_debugFunc
 	
 	set _input=%1
 	set _input=%_input:"=%

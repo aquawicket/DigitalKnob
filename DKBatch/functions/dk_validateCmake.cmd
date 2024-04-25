@@ -13,7 +13,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
 ::#
 ::#
 :dk_validateCmake () {
-	call dk_verbose "dk_validateCmake(%*)"
+	call dk_debugFunc
 	
 	if "%HOST_OS%"=="" call dk_getHostTriple
 	

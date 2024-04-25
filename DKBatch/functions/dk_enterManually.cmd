@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_enterManually () {
-	call dk_verbose "dk_enterManually(%*)"
+	call dk_debugFunc
 	
     echo Please type the name of the library, tool or app to build. Then press enter.
     set /p input= 

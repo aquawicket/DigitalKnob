@@ -8,8 +8,6 @@ setlocal enableDelayedExpansion
 :dk_buildMain () {
 	call dk_debugFunc
 
-::dk_verbose "%var%"
-
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 ::		export RELOAD_WITH_BASH=0

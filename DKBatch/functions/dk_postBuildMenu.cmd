@@ -5,7 +5,7 @@
 ::
 ::
 :dk_postBuildMenu
-	call dk_verbose "%0(%*)"
+	call dk_debugFunc
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     echo.

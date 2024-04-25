@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_validateEmscripten () {
-	call dk_verbose "dk_validateEmscripten(%*)"
+	call dk_debugFunc
 	
     if "%DKIMPORTS_DIR%"=""   call dk_validateBranch
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"

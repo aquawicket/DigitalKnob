@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_download () {
-	call dk_verbose "dk_download(%*)"
+	call dk_debugFunc
 	
     echo Downloading %~1
     if exist "%~2" (

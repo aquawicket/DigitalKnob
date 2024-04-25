@@ -6,7 +6,7 @@
 ::
 ::
 dk_keepConsoleOpen
-	call dk_verbose "%0(%*)"
+	call dk_debugFunc
 	
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %SCRIPT_PATH%) & exit ) :: keep window open
 goto:eof

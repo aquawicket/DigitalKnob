@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_readCache () {
-	call dk_verbose "dk_readCache(%*)"
+	call dk_debugFunc
 	
     ::echo reading cache...
     if not exist %DKBRANCH_DIR%\cache goto:eof

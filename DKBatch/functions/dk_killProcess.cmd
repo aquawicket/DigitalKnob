@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_killProcess () {
-	call dk_verbose "dk_killProcess(%*)"
+	call dk_debugFunc
 	
     taskkill /IM "%1" /F > nul
 goto:eof

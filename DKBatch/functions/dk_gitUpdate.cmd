@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_gitUpdate () {
-	call dk_verbose "dk_gitUpdate(%*)"
+	call dk_debugFunc
 	
     if "%1" NEQ "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.

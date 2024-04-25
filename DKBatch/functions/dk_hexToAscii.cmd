@@ -7,7 +7,7 @@
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToAscii () {
-	::call dk_verbose "dk_hexToAscii(%*)"
+	call dk_debugFunc
 	
 	set "hex=%~1"
 	echo %hex:~-2%> hex.tmp
