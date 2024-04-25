@@ -7,7 +7,6 @@ dk_includeGuard
 dk_escapeSequences () {
 	dk_debugFunc
 	
-	ASCII_length=0
 	# ASCII control characters (character code 0-31)
 	#	      		SYMBOL	DEC		OCT		HEX		HTML		Description
 	ASCII_ADD		NUL		0		000		0x00	\#00		"Null character"
@@ -43,19 +42,14 @@ dk_escapeSequences () {
 	ASCII_ADD		RS		30		036		0x1e	\#30		"Record Separator"
 	ASCII_ADD		US		31		037		0x1f	\#31		"Unit Separator"
 
-
-
-
-	ASCII_length=${#ASCII[@]}
-
 	echo ""
-	echo "		SYMBOL	DEC	OCT	HEX	HTML	Description"
-	for (( i=0; i<${ASCII_length}; i++ ));
+	echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
+	ASCII_size=${#ASCII[@]}
+	for (( i=0; i<${ASCII_size}; i++ ));
 	do
 		ASCII_SHOW $i
 	done
 	echo ""
-
 
 
 	#dk_hexToVariable NUL 0x00
@@ -177,21 +171,48 @@ dk_escapeSequences () {
 }
 
 ASCII_ADD () {
+	dk_debugFunc
+	
+	#https://linuxsimply.com/bash-scripting-tutorial/array/array-of-arrays/
+	
 	#echo ASCII_ADD ($*
 	#echo $1	$2		$3		$4		$5		$6
-	ID=$2
-	#ASCII[$ID].SYMBOL=$1
-	#ASCII[$ID].DEC=$2
-	#ASCII[$ID].OCT=$3
-	#ASCII[$ID].HEX=$4
-	#ASCII[$ID].HTML=$5
-	#ASCII[$ID].INFO=$6
+	#ID=$2
 	
-	ASCII_length=$(( ASCII_length + 1 ))
+	ID=0
+	SYMBOL=1
+	DEC=2
+	OCT=3
+	HEX=4
+	HTML=5
+	INFO=6
+	
+	ITEM[$ID]=$2
+	ITEM[$SYMBOL]=$1
+	ITEM[$DEC]=$2
+	ITEM[$OCT]=$3
+	ITEM[$HEX]=$4
+	ITEM[$HTML]=$5
+	ITEM[$INFO]=$6
+	#echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
+
+	ASCII_size=${#ASCII[@]}
+	ASCII[$ASCII_size]="${ITEM[@]}"
+
+	#ASCII[$ID,SYMBOL]=$1
+	#ASCII[$ID,DEC]=$2
+	#ASCII[$ID,OCT]=$3
+	#ASCII[$ID,HEX]=$4
+	#ASCII[$ID,HTML]=$5
+	#ASCII[$ID,INFO]=$6
+	#ASCII_length=$(( ASCII_length + 1 ))
 }
 
 ASCII_SHOW () {
-	echo $ASCII[$1].DEC	$ASCII[$1].SYMBOL	$ASCII[$1].DEC	$ASCII[$1].OCT	$ASCII[$1].HEX	$ASCII[$1].HTML	$ASCII[$1].INFO
+	dk_debugFunc
+	
+	ITEM=(${ASCII[$1]})
+	echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
+	
+	#echo "${ASCII[$1,DEC]}	${ASCII[$1,SYMBOL]}	${ASCII[$1,DEC]}	${ASCII[$1,OCT]}	${ASCII[$1,HEX]}	${ASCII[$1,HTML]}	${ASCII[$1,INFO]}"
 }
-
-dk_escapeSequences

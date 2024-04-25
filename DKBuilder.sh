@@ -1,7 +1,4 @@
 #!/bin/sh
-dk_includeGuard
-
-#clear && clear
 #echo "$0($*)"
 
 
