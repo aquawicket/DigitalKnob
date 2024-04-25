@@ -1,11 +1,12 @@
 ::dk_includeGuard()
-setlocal enableDelayedExpansion
 
 if [%ENABLE_dk_debug%]==[] set ENABLE_dk_debug=1
 if [%TRACE_ON_DEBUG%]==[] set TRACE_ON_DEBUG=0
 if [%PAUSE_ON_DEBUG%]==[] set PAUSE_ON_DEBUG=0
 if [%HALT_ON_DEBUG%]==[] set HALT_ON_DEBUG=0
 ::TAG="  VERBOSE: "
+
+setlocal enableDelayedExpansion
 ::##################################################################################
 ::# dk_debug(msg)
 ::#

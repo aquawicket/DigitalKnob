@@ -1,14 +1,19 @@
 :: dk_include_guard()
 
 
+if [%ENABLE_dk_debugFunc%] == [] set ENABLE_dk_debugFunc=0
+
 ::################################################################################
 ::# dk_debugFunc()
 ::#
 ::#
 :dk_debugFunc () {
+	
+	if [%ENABLE_dk_debugFunc%] NEQ [1] goto:eof
+	
+<:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd
 	set "cyan=[36m"
 	set "clr=[0m"
-<:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd
 	echo %_filename%: %cyan%%_func%(%_args%)%clr%
 	::echo.
 	::echo _path           = %_path%
