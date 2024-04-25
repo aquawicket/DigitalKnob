@@ -175,10 +175,6 @@ ASCII_ADD () {
 	
 	#https://linuxsimply.com/bash-scripting-tutorial/array/array-of-arrays/
 	
-	#echo ASCII_ADD ($*
-	#echo $1	$2		$3		$4		$5		$6
-	#ID=$2
-	
 	ID=0
 	SYMBOL=1
 	DEC=2
@@ -199,6 +195,7 @@ ASCII_ADD () {
 	ASCII_size=${#ASCII[@]}
 	ASCII[$ASCII_size]="${ITEM[@]}"
 
+	# Associative array
 	#ASCII[$ID,SYMBOL]=$1
 	#ASCII[$ID,DEC]=$2
 	#ASCII[$ID,OCT]=$3
@@ -214,5 +211,6 @@ ASCII_SHOW () {
 	ITEM=(${ASCII[$1]})
 	echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
 	
+	# Associative array
 	#echo "${ASCII[$1,DEC]}	${ASCII[$1,SYMBOL]}	${ASCII[$1,DEC]}	${ASCII[$1,OCT]}	${ASCII[$1,HEX]}	${ASCII[$1,HTML]}	${ASCII[$1,INFO]}"
 }

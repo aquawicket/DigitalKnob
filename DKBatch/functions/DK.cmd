@@ -12,7 +12,7 @@
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-<:dk_getCaller <nul call %DKBATCH_DIR%\functions\dk_getCaller.cmd SCRIPT_PATH
+<:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd SCRIPT_PATH
 call dk_getDirectory %SCRIPT_PATH% SCRIPT_DIR
 call dk_getFilename %SCRIPT_PATH% SCRIPT_NAME
 call dk_debug DKBATCH_DIR

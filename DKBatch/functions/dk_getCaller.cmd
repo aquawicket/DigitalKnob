@@ -1,6 +1,5 @@
 ::https://stackoverflow.com/a/43123617/688352
 @echo off
-::echo dk_getCaller.cmd
 
 ::setlocal DisableDelayedExpansion
 set "func=%~0"
@@ -10,7 +9,6 @@ if ":" == "%func:~0,1%" (
 )
 
 :Step1
-::echo dk_getCaller.cmd: STEP1
 REM *** Get the filename of the caller of this script, needed for later restart
 (
     (goto) 2>nul
@@ -24,12 +22,12 @@ REM *** Get the filename of the caller of this script, needed for later restart
 exit /b %= This is never reached =%
 
 :Step2
-::echo dk_getCaller.cmd: STEP2
 REM *** Get the filename/cmd-line of the caller of the script
 (
     (goto) 2>nul
     (goto) 2>nul
-    ::setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%    
+    ::setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%  
+echo ~0 = %~0	
     set "_returnVar=%_returnVar%"
     set "_lastCaller=%_lastCaller%"
     set "_argToLastCaller=%_argToLastCaller%"
@@ -48,7 +46,6 @@ exit /b %= This is never reached =%
 
 
 :Step3batch
-	::echo dk_getCaller.cmd: STEP3
 	REM *** STEP3 Restart the requester batch, but jump to the label :dk_getCaller
 	
 	call :dk_getCaller
@@ -56,26 +53,9 @@ exit /b %= This is never reached =%
 
 
 :dk_getCaller
-	::echo dk_getCaller.cmd: :dk_getCaller
 	REM *** This uses the trick, that starting a batch without CALL will jump to the last used label
 
 	if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
-	
-	::echo caller = %caller%
-	::echo callType = %callType%
-	::echo func = %func%
-	::echo _caller = %_caller%
-	::echo _returnVar = %_returnVar%
-	::echo _lastCaller = %_lastCaller%
-	::echo _argToLastCaller = %_argToLastCaller%
-
-	set "caller="
-	set "callType="
-	set "func="
-	set "_caller="
-	set "_returnVar="
-	::set "_lastCaller="
-	::set "_argToLastCaller="
 
 	endlocal 
 	%_lastCaller% %_argToLastCaller%

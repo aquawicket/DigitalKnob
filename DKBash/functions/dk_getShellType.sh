@@ -8,12 +8,17 @@ dk_getShellType () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
-	echo "SHELL = $SHELL"
-	echo "BASH_SOURCE = $BASH_SOURCE"
-	echo "BASH_LINENO = $BASH_LINENO"
-
 	[ -e "/proc" ] || dk_warning "/proc does not exist" && return 0 
-	PID_EXE=$(readlink /proc/$$/exe);
-	SHELL_TYPE=${PID_EXE##*/};           
-	echo "SHELL_TYPE   = $SHELL_TYPE"
+	#PID_EXE=$(readlink /proc/$$/exe);
+	#DKSHELL=${PID_EXE##*/};           
+	[ -d "/proc" ] && DKSHELL=$(basename $(readlink /proc/$$/exe))
+	[ "$SHELL" = "/bin/zsh" ] && DKSHELL="zsh"
+	[ $DKSHELL = sh ] && export DKSH=1
+	[ $DKSHELL = dash ] && export DKDASH=1
+	[ $DKSHELL = zsh ] && export DKZSH=1
+	[ $DKSHELL = bash ] && export DKBASH=1
+	echo "DKSHELL = $DKSHELL"
 }
+
+
+

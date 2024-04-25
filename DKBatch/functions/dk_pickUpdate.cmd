@@ -5,6 +5,8 @@
 ::#
 ::#
 :dk_pickUpdate () {
+	::call dk_debugFunc
+	
 	call dk_verbose "dk_pickUpdate(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
