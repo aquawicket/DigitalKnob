@@ -16,7 +16,7 @@ func1 () {
 }
 
 
-clear
+#clear
 dk_debugFunc
 main
 dk_pause

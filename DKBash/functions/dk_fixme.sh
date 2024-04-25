@@ -1,4 +1,4 @@
-# dk_includeGuard()
+# dk_includeGuard
 
 
 [ -z $ENABLE_dk_fixme ] && ENABLE_dk_fixme=1

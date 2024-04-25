@@ -1,4 +1,4 @@
-# dk_includeGuard()
+# dk_includeGuard
 
 ##################################################################################
 # DK_TRY_CATCH(<function> <args>)

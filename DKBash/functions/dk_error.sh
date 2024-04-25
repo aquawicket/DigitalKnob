@@ -1,4 +1,4 @@
-# dk_includeGuard()
+# dk_includeGuard
 
 
 [ -z $ENABLE_dk_error ] && ENABLE_dk_error=1
