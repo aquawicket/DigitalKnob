@@ -19,13 +19,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
 	call set "_lastfilename=%%~nx0"
 	call set "_lastfunc=%%~n0"
 	call set "_lastargs=%%*"
-	
-	call echo 1~0 = %~0
-	call echo 2~0 = %%~0
-	call echo 1~1 = %~1
-	call echo 2~1 = %%~1
 
-		
     call "%~d0\:Step2\..%~pnx0" %*
 	endlocal
 )

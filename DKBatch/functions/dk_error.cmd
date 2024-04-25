@@ -16,32 +16,28 @@ if [%HALT_ON_ERROR%]==[] set HALT_ON_ERROR=0
 :dk_error () {
 	setlocal enableDelayedExpansion
 	call dk_debugFunc
-	echo _callerpath = %_callerpath%
-	
-	
-	
-	
-	call dk_printError ERROR %_callerpath% %1
+	::echo _callerpath = %_callerpath%
 	
 	if NOT [%ENABLE_dk_error%] == [1] goto:eof
 	set "msg=%1"
 	::call dk_toVariableInfo msg
 	
 	:: if msg starts and ends with quotes, remove the first and last
-	if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
+	::if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
+	
 	
 	::### dk_toVariableInfo ###
 	::call set "value=%%%msg%%%"
     ::if "%value%" NEQ "" set "msg=%1 = '%value%'"
 	::if "%value%" == "" set "msg=%1 = %red%NOT DEFINED%clr%"
 	
-	call dk_echo %red%%ERROR_TAG%%bg_red%%msg%%clr%%red%
-	if [%TRACE_ON_ERROR%]==[1] call dk_stacktrace
-	call dk_echo %clr%
+	::call dk_echo %red%%ERROR_TAG%%bg_red%%msg%%clr%%red%
+	call echo.
+	call dk_echo %red%%msg%%clr%
+	if [%TRACE_ON_ERROR%]==[1] call dk_printError ERROR %_callerpath% %msg%
+	::if [%TRACE_ON_ERROR%]==[1] call dk_stacktrace
 	if [%HALT_ON_ERROR%]==[1] call dk_echo ${red}*** HALT_ON_ERROR ***${clr} && exit
 	if [%PAUSE_ON_ERROR%]==[1] call dk_pause
 	
-	
-	pause
 endlocal
 goto:eof
