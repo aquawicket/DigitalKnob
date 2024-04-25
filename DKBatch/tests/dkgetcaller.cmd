@@ -19,7 +19,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
 	call set "_lastfilename=%%~nx0"
 	call set "_lastfunc=%%~n0"
 	call set "_lastargs=%%*"
-		
+
     call "%~d0\:Step2\..%~pnx0" %*
 	endlocal
 )
@@ -59,17 +59,17 @@ goto:eof
 
 
 
-:: *** STEP3 Restart the requester batch, but jump to the label :dk_caller
+:: *** STEP3 Restart the requester batch, but jump to the label :dkgetcaller
 :Step3
-	call :dk_caller
+	call :dkgetcaller
 goto:eof
 
 
 
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
-:dk_caller
-	if "%_returnVar%" NEQ "" set "%_returnVar%=%_callerpath%"
-	endlocal
+:dkgetcaller
+	if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
+	endlocal 
 	%_lastpath% %_lastargs%
 goto:eof	

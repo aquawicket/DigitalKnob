@@ -1,5 +1,10 @@
 @echo off
 echo ":test_dk_debugFunc.cmd(%*)"
+
+::setlocal disableDelayedExpansion
+::if not defined @Try call exception init
+
+
 set ENABLE_dk_debugFunc=1
 
 ::###### Load Function files ######
@@ -12,6 +17,7 @@ call dk_pause
 
 
 :main () {
+	call dk_debugFunc
 	echo.
 	echo ":main(%*)"
 	
@@ -28,7 +34,7 @@ goto:eof
 :func1 () {
 	echo.
 	echo ":func1(%*)"
-	::call dkdebugFunc
+	call dk_debugFunc
 goto:eof
 
 

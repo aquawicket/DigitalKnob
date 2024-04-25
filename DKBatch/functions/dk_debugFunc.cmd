@@ -6,11 +6,11 @@
 ::
 ::
 :dk_debugFunc () {
-	set "cyan=%ESC%[36m"
-	set "clr=%ESC%[0m"
+	set "cyan=[36m"
+	set "clr=[0m"
 	
 <:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd
-	echo "%_filename%: %cyan%%_func%(%_args%)%clr%"
+	echo %_filename%: %cyan%%_func%(%_args%)%clr%
 	::echo.
 	::echo _path           = %_path%
 	::echo _callerpath     = %_callerpath%
