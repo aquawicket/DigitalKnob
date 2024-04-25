@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_deleteTempFiles () {
-	call dk_verbose "dk_deleteTempFiles(%*)"
+	call dk_debugFunc
 	
     ::call dk_cmakeEval "dk_deleteTempFiles()"
     echo Deleteing .tmp files . . .

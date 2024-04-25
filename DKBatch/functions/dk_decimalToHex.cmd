@@ -7,7 +7,7 @@
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_decimalToHex () {
-	::call dk_verbose "dk_decimalToHex(%*)"
+	call dk_debugFunc
 	
 	::cmd /C exit %~1
 	::set "hex="

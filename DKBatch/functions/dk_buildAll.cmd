@@ -5,5 +5,5 @@
 ::
 ::
 :build_all () {
-	call dk_verbose "%0(%*)"
+	call dk_debugFunc
 goto:eof

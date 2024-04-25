@@ -7,7 +7,8 @@
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_asciiToHex () {
-	::call dk_verbose "dk_asciiToHex(%*)"
+	call dk_debugFunc
+	
 	setlocal EnableDelayedExpansion
 
     :: Store the string in chr.tmp file

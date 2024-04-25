@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_commandToVariable () {
-	call dk_verbose "dk_commandToVariable(%*)"
+	call dk_debugFunc
 	
     if [%2] == [] (
         echo "ERROR: dk_commandToVariable() requires at least 2 parameters"

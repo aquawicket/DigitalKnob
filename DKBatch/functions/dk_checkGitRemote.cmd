@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_checkGitRemote () {
-	call dk_verbose "dk_checkGitRemote(%*)"
+	call dk_debugFunc
 	
 	if not exist "%GIT_EXE%" call dk_error GIT_EXE does not exist
 	

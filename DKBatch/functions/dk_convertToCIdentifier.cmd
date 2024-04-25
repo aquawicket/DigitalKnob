@@ -6,7 +6,7 @@ setlocal EnableDelayedExpansion
 ::#
 ::#
 :dk_convertToCIdentifier () {
-	call dk_verbose "dk_convertToCIdentifier(%*)"
+	::call dk_debugFunc
 	
     set "_input=%1"
 	::call dk_debug _input

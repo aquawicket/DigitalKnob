@@ -6,7 +6,7 @@
 ::#
 ::#
 :dk_load() {
-	::echo "%0(%*)"
+	::call dk_debugFunc
 	call %*
 	
 ::	local fn=

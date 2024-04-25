@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_cmakeNotepadpp () {
-	call dk_verbose "dk_cmakeNotepadpp(%*)"
+	call dk_debugFunc
 	
 	if "%DKIMPORTS_DIR%"==""  call dk_validateBranch
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')" "NOTEPADPP_EXE"

@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_buildRelease () {
-	call dk_verbose "dk_buildRelease(%*)"
+	call dk_debugFunc
 	
     if "%MSYSTEM%" NEQ "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"

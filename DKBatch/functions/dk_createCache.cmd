@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_createCache () {
-	call dk_verbose "dk_createCache(%*)"
+	call dk_debugFunc
 	
     echo creating cache...
     ::call dk_debug APP

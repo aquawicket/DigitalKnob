@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_clearScreen () {
-	call dk_verbose "dk_clearScreen(%*)"
+	call dk_debugFunc
 	
     cls
 goto:eof

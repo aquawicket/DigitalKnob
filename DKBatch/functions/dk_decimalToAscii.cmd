@@ -7,7 +7,7 @@
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_decimalToAscii () {
-	::call dk_verbose "dk_decimalToAscii(%*)"
+	call dk_debugFunc
 	
 	call dk_decimalToHex %~1 hex
 	call dk_hexToAscii %hex% ascii

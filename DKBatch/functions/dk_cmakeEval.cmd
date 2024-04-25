@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_cmakeEval () {
-	call dk_verbose "dk_cmakeEval(%*)"
+	call dk_debugFunc
 	
     if [%1]==[]                  call dk_error "dk_cmakeEval() parameter1 is invalid"
 	if [%CMAKE_EXE%]==[]         call dk_validateCmake

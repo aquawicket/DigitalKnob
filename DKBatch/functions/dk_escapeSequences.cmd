@@ -5,6 +5,8 @@
 :: call dk_verbose "%0(%*)"
 
 :dk_escapeSequences () {
+	call dk_debugFunc
+	
 	set ASCII_length=0
 	:: ASCII control characters (character code 0-31)
 	::      			SYMBOL	DEC		OCT		HEX		HTML	Description

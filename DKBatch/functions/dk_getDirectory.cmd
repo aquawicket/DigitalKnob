@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_getDirectory () {
-	::call dk_verbose "dk_getDirectory(%*)"
+	call dk_debugFunc
 	
 	set _input=%1
 	set _input=%_input:"=%

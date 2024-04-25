@@ -5,7 +5,7 @@
 ::#
 ::#
 :dk_commandExists () {
-	call dk_verbose "dk_commandExists(%*)"
+	call dk_debugFunc
 	
     set "command=%1"
     cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"

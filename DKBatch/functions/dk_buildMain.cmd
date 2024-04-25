@@ -6,8 +6,7 @@ setlocal enableDelayedExpansion
 ::#
 ::#
 :dk_buildMain () {
-	::call dk_debugFunc
-	::call dk_verbose "dk_buildMain(%*)"	
+	call dk_debugFunc
 
 ::dk_verbose "%var%"
 
