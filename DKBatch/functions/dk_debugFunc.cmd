@@ -7,7 +7,7 @@
 ::
 :dk_debugFunc () {
 <:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd SCRIPT_PATH
-	dk_echo %_filename%: %_func%(%_args%)
+	echo %_filename%: %_func%(%_args%)
 	echo.
 	echo _path           = %_path%
 	echo _callerpath     = %_callerpath%
