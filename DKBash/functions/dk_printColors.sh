@@ -1,4 +1,4 @@
-# dk_includeGuard
+dk_includeGuard
 
 ###############################################
 # d_k_print_colors()

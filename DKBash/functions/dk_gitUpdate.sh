@@ -1,4 +1,4 @@
-# dk_includeGuard
+dk_includeGuard
 
 ##################################################################################
 # dk_gitUpdate(<NO_CONFIRM:optional>)

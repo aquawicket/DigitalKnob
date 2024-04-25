@@ -1,4 +1,4 @@
-#[ -n "$dk_load" ] && return || readonly dk_load=1     # dk_includeGuard
+#[ -n "$dk_load" ] && return || readonly dk_load=1     dk_includeGuard
 echo "dk_load.sh"
 
 ##################################################################################

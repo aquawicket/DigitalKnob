@@ -1,4 +1,4 @@
-# dk_includeGuard
+dk_includeGuard
 #[ -z "$BASH_VERSION" ] || shopt -s expand_aliases # work around for bash
 
 ##################################################################################

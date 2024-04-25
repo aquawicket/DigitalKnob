@@ -1,4 +1,4 @@
-# dk_includeGuard
+dk_includeGuard
 
 
 [ -z $ENABLE_dk_todo ] && ENABLE_dk_todo=1
