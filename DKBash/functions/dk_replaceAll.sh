@@ -5,7 +5,7 @@
 #
 #
 dk_replaceAll () {
-	dk_verbose "dk_replaceAll($*)"
+	dk_debugFunc
 	[ $# -ne 4 ] && dk_error "Incorrect number of parameters"
 	
     input=$1

@@ -5,6 +5,8 @@
 # dk_verbose "$0($*)"
 
 dk_escapeSequences () {
+	dk_debugFunc
+	
 	ASCII_length=0
 	# ASCII control characters (character code 0-31)
 	#	      		SYMBOL	DEC		OCT		HEX		HTML		Description

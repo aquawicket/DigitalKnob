@@ -5,7 +5,7 @@
 #
 #
 dk_convertToCIdentifier () {
-	dk_verbose "dk_convertToCIdentifier($*)"
+	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	input=$1

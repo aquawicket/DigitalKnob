@@ -5,7 +5,7 @@
 #
 #
 dk_clearCmakeCache () {
-	dk_verbose "dk_clearCmakeCache($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Clearing CMake cache . . ."

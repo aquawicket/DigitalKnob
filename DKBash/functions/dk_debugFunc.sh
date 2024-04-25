@@ -1,15 +1,16 @@
 # dk_includeGuard()
 
-
-[ -z $ENABLE_dk_debugFunc ] && ENABLE_dk_debugFunc=1
+[ -z $ENABLE_dk_debugFunc ] && ENABLE_dk_debugFunc=0
 ##################################################################################
 # dk_debugFunc()
 #
 #
 alias dk_debugFunc='{
-	[ $ENABLE_dk_debug -eq 1 ] && dk_debug "$(basename ${BASH_SOURCE[0]}:${BASH_LINENO[0]}) ${FUNCNAME[0]}($*)"
+	if [ $ENABLE_dk_debugFunc -eq 1 ]; then
+		if [ "$(echo -e)" = "" ]; then
+			echo -e "$(basename ${BASH_SOURCE[1]}:${BASH_LINENO[0]}) ${blue}${FUNCNAME[0]}($*)${clr}"
+		else
+			echo "$(basename ${BASH_SOURCE[1]}:${BASH_LINENO[0]}) ${blue}${FUNCNAME[0]}($*)${clr}"
+		fi
+	fi
 }'
-
-#alias DKDEBUGFUNC='{
-#	dk_debugFunc
-#}'

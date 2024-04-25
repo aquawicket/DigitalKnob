@@ -6,7 +6,7 @@
 # Evaluates to true if the parameter is a variable that exists and has value
 #
 dk_hasValue () {
-	dk_verbose "dk_hasValue($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
 	eval value='$'{$1}

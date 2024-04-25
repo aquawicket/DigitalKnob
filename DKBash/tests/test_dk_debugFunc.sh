@@ -1,5 +1,7 @@
 #!/bin/sh
 
+ENABLE_dk_debugFunc=1
+
 ###### Load Function files ######
 . ../functions/DK.sh
 
@@ -13,6 +15,8 @@ func1 () {
 	dk_debugFunc
 }
 
+
 clear
+dk_debugFunc
 main
 dk_pause

@@ -5,7 +5,7 @@
 #
 #
 dk_pullAssets () {
-	dk_verbose "dk_pullAssets($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0

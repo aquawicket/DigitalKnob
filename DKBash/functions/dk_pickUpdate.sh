@@ -5,7 +5,7 @@
 #
 #
 dk_pickUpdate() {
-	dk_verbose "dk_pickUpdate($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_readCache

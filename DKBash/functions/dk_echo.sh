@@ -5,7 +5,7 @@
 #
 #
 dk_echo () {
-	#echo "dk_echo($*)"
+	#dk_debugFunc
 
 	if [ "$(echo -e)" = "" ]; then
 		echo -e "${1-}"

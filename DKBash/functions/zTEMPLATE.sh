@@ -5,5 +5,6 @@
 #
 #
 dk_fnction() {
-
+	dk_debugFunc
+	
 }

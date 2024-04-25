@@ -12,7 +12,7 @@
 #	echo "$1 $2 $3 $4"
 #
 dk_saveArgs () {
-	dk_verbose "dk_saveArgs($*)"
+	dk_debugFunc
 
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"

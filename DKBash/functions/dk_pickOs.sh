@@ -5,7 +5,7 @@
 #
 #
 dk_pickOs() {
-	dk_verbose "dk_pickOs($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo

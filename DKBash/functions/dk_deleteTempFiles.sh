@@ -5,7 +5,7 @@
 #
 #
 dk_deleteTempFiles () {
-	dk_verbose "dk_deleteTempFiles($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_info "Deleting .TMP files . . ."

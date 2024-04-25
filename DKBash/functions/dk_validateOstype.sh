@@ -5,7 +5,7 @@
 #
 #
 #dk_validateOstype () {
-#	dk_verbose "dk_validateOstype($*)"
+#	dk_debugFunc
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #	
 #	if [ -e /proc/device-tree/model ]; then

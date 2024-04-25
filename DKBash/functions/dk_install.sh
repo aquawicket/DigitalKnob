@@ -5,7 +5,7 @@
 #
 #
 dk_install () {
-	dk_verbose "dk_install($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	#if dk_packageInstalled $1; then

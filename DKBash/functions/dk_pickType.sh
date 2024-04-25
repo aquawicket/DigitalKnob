@@ -5,7 +5,7 @@
 #
 #
 dk_pickType() {
-	dk_verbose "dk_pickType($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo

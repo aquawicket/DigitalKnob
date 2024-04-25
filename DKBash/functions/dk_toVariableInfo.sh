@@ -16,8 +16,8 @@
 #	myVar = 'this is my variable'
 #
 dk_toVariableInfo () {
-	#dk_verbose "dk_toVariableInfo($*)"
-	#dk_echo "${cyan}dk_toVariableInfo($*)${clr}"
+	#dk_debugFunc
+	
 	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
 	
 	#echo "1 = $1"

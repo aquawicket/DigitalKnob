@@ -5,7 +5,7 @@
 #
 #
 dk_removeExtension () {
-	dk_verbose "dk_removeExtension($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 	
 	filepath="$1"

@@ -5,7 +5,7 @@
 #
 #
 dk_createCache () {
-	dk_verbose "dk_createCache($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo "creating cache..."

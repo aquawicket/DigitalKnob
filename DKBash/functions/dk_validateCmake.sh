@@ -14,7 +14,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 #
 #
 dk_validateCmake () {
-	dk_verbose "dk_validateCmake($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	[ -z $HOST_OS ] && dk_getHostTriple

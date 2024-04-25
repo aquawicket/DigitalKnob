@@ -5,7 +5,7 @@
 #
 #
 dk_gitUpdate () {
-	dk_verbose "dk_gitUpdate($*)"
+	dk_debugFunc
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then

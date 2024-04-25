@@ -29,9 +29,9 @@ fi
 
 ###### get SCRIPT_ variables  ######
 #. DKBash/functions/dk_realpath.sh
-dk_realpath() {
-    [ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
-}
+#dk_realpath() {
+#    [ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
+#}
 #readonly SCRIPT_PATH=$(dk_realpath $0)
 SCRIPT_PATH=$(pwd)/$(basename $0)
 [ ! -e $SCRIPT_PATH ] && dk_error "SCRIPT_PATH does not exist"

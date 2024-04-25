@@ -5,7 +5,7 @@
 #
 #
 dk_commandExists () {
-	dk_verbose "dk_commandExists($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	[ -n "$(command -v "$1")" ]

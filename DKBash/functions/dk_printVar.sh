@@ -5,11 +5,8 @@
 #
 #
 dk_printVar() {
-	#dk_verbose "dk_printVar($@)"
-	if [ -z "$1" ]; then
-		dk_error "dk_printVar <variable> requires 1 parameter"
-		return $false
-	fi
+	dk_debugFunc
+	[ -z "$1" ] && dk_error "dk_printVar <variable> requires 1 parameter"
 	
 	var_name=$1
 	exists=0

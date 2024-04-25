@@ -5,7 +5,7 @@
 #
 #
 dk_getDKPaths () {
-	dk_verbose "dk_getDKPaths($*)"
+	dk_debugFunc
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_debug USERPROFILE

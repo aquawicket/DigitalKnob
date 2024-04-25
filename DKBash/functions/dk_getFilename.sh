@@ -5,7 +5,7 @@
 #
 #
 dk_getFilename () {
-	dk_verbose "dk_getFilename($*)"
+	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	eval "$2=$(basename "$1")"

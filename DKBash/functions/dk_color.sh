@@ -54,5 +54,5 @@ export BG_White="[107m"
 #
 #
 #dk_color() {
-#	echo "dk_color($@)"
+#	dk_debugFunc
 #}

@@ -5,7 +5,7 @@
 #
 #
 dk_validateHomebrew () {
-	dk_verbose "dk_validateHomebrew($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	if ! [ "$OSTYPE" = "darwin"* ]; then

@@ -5,7 +5,7 @@
 #
 #
 dk_call () {
-	#dk_verbose "dk_call($*)"
+	dk_debugFunc
 	[ "$#" -lt "1" ] && dk_error "Incorrect number of parameters"
 
 	dk_echo "${magenta} $ $* ${clr}"

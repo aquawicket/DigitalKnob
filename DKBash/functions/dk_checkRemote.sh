@@ -5,7 +5,7 @@
 #
 #
 dk_checkRemote () {
-	dk_verbose "dk_checkRemote($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	ahead=0

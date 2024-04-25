@@ -5,10 +5,8 @@
 #
 #
 dk_fileContains() {
-	if [ -z "$2" ]; then
-		dk_error "file_contains <file.ext> <string> requires 2 parameters"
-		return $false
-	fi
+	dk_debugFunc
+	[ -z "$2" ] && dk_error "file_contains <file.ext> <string> requires 2 parameters"
 		
 	grep -q "$2" "$1"
 }

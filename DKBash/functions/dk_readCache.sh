@@ -5,7 +5,7 @@
 #
 #
 dk_readCache() {
-	dk_verbose "dk_readCache($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_fileExists "$DKBRANCH_DIR"/cache; then

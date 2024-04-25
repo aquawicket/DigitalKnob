@@ -5,7 +5,7 @@
 #
 #
 #dk_validateGcc () {
-#	dk_verbose "dk_validateGcc($*)"
+#	dk_debugFunc
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"

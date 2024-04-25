@@ -5,5 +5,7 @@
 #
 #
 dk_message() {
+	dk_debugFunc
+	
 	echo -e "$1"
 }

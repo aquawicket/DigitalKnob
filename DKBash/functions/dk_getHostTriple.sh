@@ -15,7 +15,7 @@ try() {
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
 dk_getHostTriple () {
-	dk_verbose "dk_getHostTriple($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed

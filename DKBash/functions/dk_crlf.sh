@@ -4,7 +4,8 @@
 #
 #
 dk_crlf() {
-	echo "dk_crlf($@)"
+	dk_debugFunc
+	
 	dk_todo 
 	return $true
 }

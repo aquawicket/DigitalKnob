@@ -7,7 +7,8 @@ echo "dk_load.sh"
 #
 #
 dk_load() {
-	echo "dk_load($@)"
+	#dk_debugFunc
+	
 	local fn=
 	[ -z $1 ] && return 0 #true
 	

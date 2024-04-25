@@ -5,10 +5,8 @@
 #
 #
 dk_appendFile() {
-	if [ -z "$2" ]; then
-		dk_error "append_file <string> <file.ext> requires 2 parameters"
-		return $false
-	fi
+	dk_debugFunc
+	[ -z "$2" ] && dk_error "append_file <string> <file.ext> requires 2 parameters"
 	
 	echo "$1" >> $2
 }

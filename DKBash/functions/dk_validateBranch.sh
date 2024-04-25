@@ -5,7 +5,7 @@
 #
 #
 dk_validateBranch () {
-	dk_verbose "dk_validateBranch($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development

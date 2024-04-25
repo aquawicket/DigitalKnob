@@ -5,7 +5,7 @@
 #
 #
 dk_validateGit () {
-	dk_verbose "dk_validateGit($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists git; then

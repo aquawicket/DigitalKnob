@@ -5,10 +5,8 @@
 #
 #
 dk_getFuncName() {
-	if [ -z "$1" ]; then
-		dk_error "get_func_name <variable> requires 1 parameter"
-		return $false
-	fi
+	dk_debugFunc
+	[ -z "$1" ] && dk_error "get_func_name <variable> requires 1 parameter"
 	
 	eval "$1=${FUNCNAME[1]}"
 	#echo "parameter name = $1"

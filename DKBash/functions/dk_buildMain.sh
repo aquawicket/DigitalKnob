@@ -5,7 +5,7 @@
 #
 #
 dk_buildMain () {
-	dk_verbose "dk_buildMain($*)"
+	dk_debugFunc
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)

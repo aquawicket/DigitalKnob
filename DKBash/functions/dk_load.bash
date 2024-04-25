@@ -7,7 +7,7 @@ echo "dk_load.bash"
 #
 #
 dk_load() {
-	#echo "dk_load($@)"
+	#dk_debugFunc
 	local fn=
 	[ -z $1 ] && return 0 #true
 	
@@ -30,7 +30,6 @@ dk_load() {
 	#fi
 	
 	if [ -f $fpath ]; then
-		#declare ${fn}=$fpath
 		local ${fn}=$fpath
     else
         echo "$fpath: file not found"

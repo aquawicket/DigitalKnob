@@ -5,7 +5,7 @@
 #
 #
 #dk_validateClang () {
-#	dk_verbose "dk_validateClang($*)"
+#	dk_debugFunc
 #	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"

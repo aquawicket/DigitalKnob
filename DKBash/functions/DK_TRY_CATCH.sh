@@ -6,6 +6,8 @@
 #	reference: https://stackoverflow.com/a/11092989/688352
 #
 DK_TRY_CATCH () {
+	dk_debugFunc
+	
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 	set +e; ( set -e
 		"$@" 

@@ -5,7 +5,7 @@
 #
 #
 dk_validatePackage () {
-	dk_verbose "dk_validatePackage($*)"
+	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists "$1"; then

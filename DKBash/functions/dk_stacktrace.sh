@@ -5,7 +5,7 @@
 #
 #
 dk_stacktrace () {
-    #dk_verbose "dk_stacktrace($*)"
+    dk_debugFunc
 	#[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	

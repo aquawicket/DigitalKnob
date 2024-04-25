@@ -5,11 +5,9 @@
 #
 #
 dk_convertToLowercase() {
-	dk_debug "dk_convertToLowercase($@)"
-	if [ -z "$2" ]; then
-		dk_error "dk_convertToCIdentifier <input> <output> requires 2 parameters"
-		return $false
-	fi
+	dk_debugFunc
+	[ -z "$2" ] && dk_error "dk_convertToCIdentifier <input> <output> requires 2 parameters"
+
 	input=$1
 	echo "convert_to_lowercase($1, $2)"
 	echo "$input" | tr '[:upper:]' '[:lower:]'

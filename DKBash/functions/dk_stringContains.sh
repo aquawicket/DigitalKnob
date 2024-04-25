@@ -5,7 +5,7 @@
 #
 #
 dk_stringContains () {
-	dk_verbose "dk_stringContains($*)"
+	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	# https://stackoverflow.com/a/8811800/688352

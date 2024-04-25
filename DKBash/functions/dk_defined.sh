@@ -6,8 +6,8 @@
 # Evaluates to true if the parameter is a variable that exists.
 #
 dk_defined () {
-	#dk_verbose "dk_defined($*)"
-	#dk_echo "${cyan}dk_defined($*)${clr}"
+	dk_debugFunc
+
 	[ $# -ne 1 ] && return $false # Incorrect number of parameters
 	
 	#echo "dk_defined():1 = $1"

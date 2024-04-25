@@ -5,7 +5,7 @@
 #
 #
 dk_generate() {
-	dk_verbose "dk_generate($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo

@@ -14,7 +14,7 @@
 #	@msg	- The message to print
 #
 dk_todo () {
-	#dk_verbose "dk_todo($*)"	
+	dk_debugFunc	
 	
 	[ $ENABLE_dk_todo -eq 1 ] || return 0
 	msg="$1"

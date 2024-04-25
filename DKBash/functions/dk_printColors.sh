@@ -6,7 +6,7 @@
 #
 #
 dk_printColors() {
-	echo "dk_printColors($@)"
+	dk_debugFunc
 	
 	#dk_color
 	echo ""

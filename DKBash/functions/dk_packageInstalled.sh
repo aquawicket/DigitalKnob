@@ -5,7 +5,7 @@
 #
 #
 dk_packageInstalled () {
-	dk_verbose "dk_packageInstalled($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	if dk_commandExists dpkg-query; then

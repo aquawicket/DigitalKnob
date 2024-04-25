@@ -14,7 +14,7 @@ ERROR_TAG="ERROR: "
 #	@msg	- The message to print
 #
 dk_error () {
-	#dk_verbose "dk_error($*)"	
+	dk_debugFunc
 	
 	[ $ENABLE_dk_error -eq 1 ] || return 0
 	msg="$1"

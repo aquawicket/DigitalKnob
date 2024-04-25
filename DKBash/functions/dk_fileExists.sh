@@ -5,7 +5,7 @@
 #
 #
 dk_fileExists () {
-	dk_verbose "dk_fileExists($*)"
+	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	#if [ -e "$1" ]; then

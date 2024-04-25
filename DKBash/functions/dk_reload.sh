@@ -5,7 +5,7 @@
 #
 #
 dk_reload () {
-	dk_verbose "dk_reload($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_debug "reloading $SCRIPT_PATH"

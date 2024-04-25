@@ -5,7 +5,7 @@
 #
 #
 dk_extract () {
-	dk_verbose "dk_extract($*)"
+	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 
 	filename="$(basename "$1")"

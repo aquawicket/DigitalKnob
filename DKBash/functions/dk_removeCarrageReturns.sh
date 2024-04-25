@@ -5,7 +5,7 @@
 #
 #
 dk_removeCarrageReturns () {
-	dk_verbose "dk_removeCarrageReturns($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	in=$1

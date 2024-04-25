@@ -5,7 +5,7 @@
 #
 #
 dk_resetAll () {
-	dk_verbose "dk_resetAll($*)"
+	dk_debugFunc
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
 	if ! [ "$1" = "wipe" ]; then
