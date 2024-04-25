@@ -7,14 +7,15 @@ alias dk_includeGuard='{
 	path=${BASH_SOURCE[0]}
 	filename=${path##*/}
 	name="${filename%.*}"
+	eval value=\${include_guard_$name}
 
-	[ -n "$(echo -e)" ] && export dkecho="echo -e" || export dkecho="echo"
+	[ -n "$(echo -e)" ] && dkecho="echo -e" || dkecho="echo"
 
-	$dkecho "[36m dk_includeGuard( $name ) [0m"
-	
-	if [ "$include_guard_${name}" = "1" ]; then
-		$dkecho "[31m $name BLOCKED BY INCLUDE GUARD [0m"
+	if [ -n "$value" ]; then
+		$dkecho "[31m dk_includeGuard(): $filename already included [0m"
 		return
 	fi
+	
 	readonly include_guard_${name}=1
+	### $dkecho "[36m added include_guard_$name [0m"
 }'
