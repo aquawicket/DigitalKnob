@@ -1,5 +1,5 @@
 call dk_includeGuard
-setlocal enableDelayedExpansion
+
 
 ::####################################################################
 ::# dk_buildMain()
@@ -8,6 +8,7 @@ setlocal enableDelayedExpansion
 :dk_buildMain () {
 	call dk_debugFunc
 
+setlocal enableDelayedExpansion
 ::	echo "BASH = $BASH"
 ::	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
 ::		export RELOAD_WITH_BASH=0
@@ -90,4 +91,5 @@ setlocal enableDelayedExpansion
 		set TARGET_OS=
 		set TYPE=
 	goto while_loop
+	endlocal
 goto:eof

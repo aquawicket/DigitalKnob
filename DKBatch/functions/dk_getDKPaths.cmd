@@ -6,16 +6,10 @@ call dk_includeGuard
 ::#
 :dk_getDKPaths () {
 	call dk_debugFunc
-	
-	
-	
+		
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call dk_makeDirectory "%DIGITALKNOB_DIR%"
     call dk_debug DIGITALKNOB_DIR
-
-
-
-
 
 
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"

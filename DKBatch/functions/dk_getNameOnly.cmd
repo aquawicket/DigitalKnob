@@ -8,6 +8,7 @@ call dk_includeGuard
 :dk_getNameOnly () {
 	call dk_debugFunc
 	
+	setlocal enabledelayedexpansion
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
