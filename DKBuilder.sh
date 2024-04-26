@@ -1,7 +1,6 @@
 #!/bin/sh
 #echo "$0($*)"
 
-
 ###### Settings ######
 #ENABLE_dk_debugFunc=1
 #ENABLE_dk_verbose=0
@@ -20,6 +19,12 @@
 #TRACE_ON_ERROR=0
 #PAUSE_ON_ERROR=0
 #HALT_ON_ERROR=1
+
+
+###### DK_SETUP ######
+[ ! -e DKBash ] && mkdir DKBash
+[ ! -e DKBash/functions ] && mkdir DKBash/functions
+[ ! -e DKBash/functions/DK.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
 
 
 ###### DK_INIT ######

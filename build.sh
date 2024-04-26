@@ -7,36 +7,63 @@
 # shellcheck disable=SC2120
 
 
+#!bin/bash
+
+#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+
+###### Reload Main Script with bash ######
+if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
+	export RELOAD_WITH_BASH=0
+	if [ -n "$(command -v bash)" ]; then
+		echo "reloading with /bin/bash . . ."
+		exec /bin/bash "$0"
+	else
+		echo ""
+		echo "ERROR: This script requires bash. Please install it and try again.";
+		read -rp 'Press enter to exit...' key;
+		exit 1
+	fi
+fi
+
+###### include guard ######
+[ -n "$DKINIT" ] && return || readonly DKINIT=1
 
 
+###### get DKSCRIPT_ variables  ######
+DKSCRIPT_PATH=$(pwd)/$(basename $0)
+[ ! -e $DKSCRIPT_PATH ] && dk_error "DKSCRIPT_PATH does not exist"
+echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
+[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "$DKSCRIPT_PATH")
+DKSCRIPT_DIR=$(dirname $DKSCRIPT_PATH)
+echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+DKSCRIPT_NAME=$(basename $DKSCRIPT_PATH)
+echo "DKSCRIPT_NAME = $DKSCRIPT_NAME"
 
 
+###### Set and check posix mode ######
+$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+  *:posix:*) echo "POSIX mode enabled" ;;
+  *)         echo "POSIX mode not enabled" ;;
+esac
 
 
+###### Set error trace options ######
+$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 
 
+###### set true and false variables ######
+readonly true=0
+readonly false=1
 
 
+###### get DKBASH_DIR ######
+export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
+export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 
 
-
-
-
-
-
-
-
-
-###### Global Script Variables ######
-[ -z ${RELOAD_WITH_BASH-} ] && export RELOAD_WITH_BASH=1
-LOG_VERBOSE=1
-LOG_DEBUG=1
-TRACE_ON_WARNINGS=0
-HALT_ON_WARNINGS=0
-CONTINUE_ON_ERRORS=0
-DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )
-
-DKSCRIPT_NAME=$(basename "$0")
 true=0
 false=1
 clr="\033[0m"
@@ -68,27 +95,10 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 dk_buildMain () {
 	dk_debugFunc
 
-	echo "BASH = $BASH"
-	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
-		export RELOAD_WITH_BASH=0
-		dk_commandExists bash && exec /bin/bash "$0" # Change to bash
-	fi
-	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
-
-	###### Set and check posix mode ######
-	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
-	  *:posix:*) echo "POSIX mode enabled" ;;
-	  *)         echo "POSIX mode not enabled" ;;
-	esac
-	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
-	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
-	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
-	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
-
 	# log to stdout and file
-	#exec |& tee file.log 
+	# exec > >(tee DKBuilder.log)
 	
-	dk_validate_sudo
+	dk_validateSudo
 	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
@@ -96,19 +106,11 @@ dk_buildMain () {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	#if [ -n "${USER-}" ]; then
-	#	dk_debug USER
-	#	DKUSERNAME=$USER
-	#elif [ -n "${USERNAME-}" ]; then
-	#	dk_debug USERNAME
-	#	DKUSERNAME=$USERNAME
-	#fi
-	#dk_debug DKUSERNAME
-	
 	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
-	dk_debug DKSCRIPT_NAME
+	dk_debug DKSCRIPT_PATH
 	dk_debug DKSCRIPT_DIR
+	dk_debug DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
@@ -125,7 +127,7 @@ dk_buildMain () {
 	dk_debug DKIMPORTS_DIR
 	dk_debug DKPLUGINS_DIR
 
-	if [ ! "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+	if [ "$DKSCRIPT_DIR" != "$DKBRANCH_DIR" ]; then
 		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
 		dk_warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
@@ -139,9 +141,7 @@ dk_buildMain () {
 		if [ -z "${TYPE-}" ];       then dk_pickType;    continue; fi
 		
 		dk_createCache
-		
-		dk_generate
-		
+		dk_generate	
 		dk_build
 		
 		unset UPDATE
@@ -301,7 +301,6 @@ dk_pickApp() {
 		dk_warning "invalid selection"
 	fi
 }
-
 
 ##################################################################################
 # dk_pickOs()
@@ -1490,7 +1489,7 @@ dk_install () {
 	elif dk_commandExists pacman; then
 		dk_call $SUDO pacman -S "$1" --noconfirm
 	elif dk_commandExists tce-load; then
-		dk_call $SUDO tce-load -wi "$1"
+		dk_call tce-load -wi "$1"
 	else
 		dk_error "ERROR: no package managers found"
 	fi

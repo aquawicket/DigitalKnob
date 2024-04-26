@@ -55,6 +55,9 @@ export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pw
 export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 
 
+###### aquire if missing ######
+[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+
 ###### Script loader ######
 . ${DKBASH_DIR}/functions/dk_load.sh
 dk_load dk_escapeSequences && dk_escapeSequences
