@@ -26,7 +26,7 @@ dk_install () {
 	elif dk_commandExists pacman; then
 		dk_call $SUDO pacman -S "$1" --noconfirm
 	elif dk_commandExists tce-load; then
-		dk_call $SUDO tce-load -wi "$1"
+		dk_call tce-load -wi "$1"
 	else
 		dk_error "ERROR: no package managers found"
 	fi
