@@ -20,8 +20,9 @@ endif()
 #
 #	@msg	- The message to print
 #
-function(dk_info msg)
+function(dk_info)
 	#DKDEBUGFUNC(${ARGV})
+	set(msg ${ARGV})
 	
 	if(NOT ENABLE_dk_info)
 		return()
