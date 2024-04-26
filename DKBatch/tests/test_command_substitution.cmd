@@ -1,17 +1,20 @@
 @echo off
+
+::####################################################################
+::# test_comman_substitution.cmd
+::#
+::#
+::###### DK_Init ######
+call "../functions/DK.cmd"
+
 setlocal enabledelayedexpansion
 
 :main()
-	::###### Load Function files ######
-	call "../functions/DK.cmd"
-
 	set funcA=(call :funcA echo test)
 	%funcA%
 	echo funcA = %funcA%
-
-	pause
+	call dk_pause
 goto:eof
-
 
 
 :funcA () {
@@ -19,9 +22,9 @@ goto:eof
 	%* > bla.txt
 	set /p VV=<bla.txt
 	set funcA=%VV%
-	
 	::FOR /F "usebackq" %%x IN (`%*`) DO set "funcA=%%x"
 goto:eof
+
 
 :funcB () {
 	echo 1 = %1
@@ -29,4 +32,4 @@ goto:eof
 	echo funcB(%*)
 goto:eof
 
-pause
+call DK_pause

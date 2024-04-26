@@ -1,8 +1,12 @@
 @echo off
 
-::###### Load Function files ######
+::####################################################################
+::# test_dk_validateNotepadpp.cmd
+::#
+::#
+::###### DK_Init ######
 call "../functions/DK.cmd"
 
 call dk_validateNotepadpp
 
-pause
+call dk_pause

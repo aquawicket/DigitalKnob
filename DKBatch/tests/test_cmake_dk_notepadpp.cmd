@@ -1,8 +1,12 @@
 @echo off
 
-::###### Load Function files ######
+::####################################################################
+::# test_cmake_dk_notepadpp.cmd
+::#
+::#
+::###### DK_Init ######
 call "../functions/DK.cmd"
 
 call dk_cmakeNotepadpp
 
-pause
+call dk_pause

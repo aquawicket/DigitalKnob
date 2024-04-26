@@ -1,19 +1,23 @@
 @echo off
-echo ":test_dk_debugFunc.cmd(%*)"
 
+::###### Settings ######
+set ENABLE_dk_debugFunc=1
+
+::####################################################################
+::# test_dk_debugFunc.cmd
+::#
+::#
+::###### DK_Init ######
+call ../functions/DK.cmd
+
+::###### Exception Handling ######
 ::setlocal disableDelayedExpansion
 ::if not defined @Try call exception init
 
 
-set ENABLE_dk_debugFunc=1
-
-::###### Load Function files ######
-call ../functions/DK.cmd
-
-
-::call dkdebugFunc
+::call dk_debugFunc
 call :main
-call dk_pause
+goto:eof
 
 
 :main () {
@@ -29,12 +33,13 @@ call dk_pause
 	
 	echo.
 	call test_dk_debugFuncB "arg1" "arg2" "arg3"
+	
+	call dk_pause
 goto:eof
+
 
 :func1 () {
 	echo.
 	echo ":func1(%*)"
 	call dk_debugFunc
 goto:eof
-
-

@@ -1,10 +1,12 @@
 @echo off
 
-::###### Load Function files ######
+::# http://cplusplus.bordoon.com/cmd_exe_variables.html
+::####################################################################
+::# test_dk_validateNotepadpp.cmd
+::#
+::#
+::###### DK_Init ######
 call "../functions/DK.cmd"
-
-::call dk_printVariables
-::echo SCRIPT_PATH = %SCRIPT_PATH%
 
 :: http://cplusplus.bordoon.com/cmd_exe_variables.html
 :: d -- drive
@@ -83,9 +85,8 @@ call "../functions/DK.cmd"
 	call :get_fullDirectory "%IN%" fullDirectory
 	echo fullDirectory   = %fullDirectory%
 	
-	pause
+	call dk_pause
 goto:eof
-
 
 
 :: print all variable names
@@ -211,7 +212,4 @@ goto:eof
 	endlocal & set %2=%OUT:~0,-1%
 goto:eof
 
-
-
-
-pause
+call dk_pause

@@ -1,8 +1,11 @@
 @echo off
 
-::#    reference: https://www.ascii-code.com
-
-::###### Load Function files ######
+::####################################################################
+::# test_ascii_hex_dec.cmd
+::#
+::#   reference: https://www.ascii-code.com
+::#
+::###### DK_Init ######
 call "../functions/DK.cmd"
 
 call dk_escapeSequences
@@ -53,7 +56,5 @@ call dk_asciiToHex A hex
 echo dk_asciiToHex A = %hex%
 call dk_asciiToHex "B" hex
 echo dk_asciiToHex "B" = %hex%
-
-
 
 call dk_pause

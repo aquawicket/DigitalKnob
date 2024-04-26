@@ -1,8 +1,9 @@
-::dk_hexToVariable()
+call dk_includeGuard
 
 ::################################################################################
 ::# dk_hexToVariable(<name> <hex>)
 ::#
+::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToVariable () {
 	call dk_debugFunc

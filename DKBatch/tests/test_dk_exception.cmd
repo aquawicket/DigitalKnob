@@ -1,6 +1,10 @@
 @echo off
 
-:: Main
+::####################################################################
+::# test_dk_exception.cmd
+::#
+::#
+
 setlocal disableDelayedExpansion
 if not defined @Try call exception init
 
