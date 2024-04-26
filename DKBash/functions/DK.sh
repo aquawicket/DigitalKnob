@@ -1,5 +1,4 @@
 #!bin/bash
-#echo "$0($*)"
 
 #export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 

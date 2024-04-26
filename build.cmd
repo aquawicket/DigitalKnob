@@ -35,9 +35,9 @@ set LOG_DEBUG=1
 set TRACE_ON_WARNINGS=0
 set HALT_ON_WARNINGS=0
 set CONTINUE_ON_ERRORS=0
-set SCRIPT_DIR=%~dp0
-set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
-set SCRIPT_NAME=%~nx0
+set DKSCRIPT_DIR=%~dp0
+set DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%
+set DKSCRIPT_NAME=%~nx0
 ::set true=0
 ::set false=1
 set "clr=[0m"
@@ -108,8 +108,8 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 	
 ::	call:dk_debug SHLVL
 ::  call:dk_debug MSYSTEM
-	call:dk_debug SCRIPT_NAME
-	call:dk_debug SCRIPT_DIR
+	call:dk_debug DKSCRIPT_NAME
+	call:dk_debug DKSCRIPT_DIR
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call:dk_getHostTriple
@@ -126,9 +126,9 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     call:dk_debug DKIMPORTS_DIR
     call:dk_debug DKPLUGINS_DIR
     
-	if NOT "%SCRIPT_DIR%"=="%DKBRANCH_DIR%" (
-		call:dk_warning "%SCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		call:dk_warning "%SCRIPT_NAME% path = %SCRIPT_DIR%"
+	if NOT "%DKSCRIPT_DIR%"=="%DKBRANCH_DIR%" (
+		call:dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		call:dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
 		call:dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
 	)
     
@@ -854,10 +854,10 @@ goto:eof
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
-    if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
+    if not "%DKSCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:dk_debug SCRIPT_DIR
+        call:dk_debug DKSCRIPT_DIR
         call:dk_debug DKBRANCH_DIR
         goto:eof
     )
@@ -865,9 +865,9 @@ goto:eof
     call:dk_killProcess java.exe
     call:dk_killProcess adb.exe
     
-    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
-    copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_resetAll wipe
+    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
+    copy /Y %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
+    start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" :dk_resetAll wipe
     exit    
         
 ::	###################################################################
@@ -895,7 +895,7 @@ goto:eof
         
     call:dk_gitUpdate NO_CONFIRM
         
-    start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%SCRIPT_NAME% & exit
+    start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% & exit
 goto:eof
 
 
@@ -921,10 +921,10 @@ goto:eof
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
-    if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
+    if not "%DKSCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call:dk_debug SCRIPT_DIR
+        call:dk_debug DKSCRIPT_DIR
         call:dk_debug DKBRANCH_DIR
         goto:eof
     )
@@ -932,9 +932,9 @@ goto:eof
     call:dk_killProcess java.exe
     call:dk_killProcess adb.exe
     
-    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
-    copy /Y %SCRIPT_DIR%\%SCRIPT_NAME% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_removeAll wipe
+    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
+    copy /Y %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
+    start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" :dk_removeAll wipe
     exit    
         
 ::  ##################################################################
@@ -967,8 +967,8 @@ goto:eof
 	call:dk_verbose "dk_reload(%*)"
 	
     echo .
-    echo reloading %SCRIPT_NAME%
-    start "" "%SCRIPT_DIR%\%SCRIPT_NAME%"
+    echo reloading %DKSCRIPT_NAME%
+    start "" "%DKSCRIPT_DIR%\%DKSCRIPT_NAME%"
     exit
 goto:eof
 
@@ -1045,16 +1045,16 @@ goto:eof
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 
     :: make sure script is running from DKBRANCH_DIR
-    ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
-    ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
-    ::              copy %SCRIPT_DIR%\%SCRIPT_NAME% %DKBRANCH_DIR%\%SCRIPT_NAME%
+    ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
+    ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
+    ::              copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
     ::      )
     ::      echo .
-    ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%SCRIPT_NAME%"
+    ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%DKSCRIPT_NAME%"
     ::      pause
-    ::      start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%"
-    ::      if exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
-    ::              del "%SCRIPT_DIR%\%SCRIPT_NAME%"
+    ::      start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%"
+    ::      if exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
+    ::              del "%DKSCRIPT_DIR%\%DKSCRIPT_NAME%"
     ::      )
     ::      exit
     ::)

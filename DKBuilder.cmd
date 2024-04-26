@@ -29,7 +29,7 @@ call "DKBatch/functions/DK.cmd"
 
 
 ::###### Global variables ######
-echo SCRIPT_PATH = %SCRIPT_PATH%
+echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 echo DKBATCH_DIR = %DKBATCH_DIR%
 
 

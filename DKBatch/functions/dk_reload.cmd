@@ -7,10 +7,10 @@ call dk_includeGuard
 :dk_reload () {
 	call dk_debugFunc
 	
-	if "%SCRIPT_PATH%" == "" dk_error "SCRIPT_PATH is invalid"; goto:eof
+	if "%DKSCRIPT_PATH%" == "" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
 	
     echo .
-    echo reloading %SCRIPT_PATH%
-    start "" "%SCRIPT_PATH%"
+    echo reloading %DKSCRIPT_PATH%
+    start "" "%DKSCRIPT_PATH%"
     exit
 goto:eof

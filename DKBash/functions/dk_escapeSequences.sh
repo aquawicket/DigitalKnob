@@ -45,14 +45,14 @@ dk_escapeSequences () {
 	ASCII_ADD		RS		30		036		0x1e	\#30		"Record Separator"
 	ASCII_ADD		US		31		037		0x1f	\#31		"Unit Separator"
 
-	echo ""
-	echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
+	dk_echo ""
+	dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
 	ASCII_size=${#ASCII[@]}
 	for (( i=0; i<${ASCII_size}; i++ ));
 	do
 		ASCII_SHOW $i
 	done
-	echo ""
+	dk_echo ""
 
 
 	#dk_hexToVariable NUL 0x00
@@ -130,7 +130,7 @@ dk_escapeSequences () {
 	export underline="$ESC[4m"
 	export blink="$ESC[5m"
 	export inverse="$ESC[7m"
-	export invisible=:"$ESC[8m"
+	export invisible="$ESC[8m"
 
 	# Foreground Colors
 	export black="$ESC[30m"

@@ -7,7 +7,7 @@
 ::###### DK_Init ######
 call ../functions/DK.cmd
 ::call dk_keepConsoleOpen
-echo "%SCRIPT_PATH%"
+echo "%DKSCRIPT_PATH%"
 echo %0
 
 

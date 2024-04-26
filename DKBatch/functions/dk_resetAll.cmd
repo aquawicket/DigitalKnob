@@ -24,10 +24,10 @@ call dk_includeGuard
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
-    if not "%SCRIPT_DIR%" == "%DKBRANCH_DIR%" (
+    if not "%DKSCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call dk_debug SCRIPT_DIR
+        call dk_debug DKSCRIPT_DIR
         call dk_debug DKBRANCH_DIR
         goto:eof
     )
@@ -35,11 +35,11 @@ call dk_includeGuard
     call dk_killProcess java.exe
     call dk_killProcess adb.exe
     
-    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%SCRIPT_NAME%"
+    echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
 	xcopy /s /e /Y %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch\
-    copy /Y %SCRIPT_PATH% %DIGITALKNOB_DIR%\%SCRIPT_NAME%
-    ::start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" dk_resetAll wipe
-	start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%"
+    copy /Y %DKSCRIPT_PATH% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
+    ::start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" dk_resetAll wipe
+	start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
 	pause
 	exit
     exit    
@@ -69,5 +69,5 @@ call dk_includeGuard
         
     call dk_gitUpdate NO_CONFIRM
         
-    start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%SCRIPT_NAME% & exit
+    start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% & exit
 goto:eof

@@ -29,16 +29,16 @@ call dk_includeGuard
     set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
 
     :: make sure script is running from DKBRANCH_DIR
-    ::if not %SCRIPT_DIR% == %DKBRANCH_DIR% (
-    ::      if not exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
-    ::              copy %SCRIPT_DIR%\%SCRIPT_NAME% %DKBRANCH_DIR%\%SCRIPT_NAME%
+    ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
+    ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
+    ::              copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
     ::      )
     ::      echo .
-    ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%SCRIPT_NAME%"
+    ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%DKSCRIPT_NAME%"
     ::      pause
-    ::      start "" "%DKBRANCH_DIR%\%SCRIPT_NAME%"
-    ::      if exist %DKBRANCH_DIR%\%SCRIPT_NAME% (
-    ::              del "%SCRIPT_DIR%\%SCRIPT_NAME%"
+    ::      start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%"
+    ::      if exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
+    ::              del "%DKSCRIPT_DIR%\%DKSCRIPT_NAME%"
     ::      )
     ::      exit
     ::)
