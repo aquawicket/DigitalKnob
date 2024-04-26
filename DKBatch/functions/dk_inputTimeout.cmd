@@ -1,12 +1,11 @@
-::call dk_includeGuard
-@echo off
-setlocal EnableExtensions EnableDelayedExpansion
+call dk_includeGuard
 
+setlocal EnableExtensions EnableDelayedExpansion
 ::#################################################################################
-:: dk_inputTimeout(<message> <timeout> <default>)
-::
-::	reference: https://stackoverflow.com/a/7703584/688352
-::
+::# dk_inputTimeout(<message> <timeout> <default>)
+::#
+::#	reference: https://stackoverflow.com/a/7703584/688352
+::#
 :dk_inputTimeout <message> <timeout> <default>
 	call dk_debugFunc
 	

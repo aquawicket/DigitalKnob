@@ -1,6 +1,6 @@
-::call dk_includeGuard
-setlocal enableDelayedExpansion
+call dk_includeGuard
 
+setlocal enableDelayedExpansion
 if [%ENABLE_dk_verbose%]==[] set ENABLE_dk_verbose=1
 if [%TRACE_ON_VERBOSE%]==[] set TRACE_ON_VERBOSE=0
 if [%PAUSE_ON_VERBOSE%]==[] set PAUSE_ON_VERBOSE=0

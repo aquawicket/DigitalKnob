@@ -1,4 +1,4 @@
-::[ -n "$dk_load" ] && return || readonly dk_load=1     #include_guard()
+if [%include_guard_dk_load%] == [1] ( goto:eof ) else set include_guard_dk_load=1
 ::echo %0(%*)
 
 ::####################################################################

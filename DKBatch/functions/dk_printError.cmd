@@ -1,4 +1,4 @@
-::call dk_includeGuard
+call dk_includeGuard
 
 ::~1 = ERROR
 ::~3 = C:\Users\aquawicket\digitalknob\Development\DKBatch\System\test_ERROR.cmd

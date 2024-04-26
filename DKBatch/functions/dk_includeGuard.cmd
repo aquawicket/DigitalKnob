@@ -1,4 +1,4 @@
-::call dk_includeGuard
+if [%include_guard_dk_includeGuard%] == [1] ( goto:eof ) else set include_guard_dk_includeGuard=1
 
 ::##################################################################################
 ::# dk_includeGuard()

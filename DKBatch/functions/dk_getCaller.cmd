@@ -1,5 +1,4 @@
 ::https://stackoverflow.com/a/43123617/688352
-@echo off
 
 ::setlocal DisableDelayedExpansion
 set "func=%~0"

@@ -1,6 +1,6 @@
-::call dk_includeGuard
-setlocal enableDelayedExpansion
+call dk_includeGuard
 
+setlocal enableDelayedExpansion
 if [%ENABLE_dk_info%]==[] set ENABLE_dk_info=1
 if [%TRACE_ON_INFO%]==[] set TRACE_ON_INFO=0
 if [%PAUSE_ON_INFO%]==[] set PAUSE_ON_INFO=0

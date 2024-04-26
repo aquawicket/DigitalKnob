@@ -1,5 +1,4 @@
-@echo OFF
-::call dk_includeGuard
+call dk_includeGuard
 
 ::####################################################################
 ::# dk_asciiToDecimal(<ascii_string>)

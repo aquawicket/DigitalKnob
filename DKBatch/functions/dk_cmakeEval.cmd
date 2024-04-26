@@ -1,5 +1,5 @@
-::call dk_includeGuard
-::@echo on
+call dk_includeGuard
+
 ::################################################################################
 ::# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 ::#

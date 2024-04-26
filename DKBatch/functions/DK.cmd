@@ -1,5 +1,4 @@
-@echo off
-:: if "$DK_INIT" == "" return else set DK_INIT=1     # dk_includeGuard()
+if [%include_guard_DK%] == [1] ( goto:eof ) else set include_guard_DK=1
 ::echo %~0(%*)
 
 

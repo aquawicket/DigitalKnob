@@ -1,10 +1,9 @@
-::call dk_includeGuard
-@echo off
+call dk_includeGuard
 
 ::#################################################################################
-:: dk_keepConsoleOpen()
-::
-::
+::# dk_keepConsoleOpen()
+::#
+::#
 dk_keepConsoleOpen
 	call dk_debugFunc
 	

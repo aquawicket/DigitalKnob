@@ -1,9 +1,9 @@
-::call dk_includeGuard
+call dk_includeGuard
 
 ::#################################################################################
-:: dk_postBuildMenu()
-::
-::
+::# dk_postBuildMenu()
+::#
+::#
 :dk_postBuildMenu
 	call dk_debugFunc
 	
