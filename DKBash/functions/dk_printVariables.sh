@@ -6,7 +6,7 @@ dk_includeGuard
 #
 #
 alias dk_printVariables='{
-	dk_verbose "dk_printVariables($*)"
+	dk_debugFunc
 	
 	# https://mywiki.wooledge.org/BashSheet
 	# https://www.adminschoice.com/bash-positional-parameters

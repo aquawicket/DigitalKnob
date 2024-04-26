@@ -66,7 +66,7 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 dk_buildMain () {
-	dk_verbose "dk_buildMain($*)"
+	dk_debugFunc
 
 	echo "BASH = $BASH"
 	if [ $RELOAD_WITH_BASH = 1 ]; then # && ! dk_defined BASH; then
@@ -157,7 +157,7 @@ dk_buildMain () {
 #
 #
 dk_pickUpdate() {
-	dk_verbose "dk_pickUpdate($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_readCache
@@ -251,7 +251,7 @@ dk_pickUpdate() {
 #
 #
 dk_pickApp() {
-	dk_verbose "dk_pickApp($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -308,7 +308,7 @@ dk_pickApp() {
 #
 #
 dk_pickOs() {
-	dk_verbose "dk_pickOs($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -443,7 +443,7 @@ dk_pickOs() {
 #
 #
 dk_pickType() {
-	dk_verbose "dk_pickType($*)"
+	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_echo
@@ -481,7 +481,7 @@ dk_pickType() {
 #
 #
 #dk_append_cmake_args() {
-#    dk_verbose "dk_append_cmake_args($*)"
+#    dk_debugFunc
 #
 #    if [ "$*" = "" ]; then dk_error "dk_append_cmake_args is empty!" & return 1
 #    set -- "%*"
@@ -494,7 +494,7 @@ dk_pickType() {
 #
 #
 #prepend_cmake_args () {
-#    call:dk_verbose "prepend_cmake_args(%*)"
+#    dk_debugFunc
 #	
 #    if [ "$*" = "" ]; then dk_error "dk_append_cmake_args is empty!" & return 1
 #    set -- "%*"
