@@ -8,6 +8,8 @@ dk_variable_info () {
 	dk_debugFunc
 	
 	[ $# -ne 2 ] && return $false										# if not exactly 2 parameters
+	#$(expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# ^ as first character is not portable
+	#$(expr "$2" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# ^ as first character is not portable
 	$(expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	$(expr "$2" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	

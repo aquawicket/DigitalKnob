@@ -21,8 +21,9 @@ dk_toVariableInfo () {
 	[ $# -ne 1 ] && dk_verbose "dk_variableInfo($*): incorrect number or variables" && return $false											# if not exactly 1 parameter
 	
 	eval name='$'{$1}
-	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
-
+	#$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# ^ as first character is not portable
+	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false
+	
 	if dk_defined $name; then
 		#echo "dk_toVariableInfo():name = $name"
 		eval value='$'{$name}
