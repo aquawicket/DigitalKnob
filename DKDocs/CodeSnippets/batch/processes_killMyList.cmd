@@ -7,3 +7,5 @@ for /f "tokens=*" %%a in (processes_MyList.txt) do (
 	echo %%a 
 	taskkill /IM "%%a" /F
 )
+
+pause

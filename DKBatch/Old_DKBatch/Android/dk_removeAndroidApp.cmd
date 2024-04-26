@@ -24,15 +24,15 @@
 
 %DKBATCH%
 ::############################################################################
-:UninstallPackage name error
+:dk_removeAndroidApp name error
 ::#
 ::# Func:  Uninstall a packgage from an Android device
 ::#
 ::# name:  The name of the package to uninstall
 ::# error:   Returned error code if any
 ::#
-::# Example:  call UninstallPackage com.company.appname error
-::#           echo UninstallPackage returned: %error%
+::# Example:  call dk_removeAndroidApp com.company.appname error
+::#           echo dk_removeAndroidApp returned: %error%
 ::###########################################################################
 set "name=%~1"
 
