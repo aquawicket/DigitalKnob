@@ -6,6 +6,7 @@ call dk_includeGuard
 ::#
 :dk_makeDirectory () {
 	call dk_debugFunc
-	
-    if NOT exist "%~1" mkdir "%~1"
+	set "path=%~1"
+	set "path=%path:/=\%"
+    if NOT exist "%path%" mkdir "%path%"
 goto:eof

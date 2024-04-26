@@ -33,4 +33,5 @@ setlocal enableDelayedExpansion
 	if [%HALT_ON_DEBUG%]==[1] exit
 	if [%PAUSE_ON_DEBUG%]==[1] call dk_pause
 	
+	endlocal
 goto:eof

@@ -27,7 +27,7 @@ function(dk_pause)
 		if(NOT DKBATCH_DIR)
 			dk_getDKPaths()
 		endif()
-		execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd)
+		execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd & dk_pause)
 		return()
 	endif()
 		
