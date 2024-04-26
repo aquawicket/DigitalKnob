@@ -18,8 +18,8 @@ dk_stacktrace () {
  	((i<size)) && echo "STACKTRACE[$size]" 
 	i=0
 	while [ "$i" -le "$size" ]; do
-		((frame=${#FUNCNAME[@]}-i-2 ))
-		dk_echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i]} ${FUNCNAME[$i+1]}()"
+		((frame=${#FUNCNAME[@]}-i ))
+		dk_echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i-1]} ${FUNCNAME[$i]}()"
 		i=$(( i + 1 ))
 	done 
 

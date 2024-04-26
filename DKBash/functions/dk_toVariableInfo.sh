@@ -18,13 +18,10 @@ dk_includeGuard
 dk_toVariableInfo () {
 	#dk_debugFunc
 	
-	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
+	[ $# -ne 1 ] && dk_verbose "dk_variableInfo($*): incorrect number or variables" && return $false											# if not exactly 1 parameter
 	
-	#echo "1 = $1"
 	eval name='$'{$1}
-	#echo "dk_toVariableInfo():name1 = $name"
 	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
-	#echo "${green}$name is [:word:]${clr}"
 
 	if dk_defined $name; then
 		#echo "dk_toVariableInfo():name = $name"
