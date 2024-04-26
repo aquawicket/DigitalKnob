@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::#####################################################################
 ::# dk_getParentDir(<input> <output>)

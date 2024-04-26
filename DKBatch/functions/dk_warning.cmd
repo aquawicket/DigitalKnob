@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 if [%ENABLE_dk_warning%]==[] set ENABLE_dk_warning=1
 if [%TRACE_ON_WARNING%]==[] set TRACE_ON_WARNING=0

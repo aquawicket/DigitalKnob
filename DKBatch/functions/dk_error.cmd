@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 
 if [%ENABLE_dk_error%]==[] set ENABLE_dk_error=1

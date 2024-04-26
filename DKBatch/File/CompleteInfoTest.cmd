@@ -46,7 +46,7 @@ goto:eof
 goto:eof
 
 
-:::: Variable substitutions :::::::
+::############ Variable substitutions ############
 :: 		   %I 	Original Variable
 :: 		  %~I 	Expands %I which removes any surrounding quotation marks.
 :: 		 %~fI	Expands %I to a fully qualified path name.

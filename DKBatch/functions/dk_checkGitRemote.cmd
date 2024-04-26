@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::##################################################################################
 ::# dk_checkGitRemote()
@@ -13,7 +13,6 @@
 
     :: git remote update > /dev/null 2> /dev/null
     %GIT_EXE% remote update
-    echo GIT_EXE = %GIT_EXE%
 
 	:: branch= $(git rev-parse --abbrev-ref HEAD)
     call dk_commandToVariable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch

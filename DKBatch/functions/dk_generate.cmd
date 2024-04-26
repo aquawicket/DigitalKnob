@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::####################################################################
 ::# dk_generate()
@@ -67,25 +67,25 @@
     call dk_appendCmakeArgs --warn-unused-vars
     ::call dk_appendCmakeArgs --check-system-vars
 	
-	if %TARGET_OS%==android_arm32      call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==android_arm64      call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==emscripten         call dk_prepend_cmake_args -G Unix Makefiles	
-	if %TARGET_OS%==ios_arm32          call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==ios_arm64          call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==iossim_x86         call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==iossim_x86_64      call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==linux_x86          call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==linux_x86_64       call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==mac_x86            call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==mac_x86_64         call dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==raspberry_arm32    call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==raspberry_arm64    call dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==win_arm64_clang    call dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_clang      call dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_mingw      call dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_clang   call dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_mingw   call dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_ucrt    call dk_prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==android_arm32      call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==android_arm64      call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==emscripten         call dk_prependCmakeArgs -G Unix Makefiles	
+	if %TARGET_OS%==ios_arm32          call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==ios_arm64          call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==iossim_x86         call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==iossim_x86_64      call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==linux_x86          call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==linux_x86_64       call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==mac_x86            call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==mac_x86_64         call dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==raspberry_arm32    call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==raspberry_arm64    call dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==win_arm64_clang    call dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_clang      call dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_mingw      call dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_clang   call dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_mingw   call dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_ucrt    call dk_prependCmakeArgs -G MinGW Makefiles
 	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
 ::	set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake

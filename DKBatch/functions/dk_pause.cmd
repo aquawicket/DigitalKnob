@@ -1,5 +1,5 @@
 @echo off
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::##################################################################################
 ::# dk_pause(msg)

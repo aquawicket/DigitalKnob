@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 setlocal enableDelayedExpansion
 
 if [%ENABLE_dk_verbose%]==[] set ENABLE_dk_verbose=1

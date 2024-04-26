@@ -1,5 +1,5 @@
 @echo OFF
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::####################################################################
 ::# dk_hexToAscii(<hex_string>)

@@ -1,13 +1,13 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::####################################################################
-::# dk_prepend_cmake_args(<string>)
+::# dk_prependCmakeArgs(<string>)
 ::#
 ::#
-:dk_prepend_cmake_args () {
+:dk_prependCmakeArgs () {
 	call dk_debugFunc
 	
-    if "%*" == "" echo ERROR: dk_prepend_cmake_args is empty! & goto:eof
+    if "%*" == "" echo ERROR: dk_prependCmakeArgs is empty! & goto:eof
     set CMAKE_ARGS="%*" %CMAKE_ARGS%
 	echo prepended %*
 goto:eof

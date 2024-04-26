@@ -5,7 +5,7 @@ if "%*" NEQ "" call %*
 
 
 ::###### Settings ######
-::set ENABLE_dk_debugFunc=1
+set ENABLE_dk_debugFunc=1
 ::set ENABLE_dk_verbose=0
 ::set TRACE_ON_VERBOSE=1
 ::set PAUSE_ON_VERBOSE=1

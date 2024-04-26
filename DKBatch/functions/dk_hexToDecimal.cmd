@@ -1,5 +1,5 @@
 @echo OFF
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::####################################################################
 ::# dk_hexToDecimal(<hex_string>)

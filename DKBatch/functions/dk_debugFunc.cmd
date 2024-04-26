@@ -1,4 +1,4 @@
-:: dk_include_guard()
+:: dk_include_guard
 
 
 if [%ENABLE_dk_debugFunc%] == [] set ENABLE_dk_debugFunc=0

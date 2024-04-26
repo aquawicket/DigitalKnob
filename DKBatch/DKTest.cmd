@@ -5,7 +5,7 @@ echo DKTest.cmd()
 
 echo cls && cls && cls
 
-::::::: Load Function files :::::::
+::############ Load Function files ############
 call functions\DK.cmd
 
 
@@ -17,7 +17,7 @@ set "TEST_VAR=this is a test variable"
 call dk_printVar TEST_VAR
 
 
-::::::::: main ::::::::::
+::############ main ############
 :main () {
 	call dk_debug "main(%*)"
 	
@@ -49,7 +49,7 @@ call dk_printVar TEST_VAR
 ::	$echo "ps -o fname --no-headers \$\$ = $(ps -o fname --no-headers $$)"
 ::	$echo ""
 ::
-::	::::::::::::::::::::::: Test Constructs :::::::::::::::::::::::
+::	############ Test Constructs ############
 ::	:: https://tldp.org/LDP/abs/html/testconstructs.html#TTESTREF
 ::
 ::	#unset=

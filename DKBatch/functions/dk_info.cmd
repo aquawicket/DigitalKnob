@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 setlocal enableDelayedExpansion
 
 if [%ENABLE_dk_info%]==[] set ENABLE_dk_info=1

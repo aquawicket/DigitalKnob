@@ -23,17 +23,17 @@
 :: SOFTWARE.
 
 %DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::############################################################################
 :UninstallPackage name error
-::
-:: Func:  Uninstall a packgage from an Android device
-::
-:: name:  The name of the package to uninstall
-:: error:   Returned error code if any
-::
-:: Example:  call UninstallPackage com.company.appname error
-::           echo UninstallPackage returned: %error%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::#
+::# Func:  Uninstall a packgage from an Android device
+::#
+::# name:  The name of the package to uninstall
+::# error:   Returned error code if any
+::#
+::# Example:  call UninstallPackage com.company.appname error
+::#           echo UninstallPackage returned: %error%
+::###########################################################################
 set "name=%~1"
 
 if not defined %name% (

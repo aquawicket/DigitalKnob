@@ -1,4 +1,4 @@
-::dk_includeGuard()
+::call dk_includeGuard
 
 ::#################################################################################
 :: dk_setRegistryKey() <reg_path> <key> <type> <value>

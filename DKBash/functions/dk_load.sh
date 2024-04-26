@@ -1,4 +1,4 @@
-#[ -n "$dk_load" ] && return || readonly dk_load=1     # dk_includeGuard()
+[ -n "$inclue_guard_dk_load" ] && return || readonly inclue_guard_dk_load=1
 
 ##################################################################################
 # dk_load()

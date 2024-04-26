@@ -399,13 +399,13 @@ goto:eof
 
 
 ::####################################################################
-::# dk_prepend_cmake_args(<string>)
+::# dk_prependCmakeArgs(<string>)
 ::#
 ::#
-:dk_prepend_cmake_args () {
-	call:dk_verbose "dk_prepend_cmake_args(%*)"
+:dk_prependCmakeArgs () {
+	call:dk_verbose "dk_prependCmakeArgs(%*)"
 	
-    if "%*" == "" echo ERROR: dk_prepend_cmake_args is empty! & goto:eof
+    if "%*" == "" echo ERROR: dk_prependCmakeArgs is empty! & goto:eof
     set CMAKE_ARGS="%*" %CMAKE_ARGS%
 	echo prepended %*
 goto:eof
@@ -438,7 +438,7 @@ goto:eof
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
     call:dk_debug CMAKE_TARGET_PATH
         
-    ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
+::	############ BUILD CMAKE_ARGS ARRAY ############
     set DKLEVEL=RebuildAll
     set DKLINK=Static
 
@@ -478,25 +478,25 @@ goto:eof
     call:dk_appendCmakeArgs --warn-unused-vars
     ::call:dk_appendCmakeArgs --check-system-vars
 	
-	if %TARGET_OS%==android_arm32      call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==android_arm64      call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==emscripten         call:dk_prepend_cmake_args -G Unix Makefiles	
-	if %TARGET_OS%==ios_arm32          call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==ios_arm64          call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==iossim_x86         call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==iossim_x86_64      call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==linux_x86          call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==linux_x86_64       call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==mac_x86            call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==mac_x86_64         call:dk_prepend_cmake_args -G Xcode
-	if %TARGET_OS%==raspberry_arm32    call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==raspberry_arm64    call:dk_prepend_cmake_args -G Unix Makefiles
-	if %TARGET_OS%==win_arm64_clang    call:dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_clang      call:dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_mingw      call:dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_clang   call:dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_mingw   call:dk_prepend_cmake_args -G MinGW Makefiles
-	if %TARGET_OS%==win_x86_64_ucrt    call:dk_prepend_cmake_args -G MinGW Makefiles
+	if %TARGET_OS%==android_arm32      call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==android_arm64      call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==emscripten         call:dk_prependCmakeArgs -G Unix Makefiles	
+	if %TARGET_OS%==ios_arm32          call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==ios_arm64          call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==iossim_x86         call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==iossim_x86_64      call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==linux_x86          call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==linux_x86_64       call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==mac_x86            call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==mac_x86_64         call:dk_prependCmakeArgs -G Xcode
+	if %TARGET_OS%==raspberry_arm32    call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==raspberry_arm64    call:dk_prependCmakeArgs -G Unix Makefiles
+	if %TARGET_OS%==win_arm64_clang    call:dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_clang      call:dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_mingw      call:dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_clang   call:dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_mingw   call:dk_prependCmakeArgs -G MinGW Makefiles
+	if %TARGET_OS%==win_x86_64_ucrt    call:dk_prependCmakeArgs -G MinGW Makefiles
 	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
 ::	set TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake
@@ -870,7 +870,7 @@ goto:eof
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_resetAll wipe
     exit    
         
-    ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::	###################################################################
     :wipe   
     ::do we need admin rights?
     ::runas /user:Administrator cmd
@@ -937,7 +937,7 @@ goto:eof
     start "" "%DIGITALKNOB_DIR%\%SCRIPT_NAME%" :dk_removeAll wipe
     exit    
         
-    ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::  ##################################################################
     :wipe   
     ::do we need admin rights?
     ::runas /user:Administrator cmd   
