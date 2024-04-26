@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
+###### Load Function files ######
+. ../../../DKBash/functions/DK.sh
 
 # to run this script requires privledges
 # > chmod 777 build.sh

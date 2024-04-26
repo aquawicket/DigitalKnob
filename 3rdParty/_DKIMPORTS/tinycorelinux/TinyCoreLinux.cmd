@@ -1,12 +1,5 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
-
-:: Install instructions ::
-:: select Frugal
-:: select sda
-:: check online
-
-:: delete tinycore.img to redo the process if needed
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
 set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 set "TINYCORELINUX_ISO=%cd%\CorePlus-current.iso"
@@ -14,6 +7,22 @@ set "TINYCORELINUX_IMG=tinycore.img"
 set "QEMU=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\qemu"
 set "QEMU_MEMORY=1G"
 set "QEMU_DRIVE_SIZE=10G"
+
+
+::####################################################################
+::# test_cmake_dk_todo.cmd
+::#
+::#
+::###### DK_Init ######
+call ../../../DKBatch/functions/DK.cmd
+
+
+:: Install instructions ::
+:: select Frugal
+:: select sda
+:: check online
+
+:: delete tinycore.img to redo the process if needed
 
 
 if NOT exist "%TINYCORELINUX_IMG%" (
@@ -31,34 +40,27 @@ if exist "%TINYCORELINUX_IMG%" (
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-:: assert()
-:assert
-	echo ERROR:%ERRORLEVEL%  %~1
-	pause
-	exit
-goto:eof
-
 
 :: Download CorePlus-current.iso
 :download_iso
 	if NOT exist "%TINYCORELINUX_ISO%" (
 		echo "Downloading CorePlus-current.iso . . ."
-		call:download %TINYCORELINUX_DL% %TINYCORELINUX_ISO%
+		call dk_download %TINYCORELINUX_DL% %TINYCORELINUX_ISO%
 	)
-	call::create_image
+	call:create_image
 goto:eof
 
 :: Create the virtual image (10gb)
 :create_image
 	if exist "%TINYCORELINUX_IMG%" (
-		call:assert "%TINYCORELINUX_IMG% already exists"
+		call dk_warning "%TINYCORELINUX_IMG% already exists"
 	)
 	echo "Creating %TINYCORELINUX_IMG% . . ."
 	%QEMU%\qemu-img create -f qcow2 %TINYCORELINUX_IMG% %QEMU_DRIVE_SIZE%
 	
-	if NOT "%ERRORLEVEL%" == "0" (
+	if "%ERRORLEVEL%" NEQ "0" (
 		del %TINYCORELINUX_IMG%
-		call:assert "Failed to create image"
+		call dk_error "Failed to create image"
 	)
 
 	call:install
@@ -70,9 +72,9 @@ goto:eof
 	%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m %QEMU_MEMORY% -cpu max -smp 2 -vga virtio -display sdl
 	if NOT "%ERRORLEVEL%" == "0" (
 		del %TINYCORELINUX_IMG%
-		call:assert "Launching the virtual maching failed"
+		call dk_error "Launching the virtual maching failed"
 	)
-	echo "Installation complete"
+	call dk_echo "Installation complete"
 goto:eof
 
 :: Launching the VM (after install)
