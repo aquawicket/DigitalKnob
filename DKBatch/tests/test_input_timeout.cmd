@@ -1,11 +1,13 @@
 @echo off
+
 setlocal EnableExtensions EnableDelayedExpansion
-cls
-echo %0(%*)
-
-
-:::::: Load DK Function files (DK_INIT) ::::::
+::####################################################################
+::# test_dk_validateNotepadpp.cmd
+::#
+::#
+::###### DK_Init ######
 call functions\DK.cmd
+
 
 :::::: Load Main Program ::::::
 ::if "%*" NEQ "" call %* 

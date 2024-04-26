@@ -1,4 +1,9 @@
-@echo off
+
+::####################################################################
+::# test_find_digitalknob.cmd
+::#
+::#
+
 setlocal EnableDelayedExpansion
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
@@ -24,8 +29,5 @@ goto:eof
 		set %1=%parent_dir:~0,-1%
 		set %2=%current_folder%
 goto:eof
-
-
-
 
 :: "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"

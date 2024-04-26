@@ -43,7 +43,7 @@ goto:END_DKDEBUGFUNC
 	echo Fully qualified path name:      ~f0 = %~f0
 	echo         Drive letter only:      ~d0 = %~d0
 	echo                 Path only:      ~p0 = %~p0
-	echo Without extension or path:      ~n0 = %~n0
+	echo Without extension or path:      ~n0 = %~n0
 	echo       File extension only:      ~x0 = %~x0
 	echo            Short 8.3 name:      ~s0 = %~s0
 	echo            Without quotes:       ~0 = %~0
