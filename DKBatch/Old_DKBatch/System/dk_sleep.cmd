@@ -24,24 +24,17 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:EndProcess process error
+:dk_sleep seconds
 ::
-:: Func:  Kill a process by process name
+:: Func: Suspends batch execution for a number of seconds.
 ::
-:: process:  the name of the task to kill.  I.E. cale.exe
-:: error:    the error code if any
-::
-:: Example:  call EndProcess iexplore.exe error
-::           echo EndProcess returned: %error%
+:: Args: %1 Number of seconds to wait for (by val)
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if "%~1"=="" (
-	echo ERROR: arg1 "process" invalid
-	goto :EOF
-)
-set "process=%~1"
-
-tasklist /fi "imagename eq %process%" |find ":" >nul
-if errorlevel 1 taskkill /f /im "%process%
+set /a n=%1+1
+echo Sleeping for %1 seconds . . .
+ping -n %n% 127.0.0.1 >nul
+endlocal 
 
 
+:end
 %DKEND%

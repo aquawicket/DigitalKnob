@@ -24,20 +24,22 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:dk_removeDirectory path
 ::
-:: getKey: get the character code of the next keystroke
+:: RemoveDirectory: Automatically turns / slashes into backslashes.
+::                  It will remove the directory and andy sub direcories and files
 ::
-:: output: variable(by ref) to receive the value
+:: path:  The path to the directory to remove
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call RemoveDirectory C:/Test/Folder
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set "path=%~1"
+set "path=%path:/=\%"
+if EXIST "%path%" (
+	rd /S /Q "%path%"
+) else (
+	echo ERROR: %0^(%path%^): The path does not exist
+)
+
+
 %DKEND%

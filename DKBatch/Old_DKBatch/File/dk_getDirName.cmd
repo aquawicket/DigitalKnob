@@ -24,20 +24,16 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:process_is_running name result
+:dk_getDirName input output
 ::
-:: Func:  Check if a process is running
+:: Func: Get the name of the topmost folder in a path
 ::
-::    name:   the name of the process to check for
-:: 	result:	  returns 1 if the process name is running or 0 if not
+:: output: variable(by ref) of directory folder name 
 ::
-:: Example:  call process_is_running calc.exe calculator_running
-::           echo process_is_running calc.exe returned: %calculator_running%
-:: 
+:: Example:  call get_dir_name %path% rval 
+::           echo get_dir_name returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-tasklist | find /i "%1" > nul
-if "%ERRORLEVEL%"=="0" set "%result%=1" & goto:eof
-set %result%=0
+for %%a in ("%1..\") do for %%b in ("%%~dpa\.") do set "dir_name=%%~nxb"
+endlocal & set %2=%dir_name%
 
-endlocal & set "%2=%result%"
 %DKEND%

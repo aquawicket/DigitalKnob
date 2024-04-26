@@ -24,32 +24,21 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:AppendEnvPath path result
+:dk_commandExists command result
 ::
-:: Func: Appends a path to the %PATH% environment variable
+:: Func:  Check if a command exists
 ::
-:: path:  a string containing the new path
+:: command:   the name of the command to check for
+:: 	result:	  returns 1 if the command exists or 0 if not found
 ::
-:: Example:  call AppendEnvPath C:\Windows\System32 result
-::           echo AppendEnvPath returned: %result%
+:: Example:  call dk_commandExists dir HAVE_dir
+::           echo dk_commandExists dir returned: %HAVE_dir%
+:: 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "path=%~1"
-if %DEBUG%==1 echo AppendEnvPath(path: %path%)
+set "command=%1"
+cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
+if %ERRORLEVEL% EQU 0 set "%result%=1" & goto:eof
+set "%result%=0"
 
-call Contains "%PATH%\" "%path%" result
-
-if not "%result%" == "1" (
-	setx PATH "%PATH%";"%path%" >nul
-)
-
-if not "%ERRORLEVEL%" == "0" (
-	echo ERROR:%ERRORLEVEL% & goto :EOF
-)
-
-if %DEBUG%==1 (
-	echo AppendEnvPath result: %result%
-)
-endlocal & set "%3=%result%"
-
-
+endlocal & set "%2=%result%"
 %DKEND%

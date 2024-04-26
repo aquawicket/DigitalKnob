@@ -23,21 +23,21 @@
 :: SOFTWARE.
 
 %DKBATCH%
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:CopyPath path
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:dk_processIsRunning name result
 ::
-:: CosyPath: Automatically turns / slashes into backslashes and creates directories as needed
-:: This is just for compatability and will not change your variables
+:: Func:  Check if a process is running
 ::
-:: path:  The path to the directory to create
+::    name:   the name of the process to check for
+:: 	result:	  returns 1 if the process name is running or 0 if not
 ::
-:: Example:  call MakeDirectory C:\Test\Folder
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "src=%~1"
-set "dest=%~2"
-set "src=%src:/=\%"
-set "dest=%dest:/=\%"
-echo f | xcopy /f "%src%" "%dest%"
-%IF_ERROR% ""
+:: Example:  call dk_processIsRunning calc.exe calculator_running
+::           echo dk_processIsRunning calc.exe returned: %calculator_running%
+:: 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+tasklist | find /i "%1" > nul
+if "%ERRORLEVEL%"=="0" set "%result%=1" & goto:eof
+set %result%=0
 
+endlocal & set "%2=%result%"
 %DKEND%

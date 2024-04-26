@@ -24,21 +24,24 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:command_exists command result
+:dk_endProcess process error
 ::
-:: Func:  Check if a command exists
+:: Func:  Kill a process by process name
 ::
-:: command:   the name of the command to check for
-:: 	result:	  returns 1 if the command exists or 0 if not found
+:: process:  the name of the task to kill.  I.E. cale.exe
+:: error:    the error code if any
 ::
-:: Example:  call command_exists dir HAVE_dir
-::           echo command_exists dir returned: %HAVE_dir%
-:: 
+:: Example:  call dk_endProcess iexplore.exe error
+::           echo dk_endProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "command=%1"
-cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
-if %ERRORLEVEL% EQU 0 set "%result%=1" & goto:eof
-set "%result%=0"
+if "%~1"=="" (
+	echo ERROR: arg1 "process" invalid
+	goto :EOF
+)
+set "process=%~1"
 
-endlocal & set "%2=%result%"
+tasklist /fi "imagename eq %process%" |find ":" >nul
+if errorlevel 1 taskkill /f /im "%process%
+
+
 %DKEND%

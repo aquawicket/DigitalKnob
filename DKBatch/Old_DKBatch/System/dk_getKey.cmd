@@ -22,8 +22,22 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-%dkbatch%
-call CommandToVariable dir
-
- 
-%DKEND% 
+%DKBATCH%
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:dk_getKey output
+::
+:: dk_getKey: get the character code of the next keystroke
+::
+:: output: variable(by ref) to receive the value
+::
+:: Example:  call dk_getKey rval & echo dk_getKey returned: %rval%
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set "output=undefined"
+@echo off
+set /p "=> Single Key Prompt? " <nul
+PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
+set "output=%ErrorLevel%"
+::echo KeyCode = %ErrorLevel%
+::pause
+endlocal & set "%1=%output%"
+%DKEND%

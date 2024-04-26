@@ -22,4 +22,26 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-echo ( %* )
+%DKBATCH%
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:dk_getFiles path result
+::
+:: get_files: List the files in the given path
+::
+:: path:  	The path to list the files in
+:: result: 	file_list returned
+::
+:: Example:  call get_files C:/Windows/Sysem32 file_list
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set "path=%~1"
+
+for %%f in ("%path%\*") do set "files=!files!;%%f"
+
+::echo files = %files%
+endlocal & set "%2==%files%"
+
+::unset variables
+::set "path="
+
+
+%DKEND%

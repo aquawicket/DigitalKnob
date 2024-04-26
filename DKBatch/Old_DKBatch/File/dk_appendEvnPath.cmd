@@ -24,17 +24,32 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:Sleep seconds
+:dk_appendEvnPath path result
 ::
-:: Func: Suspends batch execution for a number of seconds.
+:: Func: Appends a path to the %PATH% environment variable
 ::
-:: Args: %1 Number of seconds to wait for (by val)
+:: path:  a string containing the new path
+::
+:: Example:  call dk_appendEvnPath C:\Windows\System32 result
+::           echo dk_appendEvnPath returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set /a n=%1+1
-echo Sleeping for %1 seconds . . .
-ping -n %n% 127.0.0.1 >nul
-endlocal 
+set "path=%~1"
+if %DEBUG%==1 echo dk_appendEvnPath(path: %path%)
+
+call Contains "%PATH%\" "%path%" result
+
+if not "%result%" == "1" (
+	setx PATH "%PATH%";"%path%" >nul
+)
+
+if not "%ERRORLEVEL%" == "0" (
+	echo ERROR:%ERRORLEVEL% & goto :EOF
+)
+
+if %DEBUG%==1 (
+	echo dk_appendEvnPath result: %result%
+)
+endlocal & set "%3=%result%"
 
 
-:end
 %DKEND%

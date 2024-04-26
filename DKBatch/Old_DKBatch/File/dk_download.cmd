@@ -24,20 +24,25 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:Contains "string" "searchVal" result
+:dk_download url destination
 ::
-:: Func: returns true if searchVal is in string
+:: Func:  *description*
 ::
-:: Example:  call Contains boy "see the boy run" result
-::           echo Contains returned: %result%
+:: url:  		 the url file path to download
+:: destination:  the loacl path to save the file
+::
+:: Example:  call dk_download https://mysite/file.txt C:/downloads
+::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set string=%~1
-set searchVal=%~2
-if %DEBUG%==1 echo Contains(string: %string%;  searchVal: %searchVal%;  result: %result%) & echo:
-set result=0
-if not "x!string:%searchVal%=!"=="x%string%" set result=1
-if "%string%"=="" set result=0
-if %DEBUG%==1 echo Contains()result: %result% & echo:
-endlocal & set %3=%result%
+echo Downloading %~1
+if exist "%~2" (
+    echo %~2 already exist
+    goto:eof
+)
+
+echo please wait . . .
+::certutil.exe -urlcache -split -f %~1 %~2
+powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%~2')"
+::call:check_error
 
 %DKEND%

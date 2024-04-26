@@ -24,25 +24,16 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:download url destination
+:dk_getParnetDirectory input output
 ::
-:: Func:  *description*
+:: Func: Get the parent directory of a given path
 ::
-:: url:  		 the url file path to download
-:: destination:  the loacl path to save the file
+:: output: variable(by ref) of the parent directory path
 ::
-:: Example:  call download https://mysite/file.txt C:/downloads
-::
+:: Example:  call get_parent_dir %path% rval 
+::           echo get_parent_dir returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-echo Downloading %~1
-if exist "%~2" (
-    echo %~2 already exist
-    goto:eof
-)
-
-echo please wait . . .
-::certutil.exe -urlcache -split -f %~1 %~2
-powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%~2')"
-::call:check_error
+for %%x in ("%1..\") do set parent_dir=%%~dpx
+endlocal & set %2=%parent_dir%
 
 %DKEND%

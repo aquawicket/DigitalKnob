@@ -24,24 +24,20 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:get_files path result
+:dk_contains "string" "searchVal" result
 ::
-:: get_files: List the files in the given path
+:: Func: returns true if searchVal is in string
 ::
-:: path:  	The path to list the files in
-:: result: 	file_list returned
-::
-:: Example:  call get_files C:/Windows/Sysem32 file_list
+:: Example:  call Contains boy "see the boy run" result
+::           echo Contains returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "path=%~1"
-
-for %%f in ("%path%\*") do set "files=!files!;%%f"
-
-::echo files = %files%
-endlocal & set "%2==%files%"
-
-::unset variables
-::set "path="
-
+set string=%~1
+set searchVal=%~2
+if %DEBUG%==1 echo Contains(string: %string%;  searchVal: %searchVal%;  result: %result%) & echo:
+set result=0
+if not "x!string:%searchVal%=!"=="x%string%" set result=1
+if "%string%"=="" set result=0
+if %DEBUG%==1 echo Contains()result: %result% & echo:
+endlocal & set %3=%result%
 
 %DKEND%

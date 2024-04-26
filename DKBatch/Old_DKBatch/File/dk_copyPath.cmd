@@ -23,23 +23,21 @@
 :: SOFTWARE.
 
 %DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:RemoveDirectory path
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:dk_copyPath path
 ::
-:: RemoveDirectory: Automatically turns / slashes into backslashes.
-::                  It will remove the directory and andy sub direcories and files
+:: CosyPath: Automatically turns / slashes into backslashes and creates directories as needed
+:: This is just for compatability and will not change your variables
 ::
-:: path:  The path to the directory to remove
+:: path:  The path to the directory to create
 ::
-:: Example:  call RemoveDirectory C:/Test/Folder
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "path=%~1"
-set "path=%path:/=\%"
-if EXIST "%path%" (
-	rd /S /Q "%path%"
-) else (
-	echo ERROR: %0^(%path%^): The path does not exist
-)
-
+:: Example:  call MakeDirectory C:\Test\Folder
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set "src=%~1"
+set "dest=%~2"
+set "src=%src:/=\%"
+set "dest=%dest:/=\%"
+echo f | xcopy /f "%src%" "%dest%"
+%IF_ERROR% ""
 
 %DKEND%
