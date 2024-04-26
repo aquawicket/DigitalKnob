@@ -20,7 +20,7 @@ dk_error () {
 	msg="$1"
 	dk_toVariableInfo msg
 	
-	dk_echo "${red}${ERROR_TAG}${bg_red}${msg}${clr}${red}"
+	dk_echo "${red}${ERROR_TAG}${msg}"
 	[ $TRACE_ON_ERROR -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
 	dk_echo "${clr}"	
 	[ $HALT_ON_ERROR -eq 1 ] && dk_echo "${red}*** HALT_ON_ERROR ***${clr}" && exec $SHELL #OR HALT AND NOT NO_HALT)
