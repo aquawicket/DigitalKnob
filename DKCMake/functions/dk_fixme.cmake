@@ -19,7 +19,7 @@ endif()
 #	@msg (optional)	- A message to print
 #
 function(dk_fixme msg)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 
 	if(NOT ENABLE_dk_fixme)
 		return()

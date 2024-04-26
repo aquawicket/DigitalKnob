@@ -9,7 +9,7 @@ include_guard()
 #	@msg	- The message to print
 #
 macro(dk_message msg)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	string(REPLACE " " "" var ${msg})
 	dk_call(dk_updateLogInfo)

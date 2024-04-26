@@ -10,7 +10,8 @@ include_guard()
 #   ID @id			- OPTIONAL: The commit-id to checkout
 #
 function(dk_importGit url) #branch #id #PATCH
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getOption(PATCH ${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)

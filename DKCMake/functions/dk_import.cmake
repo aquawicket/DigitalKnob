@@ -16,7 +16,8 @@ include_guard()
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
 function(dk_import url)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_importVariables(${url} plugin ${ARGN})
 	
 	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)

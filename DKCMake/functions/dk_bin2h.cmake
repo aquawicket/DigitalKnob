@@ -20,7 +20,7 @@ include_guard()
 #		dk_bin2h(SOURCE_FILE "Logo.png" HEADER_FILE "Logo.h" VARIABLE_NAME "LOGO_PNG")
 #
 function(dk_bin2h)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
     set(options APPEND NULL_TERMINATE)
     set(oneValueArgs SOURCE_FILE VARIABLE_NAME HEADER_FILE)

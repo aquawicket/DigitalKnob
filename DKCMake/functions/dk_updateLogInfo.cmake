@@ -6,7 +6,8 @@ include_guard()
 #	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
+	
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)

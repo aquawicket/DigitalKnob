@@ -12,7 +12,8 @@ include_guard()
 #	Reference: https://en.wikipedia.org/wiki/List_of_file_formats
 #
 function(dk_getFileType path rtn-type)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getExtension(${path} ext)
 	if(NOT ext)
 		dk_error("The path does not contain an extension")

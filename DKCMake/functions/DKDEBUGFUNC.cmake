@@ -8,7 +8,7 @@ include_guard()
 # 
 #	Example:
 #		function(MyFunction myArg1 myArg2)
-#			dk_debugfunc(${ARGV}) 
+#			dk_debugFunc(${ARGV}) 
 #			## user code
 #		endfunction()
 #

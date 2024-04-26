@@ -11,7 +11,7 @@ include_guard()
 #	[NOMERGE]
 #
 function(dk_command)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_debug("dk_command(${ARGV})")
 	dk_getOptionValue(RESULT_VARIABLE		${ARGV})

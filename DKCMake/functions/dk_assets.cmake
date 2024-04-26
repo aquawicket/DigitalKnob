@@ -8,7 +8,7 @@ include_guard()
 #	@plugin		- TODO
 #
 function(dk_assets plugin)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT DKAPP)
 		return()

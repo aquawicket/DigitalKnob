@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT	- Returns the converted output string
 #
 function(dk_toLower str RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	string(TOLOWER "${str}" upper)
 	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()

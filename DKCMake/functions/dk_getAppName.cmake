@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT		- TODO
 #
 function(dk_getAppName path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getFilename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
 	dk_verbose(fileNameNoExt)

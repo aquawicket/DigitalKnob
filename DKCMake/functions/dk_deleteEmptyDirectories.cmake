@@ -8,7 +8,7 @@ include_guard()
 #	@path	- The path to remove all empty directories from
 #
 function(dk_deleteEmptyDirectories path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_wait("path:${path} does not exist")

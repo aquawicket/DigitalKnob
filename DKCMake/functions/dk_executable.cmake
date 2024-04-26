@@ -8,7 +8,7 @@ include_guard()
 #	@plugin_name	- TODO
 #
 function(dk_executable plugin_name)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		dk_error("${plugin_name} plugin not found")

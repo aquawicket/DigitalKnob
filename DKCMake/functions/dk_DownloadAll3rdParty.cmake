@@ -6,7 +6,7 @@ include_guard()
 #	TODO
 #
 function(dk_downloadAll3rdParty)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_dependAll()
 	

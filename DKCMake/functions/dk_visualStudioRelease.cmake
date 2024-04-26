@@ -8,7 +8,7 @@ include_guard()
 #	@path		- TODO
 #
 function(dk_visualStudioRelease path) #target #arch
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
 		return()

@@ -8,7 +8,8 @@ include_guard()
 #	@args	- TODO
 #
 function(dk_visualStudio)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_visualStudioDebug(${ARGV})
 	dk_visualStudioRelease(${ARGV})
 endfunction()

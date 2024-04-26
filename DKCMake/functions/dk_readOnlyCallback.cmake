@@ -12,7 +12,8 @@ include_guard()
 #	@stack:				- TODO
 #	 
 macro(dk_readOnlyCallback VAR access value current_list_file stack)   # Watcher for readonly property.
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
 		dk_notice("'${VAR}' is READONLY")
 		set(${VAR} "${_${VAR}_readonly_val}")	# Restore a value of the variable to the initial one.

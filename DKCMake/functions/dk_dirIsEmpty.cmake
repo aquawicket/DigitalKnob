@@ -9,7 +9,7 @@ include_guard()
 #	@RESULT		- Returns true if the directory is empty. False if the directory is not empty
 #
 function(dk_dirIsEmpty path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")

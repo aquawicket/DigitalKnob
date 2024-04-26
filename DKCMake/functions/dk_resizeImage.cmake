@@ -9,7 +9,8 @@ include_guard()
 #	@outpath	- Full path of the output file to save to
 #
 function(dk_resizeImage inpath width height outpath)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	get_filename_component(outdir ${outpath} DIRECTORY)
 	DK_ASSERT(outdir)
 

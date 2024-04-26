@@ -7,7 +7,7 @@ include_guard()
 #	@outpath	- Full path of the output file to save to (.ico)
 #
 function(dk_createFavIcon inpath outpath)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
 	if(IMAGEMAGICK_CONVERT)

@@ -9,7 +9,8 @@ include_guard()
 #	@AT_COLUMN	- The column position at which string will be wrapped.
 #
 function(dk_wrapString)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	set(oneValueArgs VARIABLE AT_COLUMN)
 	cmake_parse_arguments(dk_wrapString "${options}" "${oneValueArgs}" "" ${ARGN})
     string(LENGTH ${${DK_WRAPSTRING_VARIABLE}} stringLength)

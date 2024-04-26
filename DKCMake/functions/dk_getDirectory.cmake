@@ -9,7 +9,7 @@ include_guard()
 #	@RESULT		- Returns the directory upon success: False upon error
 #
 function(dk_getDirectory path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)

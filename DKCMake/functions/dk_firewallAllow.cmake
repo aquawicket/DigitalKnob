@@ -7,7 +7,7 @@ include_guard()
 #   @executable		- The path to the executable to allow
 #
 function(dk_firewallAllow name executable)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	return()	# this function is disabled for now
 	

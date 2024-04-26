@@ -9,7 +9,8 @@ include_guard()
 #	@dest_path		- The location of the installed library under /3rdParty
 #
 function(dk_patch import_name dest_path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
 	dk_notice("located in ${DKIMPORTS_DIR}/${import_name}/DKMAKE.cmake")

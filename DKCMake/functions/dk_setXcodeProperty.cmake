@@ -10,6 +10,7 @@ include_guard()
 #   @value		- The value to set the property to
 #
 macro(dk_setXcodeProperty TARGET property value)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
     set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
 endmacro()

@@ -1,6 +1,6 @@
 include_guard()
 dk_load(dk_eval)
-dk_load(DKDEBUGFUNC)
+dk_load(dk_debugFunc)
 
 
 ###############################################################################
@@ -12,7 +12,7 @@ dk_load(DKDEBUGFUNC)
 #	@func	- The func of the function to create aliases for
 #
 function(dk_createPrefixMacro func) #ARGN
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	set(${ARGN})
 	string(REPLACE ";" "_" prefix_name "${ARGN}")

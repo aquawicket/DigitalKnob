@@ -6,7 +6,8 @@ include_guard()
 #	Pause execution and wait for keypress to continue
 #
 function(dk_pause) 
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
+	
 	dk_debug("dk_pause(${ARGV})")
 	
 	#if(${ARGC} GREATER 0) dk_error "Incorrect number of parameters" endif()

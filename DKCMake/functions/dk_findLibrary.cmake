@@ -8,7 +8,8 @@ include_guard()
 #	@name	- The name of the library
 #
 function(dk_findLibrary name)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getOption(NOASSERT ${ARGV})
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})

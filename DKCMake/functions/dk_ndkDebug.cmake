@@ -8,7 +8,7 @@ include_guard()
 #	@path		- TODO
 #
 function(dk_ndkDebug path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_ndkDebug(${path}) path does not exist")

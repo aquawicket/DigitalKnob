@@ -8,7 +8,7 @@ include_guard()
 #	@path - The path to the configure file to use, CMakeLists.txt for cmake, Configure for Unix, Etc.
 #
 function(dk_configure path) #ARGN
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)

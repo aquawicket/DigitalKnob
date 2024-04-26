@@ -21,7 +21,7 @@ endif()
 #	@msg (optional)	- A header message to print
 #
 function(dk_todo msg)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 
 	if(NOT ENABLE_dk_todo)
 		return()

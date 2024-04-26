@@ -12,7 +12,8 @@ include_guard()
 #	@stack 		- TODO
 #
 macro(dk_watchCallback variable access val lst stack)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	message(STATUS "${cyan}##################################################################################################${clr}")
 	message(STATUS "${cyan}   Variable watch: variable=${${variable}} access=${access} val=${val} 1st=${1st} stack=${stack}  ${clr}")
 	message(STATUS "${cyan}##################################################################################################${clr}")

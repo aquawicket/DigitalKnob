@@ -8,7 +8,8 @@ include_guard()
 #	@lib_path	- TODO
 #
 function(dk_lib lib_path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	foreach(item ${ARGV})
 #		dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
 		dk_includes("${LIBS}" "${item}" result)

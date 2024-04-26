@@ -6,7 +6,8 @@ include_guard()
 #	Print all cmake varibles and save to /cmake_variables.temp 
 #
 macro(dk_printAllVariables)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	get_cmake_property(varNames VARIABLES)
 	list(SORT varNames)
 	foreach(varName ${varNames})

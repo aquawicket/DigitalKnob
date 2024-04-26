@@ -8,7 +8,8 @@ include_guard()
 #	@path	- The full path to add to the archive file
 #
 function(dk_compressAssets path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_info("Compressing: ${path}")
 	if(NOT EXISTS ${path})
 		dk_error("The path ${path} does not exist")

@@ -8,7 +8,8 @@ include_guard()
 #	@path		- TODO
 #
 function(dk_ndk)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_ndkDebug(${ARGV})
 	dk_ndkRelease(${ARGV})
 endfunction()

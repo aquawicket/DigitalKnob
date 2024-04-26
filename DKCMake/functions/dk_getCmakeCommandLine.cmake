@@ -8,7 +8,8 @@ include_guard()
 #	@RESULT			- TODO
 #
 function(dk_getCmakeCommandLine RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(NOT CMAKE_ARGC)
 		dk_info("dk_getCmakeCommandLine(): CMAKE_ARGC not set")
 		dk_info("CMAKE_ARG variables are only set in cmake script mode")

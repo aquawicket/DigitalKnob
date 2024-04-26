@@ -12,7 +12,7 @@ include_guard()
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
 function(dk_download src_path) # ARGV1 = dest_path #NOERROR
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_getOption(NOERROR ${ARGV})
 	

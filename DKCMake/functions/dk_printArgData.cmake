@@ -6,7 +6,8 @@ include_guard()
 #	Print the current CMake scripte path and ARG* variables
 #
 macro(dk_printArgData)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_debug(" ")
 	dk_debug("************************************************************")
 	dk_debug(" ")

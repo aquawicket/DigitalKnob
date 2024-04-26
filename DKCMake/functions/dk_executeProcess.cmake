@@ -30,7 +30,8 @@ include_guard()
 #					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
 #
 function(dk_executeProcess)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getOptionValues(COMMAND 					${ARGV})
 	dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})
 	dk_getOptionValue(TIMEOUT 					${ARGV})

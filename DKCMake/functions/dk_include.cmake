@@ -9,7 +9,7 @@ include_guard()
 #   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")

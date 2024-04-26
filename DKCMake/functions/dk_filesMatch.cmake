@@ -9,7 +9,8 @@ include_guard()
 #	@fileB	- TODO
 #
 function(dk_filesMatch fileA fileB)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
 	if(compare_result EQUAL 0)
 		dk_info("The files are identical.")

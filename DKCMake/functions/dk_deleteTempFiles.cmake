@@ -6,7 +6,7 @@ include_guard()
 #	Delete all .tmp files recursivly thoughout the digitalknob directory
 #
 function(dk_deleteTempFiles)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	DKASSERT(DIGITALKNOB_DIR)
 	dk_info("Deleteing Temporary files . . .")

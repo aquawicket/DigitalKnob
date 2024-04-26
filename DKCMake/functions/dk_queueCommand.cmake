@@ -8,7 +8,7 @@ include_guard()
 #	@args	- TODO
 #
 function(dk_queueCommand)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_debug("dk_queueCommand(${ARGV})")
 	dk_getOptionValue(RESULT_VARIABLE		${ARGV})

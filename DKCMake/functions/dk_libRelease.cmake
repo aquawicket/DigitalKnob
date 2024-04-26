@@ -9,7 +9,8 @@ include_guard()
 #	@variable (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libRelease lib_path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(NOT RELEASE)
 		return()
 	endif()

@@ -8,7 +8,7 @@ include_guard()
 #	@str	- TODO
 #
 function(dk_define str)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		return()

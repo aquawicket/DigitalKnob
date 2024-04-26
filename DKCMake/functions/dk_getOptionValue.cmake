@@ -8,7 +8,7 @@ include_guard()
 #	EXAMPLE: dk_getOptionValue(MY_ARG ${ARGV})
 #
 function(dk_getOptionValue name)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})

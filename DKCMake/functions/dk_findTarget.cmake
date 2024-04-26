@@ -10,7 +10,8 @@ include_guard()
 #	@RESULT_TYPE	- TODO
 #
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	## search up to 4 levels deep
 	file(GLOB children RELATIVE ${DIGITALKNOB_DIR}/ 
 		${DIGITALKNOB_DIR}/${target}/DKMAKE.cmake 

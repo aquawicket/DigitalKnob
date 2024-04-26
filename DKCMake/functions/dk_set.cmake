@@ -9,7 +9,7 @@ include_guard()
 #	@value		- The value to set the variable to. 
 #
 function(dk_set variable)# value)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	if(NOT DEFINED ARGV0)
 		dk_error("dk_set(!INVALID!): ARGV0 is invalid")

@@ -6,7 +6,7 @@ include_guard()
 #	Delete all CMake cache files thoughout the digitalknob directory
 #
 function(dk_deleteCache)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	DKASSERT(DIGITALKNOB_DIR)
 	dk_info("Deleteing CMake cache . . .")

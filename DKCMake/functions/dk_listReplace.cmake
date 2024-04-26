@@ -10,7 +10,8 @@ include_guard()
 #	@new_value	- The new value to replace with
 #
 macro(dk_listReplace LIST old_value new_value)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
+	
     list(FIND ${LIST} ${old_value} old_value_INDEX)
     if(old_value_INDEX GREATER_EQUAL 0)
         list(REMOVE_AT ${LIST} ${old_value_INDEX})

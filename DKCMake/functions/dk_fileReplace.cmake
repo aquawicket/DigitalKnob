@@ -11,7 +11,7 @@ include_guard()
 #   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dk_fileReplace filePath find replace)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	dk_getOption(NOERROR ${ARGV})
 	file(READ ${filePath} fileString)

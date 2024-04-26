@@ -6,7 +6,7 @@ include_guard()
 #	TODO
 #
 macro(dk_printColorChart)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	message(" ")
 	message(      "Regualar")
@@ -88,7 +88,8 @@ endmacro()
 #	TODO
 #
 macro(dk_printStyleChart)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	message(" ")
 	message(       "Style Chart")
 	message(       "${ESC_0}     ESC_0         ${clr}")

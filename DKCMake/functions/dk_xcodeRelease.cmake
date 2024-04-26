@@ -9,7 +9,8 @@ include_guard()
 #	@target:(optional)	- TODO
 #
 function(dk_xcodeRelease path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(NOT MAC_HOST)
 		return()
 	endif()

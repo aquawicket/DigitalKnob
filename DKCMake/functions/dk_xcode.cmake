@@ -9,7 +9,8 @@ include_guard()
 #	@target:(optional)	- TODO
 #
 function(dk_xcode)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_xcodeDebug(${ARGV})
 	dk_xcodeRelease(${ARGV})
 endfunction()

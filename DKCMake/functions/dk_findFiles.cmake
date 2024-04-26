@@ -11,7 +11,8 @@ include_guard()
 #   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getOption(RECURSE ${ARGV})
 
 	if(RECURSE)

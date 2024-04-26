@@ -8,7 +8,8 @@ include_guard()
 #	@RESULT		- TODO
 #
 function(dk_getAppDirectory RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")

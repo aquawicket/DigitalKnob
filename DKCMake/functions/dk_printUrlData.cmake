@@ -8,7 +8,8 @@ include_guard()
 #	@url	- The url to print
 #
 function(dk_printUrlData url)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(NOT url)
 		dk_error("url invalid! ")
 	endif()

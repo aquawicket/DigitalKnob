@@ -9,7 +9,8 @@ include_guard()
 #	@string	- TODO
 # 
 function(dk_prependFile path string)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	file(READ "${path}" file_data)
 	file(write "${pah}" "${string}\n${filedata}")
 endfunction()

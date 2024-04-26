@@ -8,7 +8,8 @@ include_guard()
 #	@app_name	- TODO
 #
 function(dk_updateAndroidName app_name)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	string(TOLOWER ${app_name} app_name)
 	if(ANDROID)
 		# update all files and folders recursivley

@@ -8,7 +8,8 @@ include_guard()
 #	@path	- TODO
 #
 function(dk_setPath path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	#if(path STREQUAL "OFF")
 	#	return() 
 	#endif()	

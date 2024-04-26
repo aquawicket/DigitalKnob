@@ -8,7 +8,8 @@ include_guard()
 #	@str	- TODO
 #
 function(dk_undefine str)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	remove_definitions(${str})
 	if(NOT DKDEFINES_LIST)
 		return()

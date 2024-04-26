@@ -8,7 +8,8 @@ include_guard()
 #	@RESULT: returns the current working directory upon success. False upon error
 #
 #function(dk_getCurrentDirectory RESULT)
-#	DKDEBUGFUNC(${ARGV})
+#	dk_debugFunc(${ARGV})
+
 #	if(WIN_HOST)
 #		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 #	else()

@@ -11,7 +11,8 @@ include_guard()
 #   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NOERROR ${ARGV})
 	

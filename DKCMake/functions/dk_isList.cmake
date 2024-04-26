@@ -7,7 +7,7 @@ include_guard()
 #	@arg		- The input argument(s) to be examined 
 #
 function(dk_isList RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	math(EXPR ARGC "${ARGC}-1")  
 

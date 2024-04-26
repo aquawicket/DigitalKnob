@@ -9,7 +9,7 @@ include_guard()
 #	@object		- TODO
 #
 function(dk_createSmartObject object)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_todo()
 	dk_verbose("dk_createSmartObject(${object})")

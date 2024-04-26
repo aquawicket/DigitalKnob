@@ -9,7 +9,8 @@ include_guard()
 #	@dest	- The folder path to extract the archive to
 #
 function(dk_extract src dest)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
 	endif()

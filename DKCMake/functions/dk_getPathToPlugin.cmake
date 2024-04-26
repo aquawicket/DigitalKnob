@@ -7,7 +7,7 @@ include_guard()
 #	@RESULT		- TODO
 #
 function(dk_getPathToPlugin plugin RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	list(FIND dk_disabled_list "${ARGV}" index)
 	if(${index} GREATER -1)

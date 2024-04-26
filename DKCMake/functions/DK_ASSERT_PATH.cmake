@@ -8,7 +8,7 @@ include_guard()
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 macro(DK_ASSERT_PATH path)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
 		message(STATUS "\n\n${BG_red}Assertion failed: at ${path}, ${STACK_HEADER}${clr}")

@@ -8,7 +8,7 @@ include_guard()
 #	@msg	- The message to print
 #
 macro(dk_echo msg)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	dk_printVar(msg)
 	message("${msg}")

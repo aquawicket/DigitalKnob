@@ -11,7 +11,7 @@ include_guard()
 #	https://stackoverflow.com/a/31919435
 #
 function(dk_getGitBranchName url RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	DKASSERT(GIT_EXE)

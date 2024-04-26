@@ -8,7 +8,8 @@ include_guard()
 #	@args		- TODO
 #
 function(dk_log args)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_verbose(ARGV)
 	set(output " ")
 	foreach(arg ${ARGV})

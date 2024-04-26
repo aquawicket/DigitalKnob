@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT	- Returns the converted output string
 #
 function(dk_toUpper str RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
+	
 	string(TOUPPER "${str}" upper)
 	set(${RESULT} ${upper} PARENT_SCOPE)
 endfunction()

@@ -10,7 +10,7 @@ include_guard()
 #	@data	- TODO
 #
 function(dk_addRegistryKey key value data)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(WIN_HOST)
 		string(REPLACE "/" "\\" key   ${key})

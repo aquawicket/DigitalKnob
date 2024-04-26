@@ -7,7 +7,8 @@ include_guard()
 #   @RESULT		- Returns TRUE if the expression is found
 #
 function(dk_pathContains expression RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	FILE(GLOB contains "${expression}") 
 	if(contains)
 		set(${RESULT} TRUE PARENT_SCOPE)

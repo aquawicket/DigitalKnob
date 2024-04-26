@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT		- TODO
 #
 function(dk_validatePath path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	get_filename_component(path ${path} ABSOLUTE)
 	set(${RESULT} ${path} PARENT_SCOPE)
 endfunction()

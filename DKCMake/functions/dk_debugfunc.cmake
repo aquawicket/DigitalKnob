@@ -1,19 +1,19 @@
 include_guard()
 
 ##################################################################################
-# dk_debugfunc(${ARGV})
+# dk_debugFunc(${ARGV})
 #
 #	Prints the current file name, line number, function or macro and arguments
 #	Place this at the first line of every function you want to see debug output for.
 # 
 #	Example:
 #		function(MyFunction myArg1 myArg2)
-#			dk_debugfunc(${ARGV}) 
+#			dk_debugFunc(${ARGV}) 
 #			## user code
 #		endfunction()
 #
-macro(dk_debugfunc)
-	#DKDEBUGFUNC(${ARGV})
+macro(dk_debugFunc)
+	#dk_debugFunc(${ARGV})
 	
 	if(DKDEBUGFUNC_ENABLED)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
@@ -41,6 +41,6 @@ macro(dk_debugfunc)
 		endif()
 	endif()
 endmacro()
-macro(DKDEBUGFUNC)
-	dk_debugfunc(${ARGV})
-endmacro()
+#macro(DKDEBUGFUNC)
+#	dk_debugFunc(${ARGV})
+#endmacro()

@@ -8,6 +8,7 @@ include_guard()
 #	@str	- TODO
 #
 function(dk_appendCmake str)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
 endfunction()

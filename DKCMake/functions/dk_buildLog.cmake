@@ -9,7 +9,7 @@ include_guard()
 #	@PRINTVAR	- TODO
 #
 function(dk_buildLog entry)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_getOptionValue(PATH ${ARGV})
 	dk_getOption(PRINTVAR ${ARGV})

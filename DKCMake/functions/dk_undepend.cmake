@@ -9,7 +9,8 @@ include_guard()
 #	@target (optional)	- TODO
 #
 function(dk_undepend plugin)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	set(target ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	

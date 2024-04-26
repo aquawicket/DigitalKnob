@@ -10,7 +10,7 @@ include_guard()
 #   NOERROR (optional)	- if one of the parameters is NOERROR, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	dk_getOption(NOERROR ${ARGV})
 	
 	string(FIND ${path} "." includes REVERSE)

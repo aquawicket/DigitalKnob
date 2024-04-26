@@ -8,7 +8,7 @@ include_guard()
 #	@plugin		- TODO
 #
 function(dk_depend plugin)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		list(FIND init_list ${plugin} index)

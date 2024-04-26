@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
 macro(dk_isNumber variable RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(${variable} MATCHES "^[0-9]+$")
 		set(${RESULT} TRUE)
 	else()

@@ -9,7 +9,7 @@ include_guard()
 #	@target:(optional)	- TODO
 #
 function(dk_disable plugin)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")

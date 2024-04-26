@@ -9,7 +9,7 @@ include_guard()
 #	@lib (optional)		- TODO
 #
 function(dk_make path) #lib
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_make(${path}) path does not exist")

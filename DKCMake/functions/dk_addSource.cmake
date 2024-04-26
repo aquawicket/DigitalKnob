@@ -8,7 +8,7 @@ include_guard()
 #	@regex	- TODO
 #
 function(dk_addSource regex)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
 endfunction()

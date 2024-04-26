@@ -30,7 +30,7 @@ include_guard()
 #	@url	- TODO
 #
 function(dk_importVariables PLUGIN_URL RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	##### Test that we dont have any non-alphanumeric characters ######
 	#string(MAKE_C_IDENTIFIER ${PLUGIN_URL} PLUGIN_URL_TEST)

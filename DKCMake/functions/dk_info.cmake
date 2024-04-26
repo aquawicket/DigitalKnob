@@ -21,7 +21,8 @@ endif()
 #	@msg	- The message to print
 #
 function(dk_info)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
+	
 	set(msg ${ARGV})
 	
 	if(NOT ENABLE_dk_info)

@@ -8,6 +8,7 @@ include_guard()
 #	@name		- name of the process to kill
 #
 function(dk_killProcess name)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
 endfunction()

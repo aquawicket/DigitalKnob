@@ -9,7 +9,7 @@ include_guard()
 #	@target (optional)	- The target of the project to build
 #
 function(dk_build path) #target NOASSERT
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT QUEUE_BUILD)
 		return()

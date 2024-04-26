@@ -8,7 +8,7 @@ include_guard()
 # 	WARNING: allowing eval can of course be dangerous.
 #
 function(dk_eval code)
-	#DKDEBUGFUNC(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	string(REPLACE ";"  "\n" code "${code}")
 	string(REPLACE "'"  "\"" code "${code}")

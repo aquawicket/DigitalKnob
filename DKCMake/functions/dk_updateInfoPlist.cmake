@@ -8,7 +8,8 @@ include_guard()
 #	@app_name	- TODO
 #
 function(dk_updateInfoPlist app_name)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	if(MAC)
 		# FIXME
 		dk_info("Updating MAC info.plist . . .")

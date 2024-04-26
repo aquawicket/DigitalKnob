@@ -8,7 +8,7 @@ include_guard()
 #	https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 #
 function(dk_printSettings)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_buildLog("#############  DigitalKnob  ############")
 	dk_buildLog(DKBRANCH)

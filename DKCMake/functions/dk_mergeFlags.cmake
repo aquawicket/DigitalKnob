@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT		- TODO
 #
 function(dk_mergeFlags args RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
 	set(args ${args} ${RESULT} ${ARGN})
 	list(GET args -1 RESULT)

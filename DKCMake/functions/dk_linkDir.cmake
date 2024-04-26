@@ -8,7 +8,8 @@ include_guard()
 #	@path	The path to add to the compiler library paths
 #
 function(dk_linkDir path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	#foreach(item ${ARGV})
 		#list(FIND DKLINKDIRS_LIST "${item}" index)
 		list(FIND DKLINKDIRS_LIST "${path}" index)

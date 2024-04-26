@@ -10,7 +10,8 @@ include_guard()
 #	@RESULT:	- Returns the file name upon success: False upon error
 #
 function(dk_getFilename path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	DK_ASSERT(path)
 	DK_ASSERT(RESULT)
 	

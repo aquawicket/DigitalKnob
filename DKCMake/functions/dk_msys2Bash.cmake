@@ -8,7 +8,8 @@ include_guard()
 #	@args	- TODO
 #
 function(dk_msys2Bash)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	DK_ASSERT(MINGW)
 	DK_ASSERT(MSYSTEM)
 	DK_ASSERT(MSYS2)

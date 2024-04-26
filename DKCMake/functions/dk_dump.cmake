@@ -8,7 +8,7 @@ include_guard()
 #	@variable	- The variable to print to the screen. Without variable brackets ${ }'
 #
 macro(dk_dump variable)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	message(STATUS "\n${cyan}############################### Variable DUMP ##############################################${clr}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)

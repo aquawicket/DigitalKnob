@@ -13,7 +13,7 @@ include_guard()
 #	PATCH				-Patch the install directory with files from the _DKIMPORTS path
 #
 function(dk_install plugin) #PATCH
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	#dk_debug("dk_install(${plugin})")
 	

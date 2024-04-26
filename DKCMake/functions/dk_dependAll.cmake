@@ -6,7 +6,7 @@ include_guard()
 #	TODO
 #
 function(dk_dependAll)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	set(DEPENDALL_FILE "")
 	

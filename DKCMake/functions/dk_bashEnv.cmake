@@ -8,7 +8,7 @@ include_guard()
 #	@args	- TODO
 #
 function(dk_bashEnv)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_getOption(NOASSERT ${ARGV} REMOVE)
 	dk_getOption(NOECHO ${ARGV} REMOVE)

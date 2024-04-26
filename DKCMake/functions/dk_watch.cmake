@@ -9,6 +9,7 @@ dk_load(dk_watchCallback)
 #	@variable	- The variable to watch
 #
 macro(dk_watch variable)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	variable_watch(variable dk_watchCallback)
 endmacro()

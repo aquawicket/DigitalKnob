@@ -9,7 +9,8 @@ include_guard()
 #	@RESULT:	- Returns the extension upon success: False upon error
 #
 function(dk_getExtension path RESULT)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	# WHY A NEW GET EXTENSION FUNCTION ?
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
 #	get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 

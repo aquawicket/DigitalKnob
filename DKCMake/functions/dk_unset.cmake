@@ -8,7 +8,8 @@ include_guard()
 #	@variable	- The name of the variable to unset
 #
 function(dk_unset variable)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
 endfunction()

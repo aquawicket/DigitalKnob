@@ -8,7 +8,8 @@ include_guard()
 #	@path	- The full path to the direcotory to be created
 #
 function(dk_makeDirectory path)
-	DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})
+	
 	make_directory(${path})  # requires full path
 	return()
 	
