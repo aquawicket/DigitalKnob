@@ -8,17 +8,6 @@
 ::###### DK_Init ######
 call "../functions/DK.cmd"
 
-:: http://cplusplus.bordoon.com/cmd_exe_variables.html
-:: d -- drive
-:: p -- path
-:: n -- file name
-:: x -- extension
-:: f -- full path
-:: s -- short PATH
-:: a -- attributes
-:: t -- time
-:: z -- size
-
 :main
 	set IN=%0
 ::	set "IN=%0"
@@ -48,34 +37,34 @@ call "../functions/DK.cmd"
 
 	call :get_variable "%IN%" variable
 	echo variable   = %variable%
-	
-	call :get_unquoted "%IN%" unquoted
+
+	call dk_getUnquoted "%IN%" unquoted
 	echo unquoted   = %unquoted%
-	
+
 	call dk_getDrive "%IN%" drive
 	echo drive      = %drive%
-	
-	call dk_getPathOnly "%IN%" path
-	echo path      = %path%
-	
-	call dk_getNameOnly "%IN%" name
-	echo name       = %name%
-	
+
+	call dk_getPathOnly "%IN%" pathOnly
+	echo pathOnly   = %pathOnly%
+
+	call dk_getNameOnly "%IN%" nameOnly
+	echo nameOnly   = %nameOnly%
+
 	call dk_getExtension "%IN%" extension
 	echo extension  = %extension%
-	
+
 	call dk_getFullPath "%IN%" fullPath
 	echo fullPath   = %fullPath%
-	
+
 	call dk_getShortPath "%IN%" shortPath
 	echo shortPath  = %shortPath%
-	
+
 	call dk_getAttributes "%IN%" attributes
 	echo attributes = %attributes%
-	
+
 	call dk_getFileTime "%IN%" fileTime
 	echo fileTime   = %fileTime%
-	
+
 	call dk_getFileSize "%IN%" filesize
 	echo filesize   = %filesize% bytes
 	
@@ -83,7 +72,7 @@ call "../functions/DK.cmd"
 	echo fullname   = %fullname%
 	
 	call dk_getDirectory "%IN%" directory
-	echo directory   = %directory%
+	echo directory  = %directory%
 	
 	pause
 goto:eof
@@ -101,115 +90,3 @@ goto:eof
 	endlocal & set %2=%OUT%
 goto:eof
 
-:get_unquoted
-	set _input=%1
-	set _input=%_input:"=%
-	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-	for %%Z in ("%_input%") do set "OUT=%%~Z"
-	endlocal & set %2=%OUT%
-goto:eof
-
-:::get_drive
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~dZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getPathOnly
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~pZ"
-::	endlocal & set %2=%OUT:~0,-1%
-::goto:eof
-
-:::dk_getNameOnly
-::	::https://stackoverflow.com/a/59739663/688352
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~nZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::get_extension
-::	set "_input=%1"
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~xZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::get_fullPath
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~fZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getShortPath
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~sZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getAttributes
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~aZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getFileTime
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~tZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getFileSize
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~zZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::get_fullName :: %~nxI - name and extension
-::	::https://stackoverflow.com/a/59739663/688352
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~nxZ"
-::	endlocal & set %2=%OUT%
-::goto:eof
-
-:::dk_getDirectory :: %~dpI - drive and path
-::#	::https://stackoverflow.com/a/59739663/688352
-::	set _input=%1
-::	set _input=%_input:"=%
-::	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-::	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-::	for %%Z in ("%_input%") do set "OUT=%%~dpZ"
-::	endlocal & set %2=%OUT:~0,-1%
-::goto:eof
-
-pause

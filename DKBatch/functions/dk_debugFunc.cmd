@@ -15,6 +15,7 @@ if [%ENABLE_dk_debugFunc%] == [] set ENABLE_dk_debugFunc=0
 	set "cyan=[36m"
 	set "clr=[0m"
 	echo %_filename%: %cyan%%_func%(%_args%)%clr%
+	
 	::echo.
 	::echo _path           = %_path%
 	::echo _callerpath     = %_callerpath%
