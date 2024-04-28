@@ -1,8 +1,9 @@
 dk_includeGuard
 
-
+dk_load dk_showFileLine
 [ -z ${ENABLE_dk_error-} ] && ENABLE_dk_error=1
 [ -z ${TRACE_ON_ERROR-} ]  && TRACE_ON_ERROR=1
+[ -z ${LINE_ON_ERROR-} ]   && LINE_ON_ERROR=1
 [ -z ${PAUSE_ON_ERROR-} ]  && PAUSE_ON_ERROR=1
 [ -z ${HALT_ON_ERROR-} ]   && HALT_ON_ERROR=1
 #ERROR_TAG="ERROR: "
@@ -20,9 +21,9 @@ dk_error () {
 	msg="$1"
 	#dk_toVariableInfo msg
 	
-	dk_echo "${red}${ERROR_TAG}${msg}"
-	[ $TRACE_ON_ERROR -eq 1 ] && dk_echo "${red}*** TRACE_ON_ERROR ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
-	dk_echo "${clr}"	
-	[ $HALT_ON_ERROR -eq 1 ]  && dk_echo "${red}*** HALT_ON_ERROR ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
-	[ $PAUSE_ON_ERROR -eq 1 ] && dk_echo "${red}*** PAUSE_ON_ERROR ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
+	dk_echo "${red}${ERROR_TAG}${msg}${clr}"
+	[ $TRACE_ON_ERROR -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_ERROR ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
+	[ $LINE_ON_ERROR -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_ERROR ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "$msg" #OR HALT AND NOT NO_HALT)
+	[ $HALT_ON_ERROR -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_ERROR ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_ERROR -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_ERROR ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }

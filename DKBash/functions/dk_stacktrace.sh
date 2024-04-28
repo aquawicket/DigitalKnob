@@ -11,15 +11,15 @@ dk_stacktrace () {
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
 
 	### VERSION 1 ###
-	[ "${FUNCNAME-}" = "" ] && return 0
-	#[ "${BASH_SOURCE-}" = "" ] && return 0
-	#[ "${BASH_LINENO-}" = "" ] && return 0
+	[ "${FUNCNAME-}" = "" ] && return
+	#[ "${BASH_SOURCE-}" = "" ] && return
+	#[ "${BASH_LINENO-}" = "" ] && return
 	local i=${1:-1} size=${#FUNCNAME[@]}
  	((i<size)) && echo "STACKTRACE[$size]" 
-	i=0
+	i=1
 	while [ "$i" -le "$size" ]; do
-		((frame=${#FUNCNAME[@]}-i ))
-		dk_echo "[$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i-1]} ${FUNCNAME[$i]}()"
+		(( frame=${#FUNCNAME[@]}-i ))
+		echo "  [$frame] ${BASH_SOURCE[$i]:-}:${BASH_LINENO[$i-1]} ${FUNCNAME[$i]}()"
 		i=$(( i + 1 ))
 	done 
 

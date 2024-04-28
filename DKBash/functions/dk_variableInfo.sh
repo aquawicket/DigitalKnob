@@ -13,6 +13,7 @@ dk_variable_info () {
 	$(expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	$(expr "$2" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	
+	#FIXME: this only gets the first element of an array variable
 	if dk_defined $1; then
 		eval value='$'{$1}
 		eval "$2=\"$1 = '${value}'\""

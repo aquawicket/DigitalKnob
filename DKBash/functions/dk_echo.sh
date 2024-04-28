@@ -14,5 +14,5 @@ dk_includeGuard
 dk_echo () {
 	#dk_debugFunc
 
-	echo ${escapes}${nonewline}"${1-}"
+	echo ${escapes}${nonewline}"${1}"
 }
