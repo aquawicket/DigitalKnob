@@ -2,6 +2,7 @@ call dk_includeGuard
 
 if "%ENABLE_dk_error%"==""  set ENABLE_dk_error=1
 if "%TRACE_ON_ERROR%"==""   set TRACE_ON_ERROR=1
+if "%LINE_ON_ERROR%"==""    set LINE_ON_ERROR=1
 if "%PAUSE_ON_ERROR%"==""   set PAUSE_ON_ERROR=1
 if "%HALT_ON_ERROR%"==""    set HALT_ON_ERROR=1
 :: ERROR_TAG="ERROR: "
@@ -25,9 +26,9 @@ if "%HALT_ON_ERROR%"==""    set HALT_ON_ERROR=1
 		::call dk_toVariableInfo msg
 		
 		call dk_echo %red%%ERROR_TAG%%msg%%clr%
-		if "%TRACE_ON_ERROR%"=="1"  call dk_echo %red%*** TRACE_ON_ERROR ***%clr% & call dk_printError ERROR %_callerpath% %msg%
-		::if "%TRACE_ON_ERROR%"=="1" call dk_echo %red%*** TRACE_ON_ERROR ***%clr% &  call dk_stacktrace
-		if "%HALT_ON_ERROR%"=="1"   call dk_echo %red%*** HALT_ON_ERROR ***%clr% &  call dk_exit
-		if "%PAUSE_ON_ERROR%"=="1"  call dk_echo %red%*** PAUSE_ON_ERROR ***%clr% & call dk_pause
+		if "%TRACE_ON_ERROR%"=="1" call dk_echo %red%*** TRACE_ON_ERROR ***%clr% & call dk_stacktrace
+		if "%LINE_ON_ERROR%"=="1"  call dk_echo %red%*** LINE_ON_ERROR ***%clr%  & call dk_showFileLine %_callerpath% %msg%
+		if "%HALT_ON_ERROR%"=="1"  call dk_echo %red%*** HALT_ON_ERROR ***%clr%  & call dk_exit
+		if "%PAUSE_ON_ERROR%"=="1" call dk_echo %red%*** PAUSE_ON_ERROR ***%clr% & call dk_pause
 	endlocal 
 goto:eof
