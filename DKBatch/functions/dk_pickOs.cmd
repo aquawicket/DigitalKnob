@@ -93,9 +93,9 @@ call dk_includeGuard
     if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
     if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
 	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
-    if "%choice%"=="37" call dk_clearScreen                  & goto:eof
+    if "%choice%"=="37" call dk_clearScreen                & goto:eof
     if "%choice%"=="38" set "APP="                         & goto:eof
-    if "%choice%"=="39" exit                               & goto:eof
+    if "%choice%"=="39" call dk_exit                       & goto:eof
     echo %choice%: invalid selection, please try again
     set TARGET_OS=
 goto:eof

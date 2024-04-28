@@ -85,7 +85,7 @@ dk_pickUpdate() {
 	elif [ "$input" = "9" ]; then
 		dk_reload
 	elif [ "$input" = "10" ]; then
-		exit 0	
+		dk_exit 0	
 	elif [ "$input" = "" ]; then
 		UPDATE=1
 	else

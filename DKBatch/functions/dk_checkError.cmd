@@ -9,6 +9,4 @@ call dk_includeGuard
 	
     if %ERRORLEVEL% EQU 0 goto:eof
     call dk_error "ERRORLEVEL = %ERRORLEVEL%"
-    pause
-    exit
 goto:eof

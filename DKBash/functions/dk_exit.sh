@@ -7,5 +7,8 @@ dk_includeGuard
 dk_exit () {
 	dk_debugFunc
 	
-	exec $SHELL
+	echo "dk_exit $*"
+	exec $SHELL #$*
+	
+	#exit $*
 }

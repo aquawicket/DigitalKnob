@@ -37,7 +37,7 @@ dk_resetAll () {
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
 		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		exit
+		dk_exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
@@ -67,8 +67,8 @@ dk_resetAll () {
 		
 		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
 			clear
-			. "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
-			exit
+			exec "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+			dk_exit
 		else
 			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
 		fi

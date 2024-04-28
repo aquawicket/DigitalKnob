@@ -54,6 +54,6 @@ dk_validateBranch () {
 	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi
 	#	$DKBRANCH_DIR/$DKSCRIPT_NAME
-	#	exit
+	#	dk_exit
 	#fi
 }

@@ -37,11 +37,11 @@ call dk_includeGuard
     if "%choice%"=="5"  set "APP=DKSDLRml"     & goto:eof
     if "%choice%"=="6"  set "APP=DKDomTest"    & goto:eof
     if "%choice%"=="7"  set "APP=DKTestAll"    & goto:eof
-    if "%choice%"=="8"  call dk_enterManually    & goto:eof
-    if "%choice%"=="9" call dk_clearScreen       & goto:eof
-    if "%choice%"=="10" call dk_reload            & goto:eof
+    if "%choice%"=="8"  call dk_enterManually  & goto:eof
+    if "%choice%"=="9" call dk_clearScreen     & goto:eof
+    if "%choice%"=="10" call dk_reload         & goto:eof
     if "%choice%"=="11" set "UPDATE="          & goto:eof
-    if "%choice%"=="12" exit                   & goto:eof
+    if "%choice%"=="12" call dk_exit           & goto:eof
         
     echo %choice%: invalid selection, please try again
     set APP=

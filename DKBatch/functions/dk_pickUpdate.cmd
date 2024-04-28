@@ -42,7 +42,7 @@ call dk_includeGuard
     if "%choice%"=="7" call dk_clearScreen
     if "%choice%"=="8" call dk_deleteCache & call dk_deleteTempFiles
     if "%choice%"=="9" call dk_reload
-    if "%choice%"=="10" exit
+    if "%choice%"=="10" call dk_exit
         
     set UPDATE=true
 goto:eof

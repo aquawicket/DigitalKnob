@@ -128,7 +128,7 @@ dk_pickOs() {
 	elif [ "$input" = "37" ]; then
 		APP=
 	elif [ "$input" = "38" ]; then
-		exit 0
+		dk_exit 0
 	else
 		dk_warning "invalid selection"
 	fi

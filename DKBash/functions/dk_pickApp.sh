@@ -50,7 +50,7 @@ dk_pickApp() {
 	elif [ "$input" = "11" ]; then
 		dk_call dk_reload
 	elif [ "$input" = "12" ]; then
-		exit 0
+		dk_exit 0
 	else
 		dk_warning "invalid selection"
 	fi

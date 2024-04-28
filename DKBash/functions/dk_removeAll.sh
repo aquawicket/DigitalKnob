@@ -33,8 +33,8 @@ dk_removeAll () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
 		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
-		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
-		exit
+		exec "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
+		dk_exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe

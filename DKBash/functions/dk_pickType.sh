@@ -31,7 +31,7 @@ dk_pickType() {
 	elif [ "$input" = "5" ]; then
 		TARGET_OS=
 	elif [ "$input" = "6" ]; then
-		exit 0
+		dk_exit 0
 	else
 		dk_warning "invalid selection"
 	fi
