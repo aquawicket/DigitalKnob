@@ -9,7 +9,7 @@
 call "../functions/DK.cmd"
 
 :main
-	set IN=%0
+	set IN=%0			&:this is how we comment after
 ::	set "IN=%0"
 ::	set IN=%~0
 ::	set "IN=%~0"

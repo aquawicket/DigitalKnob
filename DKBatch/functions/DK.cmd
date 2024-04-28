@@ -5,6 +5,7 @@ if [%include_guard_DK%] == [1] ( goto:eof ) else set include_guard_DK=1
 ::#
 ::#
 
+
 ::############ Script internal setup ############
 for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
@@ -15,6 +16,7 @@ call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 call dk_debug DKBATCH_DIR
 call dk_debug DKSCRIPT_DIR
 call dk_debug DKSCRIPT_NAME
+call dk_exception init
 ::pause 
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
 :: & exit )
