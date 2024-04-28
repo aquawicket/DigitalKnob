@@ -1,10 +1,9 @@
 #!/bin/sh
 
-
 ###### Load Function files ######
 . ../functions/DK.sh
 
-dk_verbose "test dk_verbose message"
-dk_info "...next line..."
+dk_info "test dk_info message"
+echo "...next line..."
 
 dk_pause

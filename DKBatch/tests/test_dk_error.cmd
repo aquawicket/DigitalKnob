@@ -11,6 +11,6 @@ call dk_debugFunc
 
 echo "calling dk_error from test_dk_error.cmd"
 call dk_error "test dk_error message"
-call dk_info "...next line..."
+echo "...next line..."
 
-call dk_pause
+call dk_exit

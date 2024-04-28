@@ -12,6 +12,6 @@ call dk_includeGuard
 ::	eval value='$'{$1+x} # value will = 'x' if the variable is defined
 ::	[ -n "$value" ]
 
-	if "%1"=="" echo "%1 is NOT defined"
-	if NOT "%1"=="" echo "%1 IS defined"
+	if "%1"=="" echo %1 is NOT defined
+	if NOT "%1"=="" echo %1 IS defined
 goto:eof

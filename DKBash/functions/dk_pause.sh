@@ -10,5 +10,6 @@ dk_pause() {
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	read -rp 'Press enter to continue...' key
+	echo ""
 	# echo $key
 }

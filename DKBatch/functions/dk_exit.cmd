@@ -1,13 +1,11 @@
 call dk_includeGuard
 
 ::################################################################################
-::# dk_end()
+::# dk_exit()
 ::#
 ::#
-:dk_end () {
+:dk_exit () {
 	call dk_debugFunc
-	
-    call dk_error "reached the end of the script"
-    call dk_pause
-    call dk_exit
+
+	cmd /k & exit
 goto:eof

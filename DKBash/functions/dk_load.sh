@@ -56,10 +56,11 @@ dk_load() {
 			#value=${value#*N}   # cut off everything from begining to first N
 			#value=${value##*N}   # cut off everything from begining to last N
 				
-			value=${value%%#*}											# remove everything after #
+			value=${value//'$#'/}					# remove any $# before removing #comments
+			value=${value%%#*}						# remove everything after # (comments)
 			
-			[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]						# BASH REGEX MATCH
-			value=${BASH_REMATCH[0]}									# BASH REGEX VALUE
+			[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]	# BASH REGEX MATCH
+			value=${BASH_REMATCH[0]}				# BASH REGEX VALUE
 			
 			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			[ -z "$value" ] && continue

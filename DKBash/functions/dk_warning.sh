@@ -1,11 +1,11 @@
 dk_includeGuard
 
 
-[ -z $ENABLE_dk_warning ] && ENABLE_dk_warning=1
-[ -z $TRACE_ON_WARNING ]  && TRACE_ON_WARNING=0
-[ -z $PAUSE_ON_WARNING ]  && PAUSE_ON_WARNING=0
-[ -z $HALT_ON_WARNING ]   && HALT_ON_WARNING=0
-#TAG="  WARNING: "
+[ -z ${ENABLE_dk_warning-} ] && ENABLE_dk_warning=1
+[ -z ${TRACE_ON_WARNING-} ]  && TRACE_ON_WARNING=0
+[ -z ${PAUSE_ON_WARNING-} ]  && PAUSE_ON_WARNING=0
+[ -z ${HALT_ON_WARNING-} ]   && HALT_ON_WARNING=0
+#WARNING_TAG="  WARNING: "
 ##################################################################################
 # dk_warning(<message>)
 #
@@ -14,14 +14,15 @@ dk_includeGuard
 #	@msg	- The message to print
 #
 dk_warning () {
-	dk_debugFunc
+	#dk_debugFunc
 	
-	[ $ENABLE_dk_warning -eq 1 ] || return 0
+	[ $ENABLE_dk_warning -ne 1 ] && return
 	msg="$1"
-	dk_toVariableInfo msg
+	#dk_toVariableInfo msg
 	
-	dk_echo "${yellow}${TAG}${msg}${clr}"
-	[ $TRACE_ON_WARNING -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)			
-	[ $HALT_ON_WARNING -eq 1 ] && exec $SHELL #OR HALT AND NOT NO_HALT)
+	dk_echo "${yellow}${WARNING_TAG}${msg}"
+	[ $TRACE_ON_WARNING -eq 1 ] && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
+	dk_echo "${clr}"	
+	[ $HALT_ON_WARNING -eq 1 ]  && dk_echo "${yellow}*** HALT_ON_WARNING ***${clr}" && exec $SHELL #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_WARNING -eq 1 ] && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }

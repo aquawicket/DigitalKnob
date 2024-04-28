@@ -1,7 +1,7 @@
 dk_includeGuard
 
 ##################################################################################
-# dk_toVariableInfo(<var>)
+# dk_toVariableInfo(<message-var>)
 #
 #	If the parameter is a variable containing the name of a valid variable name
 #	Convert the contents to the details of said variable
@@ -13,22 +13,21 @@ dk_includeGuard
 #	echo $message
 #
 #	Output:
-#	myVar = 'this is my variable'
+#	myVar: 'this is my variable'
 #
 dk_toVariableInfo () {
 	#dk_debugFunc
+	[ $# -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
 	
-	[ $# -ne 1 ] && dk_verbose "dk_variableInfo($*): incorrect number or variables" && return $false											# if not exactly 1 parameter
+	eval "name=\${$1}"
+	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return		# ^ as first character is not portable
+	#$(expr "${name}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return
 	
-	eval name='$'{$1}
-	#$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# ^ as first character is not portable
-	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false
-	
+	var_name="\${$name}"  #var_name is literal '${VARIABLE}'
 	if dk_defined $name; then
-		#echo "dk_toVariableInfo():name = $name"
-		eval value='$'{$name}
-		eval "$1=\"$name = '${value}'\""
+		eval "value=\${$name}"
+		eval "$1=\"\$var_name = '${value}'\""
 	else
-		eval "$1=\"$name = ${red}NOT DEFINED${clr}\""
+		eval "$1=\"\$var_name = ${red}UNDEFINED${clr}\""
 	fi
 }
