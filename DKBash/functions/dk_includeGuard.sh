@@ -8,6 +8,7 @@ alias dk_includeGuard='{
 	[ -z ${BASH_SOURCE[0]} ] && echo "BASH_SOURCE[0] is empty"
 	path=${BASH_SOURCE[0]}
 	filename=${path##*/}
+	filename=${filename##*\\}
 	name="${filename%.*}"
 	eval value=\${include_guard_$name}
 	[ -n "$value" ] && echo "already included" && return || readonly include_guard_${name}=1

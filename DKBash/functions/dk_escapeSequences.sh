@@ -62,16 +62,16 @@ dk_escapeSequences () {
 
 
 
-	#dk_hexToVariable NUL 0x00
+	dk_hexToVariable NUL 0x00
 	#dk_hexToVariable SOH 0x01
 	#dk_hexToVariable STX 0x02
 	#dk_hexToVariable ETX 0x03
 	#dk_hexToVariable EOT 0x04
 	#dk_hexToVariable ENQ 0x05
 	#dk_hexToVariable ACK 0x06
-	#dk_hexToVariable BEL 0x07
+	dk_hexToVariable BEL 0x07
 	#dk_hexToVariable BS  0x08
-	#dk_hexToVariable TAB 0x09
+	dk_hexToVariable TAB 0x09
 	#dk_hexToVariable LF  0x0a
 	#dk_hexToVariable VT  0x0b
 	#dk_hexToVariable FF  0x0c
