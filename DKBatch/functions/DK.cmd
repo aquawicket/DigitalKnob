@@ -4,13 +4,18 @@ if [%include_guard_DK%] == [1] ( goto:eof ) else set include_guard_DK=1
 ::# DK()
 ::#
 ::#
+:: Get full path to $0
+set _input=%~dp0..\
+for %%Z in ("%_input%") do set "DKBATCH_DIR=%%~dpZ"
+set DKBATCH_DIR=%DKBATCH_DIR:~0,-1%
+echo DKBATCH_DIR = %DKBATCH_DIR%
 
 
 ::############ Script internal setup ############
-for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
-set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+::for %%A in ("%~dp0.") do set DKBATCH_DIR=%%~dpA
+::set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-<:dk_caller <nul call %DKBATCH_DIR%\functions\dk_caller.cmd DKSCRIPT_PATH
+<:dk_caller <nul call dk_caller.cmd DKSCRIPT_PATH
 call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
 call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 call dk_debug DKBATCH_DIR

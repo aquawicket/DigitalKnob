@@ -1,4 +1,6 @@
+@echo off
 call dk_includeGuard
+call "DK.cmd"
 
 if "%ENABLE_dk_debug%"=="" set ENABLE_dk_debug=1
 if "%TRACE_ON_DEBUG%"==""  set TRACE_ON_DEBUG=0
