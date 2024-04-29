@@ -1,5 +1,6 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
-
 
 [ -z ${ENABLE_dk_fixme-} ] && ENABLE_dk_fixme=1
 [ -z ${TRACE_ON_FIXME-} ]  && TRACE_ON_FIXME=0

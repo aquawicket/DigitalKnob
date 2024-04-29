@@ -5,6 +5,10 @@ call DK
 :: https://www.ascii-code.com
 :: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
+::##################################################################################
+::# dk_escapeSequences()
+::#
+::#
 :dk_escapeSequences () {
 	call dk_debugFunc
 	
@@ -44,19 +48,18 @@ call DK
 	call:ASCII_ADD		RS		30		036		0x1e	#30		"Record Separator"
 	call:ASCII_ADD		US		31		037		0x1f	#31		"Unit Separator"
 
-
 	:::ASCII_length_Loop
 	::if defined ASCII[%ASCII_length%] (
 	::	set /a ASCII_length+=1
 	::	GOTO :ASCII_length_Loop
 	::)
-	echo.
-	echo		SYMBOL	DEC	OCT	HEX	HTML	Description
-	for /L %%i IN (0,1,%ASCII_length%) DO (
-		call:ASCII_SHOW %%i	
-	)
-	echo.
-
+	
+::	echo.
+::	echo		SYMBOL	DEC	OCT	HEX	HTML	Description
+::	for /L %%i IN (0,1,%ASCII_length%) DO (
+::		call:ASCII_SHOW %%i	
+::	)
+::	echo.
 
 
 	call dk_hexToVariable NUL 0x00
@@ -177,7 +180,9 @@ call DK
 	call dk_set BG_White   "%ESC%[107m"
 goto:eof
 
-:ASCII_ADD
+:ASCII_ADD () {
+	call dk_debugFunc
+	
 	::echo ASCII_ADD (%*
 	::echo %~1	%~2		%~3		%~4		%~5		%~6
 	set ID=%~2
@@ -191,6 +196,8 @@ goto:eof
 	set /a ASCII_length+=1
 goto:eof
 
-:ASCII_SHOW
+:ASCII_SHOW () {
+	call dk_debugFunc
+
 	call echo %%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%
 goto:eof

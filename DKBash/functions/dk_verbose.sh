@@ -1,5 +1,6 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
-
 
 [ -z ${ENABLE_dk_verbose-} ] && ENABLE_dk_verbose=1
 [ -z ${TRACE_ON_VERBOSE-} ]  && TRACE_ON_VERBOSE=0

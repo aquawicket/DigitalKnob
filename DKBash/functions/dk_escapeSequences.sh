@@ -1,3 +1,5 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
 
 # https://www.ascii-code.com
@@ -10,6 +12,7 @@ dk_includeGuard
 dk_escapeSequences () {
 	dk_debugFunc
 	
+
 	# ASCII control characters (character code 0-31)
 	#	      		SYMBOL	DEC		OCT		HEX		HTML		Description
 	ASCII_ADD		NUL		0		000		0x00	\#00		"Null character"
@@ -45,14 +48,18 @@ dk_escapeSequences () {
 	ASCII_ADD		RS		30		036		0x1e	\#30		"Record Separator"
 	ASCII_ADD		US		31		037		0x1f	\#31		"Unit Separator"
 
-	dk_echo ""
-	dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
-	ASCII_size=${#ASCII[@]}
-	for (( i=0; i<${ASCII_size}; i++ ));
-	do
-		ASCII_SHOW $i
-	done
-	dk_echo ""
+
+
+#	dk_echo ""
+#	dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
+#	ASCII_size=${#ASCII[@]}
+#	for (( i=0; i<${ASCII_size}; i++ ));
+#	do
+#		ASCII_SHOW $i
+#	done
+#	dk_echo ""
+
+
 
 
 	#dk_hexToVariable NUL 0x00
@@ -82,7 +89,7 @@ dk_escapeSequences () {
 	#dk_hexToVariable CAN 0x18
 	#dk_hexToVariable EM  0x19
 	#dk_hexToVariable SUB 0x1a
-	ESC=
+	dk_hexToVariable ESC 0x1b
 	#dk_hexToVariable FS  0x1c
 	#dk_hexToVariable GS  0x1d
 	#dk_hexToVariable RS  0x1e

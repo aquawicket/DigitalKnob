@@ -1,5 +1,6 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
-
 
 [ -z ${ENABLE_dk_warning-} ] && ENABLE_dk_warning=1
 [ -z ${TRACE_ON_WARNING-} ]  && TRACE_ON_WARNING=0

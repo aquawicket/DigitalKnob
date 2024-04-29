@@ -1,5 +1,6 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
-
 
 [ -z ${ENABLE_dk_info-} ] && ENABLE_dk_info=1
 [ -z ${TRACE_ON_INFO-} ]  && TRACE_ON_INFO=0

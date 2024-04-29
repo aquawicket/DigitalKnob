@@ -1,3 +1,5 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
 
 dk_load dk_showFileLine

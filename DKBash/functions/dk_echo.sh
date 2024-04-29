@@ -1,3 +1,5 @@
+#!/bin/sh
+#. ./DK.sh
 dk_includeGuard
 
 # https://linuxcommand.org/lc3_man_pages/echoh.html
