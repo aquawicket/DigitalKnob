@@ -7,7 +7,7 @@ call dk_includeGuard
 ::#
 ::#
 :dk_showFileLine
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	setlocal enableDelayedExpansion
 		::echo ~0 = %~0
