@@ -1,4 +1,6 @@
+@echo off
 call dk_includeGuard
+call DK
 
 setlocal enableDelayedExpansion
 if "%ENABLE_dk_verbose%"=="" set ENABLE_dk_verbose=1

@@ -1,4 +1,6 @@
-:: dk_includeGuard()
+@echo off
+call dk_includeGuard
+call DK
 
 ::################################################################################
 ::# dk_stringContains(<haystack> <needle> <result>)

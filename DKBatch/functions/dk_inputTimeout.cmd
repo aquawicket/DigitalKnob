@@ -1,4 +1,6 @@
+@echo off
 call dk_includeGuard
+call DK
 
 setlocal EnableExtensions EnableDelayedExpansion
 ::#################################################################################

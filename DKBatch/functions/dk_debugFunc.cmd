@@ -1,5 +1,6 @@
-:: dk_include_guard
-
+@echo off
+call dk_includeGuard
+call DK
 
 if "%ENABLE_dk_debugFunc%"=="" set ENABLE_dk_debugFunc=0
 if "%MAX_STACK_LINES%"==""     set "MAX_STACK_LINES=200"

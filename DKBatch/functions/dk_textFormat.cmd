@@ -1,5 +1,6 @@
-:: dk_includeGuard()
-
+@echo off
+call dk_includeGuard
+call DK
 
 ::################################################################################
 ::# dk_textFormat(<OUTPUT> <column1> <column2> <column3> <column4>)

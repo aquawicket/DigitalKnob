@@ -1,4 +1,6 @@
+@echo off
 call dk_includeGuard
+call DK
 
 ::#################################################################################
 :: dk_setRegistryKey() <reg_path> <key> <type> <value>

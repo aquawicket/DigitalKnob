@@ -1,4 +1,6 @@
+@echo off
 call dk_includeGuard
+call DK
 
 if "%ENABLE_dk_info%"=="" set ENABLE_dk_info=1
 if "%TRACE_ON_INFO%"==""  set TRACE_ON_INFO=0

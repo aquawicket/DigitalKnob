@@ -1,4 +1,6 @@
-::include_guard()
+@echo off
+call dk_includeGuard
+call DK
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: dk_message(msg)

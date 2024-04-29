@@ -1,4 +1,6 @@
-::dk_decimalToVariable()
+@echo off
+call dk_includeGuard
+call DK
 
 ::################################################################################
 ::# dk_decimalToVariable(<name> <decimal>)

@@ -1,4 +1,6 @@
+@echo off
 if [%include_guard_dk_load%] == [1] ( goto:eof ) else set include_guard_dk_load=1
+call DK
 
 ::####################################################################
 ::# dk_load()
