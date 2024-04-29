@@ -8,14 +8,14 @@ dk_includeGuard
 #
 dk_test () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "incorrect number of parameters"
+	#[ $# -ne 1 ] && dk_error "incorrect number of parameters"
 	
 	echo "$1"
 }
 
 
 
-################################ TEST_dk_test() ##################################
+################################ DKTEST #########################################
 if [ -n "${DKTEST}" ]; then
 	dk_test "called from TEST portion of the script"
 	dk_exit

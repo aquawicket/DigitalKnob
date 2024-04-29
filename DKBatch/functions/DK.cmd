@@ -1,4 +1,4 @@
-if [%include_guard_DK%] == [1] ( goto:eof ) else set include_guard_DK=1
+if defined DKINIT ( goto:eof ) else set DKINIT=1
 
 ::####################################################################
 ::# DK()
