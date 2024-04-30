@@ -7,7 +7,6 @@
 	cmd /k
 goto:eof
 
-
 :call_command <command> <args>
 	call %1 && (
 	  echo Success

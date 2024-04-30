@@ -10,5 +10,5 @@ call "../functions/DK.cmd"
 call dk_debug "test dk_debug message"
 call dk_info "...next line..."
 
-find /v /c “find /v /c” $0
+::find /v /c “find /v /c” $0
 call dk_pause
