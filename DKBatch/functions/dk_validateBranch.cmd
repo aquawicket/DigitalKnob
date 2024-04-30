@@ -5,7 +5,7 @@ call dk_includeGuard
 ::#
 ::#
 :dk_validateBranch () {
-	call dk_debugFunc
+    call dk_debugFunc
 	
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
@@ -20,7 +20,7 @@ call dk_includeGuard
 
     call dk_debug DKBRANCH
 	
-	if "%DIGITALKNOB_DIR%"==""  call dk_getDKPaths
+    if "%DIGITALKNOB_DIR%"==""  call dk_getDKPaths
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
     set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"

@@ -1,11 +1,8 @@
 @echo off
 
 setlocal EnableExtensions EnableDelayedExpansion
-::####################################################################
-::# test_dk_validateNotepadpp.cmd
-::#
-::#
-::###### DK_Init ######
+
+::###### DKINIT ######
 call functions\DK.cmd
 
 

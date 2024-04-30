@@ -9,20 +9,21 @@ call DK
 :dk_cmakeEval () {
 	call dk_debugFunc
 	
-    if [%1]==[]                  call dk_error "dk_cmakeEval() parameter1 is invalid"
-	if [%CMAKE_EXE%]==[]         call dk_validateCmake
+    if "%1"==""                  call dk_error "dk_cmakeEval() parameter 1 is invalid"
+	if "%DKIMPORTS_DIR%"==""     call dk_validateBranch
+	if "%CMAKE_EXE%"==""         call %DKIMPORTS_DIR%\cmake\dk_InstallCmake
     if not exist "%CMAKE_EXE%"   call dk_error "Could not locate CMAKE_EXE" 
-	if [%DKCMAKE_DIR%]==[]       call dk_validateBranch
-    if not exist "%DKCMAKE_DIR%" call dk_error "Could not locate DKCMAKE_DIR" 
+	if "%DKCMAKE_DIR%"==""       call dk_validateBranch
+    if not exist "%DKCMAKE_DIR%" call dk_error "Could not locate DKCMAKE_DIR"
 
     set DKCOMMAND=%1
     set DKRETURN=%2
 	set DKVARS=%3
 	:: remove double quotes
-    ::if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:"=%%
-	if [%DKCOMMAND%] NEQ [] call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-	::if [%DKRETURN%] NEQ []  call set DKRETURN=%%DKRETURN:"=%%
-	::if [%DKVARS%] NEQ []    call set DKVARS=%%DKVARS:"=%%
+    ::if "%DKCOMMAND%" NEQ "" call set DKCOMMAND=%%DKCOMMAND:"=%%
+	if "%DKCOMMAND%" NEQ "" call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
+	::if "%DKRETURN%" NEQ ""  call set DKRETURN=%%DKRETURN:"=%%
+	::if "%DKVARS%" NEQ ""    call set DKVARS=%%DKVARS:"=%%
 	
 	::echo DKCOMMAND = %DKCOMMAND%
 	::echo DKRETURN = %DKRETURN%

@@ -1,10 +1,8 @@
 @echo off
 
 ::# http://cplusplus.bordoon.com/cmd_exe_variables.html
-::####################################################################
-::# test_dk_validateNotepadpp.cmd
-::#
-::#
+
+
 ::###### DK_Init ######
 call "../functions/DK.cmd"
 

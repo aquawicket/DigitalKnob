@@ -103,7 +103,7 @@ call DK
 ::	fi
 	
 ::	###### CMake Configure ######
-	call dk_validateCmake
+	call %DKIMPORTS_DIR%\cmake\dk_InstallCmake
 	
     echo.
     echo ****** CMAKE COMMAND ******
