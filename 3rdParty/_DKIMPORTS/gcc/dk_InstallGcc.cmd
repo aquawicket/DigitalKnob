@@ -3,16 +3,15 @@ call ../../../DKBatch/functions/DK.cmd
 call dk_includeGuard
 
 ::####################################################################
-::# dk_InstallNotepadpp()
+::# dk_InstallGcc()
 ::#
 ::#
-:dk_InstallNotepadpp () {
+:dk_InstallGcc () {
 	call dk_debugFunc
 	
 	if "%DKIMPORTS_DIR%"==""  call dk_validateBranch
-    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')" "NOTEPADPP_EXE"
-	call dk_debug NOTEPADPP_EXE
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+	call dk_debug GCC_C_COMPILER
+	call dk_debug GCC_CXX_COMPILER
     call dk_checkError
-
-    call dk_exit
 goto:eof

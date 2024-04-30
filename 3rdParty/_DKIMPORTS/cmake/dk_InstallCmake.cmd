@@ -1,3 +1,5 @@
+@echo off
+call ../../../DKBatch/functions/DK.cmd
 call dk_includeGuard
 
 set "CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip"
@@ -9,10 +11,10 @@ set "CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3
 set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz"
 
 ::####################################################################
-::# dk_validateCmake()
+::# dk_InstallCmake()
 ::#
 ::#
-:dk_validateCmake () {
+:dk_InstallCmake () {
 	call dk_debugFunc
 	
 	if "%HOST_OS%"=="" call dk_getHostTriple

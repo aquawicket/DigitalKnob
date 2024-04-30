@@ -1,6 +1,6 @@
 @echo off
+call ../../../DKBatch/functions/DK.cmd
 call dk_includeGuard
-call DK
 
 ::####################################################################
 ::# dk_validateMsys2()
