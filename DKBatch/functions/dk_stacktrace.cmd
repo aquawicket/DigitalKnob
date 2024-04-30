@@ -9,8 +9,8 @@ call DK
 :dk_stacktrace () {
 	call dk_debugFunc
 	
-	echo DKSTACK_length = %DKSTACK_length%
-	echo DKSTACK_marker = %DKSTACK_marker%
+	::echo DKSTACK_length = %DKSTACK_length%
+	::echo DKSTACK_marker = %DKSTACK_marker%
 	set /a dk_stacktrace_count=%DKSTACK_length%-1
 	::set /a dk_stacktrace_marker=%DKSTACK_marker%
 	set /a dk_stacktrace_marker=%dk_stacktrace_count%
@@ -33,3 +33,17 @@ call DK
 	echo done
 	
 goto:eof
+
+
+
+
+
+:DKTEST ########################################################################
+
+call dk_debug test putting a function on the stack
+
+echo.
+call dk_stacktrace
+echo.
+
+call dk_exit

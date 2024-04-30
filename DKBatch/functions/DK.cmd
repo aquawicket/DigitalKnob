@@ -1,4 +1,4 @@
-if defined DKINIT ( goto:eof ) else set DKINIT=1
+if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 @echo off
 
 
@@ -16,8 +16,8 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	if not exist "%DKBATCH_DIR%\functions" ( echo "DKBATCH_DIR does not exist" & goto:eof )
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
-	call dk_getCaller DKCALLER
-	:dk_getCaller_return
+	call dk_getCaller 1
+	:dk_getCaller_return1
 	::call dk_debug caller[0]
 	::call dk_debug caller[0].fullpath
 	::call dk_debug caller[0].directory
@@ -73,13 +73,12 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
 	::echo SCRIPT_ARGS = %SCRIPT_ARGS%
 	if "%DKSCRIPT_DIR%"=="%DKBATCH_DIR%\functions" (
-		echo.
-		echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
-		call :DKTEST
-		:DKTEST
-		%caller[1].func%
-		echo ########################## END DKTEST MODE ######################
-		dk_exit
+        echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
+        call :DKTEST
+        :DKTEST
+        "%caller[1].func%"
+        echo ########################## END DKTEST MODE ######################
+        call dk_exit
 	)
 goto:eof
 

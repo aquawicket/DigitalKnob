@@ -15,9 +15,18 @@ if "%DKSTACK_marker%"==""      set /a "DKSTACK_marker=1"
 ::#
 :dk_debugFunc () {
 
+	call dk_caller DKCALLER
+	:dk_caller
 	set DKSTACK[%DKSTACK_marker%].FILE=%_filename%
 	set DKSTACK[%DKSTACK_marker%].FUNCTION=%_func%
 	set DKSTACK[%DKSTACK_marker%].ARGS=%_args%
+	
+::	call dk_getCaller 2
+::	:dk_getCaller_return2
+::	set DKSTACK[%DKSTACK_marker%].FILE=%caller[0].fullpath%
+::	set DKSTACK[%DKSTACK_marker%].FUNCTION=%caller[0].func%
+::	set DKSTACK[%DKSTACK_marker%].ARGS=%caller[0].args%
+	
 	
 	set /a DKSTACK_length+=1
 	set /a DKSTACK_marker=%DKSTACK_length%	

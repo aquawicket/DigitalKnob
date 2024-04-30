@@ -34,3 +34,13 @@ if "%HALT_ON_ERROR%"==""    set HALT_ON_ERROR=1
 		if "%PAUSE_ON_ERROR%"=="1" call dk_echo %red%*** PAUSE_ON_ERROR ***%clr% & call dk_pause
 	endlocal 
 goto:eof
+
+
+
+
+
+
+:DKTEST ########################################################################
+echo "calling dk_error from dk_error.cmd"
+call dk_error "test dk_error message"
+echo "...next line..."

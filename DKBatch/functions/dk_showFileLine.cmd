@@ -37,3 +37,11 @@ call DK
 		echo.
 	endlocal
 goto :eof
+
+
+
+
+
+:DKTEST ::########################################################################
+call dk_showFileLine "../../README.md" "How to build"
+call dk_exit

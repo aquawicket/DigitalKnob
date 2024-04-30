@@ -69,13 +69,10 @@ goto:eof
 
 :: *** STEP3 Restart the requester batch, but jump to the label :dk_getCaller_return
 :Step3
-	call :dk_getCaller_return
-goto:eof
-
-
-:: *** This uses the trick, that starting a batch without CALL will jump to the last used label
-:dk_getCaller_return
-	if "%_returnVar%" NEQ "" set "%_returnVar%=%caller[1]%"
+	::if "%_returnVar%" NEQ "" set "%_returnVar%=%caller[1]%"
 	endlocal
+	::echo _returnVar = %_returnVar%
+	call :dk_getCaller_return%_returnVar%
+	:dk_getCaller_return1
 	%caller[0].fullpath% %caller[0].args%
-goto:eof	
+goto:eof

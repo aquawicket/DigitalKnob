@@ -1,9 +1,9 @@
 @echo off
-echo "test_callStackB entry"
+echo "test_dk_dumpStackB entry"
 
 
-:test_callStackB
-	echo test_callStackB %*
+:test_dk_dumpStackB
+	echo :test_dumpStackB %*
 ::<:dk_popStackReturn <nul call dk_popStack
 ::	echo returned from dk_popStack & pause
 	call:func1
@@ -16,7 +16,7 @@ echo "test_callStackB entry"
 goto:eof
 
 :func1
-	echo func1 %*
+	echo :func1 %*
 	call:func2
 	echo returned from func2
 	::call:func2 & (
@@ -27,7 +27,7 @@ goto:eof
 goto:eof
 
 :func2
-	echo func2 %*
+	echo :func2 %*
 	call:func3
 	echo returned from func3
 	::call:func3 123 & (
@@ -38,7 +38,7 @@ goto:eof
 goto:eof
 
 :func3
-	echo func3 %*
+	echo :func3 %*
 	call:func4
 	echo returned from func4
 	::call:func4 blue & (
@@ -49,12 +49,13 @@ goto:eof
 goto:eof
 
 :func4
-	echo func4 %*
+	echo :func4 %*
 	call:func5 orange
 	echo returned from func5
 goto:eof
 
 :func5
-	echo func5 %*
-<:dk_popStackReturn <nul call dk_popStack
+	echo :func5 %*
+<:dk_dumpStackReturn <nul call dk_dumpStack
+	echo returned from dk_dumpStack
 goto:eof
