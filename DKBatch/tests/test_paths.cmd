@@ -42,10 +42,10 @@ call "../functions/DK.cmd"
 	call dk_getDrive "%IN%" drive
 	echo drive      = %drive%
 
-	call dk_getPathOnly "%IN%" pathOnly
+	call dk_getPath "%IN%" pathOnly
 	echo pathOnly   = %pathOnly%
 
-	call dk_getNameOnly "%IN%" nameOnly
+	call dk_getName "%IN%" nameOnly
 	echo nameOnly   = %nameOnly%
 
 	call dk_getExtension "%IN%" extension

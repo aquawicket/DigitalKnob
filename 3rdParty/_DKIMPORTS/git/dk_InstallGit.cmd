@@ -24,7 +24,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     ::call dk_debug GIT_DL_FILE
 
     ::set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
-	call dk_getNameOnly %GIT_DL_FILE% GIT_FOLDER
+	call dk_getName %GIT_DL_FILE% GIT_FOLDER
 	::call dk_debug GIT_FOLDER
     
 	call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
