@@ -18,6 +18,7 @@
 #WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-windows-x86_64.msi)
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
+dk_validate					(HOST dk_getHostTriple)
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz)
@@ -71,6 +72,7 @@ elseif(MSYSTEM)
 		dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
 	endif()
 else()
+	dk_validate(DKTOOLS_DIR dk_getDKPaths)
 	dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
 	if(MAC_HOST)
 		dk_findProgram(CMAKE_EXE cmake ${CMAKE}/CMake.app/Contents/bin)
