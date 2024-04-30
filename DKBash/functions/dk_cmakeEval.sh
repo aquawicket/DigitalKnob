@@ -8,10 +8,10 @@ dk_includeGuard
 #			
 dk_cmakeEval () {
 	dk_debugFunc
-	[ -z "$1" ]          && dk_error "dk_cmakeEval() parameter 1 is invalid"
+	[ -z "$1" ]           && dk_error "dk_cmakeEval() parameter 1 is invalid"
 	
-	[ -z "$CMAKE_EXE" ]  && dk_validateCmake
-	[ -z "$DKCMAKE_DIR"] && dk_validateBranch
+	[ -z "$CMAKE_EXE" ]   && dk_validateCmake
+	[ -z "$DKCMAKE_DIR" ] && dk_validateBranch
 	
 	DKCOMMAND="$1"
 	DKRETURN="$2"

@@ -12,6 +12,7 @@ function(dk_eval code)
 	
 	string(REPLACE ";"  "\n" code "${code}")
 	string(REPLACE "'"  "\"" code "${code}")
+	#string(REPLACE "/c/"  "C:/" code "${code}")
 	#dk_debug(code)
 	if(COMMAND cmake_language)
 		#dk_debug(code)

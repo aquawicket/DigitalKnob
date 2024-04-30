@@ -1,6 +1,9 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
+if(NOT HOST)
+	dk_getHostTriple()
+endif()
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()
@@ -17,6 +20,9 @@ if(MSYS2_DL_FILE)
 	dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
 endif()
 if(MSYS2_FOLDER)
+	if(NOT DK3RDPARTY_DIR)
+		dk_getDKPaths()
+	endif()
 	dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 endif()
 dk_debug(MSYS2_DL_FILE)

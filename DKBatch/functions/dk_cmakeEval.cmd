@@ -51,7 +51,7 @@ call DK
     call %DKCMAKE_DIR%\cmake_vars.cmd
 	del %DKCMAKE_DIR%\cmake_vars.cmd
 
-    ::if [%2] == [] goto no_return_values
+    ::if "%2" == "" goto no_return_values
     ::goto with_return_values
 
 ::    :no_return_values
