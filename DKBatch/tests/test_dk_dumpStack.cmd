@@ -7,21 +7,47 @@
 ::###### DK_Init ######
 ::
 
-:main
-	echo :main
-	
-	call "../functions/DK.cmd"
-	
-	call test_dk_dumpStackB
-	echo returned from test_dk_dumpStackB
-	
-	echo caller[0] = %caller[0]%
-	echo caller[1] = %caller[1]%
-	echo caller[2] = %caller[2]%
-	echo caller[3] = %caller[3]%
-	echo caller[4] = %caller[4]%
-	echo caller[5] = %caller[5]%
-	echo caller[6] = %caller[6]%
-	echo caller[7] = %caller[7]%
-	pause
+:func1
+	echo :func1 %*
+	call:func2
+	echo returned from func2
+	::call:func2 & (
+	::	(goto) 2>nul
+	::	call echo 0 = %%~0
+	::	echo returned from func2
+	::)
+goto:eof
+
+:func2
+	echo :func2 %*
+	call:func3
+	echo returned from func3
+	::call:func3 123 & (
+	::	(goto) 2>nul
+	::	call echo 0 = %%~0
+	::	echo returned from func3
+	::)
+goto:eof
+
+:func3
+	echo :func3 %*
+	call:func4
+	echo returned from func4
+	::call:func4 blue & (
+	::	(goto) 2>nul
+	::	call echo 0 = %%~0
+	::	echo returned from func4
+	::)
+goto:eof
+
+:func4
+	echo :func4 %*
+	call:func5 orange
+	echo returned from func5
+goto:eof
+
+:func5
+	echo :func5 %*
+<:dk_dumpStackReturn <nul call dk_dumpStack
+	echo returned from dk_dumpStack
 goto:eof
