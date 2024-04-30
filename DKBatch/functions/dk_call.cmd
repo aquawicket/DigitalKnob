@@ -8,9 +8,14 @@ call DK
 ::#
 :dk_call () {
 	call dk_debugFunc
-	if "%1"=="" call dk_error "Incorrect number of parameters"
+	::if "%1"=="" call dk_error "Incorrect number of parameters"
 
     call dk_echo %magenta% > %* %clr%
    
 	call %*
 goto:eof
+
+
+
+:DKTEST ########################################################################
+	call dk_call dk_info "test message using dk_call"

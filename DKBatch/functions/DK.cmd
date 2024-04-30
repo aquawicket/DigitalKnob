@@ -1,5 +1,6 @@
-@echo off
 if defined DKINIT ( goto:eof ) else set DKINIT=1
+@echo off
+
 
 ::####################################################################
 ::# DK()
@@ -72,10 +73,12 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
 	::echo SCRIPT_ARGS = %SCRIPT_ARGS%
 	if "%DKSCRIPT_DIR%"=="%DKBATCH_DIR%\functions" (
-		echo "############ DKTEST MODE ############"
+		echo.
+		echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
 		call :DKTEST
 		:DKTEST
 		%caller[1].func%
+		echo ########################## END DKTEST MODE ######################
 		dk_exit
 	)
 goto:eof

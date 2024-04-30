@@ -14,7 +14,7 @@ call DK
     setlocal
     set "spaces=                                        "
 	set "col1=%~2%spaces%"
-    set col1=%col1:~0,30%
+    set col1=%col1:~0,10%
     
 	set "col2=%~3%spaces%"
     set col2=%col2:~0,30%
@@ -23,7 +23,7 @@ call DK
     set col3=%col3:~0,30%
     
 	set "col4=%~5%spaces%"
-    set col4=%col4:~0,30%
+    set col4=%col4:~0,100%
     
 	::echo %col1% %col2% %col3% %col4%
 	set "output=%col1% %col2% %col3% %col4%"
