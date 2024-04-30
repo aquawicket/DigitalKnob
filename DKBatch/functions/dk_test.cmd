@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT (call DK & call :TEST_dk_test)
+call DK
 call dk_includeGuard
 
 ::####################################################################
@@ -8,14 +8,14 @@ call dk_includeGuard
 ::#
 :dk_test () {
 	call dk_debugFunc
-
+	
 	echo %~1
+	call dk_exit
 goto:eof
 
 
 
-::################################ DKTEST #########################################
-:TEST_dk_test
-	call :dk_test "called from TEST portion of the script"
-	call dk_exit
+::############################## DKTEST ##############################
+:DKTEST
+	call :dk_test "called from TEST portion of dk_test.cmd"
 goto:eof

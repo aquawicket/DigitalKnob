@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT (call DK & call :TEST_dk_debug)
+call DK
 call dk_includeGuard
 
 if "%ENABLE_dk_debug%"=="" set ENABLE_dk_debug=1
@@ -37,7 +37,7 @@ goto:eof
 
 
 ::################################ DKTEST #########################################
-:TEST_dk_debug
-	call :dk_debug "called from TEST portion of the script"
-	call dk_exit
+:DKTEST
+	call dk_debug "test dk_debug message"
+	call dk_info "...next line..."
 goto:eof

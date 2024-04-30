@@ -1,3 +1,4 @@
+@echo off
 ::https://stackoverflow.com/a/43123617/688352
 
 set "func=%~0"
@@ -23,6 +24,7 @@ goto:eof
 (
     (goto) 2>nul
     (goto) 2>nul
+	(goto) 2>nul
 	::setlocal DisableDelayedExpansion
 	set "_returnVar=%_returnVar%"	
 	set "_lastpath=%_lastpath%"

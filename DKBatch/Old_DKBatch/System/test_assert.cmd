@@ -94,7 +94,7 @@ pause & goto:eof
 
 
 :ASSERT
-	if [%1]==[] goto:is_false
+	if [%1]==[]   goto:is_false
 	if [%1]==[''] goto:is_false
 	if [%1]==[""] goto:is_false
 	

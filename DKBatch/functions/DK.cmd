@@ -1,3 +1,4 @@
+@echo off
 if defined DKINIT ( goto:eof ) else set DKINIT=1
 
 ::####################################################################
@@ -11,13 +12,31 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	set _input=%~dp0..\
 	for %%Z in ("%_input%") do set "DKBATCH_DIR=%%~dpZ"
 	set DKBATCH_DIR=%DKBATCH_DIR:~0,-1%
+	if not exist "%DKBATCH_DIR%\functions" ( echo "DKBATCH_DIR does not exist" & goto:eof )
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
-	if not exist "%DKBATCH_DIR%\functions" ( echo "The DKBATCH_DIR is incorrec!" & goto:eof )
+	call dk_getCaller DKCALLER
+	:dk_getCaller_return
+	::call dk_debug caller[0]
+	::call dk_debug caller[0].fullpath
+	::call dk_debug caller[0].directory
+	::call dk_debug caller[0].type
+	::call dk_debug caller[0].filename
+	::call dk_debug caller[0].func
+	::call dk_debug caller[0].args
 	
+	::call dk_debug caller[1]
+	::call dk_debug caller[1].fullpath
+	::call dk_debug caller[1].directory
+	::call dk_debug caller[1].type
+	::call dk_debug caller[1].filename
+	::call dk_debug caller[1].func
+	::call dk_debug caller[1].args
+	
+	set "DKSCRIPT_PATH=%caller[1].fullpath%"
 ::<:dk_getScriptPath_return <nul call dk_getScriptPath DKSCRIPT_PATH   :: same as below in 1 line
-	call dk_getScriptPath DKSCRIPT_PATH
-	:dk_getScriptPath_return
+	::call dk_getScriptPath DKSCRIPT_PATH
+	:::dk_getScriptPath_return
 	
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
@@ -27,6 +46,8 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	call dk_debug DKBATCH_DIR
 	call dk_debug DKSCRIPT_DIR
 	call dk_debug DKSCRIPT_NAME
+	
+	
 	::call dk_exception init
 	::pause 
 	::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
@@ -50,5 +71,15 @@ if defined DKINIT ( goto:eof ) else set DKINIT=1
 	:: SCRIPT_ARGS = %* after %1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
 	::echo SCRIPT_ARGS = %SCRIPT_ARGS%
-goto:eof	
+	if "%DKSCRIPT_DIR%"=="%DKBATCH_DIR%\functions" (
+		echo "############ DKTEST MODE ############"
+		call :DKTEST
+		:DKTEST
+		%caller[1].func%
+		dk_exit
+	)
+goto:eof
+
+
+
 

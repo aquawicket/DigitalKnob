@@ -41,7 +41,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
 	   
     if NOT exist "%GIT_EXE%" (
-        call assert "cannot find git"
+        call dk_error "cannot find git"
     )
         
     call dk_checkError
