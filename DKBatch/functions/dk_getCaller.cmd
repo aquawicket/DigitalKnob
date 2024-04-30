@@ -25,7 +25,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
 goto:eof
 
 
-:: *** Get the filename/cmd-line of the caller of the script
+:: *** Get the caller of the this caller
 :Step2
 (
     (goto) 2>nul
@@ -39,6 +39,7 @@ goto:eof
 	set "_lastfunc=%_lastfunc%"
 	set "_lastargs=%_lastargs%"
 	
+	call set "_caller=%%~0"
 	call set "_path=%%~f0"
 	call set "_callerpath=%%_path:*%%~f0=%%"
 	call set "_filename=%%~nx0"
@@ -68,7 +69,7 @@ goto:eof
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_getCaller_return
-	if "%_returnVar%" NEQ "" set "%_returnVar%=%_callerpath%"
+	if "%_returnVar%" NEQ "" set "%_returnVar%=%_caller%"
 	endlocal
 	%_lastpath% %_lastargs%
 goto:eof	
