@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 [ -z ${ENABLE_dk_warning-} ] && ENABLE_dk_warning=1
 [ -z ${TRACE_ON_WARNING-} ]  && TRACE_ON_WARNING=0
@@ -28,3 +28,20 @@ dk_warning () {
 	[ $HALT_ON_WARNING -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_WARNING ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_WARNING -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_WARNING ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_warning "test dk_warning message"
+	dk_info "...next line..."
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

@@ -1,4 +1,6 @@
-dk_includeGuard
+#!/bin/sh
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 [ -z ${MAX_LINES-} ]   && MAX_LINES=30
 ################################################################################
@@ -41,3 +43,19 @@ dk_showFileLine() {
 		n=$(( n+1 ))
 	done < "$filepath"
 }
+
+
+
+
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_showFileLine "../../README.md" "How to build"
+
+}
+[ -n "$DKTEST" ] && DKTEST

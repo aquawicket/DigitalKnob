@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 ####################################################################
 # dk_hexToDecimal(<hex> <OUTPUT>)
@@ -19,5 +19,20 @@ dk_hexToDecimal () {
 	
 	eval "$2=$(printf "%d\n" $1)"
 }
+
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_hexToDecimal 0x1b decimal
+	dk_debug decimal
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 [ -z ${ENABLE_dk_info-} ] && ENABLE_dk_info=1
 [ -z ${TRACE_ON_INFO-} ]  && TRACE_ON_INFO=0
@@ -28,3 +28,15 @@ dk_info () {
 	[ $HALT_ON_INFO -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_INFO ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_INFO -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_INFO ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_info "test dk_info message"
+	echo "...next line..."
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

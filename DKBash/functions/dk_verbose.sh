@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 [ -z ${ENABLE_dk_verbose-} ] && ENABLE_dk_verbose=1
 [ -z ${TRACE_ON_VERBOSE-} ]  && TRACE_ON_VERBOSE=0
@@ -28,3 +28,17 @@ dk_verbose () {
 	[ $HALT_ON_VERBOSE -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_VERBOSE ***${clr}"   && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_VERBOSE -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_VERBOSE ***${clr}"  && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_verbose "test dk_verbose message"
+	dk_info "...next line..."
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

@@ -1,5 +1,5 @@
 #!/bin/sh
-#. ./DK.sh
+[ -z "$DKINIT" ] && . ./DK.sh
 dk_includeGuard
 
 ##################################################################################
@@ -19,3 +19,19 @@ dk_confirm() {
 	[ "$REPLY" = "Y" ] && return $true
 	return $false;
 }
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+	
+	if dk_confirm; then 
+		echo "the confimation has passed"
+	else
+		echo "the confimation has failed"
+	fi
+	
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

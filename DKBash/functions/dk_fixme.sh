@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 [ -z ${ENABLE_dk_fixme-} ] && ENABLE_dk_fixme=1
 [ -z ${TRACE_ON_FIXME-} ]  && TRACE_ON_FIXME=0
@@ -28,3 +28,15 @@ dk_fixme () {
 	[ $HALT_ON_FIXME -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_FIXME ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_FIXME -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_FIXME ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_fixme "test dk_fixme message"
+	dk_info "...next line..."
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 ##################################################################################
 # try(<args..>)
@@ -287,3 +287,17 @@ dk_getHostTriple () {
 		dk_debug HOST_TRIPLE
 	fi
 }
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_getHostTriple
+	echo "HOST_TRIPLE = $HOST_TRIPLE"
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

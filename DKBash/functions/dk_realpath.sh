@@ -1,6 +1,6 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 ##################################################################################
 # dk_realpath()
@@ -21,3 +21,25 @@ dk_realpath() (
 	cd "$OURPWD"
 	echo "$REALPATH"
 )
+
+
+
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	reelpath() {
+		[ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
+	}
+
+	echo ""
+	RP=$(reelpath "$0")
+	echo "RP = $RP"
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

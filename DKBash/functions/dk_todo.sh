@@ -1,4 +1,6 @@
-dk_includeGuard
+#!/bin/sh
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
 
 
 [ -z ${ENABLE_dk_todo-} ] && ENABLE_dk_todo=1
@@ -27,3 +29,19 @@ dk_todo () {
 	[ $HALT_ON_TODO -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_TODO ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_TODO ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+
+	dk_todo "test dk_todo message"
+	dk_info "...next line..."
+
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST
