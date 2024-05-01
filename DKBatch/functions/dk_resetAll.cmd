@@ -40,9 +40,10 @@ call DK
     echo "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
 	xcopy /s /e /Y %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch\
     copy /Y %DKSCRIPT_PATH% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
-    ::start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" dk_resetAll wipe
-	start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
-	pause
+	set "PATH=%DIGITALKNOB_DIR%\DKBatch;%PATH%"
+    start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" dk_resetAll wipe
+	::start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
+	::pause
 	exit
     exit    
         
