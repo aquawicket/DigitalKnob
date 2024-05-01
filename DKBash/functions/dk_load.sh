@@ -63,6 +63,10 @@ dk_load() {
 			[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]	# BASH REGEX MATCH
 			value=${BASH_REMATCH[0]}				# BASH REGEX VALUE
 			
+			for i in "${!BASH_REMATCH[@]}"; do
+				echo "$i: ${BASH_REMATCH[$i]}"
+			done
+			
 			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			[ -z "$value" ] && continue
 
@@ -98,6 +102,8 @@ dk_load() {
 			#return 0
 		fi	
 	fi
+	
+	#echo "$dk_load_list" > dk_load_list.txt
 }
 
 #dk_load "$0"

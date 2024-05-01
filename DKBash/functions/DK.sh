@@ -66,6 +66,9 @@ DK () {
 	dk_load dk_escapeSequences && dk_escapeSequences
 	dk_load $DKSCRIPT_PATH
 	
+	dk_load dk_bundleSource
+	dk_bundleSource $dk_load_list builder_bundle.sh
+	
 	###### DKTEST MODE ######
 	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
 		echo "###### DKTEST MODE ###### ${BASH_SOURCE[2]} ###### DKTEST MODE ######"

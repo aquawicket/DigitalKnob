@@ -7,9 +7,6 @@
 # shellcheck disable=SC2120
 
 
-#!bin/bash
-
-#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 ###### Reload Main Script with bash ######
 if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
