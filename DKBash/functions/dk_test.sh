@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh && DKTEST=1
+[ -z "$DKINIT" ] && . ./DK.sh
 dk_includeGuard
 
 ##################################################################################
@@ -15,8 +15,10 @@ dk_test () {
 
 
 ################################ DKTEST #########################################
-TEST_dk_test () {
+DKTEST () {
 	dk_test "called from TEST portion of the script"
 	dk_exit
+	
+	exec $SHELL
 }
-[ -n "$DKTEST" ] && TEST_dk_test
+[ -n "$DKTEST" ] && DKTEST

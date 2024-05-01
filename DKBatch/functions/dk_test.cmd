@@ -15,7 +15,7 @@ goto:eof
 
 
 
-::############################## DKTEST ##############################
-:DKTEST
-	call :dk_test "called from TEST portion of dk_test.cmd"
-goto:eof
+
+:DKTEST ############################## DKTEST ##############################
+
+call :dk_test "called from TEST portion of dk_test.cmd"

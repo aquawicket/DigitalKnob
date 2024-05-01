@@ -1,5 +1,5 @@
 #!/bin/sh
-#. ./DK.sh
+[ -z "$DKINIT" ] && . ./DK.sh
 dk_includeGuard
 
 
@@ -29,3 +29,15 @@ dk_debug () {
 	[ $HALT_ON_DEBUG -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_DEBUG ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 	[ $PAUSE_ON_DEBUG -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_DEBUG ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
 }
+
+
+
+
+################################ DKTEST #########################################
+DKTEST () {
+	dk_debug "test dk_debug message"
+	dk_info "...next line..."
+	
+	exec $SHELL
+}
+[ -n "$DKTEST" ] && DKTEST

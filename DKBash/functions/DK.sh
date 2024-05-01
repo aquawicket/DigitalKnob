@@ -54,7 +54,8 @@ DK () {
 	###### get DKBASH_DIR ######
 	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
-	#export "PATH=$DKBASH_DIR/functions:$PATH"
+	echo "DKBASH_DIR = $DKBASH_DIR"
+	export "PATH=$DKBASH_DIR/functions:$PATH"
 
 	###### aquire if missing ######
 	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
@@ -63,5 +64,11 @@ DK () {
 	. ${DKBASH_DIR}/functions/dk_load.sh
 	dk_load dk_escapeSequences && dk_escapeSequences
 	dk_load $DKSCRIPT_PATH
+	
+	###### DKTEST MODE ######
+	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
+		echo "###### DKTEST MODE ###### ${BASH_SOURCE[2]} ###### DKTEST MODE ######"
+		export DKTEST=1
+	fi
 }
 DK
