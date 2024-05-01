@@ -41,6 +41,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     call dk_debug CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
+    if not exist "%CMAKE_EXE%" echo "Could not locate CMAKE_EXE: %CMAKE_EXE%"
        
     echo.   
     echo "Installing cmake . . ."
