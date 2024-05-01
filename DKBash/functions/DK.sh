@@ -59,7 +59,8 @@ DK () {
 
 	###### aquire if missing ######
 	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-
+	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && curl -o DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+	
 	###### Script loader ######
 	. ${DKBASH_DIR}/functions/dk_load.sh
 	dk_load dk_escapeSequences && dk_escapeSequences

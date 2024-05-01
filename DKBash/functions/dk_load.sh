@@ -21,6 +21,7 @@ dk_load() {
 	
 	#### downloader ####
 	[ ! -e $fpath ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
+	[ ! -e $fpath ] && curl -o ${DKBASH_DIR}/functions/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
 	
 	# Convert to unix line endings if CRLF found
 	#if [ -e $fpath]; then
