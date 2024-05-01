@@ -30,8 +30,8 @@ if(NOT EXISTS ${ANDROID_SDK})
 
 	# FIXME:  more work to be done on killing tasks
 	#if(WIN_HOST)
-	#	dk_killProcess(java.exe NOASSERT)
-	#	dk_killProcess(adb.exe NOASSERT)
+	#	dk_killProcess(java.exe NO_HALT)
+	#	dk_killProcess(adb.exe NO_HALT)
 	#endif()
 	
 	### SignLicenses ###

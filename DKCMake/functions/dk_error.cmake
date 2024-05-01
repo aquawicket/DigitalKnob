@@ -14,7 +14,7 @@ if(NOT DEFINED HALT_ON_ERROR)
 	set(HALT_ON_ERROR 1 CACHE INTERNAL "")
 endif()
 ##################################################################################
-# dk_error(msg) NOASSERT
+# dk_error(msg) NO_HALT
 #
 #	Print a error message to the console
 #

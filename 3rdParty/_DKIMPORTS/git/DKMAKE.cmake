@@ -79,7 +79,7 @@ return()
 #		dk_error("MSYS2:${MSYS2} does not exist")
 #	endif()
 #	
-#	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NOASSERT) # BASH_ENV)
+#	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NO_HALT) # BASH_ENV)
 #	if(GIT_EXE)
 #	dk_command(cygpath -m ${GIT_EXE} OUTPUT_VARIABLE GIT_EXE)
 #	endif()

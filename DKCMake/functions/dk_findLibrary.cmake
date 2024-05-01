@@ -1,7 +1,7 @@
 include_guard()
 
 ###############################################################################
-# dk_findLibrary(name) NOASSERT
+# dk_findLibrary(name) NO_HALT
 #
 #	Search for a library and include it with dk_lib
 #
@@ -10,13 +10,13 @@ include_guard()
 function(dk_findLibrary name)
 	dk_debugFunc(${ARGV})
 	
-	dk_getOption(NOASSERT ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
-				dk_error("Could not locate ${name} Library" ${NOASSERT})
-				if(NOASSERT)
+				dk_error("Could not locate ${name} Library" ${NO_HALT})
+				if(NO_HALT)
 					set(${name}_LIBRARY ${name})
 				endif()
 		endif()

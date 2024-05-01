@@ -17,7 +17,7 @@ function(dk_make path) #lib
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
-		dk_error("No proper dk_make() implemented for emscripten" NOASSERT)
+		dk_error("No proper dk_make() implemented for emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		

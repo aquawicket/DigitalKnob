@@ -1,12 +1,12 @@
 include_guard()
 
 ###############################################################################
-# dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NOASSERT] [NOECHO] [NOMERGE])
+# dk_command( <cmd> [<arguments>] [OUTPUT_VARIABLE <variable>] [NO_HALT] [NOECHO] [NOMERGE])
 #
 #	<cmd>				The command to run
 #	[<arguments>]	command arguments 
 #	[OUTPUT_VARIABLE <variable>]
-#	[NOASSERT]
+#	[NO_HALT]
 #	[NOECHO]
 #	[NOMERGE]
 #
@@ -21,7 +21,7 @@ function(dk_command)
 	dk_getOption(ECHO_OUTPUT_VARIABLE		${ARGV})
 	dk_getOption(ECHO_ERROR_VARIABLE		${ARGV})
 	
-	dk_getOption(NOASSERT 					${ARGV})
+	dk_getOption(NO_HALT 					${ARGV})
 	dk_getOption(NOECHO 					${ARGV})
 	dk_getOption(NOMERGE 					${ARGV} REMOVE)
 	dk_getOption(BASH_ENV					${ARGV} REMOVE)
@@ -33,8 +33,8 @@ function(dk_command)
 	#if(OUTPUT_VARIABLE)
 	#	list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	#endif()
-	##if(NOASSERT)
-	#	list(APPEND ARGV NOASSERT)
+	##if(NO_HALT)
+	#	list(APPEND ARGV NO_HALT)
 	#endif()
 	#if(NOECHO)
 	#	list(APPEND ARGV NOECHO)

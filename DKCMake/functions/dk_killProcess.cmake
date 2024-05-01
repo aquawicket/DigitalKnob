@@ -10,5 +10,5 @@ include_guard()
 function(dk_killProcess name)
 	dk_debugFunc(${ARGV})
 	
-	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
+	dk_executeProcess("taskkill /f /im ${name}" NO_HALT)
 endfunction()

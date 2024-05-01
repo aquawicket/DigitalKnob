@@ -1,7 +1,7 @@
 include_guard()
 
 ###############################################################################
-# dk_msys2Bash(args) NOASSERT
+# dk_msys2Bash(args) NO_HALT
 #
 #	TODO
 #
@@ -13,7 +13,7 @@ function(dk_msys2Bash)
 	DK_ASSERT(MINGW)
 	DK_ASSERT(MSYSTEM)
 	DK_ASSERT(MSYS2)
-	dk_getOption(NOASSERT ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	dk_getOption(NOECHO ${ARGV})
 	dk_getOptionValue(OUTPUT_VARIABLE ${ARGV})
 	set(EXTRA_ARGS "")
@@ -62,7 +62,7 @@ function(dk_msys2Bash)
 	
 	### run bash as a string parameter
 	#dk_info("\n${clr}${magenta} dk_msys2Bash> ${bash}\n")
-	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)

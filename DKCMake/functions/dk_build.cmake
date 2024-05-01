@@ -1,20 +1,20 @@
 include_guard()
 
 ###############################################################################
-# dk_build(path target) NOASSERT
+# dk_build(path target) NO_HALT
 #
 #	TODO
 #
 #	@path 				- path to the library root 	 I.E. ${MyLibrary_Dir} 
 #	@target (optional)	- The target of the project to build
 #
-function(dk_build path) #target NOASSERT
+function(dk_build path) #target NO_HALT
 	dk_debugFunc(${ARGV})
 	
 	if(NOT QUEUE_BUILD)
 		return()
 	endif()
-	dk_getOption(NOASSERT ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_build(${path}) path does not exist")
@@ -36,16 +36,16 @@ function(dk_build path) #target NOASSERT
 			dk_info("Building with CMake")
 			if(${ARGC} GREATER 1)
 				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NO_HALT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 				
-				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
+				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NO_HALT})
 			else()
 				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${CMAKE_EXE} --build . --config Debug --target ${target} \n\n")
-				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+				DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NO_HALT} OUTPUT_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 				file(APPEND ${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 				
-				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
+				RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NO_HALT})
 			endif()
 			return()
 		endif()
@@ -55,9 +55,9 @@ function(dk_build path) #target NOASSERT
 					dk_setPath(${path}/${OS}/${DEBUG_DIR})
 					dk_info("Building with CMake")
 					if(${ARGC} GREATER 1)
-						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NOASSERT})
+						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug --target ${target} ${NO_HALT})
 					else()
-						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NOASSERT})
+						DEBUG_dk_queueCommand(${CMAKE_EXE} --build . --config Debug ${NO_HALT})
 					endif()
 					dk_setPath(${path}/${BUILD_DIR})
 					return()
@@ -67,9 +67,9 @@ function(dk_build path) #target NOASSERT
 					dk_setPath(${path}/${OS}/${RELEASE_DIR})
 					dk_info("Building with CMake")
 					if(${ARGC} GREATER 1)
-						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NOASSERT})
+						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release --target ${target} ${NO_HALT})
 					else()
-						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NOASSERT})
+						RELEASE_dk_queueCommand(${CMAKE_EXE} --build . --config Release ${NO_HALT})
 					endif()
 					dk_setPath(${path}/${BUILD_DIR})
 					return()

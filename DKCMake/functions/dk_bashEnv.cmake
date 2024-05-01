@@ -10,7 +10,7 @@ include_guard()
 function(dk_bashEnv)
 	dk_debugFunc(${ARGV})
 	
-	dk_getOption(NOASSERT ${ARGV} REMOVE)
+	dk_getOption(NO_HALT ${ARGV} REMOVE)
 	dk_getOption(NOECHO ${ARGV} REMOVE)
 	dk_getOptionValue(OUTPUT_VARIABLE ${ARGV} REMOVE)
 	
@@ -79,7 +79,7 @@ function(dk_bashEnv)
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
 	string(REPLACE ";" " & " BASH_COMMANDS "${BASH_COMMANDS}")
 	#string(REPLACE ";" "\n" BASH_COMMANDS "${BASH_COMMANDS}")
-	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NOASSERT} NOECHO)
+	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 
 	if(OUTPUT_VARIABLE)

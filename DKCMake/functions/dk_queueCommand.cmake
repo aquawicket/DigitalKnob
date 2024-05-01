@@ -1,7 +1,7 @@
 include_guard()
 
 ###############################################################################
-# dk_queueCommand(args) NOASSERT NOECHO NOMERGE
+# dk_queueCommand(args) NO_HALT NOECHO NOMERGE
 #
 #	TODO
 #
@@ -18,7 +18,7 @@ function(dk_queueCommand)
 	dk_getOption(ECHO_OUTPUT_VARIABLE		${ARGV})
 	dk_getOption(ECHO_ERROR_VARIABLE		${ARGV})
 	
-	dk_getOption(NOASSERT 					${ARGV})
+	dk_getOption(NO_HALT 					${ARGV})
 	dk_getOption(NOECHO 					${ARGV})
 	dk_getOption(NOMERGE 					${ARGV})
 	dk_getOption(BASH_ENV					${ARGV})

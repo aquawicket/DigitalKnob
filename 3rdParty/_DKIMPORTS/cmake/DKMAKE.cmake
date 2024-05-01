@@ -84,7 +84,7 @@ endif()
 ### VALIDATE ### (second check)
 
 if(NOT CMAKE_EXE)
-	dk_error("COULD NOT FIND CMAKE_EXE" NOASSERT)
+	dk_error("COULD NOT FIND CMAKE_EXE" NO_HALT)
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 	return()
 endif()

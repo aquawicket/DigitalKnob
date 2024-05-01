@@ -1,11 +1,11 @@
 include_guard()
 
 ###############################################################################
-# dk_executeProcess(commands) NOASSERT NOECHO OUTPUT <output_variable>
+# dk_executeProcess(commands) NO_HALT NOECHO OUTPUT <output_variable>
 #
 #
 #	@commands	- TODO
-#	@NOASSERT	- don't halt cmake if an error occurs
+#	@NO_HALT	- don't halt cmake if an error occurs
 #
 #	@options	- Takes in and passes the same options as execute_process
 #	execute_process(COMMAND <cmd1> [<arguments>]
@@ -52,7 +52,7 @@ function(dk_executeProcess)
 	dk_getOption(ECHO_ERROR_VARIABLE				${ARGV})
 	dk_getOptionValue(COMMAND_ERROR_IS_FATAL 		${ARGV})
 	
-	dk_getOption(NOASSERT 							${ARGV} REMOVE)
+	dk_getOption(NO_HALT 							${ARGV} REMOVE)
 	dk_getOption(NOECHO 							${ARGV} REMOVE)
 	dk_debug("dk_executeProcess(${ARGV})")
 	#if(NOT ${NOECHO})
@@ -125,13 +125,13 @@ function(dk_executeProcess)
 	set(cmd1 ${ARGV})
 	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing error
-		dk_error(" "				NOASSERT)
-		dk_error(cmd1				NOASSERT)
-		dk_error(WORKING_DIRECTORY	NOASSERT)
-		dk_error(RESULT_VARIABLE    NOASSERT)
-		dk_error(OUTPUT_VARIABLE    NOASSERT)
-		dk_error(ERROR_VARIABLE     NOASSERT)
-		dk_error(" "				${NOASSERT})
+		dk_error(" "				NO_HALT)
+		dk_error(cmd1				NO_HALT)
+		dk_error(WORKING_DIRECTORY	NO_HALT)
+		dk_error(RESULT_VARIABLE    NO_HALT)
+		dk_error(OUTPUT_VARIABLE    NO_HALT)
+		dk_error(ERROR_VARIABLE     NO_HALT)
+		dk_error(" "				${NO_HALT})
 	else()
 		dk_verbose(" ")
 		dk_verbose(cmd1)

@@ -5,7 +5,7 @@ endif()
 
 ANDROID_dk_depend(android-ndk)
 
-dk_findLibrary(dl NOASSERT)
+dk_findLibrary(dl NO_HALT)
 
 LINUX_dk_lib		(dl)
 RASPBERRY_dk_lib	(dl)
