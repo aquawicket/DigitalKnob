@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
 
 
 [ -z ${ENABLE_dk_debug-} ] && ENABLE_dk_debug=1

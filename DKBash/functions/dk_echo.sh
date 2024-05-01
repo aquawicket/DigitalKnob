@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
 
 # https://linuxcommand.org/lc3_man_pages/echoh.html
 
