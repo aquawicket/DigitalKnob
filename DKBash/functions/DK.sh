@@ -1,6 +1,7 @@
 #!bin/sh
 
 DK () {
+	echo "DK()"
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 	###### Reload Main Script with bash ######
@@ -57,11 +58,6 @@ DK () {
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 	echo "DKBASH_DIR = $DKBASH_DIR"
 	
-
-	#alias DKTEST_START='[ -n "$DKTEST" ] && ( ('
-	#alias DKTEST_END='
-	#echo "############################### END DKTEST ###############################"
-	#) & exec $SHELL )'
 	
 	###### Script loader ######
 	if [ -n "$ENABLE_dk_load" ]; then

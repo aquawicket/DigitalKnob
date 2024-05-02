@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
 
 
 # https://www.ascii-code.com

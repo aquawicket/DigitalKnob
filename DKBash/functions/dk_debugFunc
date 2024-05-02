@@ -22,7 +22,7 @@ alias dk_debugFunc='{
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && ( (
+DKTEST_START
 
 	main () {
 		dk_debugFunc
@@ -37,5 +37,4 @@ alias dk_debugFunc='{
 	ENABLE_dk_debugFunc=1
 	main
 	
-echo "############################### END DKTEST ###############################"
-) & exec $SHELL )
+DKTEST_END

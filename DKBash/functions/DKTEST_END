@@ -1,2 +1,4 @@
-alias DKTEST_END='echo "############################### END DKTEST ###############################"
-) & exec $SHELL )'
+alias DKTEST_END='    unset DKTEST
+    echo "############################### END DKTEST ###############################"
+}'
+

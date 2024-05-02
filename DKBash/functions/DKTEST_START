@@ -1,1 +1,2 @@
-alias DKTEST_START='[ -n "$DKTEST" ] && ( ('
+alias DKTEST_START='[ "$DKTEST" = "$0" ] && {
+    unset DKTEST'
