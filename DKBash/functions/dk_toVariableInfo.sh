@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 ##################################################################################
 # dk_toVariableInfo(<message-var>)
 #
@@ -38,9 +39,8 @@ dk_toVariableInfo () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
-dk_echo "\n############ Testing dk_toVariableInfo ############\n"
 
 	MY_VAR="this is my variable"
 
@@ -67,8 +67,4 @@ dk_echo "\n############ Testing dk_toVariableInfo ############\n"
 	# test dk_toVariableInfo with no parameters
 	dk_toVariableInfo
 
-dk_echo "\n################### Test done #####################\n"
-
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

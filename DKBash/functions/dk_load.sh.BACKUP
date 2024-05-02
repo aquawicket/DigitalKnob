@@ -1,5 +1,6 @@
-#[ -n "$dk_load" ] && return || readonly dk_load=1     dk_includeGuard
-echo "dk_load.sh"
+#!/bin/sh
+[ -z "$DKINIT" ] && . ./DK.sh
+#[ -n "$dk_load" ] && return || readonly dk_load=1    # dk_includeGuard
 
 ##################################################################################
 # dk_load()

@@ -1,4 +1,7 @@
-dk_includeGuard
+#!/bin/sh
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
+
 
 ##################################################################################
 # dk_toLower(<variable>)

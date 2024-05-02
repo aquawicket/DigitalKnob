@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 [ -z ${ENABLE_dk_verbose-} ] && ENABLE_dk_verbose=1
 [ -z ${TRACE_ON_VERBOSE-} ]  && TRACE_ON_VERBOSE=0
 [ -z ${LINE_ON_VERBOSE-} ]   && LINE_ON_VERBOSE=0
@@ -34,11 +35,9 @@ dk_verbose () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_verbose "test dk_verbose message"
 	dk_info "...next line..."
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

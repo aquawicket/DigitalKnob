@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 [ -z ${ENABLE_dk_fixme-} ] && ENABLE_dk_fixme=1
 [ -z ${TRACE_ON_FIXME-} ]  && TRACE_ON_FIXME=0
 [ -z ${LINE_ON_FIXME-} ]   && LINE_ON_FIXME=0
@@ -32,11 +33,9 @@ dk_fixme () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_fixme "test dk_fixme message"
 	dk_info "...next line..."
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

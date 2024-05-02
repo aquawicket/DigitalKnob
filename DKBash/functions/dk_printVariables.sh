@@ -1,7 +1,7 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
-#[ -z "$BASH_VERSION" ] || shopt -s expand_aliases # work around for bash
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
+
 
 ##################################################################################
 # dk_printVariables()

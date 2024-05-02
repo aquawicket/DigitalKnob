@@ -1,13 +1,14 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
+
 
 ###############################################
-# d_k_print_colors()
+# dk_print_colors()
 #
 #
 #
-dk_printColors() {
+dk_printColors () {
 	dk_debugFunc
 	
 	#dk_color

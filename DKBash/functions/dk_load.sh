@@ -1,4 +1,7 @@
+#!/bin/sh
 [ -n "$inclue_guard_dk_load" ] && return || readonly inclue_guard_dk_load=1
+[ -z "$DKINIT" ] && . ./DK.sh
+
 
 ##################################################################################
 # dk_load()
@@ -63,9 +66,9 @@ dk_load() {
 			[[ $value =~ [Dd][Kk]_[A-Za-z0-9_]* ]]	# BASH REGEX MATCH
 			value=${BASH_REMATCH[0]}				# BASH REGEX VALUE
 			
-			for i in "${!BASH_REMATCH[@]}"; do
-				echo "$i: ${BASH_REMATCH[$i]}"
-			done
+#			for i in "${!BASH_REMATCH[@]}"; do
+#				echo "$i: ${BASH_REMATCH[$i]}"
+#			done
 			
 			#value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			[ -z "$value" ] && continue

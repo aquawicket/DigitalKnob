@@ -1,8 +1,6 @@
 #!/bin/sh
+# [ -z "$DKINIT" ] && . ./DK.sh
 [ -n "$inclue_guard_dk_includeGuard" ] && return || readonly inclue_guard_dk_includeGuard=1
-[ -z "$DKINIT" ] && . ./DK.sh
-#dk_includeGuard
-
 
 
 ##################################################################################
@@ -34,7 +32,7 @@ alias dk_includeGuard='{
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	. ${DKBASH_DIR}/functions/dk_debug.sh
 	. ${DKBASH_DIR}/functions/dk_debug.sh
@@ -42,6 +40,5 @@ DKTEST () {
 	dk_debug "testing dk_includeGuard. loading of dk_debug.sh should have been stopped twice."
 
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+
+} && exec $SHELL

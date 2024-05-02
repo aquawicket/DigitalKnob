@@ -1,4 +1,7 @@
-dk_includeGuard
+#!/bin/sh
+[ -z "$DKINIT" ] && . ./DK.sh
+#dk_includeGuard
+
 
 ##################################################################################
 # DK_TRY_CATCH(<function> <args>)

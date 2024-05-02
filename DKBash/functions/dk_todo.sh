@@ -37,11 +37,10 @@ dk_todo () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_todo "test dk_todo message"
 	dk_info "...next line..."
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+	
+} && exec $SHELL

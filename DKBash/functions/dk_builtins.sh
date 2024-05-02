@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
+
 
 # this overwrites the echo command with our own, and call the built-in.
 # https://unix.stackexchange.com/a/241060
@@ -14,8 +15,9 @@ dk_includeGuard
 
 
 ################################ DKTEST #########################################
-DKTEST () {
-	#. ../functions/dk_builtins.sh
+[ -n "$DKTEST" ] && {
+
+	#. dk_builtins.sh
 	echo "TODO"
-}
-[ -n "$DKTEST" ] && DKTEST
+	
+} && exec $SHELL

@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 [ -z ${ENABLE_dk_warning-} ] && ENABLE_dk_warning=1
 [ -z ${TRACE_ON_WARNING-} ]  && TRACE_ON_WARNING=0
 [ -z ${LINE_ON_WARNING-} ]   && LINE_ON_WARNING=0
@@ -37,11 +38,9 @@ dk_warning () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_warning "test dk_warning message"
 	dk_info "...next line..."
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

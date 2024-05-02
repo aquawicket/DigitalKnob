@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
 
 
 ##################################################################################
@@ -18,7 +18,7 @@ dk_assert() {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 	dk_echo "testing dk_assert . . ."
 
 	myVar="string"
@@ -50,6 +50,4 @@ DKTEST () {
 	dk_assert $noVar
 	dk_assert ${noVar}
 	
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

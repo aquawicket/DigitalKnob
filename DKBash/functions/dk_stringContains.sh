@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 ##################################################################################
 # dk_stringContains(<string> <substring>)
 #
@@ -21,7 +22,8 @@ dk_stringContains () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 
 	if dk_stringContains "1one1" "one"; then
 		echo "1one1 contains one"
@@ -34,6 +36,6 @@ DKTEST () {
 	else
 		echo "2two2 does not contain tow"
 	fi
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+	
+	
+} && exec $SHELL

@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 # https://linuxcommand.org/lc3_man_pages/echoh.html
 
 [ -z ${ESCAPES-} ]    && ESCAPES=1
@@ -24,11 +25,10 @@ dk_echo () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 	echo "This is a normal echo commmand"
 	dk_echo "This is a dk_echo line"
 	dk_echo "${cyan} This is dk_echo with color ${clr}"
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

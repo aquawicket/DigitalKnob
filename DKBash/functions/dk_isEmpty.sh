@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 ##################################################################################
 # dk_isEmpty(directory)
 #
@@ -24,7 +25,8 @@ dk_isEmpty() {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 	echo "PWD = $PWD"
 
 	mkdir empty
@@ -33,6 +35,4 @@ DKTEST () {
 	echo "the current directory is ..."
 	$(dk_isEmpty "$PWD") && echo "Empty" || echo "NOT Empty"
 	
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

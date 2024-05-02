@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
+
 
 ##################################################################################
 # dk_test(<args>)
@@ -13,12 +14,9 @@ dk_test () {
 }
 
 
-
 ################################ DKTEST #########################################
-DKTEST () {
-	dk_test "called from TEST portion of the script"
-	dk_exit
+[ -n "$DKTEST" ] && {
+
+	dk_test "called from TEST portion of the script"	
 	
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 [ -z $ENABLE_dk_debugFunc ] && ENABLE_dk_debugFunc=0
 ##################################################################################
 # dk_debugFunc()
@@ -21,23 +22,20 @@ alias dk_debugFunc='{
 
 
 ################################ DKTEST #########################################
-main () {
-	dk_debugFunc
-	
-	func1 1 "2" '3'
-}
+[ -n "$DKTEST" ] && {
 
-func1 () {
-	dk_debugFunc
-}
-	
-DKTEST () {
+	main () {
+		dk_debugFunc
+		func1 1 "2" '3'
+	}
+
+	func1 () {
+		dk_debugFunc
+	}
+		
+
 	ENABLE_dk_debugFunc=1
-	
-	#clear
-	dk_debugFunc
 	main
 	
-	exec $SHELL	
-}
-[ -n "$DKTEST" ] && DKTEST
+
+} && exec $SHELL

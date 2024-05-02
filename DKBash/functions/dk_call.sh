@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-dk_includeGuard
+#dk_includeGuard
+
 
 ##################################################################################
 # dk_call(<command args>)
@@ -19,7 +20,8 @@ dk_call () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 	dk_call dk_info "test message using dk_call"
-}
-[ -n "$DKTEST" ] && DKTEST
+
+} && exec $SHELL

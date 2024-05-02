@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 dk_load dk_showFileLine
 [ -z ${ENABLE_dk_error-} ] && ENABLE_dk_error=1
 [ -z ${TRACE_ON_ERROR-} ]  && TRACE_ON_ERROR=1
@@ -33,11 +34,9 @@ dk_error () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_error "test dk_error message"
 	dk_info "...next line..."
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

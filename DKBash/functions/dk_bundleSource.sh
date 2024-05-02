@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 ##################################################################################
 # dk_bundleSource(<files_list> <output_file>)
 #
@@ -26,7 +27,8 @@ dk_bundleSource () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 	echo "TODO"
-}
-[ -n "$DKTEST" ] && DKTEST
+	
+} && exec $SHELL

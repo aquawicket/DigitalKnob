@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 ##################################################################################
 # dk_replaceAll("input" "searchValue" "newValue" <output_variable>)
 #
@@ -34,7 +35,9 @@ dk_replaceAll () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
+
 	string_var="AZC AZC Zannana Zread"
 	echo "string before:  $string_var"
 	
@@ -42,6 +45,6 @@ DKTEST () {
 	
 	echo "string after:  $string_var"
 	
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+
+
+} && exec $SHELL

@@ -34,10 +34,9 @@ dk_debug () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
+
 	dk_debug "test dk_debug message"
-	dk_info "...next line..."
+	echo "...next line..."
 	
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+} && exec $SHELL

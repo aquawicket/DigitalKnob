@@ -2,6 +2,7 @@
 [ -z "$DKINIT" ] && . ./DK.sh
 #dk_includeGuard
 
+
 [ -z ${ENABLE_dk_info-} ] && ENABLE_dk_info=1
 [ -z ${TRACE_ON_INFO-} ]  && TRACE_ON_INFO=0
 [ -z ${LINE_ON_INFO-} ]   && LINE_ON_INFO=0
@@ -33,10 +34,9 @@ dk_info () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+[ -n "$DKTEST" ] && {
 
 	dk_info "test dk_info message"
 	echo "...next line..."
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+	
+} && exec $SHELL
