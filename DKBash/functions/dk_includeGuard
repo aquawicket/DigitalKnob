@@ -40,12 +40,13 @@ alias dk_includeGuard='{
 
 
 ################################ DKTEST #########################################
-DKTEST_START
+[ -n "$DKTEST" ] && ( (
 
-	. ${DKBASH_DIR}/functions/dk_debug.sh
-	. ${DKBASH_DIR}/functions/dk_debug.sh
+	. ${DKBASH_DIR}/functions/dk_debug
+	. ${DKBASH_DIR}/functions/dk_debug
 
 	dk_debug "testing dk_includeGuard. loading of dk_debug.sh should have been stopped twice."
 
 
-DKTEST_END
+echo "############################### END DKTEST ###############################"
+) & exec $SHELL )

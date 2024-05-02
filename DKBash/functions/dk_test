@@ -15,8 +15,11 @@ dk_test () {
 
 
 ################################ DKTEST #########################################
+#[ -n "$DKTEST" ] && ( (
 DKTEST_START
 
 	dk_test "called from TEST portion of the script"	
 	
 DKTEST_END
+#echo "############################### END DKTEST ###############################"
+#) & exec $SHELL )

@@ -38,5 +38,5 @@ DKTEST_START
 
 	dk_debug "test dk_debug message"
 	echo "...next line..."
-	
-DKTEST_END
+
+DKTEST_END	

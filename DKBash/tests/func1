@@ -1,24 +1,57 @@
-#!/bin/sh
-this_path="${BASH_SOURCE[0]}"
 
-echo -e "${blue}    > file entry:${clr} ${BASH_SOURCE[0]}"
+
+$echo "    BASH = $BASH"
+
+zero() { 
+	zero=$0
+	zero=${zero//'\'/'\\'}  # replace all \ with \\
+	echo $zero
+}
+$echo "    \$zero = $(zero)"
+
+$echo "\$PPID = $PPID"
+if $(ps -o >/dev/null 2>&1);then  
+	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
+	$echo "    THIS_PATH = $THIS_PATH"
+	PARENT_PATH=$(ps -o args= $PPID | awk '{print $2}')
+	$echo "    PARENT_PATH = $PARENT_PATH"
+else
+	#echo "ps -o NOT AVAILABLE"
+	echo $(ps -p -f $PPID)
+fi
+
+
+
+DKSCRIPT_PATH=$(pwd)/$(basename $0)
+
+THIS_PATH="todo"
+$echo "${blue}    > file entry:${clr} $THIS_PATH"
 
 
 
 func1 () {
-	echo -e "${cyan}        > function entry:${clr} ${FUNCNAME[0]}($*)"
-	echo -e "${cyan}        < function exit:${clr} ${FUNCNAME[0]}($*)"
+	[ -n "$FUNCNAME" ] && DKFUNCNAME="${FUNCNAME[0]}" || DKFUNCNAME="FUNCNAME"
+
+	$echo "${cyan}        > function entry:${clr} $DKFUNCNAME($*)"
+	$echo "${cyan}        < function exit:${clr} $DKFUNCNAME($*)"
 }
 
 
-if [ "${BASH_SOURCE[0]}" = "$0" ]; then
-    echo "    This script is being run."
-    #func1 $*
+if [ -n "$BASH_SOURCE" ]; then
+	SCRIPT_IS_RUN() { [ "${BASH_SOURCE[0]}" = "$0" ]; }
 else
-    echo "    This script is being sourced."
+	SCRIPT_IS_RUN() { [ -n "${PARENT_PATH}" ];	}
+fi
+
+
+if SCRIPT_IS_RUN; then
+	$echo "     This script is being run."
+	func1 $*
+else
+	$echo "     This script is being sourced."
 fi
 
 
 
 
-echo -e "${blue}    < file exit:${clr} ${BASH_SOURCE[0]}"
+$echo "${blue}    < file exit:${clr} $THIS_PATH"

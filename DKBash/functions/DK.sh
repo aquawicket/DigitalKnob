@@ -1,4 +1,4 @@
-#!bin/bash
+#!bin/sh
 
 DK () {
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
@@ -18,7 +18,7 @@ DK () {
 	fi
 
 	###### include guard ######
-	[ -n "$DKINIT" ] && return || readonly DKINIT=1
+	[ -n "$DKINIT" ] && return || export readonly DKINIT=1
 
 
 	###### get DKSCRIPT_ variables  ######
@@ -40,6 +40,7 @@ DK () {
 
 
 	###### Set error trace options ######
+	shopt -s expand_aliases
 	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
 	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
 	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
@@ -55,23 +56,27 @@ DK () {
 	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 	echo "DKBASH_DIR = $DKBASH_DIR"
-	export "PATH=$DKBASH_DIR/functions:$PATH"
+	
 
-	###### aquire if missing ######
-	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && curl -o DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-	
-	
-	alias DKTEST_START='[ -n "$DKTEST" ] && ( ('
-	alias DKTEST_END='
-	echo "############################### END DKTEST ###############################"
-	) & exec $SHELL )'
-	
+	#alias DKTEST_START='[ -n "$DKTEST" ] && ( ('
+	#alias DKTEST_END='
+	#echo "############################### END DKTEST ###############################"
+	#) & exec $SHELL )'
 	
 	###### Script loader ######
-	. ${DKBASH_DIR}/functions/dk_load.sh
-	dk_load dk_escapeSequences && dk_escapeSequences
-	dk_load $DKSCRIPT_PATH
+	if [ -n "$ENABLE_dk_load" ]; then
+		###### aquire if missing ######
+		[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+		[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && curl -o DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+	
+		. ${DKBASH_DIR}/functions/dk_load.sh
+		dk_load dk_escapeSequences && dk_escapeSequences
+		dk_load $DKSCRIPT_PATH
+	else
+		export PATH=${PATH}:${DKBASH_DIR}/functions
+		dk_escapeSequences
+		#echo $PATH
+	fi
 	
 #	dk_load dk_bundleSource
 #	dk_bundleSource $dk_load_list builder_bundle.sh
