@@ -34,9 +34,9 @@ dk_info () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_info "test dk_info message"
 	echo "...next line..."
 	
-} && exec $SHELL
+DKTEST_END

@@ -1,6 +1,7 @@
 #!/bin/sh
-# [ -z "$DKINIT" ] && . ./DK.sh
 [ -n "$inclue_guard_dk_includeGuard" ] && return || readonly inclue_guard_dk_includeGuard=1
+[ -z "$DKINIT" ] && . ./DK.sh
+
 
 
 ##################################################################################
@@ -14,7 +15,14 @@ alias dk_includeGuard='{
 	filename=${filename##*\\}
 	name="${filename%.*}"
 	eval value=\${include_guard_$name}
-	[ -n "$value" ] && echo "already included" && return || readonly include_guard_${name}=1
+	
+	if [ -n "$value" ]; then
+		echo "already included"
+		return 1 2>/dev/null
+		exit 1
+	else	
+		readonly include_guard_${name}=1
+	fi
 	
 	#######################################
 	#if [ -n "$value" ]; then
@@ -32,7 +40,7 @@ alias dk_includeGuard='{
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	. ${DKBASH_DIR}/functions/dk_debug.sh
 	. ${DKBASH_DIR}/functions/dk_debug.sh
@@ -40,5 +48,4 @@ alias dk_includeGuard='{
 	dk_debug "testing dk_includeGuard. loading of dk_debug.sh should have been stopped twice."
 
 
-
-} && exec $SHELL
+DKTEST_END

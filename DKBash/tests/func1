@@ -1,0 +1,24 @@
+#!/bin/sh
+this_path="${BASH_SOURCE[0]}"
+
+echo -e "${blue}    > file entry:${clr} ${BASH_SOURCE[0]}"
+
+
+
+func1 () {
+	echo -e "${cyan}        > function entry:${clr} ${FUNCNAME[0]}($*)"
+	echo -e "${cyan}        < function exit:${clr} ${FUNCNAME[0]}($*)"
+}
+
+
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    echo "    This script is being run."
+    #func1 $*
+else
+    echo "    This script is being sourced."
+fi
+
+
+
+
+echo -e "${blue}    < file exit:${clr} ${BASH_SOURCE[0]}"

@@ -54,8 +54,8 @@ dk_showFileLine() {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_showFileLine "../../README.md" "How to build"
 
-} && exec $SHELL
+DKTEST_END

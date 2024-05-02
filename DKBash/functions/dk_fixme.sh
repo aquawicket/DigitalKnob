@@ -33,9 +33,9 @@ dk_fixme () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_fixme "test dk_fixme message"
 	dk_info "...next line..."
 
-} && exec $SHELL
+DKTEST_END

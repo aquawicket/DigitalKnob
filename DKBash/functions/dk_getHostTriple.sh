@@ -294,9 +294,9 @@ dk_getHostTriple () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_getHostTriple
 	echo "HOST_TRIPLE = $HOST_TRIPLE"
 
-} && exec $SHELL
+DKTEST_END

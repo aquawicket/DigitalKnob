@@ -34,9 +34,9 @@ dk_error () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_error "test dk_error message"
 	dk_info "...next line..."
 
-} && exec $SHELL
+DKTEST_END

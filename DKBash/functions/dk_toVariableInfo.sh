@@ -39,8 +39,7 @@ dk_toVariableInfo () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
-
+DKTEST_START
 
 	MY_VAR="this is my variable"
 
@@ -67,4 +66,4 @@ dk_toVariableInfo () {
 	# test dk_toVariableInfo with no parameters
 	dk_toVariableInfo
 
-} && exec $SHELL
+DKTEST_END

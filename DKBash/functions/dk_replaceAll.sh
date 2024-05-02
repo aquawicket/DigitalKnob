@@ -35,7 +35,7 @@ dk_replaceAll () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 
 	string_var="AZC AZC Zannana Zread"
@@ -46,5 +46,4 @@ dk_replaceAll () {
 	echo "string after:  $string_var"
 	
 
-
-} && exec $SHELL
+DKTEST_END

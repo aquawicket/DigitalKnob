@@ -22,7 +22,7 @@ dk_stringContains () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 
 	if dk_stringContains "1one1" "one"; then
@@ -38,4 +38,4 @@ dk_stringContains () {
 	fi
 	
 	
-} && exec $SHELL
+DKTEST_END

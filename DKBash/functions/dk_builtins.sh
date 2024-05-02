@@ -15,9 +15,9 @@
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	#. dk_builtins.sh
 	echo "TODO"
 	
-} && exec $SHELL
+DKTEST_END

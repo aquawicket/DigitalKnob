@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK.sh
-#dk_includeGuard
+dk_includeGuard
 
 
 [ -z ${ENABLE_dk_debug-} ] && ENABLE_dk_debug=1
@@ -34,9 +34,9 @@ dk_debug () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_debug "test dk_debug message"
 	echo "...next line..."
 	
-} && exec $SHELL
+DKTEST_END

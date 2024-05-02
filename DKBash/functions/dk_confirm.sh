@@ -25,7 +25,7 @@ dk_confirm() {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 	
 	if dk_confirm; then 
 		echo "the confimation has passed"
@@ -33,4 +33,4 @@ dk_confirm() {
 		echo "the confimation has failed"
 	fi
 	
-} && exec $SHELL
+DKTEST_END

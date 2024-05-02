@@ -35,9 +35,9 @@ dk_verbose () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_verbose "test dk_verbose message"
 	dk_info "...next line..."
 
-} && exec $SHELL
+DKTEST_END

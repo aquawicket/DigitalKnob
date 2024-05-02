@@ -31,7 +31,7 @@ dk_realpath() (
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	reelpath() {
 		[ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
@@ -42,4 +42,4 @@ dk_realpath() (
 	echo "RP = $RP"
 
 
-} && exec $SHELL
+DKTEST_END

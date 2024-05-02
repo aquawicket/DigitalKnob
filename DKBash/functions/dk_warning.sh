@@ -38,9 +38,9 @@ dk_warning () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_warning "test dk_warning message"
 	dk_info "...next line..."
 
-} && exec $SHELL
+DKTEST_END

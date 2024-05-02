@@ -18,7 +18,7 @@ dk_assert() {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 	dk_echo "testing dk_assert . . ."
 
 	myVar="string"
@@ -50,4 +50,4 @@ dk_assert() {
 	dk_assert $noVar
 	dk_assert ${noVar}
 	
-} && exec $SHELL
+DKTEST_END

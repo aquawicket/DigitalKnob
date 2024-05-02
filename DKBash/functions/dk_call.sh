@@ -20,8 +20,8 @@ dk_call () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	dk_call dk_info "test message using dk_call"
 
-} && exec $SHELL
+DKTEST_END

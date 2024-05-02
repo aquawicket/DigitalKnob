@@ -27,13 +27,11 @@ dk_hexToDecimal () {
 
 
 ################################ DKTEST #########################################
-DKTEST () {
+DKTEST_START
 
 	dk_hexToDecimal 0x1b decimal
 	dk_debug decimal
 
-	exec $SHELL
-}
-[ -n "$DKTEST" ] && DKTEST
+DKTEST_END
 
 

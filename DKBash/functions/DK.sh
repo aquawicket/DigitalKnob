@@ -61,6 +61,13 @@ DK () {
 	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 	[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && curl -o DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 	
+	
+	alias DKTEST_START='[ -n "$DKTEST" ] && ( ('
+	alias DKTEST_END='
+	echo "############################### END DKTEST ###############################"
+	) & exec $SHELL )'
+	
+	
 	###### Script loader ######
 	. ${DKBASH_DIR}/functions/dk_load.sh
 	dk_load dk_escapeSequences && dk_escapeSequences
@@ -72,8 +79,8 @@ DK () {
 	###### DKTEST MODE ######
 	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
 		echo ""
-		echo "###### DKTEST MODE ###### $(basename ${BASH_SOURCE[2]}) ###### DKTEST MODE ######"
-		export DKTEST=1
+		echo "################# DKTEST $(basename ${BASH_SOURCE[2]}) DKTEST #################"
+		export DKTEST=${BASH_SOURCE[2]}
 	fi
 }
 DK

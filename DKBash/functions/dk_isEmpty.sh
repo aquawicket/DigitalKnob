@@ -25,7 +25,7 @@ dk_isEmpty() {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	echo "PWD = $PWD"
 
@@ -35,4 +35,4 @@ dk_isEmpty() {
 	echo "the current directory is ..."
 	$(dk_isEmpty "$PWD") && echo "Empty" || echo "NOT Empty"
 	
-} && exec $SHELL
+DKTEST_END

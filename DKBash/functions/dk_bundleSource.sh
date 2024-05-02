@@ -27,8 +27,8 @@ dk_bundleSource () {
 
 
 ################################ DKTEST #########################################
-[ -n "$DKTEST" ] && {
+DKTEST_START
 
 	echo "TODO"
 	
-} && exec $SHELL
+DKTEST_END
