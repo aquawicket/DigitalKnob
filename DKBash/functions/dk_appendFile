@@ -1,0 +1,14 @@
+echo "$0 $*"
+#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
+
+##################################################################################
+# dk_appendFile(string, file)
+#
+#
+dk_appendFile() {
+	dk_debugFunc
+	[ -z "$2" ] && dk_error "append_file <string> <file.ext> requires 2 parameters"
+	
+	echo "$1" >> $2
+}

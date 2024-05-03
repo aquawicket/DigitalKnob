@@ -1,0 +1,23 @@
+echo "$0 $*"
+#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
+
+
+##################################################################################
+# dk_convertToCIdentifier(<input> <output>)
+#
+#
+dk_convertToCIdentifier () {
+	dk_debugFunc
+	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	
+	input=$1
+	
+	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
+	dk_replaceAll "$input" "-" "_" input		# POSIX replace
+	dk_replaceAll "$input" "." "_" output		# POSIX replace
+	
+	dk_debug "output = $output"
+	eval "$2=$output"
+	#[ $input = "" ]
+}
