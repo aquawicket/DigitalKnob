@@ -1751,10 +1751,10 @@ dk_cmakeEval () {
 	
 	if [ -n "$variables" ]; then
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
-		if dk_fileExists "$DKCMAKE_DIR"/cmake_vars.sh; then
-	    	dk_info "executing cmake_vars.sh"
-			. "$DKCMAKE_DIR"/cmake_vars.sh
-			#rm $DKCMAKE_DIR/cmake_vars.sh
+		if dk_fileExists "$DKCMAKE_DIR"/cmake_vars; then
+	    	dk_info "executing cmake_vars"
+			. "$DKCMAKE_DIR"/cmake_vars
+			#rm $DKCMAKE_DIR/cmake_vars
 		fi
 	else
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake

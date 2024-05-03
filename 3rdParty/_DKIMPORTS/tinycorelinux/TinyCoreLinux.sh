@@ -4,7 +4,7 @@
 . ../../../DKBash/functions/DK
 
 # to run this script requires privledges
-# > chmod 777 build.sh
+# > chmod 777 build
 
 
 # Install instructions ::
@@ -93,7 +93,7 @@ function download_iso() {
 
 ### main ###
 function main() {
-	echo "TinyCoreLinux.sh"
+	echo "TinyCoreLinux"
 
 	if file_exists ${TINYCORELINUX_IMG}; then
 		launch
