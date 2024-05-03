@@ -1,4 +1,6 @@
-dk_includeGuard
+echo "$0 $*"
+#[ -n "$include_dk_" ] && exit || export readonly include_dk_=1
+[ -z "$DKINIT" ] && . ../../../DKBash/functions/DK.sh #$0
 
 CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip
 CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip

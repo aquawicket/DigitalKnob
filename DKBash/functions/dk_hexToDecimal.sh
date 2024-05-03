@@ -1,6 +1,6 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
-#dk_includeGuard
+echo "$0 $*"
+#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
 
 
 ####################################################################
