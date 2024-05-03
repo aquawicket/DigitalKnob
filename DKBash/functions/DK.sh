@@ -2,7 +2,7 @@ echo "DK()"
 #echo "0 = $0"
 #echo "* = $*"
 #echo "@ = $@"
-[ -n "$DKINIT" ] && return || export readonly DKINIT=1
+[ -n "$DKINIT" ] && return || export readonly DKINIT=0
 
 #DK () {
 	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
