@@ -1,6 +1,6 @@
 echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK.sh #$0
+[ -z "$DKINIT" ] && . ./DK #$0
 
 
 [ -z ${ENABLE_dk_fixme-} ] && ENABLE_dk_fixme=1
