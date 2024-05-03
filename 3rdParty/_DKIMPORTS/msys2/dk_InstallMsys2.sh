@@ -1,5 +1,5 @@
 #!/bin/sh
-. ../../../DKBash/functions/DK.sh
+. ../../../DKBash/functions/DK
 dk_includeGuard
 
 ##################################################################################
