@@ -12,7 +12,7 @@ macro(dk_message msg)
 	#dk_debugFunc(${ARGV})
 	
 	string(REPLACE " " "" var ${msg})
-	dk_call(dk_updateLogInfo)
+	#dk_call(dk_updateLogInfo)
 	if(${var})
 		message(STATUS "${H_black}${STACK_HEADER}${clr} { \"${var}\" : \"${${var}}\" } ")
 	else()

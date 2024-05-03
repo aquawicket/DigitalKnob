@@ -1,7 +1,7 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-dk_validate(HOST dk_getHostTriple)
+dk_validate(HOST "dk_getHostTriple()")
 
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
@@ -19,7 +19,7 @@ if(MSYS2_DL_FILE)
 	dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
 endif()
 if(MSYS2_FOLDER)
-	dk_validate(DK3RDPARTY_DIR dk_getDKPaths)
+	dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")
 	dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 endif()
 dk_debug(MSYS2_DL_FILE)
@@ -27,7 +27,7 @@ dk_debug(MSYS2_FOLDER)
 dk_debug(MSYS2)
 
 
-find_program(CMD_EXE cmd.exe)
+dk_findProgram(CMD_EXE cmd.exe)
 if(CMD_EXE)
 	dk_set(MSYS2_GENERATOR		"MinGW Makefiles")	# if in cmd
 else()
@@ -46,8 +46,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")
 	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NOERROR)
 
-	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
-	dk_debug(BASH_EXE)
+	
 	dk_findProgram(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
 	dk_debug(CYGPATH_EXE)
 	dk_findProgram(PACMAN_EXE pacman "${MSYS2}/usr/bin")

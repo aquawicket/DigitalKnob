@@ -10,6 +10,6 @@ dk_InstallVSCode () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 
-	dk_cmakeEval "include('$DKIMPORTS_DIR/vscode/DKMAKE.cmake')" "VSCODE_EXE"
+	dk_cmakeEval "include('${DKIMPORTS_DIR}/vscode/DKMAKE.cmake')" "VSCODE_EXE"
 	dk_debug VSCODE_EXE
 }

@@ -34,9 +34,7 @@ include_guard()
 ###############################################################
 ## Set variables for paths
 ###############################################################
-if(NOT DIGITALKNOB_DIR)
-	dk_getDKPaths()
-endif()
+dk_validate( DIGITALKNOB_DIR  "dk_getDKPaths()" )
 
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
 dk_debug(CURRENT_DIR)
@@ -69,6 +67,11 @@ if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	dk_set(MINGW ON)
 endif()
 dk_debug(MINGW)
+
+if(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
+	dk_set(MSYS ON)
+endif()
+dk_debug(MSYS)
 
 if(CMAKE_GENERATOR STREQUAL "Xcode")
 	dk_set(XCODE ON)
