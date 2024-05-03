@@ -26,13 +26,12 @@ dk_debug(MSYS2_DL_FILE)
 dk_debug(MSYS2_FOLDER)
 dk_debug(MSYS2)
 
-find_program(BASH_EXE bash)
-if(BASH_EXE)	
-	dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")	# if in Shell
-endif()
+
 find_program(CMD_EXE cmd.exe)
 if(CMD_EXE)
 	dk_set(MSYS2_GENERATOR		"MinGW Makefiles")	# if in cmd
+else()
+	dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")	# if in Shell
 endif()
 
 
