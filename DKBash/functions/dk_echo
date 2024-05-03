@@ -1,20 +1,21 @@
-echo "$0 $*"
+##echo "$0 $*"
 #[ -n "$include_dk_echo" ] && exit || export readonly include_dk_echo=1
-[ -z "$DKINIT" ] && . ./DK #$0
-#dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK
 
 
-# https://linuxcommand.org/lc3_man_pages/echoh.html
-
-[ -z ${ESCAPES-} ]    && ESCAPES=1
-[ -z ${NO_NEWLINE-} ] && NO_NEWLINE=0
-[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && escapes="-e "
-[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && nonewline="-n "
 ##################################################################################
 # dk_echo(<message>)
 #
 #
 dk_echo () {
+
+	# https://linuxcommand.org/lc3_man_pages/echoh.html
+
+	[ -z ${ESCAPES-} ]      && export ESCAPES=1
+	[ -z ${NO_NEWLINE-} ]   && export NO_NEWLINE=0
+	[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
+	[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
+
 	#dk_debugFunc
 
 	echo ${escapes}${nonewline}"$1"
@@ -25,8 +26,10 @@ dk_echo () {
 
 
 
-. DKTEST ########################################################################
+DKTEST() { ########################################################################
 
-	echo "This is a normal echo commmand"
-	dk_echo "This is a dk_echo line"
-	dk_echo "${cyan} This is dk_echo with color ${clr}"
+echo "This is a normal echo commmand"
+dk_echo "This is a dk_echo line"
+dk_echo "${cyan} This is dk_echo with color ${clr}"
+
+}

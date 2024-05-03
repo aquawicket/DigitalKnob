@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -293,10 +293,10 @@ dk_getHostTriple () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getHostTriple
 	echo "HOST_TRIPLE = $HOST_TRIPLE"
 
-DKTEST_END
+
+}

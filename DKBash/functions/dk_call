@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -19,9 +19,8 @@ dk_call () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_call dk_info "test message using dk_call"
 
-DKTEST_END
+}

@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -65,7 +65,7 @@ dk_resetAll () {
 		
 		dk_gitUpdate NO_CONFIRM
 		
-		# wait for build.sh to show up
+		# wait for build to show up
 		sleep 2
 		
 		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
@@ -73,7 +73,7 @@ dk_resetAll () {
 			exec "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 			dk_exit
 		else
-			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
+			dk_error "Oh no, the git cloned build still isn't here! :( "
 		fi
 	fi
 }

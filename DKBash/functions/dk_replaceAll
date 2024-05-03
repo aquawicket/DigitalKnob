@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -34,8 +34,7 @@ dk_replaceAll () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 
 	string_var="AZC AZC Zannana Zread"
@@ -45,5 +44,4 @@ DKTEST_START
 	
 	echo "string after:  $string_var"
 	
-
-DKTEST_END
+}

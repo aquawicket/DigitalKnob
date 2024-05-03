@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -32,9 +32,9 @@ dk_cmakeEval () {
 	
 	### get the return variables
 	if [ -n "$DKRETURN" ]; then 
-		if dk_fileExists "$DKCMAKE_DIR"/cmake_vars.sh; then
-			. "$DKCMAKE_DIR"/cmake_vars.sh
-			rm $DKCMAKE_DIR/cmake_vars.sh
+		if dk_fileExists "$DKCMAKE_DIR"/cmake_vars; then
+			. "$DKCMAKE_DIR"/cmake_vars
+			rm $DKCMAKE_DIR/cmake_vars
 		fi
 	fi
 

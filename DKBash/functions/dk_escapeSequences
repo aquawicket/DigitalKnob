@@ -1,5 +1,6 @@
-[ -n "$include_dk_escapeSequences" ] && return || export readonly include_dk_escapeSequences=1
-[ -z "$DKINIT" ] && . ./DK #$0
+#echo "$0($*)"
+#[ -n "$include_dk_escapeSequences" ] && return || export readonly include_dk_escapeSequences=1
+[ -z "$DKINIT" ] && . ./DK
 #dk_includeGuard
 
 
@@ -225,3 +226,6 @@ ASCII_SHOW () {
 	# Associative array
 	#echo "${ASCII[$1,DEC]}	${ASCII[$1,SYMBOL]}	${ASCII[$1,DEC]}	${ASCII[$1,OCT]}	${ASCII[$1,HEX]}	${ASCII[$1,HTML]}	${ASCII[$1,INFO]}"
 }
+
+
+dk_escapeSequences

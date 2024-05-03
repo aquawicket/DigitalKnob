@@ -1,6 +1,6 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
-#dk_includeGuard
+#echo "$0 $*"
+#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -24,8 +24,8 @@ dk_confirm() {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	if dk_confirm; then 
 		echo "the confimation has passed"
@@ -33,4 +33,4 @@ DKTEST_START
 		echo "the confimation has failed"
 	fi
 	
-DKTEST_END
+}

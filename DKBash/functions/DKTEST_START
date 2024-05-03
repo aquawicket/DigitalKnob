@@ -1,7 +1,0 @@
-echo "DKTEST_START($*)"
-echo "0 = $0"
-echo "* = $*"
-echo "@ = $@"
-exit
-. DKTEST
-exit

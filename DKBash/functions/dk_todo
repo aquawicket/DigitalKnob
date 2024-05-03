@@ -1,13 +1,13 @@
-echo "$0 $*"
+##echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
-[ -z ${ENABLE_dk_todo-} ] && ENABLE_dk_todo=1
-[ -z ${TRACE_ON_TODO-} ]  && TRACE_ON_TODO=0
-[ -z ${LINE_ON_TODO-} ]   && LINE_ON_TODO=0
-[ -z ${PAUSE_ON_TODO-} ]  && PAUSE_ON_TODO=0
-[ -z ${HALT_ON_TODO-} ]   && HALT_ON_TODO=0
+[ -z ${ENABLE_dk_todo-} ] && export ENABLE_dk_todo=1
+[ -z ${TRACE_ON_TODO-} ]  && export TRACE_ON_TODO=0
+[ -z ${LINE_ON_TODO-} ]   && export LINE_ON_TODO=0
+[ -z ${PAUSE_ON_TODO-} ]  && export PAUSE_ON_TODO=0
+[ -z ${HALT_ON_TODO-} ]   && export HALT_ON_TODO=0
 #TODO_TAG="  TODO: "
 ##################################################################################
 # dk_todo(<message>)
@@ -36,11 +36,9 @@ dk_todo () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_todo "test dk_todo message"
 	dk_info "...next line..."
 
-	
-DKTEST_END
+}

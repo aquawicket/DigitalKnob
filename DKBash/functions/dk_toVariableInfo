@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+[ -z "$DKINIT" ] && . ./DK
 #dk_includeGuard
 
 
@@ -38,8 +38,7 @@ dk_toVariableInfo () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	MY_VAR="this is my variable"
 
@@ -66,4 +65,4 @@ DKTEST_START
 	# test dk_toVariableInfo with no parameters
 	dk_toVariableInfo
 
-DKTEST_END
+}

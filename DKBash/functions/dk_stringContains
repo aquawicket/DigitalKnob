@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -21,8 +21,7 @@ dk_stringContains () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 
 	if dk_stringContains "1one1" "one"; then
@@ -37,5 +36,4 @@ DKTEST_START
 		echo "2two2 does not contain tow"
 	fi
 	
-	
-DKTEST_END
+}

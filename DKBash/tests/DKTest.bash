@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###### Load Function files ######
-. ../functions/DK.sh
+. ../functions/DK
 
 
 dk_echo "TEST"

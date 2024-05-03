@@ -1,5 +1,4 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+[ -z "$DKINIT" ] && . ./DK
 #dk_includeGuard
 
 
@@ -21,8 +20,7 @@ alias dk_debugFunc='{
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	main () {
 		dk_debugFunc
@@ -36,5 +34,4 @@ DKTEST_START
 
 	ENABLE_dk_debugFunc=1
 	main
-	
-DKTEST_END
+}

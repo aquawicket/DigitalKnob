@@ -1,13 +1,13 @@
-echo "$0 $*"
+##echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
-[ -z ${ENABLE_dk_info-} ] && ENABLE_dk_info=1
-[ -z ${TRACE_ON_INFO-} ]  && TRACE_ON_INFO=0
-[ -z ${LINE_ON_INFO-} ]   && LINE_ON_INFO=0
-[ -z ${PAUSE_ON_INFO-} ]  && PAUSE_ON_INFO=0
-[ -z ${HALT_ON_INFO-} ]   && HALT_ON_INFO=0
+[ -z ${ENABLE_dk_info-} ] && export ENABLE_dk_info=1
+[ -z ${TRACE_ON_INFO-} ]  && export TRACE_ON_INFO=0
+[ -z ${LINE_ON_INFO-} ]   && export LINE_ON_INFO=0
+[ -z ${PAUSE_ON_INFO-} ]  && export PAUSE_ON_INFO=0
+[ -z ${HALT_ON_INFO-} ]   && export HALT_ON_INFO=0
 #INFO_TAG="  INFO: "
 ##################################################################################
 # dk_info(<message>)
@@ -19,7 +19,7 @@ echo "$0 $*"
 dk_info () {
 	#dk_debugFunc
 	
-	[ $ENABLE_dk_debug -ne 1 ] && return
+	[ "$ENABLE_dk_info" -ne "1" ] && return
 	msg="$1"
 	#dk_toVariableInfo msg
 	
@@ -33,10 +33,9 @@ dk_info () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_info "test dk_info message"
 	echo "...next line..."
 	
-DKTEST_END
+}

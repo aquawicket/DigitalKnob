@@ -1,12 +1,15 @@
 #!/bin/sh
-#. ./DK.sh
-dk_includeGuard
+
+echo "$0($*)"
+#. ./DK
+#dk_includeGuard
 
 ##################################################################################
 # dk_buildMain()
 #
 #
 dk_buildMain () {
+	echo "dk_buildMain ()"
 	dk_debugFunc
 
 	# log to stdout and file

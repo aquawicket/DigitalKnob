@@ -1,11 +1,11 @@
-echo "DK()"
+echo "DK($*)"
 #echo "0 = $0"
 #echo "* = $*"
 #echo "@ = $@"
-[ -n "$DKINIT" ] && return || export readonly DKINIT=0
 
-#DK () {
-	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
+
+
+	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=0
 	#echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 	#echo "BASH_SOURCE = ${BASH_SOURCE[@]}"
 	#echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
@@ -14,19 +14,19 @@ echo "DK()"
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
 	###### Reload Main Script with bash ######
-#	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
-#		export RELOAD_WITH_BASH=0
-#		if [ -n "$(command -v bash)" ]; then
-#			echo "reloading with /bin/bash . . ."
-#			exec /bin/bash "$0"
-#		else
-#			echo ""
-#			echo "ERROR: This script requires bash. Please install it and try again.";
-#			read -rp 'Press enter to exit...' key;
-#			exit 1
-#		fi
-#	fi
-
+	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
+		export RELOAD_WITH_BASH=0
+		if [ -n "$(command -v bash)" ]; then
+			echo "reloading with /bin/bash . . ."
+			exec /bin/bash "$0"
+		else
+			echo ""
+			echo "ERROR: This script requires bash. Please install it and try again.";
+			read -rp 'Press enter to exit...' key;
+			exit 1
+		fi
+	fi
+	[ -n "$DKINIT" ] && return || export readonly DKINIT=1
 	
 #	if $(ps -o >/dev/null 2>&1);then  
 #		THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
@@ -75,27 +75,30 @@ echo "DK()"
 	echo "DKBASH_DIR = $DKBASH_DIR"
 	
 	
-	###### Script loader ######
-	if [ -n "$ENABLE_dk_load" ]; then
-		###### aquire if missing ######
-		[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-		[ ! -e ${DKBASH_DIR}/functions/dk_load.sh ] && curl -o DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 	
-		. ${DKBASH_DIR}/functions/dk_load.sh
+	
+	###### Script loader ######
+	#if [ -n "$ENABLE_dk_load" ]; then
+		###### aquire if missing ######
+		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
+		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && curl -o DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
+	
+		. ${DKBASH_DIR}/functions/dk_load
 		dk_load dk_escapeSequences && dk_escapeSequences
 		dk_load $DKSCRIPT_PATH
-	else
-		export PATH=${PATH}:${DKBASH_DIR}/functions
-		dk_escapeSequences
-		#echo $PATH
-	fi
+	#else	
+	#	dk_escapeSequences
+	#fi
+	export PATH=${PATH}:${DKBASH_DIR}/functions
+
 	
 #	dk_load dk_bundleSource
 #	dk_bundleSource $dk_load_list builder_bundle.sh
 
-	###### DKTEST MODE ######
-	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
-		[ "${ENABLE_DKTEST}" = "1" ] && export DKTEST=${BASH_SOURCE[1]} || echo "DISABLE_DKTEST"
-	fi
-#}
-#DK
+#	###### DKTEST MODE ######
+#	echo "$DKBASH_DIR/functions  $DKSCRIPT_DIR"
+#	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
+#		[ "${ENABLE_DKTEST}" = "1" ] && export DKTEST=${BASH_SOURCE[1]} || echo "DISABLE_DKTEST"
+#	fi
+#	
+#	#echo "DK($*)"

@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 [ -z ${ENABLE_dk_verbose-} ] && ENABLE_dk_verbose=1
@@ -34,10 +34,9 @@ dk_verbose () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_verbose "test dk_verbose message"
 	dk_info "...next line..."
 
-DKTEST_END
+}

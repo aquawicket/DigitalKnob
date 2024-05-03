@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 #echo "$0($*)"
 
 
@@ -13,8 +14,8 @@
 
 
 ###### generated global variables ######
-dk_debug DKSCRIPT_PATH
-dk_debug DKBASH_DIR
+echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+echo "DKBASH_DIR = ${DKBASH_DIR}"
 
 
 ###### Load Main Program ######

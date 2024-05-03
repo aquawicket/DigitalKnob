@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+[ -z "$DKINIT" ] && . ./DK
 #[ -n "$dk_load" ] && return || readonly dk_load=1    # dk_includeGuard
 
 ##################################################################################
@@ -19,7 +19,7 @@ dk_load() {
 	    fn="${fn%.*}"
 	else
 		fn=$1
-		fpath=${DKBASH_DIR}/functions/${fn}.sh
+		fpath=${DKBASH_DIR}/functions/${fn}
 	fi
 	
 	# Convert to unix line endings if CRLF found

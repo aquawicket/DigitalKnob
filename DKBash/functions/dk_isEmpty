@@ -1,6 +1,6 @@
-echo "$0 $*"
+#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -24,8 +24,7 @@ dk_isEmpty() {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "PWD = $PWD"
 
@@ -34,5 +33,5 @@ DKTEST_START
     $(dk_isEmpty "$PWD/empty") && echo "Empty" || echo "NOT Empty"
 	echo "the current directory is ..."
 	$(dk_isEmpty "$PWD") && echo "Empty" || echo "NOT Empty"
-	
-DKTEST_END
+
+}

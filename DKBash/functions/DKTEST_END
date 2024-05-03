@@ -1,7 +1,0 @@
-export DKTEST_END="DKTEST"
-#export alias DKTEST_END='DKTEST'
-#export alias DKTEST_END=')'
-
-
-# & exec $SHELL )'
-

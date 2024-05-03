@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "$inclue_guard_dk_load" ] && return || readonly inclue_guard_dk_load=1
-[ -z "$DKINIT" ] && . ./DK.sh
+[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -19,12 +19,12 @@ dk_load() {
 	    fn="${fn%.*}"
 	else
 		fn=$1
-		fpath=${DKBASH_DIR}/functions/$fn.sh
+		fpath=${DKBASH_DIR}/functions/$fn
 	fi
 	
 	#### downloader ####
-	[ ! -e $fpath ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	[ ! -e $fpath ] && curl -o ${DKBASH_DIR}/functions/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
+	[ ! -e $fpath ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
+	[ ! -e $fpath ] && curl -o ${DKBASH_DIR}/functions/${fn} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
 	
 	# Convert to unix line endings if CRLF found
 	#if [ -e $fpath]; then

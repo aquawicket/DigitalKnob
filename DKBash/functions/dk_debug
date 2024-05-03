@@ -1,15 +1,7 @@
-echo "$0 $*"
+##echo "$0 $*"
 #[ -n "$include_dk_debug" ] && exit || export readonly include_dk_debug=1
-[ -z "$DKINIT" ] && . ./DK #$0
-#dk_includeGuard
+[ -z "$DKINIT" ] && . ./DK
 
-
-[ -z ${ENABLE_dk_debug-} ] && ENABLE_dk_debug=1
-[ -z ${TRACE_ON_DEBUG-} ]  && TRACE_ON_DEBUG=0
-[ -z ${LINE_ON_DEBUG-} ]   && LINE_ON_DEBUG=0
-[ -z ${PAUSE_ON_DEBUG-} ]  && PAUSE_ON_DEBUG=0
-[ -z ${HALT_ON_DEBUG-} ]   && HALT_ON_DEBUG=0
-#DEBUG_TAG="  DEBUG: "
 ##################################################################################
 # dk_debug(<message>)
 #
@@ -18,6 +10,14 @@ echo "$0 $*"
 #	@msg	- The message to print
 #
 dk_debug () {
+
+	[ -z ${ENABLE_dk_debug-} ] && export ENABLE_dk_debug=1
+	[ -z ${TRACE_ON_DEBUG-} ]  && export TRACE_ON_DEBUG=0
+	[ -z ${LINE_ON_DEBUG-} ]   && export LINE_ON_DEBUG=0
+	[ -z ${PAUSE_ON_DEBUG-} ]  && export PAUSE_ON_DEBUG=0
+	[ -z ${HALT_ON_DEBUG-} ]   && export HALT_ON_DEBUG=0
+	#DEBUG_TAG="  DEBUG: "
+
 	#dk_debugFunc
 	[ $ENABLE_dk_debug -ne 1 ] && return
 	msg="$1"
@@ -33,9 +33,10 @@ dk_debug () {
 
 
 
-. DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_echo "test dk_echo message"
 	dk_debug "test dk_debug message"
 	echo "...next line..."
 	
+}

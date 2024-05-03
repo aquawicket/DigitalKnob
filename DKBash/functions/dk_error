@@ -1,15 +1,7 @@
-echo "$0 $*"
+##echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK #$0
+[ -z "$DKINIT" ] && . ./DK
 
-
-dk_load dk_showFileLine
-[ -z ${ENABLE_dk_error-} ] && ENABLE_dk_error=1
-[ -z ${TRACE_ON_ERROR-} ]  && TRACE_ON_ERROR=1
-[ -z ${LINE_ON_ERROR-} ]   && LINE_ON_ERROR=1
-[ -z ${PAUSE_ON_ERROR-} ]  && PAUSE_ON_ERROR=1
-[ -z ${HALT_ON_ERROR-} ]   && HALT_ON_ERROR=1
-#ERROR_TAG="ERROR: "
 ##################################################################################
 # dk_error(<message>)
 #
@@ -18,6 +10,14 @@ dk_load dk_showFileLine
 #	@msg	- The message to print
 #
 dk_error () {
+	dk_load dk_showFileLine
+	[ -z ${ENABLE_dk_error-} ] && export ENABLE_dk_error=1
+	[ -z ${TRACE_ON_ERROR-} ]  && export TRACE_ON_ERROR=1
+	[ -z ${LINE_ON_ERROR-} ]   && export LINE_ON_ERROR=1
+	[ -z ${PAUSE_ON_ERROR-} ]  && export PAUSE_ON_ERROR=1
+	[ -z ${HALT_ON_ERROR-} ]   && export HALT_ON_ERROR=1
+	#ERROR_TAG="ERROR: "
+
 	dk_debugFunc
 	
 	[ $ENABLE_dk_error -ne 1 ] && return
@@ -33,10 +33,9 @@ dk_error () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_error "test dk_error message"
-	dk_info "...next line..."
+dk_error "test dk_error message"
+dk_info "...next line..."
 
-DKTEST_END
+}

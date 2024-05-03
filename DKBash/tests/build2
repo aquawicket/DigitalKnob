@@ -4,7 +4,7 @@
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
 
 ###### Load DK Function files (DKINIT) ######
-. ../functions/DK.sh
+. ../functions/DK
 
 
 ###### test <...> ######
