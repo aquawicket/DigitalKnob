@@ -21,32 +21,6 @@ QEMU="/usr/bin"
 QEMU_MEMORY="1G"
 QEMU_DRIVE_SIZE="10G"
 
-### wait_for_key ###
-function wait_for_key() {
-	read -n 1 -s -r -p "Press any key to continue"
-	echo ""
-}
-
-### file_exists <file> ###
-function file_exists() {
-	if [ -z "$1" ]; then
-		error "file_exists <file> requires 1 parameter"
-		return $false
-	fi
-	
-	[ -e $1 ]
-}
-
-### download file()
-function download() {
-	echo Downloading $1 to $2
-	if file_exists "$2"; then
-		echo "$2 already exist"
-	else
-		echo "please wait . . ."
-		wget $1 $2
-	fi
-}
 
 # Launching the VM (after install)
 function launch() {
@@ -102,4 +76,4 @@ function main() {
 	fi
 }
 main
-wait_for_key		
+dk_pause	
