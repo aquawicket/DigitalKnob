@@ -1,5 +1,5 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+[ -n "$include_dk_escapeSequences" ] && return || export readonly include_dk_escapeSequences=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
 #dk_includeGuard
 
 
@@ -11,7 +11,7 @@
 #
 #
 dk_escapeSequences () {
-	dk_debugFunc
+	#dk_debugFunc
 	
 
 #	# ASCII control characters (character code 0-31)

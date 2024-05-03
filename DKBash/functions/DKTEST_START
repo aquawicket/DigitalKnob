@@ -1,2 +1,7 @@
-alias DKTEST_START='[ "$DKTEST" = "$0" ] && {
-    unset DKTEST'
+echo "DKTEST_START($*)"
+echo "0 = $0"
+echo "* = $*"
+echo "@ = $@"
+exit
+. DKTEST
+exit

@@ -1,5 +1,6 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+echo "$0 $*"
+#[ -n "$include_dk_debug" ] && exit || export readonly include_dk_debug=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
 #dk_includeGuard
 
 
@@ -18,10 +19,9 @@
 #
 dk_debug () {
 	#dk_debugFunc
-	
 	[ $ENABLE_dk_debug -ne 1 ] && return
 	msg="$1"
-	dk_toVariableInfo msg
+	#dk_toVariableInfo msg
 	
 	dk_echo "${blue}${DEBUG_TAG}${msg}${clr}"
 	[ $TRACE_ON_DEBUG -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
@@ -33,12 +33,9 @@ dk_debug () {
 
 
 
-################################ DKTEST #########################################
-echo "DKTEST = $DKTEST"
-echo "     0 = $0"
-DKTEST_START
+. DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
+	dk_echo "test dk_echo message"
 	dk_debug "test dk_debug message"
 	echo "...next line..."
-
-DKTEST_END	
+	

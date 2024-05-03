@@ -1,5 +1,6 @@
-#!/bin/sh
-[ -z "$DKINIT" ] && . ./DK.sh
+echo "$0 $*"
+#[ -n "$include_dk_echo" ] && exit || export readonly include_dk_echo=1
+[ -z "$DKINIT" ] && . ./DK.sh #$0
 #dk_includeGuard
 
 
@@ -24,11 +25,8 @@ dk_echo () {
 
 
 
-################################ DKTEST #########################################
-DKTEST_START
+. DKTEST ########################################################################
 
 	echo "This is a normal echo commmand"
 	dk_echo "This is a dk_echo line"
 	dk_echo "${cyan} This is dk_echo with color ${clr}"
-
-DKTEST_END
