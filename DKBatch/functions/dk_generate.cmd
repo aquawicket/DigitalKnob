@@ -21,13 +21,13 @@ call DK
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    call dk_debug TARGET_PATH
+    call dk_printVar TARGET_PATH
     call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%
-    call dk_debug CMAKE_SOURCE_DIR
+    call dk_printVar CMAKE_SOURCE_DIR
     call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-    call dk_debug CMAKE_TARGET_PATH
+    call dk_printVar CMAKE_TARGET_PATH
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -47,7 +47,7 @@ call DK
     ::if %TARGET_OS%==emscripten call dk_appendCmakeArgs -DEMSCRIPTEN=ON
         
     set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
-    call dk_debug CMAKE_BINARY_DIR
+    call dk_printVar CMAKE_BINARY_DIR
         
     call dk_appendCmakeArgs -S=%CMAKE_SOURCE_DIR%
     call dk_appendCmakeArgs -B=%CMAKE_BINARY_DIR%

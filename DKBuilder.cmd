@@ -13,8 +13,8 @@ call "DKBatch/functions/DK.cmd"
 
 
 ::###### Global variables ######
-call dk_debug DKSCRIPT_PATH
-call dk_debug DKBATCH_DIR
+call dk_printVar DKSCRIPT_PATH
+call dk_printVar DKBATCH_DIR
 
 
 ::###### Load Main Program ######

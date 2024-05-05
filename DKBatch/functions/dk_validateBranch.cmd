@@ -18,7 +18,7 @@ call dk_includeGuard
         )
     )
 
-    call dk_debug DKBRANCH
+    call dk_printVar DKBRANCH
 	
     if "%DIGITALKNOB_DIR%"==""  call dk_getDKPaths
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"

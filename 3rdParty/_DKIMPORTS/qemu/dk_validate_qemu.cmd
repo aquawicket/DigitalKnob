@@ -10,5 +10,5 @@ call dk_includeGuard
 	call dk_getDKPaths
 	call dk_validateBranch
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/qemu/DKMAKE.cmake')" "QEMU_EXE"
-	call dk_debug QEMU_EXE
+	call dk_printVar QEMU_EXE
 goto:eof

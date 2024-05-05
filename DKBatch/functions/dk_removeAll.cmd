@@ -25,8 +25,8 @@ call dk_includeGuard
     if not "%DKSCRIPT_DIR%" == "%DKBRANCH_DIR%" (
         echo WARNING: this file isn't running from the branch directory
         echo Is must be in the branch directory to continue.
-        call dk_debug DKSCRIPT_DIR
-        call dk_debug DKBRANCH_DIR
+        call dk_printVar DKSCRIPT_DIR
+        call dk_printVar DKBRANCH_DIR
         goto:eof
     )
     

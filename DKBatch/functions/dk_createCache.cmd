@@ -8,10 +8,10 @@ call dk_includeGuard
 	call dk_debugFunc
 	
     echo creating cache...
-    ::call dk_debug APP
-    ::call dk_debug TARGET_OS
-    ::call dk_debug TYPE
-    ::call dk_debug LEVEL
+    ::call dk_printVar APP
+    ::call dk_printVar TARGET_OS
+    ::call dk_printVar TYPE
+    ::call dk_printVar LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
     echo %APP%>"%DKBRANCH_DIR%\cache"

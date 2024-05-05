@@ -22,10 +22,10 @@ call DK
     if exist "%DKIMPORTS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKIMPORTS_DIR%\%input%"
     if exist "%DKPLUGINS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPLUGINS_DIR%\%input%"
     if exist "%DKAPPS_DIR%\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKAPPS_DIR%\%input%"
-    ::call dk_debug TARGET_PATH
+    ::call dk_printVar TARGET_PATH
     
     call dk_getParentFolder %TARGET_PATH% parent
-    ::call dk_debug parent
+    ::call dk_printVar parent
     
     if %parent%==DKApps goto:eof
     call dk_makeDirectory  %DKAPPS_DIR%\%APP%

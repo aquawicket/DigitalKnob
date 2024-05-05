@@ -10,7 +10,7 @@ call dk_includeGuard
 	
 	setlocal EnableDelayedExpansion
     set "_input=%1"
-	::call dk_debug _input
+	::call dk_printVar _input
 	
     set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     set "_LCASE=abcdefghijklmnopqrstuvwxyz"
@@ -21,7 +21,7 @@ call dk_includeGuard
         call set "_input=%%_input:!_FROM!=!_TO!%%
 		call set "_output=!_input!"
     )
-    ::call dk_debug _output
+    ::call dk_printVar _output
 	
 	endlocal & set "%2=%_output%"	
 goto:eof

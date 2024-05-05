@@ -65,7 +65,7 @@ call DK
 ::        ::del %EVAL_VARS%
 ::    goto:eof
 
-    ::call dk_debug ERRORLEVEL
+    ::call dk_printVar ERRORLEVEL
 
     :::: work with cmake return code files ::::
     :: std::out

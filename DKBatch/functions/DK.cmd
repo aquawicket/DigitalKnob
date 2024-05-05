@@ -18,21 +18,21 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	
 	call dk_getCaller 1
 	:dk_getCaller_return1
-	::call dk_debug caller[0]
-	::call dk_debug caller[0].fullpath
-	::call dk_debug caller[0].directory
-	::call dk_debug caller[0].type
-	::call dk_debug caller[0].filename
-	::call dk_debug caller[0].func
-	::call dk_debug caller[0].args
+	::call dk_printVar caller[0]
+	::call dk_printVar caller[0].fullpath
+	::call dk_printVar caller[0].directory
+	::call dk_printVar caller[0].type
+	::call dk_printVar caller[0].filename
+	::call dk_printVar caller[0].func
+	::call dk_printVar caller[0].args
 	
-	::call dk_debug caller[1]
-	::call dk_debug caller[1].fullpath
-	::call dk_debug caller[1].directory
-	::call dk_debug caller[1].type
-	::call dk_debug caller[1].filename
-	::call dk_debug caller[1].func
-	::call dk_debug caller[1].args
+	::call dk_printVar caller[1]
+	::call dk_printVar caller[1].fullpath
+	::call dk_printVar caller[1].directory
+	::call dk_printVar caller[1].type
+	::call dk_printVar caller[1].filename
+	::call dk_printVar caller[1].func
+	::call dk_printVar caller[1].args
 	
 	set "DKSCRIPT_PATH=%caller[1].fullpath%"
 ::<:dk_getScriptPath_return <nul call dk_getScriptPath DKSCRIPT_PATH   :: same as below in 1 line
@@ -42,11 +42,11 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	call dk_escapeSequences
-	call dk_debug DKBATCH_DIR
-	call dk_debug DKSCRIPT_PATH
-	call dk_debug DKBATCH_DIR
-	call dk_debug DKSCRIPT_DIR
-	call dk_debug DKSCRIPT_NAME
+	call dk_printVar DKBATCH_DIR
+	call dk_printVar DKSCRIPT_PATH
+	call dk_printVar DKBATCH_DIR
+	call dk_printVar DKSCRIPT_DIR
+	call dk_printVar DKSCRIPT_NAME
 	
 	
 	::call dk_exception init

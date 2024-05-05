@@ -24,8 +24,6 @@ if "%HALT_ON_VERBOSE%"==""   set HALT_ON_VERBOSE=0
 	:: if msg starts and ends with quotes, remove the first and last
 	if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
 	
-	::call dk_toVariableInfo msg
-	
 	call dk_echo %cyan%%TAG%%msg%%clr%
 	if "%TRACE_ON_VERBOSE%"=="1" call dk_stacktrace 		
 	if "%HALT_ON_VERBOSE%"=="1"  call dk_exit

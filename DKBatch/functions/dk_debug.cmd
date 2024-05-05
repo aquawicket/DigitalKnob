@@ -24,8 +24,6 @@ if "%HALT_ON_DEBUG%"==""   set HALT_ON_DEBUG=0
 		set "msg=%*"
 		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"    &:: if msg starts and ends with quotes, remove them
 		
-		call dk_toVariableInfo msg
-		
 		call dk_echo %blue%%DEBUG_TAG%%msg%%clr%
 		if "%TRACE_ON_DEBUG%"=="1" call dk_echo %blue%*** TRACE_ON_DEBUG ***%clr%  & call dk_stacktrace
 		if "%HALT_ON_DEBUG%"=="1"  call dk_echo %blue%*** HALT_ON_DEBUG ***%clr%   & call dk_exit

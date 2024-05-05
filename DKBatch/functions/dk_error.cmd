@@ -25,8 +25,6 @@ if "%HALT_ON_ERROR%"==""    set HALT_ON_ERROR=1
 		:: if msg starts and ends with quotes, remove the first and last characters
 		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
 		
-		::call dk_toVariableInfo msg
-		
 		call dk_echo %red%%ERROR_TAG%%msg%%clr%
 		if "%TRACE_ON_ERROR%"=="1" call dk_echo %red%*** TRACE_ON_ERROR ***%clr% & call dk_stacktrace
 		if "%LINE_ON_ERROR%"=="1"  call dk_echo %red%*** LINE_ON_ERROR ***%clr%  & call dk_showFileLine %_callerpath% %msg%

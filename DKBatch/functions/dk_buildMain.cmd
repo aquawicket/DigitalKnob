@@ -39,16 +39,16 @@ setlocal enableDelayedExpansion
 ::	fi
 	
 ::	if [ -n "${USER-}" ]; then
-::		dk_debug USER
+::		dk_printVar USER
 ::		DKUSERNAME=$USER
 ::	elif [ -n "${USERNAME-}" ]; then
-::		dk_debug USERNAME
+::		dk_printVar USERNAME
 ::		DKUSERNAME=$USERNAME
 ::	fi
-::	dk_debug DKUSERNAME
+::	dk_printVar DKUSERNAME
 	
-::	call dk_debug SHLVL
-::  call dk_debug MSYSTEM
+::	call dk_printVar SHLVL
+::  call dk_printVar MSYSTEM
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_getHostTriple
@@ -56,15 +56,15 @@ setlocal enableDelayedExpansion
 	call dk_getDKPaths
    
     call dk_validateGit
-	call dk_debug GIT_EXE
+	call dk_printVar GIT_EXE
     call dk_validateBranch
 
-    call dk_debug DKBRANCH_DIR
-    call dk_debug DKAPPS_DIR
-    call dk_debug DKCMAKE_DIR
-    call dk_debug DK3RDPARTY_DIR
-    call dk_debug DKIMPORTS_DIR
-    call dk_debug DKPLUGINS_DIR
+    call dk_printVar DKBRANCH_DIR
+    call dk_printVar DKAPPS_DIR
+    call dk_printVar DKCMAKE_DIR
+    call dk_printVar DK3RDPARTY_DIR
+    call dk_printVar DKIMPORTS_DIR
+    call dk_printVar DKPLUGINS_DIR
     
 	call dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	

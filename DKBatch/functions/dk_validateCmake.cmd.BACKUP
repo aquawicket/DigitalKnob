@@ -24,19 +24,19 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     if "%HOST_OS%"=="mac"                      set "CMAKE_DL=%CMAKE_DL_MAC%"
     if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" set "CMAKE_DL=%CMAKE_DL_LINUX_X86_64%"
     if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
-    call dk_debug CMAKE_DL
+    call dk_printVar CMAKE_DL
     
     call dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
-    call dk_debug CMAKE_DL_FILE
+    call dk_printVar CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     call dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
-    call dk_debug CMAKE_FOLDER
+    call dk_printVar CMAKE_FOLDER
     
 	if "%DKTOOLS_DIR%"=="" call dk_getDKPaths
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
-    call dk_debug CMAKE_EXE
+    call dk_printVar CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
        

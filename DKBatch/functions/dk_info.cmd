@@ -24,8 +24,6 @@ if "%HALT_ON_INFO%"==""   set HALT_ON_INFO=0
 		:: if msg starts and ends with quotes, remove the first and last
 		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
 		
-		::call dk_toVariableInfo msg
-		
 		call dk_echo %white%%INFO_TAG%%msg%%clr%
 		if "%TRACE_ON_INFO%"=="1" call dk_echo %white%*** TRACE_ON_ERROR ***%clr% & call dk_stacktrace
 		if "%HALT_ON_INFO%"=="1"  call dk_echo %white%*** HALT_ON_INFO ***%clr%   & call dk_exit

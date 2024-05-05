@@ -9,7 +9,7 @@ setlocal EnableDelayedExpansion
 	::call dk_debugFunc
 	
     set "_input=%1"
-	::call dk_debug _input
+	::call dk_printVar _input
 
     set "map=abcdefghijklmnopqrstuvwxyz 1234567890"
 
@@ -23,7 +23,7 @@ setlocal EnableDelayedExpansion
     goto c_identifier_loop
 
     :c_identifier_endLoop
-	::call dk_debug _output
+	::call dk_printVar _output
 
 endlocal & set "%2=%_output%"		
 goto:eof
