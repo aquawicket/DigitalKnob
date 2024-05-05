@@ -15,7 +15,8 @@ dk_download "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHE
 	
 	dk_validate DK3RDPARTY_DIR "dk_validateBranch"
 	dest_path="${DK3RDPARTY_DIR}/shellcheck-${SHELLCHECK_VERSION}"
-	dk_extract "${DKDOWNLOAD_DIR}/${SHELLCHECK_DL_FILE}" "${dest_path}"
+	#dk_extract "${DKDOWNLOAD_DIR}/${SHELLCHECK_DL_FILE}" "${dest_path}"
+	dk_smartExtract "${DKDOWNLOAD_DIR}/${SHELLCHECK_DL_FILE}" "${dest_path}"
 	return
 	
 	

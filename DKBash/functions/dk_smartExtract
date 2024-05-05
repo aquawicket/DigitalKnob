@@ -1,0 +1,49 @@
+#!/bin/sh
+#echo "$0 $*"
+#[ -n "$include_dk_smartExtract" ] && exit || export readonly include_dk_smartExtract=1
+[ -z "$DKINIT" ] && . ./DK
+
+
+##################################################################################
+# dk_smartExtract(<src> <dest>)
+#
+#
+dk_smartExtract () {
+	dk_debug "dk_smartExtract($*)"
+	dk_debugFunc
+	[ $# -ne 2 ] && dk_error "dk_smartExtract(): Incorrect number of parameters"
+
+	src="$1"
+	dest="$2"
+	
+	src_fullpath="$(realpath "${src}")"
+	dk_printVar src_fullpath
+	src_directory="$(dirname "${src_fullpath}")"
+	dk_printVar src_directory
+	src_filename="$(basename "${src_fullpath}")"
+	dk_printVar src_filename
+	src_folder="${src_filename%.*}"
+	dk_printVar src_folder
+	
+	dest_fullpath="$(realpath "${dest}")"
+	dk_printVar dest_fullpath
+	dest_folder="$(basename "${dest_fullpath}")"
+	dk_printVar dest_folder
+	
+	if ! dk_fileExists "${dest_fullpath}"; then
+		dk_makeDirectory "${dest_fullpath}"
+	fi
+	
+	dk_info "Extracting $src_filename . . ."
+	top_level_directories=($(tar -tf "${src_fullpath}" | sed -e 's@/.*@@' | uniq))
+	#dk_printVar top_level_directories
+
+	if [ ${#top_level_directories[@]} -eq 1 ]; then
+		#dk_debug "top_level_directories size is 1"
+		tar -xf "${src_fullpath}" --strip-components=1 -C "${dest_fullpath}"   # this will stop a root folder from being extracted
+	else
+		tar -xf "${src_fullpath}" -C "${dest_fullpath}"
+	fi
+		
+	#[ "$?" ]
+}

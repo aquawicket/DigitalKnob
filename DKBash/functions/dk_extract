@@ -22,36 +22,4 @@ dk_extract () {
 	
 	tar -xf "${src}" -C "${dest}"
 	return
-	
-	
-	
-	
-	filename="$(basename "$1")"
-	destFolder="${filename%.*}"
-	destFolder="${destFolder%.*}"
-	fulldest="$2/$destFolder"
-	dk_printVar fulldest
-		
-	if dk_fileExists "${fulldest}"; then
-		dk_warning "dk_extract(): ${fulldest} already exists"
-		return
-	fi
-	dk_info "Extracting $1 . . ."
-	parentdir="$(dirname "$1")"
-	parentdest="$(dirname "$2")"
-	dk_printVar parentdir
-	dk_printVar filename
-	#need to cd into parent directory of $1 and send tar the file name of $1
-	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
-	tar -xf "${filename}" -C "$2"
-	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
-	dk_convertToCIdentifier "${destFolder}" destFolder_
-	dk_printVar destFolder_
-	#mv "$2"/"${destFolder}" "$2"/"${destFolder}_"
-	dk_rename "$2"/"${destFolder}" "$2"/"${destFolder}_" 
-
-	#echo echo "${CMAKE_FOLDER}">"$2"/"${destFolder}_"/dk_installed
-
-	#TODO
-	#[ "$input" = "" ]
 }
