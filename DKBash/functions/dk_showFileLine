@@ -6,44 +6,54 @@
 
 [ -z ${MAX_LINES-} ]   && export MAX_LINES=30
 ################################################################################
-# dk_showFileLine(<filepath> <match_string>)
+# dk_showFileLine(<filepath> <match_string or line_num>)
 #
 #
 #
 dk_showFileLine() {
+	dk_debug "dk_showFileLine($*)"
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	filepath=$(realpath $1)
-	match_string="$2"
-	#$(dk_fileContains $filepath "$match_string") && echo "file contains the string" || echo "file DOES NOT contain the string"
+	dk_printVar lastErrorFile
+	dk_printVar lastErrorLine
+	[ -n "${lastErrorFile}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
+	[ -n "${lastErrorLine}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
+	unset lastErrorFile
+	unset lastErrorLine
 	
-	oldIFS=$IFS
-	IFS=$'\n'
-	lines=$(grep -n -o "${match_string}" "${filepath}")
-	IFS=$oldIFS
+	_filepath=$(realpath $_errfile)
+	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
+
+	#$(dk_fileContains ${_filepath} "${_matchString}") && echo "file contains the string" || echo "file DOES NOT contain the string"
 	
-	line=${lines[0]%%:*}	# remove everything after :
-	lineno=$(($line + 0))
+	if [ -z ${_lineno} ]; then
+		oldIFS=${IFS}
+		IFS=$'\n'
+		lines=$(grep -n -o "${_matchString}" "${_filepath}")
+		IFS=${oldIFS}
+		line=${lines[0]%%:*}	# remove everything after :
+		lineno=$((${line} + 0))
+	fi
 	
-	dk_echo " File: $filepath: $line"
+	dk_echo " File: ${_filepath}: ${_lineno}"
 	
-	min=$(( line-(MAX_LINES / 2) ))
-	max=$(( line+(MAX_LINES / 2) ))
+	min=$(( _lineno-(MAX_LINES / 2) ))
+	max=$(( _lineno+(MAX_LINES / 2) ))
 	n=1
 	while IFS= read -r line; do
-	    if [ "$n" -lt "$max" ]; then
-			if [ "$n" -gt "$min" ]; then
+	    if [ "${n}" -lt "${max}" ]; then
+			if [ "${n}" -gt "${min}" ]; then
 				#line=!line::=:	! 
-				if [ "$n" -eq "${lineno}" ]; then
-					dk_echo "${bg_white}${black}> $n: ${line}${clr}"
+				if [ "${n}" -eq "${_lineno}" ]; then
+					dk_echo "${bg_white}${black}> ${n}: ${line}${clr}"
 				else
-					dk_echo "  $n: ${line}"
+					dk_echo "  ${n}: ${line}"
 				fi
 			fi
 		fi
 		n=$(( n+1 ))
-	done < "$filepath"
+	done < "${_filepath}"
 }
 
 

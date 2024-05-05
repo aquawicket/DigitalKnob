@@ -17,18 +17,18 @@ dk_smartExtract () {
 	dest="$2"
 	
 	src_fullpath="$(realpath "${src}")"
-	#dk_printVar src_fullpath
+	dk_printVar src_fullpath
 	src_directory="$(dirname "${src_fullpath}")"
-	#dk_printVar src_directory
+	dk_printVar src_directory
 	src_filename="$(basename "${src_fullpath}")"
-	#dk_printVar src_filename
+	dk_printVar src_filename
 	src_folder="${src_filename%.*}"
-	#dk_printVar src_folder
+	dk_printVar src_folder
 	
 	dest_fullpath="$(realpath "${dest}")"
-	#dk_printVar dest_fullpath
+	dk_printVar dest_fullpath
 	dest_folder="$(basename "${dest_fullpath}")"
-	#dk_printVar dest_folder
+	dk_printVar dest_folder
 	
 	if ! dk_fileExists "${dest_fullpath}"; then
 		dk_makeDirectory "${dest_fullpath}"
