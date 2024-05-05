@@ -16,7 +16,8 @@ dk_gitUpdate () {
 		dk_info "Git Update? Any local changes will be lost."
 		dk_confirm || return 0
 	fi
-
+	
+	dk_validate GIT_EXE "dk_validateGit"
 	if [ ! -d "$DKBRANCH_DIR/.git" ]; then
 		dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git "$DKBRANCH_DIR"
 	fi
