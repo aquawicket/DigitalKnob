@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
@@ -22,7 +23,7 @@ dk_generate() {
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
 	dk_printVar TARGET_PATH
-	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
+	dk_makeDirectory "$TARGET_PATH"/"$TARGET_OS"
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_printVar CMAKE_SOURCE_DIR

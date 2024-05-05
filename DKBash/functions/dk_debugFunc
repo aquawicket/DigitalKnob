@@ -1,3 +1,4 @@
+#!/bin/sh
 [ -z "$DKINIT" ] && . ./DK
 #dk_includeGuard
 

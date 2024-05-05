@@ -12,13 +12,16 @@ dk_getDKPaths () {
 	dk_debug "dk_getDKPaths($*)"
 	dk_debugFunc
 	
-	if [ -n "${USERPROFILE-}" ]; then
+	if [ -n "${HOME-}" ]; then
+		dk_printVar HOME
+		DIGITALKNOB_DIR="$HOME/digitalknob"
+	elif [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
 		dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
 		dk_replaceAll "${DIGITALKNOB_DIR}" "C:" "/c" DIGITALKNOB_DIR
 	else
-		DIGITALKNOB_DIR="$HOME/digitalknob"
+		dk_error "dk_getDKPaths(): unable to locate user root directory"
 	fi
 	dk_printVar DIGITALKNOB_DIR
 	dk_makeDirectory "${DIGITALKNOB_DIR}"

@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0($*)"
 #[ -n "$include_dk_escapeSequences" ] && return || export readonly include_dk_escapeSequences=1
 [ -z "$DKINIT" ] && . ./DK
