@@ -1,5 +1,4 @@
 #!/bin/sh
-
 #echo "$0($*)"
 
 
@@ -11,11 +10,6 @@
 
 ###### DK_INIT ######
 . DKBash/functions/DK
-
-
-###### generated global variables ######
-echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-echo "DKBASH_DIR = ${DKBASH_DIR}"
 
 
 ###### Load Main Program ######

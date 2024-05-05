@@ -74,7 +74,7 @@ echo "DK($*)"
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 	echo "DKBASH_DIR = $DKBASH_DIR"
 	
-	
+	chmod 777 ${DKBASH_DIR}/functions/*
 	
 	
 	###### Script loader ######

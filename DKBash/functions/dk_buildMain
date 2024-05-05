@@ -1,7 +1,6 @@
 #!/bin/sh
-
 echo "$0($*)"
-#. ./DK
+[ -z "$DKINIT" ] && . ./DK
 #dk_includeGuard
 
 ##################################################################################
@@ -23,7 +22,7 @@ dk_buildMain () {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
+	dk_debug "SHLVL = $SHLVL"		# https://stackoverflow.com/a/4511483/688352
 	dk_debug MSYSTEM
 	dk_debug DKSCRIPT_PATH
 	dk_debug DKSCRIPT_DIR
