@@ -22,7 +22,6 @@ dk_error () {
 	
 	[ $ENABLE_dk_error -ne 1 ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${red}${ERROR_TAG}${msg}${clr}"
 	[ $TRACE_ON_ERROR -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_ERROR ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

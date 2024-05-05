@@ -18,7 +18,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 #
 dk_validateCmake () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_validate HOST_OS dk_getHostTriple
 	######################################################################################################
@@ -39,24 +39,24 @@ dk_validateCmake () {
 	[ "${TARGET_OS}" = "win_x86_64_mingw" ]      && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	[ "${TARGET_OS}" = "win_x86_64_ucrt" ]       && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	
-	dk_debug CMAKE_IMPORT
+	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
 		dk_info "Installing CMake from dl files"
-		dk_debug CMAKE_IMPORT
+		dk_printVar CMAKE_IMPORT
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
 		dk_getFilename "$CMAKE_DL" CMAKE_DL_FILE
-		dk_debug CMAKE_DL_FILE
+		dk_printVar CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
-		dk_debug CMAKE_FOLDER
+		dk_printVar CMAKE_FOLDER
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		
 		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_toLower CMAKE_FOLDER
-		dk_debug CMAKE_FOLDER
+		dk_printVar CMAKE_FOLDER
 		
 		[ -z $DKTOOLS_DIR ] && dk_getDKPaths
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
@@ -64,7 +64,7 @@ dk_validateCmake () {
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
 		[ -z $CMAKE_EXE ]              && dk_error "no cmake for this OS"
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 		
 		if dk_fileExists "$CMAKE_EXE"; then 
 			return $true;
@@ -82,12 +82,12 @@ dk_validateCmake () {
 		
 		CMAKE_EXE=$(command -v cmake)
 		CMAKE_EXE=$(realpath ${CMAKE_EXE})
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
 		CMAKE_EXE=$(realpath ${CMAKE_EXE})
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 	fi
 }

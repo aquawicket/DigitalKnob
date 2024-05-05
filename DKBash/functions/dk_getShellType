@@ -9,7 +9,7 @@
 #
 dk_getShellType () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	[ -e "/proc" ] || dk_warning "/proc does not exist" && return 0 
 	#PID_EXE=$(readlink /proc/$$/exe);

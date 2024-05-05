@@ -9,7 +9,7 @@
 #
 dk_reload () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "too many arguments"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_debug "reloading $DKSCRIPT_PATH"
 	clear

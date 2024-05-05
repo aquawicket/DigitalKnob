@@ -21,7 +21,6 @@ dk_debug () {
 	#dk_debugFunc
 	[ $ENABLE_dk_debug -ne 1 ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${blue}${DEBUG_TAG}${msg}${clr}"
 	[ $TRACE_ON_DEBUG -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

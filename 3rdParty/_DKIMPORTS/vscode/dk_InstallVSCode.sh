@@ -8,8 +8,8 @@ echo "$0 $*"
 #
 dk_InstallVSCode () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_cmakeEval "include('${DKIMPORTS_DIR}/vscode/DKMAKE.cmake')" "VSCODE_EXE"
-	dk_debug VSCODE_EXE
+	dk_printVar VSCODE_EXE
 }

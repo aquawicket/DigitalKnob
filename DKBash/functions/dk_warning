@@ -21,7 +21,6 @@ dk_warning () {
 	
 	[ $ENABLE_dk_warning -ne 1 ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${yellow}${WARNING_TAG}${msg}${clr}"
 	[ $TRACE_ON_WARNING -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_WARNING ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

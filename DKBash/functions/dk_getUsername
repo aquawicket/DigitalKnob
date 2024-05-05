@@ -11,11 +11,11 @@ dk_getUsername () {
 	dk_debugFunc
 	
 	if [ -n "${USER-}" ]; then
-		dk_debug USER
+		dk_printVar USER
 		DKUSERNAME=$USER
 	elif [ -n "${USERNAME-}" ]; then
-		dk_debug USERNAME
+		dk_printVar USERNAME
 		DKUSERNAME=$USERNAME
 	fi
-	dk_debug DKUSERNAME
+	dk_printVar DKUSERNAME
 }

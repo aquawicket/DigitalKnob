@@ -9,7 +9,7 @@
 #
 dk_generate() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_echo
 	dk_echo "##################################################################"
@@ -21,17 +21,17 @@ dk_generate() {
 	dk_deleteTempFiles
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
-	dk_debug TARGET_PATH
+	dk_printVar TARGET_PATH
 	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
-	dk_debug CMAKE_SOURCE_DIR
+	dk_printVar CMAKE_SOURCE_DIR
 	if ! dk_fileExists "$CMAKE_SOURCE_DIR"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
-	dk_debug CMAKE_SOURCE_DIR
+	dk_printVar CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
-	dk_debug CMAKE_TARGET_PATH
+	dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	DKLEVEL="RebuildAll"
@@ -69,7 +69,7 @@ dk_generate() {
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
-	dk_debug CMAKE_BINARY_DIR
+	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
 		set -- "$@" "-S=$CMAKE_SOURCE_DIR"

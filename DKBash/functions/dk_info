@@ -21,7 +21,6 @@ dk_info () {
 	
 	[ "$ENABLE_dk_info" -ne "1" ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${white}${INFO_TAG}${msg}${clr}"
 	[ $TRACE_ON_INFO -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_INFO ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

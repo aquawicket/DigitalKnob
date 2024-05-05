@@ -17,7 +17,7 @@ dk_download () {
 	fi
 	dk_info "Downloading $1 . . ."
 	parentdir="$(dirname "$2")"
-	dk_debug "parentdir = $parentdir"
+	dk_printVar parentdir
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $parentdir failed!"
 	wget -P "$parentdir" "$1" 

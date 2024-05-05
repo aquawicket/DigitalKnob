@@ -21,7 +21,6 @@ dk_todo () {
 	
 	[ $ENABLE_dk_todo -ne 1 ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${yellow}${TODO_TAG}${msg}${clr}"
 	[ $TRACE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_TODO ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

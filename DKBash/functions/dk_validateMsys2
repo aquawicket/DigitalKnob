@@ -9,8 +9,8 @@
 #
 dk_validateMsys2 () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
-	dk_debug MSYS2
+	dk_printVar MSYS2
 }

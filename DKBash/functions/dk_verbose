@@ -21,7 +21,6 @@ dk_verbose () {
 	
 	[ $ENABLE_dk_verbose -ne 1 ] && return
 	msg="$1"
-	#dk_toVariableInfo msg
 	
 	dk_echo "${cyan}${VERBOSE_TAG}${msg}${clr}"
 	[ $TRACE_ON_VERBOSE -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_VERBOSE ***${clr}"  && dk_stacktrace #OR TRACE AND NOT NO_TRACE)

@@ -9,7 +9,7 @@
 #
 dk_validateBranch () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -23,25 +23,25 @@ dk_validateBranch () {
 			DKBRANCH="$FOLDER"
 		fi
 	fi
-	dk_debug DKBRANCH
+	dk_printVar DKBRANCH
 	
 	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
-	dk_debug  DKBRANCH_DIR
+	dk_printVar DKBRANCH_DIR
 	
 	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
-	dk_debug  DKCMAKE_DIR
+	dk_printVar DKCMAKE_DIR
 	
 	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
-	dk_debug DK3RDPARTY_DIR
+	dk_printVar DK3RDPARTY_DIR
 	
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
-	dk_debug DKIMPORTS_DIR
+	dk_printVar DKIMPORTS_DIR
 	
 	DKAPPS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKApps"
-	dk_debug DKAPPS_DIR
+	dk_printVar DKAPPS_DIR
 	
 	DKPLUGINS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKPlugins"
-	dk_debug DKPLUGINS_DIR
+	dk_printVar DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then

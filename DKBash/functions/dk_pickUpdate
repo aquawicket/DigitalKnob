@@ -9,7 +9,7 @@
 #
 dk_pickUpdate() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_readCache
 	
@@ -17,9 +17,9 @@ dk_pickUpdate() {
 	dk_checkRemote
 	dk_echo
 	
-	#dk_debug _APP_
-	#dk_debug _TARGET_OS_ 
-	#dk_debug _TYPE_
+	#dk_printVar _APP_
+	#dk_printVar _TARGET_OS_ 
+	#dk_printVar _TYPE_
 	
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then

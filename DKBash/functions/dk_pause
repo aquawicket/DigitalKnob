@@ -10,7 +10,7 @@
 #
 dk_pause() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	read -rp 'Press enter to continue...' key
 	echo ""

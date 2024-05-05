@@ -29,6 +29,6 @@ dk_hexToDecimal () {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_hexToDecimal 0x1b decimal
-	dk_debug decimal
+	dk_printVar decimal
 
 }

@@ -103,11 +103,11 @@ dk_buildMain () {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	dk_debug SHLVL			# https://stackoverflow.com/a/4511483/688352
-	dk_debug MSYSTEM
-	dk_debug DKSCRIPT_PATH
-	dk_debug DKSCRIPT_DIR
-	dk_debug DKSCRIPT_NAME
+	dk_printVar SHLVL			# https://stackoverflow.com/a/4511483/688352
+	dk_printVar MSYSTEM
+	dk_printVar DKSCRIPT_PATH
+	dk_printVar DKSCRIPT_DIR
+	dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
@@ -117,12 +117,12 @@ dk_buildMain () {
 	dk_validateGit
 	dk_validateBranch
 
-	dk_debug DKBRANCH_DIR
-	dk_debug DKAPPS_DIR
-	dk_debug DKCMAKE_DIR
-	dk_debug DK3RDPARTY_DIR
-	dk_debug DKIMPORTS_DIR
-	dk_debug DKPLUGINS_DIR
+	dk_printVar DKBRANCH_DIR
+	dk_printVar DKAPPS_DIR
+	dk_printVar DKCMAKE_DIR
+	dk_printVar DK3RDPARTY_DIR
+	dk_printVar DKIMPORTS_DIR
+	dk_printVar DKPLUGINS_DIR
 
 	if [ "$DKSCRIPT_DIR" != "$DKBRANCH_DIR" ]; then
 		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
@@ -155,7 +155,7 @@ dk_buildMain () {
 #
 dk_pickUpdate() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_readCache
 	
@@ -163,9 +163,9 @@ dk_pickUpdate() {
 	dk_checkRemote
 	dk_echo
 	
-	#dk_debug _APP_
-	#dk_debug _TARGET_OS_ 
-	#dk_debug _TYPE_
+	#dk_printVar _APP_
+	#dk_printVar _TARGET_OS_ 
+	#dk_printVar _TYPE_
 	
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}s" ]; then
@@ -249,7 +249,7 @@ dk_pickUpdate() {
 #
 dk_pickApp() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
@@ -305,7 +305,7 @@ dk_pickApp() {
 #
 dk_pickOs() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
@@ -440,7 +440,7 @@ dk_pickOs() {
 #
 dk_pickType() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
@@ -504,7 +504,7 @@ dk_pickType() {
 #
 dk_generate() {
 	dk_verbose "dk_generate($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_echo
 	dk_echo "##################################################################"
@@ -516,17 +516,17 @@ dk_generate() {
 	dk_deleteTempFiles
 
 	TARGET_PATH="$DKAPPS_DIR"/"$APP"
-	dk_debug TARGET_PATH
+	dk_printVar TARGET_PATH
 	mkdir -p "$TARGET_PATH"/"$TARGET_OS"
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
-	dk_debug CMAKE_SOURCE_DIR
+	dk_printVar CMAKE_SOURCE_DIR
 	if ! dk_fileExists "$CMAKE_SOURCE_DIR"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
-	dk_debug CMAKE_SOURCE_DIR
+	dk_printVar CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
-	dk_debug CMAKE_TARGET_PATH
+	dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	DKLEVEL="RebuildAll"
@@ -564,7 +564,7 @@ dk_generate() {
 	fi
 	
 	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
-	dk_debug CMAKE_BINARY_DIR
+	dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
 		set -- "$@" "-S=$CMAKE_SOURCE_DIR"
@@ -701,7 +701,7 @@ dk_generate() {
 #
 dk_build () {
 	dk_verbose "dk_build($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "##################################################################"
@@ -749,23 +749,23 @@ dk_getDKPaths () {
 	dk_verbose "dk_getDKPaths($*)"
 	
 	if [ -n "${USERPROFILE-}" ]; then
-		dk_debug USERPROFILE
+		dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
 		dk_replaceAll "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
 		dk_replaceAll "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
-	dk_debug DIGITALKNOB_DIR
+	dk_printVar DIGITALKNOB_DIR
 	mkdir -p "$DIGITALKNOB_DIR"
 	
 	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
 	mkdir -p "$DKTOOLS_DIR"
-	dk_debug DKTOOLS_DIR
+	dk_printVar DKTOOLS_DIR
 	
 	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
 	mkdir -p "$DKDOWNLOAD_DIR"
-	dk_debug DKDOWNLOAD_DIR
+	dk_printVar DKDOWNLOAD_DIR
 }
 
 ##################################################################################
@@ -783,7 +783,7 @@ dk_url () {
 #
 dk_validateCmake () {
 	dk_verbose "dk_validateCmake($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################
 	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
@@ -803,16 +803,16 @@ dk_validateCmake () {
 	if [ "${TARGET_OS}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
 	if [ "${TARGET_OS}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
-	dk_debug CMAKE_IMPORT
+	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
 		dk_info "Installing CMake from dl files"
-		dk_debug CMAKE_IMPORT
+		dk_printVar CMAKE_IMPORT
 		
 		dk_getFilename "$CMAKE_IMPORT" CMAKE_DL_FILE
-		dk_debug CMAKE_DL_FILE
+		dk_printVar CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
-		dk_debug CMAKE_FOLDER
+		dk_printVar CMAKE_FOLDER
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
@@ -820,7 +820,7 @@ dk_validateCmake () {
 		
 		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_toLower CMAKE_FOLDER
-		dk_debug CMAKE_FOLDER
+		dk_printVar CMAKE_FOLDER
 		
 		if [ "${HOST_OS}" = "win" ]; then
 			CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
@@ -833,7 +833,7 @@ dk_validateCmake () {
 		else
 			dk_error "no cmake for this OS"
 		fi
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 		
 		if dk_fileExists "$CMAKE_EXE"; then 
 			return $true;
@@ -850,12 +850,12 @@ dk_validateCmake () {
 		dk_info "Installing CMake from package managers"
 		
 		CMAKE_EXE=$(command -v cmake)
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
-		dk_debug CMAKE_EXE
+		dk_printVar CMAKE_EXE
 	fi
 }
 
@@ -903,7 +903,6 @@ dk_debug () {
 	[ $LOG_DEBUG -eq 1 ] || return 0
 	
 	msg="$1"
-	dk_toVariableInfo msg
 	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }
 
@@ -916,7 +915,6 @@ dk_info () {
 	#dk_verbose "dk_info($*)"
 	
 	msg="$1"
-	dk_toVariableInfo msg
 	dk_echo "${white}   INFO: ${msg} ${clr}"
 }
 
@@ -929,7 +927,6 @@ dk_warning () {
 	#dk_verbose "dk_warning($*)"
 	
 	msg="$1"
-	dk_toVariableInfo msg
 	dk_echo "${yellow}WARNING: ${msg} ${clr}"
 	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
 	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
@@ -944,7 +941,6 @@ dk_error () {
 	#dk_verbose "dk_error($*)"
 	
 	msg="$1"
-	dk_toVariableInfo msg
 	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
@@ -973,43 +969,12 @@ dk_variable_info () {
 }
 
 ##################################################################################
-# dk_toVariableInfo(<var>)
-#
-#	If the parameter is a variable containing the name of a valid variable name
-#	Convert the contents to the details of said variable
-#
-#	Example:  
-#	myVar="this is my variable"
-#	message="myVar"
-#	dk_toVariableInfo message
-#	echo $message
-#
-#	Output:
-#	myVar = 'this is my variable'
-#
-dk_toVariableInfo () {
-	#echo "dk_toVariableInfo($*)"
-	
-	[ $# -ne 1 ] && return $false											# if not exactly 1 parameter
-	eval name='$'{$1}
-	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
-	
-	if dk_defined $name; then
-		eval value='$'{$name}
-		eval "$1=\"$name = '${value}'\""
-	else
-		eval "$1=\"$name = ${red}NOT DEFINED${clr}\""
-	fi
-}
-
-
-##################################################################################
 # dk_stacktrace()
 #
 #
 dk_stacktrace () {
     dk_verbose "dk_stacktrace($*)"
-	#[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
 
@@ -1103,7 +1068,7 @@ dk_call () {
 #
 dk_checkRemote () {
 	dk_verbose "dk_checkRemote($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	ahead=0
 	behind=0
@@ -1124,7 +1089,7 @@ dk_checkRemote () {
 #
 dk_validate_sudo () {
 	dk_verbose "dk_validate_sudo($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
@@ -1139,7 +1104,7 @@ dk_validate_sudo () {
 #
 dk_reload () {
 	dk_verbose "dk_reload($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_debug "reloading $DKSCRIPT_DIR/$DKSCRIPT_NAME"
 	clear
@@ -1153,7 +1118,7 @@ dk_reload () {
 #
 dk_confirm() {
 	dk_verbose "dk_confirm($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -rp $" " REPLY
@@ -1237,7 +1202,7 @@ dk_convertToCIdentifier () {
 	dk_replaceAll "$input" "-" "_" input		# POSIX replace
 	dk_replaceAll "$input" "." "_" output		# POSIX replace
 	
-	dk_debug "output = $output"
+	dk_printVar "output = $output"
 	eval "$2=$output"
 	#[ $input = "" ]
 }
@@ -1267,7 +1232,7 @@ dk_replaceAll () {
         input=${input#*"$searchValue"}
     done
 	
-	dk_debug "output = '$output'"
+	dk_printVar "output = '$output'"
 	eval "$4=$output"
 }
 
@@ -1303,7 +1268,7 @@ dk_download () {
 	fi
 	dk_info "Downloading $1 . . ."
 	parentdir="$(dirname "$2")"
-	dk_debug "parentdir = $parentdir"
+	dk_printVar "parentdir = $parentdir"
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $parentdir failed!"
 	wget -P "$parentdir" "$1" 
@@ -1324,7 +1289,7 @@ dk_extract () {
 	destFolder="${filename%.*}"
 	destFolder="${destFolder%.*}"
 	fulldest="$2/$destFolder"
-	dk_debug fulldest
+	dk_printVar fulldest
 		
 	#if dk_fileExists $fulldest; then
 	#	dk_warning "dk_extract(): $fulldest already exists"
@@ -1333,15 +1298,15 @@ dk_extract () {
 	dk_info "Extracting $1 . . ."
 	parentdir="$(dirname "$1")"
 	parentdest="$(dirname "$2")"
-	dk_debug "parentdir = $parentdir"
-	dk_debug "filename = $filename"
+	dk_printVar "parentdir = $parentdir"
+	dk_printVar "filename = $filename"
 	#need to cd into parent directory of $1 and send tar the file name of $1
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $$parentdir failed!"
 	tar -xf "$filename" -C "$2"
 	cd "$oldpwd" #|| dk_error "cd $$oldpwd failed!"
 	dk_convertToCIdentifier "$destFolder" destFolder_
-	dk_debug destFolder_
+	dk_printVar destFolder_
 	mv "$2"/"$destFolder" "$2"/"$destFolder_"
 
 	#echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/dk_installed
@@ -1385,7 +1350,7 @@ dk_removeExtension () {
 #
 dk_validateGit () {
 	dk_verbose "dk_validateGit($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	if ! dk_commandExists git; then
 		dk_install git
@@ -1394,7 +1359,7 @@ dk_validateGit () {
 	GIT_EXE=$(command -v git)
 	[ -e ${GIT_EXE} ] || dk_error "GIT_EXE is invalid"
 	
-	dk_debug GIT_EXE
+	dk_printVar GIT_EXE
 }
 
 
@@ -1404,7 +1369,7 @@ dk_validateGit () {
 #
 dk_validateHomebrew () {
 	dk_verbose "dk_validateHomebrew($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
@@ -1419,7 +1384,7 @@ dk_validateHomebrew () {
 	fi
 	
 	BREW=$(command -v brew)
-	dk_debug BREW
+	dk_printVar BREW
 }
 
 
@@ -1513,7 +1478,7 @@ dk_validatePackage () {
 #
 #dk_validateOstype () {
 #	dk_verbose "dk_validateOstype($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #	
 #	if [ -e /proc/device-tree/model ]; then
 #		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -1545,7 +1510,7 @@ dk_validatePackage () {
 #
 dk_validateBranch () {
 	dk_verbose "dk_validateBranch($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -1558,25 +1523,25 @@ dk_validateBranch () {
 			DKBRANCH="$FOLDER"
 		fi
 	fi
-	dk_debug DKBRANCH
+	dk_printVar DKBRANCH
 	
 	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
-	dk_debug  DKBRANCH_DIR
+	dk_printVar  DKBRANCH_DIR
 	
 	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
-	dk_debug  DKCMAKE_DIR
+	dk_printVar  DKCMAKE_DIR
 	
 	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
-	dk_debug DK3RDPARTY_DIR
+	dk_printVar DK3RDPARTY_DIR
 	
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
-	dk_debug DKIMPORTS_DIR
+	dk_printVar DKIMPORTS_DIR
 	
 	DKAPPS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKApps"
-	dk_debug DKAPPS_DIR
+	dk_printVar DKAPPS_DIR
 	
 	DKPLUGINS_DIR="$DIGITALKNOB_DIR/$DKBRANCH/DKPlugins"
-	dk_debug DKPLUGINS_DIR
+	dk_printVar DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
@@ -1603,7 +1568,7 @@ dk_validateBranch () {
 #
 dk_pause () {
 	dk_verbose "dk_pause($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	read -rp 'Press enter to continue...' key
 }
@@ -1615,7 +1580,7 @@ dk_pause () {
 #
 dk_clearCmakeCache () {
 	dk_verbose "dk_clearCmakeCache($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1630,7 +1595,7 @@ dk_clearCmakeCache () {
 #
 dk_deleteTempFiles () {
 	dk_verbose "dk_deleteTempFiles($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_info "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1647,10 +1612,10 @@ dk_deleteTempFiles () {
 #
 #dk_validateMsys2 () {
 #	dk_verbose "dk_validateMsys2($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
-#	dk_debug MSYS2
+#	dk_printVar MSYS2
 #}
 
 
@@ -1660,10 +1625,10 @@ dk_deleteTempFiles () {
 #
 #dk_validateMake () {
 #	dk_verbose "dk_validateMake($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-#	dk_debug MAKE_PROGRAM
+#	dk_printVar MAKE_PROGRAM
 #}
 
 
@@ -1673,15 +1638,15 @@ dk_deleteTempFiles () {
 #
 #dk_validateEmscripten () {
 #	dk_verbose "dk_validateEmscripten($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-#	dk_debug EMSDK
-#	dk_debug EMSDK_ENV
-#	dk_debug EMSDK_GENERATOR
-#	dk_debug EMSDK_TOOLCHAIN_FILE
-#	dk_debug EMSDK_C_COMPILER
-#	dk_debug EMSDK_CXX_COMPILER
+#	dk_printVar EMSDK
+#	dk_printVar EMSDK_ENV
+#	dk_printVar EMSDK_GENERATOR
+#	dk_printVar EMSDK_TOOLCHAIN_FILE
+#	dk_printVar EMSDK_C_COMPILER
+#	dk_printVar EMSDK_CXX_COMPILER
 #}
 
 
@@ -1691,16 +1656,16 @@ dk_deleteTempFiles () {
 #
 #dk_validateAndroidNdk () {
 #	dk_verbose "dk_validateAndroidNdk($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
-#	dk_debug ANDROID_NDK
-#	dk_debug ANDROID_GENERATOR
-#	dk_debug ANDROID_TOOLCHAIN_FILE
-#	dk_debug ANDROID_API
-#	dk_debug ANDROID_MAKE_PROGRAM
-#	dk_debug ANDROID_C_COMPILER
-#	dk_debug ANDROID_CXX_COMPILER
+#	dk_printVar ANDROID_NDK
+#	dk_printVar ANDROID_GENERATOR
+#	dk_printVar ANDROID_TOOLCHAIN_FILE
+#	dk_printVar ANDROID_API
+#	dk_printVar ANDROID_MAKE_PROGRAM
+#	dk_printVar ANDROID_C_COMPILER
+#	dk_printVar ANDROID_CXX_COMPILER
 #}
 
 
@@ -1710,11 +1675,11 @@ dk_deleteTempFiles () {
 #
 #dk_validateClang () {
 #	dk_verbose "dk_validateClang($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-#	dk_debug CLANG_C_COMPILER
-#	dk_debug CLANG_CXX_COMPILER
+#	dk_printVar CLANG_C_COMPILER
+#	dk_printVar CLANG_CXX_COMPILER
 #}
 
 
@@ -1724,11 +1689,11 @@ dk_deleteTempFiles () {
 #
 #dk_validateGcc () {
 #	dk_verbose "dk_validateGcc($*)"
-#	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-#	dk_debug GCC_C_COMPILER
-#	dk_debug GCC_CXX_COMPILER
+#	dk_printVar GCC_C_COMPILER
+#	dk_printVar GCC_CXX_COMPILER
 #}
 
 
@@ -1747,7 +1712,7 @@ dk_cmakeEval () {
 	variables="$2"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	dk_debug DKCOMMAND
+	dk_printVar DKCOMMAND
 	
 	if [ -n "$variables" ]; then
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
@@ -1769,7 +1734,7 @@ dk_cmakeEval () {
 #
 dk_pushAssets () {
 	dk_verbose "dk_pushAssets($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
 	
@@ -1783,7 +1748,7 @@ dk_pushAssets () {
 #
 dk_pullAssets () {
 	dk_verbose "dk_pullAssets($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
 
@@ -1820,7 +1785,7 @@ dk_resetAll () {
 			dk_echo "Is must be in the branch directory to continue."
 			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
-			dk_debug DKBRANCH_DIR
+			dk_printVar DKBRANCH_DIR
 			return $false;
 		fi
 		
@@ -1893,7 +1858,7 @@ dk_removeAll () {
 			dk_echo "Is must be in the branch directory to continue."
 			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
-			dk_debug DKBRANCH_DIR
+			dk_printVar DKBRANCH_DIR
 			return 1;
 		fi
 		
@@ -1963,7 +1928,7 @@ dk_gitUpdate () {
 #
 dk_gitCommit () {	
 	dk_verbose "dk_gitCommit($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
@@ -1971,7 +1936,7 @@ dk_gitCommit () {
 	cd "$DKBRANCH_DIR" #|| dk_error "cd \$DKBRANCH_DIR failed!"
 	
 	STORE=$($GIT_EXE config credential.helper)
-	dk_debug STORE
+	dk_printVar STORE
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
 		dk_echo
@@ -2021,7 +1986,7 @@ dk_gitCommit () {
 #
 dk_enterManually () {
 	dk_verbose "dk_enterManually($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -2039,7 +2004,7 @@ dk_enterManually () {
 		TARGET_PATH=$DKAPPS_DIR/$input
 		return $true
 	fi
-	dk_debug TARGET_PATH
+	dk_printVar TARGET_PATH
 	
 	if [ ! -d "$DKAPPS_DIR"/"$APP" ]; then
 		mkdir -p "$DKAPPS_DIR"/"$APP";
@@ -2059,7 +2024,7 @@ dk_enterManually () {
 #
 dk_createCache () {
 	dk_verbose "dk_createCache($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo "creating cache..."
 	
@@ -2077,7 +2042,7 @@ dk_createCache () {
 #
 dk_readCache() {
 	dk_verbose "dk_readCache($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_fileExists "$DKBRANCH_DIR"/cache; then
 		return 0
@@ -2091,19 +2056,19 @@ dk_readCache() {
 	while read p; do
 		if [ "$count" = "0" ]; then 
 			_APP_=$(echo "$p" | tr -d '\r')
-			#dk_debug _APP_
+			#dk_printVar _APP_
 		fi
 		if [ "$count" = "1" ]; then
 			_TARGET_OS_=$(echo "$p" | tr -d '\r')
-			#dk_debug _TARGET_OS_ 
+			#dk_printVar _TARGET_OS_ 
 		fi
 		if [ "$count" = "2" ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
-			#dk_debug _TYPE_
+			#dk_printVar _TYPE_
 		fi
 		#if [ "$count" = "3" ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')
-		#	#dk_debug _DKENV_
+		#	#dk_printVar _DKENV_
 		#fi
 		count=$((count + 1))
 	done < "${DKBRANCH_DIR}"/cache
@@ -2116,7 +2081,7 @@ dk_readCache() {
 #
 dk_removeCarrageReturns () {
 	dk_verbose "dk_removeCarrageReturns($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	in=$1
 	out=$(echo "$in" | tr -d '\r')
@@ -2161,7 +2126,7 @@ try() {
 #
 dk_getHostTriple () {
 	dk_verbose "dk_getHostTriple($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
@@ -2180,77 +2145,77 @@ dk_getHostTriple () {
 	#[ -e /proc/device-tree/model ] && dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
 	if dk_commandExists clang; then  
-		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_debug CLANG_TRIPLE	
+		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_printVar CLANG_TRIPLE	
 
 		remainder="$CLANG_TRIPLE"
 		CLANG_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug CLANG_ARCH
+		dk_printVar CLANG_ARCH
 		CLANG_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug CLANG_VENDOR
+		dk_printVar CLANG_VENDOR
 		CLANG_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug CLANG_OS
+		dk_printVar CLANG_OS
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug CLANG_ENV
+		dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$CLANG_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$CLANG_ARCH && dk_debug HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$CLANG_VENDOR && dk_debug HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_debug HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_debug HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$CLANG_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$CLANG_ARCH && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$CLANG_VENDOR && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
-		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_debug GCC_TRIPLE
+		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
 
 		remainder="$GCC_TRIPLE"
 		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug GCC_ARCH
+		dk_printVar GCC_ARCH
 		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug GCC_VENDOR
+		dk_printVar GCC_VENDOR
 		GCC_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug GCC_OS
+		dk_printVar GCC_OS
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug GCC_ENV
+		dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$GCC_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$GCC_ARCH && dk_debug HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$GCC_VENDOR && dk_debug HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_debug HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_debug HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$GCC_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$GCC_ARCH && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$GCC_VENDOR && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
-		dk_debug BASH_TRIPLE
+		dk_printVar BASH_TRIPLE
 
 		remainder="$BASH_TRIPLE"
 		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug BASH_ARCH
+		dk_printVar BASH_ARCH
 		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug BASH_VENDOR
+		dk_printVar BASH_VENDOR
 		BASH_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug BASH_OS
+		dk_printVar BASH_OS
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_debug BASH_ENV
+		dk_printVar BASH_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_debug HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_debug HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_debug HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_debug HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_printVar HOST_ENV
 	fi	
 	
 	if dk_commandExists uname; then
 		
 		UNAME="$(uname)"
-		dk_debug UNAME	
-		UNAME_a="$(try uname -a)" && dk_debug UNAME_a
-		UNAME_s="$(try uname -s)" && dk_debug UNAME_s
-		UNAME_n="$(try uname -n)" && dk_debug UNAME_n	
-		UNAME_r="$(try uname -r)" && dk_debug UNAME_r
-		UNAME_v="$(try uname -v)" && dk_debug UNAME_v
-		UNAME_m="$(try uname -m)" && dk_debug UNAME_m
-		UNAME_p="$(try uname -p)" && dk_debug UNAME_p
-		UNAME_i="$(try uname -i)" && dk_debug UNAME_i
-		UNAME_o="$(try uname -o)" && dk_debug UNAME_o
+		dk_printVar UNAME	
+		UNAME_a="$(try uname -a)" && dk_printVar UNAME_a
+		UNAME_s="$(try uname -s)" && dk_printVar UNAME_s
+		UNAME_n="$(try uname -n)" && dk_printVar UNAME_n	
+		UNAME_r="$(try uname -r)" && dk_printVar UNAME_r
+		UNAME_v="$(try uname -v)" && dk_printVar UNAME_v
+		UNAME_m="$(try uname -m)" && dk_printVar UNAME_m
+		UNAME_p="$(try uname -p)" && dk_printVar UNAME_p
+		UNAME_i="$(try uname -i)" && dk_printVar UNAME_i
+		UNAME_o="$(try uname -o)" && dk_printVar UNAME_o
 		
 		UNAME_ARCH="$(try uname -m)"
 		dk_toLower UNAME_ARCH
@@ -2280,13 +2245,13 @@ dk_getHostTriple () {
 		#UNAME_ObjectFormat=""
 
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
-		dk_debug UNAME_TRIPLE
+		dk_printVar UNAME_TRIPLE
 
-		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_debug HOST_TRIPLE
-		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_debug HOST_ARCH
-		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_debug HOST_VENDOR
-		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_debug HOST_OS
-		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_debug HOST_ENV
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_printVar HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_printVar HOST_ENV
 	fi
 	
 
@@ -2307,7 +2272,7 @@ dk_getHostTriple () {
 		dk_error "Unsupported HOST_OS: ${UNAME_a}"
 	fi
 	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
-	dk_debug HOST_OS
+	dk_printVar HOST_OS
 
 
 	### Get the HOST_ARCH ###
@@ -2422,7 +2387,7 @@ dk_getHostTriple () {
 	fi
 
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	dk_debug HOST_TRIPLE
+	dk_printVar HOST_TRIPLE
 }
 
 
@@ -2451,7 +2416,7 @@ DK_TRY_CATCH () {
 #
 dk_getShellType () {
 	dk_verbose "dk_getShellType($*)"
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	echo "SHELL = $SHELL"
 	echo "BASH_SOURCE = $BASH_SOURCE"
 	echo "BASH_LINENO = $BASH_LINENO"

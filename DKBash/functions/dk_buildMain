@@ -22,11 +22,11 @@ dk_buildMain () {
 		sudo chown -R "$LOGNAME" "$HOME"
 	fi
 
-	dk_debug "SHLVL = $SHLVL"		# https://stackoverflow.com/a/4511483/688352
-	dk_debug MSYSTEM
-	dk_debug DKSCRIPT_PATH
-	dk_debug DKSCRIPT_DIR
-	dk_debug DKSCRIPT_NAME
+	dk_printVar "SHLVL = $SHLVL"		# https://stackoverflow.com/a/4511483/688352
+	dk_printVar MSYSTEM
+	dk_printVar DKSCRIPT_PATH
+	dk_printVar DKSCRIPT_DIR
+	dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
@@ -36,12 +36,12 @@ dk_buildMain () {
 	dk_validateGit
 	dk_validateBranch
 
-	dk_debug DKBRANCH_DIR
-	dk_debug DKAPPS_DIR
-	dk_debug DKCMAKE_DIR
-	dk_debug DK3RDPARTY_DIR
-	dk_debug DKIMPORTS_DIR
-	dk_debug DKPLUGINS_DIR
+	dk_printVar DKBRANCH_DIR
+	dk_printVar DKAPPS_DIR
+	dk_printVar DKCMAKE_DIR
+	dk_printVar DK3RDPARTY_DIR
+	dk_printVar DKIMPORTS_DIR
+	dk_printVar DKPLUGINS_DIR
 
 	if [ "$DKSCRIPT_DIR" != "$DKBRANCH_DIR" ]; then
 		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"

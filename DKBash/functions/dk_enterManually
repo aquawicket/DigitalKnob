@@ -9,7 +9,7 @@
 #
 dk_enterManually () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -27,7 +27,7 @@ dk_enterManually () {
 		TARGET_PATH=$DKAPPS_DIR/$input
 		return $true
 	fi
-	dk_debug TARGET_PATH
+	dk_printVar TARGET_PATH
 	
 	if [ ! -d "$DKAPPS_DIR"/"$APP" ]; then
 		mkdir -p "$DKAPPS_DIR"/"$APP";

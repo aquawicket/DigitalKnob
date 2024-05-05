@@ -9,7 +9,7 @@
 #
 dk_pushAssets () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
+	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_confirm || return 0
 	

@@ -30,7 +30,7 @@ dk_removeAll () {
 			dk_echo "Is must be in the branch directory to continue."
 			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
-			dk_debug DKBRANCH_DIR
+			dk_printVar DKBRANCH_DIR
 			return 1;
 		fi
 		
