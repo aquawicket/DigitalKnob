@@ -14,28 +14,40 @@ dk_printVar() {
 	_name=$1
 	exists=0
 	
-	# is _name a variable
 	if [ -v $_name ]; then
-		# if the _name is an array variable
+		
+		# _name is an array variable
 		if $(declare -p $_name 2> /dev/null | grep -q '^declare \-a'); then	
 			declare -n _array="$_name"
 			for ((i=0; i < ${#_array[@]}; i++ )); do 
+				#dk_debug "\$$_name:array[$i] = ${_array[$i]}";
 				dk_debug "\$$_name[$i] = ${_array[$i]}";
 			done
+			
+		# _name is a variable
 		else
+			#dk_debug "\$$_name:variable = $(!_name)"
 			dk_debug "\$$_name = ${!_name}"
 		fi
 		exists=1
 	fi
 	
-	# is _name a function
+	# _name is a function
 	if [ "$(type -t $_name)" = "function" ]; then
-		func=$(type $_name | sed '1,2d')
-		dk_debug "\$$_name = $func"
+		_value=$(type $_name | sed '1,1d')
+		#dk_debug "\$$_name:function = $_value"
+		dk_debug "\$$_name = $_value"
 		exists=1
 	fi
 	
-	if [ $exists -ne 1 ]; then
-		dk_debug "${red}\$$_name is not set${clr}"
+	# _name is an alias
+	if [ "$(type -t $_name)" = "alias" ]; then
+		_value=$(alias $_name)
+		_value=${_value#*=}
+		#dk_debug "\$$_name:alias = $_value"
+		dk_debug "\$$_name = $_value"
+		exists=1
 	fi
+	
+	[ $exists -ne 1 ] && dk_debug "${red}\$$_name is not set${clr}"
 }
