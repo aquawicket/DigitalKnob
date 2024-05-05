@@ -41,6 +41,7 @@ dk_resetAll () {
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
 		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 		unset DKINIT
+		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
 		dk_exit
 	else	
@@ -52,7 +53,8 @@ dk_resetAll () {
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
-		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
+		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
+		dk_validate DKBRANCH_DIR "dk_validateBranch"
 		dk_echo
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
 		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
