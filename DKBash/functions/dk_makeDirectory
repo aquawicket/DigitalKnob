@@ -1,0 +1,16 @@
+#!/bin/sh
+#echo "$0 $*"
+#[ -n "$include_dk_makeDirectory" ] && exit || export readonly include_dk_makeDirectory=1
+[ -z "$DKINIT" ] && . ./DK
+
+
+#####################################################################
+# dk_makeDirectory(<path>)
+#
+#
+dk_makeDirectory () {
+	dk_debug "dk_makeDirectory($*)"
+	dk_debugFunc
+	
+	mkdir -p "$1"
+}

@@ -77,7 +77,6 @@ echo "DK($*)"
 	
 	chmod 777 ${DKBASH_DIR}/functions/*
 	
-	
 	###### Script loader ######
 	#if [ -n "$ENABLE_dk_load" ]; then
 		###### aquire if missing ######
