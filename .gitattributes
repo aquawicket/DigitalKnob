@@ -1,4 +1,5 @@
-*.cmd   text eol=crlf
-*.bat   text eol=crlf
-*.sh    text eol=lf
+*       text eol=lf
 *.bash  text eol=lf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.sh    text eol=lf
