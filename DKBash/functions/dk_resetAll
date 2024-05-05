@@ -40,6 +40,7 @@ dk_resetAll () {
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
 		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		unset DKINIT
 		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
 		dk_exit
 	else	
@@ -71,6 +72,7 @@ dk_resetAll () {
 		
 		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
 			clear
+			unset DKINIT
 			exec "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 			dk_exit
 		else

@@ -19,7 +19,9 @@ echo "DK($*)"
 		export RELOAD_WITH_BASH=0
 		if [ -n "$(command -v bash)" ]; then
 			echo "reloading with /bin/bash . . ."
+			echo "SHLVL = $SHLVL"
 			exec /bin/bash "$0"
+			echo "SHLVL = $SHLVL"
 		else
 			echo ""
 			echo "ERROR: This script requires bash. Please install it and try again.";
