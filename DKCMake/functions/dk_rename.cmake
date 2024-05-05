@@ -25,7 +25,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	endif()
 	if(EXISTS ${to})
 		if(NOT OVERWRITE)
-			dk_error("Cannot rename file. Destiantion exists and not set to overwrite")
+			dk_error("Cannot rename file. Destiantion exists and not set to OVERWRITE")
 		endif()
 		dk_remove(${to})
 	endif()

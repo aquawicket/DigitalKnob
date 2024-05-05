@@ -1,16 +1,46 @@
+#!/bin/sh
 #echo "$0 $*"
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+#[ -n "$include_dk_rename" ] && exit || export readonly include_dk_rename=1
 [ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
 # dk_rename(<from> <to>)
 #
+#	Rename file or directory or move a file or directory to another location
+#
+#	@from		- The source path to copy
+#	@to			- The destination path to copy to
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #
 dk_rename () {
+	dk_debug "dk_rename($*)"
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 2 ] && dk_error "dk_rename(): Incorrect number of parameters"
 	
+	from="$1"
+	to="$2"
+	#OVERWRITE=     TODO
+	
+	dk_info "Renameing ${from} to ${to}"
+	
+	if ! dk_fileExists "${from}"; then
+		dk_error "dk_rename: ${from} not found"
+	fi
+	
+	if dk_fileExists "${to}"; then
+		if [ $OVERWRITE -ne 1 ]; then
+			dk_error "dk_rename(): Cannot rename file. Destiantion exists and not set to OVERWRITE"
+		fi
+		dk_remove ${to}
+	fi
+	
+	# the base directory of the ${to} path must exist.    
+	parent_dir=$(dirname ${to})
+	dk_printVar parent_dir
+	dk_makeDirectory "${parent_dir}"
+	
+	mv -i ${from} ${to}   # -i means interactive, to prevent overwrite
 	#TODO
 	#[ ? = "success" ]
 }

@@ -21,7 +21,7 @@ function(dk_remove path)
 	endif()
 	file(REMOVE_RECURSE ${path})
 	#execute_process(COMMAND -E rm ${path})
-	dk_sleep(1)	# give the file a second to delete
+	dk_sleep(1)	# give the path a second to delete
 	if(EXISTS ${path})
 		if(NOT NOERROR)
 			dk_error("failed to remove ${path}")

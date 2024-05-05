@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
@@ -8,24 +9,25 @@
 #
 #
 dk_getDKPaths () {
+	dk_debug "dk_getDKPaths($*)"
 	dk_debugFunc
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE
-		DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
-		dk_replaceAll "$DIGITALKNOB_DIR" "\\" "/" DIGITALKNOB_DIR
-		dk_replaceAll "$DIGITALKNOB_DIR" "C:" "/c" DIGITALKNOB_DIR
+		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
+		dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
+		dk_replaceAll "${DIGITALKNOB_DIR}" "C:" "/c" DIGITALKNOB_DIR
 	else
 		DIGITALKNOB_DIR="$HOME/digitalknob"
 	fi
 	dk_printVar DIGITALKNOB_DIR
-	mkdir -p "$DIGITALKNOB_DIR"
+	dk_makeDirectory "${DIGITALKNOB_DIR}"
 	
-	DKTOOLS_DIR="$DIGITALKNOB_DIR/DKTools"
-	mkdir -p "$DKTOOLS_DIR"
+	DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
+	dk_makeDirectory "${DKTOOLS_DIR}"
 	dk_printVar DKTOOLS_DIR
 	
-	DKDOWNLOAD_DIR="$DIGITALKNOB_DIR/download"
-	mkdir -p "$DKDOWNLOAD_DIR"
+	DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
+	dk_makeDirectory "${DKDOWNLOAD_DIR}"
 	dk_printVar DKDOWNLOAD_DIR
 }

@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0($*)"
 #[ -n "$include_dk_printVar" ] && exit || export readonly include_dk_printVar=1
 [ -z "$DKINIT" ] && . ./DK
@@ -14,8 +15,7 @@ dk_printVar() {
 	_name=$1
 	exists=0
 	
-	if [ -v $_name ]; then
-		
+	if [ -n "${!_name+x}" ]; then	# is _name
 		# _name is an array variable
 		if $(declare -p $_name 2> /dev/null | grep -q '^declare \-a'); then	
 			declare -n _array="$_name"
@@ -49,5 +49,5 @@ dk_printVar() {
 		exists=1
 	fi
 	
-	[ $exists -ne 1 ] && dk_debug "${red}\$$_name is not set${clr}"
+	[ $exists -ne 1 ] && dk_debug "\$$_name ${red}is not set${clr}"
 }

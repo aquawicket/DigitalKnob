@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
@@ -11,8 +12,16 @@
 #
 dk_validate () {
 	dk_debugFunc
+	dk_debug "dk_validate($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 
-	[ -n $1 ] && return
-	$2
+	_var=$1
+	_code=$2
+	[ -n "${!_var+x}" ] && return
+	
+	echo "_code = ${_code}"
+	dk_load ${_code}
+	${_code}
+	
+	[ -z "${!_var+x}" ] && dk_error "dk_validate(): ${_var} is invalid"
 }

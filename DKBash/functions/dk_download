@@ -1,4 +1,5 @@
-#echo "$0 $*"
+#!/bin/sh
+#echo "$0($*)"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
 
@@ -20,7 +21,13 @@ dk_download () {
 	dk_printVar parentdir
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $parentdir failed!"
-	wget -P "$parentdir" "$1" 
+	if dk_commandExists "wget"; then
+		wget -P "$parentdir" "$1"
+	elif dk_commandExists "curl"; then
+		curl -Lo "$2" "$1"
+	else
+		dk_error "dk_download(): could not find wget or curl"
+	fi
 	cd "$oldpwd" #|| dk_error "cd $oldpwd failed!"
 	#[ "$input" = "" ]
 }

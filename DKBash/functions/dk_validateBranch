@@ -1,3 +1,4 @@
+#!/bin/sh
 #echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
@@ -8,6 +9,7 @@
 #
 #
 dk_validateBranch () {
+	dk_debug "dk_validateBranch($*)"
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 

@@ -14,14 +14,15 @@ func () {
 
 alias alias_="an alias"
 
-#all="variable using a shared name"
+all="a variable, using a shared name"
 
-all[0]="and array variable"
+all[0]="an array variable, using a shared name"
 
 all () {
-	echo "function using a shared name"
+	echo "a function, using a shared name"
 }
 
+alias all="an alias"
 
 ###################################
 dk_printVar var

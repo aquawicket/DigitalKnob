@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "DK($*)"
 #echo "0 = $0"
 #echo "* = $*"
@@ -81,7 +82,7 @@ echo "DK($*)"
 	#if [ -n "$ENABLE_dk_load" ]; then
 		###### aquire if missing ######
 		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
-		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && curl -o DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
+		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && curl -Lo DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
 	
 		. ${DKBASH_DIR}/functions/dk_load
 		dk_load dk_escapeSequences && dk_escapeSequences
