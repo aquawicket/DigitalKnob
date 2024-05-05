@@ -1,42 +1,41 @@
-#echo "$0 $*"
+#echo "$0($*)"
 #[ -n "$include_dk_printVar" ] && exit || export readonly include_dk_printVar=1
 [ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
-# dk_printVar(variable)
+# dk_printVar(<variable>)
 #
 #
 dk_printVar() {
 	dk_debugFunc
-	[ -z "$1" ] && dk_error "dk_printVar <variable> requires 1 parameter"
+	[ $# -ne 1 ] && dk_error "dk_printVar($*): incorrect number of arguments"
 	
-	var_name=$1
+	_name=$1
 	exists=0
 	
-	if [ "$(type -t $1)" = "function" ]; then
-		dk_debug "${blue} \$$var_name = function $1() ${clr}"
-		func=$(type $1 | sed '1,2d')
-		dk_debug "${blue} $func ${clr}"
-		exists=1;
-	fi
-		
-	if ! [ -v $1 ]; then
-		if [ $exists -eq 1 ]; then
-			return $true
+	# is _name a variable
+	if [ -v $_name ]; then
+		# if the _name is an array variable
+		if $(declare -p $_name 2> /dev/null | grep -q '^declare \-a'); then	
+			declare -n _array="$_name"
+			for ((i=0; i < ${#_array[@]}; i++ )); do 
+				dk_debug "\$$_name[$i] = ${_array[$i]}";
+			done
+		else
+			dk_debug "\$$_name = ${!_name}"
 		fi
-			
-		dk_warning "${red} \$$1 is not set ${clr}"
-		return $false
+		exists=1
 	fi
-		
-	if $(declare -p $1 2> /dev/null | grep -q '^declare \-a'); then	
-		declare -n arr="$1"
-		for ((i=0; i < ${#arr[@]}; i++ )); do 
-			dk_debug "${blue} \$$var_name[$i] = ${arr[$i]} ${clr}";
-		done
-	else
-		arr=$1
-		dk_debug "${blue} \$$arr = ${!arr} ${clr}"
+	
+	# is _name a function
+	if [ "$(type -t $_name)" = "function" ]; then
+		func=$(type $_name | sed '1,2d')
+		dk_debug "\$$_name = $func"
+		exists=1
+	fi
+	
+	if [ $exists -ne 1 ]; then
+		dk_debug "${red}\$$_name is not set${clr}"
 	fi
 }
