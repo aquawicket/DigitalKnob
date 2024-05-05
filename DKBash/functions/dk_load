@@ -9,17 +9,25 @@
 #
 #
 dk_load() {
+	dk_debug "dk_load($*)"
 	#dk_debugFunc
 	local fn=
+	#fpath=
 	[ -z $1 ] && return 0 #true
 	
-	if [ -f "$1" ]; then
+	#echo "if [ -e "$1" ]; then"
+	if [ -e "$1" ]; then
 		fpath=$1
 		fn=$(basename ${fpath})
 	    fn="${fn%.*}"
 	else
-		fn=$1
+		fn="$1"
+		#echo "fn = ${fn}"
+		#echo "DKBASH_DIR = ${DKBASH_DIR}"
+		#echo "fpath = ${fpath}"
+		fn=$(basename ${fn})
 		fpath=${DKBASH_DIR}/functions/$fn
+		#echo "fpath = ${fpath}"
 	fi
 	
 	#### downloader ####
