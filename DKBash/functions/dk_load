@@ -9,7 +9,7 @@
 #
 #
 dk_load() {
-	dk_debug "dk_load($*)"
+	echo "dk_load($*)"
 	#dk_debugFunc
 	local fn=
 	#fpath=
