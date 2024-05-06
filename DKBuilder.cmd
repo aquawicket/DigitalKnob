@@ -1,5 +1,5 @@
 @echo off
-echo %~0(%*)
+::echo %~0(%*)
 
 ::###### DK_SETUP ######
 ::if not exist DKBatch mkdir DKBatch

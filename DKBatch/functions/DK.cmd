@@ -19,6 +19,8 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	if not exist "%DKBATCH_DIR%\functions" ( echo "DKBATCH_DIR does not exist" & goto:eof )
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
+	if not exist DKBatch\functions\dk_getCaller.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_getCaller.cmd DKBatch\functions\dk_getCaller.cmd
+	
 	call dk_getCaller 1
 	:dk_getCaller_return1
 	::call dk_printVar caller[0]
@@ -42,9 +44,16 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::call dk_getScriptPath DKSCRIPT_PATH
 	:::dk_getScriptPath_return
 	
+	if not exist DKBatch\functions\dk_getDirectory.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_getDirectory.cmd DKBatch\functions\dk_getDirectory.cmd
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
+	
+	if not exist DKBatch\functions\dk_getFilename.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_getFilename.cmd DKBatch\functions\dk_getFilename.cmd
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
+	
+	if not exist DKBatch\functions\dk_escapeSequences.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_escapeSequences.cmd DKBatch\functions\dk_escapeSequences.cmd
 	call dk_escapeSequences
+	
+	if not exist DKBatch\functions\dk_printVar.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_printVar.cmd DKBatch\functions\dk_printVar.cmd
 	call dk_printVar DKBATCH_DIR
 	call dk_printVar DKSCRIPT_PATH
 	call dk_printVar DKBATCH_DIR
@@ -69,6 +78,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 
 	::############ Script loader ############
+	if not exist DKBatch\functions\dk_load.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_load.cmd DKBatch\functions\dk_load.cmd
 	call dk_load
 
 
@@ -81,6 +91,8 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
         :DKTEST
         "%caller[1].func%"
         echo ########################## END DKTEST MODE ######################
+		
+		if not exist DKBatch\functions\dk_exit.cmd call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_exit.cmd DKBatch\functions\dk_exit.cmd
         call dk_exit
 	)
 goto:eof
