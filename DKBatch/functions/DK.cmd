@@ -9,6 +9,9 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 :DK () {
 	echo Loading DigitalKnob . . .
 
+	if not exist DKBatch\functions\dk_download.cmd powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/DK.cmd', 'DKBatch\functions\dk_download.cmd')"
+	
+	
 	::############ Script internal setup ############
 	set _input=%~dp0..\
 	for %%Z in ("%_input%") do set "DKBATCH_DIR=%%~dpZ"
