@@ -43,8 +43,11 @@ dk_resetAll () {
 		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 		unset DKINIT
 		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
+		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
 		#dk_exit
+		
+		source "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
+		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
