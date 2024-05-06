@@ -3,7 +3,7 @@ call dk_includeGuard
 call DK
 
 ::####################################################################
-::# dk_asciiToDecimal(<ascii_string>)
+::# dk_asciiToDecimal(<ascii> <output>)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -13,8 +13,8 @@ call DK
 	call dk_asciiToHex %~1 hex
 	call dk_hexToDecimal %hex% decimal
 	
-	::echo     dk_asciiToDecimal %~1 = %decimal%
-	endlocal & set %2=%decimal%
+	::call dk_debug "dk_asciiToDecimal %~1 = %decimal%"
+	endlocal & set "%2=%decimal%"
 goto:eof
 
 

@@ -3,7 +3,7 @@ call dk_includeGuard
 call DK
 
 ::####################################################################
-::# dk_asciiToHex(<ascii_string>)
+::# dk_asciiToHex(<ascii>)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -25,7 +25,7 @@ call DK
     set "hex=0x%hex:~-2%"
 	
 	::echo     dk_asciiToHex %~1 = %hex%
-	endlocal & set %2=%hex%
+	endlocal & set "%2=%hex%"
 goto:eof
 
 

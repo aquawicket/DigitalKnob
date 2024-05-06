@@ -11,5 +11,5 @@ call DK
 	
     if "%*" == "" echo ERROR: dk_appendCmakeArgs is empty! & goto:eof
     set CMAKE_ARGS=%CMAKE_ARGS% "%*"
-	echo appended %*
+	call dk_debug "appended %*"
 goto:eof

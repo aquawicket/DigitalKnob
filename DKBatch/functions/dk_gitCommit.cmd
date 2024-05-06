@@ -12,8 +12,10 @@ call DK
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 
         
+	call dk_validate DKBRANCH_DIR dk_validateBranch
     cd %DKBRANCH_DIR%
-        
+    
+	call dk_validate GIT_EXE dk_validateGit    
     call dk_commandToVariable "%GIT_EXE%" config --global credential.helper STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store

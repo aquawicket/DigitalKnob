@@ -15,9 +15,10 @@ call DK
     )
     if /I "%CONFIRM%" NEQ "Y" goto:eof
         
-    if NOT exist "%DKBRANCH_DIR%\.git" (
-        "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
-    )
+	call dk_validate DKBRANCH_DIR dk_validateBranch
+	call dk_validate GIT_EXE dk_validateGit
+	
+    if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%")
     call dk_checkError
 
     cd "%DKBRANCH_DIR%"
