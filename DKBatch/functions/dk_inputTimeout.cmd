@@ -1,8 +1,6 @@
 @echo off
-call dk_includeGuard
 call DK
 
-setlocal EnableExtensions EnableDelayedExpansion
 ::#################################################################################
 ::# dk_inputTimeout(<message> <timeout> <default>)
 ::#
@@ -11,6 +9,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 :dk_inputTimeout <message> <timeout> <default>
 	call dk_debugFunc
 	
+	setlocal EnableExtensions EnableDelayedExpansion
 	set "message=%1"
 	set /a timeout=%2
 	set "default=%3"

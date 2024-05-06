@@ -1,6 +1,5 @@
 @echo off
 call DK
-call dk_includeGuard
 
 ::####################################################################
 ::# dk_test(<args>)

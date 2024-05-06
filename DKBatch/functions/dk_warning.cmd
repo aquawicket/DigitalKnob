@@ -1,4 +1,5 @@
-call dk_includeGuard
+@echo off
+call DK
 
 if "%ENABLE_dk_warning%"=="" set ENABLE_dk_warning=1
 if "%TRACE_ON_WARNING%"==""  set TRACE_ON_WARNING=0

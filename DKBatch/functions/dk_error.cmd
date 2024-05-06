@@ -1,5 +1,4 @@
 @echo off
-call dk_includeGuard
 call DK
 
 if "%ENABLE_dk_error%"==""  set ENABLE_dk_error=1

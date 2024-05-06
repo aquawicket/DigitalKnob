@@ -1,5 +1,4 @@
 @echo off
-call dk_includeGuard
 call DK
 
 set GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe

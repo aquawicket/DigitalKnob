@@ -1,5 +1,5 @@
-call dk_includeGuard
-setlocal EnableDelayedExpansion
+@echo off
+call DK
 
 ::################################################################################
 ::# dk_convertToCIdentifier(<in> <out>)
@@ -8,6 +8,7 @@ setlocal EnableDelayedExpansion
 :dk_convertToCIdentifier () {
 	::call dk_debugFunc
 	
+	setlocal EnableDelayedExpansion
     set "_input=%1"
 	::call dk_printVar _input
 
@@ -25,5 +26,5 @@ setlocal EnableDelayedExpansion
     :c_identifier_endLoop
 	::call dk_printVar _output
 
-endlocal & set "%2=%_output%"		
+	endlocal & set "%2=%_output%"		
 goto:eof

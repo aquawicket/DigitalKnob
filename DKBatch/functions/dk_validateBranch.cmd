@@ -1,4 +1,5 @@
-call dk_includeGuard
+@echo off
+call DK
 
 ::####################################################################
 ::# dk_validateBranch()

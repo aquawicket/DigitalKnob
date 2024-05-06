@@ -1,6 +1,5 @@
 @echo off
-::call dk_includeGuard
-::call DK
+call DK
 
 ::################################################################################
 ::# dk_set(<name> <value>)

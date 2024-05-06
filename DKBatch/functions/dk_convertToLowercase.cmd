@@ -1,5 +1,5 @@
-call dk_includeGuard
-
+@echo off
+call DK
 
 ::################################################################################
 ::# dk_convertToLowercase(<in> <out>)
