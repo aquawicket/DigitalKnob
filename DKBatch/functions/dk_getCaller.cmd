@@ -1,3 +1,6 @@
+@echo off
+::call DK
+
 ::https://stackoverflow.com/a/43123617/688352
 
 ::setlocal DisableDelayedExpansion
