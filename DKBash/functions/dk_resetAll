@@ -9,6 +9,7 @@
 #
 #
 dk_resetAll () {
+	echo "dk_resetAll($*)"
 	dk_debugFunc
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
@@ -43,7 +44,7 @@ dk_resetAll () {
 		unset DKINIT
 		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		dk_exit
+		#dk_exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
@@ -52,10 +53,13 @@ dk_resetAll () {
 		#do we need to kill any processes?
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
+		printenv
+
+		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		
-		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
+ 	   
 		dk_validate DKBRANCH_DIR "dk_validateBranch"
-		dk_echo
+		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"	
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
 		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
 		dk_echo "done."
@@ -76,7 +80,7 @@ dk_resetAll () {
 			clear
 			unset DKINIT
 			exec "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
-			dk_exit
+			#dk_exit
 		else
 			dk_error "Oh no, the git cloned build still isn't here! :( "
 		fi
