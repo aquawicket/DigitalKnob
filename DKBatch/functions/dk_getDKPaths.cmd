@@ -7,7 +7,9 @@ call DK
 ::#
 :dk_getDKPaths () {
 	call dk_debugFunc
-		
+	
+	call dk_load dk_makeDirectory
+	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
     call dk_makeDirectory "%DIGITALKNOB_DIR%"
     call dk_printVar DIGITALKNOB_DIR

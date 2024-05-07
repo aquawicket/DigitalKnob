@@ -56,8 +56,11 @@ setlocal enableDelayedExpansion
 	call dk_load dk_getDKPaths
 	call dk_getDKPaths
    
+	call dk_load dk_validateGit
     call dk_validateGit
 	call dk_printVar GIT_EXE
+	
+	call dk_load dk_validateBranch
     call dk_validateBranch
 
     call dk_printVar DKBRANCH_DIR
@@ -69,12 +72,23 @@ setlocal enableDelayedExpansion
     
 	call dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	
+	call dk_load dk_warning
 	if NOT "%DKSCRIPT_DIR%"=="%DKBRANCH_DIR%" (
 		call dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		call dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
 		call dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
 	)
     
+	call dk_load dk_pickUpdate
+	call dk_load dk_pickApp
+	call dk_load dk_pickOs
+	call dk_load dk_pickType
+	call dk_load dk_createCache
+	call dk_load dk_generate
+	call dk_load dk_build
+	call dk_load dk_readCache
+	call dk_load dk_checkGitRemote
+	
     :while_loop             
 	
 		if "%UPDATE%"==""     call dk_pickUpdate & goto:while_loop

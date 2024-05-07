@@ -11,6 +11,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 :dk_validateGit () {
 	call dk_debugFunc
 	
+	call dk_load dk_validate
 	call dk_validate HOST_ARCH dk_getHostTriple
     if "%HOST_ARCH%"=="arm32"  set GIT_DL=
     if "%HOST_ARCH%"=="arm64"  set GIT_DL=%GIT_DL_WIN_ARM64%
@@ -22,8 +23,12 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
 	::call dk_printVar GIT_FOLDER
+	
+	call dk_load dk_convertToCIdentifier
     call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
 	::call dk_printVar GIT_FOLDER
+	
+	call dk_load dk_convertToLowercase
     call dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
 	::call dk_printVar GIT_FOLDER
     
