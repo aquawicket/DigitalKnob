@@ -1,6 +1,6 @@
 @echo off
-::call DK
-::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
+call DK
+if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 
 ::####################################################################
 ::# dk_load()
@@ -8,10 +8,7 @@
 ::#
 :dk_load() {
 	::call dk_debugFunc
-	
-	if not exist "%DKBATCH_DIR%\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
-	if not exist "%DKBATCH_DIR%\functions\%~1.cmd" call dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
-	::call %*
+	call %*
 	
 ::	local fn=
 ::	[ -z $1 ] && return 0 #true
