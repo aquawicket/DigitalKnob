@@ -34,3 +34,7 @@ call DK
 
     call dk_checkError
 goto:eof
+
+
+:DKTEST ########################################################################
+call dk_gitUpdate
