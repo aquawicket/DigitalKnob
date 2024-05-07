@@ -17,9 +17,9 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
 	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions"
-	if not exist "%DKBATCH_DIR%\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
-	if not exist "%DKBATCH_DIR%\functions\dk_getCaller.cmd" call dk_download "%DKHTTP%/dk_getCaller.cmd" "%DKBATCH_DIR%\functions\dk_getCaller.cmd"
-	
+	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
+	::if not exist "%DKBATCH_DIR%\functions\dk_getCaller.cmd" call dk_download "%DKHTTP%/dk_getCaller.cmd" "%DKBATCH_DIR%\functions\dk_getCaller.cmd"
+	call dk_load dk_getCaller
 	call dk_getCaller 1
 	:dk_getCaller_return1
 	::call dk_printVar caller[0]
