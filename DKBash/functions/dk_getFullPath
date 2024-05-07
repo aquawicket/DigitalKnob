@@ -1,0 +1,16 @@
+#!/bin/sh
+#echo "$0 $*"
+#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
+[ -z "$DKINIT" ] && . ./DK
+
+
+##################################################################################
+# dk_getFilename(<path> <output>)
+#
+#
+dk_getFilename () {
+	dk_debugFunc
+	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	
+	eval "$2=$(realpath "$1")"
+}
