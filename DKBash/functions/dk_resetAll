@@ -41,6 +41,6 @@ dk_resetAll () {
 	dk_gitUpdate NO_CONFIRM
 	
 	dk_info "Restarting ${DKSCRIPT_NAME}. . ."
-	sleep 3
-	exec "$DKSCRIPT_PATH"
+	sleep 10
+	dk_reload
 }
