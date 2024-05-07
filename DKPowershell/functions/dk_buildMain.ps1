@@ -5,7 +5,7 @@
 # dk_buildMain()
 #
 #
-function dk_buildMain () {
+function dk_buildMain() {
 	dk_debugFunc
 
 #setlocal enableDelayedExpansion
@@ -50,17 +50,13 @@ function dk_buildMain () {
 #  call dk_printVar MSYSTEM
 
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_load dk_getHostTriple
 	dk_getHostTriple
 	
-	dk_load dk_getDKPaths
 	dk_getDKPaths
    
-	dk_load dk_validateGit
     dk_validateGit
 	dk_printVar GIT_EXE
 	
-	dk_load dk_validateBranch
     dk_validateBranch
 
     dk_printVar DKBRANCH_DIR
@@ -70,31 +66,20 @@ function dk_buildMain () {
     dk_printVar DKIMPORTS_DIR
     dk_printVar DKPLUGINS_DIR
     
-	dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
+	#dk_getDirectory "$DKSCRIPT_PATH" DKSCRIPT_DIR
 	
-	dk_load dk_warning
-	if NOT "%DKSCRIPT_DIR%"=="%DKBRANCH_DIR%" (
-		dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
-		dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
-	)
-    
-	dk_load dk_pickUpdate
-	dk_load dk_pickApp
-	dk_load dk_pickOs
-	dk_load dk_pickType
-	dk_load dk_createCache
-	dk_load dk_generate
-	dk_load dk_build
-	dk_load dk_readCache
-	dk_load dk_checkGitRemote
+	if (! ($DKSCRIPT_DIR -eq $DKBRANCH_DIR)){
+		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
+		dk_warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
+	}
 	
     :while_loop             
 	
-		if "%UPDATE%"==""     dk_pickUpdate & goto:while_loop
-		if "%APP%"==""        dk_pickApp    & goto:while_loop
-		if "%TARGET_OS%"==""  dk_pickOs     & goto:while_loop
-		if "%TYPE%"==""       dk_pickType   & goto:while_loop
+		if ($UPDATE -eq ""){     dk_pickUpdate; goto:while_loop }
+		if ($APP -eq ""){        dk_pickApp;    goto:while_loop }
+		if ($TARGET_OS -eq ""){  dk_pickOs;     goto:while_loop }
+		if ($TYPE -eq ""){       dk_pickType;   goto:while_loop }
 
 		dk_createCache
 		
@@ -108,4 +93,6 @@ function dk_buildMain () {
 		set TYPE=
 	goto while_loop
 	endlocal
-goto:eof
+}
+
+#dk_buildMain

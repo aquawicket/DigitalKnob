@@ -4,16 +4,22 @@ Write-Output "DKBuilder.ps1"
 if (! (Test-Path "DKPowershell")) { New-Item -Path 'DKPowershell' -ItemType Directory }
 if (! (Test-Path "DKPowershell/functions")) { New-Item -Path 'DKPowershell/functions' -ItemType Directory }
 if (! (Test-Path "DKPowershell/functions/DK.ps1")) {	Write-Warning "DK.ps1 does not exist" }
-. "DKPowershell/functions/DK.ps1"
+
+echo "PWD = $PWD"
+Import-Module -Global $PWD\DKPowershell\functions\DK.ps1
 
 
 ###### Global variables ######
-#dk_printVar DKSCRIPT_PATH
-#dk_printVar DKBATCH_DIR
-
+Write-Output "DKSCRIPT_PATH = $DKSCRIPT_PATH"
+Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
+Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
 
 ###### Load Main Program ######
-#Import-Module "$DKPOWERSHELL_DIR/dk_buildMain.ps1"
-. "DKPowershell/functions/dk_buildMain.ps1"
+dk_load dk_buildMain
+dk_load dk_getDKPaths
+dk_load dk_debugFunc
+dk_load dk_makeDirectory
+Import-Module -Global $DKPOWERSHELL_DIR\functions\dk_buildMain.ps1
 dk_buildMain
 Read-Host -Prompt "Press Enter to exit" 
