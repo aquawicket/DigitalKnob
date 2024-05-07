@@ -13,5 +13,4 @@
 
 
 ###### Load Main Program ######
-[ "$#" -gt "0" ] && "$@"
-dk_buildMain "$*"
+[ $# -gt 0 ] && "$@" || dk_buildMain "$*"

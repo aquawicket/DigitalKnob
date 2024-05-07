@@ -13,15 +13,15 @@ dk_removeAll () {
 	dk_debugFunc
 	[ $# -gt 1 ] && dk_error "Too many parameters"
 	
-	if ! [ "$1" = "wipe" ]; then
+	if [ "$1" -ne "wipe" ]; then
 		clear
 		dk_echo
 		dk_echo
 		dk_info "Do you want to reset the entire local repository . . . ?"
 		dk_info "This will delete digitalknob, everything will be reset,"
 		dk_info "and the repository will be re-cloned. All libraries and tools"
-		dk_info "will be redk_downloaded and rebuild from start. Save any changes"
-		dk_info "you wish to commit or save beforehand."
+		dk_info "will be re-downloaded and rebuild from start."
+		dk_info "You may wish to save any changes and commit them beforehand."
 		dk_echo
 		
 		dk_confirm || return 0
@@ -68,6 +68,7 @@ dk_removeAll () {
 		#exec $SHELL
 		
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
+		dk_pause
 		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
 		#dk_echo "done."
 		
