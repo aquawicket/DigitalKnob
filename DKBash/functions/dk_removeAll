@@ -28,25 +28,27 @@ dk_removeAll () {
 		
 		# first we need to relocate this file up one directory
 		# make sure script is running from DKBRANCH_DIR
-		if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
 			dk_echo "${yellow}"
 			dk_echo "WARNING: this file isn't running from the branch directory"
 			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+			dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 			dk_echo "${clr}"			
 			dk_printVar DKBRANCH_DIR
 			return $false;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
-		rm -r -f "$DIGITALKNOB_DIR/DKBash"
-		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
-		rm -r -f "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
-		cp -r "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+		rm -r -f "${DIGITALKNOB_DIR}/DKBash"
+		cp -r "${DKBRANCH_DIR}/DKBash" "${DIGITALKNOB_DIR}/DKBash"
+		rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+		cp -r "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 		unset DKINIT
-		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
-		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
+		#cd "${DIGITALKNOB_DIR}" #|| dk_error "cd ${DIGITALKNOB_DIR} failed!"
+		#exec /bin/bash "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}" dk_removeAll wipe
+		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"
+		export PATH=${DKBASH_DIR}/functions:${PATH}
+		. "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}" dk_removeAll wipe
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		echo "dk_removeAll(wipe)"
@@ -58,23 +60,22 @@ dk_removeAll () {
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
 		
-		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
+		#cd "${DIGITALKNOB_DIR}" #|| dk_error "cd ${DIGITALKNOB_DIR} failed!"
 		
- 	   
 		dk_validate DKBRANCH_DIR "dk_validateBranch"
 		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"
 
 		#printenv
 		#exec $SHELL
 		
-		dk_echo "DELETING $DKBRANCH_DIR . . . ."
+		dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 		dk_rename "${DKBRANCH_DIR}" "${DKBRANCH_DIR}_BACKUP"
-		#rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
+		#rm -r -f "${DKBRANCH_DIR}" #|| dk_error "dk_call rm -r -f ${DKBRANCH_DIR} failed"
 		
 		# wait for the folders to get deleted
 		sleep 5
 
-		if dk_fileExists "$DKBRANCH_DIR"; then
+		if dk_fileExists "${DKBRANCH_DIR}"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 
