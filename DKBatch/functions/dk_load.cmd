@@ -1,6 +1,6 @@
 @echo off
 call DK
-if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
+::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 
 ::####################################################################
 ::# dk_load()
