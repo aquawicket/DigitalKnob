@@ -42,7 +42,8 @@ echo "DK($*)"
 #	fi
 
 	###### get DKSCRIPT_ variables  ######
-	[ -n "$1" ] && DKSCRIPT_PATH=$(realpath $1) || export DKSCRIPT_PATH=$(pwd)/$(basename $0)
+	#[ -n "$1" ] && DKSCRIPT_PATH=$(realpath $1) || export DKSCRIPT_PATH=$(pwd)/$(basename $0)
+	export DKSCRIPT_PATH=$(pwd)/$(basename $0)
 	[ -e $DKSCRIPT_PATH ] || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist"
 	echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 	[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "$DKSCRIPT_PATH")

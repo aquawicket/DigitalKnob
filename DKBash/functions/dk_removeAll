@@ -1,7 +1,7 @@
 #!/bin/sh
 #echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK
+#[ -z "$DKINIT" ] && . ./DK
 
 
 ##################################################################################
@@ -40,30 +40,34 @@ dk_removeAll () {
 		
 		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
 		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
-		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
+		cp -r "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 		unset DKINIT
 		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		exit
+		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
+		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+		echo "dk_removeAll(wipe)"
+		
 		#:wipe
 		
 		#do we need sudo rights?
 		#do we need to kill any processes?
 		#do we need to undk_install any apps?
 		#do we need to remove any environment variables?
-		printenv
-
-		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
+		
+		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		
  	   
 		dk_validate DKBRANCH_DIR "dk_validateBranch"
-		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"	
+		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"
+
+		printenv
+exec $SHELL
+		
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
 		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
-		dk_echo "done."
+		#dk_echo "done."
 		
 		# wait for the folders to get deleted
 		sleep 5
