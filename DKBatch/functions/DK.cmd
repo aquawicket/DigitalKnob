@@ -65,7 +65,6 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	call dk_printVar DKSCRIPT_DIR
 	call dk_printVar DKSCRIPT_NAME
 	
-	
 	::call dk_exception init
 	::pause 
 	::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)

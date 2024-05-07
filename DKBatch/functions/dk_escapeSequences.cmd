@@ -88,6 +88,7 @@ call DK
 	::call dk_hexToVariable CAN 0x18
 	::call dk_hexToVariable EM  0x19
 	::call dk_hexToVariable SUB 0x1a
+	call dk_load dk_hexToVariable
 	call dk_hexToVariable ESC 0x1b
 	::call dk_hexToVariable FS  0x1c
 	::call dk_hexToVariable GS  0x1d
@@ -127,6 +128,7 @@ call DK
 	::call dk_decimalToVariable RS  30
 	::call dk_decimalToVariable US  31
 
+	call dk_load dk_set
 	call dk_set clear      "%ESC%[2J"
 
 	:: Attributes

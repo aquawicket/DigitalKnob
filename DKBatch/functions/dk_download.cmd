@@ -17,5 +17,7 @@ call DK
     echo please wait . . .
     ::certutil.exe -urlcache -split -f %~1 %~2
     powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%~2')"
+	
+	call dk_load dk_checkError
     call dk_checkError
 goto:eof

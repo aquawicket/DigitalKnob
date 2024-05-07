@@ -50,6 +50,7 @@ setlocal enableDelayedExpansion
 ::  call dk_printVar MSYSTEM
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
+	call dk_load dk_getHostTriple
 	call dk_getHostTriple
 
 	call dk_getDKPaths

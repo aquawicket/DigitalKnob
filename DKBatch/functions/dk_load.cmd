@@ -7,7 +7,9 @@ call DK
 ::#
 ::#
 :dk_load() {
+	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" call dk_download "%DKHTTP%/dk_debugFunc.cmd" "%DKBATCH_DIR%\functions\dk_debugFunc.cmd"
 	::call dk_debugFunc
+	
 	if not exist "%DKBATCH_DIR%\functions\%~1.cmd" call dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
 ::	call %*
 	
