@@ -32,16 +32,16 @@ dk_resetAll () {
 	fi
 		
 	# Backup main script file to digitalknob/
-	DIGITALKNOB_PARENT_DIR=$(dirname "${DIGITALKNOB_DIR}")
-	rm -r -f "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
-	cp "$DKSCRIPT_PATH" "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
-	dk_echo "DELETING ${DIGITALKNOB_DIR} . . . ."
-	rm -r -f "${DIGITALKNOB_DIR}" 2>nul
+	#DIGITALKNOB_PARENT_DIR=$(dirname "${DIGITALKNOB_DIR}")
+	#rm -r -f "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
+	#cp "$DKSCRIPT_PATH" "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
+	#dk_echo "DELETING ${DIGITALKNOB_DIR} . . . ."
+	#rm -r -f "${DIGITALKNOB_DIR}" 2>nul
 	
-	#rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-	#cp "$DKSCRIPT_PATH" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-	#dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
-	#rm -r -f "${DKBRANCH_DIR}" 2>nul
+	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+	cp "$DKSCRIPT_PATH" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
+	rm -r -f "${DKBRANCH_DIR}" 2>nul
 	
 	dk_gitUpdate #NO_CONFIRM
 	
