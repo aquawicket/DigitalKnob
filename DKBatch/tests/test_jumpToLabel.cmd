@@ -1,0 +1,27 @@
+@echo off
+
+:: when running a batch file without using call, it will jump into the last :label called if it exists in the file.
+
+:main
+	
+	:: This method call a :label, that runs the batch file. It will return to here after
+	call :method1
+	echo returned from test_jumpToLabelB :method1
+	pause
+	
+	:: This method allows us to place all code inline
+	call :method2 & goto:endMethod2
+	:method2
+	test_jumpToLabelB
+	:endMethod2
+	echo returned from test_jumpToLabelB :method2
+	pause
+		
+goto:eof
+
+
+:method1
+	test_jumpToLabelB
+goto:eof
+
+
