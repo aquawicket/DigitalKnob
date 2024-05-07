@@ -8,7 +8,8 @@ if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 ::#
 :dk_load() {
 	::call dk_debugFunc
-	call %*
+	if not exist "%DKBATCH_DIR%\functions\%~1.cmd" call dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
+::	call %*
 	
 ::	local fn=
 ::	[ -z $1 ] && return 0 #true

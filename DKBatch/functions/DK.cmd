@@ -18,7 +18,6 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	
 	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions"
 	if not exist "%DKBATCH_DIR%\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
-	
 	if not exist "%DKBATCH_DIR%\functions\dk_getCaller.cmd" call dk_download "%DKHTTP%/dk_getCaller.cmd" "%DKBATCH_DIR%\functions\dk_getCaller.cmd"
 	
 	call dk_getCaller 1
@@ -44,16 +43,22 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::call dk_getScriptPath DKSCRIPT_PATH
 	:::dk_getScriptPath_return
 	
-	if not exist "%DKBATCH_DIR%\functions\dk_getDirectory.cmd" call dk_download "%DKHTTP%/dk_getDirectory.cmd" "%DKBATCH_DIR%\functions\dk_getDirectory.cmd"
+	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" call dk_download "%DKHTTP%/dk_load.cmd" "%DKBATCH_DIR%\functions\dk_load.cmd"
+	
+	::if not exist "%DKBATCH_DIR%\functions\dk_getDirectory.cmd" call dk_download "%DKHTTP%/dk_getDirectory.cmd" "%DKBATCH_DIR%\functions\dk_getDirectory.cmd"
+	call dk_load dk_getDirectory
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
 	
-	if not exist "%DKBATCH_DIR%\functions\dk_getFilename.cmd" call dk_download "%DKHTTP%/dk_getFilename.cmd" "%DKBATCH_DIR%\functions\dk_getFilename.cmd"
+	::if not exist "%DKBATCH_DIR%\functions\dk_getFilename.cmd" call dk_download "%DKHTTP%/dk_getFilename.cmd" "%DKBATCH_DIR%\functions\dk_getFilename.cmd"
+	call dk_load dk_getFilename
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	
-	if not exist "%DKBATCH_DIR%\functions\dk_escapeSequences.cmd" call dk_download "%DKHTTP%/dk_escapeSequences.cmd" "%DKBATCH_DIR%\functions\dk_escapeSequences.cmd"
+	::if not exist "%DKBATCH_DIR%\functions\dk_escapeSequences.cmd" call dk_download "%DKHTTP%/dk_escapeSequences.cmd" "%DKBATCH_DIR%\functions\dk_escapeSequences.cmd"
+	call dk_load dk_escapeSequences
 	call dk_escapeSequences
 	
-	if not exist "%DKBATCH_DIR%\functions\dk_printVar.cmd" call dk_download "%DKHTTP%/dk_printVar.cmd" "%DKBATCH_DIR%\functions\dk_printVar.cmd"
+	::if not exist "%DKBATCH_DIR%\functions\dk_printVar.cmd" call dk_download "%DKHTTP%/dk_printVar.cmd" "%DKBATCH_DIR%\functions\dk_printVar.cmd"
+	call dk_load dk_printVar
 	call dk_printVar DKBATCH_DIR
 	call dk_printVar DKSCRIPT_PATH
 	call dk_printVar DKBATCH_DIR
@@ -78,8 +83,8 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 
 	::############ Script loader ############
-	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" call dk_download "%DKHTTP%/dk_load.cmd" "%DKBATCH_DIR%\functions\dk_load.cmd"
-	call dk_load
+	::if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" call dk_download "%DKHTTP%/dk_load.cmd" "%DKBATCH_DIR%\functions\dk_load.cmd"
+	::call dk_load
 
 
 	:: SCRIPT_ARGS = %* after %1
@@ -92,7 +97,8 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
         "%caller[1].func%"
         echo ########################## END DKTEST MODE ######################
 		
-		if not exist "%DKBATCH_DIR%\functions\dk_exit.cmd" call dk_download "%DKHTTP%/dk_exit.cmd" "%DKBATCH_DIR%\functions\dk_exit.cmd"
+		::if not exist "%DKBATCH_DIR%\functions\dk_exit.cmd" call dk_download "%DKHTTP%/dk_exit.cmd" "%DKBATCH_DIR%\functions\dk_exit.cmd"
+		call dk_load dk_exit
         call dk_exit
 	)
 goto:eof
