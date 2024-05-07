@@ -16,21 +16,20 @@ echo "DKPARENT_DIR = ${DKPARENT_DIR}"
 	
 	
 	
-
-if [ "$1" == "rename" ];then 
-	echo "RENAME"
-	sleep 3
-	
-	echo "mv ${DKSCRIPT_DIR}/test ${DKSCRIPT_DIR}/test_renamed"
-	mv "${DKSCRIPT_DIR}/test" "${DKSCRIPT_DIR}/test_renamed"
+if [ "$1" == "finished" ];then 
+	echo "FINISHED"
+	sleep 10
+	read -rp 'Press enter to continue...' key
 	
 else
 	echo "MAIN"
 	
 	echo "cp -r ${DKSCRIPT_PATH} ${DKPARENT_DIR}/${DKSCRIPT_NAME}"
-	cp -r "${DKSCRIPT_PATH}" "${DKPARENT_DIR}/${DKSCRIPT_NAME}"
-	#. "${DKPARENT_DIR}/${DKSCRIPT_NAME}" rename
-	exec "${DKPARENT_DIR}/${DKSCRIPT_NAME}" rename
-	exit
+	cp -rp "${DKSCRIPT_PATH}" "${DKPARENT_DIR}/${DKSCRIPT_NAME}"
+	rm -r -f "${DKSCRIPT_DIR}" 2>null
+	echo done
+	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/renamed.sh"
+	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/${DKSCRIPT_NAME}"
+	exec "${DKSCRIPT_DIR}/renamed.sh" finished
+	exec $SHELL
 fi
-exec $SHELL
