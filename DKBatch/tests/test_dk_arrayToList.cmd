@@ -25,5 +25,10 @@ dir /b /a-d > array.cmd
 	echo MyArrayB[0] = %MyArrayB[0]%
 	echo MyArrayB[1] = %MyArrayB[1]%
 	echo MyArrayB[2] = %MyArrayB[2]%
+	
+	call dk_deleteArray MyArrayB
+	echo MyArrayB[0] = %MyArrayB[0]%
+	echo MyArrayB[1] = %MyArrayB[1]%
+	echo MyArrayB[2] = %MyArrayB[2]%
 	pause
 goto:eof
