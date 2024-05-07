@@ -68,10 +68,8 @@ dk_removeAll () {
 		#exec $SHELL
 		
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
-		dk_pause
 		dk_rename "${DKBRANCH_DIR}" "${DKBRANCH_DIR}_BACKUP"
 		#rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
-		#dk_echo "done."
 		
 		# wait for the folders to get deleted
 		sleep 5
