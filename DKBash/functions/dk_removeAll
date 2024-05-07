@@ -1,89 +1,38 @@
 #!/bin/sh
-#echo "$0 $*"
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-#[ -z "$DKINIT" ] && . ./DK
-
 
 ##################################################################################
 # dk_removeAll()
 #
 #
 dk_removeAll () {
-	echo "dk_removeAll($*)"
 	dk_debugFunc
-	[ $# -gt 1 ] && dk_error "Too many parameters"
+	[ $# -gt 0 ] && dk_error "Too many parameters"
 	
-	if ! [ "$1" = "wipe" ]; then
-		clear
-		dk_echo
-		dk_echo
-		dk_info "Do you want to reset the entire local repository . . . ?"
-		dk_info "This will delete digitalknob, everything will be reset,"
-		dk_info "and the repository will be re-cloned. All libraries and tools"
-		dk_info "will be re-downloaded and rebuild from start."
-		dk_info "You may wish to save any changes and commit them beforehand."
-		dk_echo
+	clear
+	dk_echo
+	dk_echo
+	dk_info "Do you want to delete the entire local repository . . . ?"
+	dk_info "This will delete the local digitalknob branch repository"
+	dk_info "Save any un-commited changes first."
+	dk_echo
 		
-		dk_confirm || return 0
+	dk_confirm || return
 		
-		# first we need to relocate this file up one directory
-		# make sure script is running from DKBRANCH_DIR
-		if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
-			dk_echo "${yellow}"
-			dk_echo "WARNING: this file isn't running from the branch directory"
-			dk_echo "Is must be in the branch directory to continue."
-			dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-			dk_echo "${clr}"			
-			dk_printVar DKBRANCH_DIR
-			return $false;
-		fi
-		
-		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-		rm -r -f "${DIGITALKNOB_DIR}/DKBash"
-		cp -r "${DKBRANCH_DIR}/DKBash" "${DIGITALKNOB_DIR}/DKBash"
-		rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-		cp -r "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-		unset DKINIT
-		cd "${DIGITALKNOB_DIR}"
-		
-		OLD_DKBASH_DIR="${DKBASH_DIR}"
-		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"
-		dk_replaceAll "${PATH}" "${OLD_DKBASH_DIR}" "${DKBASH_DIR}" PATH
-		export PATH=${DKBASH_DIR}/functions:${PATH}
-				
-		exec /bin/bash "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}" dk_removeAll wipe		
-		#. "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}" dk_removeAll wipe
-		exit
-	else	
-		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-		echo "dk_removeAll(wipe)"
-		
-		#:wipe
-		
-		#do we need sudo rights?
-		#do we need to kill any processes?
-		#do we need to undk_install any apps?
-		#do we need to remove any environment variables?
-		
-		#cd "${DIGITALKNOB_DIR}" #|| dk_error "cd ${DIGITALKNOB_DIR} failed!"
-		
-		dk_validate DKBRANCH_DIR "dk_validateBranch"
-		DKBASH_DIR="${DIGITALKNOB_DIR}/DKBash"
-
-		#printenv
-		#exec $SHELL
-		
-		dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
-		dk_rename "${DKBRANCH_DIR}" "${DKBRANCH_DIR}_BACKUP"
-		#rm -r -f "${DKBRANCH_DIR}" #|| dk_error "dk_call rm -r -f ${DKBRANCH_DIR} failed"
-		
-		# wait for the folders to get deleted
-		sleep 2
-
-		#if dk_fileExists "${DKBRANCH_DIR}"; then
-		#	dk_error "Oh no, the BRANCH folder is still there! :( "
-		#fi
-		exit
-
+	# make sure script is running from DKBRANCH_DIR
+	if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
+		dk_echo "${yellow}"
+		dk_echo "WARNING: this file isn't running from the branch directory"
+		dk_echo "Is must be in the branch directory to continue."
+		dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+		dk_echo "${clr}"			
+		dk_printVar DKBRANCH_DIR
+		return $false;
 	fi
+		
+	# Backup main script file to digitalknob/
+	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+	cp "$DKSCRIPT_PATH" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+		
+	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
+	rm -r -f "${DKBRANCH_DIR}" 2>nul
 }
