@@ -9,7 +9,7 @@ echo cls && cls && cls
 call functions\DK.cmd
 
 
-call dk_message dk_message
+call dk_info dk_info
 call dk_debug dk_debug
 call dk_warning dk_warning
 call dk_debug "SCRIPT(%*)"

@@ -6,7 +6,7 @@
 
 dk_echo "TEST"
 
-dk_message "message"
+dk_info "info"
 dk_debug "debug"
 dk_warning "warning"
 dk_debug "SCRIPT($@)"
