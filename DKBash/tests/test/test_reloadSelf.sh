@@ -18,6 +18,7 @@ echo "DKPARENT_DIR = ${DKPARENT_DIR}"
 	
 if [ "$1" == "finished" ];then 
 	echo "FINISHED"
+	
 	sleep 10
 	read -rp 'Press enter to continue...' key
 	

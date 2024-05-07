@@ -38,16 +38,17 @@ dk_resetAll () {
 			return $false;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> $DIGITALKNOB_DIR/$DKSCRIPT_NAME"
-		cp -r "$DKBRANCH_DIR/DKBash" "$DIGITALKNOB_DIR/DKBash"
-		cp "$DKSCRIPT_PATH" "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
-		unset DKINIT
-		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		#dk_exit
+		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+		rm -r -f "${DIGITALKNOB_DIR}/DKBash"
+		cp -rp "${DKBRANCH_DIR}/DKBash" "${DIGITALKNOB_DIR}/DKBash"
+		rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+		cp "$DKSCRIPT_PATH" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 		
-		source "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_resetAll wipe
-		exit
+		dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
+		rm -r -f "${DKBRANCH_DIR}"
+		
+		dk_gitUpdate NO_CONFIRM
+		exec "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		#:wipe
