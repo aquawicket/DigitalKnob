@@ -1,5 +1,4 @@
 @echo off
-call dk_includeGuard
 call DK
 
 ::##################################################################################
@@ -9,10 +8,10 @@ call DK
 :dk_checkGitRemote () {
 	call dk_debugFunc
 
-	if not exist "%GIT_EXE%" call dk_error GIT_EXE does not exist
-	
+	call dk_validate DKBRANCH_DIR dk_validateBranch
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
 
+	call dk_validate GIT_EXE dk_validateGit
     :: git remote update > /dev/null 2> /dev/null
     %GIT_EXE% remote update
 
@@ -27,3 +26,8 @@ call DK
 
     echo %ahead% commits ahead, %behind% commits behind
 goto:eof
+
+
+
+:DKTEST ########################################################################
+call :dk_checkGitRemote

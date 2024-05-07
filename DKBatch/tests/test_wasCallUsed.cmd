@@ -1,3 +1,5 @@
+:: https://stackoverflow.com/a/43184105
+
 @echo off
 
 :: Check if this is the initial invocation or we have already determined how the batch file was started
@@ -47,5 +49,5 @@ goto :eof
 :main
     setlocal enableextensions disabledelayedexpansion
     echo Method invocation is [ %startMethod% ]
-	cmd /k
+	pause
 goto :eof
