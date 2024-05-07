@@ -18,7 +18,7 @@ call DK
 		set /A i+=1
     )
 	 
-	rem Return the array to the calling scope
+	:: Return the array to the calling scope
 	set "currentScope=1"
 	for /F "delims=" %%a in ('set %2[') do (
 	   if defined currentScope endlocal
