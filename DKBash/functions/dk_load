@@ -9,7 +9,7 @@
 #
 #
 dk_load() {
-	echo "dk_load($*)"
+	#echo "dk_load($*)"
 	#dk_debugFunc
 	local fn=
 	#fpath=
@@ -47,6 +47,7 @@ dk_load() {
 		local ${fn}=$fpath
     else
         echo "$fpath: file not found"
+		return 1
     fi
 
 	if [[ $dk_load_list =~ ";$fn;" ]]; then			# BASH REGEX MATCH
@@ -89,17 +90,17 @@ dk_load() {
 				#echo "dk_load_list = $dk_load_list"
 				continue
 			elif [[ ${fn} == $value ]]; then
-				echo "${fn}: skipping $value.    already matches fn"
+				#echo "${fn}: skipping $value.    already matches fn"
 				continue
 			# FIXME: this messes things up 
 			#elif [[ $(command -v $value) != "" ]]; then
 				#echo "${fn}: skipping $value.    command already recognized"
 				#continue
 			elif [[ "$value" == "" ]]; then
-				echo "${fn}: skipping $value.    empty"
+				#echo "${fn}: skipping $value.    empty"
 				continue
 			else
-				echo "$fn: dk_load( $value )"
+				#echo "$fn: dk_load( $value )"
 				dk_load $value
 			fi
 		done
