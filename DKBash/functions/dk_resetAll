@@ -39,5 +39,8 @@ dk_resetAll () {
 	rm -r -f "${DKBRANCH_DIR}" 2>nul
 		
 	dk_gitUpdate NO_CONFIRM
+	
+	dk_info "Restarting ${DKSCRIPT_NAME}. . ."
+	sleep 3
 	exec "$DKSCRIPT_PATH"
 }
