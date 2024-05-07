@@ -52,7 +52,8 @@ setlocal enableDelayedExpansion
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_load dk_getHostTriple
 	call dk_getHostTriple
-
+	
+	call dk_load dk_getDKPaths
 	call dk_getDKPaths
    
     call dk_validateGit

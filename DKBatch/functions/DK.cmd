@@ -44,6 +44,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	:::dk_getScriptPath_return
 	
 	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" call dk_download "%DKHTTP%/dk_load.cmd" "%DKBATCH_DIR%\functions\dk_load.cmd"
+	if not exist "%DKBATCH_DIR%\functions\dk_call.cmd" call dk_download "%DKHTTP%/dk_call.cmd" "%DKBATCH_DIR%\functions\dk_call.cmd"
 	
 	::if not exist "%DKBATCH_DIR%\functions\dk_getDirectory.cmd" call dk_download "%DKHTTP%/dk_getDirectory.cmd" "%DKBATCH_DIR%\functions\dk_getDirectory.cmd"
 	call dk_load dk_getDirectory
