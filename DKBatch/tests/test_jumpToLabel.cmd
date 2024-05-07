@@ -7,7 +7,7 @@
 	:: This method call a :label, that runs the batch file. It will return to here after
 	call :method1
 	echo returned from test_jumpToLabelB :method1
-	pause
+
 	
 	:: This method allows us to place all code inline
 	call :method2 & goto:endMethod2
@@ -15,13 +15,19 @@
 	test_jumpToLabelB
 	:endMethod2
 	echo returned from test_jumpToLabelB :method2
+
+	
+	:: This method also allows us to place all code inline
+<:method3 <nul call :method3 & goto:endMethod3
+test_jumpToLabelB
+<:endMethod3
+	echo returned from test_jumpToLabelB :method3
+
+
 	pause
-		
 goto:eof
 
 
 :method1
 	test_jumpToLabelB
 goto:eof
-
-
