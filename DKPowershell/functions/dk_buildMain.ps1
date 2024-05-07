@@ -6,7 +6,7 @@
 #
 #
 function dk_buildMain () {
-	call dk_debugFunc
+	dk_debugFunc
 
 #setlocal enableDelayedExpansion
 #	echo "BASH = $BASH"
@@ -50,57 +50,57 @@ function dk_buildMain () {
 #  call dk_printVar MSYSTEM
 
 	### Get the HOST_TRIPLE and other HOST variables
-	call dk_load dk_getHostTriple
-	call dk_getHostTriple
+	dk_load dk_getHostTriple
+	dk_getHostTriple
 	
-	call dk_load dk_getDKPaths
-	call dk_getDKPaths
+	dk_load dk_getDKPaths
+	dk_getDKPaths
    
-	call dk_load dk_validateGit
-    call dk_validateGit
-	call dk_printVar GIT_EXE
+	dk_load dk_validateGit
+    dk_validateGit
+	dk_printVar GIT_EXE
 	
-	call dk_load dk_validateBranch
-    call dk_validateBranch
+	dk_load dk_validateBranch
+    dk_validateBranch
 
-    call dk_printVar DKBRANCH_DIR
-    call dk_printVar DKAPPS_DIR
-    call dk_printVar DKCMAKE_DIR
-    call dk_printVar DK3RDPARTY_DIR
-    call dk_printVar DKIMPORTS_DIR
-    call dk_printVar DKPLUGINS_DIR
+    dk_printVar DKBRANCH_DIR
+    dk_printVar DKAPPS_DIR
+    dk_printVar DKCMAKE_DIR
+    dk_printVar DK3RDPARTY_DIR
+    dk_printVar DKIMPORTS_DIR
+    dk_printVar DKPLUGINS_DIR
     
-	call dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
+	dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	
-	call dk_load dk_warning
+	dk_load dk_warning
 	if NOT "%DKSCRIPT_DIR%"=="%DKBRANCH_DIR%" (
-		call dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		call dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
-		call dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
+		dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
+		dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
 	)
     
-	call dk_load dk_pickUpdate
-	call dk_load dk_pickApp
-	call dk_load dk_pickOs
-	call dk_load dk_pickType
-	call dk_load dk_createCache
-	call dk_load dk_generate
-	call dk_load dk_build
-	call dk_load dk_readCache
-	call dk_load dk_checkGitRemote
+	dk_load dk_pickUpdate
+	dk_load dk_pickApp
+	dk_load dk_pickOs
+	dk_load dk_pickType
+	dk_load dk_createCache
+	dk_load dk_generate
+	dk_load dk_build
+	dk_load dk_readCache
+	dk_load dk_checkGitRemote
 	
     :while_loop             
 	
-		if "%UPDATE%"==""     call dk_pickUpdate & goto:while_loop
-		if "%APP%"==""        call dk_pickApp    & goto:while_loop
-		if "%TARGET_OS%"==""  call dk_pickOs     & goto:while_loop
-		if "%TYPE%"==""       call dk_pickType   & goto:while_loop
+		if "%UPDATE%"==""     dk_pickUpdate & goto:while_loop
+		if "%APP%"==""        dk_pickApp    & goto:while_loop
+		if "%TARGET_OS%"==""  dk_pickOs     & goto:while_loop
+		if "%TYPE%"==""       dk_pickType   & goto:while_loop
 
-		call dk_createCache
+		dk_createCache
 		
-		call dk_generate
+		dk_generate
 		
-		call dk_build
+		dk_build
 		
 		set UPDATE=
 		set APP=
