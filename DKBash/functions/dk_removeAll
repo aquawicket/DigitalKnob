@@ -46,7 +46,7 @@ dk_removeAll () {
 		unset DKINIT
 		#cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
 		#exec /bin/bash "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
-		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" "$DIGITALKNOB_DIR/DKBash/dk_removeAll" wipe
+		. "$DIGITALKNOB_DIR/$DKSCRIPT_NAME" dk_removeAll wipe
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		echo "dk_removeAll(wipe)"
