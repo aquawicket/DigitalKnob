@@ -9,7 +9,7 @@ macro(dk_return)
 	#dk_debugFunc(${ARGV})
 	
 	if(PRINT_DKRETURNS)
-		message(STATUS "${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
+		dk_debug("${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
 	endif()
 	return()
 endmacro()

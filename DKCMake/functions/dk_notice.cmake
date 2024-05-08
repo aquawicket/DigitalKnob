@@ -14,5 +14,6 @@ function(dk_notice msg)
 	dk_printVar(msg)
 	
 	dk_updateLogInfo()
-	message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
+	#message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
+	message(NOTICE "${B_yellow}${msg}${clr}")
 endfunction()

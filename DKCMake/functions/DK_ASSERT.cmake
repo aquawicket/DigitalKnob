@@ -11,7 +11,8 @@ macro(DK_ASSERT expression)
 	#dk_debugFunc(${ARGV})
 	
 	if(NOT ${expression})
-		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${clr}")
+		#message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${clr}")
+		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}${clr}")
 		string(REPLACE " " "" var "${expression}")
 		
 		if("${var}")
