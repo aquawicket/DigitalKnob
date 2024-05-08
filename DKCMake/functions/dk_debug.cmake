@@ -34,7 +34,6 @@ function(dk_debug msg)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	dk_printVar(msg)
 	#dk_updateLogInfo()
 	#message(DEBUG "${H_black}${STACK_HEADER}${clr}${blue}${msg}${clr}")
 	if(HALT_ON_DEBUG OR HALT AND NOT NO_HALT)

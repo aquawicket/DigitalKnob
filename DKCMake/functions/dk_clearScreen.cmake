@@ -11,9 +11,9 @@ function(dk_clearScreen)
 	dk_debug("clear screen")
 	
 	find_program(CMD_EXE cmd.exe)
-	dk_debug(CMD_EXE)
+	dk_printVar(CMD_EXE)
 	find_program(BASH_EXE bash)
-	dk_debug(BASH_EXE)
+	dk_printVar(BASH_EXE)
 
 	if(CMD_EXE)
 		dk_debug("execute_process(COMMAND cmd /c cls)")

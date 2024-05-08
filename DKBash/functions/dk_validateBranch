@@ -54,7 +54,7 @@ dk_validateBranch () {
 	#	dk_echo
 	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
-	#	clear
+	#	dk_clearScreen
 	#	if dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
 	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi

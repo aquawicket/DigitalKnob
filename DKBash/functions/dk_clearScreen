@@ -1,0 +1,14 @@
+#!/bin/sh
+#echo "$0 $*"
+[ -z "$DKINIT" ] && . ./DK
+
+##################################################################################
+# dk_clearScreen()
+#
+#
+dk_clearScreen () {
+	dk_debugFunc
+	[ $# -gt 0 ] && dk_error "too many arguments"
+	
+	clear
+}

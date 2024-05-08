@@ -23,12 +23,12 @@ function(dk_import url)
 	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
 	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	
-	#dk_debug(${plugin_var})
-	#dk_debug(${plugin_var}_URL)
-	#dk_debug(${plugin_var}_VERSION)
-	#dk_debug(${plugin_var}_FOLDER)
-	#dk_debug(${plugin_var}_BRANCH)
-	#dk_debug(${plugin_var}_TAG)
+	#dk_printVar(${plugin_var})
+	#dk_printVar(${plugin_var}_URL)
+	#dk_printVar(${plugin_var}_VERSION)
+	#dk_printVar(${plugin_var}_FOLDER)
+	#dk_printVar(${plugin_var}_BRANCH)
+	#dk_printVar(${plugin_var}_TAG)
 	
 	if(NOT DKOFFLINE)
 		### .git

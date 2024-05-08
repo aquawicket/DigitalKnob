@@ -17,7 +17,7 @@ function(dk_getPathToPlugin plugin RESULT)
 	
 	#file(GLOB children RELATIVE ${DIGITALKNOB_DIR} ${DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
-		#dk_debug(child)
+		#dk_printVar(child)
 		#if(EXISTS ${DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKMAKE.cmake)
 		#	set(${RESULT} "${DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
 		#	return()

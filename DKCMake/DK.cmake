@@ -6,7 +6,7 @@ if(EXISTS $ENV{DKCMAKE_DIR})
 else()
 	include(${CMAKE_CURRENT_LIST_DIR}/functions/dk_load.cmake)
 endif()
-dk_debug(ENV{DKCMAKE_DIR})
+dk_printVar(ENV{DKCMAKE_DIR})
 
 
 if(CMAKE_SCRIPT_MODE_FILE)
@@ -64,14 +64,14 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		dk_error("CMAKE_SOURCE_DIR invalid!")
 	endif()
 	get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	dk_debug(CMAKE_SOURCE_DIR)
+	dk_printVar(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
 	if(NOT CMAKE_BINARY_DIR)
 		dk_error("CMAKE_BINARY_DIR invalid!")
 	endif()
 	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-	dk_debug(CMAKE_BINARY_DIR)
+	dk_printVar(CMAKE_BINARY_DIR)
 endif()
 
 
@@ -80,10 +80,10 @@ if(DEFINED "ENV{MSYSTEM}")
 	set(MSYSTEM "$ENV{MSYSTEM}"	CACHE INTERNAL "")		
 endif()
 if(MSYSTEM)
-	dk_debug(MSYSTEM)
+	dk_printVar(MSYSTEM)
 	
 	set(${MSYSTEM} TRUE			CACHE INTERNAL "")
-	dk_debug(${MSYSTEM})
+	dk_printVar(${MSYSTEM})
 endif()
 
 
@@ -104,10 +104,10 @@ endif()
 #endif()
 
 if(ProgramFiles)
-	dk_debug(ProgramFiles)
+	dk_printVar(ProgramFiles)
 endif()
 if(ProgramFiles_x86)
-	dk_debug(ProgramFiles_x86)
+	dk_printVar(ProgramFiles_x86)
 endif()
 
 
@@ -121,10 +121,10 @@ else()
 	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
 endif()
 if(MULTI_CONFIG)
-	dk_debug(MULTI_CONFIG)
+	dk_printVar(MULTI_CONFIG)
 endif()
 if(SINGLE_CONFIG)
-	dk_debug(SINGLE_CONFIG)
+	dk_printVar(SINGLE_CONFIG)
 endif()
 
 ##### Load Function files #################

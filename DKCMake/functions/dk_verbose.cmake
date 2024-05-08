@@ -34,7 +34,6 @@ function(dk_verbose msg)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	dk_printVar(msg)
 	#dk_updateLogInfo()
 	#message(DEBUG "${H_black}${STACK_HEADER}${clr}${cyan}${msg}${clr}")
 	if(HALT_ON_VERBOSE OR HALT AND NOT NO_HALT)

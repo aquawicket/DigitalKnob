@@ -11,6 +11,6 @@ include_guard()
 function(dk_getEnv name RESULT)
 	dk_debugFunc(${ARGV})
 	
-	dk_debug(ENV{${name}})
+	dk_printVar(ENV{${name}})
 	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
 endfunction()

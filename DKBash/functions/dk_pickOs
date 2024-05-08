@@ -128,7 +128,7 @@ dk_pickOs() {
 	elif [ "$input" = "35" ]; then
 		TARGET_OS="win_x86_64_msvc"
 	elif [ "$input" = "36" ]; then
-		clear
+		dk_clearScreen
 	elif [ "$input" = "37" ]; then
 		APP=
 	elif [ "$input" = "38" ]; then

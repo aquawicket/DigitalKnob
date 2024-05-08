@@ -48,7 +48,7 @@ dk_pickApp() {
 	elif [ "$input" = "8" ]; then
 		dk_enterManually
 	elif [ "$input" = "9" ]; then
-		clear
+		dk_clearScreen
 	elif [ "$input" = "10" ]; then
 		UPDATE=
 	elif [ "$input" = "11" ]; then

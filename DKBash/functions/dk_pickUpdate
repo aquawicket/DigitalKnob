@@ -82,7 +82,7 @@ dk_pickUpdate() {
 	elif [ "$input" = "6" ]; then
 		dk_removeAll
 	elif [ "$input" = "7" ]; then
-		clear
+		dk_clearScreen
 	elif [ "$input" = "8" ]; then
 		dk_clearCmakeCache
 		dk_deleteTempFiles

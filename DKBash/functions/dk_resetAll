@@ -8,7 +8,7 @@ dk_resetAll () {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "Too many parameters"
 	
-	clear
+	dk_clearScreen
 	dk_echo
 	dk_echo
 	dk_info "Do you want to reset the entire local repository . . . ?"
@@ -46,6 +46,6 @@ dk_resetAll () {
 	dk_gitUpdate #NO_CONFIRM
 	
 	dk_info "Restarting ${DKSCRIPT_NAME}. . ."
-	sleep 3
+	dk_sleep 3
 	dk_reload
 }

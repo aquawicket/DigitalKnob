@@ -31,7 +31,7 @@ dk_pickType() {
 	elif [ "$input" = "3" ]; then
 		TYPE="All"
 	elif [ "$input" = "4" ]; then
-		clear
+		dk_clearScreen
 	elif [ "$input" = "5" ]; then
 		TARGET_OS=
 	elif [ "$input" = "6" ]; then

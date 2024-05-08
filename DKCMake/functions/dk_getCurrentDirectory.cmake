@@ -16,6 +16,6 @@ include_guard()
 #		execute_process(COMMAND pwd ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 #	endif()
 #	execute_process(COMMAND timeout /t 2 /nobreak WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})  ##wait 2 seconds for the stdout to flush
-#	#dk_debug(output)
+#	#dk_printVar(output)
 #	set(${RESULT} ${output} PARENT_SCOPE)
 #endfunction()

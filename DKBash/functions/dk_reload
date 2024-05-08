@@ -13,7 +13,7 @@ dk_reload () {
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	dk_debug "reloading $DKSCRIPT_PATH"
-	clear
+	dk_clearScreen
 	
 	#FIXME: need to unset any and all include guards here.
 	#       Or better yet, we need to clear the entire environment

@@ -16,10 +16,10 @@ macro(dk_getHostTriple)
 		unset(CMAKE_HOST_APPLE)
 	endif()
 	
-	dk_debug(CMAKE_HOST_WIN32)
-	dk_debug(CMAKE_HOST_APPLE)
-	dk_debug(CMAKE_HOST_UNIX)
-	dk_debug(CMAKE_HOST_SYSTEM_NAME)
+	dk_printVar(CMAKE_HOST_WIN32)
+	dk_printVar(CMAKE_HOST_APPLE)
+	dk_printVar(CMAKE_HOST_UNIX)
+	dk_printVar(CMAKE_HOST_SYSTEM_NAME)
 	
 	###### Set <HOST>_HOST variables ######
 	if(CMAKE_HOST_WIN32)
@@ -52,7 +52,7 @@ macro(dk_getHostTriple)
 	else()
 		dk_error("CMAKE_HOST: Unknown host")
 	endif()
-	dk_debug(HOST)
+	dk_printVar(HOST)
 	
 	### Set HOST_ARCH
 	if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
@@ -67,7 +67,7 @@ macro(dk_getHostTriple)
 		endif()
 	endif()
 	string(STRIP "${CMAKE_HOST_SYSTEM_PROCESSOR}" CMAKE_HOST_SYSTEM_PROCESSOR)
-	dk_debug(CMAKE_HOST_SYSTEM_PROCESSOR)
+	dk_printVar(CMAKE_HOST_SYSTEM_PROCESSOR)
 	
 	if("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "aarch64")
 		set(ARM64 TRUE CACHE INTERNAL "")
@@ -94,13 +94,13 @@ macro(dk_getHostTriple)
 		dk_error("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 	endif()
 	#string(STRIP "${HOST_ARCH}" HOST_ARCH)
-	dk_debug(HOST_ARCH)
+	dk_printVar(HOST_ARCH)
 	
 	### set [HOST]_[HOST_ARCH] variable
 	string(TOUPPER ${HOST} HOST_UPPER)
 	string(TOUPPER ${HOST_ARCH} HOST_ARCH_UPPER)
 	set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE CACHE INTERNAL "")
 	#string(STRIP "${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}" ${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
-	dk_debug(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
+	dk_printVar(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
 	
 endmacro()

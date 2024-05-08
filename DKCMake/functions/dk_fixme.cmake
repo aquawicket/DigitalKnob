@@ -32,7 +32,6 @@ function(dk_fixme msg)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	dk_printVar(msg)
 	#dk_updateLogInfo()
 	#message("${H_black}${STACK_HEADER}${clr}${yellow}${msg}${clr}")	
 	if(HALT_ON_FIXME OR HALT AND NOT NO_HALT)

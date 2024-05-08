@@ -1,7 +1,7 @@
 include_guard()
 
 ##################################################################################
-# dk_notice(msg) PRINTVAR
+# dk_notice(msg)
 #
 #	Print a NOTICE message
 #
@@ -10,10 +10,7 @@ include_guard()
 function(dk_notice msg)
 	#dk_debugFunc(${ARGV})
 	
-	dk_getOption(PRINTVAR ${ARGV})
-	dk_printVar(msg)
-	
-	dk_updateLogInfo()
+	#dk_updateLogInfo()
 	#message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
 	message(NOTICE "${B_yellow}${msg}${clr}")
 endfunction()

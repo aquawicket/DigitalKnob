@@ -37,48 +37,48 @@ include_guard()
 dk_validate( DIGITALKNOB_DIR  "dk_getDKPaths()" )
 
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
-dk_debug(CURRENT_DIR)
+dk_printVar(CURRENT_DIR)
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
-dk_debug(CMAKE_SUPPRESS_REGENERATION)
+dk_printVar(CMAKE_SUPPRESS_REGENERATION)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
 endif()
-dk_debug(CMAKE_INSTALL_PREFIX)
+dk_printVar(CMAKE_INSTALL_PREFIX)
 
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-dk_debug(CMAKE_CXX_COMPILER_ID)
+dk_printVar(CMAKE_CXX_COMPILER_ID)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	dk_set(GNU ON)
 endif()
-dk_debug(GNU)
+dk_printVar(GNU)
 
 string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 if(${index} GREATER -1)
 	dk_set(MSVC ON)
 endif()
-dk_debug(MSVC)
+dk_printVar(MSVC)
 
 if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	dk_set(MINGW ON)
 endif()
-dk_debug(MINGW)
+dk_printVar(MINGW)
 
 if(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
 	dk_set(MSYS ON)
 endif()
-dk_debug(MSYS)
+dk_printVar(MSYS)
 
 if(CMAKE_GENERATOR STREQUAL "Xcode")
 	dk_set(XCODE ON)
 endif()
-dk_debug(XCODE)
+dk_printVar(XCODE)
 
-dk_debug(CMAKE_GENERATOR)
+dk_printVar(CMAKE_GENERATOR)
 
 
 ###########################################################################
@@ -93,8 +93,8 @@ if(NOT DEBUG AND NOT RELEASE)
 	dk_set(RELEASE ON)
 #endif()
 endif()
-dk_debug(DEBUG)
-dk_debug(RELEASE)
+dk_printVar(DEBUG)
+dk_printVar(RELEASE)
 
 
 ###########################################################################
@@ -111,7 +111,7 @@ if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
 #endif()
 #endif()
 endif()
-dk_debug(REBUILDALL)
+dk_printVar(REBUILDALL)
 
 
 ###########################################################################
@@ -124,7 +124,7 @@ if(NOT STATIC AND NOT SHARED)
 	dk_set(STATIC ON)
 #endif()
 endif()
-dk_debug(STATIC)
+dk_printVar(STATIC)
 
 
 ###########################################################################
@@ -141,7 +141,7 @@ endif()
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")
 #	dk_set(DKAPP ON)
-#	dk_debug(DKAPP)
+#	dk_printVar(DKAPP)
 #	add_definitions(-DDKAPP)
 #endif()
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKPlugin/" index)
@@ -173,15 +173,15 @@ dk_getTargetTriple()
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
 #	dk_set(RPI ON)
 #	dk_set(RPI32 ON)
-#	dk_debug(RPI)
-#	dk_debug(RPI32)
+#	dk_printVar(RPI)
+#	dk_printVar(RPI32)
 #endif()
 # RPI and RPI64
 #if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm64")
 #	dk_set(RPI ON)
 #	dk_set(RPI64 ON)
-#	dk_debug(RPI)
-#	dk_debug(RPI64)
+#	dk_printVar(RPI)
+#	dk_printVar(RPI64)
 #endif()
 
 # TINYCORE
@@ -189,7 +189,7 @@ if(CMAKE_HOST_SYSTEM_VERSION)
 	string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
 	if(${contains_tinycore} GREATER -1)
 		dk_set(TINYCORE ON)
-		dk_debug(TINYCORE)
+		dk_printVar(TINYCORE)
 	endif()
 endif()
 
@@ -202,14 +202,14 @@ dk_info("")
 
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH ON)
-dk_debug(CMAKE_SKIP_RPATH)
+dk_printVar(CMAKE_SKIP_RPATH)
 
 if(WIN_HOST)
 	dk_set(exe .exe)
 	dk_set(bat .bat)
 endif()
-dk_debug(exe)
-dk_debug(bat)
+dk_printVar(exe)
+dk_printVar(bat)
 
 
 
@@ -217,7 +217,7 @@ dk_debug(bat)
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
-		dk_debug(CMAKE_BINARY_DIR)	
+		dk_printVar(CMAKE_BINARY_DIR)	
 		dk_error("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
