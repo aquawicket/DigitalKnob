@@ -9,7 +9,6 @@
 #
 #
 dk_remove () {
-	dk_debug "dk_remove($*)"
 	dk_debugFunc
 	
 	_path=$1

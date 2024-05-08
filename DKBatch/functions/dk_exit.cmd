@@ -8,6 +8,6 @@ call DK
 :dk_exit () {
 	call dk_debugFunc
 
-	echo dk_exit(%*)
-	cmd /k & exit
+	::cmd /k & exit
+	exit
 goto:eof

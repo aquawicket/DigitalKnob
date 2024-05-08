@@ -8,7 +8,7 @@ call DK
 :dk_echo () {
 	::call dk_debugFunc
 	
-	echo %*
+	if "%*" EQU "" ( echo. ) else ( echo %* )
 goto:eof
 
 

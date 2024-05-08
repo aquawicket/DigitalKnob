@@ -23,8 +23,8 @@ dk_removeAll () {
 		dk_echo "${yellow}"
 		dk_echo "WARNING: this file isn't running from the branch directory"
 		dk_echo "Is must be in the branch directory to continue."
-		dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
-		dk_echo "${clr}"			
+		dk_echo "${clr}"
+        dk_printVar DKSCRIPT_DIR
 		dk_printVar DKBRANCH_DIR
 		return $false;
 	fi

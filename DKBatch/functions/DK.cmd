@@ -70,7 +70,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::pause 
 	::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*)
 	:: & exit )
-	::cls
+	::call dk_clearScreen
 	::set true=0
 	::set false=1
 
@@ -90,15 +90,18 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	:: SCRIPT_ARGS = %* after %1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set SCRIPT_ARGS=%%b
 	::echo SCRIPT_ARGS = %SCRIPT_ARGS%
-	if "%DKSCRIPT_DIR%"=="%DKBATCH_DIR%\functions" (
-        echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
-        call :DKTEST
-        :DKTEST
-        "%caller[1].func%"
-        echo ########################## END DKTEST MODE ######################
-		
-		::if not exist "%DKBATCH_DIR%\functions\dk_exit.cmd" call dk_download "%DKHTTP%/dk_exit.cmd" "%DKBATCH_DIR%\functions\dk_exit.cmd"
-		call dk_load dk_exit
-        call dk_exit
-	)
+	if "%DKSCRIPT_DIR%" NEQ "%DKBATCH_DIR%\functions" goto:eof
+	echo.
+    echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
+	echo.
+	call :DKTEST
+	echo.
+	echo ########################## END TEST ################################
+	echo.
+	pause
+	exit
+goto:eof
+
+:DKTEST
+	"%caller[1].func%"
 goto:eof

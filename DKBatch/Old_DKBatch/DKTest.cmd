@@ -3,7 +3,8 @@ setlocal EnableDelayedExpansion
 
 echo DKTest.cmd()
 
-echo cls && cls && cls
+call dk_clearScreen
+call dk_clearScreen
 
 ::############ Load Function files ############
 call functions\DK.cmd
