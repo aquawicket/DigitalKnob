@@ -18,7 +18,7 @@ call DK
 	::call set "_returnVar_=%%__ARGV__[%_lastArgN_%]%%"
 	::call set "_command_=%%_command_:%_returnVar_%=%%"
 
-	set _command_=%1
+	set _command_=%~1
 	::set "_command_=%_command_:"=_QUOTE_%"
 	set _returnVar_=%~2
 	::call dk_printVar _command_
