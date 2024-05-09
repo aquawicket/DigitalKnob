@@ -7,12 +7,11 @@ call DK
 ::#
 :dk_commandToVariable () {
 	call dk_debugFunc
+::	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+::	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
+::	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
-    if [%2] == [] (
-        echo "ERROR: dk_commandToVariable() requires at least 2 parameters"
-        goto:eof
-    )
-    set command=
+    set "command="
 
     :command_args
     set arg=%1
