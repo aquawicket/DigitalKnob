@@ -7,9 +7,9 @@ call DK
 :dk_commandExists () {
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	::set "dk_commandExists=NOT ERRORLEVEL 1"
+	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
-    ::set "command=%1"
+    ::set "command=%~1"
  	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
     if %ERRORLEVEL% equ 0 (

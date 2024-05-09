@@ -17,4 +17,3 @@ call "DKBatch/functions/DK.cmd"
 if "%*" NEQ "" call %*
 call dk_load dk_buildMain
 call dk_buildMain %*
-pause

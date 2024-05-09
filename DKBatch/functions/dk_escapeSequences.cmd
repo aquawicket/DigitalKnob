@@ -10,6 +10,7 @@ call DK
 ::#
 :dk_escapeSequences () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 ::	set ASCII_length=0
 	:: ASCII control characters (character code 0-31)
@@ -182,9 +183,16 @@ goto:eof
 
 :ASCII_ADD () {
 	call dk_debugFunc
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
+	if "%~3" equ "" call dk_error "%__FUNCTION__%(%*): argument 3 is invalid"
+	if "%~4" equ "" call dk_error "%__FUNCTION__%(%*): argument 4 is invalid"
+	if "%~5" equ "" call dk_error "%__FUNCTION__%(%*): argument 5 is invalid"
+	if "%~6" equ "" call dk_error "%__FUNCTION__%(%*): argument 6 is invalid"
+	if "%~7" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
-	::echo ASCII_ADD (%*
-	::echo %~1	%~2		%~3		%~4		%~5		%~6
+	::call dk_debug "ASCII_ADD (%*"
+	::call dk_debug "echo %~1	%~2		%~3		%~4		%~5		%~6"
 	set ID=%~2
 	set ASCII[%ID%].SYMBOL=%~1
 	set ASCII[%ID%].DEC=%~2
@@ -198,6 +206,7 @@ goto:eof
 
 :ASCII_SHOW () {
 	call dk_debugFunc
-
-	call echo %%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	
+	call dk_info "%%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%"
 goto:eof

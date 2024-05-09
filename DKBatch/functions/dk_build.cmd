@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_build () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
     echo.

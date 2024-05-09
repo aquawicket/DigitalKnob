@@ -8,6 +8,7 @@ for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
 
 if not defined frame (set /a frame=0)
+if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 
 :dk_dumpStack
 (	
@@ -57,12 +58,12 @@ if not defined frame (set /a frame=0)
 	if "%caller%"=="%DKTEST_caller%" (echo THEY ARE EQUAL!)
 	
 	if "%caller%"=="" (
-		echo CALLER IS EMPTY
+		call dk_debug "CALLER IS EMPTY"
 		setlocal DisableDelayedExpansion
 		set /a frame+=1
 		call "%~d0\:dk_dumpStack\..%~pnx0" %*
 	) else if "%caller%" neq "%DKTEST_caller%" (
-		echo CALLER neq DKTEST AND CALLER neq CALLERFUNC
+		call dk_debug "CALLER neq DKTEST AND CALLER neq CALLERFUNC"
 		setlocal DisableDelayedExpansion
 		set /a frame+=1
 		call "%~d0\:dk_dumpStack\..%~pnx0" %*
@@ -80,34 +81,12 @@ if not defined frame (set /a frame=0)
 )
 goto:eof
 
-:::dk_dumpStackB
-::	setlocal DisableDelayedExpansion
-::	
-::	set "runner=(goto) 2>nul"
-::	set "runner=%runner% & call echo frame = %%~0"
-::	set "runner=%runner% & call echo self = %~0"
-::	set "runner=%runner% & call set frame=%%~0"	
-::	set "runner=%runner% & (if [%frame%]==[%%~0] (call ) else (call))"
-::	set "runner=%runner% && (call %~d0\:call_return\..%~pnx0)"
-::	set "runner=%runner% || (if [%frame%] neq [] (call ))"
-::	set "runner=%runner% && (set frames=%frames% %frame%)"
-::
-::	set "runner=%runner% && %runner% && %runner% && %runner% && %runner% && %runner% && %runner% && echo frames = %frames%"
-::	
-::	echo "runner = %runner%"
-::	%runner%
-::	::%thingie% && %thingie% && %thingie% && %thingie% && %thingie% && %thingie% && %thingie% & call "%~d0\:call_return\..%~pnx0"
-::goto:eof
-
-
-
 :call_return
 	call :dk_dumpStackReturn
 goto:eof
 
 :dk_dumpStackReturn
 	endlocal
-	
 	%caller[1].fullpath% %caller[1].args%
 goto:eof
 
@@ -124,26 +103,26 @@ goto:eof
 goto:eof
 
 :DKTEST_dk_dumpStack
-	echo :DKTEST  %*
+	call dk_info ":DKTEST  %*"
 	call:func1
 	
-	echo caller[0] = %caller[0]%
-	echo caller[1] = %caller[1]%
-	echo caller[2] = %caller[2]%
-	echo caller[3] = %caller[3]%
-	echo caller[4] = %caller[4]%
-	echo caller[5] = %caller[5]%
-	echo caller[6] = %caller[6]%
-	echo caller[7] = %caller[7]%
-	echo returned from :DKTEST 
+	call dk_info "caller[0] = %caller[0]%"
+	call dk_info "caller[1] = %caller[1]%"
+	call dk_info "caller[2] = %caller[2]%"
+	call dk_info "caller[3] = %caller[3]%"
+	call dk_info "caller[4] = %caller[4]%"
+	call dk_info "caller[5] = %caller[5]%"
+	call dk_info "caller[6] = %caller[6]%"
+	call dk_info "caller[7] = %caller[7]%"
+	call dk_info "returned from :DKTEST"
 	
 	call dk_exit
 goto:eof
 
 :func1
-	echo :func1 %*
+	call dk_info ":func1 %*"
 	call:func2
-	echo returned from func2
+	call dk_info "returned from func2"
 	::call:func2 & (
 	::	(goto) 2>nul
 	::	call echo 0 = %%~0
@@ -152,35 +131,26 @@ goto:eof
 goto:eof
 
 :func2
-	echo :func2 %*
+	call dk_info ":func2 %*"
 	call:func3
-	echo returned from func3
-	::call:func3 123 & (
-	::	(goto) 2>nul
-	::	call echo 0 = %%~0
-	::	echo returned from func3
-	::)
+	call dk_info "returned from func3"
 goto:eof
 
 :func3
-	echo :func3 %*
+	call dk_info ":func3 %*"
 	call:func4
-	echo returned from func4
-	::call:func4 blue & (
-	::	(goto) 2>nul
-	::	call echo 0 = %%~0
-	::	echo returned from func4
-	::)
+	call dk_info "returned from func4"
 goto:eof
 
 :func4
-	echo :func4 %*
+	call dk_info ":func4 %*"
 	call:func5 orange
-	echo returned from func5
+	call dk_info "returned from func5"
 goto:eof
 
 :func5
-	echo :func5 %*
-<:dk_dumpStackReturn <nul call dk_dumpStack
-	echo returned from dk_dumpStack dumpstack_caller
+	call dk_info ":func5 %*"
+	call dk_dumpStack
+	:dk_dumpStackReturn
+	call dk_info "returned from dk_dumpStack dumpstack_caller"
 goto:eof

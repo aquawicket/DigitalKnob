@@ -6,6 +6,8 @@ call DK
 ::#
 :dk_assert () {
     call dk_debugFunc
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 ::	set "_expression_=%~1"
 	
@@ -34,23 +36,17 @@ goto:eof
 
 	set "myVar=string"
 	call dk_assert myVar
-	::call dk_assert %myVar%
 
 	set "myVarB=15"
 	call dk_assert myVarB
-	::call dk_assert %myVarB%
 
 	set "myVarC=" ""
 	call dk_assert myVarC
-	::call dk_assert %myVarC%
 
 	set "myVarD="""
     call dk_assert myVarD
-    ::call dk_assert %myVarD%
 
 	set "myVarE="
 	call dk_assert myVarE
-	::call dk_assert %myVarE%
 
 	call dk_assert noVar
-	::call dk_assert %noVar%

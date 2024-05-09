@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_buildRelease () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
     if "%MSYSTEM%" neq "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"

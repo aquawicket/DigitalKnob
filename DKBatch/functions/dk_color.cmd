@@ -7,6 +7,7 @@ call DK
 ::#   reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 :dk_color () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 	:::::: STYLES ::::::
 	set "clr=[0m"

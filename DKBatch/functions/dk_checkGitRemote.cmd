@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_checkGitRemote () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 
 	call dk_validate DKBRANCH_DIR dk_validateBranch
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
@@ -30,4 +31,5 @@ goto:eof
 
 
 :DKTEST ########################################################################
-call :dk_checkGitRemote
+
+	call dk_checkGitRemote

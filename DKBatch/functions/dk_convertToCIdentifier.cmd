@@ -2,29 +2,38 @@
 call DK
 
 ::################################################################################
-::# dk_convertToCIdentifier(<in> <out>)
+::# dk_convertToCIdentifier(<string> <output>)
 ::#
 ::#
 :dk_convertToCIdentifier () {
-	::call dk_debugFunc
+	call dk_debugFunc
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
+	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 	setlocal EnableDelayedExpansion
-    set "_input=%1"
-	::call dk_printVar _input
+    set "_input_=%~1"
 
-    set "map=abcdefghijklmnopqrstuvwxyz 1234567890"
+    set "map=abcdefghijklmnopqrstuvwxyz1234567890"
 
     :c_identifier_loop
-        if not defined _input goto c_identifier_endLoop    
-        for /F "delims=*~ eol=*" %%C in ("!_input:~0,1!") do (
+        if not defined _input_ goto c_identifier_endLoop    
+        for /F "delims=*~ eol=*" %%C in ("!_input_:~0,1!") do (
                 if "!map:%%C=!" neq "!map!" set "_output=!_output!%%C"
                 if "!map:%%C=!" equ "!map!" set "_output=!_output!_"
         )
-        set "_input=!_input:~1!"
-    goto c_identifier_loop
-
+        set "_input_=!_input_:~1!"
+        goto c_identifier_loop
     :c_identifier_endLoop
-	::call dk_printVar _output
-
+	
 	endlocal & set "%2=%_output%"		
 goto:eof
+
+
+
+:DKTEST ###############################################################################
+
+	:: Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >
+	set "myVar=a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ` - = ; , ! @ # $ % ^ & * ( ) _ + { } | :"
+	call dk_convertToCIdentifier "%myVar%" myAlphaNumericVar
+	call dk_printVar myAlphaNumericVar

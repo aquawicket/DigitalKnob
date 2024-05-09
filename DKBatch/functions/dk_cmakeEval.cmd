@@ -8,6 +8,7 @@ call DK
 :dk_cmakeEval () {
 	call dk_debugFunc
     if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~4" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 	call dk_validate DKIMPORTS_DIR dk_validateBranch
 	call dk_printVar DKIMPORTS_DIR

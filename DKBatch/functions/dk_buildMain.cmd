@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_buildMain () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 
 setlocal enableDelayedExpansion
 ::	echo "BASH = $BASH"

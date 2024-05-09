@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_createCache () {
 	call dk_debugFunc
+	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
     echo creating cache...
     ::call dk_printVar APP
