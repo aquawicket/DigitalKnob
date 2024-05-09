@@ -8,11 +8,11 @@ call DK
 :dk_gitUpdate () {
 	call dk_debugFunc
 	
-    if "%1" NEQ "NO_CONFIRM" (
+    if "%1" neq "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
         set /P CONFIRM="Are you sure? [Y] " 
     )
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
 	call dk_validate DKBRANCH_DIR dk_validateBranch
 	call dk_validate GIT_EXE dk_validateGit

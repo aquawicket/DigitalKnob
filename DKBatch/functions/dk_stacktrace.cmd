@@ -16,8 +16,8 @@ call DK
 	::echo dk_stacktrace_marker = %dk_stacktrace_marker%
 	
 	:dk_stacktrace_Loop
-		::set "OUTPUT="[%dk_stacktrace_count%]  %%DKSTACK[%dk_stacktrace_marker%].FILE%%   %%DKSTACK[%dk_stacktrace_marker%].FUNCTION%%    %%DKSTACK[%dk_stacktrace_marker%].ARGS%%"
-		call dk_textFormat OUTPUT "[%dk_stacktrace_count%]"  "%%DKSTACK[%dk_stacktrace_marker%].FILE%%"  "%%DKSTACK[%dk_stacktrace_marker%].FUNCTION%%"  "%%DKSTACK[%dk_stacktrace_marker%].ARGS%%"
+		::set "OUTPUT="[%dk_stacktrace_count%]  %%DKSTACK[%dk_stacktrace_marker%].__FILE__%%   %%DKSTACK[%dk_stacktrace_marker%].__FUNCTION__%%    %%DKSTACK[%dk_stacktrace_marker%].__ARGS__%%"
+		call dk_textFormat OUTPUT "[%dk_stacktrace_count%]"  "%%DKSTACK[%dk_stacktrace_marker%].__FILE__%%"  "%%DKSTACK[%dk_stacktrace_marker%].__FUNCTION__%%"  "%%DKSTACK[%dk_stacktrace_marker%].__ARGS__%%"
 		call echo %OUTPUT%
 		set /a dk_stacktrace_count-=1
 		
@@ -44,5 +44,3 @@ call dk_debug test putting a function on the stack
 echo.
 call dk_stacktrace
 echo.
-
-call dk_exit

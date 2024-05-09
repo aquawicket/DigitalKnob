@@ -10,5 +10,5 @@ call functions/DK.cmd
 call dk_keepConsoleOpen
 
 :::::: Load Main Program ::::::
-::if "%*" NEQ "" call %* 
+::if "%*" neq "" call %* 
 ::myfunc "mydata"

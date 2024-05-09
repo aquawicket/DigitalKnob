@@ -1,31 +1,34 @@
 @echo off
 call DK
 
-if "%ENABLE_dk_info%"=="" set ENABLE_dk_info=1
-if "%TRACE_ON_INFO%"==""  set TRACE_ON_INFO=0
-if "%PAUSE_ON_INFO%"==""  set PAUSE_ON_INFO=0
-if "%HALT_ON_INFO%"==""   set HALT_ON_INFO=0
+if not defined ENABLE_dk_info  set "ENABLE_dk_info=1"
+if not defined TRACE_ON_INFO   set "TRACE_ON_INFO=0"
+if not defined LINE_ON_INFO    set "LINE_ON_INFO=0"
+if not defined PAUSE_ON_INFO   set "PAUSE_ON_INFO=0"
+if not defined HALT_ON_INFO    set "HALT_ON_INFO=0"
 ::INFO_TAG="  INFO: "
 ::################################################################################
 ::# dk_info(<message>)
 ::#
-::#	    Print a info message to the console
+::#    Print a info message to the console
 ::#
-::#     @msg	- The message to print
+::#    @message	- The message to print
 ::#
 :dk_info () {
-	call dk_debugFunc
+	::call dk_debugFunc
 	
-	if "%ENABLE_dk_info%" NEQ "1" goto:eof
+	if "%ENABLE_dk_info%" neq "1" goto:eof
+	
+	
 	setlocal enableDelayedExpansion	
-		set "msg=%1"
+		set "_message_=%*"
+		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"           &:: if _message_ starts and ends with quotes, remove them
 		
-		:: if msg starts and ends with quotes, remove the first and last
-		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
-		
-		call dk_echo %white%%INFO_TAG%%msg%%clr%
-		if "%TRACE_ON_INFO%"=="1" call dk_echo %white%*** TRACE_ON_ERROR ***%clr% & call dk_stacktrace
-		if "%HALT_ON_INFO%"=="1"  call dk_echo %white%*** HALT_ON_INFO ***%clr%   & call dk_exit
-		if "%PAUSE_ON_INFO%"=="1" call dk_echo %white%*** PAUSE_ON_INFO ***%clr%  & call dk_pause
+		call dk_echo %white%%INFO_TAG%%_message_%%clr%
+		set "ENABLE_dk_debugFunc=0"
+		if "%TRACE_ON_INFO%"=="1" call dk_echo %blue%*** TRACE_ON_INFO ***%clr%  & call dk_stacktrace
+		if "%LINE_ON_INFO%"=="1"  call dk_echo %blue%*** LINE_ON_INFO ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
+		if "%PAUSE_ON_INFO%"=="1" call dk_echo %blue%*** PAUSE_ON_INFO ***%clr%  & call dk_pause
+		if "%HALT_ON_INFO%"=="1"  call dk_echo %blue%*** HALT_ON_INFO ***%clr%   & cmd /k
 	endlocal
 goto:eof

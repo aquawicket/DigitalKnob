@@ -1,32 +1,35 @@
 @echo off
 call DK
 
-if "%ENABLE_dk_debug%"=="" set ENABLE_dk_debug=1
-if "%TRACE_ON_DEBUG%"==""  set TRACE_ON_DEBUG=0
-if "%PAUSE_ON_DEBUG%"==""  set PAUSE_ON_DEBUG=0
-if "%HALT_ON_DEBUG%"==""   set HALT_ON_DEBUG=0
+if not defined ENABLE_dk_debug  set "ENABLE_dk_debug=1"
+if not defined TRACE_ON_DEBUG   set "TRACE_ON_DEBUG=0"
+if not defined LINE_ON_DEBUG    set "LINE_ON_DEBUG=0"
+if not defined PAUSE_ON_DEBUG   set "PAUSE_ON_DEBUG=0"
+if not defined HALT_ON_DEBUG    set "HALT_ON_DEBUG=0"
 ::DEBUG_TAG="  DEBUG: "
 ::##################################################################################
-::# dk_debug(<msg>)
+::# dk_debug(<message>)
 ::#
-::#   Print a debug message to the console
+::#    Print a debug message to the console
 ::#
-::#   @msg	- The message to print
+::#    @message	- The message to print
 ::#
 :dk_debug () {
-	call dk_debugFunc
+	::call dk_debugFunc
 	
-	if "%ENABLE_dk_debug%" NEQ "1"  goto:eof
-	if ""=="%*"  echo. & goto:eof				              &:: if argument is empty, print a new line
+	if "%ENABLE_dk_debug%" neq "1"  goto:eof
+	if ""=="%*"  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion       
-		set "msg=%*"
-		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"    &:: if msg starts and ends with quotes, remove them
+		set "_message_=%*"
+		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"    &:: if _message_ starts and ends with quotes, remove them
 		
-		call dk_echo %blue%%DEBUG_TAG%%msg%%clr%
+		call dk_echo %blue%%DEBUG_TAG%%_message_%%clr%
+		set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_DEBUG%"=="1" call dk_echo %blue%*** TRACE_ON_DEBUG ***%clr%  & call dk_stacktrace
-		if "%HALT_ON_DEBUG%"=="1"  call dk_echo %blue%*** HALT_ON_DEBUG ***%clr%   & call dk_exit
+		if "%LINE_ON_DEBUG%"=="1"  call dk_echo %blue%*** LINE_ON_DEBUG ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
 		if "%PAUSE_ON_DEBUG%"=="1" call dk_echo %blue%*** PAUSE_ON_DEBUG ***%clr%  & call dk_pause
+		if "%HALT_ON_DEBUG%"=="1"  call dk_echo %blue%*** HALT_ON_DEBUG ***%clr%   & cmd /k
 	endlocal
 goto:eof
 

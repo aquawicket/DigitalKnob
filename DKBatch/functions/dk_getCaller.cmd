@@ -72,7 +72,7 @@ goto:eof
 
 :: *** STEP3 Restart the requester batch, but jump to the label :dk_getCaller_return
 :Step3
-	::if "%_returnVar%" NEQ "" set "%_returnVar%=%caller[1]%"
+	::if "%_returnVar%" neq "" set "%_returnVar%=%caller[1]%"
 	endlocal
 	::echo _returnVar = %_returnVar%
 	call :dk_getCaller_return%_returnVar%

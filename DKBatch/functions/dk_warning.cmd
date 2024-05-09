@@ -1,36 +1,34 @@
 @echo off
 call DK
 
-if "%ENABLE_dk_warning%"=="" set ENABLE_dk_warning=1
-if "%TRACE_ON_WARNING%"==""  set TRACE_ON_WARNING=0
-if "%PAUSE_ON_WARNING%"==""  set PAUSE_ON_WARNING=0
-if "%HALT_ON_WARNING%"==""   set HALT_ON_WARNING=0
+if not defined ENABLE_dk_warning  set "ENABLE_dk_warning=1"
+if not defined TRACE_ON_WARNING   set "TRACE_ON_WARNING=0"
+if not defined LINE_ON_WARNING    set "LINE_ON_WARNING=0"
+if not defined PAUSE_ON_WARNING   set "PAUSE_ON_WARNING=0"
+if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 ::WARNING_TAG="  WARNING: "
 ::################################################################################
-::# dk_warning(msg)
+::# dk_warning(message)
 ::#
 ::#	Print a warning message to the console
 ::#
-::#	@msg	- The message to print
+::#	@message	- The message to print
 ::#
 :dk_warning () {
-	call dk_debugFunc
+	::call dk_debugFunc
 	
-	if "%ENABLE_dk_warning%" NEQ "1" goto:eof
+	if "%ENABLE_dk_warning%" neq "1" goto:eof
+	
+	
 	setlocal enableDelayedExpansion	
-		set "msg=%*"
+		set "_message_=%*"
+		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"           &:: if _message_ starts and ends with quotes, remove them
 		
-		:: if msg starts and ends with quotes, remove them
-		if "" == %msg:~0,1%%msg:~-1% set "msg=!msg:~1,-1!"
-		
-		call dk_load dk_echo
-		call dk_load dk_stacktrace
-		call dk_load dk_exit
-		call dk_load dk_pause
-		
-		call dk_echo %yellow%%WARNING_TAG%%msg%%clr%
-		if "%TRACE_ON_WARNING%"=="1" call dk_echo %yellow%*** TRACE_ON_WARNING ***%clr%  & call dk_stacktrace
-		if "%HALT_ON_WARNING%"=="1"  call dk_echo %yellow%*** HALT_ON_WARNING ***%clr%   & call dk_exit
-		if "%PAUSE_ON_WARNING%"=="1" call dk_echo %yellow%*** PAUSE_ON_WARNING ***%clr%  & call dk_pause
+		call dk_echo %yellow%%WARNING_TAG%%_message_%%clr%
+		set "ENABLE_dk_debugFunc=0"
+		if "%TRACE_ON_WARNING%"=="1" call dk_echo %blue%*** TRACE_ON_WARNING ***%clr%  & call dk_stacktrace
+		if "%LINE_ON_WARNING%"=="1"  call dk_echo %blue%*** LINE_ON_WARNING ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
+		if "%PAUSE_ON_WARNING%"=="1" call dk_echo %blue%*** PAUSE_ON_WARNING ***%clr%  & call dk_pause
+		if "%HALT_ON_WARNING%"=="1"  call dk_echo %blue%*** HALT_ON_WARNING ***%clr%   & cmd /k
 	endlocal
 goto:eof

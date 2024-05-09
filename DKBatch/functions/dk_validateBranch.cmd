@@ -14,7 +14,7 @@ call DK
 
     set DKBRANCH=Development
     if exist .git (
-        "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 0 (
+        "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
             set DKBRANCH=%FOLDER%
         )
     )

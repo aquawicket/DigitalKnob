@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_defined () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "dk_defined() argument 1 is invalid"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 
 	::set "variable=%1"
 	if defined %1 (

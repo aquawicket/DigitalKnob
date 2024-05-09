@@ -18,7 +18,7 @@ call DK
 ::		setlocal DisableDelayedExpansion
 ::		(goto) 2>nul
 ::		call set parent=%%~0
-::		if "%parent%" NEQ "" (
+::		if "%parent%" neq "" (
 ::			if defined include_guard_%parent% (
 ::				::echo %parent% is already included
 ::				call goto:eof

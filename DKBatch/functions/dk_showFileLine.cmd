@@ -24,7 +24,7 @@ call DK
 				if !n! GTR !min! (
 					set str=%%a
 					set str=!str::=:	! 
-					if !n! EQU !line! (
+					if !n! equ !line! (
 						echo [30;41m^>  !str![0m
 					) else (
 						echo    !str!

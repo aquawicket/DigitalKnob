@@ -138,8 +138,8 @@ set "FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE! "
 
 rem 1. add /N parameter to first filter if must print line prefixes and -f1 flag is not set.
 rem 2. flags prefixed output if must print line prefixes.
-if %FLAG_PRINT_LINE_NUMBER_PREFIX% NEQ 0 (
-  if %FLAG_F1_LINE_NUMBER_FILTER% EQU 0 (
+if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
+  if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
     if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
       set "FINDSTR_FIRST_FILTER_CMD_LINE=/N !FINDSTR_FIRST_FILTER_CMD_LINE!"
     )
@@ -150,7 +150,7 @@ if %FLAG_PRINT_LINE_NUMBER_PREFIX% NEQ 0 (
 rem 1. add /N parameter to first filter and flags prefixed output if lines filter is not empty and -f1 flag is not set.
 rem 2. add /B parameter to lines filter if lines filter is not empty
 if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" (
-  if %FLAG_F1_LINE_NUMBER_FILTER% EQU 0 (
+  if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
     if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
       set "FINDSTR_FIRST_FILTER_CMD_LINE=/N !FINDSTR_FIRST_FILTER_CMD_LINE!"
       set OUTPUT_HAS_NUMBER_PREFIX=1
@@ -163,7 +163,7 @@ if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" (
 
 rem 1. remove /N parameter from first filter if -f1 flag is set.
 rem 2. flags prefixed output if -f1 flag is set.
-if %FLAG_F1_LINE_NUMBER_FILTER% NEQ 0 (
+if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 (
   if not "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" == "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
     set "FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!"
   )
@@ -174,7 +174,7 @@ if "%TOOLS_PATH%" == "" set "TOOLS_PATH=%?~dp0%"
 rem set "TOOLS_PATH=%TOOLS_PATH:\=/%"
 if "%TOOLS_PATH:~-1%" == "\" set "TOOLS_PATH=%TOOLS_PATH:~0,-1%"
 
-if %FLAG_FILE_FORMAT_PE% EQU 0 (
+if %FLAG_FILE_FORMAT_PE% equ 0 (
   set CMD_LINE=type "%FILE_PATH_PREFIX%%FILE_PATH%" ^| findstr !FINDSTR_FIRST_FILTER_CMD_LINE!
 ) else (
   rem add EULA acception into registry to avoid EULA acception GUI dialog
@@ -184,7 +184,7 @@ if %FLAG_FILE_FORMAT_PE% EQU 0 (
   set CMD_LINE=@"%TOOLS_PATH%\strings.exe" -q "%FILE_PATH_PREFIX%%FILE_PATH%" ^| findstr !FINDSTR_FIRST_FILTER_CMD_LINE!
 )
 
-if %FLAG_F1_LINE_NUMBER_FILTER% NEQ 0 set CMD_LINE=!CMD_LINE! ^| findstr /N /R /C:".*"
+if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 set CMD_LINE=!CMD_LINE! ^| findstr /N /R /C:".*"
 if not "!FINDSTR_LINES_FILTER_CMD_LINE!" == "" set CMD_LINE=!CMD_LINE! ^| findstr !FINDSTR_LINES_FILTER_CMD_LINE!
 
 rem echo !CMD_LINE! >&2
@@ -192,8 +192,8 @@ rem echo !CMD_LINE! >&2
   endlocal
   rem to avoid ! character truncation
   setlocal DisableDelayedExpansion
-  if %OUTPUT_HAS_NUMBER_PREFIX% NEQ 0 (
-    if %FLAG_PRINT_LINE_NUMBER_PREFIX% NEQ 0 (
+  if %OUTPUT_HAS_NUMBER_PREFIX% neq 0 (
+    if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
       %CMD_LINE% 2>nul
     ) else ( 
       for /F "usebackq eol= tokens=1,* delims=:" %%i in (`^(%CMD_LINE: | findstr = ^| findstr %^) 2^>nul`) do echo.%%j

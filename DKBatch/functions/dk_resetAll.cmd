@@ -7,7 +7,7 @@ call DK
 :dk_resetAll () {
 	call dk_debugFunc
 	
-    if "%1" EQU "wipe" goto:wipe
+    if "%1" equ "wipe" goto:wipe
         
     call dk_clearScreen
 	call dk_echo
@@ -20,7 +20,7 @@ call DK
 	call dk_echo
         
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR

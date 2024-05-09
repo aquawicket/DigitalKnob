@@ -12,7 +12,7 @@ if not defined frame (set /a frame=0)
 :dk_dumpStack
 (	
 	setlocal DisableDelayedExpansion
-	if %frame% NEQ 0 (goto) 2>nul & (goto) 2>nul
+	if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
     
 	echo #################################################
 	set /a "frame=%frame%"
@@ -61,8 +61,8 @@ if not defined frame (set /a frame=0)
 		setlocal DisableDelayedExpansion
 		set /a frame+=1
 		call "%~d0\:dk_dumpStack\..%~pnx0" %*
-	) else if "%caller%" NEQ "%DKTEST_caller%" (
-		echo CALLER NEQ DKTEST AND CALLER NEQ CALLERFUNC
+	) else if "%caller%" neq "%DKTEST_caller%" (
+		echo CALLER neq DKTEST AND CALLER neq CALLERFUNC
 		setlocal DisableDelayedExpansion
 		set /a frame+=1
 		call "%~d0\:dk_dumpStack\..%~pnx0" %*
@@ -89,7 +89,7 @@ goto:eof
 ::	set "runner=%runner% & call set frame=%%~0"	
 ::	set "runner=%runner% & (if [%frame%]==[%%~0] (call ) else (call))"
 ::	set "runner=%runner% && (call %~d0\:call_return\..%~pnx0)"
-::	set "runner=%runner% || (if [%frame%] NEQ [] (call ))"
+::	set "runner=%runner% || (if [%frame%] neq [] (call ))"
 ::	set "runner=%runner% && (set frames=%frames% %frame%)"
 ::
 ::	set "runner=%runner% && %runner% && %runner% && %runner% && %runner% && %runner% && %runner% && echo frames = %frames%"

@@ -2,13 +2,13 @@
 call DK
 
 ::##################################################################################
-::# dk_pause(msg)
+::# dk_pause()
 ::#
-::#    Pause execution and wait for keypress to continue
+::#    Pause execution and wait for <enter> keypress to continue
 ::#
 :dk_pause () {
 	call dk_debugFunc
-	::[ %1 ] && dk_error "Incorrect number of parameters"
+	::if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	
 	pause
 goto:eof

@@ -1,6 +1,7 @@
 @echo off
 call DK
 
+if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::################################################################################
 ::# dk_printVar(<variable>)
 ::#
@@ -8,10 +9,28 @@ call DK
 :dk_printVar () {
 	call dk_debugFunc
 	
-    set "var=%1"
-    call set "value=%%%var%%%"
-	if "%value%" == "" echo %var%
-    if "%value%" NEQ "" echo %var%: %value%
+	if "%ENABLE_dk_printVar%" neq "1"  goto:eof
 	
-    ::echo %1 = !!!INVALID!!!
+	if not defined %~1 (
+		echo %1 = %red%UNDEFINED%clr%
+		goto:eof
+	)
+    
+	set "_var_=%1"
+    call set "_value_=%%%_var_%%%"
+    echo %_var_% = '%_value_%'
 goto:eof
+
+
+
+
+:DKTEST #####################################################################
+
+set "myVar=This is a string"
+call dk_printVar myVar
+
+set "myVarB="
+call dk_printVar myVarB
+
+set myVarC= 
+call dk_printVar myVarC

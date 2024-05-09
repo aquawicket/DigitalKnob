@@ -8,7 +8,7 @@ call DK
 :dk_buildDebug () {
 	call dk_debugFunc
 	
-    if "%MSYSTEM%" NEQ "" (
+    if "%MSYSTEM%" neq "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
         goto:eof
     )

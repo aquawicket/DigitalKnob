@@ -6,12 +6,10 @@ call DK
 ::#
 ::#
 :dk_commandToVariable () {
-	call dk_debugFunc
-	
-    if [%2] == [] (
-        echo "ERROR: dk_commandToVariable() requires at least 2 parameters"
-        goto:eof
-    )
+	call dk_debugFunc	
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
+
     set command=
 
     :command_args

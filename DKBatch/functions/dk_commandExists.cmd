@@ -6,13 +6,13 @@ call DK
 ::#
 :dk_commandExists () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "dk_commandExists() argument 1 is invalid"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	::set "dk_commandExists=NOT ERRORLEVEL 1"
 	
     ::set "command=%1"
  	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
-    if %ERRORLEVEL% EQU 0 (
+    if %ERRORLEVEL% equ 0 (
 		if "%~2" neq "" endlocal & set "%2=true"
 		(call )
 		goto:eof

@@ -21,7 +21,7 @@ call DK
 	
 	::set argc=0
 	::for %%x in (%*) do Set /A argc+=1
-	::if "%argc%" NEQ "1"	 call dk_verbose "dk_variableInfo(%*): incorrect number of parameters" & goto:eof
+	::if "%argc%" neq "1"	 call dk_verbose "dk_variableInfo(%*): incorrect number of parameters" & goto:eof
 	if "%1"==""          call dk_error "dk_variableInfo: parameter 1 is invalid" & goto:eof
 		
 	setlocal enabledelayedexpansion
@@ -43,7 +43,7 @@ call DK
 		set "var_name=%%!var!%%"  
 		::echo var_name = %var_name%
 		
-		if "%var_value%" NEQ ""  set "new_msg=%%!var_name!%% = '%var_value%'"
+		if "%var_value%" neq ""  set "new_msg=%%!var_name!%% = '%var_value%'"
 		if "%var_value%"==""     set "new_msg=%%!var_name!%% = %red%UNDEFINED%clr%"
 	endlocal & set "%1=%new_msg%"
 goto:eof

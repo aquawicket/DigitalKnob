@@ -7,7 +7,7 @@ call functions\DK.cmd
 
 
 :::::: Load Main Program ::::::
-::if "%*" NEQ "" call %* 
+::if "%*" neq "" call %* 
 dk_inputTimeout "My Message" "10" "no selection"
 
 

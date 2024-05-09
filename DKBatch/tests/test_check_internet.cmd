@@ -7,7 +7,7 @@
 
 :: Create temporary batch file
 echo @ECHO OFF> reply.cmd
-echo SET connect=1>>reply.cmd
+echo set connect=1>>reply.cmd
 echo Checking connection, please wait...
 echo @ECHO OFF> check_net.cmd
 ping 194.109.6.66 | find "Reply from " >>check_net.cmd

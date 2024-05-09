@@ -7,8 +7,8 @@ call DK
 ::#
 :dk_stringContains () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "dk_stringContains() argument 1 is invalid"
-	if "%~2" equ "" call dk_error "dk_stringContains() argument 2 is invalid"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
 	
 	setlocal enableDelayedExpansion
     call set "_haystack_=%~1"

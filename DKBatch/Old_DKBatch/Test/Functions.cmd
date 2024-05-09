@@ -23,7 +23,7 @@
 :: SOFTWARE.
 %DKBATCH%
 
-SETLOCAL 
+setlocal 
 call :function1
 call :function7
 call :function4

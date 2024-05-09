@@ -52,7 +52,7 @@ goto:eof
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_getScriptPath_return
-	if "%_returnVar%" NEQ "" set "%_returnVar%=%_callerpath%"
+	if "%_returnVar%" neq "" set "%_returnVar%=%_callerpath%"
 	endlocal
 	%_lastpath% %_lastargs%
 goto:eof	

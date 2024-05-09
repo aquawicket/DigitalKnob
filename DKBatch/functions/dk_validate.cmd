@@ -8,13 +8,13 @@ call DK
 ::#
 :dk_validate () {
 	call dk_debugFunc
-	::if "%1"==""  call dk_error "parameter 1 is invalid"
-	if "%2"==""  call dk_error "parameter 2 is invalid"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
 
-	if defined %1 if "%1" NEQ "" (goto:eof)
+	if defined %1 if "%1" neq "" (goto:eof)
 	call %2
 	
-	if not defined %1 dk_error "dk_validate was unable to get the variable with the function provided"
+	if not defined %1 dk_error "dk_validate was unable to set the variable with the function provided"
 	if "%1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
 goto:eof
 

@@ -24,12 +24,12 @@
 
 :myFunctionName    -- function description here
 ::                 -- %~1: argument description here
-SETLOCAL
+setlocal
 REM.--function body here
 set LocalVar1=...
 set LocalVar2=...
 (ENDLOCAL & REM -- RETURN VALUES
-    IF "%~1" NEQ "" SET %~1=%LocalVar1%
-    IF "%~2" NEQ "" SET %~2=%LocalVar2%
+    if "%~1" neq "" SET %~1=%LocalVar1%
+    if "%~2" neq "" SET %~2=%LocalVar2%
 )
 GOTO:EOF

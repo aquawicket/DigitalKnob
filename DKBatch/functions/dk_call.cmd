@@ -7,7 +7,7 @@
 ::#
 :::dk_call () {
 	::call dk_debugFunc
-	::if "%1"=="" call dk_error "Incorrect number of parameters"
+	::if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 
     ::call dk_echo %magenta% > %* %clr%
    

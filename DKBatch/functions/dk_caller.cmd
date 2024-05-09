@@ -44,9 +44,10 @@ goto:eof
 	
 	call set "_path=%%~f0"
 	call set "_callerpath=%%_path:*%%~f0=%%"
-	call set "_filename=%%~nx0"
-	call set "_func=%%~n0"
-	call set "_args=%%*"
+	call set "__FILE__=%%~nx0"
+	rem call set "__LINE__=???"
+	call set "__FUNCTION__=%%~n0"
+	call set "__ARGS__=%%*"
 
     if defined _callerpath (
         set "_callertype=batch"
@@ -71,7 +72,7 @@ goto:eof
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_caller
-	if "%_returnVar%" NEQ "" set "%_returnVar%=%_callerpath%"
+	if "%_returnVar%" neq "" set "%_returnVar%=%_callerpath%"
 	endlocal
 	%_lastpath% %_lastargs%
 goto:eof	

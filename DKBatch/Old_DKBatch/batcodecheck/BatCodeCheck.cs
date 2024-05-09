@@ -1224,7 +1224,7 @@ namespace RobvanderWoude
 				regex = new Regex( pattern, ignorecase );
 				if ( regex.IsMatch( line ) )
 				{
-					message = "IF ERRORLEVEL 0 tests if the errorlevel is greater than or equal to 0, so it ALWAYS returns true; use either IF NOT ERRORLEVEL 1 or IF %ErrorLevel% EQU 0 instead";
+					message = "IF ERRORLEVEL 0 tests if the errorlevel is greater than or equal to 0, so it ALWAYS returns true; use either IF NOT ERRORLEVEL 1 or IF %ErrorLevel% equ 0 instead";
 					allbadpr += string.Format( "{0}Line {1,5:0}:\t{2}", newline, linenum, message );
 					badprmsg += string.Format( "{0}{1}.", newline, message );
 					errinline = true;
@@ -1235,7 +1235,7 @@ namespace RobvanderWoude
 				regex = new Regex( pattern, ignorecase );
 				if ( regex.IsMatch( line ) )
 				{
-					message = "IF NOT ERRORLEVEL 0 tests if the errorlevel is less than 0, so it always ALWAYS returns false; use either IF ERRORLEVEL 1 or IF %ErrorLevel% NEQ 0 instead";
+					message = "IF NOT ERRORLEVEL 0 tests if the errorlevel is less than 0, so it always ALWAYS returns false; use either IF ERRORLEVEL 1 or IF %ErrorLevel% neq 0 instead";
 					allbadpr += string.Format( "{0}Line {1,5:0}:\t{2}", newline, linenum, message );
 					badprmsg += string.Format( "{0}{1}.", newline, message );
 					errinline = true;
