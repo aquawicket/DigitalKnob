@@ -15,13 +15,13 @@ call DK
     cd %DKBRANCH_DIR%
     
 	call dk_validate GIT_EXE dk_validateGit    
-    call dk_commandToVariable "%GIT_EXE%" config --global credential.helper STORE
+    call dk_commandToVariable "%GIT_EXE% config --global credential.helper" STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
-    call dk_commandToVariable "%GIT_EXE%" config --global user.email USER_EMAIL
+    call dk_commandToVariable "%GIT_EXE% config --global user.email" USER_EMAIL
     if "%USER_EMAIL%"=="" (
         echo.
         echo please enter an email address
@@ -32,7 +32,7 @@ call DK
         echo.
     )
         
-    call dk_commandToVariable "%GIT_EXE%" config --global user.email USER_NAME
+    call dk_commandToVariable "%GIT_EXE% config --global user.email" USER_NAME
     if "%USER_NAME%"=="" (
         echo.
         echo please enter a username

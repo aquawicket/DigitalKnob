@@ -22,6 +22,24 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
 	
+	set /a "__ARGC__=0"
+	for %%a in (%__ARGS__%) do (
+		call set "__ARGV__[%%__ARGC__%%]=%%a"
+		rem call echo "__ARGV__[%%__ARGC__%%] = %%a"
+		set /a "__ARGC__+=1"
+	)
+	set /a "cleanCount=%__ARGC__%"
+	:cleanArgArray
+	if defined __ARGV__[%cleanCount%] (
+		set "__ARGV__[%cleanCount%]="
+		set /a cleanCount+=1
+		goto:cleanArgArray
+	)
+	::echo __FILE__ = %__FILE__%
+	::echo __FUNCTION__ = %__FUNCTION__%
+	::echo __ARGS__ = %__ARGS__%
+	::echo __ARGC__ = %__ARGC__%
+		
 ::	call dk_getCaller 2
 ::	:dk_getCaller_return2
 ::	set DKSTACK[%DKSTACK_marker%].__FILE__=%caller[0].fullpath%

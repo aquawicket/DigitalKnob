@@ -12,7 +12,6 @@ call DK
 	
 	set "arry=%~1"
 	set /A "n=0"
-	
 	setlocal EnableDelayedExpansion
 		:loop1
 		if defined %arry%[%n%] ( 
