@@ -14,8 +14,8 @@ call DK
     set "command="
 
     :command_args
-    set arg=%1
-    set arg=%arg:"=_QUOTE_%
+    set "arg=%1"
+    set "arg=%arg:"=_QUOTE_%"
         
     if not "%~2"=="" (
         if "%command%"=="" (
@@ -24,14 +24,14 @@ call DK
             set "command=%command% %arg%"
         )
     )
-    set variable_name=%~1
+    set "variable_name=%~1"
     shift
     if not "%~1"=="" goto command_args
 
-    set command=%command:_QUOTE_="%
+    set "command=%command:_QUOTE_="%"
 
     for /F "tokens=*" %%g in ('%command% 2^> nul') do (
-        set %variable_name%=%%g
+        set "%variable_name%=%%g"
         set "variable_value=%%g"
     )
 
