@@ -7,9 +7,9 @@ call DK
 ::#
 :dk_commandToVariable () {
 	call dk_debugFunc
-::	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-::	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
-::	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	::if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(): argument 2 is invalid"
+	::if "%~3" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	
     set "command="
 
