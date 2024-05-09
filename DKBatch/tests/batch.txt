@@ -1,0 +1,38 @@
+:: run this file as a batch file with: cmd /V:ON < batch.txt
+
+@echo off
+rem Echo off just suppress echoing of the prompt and each loop of FOR command
+rem but it does NOT suppress the listing of these commands!
+
+rem Pause command does NOT pause, because it takes the character that follows it
+pause
+X
+
+rem This behavior allows to put data for a SET /P command after it
+set /P var=Enter data: 
+This is the data for previous command!
+echo Data read: "%var%"
+
+rem Complex FOR/IF commands may be assembled and they execute in the usual way:
+for /L %i in (1,1,5) do (
+   set /P line=
+   if "!line:~0,6!" equ "SHOW: " echo Line read: !line:~6!
+)
+NOSHOW: First line read
+SHOW: Second line
+NOSHOW: This is third line
+SHOW: The line number 4
+NOSHOW: Final line, number five
+
+rem You may suppress the tracing of the execution redirecting CMD output to NUL
+rem In this case, redirect output to STDERR to display messages in the screen
+echo This is a message redirected to STDERR >&2
+
+rem GOTO command doesn't work:
+goto label
+goto :EOF
+rem but both EXIT and EXIT /B commands works:
+exit /B
+
+:label
+echo Never reach this point...

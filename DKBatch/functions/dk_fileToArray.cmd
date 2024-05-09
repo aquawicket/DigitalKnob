@@ -14,13 +14,13 @@ call DK
 	set /A i=0
 	setlocal EnableDelayedExpansion
     for /F "usebackq delims=" %%a in ("%~1") do (
-		set %2[!i!]=%%a
-		set /A i+=1
+		set "%~2[!i!]=%%a"
+		set /a i+=1
     )
 	 
 	:: Return the array to the calling scope
 	set "currentScope=1"
-	for /F "delims=" %%a in ('set %2[') do (
+	for /F "delims=" %%a in ('set %~2[') do (
 	   if defined currentScope endlocal
 	   set "%%a"
 	)

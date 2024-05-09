@@ -9,7 +9,7 @@ call DK
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 
 	::set "variable=%1"
-	if defined %1 (
+	if defined %~1 (
 		if "%~2" neq "" endlocal & set "%2=true"
 		(call )
 		goto:eof

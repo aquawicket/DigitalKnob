@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_validate(<variable> <function>)
+::# dk_validate(<variable> <code>)
 ::#
 ::#    Check if a variable is valid, otherwise run the function that defines said variable.
 ::#
@@ -11,11 +11,11 @@ call DK
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
 
-	if defined %1 if "%1" neq "" (goto:eof)
-	call %2
+	if defined %~1 if "%~1" neq "" (goto:eof)
+	call %~2
 	
-	if not defined %1 dk_error "dk_validate was unable to set the variable with the function provided"
-	if "%1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
+	if not defined %~1 dk_error "dk_validate was unable to set the variable with the code provided"
+	if "%~1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
 goto:eof
 
 

@@ -16,3 +16,10 @@ call DK
 	for %%Z in ("%_input%") do set "OUT=%%~dpZ"
 	endlocal & set %2=%OUT:~0,-1%
 goto:eof
+
+
+
+:DKTEST ########################################################################
+
+	call dk_getDirectory "C:\Windows\System32" result
+	call dk_printVar result

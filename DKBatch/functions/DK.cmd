@@ -71,7 +71,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::echo %%CMDEXTVERSION%% = %CMDEXTVERSION%
 	::echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 
-	:: Get args after %1
+	:: Get args after %~1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
 	::call printVar ARGS_AFTER_1
 	

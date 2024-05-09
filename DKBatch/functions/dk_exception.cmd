@@ -19,7 +19,7 @@
 if "%~1" equ "/??" goto pagedHelp
 if "%~1" equ "/?" goto help
 if "%~1" equ "" goto help
-shift /1 & goto %1
+shift /1 & goto %~1
 
 
 :throw  errCode  errMsg  errLoc

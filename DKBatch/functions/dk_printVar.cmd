@@ -12,13 +12,23 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 	if "%ENABLE_dk_printVar%" neq "1"  goto:eof
 	
 	if not defined %~1 (
-		echo %1 = %red%UNDEFINED%clr%
-		goto:eof
+		rem echo %~1 = %red%UNDEFINED%clr%
+		goto:try_array
 	)
-    
-	set "_var_=%1"
+	set "_var_=%~1"
     call set "_value_=%%%_var_%%%"
     echo %_var_% = '%_value_%'
+	goto:eof
+
+:try_array	
+	if not defined %~1[0] (
+		echo %~1 = %red%UNDEFINED%clr%
+		goto:eof
+	)
+	set "_var_=%~1[0]"
+	call set "_value_=%%%_var_%%%"
+	echo %_var_% = '%_value_%'
+
 goto:eof
 
 
@@ -26,7 +36,7 @@ goto:eof
 
 :DKTEST #####################################################################
 
-set "myVar=This is a string"
+set "myVar=This is a variable"
 call dk_printVar myVar
 
 set "myVarB="
@@ -34,3 +44,6 @@ call dk_printVar myVarB
 
 set myVarC= 
 call dk_printVar myVarC
+
+set "myVarD[0]=This is an array"
+call dk_printVar myVarD
