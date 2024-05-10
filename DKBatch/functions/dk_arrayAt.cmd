@@ -2,23 +2,15 @@
 call DK
 
 ::################################################################################
-::# dk_arrayLength(<array> <output>)
+::# dk_arrayAt(<array> <index>)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
+::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_at
 ::#
-:dk_arrayLength () {
+:dk_arrayAt () {
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
 	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
-	::set "array_name=%~1"
-	set "array_length=0"
-
-	:arrayCountLoop
-	if defined %~1[%array_length%] ( 
-	   set /a "array_length+=1"
-	   goto :arrayCountLoop 
-	)
-	endlocal & set %2=%array_length%  
+	call dk_todo "dk_arrayAt"
 goto:eof
