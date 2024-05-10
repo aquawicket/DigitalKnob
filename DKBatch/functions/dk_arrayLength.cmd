@@ -2,10 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_getArrayLength(<array_name> <output>)
+::# dk_arrayLength(<array_name> <output>)
 ::#
 ::#
-:dk_getArrayLength () {
+:dk_arrayLength () {
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"

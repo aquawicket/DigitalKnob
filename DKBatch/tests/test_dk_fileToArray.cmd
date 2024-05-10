@@ -8,7 +8,7 @@ dir /b /a-d > array.cmd
 
 :main
 	call dk_fileToArray array.cmd MyArray
-	call dk_getArrayLength MyArray MyArrayLength
+	call dk_arrayLength MyArray MyArrayLength
 	echo MyArrayLength = %MyArrayLength%
 	echo MyArray[0] = %MyArray[0]%
 	echo MyArray[1] = %MyArray[1]%

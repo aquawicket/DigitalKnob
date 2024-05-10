@@ -20,6 +20,7 @@ call DK
 		::echo !!%1[1]!!
 		::echo !!%1[2]!!
 		set "_testvar_=!!%~1[0]!!"
+		set "_testvar_[0]=!!%~1[0]!!"
 		echo isArray
 		goto:printTestVar
 	)
@@ -31,7 +32,7 @@ call DK
 	
 	:printTestVar
 	echo "_testvar_ = %_testvar_%"
-	::echo "_testvar_[0] = %_testvar_%[0]"
+	echo "_testvar_[0] = %_testvar_%[0]"
 	
 goto:eof
 

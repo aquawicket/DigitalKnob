@@ -2,10 +2,11 @@
 call DK
 
 ::################################################################################
-::# dk_arrayToList(<array_name> <output>)
+::# dk_arrayToString(<array_name> <output>)
 ::#
+::#   reference: https://www.w3schools.com/js/js_array_methods.asp#mark_tostring
 ::#
-:dk_arrayToList () {
+:dk_arrayToString () {
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
@@ -14,7 +15,7 @@ call DK
 	set "array_name=%~1"
 	::call dk_printVar array_name
 
-	call dk_getArrayLength %~1 array_length
+	call dk_arrayLength %~1 array_length
 	set /a "count=%array_length%-1"
 
 	setlocal EnableDelayedExpansion
@@ -39,6 +40,6 @@ goto:eof
 	set "MyArray[3]=a"
 	set "MyArray[4]=b"
 	set "MyArray[5]=c"
-	call dk_arrayToList MyArray MyList
+	call dk_arrayToString MyArray MyList
 	
 	call dk_printVar MyList
