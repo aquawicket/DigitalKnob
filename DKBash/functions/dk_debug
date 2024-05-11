@@ -1,5 +1,4 @@
 #!/bin/sh
-#echo "$0 $*"
 #[ -n "$include_dk_debug" ] && exit || export readonly include_dk_debug=1
 [ -z "$DKINIT" ] && . ./DK
 
@@ -11,7 +10,8 @@
 #	@msg	- The message to print
 #
 dk_debug () {
-
+	#dk_debugFunc
+	
 	[ -z ${ENABLE_dk_debug-} ] && export ENABLE_dk_debug=1
 	[ -z ${TRACE_ON_DEBUG-} ]  && export TRACE_ON_DEBUG=0
 	[ -z ${LINE_ON_DEBUG-} ]   && export LINE_ON_DEBUG=0
@@ -19,15 +19,14 @@ dk_debug () {
 	[ -z ${HALT_ON_DEBUG-} ]   && export HALT_ON_DEBUG=0
 	#DEBUG_TAG="  DEBUG: "
 
-	#dk_debugFunc
 	[ $ENABLE_dk_debug -ne 1 ] && return
 	msg="$1"
 	
 	dk_echo "${blue}${DEBUG_TAG}${msg}${clr}"
-	[ $TRACE_ON_DEBUG -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
-	[ $LINE_ON_DEBUG -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_DEBUG ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}" #OR HALT AND NOT NO_HALT)
-	[ $PAUSE_ON_DEBUG -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_DEBUG ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
-	[ $HALT_ON_DEBUG -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_DEBUG ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
+	[ $TRACE_ON_DEBUG -eq 1 ] && dk_echo "\n${blue}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
+	[ $LINE_ON_DEBUG -eq 1 ]  && dk_echo "\n${blue}*** LINE_ON_DEBUG ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}" #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_DEBUG -eq 1 ] && dk_echo "\n${blue}*** PAUSE_ON_DEBUG ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
+	[ $HALT_ON_DEBUG -eq 1 ]  && dk_echo "\n${blue}*** HALT_ON_DEBUG ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
 }
 
 
@@ -38,5 +37,4 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_echo "test dk_echo message"
 	dk_debug "test dk_debug message"
 	echo "...next line..."
-	
 }

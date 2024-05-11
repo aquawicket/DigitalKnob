@@ -1,5 +1,4 @@
 #!/bin/sh
-#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
 [ -z "$DKINIT" ] && . ./DK
 
@@ -11,6 +10,7 @@
 #
 dk_pause() {
 	dk_debugFunc
+	echo "dk_debugFunc()"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	read -rp 'Press enter to continue...' key

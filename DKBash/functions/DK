@@ -4,104 +4,117 @@ echo "DK($*)"
 #echo "* = $*"
 #echo "@ = $@"
 
-
-
-	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=0
-	#echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-	#echo "BASH_SOURCE = ${BASH_SOURCE[@]}"
-	#echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
-	#echo "BASH_SOURCE[1] = ${BASH_SOURCE[1]}"
+[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
+#echo "BASH_SOURCE = ${BASH_SOURCE[@]}"
+#echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
+#echo "BASH_SOURCE[1] = ${BASH_SOURCE[1]}"
 	
-	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 
-	###### Reload Main Script with bash ######
-	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
-		export RELOAD_WITH_BASH=0
-		if [ -n "$(command -v bash)" ]; then
-			echo "reloading with /bin/bash . . ."
-			echo "SHLVL = $SHLVL"
-			exec /bin/bash "$0"
-			echo "SHLVL = $SHLVL"
-		else
-			echo ""
-			echo "ERROR: This script requires bash. Please install it and try again.";
-			read -rp 'Press enter to exit...' key;
-			exit 1
-		fi
+###### Reload Main Script with bash ######
+if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
+	export RELOAD_WITH_BASH=0
+	if [ -n "$(command -v bash)" ]; then
+		echo "reloading with /bin/bash . . ."
+		echo "SHLVL = $SHLVL"
+		exec /bin/bash "$0"
+		echo "SHLVL = $SHLVL"
+	else
+		echo ""
+		echo "ERROR: This script requires bash. Please install it and try again.";
+		read -rp 'Press enter to exit...' key;
+		exit 1
 	fi
-	[ -n "$DKINIT" ] && return || export readonly DKINIT=1
+fi
+[ -n "$DKINIT" ] && return || export readonly DKINIT=1
 	
-#	if $(ps -o >/dev/null 2>&1);then  
-#		THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
-#		$echo "    THIS_PATH = $THIS_PATH"
-#		PARENT_PATH=$(ps -o args= $PPID | awk '{print $2}')
-#		$echo "    PARENT_PATH = $PARENT_PATH"
-#	else
-#		#echo "ps -o NOT AVAILABLE"
-#		echo $(ps -p -f $PPID)
-#	fi
+#if $(ps -o >/dev/null 2>&1);then  
+#	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
+#	$echo "    THIS_PATH = $THIS_PATH"
+#	PARENT_PATH=$(ps -o args= $PPID | awk '{print $2}')
+#	$echo "    PARENT_PATH = $PARENT_PATH"
+#else
+#	#echo "ps -o NOT AVAILABLE"
+#	echo $(ps -p -f $PPID)
+#fi
 
-	###### get DKSCRIPT_ variables  ######
-	#[ -n "$1" ] && DKSCRIPT_PATH=$(realpath $1) || export DKSCRIPT_PATH=$(pwd)/$(basename $0)
-	export DKSCRIPT_PATH=$(pwd)/$(basename $0)
-	[ -e $DKSCRIPT_PATH ] || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist"
-	echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-	[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "$DKSCRIPT_PATH")
-	export DKSCRIPT_DIR=$(dirname $DKSCRIPT_PATH)
-	echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
-	export DKSCRIPT_NAME=$(basename $DKSCRIPT_PATH)
-	echo "DKSCRIPT_NAME = $DKSCRIPT_NAME"
+###### get DKSCRIPT_ variables  ######
+echo "\$0 = $0"
+#[ -e $0 ] && export DKSCRIPT_PATH=$0
 
+echo "\$(realpath \$0) = $(realpath $0)"
+[ -e $(realpath $0) ] && export DKSCRIPT_PATH=$(realpath $0)
 
-	###### Set and check posix mode ######
-	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
-	  *:posix:*) echo "POSIX mode enabled" ;;
-	  *)         echo "POSIX mode not enabled" ;;
-	esac
+#echo "\$(pwd)/\$(basename \$0) = $(pwd)/$(basename $0)"
+#[ -e $(pwd)/$(basename $0) ] && export DKSCRIPT_PATH=$(pwd)/$(basename $0)
 
+[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
+[ -e ${DKSCRIPT_PATH} ] || $(echo "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist"; read -rp 'Press enter to continue...' key; exit)
+echo "\${DKSCRIPT_PATH} = ${DKSCRIPT_PATH}"
 
-	###### Set error trace options ######
-	#shopt -s expand_aliases
-	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
-	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
-	#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
-	#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+export DKSCRIPT_DIR=$(dirname ${DKSCRIPT_PATH})
+echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+
+export DKSCRIPT_NAME=$(basename ${DKSCRIPT_PATH})
+echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 
 
-	###### set true and false variables ######
-	export readonly true=0
-	export readonly false=1
+###### Set and check posix mode ######
+$(set -o posix) && set -o posix && case :$SHELLOPTS: in
+  *:posix:*) echo "POSIX mode enabled" ;;
+  *)         echo "POSIX mode not enabled" ;;
+esac
 
 
-	###### get DKBASH_DIR ######
-	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
-	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
-	echo "DKBASH_DIR = $DKBASH_DIR"
+###### Set error trace options ######
+#shopt -s expand_aliases
+$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
+$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+#$(set -o nounset) && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
+#$(set -o errexit) && set -o errexit  	# set -e : exit the script if any statement returns a non-true
+
+
+###### set true and false variables ######
+export readonly true=0
+export readonly false=1
+
+
+###### get DKBASH_DIR ######
+export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
+export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
+echo "DKBASH_DIR = $DKBASH_DIR"
 	
-	chmod 777 ${DKBASH_DIR}/functions/*
+chmod 777 ${DKBASH_DIR}/functions/*
+export PATH=${PATH}:${DKBASH_DIR}/functions
 	
-	###### Script loader ######
-	#if [ -n "$ENABLE_dk_load" ]; then
-		###### aquire if missing ######
-		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
-		[ ! -e ${DKBASH_DIR}/functions/dk_load ] && curl -Lo DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
+###### Script loader ######
+#if [ -n "$ENABLE_dk_load" ]; then
+	###### download if missing ######
+	[ ! -e ${DKBASH_DIR}/functions/dk_load ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
+	[ ! -e ${DKBASH_DIR}/functions/dk_load ] && curl -Lo DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
 	
-		. ${DKBASH_DIR}/functions/dk_load
-		dk_load dk_escapeSequences && dk_escapeSequences
-		dk_load $DKSCRIPT_PATH
-	#else	
-	#	dk_escapeSequences
-	#fi
-	export PATH=${PATH}:${DKBASH_DIR}/functions
-
+	. ${DKBASH_DIR}/functions/dk_load
+	dk_load ${DKBASH_DIR}/dk_escapeSequences && dk_escapeSequences
+	dk_load ${DKSCRIPT_PATH}
+#else	
+#dk_escapeSequences
+#fi
+	
 	
 #	dk_load dk_bundleSource
 #	dk_bundleSource $dk_load_list builder_bundle.sh
 
-#	###### DKTEST MODE ######
-#	echo "$DKBASH_DIR/functions  $DKSCRIPT_DIR"
-#	if [ "$DKBASH_DIR/functions" = "$DKSCRIPT_DIR" ]; then
-#		[ "${ENABLE_DKTEST}" = "1" ] && export DKTEST=${BASH_SOURCE[1]} || echo "DISABLE_DKTEST"
-#	fi
-#	
-#	#echo "DK($*)"
+###### DKTEST MODE ######
+if [ "${ENABLE_DKTEST}" = "1" ]; then
+	if [ "${DKSCRIPT_DIR}" = "${DKBASH_DIR}/functions" ]; then
+		echo ""
+		echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
+		echo ""
+		DKTEST
+		echo ""
+		echo "########################## END TEST ################################"
+		echo ""
+		read -rp 'Press enter to continue...' key
+		exit
+	fi
+fi

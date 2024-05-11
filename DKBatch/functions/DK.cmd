@@ -75,6 +75,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
 	::call printVar ARGS_AFTER_1
 	
+	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
 	echo.
     echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######

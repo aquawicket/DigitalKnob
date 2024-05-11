@@ -1,8 +1,10 @@
 #!/bin/sh
-#echo "$0 $*"
 #[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK
 
+#echo "\$0 = $0"
+#echo "\$(realpath \$0) = $(realpath $0)"
+#echo "\$(dirname \$0) = $(dirname $0)"
+[ -z "$DKINIT" ] && . "$(dirname $0)/DK"
 
 
 ##################################################################################
@@ -10,7 +12,7 @@
 #
 #
 dk_test () {
-	#dk_debugFunc
+	dk_debugFunc
 	
 	echo "$1"
 }
@@ -20,7 +22,6 @@ dk_test () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-echo "DKTEST($*)"
 
 	dk_test "called from TEST portion of the script"	
 	

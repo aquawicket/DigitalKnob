@@ -1,9 +1,8 @@
 #!/bin/sh
 [ -z "$DKINIT" ] && . ./DK
-#dk_includeGuard
 
 
-[ -z $ENABLE_dk_debugFunc ] && ENABLE_dk_debugFunc=0
+[ -z ${ENABLE_dk_debugFunc} ] && export ENABLE_dk_debugFunc=1
 ##################################################################################
 # dk_debugFunc()
 #
