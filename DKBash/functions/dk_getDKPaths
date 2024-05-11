@@ -12,7 +12,7 @@ dk_getDKPaths () {
 	
 	if [ -n "${HOME-}" ]; then
 		dk_printVar HOME
-		DIGITALKNOB_DIR="$HOME/digitalknob"
+		DIGITALKNOB_DIR="${HOME}/digitalknob"
 	elif [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"

@@ -10,7 +10,7 @@ dk_readCache() {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
-	if ! dk_fileExists "$DKBRANCH_DIR"/cache; then
+	if ! dk_fileExists "${DKBRANCH_DIR}"/cache; then
 		return 0
 	fi
 	_APP_=

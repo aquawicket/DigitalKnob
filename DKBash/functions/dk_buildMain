@@ -16,8 +16,8 @@ dk_buildMain () {
 	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
-		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-		sudo chown -R "$LOGNAME" "$HOME"
+		dk_info "calling sudo chown -R ${LOGNAME} ${HOME} to allow windows write access to \\\wsl.localhost\DISTRO\home\\${LOGNAME}"
+		sudo chown -R "${LOGNAME}" "${HOME}"
 	fi
 
 	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
@@ -41,10 +41,10 @@ dk_buildMain () {
 	dk_printVar DKIMPORTS_DIR
 	dk_printVar DKPLUGINS_DIR
 
-	if [ "$DKSCRIPT_DIR" != "$DKBRANCH_DIR" ]; then
+	if [ "$DKSCRIPT_DIR" != "${DKBRANCH_DIR}" ]; then
 		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
-		dk_warning "DKBRANCH_DIR path = $DKBRANCH_DIR"
+		dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
 	fi
 	
 	while :

@@ -10,7 +10,7 @@
 #
 dk_load() {
 	#dk_debugFunc
-	echo "dk_load($*)"
+	#echo "dk_load($*)"
 	
 	local fn=
 	#fpath=
@@ -97,7 +97,7 @@ dk_load() {
 		if [ -f "${!fn}" ]; then
 			#if ! [ "${@}" = "${!fn}" ]; then
 				. "${!fn}"
-				echo "Sourced ${!fn}"
+				#echo "Sourced ${!fn}"
 			#fi
 			#return 0
 		fi

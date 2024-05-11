@@ -29,23 +29,23 @@ dk_get_dkpaths() {
 	#echo "BASH_SOURCE_NAME = $BASH_SOURCE_NAME"
 
 	DKBRANCH_DIR=$PWD
-	while [ "$(dirname $DKBRANCH_DIR)" != "/" ]; do
-		if [ "$(basename $(dirname $DKBRANCH_DIR))" == "digitalknob" ]; then
+	while [ "$(dirname ${DKBRANCH_DIR})" != "/" ]; do
+		if [ "$(basename $(dirname ${DKBRANCH_DIR}))" == "digitalknob" ]; then
 			break
 		fi
-		DKBRANCH_DIR=$(dirname $DKBRANCH_DIR)
+		DKBRANCH_DIR=$(dirname ${DKBRANCH_DIR})
 	done
-	if [ "$(dirname $DKBRANCH_DIR)" == "/" ]; then
+	if [ "$(dirname ${DKBRANCH_DIR})" == "/" ]; then
 		echo "ERROR: could not find DKBRANCH directory"
 		exit 1
 	fi
 	
 	# digitalknob
-	export DIGITALKNOB_DIR=$(dirname $DKBRANCH_DIR)
+	export DIGITALKNOB_DIR=$(dirname ${DKBRANCH_DIR})
 	export DIGITALKNOB=$(basename $DIGITALKNOB_DIR)
 		# digitalknob/branch
-		export DKBRANCH_DIR=$DKBRANCH_DIR
-		export DKBRANCH=$(basename $DKBRANCH_DIR)
+		export DKBRANCH_DIR=${DKBRANCH_DIR}
+		export DKBRANCH=$(basename ${DKBRANCH_DIR})
 			# digitalknob/branch/3rdParty
 			export DK3RDPARTY_DIR=${DKBRANCH_DIR}/3rdParty
 			export DK3RDPARTY=$(basename $DK3RDPARTY_DIR)

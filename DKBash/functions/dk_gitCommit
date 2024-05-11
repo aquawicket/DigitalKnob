@@ -13,7 +13,7 @@ dk_gitCommit () {
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
 	
-	cd "${DKBRANCH_DIR}" #|| dk_error "cd \$DKBRANCH_DIR failed!"
+	cd "${DKBRANCH_DIR}" #|| dk_error "cd \${DKBRANCH_DIR} failed!"
 	
 	STORE=$(${GIT_EXE} config credential.helper)
 	dk_printVar STORE
@@ -24,7 +24,9 @@ dk_gitCommit () {
 		dk_echo
 	fi
 	
-	USER_EMAIL=$(${GIT_EXE} config --global user.email)
+	if ! USER_EMAIL=$(${GIT_EXE} config --global user.email); then
+		ERROR_STATUS
+	fi
 	if [ -z "${USER_EMAIL}" ]; then
 		dk_echo
 		dk_info "please enter an email address"
@@ -34,9 +36,8 @@ dk_gitCommit () {
 		dk_info "git user.email '${input}' saved"
 		dk_echo
 	fi
-	ERROR_STATUS
 	if ! USER_NAME=$(${GIT_EXE} config --global user.name); then
-	ERROR_STATUS
+		ERROR_STATUS
 	fi
 	if [ -z "${USER_NAME}" ]; then
 		dk_echo
@@ -56,7 +57,6 @@ dk_gitCommit () {
 	dk_info "git commit \"${message}\""
 	dk_confirm || return 0
 	
-	#dk_call "$GIT_EXE" commit -a -m "${message}"
 	"${GIT_EXE}" commit -a -m "${message}"
     dk_call "${GIT_EXE}" push
 }

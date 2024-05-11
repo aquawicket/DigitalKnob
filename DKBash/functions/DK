@@ -144,13 +144,13 @@ DK () {
 #DK_TRY_CATCH () {
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 	set +e; ( set -e
-		DK 
+		DK
 	); err_status=$?; set -e
 
 	if [ "${err_status}" -ne "0" ]; then
 		echo "ERROR_STATUS: ${err_status}"
 		read -rp 'press enter to exit' 
-		exit
+		exit ${err_status}
 		#exec ${SHELL}
 		#dk_error "test"
 	fi

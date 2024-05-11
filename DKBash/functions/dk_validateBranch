@@ -28,10 +28,10 @@ dk_validateBranch () {
 	DKBRANCH_DIR="$DIGITALKNOB_DIR/$DKBRANCH"
 	dk_printVar DKBRANCH_DIR
 	
-	DKCMAKE_DIR="$DKBRANCH_DIR/DKCMake"
+	DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
 	dk_printVar DKCMAKE_DIR
 	
-	DK3RDPARTY_DIR="$DKBRANCH_DIR/3rdParty"
+	DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
 	dk_printVar DK3RDPARTY_DIR
 	
 	DKIMPORTS_DIR="$DK3RDPARTY_DIR/_DKIMPORTS"
@@ -44,19 +44,19 @@ dk_validateBranch () {
 	dk_printVar DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR
-	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-	#	if ! dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
-	#		dk_debug "$DKBRANCH_DIR/$DKSCRIPT_NAME"
-	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME $DKBRANCH_DIR/$DKSCRIPT_NAME
+	#if ! [ "$DKSCRIPT_DIR" = "${DKBRANCH_DIR}" ]; then
+	#	if ! dk_fileExists ${DKBRANCH_DIR}/$DKSCRIPT_NAME; then
+	#		dk_debug "${DKBRANCH_DIR}/$DKSCRIPT_NAME"
+	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME ${DKBRANCH_DIR}/$DKSCRIPT_NAME
 	#	fi
 	#	dk_echo
-	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
+	#	dk_info "RELOADING SCRIPT TO -> ${DKBRANCH_DIR}/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	dk_clearScreen
-	#	if dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#	if dk_fileExists ${DKBRANCH_DIR}/$DKSCRIPT_NAME; then
 	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi
-	#	$DKBRANCH_DIR/$DKSCRIPT_NAME
+	#	${DKBRANCH_DIR}/$DKSCRIPT_NAME
 	#	dk_exit
 	#fi
 }
