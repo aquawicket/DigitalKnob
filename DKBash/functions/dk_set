@@ -1,7 +1,5 @@
 #!/bin/sh
-#echo "$0 $*"
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 ##################################################################################
@@ -13,5 +11,15 @@ dk_set() {
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 
 	#eval "$1=$2"
-	export $1=$2
+	export $1="$2"
+}
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_set myVar "value assigned with dk_set"	
+	echo "myVar = ${myVar}"
 }

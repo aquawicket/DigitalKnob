@@ -1,6 +1,5 @@
 #!/bin/sh
-[ -z "$DKINIT" ] && . ./DK
-#[ -n "$dk_load" ] && return || readonly dk_load=1    # dk_includeGuard
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 ##################################################################################
 # dk_load()

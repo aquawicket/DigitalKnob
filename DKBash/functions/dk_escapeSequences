@@ -1,6 +1,5 @@
 #!/bin/sh
-#[ -n "$include_dk_escapeSequences" ] && return || export readonly include_dk_escapeSequences=1
-[ -z "$DKINIT" ] && . ./DK
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 # https://www.ascii-code.com
@@ -222,3 +221,14 @@ ASCII_SHOW () {
 	# Associative array
 	#echo "${ASCII[$1,DEC]}	${ASCII[$1,SYMBOL]}	${ASCII[$1,DEC]}	${ASCII[$1,OCT]}	${ASCII[$1,HEX]}	${ASCII[$1,HTML]}	${ASCII[$1,INFO]}"
 }
+
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	echo "dk_escapeSequences DKTEST() TODO"
+}
+

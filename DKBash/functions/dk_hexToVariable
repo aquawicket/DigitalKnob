@@ -1,7 +1,5 @@
 #!/bin/sh
-#echo "$0 $*"
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 ################################################################################
@@ -18,4 +16,17 @@ dk_hexToVariable () {
 	# 0x1b  prints as  '\x1b'
 	# ${2//0x/x}  removes any starting 0 and changes any 0x to x
 	export $1=$(printf '\%s' ${2//0x/x})
+}
+
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_hexToVariable HEX_0x8C 0x8C
+	echo "HEX_0x8C = ${HEX_0x8C}"
+	
+	printf ${HEX_0x8C}
 }

@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$DKINIT" ] && . ./DK
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 [ -z ${ENABLE_dk_debugFunc} ] && export ENABLE_dk_debugFunc=1
@@ -8,7 +8,7 @@
 #
 #
 alias dk_debugFunc='{
-	if [ $ENABLE_dk_debugFunc -eq 1 ]; then
+	if [ ${ENABLE_dk_debugFunc} -eq 1 ]; then
 		if [ "$(echo -e)" = "" ]; then
 			echo -e "$(basename ${BASH_SOURCE[1]}:${BASH_LINENO[0]}) ${blue}${FUNCNAME[0]}($*)${clr}"
 		else

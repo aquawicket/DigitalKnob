@@ -1,7 +1,5 @@
 #!/bin/sh
-echo "$0 $*"
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-[ -z "$DKINIT" ] && . ./DK
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 ##################################################################################

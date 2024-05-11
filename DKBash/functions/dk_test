@@ -1,10 +1,5 @@
 #!/bin/sh
-#[ -n "$include_dk_test" ] && exit || export readonly include_dk_test=1
-
-#echo "\$0 = $0"
-#echo "\$(realpath \$0) = $(realpath $0)"
-#echo "\$(dirname \$0) = $(dirname $0)"
-[ -z "$DKINIT" ] && . "$(dirname $0)/DK"
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 ##################################################################################
@@ -16,7 +11,6 @@ dk_test () {
 	
 	echo "$1"
 }
-
 
 
 

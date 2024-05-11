@@ -1,6 +1,6 @@
 #!/bin/sh
-[ -n "${inclue_guard_dk_load}" ] && return || readonly inclue_guard_dk_load=1
-[ -z "${DKINIT}" ] && . ./DK
+#[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 
 ##################################################################################
@@ -109,4 +109,10 @@ dk_load() {
 	#echo "${dk_load_list}" > dk_load_list.txt
 }
 
-#dk_load "${0}"
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	echo "dk_load:DKTEST()"	
+	
+}
