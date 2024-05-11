@@ -9,24 +9,24 @@
 dk_get_dkpaths() {
 	dk_debugFunc
 	
-	# [[ $0 != $BASH_SOURCE ]] && echo "Script is being sourced" || echo "Script is being run"
+	# [[ $0 != ${BASH_SOURCE} ]] && echo "Script is being sourced" || echo "Script is being run"
 	
-	#export SCRIPT=$0
-	#echo "SCRIPT = $SCRIPT"
-	#export SCRIPT_PATH=$(realpath "$0")
-	#echo "SCRIPT_PATH = $SCRIPT_PATH"
-	#export SCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
-	#echo "SCRIPT_DIR = $SCRIPT_DIR"
-	#export SCRIPT_NAME=$(basename "$0")
-	#echo "SCRIPT_NAME = $SCRIPT_NAME"
+	#export DKSCRIPT=$0
+	#echo "DKSCRIPT = $DKSCRIPT"
+	#export DKSCRIPT_PATH=$(realpath "$0")
+	#echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+	#export DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+	#echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	#export DKSCRIPT_NAME=$(basename "$0")
+	#echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 
-	#echo "BASH_SOURCE = $BASH_SOURCE"
-	#export BASH_SOURCE_PATH=$(realpath "$BASH_SOURCE")
-	#echo "BASH_SOURCE_PATH = $BASH_SOURCE_PATH"
-	#export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" >/dev/null 2>&1 ; pwd -P )
-	#echo "BASH_SOURCE_DIR = $BASH_SOURCE_DIR"
-	#export BASH_SOURCE_NAME=$(basename "$BASH_SOURCE")
-	#echo "BASH_SOURCE_NAME = $BASH_SOURCE_NAME"
+	#echo "BASH_SOURCE = ${BASH_SOURCE}"
+	#export BASH_SOURCE_PATH=$(realpath "${BASH_SOURCE}")
+	#echo "BASH_SOURCE_PATH = ${BASH_SOURCE_PATH}"
+	#export BASH_SOURCE_DIR=$( cd -- "$(dirname "${BASH_SOURCE}")" >/dev/null 2>&1 ; pwd -P )
+	#echo "BASH_SOURCE_DIR = ${BASH_SOURCE_DIR}"
+	#export BASH_SOURCE_NAME=$(basename "${BASH_SOURCE}")
+	#echo "BASH_SOURCE_NAME = ${BASH_SOURCE_NAME}"
 
 	DKBRANCH_DIR=$PWD
 	while [ "$(dirname ${DKBRANCH_DIR})" != "/" ]; do
@@ -42,13 +42,13 @@ dk_get_dkpaths() {
 	
 	# digitalknob
 	export DIGITALKNOB_DIR=$(dirname ${DKBRANCH_DIR})
-	export DIGITALKNOB=$(basename $DIGITALKNOB_DIR)
+	export DIGITALKNOB=$(basename ${DIGITALKNOB_DIR})
 		# digitalknob/branch
 		export DKBRANCH_DIR=${DKBRANCH_DIR}
 		export DKBRANCH=$(basename ${DKBRANCH_DIR})
 			# digitalknob/branch/3rdParty
 			export DK3RDPARTY_DIR=${DKBRANCH_DIR}/3rdParty
-			export DK3RDPARTY=$(basename $DK3RDPARTY_DIR)
+			export DK3RDPARTY=$(basename ${DK3RDPARTY_DIR})
 				# digitalknob/branch/3rdParty/_DKIMPORTS
 				export DKIMPORTS_DIR=${DK3RDPARTY_DIR}/_DKIMPORTS
 				export DKIMPORTS=$(basename $DKIMPORTS_DIR)
@@ -72,10 +72,10 @@ dk_get_dkpaths() {
 			export DKPLUGINS=$(basename $DKPLUGINS_DIR)
 		# digitalknob/DKTools
 		export DKTOOLS_DIR=${DIGITALKNOB_DIR}/DKTools
-		export DKTOOLS=$(basename $DKTOOLS_DIR)
+		export DKTOOLS=$(basename ${DKTOOLS_DIR})
 		# digitalknob/download
 		export DKDOWNLOAD_DIR=${DIGITALKNOB_DIR}/download
-		export DKDOWNLOAD=$(basename $DKDOWNLOAD_DIR)
+		export DKDOWNLOAD=$(basename ${DKDOWNLOAD_DIR})
 	
 	echo "DIGITALKNOB_DIR: ${DIGITALKNOB_DIR}"
 	echo "DIGITALKNOB: ${DIGITALKNOB}"

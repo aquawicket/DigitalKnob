@@ -41,9 +41,9 @@ dk_buildMain () {
 	dk_printVar DKIMPORTS_DIR
 	dk_printVar DKPLUGINS_DIR
 
-	if [ "$DKSCRIPT_DIR" != "${DKBRANCH_DIR}" ]; then
-		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
+	if [ "${DKSCRIPT_DIR}" != "${DKBRANCH_DIR}" ]; then
+		dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"
 		dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
 	fi
 	

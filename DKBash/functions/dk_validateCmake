@@ -57,11 +57,11 @@ dk_validateCmake () {
 		dk_toLower CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
-		[ -z $DKTOOLS_DIR ] && dk_getDKPaths
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
+		[ -z ${DKTOOLS_DIR} ] && dk_getDKPaths
+		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
+		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
+		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
+		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
 		[ -z $CMAKE_EXE ]              && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
@@ -71,8 +71,8 @@ dk_validateCmake () {
 
 		dk_echo
 		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
-		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
+		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"$CMAKE_DL_FILE"
+		dk_extract "${DKDOWNLOAD_DIR}"/"$CMAKE_DL_FILE" "${DKTOOLS_DIR}"
 		
 		#if ! dk_fileExists $CMAKE_EXE; then error "cannot find cmake"; fi
 
