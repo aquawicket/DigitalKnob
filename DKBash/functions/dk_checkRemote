@@ -8,8 +8,8 @@
 #
 dk_checkRemote () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
-
+	[ $# -gt 0 ] && dk_error "too many arguments" &
+	
 	ahead=0
 	behind=0
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then

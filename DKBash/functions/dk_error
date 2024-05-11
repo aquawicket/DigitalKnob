@@ -1,6 +1,13 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
+[ -z ${ENABLE_dk_error-} ] && export ENABLE_dk_error=1
+[ -z ${TRACE_ON_ERROR-} ]  && export TRACE_ON_ERROR=1   && dk_load dk_stacktrace
+[ -z ${LINE_ON_ERROR-} ]   && export LINE_ON_ERROR=1    && dk_load dk_showFileLine
+[ -z ${PAUSE_ON_ERROR-} ]  && export PAUSE_ON_ERROR=1   && dk_load dk_pause
+[ -z ${HALT_ON_ERROR-} ]   && export HALT_ON_ERROR=1    && dk_load dk_exit
+[ -z ${ERROR_TAG-} ]       && export ERROR_TAG=""
+	
 ##################################################################################
 # dk_error(<message>)
 #
@@ -9,15 +16,7 @@
 #	@msg	- The message to print
 #
 dk_error () {
-	dk_load dk_showFileLine
-	[ -z ${ENABLE_dk_error-} ] && export ENABLE_dk_error=1
-	[ -z ${TRACE_ON_ERROR-} ]  && export TRACE_ON_ERROR=1   && dk_load dk_stacktrace
-	[ -z ${LINE_ON_ERROR-} ]   && export LINE_ON_ERROR=1    && dk_load dk_showFileLine
-	[ -z ${PAUSE_ON_ERROR-} ]  && export PAUSE_ON_ERROR=1   && dk_load dk_pause
-	[ -z ${HALT_ON_ERROR-} ]   && export HALT_ON_ERROR=1    && dk_load dk_exit
-	#ERROR_TAG="ERROR: "
-
-	dk_debugFunc
+	#dk_debugFunc
 	
 	[ $ENABLE_dk_error -ne 1 ] && return
 	msg="$1"

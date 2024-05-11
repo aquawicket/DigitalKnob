@@ -11,11 +11,11 @@ dk_echo () {
 	# https://linuxcommand.org/lc3_man_pages/echoh.html
 
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
-	[ -z ${NO_NEWLINE-} ]   && export NO_NEWLINE=0
+	[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
 	[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
 	[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
 
-	echo ${escapes}${nonewline}"$1"
+    echo ${escapes-}${nonewline-}"${1-}"
 }
 
 

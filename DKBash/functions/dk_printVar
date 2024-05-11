@@ -10,42 +10,173 @@ dk_printVar() {
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "dk_printVar($*): incorrect number of arguments"
 	
-	_name=$1
-	exists=0
+	varname=$1
+	local -n _reference_=$1
+	if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
+		declaration=$1
+	fi
+		
+	# IS VARIABLE
+	if [[ $declaration == "declare -- "* ]]; then
+		#echo "IS VARIABLE"
+		
+		dk_debug "VARIABLE:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS ARRAY
+	if [[ $declaration =~ "declare -a "* ]]; then
+		#echo "IS ARRAY"
+		
+		for ((i=0; i < ${#_reference_[@]}; i++ )); do 
+			dk_debug "ARRAY:\$$_reference_[$i] = ${_reference_[$i]}";
+		done
+		return 0
+	fi
+		
+	# IS ASSOCIATIVE_ARRAY
+	if [[ $declaration =~ "declare -A "* ]]; then
+		#echo "IS ASSOCIATIVE_ARRAY"
+		
+		# https://stackoverflow.com/a/59991764												
+		# printf "%s\n" "${!_reference_[@]}"												# print all keys separated by a newline
+		# printf "%s\n" "${_reference_[@]}"													# print all values separated by a newline
+		# paste <(cmd1) <(cmd2)																# merge output of cmd1 and cmd2 line by line (below)
+		printf "${blue}"
+		paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
+		printf "${clr}"
+		return 0
+	fi
+		
+	# IS FUNCTION
+	if [[ $declaration =~ "declare -f "* ]]; then
+		#echo "IS FUNCTION"
+		
+		_value=$(type $varname | sed '1,1d')
+		dk_debug "FUNCTION:\$$varname = ${_value}"
+		return 0
+	fi
+		
+	# IS INT
+	if [[ $declaration =~ "declare -i "* ]]; then
+		#echo "IS INT"
+		
+		dk_debug "INT:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS LOWERCASE
+	if [[ $declaration =~ "declare -l "* ]]; then
+		#echo "IS LOWERCASE"
+		
+		dk_debug "LOWERCASE:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS REFERENCE
+	if [[ $declaration =~ "declare -n "* ]]; then
+		#echo "IS REFERENCE"
+		
+		dk_debug "REFERENCE:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS READ_ONLY
+	if [[ $declaration =~ "declare -r "* ]]; then
+		#echo "IS READ_ONLY"
+		
+		dk_debug "READ_ONLY:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS TRACE
+	if [[ $declaration =~ "declare -t "* ]]; then
+		#echo "IS TRACE"
+		
+		dk_debug "TRACE:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS UPPERCASE
+	if [[ $declaration =~ "declare -u "* ]]; then
+		#echo "IS UPPERCASE"
+		
+		dk_debug "UPPERCASE:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+	# IS EXPORT
+	if [[ $declaration =~ "declare -x "* ]]; then
+		#echo "IS EXPORT"
+		
+		dk_debug "EXPORT:\$${!_reference_} = $_reference_"
+		return 0
+	fi
+		
+		
+	# IS VARIABLE
+	if [ -n "${!varname+x}" ]; then
+		#echo "IS VARIABLE"
+		
+		dk_debug "VARIABLE:\$$varname = ${!varname}"
+		return 0
+	fi
 	
-	if [ -n "${!_name+x}" ]; then	# is _name
-		# _name is an array variable
-		if $(declare -p $_name 2> /dev/null | grep -q '^declare \-a'); then	
-			declare -n _array="$_name"
-			for ((i=0; i < ${#_array[@]}; i++ )); do 
-				#dk_debug "\$$_name:array[$i] = ${_array[$i]}";
-				dk_debug "\$$_name[$i] = ${_array[$i]}";
-			done
+	# IS FUNCTION
+	if [ "$(type -t $varname)" = "function" ]; then
+		#echo "IS FUNCTION"
 			
-		# _name is a variable
-		else
-			#dk_debug "\$$_name:variable = $(!_name)"
-			dk_debug "\$$_name = ${!_name}"
-		fi
-		exists=1
+		_value=$(type $varname | sed '1,1d')
+		dk_debug "FUNCTION:\$$varname = ${_value}"
+		return 0
 	fi
-	
-	# _name is a function
-	if [ "$(type -t $_name)" = "function" ]; then
-		_value=$(type $_name | sed '1,1d')
-		#dk_debug "\$$_name:function = $_value"
-		dk_debug "\$$_name = $_value"
-		exists=1
-	fi
-	
-	# _name is an alias
-	if [ "$(type -t $_name)" = "alias" ]; then
-		_value=$(alias $_name)
+
+	# IS ALIAS
+	if [ "$(type -t $varname)" = "alias" ]; then
+		#echo "IS ALIAS"
+			
+		_value=$(alias $varname)
 		_value=${_value#*=}
-		#dk_debug "\$$_name:alias = $_value"
-		dk_debug "\$$_name = $_value"
-		exists=1
+		dk_debug "ALIAS:\$$varname = ${_value}"
+		return 0
 	fi
+		
+	dk_debug "$1 = ${red}UNDEFINED${clr}"
+}
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	myVariable="this is the value of myVariable"
+	dk_printVar myVariable
 	
-	[ $exists -ne 1 ] && dk_debug "\$$_name ${red}is not set${clr}"
+	myArray[0]="myArray element 0"
+	myArray[1]="myArray element 1"
+	myArray[2]="myArray element 2"
+	dk_printVar myArray
+	
+	export myExport="an export variable"
+	dk_printVar myExport
+	
+	local myLocal="a local variable"
+	dk_printVar myLocal
+	
+	declare -A myHash=( ["indexA"]="this is indexA" ["indexB"]="this is indexB")
+	dk_printVar myHash
+
+	myFunction () {
+		echo "myFunction body"
+	}
+	dk_printVar myFunction
+	
+	alias myAlias='{
+		echo "This is an alias"
+	}'
+	dk_printVar myAlias
+	
+	#myUndefined="" #this variable is undefined
+	dk_printVar myUndefined
+
 }

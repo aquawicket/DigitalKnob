@@ -7,14 +7,13 @@
 #
 #
 dk_stacktrace () {
-	dk_debug "dk_stacktrace($*)"
     dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
-	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
+	#[ "${LINENO}" = "" ] || "LINENO = ${LINENO}"	
 
 	### VERSION 1 ###
-	[ "${FUNCNAME-}" = "" ] && return
+	[ "${FUNCNAME}" = "" ] && return
 	#[ "${BASH_SOURCE-}" = "" ] && return
 	#[ "${BASH_LINENO-}" = "" ] && return
 	local i=${1:-1} size=${#FUNCNAME[@]}
