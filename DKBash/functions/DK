@@ -42,8 +42,14 @@ fi
 echo "\$0 = $0"
 #[ -e $0 ] && export DKSCRIPT_PATH=$0
 
-echo "\$(realpath \$0) = $(realpath $0)"
-[ -e $(realpath $0) ] && export DKSCRIPT_PATH=$(realpath $0)
+#[ -n "$(command -v "realpath")" ] && echo "realpath exists" || echo "realpath does NOT exist"
+
+#echo "\$(realpath \$0) = $(realpath $0)"
+#[ -e $(realpath $0) ] && export DKSCRIPT_PATH=$(realpath $0)
+
+#echo "\$(cd \$(dirname \$0); pwd -P) = $(cd "$(dirname "$0")"; pwd -P)"
+echo "\$(cd \$(dirname \$0); pwd -P)/\$(basename \$0) = $(cd "$(dirname "$0")"; pwd -P)/$(basename $0)"
+[ -e $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) ] && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
 
 #echo "\$(pwd)/\$(basename \$0) = $(pwd)/$(basename $0)"
 #[ -e $(pwd)/$(basename $0) ] && export DKSCRIPT_PATH=$(pwd)/$(basename $0)
