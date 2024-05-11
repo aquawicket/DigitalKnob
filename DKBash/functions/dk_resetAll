@@ -41,6 +41,7 @@ dk_resetAll () {
 	
 	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 	cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
+	cd "${DIGITALKNOB_DIR}"
 	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	rm -r -f "${DKBRANCH_DIR}" 2>nul
 	
