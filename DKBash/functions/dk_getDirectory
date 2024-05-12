@@ -12,3 +12,10 @@ dk_getDirectory () {
 	
 	eval "$2=$(dirname "$1")"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

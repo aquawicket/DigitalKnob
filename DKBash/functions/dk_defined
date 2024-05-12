@@ -22,3 +22,12 @@ dk_defined () {
 	#echo "dk_defined():value = $value"
 	[ -n "$value" ]
 }
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

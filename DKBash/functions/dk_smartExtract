@@ -47,3 +47,10 @@ dk_smartExtract () {
 		
 	#[ "$?" ]
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

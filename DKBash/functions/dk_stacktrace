@@ -53,3 +53,10 @@ dk_stacktrace () {
 #		((i++))
 #	done
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

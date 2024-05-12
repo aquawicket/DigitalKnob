@@ -17,3 +17,10 @@ dk_convertToLowercase() {
 	eval "$2=$input"
 	#[[ $input == "" ]]
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

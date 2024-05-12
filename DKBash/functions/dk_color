@@ -59,3 +59,12 @@ export BG_White="[107m"
 #dk_color() {
 #	dk_debugFunc
 #}
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

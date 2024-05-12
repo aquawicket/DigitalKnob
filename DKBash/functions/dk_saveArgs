@@ -21,3 +21,10 @@ dk_saveArgs () {
 	done
 	echo " "
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

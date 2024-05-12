@@ -29,3 +29,10 @@ dk_download () {
 	cd "$oldpwd" #|| dk_error "cd $oldpwd failed!"
 	#[ "$input" = "" ]
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

@@ -27,6 +27,5 @@ dk_bundleSource () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "TODO"
-	
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
 }

@@ -135,3 +135,10 @@ dk_pickOs() {
 		dk_warning "invalid selection"
 	fi
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

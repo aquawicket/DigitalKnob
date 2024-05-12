@@ -60,3 +60,10 @@ dk_gitCommit () {
 	"${GIT_EXE}" commit -a -m "${message}"
     dk_call "${GIT_EXE}" push
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

@@ -17,3 +17,11 @@ dk_deleteTempFiles () {
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

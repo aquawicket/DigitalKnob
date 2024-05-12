@@ -33,3 +33,10 @@ dk_gitUpdate () {
 	fi
 	#dk_call chmod +x "${DKBRANCH_DIR}"/build
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

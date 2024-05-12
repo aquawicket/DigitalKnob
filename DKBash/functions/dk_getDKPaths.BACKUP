@@ -102,3 +102,10 @@ dk_get_dkpaths() {
 	echo "DKDOWNLOAD_DIR: ${DKDOWNLOAD_DIR}"
 	echo "DKDOWNLOAD: ${DKDOWNLOAD}"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

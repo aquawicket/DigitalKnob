@@ -32,3 +32,10 @@ dk_getDKPaths () {
 	dk_makeDirectory "${DKDOWNLOAD_DIR}"
 	dk_printVar DKDOWNLOAD_DIR
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

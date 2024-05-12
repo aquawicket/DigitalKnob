@@ -65,3 +65,10 @@ dk_printColors () {
 	echo "<ESC>[7m and nested <ESC>[31m [7mbefore [31mnested${clr}"
 	echo "<ESC>[31m and nested <ESC>[7m [31mbefore [7mnested${clr}"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

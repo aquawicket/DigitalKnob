@@ -14,3 +14,10 @@ dk_removeCarrageReturns () {
 	out=$(echo "$in" | tr -d '\r')
 	# carrage returns are removed from <out>
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

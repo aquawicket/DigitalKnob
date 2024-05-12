@@ -25,3 +25,10 @@ dk_reload () {
 		exec "${DKSCRIPT_PATH}"
 	fi
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

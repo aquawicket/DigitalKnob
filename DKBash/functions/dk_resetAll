@@ -51,3 +51,11 @@ dk_resetAll () {
 	dk_sleep 3
 	dk_reload
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

@@ -11,3 +11,11 @@ dk_commandExists () {
 
 	[ -n "$(command -v "$1")" ]
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

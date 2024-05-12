@@ -64,3 +64,13 @@ dk_buildMain () {
 		unset TYPE
 	done
 }
+
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

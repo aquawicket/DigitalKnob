@@ -42,3 +42,10 @@ dk_rename () {
 	#TODO
 	#[ ? = "success" ]
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

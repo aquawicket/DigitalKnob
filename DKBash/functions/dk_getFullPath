@@ -12,3 +12,10 @@ dk_getFilename () {
 	
 	eval "$2=$(realpath "$1")"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

@@ -21,3 +21,11 @@ dk_checkRemote () {
 		dk_info "$ahead commits ahead, $behind commits behind"
 	fi
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

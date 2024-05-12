@@ -14,3 +14,10 @@ dk_hasValue () {
 	eval value='$'{$1}
 	[ -n "${value//[[:blank:]]/}" ] # remove spaces and check if empty
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

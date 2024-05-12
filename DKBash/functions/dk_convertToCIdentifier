@@ -20,3 +20,11 @@ dk_convertToCIdentifier () {
 	eval "$2=$output"
 	#[ $input = "" ]
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

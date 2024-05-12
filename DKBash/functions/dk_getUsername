@@ -18,3 +18,10 @@ dk_getUsername () {
 	fi
 	dk_printVar DKUSERNAME
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

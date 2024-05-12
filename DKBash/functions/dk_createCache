@@ -18,3 +18,11 @@ dk_createCache () {
 	echo "$TYPE">>"${DKBRANCH_DIR}/cache"
 	#echo "$DKENV">>"${DKBRANCH_DIR}/cache"
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

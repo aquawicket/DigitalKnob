@@ -33,3 +33,11 @@ dk_install () {
 		dk_error "ERROR: no package managers found"
 	fi
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

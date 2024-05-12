@@ -15,7 +15,5 @@
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	#. dk_builtins
-	echo "TODO"
-
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
 }

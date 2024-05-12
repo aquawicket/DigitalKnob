@@ -21,3 +21,10 @@ dk_extract () {
 	tar -xf "${src}" -C "${dest}"
 	return
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

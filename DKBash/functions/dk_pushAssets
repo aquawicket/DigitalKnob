@@ -14,3 +14,10 @@ dk_pushAssets () {
 	
 	dk_error "not implemented,  TODO"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

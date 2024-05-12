@@ -13,3 +13,10 @@ dk_getExtension () {
 	filename="$(basename "$1")"
 	eval "$2=${filename##*.}"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

@@ -39,3 +39,10 @@ dk_readCache() {
 		count=$((count + 1))
 	done < "${DKBRANCH_DIR}"/cache
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

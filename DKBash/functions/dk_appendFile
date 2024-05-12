@@ -11,3 +11,11 @@ dk_appendFile() {
 	
 	echo "$1" >> $2
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

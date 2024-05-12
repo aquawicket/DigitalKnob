@@ -39,3 +39,12 @@ dk_cmakeEval () {
 
 	#dk_debug return code: $?
 }
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

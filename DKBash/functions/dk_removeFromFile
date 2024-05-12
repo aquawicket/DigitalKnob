@@ -12,3 +12,10 @@ dk_removeFromFile() {
 
 	sed -i -e "/$1/d" $2
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

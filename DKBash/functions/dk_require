@@ -11,3 +11,10 @@ dk_require() {
 	[ -z "$1" ] && dk_error "dk_require(<func_name> <$n>) requires 2 parameters. Example dk_require my_func \$1"
 	[ -z "$2" ] && dk_error "$1() requires at least 1 parameter"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

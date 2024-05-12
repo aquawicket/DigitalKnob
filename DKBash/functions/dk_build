@@ -41,3 +41,13 @@ dk_build () {
 	dk_echo "##################################################################"
 	dk_echo
 }
+
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}
