@@ -90,3 +90,10 @@ dk_validateCmake () {
 		dk_printVar CMAKE_EXE
 	fi
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

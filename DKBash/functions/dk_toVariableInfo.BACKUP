@@ -33,3 +33,10 @@ dk_toVariableInfo () {
 		eval "$1=\"\$var_name = ${red}UNDEFINED${clr}\""
 	fi
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

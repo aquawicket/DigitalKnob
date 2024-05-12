@@ -60,3 +60,11 @@ dk_validateBranch () {
 	#	dk_exit
 	#fi
 }
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

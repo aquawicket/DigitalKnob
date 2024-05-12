@@ -14,3 +14,10 @@ dk_validateClang () {
 	dk_printVar CLANG_C_COMPILER
 	dk_printVar CLANG_CXX_COMPILER
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

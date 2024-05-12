@@ -18,3 +18,10 @@ dk_validateEmscripten () {
 	dk_printVar EMSDK_C_COMPILER
 	dk_printVar EMSDK_CXX_COMPILER
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

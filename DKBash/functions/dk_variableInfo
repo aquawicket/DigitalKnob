@@ -23,3 +23,10 @@ dk_variable_info () {
 		eval "$2=\"$1 = ${red}NOT DEFINED${clr}\""
 	fi
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

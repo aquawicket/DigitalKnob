@@ -23,3 +23,10 @@ dk_validate () {
 	
 	[ -z "${!_var+x}" ] && dk_error "dk_validate(): ${_var} is invalid"
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

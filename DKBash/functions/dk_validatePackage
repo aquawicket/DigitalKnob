@@ -14,3 +14,9 @@ dk_validatePackage () {
 		dk_install "$2"
 	fi
 }
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

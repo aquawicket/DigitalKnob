@@ -19,3 +19,10 @@ dk_validateAndroidNdk () {
 	dk_printVar ANDROID_C_COMPILER
 	dk_printVar ANDROID_CXX_COMPILER
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

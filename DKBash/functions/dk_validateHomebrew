@@ -25,3 +25,10 @@ dk_validateHomebrew () {
 	BREW=$(command -v brew)
 	dk_printVar BREW
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

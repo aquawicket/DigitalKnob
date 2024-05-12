@@ -19,3 +19,10 @@ dk_validateGit () {
 	
 	dk_printVar GIT_EXE
 }
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}

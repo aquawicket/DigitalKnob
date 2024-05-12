@@ -15,3 +15,9 @@ dk_validateSudo () {
 	fi
 	${SUDO-} echo
 }
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+}
