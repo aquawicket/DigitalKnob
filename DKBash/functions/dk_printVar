@@ -40,7 +40,9 @@ dk_printVar() {
 			# printf "%s\n" "${_reference_[@]}"													# print all values separated by a newline
 			# paste <(cmd1) <(cmd2)																# merge output of cmd1 and cmd2 line by line (below)
 			printf "${blue}"
-			paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
+			
+			# FIXME: parsing error on OSX zsh
+			#paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
 			printf "${clr}"
 			return 0
 		fi

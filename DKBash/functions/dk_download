@@ -27,7 +27,7 @@ dk_download () {
 		dk_error "dk_download(): could not find wget or curl"
 	fi
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
-	#[ "$input" = "" ]
+	#[ "${input}" = "" ]
 }
 
 

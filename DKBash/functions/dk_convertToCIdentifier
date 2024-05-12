@@ -12,13 +12,45 @@ dk_convertToCIdentifier () {
 	
 	input=$1
 	
-	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
-	dk_replaceAll "$input" "-" "_" input		# POSIX replace
-	dk_replaceAll "$input" "." "_" output		# POSIX replace
+	output="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
+#	dk_replaceAll "${input}" "-" "_" input		# POSIX replace
+#	dk_replaceAll "${input}" "." "_" output		# POSIX replace
+#	dk_replaceAll "${input}" " " "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "=" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" ";" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "," "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "!" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "@" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "#" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "$" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "%" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "^" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "^" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "&" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "*" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "(" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" ")" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "+" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "|" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" ":" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "[" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "]" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "\" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "'" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "." "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "/" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "~" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" """ "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "?" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "<" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" ">" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "{" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "}" "_" output		# POSIX replace
+#	dk_replaceAll "${input}" "`" "_" output		# POSIX replace
 	
 	dk_printVar output
-	eval "$2=$output"
-	#[ $input = "" ]
+	eval "$2='${output}'"
+	#[ ${input} = "" ]
 }
 
 
@@ -26,5 +58,8 @@ dk_convertToCIdentifier () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < > { } `
+	myVar="a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 - = ; , ! @ # $ % ^ & * ( ) _ + | :"
+	dk_convertToCIdentifier "${myVar}" myAlphaNumericVar
+	dk_printVar myAlphaNumericVar
 }

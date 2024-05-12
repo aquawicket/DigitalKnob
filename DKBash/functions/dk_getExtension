@@ -18,5 +18,7 @@ dk_getExtension () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	filename="TestFile.extension"
+	dk_getExtension "${filename}" output
+	dk_printVar output
 }
