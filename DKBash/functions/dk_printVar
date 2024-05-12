@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
-
+[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=1
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -11,130 +11,105 @@ dk_printVar() {
 	[ $# -ne 1 ] && dk_error "dk_printVar($*): incorrect number of arguments"
 	
 	varname=$1
-	local -n _reference_=$1
-	if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
-		declaration=$1
+	
+	# https://github.com/flang-compiler/f18-llvm-project/issues/1344
+	if [ ${USE_LOCAL_N_dk_printVar} = 1 ]; then
+		local -n _reference_=$1
+		if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
+			declaration=$1
+		fi
+			
+		# IS VARIABLE
+		if [[ $declaration == "declare -- "* ]]; then
+			dk_debug "VARIABLE:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS ARRAY
+		if [[ $declaration =~ "declare -a "* ]]; then
+			for ((i=0; i < ${#_reference_[@]}; i++ )); do 
+				dk_debug "ARRAY:\$$_reference_[$i] = ${_reference_[$i]}";
+			done
+			return 0
+		fi
+			
+		# IS ASSOCIATIVE_ARRAY
+		if [[ $declaration =~ "declare -A "* ]]; then
+			# https://stackoverflow.com/a/59991764												
+			# printf "%s\n" "${!_reference_[@]}"												# print all keys separated by a newline
+			# printf "%s\n" "${_reference_[@]}"													# print all values separated by a newline
+			# paste <(cmd1) <(cmd2)																# merge output of cmd1 and cmd2 line by line (below)
+			printf "${blue}"
+			paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
+			printf "${clr}"
+			return 0
+		fi
+			
+		# IS FUNCTION
+		if [[ $declaration =~ "declare -f "* ]]; then
+			_value=$(type $varname | sed '1,1d')
+			dk_debug "FUNCTION:\$$varname = ${_value}"
+			return 0
+		fi
+			
+		# IS INT
+		if [[ $declaration =~ "declare -i "* ]]; then
+			dk_debug "INT:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS LOWERCASE
+		if [[ $declaration =~ "declare -l "* ]]; then
+			dk_debug "LOWERCASE:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS REFERENCE
+		if [[ $declaration =~ "declare -n "* ]]; then
+			dk_debug "REFERENCE:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS READ_ONLY
+		if [[ $declaration =~ "declare -r "* ]]; then
+			dk_debug "READ_ONLY:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS TRACE
+		if [[ $declaration =~ "declare -t "* ]]; then
+			dk_debug "TRACE:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS UPPERCASE
+		if [[ $declaration =~ "declare -u "* ]]; then
+			dk_debug "UPPERCASE:\$${!_reference_} = $_reference_"
+			return 0
+		fi
+			
+		# IS EXPORT
+		if [[ $declaration =~ "declare -x "* ]]; then
+			dk_debug "EXPORT:\$${!_reference_} = $_reference_"
+			return 0
+		fi
 	fi
-		
-	# IS VARIABLE
-	if [[ $declaration == "declare -- "* ]]; then
-		#echo "IS VARIABLE"
-		
-		dk_debug "VARIABLE:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS ARRAY
-	if [[ $declaration =~ "declare -a "* ]]; then
-		#echo "IS ARRAY"
-		
-		for ((i=0; i < ${#_reference_[@]}; i++ )); do 
-			dk_debug "ARRAY:\$$_reference_[$i] = ${_reference_[$i]}";
-		done
-		return 0
-	fi
-		
-	# IS ASSOCIATIVE_ARRAY
-	if [[ $declaration =~ "declare -A "* ]]; then
-		#echo "IS ASSOCIATIVE_ARRAY"
-		
-		# https://stackoverflow.com/a/59991764												
-		# printf "%s\n" "${!_reference_[@]}"												# print all keys separated by a newline
-		# printf "%s\n" "${_reference_[@]}"													# print all values separated by a newline
-		# paste <(cmd1) <(cmd2)																# merge output of cmd1 and cmd2 line by line (below)
-		printf "${blue}"
-		paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
-		printf "${clr}"
-		return 0
-	fi
-		
-	# IS FUNCTION
-	if [[ $declaration =~ "declare -f "* ]]; then
-		#echo "IS FUNCTION"
-		
-		_value=$(type $varname | sed '1,1d')
-		dk_debug "FUNCTION:\$$varname = ${_value}"
-		return 0
-	fi
-		
-	# IS INT
-	if [[ $declaration =~ "declare -i "* ]]; then
-		#echo "IS INT"
-		
-		dk_debug "INT:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS LOWERCASE
-	if [[ $declaration =~ "declare -l "* ]]; then
-		#echo "IS LOWERCASE"
-		
-		dk_debug "LOWERCASE:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS REFERENCE
-	if [[ $declaration =~ "declare -n "* ]]; then
-		#echo "IS REFERENCE"
-		
-		dk_debug "REFERENCE:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS READ_ONLY
-	if [[ $declaration =~ "declare -r "* ]]; then
-		#echo "IS READ_ONLY"
-		
-		dk_debug "READ_ONLY:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS TRACE
-	if [[ $declaration =~ "declare -t "* ]]; then
-		#echo "IS TRACE"
-		
-		dk_debug "TRACE:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS UPPERCASE
-	if [[ $declaration =~ "declare -u "* ]]; then
-		#echo "IS UPPERCASE"
-		
-		dk_debug "UPPERCASE:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
-	# IS EXPORT
-	if [[ $declaration =~ "declare -x "* ]]; then
-		#echo "IS EXPORT"
-		
-		dk_debug "EXPORT:\$${!_reference_} = $_reference_"
-		return 0
-	fi
-		
 		
 	# IS VARIABLE
 	if [ -n "${!varname+x}" ]; then
-		#echo "IS VARIABLE"
-		
 		dk_debug "VARIABLE:\$$varname = ${!varname}"
 		return 0
 	fi
 	
 	# IS FUNCTION
 	if [ "$(type -t $varname)" = "function" ]; then
-		#echo "IS FUNCTION"
-			
 		_value=$(type $varname | sed '1,1d')
 		dk_debug "FUNCTION:\$$varname = ${_value}"
 		return 0
 	fi
 
 	# IS ALIAS
-	if [ "$(type -t $varname)" = "alias" ]; then
-		#echo "IS ALIAS"
-			
+	if [ "$(type -t $varname)" = "alias" ]; then	
 		_value=$(alias $varname)
 		_value=${_value#*=}
 		dk_debug "ALIAS:\$$varname = ${_value}"
