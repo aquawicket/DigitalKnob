@@ -19,18 +19,18 @@ call DK
 	
 	set "from=%~1"
 	set "to=%~2"
-	::OVERWRITE=     TODO
+	set "OVERWRITE=1"
 	
 	call dk_info "Renameing %from% to %to%"
 	
 	if not exist "%from%" ( call dk_error "dk_rename: %from% not found" )
 	
-	if exist "%to%" ( pause )
-::		if "%OVERWRITE%" neq "1" (
-::			call dk_error "dk_rename Cannot rename file. Destiantion exists and not set to OVERWRITE"
-::		)
+	if exist "%to%" (
+		if "%OVERWRITE%" neq "1" (
+			call dk_error "dk_rename Cannot rename file. Destiantion exists and not set to OVERWRITE"
+		)
 		call dk_remove %to%
-::	)
+	)
 	
 	:: the base directory of the %to% path must exist.    
 	call dk_getDirectory "%to%" parent_dir
