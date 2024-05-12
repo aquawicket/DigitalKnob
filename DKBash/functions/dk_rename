@@ -12,7 +12,6 @@
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #
 dk_rename () {
-	dk_debug "dk_rename($*)"
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "dk_rename(): Incorrect number of parameters"
 	

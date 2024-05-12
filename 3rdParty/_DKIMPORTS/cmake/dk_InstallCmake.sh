@@ -1,6 +1,5 @@
-echo "$0 $*"
-#[ -n "$include_dk_" ] && exit || export readonly include_dk_=1
-[ -z "$DKINIT" ] && . ../../../DKBash/functions/DK
+#!/bin/sh
+[ -z "${DKINIT}" ] && . ../../../DKBash/functions/DK
 
 CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip
 CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip
@@ -45,7 +44,7 @@ dk_validateCmake () {
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
-		dk_getFilename "$CMAKE_DL" CMAKE_DL_FILE
+		dk_getFilename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_printVar CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
@@ -53,28 +52,32 @@ dk_validateCmake () {
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		
-		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
+		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_toLower CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
-		[ -z $DKTOOLS_DIR ] && dk_getDKPaths
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=$DKTOOLS_DIR/$CMAKE_FOLDER/bin/cmake
-		[ -z $CMAKE_EXE ]              && dk_error "no cmake for this OS"
+		[ -z ${DKTOOLS_DIR} ] && dk_getDKPaths
+		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
+		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
+		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
-		if dk_fileExists "$CMAKE_EXE"; then 
+		if dk_fileExists "${CMAKE_EXE}"; then 
 			return $true;
 		fi
 
 		dk_echo
 		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
-		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
+		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
+		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		
-		#if ! dk_fileExists $CMAKE_EXE; then error "cannot find cmake"; fi
+		CMAKE_DL_NAME="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		rename "${DKTOOLS_DIR}\${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
+		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
+        
+		if ! dk_fileExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"
