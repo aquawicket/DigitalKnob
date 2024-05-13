@@ -10,14 +10,16 @@
 #
 dk_load() {
 	#dk_debugFunc
-	#echo "dk_load($*)"
+	echo "dk_load($*)"
+	[ $# -ne 1 ] && echo "Incorrect number of parameters"
 	
 	local fn=
 	#fpath=
 	[ -z $1 ] && return 0
 	
 	if [ -e "$1" ]; then
-		fpath=$1
+		#fpath=$1
+		fpath=$(cd $(dirname $1); pwd -P)/$(basename $1)
 		fn=$(basename ${fpath})
 	    fn="${fn%.*}"
 	else
@@ -94,9 +96,12 @@ dk_load() {
 			fi
 		done
 
+		echo "fn = ${fn}"
+		echo "fpath = ${fpath}"
 		if [ -f "${!fn}" ]; then
 			#if ! [ "${@}" = "${!fn}" ]; then
 				. "${!fn}"
+			
 				#echo "Sourced ${!fn}"
 			#fi
 			#return 0
@@ -113,6 +118,6 @@ dk_load() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "dk_load:DKTEST()"	
+		dk_debug "DKTEST(${DKSCRIPT_NAME})"
 	
 }

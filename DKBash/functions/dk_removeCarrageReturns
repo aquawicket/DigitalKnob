@@ -11,8 +11,8 @@ dk_removeCarrageReturns () {
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
 	in=$1
-	out=$(echo "$in" | tr -d '\r')
-	# carrage returns are removed from <out>
+	out=$(echo "${in}" | tr -d '\r')
+	# carrage returns are removed
 }
 
 

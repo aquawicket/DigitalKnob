@@ -9,12 +9,11 @@
 #
 dk_pause() {
 	dk_debugFunc
-	echo "dk_debugFunc()"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	read -rp 'Press enter to continue...' key
-	echo ""
-	# echo $key
+	decho ""
+	# echo ${key}
 }
 
 

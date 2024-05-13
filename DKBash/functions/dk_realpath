@@ -10,16 +10,16 @@
 dk_realpath() (
 	dk_debugFunc
 
-	OURPWD=$PWD
+	OLDPWD=${PWD}
 	cd "$(dirname "$1")"
 	LINK=$(readlink "$(basename "$1")")
-	while [ "$LINK" ]; do
-		cd "$(dirname "$LINK")"
+	while [ "${LINK}" ]; do
+		cd "$(dirname "${LINK}")"
 		LINK=$(readlink "$(basename "$1")")
 	done
-	REALPATH="$PWD/$(basename "$1")"
-	cd "$OURPWD"
-	echo "$REALPATH"
+	REALPATH="${PWD}/$(basename "$1")"
+	cd "${OLDPWD}"
+	echo "${REALPATH}"
 )
 
 
@@ -32,11 +32,11 @@ dk_realpath() (
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	reelpath() {
-		[ $1 = /* ] && echo "$1" || echo "$PWD/${1#./}"
+		[ $1 = /* ] && echo "$1" || echo "${PWD}/${1#./}"
 	}
 
 	echo ""
 	RP=$(reelpath "$0")
-	echo "RP = $RP"
+	echo "RP = ${RP}"
 
 }

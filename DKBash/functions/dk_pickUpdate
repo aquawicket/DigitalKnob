@@ -40,8 +40,8 @@ dk_pickUpdate() {
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
 		dk_echo "${red}" 
-		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
-			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		if [ -n "${_APP_}" ] && [ -n "${_TARGET_OS_}" ] && [ -n "${_TYPE_}" ]; then
+			dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
 		fi
 		dk_echo "${green}"
 		dk_echo " 1) Git Update"
@@ -61,34 +61,34 @@ dk_pickUpdate() {
 	fi
 	
 	read input
-	if [ "$input" = "0" ]; then
+	if [ "${input}" = "0" ]; then
 		dk_echo "repeating last selection"
-		APP=$_APP_
-		TARGET_OS=$_TARGET_OS_
-		TYPE=$_TYPE_
+		APP=${_APP_}
+		TARGET_OS=${_TARGET_OS_}
+		TYPE=${_TYPE_}
 		UPDATE=1
-	elif [ "$input" = "1" ]; then
+	elif [ "${input}" = "1" ]; then
 		dk_gitUpdate
-	elif [ "$input" = "2" ]; then
+	elif [ "${input}" = "2" ]; then
 		dk_gitCommit
-	elif [ "$input" = "3" ]; then
+	elif [ "${input}" = "3" ]; then
 		dk_pushAssets
-	elif [ "$input" = "4" ]; then
+	elif [ "${input}" = "4" ]; then
 		dk_pullAssets
-	elif [ "$input" = "5" ]; then
+	elif [ "${input}" = "5" ]; then
 		dk_resetAll
-	elif [ "$input" = "6" ]; then
+	elif [ "${input}" = "6" ]; then
 		dk_removeAll
-	elif [ "$input" = "7" ]; then
+	elif [ "${input}" = "7" ]; then
 		dk_clearScreen
-	elif [ "$input" = "8" ]; then
+	elif [ "${input}" = "8" ]; then
 		dk_clearCmakeCache
 		dk_deleteTempFiles
-	elif [ "$input" = "9" ]; then
+	elif [ "${input}" = "9" ]; then
 		dk_reload
-	elif [ "$input" = "10" ]; then
+	elif [ "${input}" = "10" ]; then
 		dk_exit 0	
-	elif [ "$input" = "" ]; then
+	elif [ "${input}" = "" ]; then
 		UPDATE=1
 	else
 		dk_warning "invalid selection"

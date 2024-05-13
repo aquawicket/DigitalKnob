@@ -9,17 +9,17 @@
 dk_remove () {
 	dk_debugFunc
 	
-	_path=$1
-	if ! dk_fileExists "${_path}"; then
-		dk_warning "dk_remove(): ${_path} does not exist"
+	_path_=$1
+	if ! dk_fileExists "${_path_}"; then
+		dk_warning "dk_remove(): ${_path_} does not exist"
 	fi
 	
-	rm -r -f "${_path}"
+	rm -r -f "${_path_}"
 	dk_sleep 1 # give the path a second to delete
 	
-	if dk_fileExists "${_path}"; then
-		dk_error "dk_remove(): failed to remove ${_path}"
-		return $false
+	if dk_fileExists "${_path_}"; then
+		dk_error "dk_remove(): failed to remove ${_path_}"
+		return ${false}
 	fi
 }
 
