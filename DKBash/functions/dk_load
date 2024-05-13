@@ -9,16 +9,14 @@
 #
 #
 dk_load() {
-	#dk_debugFunc
-	echo "dk_load($*)"
-	[ $# -ne 1 ] && echo "Incorrect number of parameters"
+	#echo "dk_load($*)"
+	
+	[ $# -ne 1 ] && echo "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	local fn=
-	#fpath=
 	[ -z $1 ] && return 0
 	
 	if [ -e "$1" ]; then
-		#fpath=$1
 		fpath=$(cd $(dirname $1); pwd -P)/$(basename $1)
 		fn=$(basename ${fpath})
 	    fn="${fn%.*}"
@@ -96,8 +94,9 @@ dk_load() {
 			fi
 		done
 
-		echo "fn = ${fn}"
-		echo "fpath = ${fpath}"
+		#echo "fn = ${fn}"
+		#echo "!fn = ${!fn}"
+		#echo "fpath = ${fpath}"
 		if [ -f "${!fn}" ]; then
 			#if ! [ "${@}" = "${!fn}" ]; then
 				. "${!fn}"

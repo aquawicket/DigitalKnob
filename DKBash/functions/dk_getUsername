@@ -3,25 +3,26 @@
 
 
 ##################################################################################
-# dk_getUsername()
+# dk_getUsername(<output>)
 #
 #
 dk_getUsername () {
 	dk_debugFunc
+	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	if [ -n "${USER-}" ]; then
-		dk_printVar USER
 		DKUSERNAME=$USER
 	elif [ -n "${USERNAME-}" ]; then
-		dk_printVar USERNAME
 		DKUSERNAME=$USERNAME
 	fi
-	dk_printVar DKUSERNAME
+	
+	eval "$1=${DKUSERNAME}"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_getUsername _username
+	echo "_username = ${_username}"
 }

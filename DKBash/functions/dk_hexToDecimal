@@ -3,37 +3,23 @@
 
 
 ####################################################################
-# dk_hexToDecimal(<hex> <OUTPUT>)
+# dk_hexToDecimal(<hex> <output>)
 #
 #    reference: https://www.ascii-code.com
 #               https://stackoverflow.com/a/13280173
 #
 dk_hexToDecimal () {
 	dk_debugFunc
-	
-	#hex=$1
-	#decimal=$(printf "%d\n" $hex)
-	
-	#echo     dk_hexToDecimal $hex = $decimal
-	#eval "$2=$decimal"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	eval "$2=$(printf "%d\n" $1)"
 }
 
 
 
-
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
-}
-
-
-
-
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_hexToDecimal 0x1b decimal
-	dk_printVar decimal
+	echo "decimal = ${decimal}"
 
 }

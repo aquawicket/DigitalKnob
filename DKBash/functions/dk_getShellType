@@ -3,14 +3,13 @@
 
 
 ##################################################################################
-# dk_getShellType()
+# dk_getShellType(<output>)
 #
 #
 dk_getShellType () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
-	[ -e "/proc" ] || dk_warning "/proc does not exist" && return 0 
 	#PID_EXE=$(readlink /proc/$$/exe);
 	#DKSHELL=${PID_EXE##*/};           
 	[ -d "/proc" ] && DKSHELL=$(basename $(readlink /proc/$$/exe))
@@ -19,13 +18,16 @@ dk_getShellType () {
 	[ $DKSHELL = dash ] && export DKDASH=1
 	[ $DKSHELL = zsh ] && export DKZSH=1
 	[ $DKSHELL = bash ] && export DKBASH=1
-	echo "DKSHELL = $DKSHELL"
+	#echo "DKSHELL = $DKSHELL"
+	
+	eval "$1=${DKSHELL}"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_getShellType shellType
+	echo "shellType = ${shellType}"
 }
 

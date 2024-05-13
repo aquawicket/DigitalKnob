@@ -18,7 +18,6 @@ dk_getExtension () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	filename="TestFile.extension"
-	dk_getExtension "${filename}" output
-	dk_printVar output
+	dk_getExtension "TestFile.txt" extension
+	echo "extension = ${extension}"
 }

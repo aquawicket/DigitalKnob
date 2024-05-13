@@ -3,21 +3,20 @@
 
 
 ##################################################################################
-# dk_getFuncName()
+# dk_getFuncName(<output>)
 #
 #
 dk_getFuncName() {
 	dk_debugFunc
-	[ -z "$1" ] && dk_error "get_func_name <variable> requires 1 parameter"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	eval "$1=${FUNCNAME[1]}"
-	#echo "parameter name = $1"
-	#echo "function name = ${FUNCNAME[1]}"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_getFuncName funcName
+	echo "funcName = ${funcName}"
 }

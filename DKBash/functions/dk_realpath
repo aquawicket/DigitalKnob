@@ -3,40 +3,22 @@
 
 
 ##################################################################################
-# dk_realpath()
+# dk_realpath(<path> <output>)
 #
 #    reference: https://stackoverflow.com/a/18443300/688352
 #
-dk_realpath() (
+dk_realpath() {
 	dk_debugFunc
-
-	OLDPWD=${PWD}
-	cd "$(dirname "$1")"
-	LINK=$(readlink "$(basename "$1")")
-	while [ "${LINK}" ]; do
-		cd "$(dirname "${LINK}")"
-		LINK=$(readlink "$(basename "$1")")
-	done
-	REALPATH="${PWD}/$(basename "$1")"
-	cd "${OLDPWD}"
-	echo "${REALPATH}"
-)
-
-
-
-
+	[ $# -ne 2 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+	
+	eval "$2=$(cd $(dirname $1); pwd -P)/$(basename $1)"
+}
 
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	reelpath() {
-		[ $1 = /* ] && echo "$1" || echo "${PWD}/${1#./}"
-	}
-
-	echo ""
-	RP=$(reelpath "$0")
-	echo "RP = ${RP}"
-
+	dk_realpath dk_load realpath_output
+	echo "realpath_output = ${realpath_output}"
 }
