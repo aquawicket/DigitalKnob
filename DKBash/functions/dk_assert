@@ -2,12 +2,12 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
 
 ##################################################################################
-# dk_assert(expression)
+# dk_assert(<expression>)
 #
 #
 dk_assert() {
-	dk_debug "dk_assert($*)"
 	dk_debugFunc
+	[ $# -lt 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	_expression="$1"
 	#dk_printVar expression
@@ -21,10 +21,10 @@ dk_assert() {
 		lastErrorFile="${BASH_SOURCE[1]}"
 		export lastErrorFile=$(realpath ${lastErrorFile})
 		export lastErrorLine="${BASH_LINENO[1-1]}"
-		dk_error "Assertion failed: $1" && return $false
+		dk_error "Assertion failed: $1" && return ${false}
 	fi
 	
-	return $true	
+	return ${true}	
 }
 
 

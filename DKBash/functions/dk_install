@@ -12,7 +12,7 @@ dk_install () {
 
 	#if dk_packageInstalled $1; then
 	#	dk_warning "$1 already dk_installed"
-	#	return $false;
+	#	return ${false};
 	#fi
 	
 	dk_info "dk_installing $1"

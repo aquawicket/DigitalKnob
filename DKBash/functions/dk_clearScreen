@@ -7,7 +7,7 @@
 #
 dk_clearScreen () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	clear
 }
@@ -16,5 +16,5 @@ dk_clearScreen () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_clearScreen
 }

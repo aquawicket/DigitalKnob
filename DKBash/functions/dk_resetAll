@@ -29,7 +29,7 @@ dk_resetAll () {
 		dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 		dk_echo "${clr}"			
 		dk_printVar DKBRANCH_DIR
-		return $false;
+		return ${false};
 	fi
 		
 	# Backup main script file to digitalknob/

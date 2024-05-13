@@ -8,7 +8,7 @@
 #
 dk_pullAssets () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	dk_confirm || return 0
 

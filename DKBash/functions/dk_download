@@ -8,7 +8,7 @@
 #
 dk_download () {
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	if dk_fileExists "$2"; then
 		dk_warning "dk_download(): $2 already exists"
@@ -34,5 +34,5 @@ dk_download () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh" C:/DKBuilder.sh
 }

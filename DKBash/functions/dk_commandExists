@@ -7,7 +7,7 @@
 #
 dk_commandExists () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 
 	[ -n "$(command -v "$1")" ]
 }
@@ -17,5 +17,15 @@ dk_commandExists () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	if dk_commandExists bash; then
+		echo "bash command exists"
+	else
+		echo "bash command does NOT exist"
+	fi
+	
+	if dk_commandExists dummy; then
+		echo "dummy command exists"
+	else
+		echo "dummy command does NOT exist"
+	fi
 }

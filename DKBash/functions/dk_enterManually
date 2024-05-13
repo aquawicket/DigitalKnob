@@ -8,7 +8,7 @@
 #
 dk_enterManually () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -24,7 +24,7 @@ dk_enterManually () {
 	fi
 	if test -f "$DKAPPS_DIR"/"$input"/DKMAKE.cmake; then
 		TARGET_PATH=$DKAPPS_DIR/$input
-		return $true
+		return ${true}
 	fi
 	dk_printVar TARGET_PATH
 	

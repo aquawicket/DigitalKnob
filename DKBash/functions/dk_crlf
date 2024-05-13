@@ -10,13 +10,13 @@
 dk_crlf() {
 	dk_debugFunc
 	
-	dk_todo 
-	return $true
+	dk_todo "dk_crlf needs to be implemented"
+	return ${false}
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_crlf
 }

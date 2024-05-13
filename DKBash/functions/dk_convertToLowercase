@@ -3,18 +3,15 @@
 
 
 ##################################################################################
-# dk_convertToLowercase()
+# dk_convertToLowercase(<input> <output>)
 #
 #
 dk_convertToLowercase() {
 	dk_debugFunc
-	[ -z "$2" ] && dk_error "dk_convertToCIdentifier <input> <output> requires 2 parameters"
+	[ $# -ne 2 ] && echo "${FUNCNAME[0]}(): incorrect number of arguments"
 
-	input=$1
-	echo "convert_to_lowercase($1, $2)"
-	echo "$input" | tr '[:upper:]' '[:lower:]'
-	echo "input = $input"
-	eval "$2=$input"
+	output=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	eval "$2='${output}'"
 	#[[ $input == "" ]]
 }
 
@@ -22,5 +19,6 @@ dk_convertToLowercase() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_convertToLowercase "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
+	echo "lowercase = ${lowercase}"
 }

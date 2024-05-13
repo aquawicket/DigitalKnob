@@ -8,7 +8,7 @@
 #
 dk_pickOs() {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"

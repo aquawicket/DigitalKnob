@@ -10,7 +10,6 @@
 #
 dk_load() {
 	#echo "dk_load($*)"
-	
 	[ $# -ne 1 ] && echo "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	local fn=

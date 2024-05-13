@@ -17,7 +17,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 #
 dk_validateCmake () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
 	dk_validate HOST_OS dk_getHostTriple
 	######################################################################################################
@@ -66,7 +66,7 @@ dk_validateCmake () {
 		dk_printVar CMAKE_EXE
 		
 		if dk_fileExists "${CMAKE_EXE}"; then 
-			return $true;
+			return ${true};
 		fi
 
 		dk_echo

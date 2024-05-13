@@ -8,14 +8,15 @@
 #
 dk_deleteTempFiles () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 
 	dk_info "Deleting .TMP files . . ."
-	cd "${DIGITALKNOB_DIR}" #|| dk_error "cd ${DIGITALKNOB_DIR} failed!"
-	rm -rf $(find . -type d -name *.tmp)
-	rm -rf $(find . -type d -name *.TMP)
-	find . -name "*.tmp" -delete
-	find . -name "*.TMP" -delete
+	
+	dk_validate DIGITALKNOB_DIR dk_getDKPaths	
+	rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.tmp)
+	rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.TMP)
+	find "${DIGITALKNOB_DIR}" -name "*.tmp" -delete
+	find "${DIGITALKNOB_DIR}" -name "*.TMP" -delete
 }
 
 
@@ -23,5 +24,5 @@ dk_deleteTempFiles () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_deleteTempFiles
 }

@@ -10,6 +10,7 @@ dk_test () {
 	dk_debugFunc
 	
 	echo "1 = $1"
+	echo "{1} = ${1}"
 	echo "FUNCNAME[0] = ${FUNCNAME[0]}"
 }
 
