@@ -7,9 +7,10 @@
 #
 #
 dk_isEmpty() {
-	#dk_debugFunc
+	dk_debugFunc
+	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
-	if [ -d "$1" ] && files=$(ls -qAH -- "$1") && [ -z "$files" ]; then
+	if [ -d "$1" ] && files=$(ls -qAH -- "$1") && [ -z "${files}" ]; then
 		#printf '%s\n' "$dir is an empty directory"
 		return ${true}
 	else
@@ -29,8 +30,8 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 
 	mkdir empty
 	echo "The created empty folder is ...."
-    $(dk_isEmpty "$PWD/empty") && echo "Empty" || echo "NOT Empty"
+    $(dk_isEmpty "${PWD}/empty") && echo "Empty" || echo "NOT Empty"
 	echo "the current directory is ..."
-	$(dk_isEmpty "$PWD") && echo "Empty" || echo "NOT Empty"
+	$(dk_isEmpty "${PWD}") && echo "Empty" || echo "NOT Empty"
 
 }

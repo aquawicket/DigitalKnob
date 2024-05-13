@@ -9,12 +9,11 @@ dk_assert() {
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
 	
-	_expression="$1"
-	#dk_printVar expression
+	_expression_="$1"
 	
-	if ( [ ! -n "${!_expression}" ]   ||
-         [ -z "${!_expression}" ]     ||
-         [ ! -n "${!_expression+x}" ] )
+	if ( [ ! -n "${!_expression_}" ]   ||
+         [ -z "${!_expression_}" ]     ||
+         [ ! -n "${!_expression_+x}" ] )
 	then
 		#dk_printVar BASH_SOURCE
 		#dk_printVar BASH_LINENO

@@ -230,6 +230,6 @@ ASCII_SHOW () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "dk_escapeSequences DKTEST() TODO"
+	dk_escapeSequences
 }
 

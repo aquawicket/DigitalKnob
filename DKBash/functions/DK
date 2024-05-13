@@ -72,6 +72,10 @@ DK () {
 	echo "\${DKSCRIPT_NAME} = ${DKSCRIPT_NAME}"
 
 
+	##### CD into the DKSCRIPT_DIR directory #####
+	cd "${DKSCRIPT_DIR}"
+
+
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
 	  *:posix:*) echo "POSIX mode enabled" ;;

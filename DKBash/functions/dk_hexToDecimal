@@ -21,5 +21,4 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 
 	dk_hexToDecimal 0x1b decimal
 	echo "decimal = ${decimal}"
-
 }

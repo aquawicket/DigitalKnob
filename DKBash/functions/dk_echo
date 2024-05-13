@@ -21,8 +21,6 @@ dk_echo () {
 
 
 
-
-
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "This is a normal echo commmand"

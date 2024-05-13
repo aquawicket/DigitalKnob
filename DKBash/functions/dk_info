@@ -35,5 +35,4 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 
 	dk_info "test dk_info message"
 	echo "...next line..."
-	
 }
