@@ -7,7 +7,6 @@
 # dk_load()
 #
 #
-#
 dk_load() {
 	#echo "dk_load($*)"
 	[ $# -ne 1 ] && echo "${FUNCNAME}(): incorrect number of arguments"

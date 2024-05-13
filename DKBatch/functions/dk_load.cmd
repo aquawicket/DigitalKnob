@@ -1,12 +1,15 @@
 @echo off
-call DK
 ::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
+call DK
+
 
 ::####################################################################
 ::# dk_load()
 ::#
 ::#
 :dk_load() {
+	::echo "dk_load(%*)"
+
 	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" call dk_download "%DKHTTP%/dk_debugFunc.cmd" "%DKBATCH_DIR%\functions\dk_debugFunc.cmd"
 	::call dk_debugFunc
 	if not exist "%DKBATCH_DIR%\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
