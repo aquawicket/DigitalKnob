@@ -8,7 +8,7 @@
 #
 dk_removeExtension () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	filepath="$1"
 	filepath="${filepath%.*}"									    # remove everything past last dot

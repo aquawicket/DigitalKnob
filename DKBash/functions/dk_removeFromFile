@@ -3,12 +3,12 @@
 
 
 ##################################################################################
-# dk_removeFromFile()
+# dk_removeFromFile(<string> <file>)
 #
 #
 dk_removeFromFile() {
 	dk_debugFunc
-	[ -z "$2" ] && dk_error "remove_from_file <string> <file.ext> requires 2 parameters"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
 	sed -i -e "/$1/d" $2
 }

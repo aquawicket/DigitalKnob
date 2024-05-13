@@ -7,7 +7,7 @@
 #
 dk_resetAll () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "Too many parameters"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	dk_clearScreen
 	dk_echo

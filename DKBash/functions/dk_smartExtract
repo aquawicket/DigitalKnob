@@ -7,9 +7,8 @@
 #
 #
 dk_smartExtract () {
-	dk_debug "dk_smartExtract($*)"
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "dk_smartExtract(): Incorrect number of parameters"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
 	src="$1"
 	dest="$2"

@@ -8,19 +8,21 @@
 #
 dk_toLower () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	dk_defined $1 || dk_error "dk_toLower($*): $1 is not defined"
 
 	eval value='$'{$1}
 	value=$(echo "$value" | tr '[:upper:]' '[:lower:]')
 
-	eval "$1=$value"
+	eval "$1='${value}'"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_toLower
+	var="CoOnVeRtEd ThIs StRiNg To LoWeRcAsE"
+	dk_toLower var
+	echo "var = ${var}"
 }
