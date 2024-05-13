@@ -41,8 +41,6 @@ alias dk_includeGuard='{
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
-
 	. ${DKBASH_DIR}/functions/dk_debug
 	. ${DKBASH_DIR}/functions/dk_debug
 

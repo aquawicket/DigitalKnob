@@ -8,13 +8,8 @@
 #
 dk_fileExists () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
-	#if [ -e "$1" ]; then
-	#	dk_debug "dk_fileExists($*): FOUND"
-	#else
-	#	dk_warning "dk_fileExists($*): NOT FOUND!" 
-	#fi
 	[ -e "$1" ]
 }
 
@@ -22,5 +17,15 @@ dk_fileExists () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	if dk_fileExists "dk_debug"; then
+		echo "The file exists"
+	else
+		echo "The file does NOT exist"
+	fi
+	
+	if dk_fileExists "nofile.ext"; then
+		echo "The file exists"
+	else
+		echo "The file does NOT exist"
+	fi
 }

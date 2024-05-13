@@ -8,7 +8,7 @@
 #
 #dk_validateOstype () {
 #	dk_debugFunc
-#	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+#	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 #	
 #	if [ -e /proc/device-tree/model ]; then
 #		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -37,5 +37,5 @@
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_validateOstype
 }

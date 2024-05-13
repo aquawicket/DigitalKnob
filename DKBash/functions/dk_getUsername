@@ -8,7 +8,7 @@
 #
 dk_getUsername () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	if [ -n "${USER-}" ]; then
 		DKUSERNAME=$USER

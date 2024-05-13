@@ -8,6 +8,7 @@
 #
 dk_remove () {
 	dk_debugFunc
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	_path_=$1
 	if ! dk_fileExists "${_path_}"; then
@@ -27,5 +28,5 @@ dk_remove () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_remove
 }

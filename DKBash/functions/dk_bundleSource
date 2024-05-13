@@ -9,7 +9,7 @@
 #
 dk_bundleSource () {
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	file_list=$1
 	output_file=$2
@@ -27,5 +27,5 @@ dk_bundleSource () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_bundleSource
 }

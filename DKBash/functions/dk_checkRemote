@@ -8,7 +8,7 @@
 #
 dk_checkRemote () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	ahead=0
 	behind=0
@@ -27,5 +27,5 @@ dk_checkRemote () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_checkRemote
 }

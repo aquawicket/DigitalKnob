@@ -26,5 +26,5 @@ DK_TRY_CATCH () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	DK_TRY_CATCH
 }

@@ -9,10 +9,9 @@
 #
 dk_pause() {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME[0]}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	read -rp 'Press enter to continue...' key
-	decho ""
 	# echo ${key}
 }
 
@@ -20,5 +19,5 @@ dk_pause() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_pause
 }

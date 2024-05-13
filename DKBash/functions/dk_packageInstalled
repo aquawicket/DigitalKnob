@@ -8,7 +8,7 @@
 #
 dk_packageInstalled () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
 	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
@@ -42,5 +42,9 @@ dk_packageInstalled () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	if dk_packageInstalled bash; then
+		echo "The package is installed"
+	else
+		echo "The package is NOT installed"
+	fi
 }
