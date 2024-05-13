@@ -103,6 +103,6 @@ goto:eof
 
 :DKTEST ###############################################################################
 
-::cmd /k call dk_cmakeEval "dk_info('test dk_warning message')"
-call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
+	::cmd /k call dk_cmakeEval "dk_info('test dk_warning message')"
+	call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
 

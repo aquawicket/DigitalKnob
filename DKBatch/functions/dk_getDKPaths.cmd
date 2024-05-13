@@ -23,3 +23,7 @@ call DK
     call dk_makeDirectory "%DKDOWNLOAD_DIR%"
     call dk_printVar DKDOWNLOAD_DIR
 goto:eof
+
+
+
+:DKTEST ########################################################################

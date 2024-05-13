@@ -16,3 +16,7 @@ call DK
     for /r %%i in (*.TMP) do del "%%i"
     call dk_checkError
 goto:eof
+
+
+
+:DKTEST ########################################################################

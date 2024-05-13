@@ -111,3 +111,7 @@ call DK
     "%CMAKE_EXE%" %CMAKE_ARGS%
     call dk_echo
 goto:eof
+
+
+
+:DKTEST ########################################################################

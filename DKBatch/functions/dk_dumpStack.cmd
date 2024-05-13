@@ -96,61 +96,61 @@ goto:eof
 
 :DKTEST ########################################################################
 	call :DKTEST_main
-goto:eof
+	goto:eof
 
-:DKTEST_main
-	call :DKTEST_dk_dumpStack
-goto:eof
+	:DKTEST_main
+		call :DKTEST_dk_dumpStack
+	goto:eof
 
-:DKTEST_dk_dumpStack
-	call dk_info ":DKTEST  %*"
-	call:func1
-	
-	call dk_info "caller[0] = %caller[0]%"
-	call dk_info "caller[1] = %caller[1]%"
-	call dk_info "caller[2] = %caller[2]%"
-	call dk_info "caller[3] = %caller[3]%"
-	call dk_info "caller[4] = %caller[4]%"
-	call dk_info "caller[5] = %caller[5]%"
-	call dk_info "caller[6] = %caller[6]%"
-	call dk_info "caller[7] = %caller[7]%"
-	call dk_info "returned from :DKTEST"
-	
-	call dk_exit
-goto:eof
+	:DKTEST_dk_dumpStack
+		call dk_info ":DKTEST  %*"
+		call:func1
+		
+		call dk_info "caller[0] = %caller[0]%"
+		call dk_info "caller[1] = %caller[1]%"
+		call dk_info "caller[2] = %caller[2]%"
+		call dk_info "caller[3] = %caller[3]%"
+		call dk_info "caller[4] = %caller[4]%"
+		call dk_info "caller[5] = %caller[5]%"
+		call dk_info "caller[6] = %caller[6]%"
+		call dk_info "caller[7] = %caller[7]%"
+		call dk_info "returned from :DKTEST"
+		
+		call dk_exit
+	goto:eof
 
-:func1
-	call dk_info ":func1 %*"
-	call:func2
-	call dk_info "returned from func2"
-	::call:func2 & (
-	::	(goto) 2>nul
-	::	call echo 0 = %%~0
-	::	echo returned from func2
-	::)
-goto:eof
+	:func1
+		call dk_info ":func1 %*"
+		call:func2
+		call dk_info "returned from func2"
+		::call:func2 & (
+		::	(goto) 2>nul
+		::	call echo 0 = %%~0
+		::	echo returned from func2
+		::)
+	goto:eof
 
-:func2
-	call dk_info ":func2 %*"
-	call:func3
-	call dk_info "returned from func3"
-goto:eof
+	:func2
+		call dk_info ":func2 %*"
+		call:func3
+		call dk_info "returned from func3"
+	goto:eof
 
-:func3
-	call dk_info ":func3 %*"
-	call:func4
-	call dk_info "returned from func4"
-goto:eof
+	:func3
+		call dk_info ":func3 %*"
+		call:func4
+		call dk_info "returned from func4"
+	goto:eof
 
-:func4
-	call dk_info ":func4 %*"
-	call:func5 orange
-	call dk_info "returned from func5"
-goto:eof
+	:func4
+		call dk_info ":func4 %*"
+		call:func5 orange
+		call dk_info "returned from func5"
+	goto:eof
 
-:func5
-	call dk_info ":func5 %*"
-	call dk_dumpStack
-	:dk_dumpStackReturn
-	call dk_info "returned from dk_dumpStack dumpstack_caller"
-goto:eof
+	:func5
+		call dk_info ":func5 %*"
+		call dk_dumpStack
+		:dk_dumpStackReturn
+		call dk_info "returned from dk_dumpStack dumpstack_caller"
+	goto:eof

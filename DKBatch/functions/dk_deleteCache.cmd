@@ -17,3 +17,7 @@ call DK
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
     call dk_checkError
 goto:eof
+
+
+
+:DKTEST ########################################################################

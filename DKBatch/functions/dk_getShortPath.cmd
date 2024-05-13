@@ -15,3 +15,7 @@ call DK
 	for %%Z in ("%_input%") do set "OUT=%%~sZ"
 	endlocal & set %2=%OUT%
 goto:eof
+
+
+
+:DKTEST ########################################################################

@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_asciiToHex(<ascii>)
+::# dk_asciiToHex(<ascii> <output>)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -29,6 +29,8 @@ call DK
 	::echo     dk_asciiToHex %~1 = %hex%
 	endlocal & set "%2=%hex%"
 goto:eof
+
+
 
 
 :DKTEST ########################################################################

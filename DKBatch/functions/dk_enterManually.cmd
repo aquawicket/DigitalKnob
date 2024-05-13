@@ -36,3 +36,8 @@ call DK
     :: create DKApps/<APP>/main.cpp
     echo int main(int argc, char** argv) { return 0; } > "%DKAPPS_DIR%\%APP%\main.cpp"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

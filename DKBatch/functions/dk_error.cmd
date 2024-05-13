@@ -39,6 +39,7 @@ goto:eof
 
 
 :DKTEST ########################################################################
-echo "calling dk_error from dk_error.cmd"
-call dk_error "test dk_error message"
-echo "...next line..."
+
+	echo "calling dk_error from dk_error.cmd"
+	call dk_error "test dk_error message"
+	echo "...next line..."

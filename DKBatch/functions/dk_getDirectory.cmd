@@ -22,6 +22,7 @@ goto:eof
 
 
 
+
 :DKTEST ########################################################################
 
 	call dk_getDirectory "C:\Windows\System32" result

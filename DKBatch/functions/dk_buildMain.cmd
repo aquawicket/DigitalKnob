@@ -110,3 +110,7 @@ setlocal enableDelayedExpansion
 	goto while_loop
 	endlocal
 goto:eof
+
+
+
+:DKTEST ########################################################################

@@ -10,3 +10,7 @@ call DK
 	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 goto:eof
+
+
+
+:DKTEST ########################################################################

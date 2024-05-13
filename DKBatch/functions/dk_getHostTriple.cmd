@@ -25,3 +25,8 @@ call DK
     set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
 	call dk_printVar HOST_TRIPLE
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

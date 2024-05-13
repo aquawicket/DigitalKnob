@@ -12,3 +12,8 @@ call DK
 	for %%A in (%1.) do set "parent=%%~dpA"
     endlocal & set "%2=%parent%"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

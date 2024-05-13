@@ -11,3 +11,8 @@ call DK
     if %ERRORLEVEL% equ 0 goto:eof
     call dk_error "ERRORLEVEL = %ERRORLEVEL%"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

@@ -16,3 +16,7 @@ call DK
 	for %%Z in ("%_input%") do set "OUT=%%~pZ"
 	endlocal & set %2=%OUT:~0,-1%
 goto:eof
+
+
+
+:DKTEST ########################################################################

@@ -13,3 +13,7 @@
    
 	if not exist "%DKBATCH_DIR%\functions\%~1.cmd" call dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
 call %*
+
+
+
+:DKTEST ########################################################################

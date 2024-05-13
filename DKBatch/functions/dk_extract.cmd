@@ -15,3 +15,8 @@ call DK
 	if not exist "%~1"   call dk_error "cannot find %~1"
     powershell Expand-Archive "%~1" -DestinationPath "%~2"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

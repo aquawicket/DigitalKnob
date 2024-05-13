@@ -69,3 +69,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	echo %__FILE__%: %cyan%%__FUNCTION__%(%__ARGS__%)%clr%
 	
 goto:eof
+
+
+
+:DKTEST ########################################################################

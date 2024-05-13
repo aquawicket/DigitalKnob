@@ -14,3 +14,8 @@ call DK
 	
 	call dk_todo "dk_arrayCopyWithin"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

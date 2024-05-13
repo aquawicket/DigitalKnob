@@ -210,3 +210,8 @@ goto:eof
 	
 	call dk_info "%%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

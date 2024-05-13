@@ -11,3 +11,8 @@ call DK
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
     set "%2=%parent%"
 goto:eof
+
+
+
+
+:DKTEST ########################################################################

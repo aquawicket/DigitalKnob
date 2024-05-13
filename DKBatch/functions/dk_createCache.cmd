@@ -21,3 +21,7 @@ call DK
     echo %TYPE%>>"%DKBRANCH_DIR%\cache"
     ::echo %LEVEL%>>"%DKBRANCH_DIR%\cache"
 goto:eof
+
+
+
+:DKTEST ########################################################################
