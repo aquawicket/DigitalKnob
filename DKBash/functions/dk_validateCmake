@@ -48,7 +48,7 @@ dk_validateCmake () {
 		dk_getFilename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_printVar CMAKE_DL_FILE
 		
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
 		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
@@ -74,7 +74,7 @@ dk_validateCmake () {
 		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
 		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		
-		dk_removeExtension ${CMAKE_DL_NAME} CMAKE_DL_NAME
+		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
 		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
 		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed"
         

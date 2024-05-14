@@ -26,9 +26,9 @@ dk_rename () {
 	fi
 	
 	if dk_fileExists "${to}"; then
-		if [ $OVERWRITE -ne 1 ]; then
-			dk_error "dk_rename(): Cannot rename file. Destiantion exists and not set to OVERWRITE"
-		fi
+		#if [ $OVERWRITE -ne 1 ]; then
+		#	dk_error "dk_rename(): Cannot rename file. Destiantion exists and not set to OVERWRITE"
+		#fi
 		dk_remove ${to}
 	fi
 	
