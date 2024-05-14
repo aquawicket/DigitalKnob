@@ -109,7 +109,7 @@ dk_getHostTriple () {
 		UNAME_i="$(try uname -i)" && dk_printVar UNAME_i
 		UNAME_o="$(try uname -o)" && dk_printVar UNAME_o
 		
-		UNAME_ARCH="$(try uname -m)"
+		UNAME_ARCH="$(try uname -m)" && dk_printVar UNAME_ARCH
 		dk_toLower UNAME_ARCH
 		UNAME_SUBARCH=""
 		
