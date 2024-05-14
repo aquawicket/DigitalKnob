@@ -74,7 +74,11 @@ dk_validateCmake () {
 		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
 		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		
-		#if ! dk_fileExists ${CMAKE_EXE}; then error "cannot find cmake"; fi
+		CMAKE_DL_NAME="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
+		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed"
+        
+		if ! dk_fileExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"

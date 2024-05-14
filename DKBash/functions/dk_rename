@@ -46,5 +46,9 @@ dk_rename () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_rename
+	echo "rename this file" > renameMe.txt
+	dk_rename renameMe.txt iWasRenamed.txt
+	
+	dk_makeDirectory renameMe
+	dk_rename renameMe iWasRenamed
 }
