@@ -3,21 +3,26 @@
 
 
 ##################################################################################
-# dk_removeExtension(<filepath>)
+# dk_removeExtension(<filepath> <output>)
 #
 #
 dk_removeExtension () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	filepath="$1"
-	filepath="${filepath%.*}"									    # remove everything past last dot
-	[ "${filepath##*.}" = "tar" ] &&	filepath="${filepath%.*}"	# if .tar remove everything past last dot
+	_filepath_="$1"
+	echo "_filepath_ = ${_filepath_}"
+	_filepath_="${_filepath_%.*}"									    # remove everything past last dot
+	[ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
+	eval "$2='${_filepath_}'"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_removeExtension
+	filepath="/test/test2/xfile.extension"
+	echo "filepath = ${filepath}"
+	dk_removeExtension ${filepath} filepath
+	echo "filepath = ${filepath}"
 }
