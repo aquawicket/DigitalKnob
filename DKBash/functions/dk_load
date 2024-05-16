@@ -25,7 +25,7 @@ dk_load() {
 	fi
 	
 	#### download if missing ####
-	[ ! -e ${fpath} ] && "Dowloading ${fpath}"
+	[ ! -e ${fpath} ] && echo "Dowloading ${fn}"
 	[ ! -e ${fpath} ] && curl -Lo ${DKBASH_DIR}/functions/${fn} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
 	[ ! -e ${fpath} ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
 	
