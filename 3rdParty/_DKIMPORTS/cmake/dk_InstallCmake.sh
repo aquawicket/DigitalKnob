@@ -36,9 +36,9 @@ dk_validateCmake () {
 	[ "${TARGET_OS}" = "win_x86_64_clang" ]      && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	[ "${TARGET_OS}" = "win_x86_64_mingw" ]      && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	[ "${TARGET_OS}" = "win_x86_64_ucrt" ]       && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
-	
 	dk_printVar CMAKE_IMPORT
-	if dk_url ${CMAKE_IMPORT}; then
+	
+	if dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_info "Installing CMake from dl files"
 		dk_printVar CMAKE_IMPORT
 		
