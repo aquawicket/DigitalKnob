@@ -11,11 +11,11 @@ dk_stringContains () {
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	# https://stackoverflow.com/a/8811800/688352
-	_string="$1"
-	dk_printVar _string
-	_substring="$2"
-	dk_printVar _substring
-	[ "${_string#*"$_substring"}" != "$_string" ]	
+	#_string="$1"
+	#_substring="$2"
+	#[ "${_string#*"$_substring"}" != "$_string" ]
+	
+	[ "${1#*"$2"}" != "$1" ]
 }
 
 
@@ -36,5 +36,4 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	else
 		echo "2two2 does not contain tow"
 	fi
-	
 }
