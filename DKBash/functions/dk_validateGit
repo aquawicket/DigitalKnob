@@ -15,7 +15,7 @@ dk_validateGit () {
 	fi
 	
 	GIT_EXE=$(command -v git)
-	[ -e ${GIT_EXE} ] || dk_error "GIT_EXE is invalid"
+	[ -e "${GIT_EXE}" ] || dk_error "GIT_EXE is invalid"
 	
 	dk_printVar GIT_EXE
 }
