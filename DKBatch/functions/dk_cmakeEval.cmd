@@ -23,10 +23,8 @@ call DK
 	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(%*): could not locate CMAKE_EXE" 
     
-    set "DKCOMMAND=%~1"
-	:: change \'s to /'s
-	if defined DKCOMMAND (call set "DKCOMMAND=%%DKCOMMAND:^\=^/%%")
-	echo DKCOMMAND = "%DKCOMMAND%"
+    ::set "DKCOMMAND=%~1"
+	call dk_replaceAll "%~1" "\" "/" DKCOMMAND
 	call dk_printVar DKCOMMAND
 	
     set "DKRETURN=%~2"
@@ -35,8 +33,8 @@ call DK
 	set "DKVARS=%~3"
 	call dk_printVar DKVARS
 	
-	set "DK_EVAL=%DKCMAKE_DIR%\DKEval.cmake"
-	call set "DK_EVAL=%%DK_EVAL:^\=^/%%"                              &:: change \'s to /'s
+	::set "DK_EVAL=%DKCMAKE_DIR%\DKEval.cmake"
+	call dk_replaceAll "%DKCMAKE_DIR%\DKEval.cmake" "\" "/" DK_EVAL
 	call dk_printVar DK_EVAL
 	
 	::### build CMAKE_ARGS ###
@@ -60,12 +58,14 @@ call DK
 	
 	::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
 	
-	call dk_printVar CMAKE_ARGS
+	echo CMAKE_ARGS = %CMAKE_ARGS%
+	::call dk_printVar CMAKE_ARGS    ::FIXME
 	
 	::### call the cmake command
 	::echo "%CMAKE_EXE%" %CMAKE_ARGS%
+	pause
 	"%CMAKE_EXE%" %CMAKE_ARGS%
-	
+	pause
 	if not defined DKRETURN goto:eof
 	if not exist %DKCMAKE_DIR%\cmake_vars.cmd goto:eof
     call %DKCMAKE_DIR%\cmake_vars.cmd
