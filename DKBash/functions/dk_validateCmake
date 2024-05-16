@@ -19,11 +19,7 @@ dk_validateCmake () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	
-	dk_validate HOST_OS dk_getHostTriple
-	#dk_getHostTriple
-	echo "test"
-	
+	dk_validate HOST_OS dk_getHostTriple	
 	######################################################################################################
 	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
 	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
@@ -78,7 +74,8 @@ dk_validateCmake () {
 		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		
 		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
-		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
+		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${DKTOOLS_DIR}/${CMAKE_FOLDER}"
+		
 		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed"
         
 		if ! dk_fileExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi

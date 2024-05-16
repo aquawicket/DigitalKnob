@@ -10,20 +10,28 @@ dk_extract () {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	src="$1"
-	dest="$2"
+	#src="$1"
+	#dest="$2"
 	
-	if ! dk_fileExists "${dest}"; then
-		dk_makeDirectory "${dest}"
+	if ! dk_fileExists "${2}"; then
+		dk_makeDirectory "${2}"
 	fi
 	
-	tar -xf "${src}" -C "${dest}"
+	dk_getExtension "${1}" extension
+	
+	if [ "${extension}" = "zip" ]; then
+		echo "unzip '${1}' -d '${2}'"
+		unzip "${1}" -d "${2}"
+	else
+		echo "tar -xf '${1}' -C '${2}'"
+		tar -xf "${1}" -C "${2}"
+	fi
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "dk_extract DKTEST() not implemented"
-	#dk_extract "file.zip" "/path/extracted"
+	dk_validate DKDOWNLOAD_DIR dk_getDKPaths
+	dk_extract "${DKDOWNLOAD_DIR}/cmake-3.29.0-windows-x86_64.zip" "${DKDOWNLOAD_DIR}"
 }
