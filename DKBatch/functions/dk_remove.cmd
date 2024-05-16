@@ -31,5 +31,4 @@ goto:eof
 
 	echo "DKTEST(${DKSCRIPT_NAME})"
 	echo "created file to test dk_remove" > removeMe.file
-	pause
 	call dk_remove removeMe.file

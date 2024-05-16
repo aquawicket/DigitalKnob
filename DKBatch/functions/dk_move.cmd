@@ -16,8 +16,7 @@ call DK
 	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
-	::set "_to_=%~2"
-	call dk_getFilename "%~2" _to_
+	call dk_replaceAll "%~2" "/" "\" _to_
 	set "OVERWRITE=1"
 	
 	call dk_info "Moving %_from_% to %_to_%"
@@ -26,7 +25,7 @@ call DK
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
-			call dk_error "dk_move Cannot ove file. Destiantion exists and not set to OVERWRITE"
+			call dk_error "dk_move Cannot move file. Destiantion exists and not set to OVERWRITE"
 		)
 		call dk_remove %_to_%
 	)
@@ -44,7 +43,17 @@ goto:eof
 
 
 :DKTEST ###############################################################################
-
+	
+	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	
+	echo "dk_move test" > %DKDOWNLOAD_DIR%/moveMe.file
+	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt
+	
 	echo "dk_move test" > moveMe.file
-
 	call dk_move moveMe.file iWasMoved.txt
+	
+	call dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
+	call dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved
+	
+	call dk_makeDirectory moveMe
+	call dk_move moveMe iWasMoved

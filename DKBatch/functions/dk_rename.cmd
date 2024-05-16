@@ -16,8 +16,8 @@ call DK
 	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
-	::set "_to_=%~2"
-	call dk_getFilename "%~2" _to_
+	call dk_replaceAll "%~2" "/" "\" _to_
+	::call dk_getFilename "%~2" _to_
 	set "OVERWRITE=1"
 	
 	call dk_info "Renameing %_from_% to %_to_%"
@@ -36,7 +36,9 @@ call DK
 	call dk_printVar _parent_dir_
 	call dk_makeDirectory "%_parent_dir_%"
 	
-	rename "%_from_%" "%_to_%"
+	::rename "%_from_%" "%_to_%"
+	move /Y "%_from_%" "%_to_%"
+	
 	::TODO
 	::[ ? = "success" ]
 goto:eof
@@ -45,6 +47,16 @@ goto:eof
 
 :DKTEST ###############################################################################
 
+	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	
+	echo "dk_rename test" > %DKDOWNLOAD_DIR%/renameMe.file
+	call dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt
+	
 	echo "dk_rename test" > renameMe.file
-
 	call dk_rename renameMe.file iWasRenamed.txt
+	
+	call dk_makeDirectory %DKDOWNLOAD_DIR%/renameMe
+	call dk_move %DKDOWNLOAD_DIR%/renameMe %DIGITALKNOB_DIR%/iWasRenamed
+	
+	call dk_makeDirectory renameMe
+	call dk_move renameMe iWasRenamed
