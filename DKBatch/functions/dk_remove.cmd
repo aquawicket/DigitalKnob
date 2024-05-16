@@ -16,9 +16,11 @@ call DK
 		goto:eof
 	)
 	
-	del /F /Q "%_path_%"
-	rd /s /q "%_path_%"
-	call dk_sleep 1      &:: # give the path a second to delete
+	call dk_getFullPath "%_path_%" _path_ 
+	
+	del /F /Q "%_path_%" >nul 2>&1
+	rd /s /q "%_path_%" >nul 2>&1
+	::call dk_sleep 1      &:: # give the path a second to delete
 	
 	if exist "%_path_%" (
 		call dk_error "dk_remove failed to remove %_path_%"
@@ -31,4 +33,5 @@ goto:eof
 
 	echo "DKTEST(${DKSCRIPT_NAME})"
 	echo "created file to test dk_remove" > removeMe.file
-	call dk_remove removeMe.file
+	::call dk_sleep 1
+	call dk_remove "removeMe.file"

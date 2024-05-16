@@ -11,7 +11,7 @@ call DK
 	
 	call dk_replaceAll "%~1" "/" "\" _path_
     if exist "%_path_%" (
-		call dk_info "%_path_% already exists"
+		rem call dk_info "%_path_% already exists"
 		goto:eof
 	)
 	mkdir "%_path_%"

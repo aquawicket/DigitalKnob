@@ -690,7 +690,7 @@ goto:eof
 	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
-    :: git remote update > /dev/null 2> /dev/null
+    :: git remote update >nul 2>&1
     %GIT_EXE% remote update
     
     :: branch= $(git rev-parse --abbrev-ref HEAD)
