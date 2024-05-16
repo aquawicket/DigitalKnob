@@ -3,9 +3,9 @@ call DK
 
 if not defined ENABLE_dk_debugFunc     set ENABLE_dk_debugFunc=1
 if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
-if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=%0"
-if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=main"
-if not defined DKSTACK[0].__ARGS__     set "DKSTACK[0].__ARGS__=0"
+if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
+if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
+if not defined DKSTACK[0].__ARGS__     set "DKSTACK[0].__ARGS__= "
 if not defined DKSTACK_length          set /a "DKSTACK_length=1"
 if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::################################################################################
@@ -21,6 +21,15 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
+	
+	call echo "DKSTACK[%DKSTACK_marker%].__FILE__ = %%DKSTACK[%DKSTACK_marker%].__FILE__%%"	
+	call echo "DKSTACK[%DKSTACK_marker%].__FUNCTION__ = %%DKSTACK[%DKSTACK_marker%].__FUNCTION__%%"	
+	call echo "DKSTACK[%DKSTACK_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_marker%].__ARGS__%%"
+	
+::	set /a "DKSTACK_prev_marker=DKSTACK_marker-1"
+::	call echo "DKSTACK[%DKSTACK_prev_marker%].__FILE__ = %%DKSTACK[%DKSTACK_prev_marker%].__FILE__%%"	
+::	call echo "DKSTACK[%DKSTACK_prev_marker%].__FUNCTION__ = %%DKSTACK[%DKSTACK_prev_marker%].__FUNCTION__%%"	
+::	call echo "DKSTACK[%DKSTACK_prev_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_prev_marker%].__ARGS__%%"
 	
 	set /a "__ARGC__=0"
 	for %%a in (%__ARGS__%) do (

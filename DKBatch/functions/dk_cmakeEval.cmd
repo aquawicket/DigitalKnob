@@ -11,19 +11,22 @@ call DK
 	if "%~4" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
 	
 	call dk_validate DKIMPORTS_DIR dk_validateBranch
-	call dk_printVar DKIMPORTS_DIR
+	::call dk_printVar DKIMPORTS_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKIMPORTS_DIR"
 	
 	call dk_validate DKCMAKE_DIR dk_validateBranch
 	call dk_printVar DKCMAKE_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKCMAKE_DIR"
 	
+	::call dk_validate CMAKE_EXE dk_validateCmake
 	call dk_validate CMAKE_EXE %DKIMPORTS_DIR%\cmake\dk_InstallCmake
 	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(%*): could not locate CMAKE_EXE" 
     
     set "DKCOMMAND=%~1"
-	if defined DKCOMMAND  call set "DKCOMMAND=%%DKCOMMAND:^\=^/%%"    &:: change \'s to /'s
+	:: change \'s to /'s
+	if defined DKCOMMAND (call set "DKCOMMAND=%%DKCOMMAND:^\=^/%%")
+	echo DKCOMMAND = "%DKCOMMAND%"
 	call dk_printVar DKCOMMAND
 	
     set "DKRETURN=%~2"
@@ -103,6 +106,5 @@ goto:eof
 
 :DKTEST ###############################################################################
 
-	::cmd /k call dk_cmakeEval "dk_info('test dk_warning message')"
 	call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
 

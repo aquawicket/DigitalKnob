@@ -10,9 +10,9 @@ if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 ::################################################################################
 ::# dk_warning(message)
 ::#
-::#	Print a warning message to the console
+::#	   Print a warning message to the console
 ::#
-::#	@message	- The message to print
+::#	   @message	- The message to print
 ::#
 :dk_warning () {
 	::call dk_debugFunc
@@ -24,6 +24,7 @@ if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 		set "_message_=%*"
 		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"           &:: if _message_ starts and ends with quotes, remove them
 		
+		::echo %yellow%%WARNING_TAG%%_message_%%clr%
 		call dk_echo %yellow%%WARNING_TAG%%_message_%%clr%
 		set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_WARNING%"=="1" call dk_echo %blue%*** TRACE_ON_WARNING ***%clr%  & call dk_stacktrace
@@ -32,3 +33,11 @@ if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 		if "%HALT_ON_WARNING%"=="1"  call dk_echo %blue%*** HALT_ON_WARNING ***%clr%   & cmd /k
 	endlocal
 goto:eof
+
+
+
+
+:DKTEST ########################################################################
+	
+	call dk_warning "test dk_warning message"
+	call dk_info "...next line..."

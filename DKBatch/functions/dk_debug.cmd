@@ -18,12 +18,13 @@ if not defined HALT_ON_DEBUG    set "HALT_ON_DEBUG=0"
 	::call dk_debugFunc
 	
 	if "%ENABLE_dk_debug%" neq "1"  goto:eof
-	if ""=="%*"  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
+	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion       
 		set "_message_=%*"
 		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"    &:: if _message_ starts and ends with quotes, remove them
 		
+		::echo %blue%%DEBUG_TAG%%_message_%%clr%
 		call dk_echo %blue%%DEBUG_TAG%%_message_%%clr%
 		set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_DEBUG%"=="1" call dk_echo %blue%*** TRACE_ON_DEBUG ***%clr%  & call dk_stacktrace
