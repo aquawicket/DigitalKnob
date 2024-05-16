@@ -5,19 +5,20 @@ call DK
 ::##################################################################################
 ::# dk_move(<from> <to>)
 ::#
-::#	Rename file or directory or move a file or directory to another location
+::#	Move/Rename a file or directory to another location/name
 ::#
-::#	@from		- The source path to copy
-::#	@to			- The destination path to copy to
-::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
+::#	@from		- The source path to move or rename
+::#	@to			- The destination path to move or rename to
+::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
 :dk_move () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% LSS 2 (dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% GTR 3 (dk_error "%__FUNCTION__%(): too many arguments")
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
 	call dk_replaceAll "%~2" "/" "\" _to_
-	set "OVERWRITE=1"
+	if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
 	
 	call dk_info "Moving %_from_% to %_to_%"
 	
@@ -25,8 +26,8 @@ call DK
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
-			call dk_error "dk_move Cannot move file. Destiantion exists and not set to OVERWRITE"
-		)
+			call dk_error "dk_rename Cannot move file. Destiantion exists and OVERWRITE is not set"
+		) 
 		call dk_remove %_to_%
 	)
 	
@@ -36,6 +37,7 @@ call DK
 	call dk_makeDirectory "%_parent_dir_%"
 	
 	move /Y "%_from_%" "%_to_%"
+	
 	::TODO
 	::[ ? = "success" ]
 goto:eof
@@ -47,13 +49,13 @@ goto:eof
 	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
 	
 	echo "dk_move test" > %DKDOWNLOAD_DIR%/moveMe.file
-	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt
+	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt OVERWRITE
 	
 	echo "dk_move test" > moveMe.file
-	call dk_move moveMe.file iWasMoved.txt
+	call dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
 	call dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
-	call dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved
+	call dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved OVERWRITE
 	
 	call dk_makeDirectory moveMe
-	call dk_move moveMe iWasMoved
+	call dk_move moveMe iWasMoved OVERWRITE

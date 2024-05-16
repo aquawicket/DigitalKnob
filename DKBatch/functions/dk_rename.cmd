@@ -5,20 +5,20 @@ call DK
 ::##################################################################################
 ::# dk_rename(<from> <to>)
 ::#
-::#	Rename file or directory or move a file or directory to another location
+::#	Rename/Move a file or directory to another name/location
 ::#
-::#	@from		- The source path to copy
-::#	@to			- The destination path to copy to
-::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
+::#	@from		- The source path to move or rename
+::#	@to			- The destination path to move or rename to
+::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
 :dk_rename () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% LSS 2 (dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% GTR 3 (dk_error "%__FUNCTION__%(): too many arguments")
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
 	call dk_replaceAll "%~2" "/" "\" _to_
-	::call dk_getFilename "%~2" _to_
-	set "OVERWRITE=1"
+	if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
 	
 	call dk_info "Renameing %_from_% to %_to_%"
 	
@@ -26,8 +26,8 @@ call DK
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
-			call dk_error "dk_rename Cannot rename file. Destiantion exists and not set to OVERWRITE"
-		)
+			call dk_error "dk_rename Cannot rename file. Destiantion exists and OVERWRITE is not set"
+		) 
 		call dk_remove %_to_%
 	)
 	
@@ -50,13 +50,13 @@ goto:eof
 	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
 	
 	echo "dk_rename test" > %DKDOWNLOAD_DIR%/renameMe.file
-	call dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt
+	call dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt OVERWRITE
 	
 	echo "dk_rename test" > renameMe.file
-	call dk_rename renameMe.file iWasRenamed.txt
+	call dk_rename renameMe.file iWasRenamed.txt OVERWRITE
 	
 	call dk_makeDirectory %DKDOWNLOAD_DIR%/renameMe
-	call dk_move %DKDOWNLOAD_DIR%/renameMe %DIGITALKNOB_DIR%/iWasRenamed
+	call dk_rename %DKDOWNLOAD_DIR%/renameMe %DIGITALKNOB_DIR%/iWasRenamed OVERWRITE
 	
 	call dk_makeDirectory renameMe
-	call dk_move renameMe iWasRenamed
+	call dk_rename renameMe iWasRenamed OVERWRITE
