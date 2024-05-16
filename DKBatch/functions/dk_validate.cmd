@@ -8,14 +8,15 @@ call DK
 ::#
 :dk_validate () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 
 	if defined %~1 if "%~1" neq "" (goto:eof)
 	call %~2
 	
 	if not defined %~1 dk_error "dk_validate was unable to set the variable with the code provided"
 	if "%~1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
+	
+	
 goto:eof
 
 

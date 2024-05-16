@@ -7,8 +7,7 @@ call DK
 ::#
 :dk_appendCmakeArgs () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	if "%~2" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	if %__ARGC__% NEQ 1 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     set CMAKE_ARGS=%CMAKE_ARGS% "%*"
 goto:eof

@@ -15,7 +15,7 @@ call DK
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKIMPORTS_DIR"
 	
 	call dk_validate DKCMAKE_DIR dk_validateBranch
-	call dk_printVar DKCMAKE_DIR
+	::call dk_printVar DKCMAKE_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKCMAKE_DIR"
 	
 	::call dk_validate CMAKE_EXE dk_validateCmake
@@ -63,9 +63,8 @@ call DK
 	
 	::### call the cmake command
 	::echo "%CMAKE_EXE%" %CMAKE_ARGS%
-	pause
 	"%CMAKE_EXE%" %CMAKE_ARGS%
-	pause
+
 	if not defined DKRETURN goto:eof
 	if not exist %DKCMAKE_DIR%\cmake_vars.cmd goto:eof
     call %DKCMAKE_DIR%\cmake_vars.cmd
