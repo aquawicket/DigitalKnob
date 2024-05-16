@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_pickUpdate () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     

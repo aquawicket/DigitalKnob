@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_getFileTime () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	setlocal enabledelayedexpansion
 	set _input=%1

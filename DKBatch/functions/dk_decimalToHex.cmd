@@ -8,9 +8,7 @@ call DK
 ::#
 :dk_decimalToHex () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
-	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	setlocal EnableExtensions EnableDelayedExpansion
 		set LOOKUP=0123456789abcdef & set "_hex_=" & set "_prefix_="

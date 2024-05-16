@@ -6,6 +6,9 @@ call DK
 ::#
 ::#
 :dk_listToArray () {
+	call dk_debugFunc
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	
 	setlocal EnableDelayedExpansion
 	set _list=%~1
 	if defined !_list! set _list=!%_list%!

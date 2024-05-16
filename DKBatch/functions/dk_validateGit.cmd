@@ -10,6 +10,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 ::#
 :dk_validateGit () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_load dk_validate
 	call dk_validate HOST_ARCH dk_getHostTriple

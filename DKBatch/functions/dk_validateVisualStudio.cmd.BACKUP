@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_validateVisualStudio () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
 	call dk_printVar VISUALSTUDIO_GENERATOR

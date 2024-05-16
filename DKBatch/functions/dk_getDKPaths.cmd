@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_getDKPaths () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_load dk_makeDirectory
 	

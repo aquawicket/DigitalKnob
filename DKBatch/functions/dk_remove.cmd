@@ -8,6 +8,7 @@ call DK
 ::#
 :dk_remove () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 1 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	set "_path=%1"
 	if not exist "%_path%" (

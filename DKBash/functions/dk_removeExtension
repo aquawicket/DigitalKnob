@@ -11,7 +11,7 @@ dk_removeExtension () {
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	_filepath_="$1"
-	echo "_filepath_ = ${_filepath_}"
+	#dk_printVar _filepath_
 	_filepath_="${_filepath_%.*}"									    # remove everything past last dot
 	[ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
 	eval "$2='${_filepath_}'"

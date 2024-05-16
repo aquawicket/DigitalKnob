@@ -8,6 +8,7 @@ call DK
 ::#
 :dk_printVariables () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 
 	setlocal enableextensions disabledelayedexpansion
 

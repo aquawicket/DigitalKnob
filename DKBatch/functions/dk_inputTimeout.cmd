@@ -8,6 +8,7 @@ call DK
 ::#
 :dk_inputTimeout <message> <timeout> <default>
 	call dk_debugFunc
+	if %__ARGC__% NEQ 3 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	setlocal EnableExtensions EnableDelayedExpansion
 	set "message=%1"

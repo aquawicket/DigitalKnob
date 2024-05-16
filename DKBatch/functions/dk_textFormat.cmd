@@ -9,6 +9,7 @@ call DK
 ::#
 :dk_textFormat
 	call dk_debugFunc
+	if %__ARGC__% NEQ 5 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     setlocal
     set "spaces=                                        "

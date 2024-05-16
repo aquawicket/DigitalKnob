@@ -7,6 +7,7 @@ call DK
 ::#
 :dk_getExtension () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 
 	setlocal enabledelayedexpansion
 	set "_input=%1"
@@ -21,3 +22,7 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	set "filepath=/test/test2/xfile.extension"
+	call dk_getExtension "%filepath%" extension
+	echo extension = %extension%

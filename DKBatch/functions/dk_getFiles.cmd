@@ -4,7 +4,8 @@
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getFiles () {
-
+	call dk_debugFunc
+	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	::set "path=%~1"
 	
 	set /a i=0

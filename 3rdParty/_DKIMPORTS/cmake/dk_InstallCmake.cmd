@@ -16,6 +16,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
 ::#
 :dk_InstallCmake () {
 	call dk_debugFunc
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_validate HOST_OS dk_getHostTriple
 	

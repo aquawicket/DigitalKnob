@@ -7,7 +7,7 @@ call DK
 ::
 :build_all () {
 	call dk_debugFunc
-	if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 goto:eof
 

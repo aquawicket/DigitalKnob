@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_isDirectory () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
+	::if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	if exist %~1\* (
 		if "%~2" neq "" endlocal & set "%2=true"
