@@ -39,7 +39,7 @@ dk_getHostTriple () {
 	if dk_commandExists clang; then  
 		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_printVar CLANG_TRIPLE	
 
-		remainder="$CLANG_TRIPLE"
+		remainder="${CLANG_TRIPLE}"
 		CLANG_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ARCH
 		CLANG_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
@@ -49,30 +49,33 @@ dk_getHostTriple () {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$CLANG_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$CLANG_ARCH && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$CLANG_VENDOR && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ]     && HOST_OS=${CLANG_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ]    && HOST_ENV=${CLANG_ENV}       && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
 
-		remainder="$GCC_TRIPLE"
+		remainder="${GCC_TRIPLE}"
 		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ARCH
+		
 		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_VENDOR
+		
 		GCC_OS="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_OS
+		
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$GCC_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$GCC_ARCH && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$GCC_VENDOR && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${GCC_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ]     && HOST_OS=${GCC_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ]    && HOST_ENV=${GCC_ENV}       && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
@@ -81,35 +84,37 @@ dk_getHostTriple () {
 		remainder="$BASH_TRIPLE"
 		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ARCH
+		
 		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_VENDOR
+		
 		BASH_OS="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_OS
+		
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${BASH_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${BASH_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${BASH_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ]     && HOST_OS=${BASH_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ]    && HOST_ENV=${BASH_ENV}       && dk_printVar HOST_ENV
 	fi	
 	
 	if dk_commandExists uname; then
 		
-		UNAME="$(uname)"
-		dk_printVar UNAME	
-		UNAME_a="$(try uname -a)" && dk_printVar UNAME_a
-		UNAME_s="$(try uname -s)" && dk_printVar UNAME_s
-		UNAME_n="$(try uname -n)" && dk_printVar UNAME_n	
-		UNAME_r="$(try uname -r)" && dk_printVar UNAME_r
-		UNAME_v="$(try uname -v)" && dk_printVar UNAME_v
-		UNAME_m="$(try uname -m)" && dk_printVar UNAME_m
-		UNAME_p="$(try uname -p)" && dk_printVar UNAME_p
-		UNAME_i="$(try uname -i)" && dk_printVar UNAME_i
-		UNAME_o="$(try uname -o)" && dk_printVar UNAME_o
-		
+		UNAME="$(uname)"             && dk_printVar UNAME
+		UNAME_a="$(try uname -a)"    && dk_printVar UNAME_a
+		UNAME_s="$(try uname -s)"    && dk_printVar UNAME_s
+		UNAME_n="$(try uname -n)"    && dk_printVar UNAME_n	
+		UNAME_r="$(try uname -r)"    && dk_printVar UNAME_r
+		UNAME_v="$(try uname -v)"    && dk_printVar UNAME_v
+		UNAME_m="$(try uname -m)"    && dk_printVar UNAME_m
+		UNAME_p="$(try uname -p)"    && dk_printVar UNAME_p
+		UNAME_i="$(try uname -i)"    && dk_printVar UNAME_i
+		UNAME_o="$(try uname -o)"    && dk_printVar UNAME_o
 		UNAME_ARCH="$(try uname -m)" && dk_printVar UNAME_ARCH
+		
 		dk_toLower "${UNAME_ARCH}" UNAME_ARCH
 		UNAME_SUBARCH=""
 		
@@ -118,8 +123,7 @@ dk_getHostTriple () {
 		else
 			UNAME_VENDOR="-unknown"
 		fi
-
-
+		
 		if [ "$(try uname -s)" = "darwin" ]; then
 			UNAME_OS="-$(try uname -s)$(try uname -r)"
 		else
@@ -139,15 +143,14 @@ dk_getHostTriple () {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_printVar UNAME_TRIPLE
 
-		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
-		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
-		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_printVar HOST_OS
-		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE} ] && HOST_TRIPLE=${UNAME_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${UNAME_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${UNAME_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS} ]     && HOST_OS=${UNAME_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV} ]    && HOST_ENV=${UNAME_ENV}       && dk_printVar HOST_ENV
 	fi
 	
-
-
+	
 	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_stringContains "${UNAME_a}" "Android"; then			# android
@@ -242,37 +245,37 @@ dk_getHostTriple () {
     # xcore     	- XCore
 	# xtensa		-
 	
-	if [ "$UNAME_m" = "arm" ]; then
+	if [ "${UNAME_m}" = "arm" ]; then
 		HOST_ARCH="arm"
-	elif [ "$UNAME_m" = "armeb" ]; then
+	elif [ "${UNAME_m}" = "armeb" ]; then
 		HOST_ARCH="arm"
-	elif [ "$UNAME_m" = "armv7l" ]; then
+	elif [ "${UNAME_m}" = "armv7l" ]; then
 		HOST_ARCH="arm"
-	elif [ "$UNAME_m" = "aarch64" ]; then
+	elif [ "${UNAME_m}" = "aarch64" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "aarch64_32" ]; then
+	elif [ "${UNAME_m}" = "aarch64_32" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "aarch64_be" ]; then
+	elif [ "${UNAME_m}" = "aarch64_be" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "arm64" ]; then
+	elif [ "${UNAME_m}" = "arm64" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "arm64_32" ]; then
+	elif [ "${UNAME_m}" = "arm64_32" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "armv8b" ]; then
+	elif [ "${UNAME_m}" = "armv8b" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "armv8l" ]; then
+	elif [ "${UNAME_m}" = "armv8l" ]; then
 		HOST_ARCH="arm64"
-	elif [ "$UNAME_m" = "x86" ]; then
+	elif [ "${UNAME_m}" = "x86" ]; then
 		HOST_ARCH="x86"
-	elif [ "$UNAME_m" = "i386" ]; then
+	elif [ "${UNAME_m}" = "i386" ]; then
 		HOST_ARCH="x86"
-	elif [ "$UNAME_m" = "i686" ]; then
+	elif [ "${UNAME_m}" = "i686" ]; then
 		HOST_ARCH="x86"
-	elif [ "$UNAME_m" = "x86_64" ]; then
+	elif [ "${UNAME_m}" = "x86_64" ]; then
 		HOST_ARCH="x86_64"
-	elif [ "$UNAME_m" = "x86-64" ]; then
+	elif [ "${UNAME_m}" = "x86-64" ]; then
 		HOST_ARCH="x86_64"
-	elif [ "$UNAME_m" = "ia64" ]; then
+	elif [ "${UNAME_m}" = "ia64" ]; then
 		HOST_ARCH="x86_64"
 	else
 		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
@@ -281,7 +284,7 @@ dk_getHostTriple () {
 	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	dk_printVar HOST_TRIPLE
 	
-	if [ "$HOST_OS" = "win" ]; then
+	if [ "${HOST_OS}" = "win" ]; then
 		HOST_ENV=clang
 		HOST_TRIPLE=${HOST_TRIPLE}_${HOST_ENV}
 		dk_printVar HOST_TRIPLE
@@ -295,5 +298,5 @@ dk_getHostTriple () {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getHostTriple
-	echo "HOST_TRIPLE = $HOST_TRIPLE"
+	echo "HOST_TRIPLE = ${HOST_TRIPLE}"
 }
