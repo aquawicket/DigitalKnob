@@ -23,17 +23,17 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
     call dk_getFilename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
     call dk_printVar NOTEPADPP_DL_FILE
 
-	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
-	call dk_printVar NOTEPADPP_FOLDER
-	pause
+    call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
+    call dk_printVar NOTEPADPP_FOLDER
+
 	
     call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	::call dk_printVar NOTEPADPP_FOLDER
+    ::call dk_printVar NOTEPADPP_FOLDER
 	
     call dk_convertToLowercase %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
     call dk_printVar NOTEPADPP_FOLDER
     
-    if "%DKTOOLS_DIR%"==""   call dk_getDKPaths
+    call dk_validate DKTOOLS_DIR dk_getDKPaths
     set "NOTEPADPP_EXE=%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%\notepad++.exe"
     call dk_printVar NOTEPADPP_EXE
         
@@ -42,7 +42,7 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
     echo.   
     echo "Installing notepad++ . . ."
     call dk_download %NOTEPADPP_DL% "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%"
-    call dk_extract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+    call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	   
     if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find notepad++.exe"
         

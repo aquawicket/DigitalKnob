@@ -59,22 +59,13 @@ call DK
 	call dk_printVar file_count
 	
 	if %dir_count% equ 1 if %file_count% equ 0 (
-		rem echo "rename/move directories[0] to dest path"
-		rem echo directories[0] = %directories[0]%
-		call dk_rename "%directories[0]%" "%dest_folder%"
-		call dk_remove %dest_fullpath%
-		rem move /Y %src_directory%/UNZIPPED/%dest_folder% %dest_directory%
-		call dk_move "%src_directory%/UNZIPPED/%dest_folder%" "%dest_directory%"
-		rem if exist "%dest_fullpath%" ( call dk_remove "%src_directory%/UNZIPPED" )
-	) else (
-		echo "rename/move UNZIPPED folder to dest path"
+		rem rename/move UNZIPPED/root folder to dest path"
+		call dk_move "%directories[0]%" "%dest_fullpath%" OVERWRITE
+		goto:eof
 	)
-	
-	
-	
-	:: if UNZIPPED contains less than 2 items and 1 folder, rename/move folder to dest path
-	:: else rename/move UNZIPPED folder to dest path
-	
+
+	:: rename/move UNZIPPED folder to dest path"
+	call dk_move "%src_directory%/UNZIPPED" "%dest_fullpath%" OVERWRITE	
 goto:eof
 
 
@@ -82,5 +73,7 @@ goto:eof
 :DKTEST ########################################################################
 
 	call dk_validate DKDOWNLOAD_DIR dk_getDKPaths
-	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%/mySmartExtractFolder"
+	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.1"
+	
+	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.2.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.2"
 	
