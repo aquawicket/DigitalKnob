@@ -49,11 +49,11 @@ dk_getHostTriple () {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS} ]     && HOST_OS=${CLANG_OS}         && dk_printVar HOST_OS
-		[ -z ${HOST_ENV} ]    && HOST_ENV=${CLANG_ENV}       && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ]     && HOST_OS=${CLANG_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ]    && HOST_ENV=${CLANG_ENV}       && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
