@@ -3,19 +3,17 @@
 
 
 ##################################################################################
-# dk_toLower(<variable>)
+# dk_toLower(<string> <output>)
 #
 #
 dk_toLower () {
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	#[ dk_defined $1 ] || dk_error "dk_toLower($*): $1 is not defined"
-
-	eval value='$'{$1}
-	value=$(echo "$value" | tr '[:upper:]' '[:lower:]')
-
-	eval "$1='${value}'"
+	#eval value='$'{$1}
+	
+	eval "$2='$(echo "$1" | tr '[:upper:]' '[:lower:]')'"
 }
 
 
@@ -23,6 +21,6 @@ dk_toLower () {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	var="CoOnVeRtEd ThIs StRiNg To LoWeRcAsE"
-	dk_toLower var
+	dk_toLower "${var}" var
 	echo "var = ${var}"
 }

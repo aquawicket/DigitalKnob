@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_url()
+# dk_isUrl()
 #
 #
-dk_url () {
+dk_isUrl () {
 	dk_debugFunc
 	
 	dk_stringContains $1 "://" && return ${true}
@@ -17,5 +17,19 @@ dk_url () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_url
+	test_url="http://www.aquawicket.com"
+	
+	if dk_isUrl "${test_url}"; then
+		echo "variable is a url"
+	else
+		echo "variable is NOT a url";
+	fi
+	
+	
+	test_not_url="readme.txt"
+	if dk_isUrl "${test_not_url}"; then
+		echo "variable is a url"
+	else
+		echo "variable is NOT a url";
+	fi
 }

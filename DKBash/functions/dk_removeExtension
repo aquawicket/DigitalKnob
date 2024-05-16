@@ -22,7 +22,6 @@ dk_removeExtension () {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	filepath="/test/test2/xfile.extension"
-	echo "filepath = ${filepath}"
-	dk_removeExtension ${filepath} filepath
+	dk_removeExtension "${filepath}" filepath
 	echo "filepath = ${filepath}"
 }

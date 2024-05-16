@@ -16,19 +16,19 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.0/
 #
 dk_validateCmake () {
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	dk_validate HOST_OS dk_getHostTriple
 	######################################################################################################
 	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
-	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32
-	[ "${HOST_TRIPLE}" = "win_arm64" ]           && CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64
-	[ "${HOST_TRIPLE}" = "win_x86" ]             && CMAKE_IMPORT=$CMAKE_DL_WIN_X86
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64
-	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=$CMAKE_DL_MAC
-	[ "${HOST_TRIPLE}" = "linux_x86_64" ]        && CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64
-	[ "${HOST_TRIPLE}" = "linux_arm64" ]         && CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64
-	[ "${HOST_TRIPLE}" = "raspberry_arm64" ]     && CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64
+	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
+	[ "${HOST_TRIPLE}" = "win_arm64" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
+	[ "${HOST_TRIPLE}" = "win_x86" ]             && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
+	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=${CMAKE_DL_MAC}
+	[ "${HOST_TRIPLE}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
+	[ "${HOST_TRIPLE}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${HOST_TRIPLE}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	#[ "${TARGET_OS}" = "android_arm32" ]        && CMAKE_IMPORT=cmake
 	[ "${TARGET_OS}" = "win_arm64_clang" ]       && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
 	[ "${TARGET_OS}" = "win_x86_clang" ]         && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
@@ -47,16 +47,14 @@ dk_validateCmake () {
 		dk_getFilename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_printVar CMAKE_DL_FILE
 		
-		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
+		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
-		dk_debug "CMAKE_DL_FILE extension = ${CMAKE_FOLDER##*.}"
-		[ "${CMAKE_FOLDER##*.}" = "tar" ] && CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		
 		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
-		dk_toLower CMAKE_FOLDER
+		dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
-		[ -z ${DKTOOLS_DIR} ] && dk_getDKPaths
+		dk_validate DKTOOLS_DIR dk_getDKPaths
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
@@ -65,7 +63,7 @@ dk_validateCmake () {
 		dk_printVar CMAKE_EXE
 		
 		if dk_fileExists "${CMAKE_EXE}"; then 
-			return $true;
+			return ${true};
 		fi
 
 		dk_echo
