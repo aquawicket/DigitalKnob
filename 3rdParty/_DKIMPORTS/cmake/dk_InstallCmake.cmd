@@ -30,19 +30,15 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     call dk_printVar CMAKE_DL
     
     call dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
-	call dk_printVar CMAKE_DL_FILE
-        
-    set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
-    call dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
+	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
+    call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
-    call dk_printVar CMAKE_FOLDER
-    
 	call dk_validate DKTOOLS_DIR dk_getDKPaths
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
     call dk_printVar CMAKE_EXE
         
     if exist "%CMAKE_EXE%" goto:eof
-    if not exist "%CMAKE_EXE%" echo "Could not locate CMAKE_EXE: %CMAKE_EXE%"
+    ::if not exist "%CMAKE_EXE%" echo "Could not locate CMAKE_EXE: %CMAKE_EXE%"
        
     echo.   
     echo "Installing cmake . . ."
@@ -50,8 +46,7 @@ set "CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     call dk_download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
 	call dk_extract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%DKTOOLS_DIR%"
-	set CMAKE_DL_NAME=%CMAKE_DL_FILE:~0,-4%
-	rename "%DKTOOLS_DIR%\%CMAKE_DL_NAME%" "%CMAKE_FOLDER%"
+	call dk_rename "%DKTOOLS_DIR%\%CMAKE_DL_NAME%" "%DKTOOLS_DIR%\%CMAKE_FOLDER%" 
 	echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
     if NOT exist "%CMAKE_EXE%"   call dk_error "cannot find cmake"

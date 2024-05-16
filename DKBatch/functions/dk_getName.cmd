@@ -23,3 +23,9 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	call dk_getName C:\Windows\System32 name
+	call dk_printVar name
+	
+	call dk_getName TEST nameb
+	call dk_printVar nameb

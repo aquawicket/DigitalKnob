@@ -20,22 +20,13 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     if "%HOST_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
     call dk_getFilename %GIT_DL% GIT_DL_FILE
-    ::call dk_printVar GIT_DL_FILE
-
-    set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
-	::call dk_printVar GIT_FOLDER
-	
+	call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
 	call dk_load dk_convertToCIdentifier
-    call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-	::call dk_printVar GIT_FOLDER
-	
+    call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
 	call dk_load dk_convertToLowercase
     call dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
-	::call dk_printVar GIT_FOLDER
-    
 	call dk_validate DKTOOLS_DIR dk_getDKPaths
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
-    ::call dk_printVar GIT_EXE
         
     if exist "%GIT_EXE%" goto:eof
         

@@ -15,7 +15,6 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
     call dk_debugFunc
     
 	call dk_validate HOST_ARCH dk_getHostTriple
-	::if "%HOST_ARCH%"==""       call dk_getHostTriple
     if "%HOST_ARCH%"=="arm64"  set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_ARM64%
     if "%HOST_ARCH%"=="x86"    set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" set NOTEPADPP_DL=%NOTEPADPP_DL_WIN_X86_64%
@@ -24,8 +23,9 @@ set "NOTEPADPP_DL_WIN_X86_64=https://github.com/notepad-plus-plus/notepad-plus-p
     call dk_getFilename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
     call dk_printVar NOTEPADPP_DL_FILE
 
-    set NOTEPADPP_FOLDER=%NOTEPADPP_DL_FILE:~0,-4%
-	::call dk_printVar NOTEPADPP_FOLDER
+	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
+	call dk_printVar NOTEPADPP_FOLDER
+	pause
 	
     call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	::call dk_printVar NOTEPADPP_FOLDER

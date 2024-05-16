@@ -15,28 +15,28 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
-	set "from=%~1"
-	set "to=%~2"
+	set "_from_=%~1"
+	::set "_to_=%~2"
+	call dk_getFilename "%~2" _to_
 	set "OVERWRITE=1"
 	
-	call dk_info "Renameing %from% to %to%"
+	call dk_info "Renameing %_from_% to %_to_%"
 	
-	if not exist "%from%" ( call dk_error "dk_rename: %from% not found" )
+	if not exist "%_from_%" ( call dk_error "dk_rename: %_from_% not found" )
 	
-	if exist "%to%" (
+	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
 			call dk_error "dk_rename Cannot rename file. Destiantion exists and not set to OVERWRITE"
 		)
-		call dk_remove %to%
+		call dk_remove %_to_%
 	)
 	
 	:: the base directory of the %to% path must exist.    
-	call dk_getDirectory "%to%" parent_dir
+	call dk_getDirectory "%_to_%" _parent_dir_
+	call dk_printVar _parent_dir_
+	call dk_makeDirectory "%_parent_dir_%"
 	
-	call dk_printVar parent_dir
-	call dk_makeDirectory "%parent_dir%"
-	
-	rename "%from%" "%to%"
+	rename "%_from_%" "%_to_%"
 	::TODO
 	::[ ? = "success" ]
 goto:eof
@@ -46,6 +46,5 @@ goto:eof
 :DKTEST ###############################################################################
 
 	echo "dk_rename test" > renameMe.file
-	
-	::rename renameMe.file iWasRenamed.txt
+
 	call dk_rename renameMe.file iWasRenamed.txt
