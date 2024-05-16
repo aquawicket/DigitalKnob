@@ -10,11 +10,11 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
-	::set "path=%~1"
+	call dk_replaceAll "%~1" "/" "\" _path_
 	::set "folders="
 	set /A i=0
 	setlocal enabledelayedexpansion
-	for /d %%a in ("%~1\*") do ( 
+	for /d %%a in ("%_path_%\*") do ( 
 		set "%~2[!i!]=%%a"
 		set /A i+=1
 	) 

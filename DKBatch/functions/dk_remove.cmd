@@ -10,17 +10,18 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% NEQ 1 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
-	set "_path=%1"
-	if not exist "%_path%" (
-		call dk_warning "dk_remove %_path% does not exist"
+	call dk_replaceAll "%~1" "/" "\" _path_
+	if not exist "%_path_%" (
+		call dk_warning "dk_remove %_path_% does not exist"
+		goto:eof
 	)
 	
-	del /F /S "%_path%"
+	del /F /Q "%_path_%"
+	rd /s /q "%_path_%"
 	call dk_sleep 1      &:: # give the path a second to delete
 	
-	if exist "%_path%" (
-		call dk_error "dk_remove failed to remove %_path%"
-		::return $false
+	if exist "%_path_%" (
+		call dk_error "dk_remove failed to remove %_path_%"
 	)
 goto:eof
 

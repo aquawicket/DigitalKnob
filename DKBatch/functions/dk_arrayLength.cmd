@@ -18,7 +18,7 @@ call DK
 	   set /a "array_length+=1"
 	   goto :arrayCountLoop 
 	)
-	endlocal & set %2=%array_length%  
+	endlocal & set "%2=%array_length%"
 goto:eof
 
 
