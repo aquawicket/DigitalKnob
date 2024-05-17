@@ -11,10 +11,8 @@ call DK
 	
     if "%1" neq "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
-        rem set /P CONFIRM="Are you sure? [Y] " 
 		call dk_confirm || goto:eof
     )
-    ::if /I "%CONFIRM%" neq "Y" goto:eof
         
 	call dk_validate DKBRANCH_DIR dk_validateBranch
 	call dk_validate GIT_EXE dk_validateGit
