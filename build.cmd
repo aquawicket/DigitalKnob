@@ -193,7 +193,7 @@ goto:eof
     if "%choice%"=="5" call:dk_resetAll
     if "%choice%"=="6" call:dk_removeAll
     if "%choice%"=="7" call:dk_clearScreen
-    if "%choice%"=="8" call:dk_deleteCache & call:dk_deleteTempFiles
+    if "%choice%"=="8" call:dk_clearCmakeCache & call:dk_deleteTempFiles
     if "%choice%"=="9" call:dk_reload
     if "%choice%"=="10" exit
         
@@ -425,7 +425,7 @@ goto:eof
 	echo ##################################################################
 	echo.
     
-    call:dk_deleteCache
+    call:dk_clearCmakeCache
     call:dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
@@ -1306,13 +1306,13 @@ goto:eof
 
 
 ::####################################################################
-::# dk_deleteCache()
+::# dk_clearCmakeCache()
 ::#
 ::#
-:dk_deleteCache () {
-	call:dk_verbose "dk_deleteCache(%*)"
+:dk_clearCmakeCache () {
+	call:dk_verbose "dk_clearCmakeCache(%*)"
 	
-    ::call:dk_cmakeEval "dk_deleteCache()"
+    ::call:dk_cmakeEval "dk_clearCmakeCache()"
     echo Deleteing CMake cache . . .
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"

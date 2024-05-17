@@ -1,11 +1,11 @@
 include_guard()
 
 ###############################################################################
-# dk_deleteCache()
+# dk_clearCmakeCache()
 #
 #	Delete all CMake cache files thoughout the digitalknob directory
 #
-function(dk_deleteCache)
+function(dk_clearCmakeCache)
 	dk_debugFunc(${ARGV})
 	
 	DKASSERT(DIGITALKNOB_DIR)

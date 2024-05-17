@@ -42,7 +42,7 @@ call DK
     if "%choice%"=="5" call dk_resetAll
     if "%choice%"=="6" call dk_removeAll
     if "%choice%"=="7" call dk_clearScreen
-    if "%choice%"=="8" call dk_deleteCache & call dk_deleteTempFiles
+    if "%choice%"=="8" call dk_clearCmakeCache & call dk_deleteTempFiles
     if "%choice%"=="9" call dk_reload
     if "%choice%"=="10" call dk_exit
         

@@ -16,7 +16,7 @@ call DK
 	call dk_info "##################################################################"
 	call dk_echo
     
-    call dk_deleteCache
+    call dk_clearCmakeCache
     call dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"

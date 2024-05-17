@@ -2,10 +2,10 @@
 call DK
 
 ::####################################################################
-::# dk_deleteCache()
+::# dk_clearCmakeCache()
 ::#
 ::#
-:dk_deleteCache () {
+:dk_clearCmakeCache () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
