@@ -19,8 +19,6 @@ call DK
 	call dk_info "you wish to commit or save beforehand."
 	call dk_echo
         
-    ::set /P CONFIRM="Are you sure? [Y] " 
-    ::if /I "%CONFIRM%" neq "Y" goto:eof
     call dk_confirm || goto:eof
     
     :: first we need to relocate this file up one directory

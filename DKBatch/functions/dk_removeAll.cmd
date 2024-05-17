@@ -18,8 +18,6 @@ call DK
 	call dk_info "Save any un-commited changes first."
 	call dk_echo
         
-    ::set /P CONFIRM="Are you sure? [Y] " 
-    ::if /I "%CONFIRM%" neq "Y" goto:eof
     call dk_confirm || goto:eof
     
     :: first we need to relocate this file up one directory

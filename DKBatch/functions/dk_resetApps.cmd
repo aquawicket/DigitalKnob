@@ -11,8 +11,6 @@ call DK
 	
     echo Resetting Apps . . .
 
-    ::set /P CONFIRM="Are you sure? [Y] " 
-    ::if /I "%CONFIRM%" neq "Y" goto:eof
 	call dk_confirm || goto:eof
 	
     cd %DKAPPS_DIR%
