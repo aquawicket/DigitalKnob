@@ -1,0 +1,28 @@
+#!/bin/sh
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK"
+
+####################################################################
+# dk_decimalToAscii(<decimal> <output>)
+#
+#    reference: https://www.ascii-code.com
+#
+dk_decimalToAscii () {
+	dk_debugFunc
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	
+	dk_decimalToHex ${1} hex
+	dk_hexToAscii ${hex} ascii
+	
+	eval "$2=${ascii}"
+}
+
+
+
+
+DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	myDecimal="123"
+	dk_decimalToAscii "${myDecimal}" myAscii
+	dk_printVar myAscii
+
+}
