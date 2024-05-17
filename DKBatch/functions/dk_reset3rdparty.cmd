@@ -11,9 +11,10 @@ call DK
 	
     echo Resetting 3rdParty Libraries . . .
         
-    set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" neq "Y" goto:eof
-        
+    ::set /P CONFIRM="Are you sure? [Y] " 
+    ::if /I "%CONFIRM%" neq "Y" goto:eof
+    call dk_confirm || goto:eof
+    
     cd %DK3RDPARTY_DIR%
     "%GIT_EXE%" clean -f -d
 goto:eof

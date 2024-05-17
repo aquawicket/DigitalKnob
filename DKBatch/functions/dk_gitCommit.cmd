@@ -48,9 +48,10 @@ call DK
         
     echo.
     echo git commit "%message%"
-    set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" neq "Y" goto:eof
-        
+    ::set /P CONFIRM="Are you sure? [Y] " 
+    ::if /I "%CONFIRM%" neq "Y" goto:eof
+    call dk_confirm || goto:eof
+    
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
         
