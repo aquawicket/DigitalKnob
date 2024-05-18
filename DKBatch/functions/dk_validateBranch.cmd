@@ -33,7 +33,7 @@ call DK
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
-    ::              copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
+    ::              call dk_copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
     ::      )
     ::      echo .
     ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%DKSCRIPT_NAME%"

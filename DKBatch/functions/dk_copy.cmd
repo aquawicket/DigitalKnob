@@ -37,7 +37,7 @@ call DK
 	
 	::copy "%_from_%" "%_to_%"
 	if exist "%_from_%\*" (
-		echo D|xcopy "%_from_%" "%_to_%" /E /H /Y
+		echo D|xcopy "%_from_%" "%_to_%" /S /E /H /Y
 	) else (
 		echo F|xcopy "%_from_%" "%_to_%" /H /Y
 	)
