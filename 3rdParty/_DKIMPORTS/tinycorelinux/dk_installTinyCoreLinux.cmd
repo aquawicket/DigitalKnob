@@ -8,6 +8,9 @@ call :dk_installTinyCoreLinux
 call :dk_createTinyCoreLinuxLaunch
 goto:eof
 
+::####################################################################
+::# dk_installTinyCoreLinux()
+::#
 :dk_installTinyCoreLinux () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
@@ -52,7 +55,9 @@ goto:eof
 	endlocal
 goto:eof
 
-
+::####################################################################
+::# dk_createTinyCoreLinuxLaunch()
+::#
 :dk_createTinyCoreLinuxLaunch
 	setlocal
 		:: Create LAUNCH.cmd file
