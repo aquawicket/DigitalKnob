@@ -21,5 +21,4 @@ goto:eof
 
 :DKTEST ########################################################################
 	
-	echo call dk_appendFile "appended string" "%DKSCRIPT_DIR%\appendFile_TEST.txt"
 	call dk_appendFile "appended string" "%DKSCRIPT_DIR%\appendFile_TEST.txt"

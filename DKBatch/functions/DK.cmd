@@ -62,7 +62,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	
 	::set true=0
 	::set false=1
-
+	
 	::echo %%CD%%            = %CD%
 	::echo %%DATE%%          = %DATE%
 	::echo %%TIME%%          = %TIME%
