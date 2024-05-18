@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_getRegistryKey <reg_path> <key> <result>
 	call dk_debugFunc
-	if %__ARGC__% NEQ 3 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 3 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 
 	FOR /F "tokens=2* skip=2" %%a in ('reg query "%1" /v "%2"') do ( set "%3=%%b" )
 goto:eof

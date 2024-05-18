@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_assert () {
     call dk_debugFunc
-	if %__ARGC__% NEQ 1 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 ::	set "_expression_=%~1"
 	

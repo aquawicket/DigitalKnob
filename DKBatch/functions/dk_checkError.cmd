@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_checkError () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     if %ERRORLEVEL% equ 0 goto:eof
     call dk_error "ERRORLEVEL = %ERRORLEVEL%"

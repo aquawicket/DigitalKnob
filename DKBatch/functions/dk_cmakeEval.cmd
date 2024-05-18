@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_cmakeEval () {
 	call dk_debugFunc
-	if %__ARGC__% GTR 4 (dk_error "%__FUNCTION__%(): too many arguments")
+	if %__ARGC__% GTR 4 (call dk_error "%__FUNCTION__%(): too many arguments")
 	
 	call dk_validate DKIMPORTS_DIR dk_validateBranch
 	::call dk_printVar DKIMPORTS_DIR

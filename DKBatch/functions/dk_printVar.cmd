@@ -8,7 +8,7 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::#
 :dk_printVar () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 1 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	if "%ENABLE_dk_printVar%" neq "1"  goto:eof
 	

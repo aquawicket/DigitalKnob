@@ -10,7 +10,7 @@ call DK
 ::#
 :dk_fileToArray () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     ::set "file=%~1"
 	set /A i=0

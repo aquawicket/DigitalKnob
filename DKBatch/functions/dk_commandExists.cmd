@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_commandExists () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     ::set "command=%~1"
  	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"

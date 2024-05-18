@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_confirm () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
 	call dk_echo

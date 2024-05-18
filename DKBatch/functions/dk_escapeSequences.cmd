@@ -10,7 +10,7 @@ call DK
 ::#
 :dk_escapeSequences () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 ::	set ASCII_length=0
 	:: ASCII control characters (character code 0-31)
@@ -206,7 +206,7 @@ goto:eof
 
 :ASCII_SHOW () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_info "%%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%"
 goto:eof

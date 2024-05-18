@@ -2,21 +2,21 @@
 call DK
 
 ::################################################################################
-::# dk_set(<name> <value>)
+::# dk_unset(<name>)
 ::#
 ::#
-:dk_set () {
+:dk_unset () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
-	set "%~1=%~2"
+	set "%~1="
 goto:eof
-
-
 
 
 
 :DKTEST ########################################################################
 
-	call dk_set myVar "value assigned with dk_set"
+	set "myVar=initial value assigned with dk_unset"
+	echo myVar = %myVar%
+	call dk_unset myVar
 	echo myVar = %myVar%

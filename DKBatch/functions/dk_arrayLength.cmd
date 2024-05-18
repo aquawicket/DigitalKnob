@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_arrayLength () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	::set "array_name=%~1"
 	set "array_length=0"

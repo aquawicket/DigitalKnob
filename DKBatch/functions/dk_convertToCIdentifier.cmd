@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_convertToCIdentifier () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	setlocal EnableDelayedExpansion
     set "_input_=%~1"

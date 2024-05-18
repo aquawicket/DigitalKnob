@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_buildMain () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 
 setlocal enableDelayedExpansion
 ::	echo "BASH = $BASH"
@@ -74,7 +74,7 @@ setlocal enableDelayedExpansion
 	call dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	
 	call dk_load dk_warning
-	if NOT "%DKSCRIPT_DIR%"=="%DKBRANCH_DIR%" (
+	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
 		call dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		call dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
 		call dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
@@ -103,10 +103,10 @@ setlocal enableDelayedExpansion
 		
 		call dk_build
 		
-		set UPDATE=
-		set APP=
-		set TARGET_OS=
-		set TYPE=
+		set "UPDATE="
+		set "APP="
+		set "TARGET_OS="
+		set "TYPE="
 	goto while_loop
 	endlocal
 goto:eof
@@ -114,3 +114,5 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	call dk_buildMain

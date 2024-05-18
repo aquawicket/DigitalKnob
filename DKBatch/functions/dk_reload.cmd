@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_reload () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	if "%DKSCRIPT_PATH%" == "" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
 	

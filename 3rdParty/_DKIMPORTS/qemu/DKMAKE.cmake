@@ -2,37 +2,49 @@
 # https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe
 
 # https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi
-if(NOT HOST)
-	dk_getHostTriple()
-endif()
+#if(NOT HOST)
+#	dk_getHostTriple()
+#endif()
+dk_validate(HOST "dk_getHostTriple()")
 
 WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe)
 
-if(NOT DKTOOLS_DIR)
-	dk_getDKPaths()
-endif()
+#if(NOT DKTOOLS_DIR)
+#	dk_getDKPaths()
+#endif()
+dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 	
 ## Get QEMU_DL_FILE, QEMU_FOLDER
 
-if(QEMU_DL)
-	get_filename_component(QEMU_DL_FILE ${QEMU_DL} NAME)
-	dk_removeExtension(${QEMU_DL_FILE} QEMU_FOLDER)
-	string(MAKE_C_IDENTIFIER ${QEMU_FOLDER} QEMU_FOLDER)
-	dk_set(QEMU ${DKTOOLS_DIR}/${QEMU_FOLDER})
-	dk_set(QEMU_IMG_EXE ${QEMU}/qemu-img.exe)
-	dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU}/qemu-system-x86_64.exe)
-endif()
+#if(NOT QEMU_DL)
+#	dk_error("QEMU_DL invalid")
+#endif()
+dk_assert(QEMU_DL)
+
+#get_filename_component(QEMU_DL_FILE ${QEMU_DL} NAME)
+dk_getFilename(${QEMU_DL} QEMU_DL_FILE)
+dk_removeExtension(${QEMU_DL_FILE} QEMU_FOLDER)
+#string(MAKE_C_IDENTIFIER ${QEMU_FOLDER} QEMU_FOLDER)
+dk_convertToCIdentifier(${QEMU_FOLDER} QEMU_FOLDER)
+dk_set(QEMU ${DKTOOLS_DIR}/${QEMU_FOLDER})
+dk_set(QEMU_IMG_EXE ${QEMU}/qemu-img.exe)
+dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU}/qemu-system-x86_64.exe)
+
 
 
 ### INSTALL ###
 if(NOT EXISTS ${QEMU_IMG_EXE})
 	dk_download(${QEMU_DL} ${DKDOWNLOAD_DIR})
 
-	file(TO_NATIVE_PATH ${QEMU} QEMU_INSTALL_PATH)
-	set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /D=${QEMU_INSTALL_PATH})
+	#file(TO_NATIVE_PATH ${QEMU} QEMU_INSTALL_PATH)
+	dk_getNativePath(${QEMU} QEMU_INSTALL_PATH)
+	#set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /D=${QEMU_INSTALL_PATH})
+	dk_set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /D=${QEMU_INSTALL_PATH})
 
-	execute_process(COMMAND cmd /c echo ${command_string})
-	execute_process(COMMAND cmd /c ${command_string})
+	#execute_process(COMMAND cmd /c echo ${command_string})
+	dk_executeProcess(echo ${command_string})
+	#execute_process(COMMAND cmd /c ${command_string})
+	dk_executeProcess(${command_string})
 endif()
 
 

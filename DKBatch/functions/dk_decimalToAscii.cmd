@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_decimalToAscii () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	call dk_decimalToHex %~1 hex
 	call dk_hexToAscii %hex% ascii
