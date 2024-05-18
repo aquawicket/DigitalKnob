@@ -26,79 +26,68 @@ call ../../../DKBatch/functions/DK.cmd
 
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-	call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
-	
-	if exist "%NOTEPADPP_EXE%" goto:eof
-	
-	call dk_echo   
-    call dk_info "Installing notepad++ . . ."
-    call dk_download %NOTEPADPP_DL% "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%"
-    call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP%"
-	
-	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find notepad++.exe"
-	
-	:::::: dark mode ###
-	call dk_validate DKIMPORTS_DIR "dk_validateBranch"
-	call dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP%\config.xml OVERWRITE
 
+	::FIXME: kill notepad++.exe peocess
+	call dk_remove "%NOTEPADPP%"
+	
 	:::::: Add Context Menu
-	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
-	call REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
-	call REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
-	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
-	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "\"%NOTEPADPP_EXE%\" \"%%1\"" 
+	call dk_info "Removing Edit with Notepad++ context menu to Windows..." 
+	call dk_deleteRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++"
+	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
+	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
 
 	:::::: associateFiles.cmd ###
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
 	::
 	:: https://ss64.com/nt/ftype.html
-	ftype dk_txtfile=%NOTEPADPP_EXE% "%%1"
+	ftype dk_txtfile=%NOTEPADPP_EXE_WINPATH% "%%1"
 
-	assoc .1=dk_txtfile
-	assoc .2=dk_txtfile
-	assoc .3=dk_txtfile
-	assoc .=dk_txtfile
-	assoc .androidproj=dk_txtfile
-	assoc .backup=dk_txtfile
-	assoc .bak=dk_txtfile
-	assoc .c=dk_txtfile
-	assoc .cmake=dk_txtfile
-	assoc .code-workspace=dk_txtfile
-	assoc .cpp=dk_txtfile
-	assoc .css=dk_txtfile
-	assoc .data=dk_txtfile
-	assoc .gitattributes=dk_txtfile
-	assoc .gitconfig=dk_txtfile
-	assoc .glsl=dk_txtfile
-	assoc .gradle=dk_txtfile
-	assoc .h=dk_txtfile
-	assoc .htm=dk_txtfile
-	assoc .html=dk_txtfile
-	assoc .java=dk_txtfile
-	assoc .js=dk_txtfile
-	assoc .json=dk_txtfile
-	assoc .make=dk_txtfile
-	assoc .marks=dk_txtfile
-	assoc .md=dk_txtfile
-	assoc .mk=dk_txtfile
-	assoc .php=dk_txtfile
-	assoc .plist=dk_txtfile
-	assoc .pro=dk_txtfile
-	assoc .properties=dk_txtfile
-	assoc .rc=dk_txtfile
-	assoc .reference=dk_txtfile
-	assoc .rsp=dk_txtfile
-	assoc .sed=dk_txtfile
-	assoc .sh=dk_txtfile
-	assoc .storyboard=dk_txtfile
-	assoc .targets=dk_txtfile
-	assoc .traineddata=dk_txtfile
-	assoc .ts=dk_txtfile
-	assoc .ts=dk_txtfile
-	assoc .txt=dk_txtfile
-	assoc .xml=dk_txtfile
-	
+	assoc .1=
+	assoc .2=
+	assoc .3=
+	assoc .=
+	assoc .androidproj=
+	assoc .backup=
+	assoc .bak=
+	assoc .c=
+	assoc .cmake=
+	assoc .code-workspace=
+	assoc .cpp=
+	assoc .css=
+	assoc .data=
+	assoc .gitattributes=
+	assoc .gitconfig=
+	assoc .glsl=
+	assoc .gradle=
+	assoc .h=
+	assoc .htm=
+	assoc .html=
+	assoc .java=
+	assoc .js=
+	assoc .json=
+	assoc .make=
+	assoc .marks=
+	assoc .md=
+	assoc .mk=
+	assoc .php=
+	assoc .plist=
+	assoc .pro=
+	assoc .properties=
+	assoc .rc=
+	assoc .reference=
+	assoc .rsp=
+	assoc .sed=
+	assoc .sh=
+	assoc .storyboard=
+	assoc .targets=
+	assoc .traineddata=
+	assoc .ts=
+	assoc .ts=
+	assoc .txt=
+	assoc .xml=
+
+
 
 	call dk_checkError
 	
