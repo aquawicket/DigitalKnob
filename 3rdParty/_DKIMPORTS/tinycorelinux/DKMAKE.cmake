@@ -18,14 +18,6 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	# cd into install directory
 	dk_setPath(${TINYCORELINUX})
 
-	### Create the virtual image (10gb)
-	# C:/Users/Administrator/digitalknob/Development/3rdParty/qemu/qemu-img create -f qcow2 tinycore.img 10G
-	dk_command(${QEMU_IMG_EXE} create -f qcow2 tinycore.img 10G)
-
-	### Launching the VM
-	# C:/Users/Administrator/digitalknob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl
-	dk_command(${QEMU_SYSTEM_X86_64_EXE} -cdrom ${DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
-
 	### Install the OS to the .img file
 	# (Install from the running virtual OS)
 	dk_info("########### Tiny Core Linux -install- ###############")
@@ -41,7 +33,13 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	dk_info(". When instal finishes, shut down.")
 	dk_info(". A LAUNCH shortcut will be created the int DKTools/TinyCoreLinux directory")
 
-	
+	### Create the virtual image (10gb)
+	# C:/Users/Administrator/digitalknob/Development/3rdParty/qemu/qemu-img create -f qcow2 tinycore.img 10G
+	dk_command(${QEMU_IMG_EXE} create -f qcow2 tinycore.img 10G)
+
+	### Launching the VM
+	# C:/Users/Administrator/digitalknob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl
+	dk_command(${QEMU_SYSTEM_X86_64_EXE} -cdrom ${DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
 endif()
 
 dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")
