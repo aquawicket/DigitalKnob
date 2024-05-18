@@ -1,9 +1,7 @@
 # http://tinycorelinux.net/downloads.html
 # http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
 
-if(NOT DKTOOLS_DIR)
-	dk_getDKPaths()
-endif()
+dk_validate(DKTOOLS_DIR "dk_getDKPaths()") 
 
 dk_depend(qemu)
 
@@ -13,7 +11,7 @@ dk_set(TINYCORELINUX ${DKTOOLS_DIR}/TinyCoreLinux)
 if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 	dk_info("Installing tiny-core-linux . . .")
 	
-	get_filename_component(TINYCORELINUX_DL_FILE ${TINYCORELINUX_DL} NAME)
+	dk_getFilename(${TINYCORELINUX_DL} TINYCORELINUX_DL_FILE)
 	dk_download(${TINYCORELINUX_DL} ${DKDOWNLOAD_DIR}/${TINYCORELINUX_DL_FILE})
 
 	##### EAMPLE with tinycorelinux #####

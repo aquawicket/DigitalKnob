@@ -2,18 +2,14 @@
 call DK
 
 ::##################################################################################
-::# dk_appendFile(string, file)
+::# dk_fileWrite(<file> <string>)
 ::#
 ::#
-:dk_appendFile () {
+:dk_fileWrite () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
-	if exist "%~2" (
-		echo %~1 >> "%~2"
-	) else (
-		echo %~1 > "%~2"
-	)
+	echo %~2 > "%~1"
 goto:eof
 
 
@@ -21,4 +17,4 @@ goto:eof
 
 :DKTEST ########################################################################
 	
-	call dk_appendFile "appended string" "%DKSCRIPT_DIR%\appendFile_TEST.txt"
+	call dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
