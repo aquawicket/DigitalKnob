@@ -21,11 +21,11 @@ dk_error () {
 	[ ${ENABLE_dk_error} -ne 1 ] && return
 	msg="$1"
 	
-	dk_echo "${red}${ERROR_TAG}${msg}${clr}"
-	[ ${TRACE_ON_ERROR} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_ERROR ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
-	[ ${LINE_ON_ERROR} -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_ERROR ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}" #OR HALT AND NOT NO_HALT)
-	[ ${PAUSE_ON_ERROR} -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_ERROR ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
-	[ ${HALT_ON_ERROR} -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_ERROR ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
+	dk_echo "${red-}${ERROR_TAG}${msg}${clr-}"
+	[ ${TRACE_ON_ERROR} -eq 1 ] && dk_echo "\n${red-}*** TRACE_ON_ERROR ***${clr-}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
+	[ ${LINE_ON_ERROR} -eq 1 ]  && dk_echo "\n${red-}*** LINE_ON_ERROR ***${clr-}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}" #OR HALT AND NOT NO_HALT)
+	[ ${PAUSE_ON_ERROR} -eq 1 ] && dk_echo "\n${red-}*** PAUSE_ON_ERROR ***${clr-}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
+	[ ${HALT_ON_ERROR} -eq 1 ]  && dk_echo "\n${red-}*** HALT_ON_ERROR ***${clr-}"  && dk_exit #OR HALT AND NOT NO_HALT)
 }
 
 

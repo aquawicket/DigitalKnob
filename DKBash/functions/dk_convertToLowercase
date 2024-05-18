@@ -12,6 +12,7 @@ dk_convertToLowercase() {
 
 	output=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 	eval "$2='${output}'"
+	dk_printVar "${2}"
 	#[[ $input == "" ]]
 }
 

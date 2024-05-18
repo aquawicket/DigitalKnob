@@ -7,7 +7,10 @@
 #
 #
 dk_printVar() {
+	OLD_ENABLE_dk_debugFunc=${ENABLE_dk_debugFunc}
+	ENABLE_dk_debugFunc=0
 	dk_debugFunc
+	ENABLE_dk_debugFunc=${OLD_ENABLE_dk_debugFunc-}
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	varname=$1

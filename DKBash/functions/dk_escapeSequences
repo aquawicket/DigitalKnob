@@ -126,7 +126,7 @@ dk_escapeSequences () {
 	#dk_decimalToVariable 31 US
 
 
-	dk_set clear      "$ESC[2J"
+	dk_set clear      "${ESC}[2J"
 
 	# Attributes
 	dk_set clr        "$ESC[0m"

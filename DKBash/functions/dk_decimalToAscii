@@ -14,6 +14,7 @@ dk_decimalToAscii () {
 	dk_hexToAscii ${hex} ascii
 	
 	eval "$2=${ascii}"
+	dk_printVar "${2}"
 }
 
 
@@ -22,7 +23,7 @@ dk_decimalToAscii () {
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	myDecimal="123"
-	dk_decimalToAscii "${myDecimal}" myAscii
-	dk_printVar myAscii
+	dk_decimalToAscii "${myDecimal}" ascii
+	echo "ascii = ${ascii}"
 
 }

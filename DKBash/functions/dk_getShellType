@@ -21,6 +21,7 @@ dk_getShellType () {
 	#echo "DKSHELL = $DKSHELL"
 	
 	eval "$1=${DKSHELL}"
+	dk_printVar "${1}"
 }
 
 

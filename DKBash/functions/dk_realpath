@@ -12,6 +12,7 @@ dk_realpath() {
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	eval "$2=$(cd $(dirname $1); pwd -P)/$(basename $1)"
+	dk_printVar "${2}"
 }
 
 
@@ -19,6 +20,6 @@ dk_realpath() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_realpath dk_load realpath_output
-	echo "realpath_output = ${realpath_output}"
+	dk_realpath dk_load _realpath
+	echo "_realpath = ${_realpath}"
 }

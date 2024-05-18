@@ -39,21 +39,19 @@ dk_validateCmake () {
 	[ "${TARGET_OS}" = "win_x86_64_ucrt" ]       && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_printVar CMAKE_IMPORT
 	
+	if [ -z "${CMAKE_IMPORT}" ]; then
+		dk_error "CMAKE_IMPORT is invalid"
+	fi
+	
 	if dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_info "Installing CMake from dl files"
-		dk_printVar CMAKE_IMPORT
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
 		dk_getFilename "${CMAKE_DL}" CMAKE_DL_FILE
-		dk_printVar CMAKE_DL_FILE
-		
-		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
-		dk_printVar CMAKE_FOLDER
-		
+		dk_removeExtension "${CMAKE_DL_FILE}" CMAKE_FOLDER
 		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
-		dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
-		dk_printVar CMAKE_FOLDER
+		dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_validate DKTOOLS_DIR dk_getDKPaths
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe

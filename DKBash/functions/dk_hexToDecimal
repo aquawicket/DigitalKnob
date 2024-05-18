@@ -13,6 +13,7 @@ dk_hexToDecimal () {
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	eval "$2=$(printf "%d\n" $1)"
+	dk_printVar "${2}"
 }
 
 

@@ -17,6 +17,7 @@ dk_getUsername () {
 	fi
 	
 	eval "$1=${DKUSERNAME}"
+	dk_printVar "${1}"
 }
 
 

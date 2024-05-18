@@ -29,6 +29,7 @@ takes_ary_as_arg() {
     )
 	
 	eval "$3=(${output_array[@]})"
+	#dk_printVar "${3}"
 }
 
 

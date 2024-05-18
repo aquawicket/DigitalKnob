@@ -22,9 +22,9 @@ dk_buildMain () {
 
 	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
 	dk_printVar MSYSTEM
-	dk_printVar DKSCRIPT_PATH
-	dk_printVar DKSCRIPT_DIR
-	dk_printVar DKSCRIPT_NAME
+	#dk_printVar DKSCRIPT_PATH
+	#dk_printVar DKSCRIPT_DIR
+	#dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
@@ -34,12 +34,12 @@ dk_buildMain () {
 	dk_validateGit
 	dk_validateBranch
 
-	dk_printVar DKBRANCH_DIR
-	dk_printVar DKAPPS_DIR
-	dk_printVar DKCMAKE_DIR
-	dk_printVar DK3RDPARTY_DIR
-	dk_printVar DKIMPORTS_DIR
-	dk_printVar DKPLUGINS_DIR
+	#dk_printVar DKBRANCH_DIR
+	#dk_printVar DKAPPS_DIR
+	#dk_printVar DKCMAKE_DIR
+	#dk_printVar DK3RDPARTY_DIR
+	#dk_printVar DKIMPORTS_DIR
+	#dk_printVar DKPLUGINS_DIR
 
 	if [ "${DKSCRIPT_DIR}" != "${DKBRANCH_DIR}" ]; then
 		dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
@@ -58,10 +58,10 @@ dk_buildMain () {
 		dk_generate	
 		dk_build
 		
-		unset UPDATE
-		unset APP
-		unset TARGET_OS
-		unset TYPE
+		dk_unset UPDATE
+		dk_unset APP
+		dk_unset TARGET_OS
+		dk_unset TYPE
 	done
 }
 
