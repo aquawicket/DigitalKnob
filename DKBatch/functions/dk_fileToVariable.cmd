@@ -13,26 +13,15 @@ call DK
 	if %__ARGC__% NEQ 2 (dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
     ::set "file=%~1"
-	setlocal EnableDelayedExpansion
-	
-	for /f "delims=" %%x in (DK.cmd) do set Build=%%x
-	
-    for /F "usebackq delims=" %%a in ("%~1") do (
-		set "%~2[!i!]=%%a"
-		set /a i+=1
-    )
+	set "\n=\n"
+	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"
+	endlocal & set "%2=%_fileVar_%"
 goto:eof
 
 
 
 :DKTEST ########################################################################
-
-setlocal enableDelayedExpansion
-set \n=^
-
-
-rem two empty line required after set \n
-
-for /f "delims=" %%x in (DK.cmd) do set file_var=!file_var!!\n!%%x
 	
-	echo !file_var!
+	::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	call dk_fileToVariable "DK.cmd" myVar
+	echo "%myVar%"

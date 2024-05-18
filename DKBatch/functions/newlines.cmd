@@ -23,7 +23,6 @@ set \n=^
 
 
 rem two empty line required after set \n
-
 :: echo text with newlines
 echo first line !\n!second line !\n!third line !\n!
 
@@ -36,4 +35,15 @@ echo !multi!
 pause
 
 
+:: https://stackoverflow.com/a/5642300
+::::::::::::::::::::::::::::::::::::::::::::::::
+:::: newline (without delayed expansion) :::::::
+(SET LF=^
+%=this line is empty=%
+)
+echo This text^%LF%%LF%uses two lines
+echo This also^
 
+has two lines
+
+pause
