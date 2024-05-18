@@ -8,7 +8,7 @@ for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
 
 if not defined frame (set /a frame=0)
-if "%*" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
 (	

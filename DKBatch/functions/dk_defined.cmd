@@ -6,8 +6,8 @@ call DK
 ::#
 :dk_defined () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	if "%~3" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
+	if "%~3" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 
 	::set "variable=%1"
 	if defined %~1 (

@@ -28,9 +28,9 @@ if not defined HALT_ON_VERBOSE    set "HALT_ON_VERBOSE=0"
 		call dk_echo %cyan%%VERBOSE_TAG%%_message_%%clr%
 		set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_VERBOSE%"=="1" call dk_echo %blue%*** TRACE_ON_VERBOSE ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_VERBOSE%"=="1"  call dk_echo %blue%*** LINE_ON_VERBOSE ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
+		if "%LINE_ON_VERBOSE%"=="1"  call dk_echo %blue%*** LINE_ON_VERBOSE ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
 		if "%PAUSE_ON_VERBOSE%"=="1" call dk_echo %blue%*** PAUSE_ON_VERBOSE ***%clr%  & call dk_pause
-		if "%HALT_ON_VERBOSE%"=="1"  call dk_echo %blue%*** HALT_ON_VERBOSE ***%clr%   & cmd /k
+		if "%HALT_ON_VERBOSE%"=="1"  call dk_echo %blue%*** HALT_ON_VERBOSE ***%clr%   & call dk_exit
 	endlocal
 goto:eof
 

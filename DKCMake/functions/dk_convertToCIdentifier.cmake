@@ -6,7 +6,9 @@ include_guard()
 #
 function(dk_convertToCIdentifier input output)
 	dk_debugFunc(${ARGV})
-	#[ $# -ne 2 ] && echo "${FUNCNAME}(): incorrect number of arguments"
+	if(NOT ${ARGC} EQUAL 2)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+	endif()
 		
 	string(MAKE_C_IDENTIFIER ${input} c_identifier)	
 	

@@ -24,7 +24,8 @@ call DK
         goto c_identifier_loop
     :c_identifier_endLoop
 	
-	endlocal & set "%2=%_output%"		
+	endlocal & set "%2=%_output%"
+	dk_printVar %2
 goto:eof
 
 

@@ -28,9 +28,9 @@ if not defined HALT_ON_FIXME    set "HALT_ON_FIXME=1"
 		call dk_echo %red%%FIXME_TAG%%_message_%%clr%
 		::set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_FIXME%"=="1" call dk_echo %red%*** TRACE_ON_FIXME ***%clr% & call dk_stacktrace
-		if "%LINE_ON_FIXME%"=="1"  call dk_echo %red%*** LINE_ON_FIXME ***%clr%  & call dk_showFileLine %_callerpath% %_message_%
+		if "%LINE_ON_FIXME%"=="1"  call dk_echo %red%*** LINE_ON_FIXME ***%clr%  & call dk_showFileLine "%_callerpath%" "%_message_%"
 		if "%PAUSE_ON_FIXME%"=="1" call dk_echo %red%*** PAUSE_ON_FIXME ***%clr% & call dk_pause
-		if "%HALT_ON_FIXME%"=="1"  call dk_echo %red%*** HALT_ON_FIXME ***%clr%  & cmd /k
+		if "%HALT_ON_FIXME%"=="1"  call dk_echo %red%*** HALT_ON_FIXME ***%clr%  & call dk_exit
 	endlocal 
 goto:eof
 

@@ -28,9 +28,9 @@ if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 		call dk_echo %yellow%%WARNING_TAG%%_message_%%clr%
 		set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_WARNING%"=="1" call dk_echo %blue%*** TRACE_ON_WARNING ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_WARNING%"=="1"  call dk_echo %blue%*** LINE_ON_WARNING ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
+		if "%LINE_ON_WARNING%"=="1"  call dk_echo %blue%*** LINE_ON_WARNING ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
 		if "%PAUSE_ON_WARNING%"=="1" call dk_echo %blue%*** PAUSE_ON_WARNING ***%clr%  & call dk_pause
-		if "%HALT_ON_WARNING%"=="1"  call dk_echo %blue%*** HALT_ON_WARNING ***%clr%   & cmd /k
+		if "%HALT_ON_WARNING%"=="1"  call dk_echo %blue%*** HALT_ON_WARNING ***%clr%   & call dk_exit
 	endlocal
 goto:eof
 

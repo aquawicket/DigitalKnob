@@ -28,9 +28,9 @@ set "TODO_TAG=  TODO: "
 		call dk_echo %yellow%%TODO_TAG%%_message_%%clr%
 		::set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_TODO%"=="1" call dk_echo %yellow%*** TRACE_ON_TODO ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_TODO%"=="1"  call dk_echo %yellow%*** LINE_ON_TODO ***%crl%   & call dk_showFileLine %_callerpath% %_message_%
+		if "%LINE_ON_TODO%"=="1"  call dk_echo %yellow%*** LINE_ON_TODO ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
 		if "%PAUSE_ON_TODO%"=="1" call dk_echo %yellow%*** PAUSE_ON_TODO ***%clr%  & call dk_pause
-		if "%HALT_ON_TODO%"=="1"  call dk_echo %yellow%*** HALT_ON_TODO ***%clr%   & cmd /k
+		if "%HALT_ON_TODO%"=="1"  call dk_echo %yellow%*** HALT_ON_TODO ***%clr%   & call dk_exit
 	endlocal
 goto:eof
 

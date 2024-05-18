@@ -15,6 +15,7 @@ call DK
 	call set "_output_=%%_input_:%~2=%~3%%"
 	
 	endlocal & set "%4=%_output_%"
+	dk_printVar %4
 goto:eof
 
 

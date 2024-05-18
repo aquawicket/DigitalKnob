@@ -9,18 +9,20 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% GTR 4 (call dk_error "%__FUNCTION__%(): too many arguments")
 	
+	
+	setlocal
 	call dk_validate DKIMPORTS_DIR dk_validateBranch
 	::call dk_printVar DKIMPORTS_DIR
-	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKIMPORTS_DIR"
+	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
 	
 	call dk_validate DKCMAKE_DIR dk_validateBranch
 	::call dk_printVar DKCMAKE_DIR
-	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(%*): could not locate DKCMAKE_DIR"
+	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKCMAKE_DIR"
 	
 	::call dk_validate CMAKE_EXE dk_validateCmake
 	call dk_validate CMAKE_EXE %DKIMPORTS_DIR%\cmake\dk_InstallCmake
 	call dk_printVar CMAKE_EXE
-	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(%*): could not locate CMAKE_EXE" 
+	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 
     
     ::set "DKCOMMAND=%~1"
 	call dk_replaceAll "%~1" "\" "/" DKCOMMAND
@@ -95,7 +97,8 @@ call DK
     ::del cmake_eval.out
     ::err contains all of the lines
     ::echo %err%
-
+	
+	endlocal
     call dk_checkError
 goto:eof
 

@@ -10,6 +10,7 @@ call DK
 	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
 	
 	set "%~1=%~2"
+	dk_printVar %1
 goto:eof
 
 

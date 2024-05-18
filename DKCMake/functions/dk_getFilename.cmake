@@ -28,7 +28,7 @@ function(dk_getFilename path RESULT)
 	string(SUBSTRING ${path} ${index} -1 filename) 
 	
 	if(NOT filename)
-		dk_warning("dk_getFilename(${path}) failed: using get_filename_component() to retrieve the filename")
+		dk_warning("dk_getFilename(${path}) failed: Now using get_filename_component() to retrieve the filename")
 		get_filename_component(filename "${path}" NAME)
 		dk_printVar(filename)
 	endif()

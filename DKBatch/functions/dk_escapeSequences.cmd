@@ -1,8 +1,9 @@
 @echo off
 call DK
 
-:: https://www.ascii-code.com
-:: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+:: ASCII Table - https://www.ascii-code.com
+:: ANSI Escape Sequences - https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+:: Escape Characters - https://www.robvanderwoude.com/escapechars.php
 
 ::##################################################################################
 ::# dk_escapeSequences()
@@ -183,13 +184,13 @@ goto:eof
 
 :ASCII_ADD () {
 	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(%*): argument 1 is invalid"
-	if "%~2" equ "" call dk_error "%__FUNCTION__%(%*): argument 2 is invalid"
-	if "%~3" equ "" call dk_error "%__FUNCTION__%(%*): argument 3 is invalid"
-	if "%~4" equ "" call dk_error "%__FUNCTION__%(%*): argument 4 is invalid"
-	if "%~5" equ "" call dk_error "%__FUNCTION__%(%*): argument 5 is invalid"
-	if "%~6" equ "" call dk_error "%__FUNCTION__%(%*): argument 6 is invalid"
-	if "%~7" neq "" call dk_error "%__FUNCTION__%(%*): too many arguments"
+	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
+	if "%~2" equ "" call dk_error "%__FUNCTION__%(): argument 2 is invalid"
+	if "%~3" equ "" call dk_error "%__FUNCTION__%(): argument 3 is invalid"
+	if "%~4" equ "" call dk_error "%__FUNCTION__%(): argument 4 is invalid"
+	if "%~5" equ "" call dk_error "%__FUNCTION__%(): argument 5 is invalid"
+	if "%~6" equ "" call dk_error "%__FUNCTION__%(): argument 6 is invalid"
+	if "%~7" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	
 	::call dk_debug "ASCII_ADD (%*"
 	::call dk_debug "echo %~1	%~2		%~3		%~4		%~5		%~6"
