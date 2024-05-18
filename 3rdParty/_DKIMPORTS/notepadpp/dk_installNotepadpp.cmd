@@ -43,10 +43,10 @@ call ../../../DKBatch/functions/DK.cmd
 
 	:::::: Add Context Menu
 	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
-	call REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
-	call REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
-	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
-	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "\"%NOTEPADPP_EXE%\" \"%%1\"" 
+	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
+	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
+	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
+	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
 
 	:::::: associateFiles.cmd ###
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
