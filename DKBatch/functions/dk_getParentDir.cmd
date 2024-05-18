@@ -12,6 +12,7 @@ call DK
 	setlocal enableDelayedExpansion
 	for %%A in (%1.) do set "parent=%%~dpA"
     endlocal & set "%2=%parent%"
+	call dk_printVar "%2"
 goto:eof
 
 

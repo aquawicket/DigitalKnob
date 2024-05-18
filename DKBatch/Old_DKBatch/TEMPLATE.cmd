@@ -43,5 +43,5 @@ set "in2=%~2"
 set "out1=%in1%"
 set "out2=%in2%"
 
-endlocal & set "%3=%out1%" & set "%4=%out2%" 
+endlocal & set "%3=%out1%" & set "%4=%out2%"
 %DKEND%

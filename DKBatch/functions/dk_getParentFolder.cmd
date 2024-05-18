@@ -11,6 +11,7 @@ call DK
 	
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
     set "%2=%parent%"
+	call dk_printVar "%2"
 goto:eof
 
 

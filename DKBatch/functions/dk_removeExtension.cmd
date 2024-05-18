@@ -17,7 +17,7 @@ call DK
 	
 	:: [ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
 	endlocal & set "%2=%_filepath_%"
-	dk_printVar %2
+	call dk_printVar "%2"
 goto:eof
 
 

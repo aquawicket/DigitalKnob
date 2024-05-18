@@ -21,7 +21,8 @@ call DK
 			call set "_input_=%%_input_:!_FROM_!=!_TO_!%%
 			call set "_output_=!_input_!"
 		)	
-	endlocal & set "%2=%_output_%"	
+	endlocal & set "%2=%_output_%"
+	call dk_printVar "%2"
 goto:eof
 
 

@@ -15,11 +15,13 @@ call DK
 	call dk_echo
 	if /I "%REPLY%" equ "Y" (
 		if "%~2" neq "" endlocal & set "%2=true"
+		call dk_printVar "%2"
         (call )
 		goto:eof
 	) 
 	
 	 if "%~2" neq "" endlocal & set "%2=false"
+	 call dk_printVar "%2"
 	(call)
 goto:eof
 

@@ -22,4 +22,5 @@ call DK
 	
 	::echo dk_hexToAscii %hex% = %ascii%
 	endlocal & set "%2=%ascii%"
+	call dk_printVar "%2"
 goto:eof

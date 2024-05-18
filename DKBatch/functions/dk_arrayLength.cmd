@@ -19,6 +19,7 @@ call DK
 	   goto :arrayCountLoop 
 	)
 	endlocal & set "%2=%array_length%"
+	call dk_printVar "%2"
 goto:eof
 
 

@@ -16,7 +16,7 @@ call DK
 		if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
 		for %%Z in ("%_input_%") do set "OUT=%%~dpZ"
 	endlocal & set "%2=%OUT:~0,-1%"
-	call dk_printVar %2
+	call dk_printVar "%2"
 goto:eof
 
 

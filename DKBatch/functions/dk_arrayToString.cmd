@@ -25,7 +25,8 @@ call DK
 		)
 	)
 
-	endlocal & set "%2=%list%" 
+	endlocal & set "%2=%list%"
+	call dk_printVar "%2"
 goto:eof
 
 
@@ -40,4 +41,4 @@ goto:eof
 	set "MyArray[5]=c"
 	call dk_arrayToString MyArray MyList
 	
-	call dk_printVar MyList
+	echo MyList = %MyList%

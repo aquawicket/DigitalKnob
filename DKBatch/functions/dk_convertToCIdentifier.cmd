@@ -25,7 +25,7 @@ call DK
     :c_identifier_endLoop
 	
 	endlocal & set "%2=%_output%"
-	dk_printVar %2
+	call dk_printVar "%2"
 goto:eof
 
 

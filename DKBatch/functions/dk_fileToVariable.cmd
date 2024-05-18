@@ -16,6 +16,7 @@ call DK
 	set "\n=\n"
 	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"
 	endlocal & set "%2=%_fileVar_%"
+	call dk_printVar "%2"
 goto:eof
 
 

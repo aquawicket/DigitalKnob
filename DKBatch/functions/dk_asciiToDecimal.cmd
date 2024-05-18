@@ -14,6 +14,7 @@ call DK
 	call dk_hexToDecimal %hex% decimal
 	
 	endlocal & set "%2=%decimal%"
+	call dk_printVar "%2"
 goto:eof
 
 
@@ -22,4 +23,4 @@ goto:eof
 	
 	set "myAscii=x"
 	call dk_asciiToDecimal myAscii myDecimal
-	call dk_printVar myDecimal
+	echo myDecimal = %myDecimal%
