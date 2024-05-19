@@ -1079,7 +1079,7 @@ goto:eof
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
     call:dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-    call:dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
+    call:dk_toLower %GIT_FOLDER% GIT_FOLDER
     ::call:dk_printVar GIT_FOLDER
 
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
@@ -1144,7 +1144,7 @@ goto:eof
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
     call:dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
-    call:dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
+    call:dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
     call:dk_printVar CMAKE_FOLDER
         
     set "CMAKE_EXE=%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
@@ -1646,11 +1646,11 @@ goto:eof
 
 
 ::################################################################################
-::# dk_convertToLowercase(<in> <out>)
+::# dk_toLower(<in> <out>)
 ::#
 ::#
-:dk_convertToLowercase () {
-	call:dk_verbose "dk_convertToLowercase(%*)"
+:dk_toLower () {
+	call:dk_verbose "dk_toLower(%*)"
 	
     set _string=%1
     set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"

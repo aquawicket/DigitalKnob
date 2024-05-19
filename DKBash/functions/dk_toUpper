@@ -3,14 +3,14 @@
 
 
 ##################################################################################
-# dk_convertToLowercase(<input> <output>)
+# dk_toUpper(<input> <output>)
 #
 #
-dk_convertToLowercase() {
+dk_toUpper() {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
-	output=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	output=$(echo "$1" | tr '[:lower:]' '[:upper:]')
 	eval "$2='${output}'"
 	dk_printVar "${2}"
 	#[[ $input == "" ]]
@@ -20,6 +20,6 @@ dk_convertToLowercase() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_convertToLowercase "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
-	echo "lowercase = ${lowercase}"
+	dk_toUpper "CoNvErT tHiS sTrInG tO aLl UpPeRcAsE" uppercase
+	echo "uppercase = ${uppercase}"
 }

@@ -23,8 +23,8 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 	call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
 	call dk_load dk_convertToCIdentifier
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
-	call dk_load dk_convertToLowercase
-    call dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
+	call dk_load dk_toLower
+    call dk_toLower %GIT_FOLDER% GIT_FOLDER
 	call dk_validate DKTOOLS_DIR dk_getDKPaths
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
         

@@ -17,7 +17,7 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_getFilename %GIT_DL% GIT_DL_FILE
 	call dk_getName %GIT_DL_FILE% GIT_FOLDER
 	call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-    call dk_convertToLowercase %GIT_FOLDER% GIT_FOLDER
+    call dk_toLower %GIT_FOLDER% GIT_FOLDER
     
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
     call dk_set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"

@@ -23,7 +23,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_getFilename %VSCODE_DL% VSCODE_DL_FILE
 	call dk_removeExtension %VSCODE_DL_FILE% VSCODE_FOLDER
 	call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
-	call dk_convertToLowercase %VSCODE_FOLDER% VSCODE_FOLDER
+	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
 	
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	call dk_set VSCODE "%DKTOOLS_DIR%\%VSCODE_FOLDER%"

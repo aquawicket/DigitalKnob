@@ -23,7 +23,7 @@ call "../../../DKBatch/functions/DK.cmd"
     call dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
-    call dk_convertToLowercase %CMAKE_FOLDER% CMAKE_FOLDER
+    call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
     call dk_set CMAKE_EXE "%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
         

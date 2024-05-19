@@ -15,7 +15,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_getFilename %OPENJDK_DL% OPENJDK_DL_FILE
 	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_DL_NAME
 	call dk_convertToCIdentifier %OPENJDK_DL_NAME% OPENJDK_FOLDER
-	call dk_convertToLowercase %OPENJDK_FOLDER% OPENJDK_FOLDER
+	call dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
 	call dk_validate DK3RDPARTY_DIR dk_validateBranch
 	call dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%

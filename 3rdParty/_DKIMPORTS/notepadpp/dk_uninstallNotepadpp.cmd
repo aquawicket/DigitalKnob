@@ -21,7 +21,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_getFilename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	call dk_convertToLowercase %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
+	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
