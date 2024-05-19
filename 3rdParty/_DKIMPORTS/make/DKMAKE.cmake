@@ -1,7 +1,7 @@
 # https://packages.msys2.org/base/make
 
 if(MSYSTEM)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	

@@ -19,7 +19,6 @@ if(WIN_HOST)
 	set(JAVA_VERSION 11)
 	set(registerJDK11 ${OPENJDK}/registerJDK.cmd)
 
-	#file(TO_NATIVE_PATH "${OPENJDK}" OPENJDK_WINPATH)
 	dk_getNativePath("${OPENJDK}" OPENJDK_WINPATH)
 	
 	file(WRITE ${registerJDK11} "@echo off\n")
