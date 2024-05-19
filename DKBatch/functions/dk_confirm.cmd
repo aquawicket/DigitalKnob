@@ -20,8 +20,7 @@ call DK
 		goto:eof
 	) 
 	
-	 if "%~2" neq "" endlocal & set "%2=false"
-	 call dk_printVar "%2"
+	 if "%~2" neq "" endlocal & set "%2=false" & call dk_printVar "%2"
 	(call)
 goto:eof
 
