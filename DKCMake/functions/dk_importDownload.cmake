@@ -38,11 +38,11 @@ function(dk_importDownload url) #install_path #PATCH
 	get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
 	dk_verbose(Lib)
 	
-	string(TOUPPER ${Lib} LIB)
+	dk_toUpper(${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
 	dk_verbose(LIBVAR)
 	
-	string(TOLOWER ${Lib} FOLDER)
+	dk_toLower(${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_error("${LIBVAR}_FOLDER invalid")

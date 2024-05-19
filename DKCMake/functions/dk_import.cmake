@@ -22,7 +22,7 @@ function(dk_import url)
 	dk_printVar(plugin)
 	
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
-	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
+	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
 	
 	dk_printVar(${plugin_var})
 	dk_printVar(${plugin_var}_URL)

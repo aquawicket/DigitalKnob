@@ -19,7 +19,7 @@ function(dk_install plugin) #PATCH
 	
 	# set PLUGIN_URL variable
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
-	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
+	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
 	set(dest_path ${${plugin_var}})			
 	set(url_path ${${plugin_var}_URL})
 	
@@ -33,7 +33,7 @@ function(dk_install plugin) #PATCH
 	#	get_filename_component(plugin ${plugin} NAME)
 	#endif()
 	
-	#string(TOLOWER ${plugin} plugin_lower)
+	#dk_toLower(${plugin} plugin_lower)
 	#if(NOT ${plugin} STREQUAL ${plugin_lower})
 	#	dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
 	#endif()
@@ -69,13 +69,13 @@ function(dk_install plugin) #PATCH
 	dk_debug(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
-	string(TOLOWER ${url_filename} url_filename_lower)
+	dk_toLower(${url_filename} url_filename_lower)
 	string(FIND ${url_filename_lower} ${plugin} index)
 	if(${index} EQUAL -1)
 	#dk_includes(${url_filename_lower} ${plugin} result)
 	#if(NOT ${result})
 		dk_debug("The download filename ${url_filename} does not contaian the import name ${plugin}")
-		string(TOLOWER ${dest_filename} dest_filename_lower)
+		dk_toLower(${dest_filename} dest_filename_lower)
 		string(FIND ${dest_filename_lower} ${plugin} index)
 		if(${index} EQUAL -1)
 		#dk_includes(${dest_filename_lower} ${plugin} result)

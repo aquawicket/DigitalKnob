@@ -82,7 +82,7 @@ function(dk_getTargetTriple)
 		
 		### Set MSYSTEM
 		if(DK_TARGET_ENV)
-			string(TOUPPER ${DK_TARGET_ENV} DK_TARGET_ENV_UPPER)
+			dk_toUpper(${DK_TARGET_ENV} DK_TARGET_ENV_UPPER)
 			#if(${DK_TARGET_ARCH} MATCHES "arm32")
 			#	dk_set(MSYSTEM "${DK_TARGET_ENV_UPPER}ARM32")
 			#endif()
@@ -117,13 +117,13 @@ function(dk_getTargetTriple)
 		dk_printVar(OS)
 
 		### Set ${OS} variable ON ##
-		string(TOUPPER ${DK_TARGET_OS} DK_TARGET_OS_UPPER)
+		dk_toUpper(${DK_TARGET_OS} DK_TARGET_OS_UPPER)
 		dk_set(${DK_TARGET_OS_UPPER} ON)
 		dk_printVar(DK_TARGET_OS_UPPER)
 
 		### Set ARCH variable ON ##
 		if(DK_TARGET_ARCH)
-			string(TOUPPER ${DK_TARGET_ARCH} DK_TARGET_ARCH_UPPER)
+			dk_toUpper(${DK_TARGET_ARCH} DK_TARGET_ARCH_UPPER)
 		endif()
 
 		if(DK_TARGET_ARCH_UPPER)

@@ -112,7 +112,7 @@ foreach(plugin ${dkdepend_list})
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
 	if(PROJECT_INCLUDE_3RDPARTY)
-		string(TOUPPER ${plugin} PLUGIN_NAME)
+		dk_toUpper(${plugin} PLUGIN_NAME)
 		if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
 			#if(MULTI_CONFIG)
 			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
@@ -132,8 +132,8 @@ foreach(plugin ${dkdepend_list})
 	
 	####################### DKPlugins #######################
 	# Libraries in the /DKPlugins folder
-	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
-	string(TOLOWER "${plugin}" plugin_lower)	
+	dk_toLower("${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
+	dk_toLower("${plugin}" plugin_lower)	
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
 	

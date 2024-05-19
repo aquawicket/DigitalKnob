@@ -10,7 +10,7 @@ include_guard()
 function(dk_updateAndroidName app_name)
 	dk_debugFunc(${ARGV})
 	
-	string(TOLOWER ${app_name} app_name)
+	dk_toLower(${app_name} app_name)
 	if(ANDROID)
 		# update all files and folders recursivley
 		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DK_PROJECT_DIR}/${OS}/" "${DK_PROJECT_DIR}/${OS}/*")

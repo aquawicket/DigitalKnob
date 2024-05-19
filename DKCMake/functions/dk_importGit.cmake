@@ -64,7 +64,7 @@ function(dk_importGit url) #branch #id #PATCH
 		endif()
 	endif()
 	
-	string(TOLOWER ${Lib} Lib)
+	dk_toLower(${Lib} Lib)
 	dk_verbose(Lib)
 	
 	math(EXPR last "${url_list_size}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
@@ -76,7 +76,7 @@ function(dk_importGit url) #branch #id #PATCH
 	#if(${index})
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
-			string(TOLOWER ${ID} FOLDER)
+			dk_toLower(${ID} FOLDER)
 			dk_verbose(FOLDER)
 		endif()
 	endif()
@@ -86,7 +86,7 @@ function(dk_importGit url) #branch #id #PATCH
 		dk_error("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${FOLDER}\n\n")
 	endif()
 	
-	string(TOUPPER ${Lib} LIBVAR)
+	dk_toUpper(${Lib} LIBVAR)
 	if(NOT LIBVAR)
 		dk_error("$(LIBVAR) is invalid")
 	endif()

@@ -129,8 +129,8 @@ function(dk_getHostTriple)
 	#dk_printVar(HOST_ARCH)
 	
 	### set [HOST]_[HOST_ARCH] variable
-	string(TOUPPER ${HOST} HOST_UPPER)
-	string(TOUPPER ${HOST_ARCH} HOST_ARCH_UPPER)
+	dk_toUpper(${HOST} HOST_UPPER)
+	dk_toUpper(${HOST_ARCH} HOST_ARCH_UPPER)
 	#set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE CACHE INTERNAL "")
 	dk_set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
 	#string(STRIP "${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}" ${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
