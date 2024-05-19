@@ -7,7 +7,7 @@ include_guard()
 #
 #	@code	- The code to evaluate
 #
-macro(dk_cmakeLanguage code)
+function(dk_cmakeLanguage code)
 	dk_debugFunc(${ARGV})
 	
 	if(${CMAKE_VERSION} GREATER 3.17)
@@ -17,4 +17,4 @@ macro(dk_cmakeLanguage code)
 		include(${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
 		file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
 	endif()
-endmacro()
+endfunction()

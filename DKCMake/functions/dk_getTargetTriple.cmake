@@ -6,7 +6,7 @@ include_guard()
 #	set the cached target variables 
 #
 
-macro(dk_getTargetTriple)
+function(dk_getTargetTriple)
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
 		get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 		dk_printVar(CMAKE_BINARY_DIR)
@@ -149,4 +149,4 @@ macro(dk_getTargetTriple)
 		dk_printVar(DEBUG_DIR)
 		dk_printVar(RELEASE_DIR)
 	endif()
-endmacro()
+endfunction()

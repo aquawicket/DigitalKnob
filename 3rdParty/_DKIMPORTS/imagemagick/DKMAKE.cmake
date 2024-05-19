@@ -10,15 +10,14 @@ dk_depend(vc_redist)
 ### IMPORT ###
 UNIX_HOST_dk_import	(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 #WIN_HOST_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.1-28-portable-Q8-x86.zip)
-WIN_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-31-portable-Q16-x86.zip)
+WIN_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-32-portable-Q16-x86.zip)
 WIN_HOST_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
 
-if(WIN_HOST)
-	return()
-endif()
+
 
 if(DKAPP)
 if(NOT ANDROID)
+if(NOT WIN)
 	### LINK ###
 	dk_include				(${IMAGEMAGICK}/${OS})
 
@@ -36,5 +35,6 @@ if(NOT ANDROID)
 	dk_configure			(${IMAGEMAGICK})
 	
 	dk_build				(${IMAGEMAGICK})
+endif()
 endif()
 endif()

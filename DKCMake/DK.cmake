@@ -23,7 +23,7 @@ set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands o
 set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
 set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
-set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
+#set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the current cmake file
 set(DELETE_DOWNLOADS			0		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 #set(ENABLE_dk_todo				1		CACHE INTERNAL "")	# enable dk_todo() functions
@@ -130,5 +130,7 @@ endif()
 ##### Load Function files #################
 dk_load(dk_getHostTriple)
 dk_getHostTriple()
+dk_load(dk_getTargetTriple)
+dk_getTargetTriple()
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(dk_importVariables)

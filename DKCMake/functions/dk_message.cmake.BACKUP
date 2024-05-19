@@ -8,7 +8,7 @@ include_guard()
 #
 #	@msg	- The message to print
 #
-macro(dk_message msg)
+function(dk_message msg)
 	#dk_debugFunc(${ARGV})
 	
 	string(REPLACE " " "" var ${msg})
@@ -18,4 +18,4 @@ macro(dk_message msg)
 	else()
 		message(STATUS "${H_black}${STACK_HEADER}${clr} ${msg} ")
 	endif()
-endmacro()
+endfunction()

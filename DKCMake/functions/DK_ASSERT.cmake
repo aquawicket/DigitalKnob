@@ -7,7 +7,7 @@ include_guard()
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-macro(DK_ASSERT expression)
+function(DK_ASSERT expression)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT ${expression})
@@ -22,4 +22,4 @@ macro(DK_ASSERT expression)
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()
-endmacro()
+endfunction()

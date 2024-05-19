@@ -7,7 +7,7 @@ include_guard()
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-macro(DK_ASSERT_PATH path)
+function(DK_ASSERT_PATH path)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
@@ -21,4 +21,4 @@ macro(DK_ASSERT_PATH path)
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()
-endmacro()
+endfunction()

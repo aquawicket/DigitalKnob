@@ -5,7 +5,7 @@ include_guard()
 #
 #	Exit cmake
 #
-macro(dk_exit)
+function(dk_exit)
 	dk_debugFunc(${ARGV})
 	
 	dk_debug("#################### dk_exit() ####################")
@@ -14,4 +14,4 @@ macro(dk_exit)
 	else()
 		execute_process(COMMAND killall -9 cmake)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
-endmacro()
+endfunction()

@@ -30,6 +30,8 @@ dk_info("############################################################")
 dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
+
+dk_getTargetTriple()
 get_filename_component(APP_NAME ${DK_PROJECT_DIR} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 set(APP_NAME ${APP_NAME}_APP)

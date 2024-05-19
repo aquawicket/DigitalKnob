@@ -5,7 +5,7 @@ include_guard()
 #
 #	Print all cmake varibles and save to /cmake_variables.temp 
 #
-macro(dk_printAllVariables)
+function(dk_printAllVariables)
 	dk_debugFunc(${ARGV})
 	
 	get_cmake_property(varNames VARIABLES)
@@ -14,4 +14,4 @@ macro(dk_printAllVariables)
 		dk_debug(varName)
 		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
 	endforeach()
-endmacro()
+endfunction()

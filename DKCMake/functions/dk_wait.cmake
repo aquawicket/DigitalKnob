@@ -8,7 +8,7 @@ include_guard()
 #	@timeout:(Optional)	- default = 60
 #	@msg:(Optional)		- default = "press and key to continue."
 #
-macro(dk_wait) 
+function(dk_wait) 
 	#dk_debugFunc(${ARGV})
 	
 	dk_isNumber("${ARGV0}" isNumber)
@@ -35,4 +35,4 @@ macro(dk_wait)
 	else()
 		dk_error("dk_wait(): Not implemented for this platform")
 	endif()	
-endmacro()
+endfunction()

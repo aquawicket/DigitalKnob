@@ -1,6 +1,6 @@
 include_guard()
 
-macro(dk_dumpAllVariables file)
+function(dk_dumpAllVariables file)
 	dk_debugFunc(${ARGV})
 	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
@@ -9,4 +9,4 @@ macro(dk_dumpAllVariables file)
 	foreach (var ${vars})
 		file(APPEND ${file} "${var}:	${${var}}\n")
 	endforeach()
-endmacro()
+endfunction()

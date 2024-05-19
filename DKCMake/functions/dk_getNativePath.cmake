@@ -18,8 +18,8 @@ endfunction()
 
 
 
-macro(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_todo()
 	
-endmacro(DKTEST)
+endfunction(DKTEST)

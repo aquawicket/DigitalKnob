@@ -8,9 +8,9 @@ include_guard()
 #	@func				- The name of the .cmake function file as well as the name of the function
 #	@args (optional) 	- The arguments to pass to the function
 #
-macro(dk_call func) #parameters
+function(dk_call func) #parameters
 	dk_debugFunc(${ARGV})
 	
 	dk_load(${func})
 	dk_eval("${func}($ARGN)")
-endmacro()
+endfunction()

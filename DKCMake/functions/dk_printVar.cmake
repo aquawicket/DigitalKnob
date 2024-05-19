@@ -6,7 +6,7 @@ include_guard()
 #	If the msg is a defined variable, print it's name and value
 #	@var	- The variable name to print
 #
-macro(dk_printVar var)
+function(dk_printVar var)
 	#dk_debugFunc(${ARGV})
 	
 	if(DEFINED "${var}")
@@ -50,4 +50,4 @@ macro(dk_printVar var)
 #		#message("returning from ${CMAKE_CURRENT_FUNCTION}()")
 #		#return() #return out out calling function
 #	endif()
-endmacro()
+endfunction()

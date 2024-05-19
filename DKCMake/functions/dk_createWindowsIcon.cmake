@@ -10,7 +10,7 @@ function(dk_createWindowsIcon inpath outpath)
 	dk_debugFunc(${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
-	if(IMAGEMAGICK_CONVERT)
+	if(EXISTS ${IMAGEMAGICK_CONVERT})
 		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -define icon:auto-resize=256,128,64,48,32,16 ${outpath})
 	else()
 		dk_error("IMAGEMAGICK_CONVERT is invalid!")

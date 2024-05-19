@@ -8,12 +8,12 @@ include_guard()
 #	@variable	- The variable to test
 #	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
-macro(dk_isNumber variable RESULT)
+function(dk_isNumber variable RESULT)
 	dk_debugFunc(${ARGV})
 	
 	if(${variable} MATCHES "^[0-9]+$")
-		set(${RESULT} TRUE)
+		set(${RESULT} TRUE PARENT_SCOPE)
 	else()
-		set(${RESULT} FALSE)
+		set(${RESULT} FALSE PARENT_SCOPE)
 	endif()
-endmacro()
+endfunction()

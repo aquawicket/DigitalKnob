@@ -8,7 +8,7 @@ include_guard()
 #
 #	https://stackoverflow.com/a/66755317/688352
 #
-macro(dk_applyPatch directory patch_file)
+function(dk_applyPatch directory patch_file)
 	dk_debugFunc(${ARGV})
 	
 	## First run a check 
@@ -47,4 +47,4 @@ macro(dk_applyPatch directory patch_file)
 		dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
 	dk_info(output)
-endmacro()
+endfunction()

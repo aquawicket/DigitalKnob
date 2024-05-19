@@ -9,7 +9,7 @@ include_guard()
 #	<HOST>_HOST 	= WIN_HOST, UNIX_HOST, MAC_HOST, ANDROID_HOST
 #	HOST_ARCH		= arm32, arm64, x86, x86_64
 
-macro(dk_getHostTriple)
+function(dk_getHostTriple)
 	dk_debugFunc(${ARGV})
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
@@ -136,4 +136,4 @@ macro(dk_getHostTriple)
 	#string(STRIP "${${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST}" ${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
 	#dk_printVar(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
 	
-endmacro()
+endfunction()

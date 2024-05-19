@@ -5,7 +5,7 @@ include_guard()
 #
 #	TODO
 #
-macro(dk_printColorChart)
+function(dk_printColorChart)
 	dk_debugFunc(${ARGV})
 	
 	message(" ")
@@ -79,7 +79,7 @@ macro(dk_printColorChart)
 	message(   "${HBG_cyan}     HBG_cyan       ${clr}")
 	message(  "${HBG_white}     HBG_white      ${clr}")
 	message(" ")
-endmacro()
+endfunction()
 
 
 ###############################################################################
@@ -87,7 +87,7 @@ endmacro()
 #
 #	TODO
 #
-macro(dk_printStyleChart)
+function(dk_printStyleChart)
 	dk_debugFunc(${ARGV})
 	
 	message(" ")
@@ -103,4 +103,4 @@ macro(dk_printStyleChart)
 	message(       "${ESC_8}     ESC_8         ${clr}")
 	message(       "${ESC_9}     ESC_9         ${clr}")
 	message(      "${ESC_10}     ESC_10        ${clr}")
-endmacro()
+endfunction()
