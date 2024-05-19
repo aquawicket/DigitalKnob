@@ -2,12 +2,16 @@
 call "../../../DKBatch/functions/DK.cmd"
 
 
-set	"QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
-
-
+::####################################################################
+::# dk_installQemu()
+::#
 :dk_uninstallQemu () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	
+	
+	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	
 	call dk_getName %QEMU_DL% QEMU_DL_NAME
 	call dk_convertToCIdentifier %QEMU_DL_NAME% QEMU_DL_NAME

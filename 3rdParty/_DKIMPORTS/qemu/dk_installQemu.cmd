@@ -2,12 +2,16 @@
 call "../../../DKBatch/functions/DK.cmd"
 
 
-set	"QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
-
-
+::####################################################################
+::# dk_installQemu()
+::#
 :dk_installQemu () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	
+	
+	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	
 	call dk_getFilename %QEMU_DL% QEMU_DL_FILE
 	call dk_removeExtension %QEMU_DL_FILE% QEMU_NAME
@@ -23,7 +27,9 @@ set	"QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	call dk_getNativePath %QEMU% QEMU_INSTALL_PATH
 	call dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /D=%QEMU_INSTALL_PATH%"
 	call %command_string%
-
+	
+	if NOT exist "%QEMU_IMG_EXE%"  call dk_error "cannot find qemu"
+	
 	:: install via CMake
 ::  call dk_getDKPaths
 ::	call dk_validateBranch

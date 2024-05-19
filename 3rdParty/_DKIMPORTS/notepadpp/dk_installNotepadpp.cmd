@@ -8,16 +8,14 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
+	
 	call dk_validate HOST_OS "dk_getHostTriple"
 	
-::	if defined WIN_ARM64_HOST  (set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip")
-::	if defined WIN_X86_HOST	   (set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip")
-::	if defined WIN_X86_64_HOST (set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip")	
-	if "%HOST_ARCH%"=="arm64"  call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
-    if "%HOST_ARCH%"=="x86"    call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
-    if "%HOST_ARCH%"=="x86_64" call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip"
+	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip"
 	
-	if not defined NOTEPADPP_DL goto:eof
+	if not defined NOTEPADPP_DL call dk_error "NOTEPADPP_DL is invalid"
 	
 	call dk_getFilename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
@@ -46,8 +44,7 @@ call ../../../DKBatch/functions/DK.cmd
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
 	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
-	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "" "" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
 
 	:::::: associateFiles.cmd ###
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
