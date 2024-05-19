@@ -3,14 +3,18 @@
 
 dk_validate(HOST "dk_getHostTriple()")
 
-if(NOT WIN_HOST)
-	dk_undepend(msys2)
-	dk_return()
-endif()
+#if(NOT WIN_HOST)
+#	dk_undepend(msys2)
+#	dk_return()
+#endif()
 
 
 ### INSTALL ###
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
+
+if(NOT MSYS2_DL)
+	dk_error("MSYS2_DL is invalid")
+endif()
 
 if(NOT MSYS2_DL_FILE)
 	get_filename_component(MSYS2_DL_FILE ${MSYS2_DL} NAME)
@@ -22,13 +26,13 @@ if(MSYS2_FOLDER)
 	dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")
 	dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 endif()
-dk_debug(MSYS2_DL_FILE)
-dk_debug(MSYS2_FOLDER)
-dk_debug(MSYS2)
+dk_printVar(MSYS2_DL_FILE)
+dk_printVar(MSYS2_FOLDER)
+dk_printVar(MSYS2)
 
 
 dk_findProgram(CMD_EXE cmd.exe)
-if(CMD_EXE)
+if(CMD_EXE OR MINGW)
 	dk_set(MSYS2_GENERATOR		"MinGW Makefiles")	# if in cmd
 else()
 	dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")	# if in Shell

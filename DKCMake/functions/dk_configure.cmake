@@ -16,7 +16,8 @@ function(dk_configure path) #ARGN
 		if(SINGLE_CONFIG)
 			# Make sure the plugin variable is alpha-numeric and uppercase
 			string(TOUPPER ${plugin} PLUGIN_NAME)
-			string(MAKE_C_IDENTIFIER ${PLUGIN_NAME} PLUGIN_NAME)
+			#string(MAKE_C_IDENTIFIER ${PLUGIN_NAME} PLUGIN_NAME)
+			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
 			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
 		endif()
 		

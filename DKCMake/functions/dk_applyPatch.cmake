@@ -9,7 +9,8 @@ include_guard()
 #	https://stackoverflow.com/a/66755317/688352
 #
 macro(dk_applyPatch directory patch_file)
-
+	dk_debugFunc(${ARGV})
+	
 	## First run a check 
 	set(COMMAND_ARGS "")
 	set(COMMAND_ARGS ${COMMAND_ARGS} git)

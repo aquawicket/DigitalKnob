@@ -1,7 +1,7 @@
 include_guard()
 
 macro(dk_dumpAllVariables file)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
 	get_cmake_property(vars VARIABLES)

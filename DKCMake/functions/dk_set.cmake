@@ -28,5 +28,6 @@ function(dk_set variable)# value)
 #		dk_debug(${variable})
 #	endif()
 #	##########################################
+	dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")

@@ -7,10 +7,10 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::#
 ::#
 :dk_printVar () {
-	set OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%
-	set ENABLE_dk_debugFunc=0
+	set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"
+	set "ENABLE_dk_debugFunc=0"
 	call dk_debugFunc
-	set ENABLE_dk_debugFunc=%OLD_ENABLE_dk_debugFunc%
+	set "ENABLE_dk_debugFunc=%OLD_ENABLE_dk_debugFunc%"
 	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	if "%ENABLE_dk_printVar%" neq "1"  goto:eof

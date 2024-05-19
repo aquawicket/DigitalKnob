@@ -10,18 +10,12 @@ call DK
 ::#
 :dk_echo () {
 	::call dk_debugFunc
+	if ["%*"] equ [""] (echo. & goto:eof)
 	
-	setlocal enableDelayedExpansion	
-		set "_message_=%*"
-		
+	setlocal enableDelayedExpansion
+		set "_message_=%*"	
 		:: if msg starts and ends with quotes, remove the first and last
 		if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
-		
-		if "%_message_%" equ "" ( 
-			echo. 
-			goto:eof
-		) 
-		
 		::echo %*
 		echo %_message_%
 	endlocal

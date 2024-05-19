@@ -5,7 +5,6 @@ include_guard()
 #
 # 	evals the specified cmake code.
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
-# 	WARNING: allowing eval can of course be dangerous.
 #
 function(dk_eval code)
 	#dk_debugFunc(${ARGV})

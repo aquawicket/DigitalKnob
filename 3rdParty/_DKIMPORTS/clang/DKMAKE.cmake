@@ -11,8 +11,10 @@ if(MSYSTEM)
 		dk_set(CLANG_CXX_COMPILER ${MSYS2}/clang32/bin/clang++.exe)
 	elseif(CLANG64)
 		dk_command(pacman -S mingw-w64-clang-x86_64-clang --needed --noconfirm)		# CLANG64
-		dk_set(CLANG_C_COMPILER ${MSYS2}/clang64/bin/clang.exe)
-		dk_set(CLANG_CXX_COMPILER ${MSYS2}/clang64/bin/clang++.exe)
+		#dk_set(CLANG_C_COMPILER    ${MSYS2}/clang64/bin/clang.exe)
+		#dk_set(CLANG_CXX_COMPILER  ${MSYS2}/clang64/bin/clang++.exe)
+		dk_set(CMAKE_C_COMPILER	   ${MSYS2}/clang64/bin/clang.exe)
+		dk_set(CMAKE_CXX_COMPILER  ${MSYS2}/clang64/bin/clang++.exe)
 	elseif(CLANGARM64)
 		dk_command(pacman -S mingw-w64-clang-aarch64-clang --needed --noconfirm)	# CLANGARM64
 		dk_set(CLANG_C_COMPILER ${MSYS2}/clangarm64/bin/clang.exe)

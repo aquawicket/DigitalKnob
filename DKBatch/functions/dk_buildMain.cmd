@@ -39,13 +39,13 @@ setlocal enableDelayedExpansion
 ::	fi
 	
 ::	if [ -n "${USER-}" ]; then
-::		dk_printVar USER
+::		call dk_printVar USER
 ::		DKUSERNAME=$USER
 ::	elif [ -n "${USERNAME-}" ]; then
-::		dk_printVar USERNAME
+::		call dk_printVar USERNAME
 ::		DKUSERNAME=$USERNAME
 ::	fi
-::	dk_printVar DKUSERNAME
+::	call dk_printVar DKUSERNAME
 	
 ::	call dk_printVar SHLVL
 ::  call dk_printVar MSYSTEM

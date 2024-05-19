@@ -26,7 +26,8 @@ get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE INT
 
 ###### load default function ####
 include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-#include(${DKCMAKE_DIR}/functions/dk_eval.cmake)
+include(${DKCMAKE_DIR}/functions/dk_eval.cmake)
+include(${DKCMAKE_DIR}/functions/dk_debugFunc.cmake)
 dk_load(dk_eval)
 dk_load(dk_escapeSequences)
 dk_escapeSequences()

@@ -40,7 +40,8 @@ function(dk_bin2h)
     # removes trailing comma
 #	string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
     # converts the variable name into proper C identifier
-    string(MAKE_C_IDENTIFIER "${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
+    #string(MAKE_C_IDENTIFIER "${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
+	dk_convertToCIdentifier("${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
     string(TOUPPER "${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
     # declares byte array and the length variables
     set(arrayDefinition "std::string ${DK_BIN2H_VARIABLE_NAME} = \"${hexString}\";")

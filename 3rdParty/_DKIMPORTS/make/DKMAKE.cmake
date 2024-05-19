@@ -11,6 +11,7 @@ if(MSYSTEM)
 	elseif(CLANG64)
 		dk_command(pacman -S mingw-w64-clang-x86_64-make --needed --noconfirm)			# CLANG64
 		dk_findProgram(MAKE_PROGRAM mingw32-make "${MSYS2}/clang64/bin")
+		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2}/clang64/bin")
 	elseif(CLANGARM64)
 		dk_command(pacman -S mingw-w64-clang-aarch64-make --needed --noconfirm)			# CLANGARM64
 		dk_findProgram(MAKE_PROGRAM mingw32-make "${MSYS2}/clangarm64/bin")

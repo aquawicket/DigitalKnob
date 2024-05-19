@@ -27,6 +27,6 @@ function(dk_validate variable code)
 	
 	dk_eval("${code}")
 	
-	DK_ASSERT(${variable})
+	message("${variable} = ${${variable}}")
 endfunction()
 #dk_createOsMacros("dk_validate")

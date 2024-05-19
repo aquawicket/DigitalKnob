@@ -8,6 +8,8 @@ include_guard()
 #	@code	- The code to evaluate
 #
 macro(dk_cmakeLanguage code)
+	dk_debugFunc(${ARGV})
+	
 	if(${CMAKE_VERSION} GREATER 3.17)
 		cmake_language(CALL ${code})
 	else()

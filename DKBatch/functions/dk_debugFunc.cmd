@@ -34,7 +34,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set /a "__ARGC__=0"
 	FOR /L %%a IN (1,1,9) DO (
 	   if defined ARGV[%%a] (
-		  rem call echo ARGV[%%a] = %%ARGV[%%a]%%
+		  rem call echo ARGV[%%a] = '%%ARGV[%%a]%%'
 	      set /a "__ARGC__=%%a"
 	   )
 	)

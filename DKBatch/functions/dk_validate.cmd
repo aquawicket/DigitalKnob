@@ -15,7 +15,7 @@ call DK
 	
 	if not defined %~1 dk_error "dk_validate was unable to set the variable with the code provided"
 	if "%~1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
-	dk_printVar %1
+	call dk_printVar "%~1"
 goto:eof
 
 

@@ -9,7 +9,7 @@ include_guard()
 #	@args (optional) 	- The arguments to pass to the function
 #
 macro(dk_call func) #parameters
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_load(${func})
 	dk_eval("${func}($ARGN)")

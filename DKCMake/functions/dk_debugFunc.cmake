@@ -1,5 +1,10 @@
 include_guard()
 
+
+if(NOT DEFINED ENABLE_dk_debugFunc)
+	dk_load(dk_set)
+	dk_set(ENABLE_dk_debugFunc 1)
+endif()
 ##################################################################################
 # dk_debugFunc(${ARGV})
 #
@@ -15,7 +20,7 @@ include_guard()
 macro(dk_debugFunc)
 	#dk_debugFunc(${ARGV})
 	
-	if(DKDEBUGFUNC_ENABLED)
+	if(ENABLE_dk_debugFunc)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
 		endif()

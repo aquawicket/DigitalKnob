@@ -28,5 +28,5 @@ call DK
 	::echo %col1% %col2% %col3% %col4%
 	set "output=%col1% %col2% %col3% %col4%"
     endlocal & set "%1=%output%"
-	call dk_printVar "%1"
+	::call dk_printVar "%1"
 goto:eof

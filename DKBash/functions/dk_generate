@@ -163,6 +163,7 @@ dk_generate() {
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:$PATH
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		set -- "-G MSYS Makefiles" "$@"
+		set -- "$@" "-DMSYSTEM=CLANG64"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_mingw" ]; then
@@ -173,6 +174,7 @@ dk_generate() {
 	if [ "$TARGET_OS" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		set -- "-G MSYS Makefiles" "$@"
+		set -- "$@" "-DMSYSTEM=UCRT64"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######

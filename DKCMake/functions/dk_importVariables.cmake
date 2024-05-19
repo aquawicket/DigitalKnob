@@ -34,9 +34,11 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	
 	##### Test that we dont have any non-alphanumeric characters ######
 	#string(MAKE_C_IDENTIFIER ${PLUGIN_URL} PLUGIN_URL_TEST)
+	#dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL_TEST)
 	#if(NOT ${PLUGIN_URL} STREQUAL ${PLUGIN_URL_TEST})
 	#	dk_error("${PLUGIN_URL} contains non-alphanumeric characters")
 	#	#string(MAKE_C_IDENTIFIER ${PLUGIN_URL} PLUGIN_URL)
+	#	dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL)
 	#endif()
 	###################################################################
 	
@@ -79,8 +81,8 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})
 	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
-	dk_printVar(PLUGIN_GIT_BRANCH)
-	set(PLUGIN_INSTALL_NAME ${NAME})
+	#dk_printVar(PLUGIN_GIT_BRANCH)
+	dk_set(PLUGIN_INSTALL_NAME ${NAME})
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)			# PLUGIN_URL_FILENAME
@@ -258,7 +260,8 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	#dk_set(PLUGIN_VAR_PREFIX ${PLUGIN_IMPORT_NAME_UPPER})
 	
 	##### Warn if there are any non-alphanumeric characters in the PLUGIN_IMPORT_NAME ######
-	string(MAKE_C_IDENTIFIER ${PLUGIN_IMPORT_NAME_UPPER} PLUGIN_VAR_PREFIX)
+	#string(MAKE_C_IDENTIFIER ${PLUGIN_IMPORT_NAME_UPPER} PLUGIN_VAR_PREFIX)
+	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} PLUGIN_VAR_PREFIX)
 	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${PLUGIN_VAR_PREFIX})
 		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${PLUGIN_VAR_PREFIX}")
 	endif()
@@ -292,6 +295,8 @@ function(dk_importVariables PLUGIN_URL RESULT)
 		dk_printVar(${PLUGIN_VAR_PREFIX}_TAG)
 	endif()
 	
-	#set(${RESULT} ${PLUGIN_INSTALL_NAME_LOWER} PARENT_SCOPE)
+	set(${RESULT} ${PLUGIN_INSTALL_NAME_LOWER} PARENT_SCOPE)
 	set(${RESULT} ${PLUGIN_IMPORT_NAME_LOWER} PARENT_SCOPE)
+	dk_printVar(RESULT)
+	dk_printVar(PLUGIN_IMPORT_NAME_LOWER)
 endfunction()

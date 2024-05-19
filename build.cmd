@@ -92,16 +92,16 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 	::call:dk_validate_sudo
 	
 ::	if dk_defined WSLENV; then 
-::		dk_info "WSLENV is on"
-::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+::		call:dk_info "WSLENV is on"
+::		call:dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 ::		sudo chown -R "$LOGNAME" "$HOME"
 ::	fi
 	
 ::	if [ -n "${USER-}" ]; then
-::		dk_printVar USER
+::		call:dk_printVar USER
 ::		DKUSERNAME=$USER
 ::	elif [ -n "${USERNAME-}" ]; then
-::		dk_printVar USERNAME
+::		call:dk_printVar USERNAME
 ::		DKUSERNAME=$USERNAME
 ::	fi
 ::	dk_printVar DKUSERNAME

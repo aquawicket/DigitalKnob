@@ -6,9 +6,8 @@ include_guard()
 #	Clear the console
 #
 function(dk_clearScreen)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
-	dk_debug("clear screen")
 	
 	find_program(CMD_EXE cmd.exe)
 	dk_printVar(CMD_EXE)

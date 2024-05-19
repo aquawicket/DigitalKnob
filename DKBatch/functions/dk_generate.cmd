@@ -43,7 +43,7 @@ call DK
     if "%DKLEVEL%"=="Rebuild"        call dk_appendCmakeArgs -DREBUILD=ON
     if "%DKLEVEL%"=="RebuildAll"     call dk_appendCmakeArgs -DREBUILDALL=ON
     if "%DKLINK%"=="Static"          call dk_appendCmakeArgs -DSTATIC=ON
-    if "%DKLINK%"=="Shared"          call dk_appendCmakeArgs -DSHARED=ON
+    if "%DKLINK%"=="Shared"          call dk_appendCmakeArgs -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" call dk_appendCmakeArgs -DEMSCRIPTEN=ON
         
     set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
@@ -89,6 +89,15 @@ call DK
 	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependCmakeArgs -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependCmakeArgs -G MinGW Makefiles
 	
+	
+	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prependCmakeArgs -DMSYSTEM=CLANGARM64
+	if "%TARGET_OS%"=="win_x86_clang"      call dk_prependCmakeArgs -DMSYSTEM=CLANG32
+	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prependCmakeArgs -DMSYSTEM=MINGW32
+	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prependCmakeArgs -DMSYSTEM=CLANG64
+	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependCmakeArgs -DMSYSTEM=MINGW64
+	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependCmakeArgs -DMSYSTEM=UCRT64
+	
+	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
 ::	set "TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
 ::	call dk_printVar TOOLCHAIN
@@ -105,11 +114,11 @@ call DK
 ::	###### CMake Configure ######
 	call %DKIMPORTS_DIR%\cmake\dk_InstallCmake
 	
-    call dk_echo
+    ::call dk_echo
     call dk_info "****** CMAKE COMMAND ******"
-    call dk_debug ""%CMAKE_EXE%" %CMAKE_ARGS%"
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-    call dk_echo
+    echo "%CMAKE_EXE% %CMAKE_ARGS%"
+    call "%CMAKE_EXE%" %CMAKE_ARGS%
+    ::call dk_echo
 goto:eof
 
 

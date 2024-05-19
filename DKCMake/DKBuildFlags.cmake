@@ -122,7 +122,7 @@ include_guard()
 #	dk_error("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
 #endif()
 
-
+dk_validate(DKIMPORTS_DIR "dk_getDKPaths()")
 
 ########### CORE DEPENDENCIES ############
 dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)

@@ -8,7 +8,7 @@ include_guard()
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 macro(DK_ASSERT expression)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT ${expression})
 		#message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${clr}")

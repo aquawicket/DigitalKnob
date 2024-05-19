@@ -34,19 +34,16 @@ include_guard()
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_validate( DIGITALKNOB_DIR  "dk_getDKPaths()" )
+dk_validate(DIGITALKNOB_DIR  "dk_getDKPaths()")
 
 dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
-dk_printVar(CURRENT_DIR)
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
-dk_printVar(CMAKE_SUPPRESS_REGENERATION)
 
 ### Install DKBIN binary directory ###
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
 endif()
-dk_printVar(CMAKE_INSTALL_PREFIX)
 
 ###########################################################################
 ## Set the IDE variable
@@ -55,30 +52,23 @@ dk_printVar(CMAKE_CXX_COMPILER_ID)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	dk_set(GNU ON)
 endif()
-dk_printVar(GNU)
 
 string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 if(${index} GREATER -1)
 	dk_set(MSVC ON)
 endif()
-dk_printVar(MSVC)
 
 if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	dk_set(MINGW ON)
 endif()
-dk_printVar(MINGW)
 
 if(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
 	dk_set(MSYS ON)
 endif()
-dk_printVar(MSYS)
 
 if(CMAKE_GENERATOR STREQUAL "Xcode")
 	dk_set(XCODE ON)
 endif()
-dk_printVar(XCODE)
-
-dk_printVar(CMAKE_GENERATOR)
 
 
 ###########################################################################
@@ -93,8 +83,6 @@ if(NOT DEBUG AND NOT RELEASE)
 	dk_set(RELEASE ON)
 #endif()
 endif()
-dk_printVar(DEBUG)
-dk_printVar(RELEASE)
 
 
 ###########################################################################
@@ -111,7 +99,6 @@ if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
 #endif()
 #endif()
 endif()
-dk_printVar(REBUILDALL)
 
 
 ###########################################################################
@@ -124,7 +111,6 @@ if(NOT STATIC AND NOT SHARED)
 	dk_set(STATIC ON)
 #endif()
 endif()
-dk_printVar(STATIC)
 
 
 ###########################################################################
@@ -189,7 +175,6 @@ if(CMAKE_HOST_SYSTEM_VERSION)
 	string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
 	if(${contains_tinycore} GREATER -1)
 		dk_set(TINYCORE ON)
-		dk_printVar(TINYCORE)
 	endif()
 endif()
 
@@ -202,14 +187,11 @@ dk_info("")
 
 ### Set CMAKE_SKIP_RPATH ###
 dk_set(CMAKE_SKIP_RPATH ON)
-dk_printVar(CMAKE_SKIP_RPATH)
 
 if(WIN_HOST)
 	dk_set(exe .exe)
 	dk_set(bat .bat)
 endif()
-dk_printVar(exe)
-dk_printVar(bat)
 
 
 
