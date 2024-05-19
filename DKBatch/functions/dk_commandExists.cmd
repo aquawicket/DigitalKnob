@@ -6,19 +6,23 @@ call DK
 ::#
 :dk_commandExists () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     ::set "command=%~1"
  	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
     if %ERRORLEVEL% equ 0 (
-		if "%~2" neq "" endlocal & set "%2=true"
+		if not defined "%~2" goto:eof
+		
+		endlocal & set "%2=true"
 		call dk_printVar "%2"
 		(call )
 		goto:eof
 	)
 	
-	if "%~2" neq "" endlocal & set "%2=false"
+	if not defined "%~2" goto:eof
+	
+	endlocal & set "%2=false"
 	call dk_printVar "%2"
     (call)
 goto:eof

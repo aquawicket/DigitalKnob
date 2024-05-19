@@ -13,13 +13,17 @@ call DK
     call set "_haystack_=%~1"
     call set "_needle_=%~2"
     if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
-		if "%~3" neq "" endlocal & set "%3=true"
+		if not defined "%~2" goto:eof
+		
+		endlocal & set "%3=true"
 		call dk_printVar "%3"
 		(call )
 		goto:eof
 	)
 	
-    if "%~3" neq "" endlocal & set "%3=false"
+    if not defined "%~2" goto:eof
+	
+	endlocal & set "%3=false"
 	call dk_printVar "%3"
     (call)
 goto:eof

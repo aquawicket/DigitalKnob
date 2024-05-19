@@ -11,13 +11,17 @@ call DK
 	
 	::set "_path=%~1"
 	if exist "%~1" (
-		if "%~2" neq "" endlocal & set "%2=true"
+		if not defined "%~2" goto:eof
+		
+		endlocal & set "%2=true"
 		call dk_printVar "%2"
         (call )
 		goto:eof
 	)
 	
-    if "%~2" neq "" endlocal & set "%2=false"
+    if not defined "%~2" goto:eof
+	
+	endlocal & set "%2=false"
 	call dk_printVar "%2"
 	(call)
 goto:eof

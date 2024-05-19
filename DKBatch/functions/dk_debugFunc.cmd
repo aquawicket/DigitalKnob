@@ -32,45 +32,14 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::	call echo "DKSTACK[%DKSTACK_prev_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_prev_marker%].__ARGS__%%"
 	
 	set /a "__ARGC__=0"
-	FOR /L %%G IN (1,1,9) DO (
-	   if defined __%%G (
-	      call echo __%%G = %%__%%G%%
-	      set /a "__ARGC__=%%G"  
+	FOR /L %%a IN (1,1,9) DO (
+	   if defined ARGV[%%a] (
+		  rem call echo ARGV[%%a] = %%ARGV[%%a]%%
+	      set /a "__ARGC__=%%a"
 	   )
 	)
-	echo __ARGC__ = %__ARGC__%
+	set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
 
-
-::	for %%b in (%argv%) do (
-::	    echo __1 = %__1%
-::	)
-
-
-::	set /a "__ARGC__=0"
-::	for /f "tokens=*" %%a in ('echo "%__ARGS__%"') do (
-::		rem echo a = "%%a"
-::		rem call echo aa = "%%%a"
-::		rem call set "__ARGV__[%%__ARGC__%%]=%%a"
-::		rem call echo __ARGV__[%%__ARGC__%%] = %%a
-::		set /a "__ARGC__+=1"
-::	)
-::	set /a "__ARGC__-=1"
-
-::	set /a "__ARGC__=0"
-::	for %%a in (%__ARGS__%) do (
-::		call echo %%%%__ARGC__%%
-::		call set "__ARGV__[%%__ARGC__%%]=%%a"
-::		call echo __ARGV__[%%__ARGC__%%] = %%a
-::		set /a "__ARGC__+=1"
-::	)
-
-::	set /a "cleanCount=%__ARGC__%"
-::	:cleanArgArray
-::	if defined __ARGV__[%cleanCount%] (
-::		set "__ARGV__[%cleanCount%]="
-::		set /a cleanCount+=1
-::		goto:cleanArgArray
-::	)
 	::echo __FILE__ = %__FILE__%
 	::echo __FUNCTION__ = %__FUNCTION__%
 	::echo __ARGS__ = %__ARGS__%
@@ -81,7 +50,6 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::	set DKSTACK[%DKSTACK_marker%].__FILE__=%caller[0].fullpath%
 ::	set DKSTACK[%DKSTACK_marker%].__FUNCTION__=%caller[0].func%
 ::	set DKSTACK[%DKSTACK_marker%].__ARGS__=%caller[0].args%
-	
 	
 	set /a DKSTACK_length+=1
 	set /a DKSTACK_marker=%DKSTACK_length%	
