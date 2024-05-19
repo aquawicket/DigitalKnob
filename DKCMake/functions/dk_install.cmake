@@ -18,7 +18,6 @@ function(dk_install plugin) #PATCH
 	#dk_debug("dk_install(${plugin})")
 	
 	# set PLUGIN_URL variable
-	#string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
 	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	set(dest_path ${${plugin_var}})			

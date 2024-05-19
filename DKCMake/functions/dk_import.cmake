@@ -21,8 +21,7 @@ function(dk_import url)
 	dk_importVariables(${url} plugin ${ARGN})
 	dk_printVar(plugin)
 	
-	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
-	#dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
+	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
 	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	
 	dk_printVar(${plugin_var})

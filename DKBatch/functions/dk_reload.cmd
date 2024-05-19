@@ -13,6 +13,5 @@ call DK
 	
     echo .
     echo reloading %DKSCRIPT_PATH%
-    start "" "%DKSCRIPT_PATH%"
-    exit
+    start "" "%DKSCRIPT_PATH%" & exit & exit & exit
 goto:eof
