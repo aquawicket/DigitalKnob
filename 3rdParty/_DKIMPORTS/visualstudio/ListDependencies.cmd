@@ -22,7 +22,7 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-%dkbatch%
+
 :: Drop this file next to your .exe and run it
 
 set "search=*.exe"
@@ -33,4 +33,4 @@ echo %exe_file%
 
 "%DUMPBIN%" /dependents %exe_file%
 
-%DKEND% 
+

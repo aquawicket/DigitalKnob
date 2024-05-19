@@ -3,10 +3,10 @@
 
 dk_validate(HOST "dk_getHostTriple()")
 
-#if(NOT WIN_HOST)
-#	dk_undepend(msys2)
-#	dk_return()
-#endif()
+if(NOT WIN_HOST)
+	dk_undepend(msys2)
+	dk_return()
+endif()
 
 
 ### INSTALL ###
