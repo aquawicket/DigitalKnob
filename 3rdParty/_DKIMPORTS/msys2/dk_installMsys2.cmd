@@ -2,9 +2,9 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_InstallMsys2()
+::# dk_installMsys2()
 ::#
-:dk_InstallMsys2 () {
+:dk_installMsys2 () {
 	call dk_debugFunc
 	
 	call dk_validate DKIMPORTS_DIR "dk_validateBranch"

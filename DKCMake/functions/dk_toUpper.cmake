@@ -27,4 +27,4 @@ function(DKTEST) ###############################################################
 	dk_toUpper("${myVar}" Upper)
 	dk_printVar(Upper)
 
-function()
+endfunction()

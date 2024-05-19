@@ -3,10 +3,10 @@ echo "$0 $*"
 [ -z "$DKINIT" ] && . ../../../DKBash/functions/DK #$0
 
 ##################################################################################
-# dk_InstallVSCode()
+# dk_installVSCode()
 #
 #
-dk_InstallVSCode () {
+dk_installVSCode () {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 

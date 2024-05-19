@@ -2,7 +2,7 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_InstallEmsdk()
+::# dk_installEmsdk()
 ::#
 :dk_installEmsdk () {
 	call dk_debugFunc

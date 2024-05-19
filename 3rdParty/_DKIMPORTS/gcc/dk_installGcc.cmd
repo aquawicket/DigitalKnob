@@ -2,9 +2,9 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_InstallGcc()
+::# dk_installGcc()
 ::#
-:dk_InstallGcc () {
+:dk_installGcc () {
 	call dk_debugFunc
 	
 	call dk_validate DKIMPORTS_DIR "dk_validateBranch"

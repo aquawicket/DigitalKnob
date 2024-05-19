@@ -28,4 +28,4 @@ function(DKTEST) ###############################################################
 	dk_toLower("${myVar}" lower)
 	dk_printVar(lower)
 
-function()
+endfunction()

@@ -2,9 +2,9 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_InstallAndroidNdk()
+::# dk_installAndroidNdk()
 ::#
-:dk_InstallAndroidNdk () {
+:dk_installAndroidNdk () {
 	call dk_debugFunc
 	
 	call dk_validate DKIMPORTS_DIR "dk_validateBranch"

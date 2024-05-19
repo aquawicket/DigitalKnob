@@ -2,10 +2,10 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_InstallGit()
+::# dk_installGit()
 ::#
 ::#
-:dk_InstallGit () {
+:dk_installGit () {
 	call dk_debugFunc
 	
 	call dk_validate HOST_ARCH  dk_getHostTriple

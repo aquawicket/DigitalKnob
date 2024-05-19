@@ -3,7 +3,7 @@ call "../../../DKBatch/functions/DK.cmd"
 
 
 ::####################################################################
-::# dk_installQemu()
+::# dk_uninstallQemu()
 ::#
 :dk_uninstallQemu () {
 	call dk_debugFunc
