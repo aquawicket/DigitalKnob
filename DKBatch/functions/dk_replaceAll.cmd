@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_replaceAll () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 4 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 4 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	::setlocal
 	set "_input_=%~1"

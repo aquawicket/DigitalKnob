@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_download () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     call dk_info "Downloading %~1 . . ."
     if exist "%~2" (

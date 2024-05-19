@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_smartExtract () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
 	set "src=%~1"
 	set "dest=%~2"

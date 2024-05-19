@@ -7,7 +7,7 @@ set	"QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 
 :dk_uninstallQemu () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	call dk_getName %QEMU_DL% QEMU_DL_NAME
 	call dk_convertToCIdentifier %QEMU_DL_NAME% QEMU_DL_NAME

@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_fileExists () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	::set "dk_fileExists=NOT ERRORLEVEL 1"
 	
 	if exist "%~1" (

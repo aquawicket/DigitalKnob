@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_stringContains () {
 	call dk_debugFunc
-	::if %__ARGC__% NEQ 3 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	::if %__ARGC__% NEQ 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	setlocal enableDelayedExpansion
     call set "_haystack_=%~1"

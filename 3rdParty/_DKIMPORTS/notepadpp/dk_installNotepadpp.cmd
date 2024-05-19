@@ -6,7 +6,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::#
 :dk_installNotepadpp () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	call dk_validate HOST_OS "dk_getHostTriple"
 	
@@ -46,6 +46,7 @@ call ../../../DKBatch/functions/DK.cmd
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" /v Icon /t REG_SZ /d "\"%NOTEPADPP_EXE%\"" /f
 	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" /ve /d "\"%NOTEPADPP_EXE%\" \"%%1\"" /f
+	::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
 	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
 
 	:::::: associateFiles.cmd ###
@@ -108,3 +109,12 @@ call ../../../DKBatch/functions/DK.cmd
 ::	call dk_printVar NOTEPADPP_EXE
 ::	call dk_checkError
 goto:eof
+
+
+
+:DKTEST ########################################################################
+
+call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
+call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""

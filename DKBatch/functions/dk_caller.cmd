@@ -48,6 +48,16 @@ goto:eof
 	rem call set "__LINE__=???"
 	call set "__FUNCTION__=%%~n0"
 	call set "__ARGS__=%%*"
+	call set "__1=%%~1"
+	call set "__2=%%~2"
+	call set "__3=%%~3"
+	call set "__4=%%~4"
+	call set "__5=%%~5"
+	call set "__6=%%~6"
+	call set "__7=%%~7"
+	call set "__8=%%~8"
+	call set "__9=%%~9"
+
 
     if defined _callerpath (
         set "_callertype=batch"

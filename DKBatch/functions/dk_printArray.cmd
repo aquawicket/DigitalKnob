@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_printArray () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): incorrect number of arguments")
+	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	set "arry=%~1"
 	set /A "n=0"
