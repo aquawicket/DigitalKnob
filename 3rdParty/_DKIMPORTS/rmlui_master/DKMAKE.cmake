@@ -2,6 +2,23 @@
 # https://github.com/aquawicket/RmlUi.git
 
 
+#################### NOTE ###########################################################################################
+To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 
+cmake gui to get everything to compile.
+
+CMAKE_C_STANDARD_LIBRARIES
+-lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
+
+CMAKE_EXE_LINKER_FLAGS 
+C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2maind.a C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2d.a
+
+freetype also needed a folder moved up one heirarchy level
+
+-DSDL2_DIR=${SDL}/${OS}/Debug
+######################################################################################################################## 
+ 
+ 
+ 
 ### rmlui dependencies ###
 dk_depend(freetype)
 dk_depend(glfw)
@@ -12,12 +29,14 @@ dk_depend(lunasvg)
 dk_depend(rlottie)
 
 # rmlui sample dependencies
+dk_depend(cfgmgr32)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(pthread)
 dk_depend(sdl)
 dk_depend(sdl_image)
 dk_depend(setupapi.lib)
+dk_depend(shlwapi.lib)
 dk_depend(sfml)
 dk_depend(tiff)
 dk_depend(version.lib)
@@ -241,7 +260,7 @@ else()
 	
 	dk_configure(${RMLUI_MASTER}
 		-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
-		${SDL_CMAKE} 
+		
 		-DRMLUI_BACKEND=SDL_SDLrenderer
 		-DRMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
@@ -268,7 +287,8 @@ else()
 		${WINMM_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${ZSTD_CMAKE}
+		${SDL_CMAKE} )
 endif()
 
 

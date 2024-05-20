@@ -6,3 +6,11 @@ if(NOT WIN)
 endif()
 
 dk_findLibrary(shlwapi.lib)
+
+
+
+
+# MSYS2 (--lshlwapi)
+if(MSYSTEM)
+	dk_set(SHLWAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=--lshlwapi")
+endif()
