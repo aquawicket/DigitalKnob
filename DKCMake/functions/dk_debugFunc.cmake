@@ -3,7 +3,7 @@ include_guard()
 
 if(NOT DEFINED ENABLE_dk_debugFunc)
 	dk_load(dk_set)
-	dk_set(ENABLE_dk_debugFunc 1)
+	dk_set(ENABLE_dk_debugFunc 0)
 endif()
 ##################################################################################
 # dk_debugFunc(${ARGV})

@@ -52,6 +52,7 @@ RASPBERRY_dk_depend(opengl)
 WIN_dk_depend(imm32.lib)
 WIN_dk_depend(opengl)
 WIN_dk_depend(setupapi.lib)
+WIN_dk_depend(shlwapi.lib)
 WIN_dk_depend(version.lib)
 WIN_dk_depend(winmm.lib)
 

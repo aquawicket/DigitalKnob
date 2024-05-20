@@ -28,29 +28,29 @@ dk_depend(zstd)
 
 
 
-set(rmlui_all 0)
-set(rmlui_RmlCore 1)
-set(rmlui_RmlDebugger 1)
-set(rmlui_shell 1)
-set(rmlui_treeview 1)
-set(rmlui_customlog 1)
-set(rmlui_drag 1)
-set(rmlui_loaddocument 1)
-set(rmlui_transform 1)
-set(rmlui_bitmapfont 1)
-set(rmlui_animation 1)
-set(rmlui_benchmark 1)
-set(rmlui_demo 1)
-set(rmlui_databinding 1)
-set(rmlui_effects 1)
-set(rmlui_lottie 1)
-set(rmlui_harfbuzzshaping 1)
-set(rmlui_tutorial_template 1)
-set(rmlui_tutorial_drag 1)
-set(rmlui_invaders 1)
-set(rmlui_UnitTests 1)
-set(rmlui_VisualTests 1)
-set(rmlui_Benchmarks 1)
+set(rmlui_all 1)
+set(rmlui_RmlCore 0)
+set(rmlui_RmlDebugger 0)
+set(rmlui_shell 0)
+set(rmlui_treeview 0)
+set(rmlui_customlog 0)
+set(rmlui_drag 0)
+set(rmlui_loaddocument 0)
+set(rmlui_transform 0)
+set(rmlui_bitmapfont 0)
+set(rmlui_animation 0)
+set(rmlui_benchmark 0)
+set(rmlui_demo 0)
+set(rmlui_databinding 0)
+set(rmlui_effects 0)
+set(rmlui_lottie 0)
+set(rmlui_harfbuzzshaping 0)
+set(rmlui_tutorial_template 0)
+set(rmlui_tutorial_drag 0)
+set(rmlui_invaders 0)
+set(rmlui_UnitTests 0)
+set(rmlui_VisualTests 0)
+set(rmlui_Benchmarks 0)
 
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi.git)
@@ -153,7 +153,8 @@ if(MSVC)
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
+		${FREETYPE_CMAKE}
+		${GLFW_CMAKE}
 		${HARFBUZZ_CMAKE}
 		${LIBJPEG_TURBO_CMAKE}
 		${LIBPNG_CMAKE}
@@ -198,6 +199,7 @@ if(MSVC)
 		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
+		${GLFW_CMAKE}
 		${HARFBUZZ_CMAKE}
 		${LIBJPEG_TURBO_CMAKE}
 		${LIBPNG_CMAKE}
@@ -238,41 +240,28 @@ else()
 	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
 	
 	dk_configure(${RMLUI_MASTER}
-		"-DSAMPLES_BACKEND=SDL_SDLrenderer"			# "Backend platform and renderer used for the samples." "auto" 
-		#-DBUILD_FRAMEWORK=OFF 						# "Build Framework bundle for OSX" OFF
-		#-DBUILD_LUA_BINDINGS=${LUAJIT}	 			# "Build Lua bindings" OFF
-		#-DBUILD_LUA_BINDINGS_FOR_LUAJIT=${LUAJIT} 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_SAMPLES=ON 							# "Build samples" OFF
+		-DRMLUI_BACKEND=SDL_SDLrenderer
+		-RMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=ON 							#  OFF
-		-DBUILD_UNIVERSAL_BINARIES=OFF 				# "Build universal binaries for all architectures supported" ON
-		#-DCUSTOM_CONFIGURATION=OFF					# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		#-DDISABLE_RTTI_AND_EXCEPTIONS=OFF			# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 			# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON
-		#-DENABLE_SVG_PLUGIN=${LUNASVG}				# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		#-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
-		#-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		#-DNO_THIRDPARTY_CONTAINERS=OFF				# "Only use standard library containers." OFF
-		-DRMLUI_TRACY_CONFIGURATION=OFF				# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
-		-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		#-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		#-DRMLUI_VK_DEBUG=OFF						# "Enable debugging mode for Vulkan renderer." OFF
-		#-DWARNINGS_AS_ERRORS=OFF					# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
-		${HARFBUZZ_CMAKE}
+		#-DBUILD_UNIVERSAL_BINARIES=OFF 				# "Build universal binaries for all architectures supported" ON
+		#-DENABLE_HARFBUZZ=${HARFBUZZ}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+		#-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 			# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
+		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON	
+		#-DRMLUI_TRACY_CONFIGURATION=OFF				# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
+		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
+		${FREETYPE_CMAKE}
+		#${GLFW_CMAKE}
+		#${HARFBUZZ_CMAKE}
 		${LIBJPEG_TURBO_CMAKE}
 		${LIBPNG_CMAKE}
-		#${LUA_CMAKE}
-		#${LUAJIT_CMAKE}
-		${LUNASVG_CMAKE}
-		${PTHREAD_CMAKE}
-		${RLOTTIE_CMAKE}
+		#${LUNASVG_CMAKE}
+		#${PTHREAD_CMAKE}
+		#${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE}
-		${SETUPAPI_CMAKE}
-		${SFML_CMAKE}
+		#${SETUPAPI_CMAKE}
+		#${SFML_CMAKE}
 		${TIFF_CMAKE}
 		${VERSION_CMAKE}
 		${WINMM_CMAKE}
