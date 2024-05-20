@@ -3,18 +3,19 @@
 
 
 #################### NOTE ###########################################################################################
-To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 
-cmake gui to get everything to compile.
-
-CMAKE_C_STANDARD_LIBRARIES
--lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
-
-CMAKE_EXE_LINKER_FLAGS 
-C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2maind.a C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2d.a
-
-freetype also needed a folder moved up one heirarchy level
-
--DSDL2_DIR=${SDL}/${OS}/Debug
+#  To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 
+#  cmake gui to get everything to compile.
+#
+#  CMAKE_C_STANDARD_LIBRARIES
+#  -lshlwapi -lCfgmgr32 -lSetupapi -lwinmm
+#
+#  CMAKE_EXE_LINKER_FLAGS 
+#  C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2maind.a
+#  C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug/libSDL2d.a
+#
+# freetype also needed a folder moved up one heirarchy level
+# 
+# -DSDL2_DIR=${SDL}/${OS}/Debug
 ######################################################################################################################## 
  
  
@@ -149,16 +150,8 @@ endif()
 if(MSVC)
 	WIN_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
-		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
-		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=ON 						# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=ON 						#  OFF
-		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
-		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+		-DBUILD_TESTING=OFF 					#  OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
 		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
@@ -195,12 +188,8 @@ if(MSVC)
 	
 	ANDROID_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
-		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
-		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=ON 						# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=ON 					    #  OFF
+		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -258,18 +247,18 @@ else()
 	#string(APPEND SampleDependencies " -L${ZLIB}/${OS}/${DEBUG_DIR} -lzlibstatic")
 	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
 	
+	#-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
 	dk_configure(${RMLUI}
-		-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
-		
+		-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a
 		-DRMLUI_BACKEND=SDL_SDLrenderer
 		-DRMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=ON 							#  OFF
-		#-DBUILD_UNIVERSAL_BINARIES=OFF 				# "Build universal binaries for all architectures supported" ON
+		#-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		#-DENABLE_HARFBUZZ=${HARFBUZZ}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		#-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 			# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON	
-		#-DRMLUI_TRACY_CONFIGURATION=OFF				# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
+		#-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		${FREETYPE_CMAKE}
 		#${GLFW_CMAKE}

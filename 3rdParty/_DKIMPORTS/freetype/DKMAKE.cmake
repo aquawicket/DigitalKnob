@@ -35,3 +35,9 @@ dk_configure(${FREETYPE})
 
 ### COMPILE ###
 dk_build(${FREETYPE} freetype)
+
+
+# rmlui expects to find ftconfig.h here, so we just copy it for now.
+if(NOT EXISTS ${FREETYPE}/${OS}/include)
+	dk_copy(${FREETYPE}/${OS}/${DEBUG_DIR}/include ${FREETYPE}/${OS}/include)
+endif()
