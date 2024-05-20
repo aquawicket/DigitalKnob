@@ -24,11 +24,16 @@ $global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
 
 $env:PSModulePath += ";C:\Users\aquawicket\digitalknob\Development\DKPowershell\functions"
 
-Import-Module -Global $DKPOWERSHELL_DIR\functions\dk_load.ps1
+#Import-Module -Global $DKPOWERSHELL_DIR\functions\dk_load.ps1
+. $DKPOWERSHELL_DIR\functions\dk_load.ps1
+. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
+. $DKPOWERSHELL_DIR\functions\dk_getHostTriple.ps1
+. $DKPOWERSHELL_DIR\functions\dk_buildMain.ps1
 dk_load dk_buildMain
 dk_load dk_getDKPaths
-dk_load dk_debugFunc
 dk_load dk_makeDirectory
+
+
 
 #
 #dk_load dk_debugFunc

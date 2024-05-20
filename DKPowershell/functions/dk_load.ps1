@@ -13,9 +13,12 @@ function dk_load($func) {
 	
 	#if not exist "$DKPOWERSHELL_DIR\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
 	#if not exist "$DKPOWERSHELL_DIR\functions\%~1.cmd" dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
-	echo "dk_load($func): Import-Module $DKPOWERSHELL_DIR\functions\$func.ps1"
-
-	Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
+	
+	#echo "dk_load($func): Import-Module $DKPOWERSHELL_DIR\functions\$func.ps1"
+	#Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
+	
+	echo ". $DKPOWERSHELL_DIR\functions\$func.ps1"
+	. $DKPOWERSHELL_DIR\functions\$func.ps1
 
 
 

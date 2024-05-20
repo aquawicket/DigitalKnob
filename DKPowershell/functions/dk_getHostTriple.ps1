@@ -8,7 +8,7 @@
 function dk_getHostTriple () {
 	dk_debugFunc
 	
-	$HOST_OS = win
+	$HOST_OS = "win"
     dk_printVar HOST_OS
 	
 	if ($PROCESSOR_ARCHITECTURE -eq "x86")   { $HOST_ARCH = x86 }

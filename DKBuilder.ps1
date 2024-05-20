@@ -15,11 +15,7 @@ Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
 Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
 
+
 ###### Load Main Program ######
-dk_load dk_buildMain
-dk_load dk_getDKPaths
-dk_load dk_debugFunc
-dk_load dk_makeDirectory
-Import-Module -Global $DKPOWERSHELL_DIR\functions\dk_buildMain.ps1
 dk_buildMain
 Read-Host -Prompt "Press Enter to exit" 
