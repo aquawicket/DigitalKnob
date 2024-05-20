@@ -516,6 +516,7 @@ if(MINGW)
 	dk_disable(flac)
 	dk_disable(libexpat)
 	dk_disable(libiconv)
+	dk_disable(smpeg2)	
 	dk_disable(stackwalker)
 endif(MINGW)
 

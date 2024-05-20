@@ -15,6 +15,8 @@ call DK
 	call dk_validate GIT_EXE dk_validateGit
     :: git remote update >nul 2>&1
     %GIT_EXE% remote update
+	
+	echo current directory is %CD%
 
 	:: branch= $(git rev-parse --abbrev-ref HEAD)
     call dk_commandToVariable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch

@@ -1,7 +1,7 @@
 if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 @echo off
 
-
+set "DEBUG_MODE=1"
 ::####################################################################
 ::# DK()
 ::#
@@ -41,7 +41,7 @@ if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 	
 	set "DKSCRIPT_PATH=%caller[1].fullpath%"
 	set "DKSCRIPT_ARGS=%caller[1].args%"
-	if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & pause & exit ) :: keep window open
+	if %DEBUG_MODE% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & pause & exit ) :: keep window open
 	
 	call dk_load dk_getDirectory
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR

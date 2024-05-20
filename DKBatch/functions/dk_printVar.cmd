@@ -22,14 +22,12 @@ call DK
 	setlocal EnableDelayedExpansion
 	call set "_value_=!%_var_%!"
 	if not defined !_value_! ( endlocal & goto :array )
-	::call dk_debug "%~1 is a pointer variable"
 	call dk_debug "%_var_% = '!%_value_%!'"
 	endlocal
     goto:eof
 	
 	:array
 	if not defined %~1[0] ( goto :variable )
-	::echo %~1 is an array
     set "_array_=%~1"
     set /A "n=0"
     setlocal EnableDelayedExpansion
@@ -45,7 +43,6 @@ call DK
     :variable
 	set "_var_=%~1"
     if not defined %~1 ( goto :undefined )	
-	::echo %~1 is a variable
     call dk_debug "%_var_% = '%%%_var_%%%'"
     goto:eof
     
