@@ -33,3 +33,8 @@ if not defined HALT_ON_INFO    set "HALT_ON_INFO=0"
 		if "%HALT_ON_INFO%"=="1"  call dk_echo %blue%*** HALT_ON_INFO ***%clr%   & call dk_exit
 	endlocal
 goto:eof
+
+
+
+:DKTEST ########################################################################
+

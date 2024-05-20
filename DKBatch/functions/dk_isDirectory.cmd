@@ -24,3 +24,9 @@ call DK
 	call dk_printVar "%2"
 	(call)
 goto:eof
+
+
+
+:DKTEST ########################################################################
+
+	call dk_isDirectory

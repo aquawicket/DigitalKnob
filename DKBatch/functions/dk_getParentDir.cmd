@@ -19,3 +19,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	dk_getParentDir "C:\Windows\System32" parent
+	echo "parent = %parent%"

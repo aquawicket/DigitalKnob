@@ -16,7 +16,7 @@ call DK
 	set "default=%3"
 	set cache_file=%~dp0input_timeout_cache.tmp
 	set thread_file=%~dp0input_timeout_thread.cmd
-	del %cache_file% 2>nul >nul
+	call dk_remove %cache_file% 2>nul >nul
 	
 	echo ^@echo off> %thread_file%
 	echo set /p var=>> %thread_file%
@@ -40,10 +40,17 @@ call DK
 	del %thread_file% 2>nul >nul
 	if exist %cache_file% (
 		set /p result=<%cache_file%
-		del %cache_file% 2>nul >nul
+		call dk_remove %cache_file% 2>nul >nul
 	) else (
 		set result=%default%
 	)
 	::<nul set /p"=!BS!!CR!result = %result%  	"
 	set /p"=result = %result% "
 goto:eof
+
+
+
+
+:DKTEST ########################################################################
+
+	call dk_inputTimeout "this message will time out" 5 default
