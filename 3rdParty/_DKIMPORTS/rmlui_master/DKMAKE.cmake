@@ -29,28 +29,28 @@ dk_depend(zstd)
 
 
 set(rmlui_all 1)
-set(rmlui_RmlCore 0)
-set(rmlui_RmlDebugger 0)
-set(rmlui_shell 0)
-set(rmlui_treeview 0)
-set(rmlui_customlog 0)
-set(rmlui_drag 0)
-set(rmlui_loaddocument 0)
-set(rmlui_transform 0)
-set(rmlui_bitmapfont 0)
-set(rmlui_animation 0)
-set(rmlui_benchmark 0)
-set(rmlui_demo 0)
-set(rmlui_databinding 0)
-set(rmlui_effects 0)
-set(rmlui_lottie 0)
-set(rmlui_harfbuzzshaping 0)
-set(rmlui_tutorial_template 0)
-set(rmlui_tutorial_drag 0)
-set(rmlui_invaders 0)
-set(rmlui_UnitTests 0)
-set(rmlui_VisualTests 0)
-set(rmlui_Benchmarks 0)
+set(rmlui_RmlCore 1)
+set(rmlui_RmlDebugger 1)
+set(rmlui_shell 1)
+set(rmlui_treeview 1)
+set(rmlui_customlog 1)
+set(rmlui_drag 1)
+set(rmlui_loaddocument 1)
+set(rmlui_transform 1)
+set(rmlui_bitmapfont 1)
+set(rmlui_animation 1)
+set(rmlui_benchmark 1)
+set(rmlui_demo 1)
+set(rmlui_databinding 1)
+set(rmlui_effects 1)
+set(rmlui_lottie 1)
+set(rmlui_harfbuzzshaping 1)
+set(rmlui_tutorial_template 1)
+set(rmlui_tutorial_drag 1)
+set(rmlui_invaders 1)
+set(rmlui_UnitTests 1)
+set(rmlui_VisualTests 1)
+set(rmlui_Benchmarks 1)
 
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi.git)
@@ -240,8 +240,10 @@ else()
 	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
 	
 	dk_configure(${RMLUI_MASTER}
+		-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
+		${SDL_CMAKE} 
 		-DRMLUI_BACKEND=SDL_SDLrenderer
-		-RMLUI_SAMPLES=ON
+		-DRMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=ON 							#  OFF
 		#-DBUILD_UNIVERSAL_BINARIES=OFF 				# "Build universal binaries for all architectures supported" ON
@@ -258,7 +260,6 @@ else()
 		#${LUNASVG_CMAKE}
 		#${PTHREAD_CMAKE}
 		#${RLOTTIE_CMAKE}
-		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE}
 		#${SETUPAPI_CMAKE}
 		#${SFML_CMAKE}
