@@ -82,6 +82,7 @@ call ../../../DKBatch/functions/DK.cmd
 	assoc .plist=dk_txtfile
 	assoc .pro=dk_txtfile
 	assoc .properties=dk_txtfile
+	assoc .ps1=dk_txtfile
 	assoc .rc=dk_txtfile
 	assoc .reference=dk_txtfile
 	assoc .rsp=dk_txtfile

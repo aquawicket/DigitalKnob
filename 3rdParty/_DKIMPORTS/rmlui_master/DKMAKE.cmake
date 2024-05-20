@@ -4,6 +4,7 @@
 
 ### rmlui dependencies ###
 dk_depend(freetype)
+dk_depend(glfw)
 dk_depend(harfbuzz)
 #dk_depend(lua)
 #dk_depend(luajit)
@@ -55,7 +56,7 @@ set(rmlui_Benchmarks 1)
 dk_import(https://github.com/mikke89/RmlUi.git)
 
 # Version fix #
-dk_fileReplace(${RMLUI_MASTER}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
+#dk_fileReplace(${RMLUI_MASTER}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # ANDROID FIX
 if(ANDROID)
