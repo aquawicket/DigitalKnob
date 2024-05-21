@@ -141,7 +141,6 @@ endif()
 
 #WIN_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure(${LIBXML2} 
-	-DBUILD_SHARED_LIBS=OFF				# Build shared libraries ON	
 	-DLIBXML2_WITH_C14N=ON				# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON			# Add the Catalog support ON
 	-DLIBXML2_WITH_DEBUG=ON				# Add the debugging module ON

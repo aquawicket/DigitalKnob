@@ -60,7 +60,6 @@ dk_configure(${FLAC}
 	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
 	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
 	-DBUILD_PROGRAMS=OFF 				# "Build and install programs" ON
-	-DBUILD_TESTING=OFF					# "Build tests" ON
 	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
 	-DINSTALL_MANPAGES=OFF				# "Install MAN pages" ON
 	-DINSTALL_PKGCONFIG_MODULES=ON		# "Install PkgConfig modules" ON

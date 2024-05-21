@@ -91,7 +91,7 @@ ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
 ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
 dk_include		(${RMLUI}/Include			RML_INCLUDE_DIR)
-dk_include		(${RMLUI}/Source)
+dk_include		(${RMLUI}/Source 			RML_INCLUDE_DIR2)
 
 dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
@@ -151,8 +151,6 @@ endif()
 if(MSVC)
 	WIN_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
 		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
@@ -189,8 +187,6 @@ if(MSVC)
 	
 	ANDROID_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -228,33 +224,10 @@ if(MSVC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()									
-	
-	# https://stackoverflow.com/a/37038641/688352
-	# The first line of the configure below "-DCMAKE_EXE_LINKER_FLAGS=-lWinmm -lsetupapi -lversion"  provides the linker 
-	# libraries for the executable rmlui samples. Most of the time, we don't compile test apps and executables in
-	# other libraries that require their own linkage. This is just an example of how to deal with those missing link time libs.
-	# In Fact, If you look in Genererate.cmake, you'll see how the collection of link time library's are provided to the DK app.
-	# So all in all, That list of needed targetd already exists by the time we get here.
-
-	#string(APPEND SampleDependencies "-DCMAKE_EXE_LINKER_FLAGS=")
-	#string(APPEND SampleDependencies " -lpthread")
-	#string(APPEND SampleDependencies " -lsetupapi")
-	#string(APPEND SampleDependencies " -lversion")
-	#string(APPEND SampleDependencies " -lWinmm")
-	#string(APPEND SampleDependencies " -L${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR} -lturbojpeg")
-	#string(APPEND SampleDependencies " -L${LIBPNG}/${OS}/${DEBUG_DIR} -lpng16d")
-	#string(APPEND SampleDependencies " -L${TIFF}/${OS}/${DEBUG_DIR}/libtiff -ltiff")
-	#string(APPEND SampleDependencies " -L${XZ}/${OS}/${DEBUG_DIR} -llzma")
-	#string(APPEND SampleDependencies " -L${ZLIB}/${OS}/${DEBUG_DIR} -lzlibstatic")
-	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
-	
-	#-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
 	dk_configure(
 		${RMLUI}
 		-DRMLUI_BACKEND=SDL_SDLrenderer
 		-DRMLUI_SAMPLES=ON
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=ON 						#  OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
 		#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
@@ -276,8 +249,7 @@ else()
 		${WINMM_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE}
-	)
+		${ZSTD_CMAKE})
 endif()
 
 

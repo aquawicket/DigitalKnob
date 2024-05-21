@@ -29,7 +29,7 @@ RELEASE_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES
 
 
 ### GENERATE ###
-dk_configure(${LUA} -DBUILD_SHARED_LIBS=OFF)
+dk_configure(${LUA})
 
 
 ### COMPILE ###

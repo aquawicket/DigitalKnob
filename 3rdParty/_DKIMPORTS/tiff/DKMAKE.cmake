@@ -88,7 +88,6 @@ endif()
 
 ### GENERATE ###
 dk_configure(${TIFF}
-	-DBUILD_SHARED_LIBS=OFF
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
 	-Dtiff-tests=OFF				# "build TIFF tests" ON

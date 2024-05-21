@@ -170,7 +170,6 @@ if(COMPILE_CMAKE)
 			#-DCMake_USE_CLANG_TIDY_MODULE 			# "Use CMake's clang-tidy module." OFF
 			#-DCMake_RUN_IWYU 						# "Run include-what-you-use with the compiler." OFF
 			#-DCMake_IWYU_VERBOSE 					# "Run include-what-you-use in verbose mode" OFF
-			-DBUILD_TESTING=OFF
 			${CMAKE})
 			 
 		dk_build(${CMAKE}) # cmake)

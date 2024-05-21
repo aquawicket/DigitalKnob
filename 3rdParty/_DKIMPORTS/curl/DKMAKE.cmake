@@ -47,7 +47,7 @@ if(MSVC)
 	WIN_dk_libDebug		(${CURL_DEBUG_DIR}/libcurl.lib					CURL_LIBRARY_DEBUG)
 	WIN_dk_libRelease	(${CURL_RELEASE_DIR}/libcurl.lib				CURL_LIBRARY_RELEASE)
 else()	
-	dk_libDebug		(${CURL_DEBUG_DIR}/libcurl-d.a					CURL_LIBRARY_DEBUG)
+	dk_libDebug		(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
 	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a					CURL_LIBRARY_RELEASE)
 endif()
 
@@ -68,8 +68,6 @@ if(MSVC)
 	WIN_dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
-		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
-		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
 		-DCURL_DISABLE_ALTSVC=OFF						# "disables alt-svc support" OFF
 		-DCURL_DISABLE_COOKIES=ON						# "disables cookies support" OFF
@@ -182,8 +180,6 @@ elseif(MAC)
 	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
-		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
-		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
 		-DCURL_DISABLE_ALTSVC=OFF						# "disables alt-svc support" OFF
 		-DCURL_DISABLE_COOKIES=ON						# "disables cookies support" OFF
@@ -257,8 +253,6 @@ elseif(LINUX)
 	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
-		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
-		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
 		-DCURL_DISABLE_ALTSVC=OFF						# "disables alt-svc support" OFF
 		-DCURL_DISABLE_COOKIES=ON						# "disables cookies support" OFF
@@ -332,8 +326,6 @@ else()
 	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
-		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
-		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
 		-DCURL_DISABLE_ALTSVC=OFF						# "disables alt-svc support" OFF
 		-DCURL_DISABLE_COOKIES=ON						# "disables cookies support" OFF

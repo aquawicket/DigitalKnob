@@ -46,8 +46,6 @@ RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${
 #if(ANDROID)
 dk_configure(${OGG} 
 			-DBUILD_FRAMEWORK=OFF				# "Build Framework bundle for OSX" OFF
-			#-DBUILD_SHARED_LIBS=OFF			# "Build shared library" OFF
-			-DBUILD_TESTING=OFF				
 			-DINSTALL_CMAKE_PACKAGE_MODULE=ON	# "Install CMake package configuration module" ON
 			-DINSTALL_DOCS=OFF					# "Install documentation" ON
 			-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON

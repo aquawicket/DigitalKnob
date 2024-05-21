@@ -10,6 +10,8 @@ include_guard()
 function(dk_configure path) #ARGN
 	dk_debugFunc(${ARGV})
 	
+	file(WRITE ${path}/dk_configure.txt ${ARGV})
+	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${path}/CMakeLists.txt)
 		dk_info("Configuring with CMake")

@@ -67,7 +67,6 @@ else()
 endif()
 
 # TODO
-# BUILD_SHARED_LIBS "Build liblzma as a shared library instead of static"
 # LIBLZMA_HAS_AUTO_DECODER
 # LIBLZMA_HAS_EASY_ENCODER
 # LIBLZMA_HAS_LZMA_PRESET

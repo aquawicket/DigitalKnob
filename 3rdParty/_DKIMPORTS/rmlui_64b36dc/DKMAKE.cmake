@@ -71,8 +71,6 @@ if(MSVC)
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -103,8 +101,6 @@ if(MSVC)
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
@@ -134,8 +130,6 @@ else()
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
-		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
