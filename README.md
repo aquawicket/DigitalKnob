@@ -91,7 +91,7 @@ doxygen
 duk4vb
 dukluv
 duktape
-dxva2.dll
+dxva2
 emsdk
 far
 ffmpeg
@@ -229,7 +229,7 @@ osgworks
 pacman.c
 pako
 pcre2
-pdh.lib
+pdh
 pearl
 php-src
 poco
