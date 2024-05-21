@@ -1,4 +1,4 @@
-
+if ($DKINIT){return} else{ $global:DKINIT=1 }
 #####################################################################
 ## dk_load()
 ##
@@ -27,11 +27,6 @@ function DK() {
 
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
 	#Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
-
-	
-	#Invoke-WebRequest -URI $URL -OutFile $Path
-	#(New-Object System.Net.WebClient).DownloadFile($URL, $Path)
-	#Start-BitsTransfer -Source $URL -Destination $Path
 	
 	$global:DKHTTP = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
 	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_load.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_load.ps1" }
@@ -42,14 +37,24 @@ function DK() {
 	dk_load dk_getDKPaths
 	dk_load dk_makeDirectory
 	dk_load dk_buildMain
-
-
-	#Import-Module ./dk_download.ps1
-	#$GIT_DL = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
-	#$DEST = "$CurrentDirectory\PortableGit-2.44.0-64-bit.7z.exe"
-	#dk_download $GIT_DL $DEST
+	
+	
+	###### DKTEST MODE ######
+	if ("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_DIR\functions"){
+		dk_load $DKSCRIPT_PATH
+		$global:ENABLE_dk_debugFunc = 1
+		$global:ENABLE_dk_printVar = 1
+		Write-Output ""
+		Write-Output "###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ######"
+		Write-Output ""
+		DKTEST
+		Write-Output ""
+		Write-Output "########################## END TEST ################################"
+		Write-Output ""
+		
+		Read-Host -Prompt "Press Enter to exit" 
+		Exit
+	}
 }
-
-
 DK
 

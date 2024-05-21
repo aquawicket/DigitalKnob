@@ -1,15 +1,32 @@
+. $PWD\DK.ps1
+
+# https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 
 ####################################################################
 # dk_download(<url> <destination>)
 #
 #
-Function dk_download($url, $dest) {
+function Global:dk_download($url, $dest) {
 
-	Write-Output "url = $url"
-	Write-Output "dest = $dest"
+	#Write-Output "url = $url"
+	#Write-Output "dest = $dest"
 	
-    #-Command (New-Object Net.WebClient).DownloadFile($url, $dest)
-	$WebClient = New-Object System.Net.WebClient
-	$WebClient.UseDefaultCredentials = $true
-	$WebClient.DownloadFile($url, $dest)
+	# method 1
+    Invoke-WebRequest -URI $url -OutFile $dest
+	
+	# method 2
+	#(New-Object System.Net.WebClient).DownloadFile($url, $dest)
+	
+	# method 2 (extended)
+	#$WebClient = New-Object System.Net.WebClient
+	#$WebClient.UseDefaultCredentials = $true
+	#$WebClient.DownloadFile($url, $dest)
+	
+	# method 3
+	#Start-BitsTransfer -Source $url -Destination $dest
+}
+
+
+function Global:DKTEST() {
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
 }

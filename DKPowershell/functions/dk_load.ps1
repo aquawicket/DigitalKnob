@@ -13,8 +13,16 @@ function dk_load($func) {
 	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_download.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_download.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_download.ps1" }
 	#if not exist "$DKPOWERSHELL_DIR\functions\%~1.cmd" dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
 	
-	echo "Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1"
-	Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
+	if (Test-Path "$func"){
+		echo "Import-Module -Global $func"
+		Import-Module -Global $func
+		return
+	}
+	if (Test-Path "$DKPOWERSHELL_DIR\functions\$func.ps1"){
+		echo "Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1"
+		Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
+		return
+	}
 	
 	#echo ". $DKPOWERSHELL_DIR\functions\$func.ps1"
 	#. $DKPOWERSHELL_DIR\functions\$func.ps1
