@@ -38,8 +38,8 @@ call DK
     
     call dk_info "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
 	::xcopy /s /e /Y %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch\
-	call dk_copy %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch
-    call dk_copy %DKSCRIPT_PATH% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
+	call dk_copy %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch OVERWRITE
+    call dk_copy %DKSCRIPT_PATH% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% OVERWRITE
 	set "PATH=%DIGITALKNOB_DIR%\DKBatch\functions;%PATH%"
     start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" dk_resetAll wipe
     call dk_exit
