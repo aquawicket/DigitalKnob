@@ -1,7 +1,7 @@
 if defined DKINIT ( goto:eof ) else (set DKINIT=1)
 @echo off
 
-set "DEBUG_MODE=1"
+set "DEBUG_MODE=0"
 ::####################################################################
 ::# DK()
 ::#
