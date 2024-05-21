@@ -3,7 +3,7 @@
 
 ### DEPENDS ###
 dk_depend(iphlpapi.lib)
-dk_depend(ws2_32.lib)
+dk_depend(ws2_32)
 
 
 ### IMPORT ###

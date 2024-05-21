@@ -7,7 +7,7 @@ IOS_dk_return()
 IOSSIM_dk_return()
 
 if(WIN)
-	dk_depend(winmm.lib)
+	dk_depend(winmm)
 endif()
 if(MAC)
 	#dk_depend(appkit)

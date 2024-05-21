@@ -54,7 +54,7 @@ WIN_dk_depend(opengl)
 WIN_dk_depend(setupapi.lib)
 WIN_dk_depend(shlwapi.lib)
 WIN_dk_depend(version.lib)
-WIN_dk_depend(winmm.lib)
+WIN_dk_depend(winmm)
 
 
 ### IMPORT ###

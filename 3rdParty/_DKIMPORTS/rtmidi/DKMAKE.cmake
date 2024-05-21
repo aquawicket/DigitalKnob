@@ -2,7 +2,7 @@
 
 
 ### DEPEND ###
-WIN_dk_depend(winmm.lib)
+WIN_dk_depend(winmm)
 
 
 ### IMPORT ###

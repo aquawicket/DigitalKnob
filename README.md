@@ -292,8 +292,8 @@ waave
 wasi
 wasm2brs
 wasm3
-winmm.lib
-ws2_32.lib
+winmm
+ws2_32
 x264
 x265
 xcode

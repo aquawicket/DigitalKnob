@@ -1,7 +1,7 @@
 # https://docs.microsoft.com/en-us/windows/win32/multimedia/windows-multimedia-start-page?redirectedfrom=MSDN
 
 if(NOT WIN)
-	dk_undepend(winmm.lib)
+	dk_undepend(winmm)
 	dk_return()
 endif()
 
