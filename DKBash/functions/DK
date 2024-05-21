@@ -1,10 +1,6 @@
 #!/bin/sh
-
 # Conditional expressions for POSIX shell   https://www.ibm.com/docs/zh-tw/aix/7.2?topic=shell-conditional-expressions-korn-posix
 
-alias ERROR_STATUS='{
-	echo "${LINENO}: ERROR_STATUS = $?"
-}'
 
 ##################################################################################
 # DK(<args>)
@@ -19,10 +15,9 @@ DK () {
 	#echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
 	#echo "BASH_SOURCE[1] = ${BASH_SOURCE[1]}"
 
-
-	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
-
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
+	
+	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
 
 	###### Reload Main Script with bash ######
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then

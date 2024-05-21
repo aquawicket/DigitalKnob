@@ -17,7 +17,6 @@ dk_depend(DKWebTest)
 dk_depend(DKWindow)
 
 
-#dk_depend(rmlui_master)
 #dk_depend(DKDuktapeDom)
 #dk_depend(DKRmlElement)
 

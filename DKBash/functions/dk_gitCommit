@@ -25,7 +25,7 @@ dk_gitCommit () {
 	fi
 	
 	if ! USER_EMAIL=$(${GIT_EXE} config --global user.email); then
-		ERROR_STATUS
+		dk_errorStatus
 	fi
 	if [ -z "${USER_EMAIL}" ]; then
 		dk_echo
@@ -37,7 +37,7 @@ dk_gitCommit () {
 		dk_echo
 	fi
 	if ! USER_NAME=$(${GIT_EXE} config --global user.name); then
-		ERROR_STATUS
+		dk_errorStatus
 	fi
 	if [ -z "${USER_NAME}" ]; then
 		dk_echo
