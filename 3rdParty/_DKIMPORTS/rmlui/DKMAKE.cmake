@@ -251,15 +251,13 @@ else()
 	#-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
 	dk_configure(
 		${RMLUI}
-		#"-DCMAKE_C_STANDARD_LIBRARIES=-lshlwapi -lCfgmgr32 -lSetupapi -lwinmm"
-		"-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a"
 		-DRMLUI_BACKEND=SDL_SDLrenderer
 		-DRMLUI_SAMPLES=ON
-		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
-		#-DBUILD_TESTING=ON 							#  OFF
-		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON	
-		#-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
-		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
+		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
+		-DBUILD_TESTING=ON 						#  OFF
+		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
+		#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
+		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		${FREETYPE_CMAKE}
 		${GLFW_CMAKE}
 		${HARFBUZZ_CMAKE}
