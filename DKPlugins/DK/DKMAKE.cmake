@@ -4,7 +4,7 @@ if(ANDROID)
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()
 if(WIN)
-	dk_depend(psapi.lib)	# GetProcessMemoryInfo()
+	dk_depend(psapi)		# GetProcessMemoryInfo()
 	dk_depend(pdh.lib)		# PdhOpenQueryA()
 	dk_depend(dxva2.dll)	# GetNumberOfPhysicalMonitorsFromHMONITOR()
 endif()

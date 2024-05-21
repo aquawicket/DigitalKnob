@@ -10,7 +10,7 @@ dk_depend(libwebp)
 dk_depend(nasm)
 dk_depend(python)
 dk_depend(tiff)
-dk_depend(vfw32.lib)
+dk_depend(vfw32)
 dk_depend(zlib)
 
 

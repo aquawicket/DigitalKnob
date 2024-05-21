@@ -51,9 +51,9 @@ MAC_dk_depend(quartz_core)
 RASPBERRY_dk_depend(opengl)
 WIN_dk_depend(imm32)
 WIN_dk_depend(opengl)
-WIN_dk_depend(setupapi.lib)
-WIN_dk_depend(shlwapi.lib)
-WIN_dk_depend(version.lib)
+WIN_dk_depend(setupapi)
+WIN_dk_depend(shlwapi)
+WIN_dk_depend(version)
 WIN_dk_depend(winmm)
 
 
