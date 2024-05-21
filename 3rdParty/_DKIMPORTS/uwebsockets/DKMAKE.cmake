@@ -28,9 +28,9 @@ endif()
 
 ### GENERATE ###
 dk_configure(${UWEBSOCKETS}
-			${LIBUV_CMAKE}
-			${OPENSSL_CMAKE}
-			${ZLIB_CMAKE})
+	${LIBUV_CMAKE}
+	${OPENSSL_CMAKE}
+	${ZLIB_CMAKE})
 
 
 ### COMPILE ###

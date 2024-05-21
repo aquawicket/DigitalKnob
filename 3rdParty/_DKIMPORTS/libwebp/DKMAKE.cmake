@@ -20,7 +20,6 @@ if(MSVC)
 	WIN_dk_libDebug			(${LIBWEBP}/${OS}/${DEBUG_DIR}/libwebp.lib									WEBP_LIBRARY_DEBUG)
 	WIN_dk_libRelease		(${LIBWEBP}/${OS}/${RELEASE_DIR}/libwebp.lib								WEBP_LIBRARY_RELEASE)
 #elseif(APPLE)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebp.a)
 #	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpdecode.a)
 #	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdsp.build/libwebpdsp.a)
 #	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpencode.build/libwebpencode.a)
@@ -41,13 +40,11 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-if(MSVC)
-	WIN_dk_set				(LIBWEBP_CMAKE -DWEBP_INCLUDE_DIR=${WEBP_INCLUDE_DIR} -DWEBP_LIBRARY_DEBUG=${WEBP_LIBRARY_DEBUG} -DWEBP_LIBRARY_RELEASE=${WEBP_LIBRARY_RELEASE})
-elseif(ANDROID)
-	ANDROID_dk_set			(LIBWEBP_CMAKE -DWEBP_INCLUDE_DIR=${WEBP_INCLUDE_DIR} -DWEBP_LIBRARY_DEBUG=${WEBP_LIBRARY_DEBUG} -DWEBP_LIBRARY_RELEASE=${WEBP_LIBRARY_RELEASE})
-else()
-	dk_set					(LIBWEBP_CMAKE -DWEBP_INCLUDE_DIR=${WEBP_INCLUDE_DIR} -DWEBP_LIBRARY_DEBUG=${WEBP_LIBRARY_DEBUG} -DWEBP_LIBRARY_RELEASE=${WEBP_LIBRARY_RELEASE})
-endif()
+dk_set(LIBWEBP_CMAKE 
+	-DWEBP_INCLUDE_DIR=${WEBP_INCLUDE_DIR}
+	-DWEBP_LIBRARY_DEBUG=${WEBP_LIBRARY_DEBUG}
+	-DWEBP_LIBRARY_RELEASE=${WEBP_LIBRARY_RELEASE})
+
 
 
 ### GENERATE ###
