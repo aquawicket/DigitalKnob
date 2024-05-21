@@ -28,5 +28,5 @@ function Global:dk_download($url, $dest) {
 
 
 function Global:DKTEST() {
-	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1"
 }
