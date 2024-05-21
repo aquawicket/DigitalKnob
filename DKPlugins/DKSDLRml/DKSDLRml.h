@@ -67,11 +67,11 @@ public:
 	DKSDLWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
-		DKSDLRmlRenderer* Renderer;
+		DKSDLRmlRenderer* Renderer;				// Legacy Rml RenderInterface
 #	elif USE_DKSDLRMLOPENGL
-		DKSDLRmlOpenGL* Renderer;
+		DKSDLRmlOpenGL* Renderer;				// Legacy Rml RenderInterface
 #	elif USE_DKSDLRMLSHELL
-		ShellRenderInterfaceOpenGL* Renderer;
+		ShellRenderInterfaceOpenGL* Renderer;	// Legacy Rml RenderInterface
 #	endif
 
 	RmlSDL2SystemInterface* SystemInterface;

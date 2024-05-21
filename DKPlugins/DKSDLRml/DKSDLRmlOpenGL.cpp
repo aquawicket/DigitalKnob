@@ -97,7 +97,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
  
     for(int  i = 0; i < num_vertices; i++) {
         Positions[i] = vertices[i].position;
-        Colors[i] = vertices[i].colour;
+        //Colors[i] = vertices[i].colour; 		//!!!FIXME!!!!
         if(sdl_texture){
             TexCoords[i].x = vertices[i].tex_coord.x * texw;
             TexCoords[i].y = vertices[i].tex_coord.y * texh;

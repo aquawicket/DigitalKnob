@@ -16,6 +16,7 @@ call DK
     :: git remote update >nul 2>&1
     %GIT_EXE% remote update
 	
+	cd "%DKBRANCH_DIR%"
 	echo current directory is %CD%
 
 	:: branch= $(git rev-parse --abbrev-ref HEAD)

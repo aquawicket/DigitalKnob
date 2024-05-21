@@ -31,7 +31,8 @@
 
 //WARNING_DISABLE
 #include "RmlUi/Core.h"
-//#include <RmlUi/Core/RenderInterface.h>
+#include "RmlUi/Core/RenderInterfaceCompatibility.h"	// Legacy Rml RenderInterface
+//#include "RmlUi/Core/RenderInterface.h"
 #include "SDL.h"
 #if !defined(ANDROID) && !defined(IOS)
 	#include "SDL_opengl.h"
@@ -46,7 +47,7 @@ extern "C" {
 //WARNING_ENABLE
 
 
-class DKSDLRmlOpenGL : public Rml::RenderInterface
+class DKSDLRmlOpenGL : public Rml::RenderInterfaceCompatibility		// Legacy Rml RenderInterface
 {
 public:
 	DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen);
