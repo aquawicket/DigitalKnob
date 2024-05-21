@@ -36,7 +36,7 @@ call DK
     call dk_killProcess adb.exe
     
     call dk_info "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
-    call dk_copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%
+    call dk_copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% OVERWRITE
     start "" "%DIGITALKNOB_DIR%\%DKSCRIPT_NAME%" :dk_removeAll wipe
     call dk_exit    
         
