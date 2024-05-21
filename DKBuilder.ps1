@@ -1,9 +1,9 @@
-Write-Output "DKBuilder.ps1"
+#Write-Output "DKBuilder.ps1"
 
 ###### DK_INIT ######
 if (! (Test-Path "DKPowershell")) { New-Item -Path 'DKPowershell' -ItemType Directory }
 if (! (Test-Path "DKPowershell/functions")) { New-Item -Path 'DKPowershell/functions' -ItemType Directory }
-if (! (Test-Path "DKPowershell/functions/DK.ps1")) { Invoke-WebRequest -URI "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions/DK.ps1" -OutFile "DKPowershell\functions\DK.cmd" }
+if (! (Test-Path "DKPowershell/functions/DK.ps1")) { Invoke-WebRequest -URI "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions/DK.ps1" -OutFile "DKPowershell\functions\DK.ps1" }
 
 . $PWD\DKPowershell\functions\DK.ps1
 
