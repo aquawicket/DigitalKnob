@@ -127,7 +127,7 @@ imagemagick
 imm32
 iokit
 ios-cmake
-iphlpapi.lib
+iphlpapi
 jasper
 java
 jerryscript

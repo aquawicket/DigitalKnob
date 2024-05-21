@@ -2,7 +2,7 @@
 
 
 ### DEPENDS ###
-dk_depend(iphlpapi.lib)
+dk_depend(iphlpapi)
 dk_depend(ws2_32)
 
 
