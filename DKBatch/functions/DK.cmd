@@ -16,11 +16,17 @@ set "DEBUG_MODE=0"
 	if not exist "%DKBATCH_DIR%\functions" (echo "DKBATCH_DIR does not exist" & goto:eof)
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
+	::############ LOAD FUNCTION FILES ############
 	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions"
 	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
-
-
+	call dk_load dk_printVar
+	call dk_load dk_echo
+	call dk_load dk_replaceAll
+	call dk_load dk_removeExtension
 	call dk_load dk_getCaller
+	
+	
+	
 	call dk_getCaller 1
 	:dk_getCaller_return1
 	::call dk_printVar caller[0]
