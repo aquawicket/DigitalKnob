@@ -1,4 +1,5 @@
 @echo off
+call ../functions/DK.cmd
 
 ::####################################################################
 ::# test_dk_exception.cmd
@@ -6,7 +7,7 @@
 ::#
 
 setlocal disableDelayedExpansion
-if not defined @Try call exception init
+if not defined @Try call dk_exception init
 
 set /a cnt+=1
 echo Main Iteration %cnt% - Calling :Sub
@@ -24,7 +25,7 @@ echo Main Iteration %cnt% - Calling :Sub
   echo Rethrowing modified exception
   echo(
   endlocal
-  call exception rethrow -%cnt% "Main Exception" "%~f0<%~0>"
+  call dk_exception rethrow -%cnt% "Main Exception" "%~f0<%~0>"
 :@EndCatch
 echo Main Iteration %cnt% - Exit
 exit /b %cnt%
@@ -43,7 +44,7 @@ echo :Sub Iteration %cnt% - Start
   %= Throw an exception if the iteration count is a multiple of 3 =%
   set /a "1/(cnt%%3)" 2>nul || (
     echo Throwing exception
-    call exception throw -%cnt% "Divide by 0 exception" "%~f0<%~0>"
+    call dk_exception throw -%cnt% "Divide by 0 exception" "%~f0<%~0>"
   )
 %@EndTry%
 :@Catch
@@ -58,9 +59,9 @@ echo :Sub Iteration %cnt% - Start
   set /a "1/(cnt%%5)" 2>nul && (
     echo Rethrowing modified exception
     echo(
-    call exception rethrow -%cnt% ":Sub Exception" "%~f0<%~0>"
+    call dk_exception rethrow -%cnt% ":Sub Exception" "%~f0<%~0>"
   ) || (
-    call exception clear
+    call dk_exception clear
     echo Exception handled
     echo(
   )
@@ -68,3 +69,4 @@ echo :Sub Iteration %cnt% - Start
 :@EndCatch
 echo :Sub Iteration %cnt% - Exit
 exit /b %cnt%
+pause

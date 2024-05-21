@@ -7,7 +7,7 @@ call DK
 ::#
 ::#
 :dk_printVar () {
-	if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
+	if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=0"
 	
 	set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"
 	set "ENABLE_dk_debugFunc=0"

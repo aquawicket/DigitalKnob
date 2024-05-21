@@ -49,15 +49,15 @@ set "DEBUG_MODE=0"
 	call dk_load dk_getFilename
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	
-	call dk_load dk_escapeSequences
-	call dk_escapeSequences
+	::call dk_load dk_escapeSequences
+	::call dk_escapeSequences
 	
-	call dk_load dk_printVar
-	call dk_printVar DKBATCH_DIR
-	call dk_printVar DKSCRIPT_PATH
-	call dk_printVar DKBATCH_DIR
-	call dk_printVar DKSCRIPT_DIR
-	call dk_printVar DKSCRIPT_NAME
+	::call dk_load dk_printVar
+	::call dk_printVar DKBATCH_DIR
+	::call dk_printVar DKSCRIPT_PATH
+	::call dk_printVar DKBATCH_DIR
+	::call dk_printVar DKSCRIPT_DIR
+	::call dk_printVar DKSCRIPT_NAME
 	
 	::set true=0
 	::set false=1
@@ -76,6 +76,9 @@ set "DEBUG_MODE=0"
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
+	
+	set "ENABLE_dk_debugFunc=1"
+	set "ENABLE_dk_printVar=1"
 	echo.
     echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
 	echo.
@@ -83,7 +86,7 @@ set "DEBUG_MODE=0"
 	echo.
 	echo ########################## END TEST ################################
 	echo.
-	::pause
+	pause
 	exit
 goto:eof
 

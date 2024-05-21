@@ -30,3 +30,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	call dk_getFiles "C:\Windows" files
+	call dk_printArray files

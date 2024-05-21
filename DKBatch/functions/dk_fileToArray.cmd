@@ -12,14 +12,14 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
+	setlocal EnableDelayedExpansion
     ::set "file=%~1"
 	set /A i=0
-	setlocal EnableDelayedExpansion
-    for /F "usebackq delims=" %%a in ("%~1") do (
+    for /F "usebackq delims=" %%a in ("%~f1") do (
 		set "%~2[!i!]=%%a"
 		set /a i+=1
     )
-	 
+	
 	:: Return the array to the calling scope
 	set "currentScope=1"
 	for /F "delims=" %%a in ('set %~2[') do (
@@ -31,3 +31,18 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+
+:: create the file
+dir /b /a-d > array.cmd
+
+call dk_fileToArray "array.cmd" MyArray
+::call dk_arrayLength MyArray MyArrayLength
+::echo MyArrayLength = %MyArrayLength%
+call dk_printArray MyArray
+
+:: or print items individually
+
+echo MyArray[0] = %MyArray[0]%
+echo MyArray[1] = %MyArray[1]%
+echo MyArray[2] = %MyArray[2]%
