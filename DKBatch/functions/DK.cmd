@@ -24,7 +24,9 @@ set "DEBUG_MODE=0"
 	call dk_load dk_replaceAll
 	call dk_load dk_removeExtension
 	call dk_load dk_getCaller
-	
+	call dk_load dk_getDirectory
+	call dk_load dk_getFilename
+	call dk_load dk_escapeSequences
 	
 	
 	call dk_getCaller 1
@@ -49,16 +51,10 @@ set "DEBUG_MODE=0"
 	set "DKSCRIPT_ARGS=%caller[1].args%"
 	if %DEBUG_MODE% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & pause & exit ) :: keep window open
 	
-	call dk_load dk_getDirectory
 	call dk_getDirectory %DKSCRIPT_PATH% DKSCRIPT_DIR
-	
-	call dk_load dk_getFilename
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
-	
-	::call dk_load dk_escapeSequences
 	::call dk_escapeSequences
 	
-	::call dk_load dk_printVar
 	::call dk_printVar DKBATCH_DIR
 	::call dk_printVar DKSCRIPT_PATH
 	::call dk_printVar DKBATCH_DIR
