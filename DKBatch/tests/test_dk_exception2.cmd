@@ -1,13 +1,9 @@
 @echo off
-
-::####################################################################
-::# test_dk_exception2.cmd
-::#
-::#
+call ../functions/DK.cmd
 
 :: Main
 setlocal disableDelayedExpansion
-if not defined @Try call exception init
+if not defined @Try call dk_exception init
 set /a cnt+=1
 echo Main Iteration %cnt% - Calling :Sub
 call :Sub
@@ -29,8 +25,9 @@ if %cnt% lss 10 (
 %= Throw an exception if the iteration count is 6 =%
 set /a "1/(cnt-6)" 2>nul || (
   echo Throwing exception
-  call exception throw -%cnt% "Divide by 0 exception!" "%~f0<%~0>"
+  call dk_exception throw -%cnt% "Divide by 0 exception!" "%~f0<%~0>"
   echo Should NOT see this
 )
 echo :Sub Iteration %cnt% - Exit
+pause
 exit /b %cnt%
