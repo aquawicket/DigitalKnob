@@ -24,6 +24,8 @@ if(MSYSTEM)
 	elseif("${MSYSTEM}" STREQUAL "UCRT64")
 		dk_command(pacman -S mingw-w64-ucrt-x86_64-make --needed --noconfirm)			# UCRT64
 		dk_findProgram(MAKE_PROGRAM mingw32-make "${MSYS2}/ucrt64/bin")
+	else()
+		dk_error("ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
 	endif()
 endif()
 

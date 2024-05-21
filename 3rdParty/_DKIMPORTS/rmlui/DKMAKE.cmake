@@ -49,28 +49,28 @@ dk_depend(zstd)
 
 
 set(rmlui_all 1)
-set(rmlui_RmlCore 1)
-set(rmlui_RmlDebugger 1)
-set(rmlui_shell 1)
-set(rmlui_treeview 1)
-set(rmlui_customlog 1)
-set(rmlui_drag 1)
-set(rmlui_loaddocument 1)
-set(rmlui_transform 1)
-set(rmlui_bitmapfont 1)
-set(rmlui_animation 1)
-set(rmlui_benchmark 1)
-set(rmlui_demo 1)
-set(rmlui_databinding 1)
-set(rmlui_effects 1)
-set(rmlui_lottie 1)
-set(rmlui_harfbuzzshaping 1)
-set(rmlui_tutorial_template 1)
-set(rmlui_tutorial_drag 1)
-set(rmlui_invaders 1)
-set(rmlui_UnitTests 1)
-set(rmlui_VisualTests 1)
-set(rmlui_Benchmarks 1)
+set(rmlui_RmlCore 0)
+set(rmlui_RmlDebugger 0)
+set(rmlui_shell 0)
+set(rmlui_treeview 0)
+set(rmlui_customlog 0)
+set(rmlui_drag 0)
+set(rmlui_loaddocument 0)
+set(rmlui_transform 0)
+set(rmlui_bitmapfont 0)
+set(rmlui_animation 0)
+set(rmlui_benchmark 0)
+set(rmlui_demo 0)
+set(rmlui_databinding 0)
+set(rmlui_effects 0)
+set(rmlui_lottie 0)
+set(rmlui_harfbuzzshaping 0)
+set(rmlui_tutorial_template 0)
+set(rmlui_tutorial_drag 0)
+set(rmlui_invaders 0)
+set(rmlui_UnitTests 0)
+set(rmlui_VisualTests 0)
+set(rmlui_Benchmarks 0)
 
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi.git)
@@ -249,14 +249,12 @@ else()
 	
 	#-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
 	dk_configure(${RMLUI}
-		-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a
+		#"-DCMAKE_C_STANDARD_LIBRARIES=-lshlwapi -lCfgmgr32 -lSetupapi -lwinmm"
+		#"-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a"
 		-DRMLUI_BACKEND=SDL_SDLrenderer
-		-DRMLUI_SAMPLES=ON
+		#-DRMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
-		-DBUILD_TESTING=ON 							#  OFF
-		#-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
-		#-DENABLE_HARFBUZZ=${HARFBUZZ}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		#-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 			# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
+		#-DBUILD_TESTING=ON 							#  OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON	
 		#-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
