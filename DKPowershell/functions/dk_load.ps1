@@ -7,20 +7,19 @@
 ##
 ##
 function dk_load($func) {
-	#if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" call dk_download "%DKHTTP%/dk_debugFunc.cmd" "%DKBATCH_DIR%\functions\dk_debugFunc.cmd"
 	#dk_debugFunc
 	
-	
-	#if not exist "$DKPOWERSHELL_DIR\functions\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_download.cmd', '%DKBATCH_DIR%\functions\dk_download.cmd')"
+	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_debugFunc.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1" }
+	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_download.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_download.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_download.ps1" }
 	#if not exist "$DKPOWERSHELL_DIR\functions\%~1.cmd" dk_download "%DKHTTP%/%~1.cmd" "%DKBATCH_DIR%\functions\%~1.cmd"
 	
-	#echo "dk_load($func): Import-Module $DKPOWERSHELL_DIR\functions\$func.ps1"
-	#Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
+	echo "Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1"
+	Import-Module -Global $DKPOWERSHELL_DIR\functions\$func.ps1
 	
-	echo ". $DKPOWERSHELL_DIR\functions\$func.ps1"
-	. $DKPOWERSHELL_DIR\functions\$func.ps1
+	#echo ". $DKPOWERSHELL_DIR\functions\$func.ps1"
+	#. $DKPOWERSHELL_DIR\functions\$func.ps1
 
-
+	
 
 #	call %*
 	

@@ -12,7 +12,7 @@ if ($DKSTACK_marker -eq $null)		{ $DKSTACK_marker = 1 }
 # dk_debugFunc()
 #
 #
-function dk_debugFunc() {
+function Global:dk_debugFunc() {
 
 	#if not exist "%DKBATCH_DIR%\functions\dk_caller.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_caller.cmd', '%DKBATCH_DIR%\functions\dk_caller.cmd')"
 	#call dk_caller DKCALLER
