@@ -10,10 +10,10 @@
 dk_load() {
 	#echo "dk_load($*)"
 	[ $# -ne 1 ] && echo "${FUNCNAME}(): incorrect number of arguments"
+	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
-	local fn=
-	[ -z $1 ] && return 0
 	
+	local fn=	
 	if [ -e "$1" ]; then
 		fpath=$(cd $(dirname $1); pwd -P)/$(basename $1)
 		fn=$(basename ${fpath})
@@ -28,6 +28,8 @@ dk_load() {
 	[ ! -e ${fpath} ] && echo "Dowloading ${fn}"
 	[ ! -e ${fpath} ] && curl -Lo ${DKBASH_DIR}/functions/${fn} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
 	[ ! -e ${fpath} ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}
+	
+	[ ! -e ${fpath} ] && echo "ERROR: ${fpath}: file not found" && return
 	
 	# Convert to unix line endings if CRLF found
 	#if [ -e ${fpath}]; then

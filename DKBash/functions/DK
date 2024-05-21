@@ -112,7 +112,12 @@ DK () {
 		. ${DKBASH_DIR}/functions/dk_load
 		dk_load ${DKBASH_DIR}/dk_escapeSequences
 		dk_escapeSequences
+		
+		#dk_load ${DKBASH_DIR}/dk_errorStatus
+		#dk_errorStatus
+		
 		dk_load ${DKSCRIPT_PATH}
+		
 	#else	
 	#dk_escapeSequences
 	#fi
