@@ -31,7 +31,7 @@ dk_depend(rlottie)
 
 # rmlui sample dependencies
 dk_depend(cfgmgr32)
-dk_depend(imm32.lib)
+dk_depend(imm32)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(pthread)

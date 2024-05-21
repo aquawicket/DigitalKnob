@@ -37,7 +37,6 @@ call DK
     call dk_killProcess adb.exe
     
     call dk_info "RELOCATING SCRIPT TO -> %DIGITALKNOB_DIR%\%DKSCRIPT_NAME%"
-	::xcopy /s /e /Y %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch\
 	call dk_copy %DKBRANCH_DIR%\DKBatch %DIGITALKNOB_DIR%\DKBatch OVERWRITE
     call dk_copy %DKSCRIPT_PATH% %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% OVERWRITE
 	set "PATH=%DIGITALKNOB_DIR%\DKBatch\functions;%PATH%"
@@ -60,7 +59,7 @@ call DK
     call dk_info done.
         
     :: wait for the folders to get deleted
-    call dk_sleep 5
+    call dk_sleep 3
         
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
@@ -72,6 +71,3 @@ goto:eof
 
 
 :DKTEST ########################################################################
-
-
-

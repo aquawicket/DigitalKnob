@@ -124,7 +124,7 @@ homebrew
 ilmerge
 imageio
 imagemagick
-imm32.lib
+imm32
 iokit
 ios-cmake
 iphlpapi.lib

@@ -1,6 +1,6 @@
 # https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immgetcontext
 if(NOT WIN)
-	dk_undepend(imm32.lib)
+	dk_undepend(imm32)
 	dk_return()
 endif()
 
