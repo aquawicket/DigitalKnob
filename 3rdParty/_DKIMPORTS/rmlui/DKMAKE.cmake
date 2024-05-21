@@ -31,14 +31,15 @@ dk_depend(rlottie)
 
 # rmlui sample dependencies
 dk_depend(cfgmgr32)
+dk_depend(imm32.lib)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(pthread)
 dk_depend(sdl)
 dk_depend(sdl_image)
 dk_depend(setupapi.lib)
-dk_depend(shlwapi.lib)
 dk_depend(sfml)
+dk_depend(shlwapi.lib)
 dk_depend(tiff)
 dk_depend(version.lib)
 dk_depend(winmm.lib)
@@ -67,7 +68,7 @@ set(rmlui_lottie 0)
 set(rmlui_harfbuzzshaping 0)
 set(rmlui_tutorial_template 0)
 set(rmlui_tutorial_drag 0)
-set(rmlui_invaders 0)
+set(rmlui_invaders 1)          # we want this always on
 set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)
@@ -98,52 +99,52 @@ dk_addTarget	(rmlui shell)
 dk_addTarget	(rmlui treeview)
 dk_addTarget	(rmlui invaders)
 
-if(rmlui_RmlCore)
+if(rmlui_RmlCore OR rmlui_all)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Core/librmlui.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Core/librmlui.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Core/librmlui.a)
+		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Core/librmlui.a)
 	endif()
 endif()
 
-if(rmlui_RmlDebugger)
+if(rmlui_RmlDebugger OR rmlui_all)
 	dk_define				(HAVE_rmlui_RmlDebugger)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Debugger/librmlui_debugger.lib)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Debugger/librmlui_debugger.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Debugger/librmlui_debugger.a)
+        dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Debugger/librmlui_debugger.a)
 	endif()
 endif()
 
-if(rmlui_shell)
+if(rmlui_shell OR rmlui_all)
 	dk_define				(HAVE_rmlui_shell)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/shell.lib)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/shell.lib)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Samples/shell/librmlui_shell.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Samples/shell/librmlui_shell.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libshell.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libshell.a)
+		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Samples/shell/librmlui_shell.a)
+		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Samples/shell/librmlui_shell.a)
 	endif()
 endif()
 
-if(rmlui_treeview)
+if(rmlui_treeview OR rmlui_all)
 	dk_define				(HAVE_rmlui_treeview)
-	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/treeview.exe)
-	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/treeview.exe)
-	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/treeview)
-	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/treeview)
+	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_treeview.exe)
+	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_treeview.exe)
+	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_treeview)
+	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_treeview)
 endif()
 
-if(rmlui_invaders)
+if(rmlui_invaders OR rmlui_all)
 	dk_define				(HAVE_rmlui_invaders)
-	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/invaders.exe)
-	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/invaders.exe)
-	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/invaders)
-	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/invaders)
+	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_invaders.exe)
+	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_invaders.exe)
+	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_invaders)
+	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_invaders)
 endif()
 
 ### GENERATE ###
@@ -248,34 +249,37 @@ else()
 	#string(APPEND SampleDependencies " -L${ZSTD}/${OS}/${DEBUG_DIR}/lib -lzstd")
 	
 	#-DSDL2_DIR=C:/Users/aquawicket/digitalknob/Development/3rdParty/sdl-release-2.26.1/win_x86_64_clang/Debug
-	dk_configure(${RMLUI}
+	dk_configure(
+		${RMLUI}
 		#"-DCMAKE_C_STANDARD_LIBRARIES=-lshlwapi -lCfgmgr32 -lSetupapi -lwinmm"
-		#"-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a"
+		"-DCMAKE_EXE_LINKER_FLAGS=${SDL}/${BUILD_DIR}/libSDL2d.a"
 		-DRMLUI_BACKEND=SDL_SDLrenderer
-		#-DRMLUI_SAMPLES=ON
+		-DRMLUI_SAMPLES=ON
 		-DBUILD_SHARED_LIBS=OFF						# "Build shared (dynamic) libraries" ON
 		#-DBUILD_TESTING=ON 							#  OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF			# "Enable precompiled headers" ON	
 		#-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF			# "Overload global operator new/delete to track memory allocations in Tracy." ON
 		${FREETYPE_CMAKE}
-		#${GLFW_CMAKE}
-		#${HARFBUZZ_CMAKE}
+		${GLFW_CMAKE}
+		${HARFBUZZ_CMAKE}
+		${IMM32_CMAKE}
 		${LIBJPEG_TURBO_CMAKE}
 		${LIBPNG_CMAKE}
-		#${LUNASVG_CMAKE}
-		#${PTHREAD_CMAKE}
-		#${RLOTTIE_CMAKE}
+		${LUNASVG_CMAKE}
+		${PTHREAD_CMAKE}
+		${RLOTTIE_CMAKE}
+		${SDL_CMAKE}
 		${SDL_IMAGE_CMAKE}
-		#${SETUPAPI_CMAKE}
-		#${SFML_CMAKE}
+		${SETUPAPI_CMAKE}
+		${SFML_CMAKE}
 		${TIFF_CMAKE}
 		${VERSION_CMAKE}
 		${WINMM_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE}
-		${SDL_CMAKE} )
+	)
 endif()
 
 
@@ -283,23 +287,23 @@ endif()
 if(rmlui_all)
 	dk_build(${RMLUI})
 else()
-	if(rmlui_RmlCore)
+	if(rmlui_RmlCore OR rmlui_all)
 		dk_build(${RMLUI} RmlCore)
 	endif()
 
-	if(rmlui_RmlDebugger)
+	if(rmlui_RmlDebugger OR rmlui_all)
 		dk_build(${RMLUI} RmlDebugger)
 	endif()
 	
-	if(rmlui_shell)
+	if(rmlui_shell OR rmlui_all)
 		dk_build(${RMLUI} shell)
 	endif()
 	
-	if(rmlui_treeview)
+	if(rmlui_treeview OR rmlui_all)
 		dk_build(${RMLUI} treeview)
 	endif()
 	
-	if(rmlui_invaders)
+	if(rmlui_invaders OR rmlui_all)
 		dk_build(${RMLUI} invaders)
 	endif()
 endif()
