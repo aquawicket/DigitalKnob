@@ -19,7 +19,6 @@ set "DEBUG_MODE=0"
 	::############ LOAD FUNCTION FILES ############
 	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions"
 	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
-	call dk_load dk_echo
 	call dk_load dk_debug
 	call dk_load dk_printVar
 	call dk_load dk_replaceAll
