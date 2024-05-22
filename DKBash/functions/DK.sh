@@ -105,12 +105,12 @@ DK () {
 	###### Script loader ######
 	#if [ -n "${ENABLE_dk_load}" ]; then
 		###### download if missing ######
-		[ -e ${DKBASH_DIR}/functions/dk_load ] || curl -Lo DKBash/functions/dk_load https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
-		[ -e ${DKBASH_DIR}/functions/dk_load ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load
-		[ -e ${DKBASH_DIR}/functions/dk_load ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
+		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || curl -Lo DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		
-		. ${DKBASH_DIR}/functions/dk_load
-		dk_load ${DKBASH_DIR}/dk_escapeSequences
+		. ${DKBASH_DIR}/functions/dk_load.sh
+		dk_load dk_escapeSequences
 		dk_escapeSequences
 		
 		#dk_load ${DKBASH_DIR}/dk_errorStatus

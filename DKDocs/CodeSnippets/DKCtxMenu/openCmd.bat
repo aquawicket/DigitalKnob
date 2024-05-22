@@ -1,1 +1,1 @@
-cmd.exe
+cmd.exe %1

@@ -1,0 +1,26 @@
+#!/bin/sh
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+
+
+##################################################################################
+# dk_test(<args>)
+#
+#
+dk_test () {
+	dk_debugFunc
+	dk_require
+	#dk_require C1 C2 C3 C4
+	
+	#echo "1 = $1"
+	#echo "{1} = ${1}"
+	#echo "FUNCNAME[0] = ${FUNCNAME[0]}"
+}
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_test B1 B2 B3 B4
+	
+}

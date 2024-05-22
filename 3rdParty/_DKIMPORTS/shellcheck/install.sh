@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ###### Load Function files ######
-. ../../../DKBash/functions/DK
+. ../../../DKBash/functions/DK.sh
 
 SHELLCHECK_VERSION="v0.10.0"
 dk_validate HOST_OS "dk_getHostTriple"

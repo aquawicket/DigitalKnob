@@ -1,0 +1,68 @@
+#!/bin/sh
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+
+
+[ -z ${MAX_LINES-} ]   && export MAX_LINES=30
+################################################################################
+# dk_showFileLine(<filepath> <match_string or line_num>)
+#
+#
+#
+dk_showFileLine() {
+	dk_debugFunc
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	
+	dk_printVar lastErrorFile
+	dk_printVar lastErrorLine
+	[ -n "${lastErrorFile}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
+	[ -n "${lastErrorLine}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
+	unset lastErrorFile
+	unset lastErrorLine
+	
+	_filepath=$(realpath $_errfile)
+	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
+
+	#$(dk_fileContains ${_filepath} "${_matchString}") && echo "file contains the string" || echo "file DOES NOT contain the string"
+	
+	if [ -z ${_lineno} ]; then
+		oldIFS=${IFS}
+		IFS=$'\n'
+		lines=$(grep -n -o "${_matchString}" "${_filepath}")
+		IFS=${oldIFS}
+		line=${lines[0]%%:*}	# remove everything after :
+		lineno=$((${line} + 0))
+	fi
+	
+	dk_echo " File: ${_filepath}: ${_lineno}"
+	
+	min=$(( _lineno-(MAX_LINES / 2) ))
+	max=$(( _lineno+(MAX_LINES / 2) ))
+	n=1
+	while IFS= read -r line; do
+	    if [ "${n}" -lt "${max}" ]; then
+			if [ "${n}" -gt "${min}" ]; then
+				#line=!line::=:	! 
+				if [ "${n}" -eq "${_lineno}" ]; then
+					dk_echo "${bg_white}${black}> ${n}: ${line}${clr}"
+				else
+					dk_echo "  ${n}: ${line}"
+				fi
+			fi
+		fi
+		n=$(( n+1 ))
+	done < "${_filepath}"
+}
+
+
+
+
+
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	dk_showFileLine "../../README.md" "How to build"
+
+}

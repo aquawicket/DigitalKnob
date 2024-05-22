@@ -39,11 +39,6 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_validate DKIMPORTS_DIR "dk_validateBranch"
 	call dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP%\config.xml OVERWRITE
 
-	:::::: Add Context Menu
-	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "" "" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
-
 	:::::: associateFiles.cmd ###
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
@@ -97,6 +92,11 @@ call ../../../DKBatch/functions/DK.cmd
 	assoc .txt=dk_txtfile
 	assoc .xml=dk_txtfile
 	
+	:::::: Add Context Menu
+	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
+	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
+	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "" "" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+
 	call dk_checkError
 	
 	:: install via CMake
@@ -110,8 +110,4 @@ goto:eof
 
 :DKTEST ########################################################################
 
-::call dk_validate DKTOOLS_DIR "dk_getDKPaths"
-::call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-::call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
-::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
-call :dk_installNotepadpp
+call dk_installNotepadpp

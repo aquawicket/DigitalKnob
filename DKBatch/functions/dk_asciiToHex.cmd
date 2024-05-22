@@ -36,4 +36,4 @@ goto:eof
 
 	set "myAscii=x"
 	call dk_asciiToHex myAscii myHex
-	call dk_printVar myHex
+	echo myHex = %myHex%
