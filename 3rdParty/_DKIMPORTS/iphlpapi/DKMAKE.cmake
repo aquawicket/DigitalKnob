@@ -9,5 +9,5 @@ dk_findLibrary(Iphlpapi.lib)
 
 # MSYS2 (-lIphlpapi)
 if(MSYSTEM)
-	dk_set(WINMM_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lIphlpapi")
+	dk_set(IPHLPAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lIphlpapi")
 endif()

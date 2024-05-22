@@ -11,5 +11,5 @@ dk_findLibrary(Userenv.lib)
 
 # MSYS2 (-lUserenv)
 if(MSYSTEM)
-	dk_set(VERSION_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lUserenv")
+	dk_set(USERENV_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lUserenv")
 endif()

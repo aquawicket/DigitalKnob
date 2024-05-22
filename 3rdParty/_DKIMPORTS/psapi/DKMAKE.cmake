@@ -11,5 +11,5 @@ dk_findLibrary(Psapi.lib)
 
 # MSYS2 (-lPsapi)
 if(MSYSTEM)
-	dk_set(SETUPAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lPsapi")
+	dk_set(PSAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lPsapi")
 endif()

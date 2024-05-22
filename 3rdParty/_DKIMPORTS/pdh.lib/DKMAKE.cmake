@@ -9,5 +9,5 @@ dk_findLibrary(pdh.lib)
 
 # MSYS2 (-lpdh)
 if(MSYSTEM)
-	dk_set(WINMM_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpdh")
+	dk_set(PDH_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpdh")
 endif()

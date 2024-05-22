@@ -10,5 +10,5 @@ dk_findLibrary(ws2_32.lib)
 
 # MSYS2 (-lws2_32)
 if(MSYSTEM)
-	dk_set(WINMM_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lws2_32")
+	dk_set(WS2_32_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lws2_32")
 endif()
