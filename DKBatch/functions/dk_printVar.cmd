@@ -22,7 +22,7 @@ call DK
 	setlocal EnableDelayedExpansion
 	call set "_value_=!%_var_%!"
 	if not defined !_value_! ( endlocal & goto :array )
-	call dk_debug "%_var_% = '!%_value_%!'"
+	call dk_echo "%Blue%%_var_% =%blue% '!%_value_%!'%clr%"
 	endlocal
     goto:eof
 	
@@ -33,7 +33,7 @@ call DK
     setlocal EnableDelayedExpansion
     :loop1
     if defined %_array_%[%n%] ( 
-        call dk_debug "%_array_%[%n%] = '!%_array_%[%n%]!'"
+        call dk_echo "%Blue%%_array_%[%n%] =%blue% '!%_array_%[%n%]!'%clr%"
         set /A n+=1
         goto :loop1 )
     ::call dk_info "%_array_% length = %n%"
@@ -43,11 +43,11 @@ call DK
     :variable
 	set "_var_=%~1"
     if not defined %~1 ( goto :undefined )	
-    call dk_debug "%_var_% = '%%%_var_%%%'"
+    call dk_echo "%Blue%%_var_% =%blue% '%%%_var_%%%'%clr%"
     goto:eof
     
     :undefined
-    call dk_debug "%~1 = %red%UNDEFINED%clr%"
+    call dk_echo "%Blue%%~1 =%blue% %red%UNDEFINED%clr%"
 	
 goto:eof
     
