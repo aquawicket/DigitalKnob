@@ -123,6 +123,7 @@ if(ANDROID)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(gdal)
 	dk_disable(glew)
+	dk_disable(glfw)
 	dk_disable(gzip)
 	dk_disable(jasper)
 	dk_disable(kdevelop)			# Permission denied running KDevelop-5.6.1-x86_64.AppImage

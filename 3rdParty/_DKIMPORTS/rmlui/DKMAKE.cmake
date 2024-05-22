@@ -81,7 +81,7 @@ dk_import(https://github.com/mikke89/RmlUi.git)
 
 # ANDROID FIX
 if(ANDROID)
-	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
+#	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
 
 
