@@ -21,27 +21,30 @@ if not defined clr call set "clr=%ESC%[0m"
 
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
 
-    :pointer
-	::setlocal EnableDelayedExpansion
-    set "_ptr_=%~1"
-	call set "_ptrvalueA_ = %%%_ptr_%%%"
-    call set "_ptrvalueB_=%%%_ptrvalueA_%%%"
-    if not defined %_ptrvalueA_% ( goto:array )
-    call dk_echo "%LBlue% %_ptr_% %clr% %blue% = !%_ptrvalueB_%!%clr%"
-    ::endlocal
-    goto:eof
+	if not defined %~1 ( goto:undefined )
 
-    :array
+	:array
 	set "arry=%~1"
 	set /A "n=0"
 	setlocal EnableDelayedExpansion
 	:loop1
-	if not defined %arry%[%n%] ( goto:variable )
+	if not defined %arry%[%n%] ( goto:pointer )
 	call dk_echo %LBlue% %arry%[%n%] %blue% = !%arry%[%n%]!%clr%
 	set /A n+=1
 	goto :loop1 
 	endlocal
 	
+    :pointer
+	setlocal
+    set "_ptr_=%~1"
+	call set "_ptrB_=%%%_ptr_%%%"
+	if not "%_ptrB_%"=="%_ptrB_: =%" ( goto:variable )
+    if not defined %_ptrB_% ( goto:variable )
+	call set "_ptrvalue_=%%%_ptrB_%%%"
+    call dk_echo %LBlue% %_ptr_%%clr% %blue% = %_ptrB_% = %_ptrvalue_% %clr%
+    endlocal
+    goto:eof
+
     :variable
     set "_var_=%~1"
 	call set "_value_=%%%_var_%%%"
