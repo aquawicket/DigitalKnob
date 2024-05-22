@@ -1,7 +1,7 @@
 @echo off
 call DK
 
-if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=0"
+if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=1"
 if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
 if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
 if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
@@ -50,7 +50,6 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::	set DKSTACK[%DKSTACK_marker%].__FILE__=%caller[0].fullpath%
 ::	set DKSTACK[%DKSTACK_marker%].__FUNCTION__=%caller[0].func%
 ::	set DKSTACK[%DKSTACK_marker%].__ARGS__=%caller[0].args%
-	
 	set /a DKSTACK_length+=1
 	set /a DKSTACK_marker=%DKSTACK_length%	
 ::	if %DKSTACK_length% LSS %MAX_STACK_LINES% (
@@ -68,6 +67,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
 	
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
+	
+	
 	set "cyan=[36m"
 	set "clr=[0m"
 	echo %__FILE__%: %cyan%%__FUNCTION__%(%__ARGS__%)%clr%
@@ -77,3 +78,4 @@ goto:eof
 
 
 :DKTEST ########################################################################
+goto:eof

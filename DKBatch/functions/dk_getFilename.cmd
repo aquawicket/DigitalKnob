@@ -16,10 +16,13 @@ call DK
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~nxZ"
 	endlocal & set %2=%OUT%
-	call dk_printVar %2
+	::call dk_printVar %2
 goto:eof
 
 
 
 
 :DKTEST ########################################################################
+
+	call dk_getFilename "C:\Windows\System32\notepad.exe" filename
+	echo filename = %filename%

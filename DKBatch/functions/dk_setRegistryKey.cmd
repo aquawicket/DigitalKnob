@@ -7,7 +7,6 @@ call DK
 ::
 :dk_setRegistryKey
 	call dk_debugFunc
-	echo dk_setRegistryKey ___ARGC_ = %__ARGC__%
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	
 	

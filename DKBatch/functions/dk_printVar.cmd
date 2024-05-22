@@ -1,60 +1,61 @@
 @echo off
 call DK
 
-
+if not defined ESC set "ESC="
+if not defined red call set "red=%ESC%[31m"
+if not defined LBLUE call set "LBLUE=%ESC%[94m"
+if not defined blue call set "blue=%ESC%[34m"
+if not defined clr call set "clr=%ESC%[0m"
 ::################################################################################
 ::# dk_printVar(<variable>)
 ::#
 ::#
 :dk_printVar () {
-	if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=0"
-	
-	set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"
-	set "ENABLE_dk_debugFunc=0"
-	call dk_debugFunc
-	set "ENABLE_dk_debugFunc=%OLD_ENABLE_dk_debugFunc%"
-	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
-	
-	if "%ENABLE_dk_printVar%" neq "1"  goto:eof
-	
-	:pointer
-	set "_var_=%~1"
-	setlocal EnableDelayedExpansion
-	call set "_value_=!%_var_%!"
-	if not defined !_value_! ( endlocal & goto :array )
-	call dk_echo "%Blue%%_var_% =%blue% '!%_value_%!'%clr%"
-	endlocal
-    goto:eof
-	
-	:array
-	if not defined %~1[0] ( goto :variable )
-    set "_array_=%~1"
-    set /A "n=0"
-    setlocal EnableDelayedExpansion
-    :loop1
-    if defined %_array_%[%n%] ( 
-        call dk_echo "%Blue%%_array_%[%n%] =%blue% '!%_array_%[%n%]!'%clr%"
-        set /A n+=1
-        goto :loop1 )
-    ::call dk_info "%_array_% length = %n%"
-    endlocal
+    if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
+
+    set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"
+    set "ENABLE_dk_debugFunc=0"
+    call dk_debugFunc
+    set "ENABLE_dk_debugFunc=%OLD_ENABLE_dk_debugFunc%"
+    if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+
+    if "%ENABLE_dk_printVar%" neq "1" goto:eof
+
+    :pointer
+	::setlocal EnableDelayedExpansion
+    set "_ptr_=%~1"
+	call set "_ptrvalueA_ = %%%_ptr_%%%"
+    call set "_ptrvalueB_=%%%_ptrvalueA_%%%"
+    if not defined %_ptrvalueA_% ( goto:array )
+    call dk_echo "%LBlue% %_ptr_% %clr% %blue% = !%_ptrvalueB_%!%clr%"
+    ::endlocal
     goto:eof
 
+    :array
+	set "arry=%~1"
+	set /A "n=0"
+	setlocal EnableDelayedExpansion
+	:loop1
+	if not defined %arry%[%n%] ( goto:variable )
+	call dk_echo %LBlue% %arry%[%n%] %blue% = !%arry%[%n%]!%clr%
+	set /A n+=1
+	goto :loop1 
+	endlocal
+	
     :variable
-	set "_var_=%~1"
-    if not defined %~1 ( goto :undefined )	
-    call dk_echo "%Blue%%_var_% =%blue% '%%%_var_%%%'%clr%"
+    set "_var_=%~1"
+	call set "_value_=%%%_var_%%%"
+    if not defined %~1 ( goto:undefined )
+    call dk_echo %LBlue% %~1 %blue% = %_value_% %clr%
     goto:eof
-    
+
     :undefined
-    call dk_echo "%Blue%%~1 =%blue% %red%UNDEFINED%clr%"
-	
+    call dk_echo %LBlue% %~1 %blue% = %red% UNDEFINED %clr%
 goto:eof
-    
-    
-    
-    	
-	
+
+
+
+
 
 
 :DKTEST #####################################################################

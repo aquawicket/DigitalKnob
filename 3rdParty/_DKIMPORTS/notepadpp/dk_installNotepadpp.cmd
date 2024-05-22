@@ -26,7 +26,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
 	
-	if exist "%NOTEPADPP_EXE%" goto:eof
+	if exist "%NOTEPADPP_EXE%" goto:associateFiles
 	
 	call dk_echo   
     call dk_info "Installing notepad++ . . ."
@@ -49,6 +49,8 @@ call ../../../DKBatch/functions/DK.cmd
 	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
 	::
 	:: https://ss64.com/nt/ftype.html
+	:associateFiles
+	
 	ftype dk_txtfile=%NOTEPADPP_EXE% "%%1"
 
 	assoc .1=dk_txtfile
@@ -60,7 +62,6 @@ call ../../../DKBatch/functions/DK.cmd
 	assoc .bak=dk_txtfile
 	assoc .c=dk_txtfile
 	assoc .cmake=dk_txtfile
-	assoc .code-workspace=dk_txtfile
 	assoc .cpp=dk_txtfile
 	assoc .css=dk_txtfile
 	assoc .data=dk_txtfile
@@ -96,7 +97,6 @@ call ../../../DKBatch/functions/DK.cmd
 	assoc .txt=dk_txtfile
 	assoc .xml=dk_txtfile
 	
-
 	call dk_checkError
 	
 	:: install via CMake
@@ -110,7 +110,8 @@ goto:eof
 
 :DKTEST ########################################################################
 
-call dk_validate DKTOOLS_DIR "dk_getDKPaths"
-call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
-call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+::call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+::call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+::call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
+::call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+call :dk_installNotepadpp
