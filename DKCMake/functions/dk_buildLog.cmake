@@ -13,7 +13,8 @@ function(dk_buildLog entry)
 	dk_getOptionValue(PATH ${ARGV})
 	
 	#dk_printVar(entry)
-	dk_info("${entry}")
+	set(msg "${entry} = ${${entry}}")
+	dk_info("${msg}")
 	
-	file(APPEND ${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${entry}\n")
+	file(APPEND ${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${msg}\n")
 endfunction()
