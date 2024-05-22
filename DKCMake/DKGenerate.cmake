@@ -25,6 +25,7 @@ include_guard()
 
 dk_load(${DKCMAKE_DIR}/DKDisabled.cmake)
 
+
 dk_info("\n")
 dk_info("############################################################")
 dk_info("######################  DigitalKnob  #######################")
@@ -178,7 +179,7 @@ foreach(plugin ${dkdepend_list})
 					dk_warning("MISSING: ${lib}")
 					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
 				else()
-					dk_debug("FOUND: ${lib}")
+					dk_echo("${Green}FOUND:${green} ${lib}${clr}")
 				endif()
 			endforeach()
 		

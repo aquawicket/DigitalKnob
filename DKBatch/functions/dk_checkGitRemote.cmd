@@ -13,12 +13,13 @@ call DK
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
 
 	call dk_validate GIT_EXE dk_validateGit
+	
+	cd "%DKBRANCH_DIR%"
+	::echo current directory is %CD%
+	
     :: git remote update >nul 2>&1
     %GIT_EXE% remote update
 	
-	cd "%DKBRANCH_DIR%"
-	echo current directory is %CD%
-
 	:: branch= $(git rev-parse --abbrev-ref HEAD)
     call dk_commandToVariable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
 
