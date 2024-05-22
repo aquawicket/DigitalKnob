@@ -10,5 +10,5 @@ dk_findLibrary(crypt32.lib)
 
 # MSYS2 (-lcrypt32)
 if(MSYSTEM)
-	dk_set(WINMM_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lcrypt32")
+	dk_set(CRYPT32_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lcrypt32")
 endif()
