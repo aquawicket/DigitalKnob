@@ -1,4 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_debugFunc){ $dk_debugFunc = 1 } else{ return }
 
 if (!$ENABLE_dk_debugFunc)	{ $ENABLE_dk_debugFunc = 1 }
 if (!$MAX_STACK_LINES)		{ $MAX_STACK_LINES = 200 }

@@ -1,4 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_debug){ $dk_debug = 1 } else{ return }
 
 dk_load dk_info
 if (!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1 }

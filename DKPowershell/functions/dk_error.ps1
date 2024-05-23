@@ -1,10 +1,12 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_error){ $dk_error = 1 } else{ return }
 
 dk_load dk_info
+dk_load dk_pause
 if (!$ENABLE_dk_error){ $global:ENABLE_dk_error = 1 }
 if (!$TRACE_ON_ERROR) { $global:TRACE_ON_ERROR = 0  }
 if (!$LINE_ON_ERROR)  { $global:LINE_ON_ERROR = 0   }
-if (!$PAUSE_ON_ERROR) { $global:PAUSE_ON_ERROR = 0  }
+if (!$PAUSE_ON_ERROR) { $global:PAUSE_ON_ERROR = 1  }
 if (!$HALT_ON_ERROR)  { $global:HALT_ON_ERROR = 0   }
 #$ERROR_TAG="  ERROR: "
 ################################################################################

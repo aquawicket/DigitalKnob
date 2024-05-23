@@ -1,14 +1,15 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_makeDirectory){ $dk_makeDirectory = 1 } else{ return }
 
+dk_load dk_info
 ####################################################################
 # dk_makeDirectory(<path>)
 #
 #
-function Global:dk_makeDirectory () {
+function Global:dk_makeDirectory ($_path_) {
 	dk_debugFunc
 	
-	#set "path=%~1"
-    #if NOT exist "%path%" mkdir "%path%"
+	if (! (Test-Path $_path_)){ dk_info "create directory" }
 }
 
 

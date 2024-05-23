@@ -1,4 +1,6 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_download){ $dk_download = 1 } else{ return }
+
 
 ####################################################################
 # dk_download(<url> <destination>)

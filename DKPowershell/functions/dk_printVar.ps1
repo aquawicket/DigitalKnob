@@ -1,8 +1,8 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_printVar){ $dk_printVar = 1 } else{ return }
 
 dk_load dk_info
 if (!$USE_LOCAL_N_dk_printVar){ $global:USE_LOCAL_N_dk_printVar = 1 }
-
 ####################################################################
 # dk_printVar()
 #
