@@ -4,6 +4,7 @@ if (!$dk_test){ $dk_test = 1 } else{ return }
 dk_load dk_info
 dk_load dk_debug
 dk_load dk_error
+dk_load dk_pause
 ##################################################################################
 # dk_test()
 #
@@ -23,7 +24,7 @@ function GLOBAL:dk_test($str, $num) {
 	echo "__CALLER__   = $(__CALLER__)"
 
 	
-	Read-Host -Prompt "Press Enter to continue"
+	dk_pause
 }
 
 
