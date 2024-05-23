@@ -9,7 +9,7 @@ include_guard()
 #   NOERROR     - if NOERROR is specified in the parameters, dk_error() messages will not be displayed
 #
 function(dk_remove path)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_getOption(NOERROR ${ARGV})
 

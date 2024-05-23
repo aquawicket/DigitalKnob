@@ -21,7 +21,7 @@ endif()
 #	@msg	- The message to print
 #
 function(dk_info)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	set(msg ${ARGV})
 	

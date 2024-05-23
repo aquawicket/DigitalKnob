@@ -6,7 +6,7 @@ include_guard()
 #	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})  # called in dk_debugFunc
 	
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")

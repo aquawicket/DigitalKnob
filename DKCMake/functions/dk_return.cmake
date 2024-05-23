@@ -6,7 +6,7 @@ include_guard()
 #	Print the current cmake file and return
 #
 macro(dk_return)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(PRINT_DKRETURNS)
 		dk_debug("${CMAKE_CURRENT_LIST_FILE} -> dk_return()")

@@ -10,7 +10,7 @@ include_guard()
 #	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name RESULT)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_getOptionValue(${name} ${ARGN})
 	set(${RESULT} ${${name}})

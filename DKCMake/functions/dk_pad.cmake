@@ -11,7 +11,7 @@ include_guard()
 #	@RESULT		- The returned string w/padding
 #
 function(dk_pad str padchar length RESULT)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	string(LENGTH "${str}" _strlen)
 	math(EXPR _strlen "${length} - ${_strlen}")

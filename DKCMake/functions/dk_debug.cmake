@@ -21,7 +21,7 @@ endif()
 #	@msg	- The message to print
 #
 function(dk_debug msg)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(NOT ENABLE_dk_debug)
 		return()

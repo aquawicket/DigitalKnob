@@ -6,7 +6,7 @@ include_guard()
 #	Pause execution and wait for keypress to continue
 #
 function(dk_pause) 
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_debug("dk_pause(${ARGV})")
 	

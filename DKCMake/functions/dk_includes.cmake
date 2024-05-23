@@ -10,7 +10,7 @@ include_guard()
 #	@RESULT		- Returns true if the str contains the substr. Otherwise returns false
 #
 function(dk_includes variable find RESULT)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	string(FIND "${variable}" "${find}" index)
 	if(${index} GREATER -1)

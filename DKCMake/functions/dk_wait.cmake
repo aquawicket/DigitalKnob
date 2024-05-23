@@ -9,7 +9,7 @@ include_guard()
 #	@msg:(Optional)		- default = "press and key to continue."
 #
 function(dk_wait) 
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	dk_isNumber("${ARGV0}" isNumber)
 	if(isNumber)

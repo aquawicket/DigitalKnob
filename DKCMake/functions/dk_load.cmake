@@ -8,8 +8,7 @@ include_guard()
 #	@fn	- TODO
 #
 macro(dk_load var)
-	#dk_debugFunc(${ARGV})
-	message("dk_load(${ARGV})")
+	#message("dk_load(${ARGV})")
 	
 	string(STRIP ${var} fn)
 	

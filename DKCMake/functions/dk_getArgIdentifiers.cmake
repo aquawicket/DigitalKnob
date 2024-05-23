@@ -8,7 +8,7 @@ include_guard()
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})		# called in dk_debugFunc
 
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)

@@ -8,7 +8,7 @@ include_guard()
 #	@msg	- The message to print
 #
 function(dk_notice msg)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	#dk_updateLogInfo()
 	#message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
