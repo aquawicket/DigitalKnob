@@ -13,10 +13,10 @@ function Global:dk_download($url, $dest) {
 	#Write-Output "dest = $dest"
 	
 	# method 1
-    Invoke-WebRequest -URI $url -OutFile $dest
+    #Invoke-WebRequest -URI $url -OutFile $dest
 	
 	# method 2
-	#(New-Object System.Net.WebClient).DownloadFile($url, $dest)
+	(New-Object System.Net.WebClient).DownloadFile($url, $dest)
 	
 	# method 2 (extended)
 	#$WebClient = New-Object System.Net.WebClient
@@ -29,5 +29,5 @@ function Global:dk_download($url, $dest) {
 
 
 function Global:DKTEST() {
-	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1"
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"
 }
