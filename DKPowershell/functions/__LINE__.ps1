@@ -1,15 +1,10 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$__LINE__){ $__LINE__ = 1 } else{ return }
+if (!$DK_LINE){ $DK_LINE = 1 } else{ return }
 
-dk_load dk_info
 ##################################################################################
 # __LINE__()
 #
-#
-function GLOBAL:__LINE__() {
-	#dk_debugFunc
+function GLOBAL:__LINE__($_FRAME_=1) {
 	
-	$global:__LINE__   = [string]$(Get-PSCallStack)[1].ScriptLineNumber
-	return $__LINE__
+	return $(Get-PSCallStack)[$_FRAME_].ScriptLineNumber
 }
-

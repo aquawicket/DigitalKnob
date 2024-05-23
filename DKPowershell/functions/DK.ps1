@@ -59,6 +59,12 @@ function DK() {
 	#if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_load.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_load.ps1" }
 	
 	#. $DKPOWERSHELL_DIR\functions\dk_thisFunction
+	. $DKPOWERSHELL_DIR\functions\__FILE__.ps1
+	. $DKPOWERSHELL_DIR\functions\__LINE__.ps1
+	. $DKPOWERSHELL_DIR\functions\__FUNCTION__.ps1
+	. $DKPOWERSHELL_DIR\functions\__ARGC__.ps1
+	. $DKPOWERSHELL_DIR\functions\__ARGV__.ps1
+	. $DKPOWERSHELL_DIR\functions\__CALLER__.ps1
 	. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
 	. $DKPOWERSHELL_DIR\functions\dk_load.ps1
 	

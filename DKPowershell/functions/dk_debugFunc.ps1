@@ -16,42 +16,13 @@ if (!$DKSTACK_marker)		{ $DKSTACK_marker = 1 }
 #
 function Global:dk_debugFunc() {
 
-	$lvl = 1
-	
-	$global:FILENAME  = [string]($(Get-PSCallStack)[$lvl+1].Location).Split(':')[0]
-	#Write-Output "FILENAME = $FILENAME"
-	
-	$global:LINENO   = [string]$(Get-PSCallStack)[$lvl+1].ScriptLineNumber
-	#Write-Output "LINENO = $LINENO"
-	
-	$global:FUNCTION = [string]($(Get-PSCallStack)[$lvl].FunctionName).Split(':')[1]
-	#Write-Output "FUNCTION = $FUNCTION"
-	
-	$ParameterList = (Get-Command -Name $FUNCTION).Parameters;
-	#Write-Output "ParameterList = $ParameterList"
-	
-	$global:ARGC = $ParameterList.count
-	#Write-Output "ARGC = $ARGC"
-	
-	foreach ($key in $ParameterList.keys){
-		$_varName_ = (get-variable $key).Value
-		$_args_+=$_varName_
-		#$_value_ = (Get-Item variable:$_varName_).Value
-		#$args+="$_varName_`:`"$_value_`""
-	}
-	#$_args_ = $PsBoundParameters.Values + $args
-	$fileLine = "$FILENAME`:$LINENO"
-	$funcArgs = "$FUNCTION($_args_)"
-	
-	#Write-Host -Fore DarkCyan "$FILENAME`:$LINENO --> $FUNCTION($_args_)";
-	#Write-Host -Fore DarkCyan -NoNewline "$FILENAME"; Write-Host -Fore Cyan -NoNewline "`:$LINENO"; Write-Host -Fore Blue "          $FUNCTION($_args_)";
-	Write-Host -Fore cyan -NoNewline "$FILENAME`:$LINENO".PadLeft(20); Write-Host -Fore blue "   $FUNCTION($_args_)";
-	
-	#"{0} {1}" -f ($fileLine).PadLeft(20),$funcArgs
-	
-	#Write-Host -Fore DarkCyan -NoNewline $fileLine.PadLeft(20);, Write-Host -Fore Blue $funcArgs;
-	
-	
-
+	$_FRAME_ = 1
+	$_FILE_     = $(__FILE__     $($_FRAME_+2))
+	$_LINE_     = $(__LINE__     $($_FRAME_+2))
+	$_FUNCTION_ = $(__FUNCTION__ $($_FRAME_+1))
+	$_ARGC_     = $(__ARGC__     $($_FRAME_+1))
+	$_ARGV_     = $(__ARGV__     $($_FRAME_+1))
+	#$ARGS = $PsBoundParameters.Values + $args
+Write-Host -Fore cyan -NoNewline "${_FILE_}`:${_LINE_}".PadLeft(20); Write-Host -Fore blue "   ${_FUNCTION_}(${_ARGC_}`: ${_ARGV_})";
 
 }

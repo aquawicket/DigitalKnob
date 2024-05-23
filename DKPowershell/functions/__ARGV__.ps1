@@ -1,24 +1,15 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$__ARGV__){ $__ARGV__ = 1 } else{ return }
+if (!$DK_ARGV){ $DK_ARGV = 1 } else{ return }
 
-dk_load dk_info
 ##################################################################################
 # __ARGV__()
 #
-#
-function GLOBAL:__ARGV__() {
-	#dk_debugFunc
+function GLOBAL:__ARGV__($_FRAME_=1) {
 	
-	$global:__FUNCTION__ = [string]($(Get-PSCallStack)[1].FunctionName).Split(':')[1]
-	$global:__ARGS__ = (Get-Command -Name $__FUNCTION__).Parameters;
-
-	$global:ARGV = New-Object System.Collections.Generic.List[System.Object]
-	foreach ($key in $__ARGS__.keys){
-		$__ARG__ = (get-variable $key).Name
-		if(!$__ARGV__){ $__ARGV__ = "$__ARG__" }
-		else{ $__ARGV__ = "$__ARGV__`; $__ARG__" }
-		$ARGV.Add((get-variable $key).Value)
+	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
+	foreach ($key in (Get-Command -Name $(__FUNCTION__ $($_FRAME_+1))).Parameters.keys){
+		#$_ARG_ = (get-variable $key).Name
+		$_ARGV_.Add((get-variable $key).Value)
 	}
-	return $ARGV
+	return $_ARGV_
 }
-

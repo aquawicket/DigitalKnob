@@ -1,15 +1,10 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$__FILE__){ $__FILE__ = 1 } else{ return }
+if (!$DK_FILE){ $DK_FILE = 1 } else{ return }
 
-dk_load dk_info
 ##################################################################################
 # __FILE__()
 #
-#
-function GLOBAL:__FILE__() {
-	#dk_debugFunc
+function GLOBAL:__FILE__($_FRAME_=1) {
 	
-	$global:__FILE__  = [string]($(Get-PSCallStack)[1].Location).Split(':')[0]
-	return $__FILE__
+	return ($(Get-PSCallStack)[$_FRAME_].Location).Split(':')[0]
 }
-

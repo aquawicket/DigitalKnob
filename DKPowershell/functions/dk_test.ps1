@@ -1,23 +1,16 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_test){ $dk_test = 1 } else{ return }
 
-dk_load __FILE__
-dk_load __LINE__
-dk_load __FUNCTION__
-dk_load __ARGC__
-dk_load __ARGV__
-dk_load __CALLER__
 dk_load dk_info
 dk_load dk_debug
+dk_load dk_error
 ##################################################################################
 # dk_test()
 #
 #
 function GLOBAL:dk_test($str, $num) {
 	dk_debugFunc
-	
-#	$__FUNCTION__ = [string]($(Get-PSCallStack)[0].FunctionName).Split(':')[1]
-#	if ( $args ){ dk_error "$__FUNCTION__(): incorrect number of arguments" }
+	#if ( $(__ARGC__) -lt 2 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	dk_info "test from dk_info"
 	dk_debug "test from dk_debug"
@@ -37,6 +30,7 @@ function GLOBAL:dk_test($str, $num) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
 	
 	dk_test string1 123
 }
