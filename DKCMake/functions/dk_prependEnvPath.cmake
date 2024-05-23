@@ -6,7 +6,9 @@ include_guard()
 #	@inputPath	- The CMake / style full path to append the the Environment Path variable
 #
 function(dk_prependEnvPath inputPath)
-	#dk_debug("dk_prependEnvPath(${ARGV})")
+	dk_debugFunc(${ARGV})
+
+
 	if(NOT inputPath)
 		dk_warning("dk_prependEnvPath(): inputPath is invalid!")
 		return()

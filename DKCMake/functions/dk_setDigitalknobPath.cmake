@@ -6,6 +6,9 @@ include_guard()
 #	Set the digitalknob root directory environment variable
 #
 function(dk_setDigitalknobPath)
+	dk_debugFunc(${ARGV})
+	
+	
 	# Set the DIGITALKNOB_DIR environment variable 
 	get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	string(FIND "${path}" "digitalknob" pos)

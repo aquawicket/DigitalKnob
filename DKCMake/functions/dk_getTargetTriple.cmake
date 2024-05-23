@@ -7,6 +7,9 @@ include_guard()
 #
 
 function(dk_getTargetTriple)
+	dk_debugFunc(${ARGV})
+	
+	
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
 		get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 		dk_printVar(CMAKE_BINARY_DIR)

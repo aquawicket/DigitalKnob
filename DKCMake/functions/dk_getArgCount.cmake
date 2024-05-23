@@ -7,6 +7,8 @@ include_guard()
 #	@args 	 - a variable number of input arguments
 #
 function(dk_get_arg_count RESULT)
+	dk_debugFunc(${ARGV})
+	
 	math(EXPR ARGC "${ARGC}-1")
 	set(${RESULT} ${ARGC} PARENT_SCOPE)
 endfunction()

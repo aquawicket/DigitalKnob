@@ -2,7 +2,7 @@ include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_debugFunc)
-	set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+	set(ENABLE_dk_debugFunc 0 CACHE INTERNAL "")
 endif()
 if(NOT DEFINED PRINT_CALL_DETAILS)
 	set(PRINT_CALL_DETAILS 1 CACHE INTERNAL "")

@@ -7,7 +7,7 @@ include_guard()
 #	@var	- The variable name to print
 #
 function(dk_printVar var)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	
 	if(DEFINED "${var}")
 		if("${var}" MATCHES "ENV{") # ENV variables

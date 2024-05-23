@@ -6,6 +6,8 @@ include_guard()
 #	Example: dk_printPrefixVars("CMAKE_")
 #
 function(dk_printPrefixVars _prefix)
+	dk_debugFunc(${ARGV})
+
     get_cmake_property(_vars VARIABLES)
     string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
     set(_resultVars "")

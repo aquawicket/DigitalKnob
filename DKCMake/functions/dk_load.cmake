@@ -8,7 +8,7 @@ include_guard()
 #	@fn	- TODO
 #
 macro(dk_load var)
-	#message("dk_load(${ARGV})")
+	dk_debugFunc(${ARGV})
 	
 	string(STRIP ${var} fn)
 	
@@ -38,6 +38,8 @@ macro(dk_load var)
 endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
+	dk_debugFunc(${ARGV})
+	
 	#message("dk_parseFunctionsAndLoad(${ARGV})")
 	if(NOT "${fn}" MATCHES "[Dd][Kk]_[A-Za-z0-9_]")
 		#message(WARNING "${fn} is NOT a valid function name")
@@ -114,6 +116,9 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)
+	dk_debugFunc(${ARGV})
+	
+	
 	#string(REGEX MATCHALL "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" matches "${str}")
 				
 	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
