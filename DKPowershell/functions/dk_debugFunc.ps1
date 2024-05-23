@@ -1,6 +1,8 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_debugFunc){ $dk_debugFunc = 1 } else{ return }
 
+
+
 if (!$ENABLE_dk_debugFunc)	{ $ENABLE_dk_debugFunc = 1 }
 if (!$MAX_STACK_LINES)		{ $MAX_STACK_LINES = 200 }
 #if (!$DKSTACK[0].FILE)	    { $DKSTACK[0].FILE = %0 }
@@ -16,17 +18,20 @@ function Global:dk_debugFunc() {
 
 	$lvl = 1
 	
-	$FILENAME  = [string]($(Get-PSCallStack)[$lvl+1].Location).Split(':')[0]
+	$global:FILENAME  = [string]($(Get-PSCallStack)[$lvl+1].Location).Split(':')[0]
 	#Write-Output "FILENAME = $FILENAME"
 	
-	$LINENO   = [string]$(Get-PSCallStack)[$lvl+1].ScriptLineNumber
+	$global:LINENO   = [string]$(Get-PSCallStack)[$lvl+1].ScriptLineNumber
 	#Write-Output "LINENO = $LINENO"
 	
-	$FUNCTION = [string]($(Get-PSCallStack)[$lvl].FunctionName).Split(':')[1]
+	$global:FUNCTION = [string]($(Get-PSCallStack)[$lvl].FunctionName).Split(':')[1]
 	#Write-Output "FUNCTION = $FUNCTION"
 	
 	$ParameterList = (Get-Command -Name $FUNCTION).Parameters;
 	#Write-Output "ParameterList = $ParameterList"
+	
+	$global:ARGC = $ParameterList.count
+	#Write-Output "ARGC = $ARGC"
 	
 	foreach ($key in $ParameterList.keys){
 		$_varName_ = (get-variable $key).Value
