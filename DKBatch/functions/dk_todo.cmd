@@ -15,7 +15,7 @@ set "TODO_TAG=  TODO: "
 ::#    @message	- The message to print
 ::#
 :dk_todo () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	if "%ENABLE_dk_todo%" neq "1"  goto:eof
 	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line

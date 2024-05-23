@@ -15,7 +15,7 @@ if not defined HALT_ON_VERBOSE    set "HALT_ON_VERBOSE=0"
 ::#    @message	- The message to print
 ::#
 :dk_verbose () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	if "%ENABLE_dk_verbose%" neq "1" goto:eof
 	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line

@@ -6,7 +6,7 @@ call DK
 ::
 ::
 :dk_message () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	echo %~1
 goto:eof

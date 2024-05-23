@@ -15,7 +15,7 @@ if not defined HALT_ON_FIXME    set "HALT_ON_FIXME=1"
 ::#    @message - The message to print
 ::#
 :dk_fixme () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	if "%ENABLE_dk_fixme%" neq "1"  goto:eof
 	

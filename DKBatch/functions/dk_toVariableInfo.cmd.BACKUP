@@ -17,7 +17,7 @@ call DK
 ::#	myVar: 'this is my variable'
 ::#
 :dk_toVariableInfo () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	::set argc=0
 	::for %%x in (%*) do Set /A argc+=1

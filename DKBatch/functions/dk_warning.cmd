@@ -15,7 +15,7 @@ if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
 ::#	   @message	- The message to print
 ::#
 :dk_warning () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	if "%ENABLE_dk_warning%" neq "1" goto:eof
 	

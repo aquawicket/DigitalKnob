@@ -15,7 +15,7 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 ::#    @message - The message to print
 ::#
 :dk_error () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	
 	if "%ENABLE_dk_error%" neq "1"  goto:eof
 	

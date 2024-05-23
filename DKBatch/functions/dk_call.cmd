@@ -5,8 +5,8 @@
 ::# dk_call(<command args>)
 ::#
 ::#
-:::dk_call () {
-	::call dk_debugFunc
+:dk_call () {
+	call dk_debugFunc
 
     ::call dk_echo %magenta% > %* %clr%
    

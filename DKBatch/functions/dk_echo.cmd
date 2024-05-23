@@ -9,7 +9,7 @@ call DK
 ::#     @msg	- The message to print
 ::#
 :dk_echo () {
-	::call dk_debugFunc
+	call dk_debugFunc
 	if ["%*"] equ [""] (echo. & goto:eof)
 	
 	setlocal enableDelayedExpansion
