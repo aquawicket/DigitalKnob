@@ -56,9 +56,9 @@ export BG_White="[107m"
 #
 #
 #
-#dk_color() {
-#	dk_debugFunc
-#}
+dk_color() {
+	dk_debugFunc
+}
 
 
 

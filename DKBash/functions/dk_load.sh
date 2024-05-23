@@ -8,6 +8,7 @@
 #
 #
 dk_load() {
+	dk_debugFunc
 	#echo "dk_load($*)"
 	[ $# -ne 1 ] && echo "${FUNCNAME}(): incorrect number of arguments"
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files

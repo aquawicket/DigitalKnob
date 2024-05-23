@@ -10,7 +10,7 @@
 #
 #
 dk_escapeSequences () {
-	#dk_debugFunc
+	dk_debugFunc
 	
 
 #	# ASCII control characters (character code 0-31)

@@ -18,7 +18,7 @@
 #	myVar: 'this is my variable'
 #
 dk_toVariableInfo () {
-	#dk_debugFunc
+	dk_debugFunc
 	[ $# -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
 	
 	eval "name=\${$1}"

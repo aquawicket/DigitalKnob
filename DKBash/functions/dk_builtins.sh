@@ -6,10 +6,16 @@
 # https://unix.stackexchange.com/a/241060
 # https://linuxcommand.org/lc3_man_pages/echoh.html
 
-#echo () {
-#	dk_debugFunc
-#	builtin echo -n -e "DK: $@\n"
-#}
+##################################################################################
+# dk_builtins()
+#
+#
+dk_builtins () {
+	dk_debugFunc
+	
+	# call builtin echo exmple
+	builtin echo -n -e "DK: $@\n"
+}
 
 
 

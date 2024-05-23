@@ -7,10 +7,7 @@
 #
 #
 dk_set() {
-	OLD_ENABLE_dk_debugFunc=${ENABLE_dk_debugFunc}
-	ENABLE_dk_debugFunc=0
 	dk_debugFunc
-	ENABLE_dk_debugFunc=${OLD_ENABLE_dk_debugFunc-}
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): not enough arguments"
 
 	#eval "$1=${2}"

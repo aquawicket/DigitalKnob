@@ -7,6 +7,8 @@
 #
 #
 DK () {
+	#dk_debugFunc
+	
 	#echo "DK($*)"
 	#echo "0 = $0"
 	#echo "* = $*"
@@ -109,6 +111,7 @@ DK () {
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		
+		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
 		. ${DKBASH_DIR}/functions/dk_load.sh
 		dk_load dk_escapeSequences
 		dk_escapeSequences

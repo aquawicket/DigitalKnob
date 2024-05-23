@@ -15,7 +15,7 @@
 #	@msg	- The message to print
 #
 dk_fixme () {
-	#dk_debugFunc
+	dk_debugFunc
 	
 	[ ${ENABLE_dk_fixme} -eq 1 ] || return 0
 	msg="$1"

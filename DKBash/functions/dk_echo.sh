@@ -6,7 +6,7 @@
 #
 #
 dk_echo () {
-	#dk_debugFunc
+	dk_debugFunc
 	
 	# https://linuxcommand.org/lc3_man_pages/echoh.html
 

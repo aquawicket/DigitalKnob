@@ -16,7 +16,7 @@
 #	@msg	- The message to print
 #
 dk_warning () {
-	#dk_debugFunc
+	dk_debugFunc
 	
 	[ $ENABLE_dk_warning -ne 1 ] && return
 	msg="$1"

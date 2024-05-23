@@ -15,7 +15,7 @@
 #	@msg	- The message to print
 #
 dk_debug () {
-	#dk_debugFunc
+	dk_debugFunc
 
 	[ ${ENABLE_dk_debug} -ne 1 ] && return
 	msg="$1"

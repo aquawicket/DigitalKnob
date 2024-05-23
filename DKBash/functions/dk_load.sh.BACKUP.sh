@@ -7,7 +7,7 @@
 #
 #
 dk_load() {
-	#dk_debugFunc
+	dk_debugFunc
 	
 	local fn=
 	[ -z $1 ] && return 0 #true
