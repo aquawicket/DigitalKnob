@@ -11,6 +11,7 @@ if not defined clr call set "clr=%ESC%[0m"
 ::#
 ::#
 :dk_printVar () {
+	call dk_debugFunc
     if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 
     set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"

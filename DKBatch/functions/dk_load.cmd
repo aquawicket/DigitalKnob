@@ -9,6 +9,7 @@ call DK
 ::#
 :dk_load() {
 	::echo "dk_load(%*)"
+	call dk_debugFunc
 
 	if not exist "%DKBATCH_DIR%\functions\dk_echo.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_echo.cmd', '%DKBATCH_DIR%\functions\dk_echo.cmd')"
 	if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_debugFunc.cmd', '%DKBATCH_DIR%\functions\dk_debugFunc.cmd')"

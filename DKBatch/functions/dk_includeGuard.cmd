@@ -33,8 +33,7 @@ goto:eof
 
 
 
-::################################ DKTEST #########################################
-:TEST_dk_includeGuard
+:DKTEST ################################ DKTEST #########################################
 
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%
 	
@@ -42,5 +41,3 @@ goto:eof
 	:::resume
 	::echo :resume
 	
-	call dk_exit
-goto:eof

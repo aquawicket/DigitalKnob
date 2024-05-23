@@ -7,6 +7,9 @@ set "DEBUG_MODE=0"
 ::#
 ::#
 :DK () {
+	call dk_debugFunc
+	
+	
 	echo Loading DigitalKnob . . .
 
 	::############ Script internal setup ############

@@ -1,5 +1,14 @@
-goto:eof
-:strlen  StrVar  [RtnVar]
+@echo off
+call DK
+
+
+::####################################################################
+::# dk_strlen()
+::#
+::#
+:dk_strlen  StrVar  [RtnVar]
+	call dk_debugfunc
+	
   setlocal EnableDelayedExpansion
   set "s=#!%~1!"
   set "len=0"
