@@ -8,6 +8,7 @@ function Set-ConsoleColor ($bc, $fc) {
 }
 Set-ConsoleColor 'black' 'white'
 
+
 function Get-EntryPointAbsFilePath() {
     # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
     # NOTE 2: '$global:PSScriptRoot' is not the same as '$PSScriptRoot' and seems to correspond to the entry point script directory,
@@ -31,15 +32,6 @@ $DKSCRIPT_PATH = Get-EntryPointAbsFilePath
 Write-Output "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 
-
-#function Green{
-#   process { Write-Host $_ -ForegroundColor Green }
-#}
-#function Red{
-#    process { Write-Host $_ -ForegroundColor Red }
-#}
-#Write-Output this is a test | Green
-#Write-Output this is a test | Red
 
 #####################################################################
 ## dk_load()
@@ -68,11 +60,6 @@ function DK() {
 	
 	. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
 	. $DKPOWERSHELL_DIR\functions\dk_load.ps1
-#	dk_load dk_getHostTriple
-#	dk_load dk_printVar
-#	dk_load dk_getDKPaths
-#	dk_load dk_makeDirectory
-#	dk_load dk_buildMain
 	
 	
 	###### DKTEST MODE ######

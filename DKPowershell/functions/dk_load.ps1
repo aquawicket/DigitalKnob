@@ -1,11 +1,12 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 
+. $PWD\dk_debugFunc.ps1
 #####################################################################
 ## dk_load()
 ##
 ##
 function Global:dk_load($func) {
-#	dk_debugFunc
+	dk_debugFunc
 	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\$func.ps1")) {
 		echo "dk_load $func"
 		
