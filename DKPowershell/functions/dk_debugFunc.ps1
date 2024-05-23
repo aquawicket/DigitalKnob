@@ -13,39 +13,26 @@ if ($DKSTACK_marker -eq $null)		{ $DKSTACK_marker = 1 }
 #
 function Global:dk_debugFunc() {
 
-	#if not exist "%DKBATCH_DIR%\functions\dk_caller.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_caller.cmd', '%DKBATCH_DIR%\functions\dk_caller.cmd')"
-	#call dk_caller DKCALLER
-	#:dk_caller
-	set DKSTACK[%DKSTACK_marker%].FILE=%_filename%
-	set DKSTACK[%DKSTACK_marker%].FUNCTION=%_func%
-	set DKSTACK[%DKSTACK_marker%].ARGS=%_args%
+	$lvl = 1
 	
-#	call dk_getCaller 2
-#	:dk_getCaller_return2
-#	set DKSTACK[%DKSTACK_marker%].FILE=%caller[0].fullpath%
-#	set DKSTACK[%DKSTACK_marker%].FUNCTION=%caller[0].func%
-#	set DKSTACK[%DKSTACK_marker%].ARGS=%caller[0].args%
+	$FILENAME  = [string]($(Get-PSCallStack)[$lvl+1].Location).Split(':')[0]
+	#Write-Output "FILENAME = $FILENAME"
 	
+	$LINENO   = [string]$(Get-PSCallStack)[$lvl+1].ScriptLineNumber
+	#Write-Output "LINENO = $LINENO"
 	
-	$DKSTACK_length+=1
-	$DKSTACK_marker=$DKSTACK_length	
-#	if %DKSTACK_length% LSS %MAX_STACK_LINES% (
-#		set /a DKSTACK_length+=1
-#		echo "growing DKSTACK_length to %DKSTACK_length%"
-#	) else (
-#		echo "DKSTACK_length is capped at %DKSTACK_length%"
-#	)
-#	if %DKSTACK_marker% LSS %DKSTACK_length% (
-#		set /a DKSTACK_marker+=1
-#		echo "advancing DKSTACK_marker to %DKSTACK_marker%"
-#	) else (
-#		set /a DKSTACK_marker=0
-#		echo "resetting DKSTACK_marker to %DKSTACK_marker%"
-
+	$FUNCTION = [string]($(Get-PSCallStack)[$lvl].FunctionName).Split(':')[1]
+	#Write-Output "FUNCTION = $FUNCTION"
 	
-	if ($ENABLE_dk_debugFunc -ne 1){ return }
-	$cyan = "[36m"
-	$clr = "[0m"
-	#echo $_filename: $cyan$_func$($_args)$clr
+	$ParameterList = (Get-Command -Name $FUNCTION).Parameters;
+	#Write-Output "ParameterList = $ParameterList"
 	
+	foreach ($key in $ParameterList.keys){
+		$_varName_ = (get-variable $key).Value
+		$_value_ = (Get-Item variable:$_varName_).Value
+		$args+="$_varName_"
+		#$args+="$_varName_`:`"$_value_`""
+	}
+	
+	Write-Output "$FILENAME`:$LINENO --> $FUNCTION($args)"
 }

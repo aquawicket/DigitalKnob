@@ -10,3 +10,12 @@ function Global:dk_makeDirectory () {
 	#set "path=%~1"
     #if NOT exist "%path%" mkdir "%path%"
 }
+
+
+
+
+function Global:DKTEST() { ###########################################################################################
+	
+	dk_makeDirectory "MadeDirectory"
+	
+}

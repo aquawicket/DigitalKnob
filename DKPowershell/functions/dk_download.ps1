@@ -1,22 +1,22 @@
 if (!($DKINIT)){ . $PWD\DK.ps1 }
 
-# https://www.itprotoday.com/powershell/3-ways-download-file-powershell
-
 ####################################################################
 # dk_download(<url> <destination>)
 #
+#   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
 function Global:dk_download($url, $dest) {
 	dk_debugFunc
 	
-	#Write-Output "url = $url"
-	#Write-Output "dest = $dest"
+	Write-Output "url = $url"
+	Write-Output "dest = $dest"
 	
 	# method 1
-    #Invoke-WebRequest -URI $url -OutFile $dest
+	Write-Output "Downloading $url.."
+    Invoke-WebRequest -URI $url -OutFile $dest
 	
 	# method 2
-	(New-Object System.Net.WebClient).DownloadFile($url, $dest)
+	#(New-Object System.Net.WebClient).DownloadFile($url, $dest)
 	
 	# method 2 (extended)
 	#$WebClient = New-Object System.Net.WebClient
@@ -28,6 +28,8 @@ function Global:dk_download($url, $dest) {
 }
 
 
-function Global:DKTEST() {
+function Global:DKTEST() { ###########################################################################################
+	
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"
+	
 }
