@@ -1,4 +1,4 @@
-if (!($DKINIT)){ . $PWD\DK.ps1 }
+if (!$DKINIT){ . $PWD\DK.ps1 }
 
 dk_load dk_makeDirectory
 dk_load dk_printVar

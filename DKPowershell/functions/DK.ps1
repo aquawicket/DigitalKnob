@@ -6,7 +6,7 @@ function Set-ConsoleColor ($bc, $fc) {
     $Host.UI.RawUI.ForegroundColor = $fc
     Clear-Host
 }
-Set-ConsoleColor 'black' 'DarkGreen'
+Set-ConsoleColor 'black' 'white'
 
 function Get-EntryPointAbsFilePath() {
     # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
@@ -32,6 +32,14 @@ Write-Output "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 
 
+#function Green{
+#   process { Write-Host $_ -ForegroundColor Green }
+#}
+#function Red{
+#    process { Write-Host $_ -ForegroundColor Red }
+#}
+#Write-Output this is a test | Green
+#Write-Output this is a test | Red
 
 #####################################################################
 ## dk_load()
