@@ -1,11 +1,10 @@
-#@echo off
-#call DK
+if (!($DKINIT)){ . $PWD\DK.ps1 }
 
 #####################################################################
 # dk_getHostTriple()
 #
 #
-function dk_getHostTriple () {
+function Global:dk_getHostTriple () {
 	dk_debugFunc
 	
 	$HOST_OS = "win"

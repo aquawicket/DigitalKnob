@@ -1,5 +1,4 @@
-#@echo off
-#call DK
+if (!($DKINIT)){ . $PWD\DK.ps1 }
 
 if ($ENABLE_dk_debugFunc -eq $null)	{ $ENABLE_dk_debugFunc = 1 }
 if ($MAX_STACK_LINES -eq $null)		{ $MAX_STACK_LINES = 200 }

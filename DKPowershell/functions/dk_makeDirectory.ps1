@@ -1,11 +1,10 @@
-#@echo off
-#call DK
+if (!($DKINIT)){ . $PWD\DK.ps1 }
 
 ####################################################################
 # dk_makeDirectory(<path>)
 #
 #
-function dk_makeDirectory () {
+function Global:dk_makeDirectory () {
 	dk_debugFunc
 	
 	#set "path=%~1"

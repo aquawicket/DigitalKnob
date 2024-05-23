@@ -1,11 +1,10 @@
-#@echo off
-#call DK
+if (!($DKINIT)){ . $PWD\DK.ps1 }
 
 ####################################################################
 # dk_getDKPaths()
 #
 #
-function dk_getDKPaths () {
+function Global:dk_getDKPaths () {
 	dk_debugFunc
 	
 	$DIGITALKNOB_DIR = "$env:HOMEDRIVE$env:HOMEPATH\digitalknob"

@@ -1,3 +1,4 @@
+#Write-Output "DKBuilder.ps1"
 
 ###### DK_INIT ######
 if (! (Test-Path "DKPowershell")) { New-Item -Path 'DKPowershell' -ItemType Directory }

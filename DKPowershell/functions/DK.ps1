@@ -4,6 +4,8 @@ if ($DKINIT){return} else{ $global:DKINIT=1 }
 ##
 ##
 function DK() {
+	#dk_debugFunc
+	
 	Write-Output "Loading DigitalKnob . . ."
 
 	$global:CallStack = Get-PSCallStack
@@ -30,8 +32,8 @@ function DK() {
 	
 	$global:DKHTTP = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
 	if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_load.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_load.ps1" }
+	. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
 	. $DKPOWERSHELL_DIR\functions\dk_load.ps1
-	dk_load dk_debugFunc
 	dk_load dk_getHostTriple
 	dk_load dk_printVar
 	dk_load dk_getDKPaths

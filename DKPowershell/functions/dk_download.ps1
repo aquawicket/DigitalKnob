@@ -1,4 +1,4 @@
-. $PWD\DK.ps1
+if (!($DKINIT)){ . $PWD\DK.ps1 }
 
 # https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 
@@ -7,7 +7,8 @@
 #
 #
 function Global:dk_download($url, $dest) {
-
+	dk_debugFunc
+	
 	#Write-Output "url = $url"
 	#Write-Output "dest = $dest"
 	
