@@ -13,7 +13,6 @@ shopt -s extdebug
 #
 #
 dk_test() {
-	echo "dk_test()"
 	dk_debugFunc
 	#if ( $(__ARGC__) -lt 2 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -32,7 +31,7 @@ dk_test() {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_test "string1" 123
 	

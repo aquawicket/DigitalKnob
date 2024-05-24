@@ -2,17 +2,19 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
-[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=0
+[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=1
 ##################################################################################
 # dk_debugFunc()
 #
 #
 alias dk_debugFunc='{
 	if [ ${ENABLE_dk_debugFunc} -eq 1 ]; then
+	
+		_FRAME_=1
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "$(basename ${BASH_SOURCE[1]}:${BASH_LINENO[0]}) ${blue-}${FUNCNAME[0]}($*)${clr-}"
+			echo -e "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__)($(__ARGV__))${clr-}"
 		else
-			echo "$(basename ${BASH_SOURCE[1]}:${BASH_LINENO[0]}) ${blue-}${FUNCNAME[0]}($*)${clr-}"
+			echo "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__)($(__ARGV__))${clr-}"
 		fi
 	fi
 }'

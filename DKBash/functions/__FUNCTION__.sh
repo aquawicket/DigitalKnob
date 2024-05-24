@@ -9,8 +9,8 @@ __FUNCTION__() {
 	[ -z ${1-} ] && _FRAME_=1 || _FRAME_=$1
 	
 	if [ "$(echo -e)" = "" ]; then
-		echo -e "${FUNCNAME[${_FRAME_}]}($*)"
+		echo -e "${FUNCNAME[${_FRAME_}]}"
 	else
-		echo "${FUNCNAME[${_FRAME_}]}($*)"
+		echo "${FUNCNAME[${_FRAME_}]}"
 	fi
 }

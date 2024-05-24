@@ -111,6 +111,12 @@ DK () {
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		
+		. ${DKBASH_DIR}/functions/__FILE__.sh
+		. ${DKBASH_DIR}/functions/__LINE__.sh
+		. ${DKBASH_DIR}/functions/__FUNCTION__.sh
+		. ${DKBASH_DIR}/functions/__ARGC__.sh
+		. ${DKBASH_DIR}/functions/__ARGV__.sh
+		. ${DKBASH_DIR}/functions/__CALLER__.sh
 		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
 		. ${DKBASH_DIR}/functions/dk_load.sh
 		dk_load dk_escapeSequences

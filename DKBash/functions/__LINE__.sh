@@ -12,4 +12,6 @@ __LINE__() {
 	else
 		echo "${BASH_LINENO[${_FRAME_}]}"
 	fi
+
+	#echo ${LINENO}
 }
