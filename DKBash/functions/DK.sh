@@ -81,13 +81,18 @@ DK () {
 
 
 	###### Set error trace options ######
-	#shopt -s expand_aliases
 	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
-	$(set -o errtrace) && set -o errtrace 	# trace ERR through 'time command' and other functions
+	$(set -o errtrace) && set -o errtrace 	# set -E : trace ERR through 'time command' and other functions
 	$(set -o nounset)  && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 	$(set -o errexit)  && set -o errexit  	# set -e : exit the script if any statement returns a non-true
-
-
+	trap 'err $BASH_SOURCE $LINENO' ERR
+	
+	###### shopt ######
+	shopt -s extdebug
+	#shopt -s expand_aliases
+	
+	
+	
 	###### set true and false variables ######
 	export readonly true=0
 	export readonly false=1
@@ -151,6 +156,11 @@ DK () {
 			exit 0
 		fi
 	fi
+}
+
+err() {
+    echo "Error occurred: $1 line $2"
+    awk 'NR>L-4 && NR<L+4 { printf "%-5d%3s%s\n",NR,(NR==L?">>>":""),$1 }' L=$2 $1
 }
 
 

@@ -56,7 +56,7 @@ dk_load() {
 		
 		oldIFS=${IFS}
 		IFS=$'\n'
-		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath}) )
+		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath}) ) || return 0
 		#IFS=$'\n' read -r -d '' -a lines < <( echo "$(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath})" && printf '\0' )
 		IFS=${oldIFS}
 		for value in "${lines[@]}"; do

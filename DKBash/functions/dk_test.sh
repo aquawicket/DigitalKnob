@@ -1,20 +1,19 @@
 #!/bin/bash
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 #[ -n "${dk_test-}" ] && exit || export readonly dk_test=1 
-shopt -s extdebug
-. "${DKSCRIPT_DIR}/__FILE__.sh"
-. "${DKSCRIPT_DIR}/__LINE__.sh"
-. "${DKSCRIPT_DIR}/__FUNCTION__.sh"
-. "${DKSCRIPT_DIR}/__ARGC__.sh"
-. "${DKSCRIPT_DIR}/__ARGV__.sh"
-. "${DKSCRIPT_DIR}/__CALLER__.sh"
+#shopt -s extdebug
+#. "${DKSCRIPT_DIR}/__FILE__.sh"
+#. "${DKSCRIPT_DIR}/__LINE__.sh"
+#. "${DKSCRIPT_DIR}/__FUNCTION__.sh"
+#. "${DKSCRIPT_DIR}/__ARGC__.sh"
+#. "${DKSCRIPT_DIR}/__ARGV__.sh"
+#. "${DKSCRIPT_DIR}/__CALLER__.sh"
 ##################################################################################
 # dk_test(<args>)
 #
 #
 dk_test() {
 	dk_debugFunc
-	#if ( $(__ARGC__) -lt 2 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	dk_info "test from dk_info"
 	dk_debug "test from dk_debug"

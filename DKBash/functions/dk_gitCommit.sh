@@ -13,10 +13,12 @@ dk_gitCommit () {
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
 	
+	dk_validate DKBRANCH_DIR "dk_validateBranch"
 	cd "${DKBRANCH_DIR}" #|| dk_error "cd \${DKBRANCH_DIR} failed!"
 	
-	STORE=$(${GIT_EXE} config credential.helper)
-	dk_printVar STORE
+	if ! STORE=$(${GIT_EXE} config credential.helper); then
+		dk_errorStatus
+	fi
 	if [ -z "${STORE}" ]; then
 		${GIT_EXE} config --global credential.helper store
 		dk_echo

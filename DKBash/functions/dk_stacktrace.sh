@@ -19,7 +19,7 @@ dk_stacktrace () {
 	local i=${1:-1} size=${#FUNCNAME[@]}
  	((i<size)) && echo "STACKTRACE[${size}]" 
 	i=1
-	while [ "${i}" -le "${size}" ]; do
+	while [ "${i}" -lt "${size}" ]; do
 		(( frame=${#FUNCNAME[@]}-i ))
 		echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]} ${FUNCNAME[${i}]-}()"
 		i=$(( i + 1 ))

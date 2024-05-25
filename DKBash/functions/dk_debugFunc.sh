@@ -10,11 +10,10 @@
 alias dk_debugFunc='{
 	if [ ${ENABLE_dk_debugFunc} -eq 1 ]; then
 	
-		_FRAME_=1
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__):$(__ARGC__)($(__ARGV__))${clr-}"
+			echo -e "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		else
-			echo "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__):$(__ARGC__)($(__ARGV__))${clr-}"
+			echo "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		fi
 	fi
 }'

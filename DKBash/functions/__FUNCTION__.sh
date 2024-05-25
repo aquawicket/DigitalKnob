@@ -5,13 +5,16 @@
 # __FUNCTION__()
 #
 __FUNCTION__() {
-	
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
-	((_FRAME_=_FRAME_+1))
+#	((_FRAME_=_FRAME_+1))
 
-	if [ "$(echo -e)" = "" ]; then
-		echo -e "${FUNCNAME[${_FRAME_}]}"
-	else
-		echo "${FUNCNAME[${_FRAME_}]}"
-	fi
+	echo "${FUNCNAME[${_FRAME_}]}"
+}
+
+
+
+DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	
+	echo "$(__FUNCTION__)"
+
 }

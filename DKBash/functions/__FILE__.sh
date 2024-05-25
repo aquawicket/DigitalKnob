@@ -6,22 +6,15 @@
 #
 __FILE__() {
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
-	((_FRAME_=_FRAME_+2))
+	((_FRAME_=_FRAME_+1))
 
-	if [ "$(echo -e)" = "" ]; then
-		echo -e "$(basename ${BASH_SOURCE[${_FRAME_}]})"
-	else
-		echo "$(basename ${BASH_SOURCE[${_FRAME_}]})"
-	fi
+	echo "$(basename ${BASH_SOURCE[${_FRAME_}]})"
 }
 
 
 
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
-	if [ "$(echo -e)" = "" ]; then
-		echo -e "$(__FILE__)"
-	else
-		echo "$(__FILE__)"
-	fi
+	echo "$(__FILE__)"
+
 }
