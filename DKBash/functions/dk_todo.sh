@@ -22,10 +22,10 @@ dk_todo () {
 	msg="$1"
 	dk_echo "${yellow}${TODO_TAG}${msg}${clr}"
 	
-	[ $TRACE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_TODO ***${clr}" && dk_stacktrace #OR TRACE AND NOT NO_TRACE)
-	[ $LINE_ON_TODO -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_TODO ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}" #OR HALT AND NOT NO_HALT)
-	[ $PAUSE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_TODO ***${clr}" && dk_pause #OR PAUSE AND NOT NO_PAUSE)
-	[ $HALT_ON_TODO -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_TODO ***${clr}"  && dk_exit #OR HALT AND NOT NO_HALT)
+	[ $TRACE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_TODO ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
+	[ $LINE_ON_TODO -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_TODO ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
+	[ $PAUSE_ON_TODO -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_TODO ***${clr}" && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
+	[ $HALT_ON_TODO -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_TODO ***${clr}"  && dk_exit; true #OR HALT AND NOT NO_HALT)
 }
 
 

@@ -12,17 +12,13 @@ dk_showFileLine() {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	dk_printVar lastErrorFile
-	dk_printVar lastErrorLine
-	[ -n "${lastErrorFile}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
-	[ -n "${lastErrorLine}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
+	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
+	[ -n "${lastErrorLine-}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
 	unset lastErrorFile
 	unset lastErrorLine
 	
 	_filepath=$(realpath $_errfile)
 	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
-
-	#$(dk_fileContains ${_filepath} "${_matchString}") && echo "file contains the string" || echo "file DOES NOT contain the string"
 	
 	if [ -z ${_lineno} ]; then
 		oldIFS=${IFS}
@@ -34,6 +30,7 @@ dk_showFileLine() {
 	fi
 	
 	dk_echo " File: ${_filepath}: ${_lineno}"
+	echo ""
 	
 	min=$(( _lineno-(MAX_LINES / 2) ))
 	max=$(( _lineno+(MAX_LINES / 2) ))
@@ -51,6 +48,9 @@ dk_showFileLine() {
 		fi
 		n=$(( n+1 ))
 	done < "${_filepath}"
+	
+	# method 2
+	#awk 'NR>L-4 && NR<L+4 { printf "%-5d%3s%s\n",NR,(NR==L?">>>":""),$1 }' L=$2 $1
 }
 
 

@@ -10,7 +10,7 @@ dk_readCache() {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	if ! dk_fileExists "${DKBRANCH_DIR}"/cache; then
+	if ! dk_fileExists "${DKBRANCH_DIR-}"/cache; then
 		return 0
 	fi
 	_APP_=

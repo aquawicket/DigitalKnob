@@ -16,7 +16,14 @@ DK () {
 	#echo "BASH_SOURCE = ${BASH_SOURCE[@]}"
 	#echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
 	#echo "BASH_SOURCE[1] = ${BASH_SOURCE[1]}"
-
+	#echo $(basename $(readlink /proc/$$/exe))
+	#echo $(ps -p $$)
+	#echo "PID = $PID"
+	#echo "PPID = $PPID"
+	#echo "SHLVL = $SHLVL"
+	#echo "BASH_SUBSHELL = $BASH_SUBSHELL"
+	#echo "BASH_EXECUTION_STRING = $BASH_EXECUTION_STRING"
+	
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 	
 	[ -z ${ENABLE_DKTEST} ] && export ENABLE_DKTEST=1
@@ -25,7 +32,7 @@ DK () {
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
 		[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
-		echo "reloading with /bin/bash . . ."
+		echo "reloading with bash . . ."
 		exec bash "$0" 
 	fi
 	[ -n "${DKINIT}" ] && return || export readonly DKINIT=1
@@ -85,7 +92,7 @@ DK () {
 	$(set -o errtrace) && set -o errtrace 	# set -E : trace ERR through 'time command' and other functions
 	$(set -o nounset)  && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 	$(set -o errexit)  && set -o errexit  	# set -e : exit the script if any statement returns a non-true
-	trap 'err $BASH_SOURCE $LINENO' ERR
+	
 	
 	###### shopt ######
 	shopt -s extdebug
@@ -116,6 +123,8 @@ DK () {
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		
+		. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
+		. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
 		. ${DKBASH_DIR}/functions/__FILE__.sh
 		. ${DKBASH_DIR}/functions/__LINE__.sh
 		. ${DKBASH_DIR}/functions/__FUNCTION__.sh
@@ -124,6 +133,8 @@ DK () {
 		. ${DKBASH_DIR}/functions/__CALLER__.sh
 		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
 		. ${DKBASH_DIR}/functions/dk_load.sh
+		#dk_load dk_signalHandler
+
 		dk_load dk_escapeSequences
 		dk_escapeSequences
 		
@@ -146,7 +157,7 @@ DK () {
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
 			echo ""
-			. ${DKSCRIPT_PATH}
+			#. ${DKSCRIPT_PATH}
 			#echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			echo ""
@@ -158,21 +169,17 @@ DK () {
 	fi
 }
 
-err() {
-    echo "Error occurred: $1 line $2"
-    awk 'NR>L-4 && NR<L+4 { printf "%-5d%3s%s\n",NR,(NR==L?">>>":""),$1 }' L=$2 $1
-}
-
+DK
 
 #DK_TRY_CATCH () {
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
-	set +e; ( set -e
-		DK
-	); err_status=$?; set -e
-
-	if [ "${err_status}" -ne "0" ]; then
-		echo "ERROR_STATUS: ${err_status}"
-		read -rp 'press enter to exit' 
-		exit ${err_status}
-	fi
+#	set +e; ( set -e
+#		DK
+#	); err_status=$?; set -e
+#
+#	if [ "${err_status}" -ne "0" ]; then
+#		echo "ERROR_STATUS: ${err_status}"
+#		#read -rp 'press enter to exit'
+#		exit ${err_status}
+#	fi
 #}

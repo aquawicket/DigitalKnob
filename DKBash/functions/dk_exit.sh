@@ -12,10 +12,11 @@ dk_exit () {
 	echo "dk_exit $*"
 	
 	# TODO: when open with icon, we can use exec to keep the window open
-	#exec $SHELL #$*
+	echo "SHLVL = $SHLVL"
+	exec $SHELL & echo "SHLVL = $SHLVL"
 	
 	# a pure exit is the default
-	exit $*
+	#exit $*
 }
 
 

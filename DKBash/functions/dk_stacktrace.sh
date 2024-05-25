@@ -9,20 +9,21 @@
 dk_stacktrace () {
     dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
-	
-	#[ "${LINENO}" = "" ] || "LINENO = ${LINENO}"	
+	ENABLE_dk_debugFunc=0
 
 	### VERSION 1 ###
-	#[ "${FUNCNAME-}" = "" ] && return
-	#[ "${BASH_SOURCE-}" = "" ] && return
-	#[ "${BASH_LINENO-}" = "" ] && return
-	local i=${1:-1} size=${#FUNCNAME[@]}
- 	((i<size)) && echo "STACKTRACE[${size}]" 
-	i=1
+	size=${#FUNCNAME[@]}
+	dk_echo "STACKTRACE[${size}]" 
+	local i=0
 	while [ "${i}" -lt "${size}" ]; do
-		(( frame=${#FUNCNAME[@]}-i ))
-		echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]} ${FUNCNAME[${i}]-}()"
 		i=$(( i + 1 ))
+		frame=$(( i - 2 ))
+		if [ $i -eq 2 ]; then
+			fileline=$(sed -n ${BASH_LINENO[${i}-1]-}p ${BASH_SOURCE[${i}]:-})
+			dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${bg_white}${black}${BASH_LINENO[${i}-1]-}: > ${fileline}${clr}"
+			continue
+		fi
+		[ $i -gt 2 ] && echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]-} ${FUNCNAME[${i}-1]-}()" # && continue
 	done 
 
 
@@ -30,7 +31,7 @@ dk_stacktrace () {
 #	[ "${FUNCNAME-}" = "" ] && return 0
 #	[ "${BASH_SOURCE-}" = "" ] && return 0
 #	[ "${BASH_LINENO-}" = "" ] && return 0
-#	local status_code="${1}" 
+#	local status_code="${1-}" 
 #	local -a stack=("Stack trace of error code '${status_code}':")
 #	local stack_size=${#FUNCNAME[@]}
 #	local -i i
@@ -43,7 +44,7 @@ dk_stacktrace () {
 #	    stack+=("${indent} └ ${src}:${line} (${func})")
 #	    indent="${indent}    "
 #	done
-#	(IFS=$'\n'; echo "${stack[*]}")
+	(IFS=$'\n'; echo "${stack[*]}")
 
 
 #	### VERSION 3 ###
