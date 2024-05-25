@@ -13,7 +13,7 @@ dk_stacktrace () {
 	#[ "${LINENO}" = "" ] || "LINENO = ${LINENO}"	
 
 	### VERSION 1 ###
-	[ "${FUNCNAME}" = "" ] && return
+	#[ "${FUNCNAME-}" = "" ] && return
 	#[ "${BASH_SOURCE-}" = "" ] && return
 	#[ "${BASH_LINENO-}" = "" ] && return
 	local i=${1:-1} size=${#FUNCNAME[@]}

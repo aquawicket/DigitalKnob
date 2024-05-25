@@ -164,7 +164,5 @@ DK () {
 		echo "ERROR_STATUS: ${err_status}"
 		read -rp 'press enter to exit' 
 		exit ${err_status}
-		#exec ${SHELL}
-		#dk_error "test"
 	fi
 #}

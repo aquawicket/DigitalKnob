@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
@@ -12,9 +12,9 @@ alias dk_debugFunc='{
 	
 		_FRAME_=1
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__)($(__ARGV__))${clr-}"
+			echo -e "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__):$(__ARGC__)($(__ARGV__))${clr-}"
 		else
-			echo "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__)($(__ARGV__))${clr-}"
+			echo "${Blue-}$(__FILE__):$(__LINE__)  ${blue-}$(__FUNCTION__):$(__ARGC__)($(__ARGV__))${clr-}"
 		fi
 	fi
 }'
