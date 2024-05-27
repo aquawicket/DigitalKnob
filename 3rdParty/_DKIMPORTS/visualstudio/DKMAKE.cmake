@@ -66,8 +66,8 @@ if(EXISTS ${VISUALSTUDIO})
 	dk_set(VISUALSTUDIO_MAKE_PROGRAM		"${VISUALSTUDIO_COMMUNITY}/MSBuild/Current/Bin/amd64/MSBuild.exe")
 	
 	dk_info("Visual Studio ${VISUALSTUDIO_VERSION} ${VISUALSTUDIO_YEAR} already installed")
-	
-else()  #install
+#install	
+else()
 	dk_info("Installing Visual Studio . . .")
 	if(EXISTS ${DKDOWNLOAD_DIR}/VisualStudio/vs_setup.exe)
 		# offline installer
@@ -77,7 +77,7 @@ else()  #install
 		dk_download(${VISUALSTUDIO_DL} ${DKDOWNLOAD_DIR}/vs_Community.exe)
 		dk_command(${DKDOWNLOAD_DIR}/vs_Community.exe)
 	endif()
-ENDIF()
+endif()
 
 if(ANDROID)
 	if(NOT EXISTS "${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets")

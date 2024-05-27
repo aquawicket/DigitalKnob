@@ -33,8 +33,7 @@ else()
 	dk_libRelease			(${SDL_GPU}/${OS}/${RELEASE_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
 	dk_libDebug				(${SDL_GPU}/${OS}/${DEBUG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
 	dk_libRelease			(${SDL_GPU}/${OS}/${RELEASE_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-endif*(
-
+endif()
 
 
 ### GENERATE ###

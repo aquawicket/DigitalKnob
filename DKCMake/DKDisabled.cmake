@@ -92,6 +92,7 @@ dk_disable(diff-match-patch)
 dk_disable(boxer)
 dk_disable(lz4)
 dk_disable(libb2)
+dk_disable(Pyportable)
 
 # Disabled for Android targets
 if(ANDROID)

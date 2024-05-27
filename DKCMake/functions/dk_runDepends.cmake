@@ -24,7 +24,7 @@ function(dk_runDepends plugin)
 	unset(index)
 	
 	
-	#set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")
+	#set(keepCommands "if;else;find_library;return;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")
 	#set(KEEPLINE 0)
 	#foreach(line ${lines})
 	#	
@@ -60,8 +60,8 @@ function(dk_runDepends plugin)
 	#	endif()
 	#endforeach()
 	
-	#set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warning;dk_info;dk_debug;dk_verbose;dk_makeDirectory;dk_require;dk_undepend")
-	set(keepCommands "if;dk_depend")
+	#set(keepCommands "if;else;find_library;return;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warning;dk_info;dk_debug;dk_verbose;dk_makeDirectory;dk_require;dk_undepend")
+	set(keepCommands "if;else;dk_depend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 	
