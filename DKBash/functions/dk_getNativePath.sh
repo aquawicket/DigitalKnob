@@ -12,9 +12,9 @@ dk_getNativePath () {
 	local ret_val="${2-}"
 	
 	if [ "${2-}" = "" ]; then
-		dk_return "substitution"
+		dk_return "using substitution"
 	else
-		dk_return "variable"
+		dk_return "using variable"
 	fi
 
 	#[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"

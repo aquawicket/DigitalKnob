@@ -15,7 +15,7 @@ dkret_val () {
 	else
 	#	builtin echo "$1"
 		#eval "$1=${@:2}"
-		eval "${ret_val}=${2}"
+		eval "${ret_val}='${2}'"
 	fi
 }
 
