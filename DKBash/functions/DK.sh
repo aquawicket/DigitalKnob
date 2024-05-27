@@ -163,8 +163,8 @@ DK () {
 			echo ""
 			echo "########################## END TEST ################################"
 			echo ""
-			read -rp 'Press enter to exit...' key
-			exit 0
+			dk_load dk_exit
+			dk_exit 0
 		fi
 	fi
 }

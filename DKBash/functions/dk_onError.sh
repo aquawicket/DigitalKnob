@@ -20,7 +20,7 @@ dk_onError () {
 	dk_showFileLine $1 $2
 	[ "$(command -v dk_stacktrace)" = "" ]  &&  . ${DKBASH_DIR}/functions/dk_stacktrace.sh
 	dk_stacktrace
-	
+	read -rp 'Press enter to exit...' key
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 

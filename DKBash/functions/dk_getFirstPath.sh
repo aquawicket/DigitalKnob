@@ -3,23 +3,21 @@
 
 
 ##################################################################################
-# dk_exit()
+# dk_getFirstPath(<result>)
 #
 #
-dk_exit () {
+dk_getFirstPath () {
 	dk_debugFunc
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	# TODO: when open with icon, we can use exec to keep the window open
-	#[ $SHLVL -gt 1 ] && echo "exec $SHELL" || echo "exit $*"
-	
-	# a pure exit is the default
-	read -rp 'Press enter to exit...' key
-	exit $*
+	eval "$1=${PATH%%:*}"
+	dk_printVar $1
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_exit
+	dk_getFirstPath firstPath
+	echo "firstPath = ${firstPath}"
 }
