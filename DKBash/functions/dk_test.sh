@@ -25,13 +25,20 @@ dk_test() {
 	echo "__ARGV__     = $(__ARGV__)"
 	echo "__CALLER__   = $(__CALLER__)"
 
-	dk_pause
+	echo "input = $1"
+	local ret_val="${2-}"
+	dk_return "output string variable"
 }
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	dk_test "string1" 123
+	input="input string variable (return variable)"
+	dk_test "$input" output
+	echo "output = ${output}"
 	
+	input="input string variable (command substitution return)"
+	output=$(dk_test "$input")
+	echo "output = ${output}"
 }

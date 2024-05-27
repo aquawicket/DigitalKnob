@@ -8,26 +8,28 @@
 #
 dk_getNativePath () {
 	dk_debugFunc
-	#echo "dk_getNativePath($1, ${2-})"
-	local ret_val="${2-}"
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -gt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	if [ "${2-}" = "" ]; then
-		dk_return "using substitution"
-	else
-		dk_return "using variable"
-	fi
+	
+	#if [ "${2-}" = "" ]; then
+	#	dk_return "using substitution"
+	#else
+	#	dk_return "using variable"
+	#fi
 
-	#[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
-	
+
 	#dk_validate HOST_OS "dk_load dk_getHostTriple; dk_getHostTriple"
-#	dk_validate HOST_OS "dk_getHostTriple"
-#	if [ "${HOST_OS}" = "win" ]; then
-#		dk_getWindowsPath $1 _winpath_
-#		#dk_return "${_winpath_//\\/\\\\}"
-#		dk_return "${_winpath_}"
-#	else
-#		dk_return "$(readlink -f "$1")"
-#	fi
+	dk_validate HOST_OS "dk_getHostTriple"
+	if [ "${HOST_OS}" = "win" ]; then
+		dk_getWindowsPath $1 _winpath_
+		#dk_return "${_winpath_//\\/\\\\}"
+		local ret_val="${2-}"
+		dk_return "${_winpath_}"
+	else
+		local ret_val="${2-}"
+		dk_return "$(readlink -f "$1")"
+	fi
 }
 
 
@@ -37,6 +39,6 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_getNativePath "/c/Windows/System32" nativePath
 	echo "nativePath = ${nativePath}"
 	
-	nativePathB=$(dk_getNativePath "/c/Windows/System32")
-	echo "nativePathB = ${nativePathB}"
+	#nativePathB=$(dk_getNativePath "/c/Windows/System32")
+	#echo "nativePathB = ${nativePathB}"
 }
