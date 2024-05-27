@@ -8,7 +8,7 @@
 #
 dkret_val () {
 	#echo "dkret_val($1, ${@:2})"
-	echo "dkret_val($1, $2)"
+	#echo "dkret_val($1, $2)"
 	if [ "${1}" = "" ]; then
 		#builtin echo "${@:2}"
 		builtin echo "${2}"

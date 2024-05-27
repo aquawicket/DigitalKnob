@@ -8,14 +8,14 @@
 #
 dk_getNativePath () {
 	dk_debugFunc
-	echo "dk_getNativePath($1, ${2-})"
+	#echo "dk_getNativePath($1, ${2-})"
 	local ret_val="${2-}"
 	
-	#if [ "${2-}" = "" ]; then
+	if [ "${2-}" = "" ]; then
 		dk_return "substitution"
-	#else
-	#	dk_return "variable"
-	#fi
+	else
+		dk_return "variable"
+	fi
 
 	#[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
