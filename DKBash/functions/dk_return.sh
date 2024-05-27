@@ -7,11 +7,14 @@
 #
 #
 alias dk_return='ret_val "${ret_val-}"'
+#alias dk_return='ret_val '
 ret_val () {
+	#echo "ret_val($1, ${2-})"
 	if [ "${1}" = "" ]; then
-		builtin echo "${2}"
+		builtin echo "${2-}"
 	else
-		eval "${ret_val}='${2}'"
+		#local ret_val="${1}"
+		eval "${ret_val}='${2-}'"
 		unset ret_val
 	fi
 }

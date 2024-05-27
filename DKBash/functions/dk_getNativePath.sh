@@ -11,15 +11,7 @@ dk_getNativePath () {
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	[ $# -gt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	
-	#if [ "${2-}" = "" ]; then
-	#	dk_return "using substitution"
-	#else
-	#	dk_return "using variable"
-	#fi
-
-
-	#dk_validate HOST_OS "dk_load dk_getHostTriple; dk_getHostTriple"
+		#dk_validate HOST_OS "dk_load dk_getHostTriple; dk_getHostTriple"
 	dk_validate HOST_OS "dk_getHostTriple"
 	if [ "${HOST_OS}" = "win" ]; then
 		dk_getWindowsPath $1 _winpath_

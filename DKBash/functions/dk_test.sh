@@ -1,19 +1,14 @@
 #!/bin/bash
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
-#[ -n "${dk_test-}" ] && exit || export readonly dk_test=1 
-#shopt -s extdebug
-#. "${DKSCRIPT_DIR}/__FILE__.sh"
-#. "${DKSCRIPT_DIR}/__LINE__.sh"
-#. "${DKSCRIPT_DIR}/__FUNCTION__.sh"
-#. "${DKSCRIPT_DIR}/__ARGC__.sh"
-#. "${DKSCRIPT_DIR}/__ARGV__.sh"
-#. "${DKSCRIPT_DIR}/__CALLER__.sh"
+
 ##################################################################################
-# dk_test(<args>)
+# dk_test(<arg1> <ret_val>)
 #
 #
 dk_test() {
 	dk_debugFunc
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -gt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 	dk_info "test from dk_info"
 	dk_debug "test from dk_debug"
@@ -26,6 +21,7 @@ dk_test() {
 	echo "__CALLER__   = $(__CALLER__)"
 
 	echo "input = $1"
+	#dk_return "$2" "output string variable"
 	local ret_val="${2-}"
 	dk_return "output string variable"
 }
@@ -34,10 +30,12 @@ dk_test() {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
+	### using return variable ###
 	input="input string variable (return variable)"
 	dk_test "$input" output
 	echo "output = ${output}"
 	
+	### using command substitution for return variable ###
 	input="input string variable (command substitution return)"
 	output=$(dk_test "$input")
 	echo "output = ${output}"
