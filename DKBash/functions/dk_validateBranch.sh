@@ -7,7 +7,6 @@
 #
 #
 dk_validateBranch () {
-	dk_debug "dk_validateBranch($*)"
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
@@ -16,7 +15,7 @@ dk_validateBranch () {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	[ -z ${DIGITALKNOB_DIR} ] && dk_getDKPaths
+	[ -z ${DIGITALKNOB_DIR-} ] && dk_getDKPaths
 	if dk_fileExists "${DIGITALKNOB_DIR}"/"${FOLDER}"/.git; then
 		BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 		if [ "${BRANCH}" = "${FOLDER}" ]; then

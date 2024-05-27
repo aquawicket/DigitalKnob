@@ -8,6 +8,7 @@
 #
 DK () {
 	#dk_debugFunc
+	[ $# -ne 0 ] && dk_error "Incorrect number of parameters"
 	
 	#echo "DK($*)"
 	#echo "0 = $0"
@@ -23,6 +24,7 @@ DK () {
 	#echo "SHLVL = $SHLVL"
 	#echo "BASH_SUBSHELL = $BASH_SUBSHELL"
 	#echo "BASH_EXECUTION_STRING = $BASH_EXECUTION_STRING"
+	
 	
 	#export PS4=$'+\e[33m ${BASH_SOURCE[0]:-nofile}:${BASH_LINENO[0]:-noline} ${FUNCNAME[0]:-nofunc}()\e[0m  '
 	
@@ -123,8 +125,8 @@ DK () {
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		
-		. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
-		. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
+		#. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
+		#. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
 		. ${DKBASH_DIR}/functions/__FILE__.sh
 		. ${DKBASH_DIR}/functions/__LINE__.sh
 		. ${DKBASH_DIR}/functions/__FUNCTION__.sh
@@ -132,6 +134,8 @@ DK () {
 		. ${DKBASH_DIR}/functions/__ARGV__.sh
 		. ${DKBASH_DIR}/functions/__CALLER__.sh
 		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
+		. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
+		. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
 		. ${DKBASH_DIR}/functions/dk_load.sh
 		#dk_load dk_signalHandler
 

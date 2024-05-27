@@ -9,7 +9,7 @@
 dk_onExit () {
 	dk_debugFunc
 	echo "dk_onExit"
-	read -rp 'Press enter to continue...' key
+	read -rp 'Press enter to exit...' key
 	#dk_pause
 }
 trap 'dk_onExit' EXIT

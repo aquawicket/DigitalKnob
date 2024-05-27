@@ -2417,6 +2417,7 @@ DK_TRY_CATCH () {
 dk_getShellType () {
 	dk_verbose "dk_getShellType($*)"
 	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	
 	echo "SHELL = $SHELL"
 	echo "BASH_SOURCE = $BASH_SOURCE"
 	echo "BASH_LINENO = $BASH_LINENO"
