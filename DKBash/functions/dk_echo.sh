@@ -12,8 +12,8 @@ dk_echo () {
 
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
 	[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
-	[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
-	[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
+	[ "$ESCAPES" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
+	[ "$NO_NEWLINE" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
 
     echo ${escapes-}${nonewline-}"${1-}"
 }

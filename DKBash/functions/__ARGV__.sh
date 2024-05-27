@@ -12,7 +12,7 @@ __ARGV__() {
 	for (( i=((_ARGC_)); i>=1; i-- )); do
 		[ -z "${_ARGV_-}" ] && _ARGV_="${BASH_ARGV[${i}]-}" || _ARGV_="${_ARGV_-}, ${BASH_ARGV[${i}]-}"
 	done
-	echo ${_ARGV_-}
+	dk_return "${_ARGV_-}"
 }
 
 

@@ -2,6 +2,7 @@
 # Conditional expressions for POSIX shell   https://www.ibm.com/docs/zh-tw/aix/7.2?topic=shell-conditional-expressions-korn-posix
 
 
+
 ##################################################################################
 # DK(<args>)
 #
@@ -127,6 +128,7 @@ DK () {
 		
 		#. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
 		#. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
+		. ${DKBASH_DIR}/functions/dk_return.sh
 		. ${DKBASH_DIR}/functions/__FILE__.sh
 		. ${DKBASH_DIR}/functions/__LINE__.sh
 		. ${DKBASH_DIR}/functions/__FUNCTION__.sh

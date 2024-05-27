@@ -8,7 +8,7 @@ __ARGC__() {
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
 #	((_FRAME_=_FRAME_+2))
 
-	echo "${BASH_ARGC[${_FRAME_}]-}"
+	dk_return "${BASH_ARGC[${_FRAME_}]-}"
 }
 
 
