@@ -115,7 +115,7 @@ DK () {
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 	[ -d ${DKBASH_DIR} ] || [$(read -rp 'DKBASH_DIR:${DKBASH_DIR} not found, press enter to exit')] || exit;
 	echo "DKBASH_DIR = $DKBASH_DIR"
-		
+
 	chmod 777 ${DKBASH_DIR}/functions/*
 	#export PATH=${PATH}:${DKBASH_DIR}/functions
 		
@@ -163,7 +163,7 @@ DK () {
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
 			echo ""
-			#. ${DKSCRIPT_PATH}
+			. ${DKSCRIPT_PATH}
 			#echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			echo ""

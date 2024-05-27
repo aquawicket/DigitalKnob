@@ -1,15 +1,31 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
+echo () {
+	#[ -z ${ESCAPES-} ]      && export ESCAPES=1
+	#[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
+	#[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
+	#[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
+	
+	#args=${@:1:$#-1}
+	if [ "${@:$#}" = "-e" ]; then
+		true
+	elif [ "$(builtin echo -e)" = "" ]; then
+		>&2 builtin echo -e "${@:$#}"
+	else
+		>&2 builtin echo "${@:$#}"
+	fi
+}
+
 ##################################################################################
 # dk_echo(<message>)
 #
 #
 dk_echo () {
 	dk_debugFunc
+#	echo "${1-}"
 	
-	# https://linuxcommand.org/lc3_man_pages/echoh.html
-
+#	# https://linuxcommand.org/lc3_man_pages/echoh.html
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
 	[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
 	[ "$ESCAPES" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
@@ -17,8 +33,6 @@ dk_echo () {
 
     echo ${escapes-}${nonewline-}"${1-}"
 }
-
-
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###

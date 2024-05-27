@@ -34,7 +34,7 @@ dk_load() {
 	# Convert to unix line endings if CRLF found
 	#if [ -e ${fpath}]; then
 		#if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		# BASH REGEX MATCH
-		if echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
+		if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
 			echo "Converting file to Unix line endings"
 			sed -i -e 's/\r$//' ${fpath}
 		fi

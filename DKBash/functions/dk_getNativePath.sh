@@ -14,10 +14,10 @@ dk_getNativePath () {
 	dk_validate HOST_OS "dk_getHostTriple"
 	if [ "${HOST_OS}" = "win" ]; then
 		dk_getWindowsPath $1 _winpath_
-		#echo "${_winpath_//\\/\\\\}"
-		echo "${_winpath_}"
+		#dk_return "${_winpath_//\\/\\\\}"
+		dk_return "${_winpath_}"
 	else
-		echo "$(readlink -f "$1")"
+		dk_return "$(readlink -f "$1")"
 	fi
 }
 
