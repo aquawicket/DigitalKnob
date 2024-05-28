@@ -1,13 +1,5 @@
 #!/bin/sh
 
-echo "0 = $0"
-echo "\$(readlink -f \$0) = $(readlink -f $0)"
-echo "\$(realpath \$0) = $(realpath $0)"
-#echo "pwd = $(pwd)"
-#echo "pwd -P = $(pwd -P)"
-
-
-
 
 ###### DK_SETUP ######
 [ ! -e DKBash ] && mkdir DKBash

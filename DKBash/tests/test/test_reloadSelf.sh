@@ -3,6 +3,7 @@ echo ""
 echo "$0($*)"
 
 DKSCRIPT_PATH="$(cd $(dirname $(realpath $0)); pwd)/$(basename $0)"
+#DKSCRIPT_PATH="$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)"
 echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 	
 DKSCRIPT_DIR="$(dirname "${DKSCRIPT_PATH}")"

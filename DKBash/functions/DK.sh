@@ -51,20 +51,12 @@ DK () {
 	#fi
 
 	###### get DKSCRIPT_ variables  ######
-	#[ -n "$(command -v "realpath")" ] || [$(read -rp 'realpath command not found, press enter to exit')]  || exit;
-	#echo "\$(realpath \$0) = $(realpath $0)"
-	#[ -e $(realpath $0) ] && export DKSCRIPT_PATH=$(realpath $0)
-
 	[ -n "$(command -v "dirname")" ]  || [$(read -rp 'dirname command not found, press enter to exit')]  || exit;
 	[ -n "$(command -v "pwd")" ]      || [$(read -rp 'pwd command not found, press enter to exit')]      || exit;
 	[ -n "$(command -v "basename")" ] || [$(read -rp 'basename command not found, press enter to exit')] || exit;
 
-	#echo "\$(cd \$(dirname \$0); pwd -P) = $(cd "$(dirname "$0")"; pwd -P)"
-	echo "\$(cd \$(dirname \$0); pwd -P)/\$(basename \$0) = $(cd "$(dirname "$0")"; pwd -P)/$(basename $0)"
+	#echo "\$(cd \$(dirname \$0); pwd -P)/\$(basename \$0) = $(cd "$(dirname "$0")"; pwd -P)/$(basename $0)"
 	[ -e $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) ] && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
-
-	#echo "\$(pwd)/\$(basename \$0) = $(pwd)/$(basename $0)"
-	#[ -e $(pwd)/$(basename $0) ] && export DKSCRIPT_PATH=$(pwd)/$(basename $0)
 
 	[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	[ -e ${DKSCRIPT_PATH} ] || [$(read -rp 'DKSCRIPT_PATH:${DKSCRIPT_PATH} not found, press enter to exit')] || exit;
