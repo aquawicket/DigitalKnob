@@ -1,0 +1,110 @@
+#!/bin/sh
+
+. ../functions/DK.sh
+set +o nounset
+
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+
+dk_echo "****** BASH VARIABLES ******"
+
+dk_printVar _
+dk_printVar BASH
+dk_printVar BASHOPTS
+dk_printVar BASHPID
+dk_printVar BASH_ALIASES
+dk_printVar BASH_ARGC
+dk_printVar BASH_ARGV
+dk_printVar BASH_ARGV0
+dk_printVar BASH_CMDS
+dk_printVar BASH_COMMAND
+dk_printVar BASH_COMPAT
+dk_printVar BASH_ENV
+dk_printVar BASH_EXECUTION_STRING
+dk_printVar BASH_LINENO
+dk_printVar BASH_LOADABLES_PATH
+dk_printVar BASH_REMATCH
+dk_printVar BASH_SOURCE
+dk_printVar BASH_SUBSHELL
+dk_printVar BASH_VERSINFO
+dk_printVar BASH_VERSION 
+dk_printVar BASH_XTRACEFD 
+dk_printVar CHILD_MAX 
+dk_printVar COLUMNS 
+dk_printVar COMP_CWORD 
+dk_printVar COMP_LINE 
+dk_printVar COMP_POINT 
+dk_printVar COMP_TYPE 
+dk_printVar COMP_KEY 
+dk_printVar COMP_WORDBREAKS 
+dk_printVar COMP_WORDS 
+dk_printVar COMPREPLY 
+dk_printVar COPROC 
+dk_printVar DIRSTACK 
+dk_printVar EMACS 
+dk_printVar ENV
+dk_printVar EPOCHREALTIME 
+dk_printVar EPOCHSECONDS 
+dk_printVar EUID 
+dk_printVar EXECIGNORE 
+dk_printVar FCEDIT 
+dk_printVar FIGNORE 
+dk_printVar FUNCNAME 
+dk_printVar FUNCNEST
+dk_printVar GLOBIGNORE 
+dk_printVar GROUPS 
+dk_printVar histchars 
+dk_printVar HISTCMD 
+dk_printVar HISTCONTROL 
+dk_printVar HISTFILE 
+dk_printVar HISTFILESIZE 
+dk_printVar HISTIGNORE 
+dk_printVar HISTSIZE 
+dk_printVar HISTTIMEFORMAT 
+dk_printVar HOSTFILE 
+dk_printVar HOSTNAME 
+dk_printVar HOSTTYPE 
+dk_printVar IGNOREEOF 
+dk_printVar INPUTRC 
+dk_printVar INSIDE_EMACS 
+dk_printVar LANG 
+dk_printVar LC_ALL 
+dk_printVar LC_COLLATE 
+dk_printVar LC_CTYPE 
+dk_printVar LC_MESSAGES 
+dk_printVar LC_NUMERIC 
+dk_printVar LC_TIME 
+dk_printVar LINENO 
+dk_printVar LINES 
+dk_printVar MACHTYPE 
+dk_printVar MAILCHECK 
+dk_printVar MAPFILE 
+dk_printVar OLDPWD 
+dk_printVar OPTERR 
+dk_printVar OSTYPE 
+dk_printVar PIPESTATUS 
+dk_printVar POSIXLY_CORRECT 
+dk_printVar PPID 
+dk_printVar PROMPT_COMMAND 
+dk_printVar PROMPT_DIRTRIM 
+dk_printVar PS0 
+dk_printVar PS3 
+dk_printVar PS4 
+dk_printVar PWD 
+dk_printVar RANDOM 
+dk_printVar READLINE_ARGUMENT 
+dk_printVar READLINE_LINE 
+dk_printVar READLINE_MARK 
+dk_printVar READLINE_POINT 
+dk_printVar REPLY 
+dk_printVar SECONDS 
+dk_printVar SHELL 
+dk_printVar SHELLOPTS 
+dk_printVar SHLVL 
+dk_printVar SRANDOM 
+dk_printVar TIMEFORMAT 
+dk_printVar TMOUT 
+dk_printVar TMPDIR 
+dk_printVar UID 
+
+
+read -rp 'Press enter to continue...' key 

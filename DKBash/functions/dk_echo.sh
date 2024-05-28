@@ -35,7 +35,10 @@ dk_echo () {
 	[ "$ESCAPES" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
 	[ "$NO_NEWLINE" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
 
-    echo ${escapes-}${nonewline-}"${1-}"
+	msg=${1-}
+	msg=${msg//\\/\\\\}    # replace all exscapes
+	msg=${msg//\\\\x/\\x}  # put back all \x escapes for color
+	echo ${escapes-}${nonewline-}"${msg}"
 }
 
 

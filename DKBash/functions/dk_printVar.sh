@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=0
+[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=1
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -28,7 +28,7 @@ dk_printVar() {
 		# IS ARRAY
 		if [[ $declaration =~ "declare -a "* ]]; then
 			for ((i=0; i < ${#_reference_[@]}; i++ )); do 
-				dk_echo "${Blue-}ARRAY:\$$_reference_[$i] =${blue-} '${_reference_[$i]}'${clr-}";
+				dk_echo "${Blue-}ARRAY:\$${!_reference_}[$i] =${blue-} '${_reference_[$i]}'${clr-}";
 			done
 			return 0
 		fi

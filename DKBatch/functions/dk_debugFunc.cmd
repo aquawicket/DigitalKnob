@@ -1,6 +1,13 @@
 @echo off
 call DK
 
+::BATCH_SOURCE
+::BATCH_ARGC[]
+::BATCH_ARGV[]
+::BATCH_LINENO[]
+::FUNCNAME[]
+
+
 if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=1"
 if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
 if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
