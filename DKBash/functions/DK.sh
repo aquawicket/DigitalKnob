@@ -163,14 +163,15 @@ DK () {
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
 			echo ""
-			. ${DKSCRIPT_PATH}
+			#. ${DKSCRIPT_PATH}
 			#echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			echo ""
 			echo "########################## END TEST ################################"
 			echo ""
-			dk_load dk_exit
-			dk_exit 0
+			exit
+			#dk_load dk_exit
+			#dk_exit 0
 		fi
 	fi
 }

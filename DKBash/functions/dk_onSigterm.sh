@@ -1,6 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && ( . "$(dirname $0)/DK.sh"; exit )
-
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ##################################################################################
 # dk_onSigterm()
@@ -8,8 +7,8 @@
 #
 dk_onSigterm () {
 	dk_debugFunc
-	echo "dk_onSigterm"
-	read -rp 'Press enter to continue...' key
+	
+	dk_echo "received SIGTERM signal"
 }
 trap 'dk_onSigterm' SIGTERM
 
@@ -19,7 +18,5 @@ trap 'dk_onSigterm' SIGTERM
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 DKTEST() { 
 	echo "sending SIGTERM signal . . ."
-	sleep 3
-	kill -SIGTERM $$
-	read -rp 'Press enter to continue...' key
+	kill -TERM $$
 }

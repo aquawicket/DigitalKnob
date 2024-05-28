@@ -1,8 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && ( . "$(dirname $0)/DK.sh" )
-
-
-#!!!!!!!!!!!!!!!!   FIXME  !!!!!!!!!!!!!!!!!!!!!!!
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ##################################################################################
 # dk_onSigusr1()
@@ -10,25 +7,16 @@
 #
 dk_onSigusr1 () {
 	dk_debugFunc
-	echo "dk_onSigusr1"
 	
-	read -rp 'Press enter to continue...' key
+	dk_echo "received SIGUSR1 signal"
 }
-trap 'dk_onSigusr1' USR1
-
+trap 'dk_onSigusr1' SIGUSR1
 
 
 
 
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 DKTEST() { 
-	echo "sending USR1  signal . . ."
-	
-	pid=$!
-
-	trap 'echo received SIGUSR1' USR1
+	echo "sending SIGUSR1  signal . . ."
 	kill -s USR1 $$
-	wait $pid
-
-	read -rp 'Press enter to continue...' key
 }

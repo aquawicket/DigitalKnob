@@ -23,7 +23,7 @@ dk_stacktrace () {
 			dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${bg_white}${black}${BASH_LINENO[${i}-1]-}: > ${fileline}${clr}"
 			continue
 		fi
-		[ $i -gt 2 ] && echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]-} ${FUNCNAME[${i}-1]-}()" # && continue
+		[ $i -gt 2 ] && dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]-} ${FUNCNAME[${i}-1]-}()" # && continue
 	done 
 
 

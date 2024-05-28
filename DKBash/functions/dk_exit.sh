@@ -12,8 +12,7 @@ dk_exit () {
 	# TODO: when open with icon, we can use exec to keep the window open
 	#[ $SHLVL -gt 1 ] && echo "exec $SHELL" || echo "exit $*"
 	
-	# a pure exit is the default
-	read -rp 'Press enter to exit...' key
+	#[ $SHLVL -eq 1 ] && read -rp 'Press enter to exit...' key	
 	exit $*
 }
 

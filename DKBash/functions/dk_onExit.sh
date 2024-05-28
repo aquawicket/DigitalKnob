@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && ( . "$(dirname $0)/DK.sh"; exit )
+[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
 ##################################################################################
@@ -7,10 +7,9 @@
 #
 #
 dk_onExit () {
-	dk_debugFunc
-	echo "dk_onExit"
-	read -rp 'Press enter to exit...' key
-	#dk_pause
+	#dk_debugFunc
+
+	[ $SHLVL -eq 1 ] && read -rp 'dk_onExit(): Press enter to exit...' key
 }
 trap 'dk_onExit' EXIT
 
