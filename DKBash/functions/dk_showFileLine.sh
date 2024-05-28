@@ -41,7 +41,7 @@ dk_showFileLine() {
 			if [ "${n}" -gt "${min}" ]; then
 				#line=!line::=:	! 
 				if [ "${n}" -eq "${_lineno}" ]; then
-					dk_echo "${bg_white}${black}> ${n}: ${line}${clr}"
+					dk_echo "${bg_white-}${black-}> ${n}: ${line}${clr-}"
 				else
 					dk_echo "  ${n}: ${line}"
 				fi
