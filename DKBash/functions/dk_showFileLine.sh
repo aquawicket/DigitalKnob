@@ -21,16 +21,16 @@ dk_showFileLine() {
 	dk_realpath $_errfile _filepath
 	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
 	
-	if [ -z ${_lineno} ]; then
+	if [ -z ${_lineno-} ]; then
 		oldIFS=${IFS}
 		IFS=$'\n'
 		lines=$(grep -n -o "${_matchString}" "${_filepath}")
 		IFS=${oldIFS}
 		line=${lines[0]%%:*}	# remove everything after :
-		lineno=$((${line} + 0))
+		_lineno=$((${line} + 0))
 	fi
 	
-	dk_echo " File: ${_filepath}: ${_lineno}"
+	dk_echo " File: ${_filepath}: ${_lineno-}"
 	echo ""
 	
 	min=$(( _lineno-(MAX_LINES / 2) ))
