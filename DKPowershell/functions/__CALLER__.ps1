@@ -2,7 +2,7 @@ if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$DK_CALLER){ $DK_CALLER = 1 } else{ return }
 
 ##################################################################################
-# __CALLER__()
+# __CALLER__(<frame>)
 #
 function GLOBAL:__CALLER__($_FRAME_=1) {
 

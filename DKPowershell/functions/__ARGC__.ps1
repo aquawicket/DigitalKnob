@@ -2,7 +2,7 @@ if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$DK_ARGC){ $DK_ARGC = 1 } else{ return }
 
 ##################################################################################
-# __ARGC__()
+# __ARGC__(<frame>)
 #
 function GLOBAL:__ARGC__($_FRAME_=1) {
 	
