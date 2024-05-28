@@ -160,6 +160,7 @@ DK () {
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_DIR}/functions" ]; then
+			export ENABLE_dk_debugFunc=1
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
 			echo ""

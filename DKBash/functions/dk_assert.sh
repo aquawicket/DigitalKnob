@@ -19,7 +19,8 @@ dk_assert() {
          [ ! -n "${!1+x}" ] )
 	then
 		lastErrorFile="${BASH_SOURCE[1]}"
-		export lastErrorFile=$(realpath ${lastErrorFile})
+		#export lastErrorFile=$(realpath ${lastErrorFile})
+		dk_realpath ${lastErrorFile} lastErrorFile
 		export lastErrorLine="${BASH_LINENO[1-1]}"
 		dk_error "Assertion failed: $1" && return ${false}
 	fi

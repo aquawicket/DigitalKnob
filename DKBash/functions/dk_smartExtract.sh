@@ -13,7 +13,8 @@ dk_smartExtract () {
 	src="$1"
 	dest="$2"
 	
-	src_fullpath="$(realpath "${src}")"
+	#src_fullpath="$(realpath "${src}")"
+	dk_realpath "${src}" src_fullpath 
 	dk_printVar src_fullpath
 	src_directory="$(dirname "${src_fullpath}")"
 	dk_printVar src_directory
@@ -22,7 +23,8 @@ dk_smartExtract () {
 	src_folder="${src_filename%.*}"
 	dk_printVar src_folder
 	
-	dest_fullpath="$(realpath "${dest}")"
+	#dest_fullpath="$(realpath "${dest}")"
+	dk_realpath "${dest}" dest_fullpath
 	dk_printVar dest_fullpath
 	dest_folder="$(basename "${dest_fullpath}")"
 	dk_printVar dest_folder

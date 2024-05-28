@@ -17,7 +17,8 @@ dk_showFileLine() {
 	unset lastErrorFile
 	unset lastErrorLine
 	
-	_filepath=$(realpath $_errfile)
+	#_filepath=$(realpath $_errfile)
+	dk_realpath $_errfile _filepath
 	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
 	
 	if [ -z ${_lineno} ]; then

@@ -20,6 +20,6 @@ dk_realpath() {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_realpath dk_load _realpath
+	dk_realpath dk_load.sh _realpath
 	echo "_realpath = ${_realpath}"
 }
