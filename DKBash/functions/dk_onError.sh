@@ -5,6 +5,7 @@
 ##################################################################################
 # dk_onError(<filepath> <lineno>)
 #
+#  https://stackoverflow.com/a/26261518
 #
 dk_onError () {
 	dk_debugFunc
@@ -20,8 +21,6 @@ dk_onError () {
 	dk_showFileLine $1 $2
 	[ "$(command -v dk_stacktrace)" = "" ]  &&  . ${DKBASH_DIR}/functions/dk_stacktrace.sh
 	dk_stacktrace
-
-	#read -rp 'dk_onError(): Press enter to exit...' key
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 
@@ -54,7 +53,6 @@ funcC(){
 }
 
 DKTEST() { 
-
 	funcA test_args 1
 	funcB 123 abc
 }

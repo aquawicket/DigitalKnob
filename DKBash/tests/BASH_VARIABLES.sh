@@ -6,7 +6,6 @@ set +o nounset
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 
 dk_echo "****** BASH VARIABLES ******"
-
 dk_printVar _
 dk_printVar BASH
 dk_printVar BASHOPTS
@@ -106,5 +105,3 @@ dk_printVar TMOUT
 dk_printVar TMPDIR 
 dk_printVar UID 
 
-
-read -rp 'Press enter to continue...' key 

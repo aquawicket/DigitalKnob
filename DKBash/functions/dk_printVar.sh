@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=1
+#[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=1
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -13,7 +13,9 @@ dk_printVar() {
 	varname=$1
 	
 	# https://github.com/flang-compiler/f18-llvm-project/issues/1344
-	if [ ${USE_LOCAL_N_dk_printVar} = 1 ]; then
+	#if [ ${USE_LOCAL_N_dk_printVar} = 1 ]; then
+	#$(command -v local -n) && echo "local -n WORKS" || echo "local -n DOES NOT WORK"
+	if $(command -v local -n); then
 		local -n _reference_=$1
 		if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
