@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-#[ -z ${USE_LOCAL_N_dk_printVar-} ] && export USE_LOCAL_N_dk_printVar=1
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -13,14 +12,19 @@ dk_printVar() {
 	varname=$1
 	
 	# https://github.com/flang-compiler/f18-llvm-project/issues/1344
-	#if [ ${USE_LOCAL_N_dk_printVar} = 1 ]; then
-	#$(command -v local -n) && echo "local -n WORKS" || echo "local -n DOES NOT WORK"
-	if $(command -v local -n); then
-		local -n _reference_=$1
-		if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
+	# https://unix.stackexchange.com/a/66009
+	#if $(declare -n 2>/dev/null); then
+		#declare -n _reference_=$1
+		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
+		#	declaration=$1
+		#fi	
+	if $(typeset -n 2>/dev/null); then
+		typeset -n _reference_=$1
+		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
 		fi
-			
+		#echo "declaration = $declaration"
+		
 		# IS VARIABLE
 		if [[ $declaration == "declare -- "* ]]; then
 			dk_echo "${Blue-}VARIABLE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
@@ -98,7 +102,7 @@ dk_printVar() {
 			return 0
 		fi
 	fi
-		
+	
 	# IS VARIABLE
 	if [ -n "${!varname+x}" ]; then
 		dk_echo "${Blue-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"

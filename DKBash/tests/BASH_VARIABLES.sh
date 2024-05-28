@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set +o nounset
 . ../functions/DK.sh
 set +o nounset
 
