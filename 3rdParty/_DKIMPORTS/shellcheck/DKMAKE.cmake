@@ -6,3 +6,8 @@
 #shellcheck --version
 
 #SHELLCHECK_VERSION="latest"
+
+
+
+###### TERMUX ######
+pkg install shellcheck
