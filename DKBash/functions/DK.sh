@@ -2,7 +2,22 @@
 # Conditional expressions for POSIX shell   https://www.ibm.com/docs/zh-tw/aix/7.2?topic=shell-conditional-expressions-korn-posix
 #[ -n "${DKINIT}" ] && exit
 
+dk_install(){
+	[ -n "$(command -v "tce-load")" ] && tce-load -wi $1
+}
 
+dk_command(){
+	[ -z "$(command -v "$1")" ] && 	dk_install $1
+	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	
+	echo "$1 "${@:2}""
+	$1 "${@:2}"
+}
+dk_preload(){
+	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	. ${DKBASH_DIR}/functions/$1.sh
+}
+#alias dk_bash='dk_command bash'
 ##################################################################################
 # DK(<args>)
 #
@@ -34,10 +49,12 @@ DK () {
 	###### Reload Main Script with bash ######
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
-		[ -z "$(command -v "bash")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi bash
-		[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
+		#[ -z "$(command -v "bash")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi bash
+		#[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
 		echo "reloading with bash . . ."
-		exec bash "$0" 
+		#exec bash "$0" 
+		#$(dk_bash) "$0"
+		dk_command bash "$0"
 	fi
 	[ -n "${DKINIT}" ] && return || export readonly DKINIT=1
 		
@@ -116,33 +133,29 @@ DK () {
 	###### Script loader ######
 	#if [ -n "${ENABLE_dk_load}" ]; then
 		###### download if missing ######
-		[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi curl
-		[ -n "$(command -v "curl")" ] || [$(read -rp 'curl command not found, press enter to exit')] || exit;
+		#[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi curl
+		#[ -n "$(command -v "curl")" ] || [$(read -rp 'curl command not found, press enter to exit')] || exit;
 		
-		[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
-		[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
-		. ${DKBASH_DIR}/functions/dk_return.sh
+		#[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
+		#[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
+		#dk_command curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
+		#. ${DKBASH_DIR}/functions/dk_return.sh
 		
-		. ${DKBASH_DIR}/functions/__FILE__.sh
-		. ${DKBASH_DIR}/functions/__LINE__.sh
-		. ${DKBASH_DIR}/functions/__FUNCTION__.sh
-		. ${DKBASH_DIR}/functions/__ARGC__.sh
-		. ${DKBASH_DIR}/functions/__ARGV__.sh
-		. ${DKBASH_DIR}/functions/__CALLER__.sh
-		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
-		. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
-		. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
+		dk_preload dk_return
+		dk_preload __FILE__
+		dk_preload __LINE__
+		dk_preload __FUNCTION__
+		dk_preload __ARGC__
+		dk_preload __ARGV__
+		dk_preload __CALLER__
+		dk_preload dk_debugFunc
+		dk_preload dk_onExit    # trap EXIT handler
+		dk_preload dk_onError   # trap ERR handler
 		
-		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || curl -Lo DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
-		. ${DKBASH_DIR}/functions/dk_load.sh
-		#dk_load dk_signalHandler
+		dk_preload dk_load
 
 		dk_load dk_escapeSequences
 		dk_escapeSequences
-		
-		#dk_load ${DKBASH_DIR}/dk_errorStatus
-		#dk_errorStatus
 		
 		dk_load ${DKSCRIPT_PATH}
 		
