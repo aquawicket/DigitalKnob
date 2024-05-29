@@ -35,9 +35,8 @@ DK () {
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
 		if [ -z "$(command -v "bash")" ]; then
-		#if $(bash >/dev/null 2>&1); then
-			(tce-load -wi >/dev/null 2>&1) && tce-load -wi bash
-			[ -z "$(command -v "bash")" ] && [$(read -rp 'bash command not found, press enter to exit')] || exit;
+			[ -n "$(command -v "tce-load")" ] || tce-load -wi bash
+			[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
 		fi
 		echo "reloading with bash . . ."
 		exec bash "$0" 
@@ -119,6 +118,9 @@ DK () {
 	###### Script loader ######
 	#if [ -n "${ENABLE_dk_load}" ]; then
 		###### download if missing ######
+		if [ -z "$(command -v "curl")" ]; then
+			[ -n "$(command -v "curl")" ] || tce-load -wi curl
+		fi
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || curl -Lo DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
 		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
