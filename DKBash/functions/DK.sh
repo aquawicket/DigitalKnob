@@ -8,7 +8,7 @@ dk_install(){
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
 dk_source(){
-	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo ${DKBASH_DIR}/DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
 	[ -e ${DKBASH_DIR}/functions/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	chmod 777 ${DKBASH_DIR}/functions/$1.sh
 	. ${DKBASH_DIR}/functions/$1.sh
