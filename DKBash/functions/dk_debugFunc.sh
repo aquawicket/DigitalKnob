@@ -3,7 +3,7 @@ echo "loading dk_debugFunc . . ."
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
-[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=1
+#[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=1
 ##################################################################################
 # dk_debugFunc()
 #
