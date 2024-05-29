@@ -1,8 +1,9 @@
 #!/bin/bash
+echo "loading dk_debugFunc . . ."
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
-[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=0
+[ -z ${ENABLE_dk_debugFunc-} ] && export ENABLE_dk_debugFunc=1
 ##################################################################################
 # dk_debugFunc()
 #
@@ -13,7 +14,7 @@
 #}'
 
 alias dk_debugFunc='{
-	if [ ${ENABLE_dk_debugFunc} -eq 1 ]; then
+	if [ ${ENABLE_dk_debugFunc-} -eq 1 ]; then
 		if [ "$(echo -e)" = "" ]; then
 			echo -e "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		else
@@ -22,7 +23,7 @@ alias dk_debugFunc='{
 	fi
 }'
 
-
+echo "done loading dk_debugFunc . . ."
 
 
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###

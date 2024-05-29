@@ -6,16 +6,18 @@
 # dk_call(<command args>)
 #
 #
-dk_call () {
+dk_call(){
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
-
-	dk_echo "${magenta} $ $* ${clr}"
-	#$("$@") && "$@" 2>&1 #|| dk_error "'$*: failed!'"
+	
+	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
+	[ -z "$(command -v "$1")" ] && dk_load $1
+	#[ -z "$(command -v "$1")" ] && dk_source $1
+	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	
+	echo "$@"
 	"$@"
 }
-
-
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###

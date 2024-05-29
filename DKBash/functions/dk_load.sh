@@ -1,14 +1,14 @@
 #!/bin/sh
 #[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
-
+dk_source dk_debugFunc
 
 ##################################################################################
 # dk_load()
 #
 #
 dk_load() {
-	dk_source dk_debugFunc
+	dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}(): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
@@ -32,7 +32,7 @@ dk_load() {
 	
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
-	if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+	if [[ $(dk_command file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
 		echo "Converting file to Unix line endings"
 		sed -i -e 's/\r$//' ${fpath}
 	fi

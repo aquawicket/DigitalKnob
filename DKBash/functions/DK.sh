@@ -8,7 +8,8 @@ dk_install(){
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
 dk_source(){
-	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo ${DKBASH_DIR}/DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	[ -e ${DKBASH_DIR}/functions/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	chmod 777 ${DKBASH_DIR}/functions/$1.sh
 	. ${DKBASH_DIR}/functions/$1.sh
 }
@@ -17,7 +18,9 @@ dk_call(){
 	[ -z "$(command -v "$1")" ] && dk_load $1
 	#[ -z "$(command -v "$1")" ] && dk_source $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
-	$1
+	
+	echo "$@"
+	"$@"
 }
 dk_command(){
 	[ -z "$(command -v "$1")" ] && dk_install $1
@@ -136,7 +139,6 @@ DK () {
 	#export PATH=${PATH}:${DKBASH_DIR}/functions
 		
 	###### Script loader ######
-	dk_source dk_load
 	dk_source dk_return
 	dk_source __FILE__
 	dk_source __LINE__
@@ -145,6 +147,7 @@ DK () {
 	dk_source __ARGV__
 	dk_source __CALLER__
 	dk_source dk_debugFunc
+	dk_source dk_load
 	
 	dk_source dk_onExit    # trap EXIT handler
 	dk_source dk_onError   # trap ERR handler
