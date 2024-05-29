@@ -1,8 +1,8 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-#$(typeset -n) && alias HAVE_typeset_n='$(true)' || alias HAVE_typeset_n='$(false)'
-$(typeset -n) && HAVE_typeset_n=1 || HAVE_typeset_n=0
+$(typeset -n) && alias HAVE_typeset_n='true' || alias HAVE_typeset_n='false'
+#$(typeset -n) && HAVE_typeset_n=1 || HAVE_typeset_n=0
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -20,7 +20,7 @@ dk_printVar() {
 		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
 		#	declaration=$1
 		#fi	
-	if [ $HAVE_typeset_n = 1 ]; then
+	if HAVE_typeset_n; then
 		typeset -n _reference_=$1
 		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
