@@ -34,7 +34,10 @@ DK () {
 	###### Reload Main Script with bash ######
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
-		[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
+		if [ -z "$(command -v "bash")" ]; then
+			[ -z "$(command -v "tce-load")"] && tce-load -wi bash
+			[ -z "$(command -v "bash")" ] && [$(read -rp 'bash command not found, press enter to exit')] || exit;
+		fi
 		echo "reloading with bash . . ."
 		exec bash "$0" 
 	fi
