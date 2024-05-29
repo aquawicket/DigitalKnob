@@ -18,14 +18,14 @@
 dk_verbose () {
 	dk_debugFunc
 	
-	[ $ENABLE_dk_verbose -ne 1 ] && return
+	[ ${ENABLE_dk_verbose-1} -ne 1 ] && return
 	msg="$1"
 	
-	dk_echo "${cyan}${VERBOSE_TAG}${msg}${clr}"
-	[ $TRACE_ON_VERBOSE -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_VERBOSE ***${clr}"  && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
-	[ $LINE_ON_VERBOSE -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_VERBOSE ***${clr}"   && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
-	[ $PAUSE_ON_VERBOSE -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_VERBOSE ***${clr}"  && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
-	[ $HALT_ON_VERBOSE -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_VERBOSE ***${clr}"   && dk_exit; true #OR HALT AND NOT NO_HALT)
+	dk_echo "${cyan}${VERBOSE_TAG-}${msg}${clr}"
+	[ ${TRACE_ON_VERBOSE-0} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_VERBOSE ***${clr}"  && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
+	[ ${LINE_ON_VERBOSE-0} -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_VERBOSE ***${clr}"   && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
+	[ ${PAUSE_ON_VERBOSE-0} -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_VERBOSE ***${clr}"  && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
+	[ ${HALT_ON_VERBOSE-0} -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_VERBOSE ***${clr}"   && dk_exit; true #OR HALT AND NOT NO_HALT)
 }
 
 
