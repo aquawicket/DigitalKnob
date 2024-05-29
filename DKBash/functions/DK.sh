@@ -7,25 +7,24 @@ dk_install(){
 	[ -n "$(command -v "tce-load")" ] && tce-load -wi $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
-dk_command(){
-	[ -z "$(command -v "$1")" ] && dk_install $1
-	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
-	
-	echo "$@"
-	"$@"
-}
 dk_source(){
 	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
 	chmod 777 ${DKBASH_DIR}/functions/$1.sh
 	. ${DKBASH_DIR}/functions/$1.sh
 }
-
 dk_call(){
 	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
 	[ -z "$(command -v "$1")" ] && dk_load $1
 	#[ -z "$(command -v "$1")" ] && dk_source $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	$1
+}
+dk_command(){
+	[ -z "$(command -v "$1")" ] && dk_install $1
+	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	
+	echo "$@"
+	"$@"
 }
 #alias dk_bash='dk_command bash'
 ##################################################################################
