@@ -35,7 +35,8 @@ DK () {
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
 		if [ -z "$(command -v "bash")" ]; then
-			[ -z "$(command -v "tce-load")"] && tce-load -wi bash
+		#if $(bash >/dev/null 2>&1); then
+			(tce-load -wi >/dev/null 2>&1) && tce-load -wi bash
 			[ -z "$(command -v "bash")" ] && [$(read -rp 'bash command not found, press enter to exit')] || exit;
 		fi
 		echo "reloading with bash . . ."
