@@ -3,19 +3,29 @@
 #[ -n "${DKINIT}" ] && exit
 
 dk_install(){
+	[ -n "$(command -v "$1")" ] && return
 	[ -n "$(command -v "tce-load")" ] && tce-load -wi $1
+	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
-
 dk_command(){
-	[ -z "$(command -v "$1")" ] && 	dk_install $1
+	[ -z "$(command -v "$1")" ] && dk_install $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	
-	echo "$1 "${@:2}""
-	$1 "${@:2}"
+	echo "$@"
+	"$@"
 }
-dk_preload(){
+dk_source(){
 	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	chmod 777 ${DKBASH_DIR}/functions/$1.sh
 	. ${DKBASH_DIR}/functions/$1.sh
+}
+
+dk_call(){
+	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
+	[ -z "$(command -v "$1")" ] && dk_load $1
+	#[ -z "$(command -v "$1")" ] && dk_source $1
+	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	$1
 }
 #alias dk_bash='dk_command bash'
 ##################################################################################
@@ -49,11 +59,7 @@ DK () {
 	###### Reload Main Script with bash ######
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
-		#[ -z "$(command -v "bash")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi bash
-		#[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
 		echo "reloading with bash . . ."
-		#exec bash "$0" 
-		#$(dk_bash) "$0"
 		dk_command bash "$0"
 	fi
 	[ -n "${DKINIT}" ] && return || export readonly DKINIT=1
@@ -131,41 +137,28 @@ DK () {
 	#export PATH=${PATH}:${DKBASH_DIR}/functions
 		
 	###### Script loader ######
-	#if [ -n "${ENABLE_dk_load}" ]; then
-		###### download if missing ######
-		#[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi curl
-		#[ -n "$(command -v "curl")" ] || [$(read -rp 'curl command not found, press enter to exit')] || exit;
+	dk_source dk_load
+	dk_source dk_return
+	dk_source __FILE__
+	dk_source __LINE__
+	dk_source __FUNCTION__
+	dk_source __ARGC__
+	dk_source __ARGV__
+	dk_source __CALLER__
+	dk_source dk_debugFunc
+	
+	dk_source dk_onExit    # trap EXIT handler
+	dk_source dk_onError   # trap ERR handler
 		
-		#[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
-		#[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
-		#dk_command curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
-		#. ${DKBASH_DIR}/functions/dk_return.sh
-		
-		dk_preload dk_return
-		dk_preload __FILE__
-		dk_preload __LINE__
-		dk_preload __FUNCTION__
-		dk_preload __ARGC__
-		dk_preload __ARGV__
-		dk_preload __CALLER__
-		dk_preload dk_debugFunc
-		dk_preload dk_onExit    # trap EXIT handler
-		dk_preload dk_onError   # trap ERR handler
-		
-		dk_preload dk_load
-
-		dk_load dk_escapeSequences
-		dk_escapeSequences
-		
-		dk_load ${DKSCRIPT_PATH}
-		
-	#else	
+	#dk_source dk_load
+	#dk_load dk_escapeSequences
 	#dk_escapeSequences
-	#fi
+	
+	dk_call dk_escapeSequences
 		
-		
-	#	dk_load dk_bundleSource
-	#	dk_bundleSource ${dk_load_list} builder_bundle.sh
+	dk_load ${DKSCRIPT_PATH}
+				
+	#dk_bundleSource ${dk_load_list} builder_bundle.sh
 
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST}" = "1" ]; then
@@ -181,8 +174,6 @@ DK () {
 			echo "########################## END TEST ################################"
 			echo ""
 			exit
-			#dk_load dk_exit
-			#dk_exit 0
 		fi
 	fi
 }

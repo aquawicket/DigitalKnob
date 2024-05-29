@@ -19,13 +19,10 @@ dk_download () {
 	dk_printVar parentdir
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
-	if dk_commandExists "wget"; then
-		wget -P "${parentdir}" "$1"
-	elif dk_commandExists "curl"; then
-		curl -Lo "$2" "$1"
-	else
-		dk_error "dk_download(): could not find wget or curl"
-	fi
+	
+	[ dk_fileExists "$1" ] || dk_command curl -Lo "$2" "$1"
+	[ dk_fileExists "$1" ] || dk_command wget -P "${parentdir}" "$1"
+
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]
 }

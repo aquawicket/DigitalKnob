@@ -8,7 +8,7 @@
 #
 #
 dk_load() {
-	dk_debugFunc
+	dk_source dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}(): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
@@ -26,31 +26,27 @@ dk_load() {
 	
 	#### download if missing ####
 	[ ! -e ${fpath} ] && echo "Dowloading ${fn}"
-	[ ! -e ${fpath} ] && curl -Lo ${DKBASH_DIR}/functions/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	[ ! -e ${fpath} ] && wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	
+	[ ! -e ${fpath} ] && dk_command curl -Lo ${DKBASH_DIR}/functions/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
+	[ ! -e ${fpath} ] && dk_command wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
 	[ ! -e ${fpath} ] && echo "ERROR: ${fpath}: file not found" && return
 	
 	# Convert to unix line endings if CRLF found
-	#if [ -e ${fpath}]; then
-		#if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		# BASH REGEX MATCH
-		if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
-			echo "Converting file to Unix line endings"
-			sed -i -e 's/\r$//' ${fpath}
-		fi
-	#fi
+	#if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
+	if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+		echo "Converting file to Unix line endings"
+		sed -i -e 's/\r$//' ${fpath}
+	fi
 	
 	if [ -f ${fpath} ]; then
 		local ${fn}=${fpath}
     else
         echo "${fpath}: file not found"
-		return 0
-		#1
+		return
     fi
 
-	#dkload_list="init_dkload_list"
+	#if echo "${dkload_list}" | grep -q ";${fn};"; then     # POSIX REGEX
 	if ! [[ "${dkload_list-}" =~ ";${fn};" ]]; then			# BASH REGEX MATCH
-	#if echo "${dkload_list}" | grep -q ";${fn};"; then
+	
 		dkload_list="${dkload_list-};${fn};" 			# Add to list
 		#echo "added ${fn} to dkload_list"
 		
@@ -77,7 +73,7 @@ dk_load() {
 			#[ -z "${value}" ] && continue
 
 			if [[ ${dkload_list} =~ ";${value};" ]]; then			# BASH REGEX MATCH
-			#if echo ${dkload_list} | grep -q "${value};"; then	# POSIX REGEX MATCH
+			#if echo ${dkload_list} | grep -q "${value};"; then	    # POSIX REGEX MATCH
 				#echo "${fn}: skipping ${value}.    already in load_list"
 				continue
 			elif [ ${fn} = ${value} ]; then

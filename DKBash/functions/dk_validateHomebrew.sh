@@ -10,9 +10,7 @@ dk_validateHomebrew () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
-	if ! [ "$OSTYPE" = "darwin"* ]; then
-		return
-	fi
+	[ "$OSTYPE" = "darwin"* ] || return   # if NOT darwin
 		
 	if ! dk_commandExists brew; then
 		dk_info "dk_installing Homebrew"
