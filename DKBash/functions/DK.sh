@@ -1,6 +1,6 @@
 #!/bin/sh
 # Conditional expressions for POSIX shell   https://www.ibm.com/docs/zh-tw/aix/7.2?topic=shell-conditional-expressions-korn-posix
-
+#[ -n "${DKINIT}" ] && exit
 
 
 ##################################################################################
@@ -83,6 +83,7 @@ DK () {
 
 
 	###### Set error trace options ######
+	# https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
 	$(set -o errtrace) && set -o errtrace 	# set -E : trace ERR through 'time command' and other functions
 	$(set -o nounset)  && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable

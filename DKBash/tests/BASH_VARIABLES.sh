@@ -1,7 +1,5 @@
 #!/bin/sh
-set +o nounset
 . ../functions/DK.sh
-set +o nounset
 
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 

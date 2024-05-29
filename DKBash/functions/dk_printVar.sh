@@ -1,8 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-$(typeset -n) && alias HAVE_typeset_n='true' || alias HAVE_typeset_n='false'
-#$(typeset -n) && HAVE_typeset_n=1 || HAVE_typeset_n=0
 ##################################################################################
 # dk_printVar(<variable>)
 #
@@ -20,7 +18,7 @@ dk_printVar() {
 		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
 		#	declaration=$1
 		#fi	
-	if HAVE_typeset_n; then
+	if (typeset -n 2>/dev/null); then
 		typeset -n _reference_=$1
 		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
@@ -112,14 +110,14 @@ dk_printVar() {
 	fi
 	
 	# IS FUNCTION
-	if [ "$(type -t $varname)" = "function" ]; then
+	if [ "$(type -t ${varname})" = "function" ]; then
 		_value=$(type $varname | sed '1,1d')
 		dk_echo "${Blue-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
 		return 0
 	fi
 
 	# IS ALIAS
-	if [ "$(type -t $varname)" = "alias" ]; then	
+	if [ "$(type -t ${varname})" = "alias" ]; then	
 		_value=$(alias $varname)
 		_value=${_value#*=}
 		dk_echo "${Blue-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
