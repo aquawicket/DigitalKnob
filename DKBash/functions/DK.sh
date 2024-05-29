@@ -4,7 +4,7 @@
 
 dk_install(){
 	[ -n "$(command -v "$1")" ] && return
-	[ -n "$(command -v "tce-load")" ] && tce-load -wi $1
+	[ -n "$(command -v "tce-load")" ] && tce-load -wil $1     # -l flag means don't add to boot
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
 dk_source(){
