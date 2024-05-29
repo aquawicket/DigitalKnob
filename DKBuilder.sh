@@ -4,8 +4,10 @@
 ###### DK_SETUP ######
 [ ! -e DKBash ] && mkdir DKBash
 [ ! -e DKBash/functions ] && mkdir DKBash/functions
-[ ! -e DKBash/functions/DK.sh ] && wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
-#[ ! -e DKBash/functions/DK.sh ] && curl -Lo DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
+if [ ! -e DKBash/functions/DK.sh ]; then
+	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi curl
+	curl -Lo DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
+fi
 
 ###### DK_INIT ######
 . DKBash/functions/DK.sh

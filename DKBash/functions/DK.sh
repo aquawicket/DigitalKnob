@@ -34,10 +34,8 @@ DK () {
 	###### Reload Main Script with bash ######
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
-		if [ -z "$(command -v "bash")" ]; then
-			[ -n "$(command -v "tce-load")" ] || tce-load -wi bash
-			[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
-		fi
+		[ -z "$(command -v "bash")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi bash
+		[ -n "$(command -v "bash")" ] || [$(read -rp 'bash command not found, press enter to exit')] || exit;
 		echo "reloading with bash . . ."
 		exec bash "$0" 
 	fi
@@ -118,16 +116,13 @@ DK () {
 	###### Script loader ######
 	#if [ -n "${ENABLE_dk_load}" ]; then
 		###### download if missing ######
-		if [ -z "$(command -v "curl")" ]; then
-			[ -n "$(command -v "curl")" ] || tce-load -wi curl
-		fi
-		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || curl -Lo DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || wget -P DKBash/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
-		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
+		[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wi curl
+		[ -n "$(command -v "curl")" ] || [$(read -rp 'curl command not found, press enter to exit')] || exit;
 		
-		#. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
-		#. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
+		[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || curl -Lo DKBash/functions/dk_return.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_return.sh
+		[ -e ${DKBASH_DIR}/functions/dk_return.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		. ${DKBASH_DIR}/functions/dk_return.sh
+		
 		. ${DKBASH_DIR}/functions/__FILE__.sh
 		. ${DKBASH_DIR}/functions/__LINE__.sh
 		. ${DKBASH_DIR}/functions/__FUNCTION__.sh
@@ -137,6 +132,9 @@ DK () {
 		. ${DKBASH_DIR}/functions/dk_debugFunc.sh
 		. ${DKBASH_DIR}/functions/dk_onExit.sh    # trap EXIT handler
 		. ${DKBASH_DIR}/functions/dk_onError.sh   # trap ERR handler
+		
+		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || curl -Lo DKBash/functions/dk_load.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_load.sh
+		[ -e ${DKBASH_DIR}/functions/dk_load.sh ] || [$(read -rp 'dk_load not found, press enter to exit')] || exit;
 		. ${DKBASH_DIR}/functions/dk_load.sh
 		#dk_load dk_signalHandler
 
