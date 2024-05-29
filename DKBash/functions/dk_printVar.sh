@@ -18,7 +18,7 @@ dk_printVar() {
 		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
 		#	declaration=$1
 		#fi	
-	if $(typeset -n 2>/dev/null); then
+	if $(typefset -n 2>/dev/null); then
 		typeset -n _reference_=$1
 		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
@@ -101,27 +101,28 @@ dk_printVar() {
 			dk_echo "${Blue-}EXPORT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
-	fi
+	else
 	
-	# IS VARIABLE
-	if [ -n "${!varname+x}" ]; then
-		dk_echo "${Blue-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"
-		return 0
-	fi
-	
-	# IS FUNCTION
-	if [ "$(type -t $varname)" = "function" ]; then
-		_value=$(type $varname | sed '1,1d')
-		dk_echo "${Blue-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
-		return 0
-	fi
+		# IS VARIABLE
+		if [ -n "${!varname+x}" ]; then
+			dk_echo "${Blue-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"
+			return 0
+		fi
+		
+		# IS FUNCTION
+		if [ "$(type -t $varname)" = "function" ]; then
+			_value=$(type $varname | sed '1,1d')
+			dk_echo "${Blue-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
+			return 0
+		fi
 
-	# IS ALIAS
-	if [ "$(type -t $varname)" = "alias" ]; then	
-		_value=$(alias $varname)
-		_value=${_value#*=}
-		dk_echo "${Blue-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
-		return 0
+		# IS ALIAS
+		if [ "$(type -t $varname)" = "alias" ]; then	
+			_value=$(alias $varname)
+			_value=${_value#*=}
+			dk_echo "${Blue-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
+			return 0
+		fi
 	fi
 		
 	dk_echo "${Blue-}$1 =${red} UNDEFINED${clr-}"
