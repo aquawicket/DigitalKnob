@@ -13,12 +13,12 @@ dk_printVar() {
 	
 	# https://github.com/flang-compiler/f18-llvm-project/issues/1344
 	# https://unix.stackexchange.com/a/66009
-	#if $(declare -n 2>/dev/null); then
+	#if $(declare -n); then
 		#declare -n _reference_=$1
 		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
 		#	declaration=$1
 		#fi	
-	if $(typefset -n 2>/dev/null); then
+	if $(typeset -n); then
 		typeset -n _reference_=$1
 		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
 			declaration=$1
