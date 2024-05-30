@@ -1,3 +1,4 @@
+include(${CMAKE_CURRENT_LIST_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
@@ -11,4 +12,17 @@ function(dk_addSource regex)
 	dk_debugFunc(${ARGV})
 	
 	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
+endfunction()
+
+
+
+
+
+
+
+
+function(DKTEST) #############################################################
+
+	#dk_addSource()
+
 endfunction()

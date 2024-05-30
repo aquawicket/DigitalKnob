@@ -1,3 +1,4 @@
+include(${CMAKE_CURRENT_LIST_DIR}/DK.cmake)
 include_guard()
 # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
