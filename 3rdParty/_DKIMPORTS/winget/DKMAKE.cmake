@@ -15,7 +15,7 @@ Invoke-WebRequest `
     -OutFile xaml.zip -UseBasicParsing
 New-Item -ItemType Directory -Path xaml
 Expand-Archive -Path xaml.zip -DestinationPath xaml
-Add-AppxPackage -Path "xaml\tools\AppX\x64\Release\Microsoft.UI.Xaml.2.8.appx" -UseWindowsPowerShell
+Add-AppxPackage -Path "xaml\tools\AppX\x64\Release\Microsoft.UI.Xaml.2.8.appx"
 Remove-Item xaml.zip
 Remove-Item xaml -Recurse
 
@@ -28,7 +28,7 @@ $DOWNLOAD_URL = $(Invoke-RestMethod $API_URL).assets.browser_download_url |
 Invoke-WebRequest -URI $DOWNLOAD_URL -OutFile winget.msixbundle -UseBasicParsing
 
 # Install winget:
-Add-AppxPackage winget.msixbundle -UseWindowsPowerShell
+Add-AppxPackage winget.msixbundle
 
 # Remove the installer:
 Remove-Item winget.msixbundle

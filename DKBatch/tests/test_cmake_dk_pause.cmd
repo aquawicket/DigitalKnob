@@ -9,4 +9,4 @@ call ../functions/DK.cmd
 
 call dk_cmakeEval "dk_pause()"
 
-::call dk_pause
+call dk_pause

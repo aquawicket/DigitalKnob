@@ -6,7 +6,10 @@ include_guard()
 #	TODO
 #
 function(dk_sleep seconds)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
 endfunction()
+
+
+dk_sleep(10)
