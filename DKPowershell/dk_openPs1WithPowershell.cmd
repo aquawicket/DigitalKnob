@@ -12,7 +12,7 @@ dk_openPs1WithPowershell.cmd() {
 	
 	:::::: .ps1 dbl click to open scripts in powershell
 	::HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -noLogo -ExecutionPolicy unrestricted -file "%1"
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command" "" "" "\"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\" -noLogo -ExecutionPolicy unrestricted -file \"%%%%1\""
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command" "" "" "\"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\" -noLogo -ExecutionPolicy unrestricted -file \"%%%%1\""
 
 		
 

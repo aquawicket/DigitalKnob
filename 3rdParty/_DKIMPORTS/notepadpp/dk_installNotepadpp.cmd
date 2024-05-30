@@ -94,8 +94,8 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	:::::: Add Context Menu
 	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
-	call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "" "" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" "" "" "\"%NOTEPADPP_EXE%\" \"%%%%1\""
 
 	call dk_checkError
 	

@@ -18,7 +18,7 @@ call ..\functions\DK.cmd
 	pause
 	
 	:: Set the PATH environment variable from registry
-	::call dk_setRegistryKey HKCU\Environment PATH REG_EXPAND_SZ %PATH_VALUE%
+	::call dk_registrySetKey HKCU\Environment PATH REG_EXPAND_SZ %PATH_VALUE%
 	echo.
 	pause
 goto:eof

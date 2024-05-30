@@ -2,10 +2,10 @@
 call DK
 
 ::#################################################################################
-:: dk_setRegistryKey() <reg_path> <key> <type> <value>
+:: dk_registrySetKey() <reg_path> <key> <type> <value>
 ::
 ::
-:dk_setRegistryKey
+:dk_registrySetKey
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	
@@ -81,5 +81,5 @@ goto:eof
 call dk_validate DKTOOLS_DIR "dk_getDKPaths"
 call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 call dk_set NOTEPADPP_EXE "%NOTEPADPP%notepad++.exe"
-call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
-call dk_setRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%^1\""
+call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
+call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%^1\""
