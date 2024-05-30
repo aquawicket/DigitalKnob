@@ -12,7 +12,7 @@ function Global:dk_validate($variable, $code) {
 	dk_debugFunc
 	if ( $(__ARGC__) -ne 2 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if(Test-Path variable:$variable){ return $variable }
+	if(Test-Path variable:$variable){ return }
 	
 	if(Test-Path $code -PathType Leaf){ dk_load $code }
 	

@@ -33,7 +33,7 @@ function Global:dk_validateGit () {
     $GIT_FOLDER = dk_convertToCIdentifier $GIT_DL_NAME 
     $GIT_FOLDER = dk_toLower $GIT_FOLDER GIT_FOLDER
 	dk_validate DKTOOLS_DIR dk_getDKPaths
-    $GIT_EXE = "$DKTOOLS_DIR\$GIT_FOLDER\bin\git.exe"
+    $global:GIT_EXE = "$DKTOOLS_DIR\$GIT_FOLDER\bin\git.exe"
         
     if(dk_fileExists $GIT_EXE){ return }
         

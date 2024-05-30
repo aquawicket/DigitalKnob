@@ -10,7 +10,7 @@ function Global:dk_fileExists($filepath){
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-	if (Test-Path $filepath){
+	if(Test-Path $filepath){
 		return $true;
 	}
 	return $false;

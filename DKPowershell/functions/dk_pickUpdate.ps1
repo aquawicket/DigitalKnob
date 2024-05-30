@@ -2,6 +2,7 @@ if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
 
 dk_load dk_readCache
+dk_load dk_checkGitRemote
 ##################################################################################
 # dk_pickUpdate()
 #
@@ -60,25 +61,25 @@ function Global:dk_pickUpdate() {
 		dk_echo "${clr}"
 	}
 	
-	#read input
-	if("${input}" -eq "0"){
+	$input = Read-Host
+	if($input -eq "0"){
 		dk_echo "repeating last selection"
 		$APP = ${_APP_}
 		$TARGET_OS = ${_TARGET_OS_}
 		$TYPE = ${_TYPE_}
 		$UPDATE = 1
 	}
-	elseif("${input}" -eq "1"){ dk_gitUpdate }
-	elseif("${input}" -eq "2"){ dk_gitCommit }
-	elseif("${input}" -eq "3"){ dk_pushAssets }
-	elseif("${input}" -eq "4"){ dk_pullAssets }
-	elseif("${input}" -eq "5"){ dk_resetAll }
-	elseif("${input}" -eq "6"){ dk_removeAll }
-	elseif("${input}" -eq "7"){ dk_clearScreen }
-	elseif("${input}" -eq "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
-	elseif("${input}" -eq "9"){ dk_reload }
-	elseif("${input}" -eq "10"){ dk_exit 0 }	
-	elseif("${input}" -eq ""){ UPDATE=1 }
+	elseif($input -eq "1"){ dk_gitUpdate }
+	elseif($input -eq "2"){ dk_gitCommit }
+	elseif($input -eq "3"){ dk_pushAssets }
+	elseif($input -eq "4"){ dk_pullAssets }
+	elseif($input -eq "5"){ dk_resetAll }
+	elseif($input -eq "6"){ dk_removeAll }
+	elseif($input -eq "7"){ dk_clearScreen }
+	elseif($input -eq "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
+	elseif($input -eq "9"){ dk_reload }
+	elseif($input -eq "10"){ dk_exit 0 }	
+	elseif($input -eq ""){ $UPDATE = 1 }
 	else{ dk_warning "invalid selection"}
 }
 

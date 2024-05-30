@@ -17,26 +17,26 @@ function Global:dk_readCache() {
 	
 	dk_echo "reading cache..."
 	$count = 0
-	while( read p){
+	
+	foreach($line in Get-Content "${DKBRANCH_DIR}\cache") {
 		if("${count}" -eq "0"){
-			$_APP_ = $(echo "${p}" | tr -d '\r')
+			$_APP_ = $line
 			#dk_printVar _APP_
 		}
 		if("${count}" -eq "1"){
-			$_TARGET_OS_ = $(echo "${p}" | tr -d '\r')
+			$_TARGET_OS_ = $line
 			#dk_printVar _TARGET_OS_ 
 		}
 		if("${count}" -eq "2"){
-			$_TYPE_ = $(echo "${p}" | tr -d '\r')
+			$_TYPE_ = $line
 			#dk_printVar _TYPE_
 		}
 		#if("${count}" -eq "3"){
-		#	_DKENV_ = $(echo ${p} | tr -d '\r')
+		#	_DKENV_ = $line
 		#	#dk_printVar _DKENV_
 		#}
 		$count++
-	}
-	#done < "${DKBRANCH_DIR}"/cache
+	} 
 }
 
 

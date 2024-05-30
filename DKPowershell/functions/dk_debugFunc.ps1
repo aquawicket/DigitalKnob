@@ -22,5 +22,5 @@ function Global:dk_debugFunc() {
 	$_ARGC_     = $(__ARGC__     $($_FRAME_+1))
 	$_ARGV_     = $(__ARGV__     $($_FRAME_+1))
 	#$ARGS = $PsBoundParameters.Values + $args
-	Write-Host -Fore cyan -NoNewline "${_FILE_}`:${_LINE_}".PadLeft(20); Write-Host -Fore blue "   ${_FUNCTION_}(${_ARGC_}`: ${_ARGV_})";
+	Write-Host -Fore cyan -NoNewline "${_FILE_}`:${_LINE_}".PadLeft(20); Write-Host -Fore blue "   ${_FUNCTION_}(${_ARGV_})";
 }
