@@ -1,5 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$DK_ARGV){ $DK_ARGV = 1 } else{ return }
+#if (!$DK_ARGV){ $DK_ARGV = 1 } else{ return }
 
 ##################################################################################
 # __ARGV__(<frame>)
@@ -12,4 +12,10 @@ function GLOBAL:__ARGV__($_FRAME_=1) {
 		$_ARGV_.Add((get-variable $key).Value)
 	}
 	return $_ARGV_
+}
+
+
+
+function Global:DKTEST() { ###########################################################################################
+	Write-Host -Fore cyan "ARGV = $(__ARGV__)";
 }

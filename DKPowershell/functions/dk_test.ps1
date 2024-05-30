@@ -22,9 +22,6 @@ function GLOBAL:dk_test($str, $num) {
 	echo "__ARGC__     = $(__ARGC__)"
 	echo "__ARGV__     = $(__ARGV__)"
 	echo "__CALLER__   = $(__CALLER__)"
-
-	
-	dk_pause
 }
 
 
