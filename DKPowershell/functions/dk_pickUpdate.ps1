@@ -1,7 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_buildMain){ $dk_buildMain = 1 } else{ return }
+if (!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
 
-
+dk_load dk_readCache
 ##################################################################################
 # dk_pickUpdate()
 #
@@ -60,7 +60,7 @@ function Global:dk_pickUpdate() {
 		dk_echo "${clr}"
 	}
 	
-	read input
+	#read input
 	if("${input}" -eq "0"){
 		dk_echo "repeating last selection"
 		$APP = ${_APP_}
