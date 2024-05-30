@@ -7,6 +7,8 @@ dk_load dk_error
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
 dk_load dk_removeExtension
+dk_load dk_convertToCIdentifier
+dk_load dk_toLower
 ####################################################################
 # dk_validateGit()
 #
@@ -19,9 +21,9 @@ function Global:dk_validateGit () {
 	$GIT_DL_WIN_X86_64 = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
 
 	dk_validate HOST_ARCH dk_getHostTriple
-    if ($HOST_ARCH -eq "arm32"){  $GIT_DL = "" }
-    if ($HOST_ARCH -eq "arm64"){  $GIT_DL = $GIT_DL_WIN_ARM64 }
-    if ($HOST_ARCH -eq "x86"){    $GIT_DL = $GIT_DL_WIN_X86 }
+    if ($HOST_ARCH -eq "arm32") { $GIT_DL = "" }
+    if ($HOST_ARCH -eq "arm64") { $GIT_DL = $GIT_DL_WIN_ARM64 }
+    if ($HOST_ARCH -eq "x86")   { $GIT_DL = $GIT_DL_WIN_X86 }
     if ($HOST_ARCH -eq "x86_64"){ $GIT_DL = $GIT_DL_WIN_X86_64 }
     if(!$GIT_DL){ dk_error "GIT_DL is invalid" }
 	  
