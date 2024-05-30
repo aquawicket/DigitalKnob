@@ -13,33 +13,33 @@ function Global:dk_validateBranch () {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	$FOLDER = dk_getName "$(pwd)"
-	$DKBRANCH="Development"
+	$global:DKBRANCH="Development"
 	
 	dk_validate DIGITALKNOB_DIR dk_getDKPaths
 	if(dk_fileExists "${DIGITALKNOB_DIR}"\"${FOLDER}"\.git){
-		$BRANCH=$("${GIT_EXE} rev-parse --abbrev-ref HEAD")
+		$global:BRANCH=$("${GIT_EXE} rev-parse --abbrev-ref HEAD")
 		if("${BRANCH}" -eq "${FOLDER}"){
-			$DKBRANCH="${FOLDER}"
+			$global:DKBRANCH="${FOLDER}"
 		}
 	}
 	dk_printVar DKBRANCH
 	
-	$DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
+	$global:DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
 	dk_printVar DKBRANCH_DIR
 	
-	$DKCMAKE_DIR="${DKBRANCH_DIR}\DKCMake"
+	$global:DKCMAKE_DIR="${DKBRANCH_DIR}\DKCMake"
 	dk_printVar DKCMAKE_DIR
 	
-	$DK3RDPARTY_DIR="${DKBRANCH_DIR}\3rdParty"
+	$global:DK3RDPARTY_DIR="${DKBRANCH_DIR}\3rdParty"
 	dk_printVar DK3RDPARTY_DIR
 	
-	$DKIMPORTS_DIR="${DK3RDPARTY_DIR}\_DKIMPORTS"
+	$global:DKIMPORTS_DIR="${DK3RDPARTY_DIR}\_DKIMPORTS"
 	dk_printVar DKIMPORTS_DIR
 	
-	$DKAPPS_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}\DKApps"
+	$global:DKAPPS_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}\DKApps"
 	dk_printVar DKAPPS_DIR
 	
-	$DKPLUGINS_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}\DKPlugins"
+	$global:DKPLUGINS_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}\DKPlugins"
 	dk_printVar DKPLUGINS_DIR
 
 	# make sure script is running from DKBRANCH_DIR

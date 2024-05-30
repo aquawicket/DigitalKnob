@@ -9,6 +9,7 @@ dk_load dk_getDKPaths
 dk_load dk_validateGit
 dk_load dk_validateBranch
 dk_load dk_warning
+dk_load dk_pickUpdate
 ####################################################################
 # dk_buildMain()
 #
@@ -43,21 +44,21 @@ function Global:dk_buildMain() {
 		dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
 	}
 	
-#	while :
-#	do
-#		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
-#		if [ -z "${APP-}" ];        then dk_pickApp;     continue; fi
-#		if [ -z "${TARGET_OS-}" ];  then dk_pickOs;      continue; fi
-#		if [ -z "${TYPE-}" ];       then dk_pickType;    continue; fi
-#		
-#		dk_createCache
-#		dk_generate	
-#		dk_build
-#		
-#		dk_unset UPDATE
-#		dk_unset APP
-#		dk_unset TARGET_OS
-#		dk_unset TYPE
-#	done
+	$running=1
+	while($running){  
+		if(!${UPDATE})    { dk_pickUpdate;  continue; }
+		if(!${APP})       { dk_pickApp;     continue; }
+		if(!${TARGET_OS}) { dk_pickOs;      continue; }
+		if(!${TYPE})      { dk_pickType;    continue; }
+		
+		dk_createCache
+		dk_generate	
+		dk_build
+		
+		dk_unset UPDATE
+		dk_unset APP
+		dk_unset TARGET_OS
+		dk_unset TYPE
+	}  
 }
 
