@@ -1,7 +1,8 @@
+include(${CMAKE_CURRENT_LIST_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_addRegistryKey(key value data)
+# dk_registrySetKey(key value data)
 #
 #	TODO
 #
@@ -9,7 +10,7 @@ include_guard()
 #	@value	- TODO
 #	@data	- TODO
 #
-function(dk_addRegistryKey key value data)
+function(dk_registrySetKey key value data)
 	dk_debugFunc(${ARGV})
 
 	
@@ -21,4 +22,13 @@ function(dk_addRegistryKey key value data)
 		dk_verbose(output)
 		dk_verbose(_failed)
 	endif()
+endfunction()
+
+
+
+
+function(DKTEST) #############################################################
+	
+	#dk_registrySetKey()
+
 endfunction()

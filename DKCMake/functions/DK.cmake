@@ -15,6 +15,8 @@ endif()
 
 ###### set DKSCRIPT_ variables ######
 set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
+get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY CACHE INTERNAL "")
+get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME CACHE INTERNAL "")
 
 ###### get DKCMAKE_DIR ######
 get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE INTERNAL "")
@@ -37,4 +39,19 @@ dk_load(dk_escapeSequences)
 dk_escapeSequences()
 dk_load(${DKSCRIPT_PATH})
 
-DKTEST()
+
+###### DKTEST MODE ######
+#if("${ENABLE_DKTEST}" EQUAL "1")
+if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
+	set(ENABLE_dk_debugFunc 1)
+	message("\n###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######\n")
+			
+	DKTEST()
+	
+	message("\n########################## END TEST ################################\n")
+	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 100)
+endif()
+#endif()
+
+
+

@@ -19,7 +19,8 @@ endfunction()
 
 
 function(DKTEST) #############################################################
-	dk_info("running dk_test for 10 seconds . . .")
-	dk_test(10)
+
+	dk_info("running dk_test for 3 seconds . . .")
+	dk_test(3)
 
 endfunction()
