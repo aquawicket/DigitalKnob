@@ -1,7 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_load){ $dk_load = 1 } else{ return }
 
-. $PWD\dk_debugFunc.ps1
+. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
 #####################################################################
 ## dk_load()
 ##

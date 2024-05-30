@@ -2,7 +2,6 @@ if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_printVar){ $dk_printVar = 1 } else{ return }
 
 dk_load dk_info
-if (!$USE_LOCAL_N_dk_printVar){ $global:USE_LOCAL_N_dk_printVar = 1 }
 ####################################################################
 # dk_printVar()
 #
@@ -10,9 +9,13 @@ if (!$USE_LOCAL_N_dk_printVar){ $global:USE_LOCAL_N_dk_printVar = 1 }
 function Global:dk_printVar($var) {
 	dk_debugFunc
 	
-	if(!$USE_LOCAL_N_dk_printVar){ return }
-	$_value_ = (Get-Item variable:$var).Value
-	dk_info "$var = $_value_"
+	if(Test-Path variable:$var){
+		$_value_ = (Get-Item variable:$var).Value
+		dk_info "$var = $_value_"
+	}
+	else {
+		dk_info "$var = UNDEFINED"
+	}
 }
 
 

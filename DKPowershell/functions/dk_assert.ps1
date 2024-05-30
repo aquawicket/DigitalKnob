@@ -1,6 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_assert){ $dk_assert = 1 } else{ return }
 
+dk_load dk_realpath
 ##################################################################################
 # dk_assert(<expression>)
 #
@@ -12,9 +13,11 @@ function Global:dk_assert($expression) {
 	if ( ! ${!expression} ){
 		$lastErrorFile = "$(__FILE__ 1)"
 		#export lastErrorFile=$(realpath ${lastErrorFile})
-		dk_realpath ${lastErrorFile} lastErrorFile
-		export lastErrorLine="$(__LINE__ 0)"
-		dk_error "Assertion failed: $1" && return ${false}
+		#dk_realpath ${lastErrorFile} lastErrorFile
+		$lastErrorLine="$(__LINE__ 0)"
+		dk_load dk_error
+		dk_error "Assertion failed: $1"
+		return ${false}
 	}
 	
 	return ${true}	

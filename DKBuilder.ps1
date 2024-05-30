@@ -15,5 +15,6 @@ Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
 
 
 ###### Load Main Program ######
+dk_load dk_buildMain
 dk_buildMain
 Read-Host -Prompt "Press Enter to exit" 
