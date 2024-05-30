@@ -7,6 +7,8 @@ dk_load dk_warning
 dk_load dk_getHostTriple
 dk_load dk_getDKPaths
 dk_load dk_validateGit
+dk_load dk_validateBranch
+dk_load dk_warning
 ####################################################################
 # dk_buildMain()
 #
@@ -31,18 +33,9 @@ function Global:dk_buildMain() {
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
-	
 	dk_getDKPaths
-
 	dk_validateGit
 	dk_validateBranch
-	
-	#dk_printVar DKBRANCH_DIR
-	#dk_printVar DKAPPS_DIR
-	#dk_printVar DKCMAKE_DIR
-	#dk_printVar DK3RDPARTY_DIR
-	#dk_printVar DKIMPORTS_DIR
-	#dk_printVar DKPLUGINS_DIR
 	
 	if("${DKSCRIPT_DIR}" -ne "${DKBRANCH_DIR}"){
 		dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"

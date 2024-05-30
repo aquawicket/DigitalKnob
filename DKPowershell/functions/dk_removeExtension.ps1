@@ -9,14 +9,6 @@ dk_load dk_printVar
 function Global:dk_removeExtension($filepath) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-												 ## Output:
-	# $PSCommandPath                             ## C:\Users\user\Documents\code\ps\test.ps1
-	# (Get-Item $PSCommandPath ).Extension       ## .ps1
-	# (Get-Item $PSCommandPath ).Basename        ## test
-	# (Get-Item $PSCommandPath ).Name            ## test.ps1
-	# (Get-Item $PSCommandPath ).DirectoryName   ## C:\Users\user\Documents\code\ps
-	# (Get-Item $PSCommandPath ).FullName        ## C:\Users\user\Documents\code\ps\test.ps1
 
 	$output = $filepath.Substring(0, $filepath.lastIndexOf('.'))
 	dk_printVar output
