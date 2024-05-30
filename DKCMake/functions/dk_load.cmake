@@ -1,4 +1,5 @@
 include_guard()
+cmake_policy(SET CMP0057 NEW)
 
 ##################################################################################
 # dk_load(fn)
@@ -39,6 +40,10 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	dk_debugFunc(${ARGV})
+	if(NOT dk_load_list)
+		set(dk_load_list "" CACHE INTERNAL "")
+	endif()
+	
 	
 	#message("dk_parseFunctionsAndLoad(${ARGV})")
 	if(NOT "${fn}" MATCHES "[Dd][Kk]_[A-Za-z0-9_]")
@@ -157,6 +162,6 @@ function(dk_parseFunctionsAndLoadFromString str)
 	endforeach()
 endfunction(dk_parseFunctionsAndLoadFromString)
 
-if(dk_load IN_LIST dk_load_list) 
-	set(dk_load_list dk_load CACHE INTERNAL "")
-endif()
+#if(dk_load IN_LIST dk_load_list) 
+#	set(dk_load_list dk_load CACHE INTERNAL "")
+#endif()

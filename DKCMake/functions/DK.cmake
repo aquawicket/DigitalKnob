@@ -1,5 +1,9 @@
 include_guard()
 
+cmake_policy(SET CMP0011 NEW)
+cmake_policy(SET CMP0054 NEW)
+cmake_policy(SET CMP0057 NEW)
+
 set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 if(CMAKE_SCRIPT_MODE_FILE)
 	message("")
@@ -32,3 +36,5 @@ dk_load(dk_eval)
 dk_load(dk_escapeSequences)
 dk_escapeSequences()
 dk_load(${DKSCRIPT_PATH})
+
+DKTEST()
