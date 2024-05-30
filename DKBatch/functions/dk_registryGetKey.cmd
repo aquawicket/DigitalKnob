@@ -2,10 +2,10 @@
 call DK
 
 ::#################################################################################
-::# dk_getRegistryKey() <reg_path> <key> <result>
+::# dk_registryGetKey() <reg_path> <key> <result>
 ::#
 ::#
-:dk_getRegistryKey <reg_path> <key> <result>
+:dk_registryGetKey <reg_path> <key> <result>
 	call dk_debugFunc
 	if %__ARGC__% NEQ 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
