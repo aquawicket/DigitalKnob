@@ -6,6 +6,7 @@ dk_load dk_getFilename
 dk_load dk_error
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
+dk_load dk_removeExtension
 ####################################################################
 # dk_validateGit()
 #
