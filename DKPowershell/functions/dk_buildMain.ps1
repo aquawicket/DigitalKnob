@@ -11,6 +11,12 @@ dk_load dk_validateBranch
 dk_load dk_warning
 dk_load dk_pickUpdate
 dk_load dk_pickApp
+dk_load dk_pickOs
+dk_load dk_pickType
+dk_load dk_createCache
+dk_load dk_generate
+dk_load dk_build
+dl_load dk_unset
 ####################################################################
 # dk_buildMain()
 #

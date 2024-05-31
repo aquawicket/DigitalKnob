@@ -55,44 +55,44 @@ function Global:dk_pickOs() {
 	dk_echo
 	
 	$input = Read-Host
-	  if(${input} -eq  "1"){ $global:TARGET_OS = "${HOST_TRIPLE}" }
-	else(${input} -eq  "2"){ $global:TARGET_OS = "android_arm32" }
-	else(${input} -eq  "3"){ $global:TARGET_OS = "android_arm64" }
-	else(${input} -eq  "4"){ $global:TARGET_OS = "android_x86" }
-	else(${input} -eq  "5"){ $global:TARGET_OS = "android_x86_64" }
-	else(${input} -eq  "6"){ $global:TARGET_OS = "emscripten" }
-	else(${input} -eq  "7"){ $global:TARGET_OS = "ios_arm32" }
-	else(${input} -eq  "8"){ $global:TARGET_OS = "ios_arm64" }
-	else(${input} -eq  "9"){ $global:TARGET_OS = "ios_x86" }
-	else(${input} -eq "10"){ $global:TARGET_OS = "ios_x86_64" }
-	else(${input} -eq "11"){ $global:TARGET_OS = "iossim_arm32" }
-	else(${input} -eq "12"){ $global:TARGET_OS = "iossim_arm64" }
-	else(${input} -eq "13"){ $global:TARGET_OS = "iossim_x86" }
-	else(${input} -eq "14"){ $global:TARGET_OS = "iossim_x86_64" }
-	else(${input} -eq "15"){ $global:TARGET_OS = "linux_arm32" }
-	else(${input} -eq "16"){ $global:TARGET_OS = "linux_arm64" }
-	else(${input} -eq "17"){ $global:TARGET_OS = "linux_x86" }
-	else(${input} -eq "18"){ $global:TARGET_OS = "linux_x86_64" }
-	else(${input} -eq "19"){ $global:TARGET_OS = "mac_arm32" }
-	else(${input} -eq "20"){ $global:TARGET_OS = "mac_arm64" }
-	else(${input} -eq "21"){ $global:TARGET_OS = "mac_x86" }
-	else(${input} -eq "22"){ $global:TARGET_OS = "mac_x86_64" }
-	else(${input} -eq "23"){ $global:TARGET_OS = "raspberry_arm32" }
-	else(${input} -eq "24"){ $global:TARGET_OS = "raspberry_arm64" }
-	else(${input} -eq "25"){ $global:TARGET_OS = "raspberry_x86" }
-	else(${input} -eq "26"){ $global:TARGET_OS = "raspberry_x64" }
-	else(${input} -eq "27"){ $global:TARGET_OS = "win_arm32" }
-	else(${input} -eq "28"){ $global:TARGET_OS = "win_arm64_clang" }
-	else(${input} -eq "29"){ $global:TARGET_OS = "win_x86_mingw" }
-	else(${input} -eq "30"){ $global:TARGET_OS = "win_x86_clang" }
-	else(${input} -eq "31"){ $global:TARGET_OS = "win_x86_msvc" }
-	else(${input} -eq "32"){ $global:TARGET_OS = "win_x86_64_mingw" }
-	else(${input} -eq "33"){ $global:TARGET_OS = "win_x86_64_clang" }
-	else(${input} -eq "34"){ $global:TARGET_OS = "win_x86_64_ucrt" }
-	else(${input} -eq "35"){ $global:TARGET_OS = "win_x86_64_msvc" }
-	else(${input} -eq "36"){ dk_clearScreen }
-	else(${input} -eq "37"){ APP= }
-	else(${input} -eq "38"){ dk_exit 0 }
+	    if(${input} -eq  "1"){ $global:TARGET_OS = "${HOST_TRIPLE}" }
+	elseif(${input} -eq  "2"){ $global:TARGET_OS = "android_arm32" }
+	elseif(${input} -eq  "3"){ $global:TARGET_OS = "android_arm64" }
+	elseif(${input} -eq  "4"){ $global:TARGET_OS = "android_x86" }
+	elseif(${input} -eq  "5"){ $global:TARGET_OS = "android_x86_64" }
+	elseif(${input} -eq  "6"){ $global:TARGET_OS = "emscripten" }
+	elseif(${input} -eq  "7"){ $global:TARGET_OS = "ios_arm32" }
+	elseif(${input} -eq  "8"){ $global:TARGET_OS = "ios_arm64" }
+	elseif(${input} -eq  "9"){ $global:TARGET_OS = "ios_x86" }
+	elseif(${input} -eq "10"){ $global:TARGET_OS = "ios_x86_64" }
+	elseif(${input} -eq "11"){ $global:TARGET_OS = "iossim_arm32" }
+	elseif(${input} -eq "12"){ $global:TARGET_OS = "iossim_arm64" }
+	elseif(${input} -eq "13"){ $global:TARGET_OS = "iossim_x86" }
+	elseif(${input} -eq "14"){ $global:TARGET_OS = "iossim_x86_64" }
+	elseif(${input} -eq "15"){ $global:TARGET_OS = "linux_arm32" }
+	elseif(${input} -eq "16"){ $global:TARGET_OS = "linux_arm64" }
+	elseif(${input} -eq "17"){ $global:TARGET_OS = "linux_x86" }
+	elseif(${input} -eq "18"){ $global:TARGET_OS = "linux_x86_64" }
+	elseif(${input} -eq "19"){ $global:TARGET_OS = "mac_arm32" }
+	elseif(${input} -eq "20"){ $global:TARGET_OS = "mac_arm64" }
+	elseif(${input} -eq "21"){ $global:TARGET_OS = "mac_x86" }
+	elseif(${input} -eq "22"){ $global:TARGET_OS = "mac_x86_64" }
+	elseif(${input} -eq "23"){ $global:TARGET_OS = "raspberry_arm32" }
+	elseif(${input} -eq "24"){ $global:TARGET_OS = "raspberry_arm64" }
+	elseif(${input} -eq "25"){ $global:TARGET_OS = "raspberry_x86" }
+	elseif(${input} -eq "26"){ $global:TARGET_OS = "raspberry_x64" }
+	elseif(${input} -eq "27"){ $global:TARGET_OS = "win_arm32" }
+	elseif(${input} -eq "28"){ $global:TARGET_OS = "win_arm64_clang" }
+	elseif(${input} -eq "29"){ $global:TARGET_OS = "win_x86_mingw" }
+	elseif(${input} -eq "30"){ $global:TARGET_OS = "win_x86_clang" }
+	elseif(${input} -eq "31"){ $global:TARGET_OS = "win_x86_msvc" }
+	elseif(${input} -eq "32"){ $global:TARGET_OS = "win_x86_64_mingw" }
+	elseif(${input} -eq "33"){ $global:TARGET_OS = "win_x86_64_clang" }
+	elseif(${input} -eq "34"){ $global:TARGET_OS = "win_x86_64_ucrt" }
+	elseif(${input} -eq "35"){ $global:TARGET_OS = "win_x86_64_msvc" }
+	elseif(${input} -eq "36"){ dk_clearScreen }
+	elseif(${input} -eq "37"){ $global:APP= }
+	elseif(${input} -eq "38"){ dk_exit 0 }
 	else{ dk_warning "invalid selection" }
 }
 

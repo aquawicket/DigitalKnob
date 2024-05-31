@@ -33,7 +33,7 @@ function Global:dk_pickUpdate() {
 	#dk_printVar _TYPE_
 	
 	if($behind -lt 1){
-		if(${_APP_} && ${_TARGET_OS_} && ${_TYPE_-}){
+		if(${_APP_} && ${_TARGET_OS_} && ${_TYPE_}){
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 		}
 		dk_echo " 1) Git Update"   
@@ -52,7 +52,7 @@ function Global:dk_pickUpdate() {
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
 		dk_echo "${red}" 
-		if(${_APP_} && ${_TARGET_OS_} && ${_TYPE_-}){
+		if(${_APP_} && ${_TARGET_OS_} && ${_TYPE_}){
 			dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
 		}
 		dk_echo "${green}"
