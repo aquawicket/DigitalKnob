@@ -1,7 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_generate){ $dk_generate = 1 } else{ return }
 
-
+dk_load dk_validateCmake
 ##################################################################################
 # dk_generate()
 #

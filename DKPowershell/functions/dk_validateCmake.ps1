@@ -21,22 +21,22 @@ function Global:dk_validateCmake () {
 	
 	dk_validate HOST_OS dk_getHostTriple	
 	######################################################################################################
-	if(${HOST_OS} -eq "android")                 { $CMAKE_IMPORT = "cmake" }				
-	if(${HOST_TRIPLE} -eq "win_arm32")           { $CMAKE_IMPORT = ${CMAKE_DL_WIN_ARM32} }
-	if(${HOST_TRIPLE} -eq "win_arm64")           { $CMAKE_IMPORT = ${CMAKE_DL_WIN_ARM64} }
-	if(${HOST_TRIPLE} -eq "win_x86")             { $CMAKE_IMPORT = ${CMAKE_DL_WIN_X86} }
-	if(${HOST_OS}_${HOST_ARCH} -eq "win_x86_64") { $CMAKE_IMPORT = ${CMAKE_DL_WIN_X86_64} }
-	if(${HOST_OS} -eq "mac")                     { $CMAKE_IMPORT = ${CMAKE_DL_MAC} }
-	if(${HOST_TRIPLE} -eq "linux_x86_64")        { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_X86_64} }
-	if(${HOST_TRIPLE} -eq "linux_arm64")         { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_ARM64} }
-	if(${HOST_TRIPLE} -eq "raspberry_arm64")     { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_ARM64} }
-	#if(${TARGET_OS} -eq "android_arm32")        { $CMAKE_IMPORT = "cmake" }
-	if(${TARGET_OS} -eq "win_arm64_clang")       { $CMAKE_IMPORT = "mingw-w64-clang-aarch64-cmake" }
-	if(${TARGET_OS} -eq "win_x86_clang")         { $CMAKE_IMPORT = "mingw-w64-clang-i686-cmake" }
-	if(${TARGET_OS} -eq "win_x86_mingw")         { $CMAKE_IMPORT = "mingw-w64-i686-cmake" }
-	if(${TARGET_OS} -eq "win_x86_64_clang")      { $CMAKE_IMPORT = "mingw-w64-clang-x86_64-cmake" }
-	if(${TARGET_OS} -eq "win_x86_64_mingw")      { $CMAKE_IMPORT = "mingw-w64-x86_64-cmake" }
-	if(${TARGET_OS} -eq "win_x86_64_ucrt")       { $CMAKE_IMPORT = "mingw-w64-ucrt-x86_64-cmake" }
+	if(${HOST_OS} -eq "android")                   { $CMAKE_IMPORT = "cmake" }				
+	if(${HOST_TRIPLE} -eq "win_arm32")             { $CMAKE_IMPORT = ${CMAKE_DL_WIN_ARM32} }
+	if(${HOST_TRIPLE} -eq "win_arm64")             { $CMAKE_IMPORT = ${CMAKE_DL_WIN_ARM64} }
+	if(${HOST_TRIPLE} -eq "win_x86")               { $CMAKE_IMPORT = ${CMAKE_DL_WIN_X86} }
+	if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86_64") { $CMAKE_IMPORT = ${CMAKE_DL_WIN_X86_64} }
+	if(${HOST_OS} -eq "mac")                       { $CMAKE_IMPORT = ${CMAKE_DL_MAC} }
+	if(${HOST_TRIPLE} -eq "linux_x86_64")          { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_X86_64} }
+	if(${HOST_TRIPLE} -eq "linux_arm64")           { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_ARM64} }
+	if(${HOST_TRIPLE} -eq "raspberry_arm64")       { $CMAKE_IMPORT = ${CMAKE_DL_LINUX_ARM64} }
+	#if(${TARGET_OS} -eq "android_arm32")          { $CMAKE_IMPORT = "cmake" }
+	if(${TARGET_OS} -eq "win_arm64_clang")         { $CMAKE_IMPORT = "mingw-w64-clang-aarch64-cmake" }
+	if(${TARGET_OS} -eq "win_x86_clang")           { $CMAKE_IMPORT = "mingw-w64-clang-i686-cmake" }
+	if(${TARGET_OS} -eq "win_x86_mingw")           { $CMAKE_IMPORT = "mingw-w64-i686-cmake" }
+	if(${TARGET_OS} -eq "win_x86_64_clang")        { $CMAKE_IMPORT = "mingw-w64-clang-x86_64-cmake" }
+	if(${TARGET_OS} -eq "win_x86_64_mingw")        { $CMAKE_IMPORT = "mingw-w64-x86_64-cmake" }
+	if(${TARGET_OS} -eq "win_x86_64_ucrt")         { $CMAKE_IMPORT = "mingw-w64-ucrt-x86_64-cmake" }
 	dk_printVar CMAKE_IMPORT
 	
 	if(dk_isUrl "${CMAKE_IMPORT}"){
@@ -64,9 +64,9 @@ function Global:dk_validateCmake () {
 		if(!(${CMAKE_EXE}))            { dk_error "no cmake for this OS" }
 		dk_printVar CMAKE_EXE
 		
-		if dk_fileExists "${CMAKE_EXE}"; then 
+		if(dk_fileExists "${CMAKE_EXE}"){ 
 			return ${true};
-		fi
+		}
 
 		dk_echo
 		dk_info "Installing cmake . . ."
@@ -78,7 +78,7 @@ function Global:dk_validateCmake () {
 		
 		dk_echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
         
-		if(!(dk_fileExists ${CMAKE_EXE}){ dk_error "cannot find cmake" }
+		if(!(dk_fileExists ${CMAKE_EXE})){ dk_error "cannot find cmake" }
 	}
 	else{	# linux package
 		dk_info "Installing CMake from package managers"
