@@ -1,3 +1,6 @@
+include(${DKCMAKE_DIR}/functions/DK.cmake)
+include_guard()
+
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -21,7 +24,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
 
 dk_load(${DKCMAKE_DIR}/DKDisabled.cmake)
 

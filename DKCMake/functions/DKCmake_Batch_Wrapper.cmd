@@ -21,6 +21,9 @@ set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
 set "CMAKE_EXE=C:\Users\aquawicket\digitalknob\DKTools\cmake_3_29_0_windows_x86_64\bin\cmake.exe"
 
 cd %DKCMAKE_DIR%\functions
-%CMAKE_EXE% -P %1
+
+
+set "DKCMAKE_DIR=%DKCMAKE_DIR:\=/%"
+%CMAKE_EXE% -DDKCMAKE_DIR=%DKCMAKE_DIR% -P %1
 
 pause

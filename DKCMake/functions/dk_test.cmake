@@ -1,4 +1,4 @@
-include(${CMAKE_SOURCE_DIR}/DK.cmake)
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################

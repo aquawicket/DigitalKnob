@@ -1,3 +1,4 @@
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 function(dk_dumpAllVariables file)

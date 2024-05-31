@@ -1,4 +1,7 @@
+set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR})
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
+
 ### CMakeLists.txt for DKCMake ###
 ###
 ### 	source_path = thisDirectory
@@ -59,7 +62,7 @@ endif()
 
 
 
-include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
+#include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 
 
 dk_load(dk_dumpAllVariables)
@@ -67,7 +70,7 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 #Load all cmake flags prior to calling PROJECT()
-dk_load(${DKCMAKE_DIR}/DK.cmake)
+dk_load(${DKCMAKE_DIR}/DKStart.cmake)
 dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
