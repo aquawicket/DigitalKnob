@@ -10,6 +10,7 @@ dk_load dk_validateGit
 dk_load dk_validateBranch
 dk_load dk_warning
 dk_load dk_pickUpdate
+dk_load dk_pickApp
 ####################################################################
 # dk_buildMain()
 #

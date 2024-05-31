@@ -75,10 +75,10 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host
 	if($input -eq "0"){
 		dk_echo "repeating last selection"
-		$APP = ${_APP_}
-		$TARGET_OS = ${_TARGET_OS_}
-		$TYPE = ${_TYPE_}
-		$UPDATE = 1
+		$global:APP = ${_APP_}
+		$global:TARGET_OS = ${_TARGET_OS_}
+		$global:TYPE = ${_TYPE_}
+		$global:UPDATE = 1
 	}
 	elseif($input -eq "1"){ dk_gitUpdate }
 	elseif($input -eq "2"){ dk_gitCommit }
@@ -90,7 +90,7 @@ function Global:dk_pickUpdate() {
 	elseif($input -eq "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
 	elseif($input -eq "9"){ dk_reload }
 	elseif($input -eq "10"){ dk_exit 0 }	
-	elseif($input -eq ""){ $UPDATE = 1 }
+	elseif($input -eq ""){ $global:UPDATE = 1 }
 	else{ dk_warning "invalid selection"}
 }
 
