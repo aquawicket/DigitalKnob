@@ -1,7 +1,10 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_clearCmakeCache){ $dk_clearCmakeCache = 1 } else{ return }
 
+dk_load dk_call
 dk_load dk_info
+dk_load dk_validate
+dk_load dk_getDKPaths
 ##################################################################################
 # dk_clearCmakeCache()
 #
@@ -11,9 +14,12 @@ function Global:dk_clearCmakeCache () {
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	# TODO: replace ${DIGITALKNOB_DIR} with $1 and call this functions while suplying the directory 
-	dk_info "Clearing CMake cache . . ."	
-	#find ${DIGITALKNOB_DIR} -name "CMakeCache.*" -delete
-	#rm -rf $(find ${DIGITALKNOB_DIR} -type d -name CMakeFiles)
+	dk_info "Clearing CMake cache . . ."
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
+	cd "${DIGITALKNOB_DIR}"
+	Get-ChildItem -Path "$DIGITALKNOB_DIR" CMakeCache.* -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
+	Get-ChildItem -Path "$DIGITALKNOB_DIR" *CMakeFiles* -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
+    
 }
 
 

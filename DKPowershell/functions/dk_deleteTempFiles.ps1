@@ -1,7 +1,9 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_deleteTempFiles){ $dk_deleteTempFiles = 1 } else{ return }
 
-
+dk_load dk_call
+dk_load dk_getDKPaths
+dk_load dk_validate
 ##################################################################################
 # dk_deleteTempFiles()
 #
@@ -12,11 +14,9 @@ function Global:dk_deleteTempFiles () {
 
 	dk_info "Deleting .TMP files . . ."
 	
-	dk_validate DIGITALKNOB_DIR dk_getDKPaths	
-	#rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.tmp)
-	#rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.TMP)
-	#find "${DIGITALKNOB_DIR}" -name "*.tmp" -delete
-	#find "${DIGITALKNOB_DIR}" -name "*.TMP" -delete
+	dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.tmp -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
+	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.TMP -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 }
 
 

@@ -6,13 +6,19 @@ dk_load dk_info
 # dk_call(<command args>)
 #
 #
-function Global:dk_call($command){
+function Global:dk_call(){
 	#$MyInvocation | Format-List -Property *
 	dk_debugFunc
-	if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+	#& $command $($MyInvocation.UnboundArguments)
+	$allArgs = $PsBoundParameters.Values + $args
+	echo "allArgs = $allArgs"
+
+	$first, $rest = $allArgs
+	#$_args_ = $allArgs[1..($allArgs.Length-1)]
 	
-	& $command $($MyInvocation.UnboundArguments)
+	& cmd /c "$first" @rest
 }
 
 
