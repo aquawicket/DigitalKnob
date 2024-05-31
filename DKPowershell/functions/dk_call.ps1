@@ -15,7 +15,7 @@ function Global:dk_call(){
 	#$allArgs = $PsBoundParameters.Values + $args
 	#echo "allArgs = $allArgs"
 
-	$first, $rest = $PsBoundParameters.Values + $args
+	$first, $rest = ($PsBoundParameters.Values + $args)
 	#$_args_ = $allArgs[1..($allArgs.Length-1)]
 	
 	& $first @rest
