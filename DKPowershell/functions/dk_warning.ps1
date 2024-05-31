@@ -15,13 +15,13 @@ if (!$HALT_ON_WARNING)  { $global:HALT_ON_WARNING = 0   }
 #
 #    @message	- The message to print
 #
-function Global:dk_warning($allArgs) {
+function Global:dk_warning() {
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	#$allArgs = $PsBoundParameters.Values + $args
 	
 	if ($ENABLE_dk_warning -ne 1){ return }
 
-	Write-Host -Fore blue ${WARNING_TAG}${allArgs}
+	Write-Host -Fore yellow ${WARNING_TAG}${args}
 	if ($TRACE_ON_WARNING){ Write-Host -Fore yellow *** TRACE_ON_WARNING *** } #& dk_stacktrace
 	if ($LINE_ON_WARNING) { Write-Host -Fore yellow *** LINE_ON_WARNING ***  } #& dk_showFileLine "%_callerpath%" "%_message_%"
 	if ($PAUSE_ON_WARNING){ Write-Host -Fore yellow *** PAUSE_ON_WARNING *** } #& dk_pause
