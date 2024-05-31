@@ -79,7 +79,7 @@ function(dk_getDKPaths)
 	dk_printVar(DKBASH_DIR)
 	
 	###### Set DKPOWERSHELL_DIR ######
-	set(DKBASH_DIR ${DKPOWERSHELL_DIR}/DKPowershell CACHE INTERNAL "" FORCE)
+	set(DKPOWERSHELL_DIR ${DKBRANCH_DIR}/DKPowershell CACHE INTERNAL "" FORCE)
 	dk_printVar(DKPOWERSHELL_DIR)
 
 	###### Set DKWEB ######

@@ -1,3 +1,4 @@
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ##############################################################################
@@ -7,28 +8,20 @@ include_guard()
 #
 function(dk_pause) 
 	dk_debugFunc(${ARGV})
-	
-	dk_debug("dk_pause(${ARGV})")
-	
-	#if(${ARGC} GREATER 0) dk_error "Incorrect number of parameters" endif()
-	
-	find_program(BASH_EXE bash)
-	if(BASH_EXE)
-		if(NOT DKBASH_DIR)
-			dk_getDKPaths()
-		endif()
-		#execute_process(COMMAND bash -c 'source ${DKBASH_DIR}/functions/dk_pause.sh; dk_pause')
-		execute_process(COMMAND ${DKBASH_DIR}/functions/dk_pause.sh & dk_pause)
+
+	find_program(CMD_EXE cmd.exe)
+	if(CMD_EXE)
+		#dk_validate(DKBATCH_DIR "dk_getDKPaths()")
+		#execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd & dk_pause WORKING_DIRECTORY ${DKBATCH_DIR}/functions)
+		execute_process(COMMAND cmd /c pause)
 		return()
 	endif()
 	
-	find_program(CMD_EXE cmd.exe)
-	if(CMD_EXE)
-		if(NOT DKBATCH_DIR)
-			dk_getDKPaths()
-		endif()
-		execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd & dk_pause)
-		#execute_process(COMMAND cmd /c ${DKPOWERSHELL_DIR}/functions/dk_pause.cmd & dk_pause)
+	find_program(BASH_EXE bash)
+	if(BASH_EXE)
+		dk_validate(DKBASH_DIR "dk_getDKPaths()")
+		#execute_process(COMMAND bash -c 'source ${DKBASH_DIR}/functions/dk_pause.sh; dk_pause')
+		execute_process(COMMAND ${DKBASH_DIR}/functions/dk_pause.sh & dk_pause)
 		return()
 	endif()
 		
@@ -38,6 +31,6 @@ endfunction()
 
 function(DKTEST) #############################################################
 
-	dk_sleep(5)
+	dk_pause()
 
 endfunction()
