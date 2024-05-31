@@ -49,7 +49,7 @@ if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
 	DKTEST()
 	
 	message("\n########################## END TEST ################################\n")
-	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 100)
+	#execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 100)
 endif()
 #endif()
 

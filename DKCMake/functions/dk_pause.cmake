@@ -28,8 +28,16 @@ function(dk_pause)
 			dk_getDKPaths()
 		endif()
 		execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd & dk_pause)
+		#execute_process(COMMAND cmd /c ${DKPOWERSHELL_DIR}/functions/dk_pause.cmd & dk_pause)
 		return()
 	endif()
 		
 	dk_error("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
+endfunction()
+
+
+function(DKTEST) #############################################################
+
+	dk_sleep(5)
+
 endfunction()

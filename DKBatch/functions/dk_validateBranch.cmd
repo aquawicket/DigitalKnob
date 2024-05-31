@@ -12,24 +12,43 @@ call DK
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
     for %%I in (.) do set FOLDER=%%~nxI
-
     set DKBRANCH=Development
-    if exist .git (
+    
+	if not defined DIGITALKNOB_DIR call dk_getDKPaths
+	if exist .git (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
             set DKBRANCH=%FOLDER%
         )
     )
-
     call dk_printVar DKBRANCH
 	
-    if "%DIGITALKNOB_DIR%"==""  call dk_getDKPaths
     set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+	call dk_printVar DKBRANCH_DIR
+	
+	set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
+	call dk_printVar DKCMAKE_DIR
+	
+	set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
+	call dk_printVar DK3RDPARTY_DIR
+	
+	set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
+	call dk_printVar DKIMPORTS_DIR
+	
     set "DKAPPS_DIR=%DKBRANCH_DIR%\DKApps"
-    set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
+    call dk_printVar DKAPPS_DIR
+	
     set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
-    set "DK3RDPARTY_DIR=%DKBRANCH_DIR%\3rdParty"
-    set "DKIMPORTS_DIR=%DK3RDPARTY_DIR%\_DKIMPORTS"
-
+    call dk_printVar DKPLUGINS_DIR
+    
+	set "DKBASH_DIR=%DKBRANCH_DIR%\DKBash"
+    call dk_printVar DKBASH_DIR
+	
+	set "DKBATCH_DIR=%DKBRANCH_DIR%\DKBatch"
+    call dk_printVar DKBATCH_DIR
+	
+	set "DKPOWERSHELL_DIR=%DKBRANCH_DIR%\DKPowershell"
+    call dk_printVar DKPOWERSHELL_DIR
+	
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
@@ -46,3 +65,10 @@ call DK
     ::)
     call dk_checkError
 goto:eof
+
+
+
+
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	call dk_validateBranch

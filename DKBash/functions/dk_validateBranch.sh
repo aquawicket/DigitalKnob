@@ -15,7 +15,7 @@ dk_validateBranch () {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	[ -z ${DIGITALKNOB_DIR-} ] && dk_getDKPaths
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	if dk_pathExists "${DIGITALKNOB_DIR}"/"${FOLDER}"/.git; then
 		BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 		if [ "${BRANCH}" = "${FOLDER}" ]; then
@@ -41,6 +41,15 @@ dk_validateBranch () {
 	
 	DKPLUGINS_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKPlugins"
 	dk_printVar DKPLUGINS_DIR
+	
+	DKBASH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKBash"
+	dk_printVar DKBASH_DIR
+	
+	DKBATCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKBatch"
+	dk_printVar DKBATCH_DIR
+	
+	DKPOWERSHELL_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKPowershell"
+	dk_printVar DKPOWERSHELL_DIR
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then

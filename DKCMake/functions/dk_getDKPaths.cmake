@@ -3,7 +3,7 @@ include_guard()
 ###############################################################################
 # dk_getDKPaths()
 #
-#	Fill the cashe variables with DigitalKnob specfic directories
+#	Fill the cache variables with DigitalKnob specfic directories
 #
 function(dk_getDKPaths)
 	dk_debugFunc(${ARGV})
@@ -77,6 +77,10 @@ function(dk_getDKPaths)
 	###### Set DKBASH_DIR ######
 	set(DKBASH_DIR ${DKBRANCH_DIR}/DKBash CACHE INTERNAL "" FORCE)
 	dk_printVar(DKBASH_DIR)
+	
+	###### Set DKPOWERSHELL_DIR ######
+	set(DKBASH_DIR ${DKPOWERSHELL_DIR}/DKPowershell CACHE INTERNAL "" FORCE)
+	dk_printVar(DKPOWERSHELL_DIR)
 
 	###### Set DKWEB ######
 	set(DKWEB "http://127.0.0.1" CACHE INTERNAL "" FORCE)
