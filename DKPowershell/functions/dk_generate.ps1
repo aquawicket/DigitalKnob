@@ -36,158 +36,156 @@ function Global:dk_generate() {
 	$DKLEVEL = "RebuildAll"
 	$DKLINK = "Static"
 	
-	#declare -a CMAKE_ARGS
-	set --											#clear the positional parameters
+	$CMAKE_ARGS = @()
 	if($TYPE -eq "Debug"){
-		#set -- "-DDEBUG=ON" )
-		set -- "$@" "-DDEBUG=ON"
-		set -- "$@" "-DRELEASE=OFF"
+		$CMAKE_ARGS += "-DDEBUG=ON"
+		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
 	if($TYPE -eq "Release"){ 
-		set -- "$@" "-DDEBUG=OFF"
-		set -- "$@" "-DRELEASE=ON"
+		$CMAKE_ARGS += "-DDEBUG=OFF"
+		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
 	if($TYPE -eq "All"){ 
-		set -- "$@" "-DDEBUG=ON"
-		set -- "$@" "-DRELEASE=ON"
+		$CMAKE_ARGS += "-DDEBUG=ON"
+		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
 	if($DKLEVEL -eq "Build"){ 
-		set -- "$@" "-DBUILD=ON"
+		$CMAKE_ARGS += "-DBUILD=ON"
 	}
 	if($DKLEVEL -eq "Rebuild"){ 
-		set -- "$@" "-DREBUILD=ON"
+		$CMAKE_ARGS += "-DREBUILD=ON"
 	}
 	if($DKLEVEL -eq "RebuildAll"){ 
-		set -- "$@" "-DREBUILDALL=ON"
+		$CMAKE_ARGS += "-DREBUILDALL=ON"
 	}
 	if($DKLINK -eq "Static"){ 
-		set -- "$@" "-DSTATIC=ON"
+		$CMAKE_ARGS += "-DSTATIC=ON"
 	}
 	if($DKLINK -eq "Shared"){ 
-		set -- "$@" "-DSHARED=ON"
+		$CMAKE_ARGS += "-DSHARED=ON"
 	}
 	
 	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$TARGET_OS\$TYPE"
 	dk_printVar CMAKE_BINARY_DIR
 	
-	if(!(dk_defined WSLENV)){ 
-		set -- "$@" "-S=$CMAKE_SOURCE_DIR"
+	if(!($WSLENV)){ 
+		$CMAKE_ARGS += "-S=$CMAKE_SOURCE_DIR"
 	}
-	set -- "$@" "-B=$CMAKE_BINARY_DIR"
+	$CMAKE_ARGS += "-B=$CMAKE_BINARY_DIR"
 	
 	############ CMake Options ############
-    #set -- "$@" "-DCMAKE_VERBOSE_MAKEFILE=1"
-	#set -- "$@" "-DCMAKE_COLOR_DIAGNOSTICS=ON"
-	#set -- "$@" "-Wdev"
-	#set -- "$@" "-Werror=dev"
-	#set -- "$@" "-Wdeprecated"
-	#set -- "$@" "-Werror=deprecated"
-	#set -- "$@" "--graphviz=graphviz.txt"
-	#set -- "$@" "--system-information system_information.txt"
-	#set -- "$@" "--debug-trycompile"
-	#set -- "$@" "--debug-output"
-	#set -- "$@" "--trace"
-	#set -- "$@" "--trace-expand"
-	#set -- "$@" "--warn-uninitialized"
-	#set -- "$@" "--warn-unused-vars"
-	#set -- "$@" "--check-system-vars"
+    #$CMAKE_ARGS += "-DCMAKE_VERBOSE_MAKEFILE=1"
+	#$CMAKE_ARGS += "-DCMAKE_COLOR_DIAGNOSTICS=ON"
+	#$CMAKE_ARGS += "-Wdev"
+	#$CMAKE_ARGS += "-Werror=dev"
+	#$CMAKE_ARGS += "-Wdeprecated"
+	#$CMAKE_ARGS += "-Werror=deprecated"
+	#$CMAKE_ARGS += "--graphviz=graphviz.txt"
+	#$CMAKE_ARGS += "--system-information system_information.txt"
+	#$CMAKE_ARGS += "--debug-trycompile"
+	#$CMAKE_ARGS += "--debug-output"
+	#$CMAKE_ARGS += "--trace"
+	#$CMAKE_ARGS += "--trace-expand"
+	#$CMAKE_ARGS += "--warn-uninitialized"
+	#$CMAKE_ARGS += "--warn-unused-vars"
+	#$CMAKE_ARGS += "--check-system-vars"
 	
 	if($TARGET_OS -eq "android_arm32"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 
 	if($TARGET_OS -eq "android_arm64"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "emscripten"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "ios_arm32"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "ios_arm64"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "iossim_x86"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "iossim_x86_64"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "linux_x86"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "linux_x86_64"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "mac_x86"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "mac_x86_64"){ 
-		set -- "-G Xcode" "$@"
+		$CMAKE_ARGS += "-G Xcode"
 	}
 	
 	if($TARGET_OS -eq "raspberry_arm32"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "raspberry_arm64"){ 
-		set -- "-G Unix Makefiles" "$@"
+		$CMAKE_ARGS += "-G Unix Makefiles"
 	}
 	
 	if($TARGET_OS -eq "win_arm64_clang"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin:$PATH
-		set -- "-G MSYS Makefiles" "$@"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
 	}
 	
 	if($TARGET_OS -eq "win_x86_clang"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin:$PATH
-		set -- "-G MSYS Makefiles" "$@"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
 	}
 	
 	if($TARGET_OS -eq "win_x86_mingw"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin:$PATH
-		set -- "-G MSYS Makefiles" "$@"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
 	}
 	
 	if($TARGET_OS -eq "win_x86_64_clang"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin:$PATH
-		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-		set -- "-G MSYS Makefiles" "$@"
-		set -- "$@" "-DMSYSTEM=CLANG64"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
+		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
+		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
 	
 	if($TARGET_OS -eq "win_x86_64_mingw"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin:$PATH
-		set -- "-G MSYS Makefiles" "$@"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
 	}
 	
 	if($TARGET_OS -eq "win_x86_64_ucrt"){ 
-		export PATH=${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin:$PATH
-		set -- "-G MSYS Makefiles" "$@"
-		set -- "$@" "-DMSYSTEM=UCRT64"
+		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
+		$CMAKE_ARGS += "-G MSYS Makefiles"
+		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"
 	}
 
 	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
 #	if dk_fileExists "$TOOLCHAIN"; then
-#		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
+#		$CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 #	}
 	
 	###### WSL CMake Fix ######
-	if(dk_defined WSLENV){ 
+	if($WSLENV){ 
 		cd "$DKCMAKE_DIR"
-		set -- "$@" "."
+		$CMAKE_ARGS += "."
 	}
 	
 	###### CMake Configure ######
@@ -195,8 +193,8 @@ function Global:dk_generate() {
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
-	dk_echo "CMAKE_ARGS = $@"	
-	dk_call "$CMAKE_EXE" "$@"
+	dk_echo "CMAKE_ARGS = $CMAKE_ARGS"	
+	dk_call "$CMAKE_EXE" "$CMAKE_ARGS"
 	dk_echo
 }
 
