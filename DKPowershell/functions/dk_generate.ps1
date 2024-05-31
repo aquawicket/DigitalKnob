@@ -2,6 +2,7 @@ if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_generate){ $dk_generate = 1 } else{ return }
 
 dk_load dk_installCmake
+dk_load dk_call
 ##################################################################################
 # dk_generate()
 #
@@ -150,7 +151,7 @@ function Global:dk_generate() {
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "$CMAKE_EXE $CMAKE_ARGS"
-	& "$CMAKE_EXE" @CMAKE_ARGS
+	dk_call "$CMAKE_EXE" @CMAKE_ARGS
 	dk_echo
 }
 

@@ -14,10 +14,10 @@ function Global:dk_checkGitRemote () {
 	$behind=0
 	if(dk_fileExists "${DKBRANCH_DIR}/.git"){
 		cd "${DKBRANCH_DIR}"
-		& $GIT_EXE remote update
-		$branch = $(& ${GIT_EXE} rev-parse --abbrev-ref HEAD)
-		$ahead = $(& ${GIT_EXE} rev-list --count origin/$branch..$branch)
-		$behind = $(& ${GIT_EXE} rev-list --count $branch..origin/$branch)
+		dk_call $GIT_EXE remote update
+		$branch = $(dk_call ${GIT_EXE} rev-parse --abbrev-ref HEAD)
+		$ahead  = $(dk_call ${GIT_EXE} rev-list --count origin/$branch..$branch)
+		$behind = $(dk_call ${GIT_EXE} rev-list --count $branch..origin/$branch)
 		dk_info "$ahead commits ahead, $behind commits behind"
 	}
 }
