@@ -10,7 +10,7 @@ function Global:dk_gitUpdate () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-	if(!($Args[0] = "NO_CONFIRM")){
+	if(!($Args[0] -eq "NO_CONFIRM")){
 		dk_info "Git Update? Any local changes will be lost."
 		if(!(dk_confirm)){ return 0 }
 	}
