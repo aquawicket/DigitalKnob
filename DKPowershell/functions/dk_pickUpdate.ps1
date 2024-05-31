@@ -80,17 +80,17 @@ function Global:dk_pickUpdate() {
 		$global:TYPE = ${_TYPE_}
 		$global:UPDATE = 1
 	}
-	elseif($input -eq "1"){ dk_gitUpdate }
-	elseif($input -eq "2"){ dk_gitCommit }
-	elseif($input -eq "3"){ dk_pushAssets }
-	elseif($input -eq "4"){ dk_pullAssets }
-	elseif($input -eq "5"){ dk_resetAll }
-	elseif($input -eq "6"){ dk_removeAll }
-	elseif($input -eq "7"){ dk_clearScreen }
-	elseif($input -eq "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
-	elseif($input -eq "9"){ dk_reload }
+	elseif($input -eq  "1"){ dk_gitUpdate }
+	elseif($input -eq  "2"){ dk_gitCommit }
+	elseif($input -eq  "3"){ dk_pushAssets }
+	elseif($input -eq  "4"){ dk_pullAssets }
+	elseif($input -eq  "5"){ dk_resetAll }
+	elseif($input -eq  "6"){ dk_removeAll }
+	elseif($input -eq  "7"){ dk_clearScreen }
+	elseif($input -eq  "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
+	elseif($input -eq  "9"){ dk_reload }
 	elseif($input -eq "10"){ dk_exit 0 }	
-	elseif($input -eq ""){ $global:UPDATE = 1 }
+	elseif($input -eq   ""){ $global:UPDATE = 1 }
 	else{ dk_warning "invalid selection"}
 }
 
