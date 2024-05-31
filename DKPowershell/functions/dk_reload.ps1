@@ -10,20 +10,11 @@ function Global:dk_reload () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	dk_debug "reloading ${DKSCRIPT_PATH}"
-	dk_clearScreen
+	if(!(dk_fileExists "$DKSCRIPT_PATH")){ dk_error "DKSCRIPT_PATH is invalid" }
 	
-	#FIXME: need to unset any and all include guards here.
-	#       Or better yet, we need to clear the entire environment
-	unset DKINIT
-	
-	if("$(command -v bash)"){
-		echo "exec /bin/bash ${DKSCRIPT_PATH}"
-		exec /bin/bash "${DKSCRIPT_PATH}"
-	} else {
-		echo "exec ${DKSCRIPT_PATH}"
-		exec "${DKSCRIPT_PATH}"
-	}
+	#dk_echo
+    dk_echo "reloading $DKSCRIPT_PATH"
+	. "$DKSCRIPT_PATH" #& dk_exit & dk_exit & dk_exit
 }
 
 

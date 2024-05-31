@@ -9,9 +9,9 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	if "%DKSCRIPT_PATH%" == "" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
+	if not exist "%DKSCRIPT_PATH%" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
 	
-    echo .
-    echo reloading %DKSCRIPT_PATH%
-    start "" "%DKSCRIPT_PATH%" & exit & exit & exit
+    dk_echo
+    dk_echo "reloading %DKSCRIPT_PATH%"
+    start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
 goto:eof

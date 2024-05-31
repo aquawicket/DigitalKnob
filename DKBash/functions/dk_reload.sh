@@ -15,7 +15,7 @@ dk_reload () {
 	
 	#FIXME: need to unset any and all include guards here.
 	#       Or better yet, we need to clear the entire environment
-	unset DKINIT
+	dk_unset DKINIT
 	
 	if [ -n "$(command -v bash)" ]; then
 		echo "exec /bin/bash ${DKSCRIPT_PATH}"
