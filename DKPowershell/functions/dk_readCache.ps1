@@ -1,7 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_readCache){ $dk_readCache = 1 } else{ return }
 
-dk_load dk_fileExists
+dk_load dk_pathExists
 ##################################################################################
 # dk_readCache()
 #
@@ -10,7 +10,7 @@ function Global:dk_readCache() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if(!(dk_fileExists "${DKBRANCH_DIR}\cache")){ return 0 }
+	if(!(dk_pathExists "${DKBRANCH_DIR}\cache")){ return 0 }
 	$_APP_ = ""
 	$_TARGET_OS_ = ""
 	$_TYPE_ = "" 

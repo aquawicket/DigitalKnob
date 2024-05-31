@@ -17,19 +17,19 @@ function Global:dk_build () {
 	dk_echo
 	
 	if($TYPE -eq "Debug" || $TYPE -eq "All"){
-		if(dk_fileExists "$DKAPPS_DIR\$APP\$TARGET_OS\Debug\CMakeCache.txt"){
+		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Debug\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR\$APP\$TARGET_OS\Debug" "--config Debug" "--verbose"
 		}
-		elseif(dk_fileExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
+		elseif(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR\$APP\$TARGET_OS" "--config Debug" "--verbose"
 		}
 		else{dk_error "Could not find CMakeCache.txt in $APP\$TARGET_OS\Debug or $APP\$TARGET_OS"}
 	}
 	if($TYPE -eq "Release" || $TYPE -eq "All"){
-		if(dk_fileExists "$DKAPPS_DIR\$APP\$TARGET_OS\Release\CMakeCache.txt"){
+		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Release\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR\$APP\$TARGET_OS\Release" --config Release --verbose
 		}
-		elseif(dk_fileExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
+		elseif(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR\$APP\$TARGET_OS" --config Release --verbose
 		}
 		else{dk_error "Could not find CMakeCache.txt in $APP\$TARGET_OS\Release or $APP\$TARGET_OS"}

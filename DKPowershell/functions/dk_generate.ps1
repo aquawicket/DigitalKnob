@@ -27,7 +27,7 @@ function Global:dk_generate() {
 	$CMAKE_SOURCE_DIR = "$DKCMAKE_DIR"
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
 	dk_printVar CMAKE_SOURCE_DIR
-	if(!(dk_fileExists "$CMAKE_SOURCE_DIR")){
+	if(!(dk_pathExists "$CMAKE_SOURCE_DIR")){
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	}
 	$CMAKE_TARGET_PATH = $TARGET_PATH
@@ -137,7 +137,7 @@ function Global:dk_generate() {
 	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-#	if dk_fileExists "$TOOLCHAIN"; then
+#	if dk_pathExists "$TOOLCHAIN"; then
 #		$CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 #	}
 	

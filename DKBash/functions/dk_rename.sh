@@ -21,11 +21,11 @@ dk_rename () {
 	
 	dk_info "Renameing ${_from_} to ${_to_}"
 	
-	if ! dk_fileExists "${_from_}"; then
+	if ! dk_pathExists "${_from_}"; then
 		dk_error "dk_rename: ${_from_} not found"
 	fi
 	
-	if dk_fileExists "${_to_}"; then
+	if dk_pathExists "${_to_}"; then
 		#if [ $OVERWRITE -ne 1 ]; then
 		#	dk_error "dk_rename(): Cannot rename file. Destiantion exists and not set to OVERWRITE"
 		#fi

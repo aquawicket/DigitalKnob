@@ -31,7 +31,7 @@ dk_cmakeEval () {
 	
 	### get the return variables
 	if [ -n "${DKRETURN}" ]; then 
-		if dk_fileExists "${DKCMAKE_DIR}"/cmake_vars; then
+		if dk_pathExists "${DKCMAKE_DIR}"/cmake_vars; then
 			. "${DKCMAKE_DIR}"/cmake_vars
 			rm ${DKCMAKE_DIR}/cmake_vars
 		fi

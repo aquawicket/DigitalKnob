@@ -29,7 +29,7 @@ dk_smartExtract () {
 	dest_folder="$(basename "${dest_fullpath}")"
 	dk_printVar dest_folder
 	
-	if ! dk_fileExists "${dest_fullpath}"; then
+	if ! dk_pathExists "${dest_fullpath}"; then
 		dk_makeDirectory "${dest_fullpath}"
 	fi
 	

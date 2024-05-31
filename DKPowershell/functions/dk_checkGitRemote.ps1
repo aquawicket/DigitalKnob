@@ -12,7 +12,7 @@ function Global:dk_checkGitRemote () {
 	
 	$ahead=0
 	$behind=0
-	if(dk_fileExists "${DKBRANCH_DIR}/.git"){
+	if(dk_pathExists "${DKBRANCH_DIR}/.git"){
 		cd "${DKBRANCH_DIR}"
 		dk_call $GIT_EXE remote update
 		$branch = $(dk_call ${GIT_EXE} rev-parse --abbrev-ref HEAD)

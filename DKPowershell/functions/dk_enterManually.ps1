@@ -16,19 +16,19 @@ function Global:dk_enterManually () {
 	$global:APP = "_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if(dk_fileExists "$DKIMPORTS_DIR\$input\DKMAKE.cmake"){
+	if(dk_pathExists "$DKIMPORTS_DIR\$input\DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKIMPORTS_DIR\$input"
 	}
-	if(dk_fileExists "$DKPLUGINS_DIR\$input\DKMAKE.cmake"){
+	if(dk_pathExists "$DKPLUGINS_DIR\$input\DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKPLUGINS_DIR\$input"
 	}
-	if(dk_fileExists "$DKAPPS_DIR\$input\DKMAKE.cmake"){
+	if(dk_pathExists "$DKAPPS_DIR\$input\DKMAKE.cmake"){
 		$global:TARGET_PATH = "$DKAPPS_DIR\$input"
 		return ${true}
 	}
 	dk_printVar TARGET_PATH
 	
-	if(!(dk_fileExists "$DKAPPS_DIR\$APP")){
+	if(!(dk_pathExists "$DKAPPS_DIR\$APP")){
 		dk_makeDirectory "$DKAPPS_DIR\$APP"
 	}
 	

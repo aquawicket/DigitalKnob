@@ -61,7 +61,7 @@ dk_validateCmake () {
 		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
-		if dk_fileExists "${CMAKE_EXE}"; then 
+		if dk_pathExists "${CMAKE_EXE}"; then 
 			return ${true};
 		fi
 
@@ -74,7 +74,7 @@ dk_validateCmake () {
 		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
 		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
         
-		if ! dk_fileExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
+		if ! dk_pathExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"

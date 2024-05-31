@@ -521,7 +521,7 @@ dk_generate() {
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_printVar CMAKE_SOURCE_DIR
-	if ! dk_fileExists "$CMAKE_SOURCE_DIR"; then
+	if ! dk_pathExists "$CMAKE_SOURCE_DIR"; then
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	fi
 	dk_printVar CMAKE_SOURCE_DIR
@@ -674,7 +674,7 @@ dk_generate() {
 	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
 #	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-#	if dk_fileExists "$TOOLCHAIN"; then
+#	if dk_pathExists "$TOOLCHAIN"; then
 #		set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 #	fi
 	
@@ -710,18 +710,18 @@ dk_build () {
 	dk_echo
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
-		if dk_fileExists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
+		if dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
 			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS/Debug" "--config Debug" "--verbose"
-		elif dk_fileExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"; then
+		elif dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"; then
 			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS" "--config Debug" "--verbose"
 		else
 			dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [ "$TYPE" = "Release" ] || [ "$TYPE" = "All" ]; then
-		if dk_fileExists "$DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt"; then
+		if dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt"; then
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS/Release" --config Release --verbose
-		elif dk_fileExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"; then
+		elif dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"; then
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS" --config Release --verbose
 		else
 			dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
@@ -835,7 +835,7 @@ dk_validateCmake () {
 		fi
 		dk_printVar CMAKE_EXE
 		
-		if dk_fileExists "$CMAKE_EXE"; then 
+		if dk_pathExists "$CMAKE_EXE"; then 
 			return $true;
 		fi
 
@@ -844,7 +844,7 @@ dk_validateCmake () {
 		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
 		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
 		
-		#if ! dk_fileExists $CMAKE_EXE; then error "cannot find cmake"; fi
+		#if ! dk_pathExists $CMAKE_EXE; then error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"
@@ -1160,17 +1160,17 @@ dk_commandExists () {
 	
 
 ##################################################################################
-# dk_fileExists(<file>)
+# dk_pathExists(<file>)
 #
 #
-dk_fileExists () {
-	dk_verbose "dk_fileExists($*)"
+dk_pathExists () {
+	dk_verbose "dk_pathExists($*)"
 	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	#if [ -e "$1" ]; then
-	#	dk_debug "dk_fileExists($*): FOUND"
+	#	dk_debug "dk_pathExists($*): FOUND"
 	#else
-	#	dk_warning "dk_fileExists($*): NOT FOUND!" 
+	#	dk_warning "dk_pathExists($*): NOT FOUND!" 
 	#fi
 	[ -e "$1" ]
 }
@@ -1262,7 +1262,7 @@ dk_download () {
 	dk_verbose "dk_download($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if dk_fileExists "$2"; then
+	if dk_pathExists "$2"; then
 		dk_warning "dk_download(): $2 already exists"
 		return 0
 	fi
@@ -1291,7 +1291,7 @@ dk_extract () {
 	fulldest="$2/$destFolder"
 	dk_printVar fulldest
 		
-	#if dk_fileExists $fulldest; then
+	#if dk_pathExists $fulldest; then
 	#	dk_warning "dk_extract(): $fulldest already exists"
 	#	return 0
 	#fi
@@ -1517,7 +1517,7 @@ dk_validateBranch () {
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
 	
-	if dk_fileExists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
+	if dk_pathExists "$DIGITALKNOB_DIR"/"$FOLDER"/.git; then
 		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
 		if [ "$BRANCH" = "$FOLDER" ]; then
 			DKBRANCH="$FOLDER"
@@ -1545,7 +1545,7 @@ dk_validateBranch () {
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$DKSCRIPT_DIR" = "$DKBRANCH_DIR" ]; then
-	#	if ! dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#	if ! dk_pathExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
 	#		dk_debug "$DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME $DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	fi
@@ -1553,7 +1553,7 @@ dk_validateBranch () {
 	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if dk_fileExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
+	#	if dk_pathExists $DKBRANCH_DIR/$DKSCRIPT_NAME; then
 	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
 	#	fi
 	#	$DKBRANCH_DIR/$DKSCRIPT_NAME
@@ -1716,7 +1716,7 @@ dk_cmakeEval () {
 	
 	if [ -n "$variables" ]; then
 		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
-		if dk_fileExists "$DKCMAKE_DIR"/cmake_vars; then
+		if dk_pathExists "$DKCMAKE_DIR"/cmake_vars; then
 	    	dk_info "executing cmake_vars"
 			. "$DKCMAKE_DIR"/cmake_vars
 			#rm $DKCMAKE_DIR/cmake_vars
@@ -1811,7 +1811,7 @@ dk_resetAll () {
 		# wait for the folders to get deleted
 		sleep 5
 
-		if dk_fileExists "$DKBRANCH_DIR"; then
+		if dk_pathExists "$DKBRANCH_DIR"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 		
@@ -1820,7 +1820,7 @@ dk_resetAll () {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if dk_fileExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
+		if dk_pathExists "$DKBRANCH_DIR"/"$DKSCRIPT_NAME"; then
 			clear
 			. "$DKBRANCH_DIR"/"$DKSCRIPT_NAME" rm -r "$DIGITALKNOB_DIR"/"$DKSCRIPT_NAME"
 			exit
@@ -1884,7 +1884,7 @@ dk_removeAll () {
 		# wait for the folders to get deleted
 		sleep 3
 		
-		if dk_fileExists "$DKBRANCH_DIR"; then
+		if dk_pathExists "$DKBRANCH_DIR"; then
 			dk_error "Oh no, the BRANCH folder is still there! :( "
 		fi
 	fi
@@ -2044,7 +2044,7 @@ dk_readCache() {
 	dk_verbose "dk_readCache($*)"
 	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_fileExists "$DKBRANCH_DIR"/cache; then
+	if ! dk_pathExists "$DKBRANCH_DIR"/cache; then
 		return 0
 	fi
 	_APP_=

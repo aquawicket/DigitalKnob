@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_fileExists(<file>)
+# dk_pathExists(<file>)
 #
 #
-dk_fileExists () {
+dk_pathExists () {
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
@@ -17,15 +17,21 @@ dk_fileExists () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	if dk_fileExists "dk_debug"; then
-		echo "The file exists"
+	if dk_pathExists "dk_debug.sh"; then
+		echo "The path exists"
 	else
-		echo "The file does NOT exist"
+		echo "The path does NOT exist"
 	fi
 	
-	if dk_fileExists "nofile.ext"; then
-		echo "The file exists"
+	if dk_pathExists "nofile.ext"; then
+		echo "The path exists"
 	else
-		echo "The file does NOT exist"
+		echo "The path does NOT exist"
+	fi
+	
+	if dk_pathExists "$PWD"; then
+		echo "The path exists"
+	else
+		echo "The path does NOT exist"
 	fi
 }

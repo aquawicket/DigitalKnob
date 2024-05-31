@@ -13,7 +13,7 @@ dk_extract () {
 	#src="$1"
 	#dest="$2"
 	
-	if ! dk_fileExists "${2}"; then
+	if ! dk_pathExists "${2}"; then
 		dk_makeDirectory "${2}"
 	fi
 	

@@ -29,7 +29,7 @@ function Global:dk_installCmake () {
 	$global:CMAKE = "$DKTOOLS_DIR\$CMAKE_FOLDER"
     $global:CMAKE_EXE = "$CMAKE\bin\cmake.exe"
         
-    if(dk_fileExists "$CMAKE_EXE"){ return }
+    if(dk_pathExists "$CMAKE_EXE"){ return }
        
     dk_info " "
     dk_info "Installing CMake . . ."
@@ -39,7 +39,7 @@ function Global:dk_installCmake () {
 	dk_smartExtract "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE" "$CMAKE"
 	#echo $CMAKE_FOLDER>"$CMAKE\installed"
     
-    if(!(dk_fileExists "$CMAKE_EXE")){ dk_error "cannot find cmake" }
+    if(!(dk_pathExists "$CMAKE_EXE")){ dk_error "cannot find cmake" }
 }
 
 

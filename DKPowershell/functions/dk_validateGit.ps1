@@ -9,7 +9,7 @@ dk_load dk_toLower
 dk_load dk_removeExtension
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
-dk_load dk_fileExists
+dk_load dk_pathExists
 ####################################################################
 # dk_validateGit()
 #
@@ -35,7 +35,7 @@ function Global:dk_validateGit () {
 	dk_validate DKTOOLS_DIR dk_getDKPaths
     $global:GIT_EXE = "$DKTOOLS_DIR\$GIT_FOLDER\bin\git.exe"
         
-    if(dk_fileExists $GIT_EXE){ return }
+    if(dk_pathExists $GIT_EXE){ return }
         
     dk_info ""  
     dk_info "Installing git . . ."
@@ -45,7 +45,7 @@ function Global:dk_validateGit () {
 	dk_info "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
     "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
 	   
-    if(!dk_fileExists $GIT_EXE){ dk_error "cannot find git" }
+    if(!dk_pathExists $GIT_EXE){ dk_error "cannot find git" }
         
     dk_checkError
 }
