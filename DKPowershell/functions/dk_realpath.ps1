@@ -1,5 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-#if (!$dk_realpath){ $dk_realpath = 1 } else{ return }
+if (!$dk_realpath){ $dk_realpath = 1 } else{ return }
 
 dk_load dk_error
 dk_load dk_printVar
@@ -9,7 +9,7 @@ dk_load dk_printVar
 #
 function Global:dk_realpath($path) {
 	dk_debugFunc
-	if ( $(__ARGC__) -ne 1 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	$output = Resolve-Path -Path "$path"
 	dk_printVar output

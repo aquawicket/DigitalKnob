@@ -8,7 +8,7 @@ if (!$dk_pickApp){ $dk_pickApp = 1 } else{ return }
 #
 function Global:dk_pickApp() {
 	dk_debugFunc
-	if ( $(__ARGC__) -ne 0 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"

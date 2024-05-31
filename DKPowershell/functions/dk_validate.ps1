@@ -10,7 +10,7 @@ if (!$dk_validate){ $dk_validate = 1 } else{ return }
 #
 function Global:dk_validate($variable, $code) {
 	dk_debugFunc
-	if ( $(__ARGC__) -ne 2 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	if(Test-Path variable:$variable){ return }
 	

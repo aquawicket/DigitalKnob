@@ -23,7 +23,7 @@ dk_load dk_unset
 #
 function Global:dk_buildMain() {
 	dk_debugFunc
-	if ( $(__ARGC__) -ne 0 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 # 	dk_validateSudo
 	
