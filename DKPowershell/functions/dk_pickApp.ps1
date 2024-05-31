@@ -38,7 +38,7 @@ function Global:dk_pickApp() {
 	elseif($input -eq  "7"){ $global:APP = "DKTestAll" }
 	elseif($input -eq  "8"){ dk_enterManually }
 	elseif($input -eq  "9"){ dk_clearScreen }
-	elseif($input -eq "10"){ $global:UPDATE = }
+	elseif($input -eq "10"){ dk_unset UPDATE }
 	elseif($input -eq "11"){ dk_reload }
 	elseif($input -eq "12"){ dk_exit 0 }
 	else{ dk_warning "invalid selection" }

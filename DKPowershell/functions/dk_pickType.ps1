@@ -26,7 +26,7 @@ function Global:dk_pickType() {
 	elseif(${input} -eq "2"){ $global:TYPE = "Release" }
 	elseif(${input} -eq "3"){ $global:TYPE = "All" }
 	elseif(${input} -eq "4"){ dk_clearScreen }
-	elseif(${input} -eq "5"){ $global:TARGET_OS= }
+	elseif(${input} -eq "5"){ dk_unset TARGET_OS }
 	elseif(${input} -eq "6"){ dk_exit 0 }
 	else{ dk_warning "invalid selection" }
 }

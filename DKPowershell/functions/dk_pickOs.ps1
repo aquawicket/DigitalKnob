@@ -91,7 +91,7 @@ function Global:dk_pickOs() {
 	elseif(${input} -eq "34"){ $global:TARGET_OS = "win_x86_64_ucrt" }
 	elseif(${input} -eq "35"){ $global:TARGET_OS = "win_x86_64_msvc" }
 	elseif(${input} -eq "36"){ dk_clearScreen }
-	elseif(${input} -eq "37"){ $global:APP= }
+	elseif(${input} -eq "37"){ dk_unset APP }
 	elseif(${input} -eq "38"){ dk_exit 0 }
 	else{ dk_warning "invalid selection" }
 }
