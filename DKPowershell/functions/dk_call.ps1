@@ -12,13 +12,13 @@ function Global:dk_call(){
 	#if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 	#& $command $($MyInvocation.UnboundArguments)
-	$allArgs = $PsBoundParameters.Values + $args
-	echo "allArgs = $allArgs"
+	#$allArgs = $PsBoundParameters.Values + $args
+	#echo "allArgs = $allArgs"
 
-	$first, $rest = $allArgs
+	$first, $rest = $PsBoundParameters.Values + $args
 	#$_args_ = $allArgs[1..($allArgs.Length-1)]
 	
-	& cmd /c "$first" @rest
+	& $first @rest
 }
 
 
