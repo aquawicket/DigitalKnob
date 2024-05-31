@@ -3,14 +3,14 @@ if (!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
 
 
 ##################################################################################
-# dk_isUrl(<string>)
+# dk_isUrl(<str>)
 #
 #
-function Global:dk_isUrl () {
+function Global:dk_isUrl($str) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if(dk_stringContains "$1" "://"){ return ${true} }
+	if(dk_stringContains "$str" "://"){ return ${true} }
 	return ${false}
 }
 
