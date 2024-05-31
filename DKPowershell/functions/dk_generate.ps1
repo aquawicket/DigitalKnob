@@ -25,7 +25,7 @@ function Global:dk_generate() {
 	cd "$TARGET_PATH\$TARGET_OS"
 	$CMAKE_SOURCE_DIR = $DKCMAKE_DIR
 	dk_printVar CMAKE_SOURCE_DIR
-	if(! dk_fileExists "$CMAKE_SOURCE_DIR"){
+	if(!(dk_fileExists "$CMAKE_SOURCE_DIR")){
 		dk_error "CMAKE_SOURCE_DIR does not exist"
 	}
 	dk_printVar CMAKE_SOURCE_DIR
@@ -67,10 +67,10 @@ function Global:dk_generate() {
 		set -- "$@" "-DSHARED=ON"
 	}
 	
-	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH\$TARGET_OS\$TYPE
+	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$TARGET_OS\$TYPE"
 	dk_printVar CMAKE_BINARY_DIR
 	
-	if ! dk_defined WSLENV; then 
+	if(!(dk_defined WSLENV)){ 
 		set -- "$@" "-S=$CMAKE_SOURCE_DIR"
 	}
 	set -- "$@" "-B=$CMAKE_BINARY_DIR"
@@ -185,7 +185,7 @@ function Global:dk_generate() {
 #	}
 	
 	###### WSL CMake Fix ######
-	if dk_defined WSLENV; then 
+	if(dk_defined WSLENV){ 
 		cd "$DKCMAKE_DIR"
 		set -- "$@" "."
 	}

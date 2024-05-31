@@ -16,7 +16,7 @@ dk_load dk_pickType
 dk_load dk_createCache
 dk_load dk_generate
 dk_load dk_build
-dl_load dk_unset
+dk_load dk_unset
 ####################################################################
 # dk_buildMain()
 #
