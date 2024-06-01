@@ -20,6 +20,9 @@ dk_extract () {
 	dk_getExtension "${1}" extension
 	
 	if [ "${extension}" = "zip" ]; then
+		if ! dk_commandExists unzip; then
+			dk_install unzip
+		fi
 		echo "unzip '${1}' -d '${2}'"
 		unzip "${1}" -d "${2}"
 	else

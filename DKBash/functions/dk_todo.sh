@@ -13,8 +13,8 @@ dk_todo () {
 	dk_debugFunc	
 	
 	[ ${ENABLE_dk_todo-1} -ne 1 ] && return
-	msg="$1"
-	dk_echo "${yellow}${TODO_TAG}${msg}${clr}"
+	msg="${1-}"
+	dk_echo "${yellow}${TODO_TAG-}${msg}${clr}"
 	
 	[ ${TRACE_ON_TODO-0} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_TODO ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
 	[ ${LINE_ON_TODO-0} -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_TODO ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
