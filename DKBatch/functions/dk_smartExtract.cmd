@@ -13,30 +13,24 @@ call DK
 	set "src=%~1"
 	set "dest=%~2"
 	
-	::src_fullpath="$(realpath "${src}")"
 	call dk_getFullPath "%src%" src_fullpath
 	call dk_printVar src_fullpath
 	
 	call dk_getDirectory "%src_fullpath%" src_directory
 	call dk_printVar src_directory
 	
-	::src_filename="$(basename "${src_fullpath}")"
 	call dk_getFilename "%src_fullpath%" src_filename
 	call dk_printVar src_filename
 	
-	::src_folder="${src_filename%.*}"
 	call dk_getName "%src_filename%" src_folder
 	call dk_printVar src_folder
 	
-	::dest_fullpath="$(realpath "${dest}")"
 	call dk_getFullPath "%dest%" dest_fullpath
 	call dk_printVar dest_fullpath
 	
-	::dest_directory="$(dirname "${dest_fullpath}")"
 	call dk_getDirectory "%dest_fullpath%" dest_directory
 	call dk_printVar dest_directory
 	
-	::dest_folder="$(basename "${dest_fullpath}")"
 	call dk_getFilename "%dest_fullpath%" dest_folder
 	call dk_printVar dest_folder
 	

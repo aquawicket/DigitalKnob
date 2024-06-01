@@ -175,7 +175,6 @@ dk_escapeSequences () {
 	dk_set BG_Magenta "$ESC[105m"
 	dk_set BG_Cyan    "$ESC[106m"
 	dk_set BG_White   "$ESC[107m"
-	
 }
 
 ASCII_ADD () {
