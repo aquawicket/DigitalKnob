@@ -39,12 +39,10 @@ dk_validateCmake () {
 	[ "${TARGET_OS}" = "win_x86_64_ucrt" ]       && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_printVar CMAKE_IMPORT
 	
-	if [ -z "${CMAKE_IMPORT}" ]; then
-		dk_error "CMAKE_IMPORT is invalid"
-	fi
+	[ -z "${CMAKE_IMPORT}" ] && dk_error "CMAKE_IMPORT is invalid"
 	
 	if dk_isUrl "${CMAKE_IMPORT}"; then
-		dk_info "Installing CMake from dl files"
+		dk_info "Installing CMake from direct download"
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
@@ -61,33 +59,28 @@ dk_validateCmake () {
 		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
-		if dk_pathExists "${CMAKE_EXE}"; then 
-			return ${true};
-		fi
+		[ dk_pathExists "${CMAKE_EXE}" ] && return ${true}
 
 		dk_echo
 		dk_info "Installing cmake . . ."
 		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
-		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
-		
-		dk_removeExtension ${CMAKE_DL_NAME} CMAKE_DL_NAME
-		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
-		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
-        
+		#dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
+		#dk_removeExtension ${CMAKE_DL_NAME} CMAKE_DL_NAME
+		#dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_FOLDER}"
+		#echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
+		dk_smartExtract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		if ! dk_pathExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"
 		
 		CMAKE_EXE=$(command -v cmake)
-		#CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
-		#CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		dk_printVar CMAKE_EXE
 	fi
