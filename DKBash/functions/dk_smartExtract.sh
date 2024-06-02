@@ -14,22 +14,23 @@ dk_smartExtract () {
 	dest="$2"
 	
 	dk_realpath "${src}" src_fullpath 
-	dk_printVar src_fullpath
+	#dk_printVar src_fullpath
 	
 	src_directory="$(dirname "${src_fullpath}")"
-	dk_printVar src_directory
+	#dk_printVar src_directory
 	
 	src_filename="$(basename "${src_fullpath}")"
-	dk_printVar src_filename
+	#dk_printVar src_filename
 	
 	src_folder="${src_filename%.*}"
-	dk_printVar src_folder
+	#dk_printVar src_folder
 	
-	dk_realpath "${dest}" dest_fullpath
-	dk_printVar dest_fullpath
+	#dk_realpath "${dest}" dest_fullpath
+	dest_fullpath="${dest}"
+	#dk_printVar dest_fullpath
 	
 	dest_folder="$(basename "${dest_fullpath}")"
-	dk_printVar dest_folder
+	#dk_printVar dest_folder
 	
 	if ! dk_pathExists "${dest_fullpath}"; then
 		dk_makeDirectory "${dest_fullpath}"
@@ -40,16 +41,16 @@ dk_smartExtract () {
 	dk_extract "$src_fullpath" "$src_directory/UNZIPPED"
 	
 	dk_getDirectories "$src_directory/UNZIPPED" directories
-	dk_printVar directories
+	#dk_printVar directories
 	dk_arrayLength directories dir_count
-	dk_printVar dir_count
+	#dk_printVar dir_count
 	
 	dk_getFiles "$src_directory/UNZIPPED" files
 	dk_arrayLength files file_count
-	dk_printVar file_count
+	#dk_printVar file_count
 	
-	if $dir_count equ 1; then 
-		if $file_count equ 0; then
+	if [ $dir_count -eq 1 ]; then 
+		if [ $file_count -eq 0 ]; then
 			#rename/move UNZIPPED/root folder to dest path"
 			dk_move "$directories[0]" "$dest_fullpath" OVERWRITE
 		fi

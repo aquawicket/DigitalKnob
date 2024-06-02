@@ -32,7 +32,8 @@ dk_load() {
 	
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
-	if [[ $(dk_command file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+	#if [[ $(dk_command file -b - < ${fpath}) =~ CRLF ]]; then		# BASH REGEX MATCH
+	if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
 		echo "Converting file to Unix line endings"
 		sed -i -e 's/\r$//' ${fpath}
 	fi
@@ -52,7 +53,7 @@ dk_load() {
 		
 		oldIFS=${IFS}
 		IFS=$'\n'
-		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath}) ); true # || true; #return 0
+		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath}) ) || true # || true; #return 0
 		#IFS=$'\n' read -r -d '' -a lines < <( echo "$(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath})" && printf '\0' )
 		IFS=${oldIFS}
 		for value in "${lines[@]}"; do
@@ -69,7 +70,7 @@ dk_load() {
 #				echo "$i: ${BASH_REMATCH[${i}]}"
 #			done
 			
-			#value=$(echo "${value}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
+			#value=$(builtin echo "${value}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			#[ -z "${value}" ] && continue
 
 			if [[ ${dkload_list} =~ ";${value};" ]]; then			# BASH REGEX MATCH

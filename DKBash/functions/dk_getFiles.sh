@@ -10,7 +10,8 @@ dk_getFiles () {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	dk_todo
+	eval "$2=($1/*)" 
+	#dk_printVar "${2}"
 }
 
 
@@ -18,6 +19,6 @@ dk_getFiles () {
 
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_getFiles
+	dk_getFiles /c/Windows/System32 output
 
 }

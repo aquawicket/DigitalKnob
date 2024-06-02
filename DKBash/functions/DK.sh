@@ -16,7 +16,6 @@ dk_source(){
 dk_call(){
 	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
 	[ -z "$(command -v "$1")" ] && dk_load $1
-	#[ -z "$(command -v "$1")" ] && dk_source $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	
 	echo "$@"
@@ -151,10 +150,6 @@ DK () {
 	
 	dk_source dk_onExit    # trap EXIT handler
 	dk_source dk_onError   # trap ERR handler
-		
-	#dk_source dk_load
-	#dk_load dk_escapeSequences
-	#dk_escapeSequences
 	
 	dk_call dk_escapeSequences
 		
@@ -165,7 +160,7 @@ DK () {
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_DIR}/functions" ]; then
-			export ENABLE_dk_debugFunc=1
+			#export ENABLE_dk_debugFunc=1
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
 			echo ""

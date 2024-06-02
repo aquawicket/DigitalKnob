@@ -9,13 +9,13 @@
 dk_stacktrace () {
     dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
-	ENABLE_dk_debugFunc=0
+	#ENABLE_dk_debugFunc=0
 
 	### VERSION 1 ###
-	size=${#FUNCNAME[@]}
-	dk_echo "STACKTRACE[${size}]" 
+	stack_size=${#FUNCNAME[@]}
+	dk_echo "STACKTRACE[${stack_size}]" 
 	local i=0
-	while [ "${i}" -lt "${size}" ]; do
+	while [ "${i}" -lt "${stack_size}" ]; do
 		i=$(( i + 1 ))
 		frame=$(( i - 2 ))
 		if [ $i -eq 2 ]; then
@@ -58,6 +58,7 @@ dk_stacktrace () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_stacktrace
 }

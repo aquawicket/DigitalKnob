@@ -16,13 +16,10 @@ dk_move () {
 	[ $# -lt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	[ $# -gt 3 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
-	_from_=$1
-	_to_=$2
-	#dk_replaceAll "%~1" "/" "\" _from_
-	#dk_replaceAll "%~2" "/" "\" _to_
-	if [ "$3" = "OVERWRITE" ]; then
-		OVERWRITE=1
-	fi
+	local _from_=$1
+	local _to_=$2
+
+	[ "$3" = "OVERWRITE" ] && OVERWRITE=1
 	
 	dk_info "Moving $_from_ to $_to_"
 	
@@ -31,7 +28,7 @@ dk_move () {
 	fi
 	
 	if dk_pathExists "$_to_"; then
-		if "$OVERWRITE" -ne "1"; then
+		if [ $OVERWRITE -ne 1 ]; then
 			dk_error "dk_rename Cannot move file. Destiantion exists and OVERWRITE is not set"
 		fi
 		dk_remove $_to_

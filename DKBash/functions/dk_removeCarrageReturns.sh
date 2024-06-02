@@ -11,7 +11,7 @@ dk_removeCarrageReturns () {
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 
 	in=$1
-	out=$(echo "${in}" | tr -d '\r')
+	out=$(builtin echo "${in}" | tr -d '\r')
 	# carrage returns are removed
 }
 

@@ -14,7 +14,7 @@ dk_confirm() {
 	read -rp $" " REPLY
 	dk_echo
 	dk_echo
-	#result=$(echo $REPLY | grep "^[Yy]$")
+	#result=$(builtin echo $REPLY | grep "^[Yy]$")
 	[ "$REPLY" = "y" ] && return ${true}
 	[ "$REPLY" = "Y" ] && return ${true}
 	return ${false};

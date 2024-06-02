@@ -21,15 +21,15 @@ dk_readCache() {
 	count=0
 	while read p; do
 		if [ "${count}" = "0" ]; then 
-			_APP_=$(echo "${p}" | tr -d '\r')
+			_APP_=$(builtin echo "${p}" | tr -d '\r')
 			#dk_printVar _APP_
 		fi
 		if [ "${count}" = "1" ]; then
-			_TARGET_OS_=$(echo "${p}" | tr -d '\r')
+			_TARGET_OS_=$(builtin echo "${p}" | tr -d '\r')
 			#dk_printVar _TARGET_OS_ 
 		fi
 		if [ "${count}" = "2" ]; then
-			_TYPE_=$(echo "${p}" | tr -d '\r')
+			_TYPE_=$(builtin echo "${p}" | tr -d '\r')
 			#dk_printVar _TYPE_
 		fi
 		#if [ "${count}" = "3" ]; then

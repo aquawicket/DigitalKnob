@@ -11,12 +11,22 @@
 #	[ ${ENABLE_dk_debugFunc-0} -eq 1 ] && echo "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 #}'
 
+
 alias dk_debugFunc='{
-	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then
+	if [ ${ENABLE_dk_debugFunc-1} -eq 1 ]; then
+		
+		local stack_size=${#FUNCNAME[@]}
+		local -i i
+		local indent=""
+		for (( i = 4; i < stack_size; i++ )); do
+			indent="${indent}   "
+		done
+		
+		
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo -e "${indent} └ ${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		else
-			echo "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo "${indent} └ ${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		fi
 	fi
 }'

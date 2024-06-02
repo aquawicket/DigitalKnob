@@ -10,7 +10,7 @@ dk_command(){
 	[ -z "$(command -v "$1")" ] && dk_install $1
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	
-	echo "$@"
+	dk_echo "$@"
 	"$@"
 }
 

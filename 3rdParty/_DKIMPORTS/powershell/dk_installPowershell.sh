@@ -40,13 +40,13 @@ dk_installPowershell () {
 	dk_removeExtension "${POWERSHELL_DL_FILE}" POWERSHELL_FOLDER
 	dk_convertToCIdentifier "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER
 	dk_toLower "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER
-	
 	dk_validate DKTOOLS_DIR dk_getDKPaths
-	[ "${HOST_OS}" = "win" ]       && POWERSHELL_EXE=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}/bin/cmake.exe
-	[ "${HOST_OS}" = "mac" ]       && POWERSHELL_EXE=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}/CMake.app/Contents/bin/cmake
-	[ "${HOST_OS}" = "linux" ]     && POWERSHELL_EXE=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}/bin/cmake
-	[ "${HOST_OS}" = "raspberry" ] && POWERSHELL_EXE=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}/bin/cmake
-	[ -z ${POWERSHELL_EXE} ]       && dk_error "no cmake for this OS"
+	POWERSHELL=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}
+	
+	[ "${HOST_OS}" = "win" ]       && POWERSHELL_EXE=${POWERSHELL}/pwsh.exe
+	[ "${HOST_OS}" = "mac" ]       && POWERSHELL_EXE=${POWERSHELL}/powershell.app/Contents/bin/pwsh
+	[ "${HOST_OS}" = "linux" ]     && POWERSHELL_EXE=${POWERSHELL}/pwsh
+	[ "${HOST_OS}" = "raspberry" ] && POWERSHELL_EXE=${POWERSHELL}/pwsh
 	dk_printVar POWERSHELL_EXE
 		
 	if dk_pathExists "${POWERSHELL_EXE}"; then 
@@ -55,9 +55,13 @@ dk_installPowershell () {
 	
 	dk_echo
 	dk_info "Installing Powershell . . ."
-	dk_download "${POWERSHELL_DL}" "${DKDOWNLOAD_DIR}"/"${POWERSHELL_DL_FILE}"
-	dk_smartExtract "${DKDOWNLOAD_DIR}"/"${POWERSHELL_DL_FILE}" "${DKTOOLS_DIR}"
+	dk_download "${POWERSHELL_DL}" "${DKDOWNLOAD_DIR}/${POWERSHELL_DL_FILE}"
+	dk_smartExtract "${DKDOWNLOAD_DIR}/${POWERSHELL_DL_FILE}" "${POWERSHELL}"
 }
 dk_installPowershell
+exit
+exit
+exit
+
 
 	

@@ -15,7 +15,7 @@ dk_getDirectories () {
 	#arr=("${arr[@]%/}")            # This removes the trailing slash on each item
 	#arr=("${arr[@]##*/}")          # This removes the path prefix, leaving just the dir names
 	eval "$2=($1/*/)" 
-	dk_printVar "${2}"
+	#dk_printVar "${2}"
 }
 
 

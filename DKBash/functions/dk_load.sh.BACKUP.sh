@@ -71,7 +71,7 @@ dk_load() {
 			#value=${value##*N}   # cut off everything from begining to last N
 
 			value=${value%%#*}
-			value=$(echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
+			value=$(builtin echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 			[ "${value}" = "" ] && continue
 			echo "${fn}:lines $value"
 				
