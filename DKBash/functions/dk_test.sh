@@ -6,9 +6,9 @@
 #
 #
 dk_test() {
-	#dk_debugFunc
+	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
-	#[ $# -gt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -gt 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
 #	dk_info "test from dk_info"
 #	dk_debug "test from dk_debug"
@@ -20,14 +20,11 @@ dk_test() {
 #	echo "__ARGV__     = $(__ARGV__)"
 #	echo "__CALLER__   = $(__CALLER__)"
 
-	#echo "input = $1"
-	#dk_return "$2" "output string variable"
-	#echo "dk_test($*)"
 	if [[ $1 == *"[@]"* ]]; then
 		local _input_=(${!1})
 		echo "1 is an array variable"
 		local _size_=${#_input_[@]}
-		for ((i=0; i < $_size_; i++ )); do 
+		for ((i=0; i < $_size_; i++ )); do
 			echo "_input_[$i] = ${_input_[$i]}";
 		done
 		echo "_input_ = ${_input_[@]}"
@@ -39,8 +36,6 @@ dk_test() {
 		if [ -n "${!1}" ]; then
 			local _input_="${!1}"
 			echo "1 is a variable"
-			
-			
 		fi
 	fi
 	
@@ -51,32 +46,19 @@ dk_test() {
 	
 	echo "_input_ = $_input_"
 	
-
 	if [ $# -eq 2 ]; then
 		local ret_val="${2-}"
 		dk_return "sending back: $_input_"
 	else
 		dk_return "sending back: $_input_"
 	fi
-	
 }
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	### (input:array_variable output:return_var) ###
-	local arry=(
-        "7array" 
-        "array" 
-        "variable" 
-        "by" 
-        "name")
-	echo "arry = ${arry[@]}"
-	#dk_test arry[@] output
-	local input='arry[@]'
-	dk_test $input output
-	echo "output:return_variable = ${output}"
+	
 	
 	
 	
@@ -108,20 +90,27 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	output=$(dk_test input)
 	echo "output:return_variable = ${output}"
 	
-	### (input:array_variable_value output:return_var) ###
-	arryA=("6" "array" "string" "variable")
+	### (input:array_string_value output:return_var) ###
+	arryA=("6" "array" "string" "value")
 	arryA_str="${arryA[@]}"
 	input="${arryA_str}"
 	dk_test input output
 	echo "output:return_variable = ${output}"
 	
-	### (input:array_variable output:return_var) ###
-	arryB=("7array" "array" "variable" "by" "name")
-	input=arryB[@]
-	dk_test input output
+	### (input:array_variable[@] output:return_var) ###
+	arryA=("7" "array" "variable" "direct")
+	dk_test arryA[@] output
 	echo "output:return_variable = ${output}"
 	
+	### (input:array_variable_value output:return_var) ###
+	arryB=("8" "array" "variable" "by" "value")
+	input=arryB[@]
+	dk_test $input output
+	echo "output:return_variable = ${output}"
 	
-	
-	
+	#####   FIXME   ########
+#	### (input:array_variable_value output:return_var) ###
+#	arryC=("7array" "array" "variable" "by" "name")
+#	dk_test $arryC output
+#	echo "output:return_variable = ${output}"
 }
