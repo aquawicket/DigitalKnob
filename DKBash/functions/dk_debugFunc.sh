@@ -13,7 +13,7 @@
 
 
 alias dk_debugFunc='{
-	if [ ${ENABLE_dk_debugFunc-1} -eq 1 ]; then
+	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then
 		
 		local stack_size=${#FUNCNAME[@]}
 		local -i i
@@ -22,6 +22,8 @@ alias dk_debugFunc='{
 			indent="${indent}   "
 		done
 		
+		###local ARGV=($(__ARGV__ 1))
+		###echo ${ARGV[@]}
 		
 		if [ "$(echo -e)" = "" ]; then
 			echo -e "${indent} └ ${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"

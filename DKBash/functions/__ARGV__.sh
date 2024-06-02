@@ -5,20 +5,22 @@
 # __ARGV__(<frame>)
 #
 __ARGV__() {
-	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
+	[ -z ${1-} ] && local frame=0 || local frame=$1
 	
-	marker=0
-	for (( i=0; i<_FRAME_; i++ )); do
+	local marker=0
+	for (( i=0; i<frame; i++ )); do
 		marker=$(($marker + ${BASH_ARGC[${i}]-}))
 	done
-	#echo "marker = $marker : ${BASH_ARGV[${marker}]-}"
-	
-	_ARGC_=${BASH_ARGC[${_FRAME_}]-}
-	begin=$(($marker+$_ARGC_-1))
-	for (( i=$begin; i>((begin-_ARGC_)); i-- )); do
-		[ -z "${_ARGV_-}" ] && _ARGV_="${BASH_ARGV[${i}]-}" || _ARGV_="${_ARGV_-}, ${BASH_ARGV[${i}]-}"
+
+	local argv=()	
+	local argc=${BASH_ARGC[${frame}]-}
+	local begin=$(($marker+$argc-1))
+	for (( i=$begin; i>((begin-argc)); i-- )); do
+		argv+=(${BASH_ARGV[${i}]-})
 	done
-	dk_return "${_ARGV_-}"
+	
+	local argv_string=${argv[@]}
+	dk_return "${argv_string}"
 }
 
 

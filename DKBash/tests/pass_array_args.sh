@@ -32,6 +32,16 @@ takes_ary_as_arg() {
 	#dk_printVar "${3}"
 }
 
+takes_ary_as_arg2() {
+	local arg1_array=("${!1}")
+	echo ""
+	for ((i=0; i < ${#arg1_array[@]}; i++ )); do 
+		echo "arg1_array[$i] = ${arg1_array[$i]}";
+	done
+	echo "arg1_array = ${arg1_array[@]}"
+	echo "arg1_array size = ${#arg1_array[@]}"
+}
+
 
 main() {
 	local myArry1=(
@@ -50,16 +60,17 @@ main() {
         "array"
     )
 	
-	takes_ary_as_arg myArry1[@] myArry2[@] return_array
+	#takes_ary_as_arg myArry1[@] myArry2[@] return_array
+	takes_ary_as_arg2 myArry1[@]
 	
 	echo ""
 	for ((i=0; i < ${#return_array[@]}; i++ )); do 
 		echo "return_array[$i] = ${return_array[$i]}";
 	done
-	echo "return_array = ${return_array[@]}"
-	echo "return_array size = ${#return_array[@]}"
+	#echo "return_array = ${return_array[@]}"
+	#echo "return_array size = ${#return_array[@]}"
 	
-	echo ""
+	#echo ""
 	read -rp 'press enter to exit' 
 }
 
