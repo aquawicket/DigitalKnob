@@ -7,8 +7,12 @@ set "DEBUG_MODE=0"
 ::#
 ::#
 :DK () {
-	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"
-	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_debugFunc.cmd', '%DKBATCH_DIR%\functions\dk_debugFunc.cmd')"
+	set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+	set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
+	set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
+	set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
+	set "DKHTTP=%DKHTTP_DKBATCH_FUNCTIONS_DIR%"
+	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_DIR%\functions\dk_debugFunc.cmd')"
 	::call dk_load dk_debugFunc
 	::call dk_debugFunc
 	
@@ -23,7 +27,7 @@ set "DEBUG_MODE=0"
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
 	::############ LOAD FUNCTION FILES ############
-	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
+	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
 	call dk_load dk_debug
 	call dk_load dk_printVar
 	call dk_load dk_replaceAll
