@@ -604,7 +604,7 @@ goto:eof
 ::####################################################################
 
 ::####################################################################
-::# dk_getParentFolder(<input> <output>)
+::# dk_getParentFolder(<input> <rtn_var>)
 ::#
 ::#
 :dk_getParentFolder () {
@@ -644,7 +644,7 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_getParentDir(<input> <output>)
+::# dk_getParentDir(<input> <rtn_var>)
 ::#
 ::#
 :dk_getParentDir () {

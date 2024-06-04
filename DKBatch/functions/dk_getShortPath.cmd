@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getShortPath(<path> <output>)
+::# dk_getShortPath(<path> <rtn_var>)
 ::#
 ::#
 :dk_getShortPath () {

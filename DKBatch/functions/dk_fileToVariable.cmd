@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_fileToVariable(<path> <output>)
+::# dk_fileToVariable(<path> <rtn_var>)
 ::#
 ::#  Read lines of a file into an array and echo them back
 ::#

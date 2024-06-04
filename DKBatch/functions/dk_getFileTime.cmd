@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getFileTime(<path> <output>)
+::# dk_getFileTime(<path> <rtn_var>)
 ::#
 ::#
 :dk_getFileTime () {

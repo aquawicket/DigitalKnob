@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_decimalToVariable(<decimal> <output>)
+::# dk_decimalToVariable(<decimal> <rtn_var>)
 ::#
 :dk_decimalToVariable () {
 	call dk_debugFunc

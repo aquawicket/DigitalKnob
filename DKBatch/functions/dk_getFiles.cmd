@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getFiles(<path> <output>)
+::# dk_getFiles(<path> <rtn_var>)
 ::#
 ::#   reference: https://stackoverflow.com/a/138581
 ::#

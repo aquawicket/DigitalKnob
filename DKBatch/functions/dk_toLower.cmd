@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_toLower(<string> <output>)
+::# dk_toLower(<string> <rtn_var>)
 ::#
 ::#
 :dk_toLower () {

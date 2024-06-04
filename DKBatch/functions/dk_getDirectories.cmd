@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getDirectories(<path> <output>)
+::# dk_getDirectories(<path> <rtn_var>)
 ::#
 ::#   reference: https://stackoverflow.com/a/138581
 ::#

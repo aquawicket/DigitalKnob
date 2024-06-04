@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getFilename(<path> <output>)
+::# dk_getFilename(<path> <rtn_var>)
 ::#
 ::#
 :dk_getFilename () {

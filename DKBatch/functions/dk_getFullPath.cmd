@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getFullPath(<path> <output>)
+::# dk_getFullPath(<path> <rtn_var>)
 ::#
 ::#
 :dk_getFullPath () {

@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayToString(<array_name> <output>)
+::# dk_arrayToString(<array_name> <rtn_var>)
 ::#
 ::#   reference: https://www.w3schools.com/js/js_array_methods.asp#mark_tostring
 ::#

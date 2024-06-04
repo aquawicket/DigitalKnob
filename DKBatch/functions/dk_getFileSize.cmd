@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getFileSize(<path> <output>)
+::# dk_getFileSize(<path> <rtn_var>)
 ::#
 ::#
 :dk_getFileSize () {

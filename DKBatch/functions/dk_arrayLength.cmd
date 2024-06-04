@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayLength(<array> <output>)
+::# dk_arrayLength(<array> <rtn_var>)
 ::#
 ::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 ::#

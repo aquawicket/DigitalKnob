@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_removeExtension(<filepath> <output>)
+::# dk_removeExtension(<filepath> <rtn_var>)
 ::#
 ::#
 :dk_removeExtension () {

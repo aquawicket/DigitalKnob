@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getBasename(<path> <output>)
+::# dk_getBasename(<path> <rtn_var>)
 ::#
 ::#    https://en.wikipedia.org/wiki/Basename
 ::#

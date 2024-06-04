@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_listToArray(<list> <output>)
+::# dk_listToArray(<list> <rtn_var>)
 ::#
 ::#
 :dk_listToArray () {

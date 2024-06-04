@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_getNativePath(<path> <output>)
+::# dk_getNativePath(<path> <rtn_var>)
 ::#
 ::#
 :dk_getNativePath () {
