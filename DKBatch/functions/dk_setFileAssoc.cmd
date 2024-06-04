@@ -14,7 +14,7 @@ call DK
 
 	:: <_exe_>
 	set "_exe_=%~2"
-	call dk_getName "%~2" _exeName_
+	call dk_getBasename "%~2" _exeName_
 	call dk_getFilename "%~2" _exeFilename_
 
 	:: <arguments>

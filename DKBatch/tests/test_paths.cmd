@@ -45,7 +45,7 @@ call "../functions/DK.cmd"
 	call dk_getPath "%IN%" pathOnly
 	echo pathOnly   = %pathOnly%
 
-	call dk_getName "%IN%" nameOnly
+	call dk_getBasename "%IN%" nameOnly
 	echo nameOnly   = %nameOnly%
 
 	call dk_getExtension "%IN%" extension

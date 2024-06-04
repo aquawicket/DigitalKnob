@@ -1,7 +1,7 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
 if (!$dk_toLower){ $dk_toLower = 1 } else{ return }
 
-dk_load dk_getName
+dk_load dk_getBasename
 ##################################################################################
 # dk_validateBranch()
 #
@@ -12,7 +12,7 @@ function Global:dk_validateBranch () {
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
-	$FOLDER = dk_getName "$(pwd)"
+	$FOLDER = dk_getBasename "$(pwd)"
 	$global:DKBRANCH="Development"
 	
 	dk_validate DIGITALKNOB_DIR dk_getDKPaths

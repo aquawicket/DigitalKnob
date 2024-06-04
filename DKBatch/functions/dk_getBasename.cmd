@@ -2,11 +2,11 @@
 call DK
 
 ::################################################################################
-::# dk_getName(<path> <output>)
+::# dk_getBasename(<path> <output>)
 ::#
-::#    reference: https://stackoverflow.com/a/59739663/688352
+::#    https://en.wikipedia.org/wiki/Basename
 ::#
-:dk_getName () {
+:dk_getBasename () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -25,8 +25,8 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	call dk_getName C:\Windows\System32 name
+	call dk_getBasename C:\Windows\System32 name
 	echo name = %name%
 	
-	call dk_getName TEST nameb
+	call dk_getBasename TEST nameb
 	echo nameb = %nameb%

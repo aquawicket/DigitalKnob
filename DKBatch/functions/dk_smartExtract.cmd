@@ -22,7 +22,7 @@ call DK
 	call dk_getFilename "%src_fullpath%" src_filename
 	call dk_printVar src_filename
 	
-	call dk_getName "%src_filename%" src_folder
+	call dk_getBasename "%src_filename%" src_folder
 	call dk_printVar src_folder
 	
 	call dk_getFullPath "%dest%" dest_fullpath
