@@ -2,9 +2,9 @@
 call ../../../DKBatch/functions/DK.cmd
 
 ::####################################################################
-::# dk_install()
+::# dk_installPowershell()
 ::#
-:dk_install () {
+:dk_installPowershell () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -49,4 +49,4 @@ goto:eof
 
 :DKTEST ########################################################################
 
-call dk_install
+call dk_installPowershell
