@@ -20,7 +20,8 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
     
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
-    call dk_set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
+    call dk_set GIT_EXE "%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
+	call dk_set GITBASH_EXE "%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
         
     if exist "%GIT_EXE%" goto:eof
         
