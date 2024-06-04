@@ -30,6 +30,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_debug
 	call dk_load dk_printVar
+	call dk_load dk_set
 	call dk_load dk_replaceAll
 	call dk_load dk_removeExtension
 	call dk_load dk_getCaller
