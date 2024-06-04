@@ -8,7 +8,7 @@ call DK
 :dk_fileWrite () {
 	call dk_debugFunc
 	echo "dk_fileWrite %*"
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments")
 	setlocal
 	
 	echo %~2 > "%~1"

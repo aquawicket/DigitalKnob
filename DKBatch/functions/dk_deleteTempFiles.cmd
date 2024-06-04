@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_deleteTempFiles () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     call dk_info "Deleteing .tmp files . . ."
 	call dk_validate DIGITALKNOB_DIR dk_getDKPaths

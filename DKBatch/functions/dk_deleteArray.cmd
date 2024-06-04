@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_deleteArray () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	set /A "n=0"
 	:loop1 

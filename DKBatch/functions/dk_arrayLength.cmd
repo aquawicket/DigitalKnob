@@ -8,17 +8,18 @@ call DK
 ::#
 :dk_arrayLength () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	::set "array_name=%~1"
-	set "array_length=0"
+	::call dk_set array_name %~1
+	call dk_set array_length 0
 
 	:arrayCountLoop
 	if defined %~1[%array_length%] ( 
 	   set /a "array_length+=1"
 	   goto :arrayCountLoop 
 	)
-	endlocal & set "%2=%array_length%"
+	::endlocal & set "%2=%array_length%"
+	endlocal & call dk_set %2 %array_length%
 	call dk_printVar "%2"
 goto:eof
 

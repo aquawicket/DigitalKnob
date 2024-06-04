@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_fileContains () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 		
 	call dk_fileToVariable %~1 _fileVar_
 	

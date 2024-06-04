@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_getDrive () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	setlocal enabledelayedexpansion
 	set _input=%1

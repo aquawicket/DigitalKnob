@@ -8,7 +8,7 @@ call DK
 ::#
 :dk_showFileLine
 	call dk_debugFunc
-	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%("%*"): incorrect number of arguments")
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%("%*"): incorrect number of arguments")
 	
 	setlocal enableDelayedExpansion
 		::echo ~0 = %~0

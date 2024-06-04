@@ -7,7 +7,7 @@ call DK
 ::#   reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 :dk_color () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	:::::: STYLES ::::::
 	set "clr=[0m"

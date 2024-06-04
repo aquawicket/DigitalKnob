@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_gitCommit () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 

@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_reset3rdparty () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     echo Resetting 3rdParty Libraries . . .
         

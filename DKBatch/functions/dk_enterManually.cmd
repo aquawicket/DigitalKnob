@@ -7,7 +7,7 @@ call DK
 ::#
 :dk_enterManually () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     call dk_info "Please type the name of the library, tool or app to build. Then press enter."
     set /p input= 

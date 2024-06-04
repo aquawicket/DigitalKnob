@@ -14,7 +14,7 @@ call DK
 ::           echo dk_endProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 call dk_debugFunc
-if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): too many arguments")
+if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): too many arguments")
 	
 	
 set "process=%~1"

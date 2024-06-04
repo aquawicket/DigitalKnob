@@ -6,7 +6,7 @@ call DK
 ::#
 :dk_printColors () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	call dk_echo
 	call dk_info "[101;93m STYLES %clr%"
