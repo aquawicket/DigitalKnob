@@ -10,7 +10,7 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-	call dk_set array_name %~1
+	call dk_set array_name "%~1"
 
 	call dk_arrayLength %~1 array_length
 	set /a "count=%array_length%-1"

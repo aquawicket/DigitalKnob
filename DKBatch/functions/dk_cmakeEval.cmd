@@ -24,17 +24,17 @@ call DK
 	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 
     
-    ::call dk_set DKCOMMAND %~1
+    ::call dk_set DKCOMMAND "%~1"
 	call dk_replaceAll "%~1" "\" "/" DKCOMMAND
 	call dk_printVar DKCOMMAND
 	
-    call dk_set DKRETURN %~2
+    call dk_set DKRETURN "%~2"
 	call dk_printVar DKRETURN
 	
-	call dk_set DKVARS %~3
+	call dk_set DKVARS "%~3"
 	call dk_printVar DKVARS
 	
-	::call dk_set DK_EVAL %DKCMAKE_DIR%\DKEval.cmake
+	::call dk_set DK_EVAL "%DKCMAKE_DIR%\DKEval.cmake"
 	call dk_replaceAll "%DKCMAKE_DIR%\DKEval.cmake" "\" "/" DK_EVAL
 	call dk_printVar DK_EVAL
 	

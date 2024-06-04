@@ -8,20 +8,20 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-    ::call dk_set command %~1
+    ::call dk_set command "%~1"
  	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
     if %ERRORLEVEL% equ 0 (
 		if not defined "%~2" goto:eof
 		
-		endlocal & call dk_set %2 true
+		endlocal & call dk_set %2 "true"
 		(call )
 		goto:eof
 	)
 	
 	if not defined "%~2" goto:eof
 	
-	endlocal & call dk_set %2 false
+	endlocal & call dk_set %2 "false"
     (call)
 goto:eof
 

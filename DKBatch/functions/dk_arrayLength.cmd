@@ -10,16 +10,15 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	::call dk_set array_name %~1
-	call dk_set array_length 0
+	::call dk_set array_name "%~1"
+	call dk_set array_length "0"
 
 	:arrayCountLoop
 	if defined %~1[%array_length%] ( 
 	   set /a "array_length+=1"
 	   goto :arrayCountLoop 
 	)
-	endlocal & call dk_set %2 %array_length%
-	call dk_printVar "%2"
+	endlocal & call dk_set %2 "%array_length%"
 goto:eof
 
 

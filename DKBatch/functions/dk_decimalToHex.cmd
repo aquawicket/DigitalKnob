@@ -20,7 +20,7 @@ call DK
 			set "_hex_=!LOOKUP:~%B%,1!%_hex_%"
 			if %A% GTR 0 goto :loop
 		:endlookup
-	endlocal & call dk_set %2 0x%_prefix_%%_hex_%
+	endlocal & call dk_set %2 "0x%_prefix_%%_hex_%"
 goto:eof
 
 

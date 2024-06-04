@@ -9,14 +9,14 @@ call DK
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~3" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 
-	::call dk_set variable %1
+	::call dk_set variable "%1"
 	if defined %~1 (
-		if defined "%~2" (endlocal & call dk_set %2 true)
+		if defined "%~2" (endlocal & call dk_set %2 "true")
 		(call )
 		goto:eof
 	)
 	
-	if defined "%~2" (endlocal & call dk_set %2 false)
+	if defined "%~2" (endlocal & call dk_set %2 "false")
     (call)
 goto:eof
 

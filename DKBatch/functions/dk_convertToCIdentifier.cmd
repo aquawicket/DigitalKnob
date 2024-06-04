@@ -11,7 +11,7 @@ call DK
 	
 	setlocal EnableDelayedExpansion
     call dk_set _input_ "%~1"
-    call dk_set map abcdefghijklmnopqrstuvwxyz1234567890
+    call dk_set map "abcdefghijklmnopqrstuvwxyz1234567890"
 
     :c_identifier_loop
         if not defined _input_ goto c_identifier_endLoop    

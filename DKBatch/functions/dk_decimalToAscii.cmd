@@ -13,7 +13,7 @@ call DK
 	call dk_decimalToHex %~1 hex
 	call dk_hexToAscii %hex% ascii
 	
-	endlocal & call dk_set %2 %ascii%
+	endlocal & call dk_set %2 "%ascii%"
 goto:eof
 
 

@@ -12,7 +12,7 @@ call DK
 	
 	call dk_asciiToHex %~1 hex
 	call dk_hexToDecimal %hex% decimal
-	endlocal & call dk_set %2 %decimal%
+	endlocal & call dk_set %2 "%decimal%"
 goto:eof
 
 
