@@ -7,27 +7,29 @@ set "DEBUG_MODE=0"
 ::#
 ::#
 :DK () {
+	echo Loading DigitalKnob . . .
+
+	::############ Set DKBATCH_DIR path ############
+	for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
+	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+	if not exist "%DKBATCH_DIR%\functions\DK.cmd" (echo "DKBATCH_DIR does not exist" & goto:eof)
+	set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+	
+	::############ Set DKHTTP paths ############
 	set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
 	set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
 	set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
 	set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
-	set "DKHTTP=%DKHTTP_DKBATCH_FUNCTIONS_DIR%"
-	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_DIR%\functions\dk_debugFunc.cmd')"
+	
+	::############ Load dk_load.cmd ############
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
+	
+	::if not exist "DKBatch\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', 'DKBatch\functions\dk_debugFunc.cmd')"
 	::call dk_load dk_debugFunc
 	::call dk_debugFunc
 	
-	
-	echo Loading DigitalKnob . . .
-
-	::############ Script internal setup ############
-	set "_input=%~dp0..\"
-	for %%Z in ("%_input%") do set "DKBATCH_DIR=%%~dpZ"
-	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-	if not exist "%DKBATCH_DIR%\functions" (echo "DKBATCH_DIR does not exist" & goto:eof)
-	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-
 	::############ LOAD FUNCTION FILES ############
-	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
 	call dk_load dk_debug
 	call dk_load dk_printVar
 	call dk_load dk_replaceAll
