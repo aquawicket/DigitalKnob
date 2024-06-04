@@ -9,6 +9,9 @@ call DK
 ::#
 :dk_load() {
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_echo.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_echo.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_echo.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_error.cmd"     powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_error.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_error.cmd')"
+	if "%1" equ "" (call dk_error "dk_load(): incorrect number of arguments")
+	
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd')"
 	call dk_debugFunc
 	
