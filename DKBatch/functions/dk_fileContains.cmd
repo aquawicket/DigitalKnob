@@ -15,18 +15,12 @@ call DK
     call set "_haystack_=%_fileVar_%"
     call set "_needle_=%~2"
     if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
-		if not defined "%~2" goto:eof
-		
-		endlocal & set "%3=true"
-		call dk_printVar "%3"
+		if defined "%~3" (endlocal & call dk_set %3 true)
 		(call )
 		goto:eof
 	)
 	
-    if not defined "%~3" goto:eof
-	
-	endlocal & set "%3=false"
-	call dk_printVar "%3"
+    if defined "%~3" (endlocal & call dk_set %3 false)
     (call)
 goto:eof
 
@@ -36,13 +30,13 @@ goto:eof
 
 :: https://stackoverflow.com/a/3069068
 
-	call dk_appendFile "find the needle in the haystack" fileContains_TEST.txt
+	call dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
 	
-	set "string=fileContains_TEST.txt"
-	set "substring=needle"
-	call dk_fileContains "%string%" "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
+	echo.
+	call dk_set substring needle
+	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 	
-	set "string=fileContains_TEST.txt"
-	set "substring=not_in_file"
-	call dk_fileContains "%string%" "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
+	echo.
+	call dk_set substring "not_in_file"
+	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 	

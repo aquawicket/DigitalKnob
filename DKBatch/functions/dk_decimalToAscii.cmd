@@ -13,7 +13,7 @@ call DK
 	call dk_decimalToHex %~1 hex
 	call dk_hexToAscii %hex% ascii
 	
-	endlocal & set %2=%ascii%
+	endlocal & call dk_set %2 %ascii%
 goto:eof
 
 
@@ -21,6 +21,6 @@ goto:eof
 
 :DKTEST ###############################################################################
 
-	set "myDecimal=123"
+	call dk_set myDecimal 123
 	call dk_decimalToAscii "%myDecimal%" myAscii
 	call dk_printVar myAscii
