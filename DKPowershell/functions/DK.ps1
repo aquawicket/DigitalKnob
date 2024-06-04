@@ -53,7 +53,7 @@ function DK() {
 	$global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "$DKHTTP_DKPOWERSHELL_DIR/functions"
 	
 	############# Load dk_load.ps1 ############
-	if (! (Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1" }
 	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1
 	
 	$global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
