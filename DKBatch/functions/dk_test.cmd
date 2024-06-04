@@ -8,10 +8,10 @@ call DK
 :dk_test () {
 	call dk_debugFunc
 	
-	set "_testvar_="
+	call dk_unset _testvar_
 	setlocal EnableDelayedExpansion
 	if defined %1 (
-		set "_testvar_=!!%1!!"
+		call dk_set _testvar_ "!!%1!!"
 		echo isVariable
 		goto:printTestVar
 	)
@@ -19,14 +19,14 @@ call DK
 		::echo !!%1[0]!!
 		::echo !!%1[1]!!
 		::echo !!%1[2]!!
-		set "_testvar_=!!%~1[0]!!"
-		set "_testvar_[0]=!!%~1[0]!!"
+		call dk_set _testvar_ "!!%~1[0]!!"
+		call dk_set _testvar_[0] "!!%~1[0]!!"
 		echo isArray
 		goto:printTestVar
 	)
 	endlocal
 	if not defined _testvar_ (
-		set "_testvar_=%~1"
+		call dk_set _testvar_ "%~1"
 		echo isValue
 	)
 	
@@ -44,13 +44,13 @@ goto:eof
 
 call dk_test "functions can recieve strings as arguments"
 
-set "myVar=Or they can accept expanded variables"
+call dk_set myVar "Or they can accept expanded variables"
 call dk_test "%myVar%"
 
-set "myVarB=Or, they can even take in just the name of the variable"
+call dk_set myVarB "Or, they can even take in just the name of the variable"
 call dk_test myVarB
 
-set "myVarC[0]=Or, we can also take"
-set "myVarC[1]=the name of an"
-set "myVarC[2]=array variable"
+call dk_set myVarC[0] "Or, we can also take"
+call dk_set myVarC[1] "the name of an"
+call dk_set myVarC[2] "array variable"
 call dk_test myVarC

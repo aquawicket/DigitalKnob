@@ -10,10 +10,9 @@ call DK
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	setlocal EnableDelayedExpansion
-		set "_input_=%~1"
-		
-		set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		set "_LCASE=abcdefghijklmnopqrstuvwxyz"
+		call dk_set _input_ %~1
+		call dk_set _UCASE ABCDEFGHIJKLMNOPQRSTUVWXYZ
+		call dk_set _LCASE abcdefghijklmnopqrstuvwxyz
 		
 		for /l %%a in (0,1,25) do (
 			call set "_FROM_=%%_LCASE:~%%a,1%%
@@ -21,8 +20,7 @@ call DK
 			call set "_input_=%%_input_:!_FROM_!=!_TO_!%%
 			call set "_output_=!_input_!"
 		)	
-	endlocal & set "%2=%_output_%"
-	call dk_printVar "%2"
+	endlocal & call dk_set %2 %_output_%
 goto:eof
 
 

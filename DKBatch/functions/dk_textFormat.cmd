@@ -25,8 +25,6 @@ call DK
 	set "col4=%~5%spaces%"
     set col4=%col4:~0,100%
     
-	::echo %col1% %col2% %col3% %col4%
-	set "output=%col1% %col2% %col3% %col4%"
-    endlocal & set "%1=%output%"
-	::call dk_printVar "%1"
+	call dk_set output "%col1% %col2% %col3% %col4%"
+    endlocal & call dk_set %1 %output%
 goto:eof

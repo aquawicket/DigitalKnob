@@ -1,12 +1,12 @@
 @echo off
 call DK
 
-if not defined ENABLE_dk_todo  set "ENABLE_dk_todo=1"
-if not defined TRACE_ON_TODO   set "TRACE_ON_TODO=0"
-if not defined LINE_ON_TODO    set "LINE_ON_TODO=0"
-if not defined PAUSE_ON_TODO   set "PAUSE_ON_TODO=0"
-if not defined HALT_ON_TODO    set "HALT_ON_TODO=0"
-set "TODO_TAG=  TODO: "
+if not defined ENABLE_dk_todo  call dk_set ENABLE_dk_todo 1
+if not defined TRACE_ON_TODO   call dk_set TRACE_ON_TODO 0
+if not defined LINE_ON_TODO    call dk_set LINE_ON_TODO 0
+if not defined PAUSE_ON_TODO   call dk_set PAUSE_ON_TODO 0
+if not defined HALT_ON_TODO    call dk_set HALT_ON_TODO 0
+call dk_set TODO_TAG "  TODO: "
 ::##################################################################################
 ::# dk_todo(<message>)
 ::#
@@ -21,12 +21,12 @@ set "TODO_TAG=  TODO: "
 	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion       
-		set "_message_=%*"
-		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"    &:: if _message_ starts and ends with quotes, remove them
+		call dk_set _message_ %*
+		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!    &:: if _message_ starts and ends with quotes, remove them
 		
-		::echo %yellow%%TODO_TAG%%_message_%%clr%
+		if not defined yellow (call dk_set yellow [33m)
+		if not defined clr (call dk_set clr [0m)
 		call dk_echo %yellow%%TODO_TAG%%_message_%%clr%
-		::set "ENABLE_dk_debugFunc=0"
 		if "%TRACE_ON_TODO%"=="1" call dk_echo %yellow%*** TRACE_ON_TODO ***%clr%  & call dk_stacktrace
 		if "%LINE_ON_TODO%"=="1"  call dk_echo %yellow%*** LINE_ON_TODO ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
 		if "%PAUSE_ON_TODO%"=="1" call dk_echo %yellow%*** PAUSE_ON_TODO ***%clr%  & call dk_pause

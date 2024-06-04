@@ -3,26 +3,28 @@ call DK
 
 
 ::####################################################################
-::# dk_strlen()
+::# dk_strlen(<string_var> <rtn_var>)
 ::#
 ::#
-:dk_strlen  StrVar  [RtnVar]
-	call dk_debugfunc
+:dk_strlen
+	call dk_debugFunc
+	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-  setlocal EnableDelayedExpansion
-  set "s=#!%~1!"
-  set "len=0"
-  for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-    if "!s:~%%N,1!" neq "" (
-      set /a "len+=%%N"
-      set "s=!s:~%%N!"
-    )
-  )
-  endlocal&if "%~2" neq "" (set %~2=%len%) else echo %len%
-exit /b
+	setlocal EnableDelayedExpansion
+	set "s=#!%~1!"
+	set "len=0"
+	for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
+		if "!s:~%%N,1!" neq "" (
+			set /a "len+=%%N"
+			set "s=!s:~%%N!"
+		)
+	)
+	endlocal & call dk_set %2 %len%
+goto:eof
 
 
+:DKTEST ############################## DKTEST ##############################
 
-::Set "_demo=some example string"
-::Call :strlen _demo _length
-::Echo String is %_length% characters long
+	call dk_set _demo "some example string"
+	call dk_strlen _demo _length
+	call dk_info "String is %_length% characters long"
