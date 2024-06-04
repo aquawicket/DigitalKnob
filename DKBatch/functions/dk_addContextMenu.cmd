@@ -23,8 +23,8 @@ call DK
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
 	
 	::### ICON ###
-	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "Icon" "REG_SZ" "\"%_exe_%\""
-	echo REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "imageres.dll,-5324" /f
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
+	echo REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
 	REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
 	
 	::### COMMAND <args> ###

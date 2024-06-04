@@ -23,7 +23,7 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_set GIT_EXE "%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
 	call dk_set GITBASH_EXE "%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
         
-    if exist "%GIT_EXE%" goto:eof
+    if exist "%GIT_EXE%" goto:git_installed
         
     call dk_echo   
     call dk_info "Installing git . . ."
@@ -35,5 +35,17 @@ call ../../../DKBatch/functions/DK.cmd
 	   
     if not exist "%GIT_EXE%" call dk_error "cannot find git"
         
+	:git_installed	
+		
+		
+		
+		
+	::### Add Context Menu ###
+	call %DKIMPORTS_DIR%\git\dk_installGitContextMenu.cmd
+	
+	::### Add File Associations ###
+	call %DKIMPORTS_DIR%\notepadpp\dk_installGitFileAssociations.cmd
+	
+	
     call dk_checkError
 goto:eof
