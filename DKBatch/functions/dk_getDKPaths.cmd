@@ -1,6 +1,7 @@
 @echo off
 call DK
 
+call dk_load dk_makeDirectory
 ::####################################################################
 ::# dk_getDKPaths()
 ::#
@@ -8,8 +9,6 @@ call DK
 :dk_getDKPaths () {
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
-	
-	::call dk_load dk_makeDirectory
 	
 	call dk_set DIGITALKNOB_DIR %HOMEDRIVE%%HOMEPATH%\digitalknob
     call dk_makeDirectory "%DIGITALKNOB_DIR%"
