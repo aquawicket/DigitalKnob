@@ -41,8 +41,8 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
-	echo "%SystemRoot%\System32\reg.exe" DELETE "%~1"
-	"%SystemRoot%\System32\reg.exe" DELETE "%~1"
+	echo "%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
+	"%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
 goto:eof
 
 

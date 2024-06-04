@@ -9,25 +9,35 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
-	:: <_extension_>
+	:: <_extension_>  i.e. ".txt"
 	set "_extension_=%~1"
-
-	:: <_exe_>
+	
+	:: <_exe_>	i.e. "C:\Windows\System32\calc.exe"
 	set "_exe_=%~2"
 	call dk_getBasename "%~2" _exeName_
 	call dk_getFilename "%~2" _exeFilename_
-
+	set "_dkname_=dk_%_exeName_%"
+	
 	:: <arguments>
 	set "_arguments_=%~3"
 	
-	set "_dkname_=dk%_exeName_%"
-
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
+	::
+	:: https://ss64.com/nt/ftype.html
+	
+::	Example
+::		call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
+::   	ftype dk_powershell=%POWERSHELL_EXE% "%%1"
+::  	assoc .ps1=dk_powershell
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%"
+	ftype %_dkname_%=%_exe_% "%%1"
+	assoc %_extension_%=%_dkname_%
+	
+	
 
-	:: set file association using ftype ad assoc
-	call ftype %_dkname_%=%~2 "%%1"
-	call assoc %_extension_%=%_dkname_%
+	
+
 	
 	:: set file association through registry
 	
@@ -40,19 +50,18 @@ call DK
 	::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\UserChoice REG_SZ:ProgId=Applications\program.exe
 	::call dk_registrySetKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\UserChoice" "ProgId" "REG_SZ" "Applications\%_exeFilename_%"
 
-
 	::[HKEY_CLASSES_ROOT\.txt]
 	::@="emeditor.txt"
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\%_extension_%" "" "REG_SZ" "%_dkname_%"
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\%_extension_%" "" "REG_SZ" "%_dkname_%"
 
 	::[HKEY_CLASSES_ROOT\emeditor.txt]
 	::@="Text Document"
-	set "_description_=Text Document"
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%" "" "REG_SZ" "%_description_%"
+	::set "_description_=Text Document"
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%" "" "REG_SZ" "%_description_%"
 
 	::[HKEY_CLASSES_ROOT\emeditor.txt\DefaultIcon]
 	::@="%SystemRoot%\\SysWow64\\imageres.dll,-102"
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\DefaultIcon" "" "REG_SZ" "%SystemRoot%\\SysWow64\\imageres.dll,-102"
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\DefaultIcon" "" "REG_SZ" "%SystemRoot%\\SysWow64\\imageres.dll,-102"
 
 	::[HKEY_CLASSES_ROOT\emeditor.txt\shell]
 
@@ -60,7 +69,7 @@ call DK
 
 	::[HKEY_CLASSES_ROOT\emeditor.txt\shell\open\command]
 	::@="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" \"%1\""
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\shell\open\command" "" "REG_EXPAND_SZ" "\"%_exe_%\" \"%%%%^1\""
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\shell\open\command" "" "REG_EXPAND_SZ" "\"%_exe_%\" \"%%%%^1\""
 	
 	::[HKEY_CLASSES_ROOT\emeditor.txt\shell\print]
 

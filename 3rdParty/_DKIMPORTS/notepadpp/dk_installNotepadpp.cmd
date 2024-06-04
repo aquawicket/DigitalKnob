@@ -40,57 +40,52 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP%\config.xml OVERWRITE
 
 	:::::: associateFiles.cmd ###
-	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
-	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
-	::
-	:: https://ss64.com/nt/ftype.html
 	:associateFiles
 	
-	ftype dk_txtfile=%NOTEPADPP_EXE% "%%1"
-
-	assoc .1=dk_txtfile
-	assoc .2=dk_txtfile
-	assoc .3=dk_txtfile
-	assoc .=dk_txtfile
-	assoc .androidproj=dk_txtfile
-	assoc .backup=dk_txtfile
-	assoc .bak=dk_txtfile
-	assoc .c=dk_txtfile
-	assoc .cmake=dk_txtfile
-	assoc .cpp=dk_txtfile
-	assoc .css=dk_txtfile
-	assoc .data=dk_txtfile
-	assoc .gitattributes=dk_txtfile
-	assoc .gitconfig=dk_txtfile
-	assoc .glsl=dk_txtfile
-	assoc .gradle=dk_txtfile
-	assoc .h=dk_txtfile
-	assoc .htm=dk_txtfile
-	assoc .html=dk_txtfile
-	assoc .java=dk_txtfile
-	assoc .js=dk_txtfile
-	assoc .json=dk_txtfile
-	assoc .make=dk_txtfile
-	assoc .marks=dk_txtfile
-	assoc .md=dk_txtfile
-	assoc .mk=dk_txtfile
-	assoc .php=dk_txtfile
-	assoc .plist=dk_txtfile
-	assoc .pro=dk_txtfile
-	assoc .properties=dk_txtfile
-	assoc .ps1=dk_txtfile
-	assoc .rc=dk_txtfile
-	assoc .reference=dk_txtfile
-	assoc .rsp=dk_txtfile
-	assoc .sed=dk_txtfile
-	assoc .sh=dk_txtfile
-	assoc .storyboard=dk_txtfile
-	assoc .targets=dk_txtfile
-	assoc .traineddata=dk_txtfile
-	assoc .ts=dk_txtfile
-	assoc .ts=dk_txtfile
-	assoc .txt=dk_txtfile
-	assoc .xml=dk_txtfile
+	call dk_setFileAssoc .1 %NOTEPADPP_EXE%
+	call dk_setFileAssoc .2 %NOTEPADPP_EXE%
+	call dk_setFileAssoc .3 %NOTEPADPP_EXE%
+	call dk_setFileAssoc . %NOTEPADPP_EXE%
+	call dk_setFileAssoc .androidproj %NOTEPADPP_EXE%
+	call dk_setFileAssoc .backup %NOTEPADPP_EXE%
+	call dk_setFileAssoc .bak %NOTEPADPP_EXE%
+	call dk_setFileAssoc .c %NOTEPADPP_EXE%
+	call dk_setFileAssoc .cmake %NOTEPADPP_EXE%
+	call dk_setFileAssoc .cpp %NOTEPADPP_EXE%
+	call dk_setFileAssoc .css %NOTEPADPP_EXE%
+	call dk_setFileAssoc .data %NOTEPADPP_EXE%
+	call dk_setFileAssoc .gitattributes %NOTEPADPP_EXE%
+	call dk_setFileAssoc .gitconfig %NOTEPADPP_EXE%
+	call dk_setFileAssoc .glsl %NOTEPADPP_EXE%
+	call dk_setFileAssoc .gradle %NOTEPADPP_EXE%
+	call dk_setFileAssoc .h %NOTEPADPP_EXE%
+	call dk_setFileAssoc .htm %NOTEPADPP_EXE%
+	call dk_setFileAssoc .html %NOTEPADPP_EXE%
+	call dk_setFileAssoc .java %NOTEPADPP_EXE%
+	call dk_setFileAssoc .js %NOTEPADPP_EXE%
+	call dk_setFileAssoc .json %NOTEPADPP_EXE%
+	call dk_setFileAssoc .make %NOTEPADPP_EXE%
+	call dk_setFileAssoc .marks %NOTEPADPP_EXE%
+	call dk_setFileAssoc .md %NOTEPADPP_EXE%
+	call dk_setFileAssoc .mk %NOTEPADPP_EXE%
+	call dk_setFileAssoc .php %NOTEPADPP_EXE%
+	call dk_setFileAssoc .plist %NOTEPADPP_EXE%
+	call dk_setFileAssoc .pro %NOTEPADPP_EXE%
+	call dk_setFileAssoc .properties %NOTEPADPP_EXE%
+	call dk_setFileAssoc .ps1 %NOTEPADPP_EXE%
+	call dk_setFileAssoc .rc %NOTEPADPP_EXE%
+	call dk_setFileAssoc .reference %NOTEPADPP_EXE%
+	call dk_setFileAssoc .rsp %NOTEPADPP_EXE%
+	call dk_setFileAssoc .sed %NOTEPADPP_EXE%
+	call dk_setFileAssoc .sh %NOTEPADPP_EXE%
+	call dk_setFileAssoc .storyboard %NOTEPADPP_EXE%
+	call dk_setFileAssoc .targets %NOTEPADPP_EXE%
+	call dk_setFileAssoc .traineddata %NOTEPADPP_EXE%
+	call dk_setFileAssoc .ts %NOTEPADPP_EXE%
+	call dk_setFileAssoc .ts %NOTEPADPP_EXE%
+	call dk_setFileAssoc .txt %NOTEPADPP_EXE%
+	call dk_setFileAssoc .xml %NOTEPADPP_EXE%
+	
 	
 	:::::: Add Context Menu
 	call dk_info "Adding ^'Edit with Notepad++^' context menu to Windows..." 
