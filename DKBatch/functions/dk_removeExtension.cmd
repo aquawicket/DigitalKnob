@@ -2,6 +2,7 @@
 call DK
 
 
+call dk_load dk_getExtension
 ::##################################################################################
 ::# dk_removeExtension(<filepath> <rtn_var>)
 ::#
