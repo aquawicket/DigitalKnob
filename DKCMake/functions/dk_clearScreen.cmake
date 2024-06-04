@@ -27,3 +27,14 @@ function(dk_clearScreen)
 	endif()
 	
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

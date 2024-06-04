@@ -15,3 +15,14 @@ function(dk_call func) #parameters
 	dk_load(${func})
 	dk_eval("${func}($ARGN)")
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

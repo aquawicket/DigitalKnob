@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ##################################################################################
@@ -55,13 +55,13 @@ dk_test() {
 }
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
-	
-	
-	
-	
-	
+		
 	### (input:string output:return_var) ###
 	dk_test "1 input:string" output
 	echo "output:return_variable = ${output}"

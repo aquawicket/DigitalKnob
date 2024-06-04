@@ -19,3 +19,15 @@ function(dk_buildLog entry)
 	
 	file(APPEND ${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${msg}\n")
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

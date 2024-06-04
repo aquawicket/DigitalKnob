@@ -2,11 +2,9 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_bashEnv(args)
+# dk_bashEnv(<args>)
 #
-#	TODO
-#
-#	@args	- TODO
+#	<args>	- TODO
 #
 function(dk_bashEnv)
 	dk_debugFunc(${ARGV})
@@ -89,3 +87,15 @@ function(dk_bashEnv)
 
 endfunction()
 dk_createOsMacros("dk_bashEnv")
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

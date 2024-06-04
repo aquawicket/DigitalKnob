@@ -2,10 +2,10 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_applyPatch(directory patch_file)
+# dk_applyPatch(<directory> <patch_file>)
 #
-#	@directory		- The directory to patch from
-#   @patch_file		- Full path to the patch file
+#	<directory>		- The directory to patch from
+#   <patch_file>	- Full path to the patch file
 #
 #	https://stackoverflow.com/a/66755317/688352
 #
@@ -48,4 +48,16 @@ function(dk_applyPatch directory patch_file)
 		dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
 	dk_info(output)
+endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
 endfunction()

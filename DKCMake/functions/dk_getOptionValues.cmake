@@ -1,3 +1,4 @@
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 # FIXME: This is not fully functional. It take code from dk_getOptionValue() 

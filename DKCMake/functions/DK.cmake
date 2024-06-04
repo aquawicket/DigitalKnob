@@ -43,13 +43,11 @@ dk_load(${DKSCRIPT_PATH})
 ###### DKTEST MODE ######
 #if("${ENABLE_DKTEST}" EQUAL "1")
 if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
-	set(ENABLE_dk_debugFunc 1)
 	message("\n###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######\n")
 			
 	DKTEST()
 	
 	message("\n########################## END TEST ################################\n")
-	#execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 100)
 endif()
 #endif()
 

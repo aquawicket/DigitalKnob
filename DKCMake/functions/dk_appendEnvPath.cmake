@@ -2,9 +2,9 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_appendEnvPath(inputPath)
+# dk_appendEnvPath(<inputPath>)
 #
-#	@path	- The CMake / style full path to append the the Environment Path variable
+#	<inputPath>	- The CMake / style full path to append the the Environment Path variable
 #
 function(dk_appendEnvPath inputPath)
 	dk_debugFunc(${ARGV})
@@ -41,4 +41,14 @@ function(dk_appendEnvPath inputPath)
 		dk_info("appended \${nativePath} to the PATH environment list\n")
 	endif()
 	dk_printVar(ENV{PATH})
+endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
 endfunction()

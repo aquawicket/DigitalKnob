@@ -53,3 +53,14 @@ function(dk_bin2h)
         file(WRITE ${DK_BIN2H_HEADER_FILE} "${declarations}")
     endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

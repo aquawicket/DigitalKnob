@@ -2,10 +2,10 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_append(variable value)
+# dk_append(<variable> <value>)
 #
-#	@variable	- The name of a variable to declaire
-#	@value		- The value to add to the variable.
+#	<variable>	- The name of a variable to declaire
+#	<value>		- The value to add to the variable.
 #
 function(dk_append variable) #value
 	dk_debugFunc(${ARGV})
@@ -22,3 +22,14 @@ function(dk_append variable) #value
 	
 endfunction()
 dk_createOsMacros("dk_append")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

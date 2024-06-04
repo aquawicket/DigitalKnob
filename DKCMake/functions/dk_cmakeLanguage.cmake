@@ -19,3 +19,15 @@ function(dk_cmakeLanguage code)
 		file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
 	endif()
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

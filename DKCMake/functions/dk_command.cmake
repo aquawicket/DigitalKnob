@@ -66,3 +66,15 @@ function(dk_command)
 	endif()
 endfunction()
 dk_createOsMacros("dk_command")
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

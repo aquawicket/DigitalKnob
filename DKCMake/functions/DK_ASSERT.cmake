@@ -24,3 +24,14 @@ function(DK_ASSERT expression)
 		dk_exit() #FIXME:  is this needed?
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

@@ -2,12 +2,10 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_addTarget(plugin target)
+# dk_addTarget(<plugin> <target>)
 #
-#	TODO
-#
-#	@plugin		- TODO
-#	@target		- TODO
+#	<plugin>	- TODO
+#	<target>	- TODO
 #
 function(dk_addTarget plugin target)
 	dk_debugFunc(${ARGV})
@@ -24,4 +22,12 @@ function(dk_addTarget plugin target)
 		dk_set(${plugin}_${target} ON)
 		#dk_set(${plugin}::${target} ON) # TESTME
 	endif()
+endfunction()
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
 endfunction()

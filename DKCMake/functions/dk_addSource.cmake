@@ -21,7 +21,7 @@ endfunction()
 
 
 
-function(DKTEST) #############################################################
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
 	#dk_addSource()
 

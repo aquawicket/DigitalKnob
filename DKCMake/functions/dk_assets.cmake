@@ -61,3 +61,15 @@ function(dk_assets plugin)
 	
 	file(COPY ${plugin_path} DESTINATION ${DK_PROJECT_DIR}/assets ${ASSETS})
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	#dk_todo()
+
+endfunction()

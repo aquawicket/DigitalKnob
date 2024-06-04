@@ -1,3 +1,4 @@
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 cmake_policy(SET CMP0057 NEW)
 
