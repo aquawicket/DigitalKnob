@@ -9,7 +9,7 @@ goto:eof
 ::#
 :dk_install_Microsoft_Ui_Xaml () {
 	call dk_debugFunc
-	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	call dk_validate DKTOOLS_DIR dk_getDKPaths
 	call dk_validate NUGET_EXE "../nuget/dk_installNuget.cmd"

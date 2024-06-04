@@ -9,7 +9,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 ::### call any arguments passed in ###
 echo %0(%*)
-if "%*" NEQ "" call %* 
+if "%*" neq "" call %* 
     
 ::# https://stackoverflow.com/a/4095133/688352
 
@@ -168,7 +168,7 @@ goto:eof
     call:dk_checkGitRemote
 
     echo.
-    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
+    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
@@ -213,7 +213,7 @@ goto:eof
     call:dk_readCache
 
     echo.
-    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
+    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) HelloWorld
     echo  2) DKCore
     echo  3) DKJavascript
@@ -556,7 +556,7 @@ goto:eof
 :dk_buildDebug () {
 	call:dk_verbose "dk_buildDebug(%*)"
 	
-    if "%MSYSTEM%" NEQ "" (
+    if "%MSYSTEM%" neq "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
         goto:eof
     )
@@ -580,7 +580,7 @@ goto:eof
 :dk_buildRelease () {
 	call:dk_verbose "dk_buildRelease(%*)"
 	
-    if "%MSYSTEM%" NEQ "" (
+    if "%MSYSTEM%" neq "" (
         %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --config Debug --verbose"
         goto:eof
     )
@@ -789,7 +789,7 @@ goto:eof
     echo Resetting Apps . . .
 
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
 
     cd %DKAPPS_DIR%
     "%GIT_EXE%" clean -f -d
@@ -806,7 +806,7 @@ goto:eof
     echo Resetting DKPlugins . . .
 
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     cd %DKPLUGINS_DIR%
     "%GIT_EXE%" clean -f -d
@@ -823,7 +823,7 @@ goto:eof
     echo Resetting 3rdParty Libraries . . .
         
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     cd %DK3RDPARTY_DIR%
     "%GIT_EXE%" clean -f -d
@@ -837,7 +837,7 @@ goto:eof
 :dk_resetAll () {
 	call:dk_verbose "dk_resetAll(%*)"
 	
-    if "%1" EQU "wipe" goto:wipe
+    if "%1" equ "wipe" goto:wipe
         
     cls
     echo.
@@ -850,7 +850,7 @@ goto:eof
     echo. 
         
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
@@ -906,7 +906,7 @@ goto:eof
 :dk_removeAll () {
 	call:dk_verbose "dk_removeAll(%*)"
 	
-    if "%1" EQU "wipe" goto:wipe
+    if "%1" equ "wipe" goto:wipe
         
     cls
     echo.
@@ -917,7 +917,7 @@ goto:eof
     echo. 
         
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
@@ -980,7 +980,7 @@ goto:eof
 :dk_checkError () {
 	call:dk_verbose "dk_checkError(%*)"
 	
-    if %ERRORLEVEL% EQU 0 goto:eof
+    if %ERRORLEVEL% equ 0 goto:eof
     call:dk_error "ERRORLEVEL = %ERRORLEVEL%"
     pause
     exit
@@ -1344,11 +1344,11 @@ goto:eof
 :dk_gitUpdate () {
 	call:dk_verbose "dk_gitUpdate(%*)"
 	
-    if "%1" NEQ "NO_CONFIRM" (
+    if "%1" neq "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
         set /P CONFIRM="Are you sure? [Y] " 
     )
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     if NOT exist "%DKBRANCH_DIR%\.git" (
         "%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
@@ -1416,7 +1416,7 @@ goto:eof
     echo.
     echo git commit "%message%"
     set /P CONFIRM="Are you sure? [Y] " 
-    if /I "%CONFIRM%" NEQ "Y" goto:eof
+    if /I "%CONFIRM%" neq "Y" goto:eof
         
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
@@ -1527,7 +1527,7 @@ goto:eof
 	
     set "command=%1"
     cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
-    if %ERRORLEVEL% EQU 0 echo "%command% found" & goto:eof
+    if %ERRORLEVEL% equ 0 echo "%command% found" & goto:eof
     echo "%command% NOT found"
 goto:eof
 
@@ -1634,8 +1634,8 @@ goto:eof
     :c_identifier_loop
         if not defined _input goto c_identifier_endLoop    
         for /F "delims=*~ eol=*" %%C in ("!_input:~0,1!") do (
-                if "!map:%%C=!" NEQ "!map!" set "_output=!_output!%%C"
-                if "!map:%%C=!" EQU "!map!" set "_output=!_output!_"
+                if "!map:%%C=!" neq "!map!" set "_output=!_output!%%C"
+                if "!map:%%C=!" equ "!map!" set "_output=!_output!_"
         )
         set "_input=!_input:~1!"
     goto c_identifier_loop
@@ -1676,7 +1676,7 @@ goto:eof
     set "var=%1"
     call set "value=%%%var%%%"
 	if "%value%" == "" echo %var%
-    if "%value%" NEQ "" echo %var%: %value%
+    if "%value%" neq "" echo %var%: %value%
 	
     ::echo %1 = !!!INVALID!!!
 goto:eof
@@ -1741,7 +1741,7 @@ goto:eof
 	
 	::### print variable ###
 	call set "value=%%%msg%%%"
-    if "%value%" NEQ "" set "msg=%1 = '%value%'"
+    if "%value%" neq "" set "msg=%1 = '%value%'"
 	if "%value%" == "" set "msg=%1 = %red%NOT DEFINED%clr%"
 	
 	

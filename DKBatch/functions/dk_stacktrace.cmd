@@ -23,7 +23,7 @@ call DK
 		set /a dk_stacktrace_count-=1
 		
 		set /a dk_stacktrace_marker=%dk_stacktrace_count%
-		::if "%dk_stacktrace_marker%" EQU "0" (
+		::if "%dk_stacktrace_marker%" equ "0" (
 		::	set /a dk_stacktrace_marker=%DKSTACK_length%
 		::) else (
 		::	set /a dk_stacktrace_marker-=1

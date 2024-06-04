@@ -46,7 +46,7 @@ for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
         set "s=!output!#"
         set "len=0"
         for %%P in (16 8 4 2 1) do (
-            if "!s:~%%P,1!" NEQ "" (
+            if "!s:~%%P,1!" neq "" (
                 set /a "len+=%%P"
                 set "s=!s:~%%P!"
             )

@@ -19,7 +19,7 @@ set compiler=CMAKE
 set GRADLE=1
 
 
-if [%1] NEQ [] ( set "compiler=%1" )
+if [%1] neq [] ( set "compiler=%1" )
 if "%2"=="GRADLE" ( set GRADLE=1 )
 
 echo #############  BUILD SETTINGS ###############
@@ -61,7 +61,7 @@ echo 2. Install 3rd party tools
 if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
 
 :: JDK
-if %GRADLE% EQU 0 ( 
+if %GRADLE% equ 0 ( 
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-8u41-b04-windows-i586-14_jan_2020"
 ) else (
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
@@ -128,7 +128,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% EQU 0 ( 
+if %ERRORLEVEL% equ 0 ( 
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	"%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"
@@ -138,7 +138,7 @@ if %ERRORLEVEL% EQU 0 (
 
 
 echo 16. Install the apk package to android device
-if %GRADLE% EQU 1 (
+if %GRADLE% equ 1 (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 ) else (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_PATH%/build/%APK_NAME%.apk

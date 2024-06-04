@@ -1,7 +1,8 @@
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
-set "ENABLE_dk_debugFunc=0"
+set "ENABLE_dk_debugFunc=1"
+set "ENABLE_dk_printVar=1"
 set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()
@@ -85,9 +86,6 @@ set "KEEP_CONSOLE_OPEN=0"
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
-	
-	set "ENABLE_dk_debugFunc=1"
-	set "ENABLE_dk_printVar=1"
 	echo.
     echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
 	echo.

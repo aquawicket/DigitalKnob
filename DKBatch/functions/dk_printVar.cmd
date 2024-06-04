@@ -1,23 +1,18 @@
 @echo off
 call DK
 
-if not defined ESC set "ESC="
-if not defined red call set "red=%ESC%[31m"
+if not defined ESC   call set "ESC="
+if not defined red   call set "red=%ESC%[31m"
 if not defined LBLUE call set "LBLUE=%ESC%[94m"
-if not defined blue call set "blue=%ESC%[34m"
-if not defined clr call set "clr=%ESC%[0m"
+if not defined blue  call set "blue=%ESC%[34m"
+if not defined clr   call set "clr=%ESC%[0m"
+if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=0"
 ::################################################################################
 ::# dk_printVar(<variable>)
 ::#
 ::#
 :dk_printVar () {
 	call dk_debugFunc
-    if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
-
-    set "OLD_ENABLE_dk_debugFunc=%ENABLE_dk_debugFunc%"
-    set "ENABLE_dk_debugFunc=0"
-    call dk_debugFunc
-    set "ENABLE_dk_debugFunc=%OLD_ENABLE_dk_debugFunc%"
     if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
