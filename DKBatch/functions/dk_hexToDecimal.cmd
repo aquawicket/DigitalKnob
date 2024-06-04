@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_hexToDecimal(<hex_string>)
+::# dk_hexToDecimal(<hex_string> <rtn_var>)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -14,8 +14,7 @@ call DK
 	set "decimal="
 	set /A decimal=0x%hex:~-2%
 	
-	::echo     dk_hexToDecimal %hex% = %decimal%
-	endlocal & set %2=%decimal%
+	endlocal & call dk_set %2 "%decimal%"
 goto:eof
 
 

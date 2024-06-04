@@ -15,9 +15,12 @@ call DK
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~pZ"
-	endlocal & set %2=%OUT:~0,-1%
+	endlocal & call dk_set %2 "%OUT:~0,-1%"
 goto:eof
 
 
 
 :DKTEST ########################################################################
+
+	call dk_getPath DK.cmd path
+	echo path = %path%

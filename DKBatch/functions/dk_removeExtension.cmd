@@ -16,14 +16,13 @@ call DK
 	call dk_replaceAll "%_filepath_%" "%_extension_%" "" _filepath_
 	
 	:: [ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
-	endlocal & set "%2=%_filepath_%"
-	call dk_printVar "%2"
+	endlocal & call dk_set %2 "%_filepath_%"
 goto:eof
 
 
 
 :DKTEST ###############################################################################
 
-	set "filepath=/test/test2/xfile.extension"
+	call dk_set filepath "/test/test2/xfile.extension"
 	call dk_removeExtension "%filepath%" filepath
 	echo "filepath = %filepath%"

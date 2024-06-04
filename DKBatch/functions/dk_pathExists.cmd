@@ -6,23 +6,17 @@ call DK
 ::#
 :dk_pathExists () {
 	call dk_debugFunc
-	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	::set "dk_pathExists=NOT ERRORLEVEL 1"
 	
-	::set "_path=%~1"
+	::call dk_set _path "%~1"
 	if exist "%~1" (
-		if not defined "%~2" goto:eof
-		
-		endlocal & set "%2=true"
-		call dk_printVar "%2"
+		if defined "%~2" (endlocal & call dk_set %2 true)
         (call )
 		goto:eof
 	)
 	
-    if not defined "%~2" goto:eof
-	
-	endlocal & set "%2=false"
-	call dk_printVar "%2"
+    if defined "%~2" (endlocal & call dk_set %2 false)
 	(call)
 goto:eof
 
@@ -35,11 +29,11 @@ goto:eof
 
 	::###### Using if return value
 	echo.
-	
 	set "_path_=C:\Windows"
 	call dk_pathExists "%_path_%" result
 	if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
 	
+	echo.
 	set "_path_=C:\NonExistent"
 	call dk_pathExists "%_path_%" result
 	if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
@@ -48,11 +42,11 @@ goto:eof
 	
 	::###### Using if ERRORLEVEL
 	echo.
-	
 	set "_path_=C:\Windows"
 	call dk_pathExists "%_path_%"
 	if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
 	
+	echo.
 	set "_path_=C:\NonExistent"
 	call dk_pathExists "%_path_%"
 	if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
@@ -61,10 +55,10 @@ goto:eof
 	
 	::###### Using && and || conditionals
 	echo.
-	
 	set "_path_=C:\Windows"	
 	call dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
 	
+	echo.
 	set "_path_=C:\NonExistent"	
 	call dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
 	::FIXME: ERRORLEVEL is still 1 
@@ -72,11 +66,11 @@ goto:eof
 	
 	::###### Experimental
 ::	echo.
-::	
 ::	set "_path_=C:\Windows"
 ::	call dk_pathExists "%_path_%"
 ::	if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
-::	
+::
+::  echo.
 ::	set "_path_=C:\NonExistent"
 ::	call dk_pathExists "%_path_%"
 ::	if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)

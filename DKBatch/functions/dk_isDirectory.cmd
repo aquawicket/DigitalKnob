@@ -7,21 +7,15 @@ call DK
 ::#
 :dk_isDirectory () {
 	call dk_debugFunc
-	::if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	if exist %~1\* (
-		if not defined "%~2" goto:eof
-		
-		endlocal & set "%2=true"
-		call dk_printVar "%2"
+		if defined "%~2" (endlocal & call dk_set %2 true)
         (call )
 		goto:eof
 	)
 	
-    if not defined "%~2" goto:eof
-	
-	endlocal & set "%2=false"
-	call dk_printVar "%2"
+    if defined "%~2" (endlocal & call dk_set %2 false)
 	(call)
 goto:eof
 
@@ -29,4 +23,6 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	call dk_isDirectory
+	call dk_isDirectory "C:\Windows" && call dk_info "is a directory" || call dk_info "is NOT a directory"
+	
+	call dk_isDirectory "C:\NotADir" && call dk_info "is a directory" || call dk_info "is NOT a directory"

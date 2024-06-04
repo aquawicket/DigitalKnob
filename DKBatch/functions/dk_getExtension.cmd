@@ -15,7 +15,7 @@ call DK
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "OUT=%%~xZ"
-	endlocal & set %2=%OUT%
+	endlocal & call dk_set %2 "%OUT%"
 goto:eof
 
 
@@ -23,6 +23,6 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	set "filepath=/test/test2/xfile.extension"
+	call dk_set filepath "/test/test2/xfile.extension"
 	call dk_getExtension "%filepath%" extension
 	echo extension = %extension%

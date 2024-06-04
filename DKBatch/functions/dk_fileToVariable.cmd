@@ -12,17 +12,15 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-    ::set "file=%~1"
+    ::call dk_set file %~1
 	set "\n=\n"
 	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"
-	endlocal & set "%2=%_fileVar_%"
-	call dk_printVar "%2"
+	endlocal & call dk_set %2 "%_fileVar_%"
 goto:eof
 
 
 
 :DKTEST ########################################################################
 	
-	::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	call dk_fileToVariable "DK.cmd" myVar
 	echo "%myVar%"

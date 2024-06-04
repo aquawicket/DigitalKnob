@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_hexToAscii(<hex_string>)
+::# dk_hexToAscii(<hex_string> <rtn_var>)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#
@@ -20,7 +20,5 @@ call DK
 	set /p ascii=<ascii.tmp
 	( del hex.tmp & del ascii.tmp )>nul
 	
-	::echo dk_hexToAscii %hex% = %ascii%
-	endlocal & set "%2=%ascii%"
-	call dk_printVar "%2"
+	endlocal & call dk_set %2 "%ascii%"
 goto:eof
