@@ -7,7 +7,10 @@ set "DEBUG_MODE=0"
 ::#
 ::#
 :DK () {
-	call dk_debugFunc
+	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"
+	::if not exist "%DKBATCH_DIR%\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_debugFunc.cmd', '%DKBATCH_DIR%\functions\dk_debugFunc.cmd')"
+	::call dk_load dk_debugFunc
+	::call dk_debugFunc
 	
 	
 	echo Loading DigitalKnob . . .
@@ -20,7 +23,6 @@ set "DEBUG_MODE=0"
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
 	
 	::############ LOAD FUNCTION FILES ############
-	set "DKHTTP=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/functions"
 	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
 	call dk_load dk_debug
 	call dk_load dk_printVar
