@@ -1,4 +1,4 @@
-if defined DKINIT ( goto:eof ) else (set DKINIT=1)
+if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
 set "DEBUG_MODE=0"
@@ -25,7 +25,7 @@ set "DEBUG_MODE=0"
 	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 	if not exist "%DKBATCH_DIR%\functions" (echo "DKBATCH_DIR does not exist" & goto:eof)
 	set "PATH=%DKBATCH_DIR%\functions;%PATH%"
-	
+
 	::############ LOAD FUNCTION FILES ############
 	if not exist "%DKBATCH_DIR%\functions\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_DIR%\functions\dk_load.cmd')"
 	call dk_load dk_debug
@@ -36,8 +36,8 @@ set "DEBUG_MODE=0"
 	call dk_load dk_getDirname
 	call dk_load dk_getFilename
 	call dk_load dk_escapeSequences
-	
-	
+
+
 	call dk_getCaller 1
 	:dk_getCaller_return1
 	::call dk_printVar caller[0]
@@ -47,7 +47,7 @@ set "DEBUG_MODE=0"
 	::call dk_printVar caller[0].filename
 	::call dk_printVar caller[0].func
 	::call dk_printVar caller[0].args
-	
+
 	::call dk_printVar caller[1]
 	::call dk_printVar caller[1].fullpath
 	::call dk_printVar caller[1].directory

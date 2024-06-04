@@ -10,23 +10,17 @@ call DK
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
 	call dk_validate DKBRANCH_DIR dk_validateBranch
-    if not exist "%DKBRANCH_DIR%\.git" goto:eof
+    if not exist "%DKBRANCH_DIR%\.git" ( call dk_error "%DKBRANCH_DIR%\.git does not exist" )
 
 	call dk_validate GIT_EXE dk_validateGit
 	
 	cd "%DKBRANCH_DIR%"
-	::echo current directory is %CD%
 	
     :: git remote update >nul 2>&1
     %GIT_EXE% remote update
 	
-	:: branch= $(git rev-parse --abbrev-ref HEAD)
     call dk_commandToVariable "%GIT_EXE% rev-parse --abbrev-ref HEAD" branch
-
-    :: ahead= $(git rev-list --count origin/$branch..$branch)
     call dk_commandToVariable "%GIT_EXE% rev-list --count origin/%branch%..%branch%" ahead
-
-    :: behind= $(git rev-list --count $branch..origin/$branch)
     call dk_commandToVariable "%GIT_EXE% rev-list --count %branch%..origin/%branch%" behind
 
     echo %ahead% commits ahead, %behind% commits behind

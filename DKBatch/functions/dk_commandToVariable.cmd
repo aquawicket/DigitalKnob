@@ -10,18 +10,14 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	
 	::call dk_set _command_ %__ARGS__%
 	::set /a "_lastArgN_=%__ARGC__%-1"
 	::call set "_returnVar_=%%__ARGV__[%_lastArgN_%]%%"
 	::call set "_command_=%%_command_:%_returnVar_%=%%"
 
 	call dk_set _command_ "%~1"
-	::set "_command_=%_command_:"=_QUOTE_%"
 	call dk_set _returnVar_ "%~2"
-	::call dk_printVar _command_
-	::call dk_printVar _returnVar_
-	
+
 	::set "_command_=%_command_:_QUOTE_="%"
 	for /f "usebackq delims=|" %%f in (`%_command_%`) do (
         rem echo %%f

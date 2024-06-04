@@ -140,7 +140,7 @@ call DK
 	call dk_set blink      "%ESC%[5m"
 	call dk_set inverse    "%ESC%[7m"
 	call dk_set invisible  "%ESC%[8m"
-		
+
 	:: Foreground Colors
 	call dk_set black      "%ESC%[30m"
 	call dk_set red        "%ESC%[31m"

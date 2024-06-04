@@ -62,3 +62,8 @@ call DK
 	call dk_info "^<ESC^>[7m and nested ^<ESC^>[31m [7mbefore [31mnested%clr%"
 	call dk_info "^<ESC^>[31m and nested ^<ESC^>[7m [31mbefore [7mnested%clr%"
 goto:eof
+
+
+:DKTEST ########################################################################
+	
+	call dk_printColors

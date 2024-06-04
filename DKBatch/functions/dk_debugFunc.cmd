@@ -76,8 +76,10 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
 	
 	
-	set "cyan=[36m"
-	set "clr=[0m"
+	set "cyan=[36m" 		&::call dk_set cyan [36m
+	
+	set "clr=[0m"			&::call dk_set clr [0m
+	
 	echo %__FILE__%: %cyan%%__FUNCTION__%(%__ARGS__%)%clr%
 	
 goto:eof
