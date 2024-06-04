@@ -27,7 +27,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
     call dk_set CMAKE_EXE "%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
         
-    if exist "%CMAKE_EXE%" goto:eof
+    if exist "%CMAKE_EXE%" goto:cmake_installed
        
     call dk_info " "
     call dk_info "Installing CMake . . ."
@@ -39,5 +39,12 @@ call "../../../DKBatch/functions/DK.cmd"
     
     if NOT exist "%CMAKE_EXE%"  call dk_error "cannot find cmake"
         
+	:cmake_installed	
+	
+	
+	::### Add File Associations ###
+	call %DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd
+	
+	
     call dk_checkError
 goto:eof
