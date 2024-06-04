@@ -38,17 +38,9 @@ setlocal enableDelayedExpansion
    
 	call dk_load dk_validateGit
     call dk_validateGit
-	call dk_printVar GIT_EXE
 	
 	call dk_load dk_validateBranch
     call dk_validateBranch
-
-    call dk_printVar DKBRANCH_DIR
-    call dk_printVar DKAPPS_DIR
-    call dk_printVar DKCMAKE_DIR
-    call dk_printVar DK3RDPARTY_DIR
-    call dk_printVar DKIMPORTS_DIR
-    call dk_printVar DKPLUGINS_DIR
     
 	call dk_getDirname "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	

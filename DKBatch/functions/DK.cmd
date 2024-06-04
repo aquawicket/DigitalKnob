@@ -1,6 +1,7 @@
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
+set "ENABLE_dk_debugFunc=0"
 set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()
