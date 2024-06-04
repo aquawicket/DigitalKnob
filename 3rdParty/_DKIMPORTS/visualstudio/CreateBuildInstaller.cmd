@@ -67,19 +67,19 @@ if NOT "%errorlevel%" == "0" goto Error
 
 ::****************************************
 :End
-echo errorlevel = %errorlevel%
-echo end
-pause
-exit /b
+	echo errorlevel = %errorlevel%
+	echo end
+	pause
+goto:eof
 ::****************************************
 
 ::****************************************
 :Error
-cls & Color 0c
-echo(
-echo Failed with error code: %errorlevel%
-Pause>nul
-exit /b
+	cls & Color 0c
+	echo(
+	echo Failed with error code: %errorlevel%
+	Pause>nul
+goto:eof
 ::**************************************** 
  
 %DKEND% 

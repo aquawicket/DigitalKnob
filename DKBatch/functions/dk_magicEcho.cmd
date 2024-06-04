@@ -1,42 +1,41 @@
 @echo off
+call :dk_magicEcho.init
+call DK
 
-call :magicEcho.init
-%magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
-echo Or not?
-exit /b
 
-:magicEcho.init
-set "magicEcho=call :gn & REM # #"
-exit /b
 
-:magicEcho
-setlocal EnableDelayedExpansion
-set /a skip=ln-2
-setlocal DisableDelayedExpansion
-FOR /F "usebackq skip=%skip% delims=" %%L in (`findstr /n "^" "%~f0"`) do (
-    set "line=%%L"
+:dk_magicEcho.init
+    set "dk_magicEcho=call :gn & REM # #"
+goto:eof
+
+:dk_magicEcho
     setlocal EnableDelayedExpansion
-    set "line=!line:*:=!"
-    set "line=!line:*echo%% =!"
-    if defined line echo(!line!
-    endlocal
-    exit /b
-)
-exit /b
+    set /a skip=ln-2
+    setlocal DisableDelayedExpansion
+    FOR /F "usebackq skip=%skip% delims=" %%L in (`findstr /n "^" "%~f0"`) do (
+        set "line=%%L"
+        setlocal EnableDelayedExpansion
+        set "line=!line:*:=!"
+        set "line=!line:*echo%% =!"
+        if defined line echo(!line!
+        endlocal
+        goto:eof
+    )
+goto:eof
 
 :gn
-setlocal EnableDelayedExpansion
-for %%F in ("%~f0") do set /a size=%%~zF
-set "empty=."
-for /L %%n in (1 1 13) DO set "empty=!empty:~0,4000!!empty:~0,4000!"
+    setlocal EnableDelayedExpansion
+    for %%F in ("%~f0") do set /a size=%%~zF
+    set "empty=."
+    for /L %%n in (1 1 13) DO set "empty=!empty:~0,4000!!empty:~0,4000!"
 
-set LF=^
+    set LF=^
 
 
-REM ***
-set /a blockSizeHalf=4000, blockSize2=blockSizeHalf*2+2
-copy "%~f0" "%~f0.tmp" > NUL && (
-set /a charCount=0, lo=0, sl=0, preChars=0, lnr=0, cnt=0
+    REM ***
+    set /a blockSizeHalf=4000, blockSize2=blockSizeHalf*2+2
+    copy "%~f0" "%~f0.tmp" > NUL && (
+    set /a charCount=0, lo=0, sl=0, preChars=0, lnr=0, cnt=0
 for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
     set "offset=%%O"
     set /a lnr+=1
@@ -85,15 +84,24 @@ for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
         echo        (echo(^^!lastBlock^^!^)
         echo        echo(
         echo    ^) ^> "%~f0"
-        echo    set ^^^^^"#=endlocal ^^^^^& (copy "%~f0.tmp" "%~f0" ^^^^^&^^^^^& del "%~f0.tmp"^^^^^) ^^^^^> nul ^^^^^& set "ln=^!line^!" ^^^^^& call :magicEcho"
+        echo    set ^^^^^"#=endlocal ^^^^^& (copy "%~f0.tmp" "%~f0" ^^^^^&^^^^^& del "%~f0.tmp"^^^^^) ^^^^^> nul ^^^^^& set "ln=^!line^!" ^^^^^& call :dk_magicEcho"
         echo    goto :#
         echo ^)
     ) > "%~f0"
 
     endlocal
     set "#=<nul set offset=# & goto :":"
-    exit /b
+    goto:eof
 )
 )
 echo FAIL
-exit /b
+goto:eof
+
+
+
+
+:DKTEST ########################################################################
+
+    %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
+    echo Or not?
+    

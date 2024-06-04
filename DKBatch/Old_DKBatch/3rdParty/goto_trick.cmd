@@ -4,7 +4,7 @@ set "var=Parent Value"
 (
   call :test
   echo This and the following line are not executed
-  exit /b
+  goto:eof
 )
 :break
 echo How did I get here^^!^^!^^!^^!
