@@ -35,7 +35,12 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	if NOT exist "%POWERSHELL_EXE%" call dk_error "cannot find pwsh.exe"
 	
-
+	
+	::### Add File Associations ###
+	call %DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd
+	
+	
+	
 	call dk_checkError
 	
 	:: install via CMake

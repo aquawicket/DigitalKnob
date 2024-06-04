@@ -39,35 +39,42 @@ $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 ##
 ##
 function DK() {
-	#dk_debugFunc
+	echo Loading DigitalKnob . . .
 
+	############# Set DKPOWERSHELL_FUNCTIONS_DIR path ############
+	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
+	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
+	#Write-Output "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
+	
+	############# Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
+	$global:DKHTTP_DIGITALKNOB_DIR = "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+	$global:DKHTTP_DKBRANCH_DIR = "$DKHTTP_DIGITALKNOB_DIR/Development"
+	$global:DKHTTP_DKPOWERSHELL_DIR = "$DKHTTP_DKBRANCH_DIR/DKPowershell"
+	$global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "$DKHTTP_DKPOWERSHELL_DIR/functions"
+	
+	############# Load dk_load.ps1 ############
+	if (! (Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1" }
+	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1
+	
 	$global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 	#Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 
 	$global:DKSCRIPT_NAME = Split-Path -Leaf $DKSCRIPT_PATH
 	#Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
 
-	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	#Write-Output "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
-
 	#Write-Output "env:PATH = $env:PATH"
 	#$env:PATH += ";C:\Users\aquawicket\digitalknob\Development\DKPowershell\functions"
 
-	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
-	#Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
-	
-	#$global:DKHTTP = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
-	#if (! (Test-Path "$DKPOWERSHELL_DIR\functions\dk_load.ps1")) { Invoke-WebRequest -URI "$DKHTTP/dk_load.ps1" -OutFile "$DKPOWERSHELL_DIR\functions\dk_load.ps1" }
 	
 	#. $DKPOWERSHELL_DIR\functions\dk_thisFunction
-	. $DKPOWERSHELL_DIR\functions\__FILE__.ps1
-	. $DKPOWERSHELL_DIR\functions\__LINE__.ps1
-	. $DKPOWERSHELL_DIR\functions\__FUNCTION__.ps1
-	. $DKPOWERSHELL_DIR\functions\__ARGC__.ps1
-	. $DKPOWERSHELL_DIR\functions\__ARGV__.ps1
-	. $DKPOWERSHELL_DIR\functions\__CALLER__.ps1
-	. $DKPOWERSHELL_DIR\functions\dk_debugFunc.ps1
-	. $DKPOWERSHELL_DIR\functions\dk_load.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__FILE__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__LINE__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__FUNCTION__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__ARGC__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__ARGV__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\__CALLER__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_debugFunc.ps1
+	
 	
 	
 	###### DKTEST MODE ######
