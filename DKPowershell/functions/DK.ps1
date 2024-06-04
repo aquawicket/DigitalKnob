@@ -1,5 +1,6 @@
 if ($DKINIT){return} else{ $global:DKINIT=1 }
 
+# https://ss64.com/ps
 # https://www.pdq.com/blog/change-powershell-colors/
 function Set-ConsoleColor ($bc, $fc) {
     $Host.UI.RawUI.BackgroundColor = $bc
