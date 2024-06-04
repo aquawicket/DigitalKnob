@@ -14,18 +14,12 @@ call DK
 	call dk_echo
 	call dk_echo
 	if /I "%REPLY%" equ "Y" (
-		if not defined "%~2" goto:eof
-		
-		endlocal & set "%2=true"
-		call dk_printVar "%2"
+		rem if defined "%~1" ( endlocal & call dk_set %1 true )
         (call )
 		goto:eof
 	) 
 	
-	if not defined "%~2" goto:eof
-	
-	endlocal & set "%2=false"
-	call dk_printVar "%2" 
+	rem if not defined "%~1" ( endlocal & call dk_set %1 false )
 	(call)
 goto:eof
 

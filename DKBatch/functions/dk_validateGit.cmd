@@ -14,10 +14,10 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 	
 	call dk_load dk_validate
 	call dk_validate HOST_ARCH dk_getHostTriple
-    if "%HOST_ARCH%"=="arm32"  set GIT_DL=
-    if "%HOST_ARCH%"=="arm64"  set GIT_DL=%GIT_DL_WIN_ARM64%
-    if "%HOST_ARCH%"=="x86"    set GIT_DL=%GIT_DL_WIN_X86%
-    if "%HOST_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
+    if "%HOST_ARCH%"=="arm32"  call dk_set GIT_DL ""
+    if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL %GIT_DL_WIN_ARM64%
+    if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL %GIT_DL_WIN_X86%
+    if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL %GIT_DL_WIN_X86_64%
         
     call dk_getFilename %GIT_DL% GIT_DL_FILE
 	call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
@@ -26,7 +26,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 	call dk_load dk_toLower
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
 	call dk_validate DKTOOLS_DIR dk_getDKPaths
-    set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
+    call dk_set GIT_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe
         
     if exist "%GIT_EXE%" goto:eof
         
