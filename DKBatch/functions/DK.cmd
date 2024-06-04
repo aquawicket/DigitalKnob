@@ -1,7 +1,7 @@
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
-set "DEBUG_MODE=0"
+set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()
 ::#
@@ -9,14 +9,14 @@ set "DEBUG_MODE=0"
 :DK () {
 	echo Loading DigitalKnob . . .
 
-	::############ Set DKBATCH_DIR path ############
+	::############ Set DKBATCH_FUNCTIONS_DIR path ############
 	for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
 	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 	if not exist "%DKBATCH_DIR%\functions\DK.cmd" (echo "DKBATCH_DIR does not exist" & goto:eof)
 	set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	
-	::############ Set DKHTTP paths ############
+	::############ Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
 	set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
 	set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
 	set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
@@ -24,10 +24,6 @@ set "DEBUG_MODE=0"
 	
 	::############ Load dk_load.cmd ############
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
-	
-	::if not exist "DKBatch\functions\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', 'DKBatch\functions\dk_debugFunc.cmd')"
-	::call dk_load dk_debugFunc
-	::call dk_debugFunc
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_debug
@@ -38,8 +34,7 @@ set "DEBUG_MODE=0"
 	call dk_load dk_getDirname
 	call dk_load dk_getFilename
 	call dk_load dk_escapeSequences
-
-
+	
 	call dk_getCaller 1
 	:dk_getCaller_return1
 	::call dk_printVar caller[0]
@@ -60,7 +55,7 @@ set "DEBUG_MODE=0"
 	
 	set "DKSCRIPT_PATH=%caller[1].fullpath%"
 	set "DKSCRIPT_ARGS=%caller[1].args%"
-	if %DEBUG_MODE% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
+	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
 	
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
