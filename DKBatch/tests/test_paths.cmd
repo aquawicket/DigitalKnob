@@ -69,7 +69,7 @@ call "../functions/DK.cmd"
 	call dk_getFilename "%IN%" fullname
 	echo fullname   = %fullname%
 	
-	call dk_getDirectory "%IN%" directory
+	call dk_getDirname "%IN%" directory
 	echo directory  = %directory%
 	
 	pause

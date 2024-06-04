@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_getDirectory(<path> <output>)
+# dk_getDirname(<path> <output>)
 #
 #
-dk_getDirectory () {
+dk_getDirname () {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
 	
@@ -18,6 +18,6 @@ dk_getDirectory () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_getDirectory /usr/bin directory
+	dk_getDirname /usr/bin directory
 	echo "directory = ${directory}"
 }

@@ -16,7 +16,7 @@ call DK
 	call dk_getFullPath "%src%" src_fullpath
 	call dk_printVar src_fullpath
 	
-	call dk_getDirectory "%src_fullpath%" src_directory
+	call dk_getDirname "%src_fullpath%" src_directory
 	call dk_printVar src_directory
 	
 	call dk_getFilename "%src_fullpath%" src_filename
@@ -28,7 +28,7 @@ call DK
 	call dk_getFullPath "%dest%" dest_fullpath
 	call dk_printVar dest_fullpath
 	
-	call dk_getDirectory "%dest_fullpath%" dest_directory
+	call dk_getDirname "%dest_fullpath%" dest_directory
 	call dk_printVar dest_directory
 	
 	call dk_getFilename "%dest_fullpath%" dest_folder

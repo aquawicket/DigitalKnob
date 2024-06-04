@@ -2,10 +2,11 @@
 call DK
 
 ::################################################################################
-::# dk_getDirectory(<path> <output>)
+::# dk_getDirname(<path> <output>)
 ::#
+::#   https://en.wikipedia.org/wiki/Dirname
 ::#
-:dk_getDirectory () {
+:dk_getDirname () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -24,5 +25,5 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	call dk_getDirectory "C:\Windows\System32" result
+	call dk_getDirname "C:\Windows\System32" result
 	call dk_printVar result

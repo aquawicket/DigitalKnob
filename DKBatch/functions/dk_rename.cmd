@@ -32,7 +32,7 @@ call DK
 	)
 	
 	:: the base directory of the %to% path must exist.    
-	call dk_getDirectory "%_to_%" _parent_dir_
+	call dk_getDirname "%_to_%" _parent_dir_
 	call dk_printVar _parent_dir_
 	call dk_makeDirectory "%_parent_dir_%"
 	

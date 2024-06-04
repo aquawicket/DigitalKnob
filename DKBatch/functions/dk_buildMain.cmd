@@ -71,7 +71,7 @@ setlocal enableDelayedExpansion
     call dk_printVar DKIMPORTS_DIR
     call dk_printVar DKPLUGINS_DIR
     
-	call dk_getDirectory "%DKSCRIPT_PATH%" DKSCRIPT_DIR
+	call dk_getDirname "%DKSCRIPT_PATH%" DKSCRIPT_DIR
 	
 	call dk_load dk_warning
 	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
