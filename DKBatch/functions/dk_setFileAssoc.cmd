@@ -2,7 +2,7 @@
 call DK
 
 ::#################################################################################
-:: dk_setFileAssoc() <extension> <exe> <arguments>
+:: dk_setFileAssoc(<extension> <exe> <arguments>)
 ::
 ::
 :dk_setFileAssoc
@@ -12,7 +12,7 @@ call DK
 	:: <_extension_>
 	set "_extension_=%~1"
 
-	:: <exe>
+	:: <_exe_>
 	set "_exe_=%~2"
 	call dk_getName "%~2" _exeName_
 	call dk_getFilename "%~2" _exeFilename_
@@ -22,9 +22,11 @@ call DK
 	
 	set "_dkname_=dk%_exeName_%"
 
+	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
+	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
+
 	:: set file association using ftype ad assoc
 	call ftype %_dkname_%=%~2 "%%1"
-	
 	call assoc %_extension_%=%_dkname_%
 	
 	:: set file association through registry

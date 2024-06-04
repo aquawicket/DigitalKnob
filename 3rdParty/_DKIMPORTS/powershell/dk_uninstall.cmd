@@ -29,11 +29,6 @@ call ../../../DKBatch/functions/DK.cmd
 	::FIXME: kill pwsh.exe peocess
 	call dk_remove "%POWERSHELL%"
 	
-	:::::: Remove Context Menu
-	::call dk_info "Removing Edit with Notepad++ context menu to Windows..." 
-	::call dk_deleteRegistryKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++"
-
-
 	call dk_checkError
 	
 	:: uninstall via CMake
