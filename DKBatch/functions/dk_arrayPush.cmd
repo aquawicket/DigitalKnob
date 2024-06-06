@@ -19,7 +19,7 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	echo testing dk_arrayUnshift . . .
+	echo testing dk_arrayPush . . .
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"
 	set "MyArray[2]=c"
