@@ -26,6 +26,9 @@ set "KEEP_CONSOLE_OPEN=0"
 	
 	::############ Load dk_load.cmd ############
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
+	call dk_load dk_getCaller
+	call dk_getCaller 1
+	:dk_getCaller_return1
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_debug
@@ -33,13 +36,11 @@ set "KEEP_CONSOLE_OPEN=0"
 	call dk_load dk_set
 	call dk_load dk_replaceAll
 	call dk_load dk_removeExtension
-	call dk_load dk_getCaller
 	call dk_load dk_getDirname
 	call dk_load dk_getFilename
 	call dk_load dk_escapeSequences
 	
-	call dk_getCaller 1
-	:dk_getCaller_return1
+	
 	::call dk_printVar caller[0]
 	::call dk_printVar caller[0].fullpath
 	::call dk_printVar caller[0].directory
