@@ -31,6 +31,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	:dk_getCaller_return1
 	
 	::############ LOAD FUNCTION FILES ############
+	call dk_load dk_loadAll
 	call dk_loadAll
 	::call dk_load dk_debug
 	::call dk_load dk_printVar

@@ -23,7 +23,7 @@ call DK
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
 	
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 
