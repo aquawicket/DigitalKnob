@@ -9,7 +9,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_validate HOST_OS "dk_getHostTriple"
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	
 ::  if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    call dk_set CMAKE_DL
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
@@ -24,7 +24,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
-	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
     call dk_set CMAKE_EXE "%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto:cmake_installed

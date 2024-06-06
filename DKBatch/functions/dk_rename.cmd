@@ -47,7 +47,7 @@ goto:eof
 
 :DKTEST ###############################################################################
 
-	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
 	echo "dk_rename test" > %DKDOWNLOAD_DIR%/renameMe.file
 	call dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt OVERWRITE

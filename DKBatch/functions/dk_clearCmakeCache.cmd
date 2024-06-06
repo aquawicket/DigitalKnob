@@ -11,7 +11,7 @@ call DK
 	
     call dk_info "Deleteing CMake cache files. . ."
 	
-	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"

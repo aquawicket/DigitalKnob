@@ -40,6 +40,6 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
 
-	call dk_validate DKIMPORTS_DIR dk_validateBranch
+	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate GIT_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
 	call dk_addContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""

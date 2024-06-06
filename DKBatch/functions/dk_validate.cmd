@@ -10,8 +10,11 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-	if defined %~1 if "%~1" neq "" (goto:eof)
-	call %~2
+	if defined %~1 if "%~1" neq "" (goto:eof)     &:: if the variable is already valid, return
+	
+	call dk_stringContains "%~2" "call" || call dk_error "dk_validate parameter 2 requires the use of call"
+	::call %~2
+	%~2
 	
 	if not defined %~1 dk_error "dk_validate was unable to set the variable with the code provided"
 	if "%~1"=="" dk_error "dk_validate called the code requested, but the variable is still empty"
@@ -26,6 +29,7 @@ goto:eof
 
 :DKTEST ########################################################################
 
-call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%
+echo DKTOOLS_DIR = %DKTOOLS_DIR%
 echo DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%

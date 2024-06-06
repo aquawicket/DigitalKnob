@@ -8,7 +8,7 @@ call ../../../DKBatch/functions/DK.cmd
 :dk_installGit () {
 	call dk_debugFunc
 	
-	call dk_validate HOST_ARCH  dk_getHostTriple
+	call dk_validate HOST_ARCH "call dk_getHostTriple"
 ::  if "%HOST_ARCH%"=="arm32" call dk_set GIT_DL ""
 ::  if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL ""
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
@@ -18,7 +18,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_getBasename %GIT_DL_FILE% GIT_FOLDER
 	call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
-	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set GIT "%DKTOOLS_DIR%\%GIT_FOLDER%"
     call dk_set GIT_EXE "%GIT%\bin\git.exe"
 	call dk_set GITBASH_EXE "%GIT%\git-bash.exe"

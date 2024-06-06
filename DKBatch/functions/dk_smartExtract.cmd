@@ -66,7 +66,7 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	call dk_validate DKDOWNLOAD_DIR dk_getDKPaths
+	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.1"
 	
 	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.2.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.2"

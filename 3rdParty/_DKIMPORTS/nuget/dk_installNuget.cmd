@@ -9,14 +9,14 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_validate HOST_OS dk_getHostTriple
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%"=="win"     call dk_set NUGET_DL "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 
 	
 	call dk_getFilename %NUGET_DL% NUGET_DL_FILE
 	call dk_removeExtension %NUGET_DL_FILE% NUGET_NAME
 	call dk_convertToCIdentifier %NUGET_NAME% NUGET_FOLDER
-	call dk_validate DKTOOLS_DIR dk_getDKPaths
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set NUGET %DKTOOLS_DIR%\%NUGET_FOLDER%
 	call dk_set NUGET_EXE %NUGET%\nuget.exe
 	

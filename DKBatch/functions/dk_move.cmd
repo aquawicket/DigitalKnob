@@ -46,7 +46,7 @@ goto:eof
 
 :DKTEST ###############################################################################
 	
-	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
 	echo "dk_move test" > %DKDOWNLOAD_DIR%/moveMe.file
 	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt OVERWRITE

@@ -1,7 +1,7 @@
 @echo off
 call ../../../DKBatch/functions/DK.cmd
 
-call dk_validate DKIMPORTS_DIR dk_validateBranch
+call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 
 ::call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"

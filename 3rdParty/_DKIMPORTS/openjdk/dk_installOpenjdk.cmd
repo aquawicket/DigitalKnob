@@ -9,7 +9,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	
-	call dk_validate HOST_OS "dk_getHostTriple"
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
 	
 	call dk_getFilename %OPENJDK_DL% OPENJDK_DL_FILE
@@ -17,7 +17,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_convertToCIdentifier %OPENJDK_DL_NAME% OPENJDK_FOLDER
 	call dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
-	call dk_validate DK3RDPARTY_DIR dk_validateBranch
+	call dk_validate DK3RDPARTY_DIR "call dk_validateBranch"
 	call dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
 	call dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	call dk_getNativePath %OPENJDK% OPENJDK_NATIVE

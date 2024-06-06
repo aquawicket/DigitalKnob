@@ -11,12 +11,12 @@ call DK
 	
 	
 	setlocal
-	call dk_validate DKIMPORTS_DIR dk_validateBranch
+	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	
-	call dk_validate DKPOWERSHELL_DIR dk_validateBranch
+	call dk_validate DKPOWERSHELL_DIR "call dk_validateBranch"
 	if not exist "%DKPOWERSHELL_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
 	
-	call dk_validate POWERSHELL_EXE %DKIMPORTS_DIR%\powershell\dk_installPowershell
+	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 	if not exist "%POWERSHELL_EXE%"   call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
     
     ::call dk_set DKCOMMAND "%~1"

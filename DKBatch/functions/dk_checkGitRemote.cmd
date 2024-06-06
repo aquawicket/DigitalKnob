@@ -9,10 +9,10 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-	call dk_validate DKBRANCH_DIR dk_validateBranch
+	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     if not exist "%DKBRANCH_DIR%\.git" ( call dk_error "%DKBRANCH_DIR%\.git does not exist" )
 
-	call dk_validate GIT_EXE dk_validateGit
+	call dk_validate GIT_EXE "call dk_validateGit"
 	
 	cd "%DKBRANCH_DIR%"
 	

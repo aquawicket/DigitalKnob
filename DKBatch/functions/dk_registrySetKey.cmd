@@ -78,7 +78,7 @@ goto:eof
 
 :DKTEST ########################################################################
 
-call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 call dk_set NOTEPADPP_EXE "%NOTEPADPP%notepad++.exe"
 call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""

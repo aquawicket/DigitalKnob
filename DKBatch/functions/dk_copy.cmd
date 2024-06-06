@@ -50,7 +50,7 @@ goto:eof
 
 :DKTEST ###############################################################################
 
-	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
 	echo "dk_copy test" > %DKDOWNLOAD_DIR%/copyMe.file
 	call dk_copy %DKDOWNLOAD_DIR%/copyMe.file %DIGITALKNOB_DIR%/iWasCopied.txt OVERWRITE

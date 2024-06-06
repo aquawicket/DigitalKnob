@@ -13,11 +13,9 @@ call DK
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
 	
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
-	
-	call dk_printVar CD
-    for %%I in (.) do call dk_set FOLDER "%%~nxI"
+    for %%I in (.) do call dk_set FOLDER "%%~nxI"			               &:: get the current folder
 
-	call dk_set DKBRANCH Development
+	call dk_set DKBRANCH Development						               &:: set the default branch
 	call dk_validate GIT_EXE "call dk_validateGit"
 	if exist "%CD%\.git" (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (

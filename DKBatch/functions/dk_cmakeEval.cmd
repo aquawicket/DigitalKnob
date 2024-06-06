@@ -11,16 +11,16 @@ call DK
 	
 	
 	setlocal
-	call dk_validate DKIMPORTS_DIR dk_validateBranch
+	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	::call dk_printVar DKIMPORTS_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
 	
-	call dk_validate DKCMAKE_DIR dk_validateBranch
+	call dk_validate DKCMAKE_DIR "call dk_validateBranch"
 	::call dk_printVar DKCMAKE_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKCMAKE_DIR"
 	
-	::call dk_validate CMAKE_EXE dk_validateCmake
-	call dk_validate CMAKE_EXE %DKIMPORTS_DIR%\cmake\dk_InstallCmake
+	::call dk_validate CMAKE_EXE "call dk_validateCmake"
+	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake"
 	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 
     

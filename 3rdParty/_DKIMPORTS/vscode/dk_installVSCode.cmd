@@ -11,7 +11,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	
-	call dk_validate HOST_OS "dk_getHostTriple"
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%"=="mac" 			           call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip"
 	if "%HOST_OS%_%HOST_ARCH%"=="linux_arm32"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz"
 	if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz"
@@ -25,7 +25,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
 	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set VSCODE "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
 	
 	if "%HOST_OS%"=="win" (
@@ -47,7 +47,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if not exist %VSCODE_EXE% call dk_error "cannot find %VSCODE_EXE%"
 	
 	:: install via CMake
-::	call dk_validate DKIMPORTS_DIR dk_getDKPaths
+::	call dk_validate DKIMPORTS_DIR "call dk_getDKPaths"
 ::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/vscode/DKMAKE.cmake')" "VSCODE_EXE"
 ::	call dk_printVar VSCODE_EXE
     call dk_checkError

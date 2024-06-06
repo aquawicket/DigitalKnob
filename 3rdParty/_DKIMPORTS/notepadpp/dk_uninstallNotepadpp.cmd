@@ -10,7 +10,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	
-	call dk_validate HOST_OS "dk_getHostTriple"
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
@@ -23,7 +23,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 
-	call dk_validate DKTOOLS_DIR "dk_getDKPaths"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 
 	::FIXME: kill notepad++.exe peocess
@@ -93,7 +93,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_checkError
 	
 	:: install via CMake
-::	call dk_validate DKIMPORTS_DIR dk_validateBranch
+::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 ::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')" "NOTEPADPP_EXE"
 ::	call dk_printVar NOTEPADPP_EXE
 ::	call dk_checkError

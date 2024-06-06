@@ -15,10 +15,11 @@ goto:eof
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_validate DKTOOLS_DIR dk_getDKPaths
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set TINYCORELINUX "%DKTOOLS_DIR%\TinyCoreLinux"
 	call dk_set TINYCORELINUX_IMG %TINYCORELINUX%\tinycore.img
-	call dk_validate QEMU_IMG_EXE "../qemu/dk_installQemu.cmd"
+	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	call dk_validate QEMU_IMG_EXE "call %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 	
 	setlocal
 		if exist "%TINYCORELINUX_IMG%" goto:eof
@@ -69,7 +70,7 @@ goto:eof
 	
 	
 	:: install via CMake
-::	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
-::	call dk_validate DKIMPORTS_DIR dk_validateBranch
+::	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 ::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/tinycorelinux/DKMAKE.cmake')" "TINYCORELINUX"
 ::	call dk_printVar TINYCORELINUX

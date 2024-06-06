@@ -14,8 +14,8 @@ call DK
 		call dk_confirm || goto:eof
     )
         
-	call dk_validate DKBRANCH_DIR dk_validateBranch
-	call dk_validate GIT_EXE dk_validateGit
+	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
+	call dk_validate GIT_EXE "call dk_validateGit"
 	
     if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%")
     call dk_checkError
