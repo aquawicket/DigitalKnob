@@ -77,5 +77,5 @@ set "KEEP_CONSOLE_OPEN=0"
 goto:eof
 
 :DKTEST
-	::%FUNCNAME[1]%
+	%DKSCRIPT_NAME%
 goto:eof
