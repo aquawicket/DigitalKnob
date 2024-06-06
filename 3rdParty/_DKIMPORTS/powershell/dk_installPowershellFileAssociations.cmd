@@ -11,6 +11,3 @@ call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPower
 ::assoc .psm1=dk_powershell
 call dk_setFileAssoc .ps1 %POWERSHELL_EXE%
 call dk_setFileAssoc .psm1 %POWERSHELL_EXE%
-
-echo done
-call dk_pause
