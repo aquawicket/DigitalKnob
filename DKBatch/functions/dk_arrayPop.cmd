@@ -11,9 +11,9 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_arrayLength %~1 last_element
-	set /a last_element-=1
-	call dk_unset %~1[%last_element%]
+	call dk_arrayLength %~1 _length_
+	set /a _length_-=1
+	call dk_unset %~1[%_length_%]
 goto:eof
 
 

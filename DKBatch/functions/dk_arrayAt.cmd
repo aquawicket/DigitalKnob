@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayAt(array, index, rtn_var)
+::# dk_arrayAt(array, index, element>)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
@@ -25,5 +25,5 @@ goto:eof
 	set "MyArray[3]=d"
 	set "MyArray[4]=e"
 	
-	call dk_arrayAt MyArray 3 arrayAt
-	echo arrayAt = %arrayAt%
+	call dk_arrayAt MyArray 3 element
+	echo element = %element%
