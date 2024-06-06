@@ -28,9 +28,9 @@ set "KEEP_CONSOLE_OPEN=0"
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	
 	::############ Load Callstack ############
-	call dk_load dk_getCaller
-	call dk_getCaller
-	:dk_getCaller_return
+	call dk_load dk_caller
+	call dk_caller
+	:dk_caller_return
 	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
 	echo FUNCNAME[0]     = %FUNCNAME[0]%
 	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
