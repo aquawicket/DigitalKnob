@@ -65,9 +65,12 @@ rem			call set "temp=%%temp:%%= %%"
 				goto:done
 			)
 			:done
+			set "dkload_list=%dkload_list%;%temp%;" 			&:: Add to list
+			echo dkload_list = %dkload_list%
 			endlocal
 			call echo temp = %%temp%%
 rem			call dk_load %%temp%%
+			
 		) || echo.
 	)
 	
