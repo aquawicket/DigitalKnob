@@ -15,6 +15,7 @@ call dk_load dk_generate
 call dk_load dk_build
 call dk_load dk_readCache
 call dk_load dk_checkGitRemote
+call dk_load dk_commandToVariable
 	
 ::####################################################################
 ::# dk_buildMain()
