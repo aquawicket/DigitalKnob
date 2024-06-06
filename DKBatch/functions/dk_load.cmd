@@ -43,7 +43,7 @@ call DK
 	echo added %fn% to dkload_list
 	
 ::if exist "%fpath%" goto:eof
-::	:: read file line by line and store matching lines in array
+	:: read file line by line and store matching lines in array
 	for /F "usebackq delims=" %%a in ("%fpath%") do (
 	    echo %%a | findstr "\<dk_*" >nul && (
 			set "temp=%%a"
@@ -55,6 +55,7 @@ call DK
 			call set "temp=%%temp:#= %%"
 	    	call set "temp=%%temp:$= %%"
 			call set "temp=%%temp:{= %%"
+			call set "temp=%%temp:}= %%"
 			call set "temp=%%temp:$= %%"
 			call set "temp=%%temp:,= %%"
 rem			call set "temp=%%temp:%%= %%"
@@ -66,13 +67,20 @@ rem			call set "temp=%%temp:%%= %%"
 			)
 			:done
 			set "dkload_list=%dkload_list%;%temp%;" 			&:: Add to list
-			echo dkload_list = %dkload_list%
+rem			echo dkload_list = %dkload_list%
+rem			call :dk_callLoads %dkload_list%
+			echo %temp% | findstr "\<dk_" >nul && (
+				call echo [32m temp = %temp% [0m
+				call dk_load %temp%
+			)
 			endlocal
-			call echo temp = %%temp%%
+rem			call echo temp = %%temp%%
 rem			call dk_load %%temp%%
 			
 		) || echo.
 	)
 	
 rem		call dk_printArray lines
+rem	call :dk_callLoads %temp%
 goto:eof
+

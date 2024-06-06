@@ -52,7 +52,8 @@ set "KEEP_CONSOLE_OPEN=0"
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_loadAll
-	call dk_loadAll
+	::call dk_loadAll
+	call dk_load %DKSCRIPT_NAME%
 
 	call dk_assert DKSCRIPT_PATH
 	
