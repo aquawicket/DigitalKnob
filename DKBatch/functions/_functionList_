@@ -102,7 +102,6 @@ dk_load
 dk_loadAll 
 dk_magicEcho 
 dk_makeDirectory 
-dk_message.cmd 
 dk_messageBox 
 dk_move 
 dk_pathExists 
@@ -148,7 +147,6 @@ dk_textFormat
 dk_todo 
 dk_toLower 
 dk_toUpper 
-dk_toVariableInfo.cmd 
 dk_unset 
 dk_validate 
 dk_validateBranch 
