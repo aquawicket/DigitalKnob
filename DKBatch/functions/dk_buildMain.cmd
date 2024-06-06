@@ -1,22 +1,6 @@
 @echo off
 call DK
 
-::call dk_load dk_getHostTriple
-::call dk_load dk_getDKPaths
-::call dk_load dk_validateGit
-::call dk_load dk_validateBranch
-::call dk_load dk_warning
-::call dk_load dk_pickUpdate
-::call dk_load dk_pickApp
-::call dk_load dk_pickOs
-::call dk_load dk_pickType
-::call dk_load dk_createCache
-::call dk_load dk_generate
-::call dk_load dk_build
-::call dk_load dk_readCache
-::call dk_load dk_checkGitRemote
-::call dk_load dk_commandToVariable
-	
 ::####################################################################
 ::# dk_buildMain()
 ::#
@@ -25,36 +9,41 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-setlocal enableDelayedExpansion
-	
-::	if dk_defined WSLENV; then 
-::		dk_info "WSLENV is on"
-::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-::		sudo chown -R "$LOGNAME" "$HOME"
-::	fi
-	
-::	if [ -n "${USER-}" ]; then
-::		call dk_printVar USER
-::		DKUSERNAME=$USER
-::	elif [ -n "${USERNAME-}" ]; then
-::		call dk_printVar USERNAME
-::		DKUSERNAME=$USERNAME
-::	fi
-::	call dk_printVar DKUSERNAME
-	
-::	call dk_printVar SHLVL
-::  call dk_printVar MSYSTEM
+	call dk_assert DKSCRIPT_PATH
+	::setlocal enableDelayedExpansion
+		
+	::	if dk_defined WSLENV; then 
+	::		dk_info "WSLENV is on"
+	::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
+	::		sudo chown -R "$LOGNAME" "$HOME"
+	::	fi
+		
+	::	if [ -n "${USER-}" ]; then
+	::		call dk_printVar USER
+	::		DKUSERNAME=$USER
+	::	elif [ -n "${USERNAME-}" ]; then
+	::		call dk_printVar USERNAME
+	::		DKUSERNAME=$USERNAME
+	::	fi
+	::	call dk_printVar DKUSERNAME
+		
+	::	call dk_printVar SHLVL
+	::  call dk_printVar MSYSTEM
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_getHostTriple
 	call dk_getDKPaths
     call dk_validateGit
     call dk_validateBranch
+	
+	::call dk_assert DKSCRIPT_PATH
+	call dk_validate DKSCRIPT_DIR "call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR"
+	call dk_validate DKSCRIPT_NAME "call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME"
     
 	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
-		call dk_warning "%DKSCRIPT_NAME% is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		call dk_warning "%DKSCRIPT_NAME% path = %DKSCRIPT_DIR%"
-		call dk_warning "DKBRANCH_DIR path = %DKBRANCH_DIR%"
+		call dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		call dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
+		call dk_warning "DKBRANCH_DIR = %DKBRANCH_DIR%"
 	)
     
     :while_loop             

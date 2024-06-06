@@ -31,34 +31,36 @@ set "KEEP_CONSOLE_OPEN=0"
 	call dk_load dk_getCaller
 	call dk_getCaller
 	:dk_getCaller_return
-	set "DKSCRIPT_PATH=%BATCH_SOURCE[1]%"
-	set "DKSCRIPT_ARGS=%BATCH_ARGV[1]%"
-	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
-	
 	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
 	echo FUNCNAME[0]     = %FUNCNAME[0]%
 	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
 	echo BATCH_ARGC[0]   = %BATCH_ARGC[0]%
-
-	echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
-	echo FUNCNAME[1]     = %FUNCNAME[1]%
-	echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
-	echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
-
+	  echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
+	  echo FUNCNAME[1]     = %FUNCNAME[1]%
+	  echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
+	  echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
+	
+	::############ Get DKSCRIPT_ variables ############
+	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%BATCH_SOURCE[1]%"
+	set "DKSCRIPT_ARGS=%BATCH_ARGV[1]%"
+	call dk_load dk_getDirname
+	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
+	call dk_load dk_getFilename
+	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
+	
+	::if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_loadAll
 	call dk_loadAll
-	
-	::############ Get DKSCRIPT_DIR and DKSCRIPT_NAME ############
-	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
-	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 
+	call dk_assert DKSCRIPT_PATH
+	
 	:: Get args after %~1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
 	::call printVar ARGS_AFTER_1
 	
-	call dk_createFunctionList
+	::call dk_createFunctionList
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
@@ -75,5 +77,5 @@ set "KEEP_CONSOLE_OPEN=0"
 goto:eof
 
 :DKTEST
-	%FUNCNAME[1]%
+	::%FUNCNAME[1]%
 goto:eof

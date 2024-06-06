@@ -1,3 +1,4 @@
+if defined dk_loadAll (goto:eof) else (set dk_loadAll=1)
 @echo off
 call DK
 

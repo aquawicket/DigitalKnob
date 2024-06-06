@@ -1,7 +1,7 @@
 @echo off
 ::https://stackoverflow.com/a/43123617/688352
 
-setlocal DisableDelayedExpansion
+::setlocal DisableDelayedExpansion
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" (goto %func%)
@@ -11,7 +11,7 @@ if ":" == "%func:~0,1%" (goto %func%)
 (
     (goto) 2>nul
 	
-    setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%
+    rem setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =%
 		call set "BATCH_SOURCE[0]=%%~f0"
 		call set "FUNCNAME[0]=%%~n0"
 		call set "BATCH_ARGV[0]=%%*"
@@ -35,7 +35,7 @@ goto:eof
     (goto) 2>nul
     (goto) 2>nul
 	
-	setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =% 
+	rem setlocal DisableDelayedExpansion %= it could be reenabled by the GOTO =% 
 		set "BATCH_SOURCE[0]=%BATCH_SOURCE[0]%"
 		set "FUNCNAME[0]=%FUNCNAME[0]%"
 		set "BATCH_ARGV[0]=%BATCH_ARGV[0]%"
