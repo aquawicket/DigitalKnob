@@ -10,32 +10,36 @@ call DK
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     :: https://stackoverflow.com/a/33662275
-    :: If the current folder matches the current branch set DKBRANCH, default to Development
+    :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
+	
+	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+	
 	call dk_printVar CD
-    for %%I in (.) do set FOLDER=%%~nxI
+    for %%I in (.) do call dk_set FOLDER "%%~nxI"
+
 	call dk_set DKBRANCH Development
-	if exist .git (
+	call dk_validate GIT_EXE "call dk_validateGit"
+	if exist "%CD%\.git" (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
 			call dk_set DKBRANCH %FOLDER%
         )
     )
 	
-	call dk_validate DIGITALKNOB_DIR dk_getDKPaths
 
-	call dk_set DKBRANCH_DIR %DIGITALKNOB_DIR%\%DKBRANCH%
-		call dk_set DK3RDPARTY_DIR %DKBRANCH_DIR%\3rdParty
-			call dk_set DKIMPORTS_DIR %DK3RDPARTY_DIR%\_DKIMPORTS
-		call dk_set DKAPPS_DIR %DKBRANCH_DIR%\DKApps
-		call dk_set DKBASH_DIR %DKBRANCH_DIR%\DKBash
-			call dk_set DKBASH_FUNCTIONS_DIR %DKBASH_DIR%\functions
-		call dk_set DKBATCH_DIR %DKBRANCH_DIR%\DKBatch
-			call dk_set DKBATCH_FUNCTIONS_DIR %DKBATCH_DIR%\functions
-		call dk_set DKCMAKE_DIR %DKBRANCH_DIR%\DKCMake
-			call dk_set DKCMAKE_FUNCTIONS_DIR %DKCMAKE_DIR%\functions
-		call dk_set DKDOCS_DIR %DKBRANCH_DIR%\DKDocs
-		call dk_set DKPLUGINS_DIR %DKBRANCH_DIR%\DKPlugins
-		call dk_set DKPOWERSHELL_DIR %DKBRANCH_DIR%\DKPowershell
-			call dk_set DKPOWERSHELL_FUNCTIONS_DIR %DKPOWERSHELL_DIR%\functions
+	call dk_set DKBRANCH_DIR "%DIGITALKNOB_DIR%\%DKBRANCH%"
+		call dk_set DK3RDPARTY_DIR "%DKBRANCH_DIR%\3rdParty"
+			call dk_set DKIMPORTS_DIR "%DK3RDPARTY_DIR%\_DKIMPORTS"
+		call dk_set DKAPPS_DIR "%DKBRANCH_DIR%\DKApps"
+		call dk_set DKBASH_DIR "%DKBRANCH_DIR%\DKBash"
+			call dk_set DKBASH_FUNCTIONS_DIR "%DKBASH_DIR%\functions"
+		call dk_set DKBATCH_DIR "%DKBRANCH_DIR%\DKBatch"
+			call dk_set DKBATCH_FUNCTIONS_DIR "%DKBATCH_DIR%\functions"
+		call dk_set DKCMAKE_DIR "%DKBRANCH_DIR%\DKCMake"
+			call dk_set DKCMAKE_FUNCTIONS_DIR "%DKCMAKE_DIR%\functions"
+		call dk_set DKDOCS_DIR "%DKBRANCH_DIR%\DKDocs"
+		call dk_set DKPLUGINS_DIR "%DKBRANCH_DIR%\DKPlugins"
+		call dk_set DKPOWERSHELL_DIR "%DKBRANCH_DIR%\DKPowershell"
+			call dk_set DKPOWERSHELL_FUNCTIONS_DIR "%DKPOWERSHELL_DIR%\functions"
 	
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (

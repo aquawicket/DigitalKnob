@@ -87,7 +87,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
 	::call printVar ARGS_AFTER_1
 	
-	::call dk_createFunctionList
+	call dk_createFunctionList
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
