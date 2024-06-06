@@ -15,7 +15,7 @@ call DK
 	call dk_info "Adding '%_menuTitle_%' context menu to Windows using %GIT_EXE%"
 	
 	::### delete existing key ###
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%"
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
 	
 	::### Menu Title ###
 	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
@@ -23,14 +23,14 @@ call DK
 	::REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
 	
 	::### ICON ###
-	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-	echo REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
-	REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+	::call dk_registrySetKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
+	echo REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+	REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
 	
 	::### COMMAND <args> ###
 	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
-	echo REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
-	REG ADD "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+	echo REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+	REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
 goto:eof
 
 
