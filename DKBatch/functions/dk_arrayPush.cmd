@@ -20,17 +20,20 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	set "MyArray[0]=a"
-	set "MyArray[1]=b"
-	set "MyArray[2]=c"
+	::set "MyArray[0]=a"
+	::set "MyArray[1]=b"
+	::set "MyArray[2]=c"
 	
+	call dk_printArray MyArray
+	
+	call dk_arrayPush MyArray a
+	call dk_printArray MyArray
+	
+	call dk_arrayPush MyArray b
+	call dk_printArray MyArray
+	
+	call dk_arrayPush MyArray c
 	call dk_printArray MyArray
 	
 	call dk_arrayPush MyArray d
-	call dk_printArray MyArray
-	
-	call dk_arrayPush MyArray e
-	call dk_printArray MyArray
-	
-	call dk_arrayPush MyArray f
 	call dk_printArray MyArray

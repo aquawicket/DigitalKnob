@@ -14,7 +14,7 @@ call DK
 	
 	setlocal EnableDelayedExpansion
     ::set "file=%~1"
-	set /A i=0
+	set /a i=0
     for /F "usebackq delims=" %%a in ("%~f1") do (
 		set "%~2[!i!]=%%a"
 		set /a i+=1
