@@ -51,9 +51,9 @@ set "KEEP_CONSOLE_OPEN=0"
 	::if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
 	
 	::############ LOAD FUNCTION FILES ############
-	call dk_load dk_loadAll
+	::call dk_load dk_loadAll
 	::call dk_loadAll
-	call dk_load %DKSCRIPT_NAME%
+	call dk_load %DKSCRIPT_PATH%
 
 	call dk_assert DKSCRIPT_PATH
 	
