@@ -2,29 +2,17 @@
 call DK
 
 ::################################################################################
-::# dk_arrayToString(<array_name> <rtn_var>)
+::# dk_arrayToString(array rtn_var)
 ::#
-::#   reference: https://www.w3schools.com/js/js_array_methods.asp#mark_tostring
+::#   https://www.w3schools.com/js/js_array_methods.asp#mark_tostring
+::#   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString
 ::#
 :dk_arrayToString () {
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-	call dk_set array_name "%~1"
-
-	call dk_arrayLength %~1 array_length
-	set /a "count=%array_length%-1"
-
-	setlocal EnableDelayedExpansion
-	for /l %%n in (0, 1, %count%) do (
-		if "%%n"=="0" (
-			set "list=!%array_name%[%%n]!"
-		) else (
-			set "list=!list!;!%array_name%[%%n]!"
-		)
-	)
-
-	endlocal & call dk_set %2 "%list%"
+	call dk_arrayJoin %~1 "," arrayStr
+	endlocal & call dk_set %2 "%arrayStr%"
 goto:eof
 
 
@@ -37,6 +25,6 @@ goto:eof
 	set "MyArray[3]=a"
 	set "MyArray[4]=b"
 	set "MyArray[5]=c"
-	call dk_arrayToString MyArray MyList
+	call dk_arrayToString MyArray arryString
 	
-	echo MyList = %MyList%
+	echo arryString = %arryString%

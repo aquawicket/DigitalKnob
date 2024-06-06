@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayAt(<array> <index> <rtn_var>)
+::# dk_arrayAt(array, index, rtn_var)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_at
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_arrayAt () {
 	call dk_debugFunc
@@ -18,7 +19,6 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	echo testing dk_arrayAt . . .
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"
 	set "MyArray[2]=c"

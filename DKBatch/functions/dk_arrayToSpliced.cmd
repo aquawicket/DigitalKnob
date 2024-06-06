@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayToSpliced(<array> <index>)
+::# dk_arrayToSpliced(array, start, deleteCount, item1, item2, /* …, */ itemN)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_tospliced
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_tospliced
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced
 ::#
 :dk_arrayToSpliced () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	:: TODO
+	::call dk_arrayToSpliced

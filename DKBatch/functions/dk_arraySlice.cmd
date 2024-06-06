@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arraySlice(<array> <index>)
+::# dk_arraySlice(array, start, end)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_slice
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_slice
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 ::#
 :dk_arraySlice () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	:: TODO
+	:: call dk_arraySlice

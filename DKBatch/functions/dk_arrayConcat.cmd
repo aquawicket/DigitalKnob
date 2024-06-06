@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayConcat(<array> <index>)
+::# dk_arrayConcat(array, value1, value2, /* …, */ valueN)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_concat
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_concat
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 ::#
 :dk_arrayConcat () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	:: TODO
+	:: call dk_arrayConcat array value1

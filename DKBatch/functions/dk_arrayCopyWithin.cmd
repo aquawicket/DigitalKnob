@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayCopyWithin(<array> <index>)
+::# dk_arrayCopyWithin(array, target, start, end)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_copywithin
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_copywithin
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 ::#
 :dk_arrayCopyWithin () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	:: TODO
+	:: call dk_arrayCopyWithin

@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arraySplice(<array> <index>)
+::# dk_arraySplice(array, start, deleteCount, item1, item2, /* …, */ itemN)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_splice
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_splice
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 ::#
 :dk_arraySplice () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	::  TODO
+	:: call dk_arraySplice

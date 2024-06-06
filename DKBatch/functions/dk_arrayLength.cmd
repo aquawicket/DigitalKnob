@@ -2,23 +2,24 @@
 call DK
 
 ::################################################################################
-::# dk_arrayLength(<array> <rtn_var>)
+::# dk_arrayLength(array, length>)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_length
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
 :dk_arrayLength () {
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	::call dk_set array_name "%~1"
-	set array_length=0
+	::set _arry_ %~1
+	set _length_=0
 
-	:arrayCountLoop
-	if defined %~1[%array_length%] ( 
-	   set /a array_length+=1
-	   goto :arrayCountLoop 
+	:dk_arrayLength_loop
+	if defined %~1[%_length_%] ( 
+	   set /a _length_+=1
+	   goto :dk_arrayLength_loop 
 	)
-	endlocal & call dk_set %2 "%array_length%"
+	endlocal & call dk_set %2 "%_length_%"
 goto:eof
 
 
@@ -26,12 +27,11 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	echo testing dk_arrayLength . . .
-	set "MyArray[0]=a"
-	set "MyArray[1]=b"
-	set "MyArray[2]=c"
-	set "MyArray[3]=d"
-	set "MyArray[4]=e"
+	set "array[0]=a"
+	set "array[1]=b"
+	set "array[2]=c"
+	set "array[3]=d"
+	set "array[4]=e"
 	
-	call dk_arrayLength MyArray MyArray_size
-	echo MyArray_size = %MyArray_size%
+	call dk_arrayLength array length
+	echo length = %length%

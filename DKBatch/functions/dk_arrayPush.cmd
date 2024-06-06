@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayPush(<array> <value>)
+::# dk_arrayPush(array, element1, element2, /* …, */ elementN)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_push
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_push
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 ::#
 :dk_arrayPush () {
 	call dk_debugFunc
@@ -19,7 +20,6 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	echo testing dk_arrayPush . . .
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"
 	set "MyArray[2]=c"

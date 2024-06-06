@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayPop(<array>)
+::# dk_arrayPop(array)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_pop
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_pop
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_arrayPop () {
 	call dk_debugFunc
@@ -20,7 +21,6 @@ goto:eof
 
 :DKTEST ########################################################################
 
-	echo testing dk_arrayPop . . .
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"
 	set "MyArray[2]=c"

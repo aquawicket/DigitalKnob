@@ -2,9 +2,10 @@
 call DK
 
 ::################################################################################
-::# dk_arrayFlat(<array> <index>)
+::# dk_arrayFlat(array depth)
 ::#
-::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_flat
+::#    https://www.w3schools.com/js/js_array_methods.asp#mark_flat
+::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 ::#
 :dk_arrayFlat () {
 	call dk_debugFunc
@@ -17,3 +18,6 @@ goto:eof
 
 
 :DKTEST ########################################################################
+
+	:: TODO
+	:: call dk_arrayFlat
