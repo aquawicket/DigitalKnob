@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayUnshift(<array> <index>)
+::# dk_arrayUnshift(<array> <value>)
 ::#
 ::#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_unshift
 ::#   
@@ -21,8 +21,8 @@ call DK
 	
 	:dk_arrayUnshift_loop
 	if %count% gtr 0 (
-		echo count = %count%
-		echo prev = %prev%
+		::echo count = %count%
+		::echo prev = %prev%
 		call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%"
 		::call echo %_arry_%[%count%] = %%%_arry_%[%count%]%%
 		set /a count-=1
