@@ -26,63 +26,33 @@ set "KEEP_CONSOLE_OPEN=0"
 	
 	::############ Load dk_load.cmd ############
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
+	
+	::############ Load Callstack ############
 	call dk_load dk_getCaller
-	call dk_getCaller 1
-	:dk_getCaller_return1
+	call dk_getCaller
+	:dk_getCaller_return
+	set "DKSCRIPT_PATH=%BATCH_SOURCE[1]%"
+	set "DKSCRIPT_ARGS=%BATCH_ARGV[1]%"
+	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
+	
+	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
+	echo FUNCNAME[0]     = %FUNCNAME[0]%
+	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
+	echo BATCH_ARGC[0]   = %BATCH_ARGC[0]%
+
+	echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
+	echo FUNCNAME[1]     = %FUNCNAME[1]%
+	echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
+	echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
+
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_loadAll
 	call dk_loadAll
-	::call dk_load dk_debug
-	::call dk_load dk_printVar
-	::call dk_load dk_set
-	::call dk_load dk_replaceAll
-	::call dk_load dk_removeExtension
-	::call dk_load dk_getDirname
-	::call dk_load dk_getFilename
-	::call dk_load dk_escapeSequences
 	
-	
-	::call dk_printVar caller[0]
-	::call dk_printVar caller[0].fullpath
-	::call dk_printVar caller[0].directory
-	::call dk_printVar caller[0].type
-	::call dk_printVar caller[0].filename
-	::call dk_printVar caller[0].func
-	::call dk_printVar caller[0].args
-
-	::call dk_printVar caller[1]
-	::call dk_printVar caller[1].fullpath
-	::call dk_printVar caller[1].directory
-	::call dk_printVar caller[1].type
-	::call dk_printVar caller[1].filename
-	::call dk_printVar caller[1].func
-	::call dk_printVar caller[1].args
-	
-	set "DKSCRIPT_PATH=%caller[1].fullpath%"
-	set "DKSCRIPT_ARGS=%caller[1].args%"
-	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
-	
+	::############ Get DKSCRIPT_DIR and DKSCRIPT_NAME ############
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
-	::call dk_escapeSequences
-	
-	::call dk_printVar DKBATCH_DIR
-	::call dk_printVar DKSCRIPT_PATH
-	::call dk_printVar DKBATCH_DIR
-	::call dk_printVar DKSCRIPT_DIR
-	::call dk_printVar DKSCRIPT_NAME
-	
-	::set true=0
-	::set false=1
-	
-	::echo %%CD%%            = %CD%
-	::echo %%DATE%%          = %DATE%
-	::echo %%TIME%%          = %TIME%
-	::echo %%RANDOM%%        = %RANDOM%
-	::echo %%ERRORLEVEL%%    = %ERRORLEVEL%
-	::echo %%CMDEXTVERSION%% = %CMDEXTVERSION%
-	::echo %%CMDCMDLINE%%    = %CMDCMDLINE%
 
 	:: Get args after %~1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
@@ -93,7 +63,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
 	echo.
-    echo ###### DKTEST MODE ###### %caller[1].func% ###### DKTEST MODE ######
+    echo ###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######
 	echo.
 	call :DKTEST
 	echo.
@@ -105,5 +75,5 @@ set "KEEP_CONSOLE_OPEN=0"
 goto:eof
 
 :DKTEST
-	"%caller[1].func%"
+	%FUNCNAME[1]%
 goto:eof
