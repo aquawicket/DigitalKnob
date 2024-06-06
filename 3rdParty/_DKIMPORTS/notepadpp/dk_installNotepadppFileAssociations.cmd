@@ -48,5 +48,3 @@ call dk_setFileAssoc .ts %NOTEPADPP_EXE%
 call dk_setFileAssoc .ts %NOTEPADPP_EXE%
 call dk_setFileAssoc .txt %NOTEPADPP_EXE%
 call dk_setFileAssoc .xml %NOTEPADPP_EXE%
-call dk_info "complete"
-pause
