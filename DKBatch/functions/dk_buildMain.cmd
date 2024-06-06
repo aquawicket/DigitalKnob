@@ -10,6 +10,8 @@ call DK
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
 	call dk_assert DKSCRIPT_PATH
+	call dk_assert DKSCRIPT_DIR
+	call dk_assert DKSCRIPT_NAME
 	::setlocal enableDelayedExpansion
 		
 	::	if dk_defined WSLENV; then 
@@ -35,10 +37,6 @@ call DK
 	call dk_getDKPaths
     call dk_validateGit
     call dk_validateBranch
-	
-	::call dk_assert DKSCRIPT_PATH
-	call dk_validate DKSCRIPT_DIR "call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR"
-	call dk_validate DKSCRIPT_NAME "call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME"
     
 	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
 		call dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"

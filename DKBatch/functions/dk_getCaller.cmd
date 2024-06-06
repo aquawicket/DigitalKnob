@@ -18,10 +18,10 @@ if ":" == "%func:~0,1%" (goto %func%)
 		
 		call set "is_batch=%%BATCH_SOURCE[0]:*%%~f0=%%"
 		if defined is_batch (
-			set "caller[0].type=batch"
+			set "SOURCE_TYPE[0]=batch"
 			call "%~d0\:Step2\..%~pnx0" %*
 		) else (
-			set "caller[0].type=cmd-line"
+			set "SOURCE_TYPE[0]=cmd-line"
 			cmd /c "call "%~d0\:Step2\..%~pnx0" %*"
 		)
 	endlocal
@@ -46,10 +46,10 @@ goto:eof
 		
 		call set "is_batch=%%BATCH_SOURCE[1]:*%%~f0=%%"
 		if defined is_batch (
-			set "caller[1].type=batch"
+			set "SOURCE_TYPE[1]=batch"
 			call "%~d0\:Step3\..%~pnx0" %*
 		) else (
-			set "caller[1].type=cmd-line"
+			set "SOURCE_TYPE[1]=cmd-line"
 			cmd /c "call "%~d0\:Step3\..%~pnx0" %*"
 		)
     endlocal
@@ -69,6 +69,12 @@ goto:eof
 
 	rem ### Return to :dk_getCaller_return lable in calling function
 	call :dk_getCaller_return
-	:dk_getCaller_return
+	:::dk_getCaller_return
+	::%BATCH_SOURCE[0]% %BATCH_ARGV[0]%
+goto:eof
+
+
+:dk_getCaller_return
+	endlocal
 	%BATCH_SOURCE[0]% %BATCH_ARGV[0]%
 goto:eof

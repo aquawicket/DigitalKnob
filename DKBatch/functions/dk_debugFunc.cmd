@@ -23,8 +23,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_caller.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_caller.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_caller.cmd')"
-	call dk_caller DKCALLER
-	:dk_caller
+	call dk_caller
+	:dk_caller_return
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
