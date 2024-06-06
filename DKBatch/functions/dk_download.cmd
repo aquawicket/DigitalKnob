@@ -1,6 +1,8 @@
 @echo off
 call DK
 
+:: call dk_load dk_checkError
+
 ::####################################################################
 ::# dk_download(<url> <destination>)
 ::#
@@ -21,7 +23,6 @@ call DK
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
 	
-	call dk_load dk_checkError
     call dk_checkError
 goto:eof
 

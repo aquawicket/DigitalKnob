@@ -31,14 +31,15 @@ set "KEEP_CONSOLE_OPEN=0"
 	:dk_getCaller_return1
 	
 	::############ LOAD FUNCTION FILES ############
-	call dk_load dk_debug
-	call dk_load dk_printVar
-	call dk_load dk_set
-	call dk_load dk_replaceAll
-	call dk_load dk_removeExtension
-	call dk_load dk_getDirname
-	call dk_load dk_getFilename
-	call dk_load dk_escapeSequences
+	call dk_loadAll
+	::call dk_load dk_debug
+	::call dk_load dk_printVar
+	::call dk_load dk_set
+	::call dk_load dk_replaceAll
+	::call dk_load dk_removeExtension
+	::call dk_load dk_getDirname
+	::call dk_load dk_getFilename
+	::call dk_load dk_escapeSequences
 	
 	
 	::call dk_printVar caller[0]

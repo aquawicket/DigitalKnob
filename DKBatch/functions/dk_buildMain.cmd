@@ -1,21 +1,21 @@
 @echo off
 call DK
 
-call dk_load dk_getHostTriple
-call dk_load dk_getDKPaths
-call dk_load dk_validateGit
-call dk_load dk_validateBranch
-call dk_load dk_warning
-call dk_load dk_pickUpdate
-call dk_load dk_pickApp
-call dk_load dk_pickOs
-call dk_load dk_pickType
-call dk_load dk_createCache
-call dk_load dk_generate
-call dk_load dk_build
-call dk_load dk_readCache
-call dk_load dk_checkGitRemote
-call dk_load dk_commandToVariable
+::call dk_load dk_getHostTriple
+::call dk_load dk_getDKPaths
+::call dk_load dk_validateGit
+::call dk_load dk_validateBranch
+::call dk_load dk_warning
+::call dk_load dk_pickUpdate
+::call dk_load dk_pickApp
+::call dk_load dk_pickOs
+::call dk_load dk_pickType
+::call dk_load dk_createCache
+::call dk_load dk_generate
+::call dk_load dk_build
+::call dk_load dk_readCache
+::call dk_load dk_checkGitRemote
+::call dk_load dk_commandToVariable
 	
 ::####################################################################
 ::# dk_buildMain()

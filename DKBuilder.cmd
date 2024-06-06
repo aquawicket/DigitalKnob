@@ -10,5 +10,5 @@ call "DKBatch/functions/DK.cmd"
 
 ::###### Load Main Program ######
 if "%*" neq "" call %*
-call dk_load dk_buildMain
+::call dk_load dk_buildMain
 call dk_buildMain %*

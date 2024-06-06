@@ -11,7 +11,6 @@ call DK
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\_functionList_" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/_functionList_', '%DKBATCH_FUNCTIONS_DIR%\_functionList_')"
 
 	for /F "usebackq delims=" %%a in ("%DKBATCH_FUNCTIONS_DIR%\_functionList_") do (
-		echo call dk_load %%a
 		call dk_load %%a
     )
 goto:eof

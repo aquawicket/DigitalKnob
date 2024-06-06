@@ -1,7 +1,8 @@
 @echo off
 call DK
 
-call dk_load dk_makeDirectory
+::call dk_load dk_makeDirectory
+
 ::####################################################################
 ::# dk_getDKPaths()
 ::#
