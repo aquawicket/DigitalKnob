@@ -14,8 +14,8 @@ set "KEEP_CONSOLE_OPEN=0"
 	::############ Set DKBATCH_FUNCTIONS_DIR path ############
 	for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
 	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-	if not exist "%DKBATCH_DIR%\functions\DK.cmd" (echo "DKBATCH_DIR does not exist" & goto:eof)
 	set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" (echo "DKBATCH_DIR does not exist" & goto:eof)
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	
 	::############ Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
@@ -63,7 +63,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	::call dk_createFunctionList
 	
 	::###### DKTEST MODE ######
-	if "%DKSCRIPT_DIR%" neq "%DKBATCH_DIR%\functions" goto:eof
+	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
 	echo.
     echo ###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######
 	echo.
