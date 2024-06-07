@@ -10,6 +10,7 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	
 ::  if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    call dk_set CMAKE_DL
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip"
@@ -24,9 +25,7 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set CMAKE %DKTOOLS_DIR%\%CMAKE_FOLDER%
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
     call dk_set CMAKE_EXE "%CMAKE%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto:cmake_installed
@@ -45,6 +44,7 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 	
 	
 	::### Add File Associations ###
+	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
 	
 	
