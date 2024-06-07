@@ -1,5 +1,6 @@
-include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
+include(${DKCMAKE_DIR}/functions/DK.cmake)
+
 
 message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 

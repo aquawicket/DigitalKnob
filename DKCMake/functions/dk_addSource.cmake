@@ -1,5 +1,5 @@
-include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 
 ###############################################################################
 # dk_addSource(<regex>)

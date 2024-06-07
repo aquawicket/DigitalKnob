@@ -1,5 +1,6 @@
-include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
+include(${DKCMAKE_DIR}/functions/DK.cmake)
+
 
 
 if(NOT DEFINED ENABLE_dk_debugFunc)

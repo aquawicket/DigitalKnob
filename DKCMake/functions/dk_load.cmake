@@ -40,7 +40,7 @@ macro(dk_load var)
 endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
 	endif()
