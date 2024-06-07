@@ -2,15 +2,8 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
 
-for /L %%i in (1,1,%CANCEL%) do (
-   call set "isCmdLineContext=%%"
-   if defined isCmdLineContext echo We are in CmdLineContext
-   call echo Cancel %%i- "%%~NX0", var = %%var%%
-   (goto) 2> NUL
-)
-
 set "ENABLE_dk_debugFunc=1"
-set "ENABLE_dk_printVar=0"
+set "ENABLE_dk_printVar=1"
 set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()

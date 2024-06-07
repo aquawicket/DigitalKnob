@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 
 
 ::####################################################################
