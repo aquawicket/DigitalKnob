@@ -136,7 +136,18 @@ DK () {
 
 	chmod 777 ${DKBASH_DIR}/functions/*
 	#export PATH=${PATH}:${DKBASH_DIR}/functions
-		
+	
+	###### Let's see the CallStack ######
+	echo "BASH_SOURCE[0]    = ${BASH_SOURCE[0]}"
+	echo "FUNCNAME[0]       = ${FUNCNAME[0]}"
+	#echo "BASH_ARGV[0]      = ${BASH_ARGV[0]}"
+	echo "BASH_ARGC[0]      = ${BASH_ARGC[0]}"
+	echo "   BASH_SOURCE[1]    = ${BASH_SOURCE[1]}"
+	echo "   FUNCNAME[1]       = ${FUNCNAME[1]}"
+	#echo "   BASH_ARGV[1]      = ${BASH_ARGV[1]}"
+	echo "   BASH_ARGC[1]      = ${BASH_ARGC[1]}"
+	  
+	  
 	###### Script loader ######
 	dk_source dk_return
 	dk_source __FILE__
@@ -156,6 +167,9 @@ DK () {
 	dk_load ${DKSCRIPT_PATH}
 				
 	#dk_bundleSource ${dk_load_list} builder_bundle.sh
+	
+	
+
 
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST}" = "1" ]; then

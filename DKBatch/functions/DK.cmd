@@ -1,6 +1,14 @@
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
+
+for /L %%i in (1,1,%CANCEL%) do (
+   call set "isCmdLineContext=%%"
+   if defined isCmdLineContext echo We are in CmdLineContext
+   call echo Cancel %%i- "%%~NX0", var = %%var%%
+   (goto) 2> NUL
+)
+
 set "ENABLE_dk_debugFunc=1"
 set "ENABLE_dk_printVar=0"
 set "KEEP_CONSOLE_OPEN=0"
@@ -24,25 +32,28 @@ set "KEEP_CONSOLE_OPEN=0"
 	set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
 	set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
 	
+	::############ Load Callstack ############
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd')"
+	call dk_callStack
+	:dk_callStackReturn
+	echo FUNCNAME[0]     = %FUNCNAME[0]%
+	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
+	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
+	echo BATCH_ARGC[0]   = %BATCH_ARGC[0]%
+::	  echo FUNCNAME[1]     = %FUNCNAME[1]%
+::	  echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
+::	  echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
+::	  echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
+	
+	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%__FILE__%"
+	set "DKSCRIPT_ARGS=%__ARGS__%"
+	
 	::############ Load dk_load.cmd ############
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	
-	::############ Load Callstack ############
-	call dk_load dk_callStack
-	call dk_callStack
-	:dk_callStackReturn
-	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
-	echo FUNCNAME[0]     = %FUNCNAME[0]%
-	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
-	echo BATCH_ARGC[0]   = %BATCH_ARGC[0]%
-	  echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
-	  echo FUNCNAME[1]     = %FUNCNAME[1]%
-	  echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
-	  echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
+	
 	
 	::############ Get DKSCRIPT_ variables ############
-	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%BATCH_SOURCE[1]%"
-	set "DKSCRIPT_ARGS=%BATCH_ARGV[1]%"
 	call dk_load dk_getDirname
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_load dk_getFilename

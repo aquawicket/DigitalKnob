@@ -39,9 +39,38 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	call dk_debug "test putting a function on the stack"
 
-call dk_debug test putting a function on the stack
+	echo 0 = %0
+    echo ~f0 = %~f0
+    echo ~nx0 = %~nx0
+	call :func1 abc
+goto:eof
 
-echo.
-call dk_stacktrace
-echo.
+:func1
+	call dk_debugFunc
+	echo 0 = %0
+    echo ~f0 = %~f0
+    echo ~nx0 = %~nx0
+	call :func2 123
+goto:eof
+
+:func2 
+	call dk_debugFunc
+	echo 0 = %0
+    echo ~f0 = %~f0
+    echo ~nx0 = %~nx0
+	call :func3 x y z
+goto:eof
+
+:func3
+	call dk_debugFunc
+	echo 0 = %0
+    echo ~f0 = %~f0
+    echo ~nx0 = %~nx0
+	pause
+	call dk_stacktrace
+	
+goto:eof
+

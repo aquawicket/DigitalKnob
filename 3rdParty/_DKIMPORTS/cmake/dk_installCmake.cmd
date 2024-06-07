@@ -24,8 +24,9 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
+	call dk_set CMAKE %DKTOOLS_DIR%\%CMAKE_FOLDER%
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
-    call dk_set CMAKE_EXE "%DKTOOLS_DIR%\%CMAKE_FOLDER%\bin\cmake.exe"
+    call dk_set CMAKE_EXE "%CMAKE%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto:cmake_installed
        
@@ -34,7 +35,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
     ::echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     call dk_download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
-	call dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%DKTOOLS_DIR%\%CMAKE_FOLDER%"
+	call dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE%"
 	::echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
     if NOT exist "%CMAKE_EXE%" call dk_error "cannot find cmake"
