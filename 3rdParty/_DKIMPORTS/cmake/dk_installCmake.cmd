@@ -36,7 +36,6 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     call dk_download "%CMAKE_DL%" "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%"
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE%"
-	::echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
     if NOT exist "%CMAKE_EXE%" call dk_error "cannot find cmake"
         
@@ -47,6 +46,4 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
 	
-	
-    pause
 goto:eof

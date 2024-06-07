@@ -1,8 +1,10 @@
 include_guard()
 
+cmake_policy(SET CMP0007 NEW)
 cmake_policy(SET CMP0011 NEW)
 cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0057 NEW)
+set(ENABLE_DKTEST 0)
 
 set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 if(CMAKE_SCRIPT_MODE_FILE)
@@ -41,7 +43,7 @@ dk_load(${DKSCRIPT_PATH})
 
 
 ###### DKTEST MODE ######
-#if("${ENABLE_DKTEST}" EQUAL "1")
+if("${ENABLE_DKTEST}" EQUAL "1")
 if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
 	message("\n###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######\n")
 			
@@ -49,7 +51,7 @@ if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
 	
 	message("\n########################## END TEST ################################\n")
 endif()
-#endif()
+endif()
 
 
 

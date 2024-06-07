@@ -61,10 +61,6 @@ endif()
 
 
 
-
-#include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
-
-
 dk_load(dk_dumpAllVariables)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 

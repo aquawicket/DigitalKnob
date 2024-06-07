@@ -24,7 +24,7 @@ include_guard()
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
+
 
 # Reference docs
 # Get the definition of any shell command		https://explainshell.com 
@@ -125,10 +125,11 @@ include_guard()
 #	dk_error("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
 #endif()
 
-dk_validate(DKIMPORTS_DIR "dk_getDKPaths()")
+dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 
 ########### CORE DEPENDENCIES ############
 dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
+dk_assert(CMAKE_EXE)
 if(MSVC)
 	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
 endif()
