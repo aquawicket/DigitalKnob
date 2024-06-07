@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_pathExists(<path> <result>)
+::# dk_pathExists(path rtn_var)
 ::#
 :dk_pathExists () {
 	call dk_debugFunc

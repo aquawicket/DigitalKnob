@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_getParentFolder(<input> <rtn_var>)
+::# dk_getParentFolder(<input> rtn_var)
 ::#
 ::#
 :dk_getParentFolder () {

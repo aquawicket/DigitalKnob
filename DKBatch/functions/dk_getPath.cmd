@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getPath(<path> <rtn_var>)
+::# dk_getPath(path rtn_var)
 ::#
 ::#    reference: https://stackoverflow.com/a/59739663/688352
 ::#

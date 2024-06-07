@@ -26,5 +26,5 @@ call DK
     set col4=%col4:~0,100%
     
 	call dk_set output "%col1% %col2% %col3% %col4%"
-    endlocal & call dk_set %1 %output%
+    endlocal & call dk_set %1 "%output%"
 goto:eof

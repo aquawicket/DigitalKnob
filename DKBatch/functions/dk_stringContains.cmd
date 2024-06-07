@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_stringContains(<haystack> <needle> <result>)
+::# dk_stringContains(<haystack> <needle> rtn_var)
 ::#
 ::#
 :dk_stringContains () {

@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getDirname(<path> <rtn_var>)
+::# dk_getDirname(path rtn_var)
 ::#
 ::#   https://en.wikipedia.org/wiki/Dirname
 ::#

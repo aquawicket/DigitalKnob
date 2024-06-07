@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_prependCmakeArgs(<string>)
+::# dk_prependCmakeArgs(string)
 ::#
 ::#
 :dk_prependCmakeArgs () {

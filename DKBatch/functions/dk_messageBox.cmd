@@ -3,7 +3,7 @@ call DK
 
 call dk_set VERSION_dk_messageBox 3
 ::################################################################################
-::# dk_messageBox(<title> <message> <rtn_var>)
+::# dk_messageBox(<title> <message> rtn_var)
 ::#
 ::#
 :dk_messageBox () {

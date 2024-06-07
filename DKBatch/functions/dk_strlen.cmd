@@ -3,7 +3,7 @@ call DK
 
 
 ::####################################################################
-::# dk_strlen(<string_var> <rtn_var>)
+::# dk_strlen(<string_var> rtn_var)
 ::#
 ::#
 :dk_strlen

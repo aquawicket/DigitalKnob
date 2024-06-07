@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_decimalToAscii(<decimal> <rtn_var>)
+::# dk_decimalToAscii(<decimal> rtn_var)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#

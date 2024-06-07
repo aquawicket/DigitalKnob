@@ -8,6 +8,8 @@ call DK
 ::#
 ::#
 :dk_loadAll() {
+	
+	if exist "%DKBATCH_FUNCTIONS_DIR%\_functionList_" goto:eof
 	:: download _functionList_ and load each function in the list
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\_functionList_" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/_functionList_', '%DKBATCH_FUNCTIONS_DIR%\_functionList_')"
 

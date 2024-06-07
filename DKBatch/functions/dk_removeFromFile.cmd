@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_removeFromFile(<string> <file>)
+::# dk_removeFromFile(string <file>)
 ::#
 ::#
 :dk_removeFromFile () {

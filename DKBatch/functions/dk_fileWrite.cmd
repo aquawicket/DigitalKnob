@@ -2,7 +2,7 @@
 call DK
 
 ::##################################################################################
-::# dk_fileWrite(<file> <string>)
+::# dk_fileWrite(<file> string)
 ::#
 ::#
 :dk_fileWrite () {

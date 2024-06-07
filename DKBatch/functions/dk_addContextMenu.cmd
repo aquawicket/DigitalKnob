@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_addContextMenu(<menuTitle> <exe> <command>)
+::# dk_addContextMenu(menuTitle, exe, command)
 ::#
 :dk_addContextMenu () {
     call dk_debugFunc

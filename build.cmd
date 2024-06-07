@@ -386,7 +386,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_appendCmakeArgs(<string>)
+::# dk_appendCmakeArgs(string)
 ::#
 ::#
 :dk_appendCmakeArgs () {
@@ -399,7 +399,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_prependCmakeArgs(<string>)
+::# dk_prependCmakeArgs(string)
 ::#
 ::#
 :dk_prependCmakeArgs () {
@@ -604,7 +604,7 @@ goto:eof
 ::####################################################################
 
 ::####################################################################
-::# dk_getParentFolder(<input> <rtn_var>)
+::# dk_getParentFolder(input, rtn_var)
 ::#
 ::#
 :dk_getParentFolder () {
@@ -644,7 +644,7 @@ goto:eof
 
 
 ::#####################################################################
-::# dk_getParentDir(<input> <rtn_var>)
+::# dk_getParentDir(input, rtn_var)
 ::#
 ::#
 :dk_getParentDir () {
@@ -988,7 +988,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_download(<url> <destination>)
+::# dk_download(url, destination)
 ::#
 ::#
 :dk_download () {
@@ -1008,7 +1008,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_makeDirectory(<path>)
+::# dk_makeDirectory(path)
 ::#
 ::#
 :dk_makeDirectory () {
@@ -1104,7 +1104,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_extract(<url> <destination>)
+::# dk_extract(url, destination)
 ::#
 ::#
 :dk_extract () {
@@ -1265,7 +1265,7 @@ goto:eof
 
 
 ::####################################################################
-::# dk_commandToVariable(<command . .> <variable_name>)
+::# dk_commandToVariable(command, variable_name)
 ::#
 ::#
 :dk_commandToVariable () {
@@ -1437,7 +1437,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+::# dk_cmakeEval(cmake_commands, return_variables, -DVARS,)
 ::#
 ::#
 :dk_cmakeEval () {
@@ -1519,7 +1519,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_commandExists(<command> <result>)
+::# dk_commandExists(command, result)
 ::#
 ::#
 :dk_commandExists () {
@@ -1533,7 +1533,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_stringContains(<haystack> <needle> <result>)
+::# dk_stringContains(haystack, needle, result)
 ::#
 ::#
 :dk_stringContains () {
@@ -1547,7 +1547,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_getFilename(<path> <output_variable>)
+::# dk_getFilename(path rtn_var)
 ::#
 ::#
 :dk_getFilename () {
@@ -1621,7 +1621,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_convertToCIdentifier(<in> <out>)
+::# dk_convertToCIdentifier(in, out)
 ::#
 ::#
 :dk_convertToCIdentifier () {
@@ -1646,7 +1646,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_toLower(<in> <out>)
+::# dk_toLower(in, rtn_var)
 ::#
 ::#
 :dk_toLower () {
@@ -1667,7 +1667,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_printVar(<variable>)
+::# dk_printVar(variable)
 ::#
 ::#
 :dk_printVar () {
@@ -1683,7 +1683,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_killProcess(<name>)
+::# dk_killProcess(name)
 ::#
 ::#
 :dk_killProcess () {
@@ -1694,7 +1694,7 @@ goto:eof
 
 
 ::################################################################################
-::# dk_verbose(<message>)
+::# dk_verbose(message)
 ::#
 ::#
 :dk_verbose () {
@@ -1707,7 +1707,7 @@ goto:eof
 
 
 ::##################################################################################
-::# dk_defined(<variable>)
+::# dk_defined(variable)
 ::#
 ::# Evaluates to true if the parameter is a variable that exists.
 ::#
@@ -1753,7 +1753,7 @@ goto:eof
 goto:eof
 
 ::################################################################################
-::# dk_info(<message>)
+::# dk_info(message)
 ::#
 ::#
 :dk_info () {

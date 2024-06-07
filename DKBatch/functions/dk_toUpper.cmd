@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_toUpper(<string> <rtn_var>)
+::# dk_toUpper(string rtn_var)
 ::#
 ::#
 :dk_toUpper () {

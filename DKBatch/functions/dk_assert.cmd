@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_assert(<expression>)
+::# dk_assert(expression)
 ::#
 :dk_assert () {
     call dk_debugFunc

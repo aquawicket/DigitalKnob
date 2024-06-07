@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_makeDirectory(<path>)
+::# dk_makeDirectory(path)
 ::#
 ::#
 :dk_makeDirectory () {

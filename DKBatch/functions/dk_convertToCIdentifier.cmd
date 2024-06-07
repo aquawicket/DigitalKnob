@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_convertToCIdentifier(<string> <rtn_var>)
+::# dk_convertToCIdentifier(string rtn_var)
 ::#
 ::#
 :dk_convertToCIdentifier () {

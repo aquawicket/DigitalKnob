@@ -26,7 +26,7 @@ goto:eof
 
 
 
-:replace_substring <input> <replace> <with> <rtn_var>
+:replace_substring <input> <replace> <with> rtn_var
    set "input_string=%1"
    call set "%4=%%input_string:%2=%3%%"
    

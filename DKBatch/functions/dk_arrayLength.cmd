@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayLength(array, length>)
+::# dk_arrayLength(array, length)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_length
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length

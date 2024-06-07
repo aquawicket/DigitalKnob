@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayShift(<array>)
+::# dk_arrayShift(array)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_shift
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift

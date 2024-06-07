@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getUnquoted(<variable> <rtn_var>)
+::# dk_getUnquoted(<variable> rtn_var)
 ::#
 ::#
 :dk_getUnquoted () {

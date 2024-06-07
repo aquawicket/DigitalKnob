@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_isNumber(<in> <result>)
+::# dk_isNumber(<in> rtn_var)
 ::#
 ::#	 https://stackoverflow.com/a/17584764
 ::#

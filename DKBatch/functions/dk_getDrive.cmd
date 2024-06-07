@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_getDrive(<path> <rtn_var>)
+::# dk_getDrive(path rtn_var)
 ::#
 ::#
 :dk_getDrive () {

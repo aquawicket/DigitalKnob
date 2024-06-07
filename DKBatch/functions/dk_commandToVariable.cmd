@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_commandToVariable(<command . .> <variable_name>)
+::# dk_commandToVariable(command, variablevariable)
 ::#
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#

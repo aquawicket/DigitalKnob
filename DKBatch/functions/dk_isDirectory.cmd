@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_isDirectory(<path> <result>)
+::# dk_isDirectory(path rtn_var)
 ::#
 ::#
 :dk_isDirectory () {

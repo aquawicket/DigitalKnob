@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getExtension(<path> <rtn_var>)
+::# dk_getExtension(path rtn_var)
 ::#
 ::#
 :dk_getExtension () {

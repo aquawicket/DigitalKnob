@@ -2,7 +2,7 @@
 call DK
 
 ::##################################################################################
-::# dk_fileAppend(<file> <string>)
+::# dk_fileAppend(<file> string)
 ::#
 ::#
 :dk_fileAppend () {

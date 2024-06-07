@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_commandExists(<command> <result>)
+::# dk_commandExists(<command> rtn_var)
 ::#
 :dk_commandExists () {
 	call dk_debugFunc

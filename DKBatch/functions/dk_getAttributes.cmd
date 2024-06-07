@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_getAttributes(<path> <rtn_var>)
+::# dk_getAttributes(path rtn_var)
 ::#
 :dk_getAttributes () {
 	call dk_debugFunc
