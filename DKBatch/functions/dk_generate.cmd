@@ -99,10 +99,11 @@ call DK
 	
 	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
-::	set "TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
-::	call dk_printVar TOOLCHAIN
-::	set "TOOLCHAIN_FILE=%%TOOLCHAIN:^\=^/%%"
-::	if exist %TOOLCHAIN% call dk_appendCmakeArgs -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+	set "TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
+	call dk_printVar TOOLCHAIN
+	call dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
+	call dk_validatePath TOOLCHAIN_FILE
+	if exist %TOOLCHAIN% call dk_appendCmakeArgs -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
 	
 ::	###### WSL CMake Fix ######

@@ -4,7 +4,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 set "ENABLE_dk_debugFunc=1"
 set "ENABLE_dk_printVar=1"
-set "KEEP_CONSOLE_OPEN=0"
+set "KEEP_CONSOLE_OPEN=1"
 ::####################################################################
 ::# DK()
 ::#
@@ -37,9 +37,9 @@ set "KEEP_CONSOLE_OPEN=0"
 ::	  echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
 ::	  echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
 ::	  echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
-	
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%__FILE__%"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
+	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
 	
 	::############ Load dk_load.cmd ############
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
@@ -52,7 +52,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	call dk_load dk_getFilename
 	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	
-	::if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
+	
 	
 	::############ LOAD FUNCTION FILES ############
 	call dk_load dk_loadAll
