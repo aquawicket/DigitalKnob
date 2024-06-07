@@ -65,7 +65,6 @@ dk_fixme
 dk_generate 
 dk_getAttributes 
 dk_getBasename 
-dk_getCaller 
 dk_getDirectories 
 dk_getDirname 
 dk_getDKPaths 
