@@ -74,7 +74,7 @@ goto:eof
 goto:eof
 
 
-:dk_shiftArray
+:dkshiftArray
 	set FUNCNAME_size=0
 	:arrayCountLoop
 	if defined FUNCNAME[%FUNCNAME_size%] ( 
@@ -111,7 +111,7 @@ goto:eof
 :Step3
 	endlocal
 	
-	::call:dk_shiftArray
+	::call:dkshiftArray
 	
 	rem ##### Set BATCH_ARGC's ######
 	set BATCH_ARGC[0]=0
