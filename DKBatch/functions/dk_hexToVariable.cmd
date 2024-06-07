@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_hexToVariable(<name> <hex>)
+::# dk_hexToVariable(name, hex)
 ::#
 ::#    reference: https://www.ascii-code.com
 ::#

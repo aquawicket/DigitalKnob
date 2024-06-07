@@ -8,7 +8,7 @@ if not defined blue  call set "blue=%ESC%[34m"
 if not defined clr   call set "clr=%ESC%[0m"
 if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=0"
 ::################################################################################
-::# dk_printVar(<variable>)
+::# dk_printVar(variable)
 ::#
 ::#
 :dk_printVar () {

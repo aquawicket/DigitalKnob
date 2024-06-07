@@ -21,7 +21,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_isDirectory "C:\Windows" && call dk_info "is a directory" || call dk_info "is NOT a directory"
 	

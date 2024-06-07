@@ -22,9 +22,9 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 :dk_debugFunc () {
 	if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_caller.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_caller.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_caller.cmd')"
-	call dk_caller
-	:dk_caller_return
+	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd')"
+	call dk_callStack
+	:dk_callStackReturn
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
@@ -52,11 +52,6 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	::echo __ARGS__ = %__ARGS__%
 	::echo __ARGC__ = %__ARGC__%
 		
-::	call dk_getCaller 2
-::	:dk_getCaller_return2
-::	set DKSTACK[%DKSTACK_marker%].__FILE__=%caller[0].fullpath%
-::	set DKSTACK[%DKSTACK_marker%].__FUNCTION__=%caller[0].func%
-::	set DKSTACK[%DKSTACK_marker%].__ARGS__=%caller[0].args%
 	set /a DKSTACK_length+=1
 	set /a DKSTACK_marker=%DKSTACK_length%	
 ::	if %DKSTACK_length% LSS %MAX_STACK_LINES% (
@@ -86,5 +81,5 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 goto:eof

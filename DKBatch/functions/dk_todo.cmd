@@ -8,7 +8,7 @@ if not defined PAUSE_ON_TODO   call dk_set PAUSE_ON_TODO 0
 if not defined HALT_ON_TODO    call dk_set HALT_ON_TODO 0
 call dk_set TODO_TAG "  TODO: "
 ::##################################################################################
-::# dk_todo(<message>)
+::# dk_todo(message)
 ::#
 ::#    Print a todo message to the console
 ::#
@@ -37,7 +37,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_todo "test dk_todo message"
 	call dk_info "...next line..."

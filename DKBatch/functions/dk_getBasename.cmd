@@ -22,7 +22,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getBasename C:\Windows\System32 name
 	echo name = %name%

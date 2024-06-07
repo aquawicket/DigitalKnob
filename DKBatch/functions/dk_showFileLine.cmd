@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_showFileLine(<filepath> <match_string>)
+::# dk_showFileLine(filepath, match_string)
 ::#
 ::#
 ::#

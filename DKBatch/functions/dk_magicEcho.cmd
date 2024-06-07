@@ -100,7 +100,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?

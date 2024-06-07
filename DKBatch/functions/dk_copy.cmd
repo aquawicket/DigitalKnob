@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_copy(<from> <to>)
+::# dk_copy(from, to)
 ::#
 ::#	copy a file or directory to another location
 ::#
@@ -48,18 +48,18 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
-	echo "dk_copy test" > %DKDOWNLOAD_DIR%/copyMe.file
-	call dk_copy %DKDOWNLOAD_DIR%/copyMe.file %DIGITALKNOB_DIR%/iWasCopied.txt OVERWRITE
+	echo "dk_copy test" > %DKDOWNLOAD_DIR%\copyMe.file
+	call dk_copy %DKDOWNLOAD_DIR%\copyMe.file %DIGITALKNOB_DIR%\iWasCopied.txt OVERWRITE
 	
 	echo "dk_copy test" > copyMe.file
 	call dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
-	call dk_makeDirectory %DKDOWNLOAD_DIR%/copyMe
-	call dk_copy %DKDOWNLOAD_DIR%/copyMe %DIGITALKNOB_DIR%/iWasCopied OVERWRITE
+	call dk_makeDirectory %DKDOWNLOAD_DIR%\copyMe
+	call dk_copy %DKDOWNLOAD_DIR%\copyMe %DIGITALKNOB_DIR%\iWasCopied OVERWRITE
 	
 	call dk_makeDirectory copyMe
 	call dk_copy copyMe iWasCopied OVERWRITE

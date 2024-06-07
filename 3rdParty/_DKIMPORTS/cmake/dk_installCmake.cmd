@@ -1,5 +1,5 @@
 @echo off
-call "../../../DKBatch/functions/DK.cmd"
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 
 ::####################################################################
@@ -37,14 +37,14 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 	::echo %CMAKE_FOLDER%>"%DKTOOLS_DIR%\%CMAKE_FOLDER%\installed"
     
-    if NOT exist "%CMAKE_EXE%"  call dk_error "cannot find cmake"
+    if NOT exist "%CMAKE_EXE%" call dk_error "cannot find cmake"
         
 	:cmake_installed	
 	
 	
 	::### Add File Associations ###
-	call %DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd
+	call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
 	
 	
-    call dk_checkError
+    pause
 goto:eof

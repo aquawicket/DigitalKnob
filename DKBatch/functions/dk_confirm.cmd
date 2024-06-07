@@ -27,7 +27,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	::###### Using && and || conditionals
 	call dk_confirm && (echo "the confimation has passed") || (echo "the confimation has failed")

@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_extract(<file> <destination>)
+::# dk_extract(file, destination)
 ::#
 ::#
 :dk_extract () {
@@ -17,7 +17,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	call dk_extract "%DKDOWNLOAD_DIR%/cmake-3.29.0-windows-x86_64.zip" "%DKDOWNLOAD_DIR%"

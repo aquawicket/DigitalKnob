@@ -24,7 +24,7 @@ call DK
 goto:eof
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_set myDecimal 45
 	call dk_decimalToHex "%myDecimal%" myHex

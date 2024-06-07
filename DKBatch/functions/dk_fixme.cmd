@@ -8,7 +8,7 @@ if not defined PAUSE_ON_FIXME   set "PAUSE_ON_FIXME=1"
 if not defined HALT_ON_FIXME    set "HALT_ON_FIXME=1"
 :: FIXME_TAG="FIXME: "
 ::################################################################################
-::# dk_fixme(<message>)
+::# dk_fixme(message)
 ::#
 ::#    Print a fixme message to the console
 ::#
@@ -37,7 +37,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_fixme "test dk_fixme message"
 	echo "...next line..."

@@ -79,7 +79,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
 	echo messageBox_result = %messageBox_result%

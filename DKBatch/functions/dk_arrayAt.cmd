@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayAt(array, index, element>)
+::# dk_arrayAt(array, index, element)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
@@ -17,7 +17,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"

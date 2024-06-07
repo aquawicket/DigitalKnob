@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_set(<name> <value>)
+::# dk_set(name, value)
 ::#
 ::#
 :dk_set () {
@@ -17,7 +17,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_set myVar "value assigned with dk_set"
 	echo myVar = %myVar%

@@ -107,7 +107,7 @@ goto:eof
 
 
 
-:: *** STEP3 Restart the requester batch, but jump to the label :dk_caller
+:: *** STEP3 Restart the requester batch, but jump to the label :dk_callStackReturn
 :Step3
 	endlocal
 	
@@ -120,13 +120,13 @@ goto:eof
 	for %%x in (%BATCH_ARGV[1]%) do set /A BATCH_ARGC[1]+=1
 	
 	rem ### Return to :dk_caller_return lable in calling function
-	call :dk_caller_return
-	:::dk_caller_return
+	call :dk_callStackReturn
+	:::dk_callStackReturn
 	::%BATCH_SOURCE[0]% %BATCH_ARGV[0]%
 goto:eof
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
-:dk_caller_return
+:dk_callStackReturn
 	endlocal
 	::%BATCH_SOURCE[0]% %BATCH_ARGV[0]%
 	%BATCH_SOURCE% %BATCH_ARGV%

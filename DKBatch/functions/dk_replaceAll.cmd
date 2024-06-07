@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_replaceAll("input" "searchValue" "newValue" <output_variable>)
+::# dk_replaceAll(input searchValue newValue trn_var)
 ::#
 ::#
 :dk_replaceAll () {
@@ -19,7 +19,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 call dk_set string_var "AZC AZC Zannana Zread"
 call dk_printVar string_var

@@ -13,7 +13,7 @@ call DK
 goto:eof
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	set "myDecimal=32"
 	call dk_decimalToVariable "%myDecimal%" myVariable

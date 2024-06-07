@@ -31,7 +31,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	set "myAscii=x"
 	call dk_asciiToHex myAscii myHex

@@ -22,7 +22,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getDirname "C:\Windows\System32" result
 	call dk_printVar result

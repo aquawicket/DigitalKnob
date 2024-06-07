@@ -8,7 +8,7 @@ if not defined PAUSE_ON_VERBOSE   call dk_set PAUSE_ON_VERBOSE 0
 if not defined HALT_ON_VERBOSE    call dk_set HALT_ON_VERBOSE 0
 ::VERBOSE)TAG="  VERBOSE: "
 ::################################################################################
-::# dk_verbose(<message>)
+::# dk_verbose(message)
 ::#
 ::#	   Print a verbose message to the console
 ::#
@@ -37,7 +37,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_verbose "test dk_verbose message"
 	call dk_info "...next line..."

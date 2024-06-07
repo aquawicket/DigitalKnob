@@ -23,7 +23,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_set filepath "/test/test2/xfile.extension"
 	call dk_removeExtension "%filepath%" filepath

@@ -19,6 +19,6 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"

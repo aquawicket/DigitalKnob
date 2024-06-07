@@ -2,7 +2,7 @@
 call DK
 
 ::#################################################################################
-::# dk_inputTimeout(<message> <timeout> <default>)
+::# dk_inputTimeout(message, timeout, default)
 ::#
 ::#	reference: https://stackoverflow.com/a/7703584/688352
 ::#
@@ -51,6 +51,6 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_inputTimeout "this message will time out" 5 default

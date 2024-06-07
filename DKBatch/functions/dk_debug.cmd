@@ -35,7 +35,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_debug "test dk_debug message"
 	call dk_info "...next line..."

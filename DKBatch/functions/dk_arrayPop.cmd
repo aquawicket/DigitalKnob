@@ -19,7 +19,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"

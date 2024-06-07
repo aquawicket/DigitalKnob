@@ -19,6 +19,6 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"

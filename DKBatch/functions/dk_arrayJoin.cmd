@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayJoin(array, separator, string>)
+::# dk_arrayJoin(array, separator, string)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_join
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
@@ -31,7 +31,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	set "array[0]=a"
 	set "array[1]=b"

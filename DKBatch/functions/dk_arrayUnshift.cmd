@@ -1,7 +1,7 @@
 @echo off
 call DK
 
-::################################################################################
+::###################################################################################################
 ::# dk_arrayUnshift(array, element1, element2, /* …, */ elementN)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_unshift
@@ -30,9 +30,8 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo testing dk_arrayUnshift . . .
 	set "MyArray[0]=c"
 	set "MyArray[1]=d"
 	set "MyArray[2]=e"

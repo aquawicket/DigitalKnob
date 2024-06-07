@@ -2,7 +2,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 @echo off
 
 set "ENABLE_dk_debugFunc=1"
-set "ENABLE_dk_printVar=1"
+set "ENABLE_dk_printVar=0"
 set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()
@@ -15,7 +15,7 @@ set "KEEP_CONSOLE_OPEN=0"
 	for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
 	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
 	set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" (echo "DKBATCH_DIR does not exist" & goto:eof)
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" (echo "DKBATCH_FUNCTIONS_DIR does not exist" & goto:eof)
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	
 	::############ Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
@@ -28,9 +28,9 @@ set "KEEP_CONSOLE_OPEN=0"
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	
 	::############ Load Callstack ############
-	call dk_load dk_caller
-	call dk_caller
-	:dk_caller_return
+	call dk_load dk_callStack
+	call dk_callStack
+	:dk_callStackReturn
 	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
 	echo FUNCNAME[0]     = %FUNCNAME[0]%
 	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%

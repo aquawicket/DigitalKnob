@@ -5,8 +5,8 @@ call DK
 
 
 ::################################################################################
-::# dk_arrayIndexOf(array, searchElement, index>)
-::# dk_arrayIndexOf(array, searchElement, fromIndex, index>)
+::# dk_arrayIndexOf(array, searchElement, index)
+::# dk_arrayIndexOf(array, searchElement, fromIndex, index)
 ::#
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
@@ -38,7 +38,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "!!! FIXME !!!"
 	set "array[0]=a"

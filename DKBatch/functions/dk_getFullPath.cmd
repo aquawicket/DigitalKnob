@@ -21,7 +21,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getFullPath "DK.cmd" fullPath
 	echo fullPath = %fullPath%

@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_textFormat(<OUTPUT> <column1> <column2> <column3> <column4>)
+::# dk_textFormat(OUTPUT. column1, column2, column3, column4)
 ::#
 ::#   reference: https://stackoverflow.com/a/19588505
 ::#   

@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_powershellEval(<powershell_commands>)
+::# dk_powershellEval(commands)
 ::#
 ::#
 :dk_powershellEval () {
@@ -91,7 +91,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): $PSVAR'"
 

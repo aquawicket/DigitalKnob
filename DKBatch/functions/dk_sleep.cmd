@@ -2,7 +2,7 @@
 call DK
 
 ::####################################################################
-::# dk_sleep(<seconds>)
+::# dk_sleep(seconds)
 ::#
 :dk_sleep () {
 	call dk_debugFunc

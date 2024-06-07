@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_rename(<from> <to>)
+::# dk_rename(from, to)
 ::#
 ::#	Rename/Move a file or directory to another name/location
 ::#
@@ -45,7 +45,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	

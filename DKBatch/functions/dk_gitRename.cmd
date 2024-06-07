@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_gitRename(<from> <to>)
+::# dk_gitRename(from, to)
 ::#
 ::#   rename a file in git
 ::#

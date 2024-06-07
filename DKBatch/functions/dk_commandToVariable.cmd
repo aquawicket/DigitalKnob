@@ -75,7 +75,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_set myCommand dir
 	call dk_commandToVariable "%myCommand%" myVariable

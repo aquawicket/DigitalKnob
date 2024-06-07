@@ -19,7 +19,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_set myDecimal 123
 	call dk_decimalToAscii "%myDecimal%" myAscii

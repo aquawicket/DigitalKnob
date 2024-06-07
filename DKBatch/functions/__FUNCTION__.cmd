@@ -2,7 +2,7 @@
 call DK
 
 ::##################################################################################
-::# __FUNCTION__(<frame>)
+::# __FUNCTION__(frame)
 ::#
 :__FUNCTION__() {
 	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
@@ -13,6 +13,6 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__FUNCTION__)"

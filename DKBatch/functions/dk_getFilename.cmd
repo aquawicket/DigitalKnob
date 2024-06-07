@@ -21,7 +21,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getFilename "C:\Windows\System32\notepad.exe" filename
 	echo filename = %filename%

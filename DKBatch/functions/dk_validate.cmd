@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_validate(<variable> <code>)
+::# dk_validate(variable, code)
 ::#
 ::#    Check if a variable is valid, otherwise run the function that defines said variable.
 ::#
@@ -27,7 +27,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%

@@ -8,7 +8,7 @@ if not defined PAUSE_ON_ERROR   set "PAUSE_ON_ERROR=1"
 if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 :: ERROR_TAG="ERROR: "
 ::################################################################################
-::# dk_error(<message>)
+::# dk_error(message)
 ::#
 ::#    Print a error message to the console
 ::#
@@ -37,7 +37,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_error "test dk_error message"
 	echo "...next line..."

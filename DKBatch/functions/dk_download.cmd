@@ -4,7 +4,7 @@ call DK
 :: call dk_load dk_checkError
 
 ::####################################################################
-::# dk_download(<url> <destination>)
+::# dk_download(url, destination)
 ::#
 ::#
 :dk_download () {
@@ -29,6 +29,6 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd DKBuilder.cmd

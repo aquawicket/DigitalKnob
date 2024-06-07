@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
 ::#
 ::#
 :dk_cmakeEval () {
@@ -105,7 +105,7 @@ goto:eof
 
 
 
-:DKTEST ###############################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
 	call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
 

@@ -20,7 +20,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_fileToVariable "DK.cmd" myVar
 	echo "%myVar%"

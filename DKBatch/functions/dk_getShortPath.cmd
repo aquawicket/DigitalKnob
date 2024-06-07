@@ -19,7 +19,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getShortPath "C:\Program Files" shortPath
 	echo shortPath = %shortPath%

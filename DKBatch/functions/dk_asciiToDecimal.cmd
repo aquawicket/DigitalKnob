@@ -17,7 +17,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	call dk_set myAscii x
 	call dk_asciiToDecimal myAscii myDecimal

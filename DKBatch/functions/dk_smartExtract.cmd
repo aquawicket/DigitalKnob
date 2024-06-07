@@ -3,7 +3,7 @@ call DK
 
 
 ::##################################################################################
-::# dk_smartExtract(<src> <dest>)
+::# dk_smartExtract(src, dest)
 ::#
 ::#
 :dk_smartExtract () {
@@ -39,16 +39,16 @@ call DK
 ::	)
 	
 	call dk_info "Extracting %src_filename% . . ."
-	call dk_remove "%src_directory%/UNZIPPED"
-	call dk_extract "%src_fullpath%" "%src_directory%/UNZIPPED"
+	call dk_remove "%src_directory%\UNZIPPED"
+	call dk_extract "%src_fullpath%" "%src_directory%\UNZIPPED"
 	
 	
-	call dk_getDirectories "%src_directory%/UNZIPPED" directories
+	call dk_getDirectories "%src_directory%\UNZIPPED" directories
 	call dk_printVar directories
 	call dk_arrayLength directories dir_count
 	call dk_printVar dir_count
 	
-	call dk_getFiles "%src_directory%/UNZIPPED" files
+	call dk_getFiles "%src_directory%\UNZIPPED" files
 	call dk_arrayLength files file_count
 	call dk_printVar file_count
 	
@@ -59,15 +59,15 @@ call DK
 	)
 
 	:: rename/move UNZIPPED folder to dest path"
-	call dk_move "%src_directory%/UNZIPPED" "%dest_fullpath%" OVERWRITE	
+	call dk_move "%src_directory%\UNZIPPED" "%dest_fullpath%" OVERWRITE	
 goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
-	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.1"
+	call dk_smartExtract "%DKDOWNLOAD_DIR%\test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%\test_file_0.0.1"
 	
-	call dk_smartExtract "%DKDOWNLOAD_DIR%/test_file_0.0.2.zip" "%DKDOWNLOAD_DIR%/test_file_0.0.2"
+	call dk_smartExtract "%DKDOWNLOAD_DIR%\test_file_0.0.2.zip" "%DKDOWNLOAD_DIR%\test_file_0.0.2"
 	

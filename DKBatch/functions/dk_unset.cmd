@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_unset(<name>)
+::# dk_unset(name)
 ::#
 ::#
 :dk_unset () {
@@ -14,7 +14,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_set myVar "initial value assigned with dk_unset"
 	echo myVar = %myVar%

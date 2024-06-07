@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_echo(<message>)
+::# dk_echo(message)
 ::#
 ::#	    Print a message to the console
 ::#
@@ -25,7 +25,7 @@ goto:eof
 
 
 
-:DKTEST ########################################################################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 echo "This is a normal echo commmand"
 call dk_echo "This is a dk_echo line"
