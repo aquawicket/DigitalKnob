@@ -18,10 +18,10 @@ call DK
 	::lastErrorFile="${BASH_SOURCE[1]}"
 	::export lastErrorFile=$(realpath ${lastErrorFile})
 	::export lastErrorLine="${BASH_LINENO[1-1]}"
+	set "_var_=%~1"
+	call set "_value_=%%%_var_%%%"
+	if not exist "%_value_%" (
 		
-	if not exist "%~1" (
-		set "_var_=%~1"
-		call set "_value_=%%%_var_%%%"
 		call dk_error "Assertion failed: %~1 : %_value_% is not found!"
 	)
 

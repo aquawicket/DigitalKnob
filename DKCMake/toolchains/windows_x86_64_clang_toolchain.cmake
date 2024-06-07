@@ -13,7 +13,7 @@ if(NOT DKCMAKE_DIR)
 endif()
 
 include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-dk_load(${DKCMAKE_DIR}/DK.cmake)
+dk_load(${DKCMAKE_DIR}/functions/DK.cmake)
 dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
 set(CLANG64_DIR "${MSYS2}/clang64")
 set(CMAKE_MAKE_PROGRAM ${CLANG64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")

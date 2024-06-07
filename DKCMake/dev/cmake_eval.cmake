@@ -36,7 +36,7 @@ CMAKE_POLICY(SET CMP0007 NEW)
 
 include(${DKCMAKE_DIR}/functions/dk_load.cmake)
 #dk_load(dk_eval)
-dk_load(${DKCMAKE_DIR}/DK.cmake)
+dk_load(${DKCMAKE_DIR}/functions/DK.cmake)
 
 
 

@@ -25,7 +25,7 @@ include_guard()
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#include("${DKCMAKE_DIR}/DK.cmake")
+#include("${DKCMAKE_DIR}/functions/DK.cmake")
 
 # FIXME: work to remove this
 #if(COMMAND cmake_policy)

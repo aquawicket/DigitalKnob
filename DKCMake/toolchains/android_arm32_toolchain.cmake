@@ -13,7 +13,7 @@ if(NOT DKCMAKE_DIR)
 endif()
 
 include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-dk_load(${DKCMAKE_DIR}/DK.cmake)
+dk_load(${DKCMAKE_DIR}/functions/DK.cmake)
 dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
 dk_load(${ANDROID_TOOLCHAIN_FILE})
 

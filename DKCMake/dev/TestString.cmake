@@ -29,7 +29,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 # "Do not ignore empty list items"
 CMAKE_POLICY(SET CMP0007 NEW)
 
-include(${DKCMAKE_DIR}/DK.cmake)
+include(${DKCMAKE_DIR}/functions/DK.cmake)
 
 dk_set(string_Ext ON)
 include(${DKCMAKE_DIR}/DKString.cmake)
