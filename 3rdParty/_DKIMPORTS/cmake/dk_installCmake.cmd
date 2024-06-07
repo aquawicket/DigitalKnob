@@ -24,6 +24,7 @@ if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set CMAKE %DKTOOLS_DIR%\%CMAKE_FOLDER%
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
     call dk_set CMAKE_EXE "%CMAKE%\bin\cmake.exe"
