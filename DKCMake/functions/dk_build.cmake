@@ -2,12 +2,12 @@ include(${DKCMAKE_DIR}/functions/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_build(path target) NO_HALT
+# dk_build(path, target) NO_HALT
 #
 #	TODO
 #
-#	@path 				- path to the library root 	 I.E. ${MyLibrary_Dir} 
-#	@target (optional)	- The target of the project to build
+#	path 				- path to the library root 	 I.E. ${MyLibrary_Dir} 
+#	target (optional)	- The target of the project to build
 #
 function(dk_build path) #target NO_HALT
 	dk_debugFunc(${ARGV})
