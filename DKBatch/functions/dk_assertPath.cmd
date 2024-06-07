@@ -20,7 +20,9 @@ call DK
 	::export lastErrorLine="${BASH_LINENO[1-1]}"
 		
 	if not exist "%~1" (
-		call dk_error "Assertion failed: %~1"
+		set "_var_=%~1"
+		call set "_value_=%%%_var_%%%"
+		call dk_error "Assertion failed: %~1 : %_value_% is not found!"
 	)
 
 goto:eof

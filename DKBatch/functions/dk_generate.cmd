@@ -20,7 +20,7 @@ call DK
     call dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
+    call dk_set TARGET_PATH "%DKAPPS_DIR%\%APP%"
     call dk_printVar TARGET_PATH
     call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
@@ -46,7 +46,7 @@ call DK
     if "%DKLINK%"=="Shared"          call dk_appendCmakeArgs -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" call dk_appendCmakeArgs -DEMSCRIPTEN=ON
         
-    set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
+    call dk_set CMAKE_BINARY_DIR "%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
     call dk_printVar CMAKE_BINARY_DIR
         
     call dk_appendCmakeArgs -S=%CMAKE_SOURCE_DIR%
@@ -99,7 +99,8 @@ call DK
 	
 	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
-	set "TOOLCHAIN=%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
+	call dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
+	call dk_assertPath TOOLCHAIN
 	call dk_printVar TOOLCHAIN
 	call dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
 	call dk_validatePath TOOLCHAIN_FILE
