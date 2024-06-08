@@ -1,8 +1,6 @@
 @echo off
 call DK
 
-:: call dk_load dk_checkError
-
 ::####################################################################
 ::# dk_download(url, destination)
 ::#
