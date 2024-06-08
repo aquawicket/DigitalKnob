@@ -31,6 +31,9 @@ call DK
 	if not exist "%fpath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%fn%.cmd" "%fpath%"
 	if not exist "%fpath%" call dk_error "ERROR: %fpath%: file not found"
 	
+	goto:eof
+	:: TODO
+	
 	:: Convert to windows line endings if only CR found
 	
 	:: TODO
