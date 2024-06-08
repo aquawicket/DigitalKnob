@@ -13,6 +13,7 @@ call dk_load dk_validateBranch
 call dk_load dk_validateGit
 call dk_load dk_stringContains
 call dk_load dk_getDKPaths
+call dk_load dk_getHostTriple
 
 ::###### Run Program ######
 call dk_validate DKBRANCH_DIR "call dk_validateBranch"
