@@ -47,6 +47,7 @@ set "KEEP_CONSOLE_OPEN=1"
 	
 	
 	::############ Get DKSCRIPT_ variables ############
+	call dk_load dk_printVar
 	call dk_load dk_set
 	call dk_load dk_getDirname
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
