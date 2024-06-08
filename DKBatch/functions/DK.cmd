@@ -55,11 +55,11 @@ set "KEEP_CONSOLE_OPEN=1"
 	
 	
 	::############ LOAD FUNCTION FILES ############
-	call dk_load dk_loadAll
-	call dk_loadAll
+	::call dk_load dk_loadAll
+	::call dk_loadAll
 	::call dk_load %DKSCRIPT_PATH%
 
-	call dk_assert DKSCRIPT_PATH
+	
 	
 	:: Get args after %~1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
