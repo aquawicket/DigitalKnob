@@ -6,10 +6,8 @@ if (! (Test-Path "DKPowershell")) { New-Item -Path 'DKPowershell' -ItemType Dire
 if (! (Test-Path "DKPowershell/functions")) { New-Item -Path 'DKPowershell/functions' -ItemType Directory }
 if (! (Test-Path "DKPowershell/functions/DK.ps1")) { Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1" -OutFile "DKPowershell\functions\DK.ps1" }
 
-
-
 ###### DK_INIT ######
-. $PWD\DKPowershell\functions\DK.ps1
+. DKPowershell\functions\DK.ps1
 
 ###### Load Main Program ######
 dk_load dk_validate
@@ -29,9 +27,9 @@ dk_load dk_toLower
 dk_validate GIT_EXE "dk_validateGit"
 dk_validate DKBRANCH_DIR "dk_validateBranch"
 if (! (Test-Path "$DKBRANCH_DIR/.git")){
-	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
+	dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
-	$GIT_EXE checkout $DKBRANCH
+	dk_call "$GIT_EXE" checkout $DKBRANCH
 	echo "Digitalknob installation complete"
 	#pause
 	#exit
