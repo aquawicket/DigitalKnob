@@ -1,15 +1,15 @@
 #!/bin/sh
 
-###### install DK.sh ######
-[ ! -e DKBash ] && mkdir DKBash
-[ ! -e DKBash/functions ] && mkdir DKBash/functions
-if [ ! -e DKBash/functions/DK.sh ]; then
-	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wil curl
-	curl -Lo DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
-fi
+###### install DK.ps1 ######
+$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
+if (! (Test-Path "DKPowershell")) { New-Item -Path 'DKPowershell' -ItemType Directory }
+if (! (Test-Path "DKPowershell/functions")) { New-Item -Path 'DKPowershell/functions' -ItemType Directory }
+if (! (Test-Path "DKPowershell/functions/DK.ps1")) { Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1" -OutFile "DKPowershell\functions\DK.ps1" }
+
+
 
 ###### DK_INIT ######
-. DKBash/functions/DK.sh
+. $PWD\DKPowershell\functions\DK.ps1
 
 ###### Load Main Program ######
 dk_load dk_validate
@@ -28,13 +28,13 @@ dk_load dk_toLower
 ###### Run Program ######
 dk_validate GIT_EXE "dk_validateGit"
 dk_validate DKBRANCH_DIR "dk_validateBranch"
-if [ ! -e "$DKBRANCH_DIR/.git" ]; then
+if (! (Test-Path "$DKBRANCH_DIR/.git")){
 	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
 	$GIT_EXE checkout $DKBRANCH
 	echo "Digitalknob installation complete"
 	#pause
 	#exit
-else
+} else {
 	echo "DigitalKnob is already installed at $DKBRANCH_DIR"
-fi
+}
