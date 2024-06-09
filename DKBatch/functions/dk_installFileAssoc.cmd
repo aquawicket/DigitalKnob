@@ -2,10 +2,10 @@
 call DK
 
 ::#################################################################################
-::# dk_setFileAssoc(extension, exe, arguments)
+::# dk_installFileAssoc(extension, exe, arguments)
 ::#
 ::#
-:dk_setFileAssoc
+:dk_installFileAssoc
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
@@ -86,7 +86,7 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	call dk_setFileAssoc ".txt" "C:\Windows\System32\notepad.exe"
+	call dk_installFileAssoc ".txt" "C:\Windows\System32\notepad.exe"
 
 
 

@@ -2,10 +2,10 @@
 call DK
 
 ::#################################################################################
-::# dk_unsetFileAssoc(extension)
+::# dk_uninstallFileAssoc(extension)
 ::#
 ::#
-:dk_unsetFileAssoc
+:dk_uninstallFileAssoc
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
@@ -74,7 +74,7 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	call dk_unsetFileAssoc ".txt"
+	call dk_uninstallFileAssoc ".txt"
 
 
 

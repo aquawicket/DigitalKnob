@@ -13,13 +13,13 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	
 ::  if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    call dk_set CMAKE_DL
-    if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-arm64.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-i386.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-x86_64.zip"
-    if "%HOST_OS%"=="mac"                      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-macos-universal.tar.gz"
-::	if "%HOST_OS%"=="mac"                      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-macos10.10-universal.tar.gz"
-    if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-linux-x86_64.tar.gz"
-    if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-linux-aarch64.tar.gz"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"
+    if "%HOST_OS%"=="mac"                      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"
+::	if "%HOST_OS%"=="mac"                      call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"
+    if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"
+    if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"
     
     call dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME

@@ -9,5 +9,5 @@ call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_uninstallPow
 ::ftype dk_powershell=%POWERSHELL_EXE% "%%1"
 ::assoc .ps1=dk_powershell
 ::assoc .psm1=dk_powershell
-call dk_unsetFileAssoc .ps1 %POWERSHELL_EXE%
-call dk_unsetFileAssoc .psm1 %POWERSHELL_EXE%
+call dk_uninstallFileAssoc .ps1 %POWERSHELL_EXE%
+call dk_uninstallFileAssoc .psm1 %POWERSHELL_EXE%

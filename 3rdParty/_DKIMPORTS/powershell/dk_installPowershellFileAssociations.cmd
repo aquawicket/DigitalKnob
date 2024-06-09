@@ -9,5 +9,5 @@ call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPower
 ::ftype dk_powershell=%POWERSHELL_EXE% "%%1"
 ::assoc .ps1=dk_powershell
 ::assoc .psm1=dk_powershell
-call dk_setFileAssoc .ps1 %POWERSHELL_EXE%
-call dk_setFileAssoc .psm1 %POWERSHELL_EXE%
+call dk_installFileAssoc .ps1 %POWERSHELL_EXE%
+call dk_installFileAssoc .psm1 %POWERSHELL_EXE%
