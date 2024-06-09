@@ -29,6 +29,18 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_download %WSL_DL% "%DKDOWNLOAD_DIR%\%WSL_DL_FILE%"
 	"%DKDOWNLOAD_DIR%\%WSL_DL_FILE%"
 	
+	:: Step 5 - Set WSL 2 as your default version
+	wsl --set-default-version 2
+	
+	:: Step 6 - Install your Linux distribution of choice
+	::call dk_set UBUNTU_DL "https://aka.ms/wslubuntu"
+	::call dk_set UBUNTU_DL_FILE "Ubuntu2204-221101.AppxBundle"
+	::call dk_echo   
+    ::call dk_info "Installing Wsl_Ubuntu . . ."
+    ::call dk_download %UBUNTU_DL% "%DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
+	::call dk_powershellEval "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
+	
+	::wsl --install --distribution Debian
 	
 goto:eof
 
