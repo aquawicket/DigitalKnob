@@ -1,5 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_echo){ $dk_echo = 1 } else{ return }
+if (!$dk_copy){ $dk_copy = 1 } else{ return }
 
 #################################################################################
 # dk_copy(<from> <to>)

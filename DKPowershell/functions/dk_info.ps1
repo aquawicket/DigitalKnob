@@ -1,4 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
+if (!$dk_info){ $dk_info = 1 } else{ return }
 
 dk_load dk_echo
 if (!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }

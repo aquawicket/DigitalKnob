@@ -11,6 +11,7 @@ if (! (Test-Path "DKPowershell/functions/DK.ps1")) { Invoke-WebRequest -URI "$DK
 
 ###### Load Main Program ######
 dk_load dk_validate
+dk_load dk_pathExists
 dk_load dk_validateGit
 dk_load dk_validateBranch
 dk_load dk_stringContains

@@ -1,5 +1,5 @@
 if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_error){ $dk_error = 1 } else{ return }
+if (!$dk_exit){ $dk_exit = 1 } else{ return }
 
 
 ##################################################################################

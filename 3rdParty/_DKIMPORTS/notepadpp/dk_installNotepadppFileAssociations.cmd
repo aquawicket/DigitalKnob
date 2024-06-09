@@ -35,12 +35,12 @@ call dk_setFileAssoc .php %NOTEPADPP_EXE%
 call dk_setFileAssoc .plist %NOTEPADPP_EXE%
 call dk_setFileAssoc .pro %NOTEPADPP_EXE%
 call dk_setFileAssoc .properties %NOTEPADPP_EXE%
-call dk_setFileAssoc .ps1 %NOTEPADPP_EXE%
+::call dk_setFileAssoc .ps1 %NOTEPADPP_EXE%
 call dk_setFileAssoc .rc %NOTEPADPP_EXE%
 call dk_setFileAssoc .reference %NOTEPADPP_EXE%
 call dk_setFileAssoc .rsp %NOTEPADPP_EXE%
 call dk_setFileAssoc .sed %NOTEPADPP_EXE%
-call dk_setFileAssoc .sh %NOTEPADPP_EXE%
+::call dk_setFileAssoc .sh %NOTEPADPP_EXE%
 call dk_setFileAssoc .storyboard %NOTEPADPP_EXE%
 call dk_setFileAssoc .targets %NOTEPADPP_EXE%
 call dk_setFileAssoc .traineddata %NOTEPADPP_EXE%
