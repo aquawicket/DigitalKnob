@@ -4,7 +4,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 set "ENABLE_dk_debugFunc=1"
 set "ENABLE_dk_printVar=1"
-set "KEEP_CONSOLE_OPEN=0"
+set "KEEP_CONSOLE_OPEN=1"
 ::####################################################################
 ::# DK()
 ::#
