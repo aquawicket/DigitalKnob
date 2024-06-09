@@ -43,5 +43,5 @@ call ../../../DKBatch/functions/DK.cmd
 	call %DKIMPORTS_DIR%\git\dk_installGitFileAssociations.cmd
 	
 	
-    call dk_checkError
+    ::call dk_checkError
 goto:eof

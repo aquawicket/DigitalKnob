@@ -54,5 +54,5 @@ call DK
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
         
-    call dk_checkError
+    ::call dk_checkError
 goto:eof

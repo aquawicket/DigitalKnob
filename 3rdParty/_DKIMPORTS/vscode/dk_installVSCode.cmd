@@ -50,7 +50,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::	call dk_validate DKIMPORTS_DIR "call dk_getDKPaths"
 ::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/vscode/DKMAKE.cmake')" "VSCODE_EXE"
 ::	call dk_printVar VSCODE_EXE
-    call dk_checkError
+    ::call dk_checkError
 	
 	
 	:::::: associateFiles.cmd ###

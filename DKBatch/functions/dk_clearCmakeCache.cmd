@@ -15,7 +15,7 @@ call DK
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 

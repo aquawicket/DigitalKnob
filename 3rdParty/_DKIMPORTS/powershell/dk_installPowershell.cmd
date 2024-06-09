@@ -41,7 +41,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/powershell/DKMAKE.cmake')" "POWERSHELL_EXE"
 ::	call dk_printVar POWERSHELL_EXE
 
-	call dk_checkError
+	::call dk_checkError
 goto:eof
 
 

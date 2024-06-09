@@ -47,7 +47,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')" "NOTEPADPP_EXE"
 ::	call dk_printVar NOTEPADPP_EXE
 
-	call dk_checkError
+	::call dk_checkError
 goto:eof
 
 

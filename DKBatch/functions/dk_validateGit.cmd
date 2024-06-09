@@ -39,7 +39,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
 	   
     if NOT exist "%GIT_EXE%" (call dk_error "cannot find git")
         
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 

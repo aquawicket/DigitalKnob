@@ -13,5 +13,5 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_printVar VISUALSTUDIO_GENERATOR
 	call dk_printVar VISUALSTUDIO_X86_CXX_COMPILER
 	call dk_printVar VISUALSTUDIO_X64_CXX_COMPILER
-    call dk_checkError
+    ::call dk_checkError
 goto:eof

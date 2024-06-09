@@ -29,7 +29,7 @@ call ../../../DKBatch/functions/DK.cmd
 	::FIXME: kill pwsh.exe peocess
 	call dk_remove "%POWERSHELL%"
 	
-	call dk_checkError
+	::call dk_checkError
 	
 	:: uninstall via CMake
 ::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

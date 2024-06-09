@@ -90,7 +90,7 @@ call ../../../DKBatch/functions/DK.cmd
 
 
 
-	call dk_checkError
+	::call dk_checkError
 	
 	:: install via CMake
 ::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

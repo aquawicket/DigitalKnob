@@ -69,7 +69,7 @@ call DK
         call dk_set %_lastArg_% "%%g"
     )
 
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 

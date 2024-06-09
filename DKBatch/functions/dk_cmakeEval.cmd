@@ -99,7 +99,7 @@ call DK
     ::echo %err%
 	
 	endlocal
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 

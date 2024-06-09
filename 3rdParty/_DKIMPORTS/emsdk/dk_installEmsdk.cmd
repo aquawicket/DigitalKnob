@@ -15,5 +15,5 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_printVar EMSDK_TOOLCHAIN_FILE
     call dk_printVar EMSDK_C_COMPILER
     call dk_printVar EMSDK_CXX_COMPILER
-    call dk_checkError
+    ::call dk_checkError
 goto:eof

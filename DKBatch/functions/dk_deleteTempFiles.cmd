@@ -14,7 +14,7 @@ call DK
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (*.tmp) do del "%%i"
     for /r %%i in (*.TMP) do del "%%i"
-    call dk_checkError
+    ::call dk_checkError
 goto:eof
 
 
