@@ -22,6 +22,8 @@ dk_load dk_makeDirectory
 dk_load dk_replaceAll
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
+dk_load dk_pause
+dk_load dk_exit
 
 ###### Run Program ######
 dk_validate GIT_EXE "dk_validateGit"

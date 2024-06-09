@@ -24,6 +24,8 @@ call dk_load dk_makeDirectory
 call dk_load dk_replaceAll
 call dk_load dk_convertToCIdentifier
 call dk_load dk_toLower
+call dk_load dk_pause
+call dk_load dk_exit
 
 ::###### Run Program ######
 call dk_validate DKBRANCH_DIR "call dk_validateBranch"
