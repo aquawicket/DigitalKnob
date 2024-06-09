@@ -1,6 +1,6 @@
 @echo off
-if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
-
+::if not defined DKINIT call "../../../DKBatch/functions/DK.cmd"
+call "../../../DKBatch/functions/DK.cmd"
 
 ::####################################################################
 ::# dk_installCmake()

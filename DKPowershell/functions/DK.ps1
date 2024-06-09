@@ -39,7 +39,7 @@ $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 ##
 ##
 function DK() {
-	echo Loading DigitalKnob . . .
+	echo "Loading DigitalKnob . . ."
 
 	############# Set DKPOWERSHELL_FUNCTIONS_DIR path ############
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
@@ -74,15 +74,13 @@ function DK() {
 	$global:DKSCRIPT_NAME = Split-Path -Leaf $DKSCRIPT_PATH
 
 	#Write-Output "env:PATH = $env:PATH"
-	#$env:PATH += ";C:\Users\aquawicket\digitalknob\Development\DKPowershell\functions"
+	#$env:PATH += ";$DKPOWERSHELL_FUNCTIONS_DIR"
 	
-	#. $DKPOWERSHELL_DIR\functions\dk_thisFunction
+	#. DKPOWERSHELL_FUNCTIONS_DIR\dk_thisFunction
 	
 	###### DKTEST MODE ######
-	if ("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_DIR\functions"){
+	if ("$DKSCRIPT_DIR" -eq "DKPOWERSHELL_FUNCTIONS_DIR"){
 		dk_load $DKSCRIPT_PATH
-#		$global:ENABLE_dk_debugFunc = 1
-#		$global:ENABLE_dk_printVar = 1
 		Write-Output ""
 		Write-Output "###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ######"
 		Write-Output ""
@@ -92,7 +90,7 @@ function DK() {
 		Write-Output ""
 		
 		Read-Host -Prompt "Press Enter to exit" 
-		Exit
+		exit
 	}
 }
 DK

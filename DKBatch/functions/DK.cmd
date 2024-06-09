@@ -4,7 +4,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 set "ENABLE_dk_debugFunc=1"
 set "ENABLE_dk_printVar=1"
-set "KEEP_CONSOLE_OPEN=1"
+set "KEEP_CONSOLE_OPEN=0"
 ::####################################################################
 ::# DK()
 ::#
@@ -33,10 +33,6 @@ set "KEEP_CONSOLE_OPEN=1"
 	echo BATCH_SOURCE[0] = %BATCH_SOURCE[0]%
 	echo BATCH_ARGV[0]   = %BATCH_ARGV[0]%
 	echo BATCH_ARGC[0]   = %BATCH_ARGC[0]%
-::	  echo FUNCNAME[1]     = %FUNCNAME[1]%
-::	  echo BATCH_SOURCE[1] = %BATCH_SOURCE[1]%
-::	  echo BATCH_ARGV[1]   = %BATCH_ARGV[1]%
-::	  echo BATCH_ARGC[1]   = %BATCH_ARGC[1]%
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%__FILE__%"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
 	if %KEEP_CONSOLE_OPEN% equ 1 if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit ) :: keep window open
@@ -80,7 +76,6 @@ set "KEEP_CONSOLE_OPEN=1"
 	echo.
 	pause
 	exit
-	
 goto:eof
 
 :DKTEST

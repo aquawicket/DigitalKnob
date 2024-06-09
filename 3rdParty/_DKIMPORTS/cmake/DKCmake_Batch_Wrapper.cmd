@@ -3,6 +3,7 @@
 :install_cmake_fileAssociation
 	if not "%*" == "" (goto:run_cmake_file)
 	if not defined DKINIT call "..\..\..\DKBatch\functions\DK.cmd"
+	::call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake"
 	echo Associating .cmake files with DKCmake_Batch_Wrapper . . .
