@@ -26,7 +26,11 @@ call dk_validate DKBRANCH_DIR "call dk_validateBranch"
 call dk_validate GIT_EXE "call dk_validateGit"
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
+	cd "%DKBRANCH_DIR%"
 	"%GIT_EXE%" checkout "%DKBRANCH%"
+	echo Digitalknob installation complete
+	pause
+	exit
 ) else (
 	echo DigitalKnob is already installed at %DKBRANCH_DIR%
 )
