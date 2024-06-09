@@ -10,7 +10,6 @@ dk_set() {
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): not enough arguments"
 
-	#eval "$1=${2}"
 	export $1="${2-}"
 	dk_printVar "${1}"
 }
