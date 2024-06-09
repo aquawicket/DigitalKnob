@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
+
 [ -z ${OVERWRITE_echo-} ]      && export OVERWRITE_echo=1
 
 if [ "$OVERWRITE_echo" = "1" ]; then

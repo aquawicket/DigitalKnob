@@ -1,6 +1,6 @@
 #!/bin/sh
 # Conditional expressions for POSIX shell   https://www.ibm.com/docs/zh-tw/aix/7.2?topic=shell-conditional-expressions-korn-posix
-#[ -n "${DKINIT}" ] && exit
+[ -n "${DKINIT-}" ] && return || export DKINIT=1
 
 dk_install(){
 	[ -n "$(command -v "$1")" ] && return
@@ -61,9 +61,10 @@ DK () {
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		export RELOAD_WITH_BASH=0
 		echo "reloading with bash . . ."
+		unset DKINIT
+		export readonly DKINIT
 		dk_command bash "$0"
 	fi
-	[ -n "${DKINIT}" ] && return || export readonly DKINIT=1
 		
 	#if $(ps -o >/dev/null 2>&1);then  
 	#	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
