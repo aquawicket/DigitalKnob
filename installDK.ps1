@@ -31,8 +31,9 @@ if (! (Test-Path "$DKBRANCH_DIR/.git")){
 	cd $DKBRANCH_DIR
 	dk_call "$GIT_EXE" checkout $DKBRANCH
 	echo "Digitalknob installation complete"
-	#pause
-	#exit
 } else {
 	echo "DigitalKnob is already installed at $DKBRANCH_DIR"
 }
+
+dk_pause
+dk_exit

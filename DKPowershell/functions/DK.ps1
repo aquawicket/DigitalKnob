@@ -71,17 +71,12 @@ function DK() {
 	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1
 	
 	$global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
-	#Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
-
 	$global:DKSCRIPT_NAME = Split-Path -Leaf $DKSCRIPT_PATH
-	#Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
 
 	#Write-Output "env:PATH = $env:PATH"
 	#$env:PATH += ";C:\Users\aquawicket\digitalknob\Development\DKPowershell\functions"
-
 	
 	#. $DKPOWERSHELL_DIR\functions\dk_thisFunction
-
 	
 	###### DKTEST MODE ######
 	if ("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_DIR\functions"){
