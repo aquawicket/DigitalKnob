@@ -11,7 +11,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_validate HOST_ARCH "call dk_getHostTriple"
 ::  if "%HOST_ARCH%"=="arm32" call dk_set GIT_DL ""
 ::  if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL ""
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
         
     call dk_getFilename %GIT_DL% GIT_DL_FILE
@@ -31,7 +31,6 @@ call ../../../DKBatch/functions/DK.cmd
     ::"%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR="%DKTOOLS_DIR%\%GIT_FOLDER%" /VERYSILENT
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
     if not exist "%GIT_EXE%" call dk_error "cannot find git"
-        
 	:git_installed	
 		
 		
