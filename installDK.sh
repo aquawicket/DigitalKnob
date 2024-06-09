@@ -26,8 +26,8 @@ dk_load dk_convertToCIdentifier
 dk_load dk_toLower
 
 ###### Run Program ######
-dk_validate DKBRANCH_DIR "call dk_validateBranch"
-dk_validate GIT_EXE "call dk_validateGit"
+dk_validate DKBRANCH_DIR "dk_validateBranch"
+dk_validate GIT_EXE "dk_validateGit"
 if [ ! -e "$DKBRANCH_DIR/.git" ]; then
 	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
