@@ -13,8 +13,8 @@ include_guard()
 function(dk_getFilename path RESULT)
 	dk_debugFunc(${ARGV})
 	
-	DK_ASSERT(path)
-	DK_ASSERT(RESULT)
+	dk_assert(path)
+	dk_assert(RESULT)
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
@@ -34,7 +34,7 @@ function(dk_getFilename path RESULT)
 		dk_printVar(filename)
 	endif()
 	
-	DK_ASSERT(filename)
+	dk_assert(filename)
     set(${RESULT} ${filename} PARENT_SCOPE)
 endfunction()
 

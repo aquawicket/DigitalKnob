@@ -13,7 +13,7 @@ function(dk_resizeImage inpath width height outpath)
 	dk_debugFunc(${ARGV})
 	
 	get_filename_component(outdir ${outpath} DIRECTORY)
-	DK_ASSERT(outdir)
+	dk_assert(outdir)
 
 	dk_makeDirectory(${outdir})
 

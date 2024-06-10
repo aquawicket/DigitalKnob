@@ -188,7 +188,7 @@ endif()
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_depend(msys2)
-	DK_ASSERT(MSYS2)
+	dk_assert(MSYS2)
 	
 	dk_command(bash -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
 	#dk_findProgram(CMAKE_EXE cmake)

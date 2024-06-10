@@ -2,13 +2,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ##################################################################################
-# DK_ASSERT_PATH(path)
+# dk_assert_path(path)
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-function(DK_ASSERT_PATH path)
+function(dk_assert_path path)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})

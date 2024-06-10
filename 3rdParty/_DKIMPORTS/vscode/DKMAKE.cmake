@@ -18,7 +18,7 @@ LINUX_X86_64_HOST_dk_set	(VSCODE_DL https://vscode.download.prss.microsoft.com/d
 WIN_ARM64_HOST_dk_set		(VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip)
 WIN_X86_64_HOST_dk_set		(VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip)
 
-DK_ASSERT(VSCODE_DL)
+dk_assert(VSCODE_DL)
 
 dk_getFilename(${VSCODE_DL} VSCODE_DL_FILE)
 dk_removeExtension(${VSCODE_DL_FILE} VSCODE_FOLDER)

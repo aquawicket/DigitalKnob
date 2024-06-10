@@ -33,7 +33,7 @@ function(dk_make path) #lib
 	else()
 		set(lib ${ARGV1})
 		#dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
-		DK_ASSERT(CMAKE_MAKE_PROGRAM)
+		dk_assert(CMAKE_MAKE_PROGRAM)
 		dk_debug(CMAKE_MAKE_PROGRAM)
 		if(XCODE)
 			if(${ARGC} GREATER 1)
