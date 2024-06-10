@@ -17,8 +17,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	
 	set "MyArray[0]=a"
 	set "MyArray[1]=b"
 	set "MyArray[2]=c"
@@ -26,4 +27,6 @@ goto:eof
 	set "MyArray[4]=e"
 	
 	call dk_arrayAt MyArray 3 element
-	echo element = %element%
+	call dk_echo "element = %element%"
+	
+goto:eof

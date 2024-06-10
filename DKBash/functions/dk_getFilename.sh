@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_getFilename(<path> <output>)
+# dk_getFilename(path, rtn_var)
 #
 #
 dk_getFilename () {
@@ -19,5 +19,5 @@ dk_getFilename () {
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getFilename "/path/to/a/filename.txt" filename
-	echo "filename = ${filename}"
+	dk_echo "filename = ${filename}"
 }

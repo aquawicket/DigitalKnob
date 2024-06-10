@@ -16,4 +16,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	call dk_todo
+
+goto:eof

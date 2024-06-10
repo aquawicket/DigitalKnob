@@ -38,6 +38,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
 	
 	call dk_todo "test dk_todo message"
 	call dk_info "...next line..."
+goto:eof
