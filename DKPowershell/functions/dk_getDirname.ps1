@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_getDirname){ $dk_getDirname = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_getDirname){ $dk_getDirname = 1 } else{ return }
 
 
 ################################################################################

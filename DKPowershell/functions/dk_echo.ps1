@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_echo){ $dk_echo = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_echo){ $dk_echo = 1 } else{ return }
 
 ################################################################################
 # dk_echo(<message>)
@@ -13,7 +13,7 @@ function Global:dk_echo($allArgs) {
 	
 	# https://stackoverflow.com/a/818118
 	$allArgs = $PsBoundParameters.Values + $args
-	#if ($allArgs -eq ""){ echo "\n"; return }
+	#if($allArgs -eq ""){ echo "\n"; return }
 	#echo "allArgs = $allArgs"
 
 	#set "_message_=%*"	

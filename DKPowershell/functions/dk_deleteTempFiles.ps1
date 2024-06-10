@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_deleteTempFiles){ $dk_deleteTempFiles = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_deleteTempFiles){ $dk_deleteTempFiles = 1 } else{ return }
 
 dk_load dk_call
 dk_load dk_getDKPaths

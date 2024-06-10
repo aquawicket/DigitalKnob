@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_clearScreen){ $dk_clearScreen = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_clearScreen){ $dk_clearScreen = 1 } else{ return }
 
 ##################################################################################
 # dk_clearScreen()

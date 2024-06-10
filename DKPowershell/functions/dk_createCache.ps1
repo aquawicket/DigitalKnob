@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_createCache){ $dk_createCache = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_createCache){ $dk_createCache = 1 } else{ return }
 
 
 ##################################################################################

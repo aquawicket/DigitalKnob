@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_getExtension){ $dk_getExtension = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_getExtension){ $dk_getExtension = 1 } else{ return }
 
 
 ##################################################################################

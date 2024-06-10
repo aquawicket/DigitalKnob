@@ -1,4 +1,4 @@
-if ($DKINIT){return} else{ $global:DKINIT=1 }
+if($DKINIT){return} else{ $global:DKINIT=1 }
 
 # https://ss64.com/ps
 # https://www.pdq.com/blog/change-powershell-colors/
@@ -20,13 +20,13 @@ function Get-EntryPointAbsFilePath() {
     # The 'ScriptName' property of this first call can be null when the main script is invoked from a PowerShell session like [PS C:\Temp>. MainScript.ps1].
     # This is because PowerShell first evaluates the entered command.
     $FirstCall = $CallStack[$CallStack.Count - 1];
-    if ($null -ne $FirstCall.ScriptName) { return $FirstCall.ScriptName; }
+    if($null -ne $FirstCall.ScriptName){ return $FirstCall.ScriptName; }
     # We take the second call (assuming that we are run under a PowerShell session).
     # To make sure this call is coming from the execution of a script file (and not from the execution a cmdlet in the interpreter, like a function in a module),
     # we check the 'FunctionName' property which equals "<ScriptBlock>" when a call is performed from a script block, like a ps1 file.
     # This test is not required for the first call, as a PowerShell module can't be run.
     $SecondCall = $CallStack[$CallStack.Count - 2];
-    if ($null -ne $SecondCall.ScriptName -and $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
+    if($null -ne $SecondCall.ScriptName -and $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
     throw "No PowerShell entry point script could be found. This cmdlet ""$($MyInvocation.MyCommand.Name)"" is intended to be called only via the execution of a script file.";
 }
 $DKSCRIPT_PATH = Get-EntryPointAbsFilePath
@@ -80,7 +80,7 @@ function DK() {
 	#. DKPOWERSHELL_FUNCTIONS_DIR\dk_thisFunction
 	
 	###### DKTEST MODE ######
-	if ("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
+	if("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
 		dk_load $DKSCRIPT_PATH
 		Write-Output ""
 		Write-Output "###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ######"

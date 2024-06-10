@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_readCache){ $dk_readCache = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 
 dk_load dk_pathExists
 ##################################################################################

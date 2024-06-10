@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_generate){ $dk_generate = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_generate){ $dk_generate = 1 } else{ return }
 
 dk_load dk_installCmake
 dk_load dk_call

@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
 
 
 ##################################################################################

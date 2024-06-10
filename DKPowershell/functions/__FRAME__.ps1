@@ -1,8 +1,8 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-#if (!$DK_FRAME){ $DK_FRAME = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+#if(!$DK_FRAME){ $DK_FRAME = 1 } else{ return }
 
 ##################################################################################
-# __FRAME__(<frame>)
+# __FRAME__(frame)
 #
 function GLOBAL:__FRAME__($_FRAME_=1) {
 	$callStackFrame = $(Get-PSCallStack)[$_FRAME_]

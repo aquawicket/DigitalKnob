@@ -1,15 +1,15 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_debugFunc){ $dk_debugFunc = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_debugFunc){ $dk_debugFunc = 1 } else{ return }
 
 
 
-if (!$ENABLE_dk_debugFunc)	{ $ENABLE_dk_debugFunc = 0 }
-if (!$MAX_STACK_LINES)		{ $MAX_STACK_LINES = 200 }
-#if (!$DKSTACK[0].FILE)	    { $DKSTACK[0].FILE = %0 }
-#if (!$DKSTACK[0].FUNCTION) { $DKSTACK[0].FUNCTION = main }
-#if (!$DKSTACK[0].ARGS)	    { $DKSTACK[0].ARGS = 0 }
-if (!$DKSTACK_length)		{ $DKSTACK_length = 1 }
-if (!$DKSTACK_marker)		{ $DKSTACK_marker = 1 }
+if(!$ENABLE_dk_debugFunc)	{ $ENABLE_dk_debugFunc = 0 }
+if(!$MAX_STACK_LINES)		{ $MAX_STACK_LINES = 200 }
+#if(!$DKSTACK[0].FILE)	    { $DKSTACK[0].FILE = %0 }
+#if(!$DKSTACK[0].FUNCTION) { $DKSTACK[0].FUNCTION = main }
+#if(!$DKSTACK[0].ARGS)	    { $DKSTACK[0].ARGS = 0 }
+if(!$DKSTACK_length)		{ $DKSTACK_length = 1 }
+if(!$DKSTACK_marker)		{ $DKSTACK_marker = 1 }
 ################################################################################
 # dk_debugFunc()
 #

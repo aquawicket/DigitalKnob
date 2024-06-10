@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_makeDirectory){ $dk_makeDirectory = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_makeDirectory){ $dk_makeDirectory = 1 } else{ return }
 
 dk_load dk_info
 ####################################################################
@@ -9,7 +9,7 @@ dk_load dk_info
 function Global:dk_makeDirectory ($_path_) {
 	dk_debugFunc
 	
-	if (! (Test-Path $_path_)){ 
+	if(!(Test-Path $_path_)){ 
 		New-Item -Path "$_path_" -ItemType Directory 
 	}
 }
@@ -18,7 +18,8 @@ function Global:dk_makeDirectory ($_path_) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	dk_makeDirectory "MadeDirectory"
-	
 }

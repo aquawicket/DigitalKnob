@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_resetAll){ $dk_resetAll = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_resetAll){ $dk_resetAll = 1 } else{ return }
 
 ##################################################################################
 # dk_resetAll()

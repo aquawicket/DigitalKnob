@@ -1,5 +1,5 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_getFilename){ $dk_getFilename = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_getFilename){ $dk_getFilename = 1 } else{ return }
 
 
 											 ## Output:
