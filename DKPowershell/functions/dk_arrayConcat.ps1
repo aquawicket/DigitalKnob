@@ -20,8 +20,7 @@ function Global:dk_arrayConcat($array, $value1) {
 
 
 function Global:DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	# TODO
-	dk_arrayConcat array value1
+	dk_debugFunc
 	
+	dk_arrayConcat array value1
 }
