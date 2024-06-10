@@ -1,8 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-dk_fixme
-
 
 ################################################################################
 # dk_arrayIndexOf(array, searchElement, index)
@@ -50,4 +48,7 @@ DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	dk_arrayIndexOf array[@] "e" indexE
 	dk_echo "indexE = ${indexE}"
+	
+	dk_arrayIndexOf array[@] "nonExistant" indexN
+	dk_echo "indexN = ${indexN}"
 }
