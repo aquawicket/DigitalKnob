@@ -3,7 +3,7 @@ if(!$dk_arrayAt){ $dk_arrayAt = 1 } else{ return }
 
 dk_load dk_error
 ################################################################################
-# dk_arrayAt(array, index)
+# dk_arrayAt(array, index) -> rtn_var
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
