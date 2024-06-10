@@ -1,16 +1,18 @@
 #!/bin/sh
 
+# wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
+
 ###### install DK.sh ######
-[ ! -e DKBash ] && mkdir DKBash
-[ ! -e DKBash/functions ] && mkdir DKBash/functions
-if [ ! -e DKBash/functions/DK.sh ]; then
+[ ! -e $PWD/DKBash ] && mkdir $PWD/DKBash
+[ ! -e $PWD/DKBash/functions ] && mkdir $PWD/DKBash/functions
+if [ ! -e $PWD/DKBash/functions/DK.sh ]; then
 	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wil curl
 	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "apk")" ] && apk add curl
-	curl -Lo DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
+	curl -Lo $PWD/DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
 fi
 
 ###### DK_INIT ######
-. DKBash/functions/DK.sh
+. $PWD/DKBash/functions/DK.sh
 
 ###### Load Main Program ######
 dk_load dk_validate
