@@ -1,4 +1,4 @@
-include(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ##################################################################################
@@ -39,8 +39,8 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	message("dk_parseFunctionsAndLoad(${ARGV})")
-	if(EXISTS ${DKCMAKE_DIR}/functions/${fpath}.cmake)
-		set(${fn}_file ${DKCMAKE_DIR}/functions/${fpath}.cmake)
+	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})

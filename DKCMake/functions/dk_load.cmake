@@ -1,4 +1,4 @@
-include(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 cmake_policy(SET CMP0057 NEW)
 
@@ -51,8 +51,8 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		#message(WARNING "${fn} is NOT a valid function name")
 	endif()
 	
-	if(EXISTS ${DKCMAKE_DIR}/functions/${fpath}.cmake)
-		set(${fn}_file ${DKCMAKE_DIR}/functions/${fpath}.cmake)
+	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
 	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})

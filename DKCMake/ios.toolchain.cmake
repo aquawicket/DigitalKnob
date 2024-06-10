@@ -1,5 +1,5 @@
 include_guard()
-include(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 # This file is part of the ios-cmake project. It was retrieved from

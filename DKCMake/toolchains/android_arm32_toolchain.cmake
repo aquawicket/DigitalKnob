@@ -12,8 +12,8 @@ if(NOT DKCMAKE_DIR)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()
 
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-dk_load(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
 dk_load(${ANDROID_TOOLCHAIN_FILE})
 

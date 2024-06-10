@@ -33,9 +33,9 @@ get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE INT
 #endif()
 
 ###### load default function ####
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
-include(${DKCMAKE_DIR}/functions/dk_eval.cmake)
-include(${DKCMAKE_DIR}/functions/dk_debugFunc.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_eval.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 dk_load(dk_eval)
 dk_load(dk_escapeSequences)
 dk_escapeSequences()
@@ -44,7 +44,7 @@ dk_load(${DKSCRIPT_PATH})
 
 ###### DKTEST MODE ######
 if("${ENABLE_DKTEST}" EQUAL "1")
-if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_DIR}/functions")
+if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 	message("\n###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######\n")
 			
 	DKTEST()

@@ -34,9 +34,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 # "Do not ignore empty list items"
 CMAKE_POLICY(SET CMP0007 NEW)
 
-include(${DKCMAKE_DIR}/functions/dk_load.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 #dk_load(dk_eval)
-dk_load(${DKCMAKE_DIR}/functions/DK.cmake)
+dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 

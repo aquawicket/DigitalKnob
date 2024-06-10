@@ -1,5 +1,5 @@
 include_guard()
-include(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -178,20 +178,20 @@ endif()
 
 
 ### User Friendly Options ###
-dk_set(BUILD_SHARED_LIBS				OFF)
-dk_set(BUILD_STATIC_LIBS				ON)
-dk_set(BUILD_TESTING					OFF)
-dk_set(ENABLE_EXCEPTIONS				ON)    
-dk_set(ENABLE_RTTI						ON)
-dk_set(POSITION_INDEPENDENT_CODE 		ON)
-dk_set(POSITION_INDEPENDENT_EXECUTABLE 	ON)                                        
-dk_set(WARNINGS_AS_ERRORS				OFF)
-dk_set(WARNING_4244						OFF)	# /wd4244 - Warning: possible loss of data 
-dk_set(WARNING_5105						OFF)	# /wd5105 - macro producing defined is undefined behaviour
+dk_set(BUILD_SHARED_LIBS				0)
+dk_set(BUILD_STATIC_LIBS				1)
+dk_set(BUILD_TESTING					0)
+dk_set(ENABLE_EXCEPTIONS				1)    
+dk_set(ENABLE_RTTI						1)
+dk_set(POSITION_INDEPENDENT_CODE 		1)
+dk_set(POSITION_INDEPENDENT_EXECUTABLE 	1)                                        
+dk_set(WARNINGS_AS_ERRORS				0)
+dk_set(WARNING_4244						0)	# /wd4244 - Warning: possible loss of data 
+dk_set(WARNING_5105						0)	# /wd5105 - macro producing defined is undefined behaviour
 dk_set(WARNING_LEVEL 					4)
-#dk_set(STATIC							ON)
-#dk_set(SHARED							OFF)
-dk_set(CMAKE_VERBOSE_MAKEFILE			ON)
+#dk_set(STATIC							1)
+#dk_set(SHARED							0)
+dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 
 if(ANDROID)
 	dk_set(POSITION_INDEPENDENT_EXECUTABLE OFF) 
