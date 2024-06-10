@@ -8,7 +8,7 @@
 #
 dk_call(){
 	dk_debugFunc
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
 	[ -z "$(command -v "$1")" ] && dk_load $1

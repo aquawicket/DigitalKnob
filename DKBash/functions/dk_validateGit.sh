@@ -8,7 +8,7 @@
 #
 dk_validateGit () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	if ! dk_commandExists git; then
 		dk_install git

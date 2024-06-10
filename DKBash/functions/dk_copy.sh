@@ -13,8 +13,8 @@
 #
 dk_copy () {
 	dk_debugFunc
-	[ $# -lt 2 ] && dk_error "${FUNCNAME}(): not enough arguments"
-	[ $# -gt 3 ] && dk_error "${FUNCNAME}(): too many arguments"
+	[ $# -lt 2 ] && dk_error "${FUNCNAME}($#): not enough arguments"
+	[ $# -gt 3 ] && dk_error "${FUNCNAME}($#): too many arguments"
 	
 	_from_="$1"
 	_to_="$2"

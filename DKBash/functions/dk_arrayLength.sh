@@ -8,7 +8,7 @@
 #
 dk_arrayLength () {
 	dk_debugFunc
-	#[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	dk_validateArgs array rtn_var
 	dk_printVar BASH_ARGV
 	

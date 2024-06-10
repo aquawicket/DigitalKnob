@@ -8,7 +8,7 @@
 #
 dk_stringContains () {
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	# https://stackoverflow.com/a/8811800/688352
 	#_string="$1"

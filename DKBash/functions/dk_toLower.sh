@@ -8,7 +8,7 @@
 #
 dk_toLower() {
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
 	echo "1 = $1"
 	local output=$(builtin echo "$1" | tr '[:upper:]' '[:lower:]')

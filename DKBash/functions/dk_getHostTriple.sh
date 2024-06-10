@@ -18,7 +18,7 @@ try() {
 #
 dk_getHostTriple () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}

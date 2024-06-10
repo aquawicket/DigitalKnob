@@ -8,7 +8,7 @@
 #
 dk_removeCarrageReturns () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
 	in=$1
 	out=$(builtin echo "${in}" | tr -d '\r')

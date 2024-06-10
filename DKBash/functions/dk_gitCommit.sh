@@ -8,7 +8,7 @@
 #
 dk_gitCommit () {	
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message

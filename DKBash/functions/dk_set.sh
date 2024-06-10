@@ -8,7 +8,7 @@
 #
 dk_set() {
 	dk_debugFunc
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}(): not enough arguments"
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): not enough arguments"
 
 	export $1="${2-}"
 	dk_printVar "${1}"

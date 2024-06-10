@@ -8,7 +8,7 @@
 #
 dk_decimalToHex () {
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	dk_todo
 }

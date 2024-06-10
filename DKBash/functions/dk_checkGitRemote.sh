@@ -8,7 +8,7 @@
 #
 dk_checkGitRemote () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	ahead=0
 	behind=0

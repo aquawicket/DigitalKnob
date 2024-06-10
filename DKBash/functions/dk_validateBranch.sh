@@ -8,7 +8,7 @@
 #
 dk_validateBranch () {
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}(): incorrect number of arguments"
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
