@@ -3,12 +3,13 @@
 
 
 ##################################################################################
-# DK_TRY_CATCH(<function> <args>)
+# dk_tryCatch(<function> <args>)
 #
 #	reference: https://stackoverflow.com/a/11092989/688352
 #
-DK_TRY_CATCH () {
+dk_tryCatch () {
 	dk_debugFunc
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 	set +e; ( set -e
@@ -25,6 +26,8 @@ DK_TRY_CATCH () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	DK_TRY_CATCH
+	dk_debugFunc
+	
+	
+	dk_tryCatch
 }
