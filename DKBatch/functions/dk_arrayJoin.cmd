@@ -24,7 +24,6 @@ call DK
 		set /a _count_+=1
 		goto:dk_arrayJoin_loop
 	)
-	::endlocal & call dk_set %3 "%_string_%"
 	endlocal & call set "%3=%_string_%"
 goto:eof
 
@@ -32,7 +31,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	set "array[0]=a"
 	set "array[1]=b"
 	set "array[2]=c"
@@ -40,4 +40,5 @@ goto:eof
 	set "array[4]=e"
 	
 	call dk_arrayJoin array "," string
-	echo string = %string%
+	echo "string = %string%"
+goto:eof

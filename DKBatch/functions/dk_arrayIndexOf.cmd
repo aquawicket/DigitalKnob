@@ -1,10 +1,6 @@
 @echo off
 call DK
 
-:::   FIXME !!!
-call dk_fixme
-
-
 ::################################################################################
 ::# dk_arrayIndexOf(array, searchElement, index)
 ::# dk_arrayIndexOf(array, searchElement, fromIndex, index)
@@ -16,24 +12,21 @@ call dk_fixme
 	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	set _count_=0
-	call dk_set %3 "-1"
 	:dk_arrayIndexOf_loop
-echo if defined %~1[%_count_%]
-     if defined %~1[%_count_%] (
-	 echo _count_ = %_count_%
-	
-   echo call set "_value_=%%%~1[%_count_%]%%"
-		call set "_value_=%%%~1[%_count_%]%%"
-		
-   echo if "%~2" neq "%_value_%"
-		if "%~2" neq "%_value_%" (
-			set /a _count_+=1
-			goto:dk_arrayIndexOf_loop
+		if not defined %~1[%_count_%] (
+			endlocal & call dk_set %3 -1
+			goto:eof
 		)
-		endlocal & call dk_set %3 "%_count_%"
-		goto:eof
-	)
-	::endlocal & call dk_set %3 -1
+		
+		call set "_value_=%%%~1[%_count_%]%%"
+		if "%~2" == "%_value_%" (
+			endlocal & call dk_set %3 "%_count_%"
+			goto:eof
+				
+		)
+			
+		set /a _count_+=1
+	goto:dk_arrayIndexOf_loop
 goto:eof
 
 
@@ -61,4 +54,7 @@ goto:eof
 	
 	call dk_arrayIndexOf array "e" indexE
 	echo indexE = %indexE%
+	
+	call dk_arrayIndexOf array "nonExistant" indexN
+	echo indexN = %indexN%
 	

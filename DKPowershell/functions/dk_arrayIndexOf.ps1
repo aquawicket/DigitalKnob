@@ -1,6 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_arrayFlat){ $dk_arrayFlat = 1 } else{ return }
-
+if(!$dk_arrayIndexOf){ $dk_arrayIndexOf = 1 } else{ return }
 
 dk_load dk_error
 ################################################################################
