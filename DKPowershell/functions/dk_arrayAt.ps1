@@ -22,8 +22,8 @@ function Global:dk_arrayAt($arry, $index) {
 function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	$MyArray = @('a', 'b', 'c', 'd', 'e')
+	$myArray = @('a', 'b', 'c', 'd', 'e')
 
-	$element = dk_arrayAt MyArray 3
+	$element = dk_arrayAt myArray 3
 	dk_echo "element = $element"
 }

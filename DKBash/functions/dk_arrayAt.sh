@@ -2,7 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ################################################################################
-# dk_arrayAt(array, index, element)
+# dk_arrayAt(array, index, rtn_var)
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
@@ -22,12 +22,12 @@ dk_arrayAt () {
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	MyArray[0]="a"
-	MyArray[1]="b"
-	MyArray[2]="c"
-	MyArray[3]="d"
-	MyArray[4]="e"
+	myArray[0]="a"
+	myArray[1]="b"
+	myArray[2]="c"
+	myArray[3]="d"
+	myArray[4]="e"
 	
-	dk_arrayAt MyArray 3 element
+	dk_arrayAt myArray 3 element
 	dk_echo "element = ${element}"
 }

@@ -27,23 +27,23 @@ function Global:dk_arrayIndexOf($array, $searchElement) {
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	$MyArray = @('a', 'b', 'c', 'd', 'e')
+	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$indexA = dk_arrayIndexOf MyArray "a" 
+	$indexA = dk_arrayIndexOf myArray "a" 
 	dk_echo "indexA = ${indexA}"
 	
-	$indexB = dk_arrayIndexOf MyArray "b"
+	$indexB = dk_arrayIndexOf myArray "b"
 	dk_echo "indexB = ${indexB}"
 	
-	$indexC = dk_arrayIndexOf MyArray "c" 
+	$indexC = dk_arrayIndexOf myArray "c" 
 	dk_echo "indexC = ${indexC}"
 	
-	$indexD = dk_arrayIndexOf MyArray "d" indexD
+	$indexD = dk_arrayIndexOf myArray "d" indexD
 	dk_echo "indexD = ${indexD}"
 	
-	$indexE = dk_arrayIndexOf MyArray "e" 
+	$indexE = dk_arrayIndexOf myArray "e" 
 	dk_echo "indexE = ${indexE}"
 	
-	$indexN = dk_arrayIndexOf MyArray "nonExistant" 
+	$indexN = dk_arrayIndexOf myArray "nonExistant" 
 	dk_echo "indexN = ${indexN}"
 }

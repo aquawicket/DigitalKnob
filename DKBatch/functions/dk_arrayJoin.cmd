@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayJoin(array, separator, string)
+::# dk_arrayJoin(array, separator, rtn_val)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_join
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
@@ -33,12 +33,12 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	call dk_debugFunc
 	
-	set "array[0]=a"
-	set "array[1]=b"
-	set "array[2]=c"
-	set "array[3]=d"
-	set "array[4]=e"
+	set "myArray[0]=a"
+	set "myArray[1]=b"
+	set "myArray[2]=c"
+	set "myArray[3]=d"
+	set "myArray[4]=e"
 	
-	call dk_arrayJoin array "," string
-	echo "string = %string%"
+	call dk_arrayJoin myArray "," myString
+	echo "myString = %myString%"
 goto:eof

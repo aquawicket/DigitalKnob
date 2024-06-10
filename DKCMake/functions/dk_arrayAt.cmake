@@ -21,12 +21,12 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	list(APPEND MyArray "a")
-	list(APPEND MyArray "b")
-	list(APPEND MyArray "c")
-	list(APPEND MyArray "d")
-	list(APPEND MyArray "e")
+	list(APPEND myArray "a")
+	list(APPEND myArray "b")
+	list(APPEND myArray "c")
+	list(APPEND myArray "d")
+	list(APPEND myArray "e")
 	
-	dk_arrayAt(MyArray 3 element)
+	dk_arrayAt(myArray 3 element)
 	dk_echo("element = ${element}")
 endfunction(DKTEST)

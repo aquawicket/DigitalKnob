@@ -2,8 +2,8 @@
 call DK
 
 ::################################################################################
-::# dk_arrayIndexOf(array, searchElement, index)
-::# dk_arrayIndexOf(array, searchElement, fromIndex, index)
+::# dk_arrayIndexOf(array, searchElement, rtn_var)
+::# dk_arrayIndexOf(array, searchElement, fromIndex, rtn_var)
 ::#
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
@@ -34,27 +34,27 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	set "array[0]=a"
-	set "array[1]=b"
-	set "array[2]=c"
-	set "array[3]=d"
-	set "array[4]=e"
+	set "myArray[0]=a"
+	set "myArray[1]=b"
+	set "myArray[2]=c"
+	set "myArray[3]=d"
+	set "myArray[4]=e"
 	
-	call dk_arrayIndexOf array "a" indexA
+	call dk_arrayIndexOf myArray "a" indexA
 	echo indexA = %indexA%
 	
-	call dk_arrayIndexOf array "b" indexB
+	call dk_arrayIndexOf myArray "b" indexB
 	echo indexB = %indexB%
 	
-	call dk_arrayIndexOf array "c" indexC
+	call dk_arrayIndexOf myArray "c" indexC
 	echo indexC = %indexC%
 	
-	call dk_arrayIndexOf array "d" indexD
+	call dk_arrayIndexOf myArray "d" indexD
 	echo indexD = %indexD%
 	
-	call dk_arrayIndexOf array "e" indexE
+	call dk_arrayIndexOf myArray "e" indexE
 	echo indexE = %indexE%
 	
-	call dk_arrayIndexOf array "nonExistant" indexN
+	call dk_arrayIndexOf myArray "nonExistant" indexN
 	echo indexN = %indexN%
 	

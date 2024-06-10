@@ -12,8 +12,8 @@ function Global:dk_arrayJoin($array, $separator) {
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	$arry = Get-Variable -Name ($array) -ValueOnly
-	$_string_ = $arry -join $separator
-	return $_string_
+	$rtn_var = $arry -join $separator
+	return $rtn_var
 }
 
 
@@ -22,8 +22,8 @@ function Global:dk_arrayJoin($array, $separator) {
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	$MyArray = @('a', 'b', 'c', 'd', 'e')
+	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$string = dk_arrayJoin MyArray ","
-	echo "string = $string"
+	$myString = dk_arrayJoin myArray ","
+	echo "myString = $myString"
 }

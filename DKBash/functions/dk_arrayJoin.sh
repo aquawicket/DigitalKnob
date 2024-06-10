@@ -17,14 +17,13 @@ dk_arrayJoin () {
 	#local arry=("${!1}")
 	typeset -n arry=$1 
 	for ((i=0; i < ${#arry[@]}; i++ )); do
-		if [ -z ${_string_-} ]; then
-			_string_="${arry[$i]}"
+		if [ -z ${rtn_var-} ]; then
+			rtn_var="${arry[$i]}"
 		else
-		    _string_="${_string_}${2}${arry[$i]}"
+		    rtn_var="${rtn_var}${2}${arry[$i]}"
 		fi
 	done
-
-	rtn_var="${_string_}"
+	
 	eval "$3=${rtn_var}"
 }
 
@@ -34,12 +33,12 @@ dk_arrayJoin () {
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	array[0]="a"
-	array[1]="b"
-	array[2]="c"
-	array[3]="d"
-	array[4]="e"
+	myArray[0]="a"
+	myArray[1]="b"
+	myArray[2]="c"
+	myArray[3]="d"
+	myArray[4]="e"
 	
-	dk_arrayJoin array "," string
-	echo "string = ${string}"
+	dk_arrayJoin myArray "," myString
+	echo "myString = ${myString}"
 }
