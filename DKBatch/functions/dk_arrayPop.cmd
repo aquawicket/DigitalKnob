@@ -20,35 +20,38 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	set "MyArray[0]=a"
-	set "MyArray[1]=b"
-	set "MyArray[2]=c"
-	set "MyArray[3]=d"
-	set "MyArray[4]=e"
+	call dk_debugFunc
 	
-	call dk_printArray MyArray
+	set "myArray[0]=a"
+	set "myArray[1]=b"
+	set "myArray[2]=c"
+	set "myArray[3]=d"
+	set "myArray[4]=e"
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
 	
-	call dk_arrayPop MyArray
-	call dk_printArray MyArray
+	call dk_arrayPop myArray
+	call dk_printArray myArray
+	
+	call dk_arrayPop myArray
+	call dk_printArray myArray
+	
+goto:eof

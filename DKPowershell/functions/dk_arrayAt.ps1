@@ -8,12 +8,14 @@ dk_load dk_error
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
-function Global:dk_arrayAt($arry, $index) {
+function Global:dk_arrayAt($array, $index) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	$value = Get-Variable -Name ($arry) -ValueOnly
-	return $value[$index]
+	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
+	else { $_array_ = $array }
+	
+	return $_array_[$index]
 }
 
 
@@ -24,6 +26,9 @@ function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST #######
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 
-	$element = dk_arrayAt myArray 3
-	dk_echo "element = $element"
+	$elementA = dk_arrayAt myArray 3
+	dk_echo "elementA = $elementA"
+	
+	$elementB = dk_arrayAt $myArray 1
+	dk_echo "elementB = $elementB"
 }

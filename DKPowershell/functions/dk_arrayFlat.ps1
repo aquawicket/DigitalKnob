@@ -4,7 +4,7 @@ if(!$dk_arrayFlat){ $dk_arrayFlat = 1 } else{ return }
 dk_load dk_error
 dk_load dk_todo
 ################################################################################
-# dk_arrayFlat(array depth)
+# dk_arrayFlat(array, depth)
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_flat
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
@@ -12,6 +12,9 @@ dk_load dk_todo
 function Global:dk_arrayFlat($array, $depth) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	
+	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
+	else { $_array_ = $array }
 	
 	dk_todo "dk_arrayFlat"
 }

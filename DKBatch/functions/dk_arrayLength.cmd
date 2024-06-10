@@ -2,7 +2,7 @@
 call DK
 
 ::################################################################################
-::# dk_arrayLength(array, length)
+::# dk_arrayLength(array, rtn_var)
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_length
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
@@ -11,7 +11,6 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	::set _arry_ %~1
 	set _length_=0
 
 	:dk_arrayLength_loop
@@ -27,11 +26,11 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	set "array[0]=a"
-	set "array[1]=b"
-	set "array[2]=c"
-	set "array[3]=d"
-	set "array[4]=e"
+	set "myArray[0]=a"
+	set "myArray[1]=b"
+	set "myArray[2]=c"
+	set "myArray[3]=d"
+	set "myArray[4]=e"
 	
-	call dk_arrayLength array length
+	call dk_arrayLength myArray length
 	echo length = %length%

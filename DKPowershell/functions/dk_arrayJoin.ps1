@@ -1,5 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_arrayIndexOf){ $dk_arrayIndexOf = 1 } else{ return }
+if(!$dk_arrayJoin){ $dk_arrayJoin = 1 } else{ return }
 
 ################################################################################
 # dk_arrayJoin(array, separator) -> rtn_var
@@ -11,8 +11,10 @@ function Global:dk_arrayJoin($array, $separator) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	$arry = Get-Variable -Name ($array) -ValueOnly
-	$rtn_var = $arry -join $separator
+	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
+	else { $_array_ = $array }
+	
+	$rtn_var = $_array_ -join $separator
 	return $rtn_var
 }
 

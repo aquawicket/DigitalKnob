@@ -12,9 +12,11 @@ function Global:dk_arrayIndexOf($array, $searchElement) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	$arry = Get-Variable -Name ($array) -ValueOnly
-	for($i=0; $i -le $arry.count; $i++) {
-		if($searchElement -eq $arry[$i]){
+	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
+	else { $_array_ = $array }
+	
+	for($i=0; $i -le $_array_.count; $i++) {
+		if($searchElement -eq $_array_[$i]){
 			return $i
 		}
 	}
@@ -32,18 +34,18 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	$indexA = dk_arrayIndexOf myArray "a" 
 	dk_echo "indexA = ${indexA}"
 	
-	$indexB = dk_arrayIndexOf myArray "b"
+	$indexB = dk_arrayIndexOf $myArray "b"
 	dk_echo "indexB = ${indexB}"
 	
 	$indexC = dk_arrayIndexOf myArray "c" 
 	dk_echo "indexC = ${indexC}"
 	
-	$indexD = dk_arrayIndexOf myArray "d" indexD
+	$indexD = dk_arrayIndexOf $myArray "d" indexD
 	dk_echo "indexD = ${indexD}"
 	
 	$indexE = dk_arrayIndexOf myArray "e" 
 	dk_echo "indexE = ${indexE}"
 	
-	$indexN = dk_arrayIndexOf myArray "nonExistant" 
+	$indexN = dk_arrayIndexOf $myArray "nonExistant" 
 	dk_echo "indexN = ${indexN}"
 }
