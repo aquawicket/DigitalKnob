@@ -48,7 +48,7 @@ goto:eof
 	call set "BATCH_SOURCE_B=%%~f0"
 	call set "BATCH_ARGV_B=%%*"
 		
-	call set "__FILE__=%%~nx0"
+	call set "__FILE__=%%~f0"
 	rem call set "__LINE__=???"
 	call set "__FUNCTION__=%%~n0"
 	call set "__ARGS__=%%*"
