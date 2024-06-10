@@ -10,9 +10,9 @@ dk_load dk_realpath
 #
 function Global:dk_assert($expression) {
 	dk_debugFunc
-	if ( $(__ARGC__) -lt 1 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if ( ! ${!expression} ){
+	if(!(${!expression})){
 		dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))"
 		return ${false}
 	}
