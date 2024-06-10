@@ -2,9 +2,9 @@
 call DK
 
 ::################################################################################
-::# dk_addContextMenu(menuTitle, exe, command)
+::# dk_installContextMenu(menuTitle, exe, command)
 ::#
-:dk_addContextMenu () {
+:dk_installContextMenu () {
     call dk_debugFunc
 	if %__ARGC__% lss 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
@@ -42,4 +42,4 @@ goto:eof
 
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate GIT_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
-	call dk_addContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
+	call dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
