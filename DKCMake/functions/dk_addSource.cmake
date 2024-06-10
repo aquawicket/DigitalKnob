@@ -1,5 +1,5 @@
-include_guard()
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include_guard()
 
 ###############################################################################
 # dk_addSource(<regex>)
@@ -24,5 +24,6 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
 	#dk_addSource()
+	message(STATUS "TEST TEST TEST")
 
-endfunction()
+endfunction(DKTEST)

@@ -1,5 +1,6 @@
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 
 ##################################################################################
 # dk_echo(msg)
