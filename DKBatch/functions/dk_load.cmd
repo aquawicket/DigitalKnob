@@ -27,6 +27,8 @@ call DK
 	)
 
 	if not exist "%fpath%" echo Downloading %fn%
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_set.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getFullPath.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd')"
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd')"
 	if not exist "%fpath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%fn%.cmd" "%fpath%"
 	if not exist "%fpath%" call dk_error "ERROR: %fpath%: file not found"
