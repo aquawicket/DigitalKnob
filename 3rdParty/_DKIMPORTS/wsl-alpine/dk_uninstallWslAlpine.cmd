@@ -12,6 +12,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_echo   
     call dk_info "UnInstalling WSL-Alpine Linux . . ."
 
+	wslconfig /t Alpine
 	wslconfig /u Alpine
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_remove %DKTOOLS_DIR%\AlpineLinux
