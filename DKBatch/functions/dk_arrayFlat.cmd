@@ -18,6 +18,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	:: TODO
-	:: call dk_arrayFlat
+	call dk_debugFunc
+	
+	call dk_arrayFlat array depth
+goto:eof

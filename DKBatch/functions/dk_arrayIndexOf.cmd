@@ -2,6 +2,7 @@
 call DK
 
 :::   FIXME !!!
+call dk_fixme
 
 
 ::################################################################################
@@ -40,7 +41,6 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "!!! FIXME !!!"
 	set "array[0]=a"
 	set "array[1]=b"
 	set "array[2]=c"

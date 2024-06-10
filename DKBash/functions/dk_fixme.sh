@@ -13,7 +13,7 @@ dk_fixme () {
 	dk_debugFunc
 	
 	[ ${ENABLE_dk_fixme-1} -eq 1 ] || return 0
-	msg="$1"
+	msg="${1-}"
 	dk_echo "${yellow}${FIXME_TAG-}${msg}${clr}"
 	
 	[ ${TRACE_ON_FIXME-0} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_FIXME ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
