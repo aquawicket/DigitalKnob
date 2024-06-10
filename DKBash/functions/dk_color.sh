@@ -65,6 +65,7 @@ dk_color() {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_color
 }

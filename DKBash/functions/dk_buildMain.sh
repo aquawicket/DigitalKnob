@@ -71,6 +71,7 @@ dk_buildMain () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_buildMain
 }

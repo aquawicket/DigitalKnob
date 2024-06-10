@@ -29,6 +29,7 @@ alias dk_validateArgs='dkValidateArgs'
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_todo
 }

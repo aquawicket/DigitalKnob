@@ -45,7 +45,8 @@ dk_cmakeEval () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_cmakeEval "dk_debug('sent with dk_cmakeEval')" "CMAKE_CURRENT_LIST_DIR"
 	dk_printVar CMAKE_CURRENT_LIST_DIR
 }

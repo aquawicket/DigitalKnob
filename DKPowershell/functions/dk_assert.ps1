@@ -1,6 +1,8 @@
-if (!$DKINIT){ . $PWD\DK.ps1 }
-if (!$dk_assert){ $dk_assert = 1 } else{ return }
+if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$dk_assert){ $dk_assert = 1 } else{ return }
 
+dk_load dk_echo
+dk_load dk_error
 dk_load dk_realpath
 ##################################################################################
 # dk_assert(<expression>)
@@ -11,12 +13,7 @@ function Global:dk_assert($expression) {
 	if ( $(__ARGC__) -lt 1 ){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	if ( ! ${!expression} ){
-		$lastErrorFile = "$(__FILE__ 1)"
-		#export lastErrorFile=$(realpath ${lastErrorFile})
-		#dk_realpath ${lastErrorFile} lastErrorFile
-		$lastErrorLine="$(__LINE__ 0)"
-		dk_load dk_error
-		dk_error "Assertion failed: $1"
+		dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))"
 		return ${false}
 	}
 	
@@ -27,9 +24,8 @@ function Global:dk_assert($expression) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_load dk_echo
-	dk_echo "testing dk_assert . . ."
+	dk_debugFunc
+	
 
 	$myVar="string"
 	echo "dk_assert myVar" && dk_assert myVar

@@ -16,7 +16,8 @@ dk_commandExists () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	if dk_commandExists bash; then
 		echo "bash command exists"
 	else

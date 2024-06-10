@@ -25,6 +25,7 @@ dk_confirm() {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
 	
 	if dk_confirm; then 
 		echo "the confimation has passed"

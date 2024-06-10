@@ -44,7 +44,7 @@ function DK() {
 	############# Set DKPOWERSHELL_FUNCTIONS_DIR path ############
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
-	#Write-Output "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
+	Write-Output "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
 	
 	############# Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
 	$global:DKHTTP_DIGITALKNOB_DIR = "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
@@ -71,6 +71,7 @@ function DK() {
 	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1
 	
 	$global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
+	Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 	$global:DKSCRIPT_NAME = Split-Path -Leaf $DKSCRIPT_PATH
 
 	#Write-Output "env:PATH = $env:PATH"
@@ -79,7 +80,7 @@ function DK() {
 	#. DKPOWERSHELL_FUNCTIONS_DIR\dk_thisFunction
 	
 	###### DKTEST MODE ######
-	if ("$DKSCRIPT_DIR" -eq "DKPOWERSHELL_FUNCTIONS_DIR"){
+	if ("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
 		dk_load $DKSCRIPT_PATH
 		Write-Output ""
 		Write-Output "###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ######"

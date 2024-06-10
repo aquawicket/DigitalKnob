@@ -19,6 +19,7 @@ dk_clearCmakeCache () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_clearCmakeCache
 }

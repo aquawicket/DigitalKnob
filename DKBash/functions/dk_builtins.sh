@@ -12,6 +12,7 @@
 #
 dk_builtins () {
 	dk_debugFunc
+	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	# call builtin echo exmple
 	builtin echo -n -e "DK: $@\n"
@@ -20,6 +21,7 @@ dk_builtins () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_debug "DKTEST(${DKSCRIPT_NAME})"
 }
