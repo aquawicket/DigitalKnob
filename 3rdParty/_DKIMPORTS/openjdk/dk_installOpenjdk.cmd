@@ -51,7 +51,7 @@ goto:eof
 :dk_installOpenJdkMac () {
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
 
-	call dk_download "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz" "%DKDOWNLOAD_DIR%/openjdk-11_osx-x64_bin.tar.gz"
+	call dk_download "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
 	call dk_command tar xf %DKDOWNLOAD_DIR%/openjdk-11_osx-x64_bin.tar.gz
 	call dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
 	call dk_remove %DKDOWNLOAD_DIR%/openjdk-11_osx-x64_bin.tar.gz

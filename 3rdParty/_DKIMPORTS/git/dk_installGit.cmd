@@ -26,7 +26,7 @@ call ../../../DKBatch/functions/DK.cmd
     if exist "%GIT_EXE%" goto:git_installed
     call dk_echo   
     call dk_info "Installing git . . ."
-    call dk_download %GIT_DL% "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%"
+    call dk_download %GIT_DL%
     ::echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
     ::"%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR="%DKTOOLS_DIR%\%GIT_FOLDER%" /VERYSILENT
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"

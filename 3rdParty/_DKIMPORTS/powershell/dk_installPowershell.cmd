@@ -26,7 +26,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if exist "%POWERSHELL_EXE%" goto:powershell_installed
 	call dk_echo   
     call dk_info "Installing powershell . . ."
-    call dk_download %POWERSHELL_DL% "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%"
+    call dk_download %POWERSHELL_DL%
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL%"
 	if NOT exist "%POWERSHELL_EXE%" call dk_error "cannot find pwsh.exe"
 	:powershell_installed

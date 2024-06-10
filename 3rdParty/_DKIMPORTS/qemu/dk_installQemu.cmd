@@ -23,7 +23,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	
 	if exist "%QEMU_IMG_EXE%" goto:eof
 	
-	call dk_download %QEMU_DL% %DKDOWNLOAD_DIR%\%QEMU_DL_FILE%
+	call dk_download %QEMU_DL%
 	call dk_getNativePath %QEMU% QEMU_INSTALL_PATH
 	call dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /D=%QEMU_INSTALL_PATH%"
 	call %command_string%

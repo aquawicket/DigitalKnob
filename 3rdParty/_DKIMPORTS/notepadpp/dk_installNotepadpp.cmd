@@ -26,7 +26,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if exist "%NOTEPADPP_EXE%" goto:notepadpp_installed
 	call dk_echo   
     call dk_info "Installing notepad++ . . ."
-    call dk_download %NOTEPADPP_DL% "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%"
+    call dk_download %NOTEPADPP_DL%
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP%"
 	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find notepad++.exe"
 	:notepadpp_installed

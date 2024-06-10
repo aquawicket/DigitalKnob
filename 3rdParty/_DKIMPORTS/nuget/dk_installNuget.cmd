@@ -22,7 +22,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	
 	if exist "%NUGET_EXE%" goto:eof
 	
-	call dk_download %NUGET_DL% %DKDOWNLOAD_DIR%\%NUGET_DL_FILE%
+	call dk_download %NUGET_DL%
 	call dk_makeDirectory %NUGET%
 	call dk_copy %DKDOWNLOAD_DIR%\%NUGET_DL_FILE% %NUGET%\%NUGET_DL_FILE% OVERWRITE
 	

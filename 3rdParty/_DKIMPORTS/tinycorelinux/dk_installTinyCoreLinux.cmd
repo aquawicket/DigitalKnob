@@ -26,7 +26,7 @@ goto:eof
 		
 		call dk_info "Installing tiny-core-linux . . ."
 		call dk_getFilename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
-		call dk_download %TINYCORELINUX_DL% %DKDOWNLOAD_DIR%\%TINYCORELINUX_DL_FILE%
+		call dk_download %TINYCORELINUX_DL%
 		
 		:: create and cd into install directory
 		call dk_makeDirectory %TINYCORELINUX% 

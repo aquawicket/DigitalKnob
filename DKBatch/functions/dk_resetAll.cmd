@@ -15,7 +15,7 @@ call DK
 	call dk_info "Do you want to reset the entire local repository . . . ?"
 	call dk_info "This will delete digitalknob, everything will be reset,"
 	call dk_info "and the repository will be re-cloned. All libraries and tools"
-	call dk_info "will be redk_downloaded and rebuild from start. Save any changes"
+	call dk_info "will be re-downloaded and rebuild from start. Save any changes"
 	call dk_info "you wish to commit or save beforehand."
 	call dk_echo
         

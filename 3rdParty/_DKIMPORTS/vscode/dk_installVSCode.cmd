@@ -40,7 +40,7 @@ call ../../../DKBatch/functions/DK.cmd
     call dk_info "Installing VSCode . . ."
 	call dk_makeDirectory %DKTOOLS_DIR%
 ::	call dk_import %VSCODE_DL% PATH %VSCODE%
-	call dk_download "%VSCODE_DL%" "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%"
+	call dk_download %VSCODE_DL%
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE%"
 	call dk_makeDirectory %VSCODE%\data
 	
