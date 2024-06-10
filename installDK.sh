@@ -5,6 +5,7 @@
 [ ! -e DKBash/functions ] && mkdir DKBash/functions
 if [ ! -e DKBash/functions/DK.sh ]; then
 	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "tce-load")" ] && tce-load -wil curl
+	[ -z "$(command -v "curl")" ] && [ -n "$(command -v "apk")" ] && apk install curl
 	curl -Lo DKBash/functions/DK.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/DK.sh
 fi
 

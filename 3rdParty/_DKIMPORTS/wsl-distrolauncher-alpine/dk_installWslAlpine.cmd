@@ -14,7 +14,7 @@ call ../../../DKBatch/functions/DK.cmd
 	call dk_download %LAUNCHER_DL%
 	call dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
 	call dk_getFilename %LAUNCHER_DL% LAUNCHER_DL_FILE
-	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
+	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE% OVERWRITE
 	%DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
 goto:eof
 
