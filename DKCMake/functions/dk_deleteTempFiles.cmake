@@ -21,3 +21,13 @@ function(dk_deleteTempFiles)
 		
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

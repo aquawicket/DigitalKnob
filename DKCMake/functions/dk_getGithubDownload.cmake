@@ -192,3 +192,13 @@ function(dk_getGithubDownload url) #install_path #Patch
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
 
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

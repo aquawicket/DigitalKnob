@@ -20,3 +20,13 @@ macro(dk_watchCallback variable access val lst stack)
 	message(STATUS "${cyan}##################################################################################################${clr}")
 	dk_wait()
 endmacro()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

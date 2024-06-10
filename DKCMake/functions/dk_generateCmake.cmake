@@ -106,3 +106,13 @@ function(dk_generateCmake plugin_name)
 	endif()
 	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})  #Add to list
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

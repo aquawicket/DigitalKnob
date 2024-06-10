@@ -33,3 +33,13 @@ function(dk_testApp plugin_name)
 	# TODO		
 	dk_add_to_plugin_list(${plugin_name})
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

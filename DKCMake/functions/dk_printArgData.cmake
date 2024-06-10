@@ -25,3 +25,13 @@ macro(dk_printArgData)
 	dk_debug(ARGV_LAST)
 	dk_debug(" ")
 endmacro()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

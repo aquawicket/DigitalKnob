@@ -38,3 +38,12 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	file(RENAME ${from} ${to})
 endfunction()
 dk_createOsMacros("dk_rename")
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

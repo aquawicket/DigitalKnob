@@ -23,7 +23,6 @@ endfunction()
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-	#dk_addSource()
-	message(STATUS "TEST TEST TEST")
+	dk_todo()
 
 endfunction(DKTEST)

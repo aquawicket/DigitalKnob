@@ -23,3 +23,14 @@ function(dk_deleteEmptyDirectories path)
 		execute_process(COMMAND find ${path} -empty -type d -delete WORKING_DIRECTORY ${path})
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

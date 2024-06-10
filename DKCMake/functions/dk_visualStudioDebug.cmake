@@ -41,3 +41,14 @@ function(dk_visualStudioDebug path) #target #arch
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

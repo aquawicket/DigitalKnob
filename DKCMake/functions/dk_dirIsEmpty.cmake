@@ -23,3 +23,13 @@ function(dk_dirIsEmpty path rtn_var)
 	set(${rtn_var} true PARENT_SCOPE)
 	dk_printVar(rtn_var)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

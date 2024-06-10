@@ -36,3 +36,13 @@ macro(dk_dump variable)
 	endif()
 	#dk_wait()
 endmacro()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

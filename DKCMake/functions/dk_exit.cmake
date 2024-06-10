@@ -16,3 +16,13 @@ function(dk_exit)
 		execute_process(COMMAND killall -9 cmake)	# WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

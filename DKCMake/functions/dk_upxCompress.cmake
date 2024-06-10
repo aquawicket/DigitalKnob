@@ -15,3 +15,15 @@ function(dk_upxCompress path)
 	dk_info("Please wait...")
 	dk_executeProcess("${UPX_EXE} -9 -v ${path}")
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

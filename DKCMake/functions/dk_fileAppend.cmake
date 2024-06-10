@@ -18,7 +18,8 @@ endfunction()
 
 
 
-macro(DKTEST) ########################################################################
-	
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
 	dk_fileAppend("dk_fileAppend_TEST.txt" "string written by dk_fileAppend")
-endmacro()
+
+endmacro(DKTEST)

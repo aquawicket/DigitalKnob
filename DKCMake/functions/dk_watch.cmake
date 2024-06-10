@@ -14,3 +14,13 @@ macro(dk_watch variable)
 	
 	variable_watch(variable dk_watchCallback)
 endmacro()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

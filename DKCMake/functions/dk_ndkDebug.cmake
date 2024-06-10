@@ -25,3 +25,13 @@ function(dk_ndkDebug path)
 	endif()
 endfunction()
 dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -15,3 +15,13 @@ macro(dk_return)
 	return()
 endmacro()
 dk_createOsMacros("dk_return")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

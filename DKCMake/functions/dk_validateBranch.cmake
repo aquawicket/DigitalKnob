@@ -49,3 +49,14 @@ function(dk_validateBranch)
 	dk_set(DKPOWERSHELL_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKPowershell")
 	dk_printVar(DKPOWERSHELL_DIR)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -166,3 +166,12 @@ endfunction(dk_parseFunctionsAndLoadFromString)
 #if(dk_load IN_LIST dk_load_list) 
 #	set(dk_load_list dk_load CACHE INTERNAL "")
 #endif()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

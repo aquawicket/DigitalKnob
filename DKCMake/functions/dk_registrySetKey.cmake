@@ -27,8 +27,8 @@ endfunction()
 
 
 
-function(DKTEST) #############################################################
-	
-	#dk_registrySetKey()
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-endfunction()
+	dk_todo()
+
+endfunction(DKTEST)

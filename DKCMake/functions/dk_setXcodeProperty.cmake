@@ -15,3 +15,15 @@ function(dk_setXcodeProperty TARGET property value)
 	
     set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

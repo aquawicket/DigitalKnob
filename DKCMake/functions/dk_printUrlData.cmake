@@ -31,3 +31,12 @@ function(dk_printUrlData url)
 	dk_getFileType(${url} url_filetype)
 	dk_verbose(url_filetype)
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

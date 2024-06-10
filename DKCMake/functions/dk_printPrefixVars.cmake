@@ -20,3 +20,13 @@ function(dk_printPrefixVars _prefix)
         message(STATUS "${_var} = ${${_var}}")
     endforeach()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

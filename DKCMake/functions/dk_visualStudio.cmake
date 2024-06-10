@@ -15,3 +15,14 @@ function(dk_visualStudio)
 	dk_visualStudioRelease(${ARGV})
 endfunction()
 dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

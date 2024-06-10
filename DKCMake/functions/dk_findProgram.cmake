@@ -57,3 +57,13 @@ function(dk_findProgram VAR name)
 	dk_notice("COULD NOT FIND ${name}")
 	set(${VAR} "${${VAR}}" PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

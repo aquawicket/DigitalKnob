@@ -17,3 +17,13 @@ function(dk_getUnixPath path unix_path)
 		string (STRIP ${unix_path} unix_path)
 	endif(WIN32)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -28,3 +28,14 @@ function(dk_findFiles path pattern RESULT)
 	dk_printVar(files)
 	set(${RESULT} ${files} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

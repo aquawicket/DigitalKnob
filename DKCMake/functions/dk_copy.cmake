@@ -60,3 +60,13 @@ function(dk_copy from to) # OVERWRITE NOERROR
 	endif()
 endfunction()
 dk_createOsMacros("dk_copy")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

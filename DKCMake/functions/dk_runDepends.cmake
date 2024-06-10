@@ -138,3 +138,12 @@ function(dk_runDepends plugin)
 #	endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

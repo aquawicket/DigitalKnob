@@ -20,3 +20,13 @@ function(dk_includes variable find RESULT)
 		set(${RESULT} 0 PARENT_SCOPE)
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

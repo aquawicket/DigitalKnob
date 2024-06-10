@@ -52,3 +52,14 @@ function(dk_setPath path)
 #	endif()
 endfunction()
 dk_createOsMacros("dk_setPath")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

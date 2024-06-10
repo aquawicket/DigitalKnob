@@ -40,3 +40,14 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 		dk_echo("The path does NOT exist")
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

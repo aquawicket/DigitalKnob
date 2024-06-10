@@ -17,3 +17,13 @@ function(dk_compressAssets path)
 	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DK_PROJECT_DIR}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

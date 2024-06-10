@@ -15,3 +15,14 @@ function(dk_getEnv name RESULT)
 	dk_printVar(ENV{${name}})
 	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

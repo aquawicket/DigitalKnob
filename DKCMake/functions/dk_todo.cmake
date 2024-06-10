@@ -21,7 +21,7 @@ endif()
 #
 #	@msg (optional)	- A header message to print
 #
-function(dk_todo msg)
+function(dk_todo)
 	dk_debugFunc(${ARGV})
 
 	if(NOT ENABLE_dk_todo)
@@ -53,3 +53,14 @@ function(dk_todo msg)
 		dk_pause()
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

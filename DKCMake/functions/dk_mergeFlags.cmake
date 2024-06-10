@@ -57,3 +57,13 @@ function(dk_mergeFlags args RESULT)
 	set(${RESULT} ${args} PARENT_SCOPE)
 	dk_printVar(${RESULT})
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

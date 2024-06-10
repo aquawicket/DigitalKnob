@@ -96,6 +96,6 @@ dk_createOsMacros("dk_bashEnv")
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-	#dk_todo()
+	dk_todo()
 
-endfunction()
+endfunction(DKTEST)

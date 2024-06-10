@@ -11,3 +11,12 @@ function(dk_hexToVariable)
 	
 	dk_todo()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

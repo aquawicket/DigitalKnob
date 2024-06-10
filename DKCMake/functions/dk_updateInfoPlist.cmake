@@ -44,3 +44,14 @@ function(dk_updateInfoPlist app_name)
 		endif()
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

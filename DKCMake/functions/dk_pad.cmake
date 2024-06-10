@@ -31,3 +31,12 @@ function(dk_pad str padchar length RESULT)
 
   set(${RESULT} "${str}" PARENT_SCOPE)
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

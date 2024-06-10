@@ -35,3 +35,14 @@ function(dk_getAppDirectory RESULT)
 	endif()
 	set(${RESULT} ${appDirectory} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -12,3 +12,12 @@ function(dk_refreshIcons)
 	dk_executeProcess(ie4uinit.exe -ClearIconCache)
 	dk_executeProcess(ie4uinit.exe -show)	# Windows 10
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

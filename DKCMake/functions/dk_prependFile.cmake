@@ -15,3 +15,14 @@ function(dk_prependFile path string)
 	file(READ "${path}" file_data)
 	file(write "${pah}" "${string}\n${filedata}")
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

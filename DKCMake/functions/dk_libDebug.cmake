@@ -48,3 +48,13 @@ function(dk_libDebug lib_path)
 	
 endfunction()
 dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

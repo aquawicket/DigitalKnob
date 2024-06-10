@@ -88,3 +88,13 @@ function(dk_getDKPaths)
 	dk_printVar(DKWEB)
 	
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

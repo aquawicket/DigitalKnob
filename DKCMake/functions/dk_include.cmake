@@ -38,3 +38,14 @@ function(dk_include path)
 
 endfunction()
 dk_createOsMacros("dk_include")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

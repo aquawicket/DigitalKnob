@@ -32,3 +32,13 @@ function(dk_set variable)# value)
 	dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -67,3 +67,12 @@ function(dk_getFileType path rtn-type)
 		set(${rtn-type} UNKNOWN PARENT_SCOPE)
 	endif()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

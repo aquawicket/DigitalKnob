@@ -38,3 +38,14 @@ macro(dk_updateLogInfo)
 		endif()
 	endif()
 endmacro()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

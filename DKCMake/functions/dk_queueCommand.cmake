@@ -48,3 +48,13 @@ function(dk_queueCommand)
 	endif()
 endfunction()
 dk_createOsMacros("dk_queueCommand")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

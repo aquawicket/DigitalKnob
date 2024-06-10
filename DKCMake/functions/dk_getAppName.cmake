@@ -17,3 +17,14 @@ function(dk_getAppName path RESULT)
 	dk_verbose(fileNameNoExt)
 	set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

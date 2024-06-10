@@ -21,3 +21,13 @@ macro(dk_require plugin)
 	endif()
 	dk_depend(${plugin})
 endmacro()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

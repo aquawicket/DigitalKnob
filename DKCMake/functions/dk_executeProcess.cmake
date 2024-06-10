@@ -162,3 +162,13 @@ function(dk_executeProcess)
 	
 endfunction()
 dk_createOsMacros("dk_executeProcess")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -37,3 +37,13 @@ function(dk_wait)
 		dk_error("dk_wait(): Not implemented for this platform")
 	endif()	
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

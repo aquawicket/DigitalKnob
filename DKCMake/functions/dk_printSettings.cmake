@@ -109,3 +109,13 @@ function(dk_printSettings)
 	dk_buildLog(EMSCRIPTEN)
 	dk_buildLog("")
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

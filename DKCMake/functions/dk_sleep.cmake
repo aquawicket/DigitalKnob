@@ -11,3 +11,12 @@ function(dk_sleep seconds)
 	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -26,3 +26,13 @@ function(dk_removeSubstring removethis fromthis RESULT)
 	#dk_wait()
 endfunction()
 dk_createOsMacros("dk_removeSubstring")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

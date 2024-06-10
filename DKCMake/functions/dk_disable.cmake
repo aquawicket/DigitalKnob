@@ -48,3 +48,13 @@ function(dk_disable plugin)
 		dk_undepend(${plugin})
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

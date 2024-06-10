@@ -43,3 +43,14 @@ function(dk_getArgIdentifiers ARGV)
 	endwhile()
 	set(ARGI ${names} CACHE INTERNAL "")
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

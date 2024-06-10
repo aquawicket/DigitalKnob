@@ -41,3 +41,13 @@ function(dk_getPathToPlugin plugin RESULT)
 	set(${RESULT} "")
 	dk_error("Could not find ${plugin} Plugin.")
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

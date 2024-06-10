@@ -16,3 +16,12 @@ function(dk_createSmartObject object)
 	dk_verbose("dk_createSmartObject(${object})")
 	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

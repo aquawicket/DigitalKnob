@@ -21,3 +21,14 @@ function(dk_filesMatch fileA fileB)
 		dk_info("Error while comparing the files.")
 	endif()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

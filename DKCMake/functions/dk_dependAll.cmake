@@ -41,3 +41,13 @@ function(dk_dependAll)
 	unset(DEPENDALL_FILE)
 	dk_load(${DK_PROJECT_DIR}/DEPEND_ALL.txt)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

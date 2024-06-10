@@ -21,3 +21,13 @@ function(dk_getDirectory path RESULT)
 	string(SUBSTRING ${path} 0 ${index} directory) 
     set(${RESULT} ${directory} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

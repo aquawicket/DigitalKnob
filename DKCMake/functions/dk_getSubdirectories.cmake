@@ -20,3 +20,13 @@ function(dk_getSubdirectories input_dir dir_list)
     endforeach()
     set(${result} ${dir_list} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

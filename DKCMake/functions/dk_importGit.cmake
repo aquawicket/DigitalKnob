@@ -144,3 +144,13 @@ function(dk_importGit url) #branch #id #PATCH
 		dk_patch(${Lib} ${${LIBVAR}})
 	endif()	
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

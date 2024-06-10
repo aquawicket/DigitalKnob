@@ -61,6 +61,6 @@ endfunction()
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-	#dk_todo()
+	dk_todo()
 
-endfunction()
+endfunction(DKTEST)

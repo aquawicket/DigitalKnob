@@ -126,3 +126,12 @@ endif()
 #dk_preload(dk_getDKPaths)
 #dk_getDKPaths()
 
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

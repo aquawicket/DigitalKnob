@@ -74,3 +74,14 @@ function(dk_depend plugin)
 #	endif()
 endfunction()
 dk_createOsMacros("dk_depend")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

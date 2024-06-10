@@ -13,3 +13,13 @@ function(dk_get_arg_count RESULT)
 	math(EXPR ARGC "${ARGC}-1")
 	set(${RESULT} ${ARGC} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

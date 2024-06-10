@@ -28,3 +28,13 @@ function(dk_setDigitalknobPath)
 	#dk_printVar(ENV{DKCMAKE_DIR})
 endfunction()
 dk_setDigitalknobPath()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -28,3 +28,13 @@ function(dk_resizeImage inpath width height outpath)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -resize ${width}x${height} ${outpath})
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

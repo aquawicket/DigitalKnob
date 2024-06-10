@@ -17,3 +17,12 @@ function(dk_createFavIcon inpath outpath)
 		dk_error("IMAGEMAGICK_CONVERT is invalid!")
 	endif()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

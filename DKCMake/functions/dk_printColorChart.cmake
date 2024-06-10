@@ -105,3 +105,14 @@ function(dk_printStyleChart)
 	message(       "${ESC_9}     ESC_9         ${clr}")
 	message(      "${ESC_10}     ESC_10        ${clr}")
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

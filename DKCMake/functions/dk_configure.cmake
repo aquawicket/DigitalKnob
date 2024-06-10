@@ -76,3 +76,13 @@ function(dk_configure path) #ARGN
 	endif()
 endfunction()
 dk_createOsMacros("dk_configure")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

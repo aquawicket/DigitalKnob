@@ -17,3 +17,13 @@ function(dk_undefine str)
 	endif()
 	list(REMOVE_ITEM DKDEFINES_LIST ${str})
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

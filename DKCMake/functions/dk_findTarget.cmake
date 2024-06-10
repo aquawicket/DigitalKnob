@@ -37,3 +37,14 @@ function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 		return()
 	endforeach()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

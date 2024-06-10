@@ -13,3 +13,13 @@ function(dk_killProcess name)
 	
 	dk_executeProcess("taskkill /f /im ${name}" NO_HALT)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

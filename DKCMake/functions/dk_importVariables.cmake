@@ -312,3 +312,15 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	
 	set(${RESULT} ${PLUGIN_IMPORT_NAME_LOWER} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

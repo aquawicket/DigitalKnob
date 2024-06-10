@@ -47,3 +47,13 @@ function(dk_isList RESULT)
 		set(${RESULT} FALSE PARENT_SCOPE)
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

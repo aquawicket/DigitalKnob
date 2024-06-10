@@ -31,3 +31,14 @@ function(dk_validate variable code)
 	message("${variable} = ${${variable}}")
 endfunction()
 #dk_createOsMacros("dk_validate")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

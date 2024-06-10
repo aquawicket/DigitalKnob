@@ -20,3 +20,13 @@ function(dk_getShortPath path RESULT)
 		set(${RESULT} ${path} PARENT_SCOPE)
 	endif()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

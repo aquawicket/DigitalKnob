@@ -213,3 +213,15 @@ function(ASCII_SHOW)
 	# Associative array
 	#dk_info("${ASCII[$1,DEC]}	${ASCII[$1,SYMBOL]}	${ASCII[$1,DEC]}	${ASCII[$1,OCT]}	${ASCII[$1,HEX]}	${ASCII[$1,HTML]}	${ASCII[$1,INFO]}")
 endfunction()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

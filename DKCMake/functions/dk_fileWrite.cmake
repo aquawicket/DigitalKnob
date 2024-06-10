@@ -21,4 +21,5 @@ endfunction()
 macro(DKTEST) ########################################################################
 	
 	dk_fileWrite("dk_fileWrite_TEST.txt" "string written by dk_fileWrite")
-endmacro()
+	
+endmacro(DKTEST)

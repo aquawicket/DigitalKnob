@@ -16,3 +16,12 @@ function(dk_xcode)
 	dk_xcodeRelease(${ARGV})
 endfunction()
 dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

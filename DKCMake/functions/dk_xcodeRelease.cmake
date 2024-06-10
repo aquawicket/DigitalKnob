@@ -29,3 +29,12 @@ function(dk_xcodeRelease path)
 	endif()
 endfunction()
 dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

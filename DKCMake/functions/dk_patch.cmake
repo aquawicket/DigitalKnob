@@ -17,3 +17,13 @@ function(dk_patch import_name dest_path)
 	dk_notice("located in ${DKIMPORTS_DIR}/${import_name}/DKMAKE.cmake")
 	dk_copy(${DKIMPORTS_DIR}/${import_name}/ ${dest_path}/ OVERWRITE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

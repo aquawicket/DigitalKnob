@@ -60,3 +60,13 @@ function(dk_downloadAll3rdParty)
 		endif()
 	endforeach()
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -34,3 +34,14 @@ function(dk_getExtension path RESULT)
 	endif()
     set(${RESULT} ${ext} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

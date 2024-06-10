@@ -138,3 +138,12 @@ function(dk_getHostTriple)
 	#dk_printVar(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST)
 	
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -20,3 +20,14 @@ include_guard()
 #	#dk_printVar(output)
 #	set(${RESULT} ${output} PARENT_SCOPE)
 #endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

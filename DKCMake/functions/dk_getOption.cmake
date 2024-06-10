@@ -37,3 +37,12 @@ function(dk_getOption name)
 		#dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

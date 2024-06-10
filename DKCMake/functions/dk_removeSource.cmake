@@ -13,3 +13,12 @@ function(dk_removeSource regex)
 	
 	dk_set(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

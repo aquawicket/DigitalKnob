@@ -22,3 +22,12 @@ function(dk_createPrefixMacro func) #ARGN
 	#dk_printVar(MACRO_STRING)
 	dk_eval(${MACRO_STRING})
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

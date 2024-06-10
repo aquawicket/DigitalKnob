@@ -24,3 +24,13 @@ function(dk_removeTarget plugin target)
 	dk_unset(${plugin}_${target})
 	#dk_unset(${plugin}::${target}) # TESTME
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

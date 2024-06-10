@@ -46,3 +46,13 @@ function(dk_prependEnvPath inputPath)
 	endif()
 	dk_debug(ENV{PATH})
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -23,3 +23,12 @@ function(dk_createPlugin url)
 		dk_set(exe_path ${appDirectory}/${App_Name}/${App_Name}.exe)
 	endif()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

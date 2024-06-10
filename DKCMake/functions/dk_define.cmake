@@ -23,3 +23,13 @@ function(dk_define str)
 	add_definitions(-D${str})
 endfunction()
 dk_createOsMacros("dk_define")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

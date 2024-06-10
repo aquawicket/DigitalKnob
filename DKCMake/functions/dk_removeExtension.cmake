@@ -30,3 +30,12 @@ function(dk_removeExtension path RESULT)
 	#string(SUBSTRING ${path} 0 ${includes} fileNameNoExt)
     set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

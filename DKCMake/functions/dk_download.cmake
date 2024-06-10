@@ -134,3 +134,14 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	endif() 
 endfunction()
 dk_createOsMacros("dk_download")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

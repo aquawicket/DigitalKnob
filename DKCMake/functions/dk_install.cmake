@@ -201,3 +201,13 @@ function(dk_install plugin) #PATCH
 	endif()
 endfunction()
 dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -206,3 +206,15 @@ if(NOT USE_COLOR)
 	set(ESC_9  		 "")
 	set(ESC_10       "")
 endif()
+
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

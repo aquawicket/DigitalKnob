@@ -41,3 +41,12 @@ function(dk_undepend plugin)
 		dk_removeTarget(${plugin} ${ARGV1})
 	endif()	   
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

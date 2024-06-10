@@ -11,3 +11,12 @@ function(dk_dumpAllVariables file)
 		file(APPEND ${file} "${var}:	${${var}}\n")
 	endforeach()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -78,3 +78,14 @@ function(dk_import url)
 	
 endfunction()
 dk_createOsMacros("dk_import")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

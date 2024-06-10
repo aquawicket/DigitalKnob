@@ -29,8 +29,11 @@ function(dk_pause)
 endfunction()
 
 
-function(DKTEST) #############################################################
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
 	dk_pause()
 
-endfunction()
+endfunction(DKTEST)

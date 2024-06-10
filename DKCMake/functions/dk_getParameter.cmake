@@ -16,3 +16,12 @@ macro(dk_getParameter name RESULT)
 	dk_getOptionValue(${name} ${ARGN})
 	set(${RESULT} ${${name}})
 endmacro()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

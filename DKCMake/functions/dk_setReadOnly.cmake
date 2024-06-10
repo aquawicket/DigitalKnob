@@ -15,3 +15,14 @@ macro(dk_setReadOnly VAR)
 	set("_${VAR}_readonly_val" "${ARGN}")		# Store the variable's value for restore it upon modifications.
 	variable_watch("${VAR}" dk_readOnlyCallback)	# Register a watcher for a variable
 endmacro()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

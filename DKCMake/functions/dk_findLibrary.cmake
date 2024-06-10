@@ -28,3 +28,14 @@ function(dk_findLibrary name)
 	endif()
 endfunction()
 dk_createOsMacros("dk_findLibrary")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -36,3 +36,13 @@ function(dk_makeDirectory path)
 #	endif()
 endfunction()
 dk_createOsMacros("dk_makeDirectory")
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

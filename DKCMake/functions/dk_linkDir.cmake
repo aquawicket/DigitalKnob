@@ -24,3 +24,12 @@ function(dk_linkDir path)
 	#endforeach()
 endfunction()
 dk_createOsMacros("dk_linkDir")
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -15,3 +15,13 @@ function(dk_validatePath path RESULT)
 	get_filename_component(path ${path} ABSOLUTE)
 	set(${RESULT} ${path} PARENT_SCOPE)
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

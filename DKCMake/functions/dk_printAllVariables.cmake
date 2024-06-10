@@ -16,3 +16,14 @@ function(dk_printAllVariables)
 		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
 	endforeach()
 endfunction()
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

@@ -19,3 +19,12 @@ function(dk_listReplace LIST old_value new_value)
         list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
     endif()
 endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

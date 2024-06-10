@@ -70,3 +70,14 @@ function(dk_msys2Bash)
 	endif()
 endfunction()
 dk_createOsMacros("dk_msys2Bash")
+
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

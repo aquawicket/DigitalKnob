@@ -15,3 +15,12 @@ function(dk_unset variable)
 	unset(${variable})
 endfunction()
 dk_createOsMacros("dk_unset")
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)

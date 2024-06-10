@@ -15,3 +15,13 @@ function(dk_notice msg)
 	#message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
 	message(NOTICE "${B_yellow}${msg}${clr}")
 endfunction()
+
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+
+	dk_todo()
+
+endfunction(DKTEST)
