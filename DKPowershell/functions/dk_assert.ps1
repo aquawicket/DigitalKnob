@@ -2,7 +2,9 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_assert){ $dk_assert = 1 } else{ return }
 
 dk_load dk_echo
+dk_load dk_info
 dk_load dk_error
+#dk_load dk_set
 dk_load dk_realpath
 ##################################################################################
 # dk_assert(<expression>)
@@ -27,27 +29,27 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 
-	$myVar="string"
-	echo "dk_assert myVar" && dk_assert myVar
-	#echo "dk_assert $myVar" && dk_assert $myVar
-	#echo "dk_assert ${myVar}" && dk_assert ${myVar}
+	$myVar = "string"
+	dk_info "dk_assert myVar" && dk_assert myVar
+	#dk_info "dk_assert $myVar" && dk_assert $myVar
+	#dk_info "dk_assert ${myVar}" && dk_assert ${myVar}
 
-	$myVarB=15
-	echo "dk_assert myVarB" && dk_assert myVarB
-	#echo "dk_assert $myVarB" && dk_assert $myVarB
-	#echo "dk_assert ${myVarB}" && dk_assert ${myVarB}
+	$myVarB = 15
+	dk_info "dk_assert myVarB" && dk_assert myVarB
+	#dk_info "dk_assert $myVarB" && dk_assert $myVarB
+	#dk_info "dk_assert ${myVarB}" && dk_assert ${myVarB}
 
-	$myVarC=" "
-	echo "dk_assert myVarC" && dk_assert myVarC
-	#echo "dk_assert $myVarC" && dk_assert $myVarC
-	#echo "dk_assert ${myVarC}" && dk_assert ${myVarC}
+	$myVarC = " "
+	dk_info "dk_assert myVarC" && dk_assert myVarC
+	#dk_info "dk_assert $myVarC" && dk_assert $myVarC
+	#dk_info "dk_assert ${myVarC}" && dk_assert ${myVarC}
 
-	$myVarD=""
-	echo "dk_assert myVarD" && dk_assert myVarD
-	#echo "dk_assert $myVarD" && dk_assert $myVarD
-	#echo "dk_assert ${myVarD}" && dk_assert ${myVarD}
+	$myVarD = ""
+	dk_info "dk_assert myVarD" && dk_assert myVarD
+	#dk_info "dk_assert $myVarD" && dk_assert $myVarD
+	#dk_info "dk_assert ${myVarD}" && dk_assert ${myVarD}
 
-	$myVarE=
+	$myVarE =
 	dk_assert myVarE
 	#dk_assert $myVarE
 	#dk_assert ${myVarE}

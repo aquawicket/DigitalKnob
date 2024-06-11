@@ -20,21 +20,32 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	call dk_debugFunc
 
-
 	call dk_set myVar string
-	call dk_assert myVar
+	call dk_info "dk_assert myVar" && call dk_assert myVar
+	::dk_info "dk_assert $myVar" && dk_assert $myVar
+	::dk_info "dk_assert ${myVar}" && dk_assert ${myVar}
 
 	call dk_set myVarB 15
-	call dk_assert myVarB
+	call dk_info "dk_assert myVarB" && call dk_assert myVarB
+	::dk_info "dk_assert $myVarB" && dk_assert $myVarB
+	::dk_info "dk_assert ${myVarB}" && dk_assert ${myVarB}
 
-::	call dk_set myVarC ""
-::	call dk_assert myVarC
+	call dk_set myVarC "  "
+	call dk_info "dk_assert myVarC" && call dk_assert myVarC
+	::dk_info "dk_assert $myVarC" && dk_assert $myVarC
+	::dk_info "dk_assert ${myVarC}" && dk_assert ${myVarC}
 
-::	call dk_set myVarD """
-::  call dk_assert myVarD
+	call dk_set myVarD ""
+	call dk_info "dk_assert myVarD" && call dk_assert myVarD
+	::dk_info "dk_assert $myVarD" && dk_assert $myVarD
+	::dk_info "dk_assert ${myVarD}" && dk_assert ${myVarD}
 
-::	call dk_set myVarE
-::	call dk_assert myVarE
+	call dk_unset myVarE
+	call dk_assert myVarE
+	::dk_assert $myVarE
+	::dk_assert ${myVarE}
 
 	call dk_assert noVar
+	::dk_assert $noVar
+	::dk_assert ${noVar}
 goto:eof
