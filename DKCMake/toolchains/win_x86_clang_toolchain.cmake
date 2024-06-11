@@ -1,10 +1,10 @@
-dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 
-message(STATUS "####################################################################")
-message(STATUS "################ window_x86_clang_toolchain.cmake ##################")
-message(STATUS "####################################################################")
+message(STATUS "#################################################################")
+message(STATUS "################ win_x86_clang_toolchain.cmake ##################")
+message(STATUS "#################################################################")
 
 ###### Get DKCMAKE_DIR ######
 if(NOT DKCMAKE_DIR)

@@ -8,7 +8,7 @@ dk_load dk_call
 #
 function Global:dk_generate() {
 	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"}
 	
 	dk_echo
 	dk_echo "##################################################################"
@@ -54,14 +54,17 @@ function Global:dk_generate() {
 	if($TARGET_OS -eq "win_arm64_clang"){ 
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
 	if($TARGET_OS -eq "win_x86_clang"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
 	if($TARGET_OS -eq "win_x86_mingw"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
 	if($TARGET_OS -eq "win_x86_64_clang"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
@@ -72,6 +75,7 @@ function Global:dk_generate() {
 	if($TARGET_OS -eq "win_x86_64_mingw"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
 	if($TARGET_OS -eq "win_x86_64_ucrt"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
@@ -109,6 +113,7 @@ function Global:dk_generate() {
 	}
 	
 	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$TARGET_OS\$TYPE"
+	$CMAKE_BINARY_DIR = $CMAKE_BINARY_DIR -replace '\\', '/';
 	dk_printVar CMAKE_BINARY_DIR
 	
 	#if(!($WSLENV)){ 
@@ -134,11 +139,10 @@ function Global:dk_generate() {
 	#$CMAKE_ARGS += "--check-system-vars"
 	
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
-#	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-#	if dk_pathExists "$TOOLCHAIN"; then
-#		$CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
-#	}
+	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
+	$TOOLCHAIN = $TOOLCHAIN -replace '\\', '/';
+	dk_echo "TOOLCHAIN = $TOOLCHAIN"
+	if(dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }
 	
 	###### WSL CMake Fix ######
 	if($WSLENV){ 

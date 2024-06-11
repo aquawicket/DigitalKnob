@@ -3,7 +3,7 @@ include_guard()
 
 
 message(STATUS "####################################################################")
-message(STATUS "################ win_x86_64_clang_toolchain.cmake ###############")
+message(STATUS "################ win_x86_64_clang_toolchain.cmake ##################")
 message(STATUS "####################################################################")
 
 ###### Get DKCMAKE_DIR ######
