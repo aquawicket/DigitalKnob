@@ -9,10 +9,10 @@ dk_install(){
 	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 }
 dk_source(){
-	[ -e ${DKBASH_DIR}/functions/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
-	[ -e ${DKBASH_DIR}/functions/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
-	chmod 777 ${DKBASH_DIR}/functions/$1.sh
-	. ${DKBASH_DIR}/functions/$1.sh
+	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	chmod 777 ${DKBASH_FUNCTIONS_DIR}/$1.sh
+	. ${DKBASH_FUNCTIONS_DIR}/$1.sh
 }
 dk_call(){
 	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
@@ -134,10 +134,11 @@ DK () {
 
 	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" >/dev/null 2>&1 ; pwd -P )
 	[ -d ${DKBASH_DIR} ] || [$(read -rp 'DKBASH_DIR:${DKBASH_DIR} not found, press enter to exit')] || exit;
+	export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 	echo "DKBASH_DIR = $DKBASH_DIR"
 
-	chmod 777 ${DKBASH_DIR}/functions/*
-	#export PATH=${PATH}:${DKBASH_DIR}/functions
+	chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
+	#export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
 	
 	###### Let's see the CallStack ######
 	echo "BASH_SOURCE[0]    = ${BASH_SOURCE[0]}"
@@ -175,7 +176,7 @@ DK () {
 
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST}" = "1" ]; then
-		if [ "${DKSCRIPT_DIR}" = "${DKBASH_DIR}/functions" ]; then
+		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			#export ENABLE_dk_debugFunc=1
 			echo ""
 			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"

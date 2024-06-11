@@ -21,13 +21,13 @@ dk_load() {
 	else
 		fn="$1"
 		fn=$(basename ${fn})
-		fpath=${DKBASH_DIR}/functions/${fn}.sh
+		fpath=${DKBASH_FUNCTIONS_DIR}/${fn}.sh
 	fi
 	
 	#### download if missing ####
 	[ ! -e ${fpath} ] && echo "Dowloading ${fn}"
-	[ ! -e ${fpath} ] && dk_command curl -Lo ${DKBASH_DIR}/functions/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	[ ! -e ${fpath} ] && dk_command wget -P ${DKBASH_DIR}/functions https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
+	[ ! -e ${fpath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
+	[ ! -e ${fpath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
 	[ ! -e ${fpath} ] && echo "ERROR: ${fpath}: file not found" && return
 	
 	# Convert to unix line endings if CRLF found

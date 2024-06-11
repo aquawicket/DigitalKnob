@@ -17,9 +17,9 @@ dk_onError () {
 	export ENABLE_dk_debugFunc=0
 	dk_echo "${red-} Error: $1:$2 ${clr-}"
 	
-	[ "$(command -v dk_showFileLine)" = "" ]  &&  . ${DKBASH_DIR}/functions/dk_showFileLine.sh
+	[ "$(command -v dk_showFileLine)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/dk_showFileLine.sh
 	dk_showFileLine $1 $2
-	[ "$(command -v dk_stacktrace)" = "" ]  &&  . ${DKBASH_DIR}/functions/dk_stacktrace.sh
+	[ "$(command -v dk_stacktrace)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/dk_stacktrace.sh
 	dk_stacktrace
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR

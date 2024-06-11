@@ -41,8 +41,8 @@ alias dk_includeGuard='{
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	. ${DKBASH_DIR}/functions/dk_debug
-	. ${DKBASH_DIR}/functions/dk_debug
+	. ${DKBASH_FUNCTIONS_DIR}/dk_debug
+	. ${DKBASH_FUNCTIONS_DIR}/dk_debug
 
 	dk_debug "testing dk_includeGuard. loading of dk_debug should have been stopped twice."
 

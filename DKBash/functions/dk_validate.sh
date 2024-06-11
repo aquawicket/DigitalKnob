@@ -18,7 +18,7 @@ dk_validate () {
 	
 	#echo "2 = ${2}"
 	
-	[ -e ${DKBASH_DIR}/functions/${2}.sh ] && dk_load ${2}
+	[ -e ${DKBASH_FUNCTIONS_DIR}/${2}.sh ] && dk_load ${2}
 	eval "${2}"
 	
 	[ -n "${!1+x}" ] || dk_error "dk_validate(): ${1} is invalid"
