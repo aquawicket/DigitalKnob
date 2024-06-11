@@ -10,6 +10,8 @@ dk_load dk_removeExtension
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
 dk_load dk_pathExists
+dk_load dk_getHostTriple
+dk_load dk_getDKPaths
 ####################################################################
 # dk_validateGit()
 #

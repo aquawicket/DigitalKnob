@@ -4,6 +4,7 @@ if(!$dk_remove){ $dk_remove = 1 } else{ return }
 dk_load dk_call
 dk_load dk_replaceAll
 dk_load dk_getFullPath
+dk_load dk_pathExists
 #####################################################################
 # dk_remove(path)
 #

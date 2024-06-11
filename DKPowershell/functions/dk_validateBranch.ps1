@@ -5,6 +5,7 @@ dk_load dk_getBasename
 dk_load dk_validate
 dk_load dk_printVar
 dk_load dk_pathExists
+dk_load dk_getDKPaths
 ##################################################################################
 # dk_validateBranch()
 #

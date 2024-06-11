@@ -1,7 +1,8 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_pickApp){ $dk_pickApp = 1 } else{ return }
 
-
+dk_load dk_echo
+dk_load dk_warning
 ##################################################################################
 # dk_pickApp()
 #
