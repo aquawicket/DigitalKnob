@@ -1,6 +1,6 @@
 @echo off
 
-:install_cmake_fileAssociation
+:install_launcher
 	if not "%*" == "" (goto:run_cmake_file)
 	echo Associating .ps1 files with DKPowershell . . .
 	
