@@ -1,7 +1,10 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_enterManually){ $dk_enterManually = 1 } else{ return }
 
-
+dk_load dk_info
+dk_load dk_pathExists
+dk_load dk_printVar
+dk_load dk_makeDirectory
 ##################################################################################
 # dk_enterManually()
 #

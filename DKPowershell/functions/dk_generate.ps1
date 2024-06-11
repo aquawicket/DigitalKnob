@@ -2,6 +2,11 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_generate){ $dk_generate = 1 } else{ return }
 
 dk_load dk_call
+dk_load dk_clearCmakeCache
+dk_load dk_deleteTempFiles
+dk_load dk_pathExists
+dk_load dk_error
+dk_load dk_installCmake
 ##################################################################################
 # dk_generate()
 #
