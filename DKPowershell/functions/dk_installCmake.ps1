@@ -14,13 +14,13 @@ function Global:dk_installCmake () {
 	dk_validate HOST_OS dk_getHostTriple
 	
 #   if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm32"    { $CMAKE_DL = "https://todo" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm64")   { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-arm64.zip" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86")     { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-i386.zip" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86_64")  { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-windows-x86_64.zip" }
-    if("$HOST_OS" -eq "mac")                        { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-macos-universal.tar.gz" }
-#	if("$HOST_OS" -eq "mac")                        { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-macos10.10-universal.tar.gz" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_x86_64"){ $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-linux-x86_64.tar.gz" }
-    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_arm64") { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.5-linux-aarch64.tar.gz" }
+    if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm64")   { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip" }
+    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86")     { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip" }
+    if("${HOST_OS}_${HOST_ARCH}" -eq "win_x86_64")  { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip" }
+    if("$HOST_OS" -eq "mac")                        { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz" }
+#	if("$HOST_OS" -eq "mac")                        { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz" }
+    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_x86_64"){ $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
+    if("${HOST_OS}_${HOST_ARCH}" -eq "linux_arm64") { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
     
     $CMAKE_DL_FILE = dk_getFilename $CMAKE_DL 
 	$CMAKE_DL_NAME = dk_removeExtension $CMAKE_DL_FILE 
@@ -34,11 +34,9 @@ function Global:dk_installCmake () {
        
     dk_info " "
     dk_info "Installing CMake . . ."
-    #echo MsiExec.exe /i "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE" INSTALL_ROOT="$CMAKE_DL_NAME\$CMAKE_FOLDER" /qn
-    #MsiExec.exe /i "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE" INSTALL_ROOT="$CMAKE_DL_NAME\$CMAKE_FOLDER" /qn
     dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE"
 	dk_smartExtract "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE" "$CMAKE"
-	#echo $CMAKE_FOLDER>"$CMAKE\installed"
+
     
     if(!(dk_pathExists "$CMAKE_EXE")){ dk_error "cannot find cmake" }
 }

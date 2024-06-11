@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_generate){ $dk_generate = 1 } else{ return }
 
-dk_load dk_installCmake
 dk_load dk_call
 ##################################################################################
 # dk_generate()
@@ -148,6 +147,7 @@ function Global:dk_generate() {
 	}
 	
 	###### CMake Configure ######
+	dk_load $DKIMPORTS_DIR/cmake/dk_installCmake.ps1
 	dk_installCmake
 	
 	dk_echo
