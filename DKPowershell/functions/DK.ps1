@@ -89,7 +89,6 @@ function DK() {
 		Write-Output ""
 		Write-Output "########################## END TEST ################################"
 		Write-Output ""
-		
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
 	}

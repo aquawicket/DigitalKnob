@@ -51,6 +51,7 @@ if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 	DKTEST()
 	
 	message("\n########################## END TEST ################################\n")
+	dk_pause()
 endif()
 endif()
 

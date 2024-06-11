@@ -2,7 +2,7 @@
 
 :install_cmake_fileAssociation
 	if not "%*" == "" (goto:run_cmake_file)
-	echo Associating .cmake files with DKCmake_Batch_Wrapper . . .
+	echo Associating .cmake files with DKCmake . . .
 	
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
@@ -17,14 +17,14 @@ goto:eof
 
 
 :run_cmake_file
-	::set "DKCMAKE_FUNCTIONS_DIR=%DKBRANCH_DIR%\DKCMake\functions"
 	set "DKCMAKE_FUNCTIONS_DIR=%~1"
 	set "CMAKE_EXE=%~2"
 	set "CMAKE_FILE=%~3"
 
+	echo ############### Digitalknob ##################
 	cd %DKCMAKE_FUNCTIONS_DIR%
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
-	%CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
+	start %CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
 
-	pause
+::	pause
 goto:eof
