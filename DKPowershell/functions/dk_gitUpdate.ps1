@@ -16,9 +16,9 @@ function Global:dk_gitUpdate () {
 	}
 	
 	dk_validate GIT_EXE "dk_validateGit"
-	if(dk_filexists "${DKBRANCH_DIR}/.git"){
+	if(!(dk_pathExists "${DKBRANCH_DIR}/.git")){
 		dk_printVar DKBRANCH_DIR
-		dk_call "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
+		dk_call "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	}
 	dk_call cd "${DKBRANCH_DIR}" #|| dk_error "cd $${DKBRANCH_DIR} failed!"
 	dk_call "${GIT_EXE}" pull --all

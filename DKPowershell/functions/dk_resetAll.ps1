@@ -19,7 +19,7 @@ function Global:dk_resetAll () {
 	dk_info "you wish to commit or save beforehand."
 	dk_echo
 		
-	dk_confirm || return
+	dk_confirm -or return
 		
 	# make sure script is running from DKBRANCH_DIR
 	if($DKSCRIPT_DIR -ne $DKBRANCH_DIR){

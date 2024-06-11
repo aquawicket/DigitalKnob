@@ -17,7 +17,7 @@ function Global:dk_removeAll () {
 	dk_info "Save any un-commited changes first."
 	dk_echo
 		
-	dk_confirm || return
+	dk_confirm -or return
 		
 	# make sure script is running from DKBRANCH_DIR
 	if($DKSCRIPT_DIR -ne $DKBRANCH_DIR){

@@ -21,7 +21,7 @@ function Global:dk_gitCommit () {
 	$message = Read-Host
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
-	cd "${DKBRANCH_DIR}" #|| dk_error "cd \${DKBRANCH_DIR} failed!"
+	cd "${DKBRANCH_DIR}" #-or dk_error "cd \${DKBRANCH_DIR} failed!"
 	
 	if(!($STORE = $(dk_call ${GIT_EXE} config credential.helper))){
 		dk_errorStatus
@@ -64,7 +64,7 @@ function Global:dk_gitCommit () {
 	
 	dk_echo
 	dk_info "git commit \"${message}\""
-	dk_confirm || return 0
+	dk_confirm -or return 0
 	
 	dk_call ${GIT_EXE} commit -a -m "${message}"
     dk_call ${GIT_EXE} push

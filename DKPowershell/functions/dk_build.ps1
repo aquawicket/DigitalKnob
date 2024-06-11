@@ -16,7 +16,7 @@ function Global:dk_build () {
 	dk_echo "##################################################################"
 	dk_echo
 	
-	if($TYPE -eq "Debug" || $TYPE -eq "All"){
+	if($TYPE -eq "Debug" -or $TYPE -eq "All"){
 		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Debug\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR\$APP\$TARGET_OS\Debug" "--config Debug" "--verbose"
 		}
@@ -25,7 +25,7 @@ function Global:dk_build () {
 		}
 		else{dk_error "Could not find CMakeCache.txt in $APP\$TARGET_OS\Debug or $APP\$TARGET_OS"}
 	}
-	if($TYPE -eq "Release" || $TYPE -eq "All"){
+	if($TYPE -eq "Release" -or $TYPE -eq "All"){
 		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Release\CMakeCache.txt"){
 			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR\$APP\$TARGET_OS\Release" --config Release --verbose
 		}

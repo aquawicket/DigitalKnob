@@ -10,7 +10,7 @@ function Global:dk_confirm() {
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
     $confirmation = Read-Host "${yellow} Are you sure ? [Y/N] ${clr}"
-	if($confirmation -eq 'y' || $confirmation -eq 'Y') { return $true }
+	if($confirmation -eq 'y' -or $confirmation -eq 'Y') { return $true }
 	return $false
 }
 

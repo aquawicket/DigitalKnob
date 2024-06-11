@@ -42,14 +42,10 @@ function Global:dk_validateGit () {
     dk_info ""  
     dk_info "Installing git . . ."
     dk_download $GIT_DL $DKDOWNLOAD_DIR\$GIT_DL_FILE
-    #echo "$DKDOWNLOAD_DIR\$GIT_DL_FILE" /DIR=$DKTOOLS_DIR\$GIT_FOLDER
-    #"$DKDOWNLOAD_DIR\$GIT_DL_FILE" /DIR="$DKTOOLS_DIR\$GIT_FOLDER" /VERYSILENT
 	dk_info "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
-    "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
+    dk_call "$DKDOWNLOAD_DIR\$GIT_DL_FILE" -y -o $DKTOOLS_DIR\$GIT_FOLDER
 	   
-    if(!dk_pathExists $GIT_EXE){ dk_error "cannot find git" }
-        
-    dk_checkError
+    if(!(dk_pathExists $GIT_EXE)){ dk_error "cannot find git" }
 }
 
 
