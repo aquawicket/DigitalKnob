@@ -21,7 +21,8 @@ endif()
 MAC_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/macosx/nasm-2.16.01-macosx.zip)
 MAC_HOST_dk_set(NASM_EXE ${NASM}/nasm)
 
-WIN_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win32/nasm-2.16.01-win32.zip)
+#WIN_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win32/nasm-2.16.01-win32.zip)
+WIN_HOST_dk_import(https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip)
 WIN_HOST_dk_set(NASM_EXE ${NASM}/nasm.exe)
 
 #dk_setEnv("PATH" "${NASM_EXE}")

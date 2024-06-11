@@ -33,8 +33,8 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	
 	::### Add File Associations ###
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call "%DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd"
+	::call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	::call "%DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd"
 	
 :: install via CMake
 ::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
