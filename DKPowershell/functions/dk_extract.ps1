@@ -16,7 +16,7 @@ function Global:dk_extract($file, $destination) {
 	dk_info "Extracting $file to $destination . . ."
 	if(!(dk_pathExists $file)){ dk_error "cannot find $file" }
 	
-	Expand-Archive $file -DestinationPath $destination
+	Expand-Archive $file -DestinationPath $destination -Force
 }
 
 

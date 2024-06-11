@@ -3,16 +3,16 @@ if(!$dk_removeExtension){ $dk_removeExtension = 1 } else{ return }
 
 dk_load dk_printVar
 ##################################################################################
-# dk_removeExtension(<filepath> <output>)
+# dk_removeExtension(filepath) -> rtn_var
 #
 #
 function Global:dk_removeExtension($filepath) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-	$output = $filepath.Substring(0, $filepath.lastIndexOf('.'))
-	dk_printVar output
-	return $output
+	$rtn_var = $filepath.Substring(0, $filepath.lastIndexOf('.'))
+	dk_printVar rtn_var
+	return $rtn_var
 }
 
 

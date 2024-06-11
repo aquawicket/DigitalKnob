@@ -10,6 +10,7 @@ dk_load dk_getDirectories
 dk_load dk_getBasename
 dk_load dk_warning
 dk_load dk_arrayLength
+dk_load dk_move
 ##################################################################################
 # dk_smartExtract(src, dest)
 #
@@ -32,14 +33,15 @@ function Global:dk_smartExtract($src, $dest) {
 	
 	
 	dk_remove $src_directory/UNZIPPED
-	dk_makeDirectory $src_directory/UNZIPPED
 	dk_info "Extracting $src_filename . . ."
 	dk_extract $src_fullpath $src_directory/UNZIPPED
 	
-	$directories = dk_getDirectories $src_directory/UNZIPPED 
+	$directories = dk_getDirectories $src_directory/UNZIPPED
+	dk_printVar directories
 	$dir_count = dk_arrayLength $directories
 	
-	$files = dk_getFiles "$src_directory/UNZIPPED"
+	$files = dk_getFiles $src_directory/UNZIPPED
+	dk_printVar files
 	$file_count = dk_arrayLength $files
 	
 	if($dir_count -eq 1){

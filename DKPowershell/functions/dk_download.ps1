@@ -7,26 +7,30 @@ if(!$dk_download){ $dk_download = 1 } else{ return }
 #
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
-function Global:dk_download($url, $dest) {
+function Global:dk_download($url, $destination) {
 	dk_debugFunc
 	
-	Write-Output "url = $url"
-	Write-Output "dest = $dest"
+	if(dk_pathExists "${destination}"){
+        dk_info "${destination} already exist"
+        return
+    }
+	
+	dk_info "Downloading $url . . ."
+    dk_info "please wait . . ."
 	
 	# method 1
-	Write-Output "Downloading $url.."
-    Invoke-WebRequest -URI $url -OutFile $dest #-SkipHttpErrorCheck
+    Invoke-WebRequest -URI $url -OutFile $destination #-SkipHttpErrorCheck
 	
 	# method 2
-	#(New-Object System.Net.WebClient).DownloadFile($url, $dest)
+	#(New-Object System.Net.WebClient).DownloadFile($url, $destination)
 	
 	# method 2 (extended)
 	#$WebClient = New-Object System.Net.WebClient
 	#$WebClient.UseDefaultCredentials = $true
-	#$WebClient.DownloadFile($url, $dest)
+	#$WebClient.DownloadFile($url, $destination)
 	
 	# method 3
-	#Start-BitsTransfer -Source $url -Destination $dest
+	#Start-BitsTransfer -Source $url -Destination $destination
 }
 
 

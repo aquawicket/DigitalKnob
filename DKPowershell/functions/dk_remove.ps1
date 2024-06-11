@@ -14,9 +14,9 @@ function Global:dk_remove($path) {
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	$path = dk_replaceAll $path "/" "\"
-	if(dk_pathExists $path){
+	if(!(dk_pathExists $path)){
 		dk_warning "dk_remove $path does not exist"
-		return ${false}
+		return
 	}
 	
 	$path = dk_getFullPath $path
@@ -34,6 +34,5 @@ function Global:dk_remove($path) {
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	
 	dk_remove
 }
