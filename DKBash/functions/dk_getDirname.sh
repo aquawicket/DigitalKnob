@@ -3,8 +3,9 @@
 
 
 ##################################################################################
-# dk_getDirname(<path> <output>)
+# dk_getDirname(path, output)
 #
+#    https://en.wikipedia.org/wiki/Dirname
 #
 dk_getDirname () {
 	dk_debugFunc

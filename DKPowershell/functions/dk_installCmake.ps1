@@ -3,6 +3,7 @@ if(!$dk_installCmake){ $dk_installCmake = 1 } else{ return }
 
 dk_load dk_validate
 dk_load dk_download
+dk_load dk_smartExtract
 ####################################################################
 # dk_installCmake()
 #

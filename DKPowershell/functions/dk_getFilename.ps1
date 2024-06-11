@@ -1,15 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_getFilename){ $dk_getFilename = 1 } else{ return }
-
-
-											 ## Output:
-	# $PSCommandPath                             ## C:\Users\user\Documents\code\ps\test.ps1
-	# (Get-Item $PSCommandPath ).Extension       ## .ps1
-	# (Get-Item $PSCommandPath ).Basename        ## test
-	# (Get-Item $PSCommandPath ).Name            ## test.ps1
-	# (Get-Item $PSCommandPath ).DirectoryName   ## C:\Users\user\Documents\code\ps
-	# (Get-Item $PSCommandPath ).FullName        ## C:\Users\user\Documents\code\ps\test.ps1
-	
+if(!$dk_getFilename){ $dk_getFilename = 1 } else{ return }	
 	
 ##################################################################################
 # dk_getFilename(<path> <output>)
