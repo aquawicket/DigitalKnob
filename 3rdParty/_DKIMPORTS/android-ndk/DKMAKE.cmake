@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://developer.android.com/ndk
 # https://github.com/android/ndk
 # https://mirrors.cloud.tencent.com/AndroidSDK/

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://gitlab.com/libtiff/libtiff
 # http://www.simplesystems.org/libtiff/
 # https://download.osgeo.org/libtiff/

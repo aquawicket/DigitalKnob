@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.dependencywalker.com
 
 if(NOT WIN_HOST)

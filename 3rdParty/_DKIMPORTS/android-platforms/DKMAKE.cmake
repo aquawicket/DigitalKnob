@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
 if(NOT ANDROID)

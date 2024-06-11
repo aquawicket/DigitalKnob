@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.mesa3d.org
 
 if(NOT LINUX AND NOT RASPBERRY)

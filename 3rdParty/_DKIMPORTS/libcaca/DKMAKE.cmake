@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/cacalabs/libcaca.git
 # http://caca.zoy.org/wiki/libcaca
 

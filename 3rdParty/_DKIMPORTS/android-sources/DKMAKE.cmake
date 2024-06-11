@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/AndroidSDKSources
 # https://androidsdkoffline.blogspot.com/p/android-sdk-sources-download.html
 

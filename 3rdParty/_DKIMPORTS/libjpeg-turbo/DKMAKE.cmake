@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/libjpeg-turbo/libjpeg-turbo
 # https://libjpeg-turbo.org/
 # For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT WIN_HOST)
 	dk_undepend(msinttypes)
 	dk_return()

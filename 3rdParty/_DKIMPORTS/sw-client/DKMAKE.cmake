@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://software-network.org/client/
 
 WIN_dk_import(https://software-network.org/client/sw-master-windows-client.zip)

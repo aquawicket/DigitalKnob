@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://packages.msys2.org/base/yasm
 
 if(MSYSTEM)

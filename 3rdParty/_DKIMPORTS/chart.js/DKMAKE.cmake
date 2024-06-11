@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/chartjs/Chart.js
 # https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js
 # https://www.chartjs.org/

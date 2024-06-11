@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # opensles
 
 if(NOT ANDROID AND NOT IOS AND NOT IOSSIM)

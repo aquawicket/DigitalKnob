@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libgtk2.0-dev)
 	dk_return()

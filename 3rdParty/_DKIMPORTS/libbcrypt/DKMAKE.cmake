@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT MINGW)
 	dk_undepend(libbcrypt)
 	dk_return()

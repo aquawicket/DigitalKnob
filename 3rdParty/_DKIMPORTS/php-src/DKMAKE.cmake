@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/php/php-src.git
 # https://www.php.net
 # https://www.php.net/distributions/php-8.0.9.tar.gz

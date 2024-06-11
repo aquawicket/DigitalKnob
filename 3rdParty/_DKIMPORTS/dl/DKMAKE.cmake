@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT UNIX)
 	dk_undepend(dl)
 	dk_return()

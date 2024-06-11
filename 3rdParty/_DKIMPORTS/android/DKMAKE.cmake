@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # not found on Android host devices the first time round. 
 # add hints to point to the library in the ndk
 

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-wrappers
 
 if(NOT WIN)

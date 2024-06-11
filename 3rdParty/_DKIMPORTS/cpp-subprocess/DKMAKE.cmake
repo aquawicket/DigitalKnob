@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/tsaarni/cpp-subprocess
 
 # NOTE:		Header only library

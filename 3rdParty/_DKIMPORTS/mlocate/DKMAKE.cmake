@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # mlocate
 # EXAMPLE Usage:   $ locate libx11.a
 

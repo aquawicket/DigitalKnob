@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/koalaman/shellcheck.git
 
 #scversion="stable" # or "v0.4.7", or "latest"

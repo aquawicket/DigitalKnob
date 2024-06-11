@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
 

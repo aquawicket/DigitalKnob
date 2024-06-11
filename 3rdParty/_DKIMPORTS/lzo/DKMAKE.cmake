@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # Portable lossless data compression library
 # 
 # https://www.oberhumer.com/opensource/lzo

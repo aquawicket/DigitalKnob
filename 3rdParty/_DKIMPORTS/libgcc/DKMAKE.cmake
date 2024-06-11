@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 
 

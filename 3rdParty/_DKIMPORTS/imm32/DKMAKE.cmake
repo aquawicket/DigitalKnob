@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://learn.microsoft.com/en-us/windows/win32/api/imm/nf-imm-immgetcontext
 if(NOT WIN)
 	dk_undepend(imm32)

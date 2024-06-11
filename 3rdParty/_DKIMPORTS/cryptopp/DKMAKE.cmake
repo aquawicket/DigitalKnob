@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 

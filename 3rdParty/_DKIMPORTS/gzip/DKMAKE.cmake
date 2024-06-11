@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://git.savannah.gnu.org/cgit/gzip.git
 # git://git.savannah.gnu.org/gzip.git
 # https://github.com/kunpengcompute/gzip.git

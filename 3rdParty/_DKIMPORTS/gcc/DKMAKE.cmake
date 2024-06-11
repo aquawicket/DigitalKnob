@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 
 if(MSYSTEM)

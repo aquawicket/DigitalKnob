@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://gitlab.freedesktop.org/gstreamer/gstreamer.git
 
 

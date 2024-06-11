@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # to use this template, remove these lines
 dk_undepend(_TEMPLATE-APP_)
 dk_return()

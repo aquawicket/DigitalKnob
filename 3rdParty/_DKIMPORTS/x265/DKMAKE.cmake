@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://bitbucket.org/multicoreware/x265_git.git
 
 

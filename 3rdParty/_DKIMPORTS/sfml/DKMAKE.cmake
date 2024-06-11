@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/SFML/SFML
 # https://www.sfml-dev.org
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip

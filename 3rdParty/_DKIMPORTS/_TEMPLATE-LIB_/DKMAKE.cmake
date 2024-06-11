@@ -1,7 +1,14 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 # to use this template, remove these lines
+#########################################
 dk_undepend(_TEMPLATE-LIB_)
 dk_return()
 #########################################
+
+
+
+
 
 # https://github.com/organization/package
 

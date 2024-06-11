@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://sourceforge.net/p/lame/svn/HEAD/tree
 # https://github.com/lameproject/lame.git
 

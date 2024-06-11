@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.thegeekdiary.com/rpm-command-not-found
 
 if(NOT LINUX_HOST OR ANDROID_HOST)

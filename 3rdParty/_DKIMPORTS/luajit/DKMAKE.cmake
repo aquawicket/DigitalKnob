@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/LuaJIT/LuaJIT.git
 
 dk_import(https://github.com/LuaJIT/LuaJIT.git BRANCH v2.1)

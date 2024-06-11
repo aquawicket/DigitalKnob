@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/leetal/ios-cmake
 
 dk_import(https://github.com/leetal/ios-cmake.git)

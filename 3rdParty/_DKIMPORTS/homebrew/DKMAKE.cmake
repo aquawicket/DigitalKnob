@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/Homebrew/brew
 # https://brew.sh/
 if(NOT MAC_HOST)

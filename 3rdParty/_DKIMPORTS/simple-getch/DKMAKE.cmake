@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/mouuff/simple-getch
 # https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip
 if(NOT UNIX_HOST)

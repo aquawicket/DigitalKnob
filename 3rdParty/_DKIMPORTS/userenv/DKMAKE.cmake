@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://learn.microsoft.com/en-us/windows/win32/api/userenv/
 
 if(NOT WIN)

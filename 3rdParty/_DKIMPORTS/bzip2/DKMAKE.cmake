@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build

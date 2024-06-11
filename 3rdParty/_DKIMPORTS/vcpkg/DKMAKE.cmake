@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # Getting Started  https://vcpkg.io/en/getting-started.html
 # Documentation    https://vcpkg.io/en/docs/README.html
 

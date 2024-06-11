@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://androidsdkoffline.blogspot.com/p/android-ndk-cmake-direct-download.html
 
 if(NOT ANDROID)

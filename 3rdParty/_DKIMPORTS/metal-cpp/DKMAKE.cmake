@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT MAC_HOST)
 	dk_undepend(metal-cpp)
 	dk_return()

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT WIN)
 	dk_undepend(pdh.lib)
 	dk_return()

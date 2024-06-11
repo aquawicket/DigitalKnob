@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/VerySleepy/verysleepy.git
 # http://www.codersnotes.com/sleepy/
 # https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe

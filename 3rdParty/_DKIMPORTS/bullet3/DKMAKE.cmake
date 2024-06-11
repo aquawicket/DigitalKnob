@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/bulletphysics/bullet3.git
 # https://code.google.com/archive/p/bullet
 # https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip

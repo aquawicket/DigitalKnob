@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/curl/curl
 # https://curl.se/
 # https://robertying.io/posts/compile-openssl-and-curl-for-android

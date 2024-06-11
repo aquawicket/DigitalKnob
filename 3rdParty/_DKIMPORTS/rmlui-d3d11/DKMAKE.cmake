@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.github.com/martonp96/RmlUi-D3D11.git
 
 

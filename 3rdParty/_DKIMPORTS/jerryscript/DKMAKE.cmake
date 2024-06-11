@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/jerryscript-project/jerryscript.git
 # https://jerryscript.net
 

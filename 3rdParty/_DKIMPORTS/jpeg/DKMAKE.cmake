@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # http://www.ijg.org/
 # https://www.ijg.org/files/jpegsr9d.zip
 

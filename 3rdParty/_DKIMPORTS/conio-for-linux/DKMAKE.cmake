@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/nowres/conio-for-linux.git
 
 if(NOT UNIX_HOST)

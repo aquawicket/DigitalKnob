@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 WIN_dk_lib(opengl32.lib)
 

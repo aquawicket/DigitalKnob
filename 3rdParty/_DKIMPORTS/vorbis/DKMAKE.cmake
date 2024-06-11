@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/xiph/vorbis
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies

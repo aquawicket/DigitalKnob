@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/glennrp/libpng
 # http://www.libpng.org/pub/png/libpng.html
 

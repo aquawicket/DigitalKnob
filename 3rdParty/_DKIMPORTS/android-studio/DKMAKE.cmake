@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
 

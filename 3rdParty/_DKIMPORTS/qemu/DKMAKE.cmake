@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.qemu.org
 # https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe
 

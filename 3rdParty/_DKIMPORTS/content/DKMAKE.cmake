@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #### MDN Web Docs ####
 # https://github.com/mdn/content.git
 # https://www.peterbe.com/plog/how-to-get-all-of-mdn-web-docs-running-locally

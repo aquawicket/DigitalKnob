@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/openframeworks/openFrameworks
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 # https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_vs2017_release.zip  # WINDOWS

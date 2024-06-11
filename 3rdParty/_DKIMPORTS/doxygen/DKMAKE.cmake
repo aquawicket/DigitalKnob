@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # FIXME:  Install to /3rdParty only
 
 # https://github.com/doxygen/doxygen.git

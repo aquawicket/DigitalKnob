@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libglib2.0-dev)
 	dk_return()

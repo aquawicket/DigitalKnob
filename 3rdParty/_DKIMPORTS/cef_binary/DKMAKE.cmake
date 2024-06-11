@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://en.wikipedia.org/wiki/Google_Chrome_version_history
 # https://cef-builds.spotifycdn.com/index.html
 #

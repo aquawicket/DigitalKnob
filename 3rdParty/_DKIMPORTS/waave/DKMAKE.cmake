@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://sourceforge.net/projects/waave
 # https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 

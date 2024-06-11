@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/libsdl-org/SDL_mixer
 # https://www.libsdl.org/projects/SDL_mixer
 

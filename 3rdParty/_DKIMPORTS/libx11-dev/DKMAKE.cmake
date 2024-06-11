@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libx11-dev)
 	dk_return()

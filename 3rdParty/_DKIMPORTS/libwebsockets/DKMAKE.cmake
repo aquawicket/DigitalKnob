@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://libwebsockets.org
 # https://github.com/warmcat/libwebsockets
 # https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip

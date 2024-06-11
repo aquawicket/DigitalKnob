@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.transmissionzero.co.uk/computing/win32-apps-with-mingw/
 # https://github.com/TransmissionZero/MinGW-Win32-Application
 
