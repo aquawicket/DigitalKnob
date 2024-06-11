@@ -1,4 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
+
 
 message(STATUS "####################################################################")
 message(STATUS "################ win_x86_64_clang_toolchain.cmake ###############")
@@ -13,8 +15,6 @@ if(NOT DKCMAKE_DIR)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()
 
-#include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
 set(CLANG64_DIR "${MSYS2}/clang64")
 set(CMAKE_MAKE_PROGRAM ${CLANG64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
