@@ -1,3 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(HOST_OS "dk_getHostTriple()")
+dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 # https://docs.python.org/3/using/windows.html
 # Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
 # Mac		https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
@@ -7,6 +10,9 @@
 # Portable Python 2.7.17
 # https://sourceforge.net/projects/portable-python/
 # https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe/download
+
+# Portable Python 2.7.6.1
+# https://archive.org/download/portable-python-2.7.6.1
 
 # Uninstall
 # https://stackoverflow.com/a/3819829
@@ -46,8 +52,6 @@ if(NOT EXISTS ${PYTHON_EXE})
 		dk_getNativePath(${PYTHON} PYTHON_WINPATH)
 		file(WRITE "${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_executeProcess(${PYTHON}/python_install.cmd)
-		
-		#dk_sleep(60)
 		
 		if(ANDROID_HOST)
 			dk_findProgram(PYTHON_EXE python)
