@@ -13,6 +13,7 @@
 	
 	ftype dk_batch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %*
 	assoc .cmd=dk_batch
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_batch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 goto:eof
 
 :run_file
@@ -26,6 +27,4 @@ goto:eof
 ::	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
 ::	echo CMD_FILE = %CMD_FILE%
 	cmd /c call %CMD_FILE%
-
-::	pause
 goto:eof

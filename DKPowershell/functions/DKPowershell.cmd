@@ -13,6 +13,7 @@
 	
 	ftype dk_powershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	assoc .ps1=dk_powershell
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_powershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 goto:eof
 
 
@@ -23,6 +24,4 @@ goto:eof
 
 	echo ############### Digitalknob ##################
 	start %POWERSHELL_EXE% %PS_FILE%
-
-	::pause
 goto:eof

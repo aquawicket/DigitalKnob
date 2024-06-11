@@ -13,6 +13,7 @@
 	
 	ftype dk_cmake=cmd /c call "%~f0" "%DKCMAKE_FUNCTIONS_DIR%" "%CMAKE_EXE%" "%%1" %*
 	assoc .cmake=dk_cmake
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_cmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
 goto:eof
 
 
@@ -25,6 +26,4 @@ goto:eof
 	cd %DKCMAKE_FUNCTIONS_DIR%
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
 	start %CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
-
-::	pause
 goto:eof

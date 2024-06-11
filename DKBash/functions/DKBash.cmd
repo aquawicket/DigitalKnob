@@ -13,6 +13,7 @@
 	
 	ftype dk_bash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
 	assoc .sh=dk_bash
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_bash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
 goto:eof
 
 
@@ -23,6 +24,4 @@ goto:eof
 
 	echo ############### Digitalknob ##################
 	start %GITBASH_EXE% %SH_FILE%
-
-::	pause
 goto:eof
