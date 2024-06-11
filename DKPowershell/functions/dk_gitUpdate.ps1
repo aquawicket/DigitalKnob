@@ -20,7 +20,7 @@ function Global:dk_gitUpdate () {
 		dk_printVar DKBRANCH_DIR
 		dk_call "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	}
-	dk_call cd "${DKBRANCH_DIR}" #|| dk_error "cd $${DKBRANCH_DIR} failed!"
+	dk_call cd "${DKBRANCH_DIR}" #-or dk_error "cd $${DKBRANCH_DIR} failed!"
 	dk_call "${GIT_EXE}" pull --all
 	dk_call "${GIT_EXE}" checkout -- .
 	dk_call "${GIT_EXE}" checkout "${DKBRANCH}"

@@ -15,7 +15,7 @@ function Global:dk_download($url, $dest) {
 	
 	# method 1
 	Write-Output "Downloading $url.."
-    Invoke-WebRequest -URI $url -OutFile $dest -SkipHttpErrorCheck
+    Invoke-WebRequest -URI $url -OutFile $dest #-SkipHttpErrorCheck
 	
 	# method 2
 	#(New-Object System.Net.WebClient).DownloadFile($url, $dest)

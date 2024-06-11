@@ -21,8 +21,9 @@ function Global:dk_remove($path) {
 	
 	$path = dk_getFullPath $path
 	
-	dk_call del /F /Q $path >nul 2>&1
-	dk_call rd /s /q $path >nul 2>&1
+	#dk_call del /F /Q $path >nul 2>&1
+	#dk_call rd /s /q $path >nul 2>&1
+	Remove-Item -Recurse -Force $path
 	
 	if(dk_pathExists $path){
 		dk_error "dk_remove failed to remove $path"
@@ -33,5 +34,6 @@ function Global:dk_remove($path) {
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
+	
 	dk_remove
 }
