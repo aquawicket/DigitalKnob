@@ -1,10 +1,10 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_extract){ $dk_extract = 1 } else{ return }
 
-::####################################################################
-::# dk_extract(file, destination)
-::#
-::#
+####################################################################
+# dk_extract(file, destination)
+#
+#
 function Global:dk_extract($file, $destination) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
