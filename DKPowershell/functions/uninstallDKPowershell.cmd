@@ -1,4 +1,5 @@
 @echo off
+call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 
 :uninstall_launcher
 	echo Uninstalling .ps1 file associations . . .
