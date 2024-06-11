@@ -1,5 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_assert){ $dk_assert = 1 } else{ return }
+if(!$dk_fixme){ $dk_fixme = 1 } else{ return }
 
 if(!$ENABLE_dk_fixme){ $global:ENABLE_dk_fixme = 1 }
 if(!$TRACE_ON_FIXME) { $global:TRACE_ON_FIXME = 0  }

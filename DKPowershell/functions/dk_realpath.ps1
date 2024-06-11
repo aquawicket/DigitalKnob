@@ -4,16 +4,16 @@ if(!$dk_realpath){ $dk_realpath = 1 } else{ return }
 dk_load dk_error
 dk_load dk_printVar
 ##################################################################################
-# dk_realpath(<path>) return <output>
+# dk_realpath(<path>) return -> rtn_var
 #
 #
 function Global:dk_realpath($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	$output = Resolve-Path -Path "$path"
-	dk_printVar output
-	return ${output}
+	$rtn_var = Resolve-Path -Path "$path"
+	dk_printVar rtn_var
+	return ${rtn_var}
 }
 
 

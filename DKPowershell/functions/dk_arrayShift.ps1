@@ -1,5 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_arrayPop){ $dk_arrayPop = 1 } else{ return }
+if(!$dk_arrayShift){ $dk_arrayShift = 1 } else{ return }
 
 dk_load dk_fixme
 dk_fixme
