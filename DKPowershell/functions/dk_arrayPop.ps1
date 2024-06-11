@@ -28,7 +28,6 @@ function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
-	
 	dk_printArray myArray
 	
 	dk_arrayPop $myArray

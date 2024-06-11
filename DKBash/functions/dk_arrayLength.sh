@@ -14,8 +14,8 @@ dk_arrayLength () {
 	
 	dk_assert $1
 	
-	typeset -n arry=$1
-	array_length=${#arry[@]}
+	typeset -n _array_=$1
+	array_length=${#_array_[@]}
 	
 	dk_assert array_length
 	eval "$2=$array_length"

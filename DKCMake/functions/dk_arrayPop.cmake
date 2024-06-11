@@ -7,25 +7,39 @@ include_guard()
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_pop
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
-function(dk_arrayPop array)# rtn_var)
-	dk_debugFunc(${ARGV})
-	
-	if(DEFINED "${array}")
-		set(_array_ "${array}")
+#function(dk_arrayPop array)# rtn_var)
+#	dk_debugFunc(${ARGV})
+#	
+#	if(DEFINED "${array}")
+#		set(_array_ "${array}")
+#		set(name ${_array_})
+#	elseif(DEFINED "array")
+#		set(_array_ "array")
+#		set(name ${_array_})
+#	else()
+#		dk_error("arguments invalid: ${_array_}")
+#	endif()
+#	
+#	list(POP_BACK "${_array_}")
+#	dk_printArray("${_array_}")
+#	
+#	set(${array} "${_array_}" PARENT_SCOPE)
+#endfunction()
+
+
+macro(dk_arrayPop)
+	if(DEFINED "${ARGV}")
+		set(_array_ "${ARGV}")
 		set(name ${_array_})
-	elseif(DEFINED "array")
-		set(_array_ "array")
+	elseif(DEFINED "ARGV")
+		set(_array_ "ARGV")
 		set(name ${_array_})
 	else()
 		dk_error("arguments invalid: ${_array_}")
 	endif()
 	
-	list(POP_BACK "${array}")
-	#dk_printArray("${array}")
-	
-	set(${array} "${array}" PARENT_SCOPE)
-endfunction()
-
+	list(POP_BACK "${_array_}")
+endmacro()
 
 
 
@@ -41,31 +55,26 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_printArray(myArray)
 	
 	dk_arrayPop(myArray)
-	#list(POP_BACK myArray)
 	dk_printArray(myArray)
 	
-#	dk_arrayPop("myArray" myArray)
-#	dk_printArray("myArray" myArray)
+	dk_arrayPop("myArray")
+	dk_printArray("myArray")
+
+	dk_arrayPop(${myArray})
+	dk_printArray(${myArray})
 	
-#	dk_arrayPop(${myArray} myArray)
-#	dk_printArray(${myArray} myArray)
-	
-#	dk_arrayPop("${myArray}" myArray)
-#	dk_printArray("${myArray}" myArray)
-	
-	dk_arrayPop(myArray)
-	#list(POP_BACK myArray)
-	dk_printArray(myArray)
+	dk_arrayPop("${myArray}")
+	dk_printArray("${myArray}")
 	
 	dk_arrayPop(myArray)
-	#list(POP_BACK myArray)
 	dk_printArray(myArray)
 	
 	dk_arrayPop(myArray)
-	#list(POP_BACK myArray)
+	dk_printArray(myArray)
+	
+	dk_arrayPop(myArray)
 	dk_printArray(myArray)
 	
 	dk_arrayPop(myArray )
-	#list(POP_BACK myArray)
 	dk_printArray(myArray)
 endfunction(DKTEST)
