@@ -138,11 +138,11 @@ function Global:dk_generate() {
 	#$CMAKE_ARGS += "--warn-unused-vars"
 	#$CMAKE_ARGS += "--check-system-vars"
 	
-	###### CMAKE_TOOLCHAIN_FILE ######
-	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
-	$TOOLCHAIN = $TOOLCHAIN -replace '\\', '/';
-	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-	if(dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }
+#	###### CMAKE_TOOLCHAIN_FILE ######
+#	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
+#	$TOOLCHAIN = $TOOLCHAIN -replace '\\', '/';
+#	dk_echo "TOOLCHAIN = $TOOLCHAIN"
+#	if(dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }
 	
 	###### WSL CMake Fix ######
 	if($WSLENV){ 
