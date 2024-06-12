@@ -17,6 +17,7 @@ dk_load dk_createCache
 dk_load dk_generate
 dk_load dk_build
 dk_load dk_unset
+dk_load dk_stacktrace
 ####################################################################
 # dk_buildMain()
 #
@@ -27,7 +28,8 @@ function Global:dk_buildMain() {
 
 
 	trap {
-		"Error found: $_" 
+		"Error found: $_"
+		dk_stacktrace
 	}
 
 # 	dk_validateSudo

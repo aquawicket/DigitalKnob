@@ -22,7 +22,7 @@ function Global:dk_move($_from_, $_to_) {
 	if($(__ARGC__) -gt 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	if($args[2] -eq "OVERWRITE"){ $OVERWRITE = 1 }
-	$OVERWRITE = 1
+	#$OVERWRITE = 1
 	
 	dk_info "Moving $_from_ to $_to_"
 	
