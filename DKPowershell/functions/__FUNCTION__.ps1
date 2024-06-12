@@ -13,5 +13,5 @@ function GLOBAL:__FUNCTION__($_FRAME_=1) {
 
 
 function Global:DKTEST() { ###########################################################################################
-	Write-Host -Fore cyan "FUNCTION = $(__FUNCTION__)";
+	Write-Host -Fore cyan "FUNCTION = $(__FUNCTION__ 0)";
 }

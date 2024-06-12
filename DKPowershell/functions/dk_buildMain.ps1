@@ -25,6 +25,11 @@ function Global:dk_buildMain() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
+	trap {
+		"Error found: $_" 
+	}
+
 # 	dk_validateSudo
 	
 #	if dk_defined WSLENV; then 

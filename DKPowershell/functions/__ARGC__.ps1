@@ -6,8 +6,6 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 #
 function GLOBAL:__ARGC__($_FRAME_=1) {
 	
-	
-	#return (Get-Command -Name $(__FUNCTION__ $_FRAME_)).Parameters.count;
 	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
 }
 
@@ -17,5 +15,5 @@ function GLOBAL:__ARGC__($_FRAME_=1) {
 
 
 function Global:DKTEST() { ###########################################################################################
-	Write-Host -Fore cyan "ARGC = $(__ARGC__)";
+	Write-Host -Fore cyan "ARGC = $(__ARGC__ 0)";
 }

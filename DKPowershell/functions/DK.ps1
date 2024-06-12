@@ -1,5 +1,7 @@
 if($DKINIT){return} else{ $global:DKINIT=1 }
 
+
+
 # https://ss64.com/ps
 # https://www.pdq.com/blog/change-powershell-colors/
 function Set-ConsoleColor ($bc, $fc) {
@@ -39,6 +41,8 @@ $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 ##
 ##
 function DK() {
+	
+	
 	echo "Loading DigitalKnob . . ."
 
 	############# Set DKPOWERSHELL_FUNCTIONS_DIR path ############
@@ -93,5 +97,7 @@ function DK() {
 		exit
 	}
 }
+
+
 DK
 

@@ -7,13 +7,6 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 # __ARGV__(frame)
 #
 function GLOBAL:__ARGV__($_FRAME_=1) {
-#	$_FRAME_=$_FRAME_+1
-#	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
-#	foreach($key in (Get-Command -Name $(__FUNCTION__ $_FRAME_)).Parameters.keys){
-#		$_ARGV_.Add((get-variable $key).Value)
-#	}
-#	return $_ARGV_
-	
 	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
 	$boundParameters = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters
 	foreach ($keyValue in $boundParameters.GetEnumerator()) { 
@@ -26,5 +19,5 @@ function GLOBAL:__ARGV__($_FRAME_=1) {
 
 
 function Global:DKTEST() { ###########################################################################################
-	Write-Host -Fore cyan "ARGV = $(__ARGV__)";
+	Write-Host -Fore cyan "ARGV = $(__ARGV__ 0)";
 }

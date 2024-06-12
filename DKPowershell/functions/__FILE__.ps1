@@ -12,5 +12,5 @@ function GLOBAL:__FILE__($_FRAME_=1) {
 
 
 function Global:DKTEST() { ###########################################################################################
-	Write-Host -Fore cyan "FILE = $(__FILE__)";
+	Write-Host -Fore cyan "FILE = $(__FILE__ 0)";
 }
