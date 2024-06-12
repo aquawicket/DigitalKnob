@@ -46,6 +46,7 @@ function Global:dk_smartExtract($src, $dest) {
 	if($dir_count -eq 1){
 		if($file_count -eq 0){
 			dk_move $src_dirname\UNZIPPED\$directories $dest_fullpath OVERWRITE    #rename\move UNZIPPED\root folder to dest path"
+			return
 		}
 	}
 
