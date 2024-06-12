@@ -6,13 +6,14 @@ dk_load dk_echo
 ## dk_color()
 ##
 ## https://evotec.xyz/powershell-how-to-format-powershell-write-host-with-multiple-colors/
+## https://duffney.io/usingansiescapesequencespowershell/
 ##
 function Global:dk_color() {
 
-    $global:esc="`n$([char]27)"
+    $global:esc="$([char]27)"
 
     ###### STYLES ######
-    $global:clr = "$esc[0m`n"
+    $global:clr = "$esc[0m"
     $global:bold = "$esc[1m"
     $global:underline = "$esc[4m"
     $global:inverse = "$esc[7m"
