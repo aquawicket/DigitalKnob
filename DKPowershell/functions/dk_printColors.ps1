@@ -64,6 +64,22 @@ function Global:dk_printColors () {
 	dk_info "^<ESC^>[7;31m                   ${esc}[7;31minverse red foreground color${clr}"
 	dk_info "^<ESC^>[7m and nested ^<ESC^>[31m ${esc}[7mbefore ${esc}[31mnested${clr}"
 	dk_info "^<ESC^>[31m and nested ^<ESC^>[7m ${esc}[31mbefore ${esc}[7mnested${clr}"
+	
+	
+	
+	# 256-Color Foreground & Background Charts
+	$esc=$([char]27)
+	echo "`n$esc[1;4m256-Color Foreground & Background Charts$esc[0m"
+	foreach ($fgbg in 38,48) {  # foreground/background switch
+	  foreach ($color in 0..255) {  # color range
+		#Display the colors
+		$field = "$color".PadLeft(4)  # pad the chart boxes with spaces
+		Write-Host -NoNewLine "$esc[$fgbg;5;${color}m$field $esc[0m"
+		#Display 6 colors per line
+		if ( (($color+1)%6) -eq 4 ) { echo "`r" }
+	  }
+	  echo `n
+	}
 }
 
 

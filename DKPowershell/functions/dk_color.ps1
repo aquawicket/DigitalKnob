@@ -61,10 +61,4 @@ function Global:dk_color() {
 
 function Global:DKTEST() { ####################################################################
 	dk_color
-	echo "$red TEST $clr"
-	echo "$green TEST $clr"
-	echo "$yellow TEST $clr"
-	echo "$blue TEST $clr"
-	echo "$magenta TEST $clr"
-	echo "$cyan TEST $clr"
 }
