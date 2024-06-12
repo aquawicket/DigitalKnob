@@ -3,7 +3,7 @@ call DK
 
 
 ::####################################################################
-::# dk_strlen(<string_var> rtn_var)
+::# dk_strlen(string_var rtn_var)
 ::#
 ::#
 :dk_strlen
@@ -23,7 +23,7 @@ call DK
 goto:eof
 
 
-:DKTEST ############################## DKTEST ##############################
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_set _demo "some example string"
 	call dk_strlen _demo _length

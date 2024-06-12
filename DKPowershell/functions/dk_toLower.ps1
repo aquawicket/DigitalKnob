@@ -3,7 +3,7 @@ if(!$dk_toLower){ $dk_toLower = 1 } else{ return }
 
 dk_load dk_printVar
 ##################################################################################
-# dk_toLower(<str>) return <output>
+# dk_toLower(str) -> rtn_val
 #
 #
 function Global:dk_toLower($str) {
@@ -18,7 +18,8 @@ function Global:dk_toLower($str) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	$lowercase = dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse"
 	echo "lowercase = ${lowercase}"
 }

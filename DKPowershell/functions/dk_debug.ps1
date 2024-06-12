@@ -33,7 +33,6 @@ function Global:dk_debug($allArgs) {
 function Global:DKTEST() { ###########################################################################################
 	dk_debugFunc
 	
-	
 	dk_debug "test dk_debug message"
 	dk_info "...next line..."
 }

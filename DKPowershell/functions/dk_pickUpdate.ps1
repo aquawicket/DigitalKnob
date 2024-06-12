@@ -28,10 +28,6 @@ function Global:dk_pickUpdate() {
 	dk_checkGitRemote
 	dk_echo
 	
-	#dk_printVar _APP_
-	#dk_printVar _TARGET_OS_ 
-	#dk_printVar _TYPE_
-	
 	if($behind -lt 1){
 		if(${_APP_} -and ${_TARGET_OS_} -and ${_TYPE_}){
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
