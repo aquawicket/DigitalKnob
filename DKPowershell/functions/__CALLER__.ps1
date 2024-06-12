@@ -4,8 +4,8 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 ##################################################################################
 # __CALLER__(frame)
 #
-function GLOBAL:__CALLER__($_FRAME_=2) {
-	$_FRAME_=$_FRAME_+2
+function GLOBAL:__CALLER__($_FRAME_=1) {
+	$_FRAME_=$_FRAME_+1
 	return ($(Get-PSCallStack)[$_FRAME_].FunctionName).Split(':')[1]
 }
 

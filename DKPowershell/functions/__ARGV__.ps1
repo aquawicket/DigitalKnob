@@ -6,7 +6,7 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 ##################################################################################
 # __ARGV__(frame)
 #
-function GLOBAL:__ARGV__($_FRAME_=2) {
+function GLOBAL:__ARGV__($_FRAME_=1) {
 #	$_FRAME_=$_FRAME_+1
 #	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
 #	foreach($key in (Get-Command -Name $(__FUNCTION__ $_FRAME_)).Parameters.keys){

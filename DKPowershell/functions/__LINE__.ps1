@@ -4,8 +4,8 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 ##################################################################################
 # __LINE__(frame)
 #
-function GLOBAL:__LINE__($_FRAME_=2) {
-	
+function GLOBAL:__LINE__($_FRAME_=1) {
+	$_FRAME_=$_FRAME_+1
 	return $(Get-PSCallStack)[$_FRAME_].ScriptLineNumber
 }
 
