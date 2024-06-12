@@ -44,52 +44,55 @@ function Global:dk_generate() {
 	
 	$CMAKE_ARGS = @()
 	if($TARGET_OS -eq "android_arm32")  { $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "ios_arm64")      { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "iossim_x86")     { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "iossim_x86_64")  { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "linux_x86")      { $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "linux_x86_64")   { $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "mac_x86")        { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "mac_x86_64")     { $CMAKE_ARGS += "-G Xcode" }
-	if($TARGET_OS -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
-	if($TARGET_OS -eq "win_arm64_clang"){ 
+	elseif($TARGET_OS -eq "android_arm64")  { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "emscripten")     { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "ios_arm32")      { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "ios_arm64")      { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "iossim_x86")     { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "iossim_x86_64")  { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "linux_x86")      { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "linux_x86_64")   { $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "mac_x86")        { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "mac_x86_64")     { $CMAKE_ARGS += "-G Xcode" }
+	elseif($TARGET_OS -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
+	elseif($TARGET_OS -eq "win_arm64_clang"){ 
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
-		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
-	if($TARGET_OS -eq "win_x86_clang"){ 
+	elseif($TARGET_OS -eq "win_x86_clang"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
-		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
-	if($TARGET_OS -eq "win_x86_mingw"){ 
+	elseif($TARGET_OS -eq "win_x86_mingw"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
-		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
-	if($TARGET_OS -eq "win_x86_64_clang"){ 
+	elseif($TARGET_OS -eq "win_x86_64_clang"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
-	if($TARGET_OS -eq "win_x86_64_mingw"){ 
+	elseif($TARGET_OS -eq "win_x86_64_mingw"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
-		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
-	if($TARGET_OS -eq "win_x86_64_ucrt"){ 
+	elseif($TARGET_OS -eq "win_x86_64_ucrt"){ 
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
-		$CMAKE_ARGS += "-G MinGW Makefiles "
+		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"
+	}
+	else{
+		dk_error "Could not get TARGET_OS from ${TARGET_OS}"	
 	}
 
 	
-	if($TYPE -eq "Debug"){
+if($TYPE -eq "Debug"){
 		$CMAKE_ARGS += "-DDEBUG=ON"
 		$CMAKE_ARGS += "-DRELEASE=ON"
 	}
