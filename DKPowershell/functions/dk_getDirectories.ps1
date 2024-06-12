@@ -4,7 +4,7 @@ if(!$dk_getDirectories){ $dk_getDirectories = 1 } else{ return }
 dk_load dk_error
 dk_load dk_printVar
 ################################################################################
-# dk_getDirectories(path) return -> rtn_var
+# dk_getDirectories(path) -> rtn_var
 #
 #
 #
@@ -14,6 +14,7 @@ function Global:dk_getDirectories($path) {
 	
 	$directories = Get-ChildItem $path | Where-Object {$_.PSIsContainer} | Foreach-Object {$_.Name}
 	   
+	dk_printVar directories
 	return $directories
 }
 
@@ -22,6 +23,6 @@ function Global:dk_getDirectories($path) {
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	$result = dk_getDirectories "C:\Windows"
-	dk_printVar result
+	$directories = dk_getDirectories "C:\Windows"
+	dk_info "directories = $directories"
 }	

@@ -6,10 +6,19 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 ##################################################################################
 # __ARGV__(frame)
 #
-function GLOBAL:__ARGV__($_FRAME_=1) {
+function GLOBAL:__ARGV__($_FRAME_=2) {
+#	$_FRAME_=$_FRAME_+1
+#	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
+#	foreach($key in (Get-Command -Name $(__FUNCTION__ $_FRAME_)).Parameters.keys){
+#		$_ARGV_.Add((get-variable $key).Value)
+#	}
+#	return $_ARGV_
+	
 	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
-	foreach($key in (Get-Command -Name $(__FUNCTION__ $($_FRAME_+1))).Parameters.keys){
-		$_ARGV_.Add((get-variable $key).Value)
+	$boundParameters = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters
+	foreach ($keyValue in $boundParameters.GetEnumerator()) { 
+		#echo "$($keyValue.Key) = $($keyValue.Value)" 
+		$_ARGV_.Add($($keyValue.Value))
 	}
 	return $_ARGV_
 }

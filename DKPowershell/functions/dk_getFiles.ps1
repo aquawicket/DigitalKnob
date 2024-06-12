@@ -14,6 +14,7 @@ function Global:dk_getFiles($path) {
 	
 	$files = Get-ChildItem $path | Where-Object {$_.PSIsContainer -eq $false} | Foreach-Object {$_.Name}
 	   
+	dk_printVar files
 	return $files
 }
 
@@ -22,6 +23,6 @@ function Global:dk_getFiles($path) {
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	$result = dk_getFiles "C:\Windows"
-	dk_printVar result
+	$files = dk_getFiles "C:\Windows"
+	dk_info "files = $files"
 }	

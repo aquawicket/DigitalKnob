@@ -10,12 +10,12 @@ function Global:dk_getFilename ($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	#$rtn_var = (Get-Item $path ).Name
-	#$rtn_var = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Name   #Calls Resolve-Path but works for files that don't exist.
+	#$filename = (Get-Item $path ).Name
+	#$filename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Name   #Calls Resolve-Path but works for files that don't exist.
 	#if(-not($rtn_var)){ $rtn_var = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-	$rtn_var = Split-Path $path -leaf
-	dk_printVar rtn_var
-	return $rtn_var
+	$filename = Split-Path $path -leaf
+	dk_printVar filename
+	return $filename
 }
 
 

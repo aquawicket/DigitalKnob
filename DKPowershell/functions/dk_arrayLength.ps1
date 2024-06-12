@@ -13,20 +13,20 @@ function Global:dk_arrayLength($array) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if($null -eq $array){ return 0 }
-	#if(!($array.count -gt 0)){ return 0 }
-	
+	if($null -eq $array){ $arrayLength = 0; dk_printVar arrayLength; return $arrayLength }
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly -ErrorAction SilentlyContinue } 
 	else {
 		$_array_ = $array 
 		if(!($_array_.count -gt 1)){
 			dk_warning "dk_arrayLength($array): are you sure the parameter is an array?"
-			return 0 
+			$arrayLength = 0; dk_printVar arrayLength; return $arrayLength
 		}
 	}
-	if($null -eq $_array_){ return 0 }
-	#if(!($_array_.count -gt 0)){ return 0 }
-	return $_array_.count
+	if($null -eq $_array_){ $arrayLength = 0; dk_printVar arrayLength; return $arrayLength }
+
+	$arrayLength = $_array_.count
+	dk_printVar arrayLength
+	return $arrayLength
 }
 
 

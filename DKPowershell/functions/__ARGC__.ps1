@@ -4,8 +4,11 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 ##################################################################################
 # __ARGC__(frame)
 #
-function GLOBAL:__ARGC__($_FRAME_=1) {
-	return (Get-Command -Name $(__FUNCTION__ $($_FRAME_+1))).Parameters.count;
+function GLOBAL:__ARGC__($_FRAME_=2) {
+	
+	$_FRAME_=$_FRAME_-1
+	#return (Get-Command -Name $(__FUNCTION__ $_FRAME_)).Parameters.count;
+	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
 }
 
 
