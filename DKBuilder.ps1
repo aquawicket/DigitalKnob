@@ -1,3 +1,5 @@
+$global:ENABLE_dk_debugFunc = 0
+
 
 ###### DK_INIT ######
 $DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
