@@ -50,9 +50,9 @@ dk_depend(zstd)
 
 
 
-set(rmlui_all 1)
-set(rmlui_RmlCore 0)
-set(rmlui_RmlDebugger 0)
+set(rmlui_all 0)
+set(rmlui_RmlCore 1)
+set(rmlui_RmlDebugger 1)
 set(rmlui_shell 0)
 set(rmlui_treeview 0)
 set(rmlui_customlog 0)
@@ -69,7 +69,7 @@ set(rmlui_lottie 0)
 set(rmlui_harfbuzzshaping 0)
 set(rmlui_tutorial_template 0)
 set(rmlui_tutorial_drag 0)
-set(rmlui_invaders 1)          # we want this always on
+set(rmlui_invaders 0)
 set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)

@@ -16,7 +16,7 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	MAC_HOST_dk_import(${PYTHON_DL})
 	WIN_HOST_dk_import(${PYTHON_DL})
 	
-	dk_findProgram(PYTHON3_EXE python3 ${PYTHON3})
+	dk_findProgram(PYTHON3_EXE python ${PYTHON3})
 endif()
 
 
