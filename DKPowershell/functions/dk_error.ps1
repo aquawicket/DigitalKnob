@@ -3,14 +3,14 @@ if(!$dk_error){ $dk_error = 1 } else{ return }
 
 dk_load dk_echo
 dk_load dk_stacktrace
-#dk_load dk_showFileLine
+dk_load dk_showFileLine
 dk_load dk_pause
 dk_load dk_exit
 if(!$ENABLE_dk_error){ $global:ENABLE_dk_error = 1 }
-if(!$TRACE_ON_ERROR) { $global:TRACE_ON_ERROR = 0  }
-if(!$LINE_ON_ERROR)  { $global:LINE_ON_ERROR = 0   }
+if(!$TRACE_ON_ERROR) { $global:TRACE_ON_ERROR = 1  }
+if(!$LINE_ON_ERROR)  { $global:LINE_ON_ERROR = 1   }
 if(!$PAUSE_ON_ERROR) { $global:PAUSE_ON_ERROR = 1  }
-if(!$HALT_ON_ERROR)  { $global:HALT_ON_ERROR = 0   }
+if(!$HALT_ON_ERROR)  { $global:HALT_ON_ERROR = 1   }
 #$ERROR_TAG="  ERROR: "
 ################################################################################
 # dk_error(<message>)
@@ -28,7 +28,7 @@ function Global:dk_error($allArgs) {
 	
 	dk_echo "${red}${ERROR_TAG}${allArgs}${clr}"
 	if($TRACE_ON_ERROR){ dk_echo "${red}*** TRACE_ON_ERROR ***${clr}"; dk_stacktrace }
-	if($LINE_ON_ERROR) { dk_echo "${red}*** LINE_ON_ERROR ***${clr}";  dk_showFileLine $callerpath $message }
+	if($LINE_ON_ERROR) { dk_echo "${red}*** LINE_ON_ERROR ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if($PAUSE_ON_ERROR){ dk_echo "${red}*** PAUSE_ON_ERROR ***${clr}"; dk_pause }
 	if($HALT_ON_ERROR) { dk_echo "${red}*** HALT_ON_ERROR ***${clr}";  dk_exit }
 }

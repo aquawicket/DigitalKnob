@@ -12,13 +12,13 @@ function Global:dk_printColors () {
 	
 	
 	dk_echo
-	dk_info "${esc}[101;93m STYLES ${clr}"
+	dk_info "${ESC}[101;93m STYLES ${clr}"
 	dk_info "clr        ${clr}Reset${clr}"
 	dk_info "bold       ${bold}Bold${clr}"
 	dk_info "underline  ${underline}Underline${clr}"
 	dk_info "inverse    ${inverse}Inverse${clr}"
 	dk_echo
-	dk_info "${esc}[101;93m NORMAL FOREGROUND COLORS ${clr}"
+	dk_info "${ESC}[101;93m NORMAL FOREGROUND COLORS ${clr}"
 	dk_info "black      ${black}Black${clr}"
 	dk_info "red        ${red}Red${clr}"
 	dk_info "green      ${green}Green${clr}"
@@ -28,7 +28,7 @@ function Global:dk_printColors () {
 	dk_info "cyan       ${cyan}Cyan${clr}"
 	dk_info "white      ${white}White${clr}"
 	dk_echo
-	dk_info "${esc}[101;93m NORMAL BACKGROUND COLORS ${clr}"
+	dk_info "${ESC}[101;93m NORMAL BACKGROUND COLORS ${clr}"
 	dk_info "bg_black   ${bg_black}Black${clr}"
 	dk_info "bg_red     ${bg_red}Red${clr}"
 	dk_info "bg_green   ${bg_green}Green${clr}"
@@ -38,7 +38,7 @@ function Global:dk_printColors () {
 	dk_info "bg_cyan    ${bg_cyan}Cyan${clr}"
 	dk_info "bg_white   ${bg_white}White${clr}"
 	dk_echo
-	dk_info "${esc}[101;93m STRONG FOREGROUND COLORS ${clr}"
+	dk_info "${ESC}[101;93m STRONG FOREGROUND COLORS ${clr}"
 	dk_info "BLACK      ${BLACK}Black${clr}"
 	dk_info "RED        ${RED}Red${clr}"
 	dk_info "GREEN      ${GREEN}Green${clr}"
@@ -48,7 +48,7 @@ function Global:dk_printColors () {
 	dk_info "CYAN       ${CYAN}Cyan${clr}"
 	dk_info "WHITE      ${WHITE}White${clr}"
 	dk_echo
-	dk_info "${esc}[101;93m STRONG BACKGROUND COLORS ${clr}"
+	dk_info "${ESC}[101;93m STRONG BACKGROUND COLORS ${clr}"
 	dk_info "BG_BLACK   ${BG_BLACK}Black${clr}"
 	dk_info "BG_RED     ${BG_RED}Red${clr}"
 	dk_info "BG_GREEN   ${BG_GREEN}Green${clr}"
@@ -58,23 +58,23 @@ function Global:dk_printColors () {
 	dk_info "BG_CYAN    ${BG_CYAN}Cyan${clr}"
 	dk_info "BG_WHITE   ${BG_WHITE}White${clr}"
 	dk_echo
-	dk_info "${esc}[101;93m COMBINATIONS ${clr}"
-	dk_info "^<ESC^>[31m                     ${esc}[31mred foreground color${clr}"
-	dk_info "^<ESC^>[7m                      ${esc}[7minverse foreground ^<-^> background${clr}"
-	dk_info "^<ESC^>[7;31m                   ${esc}[7;31minverse red foreground color${clr}"
-	dk_info "^<ESC^>[7m and nested ^<ESC^>[31m ${esc}[7mbefore ${esc}[31mnested${clr}"
-	dk_info "^<ESC^>[31m and nested ^<ESC^>[7m ${esc}[31mbefore ${esc}[7mnested${clr}"
+	dk_info "${ESC}[101;93m COMBINATIONS ${clr}"
+	dk_info "`${ESC}[31m                     ${ESC}[31m red foreground color${clr}"
+	dk_info "`${ESC}[7m                      ${ESC}[7m inverse foreground `<-`> background${clr}"
+	dk_info "`${ESC}[7;31m                   ${ESC}[7;31m inverse red foreground color${clr}"
+	dk_info "`${ESC}[7m and nested `${ESC}[31m ${ESC}[7m before ${ESC}[31mnested${clr}"
+	dk_info "`${ESC}[31m and nested `${ESC}[7m ${ESC}[31m before ${ESC}[7mnested${clr}"
 	
 	
 	
 	# 256-Color Foreground & Background Charts
-	$esc=$([char]27)
-	echo "`n$esc[1;4m256-Color Foreground & Background Charts$esc[0m"
+	${ESC}=$([char]27)
+	echo "`n${ESC}[1;4m256-Color Foreground & Background Charts${ESC}[0m"
 	foreach ($fgbg in 38,48) {  # foreground/background switch
 	  foreach ($color in 0..255) {  # color range
 		#Display the colors
 		$field = "$color".PadLeft(4)  # pad the chart boxes with spaces
-		Write-Host -NoNewLine "$esc[$fgbg;5;${color}m$field $esc[0m"
+		Write-Host -NoNewLine "${ESC}[$fgbg;5;${color}m$field ${ESC}[0m"
 		#Display 6 colors per line
 		if ( (($color+1)%6) -eq 4 ) { echo "`r" }
 	  }

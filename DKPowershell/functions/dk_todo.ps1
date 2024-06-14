@@ -3,7 +3,7 @@ if(!$dk_todo){ $dk_todo = 1 } else{ return }
 
 dk_load dk_echo
 dk_load dk_stacktrace
-#dk_load dk_showFileLine
+dk_load dk_showFileLine
 dk_load dk_pause
 dk_load dk_exit
 if(!$ENABLE_dk_todo){ $global:ENABLE_dk_todo = 1 }
@@ -26,11 +26,12 @@ function Global:dk_todo () {
 	
 	if($ENABLE_dk_todo -ne 1){ return }
 	
-	dk_echo "${yellow}${TODO_TAG}${allArgs}${clr}"
-	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}" } #& dk_stacktrace
-	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}"  } #& dk_showFileLine "${_callerpath}" "${_message_}"
-	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}" } #& dk_pause
-	if($HALT_ON_TODO) { dk_echo "${yellow}*** HALT_ON_TODO ***${clr}"  } #& dk_exit
+	$header = "${inverse}$(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 2)"
+	dk_echo "${yellow}${TODO_TAG}${header}  `"${allArgs}`" ${clr}"
+	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}"; dk_stacktrace }
+	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
+	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}"; dk_pause }
+	if($HALT_ON_TODO) { dk_echo "${yellow}*** HALT_ON_TODO ***${clr}";  dk_exit }
 }
 
 

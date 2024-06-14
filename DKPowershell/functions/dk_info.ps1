@@ -3,7 +3,7 @@ if(!$dk_info){ $dk_info = 1 } else{ return }
 
 dk_load dk_echo
 dk_load dk_stacktrace
-#dk_load dk_showFileLine
+dk_load dk_showFileLine
 dk_load dk_pause
 dk_load dk_exit
 if(!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }
@@ -28,7 +28,7 @@ function Global:dk_info($allArgs) {
 		
 	dk_echo "${white}${INFO_TAG}${allArgs}${clr}"
 	if ($TRACE_ON_INFO){ dk_echo "${white}*** TRACE_ON_INFO ***${clr}"; dk_stacktrace }
-	if ($LINE_ON_INFO) { dk_echo "${white}*** LINE_ON_INFO ***${clr}";  dk_showFileLine $callerpath $message }
+	if ($LINE_ON_INFO) { dk_echo "${white}*** LINE_ON_INFO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if ($PAUSE_ON_INFO){ dk_echo "${white}*** PAUSE_ON_INFO ***${clr}"; dk_pause }
 	if ($HALT_ON_INFO) { dk_echo "${white}*** HALT_ON_INFO ***${clr}";  dk_exit }
 }

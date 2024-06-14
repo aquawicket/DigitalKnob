@@ -17,7 +17,7 @@ function Global:dk_arrayConcat($array, $value1) {
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo "dk_arrayConcat"
+	dk_todo
 }
 
 

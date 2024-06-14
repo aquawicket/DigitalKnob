@@ -3,7 +3,7 @@ if(!$dk_debug){ $dk_debug = 1 } else{ return }
 
 dk_load dk_echo
 dk_load dk_stacktrace
-#dk_load dk_showFileLine
+dk_load dk_showFileLine
 dk_load dk_pause
 dk_load dk_exit
 if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1 }
@@ -27,10 +27,10 @@ function Global:dk_debug($allArgs) {
 	if($ENABLE_dk_debug -ne 1){ return }
 
 	dk_echo "${blue}${DEBUG_TAG}${allArgs}${clr}"
-	if($TRACE_ON_DEBUG){ dk_echo "${blue}*** TRACE_ON_DEBUG ***${clr}" } #& dk_stacktrace
-	if($LINE_ON_DEBUG) { dk_echo "${blue}*** LINE_ON_DEBUG ***${clr}" } #& dk_showFileLine "${_callerpath}" "${_message_}"
-	if($PAUSE_ON_DEBUG){ dk_echo "${blue}*** PAUSE_ON_DEBUG ***${clr}" } #& dk_pause
-	if($HALT_ON_DEBUG) { dk_echo "${blue}*** HALT_ON_DEBUG ***${clr}" } #& dk_exit
+	if($TRACE_ON_DEBUG){ dk_echo "${blue}*** TRACE_ON_DEBUG ***${clr}"; dk_stacktrace }
+	if($LINE_ON_DEBUG) { dk_echo "${blue}*** LINE_ON_DEBUG ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
+	if($PAUSE_ON_DEBUG){ dk_echo "${blue}*** PAUSE_ON_DEBUG ***${clr}"; dk_pause }
+	if($HALT_ON_DEBUG) { dk_echo "${blue}*** HALT_ON_DEBUG ***${clr}";  dk_exit }
 }
 
 
