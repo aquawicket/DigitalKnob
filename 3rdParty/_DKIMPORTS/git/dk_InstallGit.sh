@@ -3,10 +3,10 @@ echo "$0 $*"
 [ -z "$DKINIT" ] && . ../../../DKBash/functions/DK.sh #$0
 
 ##################################################################################
-# dk_validateGit()
+# dk_installGit()
 #
 #
-dk_validateGit () {
+dk_installGit () {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	

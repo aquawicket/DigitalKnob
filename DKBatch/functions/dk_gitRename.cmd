@@ -12,6 +12,6 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_validate GIT_EXE "call dk_validateGit"
+	call dk_validate GIT_EXE "call dk_installGit"
 	"%GIT_EXE%" mv --force "%~1" "%~2"
 goto:eof

@@ -15,7 +15,7 @@ call DK
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     cd %DKBRANCH_DIR%
     
-	call dk_validate GIT_EXE "call dk_validateGit"
+	call dk_validate GIT_EXE "call dk_installGit"
     call dk_commandToVariable "%GIT_EXE% config --global credential.helper" STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store

@@ -9,10 +9,10 @@ call dk_set GIT_DL_WIN_X86 https://github.com/git-for-windows/git/releases/downl
 call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 
 ::####################################################################
-::# dk_validateGit()
+::# dk_installGit()
 ::#
 ::#
-:dk_validateGit () {
+:dk_installGit () {
     call dk_debugFunc
     if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -46,4 +46,4 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
-    call dk_validateGit
+    call dk_installGit

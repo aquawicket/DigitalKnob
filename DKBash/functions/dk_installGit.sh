@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_validateGit()
+# dk_installGit()
 #
 #
-dk_validateGit () {
+dk_installGit () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -24,5 +24,5 @@ dk_validateGit () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_validateGit
+	dk_installGit
 }

@@ -1,5 +1,5 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
-if(!$dk_validateGit){ $dk_validateGit = 1 } else{ return }
+if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
 
 dk_load dk_validate
 dk_load dk_getBasename
@@ -13,10 +13,10 @@ dk_load dk_pathExists
 dk_load dk_getHostTriple
 dk_load dk_getDKPaths
 ####################################################################
-# dk_validateGit()
+# dk_installGit()
 #
 #
-function Global:dk_validateGit () {
+function Global:dk_installGit () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -55,5 +55,5 @@ function Global:DKTEST () { ####################################################
 	dk_debugFunc
 	
 	
-    dk_validateGit
+    dk_installGit
 }

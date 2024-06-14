@@ -16,7 +16,7 @@ call DK
     for %%I in (.) do call dk_set FOLDER "%%~nxI"			               &:: get the current folder
 
 	call dk_set DKBRANCH Development						               &:: set the default branch
-	call dk_validate GIT_EXE "call dk_validateGit"
+	call dk_validate GIT_EXE "call dk_installGit"
 	if exist "%CD%\.git" (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
 			call dk_set DKBRANCH %FOLDER%

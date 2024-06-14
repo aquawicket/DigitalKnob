@@ -6,7 +6,7 @@ dk_load dk_printVar
 dk_load dk_warning
 dk_load dk_getHostTriple
 dk_load dk_getDKPaths
-dk_load dk_validateGit
+dk_load dk_installGit
 dk_load dk_validateBranch
 dk_load dk_warning
 dk_load dk_pickUpdate
@@ -49,7 +49,7 @@ function Global:dk_buildMain() {
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_getHostTriple
 	dk_getDKPaths
-	dk_validateGit
+	dk_installGit
 	dk_validateBranch
 	
 	if("${DKSCRIPT_DIR}" -ne "${DKBRANCH_DIR}"){

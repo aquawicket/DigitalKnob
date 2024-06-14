@@ -35,7 +35,7 @@ call DK
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_getHostTriple
 	call dk_getDKPaths
-    call dk_validateGit
+    call dk_installGit
     call dk_validateBranch
     
 	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (

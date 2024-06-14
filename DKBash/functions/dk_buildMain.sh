@@ -31,7 +31,7 @@ dk_buildMain () {
 	
 	dk_getDKPaths
 
-	dk_validateGit
+	dk_installGit
 	dk_validateBranch
 
 	#dk_printVar DKBRANCH_DIR

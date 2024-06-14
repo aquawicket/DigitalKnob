@@ -114,7 +114,7 @@ dk_buildMain () {
 	
 	dk_getDKPaths
 
-	dk_validateGit
+	dk_installGit
 	dk_validateBranch
 
 	dk_printVar DKBRANCH_DIR
@@ -1345,11 +1345,11 @@ dk_removeExtension () {
 
 
 ##################################################################################
-# dk_validateGit()
+# dk_installGit()
 #
 #
-dk_validateGit () {
-	dk_verbose "dk_validateGit($*)"
+dk_installGit () {
+	dk_verbose "dk_installGit($*)"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	if ! dk_commandExists git; then

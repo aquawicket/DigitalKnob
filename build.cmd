@@ -116,7 +116,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 
 	call:dk_getDKPaths
    
-    call:dk_validateGit
+    call:dk_installGit
     call:dk_validateBranch
 
     call:dk_printVar DKBRANCH_DIR
@@ -1063,11 +1063,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateGit()
+::# dk_installGit()
 ::#
 ::#
-:dk_validateGit () {
-	call:dk_verbose "dk_validateGit(%*)"
+:dk_installGit () {
+	call:dk_verbose "dk_installGit(%*)"
 	
     if "%HOST_ARCH%"=="arm32" set GIT_DL=
     if "%HOST_ARCH%"=="arm64" set GIT_DL=%GIT_DL_WIN_ARM64%

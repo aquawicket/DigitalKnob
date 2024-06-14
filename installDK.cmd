@@ -14,7 +14,7 @@ call "DKBatch/functions/DK.cmd" %*
 ::###### Load Main Program ######
 call dk_load dk_validate
 call dk_load dk_validateBranch
-call dk_load dk_validateGit
+call dk_load dk_installGit
 call dk_load dk_stringContains
 call dk_load dk_getDKPaths
 call dk_load dk_getHostTriple
@@ -29,7 +29,7 @@ call dk_load dk_exit
 
 ::###### Run Program ######
 call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-call dk_validate GIT_EXE "call dk_validateGit"
+call dk_validate GIT_EXE "call dk_installGit"
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 	cd "%DKBRANCH_DIR%"
