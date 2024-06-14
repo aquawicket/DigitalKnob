@@ -3,10 +3,10 @@
 
 
 ##################################################################################
-# dk_validateHomebrew()
+# dk_installHomebrew()
 #
 #
-dk_validateHomebrew () {
+dk_installHomebrew () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -28,5 +28,5 @@ dk_validateHomebrew () {
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_validateHomebrew
+	dk_installHomebrew
 }

@@ -1171,11 +1171,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateVisualStudio()
+::# dk_installVisualStudio()
 ::#
 ::#
-:dk_validateVisualStudio () {
-	call:dk_verbose "dk_validateVisualStudio(%*)"
+:dk_installVisualStudio () {
+	call:dk_verbose "dk_installVisualStudio(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
     call:dk_checkError
@@ -1183,11 +1183,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateMsys2()
+::# dk_installMsys2()
 ::#
 ::#
-:dk_validateMsys2 () {
-	call:dk_verbose "dk_validateMsys2(%*)"
+:dk_installMsys2 () {
+	call:dk_verbose "dk_installMsys2(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
     call:dk_checkError
@@ -1207,11 +1207,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateMake()
+::# dk_installMake()
 ::#
 ::#
-:dk_validateMake () {
-	call:dk_verbose "dk_validateMake(%*)"
+:dk_installMake () {
+	call:dk_verbose "dk_installMake(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
     call:dk_checkError
@@ -1219,11 +1219,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateOpenjdk()
+::# dk_installOpenjdk()
 ::#
 ::#
-:dk_validateOpenjdk () {
-	call:dk_verbose "dk_validateOpenjdk(%*)"
+:dk_installOpenjdk () {
+	call:dk_verbose "dk_installOpenjdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
     call:dk_checkError
@@ -1231,11 +1231,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateAndroidNdk()
+::# dk_installAndroidNdk()
 ::#
 ::#
-:dk_validateAndroidNdk () {
-	call:dk_verbose "dk_validateAndroidNdk(%*)"
+:dk_installAndroidNdk () {
+	call:dk_verbose "dk_installAndroidNdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
     call:dk_printVar ANDROID_GENERATOR
@@ -1247,11 +1247,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateEmscripten()
+::# dk_installEmscripten()
 ::#
 ::#
-:dk_validateEmscripten () {
-	call:dk_verbose "dk_validateEmscripten(%*)"
+:dk_installEmscripten () {
+	call:dk_verbose "dk_installEmscripten(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     call:dk_printVar EMSDK

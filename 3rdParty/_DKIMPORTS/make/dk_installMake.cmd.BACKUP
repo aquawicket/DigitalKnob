@@ -2,14 +2,14 @@
 call DK
 
 ::####################################################################
-::# dk_validateOpenjdk()
+::# dk_installMake()
 ::#
 ::#
-:dk_validateOpenjdk () {
+:dk_installMake () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
-	call dk_printVar OPENJDK
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+	call dk_printVar MAKE_PROGRAM
     call dk_checkError
 goto:eof

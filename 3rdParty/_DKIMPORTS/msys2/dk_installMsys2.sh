@@ -3,10 +3,10 @@
 dk_includeGuard
 
 ##################################################################################
-# dk_validateMsys2()
+# dk_installMsys2()
 #
 #
-dk_validateMsys2 () {
+dk_installMsys2 () {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
@@ -16,4 +16,4 @@ dk_validateMsys2 () {
 	dk_printVar MSYS2_GENERATOR
 }
 
-dk_validateMsys2
+dk_installMsys2

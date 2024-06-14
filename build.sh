@@ -1364,11 +1364,11 @@ dk_installGit () {
 
 
 ##################################################################################
-# dk_validateHomebrew()
+# dk_installHomebrew()
 #
 #
-dk_validateHomebrew () {
-	dk_verbose "dk_validateHomebrew($*)"
+dk_installHomebrew () {
+	dk_verbose "dk_installHomebrew($*)"
 	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	if ! [ "$OSTYPE" = "darwin"* ]; then
@@ -1607,11 +1607,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateMsys2()
+# dk_installMsys2()
 #
 #
-#dk_validateMsys2 () {
-#	dk_verbose "dk_validateMsys2($*)"
+#dk_installMsys2 () {
+#	dk_verbose "dk_installMsys2($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
@@ -1620,11 +1620,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateMake()
+# dk_installMake()
 #
 #
-#dk_validateMake () {
-#	dk_verbose "dk_validateMake($*)"
+#dk_installMake () {
+#	dk_verbose "dk_installMake($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
@@ -1633,11 +1633,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateEmscripten()
+# dk_installEmscripten()
 #
 #
-#dk_validateEmscripten () {
-#	dk_verbose "dk_validateEmscripten($*)"
+#dk_installEmscripten () {
+#	dk_verbose "dk_installEmscripten($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
@@ -1651,11 +1651,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateAndroidNdk()
+# dk_installAndroidNdk()
 #
 #
-#dk_validateAndroidNdk () {
-#	dk_verbose "dk_validateAndroidNdk($*)"
+#dk_installAndroidNdk () {
+#	dk_verbose "dk_installAndroidNdk($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
@@ -1670,11 +1670,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateClang()
+# dk_installClang()
 #
 #
-#dk_validateClang () {
-#	dk_verbose "dk_validateClang($*)"
+#dk_installClang () {
+#	dk_verbose "dk_installClang($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"

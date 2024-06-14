@@ -3,21 +3,20 @@
 
 
 ##################################################################################
-# dk_validateClang()
+# dk_installMsys2()
 #
 #
-dk_validateClang () {
+dk_installMsys2 () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-	dk_printVar CLANG_C_COMPILER
-	dk_printVar CLANG_CXX_COMPILER
+	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
+	dk_printVar MSYS2
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_validateClang
+	dk_installMsys2
 }
