@@ -19,7 +19,7 @@ call DK
 	::call dk_printVar DKCMAKE_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKCMAKE_DIR"
 	
-	::call dk_validate CMAKE_EXE "call dk_validateCmake"
+	::call dk_validate CMAKE_EXE "call dk_installCmake"
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake"
 	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 

@@ -12,10 +12,10 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.0/c
 
 
 ##################################################################################
-# dk_validateCmake()
+# dk_installCmake()
 #
 #
-dk_validateCmake () {
+dk_installCmake() {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	

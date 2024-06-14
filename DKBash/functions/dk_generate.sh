@@ -191,7 +191,7 @@ dk_generate() {
 	fi
 	
 	###### CMake Configure ######
-	dk_validateCmake
+	dk_installCmake
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"

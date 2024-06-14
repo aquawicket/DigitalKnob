@@ -10,7 +10,7 @@ dk_cmakeEval () {
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	dk_validate CMAKE_EXE "dk_validateCmake"
+	dk_validate CMAKE_EXE "dk_installCmake"
 	dk_validate DKCMAKE_DIR "dk_validateBranch"
 	
 	DKCOMMAND="${1}"

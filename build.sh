@@ -685,7 +685,7 @@ dk_generate() {
 	fi
 	
 	###### CMake Configure ######
-	dk_validateCmake
+	dk_installCmake
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
@@ -778,11 +778,11 @@ dk_url () {
 }
 
 ##################################################################################
-# dk_validateCmake()
+# dk_installCmake()
 #
 #
-dk_validateCmake () {
-	dk_verbose "dk_validateCmake($*)"
+dk_installCmake () {
+	dk_verbose "dk_installCmake($*)"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################

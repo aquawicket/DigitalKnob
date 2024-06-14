@@ -512,7 +512,7 @@ goto:eof
 ::	fi
 	
 ::	###### CMake Configure ######
-	call:dk_validateCmake
+	call:dk_installCmake
 	
     echo.
     echo ****** CMAKE COMMAND ******
@@ -1124,11 +1124,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateCmake()
+::# dk_installCmake()
 ::#
 ::#
-:dk_validateCmake () {
-	call:dk_verbose "dk_validateCmake(%*)"
+:dk_installCmake () {
+	call:dk_verbose "dk_installCmake(%*)"
 	
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM64%"
