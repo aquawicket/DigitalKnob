@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_assertPath){ $dk_assertPath = 1 } else{ return }
 
-#dk_load dk_set
 dk_load dk_pathExists
 dk_load dk_error
 ################################################################################
@@ -12,9 +11,9 @@ function Global:dk_assertPath($path) {
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	if(Test-Path variable:$path){
-		$_path_ = (Get-Item variable:$path).Value
+		$_path_ = (Get-Item variable:$path).Value	# from variable name
 	} else {
-		$_path_ = $path
+		$_path_ = $path								# from variable
 	}
 	
 	if(!(dk_pathExists $_path_)){		

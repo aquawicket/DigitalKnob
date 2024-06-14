@@ -12,14 +12,15 @@ function Global:dk_validate($variable, $code) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if(Test-Path variable:$variable){ return }
+	if($variable -and (Test-Path variable:$variable)){ return }
 	
-	if(Test-Path $code -PathType Leaf){ dk_load $code }
+	if($code -and (Test-Path $code -PathType Leaf)){ dk_load $code }
 	
 	#eval "${code}"
 	Invoke-Expression $code
+	if(!(Test-Path variable:$variable)){ dk_error "dk_validate(): $variable is invalid" }
 	
-	if(!(Test-Path variable:$var)){ dk_error "dk_validate(): $variable is invalid" }
+	dk_printVar $variable
 }
 
 

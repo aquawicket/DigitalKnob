@@ -11,11 +11,13 @@ function Global:dk_arrayJoin($array, $separator) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
-	else { $_array_ = $array }
+	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 	# from variable name
+	else { $_array_ = $array }															# from variable
 	
-	$rtn_var = $_array_ -join $separator
-	return $rtn_var
+	$arrayJoin = $_array_ -join $separator
+	
+	dk_printVar arrayJoin
+	return $arrayJoin
 }
 
 

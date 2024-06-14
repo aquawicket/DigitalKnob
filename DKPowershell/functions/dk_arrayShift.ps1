@@ -17,6 +17,7 @@ function Global:dk_arrayShift(array) {
 	$prev = 0
 	$count = 1
 	
+	dk_todo "dk_arrayShift"
 #	:dk_arrayShift_loop
 #	if defined $_arry_[$count] (
 #		"$_arry_[$prev]=$_arry_[$count]"

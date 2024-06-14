@@ -1,6 +1,11 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_todo){ $dk_todo = 1 } else{ return }
 
+dk_load dk_echo
+dk_load dk_stacktrace
+#dk_load dk_showFileLine
+dk_load dk_pause
+dk_load dk_exit
 if(!$ENABLE_dk_todo){ $global:ENABLE_dk_todo = 1 }
 if(!$TRACE_ON_TODO) { $global:TRACE_ON_TODO = 0  }
 if(!$LINE_ON_TODO)  { $global:LINE_ON_TODO = 0   }
@@ -20,7 +25,7 @@ function Global:dk_todo () {
 	
 	if($ENABLE_dk_todo -ne 1){ return }
 	
-	Write-Host -Fore yellow ${TODO_TAG}${allArgs}
+	dk_echo "${yellow}${TODO_TAG}${allArgs}${clr}"
 	if($TRACE_ON_TODO){ Write-Host -Fore yellow *** TRACE_ON_TODO *** } #& dk_stacktrace
 	if($LINE_ON_TODO) { Write-Host -Fore yellow *** LINE_ON_TODO ***  } #& dk_showFileLine "%_callerpath%" "%_message_%"
 	if($PAUSE_ON_TODO){ Write-Host -Fore yellow *** PAUSE_ON_TODO *** } #& dk_pause

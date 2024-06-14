@@ -1,7 +1,11 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_debug){ $dk_debug = 1 } else{ return }
 
-dk_load dk_info
+dk_load dk_echo
+dk_load dk_stacktrace
+#dk_load dk_showFileLine
+dk_load dk_pause
+dk_load dk_exit
 if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1 }
 if(!$TRACE_ON_DEBUG) { $global:TRACE_ON_DEBUG = 0  }
 if(!$LINE_ON_DEBUG)  { $global:LINE_ON_DEBUG = 0   }
@@ -21,11 +25,11 @@ function Global:dk_debug($allArgs) {
 	
 	if($ENABLE_dk_debug -ne 1){ return }
 
-	Write-Host -Fore blue ${DEBUG_TAG}${allArgs}
-	if($TRACE_ON_DEBUG){ Write-Host -Fore blue *** TRACE_ON_DEBUG *** } #& dk_stacktrace
-	if($LINE_ON_DEBUG) { Write-Host -Fore blue *** LINE_ON_DEBUG ***  } #& dk_showFileLine "%_callerpath%" "%_message_%"
-	if($PAUSE_ON_DEBUG){ Write-Host -Fore blue *** PAUSE_ON_DEBUG *** } #& dk_pause
-	if($HALT_ON_DEBUG) { Write-Host -Fore blue *** HALT_ON_DEBUG ***  } #& dk_exit
+	dk_echo "${blue}${DEBUG_TAG}${allArgs}${clr}"
+	if($TRACE_ON_DEBUG){ dk_echo "${blue}*** TRACE_ON_DEBUG ***${clr}" } #& dk_stacktrace
+	if($LINE_ON_DEBUG) { dk_echo "${blue}*** LINE_ON_DEBUG ***${clr}" } #& dk_showFileLine "%_callerpath%" "%_message_%"
+	if($PAUSE_ON_DEBUG){ dk_echo "${blue}*** PAUSE_ON_DEBUG ***${clr}" } #& dk_pause
+	if($HALT_ON_DEBUG) { dk_echo "${blue}*** HALT_ON_DEBUG ***${clr}" } #& dk_exit
 }
 
 
@@ -34,5 +38,4 @@ function Global:DKTEST() { #####################################################
 	dk_debugFunc
 	
 	dk_debug "test dk_debug message"
-	dk_info "...next line..."
 }

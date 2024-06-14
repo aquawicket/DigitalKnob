@@ -40,7 +40,7 @@ function Global:dk_buildMain() {
 #		sudo chown -R "${LOGNAME}" "${HOME}"
 #	fi
 
-	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
+	dk_printVar SHLVL
 	dk_printVar MSYSTEM
 	#dk_printVar DKSCRIPT_PATH
 	#dk_printVar DKSCRIPT_DIR

@@ -2,6 +2,10 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_info){ $dk_info = 1 } else{ return }
 
 dk_load dk_echo
+dk_load dk_stacktrace
+#dk_load dk_showFileLine
+dk_load dk_pause
+dk_load dk_exit
 if(!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }
 if(!$TRACE_ON_INFO) { $global:TRACE_ON_INFO = 0  }
 if(!$LINE_ON_INFO)  { $global:LINE_ON_INFO = 0   }
@@ -21,7 +25,7 @@ function Global:dk_info($allArgs) {
 	
 	if($ENABLE_dk_info -ne 1){ return }
 		
-	Write-Host -Fore white ${INFO_TAG}${allArgs}
+	dk_echo "${white}${INFO_TAG}${allArgs}${clr}"
 	if ($TRACE_ON_INFO){ Write-Host -Fore white *** TRACE_ON_INFO ***; dk_stacktrace }
 	if ($LINE_ON_INFO) { Write-Host -Fore white *** LINE_ON_INFO ***;  dk_showFileLine $callerpath $message }
 	if ($PAUSE_ON_INFO){ Write-Host -Fore white *** PAUSE_ON_INFO ***; dk_pause }

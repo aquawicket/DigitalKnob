@@ -2,6 +2,7 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_arrayAt){ $dk_arrayAt = 1 } else{ return }
 
 dk_load dk_error
+dk_load dk_printVar
 ################################################################################
 # dk_arrayAt(array, index) -> rtn_var
 #
@@ -15,7 +16,9 @@ function Global:dk_arrayAt($array, $index) {
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	return $_array_[$index]
+	$arrayAt = $_array_[$index]
+	dk_printVar arrayAt
+	return $arrayAt
 }
 
 
@@ -25,10 +28,32 @@ function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
-
 	$elementA = dk_arrayAt myArray 3
 	dk_echo "elementA = $elementA"
-	
 	$elementB = dk_arrayAt $myArray 1
 	dk_echo "elementB = $elementB"
+	
+	$myArrayB = [System.Collections.ArrayList]('1', '2', '3', '4', '5')
+	$elementB_A = dk_arrayAt myArrayB 3
+	dk_echo "elementB_A = $elementB_A"
+	$elementB_B = dk_arrayAt $myArrayB 1
+	dk_echo "elementB_B = $elementB_B"
+	
+	$myArrayC = ('1', '2', '3', '4', '5')
+	$elementC_A = dk_arrayAt myArrayC 3
+	dk_echo "elementC_A = $elementC_A"
+	$elementC_B = dk_arrayAt $myArrayC 1
+	dk_echo "elementC_B = $elementC_B"
+	
+	$myArrayD = "string"
+	$elementD_A = dk_arrayAt myArrayD 3
+	dk_echo "elementD_A = $elementD_A"
+	$elementD_B = dk_arrayAt $myArrayD 1
+	dk_echo "elementD_B = $elementD_B"
+	
+	$myArrayE = 123456789
+	$elementE_A = dk_arrayAt myArrayE 3
+	dk_echo "elementE_A = $elementE_A"
+	$elementE_B = dk_arrayAt $myArrayE 1
+	dk_echo "elementE_B = $elementE_B"
 }

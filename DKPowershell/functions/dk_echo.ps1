@@ -1,6 +1,7 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_echo){ $dk_echo = 1 } else{ return }
 
+dk_load dk_color; dk_color
 ################################################################################
 # dk_echo(<message>)
 #
@@ -20,7 +21,9 @@ function Global:dk_echo($allArgs) {
 	# if msg starts and ends with quotes, remove the first and last
 	#if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
 	#echo %*
-	echo $allArgs
+	
+	#echo $allArgs
+	Write-Host $allArgs
 }
 
 
@@ -30,9 +33,7 @@ function Global:dk_echo($allArgs) {
 function Global:DKTEST() { ###########################################################################################
 	
 	echo "This is a normal echo commmand"
-	dk_echo
-	dk_echo "$red This is a dk_echo line"
-	
-	#dk_echo "%cyan% This is dk_echo with color %clr%"
+	dk_echo "This is a dk_echo line"
+	dk_echo "${red}This is ${white}dk_echo ${blue}with color ${clr}"
 }
 

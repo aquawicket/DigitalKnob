@@ -10,9 +10,9 @@ function Global:dk_removeExtension($filepath) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-	$rtn_var = $filepath.Substring(0, $filepath.lastIndexOf('.'))
-	dk_printVar rtn_var
-	return $rtn_var
+	$removeExtension = $filepath.Substring(0, $filepath.lastIndexOf('.'))
+	dk_printVar removeExtension
+	return $removeExtension
 }
 
 

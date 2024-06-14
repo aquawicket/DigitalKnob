@@ -13,12 +13,17 @@ dk_load dk_unset
 function Global:dk_arrayPop($array) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
-	else { $_array_ = $array }
 
-	if($_array_.count -eq 0){ return }
-	$_array_.removeAt($_array_.count-1)
+	#if($array -isnot [System.Object]){ dk_error "Not a System.Object"; return ${false} }
+	if($array.count -eq 0){ $removed_element = "undefined"; dk_printVar removed_element; return $removed_element }
+	if(Test-Path variable:$array){ $array = Get-Variable -Name ($array) -ValueOnly }
+	if($array -isnot [System.Collections.ArrayList]){ dk_error "array is not an ArrayList"; return ${false} }	
+	if($array.count -eq 0){ $removed_element = "undefined"; dk_printVar removed_element; return $removed_element }
+	
+	$removed_element = $array[$array.count-1]
+	$array.removeAt($array.count-1)
+	dk_printVar removed_element
+	return $removed_element
 }
 
 
@@ -27,30 +32,11 @@ function Global:dk_arrayPop($array) {
 function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
-	dk_printArray myArray
-	
+	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')
 	dk_arrayPop $myArray
-	dk_printArray myArray
+	echo "myArray = $myArray"
 	
-	dk_arrayPop myArray
-	dk_printArray myArray
-	
-	dk_arrayPop $myArray
-	dk_printArray myArray
-	
-	dk_arrayPop myArray
-	dk_printArray myArray
-	
-	dk_arrayPop $myArray
-	dk_printArray myArray
-	
-	dk_arrayPop myArray
-	dk_printArray myArray
-	
-	dk_arrayPop $myArray
-	dk_printArray myArray
-	
-	dk_arrayPop myArray
-	dk_printArray myArray	
+	$myArrayB = [System.Collections.ArrayList]('1', '2', '3')
+	dk_arrayPop $myArrayB
+	echo "myArrayB = $myArrayB"
 }

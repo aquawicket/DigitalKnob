@@ -1,8 +1,11 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_error){ $dk_error = 1 } else{ return }
 
-dk_load dk_info
+dk_load dk_echo
+dk_load dk_stacktrace
+#dk_load dk_showFileLine
 dk_load dk_pause
+dk_load dk_exit
 if(!$ENABLE_dk_error){ $global:ENABLE_dk_error = 1 }
 if(!$TRACE_ON_ERROR) { $global:TRACE_ON_ERROR = 0  }
 if(!$LINE_ON_ERROR)  { $global:LINE_ON_ERROR = 0   }
@@ -22,7 +25,7 @@ function Global:dk_error($allArgs) {
 	
 	if($ENABLE_dk_error -ne 1){ return }
 	
-	Write-Host -Fore red ${ERROR_TAG}${allArgs}
+	dk_echo "${red}${ERROR_TAG}${allArgs}${clr}"
 	if($TRACE_ON_ERROR){ Write-Host -Fore red *** TRACE_ON_ERROR ***; dk_stacktrace }
 	if($LINE_ON_ERROR) { Write-Host -Fore red *** LINE_ON_ERROR ***;  dk_showFileLine $callerpath $message }
 	if($PAUSE_ON_ERROR){ Write-Host -Fore red *** PAUSE_ON_ERROR ***; dk_pause }
@@ -35,5 +38,4 @@ function Global:dk_error($allArgs) {
 function Global:DKTEST() { ###########################################################################################
 	
 	dk_error "test dk_error message"
-	dk_info "...next line..."
 }

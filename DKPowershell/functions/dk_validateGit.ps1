@@ -28,7 +28,7 @@ function Global:dk_validateGit () {
     if($HOST_ARCH -eq "arm64") { $GIT_DL = $GIT_DL_WIN_ARM64 }
     if($HOST_ARCH -eq "x86")   { $GIT_DL = $GIT_DL_WIN_X86 }
     if($HOST_ARCH -eq "x86_64"){ $GIT_DL = $GIT_DL_WIN_X86_64 }
-    if(!$GIT_DL){ dk_error "GIT_DL is invalid" }
+    if(!$GIT_DL){ dk_error "GIT_DL is invalid"; return ${false} }
 	  
     $GIT_DL_FILE = dk_getFilename $GIT_DL
 	$GIT_DL_NAME = dk_removeExtension $GIT_DL_FILE
