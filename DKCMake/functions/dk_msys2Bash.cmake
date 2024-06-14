@@ -58,7 +58,7 @@ function(dk_msys2Bash)
 	string(REPLACE "C:/" "/c/" bash "${bash}")
 	
 	### run bash as a file
-	#file(WRITE ${MSYS2}/dkscript.tmp ${bash})
+	#dk_fileWrite(${MSYS2}/dkscript.tmp ${bash})
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter

@@ -8,7 +8,7 @@ function(dk_dumpAllVariables file)
 	get_cmake_property(vars VARIABLES)
 	list (SORT vars)
 	foreach (var ${vars})
-		file(APPEND ${file} "${var}:	${${var}}\n")
+		dk_fileAppend(${file} "${var}:	${${var}}\n")
 	endforeach()
 endfunction()
 

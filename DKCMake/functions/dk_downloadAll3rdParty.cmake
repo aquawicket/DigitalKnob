@@ -53,7 +53,7 @@ function(dk_downloadAll3rdParty)
 			endforeach()
 			
 			if(dl_import_script)
-				file(WRITE ${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP "${dl_import_script}")
+				dk_fileWrite(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP "${dl_import_script}")
 				INCLUDE(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
 				dk_remove(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
 			endif()

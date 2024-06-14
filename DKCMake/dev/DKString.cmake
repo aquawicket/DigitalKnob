@@ -193,13 +193,13 @@ endfunction()
 #
 if(string_Ext)
 	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB_DIR}/Development/DKCMake/)
-	#file(APPEND ${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
-	#file(APPEND ${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
+	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
+	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
 
 	function(CreateStringFunc str)
 		dk_debugFunc(${ARGV})
 		
-		file(APPEND ${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
+		dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
 		include(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
 	endfunction()
 

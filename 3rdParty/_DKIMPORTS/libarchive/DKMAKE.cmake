@@ -224,12 +224,12 @@ IOS_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 if(IOS)
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 IOSSIM_dk_configure(${LIBARCHIVE}
@@ -290,12 +290,12 @@ IOSSIM_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 if(IOSSIM)
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
-	file(APPEND ${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 LINUX_dk_configure(${LIBARCHIVE}

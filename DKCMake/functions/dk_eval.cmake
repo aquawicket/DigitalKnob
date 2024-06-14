@@ -29,9 +29,9 @@ function(dk_eval code)
 		#ans(__eval_temp_file)
 		# speedup: statically write filename so eval boils down to 3 function calls
 		set(__eval_temp_file ${DKCMAKE_DIR}/__eval_temp_file.cmake)
-		file(WRITE "${__eval_temp_file}" "
+		dk_fileWrite("${__eval_temp_file}" "
 			function(eval code)
-			file(WRITE ${__eval_temp_file} \"\${code}\")
+			dk_fileWrite(${__eval_temp_file} \"\${code}\")
 			include(${__eval_temp_file})
 			#set(__ans \${__ans} PARENT_SCOPE)
 			endfunction()
@@ -51,7 +51,7 @@ endfunction()
 #
 #	# write the content of temp file and include it directly, this overwrite the 
 #	# eval function you are currently defining (initializer function pattern)
-#	file(WRITE "${evalFile}" "function(dk_eval code)\n	file(WRITE ${evalFile} \"\${code}\")\n	include(${evalFile})\nendfunction()")
+#	dk_fileWrite("${evalFile}" "function(dk_eval code)\n	dk_fileWrite(${evalFile} \"\${code}\")\n	include(${evalFile})\nendfunction()")
 #	include("${evalFile}")
 #	## now eval is defined as what was just written into evalFile
 #

@@ -155,7 +155,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
 		string(REPLACE "dk_import(${url})" "#dk_import(${url})\ndk_import(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
 		string(REPLACE "dk_import(${url} PATCH)" "#dk_import(${url} PATCH)\ndk_import(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})
-       file(WRITE ${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
+       dk_fileWrite(${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
 	endif()
 	
 	if(tag)

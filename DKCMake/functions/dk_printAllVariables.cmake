@@ -13,7 +13,7 @@ function(dk_printAllVariables)
 	list(SORT varNames)
 	foreach(varName ${varNames})
 		dk_debug(varName)
-		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
+		dk_fileAppend(${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
 	endforeach()
 endfunction()
 

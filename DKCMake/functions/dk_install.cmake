@@ -193,7 +193,7 @@ function(dk_install plugin) #PATCH
 		endif()
 	endif()
 	
-	file(WRITE ${dest_path}/installed "${dest_filename} ")
+	dk_fileWrite(${dest_path}/installed "${dest_filename} ")
 	
 	if(DELETE_DOWNLOADS) # conserve disk space 
 		dk_info("deleting ${DKDOWNLOAD_DIR}/${dl_filename}. . .")

@@ -42,8 +42,8 @@ call "../../../DKBatch/functions/DK.cmd"
 	:cmake_installed	
 	
 	
-	::### Add File Associations ###
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
+	::### install DKCMake
+	::call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	::call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
 	
 goto:eof

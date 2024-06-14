@@ -52,5 +52,5 @@ dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")
 	
 	
 if(NOT EXISTS 	"${TINYCOURLINUX_launcher}")
-	file(WRITE 	"${TINYCOURLINUX_launcher}" "@echo off && start ${QEMU_SYSTEM_X86_64_EXE} -boot menu=on -drive file=tinycore.img -cpu max -smp 2 -vga virtio -display sdl")
+	dk_fileWrite("${TINYCOURLINUX_launcher}" "@echo off && start ${QEMU_SYSTEM_X86_64_EXE} -boot menu=on -drive file=tinycore.img -cpu max -smp 2 -vga virtio -display sdl")
 endif()

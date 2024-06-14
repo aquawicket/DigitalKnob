@@ -17,7 +17,7 @@ function(dk_buildLog entry)
 	set(msg "${entry} = ${${entry}}")
 	dk_info("${msg}")
 	
-	file(APPEND ${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${msg}\n")
+	dk_fileAppend(${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${msg}\n")
 endfunction()
 
 

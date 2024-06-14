@@ -9,7 +9,7 @@ include_guard()
 function(dk_appendCmake str)
 	dk_debugFunc(${ARGV})
 	
-	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
+	dk_fileAppend(${plugin_path}/CMakeLists.txt "${str}")
 endfunction()
 
 

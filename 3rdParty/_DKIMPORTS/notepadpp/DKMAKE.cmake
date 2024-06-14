@@ -39,7 +39,7 @@ dk_copy(${DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP}/config.xml OVERW
 ### addContextMenu.cmd ###
 dk_set(NOTEPADPP_addContextMenu_cmd "${NOTEPADPP}/addContextMenu.cmd")
 if(NOT EXISTS 	"${NOTEPADPP_addContextMenu_cmd}")
-	file(WRITE 	"${NOTEPADPP_addContextMenu_cmd}"
+	dk_fileWrite(	"${NOTEPADPP_addContextMenu_cmd}"
 [================================================================================================[
 @echo off
 
@@ -63,8 +63,8 @@ endif()
 #	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
 #
 dk_set(NOTEPADPP_associateFiles_cmd "${NOTEPADPP}/associateFiles.cmd")
-if(NOT EXISTS 	"${NOTEPADPP_associateFiles_cmd}")
-	file(WRITE 	"${NOTEPADPP_associateFiles_cmd}"
+if(NOT EXISTS "${NOTEPADPP_associateFiles_cmd}")
+	dk_fileWrite("${NOTEPADPP_associateFiles_cmd}"
 	
 [====================================================================================================[
 @echo off

@@ -42,7 +42,7 @@ function(CreateFunction name contents) #args
 			file(WRITE functions_ext.cmake "")
 			set(extFileCleared 1 CACHE INTERNAL "")
 		endif()
-		file(APPEND functions_ext.cmake "function(${name})\n	${contents}\nendfunction()\n")
+		dk_fileAppend(functions_ext.cmake "function(${name})\n	${contents}\nendfunction()\n")
 		include(functions_ext.cmake)
 	else()
 		cmake_language(EVAL CODE "function(${name})\n	${contents}\nendfunction()\n")

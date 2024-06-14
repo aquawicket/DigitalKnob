@@ -299,7 +299,7 @@ dk_set(APP_VERSION "${year}.${month}.${day}")
 if(PLUGINS_FILE)
 	string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
 	string(REPLACE "\\n" "\n" PLUGINS_FILE ${PLUGINS_FILE})
-	file(WRITE ${DK_PROJECT_DIR}/DKPlugins.h ${PLUGINS_FILE})
+	dk_fileWrite(${DK_PROJECT_DIR}/DKPlugins.h ${PLUGINS_FILE})
 endif()
 
 if(HAVE_DK)
@@ -717,7 +717,7 @@ if(MAC)
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
-		file(WRITE ${DK_PROJECT_DIR}/${OS}/wrapper ${TERMINAL_SCRIPT})
+		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/wrapper ${TERMINAL_SCRIPT})
 		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${OS}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS})
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
@@ -870,7 +870,7 @@ if(IOS OR IOSSIM)
 				"xcrun simctl install booted ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
 		endif()
 		if(RELEASE)
@@ -880,7 +880,7 @@ if(IOS OR IOSSIM)
 				"xcrun simctl install booted ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_fileWrite(${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/Run.sh)
 		endif()
 	endif()
@@ -957,7 +957,7 @@ if(NOT RASPBERRY)
 			"Name=${APP_NAME}\n"
 			"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
-		file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	elseif(RELEASE)
 		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
@@ -968,7 +968,7 @@ if(NOT RASPBERRY)
 			"Name=${APP_NAME}\n"
 			"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
-		file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
 		if(NOT TINYCORE)
@@ -1050,7 +1050,7 @@ if(RASPBERRY)
 		"Name=${APP_NAME}\n"
 		"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
-	file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	if(RELEASE)
 	# Create .desktop file for Release
@@ -1063,7 +1063,7 @@ if(RASPBERRY)
 		"Name=${APP_NAME}\n"
 		"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
-	file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
@@ -1143,7 +1143,7 @@ if(ANDROID)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Debug)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/assets OVERWRITE)
-			file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
+			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Debug/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Debug/gradlew")
@@ -1153,7 +1153,7 @@ if(ANDROID)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/assets OVERWRITE)
-			file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
+			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
 			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Release/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Release/gradlew")
@@ -1347,13 +1347,13 @@ if(EMSCRIPTEN)
 			set(RUN_SCRIPT_DEBUG
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh)
 		endif()
 	endif()
@@ -1362,13 +1362,13 @@ if(EMSCRIPTEN)
 			set(RUN_SCRIPT_RELEASE
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.html"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
 				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.html"
 			)
-			file(WRITE ${DK_PROJECT_DIR}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Release/Run.sh)
 		endif()
 	endif()
