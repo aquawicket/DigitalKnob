@@ -23,7 +23,7 @@ function Global:dk_printArray($array) {
 	
 	for($i=0; $i -lt $_array_.count; $i++) {
 		$value = $_array_[$i]
-		echo "$_name_[$i]  $value"
+		dk_echo "$_name_[$i]  $value"
 	}
 	dk_info "$_name_ length = $i"
 }

@@ -36,9 +36,9 @@ function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST #######
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')
 	dk_arrayPop $myArray
-	echo "myArray = $myArray"
+	dk_echo "myArray = $myArray"
 	
 	$myArrayB = [System.Collections.ArrayList]('1', '2', '3')
 	dk_arrayPop $myArrayB
-	echo "myArrayB = $myArrayB"
+	dk_echo "myArrayB = $myArrayB"
 }

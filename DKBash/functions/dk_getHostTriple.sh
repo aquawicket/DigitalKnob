@@ -71,11 +71,11 @@ dk_getHostTriple () {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${GCC_ARCH}     && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS} ]     && HOST_OS=${GCC_OS}         && dk_printVar HOST_OS
-		[ -z ${HOST_ENV} ]    && HOST_ENV=${GCC_ENV}       && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${GCC_ARCH}     && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ]     && HOST_OS=${GCC_OS}         && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ]    && HOST_ENV=${GCC_ENV}       && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "builtin echo \$MACHTYPE")

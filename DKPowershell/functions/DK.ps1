@@ -43,12 +43,12 @@ $global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
 function DK() {
 	
 	
-	echo "Loading DigitalKnob . . ."
+	Write-Host "Loading DigitalKnob . . ."
 
 	############# Set DKPOWERSHELL_FUNCTIONS_DIR path ############
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
-	Write-Output "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
+	Write-Host "DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR"
 	
 	############# Set DKHTTP_DKBATCH_FUNCTIONS_DIR path ############
 	$global:DKHTTP_DIGITALKNOB_DIR = "https://raw.githubusercontent.com/aquawicket/DigitalKnob"

@@ -9,7 +9,7 @@ dk_load dk_echo
 #
 function Global:dk_stacktrace () {
     dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 0){ dk_echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"; return }
 
 
 	### VERSION 1 ###

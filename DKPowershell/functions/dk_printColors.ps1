@@ -69,16 +69,16 @@ function Global:dk_printColors () {
 	
 	# 256-Color Foreground & Background Charts
 	${ESC}=$([char]27)
-	echo "`n${ESC}[1;4m256-Color Foreground & Background Charts${ESC}[0m"
+	dk_echo "`n${ESC}[1;4m256-Color Foreground & Background Charts${ESC}[0m"
 	foreach ($fgbg in 38,48) {  # foreground/background switch
 	  foreach ($color in 0..255) {  # color range
 		#Display the colors
 		$field = "$color".PadLeft(4)  # pad the chart boxes with spaces
 		Write-Host -NoNewLine "${ESC}[$fgbg;5;${color}m$field ${ESC}[0m"
 		#Display 6 colors per line
-		if ( (($color+1)%6) -eq 4 ) { echo "`r" }
+		if ( (($color+1)%6) -eq 4 ) { dk_echo "`r" }
 	  }
-	  echo `n
+	  dk_echo `n
 	}
 }
 
