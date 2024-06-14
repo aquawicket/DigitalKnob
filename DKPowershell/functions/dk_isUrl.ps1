@@ -12,8 +12,10 @@ function Global:dk_isUrl($str) {
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
-	if(dk_stringContains $str "://"){ return ${true} }
-	return ${false}
+	if(dk_stringContains $str "://"){ $isUrl = $true }
+	else{ $isUrl = $false }
+	dk_printVar isUrl
+	return $isUrl
 }
 
 

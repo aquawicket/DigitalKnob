@@ -11,8 +11,10 @@ function Global:dk_confirm() {
 
 
     $confirmation = Read-Host "${yellow} Are you sure ? [Y/N] ${clr}"
-	if($confirmation -eq 'y' -or $confirmation -eq 'Y') { return $true }
-	return $false
+	if($confirmation -eq 'y' -or $confirmation -eq 'Y') { $confirm = $true }
+	else{ $confirm = $false }
+	dk_printVar confirm
+	return $confirm
 }
 
 
@@ -23,9 +25,6 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	if(dk_confirm){
-		dk_echo "the confimation has passed"
-	} else {
-		dk_echo "the confimation has failed"
-	}
+	if(dk_confirm){ dk_echo "the confimation has passed" } 
+	else{ dk_echo "the confimation has failed" }
 }

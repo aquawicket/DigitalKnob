@@ -14,7 +14,6 @@ function Global:dk_getDirectories($path) {
 	
 	
 	$directories = Get-ChildItem $path | Where-Object {$_.PSIsContainer} | Foreach-Object {$_.Name}
-	   
 	dk_printVar directories
 	return $directories
 }

@@ -14,7 +14,7 @@ function Global:dk_load($func) {
 	if(Test-Path "$func"){
 		#echo "Import-Module -Global $func"
 		#Import-Module -Global $func
-		echo . $func
+		Write-Host ". $func"
 		. $func
 		return
 	}
