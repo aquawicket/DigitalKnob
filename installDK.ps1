@@ -34,9 +34,9 @@ if(!(Test-Path "$DKBRANCH_DIR/.git")){
 	dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
 	dk_call "$GIT_EXE" checkout $DKBRANCH
-	echo "Digitalknob installation complete"
+	dk_echo "Digitalknob installation complete"
 } else {
-	echo "DigitalKnob is already installed at $DKBRANCH_DIR"
+	dk_echo "DigitalKnob is already installed at $DKBRANCH_DIR"
 }
 
 dk_pause

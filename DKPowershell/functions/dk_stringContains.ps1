@@ -26,14 +26,14 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 
 	if(dk_stringContains "1one1" "one"){
-		echo "1one1 contains one"
+		dk_echo "1one1 contains one"
 	} else {
-		echo "1one1 does not contain one"
+		dk_echo "1one1 does not contain one"
 	}
 
 	if(dk_stringContains "2two2" "tow"){
-		echo "2two2 contains tow"
+		dk_echo "2two2 contains tow"
 	} else {
-		echo "2two2 does not contain tow"
+		dk_echo "2two2 does not contain tow"
 	}
 }

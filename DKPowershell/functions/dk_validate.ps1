@@ -40,7 +40,7 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_validate myVarC "myVarC='a string value'"
 	dk_echo "myVarC = ${myVarC}"
 	
-	dk_validate myVarD "echo 'this will not fill myVarD'"
+	dk_validate myVarD "dk_echo 'this will not fill myVarD'"
 	dk_echo "myVarD = ${myVarD}"
 }
 

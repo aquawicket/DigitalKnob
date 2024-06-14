@@ -9,7 +9,7 @@ dk_load dk_echo
 #
 function Global:dk_stacktrace () {
     dk_debugFunc
-	if($(__ARGC__) -ne 0){ echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 0){ dk_echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 
 	### VERSION 1 ###
@@ -56,13 +56,13 @@ function Global:dk_stacktrace () {
 #	    stack+=("${indent} └ ${src}:${line} (${func})")
 #	    indent="${indent}    "
 #	done
-#	(IFS=$'\n'; echo "${stack[*]}")
+#	(IFS=$'\n'; dk_echo "${stack[*]}")
 
 
 #	### VERSION 3 ###
 #	local i=1 line file func
 #	while read -r line func file < <(caller ${i}); do
-#		echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
+#		dk_echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
 #		((i++))
 #	done
 }
