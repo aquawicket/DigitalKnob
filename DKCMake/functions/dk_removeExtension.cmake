@@ -2,17 +2,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_removeExtension(path RESULT) NOERROR
+# dk_removeExtension(path ret_var) NOERROR
 #
 #	Remove the extension from a file path
 #
 #	@path				- TODO
-#	@RESULT				- TODO
+#	@ret_var			- TODO
 #   NOERROR (optional)	- if one of the parameters is NOERROR, dk_error() messages will not be displayed
 #
-function(dk_removeExtension path RESULT)
+function(dk_removeExtension path ret_var)
 	dk_debugFunc(${ARGV})
-	
 	dk_getOption(NOERROR ${ARGV})
 	
 	string(FIND ${path} "." includes REVERSE)
@@ -26,9 +25,9 @@ function(dk_removeExtension path RESULT)
 	endif()
 	
 	dk_getExtension(${path} ext)
-	string(REPLACE ${ext} "" fileNameNoExt ${path}) 
-	#string(SUBSTRING ${path} 0 ${includes} fileNameNoExt)
-    set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
+	dk_replaceAll("${path}" "${ext}" "" removeExtension)
+	#string(SUBSTRING ${path} 0 ${includes} removeExtension)
+    set(${ret_var} ${removeExtension} PARENT_SCOPE)
 endfunction()
 
 
@@ -36,6 +35,7 @@ endfunction()
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-	dk_todo()
-
+	set(myPath "C:/Users/yourname/awsomeFile.txt")
+	dk_removeExtension("${myPath}" myPath)
+	dk_info("${myPath}")
 endfunction(DKTEST)

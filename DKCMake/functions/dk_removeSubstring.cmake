@@ -10,29 +10,28 @@ include_guard()
 #	@fromthis		- TODO
 #	@RESULT			- TODO
 #
-function(dk_removeSubstring removethis fromthis RESULT)
+function(dk_removeSubstring removethis fromthis rtn_var)
 	dk_debugFunc(${ARGV})
-	
-	dk_dump(removethis)
-	dk_dump(fromthis)
-	#foreach(item ${fromthis})
-	#	string(REPLACE ${removethis} "" item ${item})
-	#	list(APPEND rtn ${item})
-	#endforeach()
-	string(REPLACE ${removethis} "" rtn "${fromthis}")
-	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	set(${RESULT} "${rtn}" PARENT_SCOPE) #return RESULT
-	dk_dump(rtn)
-	#dk_wait()
+	if(NOT ${ARGC} EQUAL 3)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+	endif()
+
+
+	dk_replaceAll("${fromthis}" "${removethis}" "" removeSubstring)
+	dk_printVar(removeSubstring)
+	set("${rtn_var}" "${removeSubstring}" PARENT_SCOPE)
 endfunction()
-dk_createOsMacros("dk_removeSubstring")
+#dk_createOsMacros("dk_removeSubstring")
 
 
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
-	dk_todo()
-
+	dk_debugFunc(${ARGV})
+	
+	set(myString "You have never had a good day today or anyday")
+	dk_removeSubstring("have never " "${myString}" myString)
+	dk_removeSubstring(" or anyday" "${myString}" myString)
+	dk_info("${myString}")
 endfunction(DKTEST)
