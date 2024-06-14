@@ -15,7 +15,7 @@ if(NOT NOTEPADPP_DL)
 	return()
 endif()
 
-dk_getFilename(${NOTEPADPP_DL} NOTEPADPP_DL_FILE)
+dk_getBasename(${NOTEPADPP_DL} NOTEPADPP_DL_FILE)
 dk_removeExtension(${NOTEPADPP_DL_FILE} NOTEPADPP_FOLDER)
 dk_convertToCIdentifier(${NOTEPADPP_FOLDER} NOTEPADPP_FOLDER)
 

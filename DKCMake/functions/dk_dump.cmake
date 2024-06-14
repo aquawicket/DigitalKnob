@@ -13,7 +13,7 @@ macro(dk_dump variable)
 	
 	message(STATUS "\n${cyan}############################### Variable DUMP ##############################################${clr}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
-		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+		dk_getBasename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
 	if(NOT DEFINED ${variable})
 		dk_error("variable not defined. The syntax may be incorrect if using brackets - > \$ { variable } ")

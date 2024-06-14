@@ -11,7 +11,7 @@ dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 	
 ## Get QEMU_DL_FILE, QEMU_FOLDER
 dk_assert(QEMU_DL)
-dk_getFilename(${QEMU_DL} QEMU_DL_FILE)
+dk_getBasename(${QEMU_DL} QEMU_DL_FILE)
 dk_removeExtension(${QEMU_DL_FILE} QEMU_FOLDER)
 dk_convertToCIdentifier(${QEMU_FOLDER} QEMU_FOLDER)
 dk_set(QEMU ${DKTOOLS_DIR}/${QEMU_FOLDER})

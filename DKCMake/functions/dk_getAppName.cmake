@@ -12,7 +12,7 @@ include_guard()
 function(dk_getAppName path RESULT)
 	dk_debugFunc(${ARGV})
 	
-	dk_getFilename(${path} fileName)
+	dk_getBasename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
 	dk_verbose(fileNameNoExt)
 	set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)

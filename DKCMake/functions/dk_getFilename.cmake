@@ -3,18 +3,18 @@ include_guard()
 
 # FIXME:  not working
 ###############################################################################
-# dk_getFilename(path RESULT)
+# dk_getFilename(path rtn_var)
 #
 #	Get the filename portion of a path
 #
 #	@path		- The path to use
-#	@RESULT:	- Returns the file name upon success: False upon error
+#	@rtn_var:	- Returns the file name upon success: False upon error
 #
-function(dk_getFilename path RESULT)
+function(dk_getFilename path rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	dk_assert(path)
-	dk_assert(RESULT)
+	dk_assert(rtn_var)
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
@@ -35,7 +35,7 @@ function(dk_getFilename path RESULT)
 	endif()
 	
 	dk_assert(filename)
-    set(${RESULT} ${filename} PARENT_SCOPE)
+    set(${rtn_var} ${filename} PARENT_SCOPE)
 endfunction()
 
 
