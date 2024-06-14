@@ -12,6 +12,7 @@ function Global:dk_validate($variable, $code) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if($variable -and (Test-Path variable:$variable)){ return }
 	
 	if($code -and (Test-Path $code -PathType Leaf)){ dk_load $code }
@@ -26,19 +27,21 @@ function Global:dk_validate($variable, $code) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$myVarA="a valid variable"
 	dk_validate myVarA fill_myVarA
-	echo "myVarA = ${myVarA}"
+	dk_echo "myVarA = ${myVarA}"
 		
 	dk_validate myVarB fill_myVarB
-	echo "myVarB = ${myVarB}"
+	dk_echo "myVarB = ${myVarB}"
 	
 	dk_validate myVarC "myVarC='a string value'"
-	echo "myVarC = ${myVarC}"
+	dk_echo "myVarC = ${myVarC}"
 	
 	dk_validate myVarD "echo 'this will not fill myVarD'"
-	echo "myVarD = ${myVarD}"
+	dk_echo "myVarD = ${myVarD}"
 }
 
 function Global:fill_myVarA() {

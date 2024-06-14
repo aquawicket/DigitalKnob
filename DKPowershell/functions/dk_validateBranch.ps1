@@ -14,6 +14,7 @@ function Global:dk_validateBranch () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
 	$FOLDER = dk_getBasename "$(pwd)"
@@ -77,6 +78,8 @@ function Global:dk_validateBranch () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_validateBranch
 }

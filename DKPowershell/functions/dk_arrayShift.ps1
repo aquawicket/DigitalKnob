@@ -13,6 +13,7 @@ function Global:dk_arrayShift(array) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	$_array_ = "${array}"
 	$prev = 0
 	$count = 1
@@ -34,6 +35,7 @@ function Global:dk_arrayShift(array) {
 function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
+	
 	
 	dk_printArray myArray
 	

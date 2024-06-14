@@ -13,6 +13,7 @@ function Global:dk_arrayLength($array) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if($null -eq $array){ $arrayLength = 0; dk_printVar arrayLength; return $arrayLength }
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly -ErrorAction SilentlyContinue } 
 	else {
@@ -34,6 +35,7 @@ function Global:dk_arrayLength($array) {
 
 function Global:DKTEST(){ ########################################################################
 	dk_debugFunc
+	
 	
 	$myArray = @('element 1', 'element 2', 'element 3')
 	$length = dk_arrayLength myArray

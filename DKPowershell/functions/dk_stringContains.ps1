@@ -10,6 +10,7 @@ function Global:dk_stringContains($str, $substring) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if($str -like "*$substring*"){
 		return $true
 	}
@@ -21,7 +22,8 @@ function Global:dk_stringContains($str, $substring) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 
 	if(dk_stringContains "1one1" "one"){
 		echo "1one1 contains one"

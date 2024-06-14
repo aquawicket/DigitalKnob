@@ -11,6 +11,7 @@ function Global:dk_getDKPaths () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	$global:DIGITALKNOB_DIR = "$env:HOMEDRIVE$env:HOMEPATH\digitalknob"
     dk_makeDirectory $DIGITALKNOB_DIR
     dk_printVar DIGITALKNOB_DIR
@@ -28,6 +29,8 @@ function Global:dk_getDKPaths () {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	dk_getDKPaths
 	echo "DIGITALKNOB_DIR = $DIGITALKNOB_DIR"

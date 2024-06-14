@@ -10,6 +10,7 @@ function Global:dk_build () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
@@ -48,6 +49,8 @@ function Global:dk_build () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_build
 }

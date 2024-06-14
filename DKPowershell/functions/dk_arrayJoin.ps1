@@ -1,6 +1,7 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_arrayJoin){ $dk_arrayJoin = 1 } else{ return }
 
+
 ################################################################################
 # dk_arrayJoin(array, separator) -> rtn_var
 #
@@ -10,6 +11,7 @@ if(!$dk_arrayJoin){ $dk_arrayJoin = 1 } else{ return }
 function Global:dk_arrayJoin($array, $separator) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	
 	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 	# from variable name
 	else { $_array_ = $array }															# from variable
@@ -26,8 +28,9 @@ function Global:dk_arrayJoin($array, $separator) {
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
+	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
 	$myString = dk_arrayJoin myArray ","
-	echo "myString = $myString"
+	dk_info "myString = $myString"
 }

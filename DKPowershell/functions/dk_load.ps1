@@ -10,6 +10,7 @@ function Global:dk_load($func) {
 	dk_debugFunc	
 	if($(__ARGC__) -ne 1){ echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if(Test-Path "$func"){
 		#echo "Import-Module -Global $func"
 		#Import-Module -Global $func
@@ -37,7 +38,6 @@ function Global:dk_load($func) {
 
 
 function Global:DKTEST() { ###########################################################################################
-	
+	dk_debugFunc
 
-	
 }

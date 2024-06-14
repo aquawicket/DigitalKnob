@@ -23,6 +23,7 @@ function Global:dk_info($allArgs) {
 	dk_debugFunc
 	$allArgs = $PsBoundParameters.Values + $args
 	
+	
 	if($ENABLE_dk_info -ne 1){ return }
 		
 	dk_echo "${white}${INFO_TAG}${allArgs}${clr}"
@@ -35,6 +36,8 @@ function Global:dk_info($allArgs) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	dk_info "test message from dk_info"
 }

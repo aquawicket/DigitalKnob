@@ -23,7 +23,9 @@ function Global:dk_getExtension () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$extension = dk_getExtension "/path/to/a/filename.txt"
 	echo "extension = ${extension}"
 }

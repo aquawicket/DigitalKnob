@@ -23,6 +23,7 @@ function Global:dk_fixme () {
 	dk_debugFunc
 	$allArgs = $PsBoundParameters.Values + $args
 	
+	
 	if($ENABLE_dk_fixme -ne 1){ return }
 
 	dk_echo "${yellow}${FIXME_TAG}${allArgs}${clr}"	
@@ -36,6 +37,8 @@ function Global:dk_fixme () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_fixme "test dk_fixme message"
 }

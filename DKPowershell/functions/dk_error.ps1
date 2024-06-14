@@ -23,6 +23,7 @@ function Global:dk_error($allArgs) {
 	dk_debugFunc
 	$allArgs = $PsBoundParameters.Values + $args
 	
+	
 	if($ENABLE_dk_error -ne 1){ return }
 	
 	dk_echo "${red}${ERROR_TAG}${allArgs}${clr}"
@@ -36,6 +37,8 @@ function Global:dk_error($allArgs) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	dk_error "test dk_error message"
 }

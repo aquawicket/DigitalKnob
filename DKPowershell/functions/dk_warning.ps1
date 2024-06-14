@@ -23,11 +23,12 @@ function Global:dk_warning() {
 	dk_debugFunc
 	#$allArgs = $PsBoundParameters.Values + $args
 	
+	
 	if($ENABLE_dk_warning -ne 1){ return }
 
 	dk_echo "${yellow}${WARNING_TAG}${args}${clr}"
 	if($TRACE_ON_WARNING){ dk_echo "${yellow}*** TRACE_ON_WARNING ***${clr}" } #& dk_stacktrace
-	if($LINE_ON_WARNING) { dk_echo "${yellow}*** LINE_ON_WARNING ***${clr}"  } #& dk_showFileLine "%_callerpath%" "%_message_%"
+	if($LINE_ON_WARNING) { dk_echo "${yellow}*** LINE_ON_WARNING ***${clr}"  } #& dk_showFileLine "${_callerpath}" "${_message_}"
 	if($PAUSE_ON_WARNING){ dk_echo "${yellow}*** PAUSE_ON_WARNING ***${clr}" } #& dk_pause
 	if($HALT_ON_WARNING) { dk_echo "${yellow}*** HALT_ON_WARNING ***${clr}"  } #& dk_exit
 }
@@ -36,6 +37,7 @@ function Global:dk_warning() {
 
 function Global:DKTEST() { ###########################################################################################
 	dk_debugFunc
+	
 	
 	dk_warning "test dk_warning message"
 }

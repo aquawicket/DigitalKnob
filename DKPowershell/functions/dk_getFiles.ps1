@@ -22,7 +22,9 @@ function Global:dk_getFiles($path) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$files = dk_getFiles "C:\Windows"
-	dk_info "files = $files"
+	dk_echo "files = $files"
 }	

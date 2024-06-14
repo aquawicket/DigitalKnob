@@ -9,7 +9,7 @@ if(!$dk_pushAssets){ $dk_pushAssets = 1 } else{ return }
 function Global:dk_pushAssets () {
 	dk_debugFunc
 	
-    echo not implemented,  TODO
+    dk_todo
 }
 
 

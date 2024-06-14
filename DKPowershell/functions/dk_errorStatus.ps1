@@ -7,12 +7,17 @@ if(!$dk_errorStatus){ $dk_errorStatus = 1 } else{ return }
 #
 #
 function Global:dk_errorStatus(){
-	echo "${BASH_SOURCE} ${LINENO}: ERROR_STATUS = $?"
+	dk_debugFunc
+	
+	
+	dk_echo "$(__FILE__ 1):$(__LINE__ 1) ERROR_STATUS = $?"
 }
 
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_errorStatus
 }

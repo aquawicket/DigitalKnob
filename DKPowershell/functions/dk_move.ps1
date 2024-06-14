@@ -21,8 +21,8 @@ function Global:dk_move($_from_, $_to_) {
 	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	if($(__ARGC__) -gt 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if($args[2] -eq "OVERWRITE"){ $OVERWRITE = 1 }
-	#$OVERWRITE = 1
 	
 	dk_info "Moving $_from_ to $_to_"
 	
@@ -48,13 +48,15 @@ function Global:dk_move($_from_, $_to_) {
 
 
 function Global:DKTEST(){ ###############################################################################
+	dk_debugFunc
+	
 	
 	dk_validate DIGITALKNOB_DIR dk_getDKPaths
 	
-	echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
+	dk_echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
 	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE
 	
-	echo "dk_move test" > moveMe.file
+	dk_echo "dk_move test" > moveMe.file
 	dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
 	dk_makeDirectory $DKDOWNLOAD_DIR/moveMe

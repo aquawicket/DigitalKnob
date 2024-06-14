@@ -13,6 +13,7 @@ function Global:dk_arrayAt($array, $index) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
@@ -26,6 +27,7 @@ function Global:dk_arrayAt($array, $index) {
 
 function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	$elementA = dk_arrayAt myArray 3

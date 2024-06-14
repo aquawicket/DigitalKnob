@@ -17,6 +17,7 @@ function Global:dk_gitCommit () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	$message = Read-Host
 	
@@ -73,6 +74,8 @@ function Global:dk_gitCommit () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_gitCommit
 }

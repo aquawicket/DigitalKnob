@@ -8,6 +8,7 @@ function Global:dk_sleep($seconds) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	Start-Sleep -s $seconds
 }
 
@@ -16,6 +17,7 @@ function Global:dk_sleep($seconds) {
 
 function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	
 	dk_sleep 5
 }

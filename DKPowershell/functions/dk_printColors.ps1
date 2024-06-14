@@ -1,7 +1,7 @@
 if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_printColors){ $dk_printColors = 1 } else{ return }
 
-dk_load dk_color
+
 dk_load dk_echo
 dk_load dk_info
 ####################################################################
@@ -9,7 +9,7 @@ dk_load dk_info
 #
 function Global:dk_printColors () {
 	dk_debugFunc
-	dk_color
+	
 	
 	dk_echo
 	dk_info "${esc}[101;93m STYLES ${clr}"
@@ -84,7 +84,8 @@ function Global:dk_printColors () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
+	
 	
 	dk_printColors
-	
 }

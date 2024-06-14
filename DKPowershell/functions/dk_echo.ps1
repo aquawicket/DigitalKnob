@@ -11,17 +11,12 @@ dk_load dk_color; dk_color
 #
 function Global:dk_echo($allArgs) {
 	dk_debugFunc
-	
 	# https://stackoverflow.com/a/818118
-	$allArgs = $PsBoundParameters.Values + $args
-	#if($allArgs -eq ""){ echo "\n"; return }
-	#echo "allArgs = $allArgs"
-
-	#set "_message_=%*"	
-	# if msg starts and ends with quotes, remove the first and last
-	#if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
-	#echo %*
+	$allArgs = $PsBoundParameters.Values + $args 
 	
+	
+	#if($allArgs -eq ""){ echo "\n"; return }
+
 	#echo $allArgs
 	Write-Host $allArgs
 }
@@ -31,6 +26,8 @@ function Global:dk_echo($allArgs) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	echo "This is a normal echo commmand"
 	dk_echo "This is a dk_echo line"

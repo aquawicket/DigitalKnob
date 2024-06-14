@@ -13,6 +13,7 @@ function Global:dk_enterManually () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	
 	$input = Read-Host
@@ -45,6 +46,8 @@ function Global:dk_enterManually () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_enterManually
 }

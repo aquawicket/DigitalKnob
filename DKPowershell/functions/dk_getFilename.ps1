@@ -10,6 +10,7 @@ function Global:dk_getFilename ($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	#$filename = (Get-Item $path ).Name
 	#$filename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Name   #Calls Resolve-Path but works for files that don't exist.
 	#if(-not($rtn_var)){ $rtn_var = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
@@ -21,7 +22,9 @@ function Global:dk_getFilename ($path) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$filename = dk_getFilename "/path/to/a/filename.txt"
-	echo "filename = ${filename}"
+	dk_echo "filename = ${filename}"
 }

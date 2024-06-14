@@ -11,6 +11,7 @@ dk_load dk_info
 function GLOBAL:dk_pause() {
 	dk_debugFunc
 
+
 	Read-Host -Prompt "Press Enter to continue"
 }
 
@@ -19,6 +20,7 @@ function GLOBAL:dk_pause() {
 
 function Global:DKTEST() { ###########################################################################################
 	dk_debugFunc
+	
 	
 	dk_pause
 }

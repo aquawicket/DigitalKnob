@@ -11,6 +11,7 @@ function Global:dk_isUrl($str) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if(dk_stringContains $str "://"){ return ${true} }
 	return ${false}
 }
@@ -18,7 +19,9 @@ function Global:dk_isUrl($str) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$test_url = "http://www.aquawicket.com"
 	
 	if(dk_isUrl "${test_url}"){

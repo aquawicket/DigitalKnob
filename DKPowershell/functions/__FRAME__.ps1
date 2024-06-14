@@ -63,6 +63,5 @@ function Global:Dummy($arg_1, $arg_2){
 }
 
 function Global:DKTEST() { ###########################################################################################
-	#Write-Host -Fore cyan "FRAME = $(__FRAME__)";
 	Dummy "first arg" "2nd arg" 123 "abc"
 }

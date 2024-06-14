@@ -10,6 +10,7 @@ function Global:dk_checkGitRemote () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	$ahead=0
 	$behind=0
 	if(dk_pathExists "${DKBRANCH_DIR}/.git"){
@@ -26,6 +27,8 @@ function Global:dk_checkGitRemote () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_checkGitRemote
 }

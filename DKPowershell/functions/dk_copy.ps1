@@ -36,7 +36,7 @@ function Global:dk_copy($from, $to) {
 		dk_remove ${to}
 	}
 	
-	# the base directory of the %to% path must exist.    
+	# the base directory of the ${to} path must exist.    
 	$_parent_dir_ = dk_getDirname "${to}" _parent_dir_
 	dk_makeDirectory "${_parent_dir_}"
 	
@@ -46,7 +46,9 @@ function Global:dk_copy($from, $to) {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
 	echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file

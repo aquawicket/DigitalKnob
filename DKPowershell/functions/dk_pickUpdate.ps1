@@ -22,6 +22,7 @@ function Global:dk_pickUpdate() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	dk_readCache
 	
 	dk_echo
@@ -93,6 +94,8 @@ function Global:dk_pickUpdate() {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_pickUpdate
 }

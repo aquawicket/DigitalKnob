@@ -9,7 +9,10 @@ dk_load dk_echo
 ## https://duffney.io/usingansiescapesequencespowershell/
 ##
 function Global:dk_color() {
-
+	dk_debugFunc
+	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	
+	
     $global:esc="$([char]27)"
 
     ###### STYLES ######
@@ -60,5 +63,8 @@ function Global:dk_color() {
 }
 
 function Global:DKTEST() { ####################################################################
+	dk_debugFunc
+	
+	
 	dk_color
 }

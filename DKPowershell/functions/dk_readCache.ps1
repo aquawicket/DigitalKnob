@@ -17,6 +17,7 @@ function Global:dk_readCache() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 
 	if(!(dk_pathExists "${DKBRANCH_DIR}\cache")){ return 0 }
@@ -41,6 +42,8 @@ function Global:dk_readCache() {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_readCache
 }

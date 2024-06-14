@@ -11,6 +11,7 @@ function Global:dk_pickApp() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
 	
@@ -48,6 +49,8 @@ function Global:dk_pickApp() {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	dk_pickApp
 }

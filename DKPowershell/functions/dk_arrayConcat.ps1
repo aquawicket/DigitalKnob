@@ -13,6 +13,7 @@ function Global:dk_arrayConcat($array, $value1) {
 	dk_debugFunc
 	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
@@ -24,6 +25,7 @@ function Global:dk_arrayConcat($array, $value1) {
 
 function Global:DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	
 	dk_arrayConcat array value1
 }

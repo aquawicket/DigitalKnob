@@ -23,11 +23,12 @@ function Global:dk_todo () {
 	dk_debugFunc	
 	$allArgs = $PsBoundParameters.Values + $args
 	
+	
 	if($ENABLE_dk_todo -ne 1){ return }
 	
 	dk_echo "${yellow}${TODO_TAG}${allArgs}${clr}"
 	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}" } #& dk_stacktrace
-	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}"  } #& dk_showFileLine "%_callerpath%" "%_message_%"
+	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}"  } #& dk_showFileLine "${_callerpath}" "${_message_}"
 	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}" } #& dk_pause
 	if($HALT_ON_TODO) { dk_echo "${yellow}*** HALT_ON_TODO ***${clr}"  } #& dk_exit
 }
@@ -40,6 +41,7 @@ function Global:dk_todo () {
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	
 	dk_todo "test dk_todo message"
 }

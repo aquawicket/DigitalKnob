@@ -10,6 +10,7 @@ function Global:dk_toLower($str) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	$toLower = $str.ToLower()
 	dk_printVar toLower
 	return $toLower
@@ -20,6 +21,7 @@ function Global:dk_toLower($str) {
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
+	
 	$lowercase = dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse"
-	echo "lowercase = ${lowercase}"
+	dk_echo "lowercase = ${lowercase}"
 }

@@ -10,6 +10,7 @@ function Global:dk_pathExists($filepath){
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	if(Test-Path $filepath){
 		return $true;
 	}
@@ -19,16 +20,18 @@ function Global:dk_pathExists($filepath){
 
 
 function Global:DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	if(dk_pathExists "DK.ps1"){
-		echo "The file exists"
+		dk_info "The file exists"
 	} else {
-		echo "The file does NOT exist"
+		dk_info "The file does NOT exist"
 	}
 	
 	if(dk_pathExists "nofile.ext"){
-		echo "The file exists"
+		dk_info "The file exists"
 	} else {
-		echo "The file does NOT exist"
+		dk_info "The file does NOT exist"
 	}
 }

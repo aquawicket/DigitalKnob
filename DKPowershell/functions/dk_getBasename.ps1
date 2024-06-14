@@ -11,6 +11,7 @@ function Global:dk_getBasename($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	#$basename = (Get-Item $path).Basename 
 	#$basename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Basename    #Calls Resolve-Path but works for files that don't exist.
 	#if(-not($rtn_var)){ $basename = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
@@ -24,7 +25,9 @@ function Global:dk_getBasename($path) {
 
 
 function Global:DKTEST() { ########################################################################
-
+	dk_debugFunc
+	
+	
 	$basename = dk_getBasename "C:\Windows\System32"
 	echo "basename = $basename"
 	

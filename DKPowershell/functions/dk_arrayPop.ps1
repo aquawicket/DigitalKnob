@@ -14,6 +14,7 @@ function Global:dk_arrayPop($array) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
+
 	#if($array -isnot [System.Object]){ dk_error "Not a System.Object"; return ${false} }
 	if($array.count -eq 0){ $removed_element = "undefined"; dk_printVar removed_element; return $removed_element }
 	if(Test-Path variable:$array){ $array = Get-Variable -Name ($array) -ValueOnly }
@@ -31,6 +32,7 @@ function Global:dk_arrayPop($array) {
 
 function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')
 	dk_arrayPop $myArray

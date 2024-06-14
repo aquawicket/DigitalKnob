@@ -10,6 +10,7 @@ function Global:dk_getHostTriple () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	$global:HOST_OS = "win"
     dk_printVar HOST_OS
 	
@@ -34,7 +35,8 @@ function Global:dk_getHostTriple () {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	dk_getHostTriple
-	
 }

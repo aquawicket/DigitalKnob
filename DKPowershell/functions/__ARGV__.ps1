@@ -9,7 +9,6 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 function GLOBAL:__ARGV__($_FRAME_=1) {
 	$_ARGV_ = New-Object System.Collections.Generic.List[System.Object]
 	$boundParameters = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters
-	#echo "$boundParameters"
 	foreach ($keyValue in $boundParameters.GetEnumerator()) {
 		#echo "$($keyValue.Key) = $($keyValue.Value)"
 		#$_ARGV_.Add($($keyValue.Key))

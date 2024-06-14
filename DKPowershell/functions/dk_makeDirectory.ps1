@@ -9,6 +9,7 @@ dk_load dk_info
 function Global:dk_makeDirectory ($_path_) {
 	dk_debugFunc
 	
+	
 	if(!(Test-Path $_path_)){ 
 		New-Item -Path "$_path_" -ItemType Directory 
 	}

@@ -12,6 +12,7 @@ function Global:dk_getDirectories($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	
 	$directories = Get-ChildItem $path | Where-Object {$_.PSIsContainer} | Foreach-Object {$_.Name}
 	   
 	dk_printVar directories
@@ -22,7 +23,9 @@ function Global:dk_getDirectories($path) {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	$directories = dk_getDirectories "C:\Windows"
 	dk_info "directories = $directories"
 }	

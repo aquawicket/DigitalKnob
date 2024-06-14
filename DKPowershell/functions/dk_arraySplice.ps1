@@ -8,8 +8,9 @@ if(!$dk_arrayIndexOf){ $dk_arrayIndexOf = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 #
 function Global:dk_arraySplice () {
-	call dk_debugFunc
+	dk_debugFunc
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	
 	
 	dk_todo "dk_arraySplice"
 }
@@ -18,7 +19,9 @@ function Global:dk_arraySplice () {
 
 
 function Global:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	
 	#  TODO
 	dk_arraySplice array start
 }
