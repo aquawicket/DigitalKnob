@@ -2,19 +2,19 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_mergeFlags(args RESULT)
+# dk_mergeFlags(args rtn_var)
 #
 #	TODO
 #
 #	@args		- TODO
-#	@RESULT		- TODO
+#	@rtn_var		- TODO
 #
-function(dk_mergeFlags args RESULT)
+function(dk_mergeFlags args rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	#dk_debug("BEFORE: dk_mergeFlags(${ARGV})")
-	set(args ${args} ${RESULT} ${ARGN})
-	list(GET args -1 RESULT)
+	set(args ${args} ${rtn_var} ${ARGN})
+	list(GET args -1 rtn_var)
 	list(REMOVE_AT args -1)
 	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "-DCMAKE_EXE_LINKER_FLAGS=" "CFLAGS=" "CXXFLAGS=")
 	foreach(word ${search})
@@ -52,10 +52,9 @@ function(dk_mergeFlags args RESULT)
 			list(INSERT args ${placeholder} "${DK_${word}}")	# https://stackoverflow.com/a/61948012
 		endif()
 	endforeach()
-	#dk_debug("AFTER: dk_mergeFlags(${args})")
-	set(${RESULT} ${args})
-	set(${RESULT} ${args} PARENT_SCOPE)
-	dk_printVar(${RESULT})
+
+	dk_printVar(${args})
+	set(${rtn_var} ${args} PARENT_SCOPE)
 endfunction()
 
 

@@ -2,13 +2,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_removeSubstring(removethis fromthis RESULT)
+# dk_removeSubstring(removethis fromthis rtn_var)
 #
 #	TODO
 #
 #	@removethis		- TODO
 #	@fromthis		- TODO
-#	@RESULT			- TODO
+#	@rtn_var			- TODO
 #
 function(dk_removeSubstring removethis fromthis rtn_var)
 	dk_debugFunc(${ARGV})
@@ -21,7 +21,7 @@ function(dk_removeSubstring removethis fromthis rtn_var)
 	dk_printVar(removeSubstring)
 	set("${rtn_var}" "${removeSubstring}" PARENT_SCOPE)
 endfunction()
-#dk_createOsMacros("dk_removeSubstring")
+dk_createOsMacros("dk_removeSubstring")
 
 
 

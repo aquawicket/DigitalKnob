@@ -2,19 +2,19 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_toUpper(str RESULT)
+# dk_toUpper(str rtn_var)
 #
 #	Convert a string to upper case
 #
 #	@str	- The input string to convert
-#	@RESULT	- Returns the converted output string
+#	@rtn_var	- Returns the converted output string
 #
-function(dk_toUpper str RESULT)
+function(dk_toUpper str rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	string(TOUPPER "${str}" upper)
-	set(${RESULT} ${upper} PARENT_SCOPE)
-	dk_printVar(RESULT)
+	set(${rtn_var} ${upper} PARENT_SCOPE)
+	dk_printVar(rtn_var)
 endfunction()
 
 

@@ -24,7 +24,7 @@ function(dk_removeExtension path ret_var)
 		return()
 	endif()
 	
-	dk_getExtension(${path} ext)
+	dk_getExtension("${path}" ext)
 	dk_replaceAll("${path}" "${ext}" "" removeExtension)
 	#string(SUBSTRING ${path} 0 ${includes} removeExtension)
     set(${ret_var} ${removeExtension} PARENT_SCOPE)
@@ -34,7 +34,8 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
 	dk_removeExtension("${myPath}" myPath)
 	dk_info("${myPath}")

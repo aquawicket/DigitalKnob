@@ -2,17 +2,18 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_pathContains(expression RESULT)
+# dk_pathContains(expression rtn_var)
 #
 #	@expression	- The search expression to use. Example: "${path}/subfolder/*.exe"
-#   @RESULT		- Returns TRUE if the expression is found
+#   @rtn_var		- Returns TRUE if the expression is found
 #
-function(dk_pathContains expression RESULT)
+function(dk_pathContains expression rtn_var)
 	dk_debugFunc(${ARGV})
 	
-	FILE(GLOB contains "${expression}") 
+	file(GLOB pathContains "${expression}")
+	dk_printVar(pathContains)
 	if(contains)
-		set(${RESULT} TRUE PARENT_SCOPE)
+		set(${rtn_var} TRUE PARENT_SCOPE)
 		return()
 	endif()
 endfunction()

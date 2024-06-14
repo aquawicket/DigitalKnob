@@ -25,5 +25,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_test(3)
-	
 endfunction(DKTEST)

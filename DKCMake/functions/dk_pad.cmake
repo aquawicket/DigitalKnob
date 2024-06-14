@@ -2,34 +2,36 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_pad(str padchar length RESULT)
+# dk_pad(str padchar length rtn_var)
 #
 #	Pad the end of a string to length with a given character
 #
 #   @str		- The string to pad
 #   @padchar	- The fill character to use
 #	@length		- The number of spaces to pad
-#	@RESULT		- The returned string w/padding
+#	@rtn_var		- The returned string w/padding
 #
-function(dk_pad str padchar length RESULT)
+function(dk_pad str padchar length rtn_var)
 	dk_debugFunc(${ARGV})
 	
-	string(LENGTH "${str}" _strlen)
-	math(EXPR _strlen "${length} - ${_strlen}")
 
-	if(_strlen GREATER 0)
+	string(LENGTH "${str}" strlen)
+	math(EXPR strlen "${length} - ${strlen}")
+
+	if(strlen GREATER 0)
 		if(${CMAKE_VERSION} VERSION_LESS "3.14")
 			unset(_pad)
-			foreach(_i RANGE 1 ${_strlen}) # inclusive
+			foreach(i RANGE 1 ${strlen}) # inclusive
 				string(APPEND _pad ${padchar})
 			endforeach()
 		else()
-			string(REPEAT ${padchar} ${_strlen} _pad)
+			string(REPEAT ${padchar} ${strlen} _pad)
 		endif()
-    string(APPEND str ${_pad})
-  endif()
+		string(APPEND pad ${_pad})
+	endif()
 
-  set(${RESULT} "${str}" PARENT_SCOPE)
+	dk_printVar(pad)
+  set(${rtn_var} "${pad}" PARENT_SCOPE)
 endfunction()
 
 
