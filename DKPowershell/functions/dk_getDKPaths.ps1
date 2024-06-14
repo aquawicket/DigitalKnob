@@ -33,7 +33,7 @@ function Global:DKTEST() { #####################################################
 	
 	
 	dk_getDKPaths
-	echo "DIGITALKNOB_DIR = $DIGITALKNOB_DIR"
-	echo "DKTOOLS_DIR = $DKTOOLS_DIR"
-	echo "DKDOWNLOAD_DIR = $DKDOWNLOAD_DIR"
+	dk_echo "DIGITALKNOB_DIR = $DIGITALKNOB_DIR"
+	dk_echo "DKTOOLS_DIR = $DKTOOLS_DIR"
+	dk_echo "DKDOWNLOAD_DIR = $DKDOWNLOAD_DIR"
 }

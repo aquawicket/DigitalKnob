@@ -24,8 +24,8 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	
 	if(dk_confirm){
-		echo "the confimation has passed"
+		dk_echo "the confimation has passed"
 	} else {
-		echo "the confimation has failed"
+		dk_echo "the confimation has failed"
 	}
 }

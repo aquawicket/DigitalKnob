@@ -28,7 +28,7 @@ function Global:dk_removeAll () {
 		dk_echo "${clr}"
         dk_printVar DKSCRIPT_DIR
 		dk_printVar DKBRANCH_DIR
-		return $false;
+		return ${false};
 	}
 		
 	# Backup main script file to digitalknob/

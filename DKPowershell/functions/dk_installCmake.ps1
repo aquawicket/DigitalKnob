@@ -44,6 +44,8 @@ function Global:dk_installCmake () {
 
 
 function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_validateCmake
+	dk_debugFunc
+	
+	
+	dk_installCmake
 }

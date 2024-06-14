@@ -17,7 +17,7 @@ function Global:dk_arrayFlat($array, $depth) {
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo "dk_arrayFlat"
+	dk_todo
 }
 
 

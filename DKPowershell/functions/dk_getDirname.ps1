@@ -27,8 +27,8 @@ function Global:DKTEST() { #####################################################
 	
 	
 	$dirname = dk_getDirname "C:\Windows\System32"
-	echo "dirname = $dirname"
+	dk_echo "dirname = $dirname"
 	
 	$dirname = dk_getDirname "TEST"
-	echo "dirname = $dirname"
+	dk_echo "dirname = $dirname"
 }

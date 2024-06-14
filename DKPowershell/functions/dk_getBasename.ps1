@@ -29,8 +29,8 @@ function Global:DKTEST() { #####################################################
 	
 	
 	$basename = dk_getBasename "C:\Windows\System32"
-	echo "basename = $basename"
+	dk_echo "basename = $basename"
 	
 	$basename = dk_getBasename "TEST"
-	echo "basename = $basename"
+	dk_echo "basename = $basename"
 }

@@ -26,5 +26,5 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	
 	$realpath = dk_realpath dk_load.ps1 
-	echo "realpath = ${realpath}"
+	dk_echo "realpath = ${realpath}"
 }

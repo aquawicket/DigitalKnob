@@ -16,12 +16,15 @@ function Global:dk_arrayIndexOf($array, $searchElement) {
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	for($i=0; $i -le $_array_.count; $i++) {
-		if($searchElement -eq $_array_[$i]){
-			return $i
+	for($indexOf=0; $indexOf -le $_array_.count; $indexOf++) {
+		if($searchElement -eq $_array_[$indexOf]){
+			dk_printVar indexOf
+			return $indexOf
 		}
 	}
-	return -1
+	$indexOf = -1
+	dk_printVar indexOf
+	return $indexOf
 }
 
 

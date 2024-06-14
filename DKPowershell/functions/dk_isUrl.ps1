@@ -25,16 +25,16 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	$test_url = "http://www.aquawicket.com"
 	
 	if(dk_isUrl "${test_url}"){
-		echo "variable is a url"
+		dk_echo "variable is a url"
 	} else {
-		echo "variable is NOT a url"
+		dk_echo "variable is NOT a url"
 	}
 	
 	
 	$test_not_url = "readme.txt"
 	if(dk_isUrl "${test_not_url}"){
-		echo "variable is a url"
+		dk_echo "variable is a url"
 	} else {
-		echo "variable is NOT a url"
+		dk_echo "variable is NOT a url"
 	}
 }

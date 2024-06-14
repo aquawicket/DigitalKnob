@@ -12,7 +12,7 @@ function Global:dk_arraySplice () {
 	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
-	dk_todo "dk_arraySplice"
+	dk_todo
 }
 
 

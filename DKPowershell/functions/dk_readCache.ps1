@@ -20,7 +20,7 @@ function Global:dk_readCache() {
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 
-	if(!(dk_pathExists "${DKBRANCH_DIR}\cache")){ return 0 }
+	if(!(dk_pathExists "${DKBRANCH_DIR}\cache")){ return }
 	
 	dk_echo "reading cache... in $DKBRANCH_DIR\cache"
 	$count = 0

@@ -28,6 +28,7 @@ function Global:dk_remove($path) {
 	
 	if(dk_pathExists $path){
 		dk_error "dk_remove failed to remove $path"
+		return ${false}
 	}
 }
 

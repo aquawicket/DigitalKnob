@@ -11,10 +11,10 @@ function Global:dk_replaceAll($str, $searchValue, $newValue) {
 	if($(__ARGC__) -ne 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
-	$str = $str -replace $searchValue, $newValue
+	$replaceAll = $str -replace $searchValue, $newValue
 	
-	dk_printVar str
-	return $str
+	dk_printVar replaceAll
+	return $replaceAll
 }
 
 
@@ -27,6 +27,5 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_info "string before:  ${string_var}"
 	
 	$string_var = dk_replaceAll $string_var "Z" "B"
-	
 	dk_info "string after:  ${string_var}"
 }

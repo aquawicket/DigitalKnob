@@ -12,7 +12,7 @@ function Global:dk_arraySlice($array, $start, $end) {
 	if($(__ARGC__) -ne 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
-	dk_todo "dk_arraySlice"
+	dk_todo
 }
 
 

@@ -16,15 +16,15 @@ function Global:dk_arrayPop($array) {
 
 
 	#if($array -isnot [System.Object]){ dk_error "Not a System.Object"; return ${false} }
-	if($array.count -eq 0){ $removed_element = "undefined"; dk_printVar removed_element; return $removed_element }
+	if($array.count -eq 0){ $arrayPop = "undefined"; dk_printVar arrayPop; return $arrayPop }
 	if(Test-Path variable:$array){ $array = Get-Variable -Name ($array) -ValueOnly }
 	if($array -isnot [System.Collections.ArrayList]){ dk_error "array is not an ArrayList"; return ${false} }	
-	if($array.count -eq 0){ $removed_element = "undefined"; dk_printVar removed_element; return $removed_element }
+	if($array.count -eq 0){ $arrayPop = "undefined"; dk_printVar arrayPop; return $arrayPop }
 	
-	$removed_element = $array[$array.count-1]
+	$arrayPop = $array[$array.count-1]
 	$array.removeAt($array.count-1)
-	dk_printVar removed_element
-	return $removed_element
+	dk_printVar arrayPop
+	return $arrayPop
 }
 
 
