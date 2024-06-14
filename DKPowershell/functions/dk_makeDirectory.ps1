@@ -3,7 +3,7 @@ if(!$dk_makeDirectory){ $dk_makeDirectory = 1 } else{ return }
 
 dk_load dk_info
 ####################################################################
-# dk_makeDirectory(<path>)
+# dk_makeDirectory(path)
 #
 #
 function Global:dk_makeDirectory ($_path_) {

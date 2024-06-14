@@ -13,7 +13,7 @@ if(!$PAUSE_ON_FIXME) { $global:PAUSE_ON_FIXME = 0  }
 if(!$HALT_ON_FIXME)  { $global:HALT_ON_FIXME = 0   }
 $FIXME_TAG="  FIXME: "
 ##################################################################################
-# dk_fixme(<message>)
+# dk_fixme(message)
 #
 #	Print a fixme message to the console
 #

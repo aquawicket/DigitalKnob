@@ -13,7 +13,7 @@ if(!$PAUSE_ON_INFO) { $global:PAUSE_ON_INFO = 0  }
 if(!$HALT_ON_INFO)  { $global:HALT_ON_INFO = 0   }
 #$global:INFO_TAG = "  INFO: "
 ################################################################################
-# dk_info(<message>)
+# dk_info(message)
 #
 #    Print a info message to the console
 #

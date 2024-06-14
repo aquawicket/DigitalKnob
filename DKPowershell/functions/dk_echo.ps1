@@ -3,7 +3,7 @@ if(!$dk_echo){ $dk_echo = 1 } else{ return }
 
 dk_load dk_color; dk_color
 ################################################################################
-# dk_echo(<message>)
+# dk_echo(message)
 #
 #	    Print a message to the console
 #

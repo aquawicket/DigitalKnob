@@ -3,7 +3,7 @@ if(!$dk_validate){ $dk_validate = 1 } else{ return }
 
 
 ###############################################################################
-# dk_validate(<variable> <code>)
+# dk_validate(variable, code)
 #
 #	@variable  - The name of a variable to test
 #	@code	   - The code to run if the variable is invalid.

@@ -3,7 +3,7 @@ if(!$dk_download){ $dk_download = 1 } else{ return }
 
 
 ####################################################################
-# dk_download(<url> <destination>)
+# dk_download(url destination)
 #
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #

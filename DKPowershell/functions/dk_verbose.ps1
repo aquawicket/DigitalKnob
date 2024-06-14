@@ -13,7 +13,7 @@ if(!$PAUSE_ON_VERBOSE) { $global:PAUSE_ON_VERBOSE = 0  }
 if(!$HALT_ON_VERBOSE)  { $global:HALT_ON_VERBOSE = 0   }
 #$VERBOSE_TAG="  VERBOSE: "
 ################################################################################
-# dk_verbose(<message>)
+# dk_verbose(message)
 #
 #    Print a warning message to the console
 #

@@ -3,7 +3,7 @@ if(!$dk_stringContains){ $dk_stringContains = 1 } else{ return }
 
 dk_load dk_info
 ##################################################################################
-# dk_stringContains(<str> <substring>)
+# dk_stringContains(str, substring)
 #
 #
 function Global:dk_stringContains($str, $substring) {

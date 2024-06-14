@@ -4,7 +4,7 @@ if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
 
 dk_load dk_stringContains
 ##################################################################################
-# dk_isUrl(<str>)
+# dk_isUrl(str)
 #
 #
 function Global:dk_isUrl($str) {

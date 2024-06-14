@@ -13,7 +13,7 @@ if(!$PAUSE_ON_ERROR) { $global:PAUSE_ON_ERROR = 1  }
 if(!$HALT_ON_ERROR)  { $global:HALT_ON_ERROR = 1   }
 #$ERROR_TAG="  ERROR: "
 ################################################################################
-# dk_error(<message>)
+# dk_error(message)
 #
 #    Print a error message to the console
 #

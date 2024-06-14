@@ -13,7 +13,7 @@ if(!$PAUSE_ON_WARNING) { $global:PAUSE_ON_WARNING = 0  }
 if(!$HALT_ON_WARNING)  { $global:HALT_ON_WARNING = 0   }
 #$WARNING_TAG="  WARNING: "
 ################################################################################
-# dk_warning(<message>)
+# dk_warning(message)
 #
 #    Print a warning message to the console
 #

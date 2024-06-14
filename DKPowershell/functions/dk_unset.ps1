@@ -3,7 +3,7 @@ if(!$dk_unset){ $dk_unset = 1 } else{ return }
 
 dk_load dk_error
 ##################################################################################
-# dk_unset(<variable>)
+# dk_unset(variable)
 #
 #
 function Global:dk_unset($variable) {

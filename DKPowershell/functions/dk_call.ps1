@@ -3,7 +3,7 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 
 dk_load dk_info
 ##################################################################################
-# dk_call(<command args>)
+# dk_call(command, args)
 #
 #
 function Global:dk_call(){
@@ -25,5 +25,4 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	
 	dk_call dk_info "test message using dk_call"
-
 }

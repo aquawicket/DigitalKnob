@@ -6,7 +6,7 @@ dk_load dk_info
 dk_load dk_error
 dk_load dk_realpath
 ##################################################################################
-# dk_assert(<expression>)
+# dk_assert(expression)
 #
 #
 function Global:dk_assert($expression) {

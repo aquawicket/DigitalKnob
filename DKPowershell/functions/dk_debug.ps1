@@ -13,7 +13,7 @@ if(!$PAUSE_ON_DEBUG) { $global:PAUSE_ON_DEBUG = 0  }
 if(!$HALT_ON_DEBUG)  { $global:HALT_ON_DEBUG = 0   }
 #$DEBUG_TAG="  DEBUG: "
 ################################################################################
-# dk_debug(<message>)
+# dk_debug(message)
 #
 #    Print a debug message to the console
 #

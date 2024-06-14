@@ -2,7 +2,7 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_copy){ $dk_copy = 1 } else{ return }
 
 #################################################################################
-# dk_copy(<from> <to>)
+# dk_copy(from to)
 #
 #	copy a file or directory to another location
 #
@@ -53,10 +53,10 @@ DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
-	dk_echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file
+	echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file
 	dk_copy ${DKDOWNLOAD_DIR}/copyMe.file ${DIGITALKNOB_DIR}/iWasCopied.txt OVERWRITE
 	
-	dk_echo "dk_copy test" > copyMe.file
+	echo "dk_copy test" > copyMe.file
 	dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
 	dk_makeDirectory ${DKDOWNLOAD_DIR}/copyMe

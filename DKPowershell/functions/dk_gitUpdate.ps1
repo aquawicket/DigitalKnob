@@ -3,7 +3,7 @@ if(!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
 
 
 ##################################################################################
-# dk_gitUpdate(<NO_CONFIRM:optional>)
+# dk_gitUpdate(NO_CONFIRM:optional)
 #
 #
 function Global:dk_gitUpdate () {

@@ -13,7 +13,7 @@ if(!$PAUSE_ON_TODO) { $global:PAUSE_ON_TODO = 0  }
 if(!$HALT_ON_TODO)  { $global:HALT_ON_TODO = 0   }
 $global:TODO_TAG = "  TODO: "
 ##################################################################################
-# dk_todo(<message>)
+# dk_todo(message)
 #
 #	Print a todo message to the console
 #

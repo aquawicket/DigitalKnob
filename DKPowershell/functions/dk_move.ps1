@@ -8,7 +8,7 @@ dk_load dk_error
 dk_load dk_remove
 dk_load dk_getDirname
 ##################################################################################
-# dk_move(<from> <to>)
+# dk_move(from to)
 #
 #	Move/Rename a file or directory to another location/name
 #

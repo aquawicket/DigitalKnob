@@ -7,7 +7,7 @@ dk_load dk_info
 dk_load dk_error
 dk_load dk_printVar
 ##################################################################################
-# dk_set(<variable> <value>)
+# dk_set(variable value)
 #
 #
 function Global:dk_set($variable, $value) {
