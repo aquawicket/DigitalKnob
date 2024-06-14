@@ -2,14 +2,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getShortPath(path RESULT)
+# dk_getShortPath(path rtn_var)
 #
 #	TODO
 #
 #	@path		- TODO
-#	@RESULT		- TODO
+#	@rtn_var		- TODO
 #
-function(dk_getShortPath path RESULT)
+function(dk_getShortPath path rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	if(WIN_HOST)
@@ -17,7 +17,7 @@ function(dk_getShortPath path RESULT)
 		execute_process(COMMAND ${DKCMAKE_DIR}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		string(REPLACE "\\" "/" path ${path})
 		string(REPLACE "\n" "" path ${path})
-		set(${RESULT} ${path} PARENT_SCOPE)
+		set(${rtn_var} ${path} PARENT_SCOPE)
 	endif()
 endfunction()
 

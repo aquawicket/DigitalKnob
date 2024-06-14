@@ -2,14 +2,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getDirectory(path RESULT)
+# dk_getDirectory(path rtn_var)
 #
 #	Get the directory portion of a path
 #
 #	@path		- The path to use
-#	@RESULT		- Returns the directory upon success: False upon error
+#	@rtn_var		- Returns the directory upon success: False upon error
 #
-function(dk_getDirectory path RESULT)
+function(dk_getDirectory path rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	string(FIND ${path} "/" index REVERSE)
@@ -19,7 +19,7 @@ function(dk_getDirectory path RESULT)
 		return() # no path dividers found
 	endif()
 	string(SUBSTRING ${path} 0 ${index} directory) 
-    set(${RESULT} ${directory} PARENT_SCOPE)
+    set(${rtn_var} ${directory} PARENT_SCOPE)
 endfunction()
 
 

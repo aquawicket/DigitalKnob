@@ -2,13 +2,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getCmakeCommandLine(RESULT)
+# dk_getCmakeCommandLine(rtn_var)
 #	
 #	TODO
 #
-#	@RESULT			- TODO
+#	@rtn_var			- TODO
 #
-function(dk_getCmakeCommandLine RESULT)
+function(dk_getCmakeCommandLine rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT CMAKE_ARGC)
@@ -31,7 +31,7 @@ function(dk_getCmakeCommandLine RESULT)
 	dk_debug(PASSED_PARAMETERS)
 	dk_wait()
 	
-	set(${RESULT} "${PASSED_PARAMETERS}" PARENT_SCOPE) #return RESULT
+	set(${rtn_var} "${PASSED_PARAMETERS}" PARENT_SCOPE) #return rtn_var
 endfunction()
 
 

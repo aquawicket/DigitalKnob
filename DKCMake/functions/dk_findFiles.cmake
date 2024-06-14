@@ -2,16 +2,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_findFiles(path pattern RESULT) RECURSE
+# dk_findFiles(path pattern rtn_var) RECURSE
 #
 #	Search for files within a path matching a pattern
 #
 #	@path				- The path to search 
 #	@pattern			- The pattern to search for
-#	@RESULT				- Returns the list of file(s) if found
+#	@rtn_var				- Returns the list of file(s) if found
 #   RECURSE (optional) 	- Search the path recursivly 
 #
-function(dk_findFiles path pattern RESULT)
+function(dk_findFiles path pattern rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	dk_getOption(RECURSE ${ARGV})
@@ -26,7 +26,7 @@ function(dk_findFiles path pattern RESULT)
 		return()
 	endif()
 	dk_printVar(files)
-	set(${RESULT} ${files} PARENT_SCOPE)
+	set(${rtn_var} ${files} PARENT_SCOPE)
 endfunction()
 
 

@@ -24,13 +24,13 @@ include_guard()
 
 
 ###############################################################################
-# dk_importVariables(url RESULT)
+# dk_importVariables(url rtn_var)
 #
 #	Rework of dk_import()
 #
 #	@url	- TODO
 #
-function(dk_importVariables PLUGIN_URL RESULT)
+function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	##### Test that we dont have any non-alphanumeric characters ######
@@ -310,7 +310,7 @@ function(dk_importVariables PLUGIN_URL RESULT)
 		#dk_printVar(${PLUGIN_VAR_PREFIX}_TAG)
 	endif()
 	
-	set(${RESULT} ${PLUGIN_IMPORT_NAME_LOWER} PARENT_SCOPE)
+	set(${rtn_var} ${PLUGIN_IMPORT_NAME_LOWER} PARENT_SCOPE)
 endfunction()
 
 

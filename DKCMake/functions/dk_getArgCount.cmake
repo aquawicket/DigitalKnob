@@ -2,16 +2,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_get_arg_count(RESULT args)
+# dk_get_arg_count(rtn_var args)
 #
-#	@RESULT  - Returns the number of args received (minus the result argument)
+#	@rtn_var  - Returns the number of args received (minus the result argument)
 #	@args 	 - a variable number of input arguments
 #
-function(dk_get_arg_count RESULT)
+function(dk_get_arg_count rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	math(EXPR ARGC "${ARGC}-1")
-	set(${RESULT} ${ARGC} PARENT_SCOPE)
+	set(${rtn_var} ${ARGC} PARENT_SCOPE)
 endfunction()
 
 

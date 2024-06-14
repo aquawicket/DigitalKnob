@@ -1,5 +1,5 @@
 ###############################################################################
-# TestReturnValue(args RESULT)
+# TestReturnValue(args rtn_var)
 #
 #	Example function that uses returns value with a supplied variable 
 #
@@ -7,11 +7,11 @@
 #		TestReturnValue("ABC" "123" 5 myResult)
 #		message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
 #
-function(TestReturnValue args RESULT)
+function(TestReturnValue args rtn_var)
 	set(args ${ARGV})
-	list(GET args -1 RESULT)
+	list(GET args -1 rtn_var)
 	list(REMOVE_AT args -1)
-	set(${RESULT} ${args} PARENT_SCOPE) #just relay the arguments
+	set(${rtn_var} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
 
 TestReturnValue("ABC" "123" 5 myResult)

@@ -2,14 +2,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getExtension(path RESULT)
+# dk_getExtension(path rtn_var)
 #
 #	Get the extension portion of a path
 #
 #	@path		- The path to use
-#	@RESULT:	- Returns the extension upon success: False upon error
+#	@rtn_var:	- Returns the extension upon success: False upon error
 #
-function(dk_getExtension path RESULT)
+function(dk_getExtension path rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	# WHY A NEW GET EXTENSION FUNCTION ?
@@ -32,7 +32,7 @@ function(dk_getExtension path RESULT)
 			set(ext ${tarext})
 		endif()
 	endif()
-    set(${RESULT} ${ext} PARENT_SCOPE)
+    set(${rtn_var} ${ext} PARENT_SCOPE)
 endfunction()
 
 

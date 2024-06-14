@@ -2,13 +2,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getCurrentDirectory(RESULT)
+# dk_getCurrentDirectory(rtn_var)
 #
 #	Retrieve the current working directory
 #
-#	@RESULT: returns the current working directory upon success. False upon error
+#	@rtn_var: returns the current working directory upon success. False upon error
 #
-#function(dk_getCurrentDirectory RESULT)
+#function(dk_getCurrentDirectory rtn_var)
 #	dk_debugFunc(${ARGV})
 
 #	if(WIN_HOST)
@@ -18,7 +18,7 @@ include_guard()
 #	endif()
 #	execute_process(COMMAND timeout /t 2 /nobreak WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})  ##wait 2 seconds for the stdout to flush
 #	#dk_printVar(output)
-#	set(${RESULT} ${output} PARENT_SCOPE)
+#	set(${rtn_var} ${output} PARENT_SCOPE)
 #endfunction()
 
 

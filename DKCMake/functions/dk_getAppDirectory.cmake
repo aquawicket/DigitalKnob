@@ -2,13 +2,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getAppDirectory(RESULT)
+# dk_getAppDirectory(rtn_var)
 #
 #	Get the OS default app directory
 #
-#	@RESULT		- TODO
+#	@rtn_var		- TODO
 #
-function(dk_getAppDirectory RESULT)
+function(dk_getAppDirectory rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	set(USE_32BIT 1)
@@ -33,7 +33,7 @@ function(dk_getAppDirectory RESULT)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
-	set(${RESULT} ${appDirectory} PARENT_SCOPE)
+	set(${rtn_var} ${appDirectory} PARENT_SCOPE)
 endfunction()
 
 

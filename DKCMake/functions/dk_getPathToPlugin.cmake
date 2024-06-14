@@ -2,12 +2,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_getPathToPlugin(plugin RESULT)
+# dk_getPathToPlugin(plugin rtn_var)
 #
 #	@plugin		- TODO
-#	@RESULT		- TODO
+#	@rtn_var		- TODO
 #
-function(dk_getPathToPlugin plugin RESULT)
+function(dk_getPathToPlugin plugin rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	list(FIND dk_disabled_list "${ARGV}" index)
@@ -20,25 +20,25 @@ function(dk_getPathToPlugin plugin RESULT)
  	#foreach(child ${children})
 		#dk_printVar(child)
 		#if(EXISTS ${DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKMAKE.cmake)
-		#	set(${RESULT} "${DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
+		#	set(${rtn_var} "${DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
 		#	return()
     	#endif()
 		#dk_debug(${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake)
 		if(EXISTS ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake)
-			set(${RESULT} "${DKIMPORTS_DIR}/${plugin}" PARENT_SCOPE)
+			set(${rtn_var} "${DKIMPORTS_DIR}/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
 		#if(EXISTS ${DIGITALKNOB_DIR}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
-		#	set(${RESULT} "${DIGITALKNOB_DIR}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
+		#	set(${rtn_var} "${DIGITALKNOB_DIR}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
 		#	return()
     	#endif()
 		if(EXISTS ${DKPLUGINS_DIR}/${plugin}/DKMAKE.cmake)
-			set(${RESULT} "${DKPLUGINS_DIR}/${plugin}" PARENT_SCOPE)
+			set(${rtn_var} "${DKPLUGINS_DIR}/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
   	#endforeach()
 	
-	set(${RESULT} "")
+	set(${rtn_var} "")
 	dk_error("Could not find ${plugin} Plugin.")
 endfunction()
 
