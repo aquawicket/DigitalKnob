@@ -11,7 +11,7 @@ function Global:dk_installCmake () {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	dk_validate HOST_OS dk_getHostTriple
+	dk_validate HOST_OS "dk_getHostTriple"
 	
 #   if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm32"    { $CMAKE_DL = "https://todo" }
     if("${HOST_OS}_${HOST_ARCH}" -eq "win_arm64")   { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip" }
@@ -26,7 +26,7 @@ function Global:dk_installCmake () {
 	$CMAKE_DL_NAME = dk_removeExtension $CMAKE_DL_FILE 
     $CMAKE_FOLDER = dk_convertToCIdentifier $CMAKE_DL_NAME 
     $CMAKE_FOLDER = dk_toLower $CMAKE_FOLDER
-	dk_validate DKTOOLS_DIR dk_getDKPaths
+	dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	$global:CMAKE = "$DKTOOLS_DIR\$CMAKE_FOLDER"
     $global:CMAKE_EXE = "$CMAKE\bin\cmake.exe"
         

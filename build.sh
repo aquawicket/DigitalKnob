@@ -1684,11 +1684,11 @@ dk_deleteTempFiles () {
 
 
 ##################################################################################
-# dk_validateGcc()
+# dk_installGcc()
 #
 #
-#dk_validateGcc () {
-#	dk_verbose "dk_validateGcc($*)"
+#dk_installGcc () {
+#	dk_verbose "dk_installGcc($*)"
 #	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"

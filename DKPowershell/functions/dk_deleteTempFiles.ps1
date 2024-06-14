@@ -15,7 +15,7 @@ function Global:dk_deleteTempFiles () {
 
 	dk_info "Deleting .TMP files . . ."
 	
-	dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.tmp -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.TMP -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 }

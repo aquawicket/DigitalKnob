@@ -21,7 +21,7 @@ dk_installPowershell () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	dk_validate HOST_OS dk_getHostTriple
+	dk_validate HOST_OS "dk_getHostTriple"
 	######################################################################################################
 	[ "${HOST_OS}_${HOST_ARCH}" = "linux_arm32" ]	&& POWERSHELL_DL=${POWERSHELL_DL_LINUX_ARM32}
 	[ "${HOST_OS}_${HOST_ARCH}" = "linux_arm64" ]	&& POWERSHELL_DL=${POWERSHELL_DL_LINUX_ARM64}
@@ -40,7 +40,7 @@ dk_installPowershell () {
 	dk_removeExtension "${POWERSHELL_DL_FILE}" POWERSHELL_FOLDER
 	dk_convertToCIdentifier "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER
 	dk_toLower "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER
-	dk_validate DKTOOLS_DIR dk_getDKPaths
+	dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	POWERSHELL=${DKTOOLS_DIR}/${POWERSHELL_FOLDER}
 	
 	[ "${HOST_OS}" = "win" ]       && POWERSHELL_EXE=${POWERSHELL}/pwsh.exe

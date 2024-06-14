@@ -46,7 +46,7 @@ dk_move () {
 
 DKTEST(){ ###############################################################################
 	
-	dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
 	echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
 	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE

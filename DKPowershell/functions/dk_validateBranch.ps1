@@ -20,7 +20,7 @@ function Global:dk_validateBranch () {
 	$FOLDER = dk_getBasename "$(pwd)"
 	$global:DKBRANCH="Development"
 	
-	dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	if(dk_pathExists "${DIGITALKNOB_DIR}\${FOLDER}\.git"){
 		$global:BRANCH=$("${GIT_EXE} rev-parse --abbrev-ref HEAD")
 		if("${BRANCH}" -eq "${FOLDER}"){

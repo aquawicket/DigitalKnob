@@ -51,7 +51,7 @@ function Global:DKTEST(){ ######################################################
 	dk_debugFunc
 	
 	
-	dk_validate DIGITALKNOB_DIR dk_getDKPaths
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
 	dk_echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
 	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE

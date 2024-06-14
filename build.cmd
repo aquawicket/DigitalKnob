@@ -1195,11 +1195,11 @@ goto:eof
 
 
 ::####################################################################
-::# dk_validateGcc()
+::# dk_installGcc()
 ::#
 ::#
-:dk_validateGcc () {
-	call:dk_verbose "dk_validateGcc(%*)"
+:dk_installGcc () {
+	call:dk_verbose "dk_installGcc(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
     call:dk_checkError

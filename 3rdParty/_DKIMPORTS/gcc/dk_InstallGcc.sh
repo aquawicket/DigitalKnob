@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . ../../../DKBash/functions/DK.sh
 
 ##################################################################################
-# dk_validateGcc()
+# dk_installGcc()
 #
 #
-dk_validateGcc () {
+dk_installGcc () {
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 

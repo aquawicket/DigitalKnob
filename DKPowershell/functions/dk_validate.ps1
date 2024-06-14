@@ -31,10 +31,10 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	
 	$myVarA="a valid variable"
-	dk_validate myVarA fill_myVarA
+	dk_validate myVarA "fill_myVarA"
 	dk_echo "myVarA = ${myVarA}"
 		
-	dk_validate myVarB fill_myVarB
+	dk_validate myVarB "fill_myVarB"
 	dk_echo "myVarB = ${myVarB}"
 	
 	dk_validate myVarC "myVarC='a string value'"

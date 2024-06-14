@@ -2,10 +2,10 @@
 call DK
 
 ::####################################################################
-::# dk_validateGcc()
+::# dk_installGcc()
 ::#
 ::#
-:dk_validateGcc () {
+:dk_installGcc () {
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

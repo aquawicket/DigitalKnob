@@ -19,7 +19,7 @@ dk_installCmake () {
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	dk_validate HOST_OS dk_getHostTriple	
+	dk_validate HOST_OS "dk_getHostTriple"	
 	######################################################################################################
 	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
 	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
@@ -56,7 +56,7 @@ dk_installCmake () {
 		dk_printVar CMAKE_FOLDER
 		
 		#[ -z ${DKTOOLS_DIR} ] && dk_getDKPaths
-		dk_validate DKTOOLS_DIR dk_getDKPaths
+		dk_validate DKTOOLS_DIR "dk_getDKPaths"
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
