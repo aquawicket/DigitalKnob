@@ -26,10 +26,10 @@ function Global:dk_info($allArgs) {
 	if($ENABLE_dk_info -ne 1){ return }
 		
 	dk_echo "${white}${INFO_TAG}${allArgs}${clr}"
-	if ($TRACE_ON_INFO){ Write-Host -Fore white *** TRACE_ON_INFO ***; dk_stacktrace }
-	if ($LINE_ON_INFO) { Write-Host -Fore white *** LINE_ON_INFO ***;  dk_showFileLine $callerpath $message }
-	if ($PAUSE_ON_INFO){ Write-Host -Fore white *** PAUSE_ON_INFO ***; dk_pause }
-	if ($HALT_ON_INFO) { Write-Host -Fore white *** HALT_ON_INFO ***;  dk_exit }
+	if ($TRACE_ON_INFO){ dk_echo "${white}*** TRACE_ON_INFO ***${clr}"; dk_stacktrace }
+	if ($LINE_ON_INFO) { dk_echo "${white}*** LINE_ON_INFO ***${clr}";  dk_showFileLine $callerpath $message }
+	if ($PAUSE_ON_INFO){ dk_echo "${white}*** PAUSE_ON_INFO ***${clr}"; dk_pause }
+	if ($HALT_ON_INFO) { dk_echo "${white}*** HALT_ON_INFO ***${clr}";  dk_exit }
 }
 
 

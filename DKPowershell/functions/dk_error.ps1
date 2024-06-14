@@ -26,10 +26,10 @@ function Global:dk_error($allArgs) {
 	if($ENABLE_dk_error -ne 1){ return }
 	
 	dk_echo "${red}${ERROR_TAG}${allArgs}${clr}"
-	if($TRACE_ON_ERROR){ Write-Host -Fore red *** TRACE_ON_ERROR ***; dk_stacktrace }
-	if($LINE_ON_ERROR) { Write-Host -Fore red *** LINE_ON_ERROR ***;  dk_showFileLine $callerpath $message }
-	if($PAUSE_ON_ERROR){ Write-Host -Fore red *** PAUSE_ON_ERROR ***; dk_pause }
-	if($HALT_ON_ERROR) { Write-Host -Fore red *** HALT_ON_ERROR ***;  dk_exit }
+	if($TRACE_ON_ERROR){ dk_echo "${red}*** TRACE_ON_ERROR ***${clr}"; dk_stacktrace }
+	if($LINE_ON_ERROR) { dk_echo "${red}*** LINE_ON_ERROR ***${clr}";  dk_showFileLine $callerpath $message }
+	if($PAUSE_ON_ERROR){ dk_echo "${red}*** PAUSE_ON_ERROR ***${clr}"; dk_pause }
+	if($HALT_ON_ERROR) { dk_echo "${red}*** HALT_ON_ERROR ***${clr}";  dk_exit }
 }
 
 

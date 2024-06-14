@@ -10,15 +10,7 @@ dk_load dk_info
 #
 function GLOBAL:dk_pause() {
 	dk_debugFunc
-#	$__FUNCTION__ = [string]($(Get-PSCallStack)[0].FunctionName).Split(':')[1]
-	if($args){ dk_error "$__FUNCTION__(): incorrect number of arguments" }
-	
-	#dk_info "test"
-	
-	Write-Output "FILENAME = $FILENAME"
-	Write-Output "LINENO = $LINENO"
-	Write-Output "FUNCTION = $FUNCTION"
-	Write-Output "ARGC = $ARGC"
+
 	Read-Host -Prompt "Press Enter to continue"
 }
 
@@ -26,6 +18,7 @@ function GLOBAL:dk_pause() {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
 	
 	dk_pause
 }

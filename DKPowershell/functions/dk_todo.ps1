@@ -26,10 +26,10 @@ function Global:dk_todo () {
 	if($ENABLE_dk_todo -ne 1){ return }
 	
 	dk_echo "${yellow}${TODO_TAG}${allArgs}${clr}"
-	if($TRACE_ON_TODO){ Write-Host -Fore yellow *** TRACE_ON_TODO *** } #& dk_stacktrace
-	if($LINE_ON_TODO) { Write-Host -Fore yellow *** LINE_ON_TODO ***  } #& dk_showFileLine "%_callerpath%" "%_message_%"
-	if($PAUSE_ON_TODO){ Write-Host -Fore yellow *** PAUSE_ON_TODO *** } #& dk_pause
-	if($HALT_ON_TODO) { Write-Host -Fore yellow *** HALT_ON_TODO ***  } #& dk_exit
+	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}" } #& dk_stacktrace
+	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}"  } #& dk_showFileLine "%_callerpath%" "%_message_%"
+	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}" } #& dk_pause
+	if($HALT_ON_TODO) { dk_echo "${yellow}*** HALT_ON_TODO ***${clr}"  } #& dk_exit
 }
 
 

@@ -25,7 +25,7 @@ function Global:dk_fixme () {
 	
 	if($ENABLE_dk_fixme -ne 1){ return }
 
-	dk_echo "${yellow}${FIXME_TAG-}${allArgs}${clr}"	
+	dk_echo "${yellow}${FIXME_TAG}${allArgs}${clr}"	
 	if($TRACE_ON_FIXME){ dk_echo "\n${red}*** TRACE_ON_FIXME ***${clr}" } #-and dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
 	if($TRACE_ON_FIXME){ dk_echo "\n${red}*** LINE_ON_FIXME ***${clr}"  } #-and dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
 	if($TRACE_ON_FIXME){ dk_echo "\n${red}*** PAUSE_ON_FIXME ***${clr}" } #-and dk_pause; true #OR PAUSE AND NOT NO_PAUSE)

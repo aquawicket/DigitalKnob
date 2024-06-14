@@ -26,15 +26,16 @@ function Global:dk_warning() {
 	if($ENABLE_dk_warning -ne 1){ return }
 
 	dk_echo "${yellow}${WARNING_TAG}${args}${clr}"
-	if($TRACE_ON_WARNING){ Write-Host -Fore yellow *** TRACE_ON_WARNING *** } #& dk_stacktrace
-	if($LINE_ON_WARNING) { Write-Host -Fore yellow *** LINE_ON_WARNING ***  } #& dk_showFileLine "%_callerpath%" "%_message_%"
-	if($PAUSE_ON_WARNING){ Write-Host -Fore yellow *** PAUSE_ON_WARNING *** } #& dk_pause
-	if($HALT_ON_WARNING) { Write-Host -Fore yellow *** HALT_ON_WARNING ***  } #& dk_exit
+	if($TRACE_ON_WARNING){ dk_echo "${yellow}*** TRACE_ON_WARNING ***${clr}" } #& dk_stacktrace
+	if($LINE_ON_WARNING) { dk_echo "${yellow}*** LINE_ON_WARNING ***${clr}"  } #& dk_showFileLine "%_callerpath%" "%_message_%"
+	if($PAUSE_ON_WARNING){ dk_echo "${yellow}*** PAUSE_ON_WARNING ***${clr}" } #& dk_pause
+	if($HALT_ON_WARNING) { dk_echo "${yellow}*** HALT_ON_WARNING ***${clr}"  } #& dk_exit
 }
 
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
 	
 	dk_warning "test dk_warning message"
 }

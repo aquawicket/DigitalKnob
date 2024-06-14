@@ -39,6 +39,8 @@ function Global:dk_printVar($var) {
 
 
 function Global:DKTEST() { ###########################################################################################
+	dk_debugFunc
+	
 	
 	$string = "a simple variable"
 	dk_printVar string
