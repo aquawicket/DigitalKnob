@@ -56,7 +56,7 @@ endif()
 
 ###### Get CURRENT_DIRECTORY ######
 #if(NOT CURRENT_DIR)
-#	get_filename_component(CURRENT_DIR ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
+#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} CURRENT_DIR)
 #	message(STATUS "CURRENT_DIR = ${CURRENT_DIR}")
 #endif()
 	
@@ -65,14 +65,14 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT CMAKE_SOURCE_DIR)
 		dk_error("CMAKE_SOURCE_DIR invalid!")
 	endif()
-	get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 	dk_printVar(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
 	if(NOT CMAKE_BINARY_DIR)
 		dk_error("CMAKE_BINARY_DIR invalid!")
 	endif()
-	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
+	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 	dk_printVar(CMAKE_BINARY_DIR)
 endif()
 

@@ -16,7 +16,7 @@ call DK
 	set "_exe_=%~2"
 	if not exist %_exe_% call dk_error "%_exe_% does not exist"
 	call dk_getBasename "%~2" _exeName_
-	call dk_getFilename "%~2" _exeFilename_
+	call dk_getBasename "%~2" _exeFilename_
 	set "_dkname_=dk_%_exeName_%"
 	
 	:: <arguments>

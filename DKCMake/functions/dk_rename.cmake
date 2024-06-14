@@ -32,7 +32,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	endif()
 	
 	# the base directory of the ${to} path must exist.    
-	get_filename_component(PARENT_DIR ${to} DIRECTORY)
+	dk_getDirname(${to} PARENT_DIR)
 	dk_makeDirectory(${PARENT_DIR})
 	
 	file(RENAME ${from} ${to})

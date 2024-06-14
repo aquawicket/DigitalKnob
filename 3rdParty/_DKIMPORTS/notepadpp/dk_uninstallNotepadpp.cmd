@@ -18,7 +18,7 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	if not defined NOTEPADPP_DL goto:eof
 	
-	call dk_getFilename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
+	call dk_getBasename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER

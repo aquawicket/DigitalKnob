@@ -2,7 +2,7 @@ if(!$DKINIT){ . $PWD\DK.ps1 }
 if(!$dk_validateGit){ $dk_validateGit = 1 } else{ return }
 
 dk_load dk_validate
-dk_load dk_getFilename
+dk_load dk_getBasename
 dk_load dk_error
 dk_load dk_convertToCIdentifier
 dk_load dk_toLower
@@ -31,7 +31,7 @@ function Global:dk_validateGit () {
     if($HOST_ARCH -eq "x86_64"){ $GIT_DL = $GIT_DL_WIN_X86_64 }
     if(!$GIT_DL){ dk_error "GIT_DL is invalid"; return ${false} }
 	  
-    $GIT_DL_FILE = dk_getFilename $GIT_DL
+    $GIT_DL_FILE = dk_getBasename $GIT_DL
 	$GIT_DL_NAME = dk_removeExtension $GIT_DL_FILE
     $GIT_FOLDER = dk_convertToCIdentifier $GIT_DL_NAME 
     $GIT_FOLDER = dk_toLower $GIT_FOLDER GIT_FOLDER

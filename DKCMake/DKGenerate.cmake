@@ -35,7 +35,7 @@ dk_info("############################################################")
 dk_info("\n")
 
 dk_getTargetTriple()
-get_filename_component(APP_NAME ${DK_PROJECT_DIR} NAME)
+dk_getBasename(${DK_PROJECT_DIR} APP_NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 set(APP_NAME ${APP_NAME}_APP)
 

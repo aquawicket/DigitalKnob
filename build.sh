@@ -808,7 +808,7 @@ dk_validateCmake () {
 		dk_info "Installing CMake from dl files"
 		dk_printVar CMAKE_IMPORT
 		
-		dk_getFilename "$CMAKE_IMPORT" CMAKE_DL_FILE
+		dk_getBasename "$CMAKE_IMPORT" CMAKE_DL_FILE
 		dk_printVar CMAKE_DL_FILE
 		
 		CMAKE_FOLDER="${CMAKE_DL_FILE%.*}"		# remove everything past last dot
@@ -1177,11 +1177,11 @@ dk_pathExists () {
 
 
 ##################################################################################
-# dk_getFilename(<path> <output>)
+# dk_getBasename(<path> <output>)
 #
 #
-dk_getFilename () {
-	dk_verbose "dk_getFilename($*)"
+dk_getBasename () {
+	dk_verbose "dk_getBasename($*)"
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	eval "$2=$(basename "$1")"

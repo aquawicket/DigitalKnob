@@ -1,3 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include_guard()
+
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -28,7 +31,7 @@ include_guard()
 if(NOT CMAKE_SOURCE_DIR)
 	message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
 endif()
-get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
 
 
@@ -36,7 +39,7 @@ message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
 if(NOT CMAKE_BINARY_DIR)
 	message(FATAL_ERROR "CMAKE_BINARY_DIR invalid!")
 endif()
-get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
+dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
 
@@ -66,16 +69,16 @@ message(STATUS "DK_BINARY_DIR = ${DK_BINARY_DIR}")
 
 ### Set DK_BINARY_OSARCH_DIR ###
 if(${CMAKE_BINARY_DIR} MATCHES "Debug$")
-	get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	dk_getDirname(${CMAKE_BINARY_DIR} DK_BINARY_OSARCH_DIR)
 elseif(${CMAKE_BINARY_DIR} MATCHES "Release$")
-	get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	dk_getDirname(${CMAKE_BINARY_DIR} DK_BINARY_OSARCH_DIR)
 else()
 	set(DK_BINARY_OSARCH_DIR ${DK_BINARY_DIR} CACHE INTERNAL "" FORCE)
 endif()
 message(STATUS "DK_BINARY_OSARCH_DIR = ${DK_BINARY_OSARCH_DIR}")
 	
 ### Set DK_BINARY_OSARCH ###
-get_filename_component(DK_BINARY_OSARCH ${DK_BINARY_OSARCH_DIR} NAME)     
+dk_getBasename(${DK_BINARY_OSARCH_DIR} DK_BINARY_OSARCH)     
 message(STATUS "DK_BINARY_OSARCH = ${DK_BINARY_OSARCH}")
 
 ### Set DK_BINARY_OS ###
@@ -90,7 +93,7 @@ string(SUBSTRING "${DK_BINARY_OSARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
 message(STATUS "DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
 
 ### Set DK_PROJECT_DIR ###
-get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
+dk_getDirname(${DK_BINARY_OSARCH_DIR} DK_PROJECT_DIR)
 message(STATUS "DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 	
 	
@@ -98,15 +101,15 @@ if(1)
 	
 # android_arm32
 if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
-	set(ANDROID_NDK 					"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620" 						CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_GENERATOR 			"Unix Makefiles" 														CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe" 					CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_ANDROID_ABI			"armeabi-v7a" 															CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_ANDROID_PLATFORM 	"31" 																	CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake" 					CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_ANDROID_TOOLCHAIN 	"clang" 																CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_ANDROID_STL 		"c++_static" 															CACHE INTERNAL "" FORCE)
-	set(ANDROID_NDK_CXX_FLAGS 			"-std=c++1z -frtti -fexceptions" 										CACHE INTERNAL "" FORCE)
+	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
+	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
+	dk_set(ANDROID_NDK_ANDROID_ABI			"armeabi-v7a")
+	dk_set(ANDROID_NDK_ANDROID_PLATFORM 	"31")
+	dk_set(ANDROID_NDK_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+	dk_set(ANDROID_NDK_ANDROID_TOOLCHAIN 	"clang")
+	dk_set(ANDROID_NDK_ANDROID_STL 			"c++_static")
+	dk_set(ANDROID_NDK_CXX_FLAGS 			"-std=c++1z -frtti -fexceptions")
 	
 	
 	set(CMAKE_ANDROID_NDK 				"${ANDROID_NDK}" 														CACHE INTERNAL "" FORCE)

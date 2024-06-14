@@ -17,7 +17,7 @@ call ../../../DKBatch/functions/DK.cmd
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set WINDOWS_TERMINAL_DL "https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip"
 	if not defined WINDOWS_TERMINAL_DL call dk_error "WINDOWS_TERMINAL_DL is invalid"
 	
-	call dk_getFilename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE
+	call dk_getBasename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE
 	call dk_removeExtension %WINDOWS_TERMINAL_DL_FILE% WINDOWS_TERMINAL_FOLDER
 	call dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	call dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER

@@ -12,7 +12,7 @@ include_guard()
 function(dk_validatePath path RESULT)
 	dk_debugFunc(${ARGV})
 	
-	get_filename_component(path ${path} ABSOLUTE)
+	dk_getFullPath(${path} path)
 	set(${RESULT} ${path} PARENT_SCOPE)
 endfunction()
 

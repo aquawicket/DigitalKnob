@@ -47,8 +47,8 @@ set "KEEP_CONSOLE_OPEN=1"
 	call dk_load dk_set
 	call dk_load dk_getDirname
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
-	call dk_load dk_getFilename
-	call dk_getFilename %DKSCRIPT_PATH% DKSCRIPT_NAME
+	call dk_load dk_getBasename
+	call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	
 	
 	

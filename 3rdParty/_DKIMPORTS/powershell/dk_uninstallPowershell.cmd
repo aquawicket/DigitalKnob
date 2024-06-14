@@ -18,7 +18,7 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	if not defined POWERSHELL_DL goto:eof
 	
-	call dk_getFilename %POWERSHELL_DL% POWERSHELL_DL_FILE
+	call dk_getBasename %POWERSHELL_DL% POWERSHELL_DL_FILE
 	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
 	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER

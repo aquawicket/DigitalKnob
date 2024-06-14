@@ -29,9 +29,9 @@ function(dk_install plugin) #PATCH
 	#endif()
 	
 	#if(NOT plugin)
-	#	get_filename_component(plugin ${CMAKE_CURRENT_LIST_DIR} NAME)
+	#	dk_getBasename(${CMAKE_CURRENT_LIST_DIR} plugin)
 	#else()
-	#	get_filename_component(plugin ${plugin} NAME)
+	#	dk_getBasename(${plugin} plugin)
 	#endif()
 	
 	#dk_toLower(${plugin} plugin_lower)

@@ -12,7 +12,7 @@ function(dk_getTargetTriple)
 	
 	
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
-		get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
+		dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 		dk_printVar(CMAKE_BINARY_DIR)
 		
 		### Get DK_TARGET_DIR ###
@@ -20,7 +20,7 @@ function(dk_getTargetTriple)
 		dk_printVar(DK_TARGET_DIR)
 		
 		### Get DK_TARGET_FOLDER ###
-		get_filename_component(DK_TARGET_FOLDER ${DK_TARGET_DIR} NAME)     
+		dk_getBasename(${DK_TARGET_DIR} DK_TARGET_FOLDER)     
 		dk_printVar(DK_TARGET_FOLDER)
 		
 		### Get DK_TARGET_OS_DIR
@@ -29,12 +29,12 @@ function(dk_getTargetTriple)
 			dk_set(DK_TARGET_TYPE Debug)
 			dk_set(DEBUG ON)
 			dk_set(RELEASE OFF)
-			get_filename_component(DK_TARGET_OS_DIR ${DK_TARGET_DIR} DIRECTORY)
+			dk_getDirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
 		elseif(${DK_TARGET_DIR} MATCHES "Release$")
 			dk_set(DK_TARGET_TYPE Release)
 			dk_set(DEBUG OFF)
 			dk_set(RELEASE ON)
-			get_filename_component(DK_TARGET_OS_DIR ${DK_TARGET_DIR} DIRECTORY)
+			dk_getDirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
 		else()
 			dk_set(DK_TARGET_OS_DIR ${CMAKE_BINARY_DIR})
 		endif()
@@ -42,7 +42,7 @@ function(dk_getTargetTriple)
 		dk_printVar(DK_TARGET_TYPE)
 		
 		### Get DK_TARGET_OS_FOLDER
-		get_filename_component(DK_TARGET_OS_FOLDER ${DK_TARGET_OS_DIR} NAME)     
+		dk_getBasename(${DK_TARGET_OS_DIR} DK_TARGET_OS_FOLDER)     
 		dk_printVar(DK_TARGET_OS_FOLDER)
 		
 		dk_set(DK_TARGET_OS ${DK_TARGET_OS_FOLDER})
@@ -111,7 +111,7 @@ function(dk_getTargetTriple)
 		dk_printVar(DK_TARGET_OS_ARCH)
 
 		### Set DK_PROJECT_DIR ###
-		get_filename_component(DK_PROJECT_DIR ${DK_TARGET_OS_DIR} DIRECTORY)
+		dk_getDirname(${DK_TARGET_OS_DIR} DK_PROJECT_DIR)
 		dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
 		dk_printVar(DK_PROJECT_DIR)
 

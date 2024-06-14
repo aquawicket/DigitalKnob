@@ -36,13 +36,13 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	endif()
 	dk_printVar(src_path)
 	
-	get_filename_component(src_dir ${src_path} DIRECTORY)
+	dk_getDirname(${src_path} src_dir)
 	if(NOT src_dir)
 		dk_error("src_dir is invalid")
 	endif()
 	dk_printVar(src_dir)
 	
-	get_filename_component(src_filename ${src_path} NAME)
+	dk_getBasename(${src_path} src_filename)
 	if(NOT src_filename)
 		dk_error("src_filename is invalid")
 	endif()
@@ -66,7 +66,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	endif()
 	dk_printVar(dest_path)
 	
-	get_filename_component(dest_dir ${dest_path} DIRECTORY)
+	dk_getDirname(${dest_path} dest_dir)
 	if(NOT dest_dir)
 		dk_error("dest_dir is invalid")
 	endif()
@@ -77,7 +77,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	dk_set(CURRENT_DIR ${dest_dir})
 	dk_printVar(dest_dir)
 	
-	get_filename_component(dest_filename ${dest_path} NAME)
+	dk_getBasename(${dest_path} dest_filename)
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()
@@ -142,6 +142,7 @@ dk_createOsMacros("dk_download")
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
-	dk_todo()
+	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
+	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
 
 endfunction(DKTEST)

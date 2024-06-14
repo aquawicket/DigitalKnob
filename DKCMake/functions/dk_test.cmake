@@ -7,8 +7,11 @@ include_guard()
 #
 function(dk_test)
 	dk_debugFunc(${ARGV})
+	if(NOT ${ARGC} EQUAL 0)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+	endif()
 	
-	message("dk_test() sleeping for ${ARGV0} seconds")
+	dk_info("dk_test() sleeping for ${ARGV0} seconds")
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${ARGV0})
 endfunction()
 
@@ -19,7 +22,6 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
 	dk_debugFunc(${ARGV})
 	
 	dk_test(3)

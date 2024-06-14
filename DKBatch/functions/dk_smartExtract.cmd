@@ -19,7 +19,7 @@ call DK
 	call dk_getDirname "%src_fullpath%" src_directory
 	call dk_printVar src_directory
 	
-	call dk_getFilename "%src_fullpath%" src_filename
+	call dk_getBasename "%src_fullpath%" src_filename
 	call dk_printVar src_filename
 	
 	call dk_getBasename "%src_filename%" src_folder
@@ -31,7 +31,7 @@ call DK
 	call dk_getDirname "%dest_fullpath%" dest_directory
 	call dk_printVar dest_directory
 	
-	call dk_getFilename "%dest_fullpath%" dest_folder
+	call dk_getBasename "%dest_fullpath%" dest_folder
 	call dk_printVar dest_folder
 	
 ::	if not exist "%dest_fullpath%" (

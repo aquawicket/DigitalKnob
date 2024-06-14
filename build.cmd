@@ -1074,7 +1074,7 @@ goto:eof
     if "%HOST_ARCH%"=="x86" set GIT_DL=%GIT_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" set GIT_DL=%GIT_DL_WIN_X86_64%
         
-    call:dk_getFilename %GIT_DL% GIT_DL_FILE
+    call:dk_getBasename %GIT_DL% GIT_DL_FILE
     ::call:dk_printVar GIT_DL_FILE
 
     set GIT_FOLDER=%GIT_DL_FILE:~0,-4%
@@ -1139,7 +1139,7 @@ goto:eof
     if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  set "CMAKE_DL=%CMAKE_DL_LINUX_ARM64%"
     call:dk_printVar CMAKE_DL
     
-    call:dk_getFilename %CMAKE_DL% CMAKE_DL_FILE
+    call:dk_getBasename %CMAKE_DL% CMAKE_DL_FILE
     call:dk_printVar CMAKE_DL_FILE
         
     set CMAKE_FOLDER=%CMAKE_DL_FILE:~0,-4%
@@ -1547,18 +1547,18 @@ goto:eof
 
 
 ::################################################################################
-::# dk_getFilename(path rtn_var)
+::# dk_getBasename(path rtn_var)
 ::#
 ::#
-:dk_getFilename () {
-	call:dk_verbose "dk_getFilename(%*)"
+:dk_getBasename () {
+	call:dk_verbose "dk_getBasename(%*)"
 	
     if [%1] == [] (
-        echo "ERROR: dk_getFilename() parameter 1 is invalid"
+        echo "ERROR: dk_getBasename() parameter 1 is invalid"
         goto:eof
     )
     if [%2] == [] (
-        echo "ERROR: dk_getFilename() parameter 2 is invalid"
+        echo "ERROR: dk_getBasename() parameter 2 is invalid"
         goto:eof
     )
     
@@ -1567,7 +1567,7 @@ goto:eof
         set val=%%~nxF
     )
     
-    ::echo dk_getFilename(%*) -^> %2 = %val%
+    ::echo dk_getBasename(%*) -^> %2 = %val%
     call:dk_checkError
 goto:eof
 

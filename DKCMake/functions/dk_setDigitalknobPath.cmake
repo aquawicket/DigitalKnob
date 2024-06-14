@@ -11,7 +11,7 @@ function(dk_setDigitalknobPath)
 	
 	
 	# Set the DIGITALKNOB_DIR environment variable 
-	get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	dk_getFullPath(${CMAKE_SOURCE_DIR} path)
 	string(FIND "${path}" "digitalknob" pos)
 	string(SUBSTRING ${path} 0 ${pos} path)
 	set(DIGITALKNOB_DIR ${path}digitalknob CACHE INTERNAL "")

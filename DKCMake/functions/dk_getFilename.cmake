@@ -30,7 +30,7 @@ function(dk_getFilename path RESULT)
 	
 	if(NOT filename)
 		dk_warning("dk_getFilename(${path}) failed: Now using get_filename_component() to retrieve the filename")
-		get_filename_component(filename "${path}" NAME)
+		dk_getBasename("${path}" filename)
 		dk_printVar(filename)
 	endif()
 	

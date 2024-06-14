@@ -14,7 +14,7 @@ endif()
 
 ### Get GIT variables ###
 if(GIT_DL)
-	get_filename_component(GIT_DL_FILE ${GIT_DL} NAME)
+	dk_getBasename(${GIT_DL} GIT_DL_FILE)
 	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
 	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
 	dk_toLower(${GIT_FOLDER} GIT_FOLDER)

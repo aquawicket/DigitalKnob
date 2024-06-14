@@ -13,7 +13,7 @@ call "../../../DKBatch/functions/DK.cmd"
 	if "%HOST_OS%"=="win"     call dk_set NUGET_DL "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 
 	
-	call dk_getFilename %NUGET_DL% NUGET_DL_FILE
+	call dk_getBasename %NUGET_DL% NUGET_DL_FILE
 	call dk_removeExtension %NUGET_DL_FILE% NUGET_NAME
 	call dk_convertToCIdentifier %NUGET_NAME% NUGET_FOLDER
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"

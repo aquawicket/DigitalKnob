@@ -3,21 +3,22 @@
 
 
 ##################################################################################
-# dk_getFilename(path, rtn_var)
+# dk_getBasename(path, rtn_var)
 #
 #
-dk_getFilename () {
+dk_getBasename () {
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	eval "$2=$(basename "$1")"
-	dk_printVar $2
+	basename=$(basename "$1")
+	dk_printVar basename
+	eval "$2=$basename"
 }
 
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	dk_getFilename "/path/to/a/filename.txt" filename
-	dk_echo "filename = ${filename}"
+	dk_getBasename "/path/to/a/filename.txt" basename
+	dk_echo "basename = ${basename}"
 }

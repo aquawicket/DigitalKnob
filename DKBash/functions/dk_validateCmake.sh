@@ -45,7 +45,7 @@ dk_validateCmake () {
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
-		dk_getFilename "${CMAKE_DL}" CMAKE_DL_FILE
+		dk_getBasename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_printVar CMAKE_DL_FILE
 		
 		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER

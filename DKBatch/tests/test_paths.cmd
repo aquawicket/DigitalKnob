@@ -66,7 +66,7 @@ call "../functions/DK.cmd"
 	call dk_getFileSize "%IN%" filesize
 	echo filesize   = %filesize% bytes
 	
-	call dk_getFilename "%IN%" fullname
+	call dk_getBasename "%IN%" fullname
 	echo fullname   = %fullname%
 	
 	call dk_getDirname "%IN%" directory
