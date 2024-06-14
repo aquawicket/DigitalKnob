@@ -7,6 +7,7 @@ dk_load dk_pathExists
 dk_load dk_error
 dk_load dk_remove
 dk_load dk_getDirname
+dk_load dk_fileWrite
 ##################################################################################
 # dk_move(from to)
 #
@@ -38,9 +39,9 @@ function Global:dk_move($_from_, $_to_) {
 	}
 	
 	# the base directory of the $_to_ path must exist.    
-	$_parent_dir_ = dk_getDirname "$_to_"
+	$_parent_dir_ = dk_getDirname "${_to_}"
 	dk_printVar _parent_dir_
-	dk_makeDirectory "$_parent_dir_"
+	dk_makeDirectory ${_parent_dir_}
 	
 	mv "$_from_" "$_to_"
 }
@@ -53,10 +54,10 @@ function Global:DKTEST(){ ######################################################
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
-	dk_echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
+	dk_fileWrite $DKDOWNLOAD_DIR/moveMe.file "dk_move test"
 	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE
 	
-	dk_echo "dk_move test" > moveMe.file
+	dk_fileWrite moveMe.file "dk_move test"
 	dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
 	dk_makeDirectory $DKDOWNLOAD_DIR/moveMe

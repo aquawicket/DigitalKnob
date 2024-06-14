@@ -3,7 +3,7 @@ if(!$dk_fixme){ $dk_fixme = 1 } else{ return }
 
 dk_load dk_echo
 dk_load dk_stacktrace
-#dk_load dk_showFileLine
+dk_load dk_showFileLine
 dk_load dk_pause
 dk_load dk_exit
 if(!$ENABLE_dk_fixme){ $global:ENABLE_dk_fixme = 1 }
