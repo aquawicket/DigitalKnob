@@ -63,7 +63,7 @@ function Global:dk_gitCommit () {
 	}
 	
 	dk_echo
-	dk_info "git commit \"${message}\""
+	dk_info "git commit `"${message}`""
 	dk_confirm -or return 0
 	
 	dk_call ${GIT_EXE} commit -a -m "${message}"
