@@ -14,7 +14,7 @@ function(dk_importDownload url) #install_path #PATCH
 	
 	dk_debug("dk_importDownload(${ARGV})")
 	#dk_wait()
-	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
+	dk_replaceAll(${url} "/" ";" url_list) # split into list converting / to divider ;
 	#foreach(item ${url_list})
 	#	dk_verbose(item)
 	#endforeach()

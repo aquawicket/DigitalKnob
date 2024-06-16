@@ -28,5 +28,5 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(APPEND myArray "e")
 	
 	dk_arrayJoin(myArray "," myString)
-	dk_echo("myString = ${myString}")
+	dk_info("myString = ${myString}")
 endfunction(DKTEST)

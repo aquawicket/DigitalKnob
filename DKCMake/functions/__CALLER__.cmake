@@ -22,11 +22,11 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	__CALLER__(CALLER)
-	dk_echo("\${CALLER} = ${CALLER}")
+	dk_info("\${CALLER} = ${CALLER}")
 	
 	__CALLER__(CALLER_0 0)
-	dk_echo("\${CALLER_0} = ${CALLER_0}")
+	dk_info("\${CALLER_0} = ${CALLER_0}")
 
 	__CALLER__(CALLER_1 1)
-	dk_echo("\${CALLER_1} = ${CALLER_1}")
+	dk_info("\${CALLER_1} = ${CALLER_1}")
 endfunction(DKTEST)

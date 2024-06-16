@@ -31,23 +31,26 @@ dk_depend(lunasvg)
 dk_depend(rlottie)
 
 # rmlui sample dependencies
-dk_depend(cfgmgr32)
-dk_depend(imm32)
-dk_depend(libjpeg-turbo)
-dk_depend(libpng)
-dk_depend(pthread)
-dk_depend(sdl)
-dk_depend(sdl_image)
-dk_depend(setupapi)
-dk_depend(sfml)
-dk_depend(shlwapi)
-dk_depend(tiff)
-dk_depend(version)
-dk_depend(winmm)
-dk_depend(xz)
-dk_depend(zlib)
-dk_depend(zstd)
-
+set(RMLUI_SAMPLES OFF)
+if(RMLUI_SAMPLES)
+	dk_depend(cfgmgr32)
+	dk_depend(imm32)
+	dk_depend(libjpeg-turbo)
+	dk_depend(libpng)
+	dk_depend(pthread)
+	dk_depend(sdl)
+	dk_depend(sdl_image)
+	dk_depend(setupapi)
+	dk_depend(sfml)
+	dk_depend(shlwapi)
+	dk_depend(tiff)
+	dk_depend(version)
+	dk_depend(winmm)
+	dk_depend(xz)
+	dk_depend(zlib)
+	dk_depend(zstd)
+	set(RMLUI_BACKEND SDL_SDLrenderer)
+endif()
 
 
 set(rmlui_all 0)
@@ -229,8 +232,8 @@ if(MSVC)
 else()									
 	dk_configure(
 		${RMLUI}
-		#-DRMLUI_BACKEND=SDL_SDLrenderer
-		-DRMLUI_SAMPLES=OFF
+		-DRMLUI_BACKEND=${RMLUI_BACKEND}
+		-DRMLUI_SAMPLES=${RMLUI_SAMPLES}
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
 		#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
@@ -260,23 +263,23 @@ endif()
 if(rmlui_all)
 	dk_build(${RMLUI})
 else()
-	if(rmlui_core OR rmlui_all)
+	if(rmlui_core)
 		dk_build(${RMLUI} rmlui_core)
 	endif()
 
-	if(rmlui_debugger OR rmlui_all)
+	if(rmlui_debugger)
 		dk_build(${RMLUI} rmlui_debugger)
 	endif()
 	
-	if(rmlui_shell OR rmlui_all)
+	if(rmlui_shell)
 		dk_build(${RMLUI} shell)
 	endif()
 	
-	if(rmlui_treeview OR rmlui_all)
+	if(rmlui_treeview)
 		dk_build(${RMLUI} treeview)
 	endif()
 	
-	if(rmlui_invaders OR rmlui_all)
+	if(rmlui_invaders)
 		dk_build(${RMLUI} invaders)
 	endif()
 endif()

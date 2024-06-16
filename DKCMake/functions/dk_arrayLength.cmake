@@ -35,14 +35,14 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(APPEND myArray "element 3")
 
 	dk_arrayLength(myArray lengthA)
-	dk_echo("lengthA = ${lengthA}")
+	dk_info("lengthA = ${lengthA}")
 	
 	dk_arrayLength("myArray" lengthB)
-	dk_echo("lengthB = ${lengthB}")
+	dk_info("lengthB = ${lengthB}")
 	
 #	dk_arrayLength(${myArray} lengthC)    #unable to send expanded arrays
-#	dk_echo("lengthC = ${lengthC}")
+#	dk_info("lengthC = ${lengthC}")
 	
 	dk_arrayLength("${myArray}" lengthD)
-	dk_echo("lengthD = ${lengthD}")
+	dk_info("lengthD = ${lengthD}")
 endfunction(DKTEST)

@@ -18,7 +18,7 @@ function(dk_importGit url) #branch #id #PATCH
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	DKASSERT(GIT_EXE)
 	
-	string(REPLACE "/" ";" url_list ${url})  #split url path into list
+	dk_replaceAll(${url} "/" ";" url_list)  #split url path into list
 	foreach(item ${url_list})
 		dk_verbose(item)
 	endforeach()

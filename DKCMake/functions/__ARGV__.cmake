@@ -35,12 +35,12 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	__ARGV__(ARGV)
-	dk_echo("\${ARGV} = ${ARGV}")
+	dk_info("\${ARGV} = ${ARGV}")
 	
 	__ARGV__(ARGV_0 0)
-	dk_echo("\${ARGV_0} = ${ARGV_0}")
+	dk_info("\${ARGV_0} = ${ARGV_0}")
 	
 	__ARGV__(ARGV_1 1)
-	dk_echo("\${ARGV_1} = ${ARGV_1}")
+	dk_info("\${ARGV_1} = ${ARGV_1}")
 
 endfunction(DKTEST)

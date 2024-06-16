@@ -24,7 +24,7 @@ function(dk_msys2Bash)
 	endif()
 	
 	if(NOT ${NOECHO})
-		string(REPLACE ";" " " ARGV_STRING "${ARGV}")
+		dk_replaceAll("${ARGV}" ";" " " ARGV_STRING)
 		dk_info("\n${clr}${magenta} dk_msys2Bash> ${ARGV_STRING}\n")
 	endif()
 

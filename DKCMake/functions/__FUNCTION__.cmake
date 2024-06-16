@@ -22,12 +22,12 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	__FUNCTION__(_FUNCTION_)
-	dk_echo("\${_FUNCTION_} = ${_FUNCTION_}")
+	dk_info("\${_FUNCTION_} = ${_FUNCTION_}")
 	
 	__FUNCTION__(_FUNCTION_0 0)
-	dk_echo("\${_FUNCTION_0} = ${_FUNCTION_0}")
+	dk_info("\${_FUNCTION_0} = ${_FUNCTION_0}")
 
 	__FUNCTION__(_FUNCTION_1 1)
-	dk_echo("\${_FUNCTION_1} = ${_FUNCTION_1}")
+	dk_info("\${_FUNCTION_1} = ${_FUNCTION_1}")
 
 endfunction(DKTEST)

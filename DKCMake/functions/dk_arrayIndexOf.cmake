@@ -27,20 +27,20 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(APPEND myArray "e")
 	
 	dk_arrayIndexOf(myArray "a" indexA)
-	dk_echo("indexA = ${indexA}")
+	dk_info("indexA = ${indexA}")
 	
 	dk_arrayIndexOf(myArray "b" indexB)
-	dk_echo("indexB = ${indexB}")
+	dk_info("indexB = ${indexB}")
 	
 	dk_arrayIndexOf(myArray "c" indexC)
-	dk_echo("indexC = ${indexC}")
+	dk_info("indexC = ${indexC}")
 	
 	dk_arrayIndexOf(myArray "d" indexD)
-	dk_echo("indexD = ${indexD}")
+	dk_info("indexD = ${indexD}")
 	
 	dk_arrayIndexOf(myArray "e" indexE)
-	dk_echo("indexE = ${indexE}")
+	dk_info("indexE = ${indexE}")
 	
 	dk_arrayIndexOf(myArray "nonExistant" indexN)
-	dk_echo("indexN = ${indexN}")
+	dk_info("indexN = ${indexN}")
 endfunction(DKTEST)

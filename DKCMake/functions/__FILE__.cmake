@@ -22,12 +22,12 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	__FILE__(FILE)
-	dk_echo("\${FILE} = ${FILE}")
+	dk_info("\${FILE} = ${FILE}")
 	
 	__FILE__(FILE_0 0)
-	dk_echo("\${FILE_0} = ${FILE_0}")
+	dk_info("\${FILE_0} = ${FILE_0}")
 
 	__FILE__(FILE_1 1)
-	dk_echo("\${FILE_1} = ${FILE_1}")
+	dk_info("\${FILE_1} = ${FILE_1}")
 
 endfunction(DKTEST)

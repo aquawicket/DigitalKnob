@@ -25,5 +25,5 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	
 	dk_getBasename("/path/to/a/filename.txt" basename)
-	dk_echo("basename = ${basename}")
+	dk_info("basename = ${basename}")
 endfunction()

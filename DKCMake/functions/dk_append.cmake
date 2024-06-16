@@ -29,7 +29,8 @@ dk_createOsMacros("dk_append")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
 
 endfunction(DKTEST)
