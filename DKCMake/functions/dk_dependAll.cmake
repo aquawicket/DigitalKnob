@@ -38,7 +38,7 @@ function(dk_dependAll)
 	# To exclude libraries, use dk_disable(lib) in your app DKMAKE.cmake file or in DKDisabled.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	dk_fileWrite(${DK_PROJECT_DIR}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
-	unset(DEPENDALL_FILE)
+	dk_unset(DEPENDALL_FILE)
 	dk_load(${DK_PROJECT_DIR}/DEPEND_ALL.txt)
 endfunction()
 

@@ -20,9 +20,9 @@ function(dk_runDepends plugin)
 	dk_verbose("FOUND ${plugin} DKMAKE.cmake at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
-	unset(disable_script)
-	unset(depends_script)
-	unset(index)
+	dk_unset(disable_script)
+	dk_unset(depends_script)
+	dk_unset(index)
 	
 	
 	#set(keepCommands "if;else;find_library;return;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")

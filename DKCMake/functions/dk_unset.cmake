@@ -4,6 +4,8 @@ include_guard()
 ###############################################################################
 # dk_unset(variable)
 #
+#	https://cmake.org/cmake/help/latest/command/unset.html
+#
 #	Remove a variable definition. will become undefined. 
 #
 #	@variable	- The name of the variable to unset
@@ -11,8 +13,10 @@ include_guard()
 function(dk_unset variable)
 	dk_debugFunc(${ARGV})
 	
-	set(${variable} "" CACHE INTERNAL "")
+	#set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
+	unset(${variable} PARENT_SCOPE)
+	unset(${variable} CACHE)
 endfunction()
 dk_createOsMacros("dk_unset")
 

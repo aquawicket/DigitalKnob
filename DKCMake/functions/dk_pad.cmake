@@ -20,7 +20,7 @@ function(dk_pad str padchar length rtn_var)
 
 	if(strlen GREATER 0)
 		if(${CMAKE_VERSION} VERSION_LESS "3.14")
-			unset(_pad)
+			dk_unset(_pad)
 			foreach(i RANGE 1 ${strlen}) # inclusive
 				string(APPEND _pad ${padchar})
 			endforeach()

@@ -15,14 +15,14 @@ function(dk_getHostTriple)
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		set(CMAKE_HOST_WIN32 1)
-		unset(CMAKE_HOST_UNIX)
-		unset(CMAKE_HOST_APPLE)
+		dk_unset(CMAKE_HOST_UNIX)
+		dk_unset(CMAKE_HOST_APPLE)
 	endif()
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
 		set(CMAKE_HOST_WIN32 1)
-		unset(CMAKE_HOST_UNIX)
-		unset(CMAKE_HOST_APPLE)
+		dk_unset(CMAKE_HOST_UNIX)
+		dk_unset(CMAKE_HOST_APPLE)
 	endif()
 	
 	###### Set <HOST>_HOST variables ######
