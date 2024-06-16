@@ -20,7 +20,7 @@ function(dk_includes variable find rtn_var)
 		set(includes 0)
 	endif()
 	
-	#dk_printVar(includes)
+	dk_printVar(includes)
 	set(${rtn_var} ${includes} PARENT_SCOPE)
 endfunction()
 
