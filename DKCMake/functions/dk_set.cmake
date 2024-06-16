@@ -21,14 +21,7 @@ function(dk_set variable)# value)
 		return()
 	endif()
 
-	#set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	set(${ARGV} CACHE INTERNAL "")
-#	###### print library versions ############
-#	dk_includes(${variable} "_VERSION" includes)
-#	if(${includes})
-#		dk_debug(${variable})
-#	endif()
-#	##########################################
+	set(${ARGV} CACHE INTERNAL "" FORCE)
 	dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")
@@ -38,7 +31,8 @@ dk_createOsMacros("dk_set")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
-	dk_todo()
-
+	dk_debugFunc(${ARGV})
+	
+	dk_set(myVariable "this is the string value of myVariable")
+	dk_info("myVariable = ${myVariable}")
 endfunction(DKTEST)
