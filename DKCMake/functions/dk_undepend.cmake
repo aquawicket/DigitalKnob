@@ -27,12 +27,11 @@ function(dk_undepend plugin)
 #		endif()
 #	endif()
 	
-	#dk_dump(plugin)
 	# remove from ${dkdepend_list}
-	list(FIND dkdepend_list ${plugin} index)
-	if(${index} GREATER -1)
-		# is was found, now remove
-		list(REMOVE_ITEM dkdepend_list ${plugin})
+	#list(FIND dkdepend_list ${plugin} index)
+	#if(${index} GREATER -1)
+	if(plugin IN_LIST dkdepend_list)
+		list(REMOVE_ITEM dkdepend_list ${plugin}) # it was found, now remove
 	endif()
 	
 	dk_info("DISABLING ${ARGV}")

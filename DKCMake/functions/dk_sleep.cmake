@@ -9,14 +9,17 @@ include_guard()
 function(dk_sleep seconds)
 	dk_debugFunc(${ARGV})
 	
+	if(ARGN)
+		dk_info("...${ARGN}")
+	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
-endfunction()
+endfunction(dk_sleep)
 
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
-	dk_todo()
-
+	dk_debugFunc(${ARGV})
+	
+	dk_sleep(5)
 endfunction(DKTEST)

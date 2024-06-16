@@ -11,9 +11,7 @@ include_guard()
 function(dk_notice msg)
 	dk_debugFunc(${ARGV})
 	
-	#dk_updateLogInfo()
-	#message(NOTICE "${H_black}${STACK_HEADER}${clr}${B_yellow} ${msg} ${clr}")
-	message(NOTICE "${B_yellow}${msg}${clr}")
+	message(NOTICE "${Yellow}${msg}${clr}")
 endfunction()
 
 
@@ -21,7 +19,7 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

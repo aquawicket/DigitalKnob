@@ -182,8 +182,7 @@ function(dk_install plugin) #PATCH
 	
 	string(FIND "${ARGN}" "PATCH" index)
 	if(${index} GREATER -1)
-	#dk_includes("${ARGN}" "PATCH" index)
-	#if(${index})
+	#if("PATCH" IN_LIST ARGN)
 		dk_patch(${plugin} ${dest_path})
 	else()
 		file(GLOB ITEMS ${DKIMPORTS_DIR}/${plugin}/*)

@@ -12,9 +12,8 @@ function(dk_depend plugin)
 	dk_debugFunc(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
-		list(FIND init_list ${plugin} index)
-		if(${index} GREATER -1)
-			#dk_debug("${plugin} is allready in the init_list")
+		if(plugin IN_LIST init_list)
+			dk_debug("${plugin} is allready in init_list")
 			return()  #plugin is already in the init_list
 		endif()
 		dk_append(init_list "${plugin}")
@@ -24,14 +23,12 @@ function(dk_depend plugin)
 		#return()
 	endif()
 	
-	
 #	if(${ARGC} GREATER 1)
 #		dk_info(ARGV)
 #		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable plugin ARGV, no value
 #	endif()
 
-	list(FIND dk_disabled_list ${plugin} index)
-	if(${index} GREATER -1)
+	if(plugin IN_LIST dk_disabled_list)
 		list(FIND DISABLED_LIBS ${plugin} indexb)
 		if(${indexb} LESS 0)
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
@@ -57,8 +54,8 @@ function(dk_depend plugin)
 #		endif()
 #	endif()
 		
-	list(FIND dkdepend_list ${plugin} index)
-	if(${index} GREATER -1)
+	if(plugin IN_LIST dkdepend_list)
+		dk_notice("${plugin} already in dkdepend_list")
 		return()  #library is already in the list
 	endif()
 	

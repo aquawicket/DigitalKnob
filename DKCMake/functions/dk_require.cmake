@@ -11,8 +11,12 @@ include_guard()
 #
 # FIXME
 macro(dk_require plugin)
-	list(FIND dk_disabled_list ${plugin} index)
-	if(${index} GREATER -1)
+	dk_debugFunc(${ARGV})
+	
+	
+	#list(FIND dk_disabled_list ${plugin} index)
+	#if(${index} GREATER -1)
+	if(plugin IN_LIST dk_disabled_list)
 		dk_getBasename(${CMAKE_CURRENT_LIST_DIR} Lib)
 		dk_notice("${Lib} requires ${plugin} which is DISABLED")
 		dk_notice("DISABLING ${Lib}")
@@ -27,7 +31,7 @@ endmacro()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

@@ -12,12 +12,12 @@ function(dk_lib lib_path)
 	dk_debugFunc(${ARGV})
 	
 	foreach(item ${ARGV})
-#		dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
+#		dk_append(LIBLIST "${lib_path}") ## used for double checking
 		dk_includes("${LIBS}" "${item}" result)
 		if(${result})
 			continue() # item is already in the list
 		endif()
-		dk_set(LIBS "${LIBS};${item}")
+		dk_append(LIBS "${item}")
 
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
@@ -37,7 +37,7 @@ dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

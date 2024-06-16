@@ -16,23 +16,23 @@ function(dk_libDebug lib_path)
 		return()
 	endif()	
 	
-	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
+	#dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
+	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		message("${Yellow}MISSING:${yellow} ${lib_path}${clr}")
 		dk_set(QUEUE_BUILD ON) 
 	endif()
 	
-	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	if(${index} GREATER -1)
-	#dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
-	#if(${result})
+	#string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
+	#if(${index} GREATER -1)
+	if(lib_path IN_LIST DEBUG_LIBS)
 		return() # The library is already in the list
 	endif()
 	
 	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
-		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
+		dk_prepend(DEBUG_LIBS debug ${lib_path}) # Add to beginning of list
 	else()
-		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
+		dk_append(DEBUG_LIBS debug ${lib_path}) # Add to end of list
 	endif()
 
 	if(INSTALL_DKLIBS)

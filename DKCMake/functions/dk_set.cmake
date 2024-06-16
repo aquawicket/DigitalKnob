@@ -17,9 +17,9 @@ function(dk_set variable)# value)
 	if(${ARGC} LESS 2)
 		dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): using less than 2 arguments")
 	endif()
-	if(${ARGC} GREATER 2)
-		dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): using more than 2 arguments")
-	endif()
+	#if(${ARGC} GREATER 2)
+	#	dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): using more than 2 arguments")
+	#endif()
 	
 	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
 	dk_printVar(${ARGV0})

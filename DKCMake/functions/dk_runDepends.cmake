@@ -118,16 +118,20 @@ function(dk_runDepends plugin)
 		endif()
 	endif()
 	
-	if(${ARGC} GREATER 1)
-		list(FIND dkdepend_list "${plugin} ${ARGV1}" index)
-		if(${index} GREATER -1)
-			return()
-		endif()
-	else()
-		list(FIND dkdepend_list "${plugin}" index)
-		if(${index} GREATER -1)
-			return() # already on the list
-		endif()
+#	if(${ARGC} GREATER 1)
+#		list(FIND dkdepend_list "${plugin} ${ARGV1}" index)
+#		if(${index} GREATER -1)
+#			return()
+#		endif()
+#	else()
+#		list(FIND dkdepend_list "${plugin}" index)
+#		if(${index} GREATER -1)
+#			return() # already on the list
+#		endif()
+#	endif()
+	if("${ARGV}" IN_LIST dkdepend_list)
+		dk_notice("already in dkdepend_list")
+		return()
 	endif()
 	
 	dk_append(dkdepend_list "${ARGV}")   # Add target to list
@@ -136,14 +140,14 @@ function(dk_runDepends plugin)
 #	else()
 #		dk_append(dkdepend_list ${plugin})  #Add library to list
 #	endif()	
-	list(REMOVE_DUPLICATES dkdepend_list)
+	#list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

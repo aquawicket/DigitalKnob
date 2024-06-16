@@ -22,17 +22,16 @@ function(dk_libRelease lib_path)
 		dk_set(QUEUE_BUILD ON)
 	endif()
 	
-	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
-	if(${index} GREATER -1)
-	#dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
-	#if(${result})
+	#string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
+	#if(${index} GREATER -1)
+	if(lib_path IN_LIST RELEASE_LIBS)
 		return() # The library is already in the list
 	endif()	
 	
 	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MINGW)
-		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
+		dk_prepend(RELEASE_LIBS optimized ${lib_path})  # Add to beginning of list
 	else()
-		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
+		dk_append(RELEASE_LIBS optimized ${lib_path})  # Add to end of list
 	endif()
 	
 	if(INSTALL_DKLIBS)
@@ -54,7 +53,7 @@ dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)
