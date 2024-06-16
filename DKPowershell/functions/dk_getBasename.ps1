@@ -28,7 +28,7 @@ function Global:DKTEST() { #####################################################
 	dk_debugFunc
 	
 	
-	$basename = dk_getBasename "C:\Windows\System32"
+	$basename = dk_getBasename "C:\Windows\System32\test.v123.zip"
 	dk_echo "basename = $basename"
 	
 	$basename = dk_getBasename "TEST"

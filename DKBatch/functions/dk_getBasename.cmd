@@ -15,8 +15,8 @@ call DK
 	set "_input_=%_input_:"=%"
 	if [%_input_:~-1,1%] == [\] set "_input=%_input_:~0,-1%"
 	if [%_input_:~-1,1%] == [/] set "_input=%_input_:~0,-1%"
-	for %%Z in ("%_input_%") do set "OUT=%%~nZ"
-	endlocal & call dk_set %2 "%OUT%"
+	for %%Z in ("%_input_%") do set "basename=%%~nxZ"
+	endlocal & call dk_set %2 "%basename%"
 goto:eof
 
 
@@ -24,7 +24,7 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	call dk_getBasename C:\Windows\System32 name
+	call dk_getBasename C:\Windows\System32\test.v123.zip name
 	echo name = %name%
 	
 	call dk_getBasename TEST nameb
