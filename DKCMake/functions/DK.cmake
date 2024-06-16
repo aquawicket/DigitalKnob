@@ -1,5 +1,6 @@
 include_guard()
 
+#cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)
 cmake_policy(SET CMP0011 NEW)
 cmake_policy(SET CMP0054 NEW)

@@ -25,13 +25,6 @@ include_guard()
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-#include("${DKCMAKE_FUNCTIONS_DIR}/DK.cmake")
-
-# FIXME: work to remove this
-#if(COMMAND cmake_policy)
-#	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
-#endif(COMMAND cmake_policy)
-
 
 ###############################################################
 ## Set variables for paths
@@ -79,11 +72,9 @@ endif()
 option(DEBUG "Build Debug Output" OFF)
 option(RELEASE "Build Release Output" OFF)
 if(NOT DEBUG AND NOT RELEASE)
-#if(NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
 	dk_set(DEBUG ON)
 	dk_set(RELEASE ON)
-#endif()
 endif()
 
 
@@ -94,12 +85,8 @@ option(BUILD "Simpily build the app or library" OFF)
 option(REBUILD "Rebuild the app" OFF)
 option(REBUILDALL "Rebuild the app and all dependencies" ON)
 if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
-#if(NOT REBUILD)
-#if(NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
 	dk_set(REBUILDALL ON)
-#endif()
-#endif()
 endif()
 
 
@@ -109,9 +96,7 @@ endif()
 option(STATIC "Build Static Libraries and Plugins" OFF)
 option(SHARED "Build Shared Libraries and Plugins" OFF)
 if(NOT STATIC AND NOT SHARED)
-#if(NOT SHARED)
 	dk_set(STATIC ON)
-#endif()
 endif()
 
 
