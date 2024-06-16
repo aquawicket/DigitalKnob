@@ -1,5 +1,4 @@
-set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR})
-include(${DKCMAKE_DIR}/functions/DK.cmake)
+include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 include_guard()
 
 ### CMakeLists.txt for DKCMake ###
