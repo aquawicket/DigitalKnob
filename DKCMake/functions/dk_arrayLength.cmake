@@ -19,8 +19,9 @@ function(dk_arrayLength array rtn_var)
 		dk_error("arguments invalid: ${_array_}")
 	endif()
 	
-	list(LENGTH "${_array_}" output)
-	set(${rtn_var} ${output} PARENT_SCOPE)
+	list(LENGTH "${_array_}" arrayLength)
+	dk_printVar(arrayLength)
+	set(${rtn_var} ${arrayLength} PARENT_SCOPE)
 endfunction()
 
 

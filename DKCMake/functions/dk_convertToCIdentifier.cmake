@@ -10,7 +10,7 @@ function(dk_convertToCIdentifier input output)
 	
 	
 	if(NOT ${ARGC} EQUAL 2)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 		
 	string(MAKE_C_IDENTIFIER ${input} c_identifier)	

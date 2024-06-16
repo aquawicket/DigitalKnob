@@ -36,7 +36,7 @@ dk_info("\n")
 
 dk_getTargetTriple()
 dk_getBasename(${DK_PROJECT_DIR} APP_NAME)
-string(REPLACE " " "_" APP_NAME ${APP_NAME})
+dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
 set(APP_NAME ${APP_NAME}_APP)
 
 ############################################################################################
@@ -51,7 +51,7 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-file(REMOVE ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
+dk_remove(${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
 dk_printSettings()
 
 
@@ -106,7 +106,7 @@ foreach(plugin ${dkdepend_list})
 	# We can use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
 		#foreach(lib ${LIBLIST})
-		#	file(REMOVE ${lib})
+		#	dk_remove(${lib})
 		#	dk_info("######  Removed ${lib}")
 		#endforeach()
 	#endif()
@@ -353,13 +353,13 @@ if(WIN_X86)
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		# Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files, excluded from assets
 		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NOERROR)
-		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup)
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE) #required
 	endif()	
 		
@@ -487,13 +487,13 @@ if(WIN_X86_64)
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
-		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
 	endif()
@@ -675,8 +675,8 @@ if(MAC)
 		
 	############## Delete Exlusions and Copy Assets to Bundle #######################
 	if(EXISTS ${DK_PROJECT_DIR}/assets)
-		file(REMOVE ${DK_PROJECT_DIR}/assets/log.txt)
-		file(REMOVE ${DK_PROJECT_DIR}/assets/cef.txt)
+		dk_remove(${DK_PROJECT_DIR}/assets/log.txt)
+		dk_remove(${DK_PROJECT_DIR}/assets/cef.txt)
 		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DK_PROJECT_DIR}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 	endif()
 		
@@ -781,10 +781,10 @@ if(IOS OR IOSSIM)
 	# Backup files and folders excluded from the package
 	#	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
 	# Remove excluded files and folders before packaging
-	#	file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+	#	dk_remove(${DK_PROJECT_DIR}/assets/USER)
 	# Restore the backed up files, excluded from assets
 	#	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
-	#	file(REMOVE ${DK_PROJECT_DIR}/Backup)
+	#	dk_remove(${DK_PROJECT_DIR}/Backup)
 	
 	########################## ICONS ###############################
 	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
@@ -920,7 +920,7 @@ if(NOT RASPBERRY)
 	if(false)
 		# backup files not going in the package
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
-		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		# Remove excluded files and folders before packaging
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
@@ -928,7 +928,7 @@ if(NOT RASPBERRY)
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
-		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -1004,14 +1004,14 @@ if(RASPBERRY)
 		# backup files not going in the package
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
 		# Remove excluded files and folders before packaging
-		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
-		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	###################### Backup Executable ###########################
@@ -1290,14 +1290,14 @@ if(EMSCRIPTEN)
 		# backup files not going in the package
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
 		# Remove excluded files and folders before packaging
-		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
-		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	###################### Backup Executable ###########################

@@ -8,7 +8,7 @@ include_guard()
 function(dk_fileAppend filepath str) 
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 2)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 	
 	file(APPEND ${filepath} "${str}")

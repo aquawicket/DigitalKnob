@@ -14,6 +14,7 @@ macro(dk_getParameter name rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	dk_getOptionValue(${name} ${ARGN})
+	dk_printVar(${name})
 	set(${rtn_var} ${${name}})
 endmacro()
 

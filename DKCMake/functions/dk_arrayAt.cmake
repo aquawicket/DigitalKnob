@@ -10,8 +10,9 @@ include_guard()
 function(dk_arrayAt array index rtn_var)
 	dk_debugFunc(${ARGV})
 	
-	list(GET ${array} ${index} output)
-	set(${rtn_var} ${output} PARENT_SCOPE)
+	list(GET ${array} ${index} arrayAt)
+	dk_printVar(arrayAt)
+	set(${rtn_var} ${arrayAt} PARENT_SCOPE)
 	
 endfunction()
 
@@ -28,5 +29,5 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(APPEND myArray "e")
 	
 	dk_arrayAt(myArray 3 element)
-	dk_echo("element = ${element}")
+	dk_info("element = ${element}")
 endfunction(DKTEST)

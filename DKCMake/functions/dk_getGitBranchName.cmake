@@ -15,10 +15,10 @@ function(dk_getGitBranchName url rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
-	DKASSERT(GIT_EXE)
+	dk_assertPath(GIT_EXE)
 			
-	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)
-	set(${rtn_var} ${output} PARENT_SCOPE)
+	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE gitBranchName)
+	set(${rtn_var} ${gitBranchName} PARENT_SCOPE)
 endfunction()
 
 

@@ -22,17 +22,18 @@ function(dk_getExtension path rtn_var)
 	#if(NOT ${index})
 		return() # no extension found
 	endif()
-	string(SUBSTRING ${path} ${index} -1 ext)
+	string(SUBSTRING ${path} ${index} -1 extension)
 
 	#look for .tar
 	math(EXPR tar ${index}-4)
 	if(${tar} GREATER -1)
-		string(SUBSTRING ${path} ${tar} -1 tarext)
-		if("${tarext}" STREQUAL ".tar${ext}")
-			set(ext ${tarext})
+		string(SUBSTRING ${path} ${tar} -1 tarextension)
+		if("${tarextension}" STREQUAL ".tar${extension}")
+			set(extension ${tarextension})
 		endif()
 	endif()
-    set(${rtn_var} ${ext} PARENT_SCOPE)
+	dk_printVar(extension)
+    set(${rtn_var} ${extension} PARENT_SCOPE)
 endfunction()
 
 

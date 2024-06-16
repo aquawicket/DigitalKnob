@@ -14,11 +14,10 @@ function(dk_getDirectory path rtn_var)
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
-	#dk_includes(${path} "/" index REVERSE)
-	#if(NOT ${index})
 		return() # no path dividers found
 	endif()
-	string(SUBSTRING ${path} 0 ${index} directory) 
+	string(SUBSTRING ${path} 0 ${index} directory)
+	dk_printVar(directory)
     set(${rtn_var} ${directory} PARENT_SCOPE)
 endfunction()
 

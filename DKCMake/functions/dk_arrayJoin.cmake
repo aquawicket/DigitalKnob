@@ -10,8 +10,9 @@ include_guard()
 function(dk_arrayJoin array separator rtn_val)
 	dk_debugFunc(${ARGV})
 	
-	list(JOIN ${array} "," output)
-	set(${rtn_val} ${output} PARENT_SCOPE)
+	list(JOIN ${array} "," arrayJoin)
+	dk_printVar(arrayJoin)
+	set(${rtn_val} ${arrayJoin} PARENT_SCOPE)
 endfunction()
 
 

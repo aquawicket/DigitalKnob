@@ -29,12 +29,12 @@ function(dk_getFilename path rtn_var)
 	string(SUBSTRING ${path} ${index} -1 filename) 
 	
 	if(NOT filename)
-		dk_warning("dk_getFilename(${path}) failed: Now using get_filename_component() to retrieve the filename")
+		dk_warning("dk_getFilename(${path}) failed: Now using dk_getBasename() to retrieve the filename")
 		dk_getBasename("${path}" filename)
-		dk_printVar(filename)
 	endif()
 	
 	dk_assert(filename)
+	dk_printVar(filename)
     set(${rtn_var} ${filename} PARENT_SCOPE)
 endfunction()
 

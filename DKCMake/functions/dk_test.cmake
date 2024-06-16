@@ -8,7 +8,7 @@ include_guard()
 function(dk_test)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 	
 	dk_info("dk_test() sleeping for ${ARGV0} seconds")

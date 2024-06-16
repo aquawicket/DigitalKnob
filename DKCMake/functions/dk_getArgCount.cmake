@@ -11,6 +11,7 @@ function(dk_get_arg_count rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	math(EXPR ARGC "${ARGC}-1")
+	dk_printVar(ARGC)
 	set(${rtn_var} ${ARGC} PARENT_SCOPE)
 endfunction()
 

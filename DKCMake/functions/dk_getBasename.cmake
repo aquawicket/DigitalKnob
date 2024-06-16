@@ -9,7 +9,7 @@ include_guard()
 function(dk_getBasename path rtn_var)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 2)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 	
 	

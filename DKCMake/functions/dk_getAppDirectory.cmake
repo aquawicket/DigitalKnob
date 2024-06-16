@@ -33,6 +33,7 @@ function(dk_getAppDirectory rtn_var)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
+	dk_printVar(appDirectory)
 	set(${rtn_var} ${appDirectory} PARENT_SCOPE)
 endfunction()
 

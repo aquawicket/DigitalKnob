@@ -13,7 +13,7 @@ include_guard()
 function(dk_removeSubstring removethis fromthis rtn_var)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 3)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 
 

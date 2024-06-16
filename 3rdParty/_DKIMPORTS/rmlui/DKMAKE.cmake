@@ -227,8 +227,8 @@ if(MSVC)
 else()									
 	dk_configure(
 		${RMLUI}
-		-DRMLUI_BACKEND=SDL_SDLrenderer
-		-DRMLUI_SAMPLES=ON
+		#-DRMLUI_BACKEND=SDL_SDLrenderer
+		-DRMLUI_SAMPLES=OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
 		#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
 		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
