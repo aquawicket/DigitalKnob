@@ -15,9 +15,9 @@ function(dk_registrySetKey key value data)
 
 	
 	if(WIN_HOST)
-		string(REPLACE "/" "\\" key   ${key})
-		string(REPLACE "/" "\\" value ${value})
-		string(REPLACE "/" "\\" data  ${data})
+		dk_replaceAll(${key}  "/"  "\\"  key)
+		dk_replaceAll(${value}  "/"  "\\"  value)
+		dk_replaceAll(${data}  "/"  "\\"  data)
 		execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
 		dk_verbose(output)
 		dk_verbose(_failed)

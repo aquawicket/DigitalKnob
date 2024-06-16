@@ -13,8 +13,8 @@ function(dk_printVar var)
 	if(DEFINED "${var}")
 		if("${var}" MATCHES "ENV{") # ENV variables
 			set(ENV_VAR ${var})
-			string(REPLACE "ENV{" "" ENV_VAR "${ENV_VAR}")
-			string(REPLACE "}" "" ENV_VAR "${ENV_VAR}")
+			dk_replaceAll("${ENV_VAR}"  "ENV{"  ""  ENV_VAR)
+			dk_replaceAll("${ENV_VAR}"  "}"  ""  ENV_VAR)
 			message("${Blue}${var} =${blue} '$ENV{${ENV_VAR}}'${clr}")
 		else()	# regular variables
 			if(DEFINED "${${${${var}}}}")

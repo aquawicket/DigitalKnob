@@ -1,6 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
-cmake_policy(SET CMP0057 NEW)
 
 ##################################################################################
 # dk_load(fn)
@@ -171,7 +170,7 @@ endfunction(dk_parseFunctionsAndLoadFromString)
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

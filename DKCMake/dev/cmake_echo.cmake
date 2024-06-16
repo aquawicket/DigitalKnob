@@ -1,3 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include_guard()
+
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -21,9 +24,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
 
 set(PASSED_PARAMETERS "") # it will contain all params string

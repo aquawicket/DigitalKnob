@@ -48,14 +48,14 @@ function(dk_msys2Bash)
 		
 	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
 	
-	string(REPLACE ";" " "	ARGV "${ARGV}")
+	dk_replaceAll("${ARGV}"  ";"  " "	ARGV)
 	list(APPEND bash "${ARGV}")
 	
 	list(APPEND bash "exit")
 	list(APPEND bash " ")
-	string(REPLACE ";" "\n"	bash "${bash}")
-	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
-	string(REPLACE "C:/" "/c/" bash "${bash}")
+	dk_replaceAll("${bash}"  ";"  "\n"	bash)
+	dk_replaceAll("${bash}" "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash)
+	dk_replaceAll("${bash}"  "C:/"  "/c/"  bash)
 	
 	### run bash as a file
 	#dk_fileWrite(${MSYS2}/dkscript.tmp ${bash})

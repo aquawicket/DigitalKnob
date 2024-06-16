@@ -51,7 +51,7 @@ message(STATUS "##############################################################")
 message(STATUS "################# DigitalKnob CMakeLists.txt #################")
 message(STATUS "##############################################################")
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+#CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
 if(CMAKE_HOST_UNIX)
 	message("calling sudo at beginning of script . . .")

@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include_guard()
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -21,23 +23,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
-message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
-
-if(NOT DKCMAKE_DIR)
-	message(FATAL_ERROR "cmake_eval requires the DKCMAKE_DIR variable")
-endif()
-
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-
-# https://cmake.org/cmake/help/latest/policy/CMP0007.html
-# "Do not ignore empty list items"
-CMAKE_POLICY(SET CMP0007 NEW)
-
-include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
-#dk_load(dk_eval)
-dk_load(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-
 
 
 # Evaluate expression (faster version)

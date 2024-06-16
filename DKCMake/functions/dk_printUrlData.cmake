@@ -16,7 +16,7 @@ function(dk_printUrlData url)
 	endif()
 	dk_verbose("*** url Variables ***")
 	dk_verbose(url)
-	string(REPLACE "/" ";" PLUGIN_URL_LIST ${url}) # seperate the url nodes into a list 
+	dk_replaceAll(${url} "/" ";" PLUGIN_URL_LIST) # seperate the url nodes into a list 
 	dk_verbose(PLUGIN_URL_LIST)
 	list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)
 	dk_verbose(PLUGIN_URL_LENGTH)

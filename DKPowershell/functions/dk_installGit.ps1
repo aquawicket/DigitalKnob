@@ -44,7 +44,7 @@ function Global:dk_installGit () {
     dk_info "Installing git . . ."
     dk_download $GIT_DL $DKDOWNLOAD_DIR\$GIT_DL_FILE
 	dk_info "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
-    dk_call "$DKDOWNLOAD_DIR\$GIT_DL_FILE" -y -o $DKTOOLS_DIR\$GIT_FOLDER
+    dk_call cmd /c "$DKDOWNLOAD_DIR\$GIT_DL_FILE" -y -o $DKTOOLS_DIR\$GIT_FOLDER
 	   
     if(!(dk_pathExists $GIT_EXE)){ dk_error "cannot find git" }
 }

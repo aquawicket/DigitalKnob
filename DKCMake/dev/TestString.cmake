@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include_guard()
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -21,15 +23,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
-
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-
-# https://cmake.org/cmake/help/latest/policy/CMP0007.html
-# "Do not ignore empty list items"
-CMAKE_POLICY(SET CMP0007 NEW)
-
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 dk_set(string_Ext ON)
 include(${DKCMAKE_DIR}/DKString.cmake)

@@ -24,12 +24,7 @@ include_guard()
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-include_guard()
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-CMAKE_POLICY(SET CMP0007 NEW) # https://cmake.org/cmake/help/latest/policy/CMP0007.html # "Do not ignore empty list items"
-#message("DKEval.cmake('${DKCOMMAND}')")
 
-include(${CMAKE_CURRENT_LIST_DIR}/functions/DK.cmake)
 
 dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
