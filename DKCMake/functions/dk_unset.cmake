@@ -13,10 +13,14 @@ include_guard()
 function(dk_unset variable)
 	dk_debugFunc(${ARGV})
 	
-	#set(${variable} "" CACHE INTERNAL "")
-	unset(${variable})
+	if(DEFINED CACHE{${variable}})  # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
+		unset(${variable} CACHE)
+	endif()
+	if(DEFINED ${variable})
+		unset(${variable})
+	endif()
 	unset(${variable} PARENT_SCOPE)
-	unset(${variable} CACHE)
+	
 endfunction()
 dk_createOsMacros("dk_unset")
 
