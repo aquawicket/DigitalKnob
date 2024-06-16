@@ -1,7 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
-dk_fixme()
 ################################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN)
 #
@@ -37,18 +36,18 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(APPEND myArray "d")
 	list(APPEND myArray "e")
 	
-	dk_printArray myArray
+	dk_printArray(myArray)
 	
-	dk_arrayPush myArray a
-	dk_printArray myArray
+	dk_arrayPush(myArray a)
+	dk_printArray(myArray)
 	
-	dk_arrayPush myArray b
-	dk_printArray myArray
+	dk_arrayPush(myArray b)
+	dk_printArray(myArray)
 	
-	dk_arrayPush myArray c
-	dk_printArray myArray
+	dk_arrayPush(myArray c)
+	dk_printArray(myArray)
 	
-	dk_arrayPush myArray d
-	dk_printArray myArray
+	dk_arrayPush(myArray d)
+	dk_printArray(myArray)
 	
 endfunction()

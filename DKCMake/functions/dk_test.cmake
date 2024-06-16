@@ -7,7 +7,7 @@ include_guard()
 #
 function(dk_test)
 	dk_debugFunc(${ARGV})
-	if(NOT ${ARGC} EQUAL 0)
+	if(NOT ${ARGC} EQUAL 1)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
 	endif()
 	
