@@ -12,9 +12,8 @@ function(dk_assert expression)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT ${expression})
-		#message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${clr}")
 		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}${clr}")
-		string(REPLACE " " "" var "${expression}")
+		dk_replaceAll("${expression}"  " "  ""  var)
 		
 		if("${var}")
 			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} { \"${var}\" : \"${${var}}\" } ${clr}")

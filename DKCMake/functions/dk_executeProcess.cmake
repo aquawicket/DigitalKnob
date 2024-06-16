@@ -57,7 +57,7 @@ function(dk_executeProcess)
 	dk_getOption(NOECHO 							${ARGV} REMOVE)
 
 	#if(NOT ${NOECHO})
-	#	string(REPLACE ";" " " print_commands "${ARGV}")
+	#	dk_replaceAll("${ARGV}"  ";"  " "  print_commands)
 	#	dk_info("\n${clr}${magenta} dk_executeProcess> ${print_commands}\n")
 	#endif()
 	
@@ -114,7 +114,7 @@ function(dk_executeProcess)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	#string(REPLACE ";" " " PRINT_ARGV "${ARGV}")
+	#dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
 	execute_process(${ARGV})
 	

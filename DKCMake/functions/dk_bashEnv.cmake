@@ -64,20 +64,20 @@ function(dk_bashEnv)
 		dk_assert(MSYS2_BASH_EXPORTS)
 		list(APPEND BASH_COMMANDS ${MSYS2_BASH_EXPORTS})
 	endif()
-	string(REPLACE ";" " "	ARGV "${ARGV}")
+	dk_replaceAll("${ARGV}"  ";"  " "  ARGV)
 	list(APPEND BASH_COMMANDS "${ARGV}")
 	
 	### BASH_COMMANDS Adjustments ###
 	if(WIN_HOST)
 	if(NOT ANDROID)
-		string(REPLACE "C:/" "/c/" BASH_COMMANDS "${BASH_COMMANDS}")
-		string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" BASH_COMMANDS "${BASH_COMMANDS}")
+		dk_replaceAll("${BASH_COMMANDS}"  "C:/"  "/c/"  BASH_COMMANDS)
+		dk_replaceAll("${BASH_COMMANDS}"  "${CMAKE_GENERATOR}"  "'${CMAKE_GENERATOR}'"  BASH_COMMANDS)
 	endif()
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
-	string(REPLACE ";" " & " BASH_COMMANDS "${BASH_COMMANDS}")
-	#string(REPLACE ";" "\n" BASH_COMMANDS "${BASH_COMMANDS}")
+	dk_replaceAll("${BASH_COMMANDS}"  ";"  " & "  BASH_COMMANDS)
+	#dk_replaceAll("${BASH_COMMANDS}"  ";"  "\n"  BASH_COMMANDS)
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 

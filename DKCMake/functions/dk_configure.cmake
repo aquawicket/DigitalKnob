@@ -23,7 +23,7 @@ function(dk_configure path) #ARGN
 		
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} ${path})				
 		dk_mergeFlags("${command_list}" command_list)		
-		string(REPLACE ";" "\" \n\"" command_string "${command_list}")
+		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		
 		dk_fileWrite(${CURRENT_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		
@@ -61,7 +61,7 @@ function(dk_configure path) #ARGN
 		
 		dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-			#string(REPLACE ";" " " BASH_COMMANDS "${ARGN}")
+			#dk_replaceAll("${ARGN}"  ";"  " "  BASH_COMMANDS)
 			#dk_queueCommand(bash -c "${ANDROID_BASH_EXPORTS} ${BASH_COMMANDS}")
 			#dk_queueCommand(${ARGN} BASH_ENV)
 			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output)# ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)

@@ -22,7 +22,7 @@ function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 		${DIGITALKNOB_DIR}/**/**/**/**/${target}/DKMAKE.cmake)
 	foreach(child ${children})
 		dk_info("FOUND: ${DIGITALKNOB_DIR}/${child}")
-		string(REPLACE "/DKMAKE.cmake" "" path ${DIGITALKNOB_DIR}/${child})
+		dk_replaceAll(${DIGITALKNOB_DIR}/${child} "/DKMAKE.cmake" "" path)
 		set(${RESULT_PATH} ${path} PARENT_SCOPE)
 		
 		file(STRINGS ${path}/DKMAKE.cmake dkmake_string)

@@ -13,7 +13,7 @@ function(dk_replaceAll input searchValue newValue rtn_var)
 	endif()
 		
 	string(REPLACE "${searchValue}" "${newValue}" replaceAll "${input}")
-	dk_printVar(replaceAll)
+	#dk_printVar(replaceAll)
 	set(${rtn_var} ${replaceAll} PARENT_SCOPE)
 endfunction()
 

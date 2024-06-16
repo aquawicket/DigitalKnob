@@ -10,12 +10,13 @@ include_guard()
 function(dk_pathContains expression rtn_var)
 	dk_debugFunc(${ARGV})
 	
-	file(GLOB pathContains "${expression}")
-	dk_printVar(pathContains)
-	if(contains)
-		set(${rtn_var} TRUE PARENT_SCOPE)
-		return()
+	file(GLOB glob_var "${expression}")
+	if(glob_var)
+		set(${pathContains} TRUE)
 	endif()
+	
+	dk_printVar(pathContains)
+	set(${rtn_var} ${pathContains} PARENT_SCOPE)
 endfunction()
 
 

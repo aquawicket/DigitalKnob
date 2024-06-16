@@ -16,7 +16,7 @@ function(dk_firewallAllow name executable)
 		return()
 	endif()
 	
-	string(REPLACE "/" "\\\\" executable "${executable}") #replace / with \
+	dk_replaceAll("${executable}" "/" "\\\\" executable) #replace / with \
 
 	dk_command(netsh advfirewall firewall add rule name="${name}" dir=in action=allow program="${executable}" enable=yes profile=any)
 	dk_command(netsh advfirewall firewall add rule name="${name}" dir=out action=allow program="${executable}" enable=yes profile=any) 

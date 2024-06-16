@@ -13,7 +13,7 @@ function(dk_assertPath path)
 	
 	if(NOT EXISTS ${path})
 		message(STATUS "\n\n${BG_red}Assertion failed: at ${path}, ${STACK_HEADER}${clr}")
-		string(REPLACE " " "" var "${path}")
+		dk_replaceAll("${path}"  " "  ""  var)
 		
 		if("${var}")
 			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} { \"${var}\" : \"${${var}}\" } ${clr}")
