@@ -104,7 +104,8 @@ function(dk_generateCmake plugin_name)
 	if(REBUILD OR REBUILDALL)
 		dk_set(QUEUE_BUILD ON)
 	endif()
-	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})  #Add to list
+
+	dk_append(DKPLUGIN_LIST ${plugin_name})  #Add to list
 endfunction()
 
 

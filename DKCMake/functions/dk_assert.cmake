@@ -10,6 +10,10 @@ include_guard()
 #
 function(dk_assert expression)
 	dk_debugFunc(${ARGV})
+	if(NOT ${ARGC} EQUAL 1)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
+	endif()
+	
 	
 	if(NOT ${expression})
 		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}${clr}")

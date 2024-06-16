@@ -111,7 +111,7 @@ function(dk_runDepends plugin)
 			dk_set(${ARGV0}_all ON)
 		endif()
 		dk_fileWrite(${plugin_path}/DEPENDS.TMP "${depends_script}")
-		INCLUDE(${plugin_path}/DEPENDS.TMP)
+		include(${plugin_path}/DEPENDS.TMP)
 		dk_remove(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			dk_set(${ARGV1} OFF)
@@ -130,11 +130,11 @@ function(dk_runDepends plugin)
 		endif()
 	endif()
 	
-	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add target to list
+	dk_append(dkdepend_list "${ARGV}")   # Add target to list
 #	if(${ARGC} GREATER 1)
-#		dk_set(dkdepend_list ${dkdepend_list} "${plugin} ${ARGV1}")  #Add target to list
+#		dk_append(dkdepend_list "${plugin} ${ARGV1}")  #Add target to list
 #	else()
-#		dk_set(dkdepend_list ${dkdepend_list} ${plugin})  #Add library to list
+#		dk_append(dkdepend_list ${plugin})  #Add library to list
 #	endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()

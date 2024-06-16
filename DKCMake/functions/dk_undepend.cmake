@@ -36,7 +36,8 @@ function(dk_undepend plugin)
 	endif()
 	
 	dk_info("DISABLING ${ARGV}")
-	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
+	dk_append(dk_disabled_list "${ARGV}")
+	
 	if(${ARGC} GREATER 1)
 		dk_removeTarget(${plugin} ${ARGV1})
 	endif()	   

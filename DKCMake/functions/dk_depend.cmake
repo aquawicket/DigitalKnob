@@ -17,8 +17,7 @@ function(dk_depend plugin)
 			#dk_debug("${plugin} is allready in the init_list")
 			return()  #plugin is already in the init_list
 		endif()
-		#dk_set(init_list ${init_list} "${plugin}")
-		list(APPEND init_list "${plugin}")
+		dk_append(init_list "${plugin}")
 		
 		dk_getPathToPlugin(${plugin} plugin_path)
 		dk_load(${plugin_path}/DKMAKE.cmake)
@@ -35,7 +34,7 @@ function(dk_depend plugin)
 	if(${index} GREATER -1)
 		list(FIND DISABLED_LIBS ${plugin} indexb)
 		if(${indexb} LESS 0)
-			dk_set(DISABLED_LIBS ${DISABLED_LIBS} "${plugin}") #this list is for the build.log
+			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()
 		dk_notice("${plugin} IS DISABLED")
 		return()
@@ -81,7 +80,7 @@ dk_createOsMacros("dk_depend")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

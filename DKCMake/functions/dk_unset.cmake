@@ -13,6 +13,9 @@ include_guard()
 function(dk_unset variable)
 	dk_debugFunc(${ARGV})
 	
+	#if(DEFINED ENV{${variable}})
+	#	unset(${variable} ENV)
+	#endif()
 	if(DEFINED CACHE{${variable}})  # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
 		unset(${variable} CACHE)
 	endif()
@@ -28,7 +31,7 @@ dk_createOsMacros("dk_unset")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_todo()
-
 endfunction(DKTEST)

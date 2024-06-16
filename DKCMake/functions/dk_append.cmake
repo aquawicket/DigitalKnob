@@ -4,7 +4,7 @@ include_guard()
 ###############################################################################
 # dk_append(<variable> <value>)
 #
-#	<variable>	- The name of a variable to declaire
+#	<variable>	- The name of a variable to declare
 #	<value>		- The value to add to the variable.
 #
 function(dk_append variable) #value
