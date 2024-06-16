@@ -3,16 +3,16 @@ include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_debug)
-	set(ENABLE_dk_debug 1 CACHE INTERNAL "")
+	dk_set(ENABLE_dk_debug 1)
 endif()
 if(NOT DEFINED TRACE_ON_DEBUG)
-	set(TRACE_ON_DEBUG 0 CACHE INTERNAL "")
+	dk_set(TRACE_ON_DEBUG 0)
 endif()
 if(NOT DEFINED PAUSE_ON_DEBUG)
-	set(PAUSE_ON_DEBUG 0 CACHE INTERNAL "")
+	dk_set(PAUSE_ON_DEBUG 0)
 endif()
 if(NOT DEFINED HALT_ON_DEBUG)
-	set(HALT_ON_DEBUG 0 CACHE INTERNAL "")
+	dk_set(HALT_ON_DEBUG 0)
 endif()
 ##################################################################################
 # dk_debug(msg)
@@ -35,22 +35,20 @@ function(dk_debug msg)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	#dk_updateLogInfo()
-	#message(DEBUG "${H_black}${STACK_HEADER}${clr}${blue}${msg}${clr}")
-	if(HALT_ON_DEBUG OR HALT AND NOT NO_HALT)
+	if(HALT_ON_DEBUG)
 		message("${blue}*** HALT_ON_DEBUG ***${clr}")
 		message(FATAL_ERROR "${H_blue}${msg}${clr}")
 		#dk_exit(1)
 	else()
-		if(TRACE_ON_DEBUG OR TRACE AND NOT NO_TRACE)
+		if(TRACE_ON_DEBUG)
 			message("${blue}*** TRACE_ON_DEBUG ***${clr}")
 			message(WARNING "${H_blue}${msg}${clr}")
 		else()
-			message("${blue}${msg}${clr}")
+			dk_echo("${blue}${msg}${clr}")
 		endif()
 	endif()
 	
-	if(PAUSE_ON_DEBUG OR PAUSE AND NOT NO_PAUSE)
+	if(PAUSE_ON_DEBUG)
 		message("${blue}*** PAUSE_ON_DEBUG ***${clr}")
 		dk_pause()
 	endif()
@@ -60,7 +58,7 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
-	dk_todo()
-
+	dk_debugFunc(${ARGV})
+	
+	dk_debug("test strin from dk_debug")
 endfunction(DKTEST)

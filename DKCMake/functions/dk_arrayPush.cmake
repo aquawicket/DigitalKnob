@@ -9,6 +9,9 @@ include_guard()
 #
 function(dk_arrayPush array element1)
 	dk_debugFunc(${ARGV})
+	if(NOT ${ARGC} EQUAL 2)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
+	endif()
 	
 	if(DEFINED "${ARGV}")
 		set(_array_ "${ARGV}")
@@ -20,8 +23,9 @@ function(dk_arrayPush array element1)
 		dk_error("arguments invalid: ${_array_}")
 	endif()
 	
-	$end_index = $_array_.count
-	##$array[${end_index}] = $element1
+	#dk_fixme()
+	#list(APPEND ${name} ${element1})
+	dk_append(${name} ${element1})
 endfunction()
 
 
@@ -30,11 +34,7 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
-	list(APPEND myArray "a")
-	list(APPEND myArray "b")
-	list(APPEND myArray "c")
-	list(APPEND myArray "d")
-	list(APPEND myArray "e")
+	dk_append(myArray "a")
 	
 	dk_printArray(myArray)
 	

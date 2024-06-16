@@ -22,6 +22,5 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
-
+	dk_echo("test string from dk_echo")
 endfunction(DKTEST)
