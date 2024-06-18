@@ -38,8 +38,6 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::############ Setup KeepOpen ############
 	call :dk_setupKeepOpen
 	
-	call dk_downloadFunc dk_callStack
-	
 	::##### CD into the DKSCRIPT_DIR directory #####
 	::cd "%DKSCRIPT_DIR%"
 
@@ -123,10 +121,11 @@ goto:eof
 :dk_DKSCRIPT_VARS (){
 	set "DKSCRIPT_PATH=%__FILE__%"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
-	call dk_load dk_getDirname
-	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
-	call dk_load dk_getBasename
-	call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
+	::call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
+	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
+	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	::call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
+	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
 goto:eof
 
 ::##################################################################################
