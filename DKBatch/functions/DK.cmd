@@ -1,8 +1,6 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
-
-::if defined in_subprocess echo in_subprocess
 ::####################################################################
 ::# DK()
 ::#
@@ -46,15 +44,8 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::############ Set Options ############
 	::dk_setOptions
 	
-	
-	
-	
-	
 	::############ LOAD FUNCTION FILES ############
-	::call dk_load dk_loadAll
-	::call dk_loadAll
 	::call dk_load %DKSCRIPT_PATH%
-	
 	
 	
 	::###### DKTEST MODE ######
@@ -82,7 +73,7 @@ goto:eof
 ::# dk_init()
 ::#
 :dk_init (){
-	call :dk_echo "###### Loading DKBatch DigitalKnob... ######"
+	call :dk_echo "Loading DKBatch DigitalKnob . . ."
 goto:eof
 
 ::##################################################################################
