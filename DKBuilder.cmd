@@ -7,7 +7,7 @@ if not exist "DKBatch\functions\DK.cmd" powershell -Command "(New-Object Net.Web
 
 
 
-call "DKBatch/functions/DK.cmd" %*
+call "DKBatch/functions/DK.cmd" %0 abc 123
 ::if "%*" neq "" call %*
 
 

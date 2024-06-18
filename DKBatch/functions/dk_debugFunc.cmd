@@ -70,7 +70,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
 	
-	set "indent="%indent% L "
+	::set "indent="%indent% L "
+	set "indent=" L "
 	
 	set "ESC="
 	set "cyan=%ESC%[36m"

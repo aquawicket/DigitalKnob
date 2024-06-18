@@ -2,18 +2,19 @@
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 
+::if defined in_subprocess echo in_subprocess
 ::####################################################################
 ::# DK()
 ::#
 ::#
 :DK (){
-	call :dk_echo "DK()"
+	call :dk_echo "DK(%*)"
 	
 	::###### Initialize Language specifics ######
 	call :dk_init
 	
 	::###### Reload Main Script with cmd ######
-	:: call dk_reloadWithCmd
+	call :dk_reloadWithCmd %*
 	
 	::############ Get DKBATCH variables ############
 	call :dk_DKBATCH_VARS
@@ -28,14 +29,10 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call :dk_setupCallstack
 	call dk_callStack
 	:dk_callStackReturn
-
-	::############ Load dk_load.cmd ############
-	::call dk_downloadFunc dk_load
 	
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
-	::pause
 	call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
@@ -58,9 +55,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::call dk_loadAll
 	::call dk_load %DKSCRIPT_PATH%
 	
-	:: Get args after %~1
-	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
-	::call printVar ARGS_AFTER_1
+	
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
@@ -87,7 +82,17 @@ goto:eof
 ::# dk_init()
 ::#
 :dk_init (){
-	call :dk_echo " "
+	call :dk_echo "###### Loading DKBatch DigitalKnob... ######"
+goto:eof
+
+::##################################################################################
+::# dk_reloadWithCmd()
+::#
+:dk_reloadWithCmd (){
+	if not exist %~1 goto:eof
+	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
+	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	call :dk_setupKeepOpen
 goto:eof
 
 ::##################################################################################
@@ -135,8 +140,9 @@ goto:eof
 ::# dk_setupKeepOpen()
 ::#
 :dk_setupKeepOpen (){
-	::if "%KEEP_CONSOLE_OPEN%" equ "1" 
-	if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
+	::if "%KEEP_CONSOLE_OPEN%" neq "1" goto:eof
+	set "clear_screen=cls ^&" 
+	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %clear_screen% set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
 
