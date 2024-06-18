@@ -31,7 +31,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	set "MyArray[0]=c"
 	set "MyArray[1]=d"
 	set "MyArray[2]=e"
@@ -39,4 +40,4 @@ goto:eof
 	call dk_printArray MyArray
 	call dk_arrayUnshift MyArray b
 	call dk_printArray MyArray
-	
+goto:eof

@@ -122,6 +122,7 @@ goto:eof
 ::#
 :dk_DKSCRIPT_VARS (){
 	set "DKSCRIPT_PATH=%__FILE__%"
+	if not exist "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%0"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
 	::call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"

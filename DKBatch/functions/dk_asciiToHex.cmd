@@ -24,7 +24,6 @@ call DK
     del chr.tmp zero.tmp
     set "hex=0x%hex:~-2%"
 	
-	::echo     dk_asciiToHex %~1 = %hex%
 	endlocal & call dk_set %2 "%hex%"
 goto:eof
 
@@ -32,7 +31,9 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	set "myAscii=x"
+	call dk_debugFunc
+	
+	call dk_set myAscii x
 	call dk_asciiToHex myAscii myHex
-	echo myHex = %myHex%
+	call dk_info "myHex = %myHex%"
+goto:eof

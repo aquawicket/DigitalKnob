@@ -18,7 +18,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	set "MyArray[0]=1"
 	set "MyArray[1]=2"
 	set "MyArray[2]=3"
@@ -26,5 +27,5 @@ goto:eof
 	set "MyArray[4]=b"
 	set "MyArray[5]=c"
 	call dk_arrayToString MyArray arryString
-	
-	echo arryString = %arryString%
+	call dk_info "arryString = %arryString%"
+goto:eof

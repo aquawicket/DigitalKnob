@@ -11,7 +11,6 @@ call DK
 	if not defined %~1 (
 		call dk_error "Assertion failed: %__FILE__%:%__LINE__%  %__FUNCTION__%(%*)"
 	)
-
 goto:eof
 
 

@@ -28,5 +28,4 @@ goto:eof
 	
 	call dk_arrayAt MyArray 3 element
 	call dk_echo "element = %element%"
-	
 goto:eof

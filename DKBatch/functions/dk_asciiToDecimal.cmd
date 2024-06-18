@@ -18,7 +18,9 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
 	
 	call dk_set myAscii x
 	call dk_asciiToDecimal myAscii myDecimal
-	echo myDecimal = %myDecimal%
+	call dk_info "myDecimal = %myDecimal%"
+goto:eof

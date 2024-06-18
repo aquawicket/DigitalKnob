@@ -11,13 +11,14 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
-	call dk_todo "dk_arrayConcat"
+	call dk_todo %__FUNCTION__%
 goto:eof
 
 
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
 
-	:: TODO
-	:: call dk_arrayConcat array value1
+	call dk_arrayConcat array value1
+goto:eof

@@ -25,16 +25,19 @@ if not defined HALT_ON_INFO    set "HALT_ON_INFO=0"
 		if "" == %_message_:~0,1%%_message_:~-1% set "_message_=!_message_:~1,-1!"    &:: if _message_ starts and ends with quotes, remove them
 		
 		::echo %white%%INFO_TAG%%_message_%%clr%
-		call dk_echo %white%%INFO_TAG%%_message_%%clr%
+		call dk_echo "%white%%INFO_TAG%%_message_%%clr%"
 		set "ENABLE_dk_debugFunc=0"
-		if "%TRACE_ON_INFO%"=="1" call dk_echo %blue%*** TRACE_ON_INFO ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_INFO%"=="1"  call dk_echo %blue%*** LINE_ON_INFO ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_INFO%"=="1" call dk_echo %blue%*** PAUSE_ON_INFO ***%clr%  & call dk_pause
-		if "%HALT_ON_INFO%"=="1"  call dk_echo %blue%*** HALT_ON_INFO ***%clr%   & call dk_exit
+		if "%TRACE_ON_INFO%"=="1" call dk_echo "%white%*** TRACE_ON_INFO ***%clr%" & call dk_stacktrace
+		if "%LINE_ON_INFO%"=="1"  call dk_echo "%white%*** LINE_ON_INFO ***%crl%"  & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_INFO%"=="1" call dk_echo "%white%*** PAUSE_ON_INFO ***%clr%" & call dk_pause
+		if "%HALT_ON_INFO%"=="1"  call dk_echo "%white%*** HALT_ON_INFO ***%clr%"  & call dk_exit
 	endlocal
 goto:eof
 
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
+	call dk_info "test string from dk_info"
+goto:eof

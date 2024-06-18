@@ -22,6 +22,7 @@ call dk_set TODO_TAG "  TODO: "
 	
 	setlocal enableDelayedExpansion       
 		call dk_set _message_ %*
+		::if not defined _message_ set "_message_=%__FUNCTION__%"
 		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!    &:: if _message_ starts and ends with quotes, remove them
 		
 		if not defined yellow (call dk_set yellow [33m)

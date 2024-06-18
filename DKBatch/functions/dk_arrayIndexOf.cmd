@@ -33,7 +33,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	set "myArray[0]=a"
 	set "myArray[1]=b"
 	set "myArray[2]=c"
@@ -57,4 +58,4 @@ goto:eof
 	
 	call dk_arrayIndexOf myArray "nonExistant" indexN
 	echo indexN = %indexN%
-	
+goto:eof

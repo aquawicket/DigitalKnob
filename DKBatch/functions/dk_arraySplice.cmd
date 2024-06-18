@@ -18,6 +18,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	::  TODO
-	:: call dk_arraySplice
+	call dk_debugFunc
+	
+	call dk_todo
+goto:eof

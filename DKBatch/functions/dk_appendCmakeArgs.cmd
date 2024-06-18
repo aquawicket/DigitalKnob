@@ -17,7 +17,7 @@ goto:eof
 
 
 :DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
-	call dk_todo
-
+	call dk_debugFunc
+	
+	call dk_appendCmakeArgs string
 goto:eof

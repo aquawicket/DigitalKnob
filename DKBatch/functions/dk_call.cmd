@@ -13,7 +13,12 @@
 	
 	::call dk_echo %magenta% > %* %clr%
     call %*
-
+goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+	call dk_debugFunc
+	
+	call dk_fixme
+	call dk_call dir
+goto:eof
