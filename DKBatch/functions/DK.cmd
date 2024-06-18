@@ -137,7 +137,8 @@ goto:eof
 ::# dk_setupKeepOpen()
 ::#
 :dk_setupKeepOpen (){
-	if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
+	::if "%KEEP_CONSOLE_OPEN%" equ "1" 
+	if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
 
