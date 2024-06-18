@@ -38,6 +38,8 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::############ Setup KeepOpen ############
 	call :dk_setupKeepOpen
 	
+	call dk_downloadFunc dk_callStack
+	
 	::##### CD into the DKSCRIPT_DIR directory #####
 	::cd "%DKSCRIPT_DIR%"
 
@@ -111,7 +113,7 @@ goto:eof
 ::#
 :dk_setupCallstack (){
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_downloadFunc.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd')"
-	call dk_downloadFunc dk_callstack
+	call dk_downloadFunc dk_callStack
 goto:eof
 
 
