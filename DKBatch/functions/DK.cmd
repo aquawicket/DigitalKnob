@@ -13,7 +13,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	::###### Reload Main Script with cmd ######
 	call :dk_reloadWithCmd %*
-	
+
 	::############ Get DKBATCH variables ############
 	call :dk_DKBATCH_VARS
 	call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
@@ -22,12 +22,12 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::############ Get DKHTTP variables ############
 	call :dk_DKHTTP_VARS
 	call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
-
+	
 	::############ Setup dk_callStack ############
 	call :dk_setupCallstack
 	call dk_callStack
 	:dk_callStackReturn
-	
+
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
@@ -80,8 +80,10 @@ goto:eof
 ::# dk_reloadWithCmd()
 ::#
 :dk_reloadWithCmd (){
-	if not exist %~1 goto:eof
+	
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
+	::if not defined DKSCRIPT_PATH goto:eof
+	if not exist "%DKSCRIPT_PATH%" goto:eof
 	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	call :dk_setupKeepOpen
 goto:eof
