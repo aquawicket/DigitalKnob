@@ -29,6 +29,8 @@ dk_validateBranch () {
 	
 	DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
 	dk_printVar DKCMAKE_DIR
+		DKCMAKE_FUNCTIONS_DIR="${DKCMAKE_DIR}/functions"
+		dk_printVar DKCMAKE_FUNCTIONS_DIR
 	
 	DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
 	dk_printVar DK3RDPARTY_DIR

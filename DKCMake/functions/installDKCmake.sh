@@ -12,3 +12,5 @@ installDKCmake() {
 	dk_validate DKCMAKE_FUNCTIONS_DIR "dk_validateBranch"
 	echo "export DKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR}" >> /etc/profile
 }
+
+installDKCmake
