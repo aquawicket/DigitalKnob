@@ -30,11 +30,12 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	:dk_callStackReturn
 
 	::############ Load dk_load.cmd ############
-	call dk_downloadFunc dk_load
+	::call dk_downloadFunc dk_load
 	
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	::pause
 	call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
@@ -93,21 +94,20 @@ goto:eof
 ::# dk_DKBATCH_VARS()
 ::#
 :dk_DKBATCH_VARS
-	for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
-	set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-	set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" (echo "DKBATCH_FUNCTIONS_DIR does not exist" & goto:eof)
-	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
+    set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+    set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+    set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 goto:eof
 
 ::##################################################################################
 ::# dk_DKHTTP_VARS()
 ::#
 :dk_DKHTTP_VARS (){
-	set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
-	set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
-	set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
+    set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+    set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
+    set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
+    set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
 goto:eof
 
 ::##################################################################################
@@ -115,7 +115,7 @@ goto:eof
 ::#
 :dk_setupCallstack (){
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_downloadFunc.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd')"
-	call dk_downloadFunc dk_callStack
+	call dk_downloadFunc dk_callstack
 goto:eof
 
 
