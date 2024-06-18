@@ -1,9 +1,11 @@
 @echo off
 call DK
 
-::call dk_load dk_validate
-::call dk_load dk_convertToCIdentifier
-::call dk_load dk_toLower
+call dk_downloadFunc dk_validate
+call dk_downloadFunc dk_getBasename
+call dk_downloadFunc dk_removeExtension
+call dk_downloadFunc dk_convertToCIdentifier
+call dk_downloadFunc dk_toLower
 
 call dk_set GIT_DL_WIN_X86 https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
 call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
@@ -47,3 +49,4 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
     call dk_installGit
+goto:eof

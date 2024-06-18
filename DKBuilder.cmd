@@ -13,4 +13,5 @@ call "DKBatch/functions/DK.cmd" %0 abc 123
 
 
 ::###### Load Main Program ######
+call dk_downloadFunc dk_buildMain
 call dk_buildMain

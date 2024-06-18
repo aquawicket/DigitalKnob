@@ -1,6 +1,7 @@
 @echo off
 call DK
 
+call dk_downloadFunc dk_replaceAll
 ::####################################################################
 ::# dk_makeDirectory(path)
 ::#
@@ -21,4 +22,5 @@ goto:eof
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
-call dk_makeDirectory "CreatedDirectory"
+	call dk_makeDirectory "CreatedDirectory"
+goto:eof

@@ -1,6 +1,11 @@
 @echo off
 call DK
 
+call dk_downloadFunc dk_debugFunc
+call dk_downloadFunc dk_assert
+call dk_downloadFunc dk_getHostTriple
+call dk_downloadFunc dk_getDKPaths
+call dk_downloadFunc dk_installGit
 ::####################################################################
 ::# dk_buildMain()
 ::#
@@ -67,3 +72,4 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_buildMain
+goto:eof

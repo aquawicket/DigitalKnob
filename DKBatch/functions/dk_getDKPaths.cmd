@@ -1,8 +1,8 @@
 @echo off
 call DK
 
-::call dk_load dk_makeDirectory
-
+call dk_downloadFunc dk_set
+call dk_downloadFunc dk_makeDirectory
 ::####################################################################
 ::# dk_getDKPaths()
 ::#
@@ -26,3 +26,4 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_getDKPaths
+goto:eof

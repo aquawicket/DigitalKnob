@@ -1,11 +1,9 @@
 @echo off
 call DK
 
-
-::call dk_load dk_getExtension
-
+call dk_downloadFunc dk_getExtension
 ::##################################################################################
-::# dk_removeExtension(<filepath> rtn_var)
+::# dk_removeExtension(filepath rtn_var)
 ::#
 ::#
 :dk_removeExtension () {
@@ -28,3 +26,4 @@ goto:eof
 	call dk_set filepath "/test/test2/xfile.extension"
 	call dk_removeExtension "%filepath%" filepath
 	echo "filepath = %filepath%"
+goto:eof

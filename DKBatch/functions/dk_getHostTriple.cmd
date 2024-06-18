@@ -1,6 +1,7 @@
 @echo off
 call DK
 
+call dk_downloadFunc dk_printVar
 ::#####################################################################
 ::# dk_getHostTriple()
 ::#
@@ -31,3 +32,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+	call dk_todo
+
+goto:eof
