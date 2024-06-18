@@ -59,23 +59,24 @@ goto:eof
 
 :DKTEST #####################################################################
 
-set "myVarA=This is a variable"
-call dk_printVar myVarA
+    set "myVarA=This is a variable"
+    call dk_printVar myVarA
 
-set "myVarB=varB content"
-call dk_printVar myVarB
+    set "myVarB=varB content"
+    call dk_printVar myVarB
 
-set "myVarC=myVarB"
-call dk_printVar myVarC
+    set "myVarC=myVarB"
+    call dk_printVar myVarC
 
-set "myVarD[0]=This is an array, element 0"
-set "myVarD[1]=This is an array, element 1"
-set "myVarD[2]=This is an array, element 2"
-call dk_printVar myVarD
-call dk_printVar myVarD[1]
+    set "myVarD[0]=This is an array, element 0"
+    set "myVarD[1]=This is an array, element 1"
+    set "myVarD[2]=This is an array, element 2"
+    call dk_printVar myVarD
+    call dk_printVar myVarD[1]
 
-set "myVarE=dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')"
-call dk_printVar myVarE
+    set "myVarE=dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')"
+    call dk_printVar myVarE
 
-::set "myVarF"
-call dk_printVar myVarF
+    ::set "myVarF"
+    call dk_printVar myVarF
+goto:eof
