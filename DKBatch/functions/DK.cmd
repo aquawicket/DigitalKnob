@@ -126,6 +126,7 @@ goto:eof
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	::call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
+	call dk_downloadFunc dk_load
 goto:eof
 
 ::##################################################################################
