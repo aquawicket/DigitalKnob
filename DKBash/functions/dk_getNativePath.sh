@@ -16,9 +16,11 @@ dk_getNativePath () {
 		dk_getWindowsPath $1 _winpath_
 		#dk_return "${_winpath_//\\/\\\\}"
 		local ret_val="${2-}"
+		dk_printVar ret_val
 		dk_return "${_winpath_}"
 	else
 		local ret_val="${2-}"
+		dk_printVar ret_val
 		dk_return "$(readlink -f "$1")"
 	fi
 }
