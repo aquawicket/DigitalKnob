@@ -29,6 +29,9 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call dk_callStack
 	:dk_callStackReturn
 
+	::############ Load dk_load.cmd ############
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
+	
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
@@ -45,10 +48,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::############ Set Options ############
 	::dk_setOptions
 	
-	::############ Load dk_load.cmd ############
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	
-
 	
 	
 	
@@ -56,8 +56,6 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::call dk_load dk_loadAll
 	::call dk_loadAll
 	::call dk_load %DKSCRIPT_PATH%
-
-	
 	
 	:: Get args after %~1
 	::for /f "tokens=1,* delims= " %%a in ("%*") do set ARGS_AFTER_1=%%b
@@ -88,7 +86,7 @@ goto:eof
 ::# dk_init()
 ::#
 :dk_init (){
-	call :dk_echo ""
+	call :dk_echo " "
 goto:eof
 
 ::##################################################################################
@@ -126,7 +124,6 @@ goto:eof
 :dk_DKSCRIPT_VARS (){
 	set "DKSCRIPT_PATH=%__FILE__%"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	call dk_load dk_getDirname
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_load dk_getBasename
