@@ -126,6 +126,7 @@ goto:eof
 :dk_DKSCRIPT_VARS (){
 	set "DKSCRIPT_PATH=%__FILE__%"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_load.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_load.cmd')"
 	call dk_load dk_getDirname
 	call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	call dk_load dk_getBasename
