@@ -26,11 +26,11 @@ if not defined HALT_ON_WARNING    call dk_set HALT_ON_WARNING 0
 
 		if not defined yellow (call dk_set yellow [33m)
 		if not defined clr (call dk_set clr [0m)
-		call dk_echo %yellow%%WARNING_TAG%%_message_%%clr%
-		if "%TRACE_ON_WARNING%"=="1" call dk_echo %yellow%*** TRACE_ON_WARNING ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_WARNING%"=="1"  call dk_echo %yellow%*** LINE_ON_WARNING ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_WARNING%"=="1" call dk_echo %yellow%*** PAUSE_ON_WARNING ***%clr%  & call dk_pause
-		if "%HALT_ON_WARNING%"=="1"  call dk_echo %yellow%*** HALT_ON_WARNING ***%clr%   & call dk_exit
+		call dk_echo "%yellow%%WARNING_TAG%%_message_%%clr%"
+		if "%TRACE_ON_WARNING%"=="1" call dk_echo "%yellow%*** TRACE_ON_WARNING ***%clr%"  & call dk_stacktrace
+		if "%LINE_ON_WARNING%"=="1"  call dk_echo "%yellow%*** LINE_ON_WARNING ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_WARNING%"=="1" call dk_echo "%yellow%*** PAUSE_ON_WARNING ***%clr%"  & call dk_pause
+		if "%HALT_ON_WARNING%"=="1"  call dk_echo "%yellow%*** HALT_ON_WARNING ***%clr%"   & call dk_exit
 	endlocal
 goto:eof
 
@@ -38,6 +38,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	call dk_warning "test dk_warning message"
-	call dk_info "...next line..."
+goto:eof

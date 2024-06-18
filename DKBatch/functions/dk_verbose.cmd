@@ -26,11 +26,11 @@ if not defined HALT_ON_VERBOSE    call dk_set HALT_ON_VERBOSE 0
 	
 		if not defined magenta (call dk_set magenta [35m)
 		if not defined clr (call dk_set clr [0m)
-		call dk_echo %magenta%%VERBOSE_TAG%%_message_%%clr%
-		if "%TRACE_ON_VERBOSE%"=="1" call dk_echo %blue%*** TRACE_ON_VERBOSE ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_VERBOSE%"=="1"  call dk_echo %blue%*** LINE_ON_VERBOSE ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_VERBOSE%"=="1" call dk_echo %blue%*** PAUSE_ON_VERBOSE ***%clr%  & call dk_pause
-		if "%HALT_ON_VERBOSE%"=="1"  call dk_echo %blue%*** HALT_ON_VERBOSE ***%clr%   & call dk_exit
+		call dk_echo "%magenta%%VERBOSE_TAG%%_message_%%clr%"
+		if "%TRACE_ON_VERBOSE%"=="1" call dk_echo "%magenta%*** TRACE_ON_VERBOSE ***%clr%"  & call dk_stacktrace
+		if "%LINE_ON_VERBOSE%"=="1"  call dk_echo "%magenta%*** LINE_ON_VERBOSE ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_VERBOSE%"=="1" call dk_echo "%magenta%*** PAUSE_ON_VERBOSE ***%clr%"  & call dk_pause
+		if "%HALT_ON_VERBOSE%"=="1"  call dk_echo "%magenta%*** HALT_ON_VERBOSE ***%clr%"   & call dk_exit
 	endlocal
 goto:eof
 
@@ -38,6 +38,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
 	
 	call dk_verbose "test dk_verbose message"
-	call dk_info "...next line..."
+goto:eof

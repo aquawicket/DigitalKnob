@@ -17,8 +17,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	call dk_source dk_info
 	call dk_info "test message using dk_source to load first"
-	
 goto:eof

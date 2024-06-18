@@ -26,11 +26,11 @@ set "FIXME_TAG=FIXME: "
 		
 		if not defined red (call dk_set red [31m)
 		if not defined clr (call dk_set clr [0m)
-		call dk_echo %red%%FIXME_TAG%%_message_%%clr%
-		if "%TRACE_ON_FIXME%"=="1" call dk_echo %red%*** TRACE_ON_FIXME ***%clr% & call dk_stacktrace
-		if "%LINE_ON_FIXME%"=="1"  call dk_echo %red%*** LINE_ON_FIXME ***%clr%  & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_FIXME%"=="1" call dk_echo %red%*** PAUSE_ON_FIXME ***%clr% & call dk_pause
-		if "%HALT_ON_FIXME%"=="1"  call dk_echo %red%*** HALT_ON_FIXME ***%clr%  & call dk_exit
+		call dk_echo "%red%%FIXME_TAG%%_message_%%clr%"
+		if "%TRACE_ON_FIXME%"=="1" call dk_echo "%red%*** TRACE_ON_FIXME ***%clr%" & call dk_stacktrace
+		if "%LINE_ON_FIXME%"=="1"  call dk_echo "%red%*** LINE_ON_FIXME ***%clr%"  & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_FIXME%"=="1" call dk_echo "%red%*** PAUSE_ON_FIXME ***%clr%" & call dk_pause
+		if "%HALT_ON_FIXME%"=="1"  call dk_echo "%red%*** HALT_ON_FIXME ***%clr%"  & call dk_exit
 	endlocal 
 goto:eof
 
@@ -38,7 +38,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	call dk_fixme "test dk_fixme message"
-
 goto:eof

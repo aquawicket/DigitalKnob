@@ -26,11 +26,11 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 		
 		if not defined red (call dk_set red [31m)
 		if not defined clr (call dk_set clr [0m)
-		call dk_echo %red%%ERROR_TAG%%_message_%%clr%
-		if "%TRACE_ON_ERROR%"=="1" call dk_echo %red%*** TRACE_ON_ERROR ***%clr% & call dk_stacktrace
-		if "%LINE_ON_ERROR%"=="1"  call dk_echo %red%*** LINE_ON_ERROR ***%clr%  & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_ERROR%"=="1" call dk_echo %red%*** PAUSE_ON_ERROR ***%clr% & call dk_pause
-		if "%HALT_ON_ERROR%"=="1"  call dk_echo %red%*** HALT_ON_ERROR ***%clr%  & call dk_exit
+		call dk_echo "%red%%ERROR_TAG%%_message_%%clr%"
+		if "%TRACE_ON_ERROR%"=="1" call dk_echo "%red%*** TRACE_ON_ERROR ***%clr%" & call dk_stacktrace
+		if "%LINE_ON_ERROR%"=="1"  call dk_echo "%red%*** LINE_ON_ERROR ***%clr%"  & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_ERROR%"=="1" call dk_echo "%red%*** PAUSE_ON_ERROR ***%clr%" & call dk_pause
+		if "%HALT_ON_ERROR%"=="1"  call dk_echo "%red%*** HALT_ON_ERROR ***%clr%"  & call dk_exit
 	endlocal 
 goto:eof
 
@@ -38,6 +38,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
 	call dk_error "test dk_error message"
-	echo "...next line..."
+goto:eof

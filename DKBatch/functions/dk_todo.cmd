@@ -26,11 +26,11 @@ call dk_set TODO_TAG "  TODO: "
 		
 		if not defined yellow (call dk_set yellow [33m)
 		if not defined clr (call dk_set clr [0m)
-		call dk_echo %yellow%%TODO_TAG%%_message_%%clr%
-		if "%TRACE_ON_TODO%"=="1" call dk_echo %yellow%*** TRACE_ON_TODO ***%clr%  & call dk_stacktrace
-		if "%LINE_ON_TODO%"=="1"  call dk_echo %yellow%*** LINE_ON_TODO ***%crl%   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%PAUSE_ON_TODO%"=="1" call dk_echo %yellow%*** PAUSE_ON_TODO ***%clr%  & call dk_pause
-		if "%HALT_ON_TODO%"=="1"  call dk_echo %yellow%*** HALT_ON_TODO ***%clr%   & call dk_exit
+		call dk_echo "%yellow%%TODO_TAG%%_message_%%clr%"
+		if "%TRACE_ON_TODO%"=="1" call dk_echo "%yellow%*** TRACE_ON_TODO ***%clr%"  & call dk_stacktrace
+		if "%LINE_ON_TODO%"=="1"  call dk_echo "%yellow%*** LINE_ON_TODO ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
+		if "%PAUSE_ON_TODO%"=="1" call dk_echo "%yellow%*** PAUSE_ON_TODO ***%clr%"  & call dk_pause
+		if "%HALT_ON_TODO%"=="1"  call dk_echo "%yellow%*** HALT_ON_TODO ***%clr%"   & call dk_exit
 	endlocal
 goto:eof
 
@@ -41,5 +41,4 @@ goto:eof
 	call dk_debugFunc
 	
 	call dk_todo "test dk_todo message"
-	call dk_info "...next line..."
 goto:eof

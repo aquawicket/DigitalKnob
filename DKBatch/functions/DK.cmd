@@ -142,5 +142,7 @@ goto:eof
 
 
 :DKTEST (){
+	call dk_debugFunc
+	
 	%DKSCRIPT_NAME%
 goto:eof
