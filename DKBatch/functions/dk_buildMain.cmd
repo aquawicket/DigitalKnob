@@ -1,11 +1,11 @@
 @echo off
 call DK
 
-call dk_downloadFunc dk_debugFunc
-call dk_downloadFunc dk_assert
-call dk_downloadFunc dk_getHostTriple
-call dk_downloadFunc dk_getDKPaths
-call dk_downloadFunc dk_installGit
+call dk_source dk_debugFunc
+call dk_source dk_assert
+call dk_source dk_getHostTriple
+call dk_source dk_getDKPaths
+call dk_source dk_installGit
 ::####################################################################
 ::# dk_buildMain()
 ::#

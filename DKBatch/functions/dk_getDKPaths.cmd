@@ -1,8 +1,8 @@
 @echo off
 call DK
 
-call dk_downloadFunc dk_set
-call dk_downloadFunc dk_makeDirectory
+call dk_source dk_set
+call dk_source dk_makeDirectory
 ::####################################################################
 ::# dk_getDKPaths()
 ::#

@@ -1,7 +1,7 @@
 @echo off
 call DK
 
-call dk_downloadFunc dk_replaceAll
+call dk_source dk_replaceAll
 ::####################################################################
 ::# dk_makeDirectory(path)
 ::#

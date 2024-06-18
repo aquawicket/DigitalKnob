@@ -1,7 +1,7 @@
 @echo off
 call DK
 
-call dk_downloadFunc dk_printVar
+call dk_source dk_printVar
 ::#####################################################################
 ::# dk_getHostTriple()
 ::#

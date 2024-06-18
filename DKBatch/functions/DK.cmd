@@ -23,7 +23,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call :dk_DKHTTP_VARS
 	call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
 
-	::############ dk_callStack ############
+	::############ Setup dk_callStack ############
 	call :dk_setupCallstack
 	call dk_callStack
 	:dk_callStackReturn
@@ -110,8 +110,8 @@ goto:eof
 ::# dk_setupCallstack()
 ::#
 :dk_setupCallstack (){
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_downloadFunc.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_downloadFunc.cmd')"
-	call dk_downloadFunc dk_callStack
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_source.cmd')"
+	call dk_source dk_callStack
 goto:eof
 
 
@@ -126,7 +126,7 @@ goto:eof
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	::call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
-	call dk_downloadFunc dk_load
+	call dk_source dk_load
 goto:eof
 
 ::##################################################################################

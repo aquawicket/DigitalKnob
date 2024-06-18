@@ -1,19 +1,18 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return || export DKINIT=1	# include_guard
 
-
 ##################################################################################
 # DK()
 #
 #
 DK () {
-	dk_echo "DK()"
+	dk_echo "DK($*)"
 	
 	###### Initialize Language specifics ######
 	dk_init
 
 	###### Reload Main Script with bash ######
-	dk_reloadWithBash
+	dk_reloadWithBash $*
 	
 	############ Get DKBASH variables ############
 	dk_DKBASH_VARS

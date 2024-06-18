@@ -1,7 +1,7 @@
 @echo off
 call DK
 
-call dk_downloadFunc dk_getExtension
+call dk_source dk_getExtension
 ::##################################################################################
 ::# dk_removeExtension(filepath rtn_var)
 ::#
