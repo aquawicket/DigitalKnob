@@ -6,14 +6,9 @@
 # dk_debugFunc()
 #
 #
-
-#alias dk_debugFunc='{
-#	[ ${ENABLE_dk_debugFunc-0} -eq 1 ] && echo "${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
-#}'
-
-
 alias dk_debugFunc='{
-	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then
+#####################################################################################################################
+	if [ ${ENABLE_dk_debugFunc-1} -eq 1 ]; then
 		
 		local stack_size=${#FUNCNAME[@]}
 		local -i i
@@ -21,31 +16,31 @@ alias dk_debugFunc='{
 		for (( i = 4; i < stack_size; i++ )); do
 			indent="${indent}   "
 		done
+		local indent="${indent} L "
 		
-		###local ARGV=($(__ARGV__ 1))
-		###echo ${ARGV[@]}
 		
+		export ESC=""
+		export cyan="${ESC}[36m"
+		export blue="${ESC}[34m"
+		export clr="${ESC}[0m"
+	
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "${indent} └ ${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo -e "${indent}${cyan}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		else
-			echo "${indent} └ ${Blue-}$(__FILE__ 1):$(__LINE__ 1)  ${blue-}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo "${indent}${cyan}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		fi
 	fi
+######################################################################################################################
 }'
 
 
+func1 () {
+	dk_debugFunc
+}
+	
 DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	main () {
-		dk_debugFunc
-		func1 1 "2" '3'
-	}
-
-	func1 () {
-		dk_debugFunc
-	}
-		
-
 	ENABLE_dk_debugFunc=1
-	main
+	dk_debugFunc
+	
+	func1 1 "2" '3'
 }

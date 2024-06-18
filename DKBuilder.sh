@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 ###### DK_SETUP ######
 [ ! -e DKBash ] && mkdir DKBash
 [ ! -e DKBash/functions ] && mkdir DKBash/functions

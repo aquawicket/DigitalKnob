@@ -25,5 +25,4 @@ DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	myDecimal="123"
 	dk_decimalToAscii "${myDecimal}" ascii
 	echo "ascii = ${ascii}"
-
 }

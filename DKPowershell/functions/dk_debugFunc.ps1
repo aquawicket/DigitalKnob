@@ -14,6 +14,7 @@ if(!$DKSTACK_marker)		{ $global:DKSTACK_marker = 1 }
 #
 function Global:dk_debugFunc() {
 	
+####################################################################################################################################
 	if($ENABLE_dk_debugFunc -ne 1){ return }
 	
 	if($(__FUNCTION__ 2) -eq "dk_echo"){ return }
@@ -26,5 +27,14 @@ function Global:dk_debugFunc() {
 	if($(__FUNCTION__ 2) -eq "dk_fixme"){ return }
 	if($(__FUNCTION__ 2) -eq "dk_printVar"){ return }
 	
-	Write-Host -NoNewline "${cyan}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "${blue}   $(__FUNCTION__ 2)($(__ARGV__ 2))";
+
+	$indent="${indent} L "
+	
+	$global:ESC = "$([char]27)"
+	$global:cyan = "${ESC}[36m"
+	$global:blue = "${ESC}[34m"
+	$global:clr = "${ESC}[0m"
+	
+	Write-Host -NoNewline "${indent}${cyan}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr}";
+#####################################################################################################################################
 }

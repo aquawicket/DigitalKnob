@@ -18,22 +18,17 @@ set(TODO_TAG "  TODO: " CACHE INTERNAL "")
 ###############################################################################
 # dk_todo(msg)
 #
-#	print a TODO message and wait 10 seconds
 #
 #	@msg (optional)	- A header message to print
 #
 function(dk_todo)
 	dk_debugFunc(${ARGV})
-	message("ARGV = ${ARGV}")
-	message("ARGN = ${ARGN}")
-	
 	
 	if(NOT ${ENABLE_dk_todo})
 		return()
 	endif()
 	
-	
-	set(msg ${ARGV})
+	set(msg "${ARGV}")
 	dk_getOption(HALT ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
 	dk_getOption(TRACE ${ARGV})
@@ -41,8 +36,6 @@ function(dk_todo)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	#dk_updateLogInfo()
-	#message("${H_black}${STACK_HEADER}${clr}${yellow}${msg}${clr}")	
 	if(${HALT_ON_TODO} OR HALT AND NOT NO_HALT)
 		message("${yellow}*** HALT_ON_TODO ***")
 		message(FATAL_ERROR "${TODO_TAG}${H_yellow}${msg}${clr}")
@@ -51,7 +44,7 @@ function(dk_todo)
 		message("${yellow}*** TRACE_ON_TODO ***")
 		message(WARNING "${TODO_TAG}${clr}${H_yellow}${msg}${clr}")
 	else()
-		message("${yellow}${TODO_TAG}${H_yellow}${msg}${clr}")
+		message("${yellow}${TODO_TAG}${msg}${clr}")
 	endif()
 	
 	if(${PAUSE_ON_TODO} OR PAUSE AND NOT NO_PAUSE)
@@ -69,5 +62,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_todo("test dk_todo message")
-
 endfunction(DKTEST)

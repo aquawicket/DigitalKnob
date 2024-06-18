@@ -1,18 +1,17 @@
 #!/bin/sh
 #[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
-dk_source dk_debugFunc
 
 ##################################################################################
 # dk_load()
 #
+#	Source a DKBash function. Download it if needed then source all of is content DKBash function recursivley.
 #
 dk_load() {
 	dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
-
 	local fn=	
 	if [ -e "$1" ]; then
 		fpath=$(cd $(dirname $1); pwd -P)/$(basename $1)

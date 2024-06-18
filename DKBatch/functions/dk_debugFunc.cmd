@@ -8,7 +8,7 @@ call DK
 ::FUNCNAME[]
 
 
-if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=0"
+if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=1"
 if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
 if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
 if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
@@ -67,19 +67,29 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::		set /a DKSTACK_marker=0
 ::		echo "resetting DKSTACK_marker to %DKSTACK_marker%"
 
-	
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
 	
+	set "indent="%indent% L "
 	
-	set "cyan=[36m" 		&::call dk_set cyan [36m
+	set "ESC="
+	set "cyan=%ESC%[36m"
+	set "blue=%ESC%[34m"
+	set "clr=%ESC%[0m"
 	
-	set "clr=[0m"			&::call dk_set clr [0m
-	
-	echo %__FILE__%: %cyan%%__FUNCTION__%(%__ARGS__%)%clr%
-	
+	set "__LINE__=0"
+	echo %indent%%cyan%%__FILE__%:%__LINE__%    %blue%%__FUNCTION__%(%__ARGS__%)%clr%
+	::Write-Host -NoNewline "${cyan}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))";	:: Powershell
+	::echo "${indent}${Blue}$(__FILE__ 1):$(__LINE__ 1)    ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"								:: Bash
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
 goto:eof
 
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+
 goto:eof
+

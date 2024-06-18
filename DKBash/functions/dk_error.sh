@@ -26,9 +26,7 @@ dk_error () {
 
 
 DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
 
-	dk_echo "test dk_echo message"
 	dk_error "test dk_error message"
-	echo "...next line..."
-	
 }
