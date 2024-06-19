@@ -21,7 +21,8 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc(${ARGV})
+	
 	dk_getFullPath("bash" fullPath)
 	dk_info("fullPath = ${fullPath}")
 endfunction()

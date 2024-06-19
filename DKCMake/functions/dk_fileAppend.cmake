@@ -12,14 +12,13 @@ function(dk_fileAppend filepath str)
 	endif()
 	
 	file(APPEND ${filepath} "${str}")
-
 endfunction()
 
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_fileAppend("dk_fileAppend_TEST.txt" "string written by dk_fileAppend")
-
 endfunction(DKTEST)

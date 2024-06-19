@@ -141,8 +141,8 @@ dk_createOsMacros("dk_download")
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc(${ARGV})
+	
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
-
 endfunction(DKTEST)

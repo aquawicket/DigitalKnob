@@ -13,14 +13,13 @@ function(dk_fileWrite filepath str)
 	
 	
 	file(WRITE ${filepath} "${str}")
-
 endfunction()
 
 
 
 
 function(DKTEST) ########################################################################
+	dk_debugFunc(${ARGV})
 	
 	dk_fileWrite("dk_fileWrite_TEST.txt" "string written by dk_fileWrite")
-	
 endfunction(DKTEST)

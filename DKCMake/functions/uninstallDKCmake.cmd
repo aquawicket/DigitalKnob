@@ -2,6 +2,9 @@
 call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 
 :uninstall_launcher
+	dk_debugFunc(${ARGV})
+	
+	
 	echo Uninstalling .cmake file associations . . .
 	
 	ftype dk_cmake=
