@@ -85,7 +85,6 @@ endfunction()
 # dk_init()
 #
 function(dk_init)
-	CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 	#cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 	cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
 	cmake_policy(SET CMP0011 NEW)
@@ -107,6 +106,7 @@ endfunction()
 #
 function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE INTERNAL "")
+	set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "")
 	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions CACHE INTERNAL "")
 endfunction(dk_DKCMAKE_VARS)
 
