@@ -81,7 +81,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})
 	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
 
-	dk_set(PLUGIN_INSTALL_NAME ${NAME})
+	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		dk_printVar(PLUGIN_URL)
@@ -138,7 +138,8 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	endif()
 
 	if(PLUGIN_GIT)
-		list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
+		#list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
+		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
 		dk_printVar(PLUGIN_GIT_FILENAME)	
 		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)		# PLUGIN_GIT_NAME
 		dk_printVar(PLUGIN_GIT_NAME)	
