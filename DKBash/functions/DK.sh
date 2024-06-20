@@ -50,6 +50,7 @@ DK () {
 	  
 	###### Script loader ######
 	dk_source dk_return
+	dk_source __TIME__
 	dk_source __FILE__
 	dk_source __LINE__
 	dk_source __FUNCTION__
@@ -74,13 +75,13 @@ DK () {
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			#export ENABLE_dk_debugFunc=1
 			echo ""
-			echo "###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######"
+			echo "${bg_white}${black}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
 			echo ""
 			#. ${DKSCRIPT_PATH}
 			#echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			echo ""
-			echo "########################## END TEST ################################"
+			echo "${bg_white}${black}########################## END TEST ################################${clr}"
 			echo ""
 			dk_source dk_pause && dk_pause
 			exit

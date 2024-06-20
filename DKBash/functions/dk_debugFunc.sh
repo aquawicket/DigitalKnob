@@ -25,9 +25,9 @@ alias dk_debugFunc='{
 		export clr="${ESC}[0m"
 	
 		if [ "$(echo -e)" = "" ]; then
-			echo -e "${indent}${cyan}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo -e "${cyan}[$(__TIME__)]${indent}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		else
-			echo "${indent}${cyan}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
+			echo "${cyan}[$(__TIME__)]${indent}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 		fi
 	fi
 ######################################################################################################################

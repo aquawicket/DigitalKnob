@@ -27,14 +27,14 @@ function Global:dk_debugFunc() {
 	if($(__FUNCTION__ 2) -eq "dk_fixme"){ return }
 	if($(__FUNCTION__ 2) -eq "dk_printVar"){ return }
 	
-
-	$indent="${indent} L "
+	$indent="${indent} "
+	#$indent="${indent} L "
 	
 	$global:ESC = "$([char]27)"
 	$global:cyan = "${ESC}[36m"
 	$global:blue = "${ESC}[34m"
 	$global:clr = "${ESC}[0m"
 	
-	Write-Host -NoNewline "${indent}${cyan}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr}";
+	Write-Host -NoNewline "${cyan}[$(__TIME__)]${indent}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr}";
 #####################################################################################################################################
 }
