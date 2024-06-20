@@ -28,6 +28,7 @@ dk_depend(harfbuzz)
 #dk_depend(lua)
 #dk_depend(luajit)
 dk_depend(lunasvg)
+dk_depend(python3)
 dk_depend(rlottie)
 
 # rmlui sample dependencies

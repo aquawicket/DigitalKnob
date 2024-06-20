@@ -62,7 +62,8 @@ DK () {
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	
-	dk_call dk_escapeSequences
+	#dk_call dk_escapeSequences
+	dk_call dk_color
 		
 	dk_load ${DKSCRIPT_PATH}
 				

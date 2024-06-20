@@ -12,8 +12,8 @@ function(dk_getFullPath path rtn_var)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
-	get_filename_component(fullpath ${path} ABSOLUTE)
-	#get_filename_component(fullpath ${path} REALPATH)
+	get_filename_component(fullpath ${path} ABSOLUTE)    # ABSOLUTE = Full path to file
+	#get_filename_component(fullpath ${path} REALPATH)	 # REALPATH = Full path to existing file with symlinks resolved
 	dk_printVar(fullpath)
 	set(${rtn_var} ${fullpath} PARENT_SCOPE)
 endfunction()
