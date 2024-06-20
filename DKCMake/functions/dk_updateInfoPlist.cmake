@@ -11,7 +11,7 @@ include_guard()
 function(dk_updateInfoPlist app_name)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 1)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGC}): incorrect number of arguments")
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
 	

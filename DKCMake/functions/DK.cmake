@@ -59,7 +59,9 @@ function(DKINIT)
 
 
 	###### DKTEST MODE ######
-	if("${ENABLE_DKTEST}" EQUAL "1")
+	if(ENABLE_DKTEST)
+	message("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
+	message("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 		message("\n###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######\n")
 		dk_load(${DKSCRIPT_PATH})
@@ -122,23 +124,29 @@ endfunction()
 # dk_setupCallstack()
 #
 function(dk_setupCallstack)
-	#todo
+	message("dk_setupCallstack()")
 endfunction()
 
 ##################################################################################
 # dk_DKSCRIPT_VARS()
 #
 function(dk_DKSCRIPT_VARS)
-	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}")
+	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
+	message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 	if(NOT EXISTS ${DKSCRIPT_PATH})
-		dk_echo("DKSCRIPT_PATH not found!")
+		dk_error("DKSCRIPT_PATH not found!")
 	endif()
-	set(DKSCRIPT_ARGS ${ARGS})
+	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
+	message("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
 	get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY CACHE INTERNAL "")
+	set(DKSCRIPT_DIR ${DKSCRIPT_DIR} CACHE INTERNAL "")
+	message("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
 	if(NOT EXISTS ${DKSCRIPT_DIR})
-		dk_echo("DKSCRIPT_DIR not found!")
+		dk_error("DKSCRIPT_DIR not found!")
 	endif()
 	get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME CACHE INTERNAL "")
+	set(DKSCRIPT_NAME ${DKSCRIPT_NAME} CACHE INTERNAL "")
+	message("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
 endfunction()
 
 ##################################################################################

@@ -43,14 +43,14 @@ function(dk_escapeSequences)
 	ASCII_ADD(		RS		30		036		0x1e	"\#30"		"Record Separator")
 	ASCII_ADD(		US		31		037		0x1f	"\#31"		"Unit Separator")
 	
-	dk_info()
+	dk_info(" ")
 	dk_info("	SYMBOL	DEC	OCT	HEX	HTML	Description")
 	#ASCII_size=${#ASCII[@]}
 	#for (( i=0; i<${ASCII_size}; i++ ));
 	#do
 	#	ASCII_SHOW $i
 	#done
-	dk_info()
+	dk_info("")
 	
 	#dk_hexToVariable(NUL 0x00)
 	#dk_hexToVariable(SOH 0x01)

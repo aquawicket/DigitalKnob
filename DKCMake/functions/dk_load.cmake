@@ -15,6 +15,7 @@ macro(dk_load var)
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
 	if("${name_we}" STREQUAL "DKMAKE")
+		#TESTME
 		dk_getDirname("${fn}" fnDir)
 		message("fnDir = ${fnDir}")
 		if(fnDir)
