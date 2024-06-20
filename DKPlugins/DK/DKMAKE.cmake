@@ -1,3 +1,5 @@
+dk_info("DK/DKMAKE.cmake")
+
 if(ANDROID)
 	dk_depend(log)
 	#dk_depend(sdl)		# SDL_AndroidGetExternalStorageState()
@@ -42,6 +44,7 @@ endif()
 dk_depend(backward-cpp)
 dk_depend(boxer)
 dk_depend(fmt)
+
 
 dk_generateCmake(DK)
 dk_assets(DK)

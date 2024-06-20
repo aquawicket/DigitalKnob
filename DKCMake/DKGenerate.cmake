@@ -51,16 +51,18 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-dk_remove(${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
+dk_remove(${DK_PROJECT_DIR}/${OS}/DKBUILD.log NOERROR)
 dk_printSettings()
 
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")
 dk_buildLog("##############################################")
+dk_printVar(dkdepend_list)
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	if(NOT ${plugin} IN_LIST dk_disabled_list)
+		dk_info("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
 		dk_buildLog("${plugin}")
 	endif()
 endforeach()
@@ -95,7 +97,17 @@ foreach(plugin ${dkdepend_list})
 	#dk_printVar(plugin_path)
 
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
+	dk_info("dk_load(${plugin_path}/DKMAKE.cmake)")
 	dk_load(${plugin_path}/DKMAKE.cmake)
+	
+	### TEMPORARY FIX: dk_load does not load DK/DKMAKE.cmake
+	#######################################################################################
+	if("${plugin}" STREQUAL "DK")
+		include(${DKCMAKE_DIR}/functions/dk_generateCmake.cmake)
+		include(${DKCMAKE_DIR}/functions/dk_assets.cmake)
+		include(${plugin_path}/DKMAKE.cmake)
+	endif()
+	######################################################################################
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
@@ -134,7 +146,7 @@ foreach(plugin ${dkdepend_list})
 	####################### DKPlugins #######################
 	# Libraries in the /DKPlugins folder
 	dk_toLower("${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
-	dk_toLower("${plugin}" plugin_lower)	
+	dk_toLower("${plugin}" plugin_lower)
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
 	

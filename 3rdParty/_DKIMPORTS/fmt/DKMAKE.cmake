@@ -1,3 +1,4 @@
+message("fmt/DKMAKE.cmake")
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/fmtlib/fmt
 # https://fmt.dev/latest/index.html

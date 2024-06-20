@@ -10,6 +10,7 @@ include_guard()
 #
 function(dk_generateCmake plugin_name)
 	dk_debugFunc(${ARGV})
+	dk_info("dk_generateCmake(${plugin_name})")
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
@@ -105,6 +106,7 @@ function(dk_generateCmake plugin_name)
 		dk_set(QUEUE_BUILD ON)
 	endif()
 
+	dk_verbose("dk_append(DKPLUGIN_LIST ${plugin_name})  #Add to list")
 	dk_append(DKPLUGIN_LIST ${plugin_name})  #Add to list
 endfunction()
 

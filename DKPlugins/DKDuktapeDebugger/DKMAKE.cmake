@@ -1,3 +1,4 @@
+dk_info("DKDuktapeDebugger/DKMAKE.cmake")
 dk_depend(DKDuktape)
 
 #if(NOT EXISTS ${DKPLUGINS_DIR}/DKDuktapeDebugger/duk_trans_dvalue.c)

@@ -1,3 +1,4 @@
+message("python/DKMAKE.cmake")
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_validate(HOST_OS "dk_getHostTriple()")
 dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
