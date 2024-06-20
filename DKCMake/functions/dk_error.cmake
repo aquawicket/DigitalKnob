@@ -38,7 +38,7 @@ function(dk_error msg)
 	#dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)
 	
 	#if(HALT_ON_ERROR OR HALT AND NOT NO_HALT)
-	if(HALT_ON_ERROR)
+	if(HALT_ON_ERROR AND NOT ${NO_HALT})
 		message("${red}*** HALT_ON_ERROR ***")
 		message(FATAL_ERROR "${H_red}${msg}${clr}")
 	else()

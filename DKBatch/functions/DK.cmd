@@ -51,11 +51,11 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
 	echo.
-    echo ###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######
+    call dk_echo "###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######"
 	echo.
 	call :DKTEST
 	echo.
-	echo ########################## END TEST ################################
+	call dk_echo "########################## END TEST ################################"
 	echo.
 	pause
 	exit

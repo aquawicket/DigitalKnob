@@ -256,7 +256,7 @@ else()
 		${WINMM_CMAKE}
 		${XZ_CMAKE}
 		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${ZSTD_CMAKE} NOERROR)
 endif()
 
 

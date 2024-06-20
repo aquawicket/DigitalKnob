@@ -81,11 +81,11 @@ function DK() {
 	if("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
 		dk_load $DKSCRIPT_PATH
 		Write-Output ""
-		Write-Output "###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ######"
+		Write-Output "${bg_white}${black}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
 		Write-Output ""
 		DKTEST
 		Write-Output ""
-		Write-Output "########################## END TEST ################################"
+		Write-Output "${bg_white}${black}########################## END TEST ################################${clr}"
 		Write-Output ""
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
