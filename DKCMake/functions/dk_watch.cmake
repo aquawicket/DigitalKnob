@@ -1,7 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
-dk_load(dk_watchCallback)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
 ##############################################################################
 # dk_watch(variable)
 # 
@@ -10,9 +10,14 @@ dk_load(dk_watchCallback)
 #	@variable	- The variable to watch
 #
 macro(dk_watch variable)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
-	variable_watch(variable dk_watchCallback)
+	if(DEFINED ${variable})
+		variable_watch(${variable} dk_watchCallback)
+	else()
+		message(FATAL_ERROR "variable:${variable} is undefined")
+	endif()
+	
 endmacro()
 
 
@@ -22,5 +27,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_watch(CMAKE_SOURCE)
+	dk_info("123")
+
 endfunction(DKTEST)

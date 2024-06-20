@@ -8,7 +8,7 @@ include_guard()
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
 #
 function(dk_eval code)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	dk_replaceAll("${code}"  ";"  "\n"  code)
 	dk_replaceAll("${code}"  "'"  "\""  code)

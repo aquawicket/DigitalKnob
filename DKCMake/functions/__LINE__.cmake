@@ -6,28 +6,42 @@ include_guard()
 #
 #
 macro(__LINE__ rtn_var)
-	if(${ARGV1})
-		set(_FRAME_ ${ARGV1})
+	if(NOT DEFINED CMAKE_LINENO)
+		set(${rtn_var} "CMAKE_CURRENT_LIST_LINE: ${CMAKE_CURRENT_LIST_LINE}")
 	else()
-		set(_FRAME_ 0)
+		if(ARGV1)
+			set(index ${ARGV1})
+		else()
+			set(index 0)
+		endif()
+#		#math(EXPR index "${index}+1" OUTPUT_FORMAT DECIMAL)	
+		
+		list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
+		if(${index} GREATER ${CMAKE_LINENO_LENGTH})
+			message(FATAL_ERROR "index:${index} out of range:${CMAKE_LINENO_LENGTH}")
+		endif()
+		list(GET CMAKE_LINENO ${index} ${rtn_var})
 	endif()
-
-	set(${rtn_var} "${CMAKE_CURRENT_LIST_LINE}")
-	#set(${rtn_var} "${CMAKE_CURRENT_FUNCTION_LIST_LINE}")
 endmacro()
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
+	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
+	message("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
+	__LINE__(_line_)
+	dk_info("\${_line_} = ${_line_}")
 	
-	__LINE__(_LINE_)
-	dk_info("\${_LINE_} = ${_LINE_}")
+	__LINE__(_line0_ 0)
+	dk_info("\${_line0_} = ${_line0_}")
+
+	__LINE__(_line1_ 1)
+	dk_info("\${_line1_} = ${_line1_}")
 	
-	__LINE__(_LINE_0 0)
-	dk_info("\${_LINE_0} = ${_LINE_0}")
+	__LINE__(_line2_ 2)
+	dk_info("\${_line2_} = ${_line2_}")
 
-	__LINE__(_LINE_1 1)
-	dk_info("\${_LINE_1} = ${_LINE_1}")
-
+	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
+	message("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
 endfunction(DKTEST)

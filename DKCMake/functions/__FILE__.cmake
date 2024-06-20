@@ -5,29 +5,43 @@ include_guard()
 # __FILE__(rtn_var, frame)
 #
 #
-macro(__FILE__ rtn_var)
-	if(${ARGV1})
-		set(_FRAME_ ${ARGV1})
+macro(__FILE__ file_rtn_var)
+	if(NOT DEFINED CMAKE_SOURCE)
+		set(${rtn_var} "CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}")
 	else()
-		set(_FRAME_ 0)
+		if(ARGV1)
+			set(index ${ARGV1})
+		else()
+			set(index 0)
+		endif()
+#		#math(EXPR index "${index}+1" OUTPUT_FORMAT DECIMAL)	
+		
+		list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
+		if(${index} GREATER ${CMAKE_SOURCE_LENGTH})
+			message(FATAL_ERROR "index:${index} out of range:${CMAKE_SOURCE_LENGTH}")
+		endif()
+		list(GET CMAKE_SOURCE ${index} ${file_rtn_var})
 	endif()
-	math(EXPR _FRAME_ "${_FRAME_}+1" OUTPUT_FORMAT DECIMAL)
-
-	set(${rtn_var} "${CMAKE_CURRENT_LIST_FILE}")
 endmacro()
 
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
+	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
+	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	__FILE__(_file_)
+	dk_info("\${_file_} = ${_file_}")
 	
-	__FILE__(FILE)
-	dk_info("\${FILE} = ${FILE}")
+	__FILE__(_file0_ 0)
+	dk_info("\${_file0_} = ${_file0_}")
+
+	__FILE__(_file1_ 1)
+	dk_info("\${_file1_} = ${_file1_}")
 	
-	__FILE__(FILE_0 0)
-	dk_info("\${FILE_0} = ${FILE_0}")
+	__FILE__(_file2_ 2)
+	dk_info("\${_file2_} = ${_file2_}")
 
-	__FILE__(FILE_1 1)
-	dk_info("\${FILE_1} = ${FILE_1}")
-
+	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
+	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 endfunction(DKTEST)

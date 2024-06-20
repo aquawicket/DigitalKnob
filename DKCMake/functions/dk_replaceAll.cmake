@@ -7,7 +7,7 @@ include_guard()
 #
 #
 function(dk_replaceAll input searchValue newValue rtn_var)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 4)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()

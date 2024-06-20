@@ -6,13 +6,22 @@ include_guard()
 #
 #
 macro(__FUNCTION__ rtn_var)
-	if(${ARGV1})
-		set(_FRAME_ ${ARGV1})
+	if(NOT DEFINED FUNCNAME)
+		set(${rtn_var} "CMAKE_CURRENT_LIST_FUNCTION: ${CMAKE_CURRENT_LIST_FUNCTION}")
 	else()
-		set(_FRAME_ 0)
+		if(ARGV1)
+			set(index ${ARGV1})
+		else()
+			set(index 0)
+		endif()
+#		#math(EXPR index "${index}+1" OUTPUT_FORMAT DECIMAL)	
+		
+		list(LENGTH FUNCNAME FUNCNAME_LENGTH)
+		if(${index} GREATER ${FUNCNAME_LENGTH})
+			message(FATAL_ERROR "index:${index} out of range:${FUNCNAME_LENGTH}")
+		endif()
+		list(GET FUNCNAME ${index} ${rtn_var})
 	endif()
-
-	set(${rtn_var} "${CMAKE_CURRENT_FUNCTION}")
 endmacro()
 
 
@@ -20,14 +29,21 @@ endmacro()
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
+	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
+	message("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
+	__FUNCTION__(_func_)
+	dk_info("\${_func_} = ${_func_}")
 	
-	__FUNCTION__(_FUNCTION_)
-	dk_info("\${_FUNCTION_} = ${_FUNCTION_}")
-	
-	__FUNCTION__(_FUNCTION_0 0)
-	dk_info("\${_FUNCTION_0} = ${_FUNCTION_0}")
+	__FUNCTION__(_func0_ 0)
+	dk_info("\${_func0_} = ${_func0_}")
 
-	__FUNCTION__(_FUNCTION_1 1)
-	dk_info("\${_FUNCTION_1} = ${_FUNCTION_1}")
+	__FUNCTION__(_func1_ 1)
+	dk_info("\${_func1_} = ${_func1_}")
+	
+	__FUNCTION__(_func2_ 2)
+	dk_info("\${_func2_} = ${_func2_}")
+
+	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
+	message("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
 
 endfunction(DKTEST)
