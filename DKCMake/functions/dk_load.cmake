@@ -2,18 +2,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ##################################################################################
-# dk_load(fn)
+# dk_load(var)
 #
-#	load a ${fn}.cmake file located in the DKCMake path 
+#	load a .cmake file and parse/load all of it's containing dk_function file recursivley 
 #
-#	@fn	- TODO
+#	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
 macro(dk_load var)
-	#dk_debugFunc(${ARGV})
-	message("dk_load(${ARGV})")
+	message("dk_load(${ARGV})") #dk_debugFunc(${ARGV})
+	
 	
 	string(STRIP ${var} fn)
-	
 	get_filename_component(name_we "${fn}" NAME_WE)
 	if("${name_we}" STREQUAL "DKMAKE")
 		dk_getDirname("${fn}" fnDir)
@@ -41,8 +40,9 @@ macro(dk_load var)
 endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	#dk_debugFunc(${ARGV})
-	message("dk_parseFunctionsAndLoad(${ARGV})")
+	message("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
+	
+	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
 	endif()
@@ -122,10 +122,10 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)
-	dk_debugFunc(${ARGV})
-	message("dk_debugFunc(${ARGV})")
+	message("dk_debugFunc(${ARGV})") #dk_debugFunc(${ARGV})
 	
-	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
+	
+	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
 	string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" matches "${str}")
 	unset(str)
 	list(REMOVE_DUPLICATES matches)
