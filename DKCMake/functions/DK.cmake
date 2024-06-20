@@ -26,7 +26,7 @@ function(DKINIT)
 	dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
 
 	############ Setup dk_callStack ############
-	#dk_setupCallstack()
+	dk_setupCallstack()
 	#dk_callStack()
 	#:dk_callStackReturn
 	
@@ -122,10 +122,66 @@ function(dk_DKHTTP_VARS)
 endfunction()
 
 ##################################################################################
+# dk_onCallstack()
+#
+macro(dk_onCallstack variable access value current_list_file stack)
+	#message("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
+	if("${access}" STREQUAL "MODIFIED_ACCESS")
+		set(MAX_STACK_SIZE 100)
+		set(CMAKE_STACK ${stack} CACHE INTERNAL "")
+		list(LENGTH CMAKE_STACK CMAKE_STACK_SIZE)
+		
+		
+		
+		set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}")
+		set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}")
+		set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}")
+		set(__ARGV__ "${ARGV}")
+		
+		###### CMAKE_SOURCE[] ######
+		list(PREPEND CMAKE_SOURCE ${__FILE__})
+		list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_SIZE)
+		if(${CMAKE_SOURCE_SIZE} GREATER ${MAX_STACK_SIZE})
+			list(POP_BACK CMAKE_SOURCE)
+		endif()
+		set(CMAKE_SOURCE ${CMAKE_SOURCE} CACHE INTERNAL "")
+		
+		###### CMAKE_LINENO[] ######
+		list(PREPEND CMAKE_LINENO ${__LINE__})
+		list(LENGTH CMAKE_LINENO CMAKE_LINENO_SIZE)
+		if(${CMAKE_LINENO_SIZE} GREATER ${MAX_STACK_SIZE})
+			list(POP_BACK CMAKE_LINENO)
+		endif()
+		set(CMAKE_LINENO ${CMAKE_LINENO} CACHE INTERNAL "")
+	
+		###### FUNCNAME ######
+		list(PREPEND FUNCNAME ${__FUNCTION__})
+		list(LENGTH FUNCNAME FUNCNAME_SIZE)
+		if(${FUNCNAME_SIZE} GREATER ${MAX_STACK_SIZE})
+			list(POP_BACK FUNCNAME)
+		endif()
+		set(FUNCNAME ${FUNCNAME} CACHE INTERNAL "")
+	
+		###### STACK_LEVEL ######
+		list(PREPEND STACK_LEVEL ${CMAKE_STACK_SIZE})
+		list(LENGTH STACK_LEVEL STACK_LEVEL_SIZE)
+		if(${STACK_LEVEL_SIZE} GREATER ${MAX_STACK_SIZE})
+			list(POP_BACK STACK_LEVEL)
+		endif()
+		set(STACK_LEVEL ${STACK_LEVEL} CACHE INTERNAL "")
+		
+		#message("${cyan}  > ${__FILE__}:${__LINE__}   ${__FUNCTION__}()")
+	endif()
+endmacro()
+
+##################################################################################
 # dk_setupCallstack()
 #
 function(dk_setupCallstack)
 	message("dk_setupCallstack()")
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE dk_onCallstack)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onCallstack)
+	variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
 endfunction()
 
 ##################################################################################
