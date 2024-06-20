@@ -32,9 +32,9 @@ macro(dk_load var)
 	
 	#NOTE: Loading a file with the name of an existing function will cause this to fail
 	if(COMMAND ${fn})
-		message(FATAL_ERROR "dk_load(${fn}) function already loaded")
+		message("dk_load(${fn}) function already loaded")
 	elseif(COMMAND ${var})
-		message(FATAL_ERROR "dk_load(${var}) function already loaded")
+		message("dk_load(${var}) function already loaded")
 	else()
 		dk_parseFunctionsAndLoad(${fn} ${var})
 	endif()

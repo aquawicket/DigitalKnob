@@ -491,7 +491,7 @@ if(WIN_X86_64)
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
 		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-		dk_remove(${DK_PROJECT_DIR}/assets/USER)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER NOERROR)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
