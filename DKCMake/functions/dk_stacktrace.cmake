@@ -12,23 +12,36 @@ function(dk_stacktrace)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
+	string(TIMESTAMP __TIME__ "%M:%S:%f")
+	string(SUBSTRING "${__TIME__}" 0 10 __TIME__)
+	list(PREPEND CMAKE_TIME ${__TIME__})
 	list(PREPEND CMAKE_SOURCE ${CMAKE_CURRENT_FUNCTION_LIST_FILE})
 	list(PREPEND CMAKE_LINENO ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
 	list(APPEND FUNCNAME "main")
+	list(APPEND STACK_LEVEL 0)
 	
 	### VERSION 1 ###
 	list(LENGTH FUNCNAME stack_size)
 	dk_echo("STACKTRACE[${stack_size}]")
-	
-	
-	
 	set(n 0)
 	#foreach(frame ${FUNCNAME})
 	while(${n} LESS ${stack_size})
+		list(GET CMAKE_TIME ${n} _TIME_)
 		list(GET CMAKE_SOURCE ${n} _FILE_)
 		list(GET CMAKE_LINENO ${n} _LINE_)
 		list(GET FUNCNAME ${n} _FUNCTION_)
-		message("${cyan}[${n}] ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
+		list(GET STACK_LEVEL ${n} _LEVEL_)
+			
+			unset(indent)
+			set(i 4)
+			while(${i} LESS ${_LEVEL_})
+				set(indent "${indent}   ")
+				math(EXPR i "${i}+1")
+			endwhile(${i} LESS ${_LEVEL_})
+		set(indent "${indent} L ")
+		
+		
+		message("${cyan}[${_TIME_}]${indent} ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
 		math(EXPR n "${n}+1")
 	endwhile()
 

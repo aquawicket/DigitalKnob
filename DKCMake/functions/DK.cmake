@@ -2,6 +2,12 @@
 include_guard()		# include_guard
 
 
+#cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
+cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
+cmake_policy(SET CMP0011 NEW)
+cmake_policy(SET CMP0054 NEW)
+cmake_policy(SET CMP0057 NEW)
+
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
 #####################################################################
 # DKINIT()
@@ -86,11 +92,7 @@ endfunction()
 # dk_init()
 #
 function(dk_init)
-	#cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
-	cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
-	cmake_policy(SET CMP0011 NEW)
-	cmake_policy(SET CMP0054 NEW)
-	cmake_policy(SET CMP0057 NEW)
+	
 	
 	set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 	if(CMAKE_SCRIPT_MODE_FILE)
@@ -127,16 +129,25 @@ endfunction()
 macro(dk_onCallstack variable access value current_list_file stack)
 	#message("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
-		set(MAX_STACK_SIZE 100)
+		set(MAX_STACK_SIZE 99)
 		set(CMAKE_STACK ${stack} CACHE INTERNAL "")
 		list(LENGTH CMAKE_STACK CMAKE_STACK_SIZE)
+			
+		set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
+		set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}" CACHE INTERNAL "")
+		set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}" CACHE INTERNAL "")
+		set(__ARGV__ "${ARGV}" CACHE INTERNAL "")
+		string(TIMESTAMP __TIME__ "%M:%S:%f")
+		string(SUBSTRING "${__TIME__}" 0 10 __TIME__)
+		set(__TIME__ "${__TIME__}" CACHE INTERNAL "")
 		
-		
-		
-		set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}")
-		set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}")
-		set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}")
-		set(__ARGV__ "${ARGV}")
+		###### CMAKE_SOURCE[] ######
+		list(PREPEND CMAKE_TIME ${__TIME__})
+		list(LENGTH CMAKE_TIME CMAKE_TIME_SIZE)
+		if(${CMAKE_TIME_SIZE} GREATER ${MAX_STACK_SIZE})
+			list(POP_BACK CMAKE_TIME)
+		endif()
+		set(CMAKE_TIME ${CMAKE_TIME} CACHE INTERNAL "")
 		
 		###### CMAKE_SOURCE[] ######
 		list(PREPEND CMAKE_SOURCE ${__FILE__})
@@ -169,8 +180,9 @@ macro(dk_onCallstack variable access value current_list_file stack)
 			list(POP_BACK STACK_LEVEL)
 		endif()
 		set(STACK_LEVEL ${STACK_LEVEL} CACHE INTERNAL "")
+		set(__LEVEL__ ${STACK_LEVEL_SIZE})
 		
-		#message("${cyan}  > ${__FILE__}:${__LINE__}   ${__FUNCTION__}()")
+		#message("${cyan}  > ${__TIME__}${__FILE__}:${__LINE__}   ${__FUNCTION__}()")
 	endif()
 endmacro()
 
