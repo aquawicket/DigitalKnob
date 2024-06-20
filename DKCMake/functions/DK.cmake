@@ -2,12 +2,13 @@
 include_guard()		# include_guard
 
 
+# Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
 #####################################################################
-# DK()
+# DKINIT()
 #
 #
-function(DK)
-	dk_echo("DK()")
+function(DKINIT)
+	dk_echo("DKINIT()")
 	
 	###### Initialize Language specifics ######
 	dk_init()
@@ -45,8 +46,6 @@ function(DK)
 	############ Set Options ############
 	#dk_setOptions()
 	
-
-	
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	###### load default function ####
@@ -70,7 +69,6 @@ function(DK)
 		dk_pause()
 	endif()
 	endif()
-
 endfunction()
 
 
@@ -152,4 +150,4 @@ endfunction()
 
 
 
-DK()
+DKINIT()

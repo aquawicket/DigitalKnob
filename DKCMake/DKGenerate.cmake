@@ -100,15 +100,6 @@ foreach(plugin ${dkdepend_list})
 	dk_info("dk_load(${plugin_path}/DKMAKE.cmake)")
 	dk_load(${plugin_path}/DKMAKE.cmake)
 	
-	### TEMPORARY FIX: dk_load does not load DK/DKMAKE.cmake
-	#######################################################################################
-	if("${plugin}" STREQUAL "DK")
-		include(${DKCMAKE_DIR}/functions/dk_generateCmake.cmake)
-		include(${DKCMAKE_DIR}/functions/dk_assets.cmake)
-		include(${plugin_path}/DKMAKE.cmake)
-	endif()
-	######################################################################################
-	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
 		dk_error("${plugin} variable is invalid")
@@ -506,7 +497,7 @@ if(WIN_X86_64)
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files
 		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
-		dk_remove(${DK_PROJECT_DIR}/Backup)
+		dk_remove(${DK_PROJECT_DIR}/Backup NOERROR)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
 	endif()
