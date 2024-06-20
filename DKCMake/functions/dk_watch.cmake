@@ -27,7 +27,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_watch(CMAKE_SOURCE)
+	dk_watch(CMAKE_CURRENT_FUNCTION)
 	dk_info("123")
 
 endfunction(DKTEST)

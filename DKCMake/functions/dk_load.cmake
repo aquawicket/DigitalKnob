@@ -9,7 +9,7 @@ include_guard()
 #	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
 macro(dk_load var)
-	message("dk_load(${ARGV})") #dk_debugFunc(${ARGV})
+	#message("dk_load(${ARGV})") #dk_debugFunc(${ARGV})
 	
 	
 	string(STRIP ${var} fn)
@@ -41,7 +41,7 @@ macro(dk_load var)
 endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	message("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
+	#message("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
 	
 	
 	if(NOT dk_load_list)
@@ -123,7 +123,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)
-	message("dk_debugFunc(${ARGV})") #dk_debugFunc(${ARGV})
+	#message("dk_debugFunc(${ARGV})") #dk_debugFunc(${ARGV})
 	
 	
 	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
