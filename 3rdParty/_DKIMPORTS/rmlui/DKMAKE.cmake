@@ -49,7 +49,7 @@ if(RMLUI_SAMPLES)
 	dk_depend(xz)
 	dk_depend(zlib)
 	dk_depend(zstd)
-	set(RMLUI_BACKEND SDL_SDLrenderer)
+	set(RMLUI_BACKEND "-DRMLUI_BACKEND=${RMLUI_BACKEND}")
 endif()
 
 
@@ -156,7 +156,7 @@ endif()
 ### GENERATE ###								
 dk_configure(
 	${RMLUI}
-	-DRMLUI_BACKEND=${RMLUI_BACKEND}
+	${RMLUI_BACKEND}
 	-DRMLUI_SAMPLES=${RMLUI_SAMPLES}
 	-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
 	#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
