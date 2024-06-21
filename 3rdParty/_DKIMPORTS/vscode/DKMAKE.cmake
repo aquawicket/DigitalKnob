@@ -42,7 +42,4 @@ if(NOT EXISTS ${VSCODE_EXE})
 	dk_makeDirectory	(${VSCODE}/data)
 endif()
 
-
-dk_set(VSCODE_EXE ${VSCODE_EXE}) # make the variable persistent
-
-dk_debug(VSCODE_EXE)
+dk_printVar(VSCODE_EXE)

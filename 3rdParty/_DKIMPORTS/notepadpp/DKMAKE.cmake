@@ -22,7 +22,8 @@ dk_convertToCIdentifier(${NOTEPADPP_FOLDER} NOTEPADPP_FOLDER)
 
 ### IMPORT ###
 dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
-dk_import(${NOTEPADPP_DL} PATH ${DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
+dk_set(NOTEPADPP ${DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
+dk_import(${NOTEPADPP_DL} PATH ${NOTEPADPP})
 dk_set(NOTEPADPP_EXE "${NOTEPADPP}/notepad++.exe")
 dk_getNativePath(${NOTEPADPP_EXE} NOTEPADPP_EXE_WINPATH)
 
