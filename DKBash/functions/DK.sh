@@ -2,31 +2,37 @@
 [ -n "${DKINIT-}" ] && return || export DKINIT=1	# include_guard
 
 ##################################################################################
-# DK()
+# DKINIT()
 #
 #
 DK () {
 	dk_echo "DKINIT($*)"
 	
+	
 	###### Initialize Language specifics ######
 	dk_init
 
+
 	###### Reload Main Script with bash ######
 	dk_reloadWithBash $*
+	
 	
 	############ Get DKBASH variables ############
 	dk_DKBASH_VARS
 	dk_echo "DKBASH_DIR = ${DKBASH_DIR}"
 	dk_echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
 
+
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS
 	dk_echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
+
 
 	############ Setup dk_callStack ############
 	#dk_setupCallstack
 	#call dk_callStack
 	#:dk_callStackReturn
+
 
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS
@@ -35,19 +41,19 @@ DK () {
 	dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 	dk_echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 	
+	
 	############ Setup KeepOpen ############
 	#dk_setupKeepOpen
 	
+	
 	##### CD into the DKSCRIPT_DIR directory #####
 	#cd "${DKSCRIPT_DIR}"
+
 
 	############ Set Options ############
 	dk_setOptions
 	
 	
-	
-	
-	  
 	###### Script loader ######
 	dk_source dk_return
 	dk_source __TIME__
@@ -62,7 +68,6 @@ DK () {
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	
-	#dk_call dk_escapeSequences
 	dk_call dk_color
 		
 	dk_load ${DKSCRIPT_PATH}

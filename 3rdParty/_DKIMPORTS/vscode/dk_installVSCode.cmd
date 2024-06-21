@@ -46,21 +46,16 @@ call ../../../DKBatch/functions/DK.cmd
 	
 	if not exist %VSCODE_EXE% call dk_error "cannot find %VSCODE_EXE%"
 	
-	:: install via CMake
-::	call dk_validate DKIMPORTS_DIR "call dk_getDKPaths"
-::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/vscode/DKMAKE.cmake')" "VSCODE_EXE"
-::	call dk_printVar VSCODE_EXE
-    ::call dk_checkError
-	
-	
-	:::::: associateFiles.cmd ###
+	::### Add File Associations ###
 	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
 	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
 	::
 	:: https://ss64.com/nt/ftype.html
 	:associateFiles
-	ftype dk_vscode=%VSCODE_EXE% "%%1"
+	call %DKIMPORTS_DIR%\vscode\dk_installVSCodeFileAssociations.cmd
 	
-	assoc .code-workspace=dk_vscode
-	
+	:: install via CMake
+::	call dk_validate DKIMPORTS_DIR "call dk_getDKPaths"
+::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/vscode/DKMAKE.cmake')" "VSCODE_EXE"
+::	call dk_printVar VSCODE_EXE
 goto:eof
