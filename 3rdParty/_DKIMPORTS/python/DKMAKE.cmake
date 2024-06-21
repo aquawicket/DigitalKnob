@@ -1,4 +1,3 @@
-message("python/DKMAKE.cmake")
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_validate(HOST_OS "dk_getHostTriple()")
 dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
@@ -99,7 +98,7 @@ endif()
 if(EXISTS ${PYTHON})
 	dk_prependEnvPath("${PYTHON}")
 endif()
-dk_debug(PYTHON_EXE)
+dk_printVar(PYTHON_EXE)
 
 
 
@@ -116,7 +115,7 @@ if(WIN_HOST)
 		dk_error("COULD NOT FIND PIP_EXE:${PIP_EXE}")
 		return()
 	endif()
-	dk_debug(PIP_EXE)
+	dk_printVar(PIP_EXE)
 endif()
 
 

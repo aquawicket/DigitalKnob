@@ -4,7 +4,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(MSYSTEM)
 	dk_depend(msys2)
 	
-	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+	dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	
 	if(CLANG32)
 		dk_command(pacman -S mingw-w64-clang-i686-gdb --needed --noconfirm)			# CLANG32

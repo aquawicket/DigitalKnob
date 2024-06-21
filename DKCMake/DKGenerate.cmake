@@ -51,7 +51,7 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-dk_remove(${DK_PROJECT_DIR}/${OS}/DKBUILD.log NOERROR)
+dk_remove(${DK_PROJECT_DIR}/${OS}/DKBUILD.log NO_HALT)
 dk_printSettings()
 
 
@@ -356,13 +356,13 @@ if(WIN_X86)
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
-		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
 		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		# Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files, excluded from assets
-		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NO_HALT)
 		dk_remove(${DK_PROJECT_DIR}/Backup)
 		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE) #required
 	endif()	
@@ -370,10 +370,10 @@ if(WIN_X86)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -490,25 +490,25 @@ if(WIN_X86_64)
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
-		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-		dk_remove(${DK_PROJECT_DIR}/assets/USER NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
+		dk_remove(${DK_PROJECT_DIR}/assets/USER NO_HALT)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_compressAssets(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files
-		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
-		dk_remove(${DK_PROJECT_DIR}/Backup NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NO_HALT)
+		dk_remove(${DK_PROJECT_DIR}/Backup NO_HALT)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
-		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
+		dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NO_HALT)
 	endif()
 
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -599,10 +599,10 @@ if(MAC)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -627,10 +627,10 @@ if(MAC)
 	endif()
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
-	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
-	dk_remove(${DK_PROJECT_DIR}/assets/USER NOERROR)
-	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
-	dk_remove(${DK_PROJECT_DIR}/Backup NOERROR)
+	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
+	dk_remove(${DK_PROJECT_DIR}/assets/USER NO_HALT)
+	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NO_HALT)
+	dk_remove(${DK_PROJECT_DIR}/Backup NO_HALT)
 	
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
@@ -909,9 +909,9 @@ if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1021,9 +1021,9 @@ if(RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1122,11 +1122,11 @@ if(ANDROID)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(MULTI_CONFIG)
-				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
-				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 			else()
-				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
-				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
 	
@@ -1148,7 +1148,7 @@ if(ANDROID)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/assets OVERWRITE)
 			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
-			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
+			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Debug/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Debug/gradlew")
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
@@ -1158,7 +1158,7 @@ if(ANDROID)
 			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
 			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/assets OVERWRITE)
 			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
-			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
+			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Release/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Release/gradlew")
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
@@ -1292,7 +1292,7 @@ if(EMSCRIPTEN)
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NO_HALT)
 		# Remove excluded files and folders before packaging
 		dk_remove(${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
@@ -1307,15 +1307,15 @@ if(EMSCRIPTEN)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1336,10 +1336,10 @@ if(EMSCRIPTEN)
 	endforeach()
 
 	########## Remove previous built files from assets #################
-	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.data NOERROR)
-	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.html NOERROR)
-	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.js NOERROR)
-	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.wasm NOERROR)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.data NO_HALT)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.html NO_HALT)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.js NO_HALT)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.wasm NO_HALT)
 
 	########################## PACKAGE ASSETS ##########################
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DK_PROJECT_DIR}/assets@/")

@@ -56,7 +56,7 @@ elseif(MSYSTEM)
 	dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
 	
 	if(NOT EXISTS ${CMAKE_EXE})
-		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+		dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 		if(CLANG32)
 			dk_command(pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm)		# CLANG32
 		elseif(CLANG64)
@@ -198,7 +198,7 @@ if(MSYSTEM)
 	endif()
 	
 	if(NOT EXISTS ${CMAKE_EXE})
-		dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+		dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 		if(CLANG32)
 			dk_command(pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm)		# CLANG32
 			#dk_set(CMAKE_EXE ${MSYS2}/clang32/bin/cmake.exe)

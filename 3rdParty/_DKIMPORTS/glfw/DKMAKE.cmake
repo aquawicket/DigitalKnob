@@ -14,7 +14,7 @@ dk_import(https://github.com/glfw/glfw.git)
 
 ### LINK ###
 dk_include				(${GLFW}/include								GLFW_INCLUDE_DIR)
-dk_include				(${GLFW}/${OS}/include/freetype2				GLFW_INCLUDE_DIR2)
+dk_include				(${GLFW}/${OS}/include/freetype2				GLFW_INCLUDE_DIR2)  # IS This Right?
 if(MSVC)
 	WIN_dk_libDebug		(${GLFW}/${OS}/${DEBUG_DIR}/src/glfw3.lib		GLFW_LIBRARY_DEBUG)
 	WIN_dk_libRelease	(${GLFW}/${OS}/${RELEASE_DIR}/src/glfw.lib		GLFW_LIBRARY_RELEASE)

@@ -12,7 +12,7 @@ if(WIN)
 endif()
 
 #dk_makeDirectory(${WEBREF}/DKWebAPIs)
-#dk_remove(${WEBREF}/DKWebAPIs/interfaces.txt NOERROR)
+#dk_remove(${WEBREF}/DKWebAPIs/interfaces.txt NO_HALT)
 #if(NOT EXISTS ${WEBREF}/DKWebAPIs/interfaces.txt)
 #	file(GLOB items RELATIVE "${WEBREF}/ed/idlnames/" "${WEBREF}/ed/idlnames/*")
 #	foreach(item ${items})

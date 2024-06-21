@@ -1,12 +1,19 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
+
+
+
+
+
+
+
 ::####################################################################
-::# DK()
+::# DKINIT()
 ::#
 ::#
 :DK (){
-	call :dk_echo "DK(%*)"
+	call :dk_echo "DKINIT(%*)"
 	
 	::###### Initialize Language specifics ######
 	call :dk_init
@@ -50,12 +57,13 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
+	call dk_color
 	echo.
-    call dk_echo "###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######"
+    call dk_echo "%bg_white%%black%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
 	echo.
 	call :DKTEST
 	echo.
-	call dk_echo "########################## END TEST ################################"
+	call dk_echo "%bg_white%%black%########################## END TEST ###############################%clr%"
 	echo.
 	pause
 	exit

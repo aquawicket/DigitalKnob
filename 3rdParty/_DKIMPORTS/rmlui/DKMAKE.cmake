@@ -28,7 +28,6 @@ dk_depend(harfbuzz)
 #dk_depend(lua)
 #dk_depend(luajit)
 dk_depend(lunasvg)
-dk_depend(python3)
 dk_depend(rlottie)
 
 # rmlui sample dependencies
@@ -93,11 +92,11 @@ endif()
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
+#ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
+#ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
-dk_include		(${RMLUI}/Include			RML_INCLUDE_DIR)
-dk_include		(${RMLUI}/Source 			RML_INCLUDE_DIR2)
+dk_include		(${RMLUI}/Include	RML_INCLUDE_DIR)
+dk_include		(${RMLUI}/Source 	RML_INCLUDE_DIR2)
 
 dk_addTarget	(rmlui core)
 dk_addTarget	(rmlui debugger)
@@ -154,110 +153,35 @@ if(rmlui_invaders OR rmlui_all)
 	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_invaders)
 endif()
 
-### GENERATE ###
-if(MSVC)
-	WIN_dk_configure(${RMLUI}
-		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
-		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
-		-RMLUI_LUA_AS_CXX=OFF					# "Lua library was compiled with a C++ compiler" OFF
-		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
-		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
-		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
-		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE}
-		${GLFW_CMAKE}
-		${HARFBUZZ_CMAKE}
-		${LIBJPEG_TURBO_CMAKE}
-		${LIBPNG_CMAKE}
-		#${LUA_CMAKE}
-		#${LUAJIT_CMAKE}
-		${LUNASVG_CMAKE}
-		${PTHREAD_CMAKE}
-		${RLOTTIE_CMAKE}
-		${SDL_CMAKE} 
-		${SDL_IMAGE_CMAKE}
-		${SETUPAPI_CMAKE}
-		${SFML_CMAKE}
-		${TIFF_CMAKE}
-		${VERSION_CMAKE}
-		${WINMM_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
-	
-	ANDROID_dk_configure(${RMLUI}
-		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
-		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
-		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
-		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
-		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
-		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
-		"-DSAMPLES_BACKEND=SDL_SDLrenderer"		# "Backend platform and renderer used for the samples." "auto" 
-		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
-		${GLFW_CMAKE}
-		${HARFBUZZ_CMAKE}
-		${LIBJPEG_TURBO_CMAKE}
-		${LIBPNG_CMAKE}
-		#${LUA_CMAKE}
-		#${LUAJIT_CMAKE}
-		${LUNASVG_CMAKE}
-		${PTHREAD_CMAKE}
-		${RLOTTIE_CMAKE}
-		${SDL_CMAKE} 
-		${SDL_IMAGE_CMAKE}
-		${SETUPAPI_CMAKE}
-		${SFML_CMAKE}
-		${TIFF_CMAKE}
-		${VERSION_CMAKE}
-		${WINMM_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
-else()									
-	dk_configure(
-		${RMLUI}
-		-DRMLUI_BACKEND=${RMLUI_BACKEND}
-		-DRMLUI_SAMPLES=${RMLUI_SAMPLES}
-		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
-		#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
-		#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		${FREETYPE_CMAKE}
-		#${GLFW_CMAKE}
-		#${HARFBUZZ_CMAKE}
-		${IMM32_CMAKE}
-		${LIBJPEG_TURBO_CMAKE}
-		${LIBPNG_CMAKE}
-		${LUNASVG_CMAKE}
-		${PTHREAD_CMAKE}
-		${RLOTTIE_CMAKE}
-		${SDL_CMAKE}
-		${SDL_IMAGE_CMAKE}
-		${SETUPAPI_CMAKE}
-		${SFML_CMAKE}
-		${TIFF_CMAKE}
-		${VERSION_CMAKE}
-		${WINMM_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE} NOERROR)
-endif()
+### GENERATE ###								
+dk_configure(
+	${RMLUI}
+	-DRMLUI_BACKEND=${RMLUI_BACKEND}
+	-DRMLUI_SAMPLES=${RMLUI_SAMPLES}
+	-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON	
+	#-DRMLUI_TRACY_CONFIGURATION=OFF		# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations."ON
+	#-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
+	${FREETYPE_CMAKE}
+	#${GLFW_CMAKE}
+	#${HARFBUZZ_CMAKE}
+	${IMM32_CMAKE}
+	${LIBJPEG_TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LUNASVG_CMAKE}
+	${PTHREAD_CMAKE}
+	${RLOTTIE_CMAKE}
+	${SDL_CMAKE}
+	${SDL_IMAGE_CMAKE}
+	${SETUPAPI_CMAKE}
+	${SFML_CMAKE}
+	${TIFF_CMAKE}
+	${VERSION_CMAKE}
+	${WINMM_CMAKE}
+	${XZ_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE} 
+	NO_HALT)
+
 
 
 ### COMPILE ###

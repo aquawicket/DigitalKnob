@@ -6,7 +6,7 @@
 #
 #
 DK () {
-	dk_echo "DK($*)"
+	dk_echo "DKINIT($*)"
 	
 	###### Initialize Language specifics ######
 	dk_init

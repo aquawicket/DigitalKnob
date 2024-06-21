@@ -2,20 +2,20 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_remove(path [NOERROR])
+# dk_remove(path [NO_HALT])
 #
 #	Remove a file or directory
 #
 #	@path		- The full path to the file or direcotory to remove
-#   NOERROR     - if NOERROR is specified in the parameters, dk_error() messages will not be displayed
+#   NO_HALT     - if NO_HALT is specified in the parameters, dk_error() messages will not be displayed
 #
 function(dk_remove path)
 	dk_debugFunc(${ARGV})
 	
-	dk_getOption(NOERROR ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 
 	if(NOT EXISTS ${path})
-		if(NOT NOERROR)
+		if(NOT NO_HALT)
 			dk_warning("${path} does not exist")
 		endif()
 		return()
@@ -24,7 +24,7 @@ function(dk_remove path)
 	#execute_process(COMMAND -E rm ${path})
 	dk_sleep(1)	# give the path a second to delete
 	if(EXISTS ${path})
-		if(NOT NOERROR)
+		if(NOT NO_HALT)
 			dk_error("failed to remove ${path}")
 		endif()
 	endif()

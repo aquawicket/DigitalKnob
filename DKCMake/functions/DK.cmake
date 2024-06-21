@@ -1,7 +1,6 @@
 
 include_guard()		# include_guard
 
-
 #cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
 cmake_policy(SET CMP0011 NEW)
@@ -60,8 +59,6 @@ function(DKINIT)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 	dk_load(dk_eval)
 	dk_load(dk_color)
-	#dk_load(dk_escapeSequences)
-	#dk_escapeSequences()
 	#dk_load(${DKSCRIPT_PATH})
 
 
@@ -92,8 +89,6 @@ endfunction()
 # dk_init()
 #
 function(dk_init)
-	
-	
 	set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 	if(CMAKE_SCRIPT_MODE_FILE)
 		message("")

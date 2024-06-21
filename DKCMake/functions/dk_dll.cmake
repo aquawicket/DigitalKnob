@@ -17,7 +17,7 @@ function(dk_dll plugin_name)
 	endif()
 	dk_include(${plugin_path})
 	# Create CmakeLists.txt file
-	dk_remove(${plugin_path}/CMakeLists.txt NOERROR)
+	dk_remove(${plugin_path}/CMakeLists.txt NO_HALT)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")

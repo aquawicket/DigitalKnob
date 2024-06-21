@@ -7,8 +7,8 @@ dk_import(https://github.com/dontcallmedom/webidlpedia.git BRANCH gh-pages)
 
 ### Build WebAPIs Tree ###
 dk_makeDirectory(${WEBIDLPEDIA}/DKWebAPIs)
-dk_remove(${WEBIDLPEDIA}/DKWebAPIs/W3C_apis.txt NOERROR)
-dk_remove(${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt NOERROR)
+dk_remove(${WEBIDLPEDIA}/DKWebAPIs/W3C_apis.txt NO_HALT)
+dk_remove(${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt NO_HALT)
 if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt)
 	file(GLOB items RELATIVE "${WEBIDLPEDIA}/names/" "${WEBIDLPEDIA}/names/*")
 	foreach(item ${items})

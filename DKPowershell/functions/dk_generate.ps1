@@ -165,7 +165,7 @@ if($TYPE -eq "Debug"){
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
-	dk_echo "$CMAKE_EXE $CMAKE_ARGS"
+	dk_echo "$CMAKE_EXE $CMAKE_ARGS ${clr}"
 	dk_call "$CMAKE_EXE" @CMAKE_ARGS
 	dk_echo
 }

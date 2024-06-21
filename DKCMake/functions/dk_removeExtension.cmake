@@ -2,23 +2,23 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_removeExtension(path ret_var) NOERROR
+# dk_removeExtension(path ret_var) NO_HALT
 #
 #	Remove the extension from a file path
 #
 #	@path				- TODO
 #	@ret_var			- TODO
-#   NOERROR (optional)	- if one of the parameters is NOERROR, dk_error() messages will not be displayed
+#   NO_HALT (optional)	- if one of the parameters is NO_HALT, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path ret_var)
 	dk_debugFunc(${ARGV})
-	dk_getOption(NOERROR ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
 	#dk_includes(${path} "." includes REVERSE)
 	#if(NOT includes)
-		if(NOT NOERROR)
+		if(NOT NO_HALT)
 			dk_error("dk_removeExtension(${path}): no extension found")
 		endif()
 		return()

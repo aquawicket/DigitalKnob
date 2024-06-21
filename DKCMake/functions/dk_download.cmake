@@ -2,20 +2,20 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_download(src_path dest_path) #NOERROR
+# dk_download(src_path dest_path) #NO_HALT
 #
 #	Download a file
 #
 #	@src_path	- The url of the file to download
 #	@dest_path	- The path to download the file to
-#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#   NO_HALT     - if any of the parameters equals NO_HALT, dk_error() messages will not be displayed
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download src_path) # ARGV1 = dest_path #NOERROR
+function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	dk_debugFunc(${ARGV})
 	
-	dk_getOption(NOERROR ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
@@ -91,7 +91,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	dk_printVar(dest_ext)
 	
 	if(EXISTS ${dest_path})
-		if(NOT NOERROR)
+		if(NOT NO_HALT)
 			dk_notice("dest_path:(${dest_path}) already exists")
 		endif()
 		return()

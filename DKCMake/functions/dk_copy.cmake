@@ -2,20 +2,20 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_copy(from to) OVERWRITE NOERROR
+# dk_copy(from to) OVERWRITE NO_HALT
 #
 #	Copy a file or directory to another location
 #
 #	@from		- The source path to copy
 #	@to			- The destination path to copy to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
-#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#   NO_HALT     - if any of the parameters equals NO_HALT, dk_error() messages will not be displayed
 #
-function(dk_copy from to) # OVERWRITE NOERROR
+function(dk_copy from to) # OVERWRITE NO_HALT
 	dk_debugFunc(${ARGV})
 	
 	dk_getOption(OVERWRITE ${ARGV})
-	dk_getOption(NOERROR ${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
 	
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})
@@ -54,7 +54,7 @@ function(dk_copy from to) # OVERWRITE NOERROR
 			endif()
 		endif()
 	else()
-		if(NOT NOERROR)
+		if(NOT NO_HALT)
 			dk_error("from:(${from}) The source path does not exist")
 		endif()
 	endif()

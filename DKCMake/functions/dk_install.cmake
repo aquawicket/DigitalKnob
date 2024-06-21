@@ -94,7 +94,7 @@ function(dk_install plugin) #PATCH
 		set(dl_filename ${url_filename})
 	endif()
 	
-	dk_download(${url_path} ${DKDOWNLOAD_DIR}/${dl_filename} NOERROR)
+	dk_download(${url_path} ${DKDOWNLOAD_DIR}/${dl_filename} NO_HALT)
 	# TODO: option to delete downloaded file after extraction to conserve disk space
 	
 	if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
@@ -145,7 +145,7 @@ function(dk_install plugin) #PATCH
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
 		dk_info("Extracting ${dl_filename}")
-		dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED NOERROR)
+		dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED NO_HALT)
 		dk_extract(${DKDOWNLOAD_DIR}/${dl_filename} ${DKDOWNLOAD_DIR}/UNZIPPED)
 		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DKDOWNLOAD_DIR}/UNZIPPED/" "${DKDOWNLOAD_DIR}/UNZIPPED/*")
