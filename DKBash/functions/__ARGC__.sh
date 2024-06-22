@@ -4,7 +4,7 @@
 ##################################################################################
 # __ARGC__(<frame>)
 #
-__ARGC__() {
+__ARGC__ (){
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
 
 	dk_return "${BASH_ARGC[${_FRAME_}]-}"
@@ -12,7 +12,7 @@ __ARGC__() {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__ARGC__)"
 

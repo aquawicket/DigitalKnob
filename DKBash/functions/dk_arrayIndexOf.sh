@@ -8,7 +8,7 @@
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 #
-dk_arrayIndexOf () {
+dk_arrayIndexOf (){
 	dk_debugFunc
 	[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -25,7 +25,7 @@ dk_arrayIndexOf () {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myArray[0]="a"

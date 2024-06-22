@@ -7,7 +7,7 @@
 #
 #	reference: https://stackoverflow.com/a/11092989/688352
 #
-dk_tryCatch () {
+dk_tryCatch (){
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -25,7 +25,7 @@ dk_tryCatch () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

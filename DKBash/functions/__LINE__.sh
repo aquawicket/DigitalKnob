@@ -4,7 +4,7 @@
 ##################################################################################
 # __LINE__(<frame>)
 #
-__LINE__() {
+__LINE__ (){
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
 
 	dk_return "${BASH_LINENO[${_FRAME_}]}"
@@ -12,7 +12,7 @@ __LINE__() {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__LINE__)"
 

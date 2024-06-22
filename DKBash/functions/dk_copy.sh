@@ -11,7 +11,7 @@
 #	@to			- The destination path to copy to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
-dk_copy () {
+dk_copy (){
 	dk_debugFunc
 	[ $# -lt 2 ] && dk_error "${FUNCNAME}($#): not enough arguments"
 	[ $# -gt 3 ] && dk_error "${FUNCNAME}($#): too many arguments"
@@ -49,7 +49,7 @@ dk_copy () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	

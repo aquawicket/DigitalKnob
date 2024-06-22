@@ -6,7 +6,7 @@
 # dk_validateBranch()
 #
 #
-dk_validateBranch () {
+dk_validateBranch (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -74,7 +74,7 @@ dk_validateBranch () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validateBranch
 }

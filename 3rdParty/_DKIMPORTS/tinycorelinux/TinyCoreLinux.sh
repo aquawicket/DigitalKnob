@@ -23,13 +23,13 @@ QEMU_DRIVE_SIZE="10G"
 
 
 # Launching the VM (after install)
-function launch() {
+function launch (){
 	echo "Starting up TinyCoreLinux . . ."
 	${QEMU}/qemu-system-x86_64 -boot menu=on -drive file=${TINYCORELINUX_IMG} -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio
 }
 
 # Launching the VM with CD to install
-function install() {
+function install (){
 	echo "Installing TinyCoreLinux . . ."
 	${QEMU}/qemu-system-x86_64 -cdrom ${TINYCORELINUX_ISO} -boot menu=on -drive file=${TINYCORELINUX_IMG} -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio
 	#if NOT "%ERRORLEVEL%" == "0" (
@@ -40,7 +40,7 @@ function install() {
 }
 
 # Create the virtual image (10gb)
-function create_image() {
+function create_image (){
 	if file_exists ${TINYCORELINUX_IMG%}; then
 		assert "${TINYCORELINUX_IMG} already exists"
 		return 1
@@ -57,7 +57,7 @@ function create_image() {
 }
 
 # Download CorePlus-current.iso
-function download_iso() {
+function download_iso (){
 	if ! file_exists ${TINYCORELINUX_ISO}; then
 		echo "Downloading CorePlus-current.iso . . ."
 		download ${TINYCORELINUX_DL} ${TINYCORELINUX_ISO}
@@ -66,7 +66,7 @@ function download_iso() {
 }
 
 ### main ###
-function main() {
+function main (){
 	echo "TinyCoreLinux"
 
 	if file_exists ${TINYCORELINUX_IMG}; then

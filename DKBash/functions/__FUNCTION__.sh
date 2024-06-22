@@ -4,7 +4,7 @@
 ##################################################################################
 # __FUNCTION__(<frame>)
 #
-__FUNCTION__() {
+__FUNCTION__ (){
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
 
 	dk_return "${FUNCNAME[${_FRAME_}]}"
@@ -12,7 +12,7 @@ __FUNCTION__() {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__FUNCTION__)"
 

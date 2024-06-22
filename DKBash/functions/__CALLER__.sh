@@ -4,7 +4,7 @@
 ##################################################################################
 # __CALLER__(<frame>)
 #
-__CALLER__() {
+__CALLER__ (){
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
 	((_FRAME_=_FRAME_+1))
 
@@ -13,7 +13,7 @@ __CALLER__() {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__CALLER__)"
 

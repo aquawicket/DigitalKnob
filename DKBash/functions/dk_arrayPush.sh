@@ -8,7 +8,7 @@ dk_fixme
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_push
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
-dk_arrayPush () {
+dk_arrayPush (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -24,7 +24,7 @@ dk_arrayPush () {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	myArray[0]="a"
 	myArray[1]="b"

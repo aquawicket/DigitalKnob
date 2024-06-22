@@ -7,7 +7,7 @@
 #
 #    https://en.wikipedia.org/wiki/Dirname
 #
-dk_getDirname () {
+dk_getDirname (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -17,7 +17,7 @@ dk_getDirname () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getDirname /usr/bin directory
 	echo "directory = ${directory}"

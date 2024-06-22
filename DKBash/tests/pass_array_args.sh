@@ -3,7 +3,7 @@
 # https://stackoverflow.com/a/4017175
 
 
-takes_ary_as_arg() {
+takes_ary_as_arg (){
 	declare -a arg1_array=("${!1}")
 	echo ""
 	for ((i=0; i < ${#arg1_array[@]}; i++ )); do 
@@ -32,7 +32,7 @@ takes_ary_as_arg() {
 	#dk_printVar "${3}"
 }
 
-takes_ary_as_arg2() {
+takes_ary_as_arg2 (){
 	local arg1_array=("${!1}")
 	echo ""
 	for ((i=0; i < ${#arg1_array[@]}; i++ )); do 
@@ -43,7 +43,7 @@ takes_ary_as_arg2() {
 }
 
 
-main() {
+main (){
 	local myArry1=(
         "This"
         "is"

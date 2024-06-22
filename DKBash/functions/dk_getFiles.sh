@@ -6,7 +6,7 @@
 #
 #   reference: https://stackoverflow.com/a/138581
 #
-dk_getFiles () {
+dk_getFiles (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -17,7 +17,7 @@ dk_getFiles () {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getFiles /c/Windows/System32 output
 

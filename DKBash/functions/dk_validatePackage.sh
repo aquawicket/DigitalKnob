@@ -6,7 +6,7 @@
 # dk_validatePackage(<command> <package>)
 #
 #
-dk_validatePackage () {
+dk_validatePackage (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
 	
@@ -16,7 +16,7 @@ dk_validatePackage () {
 }
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validatePackage
 }

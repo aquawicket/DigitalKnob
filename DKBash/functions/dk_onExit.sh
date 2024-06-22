@@ -7,7 +7,7 @@
 # dk_onExit()
 #
 #
-dk_onExit () {
+dk_onExit (){
 	dk_debugFunc
 
 #	[ ${KEY_WAIT_ON_EXIT} -eq 1 ] && [ $SHLVL -eq 1 ] && read -rp 'dk_onExit(): Press enter to exit...' key
@@ -21,7 +21,7 @@ trap 'dk_onExit' EXIT
 
 
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-DKTEST() { 
+DKTEST (){ 
 	echo "calling exit . . ."
 	exit
 }

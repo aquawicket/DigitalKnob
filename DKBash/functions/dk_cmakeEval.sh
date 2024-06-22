@@ -6,7 +6,7 @@
 # dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 #
 #			
-dk_cmakeEval () {
+dk_cmakeEval (){
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -44,7 +44,7 @@ dk_cmakeEval () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_cmakeEval "dk_debug('sent with dk_cmakeEval')" "CMAKE_CURRENT_LIST_DIR"

@@ -6,7 +6,7 @@
 # dk_getFuncName(<output>)
 #
 #
-dk_getFuncName() {
+dk_getFuncName (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -16,7 +16,7 @@ dk_getFuncName() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getFuncName funcName
 	echo "funcName = ${funcName}"

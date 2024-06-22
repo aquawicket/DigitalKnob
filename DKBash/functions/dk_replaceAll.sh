@@ -6,7 +6,7 @@
 # dk_replaceAll("input" "searchValue" "newValue" <output_variable>)
 #
 #
-dk_replaceAll () {
+dk_replaceAll (){
 	dk_debugFunc
 	[ $# -ne 4 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -33,7 +33,7 @@ dk_replaceAll () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	string_var="AZC AZC Zannana Zread"
 	echo "string before:  ${string_var}"

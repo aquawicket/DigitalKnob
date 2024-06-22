@@ -9,7 +9,7 @@
 #
 #	@msg	- The message to print
 #
-dk_error () {
+dk_error (){
 	dk_debugFunc
 
 	[ ${ENABLE_dk_error-1} -ne 1 ] && return
@@ -25,7 +25,7 @@ dk_error () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 
 	dk_error "test dk_error message"

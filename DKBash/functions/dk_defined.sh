@@ -7,7 +7,7 @@
 #
 # Evaluates to true if the parameter is a variable that exists.
 #
-dk_defined () {
+dk_defined (){
 	dk_debugFunc
 	[ $# -ne 1 ] && return ${false} # Incorrect number of parameters
 	
@@ -26,7 +26,7 @@ dk_defined () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	varA="A simple string variable"
 	if dk_defined varA; then

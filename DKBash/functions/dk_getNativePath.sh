@@ -6,7 +6,7 @@
 # dk_getNativePath(<path> <ret_val>)
 #
 #
-dk_getNativePath () {
+dk_getNativePath (){
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
@@ -27,7 +27,7 @@ dk_getNativePath () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getNativePath "/c/Windows/System32" nativePath
 	echo "nativePath = ${nativePath}"

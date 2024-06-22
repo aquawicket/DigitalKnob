@@ -9,7 +9,7 @@
 #               https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html#ANSI_002dC-Quoting
 #               https://unix.stackexchange.com/a/347410
 #
-dk_hexToVariable () {
+dk_hexToVariable (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -24,7 +24,7 @@ dk_hexToVariable () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_hexToVariable 0x8C HEX_0x8C
 	echo "HEX_0x8C = ${HEX_0x8C}"

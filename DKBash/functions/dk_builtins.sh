@@ -10,7 +10,7 @@
 # dk_builtins()
 #
 #
-dk_builtins () {
+dk_builtins (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -20,7 +20,7 @@ dk_builtins () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_debug "DKTEST(${DKSCRIPT_NAME})"

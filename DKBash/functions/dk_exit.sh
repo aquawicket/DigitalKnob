@@ -6,7 +6,7 @@
 # dk_exit()
 #
 #
-dk_exit () {
+dk_exit (){
 	dk_debugFunc
 	
 	# TODO: when open with icon, we can use exec to keep the window open
@@ -18,7 +18,7 @@ dk_exit () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_exit
 }

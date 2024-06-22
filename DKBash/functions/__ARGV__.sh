@@ -4,7 +4,7 @@
 ##################################################################################
 # __ARGV__(<frame>)
 #
-__ARGV__() {
+__ARGV__ (){
 	[ -z ${1-} ] && local frame=0 || local frame=$1
 	
 	local marker=0
@@ -25,7 +25,7 @@ __ARGV__() {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__ARGV__)"
 

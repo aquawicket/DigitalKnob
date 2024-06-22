@@ -7,7 +7,7 @@
 #
 #    reference: https://stackoverflow.com/a/18443300/688352
 #
-dk_realpath() {
+dk_realpath (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -28,7 +28,7 @@ dk_realpath() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_realpath dk_load.sh _realpath
 	echo "_realpath = ${_realpath}"

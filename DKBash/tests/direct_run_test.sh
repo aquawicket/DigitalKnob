@@ -19,7 +19,7 @@ export white="$ESC[37m"
 	
 echo "...Direct Run Test..."
 
-main () {
+main (){
 	$echo "\n${magenta}'. func1 sourced_1' >${clr}"	
 	. func1 sourced_1
 	$echo "${magenta}< '. func1 sourced_1'${clr}"	

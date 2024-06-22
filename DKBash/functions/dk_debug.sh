@@ -9,7 +9,7 @@
 #
 #	@msg	- The message to print
 #
-dk_debug () {
+dk_debug (){
 	dk_debugFunc
 
 	[ ${ENABLE_dk_debug-1} -ne 1 ] && return
@@ -25,7 +25,7 @@ dk_debug () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_echo "test dk_echo message"
 	dk_debug "test dk_debug message"

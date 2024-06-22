@@ -5,7 +5,7 @@
 # dk_appendCmakeArgs(string)
 #
 #
-dk_appendCmakeArgs () {
+dk_appendCmakeArgs (){
 	dk_debugFunc
 	#[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -16,7 +16,7 @@ dk_appendCmakeArgs () {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 
 	dk_todo
 

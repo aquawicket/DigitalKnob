@@ -9,7 +9,7 @@
 #
 #	@msg	- The message to print
 #
-dk_warning () {
+dk_warning (){
 	dk_debugFunc
 	
 	[ ${ENABLE_dk_warning-1} -ne 1 ] && return
@@ -29,7 +29,7 @@ dk_warning () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_warning "test dk_warning message"
 	dk_info "...next line..."

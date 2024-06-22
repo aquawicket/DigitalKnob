@@ -6,7 +6,7 @@
 # dk_extract(<file_path> <destination>)
 #
 #
-dk_extract () {
+dk_extract (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -33,7 +33,7 @@ dk_extract () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
 	dk_extract "${DKDOWNLOAD_DIR}/cmake-3.29.0-windows-x86_64.zip" "${DKDOWNLOAD_DIR}"

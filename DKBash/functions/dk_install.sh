@@ -6,7 +6,7 @@
 # dk_install(<package>)
 #
 #
-dk_install () {
+dk_install (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -40,7 +40,7 @@ dk_install () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_install wget
 }

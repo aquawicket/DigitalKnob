@@ -6,7 +6,7 @@
 # dk_delete(<path>)
 #
 #
-dk_delete () {
+dk_delete (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -26,7 +26,7 @@ dk_delete () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_delete
 }

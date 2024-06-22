@@ -6,7 +6,7 @@
 # dk_isEmpty(directory)
 #
 #
-dk_isEmpty() {
+dk_isEmpty (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -24,7 +24,7 @@ dk_isEmpty() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "PWD = $PWD"
 

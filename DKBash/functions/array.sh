@@ -16,7 +16,7 @@ esac
 # Array constructor
 #
 # Turn arguments into an array.
-array () {
+array (){
   for i in "$@" ; do
     printf '%s\n' "$i" | array_element_encode
   done
@@ -27,7 +27,7 @@ array () {
 #
 # Pass your array as the first argument:
 #   array_append "$A" 'next' 'another'
-array_append () {
+array_append (){
   printf '%s\n' "$1" && shift &&
   for i in "$@" ; do
     printf '%s\n' "$i" | array_element_encode
@@ -40,7 +40,7 @@ array_append () {
 #
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_len
-array_len () {
+array_len (){
   wc -l
 }
 
@@ -55,7 +55,7 @@ array_len () {
 #
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_nth $index
-array_nth () {
+array_nth (){
   printf '%d' "$1" >/dev/null 2>&1 \
     && "$arrayawkcmd" -v i="$1" '
         BEGIN { code=1 }
@@ -74,7 +74,7 @@ array_nth () {
 #
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_indexof "$element"
-array_indexof () {
+array_indexof (){
   e=`printf '%s\n' "$1" | array_element_encode` "$arrayawkcmd" '
     BEGIN { e=ENVIRON["e"] ; i = -1 ; code = 1 }
     i < 0 && e == $0 { i = NR - 1 ; print i ; code = 0 }
@@ -91,7 +91,7 @@ array_indexof () {
 #
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_remove "$element"
-array_remove () {
+array_remove (){
   e=`printf '%s\n' "$1" | array_element_encode` "$arrayawkcmd" '
     BEGIN { e=ENVIRON["e"] ; i = -1 ; code = 1 }
     { if (i < 0 && e == $0) { i = NR - 1 ; code = 0 } else { print $0 } }
@@ -104,14 +104,14 @@ array_remove () {
 #
 # This is similar to urlencode but only for % and \n (and not \0).
 #
-array_element_encode() {
+array_element_encode (){
   sed 's/%/%25/g' | sed -e :a -e '$!N; s/\n/%0A/; ta'
 }
 
 ##
 # Inverse function of array_element_encode.
 #
-array_element_decode() {
+array_element_decode (){
   sed -e 's/%0[aA]/\
 /g' -e 's/%25/%/g'
 }

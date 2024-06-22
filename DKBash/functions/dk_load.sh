@@ -9,7 +9,7 @@
 #
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
-dk_load() {
+dk_load (){
 	dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
@@ -22,14 +22,26 @@ dk_load() {
 	else
 		funcName="$1"
 		funcName=$(basename ${funcName})
+		funcName="${funcName%.*}"
 		funcPath=${DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 	fi
 	
 	#### download if missing ####
-	[ ! -e ${funcPath} ] && echo "Dowloading ${funcName}"
-	[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${funcName}.sh
-	[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${funcName}.sh
-	[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
+	if [ ! -e ${funcPath} ]; then
+		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		$(dk_download) || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
+	
+		echo "Dowloading ${funcName}"
+		dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
+		
+		[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
+		
+		#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
+		#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
+		#[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
+	fi
+	
 	
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
@@ -99,7 +111,7 @@ dk_load() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_load
 }

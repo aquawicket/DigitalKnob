@@ -6,7 +6,7 @@
 # dk_hexToAscii(hex, ascii)
 #
 #
-dk_hexToAscii () {
+dk_hexToAscii (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -19,7 +19,7 @@ dk_hexToAscii () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_hexToAscii 0x55 ascii

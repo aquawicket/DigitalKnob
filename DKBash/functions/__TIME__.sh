@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-#from_nano_to_readable() {
+#from_nano_to_readable (){
 #   (( $# )) || { printf '%s\n' 'provide atleast one argument' >&2 ; }
 #    input="$1"
 #    withNano="$(( $input % 1000000000 ))"
@@ -12,7 +12,7 @@
 ##################################################################################
 # __TIME__()
 #
-__TIME__() {
+__TIME__ (){
         nanoseconds="$(date +%s%N)"
        date_nanoseconds="$(( nanoseconds % 1000000000))"
 
@@ -95,7 +95,7 @@ date_seconds="$(date -d@"$((    seconds % 1000000000))" +"%S")"
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	echo "$(__TIME__)"
 

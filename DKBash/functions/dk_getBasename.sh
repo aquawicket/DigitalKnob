@@ -6,7 +6,7 @@
 # dk_getBasename(path, rtn_var)
 #
 #
-dk_getBasename () {
+dk_getBasename (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -17,7 +17,7 @@ dk_getBasename () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getBasename "/path/to/a/filename.txt" basename
 	dk_echo "basename = ${basename}"

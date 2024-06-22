@@ -14,7 +14,7 @@ TEST_VAR="this is a test variable"
 dk_printVar TEST_VAR
 
 ###### main ######
-main() {
+main (){
 	dk_debug "main($@)"	
 	dk_echo "\n######################## TEST FIELD ########################\n"
 
@@ -172,13 +172,13 @@ main() {
 	func_2
 }
 
-func_2 () {
+func_2 (){
 	dk_debug "func_2($@)"
 	dk_stacktrace
 }
 
 ###### evaluate() ######
-evaluate () {
+evaluate (){
 	#dk_debug "evaluate($@)"
 	export _true="${green}true${clr}"
 	export _false="${red}false${clr}"
@@ -187,14 +187,14 @@ evaluate () {
 	return $?
 }
 
-test_function () {
+test_function (){
 	#dk_debug "test_function($@)"
 	#args=( "$@" )
 	loop_array "$@"
 	exit_code="$?"
 }
 
-loop_array () {
+loop_array (){
 	#dk_debug "loop_array($@)"
 	for I in "${@}"
 	do
@@ -202,7 +202,7 @@ loop_array () {
 	done
 }
 
-escape_quotes () {
+escape_quotes (){
 	#dk_debug "escape_quotes($@)"
 	input=$1
 	output=$(echo $input  | sed 's/"/\\"/g')

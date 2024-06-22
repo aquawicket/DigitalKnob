@@ -39,7 +39,7 @@ alias dk_includeGuard='{
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	. ${DKBASH_FUNCTIONS_DIR}/dk_debug
 	. ${DKBASH_FUNCTIONS_DIR}/dk_debug

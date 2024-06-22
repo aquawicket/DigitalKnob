@@ -6,7 +6,7 @@
 # dk_sleep(<seconds>)
 #
 #
-dk_sleep () {
+dk_sleep (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -15,7 +15,7 @@ dk_sleep () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "sleeping for 5 seconds . . ."
 	dk_sleep 5

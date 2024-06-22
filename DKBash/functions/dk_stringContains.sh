@@ -6,7 +6,7 @@
 # dk_stringContains(<string> <substring>)
 #
 #
-dk_stringContains () {
+dk_stringContains (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -22,7 +22,7 @@ dk_stringContains () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 
 	if dk_stringContains "1one1" "one"; then

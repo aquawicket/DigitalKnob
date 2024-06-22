@@ -13,7 +13,7 @@
 #   eval "set -- $myarrayA"
 #	echo "$1 $2 $3 $4"
 #
-dk_saveArgs () {
+dk_saveArgs (){
 	dk_debugFunc
 
 	for i do 
@@ -24,7 +24,7 @@ dk_saveArgs () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_saveArgs
 }

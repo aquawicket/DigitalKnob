@@ -4,7 +4,7 @@
 ################################################################################
 # dk_assertPath(path)
 #
-dk_assertPath() {
+dk_assertPath (){
     dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -19,7 +19,7 @@ dk_assertPath() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_set sys32path "/c/Windows/System32"

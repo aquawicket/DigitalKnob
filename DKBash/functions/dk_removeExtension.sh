@@ -6,7 +6,7 @@
 # dk_removeExtension(<filepath> <output>)
 #
 #
-dk_removeExtension () {
+dk_removeExtension (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -19,7 +19,7 @@ dk_removeExtension () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	filepath="/test/test2/xfile.extension"
 	dk_removeExtension "${filepath}" name

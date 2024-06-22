@@ -7,7 +7,7 @@
 #
 #	Bundle multiple .sh files into 1 .sh file.
 #
-dk_bundleSource () {
+dk_bundleSource (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -25,7 +25,7 @@ dk_bundleSource () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_bundleSource

@@ -6,7 +6,7 @@
 # dk_pickType()
 #
 #
-dk_pickType() {
+dk_pickType (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -41,7 +41,7 @@ dk_pickType() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_pickType
 }

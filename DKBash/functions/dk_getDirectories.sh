@@ -6,7 +6,7 @@
 #
 #   reference: https://stackoverflow.com/a/138581
 #
-dk_getDirectories () {
+dk_getDirectories (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -21,7 +21,7 @@ dk_getDirectories () {
 
 
 
-DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getDirectories /c/Windows/System32 output
 

@@ -6,7 +6,7 @@
 # dk_pickUpdate()
 #
 #
-dk_pickUpdate() {
+dk_pickUpdate (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -97,7 +97,7 @@ dk_pickUpdate() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_pickUpdate
 }

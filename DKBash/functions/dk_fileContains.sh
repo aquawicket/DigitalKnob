@@ -6,7 +6,7 @@
 # dk_fileContains(file, string)
 #
 #
-dk_fileContains() {
+dk_fileContains (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 		
@@ -15,7 +15,7 @@ dk_fileContains() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "find the needle in the haystack" > fileContains_TEST.txt
 	

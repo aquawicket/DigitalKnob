@@ -6,7 +6,7 @@
 # dk_clearCmakeCache()
 #
 #
-dk_clearCmakeCache () {
+dk_clearCmakeCache (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -18,7 +18,7 @@ dk_clearCmakeCache () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_clearCmakeCache

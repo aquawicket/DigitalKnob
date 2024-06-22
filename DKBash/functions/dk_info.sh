@@ -15,7 +15,7 @@
 #
 #	@msg	- The message to print
 #
-dk_info () {
+dk_info (){
 	dk_debugFunc
 	
 	[ ${ENABLE_dk_info} -ne "1" ] && return
@@ -31,7 +31,7 @@ dk_info () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_info "test dk_info message"
 	echo "...next line..."

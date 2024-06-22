@@ -6,7 +6,7 @@
 # dk_removeCarrageReturns(<input>)
 #
 #
-dk_removeCarrageReturns () {
+dk_removeCarrageReturns (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
@@ -17,7 +17,7 @@ dk_removeCarrageReturns () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_removeCarrageReturns
 }

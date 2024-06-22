@@ -6,7 +6,7 @@
 # dk_getShellType(<output>)
 #
 #
-dk_getShellType () {
+dk_getShellType (){
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -26,7 +26,7 @@ dk_getShellType () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getShellType shellType
 	echo "shellType = ${shellType}"

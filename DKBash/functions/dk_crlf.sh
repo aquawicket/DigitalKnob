@@ -7,7 +7,7 @@
 #
 #
 #
-dk_crlf() {
+dk_crlf (){
 	dk_debugFunc
 	
 	dk_todo "dk_crlf needs to be implemented"
@@ -16,7 +16,7 @@ dk_crlf() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_crlf
 }

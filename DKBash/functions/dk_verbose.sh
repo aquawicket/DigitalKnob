@@ -15,7 +15,7 @@
 #
 #	@msg	- The message to print
 #
-dk_verbose () {
+dk_verbose (){
 	dk_debugFunc
 	
 	[ ${ENABLE_dk_verbose-1} -ne 1 ] && return
@@ -32,7 +32,7 @@ dk_verbose () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_verbose "test dk_verbose message"
 	dk_info "...next line..."

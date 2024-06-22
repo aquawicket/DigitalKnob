@@ -5,7 +5,7 @@
 # DKINIT()
 #
 #
-DK () {
+DK (){
 	dk_echo "DKINIT($*)"
 	
 	
@@ -155,7 +155,7 @@ dk_DKHTTP_VARS(){
 # dk_setupCallstack()
 #
 dk_setupCallstack(){
-	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ] || dk_command curl -Lo DKBash/functions/dk_callStack.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/dk_callStack.sh
+	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ] || dk_command curl -Lo DKBash/functions/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
 
 ##################################################################################
@@ -228,7 +228,7 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/$1.sh
+	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$1.sh
 	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/$1.sh
 	. ${DKBASH_FUNCTIONS_DIR}/$1.sh
@@ -261,7 +261,7 @@ dk_command(){
 
 DK
 
-#DK_TRY_CATCH () {
+#DK_TRY_CATCH (){
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 #	set +e; ( set -e
 #		DK

@@ -6,7 +6,7 @@
 #
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
-dk_arrayLength () {
+dk_arrayLength (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	dk_validateArgs array rtn_var

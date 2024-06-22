@@ -5,7 +5,7 @@
 # dk_test(<arg1> <ret_val>)
 #
 #
-dk_test() {
+dk_test (){
 	dk_debugFunc
 	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
@@ -59,7 +59,7 @@ dk_test() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 		
 	### (input:string output:return_var) ###

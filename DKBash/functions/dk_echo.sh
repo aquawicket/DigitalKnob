@@ -5,7 +5,7 @@
 [ -z ${OVERWRITE_echo-} ]      && export OVERWRITE_echo=1
 
 if [ "$OVERWRITE_echo" = "1" ]; then
-	echo () {
+	echo (){
 		#[ -z ${ESCAPES-} ]      && export ESCAPES=1
 		#[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
 		#[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
@@ -26,7 +26,7 @@ fi
 # dk_echo(<message>)
 #
 #
-dk_echo () {
+dk_echo (){
 	dk_debugFunc
 #	echo "${1-}"
 	
@@ -43,7 +43,7 @@ dk_echo () {
 }
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	echo "This is a normal echo commmand"
 	dk_echo "This is a dk_echo line"

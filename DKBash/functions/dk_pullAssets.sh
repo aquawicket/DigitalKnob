@@ -6,7 +6,7 @@
 # dk_pullAssets()
 #
 #
-dk_pullAssets () {
+dk_pullAssets (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -17,7 +17,7 @@ dk_pullAssets () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_pullAssets
 }

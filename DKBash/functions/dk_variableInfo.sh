@@ -6,7 +6,7 @@
 # dk_variable_info(<name> <output>)
 #
 #
-dk_variable_info () {
+dk_variable_info (){
 	dk_debugFunc
 	
 	[ $# -ne 2 ] && return ${false}										# if not exactly 2 parameters
@@ -26,7 +26,7 @@ dk_variable_info () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_variable_info
 }
