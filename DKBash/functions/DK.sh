@@ -6,40 +6,38 @@
 #
 #
 DK (){
+	###### Initialize Language specifics ######
+	dk_init
 	dk_echo "DKINIT($*)"
 	
 	
-	###### Initialize Language specifics ######
-	dk_init
-
-
 	###### Reload Main Script with bash ######
 	dk_reloadWithBash $*
 	
 	
 	############ Get DKBASH variables ############
 	dk_DKBASH_VARS
-	dk_echo "DKBASH_DIR = ${DKBASH_DIR}"
-	dk_echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+	dk_printVar DKBASH_DIR
+	dk_printVar DKBASH_FUNCTIONS_DIR
 
 
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS
-	dk_echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
+	dk_printVar DKHTTP_DKBASH_FUNCTIONS_DIR
 
 
 	############ Setup dk_callStack ############
 	#dk_setupCallstack
-	#call dk_callStack
+	#dk_callStack
 	#:dk_callStackReturn
 
 
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS
-	dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	dk_echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
-	dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	dk_echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+	dk_printVar DKSCRIPT_PATH
+	dk_printVar DKSCRIPT_ARGS
+	dk_printVar DKSCRIPT_DIR
+	dk_printVar DKSCRIPT_NAME
 	
 	
 	############ Setup KeepOpen ############
@@ -69,7 +67,7 @@ DK (){
 	dk_load dk_onError   	# ERR handler
 	
 	dk_call dk_color
-		
+			
 	dk_load ${DKSCRIPT_PATH}
 				
 	
@@ -79,18 +77,18 @@ DK (){
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
-			#export ENABLE_dk_debugFunc=1
-			echo ""
-			echo "${bg_white}${black}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
-			echo ""
+			#dk_export ENABLE_dk_debugFunc 1
+			dk_echo ""
+			dk_echo "${bg_white}${black}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
+			dk_echo ""
 			#. ${DKSCRIPT_PATH}
-			#echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
+			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
-			echo ""
-			echo "${bg_white}${black}########################## END TEST ################################${clr}"
-			echo ""
+			dk_echo ""
+			dk_echo "${bg_white}${black}########################## END TEST ################################${clr}"
+			dk_echo ""
 			dk_source dk_pause && dk_pause
-			exit
+			dk_exit
 		fi
 	fi
 }
@@ -99,25 +97,21 @@ DK (){
 
 
 ##################################################################################
-# dk_echo()
-#
-dk_echo(){
-	echo $*
-}
-
-##################################################################################
 # dk_init()
 #
 dk_init(){
-	dk_echo "### DKBash ###"
+	echo "### DKBash ###"
 	
 	###### fallback functions ######
-	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v "$1" &>/dev/null); }
+	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v $1 &>/dev/null); }
+	dk_commandExists "dk_echo"       || function dk_echo()      { echo $*;            }
 	dk_commandExists "dk_pathExists" || function dk_pathExists(){ [ -e "$1" ];        }
-	dk_commandExists "dk_error"      || function dk_error()     { echo "ERROR: $1";   }
+	dk_commandExists "dk_error"      || function dk_error()     { [$(read -rp "ERROR: $1, press enter to exit")] || exit; }
 	dk_commandExists "dk_warning"    || function dk_warning()   { echo "WARNING: $1"; }
 	dk_commandExists "dk_info"       || function dk_info()      { echo "$1";          }
 	dk_commandExists "dk_printVar"   || function dk_printVar()  { echo "$1 = ${!1}";  }
+	dk_commandExists "dk_unset"      || function dk_unset()     { unset "$1"; }
+	dk_commandExists "dk_export"     || function dk_export()    { export $1="$2"; }
 }
 
 ##################################################################################
@@ -125,10 +119,10 @@ dk_init(){
 #
 dk_reloadWithBash(){
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
-		export RELOAD_WITH_BASH=0
-		echo "reloading with bash . . ."
-		unset DKINIT
-		export readonly DKINIT
+		dk_export  RELOAD_WITH_BASH 0
+		dk_echo    "reloading with bash . . ."
+		dk_unset   DKINIT
+		dk_export  DKINIT
 		dk_command bash "$0"
 	fi
 }
@@ -137,46 +131,46 @@ dk_reloadWithBash(){
 # dk_DKBASH_VARS()
 #
 dk_DKBASH_VARS(){
-	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" &>/dev/null; pwd -P )
-	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
-	export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-	[ -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] || [$(read -rp '${DKBASH_FUNCTIONS_DIR}/DK.sh not found, press enter to exit')] || exit;
+	dk_export BASH_SOURCE_DIR      $( cd -- "$(dirname "$BASH_SOURCE")"     &>/dev/null; pwd -P )
+	dk_export DKBASH_DIR           $( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
+	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
-	#export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
+	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
 	
 	###### set true and false variables ######
-	export readonly true=0
-	export readonly false=1
+	dk_export true 0
+	dk_export false 1
 }
 
 ##################################################################################
 # dk_DKHTTP_VARS()
 #
 dk_DKHTTP_VARS(){
-	export DKHTTP_DIGITALKNOB_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/Development"
-	export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
-	export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
+	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+	dk_export DKHTTP_DKBRANCH_DIR         "${DKHTTP_DIGITALKNOB_DIR}/Development"
+	dk_export DKHTTP_DKBASH_DIR           "${DKHTTP_DKBRANCH_DIR}/DKBash"
+	dk_export DKHTTP_DKBASH_FUNCTIONS_DIR "${DKHTTP_DKBASH_DIR}/functions"
 }
 
 ##################################################################################
 # dk_setupCallstack()
 #
 dk_setupCallstack(){
-	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ] || dk_command curl -Lo DKBash/functions/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
 
 ##################################################################################
 # dk_DKSCRIPT_VARS()
 #
 dk_DKSCRIPT_VARS(){
-	[ -e $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) ] && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
-	[ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
-	[ -e ${DKSCRIPT_PATH} ] || [$(read -rp 'DKSCRIPT_PATH:${DKSCRIPT_PATH} not found, press enter to exit')] || exit;
-	export DKSCRIPT_ARGS=$($*)
-	export DKSCRIPT_DIR=$(dirname ${DKSCRIPT_PATH})
-	[ -d ${DKSCRIPT_DIR} ] || [$(read -rp 'DKSCRIPT_DIR:${DKSCRIPT_DIR} not found, press enter to exit')] || exit;
-	export DKSCRIPT_NAME=$(basename ${DKSCRIPT_PATH})
+	dk_pathExists    $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
+	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
+	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
+	dk_export        DKSCRIPT_ARGS       $($*)
+	dk_export        DKSCRIPT_DIR        $(dirname ${DKSCRIPT_PATH})
+	dk_pathExists    "${DKSCRIPT_DIR}"   || dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
+	dk_export        DKSCRIPT_NAME       $(basename ${DKSCRIPT_PATH})
 }
 
 ##################################################################################
@@ -224,10 +218,10 @@ dk_setOptions(){
 #	install a unix package
 #
 dk_install(){
-	[ -n "$(command -v "$1")" ] && return 					# if the command already exists, return
-	[ -n "$(command -v "apk")" ] && apk add $1				# AlpineLinux package installer
-	[ -n "$(command -v "tce-load")" ] && tce-load -wil $1	# TinyCoreLinux package installer: -l flag means don't add to boot
-	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	dk_commandExists $1        && return 					# if the command already exists, return
+	dk_commandExists apk       && apk add $1				# AlpineLinux package installer
+	dk_commandExists tce-load  && tce-load -wil $1	        # TinyCoreLinux package installer: -l flag means don't add to boot
+	dk_commandExists $1        || dk_error "$1: command not found"
 }
 
 ##################################################################################
@@ -236,8 +230,8 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || dk_command curl -Lo DKBash/functions/$1.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$1.sh
-	[ -e ${DKBASH_FUNCTIONS_DIR}/$1.sh ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
+	dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$1.sh || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$1.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$1.sh
+	dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$1.sh || dk_error "$1: command not found"
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/$1.sh
 	. ${DKBASH_FUNCTIONS_DIR}/$1.sh
 }
@@ -248,10 +242,10 @@ dk_source(){
 #	call a DKBash function. dk_load it first if needed.
 #
 dk_call(){
-	[ -z "$(command -v "dk_load")" ] && dk_source dk_load
-	[ -z "$(command -v "$1")" ] && dk_load $1
-	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
-	echo "$@"
+	dk_commandExists dk_load  || dk_source dk_load
+	dk_commandExists $1       || dk_load $1
+	dk_commandExists $1       || dk_error "$1: command not found"
+	dk_echo "$@"
 	"$@"
 }
 
@@ -261,9 +255,9 @@ dk_call(){
 #	run a unix command. Install it first if it's missing
 #
 dk_command(){
-	[ -z "$(command -v "$1")" ] && dk_install $1
-	[ -n "$(command -v "$1")" ] || [$(read -rp '$1 command not found, press enter to exit')] || exit;
-	echo "$@"
+	dk_commandExists $1 || dk_install $1
+	dk_commandExists $1 || dk_error "$1: command not found"
+	dk_echo "$@"
 	"$@"
 }
 
@@ -276,7 +270,7 @@ DK
 #	); err_status=$?; set -e
 #
 #	if [ "${err_status}" -ne "0" ]; then
-#		echo "ERROR_STATUS: ${err_status}"
+#		dk_echo "ERROR_STATUS: ${err_status}"
 #		#read -rp 'press enter to exit'
 #		exit ${err_status}
 #	fi
