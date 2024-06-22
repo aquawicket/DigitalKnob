@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayJoin){ $dk_arrayJoin = 1 } else{ return }
 
 

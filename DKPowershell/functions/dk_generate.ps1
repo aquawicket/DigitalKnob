@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_generate){ $dk_generate = 1 } else{ return }
 
 dk_load dk_call
@@ -25,10 +25,10 @@ function Global:dk_generate() {
 	dk_clearCmakeCache
 	dk_deleteTempFiles
 
-	$TARGET_PATH = "$DKAPPS_DIR\$APP"
+	$TARGET_PATH = "$DKAPPS_DIR/$APP"
 	dk_printVar TARGET_PATH
-	dk_makeDirectory "$TARGET_PATH\$TARGET_OS"
-	cd "$TARGET_PATH\$TARGET_OS"
+	dk_makeDirectory "$TARGET_PATH/$TARGET_OS"
+	cd "$TARGET_PATH/$TARGET_OS"
 	$CMAKE_SOURCE_DIR = "$DKCMAKE_DIR"
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
 	dk_printVar CMAKE_SOURCE_DIR

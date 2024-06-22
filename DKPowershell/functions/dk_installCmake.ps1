@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_installCmake){ $dk_installCmake = 1 } else{ return }
 
 dk_load dk_validate
@@ -27,15 +27,15 @@ function Global:dk_installCmake () {
     $CMAKE_FOLDER = dk_convertToCIdentifier $CMAKE_DL_NAME 
     $CMAKE_FOLDER = dk_toLower $CMAKE_FOLDER
 	dk_validate DKTOOLS_DIR "dk_getDKPaths"
-	$global:CMAKE = "$DKTOOLS_DIR\$CMAKE_FOLDER"
-    $global:CMAKE_EXE = "$CMAKE\bin\cmake.exe"
+	$global:CMAKE = "$DKTOOLS_DIR/$CMAKE_FOLDER"
+    $global:CMAKE_EXE = "$CMAKE/bin/cmake.exe"
         
     if(dk_pathExists $CMAKE_EXE){ return }
        
     dk_info " "
     dk_info "Installing CMake . . ."
-    dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE"
-	dk_smartExtract "$DKDOWNLOAD_DIR\$CMAKE_DL_FILE" "$CMAKE"
+    dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR/$CMAKE_DL_FILE"
+	dk_smartExtract "$DKDOWNLOAD_DIR/$CMAKE_DL_FILE" "$CMAKE"
 
     
     if(!(dk_pathExists "$CMAKE_EXE")){ dk_error "cannot find cmake" }

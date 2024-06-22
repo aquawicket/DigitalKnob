@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_smartExtract){ $dk_smartExtract = 1 } else{ return }
 
 dk_load dk_realpath
@@ -34,24 +34,24 @@ function Global:dk_smartExtract($src, $dest) {
 #		dk_makeDirectory $dest_fullpath
 #	}
 	
-	dk_remove $src_dirname\UNZIPPED
+	dk_remove $src_dirname/UNZIPPED
 	dk_info "Extracting $src_filename . . ."
-	dk_extract $src_fullpath $src_dirname\UNZIPPED
+	dk_extract $src_fullpath $src_dirname/UNZIPPED
 	
-	$directories = dk_getDirectories $src_dirname\UNZIPPED
+	$directories = dk_getDirectories $src_dirname/UNZIPPED
 	$dir_count = dk_arrayLength directories
 	
-	$files = dk_getFiles $src_dirname\UNZIPPED
+	$files = dk_getFiles $src_dirname/UNZIPPED
 	$file_count = dk_arrayLength files
 	
 	if($dir_count -eq 1){
 		if($file_count -eq 0){
-			dk_move $src_dirname\UNZIPPED\$directories $dest_fullpath OVERWRITE    #rename\move UNZIPPED\root folder to dest path"
+			dk_move $src_dirname/UNZIPPED/$directories $dest_fullpath OVERWRITE    #rename/move UNZIPPED/root folder to dest path"
 			return
 		}
 	}
 
-	dk_move $src_dirname\UNZIPPED $dest_fullpath OVERWRITE    # rename\move UNZIPPED folder to dest path
+	dk_move $src_dirname/UNZIPPED $dest_fullpath OVERWRITE    # rename/move UNZIPPED folder to dest path
 }
 
 

@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
 
 dk_load dk_validate
@@ -36,15 +36,15 @@ function Global:dk_installGit () {
     $GIT_FOLDER = dk_convertToCIdentifier $GIT_DL_NAME 
     $GIT_FOLDER = dk_toLower $GIT_FOLDER GIT_FOLDER
 	dk_validate DKTOOLS_DIR "dk_getDKPaths"
-    $global:GIT_EXE = "$DKTOOLS_DIR\$GIT_FOLDER\bin\git.exe"
+    $global:GIT_EXE = "$DKTOOLS_DIR/$GIT_FOLDER/bin/git.exe"
         
     if(dk_pathExists $GIT_EXE){ return }
         
     dk_info ""  
     dk_info "Installing git . . ."
-    dk_download $GIT_DL $DKDOWNLOAD_DIR\$GIT_DL_FILE
-	dk_info "$DKDOWNLOAD_DIR\$GIT_DL_FILE -y -o $DKTOOLS_DIR\$GIT_FOLDER"
-    dk_call cmd /c "$DKDOWNLOAD_DIR\$GIT_DL_FILE" -y -o $DKTOOLS_DIR\$GIT_FOLDER
+    dk_download $GIT_DL $DKDOWNLOAD_DIR/$GIT_DL_FILE
+	dk_info "$DKDOWNLOAD_DIR/$GIT_DL_FILE -y -o $DKTOOLS_DIR/$GIT_FOLDER"
+    dk_call cmd /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $DKTOOLS_DIR/$GIT_FOLDER
 	   
     if(!(dk_pathExists $GIT_EXE)){ dk_error "cannot find git" }
 }

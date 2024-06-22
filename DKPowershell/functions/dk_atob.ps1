@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_atob){ $dk_atob = 1 } else{ return }
 
 dk_load dk_validate
@@ -30,7 +30,7 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
-	$input = "${DKBRANCH_DIR}\DKBuilder.ps1.base64"
-	$output = "${DKBRANCH_DIR}\DKBuilder_decoded.ps1"
+	$input = "${DKBRANCH_DIR}/DKBuilder.ps1.base64"
+	$output = "${DKBRANCH_DIR}/DKBuilder_decoded.ps1"
 	dk_atob "${input}" "${output}"
 }

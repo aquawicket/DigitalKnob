@@ -5,7 +5,7 @@
 ##################################################################################
 # dk_load()
 #
-#	Source a DKBash function. Download it if needed then source all of is content DKBash function recursivley.
+#	Source a DKBash function. Download it if needed then source all of is content DKBash functions` recursivley.
 #
 dk_load() {
 	dk_debugFunc

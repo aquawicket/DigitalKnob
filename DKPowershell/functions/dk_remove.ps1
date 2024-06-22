@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_remove){ $dk_remove = 1 } else{ return }
 
 dk_load dk_call
@@ -14,7 +14,7 @@ function Global:dk_remove($path) {
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
-	$path = dk_replaceAll $path "/" "\"
+	#$path = dk_replaceAll $path "/" "\"
 	if(!(dk_pathExists $path)){
 		dk_warning "dk_remove $path does not exist"
 		return

@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_gitCommit){ $dk_gitCommit = 1 } else{ return }
 
 dk_load dk_info

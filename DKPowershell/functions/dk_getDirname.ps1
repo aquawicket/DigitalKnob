@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getDirname){ $dk_getDirname = 1 } else{ return }
 
 dk_load dk_printVar
@@ -26,7 +26,7 @@ function Global:DKTEST() { #####################################################
 	dk_debugFunc
 	
 	
-	$dirname = dk_getDirname "C:\Windows\System32"
+	$dirname = dk_getDirname "C:/Windows/System32"
 	dk_echo "dirname = $dirname"
 	
 	$dirname = dk_getDirname "TEST"

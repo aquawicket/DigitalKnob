@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getDirectories){ $dk_getDirectories = 1 } else{ return }
 
 dk_load dk_error
@@ -25,6 +25,6 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	$directories = dk_getDirectories "C:\Windows"
+	$directories = dk_getDirectories "C:/Windows"
 	dk_info "directories = $directories"
 }	

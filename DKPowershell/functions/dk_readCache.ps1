@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 
 dk_load dk_pathExists
@@ -20,12 +20,12 @@ function Global:dk_readCache() {
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 
-	if(!(dk_pathExists "${DKBRANCH_DIR}\cache")){ return }
+	if(!(dk_pathExists "${DKBRANCH_DIR}/cache")){ return }
 	
-	dk_echo "reading cache... in $DKBRANCH_DIR\cache"
+	dk_echo "reading cache... in $DKBRANCH_DIR/cache"
 	$count = 0
 	
-	foreach($line in Get-Content "${DKBRANCH_DIR}\cache") {
+	foreach($line in Get-Content "${DKBRANCH_DIR}/cache") {
 		if("${count}" -eq "0"){
 			dk_set _APP_ $line
 		}

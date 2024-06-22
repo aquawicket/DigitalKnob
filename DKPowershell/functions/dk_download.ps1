@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_download){ $dk_download = 1 } else{ return }
 
 #dk_load dk_pathExists
@@ -11,15 +11,12 @@ function Global:dk_download($url, $destination) {
 	dk_debugFunc
 	
 	if(Test-Path "${destination}"){
-#	if(dk_pathExists "${destination}"){
-        dk_info "${destination} already exist"
+        Write-Host "${destination} already exist"
         return
     }
 	
 	Write-Host "Downloading $url . . ."
-#	dk_info "Downloading $url . . ."
 	Write-Host "please wait . . ."
-#   dk_info "please wait . . ."
 	
 	# method 1
     Invoke-WebRequest -URI $url -OutFile $destination #-SkipHttpErrorCheck

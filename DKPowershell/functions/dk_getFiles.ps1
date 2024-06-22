@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getFiles){ $dk_getFiles = 1 } else{ return }
 
 dk_load dk_error
@@ -25,6 +25,6 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	$files = dk_getFiles "C:\Windows"
+	$files = dk_getFiles "C:/Windows"
 	dk_echo "files = $files"
 }	

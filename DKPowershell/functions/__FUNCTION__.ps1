@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 #if(!$DK_FUNCTION){ $DK_FUNCTION = 1 } else{ return }
 
 ##################################################################################

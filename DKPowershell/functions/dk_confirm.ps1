@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_confirm){ $dk_confirm = 1 } else{ return }
 
 ##################################################################################

@@ -52,31 +52,31 @@ function DK() {
 	
 	
 	############# Load dk_load.ps1 ############
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__TIME__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__TIME__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__FILE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__FILE__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__LINE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__LINE__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__FUNCTION__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__FUNCTION__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__ARGC__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__ARGC__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__ARGV__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__ARGV__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\__CALLER__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\__CALLER__.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_debugFunc.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\dk_debugFunc.ps1" }
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1" }
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__TIME__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__FILE__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__LINE__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__FUNCTION__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__ARGC__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__ARGV__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\__CALLER__.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_debugFunc.ps1
-	. $DKPOWERSHELL_FUNCTIONS_DIR\dk_load.ps1
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" }
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1
+	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1
 	
 	
 
 	#Write-Output "env:PATH = $env:PATH"
 	#$env:PATH += ";$DKPOWERSHELL_FUNCTIONS_DIR"
 	
-	#. DKPOWERSHELL_FUNCTIONS_DIR\dk_thisFunction
+	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
 	
 	###### DKTEST MODE ######
 	if("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
@@ -116,6 +116,7 @@ function dk_init(){
 #
 function dk_DKPOWERSHELL_VARS(){
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
+	$DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR -replace '\\', '/';
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
 }
 
@@ -133,7 +134,7 @@ function dk_DKHTTP_VARS(){
 # dk_setupCallstack()
 #
 function dk_setupCallstack(){
-	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR\dk_callStack.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR\dk_callStack.ps1" }
+	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1" }
 }
 
 ##################################################################################
@@ -162,10 +163,10 @@ function Get-EntryPointAbsFilePath() {
     # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
     # NOTE 2: '$global:PSScriptRoot' is not the same as '$PSScriptRoot' and seems to correspond to the entry point script directory,
     # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but not
-    # when "MainScript.ps1" is invoked from a PowerShell session (prompt) like [PS C:\Temp>. MainScript.ps1].
+    # when "MainScript.ps1" is invoked from a PowerShell session (prompt) like [PS C:/Temp>. MainScript.ps1].
     $CallStack = Get-PSCallStack
     # We take the last stack element (correponding to the first call).
-    # The 'ScriptName' property of this first call can be null when the main script is invoked from a PowerShell session like [PS C:\Temp>. MainScript.ps1].
+    # The 'ScriptName' property of this first call can be null when the main script is invoked from a PowerShell session like [PS C:/Temp>. MainScript.ps1].
     # This is because PowerShell first evaluates the entered command.
     $FirstCall = $CallStack[$CallStack.Count - 1];
     if($null -ne $FirstCall.ScriptName){ return $FirstCall.ScriptName; }

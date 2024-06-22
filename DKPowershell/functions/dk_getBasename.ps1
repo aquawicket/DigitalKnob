@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getBasename){ $dk_getBasename = 1 } else{ return }
 
 dk_load dk_printVar
@@ -28,7 +28,7 @@ function Global:DKTEST() { #####################################################
 	dk_debugFunc
 	
 	
-	$basename = dk_getBasename "C:\Windows\System32\test.v123.zip"
+	$basename = dk_getBasename "C:/Windows/System32/test.v123.zip"
 	dk_echo "basename = $basename"
 	
 	$basename = dk_getBasename "TEST"

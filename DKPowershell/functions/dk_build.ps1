@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_build){ $dk_build = 1 } else{ return }
 
 dk_load dk_echo
@@ -18,22 +18,22 @@ function Global:dk_build () {
 	dk_echo
 	
 	if($TYPE -eq "Debug" -or $TYPE -eq "All"){
-		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Debug\CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR\$APP\$TARGET_OS\Debug" "--config Debug" "--verbose"
+		if(dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS/Debug" "--config Debug" "--verbose"
 		}
-		elseif(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR\$APP\$TARGET_OS" "--config Debug" "--verbose"
+		elseif(dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" "--build" "$DKAPPS_DIR/$APP/$TARGET_OS" "--config Debug" "--verbose"
 		}
-		else{dk_error "Could not find CMakeCache.txt in $APP\$TARGET_OS\Debug or $APP\$TARGET_OS"}
+		else{dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"}
 	}
 	if($TYPE -eq "Release" -or $TYPE -eq "All"){
-		if(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\Release\CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR\$APP\$TARGET_OS\Release" --config Release --verbose
+		if(dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Release/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS/Release" --config Release --verbose
 		}
-		elseif(dk_pathExists "$DKAPPS_DIR\$APP\$TARGET_OS\CMakeCache.txt"){
-			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR\$APP\$TARGET_OS" --config Release --verbose
+		elseif(dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/CMakeCache.txt"){
+			dk_call "$CMAKE_EXE" --build "$DKAPPS_DIR/$APP/$TARGET_OS" --config Release --verbose
 		}
-		else{dk_error "Could not find CMakeCache.txt in $APP\$TARGET_OS\Release or $APP\$TARGET_OS"}
+		else{dk_error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"}
 	}
 	
 	dk_echo

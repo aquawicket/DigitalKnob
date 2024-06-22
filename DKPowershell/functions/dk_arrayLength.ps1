@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayLength){ $dk_arrayLength = 1 } else{ return }
 
 dk_load dk_error

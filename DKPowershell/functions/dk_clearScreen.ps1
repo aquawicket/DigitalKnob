@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD\DK.ps1 }
+if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_clearScreen){ $dk_clearScreen = 1 } else{ return }
 
 ##################################################################################
