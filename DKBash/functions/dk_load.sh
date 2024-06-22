@@ -14,7 +14,8 @@ dk_load (){
 	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
-	local funcName=	
+	local funcName=
+	local funcPath=
 	if [ -e "$1" ]; then
 		funcPath=$(cd $(dirname $1); pwd -P)/$(basename $1)
 		funcName=$(basename ${funcPath})
@@ -51,14 +52,8 @@ dk_load (){
 		sed -i -e 's/\r$//' ${funcPath}
 	fi
 	
-	if [ -f ${funcPath} ]; then
-		local ${funcName}=${funcPath}
-    else
-        echo "${funcPath}: file not found"
-		return
-    fi
 
-	#if echo "${DKFUNCTIONS_LIST}" | grep -q ";${funcName};"; then     # POSIX REGEX
+	#if echo "${DKFUNCTIONS_LIST}" | grep -q ";${funcName};"; then      # POSIX REGEX
 	if ! [[ "${DKFUNCTIONS_LIST-}" =~ ";${funcName};" ]]; then			# BASH REGEX MATCH
 	
 		DKFUNCTIONS_LIST="${DKFUNCTIONS_LIST-};${funcName};" 			# Add to list
@@ -102,9 +97,9 @@ dk_load (){
 			fi
 		done
 
-		if [ -f "${!funcName}" ]; then
-			. "${!funcName}"
-			#return
+		if [ -f "${funcPath}" ]; then
+			. "${funcPath}"
+			return
 		fi
 	fi
 }
