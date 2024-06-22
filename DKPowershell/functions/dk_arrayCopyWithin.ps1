@@ -21,7 +21,7 @@ function Global:dk_arrayCopyWithin($array, $target, $start, $end) {
 
 
 
-function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

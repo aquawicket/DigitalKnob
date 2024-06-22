@@ -24,7 +24,7 @@ function Global:dk_arrayJoin($array, $separator) {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

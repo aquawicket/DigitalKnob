@@ -5,7 +5,7 @@ if(!$dk_getHostTriple){ $dk_getHostTriple = 1 } else{ return }
 # dk_getHostTriple()
 #
 #
-function Global:dk_getHostTriple () {
+function Global:dk_getHostTriple  (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -33,7 +33,7 @@ function Global:dk_getHostTriple () {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

@@ -7,7 +7,7 @@ if(!$dk_color){ $dk_color = 1 } else{ return }
 ## https://evotec.xyz/powershell-how-to-format-powershell-write-host-with-multiple-colors/
 ## https://duffney.io/usingansiESCapesequencespowershell/
 ##
-function Global:dk_color() {
+function Global:dk_color (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -60,7 +60,7 @@ function Global:dk_color() {
 	$global:BG_White = "${ESC}[107m"
 }
 
-function Global:DKTEST() { ####################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

@@ -14,7 +14,7 @@ $FIXME_TAG="  FIXME: "
 #
 #	@msg	- The message to print
 #
-function Global:dk_fixme () {
+function Global:dk_fixme  (){
 	dk_debugFunc
 	$allArgs = $PsBoundParameters.Values + $args
 	
@@ -32,7 +32,7 @@ function Global:dk_fixme () {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

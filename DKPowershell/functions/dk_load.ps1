@@ -6,6 +6,8 @@ if(!$dk_load){ $dk_load = 1 } else{ return }
 #
 #	Source a dk_powershell function. Download it if needed then parse it and source all of it's content dk_powershell functions recursivley.
 #
+#	@funcName OR funcPath  - The name of an existing "functions/funcname.ps1" file, or a full filepath to a .ps1 file.
+#
 function Global:dk_load ($var) {
 	dk_debugFunc	
 	if($(__ARGC__) -ne 1){ echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
@@ -89,7 +91,7 @@ function Global:dk_load ($var) {
 
 
 
-function Global:DKTEST () { ###########################################################################################
+function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 
 }

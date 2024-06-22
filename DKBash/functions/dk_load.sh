@@ -7,6 +7,8 @@
 #
 #	Source a dk_bash function. Download it if needed then parse it and source all of it's content dk_bash functions recursivley.
 #
+#	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
+#
 dk_load() {
 	dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1

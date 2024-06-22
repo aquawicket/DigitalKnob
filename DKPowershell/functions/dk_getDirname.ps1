@@ -21,7 +21,7 @@ function Global:dk_getDirname($path) {
 
 
 
-function Global:DKTEST() { ########################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

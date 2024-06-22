@@ -6,7 +6,7 @@ if(!$dk_arrayLength){ $dk_arrayLength = 1 } else{ return }
 #
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
-function Global:dk_arrayLength($array) {
+function Global:dk_arrayLength ($array){
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -30,7 +30,7 @@ function Global:dk_arrayLength($array) {
 
 
 
-function Global:DKTEST(){ ########################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

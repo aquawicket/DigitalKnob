@@ -31,7 +31,7 @@ function Global:dk_error($allArgs) {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

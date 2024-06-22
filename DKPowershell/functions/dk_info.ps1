@@ -30,7 +30,7 @@ function Global:dk_info($allArgs) {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

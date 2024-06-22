@@ -5,7 +5,7 @@ if(!$dk_enterManually){ $dk_enterManually = 1 } else{ return }
 # dk_enterManually()
 #
 #
-function Global:dk_enterManually () {
+function Global:dk_enterManually  (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -41,7 +41,7 @@ function Global:dk_enterManually () {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

@@ -5,7 +5,7 @@ if(!$dk_confirm){ $dk_confirm = 1 } else{ return }
 # dk_confirm()
 #
 #
-function Global:dk_confirm() {
+function Global:dk_confirm (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
@@ -21,7 +21,7 @@ function Global:dk_confirm() {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

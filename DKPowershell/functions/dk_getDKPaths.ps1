@@ -5,7 +5,7 @@ if(!$dk_getDKPaths){ $dk_getDKPaths = 1 } else{ return }
 # dk_getDKPaths()
 #
 #
-function Global:dk_getDKPaths () {
+function Global:dk_getDKPaths  (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -27,7 +27,7 @@ function Global:dk_getDKPaths () {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

@@ -5,7 +5,7 @@ if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 # dk_readCache()
 #
 #
-function Global:dk_readCache() {
+function Global:dk_readCache (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -33,7 +33,7 @@ function Global:dk_readCache() {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

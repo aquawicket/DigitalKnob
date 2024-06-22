@@ -5,7 +5,7 @@ if(!$dk_createCache){ $dk_createCache = 1 } else{ return }
 # dk_createCache()
 #
 #
-function Global:dk_createCache () {
+function Global:dk_createCache  (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -21,7 +21,7 @@ function Global:dk_createCache () {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

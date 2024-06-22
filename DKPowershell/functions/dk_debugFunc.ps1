@@ -12,7 +12,7 @@ if(!$DKSTACK_marker)		{ $global:DKSTACK_marker = 1 }
 # dk_debugFunc()
 #
 #
-function Global:dk_debugFunc() {
+function Global:dk_debugFunc (){
 	
 ####################################################################################################################################
 	if($ENABLE_dk_debugFunc -ne 1){ return }

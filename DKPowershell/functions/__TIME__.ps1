@@ -4,7 +4,7 @@ if(!$DKINIT){ . $PWD/DK.ps1 }
 ##################################################################################
 # __TIME__()
 #
-function GLOBAL:__TIME__() {
+function GLOBAL:__TIME__ (){
 	#return $(Get-PSCallStack)[$_FRAME_].ScriptLineNumber
 	return Get-Date -Format HH:mm:ss.ffff
 }
@@ -12,6 +12,6 @@ function GLOBAL:__TIME__() {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	Write-Host -Fore cyan "TIME = $(__TIME__)";
 }

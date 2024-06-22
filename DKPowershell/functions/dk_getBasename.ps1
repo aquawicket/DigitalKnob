@@ -23,7 +23,7 @@ function Global:dk_getBasename($path) {
 
 
 
-function Global:DKTEST() { ########################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

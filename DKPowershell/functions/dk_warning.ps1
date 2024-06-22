@@ -14,7 +14,7 @@ if(!$HALT_ON_WARNING)  { $global:HALT_ON_WARNING = 0   }
 #
 #    @message	- The message to print
 #
-function Global:dk_warning() {
+function Global:dk_warning (){
 	dk_debugFunc
 	#$allArgs = $PsBoundParameters.Values + $args
 	
@@ -30,7 +30,7 @@ function Global:dk_warning() {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

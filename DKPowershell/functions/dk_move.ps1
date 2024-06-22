@@ -41,7 +41,7 @@ function Global:dk_move($_from_, $_to_) {
 
 
 
-function Global:DKTEST(){ ###############################################################################
+function Global:DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

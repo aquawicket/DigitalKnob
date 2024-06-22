@@ -14,7 +14,7 @@ if(!$HALT_ON_VERBOSE)  { $global:HALT_ON_VERBOSE = 0   }
 #
 #    @message	- The message to print
 #
-function Global:dk_verbose() {
+function Global:dk_verbose (){
 	dk_debugFunc
 	$allArgs = $PsBoundParameters.Values + $args
 	
@@ -30,7 +30,7 @@ function Global:dk_verbose() {
 
 
 
-function Global:DKTEST() { ###########################################################################################
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

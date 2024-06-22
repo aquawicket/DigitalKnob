@@ -14,7 +14,7 @@ $global:TODO_TAG = "  TODO: "
 #
 #	@msg	- The message to print
 #
-function Global:dk_todo () {
+function Global:dk_todo  (){
 	dk_debugFunc	
 	$allArgs = $PsBoundParameters.Values + $args
 	
@@ -35,7 +35,7 @@ function Global:dk_todo () {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

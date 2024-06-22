@@ -29,7 +29,7 @@ function Global:dk_arrayShift($array) {
 
 
 
-function Global:DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
 	

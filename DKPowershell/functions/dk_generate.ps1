@@ -5,7 +5,7 @@ if(!$dk_generate){ $dk_generate = 1 } else{ return }
 # dk_generate()
 #
 #
-function Global:dk_generate() {
+function Global:dk_generate (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"}
 	
@@ -169,7 +169,7 @@ if($TYPE -eq "Debug"){
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

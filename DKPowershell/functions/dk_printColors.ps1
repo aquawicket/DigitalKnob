@@ -4,7 +4,7 @@ if(!$dk_printColors){ $dk_printColors = 1 } else{ return }
 ####################################################################
 # dk_printColors()
 #
-function Global:dk_printColors () {
+function Global:dk_printColors  (){
 	dk_debugFunc
 	
 	
@@ -80,7 +80,7 @@ function Global:dk_printColors () {
 }
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

@@ -5,7 +5,7 @@ if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
 # dk_installGit()
 #
 #
-function Global:dk_installGit () {
+function Global:dk_installGit  (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -40,7 +40,7 @@ function Global:dk_installGit () {
 
 
 
-function Global:DKTEST () { ########################################################################
+function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

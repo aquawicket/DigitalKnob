@@ -5,7 +5,7 @@ if(!$dk_pullAssets){ $dk_pullAssets = 1 } else{ return }
 # dk_pullAssets()
 #
 #
-function Global:dk_pullAssets () {
+function Global:dk_pullAssets  (){
 	dk_debugFunc
 	
 	
@@ -15,7 +15,7 @@ function Global:dk_pullAssets () {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

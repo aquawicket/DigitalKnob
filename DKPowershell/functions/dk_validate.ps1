@@ -25,7 +25,7 @@ function Global:dk_validate($variable, $code) {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	
@@ -43,10 +43,10 @@ function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "myVarD = ${myVarD}"
 }
 
-function Global:fill_myVarA() {
+function Global:fill_myVarA (){
 	$myVarA="myVarA has a string value"
 }
 
-function Global:fill_myVarB() {
+function Global:fill_myVarB (){
 	$myVarB="myVarB has a string value"
 }
