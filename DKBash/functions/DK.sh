@@ -68,7 +68,7 @@ DK (){
 	
 	dk_call dk_color
 			
-	dk_load ${DKSCRIPT_PATH}
+	dk_load "${DKSCRIPT_PATH}"
 				
 	
 	
@@ -79,15 +79,15 @@ DK (){
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			#dk_export ENABLE_dk_debugFunc 1
 			dk_echo ""
-			dk_echo "${bg_white}${black}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
+			dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
 			dk_echo ""
-			#. ${DKSCRIPT_PATH}
+			#dk_source "${DKSCRIPT_PATH}"
 			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			dk_echo ""
-			dk_echo "${bg_white}${black}########################## END TEST ################################${clr}"
+			dk_echo "${bg_magenta}${white}########################## END TEST ################################${clr}"
 			dk_echo ""
-			dk_source dk_pause && dk_pause
+			dk_call dk_pause
 			dk_exit
 		fi
 	fi
@@ -104,14 +104,29 @@ dk_init(){
 	
 	###### fallback functions ######
 	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v $1 &>/dev/null); }
-	dk_commandExists "dk_echo"       || function dk_echo()      { echo $*;            }
-	dk_commandExists "dk_pathExists" || function dk_pathExists(){ [ -e "$1" ];        }
-	dk_commandExists "dk_error"      || function dk_error()     { [$(read -rp "ERROR: $1, press enter to exit")] || exit; }
-	dk_commandExists "dk_warning"    || function dk_warning()   { echo "WARNING: $1"; }
-	dk_commandExists "dk_info"       || function dk_info()      { echo "$1";          }
-	dk_commandExists "dk_printVar"   || function dk_printVar()  { echo "$1 = ${!1}";  }
-	dk_commandExists "dk_unset"      || function dk_unset()     { unset "$1"; }
-	dk_commandExists "dk_export"     || function dk_export()    { export $1="$2"; }
+	
+	dk_commandExists "dk_echo"       || function dk_echo()      { echo $*;                               }
+	dk_commandExists "dk_error"      || function dk_error()     { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit; }
+	dk_commandExists "dk_warning"    || function dk_warning()   { dk_echo "${yellow}WARNING: $1${clr}";  }
+	dk_commandExists "dk_info"       || function dk_info()      { dk_echo "$1";                          }
+	dk_commandExists "dk_debug"      || function dk_debug()     { dk_echo "${blue}$1${clr}";             }
+	dk_commandExists "dk_verbose"    || function dk_verbose()   { dk_echo "${cyan}$1${clr}";             }
+	dk_commandExists "dk_printVar"   || function dk_printVar()  { dk_echo "${blue}$1 = ${!1}${clr}";     }
+	dk_commandExists "dk_pathExists" || function dk_pathExists(){ [ -e "$1" ];                           }
+	dk_commandExists "dk_unset"      || function dk_unset()     { unset "$1";                            }
+	dk_commandExists "dk_export"     || function dk_export()    { export $1="$2";                        }
+	dk_commandExists "dk_defined"    || function dk_defined()   { eval value='$'{$1+x}; [ -n "$value" ]; }
+	dk_commandExists "dk_debugFunc"  || function dk_debugFunc   { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
+	
+	###### default variables ######
+	dk_defined ESC        || dk_export ESC        ""
+	dk_defined clr        || dk_export clr        "${ESC}[0m"
+	dk_defined black      || dk_export black      "${ESC}[30m"
+	dk_defined red        || dk_export red        "${ESC}[31m"
+	dk_defined yellow     || dk_export yellow     "${ESC}[33m"
+	dk_defined blue       || dk_export blue       "${ESC}[34m"
+	dk_defined cyan       || dk_export cyan       "${ESC}[36m"
+	dk_defined bg_magenta || dk_export bg_magenta "${ESC}[45m"
 }
 
 ##################################################################################
@@ -239,12 +254,14 @@ dk_source(){
 ##################################################################################
 # dk_call()
 #
-#	call a DKBash function. dk_load it first if needed.
+#	call a dk_bash function. dk_load it first if needed.
 #
 dk_call(){
-	dk_commandExists dk_load  || dk_source dk_load
-	dk_commandExists $1       || dk_load $1
-	dk_commandExists $1       || dk_error "$1: command not found"
+	if ! dk_commandExists "$1"; then
+		dk_commandExists dk_load  || dk_source dk_load
+		dk_commandExists $1       || dk_load $1
+		dk_commandExists $1       || dk_error "$1: command not found"
+	fi
 	dk_echo "$@"
 	"$@"
 }
@@ -261,7 +278,16 @@ dk_command(){
 	"$@"
 }
 
-DK
+
+    DK
+
+
+
+
+
+
+
+
 
 #DK_TRY_CATCH (){
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
