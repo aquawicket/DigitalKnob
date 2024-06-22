@@ -15,7 +15,6 @@ function Global:dk_download($url, $destination) {
     }
 	
 	Write-Host "Downloading $url . . ."
-	Write-Host "please wait . . ."
 	
 	# method 1
     Invoke-WebRequest -URI $url -OutFile $destination #-SkipHttpErrorCheck
