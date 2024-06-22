@@ -110,6 +110,14 @@ dk_echo(){
 #
 dk_init(){
 	dk_echo "### DKBash ###"
+	
+	###### fallback functions ######
+	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v "$1" &>/dev/null); }
+	dk_commandExists "dk_pathExists" || function dk_pathExists(){ [ -e "$1" ];        }
+	dk_commandExists "dk_error"      || function dk_error()     { echo "ERROR: $1";   }
+	dk_commandExists "dk_warning"    || function dk_warning()   { echo "WARNING: $1"; }
+	dk_commandExists "dk_info"       || function dk_info()      { echo "$1";          }
+	dk_commandExists "dk_printVar"   || function dk_printVar()  { echo "$1 = ${!1}";  }
 }
 
 ##################################################################################

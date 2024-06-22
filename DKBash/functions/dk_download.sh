@@ -1,13 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-###### fallback functions ######
-$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v "$1" &>/dev/null); }
-$(command -v dk_pathExists &>/dev/null)    || function dk_pathExists(){ [ -e "$1" ]; }
-$(command -v dk_error &>/dev/null)         || function dk_error(){ echo "ERROR: $1"; }
-$(command -v dk_warning &>/dev/null)       || function dk_warning(){ echo "WARNING: $1"; }
-$(command -v dk_info &>/dev/null)          || function dk_info(){ echo "$1"; }
-$(command -v dk_printVar &>/dev/null)      || function dk_printVar(){ echo "$1 = ${!1}"; }
 ##################################################################################
 # dk_download(url, destination)
 #
