@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "dk_echo.sh"
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 
@@ -44,7 +45,8 @@ dk_echo (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	echo "This is a normal echo commmand"
 	dk_echo "This is a dk_echo line"
 	dk_echo "${cyan} This is dk_echo with color ${clr}"

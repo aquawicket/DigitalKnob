@@ -1,7 +1,7 @@
 #!/bin/sh
 #echo "dirname 0/DK.sh = $(dirname $0)/DK.sh"
-#[ -z "${DKINIT-}" ] && . "$(dirname $0)/DK.sh"
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR}/DK.sh"
+[ -z "${DKINIT-}" ] && . "$(dirname $0)/DK.sh";
+#[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR}/DK.sh"
 
 
 
@@ -37,6 +37,7 @@ ret_val (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_return "return string value"
 }

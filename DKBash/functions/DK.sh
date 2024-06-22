@@ -9,12 +9,12 @@ DK (){
 	###### Initialize Language specifics ######
 	dk_init
 	dk_echo "DKINIT($*)"
-	
-	
+
+
 	###### Reload Main Script with bash ######
 	dk_reloadWithBash $*
-	
-	
+
+
 	############ Get DKBASH variables ############
 	dk_DKBASH_VARS
 	dk_printVar DKBASH_DIR
@@ -38,20 +38,20 @@ DK (){
 	dk_printVar DKSCRIPT_ARGS
 	dk_printVar DKSCRIPT_DIR
 	dk_printVar DKSCRIPT_NAME
-	
-	
+
+
 	############ Setup KeepOpen ############
 	#dk_setupKeepOpen
-	
-	
+
+
 	##### CD into the DKSCRIPT_DIR directory #####
 	#cd "${DKSCRIPT_DIR}"
 
 
 	############ Set Options ############
 	dk_setOptions
-	
-	
+
+
 	###### Script loader ######
 	dk_source dk_return
 	dk_source __TIME__
@@ -65,22 +65,21 @@ DK (){
 	dk_source dk_load
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
-	
+
 	dk_call dk_color
-			
-	dk_load "${DKSCRIPT_PATH}"
-				
 	
 	
-
-
+	#dk_source "${DKSCRIPT_PATH}"
+	#. "${DKSCRIPT_PATH}"
+	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
-			#dk_export ENABLE_dk_debugFunc 1
+			dk_source "${DKSCRIPT_PATH}"
 			dk_echo ""
 			dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
 			dk_echo ""
+			#dk_export ENABLE_dk_debugFunc 1
 			#dk_source "${DKSCRIPT_PATH}"
 			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
@@ -91,6 +90,8 @@ DK (){
 			dk_exit
 		fi
 	fi
+	
+	dk_load "${DKSCRIPT_PATH}"
 }
 
 
@@ -100,24 +101,24 @@ DK (){
 # dk_init()
 #
 dk_init(){
-	echo "### DKBash ###"
-	
+	echo "###### DKBash ######"
+
 	###### fallback functions ######
 	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v $1 &>/dev/null); }
-	
-	dk_commandExists "dk_echo"       || function dk_echo()      { echo $*;                               }
-	dk_commandExists "dk_error"      || function dk_error()     { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit; }
-	dk_commandExists "dk_warning"    || function dk_warning()   { dk_echo "${yellow}WARNING: $1${clr}";  }
-	dk_commandExists "dk_info"       || function dk_info()      { dk_echo "$1";                          }
-	dk_commandExists "dk_debug"      || function dk_debug()     { dk_echo "${blue}$1${clr}";             }
-	dk_commandExists "dk_verbose"    || function dk_verbose()   { dk_echo "${cyan}$1${clr}";             }
-	dk_commandExists "dk_printVar"   || function dk_printVar()  { dk_echo "${blue}$1 = ${!1}${clr}";     }
-	dk_commandExists "dk_pathExists" || function dk_pathExists(){ [ -e "$1" ];                           }
-	dk_commandExists "dk_unset"      || function dk_unset()     { unset "$1";                            }
-	dk_commandExists "dk_export"     || function dk_export()    { export $1="$2";                        }
-	dk_commandExists "dk_defined"    || function dk_defined()   { eval value='$'{$1+x}; [ -n "$value" ]; }
-	dk_commandExists "dk_debugFunc"  || function dk_debugFunc   { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
-	
+	dk_commandExists "dk_echo"           || function dk_echo()           { echo $*;                                   }
+	dk_commandExists "dk_error"          || function dk_error()          { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit; }
+	dk_commandExists "dk_warning"        || function dk_warning()        { dk_echo "${yellow}WARNING: $1${clr}";      }
+	dk_commandExists "dk_info"           || function dk_info()           { dk_echo "$1";                              }
+	dk_commandExists "dk_debug"          || function dk_debug()          { dk_echo "${blue}$1${clr}";                 }
+	dk_commandExists "dk_verbose"        || function dk_verbose()        { dk_echo "${cyan}$1${clr}";                 }
+	dk_commandExists "dk_printVar"       || function dk_printVar()       { dk_echo "${blue}$1 = ${!1-}${clr}";         }
+	dk_commandExists "dk_pathExists"     || function dk_pathExists()     { [ -e "$1" ];                               }
+	dk_commandExists "dk_unset"          || function dk_unset()          { unset "$1";                                }
+	dk_commandExists "dk_export"         || function dk_export()         { export $1="$2";                            }
+	dk_commandExists "dk_defined"        || function dk_defined()        { eval value='$'{$1+x}; [ -n "$value" ];     }
+	dk_commandExists "dk_stringContains" || function dk_stringContains() { [ "${1#*"$2"}" != "$1" ];                  }
+	dk_commandExists "dk_debugFunc"      || function dk_debugFunc()      { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
+
 	###### default variables ######
 	dk_defined ESC        || dk_export ESC        ""
 	dk_defined clr        || dk_export clr        "${ESC}[0m"
@@ -152,7 +153,7 @@ dk_DKBASH_VARS(){
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
 	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
-	
+
 	###### set true and false variables ######
 	dk_export true 0
 	dk_export false 1
@@ -205,14 +206,14 @@ dk_setOptions(){
 	  *:posix:*) echo "POSIX mode enabled" ;;
 	  *)         echo "POSIX mode not enabled" ;;
 	esac
-	
+
 	###### Set error trace options ######
 	# https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	$(set -o pipefail) && set -o pipefail  	# trace ERR through pipes
 	$(set -o errtrace) && set -o errtrace 	# set -E : trace ERR through 'time command' and other functions
 	$(set -o nounset)  && set -o nounset  	# set -u : exit the script if you try to use an uninitialised variable
 	$(set -o errexit)  && set -o errexit  	# set -e : exit the script if any statement returns a non-true
-	
+
 	###### shopt ######
 	shopt -s extdebug
 	#shopt -s expand_aliases
@@ -245,10 +246,19 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$1.sh || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$1.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$1.sh
-	dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$1.sh || dk_error "$1: command not found"
-	chmod 777 ${DKBASH_FUNCTIONS_DIR}/$1.sh
-	. ${DKBASH_FUNCTIONS_DIR}/$1.sh
+	dk_stringContains $1 ".sh"                      && local funcPath=$1      ||      local funcPath=$1.sh
+	echo "funcPath = $funcPath"
+	if dk_pathExists "$PWD/$funcPath"; then
+		chmod 777 $PWD/$funcPath
+		. $funcPath
+		return
+	fi
+	if dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$funcPath"; then
+		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$funcPath ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$funcPath
+		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_error "$funcPath: command not found"
+		chmod 777 ${DKBASH_FUNCTIONS_DIR}/$funcPath
+		. ${DKBASH_FUNCTIONS_DIR}/$funcPath
+	fi
 }
 
 ##################################################################################
