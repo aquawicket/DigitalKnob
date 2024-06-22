@@ -117,6 +117,7 @@ dk_init(){
 	dk_commandExists "dk_export"         || function dk_export()         { export $1="$2";                            }
 	dk_commandExists "dk_defined"        || function dk_defined()        { eval value='$'{$1+x}; [ -n "$value" ];     }
 	dk_commandExists "dk_stringContains" || function dk_stringContains() { [ "${1#*"$2"}" != "$1" ];                  }
+	dk_commandExists "dk_realpath"       || function dk_realpath()       { echo $(cd $(dirname $1); pwd -P)/$(basename $1); }
 	dk_commandExists "dk_debugFunc"      || function dk_debugFunc()      { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
 
 	###### default variables ######
@@ -180,7 +181,8 @@ dk_setupCallstack(){
 # dk_DKSCRIPT_VARS()
 #
 dk_DKSCRIPT_VARS(){
-	dk_pathExists    $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
+	#dk_pathExists    $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
+	dk_pathExists    $(dk_realpath $0)   && dk_export   DKSCRIPT_PATH   $(dk_realpath $0)
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_export        DKSCRIPT_ARGS       $($*)
@@ -247,18 +249,21 @@ dk_install(){
 #
 dk_source(){
 	dk_stringContains $1 ".sh"                      && local funcPath=$1      ||      local funcPath=$1.sh
+	dk_pathExists "${funcPath}" && funcPath="${funcPath}"
+	dk_pathExists "${PWD}/${funcPath}" && funcPath="${PWD}/${funcPath}"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/${funcPath}" && funcPath="${DKBASH_FUNCTIONS_DIR}/${funcPath}"
 	echo "funcPath = $funcPath"
-	if dk_pathExists "$PWD/$funcPath"; then
-		chmod 777 $PWD/$funcPath
+	if dk_pathExists "$funcPath"; then
+		chmod 777 $funcPath
 		. $funcPath
 		return
 	fi
-	if dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$funcPath"; then
-		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$funcPath ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$funcPath
-		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_error "$funcPath: command not found"
-		chmod 777 ${DKBASH_FUNCTIONS_DIR}/$funcPath
-		. ${DKBASH_FUNCTIONS_DIR}/$funcPath
-	fi
+#	if dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$funcPath"; then
+#		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$funcPath ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$funcPath
+#		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_error "$funcPath: command not found"
+#		chmod 777 ${DKBASH_FUNCTIONS_DIR}/$funcPath
+#		. ${DKBASH_FUNCTIONS_DIR}/$funcPath
+#	fi
 }
 
 ##################################################################################
