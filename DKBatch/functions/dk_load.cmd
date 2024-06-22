@@ -6,8 +6,11 @@ call DK
 
 
 ::####################################################################
-::# dk_load()
+::# dk_load(funcName OR funcPath)
 ::#
+::#	Source a dk_batch function. Download it if needed then parse it and source all of it's content dk_batch functions recursivley.
+::#
+::#	@funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#
 :dk_load() {
 	call dk_source dk_echo
@@ -23,22 +26,22 @@ call DK
 	call dk_debugFunc
 	
 	if exist "%~1" (
-		set "fpath=%~1"
-		for %%Z in ("%fpath%") do set "fn=%%~nZ"
+		set "funcPath=%~1"
+		for %%Z in ("%funcPath%") do set "funcName=%%~nZ"
 	) else (
-		set "fn=%~n1"
-		set "fpath=%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd"
+		set "funcName=%~n1"
+		set "funcPath=%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd"
 	)
 
-	if not exist "%fpath%" echo Downloading %fn%
+	if not exist "%funcPath%" echo Downloading %funcName%
 	call dk_source dk_set
 	call dk_source dk_getFullPath
 	call dk_source dk_download
 	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_set.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getFullPath.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd')"
-	if not exist "%fpath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%fn%.cmd" "%fpath%"
-	if not exist "%fpath%" call dk_error "ERROR: %fpath%: file not found"
+	if not exist "%funcPath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
+	if not exist "%funcPath%" call dk_error "ERROR: %funcPath%: file not found"
 	
 	goto:eof
 	:: TODO
@@ -46,14 +49,14 @@ call DK
 	:: Convert to windows line endings if only CR found
 	
 	:: TODO
-	if exist "%fpath%" (set "%fn%=%fpath%") else (call dk_error "%fpath%: file not found")
+	if exist "%funcPath%" (set "%funcName%=%funcPath%") else (call dk_error "%funcPath%: file not found")
 	
-	echo %dkload_list% | findstr ";%fn%;" && goto:eof
-	set "dkload_list=%dkload_list%;%fn%;" 			&:: Add to list
-	echo added %fn% to dkload_list
+	echo %DKFUNCTIONS_LIST% | findstr ";%funcName%;" && goto:eof
+	set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%funcName%;" 			&:: Add to list
+	echo added %funcName% to DKFUNCTIONS_LIST
 	
 	:: read file line by line and store matching lines in array
-	for /F "usebackq delims=" %%a in ("%fpath%") do (
+	for /F "usebackq delims=" %%a in ("%funcPath%") do (
 	    echo %%a | findstr "\<dk_*" >nul && (
 			set "temp=%%a"
 			call set "temp=%%temp:*dk_=dk_%%"
@@ -74,7 +77,7 @@ call DK
 				goto:done
 			)
 			:done
-			set "dkload_list=%dkload_list%;%temp%;" 			&:: Add to list
+			set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%temp%;" 			&:: Add to list
 
 			echo %temp% | findstr "\<dk_" >nul && (
 				call echo [32m temp = %temp% [0m
