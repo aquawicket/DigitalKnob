@@ -1,7 +1,7 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_createCache){ $dk_createCache = 1 } else{ return }
 
-dk_load dk_echo
+#dk_load dk_echo
 ##################################################################################
 # dk_createCache()
 #

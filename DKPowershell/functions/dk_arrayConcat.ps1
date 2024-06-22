@@ -1,8 +1,8 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayConcat){ $dk_arrayConcat = 1 } else{ return }
 
-dk_load dk_todo
-dk_load dk_error
+#dk_load dk_todo
+#dk_load dk_error
 ################################################################################
 # dk_arrayConcat(array, value1, value2, /* …, */ valueN)
 #

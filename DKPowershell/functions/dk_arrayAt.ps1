@@ -1,8 +1,8 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayAt){ $dk_arrayAt = 1 } else{ return }
 
-dk_load dk_error
-dk_load dk_printVar
+#dk_load dk_error
+#dk_load dk_printVar
 ################################################################################
 # dk_arrayAt(array, index) -> rtn_var
 #

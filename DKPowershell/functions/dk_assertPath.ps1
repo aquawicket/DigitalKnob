@@ -1,8 +1,8 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_assertPath){ $dk_assertPath = 1 } else{ return }
 
-dk_load dk_pathExists
-dk_load dk_error
+#dk_load dk_pathExists
+#dk_load dk_error
 ################################################################################
 # dk_assertPath(path)
 #

@@ -1,23 +1,23 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_buildMain){ $dk_buildMain = 1 } else{ return }
 
-dk_load dk_debugFunc
-dk_load dk_printVar
-dk_load dk_warning
-dk_load dk_getHostTriple
-dk_load dk_getDKPaths
-dk_load dk_installGit
-dk_load dk_validateBranch
-dk_load dk_warning
-dk_load dk_pickUpdate
-dk_load dk_pickApp
-dk_load dk_pickOs
-dk_load dk_pickType
-dk_load dk_createCache
-dk_load dk_generate
-dk_load dk_build
-dk_load dk_unset
-dk_load dk_stacktrace
+#dk_load dk_debugFunc
+#dk_load dk_printVar
+#dk_load dk_warning
+#dk_load dk_getHostTriple
+#dk_load dk_getDKPaths
+#dk_load dk_installGit
+#dk_load dk_validateBranch
+#dk_load dk_warning
+#dk_load dk_pickUpdate
+#dk_load dk_pickApp
+#dk_load dk_pickOs
+#dk_load dk_pickType
+#dk_load dk_createCache
+#dk_load dk_generate
+#dk_load dk_build
+#dk_load dk_unset
+#dk_load dk_stacktrace
 ####################################################################
 # dk_buildMain()
 #

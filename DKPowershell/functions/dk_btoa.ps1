@@ -1,9 +1,9 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_btoa){ $dk_btoa = 1 } else{ return }
 
-dk_load dk_validate
-dk_load dk_validateBranch
-dk_load dk_pathExists
+#dk_load dk_validate
+#dk_load dk_validateBranch
+#dk_load dk_pathExists
 ##################################################################################
 # dk_btoa(file_in, file_out)
 #

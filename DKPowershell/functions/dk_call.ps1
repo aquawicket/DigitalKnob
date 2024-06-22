@@ -1,7 +1,7 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_call){ $dk_call = 1 } else{ return }
 
-dk_load dk_info
+#dk_load dk_info
 ##################################################################################
 # dk_call(command, args)
 #

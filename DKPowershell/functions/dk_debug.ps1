@@ -1,11 +1,11 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_debug){ $dk_debug = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
+#dk_load dk_echo
+#dk_load dk_stacktrace
+#dk_load dk_showFileLine
+#dk_load dk_pause
+#dk_load dk_exit
 if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1 }
 if(!$TRACE_ON_DEBUG) { $global:TRACE_ON_DEBUG = 0  }
 if(!$LINE_ON_DEBUG)  { $global:LINE_ON_DEBUG = 0   }

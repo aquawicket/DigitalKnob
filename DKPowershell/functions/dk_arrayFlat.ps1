@@ -1,8 +1,8 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayFlat){ $dk_arrayFlat = 1 } else{ return }
 
-dk_load dk_error
-dk_load dk_todo
+#dk_load dk_error
+#dk_load dk_todo
 ################################################################################
 # dk_arrayFlat(array, depth)
 #

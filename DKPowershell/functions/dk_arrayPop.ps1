@@ -1,9 +1,9 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayPop){ $dk_arrayPop = 1 } else{ return }
 
-dk_load dk_printArray
-dk_load dk_arrayLength
-dk_load dk_unset
+#dk_load dk_printArray
+#dk_load dk_arrayLength
+#dk_load dk_unset
 ################################################################################
 # dk_arrayPop(array)
 #
