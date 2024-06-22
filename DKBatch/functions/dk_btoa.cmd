@@ -6,6 +6,7 @@ call DK
 ::# dk_btoa(input, output)
 ::#
 ::#    Encode input to base-64 output
+::#    https://github.com/base64code/examples
 ::#
 :dk_btoa () {
 	call dk_debugFunc

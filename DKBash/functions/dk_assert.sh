@@ -5,7 +5,7 @@
 # dk_assert(expression)
 #
 #
-dk_assert() {
+dk_assert () {
 	dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
@@ -22,7 +22,7 @@ dk_assert() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST () { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_set myVar "string"

@@ -6,6 +6,7 @@ call DK
 ::# dk_atob(input, output)
 ::#
 ::#    Decode base-64 input to output
+::#    https://github.com/base64code/examples
 ::#
 :dk_atob () {
 	call dk_debugFunc
