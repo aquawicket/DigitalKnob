@@ -34,6 +34,11 @@ function Global:dk_load ($var) {
 		Write-Host "Dowloading ${fn}"
 		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${fn}.ps1" "$DKPOWERSHELL_FUNCTIONS_DIR/${fn}.ps1"
 	}
+	if(!(Test-Path ${fpath})){
+		Write-Host "${fpath}: file not found"
+		return
+    }
+	
 	
 #	# Convert to unix line endings if CRLF found
 #	if($(file -b - < ${fpath}) =~ CRLF){
@@ -41,12 +46,7 @@ function Global:dk_load ($var) {
 #		sed -i -e 's/\r$//' ${fpath}
 #	}
 	
-	if(!(Test-Path ${fpath})){
-		Write-Host "${fpath}: file not found"
-		return
-    }
 
-	
 	if(!("${dkload_list}" -match ";${fn};")){			#IF NOT REGEX MATCH
 	
 		$global:dkload_list = "${dkload_list};${fn};" 			# Add to list
@@ -58,7 +58,7 @@ function Global:dk_load ($var) {
 		
 		for($i=0; $i -lt $lines.count; $i++) {
 			$value = $lines[$i]
-			Write-Host "value = $value"
+			#Write-Host "value = $value"
 			
 			if("${dkload_list}" -match ";${value};"){
 				#echo "${fn}: skipping ${value}.    already in load_list"
@@ -77,16 +77,25 @@ function Global:dk_load ($var) {
 			}
 		}
 		
-		if(Test-Path "$var"){
-			Write-Host ". $var"
-			. $var
+		if(Test-Path "${fpath}"){
+  echo "if(Test-Path $fpath){"
+			Write-Host ". $fpath"
+			. $fpath
 			return
 		}
-		if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"){
-			echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"
-			Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1
-			return
-		}
+		
+#		if(Test-Path "$var"){
+#  echo "if(Test-Path $var){"
+#			Write-Host ". $var"
+#			. $var
+#			return
+#		}
+#		if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"){
+# echo "if(Test-Path $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1){"
+#			echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"
+#			Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1
+#			return
+#		}
 	}	
 }
 
