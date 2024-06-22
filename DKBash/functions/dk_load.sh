@@ -3,111 +3,96 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ##################################################################################
-# dk_load()
+# dk_load(funcName OR funcPath)
 #
-#	Source a DKBash function. Download it if needed then source all of is content DKBash functions` recursivley.
+#	Source a dk_bash function. Download it if needed then parse it and source all of it's content dk_bash functions recursivley.
 #
 dk_load() {
 	dk_debugFunc
 	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
-	local fn=	
+	local funcName=	
 	if [ -e "$1" ]; then
-		fpath=$(cd $(dirname $1); pwd -P)/$(basename $1)
-		fn=$(basename ${fpath})
-	    fn="${fn%.*}"
+		funcPath=$(cd $(dirname $1); pwd -P)/$(basename $1)
+		funcName=$(basename ${funcPath})
+	    funcName="${funcName%.*}"
 	else
-		fn="$1"
-		fn=$(basename ${fn})
-		fpath=${DKBASH_FUNCTIONS_DIR}/${fn}.sh
+		funcName="$1"
+		funcName=$(basename ${funcName})
+		funcPath=${DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 	fi
 	
 	#### download if missing ####
-	[ ! -e ${fpath} ] && echo "Dowloading ${fn}"
-	[ ! -e ${fpath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${fn}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	[ ! -e ${fpath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${fn}.sh
-	[ ! -e ${fpath} ] && echo "ERROR: ${fpath}: file not found" && return
+	[ ! -e ${funcPath} ] && echo "Dowloading ${funcName}"
+	[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${funcName}.sh
+	[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/functions/${funcName}.sh
+	[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
 	
 	# Convert to unix line endings if CRLF found
-	#if builtin echo $(file -b - < ${fpath}) | grep -q CRLF; then	# POSIX REGEX MATCH
-	#if [[ $(dk_command file -b - < ${fpath}) =~ CRLF ]]; then		# BASH REGEX MATCH
-	if [[ $(file -b - < ${fpath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
+	#if [[ $(dk_command file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
+	if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
 		echo "Converting file to Unix line endings"
-		sed -i -e 's/\r$//' ${fpath}
+		sed -i -e 's/\r$//' ${funcPath}
 	fi
 	
-	if [ -f ${fpath} ]; then
-		local ${fn}=${fpath}
+	if [ -f ${funcPath} ]; then
+		local ${funcName}=${funcPath}
     else
-        echo "${fpath}: file not found"
+        echo "${funcPath}: file not found"
 		return
     fi
 
-	#if echo "${dkload_list}" | grep -q ";${fn};"; then     # POSIX REGEX
-	if ! [[ "${dkload_list-}" =~ ";${fn};" ]]; then			# BASH REGEX MATCH
+	#if echo "${DKFUNCTIONS_LIST}" | grep -q ";${funcName};"; then     # POSIX REGEX
+	if ! [[ "${DKFUNCTIONS_LIST-}" =~ ";${funcName};" ]]; then			# BASH REGEX MATCH
 	
-		dkload_list="${dkload_list-};${fn};" 			# Add to list
-		#echo "added ${fn} to dkload_list"
+		DKFUNCTIONS_LIST="${DKFUNCTIONS_LIST-};${funcName};" 			# Add to list
+		#echo "added ${funcName} to DKFUNCTIONS_LIST"
 		
 		oldIFS=${IFS}
 		IFS=$'\n'
-		lines=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath}) ) || true # || true; #return 0
-		#IFS=$'\n' read -r -d '' -a lines < <( echo "$(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${fpath})" && printf '\0' )
+		matchList=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${funcPath}) ) || true # || true; #return 0
+		#IFS=$'\n' read -r -d '' -a matchList < <( echo "$(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${funcPath})" && printf '\0' )
 		IFS=${oldIFS}
-		for value in "${lines[@]}"; do
-			#value=${value%%N*}   # cut off everything from the first N to end
-			#value=${value%N*}    # cut off everything from the last N to end
-			#value=${value#*N}    # cut off everything from begining to first N
-			#value=${value##*N}   # cut off everything from begining to last N
+		for match in "${matchList[@]}"; do
+			#match=${match%%N*}   # cut off everything from the first N to end
+			#match=${match%N*}    # cut off everything from the last N to end
+			#match=${match#*N}    # cut off everything from begining to first N
+			#match=${match##*N}   # cut off everything from begining to last N
 				
-			value=${value//'$#'/}					    # remove any $# before removing #comments
-			value=${value%%#*}						    # remove everything after # (comments)
-			if ! [[ "${value}" =~ [Dd][Kk]_[A-Za-z0-9_]* ]];then  continue; fi	# BASH REGEX MATCH
-			value=${BASH_REMATCH[0]}				    	# BASH REGEX VALUE
-#			for i in "${!BASH_REMATCH[@]}"; do
-#				echo "$i: ${BASH_REMATCH[${i}]}"
-#			done
+			match=${match//'$#'/}					    # remove any $# before removing #comments
+			match=${match%%#*}						    # remove everything after # (comments)
+			if ! [[ "${match}" =~ [Dd][Kk]_[A-Za-z0-9_]* ]];then  continue; fi	# BASH REGEX MATCH
+			match=${BASH_REMATCH[0]}				    	# BASH REGEX VALUE
 			
-			#value=$(builtin echo "${value}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
-			#[ -z "${value}" ] && continue
+			#match=$(builtin echo "${match}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
+			#[ -z "${match}" ] && continue
 
-			if [[ ${dkload_list} =~ ";${value};" ]]; then			# BASH REGEX MATCH
-			#if echo ${dkload_list} | grep -q "${value};"; then	    # POSIX REGEX MATCH
-				#echo "${fn}: skipping ${value}.    already in load_list"
+			if [[ ${DKFUNCTIONS_LIST} =~ ";${match};" ]]; then			# BASH REGEX MATCH
+			#if echo ${DKFUNCTIONS_LIST} | grep -q "${match};"; then    # POSIX REGEX MATCH
+				#echo "${funcName}: skipping ${match}.    already in load_list"
 				continue
-			elif [ ${fn} = ${value} ]; then
-				#echo "${fn}: skipping ${value}.    already matches fn"
+			elif [ ${funcName} = ${match} ]; then
+				#echo "${funcName}: skipping ${match}.    already matches funcName"
 				continue
 			# FIXME: this messes things up 
-			#elif ! [ $(command -v ${value}) = "" ]; then
-				#echo "${fn}: skipping ${value}.    command already recognized"
+			#elif ! [ $(command -v ${match}) = "" ]; then
+				#echo "${funcName}: skipping ${match}.    command already recognized"
 				#continue
-			elif [ "${value}" = "" ]; then
-				#echo "${fn}: skipping ${value}.    empty"
+			elif [ "${match}" = "" ]; then
+				#echo "${funcName}: skipping ${match}.    empty"
 				continue
 			else
-				dk_load ${value}
+				dk_load ${match}
 			fi
 		done
 
-		#echo "fn = ${fn}"
-		#echo "!fn = ${!fn}"
-		#echo "fpath = ${fpath}"
-		if [ -f "${!fn}" ]; then
-			#if ! [ "${@}" = "${!fn}" ]; then
-				. "${!fn}"
-			
-				#echo "Sourced ${!fn}"
-			#fi
-			#return 0
+		if [ -f "${!funcName}" ]; then
+			. "${!funcName}"
+			#return
 		fi
-#	else
-		#echo "${fn}: already in the list" 				# if already in list, do nothing
-#		return 0
 	fi
-	
-	#echo "${dkload_list}" > dkload_list.txt
 }
 
 

@@ -8,7 +8,7 @@
 #
 alias dk_debugFunc='{
 #####################################################################################################################
-	if [ ${ENABLE_dk_debugFunc-1} -eq 1 ]; then
+	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then
 		
 		local stack_size=${#FUNCNAME[@]}
 		local -i i

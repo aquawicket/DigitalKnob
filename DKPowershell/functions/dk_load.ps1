@@ -4,7 +4,7 @@ if(!$dk_load){ $dk_load = 1 } else{ return }
 #####################################################################
 # dk_load(funcName OR funcPath)
 #
-#	Source a DKPowershell function. Download it if needed then parse it and source all of it's content DKPowershell functions recursivley.
+#	Source a dk_powershell function. Download it if needed then parse it and source all of it's content dk_powershell functions recursivley.
 #
 function Global:dk_load ($var) {
 	dk_debugFunc	
@@ -15,12 +15,12 @@ function Global:dk_load ($var) {
 	if(Test-Path "${var}"){
 		${funcPath} = Resolve-Path -Path "${var}" -ErrorAction SilentlyContinue -ErrorVariable _frperror 	# works for files that don't exist.
 		if(-not(${funcPath})){ ${funcPath} = $_frperror[0].TargetObject } 									# http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-		${funcName} = Split-Path ${funcPath} -leaf																# get basename
-		${funcName} = ${funcName}.Substring(0, ${funcName}.lastIndexOf('.'))												# remove extension
+		${funcName} = Split-Path ${funcPath} -leaf															# get basename
+		${funcName} = ${funcName}.Substring(0, ${funcName}.lastIndexOf('.'))								# remove extension
 	}
 	else{
 		${funcName} = "${var}"
-		${funcName} = Split-Path ${funcName} -leaf																	# get basename
+		${funcName} = Split-Path ${funcName} -leaf															# get basename
 		${funcPath} = "${DKPOWERSHELL_FUNCTIONS_DIR}/${funcName}.ps1"
 	}
 	${funcPath} = ${funcPath} -replace '\\', '/';
@@ -45,10 +45,10 @@ function Global:dk_load ($var) {
 #		sed -i -e 's/\r$//' ${funcPath}
 #	}
 	
-	if(!("${DKFUNCTIONS}" -match ";${funcName};")){			#IF NOT REGEX MATCH
+	if(!("${DKFUNCTIONS_LIST}" -match ";${funcName};")){			#IF NOT REGEX MATCH
 	
-		$global:DKFUNCTIONS = "${DKFUNCTIONS};${funcName};" 			# Add to list
-		# Write-Host "added ${funcName} to DKFUNCTIONS"
+		$global:DKFUNCTIONS_LIST = "${DKFUNCTIONS_LIST};${funcName};" 			# Add to list
+		# Write-Host "added ${funcName} to DKFUNCTIONS_LIST"
 		
 		$matchList = Select-String -path "${funcPath}" -Pattern "(dk|DK)_[a-zA-Z0-9]*" -AllMatches |
 		ForEach-Object{ $_.Matches.Value }
@@ -58,7 +58,7 @@ function Global:dk_load ($var) {
 			${match} = $matchList[$i]
 			#Write-Host "match = ${match}"
 			
-			if("${DKFUNCTIONS}" -match ";${match};"){
+			if("${DKFUNCTIONS_LIST}" -match ";${match};"){
 				#Write-Host "${funcName}: skipping ${match}.    already in load_list"
 				continue;
 			}
