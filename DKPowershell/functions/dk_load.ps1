@@ -37,7 +37,7 @@ function Global:dk_load ($var) {
 		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${funcName}.ps1" "$DKPOWERSHELL_FUNCTIONS_DIR/${funcName}.ps1"
 		
 		if(!(Test-Path ${funcPath})){
-			Write-Host "ERROR: ${funcPath}: file not found"
+			Write-Host "${funcPath}: file not found"
 			return
 		}
 	}

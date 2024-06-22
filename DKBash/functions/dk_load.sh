@@ -31,7 +31,7 @@ dk_load (){
 	if [ ! -e ${funcPath} ]; then
 		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
-		$(dk_download) || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 	
 		echo "Dowloading ${funcName}"
 		dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"

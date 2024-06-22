@@ -20,12 +20,12 @@ dk_info (){
 	
 	[ ${ENABLE_dk_info} -ne "1" ] && return
 	msg="$1"
-	dk_echo "${white}${INFO_TAG}${msg}${clr}"
+	dk_echo "${white-}${INFO_TAG}${msg}${clr-}"
 	
-	[ ${TRACE_ON_INFO} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_INFO ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
-	[ ${LINE_ON_INFO} -eq 1 ]  && dk_echo "\n${red}*** LINE_ON_INFO ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
-	[ ${PAUSE_ON_INFO} -eq 1 ] && dk_echo "\n${red}*** PAUSE_ON_INFO ***${clr}" && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
-	[ ${HALT_ON_INFO} -eq 1 ]  && dk_echo "\n${red}*** HALT_ON_INFO ***${clr}"  && dk_exit; true #OR HALT AND NOT NO_HALT)
+	[ ${TRACE_ON_INFO} -eq 1 ] && dk_echo "\n${white-}*** TRACE_ON_INFO ***${clr-}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
+	[ ${LINE_ON_INFO} -eq 1 ]  && dk_echo "\n${white-}*** LINE_ON_INFO ***${clr-}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[0]}"; true #OR HALT AND NOT NO_HALT)
+	[ ${PAUSE_ON_INFO} -eq 1 ] && dk_echo "\n${white-}*** PAUSE_ON_INFO ***${clr-}" && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
+	[ ${HALT_ON_INFO} -eq 1 ]  && dk_echo "\n${white-}*** HALT_ON_INFO ***${clr-}"  && dk_exit; true #OR HALT AND NOT NO_HALT)
 }
 
 
