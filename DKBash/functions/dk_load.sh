@@ -102,9 +102,9 @@ dk_load() {
 			#fi
 			#return 0
 		fi
-	else
+#	else
 		#echo "${fn}: already in the list" 				# if already in list, do nothing
-		return 0
+#		return 0
 	fi
 	
 	#echo "${dkload_list}" > dkload_list.txt

@@ -24,6 +24,7 @@ function Global:dk_load ($var) {
 		$fn = Split-Path ${fn} -leaf
 		$fpath = "${DKPOWERSHELL_FUNCTIONS_DIR}/${fn}.ps1"
 	}
+	$fpath = $fpath -replace '\\', '/';
 
 	#### download if missing ####
 	if(!(Test-Path ${fpath})){
@@ -33,7 +34,6 @@ function Global:dk_load ($var) {
 		
 		Write-Host "Dowloading ${fn}"
 		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${fn}.ps1" "$DKPOWERSHELL_FUNCTIONS_DIR/${fn}.ps1"
-		if(!(Test-Path ${fpath})){ Write-Host "ERROR: ${fpath}: file not found"; return }
 	}
 	
 #	# Convert to unix line endings if CRLF found
@@ -42,41 +42,53 @@ function Global:dk_load ($var) {
 #		sed -i -e 's/\r$//' ${fpath}
 #	}
 	
-	if(Test-Path ${fpath}){
-		$fn = ${fpath}
-    }
-	else {
-        Write-Host "${fpath}: file not found"
+	if(!(Test-Path ${fpath})){
+		Write-Host "${fpath}: file not found"
 		return
     }
+
 	
+	if(!("${dkload_list}" -match ";${fn};")){			#IF NOT REGEX MATCH
 	
-	
-	
-	
-	
-	
-	
-	if(Test-Path "$var"){
-		#echo "Import-Module -Global $var"
-		#Import-Module -Global $var
-		Write-Host ". $var"
-		. $var
-		return
-	}
-	
-#	if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1")) {
-#		echo "dk_load $var"
-#		if(!(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1" }
-#		. $DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1
-#		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1" "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1" 
-#	}
-	
-	if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"){
-		echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"
-		Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1
-		return
-	}
+		$global:dkload_list = "${dkload_list};${fn};" 			# Add to list
+		# Write-Host "added ${fn} to dkload_list"
+		
+		$lines = Select-String -path "${fpath}" -Pattern "(dk|DK)_[a-zA-Z0-9]*" -AllMatches |
+		ForEach-Object{ $_.Matches.Value }
+		$lines = $lines | select -Unique  # remove duplicates
+		
+		for($i=0; $i -lt $lines.count; $i++) {
+			$value = $lines[$i]
+			Write-Host "value = $value"
+			
+			if("${dkload_list}" -match ";${value};"){
+				#echo "${fn}: skipping ${value}.    already in load_list"
+				continue;
+			}
+			elseif(${fn} -eq ${value}){
+				#echo "${fn}: skipping ${value}.    already matches fn"
+				continue
+			}
+			elseif("${value}" -eq ""){
+				#echo "${fn}: skipping ${value}.    empty"
+				continue
+			}
+			else{
+				if(!(Test-Path "${value}")){ dk_load ${value} }
+			}
+		}
+		
+		if(Test-Path "$var"){
+			Write-Host ". $var"
+			. $var
+			return
+		}
+		if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"){
+			echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"
+			Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1
+			return
+		}
+	}	
 }
 
 
