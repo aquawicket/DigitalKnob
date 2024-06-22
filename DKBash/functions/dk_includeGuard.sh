@@ -18,7 +18,7 @@ alias dk_includeGuard='{
 	
 	if [ -n "$value" ]; then
 		echo "already included"
-		return 1 2>/dev/null
+		return 1 2>nul
 		exit 1
 	else	
 		export readonly include_guard_${name}=1
