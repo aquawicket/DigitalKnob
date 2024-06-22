@@ -105,19 +105,21 @@ dk_init(){
 
 	###### fallback functions ######
 	$(command -v dk_commandExists &>/dev/null) || function dk_commandExists(){ $(command -v $1 &>/dev/null); }
-	dk_commandExists "dk_echo"           || function dk_echo()           { echo $*;                                   }
-	dk_commandExists "dk_error"          || function dk_error()          { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit; }
-	dk_commandExists "dk_warning"        || function dk_warning()        { dk_echo "${yellow}WARNING: $1${clr}";      }
-	dk_commandExists "dk_info"           || function dk_info()           { dk_echo "$1";                              }
-	dk_commandExists "dk_debug"          || function dk_debug()          { dk_echo "${blue}$1${clr}";                 }
-	dk_commandExists "dk_verbose"        || function dk_verbose()        { dk_echo "${cyan}$1${clr}";                 }
-	dk_commandExists "dk_printVar"       || function dk_printVar()       { dk_echo "${blue}$1 = ${!1-}${clr}";         }
-	dk_commandExists "dk_pathExists"     || function dk_pathExists()     { [ -e "$1" ];                               }
-	dk_commandExists "dk_unset"          || function dk_unset()          { unset "$1";                                }
-	dk_commandExists "dk_export"         || function dk_export()         { export $1="$2";                            }
-	dk_commandExists "dk_defined"        || function dk_defined()        { eval value='$'{$1+x}; [ -n "$value" ];     }
-	dk_commandExists "dk_stringContains" || function dk_stringContains() { [ "${1#*"$2"}" != "$1" ];                  }
-	dk_commandExists "dk_realpath"       || function dk_realpath()       { echo $(cd $(dirname $1); pwd -P)/$(basename $1); }
+	dk_commandExists "dk_echo"           || function dk_echo()           { echo $*;                                                                                                        }
+	dk_commandExists "dk_error"          || function dk_error()          { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit;                                   }
+	dk_commandExists "dk_warning"        || function dk_warning()        { dk_echo "${yellow}WARNING: $1${clr}";                                                                           }
+	dk_commandExists "dk_info"           || function dk_info()           { dk_echo "$1";                                                                                                   }
+	dk_commandExists "dk_debug"          || function dk_debug()          { dk_echo "${blue}$1${clr}";                                                                                      }
+	dk_commandExists "dk_verbose"        || function dk_verbose()        { dk_echo "${cyan}$1${clr}";                                                                                      }
+	dk_commandExists "dk_printVar"       || function dk_printVar()       { dk_echo "${blue}$1 = ${!1-}${clr}";                                                                             }
+	dk_commandExists "dk_pathExists"     || function dk_pathExists()     { [ -e "$1" ];                                                                                                    }
+	dk_commandExists "dk_stringContains" || function dk_stringContains() { [ "${1#*"$2"}" != "$1" ];                                                                                       }
+	dk_commandExists "dk_unset"          || function dk_unset()          { dk_commandExists "unset"    && unset "$1";                                                                      }
+	dk_commandExists "dk_export"         || function dk_export()         { dk_commandExists "export"   && export $1="$2";                                                                  }
+	dk_commandExists "dk_defined"        || function dk_defined()        { dk_commandExists "eval"     && eval value='$'{$1+x}; [ -n "$value" ];                                           }
+	dk_commandExists "dk_basename"       || function dk_basename()       { dk_commandExists "basename" && echo $(basename $1) || dk_error "basename is not implemented";                   }
+	dk_commandExists "dk_dirname"        || function dk_dirname()        { dk_commandExists "dirname"  && echo $(dirname $1)  || dk_error "dirname is not implemented";                    }
+	dk_commandExists "dk_realpath"       || function dk_realpath()       { dk_commandExists "realpath" && echo $(realpath $1) || echo $(cd $(dirname $1); pwd -P)/$(dk_basename $1);       }
 	dk_commandExists "dk_debugFunc"      || function dk_debugFunc()      { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
 
 	###### default variables ######
@@ -248,22 +250,15 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	dk_stringContains $1 ".sh"                      && local funcPath=$1      ||      local funcPath=$1.sh
+	dk_stringContains $1 ".sh"  && local funcPath=$1              ||      local funcPath=$1.sh
 	dk_pathExists "${funcPath}" && funcPath="${funcPath}"
-	dk_pathExists "${PWD}/${funcPath}" && funcPath="${PWD}/${funcPath}"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/${funcPath}" && funcPath="${DKBASH_FUNCTIONS_DIR}/${funcPath}"
-	echo "funcPath = $funcPath"
-	if dk_pathExists "$funcPath"; then
-		chmod 777 $funcPath
-		. $funcPath
-		return
-	fi
-#	if dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$funcPath"; then
-#		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/$funcPath ${DKHTTP_DKBASH_FUNCTIONS_DIR}/$funcPath
-#		dk_pathExists ${DKBASH_FUNCTIONS_DIR}/$funcPath || dk_error "$funcPath: command not found"
-#		chmod 777 ${DKBASH_FUNCTIONS_DIR}/$funcPath
-#		. ${DKBASH_FUNCTIONS_DIR}/$funcPath
-#	fi
+	dk_pathExists "${PWD}/$(basename $funcPath)"                  && funcPath="${PWD}/$(basename $funcPath)"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" && funcPath="${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)"
+	dk_pathExists "${funcPath}" || dk_error "Unable to fine funcPath:${funcPath}"
+	#echo "funcPath = $funcPath"
+	chmod 777 $funcPath
+	. $funcPath
 }
 
 ##################################################################################
