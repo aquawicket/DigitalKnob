@@ -6,7 +6,7 @@
 # try(<args..>)
 #
 try (){ 
-	#$@ &>nul
+	#$@ &>/dev/null
 	$@ 2>&1
 }
 

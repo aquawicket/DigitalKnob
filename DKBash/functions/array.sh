@@ -56,7 +56,7 @@ array_len (){
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_nth $index
 array_nth (){
-  printf '%d' "$1" >/dev/null 2>&1 \
+  printf '%d' "$1" >/dev/null \
     && "$arrayawkcmd" -v i="$1" '
         BEGIN { code=1 }
         NR == i + 1 { print $0; code=0 }

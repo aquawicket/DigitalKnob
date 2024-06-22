@@ -37,13 +37,13 @@ dk_resetAll (){
 	#rm -r -f "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
 	#cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_PARENT_DIR}/${DKSCRIPT_NAME}"
 	#dk_echo "DELETING ${DIGITALKNOB_DIR} . . . ."
-	#rm -r -f "${DIGITALKNOB_DIR}" 2>nul
+	#rm -r -f "${DIGITALKNOB_DIR}" 2>/dev/null
 	
 	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 	cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 	cd "${DIGITALKNOB_DIR}"
 	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
-	rm -r -f "${DKBRANCH_DIR}" 2>nul
+	rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
 	
 	dk_gitUpdate #NO_CONFIRM
 	

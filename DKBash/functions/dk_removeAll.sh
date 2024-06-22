@@ -35,7 +35,7 @@ dk_removeAll (){
 	cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
 		
 	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
-	rm -r -f "${DKBRANCH_DIR}" 2>nul
+	rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
 }
 
 

@@ -15,7 +15,7 @@ dk_get_dkpaths (){
 	#echo "DKSCRIPT = $DKSCRIPT"
 	#export DKSCRIPT_PATH=$(realpath "$0")
 	#echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	#export DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+	#export DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" &>/dev/null; pwd -P )
 	#echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 	#export DKSCRIPT_NAME=$(basename "$0")
 	#echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
@@ -23,7 +23,7 @@ dk_get_dkpaths (){
 	#echo "BASH_SOURCE = ${BASH_SOURCE}"
 	#export BASH_SOURCE_PATH=$(realpath "${BASH_SOURCE}")
 	#echo "BASH_SOURCE_PATH = ${BASH_SOURCE_PATH}"
-	#export BASH_SOURCE_DIR=$( cd -- "$(dirname "${BASH_SOURCE}")" >/dev/null 2>&1 ; pwd -P )
+	#export BASH_SOURCE_DIR=$( cd -- "$(dirname "${BASH_SOURCE}")" &>/dev/null ; pwd -P )
 	#echo "BASH_SOURCE_DIR = ${BASH_SOURCE_DIR}"
 	#export BASH_SOURCE_NAME=$(basename "${BASH_SOURCE}")
 	#echo "BASH_SOURCE_NAME = ${BASH_SOURCE_NAME}"

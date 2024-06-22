@@ -129,8 +129,8 @@ dk_reloadWithBash(){
 # dk_DKBASH_VARS()
 #
 dk_DKBASH_VARS(){
-	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" &>nul; pwd -P )
-	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>nul; pwd -P )
+	export BASH_SOURCE_DIR=$( cd -- "$(dirname "$BASH_SOURCE")" &>/dev/null; pwd -P )
+	export DKBASH_DIR=$( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 	[ -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] || [$(read -rp '${DKBASH_FUNCTIONS_DIR}/DK.sh not found, press enter to exit')] || exit;
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
@@ -275,7 +275,7 @@ DK
 #}
 
 
-#if $(ps -o &>nul);then  
+#if $(ps -o &>/dev/null);then  
 #	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
 #	$echo "    THIS_PATH = $THIS_PATH"
 #	PARENT_PATH=$(ps -o args= $PPID | awk '{print $2}')

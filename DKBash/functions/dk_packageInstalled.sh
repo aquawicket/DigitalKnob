@@ -11,11 +11,11 @@ dk_packageInstalled (){
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
 	if dk_commandExists dpkg-query; then
-		if [ $(dpkg-query -W -f='${Status}' "$1" 2>nul | grep -c "ok dk_installed") -ne 0 ]; then
+		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
 			return ${true}
 		fi
 	elif dk_commandExists brew; then
-		if brew list "$1" &>nul; then
+		if brew list "$1" &>/dev/null; then
 			return ${true}
 		fi
 	elif dk_commandExists apt; then
@@ -25,7 +25,7 @@ dk_packageInstalled (){
 	elif dk_commandExists pkg; then
 		dk_error "dk_packageInstalled() pkg not implemented"
 	elif dk_commandExists pacman; then
-		if pacman -Qs "$1" > /dev/null; then
+		if pacman -Qs "$1" >/dev/null; then
 			#FIXME: this doesn't always work
 			return ${false};
 		fi

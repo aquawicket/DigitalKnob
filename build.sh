@@ -1091,7 +1091,7 @@ dk_validate_sudo (){
 	dk_verbose "dk_validate_sudo($*)"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
-	if command -v "sudo" >/dev/null 2>&1; then
+	if command -v "sudo" >/dev/null; then
 		SUDO="sudo"
 	fi
 	${SUDO-} echo
@@ -1411,7 +1411,7 @@ dk_packageInstalled (){
 	elif dk_commandExists pkg; then
 		dk_error "dk_packageInstalled() pkg not implemented"
 	elif dk_commandExists pacman; then
-		if pacman -Qs "$1" > /dev/null; then
+		if pacman -Qs "$1" >/dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
@@ -2113,7 +2113,7 @@ dk_saveArgs (){
 # try(<args..>)
 #
 try (){ 
-	#$@ >/dev/null 2>&1
+	#$@ >/dev/null
 	$@ 2>&1
 }
 

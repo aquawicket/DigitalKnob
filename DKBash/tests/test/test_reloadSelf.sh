@@ -28,7 +28,7 @@ else
 	
 	echo "cp -r ${DKSCRIPT_PATH} ${DKPARENT_DIR}/${DKSCRIPT_NAME}"
 	cp -rp "${DKSCRIPT_PATH}" "${DKPARENT_DIR}/${DKSCRIPT_NAME}"
-	rm -r -f "${DKSCRIPT_DIR}" 2>null
+	rm -r -f "${DKSCRIPT_DIR}" 2>/dev/null
 	echo done
 	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/renamed.sh"
 	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/${DKSCRIPT_NAME}"

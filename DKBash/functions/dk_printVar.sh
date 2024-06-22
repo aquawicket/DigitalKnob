@@ -15,12 +15,12 @@ dk_printVar (){
 	# https://unix.stackexchange.com/a/66009
 	#if $(declare -n); then
 		#declare -n _reference_=$1
-		#if ! declaration="$(declare -p ${!_reference_} 2> /dev/null)"; then
+		#if ! declaration="$(declare -p ${!_reference_} 2>/dev/null)"; then
 		#	declaration=$1
 		#fi	
 	if (typeset -n 2>/dev/null); then
 		typeset -n _reference_=$1
-		if ! declaration="$(typeset -p ${!_reference_} 2> /dev/null)"; then
+		if ! declaration="$(typeset -p ${!_reference_} 2>/dev/null)"; then
 			declaration=$1
 		fi
 		#echo "declaration = $declaration"
