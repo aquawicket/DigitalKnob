@@ -9,21 +9,21 @@ if(!$dk_load){ $dk_load = 1 } else{ return }
 function Global:dk_load ($var) {
 	dk_debugFunc	
 	if($(__ARGC__) -ne 1){ echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	if("$var" -eq "dk_depend"){ return }  #FIXME: need to better handle non-existant files
+	if("${var}" -eq "dk_depend"){ return }  #FIXME: need to better handle non-existant files
 
-	$fn = ""
-	if(Test-Path "$var"){
-		$fpath = Resolve-Path -Path "$var" -ErrorAction SilentlyContinue -ErrorVariable _frperror #Calls Resolve-Path but works for files that don't exist.
-		if(-not($fpath)){ $fpath = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-		$fn = Split-Path $fpath -leaf
-		$fn = $fn.Substring(0, $fn.lastIndexOf('.'))
+	${fn} = ""
+	if(Test-Path "${var}"){
+		${fpath} = Resolve-Path -Path "${var}" -ErrorAction SilentlyContinue -ErrorVariable _frperror #Calls Resolve-Path but works for files that don't exist.
+		if(-not(${fpath})){ ${fpath} = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
+		${fn} = Split-Path ${fpath} -leaf
+		${fn} = ${fn}.Substring(0, ${fn}.lastIndexOf('.'))
 	}
 	else{
-		$fn = "${var}"
-		$fn = Split-Path ${fn} -leaf
-		$fpath = "${DKPOWERSHELL_FUNCTIONS_DIR}/${fn}.ps1"
+		${fn} = "${var}"
+		${fn} = Split-Path ${fn} -leaf
+		${fpath} = "${DKPOWERSHELL_FUNCTIONS_DIR}/${fn}.ps1"
 	}
-	$fpath = $fpath -replace '\\', '/';
+	${fpath} = ${fpath} -replace '\\', '/';
 
 	#### download if missing ####
 	if(!(Test-Path ${fpath})){
@@ -52,48 +52,47 @@ function Global:dk_load ($var) {
 		$global:dkload_list = "${dkload_list};${fn};" 			# Add to list
 		# Write-Host "added ${fn} to dkload_list"
 		
-		$lines = Select-String -path "${fpath}" -Pattern "(dk|DK)_[a-zA-Z0-9]*" -AllMatches |
+		$matchList = Select-String -path "${fpath}" -Pattern "(dk|DK)_[a-zA-Z0-9]*" -AllMatches |
 		ForEach-Object{ $_.Matches.Value }
-		$lines = $lines | select -Unique  # remove duplicates
+		$matchList = $matchList | select -Unique  # remove duplicates
 		
-		for($i=0; $i -lt $lines.count; $i++) {
-			$value = $lines[$i]
-			#Write-Host "value = $value"
+		for($i=0; $i -lt $matchList.count; $i++) {
+			${match} = $matchList[$i]
+			#Write-Host "match = ${match}"
 			
-			if("${dkload_list}" -match ";${value};"){
-				#echo "${fn}: skipping ${value}.    already in load_list"
+			if("${dkload_list}" -match ";${match};"){
+				#echo "${fn}: skipping ${match}.    already in load_list"
 				continue;
 			}
-			elseif(${fn} -eq ${value}){
-				#echo "${fn}: skipping ${value}.    already matches fn"
+			elseif(${fn} -eq ${match}){
+				#echo "${fn}: skipping ${match}.    already matches fn"
 				continue
 			}
-			elseif("${value}" -eq ""){
-				#echo "${fn}: skipping ${value}.    empty"
+			elseif("${match}" -eq ""){
+				#echo "${fn}: skipping ${match}.    empty"
 				continue
 			}
 			else{
-				if(!(Test-Path "${value}")){ dk_load ${value} }
+				if(!(Test-Path "${match}")){ dk_load ${match} }
 			}
 		}
 		
 		if(Test-Path "${fpath}"){
-  echo "if(Test-Path $fpath){"
-			Write-Host ". $fpath"
-			. $fpath
+			Write-Host ". ${fpath}"
+			. ${fpath}
 			return
 		}
 		
-#		if(Test-Path "$var"){
-#  echo "if(Test-Path $var){"
-#			Write-Host ". $var"
-#			. $var
+#		if(Test-Path "${var}"){
+#  echo "if(Test-Path ${var}){"
+#			Write-Host ". ${var}"
+#			. ${var}
 #			return
 #		}
-#		if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"){
-# echo "if(Test-Path $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1){"
-#			echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1"
-#			Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/$var.ps1
+#		if(Test-Path "$DKPOWERSHELL_FUNCTIONS_DIR/${var}.ps1"){
+# echo "if(Test-Path $DKPOWERSHELL_FUNCTIONS_DIR/${var}.ps1){"
+#			echo "Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/${var}.ps1"
+#			Import-Module -Global $DKPOWERSHELL_FUNCTIONS_DIR/${var}.ps1
 #			return
 #		}
 	}	
