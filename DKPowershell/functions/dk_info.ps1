@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_info){ $dk_info = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }
 if(!$TRACE_ON_INFO) { $global:TRACE_ON_INFO = 0  }
 if(!$LINE_ON_INFO)  { $global:LINE_ON_INFO = 0   }

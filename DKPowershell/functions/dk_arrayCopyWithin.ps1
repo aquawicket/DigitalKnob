@@ -1,8 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayCopyWithin){ $dk_arrayCopyWithin = 1 } else{ return }
 
-#dk_load dk_error
-#dk_load dk_todo
 ################################################################################
 # dk_arrayCopyWithin(array, target, start, end)
 #

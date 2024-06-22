@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_todo){ $dk_todo = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_todo){ $global:ENABLE_dk_todo = 1 }
 if(!$TRACE_ON_TODO) { $global:TRACE_ON_TODO = 0  }
 if(!$LINE_ON_TODO)  { $global:LINE_ON_TODO = 0   }

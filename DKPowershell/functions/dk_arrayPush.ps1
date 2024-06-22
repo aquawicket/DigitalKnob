@@ -1,12 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayPush){ $dk_arrayPush = 1 } else{ return }
 
-#dk_load dk_fixme
-#dk_fixme
-#
-#dk_load dk_todo
-#dk_load dk_printVar
-#dk_load dk_printArray
 ################################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN) -> rtn_var
 #

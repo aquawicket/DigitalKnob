@@ -1,8 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_pickOs){ $dk_pickOs = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_warning
 ##################################################################################
 # dk_pickOs()
 #

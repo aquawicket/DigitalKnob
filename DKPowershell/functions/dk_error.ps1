@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_error){ $dk_error = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_error){ $global:ENABLE_dk_error = 1 }
 if(!$TRACE_ON_ERROR) { $global:TRACE_ON_ERROR = 1  }
 if(!$LINE_ON_ERROR)  { $global:LINE_ON_ERROR = 1   }

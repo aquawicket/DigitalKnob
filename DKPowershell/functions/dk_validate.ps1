@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_validate){ $dk_validate = 1 } else{ return }
 
-
 ###############################################################################
 # dk_validate(variable, code)
 #

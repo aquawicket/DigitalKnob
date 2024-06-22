@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_warning){ $dk_warning = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_warning){ $global:ENABLE_dk_warning = 1 }
 if(!$TRACE_ON_WARNING) { $global:TRACE_ON_WARNING = 0  }
 if(!$LINE_ON_WARNING)  { $global:LINE_ON_WARNING = 0   }

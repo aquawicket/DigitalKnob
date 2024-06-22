@@ -1,16 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_smartExtract){ $dk_smartExtract = 1 } else{ return }
 
-dk_load dk_realpath
-dk_load dk_getDirname
-dk_load dk_remove
-dk_load dk_extract
-dk_load dk_getFiles
-dk_load dk_getDirectories
-dk_load dk_getBasename
-dk_load dk_warning
-dk_load dk_arrayLength
-dk_load dk_move
 ##################################################################################
 # dk_smartExtract(src, dest)
 #

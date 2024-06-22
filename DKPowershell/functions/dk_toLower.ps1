@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_toLower){ $dk_toLower = 1 } else{ return }
 
-dk_load dk_printVar
 ##################################################################################
 # dk_toLower(str) -> rtn_val
 #

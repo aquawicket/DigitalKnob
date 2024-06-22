@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_verbose){ $dk_verbose = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_verbose){ $global:ENABLE_dk_verbose = 1 }
 if(!$TRACE_ON_VERBOSE) { $global:TRACE_ON_VERBOSE = 0  }
 if(!$LINE_ON_VERBOSE)  { $global:LINE_ON_VERBOSE = 0   }

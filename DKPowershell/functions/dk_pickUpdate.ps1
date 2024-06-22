@@ -1,19 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
 
-dk_load dk_readCache
-dk_load dk_checkGitRemote
-dk_load dk_gitUpdate
-dk_load dk_gitCommit
-dk_load dk_pushAssets
-dk_load dk_pullAssets
-dk_load dk_resetAll
-dk_load dk_removeAll
-dk_load dk_clearScreen
-dk_load dk_clearCmakeCache
-dk_load dk_deleteTempFiles
-dk_load dk_reload
-dk_load dk_exit
 ##################################################################################
 # dk_pickUpdate()
 #

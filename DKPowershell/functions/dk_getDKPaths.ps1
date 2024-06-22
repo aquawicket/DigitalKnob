@@ -1,8 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getDKPaths){ $dk_getDKPaths = 1 } else{ return }
 
-dk_load dk_makeDirectory
-dk_load dk_printVar
 ####################################################################
 # dk_getDKPaths()
 #

@@ -1,9 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayLength){ $dk_arrayLength = 1 } else{ return }
 
-#dk_load dk_error
-#dk_load dk_assert
-#dk_load dk_warning
 ################################################################################
 # dk_arrayLength(array) -> rtn_var
 #

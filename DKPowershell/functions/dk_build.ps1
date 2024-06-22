@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_build){ $dk_build = 1 } else{ return }
 
-#dk_load dk_echo
 ##################################################################################
 # dk_build()
 #

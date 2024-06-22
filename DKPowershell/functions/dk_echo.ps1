@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_echo){ $dk_echo = 1 } else{ return }
 
-dk_load dk_color; dk_color
 ################################################################################
 # dk_echo(message)
 #

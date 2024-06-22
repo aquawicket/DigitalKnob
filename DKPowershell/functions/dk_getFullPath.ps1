@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getFullPath){ $dk_getFullPath = 1 } else{ return }
 
-dk_load dk_realpath
 ##################################################################################
 # dk_getFullPath(path) -> rtn_var
 #

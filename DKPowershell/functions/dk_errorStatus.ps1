@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_errorStatus){ $dk_errorStatus = 1 } else{ return }
 
-
 ##################################################################################
 # dk_errorStatus()
 #

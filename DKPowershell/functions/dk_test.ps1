@@ -1,10 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_test){ $dk_test = 1 } else{ return }
 
-dk_load dk_info
-dk_load dk_debug
-dk_load dk_error
-dk_load dk_pause
 ##################################################################################
 # dk_test()
 #

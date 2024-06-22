@@ -1,14 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_gitCommit){ $dk_gitCommit = 1 } else{ return }
 
-dk_load dk_info
-dk_load dk_error
-dk_load dk_errorStatus
-dk_load dk_confirm
-dk_load dk_validate
-dk_load dk_validateBranch
-dk_load dk_getDKPaths
-dk_load dk_call
 ##################################################################################
 # dk_gitCommit()
 #

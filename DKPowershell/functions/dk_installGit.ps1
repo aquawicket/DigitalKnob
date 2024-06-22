@@ -1,17 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_installGit){ $dk_installGit = 1 } else{ return }
 
-dk_load dk_validate
-dk_load dk_getBasename
-dk_load dk_error
-dk_load dk_convertToCIdentifier
-dk_load dk_toLower
-dk_load dk_removeExtension
-dk_load dk_convertToCIdentifier
-dk_load dk_toLower
-dk_load dk_pathExists
-dk_load dk_getHostTriple
-dk_load dk_getDKPaths
 ####################################################################
 # dk_installGit()
 #

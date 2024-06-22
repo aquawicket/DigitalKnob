@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_showFileLine){ $dk_showFileLine = 1 } else{ return }
 
-dk_load dk_echo
 if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 ################################################################################
 # dk_showFileLine(filepath <match_string or line_num>)

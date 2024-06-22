@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_arrayShift){ $dk_arrayShift = 1 } else{ return }
 
-
 ################################################################################
 # dk_arrayShift(array)
 #

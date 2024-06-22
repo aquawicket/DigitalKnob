@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getBasename){ $dk_getBasename = 1 } else{ return }
 
-dk_load dk_printVar
 ################################################################################
 # dk_getBasename(path) -> rtn_var
 #

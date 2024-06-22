@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getDirname){ $dk_getDirname = 1 } else{ return }
 
-dk_load dk_printVar
 ################################################################################
 # dk_getDirname(path)   return -> rtn_var
 #

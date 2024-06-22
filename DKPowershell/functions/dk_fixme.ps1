@@ -1,11 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_fixme){ $dk_fixme = 1 } else{ return }
 
-dk_load dk_echo
-dk_load dk_stacktrace
-dk_load dk_showFileLine
-dk_load dk_pause
-dk_load dk_exit
 if(!$ENABLE_dk_fixme){ $global:ENABLE_dk_fixme = 1 }
 if(!$TRACE_ON_FIXME) { $global:TRACE_ON_FIXME = 0  }
 if(!$LINE_ON_FIXME)  { $global:LINE_ON_FIXME = 0   }

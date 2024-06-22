@@ -1,7 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_getHostTriple){ $dk_getHostTriple = 1 } else{ return }
 
-dk_load dk_printVar
 #####################################################################
 # dk_getHostTriple()
 #

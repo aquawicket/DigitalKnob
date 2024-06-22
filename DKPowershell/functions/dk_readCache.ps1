@@ -1,14 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 
-dk_load dk_pathExists
-dk_load dk_echo
-dk_load dk_printVar
-dk_load dk_validate
-dk_load dk_getDKPaths
-dk_load dk_assert
-dk_load dk_validateBranch
-dk_load dk_set
 ##################################################################################
 # dk_readCache()
 #

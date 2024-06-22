@@ -1,9 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_pathExists){ $dk_pathExists = 1 } else{ return }
 
-
-dk_load dk_info
-dk_load dk_printVar
 ##################################################################################
 # dk_pathExists(filepath)
 #

@@ -1,8 +1,6 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_realpath){ $dk_realpath = 1 } else{ return }
 
-dk_load dk_error
-dk_load dk_printVar
 ##################################################################################
 # dk_realpath(path) -> rtn_var
 #
