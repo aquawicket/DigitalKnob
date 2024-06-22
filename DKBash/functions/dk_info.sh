@@ -32,7 +32,7 @@ dk_info (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_info "test dk_info message"
-	echo "...next line..."
+	dk_debugFunc
+	
+	dk_info "test message from dk_info"
 }
