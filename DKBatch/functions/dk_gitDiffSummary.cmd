@@ -14,7 +14,7 @@ call DK.cmd
     
 	call dk_validate GIT_EXE "call dk_installGit"
 
-    "%GIT_EXE%" diff --compact-summary
+    "%GIT_EXE%" --no-pager diff --compact-summary
 goto:eof
 
 
