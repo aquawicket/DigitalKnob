@@ -14,7 +14,7 @@ dk_gitDiffSummary (){
     
 	dk_validate GIT_EXE "dk_installGit"
 
-    "${GIT_EXE}" diff --compact-summary
+    "${GIT_EXE}" --no-pager diff --compact-summary
 }
 
 

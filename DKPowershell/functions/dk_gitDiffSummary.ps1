@@ -14,7 +14,7 @@ function Global:dk_gitDiffSummary (){
     
 	dk_validate GIT_EXE "dk_installGit"
 
-    dk_call "${GIT_EXE}" diff --compact-summary
+    dk_call "${GIT_EXE}" --no-pager diff --compact-summary
 }
 
 
