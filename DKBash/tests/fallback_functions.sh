@@ -1,15 +1,15 @@
 #!/bin/sh
 
 foo(){ echo "foo $1"; }
-$(command -v foo &>/dev/null) || foo(){ echo "foo_fallback $1"; }
+$(command -v foo) || foo(){ echo "foo_fallback $1"; }
 #foo(){ echo "foo $1"; }
 
 #bar(){ echo "bar $1"; }
-$(command -v bar &>/dev/null) || bar(){ echo "bar_fallback $1"; }
+$(command -v bar) || bar(){ echo "bar_fallback $1"; }
 bar(){ echo "bar $1"; }
 
 #noob(){ echo "noob $1" }
-$(command -v noob &>/dev/null) || noob(){ echo "noob_fallback $1"; }
+$(command -v noob) || noob(){ echo "noob_fallback $1"; }
 #noob(){ echo "noob $1" }
 
 

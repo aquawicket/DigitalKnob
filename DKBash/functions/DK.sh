@@ -101,7 +101,7 @@ dk_init(){
 	echo "###### DKBash ######"
 
 	###### fallback functions ######
-	$(command -v dk_commandExists &>/dev/null) || dk_commandExists(){ $(command -v $1 &>/dev/null); }
+	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v $1 1>/dev/null); }
 	dk_commandExists "dk_echo"           || dk_echo()           { echo $*;                                                                                                        }
 	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: $1${clr}"; [$(read -rp "press enter to exit")] || exit;                                   }
 	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: $1${clr}";                                                                           }
@@ -147,7 +147,7 @@ dk_reloadWithBash(){
 # dk_DKBASH_VARS()
 #
 dk_DKBASH_VARS(){
-	dk_export BASH_SOURCE_DIR      $( cd -- "$(dirname "$BASH_SOURCE")"     &>/dev/null; pwd -P )
+	dk_export BASH_SOURCE_DIR      $( cd -- "$(dirname "$BASH_SOURCE")"; pwd -P )
 	dk_export DKBASH_DIR           $( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
