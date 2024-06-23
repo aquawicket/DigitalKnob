@@ -18,6 +18,5 @@ fi
 ###### DK_INIT ######
 . ${DKBASH_FUNCTIONS_DIR}/DK.sh
 
-
 ###### Load Main Program ######
 [ $# -gt 0 ] && "$@" || dk_buildMain

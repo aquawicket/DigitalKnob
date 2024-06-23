@@ -9,7 +9,7 @@
 
 ###### test <...> ######
 function test (){
-	echo "############ test() ############"
+	dk_echo "############ test() ############"
 	dk_printVar BASH
 	dk_printVar BASHOPTS
 	dk_printVar FUNCNAME

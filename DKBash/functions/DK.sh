@@ -63,14 +63,10 @@ DK (){
 	dk_source __CALLER__
 	dk_source dk_debugFunc
 	dk_source dk_load
+	dk_source dk_exit
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
-
 	dk_call dk_color
-	
-	
-	#dk_source "${DKSCRIPT_PATH}"
-	#. "${DKSCRIPT_PATH}"
 	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
@@ -87,11 +83,12 @@ DK (){
 			dk_echo "${bg_magenta}${white}########################## END TEST ################################${clr}"
 			dk_echo ""
 			dk_call dk_pause
-			dk_exit
+			dk_exit 0
 		fi
 	fi
 	
-	dk_load "${DKSCRIPT_PATH}"
+	###### RUN MODE ######
+	dk_load "${DKSCRIPT_PATH}" && dk_exit 0
 }
 
 
