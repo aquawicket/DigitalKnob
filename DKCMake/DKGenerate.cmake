@@ -961,6 +961,7 @@ if(NOT RASPBERRY)
 			"Name=${APP_NAME}\n"
 			"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite("${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	elseif(RELEASE)
 		dk_set(DESKTOP_FILE
@@ -972,6 +973,7 @@ if(NOT RASPBERRY)
 			"Name=${APP_NAME}\n"
 			"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
@@ -1054,6 +1056,7 @@ if(RASPBERRY)
 		"Name=${APP_NAME}\n"
 		"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	if(RELEASE)
@@ -1067,6 +1070,7 @@ if(RASPBERRY)
 		"Name=${APP_NAME}\n"
 		"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	
