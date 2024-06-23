@@ -33,6 +33,11 @@ goto:eof
 	echo JAVASCRIPT_FILE = %JAVASCRIPT_FILE%
 
 	echo ############### Digitalknob ##################
-echo %NODEJS_EXE% %JAVASCRIPT_FILE%
-     %NODEJS_EXE% %JAVASCRIPT_FILE%
+echo start %NODEJS_EXE% %JAVASCRIPT_FILE%
+    start %NODEJS_EXE% %JAVASCRIPT_FILE%
+	
+::	ping 127.0.0.1:8080
+::	ping 127.0.0.1:8080
+::	ping 127.0.0.1:8080
+	explorer "http://127.0.0.1:8080"
 goto:eof
