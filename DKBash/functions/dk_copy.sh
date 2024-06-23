@@ -50,7 +50,7 @@ dk_copy (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
 	echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file

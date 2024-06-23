@@ -4,7 +4,7 @@ include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_debugFunc)
-	set(ENABLE_dk_debugFunc 0 CACHE INTERNAL "")
+	set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 endif()
 ##################################################################################
 # dk_debugFunc(${ARGV})

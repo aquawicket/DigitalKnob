@@ -17,7 +17,7 @@ dk_appendCmakeArgs (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-
+	dk_debugFunc
+	
 	dk_todo
-
 }

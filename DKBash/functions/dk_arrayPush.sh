@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-dk_fixme
 ################################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN)
 #
@@ -25,7 +24,8 @@ dk_arrayPush (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	myArray[0]="a"
 	myArray[1]="b"
 	myArray[2]="c"

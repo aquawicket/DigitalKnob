@@ -57,7 +57,7 @@ function(DKINIT)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_eval.cmake)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
-	dk_load(dk_eval)
+	#dk_load(dk_eval)
 	dk_load(dk_color)
 	#dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 

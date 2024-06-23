@@ -2,7 +2,9 @@
 echo "dk_echo.sh"
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-
+# The reason we are overwriting echo is to try and keep junk echo's out of command substitution returns.
+#   result=$(myFunction thing) <- if anything writes to stdout durring this, it will junk up the result value.
+#   for that reason, we've overwritten echo and we point it to stderr since command substitions use stdout. 
 [ -z ${OVERWRITE_echo-} ]      && export OVERWRITE_echo=1
 
 if [ "$OVERWRITE_echo" = "1" ]; then

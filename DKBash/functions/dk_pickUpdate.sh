@@ -40,7 +40,7 @@ dk_pickUpdate (){
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
 		dk_echo "${red}" 
-		if [ -n "${_APP_}" ] && [ -n "${_TARGET_OS_}" ] && [ -n "${_TYPE_}" ]; then
+		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
 			dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
 		fi
 		dk_echo "${green}"
