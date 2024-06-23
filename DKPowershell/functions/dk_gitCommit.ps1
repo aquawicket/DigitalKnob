@@ -5,16 +5,19 @@ if(!$dk_gitCommit){ $dk_gitCommit = 1 } else{ return }
 # dk_gitCommit()
 #
 #
-function Global:dk_gitCommit  (){	
+function Global:dk_gitCommit (){	
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
+	dk_gitDiffSummary
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	$message = Read-Host
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 	cd "${DKBRANCH_DIR}" #-or dk_error "cd \${DKBRANCH_DIR} failed!"
+	
+	dk_validate GIT_EXE "dk_installGit"
 	
 	if(!($STORE = $(dk_call ${GIT_EXE} config credential.helper))){
 		dk_errorStatus
@@ -67,7 +70,6 @@ function Global:dk_gitCommit  (){
 
 function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
-	
 	
 	dk_gitCommit
 }
