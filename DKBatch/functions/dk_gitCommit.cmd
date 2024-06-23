@@ -9,6 +9,8 @@ call DK
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
+	call dk_gitDiffSummary
+	
     echo "Please enter some details about this commit, then press enter."
     set /p message=">" 
         
@@ -53,6 +55,14 @@ call DK
     
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
-        
-    ::call dk_checkError
+
+goto:eof
+
+
+
+
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	
+	call dk_gitCommit
 goto:eof
