@@ -19,4 +19,5 @@ include(DKCMake/functions/DK.cmake)
 
 ###### Load Main Program ######
 ## [ $# -gt 0 ] && "$@" || dk_buildMain
+dk_load(dk_buildMain)
 dk_buildMain()
