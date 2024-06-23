@@ -23,7 +23,9 @@ function Global:dk_load ($var) {
 	else{
 		${funcName} = "${var}"
 		${funcName} = Split-Path ${funcName} -leaf															# get basename
-		${funcName} = ${funcName}.Substring(0, ${funcName}.lastIndexOf('.'))	
+		if(${funcName}.lastIndexOf('.') -gt -1){
+			${funcName} = ${funcName}.Substring(0, ${funcName}.lastIndexOf('.'))	
+		}
 		${funcPath} = "${DKPOWERSHELL_FUNCTIONS_DIR}/${funcName}.ps1"
 	}
 	${funcPath} = ${funcPath} -replace '\\', '/';
