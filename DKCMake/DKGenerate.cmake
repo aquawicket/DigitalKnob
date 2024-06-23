@@ -961,7 +961,7 @@ if(NOT RASPBERRY)
 			"Name=${APP_NAME}\n"
 			"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
-		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+		dk_fileWrite("${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	elseif(RELEASE)
 		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
