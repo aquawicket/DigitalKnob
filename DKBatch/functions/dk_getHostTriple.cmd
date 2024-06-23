@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 call dk_source dk_printVar
 ::#####################################################################

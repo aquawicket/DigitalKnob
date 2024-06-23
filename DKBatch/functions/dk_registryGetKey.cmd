@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::#################################################################################
 ::# dk_registryGetKey() <reg_path> <key> rtn_var

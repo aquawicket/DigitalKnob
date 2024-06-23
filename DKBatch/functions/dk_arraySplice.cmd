@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::################################################################################
 ::# dk_arraySplice(array, start, deleteCount, item1, item2, /* …, */ itemN)

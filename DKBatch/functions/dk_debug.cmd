@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 if not defined ENABLE_dk_debug  call dk_set ENABLE_dk_debug 1
 if not defined TRACE_ON_DEBUG   call dk_set TRACE_ON_DEBUG 0

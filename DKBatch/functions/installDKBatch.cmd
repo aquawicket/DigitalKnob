@@ -5,9 +5,12 @@
 	if not "%*" == "" (goto:run_file)
 	echo Associating .cmd files with DKBatch . . .
 	
+	::###### DKINIT ######
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
-	call "%DKBRANCH_DIR%\DKBatch\functions\DK.cmd"
+	set "DKBATCH_FUNCTION_DIR=%DKBRANCH_DIR%\DKBatch\functions"
+	call "%DKBATCH_FUNCTION_DIR%\DK"
+	
 	call dk_load dk_validate
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	

@@ -4,9 +4,12 @@
 	if not "%*" == "" (goto:run_cmake_file)
 	echo Associating .ps1 files with DKPowershell . . .
 	
+	::###### DKINIT ######
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
-	call "%DKBRANCH_DIR%\DKBatch\functions\DK.cmd"
+	set "DKBATCH_FUNCTION_DIR=%DKBRANCH_DIR%\DKBatch\functions"
+	call "%DKBATCH_FUNCTION_DIR%\DK"
+	
 	call dk_load dk_validate
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
@@ -17,7 +20,7 @@
 goto:eof
 
 
-:run_cmake_file
+:run_powershell_file
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
 	set "POWERSHELL_EXE=%~2"
 	set "PS_FILE=%~3"

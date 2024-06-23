@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::####################################################################
 ::# dk_asciiToHex(ascii, rtn_var)

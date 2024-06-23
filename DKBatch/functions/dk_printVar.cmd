@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 if not defined ESC   call set "ESC="
 if not defined red   call set "red=%ESC%[31m"

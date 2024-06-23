@@ -1,6 +1,6 @@
 @echo off
 ::if defined dk_loadAll (goto:eof) else (set dk_loadAll=1)
-call DK
+call DK.cmd
 
 
 ::####################################################################

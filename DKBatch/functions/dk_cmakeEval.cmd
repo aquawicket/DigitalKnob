@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::################################################################################
 ::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)

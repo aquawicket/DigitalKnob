@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 if not defined ENABLE_dk_warning  call dk_set ENABLE_dk_warning 1
 if not defined TRACE_ON_WARNING   call dk_set TRACE_ON_WARNING 0

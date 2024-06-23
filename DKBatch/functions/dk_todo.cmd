@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 if not defined ENABLE_dk_todo  call dk_set ENABLE_dk_todo 1
 if not defined TRACE_ON_TODO   call dk_set TRACE_ON_TODO 0

@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::################################################################################
 ::# dk_arrayConcat(array, value1, value2, /* …, */ valueN)

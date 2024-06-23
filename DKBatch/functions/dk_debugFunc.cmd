@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::BATCH_SOURCE
 ::BATCH_ARGC[]

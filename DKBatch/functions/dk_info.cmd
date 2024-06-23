@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 if not defined ENABLE_dk_info  set "ENABLE_dk_info=1"
 if not defined TRACE_ON_INFO   set "TRACE_ON_INFO=0"

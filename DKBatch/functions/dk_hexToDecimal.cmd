@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::####################################################################
 ::# dk_hexToDecimal(<hex_string> rtn_var)

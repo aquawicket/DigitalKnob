@@ -1,5 +1,5 @@
 @echo off
-call DK
+call DK.cmd
 
 ::################################################################################
 ::# dk_textFormat(OUTPUT. column1, column2, column3, column4)

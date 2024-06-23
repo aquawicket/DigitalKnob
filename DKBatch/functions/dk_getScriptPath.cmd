@@ -1,5 +1,5 @@
 @echo off
-::call DK
+::call DK.cmd
 
 ::https://stackoverflow.com/a/43123617/688352
 

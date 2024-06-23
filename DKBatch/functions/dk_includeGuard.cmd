@@ -1,9 +1,9 @@
 @echo off
-call DK
+call DK.cmd
 
 ::if defined include_guard_dk_includeGuard (goto:eof) else set include_guard_dk_includeGuard=1
-::if not defined DKINIT (call DK & call :TEST_dk_includeGuard)
-::if not defined DKINIT (call DK)
+::if not defined DKINIT (call DK.cmd & call :TEST_dk_includeGuard)
+::if not defined DKINIT (call DK.cmd)
 
 ::##################################################################################
 ::# dk_includeGuard()

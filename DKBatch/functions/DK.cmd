@@ -88,9 +88,7 @@ goto:eof
 ::# dk_reloadWithCmd()
 ::#
 :dk_reloadWithCmd (){
-	
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
-	::if not defined DKSCRIPT_PATH goto:eof
 	if not exist "%DKSCRIPT_PATH%" goto:eof
 	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	call :dk_setupKeepOpen

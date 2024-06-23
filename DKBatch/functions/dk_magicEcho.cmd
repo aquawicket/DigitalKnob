@@ -1,6 +1,6 @@
 @echo off
 call :dk_magicEcho.init
-call DK
+call DK.cmd
 
 
 

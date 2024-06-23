@@ -2,7 +2,7 @@
 if exist "%DKBATCH_FUNCTIONS_DIR%\%~n1.cmd" (goto:eof)
 if exist "%~1" (goto:eof)
 ::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
-call DK
+call DK.cmd
 
 
 ::####################################################################
