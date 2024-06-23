@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_tryCatch(<function> <args>)
+# dk_tryCatch(function, args)
 #
 #	reference: https://stackoverflow.com/a/11092989/688352
 #

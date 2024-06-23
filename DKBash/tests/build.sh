@@ -2392,7 +2392,7 @@ dk_getHostTriple (){
 
 
 ##################################################################################
-# DK_TRY_CATCH(<function> <args>)
+# DK_TRY_CATCH(function, args)
 #
 #	reference: https://stackoverflow.com/a/11092989/688352
 #
