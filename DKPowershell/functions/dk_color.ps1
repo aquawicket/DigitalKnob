@@ -14,16 +14,9 @@ if(!$dk_color){ $dk_color = 1 } else{ return }
 function Global:dk_color (){
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	#dk_echo "`$args = $args"
-	#dk_echo "`${args} = ${args}"
-	#dk_echo "`$args[0] = $args[0]"
-	#dk_echo "`${args[0]} = ${args[0]}"
 
 	$global:USE_COLOR = 1
 	if(Test-Path variable:args){
-		dk_echo "args = $args"
-		#if($args -eq "OFF"){ 
 		if(!($args)){
 			dk_unset USE_COLOR 
 		}
@@ -33,50 +26,66 @@ function Global:dk_color (){
 		$global:ESC = "$([char]27)" # escape character
 		$global:clr = "${ESC}[0m"   # reset color
 		
+		$global:ESC=""     		 # escape character
+		
 		# Styles
-		$global:bold = "${ESC}[1m"
-		$global:underline = "${ESC}[4m"
-		$global:inverse = "${ESC}[7m"
+		$global:clr = "${ESC}[0m"   				# Default					- Returns all attributes to the default state prior to modification
+		$global:bold = "${ESC}[1m"					# Bold/Bright 				- Applies brightness/intensity flag to foreground color
+		$global:nobold = "${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
+		$global:underline = "${ESC}[4m"				# Underline       			- Adds underline
+		$global:nounderline = "${ESC}[24m"			# No underline				- Removes underline
+		$global:negative = "${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
+		$global:nonegative = "${ESC}[27m"  			# Positive(No negative)		- Returns foreground/background to normal
 
 		# Foreground Colors
-		$global:black = "${ESC}[30m"
-		$global:red = "${ESC}[31m"
-		$global:green = "${ESC}[32m"
-		$global:yellow = "${ESC}[33m"
-		$global:blue = "${ESC}[34m"
-		$global:magenta = "${ESC}[35m"
-		$global:cyan = "${ESC}[36m" 
-		$global:white = "${ESC}[37m"
+		$global:black = "${ESC}[30m"				# Foreground Black			- Applies non-bold/bright black to foreground
+		$global:red = "${ESC}[31m"					# Foreground Red			- Applies non-bold/bright red to foreground
+		$global:green = "${ESC}[32m"				# Foreground Green			- Applies non-bold/bright green to foreground
+		$global:yellow = "${ESC}[33m"				# Foreground Yellow			- Applies non-bold/bright yellow to foreground
+		$global:blue = "${ESC}[34m"					# Foreground Blue			- Applies non-bold/bright blue to foreground
+		$global:magenta = "${ESC}[35m"				# Foreground Magenta		- Applies non-bold/bright magenta to foreground
+		$global:cyan = "${ESC}[36m"					# Foreground Cyan			- Applies non-bold/bright cyan to foreground
+		$global:white = "${ESC}[37m"				# Foreground White			- Applies non-bold/bright white to foreground
+		$global:extended = "${ESC}[38m"				# Foreground Extended		- Applies extended color value to the foreground
+		$global:default = "${ESC}[39m"				# Foreground Default		- Applies only the foreground portion of the defaults
 		
 		# Background Colors
-		$global:bg_black = "${ESC}[40m"
-		$global:bg_red = "${ESC}[41m"
-		$global:bg_green = "${ESC}[42m"
-		$global:bg_yellow = "${ESC}[43m"
-		$global:bg_blue = "${ESC}[44m"
-		$global:bg_magenta = "${ESC}[45m"
-		$global:bg_cyan = "${ESC}[46m" 
-		$global:bg_white = "${ESC}[47m"
+		$global:bg_black = "${ESC}[40m"				# Background Black			- Applies non-bold/bright black to background
+		$global:bg_red = "${ESC}[41m"				# Background Red			- Applies non-bold/bright red to background
+		$global:bg_green = "${ESC}[42m"				# Background Green			- Applies non-bold/bright green to background
+		$global:bg_yellow = "${ESC}[43m"			# Background Yellow			- Applies non-bold/bright yellow to background
+		$global:bg_blue = "${ESC}[44m"				# Background Blue			- Applies non-bold/bright blue to background
+		$global:bg_magenta = "${ESC}[45m"			# Background Magenta		- Applies non-bold/bright magenta to background
+		$global:bg_cyan = "${ESC}[46m"				# Background Cyan			- Applies non-bold/bright cyan to background
+		$global:bg_white = "${ESC}[47m"				# Background White			- Applies non-bold/bright white to background
+		$global:bg_extended = "${ESC}[48m"			# Background Extended		- Applies extended color value to the background
+		$global:bg_default = "${ESC}[49m"			# Background Default		- Applies only the background portion of the defaults
 		
-		# Foreground Colors (Bright)
-		$global:BLACK = "${ESC}[90m"
-		$global:RED = "${ESC}[91m"
-		$global:GREEN = "${ESC}[92m"
-		$global:YELLOW = "${ESC}[93m"
-		$global:BLUE = "${ESC}[94m"
-		$global:MAGENTA = "${ESC}[95m"
-		$global:CYAN = "${ESC}[96m"
-		$global:WHITE = "${ESC}[97m"
+		# Foreground Colors (light)
+		$global:lblack = "${ESC}[90m"				# Bright Foreground Black	- Applies bold/bright black to foreground
+		$global:lred = "${ESC}[91m"					# Bright Foreground Red		- Applies bold/bright red to foreground
+		$global:lgreen = "${ESC}[92m"				# Bright Foreground Green	- Applies bold/bright green to foreground
+		$global:lyellow = "${ESC}[93m"				# Bright Foreground Yellow	- Applies bold/bright yellow to foreground
+		$global:lblue = "${ESC}[94m"				# Bright Foreground Blue	- Applies bold/bright blue to foreground
+		$global:lmagenta = "${ESC}[95m"				# Bright Foreground Magenta	- Applies bold/bright magenta to foreground
+		$global:lcyan = "${ESC}[96m"				# Bright Foreground Cyan	- Applies bold/bright cyan to foreground
+		$global:lwhite = "${ESC}[97m"				# Bright Foreground White	- Applies bold/bright white to foreground
+
+		# Background Colors (light)
+		$global:bg_lblack = "${ESC}[100m"			# Bright Background Black	- Applies bold/bright black to background
+		$global:bg_lred = "${ESC}[101m"				# Bright Background Red		- Applies bold/bright red to background
+		$global:bg_lgreen = "${ESC}[102m"			# Bright Background Green	- Applies bold/bright green to background
+		$global:bg_lyellow = "${ESC}[103m"			# Bright Background Yellow	- Applies bold/bright yellow to background
+		$global:bg_lblue = "${ESC}[104m"			# Bright Background Blue	- Applies bold/bright blue to background
+		$global:bg_lmagenta = "${ESC}[105m"			# Bright Background Magenta	- Applies bold/bright magenta to background
+		$global:bg_lcyan = "${ESC}[106m"			# Bright Background Cyan	- Applies bold/bright cyan to background
+		$global:bg_lwhite = "${ESC}[107m"			# Bright Background White	- Applies bold/bright white to background
 		
-		# Background Colors (Bright)
-		$global:BG_BLACK = "${ESC}[100m"
-		$global:BG_RED = "${ESC}[101m"
-		$global:BG_GREEN = "${ESC}[102m"
-		$global:BG_YELLOW = "${ESC}[103m"
-		$global:BG_BLUE = "${ESC}[104m"
-		$global:BG_MAGENTA = "${ESC}[105m"
-		$global:BG_CYAN = "${ESC}[106m"
-		$global:BG_WHITE = "${ESC}[107m"
+		# Foreground RGB Colors
+		$global:RGB = "${ESC}[38;2;"				# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
+		
+		# Background RGB Colors
+		$global:bg_RGB="${ESC}[48;2;"				# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
 		
 		dk_echo "${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}"
 	}
@@ -86,8 +95,11 @@ function Global:dk_color (){
 		
 		# Styles
 		dk_unset bold
+		dk_unset nobold
 		dk_unset underline
-		dk_unset inverse
+		dk_unset nounderline
+		dk_unset negative
+		dk_unset nonegative
 		
 		# Foreground Colors
 		dk_unset black
@@ -110,24 +122,27 @@ function Global:dk_color (){
 		dk_unset bg_white
 		
 		# Foreground Colors (Bright)
-		dk_unset BLACK
-		dk_unset RED
-		dk_unset GREEN
-		dk_unset YELLOW
-		dk_unset BLUE
-		dk_unset MAGENTA
-		dk_unset CYAN
-		dk_unset WHITE
+		dk_unset lblack
+		dk_unset lred
+		dk_unset lgreen
+		dk_unset lyellow
+		dk_unset lblue
+		dk_unset lmagenta
+		dk_unset lcyan
+		dk_unset lwhite
 		
 		# Background Colors (Bright)
-		dk_unset BG_BLACK
-		dk_unset BG_RED
-		dk_unset BG_GREEN
-		dk_unset BG_YELLOW
-		dk_unset BG_BLUE
-		dk_unset BG_MAGENTA
-		dk_unset BG_CYAN
-		dk_unset BG_WHITE
+		dk_unset bg_lblack
+		dk_unset bg_lred
+		dk_unset bg_lgreen
+		dk_unset bg_lyellow
+		dk_unset bg_lblue
+		dk_unset bg_lmagenta
+		dk_unset bg_lcyan
+		dk_unset bg_lwhite
+		
+		dk_unset RGB
+		dk_unset bg_RGB
 	
 		dk_echo "${clr} COLOR OFF"
 	}
@@ -141,74 +156,116 @@ dk_color 1
 function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
-	dk_color 1			# true		good
-	dk_color 0			# false		good
-	dk_color $true 		# true		good
-	#dk_color $false	# false		good
-	
-	#dk_color "1"		# true		bad
-	#dk_color "0"		# true		bad
-	#dk_color $1		# false		bad
-	#dk_color $0		# false		bad
-	#dk_color "$1"   	# false		bad
-	#dk_color "$0"   	# false		bad
-	#dk_color true   	# true		bad
-	#dk_color false 	# true		bad
-	#dk_color "true"	# true		bad
-	#dk_color "false"	# true		bad
-	
+	dk_color 1
+	dk_color 0
+	dk_color 1
 	
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK}           Styles            ${clr}"
-	dk_echo "`${clr}        ${clr}Reset${clr}"
-	dk_echo "`${bold}       ${bold}Bold${clr}"
-	dk_echo "`${underline}  ${underline}Underline${clr}"
-	dk_echo "`${inverse}    ${inverse}Inverse${clr}"
+	dk_echo "${black}${bg_lblack}           Styles            ${clr}"
+	dk_echo "`${clr}        ${clr} default ${clr}"
+	dk_echo "`${bold}       ${bold} bold ${clr}"
+	dk_echo "`${underline}  ${underline} underline ${clr}"
+	dk_echo "`${negative}    ${negative} negative ${clr}"
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK}      Foreground Colors      ${clr}"
-	dk_echo "`${black}      ${black}Black${clr}"
-	dk_echo "`${red}        ${red}Red${clr}"
-	dk_echo "`${green}      ${green}Green${clr}"
-	dk_echo "`${yellow}     ${yellow}Yellow${clr}"
-	dk_echo "`${blue}       ${blue}BLUE${clr}"
-	dk_echo "`${magenta}    ${magenta}Magenta${clr}"
-	dk_echo "`${cyan}       ${cyan}Cyan${clr}"
-	dk_echo "`${white}      ${white}White${clr}"
+	dk_echo "${black}${bg_lblack}      Foreground Colors      ${clr}"
+	dk_echo "`${black}      ${black} black ${clr}"
+	dk_echo "`${red}        ${red} red ${clr}"
+	dk_echo "`${green}      ${green} green ${clr}"
+	dk_echo "`${yellow}     ${yellow} yellow ${clr}"
+	dk_echo "`${blue}       ${blue} blue ${clr}"
+	dk_echo "`${magenta}    ${magenta} magenta ${clr}"
+	dk_echo "`${cyan}       ${cyan} cyan ${clr}"
+	dk_echo "`${white}      ${white} white ${clr}"
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK}      Background Colors      ${clr}"
-	dk_echo "`${bg_black}   ${bg_black}Black${clr}"
-	dk_echo "`${bg_red}     ${bg_red}Red${clr}"
-	dk_echo "`${bg_green}   ${bg_green}Green${clr}"
-	dk_echo "`${bg_yellow}  ${bg_yellow}Yellow${clr}"
-	dk_echo "`${bg_blue}    ${bg_blue}BLUE${clr}"
-	dk_echo "`${bg_magenta} ${bg_magenta}Magenta${clr}"
-	dk_echo "`${bg_cyan}    ${bg_cyan}Cyan${clr}"
-	dk_echo "`${bg_white}   ${bg_white}White${clr}"
+	dk_echo "${black}${bg_lblack}      Background Colors      ${clr}"
+	dk_echo "`${bg_black}   ${bg_black} bg_black ${clr}"
+	dk_echo "`${bg_red}     ${bg_red} bg_red ${clr}"
+	dk_echo "`${bg_green}   ${bg_green} bg_green ${clr}"
+	dk_echo "`${bg_yellow}  ${bg_yellow} bg_yellow ${clr}"
+	dk_echo "`${bg_blue}    ${bg_blue} bg_blue ${clr}"
+	dk_echo "`${bg_magenta} ${bg_magenta} bg_magenta ${clr}"
+	dk_echo "`${bg_cyan}    ${bg_cyan} bg_cyan ${clr}"
+	dk_echo "`${bg_white}   ${bg_white} bg_white ${clr}"
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK} Foreground Colors  bright  ${clr}"
-	dk_echo "`${BLACK}      ${BLACK}Black${clr}"
-	dk_echo "`${RED}        ${RED}Red${clr}"
-	dk_echo "`${GREEN}      ${GREEN}Green${clr}"
-	dk_echo "`${YELLOW}     ${YELLOW}Yellow${clr}"
-	dk_echo "`${BLUE}       ${BLUE}BLUE${clr}"
-	dk_echo "`${MAGENTA}    ${MAGENTA}Magenta${clr}"
-	dk_echo "`${CYAN}       ${CYAN}Cyan${clr}"
-	dk_echo "`${WHITE}      ${WHITE}White${clr}"
+	dk_echo "${black}${bg_lblack} Foreground Colors  bright  ${clr}"
+	dk_echo "`${lblack}      ${lblack} lblack ${clr}"
+	dk_echo "`${lred}        ${lred} lred ${clr}"
+	dk_echo "`${lgreen}      ${lgreen} lgreen ${clr}"
+	dk_echo "`${lyellow}     ${lyellow} lyellow ${clr}"
+	dk_echo "`${lblue}       ${lblue} lblue ${clr}"
+	dk_echo "`${lmagenta}    ${lmagenta} lmagenta ${clr}"
+	dk_echo "`${lcyan}       ${lcyan} lcyan ${clr}"
+	dk_echo "`${lwhite}      ${lwhite} lwhite ${clr}"
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK} Background Colors  bright  ${clr}"
-	dk_echo "`${BG_BLACK}   ${BG_BLACK}Black${clr}"
-	dk_echo "`${BG_RED}     ${BG_RED}Red${clr}"
-	dk_echo "`${BG_GREEN}   ${BG_GREEN}Green${clr}"
-	dk_echo "`${BG_YELLOW}  ${BG_YELLOW}Yellow${clr}"
-	dk_echo "`${BG_BLUE}    ${BG_BLUE}BLUE${clr}"
-	dk_echo "`${BG_MAGENTA} ${BG_MAGENTA}Magenta${clr}"
-	dk_echo "`${BG_CYAN}    ${BG_CYAN}Cyan${clr}"
-	dk_echo "`${BG_WHITE}   ${BG_WHITE}White${clr}"
+	dk_echo "${black}${bg_lblack} Background Colors  bright  ${clr}"
+	dk_echo "`${bg_lblack}   ${bg_lblack} bg_lblack ${clr}"
+	dk_echo "`${bg_lred}     ${bg_lred} bg_lred ${clr}"
+	dk_echo "`${bg_lgreen}   ${bg_lgreen} bg_lgreen ${clr}"
+	dk_echo "`${bg_lyellow}  ${bg_lyellow} bg_lyellow ${clr}"
+	dk_echo "`${bg_lblue}    ${bg_lblue} bg_lblue ${clr}"
+	dk_echo "`${bg_lmagenta} ${bg_lmagenta} bg_lmagenta ${clr}"
+	dk_echo "`${bg_lcyan}    ${bg_lcyan} bg_lcyan ${clr}"
+	dk_echo "`${bg_lwhite}   ${bg_lwhite} bg_lwhite ${clr}"
 	dk_echo ""
-	dk_echo "${black}${BG_BLACK}        Combinations         ${clr}"
-	dk_echo "`${inverse}                             ${inverse}   inverse foreground <-> background   ${clr}"
+	dk_echo "${RGB}255;10;10m    RGB test (255;0;10)    ${clr}"
+	dk_echo "${RGB}10;255;10m    RGB test (0;255;10)    ${clr}"
+	dk_echo "${RGB}0;0;255m    RGB test (0;0;255)     ${clr}"
+	dk_echo "${RGB}0;0;250m    RGB test (0;0;250)     ${clr}"
+	dk_echo "${RGB}0;0;245m    RGB test (0;0;245)     ${clr}"
+	dk_echo "${RGB}0;0;240m    RGB test (0;0;240)     ${clr}"
+	dk_echo "${RGB}0;0;235m    RGB test (0;0;235)     ${clr}"
+	dk_echo "${RGB}0;0;230m    RGB test (0;0;230)     ${clr}"
+	dk_echo "${RGB}0;0;225m    RGB test (0;0;225)     ${clr}"
+	dk_echo "${RGB}0;0;220m    RGB test (0;0;220)     ${clr}"
+	dk_echo "${RGB}0;0;215m    RGB test (0;0;215)     ${clr}"
+	dk_echo "${RGB}0;0;210m    RGB test (0;0;210)     ${clr}"
+	dk_echo "${RGB}0;0;205m    RGB test (0;0;205)     ${clr}"
+	dk_echo "${RGB}0;0;200m    RGB test (0;0;200)     ${clr}"
+	dk_echo "${RGB}0;0;195m    RGB test (0;0;195)     ${clr}"
+	dk_echo "${RGB}0;0;190m    RGB test (0;0;190)     ${clr}"
+	dk_echo "${RGB}0;0;185m    RGB test (0;0;185)     ${clr}"
+	dk_echo "${RGB}0;0;180m    RGB test (0;0;180)     ${clr}"
+	dk_echo "${RGB}0;0;175m    RGB test (0;0;175)     ${clr}"
+	dk_echo "${RGB}0;0;170m    RGB test (0;0;170)     ${clr}"
+	dk_echo "${RGB}0;0;165m    RGB test (0;0;165)     ${clr}"
+	dk_echo "${RGB}0;0;160m    RGB test (0;0;160)     ${clr}"
+	dk_echo "${RGB}0;0;155m    RGB test (0;0;155)     ${clr}"
+	dk_echo "${RGB}0;0;150m    RGB test (0;0;150)     ${clr}"
+	dk_echo "${RGB}0;0;145m    RGB test (0;0;145)     ${clr}"
+	dk_echo "${RGB}0;0;140m    RGB test (0;0;140)     ${clr}"
+	dk_echo "${RGB}0;0;135m    RGB test (0;0;135)     ${clr}"
+	dk_echo "${RGB}0;0;130m    RGB test (0;0;130)     ${clr}"
+	dk_echo "${RGB}0;0;125m    RGB test (0;0;125)     ${clr}"
+	dk_echo "${RGB}0;0;120m    RGB test (0;0;120)     ${clr}"
+	dk_echo "${RGB}0;0;115m    RGB test (0;0;115)     ${clr}"
+	dk_echo "${RGB}0;0;110m    RGB test (0;0;110)     ${clr}"
+	dk_echo "${RGB}0;0;105m    RGB test (0;0;105)     ${clr}"
+	dk_echo "${RGB}0;0;100m    RGB test (0;0;100)     ${clr}"
+	dk_echo "${RGB}0;0;95m    RGB test (0;0;95)      ${clr}"
+	dk_echo "${RGB}0;0;90m    RGB test (0;0;90)      ${clr}"
+	dk_echo "${RGB}0;0;85m    RGB test (0;0;85)      ${clr}"
+	dk_echo "${RGB}0;0;80m    RGB test (0;0;80)      ${clr}"
+	dk_echo "${RGB}0;0;75m    RGB test (0;0;75)      ${clr}"
+	dk_echo "${RGB}0;0;70m    RGB test (0;0;70)      ${clr}"
+	dk_echo "${RGB}0;0;65m    RGB test (0;0;65)      ${clr}"
+	dk_echo "${RGB}0;0;60m    RGB test (0;0;60)      ${clr}"
+	dk_echo "${RGB}0;0;55m    RGB test (0;0;55)      ${clr}"
+	dk_echo "${RGB}0;0;50m    RGB test (0;0;50)      ${clr}"
+	dk_echo "${RGB}0;0;45m    RGB test (0;0;45)      ${clr}"
+	dk_echo "${RGB}0;0;40m    RGB test (0;0;40)      ${clr}"
+	dk_echo "${RGB}0;0;35m    RGB test (0;0;35)      ${clr}"
+	dk_echo "${RGB}0;0;30m    RGB test (0;0;30)      ${clr}"
+	dk_echo "${RGB}0;0;25m    RGB test (0;0;25)      ${clr}"
+	dk_echo "${RGB}0;0;20m    RGB test (0;0;20)      ${clr}"
+	dk_echo "${RGB}0;0;15m    RGB test (0;0;15)      ${clr}"
+	dk_echo "${RGB}0;0;10m    RGB test (0;0;10)      ${clr}"
+	dk_echo "${RGB}0;0;5m    RGB test (0;0;5)       ${clr}"
+	dk_echo "${RGB}0;0;0m    RGB test (0;0;0)       ${clr}"
+	dk_echo ""
+	dk_echo "${black}${bg_lblack}        Combinations         ${clr}"
+	dk_echo "`${negative}                             ${negative}   inverse foreground <-> background   ${clr}"
 	dk_echo "`${bg_yellow}`${red}                     ${bg_yellow}${red}   yellow backgroud / red foreground   ${clr}"
-	dk_echo "`${bg_yellow}`${red}`${inverse}           ${bg_yellow}${red}${inverse}        yellow / red inversed          ${clr}"
+	dk_echo "`${bg_yellow}`${red}`${negative}           ${bg_yellow}${red}${negative}        yellow / red inversed          ${clr}"
 	dk_echo "`${bg_red}..`${bg_green}..`${bg_blue}     ${bg_red}    nested   ${bg_green}    colors    ${bg_blue}    text    ${clr}"
 	dk_echo ""
 	dk_echo ""

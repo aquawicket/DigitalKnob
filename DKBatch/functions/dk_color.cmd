@@ -80,6 +80,9 @@ call DK.cmd
 		::# Foreground RGB Colors
 		set "RGB=%ESC%[38;2;"				&:: %RGB%50;100;150m         = %ESC%[38;2;50;100;150m
 		
+		::# Background RGB Colors
+		set "bg_RGB=%ESC%[48;2;"			&:: %bg_RGB%150;100;50m      = %ESC%[38;2;150;100;50m
+		
 		call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto:USE_COLOR_endif	
 	:USE_COLOR_else
@@ -133,6 +136,9 @@ call DK.cmd
 		call dk_unset bg_lmagenta
 		call dk_unset bg_lcyan
 		call dk_unset bg_lwhite
+		
+		call dk_unset RGB
+		call dk_unset bg_RGB
 	
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif

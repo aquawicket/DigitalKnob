@@ -80,6 +80,9 @@ dk_color (){
 		# Foreground RGB Colors
 		export RGB="${ESC}[38;2;"				# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
 		
+		# Background RGB Colors
+		export bg_RGB="${ESC}[48;2;"			# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		
 		dk_echo "${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}"
 	else
 		#unset ESC
@@ -132,8 +135,11 @@ dk_color (){
 		unset bg_lmagenta
 		unset bg_lcyan
 		unset bg_lwhite
+		
+		unset RGB
+		unset bg_RGB
 	
-		dk_echo "${clr}COLOR OFF"
+		dk_echo "${clr} COLOR OFF"
 	fi
 }
 dk_color 1
