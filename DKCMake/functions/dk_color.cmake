@@ -1,8 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
-# https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-# https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-
 
 ##################################################################################
 # dk_color(on/off)
@@ -10,6 +7,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Enable / Disable console text and background coloring
 #
 #   on/off:  Default ON
+#
+#   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #
 function(dk_color)
 	dk_debugFunc(${ARGV})
@@ -24,8 +24,8 @@ function(dk_color)
 	
 	if(USE_COLOR)
 		string(ASCII 27 ESC)
-		set(ESC          "${ESC}" CACHE INTERNAL "")   #escape character
-		set(clr          "${ESC}[0m" CACHE INTERNAL "")   #reset color
+		set(ESC          "${ESC}" CACHE INTERNAL "")      # escape character
+		set(clr          "${ESC}[0m" CACHE INTERNAL "")   # reset color
 		
 		# Styles
 		set(bold		 "${ESC}[1m" CACHE INTERNAL "")
@@ -209,17 +209,17 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_echo("\${bg_red}..\${bg_green}..\${bg_blue}     ${bg_red}    nested   ${bg_green}    colors    ${bg_blue}    text    ${clr}")
 	dk_echo("")
 	dk_echo("")
-	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                       ${clr}")
-	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                       ${clr}")
-	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                       ${clr}") 
-	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                       ${clr}")
-	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                       ${clr}")
-	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                       ${clr}")
-	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                       ${clr}")
-	dk_echo(" ${bg_white}                                                          ${clr}")
-	dk_echo(" ${bg_red}                                                          ${clr}")
-	dk_echo(" ${bg_white}                                                          ${clr}")
-	dk_echo(" ${bg_red}                                                          ${clr}")
-	dk_echo(" ${bg_white}                                                          ${clr}")
-	dk_echo(" ${bg_red}                                                          ${clr}")
+	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                  ${clr}")
+	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                  ${clr}")
+	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                  ${clr}") 
+	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                  ${clr}")
+	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                  ${clr}")
+	dk_echo(" ${bg_blue}  * * * * * * * *  ${bg_white}                                  ${clr}")
+	dk_echo(" ${bg_blue} * * * * * * * * * ${bg_red}                                  ${clr}")
+	dk_echo(" ${bg_white}                                                     ${clr}")
+	dk_echo(" ${bg_red}                                                     ${clr}")
+	dk_echo(" ${bg_white}                                                     ${clr}")
+	dk_echo(" ${bg_red}                                                     ${clr}")
+	dk_echo(" ${bg_white}                                                     ${clr}")
+	dk_echo(" ${bg_red}                                                     ${clr}")
 endfunction()
