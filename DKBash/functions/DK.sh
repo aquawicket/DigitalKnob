@@ -67,6 +67,7 @@ DK (){
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	dk_call dk_color
+	dk_call dk_logo
 	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
