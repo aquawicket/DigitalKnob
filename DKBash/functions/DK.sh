@@ -73,14 +73,14 @@ DK (){
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			dk_source "${DKSCRIPT_PATH}"
 			dk_echo ""
-			dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}"
+			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 			dk_echo ""
 			#dk_export ENABLE_dk_debugFunc 1
 			#dk_source "${DKSCRIPT_PATH}"
 			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			dk_echo ""
-			dk_echo "${bg_magenta}${white}########################## END TEST ################################${clr}"
+			dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
 			dk_echo ""
 			dk_call dk_pause
 			dk_exit 0
