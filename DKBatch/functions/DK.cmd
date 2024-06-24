@@ -59,11 +59,11 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
 	call dk_color
 	echo.
-    call dk_echo "%bg_white%%black%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
+    call dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
 	echo.
 	call :DKTEST
 	echo.
-	call dk_echo "%bg_white%%black%########################## END TEST ###############################%clr%"
+	call dk_echo "%bg_magenta%%white%########################## END TEST ###############################%clr%"
 	echo.
 	pause
 	exit

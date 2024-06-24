@@ -78,10 +78,7 @@ call DK.cmd
 		set "bg_lwhite=%ESC%[107m"			&:: Bright Background White		- Applies bold/bright white to background
 		
 		::# Foreground RGB Colors
-		set "RGB=%ESC%[38;2;"				&:: ESC[38;2;<r>;<g>;<b>m"
-		
-		
-		
+		set "RGB=%ESC%[38;2;"				&:: %RGB%50;100;150m         = %ESC%[38;2;50;100;150m
 		
 		call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto:USE_COLOR_endif	
@@ -91,8 +88,11 @@ call DK.cmd
 		
 		::# Styles
 		call dk_unset bold
+		call dk_unset nobold
 		call dk_unset underline
-		call dk_unset inverse
+		call dk_unset nounderline
+		call dk_unset negative
+		call dk_unset nonegative
 		
 		::# Foreground Colors
 		call dk_unset black
@@ -150,10 +150,10 @@ call dk_color 1
 	
 	echo.
 	call dk_echo "%black% %S_BG_BLACK%           Styles            %clr%"
-	call dk_echo "clr        %clr% Default %clr%"
-	call dk_echo "bold       %bold% Bold %clr%"
-	call dk_echo "underline  %underline% Underline %clr%"
-	call dk_echo "inverse    %inverse% Inverse %clr%"
+	call dk_echo "clr        %clr% default %clr%"
+	call dk_echo "bold       %bold% bold %clr%"
+	call dk_echo "underline  %underline% underline %clr%"
+	call dk_echo "negative    %negative% negative %clr%"
 	echo.
 	call dk_echo "%black% %S_BG_BLACK%      Foreground Colors      %clr%"
 	call dk_echo "black      %black% black %clr%"
@@ -251,9 +251,9 @@ call dk_color 1
 	call dk_echo " %RGB%0;0;0m    RGB test (0;0;0)       %clr%"
 	echo.
 	call dk_echo "%black% %bg_lblack%        Combinations         %clr%"
-	call dk_echo "inverse                            %inverse%   inverse foreground <-> background   %clr%"
+	call dk_echo "negative                            %negative%   inverse foreground <-> background   %clr%"
 	call dk_echo "bg_yellow red                     %bg_yellow% %red%   yellow backgroud / red foreground   %clr%"
-	call dk_echo "bg_yellow red inverse           %bg_yellow% %red% %inverse%        yellow / red inversed          %clr%"
+	call dk_echo "bg_yellow red negative           %bg_yellow% %red% %negative%        yellow / red inversed          %clr%"
 	call dk_echo "bg_red.. bg_green.. bg_blue     %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%"
 	echo.
 	echo.
