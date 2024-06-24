@@ -125,7 +125,7 @@ function(dk_color)
 		message("${clr}COLOR OFF")
 	endif()
 endfunction()
-dk_color(ON)
+dk_color(1)
 
 
 

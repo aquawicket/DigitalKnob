@@ -15,7 +15,6 @@ dk_color (){
 	dk_debugFunc
 	
 	export USE_COLOR=1
-
 	if [ "${1-}" = "OFF" ]; then
 		unset USE_COLOR
 	fi
@@ -122,7 +121,7 @@ dk_color (){
 		dk_echo "${clr}COLOR OFF"
 	fi
 }
-dk_color ON
+dk_color 1
 
 
 

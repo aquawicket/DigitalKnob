@@ -9,7 +9,7 @@ function Global:dk_unset($variable) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-
+	if(!(Test-Path variable:$variable)){ return }
 	Clear-Variable $variable -Scope Global
 	#Clear-Variable $variable -Scope Local
 	#Clear-Variable $variable -Scope Script
