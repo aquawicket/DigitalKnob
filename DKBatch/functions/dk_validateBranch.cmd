@@ -35,6 +35,8 @@ call DK.cmd
 		call dk_set DKCMAKE_DIR "%DKBRANCH_DIR%\DKCMake"
 			call dk_set DKCMAKE_FUNCTIONS_DIR "%DKCMAKE_DIR%\functions"
 		call dk_set DKDOCS_DIR "%DKBRANCH_DIR%\DKDocs"
+		call dk_set DKJAVASCRIPT_DIR "%DKBRANCH_DIR%\DKJavascript"
+			call dk_set DKJAVASCRIPT_FUNCTIONS_DIR "%DKJAVASCRIPT_DIR%\functions"
 		call dk_set DKPLUGINS_DIR "%DKBRANCH_DIR%\DKPlugins"
 		call dk_set DKPOWERSHELL_DIR "%DKBRANCH_DIR%\DKPowershell"
 			call dk_set DKPOWERSHELL_FUNCTIONS_DIR "%DKPOWERSHELL_DIR%\functions"
