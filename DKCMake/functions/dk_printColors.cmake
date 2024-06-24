@@ -2,11 +2,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 include_guard()
 
 ###############################################################################
-# dk_printColorChart()
+# dk_printColors()
 #
 #	TODO
 #
-function(dk_printColorChart)
+function(dk_printColors)
 	dk_debugFunc(${ARGV})
 	
 	message(" ")
@@ -84,11 +84,11 @@ endfunction()
 
 
 ###############################################################################
-# dk_printStyleChart()
+# dk_printStyles()
 #
 #	TODO
 #
-function(dk_printStyleChart)
+function(dk_printStyles)
 	dk_debugFunc(${ARGV})
 	
 	message(" ")
