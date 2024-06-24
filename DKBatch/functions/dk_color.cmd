@@ -10,6 +10,7 @@ call DK.cmd
 ::#
 ::#   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 ::#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+::#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 ::#
 :dk_color () {
 	call dk_debugFunc
@@ -22,52 +23,65 @@ call DK.cmd
 	:USE_COLOR_if
 	if not defined USE_COLOR goto:USE_COLOR_else
 		set "ESC="
-		set "clr=%ESC%[0m"
-	
-		::# Styles
-		set "bold=%ESC%[1m"
-		set "underline=%ESC%[4m"
-		set "inverse=%ESC%[7m"
 		
+		::# Styles
+		set "clr=%ESC%[0m"				&:: Default						- Returns all attributes to the default state prior to modification
+		set "bold=%ESC%[1m"				&:: Bold/Bright 				- Applies brightness/intensity flag to foreground color
+		set "nobold=%ESC%[22m"			&:: No bold/bright				- Removes brightness/intensity flag from foreground color
+		set "underline=%ESC%[4m"		&:: Underline       			- Adds underline
+		set "nounderline=%ESC%[24m"		&:: No underline				- Removes underline
+		set "negative=%ESC%[7m"   		&:: Negative	    			- Swaps foreground and background colors
+		set "nonegative=%ESC%[27m"  	&:: Positive(No negative)		- Returns foreground/background to normal
+
 		::# Foreground Colors
-		set "black=%ESC%[30m"
-		set "red=%ESC%[31m"
-		set "green=%ESC%[32m"
-		set "yellow=%ESC%[33m"
-		set "blue=%ESC%[34m"
-		set "magenta=%ESC%[35m"
-		set "cyan=%ESC%[36m"
-		set "white=%ESC%[37m"
+		set "black=%ESC%[30m"			&:: Foreground Black			- Applies non-bold/bright black to foreground
+		set "red=%ESC%[31m"				&:: Foreground Red				- Applies non-bold/bright red to foreground
+		set "green=%ESC%[32m"			&:: Foreground Green			- Applies non-bold/bright green to foreground
+		set "yellow=%ESC%[33m"			&:: Foreground Yellow			- Applies non-bold/bright yellow to foreground
+		set "blue=%ESC%[34m"			&:: Foreground Blue				- Applies non-bold/bright blue to foreground
+		set "magenta=%ESC%[35m"			&:: Foreground Magenta			- Applies non-bold/bright magenta to foreground
+		set "cyan=%ESC%[36m"			&:: Foreground Cyan				- Applies non-bold/bright cyan to foreground
+		set "white=%ESC%[37m"			&:: Foreground White			- Applies non-bold/bright white to foreground
+		set "extended=%ESC%[38m"		&:: Foreground Extended			- Applies extended color value to the foreground
+		set "default=%ESC%[39m"			&:: Foreground Default			- Applies only the foreground portion of the defaults
 		
 		::# Background Colors
-		set "bg_black=%ESC%[40m"
-		set "bg_red=%ESC%[41m"
-		set "bg_green=%ESC%[42m"
-		set "bg_yellow=%ESC%[43m"
-		set "bg_blue=%ESC%[44m"
-		set "bg_magenta=%ESC%[45m"
-		set "bg_cyan=%ESC%[46m"
-		set "bg_white=%ESC%[47m"
+		set "bg_black=%ESC%[40m"		&:: Background Black			- Applies non-bold/bright black to background
+		set "bg_red=%ESC%[41m"			&:: Background Red				- Applies non-bold/bright red to background
+		set "bg_green=%ESC%[42m"		&:: Background Green			- Applies non-bold/bright green to background
+		set "bg_yellow=%ESC%[43m"		&:: Background Yellow			- Applies non-bold/bright yellow to background
+		set "bg_blue=%ESC%[44m"			&:: Background Blue				- Applies non-bold/bright blue to background
+		set "bg_magenta=%ESC%[45m"		&:: Background Magenta			- Applies non-bold/bright magenta to background
+		set "bg_cyan=%ESC%[46m"			&:: Background Cyan				- Applies non-bold/bright cyan to background
+		set "bg_white=%ESC%[47m"		&:: Background White			- Applies non-bold/bright white to background
+		set "bg_extended=%ESC%[48m"		&:: Background Extended			- Applies extended color value to the background
+		set "bg_white=%ESC%[49m"		&:: Background Default			- Applies only the background portion of the defaults
 		
-		::# Foreground Colors (Bright)
-		set "S_BLACK=%ESC%[90m"
-		set "S_RED=%ESC%[91m"
-		set "S_GREEN=%ESC%[92m"
-		set "S_YELLOW=%ESC%[93m"
-		set "S_BLUE=%ESC%[94m"
-		set "S_MAGENTA=%ESC%[95m"
-		set "S_CYAN=%ESC%[96m"
-		set "S_WHITE=%ESC%[97m"
+		::# Foreground Colors (light)
+		set "lblack=%ESC%[90m"			&:: Bright Foreground Black		- Applies bold/bright black to foreground
+		set "lred=%ESC%[91m"			&:: Bright Foreground Red		- Applies bold/bright red to foreground
+		set "lgreen=%ESC%[92m"			&:: Bright Foreground Green		- Applies bold/bright green to foreground
+		set "lyellow=%ESC%[93m"			&:: Bright Foreground Yellow	- Applies bold/bright yellow to foreground
+		set "lblue=%ESC%[94m"			&:: Bright Foreground Blue		- Applies bold/bright blue to foreground
+		set "lmagenta=%ESC%[95m"		&:: Bright Foreground Magenta	- Applies bold/bright magenta to foreground
+		set "lcyan=%ESC%[96m"			&:: Bright Foreground Cyan		- Applies bold/bright cyan to foreground
+		set "lwhite=%ESC%[97m"			&:: Bright Foreground White		- Applies bold/bright white to foreground
 
-		::# Background Colors (Bright)
-		set "S_BG_BLACK=%ESC%[100m"
-		set "S_BG_RED=%ESC%[101m"
-		set "S_BG_GREEN=%ESC%[102m"
-		set "S_BG_YELLOW=%ESC%[103m"
-		set "S_BG_BLUE=%ESC%[104m"
-		set "S_BG_MAGENTA=%ESC%[105m"
-		set "S_BG_CYAN=%ESC%[106m"
-		set "S_BG_WHITE=%ESC%[107m"
+		::# Background Colors (light)
+		set "bg_lblack=%ESC%[100m"		&:: Bright Background Black		- Applies bold/bright black to background
+		set "bg_lred=%ESC%[101m"		&:: Bright Background Red		- Applies bold/bright red to background
+		set "bg_lgreen=%ESC%[102m"		&:: Bright Background Green		- Applies bold/bright green to background
+		set "bg_lyellow=%ESC%[103m"		&:: Bright Background Yellow	- Applies bold/bright yellow to background
+		set "bg_lblue=%ESC%[104m"		&:: Bright Background Blue		- Applies bold/bright blue to background
+		set "bg_lmagenta=%ESC%[105m"	&:: Bright Background Magenta	- Applies bold/bright magenta to background
+		set "bg_lcyan=%ESC%[106m"		&:: Bright Background Cyan		- Applies bold/bright cyan to background
+		set "bg_lwhite=%ESC%[107m"		&:: Bright Background White		- Applies bold/bright white to background
+	
+
+		::#########################
+		::#  RGB color schemes
+		
+		::set "rgb=%ESC%[38;2;255;0;0m"
 		
 		call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto:USE_COLOR_endif	
@@ -101,24 +115,24 @@ call DK.cmd
 		call dk_unset bg_white
 		
 		::# Foreground Colors (bright)
-		call dk_unset S_BLACK
-		call dk_unset S_RED
-		call dk_unset S_GREEN
-		call dk_unset S_YELLOW
-		call dk_unset S_BLUE
-		call dk_unset S_MAGENTA
-		call dk_unset S_CYAN
-		call dk_unset S_WHITE
+		call dk_unset lblack
+		call dk_unset lred
+		call dk_unset lgreen
+		call dk_unset lyellow
+		call dk_unset lblue
+		call dk_unset lmagenta
+		call dk_unset lcyan
+		call dk_unset lwhite
 		
 		::# Background Colors (bright)
-		call dk_unset S_BG_BLACK
-		call dk_unset S_BG_RED
-		call dk_unset S_BG_GREEN
-		call dk_unset S_BG_YELLOW
-		call dk_unset S_BG_BLUE
-		call dk_unset S_BG_MAGENTA
-		call dk_unset S_BG_CYAN
-		call dk_unset S_BG_WHITE
+		call dk_unset bg_lblack
+		call dk_unset bg_lred
+		call dk_unset bg_lgreen
+		call dk_unset bg_lyellow
+		call dk_unset bg_lblue
+		call dk_unset bg_lmagenta
+		call dk_unset bg_lcyan
+		call dk_unset bg_lwhite
 	
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif
@@ -136,7 +150,7 @@ call dk_color 1
 	
 	echo.
 	call dk_echo "%black% %S_BG_BLACK%           Styles            %clr%"
-	call dk_echo "clr        %clr% Reset %clr%"
+	call dk_echo "clr        %clr% Default %clr%"
 	call dk_echo "bold       %bold% Bold %clr%"
 	call dk_echo "underline  %underline% Underline %clr%"
 	call dk_echo "inverse    %inverse% Inverse %clr%"
@@ -162,24 +176,26 @@ call dk_color 1
 	call dk_echo "bg_white   %bg_white% bg_white %clr%"
 	echo.
 	call dk_echo "%black% %S_BG_BLACK% Foreground Colors  bright  %clr%"
-	call dk_echo "BLACK      %S_BLACK% BLACK %clr%"
-	call dk_echo "RED        %S_RED% RED %clr%"
-	call dk_echo "GREEN      %S_GREEN% GREEN %clr%"
-	call dk_echo "YELLOW     %S_YELLOW% YELLOW %clr%"
-	call dk_echo "BLUE       %S_BLUE% BLUE %clr%"
-	call dk_echo "MAGENTA    %S_MAGENTA% MAGENTA %clr%"
-	call dk_echo "CYAN       %S_CYAN% CYAN %clr%"
-	call dk_echo "WHITE      %S_WHITE% WHITE %clr%"
+	call dk_echo "lblack      %lblack% lblack %clr%"
+	call dk_echo "lred        %lred% lred %clr%"
+	call dk_echo "lgreen      %lgreen% lgreen %clr%"
+	call dk_echo "lyellow     %lyellow% lyellow %clr%"
+	call dk_echo "lblue       %lblue% lblue %clr%"
+	call dk_echo "lmagenta    %lmagenta% lmagenta %clr%"
+	call dk_echo "lcyan       %lcyan% lcyan %clr%"
+	call dk_echo "lwhite      %lwhite% lwhite %clr%"
 	echo.
 	call dk_echo "%black% %S_BG_BLACK% Background Colors  bright  %clr%"
-	call dk_echo "BG_BLACK   %S_BG_BLACK% BG_BLACK %clr%"
-	call dk_echo "BG_RED     %S_BG_RED% BG_RED %clr%"
-	call dk_echo "BG_GREEN   %S_BG_GREEN% BG_GREEN %clr%"
-	call dk_echo "BG_YELLOW  %S_BG_YELLOW% BG_YELLOW %clr%"
-	call dk_echo "BG_BLUE    %S_BG_BLUE% BG_BLUE %clr%"
-	call dk_echo "BG_MAGENTA %S_BG_MAGENTA% BG_MAGENTA %clr%"
-	call dk_echo "BG_CYAN    %S_BG_CYAN% BG_CYAN %clr%"
-	call dk_echo "BG_WHITE   %S_BG_WHITE% BG_WHITE %clr%"
+	call dk_echo "bg_lblack   %bg_lblack% bg_lblack %clr%"
+	call dk_echo "bg_lred     %bg_lred% bg_lred %clr%"
+	call dk_echo "bg_lgreen   %bg_lgreen% bg_lgreen %clr%"
+	call dk_echo "bg_lyellow  %bg_lyellow% bg_lyellow %clr%"
+	call dk_echo "bg_lblue    %bg_lblue% bg_lblue %clr%"
+	call dk_echo "bg_lmagenta %bg_lmagenta% bg_lmagenta %clr%"
+	call dk_echo "bg_lcyan    %bg_lcyan% bg_lcyan %clr%"
+	call dk_echo "bg_lwhite   %bg_lwhite% bg_lwhite %clr%"
+	echo.
+	call dk_echo "%rgb%       RGB test         %clr%"
 	echo.
 	call dk_echo "%black% %S_BG_BLACK%        Combinations         %clr%"
 	call dk_echo "inverse                            %inverse%   inverse foreground <-> background   %clr%"
