@@ -3,7 +3,7 @@
 %dkbatch%
 
 ::0 = Black
-::1 = Blue
+::1 = BLUE
 ::2 = Green
 ::3 = Aqua
 ::4 = Red
@@ -11,7 +11,7 @@
 ::6 = Yellow
 ::7 = White
 ::8 = Gray
-::9 = Light Blue
+::9 = Light BLUE
 ::A = Light Green
 ::B = Light Aqua
 ::C = Light Red

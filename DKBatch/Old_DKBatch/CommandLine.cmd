@@ -26,7 +26,7 @@
 
 :: background color
 ::0 = Black       8 = Gray
-::1 = Blue        9 = Light Blue
+::1 = BLUE        9 = Light BLUE
 ::2 = Green       A = Light Green
 ::3 = Aqua        B = Light Aqua
 ::4 = Red         C = Light Red

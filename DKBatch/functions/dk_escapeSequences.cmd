@@ -167,7 +167,7 @@ call DK.cmd
 	call dk_set Red        "%ESC%[91m"
 	call dk_set Green      "%ESC%[92m"
 	call dk_set Yellow     "%ESC%[93m"
-	call dk_set Blue       "%ESC%[94m"
+	call dk_set BLUE       "%ESC%[94m"
 	call dk_set Magenta    "%ESC%[95m"
 	call dk_set Cyan       "%ESC%[96m"
 	call dk_set White      "%ESC%[97m"

@@ -40,7 +40,7 @@ call DK.cmd
 	call dk_set Red [91m
 	call dk_set Green [92m
 	call dk_set Yellow [93m
-	call dk_set Blue [94m
+	call dk_set BLUE [94m
 	call dk_set Magenta [95m
 	call dk_set Cyan [96m
 	call dk_set White [97m

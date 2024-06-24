@@ -44,7 +44,7 @@ function Global:dk_color (){
 	$global:Red = "${ESC}[91m"
 	$global:Green = "${ESC}[92m"
 	$global:Yellow = "${ESC}[93m"
-	$global:Blue = "${ESC}[94m"
+	$global:BLUE = "${ESC}[94m"
 	$global:Magenta = "${ESC}[95m"
 	$global:Cyan = "${ESC}[96m"
 	$global:White = "${ESC}[97m"

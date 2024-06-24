@@ -161,7 +161,7 @@ dk_escapeSequences (){
 	dk_set Red        "$ESC[91m"
 	dk_set Green      "$ESC[92m"
 	dk_set Yellow     "$ESC[93m"
-	dk_set Blue       "$ESC[94m"
+	dk_set BLUE       "$ESC[94m"
 	dk_set Magenta    "$ESC[95m"
 	dk_set Cyan       "$ESC[96m"
 	dk_set White      "$ESC[97m"

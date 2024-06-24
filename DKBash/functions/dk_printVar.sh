@@ -27,14 +27,14 @@ dk_printVar (){
 		
 		# IS VARIABLE
 		if [[ $declaration == "declare -- "* ]]; then
-			dk_echo "${Blue-}VARIABLE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}VARIABLE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS ARRAY
 		if [[ $declaration =~ "declare -a "* ]]; then
 			for ((i=0; i < ${#_reference_[@]}; i++ )); do 
-				dk_echo "${Blue-}ARRAY:\$${!_reference_}[$i] =${blue-} '${_reference_[$i]}'${clr-}";
+				dk_echo "${BLUE-}ARRAY:\$${!_reference_}[$i] =${blue-} '${_reference_[$i]}'${clr-}";
 			done
 			return 0
 		fi
@@ -45,7 +45,7 @@ dk_printVar (){
 			# printf "%s\n" "${!_reference_[@]}"												# print all keys separated by a newline
 			# printf "%s\n" "${_reference_[@]}"													# print all values separated by a newline
 			# paste <(cmd1) <(cmd2)																# merge output of cmd1 and cmd2 line by line (below)
-			printf "${Blue-}"
+			printf "${BLUE-}"
 			
 			# FIXME: parsing error on OSX zsh
 			#paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
@@ -56,63 +56,63 @@ dk_printVar (){
 		# IS FUNCTION
 		if [[ $declaration =~ "declare -f "* ]]; then
 			_value=$(type $varname | sed '1,1d')
-			dk_echo "${Blue-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
+			dk_echo "${BLUE-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
 			return 0
 		fi
 			
 		# IS INT
 		if [[ $declaration =~ "declare -i "* ]]; then
-			dk_echo "${Blue-}INT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}INT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS LOWERCASE
 		if [[ $declaration =~ "declare -l "* ]]; then
-			dk_echo "${Blue-}LOWERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}LOWERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS REFERENCE
 		if [[ $declaration =~ "declare -n "* ]]; then
-			dk_echo "${Blue-}REFERENCE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}REFERENCE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS READ_ONLY
 		if [[ $declaration =~ "declare -r "* ]]; then
-			dk_echo "${Blue-}READ_ONLY:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}READ_ONLY:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS TRACE
 		if [[ $declaration =~ "declare -t "* ]]; then
-			dk_echo "${Blue-}TRACE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}TRACE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS UPPERCASE
 		if [[ $declaration =~ "declare -u "* ]]; then
-			dk_echo "${Blue-}UPPERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}UPPERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS EXPORT
 		if [[ $declaration =~ "declare -x "* ]]; then
-			dk_echo "${Blue-}EXPORT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${BLUE-}EXPORT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 	fi
 	
 	# IS VARIABLE
 	if [ -n "${!varname+x}" ]; then
-		dk_echo "${Blue-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"
+		dk_echo "${BLUE-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"
 		return 0
 	fi
 	
 	# IS FUNCTION
 	if [ "$(type -t ${varname})" = "function" ]; then
 		_value=$(type $varname | sed '1,1d')
-		dk_echo "${Blue-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
+		dk_echo "${BLUE-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
 		return 0
 	fi
 
@@ -120,11 +120,11 @@ dk_printVar (){
 	if [ "$(type -t ${varname})" = "alias" ]; then	
 		_value=$(alias $varname)
 		_value=${_value#*=}
-		dk_echo "${Blue-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
+		dk_echo "${BLUE-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
 		return 0
 	fi
 		
-	dk_echo "${Blue-}$1 =${red} UNDEFINED${clr-}"
+	dk_echo "${BLUE-}$1 =${red} UNDEFINED${clr-}"
 }
 
 
