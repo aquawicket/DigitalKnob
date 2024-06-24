@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_error)
@@ -68,4 +68,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_error("test string from dk_error")
-endfunction(DKTEST)
+endfunction()

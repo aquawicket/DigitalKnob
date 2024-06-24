@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayLength(array, rtn_var)
@@ -45,4 +45,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayLength("${myArray}" lengthD)
 	dk_info("lengthD = ${lengthD}")
-endfunction(DKTEST)
+endfunction()

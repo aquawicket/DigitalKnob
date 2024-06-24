@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_sleep(seconds)
@@ -22,4 +22,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_sleep(5)
-endfunction(DKTEST)
+endfunction()

@@ -1,11 +1,8 @@
-set(ENABLE_dk_debugFunc 1)
+set(ENABLE_dk_debugFunc 0)
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
-if(NOT DEFINED ENABLE_dk_debugFunc)
-	set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
-endif()
 ##################################################################################
 # dk_debugFunc(${ARGV})
 #

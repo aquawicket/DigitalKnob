@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_createSmartObject(object)
@@ -24,4 +24,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_createSmartObject(todo)
-endfunction(DKTEST)
+endfunction()

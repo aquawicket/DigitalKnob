@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayCopyWithin(array, target, start, end)
@@ -20,4 +20,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_arrayCopyWithin(array target start end)
-endfunction(DKTEST)
+endfunction()

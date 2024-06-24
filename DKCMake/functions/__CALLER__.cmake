@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # __CALLER__(rtn_var, frame)
@@ -29,4 +29,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	__CALLER__(CALLER_1 1)
 	dk_info("\${CALLER_1} = ${CALLER_1}")
-endfunction(DKTEST)
+endfunction()

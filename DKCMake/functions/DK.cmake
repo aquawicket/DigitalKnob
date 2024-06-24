@@ -3,9 +3,10 @@ include_guard()		# include_guard
 
 #cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
-cmake_policy(SET CMP0011 NEW)
-cmake_policy(SET CMP0054 NEW)
-cmake_policy(SET CMP0057 NEW)
+cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0011.html
+cmake_policy(SET CMP0012 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0012.html
+cmake_policy(SET CMP0054 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0054.html
+cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0057.html
 
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
 #####################################################################
@@ -68,10 +69,11 @@ function(DKINIT)
 	message("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 		message("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
-		dk_load(${DKSCRIPT_PATH})
+		include(${DKSCRIPT_PATH})
 		DKTEST()
 		
 		message("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
+		dk_load(dk_pause)
 		dk_pause()
 	endif()
 	endif()

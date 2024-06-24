@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # __LINE__(rtn_var, frame)
@@ -44,4 +44,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
 	message("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
-endfunction(DKTEST)
+endfunction()

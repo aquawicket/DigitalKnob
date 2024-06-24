@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 if(NOT COMMAND __FILE__)
 	dk_load(${DKCMAKE_FUNCTIONS_DIR}/__FILE__.cmake)
@@ -71,4 +71,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	__FRAME__(_frame2_ 2)
 	dk_info("\${_frame2_} = ${_frame2_}")
 
-endfunction(DKTEST)
+endfunction()

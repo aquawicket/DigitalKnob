@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_updateInfoPlist(app_name)
@@ -59,4 +59,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_todo()
 	dk_updateInfoPlist()
-endfunction(DKTEST)
+endfunction()

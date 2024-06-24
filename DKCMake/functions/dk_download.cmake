@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_download(src_path dest_path) #NO_HALT
@@ -145,4 +145,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
-endfunction(DKTEST)
+endfunction()

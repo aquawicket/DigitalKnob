@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##############################################################################
 # dk_isNumber(variable rtn_var)
@@ -52,4 +52,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_info("${result}")
 	dk_isNumber('' result)
 	dk_info("${result}")
-endfunction(DKTEST)
+endfunction()

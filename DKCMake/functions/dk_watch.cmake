@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 include(${DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
 ##############################################################################
@@ -31,4 +31,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)
 	dk_watch(CMAKE_CURRENT_FUNCTION)
 
-endfunction(DKTEST)
+endfunction()

@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayPop(array rtn_val)
@@ -77,4 +77,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayPop(myArray )
 	dk_printArray(myArray)
-endfunction(DKTEST)
+endfunction()

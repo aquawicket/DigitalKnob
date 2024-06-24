@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # __FUNCTION__(rtn_var, frame)
@@ -46,4 +46,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
 	message("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
 
-endfunction(DKTEST)
+endfunction()

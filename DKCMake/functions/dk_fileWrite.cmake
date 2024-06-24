@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # dk_fileWrite(filepath, string)
@@ -35,4 +35,4 @@ function(DKTEST) ###############################################################
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite("APP_NAME.desktop" "${DESKTOP_FILE}")
 		
-endfunction(DKTEST)
+endfunction()

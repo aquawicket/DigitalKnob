@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_executeProcess(commands) NO_HALT NOECHO OUTPUT <output_variable>
@@ -170,4 +170,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-endfunction(DKTEST)
+endfunction()

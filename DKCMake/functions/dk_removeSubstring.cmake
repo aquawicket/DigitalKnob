@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_removeSubstring(removethis fromthis rtn_var)
@@ -34,4 +34,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_removeSubstring("have never " "${myString}" myString)
 	dk_removeSubstring(" or anyday" "${myString}" myString)
 	dk_info("${myString}")
-endfunction(DKTEST)
+endfunction()

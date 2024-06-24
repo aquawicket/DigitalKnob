@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
 ##################################################################################
@@ -92,4 +92,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_info("called a function")
 	dk_stacktrace()
-endfunction(DKTEST)
+endfunction()

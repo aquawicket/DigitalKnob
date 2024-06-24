@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayJoin(array, separator, rtn_var)
@@ -29,4 +29,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayJoin(myArray "," myString)
 	dk_info("myString = ${myString}")
-endfunction(DKTEST)
+endfunction()

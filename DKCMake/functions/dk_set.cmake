@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_set(variable value)
@@ -35,4 +35,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_set(myVariable "this is the string value of myVariable")
 	dk_info("myVariable = ${myVariable}")
-endfunction(DKTEST)
+endfunction()

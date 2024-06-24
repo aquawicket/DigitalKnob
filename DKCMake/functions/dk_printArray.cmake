@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_printArray(array)
@@ -62,4 +62,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_printArray("myString")
 	message("dk_printArray(\"\${myString}\")")
 	dk_printArray("${myString}")
-endfunction(DKTEST)
+endfunction()

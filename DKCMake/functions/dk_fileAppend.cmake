@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # dk_fileAppend(filepath, string)
@@ -21,4 +21,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_fileAppend("dk_fileAppend_TEST.txt" "string written by dk_fileAppend")
-endfunction(DKTEST)
+endfunction()

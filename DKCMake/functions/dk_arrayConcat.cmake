@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayConcat(array, value1, value2, /* …, */ valueN)
@@ -21,4 +21,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayConcat(MyArray)
 	
-endfunction(DKTEST)
+endfunction()

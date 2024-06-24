@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayAt(array, index, rtn_var)
@@ -30,4 +30,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayAt(myArray 3 element)
 	dk_info("element = ${element}")
-endfunction(DKTEST)
+endfunction()

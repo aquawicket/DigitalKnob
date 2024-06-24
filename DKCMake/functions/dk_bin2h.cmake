@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_bin2h(SOURCE_FILE arg1 HEADER_FILE arg2 VARIABLE_NAME arg3)
@@ -63,4 +63,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-endfunction(DKTEST)
+endfunction()

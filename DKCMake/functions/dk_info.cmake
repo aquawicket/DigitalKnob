@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_info)
@@ -71,4 +71,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_info("Test string from dk_info")
-endfunction(DKTEST)
+endfunction()

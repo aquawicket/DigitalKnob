@@ -1,6 +1,6 @@
 #!/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # dk_echo(msg)
@@ -24,4 +24,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_echo("test string from dk_echo")
-endfunction(DKTEST)
+endfunction()

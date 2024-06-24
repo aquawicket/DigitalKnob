@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ###############################################################################
 # dk_removeExtension(path ret_var) NO_HALT
@@ -39,4 +39,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
 	dk_removeExtension("${myPath}" myPath)
 	dk_info("${myPath}")
-endfunction(DKTEST)
+endfunction()

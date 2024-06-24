@@ -1,4 +1,4 @@
-include_guard()
+#include_guard()
 
 message(STATUS "##############################################################")
 message(STATUS "################ android_arm32_toolchain.cmake ###############")

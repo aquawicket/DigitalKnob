@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_todo)
@@ -60,7 +60,7 @@ endfunction()
 
 
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	dk_todo("test dk_todo message")
-endfunction(DKTEST)
+endfunction()

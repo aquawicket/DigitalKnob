@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # __ARGC__(rtn_var, frame)
@@ -29,4 +29,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	__ARGC__(ARGC_1 1)
 	dk_info("\${ARGC_1} = ${ARGC_1}")
 
-endfunction(DKTEST)
+endfunction()

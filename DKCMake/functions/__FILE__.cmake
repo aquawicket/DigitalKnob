@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ##################################################################################
 # __FILE__(rtn_var, frame)
@@ -44,4 +44,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
 	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
-endfunction(DKTEST)
+endfunction()

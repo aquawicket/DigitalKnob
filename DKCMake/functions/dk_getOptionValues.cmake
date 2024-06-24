@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 # FIXME: This is not fully functional. It take code from dk_getOptionValue() 
 # but has not yet ben set up to recieve multiple variables, or been tested
@@ -40,4 +40,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-endfunction(DKTEST)
+endfunction()

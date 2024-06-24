@@ -1,4 +1,4 @@
-include_guard()
+#include_guard()
 
 message(STATUS "##############################################################")
 message(STATUS "################# emscripten_toolchain.cmake #################")

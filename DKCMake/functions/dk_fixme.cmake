@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 
 if(NOT DEFINED ENABLE_dk_fixme)
@@ -64,4 +64,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc(${ARGV})
 
 	dk_fixme()
-endfunction(DKTEST)
+endfunction()

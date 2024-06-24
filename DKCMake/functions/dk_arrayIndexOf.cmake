@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-include_guard()
+#include_guard()
 
 ################################################################################
 # dk_arrayIndexOf(array, searchElement, rtn_val)
@@ -43,4 +43,4 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	dk_arrayIndexOf(myArray "nonExistant" indexN)
 	dk_info("indexN = ${indexN}")
-endfunction(DKTEST)
+endfunction()
