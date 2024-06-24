@@ -53,7 +53,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	::############ LOAD FUNCTION FILES ############
 	::call dk_load %DKSCRIPT_PATH%
-	
+	call dk_logo
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
