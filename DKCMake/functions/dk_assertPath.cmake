@@ -12,13 +12,13 @@ function(dk_assertPath path)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
-		message(STATUS "\n\n${BG_red}Assertion failed: at ${path}, ${STACK_HEADER}${clr}")
+		message(STATUS "\n\n${bg_red}Assertion failed: at ${path}, ${STACK_HEADER}${clr}")
 		dk_replaceAll("${path}"  " "  ""  var)
 		
 		if("${var}")
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} ${path} ${clr}")
+			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} ${path} ${clr}")
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()

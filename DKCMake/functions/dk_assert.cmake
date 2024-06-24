@@ -16,13 +16,13 @@ function(dk_assert expression)
 	
 	
 	if(NOT ${expression})
-		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}${clr}")
+		message(STATUS "\n\n${bg_red}Assertion failed: at ${expression}${clr}")
 		dk_replaceAll("${expression}"  " "  ""  var)
 		
 		if("${var}")
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${H_black}${STACK_HEADER}${clr}${BG_red} ${expression} ${clr}")
+			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} ${expression} ${clr}")
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()
