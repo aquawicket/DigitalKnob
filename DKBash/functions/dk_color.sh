@@ -10,6 +10,7 @@
 #
 #   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+#   https://en.wikipedia.org/wiki/ANSI_escape_code
 #
 dk_color (){
 	dk_debugFunc
@@ -28,11 +29,22 @@ dk_color (){
 		export clr="${ESC}[0m"   				# Default					- Returns all attributes to the default state prior to modification
 		export bold="${ESC}[1m"					# Bold/Bright 				- Applies brightness/intensity flag to foreground color
 		export nobold="${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
+		export dim="${ESC}[2m"
+		export nodim="${ESC}[22m"
+		export italic="${ESC}[3m"
+		export noitalic="${ESC}[23m"
 		export underline="${ESC}[4m"			# Underline       			- Adds underline
 		export nounderline="${ESC}[24m"			# No underline				- Removes underline
+		export blink="$ESC[5m"
+		export noblink="$ESC[25m"
+		export fblink="$ESC[6m"
 		export negative="${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
 		export nonegative="${ESC}[27m"  		# Positive(No negative)		- Returns foreground/background to normal
-
+		export invisible="$ESC[8m"
+		export visible="$ESC[8m"
+		export strike="$ESC[9m"
+		export nostrike="$ESC[29m"
+		
 		# Foreground Colors
 		export black="${ESC}[30m"				# Foreground Black			- Applies non-bold/bright black to foreground
 		export red="${ESC}[31m"					# Foreground Red			- Applies non-bold/bright red to foreground
