@@ -23,27 +23,31 @@ dk_color (){
 	fi
 	
 	if dk_defined USE_COLOR; then
-		export ESC=""     		 # escape character
+		export ESC=""     		 			# escape character
 		
-		# Styles
+		# Attributes on
 		export clr="${ESC}[0m"   				# Default					- Returns all attributes to the default state prior to modification
 		export bold="${ESC}[1m"					# Bold/Bright 				- Applies brightness/intensity flag to foreground color
-		export nobold="${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
-		export dim="${ESC}[2m"
-		export nodim="${ESC}[22m"
-		export italic="${ESC}[3m"
-		export noitalic="${ESC}[23m"
+		export dim="${ESC}[2m"					# Dim
+		export italic="${ESC}[3m"				# Italic
 		export underline="${ESC}[4m"			# Underline       			- Adds underline
-		export nounderline="${ESC}[24m"			# No underline				- Removes underline
-		export blink="$ESC[5m"
-		export noblink="$ESC[25m"
-		export fblink="$ESC[6m"
+		export blink="${ESC}[5m"				# Blink
+		export fblink="${ESC}[6m"				# Rapid Blink
 		export negative="${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
+		export invisible="${ESC}[8m"			# Invisible
+		export strike="${ESC}[9m"				# Strike Through
+		
+		# Attributes off
+		#export 20m="${ESC}[20m"				# 20
+		#export 21m="${ESC}[21m"				# 21
+		export nobold="${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
+		export noitalic="${ESC}[23m"			# No Italic
+		export nounderline="${ESC}[24m"			# No underline				- Removes underline
+		export noblink="${ESC}[25m"				# No Blink
+		#export 26m="${ESC}[26m"				# 26
 		export nonegative="${ESC}[27m"  		# Positive(No negative)		- Returns foreground/background to normal
-		export invisible="$ESC[8m"
-		export visible="$ESC[8m"
-		export strike="$ESC[9m"
-		export nostrike="$ESC[29m"
+		export visible="${ESC}[28m"				# Visible(No invisible)
+		export nostrike="${ESC}[29m"			# No Strike Through
 		
 		# Foreground Colors
 		export black="${ESC}[30m"				# Foreground Black			- Applies non-bold/bright black to foreground

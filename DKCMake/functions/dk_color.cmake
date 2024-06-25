@@ -23,67 +23,82 @@ function(dk_color)
 	
 	if(USE_COLOR)
 		string(ASCII 27 ESC)
-		set(ESC          "${ESC}" 		CACHE INTERNAL "")   	# escape character
-		set(clr          "${ESC}[0m" 	CACHE INTERNAL "")   	# reset color
+		set(ESC         "${ESC}" 		CACHE INTERNAL "")   	# escape character
 		
-		# Styles
+		# Attributes on
 		set(clr 		"${ESC}[0m" 	CACHE INTERNAL "")		# Default					- Returns all attributes to the default state prior to modification
 		set(bold 		"${ESC}[1m" 	CACHE INTERNAL "")		# Bold/Bright 				- Applies brightness/intensity flag to foreground color
-		set(nobold 		"${ESC}[22m" 	CACHE INTERNAL "")		# No bold/bright			- Removes brightness/intensity flag from foreground color
+		set(dim			"${ESC}[2m"		CACHE INTERNAL "")		# Dim
+		set(italic		"${ESC}[3m"		CACHE INTERNAL "")		# Italic
 		set(underline 	"${ESC}[4m" 	CACHE INTERNAL "")		# Underline       			- Adds underline
-		set(nounderline "${ESC}[24m"	CACHE INTERNAL "")		# No underline				- Removes underline
+		set(blink		"${ESC}[5m"		CACHE INTERNAL "")		# Blink
+		set(fblink		"${ESC}[6m"		CACHE INTERNAL "")		# Rapid Blink
 		set(negative 	"${ESC}[7m" 	CACHE INTERNAL "")  	# Negative	    			- Swaps foreground and background colors
+		set(invisible	"${ESC}[8m"		CACHE INTERNAL "")		# Invisible
+		set(strike		"${ESC}[9m"		CACHE INTERNAL "")		# Strike Through
+		
+		# Attributes off
+		#set(20m		"${ESC}[20m"	CACHE INTERNAL "")		# 20
+		#set(21m		"${ESC}[21m"	CACHE INTERNAL "")		# 21
+		set(nobold 		"${ESC}[22m" 	CACHE INTERNAL "")		# No bold/bright			- Removes brightness/intensity flag from foreground color
+		set(noitalic	"${ESC}[23m"	CACHE INTERNAL "")		# No italic
+		set(nounderline "${ESC}[24m"	CACHE INTERNAL "")		# No underline				- Removes underline
+		set(noblink		"${ESC}[25m"	CACHE INTERNAL "")		# No blink
+		#set(26m		"${ESC}[26m"	CACHE INTERNAL "")		# 26
 		set(nonegative 	"${ESC}[27m" 	CACHE INTERNAL "")  	# Positive(No negative)		- Returns foreground/background to normal
-
+		set(visible		"${ESC}[28m"	CACHE INTERNAL "")		# Visible
+		set(nostrike	"${ESC}[29m"	CACHE INTERNAL "")		# No Strike Through
+		
 		# Foreground Colors
-		set(black "${ESC}[30m" CACHE INTERNAL "")			# Foreground Black			- Applies non-bold/bright black to foreground
-		set(red "${ESC}[31m" CACHE INTERNAL "")				# Foreground Red			- Applies non-bold/bright red to foreground
-		set(green "${ESC}[32m" CACHE INTERNAL "")			# Foreground Green			- Applies non-bold/bright green to foreground
-		set(yellow "${ESC}[33m" CACHE INTERNAL "")			# Foreground Yellow			- Applies non-bold/bright yellow to foreground
-		set(blue "${ESC}[34m" CACHE INTERNAL "")			# Foreground Blue			- Applies non-bold/bright blue to foreground
-		set(magenta "${ESC}[35m" CACHE INTERNAL "")			# Foreground Magenta		- Applies non-bold/bright magenta to foreground
-		set(cyan "${ESC}[36m" CACHE INTERNAL "")			# Foreground Cyan			- Applies non-bold/bright cyan to foreground
-		set(white "${ESC}[37m" CACHE INTERNAL "")			# Foreground White			- Applies non-bold/bright white to foreground
-		set(extended "${ESC}[38m" CACHE INTERNAL "")		# Foreground Extended		- Applies extended color value to the foreground
-		set(default "${ESC}[39m" CACHE INTERNAL "")			# Foreground Default		- Applies only the foreground portion of the defaults
+		set(black 		"${ESC}[30m" 	CACHE INTERNAL "")		# Foreground Black			- Applies non-bold/bright black to foreground
+		set(red 		"${ESC}[31m" 	CACHE INTERNAL "")		# Foreground Red			- Applies non-bold/bright red to foreground
+		set(green		"${ESC}[32m" 	CACHE INTERNAL "")		# Foreground Green			- Applies non-bold/bright green to foreground
+		set(yellow 		"${ESC}[33m" 	CACHE INTERNAL "")		# Foreground Yellow			- Applies non-bold/bright yellow to foreground
+		set(blue 		"${ESC}[34m" 	CACHE INTERNAL "")		# Foreground Blue			- Applies non-bold/bright blue to foreground
+		set(magenta 	"${ESC}[35m" 	CACHE INTERNAL "")		# Foreground Magenta		- Applies non-bold/bright magenta to foreground
+		set(cyan 		"${ESC}[36m" 	CACHE INTERNAL "")		# Foreground Cyan			- Applies non-bold/bright cyan to foreground
+		set(white 		"${ESC}[37m" 	CACHE INTERNAL "")		# Foreground White			- Applies non-bold/bright white to foreground
+		set(extended 	"${ESC}[38m" 	CACHE INTERNAL "")		# Foreground Extended		- Applies extended color value to the foreground
+		set(default 	"${ESC}[39m" 	CACHE INTERNAL "")		# Foreground Default		- Applies only the foreground portion of the defaults
 		
 		# Background Colors
-		set(bg_black "${ESC}[40m" CACHE INTERNAL "")		# Background Black			- Applies non-bold/bright black to background
-		set(bg_red "${ESC}[41m" CACHE INTERNAL "")			# Background Red			- Applies non-bold/bright red to background
-		set(bg_green "${ESC}[42m" CACHE INTERNAL "")		# Background Green			- Applies non-bold/bright green to background
-		set(bg_yellow "${ESC}[43m" CACHE INTERNAL "")		# Background Yellow			- Applies non-bold/bright yellow to background
-		set(bg_blue "${ESC}[44m" CACHE INTERNAL "")			# Background Blue			- Applies non-bold/bright blue to background
-		set(bg_magenta "${ESC}[45m" CACHE INTERNAL "")		# Background Magenta		- Applies non-bold/bright magenta to background
-		set(bg_cyan "${ESC}[46m" CACHE INTERNAL "")			# Background Cyan			- Applies non-bold/bright cyan to background
-		set(bg_white "${ESC}[47m" CACHE INTERNAL "")		# Background White			- Applies non-bold/bright white to background
-		set(bg_extended "${ESC}[48m" CACHE INTERNAL "")		# Background Extended		- Applies extended color value to the background
-		set(bg_default "${ESC}[49m" CACHE INTERNAL "")		# Background Default		- Applies only the background portion of the defaults
+		set(bg_black 	"${ESC}[40m" 	CACHE INTERNAL "")		# Background Black			- Applies non-bold/bright black to background
+		set(bg_red 		"${ESC}[41m" 	CACHE INTERNAL "")		# Background Red			- Applies non-bold/bright red to background
+		set(bg_green 	"${ESC}[42m" 	CACHE INTERNAL "")		# Background Green			- Applies non-bold/bright green to background
+		set(bg_yellow 	"${ESC}[43m" 	CACHE INTERNAL "")		# Background Yellow			- Applies non-bold/bright yellow to background
+		set(bg_blue 	"${ESC}[44m" 	CACHE INTERNAL "")		# Background Blue			- Applies non-bold/bright blue to background
+		set(bg_magenta 	"${ESC}[45m" 	CACHE INTERNAL "")		# Background Magenta		- Applies non-bold/bright magenta to background
+		set(bg_cyan 	"${ESC}[46m" 	CACHE INTERNAL "")		# Background Cyan			- Applies non-bold/bright cyan to background
+		set(bg_white 	"${ESC}[47m" 	CACHE INTERNAL "")		# Background White			- Applies non-bold/bright white to background
+		set(bg_extended "${ESC}[48m" 	CACHE INTERNAL "")		# Background Extended		- Applies extended color value to the background
+		set(bg_default 	"${ESC}[49m" 	CACHE INTERNAL "")		# Background Default		- Applies only the background portion of the defaults
 		
 		# Foreground Colors (light)
-		set(lblack "${ESC}[90m" CACHE INTERNAL "")			# Bright Foreground Black	- Applies bold/bright black to foreground
-		set(lred "${ESC}[91m" CACHE INTERNAL "")			# Bright Foreground Red		- Applies bold/bright red to foreground
-		set(lgreen "${ESC}[92m" CACHE INTERNAL "")			# Bright Foreground Green	- Applies bold/bright green to foreground
-		set(lyellow "${ESC}[93m" CACHE INTERNAL "")			# Bright Foreground Yellow	- Applies bold/bright yellow to foreground
-		set(lblue "${ESC}[94m" CACHE INTERNAL "")			# Bright Foreground Blue	- Applies bold/bright blue to foreground
-		set(lmagenta "${ESC}[95m" CACHE INTERNAL "")		# Bright Foreground Magenta	- Applies bold/bright magenta to foreground
-		set(lcyan "${ESC}[96m" CACHE INTERNAL "")			# Bright Foreground Cyan	- Applies bold/bright cyan to foreground
-		set(lwhite "${ESC}[97m" CACHE INTERNAL "")			# Bright Foreground White	- Applies bold/bright white to foreground
+		set(lblack 		"${ESC}[90m" 	CACHE INTERNAL "")		# Bright Foreground Black	- Applies bold/bright black to foreground
+		set(lred 		"${ESC}[91m" 	CACHE INTERNAL "")		# Bright Foreground Red		- Applies bold/bright red to foreground
+		set(lgreen 		"${ESC}[92m" 	CACHE INTERNAL "")		# Bright Foreground Green	- Applies bold/bright green to foreground
+		set(lyellow 	"${ESC}[93m" 	CACHE INTERNAL "")		# Bright Foreground Yellow	- Applies bold/bright yellow to foreground
+		set(lblue 		"${ESC}[94m" 	CACHE INTERNAL "")		# Bright Foreground Blue	- Applies bold/bright blue to foreground
+		set(lmagenta 	"${ESC}[95m" 	CACHE INTERNAL "")		# Bright Foreground Magenta	- Applies bold/bright magenta to foreground
+		set(lcyan 		"${ESC}[96m" 	CACHE INTERNAL "")		# Bright Foreground Cyan	- Applies bold/bright cyan to foreground
+		set(lwhite 		"${ESC}[97m" 	CACHE INTERNAL "")		# Bright Foreground White	- Applies bold/bright white to foreground
 
 		# Background Colors (light)
-		set(bg_lblack "${ESC}[100m" CACHE INTERNAL "")		# Bright Background Black	- Applies bold/bright black to background
-		set(bg_lred "${ESC}[101m" CACHE INTERNAL "")		# Bright Background Red		- Applies bold/bright red to background
-		set(bg_lgreen "${ESC}[102m" CACHE INTERNAL "")		# Bright Background Green	- Applies bold/bright green to background
-		set(bg_lyellow "${ESC}[103m" CACHE INTERNAL "")		# Bright Background Yellow	- Applies bold/bright yellow to background
-		set(bg_lblue "${ESC}[104m" CACHE INTERNAL "")		# Bright Background Blue	- Applies bold/bright blue to background
-		set(bg_lmagenta "${ESC}[105m" CACHE INTERNAL "")	# Bright Background Magenta	- Applies bold/bright magenta to background
-		set(bg_lcyan "${ESC}[106m" CACHE INTERNAL "")		# Bright Background Cyan	- Applies bold/bright cyan to background
-		set(bg_lwhite "${ESC}[107m" CACHE INTERNAL "")		# Bright Background White	- Applies bold/bright white to background
+		set(bg_lblack 	"${ESC}[100m" 	CACHE INTERNAL "")		# Bright Background Black	- Applies bold/bright black to background
+		set(bg_lred 	"${ESC}[101m"	CACHE INTERNAL "")		# Bright Background Red		- Applies bold/bright red to background
+		set(bg_lgreen 	"${ESC}[102m"	CACHE INTERNAL "")		# Bright Background Green	- Applies bold/bright green to background
+		set(bg_lyellow 	"${ESC}[103m" 	CACHE INTERNAL "")		# Bright Background Yellow	- Applies bold/bright yellow to background
+		set(bg_lblue 	"${ESC}[104m" 	CACHE INTERNAL "")		# Bright Background Blue	- Applies bold/bright blue to background
+		set(bg_lmagenta "${ESC}[105m" 	CACHE INTERNAL "")		# Bright Background Magenta	- Applies bold/bright magenta to background
+		set(bg_lcyan 	"${ESC}[106m" 	CACHE INTERNAL "")		# Bright Background Cyan	- Applies bold/bright cyan to background
+		set(bg_lwhite 	"${ESC}[107m" 	CACHE INTERNAL "")		# Bright Background White	- Applies bold/bright white to background
 		
 		# Foreground RGB Colors
-		set(RGB "${ESC}[38;2;" CACHE INTERNAL "")			# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
+		set(RGB 		"${ESC}[38;2;" 	CACHE INTERNAL "")		# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
 		
 		# Background RGB Colors
-		set(bg_RGB "${ESC}[48;2;")							# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		set(bg_RGB 		"${ESC}[48;2;"	CACHE INTERNAL "")		# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		
 		
 		dk_echo("${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}")
 	else()
@@ -142,7 +157,6 @@ function(dk_color)
 		unset(bg_RGB CACHE)
 	
 		dk_echo("${clr} COLOR OFF")
-		
 	endif()
 endfunction()
 dk_color(1)

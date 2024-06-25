@@ -25,9 +25,7 @@ dk_generate (){
 	cd "$TARGET_PATH"/"$TARGET_OS"
 	CMAKE_SOURCE_DIR="$DKCMAKE_DIR"
 	dk_printVar CMAKE_SOURCE_DIR
-	if ! dk_pathExists "$CMAKE_SOURCE_DIR"; then
-		dk_error "CMAKE_SOURCE_DIR does not exist"
-	fi
+	[ dk_pathExists "$CMAKE_SOURCE_DIR" ] || dk_error "CMAKE_SOURCE_DIR does not exist"
 	dk_printVar CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=$TARGET_PATH
 	dk_printVar CMAKE_TARGET_PATH
@@ -196,7 +194,7 @@ dk_generate (){
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = $@"	
-	dk_call "$CMAKE_EXE" "$@"
+	dk_call "$CMAKE_EXE" "$@" && echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo
 }
 

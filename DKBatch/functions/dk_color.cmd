@@ -22,17 +22,32 @@ call DK.cmd
 	
 	:USE_COLOR_if
 	if not defined USE_COLOR goto:USE_COLOR_else
-		set "ESC="
+		set "ESC="						&:: escape character
 		
-		::# Styles
+		::# Attributes on
 		set "clr=%ESC%[0m"					&:: Default						- Returns all attributes to the default state prior to modification
 		set "bold=%ESC%[1m"					&:: Bold/Bright 				- Applies brightness/intensity flag to foreground color
-		set "nobold=%ESC%[22m"				&:: No bold/bright				- Removes brightness/intensity flag from foreground color
+		set "dim=%ESC%[2m"					&:: Dim
+		set "italic=%ESC%[3m"				&:: Italic
 		set "underline=%ESC%[4m"			&:: Underline       			- Adds underline
-		set "nounderline=%ESC%[24m"			&:: No underline				- Removes underline
+		set "blink=%ESC%[5m"				&:: Blink
+		set "fblink=%ESC%[6m"				&:: Rapid Blink
 		set "negative=%ESC%[7m"   			&:: Negative	    			- Swaps foreground and background colors
+		set "invisible=%ESC%[8m"			&:: Invisible
+		set "strike=%ESC%[9m"				&:: Strike Through
+		
+		::# Attributes off
+		::set "20m=%ESC%[20m"				&:: 20
+		::set "21m=%ESC%[21m"				&:: 21
+		set "nobold=%ESC%[22m"				&:: No bold/bright				- Removes brightness/intensity flag from foreground color
+		set "noitalic=%ESC%[23m"			&:: No italic
+		set "nounderline=%ESC%[24m"			&:: No underline				- Removes underline
+		set "noblink=%ESC%[25m"				&:: No Blink
+		::set "26m=%ESC%[26m"				&:: 26
 		set "nonegative=%ESC%[27m"  		&:: Positive(No negative)		- Returns foreground/background to normal
-
+		set "visible=%ESC%[28m"				&:: Visible(No invisible)
+		set "nostrike=%ESC%[29m"			&:: No Strike Through
+		
 		::# Foreground Colors
 		set "black=%ESC%[30m"				&:: Foreground Black			- Applies non-bold/bright black to foreground
 		set "red=%ESC%[31m"					&:: Foreground Red				- Applies non-bold/bright red to foreground
@@ -82,6 +97,7 @@ call DK.cmd
 		
 		::# Background RGB Colors
 		set "bg_RGB=%ESC%[48;2;"			&:: %bg_RGB%150;100;50m      = %ESC%[38;2;150;100;50m
+		
 		
 		if defined %1 call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto:USE_COLOR_endif	

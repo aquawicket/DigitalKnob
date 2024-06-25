@@ -23,20 +23,32 @@ function Global:dk_color (){
 	}
 	
 	if($USE_COLOR){
-		$global:ESC = "$([char]27)" # escape character
-		$global:clr = "${ESC}[0m"   # reset color
+		$global:ESC = "$([char]27)" 				# escape character
 		
-		$global:ESC=""     		 # escape character
-		
-		# Styles
+		# Attributes on
 		$global:clr = "${ESC}[0m"   				# Default					- Returns all attributes to the default state prior to modification
 		$global:bold = "${ESC}[1m"					# Bold/Bright 				- Applies brightness/intensity flag to foreground color
-		$global:nobold = "${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
+		$global:dim = "${ESC}[2m"					# Dim
+		$global:italic = "${ESC}[3m"				# Italic
 		$global:underline = "${ESC}[4m"				# Underline       			- Adds underline
-		$global:nounderline = "${ESC}[24m"			# No underline				- Removes underline
+		$global:blink = "${ESC}[5m"					# Blink
+		$global:fblink = "${ESC}[6m"				# Rapid Blink
 		$global:negative = "${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
+		$global:invisible = "${ESC}[8m"				# Invisible
+		$global:strike = "${ESC}[9m"				# Strike Through
+		
+		# Attributes off
+		#$global:20m = "${ESC}[20m"					# 20
+		#$global:21m = "${ESC}[21m"					# 21
+		$global:nobold = "${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
+		$global:noitalic = "${ESC}[23m"				# No Italic
+		$global:nounderline = "${ESC}[24m"			# No underline				- Removes underline
+		$global:noblink = "${ESC}[25m"				# No Blink
+		#$global:26m = "${ESC}[26m"					# 26
 		$global:nonegative = "${ESC}[27m"  			# Positive(No negative)		- Returns foreground/background to normal
-
+		$global:visible = "${ESC}[28m"				# Visible(No invisible)
+		$global:nostrike = "${ESC}[29m"				# No Strike Through
+		
 		# Foreground Colors
 		$global:black = "${ESC}[30m"				# Foreground Black			- Applies non-bold/bright black to foreground
 		$global:red = "${ESC}[31m"					# Foreground Red			- Applies non-bold/bright red to foreground
@@ -85,7 +97,8 @@ function Global:dk_color (){
 		$global:RGB = "${ESC}[38;2;"				# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
 		
 		# Background RGB Colors
-		$global:bg_RGB="${ESC}[48;2;"				# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		$global:bg_RGB = "${ESC}[48;2;"				# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		
 		
 		dk_echo "${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}"
 	}

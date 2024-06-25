@@ -118,7 +118,7 @@ call DK.cmd
     ::call dk_echo
     call dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE% %CMAKE_ARGS%"
-    call "%CMAKE_EXE%" %CMAKE_ARGS%
+    call "%CMAKE_EXE%" %CMAKE_ARGS%  && echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
     ::call dk_echo
 goto:eof
 
