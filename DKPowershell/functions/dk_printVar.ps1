@@ -2,7 +2,7 @@ if(!$DKINIT){ . $PWD/DK.ps1 }
 if(!$dk_printVar){ $dk_printVar = 1 } else{ return }
 
 ####################################################################
-# dk_printVar()
+# dk_printVar(variable)
 #
 #
 function Global:dk_printVar($var) {
@@ -19,20 +19,21 @@ function Global:dk_printVar($var) {
 		if(($name[1] -eq "$") -and ($name[1] -eq "$")){ $variable = $var }
 	}
 
+	dk_validate clr "dk_load dk_color"
 	
 	if(($variable -is [array]) -or ($variable -is [System.Collections.ArrayList])){ 
 		if($variable.count){
 			for($i=0; $i -lt $variable.count; $i++) {
-				dk_echo "${blue}$name[$i] = '$($variable[$i])'${clr}";
+				dk_echo "${cyan}$name[$i] = ${blue}'$($variable[$i])'${clr}";
 			}
 		}
 		else{
-			dk_echo "${blue}$name = ${yellow}EMPTY${clr}"
+			dk_echo "${cyan}$name = ${yellow}EMPTY${clr}"
 		}
 	} elseif($variable){
-		dk_echo "${blue}$name = '$variable'${clr}"
+		dk_echo "${cyan}$name = ${blue}'$variable'${clr}"
 	} else{
-		dk_echo "${blue}$name = ${red}UNDEFINED${clr}"
+		dk_echo "${cyan}$name = ${red}UNDEFINED${clr}"
 	}
 }
 
