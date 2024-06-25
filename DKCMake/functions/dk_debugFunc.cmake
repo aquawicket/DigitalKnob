@@ -1,4 +1,4 @@
-set(ENABLE_dk_debugFunc 0)
+set(ENABLE_dk_debugFunc 1)
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 

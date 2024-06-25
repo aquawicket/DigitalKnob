@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 dk_load(dk_eval)
 dk_load(dk_debugFunc)
-
+dk_load(dk_replaceAll)
 
 ###############################################################################
 # dk_createPrefixMacro(func prefix_list)
@@ -16,6 +16,7 @@ function(dk_createPrefixMacro func) #ARGN
 	#dk_debugFunc(${ARGV})
 	
 	set(${ARGN})
+	#dk_load(dk_replaceAll)
 	dk_replaceAll("${ARGN}"  ";"  "_"  prefix_name)
 	dk_replaceAll("${ARGN}"  ";"  " AND "  prefix_if)
 	set(MACRO_STRING "macro(${prefix_name}_${func})\n   if(${prefix_if})\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
