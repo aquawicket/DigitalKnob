@@ -30,10 +30,10 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
-	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
-	call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
-	call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
-	call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+	::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
+	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
+	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
 
 	::############ Setup KeepOpen ############
 	::	call :dk_setupKeepOpen

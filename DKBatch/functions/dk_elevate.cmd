@@ -1,21 +1,45 @@
-<!-- :
+<!-- ::################## ELEVATE ##################
 @echo off
-::NET FILE 1>NUL 2>NUL
-::if '%errorlevel%' == '0' ( echo admin & pause & goto:eof )
-	
-if '%1'=='ELEV' (
-	set "DKSCRIPT_PATH=%~2"
-	set "DKSCRIPT_DIR=%~3"
-	
-	setlocal & cd /d %3
-    if '%1'=='ELEV' (shift /1)
-	cmd /c "%~2"
-	goto:eof
-)
+
+net session >nul 2>&1
+if %ERRORLEVEL% equ 0 goto :admin
+if "%~2" == "gotPrivileges" goto :gotPrivileges
+goto:admin
+:elevate
+	echo elevate
+	if "%~1" == "elevated" goto :admin
+	if "%~2" == "gotPrivileges" goto :gotPrivileges
+		echo "elevating permissions . . ."
+		setlocal DisableDelayedExpansion
+		set "DKSCRIPT_PATH=%~dpnx0"
+		setlocal EnableDelayedExpansion
+		cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges & exit
+	:gotPrivileges
+		echo gotPrivileges
+		pause
+		setlocal & cd /d %~dp0
+		cmd /k "%~0" elevated
+	--><job><script language="VBScript">
+			Set oShell = CreateObject( "WScript.Shell" )
+			DKSCRIPT_PATH=oShell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%")
+			Set UAC = CreateObject("Shell.Application") 
+			args = "" 
+			For Each strArg in WScript.Arguments 
+			args = args & strArg & " "  
+			Next
+			args = "/c """ + DKSCRIPT_PATH + """ " + args 
+			UAC.ShellExecute "cmd", args, "", "runas", 1
+		</script></job><!--
+	:admin
+		echo admin
+		::echo Administrator privileges detected
+		cd /d %~dp0
+::goto:eof
+
+::###################### ELEVATE ##################	
+
 
 call DK.cmd
-
-
 
 ::##################################################################################
 ::# dk_elevate()
@@ -25,17 +49,9 @@ call DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% NEQ 0 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	
-	NET FILE 1>NUL 2>NUL
-	if '%errorlevel%' == '0' ( echo admin & pause & goto:eof )
-	
-	set "DKELEVATE_CMD=%~f0"
-	echo DKELEVATE_CMD = %DKELEVATE_CMD%
-	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-	echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
-	cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% %DKSCRIPT_DIR% & exit
+	net session >nul 2>&1
+	if %ERRORLEVEL% equ 0 (echo "Administrator privileges detected") else (echo Not an Admin & goto :elevate)
 goto:eof
-
-
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
@@ -44,20 +60,4 @@ goto:eof
 	call dk_elevate
 goto:eof
 
-
-
 -->
-<job><script language="VBScript">
-	Set oShell = CreateObject( "WScript.Shell" )
-	DKELEVATE_CMD=oShell.ExpandEnvironmentStrings("%DKELEVATE_CMD%")
-	DKSCRIPT_PATH=oShell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%")
-	DKSCRIPT_DIR=oShell.ExpandEnvironmentStrings("%DKSCRIPT_DIR%")
-	Set UAC = CreateObject("Shell.Application") 
-	args = "ELEV " 
-	For Each strArg in WScript.Arguments 
-	args = args & strArg & " "  
-	Next
-	args = "/c """ + DKELEVATE_CMD + """ " + args 
-	UAC.ShellExecute "C:\WINDOWS\System32\cmd.exe", args, "", "runas", 1
-</script></job>
-
