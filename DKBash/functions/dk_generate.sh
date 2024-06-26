@@ -194,7 +194,7 @@ dk_generate (){
 	dk_echo ""
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = $*"
-	dk_call "$CMAKE_EXE" "$@" && echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
+	dk_call "$CMAKE_EXE" "$@" #&& echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo ""
 }
 
