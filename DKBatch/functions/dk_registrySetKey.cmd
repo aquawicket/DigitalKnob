@@ -1,5 +1,5 @@
 @echo off
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::#################################################################################
 :: dk_registrySetKey() <reg_path> <key> <type> <value>

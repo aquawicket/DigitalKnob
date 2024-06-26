@@ -32,7 +32,7 @@ if "%~2" == "gotPrivileges" goto :gotPrivileges
 
 
 
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::call dk_set ENABLE_dk_debug 0
 ::call dk_set TRACE_ON_DEBUG 1

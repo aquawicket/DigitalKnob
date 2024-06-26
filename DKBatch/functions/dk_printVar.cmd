@@ -1,5 +1,5 @@
 @echo off
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::################################################################################

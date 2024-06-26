@@ -1,5 +1,5 @@
 @echo off
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 if not defined ENABLE_dk_verbose  call dk_set ENABLE_dk_verbose 1
 if not defined TRACE_ON_VERBOSE   call dk_set TRACE_ON_VERBOSE 0

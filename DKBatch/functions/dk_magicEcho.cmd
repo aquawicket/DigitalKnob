@@ -1,6 +1,6 @@
 @echo off
 call :dk_magicEcho.init
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 
 

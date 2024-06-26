@@ -1,5 +1,5 @@
 @echo off
-call DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::################################################################################
 ::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
