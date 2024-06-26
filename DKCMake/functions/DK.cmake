@@ -14,7 +14,7 @@ cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP00
 #
 #
 function(DKINIT)
-	dk_echo("DKINIT()")
+	#dk_echo("DKINIT()")
 	
 	###### Initialize Language specifics ######
 	dk_init()
@@ -24,12 +24,12 @@ function(DKINIT)
 	
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
-	dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
-	dk_echo("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
+	#dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
+	#dk_echo("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
-	dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
+	#dk_echo("DKHTTP_DKCMAKE_FUNCTIONS_DIR = ${DKHTTP_DKCMAKE_FUNCTIONS_DIR}")
 
 	############ Setup dk_callStack ############
 	dk_setupCallstack()
@@ -38,10 +38,10 @@ function(DKINIT)
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
-	dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
-	dk_echo("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
-	dk_echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
-	dk_echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
+	#dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
+	#dk_echo("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
+	#dk_echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
+	#dk_echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
 	
 	############ Setup KeepOpen ############
 	#dk_setupKeepOpen()
