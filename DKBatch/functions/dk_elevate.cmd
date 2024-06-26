@@ -1,6 +1,5 @@
 <!-- ::################## ELEVATE ##################
 @echo off
-
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto :admin
 if "%~2" == "gotPrivileges" goto :gotPrivileges

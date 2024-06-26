@@ -1,6 +1,7 @@
 <!-- ::################## ELEVATE ##################
 @echo off
-
+echo 0 = %0
+echo * = %*
 net session >nul 2>&1
 IF %ERRORLEVEL% EQU 0 goto :admin
 if "%~1" == "elevated" goto :admin
@@ -8,6 +9,7 @@ if "%~2" == "gotPrivileges" goto :gotPrivileges
 	echo "elevating permissions . . ."
 	setlocal DisableDelayedExpansion
 	set "DKSCRIPT_PATH=%~dpnx0"
+	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	setlocal EnableDelayedExpansion
 	cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges
 :gotPrivileges
