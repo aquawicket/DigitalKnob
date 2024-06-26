@@ -27,7 +27,7 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	
 	
 	echo "This is a normal echo commmand"
-	dk_echo ""
+	dk_echo
 	dk_echo ""
 	dk_echo "This is a dk_echo line"
 	dk_echo "${red}This is ${white}dk_echo ${blue}with color ${clr}"

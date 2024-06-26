@@ -28,9 +28,9 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
     call dk_debugFunc
 	
-	echo "This is a normal echo commmand"
-	call dk_echo ""
+	echo This is a normal echo commmand
+	call dk_echo
 	call dk_echo ""
 	call dk_echo "This is a dk_echo line"
-    call dk_echo "%cyan%This is dk_echo with color %clr%"
+    call dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 goto:eof

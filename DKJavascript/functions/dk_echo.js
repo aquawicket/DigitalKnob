@@ -25,7 +25,7 @@ document.body.appendChild(js);
 //	
 //	console.log "This is a normal console.log commmand"
 //	dk_echo
-//	dk_echo
+//	dk_echo ""
 //	dk_echo "This is a dk_echo line"
-//    dk_echo "%cyan%This is dk_echo with color %clr%"
+//  dk_echo "%cyan%This is dk_echo with color %clr%"
 //}

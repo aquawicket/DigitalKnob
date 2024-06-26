@@ -29,6 +29,7 @@ fi
 #
 dk_echo (){
 	dk_debugFunc
+	[ $# -eq 0 ] && echo "" && return
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 #	# https://linuxcommand.org/lc3_man_pages/echoh.html
@@ -48,6 +49,8 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	echo "This is a normal echo commmand"
+	dk_echo
+	dk_echo ""
 	dk_echo "This is a dk_echo line"
-	dk_echo "${cyan} This is dk_echo with color ${clr}"
+	dk_echo "${red}This is ${white}dk_echo ${blue}with color ${clr}"
 }
