@@ -7,7 +7,7 @@ if($DKINIT){return} else{ $global:DKINIT=1 }	# include_guard
 #
 #
 function DK (){
-	dk_echo "DK()"
+	#dk_echo "DK()"
 
 	###### Initialize Language specifics ######
 	dk_init
@@ -17,12 +17,12 @@ function DK (){
 	
 	############ Get DKPOWERSHELL variables ############
 	dk_DKPOWERSHELL_VARS
-	dk_echo "DKPOWERSHELL_DIR = ${DKPOWERSHELL_DIR}"
-	dk_echo "DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR}"
+	#dk_echo "DKPOWERSHELL_DIR = ${DKPOWERSHELL_DIR}"
+	#dk_echo "DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR}"
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS
-	dk_echo "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}"
+	#dk_echo "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}"
 
 	############ Setup dk_callStack ############
 	#dk_setupCallstack
@@ -31,10 +31,10 @@ function DK (){
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS
-	dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	dk_echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
-	dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	dk_echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+	#dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+	#dk_echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+	#dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	#dk_echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 	
 	############ Setup KeepOpen ############
 	#dk_setupKeepOpen
