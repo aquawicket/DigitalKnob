@@ -15,9 +15,9 @@ function Global:dk_buildMain (){
 		dk_stacktrace
 	}
 
-# 	dk_validateSudo
+# 	dk _validateSudo
 	
-#	if dk_defined WSLENV; then 
+#	if dk _defined WSLENV; then 
 #		dk_info "WSLENV is on"
 #		dk_info "calling sudo chown -R ${LOGNAME} ${HOME} to allow windows write access to \\\wsl.localhost\DISTRO\home\\${LOGNAME}"
 #		sudo chown -R "${LOGNAME}" "${HOME}"

@@ -69,6 +69,7 @@ function DK (){
 	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1
 	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_color.ps1
 	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_logo.ps1
+	dk_logo
 	
 	
 

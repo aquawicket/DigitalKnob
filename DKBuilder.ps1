@@ -11,10 +11,10 @@ if(!(Test-Path "DKPowershell/functions/DK.ps1")){ Invoke-WebRequest -URI "$DKHTT
 
 
 ###### Global variables ######
-Write-Output "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
-Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
-Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
+#Write-Output "DKSCRIPT_PATH = $DKSCRIPT_PATH"
+#Write-Output "DKSCRIPT_DIR = $DKSCRIPT_DIR"
+#Write-Output "DKSCRIPT_NAME = $DKSCRIPT_NAME"
+#Write-Output "DKPOWERSHELL_DIR = $DKPOWERSHELL_DIR"
 
 
 ###### Load Main Program ######
