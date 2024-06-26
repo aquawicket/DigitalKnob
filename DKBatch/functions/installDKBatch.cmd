@@ -21,6 +21,7 @@ goto:eof
 
 :run_file
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
+	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "CMD_FILE=%~2"
 	
 	echo ############### Digitalknob ##################
@@ -28,6 +29,7 @@ goto:eof
 ::	echo 1 = %1
 ::	echo 2 = %2
 ::	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
+::	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 ::	echo CMD_FILE = %CMD_FILE%
 	cmd /c call %CMD_FILE%
 goto:eof

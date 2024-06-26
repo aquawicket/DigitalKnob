@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 :uninstall_launcher
 	echo Uninstalling .sh file associations . . .

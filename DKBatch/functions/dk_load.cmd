@@ -17,10 +17,10 @@ call DK.cmd
 	call dk_source dk_info
 	call dk_source dk_error
 	call dk_source dk_debugFunc
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_echo.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_echo.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_echo.cmd')"
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_info.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_info.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_info.cmd')"
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_error.cmd"     powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_error.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_error.cmd')"
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_echo.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_echo.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_echo.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_info.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_info.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_info.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_error.cmd"     powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_error.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_error.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd')"
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): invalid arguments"
 	if "%~2" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	call dk_debugFunc
@@ -37,9 +37,9 @@ call DK.cmd
 	call dk_source dk_set
 	call dk_source dk_getFullPath
 	call dk_source dk_download
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_set.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_set.cmd')"
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getFullPath.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_getFullPath.cmd')"
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_set.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_set.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_set.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_getFullPath.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_getFullPath.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_getFullPath.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd')"
 	if not exist "%funcPath%" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName%.cmd" "%funcPath%"
 	if not exist "%funcPath%" call dk_error "ERROR: %funcPath%: file not found"
 	

@@ -22,7 +22,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 :dk_debugFunc () {
 	if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_callStack.cmd')"
+	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd')"
 	call dk_callStack
 	:dk_callStackReturn
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"

@@ -1,5 +1,5 @@
 @echo off
-call DK.cmd
+call %DKBATCH_FUNCTION_DIR%DK.cmd
 
 ::################################################################################
 ::# dk_echo(message)

@@ -32,6 +32,7 @@ call DK.cmd
 			call dk_set DKBASH_FUNCTIONS_DIR "%DKBASH_DIR%\functions"
 		call dk_set DKBATCH_DIR "%DKBRANCH_DIR%\DKBatch"
 			call dk_set DKBATCH_FUNCTIONS_DIR "%DKBATCH_DIR%\functions"
+			call dk_set DKBATCH_FUNCTIONS_DIR_ "%DKBATCH_DIR%\functions\"
 		call dk_set DKCMAKE_DIR "%DKBRANCH_DIR%\DKCMake"
 			call dk_set DKCMAKE_FUNCTIONS_DIR "%DKCMAKE_DIR%\functions"
 		call dk_set DKDOCS_DIR "%DKBRANCH_DIR%\DKDocs"

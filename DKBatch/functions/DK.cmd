@@ -94,8 +94,10 @@ goto:eof
     for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
     set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
     call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
+	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	cd %DKBATCH_FUNCTIONS_DIR%
 	
 	echo PATH = %PATH%
@@ -115,7 +117,7 @@ goto:eof
 ::# dk_setupCallstack()
 ::#
 :dk_setupCallstack (){
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR%\dk_source.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
 	call dk_source dk_callStack
 goto:eof
 
