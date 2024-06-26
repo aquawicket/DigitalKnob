@@ -58,7 +58,7 @@ function(DKINIT)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	dk_load(dk_color)
 	dk_load(dk_logo)
-	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
+	#dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
