@@ -2,7 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ##############################################################################
-# dk_isFunction(name rtn_var)
+# dk_isFunction(name) -> rtn_var
 # 
 #	Test if a string is a function name
 #
@@ -13,18 +13,9 @@
 #
 dk_isFunction (){
 	dk_debugFunc 
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	if declare -F "$1" > /dev/null; then 
-		isFunction=1
-		eval $2="${isFunction-}"
-		dk_printVar isFunction
-		[ ${isFunction-} -eq 1 ]
-	else 
-		isFunction=0
-		eval $2="${isFunction-}"
-		dk_printVar isFunction
-		[ ${isFunction-} -eq 1 ]
-	fi
+	 $(declare -F "$1" > /dev/null)	
 }
 
 
@@ -37,12 +28,9 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	dk_echo "testing dk_isFunction(test_function)"
-	dk_isFunction "test_function" isFunction
-	dk_info "isFunction = ${isFunction}"
-	$(dk_isFunction "test_function") && echo "true" || echo "false"
+	dk_isFunction "test_function" && echo "true" || echo "false"
 	
+	dk_echo
 	dk_echo "testing dk_isFunction(nonExistentFunction)" 
-	dk_isFunction "nonExistentFunction" isFunction
-	dk_info "isFunction = ${isFunction}"
-	$(dk_isFunction "nonExistentFunction") && echo "true" || echo "false"
+	dk_isFunction "nonExistentFunction" && echo "true" || echo "false"
 }
