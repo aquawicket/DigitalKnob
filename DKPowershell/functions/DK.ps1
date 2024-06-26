@@ -71,6 +71,7 @@ function DK (){
 	. $DKPOWERSHELL_FUNCTIONS_DIR/dk_logo.ps1
 	dk_logo
 	
+	dk_load $DKSCRIPT_PATH
 	
 
 	#Write-Output "env:PATH = $env:PATH"
