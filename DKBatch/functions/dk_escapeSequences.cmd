@@ -133,54 +133,6 @@ call DK.cmd
 	::call dk_decimalToVariable US  31
 
 	call dk_set clear      "%ESC%[2J"
-
-	:: Attributes
-	call dk_set clr        "%ESC%[0m"
-	call dk_set bold       "%ESC%[1m"
-	call dk_set underline  "%ESC%[4m"
-	call dk_set blink      "%ESC%[5m"
-	call dk_set inverse    "%ESC%[7m"
-	call dk_set invisible  "%ESC%[8m"
-
-	:: Foreground Colors
-	call dk_set black      "%ESC%[30m"
-	call dk_set red        "%ESC%[31m"
-	call dk_set green      "%ESC%[32m"
-	call dk_set yellow     "%ESC%[33m"
-	call dk_set blue       "%ESC%[34m"
-	call dk_set magenta    "%ESC%[35m"
-	call dk_set cyan       "%ESC%[36m"
-	call dk_set white      "%ESC%[37m"
-
-	:: Background Colors
-	call dk_set bg_black   "%ESC%[40m"
-	call dk_set bg_red     "%ESC%[41m"
-	call dk_set bg_green   "%ESC%[42m"
-	call dk_set bg_yellow  "%ESC%[43m"
-	call dk_set bg_blue    "%ESC%[44m"
-	call dk_set bg_magenta "%ESC%[45m"
-	call dk_set bg_cyan    "%ESC%[46m"
-	call dk_set bg_white   "%ESC%[47m"
-
-	:: Foreground Colors (Bright)
-	call dk_set Black      "%ESC%[90m"
-	call dk_set Red        "%ESC%[91m"
-	call dk_set Green      "%ESC%[92m"
-	call dk_set Yellow     "%ESC%[93m"
-	call dk_set BLUE       "%ESC%[94m"
-	call dk_set Magenta    "%ESC%[95m"
-	call dk_set Cyan       "%ESC%[96m"
-	call dk_set White      "%ESC%[97m"
-
-	:: Background Colors (Bright)
-	call dk_set BG_Black   "%ESC%[100m"
-	call dk_set BG_Red     "%ESC%[101m"
-	call dk_set BG_Green   "%ESC%[102m"
-	call dk_set BG_Yellow  "%ESC%[103m"
-	call dk_set BG_Blue    "%ESC%[104m"
-	call dk_set BG_Magenta "%ESC%[105m"
-	call dk_set BG_Cyan    "%ESC%[106m"
-	call dk_set BG_White   "%ESC%[107m"
 goto:eof
 
 :ASCII_ADD () {

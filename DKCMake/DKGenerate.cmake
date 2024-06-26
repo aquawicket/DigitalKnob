@@ -184,7 +184,7 @@ foreach(plugin ${dkdepend_list})
 					dk_warning("MISSING: ${lib}")
 					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
 				else()
-					dk_echo("${Green}FOUND:${green} ${lib}${clr}")
+					dk_echo("${lgreen}FOUND: ${green}${lib} ${clr}")
 				endif()
 			endforeach()
 		

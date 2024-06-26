@@ -120,53 +120,6 @@ function(dk_escapeSequences)
 
 	dk_set(clear      "${ESC}[2J")
 
-	# Attributes
-	dk_set(clr        "${ESC}[0m")
-	dk_set(bold       "${ESC}[1m")
-	dk_set(underline  "${ESC}[4m")
-	dk_set(blink      "${ESC}[5m")
-	dk_set(inverse    "${ESC}[7m")
-	dk_set(invisible  "${ESC}[8m")
-
-	# Foreground Colors
-	dk_set(black      "${ESC}[30m")
-	dk_set(red        "${ESC}[31m")
-	dk_set(green      "${ESC}[32m")
-	dk_set(yellow     "${ESC}[33m")
-	dk_set(blue       "${ESC}[34m")
-	dk_set(magenta    "${ESC}[35m")
-	dk_set(cyan       "${ESC}[36m")
-	dk_set(white      "${ESC}[37m")
-
-	# Background Colors
-	dk_set(bg_black   "${ESC}[40m")
-	dk_set(bg_red     "${ESC}[41m")
-	dk_set(bg_green   "${ESC}[42m")
-	dk_set(bg_yellow  "${ESC}[43m")
-	dk_set(bg_blue    "${ESC}[44m")
-	dk_set(bg_magenta "${ESC}[45m")
-	dk_set(bg_cyan    "${ESC}[46m")
-	dk_set(bg_white   "${ESC}[47m")
-
-	# Foreground Colors (Bright)
-	dk_set(Black      "${ESC}[90m")
-	dk_set(Red        "${ESC}[91m")
-	dk_set(Green      "${ESC}[92m")
-	dk_set(Yellow     "${ESC}[93m")
-	dk_set(BLUE       "${ESC}[94m")
-	dk_set(Magenta    "${ESC}[95m")
-	dk_set(Cyan       "${ESC}[96m")
-	dk_set(White      "${ESC}[97m")
-
-	# Background Colors (Bright)
-	dk_set(BG_Black   "${ESC}[100m")
-	dk_set(BG_Red     "${ESC}[101m")
-	dk_set(BG_Green   "${ESC}[102m")
-	dk_set(BG_Yellow  "${ESC}[103m")
-	dk_set(BG_Blue    "${ESC}[104m")
-	dk_set(BG_Magenta "${ESC}[105m")
-	dk_set(BG_Cyan    "${ESC}[106m")
-	dk_set(BG_White   "${ESC}[107m")
 endfunction()
 
 function(ASCII_ADD)

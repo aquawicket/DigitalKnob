@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_notice msg)
 	dk_debugFunc(${ARGV})
 	
-	message(NOTICE "${Yellow}${msg}${clr}")
+	message(NOTICE "${lyellow}${msg}${clr}")
 endfunction()
 
 
@@ -21,5 +21,5 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_notice("Test message from dk_notice")
 endfunction()

@@ -20,11 +20,11 @@ function(dk_assert expression)
 		dk_replaceAll("${expression}"  " "  ""  var)
 		
 		if("${var}")
-			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			message(FATAL_ERROR "${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} ${expression} ${clr}")
+			message(FATAL_ERROR "${bg_red} ${expression} ${clr}")
 		endif()
-		dk_exit() #FIXME:  is this needed?
+		dk_exit()
 	endif()
 endfunction()
 

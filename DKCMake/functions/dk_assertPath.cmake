@@ -16,9 +16,9 @@ function(dk_assertPath path)
 		dk_replaceAll("${path}"  " "  ""  var)
 		
 		if("${var}")
-			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			message(FATAL_ERROR "${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${BLACK}${STACK_HEADER}${clr}${bg_red} ${path} ${clr}")
+			message(FATAL_ERROR "${bg_red} ${path} ${clr}")
 		endif()
 		dk_exit() #FIXME:  is this needed?
 	endif()
@@ -33,5 +33,5 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_assertPath("C:/Windows/System32")
 endfunction()

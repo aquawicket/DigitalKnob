@@ -18,7 +18,7 @@ function(dk_libRelease lib_path)
 	
 	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
-		message("${Yellow}MISSING:${yellow} ${lib_path}${clr}")
+		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
 		dk_set(QUEUE_BUILD ON)
 	endif()
 	
