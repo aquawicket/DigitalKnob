@@ -10,6 +10,7 @@ if(!$dk_echo){ $dk_echo = 1 } else{ return }
 #
 function Global:dk_echo($message) {
 	dk_debugFunc
+	if($(__ARGC__) -eq 0){ Write-Host ""; return }
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	# https://stackoverflow.com/a/818118

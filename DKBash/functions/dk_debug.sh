@@ -1,7 +1,12 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
-
+#dk_set ENABLE_dk_debug 0
+#dk_set TRACE_ON_DEBUG 1
+#dk_set LINE_ON_DEBUG 1
+#dk_set PAUSE_ON_DEBUG 1
+#dk_set HALT_ON_DEBUG 1
+#dk_set DEBUG_TAG " DEBUG: "
 ##################################################################################
 # dk_debug(<message>)
 #
@@ -11,11 +16,12 @@
 #
 dk_debug (){
 	dk_debugFunc
-
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	
+	
 	[ ${ENABLE_dk_debug-1} -ne 1 ] && return
 	msg="$1"
 	dk_echo "${blue-}${DEBUG_TAG-}${msg}${clr-}"
-
 	[ ${TRACE_ON_DEBUG-0} -eq 1 ] && dk_echo "\n${blue}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
 	[ ${LINE_ON_DEBUG-0} -eq 1 ]  && dk_echo "\n${blue}*** LINE_ON_DEBUG ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true #OR HALT AND NOT NO_HALT)
 	[ ${PAUSE_ON_DEBUG-0} -eq 1 ] && dk_echo "\n${blue}*** PAUSE_ON_DEBUG ***${clr}" && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
@@ -26,9 +32,7 @@ dk_debug (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_echo "test dk_echo message"
-	dk_debug "test dk_debug message"
-	echo "...next line..."
+	dk_debugFunc
 	
+	dk_debug "test dk_debug message"
 }

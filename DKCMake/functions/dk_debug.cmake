@@ -1,19 +1,12 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ##include_guard()
 
-
-if(NOT DEFINED ENABLE_dk_debug)
-	set(ENABLE_dk_debug 1 CACHE INTERNAL "")
-endif()
-if(NOT DEFINED TRACE_ON_DEBUG)
-	set(TRACE_ON_DEBUG 0 CACHE INTERNAL "")
-endif()
-if(NOT DEFINED PAUSE_ON_DEBUG)
-	set(PAUSE_ON_DEBUG 0 CACHE INTERNAL "")
-endif()
-if(NOT DEFINED HALT_ON_DEBUG)
-	set(HALT_ON_DEBUG 0 CACHE INTERNAL "")
-endif()
+#dk_set(ENABLE_dk_debug 0)
+#dk_set(TRACE_ON_DEBUG 1)
+#dk_set(LINE_ON_DEBUG 1)
+#dk_set(PAUSE_ON_DEBUG 1)
+#dk_set(HALT_ON_DEBUG 1)
+#dk_set(DEBUG_TAG " DEBUG: ")
 ##################################################################################
 # dk_debug(msg)
 #
@@ -27,6 +20,10 @@ function(dk_debug msg)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
+	
+	if(NOT DEFINED ENABLE_dk_debug)
+		set(ENABLE_dk_debug 1 CACHE INTERNAL "")
+	endif()
 	if(NOT ENABLE_dk_debug)
 		return()
 	endif()

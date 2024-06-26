@@ -4,7 +4,7 @@ if(!$dk_load){ $dk_load = 1 } else{ return }
 #####################################################################
 # dk_load(funcName OR funcPath)
 #
-#	Source a dk_powershell function. Download it if needed then parse it and source all of it's content dk_powershell functions recursivley.
+#	Source a dkpowershell function. Download it if needed then parse it and source all of it's content dkpowershell functions recursivley.
 #
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.ps1" file, or a full filepath to a .ps1 file.
 #
@@ -83,7 +83,7 @@ function Global:dk_load ($var) {
 		if(Test-Path "${funcPath}"){
 			#Write-Host ". ${funcPath}"
 			#. ${funcPath}
-			Write-Host "Import-Module -Global ${funcPath}"
+			#Write-Host "Import-Module -Global ${funcPath}"
 			Import-Module -Global ${funcPath}
 			return
 		}
