@@ -19,10 +19,10 @@ call DK.cmd
 	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	
 	
-	if not defined ENABLE_dk_debug  call set "ENABLE_dk_debug=1"
+	if not defined ENABLE_dk_debug  set "ENABLE_dk_debug=1"
 	if "%ENABLE_dk_debug%" neq "1"  goto:eof
 	setlocal enableDelayedExpansion       
-		call dk_set _message_ %*
+		set "_message_=%~1"
 		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!    &:: if _message_ starts and ends with quotes, remove them
 
 		call dk_echo "%blue%%DEBUG_TAG%%_message_%%clr%"

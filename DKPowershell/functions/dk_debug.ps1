@@ -16,7 +16,7 @@ if(!$dk_debug){ $dk_debug = 1 } else{ return }
 #
 function Global:dk_debug($message) {
 	dk_debugFunc
-	#if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	#$allArgs = $PsBoundParameters.Values + $args
 	

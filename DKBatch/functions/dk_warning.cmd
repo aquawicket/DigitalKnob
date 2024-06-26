@@ -1,12 +1,12 @@
 @echo off
 call DK.cmd
 
-if not defined ENABLE_dk_warning  call dk_set ENABLE_dk_warning 1
-if not defined TRACE_ON_WARNING   call dk_set TRACE_ON_WARNING 0
-if not defined LINE_ON_WARNING    call dk_set LINE_ON_WARNING 0
-if not defined PAUSE_ON_WARNING   call dk_set PAUSE_ON_WARNING 0
-if not defined HALT_ON_WARNING    call dk_set HALT_ON_WARNING 0
-::WARNING_TAG="  WARNING: "
+::call dk_set ENABLE_dk_warning 0
+::call dk_set TRACE_ON_WARNING 1
+::call dk_set LINE_ON_WARNING 1
+::call dk_set PAUSE_ON_WARNING 1
+::call dk_set HALT_ON_WARNING 1
+::call dk_set WARNING_TAG=" WARNING: "
 ::################################################################################
 ::# dk_warning(message)
 ::#
@@ -16,16 +16,15 @@ if not defined HALT_ON_WARNING    call dk_set HALT_ON_WARNING 0
 ::#
 :dk_warning () {
 	call dk_debugFunc
-
-	if "%ENABLE_dk_warning%" neq "1" goto:eof
-	::if "%*"==""  echo. & goto:eof	                                                               &:: if arguments are empty, print a new line
-
+	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
+	
+	
+	if not defined ENABLE_dk_warning  set "ENABLE_dk_warning=1"
+	if "%ENABLE_dk_warning%" neq "1" goto:eof                                                               &:: if arguments are empty, print a new line
 	setlocal enableDelayedExpansion	
-		call dk_set _message_ %*
+		set "_message_=%~1"
 		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!           &:: if _message_ starts and ends with quotes, remove them
 
-		if not defined yellow (call dk_set yellow [33m)
-		if not defined clr (call dk_set clr [0m)
 		call dk_echo "%yellow%%WARNING_TAG%%_message_%%clr%"
 		if "%TRACE_ON_WARNING%"=="1" call dk_echo "%yellow%*** TRACE_ON_WARNING ***%clr%"  & call dk_stacktrace
 		if "%LINE_ON_WARNING%"=="1"  call dk_echo "%yellow%*** LINE_ON_WARNING ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
