@@ -857,6 +857,8 @@ if(CMAKE_BUILD_TYPE)
 	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
 endif()
 if(CMAKE_TOOLCHAIN_FILE)
+	# FIXME: make sure the path uses foward slashes
+	dk_replaceAll(${CMAKE_TOOLCHAIN_FILE}  "\\"  "/"  CMAKE_TOOLCHAIN_FILE)
 	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
 endif()
 if(CMAKE_MAKE_PROGRAM)
