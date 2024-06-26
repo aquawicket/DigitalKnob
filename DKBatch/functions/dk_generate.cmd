@@ -9,6 +9,7 @@ call DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
+	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     call dk_echo
 	call dk_info "##################################################################"
@@ -99,11 +100,11 @@ call DK.cmd
 	
 	
 ::	###### CMAKE_TOOLCHAIN_FILE ######
-	call dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
-	call dk_assertPath TOOLCHAIN
-	call dk_printVar TOOLCHAIN
-	call dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
-	if exist %TOOLCHAIN% call dk_appendCmakeArgs -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+::	call dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
+::	call dk_assertPath TOOLCHAIN
+::	call dk_printVar TOOLCHAIN
+::	call dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
+::	if exist %TOOLCHAIN% call dk_appendCmakeArgs -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
 	
 ::	###### WSL CMake Fix ######
@@ -125,3 +126,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	
+	call dk_generate
+goto:eof
