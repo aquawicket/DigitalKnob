@@ -8,7 +8,7 @@
 DK (){
 	###### Initialize Language specifics ######
 	dk_init
-	dk_echo "DKINIT($*)"
+	#dk_echo "DKINIT($*)"
 
 
 	###### Reload Main Script with bash ######
@@ -17,13 +17,13 @@ DK (){
 
 	############ Get DKBASH variables ############
 	dk_DKBASH_VARS
-	dk_printVar DKBASH_DIR
-	dk_printVar DKBASH_FUNCTIONS_DIR
+	#dk_printVar DKBASH_DIR
+	#dk_printVar DKBASH_FUNCTIONS_DIR
 
 
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS
-	dk_printVar DKHTTP_DKBASH_FUNCTIONS_DIR
+	#dk_printVar DKHTTP_DKBASH_FUNCTIONS_DIR
 
 
 	############ Setup dk_callStack ############
@@ -34,10 +34,10 @@ DK (){
 
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS
-	dk_printVar DKSCRIPT_PATH
-	dk_printVar DKSCRIPT_ARGS
-	dk_printVar DKSCRIPT_DIR
-	dk_printVar DKSCRIPT_NAME
+	#dk_printVar DKSCRIPT_PATH
+	#dk_printVar DKSCRIPT_ARGS
+	#dk_printVar DKSCRIPT_DIR
+	#dk_printVar DKSCRIPT_NAME
 
 
 	############ Setup KeepOpen ############
@@ -66,7 +66,7 @@ DK (){
 	dk_source dk_exit
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
-	dk_call dk_color
+	dk_load dk_color
 	dk_call dk_logo
 	
 	###### DKTEST MODE ######
@@ -99,7 +99,7 @@ DK (){
 # dk_init()
 #
 dk_init(){
-	echo "###### DKBash ######"
+	#echo "###### DKBash ######"
 
 	###### fallback functions ######
 	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v $1 1>/dev/null); }
@@ -137,7 +137,7 @@ dk_init(){
 dk_reloadWithBash(){
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		dk_export  RELOAD_WITH_BASH 0
-		dk_echo    "reloading with bash . . ."
+		#dk_echo    "reloading with bash . . ."
 		dk_unset   DKINIT
 		dk_export  DKINIT
 		dk_command bash "$0"
@@ -204,10 +204,11 @@ dk_setupKeepOpen(){
 #
 dk_setOptions(){
 	###### Set and check posix mode ######
-	$(set -o posix) && set -o posix && case :$SHELLOPTS: in
-	  *:posix:*) echo "POSIX mode enabled" ;;
-	  *)         echo "POSIX mode not enabled" ;;
-	esac
+	$(set -o posix) && set -o posix
+#	case :$SHELLOPTS: in
+#	  *:posix:*) echo "POSIX mode enabled" ;;
+#	  *)         echo "POSIX mode not enabled" ;;
+#	esac
 
 	###### Set error trace options ######
 	# https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
@@ -270,7 +271,7 @@ dk_call(){
 		dk_commandExists $1       || dk_load $1
 		dk_commandExists $1       || dk_error "$1: command not found"
 	fi
-	dk_echo "$@"
+	#dk_echo "$@"
 	"$@"
 }
 
@@ -282,7 +283,7 @@ dk_call(){
 dk_command(){
 	dk_commandExists $1 || dk_install $1
 	dk_commandExists $1 || dk_error "$1: command not found"
-	dk_echo "$@"
+	#dk_echo "$@"
 	"$@"
 }
 

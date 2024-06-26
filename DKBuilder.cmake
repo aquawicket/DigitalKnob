@@ -1,8 +1,7 @@
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-#include_guard()
 
+###### DKBuilder ######
 
-###### DK_SETUP ######
+###### DKINIT ######
 if(NOT EXISTS DKCMake)
 	file(MAKE_DIRECTORY DKCMake)
 endif()
@@ -12,8 +11,6 @@ endif()
 if(NOT EXISTS DKCMake/functions/DK.sh)
 	file(DOWNLOAD "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKCMake/functions/DK.cmake" "DKCMake/functions/DK.cmake")
 endif()
-
-###### DK_INIT ######
 include(DKCMake/functions/DK.cmake)
 
 

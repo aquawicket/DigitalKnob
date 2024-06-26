@@ -99,7 +99,7 @@ call DK.cmd
 		set "bg_RGB=%ESC%[48;2;"			&:: %bg_RGB%150;100;50m      = %ESC%[38;2;150;100;50m
 		
 		
-		if defined %1 call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
+		call dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
 	goto:USE_COLOR_endif	
 	:USE_COLOR_else
 		::call dk_unset ESC
