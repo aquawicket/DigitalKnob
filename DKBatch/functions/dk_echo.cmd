@@ -10,8 +10,8 @@ call DK.cmd
 ::#
 :dk_echo () {
     call dk_debugFunc
-    if [%*] equ [] (echo. & goto:eof)
-	::if "%~1" equ "" (echo. & goto:eof)
+	if "%~1" equ "" (echo. & goto:eof)
+	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments")
 	
     setlocal enableDelayedExpansion
         set "_message_=%~1"	
@@ -29,8 +29,8 @@ goto:eof
     call dk_debugFunc
 	
 	echo "This is a normal echo commmand"
-	call dk_echo
-	call dk_echo
+	call dk_echo ""
+	call dk_echo ""
 	call dk_echo "This is a dk_echo line"
     call dk_echo "%cyan%This is dk_echo with color %clr%"
 goto:eof
