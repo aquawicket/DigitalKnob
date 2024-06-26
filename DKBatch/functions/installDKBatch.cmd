@@ -1,5 +1,8 @@
 <!-- ::################## ELEVATE ##################
 @echo off
+echo 0 = %0
+echo * = %*
+pauses
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto :admin
 if "%~2" == "gotPrivileges" goto :gotPrivileges
@@ -10,12 +13,14 @@ if "%~2" == "gotPrivileges" goto :gotPrivileges
 		echo "elevating permissions . . ."
 		setlocal DisableDelayedExpansion
 		set "DKSCRIPT_PATH=%~dpnx0"
+		set "DKSCRIPT_DIR=%~dp0"
+		if "%2" neq "" set "DKSCRIPT_PATH=%~dpnx2"
+		if "%2" neq "" set "DKSCRIPT_DIR=%~dp2"
 		setlocal EnableDelayedExpansion
 		cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges & exit
 	:gotPrivileges
 		echo gotPrivileges
-		pause
-		setlocal & cd /d %~dp0
+		setlocal & cd /d %DKSCRIPT_DIR%
 		cmd /k "%~0" elevated
 	--><job><script language="VBScript">
 			Set oShell = CreateObject( "WScript.Shell" )
@@ -31,7 +36,7 @@ if "%~2" == "gotPrivileges" goto :gotPrivileges
 	:admin
 		echo admin
 		::echo Administrator privileges detected
-		cd /d %~dp0
+		cd /d %DKSCRIPT_DIR%
 ::goto:eof
 
 ::###################### ELEVATE ##################	
