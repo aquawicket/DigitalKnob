@@ -117,7 +117,7 @@ function dk_init(){
 #
 function dk_DKPOWERSHELL_VARS(){
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	$DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR -replace '\\', '/';
+	$global:DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR -replace '\\', '/';
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
 }
 
@@ -143,9 +143,11 @@ function dk_setupCallstack(){
 #
 function dk_DKSCRIPT_VARS(){
 	$global:DKSCRIPT_PATH = Get-EntryPointAbsFilePath
+	$global:DKSCRIPT_PATH = $DKSCRIPT_PATH -replace '\\', '/';
 	if(!(Test-Path ${DKSCRIPT_PATH})){ dk_echo "DKSCRIPT_PATH not found!"; exit } 
 	$global:DKSCRIPT_ARGS = $args
 	$global:DKSCRIPT_DIR = Split-Path -Parent $DKSCRIPT_PATH
+	$global:DKSCRIPT_DIR = $DKSCRIPT_DIR -replace '\\', '/';
 	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_echo "DKSCRIPT_DIR not found!"; exit } 
 	$global:DKSCRIPT_NAME = Split-Path -Leaf $DKSCRIPT_PATH
 }

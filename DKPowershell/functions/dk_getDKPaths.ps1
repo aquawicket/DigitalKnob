@@ -11,7 +11,7 @@ function Global:dk_getDKPaths  (){
 	
 	
 	$global:DIGITALKNOB_DIR = "$env:HOMEDRIVE$env:HOMEPATH/digitalknob"
-	$DIGITALKNOB_DIR = $DIGITALKNOB_DIR -replace '\\', '/';
+	$global:DIGITALKNOB_DIR = $DIGITALKNOB_DIR -replace '\\', '/';
     dk_makeDirectory $DIGITALKNOB_DIR
     dk_printVar DIGITALKNOB_DIR
 
