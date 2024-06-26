@@ -18,8 +18,6 @@ function Global:dk_printVar($var) {
 		if($name[0] -eq "$"){ $variable = $var }
 		if(($name[1] -eq "$") -and ($name[1] -eq "$")){ $variable = $var }
 	}
-
-	dk_validate clr "dk_load dk_color"
 	
 	if(($variable -is [array]) -or ($variable -is [System.Collections.ArrayList])){ 
 		if($variable.count){

@@ -169,10 +169,6 @@ dk_color 1
 function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
-	dk_color 1
-	dk_color 0
-	dk_color 1
-	
 	dk_echo ""
 	dk_echo "${black}${bg_lblack}           Styles            ${clr}"
 	dk_echo "`${clr}        ${clr} default ${clr}"
