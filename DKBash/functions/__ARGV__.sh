@@ -25,8 +25,18 @@ __ARGV__ (){
 
 
 
+
+
+test_function(){
+	echo "ARGV = $(__ARGV__ 1)"					# as a string
+	
+	ARGV=($(__ARGV__ 1))						# as an array
+	for ((i=0; i < ${#ARGV[@]}; i++ )); do 
+		echo "ARGV[$i] = ${ARGV[$i]}";
+	done
+}
+
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
-	echo "$(__ARGV__)"
-
+	test_function abc 123
 }
