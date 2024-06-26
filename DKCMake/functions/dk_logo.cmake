@@ -1,0 +1,21 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+##include_guard()
+
+################################################################################
+# dk_logo()
+#
+function(dk_logo)
+	dk_color()
+	message("${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______        ")
+	message("${lblue}   |     \\   |   |  ____   |      |    |_____| |      |____/  | \\  | |     | |_____]       ")
+	message("${blue}   |_____/ __|__ |_____| __|__    |    |     | |_____ |    \\_ |  \\_| |_____| |_____]  ${clr}")
+endfunction()
+
+
+
+
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc(${ARGV})
+	
+	dk_logo()
+endfunction()
