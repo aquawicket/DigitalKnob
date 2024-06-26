@@ -1,17 +1,13 @@
-
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
-
-::NET FILE 1>NUL 2>NUL & IF ERRORLEVEL 0 (ECHO You must right-click and select & ECHO "RUN AS ADMINISTRATOR"  to run this batch. & ECHO. & PAUSE) else (echo "ADMIN")
 
 ::####################################################################
 ::# DKINIT()
 ::#
 ::#
 :DK (){
-	call :dk_echo "DKINIT(%*)"
-	call :dk_echo "0 = %0"
-	call :dk_echo "CD = %CD%"
+	::call :dk_echo "DKINIT(%*)"
+
 	::###### Initialize Language specifics ######
 	call :dk_init
 
@@ -20,12 +16,12 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	::############ Get DKBATCH variables ############
 	call :dk_DKBATCH_VARS
-	call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
-	call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
+	::call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
+	::call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	::############ Get DKHTTP variables ############
 	call :dk_DKHTTP_VARS
-	call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
+	::call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
 	
 	::############ Setup dk_callStack ############
 	call :dk_setupCallstack
@@ -33,12 +29,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	:dk_callStackReturn
 
 	::############ Get DKSCRIPT variables ############
-	::call :dk_DKSCRIPT_VARS
-	for %%Z in (%1) do set DKSCRIPT_NAME=%%~nZ
-	for %%Z in (%1) do set DKSCRIPT_DIR=%%~dpZ
-	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	set "DKSCRIPT_ARGS=%__ARGS__%"
-	
+	call :dk_DKSCRIPT_VARS
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
@@ -136,10 +127,8 @@ goto:eof
 	set "DKSCRIPT_PATH=%__FILE__%"
 	if not exist "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%0"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
-	::call dk_getDirname %DKSCRIPT_PATH% DKSCRIPT_DIR
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	::call dk_getBasename %DKSCRIPT_PATH% DKSCRIPT_NAME
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
 	call dk_source dk_load
 goto:eof

@@ -3,25 +3,16 @@
 
 net session >nul 2>&1
 IF %ERRORLEVEL% EQU 0 goto :admin
-echo NOT AN ADMIN!
-pause
-if "%~1" == "elevated" goto :elevate_end
+if "%~1" == "elevated" goto :admin
 if "%~2" == "gotPrivileges" goto :gotPrivileges
 	echo "elevating permissions . . ."
 	setlocal DisableDelayedExpansion
 	set "DKSCRIPT_PATH=%~dpnx0"
 	setlocal EnableDelayedExpansion
-	pause
 	cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges & exit
 :gotPrivileges
-	echo gotPrivileges
 	setlocal & cd /d %~dp0
-	echo cmdk
-	pause
 	cmd /k "%~0" elevated
-:elevate_end
-	echo elevate_end
-	setlocal & cd /d %~dp0
 --><job><script language="VBScript">
 		Set oShell = CreateObject( "WScript.Shell" )
 		DKSCRIPT_PATH=oShell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%")
@@ -34,7 +25,7 @@ if "%~2" == "gotPrivileges" goto :gotPrivileges
 		UAC.ShellExecute "cmd", args, "", "runas", 1
 	</script></job>
 :admin	
-	echo Administrator PRIVILEGES Detected!
+	echo Administrator privileges detected
 	cd /d %~dp0
 ::###################### ELEVATE ##################	
 	
