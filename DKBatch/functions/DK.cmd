@@ -52,12 +52,12 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::dk_setOptions
 	
 	::############ LOAD FUNCTION FILES ############
-	::call dk_load %DKSCRIPT_PATH%
+	call dk_color
 	call dk_logo
+	::call dk_load %DKSCRIPT_PATH%
 	
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
-	call dk_color
 	echo.
     call dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
 	echo.

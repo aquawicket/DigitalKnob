@@ -5,7 +5,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_logo()
 #
 function(dk_logo)
-	dk_color()
+	dk_debugFunc(${ARGV})
+	
+	
 	message("${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______        ")
 	message("${lblue}   |     \\   |   |  ____   |      |    |_____| |      |____/  | \\  | |     | |_____]       ")
 	message("${blue}   |_____/ __|__ |_____| __|__    |    |     | |_____ |    \\_ |  \\_| |_____| |_____]  ${clr}")

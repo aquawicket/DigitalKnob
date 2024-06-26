@@ -52,7 +52,7 @@ DK (){
 	dk_setOptions
 
 
-	###### Script loader ######
+	############ LOAD FUNCTION FILES ############
 	dk_source dk_return
 	dk_source __TIME__
 	dk_source __FILE__
