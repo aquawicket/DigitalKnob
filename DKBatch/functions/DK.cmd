@@ -1,34 +1,31 @@
+
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
-
-
-
-
-
-
+::NET FILE 1>NUL 2>NUL & IF ERRORLEVEL 0 (ECHO You must right-click and select & ECHO "RUN AS ADMINISTRATOR"  to run this batch. & ECHO. & PAUSE) else (echo "ADMIN")
 
 ::####################################################################
 ::# DKINIT()
 ::#
 ::#
 :DK (){
-	::call :dk_echo "DKINIT(%*)"
-	
+	call :dk_echo "DKINIT(%*)"
+	call :dk_echo "0 = %0"
+	call :dk_echo "CD = %CD%"
 	::###### Initialize Language specifics ######
 	call :dk_init
-	
+
 	::###### Reload Main Script with cmd ######
 	call :dk_reloadWithCmd %*
-
+	
 	::############ Get DKBATCH variables ############
 	call :dk_DKBATCH_VARS
-	::call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
-	::call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
-	
+	call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
+	call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
+	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	::############ Get DKHTTP variables ############
 	call :dk_DKHTTP_VARS
-	::call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
+	call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
 	
 	::############ Setup dk_callStack ############
 	call :dk_setupCallstack
@@ -36,14 +33,19 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	:dk_callStackReturn
 
 	::############ Get DKSCRIPT variables ############
-	call :dk_DKSCRIPT_VARS
-	::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
-	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
-	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
-	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+	::call :dk_DKSCRIPT_VARS
+	for %%Z in (%1) do set DKSCRIPT_NAME=%%~nZ
+	for %%Z in (%1) do set DKSCRIPT_DIR=%%~dpZ
+	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	set "DKSCRIPT_ARGS=%__ARGS__%"
 	
+	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
+	call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
+	call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+
 	::############ Setup KeepOpen ############
-	call :dk_setupKeepOpen
+	::	call :dk_setupKeepOpen
 	
 	::##### CD into the DKSCRIPT_DIR directory #####
 	::cd "%DKSCRIPT_DIR%"
@@ -55,7 +57,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call dk_color
 	call dk_logo
 	::call dk_load %DKSCRIPT_PATH%
-	
+
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
 	echo.
@@ -91,7 +93,7 @@ goto:eof
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%" goto:eof
 	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
-	call :dk_setupKeepOpen
+	::call :dk_setupKeepOpen
 goto:eof
 
 ::##################################################################################
@@ -101,7 +103,11 @@ goto:eof
     for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
     set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-    set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
+	cd %DKBATCH_FUNCTIONS_DIR%
+	
+	echo PATH = %PATH%
 goto:eof
 
 ::##################################################################################
@@ -143,7 +149,7 @@ goto:eof
 ::#
 :dk_setupKeepOpen (){
 	::if "%KEEP_CONSOLE_OPEN%" neq "1" goto:eof
-	set "clear_screen=cls ^&" 
+	set "clear_screen=cls ^&"
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %clear_screen% set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
@@ -153,3 +159,6 @@ goto:eof
 	
 	%DKSCRIPT_NAME%
 goto:eof
+
+
+
