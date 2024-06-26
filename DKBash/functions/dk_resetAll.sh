@@ -10,14 +10,14 @@ dk_resetAll (){
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	dk_clearScreen
-	dk_echo
-	dk_echo
+	dk_echo ""
+	dk_echo ""
 	dk_info "Do you want to reset the entire local repository . . . ?"
 	dk_info "This will delete digitalknob, everything will be reset,"
 	dk_info "and the repository will be re-cloned. All libraries and tools"
 	dk_info "will be redk_downloaded and rebuild from start. Save any changes"
 	dk_info "you wish to commit or save beforehand."
-	dk_echo
+	dk_echo ""
 		
 	dk_confirm || return
 		

@@ -53,7 +53,7 @@ dk_installPowershell (){
 		return ${true};
 	fi
 	
-	dk_echo
+	dk_echo ""
 	dk_info "Installing Powershell . . ."
 	dk_download "${POWERSHELL_DL}" "${DKDOWNLOAD_DIR}/${POWERSHELL_DL_FILE}"
 	dk_smartExtract "${DKDOWNLOAD_DIR}/${POWERSHELL_DL_FILE}" "${POWERSHELL}"

@@ -10,12 +10,12 @@ dk_removeAll (){
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	dk_clearScreen
-	dk_echo
-	dk_echo
+	dk_echo ""
+	dk_echo ""
 	dk_info "Do you want to delete the entire local repository . . . ?"
 	dk_info "This will delete the local digitalknob branch repository"
 	dk_info "Save any un-commited changes first."
-	dk_echo
+	dk_echo ""
 		
 	dk_confirm || return
 		

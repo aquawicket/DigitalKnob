@@ -56,14 +56,8 @@ function(DKINIT)
 
 	###### load default function ####
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
-	include(${DKCMAKE_FUNCTIONS_DIR}/dk_eval.cmake)
-	include(${DKCMAKE_FUNCTIONS_DIR}/dk_replaceAll.cmake)
-	include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
-	#dk_load(dk_eval)
-	
 	dk_load(dk_color)
-	#dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
-
+	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
@@ -71,7 +65,7 @@ function(DKINIT)
 	message("DKCMAKE_FUNCTIONS_DIR = ${DKCMAKE_FUNCTIONS_DIR}")
 	if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
 		message("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
-		include(${DKSCRIPT_PATH})
+		include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 		DKTEST()
 		
 		message("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")

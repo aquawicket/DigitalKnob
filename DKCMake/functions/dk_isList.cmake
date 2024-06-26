@@ -63,5 +63,8 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	list(APPEND myList "myList item 0")
+	list(APPEND myList "myList item 1")
+	list(APPEND myList "myList item 2")
+	dk_isList(rtn myList)
 endfunction()

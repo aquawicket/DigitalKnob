@@ -11,13 +11,13 @@ dk_printColors (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m STYLES ${clr}"
 	dk_echo "\${clr}        ${clr}Reset${clr}"
 	dk_echo "\${bold}       ${bold}Bold${clr}"
 	dk_echo "\${underline}  ${underline}Underline${clr}"
 	dk_echo "\${inverse}    ${inverse}Inverse${clr}"
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m NORMAL FOREGROUND COLORS ${clr}"
 	dk_echo "\${black}      ${black}Black${clr}"
 	dk_echo "\${red}        ${red}Red${clr}"
@@ -27,7 +27,7 @@ dk_printColors (){
 	dk_echo "\${magenta}    ${magenta}Magenta${clr}"
 	dk_echo "\${cyan}       ${cyan}Cyan${clr}"
 	dk_echo "\${white}      ${white}White${clr}"
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m NORMAL BACKGROUND COLORS ${clr}"
 	dk_echo "\${bg_black}   ${bg_black}Black${clr}"
 	dk_echo "\${bg_red}     ${bg_red}Red${clr}"
@@ -37,7 +37,7 @@ dk_printColors (){
 	dk_echo "\${bg_magenta} ${bg_magenta}Magenta${clr}"
 	dk_echo "\${bg_cyan}    ${bg_cyan}Cyan${clr}"
 	dk_echo "\${bg_white}   ${bg_white}White${clr}"
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m STRONG FOREGROUND COLORS ${clr}"
 	dk_echo "\${Black}      ${Black}Black${clr}"
 	dk_echo "\${Red}        ${Red}Red${clr}"
@@ -47,7 +47,7 @@ dk_printColors (){
 	dk_echo "\${Magenta}    ${Magenta}Magenta${clr}"
 	dk_echo "\${Cyan}       ${Cyan}Cyan${clr}"
 	dk_echo "\${White}      ${White}White${clr}"
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m STRONG BACKGROUND COLORS ${clr}"
 	dk_echo "\${BG_Black}   ${BG_Black}Black${clr}"
 	dk_echo "\${BG_Red}     ${BG_Red}Red${clr}"
@@ -57,7 +57,7 @@ dk_printColors (){
 	dk_echo "\${BG_Magenta} ${BG_Magenta}Magenta${clr}"
 	dk_echo "\${BG_Cyan}    ${BG_Cyan}Cyan${clr}"
 	dk_echo "\${BG_White}   ${BG_White}White${clr}"
-	dk_echo
+	dk_echo ""
 	dk_echo "${ESC}[101;93m COMBINATIONS ${clr}"
 	dk_echo "\${ESC}[31m                       ${ESC}[31mred foreground color${clr}"
 	dk_echo "\${ESC}[7m                        ${ESC}[7minverse foreground <-> background${clr}"

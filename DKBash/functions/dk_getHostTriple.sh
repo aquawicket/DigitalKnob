@@ -298,5 +298,5 @@ dk_getHostTriple (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getHostTriple
-	echo "HOST_TRIPLE = ${HOST_TRIPLE}"
+	dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"
 }

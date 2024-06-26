@@ -10,16 +10,16 @@ dk_pickType (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	dk_echo
+	dk_echo ""
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
-	dk_echo	
+	dk_echo ""	
     dk_echo " 1) Debug"
 	dk_echo " 2) Release"
 	dk_echo " 3) All"
 	dk_echo " 4) Clear Screen"
 	dk_echo " 5) Go Back"
 	dk_echo " 6) Exit"
-	dk_echo
+	dk_echo ""
 	
 	read input
 	if [ "${input}" = "1" ]; then
@@ -42,6 +42,7 @@ dk_pickType (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_pickType
 }

@@ -68,7 +68,7 @@ dk_installCmake (){
 			return ${true};
 		fi
 
-		dk_echo
+		dk_echo ""
 		dk_info "Installing cmake . . ."
 		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
 		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"

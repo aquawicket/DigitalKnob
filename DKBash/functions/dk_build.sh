@@ -10,11 +10,11 @@ dk_build (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	dk_echo
+	dk_echo ""
 	dk_echo "##################################################################"
 	dk_echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	dk_echo
+	dk_echo ""
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
 		if dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
@@ -35,11 +35,11 @@ dk_build (){
 		fi
 	fi
 	
-	dk_echo
+	dk_echo ""
 	dk_echo "##################################################################"
 	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	dk_echo
+	dk_echo ""
 }
 
 

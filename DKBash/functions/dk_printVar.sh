@@ -27,14 +27,14 @@ dk_printVar (){
 		
 		# IS VARIABLE
 		if [[ $declaration == "declare -- "* ]]; then
-			dk_echo "${cyan-}VARIABLE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}VARIABLE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS ARRAY
 		if [[ $declaration =~ "declare -a "* ]]; then
 			for ((i=0; i < ${#_reference_[@]}; i++ )); do 
-				dk_echo "${cyan-}ARRAY:\$${!_reference_}[$i] =${blue-} '${_reference_[$i]}'${clr-}";
+				dk_echo "${cyan-}ARRAY:${!_reference_}[$i] =${blue-} '${_reference_[$i]}'${clr-}";
 			done
 			return 0
 		fi
@@ -56,63 +56,63 @@ dk_printVar (){
 		# IS FUNCTION
 		if [[ $declaration =~ "declare -f "* ]]; then
 			_value=$(type $varname | sed '1,1d')
-			dk_echo "${cyan-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
+			dk_echo "${cyan-}FUNCTION:$varname =${blue-} '${_value}'${clr-}"
 			return 0
 		fi
 			
 		# IS INT
 		if [[ $declaration =~ "declare -i "* ]]; then
-			dk_echo "${cyan-}INT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}INT:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS LOWERCASE
 		if [[ $declaration =~ "declare -l "* ]]; then
-			dk_echo "${cyan-}LOWERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}LOWERCASE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS REFERENCE
 		if [[ $declaration =~ "declare -n "* ]]; then
-			dk_echo "${cyan-}REFERENCE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}REFERENCE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS READ_ONLY
 		if [[ $declaration =~ "declare -r "* ]]; then
-			dk_echo "${cyan-}READ_ONLY:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}READ_ONLY:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS TRACE
 		if [[ $declaration =~ "declare -t "* ]]; then
-			dk_echo "${cyan-}TRACE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}TRACE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS UPPERCASE
 		if [[ $declaration =~ "declare -u "* ]]; then
-			dk_echo "${cyan-}UPPERCASE:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}UPPERCASE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 			
 		# IS EXPORT
 		if [[ $declaration =~ "declare -x "* ]]; then
-			dk_echo "${cyan-}EXPORT:\$${!_reference_} =${blue-} '$_reference_'${clr-}"
+			dk_echo "${cyan-}EXPORT:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
 		fi
 	fi
 	
 	# IS VARIABLE
 	if [ -n "${!varname+x}" ]; then
-		dk_echo "${cyan-}VARIABLE:\$$varname =${blue-} '${!varname}'${clr-}"
+		dk_echo "${cyan-}VARIABLE:$varname =${blue-} '${!varname}'${clr-}"
 		return 0
 	fi
 	
 	# IS FUNCTION
 	if [ "$(type -t ${varname})" = "function" ]; then
 		_value=$(type $varname | sed '1,1d')
-		dk_echo "${cyan-}FUNCTION:\$$varname =${blue-} '${_value}'${clr-}"
+		dk_echo "${cyan-}FUNCTION:$varname =${blue-} '${_value}'${clr-}"
 		return 0
 	fi
 
@@ -120,7 +120,7 @@ dk_printVar (){
 	if [ "$(type -t ${varname})" = "alias" ]; then	
 		_value=$(alias $varname)
 		_value=${_value#*=}
-		dk_echo "${cyan-}ALIAS:\$$varname =${blue-} '${_value}'${clr-}"
+		dk_echo "${cyan-}ALIAS:$varname =${blue-} '${_value}'${clr-}"
 		return 0
 	fi
 		

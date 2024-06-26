@@ -12,9 +12,9 @@ dk_pickUpdate (){
 
 	dk_readCache
 	
-	dk_echo
+	dk_echo ""
 	dk_checkGitRemote
-	dk_echo
+	dk_echo ""
 	
 	#dk_printVar _APP_
 	#dk_printVar _TARGET_OS_ 
@@ -34,11 +34,11 @@ dk_pickUpdate (){
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo
+		dk_echo ""
 		dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
-		dk_echo
+		dk_echo ""
 		dk_echo "${red}" 
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
 			dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
@@ -55,7 +55,7 @@ dk_pickUpdate (){
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo
+		dk_echo ""
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
 	fi

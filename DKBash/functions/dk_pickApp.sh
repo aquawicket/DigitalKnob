@@ -10,10 +10,10 @@ dk_pickApp (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	dk_echo
+	dk_echo ""
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
 	
-	dk_echo
+	dk_echo ""
     dk_echo " 1) HelloWorld"
     dk_echo " 2) DKCore"
     dk_echo " 3) DKJavascript"
@@ -26,7 +26,7 @@ dk_pickApp (){
     dk_echo "10) Go Back"
     dk_echo "11) Reload"
 	dk_echo "12) Exit"
-    dk_echo 
+    dk_echo ""
 	
 	read input
 	if [ "$input" = "1" ]; then

@@ -10,26 +10,29 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_printVar var)
 	dk_debugFunc(${ARGV})
 	
-	if(DEFINED "${var}")
-		if("${var}" MATCHES "ENV{") # ENV variables
-			set(ENV_VAR ${var})
-			dk_replaceAll("${ENV_VAR}"  "ENV{"  ""  ENV_VAR)
-			dk_replaceAll("${ENV_VAR}"  "}"  ""  ENV_VAR)
-			message("${cyan}${var} = ${blue}'$ENV{${ENV_VAR}}'${clr}")
-		else()	# regular variables
-			if(DEFINED "${${${${var}}}}")
-				message("${cyan}${var} = ${blue}${${var}} = ${${${var}}} = ${${${${var}}}} = '${${${${${var}}}}}'${clr}")
-			elseif(DEFINED "${${${var}}}")
-				message("${cyan}${var} = ${blue}${${var}} = ${${${var}}} = '${${${${var}}}}'${clr}")
-			elseif(DEFINED "${${var}}")
-				message("${cyan}${var} = ${blue}${${var}} = '${${${var}}}'${clr}")
+
+	if("${var}" MATCHES "ENV{") # ENV variables
+		set(ENV_VAR ${var})
+		dk_replaceAll("${ENV_VAR}"  "ENV{"  ""  ENV_VAR)
+		dk_replaceAll("${ENV_VAR}"  "}"  ""  ENV_VAR)
+		message("${cyan}ENV:${var} = ${blue}'$ENV{${ENV_VAR}}'${clr}")
+	else()	# regular variables
+		if(DEFINED "${${${${var}}}}")
+			message("${cyan}POINTER:${var} = ${blue}${${var}} = ${${${var}}} = ${${${${var}}}} = '${${${${${var}}}}}'${clr}")
+		elseif(DEFINED "${${${var}}}")
+			message("${cyan}POINTER:${var} = ${blue}${${var}} = ${${${var}}} = '${${${${var}}}}'${clr}")
+		elseif(DEFINED "${${var}}")
+			message("${cyan}POINTER:${var} = ${blue}${${var}} = '${${${var}}}'${clr}")
+		elseif(DEFINED "${var}")
+			#dk_isList(isList ${var})  # TODO
+			if(isList)
+				message("${cyan}LIST:${var} = ${blue}'${${var}}'${clr}")
 			else()
-				message("${cyan}${var} = ${blue}'${${var}}'${clr}")
+				message("${cyan}VARIABLE:${var} = ${blue}'${${var}}'${clr}")
 			endif()
+		else()
+			message("${cyan}${var} = ${red}UNDEFINED${clr}")
 		endif()
-	else()  # Undefined
-		message("${cyan}${var} = ${red}UNDEFINED${clr}")
-		return()
 	endif()
 endfunction()
 

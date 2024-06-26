@@ -35,4 +35,6 @@ goto:eof
 	echo ############### Digitalknob ##################
 echo %CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
      %CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
+	 
+	 pause
 goto:eof
