@@ -15,7 +15,6 @@ goto:admin
 		cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges & exit
 	:gotPrivileges
 		echo gotPrivileges
-		pause
 		setlocal & cd /d %~dp0
 		cmd /k "%~0" elevated
 	--><job><script language="VBScript">

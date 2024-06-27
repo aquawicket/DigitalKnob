@@ -1,6 +1,7 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
+
 ::####################################################################
 ::# DKINIT()
 ::#
@@ -19,6 +20,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
 	::call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+	
 	::############ Get DKHTTP variables ############
 	call :dk_DKHTTP_VARS
 	::call :dk_echo "DKHTTP_DKBATCH_FUNCTIONS_DIR = %DKHTTP_DKBATCH_FUNCTIONS_DIR%"
@@ -30,10 +32,18 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
-	::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+	net session >nul 2>&1
+	if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skipElevate) else (echo NOT an Admin)
+	
+	if "%2" == "elevated" elevated=1
+	if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%elevate.cmd" %DKSCRIPT_PATH%)
+	
+	:skipElevate
+	::pause
 
 	::############ Setup KeepOpen ############
 	::	call :dk_setupKeepOpen
@@ -96,11 +106,7 @@ goto:eof
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
     call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
-	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	cd %DKBATCH_FUNCTIONS_DIR%
-	
-	echo PATH = %PATH%
 goto:eof
 
 ::##################################################################################
