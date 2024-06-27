@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
 
 set openssl="%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\openssl-1.0.2h-vs2015\bin\opensslMT"
 set certs="%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security"

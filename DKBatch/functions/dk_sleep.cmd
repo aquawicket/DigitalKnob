@@ -16,3 +16,8 @@ goto:eof
 
 
 :DKTEST ############################## DKTEST ##############################
+	call dk_debugFunc
+	
+	call dk_echo "sleeping for 10 seconds . . ."
+	call dk_sleep 10
+goto:eof
