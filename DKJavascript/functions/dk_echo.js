@@ -13,7 +13,7 @@ document.body.appendChild(js);
 //#
 //#     @msg	- The message to print
 //#
-const dk_echo = function dk_echo(message){
+window.dk_echo = function dk_echo(message){
 	//dk_debugFunc
 	
     console.log(message)
@@ -21,7 +21,7 @@ const dk_echo = function dk_echo(message){
 
 
 
-const DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
     //dk_debugFunc
 	
 	const ESC = "\x1b"

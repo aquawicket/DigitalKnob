@@ -106,13 +106,25 @@ function Global:dk_color (){
 		#dk_unset ESC
 		#dk_unset clr
 		
-		# Styles
+		# Attributes on
 		dk_unset bold
-		dk_unset nobold
+		dk_unset dim
+		dk_unset italic
 		dk_unset underline
-		dk_unset nounderline
+		dk_unset blink
+		dk_unset fblink
 		dk_unset negative
+		dk_unset invisible
+		dk_unset strike
+		
+		# Attributes off
+		dk_unset nobold
+		dk_unset noitalic
+		dk_unset nounderline
+		dk_unset noblink
 		dk_unset nonegative
+		dk_unset visible
+		dk_unset nostrike
 		
 		# Foreground Colors
 		dk_unset black
@@ -173,8 +185,14 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "${black}${bg_lblack}           Styles            ${clr}"
 	dk_echo "`${clr}        ${clr} default ${clr}"
 	dk_echo "`${bold}       ${bold} bold ${clr}"
+	dk_echo "`${dim}        ${dim} dim ${clr}"
 	dk_echo "`${underline}  ${underline} underline ${clr}"
-	dk_echo "`${negative}    ${negative} negative ${clr}"
+	dk_echo "`${blink}      ${blink} blink ${clr}"
+	dk_echo "`${fblink}     ${fblink} fblink ${clr}"
+	dk_echo "`${negative}   ${negative} negative ${clr}"
+	dk_echo "`${invisible}  ${invisible} invisible ${clr}"
+	dk_echo "`${strike}     ${strike} strike ${clr}"
+	dk_echo ""
 	dk_echo ""
 	dk_echo "${black}${bg_lblack}      Foreground Colors      ${clr}"
 	dk_echo "`${black}      ${black} black ${clr}"
@@ -186,6 +204,7 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "`${cyan}       ${cyan} cyan ${clr}"
 	dk_echo "`${white}      ${white} white ${clr}"
 	dk_echo ""
+	dk_echo ""
 	dk_echo "${black}${bg_lblack}      Background Colors      ${clr}"
 	dk_echo "`${bg_black}   ${bg_black} bg_black ${clr}"
 	dk_echo "`${bg_red}     ${bg_red} bg_red ${clr}"
@@ -195,6 +214,7 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "`${bg_magenta} ${bg_magenta} bg_magenta ${clr}"
 	dk_echo "`${bg_cyan}    ${bg_cyan} bg_cyan ${clr}"
 	dk_echo "`${bg_white}   ${bg_white} bg_white ${clr}"
+	dk_echo ""
 	dk_echo ""
 	dk_echo "${black}${bg_lblack} Foreground Colors  bright  ${clr}"
 	dk_echo "`${lblack}      ${lblack} lblack ${clr}"
@@ -206,6 +226,7 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "`${lcyan}       ${lcyan} lcyan ${clr}"
 	dk_echo "`${lwhite}      ${lwhite} lwhite ${clr}"
 	dk_echo ""
+	dk_echo ""
 	dk_echo "${black}${bg_lblack} Background Colors  bright  ${clr}"
 	dk_echo "`${bg_lblack}   ${bg_lblack} bg_lblack ${clr}"
 	dk_echo "`${bg_lred}     ${bg_lred} bg_lred ${clr}"
@@ -216,6 +237,8 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "`${bg_lcyan}    ${bg_lcyan} bg_lcyan ${clr}"
 	dk_echo "`${bg_lwhite}   ${bg_lwhite} bg_lwhite ${clr}"
 	dk_echo ""
+	dk_echo ""
+	dk_echo "${black}${bg_lblack}   RGB Foreground Colors    ${clr}"
 	dk_echo "${RGB}255;10;10m    RGB test (255;0;10)    ${clr}"
 	dk_echo "${RGB}10;255;10m    RGB test (0;255;10)    ${clr}"
 	dk_echo "${RGB}0;0;255m    RGB test (0;0;255)     ${clr}"
@@ -271,12 +294,72 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_echo "${RGB}0;0;5m    RGB test (0;0;5)       ${clr}"
 	dk_echo "${RGB}0;0;0m    RGB test (0;0;0)       ${clr}"
 	dk_echo ""
+	dk_echo ""
+	dk_echo "${black}${bg_lblack}    RGB Background Colors     ${clr}"
+	dk_echo "${bg_RGB}255;10;10m    bg_RGB test (255;0;10)    ${clr}"
+	dk_echo "${bg_RGB}10;255;10m    bg_RGB test (0;255;10)    ${clr}"
+	dk_echo "${bg_RGB}0;0;255m    bg_RGB test (0;0;255)     ${clr}"
+	dk_echo "${bg_RGB}0;0;250m    bg_RGB test (0;0;250)     ${clr}"
+	dk_echo "${bg_RGB}0;0;245m    bg_RGB test (0;0;245)     ${clr}"
+	dk_echo "${bg_RGB}0;0;240m    bg_RGB test (0;0;240)     ${clr}"
+	dk_echo "${bg_RGB}0;0;235m    bg_RGB test (0;0;235)     ${clr}"
+	dk_echo "${bg_RGB}0;0;230m    bg_RGB test (0;0;230)     ${clr}"
+	dk_echo "${bg_RGB}0;0;225m    bg_RGB test (0;0;225)     ${clr}"
+	dk_echo "${bg_RGB}0;0;220m    bg_RGB test (0;0;220)     ${clr}"
+	dk_echo "${bg_RGB}0;0;215m    bg_RGB test (0;0;215)     ${clr}"
+	dk_echo "${bg_RGB}0;0;210m    bg_RGB test (0;0;210)     ${clr}"
+	dk_echo "${bg_RGB}0;0;205m    bg_RGB test (0;0;205)     ${clr}"
+	dk_echo "${bg_RGB}0;0;200m    bg_RGB test (0;0;200)     ${clr}"
+	dk_echo "${bg_RGB}0;0;195m    bg_RGB test (0;0;195)     ${clr}"
+	dk_echo "${bg_RGB}0;0;190m    bg_RGB test (0;0;190)     ${clr}"
+	dk_echo "${bg_RGB}0;0;185m    bg_RGB test (0;0;185)     ${clr}"
+	dk_echo "${bg_RGB}0;0;180m    bg_RGB test (0;0;180)     ${clr}"
+	dk_echo "${bg_RGB}0;0;175m    bg_RGB test (0;0;175)     ${clr}"
+	dk_echo "${bg_RGB}0;0;170m    bg_RGB test (0;0;170)     ${clr}"
+	dk_echo "${bg_RGB}0;0;165m    bg_RGB test (0;0;165)     ${clr}"
+	dk_echo "${bg_RGB}0;0;160m    bg_RGB test (0;0;160)     ${clr}"
+	dk_echo "${bg_RGB}0;0;155m    bg_RGB test (0;0;155)     ${clr}"
+	dk_echo "${bg_RGB}0;0;150m    bg_RGB test (0;0;150)     ${clr}"
+	dk_echo "${bg_RGB}0;0;145m    bg_RGB test (0;0;145)     ${clr}"
+	dk_echo "${bg_RGB}0;0;140m    bg_RGB test (0;0;140)     ${clr}"
+	dk_echo "${bg_RGB}0;0;135m    bg_RGB test (0;0;135)     ${clr}"
+	dk_echo "${bg_RGB}0;0;130m    bg_RGB test (0;0;130)     ${clr}"
+	dk_echo "${bg_RGB}0;0;125m    bg_RGB test (0;0;125)     ${clr}"
+	dk_echo "${bg_RGB}0;0;120m    bg_RGB test (0;0;120)     ${clr}"
+	dk_echo "${bg_RGB}0;0;115m    bg_RGB test (0;0;115)     ${clr}"
+	dk_echo "${bg_RGB}0;0;110m    bg_RGB test (0;0;110)     ${clr}"
+	dk_echo "${bg_RGB}0;0;105m    bg_RGB test (0;0;105)     ${clr}"
+	dk_echo "${bg_RGB}0;0;100m    bg_RGB test (0;0;100)     ${clr}"
+	dk_echo "${bg_RGB}0;0;95m    bg_RGB test (0;0;95)      ${clr}"
+	dk_echo "${bg_RGB}0;0;90m    bg_RGB test (0;0;90)      ${clr}"
+	dk_echo "${bg_RGB}0;0;85m    bg_RGB test (0;0;85)      ${clr}"
+	dk_echo "${bg_RGB}0;0;80m    bg_RGB test (0;0;80)      ${clr}"
+	dk_echo "${bg_RGB}0;0;75m    bg_RGB test (0;0;75)      ${clr}"
+	dk_echo "${bg_RGB}0;0;70m    bg_RGB test (0;0;70)      ${clr}"
+	dk_echo "${bg_RGB}0;0;65m    bg_RGB test (0;0;65)      ${clr}"
+	dk_echo "${bg_RGB}0;0;60m    bg_RGB test (0;0;60)      ${clr}"
+	dk_echo "${bg_RGB}0;0;55m    bg_RGB test (0;0;55)      ${clr}"
+	dk_echo "${bg_RGB}0;0;50m    bg_RGB test (0;0;50)      ${clr}"
+	dk_echo "${bg_RGB}0;0;45m    bg_RGB test (0;0;45)      ${clr}"
+	dk_echo "${bg_RGB}0;0;40m    bg_RGB test (0;0;40)      ${clr}"
+	dk_echo "${bg_RGB}0;0;35m    bg_RGB test (0;0;35)      ${clr}"
+	dk_echo "${bg_RGB}0;0;30m    bg_RGB test (0;0;30)      ${clr}"
+	dk_echo "${bg_RGB}0;0;25m    bg_RGB test (0;0;25)      ${clr}"
+	dk_echo "${bg_RGB}0;0;20m    bg_RGB test (0;0;20)      ${clr}"
+	dk_echo "${bg_RGB}0;0;15m    bg_RGB test (0;0;15)      ${clr}"
+	dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
+	dk_echo "${bg_RGB}0;0;5m    bg_RGB test (0;0;5)       ${clr}"
+	dk_echo "${bg_RGB}0;0;0m    bg_RGB test (0;0;0)       ${clr}"
+	dk_echo ""
+	dk_echo ""
 	dk_echo "${black}${bg_lblack}        Combinations         ${clr}"
 	dk_echo "`${negative}                             ${negative}   inverse foreground <-> background   ${clr}"
 	dk_echo "`${bg_yellow}`${red}                     ${bg_yellow}${red}   yellow backgroud / red foreground   ${clr}"
 	dk_echo "`${bg_yellow}`${red}`${negative}           ${bg_yellow}${red}${negative}        yellow / red inversed          ${clr}"
 	dk_echo "`${bg_red}..`${bg_green}..`${bg_blue}     ${bg_red}    nested   ${bg_green}    colors    ${bg_blue}    text    ${clr}"
 	dk_echo ""
+	dk_echo ""
+	dk_echo "${black}${bg_lblack}        ASCII Color Art       ${clr}"
 	dk_echo ""
 	dk_echo " ${bg_blue} * * * * * * * * * ${bg_red}                                  ${clr}"
 	dk_echo " ${bg_blue}  * * * * * * * *  ${bg_white}                                  ${clr}"

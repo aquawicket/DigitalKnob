@@ -104,13 +104,25 @@ dk_color (){
 		#unset ESC
 		#unset clr
 		
-		# Styles
+		# Attributes on
 		unset bold
-		unset nobold
+		unset dim
+		unset italic
 		unset underline
-		unset nounderline
+		unset blink
+		unset fblink
 		unset negative
+		unset invisible
+		unset strike
+		
+		# Attributes off
+		unset nobold
+		unset noitalic
+		unset nounderline
+		unset noblink
 		unset nonegative
+		unset visible
+		unset nostrike
 		
 		# Foreground Colors
 		unset black
@@ -172,8 +184,14 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_echo "${black}${bg_lblack}           Styles             ${clr}"
 	dk_echo "\${clr}        ${clr} default ${clr}"
 	dk_echo "\${bold}       ${bold} bold ${clr}"
-	dk_echo "\${negative}   ${negative} negative  ${clr}"
+	dk_echo "\${dim}        ${dim} dim ${clr}"
+	dk_echo "\${italic}     ${italic} italic ${clr}"
 	dk_echo "\${underline}  ${underline} underline ${clr}"
+	dk_echo "\${blink}      ${blink} blink ${clr}"
+	dk_echo "\${fblink}     ${fblink} fblink ${clr}"
+	dk_echo "\${negative}   ${negative} negative ${clr}"
+	dk_echo "\${invisible}  ${invisible} invisible ${clr}"
+	dk_echo "\${strike}     ${strike} strike ${clr}"
 	dk_echo ""
 	dk_echo ""
 	dk_echo "${black}${bg_lblack}      Foreground Colors       ${clr}"
