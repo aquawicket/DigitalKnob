@@ -40,10 +40,12 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	
 	::############ Elevate Permissions ############
-	net session >nul 2>&1
-	if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skip_elevate) else (echo NOT an Admin)
-	if "%2" == "elevated" elevated=1
-	if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
+	set "ENABLE_dk_elevate=1"
+	if not defined ENABLE_dk_elevate goto :skip_elevate
+    	net session >nul 2>&1
+	    if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skip_elevate) else (echo NOT an Admin)
+	    if "%2" == "elevated" elevated=1
+	    if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
 	:skip_elevate
 
 
