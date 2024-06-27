@@ -1,37 +1,4 @@
-<!-- ::################## ELEVATE ##################
 @echo off
-
-net session >nul 2>&1
-IF %ERRORLEVEL% EQU 0 goto :admin
-if "%~1" == "elevated" goto :admin
-if "%~2" == "gotPrivileges" goto :gotPrivileges
-	echo "elevating permissions . . ."
-	setlocal DisableDelayedExpansion
-	set "DKSCRIPT_PATH=%~dpnx0"
-	setlocal EnableDelayedExpansion
-	cscript //nologo "%~f0?.wsf" %DKSCRIPT_PATH% gotPrivileges & exit
-:gotPrivileges
-	setlocal & cd /d %~dp0
-	cmd /k "%~0" elevated
---><job><script language="VBScript">
-		Set oShell = CreateObject( "WScript.Shell" )
-		DKSCRIPT_PATH=oShell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%")
-		Set UAC = CreateObject("Shell.Application") 
-		args = "" 
-		For Each strArg in WScript.Arguments 
-		args = args & strArg & " "  
-		Next
-		args = "/c """ + DKSCRIPT_PATH + """ " + args 
-		UAC.ShellExecute "cmd", args, "", "runas", 1
-	</script></job><!--
-:admin	
-	echo Administrator privileges detected
-	cd /d %~dp0
-::###################### ELEVATE ##################	
-
-
-
-
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::call dk_set ENABLE_dk_debug 0
@@ -74,5 +41,3 @@ goto:eof
 	
 	call dk_debug "test dk_debug message"
 goto:eof
-
--->

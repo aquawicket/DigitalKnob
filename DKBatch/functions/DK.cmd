@@ -1,6 +1,5 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
-echo DK(%0 %*)
 
 ::####################################################################
 ::# DKINIT()
@@ -32,21 +31,21 @@ echo DK(%0 %*)
 
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
-	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" if exist "%~3" set "DKSCRIPT_PATH=%~3"
+	::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" if exist "%~3" set "DKSCRIPT_PATH=%~3"
+	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
 	
 	
+	::############ Elevate Permissions ############
 	net session >nul 2>&1
-	if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skipElevate) else (echo NOT an Admin)
-	
+	if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skip_elevate) else (echo NOT an Admin)
 	if "%2" == "elevated" elevated=1
-	if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%elevate.cmd" %DKSCRIPT_PATH%)
-	
-	:skipElevate
-	::pause
+	if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
+	:skip_elevate
+
 
 	::############ Setup KeepOpen ############
 	::	call :dk_setupKeepOpen
