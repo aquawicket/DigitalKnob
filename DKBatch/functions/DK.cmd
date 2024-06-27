@@ -51,9 +51,6 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::############ Setup KeepOpen ############
 	::	call :dk_setupKeepOpen
-	
-	::##### CD into the DKSCRIPT_DIR directory #####
-	::cd "%DKSCRIPT_DIR%"
 
 	::############ Set Options ############
 	::dk_setOptions

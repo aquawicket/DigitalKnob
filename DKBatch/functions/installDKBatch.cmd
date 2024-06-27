@@ -1,16 +1,8 @@
 @echo off
-::echo installDKBatch(%0 %*)
-::pause
-if exist "%~2" goto :install_cmd_fileAssociation
-::###### DKINIT ######
-::set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-::set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
-::set "DKBATCH_FUNCTION_DIR=%DKBRANCH_DIR%\DKBatch\functions"
-::set "DKBATCH_FUNCTION_DIR_=%DKBATCH_FUNCTION_DIR%\"
 
 
 :DKTEST
-:install_cmd_fileAssociation
+:installDKBatch
 	call "%DKBATCH_FUNCTION_DIR_%DK.cmd" %0 %*
 	
 	if not "%*" == "" (goto:run_file)
@@ -31,13 +23,5 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "CMD_FILE=%~2"
-	
-	echo ############### Digitalknob ##################
-::	echo * = %*
-::	echo 1 = %1
-::	echo 2 = %2
-::	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
-::	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
-::	echo CMD_FILE = %CMD_FILE%
 	cmd /c call %CMD_FILE%
 goto:eof
