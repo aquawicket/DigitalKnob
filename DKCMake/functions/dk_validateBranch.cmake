@@ -13,7 +13,7 @@ function(dk_validateBranch)
 	dk_getDirname(${CMAKE_CURRENT_LIST_DIR} FOLDER)
 	dk_set(DKBRANCH "Development")
 	
-	dk_validate(DIGITALKNOB_DIR "dk_getDKPaths")
+	dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
 	if(EXISTS "${DIGITALKNOB_DIR}/${DKBRANCH}/.git")
 #		BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 #		if [ "${BRANCH}" = "${FOLDER}" ]; then

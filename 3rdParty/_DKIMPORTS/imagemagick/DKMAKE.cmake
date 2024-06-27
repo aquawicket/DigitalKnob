@@ -9,10 +9,11 @@ dk_depend(vc_redist)
 
 
 ### IMPORT ###
+dk_validate			(HOST "dk_getHostTriple()")
 UNIX_HOST_dk_import	(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 #WIN_HOST_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.1-28-portable-Q8-x86.zip)
-WIN_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-33-portable-Q16-x86.zip)
-WIN_HOST_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
+WIN_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-34-portable-Q16-x86.zip)
+WIN_HOST_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/magick.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
 
 
 

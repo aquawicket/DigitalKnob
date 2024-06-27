@@ -1,6 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
+
 ###############################################################################
 # dk_getPathToPlugin(plugin rtn_var)
 #
@@ -15,7 +16,8 @@ function(dk_getPathToPlugin plugin rtn_var)
 		dk_info("${ARGV} IS DISABLED")
 		return()
 	endif()
-	
+
+	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 	#file(GLOB children RELATIVE ${DIGITALKNOB_DIR} ${DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
 		#dk_printVar(child)
