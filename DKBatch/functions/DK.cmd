@@ -1,6 +1,6 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
-
+echo DK(%0 %*)
 
 ::####################################################################
 ::# DKINIT()
@@ -32,10 +32,13 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
+	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" if exist "%~3" set "DKSCRIPT_PATH=%~3"
 	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+	
+	
 	net session >nul 2>&1
 	if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skipElevate) else (echo NOT an Admin)
 	

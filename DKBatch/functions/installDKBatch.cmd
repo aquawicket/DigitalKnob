@@ -1,6 +1,7 @@
 @echo off
-
-if "%~1" == "" goto :install_cmd_fileAssociation
+::echo installDKBatch(%0 %*)
+::pause
+if exist "%~2" goto :install_cmd_fileAssociation
 ::###### DKINIT ######
 ::set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 ::set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
@@ -26,6 +27,7 @@ goto:eof
 
 
 :run_file
+	echo dk_installDKBatch(%0 %*)
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "CMD_FILE=%~2"

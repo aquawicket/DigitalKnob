@@ -1,5 +1,7 @@
 <!-- ::################## ELEVATE ##################
 @echo off
+echo elevate(%0 %*)
+
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto :admin
 :elevate
