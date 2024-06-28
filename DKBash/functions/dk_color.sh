@@ -23,149 +23,149 @@ dk_color (){
 	fi
 	
 	if dk_defined USE_COLOR; then
-		export ESC=""     		 			# escape character
+		export ESC=""     		 		# escape character
 		
 		# Attributes on
-		export clr="${ESC}[0m"   				# Default					- Returns all attributes to the default state prior to modification
-		export bold="${ESC}[1m"					# Bold/Bright 				- Applies brightness/intensity flag to foreground color
-		export dim="${ESC}[2m"					# Dim
-		export italic="${ESC}[3m"				# Italic
-		export underline="${ESC}[4m"			# Underline       			- Adds underline
-		export blink="${ESC}[5m"				# Blink
-		export fblink="${ESC}[6m"				# Rapid Blink
-		export negative="${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
-		export invisible="${ESC}[8m"			# Invisible
-		export strike="${ESC}[9m"				# Strike Through
+		export clr="${ESC}[0m"   			# Default					- Returns all attributes to the default state prior to modification
+		export bold="${ESC}[1m"				# Bold/Bright 				- Applies brightness/intensity flag to foreground color
+		export dim="${ESC}[2m"				# Dim
+		export italic="${ESC}[3m"			# Italic
+		export underline="${ESC}[4m"		# Underline       			- Adds underline
+		export blink="${ESC}[5m"			# Blink
+		export fblink="${ESC}[6m"			# Rapid Blink
+		export negative="${ESC}[7m"   		# Negative	    			- Swaps foreground and background colors
+		export invisible="${ESC}[8m"		# Invisible
+		export strike="${ESC}[9m"			# Strike Through
 		
 		# Attributes off
-		#export 20m="${ESC}[20m"				# 20
-		#export 21m="${ESC}[21m"				# 21
-		export nobold="${ESC}[22m"				# No bold/bright			- Removes brightness/intensity flag from foreground color
-		export noitalic="${ESC}[23m"			# No Italic
-		export nounderline="${ESC}[24m"			# No underline				- Removes underline
-		export noblink="${ESC}[25m"				# No Blink
-		#export 26m="${ESC}[26m"				# 26
-		export nonegative="${ESC}[27m"  		# Positive(No negative)		- Returns foreground/background to normal
-		export visible="${ESC}[28m"				# Visible(No invisible)
-		export nostrike="${ESC}[29m"			# No Strike Through
+		#export 20m="${ESC}[20m"			# 20
+		#export 21m="${ESC}[21m"			# 21
+		export nobold="${ESC}[22m"			# No bold/bright			- Removes brightness/intensity flag from foreground color
+		export noitalic="${ESC}[23m"		# No Italic
+		export nounderline="${ESC}[24m"		# No underline				- Removes underline
+		export noblink="${ESC}[25m"			# No Blink
+		#export 26m="${ESC}[26m"			# 26
+		export nonegative="${ESC}[27m"  	# Positive(No negative)		- Returns foreground/background to normal
+		export visible="${ESC}[28m"			# Visible(No invisible)
+		export nostrike="${ESC}[29m"		# No Strike Through
 		
 		# Foreground Colors
-		export black="${ESC}[30m"				# Foreground Black			- Applies non-bold/bright black to foreground
-		export red="${ESC}[31m"					# Foreground Red			- Applies non-bold/bright red to foreground
-		export green="${ESC}[32m"				# Foreground Green			- Applies non-bold/bright green to foreground
-		export yellow="${ESC}[33m"				# Foreground Yellow			- Applies non-bold/bright yellow to foreground
-		export blue="${ESC}[34m"				# Foreground Blue			- Applies non-bold/bright blue to foreground
-		export magenta="${ESC}[35m"				# Foreground Magenta		- Applies non-bold/bright magenta to foreground
-		export cyan="${ESC}[36m"				# Foreground Cyan			- Applies non-bold/bright cyan to foreground
-		export white="${ESC}[37m"				# Foreground White			- Applies non-bold/bright white to foreground
-		export extended="${ESC}[38m"			# Foreground Extended		- Applies extended color value to the foreground
-		export default="${ESC}[39m"				# Foreground Default		- Applies only the foreground portion of the defaults
+		export black="${ESC}[30m"			# Foreground Black			- Applies non-bold/bright black to foreground
+		export red="${ESC}[31m"				# Foreground Red			- Applies non-bold/bright red to foreground
+		export green="${ESC}[32m"			# Foreground Green			- Applies non-bold/bright green to foreground
+		export yellow="${ESC}[33m"			# Foreground Yellow			- Applies non-bold/bright yellow to foreground
+		export blue="${ESC}[34m"			# Foreground Blue			- Applies non-bold/bright blue to foreground
+		export magenta="${ESC}[35m"			# Foreground Magenta		- Applies non-bold/bright magenta to foreground
+		export cyan="${ESC}[36m"			# Foreground Cyan			- Applies non-bold/bright cyan to foreground
+		export white="${ESC}[37m"			# Foreground White			- Applies non-bold/bright white to foreground
+		export extended="${ESC}[38m"		# Foreground Extended		- Applies extended color value to the foreground
+		export default="${ESC}[39m"			# Foreground Default		- Applies only the foreground portion of the defaults
 		
 		# Background Colors
-		export bg_black="${ESC}[40m"			# Background Black			- Applies non-bold/bright black to background
-		export bg_red="${ESC}[41m"				# Background Red			- Applies non-bold/bright red to background
-		export bg_green="${ESC}[42m"			# Background Green			- Applies non-bold/bright green to background
-		export bg_yellow="${ESC}[43m"			# Background Yellow			- Applies non-bold/bright yellow to background
-		export bg_blue="${ESC}[44m"				# Background Blue			- Applies non-bold/bright blue to background
-		export bg_magenta="${ESC}[45m"			# Background Magenta		- Applies non-bold/bright magenta to background
-		export bg_cyan="${ESC}[46m"				# Background Cyan			- Applies non-bold/bright cyan to background
-		export bg_white="${ESC}[47m"			# Background White			- Applies non-bold/bright white to background
-		export bg_extended="${ESC}[48m"			# Background Extended		- Applies extended color value to the background
-		export bg_default="${ESC}[49m"			# Background Default		- Applies only the background portion of the defaults
+		export bg_black="${ESC}[40m"		# Background Black			- Applies non-bold/bright black to background
+		export bg_red="${ESC}[41m"			# Background Red			- Applies non-bold/bright red to background
+		export bg_green="${ESC}[42m"		# Background Green			- Applies non-bold/bright green to background
+		export bg_yellow="${ESC}[43m"		# Background Yellow			- Applies non-bold/bright yellow to background
+		export bg_blue="${ESC}[44m"			# Background Blue			- Applies non-bold/bright blue to background
+		export bg_magenta="${ESC}[45m"		# Background Magenta		- Applies non-bold/bright magenta to background
+		export bg_cyan="${ESC}[46m"			# Background Cyan			- Applies non-bold/bright cyan to background
+		export bg_white="${ESC}[47m"		# Background White			- Applies non-bold/bright white to background
+		export bg_extended="${ESC}[48m"		# Background Extended		- Applies extended color value to the background
+		export bg_default="${ESC}[49m"		# Background Default		- Applies only the background portion of the defaults
 		
 		# Foreground Colors (light)
-		export lblack="${ESC}[90m"				# Bright Foreground Black	- Applies bold/bright black to foreground
-		export lred="${ESC}[91m"				# Bright Foreground Red		- Applies bold/bright red to foreground
-		export lgreen="${ESC}[92m"				# Bright Foreground Green	- Applies bold/bright green to foreground
-		export lyellow="${ESC}[93m"				# Bright Foreground Yellow	- Applies bold/bright yellow to foreground
-		export lblue="${ESC}[94m"				# Bright Foreground Blue	- Applies bold/bright blue to foreground
-		export lmagenta="${ESC}[95m"			# Bright Foreground Magenta	- Applies bold/bright magenta to foreground
-		export lcyan="${ESC}[96m"				# Bright Foreground Cyan	- Applies bold/bright cyan to foreground
-		export lwhite="${ESC}[97m"				# Bright Foreground White	- Applies bold/bright white to foreground
+		export lblack="${ESC}[90m"			# Bright Foreground Black	- Applies bold/bright black to foreground
+		export lred="${ESC}[91m"			# Bright Foreground Red		- Applies bold/bright red to foreground
+		export lgreen="${ESC}[92m"			# Bright Foreground Green	- Applies bold/bright green to foreground
+		export lyellow="${ESC}[93m"			# Bright Foreground Yellow	- Applies bold/bright yellow to foreground
+		export lblue="${ESC}[94m"			# Bright Foreground Blue	- Applies bold/bright blue to foreground
+		export lmagenta="${ESC}[95m"		# Bright Foreground Magenta	- Applies bold/bright magenta to foreground
+		export lcyan="${ESC}[96m"			# Bright Foreground Cyan	- Applies bold/bright cyan to foreground
+		export lwhite="${ESC}[97m"			# Bright Foreground White	- Applies bold/bright white to foreground
 
 		# Background Colors (light)
-		export bg_lblack="${ESC}[100m"			# Bright Background Black	- Applies bold/bright black to background
-		export bg_lred="${ESC}[101m"			# Bright Background Red		- Applies bold/bright red to background
-		export bg_lgreen="${ESC}[102m"			# Bright Background Green	- Applies bold/bright green to background
-		export bg_lyellow="${ESC}[103m"			# Bright Background Yellow	- Applies bold/bright yellow to background
-		export bg_lblue="${ESC}[104m"			# Bright Background Blue	- Applies bold/bright blue to background
-		export bg_lmagenta="${ESC}[105m"		# Bright Background Magenta	- Applies bold/bright magenta to background
-		export bg_lcyan="${ESC}[106m"			# Bright Background Cyan	- Applies bold/bright cyan to background
-		export bg_lwhite="${ESC}[107m"			# Bright Background White	- Applies bold/bright white to background
+		export bg_lblack="${ESC}[100m"		# Bright Background Black	- Applies bold/bright black to background
+		export bg_lred="${ESC}[101m"		# Bright Background Red		- Applies bold/bright red to background
+		export bg_lgreen="${ESC}[102m"		# Bright Background Green	- Applies bold/bright green to background
+		export bg_lyellow="${ESC}[103m"		# Bright Background Yellow	- Applies bold/bright yellow to background
+		export bg_lblue="${ESC}[104m"		# Bright Background Blue	- Applies bold/bright blue to background
+		export bg_lmagenta="${ESC}[105m"	# Bright Background Magenta	- Applies bold/bright magenta to background
+		export bg_lcyan="${ESC}[106m"		# Bright Background Cyan	- Applies bold/bright cyan to background
+		export bg_lwhite="${ESC}[107m"		# Bright Background White	- Applies bold/bright white to background
 		
 		# Foreground RGB Colors
-		export RGB="${ESC}[38;2;"				# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
+		export RGB="${ESC}[38;2;"			# ${RGB}50;100;150m         = ${ESC}[38;2;50;100;150m
 		
 		# Background RGB Colors
-		export bg_RGB="${ESC}[48;2;"			# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
+		export bg_RGB="${ESC}[48;2;"		# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
 		
 		dk_echo "${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}"
 	else
-		#unset ESC
-		#unset clr
+		#dk_unset ESC
+		#dk_unset clr
 		
 		# Attributes on
-		unset bold
-		unset dim
-		unset italic
-		unset underline
-		unset blink
-		unset fblink
-		unset negative
-		unset invisible
-		unset strike
+		dk_unset bold
+		dk_unset dim
+		dk_unset italic
+		dk_unset underline
+		dk_unset blink
+		dk_unset fblink
+		dk_unset negative
+		dk_unset invisible
+		dk_unset strike
 		
 		# Attributes off
-		unset nobold
-		unset noitalic
-		unset nounderline
-		unset noblink
-		unset nonegative
-		unset visible
-		unset nostrike
+		dk_unset nobold
+		dk_unset noitalic
+		dk_unset nounderline
+		dk_unset noblink
+		dk_unset nonegative
+		dk_unset visible
+		dk_unset nostrike
 		
 		# Foreground Colors
-		unset black
-		unset red
-		unset green
-		unset yellow
-		unset blue
-		unset magenta
-		unset cyan
-		unset white
+		dk_unset black
+		dk_unset red
+		dk_unset green
+		dk_unset yellow
+		dk_unset blue
+		dk_unset magenta
+		dk_unset cyan
+		dk_unset white
 		
 		# Background Colors
-		unset bg_black
-		unset bg_red
-		unset bg_green
-		unset bg_yellow
-		unset bg_blue
-		unset bg_magenta
-		unset bg_cyan
-		unset bg_white
+		dk_unset bg_black
+		dk_unset bg_red
+		dk_unset bg_green
+		dk_unset bg_yellow
+		dk_unset bg_blue
+		dk_unset bg_magenta
+		dk_unset bg_cyan
+		dk_unset bg_white
 		
 		# Foreground Colors (Bright)
-		unset lblack
-		unset lred
-		unset lgreen
-		unset lyellow
-		unset lblue
-		unset lmagenta
-		unset lcyan
-		unset lwhite
+		dk_unset lblack
+		dk_unset lred
+		dk_unset lgreen
+		dk_unset lyellow
+		dk_unset lblue
+		dk_unset lmagenta
+		dk_unset lcyan
+		dk_unset lwhite
 		
 		# Background Colors (Bright)
-		unset bg_lblack
-		unset bg_lred
-		unset bg_lgreen
-		unset bg_lyellow
-		unset bg_lblue
-		unset bg_lmagenta
-		unset bg_lcyan
-		unset bg_lwhite
+		dk_unset bg_lblack
+		dk_unset bg_lred
+		dk_unset bg_lgreen
+		dk_unset bg_lyellow
+		dk_unset bg_lblue
+		dk_unset bg_lmagenta
+		dk_unset bg_lcyan
+		dk_unset bg_lwhite
 		
-		unset RGB
-		unset bg_RGB
+		dk_unset RGB
+		dk_unset bg_RGB
 	
 		dk_echo "${clr} COLOR OFF"
 	fi
