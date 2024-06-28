@@ -18,7 +18,7 @@ dk_color (){
 	export USE_COLOR=1
 	if [ $# -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			unset USE_COLOR
+			dk_unset USE_COLOR
 		fi
 	fi
 	
