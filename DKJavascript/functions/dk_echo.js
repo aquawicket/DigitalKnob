@@ -1,9 +1,15 @@
-//###### DKINIT ######
-var js = document.createElement("script");
-js.type = "text/javascript";
-js.src = "DK.js";
-document.body.appendChild(js);
-
+function DKINIT(callback){
+    var head = document.head;
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = "DK.js";
+    script.onreadystatechange = callback;
+    script.onload = callback;
+    head.appendChild(script);
+} DKINIT(function(){
+	
+	
+});
 
 
 //################################################################################
@@ -16,20 +22,11 @@ document.body.appendChild(js);
 window.dk_echo = function dk_echo(message){
 	//dk_debugFunc
 	
-    console.log(message)
+	console.log(message)
 }
 
-
-
 DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-    //dk_debugFunc
-	
-	const ESC = "\x1b"
-	const clr = "\x1b[0m"
-	const red = "\x1b[31m"
-	const white = "\x1b[37m"
-	const blue = "\x1b[34m"
-	
+	//dk_debugFunc
 	
 	console.log("This is a normal console.log commmand")
 	dk_echo()
