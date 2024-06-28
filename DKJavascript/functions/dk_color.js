@@ -4,7 +4,7 @@ js.type = "text/javascript";
 js.src = "dk_echo.js";
 document.body.appendChild(js);
 
-//const dk_echo = function dk_echo(message){ console.log(message) }
+
 
 //if(!$DKINIT){ . $PWD/DK.ps1 }
 //if(!$dk_color){ $dk_color = 1 } else{ return }
@@ -115,67 +115,67 @@ const dk_color = function dk_color (){
 		//dk_unset clr
 		
 		// Attributes on
-//		dk_unset bold
-//		dk_unset dim
-//		dk_unset italic
-//		dk_unset underline
-//		dk_unset blink
-//		dk_unset fblink
-//		dk_unset negative
-//		dk_unset invisible
-//		dk_unset strike
+		dk_unset bold
+		dk_unset dim
+		dk_unset italic
+		dk_unset underline
+		dk_unset blink
+		dk_unset fblink
+		dk_unset negative
+		dk_unset invisible
+		dk_unset strike
 		
 		// Attributes off
-//		dk_unset nobold
-//		dk_unset noitalic
-//		dk_unset nounderline
-//		dk_unset noblink
-//		dk_unset nonegative
-//		dk_unset visible
-//		dk_unset nostrike
+		dk_unset nobold
+		dk_unset noitalic
+		dk_unset nounderline
+		dk_unset noblink
+		dk_unset nonegative
+		dk_unset visible
+		dk_unset nostrike
 		
 		// Foreground Colors
-//		dk_unset black
-//		dk_unset red
-//		dk_unset green
-//		dk_unset yellow
-//		dk_unset blue
-//		dk_unset magenta
-//		dk_unset cyan
-//		dk_unset white
-		
+		dk_unset black
+		dk_unset red
+		dk_unset green
+		dk_unset yellow
+		dk_unset blue
+		dk_unset magenta
+		dk_unset cyan
+		dk_unset white
+
 		// Background Colors
-//		dk_unset bg_black
-//		dk_unset bg_red
-//		dk_unset bg_green
-//		dk_unset bg_yellow
-//		dk_unset bg_blue
-//		dk_unset bg_magenta
-//		dk_unset bg_cyan
-//		dk_unset bg_white
-		
+		dk_unset bg_black
+		dk_unset bg_red
+		dk_unset bg_green
+		dk_unset bg_yellow
+		dk_unset bg_blue
+		dk_unset bg_magenta
+		dk_unset bg_cyan
+		dk_unset bg_white
+
 		// Foreground Colors (Bright)
-//		dk_unset lblack
-//		dk_unset lred
-//		dk_unset lgreen
-//		dk_unset lyellow
-//		dk_unset lblue
-//		dk_unset lmagenta
-//		dk_unset lcyan
-//		dk_unset lwhite
+		dk_unset lblack
+		dk_unset lred
+		dk_unset lgreen
+		dk_unset lyellow
+		dk_unset lblue
+		dk_unset lmagenta
+		dk_unset lcyan
+		dk_unset lwhite
 		
 		// Background Colors (Bright)
-//		dk_unset bg_lblack
-//		dk_unset bg_lred
-//		dk_unset bg_lgreen
-//		dk_unset bg_lyellow
-//		dk_unset bg_lblue
-//		dk_unset bg_lmagenta
-//		dk_unset bg_lcyan
-//		dk_unset bg_lwhite
+		dk_unset bg_lblack
+		dk_unset bg_lred
+		dk_unset bg_lgreen
+		dk_unset bg_lyellow
+		dk_unset bg_lblue
+		dk_unset bg_lmagenta
+		dk_unset bg_lcyan
+		dk_unset bg_lwhite
 		
-//		dk_unset RGB
-//		dk_unset bg_RGB
+		dk_unset RGB
+		dk_unset bg_RGB
 	
 		dk_echo(clr+" COLOR OFF")
 	}
@@ -384,4 +384,3 @@ DKTEST = function DKTEST (){ //####### DKTEST ####### DKTEST ####### DKTEST ####
 	dk_echo(bg_white+"                                                     "+clr)
 	dk_echo(bg_red+"                                                     "+clr)
 }
-DKTEST()

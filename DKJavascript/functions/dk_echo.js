@@ -37,6 +37,3 @@ DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####
 	dk_echo("This is a dk_echo line")
 	dk_echo(red+"This is "+white+"dk_echo "+blue+"with color"+clr)
 }
-
-
-DKTEST()

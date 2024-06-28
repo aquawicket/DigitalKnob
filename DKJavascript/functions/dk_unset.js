@@ -10,19 +10,35 @@ document.body.appendChild(js);
 //# dk_unset(variable)
 //#
 //#
-window.dk_unset = function dk_unset(variable){
-	//dk_debugFunc
+function dk_unset(obj) {
 	
-    delete variable
+	//obj = undefined;
+	//delete obj;
+	//return obj ;
+	
+	obj.value = undefined;
+	delete obj
+	return obj.value ;
 }
-
+	
 
 
 DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
     //dk_debugFunc
 	
-	const var = "the value of var"
-	echo "var = ${var}"
-	dk_unset const var
-	echo "var = ${var}"
+	myVarA = "this is the value of myVarA";
+	console.log(myVarA)
+	//delete myVarA;
+	console.log(myVarA)
+	
+	myVarB = "this is the value of myVarB";
+	console.log(myVarB)
+	dk_unset(myVarB)
+	console.log(myVarB)
+	
+	var myVarC = {value: "this is the value of myVarC"};
+	console.log(myVarC.value)
+	dk_unset(myVarC)
+	console.log(myVarC.value)
 }
+DKTEST()
