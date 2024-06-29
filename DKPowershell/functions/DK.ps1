@@ -81,10 +81,12 @@ function DK (){
 	
 	###### DKTEST MODE ######
 	if("$DKSCRIPT_DIR" -eq "$DKPOWERSHELL_FUNCTIONS_DIR"){
-		. $DKSCRIPT_PATH
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
 		Write-Output ""
+		#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
+		#dk_unset $include_guard
+		. $DKSCRIPT_PATH
 		DKTEST
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}########################## END TEST ################################${clr}"

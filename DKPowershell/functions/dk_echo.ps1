@@ -16,7 +16,10 @@ function Global:dk_echo($message) {
 	# https://stackoverflow.com/a/818118
 	# $allArgs = $PsBoundParameters.Values + $args 
 
-	Write-Host $message
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
+	Write-Host "${echo_fileline}   $message"
+	
+	if(Test-Path variable:echo_fileline){ dk_unset echo_fileline }
 }
 
 

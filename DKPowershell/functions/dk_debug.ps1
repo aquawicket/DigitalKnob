@@ -23,6 +23,7 @@ function Global:dk_debug($message) {
 	if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1 }
 	if($ENABLE_dk_debug -ne 1){ return }
 
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 	dk_echo "${blue}${DEBUG_TAG}${message}${clr}"
 	if($TRACE_ON_DEBUG){ dk_echo "${blue}*** TRACE_ON_DEBUG ***${clr}"; dk_stacktrace }
 	if($LINE_ON_DEBUG) { dk_echo "${blue}*** LINE_ON_DEBUG ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }

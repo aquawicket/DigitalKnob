@@ -1,5 +1,5 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
-if(!$dk_color){ $dk_color = 1 } else{ return }
+#if(!$dk_color){ $dk_color = 1 } else{ return }
 
 ##################################################################################
 # dk_color(on/off)

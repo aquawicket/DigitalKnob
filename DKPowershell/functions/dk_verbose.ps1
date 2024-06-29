@@ -14,14 +14,15 @@ if(!$HALT_ON_VERBOSE)  { $global:HALT_ON_VERBOSE = 0   }
 #
 #    @message	- The message to print
 #
-function Global:dk_verbose (){
+function Global:dk_verbose($message){
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#$allArgs = $PsBoundParameters.Values + $args
 	
 	
 	if($ENABLE_dk_verbose -ne 1){ return }
 
-	dk_echo "${cyan}${VERBOSE_TAG}${allArgs}${clr}"
+	dk_echo "${cyan}${VERBOSE_TAG}${message}${clr}"
 	if($TRACE_ON_VERBOSE){ dk_echo "${cyan}*** TRACE_ON_VERBOSE ***${clr}"; dk_stacktrace }
 	if($LINE_ON_VERBOSE) { dk_echo "${cyan}*** LINE_ON_VERBOSE ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if($PAUSE_ON_VERBOSE){ dk_echo "${cyan}*** PAUSE_ON_VERBOSE ***${clr}"; dk_pause }

@@ -21,8 +21,10 @@ function Global:dk_printArray($array) {
 	
 	for($i=0; $i -lt $_array_.count; $i++) {
 		$value = $_array_[$i]
+		if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 		dk_echo "$_name_[$i]  $value"
 	}
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 	dk_info "$_name_ length = $i"
 }
 

@@ -21,8 +21,8 @@ function Global:dk_todo  (){
 	
 	if($ENABLE_dk_todo -ne 1){ return }
 	
-	$header = "${inverse}$(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 2)"
-	dk_echo "${yellow}${TODO_TAG}${header}  `"${allArgs}`" ${clr}"
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
+	dk_echo "${yellow}${TODO_TAG}  `"${allArgs}`" ${clr}"
 	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}"; dk_stacktrace }
 	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}"; dk_pause }

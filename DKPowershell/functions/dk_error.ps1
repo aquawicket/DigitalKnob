@@ -14,14 +14,16 @@ if(!$HALT_ON_ERROR)  { $global:HALT_ON_ERROR = 1   }
 #
 #    @message	- The message to print
 #
-function Global:dk_error($allArgs) {
+function Global:dk_error($message) {
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#$allArgs = $PsBoundParameters.Values + $args
 	
 	
 	if($ENABLE_dk_error -ne 1){ return }
 	
-	dk_echo "${red}${ERROR_TAG}${allArgs}${clr}"
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
+	dk_echo "${red}${ERROR_TAG}${message}${clr}"
 	if($TRACE_ON_ERROR){ dk_echo "${red}*** TRACE_ON_ERROR ***${clr}"; dk_stacktrace }
 	if($LINE_ON_ERROR) { dk_echo "${red}*** LINE_ON_ERROR ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if($PAUSE_ON_ERROR){ dk_echo "${red}*** PAUSE_ON_ERROR ***${clr}"; dk_pause }

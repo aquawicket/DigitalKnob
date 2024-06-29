@@ -22,15 +22,19 @@ function Global:dk_printVar($var) {
 	if(($variable -is [array]) -or ($variable -is [System.Collections.ArrayList])){ 
 		if($variable.count){
 			for($i=0; $i -lt $variable.count; $i++) {
+				if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 				dk_echo "${cyan}$name[$i] = ${blue}'$($variable[$i])'${clr}";
 			}
 		}
 		else{
+			if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 			dk_echo "${cyan}$name = ${yellow}EMPTY${clr}"
 		}
 	} elseif($variable){
+		if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 		dk_echo "${cyan}$name = ${blue}'$variable'${clr}"
 	} else{
+		if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 		dk_echo "${cyan}$name = ${red}UNDEFINED${clr}"
 	}
 }

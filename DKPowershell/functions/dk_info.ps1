@@ -14,14 +14,16 @@ if(!$HALT_ON_INFO)  { $global:HALT_ON_INFO = 0   }
 #
 #    @message	- The message to print
 #
-function Global:dk_info($allArgs) {
+function Global:dk_info($message) {
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#$allArgs = $PsBoundParameters.Values + $args
 	
 	
 	if($ENABLE_dk_info -ne 1){ return }
 		
-	dk_echo "${white}${INFO_TAG}${allArgs}${clr}"
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
+	dk_echo "${white}${INFO_TAG}${message}${clr}"
 	if ($TRACE_ON_INFO){ dk_echo "${white}*** TRACE_ON_INFO ***${clr}"; dk_stacktrace }
 	if ($LINE_ON_INFO) { dk_echo "${white}*** LINE_ON_INFO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if ($PAUSE_ON_INFO){ dk_echo "${white}*** PAUSE_ON_INFO ***${clr}"; dk_pause }

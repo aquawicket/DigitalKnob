@@ -14,15 +14,16 @@ $FIXME_TAG="  FIXME: "
 #
 #	@msg	- The message to print
 #
-function Global:dk_fixme  (){
+function Global:dk_fixme($message){
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#$allArgs = $PsBoundParameters.Values + $args
 	
 	
 	if($ENABLE_dk_fixme -ne 1){ return }
 
-	$header = "${inverse}$(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 2)"
-	dk_echo "${yellow}${FIXME_TAG}${header}${allArgs}${clr}"	
+	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
+	dk_echo "${yellow}${FIXME_TAG}${message}${clr}"	
 	if($TRACE_ON_FIXME){ dk_echo "${red}*** TRACE_ON_FIXME ***${clr}"; dk_stacktrace }
 	if($LINE_ON_FIXME){  dk_echo "${red}*** LINE_ON_FIXME ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
 	if($PAUSE_ON_FIXME){ dk_echo "${red}*** PAUSE_ON_FIXME ***${clr}"; dk_pause }
