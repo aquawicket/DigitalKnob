@@ -1,15 +1,13 @@
-//###### DKINIT ######
-var js = document.createElement("script");
-js.type = "text/javascript";
-js.src = "DK.js";
-document.body.appendChild(js);
+var script = document.createElement('script');
+script.src = "DK.js";
+document.head.appendChild(script);
+script.onreadystatechange = script.onload = function(evt){
 
-
-
-//################################################################################
-//# dk_debugFunc()
-//#
-//#
-function dk_debugFunc() {
-	console.log("dk_debugFunc");
+	//################################################################################
+	//# dk_debugFunc()
+	//#
+	//#
+	function dk_debugFunc() {
+		console.log("dk_debugFunc");
+	}
 }

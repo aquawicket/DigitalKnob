@@ -1,28 +1,19 @@
-function loadScript(url, callback){
-    var head = document.head;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
-    script.onreadystatechange = callback;
-    script.onload = callback;
-    head.appendChild(script);
-}
-if(typeof DKINIT === 'undefined'){ loadScript("DK.js", function(){
-	console.log("DK.js loaded");
-});}
-
-
+//function DKINIT(callback){
+//    var script = document.createElement('script');
+//    script.src = "DK.js";
+//    script.onreadystatechange = script.onload = callback;
+//	document.head.appendChild(script);
+//} DKINIT(function(evt){
+//});
 
 //################################################################################
 //# dk_load()
 //#
 //#
-function dk_load(name) {
-	console.log("dk_load("+name+")");
-}
-	
-
-
-DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-    console.log("DKTEST()");
+window.dk_load = function dk_load(src, callback) {
+	console.log("dk_load("+src+")")
+	var script = document.createElement('script');
+	script.src = src+'.js';
+	script.onreadystatechange = script.onload = callback;
+	document.head.appendChild(script);
 }

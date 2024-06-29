@@ -33,7 +33,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call :dk_DKSCRIPT_VARS
 	::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" if exist "%~3" set "DKSCRIPT_PATH=%~3"
 	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
-	call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
 	::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
@@ -62,13 +62,13 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
-	echo.
+	call dk_echo
     call dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
-	echo.
+	call dk_echo
 	call :DKTEST
-	echo.
+	call dk_echo
 	call dk_echo "%bg_magenta%%white%########################## END TEST ###############################%clr%"
-	echo.
+	call dk_echo
 	pause
 	exit
 goto:eof

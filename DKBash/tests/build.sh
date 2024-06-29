@@ -1202,8 +1202,8 @@ dk_convertToCIdentifier (){
 	dk_replaceAll "$input" "-" "_" input		# POSIX replace
 	dk_replaceAll "$input" "." "_" output		# POSIX replace
 	
-	dk_printVar "output = $output"
 	eval "$2=$output"
+	dk_printVar $2
 	#[ $input = "" ]
 }
 
@@ -1232,8 +1232,9 @@ dk_replaceAll (){
         input=${input#*"$searchValue"}
     done
 	
-	dk_printVar "output = '$output'"
+	
 	eval "$4=$output"
+	dk_printVar $4
 }
 
 

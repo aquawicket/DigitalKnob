@@ -178,7 +178,7 @@ call dk_color 1
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	call dk_debugFunc
 	
-	call dk_echo ""
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%           Styles            %clr%"
 	call dk_echo "clr        %clr% default %clr%"
 	call dk_echo "bold       %bold% bold %clr%"
@@ -190,8 +190,8 @@ call dk_color 1
 	call dk_echo "negative   %negative% negative %clr%"
 	call dk_echo "invisible  %invisible% invisible %clr%"
 	call dk_echo "strike     %strike% strike %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%      Foreground Colors      %clr%"
 	call dk_echo "black      %black% black %clr%"
 	call dk_echo "red        %red% red %clr%"
@@ -201,8 +201,8 @@ call dk_color 1
 	call dk_echo "magenta    %magenta% magenta %clr%"
 	call dk_echo "cyan       %cyan% cyan %clr%"
 	call dk_echo "white      %white% white %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%      Background Colors      %clr%"
 	call dk_echo "bg_black   %bg_black% bg_black %clr%"
 	call dk_echo "bg_red     %bg_red% bg_red %clr%"
@@ -212,8 +212,8 @@ call dk_color 1
 	call dk_echo "bg_magenta %bg_magenta% bg_magenta %clr%"
 	call dk_echo "bg_cyan    %bg_cyan% bg_cyan %clr%"
 	call dk_echo "bg_white   %bg_white% bg_white %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack% Foreground Colors  bright  %clr%"
 	call dk_echo "lblack      %lblack% lblack %clr%"
 	call dk_echo "lred        %lred% lred %clr%"
@@ -223,8 +223,8 @@ call dk_color 1
 	call dk_echo "lmagenta    %lmagenta% lmagenta %clr%"
 	call dk_echo "lcyan       %lcyan% lcyan %clr%"
 	call dk_echo "lwhite      %lwhite% lwhite %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack% Background Colors  bright  %clr%"
 	call dk_echo "bg_lblack   %bg_lblack% bg_lblack %clr%"
 	call dk_echo "bg_lred     %bg_lred% bg_lred %clr%"
@@ -234,8 +234,8 @@ call dk_color 1
 	call dk_echo "bg_lmagenta %bg_lmagenta% bg_lmagenta %clr%"
 	call dk_echo "bg_lcyan    %bg_lcyan% bg_lcyan %clr%"
 	call dk_echo "bg_lwhite   %bg_lwhite% bg_lwhite %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%   RGB Foreground Colors   %clr%"
 	call dk_echo "%RGB%255;10;10m    RGB test 255;0;10     %clr%"
 	pause
@@ -292,8 +292,8 @@ call dk_color 1
 	call dk_echo "%RGB%0;0;10m    RGB test 0;0;10      %clr%"
 	call dk_echo "%RGB%0;0;5m    RGB test 0;0;5       %clr%"
 	call dk_echo "%RGB%0;0;0m    RGB test 0;0;0       %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%   RGB Background Colors   %clr%"
 	call dk_echo "%bg_RGB%255;10;10m    bg_RGB test 255;0;10    %clr%"
 	call dk_echo "%bg_RGB%10;255;10m    bg_RGB test 0;255;10    %clr%"
@@ -349,17 +349,17 @@ call dk_color 1
 	call dk_echo "%bg_RGB%0;0;10m    bg_RGB test 0;0;10      %clr%"
 	call dk_echo "%bg_RGB%0;0;5m    bg_RGB test 0;0;5       %clr%"
 	call dk_echo "%bg_RGB%0;0;0m    bg_RGB test 0;0;0       %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%        Combinations         %clr%"
 	call dk_echo "negative                            %negative%   inverse foreground <-> background   %clr%"
 	call dk_echo "bg_yellow red                     %bg_yellow% %red%   yellow backgroud / red foreground   %clr%"
 	call dk_echo "bg_yellow red negative           %bg_yellow% %red% %negative%        yellow / red inversed          %clr%"
 	call dk_echo "bg_red.. bg_green.. bg_blue     %bg_red%    nested   %bg_green%    colors    %bg_blue%    text    %clr%"
-	call dk_echo ""
-	call dk_echo ""
+	call dk_echo
+	call dk_echo
 	call dk_echo "%black% %bg_lblack%        ASCII Color Art       %clr%"
-	call dk_echo ""
+	call dk_echo
 	call dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%"
 	call dk_echo "%bg_blue%  * * * * * * * *  %bg_white%                                  %clr%"
 	call dk_echo "%bg_blue% * * * * * * * * * %bg_red%                                  %clr%" 

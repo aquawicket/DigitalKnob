@@ -13,7 +13,6 @@ dk_realpath (){
 	
 	local absolutePath=""
 	if dk_commandExists readlink; then
-		echo "1 = $1"
 		absolutePath=$(readlink -f "$1") || true
 	elif dk_commandExists realpath; then
 		absolutePath=$(realpath "$1")

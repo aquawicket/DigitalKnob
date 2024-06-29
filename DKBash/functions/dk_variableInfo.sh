@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_variable_info(<name> <output>)
+# dk_variable_info(name output)
 #
 #
 dk_variable_info (){

@@ -10,9 +10,7 @@ dk_toLower (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	echo "1 = $1"
 	local output=$(builtin echo "$1" | tr '[:upper:]' '[:lower:]')
-	echo "output = $output"
 	eval "$2='${output}'"
 	dk_printVar "${2}"
 }
@@ -20,7 +18,8 @@ dk_toLower (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
 	echo "lowercase = ${lowercase}"
 }
