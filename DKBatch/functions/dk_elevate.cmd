@@ -9,7 +9,6 @@ if %ERRORLEVEL% equ 0 goto :elevated
 		setlocal DisableDelayedExpansion
 		set "THIS_PATH=%~dpnx0"
 		for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"          &:: get last argument
-		echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 		setlocal EnableDelayedExpansion
 		cscript //nologo "%~f0?.wsf" %THIS_PATH% gotPrivileges %DKSCRIPT_PATH% & exit
 	:gotPrivileges
@@ -29,9 +28,7 @@ if %ERRORLEVEL% equ 0 goto :elevated
 		</script></job><!--
 	:elevated
 		for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"          &:: get last argument
-		echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 		for %%Z in (%*) do set "DKSCRIPT_DIR=%%~dpZ"             &:: get last argument
-		echo DKSCRIPT_DIR = %DKSCRIPT_DIR%
 		cd /d %DKSCRIPT_DIR%
 		call %DKSCRIPT_PATH% elevated
 goto:eof

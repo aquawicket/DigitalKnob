@@ -43,7 +43,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	set "ENABLE_dk_elevate=1"
 	if not defined ENABLE_dk_elevate goto :skip_elevate
     	net session >nul 2>&1
-	    if %ERRORLEVEL% equ 0 (echo Administrator Priviledges Detected & goto:skip_elevate) else (echo NOT an Admin)
+	    if %ERRORLEVEL% equ 0 (goto:skip_elevate)
 	    if "%2" == "elevated" elevated=1
 	    if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTION_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
 	:skip_elevate
@@ -147,8 +147,7 @@ goto:eof
 ::#
 :dk_setupKeepOpen (){
 	::if "%KEEP_CONSOLE_OPEN%" neq "1" goto:eof
-	set "clear_screen=cls ^&"
-	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %clear_screen% set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
+	if not defined in_subprocess (cmd /k set in_subprocess=y ^& cls ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
 
