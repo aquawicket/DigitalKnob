@@ -35,7 +35,6 @@ function(dk_info)
 	dk_getOption(PAUSE ${ARGV})
 	dk_getOption(NO_PAUSE ${ARGV})
 	
-	dk_stacktrace()
 	if(NOT echo_fileline)
 		__FILE__(_FILE_ 0)
 		__LINE__(_LINE_ 0)
