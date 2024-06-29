@@ -45,7 +45,8 @@ endfunction()
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_readCache
-}
+function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+	dk_debugFunc(${ARGV})
+	
+	dk_readCache()
+endfunction()
