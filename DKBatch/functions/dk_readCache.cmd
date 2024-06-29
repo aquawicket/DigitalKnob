@@ -7,23 +7,30 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_readCache () {
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     ::echo reading cache...
+	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     if not exist %DKBRANCH_DIR%\cache goto:eof
-    set /a count = 0
+    set /a count=0
+
+	setlocal enableDelayedExpansion
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
         set a=%%a: =%
-        ::echo !count!: %%a
-        if !count! == 0 set "_APP_=%%a"
-        if !count! == 1 set "_TARGET_OS_=%%a"
-        if !count! == 2 set "_TYPE_=%%a"
-        if !count! == 3 set "_LEVEL_=%%a"
-        call set /a count += 1
+		if !count! equ 0 call dk_set _APP_ "%%a"
+        if !count! equ 1 call dk_set _TARGET_OS_ "%%a"
+        if !count! equ 2 call dk_set _TYPE_ "%%a"
+		set /a count+=1
     )
-        
-    set _APP_=%_APP_: =%
-    set _TARGET_OS_=%_TARGET_OS_: =%
-    set _TYPE_=%_TYPE_: =%
-    set _LEVEL_=%_LEVEL_: =%
+	
+	endlocal & set "%1=%_APP_%" & set "%2=%_TARGET_OS_%" & set "%3=%_TYPE_%"
+goto:eof
+
+
+
+
+:DKTEST (){ #####################################################################
+	call dk_debugFunc
+	
+	call dk_readCache
 goto:eof

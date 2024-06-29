@@ -11,12 +11,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
-    call dk_readCache
+    call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	call dk_printVar _APP_
+	call dk_printVar _TARGET_OS_
+	call dk_printVar _TYPE_
 
-    echo.
+    call dk_echo
     call dk_checkGitRemote
 
-    echo.
+    call dk_echo
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
@@ -28,7 +31,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     echo  8) Clear cmake cache and .tmp files
     echo  9) Reload
     echo  10) Exit
-    echo. 
+    call dk_echo 
     echo  Press Enter To Skip
     set choice=
     set /p "choice=Choose a selection: " 
@@ -47,4 +50,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     if "%choice%"=="10" call dk_exit
         
     set UPDATE=true
+goto:eof
+
+
+
+
+
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	
+	call dk_pickUpdate
 goto:eof
