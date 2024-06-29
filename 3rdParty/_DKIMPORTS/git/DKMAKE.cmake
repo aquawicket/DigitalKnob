@@ -4,6 +4,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DOWNLOAD ###
+dk_validate(HOST "dk_getHostTriple()")
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
 WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
 if(WIN_HOST AND NOT GIT_DL)
@@ -18,6 +19,7 @@ if(GIT_DL)
 	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
 	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
 	dk_toLower(${GIT_FOLDER} GIT_FOLDER)
+	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
 endif()
 
