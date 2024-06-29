@@ -7,6 +7,7 @@ cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP00
 cmake_policy(SET CMP0012 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0012.html
 cmake_policy(SET CMP0054 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0054.html
 cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0057.html
+cmake_policy(SET CMP0126 NEW)   # https://cmake.org/cmake/help/latest/policy/CMP0126.html
 
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
 #####################################################################
