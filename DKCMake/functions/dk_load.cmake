@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
 macro(dk_load var)
-	#message("dk_load(${ARGV})") #dk_debugFunc(${ARGV})
+	message("dk_load(${ARGV})") #dk_debugFunc(${ARGV})
 	
 	
 	string(STRIP ${var} fn)
@@ -42,7 +42,7 @@ endmacro()
 
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	#message("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
+	message("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -112,8 +112,11 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 			endif()
 		endforeach()
 			
-		message(DEBUG "include(${${fn}_file})")
-		include(${${fn}_file})
+		#if(NOT "${fn}" STREQUAL "CMakeLists")
+		if(NOT "${${fn}_file}" STREQUAL "${DKSCRIPT_PATH}")
+			message(VERBOSE "${fn} -> include(${${fn}_file})")
+			include(${${fn}_file})
+		endif()
 		
 		### variable clean-up ###
 		unset(${fn}_file)
@@ -161,7 +164,7 @@ function(dk_parseFunctionsAndLoadFromString str)
 	endforeach()
 endfunction(dk_parseFunctionsAndLoadFromString)
 
-#if(dk_load IN_LIST dk_load_list) 
+#if(NOT dk_load IN_LIST dk_load_list) 
 #	set(dk_load_list dk_load CACHE INTERNAL "")
 #endif()
 

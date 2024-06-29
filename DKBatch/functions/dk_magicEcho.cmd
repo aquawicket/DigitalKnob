@@ -101,7 +101,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?
-    
+goto:eof   

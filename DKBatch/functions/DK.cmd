@@ -40,7 +40,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	
 	
 	::############ Elevate Permissions ############
-	set "ENABLE_dk_elevate=0"
+	set "ENABLE_dk_elevate=1"
 	if %ENABLE_dk_elevate% neq 1 goto :skip_elevate
     	net session >nul 2>&1
 	    if %ERRORLEVEL% equ 0 (goto:skip_elevate)

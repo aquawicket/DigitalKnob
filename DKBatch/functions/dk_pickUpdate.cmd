@@ -34,7 +34,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     set /p "choice=Choose a selection: " 
     
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="0" set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
+    if "%choice%"=="0" call dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_%
     if "%choice%"=="1" call dk_gitUpdate
     if "%choice%"=="2" call dk_gitCommit
     if "%choice%"=="3" call dk_pushAssets
