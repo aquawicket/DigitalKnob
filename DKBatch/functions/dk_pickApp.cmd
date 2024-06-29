@@ -6,14 +6,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#
 :dk_pickApp () {
-	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
-	
+    call dk_debugFunc
+    if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
-    call dk_readCache
+    call dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
-    echo.
+    call dk_echo
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) HelloWorld
     echo  2) DKCore
@@ -27,24 +27,32 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     echo 10) Reload
     echo 11) Go Back
     echo 12) Exit
-    set choice=
+    call dk_unset choice
     set /p choice=Please select an app to build: 
-    
+
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%" & goto:eof
-    if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
-    if "%choice%"=="2"  set "APP=DKCore"       & goto:eof
-    if "%choice%"=="3"  set "APP=DKJavascript" & goto:eof
-    if "%choice%"=="4"  set "APP=DKSDL"        & goto:eof
-    if "%choice%"=="5"  set "APP=DKSDLRml"     & goto:eof
-    if "%choice%"=="6"  set "APP=DKDomTest"    & goto:eof
-    if "%choice%"=="7"  set "APP=DKTestAll"    & goto:eof
-    if "%choice%"=="8"  call dk_enterManually  & goto:eof
-    if "%choice%"=="9" call dk_clearScreen     & goto:eof
-    if "%choice%"=="10" call dk_reload         & goto:eof
-    if "%choice%"=="11" set "UPDATE="          & goto:eof
-    if "%choice%"=="12" call dk_exit           & goto:eof
-        
-    echo %choice%: invalid selection, please try again
-    set APP=
+    if "%choice%"=="0"  call dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & goto:eof
+    if "%choice%"=="1"  call dk_set APP HelloWorld   & goto:eof
+    if "%choice%"=="2"  call dk_set APP DKCore       & goto:eof
+    if "%choice%"=="3"  call dk_set APP DKJavascript & goto:eof
+    if "%choice%"=="4"  call dk_set APP DKSDL        & goto:eof
+    if "%choice%"=="5"  call dk_set APP DKSDLRml     & goto:eof
+    if "%choice%"=="6"  call dk_set APP DKDomTest    & goto:eof
+    if "%choice%"=="7"  call dk_set APP DKTestAll    & goto:eof
+    if "%choice%"=="8"  call dk_enterManually        & goto:eof
+    if "%choice%"=="9"  call dk_clearScreen          & goto:eof
+    if "%choice%"=="10" call dk_reload               & goto:eof
+    if "%choice%"=="11" call dk_unset UPDATE         & goto:eof
+    if "%choice%"=="12" call dk_exit                 & goto:eof
+
+    call dk_echo "%choice%: invalid selection, please try again"
+    call dk_unset APP
+goto:eof
+
+
+
+:DKTEST (){ #####################################################################
+	call dk_debugFunc
+
+	call dk_pickApp
 goto:eof

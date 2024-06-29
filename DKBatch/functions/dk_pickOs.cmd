@@ -10,13 +10,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    echo.
-    echo %APP% %TARGET_OS% %TYPE%
+    call dk_echo
+    call dk_echo %APP% %TARGET_OS% %TYPE%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
-    echo.
+    call dk_echo
     echo  1) %HOST_TRIPLE%
-    echo.
+    call dk_echo
     echo  2) Android arm32
     echo  3) Android arm64
     echo  4) Android x86
@@ -55,49 +55,58 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     echo 37) Clear Screen
     echo 38) Go Back
     echo 39) Exit    
-    set choice=
+    call dk_unset choice
     set /p choice=Please select an OS to build for: 
         
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=%HOST_TRIPLE%"      & goto:eof
-    if "%choice%"=="2" set "TARGET_OS=android_arm32"       & goto:eof
-    if "%choice%"=="3" set "TARGET_OS=android_arm64"       & goto:eof
-    if "%choice%"=="4" set "TARGET_OS=android_x86"         & goto:eof
-    if "%choice%"=="5" set "TARGET_OS=android_x86_64"      & goto:eof
-    if "%choice%"=="6" set "TARGET_OS=emscripten"          & goto:eof
-    if "%choice%"=="7" set "TARGET_OS=ios_arm32"           & goto:eof
-    if "%choice%"=="8" set "TARGET_OS=ios_arm64"           & goto:eof
-    if "%choice%"=="9" set "TARGET_OS=ios_x86"             & goto:eof
-    if "%choice%"=="10" set "TARGET_OS=ios_x86_64"         & goto:eof
-    if "%choice%"=="11" set "TARGET_OS=iossim_arm32"       & goto:eof
-    if "%choice%"=="12" set "TARGET_OS=iossim_arm64"       & goto:eof
-    if "%choice%"=="13" set "TARGET_OS=iossim_x86"         & goto:eof
-    if "%choice%"=="14" set "TARGET_OS=iossim_x86_64"      & goto:eof
-    if "%choice%"=="15" set "TARGET_OS=linux_arm32"        & goto:eof
-    if "%choice%"=="16" set "TARGET_OS=linux_arm64"        & goto:eof
-    if "%choice%"=="17" set "TARGET_OS=linux_x86"          & goto:eof
-    if "%choice%"=="18" set "TARGET_OS=linux_x86_64"       & goto:eof
-    if "%choice%"=="19" set "TARGET_OS=mac_arm32"          & goto:eof
-    if "%choice%"=="20" set "TARGET_OS=mac_arm64"          & goto:eof
-    if "%choice%"=="21" set "TARGET_OS=mac_x86"            & goto:eof
-    if "%choice%"=="22" set "TARGET_OS=mac_x86_64"         & goto:eof
-    if "%choice%"=="23" set "TARGET_OS=raspberry_arm32"    & goto:eof
-    if "%choice%"=="24" set "TARGET_OS=raspberry_arm64"    & goto:eof
-    if "%choice%"=="25" set "TARGET_OS=raspberry_x86"      & goto:eof
-    if "%choice%"=="26" set "TARGET_OS=raspberry_x86_64"   & goto:eof
-    if "%choice%"=="27" set "TARGET_OS=win_arm32"          & goto:eof
-    if "%choice%"=="28" set "TARGET_OS=win_arm64_clang"    & goto:eof
-    if "%choice%"=="29" set "TARGET_OS=win_x86_mingw"      & goto:eof
-    if "%choice%"=="30" set "TARGET_OS=win_x86_clang"      & goto:eof
-    if "%choice%"=="31" set "TARGET_OS=win_x86_msvc"       & goto:eof
-    if "%choice%"=="32" set "TARGET_OS=win_x86_64_mingw"   & goto:eof
-    if "%choice%"=="33" set "TARGET_OS=win_x86_64_clang"   & goto:eof
-    if "%choice%"=="34" set "TARGET_OS=win_x86_64_ucrt"    & goto:eof
-    if "%choice%"=="35" set "TARGET_OS=win_x86_64_msvc"    & goto:eof
-	if "%choice%"=="36" set "TARGET_OS=none"               & goto:eof
-    if "%choice%"=="37" call dk_clearScreen                & goto:eof
-    if "%choice%"=="38" set "APP="                         & goto:eof
-    if "%choice%"=="39" call dk_exit                       & goto:eof
-    echo %choice%: invalid selection, please try again
-    set TARGET_OS=
+    if "%choice%"=="1" call dk_set TARGET_OS %HOST_TRIPLE%        & goto:eof
+    if "%choice%"=="2" call dk_set TARGET_OS android_arm32        & goto:eof
+    if "%choice%"=="3" call dk_set TARGET_OS android_arm64        & goto:eof
+    if "%choice%"=="4" call dk_set TARGET_OS android_x86          & goto:eof
+    if "%choice%"=="5" call dk_set TARGET_OS android_x86_64       & goto:eof
+    if "%choice%"=="6" call dk_set TARGET_OS emscripten           & goto:eof
+    if "%choice%"=="7" call dk_set TARGET_OS ios_arm32            & goto:eof
+    if "%choice%"=="8" call dk_set TARGET_OS ios_arm64            & goto:eof
+    if "%choice%"=="9" call dk_set TARGET_OS ios_x86              & goto:eof
+    if "%choice%"=="10" call dk_set TARGET_OS ios_x86_64          & goto:eof
+    if "%choice%"=="11" call dk_set TARGET_OS iossim_arm32        & goto:eof
+    if "%choice%"=="12" call dk_set TARGET_OS iossim_arm64        & goto:eof
+    if "%choice%"=="13" call dk_set TARGET_OS iossim_x86          & goto:eof
+    if "%choice%"=="14" call dk_set TARGET_OS iossim_x86_64       & goto:eof
+    if "%choice%"=="15" call dk_set TARGET_OS linux_arm32         & goto:eof
+    if "%choice%"=="16" call dk_set TARGET_OS linux_arm64         & goto:eof
+    if "%choice%"=="17" call dk_set TARGET_OS linux_x86           & goto:eof
+    if "%choice%"=="18" call dk_set TARGET_OS linux_x86_64        & goto:eof
+    if "%choice%"=="19" call dk_set TARGET_OS mac_arm32           & goto:eof
+    if "%choice%"=="20" call dk_set TARGET_OS mac_arm64           & goto:eof
+    if "%choice%"=="21" call dk_set TARGET_OS mac_x86             & goto:eof
+    if "%choice%"=="22" call dk_set TARGET_OS mac_x86_64          & goto:eof
+    if "%choice%"=="23" call dk_set TARGET_OS raspberry_arm32     & goto:eof
+    if "%choice%"=="24" call dk_set TARGET_OS raspberry_arm64     & goto:eof
+    if "%choice%"=="25" call dk_set TARGET_OS raspberry_x86       & goto:eof
+    if "%choice%"=="26" call dk_set TARGET_OS raspberry_x86_64    & goto:eof
+    if "%choice%"=="27" call dk_set TARGET_OS win_arm32           & goto:eof
+    if "%choice%"=="28" call dk_set TARGET_OS win_arm64_clang     & goto:eof
+    if "%choice%"=="29" call dk_set TARGET_OS win_x86_mingw       & goto:eof
+    if "%choice%"=="30" call dk_set TARGET_OS win_x86_clang       & goto:eof
+    if "%choice%"=="31" call dk_set TARGET_OS win_x86_msvc        & goto:eof
+    if "%choice%"=="32" call dk_set TARGET_OS win_x86_64_mingw    & goto:eof
+    if "%choice%"=="33" call dk_set TARGET_OS win_x86_64_clang    & goto:eof
+    if "%choice%"=="34" call dk_set TARGET_OS win_x86_64_ucrt     & goto:eof
+    if "%choice%"=="35" call dk_set TARGET_OS win_x86_64_msvc     & goto:eof
+	if "%choice%"=="36" call dk_set TARGET_OS none                & goto:eof
+    if "%choice%"=="37" call dk_clearScreen                       & goto:eof
+    if "%choice%"=="38" call dk_set APP                           & goto:eof
+    if "%choice%"=="39" call dk_exit                              & goto:eof
+    call dk_echo %choice%: invalid selection, please try again
+    call dk_unset TARGET_OS
+goto:eof
+
+
+
+
+:DKTEST (){ #####################################################################
+	call dk_debugFunc
+	
+	call dk_pickOs
 goto:eof

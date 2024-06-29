@@ -34,7 +34,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			)		
 			set /a n+=1
 		)
-		echo.
+		call dk_echo
 	endlocal
 goto :eof
 

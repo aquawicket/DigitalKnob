@@ -33,7 +33,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
         
     if exist "%GIT_EXE%" goto:eof
         
-    echo.   
+    call dk_echo   
     call dk_info "Installing git . . ."
     call dk_download %GIT_DL%
     call dk_info "%DKDOWNLOAD_DIR%\%GIT_DL_FILE% -y -o %DKTOOLS_DIR%\%GIT_FOLDER%"

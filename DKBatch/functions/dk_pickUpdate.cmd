@@ -12,9 +12,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     call dk_readCache _APP_ _TARGET_OS_ _TYPE_
-	call dk_printVar _APP_
-	call dk_printVar _TARGET_OS_
-	call dk_printVar _TYPE_
 
     call dk_echo
     call dk_checkGitRemote
@@ -33,7 +30,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     echo  10) Exit
     call dk_echo 
     echo  Press Enter To Skip
-    set choice=
+    call dk_unset choice
     set /p "choice=Choose a selection: " 
     
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?

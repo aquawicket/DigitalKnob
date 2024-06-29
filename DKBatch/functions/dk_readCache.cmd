@@ -7,9 +7,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_readCache () {
 	call dk_debugFunc
-	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%) incorrect number of arguments")
 	
-    ::echo reading cache...
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     if not exist %DKBRANCH_DIR%\cache goto:eof
     set /a count=0
@@ -22,7 +21,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
         if !count! equ 2 call dk_set _TYPE_ "%%a"
 		set /a count+=1
     )
-	
 	endlocal & set "%1=%_APP_%" & set "%2=%_TARGET_OS_%" & set "%3=%_TYPE_%"
 goto:eof
 
@@ -32,5 +30,5 @@ goto:eof
 :DKTEST (){ #####################################################################
 	call dk_debugFunc
 	
-	call dk_readCache
+	call dk_readCache APP TARGET_OS TYPE
 goto:eof

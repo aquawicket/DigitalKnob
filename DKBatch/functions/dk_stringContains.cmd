@@ -29,13 +29,13 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
     ::###### Using if return value
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=needle"
 	call dk_stringContains "%string%" "%substring%" result
 	if "%result%" equ "true" (echo string contains substring) else (echo string does NOT contain substring)
 	
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=straw"
 	call dk_stringContains "%string%" "%substring%" result
@@ -44,13 +44,13 @@ goto:eof
 	
 	
 	::###### Using if ERRORLEVEL
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=needle"
 	call dk_stringContains "%string%" "%substring%"
 	if not ERRORLEVEL 1 (echo string contains substring) else (echo string does NOT contain substring)
 	
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=straw"
 	call dk_stringContains "%string%" "%substring%"
@@ -59,12 +59,12 @@ goto:eof
 	
 	
 	::###### Using && and || conditionals
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=needle"
 	call dk_stringContains "%string%" "%substring%" && (echo string contains substring) || (echo string does NOT contain substring)
 
-	echo.
+	call dk_echo
 	set "string=There is a needle in this haystack"
 	set "substring=straw"
 	call dk_stringContains "%string%" "%substring%" && (echo string contains substring) || (echo string does NOT contain substring)

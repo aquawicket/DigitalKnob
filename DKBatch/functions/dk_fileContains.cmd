@@ -32,11 +32,11 @@ goto:eof
 
 	call dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
 	
-	echo.
+	call dk_echo
 	call dk_set substring needle
 	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 	
-	echo.
+	call dk_echo
 	call dk_set substring "not_in_file"
 	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 	

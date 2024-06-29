@@ -58,12 +58,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::	GOTO :ASCII_length_Loop
 	::)
 	
-::	echo.
+::	call dk_echo
 ::	echo		SYMBOL	DEC	OCT	HEX	HTML	Description
 ::	for /L %%i IN (0,1,%ASCII_length%) DO (
 ::		call:ASCII_SHOW %%i	
 ::	)
-::	echo.
+::	call dk_echo
 
 
 	::call dk_hexToVariable NUL 0x00

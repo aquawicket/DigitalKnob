@@ -28,12 +28,12 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
     ::###### Using if return value
-	echo.
+	call dk_echo
 	call dk_set _variable_ "is defined"
 	call dk_defined _variable_ result
 	if "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
 	
-	echo.
+	call dk_echo
 	call dk_unset _variable_
 	call dk_defined _variable_ result
 	if "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
@@ -41,12 +41,12 @@ goto:eof
 	
 	
 	::###### Using if ERRORLEVEL
-	echo.
+	call dk_echo
 	call dk_set _variable_ "is defined"
 	call dk_defined _variable_
 	if not ERRORLEVEL 1 (echo _variable_ is defined) else (echo _variable_ is NOT defined)
 	
-	echo.
+	call dk_echo
 	call dk_unset _variable_
 	call dk_defined _variable_
 	if not ERRORLEVEL 1 (echo _variable_ is defined) else (echo _variable_ is NOT defined)
@@ -54,11 +54,11 @@ goto:eof
 	
 	
 	::###### Using && and || conditionals
-	echo.
+	call dk_echo
 	call dk_set _variable_ "is defined"
 	call dk_defined _variable_ && (echo _variable_ is defined) || (echo _variable_ is NOT defined)
 
-	echo.
+	call dk_echo
 	call dk_unset _variable_
 	call dk_defined _variable_ && (echo _variable_ is defined) || (echo _variable_ is NOT defined)
 	::FIXME: ERRORLEVEL is still 1

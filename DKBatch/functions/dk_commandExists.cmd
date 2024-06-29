@@ -32,7 +32,7 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
     ::###### Using if return value
-	echo.
+	call dk_echo
 	
 	call dk_set _command_ echo
 	call dk_commandExists "%_command_%" result
@@ -45,7 +45,7 @@ goto:eof
 	
 	
 	::###### Using if ERRORLEVEL
-	echo.
+	call dk_echo
 	
 	call dk_set _command_ echo
 	call dk_commandExists "%_command_%"
@@ -58,7 +58,7 @@ goto:eof
 	
 	
 	::###### Using && and || conditionals
-	echo.
+	call dk_echo
 	
 	call dk_set _command_ echo	
 	call dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exists)

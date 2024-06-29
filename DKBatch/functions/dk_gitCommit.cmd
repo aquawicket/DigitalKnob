@@ -26,29 +26,29 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
         
     call dk_commandToVariable "%GIT_EXE% config --global user.email" USER_EMAIL
     if "%USER_EMAIL%"=="" (
-        echo.
+        call dk_echo
         echo please enter an email address
         set /p input=">" 
         "%GIT_EXE%" config --global user.email "%input%"
-        echo.
+        call dk_echo
         echo "git user.email %input% saved"
-        echo.
+        call dk_echo
     )
         
     call dk_commandToVariable "%GIT_EXE% config --global user.email" USER_NAME
     if "%USER_NAME%"=="" (
-        echo.
+        call dk_echo
         echo please enter a username
         set /p input=">" 
         "%GIT_EXE%" config --global user.name "%input%"
-        echo.
+        call dk_echo
         echo "git user.name %input% saved"
-        echo.
+        call dk_echo
     )
         
     if "%message%"=="" set "message=git commit"
         
-    echo.
+    call dk_echo
     echo git commit "%message%"
 
     call dk_confirm || goto:eof

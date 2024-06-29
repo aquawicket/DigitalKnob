@@ -28,12 +28,12 @@ goto:eof
 :DKTEST #############################################################
 
 	::###### Using if return value
-	echo.
+	call dk_echo
 	set "_path_=C:\Windows"
 	call dk_pathExists "%_path_%" result
 	if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
 	
-	echo.
+	call dk_echo
 	set "_path_=C:\NonExistent"
 	call dk_pathExists "%_path_%" result
 	if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exists)
@@ -41,12 +41,12 @@ goto:eof
 	
 	
 	::###### Using if ERRORLEVEL
-	echo.
+	call dk_echo
 	set "_path_=C:\Windows"
 	call dk_pathExists "%_path_%"
 	if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
 	
-	echo.
+	call dk_echo
 	set "_path_=C:\NonExistent"
 	call dk_pathExists "%_path_%"
 	if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exists)
@@ -54,23 +54,23 @@ goto:eof
 	
 	
 	::###### Using && and || conditionals
-	echo.
+	call dk_echo
 	set "_path_=C:\Windows"	
 	call dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
 	
-	echo.
+	call dk_echo
 	set "_path_=C:\NonExistent"	
 	call dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exists)
 	::FIXME: ERRORLEVEL is still 1 
 	
 	
 	::###### Experimental
-::	echo.
+::	call dk_echo
 ::	set "_path_=C:\Windows"
 ::	call dk_pathExists "%_path_%"
 ::	if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
 ::
-::  echo.
+::  call dk_echo
 ::	set "_path_=C:\NonExistent"
 ::	call dk_pathExists "%_path_%"
 ::	if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
