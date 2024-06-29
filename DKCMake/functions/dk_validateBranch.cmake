@@ -23,31 +23,18 @@ function(dk_validateBranch)
 	dk_printVar(DKBRANCH)
 	
 	dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
-	dk_printVar(DKBRANCH_DIR)
-	
-	dk_set(DKCMAKE_DIR "${DKBRANCH_DIR}/DKCMake")
-	dk_printVar(DKCMAKE_DIR)
-	
-	dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
-	dk_printVar(DK3RDPARTY_DIR)
-	
-	dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
-	dk_printVar(DKIMPORTS_DIR)
-	
-	dk_set(DKAPPS_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKApps")
-	dk_printVar(DKAPPS_DIR)
-	
-	dk_set(DKPLUGINS_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKPlugins")
-	dk_printVar(DKPLUGINS_DIR)
-	
-	dk_set(DKBASH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKBash")
-	dk_printVar(DKBASH_DIR)
-	
-	dk_set(DKBATCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKBatch")
-	dk_printVar(DKBATCH_DIR)
-	
-	dk_set(DKPOWERSHELL_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}/DKPowershell")
-	dk_printVar(DKPOWERSHELL_DIR)
+		dk_set(DKCMAKE_DIR "${DKBRANCH_DIR}/DKCMake")
+			dk_set(DKCMAKE_FUNCTIONS_DIR "${DKCMAKE_DIR}/functions")
+		dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")	
+		dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")	
+		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
+		dk_set(DKPLUGINS_DIR "${DKBRANCH_DIR}/DKPlugins")
+		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
+			dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
+		dk_set(DKBATCH_DIR "${DKBRANCH_DIR}/DKBatch")
+			dk_set(DKBATCH_FUNCTIONS_DIR "${DKBATCH_DIR}/functions")
+		dk_set(DKPOWERSHELL_DIR "${DKBRANCH_DIR}/DKPowershell")
+			dk_set(DKPOWERSHELL_FUNCTIONS_DIR "${DKPOWERSHELL_DIR}/functions")
 endfunction()
 
 
@@ -58,5 +45,5 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_validateBranch()
 endfunction()
