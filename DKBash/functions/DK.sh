@@ -73,16 +73,16 @@ DK (){
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			dk_source "${DKSCRIPT_PATH}"
-			dk_echo ""
+			dk_echo
 			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-			dk_echo ""
+			dk_echo
 			#dk_export ENABLE_dk_debugFunc 1
 			#dk_source "${DKSCRIPT_PATH}"
 			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
-			dk_echo ""
+			dk_echo
 			dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-			dk_echo ""
+			dk_echo
 			dk_call dk_pause
 			dk_exit 0
 		fi
@@ -195,7 +195,7 @@ dk_DKSCRIPT_VARS(){
 # dk_setupKeepOpen()
 #
 dk_setupKeepOpen(){
-	dk_echo ""
+	dk_echo
 	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 }
 

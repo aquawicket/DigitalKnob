@@ -159,9 +159,9 @@ dk_pickUpdate (){
 
 	dk_readCache
 	
-	dk_echo ""
+	dk_echo
 	dk_checkGitRemote
-	dk_echo ""
+	dk_echo
 	
 	#dk_printVar _APP_
 	#dk_printVar _TARGET_OS_ 
@@ -181,11 +181,11 @@ dk_pickUpdate (){
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo ""
+		dk_echo
 		dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
-		dk_echo ""
+		dk_echo
 		dk_echo "${red}" 
 		if [ -n "$_APP_" ] && [ -n "$_TARGET_OS_" ] && [ -n "$_TYPE_" ]; then
 			dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
@@ -202,7 +202,7 @@ dk_pickUpdate (){
 		dk_echo " 8) Clear cmake cache and .tmp files"
 		dk_echo " 9) Reload"
 		dk_echo "10) Exit"
-		dk_echo ""
+		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
 	fi
@@ -251,10 +251,10 @@ dk_pickApp (){
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
-	dk_echo ""
+	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
 	
-	dk_echo ""
+	dk_echo
     dk_echo " 1) HelloWorld"
     dk_echo " 2) DKCore"
     dk_echo " 3) DKJavascript"
@@ -267,7 +267,7 @@ dk_pickApp (){
     dk_echo "10) Go Back"
     dk_echo "11) Reload"
 	dk_echo "12) Exit"
-    dk_echo ""
+    dk_echo
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -307,11 +307,11 @@ dk_pickOs (){
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
-	dk_echo ""
+	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) ${HOST_TRIPLE-}"
-	dk_echo ""
+	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
 	dk_echo " 4) Android x86"
@@ -349,7 +349,7 @@ dk_pickOs (){
 	dk_echo "36) Clear Screen"
 	dk_echo "37) Go Back"
 	dk_echo "38) Exit"
-	dk_echo ""
+	dk_echo
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -442,7 +442,7 @@ dk_pickType (){
 	dk_debugFunc
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
-	dk_echo ""
+	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) Debug"
@@ -451,7 +451,7 @@ dk_pickType (){
 	dk_echo " 4) Clear Screen"
 	dk_echo " 5) Go Back"
 	dk_echo " 6) Exit"
-	dk_echo ""
+	dk_echo
 	
 	read input
 	if [ "$input" = "1" ]; then
@@ -506,11 +506,11 @@ dk_generate (){
 	dk_verbose "dk_generate($*)"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 	
-	dk_echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - ${DKLEVEL-}"
 	dk_echo "##################################################################"
-	dk_echo ""
+	dk_echo
 
 	dk_clearCmakeCache
 	dk_deleteTempFiles
@@ -687,11 +687,11 @@ dk_generate (){
 	###### CMake Configure ######
 	dk_installCmake
 	
-	dk_echo ""
+	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = $@"	
 	dk_call "$CMAKE_EXE" "$@"
-	dk_echo ""
+	dk_echo
 }
 	
 
@@ -703,11 +703,11 @@ dk_build (){
 	dk_verbose "dk_build($*)"
 	[ $# -gt 0 ] && dk_error "too many arguments"
 
-	dk_echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	dk_echo ""
+	dk_echo
 	
 	if [ "$TYPE" = "Debug" ] || [ "$TYPE" = "All" ]; then
 		if dk_pathExists "$DKAPPS_DIR/$APP/$TARGET_OS/Debug/CMakeCache.txt"; then
@@ -728,11 +728,11 @@ dk_build (){
 		fi
 	fi
 	
-	dk_echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	dk_echo "##################################################################"
-	dk_echo ""
+	dk_echo
 }
 
 
@@ -839,7 +839,7 @@ dk_installCmake (){
 			return $true;
 		fi
 
-		dk_echo ""
+		dk_echo
 		dk_info "Installing cmake . . ."
 		dk_download "$CMAKE_DL" "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE"
 		dk_extract "$DKDOWNLOAD_DIR"/"$CMAKE_DL_FILE" "$DKTOOLS_DIR"
@@ -1122,8 +1122,8 @@ dk_confirm (){
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -rp $" " REPLY
-	dk_echo ""
-	dk_echo ""
+	dk_echo
+	dk_echo
 	#result=$(echo $REPLY | grep "^[Yy]$")
 	[ "$REPLY" = "y" ] && return $true
 	[ "$REPLY" = "Y" ] && return $true
@@ -1550,7 +1550,7 @@ dk_validateBranch (){
 	#		dk_debug "$DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME $DKBRANCH_DIR/$DKSCRIPT_NAME
 	#	fi
-	#	dk_echo ""
+	#	dk_echo
 	#	dk_info "RELOADING SCRIPT TO -> $DKBRANCH_DIR/$DKSCRIPT_NAME"
 	#	read -p "Press enter to continue"
 	#	clear
@@ -1767,14 +1767,14 @@ dk_resetAll (){
 	
 	if ! [ "$1" = "wipe" ]; then
 		clear
-		dk_echo ""
-		dk_echo ""
+		dk_echo
+		dk_echo
 		dk_info "Do you want to reset the entire local repository . . . ?"
 		dk_info "This will delete digitalknob, everything will be reset,"
 		dk_info "and the repository will be re-cloned. All libraries and tools"
 		dk_info "will be re downloaded and rebuild from start. Save any changes"
 		dk_info "you wish to commit or save beforehand."
-		dk_echo ""
+		dk_echo
 		
 		dk_confirm || return 0
 		
@@ -1804,7 +1804,7 @@ dk_resetAll (){
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		dk_echo ""
+		dk_echo
 		dk_echo "DELETING $DKBRANCH_DIR . . . ."
 		dk_call rm -r -f "$DKBRANCH_DIR" #|| dk_error "dk_call rm -r -f $DKBRANCH_DIR failed"
 		dk_echo "done."
@@ -1842,12 +1842,12 @@ dk_removeAll (){
 	
 	if ! [ "$1" = "wipe" ]; then	
 		clear
-		dk_echo ""
-		dk_echo ""
+		dk_echo
+		dk_echo
 		dk_echo "Do you want to remove the entire local repository . . . ?"
 		dk_echo "This will delete digitalknob, Save any changes"
 		dk_echo "you wish to commit or save beforehand."		
-		dk_echo ""
+		dk_echo
 		
 		dk_confirm || return 0
 		
@@ -1877,7 +1877,7 @@ dk_removeAll (){
 		#do we need to remove any environment variables?
 		
 		cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
-		dk_echo ""
+		dk_echo
 		dk_info "DELETING $DKBRANCH_DIR . . . ."
 		rm -r -f "$DKBRANCH_DIR"
 		dk_info "done."
@@ -1940,38 +1940,38 @@ dk_gitCommit (){
 	dk_printVar STORE
 	if [ -z "$STORE" ]; then
 		$GIT_EXE config --global credential.helper store
-		dk_echo ""
+		dk_echo
 		dk_info "git credential.helper is now set to store"
-		dk_echo ""
+		dk_echo
 	fi
 	
 	USER_EMAIL=$($GIT_EXE config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
-		dk_echo ""
+		dk_echo
 		dk_info "please enter an email address"
 		read input
 		$GIT_EXE config --global user.email "$input"
-		dk_echo ""
+		dk_echo
 		dk_info "git user.email '$input' saved"
-		dk_echo ""
+		dk_echo
 	fi
 
 	USER_NAME=$($GIT_EXE config --global user.name)
 	if [ -z "USER_NAME" ]; then
-		dk_echo ""
+		dk_echo
 		dk_info "please enter a username"
 		read input
 		$GIT_EXE config --global user.name "$input"
-		dk_echo ""
+		dk_echo
 		dk_info "git user.name '$input' saved"
-		dk_echo ""
+		dk_echo
 	fi
 	
 	if [ -z "$message" ]; then
 		message="git commit"
 	fi
 	
-	dk_echo ""
+	dk_echo
 	dk_info "git commit \"${message}\""
 	dk_confirm || return 0
 	

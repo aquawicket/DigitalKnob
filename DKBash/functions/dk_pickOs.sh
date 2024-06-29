@@ -10,11 +10,11 @@ dk_pickOs (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 
-	dk_echo ""
+	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) ${HOST_TRIPLE-}"
-	dk_echo ""
+	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
 	dk_echo " 4) Android x86"
@@ -52,7 +52,7 @@ dk_pickOs (){
 	dk_echo "36) Clear Screen"
 	dk_echo "37) Go Back"
 	dk_echo "38) Exit"
-	dk_echo ""
+	dk_echo
 	
 	read input
 	if [ "${input}" = "1" ]; then

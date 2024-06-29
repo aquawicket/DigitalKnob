@@ -10,11 +10,11 @@ dk_generate (){
 	dk_debugFunc
 	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	dk_echo ""
+	dk_echo
 	dk_echo "##################################################################"
 	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - ${DKLEVEL-}"
 	dk_echo "##################################################################"
-	dk_echo ""
+	dk_echo
 
 	dk_clearCmakeCache
 	dk_deleteTempFiles
@@ -191,11 +191,11 @@ dk_generate (){
 	###### CMake Configure ######
 	dk_installCmake
 	
-	dk_echo ""
+	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = $*"
 	dk_call "$CMAKE_EXE" "$@" #&& echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
-	dk_echo ""
+	dk_echo
 }
 
 

@@ -59,7 +59,7 @@ dk_validateBranch (){
 	#		dk_debug "${DKBRANCH_DIR}/${DKSCRIPT_NAME}"
 	#		cp ${DKSCRIPT_DIR}/${DKSCRIPT_NAME} ${DKBRANCH_DIR}/${DKSCRIPT_NAME}
 	#	fi
-	#	dk_echo ""
+	#	dk_echo
 	#	dk_info "RELOADING SCRIPT TO -> ${DKBRANCH_DIR}/${DKSCRIPT_NAME}"
 	#	read -p "Press enter to continue"
 	#	dk_clearScreen

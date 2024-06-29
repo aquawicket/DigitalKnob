@@ -46,7 +46,7 @@ main (){
 	dk_echo "ps -p \$\$ -o 'comm=' = $(ps -p $$ -o 'comm=')"
 	dk_echo "ps -p \$\$ -o 'args=' = $(ps -p $$ -o 'args=')"
 	dk_echo "ps -o fname --no-headers \$\$ = $(ps -o fname --no-headers $$)"
-	dk_echo ""
+	dk_echo
 
 	####################### Test Constructs #######################
 	# https://tldp.org/LDP/abs/html/testconstructs.html#TTESTREF
@@ -62,7 +62,7 @@ main (){
 	dk_echo "\$v_0 =   $v_0"
 	dk_echo "\$v_1 =   $v_1"
 	dk_echo "\$v_abc = $v_abc"
-	dk_echo ""
+	dk_echo
 
 
 	### test ###
@@ -89,7 +89,7 @@ main (){
 	evaluate test "v_0"
 	evaluate test "v_1"
 	evaluate test "v_abc"
-	dk_echo ""
+	dk_echo
 	
 	evaluate [        ] 
 	evaluate [ 0      ]
@@ -103,26 +103,26 @@ main (){
 	evaluate [ $v_0   ]
 	evaluate [ $v_1   ]
 	evaluate [ $v_abc ]
-	dk_echo ""
+	dk_echo
 	
 	### if [ ] ###
 	if [   ]; then dk_echo 'if [   ] is $true'; else dk_echo 'if [   ] is $false'; fi
 	if [ 0 ]; then dk_echo "if [ 0 ] is $true"; else dk_echo "if [ 0 ] is $false"; fi
 	if [ 1 ]; then dk_echo "if [ 1 ] is $true"; else dk_echo "if [ 1 ] is $false"; fi
-	dk_echo ""
+	dk_echo
 
 	### [ -e ] ###
 	[ -e        ] && dk_echo "[ -e        ] is $true" || dk_echo "[ -e        ] is $false"
 	[ -e $BLANK ] && dk_echo "[ -e \$BLANK ] is $true" || dk_echo "[ -e \$BLANK ] is $false"
 	[ -e $HOME  ] && dk_echo "[ -e \$HOME  ] is $true" || dk_echo "[ -e \$HOME  ] is $false"
-	dk_echo ""
+	dk_echo
 
 	################ (BASH ONLY) #################
 	### [[ ]] ### (BASH ONLY) 
 	#           dk_echo "[[   ]] is $error"
 	#[[ 0 ]] && dk_echo "[[ 0 ]] is $true" || dk_echo "[[ 0 ]] is $false"
 	#[[ 1 ]] && dk_echo "[[ 1 ]] is $true" || dk_echo "[[ 1 ]] is $false"
-	#dk_echo ""
+	#dk_echo
 
 	### (( )) ### (BASH ONLY)
 	#((          )) && dk_echo "((          )) is $true" || dk_echo "((          )) is $false"	# sh error
@@ -140,32 +140,32 @@ main (){
 	#((  '0'     )) && dk_echo "((  '0'     )) is $true" || dk_echo "((  '0'     )) is $false"
 	#((  '1'     )) && dk_echo "((  '1'     )) is $true" || dk_echo "((  '1'     )) is $false"
 	#((  'abc'   )) && dk_echo "(( 'abc '   )) is $true" || dk_echo "(( 'abc'    )) is $false"
-	#dk_echo ""
+	#dk_echo
 
 	### if [[ ]] ### (BASH ONLY)
 	#                dk_echo "if [[   ]] is $error"
 	#if [[ 0 ]]; then dk_echo "if [[ 0 ]] is $true"; else dk_echo "if [[ 0 ]] is $false"; fi
 	#if [[ 1 ]]; then dk_echo "if [[ 1 ]] is $true"; else dk_echo "if [[ 1 ]] is $false"; fi
-	#dk_echo ""
+	#dk_echo
 
 	### if (( )) ### (BASH ONLY)
 	#if ((   )); then dk_echo "if ((   )) is $true"; else dk_echo "if ((   )) is $false"; fi    sh error
 	#if (( 0 )); then dk_echo "if (( 0 )) is $true"; else dk_echo "if (( 0 )) is $false"; fi
 	#if (( 1 )); then dk_echo "if (( 1 )) is $true"; else dk_echo "if (( 1 )) is $false"; fi
-	#dk_echo ""
+	#dk_echo
 
 	### [[ -e ]] ### (BASH ONLY)
 	#                   dk_echo "[[ -e        ]] is $error"
 	#[[ -e $BLANK ]] && dk_echo "[[ -e \$BLANK ]] is $true" || dk_echo "[[ -e \$BLANK ]] is $false"
 	#[[ -e $HOME  ]] && dk_echo "[[ -e \$HOME  ]] is $true" || dk_echo "[[ -e \$HOME  ]] is $false"
-	#dk_echo ""
+	#dk_echo
 
 	### (( -e )) ### (BASH ONLY)
 	#(( -e        )) && dk_echo "(( -e        )) is $true" || dk_echo "(( -e        )) is $false"
 	#(( -e $BLANK )) && dk_echo "(( -e \$BLANK )) is $true" || dk_echo "(( -e \$BLANK )) is $false"
 	#				   dk_echo "(( -e HOME    )) is $error"
 	#				   dk_echo "(( -e \$HOME  )) is $error"
-	#dk_echo ""
+	#dk_echo
 
 	dk_echo "\n############################################################\n"
 	

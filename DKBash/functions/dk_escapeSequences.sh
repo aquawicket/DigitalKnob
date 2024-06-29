@@ -49,14 +49,14 @@ dk_escapeSequences (){
 #	ASCII_ADD		US		31		037		0x1f	\#31		"Unit Separator"
 
 
-#	dk_echo ""
+#	dk_echo
 #	dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
 #	ASCII_size=${#ASCII[@]}
 #	for (( i=0; i<${ASCII_size}; i++ ));
 #	do
 #		ASCII_SHOW $i
 #	done
-#	dk_echo ""
+#	dk_echo
 
 
 	dk_hexToVariable 0x00 NUL
