@@ -56,6 +56,13 @@ function(DKINIT)
 
 	############ LOAD FUNCTION FILES ############
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	#dk_load(__TIME__)
+	dk_load(__FILE__)
+	dk_load(__LINE__)
+	dk_load(__FUNCTION__)
+	dk_load(__ARGC__)
+	dk_load(__ARGV__)
+	dk_load(__CALLER__)
 	dk_load(dk_color)
 	dk_load(dk_logo)
 	
@@ -73,7 +80,6 @@ function(DKINIT)
 		DKTEST()
 		
 		message("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
-		dk_load(dk_pause)
 		dk_pause()
 	endif()
 	endif()

@@ -16,13 +16,13 @@ function(dk_assert expression)
 	
 	
 	if(NOT ${expression})
-		message(STATUS "\n\n${bg_red}Assertion failed: at ${expression}${clr}")
+		dk_echo("\n\n${bg_red}Assertion failed: at ${expression}${clr}")
 		dk_replaceAll("${expression}"  " "  ""  var)
 		
 		if("${var}")
-			message(FATAL_ERROR "${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			message(FATAL_ERROR "${bg_red} ${expression} ${clr}")
+			dk_error("${bg_red} ${expression} ${clr}")
 		endif()
 		dk_exit()
 	endif()

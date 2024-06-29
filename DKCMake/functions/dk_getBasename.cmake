@@ -12,9 +12,9 @@ function(dk_getBasename path rtn_var)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
-	
+	#dk_printVar(path)
 	get_filename_component(basename ${path} NAME)
-	dk_printVar(basename)
+	#dk_printVar(basename)
 	set(${rtn_var} ${basename} PARENT_SCOPE)
 endfunction()
 

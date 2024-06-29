@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #	@msg (optional)	- A message to print
 #
-function(dk_fixme msg)
+function(dk_fixme)
 	dk_debugFunc(${ARGV})
 
 
@@ -36,18 +36,18 @@ function(dk_fixme msg)
 	endif()
 	
 	if(HALT_ON_FIXME OR HALT AND NOT NO_HALT)
-		message("${yellow}*** HALT_ON_FIXME ***")
+		dk_echo("${yellow}*** HALT_ON_FIXME ***")
 		message(FATAL_ERROR "${yellow}FIXME: ${msg}${clr}")
 		#dk_exit(1)
 	elseif(TRACE_ON_FIXME OR TRACE AND NOT NO_TRACE)
-		message("${yellow}*** TRACE_ON_FIXME ***")
+		dk_echo("${yellow}*** TRACE_ON_FIXME ***")
 		message(WARNING "${yellow}FIXME: ${yellow}${msg}${clr}")
 	else()
-		message("${yellow}FIXME: ${msg}${clr}")
+		dk_echo("${yellow}FIXME: ${msg}${clr}")
 	endif()
 	
 	if(PAUSE_ON_FIXME OR PAUSE AND NOT NO_PAUSE)
-		message("${yellow}*** PAUSE_ON_FIXME ***${clr}")
+		dk_echo("${yellow}*** PAUSE_ON_FIXME ***${clr}")
 		dk_pause()
 	endif()
 endfunction()

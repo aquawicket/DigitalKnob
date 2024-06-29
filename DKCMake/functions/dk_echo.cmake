@@ -19,9 +19,15 @@ function(dk_echo)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
-	
+#	if(NOT echo_fileline)
+		__FILE__(_FILE_ 1)
+		__LINE__(_LINE_ 1)
+		dk_getBasename("${_FILE_}" _FILE_)
+		set(echo_fileline "${_FILE_}:${_LINE_}   " CACHE INTERNAL "")
+#	endif()
 	set(msg ${ARGV})
-	message("${msg}")
+	message("${echo_fileline}${msg}")
+	dk_unset(echo_fileline)
 endfunction()
 
 

@@ -21,7 +21,7 @@ function(dk_wait)
 		set(msg "${ARGV0}")
 	endif()
 	
-	message(STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress any key to continue.")
+	dk_echo("\n\n${msg}\nWaiting ${timeout} seconds...\npress any key to continue.")
 	
 	# FIXME: This needs to adhear to the shell type we are in. Not the host OS. Hence, we can be on a WIN32 host 
 	# yet, still be in a unix environment.. and timeout wont work, and vice versa. 

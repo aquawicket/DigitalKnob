@@ -28,7 +28,7 @@ function(dk_validate variable code)
 	
 	dk_eval("${code}")
 	
-	message("${variable} = ${${variable}}")
+	dk_echo("${variable} = ${${variable}}")
 endfunction()
 #dk_createOsMacros("dk_validate")
 

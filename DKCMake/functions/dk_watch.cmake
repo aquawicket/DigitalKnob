@@ -15,7 +15,7 @@ macro(dk_watch variable)
 	if(DEFINED ${variable})
 		variable_watch(${variable} dk_watchCallback)
 	else()
-		message(FATAL_ERROR "variable:${variable} is undefined")
+		dk_error("variable:${variable} is undefined")
 	endif()
 	
 endmacro()
