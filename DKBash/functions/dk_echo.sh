@@ -41,7 +41,10 @@ dk_echo (){
 	msg=${1-}
 	msg=${msg//\\/\\\\}    # replace all exscapes
 	msg=${msg//\\\\x/\\x}  # put back all \x escapes for color
-	echo ${escapes-}${nonewline-}"${msg}"
+	
+	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
+	echo ${escapes-}${nonewline-}"${echo_fileline}  ${msg}"
+	dk_unset echo_fileline
 }
 
 

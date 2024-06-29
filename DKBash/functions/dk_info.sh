@@ -17,9 +17,13 @@
 #
 dk_info (){
 	dk_debugFunc
+	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	
 	
 	[ ${ENABLE_dk_info} -ne "1" ] && return
 	msg="$1"
+	
+	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	dk_echo "${white-}${INFO_TAG}${msg}${clr-}"
 	
 	[ ${TRACE_ON_INFO} -eq 1 ] && dk_echo "\n${white-}*** TRACE_ON_INFO ***${clr-}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)

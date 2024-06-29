@@ -21,6 +21,8 @@ dk_debug (){
 	
 	[ ${ENABLE_dk_debug-1} -ne 1 ] && return
 	msg="$1"
+	
+	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	dk_echo "${blue-}${DEBUG_TAG-}${msg}${clr-}"
 	[ ${TRACE_ON_DEBUG-0} -eq 1 ] && dk_echo "${blue}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
 	[ ${LINE_ON_DEBUG-0} -eq 1 ]  && dk_echo "${blue}*** LINE_ON_DEBUG ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true #OR HALT AND NOT NO_HALT)

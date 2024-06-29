@@ -14,6 +14,8 @@ dk_todo (){
 	
 	[ ${ENABLE_dk_todo-1} -ne 1 ] && return
 	msg="${1-}"
+	
+	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	dk_echo "${yellow}${TODO_TAG-}${msg}${clr}"
 	
 	[ ${TRACE_ON_TODO-0} -eq 1 ] && dk_echo "\n${red}*** TRACE_ON_TODO ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
