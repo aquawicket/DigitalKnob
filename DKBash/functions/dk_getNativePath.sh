@@ -21,7 +21,10 @@ dk_getNativePath (){
 	else
 		local ret_val="${2-}"
 		dk_printVar ret_val
+		
+		#dk_fixme("MacOS readlink has no -f parameter")
 		dk_return "$(readlink -f "$1")"
+		#dk_return "$(dk_readlink -f "$1")"
 	fi
 }
 
