@@ -1346,7 +1346,9 @@ if(EMSCRIPTEN)
 	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.wasm NO_HALT)
 
 	########################## PACKAGE ASSETS ##########################
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DK_PROJECT_DIR}/assets@/")
+	if(EXISTS ${DK_PROJECT_DIR}/assets)
+		set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DK_PROJECT_DIR}/assets@/")
+	endif()
 	
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
