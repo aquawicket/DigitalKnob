@@ -99,9 +99,6 @@ $code=@'
 	$11bug=($((gwmi Win32_OperatingSystem).BuildNumber) -eq '22000') -AND (($cmd -eq 'file:') -OR (test-path -lit $cmd -PathType Container))
 	if($11bug){
 		'System.Windows.Forms','Microsoft.VisualBasic' |% {[Reflection.Assembly]::LoadWithPartialName("'$_")}
-	}
-	if($11bug){
-		$path='^(l)'+$($cmd -replace '([\+\^\%\~\(\)\[\]])','{$1}')+'{ENTER}'; 
 		$cmd='control.exe'; 
 		$arg='admintools'
 	}
@@ -114,7 +111,7 @@ $code=@'
 	if($11bug) {
 		$w=0; 
 		do {
-			if($w-gt40){
+			if($w -gt 40){
 				break
 			}; 
 			sleep -mi 250;
@@ -122,9 +119,7 @@ $code=@'
 		} 
 		until (Q); 
 		[Microsoft.VisualBasic.Interaction]::AppActivate($(Q))
-	}
-	if($11bug){
-		[Windows.Forms.SendKeys]::SendWait($path)
+		[Windows.Forms.SendKeys]::SendWait('^(l)'+$($cmd -replace '([\+\^\%\~\(\)\[\]])','{$1}')+'{ENTER}')
 	}; 
 	do {sleep 7} while(Q);
 	L '.Default' $reg[4] 'Interactive User' 
