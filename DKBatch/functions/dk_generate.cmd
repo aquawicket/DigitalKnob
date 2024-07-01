@@ -93,7 +93,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_clang"      call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prepend CMAKE_ARGS -G MinGW Makefiles
-	::if "%TARGET_OS%"=="win_x86_64_clang"   set CMAKE_ARGS=%CMAKE_ARGS% "-G MinGW Makefiles"
 	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prepend CMAKE_ARGS -G MinGW Makefiles
@@ -120,7 +119,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     ::call dk_echo
     call dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE% %CMAKE_ARGS%"
-	pause
     call "%CMAKE_EXE%" %CMAKE_ARGS%  && echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
     ::call dk_echo
 goto:eof
