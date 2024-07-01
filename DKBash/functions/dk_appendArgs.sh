@@ -9,8 +9,12 @@ dk_appendArgs (){
 	dk_debugFunc
 	[ $# -lt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-    CMAKE_ARGS=${CMAKE_ARGS} "$*"
-	#call dk_set CMAKE_ARGS "${CMAKE_ARGS} "$*""
+		if [ -n "${!1-}" ]; then
+			export $1=${!1} "${@:2}"
+		else
+			export $1="${@:2}"
+		fi
+		#dk_echo "1 = $1 = ${!1}"
 }
 
 
@@ -19,5 +23,9 @@ dk_appendArgs (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
-	dk_todo
+	dk_echo "myVar = ${myVar-}"
+	dk_appendArgs myVar "abc"
+	dk_echo "myVar = ${myVar-}"
+	dk_appendArgs myVar "zyx"
+	dk_echo "myVar = ${myVar-}"
 }
