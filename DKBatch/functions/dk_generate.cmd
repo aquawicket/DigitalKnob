@@ -70,6 +70,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_append CMAKE_ARGS --warn-unused-vars
     ::call dk_append CMAKE_ARGS --check-system-vars
 	
+	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANGARM64
+	if "%TARGET_OS%"=="win_x86_clang"      call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANG32
+	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prepend CMAKE_ARGS -DMSYSTEM=MINGW32
+	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANG64
+	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prepend CMAKE_ARGS -DMSYSTEM=MINGW64
+	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prepend CMAKE_ARGS -DMSYSTEM=UCRT64
+	
 	if "%TARGET_OS%"=="android_arm32"      call dk_prepend CMAKE_ARGS -G Unix Makefiles
 	if "%TARGET_OS%"=="android_arm64"      call dk_prepend CMAKE_ARGS -G Unix Makefiles
 	if "%TARGET_OS%"=="emscripten"         call dk_prepend CMAKE_ARGS -G Unix Makefiles	
@@ -86,19 +93,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_clang"      call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prepend CMAKE_ARGS -G MinGW Makefiles
+	::if "%TARGET_OS%"=="win_x86_64_clang"   set CMAKE_ARGS=%CMAKE_ARGS% "-G MinGW Makefiles"
 	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prepend CMAKE_ARGS -G MinGW Makefiles
 	
 	
-	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANGARM64
-	if "%TARGET_OS%"=="win_x86_clang"      call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANG32
-	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prepend CMAKE_ARGS -DMSYSTEM=MINGW32
-	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prepend CMAKE_ARGS -DMSYSTEM=CLANG64
-	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prepend CMAKE_ARGS -DMSYSTEM=MINGW64
-	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prepend CMAKE_ARGS -DMSYSTEM=UCRT64
-	
-	
+
 ::	###### CMAKE_TOOLCHAIN_FILE ######
 ::	call dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
 ::	call dk_assertPath TOOLCHAIN
@@ -119,6 +120,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     ::call dk_echo
     call dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE% %CMAKE_ARGS%"
+	pause
     call "%CMAKE_EXE%" %CMAKE_ARGS%  && echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
     ::call dk_echo
 goto:eof
