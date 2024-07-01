@@ -11,36 +11,34 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	$key="Registry::HKU\$(((whoami /user)-split' ')[-1])\Volatile Environment"; 
 	$code=@'
 	$I=[int32];
-	$M=[int32].module.gettype("System.Runtime.Interop`Services.Mar`shal");
-	$P=[int32].module.gettype("System.Int`Ptr"); 
-	$S=[string]
+	$M=[int32].module.gettype("System.Runtime.InteropServices.Marshal");
+	$P=[int32].module.gettype("System.IntPtr"); 
 	$D=@(); 
-	$T=@(); 
-	$DM=[AppDomain]::CurrentDomain."DefineDynami`cAssembly"(1,1)."DefineDynami`cModule"(1); 
-	$Z=[uintptr]::size
+	$T=@();
+	$DM=[AppDomain]::CurrentDomain."DefineDynamicAssembly"(1,1)."DefineDynamicModule"(1); 
 	0..5|% {
-		$D += $DM."Defin`eType"("AveYo_$_",1179913,[ValueType])
+		$D += $DM."DefineType"("aaaaa_$_",1179913,[ValueType])
 	}; 
 	$D += [uintptr]; 
 	4..6|% {
-		$D += $D[$_]."MakeByR`efType"()
+		$D += $D[$_]."MakeByRefType"()
 	}
-	$F='kernel','advapi','advapi', ($S,$S,$I,$I,$I,$I,$I,$S,$D[7],$D[8]), ([uintptr],$S,$I,$I,$D[9]),([uintptr],$S,$I,$I,[byte[]],$I)
+	$F='kernel', 'advapi', 'advapi', ([string],[string],[int32],[int32],[int32],[int32],[int32],[string],$D[7],$D[8]), ([uintptr],[string],[int32],[int32],$D[9]), ([uintptr],[string],[int32],[int32],[byte[]],[int32])
 	0..2|% {
-		$9=$D[0]."DefinePInvok`eMethod"(('CreateProcess','RegOpenKeyEx','RegSetValueEx')[$_],$F[$_]+'32',8214,1,$S,$F[$_+3],1,4)
+		$9=$D[0]."DefinePInvokeMethod"(('CreateProcess','RegOpenKeyEx','RegSetValueEx')[$_],$F[$_]+'32',8214,1,[string],$F[$_+3],1,4)
 	}
-	$DF=($P,$I,$P),($I,$I,$I,$I,$P,$D[1]),($I,$S,$S,$S,$I,$I,$I,$I,$I,$I,$I,$I,[int16],[int16],$P,$P,$P,$P),($D[3],$P),($P,$P,$I,$I)
+	$DF=($P,[int32],$P),([int32],[int32],[int32],[int32],$P,$D[1]),([int32],[string],[string],[string],[int32],[int32],[int32],[int32],[int32],[int32],[int32],[int32],[int16],[int16],$P,$P,$P,$P),($D[3],$P),($P,$P,[int32],[int32])
 	1..5|% {
-		$k=$_; $n=1; $DF[$_-1]|% {$9=$D[$k]."Defin`eField"('f' + $n++, $_, 6)}
+		$k=$_; $n=1; $DF[$_-1]|% {$9=$D[$k]."DefineField"('f' + $n++, $_, 6)}
 	};
 	0..5|% {
-		$T += $D[$_]."Creat`eType"()
+		$T += $D[$_]."CreateType"()
 	}
 	0..5|% {
 		nv "A$_" ([Activator]::CreateInstance($T[$_])) -fo
 	}; 
 	function F ($1,$2) {
-		$T[0]."G`etMethod"($1).invoke(0,$2)
+		$T[0]."GetMethod"($1).invoke(0,$2)
 	}
 	$TI=(whoami /groups)-like'*1-16-16384*'; 
 	$As=0; 
@@ -57,30 +55,30 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 			}
 		}
 		function M ($1,$2,$3) {
-			$M."G`etMethod"($1,[type[]]$2).invoke(0,$3)}; 
+			$M."GetMethod"($1,[type[]]$2).invoke(0,$3)}; 
 			$H=@(); 
-			$Z,(4*$Z+16)|% {
-				$H += M "AllocHG`lobal" $I $_
+			[uintptr]::size,(4*[uintptr]::size+16)|% {
+				$H += M "AllocHGlobal" $I $_
 			}
-		M "WriteInt`Ptr" ($P,$P) ($H[0],$As.Handle); 
+		M "WriteIntPtr" ($P,$P) ($H[0],$As.Handle); 
 		$A1.f1=131072; 
-		$A1.f2=$Z; 
+		$A1.f2=[uintptr]::size; 
 		$A1.f3=$H[0]; 
 		$A2.f1=1; 
 		$A2.f2=1; 
 		$A2.f3=1; 
 		$A2.f4=1
 		$A2.f6=$A1; 
-		$A3.f1=10*$Z+32; 
+		$A3.f1=10*[uintptr]::size+32; 
 		$A4.f1=$A3; 
 		$A4.f2=$H[1]; 
-		M "StructureTo`Ptr" ($D[2],$P,[boolean]) (($A2 -as $D[2]),$A4.f2,$false)
+		M "StructureToPtr" ($D[2],$P,[boolean]) (($A2 -as $D[2]),$A4.f2,$false)
 		$Run=@($null, "powershell -win 1 -nop -c iex `$env:R; # $id", 0, 0, 0, 0x0E080600, 0, $null, ($A4 -as $T[4]), ($A5 -as $T[5]))
 		F 'CreateProcess' $Run; return
 	}; 
 	$env:R=''; 
 	rp $key $id -force; 
-	$priv=[diagnostics.process]."GetM`ember"('SetPrivilege',42)[0]
+	$priv=[diagnostics.process]."GetMember"('SetPrivilege',42)[0]
 	'SeSecurityPrivilege','SeTakeOwnershipPrivilege','SeBackupPrivilege','SeRestorePrivilege' |% {$priv.Invoke($null, @("$_",2))}
 	$HKU=[uintptr][uint32]2147483651;
 	$NT='S-1-5-18'; 
