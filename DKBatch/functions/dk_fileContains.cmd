@@ -9,19 +9,29 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 		
-	call dk_fileToVariable %~1 _fileVar_
-	
-	setlocal enableDelayedExpansion
-    call set "_haystack_=%_fileVar_%"
-    call set "_needle_=%~2"
-    if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
+	>nul findstr /c:"%~2" "%~1" &&  (
 		if defined "%~3" (endlocal & call dk_set %3 "true")
 		(call )
 		goto:eof
 	)
 	
-    if defined "%~3" (endlocal & call dk_set %3 "false")
+	if defined "%~3" (endlocal & call dk_set %3 "false")
     (call)
+	
+::  method 2
+::	call dk_fileToVariable %~1 _fileVar_
+::	
+::	setlocal enableDelayedExpansion
+::    call set "_haystack_=%_fileVar_%"
+::    call set "_needle_=%~2"
+::    if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
+::		if defined "%~3" (endlocal & call dk_set %3 "true")
+::		(call )
+::		goto:eof
+::	)
+::	
+::    if defined "%~3" (endlocal & call dk_set %3 "false")
+::    (call)
 goto:eof
 
 
