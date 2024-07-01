@@ -17,8 +17,7 @@ dk_readlink (){
 	# test $(readlink -f "%2")
 	# fallback on the code below upon failure
 echo "if $(readlink -f "$2"); then"	
-	#if $(readlink -f "$2"); then
-	if [ 0 = 1 ]; then
+	if $(readlink -f "$2"); then
 		echo $(readlink -f "$2")
 	else
 		echo "dk_readlink"
