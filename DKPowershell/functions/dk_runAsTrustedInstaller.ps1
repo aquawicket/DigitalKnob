@@ -6,10 +6,10 @@ if(!$dk_runAsTrustedInstaller){ $dk_runAsTrustedInstaller = 1 } else{ return }
 #
 # Run as Trusted Installer, with ownership privileges
 #
-function dk_runAsTrustedInstaller ($cmd,$arg){ 
+function dk_runAsTrustedInstaller ($cmd, $arg){ 
 	$id='dk_runAsTrustedInstaller'; 
 	$key="Registry::HKU\$(((whoami /user)-split' ')[-1])\Volatile Environment"; 
-	$code=@'
+$code=@'
 	$I=[int32];
 	$M=[int32].module.gettype("System.Runtime.InteropServices.Marshal");
 	$P=[int32].module.gettype("System.IntPtr"); 
@@ -29,7 +29,9 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	}
 	$DF=($P,[int32],$P),([int32],[int32],[int32],[int32],$P,$D[1]),([int32],[string],[string],[string],[int32],[int32],[int32],[int32],[int32],[int32],[int32],[int32],[int16],[int16],$P,$P,$P,$P),($D[3],$P),($P,$P,[int32],[int32])
 	1..5|% {
-		$k=$_; $n=1; $DF[$_-1]|% {$9=$D[$k]."DefineField"('f' + $n++, $_, 6)}
+		$k=$_; 
+		$n=1; 
+		$DF[$_-1]|% {$9=$D[$k]."DefineField"('f' + $n++, $_, 6)}
 	};
 	0..5|% {
 		$T += $D[$_]."CreateType"()
@@ -43,15 +45,17 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	$TI=(whoami /groups)-like'*1-16-16384*'; 
 	$As=0; 
 	if(!$cmd){	
-		$cmd='control';$arg='admintools'
+		$cmd='control';
+		$arg='admintools'
 	}; 
-	if($cmd-eq'This PC'){
+	if($cmd -eq 'This PC'){
 		$cmd='file:'
 	}
 	if(!$TI){
 		'TrustedInstaller','lsass','winlogon'|% {
 			if(!$As){
-				$9=sc.exe start $_; $As=@(get-process -name $_ -ea 0|% {$_})[0]
+				$9=sc.exe start $_; 
+				$As=@(get-process -name $_ -ea 0|% {$_})[0]
 			}
 		}
 		function M ($1,$2,$3) {
@@ -73,17 +77,16 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 		$A4.f1=$A3; 
 		$A4.f2=$H[1]; 
 		M "StructureToPtr" ($D[2],$P,[boolean]) (($A2 -as $D[2]),$A4.f2,$false)
-		$Run=@($null, "powershell -win 1 -nop -c iex `$env:R; # $id", 0, 0, 0, 0x0E080600, 0, $null, ($A4 -as $T[4]), ($A5 -as $T[5]))
-		F 'CreateProcess' $Run; return
+		$Run=@($null, "powershell -win 1 -nop -c iex `$env:R; # dk_runAsTrustedInstaller", 0, 0, 0, 0x0E080600, 0, $null, ($A4 -as $T[4]), ($A5 -as $T[5]))
+		F 'CreateProcess' $Run; 
+		return
 	}; 
 	$env:R=''; 
-	rp $key $id -force; 
+	rp $key dk_runAsTrustedInstaller -force; 
 	$priv=[diagnostics.process]."GetMember"('SetPrivilege',42)[0]
 	'SeSecurityPrivilege','SeTakeOwnershipPrivilege','SeBackupPrivilege','SeRestorePrivilege' |% {$priv.Invoke($null, @("$_",2))}
-	$HKU=[uintptr][uint32]2147483651;
-	$NT='S-1-5-18'; 
-	$reg=($HKU,$NT,8,2,($HKU -as $D[9])); 
-	F 'RegOpenKeyEx' $reg; $LNK=$reg[4]
+	$reg=([uintptr][uint32]2147483651,'S-1-5-18',8,2,([uintptr][uint32]2147483651 -as $D[9])); 
+	F 'RegOpenKeyEx' $reg; 
 	function L ($1,$2,$3) {
 		sp 'HKLM:\Software\Classes\AppID\{CDCBCFCA-3CDC-436f-A4E2-0E02075250C2}' 'RunAs' $3 -force -ea 0
 		$b=[Text.Encoding]::Unicode.GetBytes("\Registry\User\$1"); 
@@ -91,9 +94,9 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	}
 	function Q {
 		[int](gwmi win32_process -filter 'name="explorer.exe"'|?{
-		$_.getownersid().sid-eq$NT}|select -last 1).ProcessId
+		$_.getownersid().sid -eq 'S-1-5-18'}|select -last 1).ProcessId
 	}
-	$11bug=($((gwmi Win32_OperatingSystem).BuildNumber) -eq '22000') -AND (($cmd-eq'file:') -OR (test-path -lit $cmd -PathType Container))
+	$11bug=($((gwmi Win32_OperatingSystem).BuildNumber) -eq '22000') -AND (($cmd -eq 'file:') -OR (test-path -lit $cmd -PathType Container))
 	if($11bug){
 		'System.Windows.Forms','Microsoft.VisualBasic' |% {[Reflection.Assembly]::LoadWithPartialName("'$_")}
 	}
@@ -102,17 +105,20 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 		$cmd='control.exe'; 
 		$arg='admintools'
 	}
-	L ($key-split'\\')[1] $LNK ''; 
-	$R=[diagnostics.process]::start($cmd,$arg); 
+	L ($key-split'\\')[1] $reg[4] ''; 
+	$R=[diagnostics.process]::start($cmd, $arg); 
 	if($R){
-		$R.PriorityClass='High'; $R.WaitForExit()
+		$R.PriorityClass='High'; 
+		$R.WaitForExit()
 	}
 	if($11bug) {
-		$w=0; do {
+		$w=0; 
+		do {
 			if($w-gt40){
 				break
 			}; 
-			sleep -mi 250;$w++
+			sleep -mi 250;
+			$w++
 		} 
 		until (Q); 
 		[Microsoft.VisualBasic.Interaction]::AppActivate($(Q))
@@ -121,11 +127,15 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 		[Windows.Forms.SendKeys]::SendWait($path)
 	}; 
 	do {sleep 7} while(Q);
-	L '.Default' $LNK 'Interactive User'
-'@; $V='';'cmd','arg','id','key'|%{
-	$V+="`n`$$_='$($(gv $_ -val)-replace"'","''")';"
+	L '.Default' $reg[4] 'Interactive User' 
+'@;
+
+$V='';
+'cmd','arg','id','key'|%{
+	$V+="`n`$$_='$($(gv $_ -val)-replace"'","''")';
+	"
 }; 
-	sp $key $id $($V,$code) -type 7 -force -ea 0
+	sp $key dk_runAsTrustedInstaller $($V,$code) -type 7 -force -ea 0
 	start powershell -args "-win 1 -nop -c `n$V `$env:R=(gi `$key -ea 0).getvalue(`$id)-join''; 
 	iex `$env:R" -verb runas
 } 
