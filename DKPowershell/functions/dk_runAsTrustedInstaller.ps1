@@ -11,22 +11,34 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	$key="Registry::HKU\$(((whoami /user)-split' ')[-1])\Volatile Environment"; 
 	$code=@'
 	$I=[int32];
-	$M=$I.module.gettype("System.Runtime.Interop`Services.Mar`shal");
-	$P=$I.module.gettype("System.Int`Ptr"); 
+	$M=[int32].module.gettype("System.Runtime.Interop`Services.Mar`shal");
+	$P=[int32].module.gettype("System.Int`Ptr"); 
 	$S=[string]
 	$D=@(); 
 	$T=@(); 
 	$DM=[AppDomain]::CurrentDomain."DefineDynami`cAssembly"(1,1)."DefineDynami`cModule"(1); 
 	$Z=[uintptr]::size
-	0..5|% {$D += $DM."Defin`eType"("AveYo_$_",1179913,[ValueType])}; 
+	0..5|% {
+		$D += $DM."Defin`eType"("AveYo_$_",1179913,[ValueType])
+	}; 
 	$D += [uintptr]; 
-	4..6|% {$D += $D[$_]."MakeByR`efType"()}
+	4..6|% {
+		$D += $D[$_]."MakeByR`efType"()
+	}
 	$F='kernel','advapi','advapi', ($S,$S,$I,$I,$I,$I,$I,$S,$D[7],$D[8]), ([uintptr],$S,$I,$I,$D[9]),([uintptr],$S,$I,$I,[byte[]],$I)
-	0..2|% {$9=$D[0]."DefinePInvok`eMethod"(('CreateProcess','RegOpenKeyEx','RegSetValueEx')[$_],$F[$_]+'32',8214,1,$S,$F[$_+3],1,4)}
+	0..2|% {
+		$9=$D[0]."DefinePInvok`eMethod"(('CreateProcess','RegOpenKeyEx','RegSetValueEx')[$_],$F[$_]+'32',8214,1,$S,$F[$_+3],1,4)
+	}
 	$DF=($P,$I,$P),($I,$I,$I,$I,$P,$D[1]),($I,$S,$S,$S,$I,$I,$I,$I,$I,$I,$I,$I,[int16],[int16],$P,$P,$P,$P),($D[3],$P),($P,$P,$I,$I)
-	1..5|% {$k=$_; $n=1; $DF[$_-1]|% {$9=$D[$k]."Defin`eField"('f' + $n++, $_, 6)}};
-	0..5|% {$T += $D[$_]."Creat`eType"()}
-	0..5|% {nv "A$_" ([Activator]::CreateInstance($T[$_])) -fo}; 
+	1..5|% {
+		$k=$_; $n=1; $DF[$_-1]|% {$9=$D[$k]."Defin`eField"('f' + $n++, $_, 6)}
+	};
+	0..5|% {
+		$T += $D[$_]."Creat`eType"()
+	}
+	0..5|% {
+		nv "A$_" ([Activator]::CreateInstance($T[$_])) -fo
+	}; 
 	function F ($1,$2) {
 		$T[0]."G`etMethod"($1).invoke(0,$2)
 	}
@@ -81,9 +93,9 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	}
 	function Q {
 		[int](gwmi win32_process -filter 'name="explorer.exe"'|?{
-			$_.getownersid().sid-eq$NT}|select -last 1).ProcessId
+		$_.getownersid().sid-eq$NT}|select -last 1).ProcessId
 	}
-	$11bug=($((gwmi Win32_OperatingSystem).BuildNumber)-eq'22000')-AND(($cmd-eq'file:')-OR(test-path -lit $cmd -PathType Container))
+	$11bug=($((gwmi Win32_OperatingSystem).BuildNumber) -eq '22000') -AND (($cmd-eq'file:') -OR (test-path -lit $cmd -PathType Container))
 	if($11bug){
 		'System.Windows.Forms','Microsoft.VisualBasic' |% {[Reflection.Assembly]::LoadWithPartialName("'$_")}
 	}
@@ -94,10 +106,14 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	}
 	L ($key-split'\\')[1] $LNK ''; 
 	$R=[diagnostics.process]::start($cmd,$arg); 
-	if ($R) {$R.PriorityClass='High'; $R.WaitForExit()}
-	if ($11bug) {
+	if($R){
+		$R.PriorityClass='High'; $R.WaitForExit()
+	}
+	if($11bug) {
 		$w=0; do {
-			if($w-gt40){break}; 
+			if($w-gt40){
+				break
+			}; 
 			sleep -mi 250;$w++
 		} 
 		until (Q); 
@@ -108,8 +124,12 @@ function dk_runAsTrustedInstaller ($cmd,$arg){
 	}; 
 	do {sleep 7} while(Q);
 	L '.Default' $LNK 'Interactive User'
-'@; $V='';'cmd','arg','id','key'|%{$V+="`n`$$_='$($(gv $_ -val)-replace"'","''")';"}; sp $key $id $($V,$code) -type 7 -force -ea 0
-start powershell -args "-win 1 -nop -c `n$V `$env:R=(gi `$key -ea 0).getvalue(`$id)-join''; iex `$env:R" -verb runas
+'@; $V='';'cmd','arg','id','key'|%{
+	$V+="`n`$$_='$($(gv $_ -val)-replace"'","''")';"
+}; 
+	sp $key $id $($V,$code) -type 7 -force -ea 0
+	start powershell -args "-win 1 -nop -c `n$V `$env:R=(gi `$key -ea 0).getvalue(`$id)-join''; 
+	iex `$env:R" -verb runas
 } 
 
 
