@@ -1,13 +1,13 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
-if(!$dk_runAsTrustedInstaller){ $dk_runAsTrustedInstaller = 1 } else{ return }
+if(!$dk_runAsTI){ $dk_runAsTI = 1 } else{ return }
 
 ##################################################################################
-# dk_runAsTrustedInstaller(command)
+# dk_runAsTI(command)
 #
 # Run as Trusted Installer, with ownership privileges
 #
-function dk_runAsTrustedInstaller ($cmd, $arg){ 
-	$id='dk_runAsTrustedInstaller'; 
+function dk_runAsTI ($cmd, $arg){ 
+	$id='dk_runAsTI'; 
 	$key="Registry::HKU\$(((whoami /user)-split' ')[-1])\Volatile Environment"; 
 $code=@'
 	$I=[int32];
@@ -77,12 +77,12 @@ $code=@'
 		$A4.f1=$A3; 
 		$A4.f2=$H[1]; 
 		M "StructureToPtr" ($D[2],$P,[boolean]) (($A2 -as $D[2]),$A4.f2,$false)
-		$Run=@($null, "powershell -win 1 -nop -c iex `$env:R; # dk_runAsTrustedInstaller", 0, 0, 0, 0x0E080600, 0, $null, ($A4 -as $T[4]), ($A5 -as $T[5]))
+		$Run=@($null, "powershell -win 1 -nop -c iex `$env:R; # dk_runAsTI", 0, 0, 0, 0x0E080600, 0, $null, ($A4 -as $T[4]), ($A5 -as $T[5]))
 		F 'CreateProcess' $Run; 
 		return
 	}; 
 	$env:R=''; 
-	rp $key dk_runAsTrustedInstaller -force; 
+	rp $key dk_runAsTI -force; 
 	$priv=[diagnostics.process]."GetMember"('SetPrivilege',42)[0]
 	'SeSecurityPrivilege','SeTakeOwnershipPrivilege','SeBackupPrivilege','SeRestorePrivilege' |% {$priv.Invoke($null, @("$_",2))}
 	$reg=([uintptr][uint32]2147483651,'S-1-5-18',8,2,([uintptr][uint32]2147483651 -as $D[9])); 
@@ -130,7 +130,7 @@ $V='';
 	$V+="`n`$$_='$($(gv $_ -val)-replace"'","''")';
 	"
 }; 
-	sp $key dk_runAsTrustedInstaller $($V,$code) -type 7 -force -ea 0
+	sp $key dk_runAsTI $($V,$code) -type 7 -force -ea 0
 	start powershell -args "-win 1 -nop -c `n$V `$env:R=(gi `$key -ea 0).getvalue(`$id)-join''; 
 	iex `$env:R" -verb runas
 } 
@@ -142,5 +142,5 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	dk_runAsTrustedInstaller cmd
+	dk_runAsTI cmd
 }
