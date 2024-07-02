@@ -9,11 +9,15 @@
 #
 dk_arrayAt (){
 	dk_debugFunc
-	[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	dk_validateArgs array int optional:rtn_var
 	
-	typeset -n arry=$1 
-	local rtn_var="${arry[${2}]}"
-	eval "${3}=${rtn_var}"
+	typeset -n arry=${1} 
+	local arrayAt="${arry[${2}]}"
+	
+	dk_printVar arrayAt
+	[ $# -gt 2 ] && eval "${3}=${arrayAt}"
+	dk_return ${arrayAt}
 }
 
 
