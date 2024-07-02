@@ -1,5 +1,6 @@
 <!-- ::################## ELEVATE ##################
 @echo off
+title="elevate.cmd(%*)"
 
 net session >nul 2>&1
 if %ERRORLEVEL% equ 0 goto :elevated

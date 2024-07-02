@@ -1,12 +1,13 @@
 @echo off
 call ../../../DKBatch/functions/DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::####################################################################
 ::# dk_installWsl()
 ::#
 :dk_installWsl () {
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	::if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
@@ -33,12 +34,14 @@ call ../../../DKBatch/functions/DK.cmd
 	wsl --set-default-version 2
 	
 	:: Step 6 - Install your Linux distribution of choice
-	::call dk_set UBUNTU_DL "https://aka.ms/wslubuntu"
-	::call dk_set UBUNTU_DL_FILE "Ubuntu2204-221101.AppxBundle"
-	::call dk_echo   
-    ::call dk_info "Installing Wsl_Ubuntu . . ."
-    ::call dk_download %UBUNTU_DL%
-	::call dk_powershellEval "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
+	call dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
+	call dk_echo   
+    call dk_info "Installing WSL-Alpine Linux . . ."
+	call dk_download %LAUNCHER_DL%
+	call dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
+	call dk_getBasename %LAUNCHER_DL% LAUNCHER_DL_FILE
+	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE% OVERWRITE
+	%DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
 	
 	::wsl --install --distribution Debian
 	
@@ -49,3 +52,5 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_installWsl
+
+goto:eof

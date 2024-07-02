@@ -63,7 +63,7 @@ DK (){
 	dk_source __CALLER__
 	dk_source dk_debugFunc
 	dk_source dk_load
-	dk_source dk_exit
+	dk_load dk_exit
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	dk_load dk_color
@@ -73,12 +73,9 @@ DK (){
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
-			#dk_source "${DKSCRIPT_PATH}"
 			dk_echo
 			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 			dk_echo
-			#dk_export ENABLE_dk_debugFunc 1
-			#dk_source "${DKSCRIPT_PATH}"
 			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
 			DKTEST
 			dk_echo
@@ -88,9 +85,6 @@ DK (){
 			dk_exit 0
 		fi
 	fi
-	
-	###### RUN MODE ######
-	#dk_load "${DKSCRIPT_PATH}" && dk_exit 0
 }
 
 
@@ -100,25 +94,24 @@ DK (){
 # dk_init()
 #
 dk_init(){
-	#echo "###### DKBash ######"
 
 	###### fallback functions ######
 	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists "dk_echo"           || dk_echo()           { echo $*;                                                                                                        }
-	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; [$(read -rp "press enter to exit")] || exit;                                   }
-	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}";                                                                           }
-	dk_commandExists "dk_info"           || dk_info()           { dk_echo "${1}";                                                                                                   }
-	dk_commandExists "dk_debug"          || dk_debug()          { dk_echo "${blue}${1}${clr}";                                                                                      }
-	dk_commandExists "dk_verbose"        || dk_verbose()        { dk_echo "${cyan}${1}${clr}";                                                                                      }
-	dk_commandExists "dk_printVar"       || dk_printVar()       { dk_echo "${blue}${1} = ${!1-}${clr}";                                                                             }
-	dk_commandExists "dk_pathExists"     || dk_pathExists()     { [ -e "${1}" ];                                                                                                    }
-	dk_commandExists "dk_stringContains" || dk_stringContains() { [ "${1#*"$2"}" != "${1}" ];                                                                                       }
-	dk_commandExists "dk_unset"          || dk_unset()          { dk_commandExists "unset"    && unset "${1}";                                                                      }
-	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="$2";                                                                  }
-	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "$value" ];                                           }
-	dk_commandExists "dk_basename"       || dk_basename()       { dk_commandExists "basename" && echo $(basename ${1}) || dk_error "basename is not implemented";                   }
-	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && echo $(dirname ${1})  || dk_error "dirname is not implemented";                    }
-	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && echo $(realpath ${1}) || echo $(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1});       }
+	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; [$(read -rp "press enter to exit")] || exit;                                 }
+	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}";                                                                         }
+	dk_commandExists "dk_info"           || dk_info()           { dk_echo "${1}";                                                                                                 }
+	dk_commandExists "dk_debug"          || dk_debug()          { dk_echo "${blue}${1}${clr}";                                                                                    }
+	dk_commandExists "dk_verbose"        || dk_verbose()        { dk_echo "${cyan}${1}${clr}";                                                                                    }
+	dk_commandExists "dk_printVar"       || dk_printVar()       { dk_echo "${blue}${1} = ${!1-}${clr}";                                                                           }
+	dk_commandExists "dk_pathExists"     || dk_pathExists()     { [ -e "${1}" ];                                                                                                  }
+	dk_commandExists "dk_stringContains" || dk_stringContains() { [ "${1#*"$2"}" != "${1}" ];                                                                                     }
+	dk_commandExists "dk_unset"          || dk_unset()          { dk_commandExists "unset"    && unset "${1}";                                                                    }
+	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="$2";                                                                }
+	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "$value" ];                                         }
+	dk_commandExists "dk_basename"       || dk_basename()       { dk_commandExists "basename" && echo $(basename ${1}) || dk_error "basename is not implemented";                 }
+	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && echo $(dirname ${1})  || dk_error "dirname is not implemented";                  }
+	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && echo $(realpath ${1}) || echo $(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1}); }
 	dk_commandExists "dk_debugFunc"      || dk_debugFunc()      { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
 
 	###### default variables ######
@@ -138,10 +131,10 @@ dk_init(){
 dk_reloadWithBash(){
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		dk_export  RELOAD_WITH_BASH 0
-		#dk_echo    "reloading with bash . . ."
+		#dk_echo   "reloading with bash . . ."
 		dk_unset   DKINIT
 		dk_export  DKINIT
-		dk_command bash "$0"
+		dk_command bash "${0}"
 	fi
 }
 
@@ -182,8 +175,8 @@ dk_setupCallstack(){
 # dk_DKSCRIPT_VARS()
 #
 dk_DKSCRIPT_VARS(){
-	#dk_pathExists    $(cd "$(dirname "$0")"; pwd -P)/$(basename $0) && export DKSCRIPT_PATH=$(cd "$(dirname "$0")"; pwd -P)/$(basename $0)
-	dk_pathExists    $(dk_realpath $0)   && dk_export   DKSCRIPT_PATH   $(dk_realpath $0)
+	#dk_pathExists   $(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0}) && export DKSCRIPT_PATH=$(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0})
+	dk_pathExists    $(dk_realpath ${0}) && dk_export   DKSCRIPT_PATH   $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_export        DKSCRIPT_ARGS       $($*)
@@ -238,10 +231,15 @@ dk_setOptions(){
 #	install a unix package
 #
 dk_install(){
-	dk_commandExists ${1}        && return 					# if the command already exists, return
-	dk_commandExists apk       && apk add ${1}				# AlpineLinux package installer
-	dk_commandExists tce-load  && tce-load -wil ${1}	        # TinyCoreLinux package installer: -l flag means don't add to boot
-	dk_commandExists ${1}        || dk_error "${1}: command not found"
+	dk_commandExists ${1}      && return 					        # if the command already exists, return
+	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
+	dk_commandExists apt	   && apt -y install "${1}"
+	dk_commandExists apt-get   && apt-get -y install "${1}"
+	dk_commandExists brew 	   && brew install "${1}"
+	dk_commandExists pacman    && pacman -S "${1}" --noconfirm
+	dk_commandExists pkg	   && pkg install "${1}"
+	dk_commandExists tce-load  && tce-load -wil "${1}"	            # TinyCoreLinux package installer: -l flag means don't add to boot
+	dk_commandExists ${1}      || dk_error "${1}: command not found"
 }
 
 ##################################################################################

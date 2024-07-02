@@ -1,5 +1,6 @@
 @echo off
 call ../../../DKBatch/functions/DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::####################################################################
 ::# dk_installWslAlpine()
@@ -23,3 +24,5 @@ goto:eof
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	call dk_installWslAlpine
+
+goto:eof

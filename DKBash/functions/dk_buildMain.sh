@@ -17,7 +17,7 @@ dk_buildMain (){
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R ${LOGNAME} ${HOME} to allow windows write access to \\\wsl.localhost\DISTRO\home\\${LOGNAME}"
-		sudo chown -R "${LOGNAME}" "${HOME}"
+		${sudo} chown -R "${LOGNAME}" "${HOME}"
 	fi
 
 	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
