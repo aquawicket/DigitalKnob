@@ -9,18 +9,14 @@
 #
 dk_arrayPush (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	dk_validateArgs array element
 	
-	#dk_echo "1 = ${1-}"
-	#dk_echo "2 = ${2-}"
-	
-	typeset -n array=$1
-	
-	dk_arrayLength array end_index
-	local end_index=$(dk_arrayLength array)
-	#dk_set $array[${end_index}] "${2}"
+	typeset -n array=${1}
+	local end_index=$(dk_arrayLength array)		# command substitution return
+	#dk_arrayLength array end_index				# parameter variable return
+
 	eval ${array}[${end_index}]="${2}"
-	
 }
 
 
@@ -34,15 +30,15 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArray[2]="c"
 	dk_printArray myArray
 	
-	dk_arrayPush myArray a
-	dk_printArray myArray
-	
-	dk_arrayPush myArray b
-	dk_printArray myArray
-	
-	dk_arrayPush myArray c
-	dk_printArray myArray
-	
 	dk_arrayPush myArray d
+	dk_printArray myArray
+	
+	dk_arrayPush myArray e
+	dk_printArray myArray
+	
+	dk_arrayPush myArray f
+	dk_printArray myArray
+	
+	dk_arrayPush myArray g
 	dk_printArray myArray
 }

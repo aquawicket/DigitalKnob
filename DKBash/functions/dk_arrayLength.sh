@@ -9,21 +9,16 @@
 dk_arrayLength (){
 	dk_debugFunc
 	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	#dk_validateArgs array rtn_var
+	dk_validateArgs array rtn_var
 	
 	typeset -n _array_=${1} 
-	dk_echo "_array_ = ${_array_}"
-	array_length=${#_array_[@]}
+	local array_length=${#_array_[@]}
 	
 	dk_assert array_length
 	dk_printVar array_length
 	
-	if [ $# -gt 1 ]; then
-		dk_echo "2 = $2"
-		eval "$2=${array_length}"
-		#dk_echo "{!2} = ${!2}"
-	fi
-	dk_return ${#_array_[@]}
+	[ $# -gt 1 ] && eval "$2=${array_length}"
+	dk_return ${array_length}
 }
 
 

@@ -9,7 +9,6 @@ dk_validateArgs (){
 	dk_debugFunc
 	#dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
 	
-	return
 	local minArgs=${#}
 	for arg in "$@"
 	do
@@ -18,6 +17,9 @@ dk_validateArgs (){
 			local maxArgs=99
 		elif [ $arg = "array" ]; then
 			#local argType="array"
+			local maxArgs=${#}
+		elif [ $arg = "element" ]; then
+			#local argType="element"
 			local maxArgs=${#}
 		elif [ $arg = "int" ]; then
 			#local argType="int"
@@ -37,6 +39,10 @@ dk_validateArgs (){
 			local maxArgs=99
 		elif [ $arg = "optional:array" ]; then
 			#local argType="optional:array"
+			local minArgs=$((minArgs-1))
+			local maxArgs=${#}
+		elif [ $arg = "optional:element" ]; then
+			#local argType="optional:element"
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
 		elif [ $arg = "optional:int" ]; then
