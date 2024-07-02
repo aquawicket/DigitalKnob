@@ -18,13 +18,13 @@ dk_arrayJoin (){
 	typeset -n arry=$1 
 	for ((i=0; i < ${#arry[@]}; i++ )); do
 		if [ -z ${rtn_var-} ]; then
-			rtn_var="${arry[$i]}"
+			local rtn_var="${arry[$i]}"
 		else
-		    rtn_var="${rtn_var}${2}${arry[$i]}"
+		    local rtn_var="${rtn_var}${2}${arry[$i]}"
 		fi
 	done
 	
-	eval "$3=${rtn_var}"
+	eval "${3}=${rtn_var}"
 }
 
 
@@ -40,5 +40,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArray[4]="e"
 	
 	dk_arrayJoin myArray "," myString
-	echo "myString = ${myString}"
+	dk_echo "myString = ${myString}"
 }

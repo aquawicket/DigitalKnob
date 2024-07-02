@@ -15,11 +15,11 @@ dk_arrayIndexOf (){
 	typeset -n arry=$1 
 	for ((i=0; i < ${#arry[@]}; i++ )); do
 		if [ "${2}" = "${arry[$i]}" ]; then
-			eval "$3=$i" 
+			eval "${3}=${i}" 
 			return ${true}
 		fi
 	done
-	eval "$3=-1" 
+	eval "${3}=-1" 
 }
 
 

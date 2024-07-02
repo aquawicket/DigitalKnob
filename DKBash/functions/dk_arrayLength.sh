@@ -8,18 +8,22 @@
 #
 dk_arrayLength (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	dk_validateArgs array rtn_var
-	dk_printVar BASH_ARGV
+	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#dk_validateArgs array rtn_var
 	
-	dk_assert $1
-	
-	typeset -n _array_=$1
+	typeset -n _array_=${1} 
+	dk_echo "_array_ = ${_array_}"
 	array_length=${#_array_[@]}
 	
 	dk_assert array_length
-	eval "$2=$array_length"
-	dk_printVar $2
+	dk_printVar array_length
+	
+	if [ $# -gt 1 ]; then
+		dk_echo "2 = $2"
+		eval "$2=${array_length}"
+		#dk_echo "{!2} = ${!2}"
+	fi
+	dk_return ${#_array_[@]}
 }
 
 
@@ -29,6 +33,9 @@ DKTEST(){ ######################################################################
 	dk_debugFunc
 	
 	myArray=("element 1" "element 2" "element 3")
-	dk_arrayLength myArray length
-	dk_echo "length = $length"
+	#dk_arrayLength myArray myArrayLength
+	myArrayLengthA=$(dk_arrayLength myArray)
+	dk_arrayLength myArray myArrayLengthB
+	dk_printVar myArrayLengthA
+	dk_printVar myArrayLengthB
 }

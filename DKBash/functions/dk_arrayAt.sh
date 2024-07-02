@@ -12,8 +12,8 @@ dk_arrayAt (){
 	[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
 	typeset -n arry=$1 
-	rtn_var="${arry[$2]}"
-	eval "$3=${rtn_var}"
+	local rtn_var="${arry[${2}]}"
+	eval "${3}=${rtn_var}"
 }
 
 

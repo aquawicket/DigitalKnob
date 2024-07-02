@@ -19,7 +19,7 @@ dk_printVar (){
 		#if ! declaration="$(declare -p ${!_reference_} 2>/dev/null)"; then
 		#	declaration=$1
 		#fi	
-	if (typeset -n 2>/dev/null); then
+	if (typeset -n > /dev/null 2>&1); then
 		typeset -n _reference_=$1
 		if ! declaration="$(typeset -p ${!_reference_} 2>/dev/null)"; then
 			declaration=$1

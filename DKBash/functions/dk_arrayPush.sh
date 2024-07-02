@@ -11,13 +11,16 @@ dk_arrayPush (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	echo "1 = ${1-}"
-	echo "2 = ${2-}"
+	#dk_echo "1 = ${1-}"
+	#dk_echo "2 = ${2-}"
 	
 	typeset -n array=$1
 	
 	dk_arrayLength array end_index
-	dk_set $array[${end_index}] "$2"
+	local end_index=$(dk_arrayLength array)
+	#dk_set $array[${end_index}] "${2}"
+	eval ${array}[${end_index}]="${2}"
+	
 }
 
 
