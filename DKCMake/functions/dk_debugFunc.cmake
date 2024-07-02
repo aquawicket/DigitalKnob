@@ -23,7 +23,9 @@ macro(dk_debugFunc)
 	#dk_info("TODO: make an exclude ARGV list for dk_debugFunc printing")
 	if(NOT "${__FUNCTION__}" STREQUAL "dk_fileAppend")
 	if(NOT "${__FUNCTION__}" STREQUAL "dk_fileWrite")
-		set(__ARGV__     "${ARGV}"                     CACHE INTERNAL "")
+		
+		 string(REGEX REPLACE "([][+.*()^])" "\\\\\\1" __ARGV__ "${ARGV}")
+		set(__ARGV__     "${__ARGV__}"                  CACHE INTERNAL "")
 	endif()
 	endif()
 	
