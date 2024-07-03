@@ -2,14 +2,16 @@
 [ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
 
 ################################################################################
+# dk_arrayLength(array)
 # dk_arrayLength(array rtn_var)
 #
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
 dk_arrayLength (){
 	dk_debugFunc
-	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	dk_validateArgs array rtn_var
+	#[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): not enough arguments"
+	#[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): too many arguments"
+	dk_validateArgs array optional:rtn_var
 	
 	typeset -n _array_=${1} 
 	local array_length=${#_array_[@]}

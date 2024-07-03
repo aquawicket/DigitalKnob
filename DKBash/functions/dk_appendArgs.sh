@@ -7,24 +7,26 @@
 #
 dk_appendArgs (){
 	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}($*): incorrect number of arguments"
+	#[ ${#} -lt 2 ] && dk_error "${FUNCNAME}($*): incorrect number of arguments"
 	dk_validateArgs variable args
 	
 	dk_echo
 	dk_echo "\${1} = ${1-}"
 	dk_echo "\${2} = ${2-}"
-	dk_echo "\${3} = ${3-}"
-	dk_echo "\${*} = ${*-}"
+#	dk_echo "\${3} = ${3-}"
+#	dk_echo "\${*} = ${*-}"
 		
-	local args=(${!1-})
-	dk_echo "\${args[0] = ${args[0]-}"
-	dk_echo "\${args[1] = ${args[1]-}"
-	dk_echo "\${args[2] = ${args[2]-}"
-	dk_echo "\${args[2] = ${args[3]-}"
-	dk_echo "\${args[*] = ${args[*]-}"
+	local var=(${!1-})
+	dk_arrayPush var args
+
+	dk_echo "\${var[0] = ${var[0]-}"
+	dk_echo "\${var[1] = ${var[1]-}"
+	dk_echo "\${var[2] = ${var[2]-}"
+	dk_echo "\${var[3] = ${var[3]-}"
+	dk_echo "\${var[*] = ${var[*]-}"
 	
-	dk_arrayPush args "xyz"
-	eval ${1}=${args[@]}
+	
+	#eval ${1}=${args[@]}
 	#dk_return "${args[@]}"
 
 #	if [ -n "${!1-}" ]; then
