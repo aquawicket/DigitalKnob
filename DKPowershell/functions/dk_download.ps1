@@ -10,11 +10,11 @@ function Global:dk_download($url, $destination) {
 	dk_debugFunc
 	
 	if(Test-Path "${destination}"){
-        dk_info "${destination} already exist"
+        dk_echo "${destination} already exist"
         return
     }
 	
-	dk_info "Downloading $url . . ."
+	dk_echo "Downloading $url . . ."
 	
 	# method 1
     Invoke-WebRequest -URI $url -OutFile $destination #-SkipHttpErrorCheck
