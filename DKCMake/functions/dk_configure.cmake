@@ -11,6 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_configure path) #ARGN
 	dk_debugFunc(${ARGV})
 	
+	dk_assert(path)
 	dk_getOption(NO_HALT 					${ARGV})
 	
 	# Configure with CMake		(multi_config / single_config)
@@ -18,11 +19,14 @@ function(dk_configure path) #ARGN
 		dk_info("Configuring with CMake")
 		if(SINGLE_CONFIG)
 			# Make sure the plugin variable is alpha-numeric and uppercase
+			dk_assert(plugin)
 			dk_toUpper(${plugin} PLUGIN_NAME)
 			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
+			dk_assert(SINGLE_CONFIG_BUILD_DIR)
 			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
 		endif()
 		
+		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} ${path})				
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)

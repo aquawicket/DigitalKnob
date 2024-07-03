@@ -20,14 +20,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 dk_validate					(HOST "dk_getHostTriple()")
-ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
-LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-aarch64.tar.gz)
-LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-linux-x86_64.tar.gz)
-#MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos10.10-universal.tar.gz)	# macOS 10.10 or later
-MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-macos-universal.tar.gz)		# macOS 10.13 or later
-WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-arm64.zip)
-WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-i386.zip)
-WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.0/cmake-3.29.0-windows-x86_64.zip)
+ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
+LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
+LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
+#MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz)	# macOS 10.10 or later
+MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz)		# macOS 10.13 or later
+WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip)
+WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip)
+WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
 if(NOT CMAKE_DL)
@@ -77,12 +77,21 @@ elseif(MSYSTEM)
 	endif()
 else()
 	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
-	dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
+
 	if(MAC_HOST)
+		dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
 		dk_findProgram(CMAKE_EXE cmake ${CMAKE}/CMake.app/Contents/bin)
 	else()
+		dk_set(CMAKE ${DKTOOLS_DIR}/${CMAKE_FOLDER})
 		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})#${CMAKE}/bin)
+		
+		if(NOT EXISTS ${CMAKE_EXE})
+			dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
+			dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})#${CMAKE}/bin)
+		endif()
 	endif()
+	
+	
 endif()
 
 ### VALIDATE ### (second check)
