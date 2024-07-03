@@ -32,7 +32,6 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
-	::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" if exist "%~3" set "DKSCRIPT_PATH=%~3"
 	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
 	::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
@@ -57,7 +56,10 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::dk_setOptions
 	
 	::############ LOAD FUNCTION FILES ############
+	call dk_source dk_echo
+	call dk_source dk_color
 	call dk_color
+	call dk_source dk_logo
 	call dk_logo
 	::call dk_load %DKSCRIPT_PATH%
 

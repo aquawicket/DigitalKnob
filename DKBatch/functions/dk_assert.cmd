@@ -1,6 +1,8 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_debugFunc
+call dk_source dk_error
 ::################################################################################
 ::# dk_assert(expression)
 ::#
