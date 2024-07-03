@@ -56,6 +56,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	::dk_setOptions
 	
 	::############ LOAD FUNCTION FILES ############
+	call dk_source dk_debugFunc
 	call dk_source dk_echo
 	call dk_source dk_color
 	call dk_color

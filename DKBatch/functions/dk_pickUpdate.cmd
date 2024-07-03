@@ -1,6 +1,24 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_checkGitRemote
+call dk_source dk_clearCmakeCache
+call dk_source dk_clearScreen
+call dk_source dk_debugFunc
+call dk_source dk_deleteTempFiles
+call dk_source dk_echo
+call dk_source dk_error
+call dk_source dk_exit
+call dk_source dk_gitCommit
+call dk_source dk_gitUpdate
+call dk_source dk_pullAssets
+call dk_source dk_pushAssets
+call dk_source dk_readCache
+call dk_source dk_reload
+call dk_source dk_removeAll
+call dk_source dk_resetAll
+call dk_source dk_set
+call dk_source dk_unset
 ::#####################################################################
 ::# dk_pickUpdate()
 ::#

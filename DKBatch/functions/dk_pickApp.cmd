@@ -1,6 +1,17 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_clearScreen
+call dk_source dk_debugFunc
+call dk_source dk_echo
+call dk_source dk_enterManually
+call dk_source dk_error
+call dk_source dk_exit
+call dk_source dk_readCache
+call dk_source dk_readCache
+call dk_source dk_reload
+call dk_source dk_set
+call dk_source dk_unset
 ::#####################################################################
 ::# dk_pickApp()
 ::#
