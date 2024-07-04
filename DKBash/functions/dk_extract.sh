@@ -36,5 +36,5 @@ dk_extract (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
-	dk_extract "${DKDOWNLOAD_DIR}/cmake-3.29.0-windows-x86_64.zip" "${DKDOWNLOAD_DIR}"
+	dk_extract "${DKDOWNLOAD_DIR}/cmake-3.29.5-windows-x86_64.zip" "${DKDOWNLOAD_DIR}"
 }

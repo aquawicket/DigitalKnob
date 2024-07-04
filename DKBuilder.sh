@@ -40,4 +40,4 @@ fi
 
 
 ###### Load Main Program ######
-[ -e ${DKBASH_FUNCTIONS_DIR}/dk_buildMain.sh ] && [ $# -gt 0 ] && "$@" || dk_buildMain
+[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_buildMain
