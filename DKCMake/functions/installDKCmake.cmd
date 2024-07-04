@@ -1,7 +1,7 @@
 @echo off
 
-:install_cmake_fileAssociation
-	if not "%*" == "" (goto:run_cmake_file)
+:installDKCMake
+	if not "%*" == "" (goto:runDKCMake)
 	echo Associating .cmake files with DKCmake . . .
 	
 	::###### DKINIT ######
@@ -21,7 +21,7 @@
 goto:eof
 
 
-:run_cmake_file
+:runDKCMake
 	set "CMAKE_EXE=%~1"
 	::echo CMAKE_EXE = %CMAKE_EXE%
 	

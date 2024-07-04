@@ -3,7 +3,7 @@ title="installDKBatch.cmd %*"
 
 
 if exist %DKBATCH_FUNCTION_DIR_%DK.cmd call %DKBATCH_FUNCTION_DIR_%DK.cmd %0 %*
-if not "%*" == "" (goto:run_file)
+if not "%*" == "" (goto:runDKBatch)
 
 	
 :installDKBatch
@@ -19,8 +19,9 @@ goto:eof
 
 
 
-:run_file
+:runDKBatch
 	echo dk_installDKBatch(%0 %*)
+	
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	echo "DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%"

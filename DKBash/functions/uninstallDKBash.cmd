@@ -1,7 +1,7 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-:uninstall_launcher
+:uninstallDKBash
 	echo Uninstalling .sh file associations . . .
 	
 	ftype dk_bash=

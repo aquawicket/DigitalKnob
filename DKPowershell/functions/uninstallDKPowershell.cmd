@@ -1,7 +1,7 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 
-:uninstall_launcher
+:uninstallDKPowershell
 	echo Uninstalling .ps1 file associations . . .
 	
 	ftype dk_powershell=

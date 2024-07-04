@@ -1,7 +1,7 @@
 @echo off
 
-:install_cmake_fileAssociation
-	if not "%*" == "" (goto:run_javascript_file)
+:installDKJavascript
+	if not "%*" == "" (goto:runDKJavascript)
 	echo Associating .cmake files with DKJavascript . . .
 	
 	::###### DKINIT ######
@@ -21,7 +21,7 @@
 goto:eof
 
 
-:run_javascript_file
+:runDKJavascript
 	set "NODEJS_EXE=%~1"
 	echo NODEJS_EXE = %NODEJS_EXE%
 	

@@ -1,7 +1,7 @@
 @echo off
 
-:install_launcher
-	if not "%*" == "" (goto:run_cmake_file)
+:installDKPowershell
+	if not "%*" == "" (goto:runDKPowershell)
 	echo Associating .ps1 files with DKPowershell . . .
 	
 	::###### DKINIT ######
@@ -21,7 +21,7 @@
 goto:eof
 
 
-:run_powershell_file
+:runDKPowershell
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
 	set "POWERSHELL_EXE=%~2"
 	set "PS_FILE=%~3"

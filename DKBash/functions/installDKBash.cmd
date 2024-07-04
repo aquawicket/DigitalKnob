@@ -1,7 +1,7 @@
 @echo off
 
 :installDKBash
-	if not "%*" == "" (goto:run_cmake_file)
+	if not "%*" == "" (goto:runDKBash)
 	echo Associating .sh files with DKBash . . .
 	
 	::###### DKINIT ######
