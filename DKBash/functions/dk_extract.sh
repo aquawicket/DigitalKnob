@@ -10,7 +10,7 @@ dk_extract (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	#src="$1"
+	#src="${1}"
 	#dest="$2"
 	
 	if ! dk_pathExists "${2}"; then

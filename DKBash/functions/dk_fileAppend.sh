@@ -9,7 +9,7 @@ dk_fileAppend (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	[ -e "$1" ] && echo "$2" >> "$1" || echo "$2" > "$1" 
+	[ -e "${1}" ] && echo "$2" >> "${1}" || echo "$2" > "${1}" 
 }
 
 

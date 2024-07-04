@@ -11,7 +11,7 @@ dk_bundleSource (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	file_list=$1
+	file_list=${1}
 	output_file=$2
 	
 	# dk_load has ;; seperators in it's list.  convert them to single ;
