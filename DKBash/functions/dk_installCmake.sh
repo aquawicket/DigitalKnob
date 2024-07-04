@@ -83,10 +83,10 @@ dk_installCmake (){
 	else	# linux package
 		dk_info "Installing CMake from package managers"
 		
-		CMAKE_EXE=$(command -v cmake)
+		#$(command -v "cmake") && $CMAKE_EXE=$(command -v "cmake")
 		#CMAKE_EXE=$(realpath ${CMAKE_EXE})
-		dk_realpath ${CMAKE_EXE} CMAKE_EXE
-		dk_printVar CMAKE_EXE
+		#dk_realpath ${CMAKE_EXE} CMAKE_EXE
+		#dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
 			dk_install ${CMAKE_IMPORT}
 		fi	
