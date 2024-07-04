@@ -29,8 +29,9 @@ dk_load (){
 	
 	#### download if missing ####
 	if [ ! -e ${funcPath} ]; then
-		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+
 		[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 	
 		echo "Dowloading ${funcName}"
@@ -38,8 +39,8 @@ dk_load (){
 		
 		[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
 		
-		#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 		#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
+		#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 		#[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
 	fi
 	
