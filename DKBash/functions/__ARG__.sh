@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
 # __ARG__(arg_number, frame)
@@ -20,7 +20,7 @@ __ARG__ (){
 	local argN=$(($marker+$1))
 
 	local arg=(${BASH_ARGV[${argN}]-})
-	dk_return "${arg}"
+	dk_return "${arg}"; return
 }
 
 

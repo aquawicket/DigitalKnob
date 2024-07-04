@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 #dk_set ENABLE_dk_warning 0
 #dk_set TRACE_ON_WARNING 1

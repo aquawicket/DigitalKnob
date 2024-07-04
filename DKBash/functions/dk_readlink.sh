@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
 ##################################################################################
@@ -8,7 +8,7 @@
 #    reference: https://stackoverflow.com/a/1116890/688352
 #	macOs: https://www.unix.com/man-page/osx/1/readlink/
 #
-#	example: dk_return "$(dk_readlink -f "$path")" 
+#	example: dk_return "$(dk_readlink -f "$path")"; return 
 #
 dk_readlink (){
 	dk_debugFunc

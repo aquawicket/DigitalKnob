@@ -1,7 +1,8 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
+# dk_arrayAt(array, index)
 # dk_arrayAt(array, index, rtn_var)
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_at
@@ -14,10 +15,11 @@ dk_arrayAt (){
 	
 	typeset -n arry=${1} 
 	local arrayAt="${arry[${2}]}"
-	
 	dk_printVar arrayAt
-	[ $# -gt 2 ] && eval "${3}=${arrayAt}"
-	dk_return ${arrayAt}
+	
+	# return value
+	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}"
+	dk_return ${arrayAt}; return
 }
 
 
@@ -26,12 +28,26 @@ dk_arrayAt (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArray[0]="a"
-	myArray[1]="b"
-	myArray[2]="c"
-	myArray[3]="d"
-	myArray[4]="e"
+	myArrayA[0]="a"
+	myArrayA[1]="b"
+	myArrayA[2]="c"
+	myArrayA[3]="d"
+	myArrayA[4]="e"
 	
-	dk_arrayAt myArray 3 element
-	dk_echo "element = ${element}"
+	#dk_arrayAt myArrayA 3 elementA
+	elementA=$(dk_arrayAt myArrayA 3)
+	dk_echo "elementA = ${elementA}"
+	
+	
+	
+	
+	myArrayB[0]="1"
+	myArrayB[1]="2"
+	myArrayB[2]="3"
+	myArrayB[3]="4"
+	myArrayB[4]="5"
+	
+	dk_arrayAt myArrayB 3 elementB
+	#elementB=$(dk_arrayAt myArrayB 3)
+	dk_echo "elementB = ${elementB}"
 }

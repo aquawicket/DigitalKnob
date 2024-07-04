@@ -27,7 +27,7 @@ dk_appendArgs (){
 	
 	
 	#eval ${1}=${args[@]}
-	#dk_return "${args[@]}"
+	#dk_return "${args[@]}"; return
 
 #	if [ -n "${!1-}" ]; then
 #		set -- "$@" "${@:2}"

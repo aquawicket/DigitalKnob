@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
 # dk_assertPath(path)
@@ -8,7 +8,7 @@ dk_assertPath (){
     dk_debugFunc
 	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	
-	arg1="${1//[^[:alnum:]]/_}"
+	local arg1="${1//[^[:alnum:]]/_}"
 	[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}
 	
 	if [ ! -e ${_path_} ]; then	

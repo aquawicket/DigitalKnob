@@ -1,6 +1,6 @@
 #!/bin/sh
 #[ -n "${HAVE_dk_load}" ] && return || readonly HAVE_dk_load=1
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
 # dk_load(funcName OR funcPath)

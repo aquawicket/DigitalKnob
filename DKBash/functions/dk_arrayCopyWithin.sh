@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
 # dk_arrayCopyWithin(array, target, start, end)
@@ -9,7 +9,8 @@
 #
 dk_arrayCopyWithin (){
 	dk_debugFunc
-	[ $# -ne 4 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ $# -ne 4 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	dk_validateArgs array any any any
 	
 	dk_todo "dk_arrayCopyWithin"
 }
@@ -20,5 +21,6 @@ dk_arrayCopyWithin (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
+	dk_todo
 	dk_arrayCopyWithin array target start end
 }

@@ -1,16 +1,16 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ####################################################################
-# dk_appendCmakeArgs(string)
+# dk_appendCmakeArgs(args)
 #
 #
 dk_appendCmakeArgs (){
 	dk_debugFunc
-	#[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): not enough arguments"
 	
-    CMAKE_ARGS=${CMAKE_ARGS} "$*"
-	#call dk_set CMAKE_ARGS "${CMAKE_ARGS} "$*""
+    export CMAKE_ARGS=${CMAKE_ARGS} "${*}"
+	#call dk_set CMAKE_ARGS "${CMAKE_ARGS} "${*}""
 }
 
 
@@ -19,5 +19,5 @@ dk_appendCmakeArgs (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
-	dk_todo
+	dk_appendCmakeArgs "-G Unix Makefiles"
 }

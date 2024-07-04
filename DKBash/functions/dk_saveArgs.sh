@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
 ##################################################################################
@@ -69,7 +69,7 @@ test_func (){
 	
 	dk_echo
 	dk_echo "returning args to calling function  'dk_return \${args[@]}'"
-	dk_return "${args[@]}"
+	dk_return "${args[@]}"; return
 	
 }
 

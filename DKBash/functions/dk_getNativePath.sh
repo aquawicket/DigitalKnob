@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
 ##################################################################################
@@ -14,17 +14,17 @@ dk_getNativePath (){
 	dk_validate HOST_OS "dk_getHostTriple"
 	if [ "${HOST_OS}" = "win" ]; then
 		dk_getWindowsPath $1 _winpath_
-		#dk_return "${_winpath_//\\/\\\\}"
+		#dk_return "${_winpath_//\\/\\\\}"; return
 		local ret_val="${2-}"
 		dk_printVar ret_val
-		dk_return "${_winpath_}"
+		dk_return "${_winpath_}"; return
 	else
 		local ret_val="${2-}"
 		dk_printVar ret_val
 		
-		#dk_fixme("MacOS readlink has no -f parameter")
-		dk_return "$(readlink -f "$1")"
-		#dk_return "$(dk_readlink -f "$1")"
+		#dk_fixme("MacOS readlink has no -f parameter"); return
+		dk_return "$(readlink -f "$1")"; return
+		#dk_return "$(dk_readlink -f "$1")"; return
 	fi
 }
 

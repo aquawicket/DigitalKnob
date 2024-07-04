@@ -1,30 +1,32 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
-# dk_arrayJoin(array, separator, string)
+# dk_arrayJoin(array, separator, rtn_var)
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_join
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 dk_arrayJoin (){
 	dk_debugFunc
-	[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	dk_validateArgs array string optional:rtn_var
 	
 	#_arry_="$1"
 	#_separator_="$2"
 	
 	#local arry=("${!1}")
-	typeset -n arry=$1 
+	typeset -n arry=${1} 
 	for ((i=0; i < ${#arry[@]}; i++ )); do
-		if [ -z ${rtn_var-} ]; then
-			local rtn_var="${arry[$i]}"
+		if [ -z ${dk_arrayJoin-} ]; then
+			local dk_arrayJoin="${arry[${i}]}"
 		else
-		    local rtn_var="${rtn_var}${2}${arry[$i]}"
+		    local dk_arrayJoin="${dk_arrayJoin}${2}${arry[${i}]}"
 		fi
 	done
 	
-	eval "${3}=${rtn_var}"
+	[ $# -gt 2 ] && eval "${3}=${dk_arrayJoin}"
+	dk_return ${dk_arrayJoin}; return	
 }
 
 
@@ -33,12 +35,25 @@ dk_arrayJoin (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArray[0]="a"
-	myArray[1]="b"
-	myArray[2]="c"
-	myArray[3]="d"
-	myArray[4]="e"
+	myArrayA[0]="a"
+	myArrayA[1]="b"
+	myArrayA[2]="c"
+	myArrayA[3]="d"
+	myArrayA[4]="e"
 	
-	dk_arrayJoin myArray "," myString
-	dk_echo "myString = ${myString}"
+	#dk_arrayJoin myArrayA "," myStringA
+	myStringA=$(dk_arrayJoin myArrayA ",")
+	dk_echo "myStringA = ${myStringA}"
+	
+	
+	
+	myArrayB[0]="1"
+	myArrayB[1]="2"
+	myArrayB[2]="3"
+	myArrayB[3]="4"
+	myArrayB[4]="5"
+	
+	dk_arrayJoin myArrayB "," myStringB
+	#myStringB=$(dk_arrayJoin myArrayB ",")
+	dk_echo "myStringB = ${myStringB}"
 }

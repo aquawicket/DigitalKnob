@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 #from_nano_to_readable (){
 #   (( $# )) || { printf '%s\n' 'provide atleast one argument' >&2 ; }
@@ -90,7 +90,7 @@ date_seconds="$(date -d@"$((    seconds % 1000000000))" +"%S")"
 #	echo "   date_centuries = ${date_centuries}"
 #	echo "      t_centuries = ${t_centuries}"
 #	echo "        timestamp = ${timestamp}"
-	dk_return "${date_hours}:${date_minutes}:${date_seconds}.${date_milliseconds}"
+	dk_return "${date_hours}:${date_minutes}:${date_seconds}.${date_milliseconds}"; return
 }
 
 

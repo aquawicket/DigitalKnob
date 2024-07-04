@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
 # dk_test(<arg1> <ret_val>)
@@ -48,9 +48,9 @@ dk_test (){
 	
 	if [ $# -eq 2 ]; then
 		local ret_val="${2-}"
-		dk_return "sending back: $_input_"
+		dk_return "sending back: $_input_"; return
 	else
-		dk_return "sending back: $_input_"
+		dk_return "sending back: $_input_"; return
 	fi
 }
 

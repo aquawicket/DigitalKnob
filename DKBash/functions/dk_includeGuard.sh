@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "$inclue_guard_dk_includeGuard" ] && return || export readonly inclue_guard_dk_includeGuard=1
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
 

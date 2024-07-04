@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN)
@@ -16,17 +16,18 @@
 dk_arrayPush (){
 	dk_debugFunc
 	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	dk_validateArgs array element
+	dk_validateArgs array element optional:rtn_var
 	
 	#typeset -n array="${1}"
-	#dk_arrayLength array end_index			# parameter variable return
-	if [ -n ${1} ]; then
-		local end_index=$(dk_arrayLength ${1})		# command substitution return
+	#dk_arrayLength array arrayPush			# parameter variable return
+	if [ -n ${1-} ]; then
+		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
 	fi
-	eval "${1}[${end_index}]=${2}"
+	eval "${1-}[${arrayPush}]=${2}"
 
-	#eval "${3}=${end_index}"	# parameter variable return
-	dk_return ${end_index}		# command substitution return
+	#eval "${3}=${arrayPush}"	# parameter variable return
+	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
+	dk_return ${arrayPush}; return		# command substitution return
 }
 
 
@@ -35,20 +36,37 @@ dk_arrayPush (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-#	myArray[0]="a"
-#	myArray[1]="b"
-#	myArray[2]="c"
-	dk_printVar myArray
+	myArrayA[0]=a				# FIXME - variable must exist for dk_arrayPush to work
+	dk_printVar myArrayA
 	
-	dk_arrayPush myArray d
-	dk_printArray myArray
+	dk_arrayPush myArrayA b
+	dk_printArray myArrayA
 	
-	dk_arrayPush myArray e
-	dk_printArray myArray
+	dk_arrayPush myArrayA c
+	dk_printArray myArrayA
 	
-	dk_arrayPush myArray f
-	dk_printArray myArray
+	dk_arrayPush myArrayA d
+	dk_printArray myArrayA
 	
-	dk_arrayPush myArray g
-	dk_printArray myArray
+	dk_arrayPush myArrayA f
+	dk_printArray myArrayA
+	
+	
+	
+	
+	
+	myArrayB[0]=1				# FIXME - variable must exist for dk_arrayPush to work
+	dk_printVar myArrayB
+	
+	dk_arrayPush myArrayB 2
+	dk_printArray myArrayB
+	
+	dk_arrayPush myArrayB 3
+	dk_printArray myArrayB
+	
+	dk_arrayPush myArrayB 4
+	dk_printArray myArrayB
+	
+	dk_arrayPush myArrayB 5
+	dk_printArray myArrayB
 }

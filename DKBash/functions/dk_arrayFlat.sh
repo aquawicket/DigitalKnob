@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
 # dk_arrayFlat(array depth)
@@ -10,6 +10,7 @@
 dk_arrayFlat (){
 	dk_debugFunc
 	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	dk_validateArgs array int
 	
 	dk_todo "dk_arrayFlat"
 }
@@ -20,5 +21,6 @@ dk_arrayFlat (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
+	dk_todo
 	dk_arrayFlat array depth
 }

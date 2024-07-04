@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname $0)/DK.sh"
+[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
 # dk_arrayConcat(array, value1, value2, /* …, */ valueN)
@@ -11,6 +11,8 @@ dk_arrayConcat (){
 	dk_debugFunc
 	#[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
 	dk_validateArgs array value
+	
+	
 	dk_todo "dk_arrayConcat"
 }
 
