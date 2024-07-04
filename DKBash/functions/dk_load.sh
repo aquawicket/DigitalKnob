@@ -48,9 +48,11 @@ dk_load (){
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
 	#if [[ $(dk_command file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
-	if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
-		echo "Converting file to Unix line endings"
-		sed -i -e 's/\r$//' ${funcPath}
+	if $(dk_commandExists file); then
+		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+			echo "Converting file to Unix line endings"
+			sed -i -e 's/\r$//' ${funcPath}
+		fi
 	fi
 	
 

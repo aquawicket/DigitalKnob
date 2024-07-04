@@ -1,4 +1,4 @@
-#!/bin/sh
+1#!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 

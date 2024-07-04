@@ -1,6 +1,6 @@
 @echo off
 
-:install_cmake_fileAssociation
+:installDKBash
 	if not "%*" == "" (goto:run_cmake_file)
 	echo Associating .sh files with DKBash . . .
 	
@@ -21,7 +21,7 @@
 goto:eof
 
 
-:run_cmake_file
+:runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
 	set "SH_FILE=%~3"
