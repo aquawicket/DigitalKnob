@@ -5,9 +5,9 @@
 # __ARG__(arg_number, frame)
 #
 __ARG__ (){
-	[ $# -eq 0 ] && echo "ERROR: __ARG__() requires at least 1 argument"
-	[ $# -gt 2 ] && echo "ERROR: __ARG__(): too many arguments"
-	[ -z ${2-} ] && local frame=0 || local frame=$2
+	[ ${#} -eq 0 ] && echo "ERROR: __ARG__() requires at least 1 argument"
+	[ ${#} -gt 2 ] && echo "ERROR: __ARG__(): too many arguments"
+	[ -z ${2-} ] && local frame=0 || local frame=${2}
 	local argN=$1
 	
 	ARGC=$(__ARGC__ $frame)

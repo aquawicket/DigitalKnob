@@ -16,7 +16,7 @@ dk_color (){
 	dk_debugFunc
 	
 	export USE_COLOR=1
-	if [ $# -gt 0 ]; then
+	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
 			dk_unset USE_COLOR
 		fi

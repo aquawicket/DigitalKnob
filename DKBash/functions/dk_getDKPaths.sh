@@ -8,7 +8,7 @@
 #
 dk_getDKPaths (){
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE

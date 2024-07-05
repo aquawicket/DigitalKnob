@@ -7,8 +7,8 @@
 #
 dk_test (){
 	dk_debugFunc
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 #	dk_info "test from dk_info"
 #	dk_debug "test from dk_debug"
@@ -46,7 +46,7 @@ dk_test (){
 	
 	echo "_input_ = $_input_"
 	
-	if [ $# -eq 2 ]; then
+	if [ ${#} -eq 2 ]; then
 		local ret_val="${2-}"
 		dk_return "sending back: $_input_"; return
 	else

@@ -8,7 +8,7 @@
 #
 dk_toUpper (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
 	local output=$(builtin echo "$1" | tr '[:lower:]' '[:upper:]')
 	eval "$2='${output}'"

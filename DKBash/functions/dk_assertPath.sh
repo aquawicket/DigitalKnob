@@ -6,7 +6,7 @@
 #
 dk_assertPath (){
     dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	local arg1="${1//[^[:alnum:]]/_}"
 	[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}

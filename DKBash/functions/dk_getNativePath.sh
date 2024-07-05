@@ -3,17 +3,17 @@
 
 
 ##################################################################################
-# dk_getNativePath(<path> <ret_val>)
+# dk_getNativePath(path ret_val)
 #
 #
 dk_getNativePath (){
 	dk_debugFunc
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_validate HOST_OS "dk_getHostTriple"
 	if [ "${HOST_OS}" = "win" ]; then
-		dk_getWindowsPath $1 _winpath_
+		dk_getWindowsPath ${1} _winpath_
 		#dk_return "${_winpath_//\\/\\\\}"; return
 		local ret_val="${2-}"
 		dk_printVar ret_val
@@ -23,8 +23,8 @@ dk_getNativePath (){
 		dk_printVar ret_val
 		
 		#dk_fixme("MacOS readlink has no -f parameter"); return
-		dk_return "$(readlink -f "$1")"; return
-		#dk_return "$(dk_readlink -f "$1")"; return
+		dk_return "$(readlink -f "${1}")"; return
+		#dk_return "$(dk_readlink -f "${1}")"; return
 	fi
 }
 

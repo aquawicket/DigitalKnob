@@ -9,7 +9,7 @@
 #
 dk_arrayJoin (){
 	dk_debugFunc
-	#[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array string optional:rtn_var
 	
 	#_arry_="${1}"
@@ -25,7 +25,7 @@ dk_arrayJoin (){
 		fi
 	done
 	
-	[ $# -gt 2 ] && eval "${3}=${dk_arrayJoin}"
+	[ ${#} -gt 2 ] && eval "${3}=${dk_arrayJoin}"
 	dk_return ${dk_arrayJoin}; return	
 }
 

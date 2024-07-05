@@ -10,7 +10,7 @@ dk_fixme
 #
 dk_arrayShift (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	typeset -n arrayShift=${1} 
 	prev=0

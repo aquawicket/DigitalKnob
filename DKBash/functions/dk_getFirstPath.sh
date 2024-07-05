@@ -3,15 +3,15 @@
 
 
 ##################################################################################
-# dk_getFirstPath(<result>)
+# dk_getFirstPath(result)
 #
 #
 dk_getFirstPath (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	eval "$1=${PATH%%:*}"
-	dk_printVar $1
+	eval "${1}=${PATH%%:*}"
+	dk_printVar ${1}
 }
 
 

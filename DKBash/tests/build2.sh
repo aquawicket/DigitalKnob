@@ -267,7 +267,7 @@ main (){
 
 
 # If this script is called with arguments, call the function with arguments, get the return value and exit
-if [ $# -ne 0 ]; then
+if [ ${#} -ne 0 ]; then
 	echo "$1(${@:2}) ->"
 	echo ""
 	

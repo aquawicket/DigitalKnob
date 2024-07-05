@@ -10,7 +10,7 @@
 #
 dk_arrayAt (){
 	dk_debugFunc
-	#[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array int optional:rtn_var
 	
 	typeset -n arry=${1} 

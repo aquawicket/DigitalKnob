@@ -9,7 +9,7 @@
 #
 dk_realpath (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	local absolutePath=""
 	if dk_commandExists readlink; then

@@ -7,7 +7,7 @@
 #
 dk_appendCmakeArgs (){
 	dk_debugFunc
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): not enough arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	
     export CMAKE_ARGS=${CMAKE_ARGS} "${*}"
 	#call dk_set CMAKE_ARGS "${CMAKE_ARGS} "${*}""

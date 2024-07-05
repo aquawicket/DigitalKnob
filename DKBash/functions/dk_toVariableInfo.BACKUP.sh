@@ -19,7 +19,7 @@
 #
 dk_toVariableInfo (){
 	dk_debugFunc
-	[ $# -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
+	[ ${#} -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
 	
 	eval "name=\${$1}"
 	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return		# ^ as first character is not portable

@@ -7,7 +7,7 @@
 #
 dk_assert (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	if ( [ ! -n "${!1-}" ]  ||
          [ -z "${!1}" ]     ||

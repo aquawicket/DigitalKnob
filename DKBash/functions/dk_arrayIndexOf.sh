@@ -12,7 +12,7 @@
 #
 dk_arrayIndexOf (){
 	dk_debugFunc
-	#[ $# -ne 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array element optional:rtn_var
 	
 	typeset -n arry=${1} 
@@ -20,7 +20,7 @@ dk_arrayIndexOf (){
 		if [ "${2}" = "${arry[${arrayIndexOf}]}" ]; then
 		
 			# return value
-			[ $# -gt 2 ] && eval "${3}=${arrayIndexOf}" 
+			[ ${#} -gt 2 ] && eval "${3}=${arrayIndexOf}" 
 			dk_return ${arrayIndexOf}; return
 		fi
 	done

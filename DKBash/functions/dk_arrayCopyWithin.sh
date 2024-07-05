@@ -9,7 +9,7 @@
 #
 dk_arrayCopyWithin (){
 	dk_debugFunc
-	#[ $# -ne 4 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ ${#} -ne 4 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array any any any
 	
 	dk_todo "dk_arrayCopyWithin"

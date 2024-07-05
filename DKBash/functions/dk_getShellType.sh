@@ -8,7 +8,7 @@
 #
 dk_getShellType (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#PID_EXE=$(readlink /proc/$$/exe);
 	#DKSHELL=${PID_EXE##*/};           

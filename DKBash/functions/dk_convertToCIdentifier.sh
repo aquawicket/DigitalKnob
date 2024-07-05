@@ -8,7 +8,7 @@
 #
 dk_convertToCIdentifier (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	output="${1//[^[:alnum:]]/_}"			    # BASH alpha_numeric_replace
 #	dk_replaceAll "${input}" "-" "_" input		# POSIX replace

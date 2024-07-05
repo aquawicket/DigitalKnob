@@ -8,12 +8,12 @@
 #
 dk_validateSudo (){
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	if command -v "sudo" >/dev/null 2>&1; then
-		SUDO="sudo"
+		dksudo="sudo"
 	fi
-	${SUDO-} echo
+	${dksudo-} echo
 }
 
 

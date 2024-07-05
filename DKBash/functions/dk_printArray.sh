@@ -7,7 +7,7 @@
 #
 dk_printArray (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	typeset -n arry=$1 
 	for ((i=0; i < ${#arry[@]}; i++ )); do

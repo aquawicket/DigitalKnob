@@ -8,7 +8,7 @@
 #
 dk_replaceAll (){
 	dk_debugFunc
-	[ $# -ne 4 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 4 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
     input="$1"
 	searchValue="$2"

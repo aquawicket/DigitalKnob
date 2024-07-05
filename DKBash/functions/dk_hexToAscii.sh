@@ -8,12 +8,12 @@
 #
 dk_hexToAscii (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_fixme
-	ascii=$(echo $1 | xxd -r)
+	ascii=$(echo ${1} | xxd -r)
 
-	eval "$2=${ascii}"
+	eval "${2}=${ascii}"
 	dk_printVar "${2}"
 }
 

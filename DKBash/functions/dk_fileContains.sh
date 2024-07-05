@@ -8,7 +8,7 @@
 #
 dk_fileContains (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 		
 	grep -q "$2" "${1}"
 }

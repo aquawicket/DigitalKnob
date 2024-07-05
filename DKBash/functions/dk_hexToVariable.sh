@@ -11,7 +11,7 @@
 #
 dk_hexToVariable (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	# 0x1b			- prints as  '\x1b'
 	# ${2//0x/x}	- removes any starting 0 and changes any 0x to x

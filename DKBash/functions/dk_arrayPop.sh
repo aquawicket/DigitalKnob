@@ -9,7 +9,7 @@
 #
 dk_arrayPop (){
 	dk_debugFunc
-	#[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	#[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array
 	
 	#dk_arrayLength ${1} _length_

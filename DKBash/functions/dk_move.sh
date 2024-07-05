@@ -13,8 +13,8 @@
 #
 dk_move (){
 	dk_debugFunc
-	[ $# -lt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
-	[ $# -gt 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	local _from_=$1
 	local _to_=$2

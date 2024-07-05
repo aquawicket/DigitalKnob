@@ -16,7 +16,7 @@
 #
 dk_debug (){
 	dk_debugFunc
-	[ $# -ne 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	
 	[ ${ENABLE_dk_debug-1} -ne 1 ] && return

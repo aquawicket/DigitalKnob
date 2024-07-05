@@ -9,8 +9,8 @@
 #
 dk_arrayLength (){
 	dk_debugFunc
-	#[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): not enough arguments"
-	#[ $# -gt 2 ] && dk_error "${FUNCNAME}($#): too many arguments"
+	#[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	#[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	dk_validateArgs array optional:rtn_var
 	
 	typeset -n _array_=${1}

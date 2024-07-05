@@ -8,7 +8,7 @@
 #
 dk_stacktrace (){
     dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	#ENABLE_dk_debugFunc=0
 
 	### VERSION 1 ###

@@ -8,7 +8,7 @@
 #
 #dk_validateOstype (){
 #	dk_debugFunc
-#	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+#	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 #	
 #	if [ -e /proc/device-tree/model ]; then
 #		MODEL=$(tr -d '\0' </proc/device-tree/model)

@@ -13,7 +13,7 @@
 #
 dk_isFunction (){
 	dk_debugFunc 
-	[ $# -lt 1 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	 $(declare -F "$1" > /dev/null)	
 }

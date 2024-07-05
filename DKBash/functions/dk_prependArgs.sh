@@ -7,7 +7,7 @@
 #
 dk_prependArgs (){
 	dk_debugFunc
-	[ $# -lt 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 		if [ -n "${!1-}" ]; then
 			#echo "export $1="${@:2} ${!1}""

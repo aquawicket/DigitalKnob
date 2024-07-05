@@ -11,7 +11,7 @@
 #
 dk_load (){
 	dk_debugFunc
-	[ $# -ne 1 ] && echo "${FUNCNAME}($#): incorrect number of arguments" && return 1
+	[ ${#} -ne 1 ] && echo "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
 	local funcName=

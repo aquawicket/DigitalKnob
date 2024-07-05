@@ -8,7 +8,7 @@ dk_fixme()
 #
 dk_addContextMenu (){
     dk_debugFunc
-	[ $# -lt 3 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -lt 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
 	dk_set _menuTitle_ "${1}"
 	dk_set _exe_ "${2}"

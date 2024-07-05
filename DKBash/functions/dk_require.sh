@@ -3,7 +3,7 @@
 
 arrayAsArg (){
 	dk_debugFunc
-	[ $# -gt 3 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 3 ] && dk_error "Incorrect number of parameters"
 	
 	local arg1=${1}
 	echo "arg1 = ${arg1}"
@@ -17,7 +17,7 @@ arrayAsArg (){
 
 checkFunc (){
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	args=("$@")
 	for ((i=0; i < ${#args[@]}; i++ )); do 

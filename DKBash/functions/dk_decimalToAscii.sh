@@ -8,7 +8,7 @@
 #
 dk_decimalToAscii (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_decimalToHex ${1} hex
 	dk_hexToAscii ${hex} ascii

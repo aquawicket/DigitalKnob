@@ -12,7 +12,7 @@
 #
 dk_readlink (){
 	dk_debugFunc
-	[ $# -ne 2 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
 	# test $(readlink -f "%2")
 	# fallback on the code below upon failure

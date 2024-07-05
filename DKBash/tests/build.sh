@@ -100,7 +100,7 @@ dk_buildMain (){
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-		sudo chown -R "$LOGNAME" "$HOME"
+		${dksudo} chown -R "$LOGNAME" "$HOME"
 	fi
 
 	dk_printVar SHLVL			# https://stackoverflow.com/a/4511483/688352
@@ -155,7 +155,7 @@ dk_buildMain (){
 #
 dk_pickUpdate (){
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_readCache
 	
@@ -249,7 +249,7 @@ dk_pickUpdate (){
 #
 dk_pickApp (){
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
@@ -305,7 +305,7 @@ dk_pickApp (){
 #
 dk_pickOs (){
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
@@ -440,7 +440,7 @@ dk_pickOs (){
 #
 dk_pickType (){
 	dk_debugFunc
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
@@ -473,7 +473,7 @@ dk_pickType (){
 
 
 ##################################################################################
-# dk_append_cmake_args(<string>)
+# dk_append_cmake_args(string)
 #
 #
 #dk_append_cmake_args (){
@@ -486,7 +486,7 @@ dk_pickType (){
 
 
 #####################################################################
-# prepend_cmake_args(<string>)
+# prepend_cmake_args(string)
 #
 #
 #prepend_cmake_args (){
@@ -504,7 +504,7 @@ dk_pickType (){
 #
 dk_generate (){
 	dk_verbose "dk_generate($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	dk_echo
 	dk_echo "##################################################################"
@@ -701,7 +701,7 @@ dk_generate (){
 #
 dk_build (){
 	dk_verbose "dk_build($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
 	dk_echo "##################################################################"
@@ -773,7 +773,7 @@ dk_getDKPaths (){
 #
 #
 dk_url (){
-	dk_stringContains $1 "://" && return $true
+	dk_stringContains ${1} "://" && return $true
 	return $false
 }
 
@@ -783,7 +783,7 @@ dk_url (){
 #
 dk_installCmake (){
 	dk_verbose "dk_installCmake($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################
 	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
@@ -861,7 +861,7 @@ dk_installCmake (){
 
 
 ##################################################################################
-# dk_echo(<message>)
+# dk_echo(message)
 #
 #
 dk_echo (){
@@ -876,21 +876,21 @@ dk_echo (){
 
 
 ##################################################################################
-# dk_verbose(<message>)
+# dk_verbose(message)
 #
 #
 dk_verbose (){
 	#dk_verbose "dk_verbose($*)"
-	[ -z "$1" ] && dk_error "dk_verbose($*): requires at least 1 parameter"
+	[ -z "${1}" ] && dk_error "dk_verbose($*): requires at least 1 parameter"
 	
 	[ $LOG_VERBOSE = 1 ] || return 0
 
-	dk_echo "${cyan}VERBOSE: $1 ${clr}"
+	dk_echo "${cyan}VERBOSE: ${1} ${clr}"
 }
 
 
 ##################################################################################
-# dk_debug(<message>)
+# dk_debug(message)
 #
 #	Print a debug message to the console
 #
@@ -898,35 +898,35 @@ dk_verbose (){
 #
 dk_debug (){
 	#dk_verbose "dk_debug($*)"	
-	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
+	[ ${#} -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
 	
 	[ $LOG_DEBUG -eq 1 ] || return 0
 	
-	msg="$1"
+	msg="${1}"
 	dk_echo "${blue}  DEBUG: ${msg} ${clr}"
 }
 
 
 ##################################################################################
-# dk_info(<message>)
+# dk_info(message)
 #
 #
 dk_info (){
 	#dk_verbose "dk_info($*)"
 	
-	msg="$1"
+	msg="${1}"
 	dk_echo "${white}   INFO: ${msg} ${clr}"
 }
 
 
 ##################################################################################
-# dk_warning(<message>)
+# dk_warning(message)
 #
 #
 dk_warning (){
 	#dk_verbose "dk_warning($*)"
 	
-	msg="$1"
+	msg="${1}"
 	dk_echo "${yellow}WARNING: ${msg} ${clr}"
 	[ ${TRACE_ON_WARNINGS-} = 1 ] && dk_stacktrace
 	[ ${HALT_ON_WARNINGS-} = 1 ] && exit 1
@@ -934,13 +934,13 @@ dk_warning (){
 
 
 ##################################################################################
-# dk_error(<message>)
+# dk_error(message)
 #
 #
 dk_error (){
 	#dk_verbose "dk_error($*)"
 	
-	msg="$1"
+	msg="${1}"
 	dk_echo "${red}  ERROR: ${msg} ${clr}"
 	dk_stacktrace
 	[ $CONTINUE_ON_ERRORS = 1 ] && return 0
@@ -950,21 +950,21 @@ dk_error (){
 
 
 ##################################################################################
-# dk_variable_info(<name> <output>)
+# dk_variable_info(name output)
 #
 #
 dk_variable_info (){
 	echo "dk_variable_info($*)"
 	
-	[ $# -ne 2 ] && return $false										# if not exactly 2 parameters
-	$(expr "$1" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
-	$(expr "$2" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	[ ${#} -ne 2 ] && return $false										# if not exactly 2 parameters
+	$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
+	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $false		# if not valid variable name
 	
-	if dk_defined $1; then
-		eval value='$'{$1}
-		eval "$2=\"$1 = '${value}'\""
+	if dk_defined ${1}; then
+		eval value='$'{${1}}
+		eval "${2}=\"${1} = '${value}'\""
 	else
-		eval "$2=\"$1 = ${red}NOT DEFINED${clr}\""
+		eval "${2}=\"${1} = ${red}NOT DEFINED${clr}\""
 	fi
 }
 
@@ -974,7 +974,7 @@ dk_variable_info (){
 #
 dk_stacktrace (){
     dk_verbose "dk_stacktrace($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	#[ "${LINENO-}" = "" ] || "LINENO = ${LINENO-}"	
 
@@ -1021,44 +1021,44 @@ dk_stacktrace (){
 }
 
 ##################################################################################
-# dk_defined(<variable>)
+# dk_defined(variable)
 #
 # Evaluates to true if the parameter is a variable that exists.
 #
 dk_defined (){
 	dk_verbose "dk_defined($*)"
-	[ $# -ne 1 ] && return $false # Incorrect number of parameters
+	[ ${#} -ne 1 ] && return $false # Incorrect number of parameters
 	
-	eval value='$'{$1+x} # value will = 'x' if the variable is defined
+	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
 	[ -n "$value" ]
 }
 
 
 ##################################################################################
-# dk_hasValue(<variable>)
+# dk_hasValue(variable)
 #
 # Evaluates to true if the parameter is a variable that exists and has value
 #
 dk_hasValue (){
 	dk_verbose "dk_hasValue($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 	
-	eval value='$'{$1}
+	eval value='$'{${1}}
 	[ -n "${value//[[:blank:]]/}" ] # remove spaces and check if empty
 }
 
 
 ##################################################################################
-# dk_call(<command args>)
+# dk_call(command args)
 #
 #
 dk_call (){
 	#dk_verbose "dk_call($*)"
-	[ "$#" -lt "1" ] && dk_error "Incorrect number of parameters"
+	[ ${#} -lt 1 ] && dk_error "Incorrect number of parameters"
 
-	dk_echo "${magenta} $ $* ${clr}"
-	#$("$@") && "$@" 2>&1 #|| dk_verbose "'$*: failed!'"
-	"$@"
+	dk_echo "${magenta} $ ${*} ${clr}"
+	#$("${@}") && "$@" 2>&1 #|| dk_verbose "'$*: failed!'"
+	"${@}"
 }
 
 
@@ -1068,7 +1068,7 @@ dk_call (){
 #
 dk_checkGitRemote (){
 	dk_verbose "dk_checkGitRemote($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	ahead=0
 	behind=0
@@ -1089,12 +1089,12 @@ dk_checkGitRemote (){
 #
 dk_validate_sudo (){
 	dk_verbose "dk_validate_sudo($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if command -v "sudo" >/dev/null; then
-		SUDO="sudo"
+		dksudo="sudo"
 	fi
-	${SUDO-} echo
+	${dksudo} echo
 }
 
 
@@ -1104,7 +1104,7 @@ dk_validate_sudo (){
 #
 dk_reload (){
 	dk_verbose "dk_reload($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	dk_debug "reloading $DKSCRIPT_DIR/$DKSCRIPT_NAME"
 	clear
@@ -1118,7 +1118,7 @@ dk_reload (){
 #
 dk_confirm (){
 	dk_verbose "dk_confirm($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -rp $" " REPLY
@@ -1132,92 +1132,92 @@ dk_confirm (){
 
 
 ##################################################################################
-# dk_stringContains(<string> <substring>)
+# dk_stringContains(string substring)
 #
 #
 dk_stringContains (){
 	dk_verbose "dk_stringContains($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	# https://stackoverflow.com/a/8811800/688352
-	string=$1
-	substring=$2
+	string=${1}
+	substring=${2}
 	[ "${string#*"$substring"}" != "$string" ]	
 }
 
 
 
 ##################################################################################
-# dk_commandExists(<command>)
+# dk_commandExists(command)
 #
 #
 dk_commandExists (){
 	dk_verbose "dk_commandExists($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	[ -n "$(command -v "$1")" ]
+	[ -n "$(command -v "${1}")" ]
 }
 	
 
 ##################################################################################
-# dk_pathExists(<file>)
+# dk_pathExists(file)
 #
 #
 dk_pathExists (){
 	dk_verbose "dk_pathExists($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	#if [ -e "$1" ]; then
+	#if [ -e "${1}" ]; then
 	#	dk_debug "dk_pathExists($*): FOUND"
 	#else
 	#	dk_warning "dk_pathExists($*): NOT FOUND!" 
 	#fi
-	[ -e "$1" ]
+	[ -e "${1}" ]
 }
 
 
 ##################################################################################
-# dk_getBasename(<path> <output>)
+# dk_getBasename(path output)
 #
 #
 dk_getBasename (){
 	dk_verbose "dk_getBasename($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	eval "$2=$(basename "$1")"
+	eval "${2}=$(basename "${1}")"
 }
 
 
 ##################################################################################
-# dk_convertToCIdentifier(<input> <output>)
+# dk_convertToCIdentifier(input output)
 #
 #
 dk_convertToCIdentifier (){
 	dk_verbose "dk_convertToCIdentifier($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	input=$1
+	input=${1}
 	
 	#input="${input//[^[:alnum:]]/_}"			# BASH alpha_numeric_replace
 	dk_replaceAll "$input" "-" "_" input		# POSIX replace
 	dk_replaceAll "$input" "." "_" output		# POSIX replace
 	
-	eval "$2=$output"
-	dk_printVar $2
+	eval "${2}=$output"
+	dk_printVar ${2}
 	#[ $input = "" ]
 }
 
 ##################################################################################
-# dk_replaceAll(<input> <searchValue> <newValue> <output>)
+# dk_replaceAll(input searchValue newValue output)
 #
 #
 dk_replaceAll (){
 	dk_verbose "dk_replaceAll($*)"
-	[ $# -ne 4 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 4 ] && dk_error "Incorrect number of parameters"
 	
-    input=$1
-	searchValue=$2
-	newValue=$3
+    input=${1}
+	searchValue=${2}
+	newValue=${3}
     output=
 		
     while [ -n "$input" ]; do
@@ -1233,84 +1233,84 @@ dk_replaceAll (){
     done
 	
 	
-	eval "$4=$output"
-	dk_printVar $4
+	eval "${4}=$output"
+	dk_printVar ${4}
 }
 
 
 ##################################################################################
-# dk_toLower(<variable>)
+# dk_toLower(variable)
 #
 #
 dk_toLower (){
 	dk_verbose "dk_toLower($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 	
-	dk_defined $1 || dk_error "dk_toLower($*): $1 is not defined"
+	dk_defined ${1} || dk_error "dk_toLower($*): ${1} is not defined"
 
-	eval value='$'{$1}
+	eval value='$'{${1}}
 	value=$(echo "$value" | tr '[:upper:]' '[:lower:]')
 
-	eval "$1=$value"
+	eval "${1}=$value"
 }
 
 
 ##################################################################################
-# dk_download(<url> <destination>)
+# dk_download(url destination)
 #
 #
 dk_download (){
 	dk_verbose "dk_download($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if dk_pathExists "$2"; then
-		dk_warning "dk_download(): $2 already exists"
+	if dk_pathExists "${2}"; then
+		dk_warning "dk_download(): ${2} already exists"
 		return 0
 	fi
-	dk_info "Downloading $1 . . ."
-	parentdir="$(dirname "$2")"
+	dk_info "Downloading ${1} . . ."
+	parentdir="$(dirname "${2}")"
 	dk_printVar "parentdir = $parentdir"
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $parentdir failed!"
-	wget -P "$parentdir" "$1" 
+	wget -P "$parentdir" "${1}" 
 	cd "$oldpwd" #|| dk_error "cd $oldpwd failed!"
 	#[ "$input" = "" ]
 }
 
 
 ##################################################################################
-# dk_extract(<file> <destination>)
+# dk_extract(file destination)
 #
 #
 dk_extract (){
 	dk_verbose "dk_extract($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 
-	filename="$(basename "$1")"
+	filename="$(basename "${1}")"
 	destFolder="${filename%.*}"
 	destFolder="${destFolder%.*}"
-	fulldest="$2/$destFolder"
+	fulldest="${2}/$destFolder"
 	dk_printVar fulldest
 		
 	#if dk_pathExists $fulldest; then
 	#	dk_warning "dk_extract(): $fulldest already exists"
 	#	return 0
 	#fi
-	dk_info "Extracting $1 . . ."
-	parentdir="$(dirname "$1")"
-	parentdest="$(dirname "$2")"
+	dk_info "Extracting ${1} . . ."
+	parentdir="$(dirname "${1}")"
+	parentdest="$(dirname "${2}")"
 	dk_printVar "parentdir = $parentdir"
 	dk_printVar "filename = $filename"
-	#need to cd into parent directory of $1 and send tar the file name of $1
+	#need to cd into parent directory of ${1} and send tar the file name of ${1}
 	olddir=$PWD
 	cd "$parentdir" #|| dk_error "cd $$parentdir failed!"
-	tar -xf "$filename" -C "$2"
+	tar -xf "$filename" -C "${2}"
 	cd "$oldpwd" #|| dk_error "cd $$oldpwd failed!"
 	dk_convertToCIdentifier "$destFolder" destFolder_
 	dk_printVar destFolder_
-	mv "$2"/"$destFolder" "$2"/"$destFolder_"
+	mv "${2}"/"$destFolder" "${2}"/"$destFolder_"
 
-	#echo echo "$CMAKE_FOLDER">"$2"/"$destFolder_"/dk_installed
+	#echo echo "$CMAKE_FOLDER">"${2}"/"$destFolder_"/dk_installed
 
 	#TODO
 	#[ "$input" = "" ]
@@ -1318,12 +1318,12 @@ dk_extract (){
 
 
 ##################################################################################
-# dk_rename(<from> <to>)
+# dk_rename(from to)
 #
 #
 dk_rename (){
 	dk_verbose "dk_rename($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	#TODO
 	#[ ? = "success" ]
@@ -1331,14 +1331,14 @@ dk_rename (){
 
 
 ##################################################################################
-# dk_removeExtension(<filepath>)
+# dk_removeExtension(filepath)
 #
 #
 dk_removeExtension (){
 	dk_verbose "dk_removeExtension($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 	
-	filepath="$1"
+	filepath="${1}"
 	filepath="${filepath%.*}"									    # remove everything past last dot
 	[ "${filepath##*.}" = "tar" ] &&	filepath="${filepath%.*}"	# if .tar remove everything past last dot
 
@@ -1351,7 +1351,7 @@ dk_removeExtension (){
 #
 dk_installGit (){
 	dk_verbose "dk_installGit($*)"
-	[ $# -gt 0 ] && dk_error "too many arguments"
+	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if ! dk_commandExists git; then
 		dk_install git
@@ -1370,7 +1370,7 @@ dk_installGit (){
 #
 dk_installHomebrew (){
 	dk_verbose "dk_installHomebrew($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	if ! [ "$OSTYPE" = "darwin"* ]; then
 		return
@@ -1390,19 +1390,19 @@ dk_installHomebrew (){
 
 
 ##################################################################################
-# dk_packageInstalled(<package>)
+# dk_packageInstalled(package)
 #
 #
 dk_packageInstalled (){
 	dk_verbose "dk_packageInstalled($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	if dk_commandExists dpkg-query; then
-		if [ $(dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
+		if [ $(dpkg-query -W -f='${Status}' "${1}" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
 			return $true
 		fi
 	elif dk_commandExists brew; then
-		if brew list "$1" &>/dev/null; then
+		if brew list "${1}" &>/dev/null; then
 			return $true
 		fi
 	elif dk_commandExists apt; then
@@ -1412,7 +1412,7 @@ dk_packageInstalled (){
 	elif dk_commandExists pkg; then
 		dk_error "dk_packageInstalled() pkg not implemented"
 	elif dk_commandExists pacman; then
-		if pacman -Qs "$1" >/dev/null; then
+		if pacman -Qs "${1}" >/dev/null; then
 			#FIXME: this doesn't always work
 			return $false;
 		fi
@@ -1427,32 +1427,32 @@ dk_packageInstalled (){
 
 
 ##################################################################################
-# dk_install(<package>)
+# dk_install(package)
 #
 #
 dk_install (){
 	dk_verbose "dk_install($*)"
-	[ $# -ne 1 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
-	#if dk_packageInstalled $1; then
-	#	dk_warning "$1 already dk_installed"
+	#if dk_packageInstalled ${1}; then
+	#	dk_warning "${1} already dk_installed"
 	#	return $false;
 	#fi
 	
-	dk_info "dk_installing $1"
+	dk_info "dk_installing ${1}"
 
 	if dk_commandExists brew; then
-		dk_call $SUDO brew dk_install "$1"
+		dk_call ${dksudo} brew dk_install "${1}"
 	elif dk_commandExists apt; then
-		dk_call $SUDO apt -y dk_install "$1"
+		dk_call ${dksudo} apt -y dk_install "${1}"
 	elif dk_commandExists apt-get; then
-		dk_call $SUDO apt-get -y dk_install "$1"
+		dk_call ${dksudo} apt-get -y dk_install "${1}"
 	elif dk_commandExists pkg; then
-		dk_call $SUDO pkg dk_install "$1"
+		dk_call ${dksudo} pkg dk_install "${1}"
 	elif dk_commandExists pacman; then
-		dk_call $SUDO pacman -S "$1" --noconfirm
+		dk_call ${dksudo} pacman -S "${1}" --noconfirm
 	elif dk_commandExists tce-load; then
-		dk_call tce-load -wi "$1"
+		dk_call tce-load -wi "${1}"
 	else
 		dk_error "ERROR: no package managers found"
 	fi
@@ -1460,15 +1460,15 @@ dk_install (){
 
 
 ##################################################################################
-# dk_validatePackage(<command> <package>)
+# dk_validatePackage(command package)
 #
 #
 dk_validatePackage (){
 	dk_verbose "dk_validatePackage($*)"
-	[ $# -ne 2 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_commandExists "$1"; then
-		dk_install "$2"
+	if ! dk_commandExists "${1}"; then
+		dk_install "${2}"
 	fi
 }
 
@@ -1479,7 +1479,7 @@ dk_validatePackage (){
 #
 #dk_validateOstype (){
 #	dk_verbose "dk_validateOstype($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #	
 #	if [ -e /proc/device-tree/model ]; then
 #		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -1511,7 +1511,7 @@ dk_validatePackage (){
 #
 dk_validateBranch (){
 	dk_verbose "dk_validateBranch($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -1569,7 +1569,7 @@ dk_validateBranch (){
 #
 dk_pause (){
 	dk_verbose "dk_pause($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	read -rp 'Press enter to continue...' key
 }
@@ -1581,7 +1581,7 @@ dk_pause (){
 #
 dk_clearCmakeCache (){
 	dk_verbose "dk_clearCmakeCache($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Clearing CMake cache . . ."
 	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1596,7 +1596,7 @@ dk_clearCmakeCache (){
 #
 dk_deleteTempFiles (){
 	dk_verbose "dk_deleteTempFiles($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	dk_info "Deleting .TMP files . . ."
 	cd "$DIGITALKNOB_DIR" #|| dk_error "cd $$DIGITALKNOB_DIR failed!"
@@ -1613,7 +1613,7 @@ dk_deleteTempFiles (){
 #
 #dk_installMsys2 (){
 #	dk_verbose "dk_installMsys2($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
 #	dk_printVar MSYS2
@@ -1626,7 +1626,7 @@ dk_deleteTempFiles (){
 #
 #dk_installMake (){
 #	dk_verbose "dk_installMake($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	dk_printVar MAKE_PROGRAM
@@ -1639,7 +1639,7 @@ dk_deleteTempFiles (){
 #
 #dk_installEmscripten (){
 #	dk_verbose "dk_installEmscripten($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	dk_printVar EMSDK
@@ -1657,7 +1657,7 @@ dk_deleteTempFiles (){
 #
 #dk_installAndroidNdk (){
 #	dk_verbose "dk_installAndroidNdk($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	dk_printVar ANDROID_NDK
@@ -1676,7 +1676,7 @@ dk_deleteTempFiles (){
 #
 #dk_installClang (){
 #	dk_verbose "dk_installClang($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	dk_printVar CLANG_C_COMPILER
@@ -1690,7 +1690,7 @@ dk_deleteTempFiles (){
 #
 #dk_installGcc (){
 #	dk_verbose "dk_installGcc($*)"
-#	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+#	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
 #	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	dk_printVar GCC_C_COMPILER
@@ -1699,24 +1699,24 @@ dk_deleteTempFiles (){
 
 
 ##################################################################################
-# dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
+# dk_cmakeEval(cmake_commands;.;.; return_variables;.;.;. -DVARS;.;.;)
 #
 #			
 dk_cmakeEval (){
 	dk_verbose "dk_cmakeEval($*)"
 	
-	if [ -z "$1" ]; then
+	if [ -z "${1}" ]; then
 		dk_error "dk_cmakeEval() parameter 1 is invalid"
 	fi
 	
-	commands="$1"
-	variables="$2"
+	commands="${1}"
+	variables="${2}"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
 	dk_printVar DKCOMMAND
 	
 	if [ -n "$variables" ]; then
-		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" "$3" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
+		dk_call "$CMAKE_EXE" "-DDKCMAKE_DIR=$DKCMAKE_DIR" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=${2}" "${3}" -P "$DKCMAKE_DIR"/dev/dk_cmakeEval.cmake
 		if dk_pathExists "$DKCMAKE_DIR"/cmake_vars; then
 	    	dk_info "executing cmake_vars"
 			. "$DKCMAKE_DIR"/cmake_vars
@@ -1735,7 +1735,7 @@ dk_cmakeEval (){
 #
 dk_pushAssets (){
 	dk_verbose "dk_pushAssets($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
 	
@@ -1749,7 +1749,7 @@ dk_pushAssets (){
 #
 dk_pullAssets (){
 	dk_verbose "dk_pullAssets($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_confirm || return 0
 
@@ -1763,9 +1763,9 @@ dk_pullAssets (){
 #
 dk_resetAll (){
 	dk_verbose "dk_resetAll($*)"
-	[ $# -gt 1 ] && dk_error "Too many parameters"
+	[ ${#} -gt 1 ] && dk_error "Too many parameters"
 	
-	if ! [ "$1" = "wipe" ]; then
+	if ! [ "${1}" = "wipe" ]; then
 		clear
 		dk_echo
 		dk_echo
@@ -1838,9 +1838,9 @@ dk_resetAll (){
 #
 dk_removeAll (){
 	dk_verbose "dk_removeAll($*)"
-	[ $# -gt 1 ] && dk_error "Too many parameters"
+	[ ${#} -gt 1 ] && dk_error "Too many parameters"
 	
-	if ! [ "$1" = "wipe" ]; then	
+	if ! [ "${1}" = "wipe" ]; then	
 		clear
 		dk_echo
 		dk_echo
@@ -1893,12 +1893,12 @@ dk_removeAll (){
 
 
 ##################################################################################
-# dk_gitUpdate(<NO_CONFIRM:optional>)
+# dk_gitUpdate(NO_CONFIRM:optional)
 #
 #
 dk_gitUpdate (){
 	dk_verbose "dk_gitUpdate($*)"
-	[ $# -gt 1 ] && dk_error "Too many parameters"
+	[ ${#} -gt 1 ] && dk_error "Too many parameters"
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."
@@ -1929,7 +1929,7 @@ dk_gitUpdate (){
 #
 dk_gitCommit (){	
 	dk_verbose "dk_gitCommit($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please enter some details about this commit, Then press ENTER."
 	read message
@@ -1987,7 +1987,7 @@ dk_gitCommit (){
 #
 dk_enterManually (){
 	dk_verbose "dk_enterManually($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
@@ -2025,7 +2025,7 @@ dk_enterManually (){
 #
 dk_createCache (){
 	dk_verbose "dk_createCache($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	dk_echo "creating cache..."
 	
@@ -2043,7 +2043,7 @@ dk_createCache (){
 #
 dk_readCache (){
 	dk_verbose "dk_readCache($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_pathExists "$DKBRANCH_DIR"/cache; then
 		return 0
@@ -2077,21 +2077,21 @@ dk_readCache (){
 
 
 ##################################################################################
-# dk_removeCarrageReturns(<input>)
+# dk_removeCarrageReturns(input)
 #
 #
 dk_removeCarrageReturns (){
 	dk_verbose "dk_removeCarrageReturns($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 
-	in=$1
+	in=${1}
 	out=$(echo "$in" | tr -d '\r')
 	# carrage returns are removed from <out>
 }
 
 
 ##################################################################################
-# dk_saveArgs(<args..>)
+# dk_saveArgs(args..)
 #
 # reference: https://www.etalabs.net/sh_tricks.html
 #
@@ -2099,7 +2099,7 @@ dk_removeCarrageReturns (){
 #   set -- One Two Three Four
 #   myarrayA=$(dk_saveArgs "$@")
 #   eval "set -- $myarrayA"
-#	echo "$1 $2 $3 $4"
+#	echo "${1} ${2} ${3} ${4}"
 #
 dk_saveArgs (){
 	dk_verbose "dk_saveArgs($*)"
@@ -2111,7 +2111,7 @@ dk_saveArgs (){
 }
 
 ##################################################################################
-# try(<args..>)
+# try(args..)
 #
 try (){ 
 	#$@ >/dev/null
@@ -2120,14 +2120,14 @@ try (){
 
 
 ##################################################################################
-# dk_getHostTriple(<input>)
+# dk_getHostTriple(input)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
 dk_getHostTriple (){
 	dk_verbose "dk_getHostTriple($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
@@ -2417,7 +2417,7 @@ DK_TRY_CATCH (){
 #
 dk_getShellType (){
 	dk_verbose "dk_getShellType($*)"
-	[ $# -gt 0 ] && dk_error "Incorrect number of parameters"
+	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	echo "SHELL = $SHELL"
 	echo "BASH_SOURCE = $BASH_SOURCE"
