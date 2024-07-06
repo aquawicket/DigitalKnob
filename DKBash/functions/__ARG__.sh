@@ -10,11 +10,12 @@ __ARG__ (){
 	[ -z ${2-} ] && local frame=0 || local frame=${2}
 	local argN=$1
 	
-	ARGC=$(__ARGC__ $frame)
+	#ARGC=$(__ARGC__ $frame)
+	ARGC=${BASH_ARGC[${frame}]-}
 	[ $(($argN+1)) -gt ${ARGC} ] && echo "ERROR: ARG$argN is out of bounds. ARG(N) is 0 to $((ARGC-1))"
 	
 	local marker=0
-	for (( i=0; i<frame-1; i++ )); do
+	for (( i=0; i<frame; i++ )); do
 		marker=$(($marker + ${BASH_ARGC[${i}]-}))
 	done
 	local argN=$(($marker+$ARGC-$1-1))
@@ -25,22 +26,36 @@ __ARG__ (){
 
 
 test_functionA(){
-	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 2)"
-	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 2)"
-	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 2)"
-	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 2)"
-	echo "${FUNCNAME} ARG4 = $(__ARG__ 4 2)"
-	echo "${FUNCNAME} ARG5 = $(__ARG__ 5 2)"
-	#echo "${FUNCNAME} ARG6 = $(__ARG__ 6 2)"	# out of bounds
+	echo "${FUNCNAME} FILE = $(__TIME__ 1)"
+	echo "${FUNCNAME} FILE = $(__FILE__ 1)"
+	echo "${FUNCNAME} LINE = $(__LINE__ 1)"
+	echo "${FUNCNAME} FROM = $(__CALLER__ 1)"
+	echo "${FUNCNAME} FUNC = $(__FUNCTION__ 1)"
+	echo "${FUNCNAME} ARGC = $(__ARGC__ 1)"
+	echo "${FUNCNAME} ARGV = $(__ARGV__ 1)"
+	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 1)"
+	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 1)"
+	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 1)"
+	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 1)"
+	echo "${FUNCNAME} ARG4 = $(__ARG__ 4 1)"
+	echo "${FUNCNAME} ARG5 = $(__ARG__ 5 1)"
+	#echo "${FUNCNAME} ARG6 = $(__ARG__ 6 1)"	# out of bounds
 	test_functionB one two three four
 }
 
 test_functionB(){
-	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 2)"
-	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 2)"
-	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 2)"
-	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 2)"
-	#echo "${FUNCNAME} ARG4 = $(__ARG__ 4 2)"	# out of bounds
+	echo "${FUNCNAME} FILE = $(__TIME__ 1)"
+	echo "${FUNCNAME} FILE = $(__FILE__ 1)"
+	echo "${FUNCNAME} LINE = $(__LINE__ 1)"
+	echo "${FUNCNAME} FROM = $(__CALLER__ 1)"
+	echo "${FUNCNAME} FUNC = $(__FUNCTION__ 1)"
+	echo "${FUNCNAME} ARGC = $(__ARGC__ 1)"
+	echo "${FUNCNAME} ARGV = $(__ARGV__ 1)"
+	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 1)"
+	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 1)"
+	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 1)"
+	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 1)"
+	#echo "${FUNCNAME} ARG4 = $(__ARG__ 4 1)"	# out of bounds
 }
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###

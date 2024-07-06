@@ -11,49 +11,51 @@ dk_validateArgs (){
 	
 	local minArgs=${#}
 	local count=0
-	for arg in "$@"
+	for argType in "$@"
 	do
-		dk_echo "count = $count"
-		dk_echo "ARGV = $(__ARGV__ 2)"
-		dk_echo "ARG${count} = $(__ARG__ ${count} 2)"
-		if [ $arg = "args" ]; then
+		#dk_echo "ARGV = $(__ARGV__ 2)"
+		#dk_echo "ARG${count} = $(__ARG__ ${count} 2)"
+		ARG=$(__ARG__ ${count} 2)
+		
+		if [ $argType = "args" ]; then
 			local maxArgs=99
-		elif [ $arg = "array" ]; then
-			#dk_isArray $arg
+		elif [ $argType = "array" ]; then
+			#$(dk_isArray $ARG) && dk_info "ARG${count}:'${ARG}' is an array" || dk_error "ARG${count}:'${ARG}' must be an array"
+			$(dk_isArray $ARG) || dk_error "ARG${count}:'${ARG}' must be an array"
 			local maxArgs=${#}
-		elif [ $arg = "element" ]; then
+		elif [ $argType = "element" ]; then
 			local maxArgs=${#}
-		elif [ $arg = "int" ]; then
+		elif [ $argType = "int" ]; then
 			local maxArgs=${#}
-		elif [ $arg = "string" ]; then
+		elif [ $argType = "string" ]; then
 			local maxArgs=${#}
-		elif [ $arg = "rtn_var" ]; then
+		elif [ $argType = "rtn_var" ]; then
 			local maxArgs=${#}
-		elif [ $arg = "variable" ]; then
+		elif [ $argType = "variable" ]; then
 			local maxArgs=${#}
-		elif [ $arg = "optional:args" ]; then
+		elif [ $argType = "optional:args" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=99
-		elif [ $arg = "optional:array" ]; then
+		elif [ $argType = "optional:array" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
-		elif [ $arg = "optional:element" ]; then
+		elif [ $argType = "optional:element" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
-		elif [ $arg = "optional:int" ]; then
+		elif [ $argType = "optional:int" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
-		elif [ $arg = "optional:string" ]; then
+		elif [ $argType = "optional:string" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
-		elif [ $arg = "optional:rtn_var" ]; then
+		elif [ $argType = "optional:rtn_var" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
-		elif [ $arg = "optional:variable" ]; then
+		elif [ $argType = "optional:variable" ]; then
 			local minArgs=$((minArgs-1))
 			local maxArgs=${#}
 		else
-			dk_error "$arg is invalid. Acceptable types are ( args, array, element, int, string, rtn_var, variable, optional:args, optional:array, optional:int, optional:string, optional:rtn_var, variable )"
+			dk_error "$argType is invalid. Acceptable types are ( args, array, element, int, string, rtn_var, variable, optional:args, optional:array, optional:int, optional:string, optional:rtn_var, variable )"
 		fi
 			count=$((count+1))
 	done
