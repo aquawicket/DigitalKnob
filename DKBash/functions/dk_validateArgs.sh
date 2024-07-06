@@ -7,14 +7,19 @@
 #
 dk_validateArgs (){
 	dk_debugFunc
-	#dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
+	dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
 	
 	local minArgs=${#}
+	local count=0
 	for arg in "$@"
 	do
+		dk_echo "count = $count"
+		dk_echo "ARGV = $(__ARGV__ 2)"
+		dk_echo "ARG${count} = $(__ARG__ ${count} 2)"
 		if [ $arg = "args" ]; then
 			local maxArgs=99
 		elif [ $arg = "array" ]; then
+			#dk_isArray $arg
 			local maxArgs=${#}
 		elif [ $arg = "element" ]; then
 			local maxArgs=${#}
@@ -50,7 +55,7 @@ dk_validateArgs (){
 		else
 			dk_error "$arg is invalid. Acceptable types are ( args, array, element, int, string, rtn_var, variable, optional:args, optional:array, optional:int, optional:string, optional:rtn_var, variable )"
 		fi
-			#dk_echo "$arg"
+			count=$((count+1))
 	done
 	
 	local ARGC=$(__ARGC__ 2)

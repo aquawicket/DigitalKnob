@@ -11,24 +11,38 @@ __ARG__ (){
 	local argN=$1
 	
 	ARGC=$(__ARGC__ $frame)
-	[ $(($argN+1)) -gt ${ARGC} ] && echo "ERROR: argN:$argN out of bounds. ARGC is $ARGC"
+	[ $(($argN+1)) -gt ${ARGC} ] && echo "ERROR: ARG$argN is out of bounds. ARG(N) is 0 to $((ARGC-1))"
 	
 	local marker=0
-	for (( i=0; i<frame; i++ )); do
+	for (( i=0; i<frame-1; i++ )); do
 		marker=$(($marker + ${BASH_ARGC[${i}]-}))
 	done
-	local argN=$(($marker+$1))
+	local argN=$(($marker+$ARGC-$1-1))
 
 	local arg=(${BASH_ARGV[${argN}]-})
 	dk_return "${arg}"; return
 }
 
 
-test_function(){
-	echo "ARG0-1 = $(__ARG__ 0 1)"
-	echo "ARG1-1 = $(__ARG__ 1 1)"
+test_functionA(){
+	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 2)"
+	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 2)"
+	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 2)"
+	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 2)"
+	echo "${FUNCNAME} ARG4 = $(__ARG__ 4 2)"
+	echo "${FUNCNAME} ARG5 = $(__ARG__ 5 2)"
+	#echo "${FUNCNAME} ARG6 = $(__ARG__ 6 2)"	# out of bounds
+	test_functionB one two three four
+}
+
+test_functionB(){
+	echo "${FUNCNAME} ARG0 = $(__ARG__ 0 2)"
+	echo "${FUNCNAME} ARG1 = $(__ARG__ 1 2)"
+	echo "${FUNCNAME} ARG2 = $(__ARG__ 2 2)"
+	echo "${FUNCNAME} ARG3 = $(__ARG__ 3 2)"
+	#echo "${FUNCNAME} ARG4 = $(__ARG__ 4 2)"	# out of bounds
 }
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-	test_function abc 123
+	test_functionA abc 123 def 456 ghi 789
 }

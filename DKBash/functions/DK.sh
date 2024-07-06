@@ -60,6 +60,7 @@ DK (){
 	dk_source __FUNCTION__
 	dk_source __ARGC__
 	dk_source __ARGV__
+	dk_source __ARG__
 	dk_source __CALLER__
 	dk_source dk_debugFunc
 	dk_source dk_load

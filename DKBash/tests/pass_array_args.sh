@@ -5,10 +5,10 @@
 is_array(){
 	if [[ "$(declare -p ${1})" =~ "declare -a" ]]; then
 		echo ${1} is an array
-		return ${true}
+		return $(true)
 	fi
 	echo ${1} is NOT an array
-	return ${false}
+	return $(false)
 }
 
 takes_array(){

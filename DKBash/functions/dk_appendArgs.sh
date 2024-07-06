@@ -2,13 +2,13 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ####################################################################
-# dk_appendArgs(variable args)
+# dk_appendArgs(array args)
 #
 #
 dk_appendArgs (){
 	dk_debugFunc
 	#[ ${#} -lt 2 ] && dk_error "${FUNCNAME}($*): incorrect number of arguments"
-	dk_validateArgs variable args
+	dk_validateArgs array args
 	
 	dk_echo
 	dk_echo "\${1} = ${1-}"
