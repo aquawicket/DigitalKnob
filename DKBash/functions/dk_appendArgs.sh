@@ -17,36 +17,42 @@ dk_appendArgs (){
 #	dk_echo "\${*} = ${*-}"
 		
 	# THIS WORKS when $1 is passed by array[@]	
-	#local var=(${!1-})
+	#local var=(${!1})
 	#dk_arrayPush var ${@:2}
+	
+	array_name=$1
+	dk_echo "\${array_name} = ${array_name}"		# CMAKE_ARGS
 	
 	array_name=${1}
 	dk_echo "\${array_name} = ${array_name}"		# CMAKE_ARGS
 	
-	array_value=${!array_name}
+	array_value=${!1}
 	dk_echo "\${array_value} = ${array_value}"		# a
 	
-	eval array_valueA='$'$array_name
-	dk_echo "\${array_valueA} = ${array_valueA}"	# a
+	eval array_value='$'$1
+	dk_echo "\${array_value} = ${array_value}"		# a
 	
-	eval array_valueB='${'$array_name'}'
-	dk_echo "\${array_valueB} = ${array_valueB}"	# a
+	eval array_value='${'$1'}'
+	dk_echo "\${array_value} = ${array_value}"		# a
 	
-	eval array_valueC='${'$array_name'[1]}'
-	dk_echo "\${array_valueC} = ${array_valueC}"	# b
+	eval array_value1='${'$1'[1]}'
+	dk_echo "\${array_value1} = ${array_value1}"	# b
 	
-	eval array_valueD='${'${array_name}'[1]}'
-	dk_echo "\${array_valueD} = ${array_valueD}"	# b
+	eval array_value1='${'${1}'[1]}'
+	dk_echo "\${array_value1} = ${array_value1}"	# b
+	
+	eval array_value_all='${'$1'[@]}'
+	dk_echo "\${array_value_all} = ${array_value_all}"	# a b c 1 2 3
+	
+	eval array_value_all=('${'$1'[@]}')
+	dk_echo "\${array_value_all[1]} = ${array_value_all[1]}"	# b
+	
+	eval array_value_all=('${'$1'[@]}')
+	array_value_all="${array_value_all[@]}"
+	dk_echo "\${array_value_all} = ${array_value_all}"	# a b c 1 2 3
+	
 
-	#array_value1=${CMAKE_ARGS[1]}
-	#dk_echo "\${array_value1} = ${array_value1}"
-	
-	
-	
-	
 
-	#array_valueC=(${!array_valueB})
-	#dk_echo "\${array_valueC} = ${array_valueC}"
 
 	#local var=(${1}[@])
 
