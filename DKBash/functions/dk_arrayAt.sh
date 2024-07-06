@@ -13,7 +13,9 @@ dk_arrayAt (){
 	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array int optional:rtn_var
 	
-	typeset -n arry=${1} 
+	#eval local arry=('${'$1'[@]}')
+	typeset -n arry=${1}
+	
 	local arrayAt="${arry[${2}]}"
 	dk_printVar arrayAt
 	
@@ -35,7 +37,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[4]="e"
 	
 	#dk_arrayAt myArrayA 3 elementA
-	elementA=$(dk_arrayAt myArrayA 3)
+	elementA=$(dk_arrayAt myArrayA)
 	dk_echo "elementA = ${elementA}"
 	
 	

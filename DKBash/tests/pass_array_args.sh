@@ -12,7 +12,8 @@ is_array(){
 }
 
 takes_array(){
-	eval local arg1=('${'$1'[@]}')
+	#eval local arg1=('${'$1'[@]}')
+	typeset -n arg1=${1}
 
 	echo "array name = $1"
 	echo "$1[@] = ${arg1[@]}"
@@ -24,6 +25,7 @@ returns_array(){
 	local rtn1=("1" "2" "3" "4")
 	
 	eval $1="(${rtn1[@]})"
+	#typeset -n ${1}=rtn1   # Does NOT work
 }
 
 
