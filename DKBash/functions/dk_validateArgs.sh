@@ -51,6 +51,8 @@ dk_validateArgs (){
 			$(dk_isArray $ARG) || dk_error "ARG${n}:'${ARG}' must be an array"
 		elif [[ "$argType" =~ "element" ]]; then
 			dk_echo "ARG${n} = ${argType}"
+		elif [[ "$argType" =~ "number" ]]; then
+			$(dk_isNumber $ARG) || dk_error "ARG${n}:'${ARG}' must be a number"
 		elif [[ "$argType" =~ "int" ]]; then
 			dk_echo "ARG${n} = ${argType}"
 		elif [[ "$argType" =~ "string" ]]; then
@@ -75,18 +77,18 @@ dk_validateArgs (){
 test_function (){
 	dk_debugFunc
 	
-	dk_validateArgs int array string optional:int optional:array 
+	dk_validateArgs number array string optional:int optional:array 
 }
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myInt=69
+	myNumber=69
 	myArray=(1 2 3)
 	myString="string_value"
 	
-	test_function myInt myArray myString
-	#test_function myInt myArray			# NOT ENOUGH
-	test_function myInt myArray myString an_optional
-	test_function myInt myArray myString TOO_MANY myArray
+	test_function 69 myArray myString
+	#test_function myNumber myArray			# NOT ENOUGH
+	test_function 69 myArray myString an_optional
+	test_function myNumber myArray myString TOO_MANY myArray
 }

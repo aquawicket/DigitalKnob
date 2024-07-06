@@ -3,35 +3,40 @@
 
 
 ##################################################################################
-# dk_isEmpty(directory)
+# dk_isVariable(arg)
 #
 #
-dk_isEmpty (){
+dk_isVariable (){
 	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -ne 1 ] && return ${false} # Incorrect number of parameters
 	
-	if [ -d "${1}" ] && files=$(ls -qAH -- "${1}") && [ -z "${files}" ]; then
-		#printf '%s\n' "$dir is an empty directory"
-		return ${true}
-	else
-		#printf >&2 '%s\n' "$dir is not empty, or is not a directory" \
-        #           "or is not readable or searchable in which case" \
-        #            "you should have seen an error message from ls above."
-		return ${false}
-	fi
+	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}   # ^ as first character is not portable
+	$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
+	#echo "${green}$name is [:word:]${clr}"
+	
+	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
+	
+	#echo "dk_defined():value = $value"
+	[ -n "$value" ]
 }
 
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
 
-	echo "PWD = $PWD"
-
-	mkdir empty
-	echo "The created empty folder is ...."
-    $(dk_isEmpty "${PWD}/empty") && echo "Empty" || echo "NOT Empty"
-	echo "the current directory is ..."
-	$(dk_isEmpty "${PWD}") && echo "Empty" || echo "NOT Empty"
-
+	varA="A simple string variable"
+	if dk_isVariable varA; then
+		echo "varA is a variable"
+	else
+		echo "varA is NOT a variable"
+	fi
+	
+	#varB="A non existent variable"
+	if dk_isVariable varB; then
+		echo "varB is a variable"
+	else
+		echo "varB is NOT a variable"
+	fi
 }
