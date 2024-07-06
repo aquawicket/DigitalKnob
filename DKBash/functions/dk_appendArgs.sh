@@ -7,12 +7,18 @@
 #
 dk_appendArgs (){
 	dk_debugFunc
-	#[ ${#} -lt 2 ] && dk_error "${FUNCNAME}($*): incorrect number of arguments"
-	dk_validateArgs array args
+	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_validateArgs array element optional:rtn_var
 	
-	#eval local arry=('${'$1'[@]}')
-	typeset -n arry=${1}
-	
+	#typeset -n array="${1}"
+	#dk_arrayLength array arrayPush			# parameter variable return
+	if [ -n ${1-} ]; then
+		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
+	fi
+	eval "${1-}[${arrayPush}]=${2}"
+
+	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
+	dk_return ${arrayPush}; return		# command substitution return
 }
 
 
@@ -22,12 +28,11 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	local CMAKE_ARGS=(a b c 1 2 4)
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS}"
+	dk_printVar CMAKE_ARGS
 	dk_appendArgs CMAKE_ARGS "A"
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS}"
+	dk_printVar CMAKE_ARGS
 	dk_appendArgs CMAKE_ARGS "B"
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS}"
+	dk_printVar CMAKE_ARGS
 	dk_appendArgs CMAKE_ARGS "C"
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS}"
-	
+	dk_printVar CMAKE_ARGS
 }
