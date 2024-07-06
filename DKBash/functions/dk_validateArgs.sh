@@ -46,21 +46,21 @@ dk_validateArgs (){
 		#dk_echo "NEED${n}:${argType}  GOT${n}:${ARG}"
 			
 		  if [[ "$argType" =~ "args" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			dk_echo "ARG${n} = ${argType}"	# TODO
 		elif [[ "$argType" =~ "array" ]]; then
 			$(dk_isArray $ARG) || dk_error "ARG${n}:'${ARG}' must be an array"
 		elif [[ "$argType" =~ "element" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			dk_echo "ARG${n} = ${argType}"	# TODO
 		elif [[ "$argType" =~ "number" ]]; then
 			$(dk_isNumber $ARG) || dk_error "ARG${n}:'${ARG}' must be a number"
 		elif [[ "$argType" =~ "int" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			dk_echo "ARG${n} = ${argType}"	# TODO
 		elif [[ "$argType" =~ "string" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			$(dk_isString $ARG) || dk_error "ARG${n}:'${ARG}' must be a string"
 		elif [[ "$argType" =~ "rtn_var" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			dk_echo "ARG${n} = ${argType}"   # TODO
 		elif [[ "$argType" =~ "variable" ]]; then
-			dk_echo "ARG${n} = ${argType}"
+			$(dk_isVariable $ARG) || dk_error "ARG${n}:'${ARG}' must be a variable"
 		else
 			dk_error "$argType is invalid. Acceptable types are ( args, array, element, int, string, rtn_var, variable, optional:args, optional:array, optional:int, optional:string, optional:rtn_var, variable )"
 		fi

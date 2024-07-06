@@ -2,6 +2,44 @@
 
 # https://stackoverflow.com/a/4017175
 
+misc_tests(){
+	# THIS WORKS when $1 is passed by array[@]	
+	#local var=(${!1})
+	#dk_arrayPush var ${@:2}
+	
+	array_name=$1
+	dk_echo "\${array_name} = ${array_name}"		# CMAKE_ARGS
+	
+	array_name=${1}
+	dk_echo "\${array_name} = ${array_name}"		# CMAKE_ARGS
+	
+	array_value=${!1}
+	dk_echo "\${array_value} = ${array_value}"		# a
+	
+	eval array_value='$'$1
+	dk_echo "\${array_value} = ${array_value}"		# a
+	
+	eval array_value='${'$1'}'
+	dk_echo "\${array_value} = ${array_value}"		# a
+	
+	eval array_value1='${'$1'[1]}'
+	dk_echo "\${array_value1} = ${array_value1}"	# b
+	
+	eval array_value1='${'${1}'[1]}'
+	dk_echo "\${array_value1} = ${array_value1}"	# b
+	
+	eval array_value_all='${'$1'[@]}'
+	dk_echo "\${array_value_all} = ${array_value_all}"	# a b c 1 2 3
+	
+	eval array_value_all=('${'$1'[@]}')
+	dk_echo "\${array_value_all[1]} = ${array_value_all[1]}"	# b
+	
+	eval array_value_all=('${'$1'[@]}')
+	array_value_all="${array_value_all[@]}"
+	dk_echo "\${array_value_all} = ${array_value_all}"	# a b c 1 2 3
+}
+
+
 is_array(){
 	if [[ "$(declare -p ${1})" =~ "declare -a" ]]; then
 		echo ${1} is an array
