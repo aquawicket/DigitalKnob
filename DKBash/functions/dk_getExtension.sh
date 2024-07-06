@@ -10,7 +10,7 @@ dk_getExtension (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	_filename_="$(basename "$1")"
+	_filename_="$(basename "${1}")"
 	eval "$2=${_filename_##*.}"
 	dk_printVar "${2}"
 }

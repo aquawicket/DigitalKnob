@@ -11,7 +11,7 @@ dk_hasValue (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 	
-	eval value='$'{$1}
+	eval value='$'{${1}}
 	[ -n "${value//[[:blank:]]/}" ] # remove spaces and check if empty
 }
 

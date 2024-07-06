@@ -20,7 +20,7 @@ dk_getShellType (){
 	[ $DKSHELL = bash ] && export DKBASH=1
 	#echo "DKSHELL = $DKSHELL"
 	
-	eval "$1=${DKSHELL}"
+	eval "${1}=${DKSHELL}"
 	dk_printVar "${1}"
 }
 

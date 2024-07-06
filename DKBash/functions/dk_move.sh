@@ -16,7 +16,7 @@ dk_move (){
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	local _from_=$1
+	local _from_=${1}
 	local _to_=$2
 
 	[ "$3" = "OVERWRITE" ] && OVERWRITE=1

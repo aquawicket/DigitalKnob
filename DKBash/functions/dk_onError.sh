@@ -11,14 +11,14 @@ dk_onError (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	#filepath=$1
+	#filepath=${1}
 	#lineno=$2
 	
 	export ENABLE_dk_debugFunc=0
-	dk_echo "${red-} Error: $1:$2 ${clr-}"
+	dk_echo "${red-} Error: ${1}:$2 ${clr-}"
 	
 	[ "$(command -v dk_showFileLine)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/dk_showFileLine.sh
-	dk_showFileLine $1 $2
+	dk_showFileLine ${1} $2
 	[ "$(command -v dk_stacktrace)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/dk_stacktrace.sh
 	dk_stacktrace
 }

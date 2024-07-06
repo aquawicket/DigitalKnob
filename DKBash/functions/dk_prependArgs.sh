@@ -10,13 +10,13 @@ dk_prependArgs (){
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 		if [ -n "${!1-}" ]; then
-			#echo "export $1="${@:2} ${!1}""
-			export $1="${@:2} ${!1}"
+			#echo "export ${1}="${@:2} ${!1}""
+			export ${1}="${@:2} ${!1}"
 		else
-			#echo "export $1="${@:2}""
-			export $1="${@:2}"
+			#echo "export ${1}="${@:2}""
+			export ${1}="${@:2}"
 		fi
-		#dk_echo "1 = $1 = ${!1}"
+		#dk_echo "1 = ${1} = ${!1}"
 }
 
 

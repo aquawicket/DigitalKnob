@@ -9,11 +9,11 @@ dk_printArray (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	typeset -n arry=$1 
+	typeset -n arry=${1} 
 	for ((i=0; i < ${#arry[@]}; i++ )); do
 		dk_info "${1}[$i] = ${arry[$i]}"
 	done
-	dk_info "$1 length = $i"
+	dk_info "${1} length = $i"
 }
 
 

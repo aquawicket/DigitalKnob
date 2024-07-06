@@ -10,19 +10,19 @@ dk_printVar (){
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	
-	varname=$1
+	varname=${1}
 	
 	# https://github.com/flang-compiler/f18-llvm-project/issues/1344
 	# https://unix.stackexchange.com/a/66009
 	#if $(declare -n); then
-		#declare -n _reference_=$1
+		#declare -n _reference_=${1}
 		#if ! declaration="$(declare -p ${!_reference_} 2>/dev/null)"; then
-		#	declaration=$1
+		#	declaration=${1}
 		#fi	
 	if (typeset -n > /dev/null 2>&1); then
-		typeset -n _reference_=$1
+		typeset -n _reference_=${1}
 		if ! declaration="$(typeset -p ${!_reference_} 2>/dev/null)"; then
-			declaration=$1
+			declaration=${1}
 		fi
 		#echo "declaration = $declaration"
 		
@@ -51,7 +51,7 @@ dk_printVar (){
 			printf "${cyan-}"
 			
 			# FIXME: parsing error on OSX zsh
-			#paste <(printf "ASSOCIATIVE_ARRAY:\$$1[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
+			#paste <(printf "ASSOCIATIVE_ARRAY:\$${1}[%s] = \n" "${!_reference_[@]}") <(printf "%s\n" "${_reference_[@]}")
 			printf "${clr-}"
 			return 0
 		fi
@@ -139,7 +139,7 @@ dk_printVar (){
 	fi
 	
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
-	dk_echo "${cyan-}$1 =${red} UNDEFINED${clr-}"
+	dk_echo "${cyan-}${1} =${red} UNDEFINED${clr-}"
 }
 
 

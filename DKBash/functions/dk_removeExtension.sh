@@ -10,7 +10,7 @@ dk_removeExtension (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	_filepath_="$1"
+	_filepath_="${1}"
 	_filepath_="${_filepath_%.*}"									    # remove everything past last dot
 	[ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
 	eval "$2='${_filepath_}'"

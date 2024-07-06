@@ -10,7 +10,7 @@ dk_isUrl (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	dk_stringContains "$1" "://" && return ${true}
+	dk_stringContains "${1}" "://" && return ${true}
 	return ${false}
 }
 

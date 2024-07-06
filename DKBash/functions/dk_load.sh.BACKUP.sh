@@ -10,14 +10,14 @@ dk_load (){
 	dk_debugFunc
 	
 	local fn=
-	[ -z $1 ] && return 0 #true
+	[ -z ${1} ] && return 0 #true
 	
-	if [ -f "$1" ]; then
-		fpath=$1
+	if [ -f "${1}" ]; then
+		fpath=${1}
 		fn=$(basename ${fpath})
 	    fn="${fn%.*}"
 	else
-		fn=$1
+		fn=${1}
 		fpath=${DKBASH_FUNCTIONS_DIR}/${fn}
 	fi
 	

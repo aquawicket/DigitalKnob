@@ -10,7 +10,7 @@ dk_isEmpty (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	if [ -d "$1" ] && files=$(ls -qAH -- "$1") && [ -z "${files}" ]; then
+	if [ -d "${1}" ] && files=$(ls -qAH -- "${1}") && [ -z "${files}" ]; then
 		#printf '%s\n' "$dir is an empty directory"
 		return ${true}
 	else

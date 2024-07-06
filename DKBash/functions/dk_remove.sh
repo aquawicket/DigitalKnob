@@ -10,7 +10,7 @@ dk_remove (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	_path_=$1
+	_path_=${1}
 	if ! dk_pathExists "${_path_}"; then
 		dk_warning "dk_remove(): ${_path_} does not exist"
 	fi

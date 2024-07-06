@@ -12,16 +12,16 @@
 dk_load (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && echo "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
-	[ "$1" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
+	[ "${1}" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
 	local funcName=
 	local funcPath=
-	if [ -e "$1" ]; then
-		funcPath=$(cd $(dirname $1); pwd -P)/$(basename $1)
+	if [ -e "${1}" ]; then
+		funcPath=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
 		funcName=$(basename ${funcPath})
 	    funcName="${funcName%.*}"
 	else
-		funcName="$1"
+		funcName="${1}"
 		funcName=$(basename ${funcName})
 		funcName="${funcName%.*}"
 		funcPath=${DKBASH_FUNCTIONS_DIR}/${funcName}.sh

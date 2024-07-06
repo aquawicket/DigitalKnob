@@ -37,7 +37,7 @@ dk_installCmake (){
 	[ "${TARGET_OS-}" = "win_x86_64_clang" ]     && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
 	[ "${TARGET_OS-}" = "win_x86_64_mingw" ]     && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	[ "${TARGET_OS-}" = "win_x86_64_ucrt" ]      && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
-	dk_printVar CMAKE_IMPORT
+	dk_assert CMAKE_IMPORT
 	
 	if dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_info "Installing CMake from dl files"
@@ -46,23 +46,22 @@ dk_installCmake (){
 		CMAKE_DL=${CMAKE_IMPORT}
 		
 		dk_getBasename "${CMAKE_DL}" CMAKE_DL_FILE
-		dk_printVar CMAKE_DL_FILE
+		dk_assert CMAKE_DL_FILE
 		
 		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
-		dk_printVar CMAKE_FOLDER
+		dk_assert CMAKE_FOLDER
 		
 		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
-		dk_printVar CMAKE_FOLDER
+		dk_assert CMAKE_FOLDER
 		
-		#[ -z ${DKTOOLS_DIR} ] && dk_getDKPaths
 		dk_validate DKTOOLS_DIR "dk_getDKPaths"
 		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
 		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
 		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
-		dk_printVar CMAKE_EXE
+		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake found for this OS"
+		dk_assert CMAKE_EXE
 		
 		if dk_pathExists "${CMAKE_EXE}"; then 
 			return ${true};
@@ -83,7 +82,7 @@ dk_installCmake (){
 	else	# linux package
 		dk_info "Installing CMake from package managers"
 		
-		dk_commandExists cmake && $CMAKE_EXE=$(command -v "cmake")
+		dk_commandExists cmake && CMAKE_EXE=$(command -v "cmake")
 		#dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		#dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		#dk_printVar CMAKE_EXE
@@ -93,13 +92,14 @@ dk_installCmake (){
 		CMAKE_EXE=$(command -v cmake)
 		#CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		dk_realpath ${CMAKE_EXE} CMAKE_EXE
-		dk_printVar CMAKE_EXE
+		dk_assert CMAKE_EXE
 	fi
 }
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_installCmake
 }
