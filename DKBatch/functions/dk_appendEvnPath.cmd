@@ -1,6 +1,13 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_appendEvnPath
+call dk_source dk_debugFunc
+call dk_source dk_error
+call dk_source dk_info
+call dk_source dk_stringContains
+call dk_source dk_validate
+call dk_source dk_validateBranch
 ::################################################################################
 ::# dk_appendEvnPath(array, index, element)
 ::#

@@ -1,6 +1,10 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_appendArgs
+call dk_source dk_debugFunc
+call dk_source dk_echo
+call dk_source dk_error
 ::####################################################################
 ::# dk_appendArgs(variable, string)
 ::#
