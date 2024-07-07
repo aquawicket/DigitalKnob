@@ -13,6 +13,4 @@
 	ftype dkbash=
 	assoc .sh=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dkbash"
-	
-	pause
 goto:eof
