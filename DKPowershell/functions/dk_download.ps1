@@ -14,7 +14,8 @@ function Global:dk_download($url, $destination) {
         return
     }
 	
-	dk_echo "Downloading $url . . ."
+	$filename = Split-Path $url -leaf
+	dk_echo "Downloading $filename . . ."
 	
 	# method 1
     Invoke-WebRequest -URI $url -OutFile $destination #-SkipHttpErrorCheck
