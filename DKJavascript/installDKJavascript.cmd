@@ -15,9 +15,9 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
 	
-	ftype dk_javascript=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	assoc .js=dk_javascript
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_javascript\DefaultIcon" "" "REG_SZ" "%NODEJS%\node.exe"
+	ftype dkjavascript=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	assoc .js=dkjavascript
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkjavascript\DefaultIcon" "" "REG_SZ" "%NODEJS%\node.exe"
 goto:eof
 
 

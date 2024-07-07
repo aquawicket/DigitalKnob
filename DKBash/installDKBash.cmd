@@ -19,12 +19,12 @@
 	::###### Git Bash ######::
 	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
 	assoc .sh=dkbash
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_bash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkbash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
 	
 	::###### Msys2 Bash ######
 ::	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%CLANG64_EXE%" "%%1" %*
 ::	assoc .sh=dkbash
-::	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_bash\DefaultIcon" "" "REG_SZ" "%CLANG64_EXE%"
+::	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkbash\DefaultIcon" "" "REG_SZ" "%CLANG64_EXE%"
 	
 goto:eof
 

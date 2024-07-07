@@ -12,9 +12,9 @@ if not "%*" == "" (goto:runDKBatch)
 	call dk_load dk_validate
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	
-	ftype dk_batch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %*
-	assoc .cmd=dk_batch
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_batch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
+	ftype dkbatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %*
+	assoc .cmd=dkbatch
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkbatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 goto:eof
 
 

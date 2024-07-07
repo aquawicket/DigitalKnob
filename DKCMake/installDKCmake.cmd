@@ -15,9 +15,9 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
-	ftype dk_cmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
-	assoc .cmake=dk_cmake
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_cmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
+	ftype dkcmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
+	assoc .cmake=dkcmake
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkcmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
 goto:eof
 
 

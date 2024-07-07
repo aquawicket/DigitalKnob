@@ -15,9 +15,9 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 	
-	ftype dk_powershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
-	assoc .ps1=dk_powershell
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_powershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
+	ftype dkpowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
+	assoc .ps1=dkpowershell
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkpowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 goto:eof
 
 

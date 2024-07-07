@@ -8,7 +8,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::####################################################################
 ::# dk_load(funcName OR funcPath)
 ::#
-::#	Source a dk_batch function. Download it if needed then parse it and source all of it's content dk_batch functions recursivley.
+::#	Source a DKBatch function. Download it if needed then parse it and source all of it's content DKBatch functions recursivley.
 ::#
 ::#	@funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#

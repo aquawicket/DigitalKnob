@@ -16,9 +16,9 @@
 	call dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
 	
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html"
-	ftype dk_html=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	assoc .html=dk_html
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_javascript\DefaultIcon" "" "REG_SZ" "%NODEJS%\node.exe"
+	ftype dkhtml=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	assoc .html=dkhtml
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkhtml\DefaultIcon" "" "REG_SZ" "%NODEJS%\node.exe"
 goto:eof
 
 

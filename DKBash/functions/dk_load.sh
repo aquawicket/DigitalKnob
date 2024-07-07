@@ -5,7 +5,7 @@
 ##################################################################################
 # dk_load(funcName OR funcPath)
 #
-#	Source a dk_bash function. Download it if needed then parse it and source all of it's content dk_bash functions recursivley.
+#	Source a DKBash function. Download it if needed then parse it and source all of it's content DKBash functions recursivley.
 #
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #

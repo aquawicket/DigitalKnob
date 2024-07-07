@@ -7,7 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	
 	echo Uninstalling .cmake file associations . . .
 	
-	ftype dk_cmake=
+	ftype dkcmake=
 	assoc .cmake=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dk_cmake"
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dkcmake"
 goto:eof

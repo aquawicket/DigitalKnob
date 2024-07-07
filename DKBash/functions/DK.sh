@@ -263,7 +263,7 @@ dk_source(){
 ##################################################################################
 # dk_call()
 #
-#	call a dk_bash function. dk_load it first if needed.
+#	call a DKBash function. dk_load it first if needed.
 #
 dk_call(){
 	if ! dk_commandExists "${1}"; then
