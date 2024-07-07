@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
-# dk_printArray(array)
+# dk_printVar(array)
 #
 #
-dk_printArray (){
+dk_printVar (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -28,5 +28,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArray[3]="d"
 	myArray[4]="e"
 	
-	dk_printArray myArray
+	dk_printVar myArray
 }

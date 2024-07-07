@@ -30,29 +30,29 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArray[3]="d"
 	myArray[4]="e"
 	
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPop myArray
-	dk_printArray myArray	
+	dk_printVar myArray	
 }

@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_generate()
 #
@@ -35,7 +34,8 @@ dk_generate (){
 	DKLINK="Static"
 	
 	#declare -a CMAKE_ARGS
-	set --											#clear the positional parameters
+	#set --											#clear the positional parameters
+	CMAKE_ARGS=()
 	if [ "$TYPE" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		#set -- "$@" "-DDEBUG=ON"

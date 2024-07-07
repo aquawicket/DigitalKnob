@@ -37,7 +37,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[4]="e"
 	
 	#dk_arrayAt myArrayA 3 elementA
-	elementA=$(dk_arrayAt myArrayA)
+	elementA=$(dk_arrayAt myArrayA 3)
 	dk_echo "elementA = ${elementA}"
 	
 	

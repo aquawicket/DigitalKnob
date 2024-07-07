@@ -10,15 +10,13 @@ dk_appendArgs (){
 	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	dk_validateArgs array element optional:rtn_var
 	
-	#typeset -n array="${1}"
-	#dk_arrayLength array arrayPush			# parameter variable return
-	if [ -n ${1-} ]; then
-		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
-	fi
-	eval "${1-}[${arrayPush}]=${2}"
+	# https://stackoverflow.com/a/38959226
+	
+	typeset -n array="${1}"
+	eval array=("${array[@]}" '${2}');
 
-	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
-	dk_return ${arrayPush}; return		# command substitution return
+	[ ${#} -gt 2 ] && eval "${3}=${array}" 
+	dk_return ${array}; return		# command substitution return
 }
 
 
