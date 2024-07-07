@@ -62,7 +62,7 @@ function(dk_pickUpdate)
 		dk_echo("${clr}")
 	endif()
 	
-	read input
+	#read input
 	if(${input} EQUAL 0)
 		dk_echo("repeating last selection")
 		dk_set(APP ${_APP_})
@@ -92,7 +92,7 @@ function(dk_pickUpdate)
 		dk_exit(0)	
 	elseif(${input} EQUAL "")
 		dk_set(UPDATE 1)
-	else
+	else()
 		dk_warning("invalid selection")
 	endif()
 endfunction()
