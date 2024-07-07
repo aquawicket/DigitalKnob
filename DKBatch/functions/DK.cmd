@@ -6,8 +6,8 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 ::# DKINIT()
 ::#
 ::#
-:DK (){
-	::call :dk_echo "DKINIT(%*)"
+:DK
+	::call dk_debugFunc
 
 	::###### Initialize Language specifics ######
 	call :dk_init
@@ -81,21 +81,27 @@ goto:eof
 ::##################################################################################
 ::# dk_echo()
 ::#
-:dk_echo (){
+:dk_echo
+	::call dk_debugFunc
+	
 	echo %~1
 goto:eof
 
 ::##################################################################################
 ::# dk_init()
 ::#
-:dk_init (){
+:dk_init
+	::call dk_debugFunc
+	
 	::call :dk_echo "Loading DKBatch DigitalKnob . . ."
 goto:eof
 
 ::##################################################################################
 ::# dk_reloadWithCmd()
 ::#
-:dk_reloadWithCmd (){
+:dk_reloadWithCmd
+	::call dk_debugFunc
+	
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%" goto:eof
 	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
@@ -106,6 +112,8 @@ goto:eof
 ::# dk_DKBATCH_VARS()
 ::#
 :dk_DKBATCH_VARS
+	::call dk_debugFunc
+	
     for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
     set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
@@ -117,7 +125,9 @@ goto:eof
 ::##################################################################################
 ::# dk_DKHTTP_VARS()
 ::#
-:dk_DKHTTP_VARS (){
+:dk_DKHTTP_VARS
+	::call dk_debugFunc
+	
     set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
     set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
     set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
@@ -127,7 +137,9 @@ goto:eof
 ::##################################################################################
 ::# dk_setupCallstack()
 ::#
-:dk_setupCallstack (){
+:dk_setupCallstack
+	::call dk_debugFunc
+	
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
 	call dk_source dk_callStack
 goto:eof
@@ -136,7 +148,9 @@ goto:eof
 ::##################################################################################
 ::# dk_DKSCRIPT_VARS()
 ::#
-:dk_DKSCRIPT_VARS (){
+:dk_DKSCRIPT_VARS
+	::call dk_debugFunc
+	
 	set "DKSCRIPT_PATH=%__FILE__%"
 	if not exist "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%0"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
@@ -149,13 +163,15 @@ goto:eof
 ::##################################################################################
 ::# dk_setupKeepOpen()
 ::#
-:dk_setupKeepOpen (){
+:dk_setupKeepOpen
+	::call dk_debugFunc
+	
 	::if "%KEEP_CONSOLE_OPEN%" neq "1" goto:eof
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& cls ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
-
-:DKTEST (){
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	%DKSCRIPT_NAME%

@@ -5,6 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# __ARGV__(<frame>
 ::#
 :__ARGV__() {
+	::call dk_debugFunc
 	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
 	::set /A _FRAME_-=1
 	
@@ -18,5 +19,7 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	::call dk_debugFunc
 	
 	echo "$(__ARGV__)"
+goto:eof

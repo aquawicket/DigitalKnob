@@ -1,11 +1,11 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
-###############################################################################
-# dk_gitUpdate()
+##################################################################################
+# dk_gitCommit()
 #
 #
-function(dk_gitUpdate)
+function(dk_gitCommit)
 	dk_debugFunc(${ARGV})
 
 endfunction()
@@ -15,5 +15,5 @@ endfunction()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc(${ARGV})
 	
-	dk_gitUpdate()
+	dk_gitCommit()
 endfunction()

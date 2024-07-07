@@ -5,6 +5,7 @@
 # __ARG__(arg_number, frame)
 #
 __ARG__ (){
+	#dk_debugFunc
 	[ ${#} -eq 0 ] && echo "ERROR: __ARG__() requires at least 1 argument"
 	[ ${#} -gt 2 ] && echo "ERROR: __ARG__(): too many arguments"
 	[ -z ${2-} ] && local frame=0 || local frame=${2}
@@ -26,6 +27,8 @@ __ARG__ (){
 
 
 test_functionA(){
+	#dk_debugFunc
+	
 	echo "${FUNCNAME} FILE = $(__TIME__ 1)"
 	echo "${FUNCNAME} FILE = $(__FILE__ 1)"
 	echo "${FUNCNAME} LINE = $(__LINE__ 1)"
@@ -44,6 +47,8 @@ test_functionA(){
 }
 
 test_functionB(){
+	#dk_debugFunc
+	
 	echo "${FUNCNAME} FILE = $(__TIME__ 1)"
 	echo "${FUNCNAME} FILE = $(__FILE__ 1)"
 	echo "${FUNCNAME} LINE = $(__LINE__ 1)"
@@ -59,5 +64,7 @@ test_functionB(){
 }
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	#dk_debugFunc
+	
 	test_functionA abc 123 def 456 ghi 789
 }
