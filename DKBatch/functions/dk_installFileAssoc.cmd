@@ -8,7 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 :dk_installFileAssoc
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% gtr 3 (call dk_error "%__FUNCTION__%(): too many arguments")
 
+	::if "%~4" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
+	
 	:: <_extension_>  i.e. ".txt"
 	set "_extension_=%~1"
 	
