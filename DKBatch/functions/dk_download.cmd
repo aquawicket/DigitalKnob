@@ -1,6 +1,14 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_debugFunc
+call dk_source dk_error
+call dk_source dk_getBasename
+call dk_source dk_getDKPaths
+call dk_source dk_getFullPath
+call dk_source dk_info
+call dk_source dk_set
+call dk_source dk_validate
 ::####################################################################
 ::# dk_download(url, destination)
 ::#
@@ -30,12 +38,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%destination%')"
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
-
 goto:eof
 
 
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
 	
 	call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd
+goto:eof
