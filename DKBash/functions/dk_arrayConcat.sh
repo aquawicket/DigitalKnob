@@ -10,10 +10,15 @@
 dk_arrayConcat (){
 	dk_debugFunc
 	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array value
+	dk_validateArgs array array
 	
+	typeset -n arrayA="${1}"
+	typeset -n arrayB="${2}"
+	new_array=("${arrayA[@]}" "${arrayB[@]}");
+	dk_printVar new_array
 	
-	dk_todo "dk_arrayConcat"
+	[ ${#} -gt 2 ] && eval "${3}=${new_array}" 
+	dk_return ${new_array}; return		# command substitution return
 }
 
 
@@ -22,5 +27,14 @@ dk_arrayConcat (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	dk_arrayConcat array value1
+	myArray1[0]="a"
+	myArray1[1]="b"
+	myArray1[2]="c"
+	
+	myArray2[0]="1"
+	myArray2[1]="2"
+	myArray2[2]="3"
+	
+	myArray3=($(dk_arrayConcat myArray1 myArray2))
+	dk_printVar myArray3
 }
