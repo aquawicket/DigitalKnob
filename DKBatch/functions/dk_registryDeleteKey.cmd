@@ -41,6 +41,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
+	call dk_registryKeyExists "%~1" || goto:eof
+	
 	echo "%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
 	"%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
 goto:eof
