@@ -6,13 +6,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_uninstallContextMenu () {
     call dk_debugFunc
-	if %__ARGC__% lss 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): not enough arguments")
 
 	call dk_set _menuTitle_ "%~1"
 	call dk_set _exe_ "%~2"
 	call dk_set _command_ "%~3"
 	
-	call dk_info "Uninstalling '%_menuTitle_%' context menu to Windows using %GIT_EXE%"
+	call dk_info "Uninstalling '%_menuTitle_%' context menu"
 	
 	::### delete existing key ###
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%"
