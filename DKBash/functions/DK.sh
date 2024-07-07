@@ -6,6 +6,9 @@
 #
 #
 DK (){
+	#dk_debugFunc
+	
+	
 	###### Initialize Language specifics ######
 	dk_init
 	#dk_echo "DKINIT($*)"
@@ -95,7 +98,8 @@ DK (){
 # dk_init()
 #
 dk_init(){
-
+	#dk_debugFunc
+	
 	###### fallback functions ######
 	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists "dk_echo"           || dk_echo()           { echo $*;                                                                                                        }
@@ -130,6 +134,8 @@ dk_init(){
 # dk_reloadWithBash()
 #
 dk_reloadWithBash(){
+	#dk_debugFunc
+	
 	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
 		dk_export  RELOAD_WITH_BASH 0
 		#dk_echo   "reloading with bash . . ."
@@ -143,6 +149,8 @@ dk_reloadWithBash(){
 # dk_DKBASH_VARS()
 #
 dk_DKBASH_VARS(){
+	#dk_debugFunc
+	
 	dk_export BASH_SOURCE_DIR      $( cd -- "$(dirname "$BASH_SOURCE")"; pwd -P )
 	dk_export DKBASH_DIR           $( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
@@ -159,6 +167,8 @@ dk_DKBASH_VARS(){
 # dk_DKHTTP_VARS()
 #
 dk_DKHTTP_VARS(){
+	#dk_debugFunc
+	
 	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
 	dk_export DKHTTP_DKBRANCH_DIR         "${DKHTTP_DIGITALKNOB_DIR}/Development"
 	dk_export DKHTTP_DKBASH_DIR           "${DKHTTP_DKBRANCH_DIR}/DKBash"
@@ -169,6 +179,8 @@ dk_DKHTTP_VARS(){
 # dk_setupCallstack()
 #
 dk_setupCallstack(){
+	#dk_debugFunc
+	
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
 
@@ -176,6 +188,8 @@ dk_setupCallstack(){
 # dk_DKSCRIPT_VARS()
 #
 dk_DKSCRIPT_VARS(){
+	#dk_debugFunc
+	
 	#dk_pathExists   $(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0}) && export DKSCRIPT_PATH=$(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0})
 	dk_pathExists    $(dk_realpath ${0}) && dk_export   DKSCRIPT_PATH   $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
@@ -190,6 +204,8 @@ dk_DKSCRIPT_VARS(){
 # dk_setupKeepOpen()
 #
 dk_setupKeepOpen(){
+	#dk_debugFunc
+	
 	dk_echo
 	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 }
@@ -198,6 +214,8 @@ dk_setupKeepOpen(){
 # dk_setOptions()
 #
 dk_setOptions(){
+	#dk_debugFunc
+	
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix
 #	case :$SHELLOPTS: in
@@ -232,6 +250,8 @@ dk_setOptions(){
 #	install a unix package
 #
 dk_install(){
+	#dk_debugFunc
+	
 	dk_commandExists ${1}      && return 					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
@@ -249,6 +269,8 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
+	#dk_debugFunc
+	
 	dk_stringContains ${1} ".sh"  && local funcPath=${1}              ||      local funcPath=${1}.sh
 	dk_pathExists "${funcPath}" && funcPath="${funcPath}"
 	dk_pathExists "${PWD}/$(basename $funcPath)"                  && funcPath="${PWD}/$(basename $funcPath)"
@@ -266,6 +288,8 @@ dk_source(){
 #	call a DKBash function. dk_load it first if needed.
 #
 dk_call(){
+	#dk_debugFunc
+	
 	if ! dk_commandExists "${1}"; then
 		dk_commandExists dk_load  || dk_source dk_load
 		dk_commandExists ${1}       || dk_load ${1}
@@ -281,6 +305,8 @@ dk_call(){
 #	run a unix command. Install it first if it's missing
 #
 dk_command(){
+	#dk_debugFunc
+	
 	dk_commandExists ${1} || dk_install ${1}
 	dk_commandExists ${1} || dk_error "${1}: command not found"
 	#dk_echo "$@"

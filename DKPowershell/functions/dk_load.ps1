@@ -35,7 +35,6 @@ function Global:dk_load ($var) {
 		if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_download.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1" -OutFile "$DKPOWERSHELL_FUNCTIONS_DIR/dk_download.ps1" }
 		if(!(Test-Path dk_download)){ . ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_download.ps1 }
 		
-		Write-Host "Dowloading ${funcName}"
 		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${funcName}.ps1" "$DKPOWERSHELL_FUNCTIONS_DIR/${funcName}.ps1"
 		
 		if(!(Test-Path ${funcPath})){

@@ -13,50 +13,51 @@
 # __TIME__()
 #
 __TIME__ (){
-        nanoseconds="$(date +%s%N)"
-       date_nanoseconds="$(( nanoseconds % 1000000000))"
+	#dk_debugFunc
+	
+    nanoseconds="$(date +%s%N)"
+    date_nanoseconds="$(( nanoseconds % 1000000000))"
 
-#          microseconds="$(( nanoseconds / 1000))"
-#      date_microseconds="$((microseconds % 1000))"
+#   microseconds="$(( nanoseconds / 1000))"
+#   date_microseconds="$((microseconds % 1000))"
       
-           milliseconds="$(( nanoseconds / 1000000))"
-      date_milliseconds="$((milliseconds % 1000000))"
+    milliseconds="$(( nanoseconds / 1000000))"
+    date_milliseconds="$((milliseconds % 1000000))"
 
-                seconds="$((nanoseconds / 1000000000))"
-date_seconds="$(date -d@"$((    seconds % 1000000000))" +"%S")"
+    seconds="$((nanoseconds / 1000000000))"
+    date_seconds="$(date -d@"$((    seconds % 1000000000))" +"%S")"
 
-#	         minutes="$((seconds/60))"
-	    date_minutes="$(date -d@"$seconds" +"%M")"
-#	       t_minutes="$((seconds/60%60))"
-#	           #hours="$((seconds/60/60))"
-#	           hours="$((seconds/3600))"
-          date_hours="$(date -d@"$seconds" +"%H")"
-#            t_hours="$((seconds/60/60%24))"
-#	            #days="$((seconds/60/60/24))"
-#	            days="$((seconds/86400))"
-#	       date_days="$(date -d@"$seconds" +"%d")"
-#	          t_days="$((seconds/60/60%24))"
-#	           #weeks="$((seconds/60/60/24/7))"
-#	           weeks="$((seconds/604800))"
-#	    # date_weeks="$(date -d@"$seconds" +"%d")"
-#	         t_weeks="$((seconds/60/60/24/7%30))"
-#	          #months="$((seconds/60/60/24/30))"
-#	          months="$((seconds/2629746))"
-#	     date_months="$(date -d@"$seconds" +"%m")"
-#	        t_months="$((seconds/60/60/24%10))"
-#	           #years="$((seconds/60/60/24/365))"
-#	           years="$((seconds/31556952))"
-#	      date_years="$(date -d@"$seconds" +"%Y")"
-#            t_years="$((seconds/60/60/24/7%12))" 
-#	         decades="$((seconds/315569520))"
-#	   #date_decades="$((date_years / 10))"
-#	      #t_decades="$((seconds/60/60/24/365%10))"
-#	       centuries="$((seconds/3155695200))"
-#	 #date_centuries="$((date_years / 100))"
-#	    #t_centuries="$((seconds/60/60/24/365%100))"
-#	       timestamp="$(date -d@"$seconds" +"%Y-%m-%d-%H:%M:%S")"
-	
-	
+#	minutes="$((seconds/60))"
+	date_minutes="$(date -d@"$seconds" +"%M")"
+#	t_minutes="$((seconds/60%60))"
+#	#hours="$((seconds/60/60))"
+#	hours="$((seconds/3600))"
+    date_hours="$(date -d@"$seconds" +"%H")"
+#   t_hours="$((seconds/60/60%24))"
+#	#days="$((seconds/60/60/24))"
+#	days="$((seconds/86400))"
+#	date_days="$(date -d@"$seconds" +"%d")"
+#	t_days="$((seconds/60/60%24))"
+#	#weeks="$((seconds/60/60/24/7))"
+#	weeks="$((seconds/604800))"
+#	#date_weeks="$(date -d@"$seconds" +"%d")"
+#	t_weeks="$((seconds/60/60/24/7%30))"
+#	#months="$((seconds/60/60/24/30))"
+#	months="$((seconds/2629746))"
+#	date_months="$(date -d@"$seconds" +"%m")"
+#	t_months="$((seconds/60/60/24%10))"
+#	#years="$((seconds/60/60/24/365))"
+#	years="$((seconds/31556952))"
+#	date_years="$(date -d@"$seconds" +"%Y")"
+#   t_years="$((seconds/60/60/24/7%12))" 
+#	decades="$((seconds/315569520))"
+#	#date_decades="$((date_years / 10))"
+#	#t_decades="$((seconds/60/60/24/365%10))"
+#	centuries="$((seconds/3155695200))"
+#	#date_centuries="$((date_years / 100))"
+#	#t_centuries="$((seconds/60/60/24/365%100))"
+#	timestamp="$(date -d@"$seconds" +"%Y-%m-%d-%H:%M:%S")"
+
 #	echo "      nanoseconds = ${nanoseconds}"
 #	echo " date_nanoseconds = ${date_nanoseconds}"
 #	echo "     microseconds = ${microseconds}"
@@ -96,7 +97,7 @@ date_seconds="$(date -d@"$((    seconds % 1000000000))" +"%S")"
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	#dk_debugFunc
 	
 	echo "$(__TIME__)"
-
 }

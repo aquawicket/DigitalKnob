@@ -33,7 +33,6 @@ call dk_source dk_validate
     )
 
 	call dk_info "Downloading %~1 . . ."
-    call dk_info "please wait . . ."
     ::certutil.exe -urlcache -split -f %~1 %~2
     powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%destination%')"
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING

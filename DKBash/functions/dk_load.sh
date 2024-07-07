@@ -34,7 +34,6 @@ dk_load (){
 
 		[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 	
-		echo "Dowloading ${funcName}"
 		dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
 		
 		[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return

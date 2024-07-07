@@ -5,6 +5,7 @@
 # __ARGV__(<frame>)
 #
 __ARGV__ (){
+	#dk_debugFunc
 	[ -z ${1-} ] && local frame=0 || local frame=$1
 	
 	local marker=0
@@ -28,8 +29,9 @@ __ARGV__ (){
 
 
 test_function(){
-	echo "ARGV = $(__ARGV__ 1)"					# as a string
+	#dk_debugFunc
 	
+	echo "ARGV = $(__ARGV__ 1)"					# as a string
 	ARGV=($(__ARGV__ 1))						# as an array
 	for ((i=0; i < ${#ARGV[@]}; i++ )); do 
 		echo "ARGV[$i] = ${ARGV[$i]}";
@@ -37,6 +39,7 @@ test_function(){
 }
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	#dk_debugFunc
 	
 	test_function abc 123
 }

@@ -26,6 +26,7 @@ dk_arrayShift (){
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
+	
 	myArray[0]="a"
 	myArray[1]="b"
 	myArray[2]="c"
