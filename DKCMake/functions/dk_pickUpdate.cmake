@@ -22,6 +22,7 @@ function(dk_pickUpdate)
 	#dk_printVar(_TARGET_OS_) 
 	#dk_printVar(_TYPE_)
 	
+	dk_assert(behind)
 	if(${behind} LESS 1)
 		if(_APP_ AND _TARGET_OS_ AND _TYPE_)
 			dk_echo(" 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]")
