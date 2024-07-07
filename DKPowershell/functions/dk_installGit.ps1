@@ -26,6 +26,7 @@ function Global:dk_installGit  (){
     $GIT_FOLDER = dk_toLower $GIT_FOLDER GIT_FOLDER
 	dk_validate DKTOOLS_DIR "dk_getDKPaths"
     $global:GIT_EXE = "$DKTOOLS_DIR/$GIT_FOLDER/bin/git.exe"
+	$global:GITBASH_EXE = "$DKTOOLS_DIR/$GIT_FOLDER/git-bash.exe"
         
     if(dk_pathExists $GIT_EXE){ return }
         

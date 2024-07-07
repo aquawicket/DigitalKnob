@@ -12,18 +12,18 @@
 	call "%DKBATCH_FUNCTION_DIR_%DK.cmd"
 	
 	call dk_load dk_validate
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate GITBASH_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
-	call dk_validate CLANG64_EXE "call %DKIMPORTS_DIR%\msys2\dk_installMsys2"
-	
+    call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+    call dk_validate GITBASH_EXE "call dk_installGit"
+	::call dk_validate CLANG64_EXE "call %DKIMPORTS_DIR%\msys2\dk_installMsys2"
+
 	::###### Git Bash ######::
-	ftype dk_bash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
-	assoc .sh=dk_bash
+	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
+	assoc .sh=dkbash
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_bash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
 	
 	::###### Msys2 Bash ######
-::	ftype dk_bash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%CLANG64_EXE%" "%%1" %*
-::	assoc .sh=dk_bash
+::	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%CLANG64_EXE%" "%%1" %*
+::	assoc .sh=dkbash
 ::	call dk_registrySetKey "HKEY_CLASSES_ROOT\dk_bash\DefaultIcon" "" "REG_SZ" "%CLANG64_EXE%"
 	
 goto:eof

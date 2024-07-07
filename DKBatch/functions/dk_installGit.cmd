@@ -30,9 +30,9 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
     call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
     call dk_set GIT_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe
-        
+	call dk_set GITBASH_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe
+     
     if exist "%GIT_EXE%" goto:eof
-        
     call dk_echo   
     call dk_info "Installing git . . ."
     call dk_download %GIT_DL%
@@ -40,7 +40,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
 	   
     if NOT exist "%GIT_EXE%" (call dk_error "cannot find git")
-        
+
     ::call dk_checkError
 goto:eof
 
