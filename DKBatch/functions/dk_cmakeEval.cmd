@@ -105,7 +105,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
-
+goto:eof

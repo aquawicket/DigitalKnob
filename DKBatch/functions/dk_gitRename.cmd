@@ -15,3 +15,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_validate GIT_EXE "call dk_installGit"
 	"%GIT_EXE%" mv --force "%~1" "%~2"
 goto:eof
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_todo
+	call dk_gitRename 
+goto:eof

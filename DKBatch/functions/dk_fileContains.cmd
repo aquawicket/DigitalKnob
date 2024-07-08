@@ -36,10 +36,14 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-:: https://stackoverflow.com/a/3069068
 
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+
+	:: https://stackoverflow.com/a/3069068
 	call dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
 	
 	call dk_echo
@@ -49,4 +53,4 @@ goto:eof
 	call dk_echo
 	call dk_set substring "not_in_file"
 	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
-	
+goto:eof

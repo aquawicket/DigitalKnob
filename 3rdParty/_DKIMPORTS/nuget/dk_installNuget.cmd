@@ -38,6 +38,11 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_installNuget
+goto:eof

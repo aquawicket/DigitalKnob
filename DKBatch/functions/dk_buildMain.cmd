@@ -31,25 +31,7 @@ call dk_source dk_warning
 	call dk_assert DKSCRIPT_PATH
 	call dk_assert DKSCRIPT_DIR
 	call dk_assert DKSCRIPT_NAME
-	::setlocal enableDelayedExpansion
-		
-	::	if dk_defined WSLENV; then 
-	::		dk_info "WSLENV is on"
-	::		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-	::		sudo chown -R "$LOGNAME" "$HOME"
-	::	fi
-		
-	::	if [ -n "${USER-}" ]; then
-	::		call dk_printVar USER
-	::		DKUSERNAME=$USER
-	::	elif [ -n "${USERNAME-}" ]; then
-	::		call dk_printVar USERNAME
-	::		DKUSERNAME=$USERNAME
-	::	fi
-	::	call dk_printVar DKUSERNAME
-		
-	::	call dk_printVar SHLVL
-	::  call dk_printVar MSYSTEM
+
 
 	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_getHostTriple
@@ -83,7 +65,12 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_buildMain

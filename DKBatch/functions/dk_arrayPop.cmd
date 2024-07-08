@@ -19,7 +19,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	set "myArray[0]=a"
@@ -53,5 +54,4 @@ goto:eof
 	
 	call dk_arrayPop myArray
 	call dk_printArray myArray
-	
 goto:eof

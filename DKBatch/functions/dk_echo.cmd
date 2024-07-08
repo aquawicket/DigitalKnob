@@ -25,8 +25,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-    call dk_debugFunc
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	
 	echo This is a normal echo commmand
 	call dk_echo

@@ -33,17 +33,21 @@ call ../../../DKBatch/functions/DK.cmd
 	if NOT exist "%WINDOWS_TERMINAL_EXE%" call dk_error "cannot find wt.exe"
 	:windows_terminal_installed
 	
-
-	
-:: install via CMake
-::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/windows_terminal/DKMAKE.cmake')" "WINDOWS_TERMINAL_EXE"
-::	call dk_printVar WINDOWS_TERMINAL_EXE
-
+	:: install via CMake
+	::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/windows_terminal/DKMAKE.cmake')" "WINDOWS_TERMINAL_EXE"
+	::	call dk_printVar WINDOWS_TERMINAL_EXE
 goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-call dk_installWindowsTerminal
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installWindowsTerminal
+goto:eof
+

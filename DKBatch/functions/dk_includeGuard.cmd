@@ -33,11 +33,16 @@ goto:eof
 
 
 
-:DKTEST ################################ DKTEST #########################################
 
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%
 	
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller% & goto:resume
 	:::resume
 	::echo :resume
-	
+goto:eof

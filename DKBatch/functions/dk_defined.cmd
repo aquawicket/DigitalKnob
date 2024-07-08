@@ -25,8 +25,10 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
     ::###### Using if return value
 	call dk_echo
 	call dk_set _variable_ "is defined"
@@ -62,4 +64,4 @@ goto:eof
 	call dk_unset _variable_
 	call dk_defined _variable_ && (echo _variable_ is defined) || (echo _variable_ is NOT defined)
 	::FIXME: ERRORLEVEL is still 1
-	
+goto:eof

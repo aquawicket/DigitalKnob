@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::##################################################################################
 ::# __FILE__(frame)
 ::#
-:__FILE__() {
+:__FILE__
 	::call dk_debugFunc
 	
 	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
@@ -16,7 +16,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	::call dk_debugFunc
 	
 	echo "$(__FILE__)"

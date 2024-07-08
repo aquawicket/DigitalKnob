@@ -20,7 +20,10 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 
 	call dk_getPath DK.cmd path
-	echo path = %path%
+	call dk_echo "path = %path%"
+goto:eof

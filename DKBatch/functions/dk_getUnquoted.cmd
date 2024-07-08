@@ -16,3 +16,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	for %%Z in ("%_input%") do set "OUT=%%~Z"
 	endlocal & call dk_set %2 "%OUT%"
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_getUnquoted "string" unquoted
+	call dk_echo "unquoted = %unquoted%"
+goto:eof

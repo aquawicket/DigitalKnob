@@ -16,3 +16,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::set "hex=0x%hex:~-2%
 	for /f %%b in ('forfiles /c "cmd /c echo 0x%hex:~-2%"') do set "%~1=%%b"
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+
+	call dk_hexToVariable var 0x41
+	call dk_echo "var = %var%"
+goto:eof

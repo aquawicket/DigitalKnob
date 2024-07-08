@@ -5,7 +5,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_echoAlign(align text)
 ::#
 ::#
-:dk_echoAlign 
+:dk_echoAlign
+	call dk_debugFunc
+	
 	setlocal EnableDelayedExpansion
 	(set^ tmp=%~2)
 	if defined tmp (
@@ -43,7 +45,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	setlocal EnableDelayedExpansion

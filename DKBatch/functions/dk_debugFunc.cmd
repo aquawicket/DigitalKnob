@@ -80,17 +80,14 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	
 	set "__LINE__=0"
 	echo %indent%%cyan%%__FILE__%:%__LINE__%    %blue%%__FUNCTION__%(%__ARGS__%)%clr%
-	::Write-Host -NoNewline "${cyan}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))";	:: Powershell
-	::echo "${indent}${cyan}$(__FILE__ 1):$(__LINE__ 1)    ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"								:: Bash
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
 goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-
-
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 goto:eof
 

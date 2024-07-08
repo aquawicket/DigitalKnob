@@ -48,8 +48,12 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
 	echo "dk_copy test" > %DKDOWNLOAD_DIR%\copyMe.file
@@ -63,3 +67,4 @@ goto:eof
 	
 	call dk_makeDirectory copyMe
 	call dk_copy copyMe iWasCopied OVERWRITE
+goto:eof

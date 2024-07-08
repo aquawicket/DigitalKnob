@@ -22,10 +22,13 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_getBasename C:\Windows\System32\test.v123.zip name
-	echo name = %name%
+	call dk_echo "name = %name%"
 	
 	call dk_getBasename TEST nameb
-	echo nameb = %nameb%
+	call dk_echo "nameb = %nameb%"
+goto:eof

@@ -24,8 +24,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 goto:eof
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_set myDecimal 45
 	call dk_decimalToHex "%myDecimal%" myHex
 	call dk_printVar myHex
+goto:eof

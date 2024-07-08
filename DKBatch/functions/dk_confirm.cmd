@@ -27,7 +27,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	
 	::###### Using && and || conditionals
 	call dk_confirm && (echo "the confimation has passed") || (echo "the confimation has failed")
@@ -35,3 +37,4 @@ goto:eof
 	::###### abort in not confirmed type code
 	call dk_confirm || goto:eof
 	echo "passed the confirmation, executing code after confirm"
+goto:eof

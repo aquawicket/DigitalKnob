@@ -29,9 +29,15 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	echo "DKTEST(${DKSCRIPT_NAME})"
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_echo "DKTEST(${DKSCRIPT_NAME})"
 	echo "created file to test dk_delete" > removeMe.file
 	::call dk_sleep 1
 	call dk_delete "removeMe.file"
+goto:eof

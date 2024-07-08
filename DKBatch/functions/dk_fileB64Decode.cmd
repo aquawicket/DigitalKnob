@@ -31,7 +31,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"

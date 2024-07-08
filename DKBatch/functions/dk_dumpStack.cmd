@@ -95,7 +95,10 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call :DKTEST_main
 	goto:eof
 
@@ -155,3 +158,4 @@ goto:eof
 		:dk_dumpStackReturn
 		call dk_info "returned from dk_dumpStack dumpstack_caller"
 	goto:eof
+goto:eof

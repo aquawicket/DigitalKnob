@@ -32,10 +32,16 @@ call dk_source dk_confirm
         "%GIT_EXE%" checkout -b %DKBRANCH% main
         "%GIT_EXE%" push --set-upstream origin %DKBRANCH%
     )
-
-    ::call dk_checkError
 goto:eof
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-call dk_gitUpdate
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_gitUpdate
+goto:eof

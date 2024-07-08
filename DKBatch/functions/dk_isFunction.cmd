@@ -33,11 +33,9 @@ goto:eof
 
 
 
-:test_function
-	call dk_info "..."
-goto:eof
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_isFunction "dk_debugFunc" && call dk_info "'dk_debugFunc' is a function" || call dk_info "'dk_debugFunc' is NOT a function"

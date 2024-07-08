@@ -12,7 +12,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#	@funcName OR funcPath  - The name of an existing "functions/funcname.cmd" file, or a full filepath to a .cmd file.
 ::#
-:dk_load() {
+:dk_load
+	::call dk_debugFunc
+	
 	call dk_source dk_echo
 	call dk_source dk_info
 	call dk_source dk_error
@@ -88,3 +90,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	)
 goto:eof
 
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_load dk_printVar
+goto:eof

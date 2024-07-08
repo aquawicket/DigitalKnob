@@ -13,9 +13,16 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 goto:eof
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	set "myDecimal=32"
 	call dk_decimalToVariable "%myDecimal%" myVariable
 	call dk_printVar myVariable
-	
+goto:eof

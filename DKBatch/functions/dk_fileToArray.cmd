@@ -30,19 +30,25 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 
-:: create the file
-dir /b /a-d > array.cmd
 
-call dk_fileToArray "array.cmd" MyArray
-::call dk_arrayLength MyArray MyArrayLength
-::echo MyArrayLength = %MyArrayLength%
-call dk_printArray MyArray
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 
-:: or print items individually
+	:: create the file
+	dir /b /a-d > array.cmd
 
-echo MyArray[0] = %MyArray[0]%
-echo MyArray[1] = %MyArray[1]%
-echo MyArray[2] = %MyArray[2]%
+	call dk_fileToArray "array.cmd" MyArray
+	::call dk_arrayLength MyArray MyArrayLength
+	::echo MyArrayLength = %MyArrayLength%
+	call dk_printArray MyArray
+
+	:: or print items individually
+
+	echo MyArray[0] = %MyArray[0]%
+	echo MyArray[1] = %MyArray[1]%
+	echo MyArray[2] = %MyArray[2]%
+goto:eof
+

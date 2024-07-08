@@ -19,7 +19,13 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 
 	call dk_getShortPath "C:\Program Files" shortPath
-	echo shortPath = %shortPath%
+	call dk_echo "shortPath = %shortPath%"
+goto:eof

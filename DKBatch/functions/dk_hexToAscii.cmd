@@ -22,3 +22,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	endlocal & call dk_set %2 "%ascii%"
 goto:eof
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+		
+	call dk_hexToAscii 0x41 ascii
+	call dk_echo "ascii = %ascii%"
+goto:eof

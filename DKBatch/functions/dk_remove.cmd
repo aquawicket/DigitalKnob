@@ -37,7 +37,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	echo "DKTEST(${DKSCRIPT_NAME})"
+	call dk_echo "DKTEST(${DKSCRIPT_NAME})"
 	echo "created file to test dk_remove" > removeMe.file
 	::call dk_sleep 1
 	call dk_remove "removeMe.file"

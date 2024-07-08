@@ -19,8 +19,14 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_set myDecimal 123
 	call dk_decimalToAscii "%myDecimal%" myAscii
 	call dk_printVar myAscii
+goto:eof

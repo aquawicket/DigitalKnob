@@ -17,7 +17,12 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 
 	dk_getParentDir "C:\Windows\System32" parent
-	echo "parent = %parent%"
+	call dk_echo "parent = %parent%"
+goto:eof

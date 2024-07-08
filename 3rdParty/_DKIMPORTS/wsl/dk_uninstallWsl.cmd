@@ -41,11 +41,14 @@ call ../../../DKBatch/functions/DK.cmd
 	::call dk_powershellEval "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
 	
 	::wsl --install --distribution Debian
-	
 goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_installWsl
+goto:eof
+

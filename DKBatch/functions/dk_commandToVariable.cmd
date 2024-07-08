@@ -75,9 +75,11 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_set myCommand dir
 	call dk_commandToVariable "%myCommand%" myVariable
 	call dk_printVar myVariable
-	
+goto:eof
