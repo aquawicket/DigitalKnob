@@ -20,5 +20,5 @@ goto:eof
 :DKTEST
 	::call dk_debugFunc
 	
-	echo "$(__FILE__)"
+	echo %__FILE__%
 goto:eof

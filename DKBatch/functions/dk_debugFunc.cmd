@@ -20,7 +20,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#
 ::#
 :dk_debugFunc
-	if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
+	if "%*" neq "" call dk_error "dk_debugFunc: too many arguments"
 	
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd')"
 	call dk_callStack
@@ -93,6 +93,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::		echo "resetting DKSTACK_marker to %DKSTACK_marker%"
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::@echo on
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
 	
 	::set "indent="%indent% L "
@@ -104,7 +105,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set "clr=%ESC%[0m"
 	
 	set "__LINE__=0"
-	echo %indent%%cyan%%__FILE__%:%__LINE__%    %blue%%__FUNCTION__%(%__ARGS__%)%clr%
+	::echo %indent%%cyan%%__FILE__%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
+	echo %indent%%cyan%%blue%%__FUNCTION__%%clr%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
 goto:eof
 

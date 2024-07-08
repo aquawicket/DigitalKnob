@@ -22,5 +22,5 @@ goto:eof
 :DKTEST
 	::call dk_debugFunc
 	
-	echo "$(__ARGV__)"
+	echo %__ARGV__%
 goto:eof

@@ -19,5 +19,5 @@ goto:eof
 :DKTEST
 	::call dk_debugFunc
 	
-	echo "$(__FUNCTION__)"
+	echo %__FUNCTION__%
 goto:eof

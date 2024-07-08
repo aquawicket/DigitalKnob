@@ -21,7 +21,6 @@ goto:eof
 :DKTEST 
 	::call dk_debugFunc
 	
-	
 	::prepareLineNumbers
 	>nul 2>nul (
 	  call jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f0" /o "%~f0.new"

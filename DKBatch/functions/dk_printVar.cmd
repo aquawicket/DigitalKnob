@@ -6,39 +6,43 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::# dk_printVar(variable)
 ::#
 ::#
+
 :dk_printVar
-	call dk_debugFunc
+    call dk_debugFunc
     if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
-
-	:array
-	set "arry=%~1"
-	if not defined %arry%[0] ( goto:pointer )
-	set /A "n=0"
-	setlocal EnableDelayedExpansion
-	:loop1
-		if not defined %arry%[%n%] ( goto:eof )
-		call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]!%clr%"
-		set /A n+=1
-	goto :loop1 
-	endlocal
 	
+	call dk_isAlphanumeric "%~1" || goto:eof
+	
+    :array
+    set "arry=%~1"
+    if not defined %arry%[0] goto:pointer
+    set /A "n=0"
+    setlocal EnableDelayedExpansion
+    :loop1
+        if not defined %arry%[%n%] goto:eof
+        call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]!%clr%"
+        set /A n+=1
+        goto :loop1 
+    endlocal
+    
     :pointer
-	if not defined %~1 ( goto:undefined )
-	setlocal
+    if not defined %~1 goto:undefined
+    setlocal
     set "_ptr_=%~1"
-	call set "_ptrB_=%%%_ptr_%%%"
-	if not "%_ptrB_%"=="%_ptrB_: =%" ( goto:variable )
-    if not defined %_ptrB_% ( goto:variable )
-	call set "_ptrvalue_=%%%_ptrB_%%%"
+	call dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
+    call set "_ptrB_=%%%_ptr_%%%"
+	call dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
+    ::if not defined "%_ptrB_%" goto:variable
+    set "_ptrvalue_=%%%_ptrB_%%%"
     call dk_echo "%cyan% POINTER:%_ptr_% = %_ptrB_% =%blue% %_ptrvalue_% %clr%"
     endlocal
     goto:eof
 
     :variable
     set "_var_=%~1"
-	call set "_value_=%%%_var_%%%"
+    call set "_value_=%%%_var_%%%"
     call dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
     goto:eof
 
@@ -53,8 +57,8 @@ goto:eof
 
 ::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 :DKTEST
-	call dk_debugFunc
-	
+    call dk_debugFunc
+
     set "myVarA=This is a variable"
     call dk_printVar myVarA
 

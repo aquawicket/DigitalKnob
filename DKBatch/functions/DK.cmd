@@ -28,7 +28,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 	call :dk_setupCallstack
 	call dk_callStack
 	:dk_callStackReturn
-
+	
 	::############ Get DKSCRIPT variables ############
 	call :dk_DKSCRIPT_VARS
 	if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
