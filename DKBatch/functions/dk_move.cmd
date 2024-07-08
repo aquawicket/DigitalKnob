@@ -13,8 +13,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_move
 	call dk_debugFunc
-	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
-	if %__ARGC__% gtr 3 (call dk_error "%__FUNCTION__%(): too many arguments")
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%(): too many arguments")
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
 	call dk_replaceAll "%~2" "/" "\" _to_

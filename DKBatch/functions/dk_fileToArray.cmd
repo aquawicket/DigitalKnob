@@ -10,7 +10,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_fileToArray
 	call dk_debugFunc
-	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	setlocal EnableDelayedExpansion
     ::set "file=%~1"

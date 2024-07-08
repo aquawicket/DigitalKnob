@@ -9,7 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_arrayIndexOf
 	call dk_debugFunc
-	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	set _count_=0
 	:dk_arrayIndexOf_loop

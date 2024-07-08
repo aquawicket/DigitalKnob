@@ -7,7 +7,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 ::#
 :dk_installNotepadpp
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"

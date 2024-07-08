@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_uninstallContextMenu
     call dk_debugFunc
-	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): not enough arguments")
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__%: not enough arguments")
 
 	call dk_set _menuTitle_ "%~1"
 	call dk_set _exe_ "%~2"

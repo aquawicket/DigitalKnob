@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_assertPath
     call dk_debugFunc
-	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	set "_var_=%~1"
 	call set "_value_=%%%_var_%%%"

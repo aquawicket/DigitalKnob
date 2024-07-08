@@ -11,8 +11,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_fileB64Encode
 	call dk_debugFunc
-	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): not enough arguments")
-	if %__ARGC__% gtr 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): too many arguments")
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__%: not enough arguments")
+	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments")
 	
 	set "inputFile=%~1"
 	set "outputFile=%inputFile%.b64"

@@ -7,7 +7,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_installWslAlpine
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
 	

@@ -8,7 +8,7 @@ call dk_source dk_getExtension
 ::#
 :dk_removeExtension
 	call dk_debugFunc
-	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	set "_filepath_=%~1"
 	call dk_printVar _filepath_

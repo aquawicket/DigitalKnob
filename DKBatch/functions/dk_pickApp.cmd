@@ -18,7 +18,7 @@ call dk_source dk_unset
 ::#
 :dk_pickApp
     call dk_debugFunc
-    if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
     call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
 

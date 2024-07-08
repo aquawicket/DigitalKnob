@@ -6,7 +6,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 ::#
 :dk_installNotepadppFileAssociations
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate NOTEPADPP_EXE "call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadpp"

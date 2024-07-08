@@ -13,7 +13,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_isFunction
 	call dk_debugFunc 
-	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	if %ERRORLEVEL% equ 0 (

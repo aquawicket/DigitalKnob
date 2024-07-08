@@ -8,7 +8,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_replaceAll
 	call dk_debugFunc
-	if %__ARGC__% neq 4 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 4 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	::setlocal
 	call dk_set _input_ "%~1"

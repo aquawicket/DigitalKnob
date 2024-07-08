@@ -7,7 +7,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_fileContains
 	call dk_debugFunc
-	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 		
 	>nul findstr /c:"%~2" "%~1" &&  (
 		if defined "%~3" (endlocal & call dk_set %3 "true")

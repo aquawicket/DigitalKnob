@@ -12,7 +12,7 @@ call dk_source dk_toLower
 ::#
 :dk_installGit
     call dk_debugFunc
-    if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
     call dk_validate HOST_ARCH "call dk_getHostTriple"
     ::if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"

@@ -51,7 +51,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	:: Convert to windows line endings if only CR found
 	
 	:: TODO
-	if exist "%funcPath%" (set "%funcName%=%funcPath%") else (call dk_error "%funcPath%: file not found")
+	if exist "%funcPath%" (set "%funcName%=%funcPath%") else call dk_error "%funcPath%: file not found")
 	
 	echo %DKFUNCTIONS_LIST% | findstr ";%funcName%;" && goto:eof
 	set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%funcName%;" 			&:: Add to list

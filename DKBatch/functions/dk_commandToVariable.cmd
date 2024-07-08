@@ -8,7 +8,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_commandToVariable
 	call dk_debugFunc
-	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	::call dk_set _command_ "%__ARGS__%"
 	::set /a "_lastArgN_=%__ARGC__%-1"

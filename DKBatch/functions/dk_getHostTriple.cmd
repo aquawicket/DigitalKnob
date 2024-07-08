@@ -8,7 +8,7 @@ call dk_source dk_printVar
 ::#
 :dk_getHostTriple
 	call dk_debugFunc
-	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	set HOST_OS=win
     call dk_printVar HOST_OS
