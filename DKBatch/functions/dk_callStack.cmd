@@ -157,7 +157,7 @@ goto:eof
 
 
 
-:: *** STEP3 Restart the requester batch, but jump to the label :dk_callStackReturn
+:: *** STEP3 Restart the requester batch, jump to the label :dk_callStackReturn
 :Step4
 	endlocal
 	

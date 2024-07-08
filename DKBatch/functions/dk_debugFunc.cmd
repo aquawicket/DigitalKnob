@@ -25,11 +25,13 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd')"
 	call dk_callStack
 	:dk_callStackReturn
+	
+	:: find the first matching __CALLER__ in the stack.  If a match is found, replace that frame with the current frame, and remove all elements after
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
 	
-	title %__FUNCTION__%
+	::title %__FUNCTION__%
 ::	call echo "DKSTACK[%DKSTACK_marker%].__FILE__ = %%DKSTACK[%DKSTACK_marker%].__FILE__%%"	
 ::	call echo "DKSTACK[%DKSTACK_marker%].__FUNCTION__ = %%DKSTACK[%DKSTACK_marker%].__FUNCTION__%%"	
 ::	call echo "DKSTACK[%DKSTACK_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_marker%].__ARGS__%%"
@@ -48,6 +50,28 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	)
 	set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
 
+	::NOTE: determin when we need to remove the topmost DKStack_marker 
+	::Example
+	::
+	::	main()				0
+	::  	func1()			1
+	::			func2()     2
+	::				func3() 3
+	::				funcA() 4	<-- THIS is where we need to drop func3() from the call stack
+	::			funcB()     5   <-- THIS is where we need to drop func2() from the call stack
+	::		funcC()         6   <-- THIS is where we need to drop func1() from the call stack
+	::
+	::Example
+	::
+	::	main()				0
+	::  	func1()			1
+	::			func2()     2
+	::				func3() 3
+	::		funcC()         6   <-- THIS is where we need to replace func1() with funcC() and remove everything after
+	::
+	
+	
+	
 	::echo __FILE__ = %__FILE__%
 	::echo __FUNCTION__ = %__FUNCTION__%
 	::echo __ARGS__ = %__ARGS__%
