@@ -18,3 +18,15 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_printVar EMSDK_C_COMPILER
     call dk_printVar EMSDK_CXX_COMPILER
 goto:eof
+
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installEmsdk
+goto:eof

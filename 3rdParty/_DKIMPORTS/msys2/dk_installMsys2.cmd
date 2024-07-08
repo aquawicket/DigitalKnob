@@ -14,3 +14,14 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_printVar MSYS2
 	call dk_printVar MSYS2_GENERATOR
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installMsys2
+goto:eof

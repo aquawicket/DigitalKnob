@@ -3,9 +3,9 @@ call ..\..\..\DKBatch\functions\DK.cmd
 
 
 ::####################################################################
-::# dk_installNotepadpp()
+::# dk_uninstallPowershell()
 ::#
-:dk_installNotepadpp
+:dk_uninstallPowershell
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -28,12 +28,14 @@ call ..\..\..\DKBatch\functions\DK.cmd
 
 	::FIXME: kill pwsh.exe peocess
 	call dk_remove "%POWERSHELL%"
+goto:eof
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	
-	::call dk_checkError
-	
-	:: uninstall via CMake
-::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/powershell/DKMAKE.cmake')" "NOTEPADPP_EXE"
-::	call dk_printVar POWERSHELL_EXE
-::	call dk_checkError
+	call dk_uninstallPowershell
 goto:eof

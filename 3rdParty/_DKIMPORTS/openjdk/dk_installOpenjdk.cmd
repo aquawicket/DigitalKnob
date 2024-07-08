@@ -10,7 +10,12 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
+	:: https://jdk.java.net/archive/
+	if "%HOST_OS%"=="android"                  call dk_set OPENJDK_DL "openjdk-17"
+	if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
+	if "%HOST_OS%_%HOST_ARCH%"=="mac_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
+	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
+	if not defined OPENJDK_DL call dk_error "OPENJDK_DL is invalid"
 	
 	call dk_getBasename %OPENJDK_DL% OPENJDK_DL_FILE
 	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_DL_NAME
@@ -51,10 +56,10 @@ goto:eof
 :dk_installOpenJdkMac
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
 
-	call dk_download "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
-	call dk_command tar xf %DKDOWNLOAD_DIR%/openjdk-11_osx-x64_bin.tar.gz
+	call dk_download %OPENJDK_DL%
+	call dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	call dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
-	call dk_remove %DKDOWNLOAD_DIR%/openjdk-11_osx-x64_bin.tar.gz
+	call dk_remove %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	call dk_command java --version 
 goto:eof
 
@@ -83,10 +88,15 @@ goto:eof
 
 
 
-	:: install via CMake
-::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
-::	call dk_printVar OPENJDK
-::  call dk_checkError
 
 
 
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installOpenjdk
+goto:eof

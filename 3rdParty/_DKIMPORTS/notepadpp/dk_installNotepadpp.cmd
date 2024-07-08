@@ -19,6 +19,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
+	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
@@ -28,9 +29,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_info "Installing notepad++ . . ."
     call dk_download %NOTEPADPP_DL%
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP%"
-	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find notepad++.exe"
+	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%"
 	:notepadpp_installed
-	
 	
 	::### Add Dark Mode ###
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
@@ -41,11 +41,6 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	
 	::### Add File Associations ###
 	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
-	
-:: install via CMake
-::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/notepadpp/DKMAKE.cmake')" "NOTEPADPP_EXE"
-::	call dk_printVar NOTEPADPP_EXE
 goto:eof
 
 

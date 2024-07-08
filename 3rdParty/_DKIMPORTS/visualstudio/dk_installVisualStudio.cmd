@@ -16,3 +16,15 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_printVar VISUALSTUDIO_X86_CXX_COMPILER
 	call dk_printVar VISUALSTUDIO_X64_CXX_COMPILER
 goto:eof
+
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installVisualStudio
+goto:eof

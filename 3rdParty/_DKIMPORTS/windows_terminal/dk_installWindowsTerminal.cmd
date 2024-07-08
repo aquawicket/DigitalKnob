@@ -21,6 +21,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_removeExtension %WINDOWS_TERMINAL_DL_FILE% WINDOWS_TERMINAL_FOLDER
 	call dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	call dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
+	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set WINDOWS_TERMINAL "%DKTOOLS_DIR%\%WINDOWS_TERMINAL_FOLDER%"
 	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL%\wt.exe"
@@ -32,11 +33,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%WINDOWS_TERMINAL_DL_FILE%" "%WINDOWS_TERMINAL%"
 	if NOT exist "%WINDOWS_TERMINAL_EXE%" call dk_error "cannot find wt.exe"
 	:windows_terminal_installed
-	
-	:: install via CMake
-	::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/windows_terminal/DKMAKE.cmake')" "WINDOWS_TERMINAL_EXE"
-	::	call dk_printVar WINDOWS_TERMINAL_EXE
+
 goto:eof
 
 

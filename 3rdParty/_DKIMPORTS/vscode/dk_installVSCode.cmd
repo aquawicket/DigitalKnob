@@ -18,7 +18,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip"
-	call dk_assert VSCODE_DL
+	if not defined VSCODE_DL call dk_error "VSCODE_DL is invalid"
 	
 	call dk_getBasename %VSCODE_DL% VSCODE_DL_FILE
 	call dk_removeExtension %VSCODE_DL_FILE% VSCODE_FOLDER
@@ -27,15 +27,13 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set VSCODE "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
-	
 	if "%HOST_OS%"=="win" (
 		call dk_set VSCODE_EXE %VSCODE%\Code.exe
 	) else (
 		call dk_set VSCODE_EXE %VSCODE%\code
 	)	
 
-	if exist %VSCODE_EXE% goto :associateFiles
-	
+	if exist %VSCODE_EXE% goto :vscodeInstalled
 	call dk_echo 
     call dk_info "Installing VSCode . . ."
 	call dk_makeDirectory %DKTOOLS_DIR%
@@ -43,19 +41,19 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_download %VSCODE_DL%
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE%"
 	call dk_makeDirectory %VSCODE%\data
-	
 	if not exist %VSCODE_EXE% call dk_error "cannot find %VSCODE_EXE%"
+	:vscodeInstalled
 	
-	::### Add File Associations ###
-	::	Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
-	::	Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
-	::
-	:: https://ss64.com/nt/ftype.html
-	:associateFiles
+	::###### dk_installVSCodeFileAssociations.cmd ######
 	call %DKIMPORTS_DIR%\vscode\dk_installVSCodeFileAssociations.cmd
+goto:eof
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	
-	:: install via CMake
-::	call dk_validate DKIMPORTS_DIR "call dk_getDKPaths"
-::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/vscode/DKMAKE.cmake')" "VSCODE_EXE"
-::	call dk_printVar VSCODE_EXE
+	call dk_installVSCode
 goto:eof

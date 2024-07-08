@@ -1,12 +1,5 @@
 @echo off
-call "../../../DKBatch/functions/DK.cmd"
-
-
-set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
-
-call :dk_installTinyCoreLinux
-call :dk_createTinyCoreLinuxLaunch
-goto:eof
+call ..\..\..\DKBatch\functions\DK.cmd
 
 ::####################################################################
 ::# dk_installTinyCoreLinux()
@@ -14,6 +7,9 @@ goto:eof
 :dk_installTinyCoreLinux
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
+	
+	
+	set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set TINYCORELINUX "%DKTOOLS_DIR%\TinyCoreLinux"
@@ -53,24 +49,20 @@ goto:eof
 		:: Launching the VM
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/CorePlus-current.iso -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
-	endlocal
-goto:eof
-
-::####################################################################
-::# dk_createTinyCoreLinuxLaunch()
-::#
-:dk_createTinyCoreLinuxLaunch
-	setlocal
-		:: Create LAUNCH.cmd file
+		:: create TinyCoreLinux Launcher
 		call dk_set TINYCORELINUX_launcher "%TINYCORELINUX%\LAUNCH.cmd"
 		if exist "%TINYCORELINUX_launcher%" goto:eof	
 		call dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
+	
 	endlocal
 goto:eof
 	
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
 	
-	:: install via CMake
-::	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
-::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/tinycorelinux/DKMAKE.cmake')" "TINYCORELINUX"
-::	call dk_printVar TINYCORELINUX
+	call dk_installTinyCoreLinux
+goto:eof

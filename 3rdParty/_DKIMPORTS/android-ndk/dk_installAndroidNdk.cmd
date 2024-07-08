@@ -15,3 +15,14 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_printVar ANDROID_NDK
     call dk_printVar ANDROID_TOOLCHAIN_FILE
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installAndroidNdk
+goto:eof

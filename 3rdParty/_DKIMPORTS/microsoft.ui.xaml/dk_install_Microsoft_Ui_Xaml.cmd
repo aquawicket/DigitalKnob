@@ -1,8 +1,5 @@
 @echo off
-call "../../../DKBatch/functions/DK.cmd"
-
-call :dk_install_Microsoft_Ui_Xaml
-goto:eof
+call ..\..\..\DKBatch\functions\DK.cmd
 
 ::####################################################################
 ::# dk_install_Microsoft_Ui_Xaml()
@@ -11,6 +8,7 @@ goto:eof
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
+	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate NUGET_EXE "call %DKIMPORTS_DIR%\nuget\dk_installNuget.cmd"
 	
@@ -18,3 +16,11 @@ goto:eof
 goto:eof
 
 
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_install_Microsoft_Ui_Xaml
+goto:eof

@@ -13,3 +13,13 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 	call dk_printVar MAKE_PROGRAM
 goto:eof
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_installMake
+goto:eof

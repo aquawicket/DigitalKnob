@@ -1,5 +1,5 @@
 @echo off
-call "../../../DKBatch/functions/DK.cmd"
+call ..\..\..\DKBatch\functions\DK.cmd
 
 
 ::####################################################################
@@ -12,10 +12,13 @@ call "../../../DKBatch/functions/DK.cmd"
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
+	if not defined QEMU_DL call dk_error "QEMU_DL is invalid"
 	
 	call dk_getBasename %QEMU_DL% QEMU_DL_FILE
 	call dk_removeExtension %QEMU_DL_FILE% QEMU_NAME
 	call dk_convertToCIdentifier %QEMU_NAME% QEMU_FOLDER
+	call dk_toLower %QEMU_FOLDER% QEMU_FOLDER
+	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set QEMU %DKTOOLS_DIR%\%QEMU_FOLDER%
 	call dk_set QEMU_IMG_EXE %QEMU%\qemu-img.exe
@@ -29,12 +32,6 @@ call "../../../DKBatch/functions/DK.cmd"
 	call %command_string%
 	
 	if NOT exist "%QEMU_IMG_EXE%"  call dk_error "cannot find qemu"
-	
-	:: install via CMake
-::  call dk_getDKPaths
-::	call dk_validateBranch
-::  call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/qemu/DKMAKE.cmake')" "QEMU_IMG_EXE"
-::	call dk_printVar QEMU_IMG_EXE
 goto:eof
 
 
