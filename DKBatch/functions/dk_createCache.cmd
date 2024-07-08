@@ -16,10 +16,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     ::call dk_printVar LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
-    echo %APP%>"%DKBRANCH_DIR%\cache"
-    echo %TARGET_OS%>>"%DKBRANCH_DIR%\cache"
-    echo %TYPE%>>"%DKBRANCH_DIR%\cache"
-    ::echo %LEVEL%>>"%DKBRANCH_DIR%\cache"
+    call dk_fileWrite "%DKBRANCH_DIR%\cache" %APP%
+    call dk_fileAppend "%DKBRANCH_DIR%\cache" %TARGET_OS%
+    call dk_fileAppend "%DKBRANCH_DIR%\cache" %TYPE%
+    ::call dk_fileAppend "%DKBRANCH_DIR%\cache" %LEVEL%
 goto:eof
 
 

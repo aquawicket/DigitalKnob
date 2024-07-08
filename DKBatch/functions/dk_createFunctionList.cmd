@@ -17,7 +17,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_remove "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
 	for %%a in (%DKBATCH_FUNCTIONS_DIR_%dk_*.cmd) do (
 		echo %%~na
-        echo %%~na >> "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
+		call dkFileAppend "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %%~na
     )
 	
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" (call dk_error "_functionList_ is missing")

@@ -53,10 +53,10 @@ goto:eof
 	
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
-	echo "dk_move test" > %DKDOWNLOAD_DIR%/moveMe.file
+	call dk_fileWrite %DKDOWNLOAD_DIR%/moveMe.file "dk_move test"
 	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt OVERWRITE
 	
-	echo "dk_move test" > moveMe.file
+	call dk_fileWrite moveMe.file "dk_move test"
 	call dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
 	call dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
@@ -66,3 +66,4 @@ goto:eof
 	
 	call dk_makeDirectory moveMe
 	call dk_move moveMe iWasMoved OVERWRITE
+goto:eof

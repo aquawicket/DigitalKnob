@@ -56,10 +56,10 @@ goto:eof
 	
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
-	echo "dk_rename test" > %DKDOWNLOAD_DIR%/renameMe.file
+	call dk_fileWrite %DKDOWNLOAD_DIR%/renameMe.file "dk_rename test"
 	call dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt OVERWRITE
 	
-	echo "dk_rename test" > renameMe.file
+	call dk_fileWrite renameMe.file "dk_rename test"
 	call dk_rename renameMe.file iWasRenamed.txt OVERWRITE
 	
 	call dk_makeDirectory %DKDOWNLOAD_DIR%/renameMe

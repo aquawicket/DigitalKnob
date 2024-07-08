@@ -31,7 +31,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_makeDirectory "%DKAPPS_DIR%\%APP%"
     
     :: create DKApps/<APP>/DKMAKE.cmake 
-    echo dk_depend(%input%)> "%DKAPPS_DIR%\%APP%\DKMAKE.cmake"
+    call dk_fileWrite "%DKAPPS_DIR%\%APP%\DKMAKE.cmake" dk_depend(%input%)
     
     :: create DKApps/<APP>/main.cpp
     echo int main(int argc, char** argv) { return 0; } > "%DKAPPS_DIR%\%APP%\main.cpp"

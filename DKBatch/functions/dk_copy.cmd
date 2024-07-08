@@ -56,10 +56,10 @@ goto:eof
 	call dk_debugFunc
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	
-	echo "dk_copy test" > %DKDOWNLOAD_DIR%\copyMe.file
+	call dk_fileWrite %DKDOWNLOAD_DIR%\copyMe.file "dk_copy test"
 	call dk_copy %DKDOWNLOAD_DIR%\copyMe.file %DIGITALKNOB_DIR%\iWasCopied.txt OVERWRITE
 	
-	echo "dk_copy test" > copyMe.file
+	call dk_fileWrite copyMe.file "dk_copy test"
 	call dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
 	call dk_makeDirectory %DKDOWNLOAD_DIR%\copyMe

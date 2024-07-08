@@ -2,7 +2,7 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::##################################################################################
-::# dk_fileWrite(<file> string)
+::# dk_fileWrite(file, string)
 ::#
 ::#
 :dk_fileWrite
