@@ -6,7 +6,7 @@ call dk_set VERSION_dk_messageBox 3
 ::# dk_messageBox(<title> <message> rtn_var)
 ::#
 ::#
-:dk_messageBox () {
+:dk_messageBox
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -79,7 +79,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
 
 	call dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
 	echo messageBox_result = %messageBox_result%
@@ -91,5 +93,5 @@ goto:eof
 	if %messageBox_result%==6  (echo You Clicked Yes)
 	if %messageBox_result%==7  (echo You Clicked No)
 	if %messageBox_result%==-1 (echo The message timed out)
-	
+goto:eof
 	

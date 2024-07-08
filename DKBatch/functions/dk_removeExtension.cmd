@@ -6,7 +6,7 @@ call dk_source dk_getExtension
 ::# dk_removeExtension(filepath rtn_var)
 ::#
 ::#
-:dk_removeExtension () {
+:dk_removeExtension
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -21,8 +21,14 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_set filepath "/test/test2/xfile.extension"
 	call dk_removeExtension "%filepath%" filepath
 	echo "filepath = %filepath%"

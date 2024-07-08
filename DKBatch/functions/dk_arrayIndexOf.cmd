@@ -7,7 +7,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
-:dk_arrayIndexOf () {
+:dk_arrayIndexOf
 	call dk_debugFunc
 	if %__ARGC__% neq 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_isDirectory(path rtn_var)
 ::#
 ::#
-:dk_isDirectory () {
+:dk_isDirectory
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -21,7 +21,8 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_isDirectory "C:\Windows" && call dk_info "'C:\Windows' is a directory" || call dk_info "'C:\Windows' is NOT a directory"

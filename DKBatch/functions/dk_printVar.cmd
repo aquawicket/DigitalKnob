@@ -6,7 +6,7 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
 ::# dk_printVar(variable)
 ::#
 ::#
-:dk_printVar (){
+:dk_printVar
 	call dk_debugFunc
     if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
@@ -51,7 +51,8 @@ goto:eof
 
 
 
-:DKTEST (){ #####################################################################
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
 	call dk_debugFunc
 	
     set "myVarA=This is a variable"

@@ -41,17 +41,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 
-	call dk_registryKeyExists "%~1" || dk_warning "%~1 does not exist" & goto:eof
+	call dk_registryKeyExists "%~1" || dk_warning "%~1 does not exist"
 	
-	echo "%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
-	"%SystemRoot%\System32\reg.exe" DELETE "%~1" /f
+	echo "%SystemRoot%\System32\reg.exe" delete "%~1" /f
+	"%SystemRoot%\System32\reg.exe" delete "%~1" /f
 goto:eof
 
 
 
 
-
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"

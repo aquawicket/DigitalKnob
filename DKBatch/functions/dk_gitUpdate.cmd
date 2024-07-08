@@ -1,11 +1,12 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_confirm
 ::################################################################################
 ::# dk_gitUpdate(NO_CONFIRM)
 ::#
 ::#
-:dk_gitUpdate () {
+:dk_gitUpdate
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

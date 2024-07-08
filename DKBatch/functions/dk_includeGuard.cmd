@@ -9,7 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_includeGuard()
 ::#
 ::#
-:dk_includeGuard () {
+:dk_includeGuard
 	call dk_debugFunc
 	
 	:: since batch calls scripts by file and not by function, there is no need to use include guards

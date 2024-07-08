@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_replaceAll(input searchValue newValue trn_var)
 ::#
 ::#
-:dk_replaceAll () {
+:dk_replaceAll
 	call dk_debugFunc
 	if %__ARGC__% neq 4 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -19,14 +19,19 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
 
-call dk_set string_var "AZC AZC Zannana Zread"
-call dk_printVar string_var
-call dk_replaceAll "%string_var%" "Z" "B" string_var
-call dk_printVar string_var
 
-call dk_set varB "C:\path\with\backslashes"
-call dk_printVar varB
-call dk_replaceAll "%varB%" "\" "/" varB
-call dk_printVar varB
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_set string_var "AZC AZC Zannana Zread"
+	call dk_printVar string_var
+	call dk_replaceAll "%string_var%" "Z" "B" string_var
+	call dk_printVar string_var
+
+	call dk_set varB "C:\path\with\backslashes"
+	call dk_printVar varB
+	call dk_replaceAll "%varB%" "\" "/" varB
+	call dk_printVar varB
+goto:eof

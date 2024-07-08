@@ -9,7 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#    Decode base-64 input to output
 ::#    https://github.com/base64code/examples
 ::#
-:dk_fileB64Decode () {
+:dk_fileB64Decode
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): not enough arguments")
 	if %__ARGC__% gtr 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): too many arguments")

@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_remove(path)
 ::#
 ::#
-:dk_remove () {
+:dk_remove
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -29,9 +29,16 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
 
 	echo "DKTEST(${DKSCRIPT_NAME})"
 	echo "created file to test dk_remove" > removeMe.file
 	::call dk_sleep 1
 	call dk_remove "removeMe.file"
+goto:eof

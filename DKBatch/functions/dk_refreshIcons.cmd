@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::####################################################################
 ::# dk_refreshIcons()
 ::#
-:dk_refreshIcons () {
+:dk_refreshIcons
 	echo Refreshing windows icons
 
 	:: for window
@@ -15,9 +15,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 goto:eof
 
 
-:DKTEST ############################## DKTEST ##############################
+
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_refreshIcons
 goto:eof
-

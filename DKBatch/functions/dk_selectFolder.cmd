@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::################################################################################
 ::# dk_selectFolder(rtn_var)
 ::#
-:dk_selectFolder (){
+:dk_selectFolder
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -22,7 +22,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 goto:eof
 
 
-:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	call dk_debugFunc
 	
 	call dk_selectFolder myFolder

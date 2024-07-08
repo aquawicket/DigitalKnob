@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_test(args)
 ::#
 ::#
-:dk_test () {
+:dk_test
 	call dk_debugFunc
 	
 	call dk_unset _testvar_
@@ -36,21 +36,24 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 goto:eof
 
-)
+
+
+
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+	call dk_debugFunc
+	
+	call dk_test "functions can recieve strings as arguments"
 
+	call dk_set myVar "Or they can accept expanded variables"
+	call dk_test "%myVar%"
 
-call dk_test "functions can recieve strings as arguments"
+	call dk_set myVarB "Or, they can even take in just the name of the variable"
+	call dk_test myVarB
 
-call dk_set myVar "Or they can accept expanded variables"
-call dk_test "%myVar%"
-
-call dk_set myVarB "Or, they can even take in just the name of the variable"
-call dk_test myVarB
-
-call dk_set myVarC[0] "Or, we can also take"
-call dk_set myVarC[1] "the name of an"
-call dk_set myVarC[2] "array variable"
-call dk_test myVarC
+	call dk_set myVarC[0] "Or, we can also take"
+	call dk_set myVarC[1] "the name of an"
+	call dk_set myVarC[2] "array variable"
+	call dk_test myVarC
+goto:eof

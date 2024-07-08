@@ -12,7 +12,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 ::#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 ::#
-:dk_color () {
+:dk_color
 	call dk_debugFunc
 	if %__ARGC__% gtr 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): too many arguments")
 

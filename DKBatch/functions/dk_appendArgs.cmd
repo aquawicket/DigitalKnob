@@ -9,7 +9,7 @@ call dk_source dk_error
 ::# dk_appendArgs(variable, string)
 ::#
 ::#
-:dk_appendArgs () {
+:dk_appendArgs
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

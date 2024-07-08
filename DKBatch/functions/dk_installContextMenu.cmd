@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::################################################################################
 ::# dk_installContextMenu(menuTitle, exe, command)
 ::#
-:dk_installContextMenu () {
+:dk_installContextMenu
     call dk_debugFunc
 	if %__ARGC__% lss 3 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
@@ -38,8 +38,11 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate GIT_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
 	call dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
+goto:eof

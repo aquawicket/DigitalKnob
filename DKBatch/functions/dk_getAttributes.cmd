@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::################################################################################
 ::# dk_getAttributes(path rtn_var)
 ::#
-:dk_getAttributes () {
+:dk_getAttributes
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

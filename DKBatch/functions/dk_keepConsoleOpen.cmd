@@ -11,3 +11,14 @@ dk_keepConsoleOpen
 	
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %DKSCRIPT_PATH%) & exit ) :: keep window open
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_keepConsoleOpen
+goto:eof

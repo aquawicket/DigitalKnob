@@ -4,7 +4,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::####################################################################
 ::# dk_installOpenjdk()
 ::#
-:dk_installOpenjdk () {
+:dk_installOpenjdk
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -27,7 +27,7 @@ call ../../../DKBatch/functions/DK.cmd
 	if "%HOST_OS%"=="linux" (call :dk_installOpenJdkLinux)
 goto:eof	
 	
-:dk_installOpenJdkWin () {
+:dk_installOpenJdkWin
 	call dk_set JAVA_VERSION 11
 	call dk_set JAVA_VERSION %JAVA_VERSION%
 	call dk_set JAVA_HOME %OPENJDK%
@@ -48,7 +48,7 @@ goto:eof
 	call dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8U41_WINPATH%"
 goto:eof
 
-:dk_installOpenJdkMac () {
+:dk_installOpenJdkMac
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
 
 	call dk_download "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
@@ -58,7 +58,7 @@ goto:eof
 	call dk_command java --version 
 goto:eof
 
-:dk_installOpenJdkLinux () {
+:dk_installOpenJdkLinux
 	::if exist /usr (
 	::	call dk_set CURRENT_DIR /usr
 	::)

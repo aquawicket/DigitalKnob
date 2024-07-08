@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::####################################################################
 ::# dk_sleep(seconds)
 ::#
-:dk_sleep () {
+:dk_sleep
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -14,8 +14,8 @@ goto:eof
 
 
 
-
-:DKTEST ############################## DKTEST ##############################
+::############################## DKTEST ##############################
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_echo "sleeping for 10 seconds . . ."

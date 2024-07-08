@@ -17,7 +17,7 @@ setlocal enabledelayedexpansion
 goto:eof
 
 
-:funcA () {
+:funcA
 	::for /f "usebackq tokens=*" %%a in (`echo Test`) do my_command %%a
 	%* > bla.txt
 	set /p VV=<bla.txt
@@ -26,7 +26,7 @@ goto:eof
 goto:eof
 
 
-:funcB () {
+:funcB
 	echo 1 = %1
 	!%1!
 	echo funcB(%*)

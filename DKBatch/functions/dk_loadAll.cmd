@@ -7,7 +7,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_loadAll()
 ::#
 ::#
-:dk_loadAll() {
+:dk_loadAll()
+	call dk_debugFunc
+	
 	:: if we are working from a local repository, all function files should be there. No need to loadAll
 	if exist "%DKBATCH_FUNCTIONS_DIR_%..\..\.git" goto:eof
 	
@@ -22,6 +24,12 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_loadAll
+goto:eof

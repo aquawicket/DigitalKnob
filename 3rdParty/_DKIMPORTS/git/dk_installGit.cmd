@@ -14,7 +14,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
 ::# dk_installGit()
 ::#
 ::#
-:dk_installGit () {
+:dk_installGit
     call dk_debugFunc
     if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

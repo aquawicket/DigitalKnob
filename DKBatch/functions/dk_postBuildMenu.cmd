@@ -15,3 +15,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
         
     call dk_echo
 goto:eof
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_postBuildMenu
+goto:eof

@@ -14,7 +14,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#    @message	- The message to print
 ::#
-:dk_debug () {
+:dk_debug
 	call dk_debugFunc
 	if %__ARGC__% NEQ 1 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	

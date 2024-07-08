@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_fileContains(file, string)
 ::#
 ::#
-:dk_fileContains () {
+:dk_fileContains
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 		

@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
-:dk_getFiles () {
+:dk_getFiles
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	::set "path=%~1"

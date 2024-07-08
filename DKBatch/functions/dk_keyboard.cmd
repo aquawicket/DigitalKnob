@@ -7,7 +7,7 @@ if "%~1" equ "BeginReceiving" goto %1
 ::# dk_keyboard()
 ::#
 ::#
-:dk_keyboard (){
+:dk_keyboard
 	call dk_debugFunc
 	
 	call :Keyboard_Loop

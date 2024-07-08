@@ -11,7 +11,7 @@ goto:eof
 ::####################################################################
 ::# dk_installTinyCoreLinux()
 ::#
-:dk_installTinyCoreLinux () {
+:dk_installTinyCoreLinux
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

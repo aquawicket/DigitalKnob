@@ -5,7 +5,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_showFileLine(filepath, match_string)
 ::#
 ::#
-::#
 :dk_showFileLine
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%("%*"): incorrect number of arguments")
@@ -41,7 +40,10 @@ goto :eof
 
 
 
-
-:DKTEST ::########################################################################
-call dk_showFileLine "../../README.md" "How to build"
-call dk_exit
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_showFileLine "../../README.md" "How to build"
+	call dk_exit
+goto:eof

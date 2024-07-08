@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::####################################################################
 ::# dk_installWslAlpine()
 ::#
-:dk_installWslAlpine () {
+:dk_installWslAlpine
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

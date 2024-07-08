@@ -14,7 +14,7 @@ call dk_set TODO_TAG "  TODO: "
 ::#
 ::#    @message	- The message to print
 ::#
-:dk_todo () {
+:dk_todo
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_todo%" neq "1"  goto:eof

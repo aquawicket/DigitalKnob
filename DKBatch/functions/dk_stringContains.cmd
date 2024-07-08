@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_stringContains(<haystack> <needle> rtn_var)
 ::#
 ::#
-:dk_stringContains () {
+:dk_stringContains
 	call dk_debugFunc
 	if %__ARGC__% lss 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -27,7 +27,8 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	call dk_debugFunc
+	
     ::###### Using if return value
 	call dk_echo
 	set "string=There is a needle in this haystack"
@@ -69,3 +70,4 @@ goto:eof
 	set "substring=straw"
 	call dk_stringContains "%string%" "%substring%" && (echo string contains substring) || (echo string does NOT contain substring)
 	::FIXME: ERRORLEVEL is still 1
+goto:eof

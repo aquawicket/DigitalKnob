@@ -17,7 +17,7 @@ call dk_source dk_validateBranch
 ::#	  Example:  call dk_appendEvnPath C:\Windows\System32 result
 ::#          echo dk_appendEvnPath returned: %result%
 ::#
-:dk_appendEvnPath () {
+:dk_appendEvnPath
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

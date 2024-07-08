@@ -7,7 +7,7 @@ call dk_source dk_makeDirectory
 ::# dk_getDKPaths()
 ::#
 ::#
-:dk_getDKPaths () {
+:dk_getDKPaths
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

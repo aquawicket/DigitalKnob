@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::####################################################################
 ::# dk_resetAll()
 ::#
-:dk_resetAll () {
+:dk_resetAll
 	call dk_debugFunc
 	
     if "%1" equ "wipe" goto:wipe
@@ -70,4 +70,9 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+
+	call dk_resetAll
+goto:eof

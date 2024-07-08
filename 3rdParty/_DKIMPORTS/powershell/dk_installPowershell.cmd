@@ -4,7 +4,7 @@ call ../../../DKBatch/functions/DK.cmd
 ::####################################################################
 ::# dk_installPowershell()
 ::#
-:dk_installPowershell () {
+:dk_installPowershell
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

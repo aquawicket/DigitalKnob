@@ -80,19 +80,16 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::[HKEY_CLASSES_ROOT\emeditor.txt\shell\print\command]
 	::@="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" /p \"%1\""
 	::call dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\shell\print\command" "@" "REG_SZ" "\"%_exe_%\" /p \"%1\""
-
 goto:eof
 
 
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
 	call dk_installFileAssoc ".txt" "C:\Windows\System32\notepad.exe"
-
-
-
-
-
+goto:eof
 	

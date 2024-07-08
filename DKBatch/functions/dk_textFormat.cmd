@@ -28,3 +28,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_set output "%col1% %col2% %col3% %col4%"
     endlocal & call dk_set %1 "%output%"
 goto:eof
+
+
+
+
+
+:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	call dk_debugFunc
+	
+	call dk_textFormat output "column1" "column2" "column3" "column4"
+	call dk_echo "%output%"
+goto:eof

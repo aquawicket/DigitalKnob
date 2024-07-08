@@ -14,7 +14,7 @@ if not defined HALT_ON_INFO    set "HALT_ON_INFO=0"
 ::#
 ::#    @message	- The message to print
 ::#
-:dk_info () {
+:dk_info
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_info%" neq "1" goto:eof
@@ -36,7 +36,12 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_info "test string from dk_info"

@@ -19,7 +19,7 @@ call dk_printVar TEST_VAR
 
 
 ::############ main ############
-:main () {
+:main
 	call dk_debug "main(%*)"
 	
 	echo. && echo ######################## TEST FIELD ######################## && echo.
@@ -175,7 +175,7 @@ call dk_printVar TEST_VAR
 goto:eof
 ::
 ::::::::: print_stack() :::::::
-::print_stack () {
+::print_stack
 ::	dk_debug "print_stack($@)"
 ::  if [ $BASH ]; then
 ::		#echo "stack_size: ${#FUNCNAME[@]}"
@@ -189,7 +189,7 @@ goto:eof
 ::goto:eof
 ::
 ::::::::: evaluate() ::::::::
-::evaluate () {
+::evaluate
 ::	#dk_debug "evaluate($@)"
 ::	export _true="${green}true${clr}"
 ::	export _false="${red}false${clr}"
@@ -198,14 +198,14 @@ goto:eof
 ::	return $?
 ::goto:eof
 ::
-::test_function () {
+::test_function
 ::	dk_debug "test_function($@)"
 ::	#args=( "$@" )
 ::	loop_array "$@"
 ::	exit_code="$?"
 ::goto:eof
 ::
-::loop_array () {
+::loop_array
 ::	dk_debug "loop_array($@)"
 ::	for I in "${@}"
 ::	do
@@ -213,7 +213,7 @@ goto:eof
 ::	done
 ::goto:eof
 ::
-::escape_quotes () {
+::escape_quotes
 ::	dk_debug "escape_quotes($@)"
 ::	input=$1
 ::	output=$(echo $input  | sed 's/"/\\"/g')

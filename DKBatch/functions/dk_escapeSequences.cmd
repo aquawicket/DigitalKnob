@@ -12,7 +12,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_escapeSequences()
 ::#
 ::#
-:dk_escapeSequences () {
+:dk_escapeSequences
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -135,7 +135,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_set clear      "%ESC%[2J"
 goto:eof
 
-:ASCII_ADD () {
+:ASCII_ADD
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(): argument 2 is invalid"
@@ -158,7 +158,7 @@ goto:eof
 	set /a ASCII_length+=1
 goto:eof
 
-:ASCII_SHOW () {
+:ASCII_SHOW
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

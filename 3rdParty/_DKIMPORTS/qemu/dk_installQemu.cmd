@@ -5,7 +5,7 @@ call "../../../DKBatch/functions/DK.cmd"
 ::####################################################################
 ::# dk_installQemu()
 ::#
-:dk_installQemu () {
+:dk_installQemu
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

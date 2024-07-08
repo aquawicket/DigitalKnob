@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::################################################################################
 ::# dk_uninstallContextMenu(menuTitle, exe, command)
 ::#
-:dk_uninstallContextMenu () {
+:dk_uninstallContextMenu
     call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): not enough arguments")
 

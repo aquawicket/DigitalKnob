@@ -11,7 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#	@to			- The destination path to copy to
 ::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
-:dk_copy () {
+:dk_copy
 	call dk_debugFunc
 	if %__ARGC__% LSS 2 (call dk_error "%__FUNCTION__%(): not enough arguments")
 	if %__ARGC__% GTR 3 (call dk_error "%__FUNCTION__%(): too many arguments")

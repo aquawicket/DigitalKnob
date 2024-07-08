@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_printArray(array)
 ::#
 ::#
-:dk_printArray () {
+:dk_printArray
 	call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -20,4 +20,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		)
 		call dk_info "%arry% length = %n%"
 	endlocal
+goto:eof
+
+
+
+
+
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_todo
+	call dk_printArray myArray
 goto:eof

@@ -13,7 +13,7 @@ call dk_source dk_validate
 ::# dk_download(url, destination)
 ::#
 ::#
-:dk_download () {
+:dk_download
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

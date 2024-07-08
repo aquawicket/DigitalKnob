@@ -24,7 +24,7 @@ call dk_source dk_warning
 ::# dk_buildMain()
 ::#
 ::#
-:dk_buildMain () {
+:dk_buildMain
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 

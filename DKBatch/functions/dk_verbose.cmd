@@ -14,7 +14,7 @@ if not defined HALT_ON_VERBOSE    call dk_set HALT_ON_VERBOSE 0
 ::#
 ::#    @message	- The message to print
 ::#
-:dk_verbose () {
+:dk_verbose
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_verbose%" neq "1" goto:eof
@@ -36,8 +36,8 @@ goto:eof
 
 
 
-
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
 	call dk_debugFunc
 	
 	call dk_verbose "test dk_verbose message"

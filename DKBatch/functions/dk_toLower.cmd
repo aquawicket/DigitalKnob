@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_toLower(string rtn_var)
 ::#
 ::#
-:dk_toLower () {
+:dk_toLower
 	call dk_debugFunc
 	if %__ARGC__% neq 2 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -26,8 +26,10 @@ goto:eof
 
 
 :DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ##########
-
+	call dk_debugFunc
+	
 	:: Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >
 	call dk_set myVar "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ` - = ; , ! @ # $ % ^ & * ( ) _ + { } | :"
 	call dk_toLower "%myVar%" myLowerCaseVar
 	call dk_printVar myLowercaseVar
+goto:eof

@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::##################################################################################
 ::# dk_defined(<variable> rtn_var)
 ::#
-:dk_defined () {
+:dk_defined
 	call dk_debugFunc
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~3" neq "" call dk_error "%__FUNCTION__%(): too many arguments"

@@ -5,7 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_stacktrace()
 ::#
 ::#
-:dk_stacktrace () {
+:dk_stacktrace
 	call dk_debugFunc
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -31,17 +31,19 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %dk_stacktrace_count% GEQ 0 goto:dk_stacktrace_Loop
 	
 	echo done
-	
 goto:eof
 
 
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-	call dk_debugFunc
-	call dk_debug "test putting a function on the stack"
 
+
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST
+	call dk_debugFunc
+	
+	call dk_debug "test putting a function on the stack"
 	echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
@@ -71,6 +73,4 @@ goto:eof
     echo ~nx0 = %~nx0
 	pause
 	call dk_stacktrace
-	
 goto:eof
-

@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::################################################################################
 ::# dk_commandExists(<command> rtn_var)
 ::#
-:dk_commandExists () {
+:dk_commandExists
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	

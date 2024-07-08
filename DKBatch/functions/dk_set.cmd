@@ -7,7 +7,7 @@ call dk_load dk_printVar
 ::# dk_set(name, value)
 ::#
 ::#
-:dk_set () {
+:dk_set
 	call dk_debugFunc
 	if %__ARGC__% lss 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
@@ -19,10 +19,10 @@ goto:eof
 
 
 
-:DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+:DKTEST 
 	call dk_debugFunc
 	
 	call dk_set myVar "value assigned with dk_set"
 	call dk_echo "myVar = %myVar%"
-
 goto:eof

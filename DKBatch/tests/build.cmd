@@ -66,7 +66,7 @@ set GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v
 ::# dk_buildMain()
 ::#
 ::#
-:dk_buildMain () {
+:dk_buildMain
 	call:dk_verbose "dk_buildMain(%*)"
 	
 ::	echo "BASH = $BASH"
@@ -157,7 +157,7 @@ goto:eof
 ::# dk_pickUpdate()
 ::#
 ::#
-:dk_pickUpdate () {
+:dk_pickUpdate
 	call:dk_verbose "dk_pickUpdate(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -205,7 +205,7 @@ goto:eof
 ::# dk_pickApp()
 ::#
 ::#
-:dk_pickApp () {
+:dk_pickApp
 	call:dk_verbose "dk_pickApp(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -253,7 +253,7 @@ goto:eof
 ::# dk_pickOs()
 ::#
 ::#
-:dk_pickOs () {
+:dk_pickOs
 	call:dk_verbose "dk_pickOs(%*)"
 
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -354,7 +354,7 @@ goto:eof
 ::# dk_pickType()
 ::#
 ::#
-:dk_pickType () {
+:dk_pickType
 	call:dk_verbose "dk_pickType(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -389,7 +389,7 @@ goto:eof
 ::# dk_appendCmakeArgs(string)
 ::#
 ::#
-:dk_appendCmakeArgs () {
+:dk_appendCmakeArgs
 	call:dk_verbose "dk_appendCmakeArgs(%*)"
 	
     if "%*" == "" echo ERROR: dk_appendCmakeArgs is empty! & goto:eof
@@ -402,7 +402,7 @@ goto:eof
 ::# dk_prependCmakeArgs(string)
 ::#
 ::#
-:dk_prependCmakeArgs () {
+:dk_prependCmakeArgs
 	call:dk_verbose "dk_prependCmakeArgs(%*)"
 	
     if "%*" == "" echo ERROR: dk_prependCmakeArgs is empty! & goto:eof
@@ -415,7 +415,7 @@ goto:eof
 ::# dk_generate()
 ::#
 ::#
-:dk_generate () {
+:dk_generate
 	call:dk_verbose "dk_generate(%*)"
 	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
@@ -526,7 +526,7 @@ goto:eof
 ::# dk_build()
 ::#
 ::#
-:dk_build () {
+:dk_build
 	call:dk_verbose "dk_build(%*)"
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
@@ -548,12 +548,12 @@ goto:eof
 goto:eof
 
 
-:dk_buildAll () {
+:dk_buildAll
 ::####################################################################
 ::# dk_buildDebug()
 ::#
 ::#
-:dk_buildDebug () {
+:dk_buildDebug
 	call:dk_verbose "dk_buildDebug(%*)"
 	
     if "%MSYSTEM%" neq "" (
@@ -577,7 +577,7 @@ goto:eof
 ::# dk_buildRelease()
 ::#
 ::#
-:dk_buildRelease () {
+:dk_buildRelease
 	call:dk_verbose "dk_buildRelease(%*)"
 	
     if "%MSYSTEM%" neq "" (
@@ -607,7 +607,7 @@ goto:eof
 ::# dk_getParentFolder(input, rtn_var)
 ::#
 ::#
-:dk_getParentFolder () {
+:dk_getParentFolder
 	call:dk_verbose "dk_getParentFolder(%*)"
 	
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
@@ -619,7 +619,7 @@ goto:eof
 ::# dk_getDKPaths()
 ::#
 ::#
-:dk_getDKPaths () {
+:dk_getDKPaths
 	call:dk_verbose "dk_getDKPaths(%*)"
 	
 	
@@ -647,7 +647,7 @@ goto:eof
 ::# dk_getParentDir(input, rtn_var)
 ::#
 ::#
-:dk_getParentDir () {
+:dk_getParentDir
 	call:dk_verbose "dk_getParentDir(%*)"
 	
 	for %%A in (%1.) do set "parent=%%~dpA"
@@ -659,7 +659,7 @@ goto:eof
 ::# dk_getHostTriple()
 ::#
 ::#
-:dk_getHostTriple () {
+:dk_getHostTriple
 	call:dk_verbose "dk_getHostTriple(%*)"
 	
 	set HOST_OS=win
@@ -685,7 +685,7 @@ goto:eof
 ::# dk_checkGitRemote()
 ::#
 ::#
-:dk_checkGitRemote () {
+:dk_checkGitRemote
 	call:dk_verbose "dk_checkGitRemote(%*)"
 	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
@@ -710,7 +710,7 @@ goto:eof
 ::# dk_call()
 ::#
 ::#
-:dk_call () {
+:dk_call
 	call:dk_verbose "dk_call(%*)"
 	
     ::TODO
@@ -725,7 +725,7 @@ goto:eof
 ::# dk_enterManually()
 ::#
 ::#
-:dk_enterManually () {
+:dk_enterManually
 	call:dk_verbose "dk_enterManually(%*)"
 	
     echo Please type the name of the library, tool or app to build. Then press enter.
@@ -761,7 +761,7 @@ goto:eof
 ::# dk_pushAssets()
 ::#
 ::#
-:dk_pushAssets () {
+:dk_pushAssets
 	call:dk_verbose "dk_pushAssets(%*)"
 	
     echo not implemented,  TODO
@@ -772,7 +772,7 @@ goto:eof
 ::# dk_pullAssets()
 ::#
 ::#
-:dk_pullAssets () {
+:dk_pullAssets
 	call:dk_verbose "dk_pullAssets(%*)"
 	
     echo not implemented,  TODO
@@ -783,7 +783,7 @@ goto:eof
 ::# dk_resetApps()
 ::#
 ::#
-:dk_resetApps () {
+:dk_resetApps
 	call:dk_verbose "dk_resetApps(%*)"
 	
     echo Resetting Apps . . .
@@ -800,7 +800,7 @@ goto:eof
 ::# dk_resetPlugins()
 ::#
 ::#
-:dk_resetPlugins () {
+:dk_resetPlugins
 	call:dk_verbose "dk_resetPlugins(%*)"
 	
     echo Resetting DKPlugins . . .
@@ -817,7 +817,7 @@ goto:eof
 ::# dk_reset3rdparty()
 ::#
 ::#
-:dk_reset3rdparty () {
+:dk_reset3rdparty
 	call:dk_verbose "dk_reset3rdparty(%*)"
 	
     echo Resetting 3rdParty Libraries . . .
@@ -834,7 +834,7 @@ goto:eof
 ::# dk_resetAll()
 ::#
 ::#
-:dk_resetAll () {
+:dk_resetAll
 	call:dk_verbose "dk_resetAll(%*)"
 	
     if "%1" equ "wipe" goto:wipe
@@ -903,7 +903,7 @@ goto:eof
 ::# dk_removeAll()
 ::#
 ::#
-:dk_removeAll () {
+:dk_removeAll
 	call:dk_verbose "dk_removeAll(%*)"
 	
     if "%1" equ "wipe" goto:wipe
@@ -963,7 +963,7 @@ goto:eof
 ::# dk_reload()
 ::#
 ::#
-:dk_reload () {
+:dk_reload
 	call:dk_verbose "dk_reload(%*)"
 	
     echo .
@@ -977,7 +977,7 @@ goto:eof
 ::# dk_checkError()
 ::#
 ::#
-:dk_checkError () {
+:dk_checkError
 	call:dk_verbose "dk_checkError(%*)"
 	
     if %ERRORLEVEL% equ 0 goto:eof
@@ -991,7 +991,7 @@ goto:eof
 ::# dk_download(url, destination)
 ::#
 ::#
-:dk_download () {
+:dk_download
 	call:dk_verbose "dk_download(%*)"
 	
     echo Downloading %~1
@@ -1011,7 +1011,7 @@ goto:eof
 ::# dk_makeDirectory(path)
 ::#
 ::#
-:dk_makeDirectory () {
+:dk_makeDirectory
 	call:dk_verbose "dk_makeDirectory(%*)"
 	
     if NOT exist "%~1" mkdir "%~1"
@@ -1022,7 +1022,7 @@ goto:eof
 ::# dk_validateBranch()
 ::#
 ::#
-:dk_validateBranch () {
+:dk_validateBranch
 	call:dk_verbose "dk_validateBranch(%*)"
 	
     :: https://stackoverflow.com/a/33662275
@@ -1066,7 +1066,7 @@ goto:eof
 ::# dk_installGit()
 ::#
 ::#
-:dk_installGit () {
+:dk_installGit
 	call:dk_verbose "dk_installGit(%*)"
 	
     if "%HOST_ARCH%"=="arm32" set GIT_DL=
@@ -1107,7 +1107,7 @@ goto:eof
 ::# dk_extract(url, destination)
 ::#
 ::#
-:dk_extract () {
+:dk_extract
 	call:dk_verbose "dk_extract(%*)"
 	
 	echo Extracting %~1 to %2
@@ -1127,7 +1127,7 @@ goto:eof
 ::# dk_installCmake()
 ::#
 ::#
-:dk_installCmake () {
+:dk_installCmake
 	call:dk_verbose "dk_installCmake(%*)"
 	
     if "%HOST_OS%_%HOST_ARCH%"=="win_arm32"    set "CMAKE_DL=%CMAKE_DL_WIN_ARM32%"
@@ -1174,7 +1174,7 @@ goto:eof
 ::# dk_installVisualStudio()
 ::#
 ::#
-:dk_installVisualStudio () {
+:dk_installVisualStudio
 	call:dk_verbose "dk_installVisualStudio(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
@@ -1186,7 +1186,7 @@ goto:eof
 ::# dk_installMsys2()
 ::#
 ::#
-:dk_installMsys2 () {
+:dk_installMsys2
 	call:dk_verbose "dk_installMsys2(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
@@ -1198,7 +1198,7 @@ goto:eof
 ::# dk_installGcc()
 ::#
 ::#
-:dk_installGcc () {
+:dk_installGcc
 	call:dk_verbose "dk_installGcc(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
@@ -1210,7 +1210,7 @@ goto:eof
 ::# dk_installMake()
 ::#
 ::#
-:dk_installMake () {
+:dk_installMake
 	call:dk_verbose "dk_installMake(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
@@ -1222,7 +1222,7 @@ goto:eof
 ::# dk_installOpenjdk()
 ::#
 ::#
-:dk_installOpenjdk () {
+:dk_installOpenjdk
 	call:dk_verbose "dk_installOpenjdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/openjdk/DKMAKE.cmake')" "OPENJDK"
@@ -1234,7 +1234,7 @@ goto:eof
 ::# dk_installAndroidNdk()
 ::#
 ::#
-:dk_installAndroidNdk () {
+:dk_installAndroidNdk
 	call:dk_verbose "dk_installAndroidNdk(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
@@ -1250,7 +1250,7 @@ goto:eof
 ::# dk_installEmscripten()
 ::#
 ::#
-:dk_installEmscripten () {
+:dk_installEmscripten
 	call:dk_verbose "dk_installEmscripten(%*)"
 	
     call:dk_cmakeEval "include('%DKIMPORTS_DIR%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
@@ -1268,7 +1268,7 @@ goto:eof
 ::# dk_commandToVariable(command, variable_name)
 ::#
 ::#
-:dk_commandToVariable () {
+:dk_commandToVariable
 	call:dk_verbose "dk_commandToVariable(%*)"
 	
     if [%2] == [] (
@@ -1309,7 +1309,7 @@ goto:eof
 ::# dk_clearCmakeCache()
 ::#
 ::#
-:dk_clearCmakeCache () {
+:dk_clearCmakeCache
 	call:dk_verbose "dk_clearCmakeCache(%*)"
 	
     ::call:dk_cmakeEval "dk_clearCmakeCache()"
@@ -1325,7 +1325,7 @@ goto:eof
 ::# dk_deleteTempFiles()
 ::#
 ::#
-:dk_deleteTempFiles () {
+:dk_deleteTempFiles
 	call:dk_verbose "dk_deleteTempFiles(%*)"
 	
     ::call:dk_cmakeEval "dk_deleteTempFiles()"
@@ -1341,7 +1341,7 @@ goto:eof
 ::# dk_gitUpdate(NO_CONFIRM)
 ::#
 ::#
-:dk_gitUpdate () {
+:dk_gitUpdate
 	call:dk_verbose "dk_gitUpdate(%*)"
 	
     if "%1" neq "NO_CONFIRM" (
@@ -1375,7 +1375,7 @@ goto:eof
 ::# dk_gitCommit()
 ::#
 ::#
-:dk_gitCommit () {
+:dk_gitCommit
 	call:dk_verbose "dk_gitCommit(%*)"
 	
     echo "Please enter some details about this commit, then press enter."
@@ -1429,7 +1429,7 @@ goto:eof
 ::# dk_clearScreen()
 ::#
 ::#
-:dk_clearScreen () {
+:dk_clearScreen
 	call:dk_verbose "dk_clearScreen(%*)"
 	
     cls
@@ -1440,7 +1440,7 @@ goto:eof
 ::# dk_cmakeEval(cmake_commands, return_variables, -DVARS,)
 ::#
 ::#
-:dk_cmakeEval () {
+:dk_cmakeEval
 	call:dk_verbose "dk_cmakeEval(%*)"
 	
     echo.
@@ -1522,7 +1522,7 @@ goto:eof
 ::# dk_commandExists(command, result)
 ::#
 ::#
-:dk_commandExists () {
+:dk_commandExists
 	call:dk_verbose "dk_commandExists(%*)"
 	
     set "command=%1"
@@ -1536,7 +1536,7 @@ goto:eof
 ::# dk_stringContains(haystack, needle, result)
 ::#
 ::#
-:dk_stringContains () {
+:dk_stringContains
 	call:dk_verbose "dk_stringContains(%*)"
 	
     call set "haystack=%1"
@@ -1550,7 +1550,7 @@ goto:eof
 ::# dk_getBasename(path rtn_var)
 ::#
 ::#
-:dk_getBasename () {
+:dk_getBasename
 	call:dk_verbose "dk_getBasename(%*)"
 	
     if [%1] == [] (
@@ -1576,7 +1576,7 @@ goto:eof
 ::# dk_createCache()
 ::#
 ::#
-:dk_createCache () {
+:dk_createCache
 	call:dk_verbose "dk_createCache(%*)"
 	
     echo creating cache...
@@ -1597,7 +1597,7 @@ goto:eof
 ::# dk_readCache()
 ::#
 ::#
-:dk_readCache () {
+:dk_readCache
 	call:dk_verbose "dk_readCache(%*)"
 	
     ::echo reading cache...
@@ -1624,7 +1624,7 @@ goto:eof
 ::# dk_convertToCIdentifier(in, out)
 ::#
 ::#
-:dk_convertToCIdentifier () {
+:dk_convertToCIdentifier
 	call:dk_verbose "dk_convertToCIdentifier(%*)"
 	
     set "_input=%1"
@@ -1649,7 +1649,7 @@ goto:eof
 ::# dk_toLower(in, rtn_var)
 ::#
 ::#
-:dk_toLower () {
+:dk_toLower
 	call:dk_verbose "dk_toLower(%*)"
 	
     set _string=%1
@@ -1670,7 +1670,7 @@ goto:eof
 ::# dk_printVar(variable)
 ::#
 ::#
-:dk_printVar () {
+:dk_printVar
 	::call:dk_verbose "dk_printVar(%*)"
 	
     set "var=%1"
@@ -1686,7 +1686,7 @@ goto:eof
 ::# dk_killProcess(name)
 ::#
 ::#
-:dk_killProcess () {
+:dk_killProcess
 	call:dk_verbose "dk_killProcess(%*)"
 	
     taskkill /IM "%1" /F > nul
@@ -1697,7 +1697,7 @@ goto:eof
 ::# dk_verbose(message)
 ::#
 ::#
-:dk_verbose () {
+:dk_verbose
 	::call dk_verbose "dk_verbose(%*)"
 	
 	if %LOG_VERBOSE% == 1 ( 
@@ -1711,7 +1711,7 @@ goto:eof
 ::#
 ::# Evaluates to true if the parameter is a variable that exists.
 ::#
-:dk_defined () {
+:dk_defined
 	call:dk_verbose "dk_defined($*)"
 ::	[ $# -ne 1 ] && return $false # Incorrect number of parameters
 	
@@ -1730,7 +1730,7 @@ goto:eof
 ::#
 ::#   @msg	- The message to print
 ::#
-:dk_debug () {
+:dk_debug
 	::call dk_verbose "dk_debug(%*)"
 	
 ::	[ $# -lt 1 ] && dk_error "dk_debug($*): requires at least 1 parameter"
@@ -1756,7 +1756,7 @@ goto:eof
 ::# dk_info(message)
 ::#
 ::#
-:dk_info () {
+:dk_info
 	::call:dk_verbose "dk_info(%*)"
 	
 	echo %white%    INFO: %1 %clr%
@@ -1770,7 +1770,7 @@ goto:eof
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_warning () {
+:dk_warning
 	::call dk_verbose "dk_warning(%*)"
 	
 	echo %yellow% WARNING: %1 %clr%
@@ -1784,7 +1784,7 @@ goto:eof
 ::#
 ::#	@msg	- The message to print
 ::#
-:dk_error () {
+:dk_error
 	::call dk_verbose "dk_error(%*)"
 	
 	echo %red%   ERROR: %1 %clr%
@@ -1798,7 +1798,7 @@ goto:eof
 ::# dk_end()
 ::#
 ::#
-:dk_end () {
+:dk_end
 	call:dk_verbose "dk_end(%*)"
 	
     call:dk_error "reached the end of the script"

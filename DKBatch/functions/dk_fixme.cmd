@@ -14,7 +14,7 @@ set "FIXME_TAG=FIXME: "
 ::#
 ::#    @message - The message to print
 ::#
-:dk_fixme () {
+:dk_fixme
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_fixme%" neq "1"  goto:eof

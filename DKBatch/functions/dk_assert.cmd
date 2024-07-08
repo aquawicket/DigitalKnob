@@ -6,7 +6,7 @@ call dk_source dk_error
 ::################################################################################
 ::# dk_assert(expression)
 ::#
-:dk_assert () {
+:dk_assert
     call dk_debugFunc
 	if %__ARGC__% neq 1 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
