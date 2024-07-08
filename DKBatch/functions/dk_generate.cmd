@@ -10,7 +10,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 	
 	
-    TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
+    call dk_setTitle Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     call dk_echo
 	call dk_info "##################################################################"
 	call dk_info "      Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL%"

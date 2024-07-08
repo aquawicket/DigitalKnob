@@ -1,5 +1,4 @@
 @echo off
-title="DK.cmd(%*)"
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
 ::####################################################################

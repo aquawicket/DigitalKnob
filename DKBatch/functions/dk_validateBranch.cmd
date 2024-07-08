@@ -41,7 +41,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		call dk_set DKPLUGINS_DIR "%DKBRANCH_DIR%\DKPlugins"
 		call dk_set DKPOWERSHELL_DIR "%DKBRANCH_DIR%\DKPowershell"
 			call dk_set DKPOWERSHELL_FUNCTIONS_DIR "%DKPOWERSHELL_DIR%\functions"
-	
+goto:eof	
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (

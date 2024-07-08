@@ -1,5 +1,4 @@
 @echo off
-title="installDKBatch.cmd %*"
 
 
 if exist %DKBATCH_FUNCTION_DIR_%DK.cmd call %DKBATCH_FUNCTION_DIR_%DK.cmd %0 %*

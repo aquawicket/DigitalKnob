@@ -20,7 +20,7 @@ call dk_source dk_unset
     call dk_debugFunc
     if %__ARGC__% neq 0 (call dk_error "%__FUNCTION__%(%__ARGC__%): incorrect number of arguments")
 
-    TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
     call dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
