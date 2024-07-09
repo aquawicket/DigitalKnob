@@ -5,6 +5,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::# dk_encodeEscapes(variable)
 ::#
 ::#	 https://stackoverflow.com/a/17584764
+::#  https://www.robvanderwoude.com/escapechars.php
 ::#
 :dk_encodeEscapes
 	call dk_debugFunc
@@ -21,6 +22,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "org=%org:<=^<%"
 	set "org=%org:>=^>%"
 	set "org=%org:"=""%"
+	::set "org=%org:"=^"%"
 	set "org=%org:&=^&%"
 	set "org=%org:|=^|%"
 	set "org=%org:'=^'%"
@@ -34,74 +36,73 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "var=%org%"
 	if defined %* endlocal & set "%1=%var%"
 	
-	
 	::setlocal enableDelayedExpansion	
 	::set "org=!org:%=%%!"
 	::endlocal & set "org=%org%"
 	
-	set "replaceWith=_"
-	goto:rtn
+::	set "replaceWith=_"
+::	goto:rtn
 	
-	set "var=%var:""=_%"
-	set "org=%var%"
+::	set "var=%var:""=_%"
+::	set "org=%var%"
 	
-	set "var=%var:^^=_%"
-	set "org=%var%"
+::	set "var=%var:^^=_%"
+::	set "org=%var%"
 	
-	set "var=%var:^<=_%"
-	set "org=%var%"
+::	set "var=%var:^<=_%"
+::	set "org=%var%"
 	
-	set "var=%var:^>=_%"
-	set "org=%var%"
+::	set "var=%var:^>=_%"
+::	set "org=%var%"
 	
-	set "var=%var:`=_%"
-	set "org=%var%"
+::	set "var=%var:`=_%"
+::	set "org=%var%"
 	
-	set "var=%var:,=_%"
-	set "org=%var%"
+::	set "var=%var:,=_%"
+::	set "org=%var%"
 	
-	set "var=%var:;=_%"
-	set "org=%var%"
+::	set "var=%var:;=_%"
+::	set "org=%var%"
 	
-	set "var=%var:(=_%"
-	set "org=%var%"
+::	set "var=%var:(=_%"
+::	set "org=%var%"
 	
-	set "var=%var:)=_%"
-	set "org=%var%"
+::	set "var=%var:)=_%"
+::	set "org=%var%"
 	
-	set "var=%var:!=_%"
-	set "org=%var%"
+::	set "var=%var:!=_%"
+::	set "org=%var%"
 	
-	set "var=%var:\=_%"
-	set "org=%var%"
+::	set "var=%var:\=_%"
+::	set "org=%var%"
 	
-	set "var=%var:[=_%"
-	set "org=%var%"
+::	set "var=%var:[=_%"
+::	set "org=%var%"
 	
-	set "var=%var:]=_%"
-	set "org=%var%"
+::	set "var=%var:]=_%"
+::	set "org=%var%"
 
-	set "var=%var:.=_%"
-	set "org=%var%"
+::	set "var=%var:.=_%"
+::	set "org=%var%"
 
-	set "var=%var:?=_%"
-	set "org=%var%"
+::	set "var=%var:?=_%"
+::	set "org=%var%"
 	
-	call :replaceEqualSign var _
-	set "org=%var%"
+::	call :replaceEqualSign var _
+::	set "org=%var%"
 
-	set "var=%var:|=_%"
-	set "org=%var%"
+::	set "var=%var:|=_%"
+::	set "org=%var%"
 	
-	call dk_echo ""%var%"|find "*">nul
-	if not errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
-	set "org=%var%"
+::	call dk_echo ""%var%"|find "*">nul
+::	if not errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
+::	set "org=%var%"
 	
-	set "var=%var:^&=_%"
-	set "org=%var%"
+::	set "var=%var:^&=_%"
+::	set "org=%var%"
 	
-	set "var=%var:^|=_%"
-	set "org=%var%"
+::	set "var=%var:^|=_%"
+::	set "org=%var%"
 	
 ::	setlocal enableDelayedExpansion
 ::	set "var=!var:%%%%=_!"
@@ -142,119 +143,99 @@ goto:eof
 ::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 :DKTEST
 	call dk_debugFunc
-
-	:: call dk_echo "####### Parameters by string ########
-	:: call dk_encodeEscapes "abc   xyz"
-	:: call dk_encodeEscapes "abc ^ xyz"
-	:: call dk_encodeEscapes "abc < xyz"
-	:: call dk_encodeEscapes "abc > xyz"
-	:: call dk_encodeEscapes "abc ` xyz"
-	:: call dk_encodeEscapes "abc , xyz"
-	:: call dk_encodeEscapes "abc ; xyz"
-	:: call dk_encodeEscapes "abc = xyz"
-	:: call dk_encodeEscapes "abc ( xyz"
-	:: call dk_encodeEscapes "abc ) xyz"
-	:: call dk_encodeEscapes "abc ! xyz"
-	:: call dk_encodeEscapes "abc \ xyz"
-	:: call dk_encodeEscapes "abc [ xyz"
-	:: call dk_encodeEscapes "abc ] xyz"
-	:: call dk_encodeEscapes "abc . xyz"
-	:: call dk_encodeEscapes "abc * xyz"
-	:: call dk_encodeEscapes "abc & xyz"
-	:: call dk_encodeEscapes "abc ? xyz"
-	:: call dk_encodeEscapes "abc " xyz"
-	:: call dk_encodeEscapes "abc | xyz"
-	::call dk_encodeEscapes "abc %%%% xyz"
-	
 	
 	call dk_echo
-	call dk_echo "####### Parameters by variable ########
-	set "no_special=abc xyz"
+
+	set "no_special=### ###"
 	call dk_encodeEscapes no_special
 	call dk_echo "no_special = %no_special%"
 	
-	set "caret=abc ^ xyz"
+	set "caret=### ^ ###"
 	call dk_encodeEscapes caret
 	call dk_echo "caret = %caret%"
 	
-	set "direct_left=abc < xyz"
+	set "direct_left=### < ###"
 	call dk_encodeEscapes direct_left
 	call dk_echo "direct_left = %direct_left%"
 	
-	set "direct_right=abc > xyz"
+	set "direct_right=### > ###"
 	call dk_encodeEscapes direct_right
 	call dk_echo "direct_right = %direct_right%"
 	
-	set "backtick=abc ` xyz"
+	set "backtick=### ` ###"
 	call dk_encodeEscapes backtick
 	call dk_echo "backtick = %backtick%"
 	
-	set "comma=abc , xyz"
+	set "comma=### , ###"
 	call dk_encodeEscapes comma
 	call dk_echo "comma = %comma%"
 	
-	set "semicolon=abc ; xyz"
+	set "semicolon=### ; ###"
 	call dk_encodeEscapes semicolon
 	call dk_echo "semicolon = %semicolon%"
 	
-	set "equal=abc = xyz"
+	set "equal=### = ###"
 	call dk_encodeEscapes equal
 	call dk_echo "equal = %equal%"
 	
-	set "left_parenthesis=abc ( xyz"
+	set "left_parenthesis=### ( ###"
 	call dk_encodeEscapes left_parenthesis
 	call dk_echo "left_parenthesis = %left_parenthesis%"
 	
-	set "right_parenthesis=abc ) xyz"
+	set "right_parenthesis=### ) ###"
 	call dk_encodeEscapes right_parenthesis
 	call dk_echo "right_parenthesis = %right_parenthesis%"
 	
-	set "exclamation=abc ! xyz"
+	set "exclamation=### ! ###"
 	call dk_encodeEscapes exclamation
 	call dk_echo "exclamation = %exclamation%"
 	
-	set "backslash=abc \ xyz"
+	set "backslash=### \ ###"
 	call dk_encodeEscapes backslash
 	call dk_echo "backslash = %backslash%"
 	
-	set "left_bracket=abc [ xyz"
+	set "left_bracket=### [ ###"
 	call dk_encodeEscapes left_bracket
 	call dk_echo "left_bracket = %left_bracket%"
 	
-	set "right_bracket=abc ] xyz"
+	set "right_bracket=### ] ###"
 	call dk_encodeEscapes right_bracket
 	call dk_echo "right_bracket = %right_bracket%"
 	
-	set "period=abc . xyz"
+	set "period=### . ###"
 	call dk_encodeEscapes period
 	call dk_echo "period = %period%"
 	
-	set "asterisk=abc * xyz"
+	set "asterisk=### * ###"
 	call dk_encodeEscapes asterisk
 	call dk_echo "asterisk = %asterisk%"
 	
-	set "quote=abc " xyz"
+	set "quote=### " ###"
 	call dk_encodeEscapes quote
 	call dk_echo "quote = %quote%"
 	
-	set "question=abc ? xyz"
+	set "question=### ? ###"
 	call dk_encodeEscapes question
 	call dk_echo "question = %question%"
 	
-	set "and=abc & xyz"
+	set "and=### & ###"
 	call dk_encodeEscapes and
 	call dk_echo "and = %and%"
 	
-	set "pipe=abc | xyz"
+	set "pipe=### | ###"
 	call dk_encodeEscapes pipe
 	echo pipe = %pipe%
 	
-	::set "percent=abc %%%% xyz"
+	::set "percent=### %%%% ###"
 	::call dk_encodeEscapes percent
 	::call dk_echo "percent = %percent%
 	
-	set "allchars=abc ^ < > ` , ; = ( ) ! \ [ ] . ? & | " % xyz"
+	set "allchars=### ^ < > ` , ; = ( ) ! \ [ ] . ? & | " % ###"
 	call dk_encodeEscapes allchars
-	call dk_echo "allchars = %allchars%"	
+	call dk_echo "allchars = %allchars%"
+
+	::set "imposible=### This is impossible %path% ^& | <> "^& | <>" ^ ###"
+	::call dk_encodeEscapes imposible
+	::call dk_echo "imposible = %imposible%"
 	
 goto:eof
