@@ -11,7 +11,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__% not enough arguments"
 	::if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__% too many arguments"
 	
-	echo.
 	set org=%*
 	
 	if defined %* call set "org=%%%org%%%"
@@ -20,19 +19,36 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!"
 	endlocal & set "org=%org%"
 	
-	set "org=%org:"=""%"
+	
 	set "org=%org:^=^^%"
 	set "org=%org:<=^<%"
 	set "org=%org:>=^>%"
+	set "org=%org:"=""%"
 	set "org=%org:&=^&%"
 	set "org=%org:|=^|%"
+	set "org=%org:'=^'%"
+	set "org=%org:`=^`%"
+	set "org=%org:,=^,%"
+	set "org=%org:;=^;%"
+	set "org=%org:(=^(%"
+	set "org=%org:)=^)%"
+	set "org=%org:!=^!%"
+	echo org = %org%
+	
+	set "var=%org%"
+	
+	::if defined %* set "var=%var:^=^^%"
+	::if defined %* set "var=%var:<=^<%"
+	if defined %* endlocal & set "%1=%var%"
+	
+	
 	::setlocal enableDelayedExpansion	
 	::set "org=!org:%=%%!"
 	::endlocal & set "org=%org%"
-	echo org = %org%
-	set "var=%org%"
+	
 	set "replaceWith=_"
-
+	goto:rtn
+	
 	set "var=%var:""=_%"
 	set "org=%var%"
 	
@@ -104,11 +120,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::echo "%var%"|find "=">nul
 	::if not errorlevel 1 echo equal sign detected
 	
+	:rtn
 	echo var = %var%
 	
 	call dk_unset org
-	call dk_unset var
 	call dk_unset replaceWith
+	
+	call dk_unset var
 goto:eof
 
 :replaceEqualSign variable replaceWith
@@ -153,69 +171,97 @@ goto:eof
 	call dk_removeSpecialChars "abc ? xyz"
 	call dk_removeSpecialChars "abc " xyz"
 	call dk_removeSpecialChars "abc | xyz"
-::	call dk_removeSpecialChars "abc %%%% xyz"
-
-	echo.
+	::call dk_removeSpecialChars "abc %%%% xyz"
+	
+	
 	echo.
 	echo ####### Parameters by variable ########
 	set "no_special=abc xyz"
+	echo no_special = %no_special%
 	call dk_removeSpecialChars no_special
+	echo no_special = %no_special%
 	
 	set "caret=abc ^ xyz"
+	echo caret = %caret%
 	call dk_removeSpecialChars caret
+	echo caret = %caret%
 	
 	set "direct_left=abc < xyz"
+	echo direct_left = %direct_left%
 	call dk_removeSpecialChars direct_left
+	echo direct_left = %direct_left%
 	
 	set "direct_right=abc > xyz"
 	call dk_removeSpecialChars direct_right
+	echo direct_right = %direct_right%
 	
 	set "backtick=abc ` xyz"
 	call dk_removeSpecialChars backtick
+	echo backtick = %backtick%
 	
 	set "comma=abc , xyz"
 	call dk_removeSpecialChars comma
+	echo comma = %comma%
 	
 	set "semicolon=abc ; xyz"
 	call dk_removeSpecialChars semicolon
+	echo semicolon = %semicolon%
 	
 	set "equal=abc = xyz"
 	call dk_removeSpecialChars equal
+	echo equal = %equal%
 	
 	set "left_parenthesis=abc ( xyz"
 	call dk_removeSpecialChars left_parenthesis
+	echo left_parenthesis = %left_parenthesis%
 	
 	set "right_parenthesis=abc ) xyz"
 	call dk_removeSpecialChars right_parenthesis
+	echo right_parenthesis = %right_parenthesis%
 	
 	set "exclamation=abc ! xyz"
 	call dk_removeSpecialChars exclamation
+	echo exclamation = %exclamation%
 	
 	set "backslash=abc \ xyz"
 	call dk_removeSpecialChars backslash
+	echo backslash = %backslash%
 	
 	set "left_bracket=abc [ xyz"
 	call dk_removeSpecialChars left_bracket
+	echo left_bracket = %left_bracket%
 	
 	set "right_bracket=abc ] xyz"
 	call dk_removeSpecialChars right_bracket
+	echo right_bracket = %right_bracket%
 	
 	set "period=abc . xyz"
 	call dk_removeSpecialChars period
+	echo period = %period%
 	
 	set "asterisk=abc * xyz"
 	call dk_removeSpecialChars asterisk
-	
-	set "and=abc & xyz"
-	call dk_removeSpecialChars and
-	
-	set "question=abc ? xyz"
-	call dk_removeSpecialChars question
+	echo asterisk = %asterisk%
 	
 	set "quote=abc " xyz"
 	call dk_removeSpecialChars quote
+	echo quote = %quote%
 	
-	set "pipe=abc | xyz"
+	set "question=abc ? xyz"
+	call dk_removeSpecialChars question
+	echo question = %question%
+	
+	set "and=abc & xyz"
+	call dk_removeSpecialChars and
+	echo and = %and%
+	
+	pause
+	
+	set "pipe=abc ^| xyz"
 	call dk_removeSpecialChars pipe
-::	call dk_removeSpecialChars "abc %%%% xyz"
+	echo pipe = %pipe%	
+	
+	::set "percent=abc %%%% xyz"
+	::call dk_removeSpecialChars percent
+	::echo percent = %percent%
 goto:eof
