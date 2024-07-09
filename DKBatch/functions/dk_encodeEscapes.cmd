@@ -93,7 +93,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "var=%var:|=_%"
 	set "org=%var%"
 	
-	echo "%var%"|find "*">nul
+	call dk_echo ""%var%"|find "*">nul
 	if not errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
 	set "org=%var%"
 	
@@ -105,16 +105,16 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 ::	setlocal enableDelayedExpansion
 ::	set "var=!var:%%%%=_!"
-::	if not "!var!"=="!org!" echo %% characters removed
+::	if not "!var!"=="!org!" call dk_echo "%% characters removed
 ::	set "org=!var!"
 ::	endlocal & set "org=%org%"
 	
 	:: Simple method to detect character in a string
-	::echo "%var%"|find "=">nul
-	::if not errorlevel 1 echo equal sign detected
+	::call dk_echo ""%var%"|find "=">nul
+	::if not errorlevel 1 call dk_echo "equal sign detected
 	
 	:rtn
-	if not defined %* echo var = %var%
+	if not defined %* call dk_echo "var = %var%
 	
 	call dk_unset org
 	call dk_unset replaceWith
@@ -143,7 +143,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	:: echo ####### Parameters by string ########
+	:: call dk_echo "####### Parameters by string ########
 	:: call dk_encodeEscapes "abc   xyz"
 	:: call dk_encodeEscapes "abc ^ xyz"
 	:: call dk_encodeEscapes "abc < xyz"
@@ -168,90 +168,90 @@ goto:eof
 	
 	
 	call dk_echo
-	echo ####### Parameters by variable ########
+	call dk_echo "####### Parameters by variable ########
 	set "no_special=abc xyz"
 	call dk_encodeEscapes no_special
-	echo no_special = %no_special%
+	call dk_echo "no_special = %no_special%"
 	
 	set "caret=abc ^ xyz"
 	call dk_encodeEscapes caret
-	echo caret = %caret%
+	call dk_echo "caret = %caret%"
 	
 	set "direct_left=abc < xyz"
 	call dk_encodeEscapes direct_left
-	echo direct_left = %direct_left%
+	call dk_echo "direct_left = %direct_left%"
 	
 	set "direct_right=abc > xyz"
 	call dk_encodeEscapes direct_right
-	echo direct_right = %direct_right%
+	call dk_echo "direct_right = %direct_right%"
 	
 	set "backtick=abc ` xyz"
 	call dk_encodeEscapes backtick
-	echo backtick = %backtick%
+	call dk_echo "backtick = %backtick%"
 	
 	set "comma=abc , xyz"
 	call dk_encodeEscapes comma
-	echo comma = %comma%
+	call dk_echo "comma = %comma%"
 	
 	set "semicolon=abc ; xyz"
 	call dk_encodeEscapes semicolon
-	echo semicolon = %semicolon%
+	call dk_echo "semicolon = %semicolon%"
 	
 	set "equal=abc = xyz"
 	call dk_encodeEscapes equal
-	echo equal = %equal%
+	call dk_echo "equal = %equal%"
 	
 	set "left_parenthesis=abc ( xyz"
 	call dk_encodeEscapes left_parenthesis
-	echo left_parenthesis = %left_parenthesis%
+	call dk_echo "left_parenthesis = %left_parenthesis%"
 	
 	set "right_parenthesis=abc ) xyz"
 	call dk_encodeEscapes right_parenthesis
-	echo right_parenthesis = %right_parenthesis%
+	call dk_echo "right_parenthesis = %right_parenthesis%"
 	
 	set "exclamation=abc ! xyz"
 	call dk_encodeEscapes exclamation
-	echo exclamation = %exclamation%
+	call dk_echo "exclamation = %exclamation%"
 	
 	set "backslash=abc \ xyz"
 	call dk_encodeEscapes backslash
-	echo backslash = %backslash%
+	call dk_echo "backslash = %backslash%"
 	
 	set "left_bracket=abc [ xyz"
 	call dk_encodeEscapes left_bracket
-	echo left_bracket = %left_bracket%
+	call dk_echo "left_bracket = %left_bracket%"
 	
 	set "right_bracket=abc ] xyz"
 	call dk_encodeEscapes right_bracket
-	echo right_bracket = %right_bracket%
+	call dk_echo "right_bracket = %right_bracket%"
 	
 	set "period=abc . xyz"
 	call dk_encodeEscapes period
-	echo period = %period%
+	call dk_echo "period = %period%"
 	
 	set "asterisk=abc * xyz"
 	call dk_encodeEscapes asterisk
-	echo asterisk = %asterisk%
+	call dk_echo "asterisk = %asterisk%"
 	
 	set "quote=abc " xyz"
 	call dk_encodeEscapes quote
-	echo quote = %quote%
+	call dk_echo "quote = %quote%"
 	
 	set "question=abc ? xyz"
 	call dk_encodeEscapes question
-	echo question = %question%
+	call dk_echo "question = %question%"
 	
 	set "and=abc & xyz"
 	call dk_encodeEscapes and
-	echo and = %and%
+	call dk_echo "and = %and%"
 	
 	set "pipe=abc | xyz"
 	call dk_encodeEscapes pipe
-	echo pipe = %pipe%	
+	echo pipe = %pipe%
 	
 	::set "percent=abc %%%% xyz"
 	::call dk_encodeEscapes percent
-	::echo percent = %percent%
+	::call dk_echo "percent = %percent%
 	
 	set "allchars=abc ^ < > ` , ; = ( ) ! \ [ ] . ? & | " % xyz"
 	call dk_encodeEscapes allchars
