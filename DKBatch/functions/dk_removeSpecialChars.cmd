@@ -33,7 +33,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "org=%org:(=^(%"
 	set "org=%org:)=^)%"
 	set "org=%org:!=^!%"
-	echo org = %org%
+	::echo org = %org%
 	
 	set "var=%org%"
 	
@@ -121,7 +121,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::if not errorlevel 1 echo equal sign detected
 	
 	:rtn
-	echo var = %var%
+	if not defined %* echo var = %var%
 	
 	call dk_unset org
 	call dk_unset replaceWith
@@ -177,17 +177,14 @@ goto:eof
 	echo.
 	echo ####### Parameters by variable ########
 	set "no_special=abc xyz"
-	echo no_special = %no_special%
 	call dk_removeSpecialChars no_special
 	echo no_special = %no_special%
 	
 	set "caret=abc ^ xyz"
-	echo caret = %caret%
 	call dk_removeSpecialChars caret
 	echo caret = %caret%
 	
 	set "direct_left=abc < xyz"
-	echo direct_left = %direct_left%
 	call dk_removeSpecialChars direct_left
 	echo direct_left = %direct_left%
 	
@@ -254,8 +251,6 @@ goto:eof
 	set "and=abc & xyz"
 	call dk_removeSpecialChars and
 	echo and = %and%
-	
-	pause
 	
 	set "pipe=abc ^| xyz"
 	call dk_removeSpecialChars pipe
