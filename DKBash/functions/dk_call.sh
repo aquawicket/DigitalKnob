@@ -16,12 +16,12 @@ dk_call(){
 	#[ -z "$(command -v "${1}")" ] && dk_source ${1}
 	[ -n "$(command -v "${1}")" ] || [$(read -rp '${1} command not found, press enter to exit')] || exit;
 	
-	#echo "$@"
-	"$@"
+	dk_echo "${*}"
+	"${@}"
 }
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_call dk_info "test message using dk_call"
