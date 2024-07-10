@@ -37,5 +37,5 @@ goto:eof
 	call dk_debugFunc
 	
 	call dk_getFiles "C:\Windows" files
-	call dk_printArray files
+	call dk_printVar files
 goto:eof

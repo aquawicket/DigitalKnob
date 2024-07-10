@@ -33,7 +33,7 @@ function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST #######
 	
 	
 	#$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
-	#dk_printArray myArray
+	#dk_printVar myArray
 	
 	$myArray = [System.Collections.ArrayList]('1', '2', '3')
 	
@@ -41,11 +41,11 @@ function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_printVar myArray
 	
 	dk_arrayPush myArray b
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPush myArray c
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayPush myArray d
-	dk_printArray myArray
+	dk_printVar myArray
 }

@@ -34,23 +34,23 @@ function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST #######
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
 	
 	
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 	
 	dk_arrayShift myArray
-	dk_printArray myArray
+	dk_printVar myArray
 }

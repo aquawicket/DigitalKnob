@@ -43,7 +43,7 @@ goto:eof
 	call dk_fileToArray "array.cmd" MyArray
 	::call dk_arrayLength MyArray MyArrayLength
 	::echo MyArrayLength = %MyArrayLength%
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 
 	:: or print items individually
 

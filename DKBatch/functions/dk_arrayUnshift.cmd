@@ -38,7 +38,7 @@ goto:eof
 	set "MyArray[1]=d"
 	set "MyArray[2]=e"
 	
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	call dk_arrayUnshift MyArray b
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 goto:eof

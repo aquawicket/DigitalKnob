@@ -13,7 +13,7 @@ dir /b /a-d > array.cmd
 	::echo MyArray[0] = %MyArray[0]%
 	::echo MyArray[1] = %MyArray[1]%
 	::echo MyArray[2] = %MyArray[2]%
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayToString MyArray MyArrayString
 	echo MyArrayString = %MyArrayString%
@@ -26,13 +26,13 @@ dir /b /a-d > array.cmd
 	::echo MyArrayB[0] = %MyArrayB[0]%
 	::echo MyArrayB[1] = %MyArrayB[1]%
 	::echo MyArrayB[2] = %MyArrayB[2]%
-	call dk_printArray MyArrayB
+	call dk_printVar MyArrayB
 	
 	call dk_deleteArray MyArrayB
 	::echo MyArrayB[0] = %MyArrayB[0]%
 	::echo MyArrayB[1] = %MyArrayB[1]%
 	::echo MyArrayB[2] = %MyArrayB[2]%
-	call dk_printArray MyArrayB
+	call dk_printVar MyArrayB
 	
 	pause
 goto:eof

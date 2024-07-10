@@ -5,28 +5,41 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://softmany.com/microsoft-visual-c-redistributable-package/download/
 #
 # VCRUNTIME140.dll
-dk_validate(WIN_HOST "dk_getHostTriple()")
-dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
+
+dk_validate(HOST "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(vc_redist)
 	dk_return()
 endif()
-if(VISUALSTUDIO)
+#if(VISUALSTUDIO)
 	#dk_undepend(vc_redist)
 	#dk_return()
+#endif()
+
+WIN_X86_HOST_dk_set		(VC_REDIST_DL https://aka.ms/vs/16/release/vc_redist.x86.exe)
+WIN_X86_64_HOST_dk_set	(VC_REDIST_DL https://aka.ms/vs/16/release/vc_redist.x64.exe)
+if(NOT VC_REDIST_DL)
+	dk_error("VC_REDIST_DL is invalid")
+	return()
+endif()
+
+WIN_X86_HOST_dk_set		(VCCOMP140_DLL "C:/Windows/System32/vccomp140.dll")
+WIN_X86_64_HOST_dk_set	(VCCOMP140_DLL "C:/Windows/SysWOW64/vccomp140.dll")
+if(NOT VCCOMP140_DLL)
+	dk_error("VCCOMP140_DLL is invalid")
+	return()
+endif()
+
+### INSTALL ###
+if(NOT EXISTS "${VCCOMP140_DLL}")
+	dk_getBasename(${VC_REDIST_DL} VC_REDIST_DL_FILE)
+	dk_info("Installing Visual C Redistributable - ${VC_REDIST_DL_FILE}")
+	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
+	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE})
+	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE})
 endif()
 
 
-dk_set(VC_REDIST_VERSION 14.29.30133)
-dk_set(VC_REDIST_PLATFORM x86)
-dk_set(VC_REDIST_NAME vc_redist.${VC_REDIST_PLATFORM})
-dk_set(VC_REDIST_DL https://aka.ms/vs/16/release/${VC_REDIST_NAME}.exe)
-#dk_set(VC_REDIST "${ProgramFiles_x86}/Microsoft Visual Studio/2019/Community/VC/Redist/MSVC/${VC_REDIST_VERSION}")
-dk_set(VC_REDIST "C:/Windows/SysWOW64/vcruntime140.dll")
-
-### INSTALL ###
-IF(NOT EXISTS "${VC_REDIST}")
-	MESSAGE(STATUS "Installing Visual Studio ${VC_REDIST_VERSION} ${VC_REDIST_PLATFORM} Redistributable")
-	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_NAME}.exe)
-	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_NAME}.exe)
-ENDIF()
+if(NOT EXISTS "${VCCOMP140_DLL}")
+	dk_error("Unable to locate VCCOMP140_DLL:${VCCOMP140_DLL}")
+endif()

@@ -26,17 +26,17 @@ goto:eof
 	::set "MyArray[1]=b"
 	::set "MyArray[2]=c"
 	
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayPush MyArray a
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayPush MyArray b
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayPush MyArray c
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayPush MyArray d
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 goto:eof

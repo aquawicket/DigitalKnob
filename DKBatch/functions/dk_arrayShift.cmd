@@ -40,23 +40,23 @@ goto:eof
 	set "MyArray[3]=d"
 	set "MyArray[4]=e"
 	
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 	
 	call dk_arrayShift MyArray
-	call dk_printArray MyArray
+	call dk_printVar MyArray
 goto:eof

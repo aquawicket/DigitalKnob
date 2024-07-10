@@ -29,29 +29,29 @@ goto:eof
 	set "myArray[3]=d"
 	set "myArray[4]=e"
 	
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 	
 	call dk_arrayPop myArray
-	call dk_printArray myArray
+	call dk_printVar myArray
 goto:eof
