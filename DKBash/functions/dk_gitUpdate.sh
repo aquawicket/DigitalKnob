@@ -24,7 +24,7 @@ dk_gitUpdate (){
 	"${GIT_EXE}" pull --all
 	dk_call "${GIT_EXE}" checkout -- .
 	"${GIT_EXE}" checkout "${DKBRANCH}"
-	if [ "$?" = "0" ]; then
+	if [ "${?}" = "0" ]; then
 		dk_info "${DKBRANCH} branch selected"
 	else
 		dk_info "Remote has no ${DKBRANCH} branch. Creating..."

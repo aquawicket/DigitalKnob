@@ -71,32 +71,32 @@ dk_load (){
 			#value=${value##*N}   # cut off everything from begining to last N
 
 			value=${value%%#*}
-			value=$(builtin echo "$value" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
+			value=$(builtin echo "${value}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*")	# POSIX REGEX MATCH
 			[ "${value}" = "" ] && continue
-			echo "${fn}:lines $value"
+			echo "${fn}:lines ${value}"
 				
-			if echo $dk_load_list | grep -q "$value"; then				# POSIX REGEX MATCH
-			    echo "${fn}: skipping $value.    already in load_list"
+			if echo $dk_load_list | grep -q "${value}"; then				# POSIX REGEX MATCH
+			    echo "${fn}: skipping ${value}.    already in load_list"
 			    continue
 			elif [ "${fn}" = "${value}" ]; then
-			    echo "${fn}: skipping $value.    already matches fn"
+			    echo "${fn}: skipping ${value}.    already matches fn"
 			    continue
-			elif [ "$(command -v $value)" != "" ]; then
-			    echo "${fn}: skipping $value.    command already recognized"
+			elif [ "$(command -v ${value})" != "" ]; then
+			    echo "${fn}: skipping ${value}.    command already recognized"
 			    continue
-			elif [ "$value" = "" ]; then
-				echo "${fn}: skipping $value.    empty"
+			elif [ "${value}" = "" ]; then
+				echo "${fn}: skipping ${value}.    empty"
 			    continue
 			else
-			    echo "$fn: dk_load( $value )"
-			    dk_load $value
+			    echo "$fn: dk_load( ${value} )"
+			    dk_load ${value}
 			fi
 		done <<EOF
 "$lines"
 EOF
 		
 		if [ -f "${fpath}" ]; then
-			if [ "$@" = "${fpath}" ]; then
+			if [ "${@}" = "${fpath}" ]; then
 				return 0
 			fi
 				echo "${fn}: source ${fpath}"
@@ -106,7 +106,7 @@ EOF
 	fi
 }
 
-dk_load "$0"
+dk_load "${0}"
 
 
 

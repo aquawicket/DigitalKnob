@@ -9,7 +9,7 @@ dk_unset (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
-	unset $1
+	unset ${1}
 }
 
 

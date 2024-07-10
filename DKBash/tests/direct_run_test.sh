@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LIB_PATH=$(dirname $(realpath $0))
+LIB_PATH=$(dirname $(realpath ${0}))
 PATH=${PATH}:${LIB_PATH}
 export BASH="${BASH}"
 
@@ -39,7 +39,7 @@ main (){
 	
 	
 
-	exec $SHELL
+	exec ${SHELL}
 }
 
 main

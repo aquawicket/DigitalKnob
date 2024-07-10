@@ -13,7 +13,7 @@ dk_getShellType (){
 	#PID_EXE=$(readlink /proc/$$/exe);
 	#DKSHELL=${PID_EXE##*/};           
 	[ -d "/proc" ] && DKSHELL=$(basename $(readlink /proc/$$/exe))
-	[ "$SHELL" = "/bin/zsh" ] && DKSHELL="zsh"
+	[ "${SHELL}" = "/bin/zsh" ] && DKSHELL="zsh"
 	[ $DKSHELL = sh ] && export DKSH=1
 	[ $DKSHELL = dash ] && export DKDASH=1
 	[ $DKSHELL = zsh ] && export DKZSH=1

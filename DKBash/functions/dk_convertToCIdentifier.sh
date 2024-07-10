@@ -46,7 +46,7 @@ dk_convertToCIdentifier (){
 #	dk_replaceAll "${input}" "}" "_" output		# POSIX replace
 #	dk_replaceAll "${input}" "`" "_" output		# POSIX replace
 	
-	eval "$2='${output}'"
+	eval "${2}='${output}'"
 	dk_printVar "${2}"
 	#[ ${input} = "" ]
 }

@@ -12,9 +12,9 @@ dk_btoa (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	[ -e ${1} ] || dk_error "${1} not found"
-	[ -e $2 ] && dk_error "$2 already exists and cannot be overwritten"
+	[ -e ${2} ] && dk_error "${2} already exists and cannot be overwritten"
 	
-	[ -e ${1} ] && base64 -w 0 "${1}" > "$2"
+	[ -e ${1} ] && base64 -w 0 "${1}" > "${2}"
 }
 
 

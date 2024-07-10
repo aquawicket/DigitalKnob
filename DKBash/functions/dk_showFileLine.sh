@@ -12,8 +12,8 @@ dk_showFileLine (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
-	[ -n "${lastErrorLine-}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
+	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="${1}"
+	[ -n "${lastErrorLine-}" ] && _lineno="${lastErrorLine}"   || _matchString="${2}"
 	unset lastErrorFile
 	unset lastErrorLine
 	
@@ -51,7 +51,7 @@ dk_showFileLine (){
 	done < "${_filepath}"
 	
 	# method 2
-	#awk 'NR>L-4 && NR<L+4 { printf "%-5d%3s%s\n",NR,(NR==L?">>>":""),$1 }' L=$2 $1
+	#awk 'NR>L-4 && NR<L+4 { printf "%-5d%3s%s\n",NR,(NR==L?">>>":""),${1} }' L=${2} ${1}
 }
 
 

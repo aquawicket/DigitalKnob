@@ -11,8 +11,8 @@ dk_command(){
 	dk_commandExists "${1}" || dk_install ${1}
 	dk_commandExists "${1}"  || [$(read -rp '${1} command not found, press enter to exit')] || exit;
 	
-	dk_echo "$@"
-	"$@"
+	dk_echo "${@}"
+	"${@}"
 }
 
 

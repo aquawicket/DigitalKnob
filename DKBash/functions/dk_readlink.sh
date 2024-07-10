@@ -16,12 +16,12 @@ dk_readlink (){
 
 	# test $(readlink -f "%2")
 	# fallback on the code below upon failure
-echo "if $(readlink -f "$2"); then"	
-	if $(readlink -f "$2"); then
-		echo $(readlink -f "$2")
+echo "if $(readlink -f "${2}"); then"	
+	if $(readlink -f "${2}"); then
+		echo $(readlink -f "${2}")
 	else
 		echo "dk_readlink"
-		target_file=$2   # we expect to use a -f parameter, so use $2 as the input path.
+		target_file=${2}   # we expect to use a -f parameter, so use ${2} as the input path.
 
 		cd $(dirname $target_file)
 		target_file=$(basename $target_file)
@@ -40,7 +40,7 @@ echo "if $(readlink -f "$2"); then"
 		readlinkPath=$phys_dir/$target_file
 		echo $readlinkPath
 	fi
-	#eval "$2=${readlinkPath}"
+	#eval "${2}=${readlinkPath}"
 	#dk_printVar "${2}"
 }
 

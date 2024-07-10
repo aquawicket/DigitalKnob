@@ -119,7 +119,7 @@ get_term (){
 
 ###### get_shell ######
 get_shell (){
-	DKSHELL=$SHELL
+	DKSHELL=${SHELL}
 	dk_printVar DKSHELL
 }
 
@@ -143,12 +143,12 @@ load_dkenv (){
 
 ###### set_dkroot <path> ######
 set_dkroot(){
-	if [ -z "$1" ]; then
+	if [ -z "${1}" ]; then
 		dk_error "set_dkroot <path> requires 1 parameter"
-		return $false
+		return ${false}
 	fi
 	
-	DKROOT=$1
+	DKROOT=${1}
 	export DKROOT=$DKROOT
 	
 	touch ~/.dkenv
@@ -271,9 +271,9 @@ if [ ${#} -ne 0 ]; then
 	echo "$1(${@:2}) ->"
 	echo ""
 	
-	"$@"
+	"${@}"
 	
-	if [ $? -eq 0 ]; then
+	if [ ${?} -eq 0 ]; then
 		echo ""
 		echo -e "-> returned true"
 	else

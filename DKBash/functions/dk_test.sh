@@ -20,7 +20,7 @@ dk_test (){
 #	echo "__ARGV__     = $(__ARGV__)"
 #	echo "__CALLER__   = $(__CALLER__)"
 
-	if [[ $1 == *"[@]"* ]]; then
+	if [[ ${1} == *"[@]"* ]]; then
 		local _input_=(${!1})
 		echo "1 is an array variable"
 		local _size_=${#_input_[@]}
@@ -72,12 +72,12 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	
 	### (input:string_variable_value output:return_var) ###
 	input="3 input:string_variable_value"
-	dk_test "$input" output
+	dk_test "${input}" output
 	echo "output:return_variable = ${output}"
 	
 	### (input:string_variable_value output:$(command sub))
 	input="4 input:string_variable_value"
-	output=$(dk_test "$input")
+	output=$(dk_test "${input}")
 	echo "output:command_sub_variable = ${output}"
 	
 	### (input:string_variable output:return_var) ###
@@ -105,7 +105,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	### (input:array_variable_value output:return_var) ###
 	arryB=("8" "array" "variable" "by" "value")
 	input=arryB[@]
-	dk_test $input output
+	dk_test ${input} output
 	echo "output:return_variable = ${output}"
 	
 	#####   FIXME   ########

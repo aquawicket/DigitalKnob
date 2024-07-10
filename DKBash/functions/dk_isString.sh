@@ -6,8 +6,8 @@
 # 
 #	Test if arg1 is a string or a string variable
 #
-#	$1			- The variable to test
-#	$rtn_var: 	- True if the argument is string or a string variable
+#	${1}			- The variable to test
+#	${rtn_var}: 	- True if the argument is string or a string variable
 #
 dk_isString (){
 	dk_debugFunc 

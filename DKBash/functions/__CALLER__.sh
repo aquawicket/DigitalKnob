@@ -7,7 +7,7 @@
 __CALLER__ (){
 	#dk_debugFunc
 	
-	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=$1
+	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
 	((_FRAME_=_FRAME_+1))
 	dk_return "${FUNCNAME[${_FRAME_}]-}"; return
 }

@@ -56,4 +56,4 @@ echo SentToFile >& File.txt
 #echo SendTo_zero      >&/dev/zero       # 0
 
 
-exec $SHELL
+exec ${SHELL}

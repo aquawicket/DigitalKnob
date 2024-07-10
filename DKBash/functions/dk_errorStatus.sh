@@ -7,7 +7,7 @@
 #
 #
 alias dk_errorStatus='{
-	echo "${BASH_SOURCE} ${LINENO}: ERROR_STATUS = $?"
+	echo "${BASH_SOURCE} ${LINENO}: ERROR_STATUS = ${?}"
 }'
 
 

@@ -3,11 +3,11 @@
 # https://stackoverflow.com/a/4017175
 
 misc_tests(){
-	# THIS WORKS when $1 is passed by array[@]	
+	# THIS WORKS when ${1} is passed by array[@]	
 	#local var=(${!1})
 	#dk_arrayPush var ${@:2}
 	
-	array_name=$1
+	array_name=${1}
 	dk_echo "\${array_name} = ${array_name}"		# CMAKE_ARGS
 	
 	array_name=${1}
@@ -53,16 +53,16 @@ takes_array(){
 	#eval local arg1=('${'$1'[@]}')
 	typeset -n arg1=${1}
 
-	echo "array name = $1"
-	echo "$1[@] = ${arg1[@]}"
-	for ((i=0; i < ${#arg1[@]}; i++)); do echo "$1[$i] = ${arg1[$i]}"; done
-	echo "$1 size = ${#arg1[@]}"
+	echo "array name = ${1}"
+	echo "${1}[@] = ${arg1[@]}"
+	for ((i=0; i < ${#arg1[@]}; i++)); do echo "${1}[$i] = ${arg1[$i]}"; done
+	echo "${1} size = ${#arg1[@]}"
 }
 
 returns_array(){
 	local rtn1=("1" "2" "3" "4")
 	
-	eval $1="(${rtn1[@]})"
+	eval ${1}="(${rtn1[@]})"
 	#typeset -n ${1}=rtn1   # Does NOT work
 }
 

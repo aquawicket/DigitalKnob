@@ -29,29 +29,29 @@ dk_pickApp (){
     dk_echo
 	
 	read input
-	if [ "$input" = "1" ]; then
+	if [ "${input}" = "1" ]; then
 		APP="HelloWorld"
-	elif [ "$input" = "2" ]; then
+	elif [ "${input}" = "2" ]; then
 		APP="DKCore"
-	elif [ "$input" = "3" ]; then
+	elif [ "${input}" = "3" ]; then
 		APP="DKJavascript"
-	elif [ "$input" = "4" ]; then
+	elif [ "${input}" = "4" ]; then
 		APP="DKSDL"
-	elif [ "$input" = "5" ]; then
+	elif [ "${input}" = "5" ]; then
 		APP="DKSDLRml"
-	elif [ "$input" = "6" ]; then
+	elif [ "${input}" = "6" ]; then
 		APP="DKDomTest"
-	elif [ "$input" = "7" ]; then
+	elif [ "${input}" = "7" ]; then
 		APP="DKTestAll"
-	elif [ "$input" = "8" ]; then
+	elif [ "${input}" = "8" ]; then
 		dk_enterManually
-	elif [ "$input" = "9" ]; then
+	elif [ "${input}" = "9" ]; then
 		dk_clearScreen
-	elif [ "$input" = "10" ]; then
+	elif [ "${input}" = "10" ]; then
 		UPDATE=
-	elif [ "$input" = "11" ]; then
+	elif [ "${input}" = "11" ]; then
 		dk_call dk_reload
-	elif [ "$input" = "12" ]; then
+	elif [ "${input}" = "12" ]; then
 		dk_exit 0
 	else
 		dk_warning "invalid selection"

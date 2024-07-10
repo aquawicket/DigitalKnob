@@ -16,8 +16,8 @@ dk_hexToVariable (){
 	# 0x1b			- prints as  '\x1b'
 	# ${2//0x/x}	- removes any starting 0 and changes any 0x to x
 
-	#eval "$2=$(printf '\%s' ${1//0x/x})"
-	export $2=$(printf '\%s' ${1//0x/x})
+	#eval "${2}=$(printf '\%s' ${1//0x/x})"
+	export ${2}=$(printf '\%s' ${1//0x/x})
 	dk_printVar "${2}"	
 }
 

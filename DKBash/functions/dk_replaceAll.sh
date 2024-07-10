@@ -10,9 +10,9 @@ dk_replaceAll (){
 	dk_debugFunc
 	[ ${#} -ne 4 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-    input="$1"
-	searchValue="$2"
-	newValue="$3"
+    input="${1}"
+	searchValue="${2}"
+	newValue="${3}"
     output=
 		
     while [ -n "${input}" ]; do
@@ -28,7 +28,7 @@ dk_replaceAll (){
     done
 	
 	dk_printVar output
-	eval "$4='$output'"
+	eval "${4}='${output}'"
 }
 
 

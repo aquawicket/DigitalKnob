@@ -1,5 +1,5 @@
 #!/bin/sh
-#echo "dirname 0/DK.sh = $(dirname $0)/DK.sh"
+#echo "dirname 0/DK.sh = $(dirname ${0})/DK.sh"
 [ -z "${DKINIT-}" ] && . "$(dirname ${0})/DK.sh";
 #[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR}/DK.sh"
 
@@ -35,7 +35,7 @@ ret_val (){
 #alias dk_return='ret_val "${ret_val-}"'
 ##alias dk_return='ret_val '
 #ret_val (){
-#	#echo "ret_val($1, ${2-})"
+#	#echo "ret_val(${1}, ${2-})"
 #	if [ "${1}" = "" ]; then
 #		builtin echo "${2-}"
 #	else

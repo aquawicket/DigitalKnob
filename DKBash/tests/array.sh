@@ -17,7 +17,7 @@ esac
 #
 # Turn arguments into an array.
 array (){
-  for i in "$@" ; do
+  for i in "${@}" ; do
     printf '%s\n' "$i" | array_element_encode
   done
 }
@@ -28,8 +28,8 @@ array (){
 # Pass your array as the first argument:
 #   array_append "$A" 'next' 'another'
 array_append (){
-  printf '%s\n' "$1" && shift &&
-  for i in "$@" ; do
+  printf '%s\n' "${1}" && shift &&
+  for i in "${@}" ; do
     printf '%s\n' "$i" | array_element_encode
   done
 }
@@ -56,10 +56,10 @@ array_len (){
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_nth $index
 array_nth (){
-  printf '%d' "$1" >/dev/null \
-    && "$arrayawkcmd" -v i="$1" '
+  printf '%d' "${1}" >/dev/null \
+    && "$arrayawkcmd" -v i="${1}" '
         BEGIN { code=1 }
-        NR == i + 1 { print $0; code=0 }
+        NR == i + 1 { print ${0}; code=0 }
         END { exit code }
       ' \
     | array_element_decode
@@ -75,9 +75,9 @@ array_nth (){
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_indexof "$element"
 array_indexof (){
-  e=`printf '%s\n' "$1" | array_element_encode` "$arrayawkcmd" '
+  e=`printf '%s\n' "${1}" | array_element_encode` "$arrayawkcmd" '
     BEGIN { e=ENVIRON["e"] ; i = -1 ; code = 1 }
-    i < 0 && e == $0 { i = NR - 1 ; print i ; code = 0 }
+    i < 0 && e == ${0} { i = NR - 1 ; print i ; code = 0 }
     END { exit code }
   '
 }
@@ -92,9 +92,9 @@ array_indexof (){
 # Pipe your array in:
 #   printf '%s\n' "$ary" | array_remove "$element"
 array_remove (){
-  e=`printf '%s\n' "$1" | array_element_encode` "$arrayawkcmd" '
+  e=`printf '%s\n' "${1}" | array_element_encode` "$arrayawkcmd" '
     BEGIN { e=ENVIRON["e"] ; i = -1 ; code = 1 }
-    { if (i < 0 && e == $0) { i = NR - 1 ; code = 0 } else { print $0 } }
+    { if (i < 0 && e == ${0}) { i = NR - 1 ; code = 0 } else { print ${0} } }
     END { exit code }
   '
 }

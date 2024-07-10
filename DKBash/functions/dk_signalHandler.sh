@@ -8,7 +8,7 @@
 #
 dk_signalHandler (){
 	#dk_debugFunc
-	local signal_name="$1"
+	local signal_name="${1}"
 	echo "Signal $signal_name received."
 	continue
 }
@@ -16,7 +16,8 @@ dk_signalHandler (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	#dk_debugFunc
+	
 	dk_signalHandler
 }
 

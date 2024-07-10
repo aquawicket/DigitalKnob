@@ -11,11 +11,11 @@ DK (){
 	
 	###### Initialize Language specifics ######
 	dk_init
-	#dk_echo "DKINIT($*)"
+	#dk_echo "DKINIT(${*})"
 
 
 	###### Reload Main Script with bash ######
-	dk_reloadWithBash $*
+	dk_reloadWithBash ${*}
 
 
 	############ Get DKBASH variables ############
@@ -102,7 +102,7 @@ dk_init(){
 	
 	###### fallback functions ######
 	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
-	dk_commandExists "dk_echo"           || dk_echo()           { echo $*;                                                                                                        }
+	dk_commandExists "dk_echo"           || dk_echo()           { echo ${*};                                                                                                        }
 	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; [$(read -rp "press enter to exit")] || exit;                                 }
 	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}";                                                                         }
 	dk_commandExists "dk_info"           || dk_info()           { dk_echo "${1}";                                                                                                 }
@@ -112,8 +112,8 @@ dk_init(){
 	dk_commandExists "dk_pathExists"     || dk_pathExists()     { [ -e "${1}" ];                                                                                                  }
 	dk_commandExists "dk_stringContains" || dk_stringContains() { [ "${1#*"$2"}" != "${1}" ];                                                                                     }
 	dk_commandExists "dk_unset"          || dk_unset()          { dk_commandExists "unset"    && unset "${1}";                                                                    }
-	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="$2";                                                                }
-	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "$value" ];                                         }
+	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="${2}";                                                                }
+	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "${value}" ];                                         }
 	dk_commandExists "dk_basename"       || dk_basename()       { dk_commandExists "basename" && echo $(basename ${1}) || dk_error "basename is not implemented";                 }
 	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && echo $(dirname ${1})  || dk_error "dirname is not implemented";                  }
 	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && echo $(realpath ${1}) || echo $(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1}); }
@@ -194,7 +194,7 @@ dk_DKSCRIPT_VARS(){
 	dk_pathExists    $(dk_realpath ${0}) && dk_export   DKSCRIPT_PATH   $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
-	dk_export        DKSCRIPT_ARGS       $($*)
+	dk_export        DKSCRIPT_ARGS       $(${*})
 	dk_export        DKSCRIPT_DIR        $(dirname ${DKSCRIPT_PATH})
 	dk_pathExists    "${DKSCRIPT_DIR}"   || dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
 	dk_export        DKSCRIPT_NAME       $(basename ${DKSCRIPT_PATH})
@@ -218,7 +218,7 @@ dk_setOptions(){
 	
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix
-#	case :$SHELLOPTS: in
+#	case :${SHELLOPTS}: in
 #	  *:posix:*) echo "POSIX mode enabled" ;;
 #	  *)         echo "POSIX mode not enabled" ;;
 #	esac
@@ -295,8 +295,8 @@ dk_call(){
 		dk_commandExists ${1}       || dk_load ${1}
 		dk_commandExists ${1}       || dk_error "${1}: command not found"
 	fi
-	#dk_echo "$@"
-	"$@"
+	#dk_echo "${@}"
+	"${@}"
 }
 
 ##################################################################################
@@ -309,8 +309,8 @@ dk_command(){
 	
 	dk_commandExists ${1} || dk_install ${1}
 	dk_commandExists ${1} || dk_error "${1}: command not found"
-	#dk_echo "$@"
-	"$@"
+	#dk_echo "${@}"
+	"${@}"
 }
 
 
@@ -328,7 +328,7 @@ dk_command(){
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 #	set +e; ( set -e
 #		DK
-#	); err_status=$?; set -e
+#	); err_status=${?}; set -e
 #
 #	if [ "${err_status}" -ne "0" ]; then
 #		dk_echo "ERROR_STATUS: ${err_status}"
@@ -339,9 +339,9 @@ dk_command(){
 
 
 #if $(ps -o &>/dev/null);then  
-#	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print $2}')
+#	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print ${2}}')
 #	$echo "    THIS_PATH = $THIS_PATH"
-#	PARENT_PATH=$(ps -o args= $PPID | awk '{print $2}')
+#	PARENT_PATH=$(ps -o args= $PPID | awk '{print ${2}}')
 #	$echo "    PARENT_PATH = $PARENT_PATH"
 #else
 #	#echo "ps -o NOT AVAILABLE"

@@ -9,13 +9,13 @@ dk_echo "TEST"
 dk_info "info"
 dk_debug "debug"
 dk_warning "warning"
-dk_debug "SCRIPT($@)"
+dk_debug "SCRIPT(${@})"
 TEST_VAR="this is a test variable"
 dk_printVar TEST_VAR
 
 ###### main ######
 main (){
-	dk_debug "main($@)"	
+	dk_debug "main(${@})"	
 	dk_echo "\n######################## TEST FIELD ########################\n"
 
 	: '
@@ -27,8 +27,8 @@ main (){
 	# https://www.baeldung.com/linux/find-current-shell
 	dk_echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"
 	dk_echo "cat /proc/\$\$/cmdline = cat /proc/$$/cmdline"
-	dk_echo "\$0 = $0"
-	dk_echo "\$SHELL = $SHELL"
+	dk_echo "\${0} = ${0}"
+	dk_echo "\${SHELL} = ${SHELL}"
 	dk_echo "\$BASH = $BASH"
 	dk_echo "\$PS1 = $PS1"
 	dk_echo "\$PS2 = $PS2"
@@ -106,65 +106,65 @@ main (){
 	dk_echo
 	
 	### if [ ] ###
-	if [   ]; then dk_echo 'if [   ] is $true'; else dk_echo 'if [   ] is $false'; fi
-	if [ 0 ]; then dk_echo "if [ 0 ] is $true"; else dk_echo "if [ 0 ] is $false"; fi
-	if [ 1 ]; then dk_echo "if [ 1 ] is $true"; else dk_echo "if [ 1 ] is $false"; fi
+	if [   ]; then dk_echo 'if [   ] is ${true}'; else dk_echo 'if [   ] is ${false}'; fi
+	if [ 0 ]; then dk_echo "if [ 0 ] is ${true}"; else dk_echo "if [ 0 ] is ${false}"; fi
+	if [ 1 ]; then dk_echo "if [ 1 ] is ${true}"; else dk_echo "if [ 1 ] is ${false}"; fi
 	dk_echo
 
 	### [ -e ] ###
-	[ -e        ] && dk_echo "[ -e        ] is $true" || dk_echo "[ -e        ] is $false"
-	[ -e $BLANK ] && dk_echo "[ -e \$BLANK ] is $true" || dk_echo "[ -e \$BLANK ] is $false"
-	[ -e $HOME  ] && dk_echo "[ -e \$HOME  ] is $true" || dk_echo "[ -e \$HOME  ] is $false"
+	[ -e        ] && dk_echo "[ -e        ] is ${true}" || dk_echo "[ -e        ] is ${false}"
+	[ -e $BLANK ] && dk_echo "[ -e \$BLANK ] is ${true}" || dk_echo "[ -e \$BLANK ] is ${false}"
+	[ -e $HOME  ] && dk_echo "[ -e \$HOME  ] is ${true}" || dk_echo "[ -e \$HOME  ] is ${false}"
 	dk_echo
 
 	################ (BASH ONLY) #################
 	### [[ ]] ### (BASH ONLY) 
-	#           dk_echo "[[   ]] is $error"
-	#[[ 0 ]] && dk_echo "[[ 0 ]] is $true" || dk_echo "[[ 0 ]] is $false"
-	#[[ 1 ]] && dk_echo "[[ 1 ]] is $true" || dk_echo "[[ 1 ]] is $false"
+	#           dk_echo "[[   ]] is ${error}"
+	#[[ 0 ]] && dk_echo "[[ 0 ]] is ${true}" || dk_echo "[[ 0 ]] is ${false}"
+	#[[ 1 ]] && dk_echo "[[ 1 ]] is ${true}" || dk_echo "[[ 1 ]] is ${false}"
 	#dk_echo
 
 	### (( )) ### (BASH ONLY)
-	#((          )) && dk_echo "((          )) is $true" || dk_echo "((          )) is $false"	# sh error
-	#((   0      )) && dk_echo "((   0      )) is $true" || dk_echo "((   0      )) is $false"
-	#((   1      )) && dk_echo "((   1      )) is $true" || dk_echo "((   1      )) is $false"
-	#((  abc     )) && dk_echo "((  abc     )) is $true" || dk_echo "((  abc     )) is $false"
-	#((  v_    )) && dk_echo "((  v_    )) is $true" || dk_echo "((  v_    )) is $false"
-	#((  v_0   )) && dk_echo "((  v_0   )) is $true" || dk_echo "((  v_0   )) is $false"
-	#(( $v_0   )) && dk_echo "(( \$v_0   )) is $true"|| dk_echo "(( \$v_0   )) is $false"
-	#((  v_1   )) && dk_echo "((  v_1   )) is $true" || dk_echo "((  v_1   )) is $false"
-	#(( $v_1   )) && dk_echo "(( \$v_1   )) is $true"|| dk_echo "(( \$v_1   )) is $false"
-	#((  v_abc )) && dk_echo "((  v_abc )) is $true" || dk_echo "((  v_abc )) is $false"
-	#(( $v_abc )) && dk_echo "(( \$v_abc )) is $true"|| dk_echo "(( \$v_abc )) is $false"
-	#((  ' '     )) && dk_echo "((  ' '     )) is $true" || dk_echo "((  ' '     )) is $false"
-	#((  '0'     )) && dk_echo "((  '0'     )) is $true" || dk_echo "((  '0'     )) is $false"
-	#((  '1'     )) && dk_echo "((  '1'     )) is $true" || dk_echo "((  '1'     )) is $false"
-	#((  'abc'   )) && dk_echo "(( 'abc '   )) is $true" || dk_echo "(( 'abc'    )) is $false"
+	#((          )) && dk_echo "((          )) is ${true}" || dk_echo "((          )) is ${false}"	# sh error
+	#((   0      )) && dk_echo "((   0      )) is ${true}" || dk_echo "((   0      )) is ${false}"
+	#((   1      )) && dk_echo "((   1      )) is ${true}" || dk_echo "((   1      )) is ${false}"
+	#((  abc     )) && dk_echo "((  abc     )) is ${true}" || dk_echo "((  abc     )) is ${false}"
+	#((  v_    )) && dk_echo "((  v_    )) is ${true}" || dk_echo "((  v_    )) is ${false}"
+	#((  v_0   )) && dk_echo "((  v_0   )) is ${true}" || dk_echo "((  v_0   )) is ${false}"
+	#(( $v_0   )) && dk_echo "(( \$v_0   )) is ${true}"|| dk_echo "(( \$v_0   )) is ${false}"
+	#((  v_1   )) && dk_echo "((  v_1   )) is ${true}" || dk_echo "((  v_1   )) is ${false}"
+	#(( $v_1   )) && dk_echo "(( \$v_1   )) is ${true}"|| dk_echo "(( \$v_1   )) is ${false}"
+	#((  v_abc )) && dk_echo "((  v_abc )) is ${true}" || dk_echo "((  v_abc )) is ${false}"
+	#(( $v_abc )) && dk_echo "(( \$v_abc )) is ${true}"|| dk_echo "(( \$v_abc )) is ${false}"
+	#((  ' '     )) && dk_echo "((  ' '     )) is ${true}" || dk_echo "((  ' '     )) is ${false}"
+	#((  '0'     )) && dk_echo "((  '0'     )) is ${true}" || dk_echo "((  '0'     )) is ${false}"
+	#((  '1'     )) && dk_echo "((  '1'     )) is ${true}" || dk_echo "((  '1'     )) is ${false}"
+	#((  'abc'   )) && dk_echo "(( 'abc '   )) is ${true}" || dk_echo "(( 'abc'    )) is ${false}"
 	#dk_echo
 
 	### if [[ ]] ### (BASH ONLY)
-	#                dk_echo "if [[   ]] is $error"
-	#if [[ 0 ]]; then dk_echo "if [[ 0 ]] is $true"; else dk_echo "if [[ 0 ]] is $false"; fi
-	#if [[ 1 ]]; then dk_echo "if [[ 1 ]] is $true"; else dk_echo "if [[ 1 ]] is $false"; fi
+	#                dk_echo "if [[   ]] is ${error}"
+	#if [[ 0 ]]; then dk_echo "if [[ 0 ]] is ${true}"; else dk_echo "if [[ 0 ]] is ${false}"; fi
+	#if [[ 1 ]]; then dk_echo "if [[ 1 ]] is ${true}"; else dk_echo "if [[ 1 ]] is ${false}"; fi
 	#dk_echo
 
 	### if (( )) ### (BASH ONLY)
-	#if ((   )); then dk_echo "if ((   )) is $true"; else dk_echo "if ((   )) is $false"; fi    sh error
-	#if (( 0 )); then dk_echo "if (( 0 )) is $true"; else dk_echo "if (( 0 )) is $false"; fi
-	#if (( 1 )); then dk_echo "if (( 1 )) is $true"; else dk_echo "if (( 1 )) is $false"; fi
+	#if ((   )); then dk_echo "if ((   )) is ${true}"; else dk_echo "if ((   )) is ${false}"; fi    sh error
+	#if (( 0 )); then dk_echo "if (( 0 )) is ${true}"; else dk_echo "if (( 0 )) is ${false}"; fi
+	#if (( 1 )); then dk_echo "if (( 1 )) is ${true}"; else dk_echo "if (( 1 )) is ${false}"; fi
 	#dk_echo
 
 	### [[ -e ]] ### (BASH ONLY)
-	#                   dk_echo "[[ -e        ]] is $error"
-	#[[ -e $BLANK ]] && dk_echo "[[ -e \$BLANK ]] is $true" || dk_echo "[[ -e \$BLANK ]] is $false"
-	#[[ -e $HOME  ]] && dk_echo "[[ -e \$HOME  ]] is $true" || dk_echo "[[ -e \$HOME  ]] is $false"
+	#                   dk_echo "[[ -e        ]] is ${error}"
+	#[[ -e $BLANK ]] && dk_echo "[[ -e \$BLANK ]] is ${true}" || dk_echo "[[ -e \$BLANK ]] is ${false}"
+	#[[ -e $HOME  ]] && dk_echo "[[ -e \$HOME  ]] is ${true}" || dk_echo "[[ -e \$HOME  ]] is ${false}"
 	#dk_echo
 
 	### (( -e )) ### (BASH ONLY)
-	#(( -e        )) && dk_echo "(( -e        )) is $true" || dk_echo "(( -e        )) is $false"
-	#(( -e $BLANK )) && dk_echo "(( -e \$BLANK )) is $true" || dk_echo "(( -e \$BLANK )) is $false"
-	#				   dk_echo "(( -e HOME    )) is $error"
-	#				   dk_echo "(( -e \$HOME  )) is $error"
+	#(( -e        )) && dk_echo "(( -e        )) is ${true}" || dk_echo "(( -e        )) is ${false}"
+	#(( -e $BLANK )) && dk_echo "(( -e \$BLANK )) is ${true}" || dk_echo "(( -e \$BLANK )) is ${false}"
+	#				   dk_echo "(( -e HOME    )) is ${error}"
+	#				   dk_echo "(( -e \$HOME  )) is ${error}"
 	#dk_echo
 
 	dk_echo "\n############################################################\n"
@@ -173,45 +173,45 @@ main (){
 }
 
 func_2 (){
-	dk_debug "func_2($@)"
+	dk_debug "func_2(${@})"
 	dk_stacktrace
 }
 
 ###### evaluate() ######
 evaluate (){
-	#dk_debug "evaluate($@)"
+	#dk_debug "evaluate(${@})"
 	export _true="${green}true${clr}"
 	export _false="${red}false${clr}"
 	export _error="${red}!! SYNTAX ERROR !!${clr}"
-	$@ && dk_echo "evaluate($@) is $_true" || dk_echo "evaluate($@) is $_false"
-	return $?
+	${@} && dk_echo "evaluate(${@}) is $_true" || dk_echo "evaluate(${@}) is $_false"
+	return ${?}
 }
 
 test_function (){
-	#dk_debug "test_function($@)"
-	#args=( "$@" )
-	loop_array "$@"
-	exit_code="$?"
+	#dk_debug "test_function(${@})"
+	#args=( "${@}" )
+	loop_array "${@}"
+	exit_code="${?}"
 }
 
 loop_array (){
-	#dk_debug "loop_array($@)"
+	#dk_debug "loop_array(${@})"
 	for I in "${@}"
 	do
-		echo "Param: $I"
+		echo "Param: ${i}"
 	done
 }
 
 escape_quotes (){
-	#dk_debug "escape_quotes($@)"
-	input=$1
+	#dk_debug "escape_quotes(${@})"
+	input=${1}
 	output=$(echo $input  | sed 's/"/\\"/g')
-	eval $2=$output
+	eval ${2}=${output}
 }
 
 
 
-#[ "$@" -ne "" ] && "$@"
-main "$@"
+#[ "${@}" -ne "" ] && "${@}"
+main "${@}"
 
-#exit $?  #exitcode
+#exit ${?}  #exitcode

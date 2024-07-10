@@ -16,7 +16,7 @@ exitfn () {
 trap "exitfn" INT        # Set SIGINT trap to call function.
 
 read -p "What? "         # Ask user for input,
-echo "You said: $REPLY"  #   then echo back.
+echo "You said: ${REPLY}"  #   then echo back.
 
 trap '' SIGINT              # Restore signal handling.
-exec $0
+exec ${0}

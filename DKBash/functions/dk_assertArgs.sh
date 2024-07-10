@@ -22,7 +22,7 @@ dk_assertArgs (){
 	ARGV=($(__ARGV__ 1))
 	minimumArgCount=$(__ARGC__ 1)
 	for ((i=0; i < ${#ARGV[@]}; i++ )); do
-	    [ "${ARGV[$i]}" = "optional" ] && minimumArgCount=$((minimumArgCount-1))
+	    [ "${ARGV[${i}]}" = "optional" ] && minimumArgCount=$((minimumArgCount-1))
 	done
 	echo "dk_assertArgs:minimumArgCount = ${minimumArgCount}"
 	if [ $(__ARGC__ 2) -lt ${minimumArgCount} ]; then

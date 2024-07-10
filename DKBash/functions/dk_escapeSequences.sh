@@ -54,7 +54,7 @@ dk_escapeSequences (){
 #	ASCII_size=${#ASCII[@]}
 #	for (( i=0; i<${ASCII_size}; i++ ));
 #	do
-#		ASCII_SHOW $i
+#		ASCII_SHOW ${i}
 #	done
 #	dk_echo
 
@@ -141,13 +141,13 @@ ASCII_ADD (){
 	HTML=5
 	INFO=6
 	
-	ITEM[$ID]=$2
+	ITEM[$ID]=${2}
 	ITEM[$SYMBOL]=${1}
-	ITEM[$DEC]=$2
-	ITEM[$OCT]=$3
-	ITEM[$HEX]=$4
-	ITEM[$HTML]=$5
-	ITEM[$INFO]=$6
+	ITEM[$DEC]=${2}
+	ITEM[$OCT]=${3}
+	ITEM[$HEX]=${4}
+	ITEM[$HTML]=${5}
+	ITEM[$INFO]=${6}
 	#echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
 
 	ASCII_size=${#ASCII[@]}
@@ -155,11 +155,11 @@ ASCII_ADD (){
 
 	# Associative array
 	#ASCII[$ID,SYMBOL]=${1}
-	#ASCII[$ID,DEC]=$2
-	#ASCII[$ID,OCT]=$3
-	#ASCII[$ID,HEX]=$4
-	#ASCII[$ID,HTML]=$5
-	#ASCII[$ID,INFO]=$6
+	#ASCII[$ID,DEC]=${2}
+	#ASCII[$ID,OCT]=${3}
+	#ASCII[$ID,HEX]=${4}
+	#ASCII[$ID,HTML]=${5}
+	#ASCII[$ID,INFO]=${6}
 	#ASCII_length=$(( ASCII_length + 1 ))
 }
 

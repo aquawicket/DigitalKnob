@@ -15,7 +15,7 @@ dk_builtins (){
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	# call builtin echo exmple
-	builtin echo -n -e "DK: $@\n"
+	builtin echo -n -e "DK: ${@}\n"
 }
 
 

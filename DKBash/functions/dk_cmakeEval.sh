@@ -20,14 +20,14 @@ dk_cmakeEval (){
 	
 	### build cmake command ###
 	set -- #clear the positional parameters
-	[ -n "${DKCOMMAND}" ] && set -- "$@" "-DDKCOMMAND=${DKCOMMAND}" || dk_error "DKCOMMAND is invalid"
-	[ -n "${DKRETURN}" ]  && set -- "$@" "-DDKRETURN=${DKRETURN}"
-	[ -n "${DKVARS}" ]    && set -- "$@" "${DKVARS}"
-	set -- "$@" "-P"
-	set -- "$@" "$DKCMAKE_DIR/DKEval.cmake"
+	[ -n "${DKCOMMAND}" ] && set -- "${@}" "-DDKCOMMAND=${DKCOMMAND}" || dk_error "DKCOMMAND is invalid"
+	[ -n "${DKRETURN}" ]  && set -- "${@}" "-DDKRETURN=${DKRETURN}"
+	[ -n "${DKVARS}" ]    && set -- "${@}" "${DKVARS}"
+	set -- "${@}" "-P"
+	set -- "${@}" "${DKCMAKE_DIR}/DKEval.cmake"
 	
 	### call the cmake command 
-	dk_call "${CMAKE_EXE}" "$@"
+	dk_call "${CMAKE_EXE}" "${@}"
 	
 	### get the return variables
 	if [ -n "${DKRETURN}" ]; then 
@@ -37,7 +37,7 @@ dk_cmakeEval (){
 		fi
 	fi
 
-	#dk_debug return code: $?
+	#dk_debug return code: ${?}
 }
 
 

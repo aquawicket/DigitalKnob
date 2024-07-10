@@ -16,7 +16,7 @@ alias dk_includeGuard='{
 	name="${filename%.*}"
 	eval value=\${include_guard_$name}
 	
-	if [ -n "$value" ]; then
+	if [ -n "${value}" ]; then
 		echo "already included"
 		return 1 2>/dev/null
 		exit 1
@@ -25,7 +25,7 @@ alias dk_includeGuard='{
 	fi
 	
 	#######################################
-	#if [ -n "$value" ]; then
+	#if [ -n "${value}" ]; then
 	#	[ -n "$(echo -e)" ] && dkecho="echo -e" || dkecho="echo"
 	#	$dkecho "[31m dk_includeGuard(): $filename already included [0m"
 	#	return

@@ -9,7 +9,7 @@ __ARG__ (){
 	[ ${#} -eq 0 ] && echo "ERROR: __ARG__() requires at least 1 argument"
 	[ ${#} -gt 2 ] && echo "ERROR: __ARG__(): too many arguments"
 	[ -z ${2-} ] && local frame=0 || local frame=${2}
-	local argN=$1
+	local argN=${1}
 	
 	#ARGC=$(__ARGC__ $frame)
 	ARGC=${BASH_ARGC[${frame}]-}
@@ -19,7 +19,7 @@ __ARG__ (){
 	for (( i=0; i<frame; i++ )); do
 		marker=$(($marker + ${BASH_ARGC[${i}]-}))
 	done
-	local argN=$(($marker+$ARGC-$1-1))
+	local argN=$(($marker+$ARGC-${1}-1))
 
 	local arg=(${BASH_ARGV[${argN}]-})
 	dk_return "${arg}"; return

@@ -17,9 +17,9 @@ dk_move (){
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	local _from_=${1}
-	local _to_=$2
+	local _to_=${2}
 
-	[ "$3" = "OVERWRITE" ] && OVERWRITE=1
+	[ "${3}" = "OVERWRITE" ] && OVERWRITE=1
 	
 	dk_info "Moving $_from_ to $_to_"
 	
@@ -48,14 +48,14 @@ DKTEST(){ ######################################################################
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
-	echo "dk_move test" > $DKDOWNLOAD_DIR/moveMe.file
-	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE
+	echo "dk_move test" > ${DKDOWNLOAD_DIR}/moveMe.file
+	dk_move ${DKDOWNLOAD_DIR}/moveMe.file ${DIGITALKNOB_DIR}/iWasMoved.txt OVERWRITE
 	
 	echo "dk_move test" > moveMe.file
 	dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
-	dk_makeDirectory $DKDOWNLOAD_DIR/moveMe
-	dk_move $DKDOWNLOAD_DIR/moveMe $DIGITALKNOB_DIR/iWasMoved OVERWRITE
+	dk_makeDirectory ${DKDOWNLOAD_DIR}/moveMe
+	dk_move ${DKDOWNLOAD_DIR}/moveMe ${DIGITALKNOB_DIR}/iWasMoved OVERWRITE
 	
 	dk_makeDirectory moveMe
 	dk_move moveMe iWasMoved OVERWRITE

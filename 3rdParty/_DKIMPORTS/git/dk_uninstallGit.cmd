@@ -19,7 +19,7 @@ call dk_source dk_validate
     ::if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL ""
     if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
     if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
-    if not defined GIT_DL goto:eof
+    if not defined GIT_DL call dk_error "GIT_DL is invalid" & goto:eof
 	
     call dk_getBasename %GIT_DL% GIT_DL_FILE
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
@@ -27,7 +27,7 @@ call dk_source dk_validate
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
     
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
-	call dk_set GIT "%DKTOOLS_DIR%\%FIT_FOLDER%"
+	call dk_set GIT "%DKTOOLS_DIR%\%GIT_FOLDER%"
 
 	::FIXME: kill git.exe process
     call dk_remove "%GIT%"

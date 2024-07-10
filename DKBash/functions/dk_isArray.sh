@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-#alias dkreturn='x(){ echo "$1"; return "$1" }; x'
+#alias dkreturn='x(){ echo "${1}"; return "${1}" }; x'
 ##############################################################################
 # dk_isArray(variable) -> rtn_var
 # 

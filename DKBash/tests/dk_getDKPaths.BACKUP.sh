@@ -9,15 +9,15 @@
 dk_get_dkpaths (){
 	dk_debugFunc
 	
-	# [[ $0 != ${BASH_SOURCE} ]] && echo "Script is being sourced" || echo "Script is being run"
+	# [[ ${0} != ${BASH_SOURCE} ]] && echo "Script is being sourced" || echo "Script is being run"
 	
-	#export DKSCRIPT=$0
+	#export DKSCRIPT=${0}
 	#echo "DKSCRIPT = $DKSCRIPT"
-	#export DKSCRIPT_PATH=$(realpath "$0")
+	#export DKSCRIPT_PATH=$(realpath "${0}")
 	#echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	#export DKSCRIPT_DIR=$( cd -- "$(dirname "$0")" &>/dev/null; pwd -P )
+	#export DKSCRIPT_DIR=$( cd -- "$(dirname "${0}")" &>/dev/null; pwd -P )
 	#echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	#export DKSCRIPT_NAME=$(basename "$0")
+	#export DKSCRIPT_NAME=$(basename "${0}")
 	#echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 
 	#echo "BASH_SOURCE = ${BASH_SOURCE}"

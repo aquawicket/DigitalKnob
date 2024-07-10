@@ -27,30 +27,24 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	
 	dk_set myVar "string"
 	dk_info "dk_assert myVar" && dk_assert myVar
-	#dk_info "dk_assert $myVar" && dk_assert $myVar
 	#dk_info "dk_assert ${myVar}" && dk_assert ${myVar}
 
 	dk_set myVarB 15
 	dk_info "dk_assert myVarB" && dk_assert myVarB
-	#dk_info "dk_assert $myVarB" && dk_assert $myVarB
 	#dk_info "dk_assert ${myVarB}" && dk_assert ${myVarB}
 
 	dk_set myVarC " "
 	dk_info "dk_assert myVarC" && dk_assert myVarC
-	#dk_info "dk_assert $myVarC" && dk_assert $myVarC
 	#dk_info "dk_assert ${myVarC}" && dk_assert ${myVarC}
 
 	dk_set myVarD ""
 	dk_info "dk_assert myVarD" && dk_assert myVarD
-	#dk_info "dk_assert $myVarD" && dk_assert $myVarD
 	#dk_info "dk_assert ${myVarD}" && dk_assert ${myVarD}
 
 	myVarE=
 	dk_assert myVarE
-	#dk_assert $myVarE
 	#dk_assert ${myVarE}
 
 	dk_assert noVar
-	#dk_assert $noVar
 	#dk_assert ${noVar}
 }

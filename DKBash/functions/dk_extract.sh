@@ -11,7 +11,7 @@ dk_extract (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#src="${1}"
-	#dest="$2"
+	#dest="${2}"
 	
 	if ! dk_pathExists "${2}"; then
 		dk_makeDirectory "${2}"

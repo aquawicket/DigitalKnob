@@ -9,14 +9,14 @@ dk_validateArgs (){
 	dk_debugFunc
 	#dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
 	#dk_echo "$(__FUNCTION__ 1)($(__ARGV__ 2))"
-	#dk_echo "$(__FUNCTION__ 1)($*)"
+	#dk_echo "$(__FUNCTION__ 1)(${*})"
 	
 	local ARGC=$(__ARGC__ 2)
 	local n=0
 	local minArgs=${#}
 	local maxArgs=${#}
 	
-	for argType in "$@"
+	for argType in "${@}"
 	do
 		if [[ "$argType" =~ "optional:" ]]; then
 			minArgs=$((minArgs-1))
@@ -34,7 +34,7 @@ dk_validateArgs (){
 	[ ${ARGC} -gt ${maxArgs} ] && dk_error "$(__FUNCTION__ 2)($(__ARGV__ 2)): too many arguments:(${ARGC}). The function is expecting a max of ${maxArgs} arguments"
 	[ ${n} -gt $((ARGC-1)) ] && return	
 		
-	for argType in "$@"
+	for argType in "${@}"
 	do	
 		#dk_echo "n = ${n}"
 		#dk_echo "minArgs = ${minArgs}"

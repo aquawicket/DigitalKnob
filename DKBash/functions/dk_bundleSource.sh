@@ -12,7 +12,7 @@ dk_bundleSource (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	file_list=${1}
-	output_file=$2
+	output_file=${2}
 	
 	# dk_load has ;; seperators in it's list.  convert them to single ;
 	dk_replaceAll "$file_list" ";;" ";" file_list

@@ -22,15 +22,15 @@ dk_toVariableInfo (){
 	[ ${#} -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
 	
 	eval "name=\${$1}"
-	$(expr "$name" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return		# ^ as first character is not portable
+	$(expr "${name}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return		# ^ as first character is not portable
 	#$(expr "${name}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return
 	
 	var_name="\${$name}"  #var_name is literal '${VARIABLE}'
-	if dk_defined $name; then
+	if dk_defined ${name}; then
 		eval "value=\${$name}"
-		eval "$1=\"\$var_name = '${value}'\""
+		eval "${1}=\"\$var_name = '${value}'\""
 	else
-		eval "$1=\"\$var_name = ${red}UNDEFINED${clr}\""
+		eval "${1}=\"\$var_name = ${red}UNDEFINED${clr}\""
 	fi
 }
 

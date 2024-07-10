@@ -6,7 +6,7 @@
 #
 __ARGV__ (){
 	#dk_debugFunc
-	[ -z ${1-} ] && local frame=0 || local frame=$1
+	[ -z ${1-} ] && local frame=0 || local frame=${1}
 	
 	local marker=0
 	for (( i=0; i<frame; i++ )); do

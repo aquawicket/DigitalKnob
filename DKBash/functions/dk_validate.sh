@@ -12,8 +12,8 @@ dk_validate (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	#_var_=$1
-	#_code_=$2
+	#_var_=${1}
+	#_code_=${2}
 	[ -n "${!1+x}" ] && return 0
 	
 	#echo "2 = ${2}"

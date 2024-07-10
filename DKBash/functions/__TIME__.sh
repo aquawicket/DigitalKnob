@@ -3,9 +3,9 @@
 
 #from_nano_to_readable (){
 #   (( ${#} )) || { printf '%s\n' 'provide atleast one argument' >&2 ; }
-#    input="$1"
-#    withNano="$(( $input % 1000000000 ))"
-#    withoutNano="$(date -d@"$(( $input / 1000000000 ))" +"%Y-%m-%d-%H:%M:%S")"
+#    input="${1}"
+#    withNano="$(( ${input} % 1000000000 ))"
+#    withoutNano="$(date -d@"$(( ${input} / 1000000000 ))" +"%Y-%m-%d-%H:%M:%S")"
 #    printf '%s\n' "$withoutNano.$withNano"        
 #}
 

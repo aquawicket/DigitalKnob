@@ -11,7 +11,7 @@ dk_getFullPath (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_realpath "${1}" _realpath_
-	eval "$2=${_realpath_}"
+	eval "${2}=${_realpath_}"
 	dk_printVar "${2}"
 }
 

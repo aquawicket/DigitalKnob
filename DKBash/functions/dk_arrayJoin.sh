@@ -13,7 +13,7 @@ dk_arrayJoin (){
 	dk_validateArgs array string optional:rtn_var
 	
 	#_arry_="${1}"
-	#_separator_="$2"
+	#_separator_="${2}"
 	
 	#local arry=("${!1}")
 	typeset -n arry=${1} 

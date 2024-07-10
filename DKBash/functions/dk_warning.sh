@@ -20,7 +20,7 @@ dk_warning (){
 	
 	
 	[ ${ENABLE_dk_warning-1} -ne 1 ] && return
-	msg="$1"
+	msg="${1}"
 	
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	dk_echo "${yellow}${WARNING_TAG-}${msg}${clr}"

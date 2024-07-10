@@ -22,7 +22,7 @@ dk_realpath (){
 		absolutePath=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
 	fi
 	
-	eval "$2=${absolutePath}"
+	eval "${2}=${absolutePath}"
 	dk_printVar "${2}"
 }
 

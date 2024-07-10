@@ -9,9 +9,9 @@
 #
 # usage:
 #   set -- One Two Three Four
-#   myarrayA=$(dk_saveArgs "$@")
+#   myarrayA=$(dk_saveArgs "${@}")
 #   eval "set -- $myarrayA"
-#	echo "$1 $2 $3 $4"
+#	echo "${1} ${2} ${3} ${4}"
 #
 dk_saveArgs (){
 	dk_debugFunc
@@ -60,8 +60,8 @@ test_func (){
 	dk_echo "test_func \${*} = ${*-}"
 
 #	dk_echo
-#	dk_echo "returning args to calling function  'eval \$2=(\${args[@]})'"
-#	eval "$2=(${args[@]})"
+#	dk_echo "returning args to calling function  'eval \${2}=(\${args[@]})'"
+#	eval "${2}=(${args[@]})"
 	
 #	dk_echo
 #	dk_echo "returning args with saved rtn variable to calling function  'eval \${_rtn_val_}=(\${args[@]})'"

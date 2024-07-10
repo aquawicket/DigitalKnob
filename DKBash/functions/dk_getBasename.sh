@@ -12,7 +12,7 @@ dk_getBasename (){
 	
 	basename=$(basename "${1}")
 	dk_printVar basename
-	eval "$2=$basename"
+	eval "${2}=$basename"
 }
 
 

@@ -19,7 +19,7 @@ checkFunc (){
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	args=("$@")
+	args=("${@}")
 	for ((i=0; i < ${#args[@]}; i++ )); do 
 		dk_debug "args[$i] = ${args[$i]}";
 	done
@@ -28,11 +28,11 @@ checkFunc (){
 	C_END=${#args[@]}
 	
 	for i in "${!args[@]}"; do
-		[ $i -eq 0 ]           && A_END=$(( ${args[i]} + i + 1)) && continue
-		[ $i -lt ${A_END} ]    && A_args+=("${args[i]}")         && continue
-		[ $i -eq ${A_END} ]    && B_END=$(( ${args[i]} + i + 1)) && continue
-		[ $i -lt ${B_END} ]    && B_args+=("${args[i]}")         && continue
-		[ $i -lt ${C_END} ]    && C_args+=("${args[i]}")         && continue 
+		[ ${i} -eq 0 ]           && A_END=$(( ${args[i]} + i + 1)) && continue
+		[ ${i} -lt ${A_END} ]    && A_args+=("${args[i]}")         && continue
+		[ ${i} -eq ${A_END} ]    && B_END=$(( ${args[i]} + i + 1)) && continue
+		[ ${i} -lt ${B_END} ]    && B_args+=("${args[i]}")         && continue
+		[ ${i} -lt ${C_END} ]    && C_args+=("${args[i]}")         && continue 
 	done
 	
 	#echo "A_END = ${A_END}"
@@ -60,9 +60,9 @@ checkFunc (){
 # dk_require()
 #
 #
-#alias dk_require='checkFunc ${FUNCNAME} ${#} "$@"'
-#alias dk_require='checkFunc 3 A1 A2 A3 ${#} "$@"' 
+#alias dk_require='checkFunc ${FUNCNAME} ${#} "${@}"'
+#alias dk_require='checkFunc 3 A1 A2 A3 ${#} "${@}"' 
 alias dk_require='
-	args=($@) 
+	args=(${@}) 
 	arrayAsArg "firstArg" args[@] "lastArg"
 '

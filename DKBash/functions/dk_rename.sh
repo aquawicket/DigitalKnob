@@ -16,7 +16,7 @@ dk_rename (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	_from_="${1}"
-	_to_="$2"
+	_to_="${2}"
 	#OVERWRITE=     TODO
 	
 	dk_info "Renameing ${_from_} to ${_to_}"

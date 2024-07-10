@@ -13,7 +13,7 @@ dk_decimalToAscii (){
 	dk_decimalToHex ${1} hex
 	dk_hexToAscii ${hex} ascii
 	
-	eval "$2=${ascii}"
+	eval "${2}=${ascii}"
 	dk_printVar "${2}"
 }
 

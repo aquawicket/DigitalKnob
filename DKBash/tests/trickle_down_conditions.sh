@@ -2,9 +2,9 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
-echo "DKTEST $0 ($*)"
+echo "DKTEST ${0} (${*})"
 #echo "DKTEST = $DKTEST"
-#echo "0 = $0"
+#echo "0 = ${0}"
 #echo "BASH_SOURCE[0] = ${BASH_SOURCE[0]}"
 #echo "BASH_SOURCE[1] = ${BASH_SOURCE[1]}"
 
@@ -47,7 +47,7 @@ echo "DKTEST $0 ($*)"
 # No comments
 #
 if ( [ "$DKTEST" = "" ]                  ||
-     [ "$DKTEST" = "$0" ]                ||
+     [ "$DKTEST" = "${0}" ]                ||
      [ "$DKTEST" = "${BASH_SOURCE[0]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[1]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[2]}" ] ); then
@@ -62,7 +62,7 @@ fi
 # Coments
 #
 #if ( ( [ "$DKTEST" = "" ]                   &&  echo "DKTEST is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
-#       [ "$DKTEST" = "$0" ]                 &&  echo "     0 is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
+#       [ "$DKTEST" = "${0}" ]                 &&  echo "     0 is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[0]}" ]  &&  echo "   bs0 is TRUE:${DKTEST}" )   || ( echo "bs0 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[1]}" ]  &&  echo "   bs1 is TRUE:${DKTEST}" )   || ( echo "bs1 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[2]}" ]  &&  echo "   bs2 is TRUE:${DKTEST}" ) ); then
@@ -77,7 +77,7 @@ fi
 #            echo "DKTEST is TRUE:${DKTEST}" 
 #			            ) || ( 
 #			echo "0 is FALSE:${DKTEST}"
-#       [ "$DKTEST" = "$0" ] &&  
+#       [ "$DKTEST" = "${0}" ] &&  
 #	        echo "0 is TRUE:${DKTEST}" 
 #			            ) || ( 
 #			echo "0 is FALSE:${DKTEST}"
