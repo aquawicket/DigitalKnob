@@ -1,7 +1,7 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
-if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
+call dk_source dk_isAlphanumeric
 ::################################################################################
 ::# dk_printVar(variable)
 ::#
@@ -11,6 +11,7 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
     call dk_debugFunc
     if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
+	if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
 	
 	call dk_isAlphanumeric "%~1" || goto:eof

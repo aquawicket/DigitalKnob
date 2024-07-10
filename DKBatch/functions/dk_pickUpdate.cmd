@@ -18,6 +18,7 @@ call dk_source dk_reload
 call dk_source dk_removeAll
 call dk_source dk_resetAll
 call dk_source dk_set
+call dk_source dk_setTitle
 call dk_source dk_unset
 ::#####################################################################
 ::# dk_pickUpdate()

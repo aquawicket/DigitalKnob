@@ -11,6 +11,7 @@ call dk_source dk_readCache
 call dk_source dk_readCache
 call dk_source dk_reload
 call dk_source dk_set
+call dk_source dk_setTitle
 call dk_source dk_unset
 ::#####################################################################
 ::# dk_pickApp()
