@@ -36,7 +36,7 @@ if(NOT EXISTS "${VCCOMP140_DLL}")
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_DL_FILE}")
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE})
-	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE})
+	dk_command(${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE} /install /quiet /norestart) #/log ${DK3RDPARTY_DIR}/vc_redist_install_log.txt
 endif()
 
 
