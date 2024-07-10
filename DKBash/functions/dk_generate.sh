@@ -160,6 +160,7 @@ dk_generate (){
 	
 	if [ "${TARGET_OS}" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
+		export MSYSTEM=CLANG64
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 	fi
