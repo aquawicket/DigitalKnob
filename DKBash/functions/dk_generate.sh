@@ -69,10 +69,8 @@ dk_generate (){
 	#dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then
-		#dk_getNativePath ${CMAKE_SOURCE_DIR} NATIVE_CMAKE_SOURCE_DIR
 		dk_arrayPush CMAKE_ARGS "-S=${CMAKE_SOURCE_DIR}"
 	fi
-	#dk_getNativePath ${CMAKE_BINARY_DIR} NATIVE_CMAKE_BINARY_DIR
 	dk_arrayPush CMAKE_ARGS "-B=${CMAKE_BINARY_DIR}"
 	
 	############ CMake Options ############
@@ -98,101 +96,82 @@ dk_generate (){
 	fi
 
 	if [ "${TARGET_OS}" = "android_arm64" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles"
 	fi
 	
 	if [ "${TARGET_OS}" = "emscripten" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
 	if [ "${TARGET_OS}" = "ios_arm32" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "ios_arm64" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "iossim_x86" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "iossim_x86_64" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "linux_x86" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
 	if [ "${TARGET_OS}" = "linux_x86_64" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
 	if [ "${TARGET_OS}" = "mac_x86" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "mac_x86_64" ]; then
-		#set -- "-G Xcode" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
 	if [ "${TARGET_OS}" = "raspberry_arm32" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
 	if [ "${TARGET_OS}" = "raspberry_arm64" ]; then
-		#set -- "-G Unix Makefiles" "${@}"
 		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
 	if [ "${TARGET_OS}" = "win_arm64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
-		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=CLANGARM64"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
-		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=CLANG32"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
-		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=MINGW32"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
-		#set -- "-G MSYS Makefiles" "${@}"
-		#dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=CLANG64"
 		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
-		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=MINGW64"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
-		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=UCRT64"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
