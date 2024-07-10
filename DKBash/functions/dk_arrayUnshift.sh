@@ -9,15 +9,15 @@
 #
 dk_arrayUnshift (){
 	dk_debugFunc
-	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array element optional:rtn_var
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#dk_validateArgs array element optional:rtn_var
 	
-	typeset -n array="${1}"
-	array=('${2}' "${array[@]}");
-	eval "${1-}=${array}"
+	typeset -n array=${1}
+	array=(${@:2} ${array[@]});
+	eval ${1}=${array}
 
-	[ ${#} -gt 2 ] && eval "${3}=${array}" 
-	dk_return ${array}; return		# command substitution return
+	#[ ${#} -gt 2 ] && eval "${3}=${array}" 
+	#dk_return ${array}; return		# command substitution return
 }
 
 
@@ -26,11 +26,11 @@ dk_arrayUnshift (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArray[0]="a"
-	myArray[1]="b"
-	myArray[2]="c"
-	myArray[3]="d"
-	myArray[4]="e"
+	myArray[0]=a
+	myArray[1]=b
+	myArray[2]=c
+	myArray[3]=d
+	myArray[4]=e
 	
 	dk_printVar myArray
 	

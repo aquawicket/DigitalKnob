@@ -9,18 +9,18 @@
 #
 dk_arrayLength (){
 	dk_debugFunc
-	#[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	#[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
-	dk_validateArgs array optional:rtn_var
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	#dk_validateArgs array optional:rtn_var
 	
 	typeset -n _array_=${1}
-	local array_length=${#_array_[@]}
+	local arrayLength=${#_array_[@]}
 	
-	#dk_assert array_length
-	#dk_printVar array_length
+	#dk_assert arrayLength
+	#dk_printVar arrayLength
 	
-	[ ${#} -gt 1 ] && eval "${2}=${array_length}"
-	dk_return ${array_length}; return
+	[ ${#} -gt 1 ] && eval "${2}=${arrayLength}"
+	dk_return ${arrayLength}; return
 }
 
 

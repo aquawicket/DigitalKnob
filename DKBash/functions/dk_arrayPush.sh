@@ -15,19 +15,15 @@
 #
 dk_arrayPush (){
 	dk_debugFunc
-	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array element optional:rtn_var
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	#dk_validateArgs array element optional:rtn_var
 	
-	#typeset -n array="${1}"
-	#dk_arrayLength array arrayPush			# parameter variable return
-	if [ -n ${1-} ]; then
-		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
-	fi
-	eval "${1-}[${arrayPush}]=${2}"
+	typeset -n array=${1}
+	array=(${array[@]} ${@:2});
+	eval ${1}=${array}
 
-	#eval "${3}=${arrayPush}"	# parameter variable return
-	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
-	dk_return ${arrayPush}; return		# command substitution return
+	#[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" # parameter variable return
+	#dk_return ${arrayPush}; return		# command substitution return
 }
 
 

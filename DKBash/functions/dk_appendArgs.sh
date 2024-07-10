@@ -7,8 +7,8 @@
 #
 dk_appendArgs (){
 	dk_debugFunc
-	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array element optional:rtn_var
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	#dk_validateArgs array element optional:rtn_var
 	
 	# https://stackoverflow.com/a/38959226
 	

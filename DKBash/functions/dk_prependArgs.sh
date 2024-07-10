@@ -2,23 +2,22 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ####################################################################
-# dk_prependArgs(variable args)
+# dk_prependArgs(array args)
 #
 #
 dk_prependArgs (){
 	dk_debugFunc
-	dk_debugFunc
-	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array element optional:rtn_var
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	#dk_validateArgs array args optional:rtn_var
 	
-	#typeset -n array="${1}"
-	#dk_arrayLength array arrayPush			# parameter variable return
-	if [ -n ${1-} ]; then
-		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
-	fi
-	eval "${1-}[${arrayPush}]=${2}"
+	typeset -n array="${1}"
+	dk_arrayLength array arrayPush			# parameter variable return
+#	if [ -n ${1-} ]; then
+#		local arrayPush=$(dk_arrayLength ${1})		# command substitution return
+#	fi
+	eval ${array}[${arrayPush}]=${2}
 
-	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
+#	[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" 
 	dk_return ${arrayPush}; return		# command substitution return
 }
 
