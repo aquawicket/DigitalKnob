@@ -19,8 +19,8 @@ dk_arrayPush (){
 	#dk_validateArgs array element optional:rtn_var
 	
 	typeset -n array=${1}
-	array=(${array[@]} ${@:2});
-	eval ${1}=${array}
+	array=("${array[@]}" "${@:2}");
+	#dk_printVar array
 
 	#[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" # parameter variable return
 	#dk_return ${arrayPush}; return		# command substitution return
@@ -31,9 +31,6 @@ dk_arrayPush (){
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
-	
-	myArrayA=()				# FIXME - variable must exist for dk_arrayPush to work
-	dk_printVar myArrayA
 	
 	dk_arrayPush myArrayA a
 	dk_printVar myArrayA
@@ -48,21 +45,17 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_printVar myArrayA
 	
 	
-	
-	
-	
-	myArrayB=()				# FIXME - variable must exist for dk_arrayPush to work
-	dk_printVar myArrayB
-	
 	dk_arrayPush myArrayB 1
-	dk_printVar myArrayB
-	
 	dk_arrayPush myArrayB 2
-	dk_printVar myArrayB
-	
 	dk_arrayPush myArrayB 3
-	dk_printVar myArrayB
-	
 	dk_arrayPush myArrayB 4
 	dk_printVar myArrayB
+	
+	
+	dk_arrayPush CMAKE_ARGS cmake
+	dk_arrayPush CMAKE_ARGS -G "MSYS Makefiles"
+	dk_arrayPush CMAKE_ARGS -DDEBUG=ON
+	dk_arrayPush CMAKE_ARGS -DREBUILDALL=ON
+	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
+	dk_printVar CMAKE_ARGS
 }

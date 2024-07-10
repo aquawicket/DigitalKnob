@@ -93,85 +93,85 @@ dk_generate (){
 	
 	if [ "$TARGET_OS" = "android_arm32" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 
 	if [ "$TARGET_OS" = "android_arm64" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles"
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles"
 	fi
 	
 	if [ "$TARGET_OS" = "emscripten" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm32" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "ios_arm64" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "iossim_x86_64" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "linux_x86_64" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "mac_x86_64" ]; then
 		#set -- "-G Xcode" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Xcode"
+		dk_arrayUnshift CMAKE_ARGS -G "Xcode"
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm32" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "raspberry_arm64" ]; then
 		#set -- "-G Unix Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G Unix Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "Unix Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "win_arm64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:$PATH
 		#set -- "-G MSYS Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G MSYS Makefiles" 
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles" 
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:$PATH
 		#set -- "-G MSYS Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G MSYS Makefiles"
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:$PATH
 		#set -- "-G MSYS Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G MSYS Makefiles"
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_clang" ]; then
@@ -179,20 +179,20 @@ dk_generate (){
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		#set -- "-G MSYS Makefiles" "$@"
 		dk_arrayPush CMAKE_ARGS "-DMSYSTEM=CLANG64"
-		dk_arrayUnshift CMAKE_ARGS "-G "MSYS Makefiles""
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:$PATH
 		#set -- "-G MSYS Makefiles" "$@"
-		dk_arrayUnshift CMAKE_ARGS "-G MSYS Makefiles"
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles"
 	fi
 	
 	if [ "$TARGET_OS" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:$PATH
 		#set -- "-G MSYS Makefiles" "$@"
 		dk_arrayPush CMAKE_ARGS "-DMSYSTEM=UCRT64"
-		dk_arrayUnshift CMAKE_ARGS "-G MSYS Makefiles"
+		dk_arrayUnshift CMAKE_ARGS -G "MSYS Makefiles"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
@@ -213,10 +213,10 @@ dk_generate (){
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
-	#dk_echo "CMAKE_ARGS = $*"
-	dk_echo "CMAKE_ARGS = $CMAKE_ARGS"
-	#dk_call "$CMAKE_EXE" "$@" #&& echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
-	dk_call "$CMAKE_EXE" "$CMAKE_ARGS"
+	dk_printVar CMAKE_ARGS
+	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
+	#dk_call "$CMAKE_EXE" ${CMAKE_ARGS[@]} #&& echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
+	${CMAKE_EXE} "${CMAKE_ARGS[@]}" #&& echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo
 }
 

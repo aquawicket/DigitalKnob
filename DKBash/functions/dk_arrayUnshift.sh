@@ -13,8 +13,8 @@ dk_arrayUnshift (){
 	#dk_validateArgs array element optional:rtn_var
 	
 	typeset -n array=${1}
-	array=(${@:2} ${array[@]});
-	eval ${1}=${array}
+	array=("${@:2}" "${array[@]}");
+	#dk_printVar array
 
 	#[ ${#} -gt 2 ] && eval "${3}=${array}" 
 	#dk_return ${array}; return		# command substitution return
@@ -26,24 +26,22 @@ dk_arrayUnshift (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArray=()	# FIXME - variable must exist for dk_arrayUnshift to work
+	dk_arrayUnshift myArray a
 	dk_printVar myArray
 	
-	dk_arrayUnshift myArray 1
+	dk_arrayUnshift myArray b
 	dk_printVar myArray
 	
-	dk_arrayUnshift myArray 2
+	dk_arrayUnshift myArray c
 	dk_printVar myArray
 	
-	dk_arrayUnshift myArray 3
+	dk_arrayUnshift myArray d
 	dk_printVar myArray
-	
-	dk_arrayUnshift myArray 4
-	dk_printVar myArray
-	
-	dk_arrayUnshift myArray 5
-	dk_printVar myArray
-	
-	dk_arrayUnshift myArray 6
-	dk_printVar myArray
+
+
+	dk_arrayUnshift myArrayB 1
+	dk_arrayUnshift myArrayB 2
+	dk_arrayUnshift myArrayB 3
+	dk_arrayUnshift myArrayB 4
+	dk_printVar myArrayB
 }
