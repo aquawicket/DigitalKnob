@@ -73,6 +73,7 @@ dk_load (){
 			#match=${match##*N}   # cut off everything from begining to last N
 				
 			match=${match//'$#'/}					    # remove any $# before removing #comments
+			match=${match//'${#}'/}					    # remove any ${#} before removing #comments
 			match=${match%%#*}						    # remove everything after # (comments)
 			if ! [[ "${match}" =~ [Dd][Kk]_[A-Za-z0-9_]* ]];then  continue; fi	# BASH REGEX MATCH
 			match=${BASH_REMATCH[0]}				    	# BASH REGEX VALUE

@@ -60,8 +60,8 @@ checkFunc (){
 # dk_require()
 #
 #
-#alias dk_require='checkFunc ${FUNCNAME} $# "$@"'
-#alias dk_require='checkFunc 3 A1 A2 A3 $# "$@"' 
+#alias dk_require='checkFunc ${FUNCNAME} ${#} "$@"'
+#alias dk_require='checkFunc 3 A1 A2 A3 ${#} "$@"' 
 alias dk_require='
 	args=($@) 
 	arrayAsArg "firstArg" args[@] "lastArg"

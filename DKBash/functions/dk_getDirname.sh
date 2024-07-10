@@ -11,14 +11,15 @@ dk_getDirname (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	eval "$2=$(dirname "${1}")"
+	eval "${2}=$(dirname "${1}")"
 	dk_printVar "${2}"
 }
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getDirname /usr/bin directory
-	echo "directory = ${directory}"
+	dk_echo "directory = ${directory}"
 }

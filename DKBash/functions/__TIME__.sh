@@ -2,7 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 #from_nano_to_readable (){
-#   (( $# )) || { printf '%s\n' 'provide atleast one argument' >&2 ; }
+#   (( ${#} )) || { printf '%s\n' 'provide atleast one argument' >&2 ; }
 #    input="$1"
 #    withNano="$(( $input % 1000000000 ))"
 #    withoutNano="$(date -d@"$(( $input / 1000000000 ))" +"%Y-%m-%d-%H:%M:%S")"

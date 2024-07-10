@@ -21,22 +21,23 @@ dk_installCmake (){
 	
 	dk_validate HOST_OS "dk_getHostTriple"	
 	######################################################################################################
-	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
-	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
-	[ "${HOST_TRIPLE}" = "win_arm64" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
-	[ "${HOST_TRIPLE}" = "win_x86" ]             && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
+	#[ "${HOST_OS}" = "android" ]                && CMAKE_IMPORT=cmake;						
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
+	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
 	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=${CMAKE_DL_MAC}
 	[ "${HOST_TRIPLE}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
 	[ "${HOST_TRIPLE}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${HOST_TRIPLE}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	#[ "${TARGET_OS}" = "android_arm32" ]        && CMAKE_IMPORT=cmake
-	[ "${TARGET_OS-}" = "win_arm64_clang" ]      && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	[ "${TARGET_OS-}" = "win_x86_clang" ]        && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	[ "${TARGET_OS-}" = "win_x86_mingw" ]        && CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${TARGET_OS-}" = "win_x86_64_clang" ]     && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	[ "${TARGET_OS-}" = "win_x86_64_mingw" ]     && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${TARGET_OS-}" = "win_x86_64_ucrt" ]      && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	#[ "${TARGET_OS-}" = "win_arm64_clang" ]     && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	#[ "${TARGET_OS-}" = "win_x86_clang" ]       && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	#[ "${TARGET_OS-}" = "win_x86_mingw" ]       && CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${TARGET_OS-}" = "win_x86_64_clang" ]    && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${TARGET_OS-}" = "win_x86_64_mingw" ]    && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${TARGET_OS-}" = "win_x86_64_ucrt" ]     && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	[ -z ${CMAKE_IMPORT} ] 						 && CMAKE_IMPORT=cmake  #Default
 	dk_assert CMAKE_IMPORT
 	
 	if dk_isUrl "${CMAKE_IMPORT}"; then
@@ -82,7 +83,7 @@ dk_installCmake (){
 	else	# linux package
 		dk_info "Installing CMake from package managers"
 		
-		dk_commandExists cmake && CMAKE_EXE=$(command -v "cmake")
+		CMAKE_EXE=$(command -v cmake)
 		#dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		#dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		#dk_printVar CMAKE_EXE

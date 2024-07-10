@@ -19,7 +19,7 @@ POWERSHELL_DL_WIN_x86_64=https://github.com/PowerShell/PowerShell/releases/downl
 #
 dk_installPowershell (){
 	dk_debugFunc
-	[ $# -ne 0 ] && dk_error "${FUNCNAME}($#): incorrect number of arguments"
+	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_validate HOST_OS "dk_getHostTriple"
 	######################################################################################################

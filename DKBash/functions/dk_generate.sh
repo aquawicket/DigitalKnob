@@ -26,7 +26,7 @@ dk_generate (){
 	#dk_printVar CMAKE_SOURCE_DIR
 	$(dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_printVar CMAKE_SOURCE_DIR
-	CMAKE_TARGET_PATH=${TARGET_PATH}
+	CMAKE_TARGET_PATH="${TARGET_PATH}"
 	#dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
@@ -68,9 +68,11 @@ dk_generate (){
 	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${TARGET_OS}/${TYPE}"
 	#dk_printVar CMAKE_BINARY_DIR
 	
-	if ! dk_defined WSLENV; then 
+	if ! dk_defined WSLENV; then
+		#dk_getNativePath ${CMAKE_SOURCE_DIR} NATIVE_CMAKE_SOURCE_DIR
 		dk_arrayPush CMAKE_ARGS "-S=${CMAKE_SOURCE_DIR}"
 	fi
+	#dk_getNativePath ${CMAKE_BINARY_DIR} NATIVE_CMAKE_BINARY_DIR
 	dk_arrayPush CMAKE_ARGS "-B=${CMAKE_BINARY_DIR}"
 	
 	############ CMake Options ############
@@ -177,7 +179,8 @@ dk_generate (){
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		#set -- "-G MSYS Makefiles" "${@}"
-		dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=CLANG64"
+		#dk_arrayUnshift CMAKE_ARGS "-G" "MSYS Makefiles" "-DMSYSTEM=CLANG64"
+		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 	fi
 	
 	if [ "${TARGET_OS}" = "win_x86_64_mingw" ]; then
@@ -210,8 +213,7 @@ dk_generate (){
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
-	#dk_printVar CMAKE_ARGS
-	#dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
+	#dk_getNativePath ${CMAKE_EXE} NATIVE_CMAKE_EXE
 	dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo
 }

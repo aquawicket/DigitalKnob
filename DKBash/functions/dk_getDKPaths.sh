@@ -13,8 +13,8 @@ dk_getDKPaths (){
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
+		dk_commandExists "cygpath" && DIGITALKNOB_DIR=$(cygpath -u "${DIGITALKNOB_DIR}")
 		dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
-		dk_replaceAll "${DIGITALKNOB_DIR}" "C:" "/c" DIGITALKNOB_DIR
 	elif [ -n "${HOME-}" ]; then
 		dk_printVar HOME
 		DIGITALKNOB_DIR="${HOME}/digitalknob"
