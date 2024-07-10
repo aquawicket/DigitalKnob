@@ -8,8 +8,9 @@ dk_depend(vc_redist)
 
 dk_validate(HOST "dk_getHostTriple()")
 if(WIN_HOST)
-	dk_load(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
-	dk_assert(VCCOMP140_DLL)
+	dk_load			(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
+	dk_assert		(VCCOMP140_DLL)
+	dk_assertPath	(${VCCOMP140_DLL})
 endif()
 
 

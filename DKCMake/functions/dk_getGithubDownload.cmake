@@ -44,7 +44,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 	if(NOT Lib)
 		dk_printVar(CMAKE_CURRENT_LIST_DIR)
 		dk_getBasename(${CMAKE_CURRENT_LIST_DIR} Lib)
-		dk_printVar(Lib)
+		#dk_printVar(Lib)
 		
 		string(FIND ${url} "github.com" includes)
 		if(${includes} EQUAL -1)
