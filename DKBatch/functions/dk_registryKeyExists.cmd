@@ -6,7 +6,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::
 :dk_registryKeyExists
 	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
 
 	"%SystemRoot%\System32\reg.exe" query "%~1" >nul 2>&1
 	

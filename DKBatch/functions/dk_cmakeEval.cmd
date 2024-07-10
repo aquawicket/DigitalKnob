@@ -7,7 +7,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_cmakeEval
 	call dk_debugFunc
-	if %__ARGC__% GTR 4 call dk_error "%__FUNCTION__%(): too many arguments")
+	if %__ARGC__% GTR 4 call dk_error "%__FUNCTION__%(): too many arguments"
 	
 	
 	setlocal

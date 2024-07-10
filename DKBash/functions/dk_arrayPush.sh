@@ -32,7 +32,10 @@ dk_arrayPush (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArrayA[0]=a				# FIXME - variable must exist for dk_arrayPush to work
+	myArrayA=()				# FIXME - variable must exist for dk_arrayPush to work
+	dk_printVar myArrayA
+	
+	dk_arrayPush myArrayA a
 	dk_printVar myArrayA
 	
 	dk_arrayPush myArrayA b
@@ -44,14 +47,14 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_arrayPush myArrayA d
 	dk_printVar myArrayA
 	
-	dk_arrayPush myArrayA f
-	dk_printVar myArrayA
 	
 	
 	
 	
+	myArrayB=()				# FIXME - variable must exist for dk_arrayPush to work
+	dk_printVar myArrayB
 	
-	myArrayB[0]=1				# FIXME - variable must exist for dk_arrayPush to work
+	dk_arrayPush myArrayB 1
 	dk_printVar myArrayB
 	
 	dk_arrayPush myArrayB 2
@@ -61,8 +64,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_printVar myArrayB
 	
 	dk_arrayPush myArrayB 4
-	dk_printVar myArrayB
-	
-	dk_arrayPush myArrayB 5
 	dk_printVar myArrayB
 }

@@ -14,7 +14,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_color
 	call dk_debugFunc
-	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments")
+	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
 
 	set "USE_COLOR=1"
 	if defined %1 if %1 equ 0 call dk_unset USE_COLOR 

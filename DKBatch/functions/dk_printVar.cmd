@@ -33,8 +33,8 @@ if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
     set "_ptr_=%~1"
 	call dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
     call set "_ptrB_=%%%_ptr_%%%"
-	call dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
-    ::if not defined "%_ptrB_%" goto:variable
+	::call dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
+    if not defined "%_ptrB_%" goto:variable
     set "_ptrvalue_=%%%_ptrB_%%%"
     call dk_echo "%cyan% POINTER:%_ptr_% = %_ptrB_% =%blue% %_ptrvalue_% %clr%"
     endlocal

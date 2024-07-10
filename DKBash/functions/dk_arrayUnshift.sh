@@ -26,12 +26,7 @@ dk_arrayUnshift (){
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	myArray[0]=a
-	myArray[1]=b
-	myArray[2]=c
-	myArray[3]=d
-	myArray[4]=e
-	
+	myArray=()	# FIXME - variable must exist for dk_arrayUnshift to work
 	dk_printVar myArray
 	
 	dk_arrayUnshift myArray 1

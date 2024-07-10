@@ -39,7 +39,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::
 :dk_registryDeleteKey
 	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
 
 	call dk_registryKeyExists "%~1" || dk_warning "%~1 does not exist"
 	

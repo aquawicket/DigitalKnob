@@ -12,7 +12,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#    
 :dk_killProcess
 	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments")
+	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
 		
 		
 	set "process=%~1"

@@ -9,7 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_runAsTI
 	call dk_debugFunc
-	if %__ARGC__% NEQ 1 call dk_error "%__FUNCTION__%(): not enough arguments")
+	if %__ARGC__% NEQ 1 call dk_error "%__FUNCTION__%(): not enough arguments"
 	
 	set ^ #=
 	set "0=%~f0"

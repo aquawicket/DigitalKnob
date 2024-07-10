@@ -97,7 +97,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
 	
 	::set "indent="%indent% L "
-	set "indent=" L "
+	set "indent=-^> "
 	
 	set "ESC="
 	set "cyan=%ESC%[36m"
@@ -105,8 +105,9 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set "clr=%ESC%[0m"
 	
 	set "__LINE__=0"
-	::echo %indent%%cyan%%__FILE__%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
-	echo %indent%%cyan%%blue%%__FUNCTION__%%clr%
+	for %%Z in ("%__FILE__%") do set "basename=%%~nxZ"
+	echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
+	::echo %indent%%blue%%__FUNCTION__%%clr%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
 goto:eof
 
