@@ -19,15 +19,15 @@ dk_generate (){
 	dk_deleteTempFiles
 
 	TARGET_PATH="${DKAPPS_DIR}"/"${APP}"
-	dk_printVar TARGET_PATH
+	#dk_printVar TARGET_PATH
 	dk_makeDirectory "${TARGET_PATH}"/"${TARGET_OS}"
 	cd "${TARGET_PATH}"/"${TARGET_OS}"
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
-	dk_printVar CMAKE_SOURCE_DIR
-	$(dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_error "CMAKE_SOURCE_DIR does not exist"
-	dk_printVar CMAKE_SOURCE_DIR
+	#dk_printVar CMAKE_SOURCE_DIR
+	$(dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
+	#dk_printVar CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH=${TARGET_PATH}
-	dk_printVar CMAKE_TARGET_PATH
+	#dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
 	DKLEVEL="RebuildAll"
@@ -66,7 +66,7 @@ dk_generate (){
 	fi
 	
 	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${TARGET_OS}/${TYPE}"
-	dk_printVar CMAKE_BINARY_DIR
+	#dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_defined WSLENV; then 
 		dk_arrayPush CMAKE_ARGS "-S=${CMAKE_SOURCE_DIR}"
@@ -210,8 +210,8 @@ dk_generate (){
 	
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
-	dk_printVar CMAKE_ARGS
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
+	#dk_printVar CMAKE_ARGS
+	#dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
 	dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo
 }

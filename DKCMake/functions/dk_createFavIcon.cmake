@@ -11,10 +11,10 @@ function(dk_createFavIcon inpath outpath)
 	dk_debugFunc(${ARGV})
 	
 	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
-	if(IMAGEMAGICK_CONVERT)
-		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -define icon:auto-resize=16 ${outpath})
+	if(IMAGEMAGICK_CONVERT_EXE)
+		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=16 ${outpath})
 	else()
-		dk_error("IMAGEMAGICK_CONVERT is invalid!")
+		dk_error("IMAGEMAGICK_CONVERT_EXE is invalid!")
 	endif()
 endfunction()
 
