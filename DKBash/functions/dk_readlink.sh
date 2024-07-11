@@ -12,15 +12,22 @@
 #
 dk_readlink (){
 	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	
 
 	# test $(readlink -f "%2")
-	# fallback on the code below upon failure
-echo "if $(readlink -f "${2}"); then"	
-	if $(readlink -f "${2}"); then
-		echo $(readlink -f "${2}")
-	else
-		echo "dk_readlink"
+	# fallback on the code below upon failure	
+#	if $(readlinkbob -f "${2}"); then
+#		dk_echo "using readlink -f ${2}"
+#		builtin echo $(readlink -f "${2}")
+#		
+#	elif $(readlink "${2}"); then
+#		dk_echo "using readlink ${2}"
+#		
+#		builtin echo $(readlink "${2}")
+#	else
+		dk_echo "using dk_readlink -f ${2}"
 		target_file=${2}   # we expect to use a -f parameter, so use ${2} as the input path.
 
 		cd $(dirname $target_file)
@@ -38,8 +45,8 @@ echo "if $(readlink -f "${2}"); then"
 		# for the directory we're in and appending the target file.
 		phys_dir=$(pwd -P)
 		readlinkPath=$phys_dir/$target_file
-		echo $readlinkPath
-	fi
+		builtin echo $readlinkPath
+#	fi
 	#eval "${2}=${readlinkPath}"
 	#dk_printVar "${2}"
 }

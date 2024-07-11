@@ -11,8 +11,10 @@ dk_getShellType (){
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#PID_EXE=$(readlink /proc/$$/exe);
+	#PID_EXE=$(dk_readlink /proc/$$/exe);
 	#DKSHELL=${PID_EXE##*/};           
-	[ -d "/proc" ] && DKSHELL=$(basename $(readlink /proc/$$/exe))
+	#[ -d "/proc" ] && DKSHELL=$(basename $(readlink /proc/$$/exe))
+	[ -d "/proc" ] && DKSHELL=$(basename $(dk_readlink /proc/$$/exe))
 	[ "${SHELL}" = "/bin/zsh" ] && DKSHELL="zsh"
 	[ $DKSHELL = sh ] && export DKSH=1
 	[ $DKSHELL = dash ] && export DKDASH=1

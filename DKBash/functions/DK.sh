@@ -272,14 +272,13 @@ dk_source(){
 	#dk_debugFunc
 	
 	dk_stringContains ${1} ".sh"  && local funcPath=${1}              ||      local funcPath=${1}.sh
-	dk_pathExists "${funcPath}" && funcPath="${funcPath}"
-	dk_pathExists "${PWD}/$(basename $funcPath)"                  && funcPath="${PWD}/$(basename $funcPath)"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)" && funcPath="${DKBASH_FUNCTIONS_DIR}/$(basename $funcPath)"
+	dk_pathExists "${funcPath}" && local funcPath="${funcPath}"
+	dk_pathExists "${PWD}/$(basename ${funcPath})"                  && local funcPath="${PWD}/$(basename ${funcPath})"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})"
 	dk_pathExists "${funcPath}" || dk_error "Unable to fine funcPath:${funcPath}"
-	#echo "funcPath = $funcPath"
-	chmod 777 $funcPath
-	. $funcPath
+	chmod 777 ${funcPath}
+	. ${funcPath}
 }
 
 ##################################################################################
@@ -292,8 +291,8 @@ dk_call(){
 	
 	if ! dk_commandExists "${1}"; then
 		dk_commandExists dk_load  || dk_source dk_load
-		dk_commandExists ${1}       || dk_load ${1}
-		dk_commandExists ${1}       || dk_error "${1}: command not found"
+		dk_commandExists ${1}     || dk_load ${1}
+		dk_commandExists ${1}     || dk_error "${1}: command not found"
 	fi
 	#dk_echo "${@}"
 	"${@}"
@@ -314,7 +313,9 @@ dk_command(){
 }
 
 
-    DK
+##################################################################################
+# run DK() function
+DK
 
 
 
@@ -328,7 +329,7 @@ dk_command(){
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 #	set +e; ( set -e
 #		DK
-#	); err_status=${?}; set -e
+#	); local err_status=${?}; set -e
 #
 #	if [ "${err_status}" -ne "0" ]; then
 #		dk_echo "ERROR_STATUS: ${err_status}"

@@ -5,7 +5,9 @@
 # dk_arrayAt(array, index)
 # dk_arrayAt(array, index, rtn_var)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
+#	The dk_arrayAt method takes an array instance with an integer value and returns the item at that index, 
+#	allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
+#
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 dk_arrayAt (){
@@ -20,9 +22,11 @@ dk_arrayAt (){
 	dk_printVar arrayAt
 	
 	# return value
-	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}"
-	dk_return ${arrayAt}; return
+	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}"	# return using parameter rtn_var
+	dk_return ${arrayAt}; return				# return through command substitution 
 }
+
+
 
 
 
@@ -36,10 +40,8 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[3]="d"
 	myArrayA[4]="e"
 	
-	#dk_arrayAt myArrayA 3 elementA
-	elementA=$(dk_arrayAt myArrayA 3)
+	elementA=$(dk_arrayAt myArrayA 3)	# return through command substitution 
 	dk_echo "elementA = ${elementA}"
-	
 	
 	
 	
@@ -49,7 +51,6 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayB[3]="4"
 	myArrayB[4]="5"
 	
-	dk_arrayAt myArrayB 3 elementB
-	#elementB=$(dk_arrayAt myArrayB 3)
+	dk_arrayAt myArrayB 3 elementB		# return using third parameter rtn_var
 	dk_echo "elementB = ${elementB}"
 }

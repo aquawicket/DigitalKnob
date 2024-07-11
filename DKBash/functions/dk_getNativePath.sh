@@ -23,8 +23,8 @@ dk_getNativePath (){
 		dk_printVar ret_val
 		
 		#dk_fixme("MacOS readlink has no -f parameter"); return
-		dk_return "$(readlink -f "${1}")"; return
-		#dk_return "$(dk_readlink -f "${1}")"; return
+		#dk_return "$(readlink -f "${1}")"; return
+		dk_return "$(dk_readlink -f "${1}")"; return
 	fi
 }
 

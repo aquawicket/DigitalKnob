@@ -14,8 +14,8 @@ dk_realpath (){
 	local absolutePath=""
 	if dk_commandExists readlink; then
 		#dk_fixme("MacOS readlink has no -f parameter")
-		absolutePath=$(readlink -f "${1}") || true
-		#absolutePath=$(dk_readlink -f "${1}") || true
+		#absolutePath=$(readlink -f "${1}") || true
+		absolutePath=$(dk_readlink -f "${1}") || true
 	elif dk_commandExists realpath; then
 		absolutePath=$(realpath "${1}")
 	else	

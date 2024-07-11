@@ -2,9 +2,12 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
+# dk_arrayCopyWithin(array, target, start)
 # dk_arrayCopyWithin(array, target, start, end)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_copywithin
+#	The dk_arrayCopyWithin() method copies part of this array to another location
+#   in the same array and returns this array without modifying its length.
+#
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 #
 dk_arrayCopyWithin (){

@@ -2,9 +2,11 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
-# dk_arrayConcat(array, value1, value2, /* …, */ valueN)
+# dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
+# dk_arrayConcat(array, {value1, value2, /* …, */ valueN}, rtn_var)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_concat
+#	The dk_arrayConcat() method is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+#
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
 dk_arrayConcat (){
@@ -17,8 +19,8 @@ dk_arrayConcat (){
 	new_array=("${arrayA[@]}" "${arrayB[@]}");
 	dk_printVar new_array
 	
-	[ ${#} -gt 2 ] && eval "${3}=${new_array}" 
-	dk_return ${new_array}; return		# command substitution return
+	[ ${#} -gt 2 ] && eval "${3}=${new_array}" 		# return using parameter rtn_var
+	dk_return ${new_array}; return					# return through command substitution 
 }
 
 
