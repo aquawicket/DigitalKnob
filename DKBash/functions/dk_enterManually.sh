@@ -16,11 +16,11 @@ dk_enterManually (){
 	APP="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if test -f "$DKIMPORTS_DIR"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=$DKIMPORTS_DIR/${input}
+	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKIMPORTS_DIR}/${input}
 	fi
-	if test -f "$DKPLUGINS_DIR"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=$DKPLUGINS_DIR/${input}
+	if test -f "${DKPLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKPLUGINS_DIR}/${input}
 	fi
 	if test -f "$DKAPPS_DIR"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=$DKAPPS_DIR/${input}

@@ -155,7 +155,7 @@ dk_DKBASH_VARS(){
 	dk_export DKBASH_DIR           $( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
-	chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
+	dk_call ${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
 	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
 
 	###### set true and false variables ######

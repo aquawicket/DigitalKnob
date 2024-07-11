@@ -73,22 +73,22 @@ get_model (){
 
 ###### get_machtype ######
 get_machtype (){
-	DKMACHTYPE=$MACHTYPE
+	DKMACHTYPE=${MACHTYPE}
 	dk_printVar DKMACHTYPE
 }
 
 ###### get_lang ######
 get_lang (){
-	DKLANG=$LANG
+	DKLANG=${LANG}
 	dk_printVar DKLANG
 }
 
 ###### get_username ######
 get_username (){
-	if [ -n "$USER" ]; then
-		DKUSERNAME=$USER
-	elif [ -n "$USERNAME" ]; then
-		DKUSERNAME=$USERNAME
+	if [ -n "${USER}" ]; then
+		DKUSERNAME=${USER}
+	elif [ -n "${USERNAME}" ]; then
+		DKUSERNAME=${USERNAME}
 	fi
 	dk_printVar DKUSERNAME
 }

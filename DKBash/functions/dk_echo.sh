@@ -9,8 +9,8 @@ if [ "${OVERWRITE_echo-}" = "1" ]; then
 	echo (){
 		#[ -z ${ESCAPES-} ]      && export ESCAPES=1
 		#[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
-		#[ "$ESCAPES" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
-		#[ "$NO_NEWLINE" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
+		#[ "${ESCAPES}" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
+		#[ "${NO_NEWLINE}" = "1" ] && [ "$(builtin echo -n)" = "" ] && export nonewline="-n "
 		
 		#args=${@:1:$#-1}
 		if [ "${@:$#}" = "-e" ]; then
@@ -35,8 +35,8 @@ dk_echo (){
 #	# https://linuxcommand.org/lc3_man_pages/echoh.html
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
 	[ -z ${NO_NEWLINE-} ]   && export NO_NEWLINE=0
-	[ "$ESCAPES" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
-	[ "$NO_NEWLINE" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
+	[ "${ESCAPES}" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
+	[ "${NO_NEWLINE}" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
 
 	msg=${1-}
 	msg=${msg//\\/\\\\}    # replace all exscapes

@@ -15,8 +15,8 @@ dk_bundleSource (){
 	output_file=${2}
 	
 	# dk_load has ;; seperators in it's list.  convert them to single ;
-	dk_replaceAll "$file_list" ";;" ";" file_list
-	echo file_list = $file_list
+	dk_replaceAll "${file_list}" ";;" ";" file_list
+	echo file_list = ${file_list}
 	dk_pause
 	
 

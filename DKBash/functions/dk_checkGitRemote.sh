@@ -16,9 +16,9 @@ dk_checkGitRemote (){
 		cd "${DKBRANCH_DIR}"
 		${GIT_EXE} remote update
 		branch=$(${GIT_EXE} rev-parse --abbrev-ref HEAD)
-		ahead=$(${GIT_EXE} rev-list --count origin/$branch..$branch)
-		behind=$(${GIT_EXE} rev-list --count $branch..origin/$branch)
-		dk_info "$ahead commits ahead, $behind commits behind"
+		ahead=$(${GIT_EXE} rev-list --count origin/${branch}..${branch})
+		behind=$(${GIT_EXE} rev-list --count ${branch}..origin/${branch})
+		dk_info "${ahead} commits ahead, ${behind} commits behind"
 	fi
 }
 

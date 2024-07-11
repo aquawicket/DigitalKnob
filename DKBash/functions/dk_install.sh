@@ -22,7 +22,7 @@ dk_install (){
 	# https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 	
 	if dk_commandExists apk; then
-		dk_call ${dksudo} apk add "${1}"						# Alpine Package Keeper (alpine linux)
+		dk_call ${dksudo} apk add "${1}"					# Alpine Package Keeper (alpine linux)
 	elif dk_commandExists apt-get; then
 		dk_call ${dksudo} apt-get -y install "${1}"			# Apt-get (debian)
 	elif dk_commandExists apt; then	
@@ -30,7 +30,7 @@ dk_install (){
 	elif dk_commandExists brew; then	
 		dk_call ${dksudo} brew install "${1}"				# Homebrew (MacOS)
 	elif dk_commandExists dnf; then
-		dk_call ${dksudo} dnf install "${1}"					# Dnf (yum)
+		dk_call ${dksudo} dnf install "${1}"				# Dnf (yum)
 	elif dk_commandExists emerge; then	
 		dk_call ${dksudo} emerge "${1}"						# Portage
 	elif dk_commandExists nix-env; then	
@@ -38,7 +38,7 @@ dk_install (){
 	elif dk_commandExists ohpm; then	
 		dk_call ${dksudo} ohpm install "${1}"				# Ohpm
 	elif dk_commandExists pkg; then
-		dk_call ${dksudo} pkg install "${1}"					# Termux
+		dk_call ${dksudo} pkg install "${1}"				# Termux
 	elif dk_commandExists pacman; then
 		dk_call ${dksudo} pacman -S "${1}" --noconfirm		# Pacman
 	elif dk_commandExists swupd; then

@@ -66,10 +66,10 @@ dk_get_dkpaths (){
 			export DKCMAKE=$(basename $DKCMAKE_DIR)
 			# digitalknob/branch/DKDocs
 			export DKDOCS_DIR=${DKBRANCH_DIR}/DKDocs
-			export DKDOCS=$(basename $DKDOCS_DIR)
+			export DKDOCS=$(basename ${DKDOCS_DIR})
 			# digitalknob/branch/DKPlugins
 			export DKPLUGINS_DIR=${DKBRANCH_DIR}/DKPlugins
-			export DKPLUGINS=$(basename $DKPLUGINS_DIR)
+			export DKPLUGINS=$(basename ${DKPLUGINS_DIR})
 		# digitalknob/DKTools
 		export DKTOOLS_DIR=${DIGITALKNOB_DIR}/DKTools
 		export DKTOOLS=$(basename ${DKTOOLS_DIR})

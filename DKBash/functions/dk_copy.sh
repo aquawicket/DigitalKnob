@@ -16,8 +16,8 @@ dk_copy (){
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
-	_from_="${1}"
-	_to_="${2}"
+	local _from_="${1}"
+	local _to_="${2}"
 	if [ "${3}" = "OVERWRITE" ]; then
 		OVERWRITE=1
 	else 

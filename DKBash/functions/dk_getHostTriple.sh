@@ -78,10 +78,10 @@ dk_getHostTriple (){
 		[ -z ${HOST_ENV-} ]    && HOST_ENV=${GCC_ENV}       && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
-		BASH_TRIPLE=$(bash -c "builtin echo \$MACHTYPE")
+		BASH_TRIPLE=$(bash -c "builtin echo \${MACHTYPE}")
 		dk_printVar BASH_TRIPLE
 
-		remainder="$BASH_TRIPLE"
+		remainder="${BASH_TRIPLE}"
 		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ARCH
 		

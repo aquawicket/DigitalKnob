@@ -1615,7 +1615,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installMsys2(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/msys2/DKMAKE.cmake')" "MSYS2"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/msys2/DKMAKE.cmake')" "MSYS2"
 #	dk_printVar MSYS2
 #}
 
@@ -1628,7 +1628,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installMake(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 #	dk_printVar MAKE_PROGRAM
 #}
 
@@ -1641,7 +1641,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installEmscripten(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
 #	dk_printVar EMSDK
 #	dk_printVar EMSDK_ENV
 #	dk_printVar EMSDK_GENERATOR
@@ -1659,7 +1659,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installAndroidNdk(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_GENERATOR;ANDROID_TOOLCHAIN_FILE;ANDROID_API;ANDROID_MAKE_PROGRAM;ANDROID_C_COMPILER;ANDROID_CXX_COMPILER"
 #	dk_printVar ANDROID_NDK
 #	dk_printVar ANDROID_GENERATOR
 #	dk_printVar ANDROID_TOOLCHAIN_FILE
@@ -1678,7 +1678,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installClang(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
 #	dk_printVar CLANG_C_COMPILER
 #	dk_printVar CLANG_CXX_COMPILER
 #}
@@ -1692,7 +1692,7 @@ dk_deleteTempFiles (){
 #	dk_verbose "dk_installGcc(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
 #	dk_printVar GCC_C_COMPILER
 #	dk_printVar GCC_CXX_COMPILER
 #}
@@ -1995,11 +1995,11 @@ dk_enterManually (){
 	APP="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	if test -f "$DKIMPORTS_DIR"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=$DKIMPORTS_DIR/${input}
+	if test -f "${DKIMPORTS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKIMPORTS_DIR}/${input}
 	fi
-	if test -f "$DKPLUGINS_DIR"/"${input}"/DKMAKE.cmake; then
-		TARGET_PATH=$DKPLUGINS_DIR/${input}
+	if test -f "${DKPLUGINS_DIR}"/"${input}"/DKMAKE.cmake; then
+		TARGET_PATH=${DKPLUGINS_DIR}/${input}
 	fi
 	if test -f "${DKAPPS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKAPPS_DIR}/${input}
@@ -2055,19 +2055,19 @@ dk_readCache (){
 	dk_echo "reading cache..."
 	count=0
 	while read p; do
-		if [ "$count" = "0" ]; then 
+		if [ "${count}" = "0" ]; then 
 			_APP_=$(echo "$p" | tr -d '\r')
 			#dk_printVar _APP_
 		fi
-		if [ "$count" = "1" ]; then
+		if [ "${count}" = "1" ]; then
 			_TARGET_OS_=$(echo "$p" | tr -d '\r')
 			#dk_printVar _TARGET_OS_ 
 		fi
-		if [ "$count" = "2" ]; then
+		if [ "${count}" = "2" ]; then
 			_TYPE_=$(echo "$p" | tr -d '\r')
 			#dk_printVar _TYPE_
 		fi
-		#if [ "$count" = "3" ]; then
+		#if [ "${count}" = "3" ]; then
 		#	_DKENV_=$(echo $p | tr -d '\r')
 		#	#dk_printVar _DKENV_
 		#fi
@@ -2158,16 +2158,16 @@ dk_getHostTriple (){
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$CLANG_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$CLANG_ARCH && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$CLANG_VENDOR && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$CLANG_OS && dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$CLANG_ENV && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${CLANG_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=${CLANG_OS} && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${CLANG_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
 
-		remainder="$GCC_TRIPLE"
+		remainder="${GCC_TRIPLE}"
 		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ARCH
 		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
@@ -2177,17 +2177,17 @@ dk_getHostTriple (){
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$GCC_TRIPLE && dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$GCC_ARCH && dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$GCC_VENDOR && dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ] && HOST_OS=$GCC_OS && dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ] && HOST_ENV=$GCC_ENV && dk_printVar HOST_ENV
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${GCC_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=${GCC_OS} && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${GCC_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
-		BASH_TRIPLE=$(bash -c "echo \$MACHTYPE")
+		BASH_TRIPLE=$(bash -c "echo \${MACHTYPE}")
 		dk_printVar BASH_TRIPLE
 
-		remainder="$BASH_TRIPLE"
+		remainder="${BASH_TRIPLE}"
 		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ARCH
 		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
