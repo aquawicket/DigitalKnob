@@ -32,6 +32,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	:: Step 5 - Set WSL 2 as your default version
 	wsl --set-default-version 2
 	
+	goto:eof
 	:: Step 6 - Install your Linux distribution of choice
 	call dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
 	call dk_echo   
