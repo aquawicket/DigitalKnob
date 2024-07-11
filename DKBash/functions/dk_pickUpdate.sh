@@ -36,6 +36,19 @@ dk_pickUpdate (){
 		dk_echo "10) Exit"
 		dk_echo
 		dk_echo " Press Enter To Skip"
+		
+		#dk_echo " 1) Git Update \n   
+		#          2) Git Commit \n
+		#          3) Push assets \n
+		#          4) Pull assets \n
+		#          5) Reset All \n
+		#          6) Remove All \n
+		#          7) Clear Screen \n
+		#          8) Clear cmake cache and .tmp files \n
+		#          9) Reload \n
+		#         10) Exit"
+		#dk_echo
+		#dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
