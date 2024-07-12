@@ -11,11 +11,13 @@ call dk_source dk_error
 ::#
 :dk_appendArgs
 	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
-	call set %1=%%%~1%% "%ALL_BUT_FIRST%"
+	
+	if defined %~1 call set "%1=%%%~1%% %ALL_BUT_FIRST%"
+	if not defined %~1 call set "%1=%ALL_BUT_FIRST%"
+	
 	::call echo %1 = %%%1%%
 goto:eof
 
@@ -26,9 +28,14 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_echo "myVar = %myVar%"
-	call dk_appendArgs myVar "abc"
-	call dk_echo "myVar = %myVar%"
-	call dk_appendArgs myVar "zyx"
-	call dk_echo "myVar = %myVar%"
+	::call dk_echo "myVar = '%myVar%'"
+	call dk_printVar myVar
+	
+	call dk_appendArgs myVar 123 abc
+	::call dk_echo "myVar = '%myVar%'"
+	call dk_printVar myVar
+	
+	call dk_appendArgs myVar 456 zyx
+	::call dk_echo "myVar = '%myVar%'"
+	call dk_printVar myVar
 goto:eof
