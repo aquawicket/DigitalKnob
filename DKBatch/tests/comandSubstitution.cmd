@@ -25,33 +25,21 @@ set ")=echo :%subfunc%"
 	set ver=&call :funcA
 	echo ver = %ver%
 	
-	
-
 	set "start=&call :start "
 
-	echo loading %start%dk_test%end%
-	call dk_echo "startB = %start%:dk_test%end%"
+	echo loading %start%dk_test
+	call dk_echo "start = before %start%!dk_test!%end% after"
 	
 	pause
 goto:eof
 
 
-	
 :funcA
 	set ver=&for /f "usebackq tokens=*" %%a in (`ver`) do set "ver=%%a"
 goto:eof
 
 :start
-	::set start=&for /f "usebackq tokens=*" %%a in (`%~1`) do set "end=%%a"
-	for /f "usebackq tokens=*" %%a in (`%1`) do set "start=%%a&"
+	set start=&for /f "usebackq tokens=*" %%a in (`%1`) do set "end=%%a"
 goto:eof
 
 
-
-:cmnd
-	set ver=&for /f "usebackq tokens=*" %%a in (`ver`) do set "ver=%%a"
-goto:eof
-
-:getversion
-	set varA=&for /f "usebackq tokens=*" %%a in (`ver`) do set "varA=%%a"
-goto:eof
