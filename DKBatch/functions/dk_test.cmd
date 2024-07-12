@@ -1,12 +1,16 @@
 @echo off
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+::call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::####################################################################
 ::# dk_test(args)
 ::#
 ::#
-:dk_test
-	call dk_debugFunc
+:::dk_test
+	::call dk_debugFunc
+	
+	echo dk_test_string
+	goto:eof
+	
 	
 	call dk_unset _testvar_
 	setlocal EnableDelayedExpansion

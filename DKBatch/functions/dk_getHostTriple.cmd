@@ -26,6 +26,7 @@ call dk_source dk_printVar
     set HOST_ENV=clang
     set HOST_TRIPLE=%HOST_TRIPLE%_%HOST_ENV%
 	call dk_printVar HOST_TRIPLE
+	echo %HOST_TRIPLE%
 goto:eof
 
 
