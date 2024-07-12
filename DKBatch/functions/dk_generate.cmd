@@ -97,6 +97,7 @@ call dk_source dk_setTitle
 	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
 	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
+	if "%TARGET_OS%"=="win_x86_64_msvc"    call dk_prependArgs CMAKE_ARGS -G Visual Studio 17 2022
 	
 	
 

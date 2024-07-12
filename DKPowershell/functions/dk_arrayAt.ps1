@@ -4,7 +4,6 @@ if(!$dk_arrayAt){ $dk_arrayAt = 1 } else{ return }
 ################################################################################
 # dk_arrayAt(array, index) -> rtn_var
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 function Global:dk_arrayAt($array, $index) {
@@ -28,8 +27,9 @@ function Global:DKTEST  (){ ####### DKTEST ####### DKTEST ####### DKTEST #######
 	
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
-	$elementA = dk_arrayAt myArray 3
-	dk_echo "elementA = $elementA"
+	dk_printVar myArray
+	$arrayAt_3 = dk_arrayAt myArray 3
+	dk_echo "arrayAt_3 = $arrayAt_3"
 	$elementB = dk_arrayAt $myArray 1
 	dk_echo "elementB = $elementB"
 	

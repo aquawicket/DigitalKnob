@@ -174,6 +174,10 @@ dk_generate (){
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 	fi
+	
+	if [ "${TARGET_OS}" = "win_x86_64_msvc" ]; then
+		dk_arrayUnshift CMAKE_ARGS "-G" "Visual Studio 17 2022"
+	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
 #	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"

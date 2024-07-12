@@ -82,8 +82,11 @@ function Global:dk_generate (){
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"
 	}
+	elseif($TARGET_OS -eq "win_x86_64_msvc"){ 
+		$CMAKE_ARGS += "-G Visual Studio 17 2022"
+	}
 	else{
-		dk_error "Could not get TARGET_OS from ${TARGET_OS}"	
+		dk_error "Unrecognized TARGET_OS:${TARGET_OS}"	
 	}
 
 	
