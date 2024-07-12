@@ -15,6 +15,7 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
 	
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
 	ftype dkjavascript=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	assoc .js=dkjavascript
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkjavascript\DefaultIcon" "" "REG_SZ" "%NODEJS%\node.exe"

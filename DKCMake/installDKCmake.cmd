@@ -15,6 +15,7 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake
 	ftype dkcmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
 	assoc .cmake=dkcmake
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkcmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"

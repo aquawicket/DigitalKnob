@@ -1,7 +1,8 @@
 @echo off
 
+if not "%*" == "" (goto:runDKPowershell)
+
 :installDKPowershell
-	if not "%*" == "" (goto:runDKPowershell)
 	echo Associating .ps1 files with DKPowershell . . .
 	
 	::###### DKINIT ######
@@ -15,6 +16,8 @@
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 	
+	::###### Powershell ######::
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1
 	ftype dkpowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	assoc .ps1=dkpowershell
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkpowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
