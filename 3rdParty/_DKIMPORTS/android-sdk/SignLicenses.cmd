@@ -1,5 +1,3 @@
-%dkbatch%
-
 ::call EndProcess java.exe
 ::call EndProcess adb.exe
 
@@ -35,5 +33,3 @@ set "SDKMANAGER=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\android-s
 ::%SDKMANAGER% --licenses
 
 call "%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\_DKIMPORTS\jdk\registerJDK.cmd" 
- 
-::%DKEND% 

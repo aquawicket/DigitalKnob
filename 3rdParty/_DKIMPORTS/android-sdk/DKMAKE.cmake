@@ -28,43 +28,34 @@ if(NOT EXISTS ${ANDROID_SDK})
 	dk_setEnv("ANDROID_USER_HOME" "${DIGITALKNOB_DIR}/.android")
 	dk_setEnv("ANDROID_SDK_HOME" "${DIGITALKNOB_DIR}/.android")
 	dk_setEnv("VS_AndroidHome" "${ANDROID_SDK}")
+endif()
 
+
+if(NOT EXISTS "${ANDROID_SDK}/licenses")
 	# FIXME:  more work to be done on killing tasks
 	#if(WIN_HOST)
 	#	dk_killProcess(java.exe NO_HALT)
 	#	dk_killProcess(adb.exe NO_HALT)
 	#endif()
 	
+	
 	### SignLicenses ###
-	if(EXISTS "${OPENJDK_8U41}/registerJDK.cmd")
-		WIN_HOST_dk_executeProcess(call "${OPENJDK_8U41}/registerJDK.cmd")
+	if(EXISTS "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
+		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
 	endif()
+	
+	
+	
 	if(EXISTS "${SDKMANAGER_BAT}")
 		WIN_HOST_dk_executeProcess("${SDKMANAGER_BAT} --licenses")
 	endif()
+	WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
+	UNIX_HOST_dk_executeProcess(chmod 777 "${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
+	UNIX_HOST_dk_executeProcess("${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
 	
-	dk_sleep(2) # wait 2 seconds for the file to become available
-	if(EXISTS "${ANDROID_SDK}/SignLicenses.cmd")
-		#WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
-		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
+	
+	
+	if(EXISTS "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
+		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
 	endif()
-	if(EXISTS "${OPENJDK}/registerJDK.cmd")
-		WIN_HOST_dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
-	endif()
-endif()
-
-### SignLicenses ###
-if(NOT EXISTS "${ANDROID_SDK}/licenses" OR NOT EXISTS "${ANDROID_SDK}/SignLicenses.cmd")
-	dk_copy("${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd" "${ANDROID_SDK}/SignLicenses.cmd" OVERWRITE)
-	dk_sleep(2) # wait 2 seconds for the file to become available
-	
-	WIN_HOST_dk_executeProcess(call "${ANDROID_SDK}/SignLicenses.cmd")
-endif()
-
-if(NOT EXISTS "${ANDROID_SDK}/licenses" OR NOT EXISTS "${ANDROID_SDK}/SignLicenses.sh")
-	dk_copy("${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh" "${ANDROID_SDK}/SignLicenses.sh" OVERWRITE)
-	dk_sleep(2) # wait 2 seconds for the file to become available
-	
-	UNIX_HOST_dk_executeProcess(chmod 777 "${ANDROID_SDK}/SignLicenses.sh")
-	UNIX_HOST_dk_executeProcess("${ANDROID_SDK}/SignLicenses.sh")
 endif()
