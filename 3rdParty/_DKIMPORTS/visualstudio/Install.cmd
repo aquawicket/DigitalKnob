@@ -1,6 +1,7 @@
-@echo off & %dkbatch%
+@echo off
+call ..\..\..\DKBatch\functions\DK.cmd
 
-%HOMEDRIVE%%HOMEPATH%\digitalknob\Download\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
+%DKDOWNLOAD_DIR%\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.Net.Component.4.7.2.TargetingPack ^

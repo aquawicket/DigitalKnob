@@ -23,6 +23,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	dk_getParentDir "C:\Windows\System32" parent
+	call dk_getParentDir "C:\Windows\System32" parent
 	call dk_echo "parent = %parent%"
 goto:eof

@@ -11,7 +11,7 @@ call "../functions/DK.cmd"
 ::	set "IN=%0"
 ::	set IN=%~0
 ::	set "IN=%~0"
-::	set "IN=C:\Program Files\WSL\wsl.exe"
+::	set "IN=%ProgramFiles%\WSL\wsl.exe"
 ::	set "IN=C:\Users\aquawicket\digitalknob\Development\DKBatch\tests\test_blank.cmd"
 ::	set "IN=C:/Program Files/WSL/wsl.exe"
 ::  set "IN=test_dk_echo.cmd"

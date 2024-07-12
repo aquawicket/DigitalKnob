@@ -239,7 +239,6 @@ call dk_color 1
 	call dk_echo
 	call dk_echo "%black% %bg_lblack%   RGB Foreground Colors   %clr%"
 	call dk_echo "%RGB%255;10;10m    RGB test 255;0;10     %clr%"
-	pause
 	call dk_echo "%RGB%10;255;10m    RGB test 0;255;10    %clr%"
 	call dk_echo "%RGB%0;0;255m    RGB test 0;0;255     %clr%"
 	call dk_echo "%RGB%0;0;250m    RGB test 0;0;250     %clr%"

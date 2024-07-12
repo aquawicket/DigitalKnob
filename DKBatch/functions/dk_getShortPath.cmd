@@ -26,6 +26,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_getShortPath "C:\Program Files" shortPath
+	call dk_getShortPath "%ProgramFiles%" shortPath
 	call dk_echo "shortPath = %shortPath%"
 goto:eof

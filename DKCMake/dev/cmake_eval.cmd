@@ -44,9 +44,9 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%\DKCMake"
 	
-	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE_EXE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE_EXE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-	if not exist "%CMAKE_EXE%" 									echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
+	if exist "%ProgramFiles%\CMake\bin\cmake.exe" 		set "CMAKE_EXE=%ProgramFiles%\CMake\bin\cmake.exe"
+	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+	if not exist "%CMAKE_EXE%" 							echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
 	
 	if not exist "%CMAKE_EXE%"		echo "ERROR: Could not locate CMAKE_EXE" 	& goto:eof
 	if not exist "%DKCMAKE_DIR%" 	echo "ERROR: Could not locate DKCMAKE_DIR" 	& goto:eof

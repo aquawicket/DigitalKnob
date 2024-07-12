@@ -1,5 +1,9 @@
+@echo off
+call ..\..\..\DKBatch\functions\DK.cmd
+
+
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
-@echo off & %dkbatch%
+
 
 setlocal enabledelayedexpansion
 

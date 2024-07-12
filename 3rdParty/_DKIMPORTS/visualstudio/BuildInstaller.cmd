@@ -1,6 +1,7 @@
-@echo off & %dkbatch%
+@echo off
+call ..\..\..\DKBatch\functions\DK.cmd
 
-start /wait %HOMEDRIVE%%HOMEPATH%\digitalknob\download\vs_Community.exe --layout "%HOMEDRIVE%%HOMEPATH%\digitalknob\download\VisualStudio" ^
+start /wait %DKDOWNLOAD_DIR%\vs_Community.exe --layout "%DKDOWNLOAD_DIR%\VisualStudio" ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.Net.Component.4.7.2.TargetingPack ^
@@ -44,6 +45,3 @@ start /wait %HOMEDRIVE%%HOMEPATH%\digitalknob\download\vs_Community.exe --layout
 --add Microsoft.VisualStudio.Workload.NativeMobile ^
 --add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 ^
 --lang en-US --passive --wait
- 
- 
-%DKEND% 

@@ -1,11 +1,9 @@
-::https://www.msys2.org/wiki/Launchers/
-
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+call ..\..\..\DKBatch\functions\DK.cmd
 
-::cls
-set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
+
+::https://www.msys2.org/wiki/Launchers
+
 set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
 
 goto:main

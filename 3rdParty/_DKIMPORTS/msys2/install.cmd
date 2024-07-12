@@ -1,7 +1,6 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+call ..\..\..\DKBatch\functions\DK.cmd
 
-set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-%DIGITALKNOB_DIR%\Development\DKCMake\dev\cmake_eval "include('%DIGITALKNOB_DIR%/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
+%DKBATCH_DIR%\dk_cmakeEval.cmd "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
 
-cmake -E create_symlink %HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\libjpeg-turbo-main\win_x86_64\Debug\jconfig.h %HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\libjpeg-turbo-main\win_x86_64\Debug\jconfig.h
+cmake -E create_symlink %DK3RDPARTY_DIR%\libjpeg-turbo-main\win_x86_64\Debug\jconfig.h %DK3RDPARTY_DIR%\libjpeg-turbo-main\win_x86_64\Debug\jconfig.h

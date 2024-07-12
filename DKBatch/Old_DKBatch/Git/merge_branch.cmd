@@ -36,8 +36,8 @@ echo Merging To: %destination%
 set DKBRANCH=Development
 set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT_EXE=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT_EXE=C:\Program Files (x86)\Git\bin\git.exe"
+if exist "%ProgramFiles%\Git\bin\git.exe" set "GIT_EXE=%ProgramFiles%\Git\bin\git.exe"
+if exist "%ProgramFiles(x86)%\Git\bin\git.exe" set "GIT_EXE=%ProgramFiles(x86)%\Git\bin\git.exe"
 if NOT exist "%GIT_EXE%" (
 	ERROR "Could not find git"
 )

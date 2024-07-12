@@ -1,11 +1,12 @@
 @echo off
+call ..\..\..\DKBatch\functions\DK.cmd
 
 set "Folder=openjdk-8u41-b04-windows-i586-14_jan_2020"
 set "CurrentVersion=1.8.0_41"
 
 set "JAVA_VERSION=%CurrentVersion%"
 setx JAVA_VERSION %CurrentVersion%
-set "JAVA_HOME=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\%Folder%"
+set "JAVA_HOME=%DK3RDPARTY_DIR%\%Folder%"
 setx JAVA_HOME %JAVA_HOME%
 setx VS_JavaHome %JAVA_HOME%
 setx STUDIO_JDK %JAVA_HOME%

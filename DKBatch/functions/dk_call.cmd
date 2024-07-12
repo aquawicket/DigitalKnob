@@ -1,5 +1,5 @@
 @echo off
-
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::####################################################################
 ::# dk_call(command args)
@@ -26,6 +26,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_fixme
-	call dk_call dir
+	call dk_call dk_color
 goto:eof
