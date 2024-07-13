@@ -31,13 +31,13 @@ goto:END_DKDEBUGFUNC
 	::if defined args set args=%args:~1%
 	::echo :DKDEBUGFUNC(%0 %args%)
 	
-	echo.
+	echo:
 	echo %~nx0(%args%)
 
 
 	:: https://ss64.com/nt/syntax-args.html
 	:: Parameter Extensions
-	echo.
+	echo:
 	echo                                   * = %*
 	echo              Raw argument:        0 = %0
 	echo Fully qualified path name:      ~f0 = %~f0

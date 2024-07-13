@@ -7,7 +7,7 @@ set "length=!length!                                                            
 :controls
   cls
   echo Use WASD to move your character ([]).
-  echo.
+  echo:
   echo %length%[]
   choice /c wasd /n
   if %errorlevel% equ 1 call:up

@@ -10,7 +10,7 @@ call %DKBATCH_FUNCTION_DIR_%DK.cmd
 ::#
 :dk_echo
     call dk_debugFunc
-	if "%~1" equ "" (echo. & goto:eof)
+	if "%~1" equ "" (echo: & goto:eof)
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments"
 	
     setlocal enableDelayedExpansion

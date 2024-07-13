@@ -18,7 +18,7 @@ if not defined HALT_ON_VERBOSE    call dk_set HALT_ON_VERBOSE 0
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_verbose%" neq "1" goto:eof
-	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
+	::if "%*"==""  echo: & goto:eof				                                      &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion
 		call dk_set _message_ %*

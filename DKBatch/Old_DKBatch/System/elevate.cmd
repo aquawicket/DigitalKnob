@@ -5,7 +5,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::
  @echo off
  CLS
- ECHO.
+ echo:
  ECHO =============================
  ECHO Running Admin shell
  ECHO =============================
@@ -26,7 +26,7 @@
 
 :getPrivileges
   if '%1'=='ELEV' (echo ELEV & shift /1 & goto gotPrivileges)
-  ECHO.
+  echo:
   ECHO **************************************
   ECHO Invoking UAC for Privilege Escalation
   ECHO **************************************

@@ -102,6 +102,6 @@ exit %ERROR_CODE%
 		)		
 		set /a n+=1
 	)
-	echo.
-	echo.
+	echo:
+	echo:
 goto :eof

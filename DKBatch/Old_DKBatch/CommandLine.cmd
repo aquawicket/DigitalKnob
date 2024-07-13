@@ -52,9 +52,9 @@ goto:eof
    ::call PrintArray command_arry
    ::call CallArray command_arry
    ::call DeleteArray command_arry
-   echo.
+   echo:
    call %command%
-   echo.
+   echo:
    set "command_arry="
    set "length="
 goto:eof

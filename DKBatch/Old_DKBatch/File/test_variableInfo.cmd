@@ -11,7 +11,7 @@
 goto:eof
 
 :print_path_info <input>
-	echo.
+	echo:
 	echo print_path_info( %* )
 	
 	echo  1 = %1

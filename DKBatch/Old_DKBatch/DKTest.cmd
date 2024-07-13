@@ -22,7 +22,7 @@ call dk_printVar TEST_VAR
 :main
 	call dk_debug "main(%*)"
 	
-	echo. && echo ######################## TEST FIELD ######################## && echo.
+	echo: && echo ######################## TEST FIELD ######################## && echo:
 
 ::	#printenv
 ::	

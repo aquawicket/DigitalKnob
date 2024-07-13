@@ -86,7 +86,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 				call dk_load %temp%
 			)
 			endlocal
-		) || echo.
+		) || echo:
 	)
 goto:eof
 

@@ -48,7 +48,7 @@ echo IF_FATAL was called but skipped since ERRORLEVEL = 0
 echo:
 	
 ::echo Setting ERRORLEVEL to 1 and calling IF_FATAL again.
-::echo.
+::echo:
 ::set ERRORLEVEL=1
 ::%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
 ::echo:

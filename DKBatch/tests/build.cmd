@@ -164,10 +164,10 @@ goto:eof
     
     call:dk_readCache
 
-    echo.
+    echo:
     call:dk_checkGitRemote
 
-    echo.
+    echo:
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
@@ -179,7 +179,7 @@ goto:eof
     echo  8) Clear cmake cache and .tmp files
     echo  9) Reload
     echo  10) Exit
-    echo. 
+    echo: 
     echo  Press Enter To Skip
     set choice=
     set /p "choice=Choose a selection: " 
@@ -212,7 +212,7 @@ goto:eof
 
     call:dk_readCache
 
-    echo.
+    echo:
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) HelloWorld
     echo  2) DKCore
@@ -257,13 +257,13 @@ goto:eof
 	call:dk_verbose "dk_pickOs(%*)"
 
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    echo.
+    echo:
     echo %APP% %TARGET_OS% %TYPE%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
-    echo.
+    echo:
     echo  1) %HOST_TRIPLE%
-    echo.
+    echo:
     echo  2) Android arm32
     echo  3) Android arm64
     echo  4) Android x86
@@ -358,9 +358,9 @@ goto:eof
 	call:dk_verbose "dk_pickType(%*)"
 	
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    echo.
+    echo:
     echo %APP% %TARGET_OS% %TYPE%     
-    echo.
+    echo:
     echo 1) Debug
     echo 2) Release
     echo 3) All
@@ -419,11 +419,11 @@ goto:eof
 	call:dk_verbose "dk_generate(%*)"
 	
     TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
-    echo.
+    echo:
 	echo ##################################################################
 	echo      Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL%
 	echo ##################################################################
-	echo.
+	echo:
     
     call:dk_clearCmakeCache
     call:dk_deleteTempFiles
@@ -514,11 +514,11 @@ goto:eof
 ::	###### CMake Configure ######
 	call:dk_installCmake
 	
-    echo.
+    echo:
     echo ****** CMAKE COMMAND ******
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     "%CMAKE_EXE%" %CMAKE_ARGS%
-    echo.
+    echo:
 goto:eof
 
 
@@ -530,21 +530,21 @@ goto:eof
 	call:dk_verbose "dk_build(%*)"
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
-    echo.
+    echo:
     echo ###########################################################        
     echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
     echo ###########################################################
-    echo.
+    echo:
 	
 	if %TYPE%==All      call:dk_buildAll
 	if %TYPE%==Release  call:dk_buildRelease
 	if %TYPE%==Debug    call:dk_buildDebug
 	
-	echo.
+	echo:
     echo ###########################################################        
     echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
     echo ###########################################################
-    echo.
+    echo:
 goto:eof
 
 
@@ -840,14 +840,14 @@ goto:eof
     if "%1" equ "wipe" goto:wipe
         
     cls
-    echo.
-    echo.
+    echo:
+    echo:
     echo  Do you want to reset the entire local repository . . .?
-    echo. This will delete digitalknob, everything will be reset,
-    echo. and the repository will be re-cloned. All libraries and tools
-    echo. will be redownloaded and rebuild from start. Save any changes 
-    echo. you wish to commit or save beforehand.
-    echo. 
+    echo  This will delete digitalknob, everything will be reset,
+    echo  and the repository will be re-cloned. All libraries and tools
+    echo  will be redownloaded and rebuild from start. Save any changes 
+    echo  you wish to commit or save beforehand.
+    echo: 
         
     set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" neq "Y" goto:eof
@@ -882,7 +882,7 @@ goto:eof
       
     cd %DIGITALKNOB_DIR%
 
-    echo.
+    echo:
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
     echo done.
@@ -909,12 +909,12 @@ goto:eof
     if "%1" equ "wipe" goto:wipe
         
     cls
-    echo.
-    echo.
+    echo:
+    echo:
     echo  Do you want to remove the entire local repository . . .?
-    echo. This will delete digitalknob. Save any changes 
-    echo. you wish to commit or save beforehand.
-    echo. 
+    echo  This will delete digitalknob. Save any changes 
+    echo  you wish to commit or save beforehand.
+    echo: 
         
     set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" neq "Y" goto:eof
@@ -946,7 +946,7 @@ goto:eof
     ::do we need to remove any environment variables?
         
     cd %DIGITALKNOB_DIR%
-    echo.
+    echo:
     echo DELETING %DKBRANCH_DIR% . . . .
     call rmdir %DKBRANCH_DIR% /s /q
     echo done.
@@ -1087,7 +1087,7 @@ goto:eof
         
     if exist "%GIT_EXE%" goto:eof
         
-    echo.   
+    echo:   
     echo "Installing git . . ."
     call:dk_download %GIT_DL%
     ::echo "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" /DIR=%DKTOOLS_DIR%\%GIT_FOLDER%
@@ -1152,7 +1152,7 @@ goto:eof
         
     if exist "%CMAKE_EXE%" goto:eof
        
-    echo.   
+    echo:   
     echo "Installing cmake . . ."
     ::echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
@@ -1391,29 +1391,29 @@ goto:eof
         
     call:dk_commandToVariable "%GIT_EXE%" config --global user.email USER_EMAIL
     if "%USER_EMAIL%"=="" (
-        echo.
+        echo:
         echo please enter an email address
         set /p input=">" 
         "%GIT_EXE%" config --global user.email "%input%"
-        echo.
+        echo:
         echo "git user.email %input% saved"
-        echo.
+        echo:
     )
         
     call:dk_commandToVariable "%GIT_EXE%" config --global user.email USER_NAME
     if "%USER_NAME%"=="" (
-        echo.
+        echo:
         echo please enter a username
         set /p input=">" 
         "%GIT_EXE%" config --global user.name "%input%"
-        echo.
+        echo:
         echo "git user.name %input% saved"
-        echo.
+        echo:
     )
         
     if "%message%"=="" set "message=git commit"
         
-    echo.
+    echo:
     echo git commit "%message%"
     set /P CONFIRM="Are you sure? [Y] " 
     if /I "%CONFIRM%" neq "Y" goto:eof
@@ -1443,9 +1443,9 @@ goto:eof
 :dk_cmakeEval
 	call:dk_verbose "dk_cmakeEval(%*)"
 	
-    echo.
+    echo:
     echo  $ dk_cmakeEval (%*)
-    echo.
+    echo:
     
     if [%1] == [] (
         echo "ERROR: dk_cmakeEval() parameter1 is invalid"

@@ -58,5 +58,5 @@ goto:eof
 		set "prep_text=!prep_text!aR"
 		call :dk_echoAlign center "!prep_text!"
 	)
-	echo.
+	echo:
 goto:eof

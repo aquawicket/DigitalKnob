@@ -18,7 +18,7 @@ call dk_set TODO_TAG "  TODO: "
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_todo%" neq "1"  goto:eof
-	::if "%*"==""  echo. & goto:eof				                                      &:: if arguments are empty, print a new line
+	::if "%*"==""  echo: & goto:eof				                                      &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion       
 		call dk_set _message_ %*

@@ -18,7 +18,7 @@ if not defined HALT_ON_INFO    set "HALT_ON_INFO=0"
 	call dk_debugFunc
 	
 	if "%ENABLE_dk_info%" neq "1" goto:eof
-	::if "%*"==""  echo. & goto:eof                                                     &:: if arguments are empty, print a new line
+	::if "%*"==""  echo: & goto:eof                                                     &:: if arguments are empty, print a new line
 	
 	setlocal enableDelayedExpansion	
 		set "_message_=%*"

@@ -12,9 +12,9 @@ set `r=[0m&set `b=[1m&set `u=[4m&set `i=[7m&set fg`black-=[30m&set fg`red-=
 ::::::::::::::::::::
 
 cls
-echo.
+echo:
 echo  %`u%%fg`white%Dark foreground%`r%                   %`u%%fg`white%Styles%`r%
-echo.
+echo:
 echo  ^| %fg`black-%Hello World!%`r% ^| %%fg`black-%%      ^| %`r%Normal text ^(reset^)%`r% ^| %%`r%%
 echo  ^| %fg`red-%Hello World!%`r% ^| %%fg`red-%%        ^| %`b%Bold text%`r%           ^| %%`b%%
 echo  ^| %fg`green-%Hello World!%`r% ^| %%fg`green-%%      ^| %`u%Underline text%`r%      ^| %%`u%%
@@ -23,9 +23,9 @@ echo  ^| %fg`blue-%Hello World!%`r% ^| %%fg`blue-%%
 echo  ^| %fg`magenta-%Hello World!%`r% ^| %%fg`magenta-%%
 echo  ^| %fg`cyan-%Hello World!%`r% ^| %%fg`cyan-%%
 echo  ^| %fg`white-%Hello World!%`r% ^| %%fg`white-%%
-echo.
+echo:
 echo  %`u%%fg`white%Light foreground%`r%                  %`u%%fg`white%Usage%`r% 
-echo.                                                   
+echo:                                                   
 echo  ^| %fg`black%Hello World!%`r% ^| %%fg`black%%       Before using %`b%cl%`r% plugin, add '%fg`black%call cl.bat%`r%'
 echo  ^| %fg`red%Hello World!%`r% ^| %%fg`red%%         to your code. It will save colors to
 echo  ^| %fg`green%Hello World!%`r% ^| %%fg`green%%       variables. After that, you can now use it.
@@ -45,9 +45,9 @@ echo  ^| %bg`blue-%Hello World!%`r% ^| %%bg`blue-%%       %`b%cl%`r% will automa
 echo  ^| %bg`magenta-%Hello World!%`r% ^| %%bg`magenta-%%    mode. If not: '%fg`black%call cl.bat --legacy%`r%'.
 echo  ^| %bg`cyan-%Hello World!%`r% ^| %%bg`cyan-%%
 echo  ^| %bg`white-%Hello World!%`r% ^| %%bg`white-%%
-echo.
+echo:
 echo  %`u%%fg`white%Light background%`r%                  %`u%%fg`white%Author%`r%
-echo.
+echo:
 echo  ^| %bg`black%Hello World!%`r% ^| %%bg`black-%%      hXR16F.ar@gmail.com %fg`black%^(E-mail^)%`r%
 echo  ^| %bg`red%Hello World!%`r% ^| %%bg`red-%%        hXR16F#1796 %fg`black%^(Discord^)%`r%
 echo  ^| %bg`green%Hello World!%`r% ^| %%bg`green-%%
