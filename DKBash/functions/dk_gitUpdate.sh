@@ -18,7 +18,7 @@ dk_gitUpdate (){
 	dk_validate GIT_EXE "dk_installGit"
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_printVar DKBRANCH_DIR
-		dk_call "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
+		dk_call ${dksudo} "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
 	fi
 	dk_call cd "${DKBRANCH_DIR}" #|| dk_error "cd $${DKBRANCH_DIR} failed!"
 	"${GIT_EXE}" pull --all
