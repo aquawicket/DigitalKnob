@@ -23,7 +23,7 @@ function Global:dk_installCmake  (){
     if("${HOST_OS}_${HOST_ARCH}" -eq "linux_x86_64"){ $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" }
     if("${HOST_OS}_${HOST_ARCH}" -eq "linux_arm64") { $CMAKE_DL = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz" }
     
-    $CMAKE_DL_FILE = dk_getBasename $CMAKE_DL 
+    $CMAKE_DL_FILE = dk_basename $CMAKE_DL 
 	$CMAKE_DL_NAME = dk_removeExtension $CMAKE_DL_FILE 
     $CMAKE_FOLDER = dk_convertToCIdentifier $CMAKE_DL_NAME 
     $CMAKE_FOLDER = dk_toLower $CMAKE_FOLDER

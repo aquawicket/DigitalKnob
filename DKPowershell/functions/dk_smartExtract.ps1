@@ -11,14 +11,14 @@ function Global:dk_smartExtract($src, $dest) {
 
 
 	$src_fullpath = dk_realpath $src
-	$src_dirname = dk_getDirname $src_fullpath
-	$src_basename = dk_getBasename $src_fullpath
+	$src_dirname = dk_dirname $src_fullpath
+	$src_basename = dk_basename $src_fullpath
 	$src_folder = "${src_basename%.*}"
 	
 	#$dest_fullpath = dk_realpath $dest
 	$dest_fullpath="${dest}"
-	$dest_dirname = dk_getDirname $dest_fullpath
-	$dest_basename = dk_getBasename $dest_fullpath
+	$dest_dirname = dk_dirname $dest_fullpath
+	$dest_basename = dk_basename $dest_fullpath
 	
 #	if(!(dk_pathExists $dest_fullpath)){
 #		dk_makeDirectory $dest_fullpath

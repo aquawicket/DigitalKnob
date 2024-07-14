@@ -39,7 +39,7 @@ function Global:dk_copy($from, $to) {
 	}
 	
 	# the base directory of the ${to} path must exist.    
-	$_parent_dir_ = dk_getDirname "${to}" _parent_dir_
+	$_parent_dir_ = dk_dirname "${to}" _parent_dir_
 	dk_makeDirectory "${_parent_dir_}"
 	
 	#cp -r "${from}" "${to}"

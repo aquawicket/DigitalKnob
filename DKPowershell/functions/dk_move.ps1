@@ -32,7 +32,7 @@ function Global:dk_move($_from_, $_to_) {
 	}
 	
 	# the base directory of the $_to_ path must exist.    
-	$_parent_dir_ = dk_getDirname "${_to_}"
+	$_parent_dir_ = dk_dirname "${_to_}"
 	dk_printVar _parent_dir_
 	dk_makeDirectory ${_parent_dir_}
 	

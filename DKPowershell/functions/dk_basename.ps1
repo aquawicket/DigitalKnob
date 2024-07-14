@@ -1,12 +1,12 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
-if(!$dk_getBasename){ $dk_getBasename = 1 } else{ return }
+if(!$dk_basename){ $dk_basename = 1 } else{ return }
 
 ################################################################################
-# dk_getBasename(path) -> rtn_var
+# dk_basename(path) -> rtn_var
 #
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
-function Global:dk_getBasename($path) {
+function Global:dk_basename($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -27,9 +27,9 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	$basename = dk_getBasename "C:/Windows/System32/test.v123.zip"
+	$basename = dk_basename "C:/Windows/System32/test.v123.zip"
 	dk_echo "basename = $basename"
 	
-	$basename = dk_getBasename "TEST"
+	$basename = dk_basename "TEST"
 	dk_echo "basename = $basename"
 }

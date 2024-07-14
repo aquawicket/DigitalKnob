@@ -20,7 +20,7 @@ function Global:dk_installGit  (){
     if($HOST_ARCH -eq "x86_64"){ $GIT_DL = $GIT_DL_WIN_X86_64 }
     if(!$GIT_DL){ dk_error "GIT_DL is invalid"; return ${false} }
 	  
-    $GIT_DL_FILE = dk_getBasename $GIT_DL
+    $GIT_DL_FILE = dk_basename $GIT_DL
 	$GIT_DL_NAME = dk_removeExtension $GIT_DL_FILE
     $GIT_FOLDER = dk_convertToCIdentifier $GIT_DL_NAME 
     $GIT_FOLDER = dk_toLower $GIT_FOLDER GIT_FOLDER

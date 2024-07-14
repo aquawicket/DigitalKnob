@@ -1,11 +1,11 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
-if(!$dk_getDirname){ $dk_getDirname = 1 } else{ return }
+if(!$dk_dirname){ $dk_dirname = 1 } else{ return }
 
 ################################################################################
-# dk_getDirname(path)   return -> rtn_var
+# dk_dirname(path)   return -> rtn_var
 #
 #
-function Global:dk_getDirname($path) {
+function Global:dk_dirname($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -25,9 +25,9 @@ function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	
-	$dirname = dk_getDirname "C:/Windows/System32"
+	$dirname = dk_dirname "C:/Windows/System32"
 	dk_echo "dirname = $dirname"
 	
-	$dirname = dk_getDirname "TEST"
+	$dirname = dk_dirname "TEST"
 	dk_echo "dirname = $dirname"
 }
