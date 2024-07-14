@@ -28,13 +28,14 @@ if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 		[ -n "$(command -v "xbps-install")" ]  && alias dk_install='${dksudo} xbps-install'			# Xbps
 		[ -n "$(command -v "zypper")" ]        && alias dk_install='${dksudo} zypper in'			# Zypper
 		[ -z "$(command -v "dk_install")" ]    && echo "ERROR: Unable to aquire DK.sh, no package managers found. Please install wget or curl." && read -rp "Press enter to exit..." && exit 1
-		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && dk_install wget
-		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && dk_install curl
+		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && ${dksudo} dk_install wget
+		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && ${dksudo} dk_install curl
 		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && echo "ERROR: Unable to aquire DK.sh, no download apps found. Please install wget or curl." && read -rp "Press enter to exit..." && exit 1
 	fi
-	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "wget")" ] && wget -P "${DKBASH_FUNCTIONS_DIR}" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
-	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DKBASH_FUNCTIONS_DIR}/DK.sh" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
+	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "wget")" ] && ${dksudo} wget -P "${DKBASH_FUNCTIONS_DIR}" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
+	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "curl")" ] && ${dksudo} curl -Lo "${DKBASH_FUNCTIONS_DIR}/DK.sh" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
 	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && echo "ERROR: Unable to aquire DK.sh, please git clone the repository https://github.com/aquawicket/DigitalKnob.git" && read -rp "Press enter to exit..." && exit 1
+	${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/DK.sh
 fi
 . ${DKBASH_FUNCTIONS_DIR}/DK.sh
 

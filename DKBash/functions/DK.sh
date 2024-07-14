@@ -151,7 +151,7 @@ DKBASH_VARS(){
 	dk_export DKBASH_DIR           $( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
-	dk_call ${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
+	#${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
 	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
 }
 
@@ -279,7 +279,7 @@ dk_source(){
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_call curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
 	dk_pathExists "${funcPath}"                                        || dk_error "Unable to find funcPath:${funcPath}"
-	chmod 777 ${funcPath}
+	${dksudo} chmod 777 ${funcPath}
 	. ${funcPath}
 }
 
