@@ -41,7 +41,7 @@ dk_installCmake (){
 	dk_assert CMAKE_IMPORT
 	
 	if dk_isUrl "${CMAKE_IMPORT}"; then
-		dk_info "Installing CMake from dl files"
+		dk_info "Installing CMake from file download"
 		dk_printVar CMAKE_IMPORT
 		
 		CMAKE_DL=${CMAKE_IMPORT}
@@ -64,21 +64,19 @@ dk_installCmake (){
 		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake found for this OS"
 		dk_assert CMAKE_EXE
 		
-		if dk_pathExists "${CMAKE_EXE}"; then 
-			return ${true};
-		fi
-
+		dk_pathExists "${CMAKE_EXE}" && return ${true};
+		
 		dk_echo
 		dk_info "Installing cmake . . ."
 		dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
-		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
+		dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
 		
 		dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
 		dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
-		echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed"
+		#dk_fileWrite "${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed" "${CMAKE_FOLDER}"
         
-		if ! dk_pathExists ${CMAKE_EXE}; then dk_error "cannot find cmake"; fi
+		dk_pathExists "${CMAKE_EXE}" || dk_error "cannot find cmake"
 
 	else	# linux package
 		dk_info "Installing CMake from package managers"
@@ -87,12 +85,9 @@ dk_installCmake (){
 		#dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		#dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		#dk_printVar CMAKE_EXE
-		if ! dk_commandExists cmake; then
-			dk_install ${CMAKE_IMPORT}
-		fi	
+		dk_commandExists cmake || dk_install ${CMAKE_IMPORT}
 		CMAKE_EXE=$(command -v cmake)
-		#CMAKE_EXE=$(realpath ${CMAKE_EXE})
-		dk_realpath ${CMAKE_EXE} CMAKE_EXE
+		CMAKE_EXE=$(dk_realpath "${CMAKE_EXE}")
 		dk_assert CMAKE_EXE
 	fi
 }

@@ -25,13 +25,12 @@ dk_isEmpty (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	echo "PWD = $PWD"
-
+	dk_debugFunc
+	
+	dk_echo "PWD = $PWD"
 	mkdir empty
-	echo "The created empty folder is ...."
-    $(dk_isEmpty "${PWD}/empty") && echo "Empty" || echo "NOT Empty"
-	echo "the current directory is ..."
-	$(dk_isEmpty "${PWD}") && echo "Empty" || echo "NOT Empty"
-
+	dk_echo "The created empty folder is ...."
+    $(dk_isEmpty "${PWD}/empty") && dk_echo "Empty" || dk_echo "NOT Empty"
+	dk_echo "the current directory is ..."
+	$(dk_isEmpty "${PWD}") && dk_echo "Empty" || dk_echo "NOT Empty"
 }

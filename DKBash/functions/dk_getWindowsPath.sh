@@ -10,7 +10,7 @@ dk_getWindowsPath (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	_winpath_=$(cygpath -w "${1}")
+	local _winpath_=$(cygpath -w "${1}")
 	eval "${2}=${_winpath_//\\/\\\\}"
 	#eval "${2}=${_winpath_}"
 	dk_printVar ${2}
@@ -19,7 +19,8 @@ dk_getWindowsPath (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getWindowsPath "/c/Windows/System32" windowsPath
-	echo "windowsPath = ${windowsPath}"
+	dk_echo "windowsPath = ${windowsPath}"
 }

@@ -148,7 +148,7 @@ ASCII_ADD (){
 	ITEM[$HEX]=${4}
 	ITEM[$HTML]=${5}
 	ITEM[$INFO]=${6}
-	#echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
+	#dk_echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
 
 	ASCII_size=${#ASCII[@]}
 	ASCII[$ASCII_size]="${ITEM[@]}"
@@ -167,10 +167,10 @@ ASCII_SHOW (){
 	dk_debugFunc
 	
 	ITEM=(${ASCII[${1}]})
-	echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
+	dk_echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
 	
 	# Associative array
-	#echo "${ASCII[${1},DEC]}	${ASCII[${1},SYMBOL]}	${ASCII[${1},DEC]}	${ASCII[${1},OCT]}	${ASCII[${1},HEX]}	${ASCII[${1},HTML]}	${ASCII[${1},INFO]}"
+	#dk_echo "${ASCII[${1},DEC]}	${ASCII[${1},SYMBOL]}	${ASCII[${1},DEC]}	${ASCII[${1},OCT]}	${ASCII[${1},HEX]}	${ASCII[${1},HTML]}	${ASCII[${1},INFO]}"
 }
 
 
@@ -179,7 +179,8 @@ ASCII_SHOW (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_escapeSequences
 }
 

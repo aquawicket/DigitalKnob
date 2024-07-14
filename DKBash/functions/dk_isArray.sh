@@ -29,27 +29,27 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	myVar1=(1 2 3)
-	dk_isArray myVar1 && echo "myVar1 is an array" || echo "myVar1 is NOT an array"
+	dk_isArray myVar1 && dk_echo "myVar1 is an array" || dk_echo "myVar1 is NOT an array"
 	
 	#dk_echo "dk_isArray myVar1 = $(dk_isArray myVar1)"
 	
 	#if dk_isArray myVar1; then
-	#	echo "myVar1 is an array"
+	#	dk_echo "myVar1 is an array"
 	#else
-	#	echo "myVar1 is NOT an array"
+	#	dk_echo "myVar1 is NOT an array"
 	#fi
 	
 	
 	
 	
 	myVar2="a b c"
-	dk_isArray myVar2 && echo "myVar2 is an array" || echo "myVar2 is NOT an array"
+	dk_isArray myVar2 && dk_echo "myVar2 is an array" || dk_echo "myVar2 is NOT an array"
 	
 	#dk_echo "dk_isArray myVar2 = $(dk_isArray myVar2)"
 	
 	#if dk_isArray myVar2; then
-	#	echo "myVar2 is an array"
+	#	dk_echo "myVar2 is an array"
 	#else
-	#	echo "myVar2 is NOT an array"
+	#	dk_echo "myVar2 is NOT an array"
 	#fi
 }

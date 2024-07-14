@@ -25,9 +25,9 @@ dk_hexToVariable (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_hexToVariable 0x8C HEX_0x8C
-	echo "HEX_0x8C = ${HEX_0x8C}"
+	dk_debugFunc
 	
+	dk_hexToVariable 0x8C HEX_0x8C
+	dk_echo "HEX_0x8C = ${HEX_0x8C}"
 	printf ${HEX_0x8C}
 }

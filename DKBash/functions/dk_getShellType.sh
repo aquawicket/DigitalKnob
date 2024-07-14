@@ -20,7 +20,7 @@ dk_getShellType (){
 	[ $DKSHELL = dash ] && export DKDASH=1
 	[ $DKSHELL = zsh ] && export DKZSH=1
 	[ $DKSHELL = bash ] && export DKBASH=1
-	#echo "DKSHELL = $DKSHELL"
+	#dk_echo "DKSHELL = $DKSHELL"
 	
 	eval "${1}=${DKSHELL}"
 	dk_printVar "${1}"
@@ -29,8 +29,8 @@ dk_getShellType (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getShellType shellType
-	echo "shellType = ${shellType}"
+	dk_echo "shellType = ${shellType}"
 }
-

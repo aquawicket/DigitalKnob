@@ -2,7 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ####################################################################
-# dk_decimalToAscii(<decimal> <output>)
+# dk_decimalToAscii(decimal, output)
 #
 #    reference: https://www.ascii-code.com
 #
@@ -21,8 +21,9 @@ dk_decimalToAscii (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	myDecimal="123"
 	dk_decimalToAscii "${myDecimal}" ascii
-	echo "ascii = ${ascii}"
+	dk_echo "ascii = ${ascii}"
 }

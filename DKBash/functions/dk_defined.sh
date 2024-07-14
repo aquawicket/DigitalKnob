@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_defined(<variable>)
+# dk_defined(variable)
 #
 # Evaluates to true if the parameter is a variable that exists.
 #
@@ -13,11 +13,11 @@ dk_defined (){
 	
 	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}   # ^ as first character is not portable
 	$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
-	#echo "${green}${name} is [:word:]${clr}"
+	#dk_echo "${green}${name} is [:word:]${clr}"
 	
 	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
 	
-	#echo "dk_defined():value = ${value}"
+	#dk_echo "dk_defined():value = ${value}"
 	[ -n "${value}" ]
 }
 
@@ -26,18 +26,19 @@ dk_defined (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	varA="A simple string variable"
 	if dk_defined varA; then
-		echo "varA is defined"
+		dk_echo "varA is defined"
 	else
-		echo "varA is NOT defined"
+		dk_echo "varA is NOT defined"
 	fi
 	
 	#varB="A non existent variable"
 	if dk_defined varB; then
-		echo "varB is defined"
+		dk_echo "varB is defined"
 	else
-		echo "varB is NOT defined"
+		dk_echo "varB is NOT defined"
 	fi
 }

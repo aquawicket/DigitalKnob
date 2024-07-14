@@ -4,7 +4,7 @@
 ################################################################################
 # dk_fileToArray(<path> <output>)
 #
-#  Read lines of a file into an array and echo them back
+#  Read lines of a file into an array
 #
 #  reference: https://stackoverflow.com/a/49042678
 #
@@ -18,7 +18,8 @@ dk_fileToArray (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
+	dk_todo
 	dk_fileToArray
-
 }	

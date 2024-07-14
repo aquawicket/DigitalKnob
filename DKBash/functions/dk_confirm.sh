@@ -28,8 +28,8 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	if dk_confirm; then 
-		echo "the confimation has passed"
+		dk_echo "the confimation has passed"
 	else
-		echo "the confimation has failed"
+		dk_echo "the confimation has failed"
 	fi
 }

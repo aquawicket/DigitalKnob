@@ -11,9 +11,9 @@ dk_getUsername (){
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	if [ -n "${USER-}" ]; then
-		DKUSERNAME=$USER
+		DKUSERNAME=${USER}
 	elif [ -n "${USERNAME-}" ]; then
-		DKUSERNAME=$USERNAME
+		DKUSERNAME=${USERNAME}
 	fi
 	
 	eval "${1}=${DKUSERNAME}"
@@ -22,8 +22,9 @@ dk_getUsername (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+	dk_debugFunc
+	
 	dk_getUsername _username
-	echo "_username = ${_username}"
+	dk_echo "_username = ${_username}"
 }

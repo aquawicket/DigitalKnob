@@ -26,17 +26,17 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	myString1="test string"
-	dk_isString myString1        && echo "myString1 is a string"       || echo "myString1 is NOT a string"
-	dk_isString "as string"      && echo "'as string' is a string"     || echo "'as string' is NOT a string"
-	dk_isString no_quotes        && echo "no_quotes is a string"       || echo "no_quotes is NOT a string"
-	dk_isString 'single quotes'  && echo "'single quotes' is a string" || echo "'single quotes' is NOT a string"
-	dk_isString ""               && echo "1 is a string"               || echo "1 is NOT a string"
+	dk_isString myString1        && dk_echo "myString1 is a string"       || dk_echo "myString1 is NOT a string"
+	dk_isString "as string"      && dk_echo "'as string' is a string"     || dk_echo "'as string' is NOT a string"
+	dk_isString no_quotes        && dk_echo "no_quotes is a string"       || dk_echo "no_quotes is NOT a string"
+	dk_isString 'single quotes'  && dk_echo "'single quotes' is a string" || dk_echo "'single quotes' is NOT a string"
+	dk_isString ""               && dk_echo "1 is a string"               || dk_echo "1 is NOT a string"
 	
 	#dk_echo "dk_isString myString1 = $(dk_isString myString1)"
 	
 	#if dk_isString myString1; then
-	#	echo "myString1 is a string"
+	#	dk_echo "myString1 is a string"
 	#else
-	#	echo "myString1 is NOT a string"
+	#	dk_echo "myString1 is NOT a string"
 	#fi
 }

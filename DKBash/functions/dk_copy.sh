@@ -53,10 +53,10 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	
-	echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file
+	dk_echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file
 	dk_copy ${DKDOWNLOAD_DIR}/copyMe.file ${DIGITALKNOB_DIR}/iWasCopied.txt OVERWRITE
 	
-	echo "dk_copy test" > copyMe.file
+	dk_echo "dk_copy test" > copyMe.file
 	dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
 	dk_makeDirectory ${DKDOWNLOAD_DIR}/copyMe

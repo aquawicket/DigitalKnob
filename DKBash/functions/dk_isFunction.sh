@@ -28,9 +28,9 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	dk_echo "testing dk_isFunction(test_function)"
-	dk_isFunction "test_function" && echo "true" || echo "false"
+	dk_isFunction "test_function" && dk_echo "true" || dk_echo "false"
 	
 	dk_echo
 	dk_echo "testing dk_isFunction(nonExistentFunction)" 
-	dk_isFunction "nonExistentFunction" && echo "true" || echo "false"
+	dk_isFunction "nonExistentFunction" && dk_echo "true" || dk_echo "false"
 }

@@ -13,16 +13,17 @@ dk_createCache (){
 	dk_echo "creating cache..."
 	
 	# write variable values line by line
-	echo "${APP}">"${DKBRANCH_DIR}/cache"
-	echo "${TARGET_OS}">>"${DKBRANCH_DIR}/cache"
-	echo "${TYPE}">>"${DKBRANCH_DIR}/cache"
-	#echo "$DKENV">>"${DKBRANCH_DIR}/cache"
+	dk_fileWrite "${DKBRANCH_DIR}/cache" "${APP}"
+	dk_fileAppend "${DKBRANCH_DIR}/cache" "${TARGET_OS}"
+	dk_fileAppend "${DKBRANCH_DIR}/cache" "${TYPE}"
+	#dk_fileAppend "${DKBRANCH_DIR}/cache" "${DKENV}"
 }
 
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_createCache
 }

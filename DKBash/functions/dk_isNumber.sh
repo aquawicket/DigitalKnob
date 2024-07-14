@@ -26,17 +26,17 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	myNumber1=69
-	dk_isNumber myNumber1 && echo "myNumber1 is a number" || echo "myNumber1 is NOT a number"
-	dk_isNumber 23        && echo "23 is a number"        || echo "23 is NOT a number"
-	dk_isNumber 123.456   && echo "123.456 is a number"   || echo "123.456 is NOT a number"
-	dk_isNumber 0         && echo "0 is a number"         || echo "0 is NOT a number"
-	dk_isNumber 1         && echo "1 is a number"         || echo "1 is NOT a number"
+	dk_isNumber myNumber1 && dk_echo "myNumber1 is a number" || dk_echo "myNumber1 is NOT a number"
+	dk_isNumber 23        && dk_echo "23 is a number"        || dk_echo "23 is NOT a number"
+	dk_isNumber 123.456   && dk_echo "123.456 is a number"   || dk_echo "123.456 is NOT a number"
+	dk_isNumber 0         && dk_echo "0 is a number"         || dk_echo "0 is NOT a number"
+	dk_isNumber 1         && dk_echo "1 is a number"         || dk_echo "1 is NOT a number"
 	
 	#dk_echo "dk_isNumber myNumber1 = $(dk_isNumber myNumber1)"
 	
 	#if dk_isNumber myNumber1; then
-	#	echo "myNumber1 is a number"
+	#	dk_echo "myNumber1 is a number"
 	#else
-	#	echo "myNumber1 is NOT a number"
+	#	dk_echo "myNumber1 is NOT a number"
 	#fi
 }

@@ -18,7 +18,8 @@ dk_getExtension (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getExtension "TestFile.txt" extension
-	echo "extension = ${extension}"
+	dk_echo "extension = ${extension}"
 }

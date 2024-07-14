@@ -17,7 +17,8 @@ dk_getFuncName (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getFuncName funcName
-	echo "funcName = ${funcName}"
+	dk_echo "funcName = ${funcName}"
 }

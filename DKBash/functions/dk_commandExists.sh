@@ -19,14 +19,14 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	if dk_commandExists bash; then
-		echo "bash command exists"
+		dk_echo "bash command exists"
 	else
-		echo "bash command does NOT exist"
+		dk_echo "bash command does NOT exist"
 	fi
 	
 	if dk_commandExists dummy; then
-		echo "dummy command exists"
+		dk_echo "dummy command exists"
 	else
-		echo "dummy command does NOT exist"
+		dk_echo "dummy command does NOT exist"
 	fi
 }

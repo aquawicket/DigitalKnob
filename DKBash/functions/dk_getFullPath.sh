@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_getFullPath(<path> <output>)
+# dk_getFullPath(path, output)
 #
 #
 dk_getFullPath (){
@@ -18,7 +18,8 @@ dk_getFullPath (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getFullPath "bash" fullPath
-	echo "fullPath = ${fullPath}"
+	dk_echo "fullPath = ${fullPath}"
 }

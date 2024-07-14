@@ -19,7 +19,8 @@ dk_hexToDecimal (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_hexToDecimal 0x1b decimal
-	echo "decimal = ${decimal}"
+	dk_echo "decimal = ${decimal}"
 }

@@ -3,7 +3,7 @@
 
 # The reason we are overwriting echo is to try and keep junk echo's out of command substitution returns.
 #   result=$(myFunction thing) <- if anything writes to stdout durring this, it will junk up the result value.
-#   for that reason, we've overwritten echo and we point it to stderr since command substitions use stdout. 
+#   For that reason, we've overwritten echo and we point it to stderr since command substitions use stdout. 
 export OVERWRITE_echo=1
 if [ "${OVERWRITE_echo-}" = "1" ]; then
 	echo (){
@@ -32,13 +32,13 @@ dk_echo (){
 	[ ${#} -eq 0 ] && echo "" && return
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-#	# https://linuxcommand.org/lc3_man_pages/echoh.html
+	# https://linuxcommand.org/lc3_man_pages/echoh.html
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
 	[ -z ${NO_NEWLINE-} ]   && export NO_NEWLINE=0
 	[ "${ESCAPES}" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
 	[ "${NO_NEWLINE}" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
 
-	msg=${1-}
+	msg=${1}
 	msg=${msg//\\/\\\\}    # replace all exscapes
 	msg=${msg//\\\\x/\\x}  # put back all \x escapes for color
 	

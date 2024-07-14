@@ -11,7 +11,7 @@ dk_hexToAscii (){
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	dk_fixme
-	ascii=$(echo ${1} | xxd -r)
+	local ascii=$(builtin echo ${1} | xxd -r)
 
 	eval "${2}=${ascii}"
 	dk_printVar "${2}"
@@ -23,5 +23,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_debugFunc
 	
 	dk_hexToAscii 0x55 ascii
-	echo "ascii = ${ascii}"
+	dk_echo "ascii = ${ascii}"
 }

@@ -21,9 +21,6 @@ dk_getNativePath (){
 	else
 		local ret_val="${2-}"
 		dk_printVar ret_val
-		
-		#dk_fixme("MacOS readlink has no -f parameter"); return
-		#dk_return "$(readlink -f "${1}")"; return
 		dk_return "$(dk_readlink -f "${1}")"; return
 	fi
 }
@@ -31,10 +28,11 @@ dk_getNativePath (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_getNativePath "/c/Windows/System32" nativePath
-	echo "nativePath = ${nativePath}"
+	dk_echo "nativePath = ${nativePath}"
 	
 	#nativePathB=$(dk_getNativePath "/c/Windows/System32")
-	#echo "nativePathB = ${nativePathB}"
+	#dk_echo "nativePathB = ${nativePathB}"
 }

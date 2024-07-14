@@ -9,27 +9,27 @@
 dk_fileContains (){
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-		
+	
+	dk_commandExists grep || dk_install grep
 	grep -q "${2}" "${1}"
 }
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	echo "find the needle in the haystack" > fileContains_TEST.txt
+	dk_debugFunc
 	
+	dk_fileWrite "fileContains_TEST.txt" "find the needle in the haystack"
 	
 	if dk_fileContains "fileContains_TEST.txt" "needle"; then
-		echo "The file contains the string"
+		dk_echo "The file contains the string"
 	else
-		echo "The file does NOT contain the string"
+		dk_echo "The file does NOT contain the string"
 	fi
 	
-	
 	if dk_fileContains "fileContains_TEST.txt" "nope"; then
-		echo "The file contains the string"
+		dk_echo "The file contains the string"
 	else
-		echo "The file does NOT contain the string"
+		dk_echo "The file does NOT contain the string"
 	fi
 }
