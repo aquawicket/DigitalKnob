@@ -5,10 +5,13 @@
 ##################################################################################
 # dk_readlink(path "-f" rtn_var)
 #
-#    reference: https://stackoverflow.com/a/1116890/688352
-#	macOs: https://www.unix.com/man-page/osx/1/readlink/
+#    read the contents of a symbolic link
 #
-#	example: dk_return "$(dk_readlink -f "$path")"; return 
+#	 example: dk_return "$(dk_readlink -f "$path")"; return 
+#
+#    SHELL: https://man7.org/linux/man-pages/man1/realpath.1.html
+#    C:     https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html
+#	 OSX:   https://www.unix.com/man-page/osx/1/readlink/
 #
 dk_readlink (){
 	dk_debugFunc
