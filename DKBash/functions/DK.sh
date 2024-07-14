@@ -234,7 +234,7 @@ dksetOptions(){
 	#shopt -s expand_aliases
 	
 	dk_echo "SHELLOPTS = ${SHELLOPTS}"
-	dk_echo "BASHOPTS = ${BASHOPTS}"
+	dk_echo "BASHOPTS = ${BASHOPTS-}"
 }
 
 
