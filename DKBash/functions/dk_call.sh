@@ -13,8 +13,9 @@ dk_call(){
 	if ! dk_commandExists ${1}; then
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then	# Is it a dk_ prefixed function?
 			dk_commandExists dk_load  || dk_source dk_load
-			dk_commandExists ${1}     || dk_load ${1}
+			dk_load ${1}
 		else										# Not a dk_ prefixed function
+			dk_commandExists dk_install  || dk_source dk_install
 			dk_install ${1}
 		fi
 		dk_commandExists ${1} || dk_error "${1}: command not found"
@@ -25,7 +26,7 @@ dk_call(){
 	#[ -z "$(command -v "${1}")" ] && dk_source ${1}
 	#[ -n "$(command -v "${1}")" ] || [$(read -rp '${1} command not found, press enter to exit')] || exit;
 	
-	dk_echo "${*}"
+	dk_echo "${cyan}dk_call>${clr} ${*}"
 	"${@}"
 }
 

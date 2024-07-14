@@ -32,8 +32,8 @@ dk_load (){
 	#### download if missing ####
 	if [ ! -e ${funcPath} ]; then
 		if [[ "${funcName}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
-			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
-			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_call wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 			[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 			dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
 			[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found"
@@ -44,7 +44,7 @@ dk_load (){
 	
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
-	#if [[ $(dk_command file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
+	#if [[ $(dk_call file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
 	if $(dk_commandExists file); then
 		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		        # BASH REGEX MATCH
 			dk_echo "Converting file to Unix line endings"
