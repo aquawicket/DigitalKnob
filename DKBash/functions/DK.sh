@@ -9,33 +9,33 @@ DK (){
 	#dk_debugFunc
 	
 	###### Reload Main Script with bash ######
-	reloadWithBash ${*}
+	dkreloadWithBash ${*}
 
 	
 	###### Initialize Language specifics ######
-	dk_init
+	dkinit
 	#dk_echo "DKINIT(${*})"
 
 
 	############ Get DKBASH variables ############
-	dk_DKBASH_VARS
+	DKBASH_VARS
 	#dk_printVar DKBASH_DIR
 	#dk_printVar DKBASH_FUNCTIONS_DIR
 
 
 	############ Get DKHTTP variables ############
-	dk_DKHTTP_VARS
+	DKHTTP_VARS
 	#dk_printVar DKHTTP_DKBASH_FUNCTIONS_DIR
 
 
 	############ Setup dk_callStack ############
-	#dk_setupCallstack
+	#dksetupCallstack
 	#dk_callStack
 	#:dk_callStackReturn
 
 
 	############ Get DKSCRIPT variables ############
-	dk_DKSCRIPT_VARS
+	DKSCRIPT_VARS
 	#dk_printVar DKSCRIPT_PATH
 	#dk_printVar DKSCRIPT_ARGS
 	#dk_printVar DKSCRIPT_DIR
@@ -43,7 +43,7 @@ DK (){
 
 
 	############ Setup KeepOpen ############
-	#dk_setupKeepOpen
+	#dksetupKeepOpen
 
 
 	##### CD into the DKSCRIPT_DIR directory #####
@@ -51,7 +51,7 @@ DK (){
 
 
 	############ Set Options ############
-	dk_setOptions
+	dksetOptions
 
 
 	############ LOAD FUNCTION FILES ############
@@ -94,46 +94,46 @@ DK (){
 
 
 ##################################################################################
-# dk_init()
+# dkinit()
 #
-dk_init(){
+dkinit(){
 	#dk_debugFunc
 	
 	###### fallback functions ######
-	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
-	dk_commandExists "dk_echo"           || dk_echo()           { builtin echo ${*};                                                                                                              }
-	dk_commandExists "dk_pause"          || dk_pause()          { dk_echo "Press enter to continue..."; read -rp '';                                                                              }
-	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; [$(read -rp "press enter to exit")] || exit;                                                 }
-	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}";                                                                                         }
-	dk_commandExists "dk_info"           || dk_info()           { dk_echo "${1}";                                                                                                                 }
-	dk_commandExists "dk_debug"          || dk_debug()          { dk_echo "${blue}${1}${clr}";                                                                                                    }
-	dk_commandExists "dk_verbose"        || dk_verbose()        { dk_echo "${cyan}${1}${clr}";                                                                                                    }
-	dk_commandExists "dk_printVar"       || dk_printVar()       { dk_echo "${blue}${1} = ${!1-}${clr}";                                                                                           }
-	dk_commandExists "dk_pathExists"     || dk_pathExists()     { [ -e "${1}" ];                                                                                                                  }
-	dk_commandExists "dk_stringContains" || dk_stringContains() { [ "${1#*"$2"}" != "${1}" ];                                                                                                     }
-	dk_commandExists "dk_unset"          || dk_unset()          { dk_commandExists "unset"    && unset "${1}";                                                                                    }
-	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="${2}";                                                                              }
-	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "${value}" ];                                                       }
-	dk_commandExists "dk_basename"       || dk_commandExists "basename" && dk_basename(){ builtin echo $(basename ${1});                                                                             }
-	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && builtin echo $(dirname ${1})  || dk_error "dirname command not found";                              }
-	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && builtin echo $(realpath ${1}) || builtin echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-	dk_commandExists "dk_debugFunc"      || dk_debugFunc()      { dk_echo "${cyan}$(dk_basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}";                 }
+	$(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
+	dk_commandExists dk_defined          || dk_commandExists eval   && dk_defined(){ builtin eval value='$'{${1}+x}; [ -n "${value}" ]; }
+	dk_commandExists dk_export           || dk_commandExists export && dk_export() { builtin export ${1}="${2}"; }
+	dk_commandExists dk_echo             || dk_commandExists echo   && dk_echo()   { builtin echo ${*}; }
+	dk_commandExists dk_pause            || dk_commandExists read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }
+	dk_defined       ESC                 || dk_export ESC        ""
+	dk_defined       clr                 || dk_export clr        "${ESC}[0m"
+	dk_defined       black               || dk_export black      "${ESC}[30m"
+	dk_defined       red                 || dk_export red        "${ESC}[31m"
+	dk_defined       yellow              || dk_export yellow     "${ESC}[33m"
+	dk_defined       blue                || dk_export blue       "${ESC}[34m"
+	dk_defined       cyan                || dk_export cyan       "${ESC}[36m"
+	dk_defined       bg_magenta          || dk_export bg_magenta "${ESC}[45m"
+	dk_commandExists dk_error            || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; dk_pause; exit; }
+	dk_commandExists dk_warning          || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}"; }
+	dk_commandExists dk_info             || dk_info()           { dk_echo "${1}"; }
+	dk_commandExists dk_debug            || dk_debug()          { dk_echo "${blue}${1}${clr}"; }
+	dk_commandExists dk_verbose          || dk_verbose()        { dk_echo "${cyan}${1}${clr}"; }
+	dk_commandExists dk_printVar         || dk_printVar()       { dk_echo "${blue}${1} = ${!1-}${clr}"; }
+    dk_commandExists dk_pathExists       || dk_pathExists()     { [ -e "${1}" ]; }
+    dk_commandExists dk_stringContains   || dk_stringContains() { [ "${1#*"$2"}" != "${1}" ]; }
+    dk_commandExists dk_unset            || dk_commandExists "unset"    && dk_unset()   { builtin unset "${1}"; }
+    dk_commandExists dk_basename         || dk_commandExists "basename" && dk_basename(){ builtin echo $(basename ${1}); }
+    dk_commandExists dk_dirname          || dk_commandExists "dirname"  && dk_dirname() { builtin echo $(dirname ${1}); }
+    dk_commandExists dk_realpath         || dk_commandExists "realpath" && dk_realpath(){ builtin echo $(realpath ${1}) || builtin echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
+    dk_commandExists dk_debugFunc        || dk_debugFunc(){ dk_echo "${cyan}$(dk_basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
 	
 	###### default variables ######
-	dk_defined ESC        || dk_export ESC        ""
-	dk_defined clr        || dk_export clr        "${ESC}[0m"
-	dk_defined black      || dk_export black      "${ESC}[30m"
-	dk_defined red        || dk_export red        "${ESC}[31m"
-	dk_defined yellow     || dk_export yellow     "${ESC}[33m"
-	dk_defined blue       || dk_export blue       "${ESC}[34m"
-	dk_defined cyan       || dk_export cyan       "${ESC}[36m"
-	dk_defined bg_magenta || dk_export bg_magenta "${ESC}[45m"
 }
 
 ##################################################################################
-# reloadWithBash()
+# dkreloadWithBash()
 #
-reloadWithBash(){
+dkreloadWithBash(){
 	#dk_debugFunc
 	
 	if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
@@ -141,14 +141,14 @@ reloadWithBash(){
 		echo "reloading with bash . . ."
 		unset DKINIT
 		export DKINIT=""
-		bash "${0}" #dk_command bash "${0}"
+		exec bash "${0}" #dk_command bash "${0}"
 	fi
 }
 
 ##################################################################################
-# dk_DKBASH_VARS()
+# DKBASH_VARS()
 #
-dk_DKBASH_VARS(){
+DKBASH_VARS(){
 	#dk_debugFunc
 	
 	dk_export BASH_SOURCE_DIR      $( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
@@ -164,9 +164,9 @@ dk_DKBASH_VARS(){
 }
 
 ##################################################################################
-# dk_DKHTTP_VARS()
+# DKHTTP_VARS()
 #
-dk_DKHTTP_VARS(){
+DKHTTP_VARS(){
 	#dk_debugFunc
 	
 	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
@@ -176,18 +176,18 @@ dk_DKHTTP_VARS(){
 }
 
 ##################################################################################
-# dk_setupCallstack()
+# dksetupCallstack()
 #
-dk_setupCallstack(){
+dksetupCallstack(){
 	#dk_debugFunc
 	
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
 
 ##################################################################################
-# dk_DKSCRIPT_VARS()
+# DKSCRIPT_VARS()
 #
-dk_DKSCRIPT_VARS(){
+DKSCRIPT_VARS(){
 	#dk_debugFunc
 	
 	dk_pathExists    $(dk_realpath ${0}) && dk_export  DKSCRIPT_PATH  $(dk_realpath ${0})
@@ -200,9 +200,9 @@ dk_DKSCRIPT_VARS(){
 }
 
 ##################################################################################
-# dk_setupKeepOpen()
+# dksetupKeepOpen()
 #
-dk_setupKeepOpen(){
+dksetupKeepOpen(){
 	#dk_debugFunc
 	
 	dk_echo
@@ -210,9 +210,9 @@ dk_setupKeepOpen(){
 }
 
 ##################################################################################
-# dk_setOptions()
+# dksetOptions()
 #
-dk_setOptions(){
+dksetOptions(){
 	#dk_debugFunc
 	
 	###### Set and check posix mode ######
