@@ -11,7 +11,7 @@
 #
 dk_load (){
 	#dk_debugFunc
-	#dk_echo "dk_load($*)"
+	dk_echo "dk_load($*)"
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 	[ "${1}" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
@@ -31,18 +31,22 @@ dk_load (){
 	
 	#### download if missing ####
 	if [ ! -e ${funcPath} ]; then
-		[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
-		[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		if [[ "${funcName}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
+			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 
-		[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
-	
-		dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
+			[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 		
-		[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
-		
-		#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
-		#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
-		#[ ! -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
+			dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
+			
+			[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found"
+			
+			#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
+			#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
+			#[ ! -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
+		else
+			dk_warning "'${funcName}' does not match the dk_ regex pattern"
+		fi
 	fi
 	
 	
@@ -65,8 +69,8 @@ dk_load (){
 		
 		oldIFS=${IFS}
 		IFS=$'\n'
-		matchList=( $(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${funcPath}) ) || true # || true; #return 0
-		#IFS=$'\n' read -r -d '' -a matchList < <( echo "$(grep -E "(dk|DK)_[a-zA-Z0-9]*" ${funcPath})" && printf '\0' )
+		matchList=( $(grep -E "dk_[a-zA-Z0-9]+" ${funcPath}) ) || true # || true; #return 0
+		#IFS=$'\n' read -r -d '' -a matchList < <( echo "$(grep -E "dk_[a-zA-Z0-9]+" ${funcPath})" && printf '\0' )
 		IFS=${oldIFS}
 		for match in "${matchList[@]}"; do
 			#match=${match%%N*}   # cut off everything from the first N to end
@@ -74,11 +78,11 @@ dk_load (){
 			#match=${match#*N}    # cut off everything from begining to first N
 			#match=${match##*N}   # cut off everything from begining to last N
 				
-			match=${match//'$#'/}					    # remove any $# before removing #comments
-			match=${match//'${#}'/}					    # remove any ${#} before removing #comments
-			match=${match%%#*}						    # remove everything after # (comments)
-			if ! [[ "${match}" =~ [Dd][Kk]_[A-Za-z0-9_]* ]];then  continue; fi	# BASH REGEX MATCH
-			match=${BASH_REMATCH[0]}				    	# BASH REGEX VALUE
+			match=${match//'$#'/}					                 # remove any $# before removing #comments
+			match=${match//'${#}'/}					                 # remove any ${#} before removing #comments
+			match=${match%%#*}						                 # remove everything after # (comments)
+			[[ "${match}" =~ dk_[a-zA-Z0-9]+ ]] || continue 	     # BASH REGEX MATCH
+			match=${BASH_REMATCH[0]}				                 # BASH REGEX VALUE
 			
 			#match=$(builtin echo "${match}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			#[ -z "${match}" ] && continue

@@ -277,12 +277,13 @@ dk_source(){
 dk_call(){
 	dk_debugFunc
 	
-	if ! dk_commandExists "${1}"; then
+	if ! dk_commandExists ${1}; then
+		[ "${1:0:3}" = "dk_" ]    || dk_error "calling non dk_ function with dk_call()"
 		dk_commandExists dk_load  || dk_source dk_load
 		dk_commandExists ${1}     || dk_load ${1}
 		dk_commandExists ${1}     || dk_error "${1}: command not found"
 	fi
-	#dk_echo "${@}"
+	#dk_echo "${*}"
 	"${@}"
 }
 
@@ -294,8 +295,9 @@ dk_call(){
 dk_command(){
 	dk_debugFunc
 	
-	dk_commandExists ${1} || dk_install ${1}
-	dk_commandExists ${1} || dk_error "${1}: command not found"
+	[ "${1:0:3}" = "dk_" ] && dk_error "calling dk_ function with dk_command()"
+	dk_commandExists ${1}  || dk_install ${1}
+	dk_commandExists ${1}  || dk_error "${1}: command not found"
 	#dk_echo "${*}"
 	"${@}"
 }
