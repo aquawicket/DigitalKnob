@@ -13,12 +13,12 @@ dk_load (){
 	#dk_debugFunc
 	dk_echo "dk_load($*)"
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
-	[ "${1}" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
+	EXCLUDE_LIST="dk_whatever,dk_depend,dk_DontLoadMe"
+	[[ ${EXCLUDE_LIST} =~ "${1}" ]] && dk_warning "${1} is excluded" && return 0  #FIXME: need to better handle non-existant files
 	
 	local funcName=
 	local funcPath=
 	if [ -e "${1}" ]; then
-		#funcPath=$(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1})
 		funcPath=$(dk_realpath "${1}")
 		funcName=$(dk_basename "${funcPath}")
 	    funcName="${funcName%.*}"
@@ -34,33 +34,24 @@ dk_load (){
 		if [[ "${funcName}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
 			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
-
 			[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
-		
 			dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
-			
 			[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found"
-			
-			#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
-			#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
-			#[ ! -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
 		else
 			dk_warning "'${funcName}' does not match the dk_ regex pattern"
 		fi
 	fi
 	
-	
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
 	#if [[ $(dk_command file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
 	if $(dk_commandExists file); then
-		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
+		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		        # BASH REGEX MATCH
 			dk_echo "Converting file to Unix line endings"
 			sed -i -e 's/\r$//' ${funcPath}
 		fi
 	fi
 	
-
 	#if echo "${DKFUNCTIONS_LIST}" | grep -q ";${funcName};"; then      # POSIX REGEX
 	if ! [[ "${DKFUNCTIONS_LIST-}" =~ ";${funcName};" ]]; then			# BASH REGEX MATCH
 	
@@ -73,6 +64,7 @@ dk_load (){
 		#IFS=$'\n' read -r -d '' -a matchList < <( echo "$(grep -E "dk_[a-zA-Z0-9]+" ${funcPath})" && printf '\0' )
 		IFS=${oldIFS}
 		for match in "${matchList[@]}"; do
+			#dk_echo "match = ${match}"
 			#match=${match%%N*}   # cut off everything from the first N to end
 			#match=${match%N*}    # cut off everything from the last N to end
 			#match=${match#*N}    # cut off everything from begining to first N
@@ -82,13 +74,15 @@ dk_load (){
 			match=${match//'${#}'/}					                 # remove any ${#} before removing #comments
 			match=${match%%#*}						                 # remove everything after # (comments)
 			[[ "${match}" =~ dk_[a-zA-Z0-9]+ ]] || continue 	     # BASH REGEX MATCH
+			
 			match=${BASH_REMATCH[0]}				                 # BASH REGEX VALUE
+			#dk_echo "match = ${match}"
 			
 			#match=$(builtin echo "${match}" | grep -o "[Dd][Kk]_[A-Za-z0-9_]*" | head -1)	# POSIX REGEX MATCH
 			#[ -z "${match}" ] && continue
 
 			if [[ ${DKFUNCTIONS_LIST} =~ ";${match};" ]]; then			# BASH REGEX MATCH
-			#if echo ${DKFUNCTIONS_LIST} | grep -q "${match};"; then    # POSIX REGEX MATCH
+			#if echo ${DKFUNCTIONS_LIST} | grep -q ";${match};"; then   # POSIX REGEX MATCH
 				#dk_echo "${funcName}: skipping ${match}.    already in load_list"
 				continue
 			elif [ "${funcName}" = "${match}" ]; then
