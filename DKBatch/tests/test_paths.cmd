@@ -45,7 +45,7 @@ call "../functions/DK.cmd"
 	call dk_getPath "%IN%" pathOnly
 	echo pathOnly   = %pathOnly%
 
-	call dk_getBasename "%IN%" nameOnly
+	call dk_basename "%IN%" nameOnly
 	echo nameOnly   = %nameOnly%
 
 	call dk_getExtension "%IN%" extension
@@ -66,10 +66,10 @@ call "../functions/DK.cmd"
 	call dk_getFileSize "%IN%" filesize
 	echo filesize   = %filesize% bytes
 	
-	call dk_getBasename "%IN%" fullname
+	call dk_basename "%IN%" fullname
 	echo fullname   = %fullname%
 	
-	call dk_getDirname "%IN%" directory
+	call dk_dirname "%IN%" directory
 	echo directory  = %directory%
 	
 	pause

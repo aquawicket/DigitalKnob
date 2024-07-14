@@ -17,7 +17,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
 	if not defined OPENJDK_DL call dk_error "OPENJDK_DL is invalid"
 	
-	call dk_getBasename %OPENJDK_DL% OPENJDK_DL_FILE
+	call dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
 	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_DL_NAME
 	call dk_convertToCIdentifier %OPENJDK_DL_NAME% OPENJDK_FOLDER
 	call dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER

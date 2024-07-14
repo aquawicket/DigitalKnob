@@ -23,7 +23,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	:: Step 4 - Download the Linux kernel update package
 	call dk_validate HOST_ARCH "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set WSL_DL "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
-	call dk_getBasename %WSL_DL% WSL_DL_FILE
+	call dk_basename %WSL_DL% WSL_DL_FILE
 	call dk_echo   
     call dk_info "Installing Wsl Update . . ."
     call dk_download %WSL_DL%
@@ -39,7 +39,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_info "Installing WSL-Alpine Linux . . ."
 	call dk_download %LAUNCHER_DL%
 	call dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
-	call dk_getBasename %LAUNCHER_DL% LAUNCHER_DL_FILE
+	call dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
 	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE% OVERWRITE
 	%DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
 	

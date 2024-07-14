@@ -22,7 +22,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_info "Installing Alpine Linux . . ."
 	call dk_download %LAUNCHER_DL%
 	call dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
-	call dk_getBasename %LAUNCHER_DL% LAUNCHER_DL_FILE
+	call dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
 	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %ALPINE%\%LAUNCHER_DL_FILE% OVERWRITE
 	%ALPINE%\%LAUNCHER_DL_FILE%
 	if NOT exist "%ALPINE%\%LAUNCHER_DL_FILE%" call dk_error "cannot find ALPINE\LAUNCHER_DL_FILE:%ALPINE%\%LAUNCHER_DL_FILE%"

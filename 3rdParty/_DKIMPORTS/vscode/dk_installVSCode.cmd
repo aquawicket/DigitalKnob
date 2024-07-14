@@ -20,7 +20,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip"
 	if not defined VSCODE_DL call dk_error "VSCODE_DL is invalid"
 	
-	call dk_getBasename %VSCODE_DL% VSCODE_DL_FILE
+	call dk_basename %VSCODE_DL% VSCODE_DL_FILE
 	call dk_removeExtension %VSCODE_DL_FILE% VSCODE_FOLDER
 	call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
 	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER

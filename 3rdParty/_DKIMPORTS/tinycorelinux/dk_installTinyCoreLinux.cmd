@@ -23,7 +23,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		if exist "%TINYCORELINUX_IMG%" goto:eof
 		
 		call dk_info "Installing tiny-core-linux . . ."
-		call dk_getBasename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
+		call dk_basename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
 		call dk_download %TINYCORELINUX_DL%
 		
 		:: create and cd into install directory

@@ -18,7 +18,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip"
     if not defined NODEJS_DL call dk_error "NODEJS_DL is invalid"
 	
-    call dk_getBasename %NODEJS_DL% NODEJS_DL_FILE
+    call dk_basename %NODEJS_DL% NODEJS_DL_FILE
 	call dk_removeExtension %NODEJS_DL_FILE% NODEJS_DL_NAME
     call dk_convertToCIdentifier %NODEJS_DL_NAME% NODEJS_FOLDER
     call dk_toLower %NODEJS_FOLDER% NODEJS_FOLDER

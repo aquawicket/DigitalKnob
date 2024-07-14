@@ -32,7 +32,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	)
 	
 	:: the base directory of the %to% path must exist.    
-	call dk_getDirname "%_to_%" _parent_dir_
+	call dk_dirname "%_to_%" _parent_dir_
 	call dk_makeDirectory "%_parent_dir_%"
 	
 	::copy "%_from_%" "%_to_%"

@@ -16,22 +16,22 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_getFullPath "%src%" src_fullpath
 	call dk_printVar src_fullpath
 	
-	call dk_getDirname "%src_fullpath%" src_directory
+	call dk_dirname "%src_fullpath%" src_directory
 	call dk_printVar src_directory
 	
-	call dk_getBasename "%src_fullpath%" src_filename
+	call dk_basename "%src_fullpath%" src_filename
 	call dk_printVar src_filename
 	
-	call dk_getBasename "%src_filename%" src_folder
+	call dk_basename "%src_filename%" src_folder
 	call dk_printVar src_folder
 	
 	call dk_getFullPath "%dest%" dest_fullpath
 	call dk_printVar dest_fullpath
 	
-	call dk_getDirname "%dest_fullpath%" dest_directory
+	call dk_dirname "%dest_fullpath%" dest_directory
 	call dk_printVar dest_directory
 	
-	call dk_getBasename "%dest_fullpath%" dest_folder
+	call dk_basename "%dest_fullpath%" dest_folder
 	call dk_printVar dest_folder
 	
 ::	if not exist "%dest_fullpath%" (

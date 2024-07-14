@@ -20,7 +20,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set CMAKE_DL "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"
     if not defined CMAKE_DL call dk_error "CMAKE_DL is invalid"
 	
-    call dk_getBasename %CMAKE_DL% CMAKE_DL_FILE
+    call dk_basename %CMAKE_DL% CMAKE_DL_FILE
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER

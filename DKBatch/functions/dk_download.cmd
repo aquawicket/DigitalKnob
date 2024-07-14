@@ -3,7 +3,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 call dk_source dk_debugFunc
 call dk_source dk_error
-call dk_source dk_getBasename
+call dk_source dk_basename
 call dk_source dk_getDKPaths
 call dk_source dk_getFullPath
 call dk_source dk_info
@@ -19,7 +19,7 @@ call dk_source dk_validate
 	
 	set "destination=%~2"
 	if defined destination goto:destination_set
-	call dk_getBasename %~1 DL_FILE
+	call dk_basename %~1 DL_FILE
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	call dk_set destination "%DKDOWNLOAD_DIR%\%DL_FILE%"
 	:destination_set

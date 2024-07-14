@@ -2,7 +2,7 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 call dk_source dk_validate
-call dk_source dk_getBasename
+call dk_source dk_basename
 call dk_source dk_removeExtension
 call dk_source dk_convertToCIdentifier
 call dk_source dk_toLower
@@ -25,7 +25,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL %GIT_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL %GIT_DL_WIN_X86_64%
         
-    call dk_getBasename %GIT_DL% GIT_DL_FILE
+    call dk_basename %GIT_DL% GIT_DL_FILE
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER

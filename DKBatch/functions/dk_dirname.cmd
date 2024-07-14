@@ -2,11 +2,11 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::################################################################################
-::# dk_getDirname(path rtn_var)
+::# dk_dirname(path rtn_var)
 ::#
 ::#   https://en.wikipedia.org/wiki/Dirname
 ::#
-:dk_getDirname
+:dk_dirname
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
@@ -28,6 +28,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_getDirname "C:\Windows\System32" result
+	call dk_dirname "C:\Windows\System32" result
 	call dk_printVar result
 goto:eof

@@ -2,11 +2,11 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 ::################################################################################
-::# dk_getBasename(path rtn_var)
+::# dk_basename(path rtn_var)
 ::#
 ::#    https://en.wikipedia.org/wiki/Basename
 ::#
-:dk_getBasename
+:dk_basename
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
@@ -26,9 +26,9 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_getBasename C:\Windows\System32\test.v123.zip name
+	call dk_basename C:\Windows\System32\test.v123.zip name
 	call dk_echo "name = %name%"
 	
-	call dk_getBasename TEST nameb
+	call dk_basename TEST nameb
 	call dk_echo "nameb = %nameb%"
 goto:eof

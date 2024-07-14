@@ -14,7 +14,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	if not defined QEMU_DL call dk_error "QEMU_DL is invalid"
 	
-	call dk_getBasename %QEMU_DL% QEMU_DL_FILE
+	call dk_basename %QEMU_DL% QEMU_DL_FILE
 	call dk_removeExtension %QEMU_DL_FILE% QEMU_NAME
 	call dk_convertToCIdentifier %QEMU_NAME% QEMU_FOLDER
 	call dk_toLower %QEMU_FOLDER% QEMU_FOLDER

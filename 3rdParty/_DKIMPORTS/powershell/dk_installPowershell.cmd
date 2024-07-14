@@ -15,7 +15,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
 	if not defined POWERSHELL_DL call dk_error "POWERSHELL_DL is invalid"
 	
-	call dk_getBasename %POWERSHELL_DL% POWERSHELL_DL_FILE
+	call dk_basename %POWERSHELL_DL% POWERSHELL_DL_FILE
 	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
 	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER

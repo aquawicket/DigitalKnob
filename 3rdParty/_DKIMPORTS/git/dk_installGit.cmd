@@ -2,7 +2,7 @@
 call ..\..\..\DKBatch\functions\DK.cmd
 
 call dk_source dk_validate
-call dk_source dk_getBasename
+call dk_source dk_basename
 call dk_source dk_removeExtension
 call dk_source dk_convertToCIdentifier
 call dk_source dk_toLower
@@ -20,7 +20,7 @@ call dk_source dk_toLower
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
     if not defined GIT_DL call dk_error "GIT_DL is invalid" & goto:eof
         
-    call dk_getBasename %GIT_DL% GIT_DL_FILE
+    call dk_basename %GIT_DL% GIT_DL_FILE
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
