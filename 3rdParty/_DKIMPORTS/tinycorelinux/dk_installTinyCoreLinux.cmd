@@ -8,8 +8,10 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	
-	set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
+	set "TINYCORELINUX_RPI=http://www.tinycorelinux.net/15.x/aarch64/test_releases/RPi/piCore64-15.0.0-beta2.zip"
+	set "TINYCORELINUX_X86=http://www.tinycorelinux.net/15.x/x86/release/Core-current.iso"
+	set "TINYCORELINUX_X86_64=http://www.tinycorelinux.net/15.x/x86_64/release/CorePure64-current.iso"
+	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_set TINYCORELINUX "%DKTOOLS_DIR%\TinyCoreLinux"

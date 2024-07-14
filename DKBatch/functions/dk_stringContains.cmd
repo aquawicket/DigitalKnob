@@ -11,8 +11,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	
 	setlocal enableDelayedExpansion
-    call dk_set _haystack_ "%~1"
-    call dk_set _needle_ "%~2"
+    set "_haystack_=%~1"
+    set "_needle_=%~2"
     if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
 		if defined "%~3" (endlocal & call dk_set %3 true)
 		(call )

@@ -27,6 +27,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	%ALPINE%\%LAUNCHER_DL_FILE%
 	if NOT exist "%ALPINE%\%LAUNCHER_DL_FILE%" call dk_error "cannot find ALPINE\LAUNCHER_DL_FILE:%ALPINE%\%LAUNCHER_DL_FILE%"
 	:alpine_installed
+
 goto:eof
 
 
