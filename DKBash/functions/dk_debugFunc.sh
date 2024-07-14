@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_debugFunc()
 #
@@ -24,13 +23,13 @@ alias dk_debugFunc='{
 }'
 
 
-func1 (){
-	dk_debugFunc
-}
+#func1 (){
+#	dk_debugFunc
+#}
 	
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-	ENABLE_dk_debugFunc=1
-	dk_debugFunc
-	
-	func1 1 "2" '3'
-}
+#DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+#	ENABLE_dk_debugFunc=1
+#	dk_debugFunc
+#	
+#	func1 1 "2" '3'
+#}

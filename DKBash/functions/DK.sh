@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return || export DKINIT=1	# include_guard
 
+[ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
 ##################################################################################
 # DKINIT()
 #
@@ -77,7 +78,8 @@ DK(){
 			dk_echo
 			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 			dk_echo
-			#dk_echo $(type DKTEST | sed '1,1d') 			# print DKTEST() code
+			dk_source "${DKSCRIPT_PATH}"
+			dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
 			DKTEST
 			dk_echo
 			dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
