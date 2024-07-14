@@ -12,12 +12,12 @@ dk_basename (){
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
-	#local _basename_=$(basename "${1}")
+	local _basename_=$(basename "${1}")
 	
 	### return value ###
-	#dk_printVar _basename_
-	[ ${#} -gt 1 ] && eval "${2}=$(basename "${1}")" && return	# return value when using rtn_var parameter 
-	dk_return $(basename "${1}"); return					    # return value when using command substitution 
+	#dk_printVar _basename_ 	# ERROR: causes infinate loop
+	[ ${#} -gt 1 ] && eval "${2}=${_basename_}" && return	# return value when using rtn_var parameter 
+	dk_return ${_basename_}; return					        # return value when using command substitution 
 }
 
 

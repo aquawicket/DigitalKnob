@@ -3,34 +3,39 @@
 
 
 ##################################################################################
-# dk_realpath(<path> <output>)
+# dk_realpath(path rtn_var)
 #
 #    reference: https://stackoverflow.com/a/18443300/688352
 #
 dk_realpath (){
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#dk_debugFunc
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${*}): not enough arguments"
+	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${*}): too many arguments"
 	
-	local absolutePath=""
-	if dk_commandExists readlink; then
-		#dk_fixme("MacOS readlink has no -f parameter")
-		#absolutePath=$(readlink -f "${1}") || true
-		absolutePath=$(dk_readlink -f "${1}") || true
-	elif dk_commandExists realpath; then
-		absolutePath=$(realpath "${1}")
+	local _realpath_=""
+	if dk_commandExists realpath; then
+		_realpath_=$(realpath "${1}")
+	elif dk_commandExists readlink; then
+		$(dk_readlink -f "${1}") && _realpath_=$(dk_readlink -f "${1}") || _realpath_=$(dk_readlink "${1}") #dk_fixme("MacOS readlink has no -f parameter")
 	else	
-		absolutePath=$(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1})
+		_realpath_=$(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1})
 	fi
 	
-	eval "${2}=${absolutePath}"
-	dk_printVar "${2}"
+	### return value ###
+	dk_printVar _realpath_
+	[ ${#} -gt 1 ] && eval "${2}=${_realpath_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_realpath_}; return						  # return value when using command substitution 
 }
 
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	dk_realpath dk_load.sh _realpath
-	echo "_realpath = ${_realpath}"
+	#dk_debugFunc
+	
+	realpathA=$(dk_realpath "dk_load.sh")
+	dk_echo "realpathA = ${realpathA}"
+	
+	dk_realpath "dk_load.sh" realpathB
+	dk_echo "realpathB = ${realpathB}"
 }

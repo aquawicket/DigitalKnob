@@ -12,12 +12,12 @@ dk_dirname (){
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
-	#local _dirname_=$(dirname "${1}")
+	local _dirname_=$(dirname "${1}")
 	
 	### return value ###
 	dk_printVar _dirname_
-	[ ${#} -gt 1 ] && eval "${2}=$(dirname "${1}")" && return  # return value when using rtn_var parameter 
-	dk_return $(dirname "${1}"); return						   # return value when using command substitution 
+	[ ${#} -gt 1 ] && eval "${2}=${_dirname_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_dirname_}; return						  # return value when using command substitution 
 }
 
 

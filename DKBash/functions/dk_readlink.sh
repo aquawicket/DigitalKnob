@@ -3,7 +3,7 @@
 
 
 ##################################################################################
-# dk_readlink(<path> <output>)
+# dk_readlink(path "-f" rtn_var)
 #
 #    reference: https://stackoverflow.com/a/1116890/688352
 #	macOs: https://www.unix.com/man-page/osx/1/readlink/
@@ -15,47 +15,46 @@ dk_readlink (){
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
+	# we expect to use a -f parameter, so use ${2} as the input path.
+	[ "${1}" = "-f" ] && local target_file=${2} || local target_file=${1}  
+	cd $(dk_dirname $target_file)
+	target_file=$(dk_basename $target_file)
 
-	# test $(readlink -f "%2")
-	# fallback on the code below upon failure	
-#	if $(readlinkbob -f "${2}"); then
-#		dk_echo "using readlink -f ${2}"
-#		builtin echo $(readlink -f "${2}")
-#		
-#	elif $(readlink "${2}"); then
-#		dk_echo "using readlink ${2}"
-#		
-#		builtin echo $(readlink "${2}")
-#	else
-		dk_echo "using dk_readlink -f ${2}"
-		target_file=${2}   # we expect to use a -f parameter, so use ${2} as the input path.
-
-		cd $(dk_dirname $target_file)
+	# Iterate down a (possible) chain of symlinks
+	while [ -L "$target_file" ]
+	do
+		target_file=$(readlink $target_file)
+		cd $(dk_dirname $TARGET_FILE)
 		target_file=$(dk_basename $target_file)
+	done
 
-		# Iterate down a (possible) chain of symlinks
-		while [ -L "$target_file" ]
-		do
-			target_file=$(readlink $target_file)
-			cd $(dk_dirname $TARGET_FILE)
-			target_file=$(dk_basename $target_file)
-		done
-
-		# Compute the canonicalized name by finding the physical path 
-		# for the directory we're in and appending the target file.
-		phys_dir=$(pwd -P)
-		readlinkPath=$phys_dir/$target_file
-		builtin echo $readlinkPath
-#	fi
-	#eval "${2}=${readlinkPath}"
-	#dk_printVar "${2}"
+	# Compute the canonicalized name by finding the physical path 
+	# for the directory we're in and appending the target file.
+	local phys_dir=$(pwd -P)
+	local _readlink_=${phys_dir}/${target_file}
+		
+	### return value ###
+	dk_printVar _readlink_
+	[ ! "${1}" = "-f" ] && [ ${#} -gt 1 ] && eval "${2}=${_readlink_}" && return  # return value when using rtn_var parameter 
+	[ "${1}" = "-f" ] && [ ${#} -gt 2 ] && eval "${3}=${_readlink_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_readlink_}; return						   # return value when using command substitution 
 }
 
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
-	_readlink=$(dk_readlink -f "dk_load.sh")
-	echo "_readlink = ${_readlink}"
+	dk_debugFunc
+	
+	readlinkA=$(dk_readlink -f "dk_load.sh")
+	dk_echo "readlinkA = ${readlinkA}"
+	
+	dk_readlink -f "dk_load.sh" readlinkB
+	dk_echo "readlinkB = ${readlinkB}"
+	
+	readlinkC=$(dk_readlink "dk_load.sh")
+	dk_echo "readlinkC = ${readlinkC}"
+	
+	dk_readlink "dk_load.sh" readlinkD
+	dk_echo "readlinkD = ${readlinkD}"
 }
