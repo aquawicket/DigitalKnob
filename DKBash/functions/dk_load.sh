@@ -10,8 +10,8 @@
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
 dk_load (){
-	#dk_debugFunc
-	dk_echo "dk_load($*)"
+	dk_debugFunc
+	#dk_echo "dk_load($*)"
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 	EXCLUDE_LIST="dk_whatever,dk_depend,dk_DontLoadMe"
 	[[ ${EXCLUDE_LIST} =~ "${1}" ]] && dk_warning "${1} is excluded" && return 0  #FIXME: need to better handle non-existant files
@@ -86,14 +86,14 @@ dk_load (){
 				#dk_echo "${funcName}: skipping ${match}.    already in load_list"
 				continue
 			elif [ "${funcName}" = "${match}" ]; then
-				#dk_echo "${funcName}: skipping ${match}.    already matches funcName"
+				dk_error "${funcName}: skipping ${match}.    already matches funcName"   
 				continue
 			# FIXME: this messes things up 
 			#elif ! [ $(command -v ${match}) = "" ]; then
 				#dk_echo "${funcName}: skipping ${match}.    command already recognized"
 				#continue
 			elif [ "${match}" = "" ]; then
-				#dk_echo "${funcName}: skipping ${match}.    empty"
+				dk_error "${funcName}: skipping ${match}.    empty"
 				continue
 			else
 				#dk_echo "dk_load(match:${match})"
