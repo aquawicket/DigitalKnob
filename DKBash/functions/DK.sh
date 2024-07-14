@@ -98,6 +98,7 @@ dkreloadWithBash(){
 		echo "reloading with bash . . ."
 		unset DKINIT
 		export DKINIT=""
+		$(command -v ${1} 1>/dev/null) || echo "bash command not found!";
 		exec bash "${0}" #dk_command bash "${0}"
 	fi
 }
@@ -112,6 +113,8 @@ dkinit(){
 	dk_commandExists dk_export           || dk_commandExists     export && dk_export() { builtin export ${1}="${2}"; }                         # dk_export variable value
 	dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { builtin echo "${*}"; }                                # dk_echo "test dk_echo"
 	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }  # dk_pause
+	dk_defined       true                || dk_export true       0                                                                             # true
+	dk_defined       false               || dk_export false      1                                                                             # false
 	dk_defined       ESC                 || dk_export ESC        ""                                                                            # Escape character
 	dk_defined       clr                 || dk_export clr        "${ESC}[0m"
 	dk_defined       black               || dk_export black      "${ESC}[30m"
@@ -128,18 +131,18 @@ dkinit(){
 	dk_commandExists dk_printVar         || dk_printVar()        { dk_echo "${cyan}${1} = ${blue}${!1-}${clr}"; }                              # dk_printVar variable
     dk_commandExists dk_pathExists       || dk_pathExists()      { [ -e "${1}" ]; }                                                            # dk_pathExists "/usr/bin"
     dk_commandExists dk_stringContains   || dk_stringContains()  { [ "${1#*"$2"}" != "${1}" ]; }                                               # dk_stringContains string search
-    dk_commandExists dk_unset            || dk_commandExists unset    && dk_unset()   { builtin unset "${1}"; }                                # dk_unset variable
-    dk_commandExists dk_basename         || dk_commandExists basename && dk_basename(){ builtin echo $(basename ${1}); }                       # dk_basename path
-    dk_commandExists dk_dirname          || dk_commandExists dirname  && dk_dirname() { builtin echo $(dirname ${1}); }                        # dk_dirname path
-    dk_commandExists dk_realpath         || dk_commandExists realpath && dk_realpath(){ builtin echo $(realpath ${1}); } || dk_realpath(){ builtin echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-    dk_commandExists dk_debugFunc        || dk_debugFunc(){ dk_echo "${cyan}$(dk_basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}"; }
+    dk_commandExists dk_unset            || dk_commandExists     unset    && dk_unset()   { builtin unset "${1}"; }                            # dk_unset variable
+    dk_commandExists dk_basename         || dk_commandExists     basename && dk_basename(){ builtin echo $(basename ${1}); }                   # dk_basename path
+    dk_commandExists dk_dirname          || dk_commandExists     dirname  && dk_dirname() { builtin echo $(dirname ${1}); }                    # dk_dirname path
+    dk_commandExists dk_realpath         || dk_commandExists     realpath && dk_realpath(){ builtin echo $(realpath ${1}); } || dk_realpath(){ builtin echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
+    dk_commandExists dk_debugFunc        || dk_debugFunc()       { dk_echo "${cyan}$(dk_basename ${BASH_SOURCE[1]}):${BASH_LINENO[1]}  ${blue}${FUNCNAME[1]}(${BASH_ARGC[1]})${clr}"; }
 }
 
 ##################################################################################
 # DKBASH_VARS()
 #
 DKBASH_VARS(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_export BASH_SOURCE_DIR      $( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
 	dk_export DKBASH_DIR           $( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
@@ -147,17 +150,13 @@ DKBASH_VARS(){
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
 	dk_call ${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
 	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
-
-	###### set true and false variables ######
-	dk_export true 0
-	dk_export false 1
 }
 
 ##################################################################################
 # DKHTTP_VARS()
 #
 DKHTTP_VARS(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
 	dk_export DKHTTP_DKBRANCH_DIR         "${DKHTTP_DIGITALKNOB_DIR}/Development"
@@ -169,7 +168,7 @@ DKHTTP_VARS(){
 # dksetupCallstack()
 #
 dksetupCallstack(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
@@ -178,7 +177,7 @@ dksetupCallstack(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_pathExists    $(dk_realpath ${0}) && dk_export  DKSCRIPT_PATH  $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
@@ -193,7 +192,7 @@ DKSCRIPT_VARS(){
 # dksetupKeepOpen()
 #
 dksetupKeepOpen(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_echo
 	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
@@ -203,7 +202,7 @@ dksetupKeepOpen(){
 # dksetOptions()
 #
 dksetOptions(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix
@@ -236,10 +235,10 @@ dksetOptions(){
 ##################################################################################
 # dk_install()
 #
-#	install a unix package
+#	install a package
 #
 dk_install(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_commandExists ${1}      && return 0					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
@@ -258,14 +257,14 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	#dk_debugFunc
+	dk_debugFunc
 	
-	dk_stringContains ${1} ".sh"  && local funcPath=${1}               || local funcPath=${1}.sh
-	dk_pathExists "${funcPath}" && local funcPath="${funcPath}"
+	dk_stringContains ${1} ".sh"                                       && local funcPath=${1}                              || local funcPath=${1}.sh
+	dk_pathExists "${funcPath}"                                        && local funcPath="${funcPath}"
 	dk_pathExists "${PWD}/$(dk_basename ${funcPath})"                  && local funcPath="${PWD}/$(dk_basename ${funcPath})"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
-	dk_pathExists "${funcPath}" || dk_error "Unable to find funcPath:${funcPath}"
+	dk_pathExists "${funcPath}"                                        || dk_error "Unable to find funcPath:${funcPath}"
 	chmod 777 ${funcPath}
 	. ${funcPath}
 }
@@ -276,7 +275,7 @@ dk_source(){
 #	call a DKBash function. dk_load it first if needed.
 #
 dk_call(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	if ! dk_commandExists "${1}"; then
 		dk_commandExists dk_load  || dk_source dk_load
@@ -293,7 +292,7 @@ dk_call(){
 #	run a unix command. Install it first if it's missing
 #
 dk_command(){
-	#dk_debugFunc
+	dk_debugFunc
 	
 	dk_commandExists ${1} || dk_install ${1}
 	dk_commandExists ${1} || dk_error "${1}: command not found"
