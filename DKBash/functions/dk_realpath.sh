@@ -19,7 +19,7 @@ dk_realpath (){
 	elif dk_commandExists realpath; then
 		absolutePath=$(realpath "${1}")
 	else	
-		absolutePath=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
+		absolutePath=$(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1})
 	fi
 	
 	eval "${2}=${absolutePath}"

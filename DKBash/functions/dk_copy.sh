@@ -38,7 +38,7 @@ dk_copy (){
 	fi
 	
 	# the base directory of the %to% path must exist.    
-	dk_getDirname "${_to_}" _parent_dir_
+	dk_dirname "${_to_}" _parent_dir_
 	dk_makeDirectory "${_parent_dir_}"
 	
 	cp -r "${_from_}" "${_to_}"

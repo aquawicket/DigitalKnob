@@ -1,26 +1,23 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
+
 ##################################################################################
-# dk_unset(variable)
+# dk_export(variable, value)
 #
 #
-dk_unset (){
+dk_export (){
 	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-
-	builtin unset ${1}
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	
+	export ${1}="${2-}"
 }
-
-
 
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
-	dk_set myVar "initial value assigned with dk_unset"
+	dk_export myVar "the string value of myVar"
 	dk_echo "myVar = ${myVar}"
-	dk_unset myVar
-	dk_echo "myVar = ${myVar-}"
 }

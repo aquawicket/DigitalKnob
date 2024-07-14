@@ -16,9 +16,7 @@ dk_isArray (){
 	dk_debugFunc 
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	if [[ "$(declare -p ${1})" =~ "declare -a" ]]; then
-		return $(true)
-	fi
+	[[ "$(declare -p ${1})" =~ "declare -a" ]] && return $(true)
 	return $(false)
 }
 

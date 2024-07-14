@@ -14,7 +14,7 @@ dk_download (){
 		return 0
 	fi
 	dk_info "Downloading ${1} . . ."
-	parentdir="$(dirname "${2}")"
+	parentdir="$(dk_dirname "${2}")"
 	dk_printVar parentdir
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"

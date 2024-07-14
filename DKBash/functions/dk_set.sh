@@ -3,15 +3,15 @@
 
 
 ##################################################################################
-# dk_set(<variable> <value>)
+# dk_set(variable, value)
 #
 #
 dk_set (){
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 
-	export ${1}="${2-}"
-	dk_printVar "${1}"
+	dk_export ${1} "${2-}"
+	dk_printVar ${1}
 }
 
 
@@ -19,7 +19,8 @@ dk_set (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-
+	dk_debugFunc
+	
 	dk_set myVar "value assigned with dk_set"	
-	echo "myVar = ${myVar}"
+	dk_echo "myVar = ${myVar}"
 }

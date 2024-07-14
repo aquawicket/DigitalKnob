@@ -8,14 +8,13 @@
 DK (){
 	#dk_debugFunc
 	
+	###### Reload Main Script with bash ######
+	reloadWithBash ${*}
+
 	
 	###### Initialize Language specifics ######
 	dk_init
 	#dk_echo "DKINIT(${*})"
-
-
-	###### Reload Main Script with bash ######
-	dk_reloadWithBash ${*}
 
 
 	############ Get DKBASH variables ############
@@ -67,7 +66,7 @@ DK (){
 	dk_source __CALLER__
 	dk_source dk_debugFunc
 	dk_source dk_load
-	dk_load dk_exit
+	#dk_load dk_exit
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	dk_load dk_color
@@ -103,6 +102,7 @@ dk_init(){
 	###### fallback functions ######
 	$(command -v dk_commandExists) || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists "dk_echo"           || dk_echo()           { builtin echo ${*};                                                                                                              }
+	dk_commandExists "dk_pause"          || dk_pause()          { dk_echo "Press enter to continue..."; read -rp '';                                                                              }
 	dk_commandExists "dk_error"          || dk_error()          { dk_echo "${red}ERROR: ${1}${clr}"; [$(read -rp "press enter to exit")] || exit;                                                 }
 	dk_commandExists "dk_warning"        || dk_warning()        { dk_echo "${yellow}WARNING: ${1}${clr}";                                                                                         }
 	dk_commandExists "dk_info"           || dk_info()           { dk_echo "${1}";                                                                                                                 }
@@ -114,11 +114,11 @@ dk_init(){
 	dk_commandExists "dk_unset"          || dk_unset()          { dk_commandExists "unset"    && unset "${1}";                                                                                    }
 	dk_commandExists "dk_export"         || dk_export()         { dk_commandExists "export"   && export ${1}="${2}";                                                                              }
 	dk_commandExists "dk_defined"        || dk_defined()        { dk_commandExists "eval"     && eval value='$'{${1}+x}; [ -n "${value}" ];                                                       }
-	dk_commandExists "dk_basename"       || dk_basename()       { dk_commandExists "basename" && builtin echo $(basename ${1}) || dk_error "basename is not implemented";                         }
-	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && builtin echo $(dirname ${1})  || dk_error "dirname is not implemented";                          }
-	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && builtin echo $(realpath ${1}) || builtin echo $(cd $(dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-	dk_commandExists "dk_debugFunc"      || dk_debugFunc()      { dk_echo "${cyan}$(basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}";                 }
-
+	dk_commandExists "dk_basename"       || dk_commandExists "basename" && dk_basename(){ builtin echo $(basename ${1});                                                                             }
+	dk_commandExists "dk_dirname"        || dk_dirname()        { dk_commandExists "dirname"  && builtin echo $(dirname ${1})  || dk_error "dirname command not found";                              }
+	dk_commandExists "dk_realpath"       || dk_realpath()       { dk_commandExists "realpath" && builtin echo $(realpath ${1}) || builtin echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
+	dk_commandExists "dk_debugFunc"      || dk_debugFunc()      { dk_echo "${cyan}$(dk_basename ${BASH_SOURCE[0]}):${BASH_LINENO[0]}  ${blue}${FUNCNAME[0]}(${BASH_ARGC[0]})${clr}";                 }
+	
 	###### default variables ######
 	dk_defined ESC        || dk_export ESC        ""
 	dk_defined clr        || dk_export clr        "${ESC}[0m"
@@ -131,17 +131,17 @@ dk_init(){
 }
 
 ##################################################################################
-# dk_reloadWithBash()
+# reloadWithBash()
 #
-dk_reloadWithBash(){
+reloadWithBash(){
 	#dk_debugFunc
 	
-	if [ ${RELOAD_WITH_BASH-1} = 1 ]; then
-		dk_export  RELOAD_WITH_BASH 0
-		#dk_echo   "reloading with bash . . ."
-		dk_unset   DKINIT
-		dk_export  DKINIT
-		dk_command bash "${0}"
+	if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
+		export RELOAD_WITH_BASH=0
+		echo "reloading with bash . . ."
+		unset DKINIT
+		export DKINIT=""
+		bash "${0}" #dk_command bash "${0}"
 	fi
 }
 
@@ -151,8 +151,8 @@ dk_reloadWithBash(){
 dk_DKBASH_VARS(){
 	#dk_debugFunc
 	
-	dk_export BASH_SOURCE_DIR      $( cd -- "$(dirname "$BASH_SOURCE")"; pwd -P )
-	dk_export DKBASH_DIR           $( cd -- "$(dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
+	dk_export BASH_SOURCE_DIR      $( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
+	dk_export DKBASH_DIR           $( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
 	dk_call ${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/*
@@ -190,14 +190,13 @@ dk_setupCallstack(){
 dk_DKSCRIPT_VARS(){
 	#dk_debugFunc
 	
-	#dk_pathExists   $(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0}) && export DKSCRIPT_PATH=$(cd "$(dirname "${0}")"; pwd -P)/$(basename ${0})
-	dk_pathExists    $(dk_realpath ${0}) && dk_export   DKSCRIPT_PATH   $(dk_realpath ${0})
+	dk_pathExists    $(dk_realpath ${0}) && dk_export  DKSCRIPT_PATH  $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_export        DKSCRIPT_ARGS       $(${*})
-	dk_export        DKSCRIPT_DIR        $(dirname ${DKSCRIPT_PATH})
+	dk_export        DKSCRIPT_DIR        $(dk_dirname ${DKSCRIPT_PATH})
 	dk_pathExists    "${DKSCRIPT_DIR}"   || dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
-	dk_export        DKSCRIPT_NAME       $(basename ${DKSCRIPT_PATH})
+	dk_export        DKSCRIPT_NAME       $(dk_basename ${DKSCRIPT_PATH})
 }
 
 ##################################################################################
@@ -219,8 +218,8 @@ dk_setOptions(){
 	###### Set and check posix mode ######
 	$(set -o posix) && set -o posix
 #	case :${SHELLOPTS}: in
-#	  *:posix:*) builtin echo "POSIX mode enabled" ;;
-#	  *)         builtin echo "POSIX mode not enabled" ;;
+#	  *:posix:*) dk_echo "POSIX mode enabled" ;;
+#	  *)         dk_echo "POSIX mode not enabled" ;;
 #	esac
 
 	###### Set error trace options ######
@@ -252,7 +251,7 @@ dk_setOptions(){
 dk_install(){
 	#dk_debugFunc
 	
-	dk_commandExists ${1}      && return 					        # if the command already exists, return
+	dk_commandExists ${1}      && return 0					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
 	dk_commandExists apt-get   && apt-get -y install "${1}"
@@ -271,12 +270,12 @@ dk_install(){
 dk_source(){
 	#dk_debugFunc
 	
-	dk_stringContains ${1} ".sh"  && local funcPath=${1}              ||      local funcPath=${1}.sh
+	dk_stringContains ${1} ".sh"  && local funcPath=${1}               || local funcPath=${1}.sh
 	dk_pathExists "${funcPath}" && local funcPath="${funcPath}"
-	dk_pathExists "${PWD}/$(basename ${funcPath})"                  && local funcPath="${PWD}/$(basename ${funcPath})"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(basename ${funcPath})"
-	dk_pathExists "${funcPath}" || dk_error "Unable to fine funcPath:${funcPath}"
+	dk_pathExists "${PWD}/$(dk_basename ${funcPath})"                  && local funcPath="${PWD}/$(dk_basename ${funcPath})"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_command curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
+	dk_pathExists "${funcPath}" || dk_error "Unable to find funcPath:${funcPath}"
 	chmod 777 ${funcPath}
 	. ${funcPath}
 }
@@ -308,7 +307,7 @@ dk_command(){
 	
 	dk_commandExists ${1} || dk_install ${1}
 	dk_commandExists ${1} || dk_error "${1}: command not found"
-	#dk_echo "${@}"
+	dk_echo "${*}"
 	"${@}"
 }
 
@@ -341,10 +340,10 @@ DK
 
 #if $(ps -o &>/dev/null);then  
 #	THIS_PATH=$(ps -o args= $PID | tail -n 6 | awk 'FNR==1 {print ${2}}')
-#	builtin echo "    THIS_PATH = $THIS_PATH"
+#	dk_echo "    THIS_PATH = $THIS_PATH"
 #	PARENT_PATH=$(ps -o args= $PPID | awk '{print ${2}}')
-#	builtin echo "    PARENT_PATH = $PARENT_PATH"
+#	dk_echo "    PARENT_PATH = $PARENT_PATH"
 #else
-#	builtin echo "ps -o NOT AVAILABLE"
+#	dk_echo "ps -o NOT AVAILABLE"
 #	builtin echo $(ps -p -f $PPID)
 #fi

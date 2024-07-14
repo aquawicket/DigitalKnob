@@ -17,13 +17,13 @@ dk_arrayAt (){
 	
 	#eval local arry=('${'$1'[@]}')
 	typeset -n arry=${1}
-	
 	local arrayAt="${arry[${2}]}"
+
+
+	### return value ###
 	dk_printVar arrayAt
-	
-	# return value
-	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}"	# return using parameter rtn_var
-	dk_return ${arrayAt}; return				# return through command substitution 
+	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}" && return	# return value when using rtn_var parameter 
+	dk_return ${arrayAt}; return						# return value when using command substitution
 }
 
 
@@ -40,7 +40,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[3]="d"
 	myArrayA[4]="e"
 	
-	elementA=$(dk_arrayAt myArrayA 3)	# return through command substitution 
+	elementA=$(dk_arrayAt myArrayA 3)	# return value when using command substitution
 	dk_echo "elementA = ${elementA}"
 	
 	
@@ -51,6 +51,6 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayB[3]="4"
 	myArrayB[4]="5"
 	
-	dk_arrayAt myArrayB 3 elementB		# return using third parameter rtn_var
+	dk_arrayAt myArrayB 3 elementB		# return value when using rtn_var parameter 
 	dk_echo "elementB = ${elementB}"
 }

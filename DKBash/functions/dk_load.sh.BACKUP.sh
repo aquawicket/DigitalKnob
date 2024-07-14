@@ -14,7 +14,7 @@ dk_load (){
 	
 	if [ -f "${1}" ]; then
 		fpath=${1}
-		fn=$(basename ${fpath})
+		fn=$(dk_basename ${fpath})
 	    fn="${fn%.*}"
 	else
 		fn=${1}

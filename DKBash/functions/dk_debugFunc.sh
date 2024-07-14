@@ -18,17 +18,7 @@ alias dk_debugFunc='{
 		done
 		local indent="${indent} L "
 		
-		
-		export ESC=""
-		export cyan="${ESC}[36m"
-		export blue="${ESC}[34m"
-		export clr="${ESC}[0m"
-	
-		if [ "$(echo -e)" = "" ]; then
-			echo -e "${cyan}[$(__TIME__)]${indent}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
-		else
-			echo "${cyan}[$(__TIME__)]${indent}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
-		fi
+		dk_echo "${cyan}[$(__TIME__)]${indent}$(__FILE__ 1):$(__LINE__ 1)  ${blue}$(__FUNCTION__ 1)($(__ARGV__ 1))${clr-}"
 	fi
 ######################################################################################################################
 }'

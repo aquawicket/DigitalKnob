@@ -10,37 +10,39 @@
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
 dk_load (){
-	dk_debugFunc
-	[ ${#} -ne 1 ] && echo "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
+	#dk_debugFunc
+	#dk_echo "dk_load($*)"
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 	[ "${1}" = "dk_depend" ] && return 0  #FIXME: need to better handle non-existant files
 	
 	local funcName=
 	local funcPath=
 	if [ -e "${1}" ]; then
-		funcPath=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
-		funcName=$(basename ${funcPath})
+		#funcPath=$(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1})
+		funcPath=$(dk_realpath "${1}")
+		funcName=$(dk_basename "${funcPath}")
 	    funcName="${funcName%.*}"
 	else
 		funcName="${1}"
-		funcName=$(basename ${funcName})
+		funcName=$(dk_basename ${funcName})
 		funcName="${funcName%.*}"
 		funcPath=${DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 	fi
 	
 	#### download if missing ####
 	if [ ! -e ${funcPath} ]; then
-		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
-		[ ! -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
+		[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 
 		[ -n "$(command -v "dk_download")" ] || . ${DKBASH_FUNCTIONS_DIR}/dk_download.sh
 	
 		dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
 		
-		[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
+		[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
 		
 		#[ ! -e ${funcPath} ] && dk_command wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 		#[ ! -e ${funcPath} ] && dk_command curl -Lo ${DKBASH_FUNCTIONS_DIR}/${funcName}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${funcName}.sh
-		#[ ! -e ${funcPath} ] && echo "ERROR: ${funcPath}: file not found" && return
+		#[ ! -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found" && return 1
 	fi
 	
 	
@@ -49,7 +51,7 @@ dk_load (){
 	#if [[ $(dk_command file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
 	if $(dk_commandExists file); then
 		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		            # BASH REGEX MATCH
-			echo "Converting file to Unix line endings"
+			dk_echo "Converting file to Unix line endings"
 			sed -i -e 's/\r$//' ${funcPath}
 		fi
 	fi
@@ -59,7 +61,7 @@ dk_load (){
 	if ! [[ "${DKFUNCTIONS_LIST-}" =~ ";${funcName};" ]]; then			# BASH REGEX MATCH
 	
 		DKFUNCTIONS_LIST="${DKFUNCTIONS_LIST-};${funcName};" 			# Add to list
-		#echo "added ${funcName} to DKFUNCTIONS_LIST"
+		#dk_echo "added ${funcName} to DKFUNCTIONS_LIST"
 		
 		oldIFS=${IFS}
 		IFS=$'\n'
@@ -83,26 +85,29 @@ dk_load (){
 
 			if [[ ${DKFUNCTIONS_LIST} =~ ";${match};" ]]; then			# BASH REGEX MATCH
 			#if echo ${DKFUNCTIONS_LIST} | grep -q "${match};"; then    # POSIX REGEX MATCH
-				#echo "${funcName}: skipping ${match}.    already in load_list"
+				#dk_echo "${funcName}: skipping ${match}.    already in load_list"
 				continue
-			elif [ ${funcName} = ${match} ]; then
-				#echo "${funcName}: skipping ${match}.    already matches funcName"
+			elif [ "${funcName}" = "${match}" ]; then
+				#dk_echo "${funcName}: skipping ${match}.    already matches funcName"
 				continue
 			# FIXME: this messes things up 
 			#elif ! [ $(command -v ${match}) = "" ]; then
-				#echo "${funcName}: skipping ${match}.    command already recognized"
+				#dk_echo "${funcName}: skipping ${match}.    command already recognized"
 				#continue
 			elif [ "${match}" = "" ]; then
-				#echo "${funcName}: skipping ${match}.    empty"
+				#dk_echo "${funcName}: skipping ${match}.    empty"
 				continue
 			else
+				#dk_echo "dk_load(match:${match})"
 				dk_load ${match}
 			fi
 		done
 
+		#dk_echo "if [ -f "${funcPath}" ]"
 		if [ -f "${funcPath}" ]; then
+			#dk_echo ". ${funcPath}"
 			. "${funcPath}"
-			return
+			return 0
 		fi
 	fi
 }
@@ -110,6 +115,7 @@ dk_load (){
 
 
 DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
 	
-	dk_load
+	dk_load dk_debug
 }

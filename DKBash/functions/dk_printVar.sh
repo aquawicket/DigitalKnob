@@ -8,7 +8,7 @@
 dk_printVar (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
+	[ -z ${echo_fileline-} ] && dk_export echo_fileline "$(__FILE__ 1):$(__LINE__ 1)   "
 	
 	varname=${1}
 	
@@ -145,9 +145,11 @@ dk_printVar (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
-	myVariable="this is the value of myVariable"
+DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	dk_debugFunc
+	
+	dk_set myVariable "this is the value of myVariable"
 	dk_printVar myVariable
 	
 	myArray[0]="myArray element 0"
@@ -155,7 +157,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArray[2]="myArray element 2"
 	dk_printVar myArray
 	
-	export myExport="an export variable"
+	dk_export myExport "an export variable"
 	dk_printVar myExport
 	
 	local myLocal="a local variable"
@@ -165,12 +167,12 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_printVar myHash
 
 	myFunction (){
-		echo "myFunction body"
+		dk_echo "myFunction body"
 	}
 	dk_printVar myFunction
 	
 	alias myAlias='{
-		echo "This is an alias"
+		dk_echo "This is an alias"
 	}'
 	dk_printVar myAlias
 	

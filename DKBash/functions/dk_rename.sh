@@ -33,7 +33,7 @@ dk_rename (){
 	fi
 	
 	# the base directory of the ${_to_} path must exist.    
-	parent_dir=$(dirname ${_to_})
+	parent_dir=$(dk_dirname ${_to_})
 	dk_printVar parent_dir
 	dk_makeDirectory "${parent_dir}"
 	

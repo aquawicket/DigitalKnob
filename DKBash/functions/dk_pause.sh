@@ -11,8 +11,9 @@ dk_pause (){
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	
-	read -rp 'Press enter to continue...' key     #; echo ${key}
+	#read -rp 'Press enter to continue...'; # key; echo ${key}
+	dk_echo "Press enter to continue..."; 
+	read -rp '';
 }
 
 

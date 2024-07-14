@@ -12,7 +12,7 @@ dk_validateBranch (){
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
-	FOLDER="$(basename $(pwd))"
+	FOLDER="$(dk_basename $(pwd))"
 	DKBRANCH="Development"
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"

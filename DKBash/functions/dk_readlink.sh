@@ -30,15 +30,15 @@ dk_readlink (){
 		dk_echo "using dk_readlink -f ${2}"
 		target_file=${2}   # we expect to use a -f parameter, so use ${2} as the input path.
 
-		cd $(dirname $target_file)
-		target_file=$(basename $target_file)
+		cd $(dk_dirname $target_file)
+		target_file=$(dk_basename $target_file)
 
 		# Iterate down a (possible) chain of symlinks
 		while [ -L "$target_file" ]
 		do
 			target_file=$(readlink $target_file)
-			cd $(dirname $TARGET_FILE)
-			target_file=$(basename $target_file)
+			cd $(dk_dirname $TARGET_FILE)
+			target_file=$(dk_basename $target_file)
 		done
 
 		# Compute the canonicalized name by finding the physical path 
