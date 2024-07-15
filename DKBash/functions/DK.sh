@@ -169,12 +169,38 @@ DKHTTP_VARS(){
 }
 
 ##################################################################################
+# dk_download(url, destination)
+#
+#
+dk_download (){
+	dk_debugFunc
+	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	
+	if dk_pathExists "${2}"; then
+		dk_warning "dk_download(): ${2} already exists"
+		return 0
+	fi
+	dk_info "Downloading ${1} . . ."
+	parentdir="$(dk_dirname "${2}")"
+	dk_printVar parentdir
+	OLDPWD=${PWD}
+	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
+	
+	dk_pathExists "${1}" || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
+	dk_pathExists "${1}" || dk_commandExists "curl" && ${dksudo} curl -Lo "${2}" "${1}"
+	
+	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
+	#[ "${input}" = "" ]
+}
+
+##################################################################################
 # dksetupCallstack()
 #
 dksetupCallstack(){
 	dk_debugFunc
 	
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
+	#dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
 
 ##################################################################################
@@ -266,6 +292,8 @@ dk_install(){
 	dk_commandExists ${1}      || dk_error "${1}: command not found"
 }
 
+
+
 ##################################################################################
 # dk_source()
 #
@@ -277,7 +305,8 @@ dk_source(){
 	dk_stringContains ${1} ".sh"                                       && local funcPath=${1}                              || local funcPath=${1}.sh
 	dk_pathExists "${funcPath}"                                        && local funcPath="${funcPath}"
 	dk_pathExists "${PWD}/$(dk_basename ${funcPath})"                  && local funcPath="${PWD}/$(dk_basename ${funcPath})"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_call curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
+	#dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || ${dksudo} dk_call curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_download "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
 	dk_pathExists "${funcPath}"                                        || dk_error "Unable to find funcPath:${funcPath}"
 	${dksudo} chmod 777 ${funcPath}
