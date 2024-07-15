@@ -55,4 +55,3 @@ if not exist "%ANDROID_HOME%/platform-tools/adb" (
 
 :end 
 endlocal & set "%2=%ERRORLEVEL%"
-%DKEND%

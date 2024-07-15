@@ -60,4 +60,3 @@ goto:eof
 goto:eof
 
 :end
-%DKEND%
