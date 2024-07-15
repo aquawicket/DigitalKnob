@@ -7,7 +7,9 @@ export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket
 export DKBASH_DIR="$PWD/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ -e ${DKBASH_DIR} ] || ${dksudo} mkdir ${DKBASH_DIR}
+${dksudo} chmod 777 ${DKBASH_DIR}
 [ -e ${DKBASH_FUNCTIONS_DIR} ] || ${dksudo} mkdir ${DKBASH_FUNCTIONS_DIR}
+${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}
 
 if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 	# https://en.wikipedia.org/wiki/Package_manager
