@@ -13,15 +13,17 @@ dk_defined (){
 	
 	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}   # ^ as first character is not portable
 	# FIXME:  the errors out on zsh
-	$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
+	
+	#$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
 	#[[ ${1} ~= [A-Za-z0-9_]\+$ ]] || return ${false}
 	
 	#dk_echo "${green}${name} is [:word:]${clr}"
 	
-	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
+	#eval value='$'{${1}+x} # value will = 'x' if the variable is defined
 	
+	[ -n "${!1+1}" ]
 	#dk_echo "dk_defined():value = ${value}"
-	[ -n "${value}" ]
+	#[ -n "${value}" ]
 }
 
 
