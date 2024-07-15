@@ -7,9 +7,11 @@ export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket
 export DKBASH_DIR="$PWD/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ -e ${DKBASH_DIR} ] || ${dksudo} mkdir ${DKBASH_DIR}
-${dksudo} chmod 777 ${DKBASH_DIR}
-[ -e ${DKBASH_FUNCTIONS_DIR} ] || ${dksudo} mkdir ${DKBASH_FUNCTIONS_DIR}
-${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}
+${dksudo} chown -R ${USERNAME} ${DKBASH_DIR}
+#${dksudo} chmod 777 ${DKBASH_DIR}
+
+[ -e ${DKBASH_FUNCTIONS_DIR} ] || mkdir ${DKBASH_FUNCTIONS_DIR}
+#${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}
 
 if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 	# https://en.wikipedia.org/wiki/Package_manager
@@ -34,10 +36,10 @@ if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && ${dksudo} dk_install curl
 		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && echo "ERROR: Unable to aquire DK.sh, no download apps found. Please install wget or curl." && read -rp "Press enter to exit..." && exit 1
 	fi
-	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "wget")" ] && ${dksudo} wget -P "${DKBASH_FUNCTIONS_DIR}" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
-	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "curl")" ] && ${dksudo} curl -Lo "${DKBASH_FUNCTIONS_DIR}/DK.sh" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
+	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "wget")" ] && wget -P "${DKBASH_FUNCTIONS_DIR}" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
+	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DKBASH_FUNCTIONS_DIR}/DK.sh" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/DK.sh"
 	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && echo "ERROR: Unable to aquire DK.sh, please git clone the repository https://github.com/aquawicket/DigitalKnob.git" && read -rp "Press enter to exit..." && exit 1
-	${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/DK.sh
+	chmod 777 ${DKBASH_FUNCTIONS_DIR}/DK.sh
 fi
 . ${DKBASH_FUNCTIONS_DIR}/DK.sh
 
