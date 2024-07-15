@@ -11,14 +11,14 @@ dk_arrayShift (){
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	typeset -n arrayShift=${1} 
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
 	prev=0
 	count=1
 	
-	arrayShift=("${arrayShift[@]:1}")
+	array=("${array[@]:1}")
 
-	[ ${#} -gt 1 ] && eval "${2}=${arrayShift}" 
-	dk_return ${arrayShift}; return		# command substitution return
+	eval ${1}="(${array[@]})"
+	#dk_return ${array}; return		# command substitution return
 }
 
 

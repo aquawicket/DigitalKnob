@@ -18,12 +18,12 @@ dk_arrayPush (){
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	#dk_validateArgs array element optional:rtn_var
 	
-	typeset -n array=${1}
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
+	
 	#dk_printVar array
-
-	#[ ${#} -gt 2 ] && eval "${3}=${arrayPush}" # parameter variable return
-	#dk_return ${arrayPush}; return		# command substitution return
+	eval ${1}="(${array[@]})"
+	dk_return ${array}; return		# command substitution return
 }
 
 

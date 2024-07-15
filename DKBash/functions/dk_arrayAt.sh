@@ -16,12 +16,14 @@ dk_arrayAt (){
 	dk_validateArgs array int optional:rtn_var
 	
 	#eval local arry=('${'$1'[@]}')
-	typeset -n arry=${1}
-	local arrayAt="${arry[${2}]}"
+	
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	local arrayAt="${array[${2}]}"
 
 
 	### return value ###
-	dk_printVar arrayAt
+	#dk_printVar array
+	#eval ${1}="(${array[@]})"                           # alter the original array variable
 	[ ${#} -gt 2 ] && eval "${3}=${arrayAt}" && return	# return value when using rtn_var parameter 
 	dk_return ${arrayAt}; return						# return value when using command substitution
 }
@@ -41,7 +43,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[4]="e"
 	
 	elementA=$(dk_arrayAt myArrayA 3)	# return value when using command substitution
-	dk_echo "elementA = ${elementA}"
+	dk_printVar elementA
 	
 	
 	
@@ -52,5 +54,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayB[4]="5"
 	
 	dk_arrayAt myArrayB 3 elementB		# return value when using rtn_var parameter 
-	dk_echo "elementB = ${elementB}"
+	dk_printVar elementB
 }

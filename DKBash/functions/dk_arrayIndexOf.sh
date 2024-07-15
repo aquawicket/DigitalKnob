@@ -12,12 +12,12 @@
 #
 dk_arrayIndexOf (){
 	dk_debugFunc
-	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array element optional:rtn_var
+	[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#dk_validateArgs array element optional:rtn_var
 	
-	typeset -n arry=${1} 
-	for ((arrayIndexOf=0; arrayIndexOf < ${#arry[@]}; arrayIndexOf++ )); do
-		if [ "${2}" = "${arry[${arrayIndexOf}]}" ]; then
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	for ((arrayIndexOf=0; arrayIndexOf < ${#array[@]}; arrayIndexOf++ )); do
+		if [ "${2}" = "${array[${arrayIndexOf}]}" ]; then
 		
 			# return value
 			[ ${#} -gt 2 ] && eval "${3}=${arrayIndexOf}" 
@@ -42,22 +42,22 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayA[4]="e"
 	
 	dk_arrayIndexOf myArrayA "a" indexA
-	dk_echo "indexA = ${indexA}"
+	dk_printVar indexA
 	
 	dk_arrayIndexOf myArrayA "b" indexB
-	dk_echo "indexB = ${indexB}"
+	dk_printVar indexB
 	
 	dk_arrayIndexOf myArrayA "c" indexC
-	dk_echo "indexC = ${indexC}"
+	dk_printVar indexC
 	
 	dk_arrayIndexOf myArrayA "d" indexD
-	dk_echo "indexD = ${indexD}"
+	dk_printVar indexD
 	
 	dk_arrayIndexOf myArrayA "e" indexE
-	dk_echo "indexE = ${indexE}"
+	dk_printVar indexE
 	
 	dk_arrayIndexOf myArrayA "nonExistant" indexN
-	dk_echo "indexN = ${indexN}"
+	dk_printVar indexN
 	
 	
 	
@@ -70,20 +70,20 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	myArrayB[4]="5"
 	
 	dk_arrayIndexOf myArrayB "1" indexAA
-	dk_echo "indexAA = ${indexAA}"
+	dk_printVar indexAA
 	
 	dk_arrayIndexOf myArrayB "2" indexBB
-	dk_echo "indexBB = ${indexBB}"
+	dk_printVar indexBB
 	
 	dk_arrayIndexOf myArrayB "3" indexCC
-	dk_echo "indexCC = ${indexCC}"
+	dk_printVar indexCC
 	
 	dk_arrayIndexOf myArrayB "4" indexDD
-	dk_echo "indexDD = ${indexDD}"
+	dk_printVar indexDD
 	
 	dk_arrayIndexOf myArrayB "5" indexEE
-	dk_echo "indexEE = ${indexEE}"
+	dk_printVar indexEE
 	
 	dk_arrayIndexOf myArrayB "nonExistant" indexNN
-	dk_echo "indexNN = ${indexNN}"
+	dk_printVar indexNN
 }

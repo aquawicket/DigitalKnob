@@ -12,11 +12,11 @@ dk_arrayUnshift (){
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	#dk_validateArgs array element optional:rtn_var
 	
-	typeset -n array=${1}
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
 	array=("${@:2}" "${array[@]}");
 	#dk_printVar array
 
-	#[ ${#} -gt 2 ] && eval "${3}=${array}" 
+	eval ${1}="(${array[@]})"
 	#dk_return ${array}; return		# command substitution return
 }
 

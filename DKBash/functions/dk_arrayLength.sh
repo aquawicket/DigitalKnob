@@ -13,8 +13,8 @@ dk_arrayLength (){
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array optional:rtn_var
 	
-	typeset -n _array_=${1}
-	local arrayLength=${#_array_[@]}
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	local arrayLength=${#array[@]}
 	
 	#dk_assert arrayLength
 	#dk_printVar arrayLength

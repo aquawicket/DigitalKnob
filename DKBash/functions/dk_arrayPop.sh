@@ -9,8 +9,8 @@
 #
 dk_arrayPop (){
 	dk_debugFunc
-	#[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array
+	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#dk_validateArgs array
 	
 	#dk_arrayLength ${1} _length_
 	local _length_=$(dk_arrayLength ${1})
@@ -47,12 +47,12 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_arrayPop myArray
 	dk_printVar myArray
 	
-	dk_arrayPop myArray
-	dk_printVar myArray
+#	dk_arrayPop myArray
+#	dk_printVar myArray
 	
-	dk_arrayPop myArray
-	dk_printVar myArray
+#	dk_arrayPop myArray
+#	dk_printVar myArray
 	
-	dk_arrayPop myArray
-	dk_printVar myArray	
+#	dk_arrayPop myArray
+#	dk_printVar myArray	
 }

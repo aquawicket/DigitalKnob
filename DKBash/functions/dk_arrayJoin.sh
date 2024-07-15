@@ -9,19 +9,16 @@
 #
 dk_arrayJoin (){
 	dk_debugFunc
-	#[ ${#} -ne 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array string optional:rtn_var
-	
-	#_arry_="${1}"
-	#_separator_="${2}"
-	
-	#local arry=("${!1}")
-	typeset -n arry=${1} 
-	for ((i=0; i < ${#arry[@]}; i++ )); do
+	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	#dk_validateArgs array string optional:rtn_var
+
+	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	for ((i=0; i < ${#array[@]}; i++ )); do
 		if [ -z ${dk_arrayJoin-} ]; then
-			local dk_arrayJoin="${arry[${i}]}"
+			local dk_arrayJoin="${array[${i}]}"
 		else
-		    local dk_arrayJoin="${dk_arrayJoin}${2}${arry[${i}]}"
+		    local dk_arrayJoin="${dk_arrayJoin}${2}${array[${i}]}"
 		fi
 	done
 	
@@ -43,7 +40,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	
 	#dk_arrayJoin myArrayA "," myStringA
 	myStringA=$(dk_arrayJoin myArrayA ",")
-	dk_echo "myStringA = ${myStringA}"
+	dk_printVar myStringA
 	
 	
 	
@@ -55,5 +52,5 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	
 	dk_arrayJoin myArrayB "," myStringB
 	#myStringB=$(dk_arrayJoin myArrayB ",")
-	dk_echo "myStringB = ${myStringB}"
+	dk_printVar myStringB
 }
