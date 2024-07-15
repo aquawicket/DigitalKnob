@@ -9,6 +9,7 @@ export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ -e ${DKBASH_DIR} ] || ${dksudo} mkdir ${DKBASH_DIR}
 [ -n "${USER-}" ] && DKUSERNAME=${USER} || DKUSERNAME=${USERNAME}	
 ${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
+#TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 
 [ -e ${DKBASH_FUNCTIONS_DIR} ] || mkdir ${DKBASH_FUNCTIONS_DIR}
 
@@ -19,17 +20,17 @@ if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 		[ -n "$(command -v "apk")" ]           && alias dk_install='apk add'  	 		# Alpine Package Keeper (alpine linux)
 		[ -n "$(command -v "apt-get")" ]       && alias dk_install='apt-get -y install'	# Apt-get (debian)
 		[ -n "$(command -v "apt")" ]           && alias dk_install='apt -y install'		# Apt (debian)
-		[ -n "$(command -v "brew")" ]          && alias dk_install='brew install'			# Homebrew (MacOS)
-		[ -n "$(command -v "dnf")" ]           && alias dk_install='dnf install'			# Dnf (yum)
+		[ -n "$(command -v "brew")" ]          && alias dk_install='brew install'		# Homebrew (MacOS)
+		[ -n "$(command -v "dnf")" ]           && alias dk_install='dnf install'		# Dnf (yum)
 		[ -n "$(command -v "emerge")" ]        && alias dk_install='emerge'				# Portage
 		[ -n "$(command -v "nix-env")" ]       && alias dk_install='nix-env -i'			# Nix
-		[ -n "$(command -v "ohpm")" ]          && alias dk_install='ohpm install'			# Ohpm
-		[ -n "$(command -v "pkg")" ]           && alias dk_install='pkg install'			# Termux
+		[ -n "$(command -v "ohpm")" ]          && alias dk_install='ohpm install'		# Ohpm
+		[ -n "$(command -v "pkg")" ]           && alias dk_install='pkg install'		# Termux
 		[ -n "$(command -v "pacman")" ]        && alias dk_install='pacman -S'			# Pacman
-		[ -n "$(command -v "swupd")" ]         && alias dk_install='swupd bundle-add'		# Swupd
+		[ -n "$(command -v "swupd")" ]         && alias dk_install='swupd bundle-add'	# Swupd
 		[ -n "$(command -v "tce-load")" ]      && alias dk_install='tce-load -wil'     	# Tiny core linux
 		[ -n "$(command -v "winget")" ]        && alias dk_install='winget install'		# WinGet
-		[ -n "$(command -v "xbps-install")" ]  && alias dk_install='xbps-install'			# Xbps
+		[ -n "$(command -v "xbps-install")" ]  && alias dk_install='xbps-install'		# Xbps
 		[ -n "$(command -v "zypper")" ]        && alias dk_install='zypper in'			# Zypper
 		[ -z "$(command -v "dk_install")" ]    && echo "ERROR: Unable to aquire DK.sh, no package managers found. Please install wget or curl." && read -rp "Press enter to exit..." && exit 1
 		[ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ] && dk_install wget
