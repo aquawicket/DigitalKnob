@@ -19,8 +19,8 @@ dk_download (){
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
 	
-	dk_pathExists "${1}" || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
-	dk_pathExists "${1}" || dk_commandExists "curl" && ${dksudo} curl -Lo "${2}" "${1}"
+	dk_pathExists "${1}" || dk_commandExists "wget" && wget -P "${parentdir}" "${1}"
+	dk_pathExists "${1}" || dk_commandExists "curl" && curl -Lo "${2}" "${1}"
 	
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]

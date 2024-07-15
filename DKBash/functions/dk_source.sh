@@ -10,9 +10,9 @@ dk_source(){
 	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_debugFunc.sh ] && dk_debugFunc
 	[ ${#} -ne 1 ] && echo "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call ${dksudo} curl -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
+	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || [$(read -rp '${1} command not found, press enter to exit')] || exit;
-	${dksudo} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
+	chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 	. ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 }
 

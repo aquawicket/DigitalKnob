@@ -1442,15 +1442,15 @@ dk_install (){
 	dk_info "dk_installing ${1}"
 
 	if dk_commandExists brew; then
-		dk_call ${dksudo} brew dk_install "${1}"
+		dk_call brew dk_install "${1}"
 	elif dk_commandExists apt; then
-		dk_call ${dksudo} apt -y dk_install "${1}"
+		dk_call apt -y dk_install "${1}"
 	elif dk_commandExists apt-get; then
-		dk_call ${dksudo} apt-get -y dk_install "${1}"
+		dk_call apt-get -y dk_install "${1}"
 	elif dk_commandExists pkg; then
-		dk_call ${dksudo} pkg dk_install "${1}"
+		dk_call pkg dk_install "${1}"
 	elif dk_commandExists pacman; then
-		dk_call ${dksudo} pacman -S "${1}" --noconfirm
+		dk_call pacman -S "${1}" --noconfirm
 	elif dk_commandExists tce-load; then
 		dk_call tce-load -wi "${1}"
 	else
