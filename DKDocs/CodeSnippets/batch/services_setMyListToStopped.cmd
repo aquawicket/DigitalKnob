@@ -1,6 +1,5 @@
 :: loop through services_MyList.txt, stop and diable any service in the list
 @echo off
-%dkbatch%
 
 echo #### Windows Services ####
 for /f "tokens=*" %%a in (services_MyList.txt) do (

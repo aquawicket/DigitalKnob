@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
 
 set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"

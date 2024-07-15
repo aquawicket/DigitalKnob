@@ -21,7 +21,7 @@
 :: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
-%dkbatch%
+@echo off
 
 :: Choose the repositoy and the branch to merge in to a destination(usually master)
 set "repository=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development"

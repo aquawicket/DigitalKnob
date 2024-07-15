@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
 
 if defined __ goto :variables
 set __=.

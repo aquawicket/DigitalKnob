@@ -1,4 +1,4 @@
-%dkbatch%
+@echo off
 
 set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
@@ -404,5 +404,3 @@ goto :eof
 ::Explorer ==> "com.mi.android.globalFileexplorer"
 ::Find device ==> "com.xiaomi.finddevice"
 ::END-80# 
- 
-%DKEND% 

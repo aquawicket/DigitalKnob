@@ -1,6 +1,4 @@
 @echo off
-%dkbatch%
-
 
 setlocal EnableDelayedExpansion
 
@@ -54,5 +52,3 @@ goto :eof
 	endlocal
 
 	exit /b 
- 
-%DKEND% 

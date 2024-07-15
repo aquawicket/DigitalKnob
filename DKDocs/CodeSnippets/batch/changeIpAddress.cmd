@@ -1,7 +1,6 @@
 :: Change Ip Address Configuration
 :: netsh interface ipv4 set address name="YOUR INTERFACE NAME" static IP_ADDRESS SUBNET_MASK GATEWAY
 @echo off
-%dkbatch%
 
 :: change ethernet
 ::netsh interface ipv4 set address name="Ethernet" static 10.0.0.102 255.255.255.0 10.0.0.1

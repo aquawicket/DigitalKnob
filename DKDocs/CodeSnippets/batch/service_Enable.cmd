@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
 
 set "SERVICE_NAME=schedule"     
 ::Put name here --^
@@ -10,6 +9,3 @@ sc config "%SERVICE_NAME%" start=auto
 echo "Press any key to start the service"
 pause
 sc start %SERVICE_NAME%
- 
- 
-%DKEND% 

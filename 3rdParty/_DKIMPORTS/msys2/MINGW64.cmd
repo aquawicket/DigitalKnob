@@ -29,7 +29,11 @@ goto:main
 ::###### MINGW64 ######
 :console
 	TITLE DigitalKnob - CONSOLE
-	cls & echo You are in a Windows console environment & echo: & echo PATH = %PATH% & pause
+	cls
+	call dk_echo You are in a Windows console environment
+	call dk_echo
+	call dk_echo PATH = %PATH%
+	pause
 goto:eof 
 
 ::###### MINGW64 ######
@@ -40,11 +44,11 @@ goto:eof
 
 ::###### Main ######
 :main
-	echo This will alernate between different shell environments & echo:
+	call dk_echo This will alernate between different shell environments
+	call dk_echo
 	pause
 	
 	call:console
 	call:mingw64
 	call:console
-	
-goto:eof 
+goto:eof

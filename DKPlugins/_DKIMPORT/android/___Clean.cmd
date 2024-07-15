@@ -1,5 +1,4 @@
-%dkbatch%
-
+@echo off
 :: Stop running processes and map APP_ROOT
 call EndProcess adb.exe
 call EndProcess java.exe
@@ -32,5 +31,3 @@ for /r %%i in (*.vcxproj) do del "%%i"
 for /r %%i in (*.sln) do del "%%i"
 for /r %%i in (*.filters) do del "%%i"
 for /r %%i in (*.user) do del "%%i"
-
-%DKEND%

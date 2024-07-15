@@ -1,4 +1,4 @@
-%dkbatch%
+@echo off
 
 :: https://stackoverflow.com/questions/59504840/create-jni-ndk-apk-only-command-line-without-gradle-ant-or-cmake/59533703#59533703
 set "APP_ROOT=%~dp0"
@@ -157,5 +157,3 @@ echo 18. Start app
 
 call EndProcess adb.exe
 call EndProcess java.exe
-
-%DKEND%

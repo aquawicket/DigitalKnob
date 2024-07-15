@@ -1,7 +1,4 @@
-
 @echo off
-%dkbatch%
-
    
 mode 78,45 & color 07
 
@@ -57,5 +54,3 @@ echo  ^| %bg`magenta%Hello World!%`r% ^| %%bg`magenta-%%
 echo  ^| %bg`cyan%Hello World!%`r% ^| %%bg`cyan-%%
 echo  ^| %bg`white%Hello World!%`r% ^| %%bg`white-%%
 for /l %%i in (0,0,1) do pause >nul 
- 
-%DKEND% 

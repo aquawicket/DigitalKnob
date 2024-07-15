@@ -1,4 +1,4 @@
-%dkbatch%
+@echo off
 :: https://developer.android.com/studio/projects
 
 set "PACKAGE_NAME=com.digitalknob.dk"
@@ -36,4 +36,3 @@ cmd /c "%ANDROID_HOME%/platform-tools/adb" push %ASSETS% %DEVICE_PATH%
 
 
 ECHO Done
-%DKEND%

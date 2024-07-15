@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
 
 ::echo #### Windows Services ####
 ::sc query

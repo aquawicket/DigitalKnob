@@ -1,5 +1,4 @@
 @echo off
-%dkbatch%
  
 echo disable using your machine for sending windows updates to others
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DownloadMode /t REG_DWORD /d 0 /f
@@ -32,5 +31,3 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearch
 echo disable language detection
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AlwaysUseAutoLangDetection /t REG_DWORD /d 0 /f
 echo done 
- 
-%DKEND% 

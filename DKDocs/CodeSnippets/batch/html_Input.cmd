@@ -1,7 +1,6 @@
 <!-- :
 :: PasswordSubmitter.bat
 @echo off
-%dkbatch%
 setlocal EnableDelayedExpansion
 
 if "%~1" equ "/?" (
@@ -54,5 +53,3 @@ exit /b
 
 </body>
 </html> 
- 
-%DKEND% 

@@ -1,6 +1,5 @@
 ::Kill a process
 @echo off
-%dkbatch%
 
 :: kill by PID number
 ::taskkill /F /PID pid_number

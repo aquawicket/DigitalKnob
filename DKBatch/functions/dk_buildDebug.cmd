@@ -10,17 +10,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
     if "%MSYSTEM%" neq "" (
-        %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose" && call dk_echo "CMake Build Successful" || call dk_error "CMake Build Failed"
         goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
-        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
+        call dk_echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose && call dk_echo "CMake Build Successful" || call dk_error "CMake Build Failed"
         goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
-        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
+        call dk_echo "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose
+        "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose && call dk_echo "CMake Build Successful" || call dk_error "CMake Build Failed"
         goto:eof
     )
 goto:eof
