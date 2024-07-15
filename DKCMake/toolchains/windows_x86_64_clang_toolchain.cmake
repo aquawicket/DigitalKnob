@@ -2,9 +2,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 
-message(STATUS "######################################################################")
-message(STATUS "################ windoows_x86_64_clang_toolchain.cmake ###############")
-message(STATUS "######################################################################")
+dk_echo(STATUS "######################################################################")
+dk_echo(STATUS "################ windoows_x86_64_clang_toolchain.cmake ###############")
+dk_echo(STATUS "######################################################################")
 
 ###### Get DKCMAKE_DIR ######
 if(NOT DKCMAKE_DIR)

@@ -10,9 +10,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ##################################################################################
 # dk_error(msg) HALT, NO_HALT, TRACE, NO_TRACE, PAUSE, NO_PAUSE
 #
-#	Print a error message to the console
+#	Print a error dk_echo to the console
 #
-#	@msg	- The message to print
+#	@msg	- The dk_echo to print
 #
 function(dk_error msg)
 	dk_debugFunc(${ARGV})
@@ -50,14 +50,14 @@ function(dk_error msg)
 	if((HALT_ON_ERROR OR HALT) AND NOT NO_HALT)
 		dk_echo("${red}")
 		dk_echo("*** HALT_ON_ERROR ***")
-		message(FATAL_ERROR "${ERROR_TAG}${msg}")
+		dk_echo(FATAL_ERROR "${ERROR_TAG}${msg}")
 		dk_echo("${clr}")
 		dk_exit(1)
 	else()
 		if((TRACE_ON_ERROR OR TRACE) AND NOT NO_TRACE)
 			dk_echo("${red}")
 			dk_echo("*** TRACE_ON_ERROR ***")
-			message(WARNING "${ERROR_TAG}${msg}")
+			dk_echo(WARNING "${ERROR_TAG}${msg}")
 			dk_echo("${clr}")
 			#dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)
 		else()

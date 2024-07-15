@@ -7,14 +7,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_logo)
 	dk_debugFunc(${ARGV})
 	
-	
-	message("${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______        ")
-	message("${lblue}   |     \\   |   |  ____   |      |    |_____| |      |____/  | \\  | |     | |_____]     ")
-	message("${blue}   |_____/ __|__ |_____| __|__    |    |     | |_____ |    \\_ |  \\_| |_____| |_____]      ")
-	message("${yellow}                                                                     __      __           ")
-    message("${yellow}                                                                    |  \\|_//   _  _ |  _ ")
-    message("${yellow}                                                                    |__/| \\\\__|||(_||((- ")
-	message("${clr}")
+	dk_echo("${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______        ")
+	dk_echo("${lblue}   |     \\   |   |  ____   |      |    |_____| |      |____/  | \\  | |     | |_____]     ")
+	dk_echo("${blue}   |_____/ __|__ |_____| __|__    |    |     | |_____ |    \\_ |  \\_| |_____| |_____]      ")
+	dk_echo("${yellow}                                                                     __      __           ")
+    dk_echo("${yellow}                                                                    |  \\|_//   _  _ |  _ ")
+    dk_echo("${yellow}                                                                    |__/| \\\\__|||(_||((- ")
+	dk_echo("${clr}")
                                                                         
 endfunction()
 

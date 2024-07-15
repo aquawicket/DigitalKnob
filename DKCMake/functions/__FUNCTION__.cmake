@@ -18,7 +18,7 @@ macro(__FUNCTION__ rtn_var)
 		
 		list(LENGTH FUNCNAME FUNCNAME_LENGTH)
 		if(${index} GREATER ${FUNCNAME_LENGTH})
-			message(FATAL_ERROR "index:${index} out of range:${FUNCNAME_LENGTH}")
+			dk_echo(FATAL_ERROR "index:${index} out of range:${FUNCNAME_LENGTH}")
 		endif()
 		list(GET FUNCNAME ${index} ${rtn_var})
 	endif()
@@ -30,7 +30,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
-	message("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
+	dk_echo("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
 	__FUNCTION__(_func_)
 	dk_info("\${_func_} = ${_func_}")
 	
@@ -44,6 +44,6 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_info("\${_func2_} = ${_func2_}")
 
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
-	message("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
+	dk_echo("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
 
 endfunction()

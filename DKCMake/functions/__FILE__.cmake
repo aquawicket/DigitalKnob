@@ -18,7 +18,7 @@ macro(__FILE__ file_rtn_var)
 		
 		list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
 		if(${index} GREATER ${CMAKE_SOURCE_LENGTH})
-			message(FATAL_ERROR "index:${index} out of range:${CMAKE_SOURCE_LENGTH}")
+			dk_echo(FATAL_ERROR "index:${index} out of range:${CMAKE_SOURCE_LENGTH}")
 		endif()
 		list(GET CMAKE_SOURCE ${index} ${file_rtn_var})
 	endif()
@@ -29,7 +29,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
-	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 	__FILE__(_file_)
 	dk_info("\${_file_} = ${_file_}")
 	
@@ -43,5 +43,5 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_info("\${_file2_} = ${_file2_}")
 
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
-	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 endfunction()

@@ -47,6 +47,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	dk_arrayPop myArray
 	dk_printVar myArray
 	
+	# FIXME:  out of array bounds past here
 #	dk_arrayPop myArray
 #	dk_printVar myArray
 	

@@ -58,6 +58,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
+#####  126.2.12  ####
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_windows64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_windowsarm64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_windows32.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_macosx64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_macosarm64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_linux64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_linuxarm64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127_linuxarm.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_101.0.18%2Bg367b4a0%2Bchromium-101.0.4951.67_linux32.tar.bz2
+
 if(IOS OR IOSSIM OR ANDROID)
 	dk_undepend(cef_binary)
 	dk_return()

@@ -18,7 +18,7 @@ macro(__LINE__ rtn_var)
 		
 		list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
 		if(${index} GREATER ${CMAKE_LINENO_LENGTH})
-			message(FATAL_ERROR "index:${index} out of range:${CMAKE_LINENO_LENGTH}")
+			dk_echo(FATAL_ERROR "index:${index} out of range:${CMAKE_LINENO_LENGTH}")
 		endif()
 		list(GET CMAKE_LINENO ${index} ${rtn_var})
 	endif()
@@ -29,7 +29,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
 	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
-	message("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
+	dk_echo("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
 	__LINE__(_line_)
 	dk_info("\${_line_} = ${_line_}")
 	
@@ -43,5 +43,5 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_info("\${_line2_} = ${_line2_}")
 
 	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
-	message("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
+	dk_echo("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
 endfunction()

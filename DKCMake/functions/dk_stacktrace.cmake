@@ -41,7 +41,7 @@ function(dk_stacktrace)
 		set(indent "${indent} L ")
 		
 		
-		message("${cyan}[${_TIME_}]${indent} ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
+		dk_echo("${cyan}[${_TIME_}]${indent} ${_FILE_}:${_LINE_}   ${blue}${_FUNCTION_}()")
 		math(EXPR n "${n}+1")
 	endwhile()
 

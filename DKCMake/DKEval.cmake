@@ -30,7 +30,7 @@ dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
-	#message(STATUS "DKRETURN = ${DKRETURN}")
+	#dk_echo(STATUS "DKRETURN = ${DKRETURN}")
 	
 	## create windows cmd script to set the return variables
 	dk_remove(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)

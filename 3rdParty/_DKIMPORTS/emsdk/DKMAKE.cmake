@@ -4,10 +4,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-dk_depend(python)
+#dk_depend(python)
+dk_depend(python3)
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main) # TAG ce74ca2)
 
 dk_command(${EMSDK}/emsdk${bat} install latest)
 

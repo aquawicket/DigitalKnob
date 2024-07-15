@@ -26,7 +26,7 @@ macro(__FRAME__ rtn_var)
 		
 		list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
 		if(${index} GREATER ${CMAKE_SOURCE_LENGTH})
-			message(FATAL_ERROR "index:${index} out of range:${CMAKE_SOURCE_LENGTH}")
+			dk_echo(FATAL_ERROR "index:${index} out of range:${CMAKE_SOURCE_LENGTH}")
 		endif()
 #		#math(EXPR index "${index}+1" OUTPUT_FORMAT DECIMAL)	
 		__FILE__(_file_ ${index})
@@ -43,7 +43,7 @@ endmacro()
 function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	#dk_debugFunc
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
-	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 	__FRAME__(_frame_)
 	dk_info("\${_frame_} = ${_frame_}")
 	
@@ -58,7 +58,7 @@ function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	
 	
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
-	message("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 	__FRAME__(_frame_)
 	dk_info("\${_frame_} = ${_frame_}")
 	
