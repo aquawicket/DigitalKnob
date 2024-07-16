@@ -10,7 +10,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal EnableDelayedExpansion
+	setlocal
 	set "s=#!%~1!"
 	set "len=0"
 	for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (

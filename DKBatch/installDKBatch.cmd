@@ -18,5 +18,10 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "CMD_FILE=%~2"
-	cmd /k call %CMD_FILE%
+	
+	cmd /V:ON /K call %CMD_FILE%
+	::cmd /V:OFF /K call %CMD_FILE%
+	
+	:: /K		keep the window open at the CMD prompt.
+	:: /V:ON	enable delayed expansion
 goto:eof
