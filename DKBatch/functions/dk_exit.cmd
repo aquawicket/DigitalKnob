@@ -7,10 +7,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_exit
 	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	
-	::cmd /k & exit
-	exit
+	exit %~1
 goto:eof
 
 
@@ -20,5 +19,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_exit 
+	call dk_exit 0
 goto:eof

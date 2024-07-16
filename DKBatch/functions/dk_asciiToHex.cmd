@@ -10,8 +10,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal EnableDelayedExpansion
-
+	setlocal
+	
     :: Store the string in chr.tmp file
 	set /P "=%~1" < NUL > chr.tmp
 
