@@ -11,7 +11,7 @@ if "%~1" equ "Keyboard_Loop" goto %1
 	call dk_debugFunc || call dk_error "call dk_debugFunc failed!"
 	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	
-	::call :Keyboard_Loop
+	rem Start Keyboard_Loop in a parallel process
 	start "" /B cmd /C "call dk_keyboard Keyboard_Loop" || call dk_error "call dk_keyboard Keyboard_Loop failed!"
 goto:eof
 
@@ -24,7 +24,6 @@ goto:eof
 		  Write-Host $key  ^
 	   }  ^
 	%End PowerShell% | call "%~f0" BeginReceiving %2 || call dk_error "call "%~f0" BeginReceiving %2 failed!"
-	::endlocal & set "%~1=%errorlevel%"
 goto:eof
 
 :BeginReceiving
@@ -73,5 +72,5 @@ goto:eof
 	
 	call dk_keyboard || call dk_error "call dk_keyboard failed!"
 	
-	call dk_echo "press escape to exit keyboard loop"
+	call dk_echo "press escape to exit keyboard loop" || call dk_error "call dk_echo failed!"
 goto:eof
