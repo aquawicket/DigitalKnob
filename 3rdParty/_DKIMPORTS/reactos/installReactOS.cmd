@@ -25,7 +25,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		call dk_info "Installing ReactOS . . ."
 		call dk_basename %REACTOS_DL% REACTOS_DL_FILE
 		call dk_download %REACTOS_DL%
-		::call dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE% %DKDOWNLOAD_DIR%
+		call dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
 		:: create and cd into install directory
 		call dk_makeDirectory %REACTOS% 
@@ -41,7 +41,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		%QEMU_IMG_EXE% create -f qcow2 %REACTOS_IMG% 10G
 
 		:: Launching the VM
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%REACTOS_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%REACTOS_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 		
 		:: create ReactOS Launcher
 		call dk_set REACTOS_launcher "%REACTOS%\LAUNCH.cmd"
