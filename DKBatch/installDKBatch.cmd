@@ -4,7 +4,8 @@ if "%*" neq "" (goto:runDKBatch)
 :installDKBatch
 	echo Associating .cmd files with DKBatch . . .
 	
-	call functions\DK.cmd
+	set "DKBATCH_FUNCTION_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
+	call "%DKBATCH_FUNCTION_DIR_%DK.cmd"
 	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
 	ftype dkbatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %*
 	assoc .cmd=dkbatch
