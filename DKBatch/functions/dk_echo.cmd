@@ -15,8 +15,11 @@ call %DKBATCH_FUNCTION_DIR_%DK.cmd
 	
     setlocal
         set "_message_=%~1"	
-        :: if msg starts and ends with quotes, remove the first and last
-        if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
+		
+        :: if msg starts and ends with quotes, remove the first and last characters
+		::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
+        ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
+		
         echo %_message_%
     endlocal
 goto:eof
@@ -33,5 +36,6 @@ goto:eof
 	call dk_echo
 	call dk_echo ""
 	call dk_echo "This is a dk_echo line"
+	::call dk_echo ""This is a dk_echo line with quotes""
     call dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 goto:eof
