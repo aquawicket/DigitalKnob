@@ -11,7 +11,7 @@ if(!(Test-Path $DKPOWERHELL_FUNCTIONS_DIR/DK.ps1)){
 	Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1" -OutFile $DKPOWERHELL_FUNCTIONS_DIR/DK.ps1 
 }
 . $DKPOWERHELL_FUNCTIONS_DIR/DK.ps1
-
+if($DKLOADED){exit} else{ $global:DKLOADED=1 }	# ignore the fork process that will return from DK.ps1 above
 
 
 
