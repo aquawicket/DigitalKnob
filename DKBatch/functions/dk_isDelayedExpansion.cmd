@@ -4,6 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 set "if_DE=if "!!" equ """
 set "if_NDE=if "!!" neq """
+::set "DE=call dk_isDelayedExpansion de && call dk_echo "delayed expansion = %de%"" 
 
 ::####################################################################
 ::# dk_isDelayedExpansion(rtn_var)
@@ -11,7 +12,7 @@ set "if_NDE=if "!!" neq """
 ::#
 :dk_isDelayedExpansion
 	call dk_debugFunc
-	::if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	if "!!" == "" (
 	  set "%1=ON"

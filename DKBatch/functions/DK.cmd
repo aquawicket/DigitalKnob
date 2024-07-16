@@ -14,7 +14,7 @@ set "ENABLE_dk_debugFunc=0"
 	::call dk_debugFunc
 
 	::###### Initialize Language specifics ######
-	call :dk_init
+	::call :dk_init
 
 	::###### Reload Main Script with cmd ######
 	call :dk_reloadWithCmd %*
@@ -68,6 +68,8 @@ set "ENABLE_dk_debugFunc=0"
 	call dk_isDelayedExpansion __DE__
 	call dk_source dk_logo
 	call dk_logo
+	%if_NDE% call dk_echo "delayed expansion = OFF"
+	%if_DE%  call dk_echo "delayed expansion = ON"
 	::call dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
@@ -99,7 +101,7 @@ goto:eof
 :dk_init
 	::call dk_debugFunc
 	
-	::call :dk_echo "Loading DKBatch DigitalKnob . . ."
+	call :dk_echo "Loading DKBatch DigitalKnob . . ."
 goto:eof
 
 ::##################################################################################

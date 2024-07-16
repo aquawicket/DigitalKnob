@@ -50,4 +50,5 @@ goto:eof
 	call dk_isAlphanumeric "36a"      && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
 	call dk_isAlphanumeric word       && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
 	call dk_isAlphanumeric 123456789  && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
+	call dk_isAlphanumeric myArray[0] && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
 goto:eof
