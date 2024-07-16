@@ -6,7 +6,7 @@
 # dk_getUsername(<output>)
 #
 #
-dk_getUsername (){
+dk_getUsername() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -22,7 +22,7 @@ dk_getUsername (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
 	dk_debugFunc
 	
 	dk_getUsername _username

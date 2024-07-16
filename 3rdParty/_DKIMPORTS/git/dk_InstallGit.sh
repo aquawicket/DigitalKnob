@@ -6,7 +6,7 @@ echo "$0 $*"
 # dk_installGit()
 #
 #
-dk_installGit (){
+dk_installGit() {
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	

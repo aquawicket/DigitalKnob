@@ -8,7 +8,7 @@
 
 
 ###### test <...> ######
-test (){
+test() {
 	dk_echo "############ test() ############"
 	dk_printVar BASH
 	dk_printVar BASHOPTS
@@ -26,37 +26,37 @@ test (){
 #################################
 
 ###### get_uname ######
-get_uname (){
+get_uname() {
 	DKUNAME=$(uname -a)
 	dk_printVar DKUNAME
 }
 
 ###### get_host ######
-get_host (){
+get_host() {
 	DKHOST=$(uname -s)
 	dk_printVar DKHOST
 }
 
 ###### get_arch ######
-get_arch (){
+get_arch() {
 	DKARCH=$(uname -m)
 	dk_printVar DKARCH
 }
 
 ###### get_version ######
-get_version (){
+get_version() {
 	DKVERSION=$(uname -v)
 	dk_printVar DKVERSION
 }
 
 ###### get_ostype ######
-get_ostype (){
+get_ostype() {
 	DKOSTYPE=$OSTYPE
 	dk_printVar DKOSTYPE
 }
 
 ###### get_cpuinfo ######
-get_cpuinfo (){
+get_cpuinfo() {
 	if [ -e /proc/cpuinfo ]; then
 		DKCPUINFO=$(tr -d '\0' </proc/cpuinfo)
 	fi
@@ -64,7 +64,7 @@ get_cpuinfo (){
 }
 
 ###### get_model ######
-get_model (){
+get_model() {
 	if [ -e /proc/device-tree/model ]; then
 		DKMODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
@@ -72,19 +72,19 @@ get_model (){
 }
 
 ###### get_machtype ######
-get_machtype (){
+get_machtype() {
 	DKMACHTYPE=${MACHTYPE}
 	dk_printVar DKMACHTYPE
 }
 
 ###### get_lang ######
-get_lang (){
+get_lang() {
 	DKLANG=${LANG}
 	dk_printVar DKLANG
 }
 
 ###### get_username ######
-get_username (){
+get_username() {
 	if [ -n "${USER}" ]; then
 		DKUSERNAME=${USER}
 	elif [ -n "${USERNAME}" ]; then
@@ -94,49 +94,49 @@ get_username (){
 }
 
 ###### get_logname ######
-get_logname (){
+get_logname() {
 	DKLOGNAME=$LOGNAME
 	dk_printVar DKLOGNAME
 }
 
 ###### get_home ######
-get_home (){
+get_home() {
 	DKHOME=$HOME
 	dk_printVar DKHOME
 }
 
 ###### get_prefix ######
-get_prefix (){
+get_prefix() {
 	DKPREFIX=$PREFIX
 	dk_printVar DKPREFIX
 }
 
 ###### get_term ######
-get_term (){
+get_term() {
 	DKTERM=$TERM
 	dk_printVar DKTERM
 }
 
 ###### get_shell ######
-get_shell (){
+get_shell() {
 	DKSHELL=${SHELL}
 	dk_printVar DKSHELL
 }
 
 ###### get_path ######
-get_path (){
+get_path() {
 	DKPATH=$PATH
 	dk_printVar DKPATH
 }
 
 ###### get_pwd ######
-get_pwd (){
+get_pwd() {
 	DKPWD=$PWD
 	dk_printVar DKPWD
 }
 
 ###### load_dkenv ######
-load_dkenv (){
+load_dkenv() {
 	touch ~/.dkenv
 	source ~/.dkenv
 }
@@ -159,7 +159,7 @@ set_dkroot(){
 }
 
 ###### get_root ######
-get_root (){
+get_root() {
 	load_dkenv
 	
 	if [ -n "$DKROOT" ]; then
@@ -171,7 +171,7 @@ get_root (){
 }
 
 ###### clear_root ######
-clear_root (){
+clear_root() {
 	export -n DKROOT
 	unset DKROOT
 	
@@ -183,7 +183,7 @@ clear_root (){
 ##################################
 #	main
 #################################
-main (){
+main() {
 
 	get_uname
 	get_host

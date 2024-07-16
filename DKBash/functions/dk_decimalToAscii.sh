@@ -6,7 +6,7 @@
 #
 #    reference: https://www.ascii-code.com
 #
-dk_decimalToAscii (){
+dk_decimalToAscii() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -20,7 +20,7 @@ dk_decimalToAscii (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myDecimal="123"

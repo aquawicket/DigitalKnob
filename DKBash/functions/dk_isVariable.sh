@@ -6,7 +6,7 @@
 # dk_isVariable(arg)
 #
 #
-dk_isVariable (){
+dk_isVariable() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && return ${false} # Incorrect number of parameters
 	
@@ -21,7 +21,7 @@ dk_isVariable (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 
 	varA="A simple string variable"

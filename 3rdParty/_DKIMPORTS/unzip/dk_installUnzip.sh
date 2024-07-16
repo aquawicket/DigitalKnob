@@ -5,7 +5,7 @@
 # dk_installUnzip()
 #
 #
-dk_installUnzip (){
+dk_installUnzip() {
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 

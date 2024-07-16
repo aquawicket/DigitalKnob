@@ -6,7 +6,7 @@
 # dk_export(variable, value)
 #
 #
-dk_export (){
+dk_export() {
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	
@@ -15,7 +15,7 @@ dk_export (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_export myVar "the string value of myVar"

@@ -7,7 +7,7 @@
 #
 #  https://stackoverflow.com/a/26261518
 #
-dk_onError (){
+dk_onError() {
 	#dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -54,7 +54,7 @@ funcC(){
 	echo "funcC"
 }
 
-DKTEST (){ 
+DKTEST() { 
 	funcA test_args 1
 	funcB 123 abc
 }

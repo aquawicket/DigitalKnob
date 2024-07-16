@@ -9,7 +9,7 @@
 #	${1}			- The variable to test
 #	${rtn_var}: 	- True if the argument is string or a string variable
 #
-dk_isNumber (){
+dk_isNumber() {
 	dk_debugFunc 
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -22,7 +22,7 @@ dk_isNumber (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
 	myNumber1=69

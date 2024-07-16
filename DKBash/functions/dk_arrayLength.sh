@@ -7,7 +7,7 @@
 #
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
-dk_arrayLength (){
+dk_arrayLength() {
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
@@ -26,7 +26,7 @@ dk_arrayLength (){
 
 
 
-DKTEST (){ ########################################################################
+DKTEST() { ########################################################################
 	dk_debugFunc
 	
 	myArrayA=("element A" "element B" "element C")

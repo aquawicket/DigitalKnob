@@ -6,7 +6,7 @@
 # dk_exit(rtn_code)
 #
 #
-dk_exit (){
+dk_exit() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -20,7 +20,7 @@ dk_exit (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	# Only 'dk_exit 0' will turn the dk_onExit trap off

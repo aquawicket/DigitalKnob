@@ -68,7 +68,7 @@ returns_array(){
 
 
 
-main (){
+main() {
 	local array1=("a" "b" "c" "d")
 	echo ""
 	is_array array1

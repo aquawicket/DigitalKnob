@@ -6,7 +6,7 @@
 # dk_installEmscripten()
 #
 #
-dk_installEmscripten (){
+dk_installEmscripten() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -21,7 +21,7 @@ dk_installEmscripten (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_installEmscripten
 }

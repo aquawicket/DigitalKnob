@@ -6,7 +6,7 @@
 # dk_makeDirectory(<path>)
 #
 #
-dk_makeDirectory (){
+dk_makeDirectory() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -15,7 +15,7 @@ dk_makeDirectory (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_makeDirectory test
 }

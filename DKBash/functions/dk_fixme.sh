@@ -9,7 +9,7 @@
 #
 #	@msg	- The message to print
 #
-dk_fixme (){
+dk_fixme() {
 	dk_debugFunc
 	
 	[ ${ENABLE_dk_fixme-1} -eq 1 ] || return 0
@@ -27,7 +27,7 @@ dk_fixme (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_fixme "test dk_fixme message"
 	dk_info "...next line..."

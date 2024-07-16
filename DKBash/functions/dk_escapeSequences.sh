@@ -9,7 +9,7 @@
 # dk_escapeSequences()
 #
 #
-dk_escapeSequences (){
+dk_escapeSequences() {
 	dk_debugFunc
 	
 
@@ -128,7 +128,7 @@ dk_escapeSequences (){
 	dk_set clear      "${ESC}[2J"
 }
 
-ASCII_ADD (){
+ASCII_ADD() {
 	dk_debugFunc
 	
 	#https://linuxsimply.com/bash-scripting-tutorial/array/array-of-arrays/
@@ -163,7 +163,7 @@ ASCII_ADD (){
 	#ASCII_length=$(( ASCII_length + 1 ))
 }
 
-ASCII_SHOW (){
+ASCII_SHOW() {
 	dk_debugFunc
 	
 	ITEM=(${ASCII[${1}]})
@@ -178,7 +178,7 @@ ASCII_SHOW (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_escapeSequences

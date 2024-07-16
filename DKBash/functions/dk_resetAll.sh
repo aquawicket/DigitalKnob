@@ -5,7 +5,7 @@
 # dk_resetAll()
 #
 #
-dk_resetAll (){
+dk_resetAll() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -55,7 +55,7 @@ dk_resetAll (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_resetAll
 }

@@ -6,7 +6,7 @@ dk_includeGuard
 # dk_installMsys2()
 #
 #
-dk_installMsys2 (){
+dk_installMsys2() {
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 

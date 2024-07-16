@@ -6,7 +6,7 @@ if($DKINIT){return} else{ $global:DKINIT=1 }	# include_guard
 # DK()
 #
 #
-function DK (){
+function DK() {
 	#dk_echo "DK()"
 
 	###### Initialize Language specifics ######
@@ -164,7 +164,7 @@ function dk_setupKeepOpen(){
 ##################################################################################
 # Get-EntryPointAbsFilePath()
 #
-function Get-EntryPointAbsFilePath (){
+function Get-EntryPointAbsFilePath() {
     # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
     # NOTE 2: '$global:PSScriptRoot' is not the same as '$PSScriptRoot' and seems to correspond to the entry point script directory,
     # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but not

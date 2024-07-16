@@ -10,7 +10,7 @@
 #
 
 alias dk_return='ret_val "${ret_val-}"'
-ret_val (){
+ret_val() {
 	if [ "${1-}" = "" ]; then
 		builtin echo "${2-}"
 		#trap '' EXIT
@@ -25,7 +25,7 @@ ret_val (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_return "return string value"; return

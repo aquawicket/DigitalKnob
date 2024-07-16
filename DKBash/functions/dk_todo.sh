@@ -9,7 +9,7 @@ TODO_TAG="  TODO: "
 #
 #	@msg	- The message to print
 #
-dk_todo (){
+dk_todo() {
 	dk_debugFunc	
 	
 	[ ${ENABLE_dk_todo-1} -ne 1 ] && return
@@ -30,7 +30,7 @@ dk_todo (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_todo "test dk_todo message"

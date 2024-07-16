@@ -11,7 +11,7 @@ if(!$DKINIT){ . $PWD/DK.ps1 }
 #   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #
-function Global:dk_color (){
+function Global:dk_color() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
@@ -178,7 +178,7 @@ dk_color 1
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	dk_echo ""

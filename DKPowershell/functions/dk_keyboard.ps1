@@ -12,7 +12,7 @@ function Global:dk_keyboard() {
 	Keyboard_Loop
 }
 
-function Global:Keyboard_Loop (){
+function Global:Keyboard_Loop() {
 	Write-Host 0;
 	while ($key -ne 27) {
 		$keyCode = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode;
@@ -36,7 +36,7 @@ function Global:Keyboard_Loop (){
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_keyboard

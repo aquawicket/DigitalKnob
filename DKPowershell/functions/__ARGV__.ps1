@@ -25,6 +25,6 @@ function GLOBAL:__ARGV__($_FRAME_=1) {
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	Write-Host -Fore cyan "ARGV = $(__ARGV__ 0)";
 }

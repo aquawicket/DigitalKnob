@@ -4,7 +4,7 @@ if(!$dk_logo){ $dk_logo = 1 } else{ return }
 ################################################################################
 # dk_logo()
 #
-function Global:dk_logo (){
+function Global:dk_logo() {
 	dk_debugFunc
 
 
@@ -20,7 +20,7 @@ function Global:dk_logo (){
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_logo

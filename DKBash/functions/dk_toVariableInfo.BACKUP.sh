@@ -17,7 +17,7 @@
 #	Output:
 #	myVar: 'this is my variable'
 #
-dk_toVariableInfo (){
+dk_toVariableInfo() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && return #dk_echo "incorrect number or parameters" && return
 	
@@ -36,7 +36,7 @@ dk_toVariableInfo (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_toVariableInfo
 }

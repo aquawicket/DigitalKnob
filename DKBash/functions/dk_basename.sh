@@ -7,7 +7,7 @@
 #
 #	https://en.wikipedia.org/wiki/Basename
 #
-dk_basename (){
+dk_basename() {
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
@@ -22,7 +22,7 @@ dk_basename (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	basenameA=$(dk_basename "/path/to/a/filename.txt")

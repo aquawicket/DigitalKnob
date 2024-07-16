@@ -5,7 +5,7 @@
 # dk_assertArgs()
 #
 #
-dk_assertArgs (){
+dk_assertArgs() {
 	# frame 1 holds the argument checking information
 	dk_echo "dk_assertArgs:FUNCTION = $(__FUNCTION__ 1)"
 	dk_echo "dk_assertArgs:ARGC = $(__ARGC__ 1)"
@@ -38,12 +38,12 @@ dk_assertArgs (){
 }
 
 
-test_function (){
+test_function() {
 	dk_debugFunc
 	dk_assertArgs int string optional
 }
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 
 	test_function 123 abc

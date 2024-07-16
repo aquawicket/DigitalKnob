@@ -12,7 +12,7 @@
 #
 #	https://stackoverflow.com/a/27254437
 #
-dk_isArray (){
+dk_isArray() {
 	dk_debugFunc 
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -23,7 +23,7 @@ dk_isArray (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
 	myVar1=(1 2 3)

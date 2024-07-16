@@ -6,7 +6,7 @@
 # dk_createSymlink(<path> <symlink>)
 #
 #
-dk_createSymlink (){
+dk_createSymlink() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -19,7 +19,7 @@ dk_createSymlink (){
 
 
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
-DKTEST (){ 
+DKTEST() { 
 
 	dk_createSymlink dk_createSymlink.sh dk_createSymlink
 }

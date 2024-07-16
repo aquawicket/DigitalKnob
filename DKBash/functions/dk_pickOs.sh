@@ -6,7 +6,7 @@
 # dk_pickOs()
 #
 #
-dk_pickOs (){
+dk_pickOs() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -138,7 +138,7 @@ dk_pickOs (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_pickOs
 }

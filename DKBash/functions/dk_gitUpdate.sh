@@ -6,7 +6,7 @@
 # dk_gitUpdate(<NO_CONFIRM:optional>)
 #
 #
-dk_gitUpdate (){
+dk_gitUpdate() {
 	dk_debugFunc
 	[ ${#} -gt 1 ] && dk_error "Too many parameters"
 
@@ -37,7 +37,7 @@ dk_gitUpdate (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_gitUpdate

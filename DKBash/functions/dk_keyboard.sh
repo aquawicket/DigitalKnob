@@ -6,7 +6,7 @@ ESC=
 # dk_keyboard()
 #
 #
-dk_keyboard (){
+dk_keyboard() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -324,7 +324,7 @@ dk_keyboard (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_keyboard

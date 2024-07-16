@@ -9,7 +9,7 @@
 #
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
-dk_load (){
+dk_load() {
 	dk_debugFunc
 	#dk_echo "dk_load($*)"
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
@@ -112,7 +112,7 @@ dk_load (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_load dk_debug

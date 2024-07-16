@@ -7,7 +7,7 @@
 #   Functions must use builtin echo to return via command substitution
 export OVERWRITE_echo=1
 if [ "${OVERWRITE_echo-}" = "1" ]; then
-	echo (){
+	echo() {
 		#[ -z ${ESCAPES-} ]      && export ESCAPES=1
 		#[ -z ${NO_NEWLINE-} ]    && export NO_NEWLINE=0
 		#[ "${ESCAPES}" = "1" ]    && [ "$(builtin echo -e)" = "" ] && export escapes="-e "
@@ -28,7 +28,7 @@ fi
 # dk_echo(message)
 #
 #
-dk_echo (){
+dk_echo() {
 	#dk_debugFunc
 	[ ${#} -eq 0 ] && echo "" && return 0
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
@@ -53,7 +53,7 @@ dk_echo (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	echo "This is a normal echo commmand"

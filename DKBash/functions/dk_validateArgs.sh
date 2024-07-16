@@ -5,7 +5,7 @@
 ###############################################################################
 # dkValidateArgs(...)
 #
-dk_validateArgs (){
+dk_validateArgs() {
 	dk_debugFunc
 	#dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
 	#dk_echo "$(__FUNCTION__ 1)($(__ARGV__ 2))"
@@ -74,13 +74,13 @@ dk_validateArgs (){
 
 
 
-test_function (){
+test_function() {
 	dk_debugFunc
 	
 	dk_validateArgs number array string optional:int optional:array 
 }
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myNumber=69

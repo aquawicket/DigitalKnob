@@ -4,7 +4,7 @@
 ##################################################################################
 # __FILE__(<frame>)
 #
-__FILE__ (){
+__FILE__() {
 	#dk_debugFunc
 	
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
@@ -15,7 +15,7 @@ __FILE__ (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	echo "$(__FILE__)"

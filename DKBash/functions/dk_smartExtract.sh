@@ -6,7 +6,7 @@
 # dk_smartExtract(<src> <dest>)
 #
 #
-dk_smartExtract (){
+dk_smartExtract() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -47,7 +47,7 @@ dk_smartExtract (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_smartExtract
 }

@@ -172,7 +172,7 @@ DKHTTP_VARS(){
 # dk_download(url, destination)
 #
 #
-dk_download (){
+dk_download() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -349,7 +349,7 @@ DK
 
 
 
-#DK_TRY_CATCH (){
+#DK_TRY_CATCH() {
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 #	set +e; ( set -e
 #		DK

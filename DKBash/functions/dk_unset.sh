@@ -5,7 +5,7 @@
 # dk_unset(variable)
 #
 #
-dk_unset (){
+dk_unset() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -16,7 +16,7 @@ dk_unset (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_set myVar "initial value assigned with dk_unset"

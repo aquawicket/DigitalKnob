@@ -6,7 +6,7 @@
 # dk_get_dkpaths()
 #
 #
-dk_get_dkpaths (){
+dk_get_dkpaths() {
 	dk_debugFunc
 	
 	# [[ ${0} != ${BASH_SOURCE} ]] && echo "Script is being sourced" || echo "Script is being run"
@@ -105,7 +105,7 @@ dk_get_dkpaths (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_debugFunc
 }

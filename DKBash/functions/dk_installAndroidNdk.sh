@@ -6,7 +6,7 @@
 # dk_installAndroidNdk()
 #
 #
-dk_installAndroidNdk (){
+dk_installAndroidNdk() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -22,7 +22,7 @@ dk_installAndroidNdk (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_installAndroidNdk
 }

@@ -6,7 +6,7 @@
 # dk_set(variable, value)
 #
 #
-dk_set (){
+dk_set() {
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 
@@ -18,7 +18,7 @@ dk_set (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_set myVar "value assigned with dk_set"	

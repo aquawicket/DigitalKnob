@@ -13,7 +13,7 @@
 #   Return value
 #    The new length property of the object upon which the method was called.
 #
-dk_arrayPush (){
+dk_arrayPush() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	#dk_validateArgs array element optional:rtn_var
@@ -29,7 +29,7 @@ dk_arrayPush (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_arrayPush myArrayA a

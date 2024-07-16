@@ -4,7 +4,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 ####################################################################
 # installDKBash()
 #
-#function Global:installDKBash (){
+#function Global:installDKBash() {
 	#dk_debugFunc
 	#if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
@@ -39,7 +39,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 #}
 pause
 
-function Global:runDKBash (){
+function Global:runDKBash() {
 	pause
 	$DKBASH_FUNCTIONS_DIR = $1
 	$GITBASH_EXE = $2

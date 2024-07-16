@@ -5,7 +5,7 @@
 # dk_getFileSize(<path> <output>)
 #
 #
-dk_getFileSize (){
+dk_getFileSize() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -15,7 +15,7 @@ dk_getFileSize (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getFileSize
 }

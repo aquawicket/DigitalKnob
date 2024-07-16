@@ -6,7 +6,7 @@
 # dk_getFirstPath(result)
 #
 #
-dk_getFirstPath (){
+dk_getFirstPath() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -16,7 +16,7 @@ dk_getFirstPath (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_getFirstPath firstPath

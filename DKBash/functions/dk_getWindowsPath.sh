@@ -6,7 +6,7 @@
 # dk_getWindowsPath(<path> <output>)
 #
 #
-dk_getWindowsPath (){
+dk_getWindowsPath() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -18,7 +18,7 @@ dk_getWindowsPath (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_getWindowsPath "/c/Windows/System32" windowsPath

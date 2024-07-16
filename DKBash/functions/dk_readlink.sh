@@ -13,7 +13,7 @@
 #    C:     https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html
 #	 OSX:   https://www.unix.com/man-page/osx/1/readlink/
 #
-dk_readlink (){
+dk_readlink() {
 	dk_debugFunc
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
@@ -46,7 +46,7 @@ dk_readlink (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	readlinkA=$(dk_readlink -f "dk_load.sh")

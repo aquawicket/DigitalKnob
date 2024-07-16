@@ -4,7 +4,7 @@
 ##################################################################################
 # __ARGV__(<frame>)
 #
-__ARGV__ (){
+__ARGV__() {
 	#dk_debugFunc
 	[ -z ${1-} ] && local frame=0 || local frame=${1}
 	
@@ -38,7 +38,7 @@ test_function(){
 	done
 }
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	test_function abc 123

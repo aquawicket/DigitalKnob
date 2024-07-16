@@ -11,7 +11,7 @@
 #	@to			- The destination path to move or rename to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
-dk_move (){
+dk_move() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"

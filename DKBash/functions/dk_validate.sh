@@ -8,7 +8,7 @@
 #	@variable  - The name of a variable to test
 #	@code	   - The code to run if the variable is invalid.
 #
-dk_validate (){
+dk_validate() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -26,7 +26,7 @@ dk_validate (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	myVarA="a valid variable"
 	dk_validate myVarA fill_myVarA
@@ -42,10 +42,10 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	echo "myVarD = ${myVarD}"
 }
 
-fill_myVarA (){
+fill_myVarA() {
 	myVarA="myVarA has a string value"
 }
 
-fill_myVarB (){
+fill_myVarB() {
 	myVarB="myVarB has a string value"
 }

@@ -8,7 +8,7 @@
 #
 #
 #
-dk_showFileLine (){
+dk_showFileLine() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -62,7 +62,7 @@ dk_showFileLine (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_showFileLine "../../README.md" "How to build"
 

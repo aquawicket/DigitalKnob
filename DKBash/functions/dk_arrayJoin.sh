@@ -7,7 +7,7 @@
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_join
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
-dk_arrayJoin (){
+dk_arrayJoin() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
@@ -29,7 +29,7 @@ dk_arrayJoin (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myArrayA[0]="a"

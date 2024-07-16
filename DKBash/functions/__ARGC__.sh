@@ -4,7 +4,7 @@
 ##################################################################################
 # __ARGC__(<frame>)
 #
-__ARGC__ (){
+__ARGC__() {
 	#dk_debugFunc
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
 
@@ -13,7 +13,7 @@ __ARGC__ (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	echo "$(__ARGC__)"

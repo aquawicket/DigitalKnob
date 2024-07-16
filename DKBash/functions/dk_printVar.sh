@@ -5,7 +5,7 @@
 # dk_printVar(variable)
 #
 #
-dk_printVar (){
+dk_printVar() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	[ -z ${echo_fileline-} ] && dk_export echo_fileline "$(__FILE__ 1):$(__LINE__ 1)   "
@@ -146,7 +146,7 @@ dk_printVar (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_set myVariable "this is the value of myVariable"
@@ -166,7 +166,7 @@ DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### D
 	declare -A myHash=( ["indexA"]="this is indexA" ["indexB"]="this is indexB")
 	dk_printVar myHash
 
-	myFunction (){
+	myFunction() {
 		dk_echo "myFunction body"
 	}
 	dk_printVar myFunction

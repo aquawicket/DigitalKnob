@@ -6,7 +6,7 @@
 # dk_readCache()
 #
 #
-dk_readCache (){
+dk_readCache() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -42,7 +42,7 @@ dk_readCache (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_readCache
 }

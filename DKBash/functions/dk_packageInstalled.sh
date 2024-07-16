@@ -6,7 +6,7 @@
 # dk_packageInstalled(<package>)
 #
 #
-dk_packageInstalled (){
+dk_packageInstalled() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -40,7 +40,7 @@ dk_packageInstalled (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	if dk_packageInstalled bash; then
 		echo "The package is installed"

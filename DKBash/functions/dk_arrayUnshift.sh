@@ -7,7 +7,7 @@
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_unshift
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 #
-dk_arrayUnshift (){
+dk_arrayUnshift() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	#dk_validateArgs array element optional:rtn_var
@@ -23,7 +23,7 @@ dk_arrayUnshift (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_arrayUnshift myArray a

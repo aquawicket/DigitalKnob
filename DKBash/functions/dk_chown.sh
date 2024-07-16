@@ -5,7 +5,7 @@
 ##################################################################################
 # dk_chown(path)
 #
-dk_chown (){
+dk_chown() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	
@@ -16,7 +16,7 @@ dk_chown (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"

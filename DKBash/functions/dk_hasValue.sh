@@ -7,7 +7,7 @@
 #
 # Evaluates to true if the parameter is a variable that exists and has value
 #
-dk_hasValue (){
+dk_hasValue() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 	
@@ -17,7 +17,7 @@ dk_hasValue (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_hasValue
 }

@@ -5,7 +5,7 @@ if(!$dk_buildMain){ $dk_buildMain = 1 } else{ return }
 # dk_buildMain()
 #
 #
-function Global:dk_buildMain (){
+function Global:dk_buildMain() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 

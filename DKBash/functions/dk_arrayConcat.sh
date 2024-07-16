@@ -9,7 +9,7 @@
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
-dk_arrayConcat (){
+dk_arrayConcat() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
@@ -26,7 +26,7 @@ dk_arrayConcat (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myArray1[0]="a"

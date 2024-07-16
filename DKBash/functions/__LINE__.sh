@@ -4,7 +4,7 @@
 ##################################################################################
 # __LINE__(<frame>)
 #
-__LINE__ (){
+__LINE__() {
 	#dk_debugFunc
 	
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
@@ -13,7 +13,7 @@ __LINE__ (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	#dk_debugFunc
 	
 	echo "$(__LINE__)"

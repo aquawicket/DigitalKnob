@@ -6,7 +6,7 @@
 # dk_gitCommit()
 #
 #
-dk_gitCommit (){	
+dk_gitCommit() {	
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -67,7 +67,7 @@ dk_gitCommit (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_gitCommit

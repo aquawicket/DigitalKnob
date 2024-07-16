@@ -7,7 +7,7 @@
 #    Encode input to base-64 output
 #    https://github.com/base64code/examples
 #
-dk_btoa (){
+dk_btoa() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -21,7 +21,7 @@ dk_btoa (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"

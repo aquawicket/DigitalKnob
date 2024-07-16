@@ -7,7 +7,7 @@
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_pop
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
-dk_arrayPop (){
+dk_arrayPop() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	#dk_validateArgs array
@@ -21,7 +21,7 @@ dk_arrayPop (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	myArray[0]="a"

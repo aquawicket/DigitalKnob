@@ -5,7 +5,7 @@
 # dk_commandExists(<command>)
 #
 #
-dk_commandExists (){
+dk_commandExists() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -15,7 +15,7 @@ dk_commandExists (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	if dk_commandExists bash; then

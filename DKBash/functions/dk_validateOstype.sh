@@ -6,7 +6,7 @@
 # dk_validateOstype()
 #
 #
-#dk_validateOstype (){
+#dk_validateOstype() {
 #	dk_debugFunc
 #	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 #	
@@ -35,7 +35,7 @@
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_validateOstype
 }

@@ -6,7 +6,7 @@
 # dk_removeFromFile(<string> <file>)
 #
 #
-dk_removeFromFile (){
+dk_removeFromFile() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -15,7 +15,7 @@ dk_removeFromFile (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_removeFromFile
 }

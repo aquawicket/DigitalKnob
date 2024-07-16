@@ -22,7 +22,7 @@ function Global:dk_realpath($path) {
 
 
 ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
-function Global:DKTEST (){ 
+function Global:DKTEST() { 
 	dk_debugFunc
 	
 	$realpath = dk_realpath dk_load.ps1 

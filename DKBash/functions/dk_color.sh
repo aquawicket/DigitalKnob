@@ -12,7 +12,7 @@
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #   https://en.wikipedia.org/wiki/ANSI_escape_code
 #
-dk_color (){
+dk_color() {
 	dk_debugFunc
 	
 	export USE_COLOR=1
@@ -176,7 +176,7 @@ dk_color 1
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
 	dk_debugFunc
 	
 	dk_echo

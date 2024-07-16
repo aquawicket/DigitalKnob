@@ -6,7 +6,7 @@
 # dk_getFullPath(path, output)
 #
 #
-dk_getFullPath (){
+dk_getFullPath() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -17,7 +17,7 @@ dk_getFullPath (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_getFullPath "bash" fullPath

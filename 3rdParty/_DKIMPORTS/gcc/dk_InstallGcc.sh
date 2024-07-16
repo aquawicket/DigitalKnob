@@ -5,7 +5,7 @@
 # dk_installGcc()
 #
 #
-dk_installGcc (){
+dk_installGcc() {
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 

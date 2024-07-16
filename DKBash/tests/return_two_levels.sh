@@ -1,7 +1,7 @@
 clear
 
 alias dk_return='ret_val "${ret_val-}"'
-ret_val (){
+ret_val() {
 	if [ "${1-}" = "" ]; then
 		builtin echo "${2-}"
 	else

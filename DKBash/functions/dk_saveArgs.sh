@@ -13,7 +13,7 @@
 #   eval "set -- $myarrayA"
 #	echo "${1} ${2} ${3} ${4}"
 #
-dk_saveArgs (){
+dk_saveArgs() {
 	dk_debugFunc
 
 	for i do 
@@ -23,7 +23,7 @@ dk_saveArgs (){
 }
 
 
-test_func (){
+test_func() {
 
 	dk_echo
 	dk_echo "test_func \${1} = ${1-}"
@@ -74,7 +74,7 @@ test_func (){
 }
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_echo

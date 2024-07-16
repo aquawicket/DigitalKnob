@@ -6,7 +6,7 @@ if(!$dk_pause){ $dk_pause = 1 } else{ return }
 #
 #    Pause execution and wait for <enter> keypress to continue
 #
-function GLOBAL:dk_pause (){
+function GLOBAL:dk_pause() {
 	dk_debugFunc
 
 
@@ -16,7 +16,7 @@ function GLOBAL:dk_pause (){
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
 	dk_debugFunc
 	
 	

@@ -5,7 +5,7 @@ if(!$dk_reload){ $dk_reload = 1 } else{ return }
 # dk_reload()
 #
 #
-function Global:dk_reload  (){
+function Global:dk_reload() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -19,7 +19,7 @@ function Global:dk_reload  (){
 
 
 
-function Global:DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	

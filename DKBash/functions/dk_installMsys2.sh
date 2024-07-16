@@ -6,7 +6,7 @@
 # dk_installMsys2()
 #
 #
-dk_installMsys2 (){
+dk_installMsys2() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -16,7 +16,7 @@ dk_installMsys2 (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_installMsys2
 }

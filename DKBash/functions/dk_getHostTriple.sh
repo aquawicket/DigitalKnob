@@ -5,7 +5,7 @@
 ##################################################################################
 # try(<args..>)
 #
-try (){ 
+try() { 
 	#${@} &>/dev/null
 	${@} 2>&1
 }
@@ -16,7 +16,7 @@ try (){
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
-dk_getHostTriple (){
+dk_getHostTriple() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -295,7 +295,7 @@ dk_getHostTriple (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getHostTriple
 	dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"

@@ -6,7 +6,7 @@
 # dk_getDKPaths()
 #
 #
-dk_getDKPaths (){
+dk_getDKPaths() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -35,7 +35,7 @@ dk_getDKPaths (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_getDKPaths
 }

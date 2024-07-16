@@ -6,7 +6,7 @@
 # dk_convertToCIdentifier(<input> <output>)
 #
 #
-dk_convertToCIdentifier (){
+dk_convertToCIdentifier() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -54,7 +54,7 @@ dk_convertToCIdentifier (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < > { } `

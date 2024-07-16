@@ -5,7 +5,7 @@
 # dk_installVSCode()
 #
 #
-dk_installVSCode (){
+dk_installVSCode() {
 	dk_debugFunc
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 

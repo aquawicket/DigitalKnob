@@ -6,7 +6,7 @@
 # dk_isUrl(string)
 #
 #
-dk_isUrl (){
+dk_isUrl() {
 	dk_debugFunc
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -16,7 +16,7 @@ dk_isUrl (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	test_url="http://www.aquawicket.com"

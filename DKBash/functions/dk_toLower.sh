@@ -6,7 +6,7 @@
 # dk_toLower(<input> <output>)
 #
 #
-dk_toLower (){
+dk_toLower() {
 	dk_debugFunc
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 
@@ -17,7 +17,7 @@ dk_toLower (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase

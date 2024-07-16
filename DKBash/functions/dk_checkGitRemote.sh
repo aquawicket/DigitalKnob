@@ -6,7 +6,7 @@
 # dk_checkGitRemote()
 #
 #
-dk_checkGitRemote (){
+dk_checkGitRemote() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
@@ -25,7 +25,7 @@ dk_checkGitRemote (){
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 	dk_debugFunc
 	
 	dk_checkGitRemote

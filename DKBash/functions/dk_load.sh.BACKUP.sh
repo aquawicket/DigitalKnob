@@ -6,7 +6,7 @@
 #
 #
 #
-dk_load (){
+dk_load() {
 	dk_debugFunc
 	
 	local fn=
@@ -110,7 +110,7 @@ dk_load "${0}"
 
 
 
-DKTEST (){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
 
 	dk_load
 }
