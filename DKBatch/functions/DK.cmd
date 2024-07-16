@@ -64,6 +64,8 @@ set "ENABLE_dk_debugFunc=0"
 	call dk_source dk_echo
 	call dk_source dk_color
 	call dk_color
+	call dk_source dk_isDelayedExpansion
+	call dk_isDelayedExpansion __DE__
 	call dk_source dk_logo
 	call dk_logo
 	::call dk_load %DKSCRIPT_PATH%
@@ -122,7 +124,8 @@ goto:eof
     set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-    call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    ::call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	cd %DKBATCH_FUNCTIONS_DIR%
 goto:eof
 

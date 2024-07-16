@@ -2,6 +2,9 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 
+set "if_DE=if "!!" equ """
+set "if_NDE=if "!!" neq """
+
 ::####################################################################
 ::# dk_isDelayedExpansion(rtn_var)
 ::#

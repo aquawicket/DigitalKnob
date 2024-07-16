@@ -20,7 +20,6 @@ goto:eof
 	set "CMD_FILE=%~2"
 	
 	cmd /V:ON /K call %CMD_FILE%
-	::cmd /V:OFF /K call %CMD_FILE%
 	
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
