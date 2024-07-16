@@ -11,7 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	setlocal enableDelayedExpansion
 	for %%A in (%1.) do set "parent=%%~dpA"
-    endlocal & call dk_set %2 "%parent%"
+    endlocal & call dk_set %2 "%parent:~0,-1%"
 goto:eof
 
 

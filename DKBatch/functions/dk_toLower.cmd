@@ -10,9 +10,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	setlocal EnableDelayedExpansion
-		call dk_set _input_ %~1
-		call dk_set _UCASE ABCDEFGHIJKLMNOPQRSTUVWXYZ
-		call dk_set _LCASE abcdefghijklmnopqrstuvwxyz
+		set "_input_=%~1"
+		set "_UCASE=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		set "_LCASE=abcdefghijklmnopqrstuvwxyz"
 		
 		for /l %%a in (0,1,25) do (
 			call set "_FROM_=%%_UCASE:~%%a,1%%

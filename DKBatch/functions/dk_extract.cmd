@@ -7,11 +7,35 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_extract
 	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	set "dk_extract_argc=%__ARGC__%"
 	
-	call dk_info "Extracting %~1 to %~2 . . ."
-	if not exist "%~1"   call dk_error "cannot find %~1"
-    powershell Expand-Archive "%~1" -DestinationPath "%~2"
+	
+	if %dk_extract_argc% equ 1 (call dk_info "Extracting %~1 . . .")
+	if %dk_extract_argc% equ 2 (call dk_info "Extracting %~1 to %~2. . .")
+	
+	:: if the destination isn't provided, we should extract to a folder named the same as the file
+	:: in the same diretory the archive file is in.    
+	if not exist "%~1" call dk_error "%~1 does not exist"
+	
+	echo ARGC = %dk_extract_argc%
+	if "%dk_extract_argc%" equ "2" goto:twoParams
+	::### handle 1 parameter
+	echo processing 1 parameter
+	call dk_basename "%~1" basename
+	call dk_removeExtension "%basename%" basename
+	call dk_getParentDir "%~1" destination      &:: extract contents to same directoy
+	set "destination=%destination%\%basename%"  &:: extract contents to folder within same directory
+	call dk_echo "destination = %destination%"
+	powershell Expand-Archive "%~1" -DestinationPath "%destination%"
+	goto:eof
+	
+:twoParams
+	::### handle 2 parameters
+	echo processing 2 parameters
+	powershell Expand-Archive "%~1" -DestinationPath "%~2"
+	goto:eof
 goto:eof
 
 
@@ -22,5 +46,6 @@ goto:eof
 	call dk_debugFunc
 	
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
-	call dk_extract "%DKDOWNLOAD_DIR%/cmake-3.29.5-windows-x86_64.zip" "%DKDOWNLOAD_DIR%"
+	call dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
+	call dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip" "%DKDOWNLOAD_DIR%\REACTOS_DL"
 goto:eof

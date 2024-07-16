@@ -18,5 +18,5 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "CMD_FILE=%~2"
-	cmd /c call %CMD_FILE%
+	cmd /k call %CMD_FILE%
 goto:eof
