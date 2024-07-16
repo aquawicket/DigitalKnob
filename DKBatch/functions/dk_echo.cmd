@@ -13,7 +13,7 @@ call %DKBATCH_FUNCTION_DIR_%DK.cmd
 	if "%~1" equ "" (echo: & goto:eof)
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments"
 	
-    setlocal enableDelayedExpansion
+    setlocal
         set "_message_=%~1"	
         :: if msg starts and ends with quotes, remove the first and last
         if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"

@@ -8,12 +8,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 :dk_echoAlign
 	call dk_debugFunc
 	
-	setlocal EnableDelayedExpansion
+	::setlocal
+	setlocal enabledelayedexpansion
 	(set^ tmp=%~2)
 	if defined tmp (
 		set "len=1"
 		for %%p in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-			if "!tmp:~%%p,1!" neq "" (
+			%if_NDE% if "%tmp:~%%p,1%" neq "" (
+				set /a "len+=%%p"
+				call set "tmp=%%tmp:~%%p%%"
+			)
+			%if_DE% if "!tmp:~%%p,1!" neq "" (
 				set /a "len+=%%p"
 				set "tmp=!tmp:~%%p!"
 			)
@@ -31,11 +36,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if /i "%1" equ "center" (
 		set /a offsetnum=^(%cols% / 2^) - ^(%len% / 2^)
 		set "offset="
-		for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
+		%if_NDE% for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
+		%if_DE% for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
 	) else if /i "%1" equ "right" (
 		set /a offsetnum=^(%cols% - %len%^)
 		set "offset="
-		for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
+		%if_NDE% for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
+		%if_DE% for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
 	)
 
 	echo %offset%%~2
@@ -49,14 +56,17 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	setlocal EnableDelayedExpansion
-	call :dk_echoAlign center "centered text"
-	call :dk_echoAlign right "right aligned text"
-	echo text on the left side
+	setlocal
+	call dk_echoAlign center "centered text"
+	call dk_echoAlign right "right aligned text"
+	call dk_echo "text on the left side"
 	set "prep_text="
-	for /l %%a in (1 1 7) do (
-		set "prep_text=!prep_text!aR"
-		call :dk_echoAlign center "!prep_text!"
+	for /l %%Z in (1 1 7) do (
+		%if_NDE% call set "prep_text=%%prep_text%%aR"
+		%if_NDE% call dk_echoAlign center "%%prep_text%%"
+		
+		%if_DE% set "prep_text=!prep_text!aR"
+		%if_DE% call dk_echoAlign center "!prep_text!"
 	)
 	echo:
 goto:eof

@@ -4,7 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 set "if_DE=if "!!" equ """
 set "if_NDE=if "!!" neq """
-::set "DE=call dk_isDelayedExpansion de && call dk_echo "delayed expansion = %de%"" 
+set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
 
 ::####################################################################
 ::# dk_isDelayedExpansion(rtn_var)
