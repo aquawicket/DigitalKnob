@@ -1,5 +1,4 @@
 <!-- :
-:: PasswordSubmitter.bat
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -28,28 +27,45 @@ if "%~1" equ "" (
 exit /b
 -->
 
-<html>
-<head><title>User Input</title></head>
-<body>
 
+<!-- https://learn.microsoft.com/en-us/previous-versions/ms536495(v=vs.85) -->
+<html>
+	<head>
+		<TITLE>HTA Demo</TITLE>
+		<HTA:APPLICATION ID="htaInput"
+			APPLICATIONNAME="htaInput"
+			BORDER="thin"
+			BORDERSTYLE="normal"
+			CAPTION="yes"
+			ICON=""
+			MAXIMIZEBUTTON="yes"
+			MINIMIZEBUTTON="yes"
+			NAVIGABLE="yes"
+			SCROLL="no"
+			SHOWINTASKBAR="no"
+			SINGLEINSTANCE="yes"
+			SYSMENU="yes"
+			VERSION="1.0"/>
+	</head>	
+<body onkeypress='keyPress(event)'>
+	<input type="text" id="input" value="">
+    <hr>
+    <button onclick='pipePass()'>Submit</button>
+	
     <script language='javascript' >
-		window.resizeTo(300,150);
-		function entperPressed(e){
-			    if (e.keyCode == 13) {
-					pipePass();
-				}
+		window.resizeTo(500,150);
+		function keyPress(e){
+			if (e.keyCode == 13) {
+				pipePass();
+			}
 		}
         function pipePass() {
             var pass=document.getElementById('input').value;
             var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
             close(fso.Write(pass));
-
         }
+		document.getElementById("input").focus
+		stop
     </script>
-
-    <input type="text" id="input" value="">
-    <hr>
-    <button onclick='pipePass()'>Submit</button>
-
 </body>
 </html> 

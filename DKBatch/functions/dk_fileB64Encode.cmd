@@ -34,10 +34,11 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-	set "input=%DKBRANCH_DIR%\DKBuilder.cmd"
+	::call dk_validate DKBRANCH_DIR "call dk_validateBranch"
+	::set "input=%DKBRANCH_DIR%\DKBuilder.cmd"
 	::set "output=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
 	
+	call dk_selectFile input
 	call dk_fileB64Encode "%input%"
 	::call dk_fileB64Encode "%input%" "test.b64"
 goto:eof
