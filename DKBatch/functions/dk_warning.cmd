@@ -21,9 +21,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	if not defined ENABLE_dk_warning  set "ENABLE_dk_warning=1"
 	if "%ENABLE_dk_warning%" neq "1" goto:eof                                                               &:: if arguments are empty, print a new line
-	setlocal enableDelayedExpansion	
+	setlocal
 		set "_message_=%~1"
-		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!           &:: if _message_ starts and ends with quotes, remove them
+		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!           &:: if _message_ starts and ends with quotes, remove them
 
 		call dk_echo "%yellow%%WARNING_TAG%%_message_%%clr%"
 		if "%TRACE_ON_WARNING%"=="1" call dk_echo "%yellow%*** TRACE_ON_WARNING ***%clr%"  & call dk_stacktrace
@@ -32,6 +32,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		if "%HALT_ON_WARNING%"=="1"  call dk_echo "%yellow%*** HALT_ON_WARNING ***%clr%"   & call dk_exit
 	endlocal
 goto:eof
+
 
 
 
