@@ -9,9 +9,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal enableDelayedExpansion
+	setlocal
 	for %%A in (%1.) do set "parent=%%~dpA"
-    endlocal & call dk_set %2 "%parent:~0,-1%"
+    endlocal & set "%2=%parent:~0,-1%"
 goto:eof
 
 
@@ -23,6 +23,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_getParentDir "C:\Windows\System32" parent
-	call dk_echo "parent = %parent%"
+	call dk_set myPath "C:\Windows\System32"
+	call dk_getParentDir "%myPath%" parent
+	call dk_printVar parent
 goto:eof

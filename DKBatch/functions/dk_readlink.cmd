@@ -13,13 +13,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal enabledelayedexpansion
+	setlocal
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-	for %%Z in ("%_input%") do set "_readlink_=%%~fZ"
-	endlocal & call dk_set %2 "%_readlink_%"
+	endlocal & for %%Z in ("%_input%") do set "%2=%%~fZ"
 goto:eof
 
 
@@ -30,6 +29,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_readlink "DK.cmd" realpath
-	call dk_echo "realpath = %realpath%"
+	call dk_set myPath "DK.cmd"
+	call dk_readlink "%myPath%" realpath
+	call dk_printVar realpath
 goto:eof

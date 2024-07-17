@@ -13,8 +13,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	set /a i=0
 	setlocal enabledelayedexpansion
-	for %%a in ("%~1\*") do ( 
-		set "%~2[!i!]=%%a"
+	for %%a in ("%~1\*") do (
+		%if_NDE% call set "%~2[%%i%%]=%%a"
+		%if_DE% set "%~2[!i!]=%%a"
 		set /A i+=1
 	) 
 
@@ -36,6 +37,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_getFiles "C:\Windows" files
+	call dk_set myPath "C:\Windows"
+	call dk_getFiles "%myPath%" files
 	call dk_printVar files
 goto:eof
