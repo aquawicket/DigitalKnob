@@ -28,6 +28,8 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     call dk_basename %GIT_DL% GIT_DL_FILE
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
+	call dk_printVar GIT_DL_NAME
+	call dk_printVar GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
     call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
     call dk_set GIT_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe

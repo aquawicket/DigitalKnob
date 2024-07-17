@@ -12,16 +12,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	rem FIXME: non delayed expansion broken
 	setlocal enabledelayedexpansion 
     set "_input_=%~1"
+	set "_output_="
     set "map=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
+	
     :c_identifier_loop
-        if not defined _input_ goto c_identifier_endLoop    
-		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (
+        if not defined _input_ goto c_identifier_endLoop  
 		
+		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (
 			rem FIXME: non delayed expansion broken
-			%if_NDE% call set "mapn=%%map:%%C=%%"
-			%if_NDE% if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
-            %if_NDE% if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
+			rem %if_NDE% call set "mapn=%%map:%%C=%%"
+			rem %if_NDE% if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
+            rem %if_NDE% if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
 			
             %if_DE% if "!map:%%C=!" neq "%map%" set "_output_=!_output_!%%C"
             %if_DE% if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"

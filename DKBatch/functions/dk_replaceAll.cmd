@@ -10,11 +10,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 4 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	::setlocal
-	call dk_set _input_ "%~1"
-	call set "_output_=%%_input_:%~2=%~3%%"
+	setlocal
+	set "_input_=%~1"
+	%if_NDE% call set "_output_=%%_input_:%~2=%~3%%"
+	%if_ND% set "_output_=!_input_:%~2=%~3!"
 	
-	endlocal & call dk_set %4 "%_output_%"
+	endlocal & set "%4=%_output_%"
 goto:eof
 
 
