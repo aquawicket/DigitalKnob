@@ -7,8 +7,8 @@ export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket
 export DKBASH_DIR="$PWD/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ -e ${DKBASH_DIR} ] || ${dksudo} mkdir ${DKBASH_DIR}
-[ -n "${USER-}" ] && DKUSERNAME=${USER} || DKUSERNAME=${USERNAME}	
-${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
+[ -n "${USER-}" ] && DKUSERNAME=${USER-} || DKUSERNAME=${USERNAME-}	
+[ -n "${DKUSERNAME-}" ] && ${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 
 [ -e ${DKBASH_FUNCTIONS_DIR} ] || mkdir ${DKBASH_FUNCTIONS_DIR}
