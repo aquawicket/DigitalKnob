@@ -10,13 +10,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal enabledelayedexpansion
 	set "_input_=%1"
 	set "_input_=%_input_:"=%"
 	if [%_input_:~-1,1%] == [\] set "_input=%_input_:~0,-1%"
 	if [%_input_:~-1,1%] == [/] set "_input=%_input_:~0,-1%"
-	for %%Z in ("%_input_%") do set "basename=%%~nxZ"
-	endlocal & call dk_set %2 "%basename%"
+	for %%Z in ("%_input_%") do set "%2=%%~nxZ"
 goto:eof
 
 
@@ -27,9 +25,11 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_basename C:\Windows\System32\test.v123.zip name
-	call dk_echo "name = %name%"
+	call dk_set myPath "C:\Windows\System32\test.v123.zip" 
+	call dk_basename "%myPath%" basename
+	call dk_printVar basename
 	
-	call dk_basename TEST nameb
-	call dk_echo "nameb = %nameb%"
+	call dk_set myPathB "TEST" 
+	call dk_basename "%myPathB%" basenameB
+	call dk_printVar basenameB
 goto:eof
