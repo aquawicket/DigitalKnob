@@ -9,13 +9,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
-	setlocal enabledelayedexpansion
+	setlocal
 	set "_input=%1"
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-	for %%Z in ("%_input%") do set "OUT=%%~xZ"
-	endlocal & call dk_set %2 "%OUT%"
+	endlocal & for %%Z in ("%_input%") do set "%2=%%~xZ"
 goto:eof
 
 
@@ -28,7 +27,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_set filepath "/test/test2/xfile.extension"
-	call dk_getExtension "%filepath%" extension
-	call dk_echo "extension = %extension%"
+	call dk_set myPath "/test/test2/xfile.extension"
+	call dk_getExtension "%myPath%" extension
+	call dk_printVar extension
 goto:eof
