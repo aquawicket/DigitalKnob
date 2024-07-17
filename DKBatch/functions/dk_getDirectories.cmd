@@ -13,9 +13,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_replaceAll "%~1" "/" "\" _path_
 	::set "folders="
 	set /A i=0
-	setlocal enabledelayedexpansion
+	setlocal
 	for /d %%a in ("%_path_%\*") do ( 
-		set "%~2[!i!]=%%a"
+		%if_NDE% call set "%~2[%%i%%]=%%a"
+		%if_DE% set "%~2[!i!]=%%a"
 		set /A i+=1
 	) 
 
@@ -36,7 +37,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_getDirectories "C:\Windows" result
-	call dk_printVar result
+	call dk_set myPath "C:\Windows"
+	call dk_getDirectories "%myPath%" directories
+	call dk_printVar directories
 goto:eof
 	

@@ -12,11 +12,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal EnableDelayedExpansion
+	setlocal
     ::set "file=%~1"
 	set /a i=0
     for /F "usebackq delims=" %%a in ("%~f1") do (
-		set "%~2[!i!]=%%a"
+		%if_NDK% call set "%~2[%%i%%]=%%a"
+		%if_DK% set "%~2[!i!]=%%a"
 		set /a i+=1
     )
 	
@@ -26,6 +27,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	   if defined currentScope endlocal
 	   set "%%a"
 	)
+	endlocal
 goto:eof
 
 
@@ -41,14 +43,17 @@ goto:eof
 	dir /b /a-d > array.cmd
 
 	call dk_fileToArray "array.cmd" MyArray
-	::call dk_arrayLength MyArray MyArrayLength
-	::echo MyArrayLength = %MyArrayLength%
+
 	call dk_printVar MyArray
 
 	:: or print items individually
-
-	echo MyArray[0] = %MyArray[0]%
-	echo MyArray[1] = %MyArray[1]%
-	echo MyArray[2] = %MyArray[2]%
+	dk_printVar MyArray[0]
+	dk_printVar MyArray[1]
+	dk_printVar MyArray[2]
+	dk_printVar MyArray[3]
+	dk_printVar MyArray[4]
+	dk_printVar MyArray[5]
+	dk_printVar MyArray[6]
+	dk_printVar MyArray[7]
 goto:eof
 

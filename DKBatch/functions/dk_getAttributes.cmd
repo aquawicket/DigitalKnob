@@ -8,13 +8,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	::setlocal enabledelayedexpansion
-		set "_input_=%1"
-		set "_input_=%_input_:"=%"
-		if [%_input_:~-1,1%] == [\] set "_input_=%_input_:~0,-1%"
-		if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
-		for %%Z in ("%_input_%") do set "OUT=%%~aZ"
-	endlocal & call dk_set %2 "%OUT%"
+	setlocal
+	set "_input_=%1"
+	set "_input_=%_input_:"=%"
+	if [%_input_:~-1,1%] == [\] set "_input_=%_input_:~0,-1%"
+	if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
+	endlocal & for %%Z in ("%_input_%") do set "%2=%%~aZ"
 goto:eof
 
 
@@ -26,6 +25,8 @@ goto:eof
 ::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
 :DKTEST
 	call dk_debugFunc
-		
-	call dk_getAttributes "DK.cmd" attributes
+	
+	call dk_set myPath "DK.cmd"
+	call dk_getAttributes "%myPath%" attributes
+	call dk_printVar attributes
 goto:eof

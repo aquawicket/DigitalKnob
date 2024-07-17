@@ -21,9 +21,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	if not defined ENABLE_dk_debug  set "ENABLE_dk_debug=1"
 	if "%ENABLE_dk_debug%" neq "1"  goto:eof
-	setlocal enableDelayedExpansion       
+	setlocal   
 		set "_message_=%~1"
-		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!    &:: if _message_ starts and ends with quotes, remove them
+		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
 
 		call dk_echo "%blue%%DEBUG_TAG%%_message_%%clr%"
 		if "%TRACE_ON_DEBUG%"=="1" call dk_echo "%blue%*** TRACE_ON_DEBUG ***%clr%"  & call dk_stacktrace

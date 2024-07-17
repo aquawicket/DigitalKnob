@@ -20,9 +20,9 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 	if "%ENABLE_dk_error%" neq "1"  goto:eof
 	::if "%*"==""  echo: & goto:eof	                                                               &:: if arguments are empty, print a new line
 	
-	setlocal enableDelayedExpansion	
+	setlocal
 		call dk_set _message_ %*
-		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!          &:: if _message_ starts and ends with quotes, remove them
+		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ %_message_:~1,-1%          &:: if _message_ starts and ends with quotes, remove them
 		
 		if not defined red (call dk_set red [31m)
 		if not defined clr (call dk_set clr [0m)

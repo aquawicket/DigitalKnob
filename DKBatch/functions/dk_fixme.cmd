@@ -20,9 +20,9 @@ set "FIXME_TAG=FIXME: "
 	if "%ENABLE_dk_fixme%" neq "1"  goto:eof
 	
 	
-	setlocal enableDelayedExpansion	
+	setlocal
 		call dk_set _message_ %*
-		if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!          &:: if _message_ starts and ends with quotes, remove them
+		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ !_message_:~1,-1!          &:: if _message_ starts and ends with quotes, remove them
 		
 		if not defined red (call dk_set red [31m)
 		if not defined clr (call dk_set clr [0m)
