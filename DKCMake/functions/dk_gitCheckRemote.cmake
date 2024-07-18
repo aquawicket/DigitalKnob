@@ -2,10 +2,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_checkGitRemote()
+# dk_gitCheckRemote()
 #
 #
-function(dk_checkGitRemote)
+function(dk_gitCheckRemote)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 0)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
@@ -30,8 +30,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
 	dk_debugFunc(${ARGV})
 	
-	dk_checkGitRemote()
+	dk_gitCheckRemote()
 endfunction()

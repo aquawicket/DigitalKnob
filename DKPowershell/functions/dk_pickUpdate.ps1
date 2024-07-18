@@ -13,7 +13,7 @@ function Global:dk_pickUpdate() {
 	dk_readCache
 	
 	dk_echo
-	dk_checkGitRemote
+	dk_gitCheckRemote
 	dk_echo
 	
 	if($behind -lt 1){

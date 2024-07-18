@@ -1,11 +1,11 @@
 if(!$DKINIT){ . $PWD/DK.ps1 }
-if(!$dk_checkGitRemote){ $dk_checkGitRemote = 1 } else{ return }
+if(!$dk_gitCheckRemote){ $dk_gitCheckRemote = 1 } else{ return }
 
 ##################################################################################
-# dk_checkGitRemote()
+# dk_gitCheckRemote()
 #
 #
-function Global:dk_checkGitRemote() {
+function Global:dk_gitCheckRemote() {
 	dk_debugFunc
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
@@ -29,5 +29,5 @@ function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTE
 	dk_debugFunc
 	
 	
-	dk_checkGitRemote
+	dk_gitCheckRemote
 }

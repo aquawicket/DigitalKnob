@@ -160,7 +160,7 @@ dk_pickUpdate() {
 	dk_readCache
 	
 	dk_echo
-	dk_checkGitRemote
+	dk_gitCheckRemote
 	dk_echo
 	
 	#dk_printVar _APP_
@@ -1063,11 +1063,11 @@ dk_call() {
 
 
 ##################################################################################
-# dk_checkGitRemote()
+# dk_gitCheckRemote()
 #
 #
-dk_checkGitRemote() {
-	dk_verbose "dk_checkGitRemote(${*})"
+dk_gitCheckRemote() {
+	dk_verbose "dk_gitCheckRemote(${*})"
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	ahead=0

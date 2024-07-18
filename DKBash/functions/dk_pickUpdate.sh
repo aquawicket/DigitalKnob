@@ -13,7 +13,7 @@ dk_pickUpdate() {
 	dk_readCache
 	
 	dk_echo
-	dk_checkGitRemote
+	dk_gitCheckRemote
 	dk_echo
 	
 	#dk_printVar _APP_
