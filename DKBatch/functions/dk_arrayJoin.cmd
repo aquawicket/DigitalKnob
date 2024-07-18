@@ -17,14 +17,16 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	:dk_arrayJoin_loop
 	if defined %~1[%_count_%] (
 		if defined _string_ (
-			call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
+			%if_NDE% call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
+			%if_DE% set "_string_=%_string_%%~2!%~1[%_count_%]!"
 		) else (
-		    call set "_string_=%%%~1[%_count_%]%%"
+		    %if_NDE% call set "_string_=%%%~1[%_count_%]%%"
+			%if_DE% call set "_string_=!%~1[%_count_%]!"
 		)
 		set /a _count_+=1
 		goto:dk_arrayJoin_loop
 	)
-	endlocal & call set "%3=%_string_%"
+	endlocal & set "%3=%_string_%"
 goto:eof
 
 
@@ -41,5 +43,5 @@ goto:eof
 	set "myArray[4]=e"
 	
 	call dk_arrayJoin myArray "," myString
-	echo "myString = %myString%"
+	call dk_printVar myString
 goto:eof
