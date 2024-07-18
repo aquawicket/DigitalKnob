@@ -62,14 +62,15 @@ var content2:byte[]="+content+";\r\n\
 var dt=(new Date()).getTime();\r\n\
 var temp=Path.GetTempPath();\r\n\
 var nm=Process.GetCurrentProcess().ProcessName.substring(0,Process.GetCurrentProcess().ProcessName.length-3);\r\n\
-var tempBatPath=Path.Combine(temp,nm+dt+'.bat');\r\n\
+var tempBatPath=Path.Combine(temp,nm+dt+'.cmd');\r\n\
 File.WriteAllBytes(tempBatPath,content2);\r\n\
-var pr=System.Diagnostics.Process.Start('cmd.exe','/c '+' '+tempBatPath+' '+batCommandLine);\r\n\
+//var pr=System.Diagnostics.Process.Start('cmd.exe','/V:ON /K call'+' '+tempBatPath);\r\n\
+var pr=System.Diagnostics.Process.Start('cmd.exe','/V:ON /K call'+' '+tempBatPath);\r\n\
 pr.WaitForExit();\r\n\
-//File.Delete(tempBatPath);\r\n\
+File.Delete(tempBatPath);\r\n\
 ";
 
 File.WriteAllText(tempJS,toCompile);
 var pr=System.Diagnostics.Process.Start(compilerLoc,'/nologo /out:"'+binName+'" "'+tempJS+'"');
 pr.WaitForExit();
-//File.Delete(tempJS);
+File.Delete(tempJS);
