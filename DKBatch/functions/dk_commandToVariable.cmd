@@ -13,24 +13,26 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::	for /f "usebackq delims=|" %%f in (`%~1`) do (
 ::		set "%2=%%f"
 ::  )
-	::setlocal
+	setlocal
 	set "command=%~1"
 	set i=-1
 	for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
 		set /A i+=1
 		if "!!" equ "" set "line[!i!]=%%Z"
-		if "!!" neq "" call set "line[%%i%%]=%%a"
+		if "!!" neq "" call set "line[%%i%%]=%%Z"
 	)
+	
 	set /A numLines=i-1
 	:: Final errorlevel is stored in last line
 	if "!!" equ "" if !line[%i%]! gtr 0 set /a lastline = !line[%i%]! 2>nul && cmd /c exit %lastline%
+	if "!!" neq "" call set /a lastline = %line[%%i%%]% 2>nul && cmd /c exit %lastline%
 	set "line[%i%]="           &:: delete the error line from the array
 	
-	call dk_fixme "dk_commandToVariable only returns the last element of an array"
-	if "!!" equ "" endlocal & set "%2=!line[%numLines%]!"    		  &:: return the last line from the programs output
-	if "!!" neq "" endlocal & call set "%2=%line[%%numLines%%]%"    &:: return the last line from the programs output
-)
+	call dk_warning "dk_commandToVariable only returns the last element of an array"
+	if "!!" equ "" set "lastElement=!line[%numLines%]!"
+	if "!!" neq "" call set "lastElement=%%line[%numLines%]%%"
 
+	endlocal & set "%2=%lastElement%"    		&:: return the last line from the programs output
 goto:eof
 	
 	

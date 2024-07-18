@@ -68,7 +68,6 @@ set "ENABLE_dk_debugFunc=0"
     if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
     call dk_echo
     call dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
-    call dk_echo __TIME__
     call dk_echo
     call :DKTEST
     call dk_echo
