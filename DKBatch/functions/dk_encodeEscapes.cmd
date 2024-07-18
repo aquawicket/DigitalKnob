@@ -15,8 +15,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set org=%*
 	if defined %* call set "org=%%%org%%%"
 	setlocal enableDelayedExpansion
-		%if_NDE% if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%"	&:: remove any surrounding quotes
 		%if_DE% if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!"	&:: remove any surrounding quotes
+		%if_NDE% if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%"	&:: remove any surrounding quotes
 	endlocal & set "org=%org%"
 	
 	set "org=%org:^=^^%"

@@ -18,8 +18,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			goto:eof
 		)
 		
-		%if_NDE% call set "_value_=%%%~1[%_count_%]%%"
 		%if_DE% set "_value_=!%~1[%_count_%]!"
+		%if_NDE% call set "_value_=%%%~1[%_count_%]%%"
 		if "%~2" == "%_value_%" (
 			endlocal & call dk_set %3 "%_count_%"
 			goto:eof

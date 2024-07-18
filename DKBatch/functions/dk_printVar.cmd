@@ -1,7 +1,7 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
-call dk_source dk_isAlphanumeric
+call dk_source dk_isVariableName
 ::################################################################################
 ::# dk_printVar(variable)
 ::#
@@ -24,8 +24,8 @@ call dk_source dk_isAlphanumeric
 		setlocal
 		:loop1
 			if not defined %arry%[%n%] goto:eof
-			%if_NDE% call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
 			%if_DE%  call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]! %clr%"
+			%if_NDE% call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
 			set /A n+=1
 			goto :loop1 
     endlocal

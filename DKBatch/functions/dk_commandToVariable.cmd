@@ -18,8 +18,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set i=-1
 	for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
 		set /A i+=1
-		%if_NDE% call set "line[%%i%%]=%%a"
 		%if_DE% set "line[!i!]=%%Z"
+		%if_NDE% call set "line[%%i%%]=%%a"
 	)
 	set /A numLines=i-1
 	:: Final errorlevel is stored in last line
@@ -27,8 +27,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "line[%i%]="           &:: delete the error line from the array
 	
 	call dk_fixme "dk_commandToVariable only returns the last element of an array"
-	%if_NDE% endlocal & call set "%2=%line[%%numLines%%]%"    &:: return the last line from the programs output
 	%if_DE% endlocal & set "%2=!line[%numLines%]!"    		  &:: return the last line from the programs output
+	%if_NDE% endlocal & call set "%2=%line[%%numLines%%]%"    &:: return the last line from the programs output
 )
 
 goto:eof

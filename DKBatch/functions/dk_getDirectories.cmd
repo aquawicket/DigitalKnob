@@ -14,9 +14,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::set "folders="
 	set /A i=0
 	setlocal
-	for /d %%a in ("%_path_%\*") do ( 
-		%if_NDE% call set "%~2[%%i%%]=%%a"
+	for /d %%a in ("%_path_%\*") do (
 		%if_DE% set "%~2[!i!]=%%a"
+		%if_NDE% call set "%~2[%%i%%]=%%a"
 		set /A i+=1
 	) 
 

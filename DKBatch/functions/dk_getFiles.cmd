@@ -14,8 +14,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set /a i=0
 	setlocal enabledelayedexpansion
 	for %%a in ("%~1\*") do (
-		%if_NDE% call set "%~2[%%i%%]=%%a"
 		%if_DE% set "%~2[!i!]=%%a"
+		%if_NDE% call set "%~2[%%i%%]=%%a"
 		set /A i+=1
 	) 
 

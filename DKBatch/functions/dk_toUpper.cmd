@@ -11,8 +11,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	setlocal
 		set "_upper_=%~1"
-		%if_NDE% for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do call set "_upper_=%%_upper_:%%#=%%#%%")	&:: with delayed expansion OFF
 		%if_DE%  for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "_upper_=!_upper_:%%#=%%#!")			&:: with delayed expansion ON
+		%if_NDE% for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do call set "_upper_=%%_upper_:%%#=%%#%%")	&:: with delayed expansion OFF
 	endlocal & set "%2=%_upper_%"
 goto:eof
 
