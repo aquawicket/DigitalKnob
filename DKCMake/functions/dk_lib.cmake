@@ -36,7 +36,7 @@ dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 
-function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()

@@ -17,7 +17,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 goto:eof
 
 
-::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 :DKTEST 
 	::call dk_debugFunc
 	

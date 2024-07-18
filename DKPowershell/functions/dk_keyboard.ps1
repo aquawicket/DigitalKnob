@@ -36,7 +36,7 @@ function Global:Keyboard_Loop() {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc
 	
 	dk_keyboard

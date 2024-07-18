@@ -180,7 +180,7 @@ goto:eof
 	if not defined in_subprocess (cmd /k set in_subprocess=y ^& cls ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
 goto:eof
 
-::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
 	

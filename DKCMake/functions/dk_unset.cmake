@@ -30,7 +30,7 @@ dk_createOsMacros("dk_unset")
 
 
 
-function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
 	set(myVar "value of myVar")

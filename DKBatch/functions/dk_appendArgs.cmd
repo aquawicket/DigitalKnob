@@ -17,25 +17,20 @@ call dk_source dk_error
 	
 	if defined %~1 call set "%1=%%%~1%% %ALL_BUT_FIRST%"
 	if not defined %~1 call set "%1=%ALL_BUT_FIRST%"
-	
-	::call echo %1 = %%%1%%
 goto:eof
 
 
 
 
-::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
 	
-	::call dk_echo "myVar = '%myVar%'"
 	call dk_printVar myVar
 	
 	call dk_appendArgs myVar 123 abc
-	::call dk_echo "myVar = '%myVar%'"
 	call dk_printVar myVar
 	
 	call dk_appendArgs myVar 456 zyx
-	::call dk_echo "myVar = '%myVar%'"
 	call dk_printVar myVar
 goto:eof

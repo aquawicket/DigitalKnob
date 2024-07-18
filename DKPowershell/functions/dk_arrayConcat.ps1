@@ -21,7 +21,7 @@ function Global:dk_arrayConcat($array, $value1) {
 
 
 
-function Global:DKTEST(){ ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc
 	
 	

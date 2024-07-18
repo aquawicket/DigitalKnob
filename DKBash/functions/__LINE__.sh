@@ -13,7 +13,7 @@ __LINE__() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	#dk_debugFunc
 	
 	echo "$(__LINE__)"

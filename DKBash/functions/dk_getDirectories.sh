@@ -21,7 +21,7 @@ dk_getDirectories() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	dk_getDirectories /c/Windows/System32 output
 

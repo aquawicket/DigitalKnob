@@ -17,7 +17,7 @@ DKINIT.onreadystatechange = DKINIT.onload = function(evt){
 		console.log(message)
 	}
 
-	DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	DKTEST = function DKTEST() { //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 		//dk_debugFunc
 		
 		console.log("This is a normal console.log commmand")

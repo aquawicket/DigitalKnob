@@ -23,7 +23,7 @@ endfunction()
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) #
 	dk_debugFunc(${ARGV})
 	

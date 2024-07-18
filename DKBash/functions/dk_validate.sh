@@ -26,7 +26,7 @@ dk_validate() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	myVarA="a valid variable"
 	dk_validate myVarA fill_myVarA

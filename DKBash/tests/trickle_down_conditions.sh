@@ -51,9 +51,9 @@ if ( [ "$DKTEST" = "" ]                  ||
      [ "$DKTEST" = "${BASH_SOURCE[0]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[1]}" ] ||
      [ "$DKTEST" = "${BASH_SOURCE[2]}" ] ); then
-	 echo "####################################################"
-     echo "################# DKTEST ${DKTEST} #################"
-	 echo "####################################################"
+	 echo "############################################################################"
+     echo "###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	 echo "############################################################################"
      return 0
 else
 	 exit 0
@@ -62,11 +62,11 @@ fi
 # Coments
 #
 #if ( ( [ "$DKTEST" = "" ]                   &&  echo "DKTEST is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
-#       [ "$DKTEST" = "${0}" ]                 &&  echo "     0 is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
+#       [ "$DKTEST" = "${0}" ]               &&  echo "     0 is TRUE:${DKTEST}" )   || ( echo "  0 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[0]}" ]  &&  echo "   bs0 is TRUE:${DKTEST}" )   || ( echo "bs0 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[1]}" ]  &&  echo "   bs1 is TRUE:${DKTEST}" )   || ( echo "bs1 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[2]}" ]  &&  echo "   bs2 is TRUE:${DKTEST}" ) ); then
-#      echo "################# DKTEST ${DKTEST} #################"
+#      echo "########## DKTEST ${DKTEST} #################"
 #      return 0
 #else
 #	  exit 0
@@ -91,7 +91,7 @@ fi
 #			echo "bs1 is FALSE:${DKTEST}"
 #       [ "$DKTEST" = "${BASH_SOURCE[2]}" ] ) ); then
 #			echo "bs2 is TRUE:${DKTEST}"
-#      echo "################# DKTEST ${DKTEST} #################"
+#      echo "########## DKTEST ${DKTEST} #################"
 #      return 0
 #else
 #	  exit 0

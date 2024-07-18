@@ -15,7 +15,7 @@ script.onreadystatechange = script.onload = function(evt){
 	
 	
 
-	DKTEST = function DKTEST() { //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+	DKTEST = function DKTEST() { //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 		//dk_debugFunc
 		
 		dk_set(myVarA, "the value of myVarA");

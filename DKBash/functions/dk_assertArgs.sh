@@ -43,7 +43,7 @@ test_function() {
 	dk_assertArgs int string optional
 }
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 
 	test_function 123 abc

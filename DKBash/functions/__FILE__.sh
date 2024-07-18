@@ -15,7 +15,7 @@ __FILE__() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	#dk_debugFunc
 	
 	echo "$(__FILE__)"

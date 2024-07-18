@@ -22,7 +22,7 @@ window.dk_realpath = function dk_realpath(path){
 
 
 
-//####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 DKTEST = function DKTEST() { 
 	//dk_debugFunc()
 	

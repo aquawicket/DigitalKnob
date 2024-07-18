@@ -18,7 +18,7 @@ dk_createSymlink() {
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
 
 	dk_createSymlink dk_createSymlink.sh dk_createSymlink

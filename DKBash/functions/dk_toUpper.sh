@@ -17,7 +17,7 @@ dk_toUpper() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	dk_toUpper "CoNvErT tHiS sTrInG tO aLl UpPeRcAsE" uppercase
 	echo "uppercase = ${uppercase}"

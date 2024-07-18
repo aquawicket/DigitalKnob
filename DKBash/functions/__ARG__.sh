@@ -63,7 +63,7 @@ test_functionB(){
 	#echo "${FUNCNAME} ARG4 = $(__ARG__ 4 1)"	# out of bounds
 }
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	#dk_debugFunc
 	
 	test_functionA abc 123 def 456 ghi 789

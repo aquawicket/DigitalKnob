@@ -17,7 +17,7 @@ dk_toLower() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
 	dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase

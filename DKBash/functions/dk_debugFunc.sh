@@ -27,7 +27,7 @@ alias dk_debugFunc='{
 #	dk_debugFunc
 #}
 	
-#DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+#DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #	ENABLE_dk_debugFunc=1
 #	dk_debugFunc
 #	

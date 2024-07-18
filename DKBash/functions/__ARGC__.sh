@@ -13,7 +13,7 @@ __ARGC__() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	#dk_debugFunc
 	
 	echo "$(__ARGC__)"

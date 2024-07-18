@@ -20,7 +20,7 @@ dk_isDirectory () {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
 	dk_isDirectory "C:\Windows" && dk_info "'C:\Windows' is a directory" || dk_info "'C:\Windows' is NOT a directory"

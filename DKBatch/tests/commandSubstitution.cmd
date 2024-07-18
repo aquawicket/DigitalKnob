@@ -12,7 +12,7 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 :: The macroA variable is set to invoke the command and then set itself to the result
 echo:
 %_DE_%
-set macroA=&for /f "usebackq tokens=*" %%a in (`ver`) do set "macroA=%%a"
+set macroA=&for /f "usebackq tokens=*" %%a in (`ver`) do echo %%a > 0
 echo macroA = %macroA%
 
 
@@ -50,29 +50,16 @@ echo macroD = %macroD%
 ::set minute=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd minute`) do set "minute=%%a"
 ::set second=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd second`) do set "second=%%a"
 ::echo time = %hour%:%minute%:%second%
-set macroGetTime=do (%\n%
+echo:
+set macroGetTime=&(%\n%
   setlocal enableDelayedExpansion%\n%
   set "t=0"%\n%
   for /f "tokens=1-4 delims=:." %%A in ("!time: =0!") do set /a "t=(((1%%A*60)+1%%B)*60+1%%C)*100+1%%D-36610100"%\n%
-  for %%v in (!t!) do endlocal ^&set "%%~a=%%v"%\n%
+  for %%v in (!t!) do endlocal ^&set "%%~A=%%v"%\n%
 )
 
 echo time = %macroGetTime%
 
-:: MACRO
-setlocal enableDelayedExpansion
-set Macro=&(%\n%
-	for /f "usebackq tokens=*" %%a in (`bat_echo.cmd second`) do (set Macro=%%a && echo 0)
-)
 
-pause
-echo Macro:%Macro%:
-pause
-echo Macro:%Macro%:
-pause
-echo Macro:%Macro%:
-pause
-echo Macro:%Macro%:
-pause
 
 pause

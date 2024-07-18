@@ -19,7 +19,7 @@ endfunction()
 
 
 
-function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc(${ARGV})
 	
 	set(string_var "AZC AZC Zannana Zread")

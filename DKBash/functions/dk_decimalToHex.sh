@@ -14,7 +14,7 @@ dk_decimalToHex() {
 }
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	myDecimal="45"
 	dk_decimalToHex "${myDecimal}" myHex

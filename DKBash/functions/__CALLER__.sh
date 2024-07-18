@@ -14,7 +14,7 @@ __CALLER__() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	#dk_debugFunc
 	
 	echo "$(__CALLER__)"

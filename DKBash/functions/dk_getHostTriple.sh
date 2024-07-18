@@ -295,7 +295,7 @@ dk_getHostTriple() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	dk_getHostTriple
 	dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"

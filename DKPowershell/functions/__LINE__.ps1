@@ -12,6 +12,6 @@ function GLOBAL:__LINE__($_FRAME_=1) {
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
+function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	Write-Host -Fore cyan "LINE = $(__LINE__ 0)";
 }

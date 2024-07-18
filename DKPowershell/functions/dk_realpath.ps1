@@ -21,7 +21,7 @@ function Global:dk_realpath($path) {
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() { 
 	dk_debugFunc
 	

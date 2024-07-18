@@ -33,7 +33,7 @@ dk_replaceAll() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	string_var="AZC AZC Zannana Zread"
 	echo "string before:  ${string_var}"

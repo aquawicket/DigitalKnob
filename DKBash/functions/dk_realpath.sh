@@ -32,7 +32,7 @@ dk_realpath(){
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST(){
 	#dk_debugFunc
 	

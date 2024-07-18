@@ -15,7 +15,7 @@ trap 'dk_onSigterm' SIGTERM
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
 	echo "sending SIGTERM signal . . ."
 	kill -TERM $$

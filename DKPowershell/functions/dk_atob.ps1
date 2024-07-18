@@ -23,7 +23,7 @@ function Global:dk_atob ($file_in, $file_out){
 
 
 
-function Global:DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"

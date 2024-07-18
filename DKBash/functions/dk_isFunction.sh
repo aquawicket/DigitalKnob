@@ -24,7 +24,7 @@ test_function() {
 	dk_info "..."
 }
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
 	dk_echo "testing dk_isFunction(test_function)"

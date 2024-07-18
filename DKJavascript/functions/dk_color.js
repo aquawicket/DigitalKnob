@@ -184,7 +184,7 @@ dk_color(1)
 
 
 
-DKTEST = function DKTEST (){ //####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### 
+DKTEST = function DKTEST (){ //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	//dk_debugFunc
 	
 	dk_echo("")

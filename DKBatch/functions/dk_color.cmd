@@ -175,7 +175,7 @@ call dk_color 1
 
 
 
-::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
 	

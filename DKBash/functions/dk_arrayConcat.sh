@@ -25,8 +25,8 @@ dk_arrayConcat() {
 
 
 
-
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc
 	
 	myArray1[0]="a"

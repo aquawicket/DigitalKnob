@@ -15,7 +15,7 @@ dk_sleep() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
 	echo "sleeping for 5 seconds . . ."
 	dk_sleep 5

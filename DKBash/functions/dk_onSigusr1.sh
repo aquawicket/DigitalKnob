@@ -15,7 +15,7 @@ trap 'dk_onSigusr1' SIGUSR1
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
 	dk_debugFunc
 	

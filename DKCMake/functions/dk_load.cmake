@@ -170,7 +170,7 @@ endfunction(dk_parseFunctionsAndLoadFromString)
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) 
 	dk_debugFunc(${ARGV})
 	

@@ -121,7 +121,7 @@ goto:eof
 ::setlocal enabledelayedexpansion
 
 	
-::####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ######
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
 	call debugFunc
 	

@@ -29,7 +29,7 @@ trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 funcA(){
 	echo "funcA"
 	funcC xxx zzz

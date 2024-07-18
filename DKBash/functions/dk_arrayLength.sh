@@ -26,7 +26,9 @@ dk_arrayLength() {
 
 
 
-DKTEST() { ########################################################################
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc
 	
 	myArrayA=("element A" "element B" "element C")

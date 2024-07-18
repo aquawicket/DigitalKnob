@@ -80,7 +80,7 @@ test_function() {
 	dk_validateArgs number array string optional:int optional:array 
 }
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
 	myNumber=69

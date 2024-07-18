@@ -54,7 +54,7 @@ dk_convertToCIdentifier() {
 
 
 
-DKTEST() { ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
 	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < > { } `

@@ -20,7 +20,7 @@ trap 'dk_onExit' EXIT
 
 
 
-####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
 	dk_echo "calling exit . . ."
 	dk_exit

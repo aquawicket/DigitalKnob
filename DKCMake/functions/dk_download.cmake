@@ -140,7 +140,7 @@ dk_createOsMacros("dk_download")
 
 
 
-function(DKTEST) ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST ####### DKTEST #######
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
