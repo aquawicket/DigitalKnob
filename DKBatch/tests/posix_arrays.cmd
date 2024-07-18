@@ -31,7 +31,7 @@ dk_buildRelease.cmd
 dk_call.cmd
 dk_callStack.cmd
 dk_checkError.cmd
-dk_checkGitRemote.cmd
+dk_gitCheckRemote.cmd
 dk_chown.cmd
 dk_clearCmakeCache.cmd
 dk_clearScreen.cmd

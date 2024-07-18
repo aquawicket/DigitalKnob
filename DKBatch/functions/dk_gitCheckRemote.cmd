@@ -2,7 +2,7 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 call dk_source dk_commandToVariable
-call dk_source dk_checkGitRemote
+call dk_source dk_gitCheckRemote
 call dk_source dk_debugFunc
 call dk_source dk_error
 call dk_source dk_installGit
@@ -10,10 +10,10 @@ call dk_source dk_validate
 call dk_source dk_validateBranch
 call dk_source dk_warning
 ::##################################################################################
-::# dk_checkGitRemote()
+::# dk_gitCheckRemote()
 ::#
 ::#
-:dk_checkGitRemote
+:dk_gitCheckRemote
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
@@ -43,5 +43,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_checkGitRemote
+	call dk_gitCheckRemote
 goto:eof

@@ -1,7 +1,7 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
-call dk_source dk_checkGitRemote
+call dk_source dk_gitCheckRemote
 call dk_source dk_clearCmakeCache
 call dk_source dk_clearScreen
 call dk_source dk_debugFunc
@@ -33,7 +33,7 @@ call dk_source dk_unset
     call dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
     call dk_echo
-    call dk_checkGitRemote
+    call dk_gitCheckRemote
 
     call dk_echo
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]

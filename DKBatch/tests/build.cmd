@@ -165,7 +165,7 @@ goto:eof
     call:dk_readCache
 
     echo:
-    call:dk_checkGitRemote
+    call:dk_gitCheckRemote
 
     echo:
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -682,11 +682,11 @@ goto:eof
 
 
 ::##################################################################################
-::# dk_checkGitRemote()
+::# dk_gitCheckRemote()
 ::#
 ::#
-:dk_checkGitRemote
-	call:dk_verbose "dk_checkGitRemote(%*)"
+:dk_gitCheckRemote
+	call:dk_verbose "dk_gitCheckRemote(%*)"
 	
     if not exist "%DKBRANCH_DIR%\.git" goto:eof
     
