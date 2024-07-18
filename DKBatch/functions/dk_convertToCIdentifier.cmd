@@ -9,8 +9,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	rem FIXME: non delayed expansion broken
-	setlocal enabledelayedexpansion 
+	:: FIXME: requires delayed expansion
+	setlocal enabledelayedexpansion
+	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
+	
     set "_input_=%~1"
 	set "_output_="
     set "map=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"

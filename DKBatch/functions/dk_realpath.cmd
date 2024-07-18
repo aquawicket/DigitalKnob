@@ -10,7 +10,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal enabledelayedexpansion
+	setlocal
 	set _input=%1
 	set _input=%_input:"=%
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%

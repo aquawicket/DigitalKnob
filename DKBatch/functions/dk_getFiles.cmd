@@ -9,10 +9,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 :dk_getFiles
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	::set "path=%~1"
 	
 	set /a i=0
-	setlocal enabledelayedexpansion
+	setlocal
 	for %%a in ("%~1\*") do (
 		if "!!" equ "" set "%~2[!i!]=%%a"
 		if "!!" neq "" call set "%~2[%%i%%]=%%a"

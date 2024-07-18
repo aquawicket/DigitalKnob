@@ -9,13 +9,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	setlocal EnableDelayedExpansion
-	set _list=%~1
-	if defined !_list! set _list=!%_list%!
+	setlocal
+	set "_list=%~1"
+	if "!!" neq "" if defined %_list% call set _list=%%_list%%
+	if "!!" equ "" if defined !_list! set _list=!%_list%!
 
 	set /A i=0
-	for %%a in (!_list!) do (
-		set "%~2[!i!]=%%a"
+	for %%a in (%_list%) do (
+		if "!!" neq "" call set "%~2[%%i%%]=%%a"
+		if "!!" equ "" set "%~2[!i!]=%%a"
 		set /A i+=1
 	) 
 	
@@ -35,6 +37,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_todo
-	call dk_listToArray
+	call dk_set myList "a,b,c,d,e,f,g"
+	call dk_listToArray "%myList%" myArray
+	call dk_printVar myArray
 goto:eof

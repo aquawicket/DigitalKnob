@@ -118,8 +118,6 @@ goto:eof
 	echo %hour%
 goto:eof
 
-::setlocal enabledelayedexpansion
-
 	
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 

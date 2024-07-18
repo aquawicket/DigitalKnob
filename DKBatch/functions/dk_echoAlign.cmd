@@ -8,8 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 :dk_echoAlign
 	call dk_debugFunc
 	
-	::setlocal
+	:: FIXME: requires delayed expansion
 	setlocal enabledelayedexpansion
+	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
+	
 	(set^ tmp=%~2)
 	if defined tmp (
 		set "len=1"
