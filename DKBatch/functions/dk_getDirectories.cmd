@@ -15,8 +15,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set /A i=0
 	setlocal
 	for /d %%a in ("%_path_%\*") do (
-		%if_DE% set "%~2[!i!]=%%a"
-		%if_NDE% call set "%~2[%%i%%]=%%a"
+		if "!!" equ "" set "%~2[!i!]=%%a"
+		if "!!" neq "" call set "%~2[%%i%%]=%%a"
 		set /A i+=1
 	) 
 

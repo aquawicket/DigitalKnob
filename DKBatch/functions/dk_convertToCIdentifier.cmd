@@ -20,12 +20,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		
 		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (
 			rem FIXME: non delayed expansion broken
-			rem %if_NDE% call set "mapn=%%map:%%C=%%"
-			rem %if_NDE% if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
-            rem %if_NDE% if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
+			rem if "!!" neq "" call set "mapn=%%map:%%C=%%"
+			rem if "!!" neq "" if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
+            rem if "!!" neq "" if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
 			
-            %if_DE% if "!map:%%C=!" neq "%map%" set "_output_=!_output_!%%C"
-            %if_DE% if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"
+            if "!!" equ "" if "!map:%%C=!" neq "%map%" set "_output_=!_output_!%%C"
+            if "!!" equ "" if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"
         )
         set "_input_=%_input_:~1%"
         goto c_identifier_loop

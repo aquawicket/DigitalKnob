@@ -2,8 +2,6 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 
-set "if_DE=if "!!" equ """
-set "if_NDE=if "!!" neq """
 set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
 
 ::####################################################################

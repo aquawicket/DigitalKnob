@@ -60,8 +60,8 @@ set "ENABLE_dk_debugFunc=0"
     call dk_isDelayedExpansion __DE__
     call dk_source dk_logo
     call dk_logo
-	%if_DE%  call dk_echo "delayed expansion = ON"
-    %if_NDE% call dk_echo "delayed expansion = OFF"
+	if "!!" equ "" call dk_echo "delayed expansion = ON"
+    if "!!" neq "" call dk_echo "delayed expansion = OFF"
     ::call dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######

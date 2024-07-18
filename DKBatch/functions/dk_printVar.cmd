@@ -24,8 +24,8 @@ call dk_source dk_isVariableName
 		setlocal
 		:loop1
 			if not defined %arry%[%n%] goto:eof
-			%if_DE%  call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]! %clr%"
-			%if_NDE% call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
+			if "!!" equ "" call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]! %clr%"
+			if "!!" neq "" call dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
 			set /A n+=1
 			goto :loop1 
     endlocal

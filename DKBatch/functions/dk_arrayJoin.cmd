@@ -17,11 +17,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	:dk_arrayJoin_loop
 	if defined %~1[%_count_%] (
 		if defined _string_ (
-			%if_DE% set "_string_=%_string_%%~2!%~1[%_count_%]!"
-			%if_NDE% call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
+			if "!!" equ "" set "_string_=%_string_%%~2!%~1[%_count_%]!"
+			if "!!" neq "" call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
 		) else (
-			%if_DE% call set "_string_=!%~1[%_count_%]!"
-		    %if_NDE% call set "_string_=%%%~1[%_count_%]%%"
+			if "!!" equ "" call set "_string_=!%~1[%_count_%]!"
+		    if "!!" neq "" call set "_string_=%%%~1[%_count_%]%%"
 		)
 		set /a _count_+=1
 		goto:dk_arrayJoin_loop
