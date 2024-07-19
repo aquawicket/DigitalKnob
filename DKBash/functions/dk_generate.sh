@@ -96,7 +96,7 @@ dk_generate() {
 	fi
 
 	if [ "${TARGET_OS}" = "android_arm64" ]; then
-		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles"
+		dk_arrayUnshift CMAKE_ARGS "-G" "\"Unix Makefiles\""
 	fi
 	
 	if [ "${TARGET_OS}" = "emscripten" ]; then

@@ -13,8 +13,8 @@ dk_arrayUnshift() {
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
-	array=("${@:2}" "${array[@]}");
-	#dk_printVar array
+	array=("${@:2}" ${array[@]});
+	dk_printVar array
 
 	eval ${1}="(${array[@]})"
 	#dk_return ${array}; return		# command substitution return
