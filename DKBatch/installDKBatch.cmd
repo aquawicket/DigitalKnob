@@ -1,15 +1,17 @@
 @echo off
 
-if "%*" neq "" (goto:runDKBatch)
+if "%~1" neq "" goto:runDKBatch
 :installDKBatch
 	echo Associating .cmd files with DKBatch . . .
 	
 	set "DKBATCH_FUNCTION_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
 	call "%DKBATCH_FUNCTION_DIR_%DK.cmd"
 	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
-	ftype dkbatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %*
+	ftype dkbatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %%*
 	assoc .cmd=dkbatch
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkbatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
+	
+	echo DKBatch install complete 
 goto:eof
 
 
@@ -21,5 +23,5 @@ goto:eof
 	
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	cmd /V:ON /K call %CMD_FILE%
+	cmd /V:ON /K call "%CMD_FILE%"
 goto:eof

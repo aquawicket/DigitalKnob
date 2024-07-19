@@ -58,7 +58,8 @@ set macroGetTime=&(%\n%
   for %%v in (!t!) do endlocal ^&set "%%~A=%%v"%\n%
 )
 
-echo time = %macroGetTime%
+%macroGetTime% arg1 arg2
+echo time = %time% 
 
 
 

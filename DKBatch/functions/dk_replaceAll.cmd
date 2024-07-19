@@ -12,7 +12,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	setlocal
 	set "_input_=%~1"
-	%if_ND% set "_output_=!_input_:%~2=%~3!"
+	if "!!" equ "" set "_output_=!_input_:%~2=%~3!"
 	if "!!" neq "" call set "_output_=%%_input_:%~2=%~3%%"
 	
 	endlocal & set "%4=%_output_%"
