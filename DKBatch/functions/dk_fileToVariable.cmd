@@ -14,7 +14,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
     ::call dk_set file %~1
 	set "\n=\n"
-	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"
+	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"		&:: FIXME: remove the need for call here
 	endlocal & call dk_set %2 "%_fileVar_%"
 goto:eof
 

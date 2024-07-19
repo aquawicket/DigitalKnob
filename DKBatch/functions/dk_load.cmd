@@ -61,6 +61,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	for /F "usebackq delims=" %%a in ("%funcPath%") do (
 	    echo %%a | findstr "\<dk_*" >nul && (
 			set "temp=%%a"
+			
+			&:: FIXME: remove the need for calls here
 			call set "temp=%%temp:*dk_=dk_%%"
 			call set "temp=%%temp:*dk_load =%%"
 			call set "temp=%%temp:"= %%"

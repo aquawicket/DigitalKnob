@@ -16,7 +16,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set count=1
 	:dk_arrayShift_loop
 	if defined %_arry_%[%count%] (
-		call set "%_arry_%[%prev%]=%%%_arry_%[%count%]%%"
+		call set "%_arry_%[%prev%]=%%%_arry_%[%count%]%%"  &:: FIXME: remove the need for call here
 		set /a count+=1
 		set /a prev+=1
 		goto:dk_arrayShift_loop

@@ -21,6 +21,7 @@ if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 	set "_returnVar=%~1"
 
 	
+	&:: FIXME: remove the need for calls here
 	call set "caller[%frame%]=%%~0"
 	call set "caller[%frame%].fullpath=%%~f0"
 	call set "caller[%frame%].directory=%%~dp0"

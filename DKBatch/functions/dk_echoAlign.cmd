@@ -22,7 +22,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			)
 			if "!!" neq "" if "%tmp:~%%p,1%" neq "" (
 				set /a "len+=%%p"
-				call set "tmp=%%tmp:~%%p%%"
+				call set "tmp=%%tmp:~%%p%%"	&:: FIXME: remove the need for call here
 			)
 		)
 	) else (

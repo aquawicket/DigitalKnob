@@ -13,7 +13,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__% too many arguments"
 	
 	set org=%*
-	if defined %* call set "org=%%%org%%%"
+	if defined %* call set "org=%%%org%%%"	&:: FIXME: remove the need for call here
 	setlocal enableDelayedExpansion
 		if "!!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!"	&:: remove any surrounding quotes
 		if "!!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%"	&:: remove any surrounding quotes

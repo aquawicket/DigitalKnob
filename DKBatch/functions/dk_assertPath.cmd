@@ -9,7 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	set "_var_=%~1"
-	call set "_value_=%%%_var_%%%"
+	call set "_value_=%%%_var_%%%"	&:: FIXME: remove the need for call here
 	if not exist "%_value_%" (
 		call dk_error "Assertion failed: %__FILE__%:%__LINE__%  %__FUNCTION__%(%*): %_value_% is not found!"
 	)

@@ -41,12 +41,15 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::### build CMAKE_ARGS ###
 
 	:: append %DKCOMMAND% to CMAKE_ARGS with "'s removed
-	if defined DKCOMMAND  call set "CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""
+	&:: FIXME: remove the need for call here
+	if defined DKCOMMAND  call set "CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""  
 	
 	:: append %DKRETURN% to CMAKE_ARGS with "'s removed
+	&:: FIXME: remove the need for call here
 	if defined DKRETURN   call set "CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%%DKRETURN:"=%%""
 	
 	:: append %DKVARS% to CMAKE_ARGS with "'s removed
+	&:: FIXME: remove the need for call here
 	if defined DKVARS     call set "CMAKE_ARGS=%CMAKE_ARGS% "%%DKVARS:"=%%""
 	
 	set "CMAKE_ARGS=%CMAKE_ARGS% "-P""

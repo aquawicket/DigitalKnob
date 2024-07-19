@@ -16,7 +16,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     ::set "file=%~1"
 	set /a i=0
     for /F "usebackq delims=" %%a in ("%~f1") do (
-		%if_NDK% call set "%~2[%%i%%]=%%a"
+		%if_NDK% call set "%~2[%%i%%]=%%a"		&:: FIXME: remove the need for call here
 		%if_DK% set "%~2[!i!]=%%a"
 		set /a i+=1
     )

@@ -36,7 +36,7 @@ call dk_source dk_isAlphanumeric
 		setlocal
 		set "_ptr_=%~1"
 		call dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
-		call set "_ptrB_=%%%_ptr_%%%"
+		call set "_ptrB_=%%%_ptr_%%%"					&:: FIXME: remove the need for call here
 		::call dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
 		if not defined "%_ptrB_%" goto:variable
 		set "_ptrvalue_=%%%_ptrB_%%%"
@@ -46,7 +46,7 @@ call dk_source dk_isAlphanumeric
 
     :variable
 		set "_var_=%~1"
-		call set "_value_=%%%_var_%%%"
+		call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
 		call dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
     goto:eof
 

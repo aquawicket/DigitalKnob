@@ -19,7 +19,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	:dk_arrayUnshift_loop
 	if %count% gtr 0 (
-		call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%"
+		call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
 		set /a count-=1
 		set /a prev-=1
 		goto:dk_arrayUnshift_loop

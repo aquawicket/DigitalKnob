@@ -26,8 +26,8 @@ call dk_source dk_setTitle
     call dk_printVar TARGET_PATH
     call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
-    call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"
-    call dk_printVar CMAKE_SOURCE_DIR
+    call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"			&:: FIXME: remove the need for call here
+    call dk_printVar CMAKE_SOURCE_DIR							&:: FIXME: remove the need for call here
     call set "CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%"
     call dk_printVar CMAKE_TARGET_PATH
         
