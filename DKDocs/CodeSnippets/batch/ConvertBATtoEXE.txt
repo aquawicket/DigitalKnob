@@ -1,9 +1,5 @@
 https://superuser.com/a/868341/600216
 
-40
-
-Yes, actually. It's not pretty, but it's clean (nothing to clean up afterwards) and it's actually built-in to your system!
-
 In your C:\Windows\System32\ folder, there is a file called iexpress.exe.
 
 Right-click it an Run as administrator.
