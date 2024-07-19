@@ -2,6 +2,7 @@
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 call dk_source dk_isVariableName
+call dk_source dk_isAlphanumeric
 ::################################################################################
 ::# dk_printVar(variable)
 ::#
