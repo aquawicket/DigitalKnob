@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD/DK.ps1 }
+if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
 if(!$dk_basename){ $dk_basename = 1 } else{ return }
 
 ################################################################################
@@ -25,7 +25,6 @@ function Global:dk_basename($path) {
 
 function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	dk_debugFunc
-	
 	
 	$basename = dk_basename "C:/Windows/System32/test.v123.zip"
 	dk_echo "basename = $basename"

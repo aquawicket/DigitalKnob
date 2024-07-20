@@ -5,8 +5,8 @@ if "%*" neq "" (goto:runDKBash)
 	echo Associating .sh files with DKBash . . .
 	
 	::###### DKINIT ######
-	set "DKBATCH_FUNCTION_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
-	call "%DKBATCH_FUNCTION_DIR_%DK.cmd"
+	set "DKBATCH_FUNCTIONS_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
+	call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	call dk_load dk_validate
     call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

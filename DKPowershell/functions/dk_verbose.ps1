@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD/DK.ps1 }
+if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
 if(!$dk_verbose){ $dk_verbose = 1 } else{ return }
 
 if(!$ENABLE_dk_verbose){ $global:ENABLE_dk_verbose = 1 }

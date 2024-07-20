@@ -121,6 +121,7 @@ function dk_DKPOWERSHELL_VARS(){
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
 	$global:DKPOWERSHELL_FUNCTIONS_DIR = $DKPOWERSHELL_FUNCTIONS_DIR -replace '\\', '/';
 	$global:DKPOWERSHELL_DIR = Split-Path -Parent $DKPOWERSHELL_FUNCTIONS_DIR
+	$global:DKPOWERSHELL_FUNCTIONS_DIR_ = "${DKPOWERSHELL_FUNCTIONS_DIR}/"
 }
 
 ##################################################################################

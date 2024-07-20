@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD/DK.ps1 }
+if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
 if(!$dk_pullAssets){ $dk_pullAssets = 1 } else{ return }
 
 ##################################################################################

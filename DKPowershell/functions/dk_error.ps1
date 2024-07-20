@@ -1,4 +1,4 @@
-if(!$DKINIT){ . $PWD/DK.ps1 }
+if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
 if(!$dk_error){ $dk_error = 1 } else{ return }
 
 if(!$ENABLE_dk_error){ $global:ENABLE_dk_error = 1 }
