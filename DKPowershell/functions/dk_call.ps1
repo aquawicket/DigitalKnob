@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_call){ $dk_call = 1 } else{ return }
 
 ##################################################################################
@@ -10,10 +10,10 @@ function Global:dk_call(){
 	#if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 
-	#$allArgs = $PsBoundParameters.Values + $args
+	#$allArgs = $PsBoundParameters.Values + ${args}
 	#$rest = $args[1..($args.Length-1)]
-	#$first, $rest = $PsBoundParameters.Values + $args
-	$first, $rest = $args
+	#$first, $rest = $PsBoundParameters.Values + ${args}
+	$first, $rest = ${args}
 	
 	& $first $rest
 }

@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_resetAll){ $dk_resetAll = 1 } else{ return }
 
 ##################################################################################
@@ -23,7 +23,7 @@ function Global:dk_resetAll() {
 	dk_confirm -or return
 		
 	# make sure script is running from DKBRANCH_DIR
-	if($DKSCRIPT_DIR -ne $DKBRANCH_DIR){
+	if(${DKSCRIPT_DIR} -ne $DKBRANCH_DIR){
 		dk_echo "${yellow}"
 		dk_echo "WARNING: this file isn't running from the branch directory"
 		dk_echo "Is must be in the branch directory to continue."

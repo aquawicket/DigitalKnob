@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
 
 ##################################################################################
@@ -10,7 +10,7 @@ function Global:dk_gitUpdate() {
 	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
 
-	if(!($Args[0] -eq "NO_CONFIRM")){
+	if(!($args[0] -eq "NO_CONFIRM")){
 		dk_info "Git Update? Any local changes will be lost."
 		if(!(dk_confirm)){ return 0 }
 	}

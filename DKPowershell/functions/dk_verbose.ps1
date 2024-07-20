@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_verbose){ $dk_verbose = 1 } else{ return }
 
 if(!$ENABLE_dk_verbose){ $global:ENABLE_dk_verbose = 1 }
@@ -17,7 +17,7 @@ if(!$HALT_ON_VERBOSE)  { $global:HALT_ON_VERBOSE = 0   }
 function Global:dk_verbose($message){
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	#$allArgs = $PsBoundParameters.Values + $args
+	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
 	if($ENABLE_dk_verbose -ne 1){ return }

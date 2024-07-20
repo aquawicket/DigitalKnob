@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_exit){ $dk_exit = 1 } else{ return }
 
 ##################################################################################
@@ -7,7 +7,7 @@ if(!$dk_exit){ $dk_exit = 1 } else{ return }
 #
 function Global:dk_exit() {
 	dk_debugFunc
-	$allArgs = $PsBoundParameters.Values + $args
+	$allArgs = $PsBoundParameters.Values + ${args}
 	# TODO: when open with icon, we can use exec to keep the window open
 	#[ $SHLVL -gt 1 ] -and dk_echo "exec $SHELL" -or dk_echo "exit $*"
 	

@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_fixme){ $dk_fixme = 1 } else{ return }
 
 if(!$ENABLE_dk_fixme){ $global:ENABLE_dk_fixme = 1 }
@@ -17,7 +17,7 @@ $FIXME_TAG="  FIXME: "
 function Global:dk_fixme($message){
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	#$allArgs = $PsBoundParameters.Values + $args
+	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
 	if($ENABLE_dk_fixme -ne 1){ return }

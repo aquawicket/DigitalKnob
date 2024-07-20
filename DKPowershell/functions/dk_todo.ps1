@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_todo){ $dk_todo = 1 } else{ return }
 
 if(!$ENABLE_dk_todo){ $global:ENABLE_dk_todo = 1 }
@@ -16,7 +16,7 @@ $global:TODO_TAG = "  TODO: "
 #
 function Global:dk_todo() {
 	dk_debugFunc	
-	$allArgs = $PsBoundParameters.Values + $args
+	$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
 	if($ENABLE_dk_todo -ne 1){ return }

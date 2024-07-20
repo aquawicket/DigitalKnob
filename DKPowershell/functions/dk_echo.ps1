@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_echo){ $dk_echo = 1 } else{ return }
 
 ################################################################################
@@ -14,7 +14,7 @@ function Global:dk_echo($message) {
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	# https://stackoverflow.com/a/818118
-	# $allArgs = $PsBoundParameters.Values + $args 
+	# $allArgs = $PsBoundParameters.Values + ${args} 
 
 	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 	Write-Host "${echo_fileline}   $message"

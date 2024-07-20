@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 #if(!$dk_color){ $dk_color = 1 } else{ return }
 
 ##################################################################################
@@ -17,7 +17,7 @@ function Global:dk_color() {
 
 	$global:USE_COLOR = 1
 	if(Test-Path variable:args){
-		if(!($args)){
+		if(!(${args})){
 			dk_unset USE_COLOR 
 		}
 	}

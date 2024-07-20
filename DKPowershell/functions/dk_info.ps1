@@ -1,4 +1,4 @@
-if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_info){ $dk_info = 1 } else{ return }
 
 if(!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }
@@ -17,7 +17,7 @@ if(!$HALT_ON_INFO)  { $global:HALT_ON_INFO = 0   }
 function Global:dk_info($message) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	#$allArgs = $PsBoundParameters.Values + $args
+	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
 	if($ENABLE_dk_info -ne 1){ return }

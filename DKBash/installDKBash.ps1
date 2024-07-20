@@ -1,4 +1,4 @@
-#if(!$DKINIT){ .${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1 }
+#if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$installDKBash){ $installDKBash = 1 } else{ return }
 
 ####################################################################
@@ -8,8 +8,8 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	#dk_debugFunc
 	#if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 
-	if($args.count -ne 0){ 
-		runBash $args
+	if(${args}.count -ne 0){ 
+		runBash ${args}
 		exit
 	}
 	
