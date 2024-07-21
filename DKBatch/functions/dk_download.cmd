@@ -35,6 +35,8 @@ call dk_source dk_validate
 	
 	certutil.exe /? certutil.exe -urlcache -split -f "%~1" "%~2" && goto:eof
 	
+	curl /? && curl "%~1" -o "%~2" && goto:eof
+	
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
 goto:eof
