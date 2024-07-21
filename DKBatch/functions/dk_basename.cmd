@@ -8,7 +8,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::#
 :dk_basename
 	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGC__%:%__ARGV__% incorrect number of arguments"
 	
 	set "_input_=%1"
 	set "_input_=%_input_:"=%"
@@ -32,4 +32,8 @@ goto:eof
 	call dk_set myPathB "TEST" 
 	call dk_basename "%myPathB%" basenameB
 	call dk_printVar basenameB
+	
+	set "myPathC=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
+	call dk_basename "%myPathC%" basenameC
+	call dk_printVar basenameC
 goto:eof

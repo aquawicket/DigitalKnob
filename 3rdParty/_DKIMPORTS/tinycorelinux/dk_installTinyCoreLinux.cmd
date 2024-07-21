@@ -2,7 +2,7 @@
 call ..\..\..\DKBatch\functions\DK.cmd
 
 ::####################################################################
-::# dk_installTinyCoreLinux()
+::# dk_installTinyCoreLinux
 ::#
 :dk_installTinyCoreLinux
 	call dk_debugFunc
@@ -33,7 +33,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		:::::: Install the OS to the .img file
 		:: (Install from the running virtual OS)
 		call dk_info "########### Tiny Core Linux -install- ###############"
-		call dk_info " "
+		call dk_echo
 		call dk_info ". Choose:  Boot Core with X/GUI (TinyCore) - Installation Extension"
 		call dk_info ". Click Tc-install icon to install   (bottom right)"
 		call dk_info ". Check Frugal, Whole Disc, sda1,  install bootloader, and click next"
@@ -41,7 +41,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		call dk_info ". choose any advanced options if needed.  (next)"
 		call dk_info ". check Core and X/GUI Desktop.  check wifi and all the other boxes as well (proceed)"
 		call dk_info ". Give the install process a moment to format and install.."
-		call dk_info " "
+		call dk_echo
 		call dk_info ". When instal finishes, shut down."
 		call dk_info ". A LAUNCH shortcut will be created the int DKTools/TinyCoreLinux directory"
 		
@@ -49,7 +49,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		%QEMU_IMG_EXE% create -f qcow2 %TINYCORELINUX_IMG% 10G
 		
 		:: Launching the VM
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/CorePlus-current.iso -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		:: create TinyCoreLinux Launcher
 		call dk_set TINYCORELINUX_launcher "%TINYCORELINUX%\LAUNCH.cmd"

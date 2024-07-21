@@ -1,5 +1,5 @@
 @echo off
-call %DKBATCH_FUNCTIONS_DIR%DK.cmd
+call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 if not defined ENABLE_dk_error  set "ENABLE_dk_error=1"
 if not defined TRACE_ON_ERROR   set "TRACE_ON_ERROR=1"
