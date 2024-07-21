@@ -27,14 +27,14 @@ call dk_source dk_validate
 	call dk_getFullPath %destination% fullPath
 	if %destination% neq %fullPath% call dk_error "destination is invalid: full path required"
 	
-    if exist "%destination%" (
-        call dk_info "%destination% already exist"
-        goto:eof
-    )
+    if exist "%destination%" call dk_info "%destination% already exist" && goto:eof
 
 	call dk_info "Downloading %~1 . . ."
-    ::certutil.exe -urlcache -split -f %~1 %~2
-    powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%destination%')"
+    
+    powershell /? && powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%destination%')" && goto:eof
+	
+	certutil.exe /? certutil.exe -urlcache -split -f "%~1" "%~2" && goto:eof
+	
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
 goto:eof
