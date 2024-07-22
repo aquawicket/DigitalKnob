@@ -24,7 +24,8 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL %GIT_DL_WIN_ARM64%
     if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL %GIT_DL_WIN_X86%
     if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL %GIT_DL_WIN_X86_64%
-        
+    if not defined GIT_DL call dk_error "GIT_DL is invalid"
+	
     call dk_basename %GIT_DL% GIT_DL_FILE
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER

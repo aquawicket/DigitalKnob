@@ -8,8 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	::setlocal
     if %ERRORLEVEL% equ 0 goto:eof
     call dk_error "ERRORLEVEL = %ERRORLEVEL%"
+	::endlocal
 goto:eof
 
 

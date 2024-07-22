@@ -10,6 +10,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
 	call dk_echo
 	call dk_echo
@@ -21,6 +22,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	rem if not defined "%~1" ( endlocal & call dk_set %1 "false" )
 	(call)
+	endlocal
 goto:eof
 
 

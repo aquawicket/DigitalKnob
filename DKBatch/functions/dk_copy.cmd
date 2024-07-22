@@ -16,6 +16,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% LSS 2 call dk_error "%__FUNCTION__%(): not enough arguments"
 	if %__ARGC__% GTR 3 call dk_error "%__FUNCTION__%(): too many arguments"
 	
+	setlocal
 	call dk_replaceAll "%~1" "/" "\" _from_
 	call dk_replaceAll "%~2" "/" "\" _to_
 	if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
@@ -42,6 +43,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		echo F|xcopy "%_from_%" "%_to_%" /H /Y
 	)
 
+	endlocal
 	::TODO
 	::[ ? = "success" ]
 goto:eof

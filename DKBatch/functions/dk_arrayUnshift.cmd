@@ -11,6 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	set "_arry_=%~1"
 	::set "_value_=%~2"
 	
@@ -19,12 +20,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	:dk_arrayUnshift_loop
 	if %count% gtr 0 (
-		call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
+		::if "!!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
+		if "!!" equ "" set "%_arry_%[%count%]=!%_arry_%[%prev%]!"
 		set /a count-=1
 		set /a prev-=1
 		goto:dk_arrayUnshift_loop
 	)
-	endlocal & call dk_set %~1[0] "%~2"
+	::endlocal & call dk_set %~1[0] "%~2"
+	endlocal & set "%~1[0]=%~2"
 goto:eof
 
 

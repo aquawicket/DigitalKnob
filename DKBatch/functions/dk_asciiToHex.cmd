@@ -11,7 +11,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	setlocal
-	
     :: Store the string in chr.tmp file
 	set /P "=%~1" < NUL > chr.tmp
 
@@ -24,7 +23,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     del chr.tmp zero.tmp
     set "hex=0x%hex:~-2%"
 	
-	endlocal & call dk_set %2 "%hex%"
+	endlocal & set "%2=%hex%"
 goto:eof
 
 

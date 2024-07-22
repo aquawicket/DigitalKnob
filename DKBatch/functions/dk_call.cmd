@@ -9,10 +9,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 
 	::if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
+	
+	setlocal
 	call dk_load %~1
 	
 	::call dk_echo %magenta% > %* %clr%
     call %*
+	endlocal
 goto:eof
 
 

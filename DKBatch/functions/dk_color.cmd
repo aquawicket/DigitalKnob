@@ -16,13 +16,14 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
 
+	::setlocal
 	set "USE_COLOR=1"
-	if defined %1 if %1 equ 0 call dk_unset USE_COLOR 
+	if defined %1 if %1 equ 0 set "USE_COLOR=" 
 
 	
 	:USE_COLOR_if
 	if not defined USE_COLOR goto:USE_COLOR_else
-		set "ESC="						&:: escape character
+		set "ESC="						    &:: escape character
 		
 		::# Attributes on
 		set "clr=%ESC%[0m"					&:: Default						- Returns all attributes to the default state prior to modification
@@ -170,6 +171,8 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif
+	
+	endlocal
 goto:eof
 call dk_color 1
 

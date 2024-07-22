@@ -1,7 +1,6 @@
 @echo off
 if defined DKINIT (goto:eof) else (set DKINIT=1)
 
-set "ENABLE_dk_debugFunc=0"
 
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
@@ -115,7 +114,7 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
     ::call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-	cd %DKBATCH_FUNCTIONS_DIR%
+	::cd %DKBATCH_FUNCTIONS_DIR%
 goto:eof
 
 

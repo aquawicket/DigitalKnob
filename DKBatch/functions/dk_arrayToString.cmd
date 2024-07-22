@@ -11,8 +11,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
+	setlocal
 	call dk_arrayJoin %~1 "," arrayStr
-	endlocal & call dk_set %2 "%arrayStr%"
+	endlocal & set "%2=%arrayStr%"
 goto:eof
 
 

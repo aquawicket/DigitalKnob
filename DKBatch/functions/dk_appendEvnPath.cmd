@@ -21,17 +21,18 @@ call dk_source dk_validateBranch
 	call dk_debugFunc
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	set "_path_=%~1"
 
 	call dk_stringContains "%PATH%\" "%_path_%" result
 	
-	if "%result%" equ "true" dk_info "path already in list" & goto:oef
+	if "%result%" equ "true" dk_info "path already in list" && endlocal & goto:oef
 	
 	setx PATH "%PATH%";"%_path_%" >nul
 	set "PATH=%PATH%;%_path_%"
 	if "%ERRORLEVEL%" neq "0" dk_error "ERROR: %ERRORLEVEL% 
 
-	::endlocal & set "%3=%result%"
+	endlocal
 goto:eof
 
 

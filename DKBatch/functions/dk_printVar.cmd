@@ -45,9 +45,11 @@ call dk_source dk_isAlphanumeric
     goto:eof
 
     :variable
+		setlocal
 		set "_var_=%~1"
 		call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
 		call dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
+		endlocal
     goto:eof
 
     :undefined

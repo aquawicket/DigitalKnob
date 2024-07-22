@@ -10,9 +10,11 @@ call dk_source dk_error
     call dk_debugFunc
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	if not defined %~1 (
 		call dk_error "Assertion failed: %__FILE__%:%__LINE__%  %__FUNCTION__%(%*)"
 	)
+	endlocal
 goto:eof
 
 

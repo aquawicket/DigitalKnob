@@ -10,10 +10,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
-	call dk_set src "%~1"
-	call dk_set dest "%~2"
+	setlocal
+	set "src=%~1"
+	set "dest=%~2"
 	
-	call dk_getFullPath "%src%" src_fullpath
+	call dk_realpath "%src%" src_fullpath
 	call dk_printVar src_fullpath
 	
 	call dk_dirname "%src_fullpath%" src_directory
@@ -25,7 +26,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_basename "%src_filename%" src_folder
 	call dk_printVar src_folder
 	
-	call dk_getFullPath "%dest%" dest_fullpath
+	call dk_realpath "%dest%" dest_fullpath
 	call dk_printVar dest_fullpath
 	
 	call dk_dirname "%dest_fullpath%" dest_directory
@@ -59,7 +60,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	)
 
 	:: rename/move UNZIPPED folder to dest path"
-	call dk_move "%src_directory%\UNZIPPED" "%dest_fullpath%" OVERWRITE	
+	call dk_move "%src_directory%\UNZIPPED" "%dest_fullpath%" OVERWRITE
+	
+	endlocal
 goto:eof
 
 

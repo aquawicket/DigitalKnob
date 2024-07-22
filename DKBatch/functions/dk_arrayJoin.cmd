@@ -11,6 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	::set "_arry_=%~1"
 	::set "_separator_=%~2"
 	set _count_=0
@@ -20,7 +21,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			if "!!" equ "" set "_string_=%_string_%%~2!%~1[%_count_%]!"
 			if "!!" neq "" call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
 		) else (
-			if "!!" equ "" call set "_string_=!%~1[%_count_%]!"
+			if "!!" equ "" set "_string_=!%~1[%_count_%]!"
 		    if "!!" neq "" call set "_string_=%%%~1[%_count_%]%%"
 		)
 		set /a _count_+=1

@@ -11,9 +11,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	call dk_arrayLength %~1 _length_
 	set /a _length_-=1
 	call dk_unset %~1[%_length_%]
+	endlocal
 goto:eof
 
 

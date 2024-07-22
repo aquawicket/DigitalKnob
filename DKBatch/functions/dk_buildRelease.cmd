@@ -14,12 +14,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
         goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
-        call dk_echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
+        call dk_echo "%CMAKE_EXE% --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose"
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose && call dk_echo "CMake Build Successful" || call dk_error "CMake Build Failed"
         goto:eof
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        call dk_echo "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
+        call dk_echo "%CMAKE_EXE% --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose"
         "%CMAKE_EXE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose && call dk_echo "CMake Build Successful" || call dk_error "CMake Build Failed"
         goto:eof
     )

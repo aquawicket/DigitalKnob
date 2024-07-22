@@ -8,8 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	::setlocal
 	::if defined USER set "DKUSERNAME=%USER% else set "DKUSERNAME=%USERNAME%"
 	call takeown /F "%~1" /R /D "Y"
+	::endlocal
 goto:eof
 
 

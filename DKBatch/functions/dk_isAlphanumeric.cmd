@@ -13,17 +13,17 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 	::set "arg1=%~1"
 	::if defined "%~1" call set "arg1=%%%arg1%%%"
-	set "var="&for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" %%i in ("%~1") do set bad_characters=%%i
+	for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" %%i in ("%~1") do set bad_characters=%%i
 
 	if not defined bad_characters (
-		call dk_unset bad_characters
-		if defined "%~2" (endlocal & call dk_set %2 true)
+		set "bad_characters="
+		if defined "%~2" (endlocal & set "%2=true")
         (call )
 		goto:eof
 	)
 	
-	call dk_unset bad_characters
-    if defined "%~2" (endlocal & call dk_set %2 false)
+	set "bad_characters="
+    if defined "%~2" (endlocal & call set "%2=false")
 	(call)
 goto:eof
 

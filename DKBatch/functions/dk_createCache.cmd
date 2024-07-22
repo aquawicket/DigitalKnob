@@ -9,6 +9,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
     echo creating cache...
     ::call dk_printVar APP
     ::call dk_printVar TARGET_OS
@@ -20,6 +21,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_fileAppend "%DKBRANCH_DIR%\cache" %TARGET_OS%
     call dk_fileAppend "%DKBRANCH_DIR%\cache" %TYPE%
     ::call dk_fileAppend "%DKBRANCH_DIR%\cache" %LEVEL%
+	endlocal
 goto:eof
 
 

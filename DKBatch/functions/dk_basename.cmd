@@ -10,11 +10,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGC__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	set "_input_=%1"
 	set "_input_=%_input_:"=%"
 	if [%_input_:~-1,1%] == [\] set "_input=%_input_:~0,-1%"
 	if [%_input_:~-1,1%] == [/] set "_input=%_input_:~0,-1%"
-	for %%Z in ("%_input_%") do set "%2=%%~nxZ"
+	endlocal & for %%Z in ("%_input_%") do set "%2=%%~nxZ"
 goto:eof
 
 

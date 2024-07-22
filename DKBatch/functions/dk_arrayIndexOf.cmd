@@ -11,6 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	set _count_=0
 	:dk_arrayIndexOf_loop
 		if not defined %~1[%_count_%] (
@@ -28,6 +29,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			
 		set /a _count_+=1
 	goto:dk_arrayIndexOf_loop
+	endlocal
 goto:eof
 
 

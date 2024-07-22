@@ -13,10 +13,11 @@ call dk_source dk_error
 	call dk_debugFunc
 	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
 	
-	if defined %~1 call set "%1=%%%~1%% %ALL_BUT_FIRST%"
-	if not defined %~1 call set "%1=%ALL_BUT_FIRST%"
+	if defined %~1 endlocal & call set "%1=%%%~1%% %ALL_BUT_FIRST%"
+	if not defined %~1 endlocal & set "%1=%ALL_BUT_FIRST%"
 goto:eof
 
 

@@ -11,9 +11,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
     call dk_echo
-    call dk_echo ###########################################################        
-    call dk_echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
-    call dk_echo ###########################################################
+    call dk_echo "###############################################################"        
+    call dk_echo "****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
+    call dk_echo "###############################################################"
     call dk_echo
 	
 	if %TYPE%==All      call dk_buildAll
@@ -21,9 +21,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %TYPE%==Debug    call dk_buildDebug
 	
 	call dk_echo
-    call dk_echo ###########################################################        
-    call dk_echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
-    call dk_echo ###########################################################
+    call dk_echo "####################################################################"     
+    call dk_echo "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
+    call dk_echo "####################################################################"
     call dk_echo
 goto:eof
 

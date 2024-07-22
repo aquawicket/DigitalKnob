@@ -10,10 +10,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	setlocal
 	call dk_decimalToHex %~1 hex
 	call dk_hexToAscii %hex% ascii
 	
-	endlocal & call dk_set %2 "%ascii%"
+	endlocal & set "%2=%ascii%"
 goto:eof
 
 

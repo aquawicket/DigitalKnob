@@ -8,8 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
+	::setlocal
 	call dk_decimalToHex %~2 hex
 	call dk_hexToVariable %~1 %hex%
+	::endlocal
 goto:eof
 
 

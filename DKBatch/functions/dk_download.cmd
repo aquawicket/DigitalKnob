@@ -24,18 +24,19 @@ call dk_source dk_validate
 	call dk_set destination "%DKDOWNLOAD_DIR%\%DL_FILE%"
 	:destination_set
 	
-	call dk_getFullPath %destination% fullPath
+	call dk_realpath %destination% fullPath
 	if %destination% neq %fullPath% call dk_error "destination is invalid: full path required"
 	
     if exist "%destination%" call dk_info "%destination% already exist" && goto:eof
 
 	call dk_info "Downloading %~1 . . ."
     
-    powershell /? && powershell -Command "(New-Object Net.WebClient).DownloadFile('%~1', '%destination%')" && goto:eof
+	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    powershell /? && powershell -command { $cli = New-Object System.Net.WebClient; $cli.Headers['%User-Agent%'] = 'myUserAgentString'; $cli.DownloadFile('%~1', '%destination%')" && goto:eof }
 	
-	certutil.exe /? certutil.exe -urlcache -split -f "%~1" "%~2" && goto:eof
+	certutil.exe /? && certutil.exe -urlcache -split -f "%~1" "%destination%" && goto:eof
 	
-	curl --help && curl "%~1" -o "%~2" && goto:eof
+	curl --help && curl "%~1" -o "%destination%" && goto:eof
 	
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion

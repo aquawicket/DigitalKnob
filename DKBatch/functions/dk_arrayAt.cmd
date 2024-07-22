@@ -11,7 +11,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	endlocal & call dk_set %3 "%%%~1[%~2]%%"
+	setlocal
+	if "!!" neq "" endlocal & call dk_set %3 "%%%~1[%~2]%%"
+	if "!!" equ "" endlocal & set "%3=!%~1[%~2]!"
 goto:eof
 
 
