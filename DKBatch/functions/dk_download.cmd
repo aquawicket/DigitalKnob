@@ -7,6 +7,7 @@ call dk_source dk_basename
 call dk_source dk_getDKPaths
 call dk_source dk_getFullPath
 call dk_source dk_info
+call dk_source dk_realpath
 call dk_source dk_set
 call dk_source dk_validate
 ::####################################################################
