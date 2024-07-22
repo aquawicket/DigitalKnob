@@ -15,26 +15,26 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "dest=%~2"
 	
 	call dk_realpath "%src%" src_realpath
-	call dk_printVar src_realpath
+	::call dk_printVar src_realpath
 	
 	call dk_dirname "%src_realpath%" src_dirname
-	call dk_printVar src_dirname
+	::call dk_printVar src_dirname
 	
 	call dk_basename "%src_realpath%" src_basename
-	call dk_printVar src_basename
+	::call dk_printVar src_basename
 	
 	call dk_basename "%src_basename%" src_folder
-	call dk_printVar src_folder
+	::call dk_printVar src_folder
 	
 	call dk_realpath "%dest%" dest_realpath
-	call dk_printVar dest_realpath
+	::call dk_printVar dest_realpath
 	
 	call dk_dirname "%dest_realpath%" dest_dirname
-	call dk_printVar dest_dirname
+	::call dk_printVar dest_dirname
 	
 	call dk_basename "%dest_realpath%" dest_folder
-	call dk_printVar dest_folder
-	pause
+	::call dk_printVar dest_folder
+
 ::	if not exist "%dest_realpath%" (
 ::		call dk_makeDirectory "%dest_realpath%"
 ::	)
@@ -45,13 +45,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	
 	call dk_getDirectories "%src_dirname%\UNZIPPED" directories
-	call dk_printVar directories
+	::call dk_printVar directories
 	call dk_arrayLength directories dir_count
-	call dk_printVar dir_count
+	::call dk_printVar dir_count
 	
 	call dk_getFiles "%src_dirname%\UNZIPPED" files
 	call dk_arrayLength files file_count
-	call dk_printVar file_count
+	::call dk_printVar file_count
 	
 	if %dir_count% equ 1 if %file_count% equ 0 (
 		rem rename/move UNZIPPED/root folder to dest path"
