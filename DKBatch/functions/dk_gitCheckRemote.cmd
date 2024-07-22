@@ -14,15 +14,15 @@ call dk_source dk_warning
 ::#
 ::#
 :dk_gitCheckRemote
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc
+    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-    if not exist "%DKBRANCH_DIR%\.git" ( call dk_warning "%DKBRANCH_DIR%\.git does not exist" )
+    call dk_validate DKBRANCH_DIR "call dk_validateBranch"
+    if not exist "%DKBRANCH_DIR%\.git" ( call dk_warning "%DKBRANCH_DIR%\.git does not exist" && goto:eof )
 
-	call dk_validate GIT_EXE "call dk_installGit"
+    call dk_validate GIT_EXE "call dk_installGit"
 	
-	cd "%DKBRANCH_DIR%"
+    cd "%DKBRANCH_DIR%"
 	
     :: git remote update >nul 2>&1
     %GIT_EXE% remote update
