@@ -8,9 +8,10 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_debugFunc
 	if %__ARGC__% lss 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 
-	set "_menuTitle_=%~1"
-	set "_exe_=%~2"
-	set "_command_=%~3"
+	setlocal
+	call dk_set _menuTitle_ "%~1"
+	call dk_set _exe_ "%~2"
+	call dk_set _command_ "%~3"
 	
 	call dk_info "Adding '%_menuTitle_%' context menu to Windows using %GIT_EXE%"
 	
@@ -31,6 +32,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	::call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
 	echo REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
 	REG ADD "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+	endlocal
 goto:eof
 
 
