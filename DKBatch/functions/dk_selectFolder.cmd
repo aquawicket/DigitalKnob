@@ -18,7 +18,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		goto:eof
 	)
 	
-	call dk_set %1 %sFolderName%
+	endlocal & set "%~1=%sFolderName%"
 goto:eof
 
 

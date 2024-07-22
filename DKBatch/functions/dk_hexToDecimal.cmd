@@ -12,9 +12,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	set "hex=%~1"
 	set "decimal="
-	set /A decimal=0x%hex:~-2%
+	set /A hexToDecimal=0x%hex:~-2%
 	
-	endlocal & call dk_set %2 "%decimal%"
+	endlocal & set "%2=%hexToDecimal%"
 goto:eof
 
 

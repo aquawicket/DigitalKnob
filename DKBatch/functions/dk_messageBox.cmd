@@ -10,8 +10,8 @@ call dk_set VERSION_dk_messageBox 3
 	call dk_debugFunc
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	call dk_set title "%~1"
-	call dk_set message "%~2"
+	set "title=%~1"
+	set "message=%~2"
 	
 	if %VERSION_dk_messageBox% equ 1 goto:messageBox_1
 	if %VERSION_dk_messageBox% equ 2 goto:messageBox_2 
@@ -65,8 +65,8 @@ call dk_set VERSION_dk_messageBox 3
 		if %errorlevel%==-1 (echo Timeout)
 		set rtn_var=%errorlevel%
 		del %tmp%\tmp.vbs
-		::if defined "%~3" call dk_set %3 "%errorlevel%"
-		call dk_set %3 "%rtn_var%"
+		::if defined "%~3" set "%3=%errorlevel%"
+		set "%3=%rtn_var%"
 	goto:eof
 		
 	:messageBox_4

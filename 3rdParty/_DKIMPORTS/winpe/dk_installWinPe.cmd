@@ -24,9 +24,9 @@ call ..\..\..\DKBatch\functions\DK.cmd
 			call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 			call dk_validate QEMU_IMG_EXE "call %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 
-		if not exist "%WINPE_QCOW%" %QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%"
-		%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_QCOW% -m 1G -cpu max -smp 2 -vga virtio -display sdl
-		goto:eof
+::		if not exist "%WINPE_QCOW%" %QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%"
+::		%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_QCOW% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+::		goto:eof
 		
 		
 		
@@ -50,7 +50,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 			%QEMU_IMG_EXE% create -f qcow2 %WINPE_IMG% 5G
 		
 			:: Launching the VM
-			%QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+			%QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 			
 			::%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 		:end_WIN_IMG
@@ -60,7 +60,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		set "WINPE_launcher=%WINPE%\LAUNCH.cmd"
 			if exist "%WINPE_launcher%" call dk_info "%WINPE_launcher% already exists" && goto:eof	
 			::call dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
-			call dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
+			call dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 	endlocal
 goto:eof
 	

@@ -18,13 +18,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	if not defined non_numeric (
 		call dk_unset non_numeric
-		if defined "%~2" (endlocal & call dk_set %2 true)
+		if defined "%~2" (endlocal & set "%2=true")
         (call )
 		goto:eof
 	)
 	
 	call dk_unset non_numeric
-    if defined "%~2" (endlocal & call dk_set %2 false)
+    if defined "%~2" (endlocal & set "%2=false")
 	(call)
 goto:eof
 

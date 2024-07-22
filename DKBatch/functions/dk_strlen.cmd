@@ -19,7 +19,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 			set "s=!s:~%%N!"
 		)
 	)
-	endlocal & call dk_set %2 %len%
+	endlocal & set "%2=%len%"
 goto:eof
 
 

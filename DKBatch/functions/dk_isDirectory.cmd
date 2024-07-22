@@ -10,12 +10,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	if exist %~1\* (
-		if defined "%~2" (endlocal & call dk_set %2 true)
+		if defined "%~2" (endlocal & set "%2=true")
         (call )
 		goto:eof
 	)
 	
-    if defined "%~2" (endlocal & call dk_set %2 false)
+    if defined "%~2" (endlocal & set "%2=false")
 	(call)
 goto:eof
 

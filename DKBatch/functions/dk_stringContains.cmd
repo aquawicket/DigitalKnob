@@ -16,12 +16,12 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     set "_haystack_=%~1"
     set "_needle_=%~2"
     if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
-		if defined "%~3" (endlocal & call dk_set %3 true)
+		if defined "%~3" (endlocal & set "%3=true")
 		(call )
 		goto:eof
 	)
 	
-    if defined "%~3" (endlocal & call dk_set %3 false)
+    if defined "%~3" (endlocal & set "%3=false")
     (call)
 goto:eof
 

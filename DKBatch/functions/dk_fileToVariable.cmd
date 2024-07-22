@@ -12,10 +12,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-    ::call dk_set file %~1
+    ::call set "file=%~1"
 	set "\n=\n"
-	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"		&:: FIXME: remove the need for call here
-	endlocal & call dk_set %2 "%_fileVar_%"
+	::if "!!" neq "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"	&:: FIXME: remove the need for call here
+	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"	&:: FIXME: remove the need for call here
+	::if "!!" equ "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=!_fileVar_!%\n%%%x"
+	::endlocal & call dk_set %2 "%_fileVar_%"
+	endlocal & set "%2=%_fileVar_%"
 goto:eof
 
 

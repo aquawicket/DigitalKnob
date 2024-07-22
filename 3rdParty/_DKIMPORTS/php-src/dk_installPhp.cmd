@@ -24,13 +24,13 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_toLower %PHP_FOLDER% PHP_FOLDER
 	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
-	call dk_set PHP %DKTOOLS_DIR%\%PHP_FOLDER%
-	call dk_set PHP_EXE %PHP%\php.exe
+	call dk_set PHP "%DKTOOLS_DIR%\%PHP_FOLDER%"
+	call dk_set PHP_EXE "%PHP%\php.exe"
 
 	if exist "%PHP_EXE%" goto:eof
 	
-	call dk_download %PHP_DL%
-	call dk_smartExtract %PHP_DL% %PHP%
+	call dk_download "%PHP_DL%"
+	call dk_smartExtract "%DKDOWNLOAD_DIR%\%PHP_DL_FILE%" "%PHP%"
 	
 	if NOT exist "%PHP_EXE%"  call dk_error "cannot find PHP_EXE:%PHP_EXE%"
 goto:eof

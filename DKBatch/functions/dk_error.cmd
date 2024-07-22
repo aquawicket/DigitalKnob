@@ -22,6 +22,7 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 	
 	setlocal
 		call dk_set _message_ %*
+		::set "_message_=%*"
 		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ %_message_:~1,-1%          &:: if _message_ starts and ends with quotes, remove them
 		
 		if not defined red (call dk_set red [31m)

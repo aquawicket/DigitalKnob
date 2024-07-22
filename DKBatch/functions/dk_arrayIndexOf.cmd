@@ -22,9 +22,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		if "!!" equ "" set "_value_=!%~1[%_count_%]!"
 		if "!!" neq "" call set "_value_=%%%~1[%_count_%]%%"
 		if "%~2" == "%_value_%" (
-			endlocal & call dk_set %3 "%_count_%"
-			goto:eof
-				
+			::endlocal & call dk_set %3 "%_count_%"
+			endlocal & set "%3=%_count_%"
+			goto:eof	
 		)
 			
 		set /a _count_+=1

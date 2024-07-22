@@ -20,10 +20,10 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
     call dk_validate HOST_ARCH "call dk_getHostTriple"
-    if "%HOST_ARCH%"=="arm32"  call dk_set GIT_DL ""
-    if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL %GIT_DL_WIN_ARM64%
-    if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL %GIT_DL_WIN_X86%
-    if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL %GIT_DL_WIN_X86_64%
+    if "%HOST_ARCH%"=="arm32"  set "GIT_DL="
+    if "%HOST_ARCH%"=="arm64"  set "GIT_DL=%GIT_DL_WIN_ARM64%"
+    if "%HOST_ARCH%"=="x86"    set "GIT_DL=%GIT_DL_WIN_X86%"
+    if "%HOST_ARCH%"=="x86_64" set "GIT_DL=%GIT_DL_WIN_X86_64%"
     if not defined GIT_DL call dk_error "GIT_DL is invalid"
 	
     call dk_basename %GIT_DL% GIT_DL_FILE

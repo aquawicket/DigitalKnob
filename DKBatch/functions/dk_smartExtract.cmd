@@ -14,53 +14,53 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "src=%~1"
 	set "dest=%~2"
 	
-	call dk_realpath "%src%" src_fullpath
-	call dk_printVar src_fullpath
+	call dk_realpath "%src%" src_realpath
+	call dk_printVar src_realpath
 	
-	call dk_dirname "%src_fullpath%" src_directory
-	call dk_printVar src_directory
+	call dk_dirname "%src_realpath%" src_dirname
+	call dk_printVar src_dirname
 	
-	call dk_basename "%src_fullpath%" src_filename
-	call dk_printVar src_filename
+	call dk_basename "%src_realpath%" src_basename
+	call dk_printVar src_basename
 	
-	call dk_basename "%src_filename%" src_folder
+	call dk_basename "%src_basename%" src_folder
 	call dk_printVar src_folder
 	
-	call dk_realpath "%dest%" dest_fullpath
-	call dk_printVar dest_fullpath
+	call dk_realpath "%dest%" dest_realpath
+	call dk_printVar dest_realpath
 	
-	call dk_dirname "%dest_fullpath%" dest_directory
-	call dk_printVar dest_directory
+	call dk_dirname "%dest_realpath%" dest_dirname
+	call dk_printVar dest_dirname
 	
-	call dk_basename "%dest_fullpath%" dest_folder
+	call dk_basename "%dest_realpath%" dest_folder
 	call dk_printVar dest_folder
-	
-::	if not exist "%dest_fullpath%" (
-::		call dk_makeDirectory "%dest_fullpath%"
+	pause
+::	if not exist "%dest_realpath%" (
+::		call dk_makeDirectory "%dest_realpath%"
 ::	)
 	
-	call dk_info "Extracting %src_filename% . . ."
-	call dk_remove "%src_directory%\UNZIPPED"
-	call dk_extract "%src_fullpath%" "%src_directory%\UNZIPPED"
+	call dk_info "Extracting %src_basename% . . ."
+	call dk_remove "%src_dirname%\UNZIPPED"
+	call dk_extract "%src_realpath%" "%src_dirname%\UNZIPPED"
 	
 	
-	call dk_getDirectories "%src_directory%\UNZIPPED" directories
+	call dk_getDirectories "%src_dirname%\UNZIPPED" directories
 	call dk_printVar directories
 	call dk_arrayLength directories dir_count
 	call dk_printVar dir_count
 	
-	call dk_getFiles "%src_directory%\UNZIPPED" files
+	call dk_getFiles "%src_dirname%\UNZIPPED" files
 	call dk_arrayLength files file_count
 	call dk_printVar file_count
 	
 	if %dir_count% equ 1 if %file_count% equ 0 (
 		rem rename/move UNZIPPED/root folder to dest path"
-		call dk_move "%directories[0]%" "%dest_fullpath%" OVERWRITE
+		call dk_move "%directories[0]%" "%dest_realpath%" OVERWRITE
 		goto:eof
 	)
 
 	:: rename/move UNZIPPED folder to dest path"
-	call dk_move "%src_directory%\UNZIPPED" "%dest_fullpath%" OVERWRITE
+	call dk_move "%src_dirname%\UNZIPPED" "%dest_realpath%" OVERWRITE
 	
 	endlocal
 goto:eof

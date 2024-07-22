@@ -26,7 +26,6 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 		set /a prev-=1
 		goto:dk_arrayUnshift_loop
 	)
-	::endlocal & call dk_set %~1[0] "%~2"
 	endlocal & set "%~1[0]=%~2"
 goto:eof
 

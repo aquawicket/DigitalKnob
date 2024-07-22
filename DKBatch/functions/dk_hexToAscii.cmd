@@ -20,7 +20,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set /p ascii=<ascii.tmp
 	( del hex.tmp & del ascii.tmp )>nul
 	
-	endlocal & call dk_set %2 "%ascii%"
+	endlocal & set "%2=%ascii%"
 goto:eof
 
 

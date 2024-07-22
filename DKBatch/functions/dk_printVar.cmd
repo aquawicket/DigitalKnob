@@ -35,11 +35,14 @@ call dk_source dk_isAlphanumeric
 		if not defined %~1 goto:undefined
 		setlocal
 		set "_ptr_=%~1"
-		call dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
-		call set "_ptrB_=%%%_ptr_%%%"					&:: FIXME: remove the need for call here
+		if "!!" neq "" call dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
+		if "!!" equ "" call dk_isAlphanumeric "!_ptr_!" || goto:variable
+		if "!!" neq "" call set "_ptrB_=%%%_ptr_%%%"
+		if "!!" equ "" set "_ptrB_=!_ptr_!"
 		::call dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
 		if not defined "%_ptrB_%" goto:variable
-		set "_ptrvalue_=%%%_ptrB_%%%"
+		if "!!" neq "" call set "_ptrvalue_=%%%_ptrB_%%%"
+		if "!!" equ "" set "_ptrvalue_=!_ptrB_!"
 		call dk_echo "%cyan% POINTER:%_ptr_% = %_ptrB_% =%blue% %_ptrvalue_% %clr%"
 		endlocal
     goto:eof
@@ -47,7 +50,8 @@ call dk_source dk_isAlphanumeric
     :variable
 		setlocal
 		set "_var_=%~1"
-		call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
+		if "!!" neq "" call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
+		if "!!" equ "" set "_value_=!%_var_%!"
 		call dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
 		endlocal
     goto:eof

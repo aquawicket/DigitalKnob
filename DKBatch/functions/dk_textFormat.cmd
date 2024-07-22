@@ -25,8 +25,9 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	set "col4=%~5%spaces%"
     set col4=%col4:~0,100%
     
-	call dk_set output "%col1% %col2% %col3% %col4%"
-    endlocal & call dk_set %1 "%output%"
+	::call dk_set output "%col1% %col2% %col3% %col4%"
+	set "_textFormat_=%col1% %col2% %col3% %col4%"
+    endlocal & set "%1=%_textFormat_%"
 goto:eof
 
 
