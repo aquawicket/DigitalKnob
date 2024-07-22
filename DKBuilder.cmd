@@ -7,9 +7,9 @@ set "DKBATCH_DIR=%CD%\DKBatch"
 set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_DIR%\functions\"
 if not exist "%DKBATCH_FUNCTIONS_DIR%" mkdir "%DKBATCH_FUNCTIONS_DIR%"
-::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" powershell /? && powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', '%DKBATCH_FUNCTIONS_DIR_%DK.cmd')"
-::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" certutil /? && certutil -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd" "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" curl --help && curl %DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd -o %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" powershell /? 1>nul && powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', '%DKBATCH_FUNCTIONS_DIR%/DK.cmd')"
+if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" curl --help 1>nul && curl %DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd -o %DKBATCH_FUNCTIONS_DIR%/DK.cmd
+if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" certutil /? 1>nul && certutil -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd" "%DKBATCH_FUNCTIONS_DIR%/DK.cmd"
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### Load Main Program ######

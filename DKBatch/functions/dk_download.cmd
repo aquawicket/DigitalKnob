@@ -34,11 +34,15 @@ call dk_source dk_validate
 	call dk_info "Downloading %~1 . . ."
     
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-    powershell /? && powershell -command { $cli = New-Object System.Net.WebClient; $cli.Headers['%User-Agent%'] = 'myUserAgentString'; $cli.DownloadFile('%~1', '%destination%')" && goto:eof }
+    
+	:: Try powershell
+	powershell /? 1>nul && powershell -command { $cli = New-Object System.Net.WebClient; $cli.Headers['%User-Agent%'] = 'myUserAgentString'; $cli.DownloadFile('%~1', '%destination%')" && goto:eof }
 	
-	certutil.exe /? && certutil.exe -urlcache -split -f "%~1" "%destination%" && goto:eof
+	:: Try curl
+	curl --help 1>nul && curl "%~1" -o "%destination%" && goto:eof
 	
-	curl --help && curl "%~1" -o "%destination%" && goto:eof
+	:: Try certutil
+	certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%~1" "%destination%" && goto:eof
 	
 	::FIXME - download as temporary name like myFile.txt_DOWNLOADING
 	::		  then rename it to it's original upon completion
