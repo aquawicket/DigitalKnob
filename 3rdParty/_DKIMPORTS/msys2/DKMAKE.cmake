@@ -53,6 +53,7 @@ if(NOT EXISTS "${MSYS2}/msys2.exe")
 	list(APPEND args --root)
 
 	execute_process(COMMAND ${MSYS2_DL_PATH} "${args}" "${MSYS2}" WORKING_DIRECTORY "${MSYS2}")
+	dk_executeProcess(${MSYS2_DL_PATH} "${args}" "${MSYS2}")
 endif()	
 
 
