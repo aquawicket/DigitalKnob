@@ -1,5 +1,5 @@
 @echo off
-if defined DKINIT (goto:eof) else (set DKINIT=1)
+if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
 
 (set \n=^^^
@@ -18,8 +18,6 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
 
     ::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
-    ::call :dk_echo "DKBATCH_DIR = %DKBATCH_DIR%"
-    ::call :dk_echo "DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%"
     set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 
     ::############ Get DKHTTP variables ############
@@ -33,18 +31,14 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
     if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
-    ::call :dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
-    ::call :dk_echo "DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
-    ::call :dk_echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
-    ::call :dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
 
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
     if "%ENABLE_dk_elevate%" neq "1" goto :skip_elevate
-    net session >nul 2>&1
-    if %ERRORLEVEL% equ 0 (goto:skip_elevate)
-        if "%2" == "elevated" elevated=1
-        if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
+        net session >nul 2>&1
+        if %ERRORLEVEL% equ 0 (goto:skip_elevate)
+            if "%2" == "elevated" elevated=1
+            if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
     :skip_elevate
 
     ::############ Set Options ############
@@ -56,7 +50,7 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
     call dk_source dk_color && call dk_color
     call dk_source dk_logo && call dk_logo
 	
-	if "!!" equ "" call dk_echo "delayed expansion = ON"
+    if "!!" equ "" call dk_echo "delayed expansion = ON"
     if "!!" neq "" call dk_echo "delayed expansion = OFF"
     ::call dk_load %DKSCRIPT_PATH%
 
