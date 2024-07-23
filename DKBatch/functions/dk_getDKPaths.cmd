@@ -12,7 +12,7 @@ call dk_source dk_set
     call dk_debugFunc
     if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	call dk_getDKHOME
+	call dk_setDKHOME
 	if not defined DKDESKTOP set "DKDESKTOP=%DKHOME%\Desktop"
     
 	if not defined DIGITALKNOB_DIR set "DIGITALKNOB_DIR=%DKHOME%\digitalknob"
