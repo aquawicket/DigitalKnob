@@ -3,23 +3,20 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
 call dk_source dk_debugFunc
 call dk_source dk_error
+call dk_source dk_warning
 call dk_source dk_setDKHOME_DIR
-call dk_source dk_setDKDESKTOP_DIR
-call dk_source dk_setDKTOOLS_DIR
-call dk_source dk_setDKDOWNLOAD_DIR
 ::####################################################################
-::# dk_getDKPaths()
+::# dk_setDKDESKTOP_DIR()
 ::#
 ::#
-:dk_getDKPaths
+:dk_setDKDESKTOP_DIR
     call dk_debugFunc
     if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	if not defined DKHOME          call dk_setDKHOME_DIR
-	if not defined DKDESKTOP       call dk_setDKDESKTOP_DIR
-    if not defined DIGITALKNOB_DIR call dk_setDIGITALKNOB_DIR
-    if not defined DKTOOLS_DIR     call dk_setDKTOOLS_DIR
-    if not defined DKDOWNLOAD_DIR  call dk_setDKDOWNLOAD_DIR
+	if defined DKDESKTOP_DIR call dk_warning "DKDESKTOP_DIR already set to %DKDESKTOP_DIR%" && goto:eof
+	
+	if not defined DKHOME_DIR call dk_setDKHOME_DIR
+	set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
 goto:eof
 
 
@@ -27,10 +24,14 @@ goto:eof
 
 
 
-
+call dk_source dk_printVar
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_getDKPaths
+	call dk_setDKDESKTOP_DIR
+	call dk_printVar DKDESKTOP_DIR
+	
+	call dk_setDKDESKTOP_DIR
+	call dk_printVar DKDESKTOP_DIR
 goto:eof
