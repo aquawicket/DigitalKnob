@@ -8,7 +8,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 ::FUNCNAME[]
 
 
-if not defined ENABLE_dk_debugFunc     set "ENABLE_dk_debugFunc=0"
+::set "ENABLE_dk_debugFunc=1"
 if not defined MAX_STACK_LINES         set "MAX_STACK_LINES=200"
 if not defined DKSTACK[0].__FILE__     set "DKSTACK[0].__FILE__=DK.cmd"
 if not defined DKSTACK[0].__FUNCTION__ set "DKSTACK[0].__FUNCTION__=DK"
@@ -93,7 +93,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::@echo on
-	if "%ENABLE_dk_debugFunc%" neq "1" goto:eof
+	if not defined ENABLE_dk_debugFunc goto:eof
 	
 	::set "indent="%indent% L "
 	set "indent=-^> "
