@@ -22,14 +22,14 @@ call dk_source dk_setTitle
     call dk_deleteTempFiles
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    call dk_set TARGET_PATH "%DKAPPS_DIR%\%APP%"
-    call dk_printVar TARGET_PATH
-    call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
+    set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
+    ::call dk_printVar TARGET_PATH
+    if not exist "%TARGET_PATH%\%TARGET_OS%" call dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::cd "%TARGET_PATH%\%TARGET_OS%"
     call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"			&:: FIXME: remove the need for call here
-    call dk_printVar CMAKE_SOURCE_DIR							&:: FIXME: remove the need for call here
-    call set "CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%"
-    call dk_printVar CMAKE_TARGET_PATH
+    ::call dk_printVar CMAKE_SOURCE_DIR							
+    call set "CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%"			&:: FIXME: remove the need for call here
+    ::call dk_printVar CMAKE_TARGET_PATH
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set "DKLEVEL=RebuildAll"
@@ -38,7 +38,7 @@ call dk_source dk_setTitle
     set "CMAKE_ARGS="
     ::if "%TYPE%"=="Debug"           call dk_appendArgs CMAKE_ARGS -DDEBUG=ON & call dk_appendArgs CMAKE_ARGS -DRELEASE=OFF
     if "%TYPE%"=="Debug"             call dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    ::if "%TYPE%"=="Release"         call dk_appendArgs CMAKE_ARGS -DDEBUG=OFF & call dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+	::if "%TYPE%"=="Release"         call dk_appendArgs CMAKE_ARGS -DDEBUG=OFF & call dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="Release"           call dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="All"               call dk_appendArgs CMAKE_ARGS -DDEBUG=ON & call dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          call dk_appendArgs CMAKE_ARGS -DBUILD=ON
@@ -47,9 +47,9 @@ call dk_source dk_setTitle
     if "%DKLINK%"=="Static"          call dk_appendArgs CMAKE_ARGS -DSTATIC=ON
     if "%DKLINK%"=="Shared"          call dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" call dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
-        
-    call dk_set CMAKE_BINARY_DIR "%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
-    call dk_printVar CMAKE_BINARY_DIR
+	
+    set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
+    ::call dk_printVar CMAKE_BINARY_DIR
         
     call dk_appendArgs CMAKE_ARGS -S=%CMAKE_SOURCE_DIR%
     call dk_appendArgs CMAKE_ARGS -B=%CMAKE_BINARY_DIR%
@@ -78,28 +78,26 @@ call dk_source dk_setTitle
 	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
 	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
 	
-	if "%TARGET_OS%"=="android_arm32"      call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="android_arm64"      call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="emscripten"         call dk_prependArgs CMAKE_ARGS -G Unix Makefiles	
-	if "%TARGET_OS%"=="ios_arm32"          call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="ios_arm64"          call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="iossim_x86"         call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="iossim_x86_64"      call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="linux_x86"          call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="linux_x86_64"       call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="mac_x86"            call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="mac_x86_64"         call dk_prependArgs CMAKE_ARGS -G Xcode
-	if "%TARGET_OS%"=="raspberry_arm32"    call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="raspberry_arm64"    call dk_prependArgs CMAKE_ARGS -G Unix Makefiles
-	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_clang"      call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependArgs CMAKE_ARGS -G MinGW Makefiles
-	if "%TARGET_OS%"=="win_x86_64_msvc"    call dk_prependArgs CMAKE_ARGS -G Visual Studio 17 2022
-	
-	
+	if "%TARGET_OS%"=="android_arm32"      call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="android_arm64"      call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="emscripten"         call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"	
+	if "%TARGET_OS%"=="ios_arm32"          call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="ios_arm64"          call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="iossim_x86"         call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="iossim_x86_64"      call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="linux_x86"          call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="linux_x86_64"       call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="mac_x86"            call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="mac_x86_64"         call dk_prependArgs CMAKE_ARGS -G "Xcode"
+	if "%TARGET_OS%"=="raspberry_arm32"    call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="raspberry_arm64"    call dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="win_arm64_clang"    call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_clang"      call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_mingw"      call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_64_clang"   call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_64_mingw"   call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_64_ucrt"    call dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_x86_64_msvc"    call dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022"
 
 ::	###### CMAKE_TOOLCHAIN_FILE ######
 ::	call dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
@@ -116,11 +114,11 @@ call dk_source dk_setTitle
 ::	fi
 	
 ::	###### CMake Configure ######
-	call %DKIMPORTS_DIR%\cmake\dk_InstallCmake
+	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
 	
     call dk_info "****** CMAKE COMMAND ******"
-    call dk_echo "%CMAKE_EXE% %CMAKE_ARGS%"
-    call "%CMAKE_EXE%" %CMAKE_ARGS%  && call dk_echo "CMake Generation Successful" || call dk_error "CMake Generation Failed"
+    echo %CMAKE_EXE% %CMAKE_ARGS%
+    call %CMAKE_EXE% %CMAKE_ARGS% && call dk_echo "CMake Generation Successful" || call dk_error "CMake Generation Failed"
 goto:eof
 
 
