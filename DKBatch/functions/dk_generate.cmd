@@ -51,8 +51,8 @@ call dk_source dk_setTitle
     set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
     ::call dk_printVar CMAKE_BINARY_DIR
         
-    call dk_appendArgs CMAKE_ARGS -S=%CMAKE_SOURCE_DIR%
-    call dk_appendArgs CMAKE_ARGS -B=%CMAKE_BINARY_DIR%
+    call dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
+    call dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 
     ::############ CMake Options ############
     ::call dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1

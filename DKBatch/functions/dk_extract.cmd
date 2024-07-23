@@ -27,12 +27,12 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_getParentDir "%~1" destination      &:: extract contents to same directoy
 	set "destination=%destination%\%basename%"  &:: extract contents to folder within same directory
 	call dk_echo "destination = %destination%"
-	powershell Expand-Archive "%~1" -DestinationPath "%destination%"
+	powershell Expand-Archive '"%1"' -DestinationPath '"%destination%"'
 	goto:eof
 	
 :twoParams
 	::### handle 2 parameters
-	powershell Expand-Archive "%~1" -DestinationPath "%~2"
+	powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
 	goto:eof
 goto:eof
 
