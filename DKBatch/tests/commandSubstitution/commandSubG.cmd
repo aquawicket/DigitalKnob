@@ -1,5 +1,7 @@
 @echo off
-::setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
+if "!!" neq "" echo "delayed expansion is required" && pause && exit 
+
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
 )
@@ -23,6 +25,6 @@ goto:main
 goto:eof
 
 :printTime
-	echo the time is %1 in seconds
+	echo the time is %~1 seconds
 goto:eof
 

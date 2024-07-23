@@ -1,5 +1,6 @@
 @echo off
-::setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
+if "!!" neq "" echo "delayed expansion is required" && pause && exit 
 
 set $time=0^&call:getTime
 :main

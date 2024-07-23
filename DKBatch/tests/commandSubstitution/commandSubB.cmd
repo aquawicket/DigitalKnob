@@ -1,5 +1,7 @@
 @echo off
-::setlocal enableDelayedExpansion
+setlocal enableDelayedExpansion
+if "!!" neq "" echo "delayed expansion is required" && pause && exit 
+
 set "first=0"
 set "middle=1"
 set "last=2"

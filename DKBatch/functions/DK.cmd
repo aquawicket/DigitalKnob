@@ -52,10 +52,10 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     call dk_source dk_color && call dk_color
     call dk_source dk_logo && call dk_logo
 	
-    if "!!" equ "" call dk_echo "delayed expansion = ON"
+    if "!!"=="" call dk_echo "delayed expansion = ON"
     if "!!" neq "" call dk_echo "delayed expansion = OFF"
     ::%DK% dk_load %DKSCRIPT_PATH%
-
+	
     ::###### DKTEST MODE ######
     if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
     call dk_echo
