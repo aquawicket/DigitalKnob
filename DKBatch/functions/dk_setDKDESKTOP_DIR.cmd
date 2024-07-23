@@ -17,6 +17,7 @@ call dk_source dk_setDKHOME_DIR
 	
 	if not defined DKHOME_DIR call dk_setDKHOME_DIR
 	set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
+	if not exist %DKDESKTOP_DIR% call dk_error "DKDESKTOP_DIR:%DKDESKTOP_DIR% does not exist"
 goto:eof
 
 

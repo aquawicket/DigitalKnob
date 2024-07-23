@@ -21,7 +21,7 @@ call dk_source dk_createShortcut
     if not defined DKHOME_DIR call dk_setDKHOME_DIR
     set "DIGITALKNOB_DIR=%DKHOME_DIR%\digitalknob"
 
-    :: create directory if it doesn't exist
+    :: create directory if it does not exist
     if not exist "%DIGITALKNOB_DIR%" call dk_makeDirectory "%DIGITALKNOB_DIR%"
 
     :: create desktop shortcut if it doesn't exist

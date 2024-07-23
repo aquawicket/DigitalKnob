@@ -17,6 +17,7 @@ call dk_source dk_warning
 	if not defined HOMEDRIVE call dk_error "HOMEDRIVE is invalid"
 	if not defined HOMEPATH call dk_error "HOMEPATH is invalid"
 	set "DKHOME_DIR=%HOMEDRIVE%%HOMEPATH%"
+	if not exist %DKHOME_DIR% call dk_error "DKHOME_DIR:%DKHOME_DIR% does not exist"
 goto:eof
 
 
