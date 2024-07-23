@@ -11,7 +11,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 	
 	powershell /? 1>nul || call dk_error "dk_createShortcut requires powershell"
 	
-	set "shortcut_path=%~1.lnk"
+	set "shortcut_path=%~1"
 	set "target_path=%~2"
 	
 	if exist %shortcut_path% dk_warning "%shortcut_path% already exists" && goto:eof

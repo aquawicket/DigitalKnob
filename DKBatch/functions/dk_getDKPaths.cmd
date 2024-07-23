@@ -17,7 +17,7 @@ call dk_source dk_set
     
 	set "DIGITALKNOB_DIR=%DKHOME%\digitalknob"
     if not exist "%DIGITALKNOB_DIR%" call dk_makeDirectory "%DIGITALKNOB_DIR%"
-	if not exist "%DKDESKTOP%\digitalknob.lnk" call dk_createShortcut "%DKDESKTOP%\digitalknob" "%DIGITALKNOB_DIR%"
+	if not exist "%DKDESKTOP%\digitalknob.lnk" call dk_createShortcut "%DKDESKTOP%\digitalknob.lnk" "%DIGITALKNOB_DIR%"
 	
     set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
     if not exist "%DKTOOLS_DIR%" call dk_makeDirectory "%DKTOOLS_DIR%"
