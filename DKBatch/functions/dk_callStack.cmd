@@ -185,7 +185,7 @@ goto:eof
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_callStackReturn
 	endlocal
-	%BATCH_SOURCE_A% %BATCH_ARGV_A%
+	"%BATCH_SOURCE_A%" %BATCH_ARGV_A%
 goto:eof
 
 
