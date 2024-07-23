@@ -4,6 +4,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 call dk_source dk_assert
 call dk_source dk_build
 call dk_source dk_createCache
+call dk_source dk_createShortcut
 call dk_source dk_debugFunc
 call dk_source dk_defined
 call dk_source dk_error
@@ -32,10 +33,9 @@ call dk_source dk_warning
 	call dk_assert DKSCRIPT_DIR
 	call dk_assert DKSCRIPT_NAME
 
-
-	:::::: Get the HOST_TRIPLE and other HOST variables
 	call dk_getHostTriple
 	call dk_getDKPaths
+	
     call dk_installGit
     call dk_validateBranch
     

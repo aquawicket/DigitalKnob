@@ -53,12 +53,9 @@ if defined DKINIT (goto:eof) else (set DKINIT=1)
     ::############ LOAD FUNCTION FILES ############
     call dk_source dk_debugFunc
     call dk_source dk_echo
-    call dk_source dk_color
-    call dk_color
-    call dk_source dk_isDelayedExpansion
-    call dk_isDelayedExpansion __DE__
-    call dk_source dk_logo
-    call dk_logo
+    call dk_source dk_color && call dk_color
+    call dk_source dk_logo && call dk_logo
+	
 	if "!!" equ "" call dk_echo "delayed expansion = ON"
     if "!!" neq "" call dk_echo "delayed expansion = OFF"
     ::call dk_load %DKSCRIPT_PATH%
@@ -100,7 +97,6 @@ goto:eof
 	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%" goto:eof
 	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
-	::call :dk_setupKeepOpen
 goto:eof
 
 
@@ -112,9 +108,7 @@ goto:eof
     set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-    ::call set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-	::cd %DKBATCH_FUNCTIONS_DIR%
 goto:eof
 
 
@@ -151,14 +145,6 @@ goto:eof
 	call dk_source dk_load
 goto:eof
 
-
-::##################################################################################
-::# dk_setupKeepOpen
-::#
-:dk_setupKeepOpen
-	::if "%KEEP_CONSOLE_OPEN%" neq "1" goto:eof
-	if not defined in_subprocess (cmd /k set in_subprocess=y ^& cls ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
-goto:eof
 
 
 
