@@ -2,26 +2,28 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
-::# dk_commandToVariable(command, rtn_var)
+::# dk_commandToVariable(command, args, rtn_var)
 ::#
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#
 :dk_commandToVariable
 	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
 	
 ::	for /f "usebackq delims=|" %%f in (`%~1`) do (
 ::		set "%2=%%f"
 ::  )
 	setlocal
-	set "command=%~1"
 	set i=-1
-	for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
+
+	::for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
+	for /f "usebackq delims=|" %%Z in (`"%~1" %~2 ^& call echo %%^^ERRORLEVEL%%`) do (
 		set /A i+=1
 		if "!!" equ "" set "line[!i!]=%%Z"
 		if "!!" neq "" call set "line[%%i%%]=%%Z"
 	)
-	
+
 	set /A numLines=i-1
 	:: Final errorlevel is stored in last line
 	if "!!" equ "" if !line[%i%]! gtr 0 set /a lastline = !line[%i%]! 2>nul && cmd /c exit %lastline%
@@ -32,7 +34,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if "!!" equ "" set "lastElement=!line[%numLines%]!"
 	if "!!" neq "" call set "lastElement=%%line[%numLines%]%%"
 
-	endlocal & set "%2=%lastElement%"    		&:: return the last line from the programs output
+	:: return the last line from the programs output
+	if "%~3" neq "" endlocal & set "%3=%lastElement%" && goto:eof
+	endlocal & set "%2=%lastElement%"
 goto:eof
 	
 	
