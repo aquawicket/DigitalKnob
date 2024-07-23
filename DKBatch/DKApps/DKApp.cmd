@@ -18,7 +18,7 @@ for %%x in (%*) do (
 set "ESC="
 set "SPACE= "
 
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
 

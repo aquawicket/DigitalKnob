@@ -1,5 +1,5 @@
 @echo off
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 if "%~1" equ "dk_keyboard.BeginReceiving" goto %1
 if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 

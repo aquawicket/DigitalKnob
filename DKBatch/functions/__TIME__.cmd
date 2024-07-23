@@ -1,6 +1,6 @@
 @echo off
 if "%~1" == "dk_getHour" echo dk_getHour
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
 

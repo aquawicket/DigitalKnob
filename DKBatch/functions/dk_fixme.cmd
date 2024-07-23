@@ -1,5 +1,5 @@
 @echo off
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::if not defined ENABLE_dk_fixme  set "ENABLE_dk_fixme=1"
 ::if not defined TRACE_ON_FIXME   set "TRACE_ON_FIXME=0"

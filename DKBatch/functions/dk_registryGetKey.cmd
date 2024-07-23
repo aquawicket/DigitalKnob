@@ -1,5 +1,5 @@
 @echo off
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::#################################################################################
 ::# dk_registryGetKey() <reg_path> <key> rtn_var

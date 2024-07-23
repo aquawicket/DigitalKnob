@@ -1,5 +1,5 @@
 @echo off
-::call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+::call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::https://stackoverflow.com/a/43123617/688352
 

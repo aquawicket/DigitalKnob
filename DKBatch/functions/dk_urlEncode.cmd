@@ -1,7 +1,7 @@
 @echo off
 
 
-call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
 ::# dk_urlEncode(url rtn_var)

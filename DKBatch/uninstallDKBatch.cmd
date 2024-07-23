@@ -2,7 +2,7 @@
 call functions\DK.cmd
 
 :uninstallDKBatch
-	call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
+	call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	call dk_echo "Uninstalling DKBatch file associations . . ."
 	ftype dkbatch=
