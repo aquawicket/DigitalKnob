@@ -1,7 +1,10 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_debugFunc
+call dk_source dk_error
 call dk_source dk_getExtension
+call dk_source dk_replaceAll
 ::##################################################################################
 ::# dk_removeExtension(filepath rtn_var)
 ::#
@@ -18,7 +21,6 @@ call dk_source dk_getExtension
 	:: [ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
 	endlocal & set "%2=%_filepath_%"
 goto:eof
-
 
 
 
