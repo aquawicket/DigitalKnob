@@ -25,7 +25,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
 
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%
+	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
     set "CMAKE_EXE=%CMAKE%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto:cmake_installed

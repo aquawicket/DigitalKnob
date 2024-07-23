@@ -117,8 +117,8 @@ call dk_source dk_setTitle
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
 	
     call dk_info "****** CMAKE COMMAND ******"
-    echo %CMAKE_EXE% %CMAKE_ARGS%
-    call %CMAKE_EXE% %CMAKE_ARGS% && call dk_echo "CMake Generation Successful" || call dk_error "CMake Generation Failed"
+    echo "%CMAKE_EXE%" %CMAKE_ARGS%
+    call "%CMAKE_EXE%" %CMAKE_ARGS% && call dk_echo "CMake Generation Successful" || call dk_error "CMake Generation Failed"
 goto:eof
 
 

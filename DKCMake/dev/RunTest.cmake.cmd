@@ -31,7 +31,7 @@ set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
 if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
 if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
-if not exist %CMAKE_EXE% ( ERROR "Could not locate CMAKE_EXE" )
+if not exist "%CMAKE_EXE%" ( ERROR "Could not locate CMAKE_EXE" )
 
 :begin
 cls
