@@ -114,7 +114,7 @@ call dk_source dk_setTitle
 ::	fi
 	
 ::	###### CMake Configure ######
-	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+	if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
 	
     call dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
