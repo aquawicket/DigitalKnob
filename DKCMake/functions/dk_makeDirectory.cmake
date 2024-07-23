@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_makeDirectory path)
 	dk_debugFunc(${ARGV})
 	
-	make_directory(${path})  # requires full path
+	make_directory("${path}")  # requires full path
 	return()
 	
 	# build missing directory parents recursivley

@@ -56,7 +56,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
-		set(dest_path ${DKDOWNLOAD_DIR})
+		set(dest_path "${DKDOWNLOAD_DIR}")
 	endif()
 	if(NOT dest_path)
 		dk_error("dest_path is invalid")
@@ -66,18 +66,18 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	endif()
 	dk_printVar(dest_path)
 	
-	dk_getDirname(${dest_path} dest_dir)
+	dk_getDirname("${dest_path}" dest_dir)
 	if(NOT dest_dir)
 		dk_error("dest_dir is invalid")
 	endif()
 	if(NOT EXISTS ${dest_dir})
 		dk_notice("dest_dir:(${dest_dir}) does not exists. It will be created")
-		dk_makeDirectory(${dest_dir})
+		dk_makeDirectory("${dest_dir}")
 	endif()
-	dk_set(CURRENT_DIR ${dest_dir})
+	dk_set(CURRENT_DIR "${dest_dir}")
 	dk_printVar(dest_dir)
 	
-	dk_getBasename(${dest_path} dest_filename)
+	dk_getBasename("${dest_path}" dest_filename)
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()
@@ -90,7 +90,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	endif()
 	dk_printVar(dest_ext)
 	
-	if(EXISTS ${dest_path})
+	if(EXISTS "${dest_path}")
 		if(NOT NO_HALT)
 			dk_notice("dest_path:(${dest_path}) already exists")
 		endif()
@@ -102,17 +102,17 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
-	set(temp_path ${dest_dir}/${temp_filename})
+	set(temp_path "${dest_dir}/${temp_filename}")
 	dk_printVar(temp_path)
-	if(EXISTS ${temp_path})
-		dk_remove(${temp_path})
+	if(EXISTS "${temp_path}")
+		dk_remove("${temp_path}")
 	endif()
-	if(EXISTS ${temp_path})
+	if(EXISTS "${temp_path}")
 		dk_error("temp_path:(${temp_path}) could not be removed")
 	endif()
 	
 	dk_info("Downloading ${src_filename}. . . please wait")
-	file(DOWNLOAD ${src_path} ${temp_path} 
+	file(DOWNLOAD ${src_path} "${temp_path}"
 		SHOW_PROGRESS 
 		INACTIVITY_TIMEOUT 70
 		STATUS status 

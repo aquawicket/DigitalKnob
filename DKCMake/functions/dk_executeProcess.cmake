@@ -116,6 +116,7 @@ function(dk_executeProcess)
 	
 	#dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
+	dk_printVar(ARGV)
 	execute_process(${ARGV})
 	
 	
@@ -168,5 +169,36 @@ dk_createOsMacros("dk_executeProcess")
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+
+	
+	set(DKDOWNLOAD_DIR "C:/Users/Administrator/D i g i t a l K n o b/download")
+	set(MSYS2_DL_FILE "msys2-x86_64-20231026.exe")
+	set(MSYS2 "C:/Users/Administrator/D i g i t a l K n o b/download/msys2-x86_64-20231026")
+
+	
+#	set(MSYS2_DL_PATH "${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}")
+	dk_getNativePath("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" MSYS2_DL_PATH)
+	string(REPLACE "\\" "//" MSYS2_DL_PATH "${MSYS2_DL_PATH}")
+#	string(REPLACE " " "\\\\ " MSYS2_DL_PATH "${MSYS2_DL_PATH}")
+	
+	dk_getNativePath("${MSYS2}" MSYS2)
+	set(CURRENT_DIR "${MSYS2}")
+	string(REPLACE "\\" "//" MSYS2 "${MSYS2}")
+#	string(REPLACE " " "\\ " MSYS2 "${MSYS2}")
+#	dk_makeDirectory("${MSYS2}")
+	
+#	list(APPEND args cmd)
+#	list(APPEND args /c)
+#	list(APPEND args ${MSYS2_DL_PATH})
+	list(APPEND args install)
+	list(APPEND args --confirm-command)
+	list(APPEND args --root)
+#	list(APPEND args "${MSYS2}")
+#	set(args "${MSYS2_DL_PATH};install;--confirm-command;--root;${MSYS2}")
+#	set(args "${MSYS2_DL_PATH}";install;--confirm-command;--root;"${MSYS2}")
+#	set(args "${MSYS2_DL_PATH}")
+	#set(args notepad.exe)
+#	dk_printVar(args)
+	execute_process(COMMAND ${MSYS2_DL_PATH} "${args}" "${MSYS2}" WORKING_DIRECTORY "${MSYS2}")
+#	dk_executeProcess(${MSYS2_DL_PATH} "${args}" "${MSYS2}")
 endfunction()

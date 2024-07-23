@@ -1,21 +1,19 @@
 @echo off
 
 :installDKCMake
-	if not "%*" == "" (goto:runDKCMake)
+	if not "%~1" == "" (goto:runDKCMake)
 	echo Associating .cmake files with DKCmake . . .
 	
 	::###### DKINIT ######
-	set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\Development"
-	set "DKBATCH_FUNCTIONS_DIR=%DKBRANCH_DIR%\DKBatch\functions"
+	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	
 	call dk_load dk_validate
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_installCmake"
+	if not defined DKIMPORTS_DIR call "dk_validateBranch"
+	if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
 	ftype dkcmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
 	assoc .cmake=dkcmake
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkcmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
@@ -38,7 +36,7 @@ goto:eof
 ::echo %CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
      ::%CMAKE_EXE% -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
 
-echo %CMAKE_EXE% -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
-    "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR% -P %CMAKE_FILE%
-	pause
+echo "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%CMAKE_FILE%"
+     "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%CMAKE_FILE%"
+	 pause
 goto:eof

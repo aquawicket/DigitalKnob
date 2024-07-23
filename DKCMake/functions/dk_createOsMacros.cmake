@@ -1,5 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
+dk_load(dk_createPrefixMacro)
+
 
 ###############################################################################
 # dk_createOsMacros(func)

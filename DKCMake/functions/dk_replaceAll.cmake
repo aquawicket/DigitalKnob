@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_replaceAll input searchValue newValue rtn_var)
-	#dk_debugFunc(${ARGV})
+	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 4)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
@@ -23,6 +23,7 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	dk_debugFunc(${ARGV})
 	
 	set(string_var "AZC AZC Zannana Zread")
+	#set(string_var "C:/Users/Administrator/D i g i t a l K n o b/download/msys2-x86_64-20231026.exe")
 	dk_info("string before:  ${string_var}")
 	
 	dk_replaceAll("${string_var}" "Z" "B" string_var)

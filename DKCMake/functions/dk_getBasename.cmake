@@ -13,7 +13,7 @@ function(dk_getBasename path rtn_var)
 	endif()
 	
 	#dk_printVar(path)
-	get_filename_component(basename ${path} NAME)
+	get_filename_component(basename "${path}" NAME)
 	#dk_printVar(basename)
 	set(${rtn_var} ${basename} PARENT_SCOPE)
 endfunction()

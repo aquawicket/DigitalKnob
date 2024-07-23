@@ -14,9 +14,9 @@ function(dk_getDirname path rtn_var)
 	endif()
 
 	
-	get_filename_component(dirname ${path} DIRECTORY)
+	get_filename_component(dirname "${path}" DIRECTORY)
 	dk_printVar(dirname)
-	set(${rtn_var} ${dirname} PARENT_SCOPE)
+	set(${rtn_var} "${dirname}" PARENT_SCOPE)
 endfunction()
 
 
