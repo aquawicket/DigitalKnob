@@ -26,7 +26,7 @@ call dk_source dk_validate
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
     
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set GIT "%DKTOOLS_DIR%\%GIT_FOLDER%"
 
 	::FIXME: kill git.exe process

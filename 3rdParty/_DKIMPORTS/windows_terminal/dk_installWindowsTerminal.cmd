@@ -22,7 +22,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	call dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set WINDOWS_TERMINAL "%DKTOOLS_DIR%\%WINDOWS_TERMINAL_FOLDER%"
 	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL%\wt.exe"
 	

@@ -23,7 +23,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
     call dk_convertToCIdentifier %NODEJS_DL_NAME% NODEJS_FOLDER
     call dk_toLower %NODEJS_FOLDER% NODEJS_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set NODEJS %DKTOOLS_DIR%\%NODEJS_FOLDER%
     call dk_set NODEJS_EXE "%NODEJS%\node.exe"
         

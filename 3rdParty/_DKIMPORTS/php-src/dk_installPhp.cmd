@@ -23,7 +23,7 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     call dk_convertToCIdentifier %PHP_NAME% PHP_FOLDER
     call dk_toLower %PHP_FOLDER% PHP_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set PHP "%DKTOOLS_DIR%\%PHP_FOLDER%"
 	call dk_set PHP_EXE "%PHP%\php.exe"
 

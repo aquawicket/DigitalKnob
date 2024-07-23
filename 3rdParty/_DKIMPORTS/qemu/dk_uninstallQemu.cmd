@@ -15,7 +15,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	
 	call dk_basename %QEMU_DL% QEMU_DL_NAME
 	call dk_convertToCIdentifier %QEMU_DL_NAME% QEMU_DL_NAME
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_info "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
 	call "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
 goto:eof

@@ -19,7 +19,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_convertToCIdentifier %NUGET_NAME% NUGET_FOLDER
 	call dk_toLower %NUGET_FOLDER% NUGET_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set NUGET %DKTOOLS_DIR%\%NUGET_FOLDER%
 	call dk_set NUGET_EXE %NUGET%\nuget.exe
 	

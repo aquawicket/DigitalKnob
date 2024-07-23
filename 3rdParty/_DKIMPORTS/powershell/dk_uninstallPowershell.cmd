@@ -23,7 +23,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_set POWERSHELL "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 
 	::FIXME: kill pwsh.exe peocess

@@ -17,7 +17,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 			set "WINPE_DL=https://UseTheAddressAbove/Win10TinyPEx64.iso"
 			
 
-			call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+			if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 			call dk_set WINPE "%DKTOOLS_DIR%\WindowsPE"
 			call dk_set WINPE_IMG "%WINPE%\winpe.img"
 			call dk_set WINPE_QCOW "%WINPE%\winpe.qcow"

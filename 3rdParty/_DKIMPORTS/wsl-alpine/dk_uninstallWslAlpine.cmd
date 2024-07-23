@@ -15,7 +15,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	wslconfig /t Alpine
 	wslconfig /u Alpine
 	taskkill /f /im wslservice.exe
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
 	call dk_remove %DKTOOLS_DIR%\AlpineLinux
 goto:eof
 
