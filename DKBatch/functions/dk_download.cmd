@@ -8,7 +8,6 @@ call dk_source dk_getDKPaths
 call dk_source dk_getFullPath
 call dk_source dk_info
 call dk_source dk_realpath
-call dk_source dk_set
 call dk_source dk_validate
 ::####################################################################
 ::# dk_download(url, destination)
@@ -22,7 +21,6 @@ call dk_source dk_validate
 	if defined destination goto:destination_set
 	call dk_basename %~1 DL_FILE
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
-	::call dk_set destination "%DKDOWNLOAD_DIR%\%DL_FILE%"
 	set "destination=%DKDOWNLOAD_DIR%\%DL_FILE%"
 	:destination_set
 	
