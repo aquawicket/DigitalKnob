@@ -5,6 +5,8 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
 )
+
+
 ::####################################################################
 ::# DKINIT
 ::#
@@ -52,7 +54,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	
     if "!!" equ "" call dk_echo "delayed expansion = ON"
     if "!!" neq "" call dk_echo "delayed expansion = OFF"
-    ::call dk_load %DKSCRIPT_PATH%
+    ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
     if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
