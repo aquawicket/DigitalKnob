@@ -9,14 +9,14 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-    if not exist %DKBRANCH_DIR%\cache goto:eof
+	if not defined DKBRANCH_DIR call dk_validateBranch
+    if not exist "%DKBRANCH_DIR%\cache" goto:eof
     
 	setlocal enableDelayedExpansion
 	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	set /a count=0
-    for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
+    for /f "tokens=*" %%a in ("%DKBRANCH_DIR%\cache") do (
 		if !count! equ 0 set "APP=%%a"
         if !count! equ 1 set "TARGET_OS=%%a"
         if !count! equ 2 set "TYPE=%%a"

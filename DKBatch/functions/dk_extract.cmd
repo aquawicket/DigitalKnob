@@ -22,7 +22,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo ARGC = %dk_extract_argc%
 	if "%dk_extract_argc%" equ "2" goto:twoParams
 	::### handle 1 parameter
-	echo processing 1 parameter
 	call dk_basename "%~1" basename
 	call dk_removeExtension "%basename%" basename
 	call dk_getParentDir "%~1" destination      &:: extract contents to same directoy
@@ -33,7 +32,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 :twoParams
 	::### handle 2 parameters
-	echo processing 2 parameters
 	powershell Expand-Archive "%~1" -DestinationPath "%~2"
 	goto:eof
 goto:eof
