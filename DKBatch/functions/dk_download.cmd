@@ -5,7 +5,6 @@ call dk_source dk_debugFunc
 call dk_source dk_error
 call dk_source dk_basename
 call dk_source dk_getDKPaths
-call dk_source dk_getFullPath
 call dk_source dk_info
 call dk_source dk_realpath
 call dk_source dk_validate
@@ -19,13 +18,13 @@ call dk_source dk_validate
 	
 	set "destination=%~2"
 	if defined destination goto:destination_set
-	call dk_basename %~1 DL_FILE
+	call dk_basename "%~1" DL_FILE
 	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	set "destination=%DKDOWNLOAD_DIR%\%DL_FILE%"
 	:destination_set
 	
-	call dk_realpath %destination% fullPath
-	if %destination% neq %fullPath% call dk_error "destination is invalid: full path required"
+	call dk_realpath "%destination%" realpath
+	if "%destination%" neq "%realpath%" call dk_error "destination is invalid: full path required"
 	
     if exist "%destination%" call dk_info "%destination% already exist" && goto:eof
 

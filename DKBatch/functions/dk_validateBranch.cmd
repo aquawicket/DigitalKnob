@@ -12,11 +12,11 @@ call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
 	
-	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+	if not defined DIGITALKNOB_DIR call dk_setDIGITALKNOB_DIR
     for %%I in (.) do set "FOLDER=%%~nxI"			               &:: get the current folder
 
 	set "DKBRANCH=Development"						               &:: set the default branch
-	call dk_validate GIT_EXE "call dk_installGit"
+	if not defined GIT_EXE call dk_installGit
 	if exist "%CD%\.git" (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
 			set "DKBRANCH=%FOLDER%"
