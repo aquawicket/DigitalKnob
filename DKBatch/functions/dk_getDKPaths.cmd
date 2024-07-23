@@ -12,17 +12,17 @@ call dk_source dk_set
     call dk_debugFunc
     if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	set "DKHOME=%HOMEDRIVE%%HOMEPATH%"
-	set "DKDESKTOP=%DKHOME%\Desktop"
+	call dk_getDKHOME
+	if not defined DKDESKTOP set "DKDESKTOP=%DKHOME%\Desktop"
     
-	set "DIGITALKNOB_DIR=%DKHOME%\digitalknob"
+	if not defined DIGITALKNOB_DIR set "DIGITALKNOB_DIR=%DKHOME%\digitalknob"
     if not exist "%DIGITALKNOB_DIR%" call dk_makeDirectory "%DIGITALKNOB_DIR%"
 	if not exist "%DKDESKTOP%\digitalknob.lnk" call dk_createShortcut "%DKDESKTOP%\digitalknob.lnk" "%DIGITALKNOB_DIR%"
 	
-    set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
+    if not defined DKTOOLS_DIR set "DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools"
     if not exist "%DKTOOLS_DIR%" call dk_makeDirectory "%DKTOOLS_DIR%"
         
-    set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
+    if not defined DKDOWNLOAD_DIR set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
     if not exist "%DKDOWNLOAD_DIR%" call dk_makeDirectory "%DKDOWNLOAD_DIR%"
 goto:eof
 
