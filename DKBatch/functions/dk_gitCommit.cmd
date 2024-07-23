@@ -1,6 +1,16 @@
 @echo off
 call %DKBATCH_FUNCTIONS_DIR_%DK.cmd
 
+call dk_source dk_debugFunc
+call dk_source dk_error
+call dk_source dk_gitDiffSummary
+call dk_source dk_validate
+call dk_source dk_validateBranch
+call dk_source dk_installGit
+call dk_source dk_commandToVariable
+call dk_source dk_commandToVariable
+call dk_source dk_echo
+call dk_source dk_confirm
 ::################################################################################
 ::# dk_gitCommit()
 ::#
