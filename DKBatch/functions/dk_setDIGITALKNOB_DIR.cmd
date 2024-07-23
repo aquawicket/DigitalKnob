@@ -19,7 +19,8 @@ call dk_source dk_createShortcut
     if defined DIGITALKNOB_DIR call dk_warning "DIGITALKNOB_DIR already set to %DIGITALKNOB_DIR%" && goto:eof
 	
     if not defined DKHOME_DIR call dk_setDKHOME_DIR
-	if not defined DIGITALKNOB set "DIGITALKNOB=D i g i t a l K n o b"
+	::if not defined DIGITALKNOB set "DIGITALKNOB=D i g i t a l K n o b"
+	if not defined DIGITALKNOB set "DIGITALKNOB=digitalknob"
     set "DIGITALKNOB_DIR=%DKHOME_DIR%\%DIGITALKNOB%"
 
     :: create directory if it does not exist
