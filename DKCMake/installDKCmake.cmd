@@ -1,13 +1,12 @@
 @echo off
+::###### DKINIT ######
+set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
+set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 
+if not "%~1" == "" (goto:runDKCMake)
 :installDKCMake
-	if not "%~1" == "" (goto:runDKCMake)
 	echo Associating .cmake files with DKCmake . . .
-	
-	::###### DKINIT ######
-	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
-	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	
 	call dk_load dk_validate
 	if not defined DKIMPORTS_DIR call "dk_validateBranch"

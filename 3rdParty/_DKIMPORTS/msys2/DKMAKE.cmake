@@ -2,25 +2,25 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-dk_validate(HOST "dk_getHostTriple()")
+#if(NOT WIN_HOST)
+#	dk_undepend(msys2)
+#	dk_return()
+#endif()
 
-if(NOT WIN_HOST)
-	dk_undepend(msys2)
-	dk_return()
-endif()
+dk_validate(HOST "dk_getHostTriple()")
+dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")
 
 
 ### INSTALL ###
-dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
+dk_set(MSYS2_DL "https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe")
 
 if(NOT MSYS2_DL)
 	dk_error("MSYS2_DL is invalid")
 endif()
 
-dk_getBasename(${MSYS2_DL} MSYS2_DL_FILE)
-dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
+dk_getBasename("${MSYS2_DL}" MSYS2_DL_FILE)
+dk_removeExtension("${MSYS2_DL_FILE}" MSYS2_FOLDER)
 
-dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")
 dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 
 dk_printVar(MSYS2_DL_FILE)
@@ -42,11 +42,11 @@ if(NOT EXISTS "${MSYS2}/msys2.exe")
 	dk_download("${MSYS2_DL}" ${DKDOWNLOAD_DIR})
 	
 	dk_getNativePath("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" MSYS2_DL_PATH)
-	string(REPLACE "\\" "//" MSYS2_DL_PATH "${MSYS2_DL_PATH}")
+	#string(REPLACE "\\" "//" MSYS2_DL_PATH "${MSYS2_DL_PATH}")
 	
 	dk_getNativePath("${MSYS2}" MSYS2)
 	set(CURRENT_DIR "${MSYS2}")
-	string(REPLACE "\\" "//" MSYS2 "${MSYS2}")
+	#string(REPLACE "\\" "//" MSYS2 "${MSYS2}")
 
 	list(APPEND args install)
 	list(APPEND args --confirm-command)
