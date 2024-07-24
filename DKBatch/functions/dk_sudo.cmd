@@ -21,5 +21,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_sudo cmd
+	call dk_sudo services.msc
 goto:eof
