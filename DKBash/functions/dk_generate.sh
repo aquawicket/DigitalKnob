@@ -96,7 +96,7 @@ dk_generate() {
 	fi
 
 	if [ "${TARGET_OS}" = "android_arm64" ]; then
-		dk_arrayUnshift CMAKE_ARGS "-G" "\"Unix Makefiles\""
+		dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles"
 	fi
 	
 	if [ "${TARGET_OS}" = "emscripten" ]; then
@@ -198,6 +198,7 @@ dk_generate() {
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	#dk_getNativePath ${CMAKE_EXE} NATIVE_CMAKE_EXE
+	dk_printVar CMAKE_ARGS
 	dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error "CMake Generation Failed"
 	dk_echo
 }

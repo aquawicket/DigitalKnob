@@ -12,11 +12,12 @@ dk_arrayUnshift() {
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	#dk_validateArgs array element optional:rtn_var
 	
-	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
-	array=("${@:2}" ${array[@]});
-	dk_printVar array
+	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
+	array=("${@:2}" "${array[@]}");
+	#dk_printVar array
 
-	eval ${1}="(${array[@]})"
+	eval ${1}='("${array[@]}")'
+	#dk_printVar ${1}
 	#dk_return ${array}; return		# command substitution return
 }
 
@@ -26,22 +27,26 @@ dk_arrayUnshift() {
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
-	dk_arrayUnshift myArray a
-	dk_printVar myArray
+#	dk_arrayUnshift myArray a
+#	dk_printVar myArray
 	
-	dk_arrayUnshift myArray b
-	dk_printVar myArray
+#	dk_arrayUnshift myArray b
+#	dk_printVar myArray
 	
-	dk_arrayUnshift myArray c
-	dk_printVar myArray
+#	dk_arrayUnshift myArray c
+#	dk_printVar myArray
 	
-	dk_arrayUnshift myArray d
-	dk_printVar myArray
+#	dk_arrayUnshift myArray d
+#	dk_printVar myArray
 
-
-	dk_arrayUnshift myArrayB 1
-	dk_arrayUnshift myArrayB 2
-	dk_arrayUnshift myArrayB 3
-	dk_arrayUnshift myArrayB 4
-	dk_printVar myArrayB
+#	dk_arrayUnshift myArrayB 1
+#	dk_arrayUnshift myArrayB 2
+#	dk_arrayUnshift myArrayB 3
+#	dk_arrayUnshift myArrayB 4
+#	dk_printVar myArrayB
+	
+	dk_arrayUnshift CMAKE_ARGS "-DMSYSTEM=CLANG64"
+	dk_arrayUnshift CMAKE_ARGS "MinGW Makefiles"
+	dk_arrayUnshift CMAKE_ARGS "-G"
+	dk_printVar CMAKE_ARGS
 }
