@@ -14,10 +14,8 @@ dk_arrayUnshift() {
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	array=("${@:2}" "${array[@]}");
-	#dk_printVar array
 
 	eval ${1}='("${array[@]}")'
-	#dk_printVar ${1}
 	#dk_return ${array}; return		# command substitution return
 }
 
@@ -27,23 +25,23 @@ dk_arrayUnshift() {
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
-#	dk_arrayUnshift myArray a
-#	dk_printVar myArray
-	
-#	dk_arrayUnshift myArray b
-#	dk_printVar myArray
-	
-#	dk_arrayUnshift myArray c
-#	dk_printVar myArray
-	
-#	dk_arrayUnshift myArray d
-#	dk_printVar myArray
+	dk_arrayUnshift myArrayA a
+	dk_printVar myArrayA
 
-#	dk_arrayUnshift myArrayB 1
-#	dk_arrayUnshift myArrayB 2
-#	dk_arrayUnshift myArrayB 3
-#	dk_arrayUnshift myArrayB 4
-#	dk_printVar myArrayB
+	dk_arrayUnshift myArrayA b
+	dk_printVar myArrayA
+
+	dk_arrayUnshift myArrayA c
+	dk_printVar myArrayA
+
+	dk_arrayUnshift myArrayA d
+	dk_printVar myArrayA
+
+	dk_arrayUnshift myArrayB 1
+	dk_arrayUnshift myArrayB 2
+	dk_arrayUnshift myArrayB 3
+	dk_arrayUnshift myArrayB 4
+	dk_printVar myArrayB
 	
 	dk_arrayUnshift CMAKE_ARGS "-DMSYSTEM=CLANG64"
 	dk_arrayUnshift CMAKE_ARGS "MinGW Makefiles"

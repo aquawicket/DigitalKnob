@@ -18,12 +18,11 @@ dk_arrayPush() {
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
 	#dk_validateArgs array element optional:rtn_var
 	
-	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
 	
-	#dk_printVar array
-	eval ${1}="(${array[@]})"
-	dk_return ${array}; return		# command substitution return
+	eval ${1}='("${array[@]}")'
+	#dk_return ${array}; return		# command substitution return
 }
 
 
@@ -56,6 +55,5 @@ DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST
 	dk_arrayPush CMAKE_ARGS -G "MSYS Makefiles"
 	dk_arrayPush CMAKE_ARGS -DDEBUG=ON
 	dk_arrayPush CMAKE_ARGS -DREBUILDALL=ON
-	dk_echo "CMAKE_ARGS = ${CMAKE_ARGS[*]}"
 	dk_printVar CMAKE_ARGS
 }
