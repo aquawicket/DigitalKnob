@@ -44,7 +44,7 @@ dk_stacktrace() {
 #	    stack+=("${indent} └ ${src}:${line} (${func})")
 #	    indent="${indent}    "
 #	done
-	(IFS=$'\n'; echo "${stack[*]}")
+	(IFS=$'\n'; echo "${stack[*]-}")
 
 
 #	### VERSION 3 ###

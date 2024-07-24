@@ -2,6 +2,8 @@
 ::call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 
 :uninstall_launcher
+	echo Uninstalling DKCMake . . .
+	
 	::###### DKINIT ######
 	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"

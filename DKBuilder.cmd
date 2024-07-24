@@ -1,6 +1,6 @@
 @echo off
 
-set "ENABLE_dk_debugFunc=1"	
+::set "ENABLE_dk_debugFunc=1"	
 ::################## DKBuilder ####################
 ::###### DK_INIT ######
 set "DKHTTP_DKBATCH_FUNCTIONS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"

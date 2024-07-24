@@ -3,7 +3,7 @@
 
 if not "%~1" == "" (goto:runDKCMake)
 :installDKCMake
-	echo Associating .cmake files with DKCmake . . .
+	echo Installing DKCmake . . .
 	
 	::###### DKINIT ######
 	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"

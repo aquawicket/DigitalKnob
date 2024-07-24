@@ -2,6 +2,10 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
+::### DEPEND ###
+::dk_depend(vc_redist) #for VCRUNTIME140.dll
+
+
 ::####################################################################
 ::# dk_installPhp
 ::#
@@ -10,8 +14,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
-	
-	::if "%HOST_OS%_%HOST_ARCH%"=="win_x86" call dk_import https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip
 	
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
