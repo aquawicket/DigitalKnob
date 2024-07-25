@@ -71,15 +71,18 @@ DK(){
 	dk_load dk_color
 	dk_call dk_logo
 	dk_load "${DKSCRIPT_PATH}"
+
+dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
 	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
 			dk_echo
 			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-			dk_echo
+			#dk_echo "${bg_RGB}20;20;20m"
 			dk_source "${DKSCRIPT_PATH}"
 			dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
+			#dk_echo "${clr}"
 			DKTEST
 			dk_echo
 			dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
@@ -260,8 +263,8 @@ dksetOptions(){
 	$(shopt -s extdebug) && shopt -s extdebug
 	#shopt -s expand_aliases
 	
-	dk_echo "SHELLOPTS = ${SHELLOPTS}"
-	dk_echo "BASHOPTS = ${BASHOPTS-}"
+	# dk_echo "SHELLOPTS = ${SHELLOPTS}"
+	# dk_echo "BASHOPTS = ${BASHOPTS-}"
 }
 
 
