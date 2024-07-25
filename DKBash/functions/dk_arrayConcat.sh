@@ -15,12 +15,16 @@ dk_arrayConcat() {
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array array
 	
-	eval arrayA=('${'$1'[@]}')	 #typeset -n arrayA="${1}"
-	eval arrayB=('${'$2'[@]}')	 #typeset -n arrayB="${2}"
-	new_array=(${arrayA[@]} ${arrayB[@]});
-	dk_printVar new_array
-	[ ${#} -gt 2 ] && eval ${3}='(${new_array[@]})' # return using parameter rtn_var
-	dk_return "${new_array[@]}"; return				# return through command substitution    # FIXME
+	eval local arrayA='("${'$1'[@]}")'		#typeset -n arrayA="${1}"
+	eval local arrayB='("${'$2'[@]}")'		#typeset -n arrayB="${2}"
+	new_array=("${arrayA[@]}" "${arrayB[@]}");
+#	eval local new_array=(("${'$1'[@]}") ("${'$2'[@]}"));
+
+	
+	### return value ###
+	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
+	
+	dk_return new_array && return
 }
 
 
@@ -29,26 +33,27 @@ dk_arrayConcat() {
 DKTEST() {
 	dk_debugFunc
 	
-	myArray1[0]="a"
-	myArray1[1]="b"
-	myArray1[2]="c"
+	myArray1[0]="a b c"
+	myArray1[1]="d e f"
+	myArray1[2]="g h i"
 	
-	myArray2[0]="1"
-	myArray2[1]="2"
-	myArray2[2]="3"
+	myArray2[0]="1 2 3"
+	myArray2[1]="4 5 6"
+	myArray2[2]="7 8 9"
 	
-	myNewArrayA="($(dk_arrayConcat myArray1 myArray2))"
+	dk_arrayConcat myArray1 myArray2 myNewArrayA
 	dk_printVar myNewArrayA
 	
 	
-	myArray3[0]="x"
-	myArray3[1]="y"
-	myArray3[2]="z"
 	
-	myArray4[0]="7"
-	myArray4[1]="8"
-	myArray4[2]="9"
+	myArray3[0]="a b c"
+	myArray3[1]="d e f"
+	myArray3[2]="g h i"
 	
-	dk_arrayConcat myArray3 myArray4 myNewArrayB
+	myArray4[0]="1 2 3"
+	myArray4[1]="4 5 6"
+	myArray4[2]="7 8 9"
+	
+	IFS=$'\n' myNewArrayB=($(dk_arrayConcat myArray3 myArray4))
 	dk_printVar myNewArrayB
 }

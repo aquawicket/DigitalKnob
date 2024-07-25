@@ -21,8 +21,16 @@ dk_arrayPush() {
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
 	
+	# FIXME: the new array does not get assigned in command substitution.
+	# i.e.  new_length=${dk_arrayPush myArray "new item"} 
+
+	### return value ###
 	eval ${1}='("${array[@]}")'
-	#dk_return ${array}; return		# command substitution return
+
+	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
+	
+	# FIXME: the new array does not get assigned in command substitution.
+	dk_return ${#array[@]} && return					# command substitution return
 }
 
 
@@ -31,29 +39,19 @@ dk_arrayPush() {
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
-	dk_arrayPush myArrayA a
+	dk_arrayPush myArrayA "a b c"
 	dk_printVar myArrayA
 	
-	dk_arrayPush myArrayA b
+	dk_arrayPush myArrayA "1 2 3" "4 5 6"
 	dk_printVar myArrayA
 	
-	dk_arrayPush myArrayA c
+	# FIXME: the new array does not get assigned in command substitution.
+	new_length=$(dk_arrayPush 'myArrayA' "d e f")
 	dk_printVar myArrayA
+	dk_printVar new_length
 	
-	dk_arrayPush myArrayA d
+	# FIXME: the new array does not get assigned in command substitution.
+	new_length=$(dk_arrayPush myArrayA "7 8 9" "10 11 12")
 	dk_printVar myArrayA
-	
-	
-	dk_arrayPush myArrayB 1
-	dk_arrayPush myArrayB 2
-	dk_arrayPush myArrayB 3
-	dk_arrayPush myArrayB 4
-	dk_printVar myArrayB
-	
-	
-	dk_arrayPush CMAKE_ARGS cmake
-	dk_arrayPush CMAKE_ARGS -G "MSYS Makefiles"
-	dk_arrayPush CMAKE_ARGS -DDEBUG=ON
-	dk_arrayPush CMAKE_ARGS -DREBUILDALL=ON
-	dk_printVar CMAKE_ARGS
+	dk_printVar new_length
 }
