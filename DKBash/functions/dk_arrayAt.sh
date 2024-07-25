@@ -5,8 +5,15 @@
 # dk_arrayAt(array, index)
 # dk_arrayAt(array, index, rtn_var)
 #
-#	The dk_arrayAt method takes an array instance with an integer value and returns the item at that index, 
-#	allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
+#	 Takes an array instance with an integer value and returns the item at that index, 
+#	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
+#
+#    PARAMETERS
+#    index
+#    Zero-based index of the array element to be returned, converted to an integer. Negative index counts back from the end of the array — if index < 0, index + array.length is accessed.
+#
+#    RETURN VALUE
+#    The element in the array matching the given index. Always returns undefined if index < -array.length or index >= array.length without attempting to access the corresponding property.
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #

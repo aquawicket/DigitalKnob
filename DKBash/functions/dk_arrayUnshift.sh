@@ -5,9 +5,13 @@
 # dk_arrayUnshift(array, element)
 # dk_arrayUnshift(array, element, rtn_var)
 #
-#    adds the specified elements to the beginning of an array and returns the new length of the array.
+#    Adds the specified elements to the beginning of an array and returns the new length of the array.
 #
-#    Return value
+#    PARAMETERS
+#    element1, …, elementN
+#    The elements to add to the front of the arr.
+#
+#    RETURN VALUE
 #    The new length property of the object upon which the method was called.
 #
 #    https://www.w3schools.com/js/js_array_methods.asp#mark_unshift

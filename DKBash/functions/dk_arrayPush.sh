@@ -4,14 +4,18 @@
 ################################################################################
 # dk_arrayPush(array, element1, element2, /* …, */ elementN)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_push
-#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+#    The push() method of Array instances adds the specified elements to the end of an array and returns the new length of the array.
 #
+#    PARAMETERS
 #    element1, …, elementN
 #        The element(s) to add to the end of the array.
 #
-#   Return value
+#    RETURN VALUE
 #    The new length property of the object upon which the method was called.
+#
+#    REFERENCE
+#    https://www.w3schools.com/js/js_array_methods.asp#mark_push
+#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
 dk_arrayPush() {
 	dk_debugFunc
@@ -39,19 +43,30 @@ dk_arrayPush() {
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
-	dk_arrayPush myArrayA "a b c"
+	dk_arrayPush myArrayA "a b c" # new_lengthA
 	dk_printVar myArrayA
+	# dk_printVar new_lengthA
 	
-	dk_arrayPush myArrayA "1 2 3" "4 5 6"
+	dk_arrayPush myArrayA "1 2 3" "d e f" # new_lengthA
 	dk_printVar myArrayA
+	# dk_printVar new_lengthA
+	
+	dk_arrayPush myArrayA "4 5 6" "h i j" # new_lengthA
+	dk_printVar myArrayA
+	# dk_printVar new_lengthA
+	
+	
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	new_length=$(dk_arrayPush 'myArrayA' "d e f")
-	dk_printVar myArrayA
-	dk_printVar new_length
+	new_lengthB=$(dk_arrayPush 'myArrayB' "h i j")
+	dk_printVar myArrayB
+	dk_printVar new_lengthB
 	
-	# FIXME: the new array does not get assigned in command substitution.
-	new_length=$(dk_arrayPush myArrayA "7 8 9" "10 11 12")
-	dk_printVar myArrayA
-	dk_printVar new_length
+	new_lengthB=$(dk_arrayPush 'myArrayB' "4 5 6" "d e f")
+	dk_printVar myArrayB
+	dk_printVar new_lengthB
+	
+	new_lengthB=$(dk_arrayPush 'myArrayB' "1 2 3" "a b c")
+	dk_printVar myArrayB
+	dk_printVar new_lengthB
 }

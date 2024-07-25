@@ -5,8 +5,17 @@
 # dk_arrayConcat(array, {value1, value2, /* …, */ valueN})
 # dk_arrayConcat(array, {value1, value2, /* …, */ valueN}, rtn_var)
 #
-#	The dk_arrayConcat() method is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+#	 Merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
 #
+#    PARAMETERS
+#    value1, …, valueN Optional
+#        Arrays and/or values to concatenate into a new array. 
+#        If all valueN parameters are omitted, concat returns a shallow copy of the existing array on which it is called. See the description below for more details.
+#
+#    RETURN VALUE
+#    A new Array instance.
+#
+#    REFERENCE
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
 dk_arrayConcat() {
@@ -18,12 +27,10 @@ dk_arrayConcat() {
 	eval local arrayA='("${'$1'[@]}")'		#typeset -n arrayA="${1}"
 	eval local arrayB='("${'$2'[@]}")'		#typeset -n arrayB="${2}"
 	new_array=("${arrayA[@]}" "${arrayB[@]}");
-#	eval local new_array=(("${'$1'[@]}") ("${'$2'[@]}"));
+	# eval local new_array=(("${'$1'[@]}") ("${'$2'[@]}"));
 
-	
 	### return value ###
 	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
-	
 	dk_return new_array && return
 }
 
