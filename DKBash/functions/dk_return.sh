@@ -12,11 +12,11 @@ ORIGINAL_IFS=${IFS}
 alias dk_return='ret_val "${ret_val-}"'
 ret_val() {
 	if [ "${1-}" = "" ]; then
-		[ -z ${2-} ] && return $(false)
-		if [ -v ${2-} ]; then
-			echo "is variable"
+		[ -z "${2-}" ] && return $(false)
+		[ -v "${2-}" ] && if [ ${2-} -gt 9 ]; then  # [ ${2-} -gt 9 ] = don't test names that match 0-9, positional parameters
+			#echo "is variable"
 			if [[ "$(declare -p ${2-})" =~ "declare -a" ]]; then
-				echo "is array"
+				#echo "is array"
 				eval local array='("${'${2-}'[@]}")'
 				printf "%s\n" "${array[@]}"
 				export IFS=${ORIGINAL_IFS}

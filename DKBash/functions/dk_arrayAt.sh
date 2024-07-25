@@ -31,19 +31,19 @@ dk_arrayAt() {
 DKTEST() {
 	dk_debugFunc
 	
-	myArrayB[0]="a b c"
-	myArrayB[1]="1 2 3"
-	myArrayB[2]="d e f"
-	myArrayB[3]="4 5 6"
-	myArrayB[4]="h i j"
-	dk_arrayAt myArrayB 2 arrayAt2	# returned value using return variable
-	dk_printVar arrayAt2
-	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"
 	myArrayA[2]="d e f"
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
-	arrayAt3=$(dk_arrayAt myArrayA 3)	# returned value using command substitution
-	dk_printVar arrayAt3
+	dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
+	dk_printVar arrayAtA
+	
+	myArrayB[0]="h i j"
+	myArrayB[1]="4 5 6"
+	myArrayB[2]="d e f"
+	myArrayB[3]="1 2 3"
+	myArrayB[4]="a b c"
+	arrayAt3=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
+	dk_printVar arrayAtB
 }

@@ -16,11 +16,8 @@ dk_arrayLength() {
 	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
 	local arrayLength=${#array[@]}
 	
-	#dk_assert arrayLength
-	#dk_printVar arrayLength
-	
-	[ ${#} -gt 1 ] && eval "${2}=${arrayLength}"
-	dk_return ${arrayLength}; return
+	[ ${#} -gt 1 ] && eval ${2}=${arrayLength} && return
+	dk_return ${arrayLength} && return
 }
 
 
@@ -31,15 +28,20 @@ dk_arrayLength() {
 DKTEST() {
 	dk_debugFunc
 	
-	myArrayA=("element A" "element B" "element C")
-	myArrayLengthA=$(dk_arrayLength myArrayA)
-	#dk_arrayLength myArrayA myArrayLengthA
+	myArrayA[0]="a b c"
+	myArrayA[1]="1 2 3"
+	myArrayA[2]="d e f"
+	myArrayA[3]="4 5 6"
+	myArrayA[4]="h i j"
+	dk_arrayLength myArrayA myArrayLengthA
 	dk_printVar myArrayLengthA
 	
 	
-	
-	myArrayB=("element 1" "element 2" "element 3")
-	#myArrayLengthB=$(dk_arrayLength myArrayB)
-	dk_arrayLength myArrayB myArrayLengthB
+	myArrayB[0]="h i j"
+	myArrayB[1]="4 5 6"
+	myArrayB[2]="d e f"
+	myArrayB[3]="1 2 3"
+	myArrayB[4]="a b c"
+	myArrayLengthB=$(dk_arrayLength myArrayB)
 	dk_printVar myArrayLengthB
 }

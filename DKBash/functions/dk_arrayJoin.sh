@@ -13,17 +13,17 @@ dk_arrayJoin() {
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array string optional:rtn_var
 
-	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
+	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	for ((i=0; i < ${#array[@]}; i++ )); do
-		if [ -z ${dk_arrayJoin-} ]; then
+		if [ -z "${dk_arrayJoin-}" ]; then
 			local dk_arrayJoin="${array[${i}]}"
 		else
 		    local dk_arrayJoin="${dk_arrayJoin}${2}${array[${i}]}"
 		fi
 	done
 	
-	[ ${#} -gt 2 ] && eval "${3}=${dk_arrayJoin}"
-	dk_return ${dk_arrayJoin}; return	
+	[ ${#} -gt 2 ] && eval ${3}='"${dk_arrayJoin}"' && return
+	dk_return "${dk_arrayJoin}" && return	
 }
 
 
@@ -33,25 +33,22 @@ dk_arrayJoin() {
 DKTEST() {
 	dk_debugFunc
 	
-	myArrayA[0]="a"
-	myArrayA[1]="b"
-	myArrayA[2]="c"
-	myArrayA[3]="d"
-	myArrayA[4]="e"
+	myArrayA[0]="a b c"
+	myArrayA[1]="1 2 3"
+	myArrayA[2]="d e f"
+	myArrayA[3]="4 5 6"
+	myArrayA[4]="h i j"
 	
-	#dk_arrayJoin myArrayA "," myStringA
-	myStringA=$(dk_arrayJoin myArrayA ",")
+	dk_arrayJoin myArrayA "," myStringA
 	dk_printVar myStringA
 	
 	
+	myArrayB[0]="h i j"
+	myArrayB[1]="4 5 6"
+	myArrayB[2]="d e f"
+	myArrayB[3]="1 2 3"
+	myArrayB[4]="a b c"
 	
-	myArrayB[0]="1"
-	myArrayB[1]="2"
-	myArrayB[2]="3"
-	myArrayB[3]="4"
-	myArrayB[4]="5"
-	
-	dk_arrayJoin myArrayB "," myStringB
-	#myStringB=$(dk_arrayJoin myArrayB ",")
+	myStringB=$(dk_arrayJoin myArrayB ",")
 	dk_printVar myStringB
 }
