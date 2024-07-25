@@ -4,7 +4,16 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::################################################################################
 ::# dk_arrayFlat(array depth)
 ::#
-::#    https://www.w3schools.com/js/js_array_methods.asp#mark_flat
+::#    The flat() method of Array instances creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+::#
+::#    PARAMETERS
+::#    depth :optional
+::#        The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
+::#
+::#    RETURN VALUE
+::#    A new array with the sub-array elements concatenated into it.
+::#
+::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 ::#
 :dk_arrayFlat

@@ -2,9 +2,28 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_arrayIndexOf(array, searchElement, rtn_var)
-::# dk_arrayIndexOf(array, searchElement, fromIndex, rtn_var)
+::# dk_arrayIndexOf(array, searchElement)
+::# dk_arrayIndexOf(array, searchElement, rtn_val)
+::# dk_arrayIndexOf(array, searchElement, fromIndex)
+::# dk_arrayIndexOf(array, searchElement, fromIndex, rtn_val)
 ::#
+::#    The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is not present.
+::#
+::#    PARAMETERS
+::#    searchElement
+::#        Element to locate in the array.
+::#
+::#    fromIndex :optional
+::#        Zero-based index at which to start searching, converted to an integer.
+::#            Negative index counts back from the end of the array — if -array.length <= fromIndex < 0, fromIndex + array.length is used. 
+::#            Note, the array is still searched from front to back in this case.
+::#            If fromIndex < -array.length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
+::#            If fromIndex >= array.length, the array is not searched and -1 is returned.
+::#
+::#    RETURN VALUE
+::#    The first index of searchElement in the array; -1 if not found.
+::#
+::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
 :dk_arrayIndexOf
@@ -39,27 +58,27 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "myArray[0]=a"
-	set "myArray[1]=b"
-	set "myArray[2]=c"
-	set "myArray[3]=d"
-	set "myArray[4]=e"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
 	
-	call dk_arrayIndexOf myArray "a" indexA
-	echo indexA = %indexA%
+	call dk_arrayIndexOf myArrayA "a b c" indexABC
+	call dk_printVar indexABC
 	
-	call dk_arrayIndexOf myArray "b" indexB
-	echo indexB = %indexB%
+	call dk_arrayIndexOf myArrayA "1 2 3" index123
+	call dk_printVar index123
 	
-	call dk_arrayIndexOf myArray "c" indexC
-	echo indexC = %indexC%
+	call dk_arrayIndexOf myArrayA "d e f" indexDEF
+	call dk_printVar indexDEF
 	
-	call dk_arrayIndexOf myArray "d" indexD
-	echo indexD = %indexD%
+	call dk_arrayIndexOf myArrayA "4 5 6" index456
+	call dk_printVar index456
 	
-	call dk_arrayIndexOf myArray "e" indexE
-	echo indexE = %indexE%
+	call dk_arrayIndexOf myArrayA "h i j" indexGHI
+	call dk_printVar indexGHI
 	
 	call dk_arrayIndexOf myArray "nonExistant" indexN
-	echo indexN = %indexN%
+	call dk_printVar indexN
 goto:eof

@@ -2,9 +2,19 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_arrayAt(array, index, element)
+::# dk_arrayAt(array, index)
+::# dk_arrayAt(array, index, rtn_var)
 ::#
-::#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
+::#	 Takes an array instance with an integer value and returns the item at that index, 
+::#	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
+::#
+::#    PARAMETERS
+::#    index
+::#    Zero-based index of the array element to be returned, converted to an integer. Negative index counts back from the end of the array — if index < 0, index + array.length is accessed.
+::#
+::#    RETURN VALUE
+::#    The element in the array matching the given index. Always returns undefined if index < -array.length or index >= array.length without attempting to access the corresponding property.
+::#
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_arrayAt
@@ -22,12 +32,15 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "MyArray[0]=a"
-	set "MyArray[1]=b"
-	set "MyArray[2]=c"
-	set "MyArray[3]=d"
-	set "MyArray[4]=e"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
 	
-	call dk_arrayAt MyArray 3 element
-	call dk_echo "element = %element%"
+	call dk_arrayAt MyArrayA 2 arrayAtA
+	call dk_printVar arrayAtA
+	
+	call dk_arrayAt MyArrayA 3 arrayAtA
+	call dk_printVar arrayAtA
 goto:eof
