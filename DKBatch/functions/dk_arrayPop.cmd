@@ -3,8 +3,17 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
 ::# dk_arrayPop(array)
+::# dk_arrayPop(array, rtn_var)
 ::#
-::#    https://www.w3schools.com/js/js_array_methods.asp#mark_pop
+::#    The pop() method of Array instances removes the last element from an array and returns that element. This method changes the length of the array.
+::#
+::#    PARAMETERS
+::#    array
+::#
+::#	 RETURN VALUE
+::#    The removed element from the array; undefined if the array is empty.
+::#
+::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_arrayPop

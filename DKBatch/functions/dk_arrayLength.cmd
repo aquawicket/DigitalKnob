@@ -2,9 +2,13 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_arrayLength(array, rtn_var)
+::# dk_arrayLength(array)
+::# dk_arrayLength(array rtn_var)
 ::#
-::#    https://www.w3schools.com/js/js_array_methods.asp#mark_length
+::#    The length data property of an Array instance represents the number of elements in that array. 
+::#    The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array.
+::#
+::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
 :dk_arrayLength

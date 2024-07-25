@@ -10,7 +10,6 @@
 #
 #    REFERENCE
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
 dk_arrayLength() {
 	dk_debugFunc
