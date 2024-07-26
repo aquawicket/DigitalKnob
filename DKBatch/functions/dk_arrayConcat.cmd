@@ -20,9 +20,35 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayConcat
 	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	::#dk_validateArgs array array
 	
-	call dk_todo %__FUNCTION__%
+	set "_arry1_=%~1"
+	set "_arry2_=%~2"
+	set "_arry3_=%~3"
+	set /a countA=0
+	set /a countB=0
+	:dk_arrayConcat_loop1
+	if defined %_arry1_%[%countA%] (
+		call set "%_arry3_%[%countB%]=%%%_arry1_%[%countA%]%%"  &:: FIXME: remove the need for call here
+		set /a countA+=1
+		set /a countB+=1
+		goto:dk_arrayConcat_loop1
+	)
+	set /a countA=0
+	:dk_arrayConcat_loop2
+	if defined %_arry2_%[%countA%] (
+		call set "%_arry3_%[%countB%]=%%%_arry2_%[%countA%]%%"  &:: FIXME: remove the need for call here
+		set /a countA+=1
+		set /a countB+=1
+		goto:dk_arrayConcat_loop2
+	)
+
+	
+	::### return value ###
+	if "!!" neq "" endlocal & call dk_set %3 "%_arry3_%"
+	if "!!" equ "" endlocal & set "%3=!_arry3_!"
 goto:eof
 
 
@@ -32,5 +58,14 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_arrayConcat array value1
+	set "myArray1[0]=a b c"
+	set "myArray1[1]=d e f"
+	set "myArray1[2]=g h i"
+	
+	set "myArray2[0]=1 2 3"
+	set "myArray2[1]=4 5 6"
+	set "myArray2[2]=7 8 9"
+	
+	call dk_arrayConcat myArray1 myArray2 myNewArrayA
+	call dk_printVar myNewArrayA
 goto:eof

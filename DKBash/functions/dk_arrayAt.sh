@@ -43,14 +43,20 @@ DKTEST() {
 	myArrayA[2]="d e f"
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
+	dk_printVar myArrayA
 	dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
 	dk_printVar arrayAtA
+	[ "${arrayAtA}" = "d e f" ] || dk_error "dk_arrayAt() failed"
+	[ "${arrayAtA}" = "d e f" ] && dk_info "dk_arrayAt() suceeded" 
 	
 	myArrayB[0]="h i j"
 	myArrayB[1]="4 5 6"
 	myArrayB[2]="d e f"
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
+	dk_printVar myArrayB
 	arrayAt3=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
 	dk_printVar arrayAtB
+	[ "${arrayAtB}" = "1 2 3" ] || dk_error "dk_arrayAt() failed"
+	[ "${arrayAtB}" = "1 2 3" ] && dk_info "dk_arrayAt() suceeded"
 }
