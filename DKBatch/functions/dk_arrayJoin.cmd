@@ -19,7 +19,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayJoin
 	call dk_debugFunc
-	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	
 	setlocal
 	::set "_arry_=%~1"
@@ -47,12 +48,12 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "myArray[0]=a"
-	set "myArray[1]=b"
-	set "myArray[2]=c"
-	set "myArray[3]=d"
-	set "myArray[4]=e"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
 	
-	call dk_arrayJoin myArray "," myString
-	call dk_printVar myString
+	call dk_arrayJoin myArrayA "," myStringA
+	call dk_printVar myStringA
 goto:eof

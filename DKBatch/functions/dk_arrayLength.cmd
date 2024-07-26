@@ -32,12 +32,12 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "myArray[0]=a"
-	set "myArray[1]=b"
-	set "myArray[2]=c"
-	set "myArray[3]=d"
-	set "myArray[4]=e"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
 	
-	call dk_arrayLength myArray length
-	echo length = %length%
+	call dk_arrayLength myArrayA myArrayLengthA
+	call dk_printVar myArrayLengthA
 goto:eof

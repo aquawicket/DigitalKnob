@@ -10,7 +10,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    PARAMETERS
 ::#    array
 ::#
-::#	 RETURN VALUE
+::#	   RETURN VALUE
 ::#    The removed element from the array; undefined if the array is empty.
 ::#
 ::#    REFERENCE
@@ -18,13 +18,16 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayPop
 	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	::dk_validateArgs array
 	
 	setlocal
 	call dk_arrayLength %~1 _length_
 	set /a _length_-=1
-	call dk_unset %~1[%_length_%]
-	endlocal
+	set "removedElement=!%~1[%_length_%]!"
+	call dk_printVar removedElement
+	endlocal & set "%~2=%removedElement%" & call dk_unset %~1[%_length_%]
 goto:eof
 
 
@@ -34,35 +37,44 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "myArray[0]=a"
-	set "myArray[1]=b"
-	set "myArray[2]=c"
-	set "myArray[3]=d"
-	set "myArray[4]=e"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
 	
-	call dk_printVar myArray
+	call dk_printVar myArrayA 
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+	call dk_arrayPop myArrayA removedA
+	call dk_printVar myArrayA
+	call dk_printVar removedA
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+	call dk_arrayPop myArrayA removedA
+	call dk_printVar myArrayA
+	call dk_printVar removedA
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+	call dk_arrayPop myArrayA removedA
+	call dk_printVar myArrayA
+	call dk_printVar removedA
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+	call dk_arrayPop myArrayA removedA
+	call dk_printVar myArrayA
+	call dk_printVar removedA
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+	call dk_arrayPop myArrayA removedA
+	call dk_printVar myArrayA
+	call dk_printVar removedA
+	call dk_echo
 	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
-	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
-	
-	call dk_arrayPop myArray
-	call dk_printVar myArray
+::  FIXME:  out of array bounds past here
+::	call dk_arrayPop myArrayA removedA
+::	call dk_printVar myArrayA
+::	call dk_printVar removedA
+	call dk_echo
+	call dk_echo
 goto:eof
