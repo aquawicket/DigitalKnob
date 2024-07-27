@@ -18,22 +18,42 @@ call dk_source dk_validate
 	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	
 	set "url=%~1"
+	::call dk_printVar url
+	
 	set "destination=%~2"
+	::call dk_printVar destination
 	
-	if defined destination goto:destination_set
-	    call dk_basename "%url%" DL_FILE
-	    call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
-	    set "destination=%DKDOWNLOAD_DIR%\%DL_FILE%"
-	:destination_set
+	call dk_basename "%url%" url_filename
+	::call dk_printVar url_filename
+	if not defined url_filename call dk_error "url_filename invalid"
 	
-	call dk_realpath "%destination%" realpath
-	if "%destination%" neq "%realpath%" call dk_error "destination is invalid: full path required"
+	if defined destination call dk_realpath "%destination%" destination
+	::call dk_printVar destination
 	
-    if exist "%destination%" call dk_info "%destination% already exist" && goto:eof
-
-	call dk_info "Downloading %url% . . ."
+	call dk_validate DKDOWNLOAD_DIR "call dk_setDKDOWNLOAD_DIR"
+	::call dk_printVar DKDOWNLOAD_DIR
+	
+	if not defined destination set "destination=%DKDOWNLOAD_DIR%\%url_filename%"
+	::call dk_printVar destination
+	
+	if not defined destination call dk_error "destination is invalid"
+	::call dk_printVar destination
+	
+	call dk_isDirectory "%destination%" && set "destination=%destination%\%url_filename%"
+	::call dk_printVar destination
+	
+    if exist "%destination%" call dk_info "%destination% already exist" & goto:eof
+	
+	call dk_info "Downloading %url_filename% . . ."
     
-	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+	:: make sure the destination parent directory exists
+	call dk_dirname "%destination%" destination_dir
+	::call dk_printVar destination_dir
+	
+	if not defined destination_dir call dk_error "destination_dir is invalid"
+	if not exist "%destination_dir%" call dk_makeDirectory "%destination_dir%"
+	
+	::set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
 	:: Try powershell
 	if not exist "%destination%" powershell /? 1>nul && powershell -command ^
@@ -63,5 +83,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	call dk_download https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd
+	call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
+	call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd.test2"
+	call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"
 goto:eof
