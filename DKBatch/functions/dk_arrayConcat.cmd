@@ -27,6 +27,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "_arry1_=%~1"
 	set "_arry2_=%~2"
 	set "_arry3_=%~3"
+	
 	set /a countA=0
 	set /a countB=0
 	:dk_arrayConcat_loop1
@@ -45,7 +46,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		goto:dk_arrayConcat_loop2
 	)
 
-	
 	::### return value ###
 	if "!!" neq "" endlocal & call dk_set %3 "%_arry3_%"
 	if "!!" equ "" endlocal & set "%3=!_arry3_!"
