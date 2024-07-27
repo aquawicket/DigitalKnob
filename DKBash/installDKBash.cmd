@@ -2,11 +2,12 @@
 
 if "%*" neq "" (goto:runDKBash)
 :installDKBash
-	echo Associating .sh files with DKBash . . .
+	echo Installing DKBash . . .
 	
 	::###### DKINIT ######
-	set "DKBATCH_FUNCTIONS_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
-	call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	
 	call dk_load dk_validate
     call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

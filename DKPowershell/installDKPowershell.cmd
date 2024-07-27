@@ -1,7 +1,6 @@
 @echo off
 
 if not "%*" == "" (goto:runDKPowershell)
-
 :installDKPowershell
 	echo Installing DKPowershell . . .
 	

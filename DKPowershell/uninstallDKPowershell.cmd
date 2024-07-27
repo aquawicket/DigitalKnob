@@ -1,5 +1,5 @@
 @echo off
-::call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
+
 
 :uninstallDKPowershell
 	echo Uninstalling DKPowershell . . .
@@ -9,9 +9,9 @@
 	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
 	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	
-	echo Uninstalling .ps1 file associations . . .
-	
+	call dk_echo "Uninstalling DKHta file associations . . ."
 	ftype dkpowershell=
 	assoc .ps1=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dkpowershell"
+	pause
 goto:eof
