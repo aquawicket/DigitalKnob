@@ -31,6 +31,9 @@ call dk_source dk_unset
     call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	call dk_printVar _APP_
+	call dk_printVar _TARGET_OS_
+	call dk_printVar _TYPE_
 
     call dk_echo
     call dk_gitCheckRemote
