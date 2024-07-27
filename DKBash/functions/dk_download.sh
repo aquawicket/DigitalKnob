@@ -58,7 +58,7 @@ dk_download() {
 	[ -e "${destination}" ] || dk_error "failed to download ${url_filename}"
 	
 	#cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
-	#[ "${input}" = "" ]
+
 }
 
 
