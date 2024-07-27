@@ -21,9 +21,9 @@ call dk_source dk_validate
 	set "destination=%~2"
 	
 	if defined destination goto:destination_set
-	call dk_basename "%url%" DL_FILE
-	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
-	set "destination=%DKDOWNLOAD_DIR%\%DL_FILE%"
+	    call dk_basename "%url%" DL_FILE
+	    call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
+	    set "destination=%DKDOWNLOAD_DIR%\%DL_FILE%"
 	:destination_set
 	
 	call dk_realpath "%destination%" realpath
