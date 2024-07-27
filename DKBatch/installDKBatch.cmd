@@ -4,8 +4,12 @@ if "%~1" neq "" goto:runDKBatch
 :installDKBatch
 	echo Associating .cmd files with DKBatch . . .
 	
-	::set "DKBATCH_FUNCTIONS_DIR_=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions\"
 	set "DKBATCH_FUNCTIONS_DIR=functions"
+	
+	set "DKPOWERSHELL_DIR=..\DKPowershell"
+	set "DKPOWERSHELL_FUNCTIONS_DIR=..\DKPowershell\functions"
+	
+	
 	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
 	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
 	ftype dkbatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %%*

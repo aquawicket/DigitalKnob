@@ -1,3 +1,4 @@
+@echo off
 :echoLine uniqueStr formatter offset -- outputs a formatted string, substitutes file name and line number
 ::  -- uniqueStr [in]     - a unique string to identify the line
 ::  -- formatter [in,opt] - a string using __FILE__ and/or __LINE__ to be substituted and echoed

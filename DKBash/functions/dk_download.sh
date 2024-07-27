@@ -7,20 +7,30 @@
 #
 dk_download() {
 	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
-	if dk_pathExists "${2}"; then
-		dk_warning "dk_download(): ${2} already exists"
+	url="${1}"
+	destination="${2-}"
+	
+	if [ -z "${destination-}" ]; then 
+		dk_basename "${url}" DL_FILE
+		dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
+		destination="${DKDOWNLOAD_DIR}/${DL_FILE}"
+	fi
+	
+	if dk_pathExists "${destination}"; then
+		dk_warning "dk_download(): ${destination} already exists"
 		return 0
 	fi
-	dk_info "Downloading ${1} . . ."
-	parentdir="$(dk_dirname "${2}")"
+	dk_info "Downloading ${url} . . ."
+	parentdir="$(dk_dirname "${destination}")"
 	dk_printVar parentdir
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
 	
-	dk_pathExists "${1}" || dk_commandExists "wget" && wget -P "${parentdir}" "${1}"
-	dk_pathExists "${1}" || dk_commandExists "curl" && curl -Lo "${2}" "${1}"
+	dk_pathExists "${url}" || dk_commandExists "wget" && wget -P "${parentdir}" "${url}"
+	dk_pathExists "${url}" || dk_commandExists "curl" && curl -Lo "${destination}" "${url}"
 	
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]
@@ -31,5 +41,5 @@ dk_download() {
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc
 	
-	dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh" C:/DKBuilder.sh
+	dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh"
 }
