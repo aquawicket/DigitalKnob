@@ -11,28 +11,53 @@ dk_download() {
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
 	url="${1}"
-	destination="${2-}"
+	#dk_printVar url
 	
-	if [ -z "${destination-}" ]; then 
-		dk_basename "${url}" DL_FILE
-		dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
-		destination="${DKDOWNLOAD_DIR}/${DL_FILE}"
-	fi
+    destination="${2-}"
+    #dk_printVar destination
 	
-	if dk_pathExists "${destination}"; then
-		dk_warning "dk_download(): ${destination} already exists"
-		return 0
-	fi
-	dk_info "Downloading ${url} . . ."
-	parentdir="$(dk_dirname "${destination}")"
-	dk_printVar parentdir
-	OLDPWD=${PWD}
-	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
+	dk_basename "${url}" url_filename
+	#dk_printVar url_filename
+	[ -z ${url_filename} ] && dk_error "url_filename invalid"
 	
-	dk_pathExists "${url}" || dk_commandExists "wget" && wget -P "${parentdir}" "${url}"
-	dk_pathExists "${url}" || dk_commandExists "curl" && curl -Lo "${destination}" "${url}"
+#	[ -n ${destination} ] && dk_realpath "${destination}" destination
+#	dk_printVar destination
 	
-	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
+	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
+	#dk_printVar DKDOWNLOAD_DIR
+	
+	[ -z ${destination} ] && destination="${DKDOWNLOAD_DIR}/${url_filename}"
+	#dk_printVar destination
+	
+	[ -z ${destination} ] && dk_error "destination is invalid"
+	#dk_printVar destination
+	
+	dk_isDirectory "${destination}" && destination="${destination}/${url_filename}"
+	#dk_printVar destination
+	
+	[ -e "${destination}" ] && dk_info "${destination} already exist" && return
+	
+	dk_info "Downloading %url_filename% . . ."
+	
+	# make sure the destination parent directory exists
+	dk_dirname "${destination}" destination_dir
+	#dk_printVar destination_dir
+	
+	[ -n ${destination_dir} ] || dk_error "destination_dir is invalid"
+	[ -e ${destination_dir} ] || dk_makeDirectory "${destination_dir}"
+	
+	# set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+	
+	# try wget
+	dk_pathExists "${destination}" || dk_commandExists "wget" && wget -P "${destination_dir}" "${url}"
+	
+	# try curl
+	dk_pathExists "${destination}" || dk_commandExists "curl" && curl -Lo "${destination}" "${url}"
+	
+	
+	[ -e "${destination}" ] || dk_error "failed to download ${url_filename}"
+	
+	#cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]
 }
 
@@ -42,4 +67,6 @@ DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST
 	dk_debugFunc
 	
 	dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh"
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "${DKDOWNLOAD_DIR}/dk_download_batch_test/DKBuilder.sh"
 }

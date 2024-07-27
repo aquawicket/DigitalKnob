@@ -45,6 +45,8 @@ function Global:dk_download($url) {
 	
 	# method 3
 	#Start-BitsTransfer -Source $url -Destination $destination
+	
+	
 }
 
 
@@ -52,6 +54,6 @@ function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTE
 	dk_debugFunc
 	
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1"
-	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1.test2"
+	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1"
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1"
 }
