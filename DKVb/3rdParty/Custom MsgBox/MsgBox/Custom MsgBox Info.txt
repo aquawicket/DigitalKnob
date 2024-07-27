@@ -1,0 +1,76 @@
+These scripts use customized HTAs to display complex dialogues with
+no extra libraries needed. The scripts have been tested on Win10 with 
+IE11 installed and were originally written on XP.
+
+The only apparent glitch on Win10 was that all scripts needed a
+slight height adjustment to fit the buttons into the window. What
+worked on XP was too short on Win10.
+
+
+It turned out that with IE9 there seems to be a problem with
+one or more IE instances left running after the script quits. 
+That can sometimes result in WScript and/or mshta being
+forced to keep running.
+
+  For whatever reason, this seems to be only a bug with IE9,
+or perhaps a bug with the Windows Script Host in Windows 7.
+In any case, the fix was fairly simple:
+
+  It just required that the IE instance in the script be 
+specifically released.
+
+The technical explanation:
+
+  During the Init and ShowMsg functions, the script uses an
+unusual but dependable hack in order to create an HTA window
+that acts like an IE window. If only an HTA window were used it
+would display a clunky HTA window frame. If a normal IE window
+is used it does not work properly on Vista/7 due to security
+restrictions.
+  The solution is to force mshta.exe (the HTA host) to run a
+snippet of script that creates an IE window and then attach
+a variable handle to that window. Since the window was created
+by mshta.exe it has HTA security, which is essentially no 
+restrictions. Since it's actually an IE window the HTA frame can
+be avoided. 
+    Shell.Application is then used to walk through
+all IE/Explorer windows and find the new IE instance. The window
+of that instance is then assigned to the HTA object variable.
+By the time the dust settles, the window object belonging
+to Cls_IE is represented by Cls_HTA and the script is then ready
+to create a message box, free of disabling security restrictions.
+
+The code for all that is this:
+
+Set Cls_SHAp = CreateObject("Shell.Application")    
+  SHCls.Run "MSHTA.EXE ""javascript:new ActiveXObject('InternetExplorer.Application').PutProperty('" & sID & "', window);""", 0, False  
+      Cls_iCount = 1
+          Do Until Cls_iCount = 10
+             For Each Cls_IE In Cls_SHAp.Windows
+                If IsObject(Cls_IE.GetProperty(sID)) Then
+                    Set Cls_HTA = Cls_IE.GetProperty(sID)
+
+  If you use the TypeName function at that point you'll see
+that Cls_IE is a WebBrowser object (IE) while Cls_HTA
+is an HTMLWindow object. 
+
+  Normally, the Shell Windows enumeration does not
+leave an IE instance running. On WinXP Cls_IE is released.
+But on Win7 with IE9, the Cls_HTA reference to the IE window
+apparently causes an implied reference to the IE browser,
+forcing the IE instance to keep running after the window
+is released.
+
+  The fix, thankfully, is simple. It requires adding the following....
+
+Cls_IE.Quit
+Set Cls_IE = Nothing
+
+  .....before exiting the functions wherein an HTA instance is
+created. That releases the IE instance on Win7/IE9 while
+not causing problems on WinXP.
+
+Joe Priestley
+
+www.jsware.net
+jsware@jsware.net
