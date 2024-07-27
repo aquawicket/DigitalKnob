@@ -11,7 +11,7 @@
 	
 	call dk_echo "Uninstalling DKVb file associations . . ."
 	ftype dkvb=
-	assoc .vbs=
+	assoc .vbs=VBSFile
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dkvb"
 	pause
 goto:eof
