@@ -20,7 +20,6 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
     ::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
-    set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 
     ::############ Get DKHTTP variables ############
     call :dk_DKHTTP_VARS
@@ -50,9 +49,9 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     call dk_source dk_debugFunc
     call dk_source dk_echo
     call dk_source dk_color && call dk_color
-    call dk_source dk_logo && call dk_logo
+    call dk_source dk_logo  && call dk_logo
 	
-    if "!!"=="" call dk_echo "delayed expansion = ON"
+    if "!!"==""    call dk_echo "delayed expansion = ON"
     if "!!" neq "" call dk_echo "delayed expansion = OFF"
     ::%DK% dk_load %DKSCRIPT_PATH%
 	
@@ -90,9 +89,9 @@ goto:eof
 ::# dk_reloadWithCmd
 ::#
 :dk_reloadWithCmd
-	if not defined DKSCRIPT_PATH set "DKSCRIPT_PATH=%~1"
-	if not exist "%DKSCRIPT_PATH%" goto:eof
-	if not defined DKSCRIPT_ARGS for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
+	if not exist "%DKSCRIPT_PATH%"  goto:eof
+	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 goto:eof
 
 
@@ -100,11 +99,11 @@ goto:eof
 ::# dk_DKBATCH_VARS
 ::#
 :dk_DKBATCH_VARS
-    for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
-    set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
-    set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    if not defined DKBATCH_DIR             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
+    if defined DKBATCH_DIR                 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+    if not defined DKBATCH_FUNCTIONS_DIR   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
+	if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+	if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 goto:eof
 
 
@@ -112,10 +111,10 @@ goto:eof
 ::# dk_DKHTTP_VARS
 ::#
 :dk_DKHTTP_VARS
-    set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-    set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
-    set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
-    set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
+    if not defined DKHTTP_DIGITALKNOB_DIR        set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+    if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
+    if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
+    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
 goto:eof
 
 
@@ -132,13 +131,17 @@ goto:eof
 ::# dk_DKSCRIPT_VARS
 ::#
 :dk_DKSCRIPT_VARS
-	set "DKSCRIPT_PATH=%__FILE__%"
-	if not exist "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%0"
+	if not defined DKSCRIPT_PATH       set "DKSCRIPT_PATH=%__FILE__%"
+	if not exist "%DKSCRIPT_PATH%"     set "DKSCRIPT_PATH=%0"
 	set "DKSCRIPT_ARGS=%__ARGS__%"
-	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
+	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_DIR=%%~dpZ"
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ"
+	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
 	call dk_source dk_load
+	
+	::### ASSETS ###
+	if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
+	if exist %DKASSETS_DIR%            set "PATH=%DKASSETS_DIR%;%PATH%"
 goto:eof
 
 

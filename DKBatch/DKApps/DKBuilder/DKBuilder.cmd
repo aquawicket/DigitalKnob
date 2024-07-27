@@ -14,5 +14,5 @@ if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" certutil /? 1>nul && certutil -url
 call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" %0
 
 ::###### Load Main Program ######
-call dk_source C:\Users\Administrator\digitalknob\Development\DKBatch\DKApps\DKBuilder\assets\dk_buildMain
+call dk_source dk_buildMain
 call dk_buildMain
