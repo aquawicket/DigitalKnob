@@ -10,8 +10,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	if not defined DKBRANCH_DIR call dk_validateBranch
-	call dk_printVar DKBRANCH_DIR
-    if not exist "%DKBRANCH_DIR%\cache" call dk_warning "%DKBRANCH_DIR%\cache does not exist" && goto:eof
+	::call dk_printVar DKBRANCH_DIR
+    ::if not exist "%DKBRANCH_DIR%\cache" call dk_warning "%DKBRANCH_DIR%\cache does not exist" && goto:eof
+	if not exist "%DKBRANCH_DIR%\cache" goto:eof
     
 	setlocal enableDelayedExpansion
 	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
