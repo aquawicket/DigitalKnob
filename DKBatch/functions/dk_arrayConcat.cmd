@@ -68,4 +68,12 @@ goto:eof
 	
 	call dk_arrayConcat myArray1 myArray2 myNewArrayA
 	call dk_printVar myNewArrayA
+	
+	if ^
+	"%myNewArrayA[0]%" == "a b c" if ^
+	"%myNewArrayA[1]%" == "d e f" if ^
+	"%myNewArrayA[2]%" == "g h i" if ^
+	"%myNewArrayA[3]%" == "1 2 3" if ^
+	"%myNewArrayA[4]%" == "4 5 6" if ^
+	"%myNewArrayA[5]%" == "7 8 9" dk_echo "dk_arrayConcat succeeded"
 goto:eof
