@@ -1,12 +1,15 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_debugFunc
-call dk_source dk_error
 call dk_source dk_basename
+call dk_source dk_debugFunc
+call dk_source dk_dirname
+call dk_source dk_error
 call dk_source dk_getDKPaths
 call dk_source dk_info
+call dk_source dk_isDirectory
 call dk_source dk_realpath
+call dk_source dk_rename
 call dk_source dk_validate
 ::####################################################################
 ::# dk_download(url, destination)
