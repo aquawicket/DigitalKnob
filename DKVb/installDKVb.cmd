@@ -11,11 +11,10 @@ if "%~1" neq "" (goto:runDKVb)
 	set "DKVB_FUNCTIONS_DIR=..\DKVb\functions"
 	set "WSCRIPT_EXE=%SystemRoot%\System32\WScript.exe"
 	ftype DKVb=cmd /c call "%~f0" "%DKVB_FUNCTIONS_DIR%" "%WSCRIPT_EXE%" "%%1" %*
-	::assoc .dkvb=DKVb
 	assoc .vbs=DKVb
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKVb\DefaultIcon" "" "REG_SZ" "%WSCRIPT_EXE%"
 	
-	call dk_echo DKVb install complete
+	call dk_echo "DKVb install complete"
 	call dk_pause
 goto:eof
 

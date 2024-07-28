@@ -14,7 +14,7 @@ if "%~1" neq "" goto:runDKBatch
 	assoc .cmd=DKBatch
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 	
-	call dk_echo DKBatch install complete
+	call dk_echo "DKBatch install complete"
 	call dk_pause
 goto:eof
 

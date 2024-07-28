@@ -15,7 +15,7 @@ if not "%*" == "" (goto:runDKPowershell)
 	assoc .ps1=DKPowershell
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
-	call dk_echo DKPowershell install complete
+	call dk_echo "DKPowershell install complete"
 	call dk_pause
 goto:eof
 

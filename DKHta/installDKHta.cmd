@@ -16,7 +16,7 @@ if "%~1" neq "" (goto:runDKHta)
 	assoc .hta=DKHta
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKHta\DefaultIcon" "" "REG_SZ" "%MSHTA_EXE%"
 	
-	call dk_echo DKHta install complete
+	call dk_echo "DKHta install complete"
 	call dk_pause
 goto:eof
 

@@ -13,6 +13,9 @@ if not "%~1" == "" (goto:runDKCMake)
 	ftype DKCmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
 	assoc .cmake=DKCmake
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKCmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
+
+	call dk_echo "DKCmake install complete"
+	call dk_pause
 goto:eof
 
 

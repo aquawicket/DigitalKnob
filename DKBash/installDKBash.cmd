@@ -14,7 +14,7 @@ if "%~1" neq "" (goto:runDKBash)
 	assoc .sh=DKBash
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
 	
-	call dk_echo DKBash install complete
+	call dk_echo "DKBash install complete"
 	call dk_pause
 goto:eof
 

@@ -15,7 +15,7 @@ if "%~1" neq "" (goto:runDKJavascript)
 	assoc .js=DKJavascript
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKJavascript\DefaultIcon" "" "REG_SZ" "%NODEJS_EXE%"
 	
-	call dk_echo DKJavascript install complete
+	call dk_echo "DKJavascript install complete"
 	call dk_pause
 goto:eof
 

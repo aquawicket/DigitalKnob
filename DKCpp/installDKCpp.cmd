@@ -15,7 +15,7 @@ if "%~1" neq "" (goto:runDKCpp)
 	assoc .cpp=DKCpp
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKCpp\DefaultIcon" "" "REG_SZ" "%CL_EXE%"
 	
-	call dk_echo DKCpp install complete
+	call dk_echo "DKCpp install complete"
 	call dk_pause
 goto:eof
 
