@@ -1,6 +1,6 @@
 @echo off
 
-if "%*" neq "" (goto:runDKBash)
+if "%~1" neq "" (goto:runDKBash)
 :installDKBash
 	echo Installing DKBash . . .
 	
