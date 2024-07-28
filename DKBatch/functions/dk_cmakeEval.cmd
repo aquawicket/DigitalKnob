@@ -7,66 +7,50 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_cmakeEval
 	call dk_debugFunc
-	if %__ARGC__% GTR 4 call dk_error "%__FUNCTION__%(): too many arguments"
-	
+	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
+	if %__ARGC__% gtr 4 call dk_error "%__FUNCTION__%(): too many arguments"
 	
 	setlocal
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	::call dk_printVar DKIMPORTS_DIR
-	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
+	if not exist "%DKIMPORTS_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
 	
 	call dk_validate DKCMAKE_DIR "call dk_validateBranch"
-	::call dk_printVar DKCMAKE_DIR
 	if not exist "%DKCMAKE_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKCMAKE_DIR"
 	
-	::call dk_validate CMAKE_EXE "call dk_installCmake"
 	call dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake"
-	call dk_printVar CMAKE_EXE
 	if not exist "%CMAKE_EXE%"   call dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 
     
-    ::call dk_set DKCOMMAND "%~1"
 	call dk_replaceAll "%~1" "\" "/" DKCOMMAND
-	call dk_printVar DKCOMMAND
+	::call dk_printVar DKCOMMAND
 	
     call dk_set DKRETURN "%~2"
-	call dk_printVar DKRETURN
+	::call dk_printVar DKRETURN
 	
 	call dk_set DKVARS "%~3"
-	call dk_printVar DKVARS
+	::call dk_printVar DKVARS
 	
-	::call dk_set DK_EVAL "%DKCMAKE_DIR%\DKEval.cmake"
 	call dk_replaceAll "%DKCMAKE_DIR%\DKEval.cmake" "\" "/" DK_EVAL
-	call dk_printVar DK_EVAL
+	::call dk_printVar DK_EVAL
 	
 	::### build CMAKE_ARGS ###
-
-	:: append %DKCOMMAND% to CMAKE_ARGS with "'s removed
-	&:: FIXME: remove the need for call here
+	:: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
 	if defined DKCOMMAND  call set "CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""  
 	
-	:: append %DKRETURN% to CMAKE_ARGS with "'s removed
-	&:: FIXME: remove the need for call here
+	:: append %DKRETURN% to CMAKE_ARGS with quotes removed
 	if defined DKRETURN   call set "CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%%DKRETURN:"=%%""
 	
-	:: append %DKVARS% to CMAKE_ARGS with "'s removed
-	&:: FIXME: remove the need for call here
+	:: append %DKVARS% to CMAKE_ARGS with quotes removed
 	if defined DKVARS     call set "CMAKE_ARGS=%CMAKE_ARGS% "%%DKVARS:"=%%""
 	
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set "CMAKE_ARGS=%CMAKE_ARGS% "-P""
-	
 	set "CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%""
-	
 	::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
-	
 	::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
-	
 	::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
 	
-	echo CMAKE_ARGS = %CMAKE_ARGS%
-	::call dk_printVar CMAKE_ARGS    ::FIXME
-	
-	::### call the cmake command
-	::echo "%CMAKE_EXE%" %CMAKE_ARGS%
+	::### call the cmake command ###
+	echo "%CMAKE_EXE%" %CMAKE_ARGS%
 	"%CMAKE_EXE%" %CMAKE_ARGS%
 
 	if not defined DKRETURN goto:eof

@@ -17,7 +17,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	cmd /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 	
     for /f "usebackq delims=" %%Z in (`powershell . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1; %~1 "%~2"`) do echo %%Z
-	call dk_echo "PSValue received from Powershell : %PSValue%"
+	::call dk_echo "PSValue received from Powershell : %PSValue%"
 	endlocal
 goto:eof
 

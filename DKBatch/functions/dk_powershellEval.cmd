@@ -46,10 +46,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	call dk_set POWERSHELL_ARGS "%~1"
 	echo POWERSHELL_ARGS = %POWERSHELL_ARGS%
-	::call dk_printVar POWERSHELL_ARGS    ::FIXME
-	
-	::### call the cmake command
-	::echo "%POWERSHELL_EXE%" %POWERSHELL_ARGS%
 	"%POWERSHELL_EXE%" -Command %POWERSHELL_ARGS%
 
 	::if not defined DKRETURN goto:eof
@@ -95,5 +91,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): $PSVAR'"
+	call dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): ${PSVAR}'"
 goto:eof
