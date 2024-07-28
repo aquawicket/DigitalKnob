@@ -1,0 +1,2 @@
+# https://dotnet.microsoft.com/en-us
+# https://en.wikipedia.org/wiki/.NET

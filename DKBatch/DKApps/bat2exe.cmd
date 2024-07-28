@@ -2,26 +2,32 @@
 @echo off
 setlocal
 
-del %~n0.exe /q /s >nul 2>nul
+::del %~n0.exe /q /s >nul 2>nul
 
 for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsoft.NET\Framework\*jsc.exe"') do (
-   set "jsc=%%v"
+   set "JSC_EXE=%%v"
 )
 
 if not exist "%~n0.exe" (
-    "%jsc%" /nologo /out:"%~n0.exe" "%~dpsfnx0"
+    "%JSC_EXE%" /nologo /out:"%~n0.exe" "%~dpsfnx0"
 )
 
-%~n0.exe  "%jsc%" %*
-del /q /f %~n0.exe 1>nul 2>nul 
+echo %~n0.exe  "%JSC_EXE%" %*
+%~n0.exe  "%JSC_EXE%" %*
+::del /q /f %~n0.exe 1>nul 2>nul 
 endlocal & exit /b %errorlevel%
 */
+
+
+
+
+
 
 //https://github.com/npocmaka/batch.scripts/blob/master/hybrids/.net/bat2exe.bat
 import System;
 import System;
 import System.IO;
-import  System.Diagnostics;
+import System.Diagnostics;
 
 
 var arguments:String[] = Environment.GetCommandLineArgs();
