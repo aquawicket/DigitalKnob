@@ -29,6 +29,7 @@ call dk_source dk_createShortcut
     :: create desktop shortcut if it doesn't exist
     if not defined DKDESKTOP_DIR call dk_setDKDESKTOP_DIR
     if not exist "%DKDESKTOP_DIR%\digitalknob.lnk" call dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%"
+	call dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
 goto:eof
 
 

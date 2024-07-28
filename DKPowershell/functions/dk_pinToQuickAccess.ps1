@@ -5,12 +5,13 @@ if(!$dk_pinToQuickAccess){ $dk_pinToQuickAccess = 1 } else{ return }
 # dk_pinToQuickAccess(path)
 #
 #
-function Global:dk_pinToQuickAccess($path) {
+function Global:dk_pinToQuickAccess() {
 	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
-	$o = new-object -com shell.application
-	$o.Namespace("$path").Self.InvokeVerb("pintohome")
+	$path = $args[0];
+	$o = New-object -com shell.application;
+	$o.Namespace("$path").Self.InvokeVerb("pintohome");
 }
 
 

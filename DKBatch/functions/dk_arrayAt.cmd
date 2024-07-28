@@ -19,8 +19,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayAt
 	call dk_debugFunc
-	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	::call dk_validateArgs array int optional:rtn_var
 	setlocal
 
