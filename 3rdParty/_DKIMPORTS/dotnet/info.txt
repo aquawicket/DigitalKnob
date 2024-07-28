@@ -1,2 +1,10 @@
+# https://github.com/dotnet
 # https://dotnet.microsoft.com/en-us
 # https://en.wikipedia.org/wiki/.NET
+
+# .NET 8.0
+# https://download.visualstudio.microsoft.com/download/pr/d1adccfa-62de-4306-9410-178eafb4eeeb/48e3746867707de33ef01036f6afc2c6/dotnet-sdk-8.0.303-win-x64.exe
+
+# .NET 6.0
+# https://download.visualstudio.microsoft.com/download/pr/9e184641-56bb-430b-9297-4316b039b641/3409ae071e0140ce2237f909b4b0ffbb/dotnet-sdk-6.0.424-win-x86.exe
+# https://download.visualstudio.microsoft.com/download/pr/0f71eaf1-ce85-480b-8e11-c3e2725b763a/9044bfd1c453e2215b6f9a0c224d20fe/dotnet-sdk-6.0.100-win-x64.exe
