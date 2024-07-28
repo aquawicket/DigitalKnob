@@ -20,7 +20,7 @@
 dk_arrayUnshift() {
 	dk_debugFunc
 	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	#[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}

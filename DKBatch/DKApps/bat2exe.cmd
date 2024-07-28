@@ -26,7 +26,7 @@ import  System.Diagnostics;
 
 var arguments:String[] = Environment.GetCommandLineArgs();
 if (arguments.length<3){
-    Console.WriteLine("Path to cmd\bat file not given");
+    Console.WriteLine("Path to cmd/bat file not given");
     Environment.Exit(1);
 }
 

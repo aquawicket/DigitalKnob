@@ -93,48 +93,48 @@ set "CMDIZE_ENGINE="
 set "CMDIZE_MAYBE=>"
 
 :cmdize_loop_begin
-if "%~1" == "" exit /b %CMDIZE_ERROR%
+	if "%~1" == "" exit /b %CMDIZE_ERROR%
 
-if /i "%~1" == "/W" (
-	set "CMDIZE_WRAP=1"
-	shift /1
-	goto :cmdize_loop_begin
-)
-
-if /i "%~1" == "/E" (
-	if /i "%~2" == "default" (
-		set "CMDIZE_ENGINE="
-	) else (
-		set "CMDIZE_ENGINE=%~2"
+	if /i "%~1" == "/W" (
+		set "CMDIZE_WRAP=1"
+		shift /1
+		goto :cmdize_loop_begin
 	)
-	shift /1
-	shift /1
-	goto :cmdize_loop_begin
-)
 
-if /i "%~1" == "/P" (
-	set "CMDIZE_MAYBE=& rem "
-	shift /1
-	goto :cmdize_loop_begin
-)
+	if /i "%~1" == "/E" (
+		if /i "%~2" == "default" (
+			set "CMDIZE_ENGINE="
+		) else (
+			set "CMDIZE_ENGINE=%~2"
+		)
+		shift /1
+		shift /1
+		goto :cmdize_loop_begin
+	)
 
-if not exist "%~f1" (
-	set "CMDIZE_ERROR=1"
-	call :warn File not found: "%~1"
-	shift /1
-	goto :cmdize_loop_begin
-)
+	if /i "%~1" == "/P" (
+		set "CMDIZE_MAYBE=& rem "
+		shift /1
+		goto :cmdize_loop_begin
+	)
 
-findstr /i /b /l ":cmdize%~x1" "%~f0" >nul || (
-	set "CMDIZE_ERROR=1"
-	call :warn Unsupported extension: "%~1"
-	shift /1
-	goto :cmdize_loop_begin
-)
+	if not exist "%~f1" (
+		set "CMDIZE_ERROR=1"
+		call :warn File not found: "%~1"
+		shift /1
+		goto :cmdize_loop_begin
+	)
 
-call :cmdize%~x1 "%~1" %CMDIZE_MAYBE% "%~dpn1.bat"
-if errorlevel 1 set "CMDIZE_ERROR=1"
-shift /1
+	findstr /i /b /l ":cmdize%~x1" "%~f0" >nul || (
+		set "CMDIZE_ERROR=1"
+		call :warn Unsupported extension: "%~1"
+		shift /1
+		goto :cmdize_loop_begin
+	)
+
+	call :cmdize%~x1 "%~1" %CMDIZE_MAYBE% "%~dpn1.bat"
+	if errorlevel 1 set "CMDIZE_ERROR=1"
+	shift /1
 goto :cmdize_loop_begin
 
 :: ========================================================================
@@ -163,18 +163,17 @@ goto :cmdize_loop_begin
 ::D>* https://with-love-from-siberia.blogspot.com/2009/07/js2bat-converter-2.html
 ::D>
 :cmdize.js	[/e cscript|wscript|cchakra|wchakra|ch|node|...]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+	if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
-for %%e in ( "%CMDIZE_ENGINE%" ) do for %%s in (
-	"cscript cscript javascript"
-	"wscript wscript javascript"
-	"cchakra cscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
-	"wchakra wscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
-) do for /f "tokens=1,2,3" %%a in ( "%%~s" ) do if "%%~e" == "%%~a" (
-	call :print-prolog "%%~b //nologo //e:%%~c" "0</*! ::" "*/0;"
-	type "%~f1"
-)
-
+	for %%e in ( "%CMDIZE_ENGINE%" ) do for %%s in (
+		"cscript cscript javascript"
+		"wscript wscript javascript"
+		"cchakra cscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
+		"wchakra wscript {16d51579-a30b-4c8b-a276-0ff4dc41e755}"
+	) do for /f "tokens=1,2,3" %%a in ( "%%~s" ) do if "%%~e" == "%%~a" (
+		call :print-prolog "%%~b //nologo //e:%%~c" "0</*! ::" "*/0;"
+		type "%~f1"
+	)
 goto :EOF
 
 :: ========================================================================
@@ -195,61 +194,61 @@ goto :EOF
 ::D>* http://www.dostips.com/forum/viewtopic.php?p=32485#p32485
 ::D>
 :cmdize.vbs	[/w] [/e cscript|wscript]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+	if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
-if defined CMDIZE_WRAP (
-	call :print-script-wsf-bat "%~f1" vbscript
-	goto :EOF
-)
+	if defined CMDIZE_WRAP (
+		call :print-script-wsf-bat "%~f1" vbscript
+		goto :EOF
+	)
 
-copy /y nul + nul /a "%TEMP%\%~n0.$$" /a 1>nul
-for /f "usebackq" %%s in ( "%TEMP%\%~n0.$$" ) do (
-	call :print-prolog "%CMDIZE_ENGINE% //nologo //e:vbscript" "" "" "::'%%~s"
-)
-del /q "%TEMP%\%~n0.$$"
+	copy /y nul + nul /a "%TEMP%\%~n0.$$" /a 1>nul
+	for /f "usebackq" %%s in ( "%TEMP%\%~n0.$$" ) do (
+		call :print-prolog "%CMDIZE_ENGINE% //nologo //e:vbscript" "" "" "::'%%~s"
+	)
+	del /q "%TEMP%\%~n0.$$"
 
-for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
-	rem Filtering and commenting "Option Explicit".
+	for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
+		rem Filtering and commenting "Option Explicit".
 
-	rem Weird and insane attempt to implement it using capabilities
-	rem of batch scripting only.
+		rem Weird and insane attempt to implement it using capabilities
+		rem of batch scripting only.
 
-	rem This ugly code tries as much as it can to recognize and
-	rem comment out this directive. It's flexible enough to find
-	rem the directive even the string contains an arbitrary amount
-	rem of whitespaces. It fails if both "Option" and "Explicit"
-	rem are located on different lines. But it's too hard to imagine
-	rem that someone practices such a strange coding style.
+		rem This ugly code tries as much as it can to recognize and
+		rem comment out this directive. It's flexible enough to find
+		rem the directive even the string contains an arbitrary amount
+		rem of whitespaces. It fails if both "Option" and "Explicit"
+		rem are located on different lines. But it's too hard to imagine
+		rem that someone practices such a strange coding style.
 
-	rem In the other hand, it still tries to recognize the rest of
-	rem the line after the directive and put it to the next line,
-	rem if it contains an executable code.
+		rem In the other hand, it still tries to recognize the rest of
+		rem the line after the directive and put it to the next line,
+		rem if it contains an executable code.
 
-	if "%%s" == "" (
-		echo:%%s
-	) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i not "%%a" == "Option" (
-		echo:%%s
-	) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i not "%%i" == "Explicit" (
-		echo:%%s
-	) else (
-		call :warn Commenting "Option Explicit" in "%~1"
-		echo:rem To avoid compilation error due to embedding into a batch file,
-		echo:rem the following line was commented out automatically.
-		set /p "=rem " <nul
-
-		if /i "%%b" == "Explicit" (
-			rem Option Explicit
+		if "%%s" == "" (
 			echo:%%s
-		) else for /f "tokens=1,* delims='" %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
-			rem Option Explicit {QUOTE} ...
+		) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i not "%%a" == "Option" (
 			echo:%%s
-		) else for /f "tokens=1,* delims=:	 " %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
-			rem Option Explicit {COLON|TAB|SPACE} ...
-			echo:%%a %%i
-			echo:%%j
+		) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i not "%%i" == "Explicit" (
+			echo:%%s
+		) else (
+			call :warn Commenting "Option Explicit" in "%~1"
+			echo:rem To avoid compilation error due to embedding into a batch file,
+			echo:rem the following line was commented out automatically.
+			set /p "=rem " <nul
+
+			if /i "%%b" == "Explicit" (
+				rem Option Explicit
+				echo:%%s
+			) else for /f "tokens=1,* delims='" %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
+				rem Option Explicit {QUOTE} ...
+				echo:%%s
+			) else for /f "tokens=1,* delims=:	 " %%i in ( "%%b" ) do if /i "%%i" == "Explicit" (
+				rem Option Explicit {COLON|TAB|SPACE} ...
+				echo:%%a %%i
+				echo:%%j
+			)
 		)
 	)
-)
 goto :EOF
 
 :: ========================================================================
@@ -261,14 +260,14 @@ goto :EOF
 ::D>* https://perldoc.perl.org/perlwin32
 ::D>
 :cmdize.pl	[/e cmdonly]
-if /i "%CMDIZE_ENGINE%" == "cmdonly" (
-	call :print-prolog "perl -x -S" "" "" "@" "dpn0.pl"
-	goto :EOF
-)
+	if /i "%CMDIZE_ENGINE%" == "cmdonly" (
+		call :print-prolog "perl -x -S" "" "" "@" "dpn0.pl"
+		goto :EOF
+	)
 
-call :print-prolog "perl -x -S" "@rem = '--*-Perl-*--" "@rem ';"
-echo:#!perl
-type "%~f1"
+	call :print-prolog "perl -x -S" "@rem = '--*-Perl-*--" "@rem ';"
+	echo:#!perl
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -280,8 +279,8 @@ goto :EOF
 ::D>
 :cmdize.sh
 :cmdize.bash
-call :print-prolog bash ": << '____CMD____'" "____CMD____"
-type "%~f1"
+	call :print-prolog bash ": << '____CMD____'" "____CMD____"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -294,18 +293,18 @@ goto :EOF
 ::D>* http://stackoverflow.com/a/2611487/3627676
 ::D>
 :cmdize.ps1
-echo:^<# :
-echo:@echo off
-echo:setlocal
-echo:rem Any non-empty value changes the script invocation: the script is
-echo:rem executed using ScriptBlock instead of Invoke-Expression as default.
-echo:set "PS1_ISB="
-echo:set "PS1_FILE=%%~f0"
-echo:set "PS1_ARGS=%%*"
-echo:powershell -NoLogo -NoProfile -Command "$a=($Env:PS1_ARGS|sls -Pattern '\"(.*?)\"(?=\s|$)|(\S+)' -AllMatches).Matches;$a=@(@(if($a.count){$a})|%%%%{$_.value -Replace '^\"','' -Replace '\"$',''});$f=gc $Env:PS1_FILE -Raw;if($Env:PS1_ISB){$input|&{[ScriptBlock]::Create('rv f,a -Scope Script;'+$f).Invoke($a)}}else{$i=$input;iex $('$input=$i;$args=$a;rv i,f,a;'+$f)}"
-echo:goto :EOF
-echo:#^>
-type "%~f1"
+	echo:^<# :
+	echo:@echo off
+	echo:setlocal
+	echo:rem Any non-empty value changes the script invocation: the script is
+	echo:rem executed using ScriptBlock instead of Invoke-Expression as default.
+	echo:set "PS1_ISB="
+	echo:set "PS1_FILE=%%~f0"
+	echo:set "PS1_ARGS=%%*"
+	echo:powershell -NoLogo -NoProfile -Command "$a=($Env:PS1_ARGS|sls -Pattern '\"(.*?)\"(?=\s|$)|(\S+)' -AllMatches).Matches;$a=@(@(if($a.count){$a})|%%%%{$_.value -Replace '^\"','' -Replace '\"$',''});$f=gc $Env:PS1_FILE -Raw;if($Env:PS1_ISB){$input|&{[ScriptBlock]::Create('rv f,a -Scope Script;'+$f).Invoke($a)}}else{$i=$input;iex $('$input=$i;$args=$a;rv i,f,a;'+$f)}"
+	echo:goto :EOF
+	echo:#^>
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -316,14 +315,14 @@ goto :EOF
 ::D>* http://stackoverflow.com/a/17468811/3627676
 ::D>
 :cmdize.py	[/e short]
-if /i "%CMDIZE_ENGINE%" == "short" (
-	call :print-prolog "python -x" "" "" "@" "f0"
+	if /i "%CMDIZE_ENGINE%" == "short" (
+		call :print-prolog "python -x" "" "" "@" "f0"
+		type "%~f1"
+		goto :EOF
+	)
+	echo:0^<0# : ^^
+	call :print-prolog python "'''" "'''"
 	type "%~f1"
-	goto :EOF
-)
-echo:0^<0# : ^^
-call :print-prolog python "'''" "'''"
-type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -333,9 +332,9 @@ goto :EOF
 ::D>* https://stackoverflow.com/questions/35094778
 ::D>
 :cmdize.rb
-echo:@break #^^
-call :print-prolog ruby "=begin" "=end"
-type "%~f1"
+	echo:@break #^^
+	call :print-prolog ruby "=begin" "=end"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -347,8 +346,8 @@ goto :EOF
 :cmdize.hta
 :cmdize.htm
 :cmdize.html
-call :print-prolog "start mshta" "<!-- :" ": -->"
-type "%~f1"
+	call :print-prolog "start mshta" "<!-- :" ": -->"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -374,32 +373,32 @@ goto :EOF
 ::D>* http://www.dostips.com/forum/viewtopic.php?p=33963#p33963
 ::D>
 :cmdize.wsf	[/e cscript|wscript]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+	if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
-for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do for /f "tokens=1,2,* delims=?" %%a in ( "%%~o" ) do for /f "tokens=1,*" %%d in ( "%%b" ) do (
-	set "CMDIZE_ERROR_WSF="
-	if %%n neq 1 set "CMDIZE_ERROR_WSF=1"
-	if not "%%a" == "<" set "CMDIZE_ERROR_WSF=1"
-	if defined CMDIZE_ERROR_WSF (
-		call :warn Incorrect XML declaration: it must be at the beginning of the script
-		exit /b 1
+	for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do for /f "tokens=1,2,* delims=?" %%a in ( "%%~o" ) do for /f "tokens=1,*" %%d in ( "%%b" ) do (
+		set "CMDIZE_ERROR_WSF="
+		if %%n neq 1 set "CMDIZE_ERROR_WSF=1"
+		if not "%%a" == "<" set "CMDIZE_ERROR_WSF=1"
+		if defined CMDIZE_ERROR_WSF (
+			call :warn Incorrect XML declaration: it must be at the beginning of the script
+			exit /b 1
+		)
+
+		rem We sure that the XML declaration is located on the first
+		rem line of the script. Now we can transform it to the "polyglot"
+		rem form acceptable by the batch file also.
+
+		echo:%%a?%%d :
+		call :print-prolog "%CMDIZE_ENGINE% //nologo" ": %%e?><!-- :" ": --%%c" "" "?.wsf"
+
+		for /f "tokens=1,* delims=:" %%a in ( 'findstr /n /r "^" "%~f1"' ) do (
+			if %%a gtr 1 echo:%%b
+		)
+		goto :EOF
 	)
 
-	rem We sure that the XML declaration is located on the first
-	rem line of the script. Now we can transform it to the "polyglot"
-	rem form acceptable by the batch file also.
-
-	echo:%%a?%%d :
-	call :print-prolog "%CMDIZE_ENGINE% //nologo" ": %%e?><!-- :" ": --%%c" "" "?.wsf"
-
-	for /f "tokens=1,* delims=:" %%a in ( 'findstr /n /r "^" "%~f1"' ) do (
-		if %%a gtr 1 echo:%%b
-	)
-	goto :EOF
-)
-
-call :print-prolog "%CMDIZE_ENGINE% //nologo" "<!-- :" ": -->" "" "?.wsf"
-type "%~f1"
+	call :print-prolog "%CMDIZE_ENGINE% //nologo" "<!-- :" ": -->" "" "?.wsf"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -407,8 +406,8 @@ goto :EOF
 ::D>## .kix
 ::D>
 :cmdize.kix
-call :print-prolog kix32 "" "" ";"
-type "%~f1"
+	call :print-prolog kix32 "" "" ";"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -417,8 +416,8 @@ goto :EOF
 ::D>
 :cmdize.au3
 :cmdize.a3x
-call :print-prolog AutoIt3 "" "" ";"
-type "%~f1"
+	call :print-prolog AutoIt3 "" "" ";"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -426,8 +425,8 @@ goto :EOF
 ::D>## .ahk
 ::D>
 :cmdize.ahk
-call :print-prolog AutoHotKey "" "" ";"
-type "%~f1"
+	call :print-prolog AutoHotKey "" "" ";"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -437,8 +436,8 @@ goto :EOF
 ::D>PHP is supposed to be used as a scripting language in Web. So to avoid possible conflicts with paths to dynamic libraries and to suppress HTTP headers, we use two options `-n` and `-q`, respectively.
 ::D>
 :cmdize.php
-call :print-prolog "php -n -q" "<?php/* :" "*/ ?>"
-type "%~f1"
+	call :print-prolog "php -n -q" "<?php/* :" "*/ ?>"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -450,8 +449,8 @@ goto :EOF
 ::D>* https://forum.script-coding.com/viewtopic.php?pid=150262#p150262
 ::D>
 :cmdize.jl
-call :print-prolog julia "0<#= :" "=#0;"
-type "%~f1"
+	call :print-prolog julia "0<#= :" "=#0;"
+	type "%~f1"
 goto :EOF
 
 :: ========================================================================
@@ -477,7 +476,7 @@ goto :EOF
 ::G>* `UHDG` - to print full help including internals (the `/HELP-DEVEL` option)
 ::G>
 :print-usage
-for /f "tokens=1,* delims=>" %%a in ( 'findstr /r "^::[%~1]>" "%~f0"' ) do echo:%%b
+	for /f "tokens=1,* delims=>" %%a in ( 'findstr /r "^::[%~1]>" "%~f0"' ) do echo:%%b
 goto :EOF
 
 :: ========================================================================
@@ -491,7 +490,7 @@ goto :EOF
 ::G>* `%*` - a text for printing
 ::G>
 :warn
->&2 echo:%~n0: %*
+	>&2 echo:%~n0: %*
 goto :EOF
 
 :: ========================================================================
@@ -501,7 +500,7 @@ goto :EOF
 ::G>Prints the list of supported extensions. It is invoked by the `/L` option.
 ::G>
 :print-extension-list
-for /f "tokens=1,* delims=." %%x in ( 'findstr /i /r "^:cmdize[.][0-9a-z_][0-9a-z_]*\>" "%~f0"' ) do echo:.%%~y
+	for /f "tokens=1,* delims=." %%x in ( 'findstr /i /r "^:cmdize[.][0-9a-z_][0-9a-z_]*\>" "%~f0"' ) do echo:.%%~y
 goto :EOF
 
 :: ========================================================================
@@ -518,11 +517,11 @@ goto :EOF
 ::G>* `%2` - language
 ::G>
 :print-script-wsf-bat
-for %%f in ( "%TEMP%\%~n1.wsf" ) do (
-	call :print-script-wsf "%~f1" %~2 >"%%~ff"
-	call :cmdize.wsf "%%~ff"
-	del /f /q "%%~ff"
-)
+	for %%f in ( "%TEMP%\%~n1.wsf" ) do (
+		call :print-script-wsf "%~f1" %~2 >"%%~ff"
+		call :cmdize.wsf "%%~ff"
+		del /f /q "%%~ff"
+	)
 goto :EOF
 
 ::G>## `:print-script-wsf`
@@ -535,10 +534,10 @@ goto :EOF
 ::G>* `%2` - language
 ::G>
 :print-script-wsf
-echo:^<?xml version="1.0" ?^>
-echo:^<package^>^<job id="cmdized"^>^<script language="%~2"^>^<^![CDATA[
-type "%~f1"
-echo:]]^>^</script^>^</job^>^</package^>
+	echo:^<?xml version="1.0" ?^>
+	echo:^<package^>^<job id="cmdized"^>^<script language="%~2"^>^<^![CDATA[
+	type "%~f1"
+	echo:]]^>^</script^>^</job^>^</package^>
 goto :EOF
 
 :: ========================================================================
@@ -599,32 +598,32 @@ goto :EOF
 ::G>    @engine pattern %* & @goto :EOF
 ::G>
 :print-prolog
-if "%~4" == "@" (
-	echo:@%~1 "%%~%~5" %%* ^& @goto :EOF
-	goto :EOF
-)
+	if "%~4" == "@" (
+		echo:@%~1 "%%~%~5" %%* ^& @goto :EOF
+		goto :EOF
+	)
 
-setlocal
-
-set "tag=%~2"
-if defined tag (
-	setlocal enabledelayedexpansion
-	echo:!tag!
 	setlocal
-)
 
-echo:%~4@echo off
-echo:%~4%~1 "%%~f0%~5" %%*
-echo:%~4goto :EOF
+	set "tag=%~2"
+	if defined tag (
+		setlocal enabledelayedexpansion
+		echo:!tag!
+		setlocal
+	)
 
-set "tag=%~3"
-if defined tag (
-	setlocal enabledelayedexpansion
-	echo:!tag!
-	setlocal
-)
+	echo:%~4@echo off
+	echo:%~4%~1 "%%~f0%~5" %%*
+	echo:%~4goto :EOF
 
-endlocal
+	set "tag=%~3"
+	if defined tag (
+		setlocal enabledelayedexpansion
+		echo:!tag!
+		setlocal
+	)
+
+	endlocal
 goto :EOF
 
 :: ========================================================================
