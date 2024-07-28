@@ -18,8 +18,8 @@ endif()
 UNIX_HOST_dk_import			(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 
 ### IMPORT BINARY ###
-WIN_X86_HOST_dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-35-portable-Q16-x86.zip)
-WIN_X86_64_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-35-portable-Q16-x64.zip)
+WIN_X86_HOST_dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-36-portable-Q16-x86.zip)
+WIN_X86_64_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-36-portable-Q16-x64.zip)
 WIN_HOST_dk_set				(IMAGEMAGICK_CONVERT_EXE ${IMAGEMAGICK}/magick.exe)
 
 
