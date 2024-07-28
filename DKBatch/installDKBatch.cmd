@@ -2,19 +2,20 @@
 
 if "%~1" neq "" goto:runDKBatch
 :installDKBatch
-	echo Installing DKBatch . . .
-	
 	::###### DKINIT ######
 	call "..\DKBatch\functions\DK.cmd"
 	
+	::###### Install DKBatch ######
+	call dk_echo "Installing DKBatch . . ."
 	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
+	
 	ftype DKBatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %%*
-	assoc .dkbatch=DKBatch
-	assoc .bat=DKBatch
+	::assoc .bat=DKBatch
 	assoc .cmd=DKBatch
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 	
-	echo DKBatch install complete 
+	call dk_echo DKBatch install complete
+	call dk_pause
 goto:eof
 
 

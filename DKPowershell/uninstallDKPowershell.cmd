@@ -1,17 +1,11 @@
 @echo off
 
-
 :uninstallDKPowershell
-	echo Uninstalling DKPowershell . . .
-	
 	::###### DKINIT ######
-	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
-	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd"
 	
-	call dk_echo "Uninstalling DKHta file associations . . ."
-	ftype dkpowershell=
+	ftype DKPowershell=
 	assoc .ps1=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\dkpowershell"
-	pause
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
+	call dk_pause
 goto:eof

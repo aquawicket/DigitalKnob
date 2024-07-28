@@ -1,31 +1,27 @@
 @echo off
 
 if "%~1" neq "" (goto:runDKBash)
-:installDKBash
-	echo Installing DKBash . . .
-	
+:installDKBash	
 	::###### DKINIT ######
-	set "DKBATCH_FUNCTIONS_DIR=..\DKBatch\functions"
-	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd"
 	
-	call dk_load dk_validate
-    call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-    call dk_validate GITBASH_EXE "call dk_installGit"
-
-	::###### Git Bash ######::
+	::###### Install DKBash ######
+	call dk_echo "Installing DKBash . . ."
+	call dk_validate GITBASH_EXE "call dk_installGit"
+	
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
-	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
-	assoc .sh=dkbash
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\dkbash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
+	ftype DKBash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
+	assoc .sh=DKBash
+	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
+	
+	call dk_echo DKBash install complete
+	call dk_pause
 goto:eof
 
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
-	set "SH_FILE=%~3"
-
-	echo ############### Digitalknob ##################
-	start %GITBASH_EXE% %SH_FILE%
+	set "DKBASH_FILE=%~3"
+	start %GITBASH_EXE% %DKBASH_FILE%
 goto:eof
