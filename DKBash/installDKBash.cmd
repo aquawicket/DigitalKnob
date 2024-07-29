@@ -7,6 +7,7 @@ if "%~1" neq "" (goto:runDKBash)
 	
 	::###### Install DKBash ######
 	call dk_echo "Installing DKBash . . ."
+	call dk_validate DKBASH_FUNCTIONS_DIR "call dk_validateBranch"
 	call dk_validate GITBASH_EXE "call dk_installGit"
 	
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
@@ -20,6 +21,7 @@ goto:eof
 
 
 :runDKBash
+	echo :runDKBash %*
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
 	set "DKBASH_FILE=%~3"
