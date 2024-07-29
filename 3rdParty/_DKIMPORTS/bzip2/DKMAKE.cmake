@@ -14,9 +14,8 @@ dk_depend(msys2)
 
 
 ### IMPORT ###
-#UNIX_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#WIN_dk_import	(https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-dk_import		(https://gitlab.com/bzip2/bzip2.git)
+dk_import(https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.zip)
+#dk_import(https://gitlab.com/bzip2/bzip2.git)
 
 
 

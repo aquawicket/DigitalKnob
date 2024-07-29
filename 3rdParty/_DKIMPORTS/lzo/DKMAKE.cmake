@@ -6,5 +6,5 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/eyeseaevan/lzo-2.10.git
 # https://github.com/eyeseaevan/lzo-2.10.git
 
-#dk_import(https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz)
-dk_import(https://github.com/eyeseaevan/lzo-2.10.git)
+dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/refs/heads/master.zip)
+#dk_import(https://github.com/eyeseaevan/lzo-2.10.git)

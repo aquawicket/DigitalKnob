@@ -15,9 +15,9 @@ dk_depend(pyyaml)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
-#dk_import(https://github.com/svaarala/duktape/releases/download/v2.7.0/duktape-2.7.0.tar.xz PATCH) #NOTE: PATCH is for CMakeLists.txt
-#dk_import(https://github.com/svaarala/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
+dk_import(https://github.com/aquawicket/duktape/archive/refs/heads/master.zip PATCH)
+#dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
+
 
 
 ### LINK ###
