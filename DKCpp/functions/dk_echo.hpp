@@ -1,8 +1,8 @@
 #pragma once
-#ifndef dk_echo_h
-#define dk_echo_h
+#ifndef dk_echo_hpp
+#define dk_echo_hpp
 
-#include "DK.h"
+#include "DK.hpp"
 #include <stdio.h>
 
 //################################################################################
@@ -15,4 +15,4 @@ void dk_echo(const char* message){
 }
 
 
-#endif //dk_echo_h
+#endif //dk_echo_hpp

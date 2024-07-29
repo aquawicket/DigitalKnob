@@ -1,10 +1,4 @@
-#include "dk_echo.h"
-
-/*
-void dk_echo(const char* message){
-	printf("%s\n", message);
-}
-*/
+#include "dk_echo.hpp"
 
 
 

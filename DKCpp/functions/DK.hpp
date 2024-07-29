@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DK_h
-#define DK_h
+#ifndef DK_hpp
+#define DK_hpp
 
 #include <stdio.h>
 
@@ -13,4 +13,4 @@ void DK(){
 //    return 0;
 //}
 
-#endif //DK_h
+#endif //DK_hpp
