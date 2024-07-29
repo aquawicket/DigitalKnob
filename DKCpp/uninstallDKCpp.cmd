@@ -6,6 +6,6 @@
 	
 	ftype DKCpp=
 	assoc .cpp=
+	assoc .h=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
-	call dk_pause
 goto:eof
