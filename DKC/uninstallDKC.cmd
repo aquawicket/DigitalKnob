@@ -1,11 +1,11 @@
 @echo off
 
-:uninstallDKCpp
+:uninstallDKC
 	::###### DKINIT ######
 	call "..\DKBatch\functions\DK.cmd"
 	
-	ftype DKCpp=
-	assoc .cpp=
-	assoc .h=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
+	ftype DKC=
+	assoc .c=
+	::assoc .h=
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKC"
 goto:eof

@@ -8,9 +8,4 @@ void DK(){
 	printf("DK()\n");
 }
 
-//int main() {
-//	printf("main()\n");
-//    return 0;
-//}
-
 #endif //DK_h
