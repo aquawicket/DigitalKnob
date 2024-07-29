@@ -9,13 +9,16 @@ if "%~1" neq "" goto:runDKBatch
 	call dk_echo "Installing DKBatch . . ."
 	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
 	
+	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	ftype DKBatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %%*
-	::assoc .bat=DKBatch
-	assoc .cmd=DKBatch
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+	assoc .cmd=DKBatch
+	
 	call dk_echo "DKBatch install complete"
-	call dk_pause
 goto:eof
 
 

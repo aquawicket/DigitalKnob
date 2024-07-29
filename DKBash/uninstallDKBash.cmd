@@ -5,7 +5,9 @@
 	call "..\DKBatch\functions\DK.cmd"
 	
 	ftype DKBash=
-	assoc .sh=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
-	call dk_pause
+	
+	assoc .sh=
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
 goto:eof

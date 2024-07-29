@@ -5,7 +5,9 @@
 	call "..\DKBatch\functions\DK.cmd"
 
 	ftype DKJavascript=
-	assoc .js=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKJavascript"
-	call dk_pause
+	
+	assoc .js=
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js
 goto:eof

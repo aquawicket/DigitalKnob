@@ -5,7 +5,9 @@
 	call "..\DKBatch\functions\DK.cmd"
 	
 	ftype DKCmake=
-	assoc .cmake=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCmake"
-	call dk_pause
+	
+	assoc .cmake=
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmake"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake
 goto:eof

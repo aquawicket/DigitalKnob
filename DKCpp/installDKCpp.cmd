@@ -13,13 +13,12 @@ if "%~1" neq "" goto:runDKCpp
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate GXX_EXE "call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
 	
-	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%GXX_EXE%" "%%1" %%*
+	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
-	::call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.h
-	::assoc .h=DKCpp
-	::call dk_registrySetKey "HKEY_CLASSES_ROOT\DKCpp\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 	
 	call dk_echo "DKCpp install complete"
 goto:eof

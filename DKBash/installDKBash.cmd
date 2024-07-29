@@ -10,13 +10,15 @@ if "%~1" neq "" (goto:runDKBash)
 	call dk_validate DKBASH_FUNCTIONS_DIR "call dk_validateBranch"
 	call dk_validate GITBASH_EXE "call dk_installGit"
 	
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
 	ftype DKBash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
-	assoc .sh=DKBash
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBash\DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"
 	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
+	assoc .sh=DKBash
+	
 	call dk_echo "DKBash install complete"
-	call dk_pause
 goto:eof
 
 

@@ -10,10 +10,14 @@ if "%~1" neq "" (goto:runDKJavascript)
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate NODEJS_EXE "call %DKIMPORTS_DIR%\nodejs\dk_installNodeJs"
 	
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
+	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	ftype DKJavascript=cmd /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	assoc .js=DKJavascript
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKJavascript\DefaultIcon" "" "REG_SZ" "%NODEJS_EXE%"
+	
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
+	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
+	assoc .js=DKJavascript
 	
 	call dk_echo "DKJavascript install complete"
 	call dk_pause
