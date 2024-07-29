@@ -21,7 +21,6 @@ goto:eof
 
 
 :runDKBash
-	echo :runDKBash %*
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
 	set "DKBASH_FILE=%~3"

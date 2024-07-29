@@ -55,7 +55,7 @@ DKTEST() {
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
 	dk_printVar myArrayB
-	arrayAt3=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
+	arrayAtB=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
 	dk_printVar arrayAtB
 	[ "${arrayAtB}" = "1 2 3" ] || dk_error "dk_arrayAt() failed"
 	[ "${arrayAtB}" = "1 2 3" ] && dk_info "dk_arrayAt() suceeded"
