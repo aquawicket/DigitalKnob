@@ -13,8 +13,8 @@ dk_depend(libgtk-3-dev)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip)
-dk_import(https://github.com/aaronmjacobs/Boxer.git)
+dk_import(https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip)
+#dk_import(https://github.com/aaronmjacobs/Boxer.git)
 
 
 ### LINK ###

@@ -6,7 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### INSTALL ###
-dk_import(https://github.com/bkaradzic/bgfx.git)
+dk_import(https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip)
+#dk_import(https://github.com/bkaradzic/bgfx.git)
 
 
 ### LINK ###

@@ -59,8 +59,8 @@ WIN_dk_depend(winmm)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip) # PATCH)
-#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH) # SDL3
+dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
+#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
 
 
 ### LINK ###
