@@ -10,7 +10,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
 	if %__ARGC__% gtr 4 call dk_error "%__FUNCTION__%(): too many arguments"
 	
-	setlocal
+	::setlocal
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	if not exist "%DKIMPORTS_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
 	
@@ -85,7 +85,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     ::err contains all of the lines
     ::echo %err%
 	
-	endlocal
+	::endlocal
     ::call dk_checkError
 goto:eof
 

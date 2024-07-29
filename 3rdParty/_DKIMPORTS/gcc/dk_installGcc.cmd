@@ -8,11 +8,11 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	
+	::set "MSYSTEM=CLANG64"
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-	call dk_printVar GCC_C_COMPILER
-	call dk_printVar GCC_CXX_COMPILER
+    call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_EXE;GXX_EXE"
+	call dk_printVar GCC_EXE
+	call dk_printVar GXX_EXE
 goto:eof
 
 
