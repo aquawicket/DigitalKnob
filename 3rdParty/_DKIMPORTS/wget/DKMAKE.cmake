@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### Msys2 ###
 if(MSYSTEM)
-	#dk_command(pacman -S wget)
+	#dk_command(${PACMAN_EXE} -S wget --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	dk_findProgram(WGET_EXE bash "${MSYS2}/usr/bin")
 endif()
 

@@ -63,17 +63,38 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
 	
 		if("${MSYSTEM}" STREQUAL "CLANG32")					
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+			#mingw-w64-clang-i686-clang
+			#mingw-w64-clang-i686-clang-analyzer
+			#mingw-w64-clang-i686-clang-libs
+			#mingw-w64-clang-i686-clang-tools-extra
+			#mingw-w64-clang-i686-compiler-rt
+			#mingw-w64-clang-i686-lld
+			#mingw-w64-clang-i686-llvm
+			#mingw-w64-clang-i686-llvm-libs
+			#mingw-w64-clang-i686-crt-git
+			#mingw-w64-clang-i686-headers-git
+			#mingw-w64-clang-i686-libc++
+			#mingw-w64-clang-i686-libunwind
+			#mingw-w64-clang-i686-libmangle-git
+			#mingw-w64-clang-i686-libwinpthread-git
+			#mingw-w64-clang-i686-winpthreads-git
+			#mingw-w64-clang-i686-lldb
+			#mingw-w64-clang-i686-make
+			#mingw-w64-clang-i686-pkgconf
+			#mingw-w64-clang-i686-tools-git
+			#mingw-w64-clang-i686-winstorecompat-git
+			#mingw-w64-clang-i686-llvm-openmp
 		elseif("${MSYSTEM}" STREQUAL "CLANG64")
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif("${MSYSTEM}" STREQUAL "CLANGARM64")
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif("${MSYSTEM}" STREQUAL "MINGW32")
-			dk_command(${PACMAN_EXE} -S mingw-w64-i686-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif("${MSYSTEM}" STREQUAL "MINGW64")
-			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif("${MSYSTEM}" STREQUAL "UCRT64")
-			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)
+			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		endif()
 	else()
 		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")

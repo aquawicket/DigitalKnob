@@ -9,7 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
+dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
+#dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
 
 
 ### INCLUDE/LINK ###

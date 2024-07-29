@@ -48,19 +48,19 @@ elseif(MSYSTEM)
 	if(NOT EXISTS ${CMAKE_EXE})
 		dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 		if(CLANG32)
-			dk_command(pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm)		# CLANG32
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 		elseif(CLANG64)
-			dk_command(pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm)		# CLANG64
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 		elseif(CLANGARM64)
-			dk_command(pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm)	# CLANGARM64
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 		elseif(MINGW32)
-			dk_command(pacman -S mingw-w64-i686-cmake --needed --noconfirm)				# MINGW32
+			dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 		elseif(MINGW64)
-			dk_command(pacman -S mingw-w64-x86_64-cmake --needed --noconfirm)			# MINGW64
+			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 		elseif(UCRT64)
-			dk_command(pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm)		# UCRT64
+			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 		#elseif(MSYS)
-		#	dk_command(pacman -S cmake --needed --noconfirm)							# MSYS2
+		#	dk_command(${PACMAN_EXE} -S cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# MSYS2
 		endif()
 		
 		dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
@@ -199,22 +199,22 @@ if(MSYSTEM)
 	if(NOT EXISTS ${CMAKE_EXE})
 		dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 		if(CLANG32)
-			dk_command(pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm)		# CLANG32
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 			#dk_set(CMAKE_EXE ${MSYS2}/clang32/bin/cmake.exe)
 		elseif(CLANG64)
-			dk_command(pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm)		# CLANG64
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 			#dk_set(CMAKE_EXE ${MSYS2}/clang64/bin/cmake.exe)
 		elseif(CLANGARM64)
-			dk_command(pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm)	# CLANGARM64
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 			#dk_set(CMAKE_EXE ${MSYS2}/clangarm64/bin/cmake.exe)
 		elseif(MINGW32)
-			dk_command(pacman -S mingw-w64-i686-cmake --needed --noconfirm)				# MINGW32
+			dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 			#dk_set(CMAKE_EXE ${MSYS2}/mingw32/bin/cmake.exe)
 		elseif(MINGW64)
-			dk_command(pacman -S mingw-w64-x86_64-cmake --needed --noconfirm)			# MINGW64
+			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 			#dk_set(CMAKE_EXE ${MSYS2}/mingw64/bin/cmake.exe)
 		elseif(UCRT64)
-			dk_command(pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm)		# UCRT64
+			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 			#dk_set(CMAKE_EXE ${MSYS2}/ucrt64/bin/cmake.exe)
 		endif()
 	endif()
