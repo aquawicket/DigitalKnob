@@ -36,13 +36,13 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	endif()
 	dk_printVar(src_path)
 	
-	dk_getDirname(${src_path} src_dir)
+	dk_dirname(${src_path} src_dir)
 	if(NOT src_dir)
 		dk_error("src_dir is invalid")
 	endif()
 	dk_printVar(src_dir)
 	
-	dk_getBasename(${src_path} src_filename)
+	dk_basename(${src_path} src_filename)
 	if(NOT src_filename)
 		dk_error("src_filename is invalid")
 	endif()
@@ -66,7 +66,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	endif()
 	dk_printVar(dest_path)
 	
-	dk_getDirname("${dest_path}" dest_dir)
+	dk_dirname("${dest_path}" dest_dir)
 	if(NOT dest_dir)
 		dk_error("dest_dir is invalid")
 	endif()
@@ -77,7 +77,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	dk_set(CURRENT_DIR "${dest_dir}")
 	dk_printVar(dest_dir)
 	
-	dk_getBasename("${dest_path}" dest_filename)
+	dk_basename("${dest_path}" dest_filename)
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()

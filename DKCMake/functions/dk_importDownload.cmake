@@ -36,7 +36,7 @@ function(dk_importDownload url) #install_path #PATCH
 	endif()
 	
 	dk_verbose(CMAKE_CURRENT_LIST_DIR)
-	dk_getBasename(${CMAKE_CURRENT_LIST_DIR} Lib)
+	dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
 	dk_verbose(Lib)
 	
 	dk_toUpper(${Lib} LIB)

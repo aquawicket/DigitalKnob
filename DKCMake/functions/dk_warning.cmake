@@ -42,7 +42,7 @@ function(dk_warning msg)
 	if(NOT echo_fileline)
 		__FILE__(_FILE_ 0)
 		__LINE__(_LINE_ 0)
-		dk_getBasename("${_FILE_}" _FILE_)
+		dk_basename("${_FILE_}" _FILE_)
 		set(echo_fileline "${_FILE_}:${_LINE_}   " CACHE INTERNAL "")
 	endif()
 	

@@ -3,10 +3,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ##################################################################################
-# dk_getBasename(path, rtn_var)
+# dk_basename(path, rtn_var)
 #
 #
-function(dk_getBasename path rtn_var)
+function(dk_basename path rtn_var)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 2)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
@@ -24,6 +24,6 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	dk_debugFunc(${ARGV})
 	
 	
-	dk_getBasename("/path/to/a/filename.txt" basename)
+	dk_basename("/path/to/a/filename.txt" basename)
 	dk_info("basename = ${basename}")
 endfunction()

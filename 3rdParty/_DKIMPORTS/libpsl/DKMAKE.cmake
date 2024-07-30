@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/rockdaboot/libpsl.git)
+dk_import(https://github.com/rockdaboot/libpsl/archive/refs/heads/master.zip)
+#dk_import(https://github.com/rockdaboot/libpsl.git)
 
 
 # TODO

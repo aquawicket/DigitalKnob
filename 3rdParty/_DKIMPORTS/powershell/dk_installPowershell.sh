@@ -36,7 +36,7 @@ dk_installPowershell() {
 	[ -z "${POWERSHELL_DL}" ] && dk_error "POWERSHELL_DL is invalid"
 	dk_printVar POWERSHELL_DL
 	
-	dk_getBasename "${POWERSHELL_DL}" POWERSHELL_DL_FILE
+	dk_basename "${POWERSHELL_DL}" POWERSHELL_DL_FILE
 	dk_removeExtension "${POWERSHELL_DL_FILE}" POWERSHELL_FOLDER
 	dk_convertToCIdentifier "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER
 	dk_toLower "${POWERSHELL_FOLDER}" POWERSHELL_FOLDER

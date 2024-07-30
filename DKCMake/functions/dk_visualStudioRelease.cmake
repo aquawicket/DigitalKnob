@@ -20,7 +20,7 @@ function(dk_visualStudioRelease path) #target #arch
 	endif()
 	
 	dk_findFiles(${path}/${OS} *.sln sln_file)
-	dk_getBasename(${sln_file} sln_file)
+	dk_basename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")

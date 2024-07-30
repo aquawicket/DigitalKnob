@@ -20,7 +20,7 @@ function(dk_getTargetTriple)
 		#dk_printVar(DK_TARGET_DIR)
 		
 		### Get DK_TARGET_FOLDER ###
-		dk_getBasename(${DK_TARGET_DIR} DK_TARGET_FOLDER)     
+		dk_basename(${DK_TARGET_DIR} DK_TARGET_FOLDER)     
 		#dk_printVar(DK_TARGET_FOLDER)
 		
 		### Get DK_TARGET_OS_DIR
@@ -29,12 +29,12 @@ function(dk_getTargetTriple)
 			dk_set(DK_TARGET_TYPE Debug)
 			dk_set(DEBUG ON)
 			dk_set(RELEASE OFF)
-			dk_getDirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
+			dk_dirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
 		elseif(${DK_TARGET_DIR} MATCHES "Release$")
 			dk_set(DK_TARGET_TYPE Release)
 			dk_set(DEBUG OFF)
 			dk_set(RELEASE ON)
-			dk_getDirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
+			dk_dirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
 		else()
 			dk_set(DK_TARGET_OS_DIR ${CMAKE_BINARY_DIR})
 		endif()
@@ -42,7 +42,7 @@ function(dk_getTargetTriple)
 		#dk_printVar(DK_TARGET_TYPE)
 		
 		### Get DK_TARGET_OS_FOLDER
-		dk_getBasename(${DK_TARGET_OS_DIR} DK_TARGET_OS_FOLDER)     
+		dk_basename(${DK_TARGET_OS_DIR} DK_TARGET_OS_FOLDER)     
 		#dk_printVar(DK_TARGET_OS_FOLDER)
 		
 		dk_set(DK_TARGET_OS ${DK_TARGET_OS_FOLDER})
@@ -108,7 +108,7 @@ function(dk_getTargetTriple)
 		#dk_printVar(DK_TARGET_OS_ARCH)
 
 		### Set DK_PROJECT_DIR ###
-		dk_getDirname(${DK_TARGET_OS_DIR} DK_PROJECT_DIR)
+		dk_dirname(${DK_TARGET_OS_DIR} DK_PROJECT_DIR)
 		dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
 		#dk_printVar(DK_PROJECT_DIR)
 

@@ -25,7 +25,7 @@ if(NOT CMAKE_DL)
 	return()
 endif()
 
-dk_getBasename(${CMAKE_DL} CMAKE_DL_FILE)
+dk_basename(${CMAKE_DL} CMAKE_DL_FILE)
 dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 dk_convertToCIdentifier(${CMAKE_FOLDER} CMAKE_FOLDER)
 

@@ -21,7 +21,7 @@ function(dk_lib lib_path)
 
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
-				dk_getBasename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+				dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS})
 			else()
 				dk_warning("DKINSTALL: Could not locate ${lib_path}")

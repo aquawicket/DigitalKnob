@@ -85,7 +85,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		dk_printVar(PLUGIN_URL)
-		dk_getBasename(${PLUGIN_URL} PLUGIN_URL_FILENAME)						# PLUGIN_URL_FILENAME
+		dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)						# PLUGIN_URL_FILENAME
 		dk_printVar(PLUGIN_URL_FILENAME)
 		dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					# PLUGIN_URL_LIST
 		dk_printVar(PLUGIN_URL_LIST)
@@ -129,7 +129,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(PLUGIN_IMPORT_PATH)		
 	endif()
 	if(PLUGIN_IMPORT_PATH)
-		dk_getBasename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)	# PLUGIN_IMPORT_NAME
+		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)	# PLUGIN_IMPORT_NAME
 		dk_printVar(PLUGIN_IMPORT_NAME)		
 	endif()
 	if(PLUGIN_IMPORT_NAME)

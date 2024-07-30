@@ -46,7 +46,7 @@ dk_installCmake() {
 		
 		CMAKE_DL=${CMAKE_IMPORT}
 		
-		dk_getBasename "${CMAKE_DL}" CMAKE_DL_FILE
+		dk_basename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_removeExtension "${CMAKE_DL_FILE}" CMAKE_FOLDER
 		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER

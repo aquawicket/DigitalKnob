@@ -17,7 +17,7 @@ if(NOT MSYS2_DL)
 	dk_error("MSYS2_DL is invalid")
 endif()
 
-dk_getBasename(${MSYS2_DL} MSYS2_DL_FILE)
+dk_basename(${MSYS2_DL} MSYS2_DL_FILE)
 dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
 
 dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")

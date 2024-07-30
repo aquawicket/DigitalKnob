@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_resizeImage inpath width height outpath)
 	dk_debugFunc(${ARGV})
 	
-	dk_getDirname(${outpath} outdir)
+	dk_dirname(${outpath} outdir)
 	dk_assert(outdir)
 
 	dk_makeDirectory(${outdir})

@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_getAppName path rtn_var)
 	dk_debugFunc(${ARGV})
 	
-	dk_getBasename(${path} fileName)
+	dk_basename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
 	dk_verbose(fileNameNoExt)
 	set(${rtn_var} ${fileNameNoExt} PARENT_SCOPE)

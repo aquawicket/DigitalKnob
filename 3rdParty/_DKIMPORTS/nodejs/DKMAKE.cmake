@@ -14,7 +14,7 @@ if(NOT NODEJS_DL)
 	return()
 endif()
 
-dk_getBasename(${NODEJS_DL} NODEJS_DL_FILE)
+dk_basename(${NODEJS_DL} NODEJS_DL_FILE)
 dk_removeExtension(${NODEJS_DL_FILE} NODEJS_FOLDER)
 dk_convertToCIdentifier(${NODEJS_FOLDER} NODEJS_FOLDER)
 

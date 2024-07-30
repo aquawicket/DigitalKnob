@@ -6,8 +6,8 @@ dk_echo(STATUS "##############################################################")
 
 ###### Get DKCMAKE_DIR ######
 if(NOT DKCMAKE_DIR)
-	dk_getDirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
-	dk_getDirname(${DKCMAKE_DIR} DKBRANCH_DIR)
+	dk_dirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
+	dk_dirname(${DKCMAKE_DIR} DKBRANCH_DIR)
 	set(DK3RDPARTY ${DKBRANCH_DIR}/3rdParty)
 	set(DKIMPORTS_DIR ${DK3RDPARTY}/_DKIMPORTS)
 endif()

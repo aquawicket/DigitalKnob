@@ -29,8 +29,8 @@ function(dk_getFilename path rtn_var)
 	string(SUBSTRING ${path} ${index} -1 filename) 
 	
 	if(NOT filename)
-		dk_warning("dk_getFilename(${path}) failed: Now using dk_getBasename() to retrieve the filename")
-		dk_getBasename("${path}" filename)
+		dk_warning("dk_getFilename(${path}) failed: Now using dk_basename() to retrieve the filename")
+		dk_basename("${path}" filename)
 	endif()
 	
 	dk_assert(filename)

@@ -32,7 +32,7 @@ endif()
 
 ### INSTALL ###
 if(NOT EXISTS "${VCCOMP140_DLL}")
-	dk_getBasename(${VC_REDIST_DL} VC_REDIST_DL_FILE)
+	dk_basename(${VC_REDIST_DL} VC_REDIST_DL_FILE)
 	dk_info("Installing Visual C Redistributable - ${VC_REDIST_DL_FILE}")
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 	dk_download(${VC_REDIST_DL} ${DKDOWNLOAD_DIR}/${VC_REDIST_DL_FILE})

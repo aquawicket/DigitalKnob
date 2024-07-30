@@ -23,7 +23,7 @@ function(dk_include path)
 	endif()
 		
 	if(INSTALL_DKLIBS)
-		dk_getBasename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 		file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
 		dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
 	endif()
