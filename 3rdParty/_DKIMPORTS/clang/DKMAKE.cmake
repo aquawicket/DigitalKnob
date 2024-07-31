@@ -14,27 +14,27 @@ if(MSYSTEM)
 	
 	if(CLANG32)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
-		dk_set(CLANG_EXE ${MSYS2}/clang32/bin/clang.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/clang32/bin/clang.exe)
 		dk_set(CLANGXX_EXE ${MSYS2}/clang32/bin/clang++.exe)
 	elseif(CLANG64)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
-		dk_set(CLANG_EXE	   ${MSYS2}/clang64/bin/clang.exe)
-		dk_set(CLANGXX_EXE  ${MSYS2}/clang64/bin/clang++.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/clang64/bin/clang.exe)
+		dk_set(CLANGXX_EXE ${MSYS2}/clang64/bin/clang++.exe)
 	elseif(CLANGARM64)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
-		dk_set(CLANG_EXE ${MSYS2}/clangarm64/bin/clang.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/clangarm64/bin/clang.exe)
 		dk_set(CLANGXX_EXE ${MSYS2}/clangarm64/bin/clang++.exe)
 	elseif(MINGW32)
 		dk_command(${PACMAN_EXE} -S mingw-w64-i686-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
-		dk_set(CLANG_EXE ${MSYS2}/mingw32/bin/clang.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/mingw32/bin/clang.exe)
 		dk_set(CLANGXX_EXE ${MSYS2}/mingw32/bin/clang++.exe)
 	elseif(MINGW64)
 		dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
-		dk_set(CLANG_EXE ${MSYS2}/mingw64/bin/clang.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/mingw64/bin/clang.exe)
 		dk_set(CLANGXX_EXE ${MSYS2}/mingw64/bin/clang++.exe)
 	elseif(UCRT64)
 		dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
-		dk_set(CLANG_EXE ${MSYS2}/ucrt64/bin/clang.exe)
+		dk_set(CLANG_EXE   ${MSYS2}/ucrt64/bin/clang.exe)
 		dk_set(CLANGXX_EXE ${MSYS2}/ucrt64/bin/clang++.exe)
 	endif()
 endif()

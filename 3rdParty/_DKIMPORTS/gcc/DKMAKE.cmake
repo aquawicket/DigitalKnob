@@ -30,6 +30,7 @@ if(MSYSTEM)
 		dk_set(GXX_EXE ${MSYS2}/mingw32/bin/g++.exe)
 	elseif(MINGW64)
 		dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+		dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		dk_set(GCC_EXE ${MSYS2}/mingw64/bin/gcc.exe)
 		dk_set(GXX_EXE ${MSYS2}/mingw64/bin/g++.exe)
 	elseif(UCRT64)
