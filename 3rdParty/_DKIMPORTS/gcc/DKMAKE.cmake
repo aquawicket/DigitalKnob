@@ -1,13 +1,13 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 
+
 if(DEFINED ENV{MSYSTEM})
 	dk_set(MSYSTEM "$ENV{MSYSTEM}")
 	dk_set($ENV{MSYSTEM} 1)
 endif()
 
 if(MSYSTEM)
-	
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
