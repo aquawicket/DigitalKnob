@@ -1,5 +1,38 @@
 @echo off
 
+::### OS ###
+::default = HOST_OS
+::set "OS=Android"
+::set "OS=Emscripten"
+::set "OS=iOS"
+::set "OS=iOS_Simulator"
+::set "OS=Linux"
+::set "OS=Mac"
+::set "OS=Raspberry"
+::set "OS=Windows"
+
+::### ARCH ###
+::default = HOST_ARCH
+::set "ARCH=arm"
+::set "ARCH=arm64"
+::set "ARCH=x86"
+::set "ARCH=x86_64"
+
+::### COMPILER ###
+::default = clang
+::set "COMPILER=clang"
+::set "COMPILER=gcc"
+::set "COMPILER=msvc"
+
+::### MSYSTEM ###
+::set "MSYSTEM=CLANG32"
+::set "MSYSTEM=CLANG64"
+::set "MSYSTEM=CLANGARM64"
+::set "MSYSTEM=MINGW32"
+::set "MSYSTEM=MINGW64"
+::set "MSYSTEM=MSYS"
+::set "MSYSTEM=UCRT64"
+
 ::Name			Prefix		Toolchain	Arch		C Library	C++ Library
 ::CLANG32		/clang32	llvm		i686		ucrt		libc++
 ::CLANG64		/clang64	llvm		x86_64		ucrt		libc++
@@ -17,45 +50,44 @@ if "%~1" neq "" goto:runDKCpp
 	::###### Install DKCpp ######
 	call dk_echo "Installing DKCpp . . ."
 	
-	::###### Choose Environment ######
-	::set "MSYSTEM=CLANG32"
-	set "MSYSTEM=CLANG64"
-	::set "MSYSTEM=CLANGARM64"
-	::set "MSYSTEM=MINGW32"
-	::set "MSYSTEM=MINGW64"
-	::set "MSYSTEM=MSYS"
-	::set "MSYSTEM=UCRT64"
+	::###### OS ######
+	if not defined OS call dk_validate HOST_OS "call dk_getHostTriple"
+	if not defined OS set "OS=%HOST_OS%"
+	call dk_printVar OS
 	
-	::###### Choose Compiler ######
-	::set "COMPILER=CLANG"
-	::set "COMPILER=CLANGXX"
-	::set "COMPILER=GCC"
-	::set "COMPILER=GXX"
-
-	:: set default compiler
-	if not defined COMPILER if "%MSYSTEM%"=="CLANG32"    set "COMPILER=CLANGXX"
-	if not defined COMPILER if "%MSYSTEM%"=="CLANG64"    set "COMPILER=CLANGXX"
-	if not defined COMPILER if "%MSYSTEM%"=="CLANGARM64" set "COMPILER=CLANGXX"
-	if not defined COMPILER if "%MSYSTEM%"=="MINGW32"    set "COMPILER=GXX"
-	if not defined COMPILER if "%MSYSTEM%"=="MINGW64"    set "COMPILER=GXX"
-	if not defined COMPILER if "%MSYSTEM%"=="MSYS"       set "COMPILER=GXX"
-	if not defined COMPILER if "%MSYSTEM%"=="UCRT64"     set "COMPILER=GXX"
+	::###### ARCH ######
+	if not defined ARCH call dk_validate HOST_ARCH "call dk_getHostTriple"
+	if not defined ARCH set "ARCH=%HOST_ARCH%"
+	call dk_printVar ARCH
 	
-	:: get compiler executable
+	::###### COMPILER ######
+	if not defined COMPILER set "COMPILER=clang"
+	call dk_printVar COMPILER
+	
+	::###### MSYSTEM ######
+	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="x86"    set "MSYSTEM=CLANG32"
+	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="x86_64" set "MSYSTEM=CLANG64"
+	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="arm64"  set "MSYSTEM=CLANGARM64"
+	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86"    set "MSYSTEM=MINGW32"
+	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86_64" set "MSYSTEM=MINGW64"
+	call dk_printVar MSYSTEM
+	
+	::###### COMPILER_EXE ######
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	if "%COMPILER%"=="CLANG"    call dk_validate CLANG_EXE   "call %DKIMPORTS_DIR%\clang\dk_installClang.cmd"
-	if "%COMPILER%"=="CLANGXX"  call dk_validate CLANGXX_EXE "call %DKIMPORTS_DIR%\clang\dk_installClang.cmd"
-	if "%COMPILER%"=="GCC"      call dk_validate GCC_EXE     "call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
-	if "%COMPILER%"=="GXX"      call dk_validate GXX_EXE     "call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
-	if "%COMPILER%"=="CLANG"    set "COMPILER_EXE=%CLANG_EXE%"
-	if "%COMPILER%"=="CLANGXX"  set "COMPILER_EXE=%CLANGXX_EXE%"
-	if "%COMPILER%"=="GCC"      set "COMPILER_EXE=%GCC_EXE%"
-	if "%COMPILER%"=="GXX"      set "COMPILER_EXE=%GXX_EXE%"
-	
+	if "%COMPILER%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
+	if "%COMPILER%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	:: C
+	::if not defined COMPILER_EXE  if "%COMPILER%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
+	::if not defined COMPILER_EXE  if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
+	:: C++
+	if "%COMPILER%"=="clang"  set "COMPILER_EXE=%CLANGXX_EXE%"
+	if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GXX_EXE%"
+	call dk_printVar COMPILER_EXE
+
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
+	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
 	
@@ -69,7 +101,7 @@ goto:eof
 	set "DKCPP_FILE=%~2"
 	
 	echo compiling ...
-	del temp.exe
+	if exist temp.exe  del temp.exe
 	
 	::### Clang/Clang++ ###
 	%COMPILER_EXE% -DDKTEST=1 -o temp -static "%DKCPP_FILE%"

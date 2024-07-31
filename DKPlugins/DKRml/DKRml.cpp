@@ -593,13 +593,14 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 		DKERROR("invalid event\n");
 		return "";
 	}
+	const void* v_ptr = static_cast<const void*>(event);
 	std::stringstream ss;
-	const void* address = static_cast<const void*>(event);
-	ss << address;
-	if(ss.str().compare(0, 2, "0x") != 0){
-		ss.str().insert(0, "0x");
+	ss << v_ptr;
+	DKString address = ss.str();
+	if(address.compare(0, 2, "0x") != 0){
+		address.insert(0, "0x");
 	}
-	return ss.str();
+	return address;
 }
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
@@ -648,17 +649,18 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 		return "";
 	}
 	std::stringstream ss;
-	const void* address = static_cast<const void*>(element);
-	ss << address;
-	if(ss.str().compare(0, 2, "0x") != 0){
-		ss.str().insert(0, "0x");
+	const void* v_ptr = static_cast<const void*>(element);
+	ss << v_ptr;
+	DKString address = ss.str();
+	if(address.compare(0, 2, "0x") != 0){
+		address.insert(0, "0x");
 	}
 
-	if (same("0xDDDDDDDD", ss.str())) {
+	if (same("0xDDDDDDDD", address)) {
 		DKERROR("ss = 0xDDDDDDDD\n");
 		return "";
 	}
-	return ss.str();
+	return address;
 }
 
 //TODO
