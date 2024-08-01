@@ -6,39 +6,38 @@
 #include <sstream>
 #include <iomanip>
 
-template< typename T >
-void addressToObject(const std::uintptr_t& address, T& obj)
-{	
+template< typename T > const std::uintptr_t objectToAddress(T& obj) {
+	std::cout << "objectToAddress(" << obj << ")" << std::endl;
+	const void* v_ptr = (const void*)&obj;
+	return (std::uintptr_t)v_ptr;
+}
+
+template< typename T > void addressToObject(const std::uintptr_t& address, T& obj) {
 	std::cout << "addressToPointer(" << address << ")" << std::endl;
 	const void* v_ptr = (const void*)address;
 	obj = *(T*)v_ptr;
 }
 
-
-const std::uintptr_t pointerToAddress(const void* pointer) {
-	std::cout << "pointerToAddress(" << (std::uintptr_t)pointer << ")" << std::endl;
-	return (std::uintptr_t)pointer;
-}
-
-const void* addressToPointer(const std::uintptr_t& address) {
+template< typename T > T addressToObjectB(const std::uintptr_t& address) {
 	std::cout << "addressToPointer(" << address << ")" << std::endl;
-	return (const void*)address;
+	const void* v_ptr = (const void*)address;
+	return *(T*)v_ptr;
 }
 
-int main() 
-{ 
-	std::string str_var = "simple string";
-	std::cout << "str_var = " << str_var << std::endl;
-
-	const std::uintptr_t address = pointerToAddress(&str_var);
-	std::cout << "address = " << address << std::endl;
+int main() {
 	
-	const void* v_ptr = addressToPointer(address);
+	//////// Object -> Address -> Object /////////////////////////
+	std::string myStringA = "String converted to address and back";
 	
-	std::string test = *(std::string*)v_ptr;
-	std::cout << "test = " << test << std::endl;
+	// To address
+	const std::uintptr_t addressA = objectToAddress(myStringA);
+	std::cout << "addressA = " << addressA << std::endl;
 	
-	std::string test2;
-	addressToObject(address, test2);
-	std::cout << "test = " << test2 << std::endl;
+	// Back to object
+	std::string objA;
+	addressToObject(addressA, objA);
+	std::cout << "objA = " << objA << std::endl;
+	
+	std::string objB = addressToObjectB<std::string>(addressA);
+	std::cout << "objB = " << objB << std::endl;
 }
