@@ -26,29 +26,17 @@ dk_pickUpdate() {
 		fi
 		dk_echo " 1) Git Update"   
 		dk_echo " 2) Git Commit"
-		dk_echo " 3) Push assets"
-		dk_echo " 4) Pull assets"
-		dk_echo " 5) Reset All"
-		dk_echo " 6) Remove All"
-		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 3) Download DigitalKnob"
+		dk_echo " 4) Push assets"
+		dk_echo " 5) Pull assets"
+		dk_echo " 6) Reset All"
+		dk_echo " 7) Remove All"
+		dk_echo " 8) Clear Screen"
+		dk_echo " 9) Clear cmake cache and .tmp files"
+		dk_echo "10) Reload"
+		dk_echo "11) Exit"
 		dk_echo
 		dk_echo " Press Enter To Skip"
-		
-		#dk_echo " 1) Git Update \n   
-		#          2) Git Commit \n
-		#          3) Push assets \n
-		#          4) Pull assets \n
-		#          5) Reset All \n
-		#          6) Remove All \n
-		#          7) Clear Screen \n
-		#          8) Clear cmake cache and .tmp files \n
-		#          9) Reload \n
-		#         10) Exit"
-		#dk_echo
-		#dk_echo " Press Enter To Skip"
 	else
 		dk_warning "Your local repository is behind, please git update"
 		dk_echo
@@ -60,14 +48,15 @@ dk_pickUpdate() {
 		dk_echo " 1) Git Update"
 		dk_echo "${red}"  
 		dk_echo " 2) Git Commit"
-		dk_echo " 3) Push assets"
-		dk_echo " 4) Pull assets"
-		dk_echo " 5) Reset All"
-		dk_echo " 6) Remove All"
-		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 3) Download DigitalKnob"
+		dk_echo " 4) Push assets"
+		dk_echo " 5) Pull assets"
+		dk_echo " 6) Reset All"
+		dk_echo " 7) Remove All"
+		dk_echo " 8) Clear Screen"
+		dk_echo " 9) Clear cmake cache and .tmp files"
+		dk_echo "10) Reload"
+		dk_echo "11) Exit"
 		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
@@ -85,21 +74,23 @@ dk_pickUpdate() {
 	elif [ "${input}" = "2" ]; then
 		dk_gitCommit
 	elif [ "${input}" = "3" ]; then
-		dk_pushAssets
+		dk_downloadDK
 	elif [ "${input}" = "4" ]; then
-		dk_pullAssets
+		dk_pushAssets
 	elif [ "${input}" = "5" ]; then
-		dk_resetAll
+		dk_pullAssets
 	elif [ "${input}" = "6" ]; then
-		dk_removeAll
+		dk_resetAll
 	elif [ "${input}" = "7" ]; then
-		dk_clearScreen
+		dk_removeAll
 	elif [ "${input}" = "8" ]; then
+		dk_clearScreen
+	elif [ "${input}" = "9" ]; then
 		dk_clearCmakeCache
 		dk_deleteTempFiles
-	elif [ "${input}" = "9" ]; then
-		dk_reload
 	elif [ "${input}" = "10" ]; then
+		dk_reload
+	elif [ "${input}" = "11" ]; then
 		dk_exit 0	
 	elif [ "${input}" = "" ]; then
 		UPDATE=1
