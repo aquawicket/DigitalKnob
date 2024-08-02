@@ -59,16 +59,17 @@ call dk_source dk_validate
 	::set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
 	:: Try powershell
-	if not exist "%destination%" powershell /? 1>nul && powershell -command ^
+	if not exist "%destination%_DOWNLOADING" powershell /? 1>nul && powershell -command ^
         "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
+		
 	
 	:: Try curl
-	if not exist "%destination%" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
+	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
 	
 	:: Try certutil
-	if not exist "%destination%" certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
+	if not exist "%destination%_DOWNLOADING" certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
 	
 	:: download as temporary name like myFile.txt_DOWNLOADING
 	:: then rename it to it's original upon completion
