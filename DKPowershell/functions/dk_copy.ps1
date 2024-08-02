@@ -35,7 +35,7 @@ function Global:dk_copy($from, $to) {
 			dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
 			return $false
 		}
-		dk_remove ${to}
+		dk_delete ${to}
 	}
 	
 	# the base directory of the ${to} path must exist.    

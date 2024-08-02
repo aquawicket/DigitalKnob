@@ -24,7 +24,7 @@ function Global:dk_smartExtract($src, $dest) {
 #		dk_makeDirectory $dest_fullpath
 #	}
 	
-	dk_remove $src_dirname/UNZIPPED
+	dk_delete $src_dirname/UNZIPPED
 	dk_info "Extracting $src_filename . . ."
 	dk_extract $src_fullpath $src_dirname/UNZIPPED
 	

@@ -1,18 +1,18 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_remove){ $dk_remove = 1 } else{ return }
+if(!$dk_delete){ $dk_delete = 1 } else{ return }
 
 #####################################################################
-# dk_remove(path)
+# dk_delete(path)
 #
 #
-function Global:dk_remove($path) {
+function Global:dk_delete($path) {
 	dk_debugFunc
 	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	
 	#$path = dk_replaceAll $path "/" "\"
 	if(!(dk_pathExists $path)){
-		dk_warning "dk_remove $path does not exist"
+		dk_warning "dk_delete $path does not exist"
 		return
 	}
 	
@@ -23,7 +23,7 @@ function Global:dk_remove($path) {
 	Remove-Item -Recurse -Force $path
 	
 	if(dk_pathExists $path){
-		dk_error "dk_remove failed to remove $path"
+		dk_error "dk_delete failed to remove $path"
 		return ${false}
 	}
 }
@@ -33,6 +33,6 @@ function Global:dk_remove($path) {
 function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc
 	
-	
-	dk_remove
+	dk_fileWrite "removeMe.file" "created file to test dk_delete"
+	dk_delete "removeMe.file"
 }

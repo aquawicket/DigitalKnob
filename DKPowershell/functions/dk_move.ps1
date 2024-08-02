@@ -28,7 +28,7 @@ function Global:dk_move($_from_, $_to_) {
 		if($OVERWRITE -ne 1){
 			dk_error "Cannot move file. Destiantion exists and OVERWRITE is not set"
 		}
-		#dk_remove $_to_
+		#dk_delete $_to_
 	}
 	
 	# the base directory of the $_to_ path must exist.    
