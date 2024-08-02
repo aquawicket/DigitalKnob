@@ -16,7 +16,7 @@ function(dk_cmakeLanguage code)
 	else()
 		dk_fileWrite(${CMAKE_CURRENT_BINARY_DIR}/eval.cmake "${code}")
 		include(${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
-		dk_remove(${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
+		dk_delete(${CMAKE_CURRENT_BINARY_DIR}/eval.cmake)
 	endif()
 endfunction()
 

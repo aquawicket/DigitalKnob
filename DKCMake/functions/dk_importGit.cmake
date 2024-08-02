@@ -120,7 +120,7 @@ function(dk_importGit url) #branch #id #PATCH
 	if(NOT EXISTS ${${LIBVAR}}/.git)
 		dk_set(CURRENT_DIR ${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})
 		if(EXISTS ${${LIBVAR}})
-			dk_remove(${${LIBVAR}})
+			dk_delete(${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
 			dk_makeDirectory(${${LIBVAR}})

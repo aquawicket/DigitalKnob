@@ -91,7 +91,7 @@ function(dk_installGit)
 	#	endif()
 	#	
 	#	if(NOT EXISTS ${GIT_EXE})
-	#		dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+	#		dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	#		dk_command(pacman -S git --needed --noconfirm)
 	#	endif()
 	#	

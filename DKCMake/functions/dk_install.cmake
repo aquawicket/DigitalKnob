@@ -145,7 +145,7 @@ function(dk_install plugin) #PATCH
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
 		dk_info("Extracting ${dl_filename}")
-		dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED NO_HALT)
+		dk_delete(${DKDOWNLOAD_DIR}/UNZIPPED NO_HALT)
 		dk_extract(${DKDOWNLOAD_DIR}/${dl_filename} ${DKDOWNLOAD_DIR}/UNZIPPED)
 		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DKDOWNLOAD_DIR}/UNZIPPED/" "${DKDOWNLOAD_DIR}/UNZIPPED/*")
@@ -156,7 +156,7 @@ function(dk_install plugin) #PATCH
 		else()
 			if(EXISTS ${DKDOWNLOAD_DIR}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
 				dk_rename(${DKDOWNLOAD_DIR}/UNZIPPED/${dest_filename} ${dest_path} OVERWRITE)
-				dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED)
+				dk_delete(${DKDOWNLOAD_DIR}/UNZIPPED)
 			else() #vZip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
 					if(NOT IS_DIRECTORY ${DKDOWNLOAD_DIR}/UNZIPPED/${item})
@@ -166,7 +166,7 @@ function(dk_install plugin) #PATCH
 				#dk_printVar(dest_path)
 				#dk_wait()
 				dk_rename(${DKDOWNLOAD_DIR}/UNZIPPED/${items} ${dest_path} OVERWRITE)
-				dk_remove(${DKDOWNLOAD_DIR}/UNZIPPED)
+				dk_delete(${DKDOWNLOAD_DIR}/UNZIPPED)
 			endif() 
 		endif()
 	elseif(${FILETYPE} STREQUAL "Executable")
@@ -196,7 +196,7 @@ function(dk_install plugin) #PATCH
 	
 	if(DELETE_DOWNLOADS) # conserve disk space 
 		dk_info("deleting ${DKDOWNLOAD_DIR}/${dl_filename}. . .")
-		dk_remove(${DKDOWNLOAD_DIR}/${dl_filename})
+		dk_delete(${DKDOWNLOAD_DIR}/${dl_filename})
 	endif()
 endfunction()
 dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")

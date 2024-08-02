@@ -46,7 +46,7 @@ endif()
 
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")
-	dk_remove("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
+	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
 
 	
 	dk_findProgram(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")

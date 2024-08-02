@@ -28,7 +28,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
 		if(NOT OVERWRITE)
 			dk_error("Cannot rename file. Destiantion exists and not set to OVERWRITE")
 		endif()
-		dk_remove(${to})
+		dk_delete(${to})
 	endif()
 	
 	# the base directory of the ${to} path must exist.    

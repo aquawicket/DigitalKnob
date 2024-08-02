@@ -137,7 +137,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		dk_info("We will try to get the master commit id from the page")
 		dk_download(${url} ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
 		file(READ ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html PAGE)
-		dk_remove(${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
+		dk_delete(${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
 		string(FIND "${PAGE}" "spoofed_commit_check" index)
 		if(${index} EQUAL -1)
 			dk_error("The page doesn't contain a 'spoofed_commit_check' variable")

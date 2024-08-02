@@ -49,7 +49,7 @@ if(MAC_HOST)
 		dk_download(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		dk_command(tar xf ${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 		dk_command(sudo mv ${DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
-		dk_remove(${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
+		dk_delete(${DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
 	
 	dk_command(java --version)

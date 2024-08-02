@@ -19,7 +19,7 @@ endif()
 if(MSYSTEM)
 	dk_depend(msys2)
 	
-	dk_remove(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	dk_command(bash -c "command -v perl" OUTPUT_VARIABLE PERL_EXE NO_HALT) # BASH_ENV)
 	if(PERL_EXE)
 		dk_command(${CYGPATH_EXE} -m ${PERL_EXE} OUTPUT_VARIABLE PERL_EXE)
