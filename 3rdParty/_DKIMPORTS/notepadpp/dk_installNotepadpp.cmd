@@ -21,20 +21,20 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-	call dk_set NOTEPADPP_EXE "%NOTEPADPP%\notepad++.exe"
+	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+	call dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	
 	if exist "%NOTEPADPP_EXE%" goto:notepadpp_installed
 	call dk_echo   
     call dk_info "Installing notepad++ . . ."
     call dk_download %NOTEPADPP_DL%
-    call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP%"
+    call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP_DIR%"
 	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%"
 	:notepadpp_installed
 	
 	::### Add Dark Mode ###
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP%\config.xml OVERWRITE
+	call dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP_DIR%\config.xml OVERWRITE
 	
 	::### Add Context Menu ###
 	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppContextMenu.cmd

@@ -30,16 +30,17 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
-    if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-    call dk_set GIT_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe
-	call dk_set GITBASH_EXE %DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe
+    call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
+	call dk_set GIT_DIR "%DKTOOLS_DIR%\%GIT_FOLDER%"
+    call dk_set GIT_EXE %GIT_DIR%\bin\git.exe
+	call dk_set GITBASH_EXE %GIT_DIR%\git-bash.exe
      
     if exist "%GIT_EXE%" goto:eof
     call dk_echo   
     call dk_info "Installing git . . ."
     call dk_download %GIT_DL%
-    call dk_info "%DKDOWNLOAD_DIR%\%GIT_DL_FILE% -y -o %DKTOOLS_DIR%\%GIT_FOLDER%"
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
+    call dk_info "%DKDOWNLOAD_DIR%\%GIT_DL_FILE% -y -o %GIT_DIR%"
+    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT_DIR%"
 	   
     if NOT exist "%GIT_EXE%" call dk_error "cannot find git")
 goto:eof

@@ -21,10 +21,10 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 
 	::FIXME: kill notepad++.exe process
-	call dk_remove "%NOTEPADPP%"
+	call dk_remove "%NOTEPADPP_DIR%"
 	
 	::### Uninstall Context Menu ###
 	call %DKIMPORTS_DIR%\notepadpp\dk_uninstallNotepadppContextMenu.cmd

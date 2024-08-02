@@ -26,8 +26,8 @@ goto:eof
 	call dk_debugFunc
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set NOTEPADPP "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
-	call dk_set NOTEPADPP_EXE "%NOTEPADPP%notepad++.exe"
+	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+	call dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
 	call dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%^1\""
 goto:eof
