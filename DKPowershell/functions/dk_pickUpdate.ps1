@@ -22,14 +22,15 @@ function Global:dk_pickUpdate() {
 		}
 		dk_echo " 1) Git Update"   
 		dk_echo " 2) Git Commit"
-		dk_echo " 3) Push assets"
-		dk_echo " 4) Pull assets"
-		dk_echo " 5) Reset All"
-		dk_echo " 6) Remove All"
-		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 3) Download DigitalKnob"
+		dk_echo " 4) Push assets"
+		dk_echo " 5) Pull assets"
+		dk_echo " 6) Reset All"
+		dk_echo " 7) Remove All"
+		dk_echo " 8) Clear Screen"
+		dk_echo " 9) Clear cmake cache and .tmp files"
+		dk_echo "10) Reload"
+		dk_echo "11) Exit"
 		dk_echo
 		dk_echo " Press Enter To Skip"
 	} else {
@@ -43,14 +44,15 @@ function Global:dk_pickUpdate() {
 		dk_echo " 1) Git Update"
 		dk_echo "${red}"  
 		dk_echo " 2) Git Commit"
-		dk_echo " 3) Push assets"
-		dk_echo " 4) Pull assets"
-		dk_echo " 5) Reset All"
-		dk_echo " 6) Remove All"
-		dk_echo " 7) Clear Screen"
-		dk_echo " 8) Clear cmake cache and .tmp files"
-		dk_echo " 9) Reload"
-		dk_echo "10) Exit"
+		dk_echo " 3) Download DigitalKnob"
+		dk_echo " 4) Push assets"
+		dk_echo " 5) Pull assets"
+		dk_echo " 6) Reset All"
+		dk_echo " 7) Remove All"
+		dk_echo " 8) Clear Screen"
+		dk_echo " 9) Clear cmake cache and .tmp files"
+		dk_echo "10) Reload"
+		dk_echo "11) Exit"
 		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
@@ -66,15 +68,16 @@ function Global:dk_pickUpdate() {
 	}
 	elseif($input -eq  "1"){ dk_gitUpdate }
 	elseif($input -eq  "2"){ dk_gitCommit }
-	elseif($input -eq  "3"){ dk_pushAssets }
-	elseif($input -eq  "4"){ dk_pullAssets }
-	elseif($input -eq  "5"){ dk_resetAll }
-	elseif($input -eq  "6"){ dk_removeAll }
-	elseif($input -eq  "7"){ dk_clearScreen }
-	elseif($input -eq  "8"){ dk_clearCmakeCache; dk_deleteTempFiles }
-	elseif($input -eq  "9"){ dk_reload }
-	elseif($input -eq "10"){ dk_exit 0 }	
-	elseif($input -eq   ""){ $global:UPDATE = 1 }
+	elseif($input -eq  "3"){ dk_downloadDK }
+	elseif($input -eq  "4"){ dk_pushAssets }
+	elseif($input -eq  "5"){ dk_pullAssets }
+	elseif($input -eq  "6"){ dk_resetAll }
+	elseif($input -eq  "7"){ dk_removeAll }
+	elseif($input -eq  "8"){ dk_clearScreen }
+	elseif($input -eq  "9"){ dk_clearCmakeCache; dk_deleteTempFiles }
+	elseif($input -eq "10"){ dk_reload }
+	elseif($input -eq "11"){ dk_exit 0 }	
+	elseif($input -eq ""){ $global:UPDATE = 1 }
 	else{ dk_warning "invalid selection"}
 }
 
