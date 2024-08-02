@@ -40,7 +40,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::	)
 	
 	call dk_info "Extracting %src_basename% . . ."
-	call dk_remove "%src_dirname%\UNZIPPED"
+	call dk_delete "%src_dirname%\UNZIPPED"
 	call dk_extract "%src_realpath%" "%src_dirname%\UNZIPPED"
 	
 	

@@ -17,7 +17,7 @@ call dk_source dk_setTitle
 	set "default=%3"
 	set cache_file=%~dp0input_timeout_cache.tmp
 	set thread_file=%~dp0input_timeout_thread.cmd
-	call dk_remove %cache_file% 2>nul >nul
+	call dk_delete %cache_file% 2>nul >nul
 	
 	echo ^@echo off> %thread_file%
 	echo set /p var=>> %thread_file%
@@ -41,7 +41,7 @@ call dk_source dk_setTitle
 	del %thread_file% 2>nul >nul
 	if exist %cache_file% (
 		set /p result=<%cache_file%
-		call dk_remove %cache_file% 2>nul >nul
+		call dk_delete %cache_file% 2>nul >nul
 	) else (
 		set result=%default%
 	)

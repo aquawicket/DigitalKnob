@@ -26,7 +26,7 @@ dk_smartExtract() {
 	fi
 	
 	dk_info "Extracting $src_filename . . ."
-	dk_remove "$src_directory/UNZIPPED"
+	dk_delete "$src_directory/UNZIPPED"
 	dk_extract "$src_fullpath" "$src_directory/UNZIPPED"
 	
 	dk_getDirectories "$src_directory/UNZIPPED" directories

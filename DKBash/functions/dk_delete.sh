@@ -27,6 +27,8 @@ dk_delete() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-
-	dk_delete
+	dk_debugFunc
+	
+	dk_fileWrite "removeMe.file" "created file to test dk_delete"
+	dk_delete "removeMe.file"
 }

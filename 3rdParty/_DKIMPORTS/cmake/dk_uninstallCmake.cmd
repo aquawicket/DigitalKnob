@@ -29,7 +29,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 
 	::FIXME: kill pwsh.exe peocess
-	call dk_remove "%CMAKE%"
+	call dk_delete "%CMAKE%"
 goto:eof
 
 

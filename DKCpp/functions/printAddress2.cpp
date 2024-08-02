@@ -6,16 +6,26 @@
 #include <sstream>
 #include <iomanip>
 
+//https://cplusplus.com/forum/general/266107/
+/*
+template <typename T>
+std::string save_pointer(T *p){
+    return std::to_string((uintptr_t)p);
+}
+
+template <typename T>
+T *restore_pointer(const std::string &s){
+    std::stringstream stream(s);
+    uintptr_t ret;
+    stream >> ret;
+    return (T *)ret;
+}
+*/
+
 template< typename T > const std::uintptr_t objectToAddress(T& obj) {
 	std::cout << "objectToAddress(" << obj << ")" << std::endl;
 	const void* v_ptr = (const void*)&obj;
 	return (std::uintptr_t)v_ptr;
-}
-
-template< typename T > void addressToObject(const std::uintptr_t& address, T& obj) {
-	std::cout << "addressToPointer(" << address << ")" << std::endl;
-	const void* v_ptr = (const void*)address;
-	obj = *(T*)v_ptr;
 }
 
 template< typename T > T addressToObjectB(const std::uintptr_t& address) {
@@ -34,10 +44,6 @@ int main() {
 	std::cout << "addressA = " << addressA << std::endl;
 	
 	// Back to object
-	std::string objA;
-	addressToObject(addressA, objA);
-	std::cout << "objA = " << objA << std::endl;
-	
-	std::string objB = addressToObjectB<std::string>(addressA);
-	std::cout << "objB = " << objB << std::endl;
+	std::string rtn_myStringA = addressToObjectB<std::string>(addressA);
+	std::cout << "rtn_myStringA = " << rtn_myStringA << std::endl;
 }

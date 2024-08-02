@@ -25,7 +25,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 
 	::FIXME: kill pwsh.exe peocess
-	call dk_remove "%POWERSHELL_DIR%"
+	call dk_delete "%POWERSHELL_DIR%"
 goto:eof
 
 

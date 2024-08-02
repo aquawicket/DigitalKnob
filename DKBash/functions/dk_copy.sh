@@ -34,7 +34,7 @@ dk_copy() {
 		if [ "${OVERWRITE}" -ne "1" ]; then
 			dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
 		fi
-		dk_remove ${_to_}
+		dk_delete ${_to_}
 	fi
 	
 	# the base directory of the %to% path must exist.    

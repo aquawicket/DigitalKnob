@@ -15,7 +15,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
 	if not exist "%DKBRANCH_DIR%\.git" (goto:eof)    &:: only create functions list when we have a local repository
 	
-    call dk_remove "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
+    call dk_delete "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
 	for %%a in (%DKBATCH_FUNCTIONS_DIR_%dk_*.cmd) do (
 		echo %%~na
 		call dkFileAppend "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %%~na

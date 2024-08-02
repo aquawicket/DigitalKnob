@@ -29,7 +29,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if "%OVERWRITE%" neq "1" (
 			call dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
 		) 
-		call dk_remove %_to_%
+		call dk_delete %_to_%
 	)
 	
 	:: the base directory of the %to% path must exist.    

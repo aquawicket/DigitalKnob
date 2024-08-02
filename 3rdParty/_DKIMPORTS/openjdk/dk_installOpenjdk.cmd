@@ -59,7 +59,7 @@ goto:eof
 	call dk_download %OPENJDK_DL%
 	call dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	call dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
-	call dk_remove %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
+	call dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	call dk_command java --version 
 goto:eof
 

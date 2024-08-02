@@ -29,7 +29,7 @@ dk_rename() {
 		#if [ $OVERWRITE -ne 1 ]; then
 		#	dk_error "dk_rename(): Cannot rename file. Destiantion exists and not set to OVERWRITE"
 		#fi
-		dk_remove ${_to_}
+		dk_delete ${_to_}
 	fi
 	
 	# the base directory of the ${_to_} path must exist.    

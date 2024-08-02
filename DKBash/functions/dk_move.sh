@@ -31,7 +31,7 @@ dk_move() {
 		if [ $OVERWRITE -ne 1 ]; then
 			dk_error "dk_rename Cannot move file. Destiantion exists and OVERWRITE is not set"
 		fi
-		dk_remove $_to_
+		dk_delete $_to_
 	fi
 	
 	# the base directory of the %to% path must exist.    

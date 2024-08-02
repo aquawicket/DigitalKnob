@@ -30,7 +30,7 @@ call dk_source dk_validate
 	call dk_set GIT_DIR "%DKTOOLS_DIR%\%GIT_FOLDER%"
 
 	::FIXME: kill git.exe process
-    call dk_remove "%GIT_DIR%"
+    call dk_delete "%GIT_DIR%"
         
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	
