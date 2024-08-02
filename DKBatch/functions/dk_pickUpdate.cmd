@@ -32,12 +32,9 @@ call dk_source dk_unset
     call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     call dk_readCache _APP_ _TARGET_OS_ _TYPE_
-	::call dk_printVar _APP_
-	::call dk_printVar _TARGET_OS_
-	::call dk_printVar _TYPE_
 
     call dk_echo
-    call dk_gitCheckRemote
+    call dk_commandExists "git" && call dk_gitCheckRemote
 
     call dk_echo
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]

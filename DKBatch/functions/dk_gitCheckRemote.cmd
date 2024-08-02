@@ -20,7 +20,7 @@ call dk_source dk_warning
     call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     if not exist "%DKBRANCH_DIR%\.git" (call dk_warning "%DKBRANCH_DIR%\.git does not exist" && goto:eof )
 
-	if not defined GIT_EXE call dk_installGit
+	call dk_validate GIT_EXE "call dk_installGit"
 	
     cd "%DKBRANCH_DIR%"
 	
