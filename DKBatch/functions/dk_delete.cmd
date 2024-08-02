@@ -20,7 +20,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	del /F /Q "%_path_%" >nul 2>&1
 	rd /s /q "%_path_%" >nul 2>&1
-	::call dk_sleep 1      &:: # give the path a second to delete
 	
 	if exist "%_path_%" (
 		call dk_error "dk_delete failed to remove %_path_%"
