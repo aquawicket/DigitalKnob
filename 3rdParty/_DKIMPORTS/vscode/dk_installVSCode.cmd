@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 
 ::####################################################################
@@ -9,7 +9,6 @@ call ..\..\..\DKBatch\functions\DK.cmd
 :dk_installVSCode
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%"=="mac" 			           call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip"
@@ -26,21 +25,21 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set VSCODE "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
+	call dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
 	if "%HOST_OS%"=="win" (
-		call dk_set VSCODE_EXE %VSCODE%\Code.exe
+		call dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe
 	) else (
-		call dk_set VSCODE_EXE %VSCODE%\code
+		call dk_set VSCODE_EXE %VSCODE_DIR%\code
 	)	
 
 	if exist %VSCODE_EXE% goto :vscodeInstalled
 	call dk_echo 
     call dk_info "Installing VSCode . . ."
 	call dk_makeDirectory %DKTOOLS_DIR%
-::	call dk_import %VSCODE_DL% PATH %VSCODE%
+::	call dk_import %VSCODE_DL% PATH %VSCODE_DIR%
 	call dk_download %VSCODE_DL%
-	call dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE%"
-	call dk_makeDirectory %VSCODE%\data
+	call dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE_DIR%"
+	call dk_makeDirectory %VSCODE_DIR%\data
 	if not exist %VSCODE_EXE% call dk_error "cannot find %VSCODE_EXE%"
 	:vscodeInstalled
 	

@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 
 ::####################################################################
@@ -8,7 +8,6 @@ call ..\..\..\DKBatch\functions\DK.cmd
 :dk_uninstallPowershell
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	
@@ -24,10 +23,10 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set POWERSHELL "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
+	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 
 	::FIXME: kill pwsh.exe peocess
-	call dk_remove "%POWERSHELL%"
+	call dk_remove "%POWERSHELL_DIR%"
 goto:eof
 
 

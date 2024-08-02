@@ -20,14 +20,14 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     call dk_toLower %QEMU_FOLDER% QEMU_FOLDER
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set QEMU %DKTOOLS_DIR%\%QEMU_FOLDER%
-	call dk_set QEMU_IMG_EXE %QEMU%\qemu-img.exe
-	call dk_set QEMU_SYSTEM_X86_64_EXE %QEMU%\qemu-system-x86_64.exe
+	call dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
+	call dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
+	call dk_set QEMU_SYSTEM_X86_64_EXE %QEMU_DIR%\qemu-system-x86_64.exe
 	
 	if exist "%QEMU_IMG_EXE%" goto:eof
 	
 	call dk_download %QEMU_DL%
-	call dk_getNativePath %QEMU% QEMU_INSTALL_PATH
+	call dk_getNativePath %QEMU_DIR% QEMU_INSTALL_PATH
 	call dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /D=%QEMU_INSTALL_PATH%"
 	call %command_string%
 	

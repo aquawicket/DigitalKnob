@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 start /wait %DKDOWNLOAD_DIR%\vs_Community.exe --layout "%DKDOWNLOAD_DIR%\VisualStudio" ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^

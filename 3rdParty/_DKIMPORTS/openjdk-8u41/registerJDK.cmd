@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 set "Folder=openjdk-8u41-b04-windows-i586-14_jan_2020"
 set "CurrentVersion=1.8.0_41"

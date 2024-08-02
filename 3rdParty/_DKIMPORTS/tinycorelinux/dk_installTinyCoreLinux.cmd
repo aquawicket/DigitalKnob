@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 ::####################################################################
 ::# dk_installTinyCoreLinux
@@ -14,8 +14,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set TINYCORELINUX "%DKTOOLS_DIR%\TinyCoreLinux"
-	call dk_set TINYCORELINUX_IMG %TINYCORELINUX%\tinycore.img
+	call dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
+	call dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate QEMU_IMG_EXE "call %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 	
@@ -27,8 +27,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		call dk_download %TINYCORELINUX_DL%
 		
 		:: create and cd into install directory
-		call dk_makeDirectory %TINYCORELINUX% 
-		cd %TINYCORELINUX%
+		call dk_makeDirectory %TINYCORELINUX_DIR% 
+		cd %TINYCORELINUX_DIR%
 		
 		:::::: Install the OS to the .img file
 		:: (Install from the running virtual OS)
@@ -52,7 +52,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		:: create TinyCoreLinux Launcher
-		call dk_set TINYCORELINUX_launcher "%TINYCORELINUX%\LAUNCH.cmd"
+		call dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"
 		if exist "%TINYCORELINUX_launcher%" goto:eof	
 		call dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 	

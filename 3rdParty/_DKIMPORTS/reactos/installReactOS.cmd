@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 :: https://reactos.org
 :: https://reactos.org/wiki/QEMU
@@ -14,8 +14,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set REACTOS "%DKTOOLS_DIR%\ReactOS"
-	call dk_set REACTOS_IMG %REACTOS%\reactos.img
+	call dk_set REACTOS_DIR "%DKTOOLS_DIR%\ReactOS"
+	call dk_set REACTOS_IMG %REACTOS_DIR%\reactos.img
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate QEMU_IMG_EXE "call %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 	
@@ -28,8 +28,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		call dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
 		:: create and cd into install directory
-		call dk_makeDirectory %REACTOS% 
-		cd %REACTOS%
+		call dk_makeDirectory %REACTOS_DIR% 
+		cd %REACTOS_DIR%
 		
 		:::::: Install the OS to the .img file
 		:: (Install from the running virtual OS)
@@ -44,7 +44,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%REACTOS_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 		
 		:: create ReactOS Launcher
-		call dk_set REACTOS_launcher "%REACTOS%\LAUNCH.cmd"
+		call dk_set REACTOS_launcher "%REACTOS_DIR%\LAUNCH.cmd"
 		if exist "%REACTOS_launcher%" goto:eof	
 		call dk_fileWrite "%REACTOS_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%REACTOS_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 	endlocal

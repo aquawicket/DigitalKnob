@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html

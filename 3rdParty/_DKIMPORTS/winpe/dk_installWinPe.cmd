@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 ::####################################################################
 ::# dk_installWinPE
@@ -18,9 +18,9 @@ call ..\..\..\DKBatch\functions\DK.cmd
 			
 
 			if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-			call dk_set WINPE "%DKTOOLS_DIR%\WindowsPE"
-			call dk_set WINPE_IMG "%WINPE%\winpe.img"
-			call dk_set WINPE_QCOW "%WINPE%\winpe.qcow"
+			call dk_set WINPE_DIR "%DKTOOLS_DIR%\WindowsPE"
+			call dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"
+			call dk_set WINPE_QCOW "%WINPE_DIR%\winpe.qcow"
 			call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 			call dk_validate QEMU_IMG_EXE "call %DKIMPORTS_DIR%\qemu\dk_installQemu.cmd"
 
@@ -37,8 +37,8 @@ call ..\..\..\DKBatch\functions\DK.cmd
 			call dk_download "%WINPE_DL%"
 
 			:: create and cd into install directory
-			if not exist %WINPE% call dk_makeDirectory "%WINPE%" 
-			cd "%WINPE%"
+			if not exist %WINPE_DIR% call dk_makeDirectory "%WINPE_DIR%" 
+			cd "%WINPE_DIR%"
 
 			:::::: Install the OS to the .img file
 			:: (Install from the running virtual OS)
@@ -57,7 +57,7 @@ call ..\..\..\DKBatch\functions\DK.cmd
 		
 		
 		::###### WINPE_launcher ######
-		set "WINPE_launcher=%WINPE%\LAUNCH.cmd"
+		set "WINPE_launcher=%WINPE_DIR%\LAUNCH.cmd"
 			if exist "%WINPE_launcher%" call dk_info "%WINPE_launcher% already exists" && goto:eof	
 			::call dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 			call dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"

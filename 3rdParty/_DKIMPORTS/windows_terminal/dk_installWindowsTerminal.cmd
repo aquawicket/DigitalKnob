@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 ::####################################################################
 ::# dk_installWindowsTerminal()
@@ -23,14 +23,14 @@ call ..\..\..\DKBatch\functions\DK.cmd
 	call dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	
 	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
-	call dk_set WINDOWS_TERMINAL "%DKTOOLS_DIR%\%WINDOWS_TERMINAL_FOLDER%"
-	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL%\wt.exe"
+	call dk_set WINDOWS_TERMINAL_DIR "%DKTOOLS_DIR%\%WINDOWS_TERMINAL_FOLDER%"
+	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL_DIR%\wt.exe"
 	
 	if exist "%WINDOWS_TERMINAL_EXE%" goto:windows_terminal_installed
 	call dk_echo   
     call dk_info "Installing Windows Terminal . . ."
     call dk_download %WINDOWS_TERMINAL_DL%
-    call dk_smartExtract "%DKDOWNLOAD_DIR%\%WINDOWS_TERMINAL_DL_FILE%" "%WINDOWS_TERMINAL%"
+    call dk_smartExtract "%DKDOWNLOAD_DIR%\%WINDOWS_TERMINAL_DL_FILE%" "%WINDOWS_TERMINAL_DIR%"
 	if NOT exist "%WINDOWS_TERMINAL_EXE%" call dk_error "cannot find wt.exe"
 	:windows_terminal_installed
 

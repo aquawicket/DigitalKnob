@@ -1,5 +1,5 @@
 @echo off
-call ..\..\..\DKBatch\functions\DK.cmd
+call "..\..\..\DKBatch\functions\DK.cmd"
 
 call dk_set GOOGLE_CERT "%JAVA_HOME%\google.cer"
 call dk_set MAVEN_CERT "%JAVA_HOME%\maven.cer"
