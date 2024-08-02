@@ -16,7 +16,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
-	if not defined HOST_OS call dk_getHostTriple
+	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe"
 	if not defined VC_REDIST_DL call dk_error "VC_REDIST_DL is invalid"
@@ -30,7 +30,7 @@ pause
 	::### INSTALL ###
 	call dk_basename %VC_REDIST_DL% VC_REDIST_DL_FILE
 	call dk_info "Installing Visual C Redistributable - %VC_REDIST_DL_FILE%"
-	if not defined DKDOWNLOAD_DIR call dk_getDKPaths
+	call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	call dk_download %VC_REDIST_DL% %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE%
 	call dk_command %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE% /install /quiet /norestart 
 	

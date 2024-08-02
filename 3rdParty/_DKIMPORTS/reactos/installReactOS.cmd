@@ -13,7 +13,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	
 	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
 	
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set REACTOS_DIR "%DKTOOLS_DIR%\ReactOS"
 	call dk_set REACTOS_IMG %REACTOS_DIR%\reactos.img
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

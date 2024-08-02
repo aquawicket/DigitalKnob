@@ -19,7 +19,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
 	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 	call dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
 	

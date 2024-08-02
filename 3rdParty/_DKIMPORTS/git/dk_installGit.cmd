@@ -30,6 +30,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
     call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
+	
     call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set GIT_DIR "%DKTOOLS_DIR%\%GIT_FOLDER%"
     call dk_set GIT_EXE %GIT_DIR%\bin\git.exe
@@ -41,6 +42,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
     call dk_download %GIT_DL%
     call dk_info "%DKDOWNLOAD_DIR%\%GIT_DL_FILE% -y -o %GIT_DIR%"
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT_DIR%"
+	call dk_appendEvnPath %GIT_DIR%\bin
 	   
     if NOT exist "%GIT_EXE%" call dk_error "cannot find git")
 goto:eof

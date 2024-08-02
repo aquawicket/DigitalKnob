@@ -25,7 +25,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
     call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
 
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 
 	::FIXME: kill pwsh.exe peocess

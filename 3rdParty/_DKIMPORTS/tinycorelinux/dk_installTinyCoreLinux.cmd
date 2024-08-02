@@ -13,7 +13,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	set "TINYCORELINUX_X86_64=http://www.tinycorelinux.net/15.x/x86_64/release/CorePure64-current.iso"
 	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
 	call dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"

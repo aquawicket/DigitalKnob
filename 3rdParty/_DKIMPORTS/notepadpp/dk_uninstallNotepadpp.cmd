@@ -13,14 +13,14 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
     if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip"
-	if not defined NOTEPADPP_DL goto:eof
+	if not defined NOTEPADPP_DL call dk_error "NOTEPADPP_DL is invalid"
 	
 	call dk_basename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	call dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 
 	::FIXME: kill notepad++.exe process

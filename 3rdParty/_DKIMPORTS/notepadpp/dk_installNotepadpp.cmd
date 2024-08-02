@@ -20,7 +20,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	call dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	call dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	

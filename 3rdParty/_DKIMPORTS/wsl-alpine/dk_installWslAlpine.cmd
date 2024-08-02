@@ -14,7 +14,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_echo   
     call dk_info "Installing WSL-Alpine Linux . . ."
 	
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set ALPINE_DIR "%DKTOOLS_DIR%\AlpineLinux"
 	
 	if exist "%LAUNCHER_DL_FILE%" goto:alpine_installed

@@ -24,7 +24,7 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 	call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
 	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
 	
-	if not defined DKTOOLS_DIR call dk_setDKTOOLS_DIR
+	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
 	if "%HOST_OS%"=="win" (
 		call dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe

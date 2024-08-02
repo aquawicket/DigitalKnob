@@ -39,6 +39,9 @@ call dk_source dk_validate
 
 	::### Uninstall File Associations ###
 	call %DKIMPORTS_DIR%\git\dk_uninstallGitFileAssociations.cmd
+	
+	::### Remove PATH variable
+	:: TODO
 goto:eof
 
 
