@@ -12,7 +12,8 @@ dk_depend(autotools)
 
 
 ### IMPORT ###
-dk_import(https://github.com/guillemj/libmd.git)
+#dk_import(https://github.com/guillemj/libmd.git)
+dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 
 
 ### LINK ###

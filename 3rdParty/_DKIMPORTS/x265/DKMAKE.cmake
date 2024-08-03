@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://bitbucket.org/multicoreware/x265_git.git)
+#dk_import(https://bitbucket.org/multicoreware/x265_git.git)
+dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59d95198c6d8e4133b6002c18e47e7d6fe.zip)
 
 
 ### LINK ###

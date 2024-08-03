@@ -14,7 +14,8 @@ dk_depend(vorbis)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsndfile/libsndfile.git)
+#dk_import(https://github.com/libsndfile/libsndfile.git)
+dk_import(https://github.com/libsndfile/libsndfile/archive/refs/heads/master.zip)
 
 
 ### LINK ###

@@ -8,7 +8,9 @@ dk_depend(ws2_32)
 
 
 ### IMPORT ###
-dk_import(https://github.com/pocoproject/poco.git)
+#dk_import(https://github.com/pocoproject/poco.git)
+dk_import(https://github.com/pocoproject/poco/archive/refs/heads/main.zip)
+
 
 
 ### EMSCRIPTEN FIXES ###

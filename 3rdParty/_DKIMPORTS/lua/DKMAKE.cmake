@@ -5,7 +5,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/lua/lua.git PATCH)
+#dk_import(https://github.com/lua/lua.git PATCH)
+dk_import(https://github.com/lua/lua/archive/refs/heads/master.zip PATCH)
 
 
 ### LINK ###

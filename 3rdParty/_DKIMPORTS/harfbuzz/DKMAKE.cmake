@@ -6,7 +6,9 @@ dk_depend(freetype)
 
 
 ### IMPORT ###
-dk_import(https://github.com/harfbuzz/harfbuzz.git BRANCH main)
+#dk_import(https://github.com/harfbuzz/harfbuzz.git BRANCH main)
+dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
+
 
 
 ### LINK ###

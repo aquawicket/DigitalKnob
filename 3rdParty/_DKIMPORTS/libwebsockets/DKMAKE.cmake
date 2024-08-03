@@ -9,7 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
+#dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
+dk_import(https://github.com/warmcat/libwebsockets/archive/refs/heads/main.zip)
 
 
 ### LINK ###

@@ -6,7 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### IMPORT ###
 #dk_import(git://git.savannah.gnu.org/gzip.git)
-dk_import(https://github.com/kunpengcompute/gzip.git)
+#dk_import(https://github.com/kunpengcompute/gzip.git)
+dk_import(https://github.com/kunpengcompute/gzip/archive/refs/heads/master.zip)
 
 
 ### LINK ###

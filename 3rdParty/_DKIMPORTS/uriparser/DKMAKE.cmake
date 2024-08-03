@@ -2,7 +2,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/uriparser/uriparser
 
 ### INSTALL ###
-dk_import(https://github.com/uriparser/uriparser.git)
+#dk_import(https://github.com/uriparser/uriparser.git)
+dk_import(https://github.com/uriparser/uriparser/archive/refs/heads/master.zip)
 
 
 ### LINK ###

@@ -8,7 +8,8 @@ dk_depend(nasm)
 
 
 ### IMPORT ###
-dk_import(https://code.videolan.org/videolan/x264.git)
+#dk_import(https://code.videolan.org/videolan/x264.git)
+dk_import(https://code.videolan.org/videolan/x264/-/archive/master/x264-master.zip)
 
 
 ### LINK ###

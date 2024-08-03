@@ -7,7 +7,8 @@ WIN_dk_depend(winmm)
 
 
 ### IMPORT ###
-dk_import(https://github.com/thestk/rtaudio.git)
+#dk_import(https://github.com/thestk/rtaudio.git)
+dk_import(https://github.com/thestk/rtaudio/archive/refs/heads/master.zip)
 
 
 ### LINK ###

@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/lighttpd/lighttpd1.4.git)
+#dk_import(https://github.com/lighttpd/lighttpd1.4.git)
+dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
 
 
 ### LINK ###

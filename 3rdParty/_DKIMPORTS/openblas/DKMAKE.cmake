@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/xianyi/OpenBLAS.git BRANCH develop)
+#dk_import(https://github.com/xianyi/OpenBLAS.git BRANCH develop)
+dk_import(https://github.com/OpenMathLib/OpenBLAS/archive/refs/heads/develop.zip)
 
 
 ### LINK ###

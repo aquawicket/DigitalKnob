@@ -6,8 +6,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.1.zip)
 #dk_import(https://github.com/mirror/libX11.git)
+dk_import(https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.1.zip)
+
 
 
 ### LINK ###

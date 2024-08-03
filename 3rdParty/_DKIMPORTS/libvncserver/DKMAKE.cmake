@@ -13,8 +13,8 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/LibVNC/libvncserver.git)
-
+#dk_import(https://github.com/LibVNC/libvncserver.git)
+dk_import(https://github.com/LibVNC/libvncserver/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include						(${LIBVNCSERVER})

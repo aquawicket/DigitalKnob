@@ -4,7 +4,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 
-dk_import(https://github.com/dotnet/ILMerge.git)
+#dk_import(https://github.com/dotnet/ILMerge.git)
+dk_import(https://github.com/dotnet/ILMerge/archive/refs/heads/master.zip)
 
 #dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip)
 

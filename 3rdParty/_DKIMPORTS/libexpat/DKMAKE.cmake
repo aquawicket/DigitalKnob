@@ -4,8 +4,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### IMPORT ###
 #dk_import(https://github.com/libexpat/libexpat/archive/f1a444ef64680ebd4ff89091a2c388cd046ece2d.zip)
-dk_import(https://github.com/libexpat/libexpat.git)
-
+#dk_import(https://github.com/libexpat/libexpat.git)
+dk_import(https://github.com/libexpat/libexpat/archive/refs/heads/master.zip)
 
 
 ### LINK ###

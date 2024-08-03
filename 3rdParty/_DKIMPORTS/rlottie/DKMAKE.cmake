@@ -3,7 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/Samsung/rlottie.git)
+#dk_import(https://github.com/Samsung/rlottie.git)
+dk_import(https://github.com/Samsung/rlottie/archive/refs/heads/master.zip)
+
 
 ### PATCH ###
 dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "")

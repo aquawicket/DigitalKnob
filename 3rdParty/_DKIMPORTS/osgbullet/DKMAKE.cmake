@@ -8,7 +8,8 @@ dk_depend(osgworks)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mccdo/osgbullet.git)
+#dk_import(https://github.com/mccdo/osgbullet.git)
+dk_import(https://github.com/mccdo/osgbullet/archive/refs/heads/master.zip)
 
 
 ### LINK ###

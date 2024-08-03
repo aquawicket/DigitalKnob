@@ -8,7 +8,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_depend(python3)
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main) # TAG ce74ca2)
+dk_import(https://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip)
+#dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main) # TAG ce74ca2)
 
 dk_command(${EMSDK}/emsdk${bat} install latest)
 

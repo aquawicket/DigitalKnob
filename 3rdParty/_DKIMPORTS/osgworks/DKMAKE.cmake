@@ -8,7 +8,8 @@ dk_depend(openscenegraph)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mccdo/osgworks.git)
+#dk_import(https://github.com/mccdo/osgworks.git)
+dk_import(https://github.com/mccdo/osgworks/archive/refs/heads/master.zip)
 
 
 ### LINK ###

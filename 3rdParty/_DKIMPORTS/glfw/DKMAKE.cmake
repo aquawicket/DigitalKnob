@@ -9,7 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/glfw/glfw.git)
+#dk_import(https://github.com/glfw/glfw.git)
+dk_import(https://github.com/glfw/glfw/archive/refs/heads/master.zip)
 
 
 ### LINK ###

@@ -10,8 +10,9 @@ dk_depend(openssl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
 #dk_import(https://github.com/arvidn/libtorrent.git)
+dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
+
 
 
 ### LINK ###

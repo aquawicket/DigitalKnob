@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/Mbed-TLS/mbedtls.git)
+#dk_import(https://github.com/Mbed-TLS/mbedtls.git)
+dk_import(https://github.com/Mbed-TLS/mbedtls/archive/refs/heads/development.zip)
 
 
 ### LINK ###

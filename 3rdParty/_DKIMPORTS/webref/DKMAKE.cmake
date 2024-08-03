@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 dk_depend(nodejs)
 
-dk_import(https://github.com/w3c/webref.git BRANCH curated PATCH)
+#dk_import(https://github.com/w3c/webref.git BRANCH curated PATCH)
+dk_import(https://github.com/w3c/webref/archive/refs/heads/curated.zip PATCH)
 
 
 ### Build Interface Tree ###

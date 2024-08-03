@@ -15,8 +15,9 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
 #dk_import(https://github.com/mekentosj/podofo.git)
+dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
+
 
 
 ### LINK ###

@@ -21,7 +21,9 @@ endif()
 
 
 ### IMPORT ###
-dk_import(https://github.com/mikke89/RmlUi.git TAG 64b36dc)
+#dk_import(https://github.com/mikke89/RmlUi.git TAG 64b36dc)
+dk_import(https://github.com/mikke89/RmlUi/archive/64b36dc4775e3c2eefcd93bdb873cc402c0bbcea.zip)
+
 
 # Version fix #
 dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")

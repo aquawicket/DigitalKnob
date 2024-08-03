@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://www.github.com/martonp96/RmlUi-D3D11.git)
+#dk_import(https://www.github.com/martonp96/RmlUi-D3D11.git)
+dk_import(https://github.com/martonp96/RmlUi-D3D11/archive/refs/heads/master.zip)
 
 
 ### LINK ###

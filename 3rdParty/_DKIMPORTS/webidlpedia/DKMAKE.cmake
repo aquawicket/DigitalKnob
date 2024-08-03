@@ -2,7 +2,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/dontcallmedom/webidlpedia.git
 
 
-dk_import(https://github.com/dontcallmedom/webidlpedia.git BRANCH gh-pages)
+#dk_import(https://github.com/dontcallmedom/webidlpedia.git BRANCH gh-pages)
+dk_import(https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip)
 
 
 ### Build WebAPIs Tree ###

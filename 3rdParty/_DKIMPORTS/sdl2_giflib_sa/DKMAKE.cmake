@@ -9,7 +9,8 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
+#dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
+dk_import(https://github.com/theMealena/SDL2_giflib_sa/archive/refs/heads/master.zip)
 
 
 ### LINK ###

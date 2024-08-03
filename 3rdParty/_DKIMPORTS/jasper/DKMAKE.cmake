@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/jasper-software/jasper.git)
+#dk_import(https://github.com/jasper-software/jasper.git)
+dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zip)
 
 
 ### LINK ###

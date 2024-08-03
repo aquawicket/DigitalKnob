@@ -12,8 +12,8 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/webmproject/libwebp/archive/refs/heads/main.zip)
 #dk_import(https://github.com/webmproject/libwebp.git BRANCH main)
+dk_import(https://github.com/webmproject/libwebp/archive/refs/heads/main.zip)
 
 
 ### LINK ###

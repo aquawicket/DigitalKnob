@@ -1,7 +1,8 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/sammycage/lunasvg.git
 
-dk_import(https://github.com/sammycage/lunasvg.git)
+#dk_import(https://github.com/sammycage/lunasvg.git)
+dk_import(https://github.com/sammycage/lunasvg/archive/refs/heads/master.zip)
 
 dk_include		(${LUNASVG}/include								LUNASVG_INCLUDE_DIR)
 dk_libDebug		(${LUNASVG}/${OS}/${DEBUG_DIR}/liblunasvg.a		LUNASVG_LIBRARY_DEBUG)

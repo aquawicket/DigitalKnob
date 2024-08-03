@@ -4,7 +4,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/jerryscript-project/jerryscript.git)
+#dk_import(https://github.com/jerryscript-project/jerryscript.git)
+dk_import(https://github.com/jerryscript-project/jerryscript/archive/refs/heads/master.zip)
 
 
 ### LINK ###

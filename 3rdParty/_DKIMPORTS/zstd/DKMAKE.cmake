@@ -3,8 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/facebook/zstd/archive/refs/heads/release.zip)
 #dk_import(https://github.com/facebook/zstd.git BRANCH release)
+dk_import(https://github.com/facebook/zstd/archive/refs/heads/release.zip)
+
 
 
 ### LINK ###

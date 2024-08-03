@@ -28,7 +28,8 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
+#dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
+dk_import(https://github.com/openscenegraph/OpenSceneGraph/archive/refs/heads/master.zip)
 dk_set(OSG_PLUGINS osgPlugins-3.7.0)
 
 

@@ -9,7 +9,8 @@ if(APPLE)
 endif()
 
 ### IMPORT ###
-dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig.git BRANCH main)
+dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fontconfig-main.zip)
+#dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig.git BRANCH main)
 
 
 ### LINK ###

@@ -7,7 +7,8 @@ if(NOT UNIX_HOST)
 endif()
 
 
-dk_import(https://github.com/mouuff/simple-getch.git)
+#dk_import(https://github.com/mouuff/simple-getch.git)
+dk_import(https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
 
 
 ### LINK ###

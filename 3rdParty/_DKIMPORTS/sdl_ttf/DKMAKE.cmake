@@ -11,8 +11,9 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH) # SDL3
+dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1.zip PATCH)
+
 
 
 ### LINK ###

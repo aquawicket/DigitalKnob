@@ -3,7 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 dk_depend(nodejs)
 
-dk_import(https://github.com/w3c/reffy.git BRANCH main)
+#dk_import(https://github.com/w3c/reffy.git BRANCH main)
+dk_import(https://github.com/w3c/reffy/archive/refs/heads/main.zip)
+
 
 # https://github.com/w3c/reffy#readme
 dk_set(REFFY_CRAWL_IDL OFF)

@@ -10,8 +10,8 @@ dk_depend(zlib)
 
 ### IMPORT ###
 if(MAC)
-	dk_import(https://github.com/pnggroup/libpng/archive/refs/heads/libpng16.zip)
 	#dk_import(https://github.com/glennrp/libpng.git)
+	dk_import(https://github.com/pnggroup/libpng/archive/refs/heads/libpng16.zip)
 else()
 	dk_import(https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip PATCH)
 	dk_set(LIBPNG_MAJOR 1)

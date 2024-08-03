@@ -3,7 +3,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libssh/libssh-mirror.git)
+#dk_import(https://github.com/libssh/libssh-mirror.git)
+dk_import(https://github.com/libssh/libssh-mirror/archive/refs/heads/master.zip)
 
 
 # TODO

@@ -2,7 +2,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/ninja-build/ninja.git
 
 
-dk_import(https://github.com/ninja-build/ninja.git)
+#dk_import(https://github.com/ninja-build/ninja.git)
+dk_import(https://github.com/ninja-build/ninja/archive/refs/heads/master.zip)
+
 
 dk_include(${NINJA})
 

@@ -19,7 +19,8 @@ dk_depend(nasm)
 ### IMPORT ###
 #WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
 #dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
-dk_import		(https://github.com/openssl/openssl.git)
+#dk_import		(https://github.com/openssl/openssl.git)
+dk_import		(https://github.com/openssl/openssl/archive/refs/heads/master.zip)
 
 
 #if(EMSCRIPTEN)

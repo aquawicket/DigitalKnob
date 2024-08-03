@@ -7,8 +7,9 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_net/archive/refs/tags/release-2.2.0.zip)
 #dk_import(https://github.com/libsdl-org/SDL_net.git BRANCH main) # SDL3
+dk_import(https://github.com/libsdl-org/SDL_net/archive/refs/tags/release-2.2.0.zip)
+
 
 
 ### LINK ###

@@ -1,7 +1,8 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/LuaJIT/LuaJIT.git
 
-dk_import(https://github.com/LuaJIT/LuaJIT.git BRANCH v2.1)
+#dk_import(https://github.com/LuaJIT/LuaJIT.git BRANCH v2.1)
+dk_import(https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v2.1.zip)
 
 #dk_import(https://github.com/tarantool/luajit.git BRANCH tarantool/master)
 #dk_rename(${DK3RDPARTY_DIR}/luajit-tarantool/master ${DK3RDPARTY_DIR}/luajit OVERWRITE)

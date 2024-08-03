@@ -17,7 +17,8 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/DanBloomberg/leptonica.git)
+#dk_import(https://github.com/DanBloomberg/leptonica.git)
+dk_import(https://github.com/DanBloomberg/leptonica/archive/refs/heads/master.zip)
 
 
 ### LINK ###

@@ -26,8 +26,9 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libarchive/libarchive/archive/refs/heads/master.zip)
 #dk_import(https://github.com/libarchive/libarchive.git)
+dk_import(https://github.com/libarchive/libarchive/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###

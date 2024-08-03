@@ -34,8 +34,9 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH) # SDL3
+dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip PATCH)
+
 
 
 ### LINK ###

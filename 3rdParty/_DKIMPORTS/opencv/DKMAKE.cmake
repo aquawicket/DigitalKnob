@@ -16,7 +16,8 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/opencv/opencv.git)
+#dk_import(https://github.com/opencv/opencv.git)
+dk_import(https://github.com/opencv/opencv/archive/refs/heads/master.zip)
 dk_set(OPENCV_VERSION 470)
 
 

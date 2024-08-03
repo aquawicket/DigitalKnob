@@ -11,7 +11,8 @@ dk_depend(sw)
 
 
 ### IMPORT ###
-dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
+#dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
+dk_import(https://github.com/tesseract-ocr/tesseract/archive/refs/heads/main.zip)
 
 
 ### LINK ###

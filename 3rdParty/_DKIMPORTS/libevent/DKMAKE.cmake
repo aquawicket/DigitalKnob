@@ -8,8 +8,8 @@ dk_depend(openssl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libevent/libevent.git)
-
+#dk_import(https://github.com/libevent/libevent.git)
+dk_import(https://github.com/libevent/libevent/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${LIBEVENT}/include)

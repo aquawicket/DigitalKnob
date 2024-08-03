@@ -9,7 +9,9 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/htacg/tidy-html5.git)
+#dk_import(https://github.com/htacg/tidy-html5.git)
+dk_import(https://github.com/htacg/tidy-html5/archive/refs/heads/next.zip)
+
 
 
 dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DLIBTIDY_VERSION" "#add_definitions ( -DLIBTIDY_VERSION")

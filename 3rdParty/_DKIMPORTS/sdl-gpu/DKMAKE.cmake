@@ -8,7 +8,8 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/grimfang4/sdl-gpu.git)
+#dk_import(https://github.com/grimfang4/sdl-gpu.git)
+dk_import(https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip)
 
 
 ### LINK ###

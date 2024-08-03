@@ -6,8 +6,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
 #dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git BRANCH main)
+dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
+
 
 
 ### LINK ###
