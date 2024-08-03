@@ -1,7 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/htacg/tidy-html5.git
-# https://github.com/htacg/tidy-html5/archive/5.7.28.zip
-# https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 
 ### DEPEND ###
@@ -10,7 +8,7 @@ dk_depend(zlib)
 
 ### IMPORT ###
 #dk_import(https://github.com/htacg/tidy-html5.git)
-dk_import(https://github.com/htacg/tidy-html5/archive/refs/heads/next.zip)
+dk_import(https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 
 
 
