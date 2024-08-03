@@ -23,7 +23,8 @@ dk_download() {
 #	[ -n ${destination} ] && dk_realpath "${destination}" destination
 #	dk_printVar destination
 	
-	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
+	dk_getDKPaths
+	#dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"
 	#dk_printVar DKDOWNLOAD_DIR
 	
 	[ -z ${destination} ] && destination="${DKDOWNLOAD_DIR}/${url_filename}"
@@ -49,10 +50,10 @@ dk_download() {
 	# set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 	
 	# try wget
-	dk_pathExists "${destination}" || dk_commandExists "wget" && wget -P "${destination_dir}" "${url}"
+	dk_pathExists "${destination}" || dk_commandExists "wget" && wget -P "${destination_dir}" "${url}" || $(true)
 	
 	# try curl
-	dk_pathExists "${destination}" || dk_commandExists "curl" && curl -Lo "${destination}" "${url}"
+	dk_pathExists "${destination}" || dk_commandExists "curl" && curl -Lo "${destination}" "${url}" || $(true)
 	
 	
 	[ -e "${destination}" ] || dk_error "failed to download ${url_filename}"
