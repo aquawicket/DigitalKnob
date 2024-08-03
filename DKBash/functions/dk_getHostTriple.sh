@@ -13,26 +13,41 @@ try() {
 ##################################################################################
 # dk_getHostTriple()
 #
-#	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
-#	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
+#	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
+#	and build the accoring HOST_TRIPLE variable.  I.E. x86_64_windows_msys2
 #
-#   Triple:
-#   ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT
-#	<arch>   = x86_64, i386, arm, thumb, mips, etc.
-#   <sub>    = i.e on ARM: v5, v6m, v7a, v7m, etc.
-#   <vendor> = pc, apple, nvidia, ibm, etc.
-#   <sys>    = none, linux, win32, darwin, cuda, etc.
-#   <env>    = eabi, gnu, android, macho, elf, etc.
+#   TRIPLE:
+#   architecture	The target’s architecture. If none is specified, an unknown architecture is assumed.
+#   sub          	The target’s sub architecture
+#	vendor			The target’s vendor. If none is specified, an unknown vendor is assumed.
+#	os				The target’s operating system. If none is specified, an unknown operating system is assumed.
+# 	environment     The target’s environment. If none is specified, an unknown environment is assumed.
+#	objectFormat	The target’s object file format. If none is specified, an unknown object file format is assumed.
+#
+#	ARCHITECTURE   -   VENDOR   -   OS   -   ENVIRONMENT
+#	<arch><sub>       <vendor>     <os>      <env><format>
+#
+#	<arch>    = arm, arm64, x86, x86_64, wasm32, wasm64
+#    <sub>    = i.e on ARM: v5, v6m, v7a, v7m, etc.
+#   <vendor>  = pc, apple
+#   <os>      = darwin, emscripten, ios, linux, macosx, win32, wasi
+#   <env>     = gnu, android, musl, msvc, simulator
+#    <format> = coff, elf, wasm
 #
 #   EXAMPLES:
 #    ARCH/SUB  - VENDOR  - OS     - ENV
-#   x86_64     - pc      - msys
-#   x86_64     - unknown - mingw64_nt-10.0-19041
+#     x86_64   -   pc    - msys
+#     x86_64   - unknown - mingw64_nt-10.0-19041
 #
 #   Target Triples:
-#   x86_64-pc-windows-msvc
 #   i686-w64-mingw32
-#
+#   x86_64-alpine-linux-musl
+#   x86_64-pc-msys
+#   x86_64-pc-windows-msvc
+#   x86_64-unknown-mingw64_nt-1
+#   x86_64-unknown-msys_nt-10.0-19041
+#   x86_64-unknown-mingw64_nt-10.0-19041'
+#   x86_64-w64-windows-gnu
 #
 #   REFERENCE: http://wiki.osdev.org/Target_Triplet
 #              https://wiki.debian.org/Multiarch/Tuples
