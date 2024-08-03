@@ -22,12 +22,11 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "MyArray[0]=1"
-	set "MyArray[1]=2"
-	set "MyArray[2]=3"
-	set "MyArray[3]=a"
-	set "MyArray[4]=b"
-	set "MyArray[5]=c"
-	call dk_arrayToString MyArray arryString
-	call dk_info "arryString = %arryString%"
+	set "myArrayA[0]=a b c"
+	set "myArrayA[1]=1 2 3"
+	set "myArrayA[2]=d e f"
+	set "myArrayA[3]=4 5 6"
+	set "myArrayA[4]=h i j"
+	call dk_arrayToString MyArrayA MyStringA
+	call dk_info "MyStringA = %MyStringA%"
 goto:eof

@@ -51,7 +51,14 @@ DKTEST() {
 	dk_arrayConcat myArray1 myArray2 myNewArrayA
 	dk_printVar myNewArrayA
 	
-	
+	[ "${myNewArrayA[0]-}" = "a b c" ] && \
+	[ "${myNewArrayA[1]-}" = "d e f" ] && \
+	[ "${myNewArrayA[2]-}" = "g h i" ] && \
+	[ "${myNewArrayA[3]-}" = "1 2 3" ] && \
+	[ "${myNewArrayA[4]-}" = "4 5 6" ] && \
+	[ "${myNewArrayA[5]-}" = "7 8 9" ] && \
+	dk_echo "dk_arrayConcat succeeded" || \
+	dk_echo "dk_arrayConcat failed"
 	
 	myArray3[0]="a b c"
 	myArray3[1]="d e f"
@@ -63,4 +70,13 @@ DKTEST() {
 	
 	IFS=$'\n' myNewArrayB=($(dk_arrayConcat myArray3 myArray4))
 	dk_printVar myNewArrayB
+	
+	[ "${myNewArrayB[0]-}" = "a b c" ] && \
+	[ "${myNewArrayB[1]-}" = "d e f" ] && \
+	[ "${myNewArrayB[2]-}" = "g h i" ] && \
+	[ "${myNewArrayB[3]-}" = "1 2 3" ] && \
+	[ "${myNewArrayB[4]-}" = "4 5 6" ] && \
+	[ "${myNewArrayB[5]-}" = "7 8 9" ] && \
+	dk_echo "dk_arrayConcat succeeded" || \
+	dk_echo "dk_arrayConcat failed"
 }

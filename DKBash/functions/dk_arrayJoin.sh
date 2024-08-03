@@ -2,6 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ################################################################################
+# dk_arrayJoin(array, separator)
 # dk_arrayJoin(array, separator, rtn_var)
 #
 #    The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. 
@@ -23,17 +24,17 @@ dk_arrayJoin() {
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array string optional:rtn_var
 
-	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
-	for ((i=0; i < ${#array[@]}; i++ )); do
-		if [ -z "${dk_arrayJoin-}" ]; then
-			local dk_arrayJoin="${array[${i}]}"
+	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
+	for ((i=0; i < ${#_array_[@]}; i++ )); do
+		if [ -z "${arrayJoin-}" ]; then
+			local arrayJoin="${_array_[${i}]}"
 		else
-		    local dk_arrayJoin="${dk_arrayJoin}${2}${array[${i}]}"
+		    local arrayJoin="${arrayJoin}${2}${_array_[${i}]}"
 		fi
 	done
 	
-	[ ${#} -gt 2 ] && eval ${3}='"${dk_arrayJoin}"' && return
-	dk_return "${dk_arrayJoin}" && return	
+	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' && return
+	dk_return "${arrayJoin}" && return	
 }
 
 

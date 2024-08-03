@@ -75,5 +75,5 @@ goto:eof
 	"%myNewArrayA[2]%" == "g h i" if ^
 	"%myNewArrayA[3]%" == "1 2 3" if ^
 	"%myNewArrayA[4]%" == "4 5 6" if ^
-	"%myNewArrayA[5]%" == "7 8 9" dk_echo "dk_arrayConcat succeeded"
+	"%myNewArrayA[5]%" == "7 8 9" call dk_echo "dk_arrayConcat succeeded"
 goto:eof
