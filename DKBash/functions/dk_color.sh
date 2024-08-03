@@ -22,7 +22,8 @@ dk_color() {
 		fi
 	fi
 	
-	if dk_defined USE_COLOR; then
+	if [ -n ${USE_COLOR-} ]; then
+	#if dk_defined USE_COLOR; then
 		export ESC=""     		 		# escape character
 		
 		# Attributes on

@@ -23,6 +23,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
 	call dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
 	call dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %ALPINE_DIR%\%LAUNCHER_DL_FILE% OVERWRITE
+	%ALPINE_DIR%\%LAUNCHER_DL_FILE% config --default-user root
 	%ALPINE_DIR%\%LAUNCHER_DL_FILE%
 	if NOT exist "%ALPINE_DIR%\%LAUNCHER_DL_FILE%" call dk_error "cannot find ALPINE_DIR\LAUNCHER_DL_FILE:%ALPINE%\%LAUNCHER_DL_FILE%"
 	:alpine_installed

@@ -305,12 +305,12 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [build.cmd](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.cmd) 
+Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.cmd) 
 
 ### Unix Host
-Download [build.sh](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.sh) <br>
-From terminal run 'chmod 777 /path/to/build.sh' <br>
-Run '/path/to/build.sh'
+Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh) <br>
+From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
+Run '/path/to/DKBuilder.sh'
 
 ### DKCMake
 Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
