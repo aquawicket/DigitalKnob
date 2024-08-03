@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
 ::# dk_installPowershell()
@@ -7,7 +7,6 @@ call "..\..\..\DKBatch\functions\DK.cmd"
 :dk_installPowershell
 	call dk_debugFunc
 	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"

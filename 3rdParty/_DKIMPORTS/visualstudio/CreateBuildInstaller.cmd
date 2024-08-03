@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file

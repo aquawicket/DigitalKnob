@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 %DKBATCH_DIR%\dk_cmakeEval.cmd "include('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')"
 

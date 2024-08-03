@@ -8,8 +8,8 @@ if not "%*" == "" (goto:runDKPowershell)
 	::###### Install DKPowershell ######
 	call dk_echo "Installing DKPowershell . . ."
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-	
+	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
+
 	
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
 	ftype DKPowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*

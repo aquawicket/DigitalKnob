@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 set "Folder=openjdk-11_windows-x64_bin"
 set "CurrentVersion=11"

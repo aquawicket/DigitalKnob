@@ -1,5 +1,5 @@
 @echo off
-call "..\..\..\DKBatch\functions\DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 :: https://reactos.org
 :: https://reactos.org/wiki/QEMU
