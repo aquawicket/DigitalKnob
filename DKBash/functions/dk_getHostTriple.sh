@@ -34,12 +34,8 @@ try() {
 #   <env>     = gnu, android, musl, msvc, simulator
 #    <format> = coff, elf, wasm
 #
-#   EXAMPLES:
-#    ARCH/SUB  - VENDOR  - OS     - ENV
-#     x86_64   -   pc    - msys
-#     x86_64   - unknown - mingw64_nt-10.0-19041
 #
-#   Target Triples:
+#   HOST TRIPLES:
 #   i686-w64-mingw32
 #   x86_64-alpine-linux-musl
 #   x86_64-pc-msys
@@ -48,6 +44,7 @@ try() {
 #   x86_64-unknown-msys_nt-10.0-19041
 #   x86_64-unknown-mingw64_nt-10.0-19041'
 #   x86_64-w64-windows-gnu
+#
 #
 #   REFERENCE: http://wiki.osdev.org/Target_Triplet
 #              https://wiki.debian.org/Multiarch/Tuples
