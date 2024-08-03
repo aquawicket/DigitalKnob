@@ -38,7 +38,7 @@ dk_download() {
 	
 	[ -e "${destination}" ] && dk_info "${destination} already exist" && return
 	
-	dk_info "Downloading %url_filename% . . ."
+	dk_info "Downloading ${url_filename} . . ."
 	
 	# make sure the destination parent directory exists
 	dk_dirname "${destination}" destination_dir

@@ -34,12 +34,12 @@ dk_move() {
 		dk_delete $_to_
 	fi
 	
-	# the base directory of the %to% path must exist.    
-	dk_dirname "$_to_" _parent_dir_
+	# the base directory of the ${_to_} path must exist.    
+	dk_dirname "${_to_}" _parent_dir_
 	dk_printVar _parent_dir_
-	dk_makeDirectory "$_parent_dir_"
+	dk_makeDirectory "${_parent_dir_}"
 	
-	mv "$_from_" "$_to_"
+	mv "${_from_}" "${_to_}"
 }
 
 
