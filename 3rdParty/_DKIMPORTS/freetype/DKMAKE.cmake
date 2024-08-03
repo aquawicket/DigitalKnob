@@ -9,8 +9,9 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz PATCH)
 #dk_import(https://github.com/freetype/freetype.git)
+dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz PATCH)
+
 
 
 ### LINK ###

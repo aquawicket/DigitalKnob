@@ -14,8 +14,9 @@ dk_depend(msys2)
 
 
 ### IMPORT ###
-dk_import(https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.zip)
 #dk_import(https://gitlab.com/bzip2/bzip2.git)
+dk_import(https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.zip)
+
 
 
 

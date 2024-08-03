@@ -13,9 +13,9 @@ dk_depend(autotools)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/mirrorer/giflib.git PATCH)
 #dk_import(https://sourceforge.net/code-snapshots/git/g/gi/giflib/code.git/giflib-code-8bed392c280ad2c237e8bf1beca6f8f68f893e87.zip)
 #dk_import(https://git.code.sf.net/p/giflib/code.git PATCH)
+#dk_import(https://github.com/mirrorer/giflib.git PATCH)
 dk_import(https://github.com/mirrorer/giflib/archive/refs/heads/master.zip)
 
 set(GIFLIB_USE_CMAKE ON)

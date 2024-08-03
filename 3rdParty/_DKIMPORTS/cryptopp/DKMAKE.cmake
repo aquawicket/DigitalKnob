@@ -15,8 +15,8 @@ UNIX_dk_import		(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP
 if(MINGW)
 	WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
 else()
-	WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/heads/master.zip)
 	#WIN_dk_import	(https://github.com/weidai11/cryptopp.git PATCH)
+	WIN_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/heads/master.zip)
 endif()
 
 

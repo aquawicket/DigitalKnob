@@ -3,8 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
 #dk_import(https://github.com/aubio/aubio.git)
+dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###

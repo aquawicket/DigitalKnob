@@ -3,8 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/FFTW/fftw3/archive/refs/heads/master.zip)
 #dk_import(https://github.com/FFTW/fftw3.git)
+dk_import(https://github.com/FFTW/fftw3/archive/refs/heads/master.zip)
+
 
 
 # TODO

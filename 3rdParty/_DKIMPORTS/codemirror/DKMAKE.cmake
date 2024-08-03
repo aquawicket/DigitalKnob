@@ -4,5 +4,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/codemirror/CodeMirror/archive/17634c2205d987366dedbb763fbf7b4d4ecf1326.zip
 # https://codemirror.net/codemirror.zip
 
-dk_import(https://github.com/codemirror/codemirror5/archive/refs/heads/master.zip)
 #dk_import(https://github.com/codemirror/CodeMirror.git)
+dk_import(https://github.com/codemirror/codemirror5/archive/refs/heads/master.zip)
+

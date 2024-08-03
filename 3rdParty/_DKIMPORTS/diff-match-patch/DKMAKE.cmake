@@ -4,9 +4,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
+#dk_import(https://github.com/google/diff-match-patch.git)
 #dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
 dk_import(https://github.com/google/diff-match-patch/archive/refs/heads/master.zip)
-#dk_import(https://github.com/google/diff-match-patch.git)
+
 
 
 ### LINK ###

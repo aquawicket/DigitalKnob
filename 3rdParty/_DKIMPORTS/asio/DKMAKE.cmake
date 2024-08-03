@@ -3,8 +3,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip)
 #dk_import(https://github.com/chriskohlhoff/asio.git)
+dk_import(https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip)
+
 
 
 # TODO

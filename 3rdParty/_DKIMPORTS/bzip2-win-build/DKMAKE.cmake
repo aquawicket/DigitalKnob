@@ -14,8 +14,9 @@ dk_depend(msys2)
 
 
 ### IMPORT ###
-dk_import(https://github.com/kiyolee/bzip2-win-build/archive/refs/heads/main.zip)
 #dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
+dk_import(https://github.com/kiyolee/bzip2-win-build/archive/refs/heads/main.zip)
+
 
 
 ### LINK ###

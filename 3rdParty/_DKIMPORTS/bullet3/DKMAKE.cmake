@@ -6,8 +6,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-dk_import(https://github.com/bulletphysics/bullet3/archive/refs/heads/master.zip)
 #dk_import(https://github.com/bulletphysics/bullet3.git)
+dk_import(https://github.com/bulletphysics/bullet3/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###

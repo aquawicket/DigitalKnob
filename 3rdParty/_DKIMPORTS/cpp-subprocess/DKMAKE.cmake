@@ -5,8 +5,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #			Use #include "subprocess.hpp"
 
 ### IMPORT ###
-dk_import(https://github.com/tsaarni/cpp-subprocess/archive/refs/heads/master.zip)
 #dk_import(https://github.com/tsaarni/cpp-subprocess.git)
+dk_import(https://github.com/tsaarni/cpp-subprocess/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###
