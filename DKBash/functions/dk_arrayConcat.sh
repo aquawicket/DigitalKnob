@@ -31,7 +31,7 @@ dk_arrayConcat() {
 
 	### return value ###
 	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
-	dk_return new_array && return
+	dk_return "${new_array[@]}" && return							# FIXME
 }
 
 

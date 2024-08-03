@@ -7,7 +7,7 @@ for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
 
 
-:: *** Get the caller of this script, needed for later restart
+:: *** Get the caller of this script, needed to return from this script
 :Step1
 (
     (goto) 2>nul
@@ -178,7 +178,7 @@ goto:eof
 		for %%x in (%BATCH_ARGV[1]%) do set /A BATCH_ARGC[1]+=1
 	)
 	
-	rem ### Return to :dk_caller_return lable in calling function
+	rem ### Return to :dk_caller_return label in calling function
 	call :dk_callStackReturn
 goto:eof
 

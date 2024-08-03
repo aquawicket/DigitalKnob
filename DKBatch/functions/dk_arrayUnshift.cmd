@@ -1,19 +1,29 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::###################################################################################################
-::# dk_arrayUnshift(array, element1, element2, /* …, */ elementN)
+::################################################################################
+::# dk_arrayUnshift(array, element)
+::# dk_arrayUnshift(array, element, rtn_var)
+::#
+::#    Adds the specified elements to the beginning of an array and returns the new length of the array.
+::#
+::#    PARAMETERS
+::#    element1, …, elementN
+::#    The elements to add to the front of the arr.
+::#
+::#    RETURN VALUE
+::#    The new length property of the object upon which the method was called.
 ::#
 ::#    https://www.w3schools.com/js/js_array_methods.asp#mark_unshift
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_arrayUnshift
 	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
 	
 	setlocal
 	set "_arry_=%~1"
-	::set "_value_=%~2"
+	::set "_element_=%~2"
 	
 	call dk_arrayLength %~1 count
 	set /a prev=count-1
@@ -36,11 +46,23 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 	
-	set "MyArray[0]=c"
-	set "MyArray[1]=d"
-	set "MyArray[2]=e"
+	call dk_arrayUnshift myArrayA "a b c" ::new_lengthA
+	call dk_printVar myArrayA
+	::call dk_printVar new_lengthA
 	
-	call dk_printVar MyArray
-	call dk_arrayUnshift MyArray b
-	call dk_printVar MyArray
+	call dk_arrayUnshift myArrayA "1 2 3" ::new_lengthA
+	call dk_printVar myArrayA
+	::call dk_printVar new_lengthA
+	
+	call dk_arrayUnshift myArrayA "d e f" ::new_lengthA
+	call dk_printVar myArrayA
+	::call dk_printVar new_lengthA
+	
+	call dk_arrayUnshift myArrayA "4 5 6" ::new_lengthA
+	call dk_printVar myArrayA
+	::call dk_printVar new_lengthA
+	
+	call dk_arrayUnshift myArrayA "h i j" ::new_lengthA
+	call dk_printVar myArrayA
+	::call dk_printVar new_lengthA
 goto:eof

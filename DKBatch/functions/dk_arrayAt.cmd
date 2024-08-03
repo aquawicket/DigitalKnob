@@ -24,9 +24,13 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::call dk_validateArgs array int optional:rtn_var
 	setlocal
 
+	
 	::### return value ###
-	if "!!" neq "" endlocal & call dk_set %3 "%%%~1[%~2]%%"
+	::if "!!" neq "" endlocal & call dk_set %3 "%%%~1[%~2]%%"
+	if "!!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
 	if "!!" equ "" endlocal & set "%3=!%~1[%~2]!"
+	
+	
 goto:eof
 
 
@@ -46,6 +50,7 @@ goto:eof
 	call dk_printVar myArrayA
 	call dk_arrayAt MyArrayA 2 arrayAtA
 	call dk_printVar arrayAtA
+	call dk_echo "dk_arrayAt(MyArrayA 2) = %arrayAtA%"
 	if "%arrayAtA%" neq "d e f" call dk_error "dk_arrayAt() failed"
 	if "%arrayAtA%" equ "d e f" call dk_info "dk_arrayAt() suceeded" 
 	
@@ -57,6 +62,7 @@ goto:eof
 	call dk_printVar myArrayB
 	call dk_arrayAt MyArrayB 3 arrayAtB
 	call dk_printVar arrayAtB
+	call dk_echo "dk_arrayAt(MyArrayB 3) = %arrayAtB%"
 	if "%arrayAtB%" neq "1 2 3" call dk_error "dk_arrayAt() failed"
 	if "%arrayAtB%" equ "1 2 3" call dk_info "dk_arrayAt() suceeded" 
 goto:eof

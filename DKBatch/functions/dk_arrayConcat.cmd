@@ -24,31 +24,31 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	::#dk_validateArgs array array
 	
-	set "_arry1_=%~1"
-	set "_arry2_=%~2"
-	set "_arry3_=%~3"
+	set "_arrayA_=%~1"
+	set "_arrayB_=%~2"
+	set "_arrayC_=%~3"
 	
 	set /a countA=0
 	set /a countB=0
 	:dk_arrayConcat_loop1
-	if defined %_arry1_%[%countA%] (
-		call set "%_arry3_%[%countB%]=%%%_arry1_%[%countA%]%%"  &:: FIXME: remove the need for call here
+	if defined %_arrayA_%[%countA%] (
+		call set "%_arrayC_%[%countB%]=%%%_arrayA_%[%countA%]%%"  &:: FIXME: remove the need for call here
 		set /a countA+=1
 		set /a countB+=1
 		goto:dk_arrayConcat_loop1
 	)
 	set /a countA=0
 	:dk_arrayConcat_loop2
-	if defined %_arry2_%[%countA%] (
-		call set "%_arry3_%[%countB%]=%%%_arry2_%[%countA%]%%"  &:: FIXME: remove the need for call here
+	if defined %_arrayB_%[%countA%] (
+		call set "%_arrayC_%[%countB%]=%%%_arrayB_%[%countA%]%%"  &:: FIXME: remove the need for call here
 		set /a countA+=1
 		set /a countB+=1
 		goto:dk_arrayConcat_loop2
 	)
 
 	::### return value ###
-	if "!!" neq "" endlocal & call dk_set %3 "%_arry3_%"
-	if "!!" equ "" endlocal & set "%3=!_arry3_!"
+	if "!!" neq "" endlocal & call dk_set %3 "%_arrayC_%"
+	if "!!" equ "" endlocal & set "%3=!_arrayC_!"
 goto:eof
 
 

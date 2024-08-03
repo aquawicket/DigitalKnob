@@ -23,12 +23,16 @@ dk_arrayAt() {
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array int optional:rtn_var
 	
-	eval local arrayAt='("${'${1}'[${2}]}")'
+	#eval local arrayAt='("${'${1}'[${2}]}")'
+	eval local arrayAt='${'${1}'[${2}]}'
 	
 	### return value ###
-	[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
+	#[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
+	[ ${#} -gt 2 ] && eval ${3}='${'${1}'[${2}]}' && return	# return value using return variable
 	dk_return "${arrayAt}" && return						# return value using command substitution
+	#dk_return "${"${1}"[${2}]}" && return					# return value using command substitution
 }
+
 
 
 
@@ -46,6 +50,7 @@ DKTEST() {
 	dk_printVar myArrayA
 	dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
 	dk_printVar arrayAtA
+	dk_echo "dk_arrayAt(MyArrayA 2) = ${arrayAtA}"
 	[ "${arrayAtA}" = "d e f" ] || dk_error "dk_arrayAt() failed"
 	[ "${arrayAtA}" = "d e f" ] && dk_info "dk_arrayAt() suceeded" 
 	
@@ -57,6 +62,7 @@ DKTEST() {
 	dk_printVar myArrayB
 	arrayAtB=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
 	dk_printVar arrayAtB
+	dk_echo "dk_arrayAt(MyArrayB 3) = ${arrayAtB}"
 	[ "${arrayAtB}" = "1 2 3" ] || dk_error "dk_arrayAt() failed"
 	[ "${arrayAtB}" = "1 2 3" ] && dk_info "dk_arrayAt() suceeded"
 }

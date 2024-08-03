@@ -36,7 +36,8 @@ dk_arrayUnshift() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() { 
 	dk_debugFunc
 	
 	dk_arrayUnshift myArrayA "a b c" #new_lengthA

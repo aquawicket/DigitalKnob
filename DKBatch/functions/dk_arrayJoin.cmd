@@ -56,4 +56,15 @@ goto:eof
 	
 	call dk_arrayJoin myArrayA "," myStringA
 	call dk_printVar myStringA
+	
+	
+	set "myArrayB[0]=h i j"
+	set "myArrayB[1]=4 5 6"
+	set "myArrayB[2]=d e f"
+	set "myArrayB[3]=1 2 3"
+	set "myArrayB[4]=a b c"
+	
+	call dk_arrayJoin myArrayB "," myStringB
+	::myStringB=$(dk_arrayJoin myArrayB ",")
+	call dk_printVar myStringB
 goto:eof
