@@ -16,6 +16,32 @@ try() {
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
+#   Triple:
+#   ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT
+#	<arch>   = x86_64, i386, arm, thumb, mips, etc.
+#   <sub>    = i.e on ARM: v5, v6m, v7a, v7m, etc.
+#   <vendor> = pc, apple, nvidia, ibm, etc.
+#   <sys>    = none, linux, win32, darwin, cuda, etc.
+#   <env>    = eabi, gnu, android, macho, elf, etc.
+#
+#   EXAMPLES:
+#    ARCH/SUB  - VENDOR  - OS     - ENV
+#   x86_64     - pc      - msys
+#   x86_64     - unknown - mingw64_nt-10.0-19041
+#
+#   Target Triples:
+#   x86_64-pc-windows-msvc
+#   i686-w64-mingw32
+#
+#
+#   REFERENCE: http://wiki.osdev.org/Target_Triplet
+#              https://wiki.debian.org/Multiarch/Tuples
+#              https://clang.llvm.org/docs/CrossCompilation.html
+#              https://llvm.org/doxygen/Triple_8h_source.html
+#              https://doc.rust-lang.org/rustc/platform-support.html
+#              https://llvm-swift.github.io/LLVMSwift/Structs/Triple.html
+#              https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target
+#
 dk_getHostTriple() {
 	dk_debugFunc
 	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
@@ -287,6 +313,7 @@ dk_getHostTriple() {
 	if [ "${HOST_OS}" = "win" ]; then
 		HOST_ENV=clang
 		HOST_TRIPLE=${HOST_TRIPLE}_${HOST_ENV}
+		#HOST_TRIPLE=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
 		dk_printVar HOST_TRIPLE
 	fi
 }
