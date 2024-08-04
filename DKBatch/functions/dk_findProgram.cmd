@@ -13,6 +13,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if exist "%VAL%" call dk_debug("already FOUND %name% at %VAL%") && goto:eof
 
+	call dk_commandToVariable "where /R C:\ %name%" %VAR%
+	call dk_printVar %VAR%
 ::	if("${${VAR}}" STREQUAL "${VAR}-NOTFOUND")
 ::		set(${VAR}_second_pass 1)
 ::	endif()
