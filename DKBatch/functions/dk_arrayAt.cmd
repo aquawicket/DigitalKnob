@@ -2,7 +2,6 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_arrayAt(array, index)
 ::# dk_arrayAt(array, index, rtn_var)
 ::#
 ::#	 Takes an array instance with an integer value and returns the item at that index, 
@@ -19,9 +18,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayAt
 	call dk_debugFunc
-	call dk_minMaxArgs 0 2
-::	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-::	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_minMaxArgs 3
 	::call dk_validateArgs array int optional:rtn_var
 	setlocal
 
@@ -30,7 +27,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::if "!!" neq "" endlocal & call dk_set %3 "%%%~1[%~2]%%"
 	if "!!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
 	if "!!" equ "" endlocal & set "%3=!%~1[%~2]!"
-	
 	
 goto:eof
 
@@ -41,7 +37,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	::call dk_debugFunc
+	call dk_debugFunc
+	call dk_minMaxArgs 0
 	
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

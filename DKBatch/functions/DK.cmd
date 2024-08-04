@@ -47,6 +47,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	
     ::############ LOAD FUNCTION FILES ############
     call dk_source dk_debugFunc
+	call dk_source dk_minMaxArgs
     call dk_source dk_echo
     call dk_source dk_color && call dk_color
     call dk_source dk_logo  && call dk_logo
@@ -154,6 +155,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc
+	call dk_minMaxArgs
 	
     %DKSCRIPT_NAME%
 goto:eof
