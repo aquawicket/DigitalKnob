@@ -19,7 +19,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: in the same diretory the archive file is in.    
 	if not exist "%~1" call dk_error "%~1 does not exist"
 	
-	echo ARGC = %dk_extract_argc%
 	if "%dk_extract_argc%" equ "2" goto:twoParams
 	::### handle 1 parameter
 	call dk_basename "%~1" basename

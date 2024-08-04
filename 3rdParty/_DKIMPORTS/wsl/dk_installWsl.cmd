@@ -12,7 +12,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
 	call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-	call dk_powershellEval "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux"
+	call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+
 	
 	:: Step 2 - Check requirements for running WSL 2
 	:: TODO
@@ -33,7 +34,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	wsl --set-default-version 2
 	
 	goto:eof
-	:: Step 6 - Install your Linux distribution of choice
+	:: Install your Linux distribution of choice
 	call dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
 	call dk_echo   
     call dk_info "Installing WSL-Alpine Linux . . ."
