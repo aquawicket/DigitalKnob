@@ -28,7 +28,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayIndexOf
 	call dk_debugFunc
-	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_minMaxArgs 3
+	::if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	setlocal
 	set _count_=0
@@ -56,6 +57,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
+	call dk_minMaxArgs 0
 	
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

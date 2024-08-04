@@ -35,7 +35,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayCopyWithin
 	call dk_debugFunc
-	if %__ARGC__% neq 4 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_minMaxArgs 4
+	::if %__ARGC__% neq 4 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_todo %__FUNCTION__%
 goto:eof
@@ -46,6 +47,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
+	call dk_minMaxArgs 0
 
 	call dk_arrayCopyWithin array target start end
 goto:eof

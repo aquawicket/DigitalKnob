@@ -26,8 +26,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayIncludes
 	call dk_debugFunc
-	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_minMaxArgs 2 3
+	::if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	::if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
 	::dk_validateArgs array string
 	
 	setlocal enableDelayedExpansion
@@ -54,6 +55,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc
+	call dk_minMaxArgs 0
 	
 	set "array123[0]=1"
 	set "array123[1]=2"
