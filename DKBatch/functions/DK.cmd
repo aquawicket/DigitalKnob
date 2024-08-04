@@ -155,7 +155,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc
-	call dk_minMaxArgs
+	::call dk_minMaxArgs
 	
     %DKSCRIPT_NAME%
 goto:eof

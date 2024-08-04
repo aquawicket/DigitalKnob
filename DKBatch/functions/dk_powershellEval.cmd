@@ -11,6 +11,10 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	
 	setlocal
+	::if not exist "%POWERSHELL_EXE%" where /R C:\Users\Administrator\digitalknob\DKTools pwsh.exe
+	
+	
+	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	
 	call dk_validate DKPOWERSHELL_DIR "call dk_validateBranch"
@@ -44,10 +48,11 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::set "POWERSHELL_ARGS=%POWERSHELL_ARGS% 2>cmake_eval.err"
 	
-	call dk_set POWERSHELL_ARGS "%~1"
-	echo POWERSHELL_ARGS = %POWERSHELL_ARGS%
-	"%POWERSHELL_EXE%" -Command %POWERSHELL_ARGS%
-
+	::call dk_set POWERSHELL_ARGS "%~1"
+	::echo POWERSHELL_ARGS = %POWERSHELL_ARGS%
+	::"%POWERSHELL_EXE%" -Command %POWERSHELL_ARGS%
+	"%POWERSHELL_EXE%" -Command %~1
+	
 	::if not defined DKRETURN goto:eof
 	::if not exist %DKPOWERSHELL_DIR%\powershell_vars.cmd goto:eof
     ::call %DKPOWERSHELL_DIR%\powershell_vars.cmd
