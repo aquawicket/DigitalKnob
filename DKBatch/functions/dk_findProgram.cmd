@@ -7,24 +7,23 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_findProgram
 	call dk_debugFunc
+	call dk_minMaxArgs 2 10
+	
+	setlocal
 	set "VAR=%~1"
 	set "VAL=!%VAR%!"
 	set "name=%~2"
+	if "%~3" equ "" set "pattern=C:\"
+	if "%~3" neq "" set "pattern=%~3" 
 	
 	if exist "%VAL%" call dk_debug("already FOUND %name% at %VAL%") && goto:eof
 
-	call dk_commandToVariable "where /R C:\ %name%" %VAR%
+	call dk_commandToVariable "where /R %pattern% %name% 2>nul" %VAR%
 	call dk_printVar %VAR%
-::	if("${${VAR}}" STREQUAL "${VAR}-NOTFOUND")
-::		set(${VAR}_second_pass 1)
-::	endif()
-::	
-::	if(${VAR})
-::		dk_error("error {VAR} already set to ${VAR}")
-::	endif()
-::	
-::	if(ARGN)
-::		dk_getSubdirectories("${ARGN}" SEARCH_DIRS) # Recursive search
+	endlocal & set "%2=!%VAR%!"
+
+::	if exist "%~3"
+::		dk_getSubdirectories "%~3" SEARCH_DIRS # Recursive search
 ::		list(REMOVE_DUPLICATES SEARCH_DIRS)
 ::	endif()
 ::	if(SEARCH_DIRS)
@@ -64,5 +63,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc
 
-	call dk_findProgram POWERSHELL_EXE "pwsh.exe"
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	call dk_printVar POWERSHELL_EXE
+	call dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 goto:eof
