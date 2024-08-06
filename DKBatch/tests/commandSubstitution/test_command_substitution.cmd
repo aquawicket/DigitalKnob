@@ -1,11 +1,11 @@
 @echo off
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
 ::# test_comman_substitution.cmd
 ::#
 ::#
-::###### DK_Init ######
-call "../functions/DK.cmd"
+
 
 setlocal enabledelayedexpansion
 

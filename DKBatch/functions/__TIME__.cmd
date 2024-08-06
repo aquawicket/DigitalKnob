@@ -121,7 +121,7 @@ goto:eof
 	
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
-	call debugFunc
+	call dk_debugFunc
 	
 	echo date time = %date% %time%
 	echo date = %date%
