@@ -18,6 +18,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_timer
 	setlocal enableExtensions
+	echo:
 	call set ID=%%%1%%
 	
 	::###### DATE ######
@@ -30,48 +31,120 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			set %%c=%%f
 		)
 	)
-	set "year=%yy%"
-	set "month=%mm%"
-	set "day=%dd%"
-	echo DATE = %month%/%day%/%year%
+	set "Year=%yy%"
+	set "Month=%mm%"
+	set "Day=%dd%"
+	echo DATE = %Month%/%Day%/%Year%
 	
 	::###### TIME ######
 	for /f "tokens=5-8 delims=:. " %%a in ('echo/^|time') do (
-	  set hour=%%a
-	  set minute=%%b
-	  set second=%%c
-	  set centisecond=%%d
+	  set Hour=%%a
+	  set Minute=%%b
+	  set Second=%%c
+	  set CentiSecond=%%d
 	)
-	echo TIME = %hour%:%minute%:%second%.%centisecond%
+	echo TIME = %Hour%:%Minute%:%Second%.%CentiSecond%
+	
 	
 	::###### DATE-TIME #######
-	echo TIMESTAMP = %month%/%day%/%year%-%hour%:%minute%:%second%.%centisecond%
+	echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
-	tm_sec + tm_min*60 + tm_hour*3600 + tm_yday*86400 + (tm_year-70)*31536000 + ((tm_year-69)/4)*86400 -((tm_year-1)/100)*86400 + ((tm_year+299)/400)*86400
+	::###### REMOVE LEADING ZEROS ######
+	set /a "Year=10000%Year%%%10000"
+	set /a "Month=100%Month%%%100"
+	set /a "Day=100%Day%%%100"
+	set /a "Hour=100%Hour%%%100"
+	set /a "Minute=100%Minute%%%100"
+	set /a "Second=100%Second%%%100"
+	set /a "CentiSecond=100%CentiSecond%%%100"
+	::echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
-	::###### EPOCH ######
-	set /a day=100%day% %% 100
-	set /a month=100%month% %% 100
-	set /a z=14-month
-	set /a z/=12
-	set /a y=year+4800-z
-	set /a m=month+12*z-3
-	set /a j=153*m+2
-	set /a j=j/5+day+y*365+y/4-y/100+y/400-2472633
-	set /a hour=100%hour% %% 100
-	set /a minute=100%minute% %% 100
-	set /a second=100%second% %% 100
-	set /a j=j*86400+hour*3600+minute*60+second
-	echo EPOCH = %j%
+	::set "Resolution=CentiSecond"
+	::set "Width=Minute"
+	
+	::     Seconds =    1             Seconds =  1
+	::Milliseconds =    1000           Minute =  0.0166667
+	::Centiseconds =    100              Hour =  0.00027777833333
+	:: Deciseconds =    10
+	::     Seconds =    1
+	:: Decaseconds =    0.1
+	::Hectoseconds =    0.01
+	:: Kiloseconds =    0.001
 	
 	
+	
+	::###### UNIX TIME ######
+	set /a z=(14-100%Month%%%100)/12, y=10000%Year%%%10000-z
+	set /a ut=y*365+y/4-y/100+y/400+(153*(100%Month%%%100+12*z-3)+2)/5+Day-719469
+	set /a UnixTime=ut*86400+100%Hour%%%100*3600+100%Minute%%%100*60+100%Second%%%100
+	echo UnixTime = %UnixTime%
+	
+	::###### UNIX TIME A ######
+	set /a UnixTimeA=100%Hour%%%100*3600+100%Minute%%%100*60+100%Second%%%100
+	echo UnixTimeA = %UnixTimeA%
+	
+	::###### CentiTime ######
+	set /a "CentiTime=%CentiSecond%*1"
+	echo CentiTime = %CentiTime%
+	set /a "SecondTime=(%Second%)*100+%CentiSecond%"
+	echo SecondTime = %SecondTime%
+	set /a "MinuteTime=((%Minute%)*60+%Second%)*100+%CentiSecond%"
+	echo MinuteTime = %MinuteTime%
+	set /a "HourTime=(((%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
+	echo HourTime = %HourTime%
+	set /a "DayTime=((((%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
+	echo DayTime = %DayTime%
+	set /a "MonthTime=(((((%Month%)*30+%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
+	echo MonthTime = %MonthTime%
+	::set /a "YearTime=((((((%Year%)*12+%Month%)*30+%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
+	::echo YearTime = %YearTime%
+	
+	
+
+	set /a "CentiTime=%CentiSecond%*1"
+	echo CentiTime = %CentiTime%
+	
+
+	set /a "SecondTime=%Second%*100+%CentiTime%"
+	echo SecondTime = %SecondTime%
+	set /a "MinuteTime=%Minute%*60*100+%SecondTime%"
+	echo MinuteTime = %MinuteTime%
+	set /a "HourTime=%Hour%*60*60*100+%MinuteTime%"
+	echo HourTime = %HourTime%
+	set /a "DayTime=%Day%*24*60*60*100+%HourTime%
+	echo DayTime = %DayTime%
+	set /a "MonthTime=%Month%*30*24*60*60*100+%DayTime%"
+	echo MonthTime = %MonthTime%
+	::set /a "YearTime=%Month%*3110400000+%MonthTime%"
+	::echo YearTime = %YearTime%
+	
+	set /a "CentiB=(%CentiTime%)/1"
+	echo CentiB = %CentiB%
+	set /a "SecondB=(%SecondTime%-%CentiTime%)/100"
+	echo SecondB = %SecondB%
+	set /a "MinuteB=(%MinuteTime%-%SecondTime%)/60/100"
+	echo MinuteB = %MinuteB%
+	set /a "HourB=(%HourTime%-%MinuteTime%)/60/60/100"
+	echo HourB = %HourB%
+	set /a "DayB=(%DayTime%-%HourTime%)/24/60/60/100"
+	echo DayB = %DayB%
+	set /a "MonthB=(%MonthTime%-%DayTime%)/30/24/60/60/100"
+	echo MonthB = %MonthB%
+	::set /a "YearB=(%YearTime%-%MonthTime%)12/30/24/60/60/100"
+	::echo YearB = %YearB%
+	
+	
+
+	
+	
+	::###### Timer / Elapsed Time ######
 	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
 		set last=%%a
 		set first=%%b
 		set init=%%c
 	)
-	if {%init%}=={} endlocal & set %1=0 0 %j% & goto:eof
-	set /a last=j-init-first
+	if {%init%}=={} endlocal & set %1=0 0 %CentiSecondsTime% & goto:eof
+	set /a last=CentiSecondsTime-init-first
 	set /a first+=last
 	endlocal & set %1=%last% %first% %init%
 goto:eof
