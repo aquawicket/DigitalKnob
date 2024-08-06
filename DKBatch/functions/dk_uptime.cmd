@@ -32,7 +32,11 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		set "nn=%%b"
 		set "ss=%%c"
 	)
-	if 1%yy% lss 200 if 1%yy% lss 170 (set yy=20%yy%) else (set yy=19%yy%)
+	if 1%yy% lss 200 if 1%yy% lss 170 (
+		set yy=20%yy%
+	) else (
+		set yy=19%yy%
+	)
 	set /a dd=100%dd%%%100,mm=100%mm%%%100
 	set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2
 	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
