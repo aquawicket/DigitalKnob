@@ -4,15 +4,17 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::################################################################################
 ::# dk_timer(ID)
 ::#
-::# Func: Returns number of seconds elapsed since the function was last
-::#       called and first called. For NT4/2000/XP/2003.
+::#    Func: Returns number of seconds elapsed since the function was last
+::#        called and first called. For NT4/2000/XP/2003.
 ::#
-::# Args: %1 (by ref) The first time this function is called, this variable
-::#       is initialised to '<last> <first> <init>' where <last> and <first>
-::#       are zero and <init> is the number of elapsed seconds since
-::#       1970-01-01 00:00:00. This value is used by subsequent calls to
-::#       determine the elapsed number of seconds since the last call
-::#       (<last>) and the first call (<first>).
+::#    Args: %1 (by ref) The first time this function is called, this variable
+::#        is initialised to '<last> <first> <init>' where <last> and <first>
+::#        are zero and <init> is the number of elapsed seconds since
+::#        1970-01-01 00:00:00. This value is used by subsequent calls to
+::#        determine the elapsed number of seconds since the last call
+::#        (<last>) and the first call (<first>).
+::#
+::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer ID
 	setlocal enableExtensions
@@ -28,23 +30,25 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			set "%%c=%%f"
 		)
 	)
-	for /f "tokens=5-7 delims=:. " %%a in ('echo/^|time') do (
-		set "hh=%%a"
-		set "nn=%%b"
-		set "ss=%%c"
+	for /f "tokens=5-8 delims=:. " %%a in ('echo/^|time') do (
+		set "hour=%%a"
+		set "minute=%%b"
+		set "second=%%c"
+		set "milli=%%d"
 	)
+	::echo h=%hour% m=%minute% s=%second% m=%milli%
 	set /a "dd=100%dd%%%100"
-	set /a "mm=100%mm%%%100"
-	set /a "z=14-mm"
+	set /a "minute=100%minute%%%100"
+	set /a "z=14-minute"
 	set /a "z/=12"
 	set /a "y=yy+4800-z"
-	set /a "m=mm+12*z-3"
+	set /a "m=minute+12*z-3"
 	set /a "j=153*m+2"
 	set /a "j=j/5+dd+y*365+y/4-y/100+y/400-2472633"
-	set /a "hh=100%hh%%%100"
-	set /a "nn=100%nn%%%100"
-	set /a "ss=100%ss%%%100"
-	set /a "j=j*86400+hh*3600+nn*60+ss"
+	set /a "hour=100%hour%%%100"
+	set /a "minute=100%minute%%%100"
+	set /a "second=100%second%%%100"
+	set /a "j=j*86400+hour*3600+minute*60+second"
 	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
 		set "l=%%a"
 		set "f=%%b"
