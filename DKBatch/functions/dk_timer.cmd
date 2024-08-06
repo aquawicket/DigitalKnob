@@ -17,47 +17,39 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer ID
-	setlocal enableExtensions
-	call set "ID=%%%1%%"
-	set "t=2"
-	if "%date%z" lss "A" (
-		set "t=1"
-	)
+	setlocal ENABLEEXTENSIONS
+	call set ID=%%%1%%
+	set t=2&if "%date%z" LSS "A" set t=1
 	for /f "skip=1 tokens=2-4 delims=(-)" %%a in ('echo/^|date') do (
 		for /f "tokens=%t%-4 delims=.-/ " %%d in ('date/t') do (
-			set "%%a=%%d"
-			set "%%b=%%e"
-			set "%%c=%%f"
+			set %%a=%%d
+			set %%b=%%e
+			set %%c=%%f
 		)
 	)
-	for /f "tokens=5-8 delims=:. " %%a in ('echo/^|time') do (
-		set "hour=%%a"
-		set "minute=%%b"
-		set "second=%%c"
-		set "milli=%%d"
+	for /f "tokens=5-7 delims=:. " %%a in ('echo/^|time') do (
+	  set hh=%%a
+	  set nn=%%b
+	  set ss=%%c
 	)
-	::echo h=%hour% m=%minute% s=%second% m=%milli%
-	set /a "dd=100%dd%%%100"
-	set /a "minute=100%minute%%%100"
-	set /a "z=14-minute"
-	set /a "z/=12"
-	set /a "y=yy+4800-z"
-	set /a "m=minute+12*z-3"
-	set /a "j=153*m+2"
-	set /a "j=j/5+dd+y*365+y/4-y/100+y/400-2472633"
-	set /a "hour=100%hour%%%100"
-	set /a "minute=100%minute%%%100"
-	set /a "second=100%second%%%100"
-	set /a "j=j*86400+hour*3600+minute*60+second"
+	set /a dd=100%dd%%%100
+	set /a mm=100%mm%%%100
+	set /a z=14-mm
+	set /a z/=12
+	set /a y=yy+4800-z
+	set /a m=mm+12*z-3
+	set /a j=153*m+2
+	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
+	set /a hh=100%hh%%%100,nn=100%nn%%%100
+	set /a ss=100%ss%%%100
+	set /a j=j*86400+hh*3600+nn*60+ss
 	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
-		set "l=%%a"
-		set "f=%%b"
-		set "c=%%c"
+		set l=%%a&set f=%%b&set c=%%c
 	)
-	if {%c%}=={} endlocal & set "%1=0 0 %j%" & goto:eof
-	set /a "l=j-c-f"
-	set /a "f+=l"
-	endlocal & set "%1=%l% %f% %c%"
+	if {%c%}=={} endlocal & set %1=0 0 %j% & goto :EOF
+	set /a l=j-c-f
+	set /a f+=l
+	endlocal & set %1=%l% %f% %c%
 goto:eof
 
 
