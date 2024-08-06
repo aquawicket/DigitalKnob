@@ -19,6 +19,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_timer
 	setlocal enableExtensions
 	call set ID=%%%1%%
+	
+	::###### DATE ######
 	set t=2
 	if "%date%z" LSS "A" set t=1
 	for /f "skip=1 tokens=2-4 delims=(-)" %%a in ('echo/^|date') do (
@@ -31,17 +33,23 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "year=%yy%"
 	set "month=%mm%"
 	set "day=%dd%"
+	echo DATE = %month%/%day%/%year%
+	
+	::###### TIME ######
 	for /f "tokens=5-8 delims=:. " %%a in ('echo/^|time') do (
 	  set hour=%%a
 	  set minute=%%b
 	  set second=%%c
 	  set centisecond=%%d
 	)
-
-	echo TIMESTAMP %month%/%day%/%year%-%hour%:%minute%:%second%.%centisecond%
+	echo TIME = %hour%:%minute%:%second%.%centisecond%
 	
+	::###### DATE-TIME #######
+	echo TIMESTAMP = %month%/%day%/%year%-%hour%:%minute%:%second%.%centisecond%
 	
+	tm_sec + tm_min*60 + tm_hour*3600 + tm_yday*86400 + (tm_year-70)*31536000 + ((tm_year-69)/4)*86400 -((tm_year-1)/100)*86400 + ((tm_year+299)/400)*86400
 	
+	::###### EPOCH ######
 	set /a day=100%day% %% 100
 	set /a month=100%month% %% 100
 	set /a z=14-month
@@ -54,7 +62,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set /a minute=100%minute% %% 100
 	set /a second=100%second% %% 100
 	set /a j=j*86400+hour*3600+minute*60+second
-	echo j = %j%
+	echo EPOCH = %j%
+	
+	
 	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
 		set last=%%a
 		set first=%%b
