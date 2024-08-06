@@ -16,10 +16,11 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
-:dk_timer ID
-	setlocal ENABLEEXTENSIONS
+:dk_timer
+	setlocal enableExtensions
 	call set ID=%%%1%%
-	set t=2&if "%date%z" LSS "A" set t=1
+	set t=2
+	if "%date%z" LSS "A" set t=1
 	for /f "skip=1 tokens=2-4 delims=(-)" %%a in ('echo/^|date') do (
 		for /f "tokens=%t%-4 delims=.-/ " %%d in ('date/t') do (
 			set %%a=%%d
@@ -32,23 +33,27 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	  set nn=%%b
 	  set ss=%%c
 	)
-	set /a dd=100%dd%%%100
-	set /a mm=100%mm%%%100
-	set /a z=14-mm
-	set /a z/=12
-	set /a y=yy+4800-z
-	set /a m=mm+12*z-3
-	set /a j=153*m+2
+	set "month=%mm%"
+	set "day=%dd%"
+	set "year=%yy%"
+	set "hour=%hh%"
+	set "minute=%nn%"
+	set "second=%ss%"
+	echo DATE %month%/%day%/%year%
+	echo TIME %hour%:%minute%:%second%
+	
+	
+	
+	set /a dd=100%dd%%%100,mm=100%mm%%%100
+	set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2
 	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
-	set /a hh=100%hh%%%100,nn=100%nn%%%100
-	set /a ss=100%ss%%%100
+	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100
 	set /a j=j*86400+hh*3600+nn*60+ss
 	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
 		set l=%%a&set f=%%b&set c=%%c
 	)
 	if {%c%}=={} endlocal & set %1=0 0 %j% & goto :EOF
-	set /a l=j-c-f
-	set /a f+=l
+	set /a l=j-c-f,f+=l
 	endlocal & set %1=%l% %f% %c%
 goto:eof
 
