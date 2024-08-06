@@ -11,13 +11,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
 	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
 	
-::	for /f "usebackq delims=|" %%f in (`%~1`) do (
-::		set "%2=%%f"
-::  )
 	setlocal
 	set i=-1
 
-	::for /f "usebackq delims=|" %%Z in (`%command% ^& call echo %%^^ERRORLEVEL%%`) do (
 	for /f "usebackq delims=|" %%Z in (`"%~1" %~2 ^& call echo %%^^ERRORLEVEL%%`) do (
 		set /A i+=1
 		if "!!" equ "" set "line[!i!]=%%Z"
