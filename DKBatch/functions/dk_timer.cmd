@@ -71,7 +71,19 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::Hectoseconds =    0.01
 	:: Kiloseconds =    0.001
 	
-	
+	::###### DATE TO Seconds ######
+	call:dateToSec %Year% %Month% %Day% %Hour% %Minute% %Second% yearSecs
+	echo yearSecs = %yearSecs%
+	call:dateToSec 1970 %Month% %Day% %Hour% %Minute% %Second% monthSecs
+	echo monthSecs = %monthSecs%
+	call:dateToSec 1970 01 %Day% %Hour% %Minute% %Second% daySecs
+	echo daySecs = %daySecs%
+	call:dateToSec 1970 01 01 %Hour% %Minute% %Second% hourSecs
+	echo hourSecs = %hourSecs%
+	call:dateToSec 1970 01 01 00 %Minute% %Second% minSecs
+	echo minSecs = %minSecs%
+	call:dateToSec 1970 01 01 00 00 %Second% secSecs
+	echo secSecs = %secSecs%
 	
 	::###### UNIX TIME ######
 	set /a z=(14-100%Month%%%100)/12, y=10000%Year%%%10000-z
@@ -100,11 +112,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::echo YearTime = %YearTime%
 	
 	
-
+	::###### BACK TO DATE ######
 	set /a "CentiTime=%CentiSecond%*1"
 	echo CentiTime = %CentiTime%
-	
-
 	set /a "SecondTime=%Second%*100+%CentiTime%"
 	echo SecondTime = %SecondTime%
 	set /a "MinuteTime=%Minute%*60*100+%SecondTime%"
@@ -149,6 +159,34 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	endlocal & set %1=%last% %first% %init%
 goto:eof
 
+:dateToSec %yy% %mm% %dd% %hh% %nn% %ss% secs
+	setlocal ENABLEEXTENSIONS
+	set yy=%1&set mm=%2&set dd=%3&set hh=%4&set nn=%5&set ss=%6
+	if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)
+	set /a dd=100%dd%%%100,mm=100%mm%%%100
+	set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2
+	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
+	if 1%hh% LSS 20 set hh=0%hh%
+	if {%nn:~2,1%} EQU {p} if "%hh%" NEQ "12" set hh=1%hh%&set/a hh-=88
+	if {%nn:~2,1%} EQU {a} if "%hh%" EQU "12" set hh=00
+	if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2%
+	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100
+	set /a j=j*86400+hh*3600+nn*60+ss
+	endlocal&set %7=%j%
+goto :EOF
+
+:secToDate %secs% yy mm dd hh nn ss
+	setlocal ENABLEEXTENSIONS
+	set /a i=%1,ss=i%%60,i/=60,nn=i%%60,i/=60,hh=i%%24,dd=i/24,i/=24
+	set /a a=i+2472632,b=4*a+3,b/=146097,c=-b*146097,c/=4,c+=a
+	set /a d=4*c+3,d/=1461,e=-1461*d,e/=4,e+=c,m=5*e+2,m/=153,dd=153*m+2,dd/=5
+	set /a dd=-dd+e+1,mm=-m/10,mm*=12,mm+=m+3,yy=b*100+d-4800+m/10
+	(if %mm% LSS 10 set mm=0%mm%)&(if %dd% LSS 10 set dd=0%dd%)
+	(if %hh% LSS 10 set hh=0%hh%)&(if %nn% LSS 10 set nn=0%nn%)
+	if %ss% LSS 10 set ss=0%ss%
+	endlocal&set %7=%ss%&set %6=%nn%&set %5=%hh%&^
+	set %4=%dd%&set %3=%mm%&set %2=%yy%
+goto :EOF
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
