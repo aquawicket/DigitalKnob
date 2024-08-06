@@ -159,6 +159,12 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	endlocal & set %1=%last% %first% %init%
 goto:eof
 
+:: A good alternative would be 
+:: :dateToSec secs %ss% %nn% %hh% %dd% %mm% %yy%
+:: This would always set the return variable as the first arg.
+:: Then you could increment the arguments added to increase Resolution
+:: I.E.  call:dateToSec mySecs %Seconds% %Minutes%
+::     This would only provide a resolution of 59 minutes. 
 :dateToSec %yy% %mm% %dd% %hh% %nn% %ss% secs
 	setlocal ENABLEEXTENSIONS
 	set yy=%1&set mm=%2&set dd=%3&set hh=%4&set nn=%5&set ss=%6
