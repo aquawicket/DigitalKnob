@@ -84,9 +84,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: Kiloseconds =    0.001
 	
 
-	::###### DATE TO Seconds ######
+	::###### dateToSec ######
 	echo:
-	echo ###### DATE TO Seconds ######
+	echo ###### dateToSec ######
 	call:dateToSec yearSecs %Second% %Minute% %Hour% %Day% %Month% %Year% 
 	echo yearSecs = %yearSecs%
 	call:dateToSec monthSecs %Second% %Minute% %Hour% %Day% %Month%
@@ -100,9 +100,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call:dateToSec secSecs %Second%
 	echo secSecs = %secSecs%
 	
-	::###### Seconds To Date ######
+	::###### secToDate ######
 	echo:
-	echo ###### Seconds To Date ######
+	echo ###### secToDate ######
 	call:secToDate %secSecs% sec
 	echo dateSec = %sec%
 	call:secToDate %minSecs% sec min
@@ -116,20 +116,23 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call:secToDate %yearSecs% sec min hour day month year
 	echo dateYear = %year%-%month%-%day%T%hour%:%min%:%sec% 
 	
-	::###### UNIX TIME ######
+	::###### dateToCentiSeconds ######
 	echo:
-	echo ###### UNIX TIME ######
-	set /a z=(14-100%Month%%%100)/12, y=10000%Year%%%10000-z
-	set /a ut=y*365+y/4-y/100+y/400+(153*(100%Month%%%100+12*z-3)+2)/5+Day-719469
-	set /a UnixTime=ut*86400+100%Hour%%%100*3600+100%Minute%%%100*60+100%Second%%%100
-	echo UnixTime = %UnixTime%
-	
-	
-	::###### UNIX TIME A ######
-	echo:
-	echo ###### UNIX TIME A ######
-	set /a UnixTimeA=100%Hour%%%100*3600+100%Minute%%%100*60+100%Second%%%100
-	echo UnixTimeA = %UnixTimeA%
+	echo ###### dateToCentiSeconds ######
+	call:dateToCentiSeconds yearCSecs %CentiSecond% %Second% %Minute% %Hour% %Day% %Month% %Year% 
+	echo yearCSecs = %yearCSecs%
+	call:dateToCentiSeconds monthCSecs %CentiSecond% %Second% %Minute% %Hour% %Day% %Month%
+	echo monthCSecs = %monthCSecs%
+	call:dateToCentiSeconds dayCSecs %CentiSecond% %Second% %Minute% %Hour% %Day%
+	echo dayCSecsB = %dayCSecs%
+	call:dateToCentiSeconds hourCSecs %CentiSecond% %Second% %Minute% %Hour%
+	echo hourCSecs = %hourCSecs%
+	call:dateToCentiSeconds minCSecs %CentiSecond% %Second% %Minute%
+	echo minCSecs = %minCSecs%
+	call:dateToCentiSeconds secCSecs %CentiSecond% %Second%
+	echo secCSecs = %secCSecs%
+	call:dateToCentiSeconds csecCSecs %CentiSecond%
+	echo csecCSecs = %csecCSecs%
 	
 	
 	::###### TO CentiTime ######
@@ -242,7 +245,57 @@ goto :EOF
 	(if %hh% LSS 10 set hh=0%hh%)&(if %nn% LSS 10 set nn=0%nn%)
 	if %ss% LSS 10 set ss=0%ss%
 	endlocal & set "%2=%ss%" & if "%3" neq "" set "%3=%nn%" & if "%4" neq "" set "%4=%hh%" & if "%5" neq "" set "%5=%dd%" & if "%6" neq "" set "%6=%mm%" & if "%7" neq "" set "%7=%yy%"
-goto :EOF
+goto:eof
+
+
+:dateToSecB sec %second% %minute% %hour% %day% %month% %year%
+	setlocal
+	set ss=%2
+	set nn=%3
+	set hh=%4
+	set dd=%5
+	set mm=%6
+	set yy=%7
+	if "%yy%" equ "" set yy=1970
+	if "%mm%" equ "" set mm=01
+	if "%dd%" equ "" set dd=01
+	if "%hh%" equ "" set hh=00
+	if "%nn%" equ "" set nn=00
+	set /a z=(14-100%mm%%%100)/12, y=10000%yy%%%10000-z
+	set /a ut=y*365+y/4-y/100+y/400+(153*(100%Month%%%100+12*z-3)+2)/5+dd-719469
+	set /a UnixTime=ut*86400+100%hh%%%100*3600+100%nn%%%100*60+100%ss%%%100
+	endlocal & set %1=%UnixTime%
+goto:eof
+
+:dateToCentiSeconds centiSeconds %centiSecond% %second% %minute% %hour% %day% %month% %year%
+	setlocal enableExtensions
+	set cs=%2
+	set ss=%3
+	set nn=%4
+	set hh=%5
+	set dd=%6
+	set mm=%7
+	set yy=%8
+	if "%yy%" equ "" set yy=1970
+	if "%mm%" equ "" set mm=01
+	if "%dd%" equ "" set dd=01
+	if "%hh%" equ "" set hh=00
+	if "%nn%" equ "" set nn=00
+	if "%ss%" equ "" set ss=00
+	if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)
+	set /a dd=100%dd%%%100,mm=100%mm%%%100
+	set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2
+	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
+	if 1%hh% LSS 20 set hh=0%hh%
+	if {%nn:~2,1%} EQU {p} if "%hh%" NEQ "12" set hh=1%hh%&set/a hh-=88
+	if {%nn:~2,1%} EQU {a} if "%hh%" EQU "12" set hh=00
+	if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2%
+	set cs=%cs:~0,2%
+	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100
+	set /a j=j*86400+hh*3600+nn*60+ss*100+cs
+	endlocal & set %1=%j%
+goto:eof
+
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
