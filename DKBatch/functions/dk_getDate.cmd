@@ -2,7 +2,7 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_getDate(year month day)
+::# dk_getDate(day month year)
 ::#
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
@@ -19,7 +19,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			set %%c=%%f
 		)
 	)
-	endlocal & set "%1=%yy%" & set "%2=%mm%" & set "%3=%dd%"
+	endlocal & set "%1=%dd%" & set "%2=%mm%" & set "%3=%yy%"
 goto:eof
 
 
@@ -32,6 +32,6 @@ goto:eof
 	call dk_minMaxArgs 0
 	
 	echo date = %date%
-	call dk_getDate year month day
+	call dk_getDate day month year
 	echo date = %month%/%day%/%year%
 goto:eof	

@@ -16,6 +16,14 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
+::     Seconds =    1             Seconds =  1
+	::Milliseconds =    1000           Minute =  0.0166667
+	::Centiseconds =    100              Hour =  0.00027777833333
+	:: Deciseconds =    10
+	::     Seconds =    1
+	:: Decaseconds =    0.1
+	::Hectoseconds =    0.01
+	:: Kiloseconds =    0.001
 :dk_timer
 	setlocal enableExtensions
 	echo:
@@ -59,6 +67,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
 	
+		
 	::###### REMOVE LEADING ZEROS ######
 	echo:
 	echo: ###### REMOVE LEADING ZEROS ######
@@ -71,19 +80,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set /a "CentiSecond=100%CentiSecond%%%100"
 	::echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
-	::set "Resolution=CentiSecond"
-	::set "Width=Minute"
-	
-	::     Seconds =    1             Seconds =  1
-	::Milliseconds =    1000           Minute =  0.0166667
-	::Centiseconds =    100              Hour =  0.00027777833333
-	:: Deciseconds =    10
-	::     Seconds =    1
-	:: Decaseconds =    0.1
-	::Hectoseconds =    0.01
-	:: Kiloseconds =    0.001
-	
-
 	::###### dateToSec ######
 	echo:
 	echo ###### dateToSec ######
@@ -101,20 +97,41 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo secSecs = %secSecs%
 	
 	::###### secToDate ######
+::	echo:
+::	echo ###### secToDate ######
+::	call:secToDate %secSecs% sec
+::	echo dateSec = %sec%
+::	call:secToDate %minSecs% sec min
+::	echo dateMin = %min%:%sec%
+::	call:secToDate %hourSecs% sec min hour
+::	echo dateHour = %hour%:%min%:%sec%
+::	call:secToDate %daySecs% sec min hour day
+::	echo dateDay = %day%T%hour%:%min%:%sec%
+::	call:secToDate %monthSecs% sec min hour day month
+::	echo dateMonth = %month%-%day%T%hour%:%min%:%sec%
+::	call:secToDate %yearSecs% sec min hour day month year
+::	echo dateYear = %year%-%month%-%day%T%hour%:%min%:%sec% 
+	
+	::###### dateToSecB ######
 	echo:
-	echo ###### secToDate ######
-	call:secToDate %secSecs% sec
-	echo dateSec = %sec%
-	call:secToDate %minSecs% sec min
-	echo dateMin = %min%:%sec%
-	call:secToDate %hourSecs% sec min hour
-	echo dateHour = %hour%:%min%:%sec%
-	call:secToDate %daySecs% sec min hour day
-	echo dateDay = %day%T%hour%:%min%:%sec%
-	call:secToDate %monthSecs% sec min hour day month
-	echo dateMonth = %month%-%day%T%hour%:%min%:%sec%
-	call:secToDate %yearSecs% sec min hour day month year
-	echo dateYear = %year%-%month%-%day%T%hour%:%min%:%sec% 
+	echo ###### dateToSecB ######
+	call:dateToSecB yearSecsB %Second% %Minute% %Hour% %Day% %Month% %Year% 
+	echo yearSecsB = %yearSecsB%
+	call:dateToSecB monthSecsB %Second% %Minute% %Hour% %Day% %Month%
+	echo monthSecsB = %monthSecsB%
+	call:dateToSecB daySecsB %Second% %Minute% %Hour% %Day%
+	echo daySecsB = %daySecsB%
+	call:dateToSecB hourSecsB %Second% %Minute% %Hour%
+	echo hourSecsB = %hourSecsB%
+	call:dateToSecB minSecsB %Second% %Minute%
+	echo minSecsB = %minSecsB%
+	call:dateToSecB secSecsB %Second%
+	echo secSecsB = %secSecsB%
+	pause
+	
+	
+	
+
 	
 	::###### dateToCentiSeconds ######
 	echo:
@@ -134,6 +151,41 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call:dateToCentiSeconds csecCSecs %CentiSecond%
 	echo csecCSecs = %csecCSecs%
 	
+	::###### centiSecondsToDate ######
+	echo:
+	echo ###### centiSecondsToDate ######
+	call:centiSecondsToDate %csecCSecs% csec
+	echo dateCsec = %csec%
+	call:centiSecondsToDate %secCSecs% csec sec
+	echo dateSec = %sec%.%csec%
+	call:centiSecondsToDate %minCSecs% csec sec min
+	echo dateMin = %min%:%sec%.%csec%
+	call:centiSecondsToDate %hourCSecs% csec sec min hour
+	echo dateHour = %hour%:%min%:%sec%.%csec%
+	call:centiSecondsToDate %dayCSecs% csec sec min hour day
+	echo dateDay = %day%T%hour%:%min%:%sec%.%csec%
+	call:centiSecondsToDate %monthCSecs% csec sec min hour day month
+	echo dateMonth = %month%-%day%T%hour%:%min%:%sec%.%csec%
+	call:centiSecondsToDate %yearCSecs% csec sec min hour day month year
+	echo dateYear = %year%-%month%-%day%T%hour%:%min%:%sec%.%csec% 
+
+
+
+
+
+
+
+	::###### REMOVE LEADING ZEROS ######
+	echo:
+	echo: ###### REMOVE LEADING ZEROS ######
+	set /a "Year=10000%Year%%%10000"
+	set /a "Month=100%Month%%%100"
+	set /a "Day=100%Day%%%100"
+	set /a "Hour=100%Hour%%%100"
+	set /a "Minute=100%Minute%%%100"
+	set /a "Second=100%Second%%%100"
+	set /a "CentiSecond=100%CentiSecond%%%100"
+	::echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
 	::###### TO CentiTime ######
 	echo:
@@ -150,8 +202,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo DayTime = %DayTime%
 	set /a "MonthTime=(((((%Month%)*30+%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
 	echo MonthTime = %MonthTime%
-	::set /a "YearTime=((((((%Year%)*12+%Month%)*30+%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
-	::echo YearTime = %YearTime%
+	set /a "YearTime=((((((%Year%)*12+%Month%)*30+%Day%)*24+%Hour%)*60+%Minute%)*60+%Second%)*100+%CentiSecond%"
+	echo YearTime = %YearTime%
 	
 	
 	::###### TO CentiTimeB ######
@@ -217,20 +269,25 @@ goto:eof
 	set dd=%5
 	set mm=%6
 	set yy=%7
-	if "%yy%" equ "" set yy=1970
-	if "%mm%" equ "" set mm=01
-	if "%dd%" equ "" set dd=01
-	if "%hh%" equ "" set hh=00
+	if "%ss%" equ "" set ss=00
 	if "%nn%" equ "" set nn=00
+	if "%hh%" equ "" set hh=00
+	if "%dd%" equ "" set dd=01
+	if "%mm%" equ "" set mm=01
+	if "%yy%" equ "" set yy=1970
+	
 	if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)
-	set /a dd=100%dd%%%100,mm=100%mm%%%100
+	set /a dd=100%dd%%%100
+	set /a mm=100%mm%%%100
 	set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2
 	set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633
 	if 1%hh% LSS 20 set hh=0%hh%
-	if {%nn:~2,1%} EQU {p} if "%hh%" NEQ "12" set hh=1%hh%&set/a hh-=88
+	if {%nn:~2,1%} EQU {p} if "%hh%" NEQ "12" set hh=1%hh% & set/a hh-=88
 	if {%nn:~2,1%} EQU {a} if "%hh%" EQU "12" set hh=00
 	if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2%
-	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100
+	set /a ss=100%ss%%%100
+	set /a nn=100%nn%%%100
+	set /a hh=100%hh%%%100	
 	set /a j=j*86400+hh*3600+nn*60+ss
 	endlocal & set %1=%j%
 goto :EOF
@@ -248,26 +305,42 @@ goto :EOF
 goto:eof
 
 
-:dateToSecB sec %second% %minute% %hour% %day% %month% %year%
-	setlocal
+:dateToSecB seconds %second% %minute% %hour% %day% %month% %year%
+	setlocal enableExtensions
 	set ss=%2
 	set nn=%3
 	set hh=%4
 	set dd=%5
 	set mm=%6
 	set yy=%7
-	if "%yy%" equ "" set yy=1970
-	if "%mm%" equ "" set mm=01
-	if "%dd%" equ "" set dd=01
-	if "%hh%" equ "" set hh=00
+	if "%ss%" equ "" set ss=00
 	if "%nn%" equ "" set nn=00
-	set /a z=(14-100%mm%%%100)/12, y=10000%yy%%%10000-z
-	set /a ut=y*365+y/4-y/100+y/400+(153*(100%Month%%%100+12*z-3)+2)/5+dd-719469
-	set /a UnixTime=ut*86400+100%hh%%%100*3600+100%nn%%%100*60+100%ss%%%100
-	endlocal & set %1=%UnixTime%
+	if "%hh%" equ "" set hh=00
+	if "%dd%" equ "" set dd=01
+	if "%mm%" equ "" set mm=01
+	if "%yy%" equ "" set yy=1970
+	set /a ss=100%ss%%%100
+	set /a nn=100%nn%%%100
+	set /a hh=100%hh%%%100
+	set /a dd=100%dd%%%100
+	set /a mm=100%mm%%%100
+	set /a yy=10000%yy%%%10000
+	set /a "dd=dd-1"
+	set /a "mm=mm-1"
+	if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)
+	set /a "yy=yy-1970"
+	
+	set /a "Seconds_ss=%ss%"
+	set /a "Minutes_ss=%nn%*60+%Seconds_ss%"
+	set /a "Hours_ss=%hh%*60*60+%Minutes_ss%"
+	set /a "Days_ss=%dd%*24*60*60+%Hours_ss%
+	set /a "Months_ss=(%mm%*304/10)*24*60*60+%Days_ss%"
+	set /a "Years_ss=(%yy%*12*304/10)*24*60*60+%Months_ss%"
+	if %Years_ss% gtr 99999999 set /a "Years_ss=Years_ss+2160000"
+	endlocal & set %1=%Years_ss%
 goto:eof
 
-:dateToCentiSeconds centiSeconds %centiSecond% %second% %minute% %hour% %day% %month% %year%
+:dateToCentiSecondsB centiSeconds %centiSecond% %second% %minute% %hour% %day% %month% %year%
 	setlocal enableExtensions
 	set cs=%2
 	set ss=%3
@@ -289,11 +362,57 @@ goto:eof
 	if 1%hh% LSS 20 set hh=0%hh%
 	if {%nn:~2,1%} EQU {p} if "%hh%" NEQ "12" set hh=1%hh%&set/a hh-=88
 	if {%nn:~2,1%} EQU {a} if "%hh%" EQU "12" set hh=00
-	if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2%
-	set cs=%cs:~0,2%
-	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100
+	if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2% & set cs=%cs:~0,2%
+	set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100,cs=100%cs%%%100
 	set /a j=j*86400+hh*3600+nn*60+ss*100+cs
 	endlocal & set %1=%j%
+goto:eof
+
+:dateToCentiSeconds centiSeconds %centiSecond% %second% %minute% %hour% %day% %month% %year%
+	setlocal
+	set cs=%2
+	set ss=%3
+	set nn=%4
+	set hh=%5
+	set dd=%6
+	set mm=%7
+	set yy=%8
+	if "%yy%" equ "" set yy=1970
+	if "%mm%" equ "" set mm=1
+	if "%dd%" equ "" set dd=1
+	if "%hh%" equ "" set hh=0
+	if "%nn%" equ "" set nn=0
+	if "%ss%" equ "" set ss=0
+	
+	set /a "CentiTime=%cs%*1"
+	echo CentiTime = %CentiTime%
+	set /a "SecondTime=(%ss%)*100+%cs%"
+	echo SecondTime = %SecondTime%
+	set /a "MinuteTime=((%nn%)*60+%ss%)*100+%cs%"
+	echo MinuteTime = %MinuteTime%
+	set /a "HourTime=(((%hh%)*60+%nn%)*60+%ss%)*100+%cs%"
+	echo HourTime = %HourTime%
+	set /a "DayTime=((((%dd%)*24+%hh%)*60+%nn%)*60+%ss%)*100+%cs%"
+	echo DayTime = %DayTime%
+	set /a "MonthTime=(((((%mm%)*30+%dd%)*24+%hh%)*60+%nn%)*60+%ss%)*100+%cs%"
+	echo MonthTime = %MonthTime%
+	set /a "YearTime=((((((%yy%)*12+%mm%)*30+%dd%)*24+%hh%)*60+%nn%)*60+%ss%)*100+%cs%"
+	echo YearTime = %YearTime%
+	
+	endlocal & set %1=%YearTime%
+goto:eof
+	
+:centiSecondsToDate %csecs% centisecond second minute hour day month year
+	setlocal ENABLEEXTENSIONS
+	set /a i=%1,cs=i%%100,i/=100,ss=i%%60,i/=60,nn=i%%60,i/=60,hh=i%%24,dd=i/24,i/=24
+	set /a a=i+2472632,b=4*a+3,b/=146097,c=-b*146097,c/=4,c+=a
+	set /a d=4*c+3,d/=1461,e=-1461*d,e/=4,e+=c,m=5*e+2,m/=153,dd=153*m+2,dd/=5
+	set /a dd=-dd+e+1,mm=-m/10,mm*=12,mm+=m+3,yy=b*100+d-4800+m/10
+	(if %mm% LSS 10 set mm=0%mm%)&(if %dd% LSS 10 set dd=0%dd%)
+	(if %hh% LSS 10 set hh=0%hh%)&(if %nn% LSS 10 set nn=0%nn%)
+	if %ss% LSS 10 set ss=0%ss%
+	if %cs% LSS 10 set cs=0%cs%
+	endlocal & set "%2=%cs%" & if "%3" neq "" set "%3=%ss%" & if "%4" neq "" set "%4=%nn%" & if "%5" neq "" set "%5=%hh%" & if "%6" neq "" set "%6=%dd%" & if "%7" neq "" set "%7=%mm%" & if "%8" neq "" set "%8=%yy%"
 goto:eof
 
 

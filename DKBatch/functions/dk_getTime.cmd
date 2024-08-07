@@ -2,7 +2,7 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_getTime(hour minute second centisecond)
+::# dk_getTime(centisecond second minute hour)
 ::#
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
@@ -22,7 +22,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set _hour=%_hour: =%
 	:: Ensure the hours have a leading zero
 	if 1%_hour% lss 20 set _hour=0%_hour%
-	endlocal & set "%1=%_hour%" & set "%2=%_minute%" & set "%3=%_second%" & set "%4=%_centisecond%"
+	endlocal & set "%1=%_centisecond%" & set "%2=%_second%" & set "%3=%_minute%" & set "%4=%_hour%"
 goto:eof
 
 
@@ -35,6 +35,6 @@ goto:eof
 	call dk_minMaxArgs 0
 	
 	echo time = %time%
-	call dk_getTime hour minute second centisecond
+	call dk_getTime centisecond second minute hour
 	echo time = %hour%:%minute%:%second%.%centisecond%
 goto:eof	
