@@ -16,7 +16,7 @@ dk_export() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_export myVar "the string value of myVar"
 	dk_echo "myVar = ${myVar}"

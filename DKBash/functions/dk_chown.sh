@@ -17,7 +17,7 @@ dk_chown() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	dk_chown ${DIGITALKNOB_DIR}

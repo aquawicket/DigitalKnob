@@ -75,7 +75,7 @@ test_func() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_echo
 	dk_echo "clearing positional args 'set --'"

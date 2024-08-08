@@ -6,9 +6,8 @@
 #
 #
 dk_download() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 1 2
+
 	
 	url="${1}"
 	#dk_printVar url
@@ -65,7 +64,7 @@ dk_download() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh"
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"

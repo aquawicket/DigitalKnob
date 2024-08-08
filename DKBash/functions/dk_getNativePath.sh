@@ -28,7 +28,7 @@ dk_getNativePath() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getNativePath "/c/Windows/System32" nativePath
 	dk_echo "nativePath = ${nativePath}"

@@ -15,8 +15,8 @@
 #	@msg	- The message to print
 #
 dk_error() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 
 	[ ${ENABLE_dk_error-1} -ne 1 ] && return
@@ -38,7 +38,7 @@ dk_error() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 
 	dk_error "test dk_error message"
 }

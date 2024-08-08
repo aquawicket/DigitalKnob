@@ -19,7 +19,7 @@ dk_getWindowsPath() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getWindowsPath "/c/Windows/System32" windowsPath
 	dk_echo "windowsPath = ${windowsPath}"

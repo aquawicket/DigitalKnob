@@ -22,7 +22,7 @@ dk_isVariable() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 
 	varA="A simple string variable"
 	if dk_isVariable varA; then

@@ -16,7 +16,7 @@ dk_fileWrite() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 
 	dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
 }

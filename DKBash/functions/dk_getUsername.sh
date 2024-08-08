@@ -7,8 +7,8 @@
 #
 #
 dk_getUsername() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	if [ -n "${USER-}" ]; then
 		DKUSERNAME=${USER}
@@ -23,7 +23,7 @@ dk_getUsername() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getUsername _username
 	dk_echo "_username = ${_username}"

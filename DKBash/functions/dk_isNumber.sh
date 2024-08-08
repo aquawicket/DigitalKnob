@@ -23,7 +23,7 @@ dk_isNumber() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myNumber1=69
 	dk_isNumber myNumber1 && dk_echo "myNumber1 is a number" || dk_echo "myNumber1 is NOT a number"

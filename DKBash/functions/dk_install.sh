@@ -7,8 +7,8 @@
 #
 #
 dk_install() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 	[ -n "$(command -v "${1}")" ] && return    # 
 	#if dk_packageInstalled ${1}; then

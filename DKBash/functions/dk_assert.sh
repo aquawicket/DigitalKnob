@@ -6,8 +6,8 @@
 #
 #
 dk_assert() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	if ( [ ! -n "${!1-}" ]  ||
          [ -z "${!1}" ]     ||
@@ -23,7 +23,7 @@ dk_assert() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_set myVar "string"
 	dk_info "dk_assert myVar" && dk_assert myVar

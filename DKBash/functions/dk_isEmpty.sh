@@ -7,8 +7,8 @@
 #
 #
 dk_isEmpty() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	if [ -d "${1}" ] && files=$(ls -qAH -- "${1}") && [ -z "${files}" ]; then
 		#printf '%s\n' "$dir is an empty directory"
@@ -25,7 +25,7 @@ dk_isEmpty() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_echo "PWD = $PWD"
 	mkdir empty

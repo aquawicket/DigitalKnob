@@ -20,7 +20,7 @@ dk_hexToAscii() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_hexToAscii 0x55 ascii
 	dk_echo "ascii = ${ascii}"

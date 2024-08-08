@@ -7,8 +7,8 @@
 #
 #
 dk_pathExists() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 	[ -e "${1}" ]
 }

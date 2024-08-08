@@ -6,8 +6,8 @@
 #
 #
 dk_unset() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 	builtin unset ${1}
 }
@@ -17,7 +17,7 @@ dk_unset() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_set myVar "initial value assigned with dk_unset"
 	dk_echo "myVar = ${myVar}"

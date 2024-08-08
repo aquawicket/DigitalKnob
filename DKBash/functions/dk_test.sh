@@ -60,7 +60,7 @@ dk_test() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 		
 	### (input:string output:return_var) ###
 	dk_test "1 input:string" output

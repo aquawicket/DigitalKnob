@@ -23,7 +23,7 @@ dk_isString() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myString1="test string"
 	dk_isString myString1        && dk_echo "myString1 is a string"       || dk_echo "myString1 is NOT a string"

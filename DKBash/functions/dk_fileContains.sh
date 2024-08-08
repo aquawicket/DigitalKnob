@@ -17,7 +17,7 @@ dk_fileContains() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_fileWrite "fileContains_TEST.txt" "find the needle in the haystack"
 	

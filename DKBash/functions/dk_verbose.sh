@@ -15,8 +15,8 @@
 #	@msg	- The message to print
 #
 dk_verbose() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	
 	[ ${ENABLE_dk_verbose-1} -ne 1 ] && return
@@ -38,7 +38,7 @@ dk_verbose() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_verbose "test dk_verbose message"
 }

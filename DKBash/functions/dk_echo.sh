@@ -54,7 +54,7 @@ dk_echo() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	echo "This is a normal echo commmand"
 	dk_echo

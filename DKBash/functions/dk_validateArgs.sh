@@ -81,7 +81,7 @@ test_function() {
 }
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myNumber=69
 	myArray=(1 2 3)

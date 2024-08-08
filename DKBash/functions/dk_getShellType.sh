@@ -7,8 +7,8 @@
 #
 #
 dk_getShellType() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	#PID_EXE=$(readlink /proc/$$/exe);
 	#PID_EXE=$(dk_readlink /proc/$$/exe);
@@ -29,7 +29,7 @@ dk_getShellType() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getShellType shellType
 	dk_echo "shellType = ${shellType}"

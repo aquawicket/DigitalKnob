@@ -7,8 +7,8 @@
 #
 #
 dk_packageInstalled() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "${1}" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then

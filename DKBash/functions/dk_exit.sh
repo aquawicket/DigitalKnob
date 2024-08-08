@@ -7,8 +7,8 @@
 #
 #
 dk_exit() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	# TODO: when open with icon, we can use exec to keep the window open
 	#[ $SHLVL -gt 1 ] && dk_echo "exec ${SHELL}" || dk_echo "exit ${*}"
@@ -21,7 +21,7 @@ dk_exit() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	# Only 'dk_exit 0' will turn the dk_onExit trap off
 	dk_exit 0

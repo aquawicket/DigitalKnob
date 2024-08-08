@@ -43,7 +43,7 @@ dk_addContextMenu() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_validate DKIMPORTS_DIR "dk_validateBranch"
 	dk_validate GIT_EXE "${DKIMPORTS_DIR}/git/dk_installGit"

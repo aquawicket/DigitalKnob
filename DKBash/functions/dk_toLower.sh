@@ -18,7 +18,7 @@ dk_toLower() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
 	echo "lowercase = ${lowercase}"

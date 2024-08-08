@@ -16,7 +16,7 @@ dk_fileAppend() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
 }

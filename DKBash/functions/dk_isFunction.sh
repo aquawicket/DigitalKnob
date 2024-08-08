@@ -25,7 +25,7 @@ test_function() {
 }
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_echo "testing dk_isFunction(test_function)"
 	dk_isFunction "test_function" && dk_echo "true" || dk_echo "false"

@@ -7,8 +7,8 @@
 #
 #
 dk_getFuncName() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	eval "${1}=${FUNCNAME[1]}"
 	dk_printVar "${1}"
@@ -17,7 +17,7 @@ dk_getFuncName() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getFuncName funcName
 	dk_echo "funcName = ${funcName}"

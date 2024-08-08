@@ -24,7 +24,7 @@ dk_isArray() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myVar1=(1 2 3)
 	dk_isArray myVar1 && dk_echo "myVar1 is an array" || dk_echo "myVar1 is NOT an array"

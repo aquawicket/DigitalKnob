@@ -7,8 +7,8 @@
 #
 #
 dk_getFirstPath() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
 	eval "${1}=${PATH%%:*}"
 	dk_printVar ${1}
@@ -17,7 +17,7 @@ dk_getFirstPath() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_getFirstPath firstPath
 	dk_echo "firstPath = ${firstPath}"

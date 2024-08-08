@@ -19,7 +19,7 @@ dk_set() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_set myVar "value assigned with dk_set"	
 	dk_echo "myVar = ${myVar}"
