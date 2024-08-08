@@ -9,8 +9,8 @@
 #  reference: https://stackoverflow.com/a/49042678
 #
 dk_fileToArray() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	dk_todo
 }

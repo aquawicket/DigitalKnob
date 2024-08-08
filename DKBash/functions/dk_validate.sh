@@ -9,8 +9,8 @@
 #	@code	   - The code to run if the variable is invalid.
 #
 dk_validate() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	#_var_=${1}
 	#_code_=${2}

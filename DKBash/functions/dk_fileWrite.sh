@@ -6,8 +6,8 @@
 #
 #
 dk_fileWrite() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	builtin echo "${2}" > "${1}"
 }

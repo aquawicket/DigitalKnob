@@ -7,8 +7,8 @@
 #
 #
 dk_removeFromFile() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 
 	sed -i -e "/${1}/d" ${2}
 }

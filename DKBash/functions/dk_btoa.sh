@@ -8,8 +8,8 @@
 #    https://github.com/base64code/examples
 #
 dk_btoa() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	[ -e ${1} ] || dk_error "${1} not found"
 	[ -e ${2} ] && dk_error "${2} already exists and cannot be overwritten"

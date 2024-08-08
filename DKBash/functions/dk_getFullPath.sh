@@ -7,8 +7,8 @@
 #
 #
 dk_getFullPath() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	dk_realpath "${1}" _realpath_
 	eval "${2}=${_realpath_}"

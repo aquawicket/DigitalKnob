@@ -7,8 +7,8 @@
 #
 #
 dk_hexToAscii() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	dk_fixme
 	local ascii=$(builtin echo ${1} | xxd -r)

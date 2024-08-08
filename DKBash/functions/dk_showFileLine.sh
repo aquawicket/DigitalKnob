@@ -9,8 +9,8 @@
 #
 #
 dk_showFileLine() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="${1}"
 	[ -n "${lastErrorLine-}" ] && _lineno="${lastErrorLine}"   || _matchString="${2}"

@@ -176,8 +176,8 @@ DKHTTP_VARS(){
 #
 #
 dk_download() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	if dk_pathExists "${2}"; then
 		dk_warning "dk_download(): ${2} already exists"

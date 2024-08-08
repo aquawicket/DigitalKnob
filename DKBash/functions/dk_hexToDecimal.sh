@@ -9,8 +9,8 @@
 #               https://stackoverflow.com/a/13280173
 #
 dk_hexToDecimal() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	eval "${2}=$(printf "%d\n" ${1})"
 	dk_printVar "${2}"

@@ -7,8 +7,8 @@
 #   reference: https://stackoverflow.com/a/138581
 #
 dk_getDirectories() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 
 	#directories=(${1}/*/)    # This creates an array of the full paths to all subdirs

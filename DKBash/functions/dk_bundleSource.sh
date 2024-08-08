@@ -8,8 +8,8 @@
 #	Bundle multiple .sh files into 1 .sh file.
 #
 dk_bundleSource() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	file_list=${1}
 	output_file=${2}
