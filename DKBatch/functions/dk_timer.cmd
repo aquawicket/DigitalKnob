@@ -17,20 +17,37 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer
-	setlocal
+	setlocal enableDelayedExpansion
 	
-	call dk_getTime centisecond second minute hour
-	call dk_dateToCentiSeconds seconds centiseconds %centisecond% %second% %minute% %hour%
-	set /a cstime=%seconds%*100+%centiseconds%
+	::call dk_getTime centisecond second minute hour
+	for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
+	for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (set "hour=%%A" & set "minute=%%B" & set "second=%%C" & set "centiseconds=%%D")
+	set /a "second=100%second%%%100,minute=100%minute%%%100,hour=100%hour: =%%%100"
+	::echo TIME = %hour%:%minute%:%second%.%centiseconds%
 	
-	call set init=%%%1.init%%
-	call set first=%%%1.first%%
-	call set last=%%%1.last%%
+	::call dk_dateToCentiSeconds seconds centiseconds %centisecond% %second% %minute% %hour%
+	set /a "seconds=(hour*60*60)+(minutes*60)+second"
+	set /a "currentTime=%seconds%%centiseconds%"	
 
-	if {%init%}=={} endlocal & set "%1.init=%cstime%" & set "%1.first=0" & set "%1.last=0" & goto:eof
-	set /a last=cstime-init-first
-	set /a first+=last
-	endlocal & set "%1.init=%init%" & set "%1.first=%first%" & set "%1.last=%last%"
+	if {!%~1.startTime!}=={} endlocal & set %1.startTime=%currentTime% & set %1.lastTime=%currentTime% & goto:eof
+	set "startTime=!%~1.startTime!
+	set "lastTime=!%~1.lastTime!"
+	
+	::echo startTime = %startTime%
+	echo lastTime = %lastTime%
+	echo currentTime = %currentTime%
+	
+
+	
+	
+	set /a "lastElapsed=currentTime-lastTime"
+	set /a "elapsed.whole=%lastElapsed%/100, elapsed.fraction=%lastElapsed%%%100"
+	
+	
+	endlocal & set "%1.lastTime=%currentTime%" & set "%1=%elapsed.whole%.%elapsed.fraction%"
+	
+	::echo %~1.startTime = !%~1.startTime!
+	echo %~1.lastTime = !%~1.lastTime!
 goto:eof
 
 
@@ -43,46 +60,37 @@ goto:eof
 	
 	
 	call dk_timer t1
-	call :show
+
 
 	echo:
-	echo waiting about 1 second
+	echo waiting about 1 millisecond
 	call dk_sleep 1
 	call dk_timer t1
-	call :show
+	echo Seconds since last call: = %t1%
 
 	echo:
-	echo waiting about 2 seconds
-	call dk_sleep 2
+	echo waiting about 10 milliseconds
+	call dk_sleep 10
 	call dk_timer t1
-	call :show
+	echo Seconds since last call: = %t1%
 	
 	echo:
-	echo waiting about 3 seconds
-	call dk_sleep 3
+	echo waiting about 100 milliseconds
+	call dk_sleep 100
 	call dk_timer t1
-	call :show
+	echo Seconds since last call: = %t1%
 	
 	echo:
-	echo waiting about 5 seconds
-	call dk_sleep 5
+	echo waiting about 1000 milliseconds
+	call dk_sleep 1000
 	call dk_timer t1
-	call :show
+	echo Seconds since last call: = %t1%
+	
+	:timerLoop
+		echo:
+		echo waiting about 1000 milliseconds
+		call dk_sleep 1000
+		call dk_timer t1
+		echo Seconds since last call: = %t1%
+	goto:timerLoop
 goto:eof	
-
-:show
-	echo t1.init = %t1.init%
-	echo t1.first = %t1.first%
-	echo t1.last = %t1.last%	
-	
-	:: CentiSeconds to Seconds w/fraction
-	set /a "last.whole=%t1.last% / 100"
-	set /a "last.fraction=%t1.last% %% 100"
-	set "last.result=%last.whole%.%last.fraction%"
-	
-	set /a "first.whole=%t1.first% / 100"
-	set /a "first.fraction=%t1.first% %% 100"
-	set "first.result=%first.whole%.%first.fraction%"
-
-	echo Seconds since last call: !last.result!, Seconds since first call: !first.result!
-goto:eof

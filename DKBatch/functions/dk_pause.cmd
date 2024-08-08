@@ -1,3 +1,4 @@
+@if (@X) == (@Y) @end /*
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
@@ -24,3 +25,4 @@ goto:eof
 	
 	call dk_pause
 goto:eof
+*/
