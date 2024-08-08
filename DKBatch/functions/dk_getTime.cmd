@@ -20,7 +20,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	:: Strip any leading spaces
 	set "_hour=%_hour: =%"
-	echo _centisecond = '%_centisecond%'
 	:: Ensure the hours have a leading zero
 	if 1%_hour% lss 20 set "_hour=0%_hour%"
 	endlocal & set "%1=%_centisecond%" & set "%2=%_second%" & set "%3=%_minute%" & set "%4=%_hour%"
