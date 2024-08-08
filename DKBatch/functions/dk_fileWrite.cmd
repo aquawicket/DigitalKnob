@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_fileWrite
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	setlocal
 	echo %~2 > "%~1"
@@ -19,7 +18,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
 goto:eof
