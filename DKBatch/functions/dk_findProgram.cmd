@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_findProgram
-	call dk_debugFunc
-	call dk_minMaxArgs 2 10
+	call dk_debugFunc 2 9 
 	
 	setlocal
 	set "VAR=%~1"
@@ -30,8 +29,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
 	call dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"

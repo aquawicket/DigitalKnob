@@ -6,6 +6,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_selectFile(rtn_var)
 ::#
 :dk_selectFile
+	call dk_debugFunc 1
+	
 	setlocal
 	for /f "delims=" %%I in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
 		endlocal & set %1=%%~I
@@ -18,7 +20,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_selectFile myFile
 	call dk_echo "myFile = %myFile%"

@@ -6,7 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_sudo
-	call dk_debugFunc
+	call dk_debugFunc 1 99
 	
 	@echo Set objShell = CreateObject("Shell.Application") > %temp%\sudo.tmp.vbs
 	@echo args = Right("%*", (Len("%*") - Len("%1"))) >> %temp%\sudo.tmp.vbs
@@ -19,7 +19,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_sudo services.msc
 goto:eof

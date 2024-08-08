@@ -11,7 +11,7 @@ if not defined frame (set /a frame=0)
 if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
-	call dk_debugFunc
+	call dk_debugFunc 1 99
 (	
 	setlocal DisableDelayedExpansion
 	if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
@@ -98,7 +98,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call :DKTEST_main
 	goto:eof

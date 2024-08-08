@@ -33,7 +33,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_isVariableName 69         && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
 	set "myNumber=42"

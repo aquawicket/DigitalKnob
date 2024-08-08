@@ -6,7 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_echoAlign
-	call dk_debugFunc
+	call dk_debugFunc 2
 	
 	:: FIXME: requires delayed expansion
 	setlocal enabledelayedexpansion
@@ -56,7 +56,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	setlocal
 	call dk_echoAlign center "centered text"

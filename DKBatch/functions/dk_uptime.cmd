@@ -12,8 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::# 
 :dk_uptime
-	call dk_debugFunc
-	call dk_minMaxArgs 4
+	call dk_debugFunc 4
 	
 	setlocal enableExtensions
 	set "c=net statistics work"
@@ -84,8 +83,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	call dk_uptime d h m s
 	echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%

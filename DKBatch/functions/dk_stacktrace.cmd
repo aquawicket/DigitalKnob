@@ -50,7 +50,7 @@ goto:eof
 goto:eof
 
 :func1
-	call dk_debugFunc
+	call dk_debugFunc 0
 	echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
@@ -58,7 +58,7 @@ goto:eof
 goto:eof
 
 :func2 
-	call dk_debugFunc
+	call dk_debugFunc 0
 	echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
@@ -66,7 +66,7 @@ goto:eof
 goto:eof
 
 :func3
-	call dk_debugFunc
+	call dk_debugFunc 0
 	echo 0 = %0
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0

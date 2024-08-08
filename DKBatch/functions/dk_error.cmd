@@ -2,7 +2,7 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 if not defined ENABLE_dk_error  set "ENABLE_dk_error=1"
-if not defined TRACE_ON_ERROR   set "TRACE_ON_ERROR=1"
+if not defined TRACE_ON_ERROR   set "TRACE_ON_ERROR=0"
 if not defined LINE_ON_ERROR    set "LINE_ON_ERROR=1"
 if not defined PAUSE_ON_ERROR   set "PAUSE_ON_ERROR=1"
 if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
@@ -18,7 +18,6 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 	call dk_debugFunc 1
 	
 	if "%ENABLE_dk_error%" neq "1"  goto:eof
-	::if "%*"==""  echo: & goto:eof	                                                               &:: if arguments are empty, print a new line
 	
 	setlocal
 		call dk_set _message_ %*

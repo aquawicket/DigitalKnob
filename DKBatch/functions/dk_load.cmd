@@ -23,9 +23,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_info.cmd"      powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_info.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_info.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_error.cmd"     powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_error.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_error.cmd')"
 	::if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_debugFunc.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_debugFunc.cmd')"
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(): invalid arguments"
-	if "%~2" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
-	call dk_debugFunc
+	call dk_debugFunc 1
 	
 	if exist "%~1" (
 		set "funcPath=%~1"

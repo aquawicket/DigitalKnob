@@ -51,12 +51,9 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
-	
+	call dk_debugFunc 0	
 	
 	call dk_timer t1
-
 
 	echo:
 	echo waiting about 1 millisecond

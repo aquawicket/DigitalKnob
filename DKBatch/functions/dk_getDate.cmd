@@ -7,8 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getDate
-	call dk_debugFunc
-	call dk_minMaxArgs 3
+	call dk_debugFunc 3
 	
 	setlocal
 	set t=2&if "%date%z" LSS "A" set t=1
@@ -28,8 +27,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	echo date = %date%
 	call dk_getDate day month year

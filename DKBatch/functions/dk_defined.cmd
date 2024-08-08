@@ -5,9 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_defined(<variable> rtn_var)
 ::#
 :dk_defined
-	call dk_debugFunc
-	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
-	if "%~3" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
+	call dk_debugFunc 1 2
 
 	setlocal
 	::call dk_set variable "%1"
@@ -28,7 +26,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
     ::###### Using if return value
 	call dk_echo

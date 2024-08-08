@@ -27,7 +27,7 @@ goto:eof
 call dk_source dk_printVar
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	set "MSYSTEM=CLANG64"
 	call dk_validate DKAPPS_DIR "call dk_validateBranch"

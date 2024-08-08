@@ -14,7 +14,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	set "dk_onError=&& (call dk_echo "success") || (call dk_error "error")"
 	set "dk_onError=&& (echo success) || (echo error)"
