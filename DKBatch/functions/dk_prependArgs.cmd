@@ -8,7 +8,7 @@ call dk_source dk_error
 ::#
 ::#
 :dk_prependArgs
-	call dk_debugFunc 2
+	call dk_debugFunc 2 99
 	
 	setlocal
 	for /f "tokens=1,* delims= " %%a in ("%*") do set "ALL_BUT_FIRST=%%b"
