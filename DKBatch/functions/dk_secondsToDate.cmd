@@ -43,6 +43,20 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if %ss% LSS 10 set ss=0%ss%
 	endlocal & set "%2=%ss%" & set "%3=%nn%" & set "%4=%hh%" & set "%5=%dd%" & set "%6=%mm%" & set "%7=%yy%"
 
+	::	set /a "CentiB=(%CentiTime%)/1"
+	::	echo CentiB = %CentiB%
+	::	set /a "SecondB=(%SecondTime%-%CentiTime%)/100"
+	::	echo SecondB = %SecondB%
+	::	set /a "MinuteB=(%MinuteTime%-%SecondTime%)/60/100"
+	::	echo MinuteB = %MinuteB%
+	::	set /a "HourB=(%HourTime%-%MinuteTime%)/60/60/100"
+	::	echo HourB = %HourB%
+	::	set /a "DayB=(%DayTime%-%HourTime%)/24/60/60/100"
+	::	echo DayB = %DayB%
+	::	set /a "MonthB=(%MonthTime%-%DayTime%)/30/24/60/60/100"
+	::	echo MonthB = %MonthB%
+	::	::set /a "YearB=(%YearTime%-%MonthTime%)12/30/24/60/60/100"
+	::	::echo YearB = %YearB%
 goto:eof
 
 
