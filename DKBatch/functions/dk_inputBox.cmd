@@ -1,39 +1,44 @@
 <!-- :
 @echo off
-setlocal EnableDelayedExpansion
-
-if "%~1" equ "/?" (
-	echo Creates an input value window and output
-	echo   the result to console or assign it to variable
-	echo   if variable name is passed
-	(echo()
-	echo Usage:
-	(echo()
-	echo %~0nx [storeInputTo]
-)
-for /f "tokens=* delims=" %%p in ('mshta.exe "%~f0"') do (
-    set "input=%%p"
-)
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
-if "%~1" equ "" (
-	echo %input%
-	endlocal
-) else (
-	endlocal & (
-		set "%~1=%input%"
+::################################################################################
+::# dk_inputBox(rtn_var)
+::#
+:dk_inputBox
+	call dk_debugFunc 1
+	
+	setlocal
+	for /f "tokens=* delims=" %%p in ('mshta.exe "%~f0"') do (
+		set "input=%%p"
 	)
-)
-exit /b
+	
+	endlocal & set "%~1=%input%"
+goto:eof
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+	call dk_debugFunc 0
+	
+	call dk_inputBox input
+	call dk_echo "input = %input%"
+goto:eof
+
 -->
 
 
 <!-- https://learn.microsoft.com/en-us/previous-versions/ms536495(v=vs.85) -->
 <html>
 	<head>
-		<TITLE>DKInputBox</TITLE>
-		<HTA:APPLICATION ID="DKInputBox"
-			APPLICATIONNAME="DKInputBox"
+		<TITLE>dk_inputBox</TITLE>
+		<HTA:APPLICATION ID="dk_inputBox"
+			APPLICATIONNAME="dk_inputBox"
 			BORDER="none"
 			BORDERSTYLE="normal"
 			CAPTION="yes"
