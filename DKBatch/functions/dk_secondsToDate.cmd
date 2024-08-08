@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_secondsToDate 
-	call dk_debugFunc
-	if %__ARGC__% LSS 1 call dk_error "%__FUNCTION__%(): not enough arguments"
+	call dk_debugFunc 1 7
 	
 	setlocal ENABLEEXTENSIONS
 	set /a i=%1
@@ -64,7 +63,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_getDate Day Month Year
 	call dk_getTime CentiSecond Second Minute Hour

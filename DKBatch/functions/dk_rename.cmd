@@ -12,10 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 ::#
 :dk_rename
-	call dk_debugFunc
-	if %__ARGC__% LSS 2 call dk_error "%__FUNCTION__%(): not enough arguments"
-	if %__ARGC__% GTR 3 call dk_error "%__FUNCTION__%(): too many arguments"
-	
+	call dk_debugFunc 2 3
 	
 	call dk_replaceAll "%~1" "/" "\" _from_
 	call dk_replaceAll "%~2" "/" "\" _to_
@@ -52,7 +49,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
 	

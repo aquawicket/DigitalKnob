@@ -8,8 +8,7 @@ call dk_source dk_error
 ::#
 ::#
 :dk_prependArgs
-	call dk_debugFunc
-	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	call dk_debugFunc 2
 	
 	setlocal
 	for /f "tokens=1,* delims= " %%a in ("%*") do set "ALL_BUT_FIRST=%%b"
@@ -24,7 +23,7 @@ goto:eof
 call dk_source dk_printVar
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_printVar myVar
 	

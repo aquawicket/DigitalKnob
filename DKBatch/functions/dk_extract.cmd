@@ -6,11 +6,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_extract
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_debugFunc 1 2
+
 	set "dk_extract_argc=%__ARGC__%"
-	
 	
 	if %dk_extract_argc% equ 1 (call dk_info "Extracting %~1 . . .")
 	if %dk_extract_argc% equ 2 (call dk_info "Extracting %~1 to %~2. . .")
@@ -40,7 +38,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	::call dk_validate DKDOWNLOAD_DIR "call dk_getDKPaths"
 	::call dk_extract "%DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"

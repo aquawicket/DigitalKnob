@@ -20,8 +20,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayConcat
 	call dk_debugFunc 2 3
-	::if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	::if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	::#dk_validateArgs array array
 	
 	set "_arrayA_=%~1"

@@ -8,9 +8,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#  https://www.robvanderwoude.com/escapechars.php
 ::#
 :dk_encodeEscapes
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__% not enough arguments"
-	::if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__% too many arguments"
+	call dk_debugFunc 1 2
 	
 	set org=%*
 	if defined %* call set "org=%%%org%%%"	&:: FIXME: remove the need for call here

@@ -6,9 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_cmakeEval
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
-	if %__ARGC__% gtr 4 call dk_error "%__FUNCTION__%(): too many arguments"
+	call dk_debugFunc 1 4
 	
 	setlocal
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
@@ -96,7 +94,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
 goto:eof

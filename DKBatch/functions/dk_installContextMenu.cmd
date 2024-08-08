@@ -5,8 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_installContextMenu(menuTitle, exe, command)
 ::#
 :dk_installContextMenu
-    call dk_debugFunc
-	if %__ARGC__% lss 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 3
 
 	setlocal
 	call dk_set _menuTitle_ "%~1"
@@ -42,7 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	call dk_validate GIT_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"

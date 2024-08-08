@@ -7,9 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	 https://stackoverflow.com/a/17584764
 ::#
 :dk_isNumber
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__%: not enough arguments"
-	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
+	call dk_debugFunc 1 2
 
 	set "arg1=%~1"
 	if defined %~1 call set "arg1=%%%arg1%%%"
@@ -36,7 +34,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_isNumber 69         && call dk_info "is a number" || call dk_info "is NOT a number"
 	set "myNumber=42"

@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_dateToSeconds
-	call dk_debugFunc
-	if %__ARGC__% LSS 1 call dk_error "%__FUNCTION__%(): not enough arguments"
+	call dk_debugFunc 1 7
 	
 	setlocal
 	if "%~2" equ "" (set "ss=0")    else (set /a "ss=100%~2%%100")

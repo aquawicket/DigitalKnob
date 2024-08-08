@@ -8,9 +8,7 @@ call dk_source dk_error
 ::#
 ::#
 :dk_compileCpp
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	::if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_debugFunc 1 2
 
 	set "filepath=%~1"
 	set "appname=%~2"

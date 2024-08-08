@@ -5,8 +5,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_pathExists(path rtn_var)
 ::#
 :dk_pathExists
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1 2
+
 	::set "dk_pathExists=NOT ERRORLEVEL 1"
 	
 	::set "_path=%~1"
@@ -27,7 +27,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	::###### Using if return value
 	call dk_echo

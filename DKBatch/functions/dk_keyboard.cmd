@@ -12,8 +12,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 	
 	if "%~1" == "callback" set callback=%~2 %~3
 	::if defined callback echo callback = %callback%
-	call dk_debugFunc || call dk_error "call dk_debugFunc failed!"
-	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_debugFunc 0 3 || call dk_error "call dk_debugFunc failed!"
 	
 	rem Start Keyboard_Loop in a parallel process
 	start "" /B cmd /C "call dk_keyboard dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
@@ -81,7 +80,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc || call dk_error "call dk_debugFunc failed!"
+	call dk_debugFunc 0 || call dk_error "call dk_debugFunc failed!"
 	
 	call dk_keyboard || call dk_error "call dk_keyboard failed!"
 	
