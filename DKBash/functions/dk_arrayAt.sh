@@ -19,8 +19,9 @@
 #
 dk_arrayAt() {
 	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_minMaxArgs 2 3
+	#[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	#[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	#dk_validateArgs array int optional:rtn_var
 	
 	#eval local arrayAt='("${'${1}'[${2}]}")'
