@@ -18,10 +18,8 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 dk_arrayAt() {
-	dk_debugFunc
-	dk_minMaxArgs 2 3
-	#[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	#[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 3
+	
 	#dk_validateArgs array int optional:rtn_var
 	
 	#eval local arrayAt='("${'${1}'[${2}]}")'
@@ -41,7 +39,7 @@ dk_arrayAt() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"
