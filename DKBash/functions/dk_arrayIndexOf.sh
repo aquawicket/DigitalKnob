@@ -28,9 +28,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 #
 dk_arrayIndexOf() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 4 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 4
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -52,7 +50,7 @@ dk_arrayIndexOf() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"

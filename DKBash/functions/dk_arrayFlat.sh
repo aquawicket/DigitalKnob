@@ -17,9 +17,8 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 #
 dk_arrayFlat() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	dk_validateArgs array int
+	dk_debugFunc 2
+	#dk_validateArgs array int
 	
 	dk_todo "dk_arrayFlat"
 }
@@ -28,7 +27,7 @@ dk_arrayFlat() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_todo
 	dk_arrayFlat array depth

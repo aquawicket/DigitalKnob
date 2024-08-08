@@ -34,8 +34,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 #
 dk_arrayCopyWithin() {
-	dk_debugFunc
-	#[ ${#} -ne 4 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 4
 	#dk_validateArgs array any any any
 	
 	dk_todo "dk_arrayCopyWithin"
@@ -46,7 +45,7 @@ dk_arrayCopyWithin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_arrayCopyWithin array target start end
 }

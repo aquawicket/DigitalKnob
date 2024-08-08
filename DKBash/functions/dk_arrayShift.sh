@@ -19,9 +19,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
 #
 dk_arrayShift() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 1 2
 	#dk_validateArgs array
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -34,7 +32,6 @@ dk_arrayShift() {
 	
 	# FIXME: command substitution cannot alter parent variables
 	dk_return "${removedElement}" && return						# return value using command substitution
-
 }
 
 
@@ -43,7 +40,7 @@ dk_arrayShift() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"

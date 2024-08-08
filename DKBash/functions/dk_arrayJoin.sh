@@ -19,9 +19,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 dk_arrayJoin() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 3
 	#dk_validateArgs array string optional:rtn_var
 
 	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
@@ -42,7 +40,7 @@ dk_arrayJoin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"

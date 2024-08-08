@@ -18,9 +18,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 #
 dk_arrayUnshift() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	#[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 99
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -38,7 +36,7 @@ dk_arrayUnshift() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_arrayUnshift myArrayA "a b c" #new_lengthA
 	dk_printVar myArrayA

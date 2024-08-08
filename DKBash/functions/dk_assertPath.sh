@@ -5,8 +5,7 @@
 # dk_assertPath(path)
 #
 dk_assertPath() {
-    dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+    dk_debugFunc 1
 	
 	local arg1="${1//[^[:alnum:]]/_}"
 	[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}
@@ -18,9 +17,9 @@ dk_assertPath() {
 
 
 
-
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() { 
+	dk_debugFunc 0
 	
 	dk_set sys32path "/c/Windows/System32"
 	dk_assertPath sys32path

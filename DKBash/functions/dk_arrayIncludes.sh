@@ -25,9 +25,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 #
 dk_arrayIncludes() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 3
 	#dk_validateArgs array string
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -43,7 +41,7 @@ dk_arrayIncludes() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	array123=(1 2 3)
 	dk_arrayIncludes array123 2     && echo "true" || echo "false" # true

@@ -38,13 +38,20 @@ dk_assertArgs() {
 }
 
 
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 test_function() {
-	dk_debugFunc
+	dk_debugFunc 3
 	dk_assertArgs int string optional
 }
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+
+DKTEST() { 
+
+	dk_debugFunc 0
 
 	test_function 123 abc
 }	

@@ -12,9 +12,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 #
 dk_arrayLength() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 1 2
 	#dk_validateArgs array optional:rtn_var
 	
 	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
@@ -30,7 +28,7 @@ dk_arrayLength() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"

@@ -18,8 +18,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
 dk_arrayPush() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	dk_debugFunc 2 99
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -40,8 +39,10 @@ dk_arrayPush() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() { 
+	dk_debugFunc 0
 	
 	dk_arrayPush myArrayA "a b c" # new_lengthA
 	dk_printVar myArrayA
