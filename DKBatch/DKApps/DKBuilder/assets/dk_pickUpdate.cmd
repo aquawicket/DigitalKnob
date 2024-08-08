@@ -25,8 +25,7 @@ call dk_source dk_unset
 ::#
 ::#
 :dk_pickUpdate
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
     call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
@@ -77,7 +76,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_pickUpdate
 goto:eof

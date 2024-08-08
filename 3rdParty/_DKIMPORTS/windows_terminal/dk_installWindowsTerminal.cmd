@@ -7,9 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#     https://github.com/microsoft/terminal
 ::# 
 :dk_installWindowsTerminal
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
+	call dk_debugFunc 0	
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set WINDOWS_TERMINAL_DL "https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip"
@@ -43,7 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_installWindowsTerminal
 goto:eof

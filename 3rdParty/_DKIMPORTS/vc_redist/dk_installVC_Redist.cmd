@@ -13,8 +13,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_installVC_Redist
 ::#
 :dk_installVC_Redist
-    call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 0
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
 	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"

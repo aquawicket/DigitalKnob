@@ -7,9 +7,7 @@ call dk_source dk_setTitle
 ::#
 ::#
 :dk_generate
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-	
+	call dk_debugFunc 0
 	
     call dk_setTitle Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     call dk_echo
@@ -125,7 +123,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_generate
 goto:eof

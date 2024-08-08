@@ -26,8 +26,7 @@ call dk_source dk_warning
 ::#
 ::#
 :dk_buildMain
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 
 	call dk_assert DKSCRIPT_PATH
 	call dk_assert DKSCRIPT_DIR
@@ -71,7 +70,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_buildMain
 goto:eof
