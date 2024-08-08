@@ -23,7 +23,7 @@ function Global:dk_confirm() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	if(dk_confirm){ dk_echo "the confimation has passed" } 

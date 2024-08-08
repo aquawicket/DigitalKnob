@@ -6,8 +6,7 @@ if(!$dk_fileAppend){ $dk_fileAppend = 1 } else{ return }
 #
 #
 function Global:dk_fileAppend($filepath, $str) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
 	
 	if(dk_pathExists "$filepath"){ echo "$str" >> "$filepath" }
 	else{ echo "$str" > "$filepath" }
@@ -18,7 +17,7 @@ function Global:dk_fileAppend($filepath, $str) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
 }

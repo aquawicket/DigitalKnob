@@ -8,8 +8,8 @@ if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 #
 #
 function Global:dk_showFileLine($filepath, $goto) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
+
 	
 	$lineno = $goto
 #	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
@@ -68,7 +68,7 @@ function Global:dk_showFileLine($filepath, $goto) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_showFileLine "../../README.md" "37"

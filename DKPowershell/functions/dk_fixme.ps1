@@ -35,7 +35,7 @@ function Global:dk_fixme($message){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_fixme "test dk_fixme message"

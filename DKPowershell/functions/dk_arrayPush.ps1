@@ -8,8 +8,8 @@ if(!$dk_arrayPush){ $dk_arrayPush = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
 function Global:dk_arrayPush($array, $element1) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
+
 	
 	
 	#if($array -isnot [System.Object]){ dk_error "Not a System.Object"; return ${false} }
@@ -30,7 +30,7 @@ function Global:dk_arrayPush($array, $element1) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	#$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')

@@ -58,7 +58,7 @@ function Global:dk_resetAll() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_resetAll

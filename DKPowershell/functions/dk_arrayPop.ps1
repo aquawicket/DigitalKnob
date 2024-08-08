@@ -29,7 +29,7 @@ function Global:dk_arrayPop($array) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')

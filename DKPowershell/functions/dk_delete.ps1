@@ -32,7 +32,7 @@ function Global:dk_delete($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_fileWrite "removeMe.file" "created file to test dk_delete"
 	dk_delete "removeMe.file"

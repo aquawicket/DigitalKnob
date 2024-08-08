@@ -20,7 +20,7 @@ function Global:dk_isUrl($str) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$test_url = "http://www.aquawicket.com"

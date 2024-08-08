@@ -19,7 +19,7 @@ function Global:dk_removeExtension($filepath) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$filepath="C:/test/test2/xfile.version.1.2.ext"

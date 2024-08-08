@@ -6,8 +6,8 @@ if(!$dk_replaceAll){ $dk_replaceAll = 1 } else{ return }
 #
 #
 function Global:dk_replaceAll($str, $searchValue, $newValue) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 3
+
 	
 	
 	$replaceAll = $str -replace $searchValue, $newValue
@@ -20,7 +20,7 @@ function Global:dk_replaceAll($str, $searchValue, $newValue) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$string_var="AZC AZC Zannana Zread"

@@ -6,10 +6,8 @@ if(!$dk_test){ $dk_test = 1 } else{ return }
 #
 #
 function GLOBAL:dk_test($str, $num) {
-	dk_debugFunc
-	#if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	
+	dk_debugFunc 2
+
 	dk_info "test from dk_info"
 	dk_debug "test from dk_debug"
 	
@@ -27,7 +25,6 @@ function GLOBAL:dk_test($str, $num) {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
 	dk_debugFunc 0
-	
 	
 	dk_test string1 123
 }

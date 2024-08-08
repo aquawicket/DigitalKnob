@@ -6,8 +6,7 @@ if(!$dk_fileWrite){ $dk_fileWrite = 1 } else{ return }
 #
 #
 function Global:dk_fileWrite($filepath, $str) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
 	
 	echo "$str" > "$filepath" 
 }
@@ -17,7 +16,7 @@ function Global:dk_fileWrite($filepath, $str) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 
 	dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
 }

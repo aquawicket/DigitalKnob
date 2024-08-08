@@ -8,8 +8,8 @@ if(!$dk_atob){ $dk_atob = 1 } else{ return }
 #    https://stackoverflow.com/a/60671753/688352
 #
 function Global:dk_atob ($file_in, $file_out){
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
+
 	
 	if(!(dk_pathExists $file_in)){ dk_error "$file_in not found" }
 	if(dk_pathExists $file_out){ dk_error "$file_out already exists and cannot be overwritten" }
@@ -25,7 +25,7 @@ function Global:dk_atob ($file_in, $file_out){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 	$input = "${DKBRANCH_DIR}/DKBuilder.ps1.base64"

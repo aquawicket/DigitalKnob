@@ -6,8 +6,7 @@ if(!$dk_keyboard){ $dk_keyboard = 1 } else{ return }
 #
 #
 function Global:dk_keyboard() {
-	dk_debugFunc
-	if($(__ARGC__) -lt 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
 	
 	Keyboard_Loop
 }
@@ -38,7 +37,7 @@ function Global:Keyboard_Loop() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_keyboard
 }

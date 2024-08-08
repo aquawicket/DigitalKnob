@@ -21,7 +21,7 @@ function Global:dk_getDirectories($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$directories = dk_getDirectories "C:/Windows"

@@ -11,10 +11,7 @@ if(!$dk_move){ $dk_move = 1 } else{ return }
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
 function Global:dk_move($_from_, $_to_) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	if($(__ARGC__) -gt 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+	dk_debugFunc 2 3
 	
 	if($args[2] -eq "OVERWRITE"){ $OVERWRITE = 1 }
 	
@@ -40,10 +37,9 @@ function Global:dk_move($_from_, $_to_) {
 }
 
 
-
-function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function Global:DKTEST(){
+	dk_debugFunc 0
 	
 	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
 	

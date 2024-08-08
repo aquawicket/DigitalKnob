@@ -6,9 +6,7 @@ if(!$dk_stacktrace){ $dk_stacktrace = 1 } else{ return }
 #
 #
 function Global:dk_stacktrace() {
-    dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"; return }
-
+    dk_debugFunc 0
 
 	### VERSION 1 ###
 	$stack_size = $(Get-PSCallStack).count
@@ -69,8 +67,7 @@ function Global:dk_stacktrace() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
-	
+	dk_debugFunc 0
 	
 	dk_stacktrace
 }

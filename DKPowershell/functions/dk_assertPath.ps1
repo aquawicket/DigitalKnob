@@ -5,9 +5,8 @@ if(!$dk_assertPath){ $dk_assertPath = 1 } else{ return }
 # dk_assertPath(path)
 #
 function Global:dk_assertPath($path) {
-    dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+    dk_debugFunc 1
+
 	
 	if(Test-Path variable:$path){
 		$_path_ = (Get-Item variable:$path).Value	# from variable name
@@ -30,7 +29,7 @@ function Global:dk_assertPath($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$sys32path = "C:/Windows/System32"

@@ -6,8 +6,8 @@ if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 #
 #
 function Global:dk_createShortcut($shortcut_path, $target_path) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
+
 
 	$shortcut_path = "${shortcut_path}.lnk"
 	if(dk_pathExists "${shortcut_path}"){ dk_warning "${shortcut_path} already exists"; return; }

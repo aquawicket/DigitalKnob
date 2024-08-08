@@ -6,7 +6,7 @@ if(!$dk_pullAssets){ $dk_pullAssets = 1 } else{ return }
 #
 #
 function Global:dk_pullAssets() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
     dk_fixme "dk_pullAssets() not implemented"
@@ -17,7 +17,7 @@ function Global:dk_pullAssets() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_pullAssets

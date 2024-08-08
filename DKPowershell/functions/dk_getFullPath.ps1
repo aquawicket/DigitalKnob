@@ -19,7 +19,7 @@ function Global:dk_getFullPath($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$fullpath = dk_getFullPath "bash"

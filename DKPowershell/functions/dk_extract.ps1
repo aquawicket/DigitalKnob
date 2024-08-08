@@ -6,8 +6,8 @@ if(!$dk_extract){ $dk_extract = 1 } else{ return }
 #
 #
 function Global:dk_extract($file, $destination) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
+
 	
 	
 	dk_info "Extracting $file to $destination . . ."
@@ -21,7 +21,7 @@ function Global:dk_extract($file, $destination) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"

@@ -6,9 +6,7 @@ if(!$dk_smartExtract){ $dk_smartExtract = 1 } else{ return }
 #
 #
 function Global:dk_smartExtract($src, $dest) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-
+	dk_debugFunc 2
 
 	$src_fullpath = dk_realpath $src
 	$src_dirname = dk_dirname $src_fullpath
@@ -48,7 +46,7 @@ function Global:dk_smartExtract($src, $dest) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	dk_smartExtract
