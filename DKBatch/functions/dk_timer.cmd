@@ -74,9 +74,15 @@ goto:eof
 	echo t1.init = %t1.init%
 	echo t1.first = %t1.first%
 	echo t1.last = %t1.last%	
-	set /a "last.seconds=%t1.last%/100"
-	set /a "last.centiseconds=%t1.last%-last.seconds*100"
-	set /a "first.seconds=%t1.first%/100"
-	set /a "first.centiseconds=%t1.first%-first.seconds*100"
-	echo Seconds since last call: !last.seconds!.!last.centiseconds!, Seconds since first call: !first.seconds!.!first.centiseconds!
+	
+	:: CentiSeconds to Seconds w/fraction
+	set /a "last.whole=%t1.last% / 100"
+	set /a "last.fraction=%t1.last% %% 100"
+	set "last.result=%last.whole%.%last.fraction%"
+	
+	set /a "first.whole=%t1.first% / 100"
+	set /a "first.fraction=%t1.first% %% 100"
+	set "first.result=%first.whole%.%first.fraction%"
+
+	echo Seconds since last call: !last.result!, Seconds since first call: !first.result!
 goto:eof
