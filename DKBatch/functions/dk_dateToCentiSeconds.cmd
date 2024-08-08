@@ -11,7 +11,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
 	if "%~3" equ "" (set "cs=0")    else (set /a "cs=%~3")
-	::if "%~3" equ "" (set "cs=0")    else (set /a "cs=100%~3%%100")
 	if "%~4" equ "" (set "ss=0")    else (set /a "ss=100%~4%%100")
 	if "%~5" equ "" (set "nn=0")    else (set /a "nn=100%~5%%100")
 	if "%~6" equ "" (set "hh=0")    else (set /a "hh=100%~6%%100")
@@ -59,6 +58,6 @@ goto:eof
 	echo %Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
 	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second%
 	echo :%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second%
+	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond%
 	echo .%CentiSecond% = %seconds%.%centiseconds% seconds
 goto:eof
