@@ -8,8 +8,8 @@
 # Evaluates to true if the parameter is a variable that exists and has value
 #
 dk_hasValue() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
+	dk_debugFunc 1
+
 	
 	eval value='$'{${1}}
 	[ -n "${value//[[:blank:]]/}" ] # remove spaces and check if empty

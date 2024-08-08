@@ -13,7 +13,7 @@
 #   https://en.wikipedia.org/wiki/ANSI_escape_code
 #
 dk_color() {
-	dk_debugFunc
+	dk_debugFunc 0 1
 	
 	export USE_COLOR=1
 	if [ ${#} -gt 0 ]; then

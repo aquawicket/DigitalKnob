@@ -10,7 +10,7 @@
 #
 #
 dk_escapeSequences() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 
 #	# ASCII control characters (character code 0-31)
@@ -129,7 +129,7 @@ dk_escapeSequences() {
 }
 
 ASCII_ADD() {
-	dk_debugFunc
+	dk_debugFunc 6
 	
 	#https://linuxsimply.com/bash-scripting-tutorial/array/array-of-arrays/
 	
@@ -164,7 +164,7 @@ ASCII_ADD() {
 }
 
 ASCII_SHOW() {
-	dk_debugFunc
+	dk_debugFunc 1
 	
 	ITEM=(${ASCII[${1}]})
 	dk_echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"

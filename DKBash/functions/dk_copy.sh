@@ -12,9 +12,8 @@
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
 dk_copy() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 3
+
 	
 	local _from_="${1}"
 	local _to_="${2}"

@@ -14,8 +14,8 @@
 #	 OSX:   https://www.unix.com/man-page/osx/1/readlink/
 #
 dk_readlink() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	dk_debugFunc 1
+
 	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
 	
 	# we expect to use a -f parameter, so use ${2} as the input path.

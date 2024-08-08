@@ -34,7 +34,7 @@ dk_realpath(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST(){
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
 	realpathA=$(dk_realpath "dk_load.sh")
 	dk_echo "realpathA = ${realpathA}"

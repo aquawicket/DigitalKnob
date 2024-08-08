@@ -7,8 +7,8 @@
 #
 #
 dk_gitUpdate() {
-	dk_debugFunc
-	[ ${#} -gt 1 ] && dk_error "Too many parameters"
+	dk_debugFunc 1
+
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then
 		dk_info "Git Update? Any local changes will be lost."

@@ -5,7 +5,7 @@
 # dk_logo()
 #
 dk_logo() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	echo "${lblue-}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______     "
@@ -20,8 +20,8 @@ dk_logo() {
 
 
 
-
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
 	dk_logo
