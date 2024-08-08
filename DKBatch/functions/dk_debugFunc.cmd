@@ -70,7 +70,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
 	set /a DKSTACK_length+=1
 	set /a DKSTACK_marker=%DKSTACK_length%	
-	echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
+	::echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
 
 
 	::3: ###### VALIDATE ARGUMENTS ######
