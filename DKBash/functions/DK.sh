@@ -7,7 +7,7 @@
 #
 #
 DK(){
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
 	###### Initialize Language specifics ######
 	dkinit
@@ -150,7 +150,7 @@ dkinit(){
 # DKBASH_VARS()
 #
 DKBASH_VARS(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_export BASH_SOURCE_DIR      $( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
 	dk_export DKBASH_DIR           $( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
@@ -163,7 +163,7 @@ DKBASH_VARS(){
 # DKHTTP_VARS()
 #
 DKHTTP_VARS(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
 	dk_export DKHTTP_DKBRANCH_DIR         "${DKHTTP_DIGITALKNOB_DIR}/Development"
@@ -200,7 +200,7 @@ dk_download() {
 # dksetupCallstack()
 #
 dksetupCallstack(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	#dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
@@ -210,7 +210,7 @@ dksetupCallstack(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_pathExists    $(dk_realpath ${0}) && dk_export  DKSCRIPT_PATH  $(dk_realpath ${0})
 	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
@@ -225,7 +225,7 @@ DKSCRIPT_VARS(){
 # dksetupKeepOpen()
 #
 dksetupKeepOpen(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_echo
 	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
@@ -235,7 +235,7 @@ dksetupKeepOpen(){
 # dksetOptions()
 #
 dksetOptions(){
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	# https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	# $(set -a) && set -a
@@ -282,7 +282,7 @@ dksetOptions(){
 #	install a package
 #
 dk_install(){
-	dk_debugFunc
+	dk_debugFunc 1
 	
 	dk_commandExists ${1}      && return 0					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
@@ -303,7 +303,7 @@ dk_install(){
 #	source a DKBash function. Download it first if it's missing
 #
 dk_source(){
-	dk_debugFunc
+	dk_debugFunc 1
 	
 	dk_stringContains ${1} ".sh"                                       && local funcPath=${1}                              || local funcPath=${1}.sh
 	dk_pathExists "${funcPath}"                                        && local funcPath="${funcPath}"
@@ -322,7 +322,7 @@ dk_source(){
 #	call a DKBash function. dk_load it first if needed.
 #
 dk_call(){
-	dk_debugFunc
+	dk_debugFunc 1 99
 	
 	if ! dk_commandExists ${1}; then
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then				# Is it a dk_ prefixed function?

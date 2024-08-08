@@ -29,7 +29,7 @@ fi
 #
 #
 dk_echo() {
-	#dk_debugFunc
+	#dk_debugFunc 0 1
 	[ ${#} -eq 0 ] && echo "" && return 0
 	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	

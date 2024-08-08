@@ -7,8 +7,7 @@
 #
 #
 dk_call(){
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1 99
 	
 	if ! dk_commandExists ${1}; then
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then	# Is it a dk_ prefixed function?
@@ -32,7 +31,7 @@ dk_call(){
 
 
 DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_call dk_info "test message using dk_call"
 }

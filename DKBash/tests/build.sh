@@ -90,7 +90,7 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 dk_buildMain() {
-	dk_debugFunc
+	dk_debugFunc 0
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)

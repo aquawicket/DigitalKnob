@@ -6,7 +6,7 @@
 #
 #
 dk_function() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 }
 

@@ -10,8 +10,7 @@
 #	${rtn_var}: 	- True if the argument is string or a string variable
 #
 dk_isNumber() {
-	dk_debugFunc 
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	re='^[0-9]+$'
 	dk_isVariable ${1} && local var=${!1} || local var=${1}

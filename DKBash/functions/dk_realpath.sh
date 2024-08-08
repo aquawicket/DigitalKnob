@@ -9,7 +9,7 @@
 #    C: 	https://pubs.opengroup.org/onlinepubs/9699919799/functions/realpath.html
 #
 dk_realpath(){
-	#dk_debugFunc
+	#dk_debugFunc 1 2
 	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${*}): not enough arguments"
 	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${*}): too many arguments"
 	

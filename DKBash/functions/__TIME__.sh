@@ -11,7 +11,7 @@
 #
 #
 __TIME__() {
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
     nanoseconds="$(date +%s%N)"
     date_nanoseconds="$(( nanoseconds % 1000000000))"

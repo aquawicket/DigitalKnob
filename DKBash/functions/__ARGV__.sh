@@ -5,7 +5,7 @@
 # __ARGV__(<frame>)
 #
 __ARGV__() {
-	#dk_debugFunc
+	#dk_debugFunc 0 1
 	[ -z ${1-} ] && local frame=0 || local frame=${1}
 	
 	local marker=0
@@ -29,7 +29,7 @@ __ARGV__() {
 
 
 test_function(){
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
 	echo "ARGV = $(__ARGV__ 1)"					# as a string
 	ARGV=($(__ARGV__ 1))						# as an array

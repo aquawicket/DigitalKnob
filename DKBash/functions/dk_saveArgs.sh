@@ -14,7 +14,7 @@
 #	echo "${1} ${2} ${3} ${4}"
 #
 dk_saveArgs() {
-	dk_debugFunc
+	dk_debugFunc 1 99
 
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"

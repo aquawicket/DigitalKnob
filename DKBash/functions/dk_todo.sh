@@ -10,7 +10,7 @@ TODO_TAG="  TODO: "
 #	@msg	- The message to print
 #
 dk_todo() {
-	dk_debugFunc	
+	dk_debugFunc 0 1	
 	
 	[ ${ENABLE_dk_todo-1} -ne 1 ] && return
 	msg="${1-}"

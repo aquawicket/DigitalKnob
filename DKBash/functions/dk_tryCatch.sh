@@ -7,8 +7,7 @@
 #	reference: https://stackoverflow.com/a/11092989/688352
 #
 dk_tryCatch() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	# Don't pipe the subshell into anything or we won't be able to see its exit status
 	set +e; ( set -e

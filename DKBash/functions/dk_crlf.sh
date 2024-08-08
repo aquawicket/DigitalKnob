@@ -8,7 +8,7 @@
 #
 #
 dk_crlf() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_todo "dk_crlf needs to be implemented"
 	return ${false}
@@ -16,7 +16,9 @@ dk_crlf() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
+	
 	dk_crlf
 }

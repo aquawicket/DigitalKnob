@@ -6,7 +6,7 @@
 # dkValidateArgs(...)
 #
 dk_validateArgs() {
-	dk_debugFunc
+	dk_debugFunc 1 99
 	#dk_echo "$(__FILE__ 2):$(__LINE__ 2)  $(__FUNCTION__ 1)($(__ARGV__ 2))"
 	#dk_echo "$(__FUNCTION__ 1)($(__ARGV__ 2))"
 	#dk_echo "$(__FUNCTION__ 1)(${*})"

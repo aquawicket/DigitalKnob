@@ -13,8 +13,7 @@
 #	https://stackoverflow.com/a/27254437
 #
 dk_isArray() {
-	dk_debugFunc 
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	[[ "$(declare -p ${1})" =~ "declare -a" ]] && return $(true)
 	return $(false)

@@ -6,8 +6,7 @@
 #
 #
 dk_isDirectory () {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	if [[ -d ${1} ]]; then
 		#if defined ${2} (dk_set ${2} true)

@@ -2,8 +2,7 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 arrayAsArg() {
-	dk_debugFunc
-	[ ${#} -gt 3 ] && dk_error "Incorrect number of parameters"
+	dk_debugFunc 3
 	
 	local arg1=${1}
 	echo "arg1 = ${arg1}"
@@ -16,8 +15,7 @@ arrayAsArg() {
 }
 
 checkFunc() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
+	dk_debugFunc 0
 	
 	args=("${@}")
 	for ((i=0; i < ${#args[@]}; i++ )); do 

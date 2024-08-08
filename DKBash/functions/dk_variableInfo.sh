@@ -7,7 +7,7 @@
 #
 #
 dk_variable_info() {
-	dk_debugFunc
+	dk_debugFunc 2
 	
 	[ ${#} -ne 2 ] && return ${false}										# if not exactly 2 parameters
 	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# ^ as first character is not portable
@@ -27,6 +27,7 @@ dk_variable_info() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-
+	dk_debugFunc 0
+	
 	dk_variable_info
 }

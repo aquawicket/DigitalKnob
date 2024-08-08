@@ -5,7 +5,7 @@
 # __CALLER__(<frame>)
 #
 __CALLER__() {
-	#dk_debugFunc
+	#dk_debugFunc 0 1
 	
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
 	((_FRAME_=_FRAME_+1))
@@ -15,7 +15,7 @@ __CALLER__() {
 
 
 DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
 	echo "$(__CALLER__)"
 }

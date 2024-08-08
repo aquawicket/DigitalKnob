@@ -8,7 +8,7 @@
 #  https://stackoverflow.com/a/26261518
 #
 dk_onError() {
-	#dk_debugFunc
+	#dk_debugFunc 2
 	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#filepath=${1}
