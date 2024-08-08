@@ -41,7 +41,7 @@ dk_arrayIncludes() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0 0
 	
 	array123=(1 2 3)
 	dk_arrayIncludes array123 2     && echo "true" || echo "false" # true
