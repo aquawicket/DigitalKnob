@@ -154,8 +154,8 @@ dk_buildMain() {
 #
 #
 dk_pickUpdate() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_readCache
 	
@@ -248,8 +248,8 @@ dk_pickUpdate() {
 #
 #
 dk_pickApp() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
@@ -304,8 +304,8 @@ dk_pickApp() {
 #
 #
 dk_pickOs() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
@@ -439,8 +439,8 @@ dk_pickOs() {
 #
 #
 dk_pickType() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"

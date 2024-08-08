@@ -17,9 +17,9 @@ debugFunc() {
 
 	#echo "############ ${_FUNCNAME_-} ${_ARGC_-} ${_MIN_-} ${_MAX_-} #########################"
 	#echo "####### $(__FUNCTION__ 2) $(__ARGC__ 2) ${_MIN_} ${_MAX_} #########################"
-	[ -n ${_MIN_} ] && [ ${_ARGC_-} -lt ${_MIN_-} ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): not enough arguments. Minimum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
-	[ -z ${_MAX_} ] && [ ${_ARGC_} -gt ${_MIN_} ] && dk_error "${_FUNCNAME_}(${_ARGC_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" || $(true)
-	[ -n ${_MAX_} ] && [ ${_ARGC_} -gt ${_MAX_} ] && dk_error "${_FUNCNAME_}(${_ARGC_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" || $(true)
+	[ -n "${_MIN_-}" ] && [ "${_ARGC_-}" -lt "${_MIN_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): not enough arguments. Minimum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
+	[ -z "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MIN_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
+	[ -n "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MAX_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MAX_-}, got ${_ARGC_-}" || $(true)
 	
 	#####################################################################################################################
 	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then

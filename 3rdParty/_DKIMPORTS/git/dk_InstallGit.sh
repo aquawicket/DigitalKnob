@@ -7,8 +7,8 @@ echo "$0 $*"
 #
 #
 dk_installGit() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 	
 	if ! dk_commandExists git; then
 		dk_install git
