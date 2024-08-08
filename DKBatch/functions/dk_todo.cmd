@@ -15,9 +15,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    @message	- The message to print
 ::#
 :dk_todo
-	call dk_debugFunc
-	::if %__ARGC__% NEQ 1 call dk_error "%__FUNCTION__%(): incorrect number of arguments"
-	
+	call dk_debugFunc 1
 	
 	if not defined ENABLE_dk_todo  set "ENABLE_dk_todo=1"
 	if "%ENABLE_dk_todo%" neq "1"  goto:eof
@@ -38,7 +36,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_todo "test dk_todo message"
 goto:eof

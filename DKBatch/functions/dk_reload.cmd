@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_reload
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
 	if not exist "%DKSCRIPT_PATH%" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
 	

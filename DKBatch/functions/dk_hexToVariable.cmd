@@ -7,8 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToVariable
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	::for /f %%b in ('forfiles /c "cmd /c echo 0x1b"') do set "ESC=%%b"    ::Test:  set ESC to 0x1b
 
@@ -23,7 +22,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_hexToVariable var 0x41
 	call dk_echo "var = %var%"

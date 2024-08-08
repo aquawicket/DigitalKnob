@@ -8,8 +8,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# Run as Trusted Installer
 ::#
 :dk_runAsTI
-	call dk_debugFunc
-	if %__ARGC__% NEQ 1 call dk_error "%__FUNCTION__%(): not enough arguments"
+	call dk_debugFunc 1
 	
 	set ^ #=
 	set "0=%~f0"
@@ -21,7 +20,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	::call dk_runAsTI regedit
 	call dk_runAsTI services.msc

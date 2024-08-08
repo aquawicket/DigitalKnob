@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_fileContains
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 		
 	>nul findstr /c:"%~2" "%~1" &&  (
 		if defined "%~3" (endlocal & set "%3=true")
@@ -26,7 +25,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
 	

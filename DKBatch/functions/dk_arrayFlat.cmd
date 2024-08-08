@@ -18,7 +18,6 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayFlat
 	call dk_debugFunc 2
-	::if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
 	
 	call dk_todo "dk_arrayFlat"
 goto:eof

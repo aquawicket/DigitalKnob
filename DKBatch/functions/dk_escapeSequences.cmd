@@ -13,8 +13,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_escapeSequences
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
 ::	set ASCII_length=0
 	:: ASCII control characters (character code 0-31)
@@ -136,7 +135,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 goto:eof
 
 :ASCII_ADD
-	call dk_debugFunc
+	call dk_debugFunc 7
+	
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~2" equ "" call dk_error "%__FUNCTION__%(): argument 2 is invalid"
 	if "%~3" equ "" call dk_error "%__FUNCTION__%(): argument 3 is invalid"
@@ -159,8 +159,7 @@ goto:eof
 goto:eof
 
 :ASCII_SHOW
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
 	call dk_info "%%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%"
 goto:eof
@@ -170,7 +169,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_escapeSequences
 goto:eof

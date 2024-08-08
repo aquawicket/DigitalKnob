@@ -5,8 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_selectFolder(rtn_var)
 ::#
 :dk_selectFolder
-	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	call dk_assertPath "%systemroot%\system32\mshta.exe"
 	for /f "usebackq delims=" %%i in (
@@ -28,7 +27,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_selectFolder myFolder
 	call dk_echo "myFolder = %myFolder%"

@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_sleep(milliseconds)
 ::#
 :dk_sleep
-	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	:: Method 1
 	set /a "milliseconds=%~1-100"
@@ -26,7 +25,7 @@ goto:eof
 
 ::############################ DKTEST ############################
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_echo "sleeping for 1000 milliseconds . . ."
 	call dk_sleep 1000

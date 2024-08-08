@@ -9,8 +9,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToArray
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	setlocal
     ::set "file=%~1"
@@ -37,7 +36,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	:: create the file
 	dir /b /a-d > array.cmd

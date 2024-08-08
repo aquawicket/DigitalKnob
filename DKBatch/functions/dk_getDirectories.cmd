@@ -7,8 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getDirectories
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	call dk_replaceAll "%~1" "/" "\" _path_
 	::set "folders="
@@ -35,7 +34,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_set myPath "C:\Windows"
 	call dk_getDirectories "%myPath%" directories

@@ -9,8 +9,7 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 ::#
 ::#
 :dk_isDelayedExpansion
-	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	if "!!" == "" (
 	  set "%1=ON"
@@ -24,7 +23,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_isDelayedExpansion deylayedExpansion
 	echo deylayedExpansion = %deylayedExpansion%

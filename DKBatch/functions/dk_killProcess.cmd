@@ -11,8 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#     Example:  call dk_endProcess iexplore.exe
 ::#    
 :dk_killProcess
-	call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
+	call dk_debugFunc 1
 		
 		
 	set "process=%~1"
@@ -27,7 +26,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	start mspaint.exe
 	call dk_sleep 3

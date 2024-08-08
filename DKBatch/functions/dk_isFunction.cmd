@@ -12,8 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	https://stackoverflow.com/a/85932/688352
 ::#
 :dk_isFunction
-	call dk_debugFunc 
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	if %ERRORLEVEL% equ 0 (
@@ -36,7 +35,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_isFunction "dk_debugFunc" && call dk_info "'dk_debugFunc' is a function" || call dk_info "'dk_debugFunc' is NOT a function"
 	call dk_isFunction "NotAFunction" && call dk_info "'NotAFunction' is a function" || call dk_info "'NotAFunction' is NOT a function"

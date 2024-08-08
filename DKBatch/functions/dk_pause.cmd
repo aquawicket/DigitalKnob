@@ -8,8 +8,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    Pause execution and wait for <enter> keypress to continue
 ::#
 :dk_pause
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
 	pause
 goto:eof

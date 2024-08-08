@@ -9,8 +9,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToVariable
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
     ::call set "file=%~1"
 	set "\n=\n"
@@ -28,7 +27,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_fileToVariable "DK.cmd" myVar
 	call dk_echo "myVar = %myVar%"
