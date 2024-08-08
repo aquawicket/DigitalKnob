@@ -8,10 +8,8 @@ if(!$dk_validate){ $dk_validate = 1 } else{ return }
 #	@code	   - The code to run if the variable is invalid.
 #
 function Global:dk_validate($variable, $code) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	
+	dk_debugFunc 2
+
 	if($variable -and (Test-Path variable:$variable)){ return }
 	
 	if($code -and (Test-Path $code -PathType Leaf)){ dk_load $code }
@@ -25,9 +23,9 @@ function Global:dk_validate($variable, $code) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
 	$myVarA="a valid variable"
 	dk_validate myVarA "fill_myVarA"

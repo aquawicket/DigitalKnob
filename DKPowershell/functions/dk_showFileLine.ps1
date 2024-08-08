@@ -66,7 +66,8 @@ function Global:dk_showFileLine($filepath, $goto) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

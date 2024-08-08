@@ -8,8 +8,8 @@ if(!$dk_arrayShift){ $dk_arrayShift = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
 #
 function Global:dk_arrayShift($array) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	
 	$prev = 0
@@ -29,7 +29,8 @@ function Global:dk_arrayShift($array) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
 	

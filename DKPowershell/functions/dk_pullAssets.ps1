@@ -15,7 +15,8 @@ function Global:dk_pullAssets() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

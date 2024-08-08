@@ -6,8 +6,8 @@ if(!$dk_clearScreen){ $dk_clearScreen = 1 } else{ return }
 #
 #
 function Global:dk_clearScreen() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 	
 	
 	clear
@@ -15,7 +15,8 @@ function Global:dk_clearScreen() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

@@ -16,8 +16,8 @@ if(!$dk_debug){ $dk_debug = 1 } else{ return }
 #    @message	- The message to print
 #
 function Global:dk_debug($message) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	
@@ -34,8 +34,9 @@ function Global:dk_debug($message) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	dk_debug "test dk_debug message"

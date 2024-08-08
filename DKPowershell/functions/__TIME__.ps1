@@ -12,6 +12,7 @@ function GLOBAL:__TIME__() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
 	Write-Host -Fore cyan "TIME = $(__TIME__)";
 }

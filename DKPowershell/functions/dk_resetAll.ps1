@@ -6,8 +6,8 @@ if(!$dk_resetAll){ $dk_resetAll = 1 } else{ return }
 #
 #
 function Global:dk_resetAll() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 	
 	
 	dk_clearScreen
@@ -56,7 +56,8 @@ function Global:dk_resetAll() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

@@ -15,8 +15,8 @@ if(!$HALT_ON_VERBOSE)  { $global:HALT_ON_VERBOSE = 0   }
 #    @message	- The message to print
 #
 function Global:dk_verbose($message){
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
@@ -31,8 +31,9 @@ function Global:dk_verbose($message){
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	dk_verbose "test dk_verbose message"

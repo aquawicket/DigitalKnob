@@ -24,8 +24,9 @@ function GLOBAL:dk_test($str, $num) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	dk_test string1 123

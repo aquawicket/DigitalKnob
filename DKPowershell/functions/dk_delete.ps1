@@ -6,8 +6,8 @@ if(!$dk_delete){ $dk_delete = 1 } else{ return }
 #
 #
 function Global:dk_delete($path) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	
 	#$path = dk_replaceAll $path "/" "\"
@@ -30,7 +30,8 @@ function Global:dk_delete($path) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	dk_fileWrite "removeMe.file" "created file to test dk_delete"

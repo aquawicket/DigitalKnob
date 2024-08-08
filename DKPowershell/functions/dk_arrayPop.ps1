@@ -8,8 +8,8 @@ if(!$dk_arrayPop){ $dk_arrayPop = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
 function Global:dk_arrayPop($array) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 
 
 	#if($array -isnot [System.Object]){ dk_error "Not a System.Object"; return ${false} }
@@ -27,7 +27,8 @@ function Global:dk_arrayPop($array) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

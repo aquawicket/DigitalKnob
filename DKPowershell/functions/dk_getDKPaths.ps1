@@ -6,8 +6,8 @@ if(!$dk_getDKPaths){ $dk_getDKPaths = 1 } else{ return }
 #
 #
 function Global:dk_getDKPaths() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 	
 	
 	$global:DIGITALKNOB_DIR = "$env:HOMEDRIVE$env:HOMEPATH/digitalknob"
@@ -27,8 +27,9 @@ function Global:dk_getDKPaths() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	dk_getDKPaths

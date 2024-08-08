@@ -9,9 +9,8 @@ if(!$dk_echo){ $dk_echo = 1 } else{ return }
 #     @msg	- The message to print
 #
 function Global:dk_echo($message) {
-	dk_debugFunc
+	dk_debugFunc 0 1
 	if($(__ARGC__) -eq 0){ Write-Host ""; return }
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
 	
 	# https://stackoverflow.com/a/818118
 	# $allArgs = $PsBoundParameters.Values + ${args} 
@@ -26,8 +25,9 @@ function Global:dk_echo($message) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	echo "This is a normal echo commmand"

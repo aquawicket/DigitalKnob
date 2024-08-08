@@ -6,8 +6,8 @@ if(!$dk_assert){ $dk_assert = 1 } else{ return }
 #
 #
 function Global:dk_assert($expression) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	
 	if(!(${!expression})){
@@ -21,7 +21,8 @@ function Global:dk_assert($expression) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 

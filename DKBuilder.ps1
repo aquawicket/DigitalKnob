@@ -21,4 +21,4 @@ if($DKLOADED){exit} else{ $global:DKLOADED=1 }	# ignore the fork process that wi
 ###### Load Main Program ######
 dk_load dk_buildMain
 dk_buildMain
-Read-Host -Prompt "Press Enter to exit" 
+Read-Host -Prompt "Press Enter to exit"

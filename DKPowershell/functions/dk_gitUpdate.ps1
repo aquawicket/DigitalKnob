@@ -6,8 +6,8 @@ if(!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
 #
 #
 function Global:dk_gitUpdate() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 
 
 	if(!($args[0] -eq "NO_CONFIRM")){
@@ -36,7 +36,8 @@ function Global:dk_gitUpdate() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

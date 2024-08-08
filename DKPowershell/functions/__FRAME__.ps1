@@ -62,6 +62,7 @@ function Global:Dummy($arg_1, $arg_2){
 	__FRAME__
 }
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
 	Dummy "first arg" "2nd arg" 123 "abc"
 }

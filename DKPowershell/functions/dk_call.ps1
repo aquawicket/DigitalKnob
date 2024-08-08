@@ -6,9 +6,7 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 #
 #
 function Global:dk_call(){
-	dk_debugFunc
-	#if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-
+	dk_debugFunc 0 99
 
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	#$rest = $args[1..($args.Length-1)]
@@ -19,9 +17,9 @@ function Global:dk_call(){
 }
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
 	dk_call dk_info "test message using dk_call"
 }

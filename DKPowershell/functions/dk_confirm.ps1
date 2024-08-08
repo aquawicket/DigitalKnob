@@ -6,8 +6,8 @@ if(!$dk_confirm){ $dk_confirm = 1 } else{ return }
 #
 #
 function Global:dk_confirm() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 
 
     $confirmation = Read-Host "${yellow} Are you sure ? [Y/N] ${clr}"
@@ -21,7 +21,8 @@ function Global:dk_confirm() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

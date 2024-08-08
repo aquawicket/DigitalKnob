@@ -6,8 +6,8 @@ if(!$dk_toLower){ $dk_toLower = 1 } else{ return }
 #
 #
 function Global:dk_toLower($str) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 
 
 	$toLower = $str.ToLower()
@@ -17,7 +17,8 @@ function Global:dk_toLower($str) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

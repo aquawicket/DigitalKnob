@@ -25,9 +25,9 @@ function Global:dk_echo($message) {
 
 
 
-
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
 	
 	echo "This is a normal echo commmand"

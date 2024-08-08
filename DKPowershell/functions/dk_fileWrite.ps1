@@ -15,7 +15,8 @@ function Global:dk_fileWrite($filepath, $str) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 
 	dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"

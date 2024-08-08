@@ -6,9 +6,7 @@ if(!$dk_dirname){ $dk_dirname = 1 } else{ return }
 #
 #
 function Global:dk_dirname($path) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+	dk_debugFunc 1
 	
 	#$dirname = (Get-Item $path).DirectoryName
 	#$dirname = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).DirectoryName    #Calls Resolve-Path but works for files that don't exist.
@@ -21,8 +19,9 @@ function Global:dk_dirname($path) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	$dirname = dk_dirname "C:/Windows/System32"

@@ -15,8 +15,8 @@ if(!$HALT_ON_WARNING)  { $global:HALT_ON_WARNING = 0   }
 #    @message	- The message to print
 #
 function Global:dk_warning($message){
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	if($ENABLE_dk_warning -ne 1){ return }
@@ -30,8 +30,9 @@ function Global:dk_warning($message){
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	dk_warning "test dk_warning message"

@@ -7,8 +7,8 @@ if(!$dk_basename){ $dk_basename = 1 } else{ return }
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
 function Global:dk_basename($path) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	
 	#$basename = (Get-Item $path).Basename 
@@ -23,8 +23,9 @@ function Global:dk_basename($path) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	$basename = dk_basename "C:/Windows/System32/test.v123.zip"
 	dk_echo "basename = $basename"

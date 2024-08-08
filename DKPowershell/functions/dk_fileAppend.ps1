@@ -16,7 +16,8 @@ function Global:dk_fileAppend($filepath, $str) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"

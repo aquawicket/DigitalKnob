@@ -6,8 +6,7 @@ if(!$dk_makeDirectory){ $dk_makeDirectory = 1 } else{ return }
 #
 #
 function Global:dk_makeDirectory ($_path_) {
-	dk_debugFunc
-	
+	dk_debugFunc 1
 	
 	if(!(Test-Path $_path_)){ 
 		New-Item -Path "$_path_" -ItemType Directory 
@@ -17,9 +16,9 @@ function Global:dk_makeDirectory ($_path_) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	dk_makeDirectory "MadeDirectory"
 }

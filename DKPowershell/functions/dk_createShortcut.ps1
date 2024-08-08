@@ -27,7 +27,7 @@ function Global:dk_createShortcut($shortcut_path, $target_path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() { 
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob" "C:\Users\Administrator\digitalknob"
 }

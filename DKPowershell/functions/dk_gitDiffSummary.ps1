@@ -6,8 +6,8 @@ if(!$dk_gitDiffSummary){ $dk_gitDiffSummary = 1 } else{ return }
 #
 #
 function Global:dk_gitDiffSummary() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
         
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
 	cd "${DKBRANCH_DIR}" #-or dk_error "cd \${DKBRANCH_DIR} failed!"
@@ -23,7 +23,8 @@ function Global:dk_gitDiffSummary() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	dk_gitDiffSummary

@@ -6,8 +6,8 @@ if(!$dk_pathExists){ $dk_pathExists = 1 } else{ return }
 #
 #
 function Global:dk_pathExists($filepath){
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 
 	if(Test-Path $filepath){ $pathExists = $true } 
 	else { $pathExists = $false }

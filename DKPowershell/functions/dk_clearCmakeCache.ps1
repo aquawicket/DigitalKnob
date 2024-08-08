@@ -6,8 +6,8 @@ if(!$dk_clearCmakeCache){ $dk_clearCmakeCache = 1 } else{ return }
 #
 #
 function Global:dk_clearCmakeCache() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
 	
 	
 	# TODO: replace ${DIGITALKNOB_DIR} with $1 and call this functions while suplying the directory 
@@ -21,7 +21,8 @@ function Global:dk_clearCmakeCache() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

@@ -6,8 +6,8 @@ if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
 #
 #
 function Global:dk_isUrl($str) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	
 	
 	if(dk_stringContains $str "://"){ $isUrl = $true }
@@ -18,7 +18,8 @@ function Global:dk_isUrl($str) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	

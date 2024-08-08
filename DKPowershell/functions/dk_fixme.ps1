@@ -15,8 +15,8 @@ $FIXME_TAG="  FIXME: "
 #	@msg	- The message to print
 #
 function Global:dk_fixme($message){
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
+
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	
 	
@@ -33,7 +33,8 @@ function Global:dk_fixme($message){
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
 	dk_debugFunc
 	
 	
