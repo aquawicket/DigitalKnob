@@ -1,22 +1,27 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/aubio/aubio.git
 
 
 ### IMPORT ###
-dk_import(https://github.com/aubio/aubio.git)
+#dk_import(https://github.com/aubio/aubio.git)
+dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###
-dk_include			(${AUBIO}/src)
-UNIX_dk_libDebug	(${AUBIO}/${OS}/${DEBUG_DIR}/libaubio.a)
-UNIX_dk_libRelease	(${AUBIO}/${OS}/${RELEASE_DIR}/libaubio.a)
-WIN_dk_libDebug		(${AUBIO}/${OS}/${DEBUG_DIR}/aubio.lib)
-WIN_dk_libRelease	(${AUBIO}/${OS}/${RELEASE_DIR}/aubio.lib)
+dk_include				(${AUBIO}/src)
+if(MSVC)
+	WIN_dk_libDebug		(${AUBIO}/${OS}/${DEBUG_DIR}/aubio.lib)
+	WIN_dk_libRelease	(${AUBIO}/${OS}/${RELEASE_DIR}/aubio.lib)
+else()
+	dk_libDebug			(${AUBIO}/${OS}/${DEBUG_DIR}/libaubio.a)
+	dk_libRelease		(${AUBIO}/${OS}/${RELEASE_DIR}/libaubio.a)
+endif()
 
 
-### GENERATE / COMPILE ###
-DEBUG_dk_setPath		(${AUBIO}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueshell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueshell		(make)
-RELEASE_dk_setPath		(${AUBIO}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueshell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueshell	(make)
+### GENERATE ###
+dk_configure(${AUBIO})
+
+
+### COMPILE ###
+dk_build	(${AUBIO})

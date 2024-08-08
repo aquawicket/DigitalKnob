@@ -1,8 +1,10 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/lighttpd/lighttpd1.4.git
 
 
 ### IMPORT ###
-dk_import(https://github.com/lighttpd/lighttpd1.4.git)
+#dk_import(https://github.com/lighttpd/lighttpd1.4.git)
+dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
 
 
 ### LINK ###
@@ -16,7 +18,7 @@ WIN_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
+dk_configure(${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###

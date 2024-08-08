@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # http://giflib.sourceforge.net
 # https://github.com/mirrorer/giflib
 # https://github.com/mirrorer/giflib.git
@@ -5,84 +6,71 @@
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
-
 ### DEPEND ###
-MAC_dk_depend(autotools)
-#WIN32_dk_depend(mingw32)
-#WIN64_dk_depend(mingw64)
-WIN_dk_depend(msys)
-#WIN_dk_depend(msys2)
+WIN_dk_depend(msys2)
+dk_depend(autotools)
+#dk_depend(gcc)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mirrorer/giflib.git PATCH)
+#dk_import(https://sourceforge.net/code-snapshots/git/g/gi/giflib/code.git/giflib-code-8bed392c280ad2c237e8bf1beca6f8f68f893e87.zip PATCH)
+#dk_import(https://github.com/mirrorer/giflib.git PATCH)
+#dk_import(https://git.code.sf.net/p/giflib/code.git PATCH)
+#dk_import(https://github.com/nesbox/giflib.git PATCH)
+dk_import(https://github.com/nesbox/giflib/archive/refs/heads/master.zip PATCH)
 
+set(GIFLIB_USE_CMAKE ON)
+if(GIFLIB_USE_CMAKE)
 
-### LINK ###
-dk_include					(${GIFLIB}/lib)
-if(VISUAL_STUDIO_IDE)
-	ANDROID_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
-	ANDROID_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
-	WIN_dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-	WIN_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-elseif(XCODE_IDE)
-	dk_libDebug				(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-	dk_libRelease			(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+	### LINK ###
+	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
+	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
+	
+	### 3RDPARTY LINK ###
+	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+
+	dk_configure		(${GIFLIB})
+	dk_build			(${GIFLIB} giflib)	
 else()
-	if(EMSCRIPTEN)
-		dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
-		dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
+	### LINK ###
+	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
+	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
+
+	### 3RDPARTY LINK ###
+	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	
+	### GENERATE / CONFIGURE ###
+	dk_setPath			(${GIFLIB})
+	dk_queueCommand		(bash -c "autoreconf -f -i")
+
+	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
+	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+
+	if(ANDROID)
+		if(MSVC)
+			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
+			dk_visualStudio		(${GIFLIB} giflib)
+		else()
+			dk_configure		(${GIFLIB})
+			dk_queueCommand		(make -C lib)
+		endif()
 	else()
-		dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-		dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+		if(EMSCRIPTEN)
+			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
+			dk_build			(${GIFLIB})
+		else()
+			dk_configure		(${GIFLIB})
+			dk_queueCommand		(make -C lib)
+		endif()
 	endif()
 endif()
 
-
-### 3RDPARTY LINK ###
-ANDROID_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)	
-APPLE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-EMSCRIPTEN_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
-LINUX_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-WIN_dk_set			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-
-
-### GENERATE / COMPILE ###
-if(NOT WIN_HOST AND NOT EMSCRIPTEN)
-	dk_setPath		(${GIFLIB})
-	dk_queueShell	(autoreconf -f -i)
-endif()
-
-string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
-string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
-string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
-
-if(NOT ANDROID)
-	if(EMSCRIPTEN)
-		dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB})
-		dk_build(${GIFLIB})
-	else()
-		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-		DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
-		DEBUG_dk_queueShell		(make -C lib)
-		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
-		RELEASE_dk_queueShell	(make -C lib)
-	endif()
-else()
-	if(VISUAL_STUDIO_IDE)
-		ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
-		ANDROID_dk_visualStudio(${GIFLIB} giflib)
-	#elseif(XCODE_IDE)
-	#	ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
-	#	ANDROID_dk_xcode(${GIFLIB} giflib)
-	else()
-		ANDROID_DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-		ANDROID_DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
-		ANDROID_DEBUG_dk_queueShell		(make -C lib)
-		ANDROID_RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		ANDROID_RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
-		ANDROID_RELEASE_dk_queueShell	(make -C lib)
-	endif()
-endif()
+# FIX for other searchers
+dk_copy(${GIFLIB}/gif_lib.h ${GIFLIB}/lib/gif_lib.h)

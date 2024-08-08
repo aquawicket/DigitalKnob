@@ -1,12 +1,14 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/thestk/rtaudio
 
 
 ### DEPEND ###
-WIN_dk_depend(winmm.lib)
+WIN_dk_depend(winmm)
 
 
 ### IMPORT ###
-dk_import(https://github.com/thestk/rtaudio.git)
+#dk_import(https://github.com/thestk/rtaudio.git)
+dk_import(https://github.com/thestk/rtaudio/archive/refs/heads/master.zip)
 
 
 ### LINK ###
@@ -22,7 +24,7 @@ WIN_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/rtaudio.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${RTAUDIO})
+dk_configure(${RTAUDIO})
 
 
 ### COMPILE ###

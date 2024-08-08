@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -39,7 +39,7 @@
 	#include "SDL_opengles.h"
 #endif
 
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 extern "C" {
 	#include "SDL2_gif.h"
 }
@@ -71,7 +71,7 @@ private:
     SDL_Renderer* mRenderer;
     SDL_Window* mScreen;
 
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 	std::vector<SDL_GifAnim*> animations;
 #endif
 };

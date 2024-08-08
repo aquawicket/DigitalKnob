@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+# https://libwebsockets.org
 # https://github.com/warmcat/libwebsockets
 # https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip
 
@@ -7,7 +9,8 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
+#dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
+dk_import(https://github.com/warmcat/libwebsockets/archive/refs/heads/main.zip)
 
 
 ### LINK ###
@@ -20,7 +23,7 @@ WIN_dk_libRelease	(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.l
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
+dk_configure(${LIBWEBSOCKETS} -DLWS_WITH_SSL=OFF)
 
 
 ### COMPILE ###

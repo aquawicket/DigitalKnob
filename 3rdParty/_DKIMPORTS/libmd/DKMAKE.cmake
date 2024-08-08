@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/guillemj/libmd.git
 
 if(NOT IOSSIM)
@@ -11,7 +12,8 @@ dk_depend(autotools)
 
 
 ### IMPORT ###
-dk_import(https://github.com/guillemj/libmd.git)
+#dk_import(https://github.com/guillemj/libmd.git)
+dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 
 
 ### LINK ###
@@ -31,11 +33,14 @@ if(ANDROID)
 	ANDROID_dk_ndk(${LIBMD})
 else()
 	DEBUG_dk_setPath		(${LIBMD})
-	DEBUG_dk_queueShell		(aclocal)
-	DEBUG_dk_setPath		(${LIBMD}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-	DEBUG_dk_queueShell		(make)
-	RELEASE_dk_setPath		(${LIBMD}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-	RELEASE_dk_queueShell	(make)
+	DEBUG_dk_queueCommand	(aclocal)
+	
+	#DEBUG_dk_setPath		(${LIBMD}/${OS}/${DEBUG_DIR})
+	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_setPath		(${LIBMD}/${OS}/${RELEASE_DIR})
+	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	dk_configure			(${LIBMD})
+	
+	
+	dk_build				(${LIBMD})
 endif()

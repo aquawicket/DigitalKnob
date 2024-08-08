@@ -1,11 +1,10 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://sourceforge.net/projects/waave
 # https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 
 
 ### DEPEND ###
-dk_depend(ffmpeg-dev)
-dk_depend(ffmpeg-shared)
-dk_depend(ffmpeg-static)
+dk_depend(ffmpeg)
 dk_depend(sdl)
 
 
@@ -23,7 +22,7 @@ WIN_dk_libRelease	(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
 
 
 ### COMPILE ###

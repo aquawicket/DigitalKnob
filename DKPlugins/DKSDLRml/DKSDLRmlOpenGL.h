@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -31,14 +31,15 @@
 
 //WARNING_DISABLE
 #include "RmlUi/Core.h"
-//#include <RmlUi/Core/RenderInterface.h>
+#include "RmlUi/Core/RenderInterfaceCompatibility.h"	// Legacy Rml RenderInterface
+//#include "RmlUi/Core/RenderInterface.h"
 #include "SDL.h"
 #if !defined(ANDROID) && !defined(IOS)
 	#include "SDL_opengl.h"
 #else
 	#include "SDL_opengles.h"
 #endif
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 extern "C" {
 	#include "SDL2_gif.h"
 }
@@ -46,7 +47,7 @@ extern "C" {
 //WARNING_ENABLE
 
 
-class DKSDLRmlOpenGL : public Rml::RenderInterface
+class DKSDLRmlOpenGL : public Rml::RenderInterfaceCompatibility		// Legacy Rml RenderInterface
 {
 public:
 	DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen);
@@ -71,7 +72,7 @@ private:
     SDL_Renderer* mRenderer;
     SDL_Window* mScreen;
 
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 	std::vector<SDL_GifAnim*> animations;
 #endif
 };

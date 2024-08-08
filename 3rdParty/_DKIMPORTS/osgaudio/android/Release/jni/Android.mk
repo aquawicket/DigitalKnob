@@ -18,15 +18,15 @@ LOCAL_CPPFLAGS := -DOSG_LIBRARY_STATIC
 
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
-	$(LOCAL_PATH)/../../../android32 \
+	$(LOCAL_PATH)/../../../android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include/AL \
 	$(LOCAL_PATH)/../../../../freealut-master/include \
 	$(LOCAL_PATH)/../../../../libvorbis-1.3.5/include \
 	$(LOCAL_PATH)/../../../../libogg-1.3.2/include \
-	$(LOCAL_PATH)/../../../../libogg-1.3.2/android32 \
+	$(LOCAL_PATH)/../../../../libogg-1.3.2/android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/include \
-	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android32/Release/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android_arm32/Release/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -52,15 +52,15 @@ LOCAL_CPPFLAGS := -DOSG_LIBRARY_STATIC
 
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
-	$(LOCAL_PATH)/../../../android32 \
+	$(LOCAL_PATH)/../../../android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include/AL \
 	$(LOCAL_PATH)/../../../../freealut-master/include \
 	$(LOCAL_PATH)/../../../../libvorbis-1.3.5/include \
 	$(LOCAL_PATH)/../../../../libogg-1.3.2/include \
-	$(LOCAL_PATH)/../../../../libogg-1.3.2/android32 \
+	$(LOCAL_PATH)/../../../../libogg-1.3.2/android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/include \
-	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android32/Release/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android_arm32/Release/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -86,15 +86,15 @@ LOCAL_CPPFLAGS := -DOSG_LIBRARY_STATIC
 
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
-	$(LOCAL_PATH)/../../../android32 \
+	$(LOCAL_PATH)/../../../android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include \
 	$(LOCAL_PATH)/../../../../OpenAL-android/include/AL \
 	$(LOCAL_PATH)/../../../../freealut-master/include \
 	$(LOCAL_PATH)/../../../../libvorbis-1.3.5/include \
 	$(LOCAL_PATH)/../../../../libogg-1.3.2/include \
-	$(LOCAL_PATH)/../../../../libogg-1.3.2/android32 \
+	$(LOCAL_PATH)/../../../../libogg-1.3.2/android_arm32 \
 	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/include \
-	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android32/Release/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../OpenSceneGraph-3.4.0/android_arm32/Release/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 

@@ -1,62 +1,64 @@
-# https://gitlab.xiph.org/xiph/ogg
-# https://github.com/xiph/ogg
-# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
-# https://ftp.osuosl.org/pub/xiph/releases/ogg
-# https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/xiph/ogg.git
+# https://gitlab.xiph.org/xiph/ogg.git
+# https://ftp.osuosl.org/pub/xiph/releases/ogg
+# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
 
 
 ### DEPEND ###
-WIN_dk_depend(msys)
+WIN_dk_depend(msys2)
 
 
 ### IMPORT ###
-dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
+#dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 #dk_import(https://github.com/xiph/ogg.git)
+dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 
 
 ### LINK ###
-dk_include				(${OGG}/include)
-dk_include				(${OGG}/${OS}/${DEBUG_DIR}/include)
-dk_include				(${OGG}/${OS}/${RELEASE_DIR}/include)
-ANDROID_dk_libDebug		(${OGG}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libogg.a)
-ANDROID_dk_libRelease	(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
-APPLE_dk_libDebug		(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
-APPLE_dk_libRelease		(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-EMSCRIPTEN_dk_libDebug	(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
-EMSCRIPTEN_dk_libRelease(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-LINUX_dk_libDebug		(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
-LINUX_dk_libRelease		(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-RASPBERRY_dk_libDebug	(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
-RASPBERRY_dk_libRelease	(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-WIN_dk_libDebug			(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
-WIN_dk_libRelease		(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+dk_include					(${OGG}/include									OGG_INCLUDE_DIR)
+if(MULTI_CONFIG)
+	dk_include				(${OGG}/${OS}/include							OGG_INCLUDE_DIR2)
+else()
+	DEBUG_dk_include		(${OGG}/${OS}/${DEBUG_DIR}/include				OGG_INCLUDE_DIR2)
+	RELEASE_dk_include		(${OGG}/${OS}/${RELEASE_DIR}/include			OGG_INCLUDE_DIR2)
+endif()
+
+#if(ANDROID)
+	dk_libDebug				(${OGG}/${OS}/${DEBUG_DIR}/libogg.a				OGG_LIBRARY_DEBUG)
+	dk_libRelease			(${OGG}/${OS}/${RELEASE_DIR}/libogg.a			OGG_LIBRARY_RELEASE)
+#else()
+#	dk_libDebug				(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a	OGG_LIBRARY_DEBUG)
+#	dk_libRelease			(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a	OGG_LIBRARY_RELEASE)
+#endif()
 
 
-### 3RDPARTY CONFIGURE LINK ###
-ANDROID_DEBUG_dk_set		(OGG_CONFIGURE -I${OGG}/${OS}/${DEBUG_DIR}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-ANDROID_RELEASE_dk_set		(OGG_CONFIGURE -I${OGG}/${OS}/${RELEASE_DIR}/include 	--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-APPLE_DEBUG_dk_set			(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-APPLE_RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-EMSCRIPTEN_DEBUG_dk_set		(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
-EMSCRIPTEN_RELEASE_dk_set	(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-LINUX_DEBUG_dk_set			(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
-LINUX_RELEASE_dk_set		(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-RASPBERRY_DEBUG_dk_set		(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
-RASPBERRY_RELEASE_dk_set	(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-WIN_DEBUG_dk_set			(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-WIN_RELEASE_dk_set			(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 
+### 3RDPARTY AUTOCONF LINK ###
+#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
 
 ### 3RDPARTY CMAKE LINK ###
-DEBUG_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include" )
-RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
+DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_DEBUG}		"-DCMAKE_C_FLAGS=-I${OGG_INCLUDE_DIR2}" "-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
+RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_RELEASE}	"-DCMAKE_C_FLAGS=-I${OGG_INCLUDE_DIR2}" "-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
 
 
-### GENERATE / COMPILE ###
-DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueShell		(make)
-RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueShell	(make)
+### GENERATE ###
+#if(ANDROID)
+dk_configure(${OGG} 
+			-DBUILD_FRAMEWORK=OFF				# "Build Framework bundle for OSX" OFF
+			-DINSTALL_CMAKE_PACKAGE_MODULE=ON	# "Install CMake package configuration module" ON
+			-DINSTALL_DOCS=OFF					# "Install documentation" ON
+			-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON
+
+#else()
+#	DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
+#	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#	RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
+#	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#endif()
+
+
+### BUILD ###
+dk_build			(${OGG})
+

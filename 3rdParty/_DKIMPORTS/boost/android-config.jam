@@ -16,7 +16,7 @@ import os ;
 #local ANDROID_API = [ os.environ ANDROID_API ] ;
 local ANDROID_API = 26 ;
 local NDK_ROOT = [ os.environ NDK_ROOT ] ;
-#local NDK_ROOT = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-ndk-r22b ;
+#local NDK_ROOT = C:/Users/aquawicket/digitalknob/Development/3rdParty/android-ndk-r22b ;
 
 using clang : armeabiv7a
 :

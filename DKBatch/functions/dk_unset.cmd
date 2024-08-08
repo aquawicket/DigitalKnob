@@ -1,0 +1,26 @@
+@echo off
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+
+::################################################################################
+::# dk_unset(name)
+::#
+::#
+:dk_unset
+	call dk_debugFunc 1
+	
+	set "%~1="
+goto:eof
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+	call dk_debugFunc 0
+	
+	call dk_set myVar "initial value assigned with dk_unset"
+	echo myVar = %myVar%
+	call dk_unset myVar
+	echo myVar = %myVar%
+goto:eof

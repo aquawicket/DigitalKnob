@@ -7,15 +7,15 @@
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
 ### Supported Platforms
-Windows 32 <br>
-Windows 64 <br>
-Mac 64 <br>
-Linux 32 <br>
-Linux 64 <br>
-iPhone/iPad 64 (<br>
-iPhone/iPad-Simulator 64 <br>
-Android 32 <br>
-Android 64 <br>
+Windows x86 <br>
+Windows x86_64 <br>
+Mac x86_64 <br>
+Linux x86 <br>
+Linux x86_64 <br>
+iPhone/iPad arm64 (<br>
+iPhone/iPad-Simulator x86_64 <br>
+Android arm32 <br>
+Android arm64 <br>
 Raspberry Pi <br>
 Chrome <br>
 Safari <br>
@@ -26,111 +26,320 @@ Emscripten <br>
 
 ### Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
-<!-- [SFML](https://github.com/SFML/SFML) -->
-[OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-<!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) -->
-[Emscripten](https://github.com/kripken/emscripten) <br>
 
 ### Supported Tools, Libraries and Frameworks
-[agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
-[android-ndk](https://github.com/android/ndk) <br>
-[ant](https://github.com/apache/ant) <br>
-<!-- [aom](https://aomedia.googlesource.com/aom) <br> -->
-[appkit](https://developer.apple.com/documentation/appkit?language=objc) <br>
-[astyle](http://astyle.sourceforge.net/) <br>
-<!-- [aubio](https://github.com/aubio/aubio) <br> -->
-[audio_toolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
-[audiounit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
-[autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
-[avfoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
-[avkit](https://developer.apple.com/documentation/avkit?language=objc) <br>
-[avf_audio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
-[babel](https://github.com/babel/babel) <br>
-[boost](https://github.com/boostorg/boost) <br>
-[boxer](https://github.com/aaronmjacobs/Boxer) <br>
-[build-essential](https://packages.ubuntu.com/focal/build-essential) <br>
-[bullet3](https://github.com/bulletphysics/bullet3) <br>
-[bzip2](https://github.com/asimonov-im/bzip2) <br>
-[carbon](https://developer.apple.com/documentation/coreservices/carbon_core) <br>
-[cef_binary](https://bitbucket.org/chromiumembedded/cef) <br>
-[chart.js](https://github.com/chartjs/Chart.js) <br>
-[cmake](https://cmake.org) <br>
-[cocoa](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html) <br>
-[codemirror](https://github.com/codemirror/CodeMirror) <br>
-<!-- [command_line_tools]() <br> -->
-<!-- [conio-for-linux](https://github.com/nowres/conio-for-linux) <br> -->
-<!-- [content](https://github.com/mdn/content) <br> -->
-[core_audio](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html) <br>
-[core_foundation](https://developer.apple.com/documentation/corefoundation) <br>
-[core_graphics](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
-[core_haptics](https://developer.apple.com/documentation/corehaptics?language=objc) <br>
-[core_motion](https://developer.apple.com/documentation/coremotion?language=objc) <br>
-[core_services](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
-[core_video](https://developer.apple.com/documentation/corevideo) <br>
-<!-- [cpp-subprocess](https://github.com/tsaarni/cpp-subprocess) <br> -->
-<!-- [crosswalk]() <br> -->
-[cryptopp](https://github.com/weidai11/cryptopp) <br>
-[curl](https://github.com/bagder/curl) <br>
-[duktape](https://github.com/svaarala/duktape) <br>
-<!-- [ffmpeg](https://github.com/FFmpeg/FFmpeg) <br> -->
-<!-- [freealut](https://github.com/vancegroup/freealut) <br> -->
-[freetype](https://github.com/vinniefalco/FreeType) <br>
-[giflib](http://sourceforge.net/projects/giflib/files/) <br>
-[imagemagick](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
-<!-- [libjpeg](https://github.com/LuaDist/libjpeg) <br> -->
-[libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
-[libarchive](https://github.com/libarchive/libarchive) <br>
-[libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
-<!-- [libtorrent](https://github.com/arvidn/libtorrent) <br> -->
-[libuv](https://github.com/libuv/libuv) <br>
-<!-- [libvncserver](https://github.com/LibVNC/libvncserver) <br> -->
-[libwebsockets](https://github.com/warmcat/libwebsockets) <br>
-[libxml2](http://xmlsoft.org/) <br>
-[leptonica](https://github.com/DanBloomberg/leptonica) <br>
-[msinttypes](https://github.com/chemeris/msinttypes)<br>
-[ogg](https://github.com/gcp/libogg) <br>
-[openal](https://github.com/apportable/openal-soft) <br>
-[opencv](https://github.com/opencv/opencv) <br>
-<!-- [openframeworks](https://github.com/openframeworks/openFrameworks) <br> -->
-[openscenegraph](https://github.com/openscenegraph/osg) <br>
-[openssl](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
-<!-- [osgaudio](https://github.com/mccdo/osgaudio) <br> -->
-<!-- [osgbullet](https://github.com/mccdo/osgbullet) <br> -->
-[osgworks](https://github.com/mccdo/osgworks) <br>
-[libpng](https://github.com/coapp-packages/libpng) <br>
-[pofodo](http://podofo.sourceforge.net) <br>
-[pugixml](https://github.com/zeux/pugixml) <br>
-[rmlui](https://github.com/mikke89/RmlUi) <br>
-<!-- [rtaudio](https://github.com/thestk/rtaudio) <br> -->
-[rtmidi](https://github.com/thestk/rtmidi) <br>
-[sdl](https://github.com/libsdl-org/SDL) <br>
-[sdl2_gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
-[sdl_image](https://www.libsdl.org/projects/SDL_image/) <br>
-[sdl_mixer](https://github.com/aduros/SDL_mixer) <br>
-[sdl_ttf](https://www.libsdl.org/projects/SDL_ttf/) <br>
-[sfml](https://github.com/SFML/SFML) <br>
-[smpeg2](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
-[stackwalker](https://stackwalker.codeplex.com/) <br>
-<!-- [tesseract](https://github.com/tesseract-ocr/tesseract) <br> -->
-[threadpool](http://threadpool.sourceforge.net/) <br>
-[tidy-html5](http://tidy.sourceforge.net/) <br>
-[tiff](https://github.com/LuaDist/libtiff) <br>
-[uwebsockets](https://github.com/uNetworking/uWebSockets) <br>
-[vorbis](https://github.com/soundcloud/vorbis) <br>
-<!-- [waave](https://github.com/grepwood/waave) <br> -->
-[webview](https://developer.android.com/reference/android/webkit/WebView.html) <br>
-[xz](https://github.com/nobled/xz) <br>
-[zlib](https://github.com/madler/zlib) <br>
+agl
+android
+android-build-tools
+android-cmake
+android-cmdline-tools
+android-java-tools
+android-ndk
+android-platform-tools
+android-platforms
+android-sdk
+android-sdk-tools
+android-sources
+android-studio
+android-system-images
+ant
+aom
+appkit
+asio
+astyle
+aubio
+audiounit
+audio_toolbox
+autotools
+avf_audio
+av_foundation
+av_kit
+babel
+backward-cpp
+boost
+boxer
+build-essential
+bullet3
+bzip2
+bzip2-win-build
+carbon
+cef_binary
+chart.js
+cmake
+cocoa
+codemirror
+command_line_tools
+conio-for-linux
+content
+core_audio
+core_foundation
+core_graphics
+core_haptics
+core_media
+core_motion
+core_services
+core_video
+cpp-subprocess
+crosswalk
+cryptopp
+curl
+ddd
+dependencywalker
+diff-match-patch
+dl
+doxygen
+duk4vb
+dukluv
+duktape
+dxva2
+emsdk
+far
+ffmpeg
+ffmpeg-dev
+ffmpeg-shared
+ffmpeg-static
+fftw3
+flac
+fmt
+fontconfig
+force_feedback
+foundation
+freealut
+freeimage
+freetype
+game_controller
+gdal
+ghidra
+ghostscript
+giflib
+git
+glew
+glintercept
+gl_kit
+gnutls
+gradle
+gstreamer
+gzip
+homebrew
+ilmerge
+imageio
+imagemagick
+imm32
+iokit
+ios-cmake
+iphlpapi
+jasper
+java
+jerryscript
+jpeg
+js-yaml
+json
+kdevelop
+lame
+leptonica
+libarchive
+libasound2-dev
+libatomic
+libb2
+libcaca
+libexpat
+libgcc
+libgl1-mesa-dev
+libglfw3-dev
+libglib2.0-dev
+libglu1-mesa-dev
+libgtk-3-dev
+libgtk2.0-dev
+libgtkglext1-dev
+libiconv
+libjpeg-turbo
+libmd
+libmingwex
+libpng
+libpsl
+librocket
+libsndfile
+libsndfile1-dev
+libssh
+libsystemd-dev
+libtorrent
+libudev-dev
+libusb
+libuv
+libvncserver
+libwebp
+libwebsockets
+libwinpthread
+libx11
+libx11-dev
+libxcursor-dev
+libxml2
+libxrandr-dev
+libxtst-dev
+lighttpd
+lodepng
+log
+lua
+lz4
+m
+macports
+media_player
+mesa-common-dev
+metal
+metal-cpp
+metalKit
+mingw-win32-application
+mingw32
+mingw64
+miniweb
+mlocate
+mobile_core_services
+moment
+mpg123
+msinttypes
+msys
+msys2
+nasm
+ncurses
+nodejs
+notepadpp
+ofxcmake
+ofxiosboost-1.60.0
+ofxiosboost-1.60.0-libc-bitcode
+ogg
+openal
+openblas
+opencv
+openframeworks
+opengl
+opengles
+openjdk
+openjdk-8u41
+openjpeg
+openmw
+openscenegraph
+opensles
+openssl
+opus
+os.js
+osgaudio
+osgbullet
+osgrmlui
+osgworks
+pacman.c
+pako
+pcre2
+pdh
+pearl
+php-src
+poco
+podofo
+psapi
+pugixml
+python
+pyyaml
+quartz_core
+rlottie
+rmlui
+rmlui-d3d11
+rmluieditor
+rocketship
+rpm
+rtaudio
+rtmidi
+sdl
+sdl-gpu
+sdl2_gif
+sdl2_giflib_sa
+sdl_image
+sdl_mixer
+sdl_net
+sdl_rtf
+sdl_ttf
+secur32
+security
+setupapi
+sfml
+shlwapi
+simple-getch
+smpeg2
+stackwalker
+strmiids
+sun-js
+sw
+sw-client
+system_configuration
+terminator
+termux
+tesseract
+threadpool
+tidy-html5
+tiff
+uikit
+upx
+userenv
+uwebsockets
+vccorlib
+vcpkg
+vc_redist
+version
+verysleepy
+vfw32
+video_toolbox
+visualstudio
+vorbis
+waave
+wasi
+wasm2brs
+wasm3
+winmm
+ws2_32
+x264
+x265
+xcode
+xquartz
+xz
+zlib
+zstd
 
 
 # How to build
 ### Windows Host
-Download and run [build.bat](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.cmd) 
+Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.cmd) 
 
 ### Unix Host
-Download [build.sh](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.sh) <br>
-From terminal run 'chmod 777 /path/to/build.sh' <br>
-Run '/path/to/build.sh'
+Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh) <br>
+From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
+Run '/path/to/DKBuilder.sh'
+
+### DKCMake
+Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
+Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKApps/MyApp/'OS'> will use a universal /DKCMake/CMakeLists.txt script. <br>
+The build system will differenciate the appropriate scripts to use when the output directory is pointed to a valid <OS> folder
+EXAMPLE: "<DKApps/MyApp/ios_arm64>" <br>
+
+Valid <'OS'>'s are <br>
+android_arm32 <br>
+android_arm64 <br>
+emscripten <br>
+ios_arm32 <br>
+ios_arm64 <br>
+iossim_x86 <br>
+iossim_x86_64 <br>
+linux_x86 <br>
+linux_x86_64 <br>
+mac_x86 <br>
+mac_x86_64 <br>
+raspberry_arm32 <br>
+raspberry_arm64 <br>
+win_x86 <br>
+win_x86_64 <br>
+
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Development/DKCMake -BC:/Users/<username>/digitalknob/Development/DKApps/DKCore/win_x86
+	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
+"NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
+
+
 
 
 <br><br><br>
@@ -145,7 +354,7 @@ This repository references the use of third-party source code and assets with th
 
 MIT License
 
-Copyright (c) 2010-2023 DigitalKnob, and contributors
+Copyright (c) 2010-2024 DigitalKnob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

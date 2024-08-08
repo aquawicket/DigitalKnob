@@ -1,14 +1,14 @@
-IF(NOT HAVE_DKCef)
+if(NOT HAVE_DKCef)
 	RETURN()
-ENDIF()
+endif()
 
-IF(ANDROID)
+if(ANDROID)
 	RETURN()
-ENDIF()
+endif()
 
-IF(IOSSIM)
+if(IOSSIM)
 	RETURN()
-ENDIF()
+endif()
 
 dk_depend(DKSDLWindow)
 dk_depend(DKCef)

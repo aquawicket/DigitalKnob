@@ -1,23 +1,40 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://code.videolan.org/videolan/x264.git
 
 
+### DEPENDS ###
+dk_depend(msys2)
+dk_depend(nasm)
+
+
 ### IMPORT ###
-dk_import(https://code.videolan.org/videolan/x264.git)
+#dk_import(https://code.videolan.org/videolan/x264.git)
+dk_import(https://code.videolan.org/videolan/x264/-/archive/master/x264-master.zip)
 
 
 ### LINK ###
-dk_include			(${X264}/include)
-dk_include			(${X264}/${OS})
-UNIX_dk_libDebug	(${X264}/${OS}/${DEBUG_DIR}/libx264.a)
-UNIX_dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/libx264.a)
-WIN_dk_libDebug		(${X264}/${OS}/${DEBUG_DIR}/x264.lib)
-WIN_dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/x264.lib)
+dk_include		(${X264}/include)
+dk_include		(${X264}/${OS})
+dk_libDebug		(${X264}/${OS}/${DEBUG_DIR}/libx264.a)
+dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/libx264.a)
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_setPath		(${X264}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueShell		(make)
-RELEASE_dk_setPath		(${X264}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueShell	(make)
+DEBUG_dk_setPath			(${X264}/${OS}/${DEBUG_DIR})
+if(EMSCRIPTEN)
+	DEBUG_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
+	DEBUG_dk_queueCommand	(${EMMAKE} make)
+else()
+	DEBUG_dk_queueCommand	(../../configure --disable-asm)
+	DEBUG_dk_build			(${X264})
+endif()
+
+RELEASE_dk_setPath			(${X264}/${OS}/${RELEASE_DIR})
+if(EMSCRIPTEN)
+	RELEASE_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli)
+	RELEASE_dk_queueCommand	(${EMMAKE} make)
+else()
+	RELEASE_dk_queueCommand	(../../configure --disable-asm)
+	RELEASE_dk_build		(${X264})
+endif()
+

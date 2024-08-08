@@ -11,7 +11,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libBulletCollision.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libBulletCollision.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 ########################
@@ -22,7 +22,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libBulletDynamics.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libBulletDynamics.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 ########################
@@ -33,7 +33,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libBulletMultiThreaded.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libBulletMultiThreaded.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 ########################
@@ -44,7 +44,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libBulletSoftBody.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libBulletSoftBody.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 ########################
@@ -55,7 +55,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libLinearMath.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libLinearMath.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 ########################
@@ -66,7 +66,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android32/Release/$(LIBDIR)/libMiniCL.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(BULLET)/android_arm32/Release/$(LIBDIR)/libMiniCL.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 
@@ -103,7 +103,7 @@ LOCAL_STATIC_LIBRARIES := BulletCollision BulletDynamics BulletMultiThreaded Bul
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Release/armeabi-v7a/include \
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Release/armeabi-v7a/include \
 	$(LOCAL_PATH)/../../../../$(OSGWORKS)/include \
 	$(LOCAL_PATH)/../../../../$(BULLET)/src
 
@@ -142,7 +142,7 @@ LOCAL_STATIC_LIBRARIES := BulletCollision BulletDynamics BulletMultiThreaded Bul
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Release/armeabi-v7a/include \
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Release/armeabi-v7a/include \
 	$(LOCAL_PATH)/../../../../$(OSGWORKS)/include \
 	$(LOCAL_PATH)/../../../../$(BULLET)/src
 
@@ -181,7 +181,7 @@ LOCAL_STATIC_LIBRARIES := BulletCollision BulletDynamics BulletMultiThreaded Bul
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Release/armeabi-v7a/include \
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Release/armeabi-v7a/include \
 	$(LOCAL_PATH)/../../../../$(OSGWORKS)/include \
 	$(LOCAL_PATH)/../../../../$(BULLET)/src
 
@@ -217,7 +217,7 @@ LOCAL_STATIC_LIBRARIES := BulletCollision BulletDynamics BulletMultiThreaded Bul
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Release/armeabi-v7a/include \
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Release/armeabi-v7a/include \
 	$(LOCAL_PATH)/../../../../$(OSGWORKS)/include \
 	$(LOCAL_PATH)/../../../../$(BULLET)/src
 
@@ -246,7 +246,7 @@ LOCAL_STATIC_LIBRARIES := BulletCollision BulletDynamics BulletMultiThreaded Bul
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Release/armeabi-v7a/include \
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Release/armeabi-v7a/include \
 	$(LOCAL_PATH)/../../../../$(OSGWORKS)/include \
 	$(LOCAL_PATH)/../../../../$(BULLET)/src
 

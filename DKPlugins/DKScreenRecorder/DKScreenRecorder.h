@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -30,7 +30,7 @@
 #include "DK/DK.h"
 
 //DirectX Capture
-#if WIN32
+#if WIN
 //WARNING_DISABLE
 #	include <Wincodec.h>             // we use WIC for saving images
 #	include <d3d9.h>                 // DirectX 9 header

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/openframeworks/openFrameworks
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 # https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_vs2017_release.zip  # WINDOWS
@@ -53,7 +54,7 @@ WIN_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
+dk_configure(${OPENFRAMEWORKS} -DOF_PATH=${OPENFRAMEWORKS})
 
 
 ### COMPILE ###

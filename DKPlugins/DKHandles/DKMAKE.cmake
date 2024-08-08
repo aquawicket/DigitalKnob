@@ -1,12 +1,12 @@
-IF(NOT WIN)
+if(NOT WIN)
 	RETURN()
-ENDIF()
-IF(HAVE_DKDuktape)
+endif()
+if(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
-ENDIF()
-IF(HAVE_DKCef)
+endif()
+if(HAVE_DKCef)
 	dk_depend(DKCef)
-ENDIF()
+endif()
 
 
 dk_generateCmake(DKHandles)

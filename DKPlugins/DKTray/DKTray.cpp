@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -173,4 +173,4 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam){
 	return 0;
 }
 
-#endif //WIN32
+#endif //WIN

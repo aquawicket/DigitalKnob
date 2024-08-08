@@ -1,4 +1,4 @@
-%dkbatch%
+@echo off
 
 :: https://stackoverflow.com/questions/59504840/create-jni-ndk-apk-only-command-line-without-gradle-ant-or-cmake/59533703#59533703
 set "APP_ROOT=%~dp0"
@@ -20,7 +20,7 @@ set compiler=CMAKE
 set GRADLE=1
 
 
-if [%1] NEQ [] ( set "compiler=%1" )
+if [%1] neq [] ( set "compiler=%1" )
 if "%2"=="GRADLE" ( set GRADLE=1 )
 
 echo #############  BUILD SETTINGS ###############
@@ -63,17 +63,17 @@ echo 2. Install 3rd party tools
 if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
 
 :: JDK
-if %GRADLE% EQU 0 ( 
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-8u41-b04-windows-i586-14_jan_2020"
+if %GRADLE% equ 0 ( 
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-8u41-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE=C:/Program Files (x86)/CMake/bin/cmake.exe"
+if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
+if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -103,7 +103,7 @@ if "%ABI%"=="armeabi-v7a" (
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::: JAVA COMPILING ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %GRADLE% EQU 1 goto :end
+if %GRADLE% equ 1 goto :end
 echo 3. Create project build directories
 call MakeDirectory %APP_PATH%/build/apk
 call MakeDirectory %APP_PATH%/build/gen
@@ -151,22 +151,22 @@ if "%compiler%"=="GRADLE" goto :gradle
 
 
 :::::: COMPILE WITH CMAKE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %compiler% NEQ CMAKE goto :end
+if %compiler% neq CMAKE goto :end
 echo Compiling with CMAKE
 ::Prep Visual Studio Project
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
-"%CMAKE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
+"%CMAKE_EXE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 %IF_ERROR% "CMAKE failed to generate the project files."
-"%CMAKE%" --build %CMAKE_BINARY_DIR% --target main
+"%CMAKE_EXE%" --build %CMAKE_BINARY_DIR% --target main
 ::call CopyPath %CMAKE_BINARY_DIR%/%BUILD_TYPE%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::: COMPILE WITH NDK-BUILD :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %compiler% NEQ NDK goto :end
+if %compiler% neq NDK goto :end
 echo Compiling with ndk-build
 call %NDK_ROOT%/ndk-build NDK_LOG=1 APP_BUILD_SCRIPT=%APP_PATH%/cpp/Android.mk NDK_PROJECT_PATH=%APP_PATH%
 call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
@@ -175,7 +175,7 @@ call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::: COMPILE WITH CLANG  ( ndk_toolchain ) :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %compiler% NEQ CLANG goto :end
+if %compiler% neq CLANG goto :end
 echo Compiling with NDK Toolchain
 call MakeDirectory %APP_PATH%/build/apk/lib/%ABI%
 cmd /c %ANDROID_TOOLCHAIN% -shared -o %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/cpp/main.c
@@ -189,9 +189,9 @@ call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%
 ::if "%compiler%"=="GRADLE" (
 	::set GRADLE_SETTINGS=--project-prop=BUILD_LIBS
 ::)
-if %GRADLE% NEQ 1 goto :end
+if %GRADLE% neq 1 goto :end
 echo Compiling with Gradle
-set "GRADLE_USER_HOME=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\gradle"
+set "GRADLE_USER_HOME=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\3rdParty\gradle"
 setx GRADLE_USER_HOME %GRADLE_USER_HOME%
 
 echo 2. Run gradle clean build
@@ -204,7 +204,7 @@ cmd /c %APP_ROOT%gradlew --project-dir %APP_ROOT% %GRADLE_SETTING% --info clean 
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %GRADLE% EQU 1 goto :end
+if %GRADLE% equ 1 goto :end
 echo 10. Package the APK
 call MakeDirectory %APP_PATH%/assets/
 "%BUILD_TOOLS_PATH%/aapt" package -f -M %APP_PATH%/AndroidManifest.xml -S %APP_PATH%/res/ -A %APP_PATH%/assets/ -I "%PLATFORM%/android.jar" -F %APP_PATH%/build/%APK_NAME%.unsigned.apk %APP_PATH%/build/apk/
@@ -239,7 +239,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% EQU 0 ( 
+if %ERRORLEVEL% equ 0 ( 
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	"%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"
@@ -249,7 +249,7 @@ if %ERRORLEVEL% EQU 0 (
 
 
 echo 16. Install the apk package to android device
-if %GRADLE% EQU 1 (
+if %GRADLE% equ 1 (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 ) else (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_PATH%/build/%APK_NAME%.apk
@@ -268,5 +268,3 @@ echo 18. Start app
 
 call EndProcess adb.exe
 call EndProcess java.exe
-
-%DKEND%

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/SFML/SFML
 # https://www.sfml-dev.org
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip
@@ -42,7 +43,7 @@ if(LINUX OR RASPBERRY)
 	dk_depend(opengl)
 endif()
 WIN_dk_depend(opengl)
-WIN_dk_depend(winmm.lib)
+WIN_dk_depend(winmm)
 dk_depend(flac)
 dk_depend(libjpeg-turbo)
 dk_depend(ogg)
@@ -52,7 +53,8 @@ dk_depend(vorbis)
 
 ### IMPORT ###
 #dk_import(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
-dk_import(https://github.com/SFML/SFML.git PATCH)
+#dk_import(https://github.com/SFML/SFML.git PATCH)
+dk_import(https://github.com/SFML/SFML/archive/refs/heads/master.zip PATCH)
 
 
 ### LINK ###
@@ -182,14 +184,14 @@ WIN_dk_set(SFML_CMAKE
 
 
 ### GENERATE ###
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-IOS_dk_queueCommand			(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-LINUX_dk_queueCommand		(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-MAC_dk_queueCommand			(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_MACOSX=1 ${SFML})
-RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE ${SFML})
+ANDROID_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+EMSCRIPTEN_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+IOSSIM_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+IOS_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+LINUX_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+MAC_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_MACOSX=1)
+RASPBERRY_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+WIN_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE)
 
 
 ### COMPILE ###

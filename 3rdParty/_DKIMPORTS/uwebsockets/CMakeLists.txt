@@ -15,16 +15,21 @@ if(NOT LIBUV_LIBRARY)
    find_library(LIBUV_LIBRARY NAMES uv uv1)
 endif()
 
-set(uWS_SOURCES
-	src/Extensions.cpp 
-	src/Group.cpp 
-	src/Networking.cpp 
-	src/Hub.cpp 
-	src/Node.cpp 
-	src/WebSocket.cpp 
-	src/HTTPSocket.cpp 
-	src/Socket.cpp
-)
+#set(uWS_SOURCES
+#	src/Extensions.cpp 
+#	src/Group.cpp 
+#	src/Networking.cpp 
+#	src/Hub.cpp 
+#	src/Node.cpp 
+#	src/WebSocket.cpp 
+#	src/HTTPSocket.cpp 
+#	src/Socket.cpp
+#)
+
+file(GLOB uWS_SOURCES
+	src/*.h
+	src/*.c
+	src/*.cpp)
 
 add_library(uWS STATIC ${uWS_SOURCES})
 if(CMAKE_VERSION VERSION_LESS "3.1")
@@ -46,20 +51,20 @@ target_link_libraries (uWS LINK_PUBLIC ${ZLIB_LIBRARY})
 
 if (UNIX)
 target_link_libraries (uWS LINK_PUBLIC pthread)
-install (TARGETS uWS DESTINATION /usr/lib64)
-install (FILES 
-	src/Extensions.h 
-	src/WebSocketProtocol.h 
-	src/Networking.h 
-	src/WebSocket.h 
-	src/Hub.h 
-	src/Group.h 
-	src/Node.h 
-	src/Socket.h 
-	src/HTTPSocket.h 
-	src/uWS.h 
-	src/uUV.h 
-	DESTINATION /usr/include/uWS)
+#install (TARGETS uWS DESTINATION /usr/lib64)
+#install (FILES 
+#	src/Extensions.h 
+#	src/WebSocketProtocol.h 
+#	src/Networking.h 
+#	src/WebSocket.h 
+#	src/Hub.h 
+#	src/Group.h 
+#	src/Node.h 
+#	src/Socket.h 
+#	src/HTTPSocket.h 
+#	src/uWS.h 
+#	src/uUV.h 
+#	DESTINATION /usr/include/uWS)
 endif (UNIX)
 
 ##add_subdirectory(examples)

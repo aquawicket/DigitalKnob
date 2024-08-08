@@ -1,0 +1,58 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
+
+###############################################################################
+# dk_prependEnvPath(inputPath)
+#
+#	@inputPath	- The CMake / style full path to append the the Environment Path variable
+#
+function(dk_prependEnvPath inputPath)
+	dk_debugFunc(${ARGV})
+
+
+	if(NOT inputPath)
+		dk_warning("dk_prependEnvPath(): inputPath is invalid!")
+		return()
+	endif()
+	if(NOT EXISTS ${inputPath})
+		dk_warning("dk_prependEnvPath(): inputPath does not exist")
+		return()
+	endif()
+	if(WIN_HOST)
+		dk_debug("Converting value to NATIVE_PATH")
+		#file(TO_NATIVE_PATH "${inputPath}" nativePath)
+		cmake_path(NATIVE_PATH inputPath NORMALIZE nativePath)
+		dk_debug(nativePath)
+		#set(path_printable "${inputPath}" CACHE FILEPATH "")
+		#dk_replaceAll("${path_printable}" "/" "\\" path_printable)
+		#dk_replaceAll("${inputPath}" "/" "\\" inputPath)
+	#else()
+	#	set(path_printable "${inputPath}")
+	endif()
+	
+	#dk_debug(ENV{PATH})
+	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)
+	if(${hasPath} GREATER -1)
+		#dk_notice("${path_printable} is already in the PATH environment list\n")
+		dk_notice("\${nativePath} is already in the PATH environment list\n")
+	else()
+		if(WIN_HOST)
+			set(ENV{PATH} "${nativePath};$ENV{PATH}")
+		else()
+			set(ENV{PATH} "${nativePath}:$ENV{PATH}")
+		endif()
+		#dk_info("prepended ${path_printable} to the PATH environment list\n")
+		dk_info("prepended \${nativePath} to the PATH environment list\n")
+	endif()
+	dk_debug(ENV{PATH})
+endfunction()
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

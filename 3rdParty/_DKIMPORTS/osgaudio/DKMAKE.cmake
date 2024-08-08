@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/mccdo/osgaudio.git
 
 
@@ -11,7 +12,8 @@ dk_depend(vorbis)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mccdo/osgaudio.git)
+#dk_import(https://github.com/mccdo/osgaudio.git)
+dk_import(https://github.com/mccdo/osgaudio/archive/refs/heads/master.zip)
 
 
 ### LINK ###

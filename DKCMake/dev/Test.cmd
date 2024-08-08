@@ -1,39 +1,40 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
-::
-:: For the latest information, see https://github.com/aquawicket/DigitalKnob
-::
-:: Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
-::
-:: Permission is hereby granted, free of charge, to any person obtaining a copy
-:: of this software and associated documentation files(the "Software"), to deal
-:: in the Software without restriction, including without limitation the rights
-:: to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-:: copies of the Software, and to permit persons to whom the Software is
-:: furnished to do so, subject to the following conditions :
-::
-:: The above copyright notice and this permission notice shall be included in all
-:: copies or substantial portions of the Software.
-::
-:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-:: SOFTWARE.
-@echo off & %dkbatch%
+@echo off
+setlocal EnableDelayedExpansion
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
-if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-if not exist %CMAKE% ( ERROR "Could not locate CMAKE" )
+:main
+	:: find DigitalKnob directories
+	call:find_dkbranch_dir DIGITALKNOB_DIR DKBRANCH
+	echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%
+	echo DKBRANCH = %DKBRANCH%
+	set DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%
+	echo DKBRANCH_DIR = %DKBRANCH_DIR%
+	set DKTOOLS_DIR=%DIGITALKNOB_DIR%\DKTools
+	echo DKTOOLS_DIR = %DKTOOLS_DIR%
+	set DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake
+	echo DKCMAKE_DIR = %DKCMAKE_DIR%
+		
+	:: find cmake directory
+	set CMAKE_EXE=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
+	echo CMAKE_EXE = %CMAKE_EXE%
+	"%CMAKE_EXE%" --version
+	:: we should actullly find the first folder that starts with cmake in the DKTools directory.	
+	
+	call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
+	echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+	"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+goto:eof
 
-:begin
-cls
+:: find_dkbranch_dir
+:find_dkbranch_dir
+	set current_dir=%~dp0
+	:find_dkbranch_dir_loop
+		for %%a in ("%current_dir%") do for %%b in ("%%~dpa\.") do set "current_folder=%%~nxb"
+		for %%x in ("%current_dir%\..\") do set parent_dir=%%~dpx
+		for %%a in ("%parent_dir%") do for %%b in ("%%~dpa\.") do set "parent_folder=%%~nxb"
+		set current_dir=%parent_dir%
+		if "%parent_folder%" neq "digitalknob" goto:find_dkbranch_dir_loop
+		set %1=%parent_dir:~0,-1%
+		set %2=%current_folder%
+goto:eof
 
-set "file=%DKCMAKE%\dev\Test.cmake"
-"%CMAKE%" -P "%file%" 
- 
-pause 
-%DKEND% 

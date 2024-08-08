@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -36,41 +36,41 @@
 //WARNING_ENABLE
 
 bool GetOSFlag(DKString& flag){
-#if WIN32
-	flag = "WIN32";
+#if WIN_X86
+	flag = "WIN_X86";
 #endif
-#if WIN64
-	flag = "WIN64";
+#if WIN_X86_64
+	flag = "WIN_X86_64";
 #endif
-#if MAC32
-	flag = "MAC32";
+#if MAC_X86
+	flag = "MAC_X86";
 #endif
-#if MAC64
-	flag = "MAC64";
+#if MAC_X86_64
+	flag = "MAC_X86_64";
 #endif
-#if IOS32
-	flag = "IOS32";
+#if IOS_ARM32
+	flag = "IOS_ARM32";
 #endif
-#if IOS64
-	flag = "IOS64";
+#if IOS_ARM64
+	flag = "IOS_ARM64";
 #endif
-#if LINUX32
-	flag = "LINUX32";
+#if LINUX_X86
+	flag = "LINUX_X86";
 #endif
-#if LINUX64
-	flag = "LINUX64";
+#if LINUX_X86_64
+	flag = "LINUX_X86_64";
 #endif
-#if RASPBERRY32
-	flag = "RASPBERRY32";
+#if RASPBERRY_ARM32
+	flag = "RASPBERRY_ARM32";
 #endif
-#if RASPBERRY64
-	flag = "RASPBERRY64";
+#if RASPBERRY_ARM64
+	flag = "RASPBERRY_ARM64";
 #endif
-#if ANDROID32
-	flag = "ANDROID32";
+#if ANDROID_ARM32
+	flag = "ANDROID_ARM32";
 #endif
-#if ANDROID64
-	flag = "ANDROID64";
+#if ANDROID_ARM64
+	flag = "ANDROID_ARM64";
 #endif
 #if EMSCRIPTEN
 	flag = "EMSCRIPTEN";

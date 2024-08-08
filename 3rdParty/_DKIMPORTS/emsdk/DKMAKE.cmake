@@ -1,64 +1,67 @@
-# https://github.com/emscripten-core/emsdk
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+# https://github.com/emscripten-core/emsdk.git
 # https://emscripten.org/index.html
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
+#dk_depend(python)
+dk_depend(python3)
 
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
-#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
+
+#dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main) # TAG ce74ca2)
+#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
+dk_import(https://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip)
 
 
-#WIN_dk_command(${EMSDK}/emsdk update)
-#dk_command(${EMSDK}/emsdk install latest)
-#WIN_dk_command(${EMSDK}/emsdk install activate latest)
-#WIN_dk_command(${EMSDK}/emsdk_env.bat)
-dk_command(${EMSDK}/emsdk install latest)
-dk_command(${EMSDK}/emsdk activate latest)
+dk_command(${EMSDK}/emsdk${bat} install latest)
+
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
-WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
-WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
-WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
+dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
 
-if(WIN_HOST)
-	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
-else()
-	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
-endif()
-dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
-dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
-dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
+dk_command(set PATH=%PATH%;${PYTHON} & ${EMSDK}/emsdk_env${bat})
+
+WIN_HOST_dk_command(${EMSDK}/emsdk${bat} install mingw-4.6.2-32bit)
+WIN_HOST_dk_command(${EMSDK}/emsdk${bat} activate mingw-4.6.2-32bit)
 
 
-######################################################################################################################
-# https://emscripten.org/index.html
-# https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
-# https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
-# dk_import(https://github.com/emscripten-core/emsdk.git)
-# #dk_set(EMSDK_VERSION 2.0.26)
-# #dk_set(EMSDK_NAME emsdk-${EMSCRIPTEN_VERSION})
-# #dk_set(EMSDK_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
-# #dk_set(EMSDK ${3RDPARTY}/${EMSCRIPTEN_NAME})
-#if(WIN_HOST)
-#	if(NOT EXISTS ${EMSDK})
-#		dk_set(CURRENT_DIR ${DKDOWNLOAD})
-#		## dk_download(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
-#		dk_extract(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
-#		dk_copy(${DKIMPORTS}/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten OVERWRITE)
-#		dk_set(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk update)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk install latest)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk install activate latest)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk_env.bat)
-#	endif()
-#else()
-#	dk_set(CURRENT_DIR ${DKDOWNLOAD})
-#	## dk_download(www.internet.com/emsdk-portable.tar.gz) ## find an online link
-#	dk_extract(${DKDOWNLOAD}/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
-#	dk_copy(${DKIMPORTS}/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten OVERWRITE)
-#	dk_set(CURRENT_DIR ${3RDPARTY}/emsdk-portable)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk update)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk install latest)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk install activate latest)
-#	dk_command(${3RDPARTY}/emsdk-portable/source ./emsdk_env.sh)
-#endif()
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 		"var USE_SDL_IMAGE = false;"	NO_HALT)
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 		"var USE_SDL_TTF = false;"		NO_HALT)
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 		"var USE_SDL_NET = false;"		NO_HALT)
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 		"var USE_SDL_MIXER = false;"	NO_HALT)
+dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;"	"var USE_PTHREADS = true;"		NO_HALT)
+
+dk_set(EMSDK_ENV 	${EMSDK}/emsdk_env${bat})
+dk_set(EMAR			${EMSDK}/upstream/emscripten/emar${bat})
+dk_set(EMCC			${EMSDK}/upstream/emscripten/emcc${bat})
+dk_set(EMCMAKE		${EMSDK}/upstream/emscripten/emcmake${bat})
+dk_set(EMCONFIGURE	${EMSDK}/upstream/emscripten/emconfigure${bat})	
+dk_set(EMXX			${EMSDK}/upstream/emscripten/em++${bat})
+dk_set(EMRANLIB		${EMSDK}/upstream/emscripten/emranlib${bat})
+
+
+### Set Build Flag Variables ###
+WIN_HOST_dk_set	(EMSCRIPTEN_GENERATOR 		"MinGW Makefiles")
+UNIX_HOST_dk_set(EMSCRIPTEN_GENERATOR 		"Unix Makefiles")
+dk_set			(EMSCRIPTEN_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+dk_set			(EMSCRIPTEN_MAKE_PROGRAM	${EMSDK}/mingw/4.6.2_32bit/mingw32-make.exe)
+dk_set			(EMSCRIPTEN_C_COMPILER		${EMSDK}/mingw/4.6.2_32bit/gcc.exe)
+dk_set			(EMSCRIPTEN_CXX_COMPILER	${EMSDK}/mingw/4.6.2_32bit/g++.exe)
+#dk_set			(EMSCRIPTEN_AR 				)
+#dk_set			(EMSCRIPTEN_C_COMPILER 		)
+#dk_set			(EMSCRIPTEN_CMAKE			)
+#dk_set			(EMSCRIPTEN_CONFIGURE 		)
+#dk_set			(EMSCRIPTEN_CXX_COMPILER 	)
+#dk_set			(EMSCRIPTEN_RANLIB 			)
+dk_printVar(EMSCRIPTEN_GENERATOR)
+dk_printVar(EMSCRIPTEN_TOOLCHAIN_FILE)
+dk_printVar(EMSCRIPTEN_MAKE_PROGRAM)
+
+
+### Set Environmant Variables ###
+#dk_setEnv(EMSDK 		${EMSDK})
+#dk_setEnv(EMSDK_NODE 	${EMSDK}/node/16.20.0_64bit/bin/node.exe)
+#dk_setEnv(EMSDK_PYTHON 	${EMSDK}/emsdk-main/python/3.9.2-nuget_64bit/python.exe)
+#dk_prependEnvPath(${EMSDK})
+#dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
+#dk_prependEnvPath(${EMSDK}/upstream/emscripten)

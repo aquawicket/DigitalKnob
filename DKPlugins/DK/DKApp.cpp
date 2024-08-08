@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -84,10 +84,12 @@ DKApp::DKApp(int _argc, char** _argv){
 	if (argc)
 		DKFile::exe_path = argv[0];
 	#if ANDROID
-		if (!SDL_AndroidGetExternalStorageState())
-			DKERROR("SDL_AndroidGetExternalStorageState(): failed");
-		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
-		DKFile::exe_path = externalStoragePath;
+		#if HAVE_sdl
+			if (!SDL_AndroidGetExternalStorageState())
+				DKERROR("SDL_AndroidGetExternalStorageState(): failed");
+			const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+			DKFile::exe_path = externalStoragePath;
+		#endif
 	#endif
 	#if EMSCRIPTEN
 		DKFile::GetCurrentPath(DKFile::exe_path);
@@ -113,7 +115,7 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
 	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
 
-	#if WIN32
+	#if WIN
 		DKWindows::CreateConsoleHandler();
 		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
 	#endif

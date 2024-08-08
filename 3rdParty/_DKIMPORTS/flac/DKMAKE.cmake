@@ -1,6 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/xiph/flac.git
-# https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
-# https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
+# https://ftp.osuosl.org/pub/xiph/releases/flac
 
 
 ### DEPEND ###
@@ -9,62 +9,68 @@ dk_depend(ogg)
 
 
 ### IMPORT ###
-dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
 #dk_import(https://github.com/xiph/flac.git)
+dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz)
+
 
 
 ### LINK ###
-dk_include		(${FLAC})
-dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+dk_include			(${FLAC}/include										FLAC_INCLUDE_DIR)
+
+if(MULTI_CONFIG)
+	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
+else()
+	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
+endif()
 
 
 ### 3rd Party Link ###
-ANDROID_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include 
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_dk_set(FLAC_CMAKE
-	-DFLAC_INCLUDE_DIR=${FLAC}/include 
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-EMSCRIPTEN_DEBUG_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-EMSCRIPTEN_RELEASE_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_DEBUG_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_RELEASE_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-RASPBERRY_DEBUG_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-RASPBERRY_RELEASE_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-WIN_dk_set(FLAC_CMAKE
-	-DFLAC_INCLUDE_DIR=${FLAC}/include 
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+if(MULTI_CONFIG)
+	dk_set(FLAC_CMAKE
+		-DFLAC_INCLUDE_DIR=${FLAC_INCLUDE_DIR}
+		-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_DIR}
+		-DFLAC_LIBRARY=${FLAC_LIBRARY_DEBUG}
+		-DFLAC_LIBRARY_DEBUG=${FLAC_LIBRARY_DEBUG}
+		-DFLAC_LIBRARY_RELEASE=${FLAC_LIBRARY_RELEASE}
+		"-DCMAKE_C_FLAGS=-I${FLAC_INCLUDE_DIR}"
+		"-DCMAKE_CXX_FLAGS=-I${FLAC_INCLUDE_DIR}")
+else()
+	DEBUG_dk_set(FLAC_CMAKE 
+		-DFLAC_INCLUDE_DIR=${FLAC_INCLUDE_DIR}
+		-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_DIR}
+		-DFLAC_LIBRARY=${FLAC_LIBRARY_DEBUG}
+		-DFLAC_LIBRARY_DEBUG=${FLAC_LIBRARY_DEBUG}
+		"-DCMAKE_C_FLAGS=-I${FLAC_INCLUDE_DIR}"
+		"-DCMAKE_CXX_FLAGS=-I${FLAC_INCLUDE_DIR}")
+	RELEASE_dk_set(FLAC_CMAKE 
+		-DFLAC_INCLUDE_DIR=${FLAC_INCLUDE_DIR}
+		-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_DIR}
+		-DFLAC_LIBRARY=${FLAC_LIBRARY_RELEASE}
+		-DFLAC_LIBRARY_RELEASE=${FLAC_LIBRARY_RELEASE}
+		"-DCMAKE_C_FLAGS=-I${FLAC_INCLUDE_DIR}"
+		"-DCMAKE_CXX_FLAGS=-I${FLAC_INCLUDE_DIR}")
+endif()
 
 
-### GENERATE / COMPILE ###
-string(REPLACE "-std=c++17" "" FLAC_BUILD "${DKCONFIGURE_BUILD}")
-string(REPLACE "  " " " FLAC_BUILD "${FLAC_BUILD}")
 
-DEBUG_dk_setPath		(${FLAC}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueshell		(${FLAC_BUILD} ${OGG_CONFIGURE})
-DEBUG_dk_queueshell		(make)
-RELEASE_dk_setPath		(${FLAC}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueshell	(${FLAC_BUILD} ${OGG_CONFIGURE})
-RELEASE_dk_queueshell	(make)
+### GENERATE ###
+dk_configure(${FLAC}
+	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
+	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
+	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
+	-DBUILD_PROGRAMS=OFF 				# "Build and install programs" ON
+	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
+	-DINSTALL_MANPAGES=OFF				# "Install MAN pages" ON
+	-DINSTALL_PKGCONFIG_MODULES=ON		# "Install PkgConfig modules" ON
+	-DWITH_FORTIFY_SOURCE=ON			# "Enable protection against buffer overflows" ON
+	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
+	-DWITH_STACK_PROTECTOR=ON			# "Enable GNU GCC stack smash protection" ON
+	${OGG_CMAKE})
+
+
+
+### BUILD ###
+dk_build(${FLAC})
+

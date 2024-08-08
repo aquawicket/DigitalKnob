@@ -1,0 +1,574 @@
+ <HTML>
+<HEAD>
+<TITLE>Custom MsgBox Class - Functions</TITLE>
+
+<STYLE TYPE="text/css">
+  H4 {background-color: #600040; color: #FFFFFF; line-height: 1.7; text-indent: 40;}
+  H5 {background-color: #200060; color: #FFFFFF; line-height: 1.5; text-indent: 40;}
+  H6 {background-color: #004E9B; color: #FFFFFF; font-size: 12px; line-height: 1.5; text-indent: 80;}
+BODY {font-size: 13px; line-height: 1.3; color: #000000; font-family: verdana;}
+.Blue { font-family: verdana; font-size: 13px; color: #000080; line-height: 1.5; padding: 2px; border-style: solid; border-width: 1px; border-color: #7575FF;}
+.Purple { font-family: verdana; font-size: 13px; color: #600060; background-color: #FBF4FB; line-height: 1.3;}
+.Maroon { font-family: verdana; font-size: 13px; color: #B30059; line-height: 1.3;}
+.TSmall { font-family: verdana; font-size: 11px; color: #000000; line-height: 1.3;}
+
+A {font-size: 13px; line-height: 1.3; font-family: arial;}
+PRE   {font-size: 14px; line-height: 1.3; color: #800000; background-color: #FFF9F0; font-family: courier new;}
+.Org {font-size: 16px; line-height: 1.3; color: #CC9966; font-family: verdana; font-weight: 600;}
+
+</STYLE>
+
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#3000FF" ALINK="#FF0080" VLINK="#3000FF" RIGHTMARGIN=40 LEFTMARGIN=40>
+<DIV align="center">
+
+<H2>Custom MsgBox Class</H2>
+(Updated March 2012 to fix problems with security restrictions on IE7+ and Vista+.)<BR>
+(Updated November 2012 to fix problems with IE9. See update info. file for details.)<BR><BR>
+<A NAME="top"></A>
+
+<HR>
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=5>
+<TR>
+<TD valign="top">
+
+<A HREF="#int">Introduction</A> <BR>
+<A HREF="#clas">About Classes</A> <BR><BR>
+
+<B>Properties and Methods:<BR></B>
+
+<A HREF="#a0">Init</A> <BR>
+<A HREF="#a1">Title</A> <BR>
+<A HREF="#a2">Caption</A> <BR>
+<A HREF="#a3">Icon</A> <BR>
+<A HREF="#a8">IconWidth</A> <BR>
+<A HREF="#a9">Font</A> <BR>
+<A HREF="#a4">AddButton</A> <BR>
+<A HREF="#a10">AddList</A> <BR>
+&#160; <A HREF="#a16">ListSize</A> <BR>
+
+&#160; <A HREF="#a7">ListText, ListData, ListIndex</A> <BR>
+<A HREF="#a12">AddTextBox</A> <BR>
+&#160; <A HREF="#a14">Text</A> <BR>
+<A HREF="#a20">AddPasswordInput</A> <SPAN Class="TSmall"> (new)</SPAN><BR>
+&#160; <A HREF="#a21">Password</A> <SPAN Class="TSmall">(new)</SPAN><BR>
+
+
+<A HREF="#a5">Clear</A> <BR>
+<A HREF="#a6">ShowMsg</A> <BR>
+<BR>
+
+<B>Troubleshooting</B><BR>
+<A HREF="#trbl">Troubleshooting</A> <BR><BR>
+
+<A HREF="#lic">License</A>
+<BR><BR>
+</TD>
+
+</TR>
+</TABLE>
+</DIV><DIV align="left">
+<HR>
+
+<A NAME="int"></A>
+<H4>Introduction</H4>
+&#160;&#160; The <B>Msg</B> class in the accompanying sample scripts
+is a basic, custom message box that uses Internet Explorer to create message windows
+that look very close to the way that system messages appear. <BR><BR>
+&#160;&#160; When the class object is created
+it looks in the Registry to get the default system colors. When class properties are set they
+become the properties for the next message window display. By creating this MsgBox
+as a class with properties it becomes very easy to customize - and re-customize -
+message windows. <BR><BR><SPAN CLASS="Blue"><B> The message window is automatically displayed with default
+system colors and is self-sizing. You only need to set the properties of Title, Caption, buttons, etc.</B></SPAN><BR><BR>
+
+<HR>
+<BR>
+ <B>Paste the class at the end of any script. <BR>
+Then create the object at script startup with:</B><BR><BR>
+<PRE>
+Dim Box
+Set Box = New Msg</PRE>
+
+&#160;&#160; ... And use the message box like so: <BR><BR>
+
+<PRE>
+  With Box
+    .Title = "Message Box"
+    .Caption = "Please answer Yes or no."
+    .AddButton "Yes"
+    .AddButton "No"
+    Ret = .ShowMsg
+  End With
+</PRE>
+The variable <B>Ret</B> would then return 1 if Yes was clicked and 2 if No was clicked.
+<BR><BR>
+
+<HR><BR>
+
+<SPAN CLASS="Maroon"><B>What's different in the 2012 version:</B></SPAN><BR>
+&#160;&#160; This version of the MsgBox scripts has been adapted to deal with
+restriction problems on IE7+ and Vista+. The main change is that the window used
+to be an IE window with no border. (The title bar was a facsimile.) The new version is
+actually a webpage in an HTA window. HTAs bypass security problems, meaning that
+these scripts work easily on Windows Vista/7/8. A few minor changes have also been
+made to improve the display and layout.<BR><BR>
+
+<SPAN CLASS="Maroon"><B>Re-using the message window:</B></SPAN><BR>
+&#160;&#160; You can then reuse the message window while the script
+is running. Just call the <B>Clear</B> method to clear property values for the next
+use. <B>In fact, reuse is the best way to use the class. </B>Some work is done
+when the class is instantiated. It needs to read the Registry to find system colors 
+But that work only needs to be done once while the class is in use. If you create
+the class at script startup it will create an instance of WScript.Shell, do all the setup
+work, then release the WScript.Shell object.<BR>
+&#160;&#160; Wait until script end to set the class to Nothing.
+While the script(s) is running any number of
+message boxes can then be created without needing to refind colors.<BR><BR>
+
+<SPAN CLASS="Maroon"><B>Self-sizing:</B></SPAN> <BR>
+&#160;&#160; <B>The message window is self-sizing. In most cases it will look fine
+with no effort.</B>
+There are some inline comments in the sample script that explain
+the self-sizing code. Briefly, the varying samples in the demo script have worked
+well in tests but not all configurations will be ideal. The message window is sized
+after all elements have been added and just before becoming visible. The size is
+based primarily on the space taken up by buttons. The width of button area decides
+the width of the window. You can optimize the layout by adjusting buttons, where necessary.
+ The script attempts to size
+the window with the best compromise between button dimensions and window
+dimensions. You can alter the default sizing in the code if you want wider boxes,
+or you can discreetly use wordy captions on your buttons to make a window wider.
+For example, if there is a lot of text with just a YES and NO button then you'll get a high, thin msgbox.
+ You could make
+that msgbox window wider and more balanced-looking by using a button caption
+like "Yes, I would like to proceed" in place of just "Yes".
+
+<BR><BR>
+<SPAN CLASS="Maroon"><B>Windows Skins note:</B></SPAN><BR> The function <B>GetColor()</B> in the 
+Msg class calls the Registry to retrieve default system colors. The message window then uses the same colors
+used for system message windows. On XP that will get the correct colors but if you use the "Luna" skin
+display the message box will not be skinned. On Vista+, if you use the "Aero" transparent display, the transparency
+shows on the window border because that is part of the window frame and not the webpage.
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="clas"></A>
+<H4>About Classes</H4>
+
+&#160;&#160; If you don't know about how classes work then you're missing
+a very handy aspect of VBScript (and many other programming languages). A
+class is a programming expedient that provides a way to package code as
+an independent unit for re-use.<BR><BR>
+
+&#160;&#160; This custom message box is written as a class so that it can be
+easily added to other scripts. A class is a "practical unit of code" that constitutes
+an object. That is, from the point of view of external code, a class is an interface
+and it's inside is invisible. All you have to do is to write:<BR>
+<PRE>  Class ClassName
+       '-- class code goes here.
+  End Class </PRE>
+&#160;&#160; Everything between <B>Class</B> [class name] and <B>End Class</B> becomes internal to
+the class object. When methods or variables are declared in a class as <B>Private</B>
+their "scope", or visibility, does not extend outside the class. For example, you could declare the 
+private variable "Object1" inside the class and use it to create an instance of the FileSystemObject. 
+That variable, and the FSO instance, will not be visible outside of the class. The self-contained aspect
+ of classes means that you can design a class as a custom object, choosing properties and methods to 
+make visible by declaring them as <B>Public</B>, while the functionality behind those properties and methods is 
+hidden inside the class.<BR><BR>
+&#160;&#160;
+
+   Since only the properties and methods of a class declared as Public are visible from outside the 
+class, a class can be pasted into any number of scripts without having any effect on the operation 
+of those scripts. It's like being able to paste the FileSystemObject into your script: Whether you 
+use the object or not, it does not affect your script code because only the Public methods and 
+properties are visible to the rest of the script. (Note, though, that public variables declared outside 
+the class, in the same script, are visible from inside the class, so it's a good idea to use unique 
+variable names inside script classes.)<BR><BR>
+
+&#160;&#160; So this <B>Msg</B> custom message box class can be safely pasted
+at the end of any script to provide a message box object. Your script will see the <B>Msg</B>
+class in the same way that it sees the FSO - as an external object that provides a number
+of public methods and properties. If you want to alter the code in the <B>Msg</B> class,
+or add new properties, you can also do that. For example, you could add code to show a title bar
+icon. That code would be complex and would require re-writing the CSS/HTML code that creates
+the message box. But once you worked out the code, the ability to show a chosen icon in the
+title bar could be cleanly "exposed" on the class interface as a simple, new property named TitleBarIcon,
+and someone using the class could then access that functionality with code such as:<BR>
+&#160;&#160;&#160;&#160; MsgObj.TitleBarIcon = "C:\smallLogo.gif".
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a0"></A>
+<H6>Sub Init</H6>
+<SPAN CLASS="Blue">&#149; Initializes IE to deal with IE8 bug.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Init</SPAN><BR><BR>
+
+&#160;&#160;
+With IE6 the Custom MsgBox class works fine. With IE8 there is a strange bug: The first
+call fails, but all subsequent calls work fine, until next reboot. It's as though something
+needs to be initialized. The demo script <SPAN CLASS="Maroon">Basic MsgBox Sample.vbs</SPAN>
+calls <B>Init</B>. The other demo scripts do not. If you run one of the other scripts first, on a
+system with IE8, you will see a message like, "Button 2 clicked." For some reason the first
+message window (HTA instance) created does not display. Worse, despite not displaying, the
+<B>ShowMsg</B> function still returns a button number, though the number is arbitrary!
+<B>Init</B> deals with that problem
+by creating a simple HTA instance briefly and then closing that window before it is visible.<BR><BR>
+
+<B>Notes:</B> IE8, in general, seems to be slower than IE6 to load. The scripts respond almost
+instantly on XP with IE6, but take 1-2 seconds to respond with IE8, on both XP and Win7. (Which
+seems to indicate that Win7 bloat is not the culprit.) The optimum usage of <B>Init</B>, therefore, 
+is to call it after creating the <B>Msg</B> class, but before a message window is
+needed, so that when a message window <I>is</I> needed it will appear quickly.
+<BR><BR>
+&#160;&#160; <B>Init</B> is not necessary with IE6, but if your scripts <I>might</I> be used
+with another IE version then it should be called.
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a1"></A>
+<H6>Property Title</H6>
+<SPAN CLASS="Blue">&#149; Sets title bar text of MsgBox.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Title = "Custom Message Box"</SPAN><BR><BR>
+
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a2"></A>
+<H6>Property Caption</H6>
+<SPAN CLASS="Blue">&#149; Sets caption in MsgBox window.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Caption = "Please answer Yes or No."</SPAN><BR><BR>
+
+<B>Notes:</B> Since these MsgBoxes are webpages, you can modify the
+caption appearance with inline HTML. The demo msgbox with the earth
+picture shows a sample of that.
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a3"></A>
+<H6>Property Icon</H6>
+<SPAN CLASS="Blue">&#149; Sets path of image to show in upper left.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Icon = "C:\logo2.jpg"</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; An icon image can be anything that IE will show: JPG, GIF, BMP.
+Up to about 60 pixels wide it will show fine. If you use a very large image, over 100 pixels,
+it may be necessary to modify the resizing code because the window width and height
+do not take icon size into consideration.<BR><BR>
+
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a8"></A>
+<H6>Property IconWidth</H6>
+<SPAN CLASS="Blue">&#149; Sets width of image to show in upper left.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.IconWidth = 32</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; IconWidth must be set if an image is used. That value is needed for the
+self-sizing aspect of the message window. An image will only be
+included in the message window if the Icon property is a valid file path and IconWidth is greater than 0.<BR>
+&#160;&#160; A picture can also be measured but that seemed like a lot of
+extra code, in this case, without enough value. The aim was to create a class small
+enough to be realistically used by pasting it into other scripts. If you wanted to add icon size
+functionality to the <B>Icon</B> property, the following should work
+to return image dimensions, but it will return a wrong value if fonts are set to large.<BR>
+<PRE>
+Sub PicObGetSize(sPath1, W1, H1)
+Dim oPic
+    Set oPic = LoadPicture(sPath1)
+      '-- If display is Set to large fonts use 120 in place of 96.
+       H1 = (96 * oPic.height) \ 2540
+       W1 = (96 * oPic.width) \ 2540
+    Set oPic = Nothing
+End Sub</PRE>
+
+
+<BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a9"></A>
+<H6>Property Font</H6>
+<SPAN CLASS="Blue">&#149; Sets text font. Default is MS Sans Serif.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Font = "Arial"</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; You can use any installed font here, but a message box has
+small text which is not anti-aliased (at least not on older systems). So many
+fonts will probably be unsuitable for use because they simply won't show legible text.<BR><BR>
+
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a4"></A>
+<H6>Sub AddButton(Caption)</H6>
+<SPAN CLASS="Blue">&#149; Adds a button to MsgBox. Caption property is button text.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.AddButton "Yes"</SPAN><BR><BR>
+<B>Notes:</B><BR>
+&#160;&#160; The self-sizing function of the message box works by first getting the
+size of the button table the way that IE chooses to display it. That's done by starting
+with a window width of 600 pixels so that IE is not restricted in how it sets up the table. The other parts of the 
+message box window then get sized
+in accordance with the button table width. The result is usually a well-balanced display in the message
+window. That design can be used to affect the display of the message box. For example,
+if you use a long caption and don't want it to display in a long, vertical message box, just
+make the captions in your buttons longer. The affect will be to widen the message box.<BR>
+Example: Instead of using: "Yes" and "No" you might use something like: "Yes, I would like to continue." and "No, quit now.".
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a10"></A>
+<H6>Sub AddList(Item, Data)</H6>
+<SPAN CLASS="Blue">&#149; Adds a list item to MsgBox. The first call to AddList automatically adds a list. (List is a dropdown
+selector unless ListSize is used to make it show as a listbox.)
+<B> Item</B> is text of list item. 
+<B>Data</B> is any hidden text string to be stored with list item.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.AddList "Choice one", "hidden data"</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; Calling <B>AddList</B> one or more times will cause the list to show
+in the message window (until the next time <B>Clear</B> is called). Each call to <B>AddList</B> adds one item to 
+the list. The purpose of the <B>Data</B> parameter is to associate a hidden text string
+with a specific list item for later processing. If no hidden data is needed the <B>Data</B> parameter can be "".<BR><BR>
+
+&#160;&#160; The default list display is a 1-line dropdown list. The <B>ListSize</B> property can be
+used to show a normal listbox by designating the number of items to be visible.<BR><BR>
+
+&#160;&#160; If you want to be able to confirm whether an item was selected, make the first item blank. Internet Explorer
+returns 0 (instead of the expected -1) when nothing has been selected. So a return of no selection cannot be distinguished
+from first-item selection. To make the return unambiguous, the first call to AddList can be <I>AddList "", "" </I>.
+ Then if there is no selection ListIndex will return 0 and ListText will return "". (Note that using a blank first line is
+for a single-line dropdown list. It will
+not look right in a multi-line listbox.<BR><BR>
+
+&#160;&#160; &#149; The width of dropdown is not figured into window size. The list width will
+be dependent on the widest text item used. If you want to use long lines of text in the
+dropdown then use long button captions so that list does not extend past edge of window. In other words, 
+if you have one button that says, "OK" and a very short caption then your message window will be very small
+and narrow. If you also have a list with long entries such as "second Tuesday of the month" then
+your list will extend past the right side of the window.<BR><BR>
+
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a16"></A>
+<H6>Property ListSize</H6>
+<SPAN CLASS="Blue">&#149; Specifies number of items showing in list.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.ListSize = 4</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+
+&#160;&#160; By default <B>AddList</B> shows a single-line dropdown selector, which is
+essentially a ListBox with one item showing. If <B>ListSize</B> is set to a number
+greater than 1 a normal ListBox will be displayed with [ListSize] number of items showing. 
+If ListSize matches number of list items it will
+be a plain listbox. If ListSize is less than number of items, listbox will be [ListSize]
+rows high and include a scroll bar.
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a7"></A>
+<H6>Properties ListText, ListData, ListIndex</H6>
+<SPAN CLASS="Blue">&#149; Information available about selected list item.</SPAN><BR><BR>
+
+&#160;&#160; After the ShowMsg function returns, these properties will hold information about
+what, if any, dropdown selection was made. The list is 0-based and if no selection is made
+the <B>ListIndex</B> returned will be 0. <B>ListText</B> will
+be the text from the selected item (or the top item if none was selected). <B>ListData</B> will
+return the hidden string, if one was added in the <B>AddList</B> sub.
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a12"></A>
+<H6>Sub AddTextBox(Columns)</H6>
+<SPAN CLASS="Blue">&#149; Adds a text input to MsgBox. <B>Columns</B> parameter is size of textbox in characters.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.AddTextBox 20</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; AddTextBox adds a 1-line text input to the message window. Like the
+dropdown selector, the textbox will run over the edge if you make it too big for the window.
+If you need to allow for, say, 50 characters then you should plan to use long button captions
+or numerous buttons.
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a14"></A>
+<H6>Property Text</H6>
+<SPAN CLASS="Blue">&#149; Returns text entered into TextBox.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: s = Box.Text</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; If a TextBox is used the <B>Text</B> property will return whatever text, if any,
+was entered. Like the ListText, ListData and ListIndex properties, this is only valid
+after ShowMsg returns.
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<A HREF="#a20">AddPasswordInput</A> <BR>
+&#160; <A HREF="#a21">Password</A> <BR>
+
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a20"></A>
+<H6>Sub AddPasswordInput()</H6>
+<SPAN CLASS="Blue">&#149; Adds a 20-character password textbox that shows entered text as circles.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.AddPasswordInput</SPAN><BR><BR>
+
+<A HREF="#top">Back to Top</A><BR><BR>
+
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a21"></A>
+<H6>Property Password</H6>
+<SPAN CLASS="Blue">&#149; Returns text entered into Password input textbox.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: s = Box.Password</SPAN><BR><BR>
+<B>Notes:</B><BR>
+&#160;&#160; If a Password input is used the <B>Password</B> property will return whatever text, if any,
+was entered. Like the ListText, ListData and ListIndex properties, this is only valid
+after ShowMsg returns.
+
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+
+
+<HR>
+<A NAME="a6"></A>
+<H6>Function ShowMsg()</H6>
+<SPAN CLASS="Blue">&#149; Shows MsgBox.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: r = Box.ShowMsg</SPAN><BR><BR>
+
+<B>Notes:</B><BR>
+&#160;&#160; ShowMsg is the main function. The properties are used to
+set up the MsgBox window. Once set up, ShowMsg displays the window
+and returns button number clicked. If the "X" in upper right is clicked then
+ShowMsg returns 0. Otherwise it returns number of button in order that
+they were created and displayed.<BR>
+&#160;&#160; The "X" was added to provide a clean way to escape
+the window if an error occurs such as, for example, creating a message window
+with the buttons pushed down out of sight. Without the "X" those situations
+would require stopping the IE process with the Task Manager.
+
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="a5"></A>
+<H6>Sub Clear()</H6>
+<SPAN CLASS="Blue">&#149; Clears the properties for reuse.</SPAN><BR><BR>
+<SPAN CLASS="Purple">ex.: Box.Clear</SPAN><BR><BR>
+
+
+<B>Notes:</B><BR>
+&#160;&#160; 
+  The Clear sub should be called between uses. When a script is running
+it can create a Msg object at startup and leave the object created.
+When a message box is needed just call <B>Clear</B> to clear all set
+properties, then set up the
+properties needed, such as <B>Title </B>, <B>Caption</B> and buttons.
+An IE object is only created for the duration of the message window
+display (then destroyed when the message window is closed), so there is no need 
+to set the Msg object to nothing
+until the end of the script.<BR><BR>
+
+&#160;&#160;
+ If <B>Clear</B> is not called the dialogue window will display all properties
+from the last view, adding new buttons to the existing collection.
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+ 
+<!-- ----------------------------------------------------------------------------------  -->
+<HR>
+<A NAME="trbl"></A>
+<H4>Troubleshooting</H4>
+
+<B>Buttons too close to bottom, or partially hidden:</B><BR>
+&#160;&#160; Several methods were tested to control the window layout. The present method seemed
+to be the best. It uses a TABLE with 30 pixels padding at the bottom to wrap the TABLE containing the
+buttons. It also calculates 40 pixels extra height to account for the title bar. If you find an unusual situation
+where the buttons are partially hidden at the bottom of the window, try adjusting the value in the STYLE
+tage where it says:<BR>
+<SPAN CLASS="Maroon">#ButBox {padding-bottom:</SPAN><BR>
+Another option would be to adjust the value calculations for <SPAN CLASS="TMaroon">HtBox</SPAN>, which is
+the variable used for the total window height.<BR><BR>
+
+<B>First message is not visible:</B><BR>
+&#160;&#160; This is an odd problem. It seems to be a bug with IE8. The scripts were tested on
+XP, Win7 and Win8, with both IE6 and IE8 on XP. The problem appears on Win7, on XP with IE8, but not on XP with IE6, indicating that it
+seems to be an IE issue rather than a Windows version issue.<BR><BR>
+&#160;&#160;
+The symptom of the problem is that the first time a custom MsgBox is used,
+the message box does not show. The demo scripts are designed to show the MsgBox and then show
+a message telling which button was clicked. In this case, the first thing that appears is a message
+saying something like "Button 2 was clicked"! After the first run it works fine, until next reboot. It's as though something
+needed to be intialized. WSH? IE? Mshta.exe? Perhaps it could be a service that needs to be started?
+ I can't think of any logical explanation for the problem. It does not happen on XP with IE6. <BR><BR>
+
+&#160;&#160; The <B>Init</B> sub was added to solve the problem. <B>Init</B>, which should be called when the
+ class is created on systems that don't have IE6, "primes the pump" by creating and then closing an HTA window without
+displaying it onscreen. See the <A HREF="#a0"> Init</A> listing for more info.
+
+<BR><BR>
+<A HREF="#top">Back to Top</A><BR><BR>
+ 
+<HR>
+<A NAME="lic"></A>
+
+<!---------------------------------------->
+<H5>License:</H5>
+
+&#160;&#160; You use all script code and components from JSWare at your own risk.<BR><BR>
+
+  &#160;&#160; The components (compiled DLL and EXE files) may be used for personal or
+commercial purposes. No payment or attribution is required for either use.
+The components may be redistributed if they are required as support files 
+for scripts or software that you have written.<BR>
+   &#160;&#160; Also, the script code may be used freely, in part or as whole scripts,
+for any purpose, personal or commercial, without payment or attribution.<BR><BR>
+
+  &#160;&#160; I ask only that you not redistribute these scripts and components, except
+as required for your direct use. Instead, please direct others to obtain copies
+of JSWare scripts and components directly from www.jsware.net.<BR><BR>
+
+ &#160;&#160; Also, none of the code here may be redistributed under another license. If a 
+work using code from JSWare is distributed with restrictions of any kind 
+the code from JSWare must be kept exempt from those restrictions. 
+This includes, but is not limited to, code sold for profit, code with usage restrictions
+and code distributed as so-called "Open Source" with redistribution restrictions. <BR><BR>
+
+    &#160; &#160;  Joe Priestley<BR><BR>
+
+<HR>
+<DIV align="center">
+
+ JSWare &#160;&#149;&#160; www.jsware.net &#160;&#149;&#160; jsware@jsware.net<BR>
+</DIV>
+<HR><BR>
+
+</DIV>
+</BODY></HTML>
+

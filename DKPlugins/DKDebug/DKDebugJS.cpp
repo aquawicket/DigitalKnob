@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -25,6 +25,7 @@
 */
 
 #if HAVE_DKDuktape 
+#if HAVE_stackwalker
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugJS.h"
 
@@ -50,5 +51,5 @@ int DKDebugJS::ShowStackTrace(duk_context* ctx){
 		return 0;
 	return 1;
 }
-
+#endif //HAVE_stackwalker
 #endif //HAVE_DKDuktape

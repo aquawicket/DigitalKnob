@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://developer.apple.com/documentation/coreservices/carbon_core?language=objc
 
 if(NOT MAC)

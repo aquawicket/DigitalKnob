@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -88,8 +88,8 @@ bool DKSDLText::Render(){
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	int left = 5;
-	int top = dkSdlWindow->height - texH;
+	int left = dkSdlWindow->width - texW;
+	int top = 0;
 	SDL_Rect dstrect = {left, top, texW, texH};
 	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);

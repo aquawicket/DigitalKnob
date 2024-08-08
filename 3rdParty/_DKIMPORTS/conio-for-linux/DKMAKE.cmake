@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/nowres/conio-for-linux.git
 
 if(NOT UNIX_HOST)
@@ -11,8 +12,10 @@ dk_depend(ncurses)
 
 
 ### IMPORT ###
-dk_import(https://github.com/nowres/conio-for-linux.git)
+#dk_import(https://github.com/nowres/conio-for-linux.git)
+dk_import(https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###
-dk_include(${CONIO-FOR-LINUX})
+dk_include(${CONIO_FOR_LINUX})

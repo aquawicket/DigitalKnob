@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 WIN_dk_lib(opengl32.lib)
 
@@ -11,23 +12,29 @@ IOS_dk_depend(opengles)
 IOSSIM_dk_depend(opengles)
 
 if(LINUX)
+	dk_depend(mesa-common-dev)
+	dk_depend(libgl1-mesa-dev)
+
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
 	add_definitions(${OpenGL_DEFINITIONS})
 	if(NOT OPENGL_FOUND)
-    	dk_error("COULD NOT FIND OPENGL")
+    	dk_warning("COULD NOT FIND OPENGL")
 	endif()
 	LINUX_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
 if(RASPBERRY)
+	dk_depend(mesa-common-dev)
+	dk_depend(libgl1-mesa-dev)
+	
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
 	add_definitions(${OpenGL_DEFINITIONS})
 	if(NOT OPENGL_FOUND)
-    	dk_error("COULD NOT FIND OPENGL")
+    	dk_warning("COULD NOT FIND OPENGL")
 	endif()
 	RASPBERRY_dk_lib(${OPENGL_LIBRARIES})
 endif()

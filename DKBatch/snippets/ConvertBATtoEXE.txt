@@ -1,0 +1,10 @@
+https://superuser.com/a/868341/600216
+
+In your C:\Windows\System32\ folder, there is a file called iexpress.exe.
+
+Right-click it an Run as administrator.
+Create a new SED and select "Extract files and run an installation command."
+Add the script you want, and make sure that on the next screen, you set the install program to cmd /c [your_script.bat] where [your_script.bat] is the script file you want to execute. If you don't do this, windows will try to use Command.com (the old version of Command Prompt) which hasn't been in use for quite a while.
+Select preferences (you might need to select "Store files using Long File Name inside Package), set an output path (to the .exe file you want to create), and select "No restart".
+Click next and you should have your .exe!
+Just a note, this file actually only acts as a wrapper for your script, and the script itself actually gets executed in a temp folder created on execution (and deleted afterwards), so make sure you don't use any relative paths.

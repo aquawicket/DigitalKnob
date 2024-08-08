@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://developer.apple.com/documentation/agl/agl?language=objc
 if(NOT MAC)
 	dk_undepend(agl)

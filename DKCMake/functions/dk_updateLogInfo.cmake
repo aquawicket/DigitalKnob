@@ -1,17 +1,19 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ##################################################################################
 # dk_updateLogInfo()
 #
-#	TODO
+#	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
-	#DKDEBUGFUNC(${ARGV})
+	dk_debugFunc(${ARGV})  # called in dk_debugFunc
+	
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			if(PRINT_FILE_NAMES)
-				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
+				dk_basename(${CMAKE_CURRENT_LIST_FILE} STACK_FILENAME)
 				set(STACK_HEADER "${STACK_FILENAME}:")
 			endif()
 			if(PRINT_LINE_NUMBERS)		
@@ -19,7 +21,7 @@ macro(dk_updateLogInfo)
 			endif()	
 		else()
 			if(PRINT_FILE_NAMES)
-				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+				dk_basename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} STACK_FILENAME)
 				set(STACK_HEADER "${STACK_FILENAME}:")
 			endif()
 			if(PRINT_LINE_NUMBERS)	
@@ -36,3 +38,14 @@ macro(dk_updateLogInfo)
 		endif()
 	endif()
 endmacro()
+
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

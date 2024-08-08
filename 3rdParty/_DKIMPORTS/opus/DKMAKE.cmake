@@ -1,9 +1,10 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/xiph/opus.git
 
 
 ### IMPORT ###
-dk_import(https://github.com/xiph/opus.git)
-
+#dk_import(https://github.com/xiph/opus.git)
+dk_import(https://github.com/xiph/opus/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include			(${OPUS}/include)
@@ -15,7 +16,7 @@ WIN_dk_libRelease	(${OPUS}/${OS}/${RELEASE_DIR}/opus.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${OPUS})
+dk_configure(${OPUS})
 
 
 ### COMPILE ###

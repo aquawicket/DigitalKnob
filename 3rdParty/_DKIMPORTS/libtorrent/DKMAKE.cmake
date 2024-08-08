@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/arvidn/libtorrent
 # https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz
 # https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.4.zip
@@ -9,8 +10,9 @@ dk_depend(openssl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
 #dk_import(https://github.com/arvidn/libtorrent.git)
+dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
+
 
 
 ### LINK ###
@@ -30,7 +32,7 @@ WIN_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE} ${LIBTORRENT})
+dk_configure(${LIBTORRENT} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE})
 
 
 ### COMPILE ###

@@ -1,20 +1,40 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ##################################################################################
-# dk_assert(msg)
+# dk_assert(expression)
 #
-#	Print an assert message to the console and halts execution
+#	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
 #
-#	@msg	- The message to print
+#	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-macro(dk_assert msg)
-	#message(STATUS "dk_assert(${ARGV})")
-	string(REPLACE " " "" var ${msg})
-	dk_updateLogInfo()
-	if(${var})
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${msg} ${CLR}")
+function(dk_assert expression)
+	dk_debugFunc(${ARGV})
+	if(NOT ${ARGC} EQUAL 1)
+		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
-	dk_exit() #FIXME:  is this needed?
-endmacro()
+	
+	
+	if(NOT ${expression})
+		dk_echo("\n\n${bg_red}Assertion failed: at ${expression}${clr}")
+		dk_replaceAll("${expression}"  " "  ""  var)
+		
+		if("${var}")
+			dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+		else()
+			dk_error("${bg_red} ${expression} ${clr}")
+		endif()
+		dk_exit()
+	endif()
+endfunction()
+
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

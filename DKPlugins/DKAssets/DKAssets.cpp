@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -58,17 +58,8 @@ bool DKAssets::Init(){
 	if(same(file, "OFF")){
 		DKLog::log_file = false;
 	}
-	else{
-#if !ANDROID
-	//clear the log file
-	std::ofstream file_log;
-    DKString path = DKFile::local_assets+"log.txt";
-	file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
-	file_log.close();
-#endif		
-	}
 
-#if WIN32
+#if WIN
 	DKString console;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
 #	if DEBUG
@@ -158,7 +149,7 @@ bool DKAssets::Init(){
 		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
-	DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
+	//DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
 	return true;
 }
 
@@ -174,7 +165,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets
 	
-#if WIN32
+#if WIN
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
 	    DKFile::PathExists(DKFile::app_path + "../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
@@ -227,7 +218,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 
 bool DKAssets::GetDataPath(DKString& path){
 	DKDEBUGFUNC(path);
-#if WIN32
+#if WIN
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -330,7 +321,7 @@ bool DKAssets::DeployAssets(){
 #endif
 
 //Windows will use the resources interface
-#if WIN32
+#if WIN
 	DKINFO("Extracting assets from executable windows resources . . . \n");	
 	HGLOBAL hResourceLoaded;	// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 

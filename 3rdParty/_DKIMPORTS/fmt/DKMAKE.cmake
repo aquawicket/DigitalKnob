@@ -1,14 +1,17 @@
+message("fmt/DKMAKE.cmake")
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/fmtlib/fmt
 # https://fmt.dev/latest/index.html
 
 
 ### DEPENDS ###
-#dk_depend(git)
 #dk_depend(python)
 
 
 ### IMPORT ###
-dk_import(https://github.com/fmtlib/fmt.git PATCH)
+#dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
+dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
+
 
 
 ### INCLUDE/LINK ###
@@ -21,7 +24,7 @@ dk_include(${FMT}/include)
 
 
 ### GENERATE ###
-#dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
+#dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
 
 
 ### COMPILE ###

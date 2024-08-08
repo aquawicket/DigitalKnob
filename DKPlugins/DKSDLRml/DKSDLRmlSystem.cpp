@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -323,7 +323,7 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 			DKERROR("[Rml] "+DKString(message)+"\n");
 			break;
 		case Rml::Log::LT_ASSERT:
-			DKASSERT("[Rml] "+DKString(message)+"\n");
+			DKFATAL("[Rml] "+DKString(message)+"\n");
 			break;
 		case Rml::Log::LT_WARNING:
 			DKWARN("[Rml] "+DKString(message)+"\n");

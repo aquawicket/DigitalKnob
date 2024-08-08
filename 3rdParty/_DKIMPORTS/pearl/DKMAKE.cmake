@@ -1,4 +1,0 @@
-# https://strawberryperl.com
-
-
-# TODO

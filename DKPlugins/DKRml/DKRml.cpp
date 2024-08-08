@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -557,7 +557,17 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		
 		DKERROR(address+" is invalid hex notation\n");
+		
+		//print which oh the evaluators failed.
+		if(address.compare(0, 2, "0x") != 0)
+			DKERROR("address.compare(0, 2, \"0x\") != 0 \n");
+		if(address.size() <= 2)
+			DKERROR("(address.size() <= 2 \n");
+		if(address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos)
+			DKERROR("address.find_first_not_of(\"0x123456789abcdefABCDEF\", 2) != std::string::npos");
+
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
@@ -583,21 +593,34 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 		DKERROR("invalid event\n");
 		return "";
 	}
+	const void* v_ptr = static_cast<const void*>(event);
 	std::stringstream ss;
-	const void* address = static_cast<const void*>(event);
-#if WIN
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	return ss.str();
+	ss << v_ptr;
+	DKString address = ss.str();
+	if(address.compare(0, 2, "0x") != 0){
+		address.insert(0, "0x");
+	}
+	return address;
 }
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	
+	//FIXME:  Error example (win_x86_64_mingw64_gcc)
+	//		0x0x23aefc8: the address is not a valid hex notation
+	//
 	Rml::Element* element = nullptr;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos) {
+		
 		DKERROR(address+": the address is not a valid hex notation\n");
+		
+		//print which oh the evaluators failed.
+		if(address.compare(0, 2, "0x") != 0)
+			DKERROR("address.compare(0, 2, \"0x\") != 0 \n");
+		if(address.size() <= 2)
+			DKERROR("(address.size() <= 2 \n");
+		if(address.find_first_not_of("0x123456789abcdefABCDEF", 2) != std::string::npos)
+			DKERROR("address.find_first_not_of(\"0x123456789abcdefABCDEF\", 2) != std::string::npos");
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
@@ -626,17 +649,18 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 		return "";
 	}
 	std::stringstream ss;
-	const void* address = static_cast<const void*>(element);
-#if WIN
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	if (same("0xDDDDDDDD", ss.str())) {
+	const void* v_ptr = static_cast<const void*>(element);
+	ss << v_ptr;
+	DKString address = ss.str();
+	if(address.compare(0, 2, "0x") != 0){
+		address.insert(0, "0x");
+	}
+
+	if (same("0xDDDDDDDD", address)) {
 		DKERROR("ss = 0xDDDDDDDD\n");
 		return "";
 	}
-	return ss.str();
+	return address;
 }
 
 //TODO

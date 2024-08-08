@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -43,14 +43,15 @@ bool DKSDLRml::Init(){
 	if(!dkSdlWindow || !dkRml)
 		return DKERROR("DKSDLRml::Init(): INVALID OBJECTS\n");
 #ifdef USE_DKSDLRMLRENDERER
-	Renderer = new DKSDLRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSDLRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);	// Legacy Rml RenderInterface
 #elif USE_DKSDLRMLOPENGL
-	Renderer = new DKSDLRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSDLRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);		// Legacy Rml RenderInterface
 #elif USE_DKSDLRMLSHELL
-	Renderer = new ShellRenderInterfaceOpenGL();
+	Renderer = new ShellRenderInterfaceOpenGL();									// Legacy Rml RenderInterface
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
-	Rml::SetRenderInterface(Renderer);
+	Rml::SetRenderInterface(Renderer->GetAdaptedInterface());						// Legacy Rml RenderInterface
+	//Rml::SetRenderInterface(Renderer);
     Rml::SetSystemInterface(SystemInterface);
 	DKSDLWindow::AddEventFunc(&DKSDLRml::Handle, this);
 	DKSDLWindow::AddRenderFunc(&DKSDLRml::Render, this);

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/mccdo/osgworks
 
 
@@ -7,7 +8,8 @@ dk_depend(openscenegraph)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mccdo/osgworks.git)
+#dk_import(https://github.com/mccdo/osgworks.git)
+dk_import(https://github.com/mccdo/osgworks/archive/refs/heads/master.zip)
 
 
 ### LINK ###
@@ -137,14 +139,13 @@ WIN_dk_set					(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD}
+dk_configure(${OSGWORKS}
 	-DOSGWORKS_BUILD_APPS=OFF 
 	-DOSGWORKS_INSTALL_DATA=OFF 
 	-DDIRECTINPUT_ARCH_x64=OFF 
 	-DBoost_INCLUDE_DIR=OFF 
 	${BOOST_CMAKE} 
-	${OPENSCENEGRAPH_CMAKE} 
-	${OSGWORKS})
+	${OPENSCENEGRAPH_CMAKE})
 
 
 ### COMPILE ###

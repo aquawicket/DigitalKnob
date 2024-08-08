@@ -1,8 +1,4 @@
-# https://github.com/gradle/gradle
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+# https://gradle.org
 
-dk_undepend(gradle)
-dk_return() # FIXME: currently disabled
-
-dk_depend(openjdk)
-
-dk_import(https://github.com/gradle/gradle.git)
+dk_set(GRADLE_USER_HOME ${DIGITALKNOB_DIR}/.gradle)

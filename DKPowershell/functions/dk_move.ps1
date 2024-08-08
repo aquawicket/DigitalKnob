@@ -1,0 +1,61 @@
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
+if(!$dk_move){ $dk_move = 1 } else{ return }
+
+##################################################################################
+# dk_move(from to)
+#
+#	Move/Rename a file or directory to another location/name
+#
+#	@from		- The source path to move or rename
+#	@to			- The destination path to move or rename to
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
+#
+function Global:dk_move($_from_, $_to_) {
+	dk_debugFunc
+	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	if($(__ARGC__) -gt 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	
+	
+	if($args[2] -eq "OVERWRITE"){ $OVERWRITE = 1 }
+	
+	dk_info "Moving $_from_ to $_to_"
+	
+	if(!(dk_pathExists "$_from_")){
+		dk_error "dk_move: $_from_ not found"
+	}
+	
+	if(dk_pathExists "$_to_"){
+		if($OVERWRITE -ne 1){
+			dk_error "Cannot move file. Destiantion exists and OVERWRITE is not set"
+		}
+		#dk_delete $_to_
+	}
+	
+	# the base directory of the $_to_ path must exist.    
+	$_parent_dir_ = dk_dirname "${_to_}"
+	dk_printVar _parent_dir_
+	dk_makeDirectory ${_parent_dir_}
+	
+	mv "$_from_" "$_to_"
+}
+
+
+
+function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+	dk_debugFunc
+	
+	
+	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
+	
+	dk_fileWrite $DKDOWNLOAD_DIR/moveMe.file "dk_move test"
+	dk_move $DKDOWNLOAD_DIR/moveMe.file $DIGITALKNOB_DIR/iWasMoved.txt OVERWRITE
+	
+	dk_fileWrite moveMe.file "dk_move test"
+	dk_move moveMe.file iWasMoved.txt OVERWRITE
+	
+	dk_makeDirectory $DKDOWNLOAD_DIR/moveMe
+	dk_move $DKDOWNLOAD_DIR/moveMe $DIGITALKNOB_DIR/iWasMoved OVERWRITE
+	
+	dk_makeDirectory moveMe
+	dk_move moveMe iWasMoved OVERWRITE
+}

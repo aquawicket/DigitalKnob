@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -46,7 +46,7 @@
 #endif
 //WARNING_ENABLE
 
-#define DK_ASSERT  1
+//#define DK_ASSERT  1
 #define DK_FATAL   2
 #define DK_ERROR   3
 #define DK_WARN    4
@@ -56,13 +56,7 @@
 #define DK_SHOW    8
 #define DK_HIDE    9
 
-#define DKBUILDMONTH(buildMonth) GetBuildMonth(__DATE__, buildMonth);
-#define DKBUILDDAY(buildDay) GetBuildDay(__DATE__, buildDay);
-#define DKBUILDYEAR(buildYear) GetBuildYear(__DATE__, buildYear);
-#define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
-#define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
-#define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
+//#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
 #define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
 #define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
 #define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
@@ -70,18 +64,16 @@
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
+#define    DKTODO() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"TODO: "+__FUNCTION__+"()\n", DK_WARN);
+#define    DKDEPRECATED() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"DEPRECATED: "+__FUNCTION__+"()\n", DK_WARN);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
 #if WIN
-//#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-//#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX || ANDROID || EMSCRIPTEN
-//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
-//#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
@@ -109,15 +101,17 @@ public:
 	static DKString log_hide;
 	static bool stacktrace_on_errors;
 	static bool exception_on_errors;
+	
+	static std::string output_buffer;
 };
 
 bool GetVersion(DKString& version);
-bool GetBuildMonth(const char* buildDate, DKString& buildMonth);
-bool GetBuildDay(const char* buildDate, DKString& buildDay);
-bool GetBuildYear(const char* buildDate, DKString& buildYear);
-bool GetBuildHour(const char* buildTime, DKString& buildHour);
-bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
-bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
+bool GetBuildMonth(DKString& buildMonth);
+bool GetBuildDay(DKString& buildDay);
+bool GetBuildYear(DKString& buildYear);
+bool GetBuildHour(DKString& buildHour);
+bool GetBuildMinute(DKString& buildMinute);
+bool GetBuildSecond(DKString& buildSecond);
 
 template<typename S, typename T, typename = void>
 struct is_streamable : std::false_type {};
@@ -213,7 +207,8 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	return true;
+	if(1) return true;	//DISABLED
+
 	if (!DKUtil::InMainThread())
 		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
@@ -327,7 +322,8 @@ public:
 	//const Args&&... args;
 };
 
-#if WIN
+//#if WIN
+#if _MSC_VER
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX || ANDROID || EMSCRIPTEN
@@ -338,20 +334,5 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-
-/*
-template <typename... Args>
-void Test(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	DKString str = "test";
-	DKLog::Log(file, line, func, str, DKDEBUG);
-}
-#define TEST1(__FILE__, __LINE__, __FUNCTION__, ...)  Test(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define TEST(...) TEST1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-void Runit(){
-	TEST(123);
-	TEST("123");
-	TEST();
-}
-*/
 
 #endif //DKLog_H

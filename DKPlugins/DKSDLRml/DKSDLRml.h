@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -67,11 +67,11 @@ public:
 	DKSDLWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
-		DKSDLRmlRenderer* Renderer;
+		DKSDLRmlRenderer* Renderer;				// Legacy Rml RenderInterface
 #	elif USE_DKSDLRMLOPENGL
-		DKSDLRmlOpenGL* Renderer;
+		DKSDLRmlOpenGL* Renderer;				// Legacy Rml RenderInterface
 #	elif USE_DKSDLRMLSHELL
-		ShellRenderInterfaceOpenGL* Renderer;
+		ShellRenderInterfaceOpenGL* Renderer;	// Legacy Rml RenderInterface
 #	endif
 
 	RmlSDL2SystemInterface* SystemInterface;

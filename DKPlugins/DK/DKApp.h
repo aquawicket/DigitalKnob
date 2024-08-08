@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,6 +29,9 @@
 #define DKApp_H
 
 #include "DK/DK.h"
+
+extern const char* BUILD_DATE;
+extern const char* BUILD_TIME;
 
 class DKApp{
 public:

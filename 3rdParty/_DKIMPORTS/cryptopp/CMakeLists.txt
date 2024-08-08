@@ -29,7 +29,7 @@ endif()
 # Print useful information
 message( STATUS "CMake version ${CMAKE_VERSION}" )
 
-cmake_minimum_required(VERSION 2.8.6)
+cmake_minimum_required(VERSION 3.0.0)
 if (${CMAKE_VERSION} VERSION_LESS "3.0.0")
   project(cryptopp)
   set(cryptopp_VERSION_MAJOR 8)
@@ -70,8 +70,8 @@ set(TEST_CXX_FILE ${TEST_PROG_DIR}/test_cxx.cxx)
 #============================================================================
 
 option(BUILD_STATIC "Build static library" ON)
-option(BUILD_SHARED "Build shared library" ON)
-option(BUILD_TESTING "Build library tests" ON)
+option(BUILD_SHARED "Build shared library" OFF)
+option(BUILD_TESTING "Build library tests" OFF)
 option(BUILD_DOCUMENTATION "Use Doxygen to create the HTML based API documentation" OFF)
 option(USE_INTERMEDIATE_OBJECTS_TARGET "Use a common intermediate objects target for the static and shared library targets" ON)
 

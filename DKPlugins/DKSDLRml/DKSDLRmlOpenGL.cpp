@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -97,7 +97,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
  
     for(int  i = 0; i < num_vertices; i++) {
         Positions[i] = vertices[i].position;
-        Colors[i] = vertices[i].colour;
+        //Colors[i] = vertices[i].colour; 		//!!!FIXME!!!!
         if(sdl_texture){
             TexCoords[i].x = vertices[i].tex_coord.x * texw;
             TexCoords[i].y = vertices[i].tex_coord.y * texh;

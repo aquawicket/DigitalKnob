@@ -1,0 +1,7 @@
+#*          text eol=lf
+*.bash      text eol=lf
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+*.sh        text eol=lf
+/DKBash/*   text eol=lf
+/DKBatch/*  text eol=crlf

@@ -62,7 +62,7 @@ for dir in $PATCH_BOOST_DIR; do
 		exit 1
 	fi
 
-    PATCHES=`(cd $dir && ls *.patch | sort) 2> /dev/null`
+    PATCHES=`(cd $dir && ls *.patch | sort) 2>/dev/null`
 
     if [ -z "$PATCHES" ]; then
       echo "No android-patches found in directory '$dir'"

@@ -1,15 +1,178 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ##################################################################################
-# dk_load(filename)
+# dk_load(var)
 #
-#	load a ${filename}.cmake file located in the DKCMake path 
+#	load a .cmake file and parse/load all of it's containing dk_function file recursivley 
 #
-#	@filename	- TODO
+#	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
-macro(dk_load filename)
-	if(NOT EXISTS ${DKCMAKE}/${filename}.cmake)
-		message(FATAL_ERROR "${DKCMAKE}/${filename}.cmake: file not found")
+macro(dk_load var)
+	#dk_debugFunc(${ARGV})
+	
+	string(STRIP ${var} fn)
+	get_filename_component(name_we "${fn}" NAME_WE)
+	if("${name_we}" STREQUAL "DKMAKE")
+		#TESTME
+		dk_dirname("${fn}" fnDir)
+		if(fnDir)
+			set(fn ${fnDir})
+		endif()
+		dk_basename("${fn}" fnName)
+		if(fnName)
+			set(fn ${fnName})
+		endif()
+	else()
+		set(fn ${name_we})
 	endif()
-	include(${DKCMAKE}/${filename}.cmake)
+	
+	#NOTE: Loading a file with the name of an existing function will cause this to fail
+	#if(COMMAND ${fn})
+	#	dk_echo("fn:${fn}  dk_load(${fn}) function already loaded")
+	#if(COMMAND ${var})
+	#	dk_echo("var:${var}    dk_load(${var}) function already loaded")
+	#else()
+		dk_parseFunctionsAndLoad(${fn} ${var})
+	#endif()
 endmacro()
+
+
+
+
+macro(dk_parseFunctionsAndLoad fn fpath)
+	#dk_echo("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
+	
+	if(NOT dk_load_list)
+		set(dk_load_list "" CACHE INTERNAL "")
+	endif()
+	
+	# allow only dk_nnn fuction names 
+	#if(NOT "${fn}" MATCHES "[Dd][Kk]_[A-Za-z0-9_]")
+	#	dk_echo(WARNING "${fn} is NOT a valid function name")
+	#endif()
+	
+	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
+		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
+	elseif(EXISTS ${fpath})
+		set(${fn}_file ${fpath})
+	else()
+		dk_error("${fpath}: file not found")
+	endif()
+			
+	if(${${fn}_file} IN_LIST dk_load_list)
+		#dk_debug("dk_load(${fn}) function already in list @ ${${fn}_file}")
+		#dk_verbose("dk_load_list = ${dk_load_list}")
+	else()
+		#dk_verbose("loading ${${fn}_file}")
+		list(APPEND dk_load_list "${${fn}_file}")
+				
+		#dk_verbose("${fn}_file = ${${fn}_file}")
+		file(READ ${${fn}_file} ${fn}_contents)
+				
+		## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
+		string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
+		unset(${fn}_contents)
+		list(REMOVE_DUPLICATES ${fn}_matches)
+		foreach(${fn}_item ${${fn}_matches})
+			if(NOT ${fn}_item)
+				continue()
+			endif()
+				
+			#dk_verbose("item-in = ${${fn}_item}")
+				
+			## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+			string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_item ${${fn}_item})
+			#dk_verbose("item-out = ${${fn}_item}")
+				
+			string(STRIP ${${fn}_item} ${fn}_item)
+			string(REPLACE "\t" "" ${fn}_item ${${fn}_item})
+			string(REPLACE "\r" "" ${fn}_item ${${fn}_item})
+			string(REPLACE "\n" "" ${fn}_item ${${fn}_item})
+			string(REPLACE "(" "" ${fn}_item ${${fn}_item})
+			#dk_verbose("item-stripped = ${${fn}_item}")
+					
+			#dk_verbose("${fn}_item  ${${fn}_item}")
+			if(${${fn}_item} IN_LIST dk_load_list)
+				#dk_verbose("${fn} -> ${${fn}_item} already in list")
+				continue()
+			elseif(${${fn}_item} STREQUAL ${fn})
+				#dk_verbose("${fn} -> ${${fn}_item} item cannot load itself")
+				continue()
+			elseif(COMMAND ${${fn}_item})
+				#dk_verbose("${fn} -> ${${fn}_item} already loaded")
+				continue()
+			else()
+				#dk_verbose("${fn} -> loading ${${fn}_item}")
+				dk_load(${${fn}_item})
+			endif()
+		endforeach()
+			
+		if(NOT "${${fn}_file}" STREQUAL "${DKSCRIPT_PATH}")
+			dk_echo("${fn} -> include(${${fn}_file})")
+			include(${${fn}_file})
+		endif()
+		
+		### variable clean-up ###
+		unset(${fn}_file)
+		unset(${fn}_item)
+		unset(${fn}_matches)
+	endif()
+endmacro()
+
+function(dk_parseFunctionsAndLoadFromString str)
+	#dk_echo("dk_debugFunc(${ARGV})") #dk_debugFunc(${ARGV})
+	
+	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
+	string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" matches "${str}")
+	unset(str)
+	list(REMOVE_DUPLICATES matches)
+	foreach(item ${matches})
+		if(NOT item)
+			continue()
+		endif()
+				
+		#dk_verbose("item-in = ${item}")
+				
+		## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+		string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" item ${item})
+		#dk_verbose("item-out = ${item}")
+				
+		string(STRIP ${item} item)
+		string(REPLACE "\t" "" item ${item})
+		string(REPLACE "\r" "" item ${item})
+		string(REPLACE "\n" "" item ${item})
+		string(REPLACE "(" "" item ${item})
+		#dk_verbose("item-stripped = ${item}")
+				
+		#dk_verbose("item  ${item}")
+		if(${item} IN_LIST dk_load_list)
+			#dk_verbose("${item} already in list")
+			continue()
+		elseif(COMMAND ${item})
+			#dk_verbose("${item} already loaded")
+			continue()
+		else()
+			#dk_verbose("loading ${item}")
+			dk_load(${item})
+		endif()
+	endforeach()
+endfunction(dk_parseFunctionsAndLoadFromString)
+
+#if(NOT dk_load IN_LIST dk_load_list) 
+#	set(dk_load_list dk_load CACHE INTERNAL "")
+#endif()
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

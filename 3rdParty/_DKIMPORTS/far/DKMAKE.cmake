@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # http://findandreplace.sourceforge.net/
 # https://sourceforge.net/projects/findandreplace/files/latest/download
 # https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip/download
@@ -11,4 +12,4 @@ endif()
 
 
 ### IMPORT ###
-dk_import(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip ${3RDPARTY}/FAR-2.0.3-win)
+dk_import(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip ${DK3RDPARTY_DIR}/FAR-2.0.3-win)

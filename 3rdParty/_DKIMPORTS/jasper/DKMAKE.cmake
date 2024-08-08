@@ -1,8 +1,10 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/jasper-software/jasper.git
 
 
 ### IMPORT ###
-dk_import(https://github.com/jasper-software/jasper.git)
+#dk_import(https://github.com/jasper-software/jasper.git)
+dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zip)
 
 
 ### LINK ###
@@ -23,7 +25,7 @@ WIN_dk_libRelease		(${JASPER}/${OS}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${JASPER})
+dk_configure(${JASPER})
 
 
 ### COMPILE ###

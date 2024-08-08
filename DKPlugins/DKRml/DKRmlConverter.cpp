@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -326,6 +326,14 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		if(scripts[i]->HasAttribute("src"))
 			src = scripts[i]->GetAttribute("src")->Get<Rml::String>();
 		DKString inner = scripts[i]->GetInnerRML();
+		
+		// html escape sequences
+		replace(inner, "&amp;", "&");
+		replace(inner, "&lt;", "<");
+		replace(inner, "&gt;", ">");
+		replace(inner, "&quot;", "\"");
+		replace(inner, "&apos;", "\'");
+		
 		scripts[i]->SetProperty("display", "none");
 		if(!src.empty()){
 			if(has(processed, src))
@@ -364,7 +372,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	}
 
 //DEBUG - Lets see the code
-#ifdef DKTODO
+#ifdef DKTEST
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();

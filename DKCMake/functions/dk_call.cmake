@@ -1,12 +1,28 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ##################################################################################
-# dk_Call(func) parameters
+# dk_call(func) args
 #
-#	call a function and pass arguments
+#	load a ${func}.cmake file located in the DKCMake path and call the function with arguments
 #
-#	@func	- TODO
+#	@func				- The name of the .cmake function file as well as the name of the function
+#	@args (optional) 	- The arguments to pass to the function
 #
-macro(dk_call func) #parameters
-	dk_cmakeLanguage("${func}($ARGN)")
-endmacro()
+function(dk_call func) #parameters
+	dk_debugFunc(${ARGV})
+	
+	dk_load(${func})
+	dk_eval("${func}($ARGN)")
+endfunction()
+
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

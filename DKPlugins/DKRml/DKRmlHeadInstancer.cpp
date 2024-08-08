@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -146,8 +146,8 @@ bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name){
 	return true;
 }
 
-bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType RMLUI_UNUSED_PARAMETER(type)){
-	RMLUI_UNUSED(type);
+bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType type){
+	DK_UNUSED(type);
 	const Rml::String& tag = parser->GetParseFrame()->tag;
 
 	// Store the title

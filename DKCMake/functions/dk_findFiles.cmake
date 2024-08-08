@@ -1,25 +1,41 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ###############################################################################
-# dk_findFiles(path pattern) RECURSE RELATIVE
+# dk_findFiles(path pattern rtn_var) RECURSE
 #
-#	Search for a file using a pattern I.E. *.txt
+#	Search for files within a path matching a pattern
 #
-#	@pattern		- The pattern to search for
+#	@path				- The path to search 
+#	@pattern			- The pattern to search for
+#	@rtn_var				- Returns the list of file(s) if found
+#   RECURSE (optional) 	- Search the path recursivly 
 #
-function(dk_findFiles path pattern RESULT)
-	DKDEBUGFUNC(${ARGV})
+function(dk_findFiles path pattern rtn_var)
+	dk_debugFunc(${ARGV})
 	
-	dk_includes("${ARGN}" "RECURSE" recurse)
-	if(${recurse})
-		file(GLOB_RECURSE files "${path}/" "${path}/${pattern}")
+	dk_getOption(RECURSE ${ARGV})
+
+	if(RECURSE)
+		file(GLOB_RECURSE findFiles "${path}/" "${path}/${pattern}")
 	else()
-		file(GLOB files "${path}/" "${path}/${pattern}")
+		file(GLOB findFiles "${path}/" "${path}/${pattern}")
 	endif()
-	if(NOT files)
-		dk_error("files is invalid")
+	if(NOT findFiles)
+		dk_error("findFiles is invalid")
 		return()
 	endif()
-	dk_debug(files)
-	set(${RESULT} ${files} PARENT_SCOPE)
+	dk_printVar(findFiles)
+	set(${rtn_var} ${findFiles} PARENT_SCOPE)
+endfunction()
+
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
 endfunction()

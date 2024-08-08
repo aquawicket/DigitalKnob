@@ -1,4 +1,5 @@
-include_guard()
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
 ###############################################################################
 # dk_getArgIdentifiers(ARGV)
@@ -8,15 +9,16 @@ include_guard()
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
-	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+	dk_debugFunc(${ARGV})		# called in dk_debugFunc
+
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
 		return()
 	endif()
 	get_cmake_property(varNames VARIABLES)
 	set(index 0)
-	unset(names)
-	unset(ARGI)
+	dk_unset(names)
+	dk_unset(ARGI)
 	while(${index} LESS ${ARGV_LENGTH})
 		list(APPEND names ARGV${index})
 		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
@@ -33,11 +35,22 @@ function(dk_getArgIdentifiers ARGV)
 				#endif()
 				dk_listReplace(names ARGV${index} ${varName})
 				set(ARGI${index} ${varName} CACHE INTERNAL "")
-				#message(STATUS "ARGI${index} == ${ARGI${index}}")
+				#dk_echo(STATUS "ARGI${index} == ${ARGI${index}}")
 				break()
 			endif()
 		endforeach()
 		math(EXPR index "${index}+1")
 	endwhile()
 	set(ARGI ${names} CACHE INTERNAL "")
+endfunction()
+
+
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
 endfunction()

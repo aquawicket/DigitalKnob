@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -31,7 +31,7 @@
 #include "DK/DKString.h"
 
 //WARNING_DISABLE
-#ifndef WIN32
+#ifndef WIN
 	#include <limits.h>
 	#include <stdlib.h>
 #endif
@@ -51,7 +51,7 @@ public:
 	static bool DoubleClick();
 	static bool DrawTextOnScreen(const DKString& text);
 	
-	//Basically popen. Takes same parameters along with a return reuslt value for pipes. 
+	//Basically popen. Takes same parameters along with a return result value for pipes. 
 	static bool Execute(const DKString& command, const DKString& mode, DKString& stdouterr, int& rtncode);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://developer.apple.com/documentation/MediaPlayer?language=objc
 
 if(NOT APPLE)

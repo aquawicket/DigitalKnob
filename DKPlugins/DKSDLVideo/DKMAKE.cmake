@@ -1,6 +1,6 @@
-IF(WIN)
+if(WIN)
 	RETURN()
-ENDIF()
+endif()
 
 dk_depend(waave)
 dk_depend(DKVideo)

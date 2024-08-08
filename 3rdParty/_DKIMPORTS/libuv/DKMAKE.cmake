@@ -1,14 +1,17 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/libuv/libuv.git
 
 
 ### DEPEND ###
-dk_depend(iphlpapi.lib)
-dk_depend(userenv.lib)
+dk_depend(iphlpapi)
+dk_depend(userenv)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libuv/libuv.git TAG 2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef)
 #dk_import(https://github.com/libuv/libuv.git)
+#dk_import(https://github.com/libuv/libuv/archive/refs/tags/v1.44.2.zip)
+#dk_import(https://github.com/libuv/libuv.git TAG 2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef)
+dk_import(https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef.zip)
 
 
 ### LINK ###
@@ -28,7 +31,7 @@ WIN_RELEASE_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${L
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
+dk_configure(${LIBUV})
 
 
 ### COMPILE ###

@@ -28,7 +28,7 @@ set(SDLIMAGE_SUPPORT_XV ON CACHE BOOL "Support for XV file format")
 #set(SDLIMAGE_SUPPORT_WEBP OFF CACHE BOOL "Support for WEBP file format")
 #set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 
-##ADDED BY DIGITALKNOB
+##ADDED BY DigitalKnob
 	IF(SDLIMAGE_SUPPORT_BMP)
 		add_definitions(-DLOAD_BMP)
 	ENDIF()
@@ -98,7 +98,7 @@ set(SDLIMAGE_SUPPORT_XV ON CACHE BOOL "Support for XV file format")
 	IF(ZLIB_INCLUDE_DIR)
 		include_directories(${ZLILB_INCLUDE_DIR})
 	ENDIF()
-##ADDED BY DIGITALKNOB
+##ADDED BY DigitalKnob
 	
 		
 set(SDLIMAGE_SRC

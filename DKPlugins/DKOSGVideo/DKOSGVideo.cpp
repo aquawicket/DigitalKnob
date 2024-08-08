@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -132,7 +132,7 @@ void DKOSGVideo::unloaddlls(){
 		DKERROR("DKOSGVideo::loaddlls(): swresample-1.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avutil-54.dll"))
 		DKERROR("DKOSGVideo::loaddlls(): avutil-54.dll did not unload \n");
-#endif //WIN32
+#endif //WIN
 }
 */
 

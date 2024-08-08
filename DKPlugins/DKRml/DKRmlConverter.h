@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -44,7 +44,7 @@ public:
 	bool ClickIframe(DKEvents* event);
 	bool MouseOverIframe(DKEvents* event);
 	bool Encode(std::string& data);
-#ifdef USE_tidy_html5
+#if HAVE_tidy_html5
 	bool TidyFile(const DKString& in, DKString& out);
 #endif
 	bool GetOuterHtml(Rml::Element* element, DKString& string);

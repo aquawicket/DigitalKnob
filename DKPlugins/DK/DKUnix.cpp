@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifndef WIN32
+#ifndef WIN
 #include "DK/DKUnix.h"
 #include "DK/DKFile.h"
 
@@ -154,4 +154,4 @@ void DKUnix::restoreTermios(void) {
 	// system("stty cooked"); // Reset terminal to normal "cooked" mode
 }
 
-#endif //!WIN32
+#endif //!WIN

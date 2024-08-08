@@ -17,7 +17,7 @@ dk.display.end = function dk_display_end(){
 	dk.close("DKDisplay/DKDisplay.html");
 }
 
-dk.display..onevent = function dk_display_onevent(event){
+dk.display.onevent = function dk_display_onevent(event){
 	console.log("DKDisplay_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id === "DKDisplay_Button"){
 		DK_TurnOffMonitor();

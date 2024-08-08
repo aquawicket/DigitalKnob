@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -31,15 +31,16 @@
 
 //WARNING_DISABLE
 #include "SDL.h"
-#include "RmlUi/Core/RenderInterface.h"
+#include "RmlUi/Core/RenderInterfaceCompatibility.h"	// Legacy Rml RenderInterface
+//#include "RmlUi/Core/RenderInterface.h"
 //WARNING_ENABLE
 
 
-class DKSDLRmlRenderer : public Rml::RenderInterface
+class DKSDLRmlRenderer : public Rml::RenderInterfaceCompatibility	// Legacy Rml RenderInterface
 {
 public:
     DKSDLRmlRenderer(SDL_Renderer* renderer, SDL_Window* screen);
-
+		
 	/// Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 	void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation) override;
 
@@ -65,7 +66,7 @@ public:
 
 	/// Called by RmlUi when it wants to set the current transform matrix to a new matrix.
 	void SetTransform(const Rml::Matrix4f* transform) override;
-
+	
 private:
     SDL_Renderer* mSdlRenderer;
     int mWidth;

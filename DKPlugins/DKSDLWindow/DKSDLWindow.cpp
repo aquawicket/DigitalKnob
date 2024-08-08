@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -32,8 +32,10 @@
 
 //WARNING_DISABLE
 #include "SDL_syswm.h"
+#if HAVE_glew
+	#include <GL/glew.h>
+#endif
 #if WIN
-    #include <GL/glew.h>
 	#include <GL/gl.h>
 #endif
 #if MAC
@@ -206,11 +208,11 @@ bool DKSDLWindow::Init(){
         SDL_Quit();
 		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
-#	if WIN
+	#if HAVE_glew
 		GLenum err = glewInit();
 		if (err != GLEW_OK)
 			DKERROR("GLEW ERROR:\n"); // "+glewGetErrorString(err)+"\n");
-#	endif
+	#endif
 #endif
     //Set window Title
     DKString appName;
@@ -341,6 +343,10 @@ bool DKSDLWindow::Init(){
     if(has(gl_vendor, "Microsoft"))
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
 #endif
+
+//#if ANDROID
+//    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "Android Test", "Message box test sent from C++", window);
+//#endif
 
     DKClass::DKCreate("DKWindow");
     return true;

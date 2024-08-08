@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ### INSTALL ###
 if(LINUX)
 	dk_set(CURRENT_DIR /usr)

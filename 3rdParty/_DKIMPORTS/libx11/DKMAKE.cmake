@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/mirror/libX11.git
 # https://www.x.org/
 # https://www.x.org/releases/individual/lib/
@@ -5,8 +6,9 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.1.zip)
 #dk_import(https://github.com/mirror/libX11.git)
+dk_import(https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.1.zip)
+
 
 
 ### LINK ###
@@ -19,8 +21,9 @@ WIN_dk_libRelease	(${LIBX11}/${OS}/${RELEASE_DIR}/libx11.lib)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${LIBX11}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueShell		(make)
+DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+
 RELEASE_dk_setPath		(${LIBX11}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueShell	(make)
+RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+
+dk_build				(${LIBX11})

@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://sourceware.org/newlib/libm.html
 
 ANDROID_dk_depend(android-ndk)

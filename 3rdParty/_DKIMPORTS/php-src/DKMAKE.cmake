@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/php/php-src.git
 # https://www.php.net
 # https://www.php.net/distributions/php-8.0.9.tar.gz
@@ -16,5 +17,7 @@ dk_depend(vc_redist) #for VCRUNTIME140.dll
 
 
 ### IMPORT ###
-dk_import(https://windows.php.net/downloads/releases/php-8.2.1-Win32-vs16-x86.zip)
 #dk_import(https://github.com/php/php-src.git)
+#dk_import(https://windows.php.net/downloads/releases/php-8.2.7-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip)
+

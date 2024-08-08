@@ -1,12 +1,14 @@
-# https://github.com/bulletphysics/bullet3
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+# https://github.com/bulletphysics/bullet3.git
 # https://code.google.com/archive/p/bullet
 # https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 
 ### IMPORT ###
-#dk_import(https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip)
-dk_import(https://github.com/bulletphysics/bullet3.git)
+#dk_import(https://github.com/bulletphysics/bullet3.git)
+dk_import(https://github.com/bulletphysics/bullet3/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###
@@ -16,10 +18,8 @@ if(ALL_LIBS)
 	dk_enable(Bullet3Common)
 	dk_enable(Bullet3Dynamics)
 	dk_enable(Bullet3Geometry)
-	if(NOT APPLE AND NOT RASPBERRY AND NOT EMSCRIPTEN)
-		dk_enable(Bullet3OpenCL)
-		dk_enable(Bullet3Serialize)
-	endif()
+	#dk_enable(Bullet3OpenCL)
+	#dk_enable(Bullet3Serialize)
 	dk_enable(BulletCollision)
 	dk_enable(BulletDynamics)
 	dk_enable(BulletInverseDynamics)
@@ -248,9 +248,9 @@ WIN_dk_set(BULLET3_CMAKE
 
 
 ### GENERATE ###
-#dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
-#UNIX_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_PYBULLET=ON -DBUILD_PYBULLET_NUMPY=ON -DUSE_DOUBLE_PRECISION=ON -DBT_USE_EGL=ON ${BULLET3})
-dk_queueCommand(${DKCMAKE_BUILD} ${BULLET3})
+#dk_configure(${BULLET3} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF)
+#UNIX_dk_configure(${BULLET3} -DBUILD_PYBULLET=ON -DBUILD_PYBULLET_NUMPY=ON -DUSE_DOUBLE_PRECISION=ON -DBT_USE_EGL=ON)
+dk_configure(${BULLET3})
 
 
 ### COMPILE ###

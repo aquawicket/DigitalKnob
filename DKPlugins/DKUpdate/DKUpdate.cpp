@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -39,18 +39,18 @@
 
 //////////////////////////////////////
 //     Default update files
-// win32     - http://DigitalKnob.com/Download/DKApp.exe
+// win_x86     - http://DigitalKnob.com/Download/DKApp.exe
 // win63     - http://DigitalKnob.com/Download/DKApp_64.exe
-// mac32     - http://DigitalKnob.com/Download/DKApp_mac32.zip
-// mac64     - http://DigitalKnob.com/Download/DKApp_mac64.zip
-// linux32   - http://DigitalKnob.com/Download/DKApp_linux32.zip
-// linux64   - http://DigitalKnob.com/Download/DKApp_linux64.zip
-// ios32     - http://DigitalKnob.com/Download/DKApp_ios32.zip
-// ios64     - http://DigitalKnob.com/Download/DKApp_ios64.zip
-// iossim32  - http://DigitalKnob.com/Download/DKApp_iossim32.zip
-// iossim64  - http://DigitalKnob.com/Download/DKApp_iossim64.zip
-// android32 - http://DigitalKnob.com/Download/DKApp.apk
-// android64 - http://DigitalKnob.com/Download/DKApp_64.apk
+// mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
+// mac_x86_64     - http://DigitalKnob.com/Download/DKApp_mac_x86_64.zip
+// linux_x86   - http://DigitalKnob.com/Download/DKApp_linux_x86.zip
+// linux_x86_64   - http://DigitalKnob.com/Download/DKApp_linux_x86_64.zip
+// ios_arm32     - http://DigitalKnob.com/Download/DKApp_ios_arm32.zip
+// ios_arm64     - http://DigitalKnob.com/Download/DKApp_ios_arm64.zip
+// iossim_x86  - http://DigitalKnob.com/Download/DKApp_iossim_x86.zip
+// iossim_x86_64  - http://DigitalKnob.com/Download/DKApp_iossim_x86_64.zip
+// android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
+// android_arm64 - http://DigitalKnob.com/Download/DKApp_64.apk
 
 DKString DKUpdate::url;
 
@@ -64,44 +64,44 @@ bool DKUpdate::Init(){
 	//DKFile::RemoveExtention(app);
 	DKString downloads = "http://DigitalKnob.com/Download/";
 	
-#ifdef WIN32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]", url);
+#if WIN_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN_X86]", url);
 	if(url.empty()){ url = downloads+app; }
 #endif
-#ifdef WIN64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", url);
+#if WIN_X86_64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN_X86_64]", url);
 	if(url.empty()){ url = downloads+app; }
 #endif
-#ifdef MAC32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", url);
-	if(url.empty()){ url = downloads+app+"_mac32.zip"; }
+#if MAC_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86]", url);
+	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
 #endif
-#ifdef MAC64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", url);
-	if(url.empty()){ url = downloads+app+"_mac64.zip"; }
+#if MAC_X86_64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86_64]", url);
+	if(url.empty()){ url = downloads+app+"_mac_x86_64.zip"; }
 #endif
-#ifdef LINUX32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]", url);
-	if(url.empty()){ url = downloads+app+"_linux32.zip"; }
+#ifdef LINUX_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
+	if(url.empty()){ url = downloads+app+"_linux_x86.zip"; }
 #endif
-#ifdef LINUX64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", url);
-	if(url.empty()){ url = downloads+app+"_linux64.zip"; }
+#if LINUX_X86_64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86_64]", url);
+	if(url.empty()){ url = downloads+app+"_linux_x86_64.zip"; }
 #endif
-#ifdef IOS32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]", url);
-	if(url.empty()){ url = downloads+app+"_ios32.zip"; }
+#if IOS_ARM32
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM32]", url);
+	if(url.empty()){ url = downloads+app+"_ios_arm32.zip"; }
 #endif
-#ifdef IOS64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", url);
-	if(url.empty()){ url = downloads+app+"_ios64.zip"; }
+#if IOS_ARM64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM64]", url);
+	if(url.empty()){ url = downloads+app+"_ios_arm64.zip"; }
 #endif
-#ifdef ANDROID32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID32]", url);
+#if ANDROID_ARM32
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
-#ifdef ANDROID64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]", url);
+#if ANDROID_ARM64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM64]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
 
@@ -222,7 +222,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	//TODO - recursive plugin file downloading
 	
 	//ok, here we are going to copy the url to the assets folder
-	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/DKApps/TradePost/DKBrowser
+	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/Development/DKApps/TradePost/DKBrowser
 
 	//first check that the url exists
 	DKCurl::Instance("DKCurlUpdate");

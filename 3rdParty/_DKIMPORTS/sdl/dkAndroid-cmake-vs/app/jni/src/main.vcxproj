@@ -138,7 +138,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
-      <AdditionalDependencies>$(SDL2)\android32\Debug\libSDL2.a;$(SDL2_image)\android32\lib\Debug\SDL_image.a;$(SDL2_ttf)\android32\lib\Debug\SDL_ttf.a;$(FREETYPE)\android32\Debug\libfreetype.a</AdditionalDependencies>
+      <AdditionalDependencies>$(SDL2)\android_arm32\Debug\libSDL2.a;$(SDL2_image)\android_arm32\lib\Debug\SDL_image.a;$(SDL2_ttf)\android_arm32\lib\Debug\SDL_ttf.a;$(FREETYPE)\android_arm32\Debug\libfreetype.a</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -149,7 +149,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
-      <AdditionalDependencies>$(SDL2)\android32\Release\libSDL2.a;$(SDL2_image)\android32\lib\Release\SDL_image.a;$(SDL2_ttf)\android32\lib\Release\SDL_ttf.a;$(FREETYPE)\android32\Release\libfreetype.a</AdditionalDependencies>
+      <AdditionalDependencies>$(SDL2)\android_arm32\Release\libSDL2.a;$(SDL2_image)\android_arm32\lib\Release\SDL_image.a;$(SDL2_ttf)\android_arm32\lib\Release\SDL_ttf.a;$(FREETYPE)\android_arm32\Release\libfreetype.a</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">

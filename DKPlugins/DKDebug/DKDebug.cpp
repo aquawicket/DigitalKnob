@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -25,6 +25,7 @@
 */
 
 //https://oroboro.com/stack-trace-on-crash
+#ifdef HAVE_stackwalker
 
 #include "DK/stdafx.h"
 #include "DKDebug/DKDebug.h"
@@ -35,8 +36,8 @@
 #endif
 #include <stdio.h>
 
-#if WIN32
-#include "StackWalker.h"
+#if WIN
+	#include "StackWalker.h"
 #include <tchar.h>
 #include <fstream>
 // secure-CRT_functions are only available starting with VC8
@@ -151,10 +152,10 @@ static void InitUnhandledExceptionFilter(){
 		s_bUnhandledExeptionFilterSet = TRUE;
 	}
 }
-#endif //WIN32
+#endif //WIN
 
 // https://panthema.net/2008/0901-stacktrace-demangled/
-#if !WIN32 && !ANDROID
+#if !WIN && !ANDROID
 #include <execinfo.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -224,7 +225,7 @@ bool DKDebug::Init(){
 #endif
 	InitUnhandledExceptionFilter();
 #endif
-#if !WIN32 && !ANDROID
+#if !WIN && !ANDROID
 	signal(SIGABRT, handler);
 	signal(SIGSEGV, handler);
 	signal(SIGBUS,  handler);
@@ -256,7 +257,7 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	//DKDEBUGFUNC(input, output);  //EXCESSIVE LOGGING
 	DK_UNUSED(input);
 	DK_UNUSED(output);
-#if WIN32
+#if WIN
 	DKWARN("########## C++ CALL STACK ##########\n");
 	StackWalkerToConsole sw;
 	sw.ShowCallstack(GetCurrentThread(), NULL); // output to console
@@ -266,3 +267,5 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	return DKREDINFO("not implemented on this OS \n");
 #endif
 }
+
+#endif //HAVE_stackwalker

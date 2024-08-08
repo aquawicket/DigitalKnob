@@ -1,0 +1,35 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
+dk_load(dk_eval)
+dk_load(dk_debugFunc)
+#dk_load(d_k_replaceAll)
+
+###############################################################################
+# dk_createPrefixMacro(func prefix_list)
+#
+#	Prefix a function with <prefix_list>_ macros. Calling the <prefix>_function will only be called if the <prefix_list> are variable that evaluate to true.
+#
+#	@prefix	- The prefix to prepend to the function name.    I.E.    Test_MyFunction()
+#	@func	- The func of the function to create aliases for
+#
+function(dk_createPrefixMacro func) #ARGN
+	#dk_debugFunc(${ARGV})
+	
+	set(${ARGN})
+	#d_k_replaceAll("${ARGN}"  ";"  "_"  prefix_name)
+	string(REPLACE ";" "_" prefix_name "${ARGN}")
+	#d_k_replaceAll("${ARGN}"  ";"  " AND "  prefix_if)
+	string(REPLACE ";" " AND " prefix_if "${ARGN}")
+	set(MACRO_STRING "macro(${prefix_name}_${func})\n   if(${prefix_if})\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	#dk_printVar(MACRO_STRING)
+	dk_eval(${MACRO_STRING})
+endfunction()
+
+
+
+
+function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+	dk_debugFunc(${ARGV})
+	
+	dk_todo()
+endfunction()

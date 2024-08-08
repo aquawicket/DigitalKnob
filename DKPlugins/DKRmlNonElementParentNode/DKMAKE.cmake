@@ -1,0 +1,4 @@
+dk_depend(DKNonElementParentNode)
+
+dk_generateCmake(DKRmlNonElementParentNode)
+dk_assets(DKRmlNonElementParentNode)

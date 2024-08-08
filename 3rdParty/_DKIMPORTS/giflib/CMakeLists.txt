@@ -7,25 +7,25 @@ if(MSVC)
 endif()
 
 add_library(giflib
-  lib/dgif_lib.c
-  lib/egif_lib.c
-  lib/gif_err.c
-  lib/gif_font.c
-  lib/gif_hash.c
-  lib/gif_hash.h
-  lib/gif_lib.h
-  lib/gif_lib_private.h
-  lib/gifalloc.c
-  lib/quantize.c
+  dgif_lib.c
+  egif_lib.c
+  gif_err.c
+  gif_font.c
+  gif_hash.c
+  gif_hash.h
+  gif_lib.h
+  gif_lib_private.h
+  gifalloc.c
+  quantize.c
 )
 
 target_include_directories(giflib
   PRIVATE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   INTERFACE
   $<INSTALL_INTERFACE:include>
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 )
 
 target_compile_definitions(giflib
@@ -48,7 +48,7 @@ install(TARGETS giflib EXPORT giflib
 )
 
 install(FILES
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/gif_lib.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/gif_lib.h
   DESTINATION include
 )
 
@@ -58,14 +58,14 @@ install(EXPORT giflib
   NAMESPACE
     ${PROJECT_NAME}::
   DESTINATION
-    lib/cmake/${PROJECT_NAME}
+    cmake/${PROJECT_NAME}
 )
 
 install(FILES
   cmake/${PROJECT_NAME}-config.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
   DESTINATION
-    lib/cmake/${PROJECT_VERSION}
+    cmake/${PROJECT_VERSION}
 )
 
 export(TARGETS giflib

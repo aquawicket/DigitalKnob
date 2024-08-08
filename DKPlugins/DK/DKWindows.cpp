@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-#if WIN32
+#if WIN
 #include "DK/DKWindows.h"
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
@@ -52,7 +52,7 @@ HWND DKWindows::consoleWindow;
 
 extern int main(int argc, char **argv);
 
-//////////// WIN32 MAIN ////////////////////////////////////////////////////////////////////////////
+//////////// WIN MAIN ////////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 	DKDEBUGFUNC(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	UNREFERENCED_PARAMETER(hPrevInstance);
@@ -78,9 +78,9 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type){
 bool DKWindows::CpuInit(){
 	DKDEBUGFUNC();
 	//Init for DKWindows::CpuUsed()
-	PdhOpenQuery(NULL, NULL, &cpuQuery);
+	PdhOpenQuery(NULL, 0, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
-	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
+	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", 0, &cpuTotal);
 	PdhCollectQueryData(cpuQuery);
 	//Init for DKWindows::CpuUsedByApp()
 	SYSTEM_INFO sysInfo;
@@ -170,8 +170,12 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap.bmiHeader.biSizeImage = SCREEN_WIDTH * 4 * SCREEN_HEIGHT;
 	bitmap.bmiHeader.biClrUsed = 0;
 	bitmap.bmiHeader.biClrImportant = 0;
-	BYTE* sP = BYTE();
-	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), NULL, NULL);
+	#if _MSC_VER
+		BYTE* sP = BYTE();
+	#else
+		BYTE* sP = new BYTE;
+	#endif
+	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), nullptr, 0);
 	SelectObject(hdcTemp, hBitmap);
 	BitBlt(hdcTemp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hdc, 0, 0, SRCCOPY);
 	// clean up
@@ -199,8 +203,12 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap2.bmiHeader.biSizeImage = bm.bmWidth * 4 * bm.bmHeight;
 	bitmap2.bmiHeader.biClrUsed = 0;
 	bitmap2.bmiHeader.biClrImportant = 0;
-	BYTE* iP = BYTE();
-	HBITMAP hDIBMemBM  = ::CreateDIBSection( 0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, NULL, NULL );
+	#if _MSC_VER
+		BYTE* iP = BYTE();
+	#else
+		BYTE* iP = new BYTE;
+	#endif
+	HBITMAP hDIBMemBM  = ::CreateDIBSection(0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, nullptr, 0);
 	HBITMAP hOldBmp1  = (HBITMAP)::SelectObject(memDC1,hDIBMemBM);  
 	HBITMAP hOldBmp2  = (HBITMAP)::SelectObject(memDC2,hBmp);
 	BitBlt(memDC1, 0, 0, bm.bmWidth, bm.bmHeight, memDC2, 0, 0, SRCCOPY);
@@ -291,7 +299,7 @@ bool DKWindows::GetLastError(DKString& error){
 	DWORD errorMessageID = ::GetLastError();
 	if (errorMessageID == 0)
 		return true; //No error message has been recorded
-	LPSTR messageBuffer = nullptr;
+	LPSTR messageBuffer = NULL;
 	size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
 	std::string message(messageBuffer, size);
@@ -412,7 +420,7 @@ bool DKWindows::GetUsername(DKString& username){
 bool DKWindows::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	//bool bScalar = true;
-	HRESULT hr=NULL;
+	HRESULT hr = 0;
 	//bool decibels = false;
 	//bool scalar = false;
 	CoInitialize(NULL);
@@ -539,7 +547,7 @@ bool DKWindows::PressKey(WORD key){
 
 bool DKWindows::RefreshWindowsEnvironment(){
 	DKDEBUGFUNC();
-#if !WIN64
+#if !WIN_X86_64
 	PDWORD_PTR dwReturnValue = 0;
 	::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, dwReturnValue);
 	return true;
@@ -699,10 +707,15 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 
 	// https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4334?view=msvc-170
 	// Get size of color table.
-#if WIN32 && !WIN64
+#if WIN_X86
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
-#elif WIN64
-	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+#elif WIN_X86_64
+	#if _MSC_VER
+		SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+	#else
+		#include <stdint.h>
+		SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (INT64_C( 1) << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+	#endif
 #endif
 	// Create a device context with palette
 	HDC hDC = ::GetDC(NULL);
@@ -767,7 +780,7 @@ bool DKWindows::SetVolume(int& percent){
 	if(percent < 0)
 		percent = 0;
 	bool bScalar = true;
-    HRESULT hr=NULL;
+    HRESULT hr = 0;
     //bool decibels = false;
     //bool scalar = false;
     double newVolume = (double)percent / 100;
@@ -872,7 +885,7 @@ bool DKWindows::WheelDown(){
 
 bool DKWindows::WheelUp(){
 	DKDEBUGFUNC();
-	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
+	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, 0);
 	return true;
 }
 
@@ -899,4 +912,4 @@ bool DKWindows::PrintStack(){
 }
 */
 
-#endif //WIN32
+#endif //WIN

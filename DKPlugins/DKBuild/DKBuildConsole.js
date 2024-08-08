@@ -135,56 +135,56 @@ function DKBuildConsole_SelectOs() {
 		//console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
 		//if(arch === "i686" || arch === "x86"){
-			OSes.push("win32")
+			OSes.push("win_x86")
 		//}
 		//if(CPP_DK_GetOSArchitecture() === "x86_64")
 		//if(arch === "x86_64"){
-			OSes.push("win64")
+			OSes.push("win_x86_64")
 		//}
-		OSes.push("android32")
-		OSes.push("android64")
+		OSes.push("android_arm32")
+		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
-		//OSes.push("mac32")
-		OSes.push("mac64")
-		//OSes.push("ios32")
-		OSes.push("ios64")
-		//OSes.push("iossim32")
-		OSes.push("iossim64")
-		OSes.push("android32")
-		OSes.push("android64")
+		//OSes.push("mac_x86")
+		OSes.push("mac_x86_64")
+		//OSes.push("ios_arm32")
+		OSes.push("ios_arm64")
+		//OSes.push("iossim_x86")
+		OSes.push("iossim_x86_64")
+		OSes.push("android_arm32")
+		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
 		if(arch === "i686"){
-			OSes.push("linux32")
+			OSes.push("linux_x86")
 		}
 		else if(arch === "x86_64"){
-			OSes.push("linux64")
+			OSes.push("linux_x86_64")
 		}
 		else{
 			console.log("ERROR: Unrecognized architecture")
 		}
-		OSes.push("android32")
-		OSes.push("android64")
+		OSes.push("android_arm32")
+		OSes.push("android_arm64")
 		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
 		//if(arch = "amrv7l"){
-			OSes.push("raspberry32")
+			OSes.push("raspberry_arm32")
 		//}
 		//else if(arch = "amrv7l64")
-			//OSes.push("raspberry64")
+			//OSes.push("raspberry_arm64")
 		//}
-		//OSes.push("android32")
-		//OSes.push("android64")
+		//OSes.push("android_arm32")
+		//OSes.push("android_arm64")
 		//OSes.push("emscripten")
 	}
 		
@@ -417,13 +417,13 @@ function DKBuildConsole_Process() {
 
 function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win_x86_64"){
 		const exe_name = app+".exe"
 	}
-	else if(os === "linux32" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
 		const exe_name = app
 	}
-	else if(os === "mac32" || os === "mac64"){
+	else if(os === "mac_x86" || os === "mac_x86_64"){
 		const exe_name = app+".app/Contents/MacOS/wrapper"
 	}
 	else{
@@ -445,13 +445,13 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
 	var solution_path
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win_x86_64"){
 		solution_path = app_path+os+"/"+app+".sln"
 	}
-	else if(os === "mac32" || os === "mac64"){
+	else if(os === "mac_x86" || os === "mac_x86_64"){
 		solution_path = app_path+os+"/"+app+".xcodeproj"
 	}
-	else if(os === "linux32" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
 		//solution_path = app_path+os+"/"+app+".xcodeproj"
 		console.warn("the OS ("+os+") is not implemented")
 		return false
@@ -477,10 +477,10 @@ function DKBuildConsole_RunApp(os, app, type){
 
 function DKBuildConsole_OpenAppSolution(os, app){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win_x86_64"){
 		const solution_name = app+".sln"
 	}
-	else if(os === "mac32" || os === "mac64" || os === "ios32" || os === "ios64" || os === "iossim32" || os === "iossim64"){
+	else if(os === "mac_x86" || os === "mac_x86_64" || os === "ios_arm32" || os === "ios_arm64" || os === "iossim_x86" || os === "iossim_x86_64"){
 		const solution_name = app+".xcodeproj"
 	}
 	else{

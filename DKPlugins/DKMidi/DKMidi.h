@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_rtmidi
+#if HAVE_rtmidi
 #pragma once
 #ifndef DKMidi_H
 #define DKMidi_H

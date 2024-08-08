@@ -1,0 +1,78 @@
+Custom MsgBox script class
+__________________________
+
+UPDATE 1/2014: There are two aspects to this update -
+
+1) A minor bug fix: The msgbox scripts were using a string "ID1"
+in the Init sub that "primes the pump" for creating message windows.
+In some cases, for unknown reasons, the HTA can be left running
+(as seen in Task Manager) if the ID used is not a unique string.
+That problem was fixed.
+
+2) A new script and class provides an output window that
+can be written to during a script's running. It's fairly basic.
+See the demo script and help in the Output Window folder.
+
+  Ensuring that the message window works without leaving
+any instances of IE or mshta running is a tricky business.
+The first version of the output window left both an IE instance 
+and an mshta instance running on Win7, but not on XP!
+Stranger still, the window would fail to display if the Cls_HTA1
+variable (holding the HTA window reference) was not local to 
+the Show sub. The variable could be assigned to a class-global
+variable at the end of the sub to enable cleanup later, but
+a class-global variable used to set up the window would simply 
+fail to work! 
+  The versions of the scripts here have been tested on WinXP 
+and Win7 to ensure that they fully clean up all IE and mshta
+instances.
+
+
+--------------------------------------------
+** "MsgBox" folder: 
+--------------------------------------------
+
+    These are updated scripts that use a changed
+method from what worked on XP and earlier. Some ideas were borrowed 
+from Tom Lavedas, who frequents the VBScript newsgroup, but the major 
+change is based on a very odd hack that has been known online for some time. 
+This hack allows for creating an HTA window in script, which avoids security 
+problems and also allows for a "normal" looking MsgBox window.
+
+>> The latest version works on all systems, including Windows 8. <<
+
+
+  See the updated help for explanation of how everything works. For the
+most part the new (2012) version is the same as the older version. It is
+a self-sizing window that provides options for a listbox, textbox, icon/image
+and one or more buttons. The main difference with the newer version is
+just that it uses an HTA to avoid security restrictions.
+
+Files:
+
+Basic MsgBox Sample.vbs - A very basic message box demo.
+
+MsgWithList.vbs - is a demo of the new class that creates
+3 different message box windows.
+
+ pickafruit.vbs - is a simpler demo that shows how the selector and
+text input can be used together.
+
+The image files are for the demos. They will only show if you edit
+the scripts. Unfortunately, since these scripts create an IE/HTA
+window and write to it dynamically, there is no path for the document.
+That means that a relative path cannot be used for images. In other
+words, if you load a page from C:\pages you can have images in that
+page like so:  <IMG SRC="image1.jpg">
+...as long as image1.jpg is in the C:\pages folder. But in this case IE
+doesn't know the path of it's loaded document. It's officially "about:blank".
+So any images used for the Icon property must be entered with their full path.
+
+-----------------------------------------
+"Output Window" folder
+-----------------------------------------
+
+  See the help file in the folder. This is a simplified class
+that displays an updateable output window for use during
+script running.
+

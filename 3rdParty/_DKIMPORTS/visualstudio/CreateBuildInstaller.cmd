@@ -1,9 +1,13 @@
+@echo off
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+
+
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
-@echo off & %dkbatch%
+
 
 setlocal enabledelayedexpansion
 
-set "dkdownload=C:\Users\%USERNAME%\digitalknob\Download"
+set "dkdownload=%HOMEDRIVE%%HOMEPATH%\digitalknob\Download"
 if not exist "%dkdownload%" (
 	set "errorlevel=The folder %dkdownload% does not exist" 
 	Goto :Error
@@ -22,12 +26,12 @@ if not exist "%vs_community%" (
 )
 
 set /A i=0
-echo i = %i%
+call dk_echo i = %i%
 
 :: Loop through file and store lines into an array
 for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
 	set /A i+=1
-	echo i = !i!
+	call dk_echo i = !i!
 	set item=%%a
 	
 	::remove " 
@@ -45,41 +49,39 @@ for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
 set /a length=%length%-2  
 
 for /L %%i in (1,1,%length%) do (
-	echo !array[%%i]!
+	call dk_echo !array[%%i]!
 )
 
 :: We have the variables we need, so preform the task
 ::******************* BuildInstaller.cmd *********************
-(echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
+(call dk_echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do (echo --add !array[%%i]! !LF!) >> BuildInstaller.cmd
-(echo --lang en-US --passive --wait) >> BuildInstaller.cmd
+for /L %%i in (1,1,%length%) do (call dk_echo --add !array[%%i]! !LF!) >> BuildInstaller.cmd
+(call dk_echo --lang en-US --passive --wait) >> BuildInstaller.cmd
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::******************* Install.cmd *********************
 set "vs_setup=%dkdownload%\VisualStudio\vs_setup.exe"
-(echo %vs_setup% --noweb --noUpdateInstaller ^^) > Install.cmd
+(call dk_echo %vs_setup% --noweb --noUpdateInstaller ^^) > Install.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do (echo --add !array[%%i]! !LF!) >> Install.cmd
+for /L %%i in (1,1,%length%) do (call dk_echo --add !array[%%i]! !LF!) >> Install.cmd
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::****************************************
 :End
-echo errorlevel = %errorlevel%
-echo end
-pause
-exit /b
+	call dk_echo errorlevel = %errorlevel%
+	call dk_echo end
+	pause
+goto:eof
 ::****************************************
 
 ::****************************************
 :Error
-cls & Color 0c
-echo(
-echo Failed with error code: %errorlevel%
-Pause>nul
-exit /b
+	cls & Color 0c
+	call dk_echo(
+	call dk_echo Failed with error code: %errorlevel%
+	Pause>nul
+goto:eof
 ::**************************************** 
- 
-%DKEND% 

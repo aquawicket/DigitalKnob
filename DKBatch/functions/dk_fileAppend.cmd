@@ -1,0 +1,28 @@
+@echo off
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+
+::##################################################################################
+::# dk_fileAppend(<file> string)
+::#
+::#
+:dk_fileAppend
+	call dk_debugFunc 2
+	
+	if exist "%~1" (
+		echo %~2 >> "%~1"
+	) else (
+		echo %~2 > "%~1"
+	)
+goto:eof
+
+
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+	call dk_debugFunc 0
+	
+	call dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
+goto:eof

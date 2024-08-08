@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -63,7 +63,7 @@ public:
 #if WIN
 LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam);
-#endif //WIN32
+#endif //WIN
 
 REGISTER_OBJECT(DKHook, true);
 #endif //DKHook_H

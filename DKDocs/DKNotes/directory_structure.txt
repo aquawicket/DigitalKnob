@@ -1,6 +1,6 @@
 DIRECTORY STRUCTURE
 
-digitalknob/DK
+digitalknob/Development
 			git             <-clean git
 			/3rdParty
 			/DKApps

@@ -1,0 +1,19 @@
+result_variable = 2
+output_variable = [  3%] Building CXX object CMakeFiles/SMPEG.dir/MPEG.cpp.obj
+error_variable = In file included from C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0\MPEG.cpp:3:
+In file included from C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0/MPEG.h:34:
+In file included from C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0/MPEGstream.h:28:
+C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  133 |       register int r=(buffer[bitindex>>3]>>(7-(bitindex&7)))&1;
+      |       ^~~~~~~~
+C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0/MPEGaudio.h:139:7: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  139 |       register unsigned short a;
+      |       ^~~~~~~~
+C:\Users\aquawicket\digitalknob\Development\3rdParty\smpeg2-2.0.0\MPEG.cpp:447:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  447 |   register int i;
+      |   ^~~~~~~~
+3 errors generated.
+mingw32-make[3]: *** [CMakeFiles\SMPEG.dir\build.make:76: CMakeFiles/SMPEG.dir/MPEG.cpp.obj] Error 1
+mingw32-make[2]: *** [CMakeFiles\Makefile2:82: CMakeFiles/SMPEG.dir/all] Error 2
+mingw32-make[1]: *** [CMakeFiles\Makefile2:89: CMakeFiles/SMPEG.dir/rule] Error 2
+mingw32-make: *** [Makefile:123: SMPEG] Error 2

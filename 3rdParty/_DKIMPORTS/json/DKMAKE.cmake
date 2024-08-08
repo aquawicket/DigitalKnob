@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/nlohmann/json.git
 
 
@@ -8,7 +9,8 @@
 
 ### IMPORT ###
 #dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip)
-dk_import(https://github.com/nlohmann/json.git)
+#dk_import(https://github.com/nlohmann/json.git)
+dk_import(https://github.com/nlohmann/json/archive/refs/heads/develop.zip)
 
 
 ### LINK ###
@@ -18,7 +20,7 @@ dk_include(${JSON}/include/nlohmann)
 #dk_set(JSON_TESTS ON)
 if(JSON_TESTS)
 	### GENERATE ###
-	dk_queueCommand(${DKCMAKE_BUILD} ${JSON})
+	dk_configure(${JSON})
 
 
 	### COMPILE ###

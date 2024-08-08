@@ -1,11 +1,12 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/cacalabs/libcaca.git
 # http://caca.zoy.org/wiki/libcaca
 
 
 ### IMPORT ###
 #dk_import(http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
-dk_import(https://github.com/cacalabs/libcaca.git BRANCH main)
-
+#dk_import(https://github.com/cacalabs/libcaca.git BRANCH main)
+dk_import(https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include				(${LIBCACA}/include)
@@ -17,7 +18,7 @@ WIN_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 
 
 ### GENERATE ####
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBCACA})
+dk_configure(${LIBCACA})
 
 
 ### COMPILE ###

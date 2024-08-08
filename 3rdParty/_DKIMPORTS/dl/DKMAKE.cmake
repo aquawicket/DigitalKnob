@@ -1,8 +1,12 @@
-if(NOT ANDROID)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+if(NOT UNIX)
 	dk_undepend(dl)
 	dk_return()
 endif()
 
-dk_depend(android-ndk)
+ANDROID_dk_depend(android-ndk)
 
-dk_findLibrary(dl)
+dk_findLibrary(dl NO_HALT)
+
+LINUX_dk_lib		(dl)
+RASPBERRY_dk_lib	(dl)

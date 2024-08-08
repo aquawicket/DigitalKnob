@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+## https://github.com/icculus/smpeg.git
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
 
@@ -9,20 +11,23 @@ dk_depend(sdl)
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
 
+### PATCH ###
+dk_applyPatch(${SMPEG2} ${DKIMPORTS_DIR}/smpeg2/gcc6.patch.txt)
+
+
 ### LINK ###
 dk_include				(${SMPEG2})
-ANDROID_dk_libDebug		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-ANDROID_dk_libRelease	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-APPLE_dk_libDebug		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
-APPLE_dk_libRelease		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
-EMSCRIPTEN_dk_libDebug	(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-EMSCRIPTEN_dk_libRelease(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-LINUX_dk_libDebug		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-LINUX_dk_libRelease		(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-RASPBERRY_dk_libDebug	(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-RASPBERRY_dk_libRelease	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-WIN_dk_libDebug			(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
-WIN_dk_libRelease		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
+	WIN_dk_libRelease	(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
+elseif(APPLE)
+	APPLE_dk_libDebug	(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
+	APPLE_dk_libRelease	(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
+else()
+	dk_libDebug			(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
+endif()
+
 
 
 ### 3RDPARTY LINK ###
@@ -30,12 +35,15 @@ dk_set(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
 ### GENERATE ###
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
-APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
-EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
-LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
-RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
+dk_replaceAll("${DKCMAKE_BUILD}" "-std=c17"   ""  SMPEG2_BUILD)
+dk_replaceAll("${SMPEG2_BUILD}"  "-std=c++1z" ""  SMPEG2_BUILD)
+dk_replaceAll("${SMPEG2_BUILD}"  "  "         " " SMPEG2_BUILD)
+if(MSVC)
+	dk_queueCommand		(${SMPEG2_BUILD} ${SDL_CMAKE} ${SMPEG2})
+else()
+	dk_queueCommand		(${SMPEG2_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SMPEG2})
+endif()
+
 
 
 ### COMPILE ###

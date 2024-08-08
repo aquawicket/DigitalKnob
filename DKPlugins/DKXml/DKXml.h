@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,7 +29,7 @@
 #include "DK/DKClass.h"
 
 //WARNING_DISABLE
-#ifdef USE_libxml2
+#if HAVE_libxml2
 	#include "libxml/HTMLparser.h"
 #endif
 #include "pugixml.hpp"
@@ -71,7 +71,7 @@ public:
 	pugi::xml_document doc;
 
 	//Test libmxl2
-#ifdef USE_libxml2
+#if HAVE_libxml2
 	bool traverse_dom_trees(xmlNode* a_node);
 	bool test_libxml();
 #endif

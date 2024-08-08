@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
+#if HAVE_stackwalker
 #pragma once
 #ifndef DKDebug_H
 #define DKDebug_H
@@ -46,3 +46,4 @@ public:
 REGISTER_OBJECT(DKDebug, true);
 
 #endif //DKDebug_H
+#endif //HAVE_stackwalker

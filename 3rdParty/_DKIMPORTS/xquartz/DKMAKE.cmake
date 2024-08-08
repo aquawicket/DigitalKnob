@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.xquartz.org/
 # https://www.xquartz.org/releases/index.html
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
@@ -31,7 +32,7 @@ dk_depend(homebrew)
 
 ### INSTALL ###
 #IF(NOT EXISTS ${XQUARTZ})
-#	dk_download(${XQUARTZ_DL} ${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
+#	dk_download(${XQUARTZ_DL} ${DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
 #	dk_set(QUEUE_BUILD ON)
-#	MAC_dk_queueCommand(${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
+#	MAC_dk_queueCommand(${DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
 #ENDIF()

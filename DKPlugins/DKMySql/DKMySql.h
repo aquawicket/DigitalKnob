@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,7 +29,7 @@
 #define DKMySql_H
 
 //WARNING_DISABLE
-//#if defined (WIN32) || defined (WIN64)
+//#if WIN
   //#include <winsock.h>
   //#pragma warning (disable: 4514 4786)
   //#pragma warning( push, 3 )
@@ -38,14 +38,14 @@
 //#include <stdio.h>
 //#include <string.h>
 
-#if !defined (WIN32) && !defined (WIN64)
+#if !WIN
   #include <unistd.h>
 #endif
 //WARNING_ENABLE
 
 #include "DK/DK.h"
 
-#ifdef USE_mysql
+#ifdef HAVE_mysql
 	//WARNING_DISABLE
 	#include "mysql.h"
 	//WARNING_ENABLE
@@ -64,7 +64,7 @@ public:
 	bool Database(const DKString& database);
 	bool Query(DKString query, DKStringArray& results);
 
-#ifdef USE_mysql
+#ifdef HAVE_mysql
 	MYSQL mysql;
 #endif 
 

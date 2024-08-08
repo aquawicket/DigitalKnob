@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/aaronmjacobs/Boxer.git
 
 if(ANDROID OR RASPBERRY)
@@ -12,20 +13,26 @@ dk_depend(libgtk-3-dev)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aaronmjacobs/Boxer.git)
+#dk_import(https://github.com/aaronmjacobs/Boxer.git)
+dk_import(https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip)
+
 
 
 ### LINK ###
 dk_include			(${BOXER}/include)
 dk_include			(${BOXER}/${OS})
-UNIX_dk_libDebug	(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
-UNIX_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
-WIN_dk_libDebug		(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
-WIN_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
+
+if(MSVC)
+	WIN_dk_libDebug		(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
+	WIN_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
+else()
+	dk_libDebug			(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
+	dk_libRelease		(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
+endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${BOXER})
+dk_configure(${BOXER})
 
 
 ### COMPILE ###

@@ -1,4 +1,5 @@
-# https://github.com/babel/babel
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+# https://github.com/babel/babel.git
 # https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
 
 

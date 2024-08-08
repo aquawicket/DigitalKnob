@@ -1,8 +1,10 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/wasm3/wasm3.git
 
 
 ### IMPORT ###
-dk_import(https://github.com/wasm3/wasm3.git BRANCH main)
+#dk_import(https://github.com/wasm3/wasm3.git BRANCH main)
+dk_import(https://github.com/wasm3/wasm3/archive/refs/heads/main.zip)
 
 
 ### LINK ###
@@ -19,7 +21,7 @@ WIN_dk_libRelease		(${WASM3}/${OS}/source/${RELEASE_DIR}/m3.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${WASM3})
+dk_configure(${WASM3})
 
 
 ### COMPILE ###

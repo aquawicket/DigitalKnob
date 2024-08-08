@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -198,11 +198,11 @@ bool DKOSGWindow::CreateView(){
 	//Set the window title
 	DKString title = mTitle;
 
-#if WIN32 && !WIN64
-		title += " - WIN32";
+#if WIN_X86
+		title += " - WIN_X86";
 #endif
-#if WIN64
-		title += " - WIN64";
+#if WIN_X86_64
+		title += " - WIN_X86_64";
 #endif
 #if MAC
 		title += " - MAC";
@@ -461,7 +461,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 			(mod&osgGA::GUIEventAdapter::MODKEY_RIGHT_SHIFT) );
 
 #if WIN
-		// (~)Key - Show WIN32 Console
+		// (~)Key - Show Console
 		if(ctrl && ea.getUnmodifiedKey()=='`'){
 			if(IsWindowVisible(GetConsoleWindow())){
 				ShowWindow(GetConsoleWindow(),SW_HIDE);

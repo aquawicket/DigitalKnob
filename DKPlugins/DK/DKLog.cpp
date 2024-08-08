@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -61,32 +61,34 @@ DKString DKLog::log_hide = ""; //comma seperated
 bool DKLog::stacktrace_on_errors = false;
 bool DKLog::exception_on_errors = false;
 
+std::string DKLog::output_buffer;
+
 bool GetVersion(DKString& version){
 	DKString year;
-	DKBUILDYEAR(year);
+	GetBuildYear(year);
 	version = year;
 	DKString month;
-	DKBUILDMONTH(month);
+	GetBuildMonth(month);
 	version = version + "." + month;
 	DKString day;
-	DKBUILDDAY(day);
+	GetBuildDay(day);
 	version = version + "." + day;
 	DKString hour;
-	DKBUILDHOUR(hour);
-	version = version + hour;
-	/*
+	GetBuildHour(hour);
+	version = version + "-" + hour;
 	DKString minute;
-	DKBUILDMINUTE(minute);
-	version = version + minute;
+	GetBuildMinute(minute);
+	version = version + ":" + minute;
+	/*
 	DKString second;
-	DKBUILDMINUTE(second);
-	version = version + second;
+	GetBuildSecond(second);
+	version = version + ":" + second;
 	*/
 	return true;
 }
 
-bool GetBuildMonth(const char* buildDate, DKString& buildMonth){
-	buildMonth = buildDate;
+bool GetBuildMonth(DKString& buildMonth){
+	buildMonth = BUILD_DATE;
 	std::string::size_type found = buildMonth.find_first_of(" ");
 	buildMonth = buildMonth.substr(0, found);
 	if (buildMonth == "Jan")
@@ -116,45 +118,45 @@ bool GetBuildMonth(const char* buildDate, DKString& buildMonth){
 	return true;
 }
 
-bool GetBuildDay(const char* buildDate, DKString& buildDay){
-	buildDay = buildDate;
+bool GetBuildDay(DKString& buildDay){
+	buildDay = BUILD_DATE;
 	std::string::size_type foundA = buildDay.find_first_of(" ");
 	std::string::size_type foundB = buildDay.find_first_of(" ", foundA);
 	buildDay = buildDay.substr(foundA+1, foundB-1);
 	return true;
 }
 
-bool GetBuildYear(const char* buildDate, DKString& buildYear){
-	buildYear = buildDate;
+bool GetBuildYear(DKString& buildYear){
+	buildYear = BUILD_DATE;
 	std::string::size_type found = buildYear.find_last_of(" ");
 	buildYear = buildYear.substr(found+3);
 	return true;
 }
 
-bool GetBuildHour(const char* buildTime, DKString& buildHour){
-	buildHour = buildTime;
+bool GetBuildHour(DKString& buildHour){
+	buildHour = BUILD_TIME;
 	std::string::size_type found = buildHour.find_first_of(":");
 	buildHour = buildHour.substr(0, found);
 	return true;
 }
 
-bool GetBuildMinute(const char* buildTime, DKString& buildMinute){
-	buildMinute = buildTime;
+bool GetBuildMinute(DKString& buildMinute){
+	buildMinute = BUILD_TIME;
 	std::string::size_type foundA = buildMinute.find_first_of(":");
 	std::string::size_type foundB = buildMinute.find_first_of(":", foundA);
 	buildMinute = buildMinute.substr(foundA+1, foundB);
 	return true;
 }
 
-bool GetBuildSecond(const char* buildTime, DKString& buildSecond){
-	buildSecond = buildTime;
+bool GetBuildSecond(DKString& buildSecond){
+	buildSecond = BUILD_TIME;
 	std::string::size_type found = buildSecond.find_last_of(":");
 	buildSecond = buildSecond.substr(found+1);
 	return true;
 }
 
 bool DKLog::Clear(int& rtnvalue){
-    return DKUtil::System("cls", rtnvalue);
+    return DKUtil::System("cls", rtnvalue);	//FIXME: this may only work on windows
 }
 
 /*
@@ -163,7 +165,7 @@ void signal_handler(int signal){
 }
 */
 
-// https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
+// https://stackoverflow.com/a/9371717/688352  - The command is slow on windows, read this
 bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/){
 	if (!DKUtil::InMainThread()) {
 		if (lvl <= DK_ERROR)
@@ -171,7 +173,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		return true;
 	}
 	/*
-	if(lvl == DK_ASSERT){
+	if(lvl == DK_FATAL){
 		// Install a signal handler
 		std::signal(SIGINT, signal_handler);
 		std::cout << "SignalValue: " << gSignalStatus << '\n';
@@ -215,38 +217,38 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if (log_verbose == false && lvl == DK_VERBOSE) { return true; }
 	}
 
-	DKString output;
-	std::stringstream ss;
-
+    //DKString out_string;
+    std::stringstream out_stream;
+	
 	///// ADD extra info if requested
 	if (log_thread){
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
-		output = output + "TID: " + toString((unsigned int)threadId) + "  ";
-		ss << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
+		//out_string = out_string + "TID: " + toString((unsigned int)threadId) + "  ";
+		out_stream << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
 	}
 	if (log_lines || lvl <= DK_ERROR){
 		DKString filename = file;
 		std::string::size_type found = filename.find_last_of("/\\");
-		if (found != std::string::npos && found < filename.length())
-			output += filename.substr(found + 1);
-		output = output + ":" + toString(line) + "  ";
-		ss << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
+		//if (found != std::string::npos && found < filename.length())
+		//	out_string += filename.substr(found + 1);
+		//out_string = out_string + ":" + toString(line) + "  ";
+		out_stream << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
 	}
 	if (log_funcs || lvl <= DK_ERROR){
 		if (strlen(func)){
-			output = output + func + "() ";
-			ss << func << "() ";
+			//out_string = output + func + "() ";
+			out_stream << func << "() ";
 		}
 	}
-	output += input;
-	ss << input;
+	//out_string += input;
+	out_stream << input;
 
 	/////// Main Console Color Decorators ///////
-#	if WIN32
+#	if WIN
 		WORD color = 0;
 		if (!color_override){
-			if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
+			//if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
 			if (lvl == DK_FATAL)   { color = DKFATAL_COLOR; }
 			if (lvl == DK_ERROR)   { color = DKERROR_COLOR; }
 			if (lvl == DK_WARN)    { color = DKWARN_COLOR; }
@@ -274,48 +276,67 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 
 	//CONSOLE/TERMINAL WINDOW OUTPUT
-	//printf("%s", output.c_str());
-	std::cout << ss.str();
-					
-	// File Output (log.txt)
-	if(log_file && !DKFile::local_assets.empty()){
-		std::ofstream file_log;
-		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
-		if(file_log.is_open()){
-			file_log << output.c_str();
-			file_log.close();
+	std::cout << out_stream.str();
+	
+	//File output (log.txt)	
+	if(log_file){
+		if(DKFile::local_assets.empty()) {	// no assets path available yet
+			output_buffer += out_stream.str();	// save the output to a buffer until we have an assets path
+		}
+		else {	// assets path is available
+			std::ofstream file_log;
+			if(!output_buffer.empty()) { // we have a buffer to dump into the file first
+				//clear the log file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::trunc);
+				file_log.close();
+				
+				// dump the buffer into the file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
+				if(file_log.is_open()) {
+					file_log << output_buffer;
+					file_log.close();
+					output_buffer.clear();
+				}
+			}
+			else { // we have an assets path and the buffer is empty, just write to the file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
+				if(file_log.is_open()){
+					file_log << out_stream.str();
+					file_log.close();
+				}
+			}
 		}
 	}
 
-	// // // IDE Software Console Output
+	// IDE Software Console Output
 #	if WIN
 		if(log_msvc)
-			OutputDebugString(output.c_str()); //Output to Visual Studio
+			OutputDebugString(out_stream.str().c_str()); //Output to Visual Studio
 #	endif
 #	if MAC || IOS
 		if(log_xcode)
-			NSLog(@"%s", output.c_str()); //Output to XCode
+			NSLog(@"%s", out_stream.str().c_str()); //Output to XCode
 #	endif
 #	ifdef ANDROID
 		// https://developer.android.com/ndk/reference/group/logging
 		if(lvl == DK_FATAL) //Android Studio 
-			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_ERROR) //Android Studio 
-			__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_WARN)
-			__android_log_write(ANDROID_LOG_WARN, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_WARN, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_INFO)
-			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str()); //Default
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", out_stream.str().c_str()); //Default
 		else if(lvl == DK_DEBUG)
-			__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_VERBOSE)
-			__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", out_stream.str().c_str());
 		else //if(lvl == DK_INFO)
-			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str());
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", out_stream.str().c_str());
 #	endif
 
 	// // // Restore Default Color Decorators
-#	if WIN32
+#	if WIN
 		DKTextColor::RestoreColor();
 #	endif
 
@@ -326,22 +347,22 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl <= DK_ERROR){
-		if(stacktrace_on_errors || lvl <= DK_ASSERT){
+		if(stacktrace_on_errors || lvl <= DK_FATAL){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors || lvl <= DK_ASSERT){
+		if(exception_on_errors || lvl <=  DK_FATAL){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
-					throw output; // throw an exception
+					throw out_stream.str(); // throw an exception
 				}
 				//catch (const std::string& e){
 				catch(...){
 #			endif
 #			ifdef HAVE_boxer
-					output += "\n\n Would you like to exit the application?";
-					boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+					output << "\n\n Would you like to exit the application?";
+					boxer::Selection sel = boxer::show(out_stream.str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 					if(sel == boxer::Selection::Yes){
 						DKApp::Exit();
 						return false;

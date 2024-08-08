@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2024 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -25,6 +25,7 @@
 */
 
 // https://stackoverflow.com/a/32593825/688352
+#if HAVE_boost
 
 #pragma once
 #ifndef DKThread_H
@@ -37,10 +38,10 @@
 #endif
 
 //WARNING_DISABLE
-#include "threadpool/boost/threadpool.hpp" //Not truly a Boost library.
-#include <boost/asio.hpp>
-#include <boost/smart_ptr.hpp>
-#include <boost/thread.hpp>
+	#include "threadpool/boost/threadpool.hpp" //Not truly a Boost library.
+	#include <boost/asio.hpp>
+	#include <boost/smart_ptr.hpp>
+	#include <boost/thread.hpp>
 //WARNING_ENABLE
 
 
@@ -55,9 +56,13 @@ public:
 	//void Queue(const DKString& name, boost::function<void ()> func, const DKString& data);
 	void Queue(const DKString& name, std::function<void()> func, const DKString& data);
 	void Process();
-	
+
 	bool active;
+	
+#if HAVE_boost
 	boost::threadpool::pool* dkThreadPool; //Not truly a Boost function.
+#endif
+
 	DKStringArray names;
 	DKStringArray tdata;
 };
@@ -114,4 +119,5 @@ public:
 
 
 REGISTER_OBJECT(DKThreadPool, true)
+#endif //HAVE_boost
 #endif //DKThread_h

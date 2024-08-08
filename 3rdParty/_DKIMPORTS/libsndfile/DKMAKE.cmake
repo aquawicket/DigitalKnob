@@ -1,3 +1,4 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/libsndfile/libsndfile.git
 
 
@@ -13,7 +14,8 @@ dk_depend(vorbis)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsndfile/libsndfile.git)
+#dk_import(https://github.com/libsndfile/libsndfile.git)
+dk_import(https://github.com/libsndfile/libsndfile/archive/refs/heads/master.zip)
 
 
 ### LINK ###
@@ -26,7 +28,7 @@ WIN_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/sndfile.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE} ${LIBSNDFILE})
+dk_configure(${LIBSNDFILE} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE})
 
 
 ### COMPILE ###

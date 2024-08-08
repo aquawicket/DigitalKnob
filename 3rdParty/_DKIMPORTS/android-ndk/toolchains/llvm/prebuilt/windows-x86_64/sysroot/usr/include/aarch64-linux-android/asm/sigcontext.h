@@ -37,7 +37,7 @@ struct fpsimd_context {
   struct _aarch64_ctx head;
   __u32 fpsr;
   __u32 fpcr;
-  //__uint128_t vregs[32];  ///////////  ALTERED BY DIGITALKNOB //////////////
+  //__uint128_t vregs[32];  ///////////  ALTERED BY DigitalKnob //////////////
 };
 #define ESR_MAGIC 0x45535201
 struct esr_context {
