@@ -5,8 +5,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 # installDKBash()
 #
 #function Global:installDKBash() {
-	#dk_debugFunc
-	#if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#dk_debugFunc 0
 
 	if(${args}.count -ne 0){ 
 		runBash ${args}

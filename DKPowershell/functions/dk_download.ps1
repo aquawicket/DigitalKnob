@@ -7,9 +7,7 @@ if(!$dk_download){ $dk_download = 1 } else{ return }
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
 function Global:dk_download($url) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): not enough arguments" }
-	if($(__ARGC__) -gt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): too many arguments" }
+	dk_debugFunc 1 2
 	
 	${url_filename} = Split-Path ${url} -leaf
 	if(!(${url_filename})){ dk_error "url_filename invalid" }                                                                            
@@ -50,8 +48,9 @@ function Global:dk_download($url) {
 }
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1"
 	dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1"

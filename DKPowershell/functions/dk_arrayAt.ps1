@@ -7,8 +7,7 @@ if(!$dk_arrayAt){ $dk_arrayAt = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 function Global:dk_arrayAt($array, $index) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 2
 	
 	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
@@ -23,7 +22,7 @@ function Global:dk_arrayAt($array, $index) {
 
 
 function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')

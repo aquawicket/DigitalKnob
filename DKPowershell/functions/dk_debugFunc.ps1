@@ -15,8 +15,23 @@ if(!$DKSTACK_marker)		{ $global:DKSTACK_marker = 1 }
 function Global:dk_debugFunc() {
 	
 ####################################################################################################################################
-	if($ENABLE_dk_debugFunc -ne 1){ return }
 	
+	$_MIN_ = $args[0]
+	$_MAX_ = $args[1]
+	$_FUNCTION_ = "$(__FUNCTION__ 2)"
+	$_ARGC_ = "$(__ARGC__ 2)"
+	#echo "############ ${_FUNCTION_}(${_ARGC_})  MIN:${_MIN_} MAX:${_MAX_} ############"
+	if($_MIN_){ 
+		if(${_ARGC_} -lt ${_MIN_}){ dk_error "$(__FUNCTION__ 2)(${_ARGC_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}" }
+	}
+	if($_MAX_){
+		if(${_ARGC_} -gt ${_MAX_}){ dk_error "$(__FUNCTION__ 2)(${_ARGC_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" }
+	} else {
+		if(${_ARGC_} -gt ${_MIN_}){ dk_error "$(__FUNCTION__ 2)(${_ARGC_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" }
+	}
+	
+	
+	if($ENABLE_dk_debugFunc -ne 1){ return }
 	if($(__FUNCTION__ 2) -eq "dk_echo"){ return }
 	if($(__FUNCTION__ 2) -eq "dk_info"){ return }
 	if($(__FUNCTION__ 2) -eq "dk_debug"){ return }

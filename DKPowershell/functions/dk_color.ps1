@@ -12,8 +12,7 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #
 function Global:dk_color() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0 2
 
 	$global:USE_COLOR = 1
 	if(Test-Path variable:args){
@@ -179,7 +178,7 @@ dk_color 1
 
 
 function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_echo ""
 	dk_echo "${black}${bg_lblack}           Styles            ${clr}"

@@ -5,7 +5,7 @@ if(!$dk_logo){ $dk_logo = 1 } else{ return }
 # dk_logo()
 #
 function Global:dk_logo() {
-	dk_debugFunc
+	dk_debugFunc 0
 
 
 	dk_echo "${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______  "
@@ -21,7 +21,7 @@ function Global:dk_logo() {
 
 
 function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	dk_logo
 }
