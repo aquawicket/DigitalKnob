@@ -7,8 +7,7 @@ call dk_source dk_error
 ::# dk_assert(expression)
 ::#
 :dk_assert
-    call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 1
 	
 	setlocal
 	if not defined %~1 (
@@ -25,7 +24,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_set myVar string
 	call dk_info "dk_assert myVar" && call dk_assert myVar

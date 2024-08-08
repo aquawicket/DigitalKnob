@@ -5,8 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_assertPath(expression)
 ::#
 :dk_assertPath
-    call dk_debugFunc
-	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 1
 	
 	setlocal
 	set "_var_=%~1"
@@ -26,9 +25,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
-
 	call dk_set sys32path "C:\Windows\System32"
 	call dk_assertPath sys32path
 	

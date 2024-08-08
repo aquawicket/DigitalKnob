@@ -9,8 +9,7 @@ call dk_source dk_warning
 ::#
 ::#
 :dk_setDKHOME_DIR
-    call dk_debugFunc
-    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 0
 	
 	if defined DKHOME_DIR call dk_warning "DKHOME_DIR already set to %DKHOME_DIR%" && goto:eof
 	
@@ -28,7 +27,7 @@ goto:eof
 call dk_source dk_printVar
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_setDKHOME_DIR
 	call dk_printVar DKHOME_DIR

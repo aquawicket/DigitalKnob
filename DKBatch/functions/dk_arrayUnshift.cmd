@@ -18,9 +18,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_arrayUnshift
-	call dk_debugFunc
-	call dk_minMaxArgs 2
-	::if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	call dk_debugFunc 2
 	
 	setlocal
 	set "_arry_=%~1"
@@ -45,8 +43,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	call dk_arrayUnshift myArrayA "a b c" ::new_lengthA
 	call dk_printVar myArrayA

@@ -15,8 +15,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 ::#
 ::#
 :dk_installGit
-    call dk_debugFunc
-    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 0
 	
     call dk_validate HOST_ARCH "call dk_getHostTriple"
     if "%HOST_ARCH%"=="arm32"  set "GIT_DL="
@@ -47,7 +46,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
     call dk_installGit
 goto:eof

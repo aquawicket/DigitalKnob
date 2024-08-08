@@ -10,8 +10,7 @@ call dk_source dk_replaceAll
 ::#
 ::#
 :dk_removeExtension
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	setlocal
 	set "_filepath_=%~1"
@@ -29,7 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_set myPath "/test/test2/xfile.extension"
 	call dk_removeExtension "%myPath%" filepath

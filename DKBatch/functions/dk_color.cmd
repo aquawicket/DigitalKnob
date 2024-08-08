@@ -13,8 +13,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#   https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 ::#
 :dk_color
-	call dk_debugFunc
-	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__%: too many arguments"
+	call dk_debugFunc 0 1
 
 	::setlocal
 	set "USE_COLOR=1"
@@ -180,7 +179,7 @@ call dk_color 1
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_echo
 	call dk_echo "%black% %bg_lblack%           Styles            %clr%"

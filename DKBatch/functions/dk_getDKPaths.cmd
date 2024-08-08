@@ -13,8 +13,7 @@ call dk_source dk_setDKDOWNLOAD_DIR
 ::#
 ::#
 :dk_getDKPaths
-    call dk_debugFunc
-    if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 0
 	
     if not defined DKHOME          call dk_setDKHOME_DIR
     if not defined DKDESKTOP       call dk_setDKDESKTOP_DIR
@@ -31,7 +30,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_getDKPaths
 goto:eof

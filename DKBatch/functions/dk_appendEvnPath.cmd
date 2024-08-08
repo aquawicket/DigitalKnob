@@ -18,9 +18,7 @@ call dk_source dk_validateBranch
 ::#          echo dk_appendEvnPath returned: %result%
 ::#
 :dk_appendEvnPath
-	call dk_debugFunc
-	call dk_minMaxArgs 1
-	::if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	setlocal
 	set "_path_=%~1"
@@ -42,8 +40,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	call dk_validate DKBATCH_FUNCTIONS_DIR_ "call dk_validateBranch"	
 	call dk_appendEvnPath %DKBATCH_FUNCTIONS_DIR%

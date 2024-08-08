@@ -5,8 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_commandExists(<command> rtn_var)
 ::#
 :dk_commandExists
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1
 	
 	setlocal
     ::call dk_set command "%~1"
@@ -32,7 +31,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
     ::###### Using if return value
 	call dk_echo

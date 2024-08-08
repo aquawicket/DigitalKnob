@@ -25,52 +25,59 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   before the function is entered into the callstack, after entry and the trace is printed, or at the start of the next call, before the next calls callstack is entered.
 ::#
 ::#   <TIMESTAMP> <ELAPSED_TIME>
-::#   1: If the previous function has a breakpoint set for the end of the call, pause execution here, before creating a new callstack entry.
+::#   1: ###### PREVIOUS FUNCTION EXIT BREAKPOINT / CURRENT FUNCTION PRE-INIT BREAKPOINT ######
+::#      If the previous function has a breakpoint set for the end of the call, pause execution here, before creating a new callstack entry.
 ::#      OR, If the current function has a breakpoint set for before entry, pause execution here, before creating a new callstack entry.
 ::#
-::#   2: Create a callstack entry containing the Timestamp, Current file, function, line number, arguments, argument count and argument values. 
+::#   2: ###### CREATE CALLSTACK ENTRY ######
+::#      Create a callstack entry containing the Timestamp, Current file, function, line number, arguments, argument count and argument values. 
 ::#      As well as the calling function, file and line number
 ::#
-::#   3: Check that the function paramter definition arguments match what the function received.  For example.  
+::#   3: ###### VALIDATE ARGUMENTS ######
+::#      Check that the function paramter definition arguments match what the function received.  For example.  
 ::#          dk_debugFunc(string, int, rtn:string)      "The function expects 3 arguments. Parameter 1 a string followed by an int amd a return string variable;
 ::#      If the received arguments don't match the count or type defined, dk_debugFunc will throw an error and print the callstack.
 ::#
-::#   4: If debug tracing is enabled, each function and parameter values will printed as the functions are called. Timestamp and Elapsed time since last callstack entry 
+::#   4: ###### DEBUG FUNCTION TRACE PRINTING ######
+::#      If debug tracing is enabled, each function and parameter values will printed as the functions are called. Timestamp and Elapsed time since last callstack entry 
 ::#      will also be printed to the debugging console. Any functions named in the exclusion list will not be printed. Any functions named in the inclusion list will always be printed.
 ::#      unless debug tracing is explicitly turned off. 
 ::#
-::#   5: If the current function has a breakpoint set for at entry, pause execution here, after creating and printing the new callstack entry. 
+::#   5: ###### ENTRY BREAKPOINT ######
+::#      If the current function has a breakpoint set for at entry, pause execution here, after creating and printing the new callstack entry. 
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-	if "%*" neq "" call dk_error "dk_debugFunc: too many arguments"
+	if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments"
 	
+	::###<TIMESTAMP> <ELAPSED_TIME>###
+	::call dk_timer timestamp
+	::echo timestamp = %timestamp%
+	
+	::1: ###### PREVIOUS FUNCTION EXIT BREAKPOINT / CURRENT FUNCTION PRE-INIT BREAKPOINT ######
+	::     TODO
+	
+	
+	::2: ###### CREATE CALLSTACK ENTRY ######
 	call dk_callStack
 	:dk_callStackReturn
 	
-	::TODO:  find the first matching __CALLER__ in the stack.  If a match is found, replace that frame with the current frame, and remove all elements after
+	set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
 	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
+	::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
 	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
-	
-	::title %__FUNCTION__%
-::	call echo "DKSTACK[%DKSTACK_marker%].__FILE__ = %%DKSTACK[%DKSTACK_marker%].__FILE__%%"	
-::	call echo "DKSTACK[%DKSTACK_marker%].__FUNCTION__ = %%DKSTACK[%DKSTACK_marker%].__FUNCTION__%%"	
-::	call echo "DKSTACK[%DKSTACK_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_marker%].__ARGS__%%"
-	
-::	set /a "DKSTACK_prev_marker=DKSTACK_marker-1"
-::	call echo "DKSTACK[%DKSTACK_prev_marker%].__FILE__ = %%DKSTACK[%DKSTACK_prev_marker%].__FILE__%%"	
-::	call echo "DKSTACK[%DKSTACK_prev_marker%].__FUNCTION__ = %%DKSTACK[%DKSTACK_prev_marker%].__FUNCTION__%%"	
-::	call echo "DKSTACK[%DKSTACK_prev_marker%].__ARGS__ = %%DKSTACK[%DKSTACK_prev_marker%].__ARGS__%%"
-	
-	set /a "__ARGC__=0"
-	FOR /L %%a IN (1,1,9) DO (
-	   if defined ARGV[%%a] (
-		  rem call echo ARGV[%%a] = '%%ARGV[%%a]%%'
-	      set /a "__ARGC__=%%a"
-	   )
-	)
 	set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
+	set /a DKSTACK_length+=1
+	set /a DKSTACK_marker=%DKSTACK_length%	
+	echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
+
+
+	::3: ###### VALIDATE ARGUMENTS ######
+	if "%~1" == "" call dk_error "%__FUNCTION__%(%__ARGS__%): dk_debugFunc ArgsMin ArgsMax is not set."
+	if not "%~1" == "" if %__ARGC__% lss %~1 call dk_error "%__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"
+	if "%~2" == "" if %__ARGC__% gtr %~1 call dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~1, got %__ARGC__%"
+	if not "%~2" == "" if %__ARGC__% gtr %~2 call dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~2, got %__ARGC__%"
 
 	::NOTE: determin when we need to remove the topmost DKStack_marker 
 	::Example
@@ -91,16 +98,9 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	::				func3() 3
 	::		funcC()         6   <-- THIS is where we need to replace func1() with funcC() and remove everything after
 	::
-	
-	
-	
-	::echo __FILE__ = %__FILE__%
-	::echo __FUNCTION__ = %__FUNCTION__%
-	::echo __ARGS__ = %__ARGS__%
-	::echo __ARGC__ = %__ARGC__%
+
 		
-	set /a DKSTACK_length+=1
-	set /a DKSTACK_marker=%DKSTACK_length%	
+	
 ::	if %DKSTACK_length% LSS %MAX_STACK_LINES% (
 ::		set /a DKSTACK_length+=1
 ::		echo "growing DKSTACK_length to %DKSTACK_length%"
@@ -137,7 +137,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 goto:eof
 

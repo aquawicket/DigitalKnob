@@ -7,9 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
 :dk_validate
-	call dk_debugFunc
-	if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
-
+	call dk_debugFunc 2
 
 	if defined %~1 if "%~1" neq "" (goto:eof)     &:: if the variable is already valid, return
 	
@@ -29,7 +27,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
     call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
     echo DIGITALKNOB_DIR = %DIGITALKNOB_DIR%

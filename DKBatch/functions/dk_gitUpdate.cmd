@@ -7,8 +7,7 @@ call dk_source dk_confirm
 ::#
 ::#
 :dk_gitUpdate
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
     if "%1" neq "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
@@ -41,7 +40,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_gitUpdate
 goto:eof

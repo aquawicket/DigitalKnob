@@ -7,9 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	 https://stackoverflow.com/a/17584764
 ::#
 :dk_isVariableName
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	if %__ARGC__% gtr 2 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_debugFunc 1 2
 
 	::set "arg1=%~1"
 	::if defined "%~1" call set "arg1=%%%arg1%%%"

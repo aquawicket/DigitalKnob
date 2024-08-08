@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_gitDiffSummary
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
         
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
     cd %DKBRANCH_DIR%
@@ -25,7 +24,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_gitDiffSummary
 goto:eof

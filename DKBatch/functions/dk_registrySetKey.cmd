@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::
 ::
 :dk_registrySetKey
-	call dk_debugFunc
-	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%(): not enough arguments"
+	call dk_debugFunc 2
 	
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~2" equ "" (set "_key_=/ve") else (set "_key_=/v %~2")
@@ -23,7 +22,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"

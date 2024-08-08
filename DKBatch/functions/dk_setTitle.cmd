@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_setTitle
-	call dk_debugFunc
-	::if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 1 99
 	
 	title %*
 goto:eof
@@ -17,7 +16,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_setTitle "DKTEST()"
 goto:eof

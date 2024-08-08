@@ -6,8 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_readCache
-	call dk_debugFunc
-	if %__ARGC__% neq 3 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 3
 	
 	if not defined DKBRANCH_DIR call dk_validateBranch
 	::call dk_printVar DKBRANCH_DIR
@@ -40,7 +39,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_readCache APP TARGET_OS TYPE
 	call dk_printVar APP

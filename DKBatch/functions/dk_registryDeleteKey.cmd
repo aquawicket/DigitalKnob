@@ -38,8 +38,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::    Deletes the registry value MTU under MyCo on ZODIAC
 ::
 :dk_registryDeleteKey
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%(): not enough arguments"
+	call dk_debugFunc 1
 
 	call dk_registryKeyExists "%~1" || dk_warning "%~1 does not exist"
 	
@@ -52,7 +51,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
 goto:eof

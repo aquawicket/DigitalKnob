@@ -16,8 +16,7 @@ call dk_source dk_confirm
 ::#
 ::#
 :dk_gitCommit
-	call dk_debugFunc
-	if %__ARGC__% neq 0 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 0
 	
 	call dk_gitDiffSummary
 	
@@ -73,7 +72,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_gitCommit
 goto:eof

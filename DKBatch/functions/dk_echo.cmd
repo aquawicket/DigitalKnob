@@ -9,7 +9,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#     @msg	- The message to print
 ::#
 :dk_echo
-    call dk_debugFunc
+    call dk_debugFunc 0 1
 	if "%~1" equ "" (echo: & goto:eof)
 	if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%(%__ARGS__%): incorrect number of arguments"
 	

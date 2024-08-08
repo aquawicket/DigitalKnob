@@ -5,7 +5,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_logo()
 ::#
 :dk_logo
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	echo %black%"%lblue%   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______  
 	echo %black%"%lblue%   |     \   |   |  ____   |      |    |_____| |      |____/  | \  | |     | |_____] 

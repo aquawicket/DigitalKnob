@@ -15,7 +15,7 @@ if not defined HALT_ON_ERROR    set "HALT_ON_ERROR=1"
 ::#    @message - The message to print
 ::#
 :dk_error
-	call dk_debugFunc
+	call dk_debugFunc 1
 	
 	if "%ENABLE_dk_error%" neq "1"  goto:eof
 	::if "%*"==""  echo: & goto:eof	                                                               &:: if arguments are empty, print a new line
@@ -40,7 +40,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_error "test dk_error message"
 goto:eof

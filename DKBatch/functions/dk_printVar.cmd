@@ -9,8 +9,7 @@ call dk_source dk_isAlphanumeric
 ::#
 
 :dk_printVar
-    call dk_debugFunc
-    if %__ARGC__% neq 1 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+    call dk_debugFunc 1
 
 	if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
     if "%ENABLE_dk_printVar%" neq "1" goto:eof

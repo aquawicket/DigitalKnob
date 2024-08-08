@@ -6,9 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pinToQuickAccess
-	call dk_debugFunc
-	if %__ARGC__% lss 1 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	if %__ARGC__% gtr 1 call dk_error "%__FUNCTION__%:%__ARGV__% too many arguments"
+	call dk_debugFunc 1
 	
 	:: METHOD 1:  call the DKPowershell function (FIXME: ERROR: runs twice)
 	::call dk_callPowershell dk_pinToQuickAccess "%~1"
@@ -25,7 +23,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_pinToQuickAccess "C:\Users\Administrator\digitalknob"
 goto:eof

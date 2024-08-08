@@ -34,20 +34,16 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "lastTime=!%~1.lastTime!"
 	
 	::echo startTime = %startTime%
-	echo lastTime = %lastTime%
-	echo currentTime = %currentTime%
-	
-
-	
-	
+	::echo lastTime = %lastTime%
+	::echo currentTime = %currentTime%
+		
 	set /a "lastElapsed=currentTime-lastTime"
 	set /a "elapsed.whole=%lastElapsed%/100, elapsed.fraction=%lastElapsed%%%100"
-	
-	
+
 	endlocal & set "%1.lastTime=%currentTime%" & set "%1=%elapsed.whole%.%elapsed.fraction%"
 	
 	::echo %~1.startTime = !%~1.startTime!
-	echo %~1.lastTime = !%~1.lastTime!
+	::echo %~1.lastTime = !%~1.lastTime!
 goto:eof
 
 

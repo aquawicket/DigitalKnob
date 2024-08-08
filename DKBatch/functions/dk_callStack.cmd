@@ -47,8 +47,10 @@ goto:eof
 	rem call echo FUNCNAME_B = %%FUNCNAME_B%%
 	call set "BATCH_SOURCE_B=%%~f0"
 	call set "BATCH_ARGV_B=%%*"
-		
-	call set "__FILE__=%%~f0"
+	
+	call set "__TIME__=%time%" 	
+	::call set "__FILE__=%%~f0"
+	call set "__FILE__=%%~nx0"
 	rem call set "__LINE__=???"
 	call set "__FUNCTION__=%%~n0"
 	call set "__ARGS__=%%*"
@@ -61,6 +63,13 @@ goto:eof
 	call set "ARGV[7]=%%~7"
 	call set "ARGV[8]=%%~8"
 	call set "ARGV[9]=%%~9"
+	set /a "__ARGC__=0"
+	FOR /L %%a IN (1,1,9) DO (
+	   if defined ARGV[%%a] (
+		  rem call echo ARGV[%%a] = '%%ARGV[%%a]%%'
+	      set /a "__ARGC__=%%a"
+	   )
+	)
 
 	call set "is_batch=%%BATCH_SOURCE_B:*%%~f0=%%"
 	if defined is_batch (

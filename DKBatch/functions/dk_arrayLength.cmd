@@ -12,9 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
 :dk_arrayLength
-	call dk_debugFunc
-	call dk_minMaxArgs 2
-	::if %__ARGC__% neq 2 call dk_error "%__FUNCTION__%:%__ARGV__% incorrect number of arguments"
+	call dk_debugFunc 2
 	
 	setlocal
 	set _length_=0
@@ -31,8 +29,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

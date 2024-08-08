@@ -17,8 +17,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_arrayAt
-	call dk_debugFunc
-	call dk_minMaxArgs 3
+	call dk_debugFunc 3
 	::call dk_validateArgs array int optional:rtn_var
 	setlocal
 
@@ -37,8 +36,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
-	call dk_minMaxArgs 0
+	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

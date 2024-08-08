@@ -7,9 +7,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#
 :dk_commandToVariable
-	call dk_debugFunc
-	if %__ARGC__% lss 2 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
-	if %__ARGC__% gtr 3 call dk_error "%__FUNCTION__%:%__ARGV__% not enough arguments"
+	call dk_debugFunc 2 3
 	
 	setlocal
 	set i=-1
@@ -43,7 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc
+	call dk_debugFunc 0
 	
 	call dk_set myCommand ver
 	call dk_commandToVariable "%myCommand%" myVariable
