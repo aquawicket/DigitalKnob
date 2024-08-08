@@ -6,7 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::
 ::
 :dk_registrySetKey
-	call dk_debugFunc 2
+	call dk_debugFunc 4
 	
 	if "%~1" equ "" call dk_error "%__FUNCTION__%(): argument 1 is invalid"
 	if "%~2" equ "" (set "_key_=/ve") else (set "_key_=/v %~2")
