@@ -7,8 +7,8 @@
 #
 #
 dk_readCache() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_pathExists "${DKBRANCH_DIR-}"/cache || return 0
 	_APP_=

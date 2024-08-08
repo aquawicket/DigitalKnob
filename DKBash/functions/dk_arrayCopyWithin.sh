@@ -45,7 +45,7 @@ dk_arrayCopyWithin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0 0
+	dk_debugFunc 0
 	
 	dk_arrayCopyWithin array target start end
 }

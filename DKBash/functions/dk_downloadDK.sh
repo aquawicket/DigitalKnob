@@ -6,8 +6,8 @@
 #
 #
 dk_downloadDK() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
 }

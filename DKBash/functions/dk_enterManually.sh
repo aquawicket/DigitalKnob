@@ -7,8 +7,8 @@
 #
 #
 dk_enterManually() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input

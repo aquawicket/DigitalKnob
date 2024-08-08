@@ -7,8 +7,8 @@
 #
 #
 dk_installHomebrew() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 
 	[ "$OSTYPE" = "darwin"* ] || return   # if NOT darwin
 		

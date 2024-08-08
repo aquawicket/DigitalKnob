@@ -40,7 +40,7 @@ dk_arrayJoin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0 0
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"

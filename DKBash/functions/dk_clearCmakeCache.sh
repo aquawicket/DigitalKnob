@@ -7,8 +7,8 @@
 #
 #
 dk_clearCmakeCache() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	# TODO: replace ${DIGITALKNOB_DIR} with ${1} and call this functions while suplying the directory 
 	dk_info "Clearing CMake cache . . ."	

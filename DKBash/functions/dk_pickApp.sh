@@ -7,8 +7,8 @@
 #
 #
 dk_pickApp() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"

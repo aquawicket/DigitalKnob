@@ -7,8 +7,8 @@
 #
 #
 dk_installGit() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	if ! dk_commandExists git; then
 		dk_install git

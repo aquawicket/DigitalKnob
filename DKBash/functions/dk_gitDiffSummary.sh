@@ -6,8 +6,8 @@
 #
 #
 dk_gitDiffSummary() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
         
 	dk_validate DKBRANCH_DIR "dk_validateBranch"
     cd ${DKBRANCH_DIR}

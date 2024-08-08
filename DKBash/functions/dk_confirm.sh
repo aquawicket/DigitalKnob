@@ -7,8 +7,8 @@
 #
 #
 dk_confirm() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 
 	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -rp $" " REPLY

@@ -16,8 +16,8 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/
 #
 #
 dk_installCmake() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_validate HOST_OS "dk_getHostTriple"	
 	######################################################################################################

@@ -27,7 +27,7 @@ dk_arrayFlat() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0 0
+	dk_debugFunc 0
 	
 	dk_todo
 	dk_arrayFlat array depth

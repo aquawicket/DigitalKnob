@@ -6,8 +6,8 @@
 #
 #
 dk_buildMain() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)

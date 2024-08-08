@@ -55,8 +55,8 @@ try() {
 #              https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target
 #
 dk_getHostTriple() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
