@@ -17,24 +17,20 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer
-	setlocal enableExtensions
-
-	call set ID=%%%1%%
+	setlocal
 	
 	call dk_getTime centisecond second minute hour
 	call dk_dateToCentiSeconds seconds centiseconds %centisecond% %second% %minute% %hour%
 	set /a cstime=%seconds%*100+%centiseconds%
 	
-	::###### Timer / Elapsed Time ######
-	for /f "tokens=1-3 delims= " %%a in ('echo/%ID%') do (
-		set last=%%a
-		set first=%%b
-		set init=%%c
-	)
-	if {%init%}=={} endlocal & set %1=0 0 %cstime% & goto:eof
+	call set init=%%%1.init%%
+	call set first=%%%1.first%%
+	call set last=%%%1.last%%
+
+	if {%init%}=={} endlocal & set "%1.init=%cstime%" & set "%1.first=0" & set "%1.last=0" & goto:eof
 	set /a last=cstime-init-first
 	set /a first+=last
-	endlocal & set %1=%last% %first% %init%
+	endlocal & set "%1.init=%init%" & set "%1.first=%first%" & set "%1.last=%last%"
 goto:eof
 
 
@@ -45,33 +41,42 @@ goto:eof
 	call dk_debugFunc
 	call dk_minMaxArgs 0
 	
-	set "t1="
+	
 	call dk_timer t1
 	call :show
 
-	::wait about 1 seconds
-	ping 127.0.0.1 -n 2 >nul
+	echo:
+	echo waiting about 1 second
+	call dk_sleep 1
 	call dk_timer t1
 	call :show
 
-	::wait about 2 seconds
-	ping 127.0.0.1 -n 3 >nul
+	echo:
+	echo waiting about 2 seconds
+	call dk_sleep 2
 	call dk_timer t1
 	call :show
 	
-	::wait about 3 seconds
-	ping 127.0.0.1 -n 4 >nul
+	echo:
+	echo waiting about 3 seconds
+	call dk_sleep 3
+	call dk_timer t1
+	call :show
+	
+	echo:
+	echo waiting about 5 seconds
+	call dk_sleep 5
 	call dk_timer t1
 	call :show
 goto:eof	
 
 :show
-	echo t1 = %t1%
-	for /f "tokens=1-2 delims= " %%a in ('echo/%t1%') do (
-		set /a "last.seconds=%%a/100"
-		set /a "last.centiseconds=%%a-last.seconds*100"
-		set /a "first.seconds=%%b/100"
-		set /a "first.centiseconds=%%b-first.seconds*100"
-		echo Seconds since last call: !last.seconds!.!last.centiseconds!, seconds since first call: !first.seconds!.!first.centiseconds!
-	)
+	echo t1.init = %t1.init%
+	echo t1.first = %t1.first%
+	echo t1.last = %t1.last%	
+	set /a "last.seconds=%t1.last%/100"
+	set /a "last.centiseconds=%t1.last%-last.seconds*100"
+	set /a "first.seconds=%t1.first%/100"
+	set /a "first.centiseconds=%t1.first%-first.seconds*100"
+	echo Seconds since last call: !last.seconds!.!last.centiseconds!, Seconds since first call: !first.seconds!.!first.centiseconds!
 goto:eof
