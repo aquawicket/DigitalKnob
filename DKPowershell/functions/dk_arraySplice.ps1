@@ -17,8 +17,9 @@ function Global:dk_arraySplice() {
 
 
 
-function Global:DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function Global:DKTEST
+	dk_debugFunc 0
 	
 
 	#  TODO

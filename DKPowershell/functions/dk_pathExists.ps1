@@ -19,7 +19,7 @@ function Global:dk_pathExists($filepath){
 
 
 function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	if(dk_pathExists "DK.ps1"){ dk_info "The file exists" }
 	else{ dk_info "The file does NOT exist" }

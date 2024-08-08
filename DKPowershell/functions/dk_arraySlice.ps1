@@ -15,9 +15,9 @@ function Global:dk_arraySlice($array, $start, $end) {
 
 
 
-
-function Global:DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function Global:DKTEST 
+	dk_debugFunc 0
 	
 	dk_arraySlice array start end_
 }

@@ -6,8 +6,7 @@ if(!$dk_pinToQuickAccess){ $dk_pinToQuickAccess = 1 } else{ return }
 #
 #
 function Global:dk_pinToQuickAccess() {
-	dk_debugFunc
-	#if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
 	
 	$path = $args[0];
 	$o = New-object -com shell.application;
