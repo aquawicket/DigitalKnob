@@ -5,6 +5,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	dk_undepend(build-essential)
 #	dk_return()
 #endif()
+if(WIN_HOST)
+	dk_undepend(build-essential)
+	dk_return()
+endif()
 
 #dk_depend(openjdk)
 

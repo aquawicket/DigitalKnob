@@ -19,9 +19,11 @@ dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 
 
 #WIN_HOST_dk_set	(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
-WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-MAC_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-LINUX_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
+
+LINUX_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
+MAC_HOST_dk_set		   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+WIN_X86_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+WIN_X86_64_HOST_dk_set (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi)
 
 
 ## Get PYTHON_DL_FILE, PYTHON_FOLDER and PYTHON variables
@@ -50,7 +52,7 @@ if(NOT EXISTS ${PYTHON_EXE})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
 		dk_getNativePath(${DKDOWNLOAD_DIR} DKDOWNLOAD_DIR_WINPATH)
 		dk_getNativePath(${PYTHON} PYTHON_WINPATH)
-		dk_fileWrite("${PYTHON}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
+		dk_fileWrite("${PYTHON}\\python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
 		dk_executeProcess(${PYTHON}/python_install.cmd)
 		
 		if(ANDROID_HOST)

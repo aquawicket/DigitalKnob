@@ -1,7 +1,7 @@
 
 var script = document.createElement('script');
-script.src = "DK.js";
-document.appendChild(script);
+script.src = "file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/functions/DK.js";
+document.head.appendChild(script);
 script.onreadystatechange = script.onload = function(evt){
 
 	alert("dk_executeProcess.js loaded");

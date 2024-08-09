@@ -2,9 +2,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 #dk_set(ENABLE_dk_error 0)
+#dk_set(PAUSE_ON_ERROR 1)
 #dk_set(TRACE_ON_ERROR 1)
 #dk_set(LINE_ON_ERROR 1)
-#dk_set(PAUSE_ON_ERROR 1)
 #dk_set(HALT_ON_ERROR 1)
 #dk_set(ERROR_TAG " ERROR: ")
 ##################################################################################
@@ -24,10 +24,23 @@ function(dk_error msg)
 	if(NOT DEFINED ENABLE_dk_error)
 		set(ENABLE_dk_error 1 CACHE INTERNAL "")
 	endif()
+	if(NOT DEFINED PAUSE_ON_ERROR)
+		set(PAUSE_ON_ERROR 1 CACHE INTERNAL "")
+	endif()
+	if(NOT DEFINED HALT_ON_ERROR)
+		set(HALT_ON_ERROR 1 CACHE INTERNAL "")
+	endif()
+	
+	
+	
+	
+	
+	
+	
+	
 	if(NOT ENABLE_dk_error)
 		return()
 	endif()
-	
 	dk_getOption(HALT ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
 	dk_getOption(TRACE ${ARGV})
@@ -47,27 +60,25 @@ function(dk_error msg)
 	endif()
 	
 	set(msg ${ARGV})
+	dk_echo("${red}${ERROR_TAG}${msg}${clr}")
+	
+	if((PAUSE_ON_ERROR OR PAUSE) AND NOT NO_PAUSE)
+		dk_echo("${red}*** PAUSE_ON_ERROR ***${clr}")
+		dk_pause()
+	endif()
+	if((TRACE_ON_ERROR OR TRACE) AND NOT NO_TRACE)
+		dk_echo("${red}")
+		dk_echo("*** TRACE_ON_ERROR ***")
+		dk_echo(WARNING "${ERROR_TAG}${msg}")
+		dk_echo("${clr}")
+		#dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)
+	endif()
 	if((HALT_ON_ERROR OR HALT) AND NOT NO_HALT)
 		dk_echo("${red}")
 		dk_echo("*** HALT_ON_ERROR ***")
 		dk_echo(FATAL_ERROR "${ERROR_TAG}${msg}")
 		dk_echo("${clr}")
 		dk_exit(1)
-	else()
-		if((TRACE_ON_ERROR OR TRACE) AND NOT NO_TRACE)
-			dk_echo("${red}")
-			dk_echo("*** TRACE_ON_ERROR ***")
-			dk_echo(WARNING "${ERROR_TAG}${msg}")
-			dk_echo("${clr}")
-			#dk_dumpAllVariables(${CMAKE_BINARY_DIR}/dk_trace_variables.temp)
-		else()
-			dk_echo("${red}${ERROR_TAG}${msg}${clr}")
-		endif()
-	endif()
-	
-	if((PAUSE_ON_ERROR OR PAUSE) AND NOT NO_PAUSE)
-		dk_echo("${red}*** PAUSE_ON_ERROR ***${clr}")
-		dk_pause()
 	endif()
 endfunction()
 
@@ -75,8 +86,8 @@ endfunction()
 
 
 
-
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_set(ENABLE_dk_error 1)

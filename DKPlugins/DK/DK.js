@@ -5,7 +5,7 @@ window.dk = new Object;
 var DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
-//Keep a object reference to the old console
+//Keep an object reference to the old console
 if(!DUKTAPE){
     dk.xconsole = new Object;
     //Create a logger for console

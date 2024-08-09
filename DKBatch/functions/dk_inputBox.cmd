@@ -55,19 +55,22 @@ goto:eof
 <body onkeypress='keyPress(event)'>
 	<input type="text" id="input" value="">
     <hr>
-    <button onclick='pipePass()'>Submit</button>
-	
+    <button onclick='submit()'>Submit</button>
+	<button onclick='cancel()'>Cancel</button>
     <script language='javascript' >
 		window.resizeTo(500,150);
 		function keyPress(e){
 			if (e.keyCode == 13) {
-				pipePass();
+				submit();
 			}
 		}
-        function pipePass() {
+        function submit() {
             var pass=document.getElementById('input').value;
             var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
             close(fso.Write(pass));
+        }
+		function cancel() {
+            close();
         }
 		document.getElementById("input").focus
     </script>

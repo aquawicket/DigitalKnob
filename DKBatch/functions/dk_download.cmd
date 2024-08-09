@@ -54,7 +54,7 @@ call dk_source dk_validate
 	if not defined destination_dir call dk_error "destination_dir is invalid"
 	if not exist "%destination_dir%" call dk_makeDirectory "%destination_dir%"
 	
-	::set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
 	:: Try powershell
 	if not exist "%destination%_DOWNLOADING" powershell /? 1>nul && powershell -command ^

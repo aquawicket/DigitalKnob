@@ -11,6 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_set variable)# value)
 	dk_debugFunc(${ARGV})
+	
 	if(${ARGC} LESS 1)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
 	endif()

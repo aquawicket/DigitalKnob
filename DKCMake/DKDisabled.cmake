@@ -95,6 +95,7 @@ dk_disable(boxer)
 dk_disable(lz4)
 dk_disable(libb2)
 dk_disable(Pyportable)
+dk_disable(visualstudio)
 
 # Disabled for Android targets
 if(ANDROID)
