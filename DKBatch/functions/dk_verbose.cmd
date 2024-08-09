@@ -1,12 +1,12 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-if not defined ENABLE_dk_verbose  set "ENABLE_dk_verbose=1"
+if not defined ENABLE_dk_verbose  set "ENABLE_dk_verbose=0"
 if not defined PAUSE_ON_VERBOSE   set "PAUSE_ON_VERBOSE=0"
 if not defined TRACE_ON_VERBOSE   set "TRACE_ON_VERBOSE=0"
 if not defined LINE_ON_VERBOSE    set "LINE_ON_VERBOSE=0"
 if not defined HALT_ON_VERBOSE    set "HALT_ON_VERBOSE=0"
-::if not defined VERBOSE_TAG      set VERBOSE_TAG="VERBOSE: "
+if not defined VERBOSE_TAG        set "VERBOSE_TAG=VERBOSE: "
 ::################################################################################
 ::# dk_verbose(message)
 ::#

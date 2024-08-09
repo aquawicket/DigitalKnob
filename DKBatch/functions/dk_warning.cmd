@@ -6,7 +6,7 @@ if not defined PAUSE_ON_WARNING   set "PAUSE_ON_WARNING=0"
 if not defined TRACE_ON_WARNING   set "TRACE_ON_WARNING=0"
 if not defined LINE_ON_WARNING    set "LINE_ON_WARNING=0"
 if not defined HALT_ON_WARNING    set "HALT_ON_WARNING=0"
-::if not defined WARNING_TAG      set WARNING_TAG="WARNING: "
+if not defined WARNING_TAG        set "WARNING_TAG=WARNING: "
 ::################################################################################
 ::# dk_warning(message)
 ::#
