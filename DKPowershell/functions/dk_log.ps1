@@ -103,10 +103,10 @@ function Global:dk_log() {
 
 	
 	dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
-	if(${level_PAUSE} -eq 1){ dk_echo "${level_COLOR}*** PAUSE_ON_DEBUG ***${clr}"; dk_pause }
-	if(${level_TRACE} -eq 1){ dk_echo "${level_COLOR}*** TRACE_ON_DEBUG ***${clr}"; dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
-	if(${level_LINE} -eq 1){  dk_echo "${level_COLOR}*** LINE_ON_DEBUG ***${clr}"; dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
-	if(${level_HALT} -eq 1){  dk_echo "${level_COLOR}*** HALT_ON_DEBUG ***${clr}"; dk_exit 0 } #OR HALT AND NOT NO_HALT)
+	if(${level_PAUSE} -eq 1){ dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_pause }
+	if(${level_TRACE} -eq 1){ dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
+	if(${level_LINE} -eq 1){  dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
+	if(${level_HALT} -eq 1){  dk_echo "${level_COLOR}*** HALT_ON_${_level_} ***${clr}"; dk_exit 0 } #OR HALT AND NOT NO_HALT)
 }
 
 
