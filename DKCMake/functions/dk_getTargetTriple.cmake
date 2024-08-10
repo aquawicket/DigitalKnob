@@ -4,12 +4,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ###############################################################################
 # dk_getTargetTriple()
 #
-#	set the cached target variables 
+#	Set the cached target variables
+#   This information is pulled from the folder name of the CMAKE_BINARY_DIR
+#   i.e.  win_x86_64_clang
 #
 
 function(dk_getTargetTriple)
 	dk_debugFunc(${ARGV})
-	
 	
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
 		dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
@@ -60,7 +61,7 @@ function(dk_getTargetTriple)
 			dk_set(DK_TARGET_ENV msvc)
 			dk_replaceAll("${DK_TARGET_OS}" _msvc "" DK_TARGET_OS)
 		else()
-			dk_error("Could not determine DK_TARGET_OS:${DK_TARGET_OS} to set DK_TARGET_ENV:${DK_TARGET_ENV}")
+			dk_warning("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set DK_TARGET_ENV")
 		endif()
 		#dk_printVar(DK_TARGET_ENV)
 		
@@ -78,7 +79,7 @@ function(dk_getTargetTriple)
 			dk_set(DK_TARGET_ARCH x86)
 			dk_replaceAll("${DK_TARGET_OS}" _x86 "" DK_TARGET_OS)
 		else()
-			dk_error("Could not determin DK_TARGET_OS:${DK_TARGET_OS} to set DK_TARGET_ARCH:${DK_TARGET_ARCH}")
+			dk_error("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set DK_TARGET_ARCH")
 		endif()
 		#dk_printVar(DK_TARGET_ARCH)
 		
@@ -94,7 +95,7 @@ function(dk_getTargetTriple)
 			elseif(${DK_TARGET_ARCH} MATCHES "x86")
 				dk_set(MSYSTEM "${DK_TARGET_ENV_UPPER}32")		# CLANG32, MINGW32
 			else()
-				dk_error("Could not determine DK_TARGET_ARCH:${DK_TARGET_ARCH} to set MSYSTEM:${MSYSTEM}")
+				dk_error("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set MSYSTEM")
 			endif()
 			#dk_printVar(MSYSTEM)
 			dk_set(${MSYSTEM} ON)
