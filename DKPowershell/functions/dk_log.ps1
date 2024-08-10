@@ -51,7 +51,7 @@ if(!(${WARNING_HALT}))     { ${WARNING_HALT} = 0 }
 if(!(${ERROR_ENABLE}))   { ${ERROR_ENABLE} = 1 }
 if(!(${ERROR_COLOR}))    { ${ERROR_COLOR} = ${red} }
 if(!(${ERROR_TAG}))      { ${ERROR_TAG} = "ERROR: " }
-if(!(${ERROR_PAUSE}))    { ${ERROR_PAUSE} = 0 }
+if(!(${ERROR_PAUSE}))    { ${ERROR_PAUSE} = 1 }
 if(!(${ERROR_TRACE}))    { ${ERROR_TRACE} = 0 }
 if(!(${ERROR_LINE}))     { ${ERROR_LINE} = 0 }
 if(!(${ERROR_HALT}))     { ${ERROR_HALT} = 0 }
@@ -60,7 +60,7 @@ if(!(${ERROR_HALT}))     { ${ERROR_HALT} = 0 }
 if(!(${TODO_ENABLE}))   { ${TODO_ENABLE} = 1 }
 if(!(${TODO_COLOR}))    { ${TODO_COLOR} = ${yellow} }
 if(!(${TODO_TAG}))      { ${TODO_TAG} = "TODO: " }
-if(!(${TODO_PAUSE}))    { ${TODO_PAUSE} = 0 }
+if(!(${TODO_PAUSE}))    { ${TODO_PAUSE} = 1 }
 if(!(${TODO_TRACE}))    { ${TODO_TRACE} = 0 }
 if(!(${TODO_LINE}))     { ${TODO_LINE} = 0 }
 if(!(${TODO_HALT}))     { ${TODO_HALT} = 0 }
@@ -69,7 +69,7 @@ if(!(${TODO_HALT}))     { ${TODO_HALT} = 0 }
 if(!(${FIXME_ENABLE}))   { ${FIXME_ENABLE} = 1 }
 if(!(${FIXME_COLOR}))    { ${FIXME_COLOR} = ${red} }
 if(!(${FIXME_TAG}))      { ${FIXME_TAG} = "FIXME: " }
-if(!(${FIXME_PAUSE}))    { ${FIXME_PAUSE} = 0 }
+if(!(${FIXME_PAUSE}))    { ${FIXME_PAUSE} = 1 }
 if(!(${FIXME_TRACE}))    { ${FIXME_TRACE} = 0 }
 if(!(${FIXME_LINE}))     { ${FIXME_LINE} = 0 }
 if(!(${FIXME_HALT}))     { ${FIXME_HALT} = 0 }
@@ -87,18 +87,15 @@ function Global:dk_log() {
 
 	if(${ENABLE_dk_log} -ne 1){ return }
 	
-	
-	$arg1 = $args[0]
-	$arg2 = $args[1]
 	${ARGC} = ${args}.count
-	if(${ARGC} -eq 1) {${_level_} = "DEFAULT"; ${_message_} = "${arg1}" }
-	if(${ARGC} -eq 2) {${_level_} = ${arg1}; ${_message_} = "${arg2}" }
+	if(${ARGC} -eq 1) {${_level_} = "DEFAULT"; ${_message_} = $args[0] }
+	if(${ARGC} -eq 2) {${_level_} = $args[0]; ${_message_} = $args[1] }
 	#if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 
-	${level_ENABLE} = Get-Variable "${_level_}_ENABLE" -valueOnly
+	${level_ENABLE} = Get-Variable "${_level_}_ENABLE" -valueOnly -ErrorAction SilentlyContinue
 	${level_COLOR} = Get-Variable "${_level_}_COLOR" -valueOnly
 	${level_PAUSE} = Get-Variable "${_level_}_PAUSE" -valueOnly
-	${level_TAG} = Get-Variable "${_level_}_TAG" -valueOnly
+	${level_TAG} = Get-Variable "${_level_}_TAG" -valueOnly -ErrorAction SilentlyContinue
 	${level_TRACE} = Get-Variable "${_level_}_TRACE" -valueOnly
 	${level_LINE} = Get-Variable "${_level_}_LINE" -valueOnly
 	${level_HALT} = Get-Variable "${_level_}_HALT" -valueOnly
@@ -106,23 +103,25 @@ function Global:dk_log() {
 
 	
 	dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
-#	if(${level_PAUSE} -eq 1) dk_echo "${level_COLOR}*** PAUSE_ON_DEBUG ***${clr}" dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
-#	if(${level_TRACE} -eq 1) dk_echo "${level_COLOR}*** TRACE_ON_DEBUG ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
-#	if(${level_LINE} -eq 1)  dk_echo "${level_COLOR}*** LINE_ON_DEBUG ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true #OR HALT AND NOT NO_HALT)
-#	if(${level_HALT} -eq 1)  dk_echo "${level_COLOR}*** HALT_ON_DEBUG ***${clr}"  && dk_exit 0; true #OR HALT AND NOT NO_HALT)
+	if(${level_PAUSE} -eq 1){ dk_echo "${level_COLOR}*** PAUSE_ON_DEBUG ***${clr}"; dk_pause }
+	if(${level_TRACE} -eq 1){ dk_echo "${level_COLOR}*** TRACE_ON_DEBUG ***${clr}"; dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
+	if(${level_LINE} -eq 1){  dk_echo "${level_COLOR}*** LINE_ON_DEBUG ***${clr}"; dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
+	if(${level_HALT} -eq 1){  dk_echo "${level_COLOR}*** HALT_ON_DEBUG ***${clr}"; dk_exit 0 } #OR HALT AND NOT NO_HALT)
 }
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-#	dk_debugFunc 0
+	dk_debugFunc 0
 	
-#	dk_log "test dk_log message"
+	dk_log "test dk_log message"
 	
 	dk_log VERBOSE "test dk_log VERBOSE message"
 	dk_log DEBUG   "test dk_log DEBUG message"
 	dk_log INFO    "test dk_log INFO message"
 	dk_log WARNING "test dk_log WARNING message"
 	dk_log ERROR   "test dk_log ERROR message"
+	dk_log TODO    "test dk_log TODO message"
+	dk_log FIXME   "test dk_log FIXME message"
 }
