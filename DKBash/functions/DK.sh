@@ -66,6 +66,7 @@ DK(){
 	dk_source __CALLER__
 	dk_source dk_debugFunc
 	dk_source dk_load
+	#dk_load dk_log
 	dk_load dk_onExit    	# EXIT handler
 	dk_load dk_onError   	# ERR handler
 	dk_load dk_color
@@ -129,8 +130,9 @@ dkinit(){
 	dk_defined       blue                || dk_export blue       "${ESC}[34m"
 	dk_defined       cyan                || dk_export cyan       "${ESC}[36m"
 	dk_defined       bg_magenta          || dk_export bg_magenta "${ESC}[45m"
+	dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                # dk_warning "test dk_warning";
 	dk_commandExists dk_warning          || dk_warning()         { dk_echo "${yellow}WARNING: ${1}${clr}"; }                                   # dk_warning "test dk_warning";
-	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                    # dk_info "test dk_info";
+	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                      # dk_info "test dk_info";
 	dk_commandExists dk_debug            || dk_debug()           { dk_echo "${blue}  DEBUG: ${1}${clr}"; }                                     # dk_debug "test dk_debug";
 	dk_commandExists dk_verbose          || dk_verbose()         { dk_echo "${cyan}VERBOSE: ${1}${clr}"; }                                     # dk_verbose "test dk_verbose";
 	dk_commandExists dk_error            || dk_error()           { dk_echo "${red}  ERROR: ${1}${clr}"; dk_pause; exit; }                      # dk_error "test dk_error";

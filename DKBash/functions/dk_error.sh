@@ -1,12 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-#dk_set ENABLE_dk_error 0
-#dk_set TRACE_ON_ERROR 0
-#dk_set LINE_ON_ERROR 0
-#dk_set PAUSE_ON_ERROR 0
-#dk_set HALT_ON_ERROR 0
-#dk_set ERROR_TAG " ERROR: "
 ##################################################################################
 # dk_error(<message>)
 #
