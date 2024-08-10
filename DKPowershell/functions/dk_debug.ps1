@@ -2,12 +2,12 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 if(!$dk_debug){ $dk_debug = 1 } else{ return }
 
 
-if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1   }
-if(!$PAUSE_ON_DEBUG) { $global:PAUSE_ON_DEBUG = 0    }
-if(!$TRACE_ON_DEBUG) { $global:TRACE_ON_DEBUG = 0    }
-if(!$LINE_ON_DEBUG)  { $global:LINE_ON_DEBUG = 0     }
-if(!$HALT_ON_DEBUG)  { $global:HALT_ON_DEBUG = 0     }
-if(!$DEBUG_TAG)      { $global:DEBUG_TAG = "DEBUG: " }
+#if(!$ENABLE_dk_debug){ $global:ENABLE_dk_debug = 1   }
+#if(!$PAUSE_ON_DEBUG) { $global:PAUSE_ON_DEBUG = 0    }
+#if(!$TRACE_ON_DEBUG) { $global:TRACE_ON_DEBUG = 0    }
+#if(!$LINE_ON_DEBUG)  { $global:LINE_ON_DEBUG = 0     }
+#if(!$HALT_ON_DEBUG)  { $global:HALT_ON_DEBUG = 0     }
+#if(!$DEBUG_TAG)      { $global:DEBUG_TAG = "DEBUG: " }
 ################################################################################
 # dk_debug(message)
 #
@@ -17,7 +17,10 @@ if(!$DEBUG_TAG)      { $global:DEBUG_TAG = "DEBUG: " }
 #
 function Global:dk_debug($message) {
 	dk_debugFunc 1
-
+	dk_log DEBUG "${message}"
+	dk_echo "called dk_log"
+	return
+	
 	if($ENABLE_dk_debug -ne 1){ return }
 
 	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }

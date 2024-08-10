@@ -3,76 +3,76 @@ if(!$dk_log){ $dk_log = 1 } else{ return }
 
 
 # DEFAULT
-if(!(${ENABLE_dk_log}))  { ${ENABLE_dk_log} = 1 }
-if(!(${DEFAULT_COLOR})) { ${DEFAULT_COLOR} = ${white} }
-#if(!(${DEFAULT_TAG}))  { ${DEFAULT_TAG} = bat>: " }
-if(!(${DEFAULT_PAUSE})) { ${DEFAULT_PAUSE} = 0 }
-if(!(${DEFAULT_TRACE})) { ${DEFAULT_TRACE} = 0 }
-if(!(${DEFAULT_LINE}))  { ${DEFAULT_LINE} = 0 }
-if(!(${DEFAULT_HALT}))  { ${DEFAULT_HALT} = 0 }
+if(!(${ENABLE_dk_log})) { $global:ENABLE_dk_log = 1 }
+if(!(${DEFAULT_COLOR})) { $global:DEFAULT_COLOR = ${white} }
+#if(!(${DEFAULT_TAG}))  { $global:DEFAULT_TAG = bat>: " }
+if(!(${DEFAULT_PAUSE})) { $global:DEFAULT_PAUSE = 0 }
+if(!(${DEFAULT_TRACE})) { $global:DEFAULT_TRACE = 0 }
+if(!(${DEFAULT_LINE}))  { $global:DEFAULT_LINE = 0 }
+if(!(${DEFAULT_HALT}))  { $global:DEFAULT_HALT = 0 }
 
 # VERBOSE
-if(!(${VERBOSE_ENABLE})) { ${VERBOSE_ENABLE} = 1 }
-if(!(${VERBOSE_COLOR}))  { ${VERBOSE_COLOR} = ${magenta} }
-if(!(${VERBOSE_TAG}))    { ${VERBOSE_TAG} = "VERBOSE: " }
-if(!(${VERBOSE_PAUSE}))  { ${VERBOSE_PAUSE} = 1 }
-if(!(${VERBOSE_TRACE}))  { ${VERBOSE_TRACE} = 0 }
-if(!(${VERBOSE_LINE}))   { ${VERBOSE_LINE} = 0 }
-if(!(${VERBOSE_HALT}))   { ${VERBOSE_HALT} = 0 }
+if(!(${VERBOSE_ENABLE})) { $global:VERBOSE_ENABLE = 1 }
+if(!(${VERBOSE_COLOR}))  { $global:VERBOSE_COLOR = ${magenta} }
+if(!(${VERBOSE_TAG}))    { $global:VERBOSE_TAG = "VERBOSE: " }
+if(!(${VERBOSE_PAUSE}))  { $global:VERBOSE_PAUSE = 1 }
+if(!(${VERBOSE_TRACE}))  { $global:VERBOSE_TRACE = 0 }
+if(!(${VERBOSE_LINE}))   { $global:VERBOSE_LINE = 0 }
+if(!(${VERBOSE_HALT}))   { $global:VERBOSE_HALT = 0 }
 
 # DEBUG
-if(!(${DEBUG_ENABLE}))   { ${DEBUG_ENABLE} = 1 }
-if(!(${DEBUG_COLOR}))    { ${DEBUG_COLOR} = ${blue} }
-if(!(${DEBUG_TAG}))      { ${DEBUG_TAG} = "DEBUG: " }
-if(!(${DEBUG_PAUSE}))    { ${DEBUG_PAUSE} = 0 }
-if(!(${DEBUG_TRACE}))    { ${DEBUG_TRACE} = 0 }
-if(!(${DEBUG_LINE}))     { ${DEBUG_LINE} = 0 }
-if(!(${DEBUG_HALT}))     { ${DEBUG_HALT} = 0 }
+if(!(${DEBUG_ENABLE}))   { $global:DEBUG_ENABLE = 1 }
+if(!(${DEBUG_COLOR}))    { $global:DEBUG_COLOR = ${blue} }
+if(!(${DEBUG_TAG}))      { $global:DEBUG_TAG = "DEBUG: " }
+if(!(${DEBUG_PAUSE}))    { $global:DEBUG_PAUSE = 0 }
+if(!(${DEBUG_TRACE}))    { $global:DEBUG_TRACE = 0 }
+if(!(${DEBUG_LINE}))     { $global:DEBUG_LINE = 0 }
+if(!(${DEBUG_HALT}))     { $global:DEBUG_HALT = 0 }
 
 # INFO
-if(!(${INFO_ENABLE}))   { ${INFO_ENABLE} = 1 }
-if(!(${INFO_COLOR}))    { ${INFO_COLOR} = ${white} }
-if(!(${INFO_TAG}))      { ${INFO_TAG} = "INFO: " }
-if(!(${INFO_PAUSE}))    { ${INFO_PAUSE} = 0 }
-if(!(${INFO_TRACE}))    { ${INFO_TRACE} = 0 }
-if(!(${INFO_LINE}))     { ${INFO_LINE} = 0 }
-if(!(${INFO_HALT}))     { ${INFO_HALT} = 0 }
+if(!(${INFO_ENABLE}))   { $global:INFO_ENABLE = 1 }
+if(!(${INFO_COLOR}))    { $global:INFO_COLOR = ${white} }
+if(!(${INFO_TAG}))      { $global:INFO_TAG = "INFO: " }
+if(!(${INFO_PAUSE}))    { $global:INFO_PAUSE = 0 }
+if(!(${INFO_TRACE}))    { $global:INFO_TRACE = 0 }
+if(!(${INFO_LINE}))     { $global:INFO_LINE = 0 }
+if(!(${INFO_HALT}))     { $global:INFO_HALT = 0 }
 
 # WARNING
-if(!(${WARNING_ENABLE}))  { ${WARNING_ENABLE} = 1 }
-if(!(${WARNING_COLOR}))    { ${WARNING_COLOR} = ${yellow} }
-if(!(${WARNING_TAG}))      { ${WARNING_TAG} = "WARNING: " }
-if(!(${WARNING_PAUSE}))    { ${WARNING_PAUSE} = 0 }
-if(!(${WARNING_TRACE}))    { ${WARNING_TRACE} = 0 }
-if(!(${WARNING_LINE}))     { ${WARNING_LINE} = 0 }
-if(!(${WARNING_HALT}))     { ${WARNING_HALT} = 0 }
+if(!(${WARNING_ENABLE}))  { $global:WARNING_ENABLE = 1 }
+if(!(${WARNING_COLOR}))   { $global:WARNING_COLOR = ${yellow} }
+if(!(${WARNING_TAG}))     { $global:WARNING_TAG = "WARNING: " }
+if(!(${WARNING_PAUSE}))   { $global:WARNING_PAUSE = 0 }
+if(!(${WARNING_TRACE}))   { $global:WARNING_TRACE = 0 }
+if(!(${WARNING_LINE}))    { $global:WARNING_LINE = 0 }
+if(!(${WARNING_HALT}))    { $global:WARNING_HALT = 0 }
 
 # ERROR
-if(!(${ERROR_ENABLE}))   { ${ERROR_ENABLE} = 1 }
-if(!(${ERROR_COLOR}))    { ${ERROR_COLOR} = ${red} }
-if(!(${ERROR_TAG}))      { ${ERROR_TAG} = "ERROR: " }
-if(!(${ERROR_PAUSE}))    { ${ERROR_PAUSE} = 1 }
-if(!(${ERROR_TRACE}))    { ${ERROR_TRACE} = 0 }
-if(!(${ERROR_LINE}))     { ${ERROR_LINE} = 0 }
-if(!(${ERROR_HALT}))     { ${ERROR_HALT} = 0 }
+if(!(${ERROR_ENABLE}))   { $global:ERROR_ENABLE = 1 }
+if(!(${ERROR_COLOR}))    { $global:ERROR_COLOR = ${red} }
+if(!(${ERROR_TAG}))      { $global:ERROR_TAG = "ERROR: " }
+if(!(${ERROR_PAUSE}))    { $global:ERROR_PAUSE = 1 }
+if(!(${ERROR_TRACE}))    { $global:ERROR_TRACE = 0 }
+if(!(${ERROR_LINE}))     { $global:ERROR_LINE = 0 }
+if(!(${ERROR_HALT}))     { $global:ERROR_HALT = 0 }
 
 # TODO
-if(!(${TODO_ENABLE}))   { ${TODO_ENABLE} = 1 }
-if(!(${TODO_COLOR}))    { ${TODO_COLOR} = ${yellow} }
-if(!(${TODO_TAG}))      { ${TODO_TAG} = "TODO: " }
-if(!(${TODO_PAUSE}))    { ${TODO_PAUSE} = 1 }
-if(!(${TODO_TRACE}))    { ${TODO_TRACE} = 0 }
-if(!(${TODO_LINE}))     { ${TODO_LINE} = 0 }
-if(!(${TODO_HALT}))     { ${TODO_HALT} = 0 }
+if(!(${TODO_ENABLE}))   { $global:TODO_ENABLE = 1 }
+if(!(${TODO_COLOR}))    { $global:TODO_COLOR = ${yellow} }
+if(!(${TODO_TAG}))      { $global:TODO_TAG = "TODO: " }
+if(!(${TODO_PAUSE}))    { $global:TODO_PAUSE = 1 }
+if(!(${TODO_TRACE}))    { $global:TODO_TRACE = 0 }
+if(!(${TODO_LINE}))     { $global:TODO_LINE = 0 }
+if(!(${TODO_HALT}))     { $global:TODO_HALT = 0 }
 
 # FIXME
-if(!(${FIXME_ENABLE}))   { ${FIXME_ENABLE} = 1 }
-if(!(${FIXME_COLOR}))    { ${FIXME_COLOR} = ${red} }
-if(!(${FIXME_TAG}))      { ${FIXME_TAG} = "FIXME: " }
-if(!(${FIXME_PAUSE}))    { ${FIXME_PAUSE} = 1 }
-if(!(${FIXME_TRACE}))    { ${FIXME_TRACE} = 0 }
-if(!(${FIXME_LINE}))     { ${FIXME_LINE} = 0 }
-if(!(${FIXME_HALT}))     { ${FIXME_HALT} = 0 }
+if(!(${FIXME_ENABLE}))   { $global:FIXME_ENABLE = 1 }
+if(!(${FIXME_COLOR}))    { $global:FIXME_COLOR = ${red} }
+if(!(${FIXME_TAG}))      { $global:FIXME_TAG = "FIXME: " }
+if(!(${FIXME_PAUSE}))    { $global:FIXME_PAUSE = 1 }
+if(!(${FIXME_TRACE}))    { $global:FIXME_TRACE = 0 }
+if(!(${FIXME_LINE}))     { $global:FIXME_LINE = 0 }
+if(!(${FIXME_HALT}))     { $global:FIXME_HALT = 0 }
 
 
 ################################################################################
