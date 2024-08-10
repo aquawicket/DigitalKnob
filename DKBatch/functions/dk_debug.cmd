@@ -2,12 +2,6 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
-if not defined ENABLE_dk_debug  set "ENABLE_dk_debug=1"
-if not defined PAUSE_ON_DEBUG   set "PAUSE_ON_DEBUG=0"
-if not defined TRACE_ON_DEBUG   set "TRACE_ON_DEBUG=0"
-if not defined LINE_ON_DEBUG    set "LINE_ON_DEBUG=0"
-if not defined HALT_ON_DEBUG    set "HALT_ON_DEBUG=0"
-if not defined DEBUG_TAG        set "DEBUG_TAG=DEBUG: "
 ::##################################################################################
 ::# dk_debug(<message>)
 ::#
@@ -17,19 +11,7 @@ if not defined DEBUG_TAG        set "DEBUG_TAG=DEBUG: "
 ::#
 :dk_debug
 	call dk_debugFunc 1
-	
-	if "%ENABLE_dk_debug%" neq "1"  goto:eof
-	
-	setlocal   
-		set "_message_=%~1"
-		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
-
-		call dk_echo "%blue%%DEBUG_TAG%%_message_%%clr%"
-		if "%PAUSE_ON_DEBUG%"=="1" call dk_echo "%blue%*** PAUSE_ON_DEBUG ***%clr%"  & call dk_pause
-		if "%TRACE_ON_DEBUG%"=="1" call dk_echo "%blue%*** TRACE_ON_DEBUG ***%clr%"  & call dk_stacktrace
-		if "%LINE_ON_DEBUG%"=="1"  call dk_echo "%blue%*** LINE_ON_DEBUG ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "%HALT_ON_DEBUG%"=="1"  call dk_echo "%blue%*** HALT_ON_DEBUG ***%clr%"   & call dk_exit
-	endlocal
+	call dk_log DEBUG "%~1"
 goto:eof
 
 
