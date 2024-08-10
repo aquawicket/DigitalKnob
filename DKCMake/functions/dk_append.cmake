@@ -21,7 +21,7 @@ function(dk_append variable) #value
 	endif()
 	
 endfunction()
-dk_createOsMacros("dk_append")
+#dk_createOsMacros("dk_append")
 
 
 
@@ -32,5 +32,4 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-
 endfunction()

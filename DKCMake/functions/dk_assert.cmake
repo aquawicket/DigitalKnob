@@ -24,7 +24,7 @@ function(dk_assert expression)
 		else()
 			dk_error("${bg_red} ${expression} ${clr}")
 		endif()
-		dk_exit()
+		dk_exit(1)
 	endif()
 endfunction()
 

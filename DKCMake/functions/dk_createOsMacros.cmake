@@ -1,6 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
-dk_load(dk_createPrefixMacro)
 
 
 ###############################################################################
@@ -12,6 +11,8 @@ dk_load(dk_createPrefixMacro)
 #
 function(dk_createOsMacros func)
 	#dk_debugFunc(${ARGV})
+	message("dk_createOsMacros(${ARGV})")
+	
 
 	if(ext_string)
 		dk_error("ext_string variable already in use")

@@ -1,6 +1,14 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
+if(NOT dk_loading_list)
+	set(dk_loading_list "" CACHE INTERNAL "")
+endif()
+if(NOT dk_loaded_list)
+	set(dk_loaded_list "" CACHE INTERNAL "")
+endif()
+
+set(indent_count 0 CACHE INTERNAL "")
 ##################################################################################
 # dk_load(var)
 #
@@ -10,6 +18,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 macro(dk_load var)
 	#dk_debugFunc(${ARGV})
+	#dk_echo("dk_load(${var})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)
@@ -26,22 +35,37 @@ macro(dk_load var)
 	else()
 		set(fn ${name_we})
 	endif()
-	
-	#NOTE: Loading a file with the name of an existing function will cause this to fail
-	#if(COMMAND ${fn})
-	#	dk_echo("fn:${fn}  dk_load(${fn}) function already loaded")
-	#if(COMMAND ${var})
-	#	dk_echo("var:${var}    dk_load(${var}) function already loaded")
-	#else()
-		dk_parseFunctionsAndLoad(${fn} ${var})
-	#endif()
+		
+	if(NOT ${fn} IN_LIST dk_loading_list)
+		list(APPEND dk_loading_list "${fn}")
+		
+		math(EXPR indent_count "${indent_count}+1")
+		string(REPEAT "-" ${indent_count} indent)
+		message("${indent}> dk_load(${var})")	
+		
+		#NOTE: Loading a file with the name of an existing function will cause this to fail
+		#if(COMMAND ${fn})
+		#	dk_echo("fn:${fn}  dk_load(${fn}) function already loaded")
+		#if(COMMAND ${var})
+		#	dk_echo("var:${var}    dk_load(${var}) function already loaded")
+		#else()
+			dk_parseFunctionsAndLoad(${fn} ${var})
+		#endif()
+		
+		message("${indent}< dk_load(${var})")
+		math(EXPR indent_count "${indent_count}-1")
+		string(REPEAT "-" ${indent_count} indent)
+		
+	else()
+		#message("${var} already loading")
+	endif()
 endmacro()
 
 
 
 
 macro(dk_parseFunctionsAndLoad fn fpath)
-	#dk_echo("dk_parseFunctionsAndLoad(${ARGV})") #dk_debugFunc(${ARGV})
+	#dk_echo("dk_parseFunctionsAndLoad(${fn})")
 	
 	if(NOT dk_load_list)
 		set(dk_load_list "" CACHE INTERNAL "")
@@ -61,13 +85,14 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	else()
 		dk_error("${fpath}: file not found")
 	endif()
-			
-	if(${${fn}_file} IN_LIST dk_load_list)
+	
+	
+	#if(${${fn}_file} IN_LIST dk_load_list)
 		#dk_debug("dk_load(${fn}) function already in list @ ${${fn}_file}")
 		#dk_verbose("dk_load_list = ${dk_load_list}")
-	else()
+	#else()
 		#dk_verbose("loading ${${fn}_file}")
-		list(APPEND dk_load_list "${${fn}_file}")
+		#list(APPEND dk_load_list "${${fn}_file}")
 				
 		#dk_verbose("${fn}_file = ${${fn}_file}")
 		file(READ ${${fn}_file} ${fn}_contents)
@@ -76,6 +101,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
 		unset(${fn}_contents)
 		list(REMOVE_DUPLICATES ${fn}_matches)
+		
 		foreach(${fn}_item ${${fn}_matches})
 			if(NOT ${fn}_item)
 				continue()
@@ -95,7 +121,8 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 			#dk_verbose("item-stripped = ${${fn}_item}")
 					
 			#dk_verbose("${fn}_item  ${${fn}_item}")
-			if(${${fn}_item} IN_LIST dk_load_list)
+			#if(${${fn}_item} IN_LIST dk_load_list)
+			if(${${fn}_item} IN_LIST dk_loading_list)
 				#dk_verbose("${fn} -> ${${fn}_item} already in list")
 				continue()
 			elseif(${${fn}_item} STREQUAL ${fn})
@@ -105,21 +132,38 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 				#dk_verbose("${fn} -> ${${fn}_item} already loaded")
 				continue()
 			else()
-				#dk_verbose("${fn} -> loading ${${fn}_item}")
-				dk_load(${${fn}_item})
+				#if(${fn} STREQUAL "dk_error")
+				#	message("fn = ${fn}")
+				#	message("fpath = ${fpath}")
+				#	message("fn_file} = ${${fn}_file}")
+				#	message("fn_item} = ${${fn}_item}")
+				#	message("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
+				#	message("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
+				#endif()
+
+				#if(NOT ${${fn}_file} STREQUAL "${DKSCRIPT_PATH}")
+				if(NOT ${fn} IN_LIST dk_loaded_list)
+					#if(${fn} IN_LIST dk_loading_list)
+					#	include(${${fn}_file})
+					#else()
+						dk_load(${${fn}_item})
+					#endif()
+				endif()
 			endif()
 		endforeach()
-			
+
 		if(NOT "${${fn}_file}" STREQUAL "${DKSCRIPT_PATH}")
-			dk_echo("${fn} -> include(${${fn}_file})")
+			#dk_echo("${fn} -> include(${${fn}_file})")
+		#if(NOT ${fn} IN_LIST dk_loading_list)
 			include(${${fn}_file})
 		endif()
+		
 		
 		### variable clean-up ###
 		unset(${fn}_file)
 		unset(${fn}_item)
 		unset(${fn}_matches)
-	endif()
+	#endif()
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)

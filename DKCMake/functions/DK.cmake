@@ -39,7 +39,7 @@ function(DKINIT)
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
-	#dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
+	dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
 	#dk_echo("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
 	#dk_echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
 	#dk_echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
@@ -57,6 +57,7 @@ function(DKINIT)
 
 	############ LOAD FUNCTION FILES ############
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	#dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
 	dk_load(__FILE__)
 	dk_load(__LINE__)
@@ -79,9 +80,8 @@ function(DKINIT)
 		dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 		include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 		DKTEST()
-		
 		dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
-		dk_pause()
+		dk_exit(0)
 	endif()
 	endif()
 endfunction()

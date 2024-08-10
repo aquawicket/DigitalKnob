@@ -1,6 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
+dk_load("dk_eval")
 ###############################################################################
 # dk_if(condition... "code")
 #
@@ -11,20 +12,23 @@ macro(dk_if)
 	dk_debugFunc(${ARGV})
 	
 	set(n 0)
+	unset(argv)
 	list(APPEND argv ${ARGV})
 	list(POP_BACK argv code)
 	foreach(arg ${argv})
 		set(arg${n} ${arg})
 		math(EXPR n "${n}+1")
 	endforeach()
+	while(arg${n})
+		unset(arg${n})
+		math(EXPR n "${n}+1")
+	endwhile()
 
 	if(${arg0} ${arg1} ${arg2} ${arg3} ${arg4} ${arg5} ${arg6} ${arg7} ${arg8} ${arg9})
 		dk_eval("${code}")
 	else()
-		message("${argv} = false")
+		#message("${argv} = false")
 	endif()
-	unset(argv)
-	unset(code)
 endmacro()
 
 

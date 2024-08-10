@@ -20,7 +20,7 @@ function(dk_assertPath path)
 		else()
 			dk_error("${bg_red} ${path} ${clr}")
 		endif()
-		dk_exit() #FIXME:  is this needed?
+		dk_exit(1)
 	endif()
 endfunction()
 
