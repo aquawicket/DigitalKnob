@@ -1,12 +1,13 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
+
 if not defined ENABLE_dk_debug  set "ENABLE_dk_debug=1"
 if not defined PAUSE_ON_DEBUG   set "PAUSE_ON_DEBUG=0"
 if not defined TRACE_ON_DEBUG   set "TRACE_ON_DEBUG=0"
 if not defined LINE_ON_DEBUG    set "LINE_ON_DEBUG=0"
 if not defined HALT_ON_DEBUG    set "HALT_ON_DEBUG=0"
-::if not defined DEBUG_TAG      set "DEBUG_TAG=DEBUG: "
+if not defined DEBUG_TAG        set "DEBUG_TAG=DEBUG: "
 ::##################################################################################
 ::# dk_debug(<message>)
 ::#

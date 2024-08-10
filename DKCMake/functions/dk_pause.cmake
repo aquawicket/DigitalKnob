@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_pause) 
 	dk_debugFunc(${ARGV})
 
-	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
+#	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
 	find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		#dk_validate(DKBATCH_DIR "dk_getDKPaths()")

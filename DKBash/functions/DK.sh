@@ -81,7 +81,7 @@ dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
 			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 			#dk_echo "${bg_RGB}20;20;20m"
 			dk_source "${DKSCRIPT_PATH}"
-			dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
+			#dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
 			#dk_echo "${clr}"
 			DKTEST
 			dk_echo
