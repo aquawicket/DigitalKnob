@@ -42,7 +42,7 @@ if not defined INFO_HALT       set "INFO_HALT=0"
 if not defined WARNING_ENABLE  set "WARNING_ENABLE=1"
 if not defined WARNING_COLOR   set "WARNING_COLOR=%yellow%"
 if not defined WARNING_TAG     set "WARNING_TAG=WARNING: "
-if not defined WARNING_PAUSE   set "WARNING_PAUSE=1"
+if not defined WARNING_PAUSE   set "WARNING_PAUSE=0"
 if not defined WARNING_TRACE   set "WARNING_TRACE=0"
 if not defined WARNING_LINE    set "WARNING_LINE=0"
 if not defined WARNING_HALT    set "WARNING_HALT=0"
@@ -55,6 +55,24 @@ if not defined ERROR_PAUSE     set "ERROR_PAUSE=1"
 if not defined ERROR_TRACE     set "ERROR_TRACE=0"
 if not defined ERROR_LINE      set "ERROR_LINE=0"
 if not defined ERROR_HALT      set "ERROR_HALT=1"
+
+:: TODO
+if not defined TODO_ENABLE    set "TODO_ENABLE=1"
+if not defined TODO_COLOR     set "TODO_COLOR=%yellow%"
+if not defined TODO_TAG       set "TODO_TAG=TODO: "
+if not defined TODO_PAUSE     set "TODO_PAUSE=1"
+if not defined TODO_TRACE     set "TODO_TRACE=0"
+if not defined TODO_LINE      set "TODO_LINE=0"
+if not defined TODO_HALT      set "TODO_HALT=0"
+
+:: FIXME
+if not defined FIXME_ENABLE   set "FIXME_ENABLE=1"
+if not defined FIXME_COLOR    set "FIXME_COLOR=%red%"
+if not defined FIXME_TAG      set "FIXME_TAG=FIXME: "
+if not defined FIXME_PAUSE    set "FIXME_PAUSE=1"
+if not defined FIXME_TRACE    set "FIXME_TRACE=0"
+if not defined FIXME_LINE     set "FIXME_LINE=0"
+if not defined FIXME_HALT     set "FIXME_HALT=0"
 
 ::##################################################################################
 ::# dk_log(<level> <message>)
