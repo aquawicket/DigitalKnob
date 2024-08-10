@@ -7,7 +7,7 @@
 #
 #
 dk_gitUpdate() {
-	dk_debugFunc 1
+	dk_debugFunc 0 1
 
 
 	if ! [ "${1-}" = "NO_CONFIRM" ]; then
