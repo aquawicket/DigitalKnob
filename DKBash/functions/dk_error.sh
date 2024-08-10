@@ -10,17 +10,8 @@
 #
 dk_error() {
 	dk_debugFunc 1
-
-
-	[ ${ENABLE_dk_error-1} -ne 1 ] && return
-	msg="${1}"
-	
-	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
-	dk_echo "${red-}${ERROR_TAG-}${msg}${clr-}"
-	[ ${TRACE_ON_ERROR-0} -eq 1 ] && dk_echo "${red}*** TRACE_ON_ERROR ***${clr}" && dk_load dk_stacktrace && dk_stacktrace; true          #OR TRACE AND NOT NO_TRACE
-	[ ${LINE_ON_ERROR-0} -eq 1 ]  && dk_echo "${red}*** LINE_ON_ERROR ***${clr}"  && dk_load dk_showFileLine && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true
-	[ ${PAUSE_ON_ERROR-1} -eq 1 ] && dk_echo "${red}*** PAUSE_ON_ERROR ***${clr}" && dk_load dk_pause && dk_pause; true                    #OR PAUSE AND NOT NO_PAUSE)
-	[ ${HALT_ON_ERROR-0} -eq 1 ]  && dk_echo "${red}*** HALT_ON_ERROR ***${clr}"  && dk_load dk_exit && dk_exit; true                      #OR HALT AND NOT NO_HALT)
+	dk_log ERROR "$1"
+	return
 }
 
 
