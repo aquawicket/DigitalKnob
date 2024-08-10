@@ -86,7 +86,6 @@ if not defined FIXME_HALT     set "FIXME_HALT=0"
 	call dk_debugFunc 1 2
 	
 	if "%ENABLE_dk_log%" neq "1"  goto:eof
-	if "%ENABLE_dk_log%" neq "1"  goto:eof
 	
 	setlocal 
 		if %__ARGC__% equ 1 set "_level_=DEFAULT" && set "_message_=%~1"

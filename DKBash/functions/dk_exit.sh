@@ -14,8 +14,8 @@ dk_exit() {
 	#[ $SHLVL -gt 1 ] && dk_echo "exec ${SHELL}" || dk_echo "exit ${*}"
 	#[ $SHLVL -eq 1 ] && read -rp 'Press enter to exit...' key
 	
-	[ ${1} -eq 0 ] && trap '' EXIT
-	builtin exit ${1}
+	[ ${1-} -eq 0 ] && trap '' EXIT
+	builtin exit ${1-}
 }
 
 
