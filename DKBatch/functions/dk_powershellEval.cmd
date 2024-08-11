@@ -8,85 +8,30 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_powershellEval
 	call dk_debugFunc 1 99
 	
-	
 	setlocal
-	::if not exist "%POWERSHELL_EXE%" where /R C:\Users\Administrator\digitalknob\DKTools pwsh.exe
 	
+	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
+	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
+	call dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	
-	call dk_validate DKPOWERSHELL_DIR "call dk_validateBranch"
-	if not exist "%DKPOWERSHELL_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
-	
-	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-	if not exist "%POWERSHELL_EXE%"   call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
-    
-    ::call dk_set DKCOMMAND "%~1"
-	::call dk_replaceAll "%~1" "\" "/" DKCOMMAND
-    ::call dk_set DKRETURN "%~2"
-	::call dk_set DKVARS "%~3"
-	
-	::call dk_set DK_EVAL "%DKCMAKE_DIR%\DKEval.cmake"
-	::call dk_replaceAll "%DKPOWERSHELL_DIR%\DKEval.cmake" "\" "/" DK_EVAL
-	
-	::### build POWERSHELL_ARGS ###
+	set "POWERSHELL_EXE=powershell.exe"
+	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
-	:: append %DKCOMMAND% to POWERSHELL_ARGS with "'s removed
-	::if defined DKCOMMAND  call set "POWERSHELL_ARGS=%POWERSHELL_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""
+	call dk_error "POWERSHELL_EXE command invalid"
+
+::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+::	call dk_validate DKPOWERSHELL_DIR "call dk_validateBranch"
+::	if not exist "%DKPOWERSHELL_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
 	
-	:: append %DKRETURN% to POWERSHELL_ARGS with "'s removed
-	::if defined DKRETURN   call set "POWERSHELL_ARGS=%POWERSHELL_ARGS% "-DDKRETURN=%%DKRETURN:"=%%""
+::	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
+::	if not exist "%POWERSHELL_EXE%"   call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
 	
-	:: append %DKVARS% to POWERSHELL_ARGS with "'s removed
-	::if defined DKVARS     call set "POWERSHELL_ARGS=%POWERSHELL_ARGS% "%%DKVARS:"=%%""
-	
-	::set "POWERSHELL_ARGS=%POWERSHELL_ARGS% "--log-level=TRACE""
-	
-	::set "POWERSHELL_ARGS=%POWERSHELL_ARGS% >cmake_eval.out"
-	
-	::set "POWERSHELL_ARGS=%POWERSHELL_ARGS% 2>cmake_eval.err"
-	
-	::call dk_set POWERSHELL_ARGS "%~1"
-	::echo POWERSHELL_ARGS = %POWERSHELL_ARGS%
-	::"%POWERSHELL_EXE%" -Command %POWERSHELL_ARGS%
-	::"%POWERSHELL_EXE%" -Command %~1
+	:found
 	"%POWERSHELL_EXE%" -Command %*
 	
-	::if not defined DKRETURN goto:eof
-	::if not exist %DKPOWERSHELL_DIR%\powershell_vars.cmd goto:eof
-    ::call %DKPOWERSHELL_DIR%\powershell_vars.cmd
-	::del %DKPOWERSHELL_DIR%\powershell_vars.cmd
-
-    ::call dk_printVar ERRORLEVEL
-
-    :::: work with cmake return code files ::::
-    :: std::out
-::    set "out="
-::    if exist "powershell_eval.out" (
-::        for /f "Tokens=* Delims=" %%x in (powershell_eval.out) do (
-::            set "out=!out!%%x"
-::            echo %%x
-::        )
-::    )
-    ::out contains all of the lines
-    ::del powershell_eval.out
-    ::echo %out%    
-
-    :: std::err
-::    set "err="
-::    if exist "powershell_eval.err" (
-::        for /f "Tokens=* Delims=" %%x in (powershell_eval.err) do (
-::            set "err=!err!%%x"
-::            echo [91m %%x [0m
-::        )
-::    )
-    ::del powershell_eval.out
-    ::err contains all of the lines
-    ::echo %err%
-	
 	endlocal
-    ::call dk_checkError
 goto:eof
 
 

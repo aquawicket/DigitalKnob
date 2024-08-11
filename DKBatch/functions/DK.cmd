@@ -12,6 +12,9 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 ::#
 ::#
 :DK
+	set "NO_STDOUT=1>nul"
+	set "NO_STDERR=2>nul"
+	set "NO_STD=1>nul 2>nul"
     ::###### Initialize Language specifics ######
     ::call :dk_init
 
