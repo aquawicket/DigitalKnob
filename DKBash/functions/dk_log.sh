@@ -122,5 +122,7 @@ DKTEST() {
 	dk_log DEBUG   "test dk_log DEBUG message"
 	dk_log INFO    "test dk_log INFO message"
 	dk_log WARNING "test dk_log WARNING message"
+	dk_log TODO    "test dk_log TODO message"
+	dk_log FIXME   "test dk_log FIXME message"
 	dk_log ERROR   "test dk_log ERROR message"
 }
