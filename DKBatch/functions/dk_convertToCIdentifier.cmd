@@ -29,7 +29,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
             if "!!" equ "" if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"
         )
         set "_input_=%_input_:~1%"
-        goto c_identifier_loop
+        goto:c_identifier_loop
     :c_identifier_endLoop
 	
 	endlocal & set "%2=%_output_%"
