@@ -9,9 +9,8 @@
 dk_extract() {
 	dk_debugFunc 2
 
-	
-	#src="${1}"
-	#dest="${2}"
+	#local src="${1}"
+	#local dest="${2}"
 	
 	dk_pathExists "${2}" || dk_makeDirectory "${2}"
 	dk_getExtension "${1}" extension
@@ -27,7 +26,9 @@ dk_extract() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
 	dk_validate DKDOWNLOAD_DIR "dk_getDKPaths"

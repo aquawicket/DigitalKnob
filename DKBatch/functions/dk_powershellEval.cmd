@@ -6,7 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_powershellEval
-	call dk_debugFunc 1
+	call dk_debugFunc 1 99
 	
 	
 	setlocal
@@ -50,7 +50,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::call dk_set POWERSHELL_ARGS "%~1"
 	::echo POWERSHELL_ARGS = %POWERSHELL_ARGS%
 	::"%POWERSHELL_EXE%" -Command %POWERSHELL_ARGS%
-	"%POWERSHELL_EXE%" -Command %~1
+	::"%POWERSHELL_EXE%" -Command %~1
+	"%POWERSHELL_EXE%" -Command %*
 	
 	::if not defined DKRETURN goto:eof
 	::if not exist %DKPOWERSHELL_DIR%\powershell_vars.cmd goto:eof
