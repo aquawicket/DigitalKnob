@@ -10,4 +10,6 @@
 	assoc .cmd=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd
+
+	restore.reg
 goto:eof
