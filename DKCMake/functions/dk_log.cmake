@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # DEFAULT
 dk_if(NOT DEFINED ENABLE_dk_log   "set(ENABLE_dk_log 1 CACHE INTERNAL '')")
 dk_if(NOT DEFINED DEFAULT_COLOR   "set(DEFAULT_COLOR '${white}' CACHE INTERNAL '')")
-dk_if(NOT DEFINED DEFAULT_TAG     "set(DEFAULT_TAG 'bat>: ' CACHE INTERNAL '')")
+dk_if(NOT DEFINED DEFAULT_TAG     "set(DEFAULT_TAG '' CACHE INTERNAL '')")
 dk_if(NOT DEFINED DEFAULT_PAUSE   "set(DEFAULT_PAUSE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED DEFAULT_TRACE   "set(DEFAULT_TRACE 0 CACHE INTERNAL '')") 
 dk_if(NOT DEFINED DEFAULT_LINE    "set(DEFAULT_LINE 0 CACHE INTERNAL '')") 
@@ -37,6 +37,15 @@ dk_if(NOT DEFINED INFO_PAUSE      "set(INFO_PAUSE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED INFO_TRACE      "set(INFO_TRACE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED INFO_LINE       "set(INFO_LINE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED INFO_HALT       "set(INFO_HALT 0 CACHE INTERNAL '')")
+
+# NOTICE
+dk_if(NOT DEFINED NOTICE_ENABLE     "set(NOTICE_ENABLE 1 CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_COLOR      "set(NOTICE_COLOR '${lyellow}' CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_TAG        "set(NOTICE_TAG 'NOTICE: ' CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_PAUSE      "set(NOTICE_PAUSE 0 CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_TRACE      "set(NOTICE_TRACE 0 CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_LINE       "set(NOTICE_LINE 0 CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOTICE_HALT       "set(NOTICE_HALT 0 CACHE INTERNAL '')")
 
 # WARNING
 dk_if(NOT DEFINED WARNING_ENABLE   "set(WARNING_ENABLE 1 CACHE INTERNAL '')")
@@ -134,6 +143,7 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	dk_log(VERBOSE "test dk_log VERBOSE message")
 	dk_log(DEBUG   "test dk_log DEBUG message")
 	dk_log(INFO    "test dk_log INFO message")
+	dk_log(NOTICE  "test dk_log NOTICE message")
 	dk_log(WARNING "test dk_log WARNING message")
 	dk_log(TODO    "test dk_log TODO message")
 	dk_log(FIXME   "test dk_log FIXME message")

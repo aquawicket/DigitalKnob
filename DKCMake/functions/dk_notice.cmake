@@ -11,8 +11,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_notice msg)
 	dk_debugFunc(${ARGV})
 	
-	message(NOTICE "${lyellow}${msg}${clr}")
+	dk_log(NOTICE "${ARGV0}")
 endfunction()
+
 
 
 

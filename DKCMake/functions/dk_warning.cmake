@@ -1,9 +1,8 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
-
 ##################################################################################
-# dk_warning(msg) HALT, NO_HALT, TRACE, NO_TRACE, PAUSE, NO_PAUSE
+# dk_warning(msg)
 #
 #	Print a warning message to the console
 #
