@@ -12,6 +12,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_warning msg)
 	dk_debugFunc(${ARGV})
 
+	dk_log(WARNING "${ARGV0}")
+	return()
+	
+	
 	dk_if(NOT DEFINED ENABLE_dk_warning "set(ENABLE_dk_warning  1          CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_WARNING  "set(PAUSE_ON_WARNING   0          CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_WARNING  "set(TRACE_ON_WARNING   0          CACHE INTERNAL '')")

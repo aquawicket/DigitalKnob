@@ -9,7 +9,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    @message	- The message to print
 ::#
 :dk_todo
-	call dk_debugFunc 1
+	call dk_debugFunc 0 1
 	call dk_log TODO "%~1"
 goto:eof
 

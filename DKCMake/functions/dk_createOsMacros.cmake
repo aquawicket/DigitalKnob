@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_createPrefixMacro.cmake)
 #include_guard()
 
 
@@ -13,13 +14,14 @@ function(dk_createOsMacros func)
 	#dk_debugFunc(${ARGV})
 	message("dk_createOsMacros(${ARGV})")
 	
-
 	if(ext_string)
 		dk_error("ext_string variable already in use")
 	endif()
 	
 	### HOST Prefix functions ###
-	dk_createPrefixMacro(${func} WIN_HOST)
+	if(NOT COMMAND WIN_HOST_${func})
+		dk_createPrefixMacro(${func} WIN_HOST)
+	endif()
 	dk_createPrefixMacro(${func} WIN_ARM64_HOST)
 	dk_createPrefixMacro(${func} WIN_X86_HOST)
 	dk_createPrefixMacro(${func} WIN_X86_64_HOST)

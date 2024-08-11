@@ -1,7 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #include_guard()
 
-dk_load("dk_eval")
 ###############################################################################
 # dk_if(condition... "code")
 #

@@ -11,7 +11,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_info msg)
 	dk_debugFunc(${ARGV})
-
+	
+	dk_log(INFO "${ARGV0}")
+	return()
+	
 	dk_if(NOT DEFINED ENABLE_dk_INFO "set(ENABLE_dk_info  1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_INFO  "set(PAUSE_ON_INFO   0        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_INFO  "set(TRACE_ON_INFO   0        CACHE INTERNAL '')")

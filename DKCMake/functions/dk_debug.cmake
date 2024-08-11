@@ -12,6 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_debug msg)
 	dk_debugFunc(${ARGV})
 	
+	dk_log(DEBUG "${ARGV0}")
+	return()
+	
 	dk_if(NOT DEFINED ENABLE_dk_debug "set(ENABLE_dk_debug  1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_DEBUG  "set(PAUSE_ON_DEBUG   0        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_DEBUG  "set(TRACE_ON_DEBUG   0        CACHE INTERNAL '')")

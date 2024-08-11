@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 #include_guard()
 
 ###############################################################################

@@ -12,6 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_todo msg)
 	dk_debugFunc(${ARGV})
 
+	dk_load(TODO "${ARGV0}")
+	return()
+	
 	dk_if(NOT DEFINED ENABLE_dk_todo "set(ENABLE_dk_todo  1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_TODO  "set(PAUSE_ON_TODO   0        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_TODO  "set(TRACE_ON_TODO   0        CACHE INTERNAL '')")

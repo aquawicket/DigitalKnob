@@ -11,7 +11,7 @@ TODO_TAG="  TODO: "
 #
 dk_todo() {
 	dk_debugFunc 0 1	
-	dk_log TODO "$1"
+	dk_log TODO "${1-}"
 }
 
 

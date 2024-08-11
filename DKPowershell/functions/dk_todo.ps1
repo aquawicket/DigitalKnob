@@ -9,7 +9,7 @@ if(!$dk_todo){ $dk_todo = 1 } else{ return }
 #	@msg	- The message to print
 #
 function Global:dk_todo() {
-	dk_debugFunc 0 99
+	dk_debugFunc 0 1
 	dk_log TODO "${message}"
 }
 

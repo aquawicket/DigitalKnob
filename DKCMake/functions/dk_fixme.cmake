@@ -12,6 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_fixme msg)
 	dk_debugFunc(${ARGV})
 
+	dk_log(FIXME "${ARGV0}")
+	return()
+	
 	dk_if(NOT DEFINED ENABLE_dk_fixme "set(ENABLE_dk_fixme  1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_FIXME  "set(PAUSE_ON_FIXME   1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_FIXME  "set(TRACE_ON_FIXME   0        CACHE INTERNAL '')")

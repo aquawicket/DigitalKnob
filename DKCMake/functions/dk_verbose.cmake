@@ -12,6 +12,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_verbose msg)
 	dk_debugFunc(${ARGV})
 
+	dk_log(VERBOSE "${ARGV0}")
+	return()
+	
+	
 	dk_if(NOT DEFINED ENABLE_dk_verbose "set(ENABLE_dk_verbose  1        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED PAUSE_ON_VERBOSE  "set(PAUSE_ON_VERBOSE   0        CACHE INTERNAL '')")
 	dk_if(NOT DEFINED TRACE_ON_VERBOSE  "set(TRACE_ON_VERBOSE   0        CACHE INTERNAL '')")
