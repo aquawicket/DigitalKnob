@@ -116,7 +116,6 @@ function(dk_executeProcess)
 	
 	#dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
-	dk_printVar(ARGV)
 	execute_process(${ARGV})
 	
 	
