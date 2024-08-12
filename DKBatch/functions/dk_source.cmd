@@ -1,9 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_debugFunc
-::call dk_source dk_echo
-::call dk_source dk_info
 ::################################################################################
 ::# dk_source(function_name)
 ::#
@@ -22,9 +19,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
+	:: FIXME: causes infinate recursion loop
 	:: Try dk_powershellEval
-	if exist "%DKBATCH_FUNCTIONS_DIR%\dk_powershellEval.cmd" call dk_powershellEval "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR%\%~1.cmd')"
-	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_powershellEval.cmd" call dk_powershellEval "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR%\%~1.cmd')"
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 		
 	:: Try powershell
 	powershell /? 1>nul && powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR%\%~1.cmd')"
