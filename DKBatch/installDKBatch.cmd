@@ -6,19 +6,19 @@ if "%~1" neq "" goto:runDKBatch
 	call "..\DKBatch\functions\DK.cmd"
 	
 	::###### Install DKBatch ######
-	call dk_echo "Installing DKBatch . . ."
-	call dk_validate DKBATCH_FUNCTIONS_DIR "call dk_validateBranch"
+	%dk_call% dk_echo "Installing DKBatch . . ."
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	ftype DKBatch=cmd /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%%1" %%*
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "C:\Windows\System32\cmd.exe"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
 	
-	call dk_echo "DKBatch install complete"
+	%dk_call% dk_echo "DKBatch install complete"
 goto:eof
 
 
