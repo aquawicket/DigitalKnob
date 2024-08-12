@@ -9,11 +9,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 	
 	setlocal
-	set _input=%1
-	set _input=%_input:"=%
-	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
-	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
-	endlocal & for %%Z in ("%_input%") do set "%2=%%~fZ"
+	set "_input_=%1"
+	set "_input_=%_input_:"=%"
+	if [%_input_:~-1,1%] == [\] set "_input_=%_input_:~0,-1%"
+	if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
+	endlocal & for %%Z in ("%_input_%") do set "%2=%%~fZ"
 goto:eof
 
 
