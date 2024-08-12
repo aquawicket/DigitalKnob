@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_makeDirectory "%_parent_dir_%"
 	
 	::rename "%_from_%" "%_to_%"
-	move /Y "%_from_%" "%_to_%"
+	move /Y "%_from_%" "%_to_%" %NO_STDOUT%
 	
 	::TODO
 	::[ ? = "success" ]
