@@ -19,8 +19,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myVar "initial value assigned with dk_unset"
+	%dk_call% dk_set myVar "initial value assigned with dk_unset"
 	echo myVar = %myVar%
-	call dk_unset myVar
+	%dk_call% dk_unset myVar
 	echo myVar = %myVar%
 goto:eof

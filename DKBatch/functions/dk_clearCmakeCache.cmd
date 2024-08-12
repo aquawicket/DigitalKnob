@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	setlocal
-    call dk_info "Deleteing CMake cache files. . ."
+    %dk_call% dk_info "Deleteing CMake cache files. . ."
 	
-	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
@@ -24,5 +24,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_clearCmakeCache
+	%dk_call% dk_clearCmakeCache
 goto:eof
