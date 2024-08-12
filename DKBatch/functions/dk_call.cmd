@@ -1,17 +1,16 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_debugFunc
-::call dk_source dk_source
+
 ::####################################################################
 ::# dk_call(command args)
 ::#
 ::#
 ::set "dk_call=call dk_call"
 :dk_call
-	call dk_debugFunc 1 99
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1 99
 	
-	call dk_source "%~1"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_source "%~1"
 	::call dk_echo "call %*"
 	call %*	
 goto:eof
