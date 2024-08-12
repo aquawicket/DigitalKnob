@@ -102,13 +102,13 @@ if not defined FIXME_HALT      set "FIXME_HALT=0"
 		if %__ARGC__% equ 2 set "_level_=%~1"  && set "_message_=%~2"
 		if "!%_level_%_ENABLE!" neq "1"  goto:eof
 	  
-		::if "" == %_message_:~0,1%%_message_:~-1% call dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
+		::if "" == %_message_:~0,1%%_message_:~-1% %dk_call% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
 
-		call dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
-		if "!%_level_%_PAUSE!"=="1" call dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  & call dk_pause
-		if "!%_level_%_TRACE!"=="1" call dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  & call dk_stacktrace
-		if "!%_level_%_LINE!"=="1"  call dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   & call dk_showFileLine "%_callerpath%" "%_message_%"
-		if "!%_level_%_HALT!"=="1"  call dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   & call dk_exit
+		%dk_call% dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
+		if "!%_level_%_PAUSE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  & %dk_call% dk_pause
+		if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  & %dk_call% dk_stacktrace
+		if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   & %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
+		if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   & %dk_call% dk_exit
 	endlocal
 goto:eof
 
@@ -119,14 +119,14 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_log "test dk_log message"
+	%dk_call% dk_log "test dk_log message"
 	
-	call dk_log VERBOSE "test dk_log VERBOSE message"
-	call dk_log DEBUG   "test dk_log DEBUG message"
-	call dk_log INFO    "test dk_log INFO message"
-	call dk_log NOTICE  "test dk_log NOTICE message"
-	call dk_log WARNING "test dk_log WARNING message"
-	call dk_log TODO    "test dk_log TODO message"
-	call dk_log FIXME   "test dk_log FIXME message"
-	call dk_log ERROR   "test dk_log ERROR message"
+	%dk_call% dk_log VERBOSE "test dk_log VERBOSE message"
+	%dk_call% dk_log DEBUG   "test dk_log DEBUG message"
+	%dk_call% dk_log INFO    "test dk_log INFO message"
+	%dk_call% dk_log NOTICE  "test dk_log NOTICE message"
+	%dk_call% dk_log WARNING "test dk_log WARNING message"
+	%dk_call% dk_log TODO    "test dk_log TODO message"
+	%dk_call% dk_log FIXME   "test dk_log FIXME message"
+	%dk_call% dk_log ERROR   "test dk_log ERROR message"
 goto:eof
