@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_confirm
 ::################################################################################
 ::# dk_gitUpdate(NO_CONFIRM)
 ::#
@@ -11,19 +10,17 @@ call dk_source dk_confirm
 	
     if "%1" neq "NO_CONFIRM" (
         echo Git Update? Any local changes will be lost.
-		call dk_confirm || goto:eof
+		%dk_call% dk_confirm || goto:eof
     )
         
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-	call dk_validate GIT_EXE "call dk_installGit"
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
     if NOT exist "%DKBRANCH_DIR%\.git" ("%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%")
-    ::call dk_checkError
 
     cd "%DKBRANCH_DIR%"
     "%GIT_EXE%" pull --all
     "%GIT_EXE%" checkout -- .
-    ::call dk_checkError
 
     "%GIT_EXE%" checkout %DKBRANCH%
     if NOT "%ERRORLEVEL%" == "0" (
@@ -42,5 +39,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_gitUpdate
+	%dk_call% dk_gitUpdate
 goto:eof
