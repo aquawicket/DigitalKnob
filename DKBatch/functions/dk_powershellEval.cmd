@@ -1,8 +1,8 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_validate
-call dk_source dk_findProgram
+::call dk_source dk_validate
+::call dk_source dk_findProgram
 ::################################################################################
 ::# dk_powershellEval(commands)
 ::#
@@ -14,21 +14,21 @@ call dk_source dk_findProgram
 	
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
-	call dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
+	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	set "POWERSHELL_EXE=powershell.exe"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
-	call dk_error "POWERSHELL_EXE command invalid"
+	%dk_call% dk_error "POWERSHELL_EXE command invalid"
 
-::	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_validateBranch"
-::	dk_call dk_validate DKPOWERSHELL_DIR "dk_call dk_validateBranch"
-::	if not exist "%DKPOWERSHELL_DIR%" dk_call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
+::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+::	%dk_call% dk_validate DKPOWERSHELL_DIR "%dk_call% dk_validateBranch"
+::	if not exist "%DKPOWERSHELL_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
 	
-::	dk_call dk_validate POWERSHELL_EXE "dk_call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-::	if not exist "%POWERSHELL_EXE%"   dk_call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
+::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% %DKIMPORTS_DIR%\powershell\dk_installPowershell"
+::	if not exist "%POWERSHELL_EXE%"   %dk_call% dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
 	
 	:found
 	"%POWERSHELL_EXE%" -Command %*
@@ -43,5 +43,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): ${PSVAR}'"
+	%dk_call% dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): ${PSVAR}'"
 goto:eof
