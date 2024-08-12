@@ -15,10 +15,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if "%~3" equ "" set "pattern=C:\"
 	if "%~3" neq "" set "pattern=%~3" 
 	
-	if exist "%VAL%" call dk_debug("already FOUND %name% at %VAL%") && goto:eof
+	if exist "%VAL%" %dk_call% dk_debug("already FOUND %name% at %VAL%") && goto:eof
 
-	call dk_commandToVariable "where /R %pattern% %name% 2>nul" %VAR%
-	call dk_printVar %VAR%
+	%dk_call% dk_commandToVariable "where /R %pattern% %name% 2>nul" %VAR%
+	%dk_call% dk_printVar %VAR%
 	endlocal & set "%2=!%VAR%!"
 goto:eof
 
@@ -31,6 +31,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_validate DKTOOLS_DIR "call dk_getDKPaths"
-	call dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
+	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 goto:eof
