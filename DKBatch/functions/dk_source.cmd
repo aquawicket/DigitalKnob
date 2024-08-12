@@ -15,9 +15,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	echo downloading %~1 . . .
 	
+	:: FIXME: causes infinate recursion loop
 	:: Try dk_download
-	if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
-	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
 	:: FIXME: causes infinate recursion loop
 	:: Try dk_powershellEval
