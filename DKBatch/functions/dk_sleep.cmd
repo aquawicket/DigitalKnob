@@ -8,15 +8,19 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_sleep
 	call dk_debugFunc 1
 	
-	:: Method 1
+	:: Method 1 - javascript (fastest)
 	set /a "milliseconds=%~1-100"
 	cscript /nologo /e:JScript "%~f0" "%milliseconds%" 2>nul && goto:eof || (call )
 	
-	:: Method 2
+	:: Method 2 - dk_powershellEval
+	set /a "milliseconds=%~1-300"
+	dk_powershellEval "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
+	
+	:: Method 3 - powershell directly
 	set /a "milliseconds=%~1-300"
 	powershell -Command "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
 	
-	:: Method 3
+	:: Method 4 - using ping
 	set /a "seconds=(%~1+1000)/1000"
 	ping 127.0.0.1 -n %seconds% >null
 goto:eof

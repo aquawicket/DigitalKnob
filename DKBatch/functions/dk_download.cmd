@@ -56,13 +56,18 @@ call dk_source dk_validate
 	
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
-	:: Try powershell
-	if not exist "%destination%_DOWNLOADING" powershell /? 1>nul && powershell -command ^
+	:: Try dk_powershellEval
+	if not exist "%destination%_DOWNLOADING" dk_powershellEval ^
         "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 		
-	
+	:: Try powershell
+	if not exist "%destination%_DOWNLOADING" powershell -Command ^
+        "$cli = New-Object System.Net.WebClient; "^
+	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
+	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
+		
 	:: Try curl
 	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
 	
