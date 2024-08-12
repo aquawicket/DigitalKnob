@@ -18,5 +18,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_setTitle "DKTEST()"
+	%dk_call% dk_setTitle "DKTEST()"
 goto:eof
