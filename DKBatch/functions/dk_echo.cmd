@@ -32,9 +32,9 @@ goto:eof
 	call dk_debugFunc 0
 	
 	echo This is a normal echo commmand
-	call dk_echo
-	call dk_echo ""
-	call dk_echo "This is a dk_echo line"
-	::call dk_echo ""This is a dk_echo line with quotes""
-    call dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
+	%dk_call% dk_echo
+	%dk_call% dk_echo ""
+	%dk_call% dk_echo "This is a dk_echo line"
+	::%dk_call% dk_echo ""This is a dk_echo line with quotes""
+    %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
 goto:eof

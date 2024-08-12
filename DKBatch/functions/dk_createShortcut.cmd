@@ -8,14 +8,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_createShortcut
 	call dk_debugFunc 2
 	
-	::powershell /? 1>nul || call dk_error "dk_createShortcut requires powershell"
+	::powershell /? 1>nul || %dk_call% dk_error "dk_createShortcut requires powershell"
 	
 	set "shortcut_path=%~1"
 	set "target_path=%~2"
 	
 	if exist %shortcut_path% dk_warning "%shortcut_path% already exists" && goto:eof
 	
-	call dk_powershellEval ^
+	%dk_call% dk_powershellEval ^
         "$shortcut_path = '%shortcut_path%'; "^
         "$target_path = '%target_path%'; "^
 		"$WshShell = New-Object -comObject WScript.Shell; "^
@@ -33,5 +33,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
+	%dk_call% dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
 goto:eof

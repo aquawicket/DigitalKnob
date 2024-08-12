@@ -26,5 +26,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_logo
+	%dk_call% dk_logo
 goto:eof

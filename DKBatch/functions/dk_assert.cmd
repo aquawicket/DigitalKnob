@@ -1,8 +1,8 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_debugFunc
-call dk_source dk_error
+::call dk_source dk_debugFunc
+::call dk_source dk_error
 ::################################################################################
 ::# dk_assert(expression)
 ::#
@@ -11,7 +11,7 @@ call dk_source dk_error
 	
 	setlocal
 	if not defined %~1 (
-		call dk_error "Assertion failed: %__FILE__%:%__LINE__%  %__FUNCTION__%(%*)"
+		%dk_call% dk_error "Assertion failed: %__FILE__%:%__LINE__%  %__FUNCTION__%(%*)"
 	)
 	endlocal
 goto:eof
@@ -26,20 +26,20 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_set myVar string
-	call dk_info "dk_assert myVar" && call dk_assert myVar
+	%dk_call% dk_set myVar string
+	%dk_call% dk_info "dk_assert myVar" && %dk_call% dk_assert myVar
 
-	call dk_set myVarB 15
-	call dk_info "dk_assert myVarB" && call dk_assert myVarB
+	%dk_call% dk_set myVarB 15
+	%dk_call% dk_info "dk_assert myVarB" && %dk_call% dk_assert myVarB
 
-	call dk_set myVarC "  "
-	call dk_info "dk_assert myVarC" && call dk_assert myVarC
+	%dk_call% dk_set myVarC "  "
+	%dk_call% dk_info "dk_assert myVarC" && %dk_call% dk_assert myVarC
 
-	call dk_set myVarD ""
-	call dk_info "dk_assert myVarD" && call dk_assert myVarD
+	%dk_call% dk_set myVarD ""
+	%dk_call% dk_info "dk_assert myVarD" && %dk_call% dk_assert myVarD
 
-	call dk_unset myVarE
-	call dk_assert myVarE
+	%dk_call% dk_unset myVarE
+	%dk_call% dk_assert myVarE
 
-	call dk_assert noVar
+	%dk_call% dk_assert noVar
 goto:eof
