@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "_arry_=%~1"
 	::set "_element_=%~2"
 	
-	call dk_arrayLength %~1 count
+	%dk_call% dk_arrayLength %~1 count
 	set /a prev=count-1
 	
 	:dk_arrayUnshift_loop
@@ -45,23 +45,23 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_arrayUnshift myArrayA "a b c" ::new_lengthA
-	call dk_printVar myArrayA
-	::call dk_printVar new_lengthA
+	%dk_call% dk_arrayUnshift myArrayA "a b c" ::new_lengthA
+	%dk_call% dk_printVar myArrayA
+	::%dk_call% dk_printVar new_lengthA
 	
-	call dk_arrayUnshift myArrayA "1 2 3" ::new_lengthA
-	call dk_printVar myArrayA
-	::call dk_printVar new_lengthA
+	%dk_call% dk_arrayUnshift myArrayA "1 2 3" ::new_lengthA
+	%dk_call% dk_printVar myArrayA
+	::%dk_call% dk_printVar new_lengthA
 	
-	call dk_arrayUnshift myArrayA "d e f" ::new_lengthA
-	call dk_printVar myArrayA
-	::call dk_printVar new_lengthA
+	%dk_call% dk_arrayUnshift myArrayA "d e f" ::new_lengthA
+	%dk_call% dk_printVar myArrayA
+	::%dk_call% dk_printVar new_lengthA
 	
-	call dk_arrayUnshift myArrayA "4 5 6" ::new_lengthA
-	call dk_printVar myArrayA
-	::call dk_printVar new_lengthA
+	%dk_call% dk_arrayUnshift myArrayA "4 5 6" ::new_lengthA
+	%dk_call% dk_printVar myArrayA
+	::%dk_call% dk_printVar new_lengthA
 	
-	call dk_arrayUnshift myArrayA "h i j" ::new_lengthA
-	call dk_printVar myArrayA
-	::call dk_printVar new_lengthA
+	%dk_call% dk_arrayUnshift myArrayA "h i j" ::new_lengthA
+	%dk_call% dk_printVar myArrayA
+	::%dk_call% dk_printVar new_lengthA
 goto:eof

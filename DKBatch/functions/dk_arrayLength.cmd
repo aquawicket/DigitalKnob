@@ -37,6 +37,6 @@ goto:eof
 	set "myArrayA[3]=4 5 6"
 	set "myArrayA[4]=h i j"
 	
-	call dk_arrayLength myArrayA myArrayLengthA
-	call dk_printVar myArrayLengthA
+	%dk_call% dk_arrayLength myArrayA myArrayLengthA
+	%dk_call% dk_printVar myArrayLengthA
 goto:eof

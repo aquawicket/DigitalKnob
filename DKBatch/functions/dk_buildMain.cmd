@@ -1,26 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_assert
-::call dk_source dk_build
-::call dk_source dk_createCache
-::call dk_source dk_createShortcut
-::call dk_source dk_debugFunc
-::call dk_source dk_defined
-::call dk_source dk_error
-::call dk_source dk_generate
-::call dk_source dk_getDKPaths
-::call dk_source dk_getHostTriple
-::call dk_source dk_info
-::call dk_source dk_installGit
-::call dk_source dk_pickApp
-::call dk_source dk_pickOs
-::call dk_source dk_pickType
-::call dk_source dk_pickUpdate
-::call dk_source dk_printVar
-::call dk_source dk_unset
-::call dk_source dk_validateBranch
-::call dk_source dk_warning
 ::####################################################################
 ::# dk_buildMain()
 ::#

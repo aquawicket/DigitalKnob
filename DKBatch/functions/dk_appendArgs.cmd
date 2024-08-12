@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_debugFunc
-call dk_source dk_error
 ::####################################################################
 ::# dk_appendArgs(variable, string)
 ::#
@@ -20,15 +18,15 @@ goto:eof
 
 
 
-call dk_source dk_printVar
+
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_printVar myVar
-	call dk_appendArgs myVar 123 abc
-	call dk_printVar myVar
+	%dk_call% dk_printVar myVar
+	%dk_call% dk_appendArgs myVar 123 abc
+	%dk_call% dk_printVar myVar
 	
-	call dk_appendArgs myVar 456 zyx
-	call dk_printVar myVar
+	%dk_call% dk_appendArgs myVar 456 zyx
+	%dk_call% dk_printVar myVar
 goto:eof

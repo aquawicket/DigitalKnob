@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_arrayFlat
 	call dk_debugFunc 2
 	
-	call dk_todo "dk_arrayFlat"
+	%dk_call% dk_todo "dk_arrayFlat"
 goto:eof
 
 
@@ -29,5 +29,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_arrayFlat "array" "depth"
+	%dk_call% dk_arrayFlat "array" "depth"
 goto:eof

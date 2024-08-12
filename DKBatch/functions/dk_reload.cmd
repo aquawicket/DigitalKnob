@@ -24,5 +24,5 @@ goto:
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_reload
+	%dk_call% dk_reload
 goto:eof

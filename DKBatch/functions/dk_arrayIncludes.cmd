@@ -56,16 +56,16 @@ goto:eof
 	set "array123[0]=1"
 	set "array123[1]=2"
 	set "array123[2]=3"
-	call dk_arrayIncludes array123 2      && echo true || echo false  &:: true
-	call dk_arrayIncludes array123 4      && echo true || echo false  &:: false
-	::call dk_arrayIncludes array123 3 3  && echo true || echo false  &:: false
-	::call dk_arrayIncludes array123 3 -1 && echo true || echo false  &:: true
+	%dk_call% dk_arrayIncludes array123 2      && echo true || echo false  &:: true
+	%dk_call% dk_arrayIncludes array123 4      && echo true || echo false  &:: false
+	::%dk_call% dk_arrayIncludes array123 3 3  && echo true || echo false  &:: false
+	::%dk_call% dk_arrayIncludes array123 3 -1 && echo true || echo false  &:: true
 	set "array12NaN[0]=1"
 	set "array12Nan[1]=2"
 	set "array12Nan[2]=NaN"
-	call dk_arrayIncludes array12NaN NaN  && echo true || echo false  &:: true
+	%dk_call% dk_arrayIncludes array12NaN NaN  && echo true || echo false  &:: true
 	set "array123q[0]="1""
 	set "array123q[1]="2""
 	set "array123q[2]="3""
-	call dk_arrayIncludes array123q 3     && echo true || echo false  &::# false
+	%dk_call% dk_arrayIncludes array123q 3     && echo true || echo false  &::# false
 goto:eof

@@ -32,7 +32,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myAscii x
-	call dk_asciiToHex myAscii myHex
-	call dk_info "myHex = %myHex%"
+	%dk_call% dk_set myAscii x
+	%dk_call% dk_asciiToHex myAscii myHex
+	%dk_call% dk_info "myHex = %myHex%"
 goto:eof

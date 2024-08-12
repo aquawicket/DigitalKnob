@@ -24,5 +24,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_clearScreen
+	%dk_call% dk_clearScreen
 goto:eof

@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 
 	setlocal
-	call dk_arrayJoin %~1 "," arrayStr
+	%dk_call% dk_arrayJoin %~1 "," arrayStr
 	endlocal & set "%2=%arrayStr%"
 goto:eof
 
@@ -26,6 +26,6 @@ goto:eof
 	set "myArrayA[2]=d e f"
 	set "myArrayA[3]=4 5 6"
 	set "myArrayA[4]=h i j"
-	call dk_arrayToString MyArrayA MyStringA
-	call dk_info "MyStringA = %MyStringA%"
+	%dk_call% dk_arrayToString MyArrayA MyStringA
+	%dk_call% dk_info "MyStringA = %MyStringA%"
 goto:eof

@@ -18,12 +18,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_arrayAt
 	call dk_debugFunc 3
-	::call dk_validateArgs array int optional:rtn_var
+	::%dk_call% dk_validateArgs array int optional:rtn_var
 	setlocal
 
 	
 	::### return value ###
-	::if "!!" neq "" endlocal & call dk_set %3 "%%%~1[%~2]%%"
+	::if "!!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
 	if "!!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
 	if "!!" equ "" endlocal & set "%3=!%~1[%~2]!"
 	
@@ -43,22 +43,22 @@ goto:eof
 	set "myArrayA[2]=d e f"
 	set "myArrayA[3]=4 5 6"
 	set "myArrayA[4]=h i j"
-	call dk_printVar myArrayA
-	call dk_arrayAt MyArrayA 2 arrayAtA
-	call dk_printVar arrayAtA
-	call dk_echo "dk_arrayAt(MyArrayA 2) = %arrayAtA%"
-	if "%arrayAtA%" neq "d e f" call dk_error "dk_arrayAt() failed"
-	if "%arrayAtA%" equ "d e f" call dk_info "dk_arrayAt() suceeded" 
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_arrayAt MyArrayA 2 arrayAtA
+	%dk_call% dk_printVar arrayAtA
+	%dk_call% dk_echo "dk_arrayAt(MyArrayA 2) = %arrayAtA%"
+	if "%arrayAtA%" neq "d e f" %dk_call% dk_error "dk_arrayAt() failed"
+	if "%arrayAtA%" equ "d e f" %dk_call% dk_info "dk_arrayAt() suceeded" 
 	
 	set "myArrayB[0]=h i j"
 	set "myArrayB[1]=4 5 6"
 	set "myArrayB[2]=d e f"
 	set "myArrayB[3]=1 2 3"
 	set "myArrayB[4]=a b c"
-	call dk_printVar myArrayB
-	call dk_arrayAt MyArrayB 3 arrayAtB
-	call dk_printVar arrayAtB
-	call dk_echo "dk_arrayAt(MyArrayB 3) = %arrayAtB%"
-	if "%arrayAtB%" neq "1 2 3" call dk_error "dk_arrayAt() failed"
-	if "%arrayAtB%" equ "1 2 3" call dk_info "dk_arrayAt() suceeded" 
+	%dk_call% dk_printVar myArrayB
+	%dk_call% dk_arrayAt MyArrayB 3 arrayAtB
+	%dk_call% dk_printVar arrayAtB
+	%dk_call% dk_echo "dk_arrayAt(MyArrayB 3) = %arrayAtB%"
+	if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "dk_arrayAt() failed"
+	if "%arrayAtB%" equ "1 2 3" %dk_call% dk_info "dk_arrayAt() suceeded" 
 goto:eof

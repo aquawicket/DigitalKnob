@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2 3
 	
 	setlocal
-	call dk_arrayLength %~1 end_index
+	%dk_call% dk_arrayLength %~1 end_index
 	endlocal & set "%~1[%end_index%]=%~2"
 goto:eof
 
@@ -32,18 +32,18 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_arrayPush myArrayA "a b c"          &:: new_lengthA
-	call dk_printVar myArrayA
+	%dk_call% dk_arrayPush myArrayA "a b c"          &:: new_lengthA
+	%dk_call% dk_printVar myArrayA
 	:: dk_printVar new_lengthA
-	call dk_echo
+	%dk_call% dk_echo
 	
-	call dk_arrayPush myArrayA "1 2 3" "d e f"  &:: new_lengthA
-	call dk_printVar myArrayA
+	%dk_call% dk_arrayPush myArrayA "1 2 3" "d e f"  &:: new_lengthA
+	%dk_call% dk_printVar myArrayA
 	:: dk_printVar new_lengthA
-	call dk_echo
+	%dk_call% dk_echo
 	
-	call dk_arrayPush myArrayA "4 5 6" "h i j"  &:: new_lengthA
-	call dk_printVar myArrayA
+	%dk_call% dk_arrayPush myArrayA "4 5 6" "h i j"  &:: new_lengthA
+	%dk_call% dk_printVar myArrayA
 	:: dk_printVar new_lengthA
-	call dk_echo
+	%dk_call% dk_echo
 goto:eof

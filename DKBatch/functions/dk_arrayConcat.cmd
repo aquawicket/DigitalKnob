@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	::### return value ###
-	if "!!" neq "" endlocal & call dk_set %3 "%_arrayC_%"
+	if "!!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
 	if "!!" equ "" endlocal & set "%3=!_arrayC_!"
 goto:eof
 
@@ -64,8 +64,8 @@ goto:eof
 	set "myArray2[1]=4 5 6"
 	set "myArray2[2]=7 8 9"
 	
-	call dk_arrayConcat myArray1 myArray2 myNewArrayA
-	call dk_printVar myNewArrayA
+	%dk_call% dk_arrayConcat myArray1 myArray2 myNewArrayA
+	%dk_call% dk_printVar myNewArrayA
 	
 	if ^
 	"%myNewArrayA[0]%" == "a b c" if ^
@@ -73,5 +73,5 @@ goto:eof
 	"%myNewArrayA[2]%" == "g h i" if ^
 	"%myNewArrayA[3]%" == "1 2 3" if ^
 	"%myNewArrayA[4]%" == "4 5 6" if ^
-	"%myNewArrayA[5]%" == "7 8 9" call dk_echo "dk_arrayConcat succeeded"
+	"%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_echo "dk_arrayConcat succeeded"
 goto:eof

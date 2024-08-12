@@ -1,13 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_appendEvnPath
-call dk_source dk_debugFunc
-call dk_source dk_error
-call dk_source dk_info
-call dk_source dk_stringContains
-call dk_source dk_validate
-call dk_source dk_validateBranch
 ::################################################################################
 ::# dk_appendEvnPath(array, index, element)
 ::#
@@ -23,7 +16,7 @@ call dk_source dk_validateBranch
 	setlocal
 	set "_path_=%~1"
 
-	call dk_stringContains "%PATH%\" "%_path_%" result
+	%dk_call% dk_stringContains "%PATH%\" "%_path_%" result
 	
 	if "%result%" equ "true" dk_info "path already in list" && endlocal & goto:oef
 	
@@ -42,6 +35,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_validate DKBATCH_FUNCTIONS_DIR_ "call dk_validateBranch"	
-	call dk_appendEvnPath %DKBATCH_FUNCTIONS_DIR%
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_ "%dk_call% dk_validateBranch"	
+	%dk_call% dk_appendEvnPath %DKBATCH_FUNCTIONS_DIR%
 goto:eof

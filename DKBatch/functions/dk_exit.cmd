@@ -9,7 +9,7 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 :dk_exit
 	call dk_debugFunc 0 1
 	
-	if "%PAUSE_ON_EXIT%" == "1" call dk_echo "*** PAUSE_ON_EXIT ***" && call dk_pause
+	if "%PAUSE_ON_EXIT%" == "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT ***" && %dk_call% dk_pause
 	exit %~1
 goto:eof
 
@@ -20,5 +20,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_exit 0
+	%dk_call% dk_exit 0
 goto:eof

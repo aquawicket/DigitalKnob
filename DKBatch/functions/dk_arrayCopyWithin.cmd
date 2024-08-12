@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_arrayCopyWithin
 	call dk_debugFunc 4
 	
-	call dk_todo %__FUNCTION__%
+	%dk_call% dk_todo %__FUNCTION__%
 goto:eof
 
 
@@ -46,5 +46,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_arrayCopyWithin array target start end
+	%dk_call% dk_arrayCopyWithin array target start end
 goto:eof

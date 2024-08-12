@@ -16,5 +16,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call build_all
+	%dk_call% build_all
 goto:eof

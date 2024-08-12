@@ -10,16 +10,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
     echo creating cache...
-    ::call dk_printVar APP
-    ::call dk_printVar TARGET_OS
-    ::call dk_printVar TYPE
-    ::call dk_printVar LEVEL
+    ::%dk_call% dk_printVar APP
+    ::%dk_call% dk_printVar TARGET_OS
+    ::%dk_call% dk_printVar TYPE
+    ::%dk_call% dk_printVar LEVEL
         
     :: https://stackoverflow.com/a/5143293/688352
-    call dk_fileWrite "%DKBRANCH_DIR%\cache" %APP%
-    call dk_fileAppend "%DKBRANCH_DIR%\cache" %TARGET_OS%
-    call dk_fileAppend "%DKBRANCH_DIR%\cache" %TYPE%
-    ::call dk_fileAppend "%DKBRANCH_DIR%\cache" %LEVEL%
+    %dk_call% dk_fileWrite "%DKBRANCH_DIR%\cache" %APP%
+    %dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %TARGET_OS%
+    %dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %TYPE%
+    ::%dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %LEVEL%
 	endlocal
 goto:eof
 
@@ -29,5 +29,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_createCache
+	%dk_call% dk_createCache
 goto:eof

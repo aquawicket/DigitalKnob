@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		set /a prev+=1
 		goto:dk_arrayShift_loop
 	)
-	endlocal & call dk_unset %_arry_%[%prev%]
+	endlocal & %dk_call% dk_unset %_arry_%[%prev%]
 	::endlocal & set "%_arry_%[%prev%]="
 goto:eof
 
@@ -53,38 +53,38 @@ goto:eof
 	set "myArrayA[3]=4 5 6"
 	set "myArrayA[4]=h i j"
 	
-	call dk_printVar myArrayA
-	call dk_echo
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_echo
 	
-	call dk_arrayShift myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
+	%dk_call% dk_arrayShift myArrayA removedA
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
 	
-	call dk_arrayShift myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
+	%dk_call% dk_arrayShift myArrayA removedA
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
 	
-	call dk_arrayShift myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
+	%dk_call% dk_arrayShift myArrayA removedA
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
 	
-	call dk_arrayShift myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
+	%dk_call% dk_arrayShift myArrayA removedA
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
 	
-	call dk_arrayShift myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
+	%dk_call% dk_arrayShift myArrayA removedA
+	%dk_call% dk_printVar myArrayA
+	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
 	
 	:: FIXME:  out of array bounds past here
-::	call dk_arrayShift myArrayA removedA
-::	call dk_printVar myArrayA
-::	call dk_printVar removedA
-	call dk_echo
-	call dk_echo
+::	%dk_call% dk_arrayShift myArrayA removedA
+::	%dk_call% dk_printVar myArrayA
+::	%dk_call% dk_printVar removedA
+	%dk_call% dk_echo
+	%dk_call% dk_echo
 goto:eof

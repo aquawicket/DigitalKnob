@@ -82,7 +82,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
+	%dk_call% dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
 	echo messageBox_result = %messageBox_result%
 	if %messageBox_result%==1  (echo You Clicked OK)
 	if %messageBox_result%==2  (echo You Clicked Cancel)
