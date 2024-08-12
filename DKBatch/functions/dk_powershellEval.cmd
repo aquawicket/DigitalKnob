@@ -23,12 +23,12 @@ call dk_source dk_findProgram
 
 	call dk_error "POWERSHELL_EXE command invalid"
 
-::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::	call dk_validate DKPOWERSHELL_DIR "call dk_validateBranch"
-::	if not exist "%DKPOWERSHELL_DIR%" call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
+::	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_validateBranch"
+::	dk_call dk_validate DKPOWERSHELL_DIR "dk_call dk_validateBranch"
+::	if not exist "%DKPOWERSHELL_DIR%" dk_call dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
 	
-::	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-::	if not exist "%POWERSHELL_EXE%"   call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
+::	dk_call dk_validate POWERSHELL_EXE "dk_call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
+::	if not exist "%POWERSHELL_EXE%"   dk_call dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
 	
 	:found
 	"%POWERSHELL_EXE%" -Command %*

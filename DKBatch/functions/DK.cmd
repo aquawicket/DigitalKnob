@@ -15,9 +15,10 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_STD=1>nul 2>nul"
+	
     ::###### Initialize Language specifics ######
-    ::call :dk_init
-
+    call :dk_init
+	
     ::###### Reload Main Script with cmd ######
     call :dk_reloadWithCmd %*
 
@@ -49,25 +50,26 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     ::dk_setOptions
 	
     ::############ LOAD FUNCTION FILES ############
-    call dk_source dk_debugFunc
-	call dk_source dk_minMaxArgs
-    call dk_source dk_echo
-    call dk_source dk_color && call dk_color
-    call dk_source dk_logo  && call dk_logo
+	set "dk_call=call dk_call"
+    ::call dk_source dk_debugFunc
+	::call dk_source dk_minMaxArgs
+    ::call dk_source dk_echo
+	%dk_call% dk_color
+	%dk_call% dk_logo
 	
-    if "!!"==""    call dk_echo "delayed expansion = ON"
-    if "!!" neq "" call dk_echo "delayed expansion = OFF"
+    if "!!"==""    %dk_call% dk_echo "delayed expansion = ON"
+    if "!!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
     ::%DK% dk_load %DKSCRIPT_PATH%
 	
     ::###### DKTEST MODE ######
     if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
-    call dk_echo
-    call dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
-    call dk_echo
+    %dk_call% dk_echo
+    %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
+    %dk_call% dk_echo
     call :DKTEST
-    call dk_echo
-    call dk_echo "%bg_magenta%%white%########################## END TEST ###############################%clr%"
-    call dk_echo
+    %dk_call% dk_echo
+    %dk_call% dk_echo "%bg_magenta%%white%########################## END TEST ###############################%clr%"
+    %dk_call% dk_echo
     pause
     exit
 goto:eof
@@ -86,6 +88,8 @@ goto:eof
 ::#
 :dk_init
 	call :dk_echo "Loading DKBatch DigitalKnob . . ."
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
 goto:eof
 
 
@@ -126,8 +130,7 @@ goto:eof
 ::# dk_setupCallstack
 ::#
 :dk_setupCallstack
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-    call dk_source dk_callStack
+	call dk_source dk_callStack
 goto:eof
 
 
@@ -141,7 +144,7 @@ goto:eof
 	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_DIR=%%~dpZ"
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
-	call dk_source dk_load
+	::call dk_source dk_load
 	
 	::### ASSETS ###
 	if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
