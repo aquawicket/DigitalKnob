@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_call
 	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1 99
 	
-	::if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_source "%~1"
-	call dk_source "%~1"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_source "%~1"
+	::call dk_source "%~1"
 	
 	::echo "call %*"
 	call %*	
