@@ -25,15 +25,15 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:\Windows\System32\test.v123.zip" 
-	call dk_basename "%myPath%" basename
-	call dk_printVar basename
+	%dk_call% dk_set myPath "C:\Windows\System32\test.v123.zip" 
+	%dk_call% dk_basename "%myPath%" basename
+	%dk_call% dk_printVar basename
 	
-	call dk_set myPathB "TEST" 
-	call dk_basename "%myPathB%" basenameB
-	call dk_printVar basenameB
+	%dk_call% dk_set myPathB "TEST" 
+	%dk_call% dk_basename "%myPathB%" basenameB
+	%dk_call% dk_printVar basenameB
 	
 	set "myPathC=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
-	call dk_basename "%myPathC%" basenameC
-	call dk_printVar basenameC
+	%dk_call% dk_basename "%myPathC%" basenameC
+	%dk_call% dk_printVar basenameC
 goto:eof

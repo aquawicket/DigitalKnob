@@ -1,10 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_debugFunc
-call dk_source dk_error
-call dk_source dk_getExtension
-call dk_source dk_replaceAll
 ::##################################################################################
 ::# dk_removeExtension(filepath rtn_var)
 ::#
@@ -14,8 +10,8 @@ call dk_source dk_replaceAll
 	
 	setlocal
 	set "_filepath_=%~1"
-	call dk_getExtension "%_filepath_%" _extension_
-	call dk_replaceAll "%_filepath_%" "%_extension_%" "" _filepath_
+	%dk_call% dk_getExtension "%_filepath_%" _extension_
+	%dk_call% dk_replaceAll "%_filepath_%" "%_extension_%" "" _filepath_
 	
 	:: [ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
 	endlocal & set "%2=%_filepath_%"
@@ -30,7 +26,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "/test/test2/xfile.extension"
-	call dk_removeExtension "%myPath%" filepath
-	call dk_printVar filepath
+	%dk_call% dk_set myPath "/test/test2/xfile.extension"
+	%dk_call% dk_removeExtension "%myPath%" filepath
+	%dk_call% dk_printVar filepath
 goto:eof

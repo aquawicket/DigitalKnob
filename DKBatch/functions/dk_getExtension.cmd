@@ -27,7 +27,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "/test/test2/xfile.extension"
-	call dk_getExtension "%myPath%" extension
-	call dk_printVar extension
+	%dk_call% dk_set myPath "/test/test2/xfile.extension"
+	%dk_call% dk_getExtension "%myPath%" extension
+	%dk_call% dk_printVar extension
 goto:eof

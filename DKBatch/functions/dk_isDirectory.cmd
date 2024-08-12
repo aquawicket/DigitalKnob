@@ -28,6 +28,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_isDirectory "C:\Windows" && call dk_info "'C:\Windows' is a directory" || call dk_info "'C:\Windows' is NOT a directory"
-	call dk_isDirectory "C:\NotADir" && call dk_info "'C:\NotADir' is a directory" || call dk_info "'C:\NotADir' is NOT a directory"
+	%dk_call% dk_isDirectory "C:\Windows" && %dk_call% dk_info "'C:\Windows' is a directory" || %dk_call% dk_info "'C:\Windows' is NOT a directory"
+	%dk_call% dk_isDirectory "C:\NotADir" && %dk_call% dk_info "'C:\NotADir' is a directory" || %dk_call% dk_info "'C:\NotADir' is NOT a directory"
 goto:eof

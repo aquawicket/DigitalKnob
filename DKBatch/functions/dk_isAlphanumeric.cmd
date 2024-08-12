@@ -35,18 +35,18 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_isAlphanumeric 69         && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric 69         && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
 	set "myNumber=42"
-	call dk_isAlphanumeric %myNumber% && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric myNumber   && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"  &:: FIXME
-	call dk_isAlphanumeric 0          && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric 1          && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric 1.23       && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric -42        && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric "36"       && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric %myNumber% && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric myNumber   && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"  &:: FIXME
+	%dk_call% dk_isAlphanumeric 0          && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric 1          && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric 1.23       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric -42        && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric "36"       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
 	
-	call dk_isAlphanumeric "36a"      && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric word       && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric 123456789  && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
-	call dk_isAlphanumeric myArray[0] && call dk_info "is alphanumeric" || call dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric "36a"      && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric word       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric 123456789  && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
+	%dk_call% dk_isAlphanumeric myArray[0] && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
 goto:eof

@@ -35,18 +35,18 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_isVariableName 69         && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName 69         && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
 	set "myNumber=42"
-	call dk_isVariableName %myNumber% && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName myNumber   && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"  &:: FIXME
-	call dk_isVariableName 0          && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName 1          && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName 1.23       && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName -42        && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName "36"       && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName %myNumber% && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName myNumber   && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"  &:: FIXME
+	%dk_call% dk_isVariableName 0          && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName 1          && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName 1.23       && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName -42        && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName "36"       && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
 	
-	call dk_isVariableName "36a"      && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName word       && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName 123456789  && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
-	call dk_isVariableName myArray[0] && call dk_info "is a valid variable name" || call dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName "36a"      && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName word       && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName 123456789  && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
+	%dk_call% dk_isVariableName myArray[0] && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
 goto:eof

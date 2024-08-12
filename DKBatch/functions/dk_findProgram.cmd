@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if exist "%VAL%" %dk_call% dk_debug("already FOUND %name% at %VAL%") && goto:eof
 
-	%dk_call% dk_commandToVariable "where /R %pattern% %name% 2>nul" %VAR%
+	%dk_call% dk_commandToVariable "where /R %pattern% %name% %NO_STDERR%" %VAR%
 	%dk_call% dk_printVar %VAR%
 	endlocal & set "%2=!%VAR%!"
 goto:eof

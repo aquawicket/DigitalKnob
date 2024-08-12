@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_isVariableName
-::call dk_source dk_isAlphanumeric
 ::################################################################################
 ::# dk_printVar(variable)
 ::#
@@ -15,7 +13,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
 	
 	%dk_call% dk_isVariableName "%~1" || goto:eof
-	
 	
     :array
 		set "arry=%~1"
