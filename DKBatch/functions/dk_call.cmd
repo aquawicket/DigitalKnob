@@ -13,7 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		call dk_source "%~1"
 		if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" echo ERROR: failed to dowload %~1.cmd & goto:eof
 		if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_source dk_isCRLF
-		if exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" || call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
+		if not exist "%DKBATCH_FUNCTIONS_DIR%\dk_fileToCRLF.cmd" call dk_source dk_fileToCRLF
+		if exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR%\dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
 	)
 	
 	::echo "call %*"
