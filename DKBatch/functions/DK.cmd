@@ -28,8 +28,10 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     ::############ Get DKHTTP variables ############
     call :dk_DKHTTP_VARS
 
+	::############ get dk_source and dk_call ######
+	call :dk_initFiles
+	
     ::############ Setup dk_callStack ############
-    ::call :dk_setupCallstack
 	call dk_source dk_callStack
     call dk_callStack
     :dk_callStackReturn
@@ -87,9 +89,6 @@ goto:eof
 ::#
 :dk_init
 	call :dk_echo "Loading DKBatch DigitalKnob . . ."
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd')"
 goto:eof
 
 
@@ -125,12 +124,12 @@ goto:eof
     if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
 goto:eof
 
-
 ::##################################################################################
-::# dk_setupCallstack
+::# dk_initFiles
 ::#
-:dk_setupCallstack
-	call dk_source dk_callStack
+:dk_initFiles
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
 goto:eof
 
 
