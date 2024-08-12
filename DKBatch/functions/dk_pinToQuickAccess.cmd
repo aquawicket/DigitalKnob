@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_powershellEval
 ::################################################################################
 ::# dk_pinToQuickAccess(path)
 ::#
@@ -19,6 +18,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::powershell /? 1>nul || %dk_call% dk_error "dk_createShortcut requires powershell"
 	::powershell -command "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
 goto:eof
+
+
 
 
 

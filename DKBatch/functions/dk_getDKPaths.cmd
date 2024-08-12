@@ -1,13 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_debugFunc
-::call dk_source dk_error
-::call dk_source dk_setDKHOME_DIR
-::call dk_source dk_setDKDESKTOP_DIR
-::call dk_source dk_setDIGITALKNOB_DIR
-::call dk_source dk_setDKTOOLS_DIR
-::call dk_source dk_setDKDOWNLOAD_DIR
 ::####################################################################
 ::# dk_getDKPaths()
 ::#

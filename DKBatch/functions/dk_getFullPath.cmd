@@ -27,7 +27,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "DK.cmd"
-	call dk_getFullPath "%myPath%" fullPath
-	call dk_printVar fullPath
+	%dk_call% dk_set myPath "DK.cmd"
+	%dk_call% dk_getFullPath "%myPath%" fullPath
+	%dk_call% dk_printVar fullPath
 goto:eof

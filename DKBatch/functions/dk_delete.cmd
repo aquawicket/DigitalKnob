@@ -16,8 +16,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	%dk_call% dk_getFullPath "%_path_%" _path_ 
 	
-	del /F /Q "%_path_%" >nul 2>&1
-	rd /s /q "%_path_%" >nul 2>&1
+	del /F /Q "%_path_%" %NO_STD%
+	rd /s /q "%_path_%" %NO_STD%
 	
 	if exist "%_path_%" (
 		%dk_call% dk_error "dk_delete failed to remove %_path_%"

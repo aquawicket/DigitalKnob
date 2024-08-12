@@ -27,7 +27,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:\Windows\System32"
-	call dk_dirname "%myPath%" result
-	call dk_printVar result
+	%dk_call% dk_set myPath "C:\Windows\System32"
+	%dk_call% dk_dirname "%myPath%" result
+	%dk_call% dk_printVar result
 goto:eof

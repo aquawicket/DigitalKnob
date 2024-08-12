@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-::call dk_source dk_validate
-::call dk_source dk_findProgram
 ::################################################################################
 ::# dk_powershellEval(commands)
 ::#

@@ -25,13 +25,13 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set string_var "AZC AZC Zannana Zread"
-	call dk_printVar string_var
-	call dk_replaceAll "%string_var%" "Z" "B" string_var
-	call dk_printVar string_var
+	%dk_call% dk_set string_var "AZC AZC Zannana Zread"
+	%dk_call% dk_printVar string_var
+	%dk_call% dk_replaceAll "%string_var%" "Z" "B" string_var
+	%dk_call% dk_printVar string_var
 
-	call dk_set varB "C:\path\with\backslashes"
-	call dk_printVar varB
-	call dk_replaceAll "%varB%" "\" "/" varB
-	call dk_printVar varB
+	%dk_call% dk_set varB "C:\path\with\backslashes"
+	%dk_call% dk_printVar varB
+	%dk_call% dk_replaceAll "%varB%" "\" "/" varB
+	%dk_call% dk_printVar varB
 goto:eof
