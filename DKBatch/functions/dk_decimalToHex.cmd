@@ -36,7 +36,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myDecimal 45
-	call dk_decimalToHex "%myDecimal%" myHex
-	call dk_printVar myHex
+	%dk_call% dk_set myDecimal 45
+	%dk_call% dk_decimalToHex "%myDecimal%" myHex
+	%dk_call% dk_printVar myHex
 goto:eof

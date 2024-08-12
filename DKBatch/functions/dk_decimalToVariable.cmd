@@ -8,8 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 	
 	::setlocal
-	call dk_decimalToHex %~2 hex
-	call dk_hexToVariable %~1 %hex%
+	%dk_call% dk_decimalToHex %~2 hex
+	%dk_call% dk_hexToVariable %~1 %hex%
 	::endlocal
 goto:eof
 
@@ -24,6 +24,6 @@ goto:eof
 	call dk_debugFunc 0
 	
 	set "myDecimal=32"
-	call dk_decimalToVariable "%myDecimal%" myVariable
-	call dk_printVar myVariable
+	%dk_call% dk_decimalToVariable "%myDecimal%" myVariable
+	%dk_call% dk_printVar myVariable
 goto:eof

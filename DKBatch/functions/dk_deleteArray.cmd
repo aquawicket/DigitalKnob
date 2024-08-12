@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	    goto :loop1 
 	)
 
-	if defined %~1[0] call dk_error "%__FUNCTION__%(): failed to delete array"
+	if defined %~1[0] %dk_call% dk_error "%__FUNCTION__%(): failed to delete array"
 	:: DOSTIPS version
 	:: :remove_array
 	:: for /f "delims==" %%a in ('"set %~1[ 2>NUL"') do set "%%a="
@@ -30,5 +30,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_deleteArray
+	%dk_call% dk_deleteArray
 goto:eof

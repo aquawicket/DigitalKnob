@@ -37,22 +37,22 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getDate Day Month Year
-	call dk_getTime CentiSecond Second Minute Hour
+	%dk_call% dk_getDate Day Month Year
+	%dk_call% dk_getTime CentiSecond Second Minute Hour
 	echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
 	echo:
 	echo ###### dk_dateToSeconds ######
-	call dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year% 
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year% 
 	echo %Year%/%Month%/%Day% %Hour%:%Minute%:%Second% = %seconds% seconds
-	call dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month%
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month%
 	echo %Month%/%Day% %Hour%:%Minute%:%Second% = %seconds% seconds
-	call dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day%
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day%
 	echo %Day% %Hour%:%Minute%:%Second% = %seconds% seconds
-	call dk_dateToSeconds seconds %Second% %Minute% %Hour%
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour%
 	echo %Hour%:%Minute%:%Second% = %seconds% seconds
-	call dk_dateToSeconds seconds %Second% %Minute%
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute%
 	echo %Minute%:%Second% = %seconds% seconds
-	call dk_dateToSeconds seconds %Second%
+	%dk_call% dk_dateToSeconds seconds %Second%
 	echo :%Second% = %seconds% seconds
 goto:eof

@@ -40,24 +40,24 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getDate Day Month Year
-	call dk_getTime CentiSecond Second Minute Hour
+	%dk_call% dk_getDate Day Month Year
+	%dk_call% dk_getTime CentiSecond Second Minute Hour
 	echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
 	echo:
 	echo ###### dk_dateToCentiSeconds ######
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day% %Month% %Year% 
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day% %Month% %Year% 
 	echo %Year%/%Month%/%Day% %Hour%:%Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day% %Month%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day% %Month%
 	echo %Month%/%Day% %Hour%:%Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day%
 	echo %Day% %Hour%:%Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour%
 	echo %Hour%:%Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute%
 	echo %Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second%
 	echo :%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds
-	call dk_dateToCentiSeconds seconds centiseconds %CentiSecond%
+	%dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond%
 	echo .%CentiSecond% = %seconds%.%centiseconds% seconds
 goto:eof

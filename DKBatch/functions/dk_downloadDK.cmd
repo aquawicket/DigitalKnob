@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_downloadDK
 	call dk_debugFunc 0
 	
-	call dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
+	%dk_call% dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
 goto:eof
 
 
@@ -20,5 +20,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_downloadDK
+	%dk_call% dk_downloadDK
 goto:eof

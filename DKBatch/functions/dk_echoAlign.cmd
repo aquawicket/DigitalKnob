@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: FIXME: requires delayed expansion
 	setlocal enabledelayedexpansion
-	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	(set^ tmp=%~2)
 	if defined tmp (
@@ -59,16 +59,16 @@ goto:eof
 	call dk_debugFunc 0
 	
 	setlocal
-	call dk_echoAlign center "centered text"
-	call dk_echoAlign right "right aligned text"
-	call dk_echo "text on the left side"
+	%dk_call% dk_echoAlign center "centered text"
+	%dk_call% dk_echoAlign right "right aligned text"
+	%dk_call% dk_echo "text on the left side"
 	set "prep_text="
 	for /l %%Z in (1 1 7) do (
 		if "!!" equ "" set "prep_text=!prep_text!aR"
-		if "!!" equ "" call dk_echoAlign center "!prep_text!"
+		if "!!" equ "" %dk_call% dk_echoAlign center "!prep_text!"
 		
 		if "!!" neq "" call set "prep_text=%%prep_text%%aR"
-		if "!!" neq "" call dk_echoAlign center "%%prep_text%%"
+		if "!!" neq "" %dk_call% dk_echoAlign center "%%prep_text%%"
 	)
 	echo:
 goto:eof
