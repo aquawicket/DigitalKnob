@@ -29,7 +29,8 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     call :dk_DKHTTP_VARS
 
     ::############ Setup dk_callStack ############
-    call :dk_setupCallstack
+    ::call :dk_setupCallstack
+	call dk_source dk_callStack
     call dk_callStack
     :dk_callStackReturn
 
@@ -90,6 +91,7 @@ goto:eof
 	call :dk_echo "Loading DKBatch DigitalKnob . . ."
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_callStack.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_callStack.cmd')"
 goto:eof
 
 
@@ -144,7 +146,6 @@ goto:eof
 	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_DIR=%%~dpZ"
 	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
-	::call dk_source dk_load
 	
 	::### ASSETS ###
 	if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
