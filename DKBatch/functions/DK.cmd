@@ -52,9 +52,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	
     ::############ LOAD FUNCTION FILES ############
 	set "dk_call=call dk_call"
-    ::call dk_source dk_debugFunc
-	::call dk_source dk_minMaxArgs
-    ::call dk_source dk_echo
+    call dk_source dk_debugFunc
 	%dk_call% dk_color
 	%dk_call% dk_logo
 	
