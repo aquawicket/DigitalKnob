@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::BATCH_SOURCE
 ::BATCH_ARGC[]
@@ -48,7 +48,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-	if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
+	::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
 	
 	::###<TIMESTAMP> <ELAPSED_TIME>###
 	::call dk_timer timestamp

@@ -1,6 +1,6 @@
 @echo off
 ::if defined dk_loadAll (goto:eof) else (set dk_loadAll=1)
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 
 ::####################################################################
