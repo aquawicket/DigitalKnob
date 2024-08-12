@@ -39,6 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
 	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_echo "failed to download %1.cmd"
+	
 	endlocal
 goto:eof
 
