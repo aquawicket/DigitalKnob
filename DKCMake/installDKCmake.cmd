@@ -6,20 +6,20 @@ if not "%~1" == "" (goto:runDKCMake)
 	call "..\DKBatch\functions\DK.cmd"
 	
 	::###### Install DKBash ######
-	call dk_echo "Installing DKCmake . . ."
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
-	if not defined DKIMPORTS_DIR call dk_validateBranch
+	%dk_call% dk_echo "Installing DKCmake . . ."
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
+	if not defined DKIMPORTS_DIR %dk_call% dk_validateBranch
 	if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCmake"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCmake"
 	ftype DKCmake=cmd /c call "%~f0" "%CMAKE_EXE%" "%DKCMAKE_FUNCTIONS_DIR%" "%%1" %*
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKCmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKCmake\DefaultIcon" "" "REG_SZ" "%CMAKE%\bin\cmake-gui.exe"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmake"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmake"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
 	assoc .cmake=DKCmake
 
-	call dk_echo "DKCmake install complete"
+	%dk_call% dk_echo "DKCmake install complete"
 goto:eof
 
 
