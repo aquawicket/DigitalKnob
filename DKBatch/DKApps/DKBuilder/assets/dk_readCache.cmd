@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
 ::# dk_readCache(rtn:APP, rtn:TARGET_OS, rtn:TYPE)
@@ -8,13 +8,13 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_readCache
 	call dk_debugFunc 3
 	
-	if not defined DKBRANCH_DIR call dk_validateBranch
-	::call dk_printVar DKBRANCH_DIR
-    ::if not exist "%DKBRANCH_DIR%\cache" call dk_warning "%DKBRANCH_DIR%\cache does not exist" && goto:eof
+	if not defined DKBRANCH_DIR %dk_call% dk_validateBranch
+	::%dk_call% dk_printVar DKBRANCH_DIR
+    ::if not exist "%DKBRANCH_DIR%\cache" %dk_call% dk_warning "%DKBRANCH_DIR%\cache does not exist" && goto:eof
 	if not exist "%DKBRANCH_DIR%\cache" goto:eof
     
 	setlocal enableDelayedExpansion
-	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	set /a count=0
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
@@ -25,9 +25,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     )
 	
 	endlocal && set "%1=%APP%" && set "%2=%TARGET_OS%" && set "%3=%TYPE%"
-	::call dk_printVar APP
-	::call dk_printVar TARGET_OS
-	::call dk_printVar TYPE
+	::%dk_call% dk_printVar APP
+	::%dk_call% dk_printVar TARGET_OS
+	::%dk_call% dk_printVar TYPE
 goto:eof
 
 
@@ -41,8 +41,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_readCache APP TARGET_OS TYPE
-	call dk_printVar APP
-	call dk_printVar TARGET_OS
-	call dk_printVar TYPE
+	%dk_call% dk_readCache APP TARGET_OS TYPE
+	%dk_call% dk_printVar APP
+	%dk_call% dk_printVar TARGET_OS
+	%dk_call% dk_printVar TYPE
 goto:eof

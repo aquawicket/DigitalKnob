@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
 ::# dk_validateBranch()
@@ -11,11 +11,11 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
 	
-	if not defined DIGITALKNOB_DIR call dk_setDIGITALKNOB_DIR
+	if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
     for %%I in (.) do set "FOLDER=%%~nxI"			               &:: get the current folder
 
 	set "DKBRANCH=Development"						               &:: set the default branch
-	if not defined GIT_EXE call dk_installGit
+	if not defined GIT_EXE %dk_call% dk_installGit
 	if exist "%CD%\.git" (
         "%GIT_EXE%" branch | find "* %FOLDER%" > NUL & if ERRORLEVEL 0 (
 			set "DKBRANCH=%FOLDER%"
@@ -74,7 +74,7 @@ goto:eof
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
-    ::              call dk_copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
+    ::              %dk_call% dk_copy %DKSCRIPT_DIR%\%DKSCRIPT_NAME% %DKBRANCH_DIR%\%DKSCRIPT_NAME%
     ::      )
     ::      echo .
     ::      echo "RELOADING SCRIPT TO -> %DKBRANCH_DIR%\%DKSCRIPT_NAME%"
@@ -85,7 +85,7 @@ goto:eof
     ::      )
     ::      exit
     ::)
-    ::call dk_checkError
+    ::%dk_call% dk_checkError
 goto:eof
 
 
@@ -95,5 +95,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_validateBranch
+	%dk_call% dk_validateBranch
 goto:eof

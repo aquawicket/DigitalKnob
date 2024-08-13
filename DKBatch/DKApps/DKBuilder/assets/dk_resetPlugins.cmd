@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
 ::# dk_resetPlugins()
@@ -10,7 +10,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
     echo Resetting DKPlugins . . .
 
-    call dk_confirm || goto:eof
+    %dk_call% dk_confirm || goto:eof
     
     cd %DKPLUGINS_DIR%
     "%GIT_EXE%" clean -f -d
@@ -25,5 +25,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_resetPlugins
+	%dk_call% dk_resetPlugins
 goto:eof
