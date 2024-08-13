@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_variable_info(name output)
 #
@@ -16,7 +15,7 @@ dk_variable_info() {
 	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
 	
 	#FIXME: this only gets the first element of an array variable
-	if dk_defined ${1}; then
+	if dk_call dk_defined ${1}; then
 		eval value='$'{$1}
 		eval "${2}=\"${1} = '${value}'\""
 	else
@@ -30,5 +29,5 @@ dk_variable_info() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_variable_info
+	dk_call dk_variable_info
 }

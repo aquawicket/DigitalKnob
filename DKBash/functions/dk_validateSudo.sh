@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_validateSudo()
 #
@@ -9,7 +8,6 @@
 dk_validateSudo() {
 	dk_debugFunc 0
 
-	
 	if command -v "sudo" >/dev/null 2>&1; then
 		dksudo="sudo"
 	fi
@@ -19,6 +17,7 @@ dk_validateSudo() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-
-	dk_validateSudo
+	dk_debugFunc 0
+	
+	dk_call dk_validateSudo
 }

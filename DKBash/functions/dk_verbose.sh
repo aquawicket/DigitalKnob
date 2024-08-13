@@ -1,12 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-#dk_set ENABLE_dk_verbose 1
-#dk_set TRACE_ON_VERBOSE 1
-#dk_set LINE_ON_VERBOSE 1
-#dk_set PAUSE_ON_VERBOSE 1
-#dk_set HALT_ON_VERBOSE 1
-#dk_set VERBOSE_TAG " VERBOSE: "
 ##################################################################################
 # dk_verbose(message)
 #
@@ -16,7 +10,8 @@
 #
 dk_verbose() {
 	dk_debugFunc 1
-	dk_log VERBOSE "$1"
+	
+	dk_call dk_log VERBOSE "$1"
 }
 
 
@@ -30,5 +25,5 @@ dk_verbose() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_verbose "test dk_verbose message"
+	dk_call dk_verbose "test dk_verbose message"
 }

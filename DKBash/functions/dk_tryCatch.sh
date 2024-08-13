@@ -16,8 +16,8 @@ dk_tryCatch() {
 
 	if [ "$err_status" -ne "0" ]; then
 		echo "ERROR_STATUS: $err_status"
-		#dk_pause
-		#dk_error "test"
+		#dk_call dk_pause
+		#dk_call dk_error "test"
 	fi
 }
 
@@ -30,5 +30,5 @@ dk_tryCatch() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_tryCatch
+	dk_call dk_tryCatch
 }

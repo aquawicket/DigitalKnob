@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_toLower(<input> <output>)
 #
@@ -9,10 +8,9 @@
 dk_toLower() {
 	dk_debugFunc 2
 
-
 	local output=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]')
 	eval "${2}='${output}'"
-	dk_printVar "${2}"
+	dk_call dk_printVar "${2}"
 }
 
 
@@ -21,6 +19,6 @@ dk_toLower() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
+	dk_call dk_toLower "CoNvErT tHiS sTrInG tO aLl LoWeRcAse" lowercase
 	echo "lowercase = ${lowercase}"
 }
