@@ -10,8 +10,8 @@ dk_isUrl() {
 	dk_debugFunc 1
 
 	
-	dk_stringContains "${1}" "://" && return ${true}
-	return ${false}
+	dk_stringContains "${1}" "://" && return $(true)
+	return $(false)
 }
 
 

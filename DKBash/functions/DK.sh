@@ -114,16 +114,6 @@ dkinit(){
 	dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
 	dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
 	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }     # dk_pause
-#	dk_defined       true                || export true=0                                                                                         # true
-#	dk_defined       false               || export false=1                                                                                        # false
-#	dk_defined       ESC                 || export ESC=""                                                                                      # Escape character
-#	dk_defined       clr                 || export clr="${ESC}[0m"
-#	dk_defined       black               || export black="${ESC}[30m"
-#	dk_defined       red                 || export red="${ESC}[31m"
-#	dk_defined       yellow              || export yellow="${ESC}[33m"
-#	dk_defined       blue                || export blue="${ESC}[34m"
-#	dk_defined       cyan                || export cyan="${ESC}[36m"
-#	dk_defined       bg_magenta          || export bg_magenta="${ESC}[45m"
 	dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                # dk_warning "test dk_warning";
 	dk_commandExists dk_warning          || dk_warning()         { dk_echo "${yellow}WARNING: ${1}${clr}"; }                                   # dk_warning "test dk_warning";
 	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                      # dk_info "test dk_info";

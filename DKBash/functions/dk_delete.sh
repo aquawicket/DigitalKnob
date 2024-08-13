@@ -18,7 +18,7 @@ dk_delete() {
 	
 	if dk_call dk_pathExists "${_path_}"; then
 		dk_call dk_error "dk_delete(): failed to remove ${_path_}"
-		return ${false}
+		return $(false)
 	fi
 }
 

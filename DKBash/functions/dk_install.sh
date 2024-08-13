@@ -11,7 +11,7 @@ dk_install() {
 	[ -n "$(command -v "${1}")" ] && return    # 
 	#if dk_call dk_packageInstalled ${1}; then
 	#	dk_call dk_warning "${1} already installed"
-	#	return ${false};
+	#	return $(false);
 	#fi
 	
 	dk_call dk_info "installing ${1}. . ."

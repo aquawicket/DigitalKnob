@@ -50,7 +50,7 @@ dk_installPowershell() {
 	dk_printVar POWERSHELL_EXE
 		
 	if dk_pathExists "${POWERSHELL_EXE}"; then 
-		return ${true};
+		return $(true);
 	fi
 	
 	dk_echo

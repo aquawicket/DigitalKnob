@@ -773,8 +773,8 @@ dk_getDKPaths() {
 #
 #
 dk_url() {
-	dk_stringContains ${1} "://" && return ${true}
-	return ${false}
+	dk_stringContains ${1} "://" && return $(true)
+	return $(false)
 }
 
 ##################################################################################
@@ -836,7 +836,7 @@ dk_installCmake() {
 		dk_printVar CMAKE_EXE
 		
 		if dk_pathExists "${CMAKE_EXE}"; then 
-			return ${true};
+			return $(true);
 		fi
 
 		dk_echo
@@ -956,9 +956,9 @@ dk_error() {
 dk_variable_info() {
 	echo "dk_variable_info(${*})"
 	
-	[ ${#} -ne 2 ] && return ${false}										# if not exactly 2 parameters
-	$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
-	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
+	[ ${#} -ne 2 ] && return $(false)										# if not exactly 2 parameters
+	$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)		# if not valid variable name
+	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)		# if not valid variable name
 	
 	if dk_defined ${1}; then
 		eval value='$'{${1}}
@@ -1027,7 +1027,7 @@ dk_stacktrace() {
 #
 dk_defined() {
 	dk_verbose "dk_defined(${*})"
-	[ ${#} -ne 1 ] && return ${false} # Incorrect number of parameters
+	[ ${#} -ne 1 ] && return $(false) # Incorrect number of parameters
 	
 	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
 	[ -n "${value}" ]
@@ -1125,9 +1125,9 @@ dk_confirm() {
 	dk_echo
 	dk_echo
 	#result=$(echo ${REPLY} | grep "^[Yy]$")
-	[ "${REPLY}" = "y" ] && return ${true}
-	[ "${REPLY}" = "Y" ] && return ${true}
-	return ${false};
+	[ "${REPLY}" = "y" ] && return $(true)
+	[ "${REPLY}" = "Y" ] && return $(true)
+	return $(false);
 }
 
 
@@ -1399,11 +1399,11 @@ dk_packageInstalled() {
 
 	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "${1}" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists brew; then
 		if brew list "${1}" &>/dev/null; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists apt; then
 		dk_error "dk_packageInstalled() apt-get not implemented"
@@ -1414,15 +1414,15 @@ dk_packageInstalled() {
 	elif dk_commandExists pacman; then
 		if pacman -Qs "${1}" >/dev/null; then
 			#FIXME: this doesn't always work
-			return ${false};
+			return $(false);
 		fi
 	elif dk_commandExists tce-load; then
 		#dk_error "dk_packageInstalled() tce-load not implemented"
-		return ${false}
+		return $(false)
 	else
 		dk_error "ERROR: no package managers found"
 	fi
-	return ${false}
+	return $(false)
 }
 
 
@@ -1436,7 +1436,7 @@ dk_install() {
 
 	#if dk_packageInstalled ${1}; then
 	#	dk_warning "${1} already dk_installed"
-	#	return ${false};
+	#	return $(false);
 	#fi
 	
 	dk_info "dk_installing ${1}"
@@ -1787,7 +1787,7 @@ dk_resetAll() {
 			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_printVar DKBRANCH_DIR
-			return ${false};
+			return $(false);
 		fi
 		
 		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_NAME"
@@ -2003,7 +2003,7 @@ dk_enterManually() {
 	fi
 	if test -f "${DKAPPS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKAPPS_DIR}/${input}
-		return ${true}
+		return $(true)
 	fi
 	dk_printVar TARGET_PATH
 	

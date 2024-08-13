@@ -12,10 +12,10 @@ dk_assert() {
          [ -z "${!1}" ]     ||
          [ ! -n "${!1+x}" ] )
 	then
-		dk_call dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))" && return ${false}
+		dk_call dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))" && return $(false)
 	fi
 	
-	return ${true}	
+	return $(true)	
 }
 
 

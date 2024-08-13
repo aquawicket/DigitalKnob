@@ -22,7 +22,7 @@ dk_enterManually() {
 	fi
 	if test -f "${DKAPPS_DIR}/${input}/DKMAKE.cmake"; then
 		TARGET_PATH=${DKAPPS_DIR}/${input}
-		return ${true}
+		return $(true)
 	fi
 	dk_call dk_printVar TARGET_PATH
 	

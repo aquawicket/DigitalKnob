@@ -67,7 +67,7 @@ dk_validateArgs() {
 		n=$((n+1))
 	done
 	
-	return ${true}
+	return $(true)
 }
 
 

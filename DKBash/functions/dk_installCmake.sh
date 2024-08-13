@@ -60,7 +60,7 @@ dk_installCmake() {
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake found for this OS"
 		dk_call dk_assert CMAKE_EXE
 		
-		dk_call dk_pathExists "${CMAKE_EXE}" && return ${true};
+		dk_call dk_pathExists "${CMAKE_EXE}" && return $(true);
 		
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."

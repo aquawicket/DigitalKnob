@@ -9,11 +9,11 @@
 dk_defined() {
 	dk_debugFunc 1
 	
-	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}   # ^ as first character is not portable
+	#$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)   # ^ as first character is not portable
 	# FIXME:  the errors out on zsh
 	
-	#$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
-	#[[ ${1} ~= [A-Za-z0-9_]\+$ ]] || return ${false}
+	#$(expr "${1}" : "[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)		# if not valid variable name
+	#[[ ${1} ~= [A-Za-z0-9_]\+$ ]] || return $(false)
 	
 	#dk_call dk_echo "${green}${name} is [:word:]${clr}"
 	

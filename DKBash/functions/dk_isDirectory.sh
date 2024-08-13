@@ -10,11 +10,11 @@ dk_isDirectory () {
 	
 	if [[ -d ${1} ]]; then
 		#if defined ${2} (dk_set ${2} true)
-		return ${true}
+		return $(true)
 	fi
 	
 	#if defined "${2}" (dk_set ${2} true)
-	return ${false}
+	return $(false)
 }
 
 
