@@ -9,7 +9,6 @@ if(!$dk_validate){ $dk_validate = 1 } else{ return }
 #
 function Global:dk_validate($variable, $code) {
 	dk_debugFunc 2
-	Write-Host "dk_validate($variable, $code)"
 	
 	if($variable -and (Test-Path variable:$variable)){ return }
 	
