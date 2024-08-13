@@ -171,13 +171,12 @@ dk_download() {
 	echo "Downloading $(dk_basename ${1}) . . ."
 	parentdir="$(dk_dirname "${2}")"
 	OLDPWD=${PWD}
-	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
+	cd "${parentdir}"
 	
 	[ -e "${1}" ] || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
 	[ -e "${1}" ] || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
 	
-	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
-	#[ "${input}" = "" ]
+	cd "${OLDPWD}"
 }
 
 ##################################################################################
