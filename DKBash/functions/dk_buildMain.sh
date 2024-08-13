@@ -69,7 +69,8 @@ dk_buildMain() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_buildMain

@@ -16,7 +16,8 @@ dk_isUrl() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
 	test_url="http://www.aquawicket.com"

@@ -1,17 +1,16 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_cmakeEval(<cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>)
 #
 #			
 dk_cmakeEval() {
 	dk_debugFunc 1 3
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -lt 1 ] && dk_call dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
-	dk_validate CMAKE_EXE "dk_installCmake"
-	dk_validate DKCMAKE_DIR "dk_validateBranch"
+	dk_call dk_validate CMAKE_EXE "dk_call dk_installCmake"
+	dk_call dk_validate DKCMAKE_DIR "dk_call dk_validateBranch"
 	
 	DKCOMMAND="${1}"
 	DKRETURN="${2-}"
@@ -20,33 +19,35 @@ dk_cmakeEval() {
 	
 	### build cmake command ###
 	set -- #clear the positional parameters
-	[ -n "${DKCOMMAND}" ] && set -- "${@}" "-DDKCOMMAND=${DKCOMMAND}" || dk_error "DKCOMMAND is invalid"
+	[ -n "${DKCOMMAND}" ] && set -- "${@}" "-DDKCOMMAND=${DKCOMMAND}" || dk_call dk_error "DKCOMMAND is invalid"
 	[ -n "${DKRETURN}" ]  && set -- "${@}" "-DDKRETURN=${DKRETURN}"
 	[ -n "${DKVARS}" ]    && set -- "${@}" "${DKVARS}"
 	set -- "${@}" "-P"
 	set -- "${@}" "${DKCMAKE_DIR}/DKEval.cmake"
 	
 	### call the cmake command 
-	dk_call "${CMAKE_EXE}" "${@}"
+	dk_call dk_call "${CMAKE_EXE}" "${@}"
 	
 	### get the return variables
 	if [ -n "${DKRETURN}" ]; then 
-		if dk_pathExists "${DKCMAKE_DIR}"/cmake_vars; then
+		if dk_call dk_pathExists "${DKCMAKE_DIR}"/cmake_vars; then
 			. "${DKCMAKE_DIR}"/cmake_vars
 			rm ${DKCMAKE_DIR}/cmake_vars
 		fi
 	fi
 
-	#dk_debug return code: ${?}
+	#dk_call dk_debug return code: ${?}
 }
 
 
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
-	dk_cmakeEval "dk_debug('sent with dk_cmakeEval')" "CMAKE_CURRENT_LIST_DIR"
-	dk_printVar CMAKE_CURRENT_LIST_DIR
+	dk_call dk_cmakeEval "dk_debug('sent with dk_cmakeEval')" "CMAKE_CURRENT_LIST_DIR"
+	dk_call dk_printVar CMAKE_CURRENT_LIST_DIR
 }

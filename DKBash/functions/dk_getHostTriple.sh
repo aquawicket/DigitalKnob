@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # try(<args..>)
 #
@@ -57,7 +56,6 @@ try() {
 dk_getHostTriple() {
 	dk_debugFunc 0
 
-	
 	# currently, our host triple consists of only 2 variable needed
 	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	

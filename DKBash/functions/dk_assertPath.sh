@@ -11,7 +11,7 @@ dk_assertPath() {
 	[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}
 	
 	if [ ! -e ${_path_} ]; then	
-		dk_error "Assertion failed: ${1} : ${_path_} is not found!"
+		dk_call dk_error "Assertion failed: ${1} : ${_path_} is not found!"
 	fi
 }
 
@@ -21,8 +21,8 @@ dk_assertPath() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_set sys32path "/c/Windows/System32"
-	dk_assertPath sys32path
+	dk_call dk_set sys32path "/c/Windows/System32"
+	dk_call dk_assertPath sys32path
 	
-	dk_assertPath "/c/NonExistentPath"
+	dk_call dk_assertPath "/c/NonExistentPath"
 }

@@ -40,7 +40,8 @@ dk_packageInstalled() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	if dk_packageInstalled bash; then
 		echo "The package is installed"

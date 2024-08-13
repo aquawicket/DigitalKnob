@@ -1,8 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
-
 ##################################################################################
 # dk_debugFunc()
 #
@@ -17,9 +15,9 @@ debugFunc() {
 
 	#echo "############ ${_FUNCNAME_-} ${_ARGC_-} ${_MIN_-} ${_MAX_-} #########################"
 	#echo "####### $(__FUNCTION__ 2) $(__ARGC__ 2) ${_MIN_} ${_MAX_} #########################"
-	[ -n "${_MIN_-}" ] && [ "${_ARGC_-}" -lt "${_MIN_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): not enough arguments. Minimum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
-	[ -z "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MIN_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
-	[ -n "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MAX_-}" ] && dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MAX_-}, got ${_ARGC_-}" || $(true)
+	[ -n "${_MIN_-}" ] && [ "${_ARGC_-}" -lt "${_MIN_-}" ] && dk_call dk_error "${_FUNCNAME_-}(${_ARGC_-}): not enough arguments. Minimum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
+	[ -z "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MIN_-}" ] && dk_call dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MIN_-}, got ${_ARGC_-}" || $(true)
+	[ -n "${_MAX_-}" ] && [ "${_ARGC_-}" -gt "${_MAX_-}" ] && dk_call dk_error "${_FUNCNAME_-}(${_ARGC_-}): too many arguments. Maximum is ${_MAX_-}, got ${_ARGC_-}" || $(true)
 	
 	#####################################################################################################################
 	if [ ${ENABLE_dk_debugFunc-0} -eq 1 ]; then
@@ -32,7 +30,7 @@ debugFunc() {
 		done
 		local indent="${indent} L "
 		
-		dk_echo "${cyan}[$(__TIME__)]${indent}$(__FILE__ 2):$(__LINE__ 2)  ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr-}"
+		dk_call dk_echo "${cyan}[$(__TIME__)]${indent}$(__FILE__ 2):$(__LINE__ 2)  ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr-}"
 	fi
 	######################################################################################################################
 }
@@ -44,7 +42,8 @@ alias dk_debugFunc='debugFunc ${FUNCNAME} ${#}'
 #	dk_debugFunc
 #}
 	
-#DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+####### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+#DKTEST() {
 #	ENABLE_dk_debugFunc=1
 #	dk_debugFunc
 #	

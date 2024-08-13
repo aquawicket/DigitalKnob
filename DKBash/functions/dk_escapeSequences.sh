@@ -1,10 +1,8 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 # https://www.ascii-code.com
 # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-
 ##################################################################################
 # dk_escapeSequences()
 #
@@ -12,7 +10,6 @@
 dk_escapeSequences() {
 	dk_debugFunc 0
 	
-
 #	# ASCII control characters (character code 0-31)
 #	#	      		SYMBOL	DEC		OCT		HEX		HTML		Description
 #	ASCII_ADD		NUL		0		000		0x00	\#00		"Null character"
@@ -48,84 +45,82 @@ dk_escapeSequences() {
 #	ASCII_ADD		RS		30		036		0x1e	\#30		"Record Separator"
 #	ASCII_ADD		US		31		037		0x1f	\#31		"Unit Separator"
 
-
-#	dk_echo
-#	dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
+#	dk_call dk_echo
+#	dk_call dk_echo "	SYMBOL	DEC	OCT	HEX	HTML	Description"
 #	ASCII_size=${#ASCII[@]}
 #	for (( i=0; i<${ASCII_size}; i++ ));
 #	do
 #		ASCII_SHOW ${i}
 #	done
-#	dk_echo
+#	dk_call dk_echo
 
+	dk_call dk_hexToVariable 0x00 NUL
+	#dk_call dk_hexToVariable 0x01 SOH
+	#dk_call dk_hexToVariable 0x02 STX
+	#dk_call dk_hexToVariable 0x03 ETX
+	#dk_call dk_hexToVariable 0x04 EOT
+	#dk_call dk_hexToVariable 0x05 ENQ
+	#dk_call dk_hexToVariable 0x06 ACK
+	dk_call dk_hexToVariable 0x07 BEL
+	#dk_call dk_hexToVariable 0x08 BS
+	dk_call dk_hexToVariable 0x09 TAB
+	#dk_call dk_hexToVariable 0x0a LF
+	#dk_call dk_hexToVariable 0x0b VT
+	#dk_call dk_hexToVariable 0x0c FF
+	#dk_call dk_hexToVariable 0x0d CR
+	#dk_call dk_hexToVariable 0x0e SO
+	#dk_call dk_hexToVariable 0x0f SI
+	#dk_call dk_hexToVariable 0x10 DLE
+	#dk_call dk_hexToVariable 0x11 DC1
+	#dk_call dk_hexToVariable 0x12 DC2
+	#dk_call dk_hexToVariable 0x13 DC3
+	#dk_call dk_hexToVariable 0x14 DC4
+	#dk_call dk_hexToVariable 0x15 NAK
+	#dk_call dk_hexToVariable 0x16 SYN
+	#dk_call dk_hexToVariable 0x17 ETB
+	#dk_call dk_hexToVariable 0x18 CAN
+	#dk_call dk_hexToVariable 0x19 EM
+	#dk_call dk_hexToVariable 0x1a SUB
+	dk_call dk_hexToVariable 0x1b ESC
+	#dk_call dk_hexToVariable 0x1c FS
+	#dk_call dk_hexToVariable 0x1d GS
+	#dk_call dk_hexToVariable 0x1e RS
+	#dk_call dk_hexToVariable 0x1f US
 
-	dk_hexToVariable 0x00 NUL
-	#dk_hexToVariable 0x01 SOH
-	#dk_hexToVariable 0x02 STX
-	#dk_hexToVariable 0x03 ETX
-	#dk_hexToVariable 0x04 EOT
-	#dk_hexToVariable 0x05 ENQ
-	#dk_hexToVariable 0x06 ACK
-	dk_hexToVariable 0x07 BEL
-	#dk_hexToVariable 0x08 BS
-	dk_hexToVariable 0x09 TAB
-	#dk_hexToVariable 0x0a LF
-	#dk_hexToVariable 0x0b VT
-	#dk_hexToVariable 0x0c FF
-	#dk_hexToVariable 0x0d CR
-	#dk_hexToVariable 0x0e SO
-	#dk_hexToVariable 0x0f SI
-	#dk_hexToVariable 0x10 DLE
-	#dk_hexToVariable 0x11 DC1
-	#dk_hexToVariable 0x12 DC2
-	#dk_hexToVariable 0x13 DC3
-	#dk_hexToVariable 0x14 DC4
-	#dk_hexToVariable 0x15 NAK
-	#dk_hexToVariable 0x16 SYN
-	#dk_hexToVariable 0x17 ETB
-	#dk_hexToVariable 0x18 CAN
-	#dk_hexToVariable 0x19 EM
-	#dk_hexToVariable 0x1a SUB
-	dk_hexToVariable 0x1b ESC
-	#dk_hexToVariable 0x1c FS
-	#dk_hexToVariable 0x1d GS
-	#dk_hexToVariable 0x1e RS
-	#dk_hexToVariable 0x1f US
+	#dk_call dk_decimalToVariable 0 NUL
+	#dk_call dk_decimalToVariable 1 SOH
+	#dk_call dk_decimalToVariable 2 STX
+	#dk_call dk_decimalToVariable 3 ETX
+	#dk_call dk_decimalToVariable 4 EOT
+	#dk_call dk_decimalToVariable 5 ENQ
+	#dk_call dk_decimalToVariable 6 ACK
+	#dk_call dk_decimalToVariable 7 BEL 
+	#dk_call dk_decimalToVariable 8 BS
+	#dk_call dk_decimalToVariable 9 TAB
+	#dk_call dk_decimalToVariable 10 LF
+	#dk_call dk_decimalToVariable 11 VT
+	#dk_call dk_decimalToVariable 12 FF
+	#dk_call dk_decimalToVariable 13 CR
+	#dk_call dk_decimalToVariable 14 SO
+	#dk_call dk_decimalToVariable 15 SI
+	#dk_call dk_decimalToVariable 16 DLE
+	#dk_call dk_decimalToVariable 17 DC1
+	#dk_call dk_decimalToVariable 18 DC2
+	#dk_call dk_decimalToVariable 19 DC3
+	#dk_call dk_decimalToVariable 20 DC4
+	#dk_call dk_decimalToVariable 21 NAK
+	#dk_call dk_decimalToVariable 22 SYN
+	#dk_call dk_decimalToVariable 23 ETB
+	#dk_call dk_decimalToVariable 24 CAN
+	#dk_call dk_decimalToVariable 25 EM
+	#dk_call dk_decimalToVariable 26 SUB
+	#dk_call dk_decimalToVariable 27 ESC
+	#dk_call dk_decimalToVariable 28 FS
+	#dk_call dk_decimalToVariable 29 GS
+	#dk_call dk_decimalToVariable 30 RS
+	#dk_call dk_decimalToVariable 31 US
 
-	#dk_decimalToVariable 0 NUL
-	#dk_decimalToVariable 1 SOH
-	#dk_decimalToVariable 2 STX
-	#dk_decimalToVariable 3 ETX
-	#dk_decimalToVariable 4 EOT
-	#dk_decimalToVariable 5 ENQ
-	#dk_decimalToVariable 6 ACK
-	#dk_decimalToVariable 7 BEL 
-	#dk_decimalToVariable 8 BS
-	#dk_decimalToVariable 9 TAB
-	#dk_decimalToVariable 10 LF
-	#dk_decimalToVariable 11 VT
-	#dk_decimalToVariable 12 FF
-	#dk_decimalToVariable 13 CR
-	#dk_decimalToVariable 14 SO
-	#dk_decimalToVariable 15 SI
-	#dk_decimalToVariable 16 DLE
-	#dk_decimalToVariable 17 DC1
-	#dk_decimalToVariable 18 DC2
-	#dk_decimalToVariable 19 DC3
-	#dk_decimalToVariable 20 DC4
-	#dk_decimalToVariable 21 NAK
-	#dk_decimalToVariable 22 SYN
-	#dk_decimalToVariable 23 ETB
-	#dk_decimalToVariable 24 CAN
-	#dk_decimalToVariable 25 EM
-	#dk_decimalToVariable 26 SUB
-	#dk_decimalToVariable 27 ESC
-	#dk_decimalToVariable 28 FS
-	#dk_decimalToVariable 29 GS
-	#dk_decimalToVariable 30 RS
-	#dk_decimalToVariable 31 US
-
-	dk_set clear      "${ESC}[2J"
+	dk_call dk_set clear      "${ESC}[2J"
 }
 
 ASCII_ADD() {
@@ -148,7 +143,7 @@ ASCII_ADD() {
 	ITEM[$HEX]=${4}
 	ITEM[$HTML]=${5}
 	ITEM[$INFO]=${6}
-	#dk_echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
+	#dk_call dk_echo "\${ITEM[@]::1} = ${ITEM[@]::1}"
 
 	ASCII_size=${#ASCII[@]}
 	ASCII[$ASCII_size]="${ITEM[@]}"
@@ -167,10 +162,10 @@ ASCII_SHOW() {
 	dk_debugFunc 1
 	
 	ITEM=(${ASCII[${1}]})
-	dk_echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
+	dk_call dk_echo "${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}"
 	
 	# Associative array
-	#dk_echo "${ASCII[${1},DEC]}	${ASCII[${1},SYMBOL]}	${ASCII[${1},DEC]}	${ASCII[${1},OCT]}	${ASCII[${1},HEX]}	${ASCII[${1},HTML]}	${ASCII[${1},INFO]}"
+	#dk_call dk_echo "${ASCII[${1},DEC]}	${ASCII[${1},SYMBOL]}	${ASCII[${1},DEC]}	${ASCII[${1},OCT]}	${ASCII[${1},HEX]}	${ASCII[${1},HTML]}	${ASCII[${1},INFO]}"
 }
 
 
@@ -178,9 +173,11 @@ ASCII_SHOW() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
-	dk_escapeSequences
+	dk_call dk_escapeSequences
 }
-

@@ -8,14 +8,16 @@
 dk_getFileSize() {
 	dk_debugFunc 2
 
-	
-	dk_todo
+	dk_call dk_todo
 }
 
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
-	dk_getFileSize
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
+	
+	dk_call dk_getFileSize
 }

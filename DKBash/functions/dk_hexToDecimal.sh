@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ####################################################################
 # dk_hexToDecimal(hex output)
 #
@@ -11,16 +10,16 @@
 dk_hexToDecimal() {
 	dk_debugFunc 2
 
-	
 	eval "${2}=$(printf "%d\n" ${1})"
-	dk_printVar "${2}"
+	dk_call dk_printVar "${2}"
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
-	dk_hexToDecimal 0x1b decimal
-	dk_echo "decimal = ${decimal}"
+	dk_call dk_hexToDecimal 0x1b decimal
+	dk_call dk_echo "decimal = ${decimal}"
 }

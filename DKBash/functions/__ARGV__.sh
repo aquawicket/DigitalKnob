@@ -38,7 +38,8 @@ test_function(){
 	done
 }
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	#dk_debugFunc
 	
 	test_function abc 123

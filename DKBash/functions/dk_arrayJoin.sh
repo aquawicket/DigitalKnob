@@ -20,7 +20,7 @@
 #
 dk_arrayJoin() {
 	dk_debugFunc 2 3
-	#dk_validateArgs array string optional:rtn_var
+	#dk_call dk_validateArgs array string optional:rtn_var
 
 	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
 	for ((i=0; i < ${#_array_[@]}; i++ )); do
@@ -32,7 +32,7 @@ dk_arrayJoin() {
 	done
 	
 	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' && return
-	dk_return "${arrayJoin}" && return	
+	dk_call dk_return "${arrayJoin}" && return	
 }
 
 
@@ -48,8 +48,8 @@ DKTEST() {
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
 	
-	dk_arrayJoin myArrayA "," myStringA
-	dk_printVar myStringA
+	dk_call dk_arrayJoin myArrayA "," myStringA
+	dk_call dk_printVar myStringA
 	
 	
 	myArrayB[0]="h i j"
@@ -58,6 +58,6 @@ DKTEST() {
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
 	
-	myStringB=$(dk_arrayJoin myArrayB ",")
-	dk_printVar myStringB
+	myStringB=$(dk_call dk_arrayJoin myArrayB ",")
+	dk_call dk_printVar myStringB
 }

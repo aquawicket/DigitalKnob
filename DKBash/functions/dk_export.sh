@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_export(variable, value)
 #
@@ -9,7 +8,6 @@
 dk_export() {
 	dk_debugFunc 1 2
 
-	
 	export ${1}="${2-}"
 }
 
@@ -20,6 +18,6 @@ dk_export() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_export myVar "the string value of myVar"
-	dk_echo "myVar = ${myVar}"
+	dk_call dk_export myVar "the string value of myVar"
+	dk_call dk_echo "myVar = ${myVar}"
 }

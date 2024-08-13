@@ -35,9 +35,9 @@
 #
 dk_arrayCopyWithin() {
 	dk_debugFunc 4
-	#dk_validateArgs array any any any
+	#dk_call dk_validateArgs array any any any
 	
-	dk_todo "dk_arrayCopyWithin"
+	dk_call dk_todo "dk_arrayCopyWithin"
 }
 
 
@@ -47,5 +47,5 @@ dk_arrayCopyWithin() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_arrayCopyWithin array target start end
+	dk_call dk_arrayCopyWithin array target start end
 }

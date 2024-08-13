@@ -15,7 +15,8 @@ dk_signalHandler() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	#dk_debugFunc 0
 	
 	dk_signalHandler

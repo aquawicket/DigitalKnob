@@ -19,7 +19,7 @@
 #
 dk_arrayPush() {
 	dk_debugFunc 2 99
-	#dk_validateArgs array element optional:rtn_var
+	#dk_call dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
@@ -33,7 +33,7 @@ dk_arrayPush() {
 	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	dk_return ${#array[@]} && return				# command substitution return
+	dk_call dk_return ${#array[@]} && return				# command substitution return
 }
 
 
@@ -44,30 +44,30 @@ dk_arrayPush() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_arrayPush myArrayA "a b c" # new_lengthA
-	dk_printVar myArrayA
-	# dk_printVar new_lengthA
+	dk_call dk_arrayPush myArrayA "a b c" # new_lengthA
+	dk_call dk_printVar myArrayA
+	# dk_call dk_printVar new_lengthA
 	
-	dk_arrayPush myArrayA "1 2 3" "d e f" # new_lengthA
-	dk_printVar myArrayA
-	# dk_printVar new_lengthA
+	dk_call dk_arrayPush myArrayA "1 2 3" "d e f" # new_lengthA
+	dk_call dk_printVar myArrayA
+	# dk_call dk_printVar new_lengthA
 	
-	dk_arrayPush myArrayA "4 5 6" "h i j" # new_lengthA
-	dk_printVar myArrayA
-	# dk_printVar new_lengthA
+	dk_call dk_arrayPush myArrayA "4 5 6" "h i j" # new_lengthA
+	dk_call dk_printVar myArrayA
+	# dk_call dk_printVar new_lengthA
 	
 	
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	new_lengthB=$(dk_arrayPush 'myArrayB' "h i j")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "h i j")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayPush 'myArrayB' "4 5 6" "d e f")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "4 5 6" "d e f")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayPush 'myArrayB' "1 2 3" "a b c")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "1 2 3" "a b c")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 }

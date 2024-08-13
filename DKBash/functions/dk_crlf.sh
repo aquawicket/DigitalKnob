@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_crlf()
 #
@@ -10,7 +9,7 @@
 dk_crlf() {
 	dk_debugFunc 0
 	
-	dk_todo "dk_crlf needs to be implemented"
+	dk_call dk_todo "dk_crlf needs to be implemented"
 	return ${false}
 }
 
@@ -20,5 +19,5 @@ dk_crlf() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_crlf
+	dk_call dk_crlf
 }

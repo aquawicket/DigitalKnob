@@ -44,7 +44,8 @@ dk_rename() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	echo "rename this file" > renameMe.txt
 	dk_rename renameMe.txt iWasRenamed.txt

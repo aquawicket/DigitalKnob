@@ -19,7 +19,8 @@ alias dk_printFuncInfo='{
 }'
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	dk_printFuncInfo
 

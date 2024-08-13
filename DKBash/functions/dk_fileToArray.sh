@@ -11,15 +11,14 @@
 dk_fileToArray() {
 	dk_debugFunc 2
 
-	
-	dk_todo
+	dk_call dk_todo
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
-	
-	dk_todo
-	dk_fileToArray
+
+	dk_call dk_fileToArray
 }	

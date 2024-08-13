@@ -8,8 +8,7 @@
 dk_downloadDK() {
 	dk_debugFunc 0
 
-	
-	dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
+	dk_call dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
 }
 
 
@@ -21,5 +20,5 @@ dk_downloadDK() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_downloadDK
+	dk_call dk_downloadDK
 }

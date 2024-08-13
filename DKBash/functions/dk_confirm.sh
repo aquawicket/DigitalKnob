@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_confirm()
 #
@@ -9,11 +8,10 @@
 dk_confirm() {
 	dk_debugFunc 0
 
-
-	dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
+	dk_call dk_echo "${yellow} Are you sure ? [Y/N] ${clr}"
 	read -rp $" " REPLY
-	dk_echo
-	dk_echo
+	dk_call dk_echo
+	dk_call dk_echo
 	#result=$(builtin echo ${REPLY} | grep "^[Yy]$")
 	[ "${REPLY}" = "y" ] && return ${true}
 	[ "${REPLY}" = "Y" ] && return ${true}
@@ -24,12 +22,13 @@ dk_confirm() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
-	if dk_confirm; then 
-		dk_echo "the confimation has passed"
+	if dk_call dk_confirm; then 
+		dk_call dk_echo "the confimation has passed"
 	else
-		dk_echo "the confimation has failed"
+		dk_call dk_echo "the confimation has failed"
 	fi
 }

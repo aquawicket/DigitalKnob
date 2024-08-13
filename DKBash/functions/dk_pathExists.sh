@@ -15,7 +15,8 @@ dk_pathExists() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	if dk_pathExists "dk_debug.sh"; then
 		echo "The path exists"

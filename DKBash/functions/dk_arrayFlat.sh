@@ -18,9 +18,9 @@
 #
 dk_arrayFlat() {
 	dk_debugFunc 2
-	#dk_validateArgs array int
+	#dk_call dk_validateArgs array int
 	
-	dk_todo "dk_arrayFlat"
+	dk_call dk_todo "dk_arrayFlat"
 }
 
 
@@ -29,6 +29,6 @@ dk_arrayFlat() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_todo
-	dk_arrayFlat array depth
+	dk_call dk_todo
+	dk_call dk_arrayFlat array depth
 }

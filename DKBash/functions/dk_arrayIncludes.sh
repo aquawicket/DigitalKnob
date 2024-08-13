@@ -26,7 +26,7 @@
 #
 dk_arrayIncludes() {
 	dk_debugFunc 2 3
-	#dk_validateArgs array string
+	#dk_call dk_validateArgs array string
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
 	for ((index=0; index < ${#array[@]}; index++ )); do
@@ -44,12 +44,12 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	array123=(1 2 3)
-	dk_arrayIncludes array123 2     && echo "true" || echo "false" # true
-	dk_arrayIncludes array123 4     && echo "true" || echo "false" # false
-	#dk_arrayIncludes array123 3 3  && echo "true" || echo "false" # false
-	#dk_arrayIncludes array123 3 -1 && echo "true" || echo "false" # true
+	dk_call dk_arrayIncludes array123 2     && echo "true" || echo "false" # true
+	dk_call dk_arrayIncludes array123 4     && echo "true" || echo "false" # false
+	#dk_call dk_arrayIncludes array123 3 3  && echo "true" || echo "false" # false
+	#dk_call dk_arrayIncludes array123 3 -1 && echo "true" || echo "false" # true
 	array12NaN=(1 2 NaN)
-	dk_arrayIncludes array12NaN NaN && echo "true" || echo "false" # true
+	dk_call dk_arrayIncludes array12NaN NaN && echo "true" || echo "false" # true
 	array123q=("1" "2" "3")
-	dk_arrayIncludes array123q 3    && echo "true" || echo "false" # false   # FIXME:  incorrect
+	dk_call dk_arrayIncludes array123q 3    && echo "true" || echo "false" # false   # FIXME:  incorrect
 }

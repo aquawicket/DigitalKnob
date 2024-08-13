@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_fixme(<message>)
 #
@@ -11,7 +10,8 @@
 #
 dk_fixme() {
 	dk_debugFunc 0 1
-	dk_log FIXME "$1"
+	
+	dk_call dk_log FIXME "$1"
 }
 
 
@@ -20,5 +20,5 @@ dk_fixme() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_fixme "test dk_fixme message"
+	dk_call dk_fixme "test dk_fixme message"
 }

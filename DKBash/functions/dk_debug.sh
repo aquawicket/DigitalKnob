@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_debug(message)
 #
@@ -11,7 +10,8 @@
 #
 dk_debug() {
 	dk_debugFunc 1
-	dk_log DEBUG "${1-}"
+	
+	dk_call dk_log DEBUG "${1-}"
 }
 
 
@@ -24,5 +24,5 @@ dk_debug() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_debug "test dk_debug message"
+	dk_call dk_debug "test dk_debug message"
 }

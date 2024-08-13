@@ -1,16 +1,14 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_enterManually()
 #
 #
 dk_enterManually() {
 	dk_debugFunc 0
-
 	
-	dk_info "Please type the name of the library, tool or app to build. Then press enter."
+	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
 	APP="_${input}_"
@@ -26,23 +24,27 @@ dk_enterManually() {
 		TARGET_PATH=${DKAPPS_DIR}/${input}
 		return ${true}
 	fi
-	dk_printVar TARGET_PATH
+	dk_call dk_printVar TARGET_PATH
 	
 	if [ ! -d "${DKAPPS_DIR}/${APP}" ]; then
-		dk_makeDirectory "${DKAPPS_DIR}/${APP}";
+		dk_call dk_makeDirectory "${DKAPPS_DIR}/${APP}";
 	fi
 	
 	# create DKApps/<APP>/DKMAKE.cmake 
-	dk_fileWrite "${DKAPPS_DIR}/${APP}/DKMAKE.cmake" "dk_depend(${input})"
+	dk_call dk_fileWrite "${DKAPPS_DIR}/${APP}/DKMAKE.cmake" "dk_depend(${input})"
 	
 	# create DKApps/<APP>/main.cpp
-	dk_fileWrite "${DKAPPS_DIR}/${APP}/main.cpp" "int main(int argc, char** argv) { return 0; }"
+	dk_call dk_fileWrite "${DKAPPS_DIR}/${APP}/main.cpp" "int main(int argc, char** argv) { return 0; }"
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
-	dk_enterManually
+	dk_call dk_enterManually
 }

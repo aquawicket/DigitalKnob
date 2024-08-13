@@ -29,9 +29,10 @@ fi
 #
 #
 dk_echo() {
-	#dk_debugFunc 0 1
+	dk_debugFunc 0 1
+	
 	[ ${#} -eq 0 ] && echo "" && return 0
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	[ ${#} -ne 1 ] && dk_call dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	# https://linuxcommand.org/lc3_man_pages/echoh.html
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1
@@ -45,20 +46,20 @@ dk_echo() {
 	
 	[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	echo ${escapes-}${nonewline-}"${echo_fileline}  ${msg}"
-	unset echo_fileline #dk_unset echo_fileline
+	unset echo_fileline #dk_call dk_unset echo_fileline
 }
 
 
 
 
 
-
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	dk_debugFunc 0
 	
 	echo "This is a normal echo commmand"
-	dk_echo
-	dk_echo ""
-	dk_echo "This is a dk_echo line"
-	dk_echo "${red}This is ${white}dk_echo ${blue}with color ${clr}"
+	dk_call dk_echo
+	dk_call dk_echo ""
+	dk_call dk_echo "This is a dk_echo line"
+	dk_call dk_echo "${red}This is ${white}dk_echo ${blue}with color ${clr}"
 }

@@ -10,8 +10,8 @@
 #
 dk_error() {
 	dk_debugFunc 1
-	dk_log ERROR "$1"
-	return
+	
+	dk_call dk_log ERROR "$1"
 }
 
 
@@ -24,5 +24,5 @@ dk_error() {
 DKTEST() {
 	dk_debugFunc 0
 
-	dk_error "test dk_error message"
+	dk_call dk_error "test dk_error message"
 }

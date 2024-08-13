@@ -20,7 +20,7 @@
 #
 dk_arrayConcat() {
 	dk_debugFunc 2 3
-	#dk_validateArgs array array
+	#dk_call dk_validateArgs array array
 	
 	eval local arrayA='("${'$1'[@]}")'		#typeset -n arrayA="${1}"
 	eval local arrayB='("${'$2'[@]}")'		#typeset -n arrayB="${2}"
@@ -29,7 +29,7 @@ dk_arrayConcat() {
 
 	### return value ###
 	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
-	dk_return "${new_array[@]}" && return							# FIXME
+	dk_call dk_return "${new_array[@]}" && return							# FIXME
 }
 
 
@@ -47,8 +47,8 @@ DKTEST() {
 	myArray2[1]="4 5 6"
 	myArray2[2]="7 8 9"
 	
-	dk_arrayConcat myArray1 myArray2 myNewArrayA
-	dk_printVar myNewArrayA
+	dk_call dk_arrayConcat myArray1 myArray2 myNewArrayA
+	dk_call dk_printVar myNewArrayA
 	
 	[ "${myNewArrayA[0]-}" = "a b c" ] && \
 	[ "${myNewArrayA[1]-}" = "d e f" ] && \
@@ -56,8 +56,8 @@ DKTEST() {
 	[ "${myNewArrayA[3]-}" = "1 2 3" ] && \
 	[ "${myNewArrayA[4]-}" = "4 5 6" ] && \
 	[ "${myNewArrayA[5]-}" = "7 8 9" ] && \
-	dk_echo "dk_arrayConcat succeeded" || \
-	dk_echo "dk_arrayConcat failed"
+	dk_call dk_echo "dk_arrayConcat succeeded" || \
+	dk_call dk_echo "dk_arrayConcat failed"
 	
 	myArray3[0]="a b c"
 	myArray3[1]="d e f"
@@ -67,8 +67,8 @@ DKTEST() {
 	myArray4[1]="4 5 6"
 	myArray4[2]="7 8 9"
 	
-	IFS=$'\n' myNewArrayB=($(dk_arrayConcat myArray3 myArray4))
-	dk_printVar myNewArrayB
+	IFS=$'\n' myNewArrayB=($(dk_call dk_arrayConcat myArray3 myArray4))
+	dk_call dk_printVar myNewArrayB
 	
 	[ "${myNewArrayB[0]-}" = "a b c" ] && \
 	[ "${myNewArrayB[1]-}" = "d e f" ] && \
@@ -76,6 +76,6 @@ DKTEST() {
 	[ "${myNewArrayB[3]-}" = "1 2 3" ] && \
 	[ "${myNewArrayB[4]-}" = "4 5 6" ] && \
 	[ "${myNewArrayB[5]-}" = "7 8 9" ] && \
-	dk_echo "dk_arrayConcat succeeded" || \
-	dk_echo "dk_arrayConcat failed"
+	dk_call dk_echo "dk_arrayConcat succeeded" || \
+	dk_call dk_echo "dk_arrayConcat failed"
 }

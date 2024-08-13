@@ -9,15 +9,19 @@
 dk_decimalToHex() {
 	dk_debugFunc 2
 
-	
-	dk_todo
+	dk_call dk_todo
 }
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
-	myDecimal="45"
-	dk_decimalToHex "${myDecimal}" myHex
-	dk_printVar myHex
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() { 
+	dk_debugFunc 0
 	
+	myDecimal="45"
+	dk_call dk_decimalToHex "${myDecimal}" myHex
+	dk_call dk_printVar myHex
 }

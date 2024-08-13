@@ -19,7 +19,8 @@ dk_removeExtension() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	filepath="/test/test2/xfile.extension"
 	dk_removeExtension "${filepath}" name
