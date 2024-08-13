@@ -6,8 +6,9 @@ if(!$dk_download){ $dk_download = 1 } else{ return }
 #
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
-function Global:dk_download($url) {
+function Global:dk_download($url, $destination) {
 	dk_debugFunc 1 2
+	echo "dk_download($url, $destination)"
 	
 	${url_filename} = Split-Path ${url} -leaf
 	if(!(${url_filename})){ dk_call dk_error "url_filename invalid" }                                                                            
