@@ -20,7 +20,7 @@ dk_gitCommit() {
 		dk_call dk_errorStatus
 	fi
 	if [ -z "${STORE}" ]; then
-		${GIT_EXE} config --global credential.helper store
+		dk_call "${GIT_EXE}" config --global credential.helper store
 		dk_call dk_echo
 		dk_call dk_info "git credential.helper is now set to store"
 		dk_call dk_echo
@@ -33,7 +33,7 @@ dk_gitCommit() {
 		dk_call dk_echo
 		dk_call dk_info "please enter an email address"
 		read input
-		${GIT_EXE} config --global user.email "${input}"
+		dk_call "${GIT_EXE}" config --global user.email "${input}"
 		dk_call dk_echo
 		dk_call dk_info "git user.email '${input}' saved"
 		dk_call dk_echo
@@ -45,7 +45,7 @@ dk_gitCommit() {
 		dk_call dk_echo
 		dk_call dk_info "please enter a username"
 		read input
-		${GIT_EXE} config --global user.name "${input}"
+		dk_call "${GIT_EXE}" config --global user.name "${input}"
 		dk_call dk_echo
 		dk_call dk_info "git user.name '${input}' saved"
 		dk_call dk_echo
@@ -59,7 +59,7 @@ dk_gitCommit() {
 	dk_call dk_info "git commit \"${message}\""
 	dk_call dk_confirm || return 0
 	
-	"${GIT_EXE}" commit -a -m "${message}" || $(true)
+	dk_call "${GIT_EXE}" commit -a -m "${message}" || $(true)
     dk_call "${GIT_EXE}" push
 }
 
