@@ -8,12 +8,13 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 function Global:dk_call(){
 	#dk_debugFunc 1 99
 
-	$first, $rest = ${args}
+	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args}
 	
-	if("${first}" -match "^dk_[a-zA-Z0-9]+"){
-		dk_source ${first}
+	if("${1}" -match "^dk_[a-zA-Z0-9]+"){
+		dk_source $1
 	}
-	& $args[0] $args[1] $args[2] $args[3] $args[4] $args[5] $args[6] $args[7] $args[8] $args[9] 
+	#Write-Host "$1, $2, $3, $4, $5, $6, $7, $8, $9"
+	& $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
 
 

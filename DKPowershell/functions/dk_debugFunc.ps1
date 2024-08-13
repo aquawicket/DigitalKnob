@@ -12,23 +12,21 @@ if(!$DKSTACK_marker)		{ $global:DKSTACK_marker = 1 }
 # dk_debugFunc()
 #
 #
-function Global:dk_debugFunc() {
-	
-####################################################################################################################################
-	
+function Global:dk_debugFunc() {	
 	$_MIN_ = $args[0]
 	$_MAX_ = $args[1]
 	$_FUNCTION_ = "$(__FUNCTION__ 2)"
 	$_ARGC_ = "$(__ARGC__ 2)"
-	#echo "############ ${_FUNCTION_}(${_ARGC_})  MIN:${_MIN_} MAX:${_MAX_} ############"
+	$_ARGV_ = "$(__ARGV__ 2)"
+	#Write-Host "############ ${_FUNCTION_}(${_ARGV_})  MIN:${_MIN_} MAX:${_MAX_} ############"
 	if($_MIN_){ 
-		if(${_ARGC_} -lt ${_MIN_}){ dk_call dk_error "$(__FUNCTION__ 2)(${_ARGC_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}" }
+		if(${_ARGC_} -lt ${_MIN_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}" }
 	}
 	if($_MAX_){
-		if(${_ARGC_} -gt ${_MAX_}){ dk_call dk_error "$(__FUNCTION__ 2)(${_ARGC_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" }
+		if(${_ARGC_} -gt ${_MAX_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" }
 	} else {
-		if(${_ARGC_} -gt ${_MIN_}){ echo "error" }
-		if(${_ARGC_} -gt ${_MIN_}){ dk_call dk_error "$(__FUNCTION__ 2)(${_ARGC_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" }
+		if(${_ARGC_} -gt ${_MIN_}){ Write-Host "error" }
+		if(${_ARGC_} -gt ${_MIN_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" }
 	}
 	
 	

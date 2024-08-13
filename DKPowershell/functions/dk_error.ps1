@@ -9,9 +9,9 @@ if(!$dk_error){ $dk_error = 1 } else{ return }
 #    @message	- The message to print
 #
 function Global:dk_error($message) {
-	dk_debugFunc 1
+	#dk_debugFunc 1
 	
-	dk_call dk_log ERROR "${message}"
+	dk_call dk_log ERROR "$message"
 }
 
 

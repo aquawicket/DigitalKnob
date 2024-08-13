@@ -92,14 +92,14 @@ if(!(${FIXME_HALT}))     { $global:FIXME_HALT = 0 }
 #
 #    @message	- The message to print
 #
-function Global:dk_log() {
-	#dk_debugFunc 1 2
+function Global:dk_log($level, $message) {
+	dk_debugFunc 1 2
 
 	if(${ENABLE_dk_log} -ne 1){ return }
 	
 	${ARGC} = ${args}.count
-	if(${ARGC} -eq 1) {${_level_} = "DEFAULT"; ${_message_} = $args[0] }
-	if(${ARGC} -eq 2) {${_level_} = $args[0]; ${_message_} = $args[1] }
+	#if(${ARGC} -eq 1) {${_level_} = "DEFAULT"; ${message} = $args[0] }
+	#if(${ARGC} -eq 2) {${_level_} = $args[0]; ${message} = $args[1] }
 	#if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 
 	${level_ENABLE} = Get-Variable "${_level_}_ENABLE" -valueOnly -ErrorAction SilentlyContinue
