@@ -52,5 +52,5 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_source dk_info
-	%dk_call% dk_info "test message using dk_source to load first"
+	%dk_call% dk_info "test message using dk_source to download it first"
 goto:eof

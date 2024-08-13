@@ -20,15 +20,16 @@ DK(){
 
 	############ Get DKBASH variables ############
 	DKBASH_VARS
-	#dk_printVar DKBASH_DIR
-	#dk_printVar DKBASH_FUNCTIONS_DIR
 	
 
 	############ Get DKHTTP variables ############
 	DKHTTP_VARS
-	#dk_printVar DKHTTP_DKBASH_FUNCTIONS_DIR
 
 
+	############ get dk_source and dk_call ######
+	dk_initFiles
+	
+	
 	############ Setup dk_callStack ############
 	#dksetupCallstack
 	#dk_callStack
@@ -37,14 +38,6 @@ DK(){
 
 	############ Get DKSCRIPT variables ############
 	DKSCRIPT_VARS
-	#dk_printVar DKSCRIPT_PATH
-	#dk_printVar DKSCRIPT_ARGS
-	#dk_printVar DKSCRIPT_DIR
-	#dk_printVar DKSCRIPT_NAME
-	
-
-	############ Setup KeepOpen ############
-	#dksetupKeepOpen
 
 
 	##### CD into the DKSCRIPT_DIR directory #####
@@ -53,6 +46,7 @@ DK(){
 
 	############ Set Options ############
 	dksetOptions
+
 
 	############ LOAD FUNCTION FILES ############
 	dk_source dk_return
@@ -67,29 +61,32 @@ DK(){
 	dk_source dk_debugFunc
 	dk_source dk_load
 	#dk_load dk_log
-	dk_load dk_onExit    	# EXIT handler
-	dk_load dk_onError   	# ERR handler
-	dk_load dk_color
+	#dk_load dk_onExit    	# EXIT handler
+	dk_source dk_onExit    	# EXIT handler
+	#dk_load dk_onError   	# ERR handler
+	dk_source dk_onError   	# ERR handler
+	#dk_load dk_color
 	dk_call dk_logo
-	dk_load "${DKSCRIPT_PATH}"
+	#dk_load "${DKSCRIPT_PATH}"
+	. "${DKSCRIPT_PATH}"
 
-dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
+dk_call dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
 	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
 		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
-			dk_echo
-			dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-			#dk_echo "${bg_RGB}20;20;20m"
+			dk_call dk_echo
+			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+			#dk_call dk_echo "${bg_RGB}20;20;20m"
 			dk_source "${DKSCRIPT_PATH}"
-			#dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
-			#dk_echo "${clr}"
+			#dk_call dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
+			#dk_call dk_echo "${clr}"
 			DKTEST
-			dk_echo
-			dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-			dk_echo
+			dk_call dk_echo
+			dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
+			dk_call dk_echo
 			dk_call dk_pause
-			dk_exit 0
+			dk_call dk_exit 0
 		fi
 	fi
 }
@@ -113,6 +110,8 @@ dkreloadWithBash(){
 #	 default functions and variables
 #
 dkinit(){
+	echo "Loading DKBatch DigitalKnob . . ."
+	
 	#$(command -v dk)                    || dk_try(){ $($* &>/dev/null) && $@ || echo "$* failed"; }
 	$(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists builtin			 && builtin="builtin"
@@ -174,13 +173,20 @@ DKHTTP_VARS(){
 }
 
 ##################################################################################
+# DKHTTP_VARS()
+#
+dk_initFiles(){
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_call.sh ${DKBASH_FUNCTIONS_DIR}/dk_call.sh
+}
+
+##################################################################################
 # dk_download(url, destination)
 #
 #
 dk_download() {
 	dk_debugFunc 2
 
-	
 	if dk_pathExists "${2}"; then
 		dk_warning "dk_download(): ${2} already exists"
 		return 0
@@ -224,16 +230,6 @@ DKSCRIPT_VARS(){
 }
 
 ##################################################################################
-# dksetupKeepOpen()
-#
-dksetupKeepOpen(){
-	dk_debugFunc 0
-	
-	dk_echo
-	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
-}
-
-##################################################################################
 # dksetOptions()
 #
 dksetOptions(){
@@ -269,15 +265,6 @@ dksetOptions(){
 	# dk_echo "BASHOPTS = ${BASHOPTS-}"
 }
 
-
-
-
-
-
-
-
-
-
 ##################################################################################
 # dk_install()
 #
@@ -296,8 +283,6 @@ dk_install(){
 	dk_commandExists tce-load  && tce-load -wil "${1}"	            # TinyCoreLinux package installer: -l flag means don't add to boot
 	dk_commandExists ${1}      || dk_error "${1}: command not found"
 }
-
-
 
 ##################################################################################
 # dk_source()
@@ -340,7 +325,6 @@ dk_call(){
 	dk_echo "${cyan}dk_call>${clr} ${*}"
 	"${@}"
 }
-
 
 ##################################################################################
 # run DK() function

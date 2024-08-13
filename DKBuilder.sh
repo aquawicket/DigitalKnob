@@ -47,4 +47,4 @@ fi
 
 
 ###### Load Main Program ######
-[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_buildMain
+[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_call dk_buildMain

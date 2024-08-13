@@ -7,12 +7,13 @@
 #
 #
 dk_call(){
-	dk_debugFunc 1 99
+	#dk_debugFunc 1 99
 	
 	if ! dk_commandExists ${1}; then
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then	# Is it a dk_ prefixed function?
-			dk_commandExists dk_load  || dk_source dk_load
-			dk_load ${1}
+			#dk_commandExists dk_load  || dk_source dk_load
+			#dk_load ${1}
+			dk_source ${1}
 		else										# Not a dk_ prefixed function
 			dk_commandExists dk_install  || dk_source dk_install
 			dk_install ${1}
@@ -30,7 +31,11 @@ dk_call(){
 }
 
 
-DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST(){
 	dk_debugFunc 0
 	
 	dk_call dk_info "test message using dk_call"
