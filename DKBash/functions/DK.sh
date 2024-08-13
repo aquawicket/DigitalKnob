@@ -162,7 +162,7 @@ dk_initFiles(){
 #
 #
 dk_download() {
-	if [ -e "${2}"]; then
+	if [ -e "${2}" ]; then
 		echo "WARNING: dk_download(): ${2} already exists"
 		return 0
 	fi

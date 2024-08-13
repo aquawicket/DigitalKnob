@@ -9,9 +9,9 @@
 dk_source(){
 	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_debugFunc.sh ] && dk_debugFunc 1
 
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_echo "downloading ${1} . . ."
+	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "downloading ${1} . . ."
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_error "failed to download ${1}" || [$(read -rp 'press enter to exit')] || exit;
+	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "ERROR: failed to download ${1}" || [$(read -rp 'press enter to exit')] || exit;
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 	. ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 }
