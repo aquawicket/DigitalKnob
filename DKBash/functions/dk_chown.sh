@@ -6,7 +6,6 @@
 #
 dk_chown() {
 	dk_debugFunc 1
-	[ ${#} -ne 1 ] && dk_call dk_error "${FUNCNAME}(${#}): not enough arguments"
 	
 	[ -n "${USER-}" ] && DKUSERNAME=${USER} || DKUSERNAME=${USERNAME}	
 	${dksudo} chown -R ${DKUSERNAME} "${1}"

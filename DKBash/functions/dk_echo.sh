@@ -32,7 +32,6 @@ dk_echo() {
 	dk_debugFunc 0 1
 	
 	[ ${#} -eq 0 ] && echo "" && return 0
-	[ ${#} -ne 1 ] && dk_call dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	# https://linuxcommand.org/lc3_man_pages/echoh.html
 	[ -z ${ESCAPES-} ]      && export ESCAPES=1

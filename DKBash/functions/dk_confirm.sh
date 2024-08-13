@@ -13,9 +13,9 @@ dk_confirm() {
 	dk_call dk_echo
 	dk_call dk_echo
 	#result=$(builtin echo ${REPLY} | grep "^[Yy]$")
-	[ "${REPLY}" = "y" ] && return ${true}
-	[ "${REPLY}" = "Y" ] && return ${true}
-	return ${false};
+	[ "${REPLY}" = "y" ] && return $(true)
+	[ "${REPLY}" = "Y" ] && return $(true)
+	return $(false)
 }
 
 

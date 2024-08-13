@@ -59,18 +59,13 @@ DK(){
 	dk_source __ARG__
 	dk_source __CALLER__
 	dk_source dk_debugFunc
-	#dk_source dk_load
-	#dk_load dk_log
-	#dk_load dk_onExit    	# EXIT handler
 	dk_source dk_onExit    	# EXIT handler
-	#dk_load dk_onError   	# ERR handler
 	dk_source dk_onError   	# ERR handler
-	#dk_load dk_color
+	dk_call dk_color
 	dk_call dk_logo
-	#dk_load "${DKSCRIPT_PATH}"
 	. "${DKSCRIPT_PATH}"
 
-dk_call dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
+	dk_call dk_echo "${bg_RGB}0;0;10m    bg_RGB test (0;0;10)      ${clr}"
 	
 	###### DKTEST MODE ######
 	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
@@ -119,16 +114,16 @@ dkinit(){
 	dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
 	dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
 	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }  # dk_pause
-	dk_defined       true                || dk_export true       0                                                                             # true
-	dk_defined       false               || dk_export false      1                                                                             # false
-	dk_defined       ESC                 || dk_export ESC        ""                                                                            # Escape character
-	dk_defined       clr                 || dk_export clr        "${ESC}[0m"
-	dk_defined       black               || dk_export black      "${ESC}[30m"
-	dk_defined       red                 || dk_export red        "${ESC}[31m"
-	dk_defined       yellow              || dk_export yellow     "${ESC}[33m"
-	dk_defined       blue                || dk_export blue       "${ESC}[34m"
-	dk_defined       cyan                || dk_export cyan       "${ESC}[36m"
-	dk_defined       bg_magenta          || dk_export bg_magenta "${ESC}[45m"
+#	dk_defined       true                || export true=0                                                                             # true
+#	dk_defined       false               || export false=1                                                                             # false
+#	dk_defined       ESC                 || export ESC=""                                                                            # Escape character
+#	dk_defined       clr                 || export clr="${ESC}[0m"
+#	dk_defined       black               || export black="${ESC}[30m"
+#	dk_defined       red                 || export red="${ESC}[31m"
+#	dk_defined       yellow              || export yellow="${ESC}[33m"
+#	dk_defined       blue                || export blue="${ESC}[34m"
+#	dk_defined       cyan                || export cyan="${ESC}[36m"
+#	dk_defined       bg_magenta          || export bg_magenta="${ESC}[45m"
 	dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                # dk_warning "test dk_warning";
 	dk_commandExists dk_warning          || dk_warning()         { dk_echo "${yellow}WARNING: ${1}${clr}"; }                                   # dk_warning "test dk_warning";
 	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                      # dk_info "test dk_info";
@@ -177,7 +172,9 @@ DKHTTP_VARS(){
 #
 dk_initFiles(){
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_call.sh ${DKBASH_FUNCTIONS_DIR}/dk_call.sh
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" && . "${DKBASH_FUNCTIONS_DIR}/dk_source.sh"
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_call.sh ${DKBASH_FUNCTIONS_DIR}/dk_call.sh
+	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   && . "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"
 }
 
 ##################################################################################
@@ -191,14 +188,13 @@ dk_download() {
 		dk_warning "dk_download(): ${2} already exists"
 		return 0
 	fi
-	dk_info "Downloading ${1} . . ."
+	dk_info "Downloading $(dk_basename ${1}) . . ."
 	parentdir="$(dk_dirname "${2}")"
-	dk_printVar parentdir
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
 	
 	dk_pathExists "${1}" || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
-	dk_pathExists "${1}" || dk_commandExists "curl" && ${dksudo} curl -Lo "${2}" "${1}"
+	dk_pathExists "${1}" || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
 	
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]
@@ -220,13 +216,13 @@ dksetupCallstack(){
 DKSCRIPT_VARS(){
 	dk_debugFunc 0
 	
-	dk_pathExists    $(dk_realpath ${0}) && dk_export  DKSCRIPT_PATH  $(dk_realpath ${0})
-	dk_commandExists "cygpath"           && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
-	dk_pathExists    "${DKSCRIPT_PATH}"  || dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
-	dk_export        DKSCRIPT_ARGS       $(${*})
-	dk_export        DKSCRIPT_DIR        $(dk_dirname ${DKSCRIPT_PATH})
-	dk_pathExists    "${DKSCRIPT_DIR}"   || dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
-	dk_export        DKSCRIPT_NAME       $(dk_basename ${DKSCRIPT_PATH})
+	dk_call dk_pathExists    $(dk_call dk_realpath ${0}) && dk_call dk_export  DKSCRIPT_PATH  $(dk_call dk_realpath ${0})
+	dk_call dk_commandExists "cygpath"                   && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
+	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
+	dk_call dk_export        DKSCRIPT_ARGS               $(${*})
+	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname ${DKSCRIPT_PATH})
+	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
+	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename ${DKSCRIPT_PATH})
 }
 
 ##################################################################################
@@ -261,8 +257,8 @@ dksetOptions(){
 	$(shopt -s extdebug) && shopt -s extdebug
 	#shopt -s expand_aliases
 	
-	# dk_echo "SHELLOPTS = ${SHELLOPTS}"
-	# dk_echo "BASHOPTS = ${BASHOPTS-}"
+	# dk_call dk_echo "SHELLOPTS = ${SHELLOPTS}"
+	# dk_call dk_echo "BASHOPTS = ${BASHOPTS-}"
 }
 
 ##################################################################################
@@ -282,49 +278,6 @@ dk_install(){
 	dk_commandExists pkg	   && pkg install "${1}"
 	dk_commandExists tce-load  && tce-load -wil "${1}"	            # TinyCoreLinux package installer: -l flag means don't add to boot
 	dk_commandExists ${1}      || dk_error "${1}: command not found"
-}
-
-##################################################################################
-# dk_source()
-#
-#	source a DKBash function. Download it first if it's missing
-#
-dk_source(){
-	dk_debugFunc 1
-	
-	dk_stringContains ${1} ".sh"                                       && local funcPath=${1}                              || local funcPath=${1}.sh
-	dk_pathExists "${funcPath}"                                        && local funcPath="${funcPath}"
-	dk_pathExists "${PWD}/$(dk_basename ${funcPath})"                  && local funcPath="${PWD}/$(dk_basename ${funcPath})"
-	#dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || ${dksudo} dk_call curl -Lo "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" || dk_download "${DKHTTP_DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})" && local funcPath="${DKBASH_FUNCTIONS_DIR}/$(dk_basename ${funcPath})"
-	dk_pathExists "${funcPath}"                                        || dk_error "Unable to find funcPath:${funcPath}"
-	${dksudo} chmod 777 ${funcPath}
-	. ${funcPath}
-}
-
-##################################################################################
-# dk_call()
-#
-#	call a DKBash function. dk_load it first if needed.
-#
-dk_call(){
-	dk_debugFunc 1 99
-	
-	if ! dk_commandExists ${1}; then
-		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then				# Is it a dk_ prefixed function?
-			#dk_commandExists dk_load || dk_source dk_load
-			#dk_load ${1}
-			dk_source ${1}
-		else													# Not a dk_ prefixed function
-			dk_commandExists dk_install || dk_source dk_install 
-			dk_install ${1}
-		fi
-		dk_commandExists ${1} || dk_error "${1}: command not found"
-	fi
-	
-	#dk_echo "${cyan}dk_call>${clr} ${*}"
-	"${@}"
 }
 
 ##################################################################################

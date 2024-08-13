@@ -8,7 +8,6 @@
 #
 dk_source(){
 	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_debugFunc.sh ] && dk_debugFunc 1
-	[ ${#} -ne 1 ] && echo "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
 
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_echo "downloading ${1} . . ."
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
@@ -26,5 +25,5 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_source dk_info 
-	dk_info "test message using dk_source to load first"
+	dk_info "test message using dk_source to download it first"
 }
