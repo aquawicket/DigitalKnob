@@ -31,8 +31,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_echo "sleeping for 1000 milliseconds . . ."
-	call dk_sleep 1000
+	%dk_call% dk_echo "sleeping for 1000 milliseconds . . ."
+	%dk_call% dk_sleep 1000
 goto:eof
 */
 

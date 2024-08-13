@@ -22,7 +22,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_set myPath "C:\Windows\System32"
-	call dk_getParentDir "%myPath%" parent
-	call dk_printVar parent
+	%dk_call% dk_set myPath "C:\Windows\System32"
+	%dk_call% dk_getParentDir "%myPath%" parent
+	%dk_call% dk_printVar parent
 goto:eof

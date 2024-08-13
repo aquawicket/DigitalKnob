@@ -25,7 +25,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "DK.cmd"
-	call dk_getAttributes "%myPath%" attributes
-	call dk_printVar attributes
+	%dk_call% dk_set myPath "DK.cmd"
+	%dk_call% dk_getAttributes "%myPath%" attributes
+	%dk_call% dk_printVar attributes
 goto:eof

@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 	
 	setlocal enableDelayedExpansion
-	if "!!" neq "" call dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%~f1"') do set "line=%%a"
 	
@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		)		
 		set /a n+=1
 	)
-	call dk_echo
+	%dk_call% dk_echo
 	endlocal
 goto :eof
 
@@ -43,6 +43,6 @@ goto :eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_showFileLine "../../README.md" 302
-	call dk_showFileLine "../../README.md" "How to build"
+	%dk_call% dk_showFileLine "../../README.md" 302
+	%dk_call% dk_showFileLine "../../README.md" "How to build"
 goto:eof

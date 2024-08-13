@@ -17,12 +17,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: FIXME: causes infinate recursion loop
 	:: Try dk_download
-	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
 	::if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
 	:: FIXME: causes infinate recursion loop
 	:: Try dk_powershellEval
-	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_powershellEval.cmd" call dk_powershellEval "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR%\%~1.cmd')"
+	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_powershellEval.cmd" %dk_call% dk_powershellEval "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR%\%~1.cmd')"
 	::if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 		
 	:: Try powershell
@@ -37,7 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" call dk_echo "failed to download %1.cmd"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" %dk_call% dk_echo "failed to download %1.cmd"
 	
 	endlocal
 goto:eof
@@ -51,6 +51,6 @@ goto:eof
 :DKTEST 
 	call dk_debugFunc 0
 	
-	call dk_source dk_info
-	call dk_info "test message using dk_source to load first"
+	%dk_call% dk_source dk_info
+	%dk_call% dk_info "test message using dk_source to load first"
 goto:eof

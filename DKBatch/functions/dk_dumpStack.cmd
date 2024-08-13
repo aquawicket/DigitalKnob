@@ -8,7 +8,7 @@ for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
 
 if not defined frame (set /a frame=0)
-if "%*" neq "" call dk_error "%__FUNCTION__%(): too many arguments"
+if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
 	call dk_debugFunc 1 99
@@ -108,26 +108,26 @@ goto:eof
 	goto:eof
 
 	:DKTEST_dk_dumpStack
-		call dk_info ":DKTEST  %*"
+		%dk_call% dk_info ":DKTEST  %*"
 		call:func1
 		
-		call dk_info "caller[0] = %caller[0]%"
-		call dk_info "caller[1] = %caller[1]%"
-		call dk_info "caller[2] = %caller[2]%"
-		call dk_info "caller[3] = %caller[3]%"
-		call dk_info "caller[4] = %caller[4]%"
-		call dk_info "caller[5] = %caller[5]%"
-		call dk_info "caller[6] = %caller[6]%"
-		call dk_info "caller[7] = %caller[7]%"
-		call dk_info "returned from :DKTEST"
+		%dk_call% dk_info "caller[0] = %caller[0]%"
+		%dk_call% dk_info "caller[1] = %caller[1]%"
+		%dk_call% dk_info "caller[2] = %caller[2]%"
+		%dk_call% dk_info "caller[3] = %caller[3]%"
+		%dk_call% dk_info "caller[4] = %caller[4]%"
+		%dk_call% dk_info "caller[5] = %caller[5]%"
+		%dk_call% dk_info "caller[6] = %caller[6]%"
+		%dk_call% dk_info "caller[7] = %caller[7]%"
+		%dk_call% dk_info "returned from :DKTEST"
 		
-		call dk_exit
+		%dk_call% dk_exit
 	goto:eof
 
 	:func1
-		call dk_info ":func1 %*"
+		%dk_call% dk_info ":func1 %*"
 		call:func2
-		call dk_info "returned from func2"
+		%dk_call% dk_info "returned from func2"
 		::call:func2 & (
 		::	(goto) 2>nul
 		::	call echo 0 = %%~0
@@ -136,27 +136,27 @@ goto:eof
 	goto:eof
 
 	:func2
-		call dk_info ":func2 %*"
+		%dk_call% dk_info ":func2 %*"
 		call:func3
-		call dk_info "returned from func3"
+		%dk_call% dk_info "returned from func3"
 	goto:eof
 
 	:func3
-		call dk_info ":func3 %*"
+		%dk_call% dk_info ":func3 %*"
 		call:func4
-		call dk_info "returned from func4"
+		%dk_call% dk_info "returned from func4"
 	goto:eof
 
 	:func4
-		call dk_info ":func4 %*"
+		%dk_call% dk_info ":func4 %*"
 		call:func5 orange
-		call dk_info "returned from func5"
+		%dk_call% dk_info "returned from func5"
 	goto:eof
 
 	:func5
-		call dk_info ":func5 %*"
-		call dk_dumpStack
+		%dk_call% dk_info ":func5 %*"
+		%dk_call% dk_dumpStack
 		:dk_dumpStackReturn
-		call dk_info "returned from dk_dumpStack dumpstack_caller"
+		%dk_call% dk_info "returned from dk_dumpStack dumpstack_caller"
 	goto:eof
 goto:eof

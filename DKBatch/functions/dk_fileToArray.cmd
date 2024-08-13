@@ -41,18 +41,17 @@ goto:eof
 	:: create the file
 	dir /b /a-d > array.cmd
 
-	call dk_fileToArray "array.cmd" MyArray
+	%dk_call% dk_fileToArray "array.cmd" MyArray
 
-	call dk_printVar MyArray
+	%dk_call% dk_printVar MyArray
 
 	:: or print items individually
-	dk_printVar MyArray[0]
-	dk_printVar MyArray[1]
-	dk_printVar MyArray[2]
-	dk_printVar MyArray[3]
-	dk_printVar MyArray[4]
-	dk_printVar MyArray[5]
-	dk_printVar MyArray[6]
-	dk_printVar MyArray[7]
+	%dk_call% dk_printVar MyArray[0]
+	%dk_call% dk_printVar MyArray[1]
+	%dk_call% dk_printVar MyArray[2]
+	%dk_call% dk_printVar MyArray[3]
+	%dk_call% dk_printVar MyArray[4]
+	%dk_call% dk_printVar MyArray[5]
+	%dk_call% dk_printVar MyArray[6]
+	%dk_call% dk_printVar MyArray[7]
 goto:eof
-

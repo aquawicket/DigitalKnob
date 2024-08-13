@@ -24,6 +24,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getUnquoted "string" unquoted
-	call dk_echo "unquoted = %unquoted%"
+	%dk_call% dk_getUnquoted "string" unquoted
+	%dk_call% dk_echo "unquoted = %unquoted%"
 goto:eof

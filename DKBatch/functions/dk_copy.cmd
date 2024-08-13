@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-
 ::##################################################################################
 ::# dk_copy(from, to)
 ::#

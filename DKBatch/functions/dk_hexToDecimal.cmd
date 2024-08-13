@@ -24,6 +24,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_hexToDecimal 0x1b decimal
-	call dk_echo "decimal = %decimal%"
+	%dk_call% dk_hexToDecimal 0x1b decimal
+	%dk_call% dk_echo "decimal = %decimal%"
 goto:eof

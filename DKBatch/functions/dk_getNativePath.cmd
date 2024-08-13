@@ -23,7 +23,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:/Windows/System32"
-	call dk_getNativePath "%myPath%" nativePath
-	call dk_printVar nativePath
+	%dk_call% dk_set myPath "C:/Windows/System32"
+	%dk_call% dk_getNativePath "%myPath%" nativePath
+	%dk_call% dk_printVar nativePath
 goto:eof

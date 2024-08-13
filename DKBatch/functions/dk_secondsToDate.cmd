@@ -65,11 +65,11 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getDate Day Month Year
-	call dk_getTime CentiSecond Second Minute Hour
+	%dk_call% dk_getDate Day Month Year
+	%dk_call% dk_getTime CentiSecond Second Minute Hour
 	echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
 	
-	call dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year%
-	call dk_secondsToDate %seconds% SecondB MinuteB HourB DayB MonthB YearB
+	%dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year%
+	%dk_call% dk_secondsToDate %seconds% SecondB MinuteB HourB DayB MonthB YearB
 	echo TIMESTAMP = %YearB%-%MonthB%-%DayB%T%HourB%:%MinuteB%:%SecondB%
 goto:eof

@@ -85,6 +85,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_uptime d h m s
+	%dk_call% dk_uptime d h m s
 	echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%
 goto:eof	

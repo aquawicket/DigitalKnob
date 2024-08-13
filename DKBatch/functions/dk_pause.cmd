@@ -22,6 +22,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_pause
+	%dk_call% dk_pause
 goto:eof
 */

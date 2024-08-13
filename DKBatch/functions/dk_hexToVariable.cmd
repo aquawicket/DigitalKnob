@@ -24,6 +24,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_hexToVariable var 0x41
-	call dk_echo "var = %var%"
+	%dk_call% dk_hexToVariable var 0x41
+	%dk_call% dk_echo "var = %var%"
 goto:eof

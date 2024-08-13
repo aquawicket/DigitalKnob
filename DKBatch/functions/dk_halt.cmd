@@ -8,9 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_halt
 	call dk_debugFunc 0
 	
-	call:HALT 2>nul
+	call:HALT %NO_STDERR%
 	:HALT
-		call dk_echo "%red%###### HALT ######%clr%"
+		%dk_call% dk_echo "%red%###### HALT ######%clr%"
 		()
 goto:eof
 
@@ -18,7 +18,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_echo "calling dk_halt on next line"
-	call dk_halt
-	call dk_echo "this is the line after halt"
+	%dk_call% dk_echo "calling dk_halt on next line"
+	%dk_call% dk_halt
+	%dk_call% dk_echo "this is the line after halt"
 goto:eof

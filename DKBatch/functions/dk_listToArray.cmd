@@ -36,7 +36,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_set myList "a,b,c,d,e,f,g"
-	call dk_listToArray "%myList%" myArray
-	call dk_printVar myArray
+	%dk_call% dk_set myList "a,b,c,d,e,f,g"
+	%dk_call% dk_listToArray "%myList%" myArray
+	%dk_call% dk_printVar myArray
 goto:eof

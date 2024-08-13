@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_setTitle
 ::#################################################################################
 ::# dk_inputTimeout(message, timeout, default)
 ::#
@@ -16,7 +15,7 @@ call dk_source dk_setTitle
 	set "default=%3"
 	set cache_file=%~dp0input_timeout_cache.tmp
 	set thread_file=%~dp0input_timeout_thread.cmd
-	call dk_delete %cache_file% 2>nul >nul
+	%dk_call% dk_delete %cache_file% 2>nul >nul
 	
 	echo ^@echo off> %thread_file%
 	echo set /p var=>> %thread_file%
@@ -32,7 +31,7 @@ call dk_source dk_setTitle
 	
 	ping -n 2 localhost > nul
 	if !timeout! GTR 0 (
-		call dk_setTitle %timeout%
+		%dk_call% dk_setTitle %timeout%
 		if not exist %cache_file% goto :input_timeout_loop
 	)
 		
@@ -40,7 +39,7 @@ call dk_source dk_setTitle
 	del %thread_file% 2>nul >nul
 	if exist %cache_file% (
 		set /p result=<%cache_file%
-		call dk_delete %cache_file% 2>nul >nul
+		%dk_call% dk_delete %cache_file% 2>nul >nul
 	) else (
 		set result=%default%
 	)
@@ -58,6 +57,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_inputTimeout "this message will time out" 5 default
+	%dk_call% dk_inputTimeout "this message will time out" 5 default
 goto:eof
 

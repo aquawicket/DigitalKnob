@@ -25,7 +25,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "DK.cmd"
-	call dk_getFileSize "%myPath%" fileSize
-	call dk_printVar fileSize
+	%dk_call% dk_set myPath "DK.cmd"
+	%dk_call% dk_getFileSize "%myPath%" fileSize
+	%dk_call% dk_printVar fileSize
 goto:eof

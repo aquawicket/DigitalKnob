@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
     echo Resetting 3rdParty Libraries . . .
         
-    call dk_confirm || goto:eof
+    %dk_call% dk_confirm || goto:eof
     
     cd %DK3RDPARTY_DIR%
     "%GIT_EXE%" clean -f -d
@@ -25,5 +25,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_reset3rdparty
+	%dk_call% dk_reset3rdparty
 goto:eof

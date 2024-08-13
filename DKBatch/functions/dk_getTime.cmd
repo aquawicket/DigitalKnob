@@ -33,6 +33,6 @@ goto:eof
 	call dk_debugFunc 0
 	
 	echo time = %time%
-	call dk_getTime centisecond second minute hour
+	%dk_call% dk_getTime centisecond second minute hour
 	echo time = %hour%:%minute%:%second%.%centisecond%
 goto:eof	

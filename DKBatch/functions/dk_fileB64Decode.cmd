@@ -13,14 +13,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 1 2
 	
 	set "inputFile=%~1"
-	call dk_removeExtension %inputFile% outputFile
-	call dk_printVar outputFile
+	%dk_call% dk_removeExtension %inputFile% outputFile
+	%dk_call% dk_printVar outputFile
 	if "%~2" neq "" set "outputFile=%~2"
-	call dk_printVar outputFile
+	%dk_call% dk_printVar outputFile
 	pause
 	
-	if not exist "%inputFile%" call dk_error "%inputFile% not found"
-	if exist "%outputFile%" call dk_error "%outputFile% already exists and cannot be overwritten"
+	if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
+	if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
 	
 	certutil -decode "%inputFile%" "%outputFile%"
 goto:eof
@@ -33,12 +33,12 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	::call dk_validate DKBRANCH_DIR "call dk_validateBranch"
+	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
 	::set "input=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
 	::set "output=%DKBRANCH_DIR%\DKBuilder_decoded.cmd"
-	::call dk_fileB64Decode "%input%" "%output%"
+	::%dk_call% dk_fileB64Decode "%input%" "%output%"
 	
-	call dk_selectFile input
-	call dk_fileB64Decode "%input%"
-	::call dk_fileB64Decode "%input%"
+	%dk_call% dk_selectFile input
+	%dk_call% dk_fileB64Decode "%input%"
+	::%dk_call% dk_fileB64Decode "%input%"
 goto:eof

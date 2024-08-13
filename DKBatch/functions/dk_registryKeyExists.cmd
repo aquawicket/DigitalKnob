@@ -27,6 +27,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" && call dk_info "key exists" || call dk_info "key does NOT exist"
-	call dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\NonExistentKey" && call dk_info "key exists" || call dk_info "key does NOT exist"
+	%dk_call% dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt" && %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
+	%dk_call% dk_registryKeyExists "HKEY_CURRENT_USER\SOFTWARE\NonExistentKey" && %dk_call% dk_info "key exists" || %dk_call% dk_info "key does NOT exist"
 goto:eof

@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_log
 ::################################################################################
 ::# dk_verbose(message)
 ::#
@@ -11,7 +10,8 @@ call dk_source dk_log
 ::#
 :dk_verbose
 	call dk_debugFunc 1
-	call dk_log VERBOSE "%~1"
+	
+	%dk_call% dk_log VERBOSE "%~1"
 goto:eof
 
 
@@ -21,5 +21,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_verbose "test dk_verbose message"
+	%dk_call% dk_verbose "test dk_verbose message"
 goto:eof

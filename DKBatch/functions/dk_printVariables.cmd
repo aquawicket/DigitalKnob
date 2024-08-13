@@ -63,5 +63,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_printVariables
+	%dk_call% dk_printVariables
 goto:eof

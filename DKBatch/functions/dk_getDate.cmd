@@ -30,6 +30,6 @@ goto:eof
 	call dk_debugFunc 0
 	
 	echo date = %date%
-	call dk_getDate day month year
+	%dk_call% dk_getDate day month year
 	echo date = %month%/%day%/%year%
 goto:eof	

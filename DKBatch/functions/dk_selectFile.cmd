@@ -22,8 +22,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_selectFile myFile
-	call dk_echo "myFile = %myFile%"
+	%dk_call% dk_selectFile myFile
+	%dk_call% dk_echo "myFile = %myFile%"
 goto:eof
 
 

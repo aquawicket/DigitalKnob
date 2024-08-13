@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_gitRename
 	call dk_debugFunc 2
 	
-	call dk_validate GIT_EXE "call dk_installGit"
+	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	"%GIT_EXE%" mv --force "%~1" "%~2"
 goto:eof
 
@@ -22,6 +22,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_todo
-	call dk_gitRename 
+	%dk_call% dk_todo
+	%dk_call% dk_gitRename 
 goto:eof

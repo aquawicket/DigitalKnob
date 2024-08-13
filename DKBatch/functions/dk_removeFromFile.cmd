@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-
 ::##################################################################################
 ::# dk_removeFromFile(string file)
 ::#
@@ -22,5 +21,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_removeFromFile
+	%dk_call% dk_removeFromFile
 goto:eof

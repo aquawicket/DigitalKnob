@@ -27,13 +27,13 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
+	%dk_call% dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
 	
-	call dk_echo
-	call dk_set substring needle
-	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
+	%dk_call% dk_echo
+	%dk_call% dk_set substring needle
+	%dk_call% dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 	
-	call dk_echo
-	call dk_set substring "not_in_file"
-	call dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
+	%dk_call% dk_echo
+	%dk_call% dk_set substring "not_in_file"
+	%dk_call% dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
 goto:eof

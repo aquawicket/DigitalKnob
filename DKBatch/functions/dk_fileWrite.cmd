@@ -20,5 +20,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
+	%dk_call% dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
 goto:eof

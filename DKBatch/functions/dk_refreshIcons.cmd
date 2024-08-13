@@ -25,5 +25,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_refreshIcons
+	%dk_call% dk_refreshIcons
 goto:eof

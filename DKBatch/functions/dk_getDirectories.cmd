@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_getDirectories
 	call dk_debugFunc 2
 	
-	call dk_replaceAll "%~1" "/" "\" _path_
+	%dk_call% dk_replaceAll "%~1" "/" "\" _path_
 	::set "folders="
 	set /A i=0
 	setlocal
@@ -36,8 +36,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:\Windows"
-	call dk_getDirectories "%myPath%" directories
-	call dk_printVar directories
+	%dk_call% dk_set myPath "C:\Windows"
+	%dk_call% dk_getDirectories "%myPath%" directories
+	%dk_call% dk_printVar directories
 goto:eof
 	

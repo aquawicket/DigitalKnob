@@ -26,8 +26,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_inputBox input
-	call dk_echo "input = %input%"
+	%dk_call% dk_inputBox input
+	%dk_call% dk_echo "input = %input%"
 goto:eof
 
 -->

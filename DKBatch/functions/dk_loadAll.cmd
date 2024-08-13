@@ -2,7 +2,6 @@
 ::if defined dk_loadAll (goto:eof) else (set dk_loadAll=1)
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-
 ::####################################################################
 ::# dk_loadAll()
 ::#
@@ -14,12 +13,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR_%..\..\.git" goto:eof
 	
 	:: download _functionList_ and load each function in the list"
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" call dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/_functionList_" "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/_functionList_" "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" call dk_error "failed to download %DKBATCH_FUNCTIONS_DIR_%_functionList_"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_error "failed to download %DKBATCH_FUNCTIONS_DIR_%_functionList_"
 	
 	for /F "usebackq delims=" %%a in ("%DKBATCH_FUNCTIONS_DIR_%_functionList_") do (
-		call dk_load %%a
+		%dk_call% dk_load %%a
     )
 goto:eof
 
@@ -33,5 +32,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_loadAll
+	%dk_call% dk_loadAll
 goto:eof

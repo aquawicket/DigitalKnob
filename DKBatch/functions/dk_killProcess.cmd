@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-
 ::################################################################################
 ::# dk_killProcess(process)
 ::#     Kill a process by process name
@@ -29,6 +28,6 @@ goto:eof
 	call dk_debugFunc 0
 	
 	start mspaint.exe
-	call dk_sleep 3
-	call dk_killProcess mspaint.exe
+	%dk_call% dk_sleep 3
+	%dk_call% dk_killProcess mspaint.exe
 goto:eof

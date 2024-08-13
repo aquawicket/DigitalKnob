@@ -14,25 +14,25 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_move
 	call dk_debugFunc 2 3
 	
-	call dk_replaceAll "%~1" "/" "\" _from_
-	call dk_replaceAll "%~2" "/" "\" _to_
+	%dk_call% dk_replaceAll "%~1" "/" "\" _from_
+	%dk_call% dk_replaceAll "%~2" "/" "\" _to_
 	if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
 	
-	call dk_info "Moving %_from_% to %_to_%"
+	%dk_call% dk_info "Moving %_from_% to %_to_%"
 	
-	if not exist "%_from_%" ( call dk_error "dk_move: %_from_% not found" )
+	if not exist "%_from_%" ( %dk_call% dk_error "dk_move: %_from_% not found" )
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
-			call dk_error "dk_rename Cannot move file. Destiantion exists and OVERWRITE is not set"
+			%dk_call% dk_error "dk_rename Cannot move file. Destiantion exists and OVERWRITE is not set"
 		) 
-		call dk_delete %_to_%
+		%dk_call% dk_delete %_to_%
 	)
 	
 	:: the base directory of the %to% path must exist.    
-	call dk_dirname "%_to_%" _parent_dir_
-	call dk_printVar _parent_dir_
-	call dk_makeDirectory "%_parent_dir_%"
+	%dk_call% dk_dirname "%_to_%" _parent_dir_
+	%dk_call% dk_printVar _parent_dir_
+	%dk_call% dk_makeDirectory "%_parent_dir_%"
 	
 	move /Y "%_from_%" "%_to_%"
 	
@@ -49,19 +49,19 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
 	
-	call dk_fileWrite %DKDOWNLOAD_DIR%/moveMe.file "dk_move test"
-	call dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt OVERWRITE
+	%dk_call% dk_fileWrite %DKDOWNLOAD_DIR%/moveMe.file "dk_move test"
+	%dk_call% dk_move %DKDOWNLOAD_DIR%/moveMe.file %DIGITALKNOB_DIR%/iWasMoved.txt OVERWRITE
 	
-	call dk_fileWrite moveMe.file "dk_move test"
-	call dk_move moveMe.file iWasMoved.txt OVERWRITE
+	%dk_call% dk_fileWrite moveMe.file "dk_move test"
+	%dk_call% dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
-	call dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
+	%dk_call% dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
 goto:eof
 
-	call dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved OVERWRITE
+	%dk_call% dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved OVERWRITE
 	
-	call dk_makeDirectory moveMe
-	call dk_move moveMe iWasMoved OVERWRITE
+	%dk_call% dk_makeDirectory moveMe
+	%dk_call% dk_move moveMe iWasMoved OVERWRITE
 goto:eof

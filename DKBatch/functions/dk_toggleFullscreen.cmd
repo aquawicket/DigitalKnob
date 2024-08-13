@@ -18,7 +18,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_toggleFullscreen
-	call dk_sleep 3
-	call dk_toggleFullscreen
+	%dk_call% dk_toggleFullscreen
+	%dk_call% dk_sleep 3
+	%dk_call% dk_toggleFullscreen
 goto:eof

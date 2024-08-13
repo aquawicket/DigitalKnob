@@ -25,6 +25,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_isDelayedExpansion deylayedExpansion
+	%dk_call% dk_isDelayedExpansion deylayedExpansion
 	echo deylayedExpansion = %deylayedExpansion%
 goto:eof

@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "col4=%~5%spaces%"
     set col4=%col4:~0,100%
     
-	::call dk_set output "%col1% %col2% %col3% %col4%"
+	::%dk_call% dk_set output "%col1% %col2% %col3% %col4%"
 	set "_textFormat_=%col1% %col2% %col3% %col4%"
     endlocal & set "%1=%_textFormat_%"
 goto:eof
@@ -37,6 +37,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_textFormat output "column1" "column2" "column3" "column4"
-	call dk_echo "%output%"
+	%dk_call% dk_textFormat output "column1" "column2" "column3" "column4"
+	%dk_call% dk_echo "%output%"
 goto:eof

@@ -24,7 +24,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:\Windows"
-	call dk_getDrive "%myPath%" drive
-	call dk_printVar drive
+	%dk_call% dk_set myPath "C:\Windows"
+	%dk_call% dk_getDrive "%myPath%" drive
+	%dk_call% dk_printVar drive
 goto:eof

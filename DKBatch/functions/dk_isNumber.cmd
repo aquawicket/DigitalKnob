@@ -15,13 +15,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	
 	if not defined non_numeric (
-		call dk_unset non_numeric
+		%dk_call% dk_unset non_numeric
 		if defined "%~2" (endlocal & set "%2=true")
         (call )
 		goto:eof
 	)
 	
-	call dk_unset non_numeric
+	%dk_call% dk_unset non_numeric
     if defined "%~2" (endlocal & set "%2=false")
 	(call)
 goto:eof
@@ -36,17 +36,17 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_isNumber 69         && call dk_info "is a number" || call dk_info "is NOT a number"
+	%dk_call% dk_isNumber 69         && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
 	set "myNumber=42"
-	call dk_isNumber %myNumber% && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber myNumber   && call dk_info "is a number" || call dk_info "is NOT a number"  &:: FIXME
-	call dk_isNumber 0          && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber 1          && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber 1.23       && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber -42        && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber "36"       && call dk_info "is a number" || call dk_info "is NOT a number"
+	%dk_call% dk_isNumber %myNumber% && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber myNumber   && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"  &:: FIXME
+	%dk_call% dk_isNumber 0          && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber 1          && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber 1.23       && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber -42        && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber "36"       && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
 	
-	call dk_isNumber "36a"      && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber word       && call dk_info "is a number" || call dk_info "is NOT a number"
-	call dk_isNumber 123456789  && call dk_info "is a number" || call dk_info "is NOT a number"
+	%dk_call% dk_isNumber "36a"      && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber word       && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
+	%dk_call% dk_isNumber 123456789  && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"
 goto:eof

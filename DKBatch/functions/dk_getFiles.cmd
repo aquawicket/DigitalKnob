@@ -35,7 +35,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "C:\Windows"
-	call dk_getFiles "%myPath%" files
-	call dk_printVar files
+	%dk_call% dk_set myPath "C:\Windows"
+	%dk_call% dk_getFiles "%myPath%" files
+	%dk_call% dk_printVar files
 goto:eof

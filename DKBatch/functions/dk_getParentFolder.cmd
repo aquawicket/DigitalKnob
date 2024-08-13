@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
     set "%2=%parent%"
-	call dk_printVar "%2"
+	%dk_call% dk_printVar "%2"
 goto:eof
 
 
@@ -22,5 +22,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getParentFolder
+	%dk_call% dk_getParentFolder
 goto:eof

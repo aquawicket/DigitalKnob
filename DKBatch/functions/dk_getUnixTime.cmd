@@ -25,6 +25,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_getUnixTime unixTime
+	%dk_call% dk_getUnixTime unixTime
 	echo unixTime = %unixTime%
-goto:eof	
+goto:eof

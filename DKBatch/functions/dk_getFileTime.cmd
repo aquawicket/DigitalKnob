@@ -25,7 +25,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set myPath "DK.cmd"
-	call dk_getFileTime "%myPath%" fileTime
-	call dk_printVar fileTime
+	%dk_call% dk_set myPath "DK.cmd"
+	%dk_call% dk_getFileTime "%myPath%" fileTime
+	%dk_call% dk_printVar fileTime
 goto:eof

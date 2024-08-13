@@ -37,6 +37,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_isFunction "dk_debugFunc" && call dk_info "'dk_debugFunc' is a function" || call dk_info "'dk_debugFunc' is NOT a function"
-	call dk_isFunction "NotAFunction" && call dk_info "'NotAFunction' is a function" || call dk_info "'NotAFunction' is NOT a function"
+	%dk_call% dk_isFunction "dk_debugFunc" && %dk_call% dk_info "'dk_debugFunc' is a function" || %dk_call% dk_info "'dk_debugFunc' is NOT a function"
+	%dk_call% dk_isFunction "NotAFunction" && %dk_call% dk_info "'NotAFunction' is a function" || %dk_call% dk_info "'NotAFunction' is NOT a function"
 goto:eof

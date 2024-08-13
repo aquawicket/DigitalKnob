@@ -1,8 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_debugFunc
-call dk_source dk_error
 ::####################################################################
 ::# dk_prependArgs(variable, string)
 ::#
@@ -20,16 +18,16 @@ goto:eof
 
 
 
-call dk_source dk_printVar
+
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_printVar myVar
+	%dk_call% dk_printVar myVar
 	
-	call dk_prependArgs myVar abc 123
-	call dk_printVar myVar
+	%dk_call% dk_prependArgs myVar abc 123
+	%dk_call% dk_printVar myVar
 	
-	call dk_prependArgs myVar xyz 789
-	call dk_printVar myVar
+	%dk_call% dk_prependArgs myVar xyz 789
+	%dk_call% dk_printVar myVar
 goto:eof

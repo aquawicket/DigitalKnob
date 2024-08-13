@@ -1,7 +1,6 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-
 ::####################################################################
 ::# dk_strlen(string_var rtn_var)
 ::#
@@ -31,7 +30,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_set _demo "some example string"
-	call dk_strlen _demo _length
-	call dk_info "String is %_length% characters long"
+	%dk_call% dk_set _demo "some example string"
+	%dk_call% dk_strlen _demo _length
+	%dk_call% dk_info "String is %_length% characters long"
 goto:eof

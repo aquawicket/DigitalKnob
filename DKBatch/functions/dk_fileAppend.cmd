@@ -24,5 +24,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
+	%dk_call% dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
 goto:eof

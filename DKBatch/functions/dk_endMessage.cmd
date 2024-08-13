@@ -1,19 +1,18 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_setTitle
 ::#################################################################################
 ::# dk_endMessage()
 ::#
 :dk_endMessage
 	call dk_debugFunc 0
 	
-	call dk_setTitle Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
-    call dk_echo
-    call dk_info "####################################################################"
-	call dk_info "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
-    call dk_info "####################################################################"
-    call dk_echo
+	%dk_call% dk_setTitle Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
+    %dk_call% dk_echo
+    %dk_call% dk_info "####################################################################"
+	%dk_call% dk_info "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
+    %dk_call% dk_info "####################################################################"
+    %dk_call% dk_echo
         
     set "UPDATE="
     set "APP="
@@ -28,5 +27,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_endMessage
+	%dk_call% dk_endMessage
 goto:eof

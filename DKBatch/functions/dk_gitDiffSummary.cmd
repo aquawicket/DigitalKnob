@@ -8,10 +8,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_gitDiffSummary
 	call dk_debugFunc 0
         
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
     cd %DKBRANCH_DIR%
     
-	call dk_validate GIT_EXE "call dk_installGit"
+	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 
     "%GIT_EXE%" --no-pager diff --compact-summary
 goto:eof
@@ -26,5 +26,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_gitDiffSummary
+	%dk_call% dk_gitDiffSummary
 goto:eof

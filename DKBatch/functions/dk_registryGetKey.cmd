@@ -20,6 +20,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_todo
-	call dk_registryGetKey
+	%dk_call% dk_todo
+	%dk_call% dk_registryGetKey
 goto:eof
