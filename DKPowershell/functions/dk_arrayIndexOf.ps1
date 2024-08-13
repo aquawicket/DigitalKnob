@@ -15,12 +15,12 @@ function Global:dk_arrayIndexOf($array, $searchElement) {
 	
 	for($indexOf=0; $indexOf -le $_array_.count; $indexOf++) {
 		if($searchElement -eq $_array_[$indexOf]){
-			dk_printVar indexOf
+			dk_call dk_printVar indexOf
 			return $indexOf
 		}
 	}
 	$indexOf = -1
-	dk_printVar indexOf
+	dk_call dk_printVar indexOf
 	return $indexOf
 }
 
@@ -33,21 +33,21 @@ function Global:DKTEST() {
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$indexA = dk_arrayIndexOf myArray "a" 
-	dk_echo "indexA = ${indexA}"
+	$indexA = dk_call dk_arrayIndexOf myArray "a" 
+	dk_call dk_echo "indexA = ${indexA}"
 	
-	$indexB = dk_arrayIndexOf $myArray "b"
-	dk_echo "indexB = ${indexB}"
+	$indexB = dk_call dk_arrayIndexOf $myArray "b"
+	dk_call dk_echo "indexB = ${indexB}"
 	
-	$indexC = dk_arrayIndexOf myArray "c" 
-	dk_echo "indexC = ${indexC}"
+	$indexC = dk_call dk_arrayIndexOf myArray "c" 
+	dk_call dk_echo "indexC = ${indexC}"
 	
-	$indexD = dk_arrayIndexOf $myArray "d" indexD
-	dk_echo "indexD = ${indexD}"
+	$indexD = dk_call dk_arrayIndexOf $myArray "d" indexD
+	dk_call dk_echo "indexD = ${indexD}"
 	
-	$indexE = dk_arrayIndexOf myArray "e" 
-	dk_echo "indexE = ${indexE}"
+	$indexE = dk_call dk_arrayIndexOf myArray "e" 
+	dk_call dk_echo "indexE = ${indexE}"
 	
-	$indexN = dk_arrayIndexOf $myArray "nonExistant" 
-	dk_echo "indexN = ${indexN}"
+	$indexN = dk_call dk_arrayIndexOf $myArray "nonExistant" 
+	dk_call dk_echo "indexN = ${indexN}"
 }

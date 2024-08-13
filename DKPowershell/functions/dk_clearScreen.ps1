@@ -8,8 +8,6 @@ if(!$dk_clearScreen){ $dk_clearScreen = 1 } else{ return }
 function Global:dk_clearScreen() {
 	dk_debugFunc 0
 
-	
-	
 	clear
 }
 
@@ -19,6 +17,5 @@ function Global:dk_clearScreen() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_clearScreen
+	dk_call dk_clearScreen
 }

@@ -8,8 +8,7 @@ if(!$dk_errorStatus){ $dk_errorStatus = 1 } else{ return }
 function Global:dk_errorStatus(){
 	dk_debugFunc 0
 	
-	
-	dk_echo "$(__FILE__ 1):$(__LINE__ 1) ERROR_STATUS = $?"
+	dk_call dk_echo "$(__FILE__ 1):$(__LINE__ 1) ERROR_STATUS = $?"
 }
 
 
@@ -18,6 +17,5 @@ function Global:dk_errorStatus(){
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_errorStatus
+	dk_call dk_errorStatus
 }

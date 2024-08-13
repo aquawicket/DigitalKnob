@@ -8,7 +8,7 @@ if(!$dk_fileAppend){ $dk_fileAppend = 1 } else{ return }
 function Global:dk_fileAppend($filepath, $str) {
 	dk_debugFunc 2
 	
-	if(dk_pathExists "$filepath"){ echo "$str" >> "$filepath" }
+	if(dk_call dk_pathExists "$filepath"){ echo "$str" >> "$filepath" }
 	else{ echo "$str" > "$filepath" }
 }
 
@@ -19,5 +19,5 @@ function Global:dk_fileAppend($filepath, $str) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
+	dk_call dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
 }

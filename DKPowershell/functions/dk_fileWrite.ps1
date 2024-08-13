@@ -18,5 +18,5 @@ function Global:dk_fileWrite($filepath, $str) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 
-	dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
+	dk_call dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
 }

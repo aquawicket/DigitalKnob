@@ -10,8 +10,13 @@ if(!$dk_fixme){ $dk_fixme = 1 } else{ return }
 #
 function Global:dk_fixme($message){
 	dk_debugFunc 1
-	dk_log FIXME "${message}"
+	
+	dk_call dk_log FIXME "${message}"
 }
+
+
+
+
 
 
 
@@ -20,5 +25,5 @@ function Global:dk_fixme($message){
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_fixme "test dk_fixme message"
+	dk_call dk_fixme "test dk_fixme message"
 }

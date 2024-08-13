@@ -8,14 +8,21 @@ if(!$dk_deleteTempFiles){ $dk_deleteTempFiles = 1 } else{ return }
 function Global:dk_deleteTempFiles() {
 	dk_debugFunc 0
 
-
-
-	dk_info "Deleting .TMP files . . ."
+	dk_call dk_info "Deleting .TMP files . . ."
 	
-	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.tmp -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" *.TMP -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24,6 +31,5 @@ function Global:dk_deleteTempFiles() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_deleteTempFiles
+	dk_call dk_deleteTempFiles
 }

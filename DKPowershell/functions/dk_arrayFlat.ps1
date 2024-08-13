@@ -10,11 +10,10 @@ if(!$dk_arrayFlat){ $dk_arrayFlat = 1 } else{ return }
 function Global:dk_arrayFlat($array, $depth) {
 	dk_debugFunc 2
 
-	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo
+	dk_call dk_todo
 }
 
 
@@ -24,6 +23,5 @@ function Global:dk_arrayFlat($array, $depth) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_arrayFlat array depth
+	dk_call dk_arrayFlat array depth
 }

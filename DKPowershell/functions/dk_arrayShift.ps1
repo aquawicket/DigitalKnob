@@ -10,12 +10,10 @@ if(!$dk_arrayShift){ $dk_arrayShift = 1 } else{ return }
 function Global:dk_arrayShift($array) {
 	dk_debugFunc 1
 
-	
-	
 	$prev = 0
 	$count = 1
 	
-	dk_todo
+	dk_call dk_todo
 #	:dk_arrayShift_loop
 #	if defined $_arry_[$count] (
 #		"$_arry_[$prev]=$_arry_[$count]"
@@ -34,24 +32,23 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c', 'd', 'e')
 	
+	dk_call dk_printVar myArray
 	
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 	
-	dk_arrayShift myArray
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 	
-	dk_arrayShift myArray
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 	
-	dk_arrayShift myArray
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 	
-	dk_arrayShift myArray
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 	
-	dk_arrayShift myArray
-	dk_printVar myArray
-	
-	dk_arrayShift myArray
-	dk_printVar myArray
+	dk_call dk_arrayShift myArray
+	dk_call dk_printVar myArray
 }

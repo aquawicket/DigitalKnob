@@ -10,8 +10,14 @@ if(!$dk_arraySlice){ $dk_arraySlice = 1 } else{ return }
 function Global:dk_arraySlice($array, $start, $end) {
 	dk_debugFunc 3
 
-	dk_todo
+	dk_call dk_todo
 }
+
+
+
+
+
+
 
 
 
@@ -19,5 +25,5 @@ function Global:dk_arraySlice($array, $start, $end) {
 function Global:DKTEST 
 	dk_debugFunc 0
 	
-	dk_arraySlice array start end_
+	dk_call dk_arraySlice array start end_
 }

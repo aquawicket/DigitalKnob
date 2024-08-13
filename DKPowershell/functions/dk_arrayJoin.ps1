@@ -15,7 +15,7 @@ function Global:dk_arrayJoin($array, $separator) {
 	
 	$arrayJoin = $_array_ -join $separator
 	
-	dk_printVar arrayJoin
+	dk_call dk_printVar arrayJoin
 	return $arrayJoin
 }
 
@@ -27,6 +27,6 @@ function Global:DKTEST() {
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$myString = dk_arrayJoin myArray ","
-	dk_info "myString = $myString"
+	$myString = dk_call dk_arrayJoin myArray ","
+	dk_call dk_info "myString = $myString"
 }

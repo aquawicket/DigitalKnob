@@ -10,9 +10,11 @@ if(!$dk_arrayIndexOf){ $dk_arrayIndexOf = 1 } else{ return }
 function Global:dk_arraySplice() {
 	dk_debugFunc 2
 
-
-	dk_todo
+	dk_call dk_todo
 }
+
+
+
 
 
 
@@ -21,7 +23,6 @@ function Global:dk_arraySplice() {
 function Global:DKTEST
 	dk_debugFunc 0
 	
-
 	#  TODO
-	dk_arraySplice array start
+	dk_call dk_arraySplice array start
 }

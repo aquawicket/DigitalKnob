@@ -8,8 +8,7 @@ if(!$dk_createCache){ $dk_createCache = 1 } else{ return }
 function Global:dk_createCache() {
 	dk_debugFunc 0
 
-	
-	dk_echo "creating cache..."
+	dk_call dk_echo "creating cache..."
 	
 	# write variable values line by line
 	echo "$APP">"${DKBRANCH_DIR}/cache"
@@ -25,6 +24,5 @@ function Global:dk_createCache() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_createCache
+	dk_call dk_createCache
 }

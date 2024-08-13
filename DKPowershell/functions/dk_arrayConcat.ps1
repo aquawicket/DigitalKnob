@@ -10,12 +10,14 @@ if(!$dk_arrayConcat){ $dk_arrayConcat = 1 } else{ return }
 function Global:dk_arrayConcat($array, $value1) {
 	dk_debugFunc 2 99
 	
-	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo
+	dk_call dk_todo
 }
+
+
+
 
 
 
@@ -23,6 +25,5 @@ function Global:dk_arrayConcat($array, $value1) {
 function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 	dk_debugFunc 0
 	
-	
-	dk_arrayConcat array value1
+	dk_call dk_arrayConcat array value1
 }

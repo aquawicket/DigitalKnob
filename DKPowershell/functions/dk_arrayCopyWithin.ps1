@@ -13,7 +13,7 @@ function Global:dk_arrayCopyWithin($array, $target, $start, $end) {
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo "dk_arrayCopyWithin"
+	dk_call dk_todo "dk_arrayCopyWithin"
 }
 
 
@@ -23,5 +23,5 @@ function Global:dk_arrayCopyWithin($array, $target, $start, $end) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_arrayCopyWithin array target start end
+	dk_call dk_arrayCopyWithin array target start end
 }

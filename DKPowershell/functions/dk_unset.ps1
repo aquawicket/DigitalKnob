@@ -26,7 +26,7 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$global:myVar = "initial value assigned with dk_unset"
-	dk_echo "myVar = ${myVar}"
-	dk_unset myVar
-	dk_echo "myVar = ${myVar}"
+	dk_call dk_echo "myVar = ${myVar}"
+	dk_call dk_unset myVar
+	dk_call dk_echo "myVar = ${myVar}"
 }

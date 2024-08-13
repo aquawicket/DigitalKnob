@@ -14,7 +14,7 @@ function Global:dk_arrayAt($array, $index) {
 	else { $_array_ = $array }
 	
 	$arrayAt = $_array_[$index]
-	dk_printVar arrayAt
+	dk_call dk_printVar arrayAt
 	return $arrayAt
 }
 
@@ -27,33 +27,33 @@ function Global:DKTEST() {
 	
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
-	dk_printVar myArray
-	$arrayAt_3 = dk_arrayAt myArray 3
-	dk_echo "arrayAt_3 = $arrayAt_3"
-	$elementB = dk_arrayAt $myArray 1
-	dk_echo "elementB = $elementB"
+	dk_call dk_printVar myArray
+	$arrayAt_3 = dk_call dk_arrayAt myArray 3
+	dk_call dk_echo "arrayAt_3 = $arrayAt_3"
+	$elementB = dk_call dk_arrayAt $myArray 1
+	dk_call dk_echo "elementB = $elementB"
 	
 	$myArrayB = [System.Collections.ArrayList]('1', '2', '3', '4', '5')
-	$elementB_A = dk_arrayAt myArrayB 3
-	dk_echo "elementB_A = $elementB_A"
-	$elementB_B = dk_arrayAt $myArrayB 1
-	dk_echo "elementB_B = $elementB_B"
+	$elementB_A = dk_call dk_arrayAt myArrayB 3
+	dk_call dk_echo "elementB_A = $elementB_A"
+	$elementB_B = dk_call dk_arrayAt $myArrayB 1
+	dk_call dk_echo "elementB_B = $elementB_B"
 	
 	$myArrayC = ('1', '2', '3', '4', '5')
-	$elementC_A = dk_arrayAt myArrayC 3
-	dk_echo "elementC_A = $elementC_A"
-	$elementC_B = dk_arrayAt $myArrayC 1
-	dk_echo "elementC_B = $elementC_B"
+	$elementC_A = dk_call dk_arrayAt myArrayC 3
+	dk_call dk_echo "elementC_A = $elementC_A"
+	$elementC_B = dk_call dk_arrayAt $myArrayC 1
+	dk_call dk_echo "elementC_B = $elementC_B"
 	
 	$myArrayD = "string"
-	$elementD_A = dk_arrayAt myArrayD 3
-	dk_echo "elementD_A = $elementD_A"
-	$elementD_B = dk_arrayAt $myArrayD 1
-	dk_echo "elementD_B = $elementD_B"
+	$elementD_A = dk_call dk_arrayAt myArrayD 3
+	dk_call dk_echo "elementD_A = $elementD_A"
+	$elementD_B = dk_call dk_arrayAt $myArrayD 1
+	dk_call dk_echo "elementD_B = $elementD_B"
 	
 	$myArrayE = 123456789
-	$elementE_A = dk_arrayAt myArrayE 3
-	dk_echo "elementE_A = $elementE_A"
-	$elementE_B = dk_arrayAt $myArrayE 1
-	dk_echo "elementE_B = $elementE_B"
+	$elementE_A = dk_call dk_arrayAt myArrayE 3
+	dk_call dk_echo "elementE_A = $elementE_A"
+	$elementE_B = dk_call dk_arrayAt $myArrayE 1
+	dk_call dk_echo "elementE_B = $elementE_B"
 }

@@ -11,7 +11,8 @@ if(!$dk_debug){ $dk_debug = 1 } else{ return }
 #
 function Global:dk_debug($message) {
 	dk_debugFunc 1
-	dk_log DEBUG "${message}"
+	
+	dk_call dk_log DEBUG "${message}"
 }
 
 
@@ -20,5 +21,5 @@ function Global:dk_debug($message) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_debug "test dk_debug message"
+	dk_call dk_debug "test dk_debug message"
 }
