@@ -13,7 +13,7 @@ function Global:dk_buildMain() {
 		dk_call dk_stacktrace
 	}
 
-# 	dk _validateSudo
+# 	dk_call dk _validateSudo
 	
 #	if dk _defined WSLENV; then 
 #		dk_call dk_info "WSLENV is on"
