@@ -106,23 +106,21 @@ dkreloadWithBash(){
 #
 dkinit(){
 	echo "Loading DKBatch DigitalKnob . . ."
-	
-	#$(command -v dk)                    || dk_try(){ $($* &>/dev/null) && $@ || echo "$* failed"; }
 	$(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists builtin			 && builtin="builtin"
 	dk_commandExists dk_defined          || dk_commandExists     eval   && dk_defined(){ ${builtin} eval value='$'{${1}+x}; [ -n "${value}" ]; }  # dk_defined variable
 	dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
 	dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
 	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }     # dk_pause
-	dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                # dk_warning "test dk_warning";
-	dk_commandExists dk_warning          || dk_warning()         { dk_echo "${yellow}WARNING: ${1}${clr}"; }                                   # dk_warning "test dk_warning";
-	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                      # dk_info "test dk_info";
-	dk_commandExists dk_debug            || dk_debug()           { dk_echo "${blue}  DEBUG: ${1}${clr}"; }                                     # dk_debug "test dk_debug";
-	dk_commandExists dk_verbose          || dk_verbose()         { dk_echo "${cyan}VERBOSE: ${1}${clr}"; }                                     # dk_verbose "test dk_verbose";
-	dk_commandExists dk_error            || dk_error()           { dk_echo "${red}  ERROR: ${1}${clr}"; dk_pause; exit; }                      # dk_error "test dk_error";
-	dk_commandExists dk_printVar         || dk_printVar()        { dk_echo "${cyan}${1} = ${blue}${!1-}${clr}"; }                              # dk_printVar variable
-    dk_commandExists dk_pathExists       || dk_pathExists()      { [ -e "${1}" ]; }                                                            # dk_pathExists "/usr/bin"
-    dk_commandExists dk_stringContains   || dk_stringContains()  { [ "${1#*"$2"}" != "${1}" ]; }                                               # dk_stringContains string search
+	dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                   # dk_warning "test dk_warning";
+	dk_commandExists dk_warning          || dk_warning()         { dk_echo "${yellow}WARNING: ${1}${clr}"; }                                      # dk_warning "test dk_warning";
+	dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                         # dk_info "test dk_info";
+	dk_commandExists dk_debug            || dk_debug()           { dk_echo "${blue}  DEBUG: ${1}${clr}"; }                                        # dk_debug "test dk_debug";
+	dk_commandExists dk_verbose          || dk_verbose()         { dk_echo "${cyan}VERBOSE: ${1}${clr}"; }                                        # dk_verbose "test dk_verbose";
+	dk_commandExists dk_error            || dk_error()           { dk_echo "${red}  ERROR: ${1}${clr}"; dk_pause; exit; }                         # dk_error "test dk_error";
+	dk_commandExists dk_printVar         || dk_printVar()        { dk_echo "${cyan}${1} = ${blue}${!1-}${clr}"; }                                # dk_printVar variable
+    dk_commandExists dk_pathExists       || dk_pathExists()      { [ -e "${1}" ]; }                                                               # dk_pathExists "/usr/bin"
+    dk_commandExists dk_stringContains   || dk_stringContains()  { [ "${1#*"$2"}" != "${1}" ]; }                                                  # dk_stringContains string search
     dk_commandExists dk_unset            || dk_commandExists     unset    && dk_unset()   { ${builtin} unset "${1}"; }                            # dk_unset variable
     dk_commandExists dk_basename         || dk_commandExists     basename && dk_basename(){ ${builtin} echo $(basename ${1}); }                   # dk_basename path
     dk_commandExists dk_dirname          || dk_commandExists     dirname  && dk_dirname() { ${builtin} echo $(dirname ${1}); }                    # dk_dirname path
@@ -139,8 +137,8 @@ DKBASH_VARS(){
 	export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
 	export DKBASH_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
 	export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
-	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
+	[ -e "${DKBASH_FUNCTIONS_DIR}/DK.sh" ] || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
+	#export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
 }
 
 ##################################################################################
@@ -157,10 +155,10 @@ DKHTTP_VARS(){
 # DKHTTP_VARS()
 #
 dk_initFiles(){
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" && . "${DKBASH_FUNCTIONS_DIR}/dk_source.sh"
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_call.sh ${DKBASH_FUNCTIONS_DIR}/dk_call.sh
-	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   && . "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"
+	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR}/dk_source.sh
+	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR}/dk_source.sh"
+	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_call.sh ${DKBASH_FUNCTIONS_DIR}/dk_call.sh
+	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"   ] && . "${DKBASH_FUNCTIONS_DIR}/dk_call.sh"
 }
 
 ##################################################################################
@@ -168,9 +166,7 @@ dk_initFiles(){
 #
 #
 dk_download() {
-	dk_debugFunc 2
-
-	if dk_pathExists "${2}"; then
+	if [ -e "${2}"]; then
 		dk_warning "dk_download(): ${2} already exists"
 		return 0
 	fi
@@ -179,8 +175,8 @@ dk_download() {
 	OLDPWD=${PWD}
 	cd "${parentdir}" #|| dk_error "cd ${parentdir} failed!"
 	
-	dk_pathExists "${1}" || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
-	dk_pathExists "${1}" || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
+	[ -e "${1}" ] || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
+	[ -e "${1}" ] || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
 	
 	cd "${OLDPWD}" #|| dk_error "cd ${OLDPWD} failed!"
 	#[ "${input}" = "" ]
@@ -189,9 +185,7 @@ dk_download() {
 ##################################################################################
 # dksetupCallstack()
 #
-dksetupCallstack(){
-	dk_debugFunc 0
-	
+dksetupCallstack(){	
 	#dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
 }
@@ -199,9 +193,7 @@ dksetupCallstack(){
 ##################################################################################
 # DKSCRIPT_VARS()
 #
-DKSCRIPT_VARS(){
-	dk_debugFunc 0
-	
+DKSCRIPT_VARS(){	
 	dk_call dk_pathExists    $(dk_call dk_realpath ${0}) && dk_call dk_export  DKSCRIPT_PATH  $(dk_call dk_realpath ${0})
 	dk_call dk_commandExists "cygpath"                   && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
@@ -215,8 +207,6 @@ DKSCRIPT_VARS(){
 # dksetOptions()
 #
 dksetOptions(){
-	dk_debugFunc 0
-	
 	# https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	# $(set -a) && set -a
 	# $(set -b) && set -b
@@ -253,8 +243,6 @@ dksetOptions(){
 #	install a package
 #
 dk_install(){
-	dk_debugFunc 1
-	
 	dk_commandExists ${1}      && return 0					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
