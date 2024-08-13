@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1
 	
 	setlocal
-	if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo "ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid" & pause
+	if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
 	echo downloading %~1 . . .
@@ -37,7 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	
-	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" %dk_call% dk_echo "failed to download %1.cmd"
+	if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" echo [31m failed to download %1.cmd [0m
 	
 	endlocal
 goto:eof
