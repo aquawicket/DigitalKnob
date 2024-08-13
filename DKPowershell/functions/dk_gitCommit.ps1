@@ -7,7 +7,6 @@ if(!$dk_gitCommit){ $dk_gitCommit = 1 } else{ return }
 #
 function Global:dk_gitCommit() {	
 	dk_debugFunc 0
-
 	
 	dk_gitDiffSummary
 	
