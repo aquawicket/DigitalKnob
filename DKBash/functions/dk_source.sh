@@ -9,6 +9,9 @@
 dk_source(){
 	[ -e ${DKBASH_FUNCTIONS_DIR}/dk_debugFunc.sh ] && dk_debugFunc 1
 
+	# load if it's an existing full path file
+	[ -e ${1} ] && . ${1} && return
+
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "downloading ${1} . . ."
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "ERROR: failed to download ${1}" || [$(read -rp 'press enter to exit')] || exit;

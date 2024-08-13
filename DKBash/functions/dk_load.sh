@@ -10,6 +10,9 @@
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
 dk_load() {
+	dk_call dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
+	return
+
 	dk_debugFunc 1
 	#dk_echo "dk_load($*)"
 
