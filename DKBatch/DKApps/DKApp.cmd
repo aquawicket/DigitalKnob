@@ -62,7 +62,7 @@ goto:eof
 	::echo %ESC%[19;200H                  
 	::echo %ESC%[19;20HF:%~nx0 %*
 	
-	echo DKExit
+	echo dk_exit
 	call dk_exit 0
 goto:eof
 
