@@ -47,7 +47,7 @@ function DK() {
 	dk_source __ARGV__
 	dk_source __CALLER__
 	dk_source dk_debugFunc
-	dk_call dk_color
+	dk_call dk_color 1
 	dk_call dk_logo
 	
 	#dk_source ${DKSCRIPT_PATH}

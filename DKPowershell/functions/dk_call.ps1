@@ -8,35 +8,12 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 function Global:dk_call(){
 	#dk_debugFunc 1 99
 
-	#$allArgs = $PsBoundParameters.Values + ${args}
-	#$rest = $args[1..($args.Length-1)]
-	#$first, $rest = $PsBoundParameters.Values + ${args}
 	$first, $rest = ${args}
-#	if(!(Get-Command ${first})){
-#		if("${first}" -match "^dk_[a-zA-Z0-9]+"){
-#			dk_source ${first}
-#		} else {
-#			#dk_commandExists dk_install  || dk_source dk_install
-#			#dk_install ${1}
-#		}
-#		if(!(Get-Command ${first})){ Write-Host "${1}: command not found" }
-#	}
 	
-	dk_source ${first}
-	
-#	if("${first}" -match "^dk_[a-zA-Z0-9]+"){
-#		Write-Host "-> ${args}"
-		#${args}
-		#Get-MockedData -MockFunctionName $first -MockFunctionParameters @{$rest}
-		#if($rest){ 
-		#	Invoke-Expression $first $rest 
-		#} else {
-		#	Invoke-Expression $first
-		#}
-#		& ${args}
-#	} else {
-		& $first $rest
-#	}
+	if("${first}" -match "^dk_[a-zA-Z0-9]+"){
+		dk_source ${first}
+	}
+	& $first $rest
 }
 
 
