@@ -13,7 +13,7 @@ function Global:dk_call(){
 	if("${first}" -match "^dk_[a-zA-Z0-9]+"){
 		dk_source ${first}
 	}
-	& $first $rest
+	& $args[0] $args[1] $args[2] $args[3] $args[4] $args[5]
 }
 
 

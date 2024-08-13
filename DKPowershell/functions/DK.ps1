@@ -113,9 +113,9 @@ function dk_DKHTTP_VARS(){
 	$global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "$DKHTTP_DKPOWERSHELL_DIR/functions"
 }
 
-::##################################################################################
-::# dk_initFiles
-::#
+##################################################################################
+# dk_initFiles
+#
 function dk_initFiles(){
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_source.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
 	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1
@@ -172,7 +172,7 @@ function Get-EntryPointAbsFilePath() {
 function Set-ConsoleColor ($bc, $fc) {
     $Host.UI.RawUI.BackgroundColor = $bc
     $Host.UI.RawUI.ForegroundColor = $fc
-    Clear-Host
+    #Clear-Host
 }
 
 Set-ConsoleColor 'black' 'white'

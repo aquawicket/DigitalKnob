@@ -103,12 +103,12 @@ function Global:dk_log() {
 	#if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 
 	${level_ENABLE} = Get-Variable "${_level_}_ENABLE" -valueOnly -ErrorAction SilentlyContinue
-	${level_COLOR} = Get-Variable "${_level_}_COLOR" -valueOnly
-	${level_PAUSE} = Get-Variable "${_level_}_PAUSE" -valueOnly
+	${level_COLOR} = Get-Variable "${_level_}_COLOR" -valueOnly -ErrorAction SilentlyContinue
+	${level_PAUSE} = Get-Variable "${_level_}_PAUSE" -valueOnly -ErrorAction SilentlyContinue
 	${level_TAG} = Get-Variable "${_level_}_TAG" -valueOnly -ErrorAction SilentlyContinue
-	${level_TRACE} = Get-Variable "${_level_}_TRACE" -valueOnly
-	${level_LINE} = Get-Variable "${_level_}_LINE" -valueOnly
-	${level_HALT} = Get-Variable "${_level_}_HALT" -valueOnly
+	${level_TRACE} = Get-Variable "${_level_}_TRACE" -valueOnly -ErrorAction SilentlyContinue
+	${level_LINE} = Get-Variable "${_level_}_LINE" -valueOnly -ErrorAction SilentlyContinue
+	${level_HALT} = Get-Variable "${_level_}_HALT" -valueOnly -ErrorAction SilentlyContinue
 	if("${level_ENABLE}" -ne "1"){ return }
 
 	
