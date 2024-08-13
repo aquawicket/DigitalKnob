@@ -59,8 +59,8 @@ dk_gitCommit() {
 	dk_call dk_info "git commit \"${message}\""
 	dk_call dk_confirm || return 0
 	
-	"${GIT_EXE}" commit -a -m "${message}" && echo "success" || echo "failed"
-    dk_call dk_call "${GIT_EXE}" push
+	"${GIT_EXE}" commit -a -m "${message}" || $(true)
+    dk_call "${GIT_EXE}" push
 }
 
 
