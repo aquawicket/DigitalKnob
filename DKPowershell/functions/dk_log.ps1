@@ -92,14 +92,17 @@ if(!(${FIXME_HALT}))     { $global:FIXME_HALT = 0 }
 #
 #    @message	- The message to print
 #
-function Global:dk_log($level, $message) {
+function Global:dk_log($_level_, $_message_) {
 	dk_debugFunc 1 2
 
 	if(${ENABLE_dk_log} -ne 1){ return }
 	
-	${ARGC} = ${args}.count
-	#if(${ARGC} -eq 1) {${_level_} = "DEFAULT"; ${message} = $args[0] }
-	#if(${ARGC} -eq 2) {${_level_} = $args[0]; ${message} = $args[1] }
+	#echo "_level_ = $_level_"
+	#echo "_message_ = $_message_"
+	if("${_message_}" -eq ""){
+		$_message_ = "${_level_}"
+		$_level_ = "DEFAULT";
+	}
 	#if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
 
 	${level_ENABLE} = Get-Variable "${_level_}_ENABLE" -valueOnly -ErrorAction SilentlyContinue
@@ -111,7 +114,6 @@ function Global:dk_log($level, $message) {
 	${level_HALT} = Get-Variable "${_level_}_HALT" -valueOnly -ErrorAction SilentlyContinue
 	if("${level_ENABLE}" -ne "1"){ return }
 
-	
 	dk_call dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
 	if(${level_PAUSE} -eq 1){ dk_call dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_call dk_pause }
 	if(${level_TRACE} -eq 1){ dk_call dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_call dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
@@ -123,9 +125,11 @@ function Global:dk_log($level, $message) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
+	echo "dk_log TEST"
+	
 	dk_debugFunc 0
 	
-	dk_call dk_log "test dk_log message"
+	dk_log "test dk_log message"
 	
 	dk_call dk_log VERBOSE "test dk_log VERBOSE message"
 	dk_call dk_log DEBUG   "test dk_log DEBUG message"
