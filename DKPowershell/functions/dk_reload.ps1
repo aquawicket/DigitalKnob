@@ -8,13 +8,11 @@ if(!$dk_reload){ $dk_reload = 1 } else{ return }
 function Global:dk_reload() {
 	dk_debugFunc 0
 
+	if(!(dk_call dk_pathExists "${DKSCRIPT_PATH}")){ dk_call dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
 	
-	
-	if(!(dk_pathExists "${DKSCRIPT_PATH}")){ dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
-	
-	#dk_echo
-    dk_echo "reloading ${DKSCRIPT_PATH}"
-	. "${DKSCRIPT_PATH}" #& dk_exit & dk_exit & dk_exit
+	#dk_call dk_echo
+    dk_call dk_echo "reloading ${DKSCRIPT_PATH}"
+	. "${DKSCRIPT_PATH}" #& dk_call dk_exit & dk_call dk_exit & dk_call dk_exit
 }
 
 
@@ -23,6 +21,5 @@ function Global:dk_reload() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	dk_reload
+	dk_call dk_reload
 }

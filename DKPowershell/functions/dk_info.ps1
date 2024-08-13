@@ -1,12 +1,6 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_info){ $dk_info = 1 } else{ return }
 
-if(!$ENABLE_dk_info){ $global:ENABLE_dk_info = 1 }
-if(!$TRACE_ON_INFO) { $global:TRACE_ON_INFO = 0  }
-if(!$LINE_ON_INFO)  { $global:LINE_ON_INFO = 0   }
-if(!$PAUSE_ON_INFO) { $global:PAUSE_ON_INFO = 0  }
-if(!$HALT_ON_INFO)  { $global:HALT_ON_INFO = 0   }
-#$global:INFO_TAG = "  INFO: "
 ################################################################################
 # dk_info(message)
 #
@@ -16,19 +10,17 @@ if(!$HALT_ON_INFO)  { $global:HALT_ON_INFO = 0   }
 #
 function Global:dk_info($message) {
 	dk_debugFunc 1
-
-	#$allArgs = $PsBoundParameters.Values + ${args}
 	
-	
-	if($ENABLE_dk_info -ne 1){ return }
-		
-	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
-	dk_echo "${white}${INFO_TAG}${message}${clr}"
-	if ($TRACE_ON_INFO){ dk_echo "${white}*** TRACE_ON_INFO ***${clr}"; dk_stacktrace }
-	if ($LINE_ON_INFO) { dk_echo "${white}*** LINE_ON_INFO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
-	if ($PAUSE_ON_INFO){ dk_echo "${white}*** PAUSE_ON_INFO ***${clr}"; dk_pause }
-	if ($HALT_ON_INFO) { dk_echo "${white}*** HALT_ON_INFO ***${clr}";  dk_exit }
+	dk_call dk_log INFO "$message"
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -36,7 +28,6 @@ function Global:dk_info($message) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	
-	dk_info "test message from dk_info"
+	dk_call dk_info "test message from dk_info"
 }
 

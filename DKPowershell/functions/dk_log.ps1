@@ -112,11 +112,11 @@ function Global:dk_log() {
 	if("${level_ENABLE}" -ne "1"){ return }
 
 	
-	dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
-	if(${level_PAUSE} -eq 1){ dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_pause }
-	if(${level_TRACE} -eq 1){ dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
-	if(${level_LINE} -eq 1){  dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
-	if(${level_HALT} -eq 1){  dk_echo "${level_COLOR}*** HALT_ON_${_level_} ***${clr}"; dk_exit 0 } #OR HALT AND NOT NO_HALT)
+	dk_call dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
+	if(${level_PAUSE} -eq 1){ dk_call dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_call dk_pause }
+	if(${level_TRACE} -eq 1){ dk_call dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_call dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
+	if(${level_LINE} -eq 1){  dk_call dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
+	if(${level_HALT} -eq 1){  dk_call dk_echo "${level_COLOR}*** HALT_ON_${_level_} ***${clr}"; dk_call dk_exit 0 } #OR HALT AND NOT NO_HALT)
 }
 
 
@@ -125,14 +125,14 @@ function Global:dk_log() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_log "test dk_log message"
+	dk_call dk_log "test dk_log message"
 	
-	dk_log VERBOSE "test dk_log VERBOSE message"
-	dk_log DEBUG   "test dk_log DEBUG message"
-	dk_log INFO    "test dk_log INFO message"
-	dk_log NOTICE  "test dk_log NOTICE message"
-	dk_log WARNING "test dk_log WARNING message"
-	dk_log TODO    "test dk_log TODO message"
-	dk_log FIXME   "test dk_log FIXME message"
-	dk_log ERROR   "test dk_log ERROR message"
+	dk_call dk_log VERBOSE "test dk_log VERBOSE message"
+	dk_call dk_log DEBUG   "test dk_log DEBUG message"
+	dk_call dk_log INFO    "test dk_log INFO message"
+	dk_call dk_log NOTICE  "test dk_log NOTICE message"
+	dk_call dk_log WARNING "test dk_log WARNING message"
+	dk_call dk_log TODO    "test dk_log TODO message"
+	dk_call dk_log FIXME   "test dk_log FIXME message"
+	dk_call dk_log ERROR   "test dk_log ERROR message"
 }

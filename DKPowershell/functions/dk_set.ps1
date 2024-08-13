@@ -9,9 +9,18 @@ function Global:dk_set($variable, $value) {
 	dk_debugFunc 2
 
 	Set-Variable -Name $variable -Value $value -Scope Global
-	
-	dk_printVar $variable
+	dk_call dk_printVar $variable
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -21,6 +30,6 @@ function Global:dk_set($variable, $value) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_set myVar "value assigned with dk_set"	
-	dk_info "myVar = ${myVar}"
+	dk_call dk_set myVar "value assigned with dk_set"	
+	dk_call dk_info "myVar = ${myVar}"
 }

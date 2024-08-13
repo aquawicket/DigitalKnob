@@ -17,7 +17,7 @@ function Global:Keyboard_Loop() {
 		$keyCode = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode;
 		Write-Host keyCode = $keyCode
 		if(${keyCode} -eq 27){
-			dk_exit
+			dk_call dk_exit
 		}
 		#    if %keyCode% equ 13 echo "Enter"
 		#    if %keyCode% equ 27 echo "Esc" 
@@ -39,5 +39,5 @@ function Global:Keyboard_Loop() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_keyboard
+	dk_call dk_keyboard
 }

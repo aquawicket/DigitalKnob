@@ -10,8 +10,20 @@ if(!$dk_warning){ $dk_warning = 1 } else{ return }
 #
 function Global:dk_warning($message){
 	dk_debugFunc 1
-	dk_log WARNING "${message}"
+	
+	dk_call dk_log WARNING "${message}"
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19,5 +31,5 @@ function Global:dk_warning($message){
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_warning "test dk_warning message"
+	dk_call dk_warning "test dk_warning message"
 }

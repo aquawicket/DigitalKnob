@@ -10,8 +10,15 @@ if(!$dk_todo){ $dk_todo = 1 } else{ return }
 #
 function Global:dk_todo() {
 	dk_debugFunc 0 1
-	dk_log TODO "${message}"
+	
+	dk_call dk_log TODO "${message}"
 }
+
+
+
+
+
+
 
 
 
@@ -23,5 +30,5 @@ function Global:dk_todo() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_todo "test dk_todo message"
+	dk_call dk_todo "test dk_todo message"
 }

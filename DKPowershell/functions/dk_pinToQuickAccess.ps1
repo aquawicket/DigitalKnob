@@ -16,9 +16,19 @@ function Global:dk_pinToQuickAccess() {
 
 
 
+
+
+
+
+
+
+
+
+
+
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_pinToQuickAccess("C:\Users\Administrator\digitalknob")
+	dk_call dk_pinToQuickAccess("C:\Users\Administrator\digitalknob")
 }

@@ -10,8 +10,18 @@ if(!$dk_verbose){ $dk_verbose = 1 } else{ return }
 #
 function Global:dk_verbose($message){
 	dk_debugFunc 1
-	dk_log VERBOSE "${message}"
+	
+	dk_call dk_log VERBOSE "${message}"
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19,6 +29,5 @@ function Global:dk_verbose($message){
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	
-	dk_verbose "test dk_verbose message"
+	dk_call dk_verbose "test dk_verbose message"
 }

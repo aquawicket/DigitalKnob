@@ -16,9 +16,17 @@ function Global:dk_makeDirectory ($_path_) {
 
 
 
+
+
+
+
+
+
+
+
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_makeDirectory "MadeDirectory"
+	dk_call dk_makeDirectory "MadeDirectory"
 }

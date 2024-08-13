@@ -8,8 +8,15 @@ if(!$dk_pushAssets){ $dk_pushAssets = 1 } else{ return }
 function Global:dk_pushAssets() {
 	dk_debugFunc 0
 	
-    dk_todo
+    dk_call dk_todo
 }
+
+
+
+
+
+
+
 
 
 
@@ -18,6 +25,5 @@ function Global:dk_pushAssets() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_pushAssets
-
+	dk_call dk_pushAssets
 }

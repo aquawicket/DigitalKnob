@@ -7,13 +7,19 @@ if(!$dk_removeExtension){ $dk_removeExtension = 1 } else{ return }
 #
 function Global:dk_removeExtension($filepath) {
 	dk_debugFunc 1
-
-
-
+	
 	$removeExtension = $filepath.Substring(0, $filepath.lastIndexOf('.'))
-	dk_printVar removeExtension
+	dk_call dk_printVar removeExtension
 	return $removeExtension
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -21,8 +27,7 @@ function Global:dk_removeExtension($filepath) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
 	$filepath="C:/test/test2/xfile.version.1.2.ext"
-	$name = dk_removeExtension $filepath
-	dk_info "name = ${name}"
+	$name = dk_call dk_removeExtension $filepath
+	dk_call dk_info "name = ${name}"
 }

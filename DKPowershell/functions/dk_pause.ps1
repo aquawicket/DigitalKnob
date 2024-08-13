@@ -20,5 +20,5 @@ function GLOBAL:dk_pause() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_pause
+	dk_call dk_pause
 }

@@ -11,7 +11,7 @@ function Global:dk_realpath($path) {
 	
 	$realpath = Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror #Calls Resolve-Path but works for files that don't exist.
 	if(-not($realpath)){ $realpath = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-	dk_printVar realpath
+	dk_call dk_printVar realpath
 	return ${realpath}
 }
 
@@ -24,6 +24,6 @@ function Global:dk_realpath($path) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	$realpath = dk_realpath dk_load.ps1 
+	$realpath = dk_call dk_realpath dk_load.ps1 
 	dk_echo "realpath = ${realpath}"
 }

@@ -9,12 +9,20 @@ if(!$dk_getFiles){ $dk_getFiles = 1 } else{ return }
 function Global:dk_getFiles($path) {
 	dk_debugFunc 1
 
-	
-	
 	$files = Get-ChildItem $path | Where-Object {$_.PSIsContainer -eq $false} | Foreach-Object {$_.Name}
-	dk_printVar files
+	dk_call dk_printVar files
 	return $files
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -23,7 +31,6 @@ function Global:dk_getFiles($path) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	
-	$files = dk_getFiles "C:/Windows"
-	dk_echo "files = $files"
+	$files = dk_call dk_getFiles "C:/Windows"
+	dk_call dk_echo "files = $files"
 }	

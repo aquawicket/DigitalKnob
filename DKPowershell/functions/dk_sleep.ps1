@@ -6,7 +6,6 @@ if(!$dk_toLower){ $dk_toLower = 1 } else{ return }
 #
 function Global:dk_sleep($milliseconds) {
 	dk_debugFunc 1
-
 	
 	Start-Sleep -m $milliseconds
 }
@@ -17,5 +16,5 @@ function Global:dk_sleep($milliseconds) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_sleep 5000
+	dk_call dk_sleep 5000
 }
