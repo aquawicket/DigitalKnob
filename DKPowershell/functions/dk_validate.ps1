@@ -12,13 +12,13 @@ function Global:dk_validate($variable, $code) {
 
 	if($variable -and (Test-Path variable:$variable)){ return }
 	
-	if($code -and (Test-Path $code -PathType Leaf)){ dk_load $code }
+	if($code -and (Test-Path $code -PathType Leaf)){ dk_call dk_load $code }
 	
 	#eval "${code}"
-	Invoke-Expression $code
-	if(!(Test-Path variable:$variable)){ dk_error "dk_validate(): $variable is invalid" }
+	if($code){ Invoke-Expression $code }
+	if(!(Test-Path variable:$variable)){ dk_call dk_error "dk_validate(): $variable is invalid" }
 	
-	dk_printVar $variable
+	dk_call dk_printVar $variable
 }
 
 
@@ -28,17 +28,17 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$myVarA="a valid variable"
-	dk_validate myVarA "fill_myVarA"
-	dk_echo "myVarA = ${myVarA}"
+	dk_call dk_validate myVarA "fill_myVarA"
+	dk_call dk_echo "myVarA = ${myVarA}"
 		
-	dk_validate myVarB "fill_myVarB"
-	dk_echo "myVarB = ${myVarB}"
+	dk_call dk_validate myVarB "fill_myVarB"
+	dk_call dk_echo "myVarB = ${myVarB}"
 	
-	dk_validate myVarC "myVarC='a string value'"
-	dk_echo "myVarC = ${myVarC}"
+	dk_call dk_validate myVarC "myVarC='a string value'"
+	dk_call dk_echo "myVarC = ${myVarC}"
 	
-	dk_validate myVarD "dk_echo 'this will not fill myVarD'"
-	dk_echo "myVarD = ${myVarD}"
+	dk_call dk_validate myVarD "dk_call dk_echo 'this will not fill myVarD'"
+	dk_call dk_echo "myVarD = ${myVarD}"
 }
 
 function Global:fill_myVarA() {

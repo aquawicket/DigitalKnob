@@ -39,29 +39,6 @@ function DK() {
 	
 	
 	############ LOAD FUNCTION FILES ############
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__TIME__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__TIME__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__TIME__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__FILE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FILE__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__FILE__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__LINE__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__LINE__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__LINE__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__FUNCTION__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__FUNCTION__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__FUNCTION__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGC__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGC__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGC__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGV__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__ARGV__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGV__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/__CALLER__.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/__CALLER__.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/__CALLER__.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_debugFunc.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_load.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_load.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_load.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_color.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_color.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_color.ps1" }
-#	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_logo.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_logo.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_logo.ps1" }
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__TIME__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__FILE__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__LINE__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__FUNCTION__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGC__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__ARGV__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/__CALLER__.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_load.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_color.ps1
-#	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_logo.ps1
-	
 	dk_source __TIME__
 	dk_source __FILE__
 	dk_source __LINE__
@@ -75,7 +52,6 @@ function DK() {
 	
 	#dk_source ${DKSCRIPT_PATH}
 	
-
 	#Write-Output "env:PATH = $env:PATH"
 	#$env:PATH += ";${DKPOWERSHELL_FUNCTIONS_DIR}"
 	
@@ -142,9 +118,9 @@ function dk_DKHTTP_VARS(){
 ::#
 function dk_initFiles(){
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_source.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
-	. "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" 
+	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1
 	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_call.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" }
-	. "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1"
+	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1
 }
 
 ##################################################################################

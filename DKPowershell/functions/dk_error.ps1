@@ -10,7 +10,8 @@ if(!$dk_error){ $dk_error = 1 } else{ return }
 #
 function Global:dk_error($message) {
 	dk_debugFunc 1
-	dk_log ERROR "${message}"
+	
+	dk_call dk_log ERROR "${message}"
 }
 
 
@@ -19,5 +20,5 @@ function Global:dk_error($message) {
 function Global:DKTEST() { 
 	dk_debugFunc 0	
 	
-	dk_error "test dk_error message"
+	dk_call dk_error "test dk_error message"
 }

@@ -12,17 +12,31 @@ function Global:dk_call(){
 	#$rest = $args[1..($args.Length-1)]
 	#$first, $rest = $PsBoundParameters.Values + ${args}
 	$first, $rest = ${args}
-	if(!(Get-Command ${first})){
-		#if("${first}" =~ "^dk_[a-zA-Z0-9]+"){
-			dk_source ${first}
-		#} else {
-			#dk_commandExists dk_install  || dk_source dk_install
-			#dk_install ${1}
-		#}
-		if(!(Get-Command ${first})){ Write-Host "${1}: command not found" }
-	}
+#	if(!(Get-Command ${first})){
+#		if("${first}" -match "^dk_[a-zA-Z0-9]+"){
+#			dk_source ${first}
+#		} else {
+#			#dk_commandExists dk_install  || dk_source dk_install
+#			#dk_install ${1}
+#		}
+#		if(!(Get-Command ${first})){ Write-Host "${1}: command not found" }
+#	}
 	
-	& $first $rest
+	dk_source ${first}
+	
+#	if("${first}" -match "^dk_[a-zA-Z0-9]+"){
+#		Write-Host "-> ${args}"
+		#${args}
+		#Get-MockedData -MockFunctionName $first -MockFunctionParameters @{$rest}
+		#if($rest){ 
+		#	Invoke-Expression $first $rest 
+		#} else {
+		#	Invoke-Expression $first
+		#}
+#		& ${args}
+#	} else {
+		& $first $rest
+#	}
 }
 
 
