@@ -59,7 +59,7 @@ DK(){
 	dk_source __ARG__
 	dk_source __CALLER__
 	dk_source dk_debugFunc
-	dk_source dk_load
+	#dk_source dk_load
 	#dk_load dk_log
 	#dk_load dk_onExit    	# EXIT handler
 	dk_source dk_onExit    	# EXIT handler
@@ -313,8 +313,9 @@ dk_call(){
 	
 	if ! dk_commandExists ${1}; then
 		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then				# Is it a dk_ prefixed function?
-			dk_commandExists dk_load || dk_source dk_load
-			dk_load ${1}
+			#dk_commandExists dk_load || dk_source dk_load
+			#dk_load ${1}
+			dk_source ${1}
 		else													# Not a dk_ prefixed function
 			dk_commandExists dk_install || dk_source dk_install 
 			dk_install ${1}
@@ -322,7 +323,7 @@ dk_call(){
 		dk_commandExists ${1} || dk_error "${1}: command not found"
 	fi
 	
-	dk_echo "${cyan}dk_call>${clr} ${*}"
+	#dk_echo "${cyan}dk_call>${clr} ${*}"
 	"${@}"
 }
 

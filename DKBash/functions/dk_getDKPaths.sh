@@ -9,33 +9,34 @@
 dk_getDKPaths() {
 	dk_debugFunc 0
 
-	
 	if [ -n "${USERPROFILE-}" ]; then
-		dk_printVar USERPROFILE
+		dk_call dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
-		dk_commandExists "cygpath" && DIGITALKNOB_DIR=$(cygpath -u "${DIGITALKNOB_DIR}")
-		dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
+		dk_call dk_commandExists "cygpath" && DIGITALKNOB_DIR=$(cygpath -u "${DIGITALKNOB_DIR}")
+		dk_call dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
 	elif [ -n "${HOME-}" ]; then
-		dk_printVar HOME
+		dk_call dk_printVar HOME
 		DIGITALKNOB_DIR="${HOME}/digitalknob"
 	else
-		dk_error "dk_getDKPaths(): unable to locate user root directory"
+		dk_call dk_error "dk_getDKPaths(): unable to locate user root directory"
 	fi
-	dk_printVar DIGITALKNOB_DIR
-	dk_makeDirectory "${DIGITALKNOB_DIR}"
+	dk_call dk_printVar DIGITALKNOB_DIR
+	dk_call dk_makeDirectory "${DIGITALKNOB_DIR}"
 	
 	DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
-	dk_makeDirectory "${DKTOOLS_DIR}"
-	dk_printVar DKTOOLS_DIR
+	dk_call dk_makeDirectory "${DKTOOLS_DIR}"
+	dk_call dk_printVar DKTOOLS_DIR
 	
 	DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
-	dk_makeDirectory "${DKDOWNLOAD_DIR}"
-	dk_printVar DKDOWNLOAD_DIR
+	dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}"
+	dk_call dk_printVar DKDOWNLOAD_DIR
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-
-	dk_getDKPaths
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() { 
+	dk_debugFunc 0
+	
+	dk_call dk_getDKPaths
 }

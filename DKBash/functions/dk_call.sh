@@ -26,7 +26,7 @@ dk_call(){
 	#[ -z "$(command -v "${1}")" ] && dk_source ${1}
 	#[ -n "$(command -v "${1}")" ] || [$(read -rp '${1} command not found, press enter to exit')] || exit;
 	
-	dk_echo "${cyan}dk_call>${clr} ${*}"
+	#dk_echo "${cyan}dk_call>${clr} ${*}"
 	"${@}"
 }
 
