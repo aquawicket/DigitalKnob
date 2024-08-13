@@ -113,10 +113,10 @@ dkinit(){
 	dk_commandExists dk_defined          || dk_commandExists     eval   && dk_defined(){ ${builtin} eval value='$'{${1}+x}; [ -n "${value}" ]; }  # dk_defined variable
 	dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
 	dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
-	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }  # dk_pause
-#	dk_defined       true                || export true=0                                                                             # true
-#	dk_defined       false               || export false=1                                                                             # false
-#	dk_defined       ESC                 || export ESC=""                                                                            # Escape character
+	dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }     # dk_pause
+#	dk_defined       true                || export true=0                                                                                         # true
+#	dk_defined       false               || export false=1                                                                                        # false
+#	dk_defined       ESC                 || export ESC=""                                                                                      # Escape character
 #	dk_defined       clr                 || export clr="${ESC}[0m"
 #	dk_defined       black               || export black="${ESC}[30m"
 #	dk_defined       red                 || export red="${ESC}[31m"
@@ -146,11 +146,9 @@ dkinit(){
 # DKBASH_VARS()
 #
 DKBASH_VARS(){
-	dk_debugFunc 0
-	
-	dk_export BASH_SOURCE_DIR      $( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
-	dk_export DKBASH_DIR           $( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
-	dk_export DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions"
+	export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
+	export DKBASH_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
+	export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 	dk_pathExists "${DKBASH_FUNCTIONS_DIR}/DK.sh" || dk_error "${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
 	#dk_export PATH ${PATH}:${DKBASH_FUNCTIONS_DIR}
 }
@@ -159,12 +157,10 @@ DKBASH_VARS(){
 # DKHTTP_VARS()
 #
 DKHTTP_VARS(){
-	dk_debugFunc 0
-	
-	dk_export DKHTTP_DIGITALKNOB_DIR      "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	dk_export DKHTTP_DKBRANCH_DIR         "${DKHTTP_DIGITALKNOB_DIR}/Development"
-	dk_export DKHTTP_DKBASH_DIR           "${DKHTTP_DKBRANCH_DIR}/DKBash"
-	dk_export DKHTTP_DKBASH_FUNCTIONS_DIR "${DKHTTP_DKBASH_DIR}/functions"
+	export DKHTTP_DIGITALKNOB_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+	export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/Development"
+	export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
+	export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
 }
 
 ##################################################################################
