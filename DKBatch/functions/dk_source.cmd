@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%~1" goto:eof    &:: NOTE: whould we add the dirpath to the PATH environment variable here?
 	
 	
-	
+	:: If it's a dk_function, download if it doesn't exist then load it
 	if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause
 	if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
 	

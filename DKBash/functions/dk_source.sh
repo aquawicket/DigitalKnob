@@ -12,6 +12,7 @@ dk_source(){
 	# load if it's an existing full path file
 	[ -e ${1} ] && . ${1} && return
 
+	# If it's a dk_function, download if it doesn't exist then load it
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "downloading ${1} . . ."
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "ERROR: failed to download ${1}" || [$(read -rp 'press enter to exit')] || exit;

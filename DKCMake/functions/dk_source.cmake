@@ -5,20 +5,24 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_source(filepath)
 #
 #
-function(dk_source filepath)
+function(dk_source func)
 	dk_debugFunc(${ARGV})
 	
-	if(NOT EXISTS ${filepath})
-		dk_error("${filepath} dows not exist")
+	# load if it's an existing full path file
+	if(EXISTS ${func})
+		include(${func})
 	endif()
 	
-	include(${filepath} OPTIONAL RESULT_VARIABLE sourced_file)
-	
-	if(NOT sourced_file)
-		dk_error("${filepath} failed to load.  ${sourced_file}")
-	else()
-		dk_info("Loaded ${sourced_file}")
+	# If it's a dk_function, download if it doesn't exist then load it
+	if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
+		dk_info("downloading ${func} . . .")
+		dk_download(${DKHTTP_DKCMAKE_FUNCTIONS_DIR}/${func}.cmake ${DKBASH_FUNCTIONS_DIR}/${func}.cmake)
+		
 	endif()
+	if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
+		dk_error("ERROR: failed to download ${func}") 
+	endif()
+	include(${DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
 endfunction()
 
 
@@ -27,5 +31,6 @@ endfunction()
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_source("dk_info") 
+	dk_info("test message using dk_source to download it first")
 endfunction()
