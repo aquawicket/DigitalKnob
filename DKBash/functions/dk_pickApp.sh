@@ -1,7 +1,6 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_pickApp()
 #
@@ -9,24 +8,23 @@
 dk_pickApp() {
 	dk_debugFunc 0
 
-
-	dk_echo
-	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
+	dk_call dk_echo
+	dk_call dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
 	
-	dk_echo
-    dk_echo " 1) HelloWorld"
-    dk_echo " 2) DKCore"
-    dk_echo " 3) DKJavascript"
-    dk_echo " 4) DKSDL"
-    dk_echo " 5) DKSDLRml"
-    dk_echo " 6) DKDomTest"
-    dk_echo " 7) DKTestAll"
-    dk_echo " 8) Enter Manually"
-    dk_echo " 9) Clear Screen"
-    dk_echo "10) Go Back"
-    dk_echo "11) Reload"
-	dk_echo "12) Exit"
-    dk_echo
+	dk_call dk_echo
+    dk_call dk_echo " 1) HelloWorld"
+    dk_call dk_echo " 2) DKCore"
+    dk_call dk_echo " 3) DKJavascript"
+    dk_call dk_echo " 4) DKSDL"
+    dk_call dk_echo " 5) DKSDLRml"
+    dk_call dk_echo " 6) DKDomTest"
+    dk_call dk_echo " 7) DKTestAll"
+    dk_call dk_echo " 8) Enter Manually"
+    dk_call dk_echo " 9) Clear Screen"
+    dk_call dk_echo "10) Go Back"
+    dk_call dk_echo "11) Reload"
+	dk_call dk_echo "12) Exit"
+    dk_call dk_echo
 	
 	read input
 	if [ "${input}" = "1" ]; then
@@ -44,23 +42,28 @@ dk_pickApp() {
 	elif [ "${input}" = "7" ]; then
 		APP="DKTestAll"
 	elif [ "${input}" = "8" ]; then
-		dk_enterManually
+		dk_call dk_enterManually
 	elif [ "${input}" = "9" ]; then
-		dk_clearScreen
+		dk_call dk_clearScreen
 	elif [ "${input}" = "10" ]; then
 		UPDATE=
 	elif [ "${input}" = "11" ]; then
 		dk_call dk_reload
 	elif [ "${input}" = "12" ]; then
-		dk_exit 0
+		dk_call dk_exit 0
 	else
-		dk_warning "invalid selection"
+		dk_call dk_warning "invalid selection"
 	fi
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
-	dk_pickApp
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
+	
+	dk_call dk_pickApp
 }
