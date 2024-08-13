@@ -21,9 +21,8 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	#$global:DKPOWERSHELL_FUNCTION_DIR_ = "$DKPOWERSHELL_FUNCTION_DIR\"
 	. $DKPOWERSHELL_FUNCTION_DIR\DK.ps1
 
-	dk_load dk_validate
-	dk_validate DKIMPORTS_DIR "dk_validateBranch"
-	dk_validate GITBASH_EXE "dk_installGit"
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate GITBASH_EXE "dk_call dk_installGit"
 
 	Write-Host "PSCommandPath = $PSCommandPath"
 	$global:DKBASH_FUNCTIONS_DIR = "$DKBRANCH_DIR\DKBash\functions"

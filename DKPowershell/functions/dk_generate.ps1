@@ -155,7 +155,7 @@ if($TYPE -eq "Debug"){
 	}
 	
 	###### CMake Configure ######
-	dk_call dk_load $DKIMPORTS_DIR/cmake/dk_call dk_installCmake.ps1
+	dk_call dk_source $DKIMPORTS_DIR/cmake/dk_installCmake.ps1
 	dk_call dk_installCmake
 	
 	dk_call dk_echo

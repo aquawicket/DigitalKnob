@@ -24,6 +24,6 @@ function Global:dk_realpath($path) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	$realpath = dk_call dk_realpath dk_load.ps1 
+	$realpath = dk_call dk_realpath DK.ps1 
 	dk_echo "realpath = ${realpath}"
 }
