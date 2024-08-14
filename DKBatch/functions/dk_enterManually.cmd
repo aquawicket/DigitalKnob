@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
     %dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
-    set /p input= 
+	%dk_call% dk_keyboardInput input
 
     set "APP=_%input%_"
   

@@ -19,8 +19,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     echo 5) Clear Screen
     echo 6) Go Back
     echo 7) Exit
-    %dk_call% dk_unset choice
-    set /p choice=Please select a build type: 
+	
+	%dk_call% dk_echo 
+    %dk_call% dk_echo "Please select a build type."
+	%dk_call% dk_keyboardInput choice
 
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do? 
     if "%choice%"=="1" %dk_call% dk_set TYPE "Debug"    & goto:eof

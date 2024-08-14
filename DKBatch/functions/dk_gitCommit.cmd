@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_gitDiffSummary
 	
     echo "Please enter some details about this commit, then press enter."
-    set /p message=">" 
+	%dk_call% dk_keyboardInput message
         
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
     cd %DKBRANCH_DIR%
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%USER_EMAIL%"=="" (
         %dk_call% dk_echo
         echo please enter an email address
-        set /p input=">" 
+        %dk_call% dk_keyboardInput input
         "%GIT_EXE%" config --global user.email "%input%"
         %dk_call% dk_echo
         echo "git user.email %input% saved"
@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%USER_NAME%"=="" (
         %dk_call% dk_echo
         echo please enter a username
-        set /p input=">" 
+        %dk_call% dk_keyboardInput input
         "%GIT_EXE%" config --global user.name "%input%"
         %dk_call% dk_echo
         echo "git user.name %input% saved"
