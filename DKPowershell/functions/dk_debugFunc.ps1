@@ -12,23 +12,25 @@ if(!$DKSTACK_marker)		{ $global:DKSTACK_marker = 1 }
 # dk_debugFunc()
 #
 #
-function Global:dk_debugFunc() {	
+function Global:dk_debugFunc() {
 	$_MIN_ = $args[0]
 	$_MAX_ = $args[1]
-	$_FUNCTION_ = "$(__FUNCTION__ 2)"
-	$_ARGC_ = "$(__ARGC__ 2)"
-	$_ARGV_ = "$(__ARGV__ 2)"
-	#Write-Host "############ ${_FUNCTION_}(${_ARGV_})  MIN:${_MIN_} MAX:${_MAX_} ############"
+	$FRAME = 2	
+	$_TIME_     = "$(__TIME__)"
+	$_FILE_     = "$(__FILE__     $FRAME)"
+	$_LINE_     = "$(__LINE__     $FRAME)"
+	$_FUNCTION_ = "$(__FUNCTION__ $FRAME)"
+	$_ARGC_     = "$(__ARGC__     $FRAME)"
+	$_ARGV_     = "$(__ARGV__     $FRAME)"
 	if($_MIN_){ 
-		if(${_ARGC_} -lt ${_MIN_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}" }
+		if(${_ARGC_} -lt ${_MIN_}){ Write-Host "${_FUNCTION_}(${_ARGV_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}" }
 	}
 	if($_MAX_){
-		if(${_ARGC_} -gt ${_MAX_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" }
+		if(${_ARGC_} -gt ${_MAX_}){ Write-Host "${_FUNCTION_}(${_ARGV_}): too many arguments. Maximum is ${_MAX_}, got ${_ARGC_}" }
 	} else {
 		if(${_ARGC_} -gt ${_MIN_}){ Write-Host "error" }
-		if(${_ARGC_} -gt ${_MIN_}){ Write-Host "$(__FUNCTION__ 2)(${_ARGV_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" }
+		if(${_ARGC_} -gt ${_MIN_}){ Write-Host "${_FUNCTION_}(${_ARGV_}): too many arguments. Maximum is ${_MIN_}, got ${_ARGC_}" }
 	}
-	
 	
 	if($ENABLE_dk_debugFunc -ne 1){ return }
 	if($(__FUNCTION__ 2) -eq "dk_echo"){ return }
@@ -49,6 +51,7 @@ function Global:dk_debugFunc() {
 	$global:blue = "${ESC}[34m"
 	$global:clr = "${ESC}[0m"
 	
-	Write-Host -NoNewline "${cyan}[$(__TIME__)]${indent}$(__FILE__ 2)`:$(__LINE__ 2)".PadLeft(25); Write-Host "    ${blue}$(__FUNCTION__ 2)($(__ARGV__ 2))${clr}";
+	Write-Host -NoNewline "${cyan}[${_TIME_}]${indent}${_FILE_}`:${_LINE_}".PadLeft(25); Write-Host "    ${blue}${_FUNCTION_}(${_ARGV_})${clr}";
 #####################################################################################################################################
 }
+

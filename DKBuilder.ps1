@@ -1,6 +1,8 @@
 
 ###### DKBuilder ######
 
+$ENABLE_dk_debugFunc = 1
+
 ###### DKINIT ######
 $DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/functions"
 $DKPOWERHELL_DIR = "$PWD/DKPowershell"
