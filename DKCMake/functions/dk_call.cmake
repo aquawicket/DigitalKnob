@@ -9,11 +9,22 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@func				- The name of the .cmake function file as well as the name of the function
 #	@args (optional) 	- The arguments to pass to the function
 #
-function(dk_call func) #parameters
+function(dk_call)
 	dk_debugFunc(${ARGV})
 	
-	dk_load(${func})
-	dk_eval("${func}($ARGN)")
+	if(NOT COMMAND ${ARGV0})
+		#if("${ARGV0}" =~ ^dk_[a-zA-Z0-9]+ ]])
+			dk_source(${ARGV0})
+		#else()				
+		#	dk _commandExists(dk_install)  || dk_source(dk_install)
+		#	dk _install ${1}
+		#endif()
+		if(NOT COMMAND ${ARGV0})
+			dk_error("${ARGV0}: command not found")
+		endif()
+	endif()
+	
+	dk_eval("${ARGV)")
 endfunction()
 
 
@@ -24,5 +35,5 @@ endfunction()
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_call(dk_info "test message using dk_call")
 endfunction()
