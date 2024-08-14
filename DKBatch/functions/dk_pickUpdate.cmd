@@ -29,10 +29,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     echo  10) Reload
     echo  11) Exit
     %dk_call% dk_echo 
-    echo  Press Enter To Skip
-    %dk_call% dk_unset choice
-    set /p "choice=Choose a selection: " 
-    
+    ::echo  Press Enter To Skip
+    ::%dk_call% dk_unset choice
+    ::set /p "choice=Choose a selection: " 
+    %dk_call% dk_echo "Choose a selection. Press enter to skip."
+	%dk_call% dk_keyboardInput choice
+	
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%
     if "%choice%"=="1" %dk_call% dk_gitUpdate

@@ -12,9 +12,9 @@ function(dk_pause)
 #	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
 	find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
-		#dk_validate(DKBATCH_DIR "dk_getDKPaths()")
-		#execute_process(COMMAND cmd /c ${DKBATCH_DIR}/functions/dk_pause.cmd & dk_pause WORKING_DIRECTORY ${DKBATCH_DIR}/functions)
 		execute_process(COMMAND cmd /c pause)
+		#dk_validate(DKBATCH_DIR "dk_getDKPaths()")
+		#execute_process(COMMAND cmd /c ${DKBATCH_FUNCTIONS_DIR}/dk_pause.cmd)
 		return()
 	endif()
 	
@@ -33,7 +33,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_pause()

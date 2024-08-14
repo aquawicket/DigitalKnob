@@ -8,6 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_reload)
 	dk_debugFunc(${ARGV})
 
+	dk_todo()
 endfunction()
 
 

@@ -282,6 +282,10 @@ function(dk_getDKPaths)
 		dk_printVar(DKDOWNLOAD_DIR)
 
 
+
+
+
+
 	# try to deduce anything missing in the environment variables
 	###### Get DKBRANCH_DIR ######
 			if(NOT DEFINED DKBRANCH_DIR)
@@ -320,6 +324,13 @@ function(dk_getDKPaths)
 			endif()
 		endif()
 		dk_printVar(DKBASH_DIR)
+			
+			if(NOT DEFINED DKBASH_FUNCTIONS_DIR)
+				if(EXISTS "${DKBASH_DIR}/functions")
+					set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions" CACHE PATH "" FORCE)
+				endif()
+			endif()
+			dk_printVar(DKBASH_FUNCTIONS_DIR)
 		
 		if(NOT DEFINED DKBATCH_DIR)
 			if(EXISTS "${DKBRANCH_DIR}/DKBatch")
@@ -328,12 +339,34 @@ function(dk_getDKPaths)
 		endif()
 		dk_printVar(DKBATCH_DIR)
 		
+			if(NOT DEFINED DKBATCH_FUNCTIONS_DIR)
+				if(EXISTS "${DKBATCH_DIR}/functions")
+					set(DKBATCH_FUNCTIONS_DIR "${DKBATCH_DIR}/functions" CACHE PATH "" FORCE)
+				endif()
+			endif()
+			dk_printVar(DKBATCH_FUNCTIONS_DIR)
+			
+			if(NOT DEFINED DKBATCH_FUNCTIONS_DIR_)
+				if(EXISTS "${DKBATCH_DIR}/functions/")
+					set(DKBATCH_FUNCTIONS_DIR_ "${DKBATCH_DIR}/functions/" CACHE PATH "" FORCE)
+					dk_replaceAll(${DKBATCH_FUNCTIONS_DIR_} "/" "\\" DKBATCH_FUNCTIONS_DIR_)
+				endif()
+			endif()
+			dk_printVar(DKBATCH_FUNCTIONS_DIR_)
+		
 		if(NOT DEFINED DKCMAKE_DIR)
 			if(EXISTS "${DKBRANCH_DIR}/DKCMake")
 				set(DKCMAKE_DIR "${DKBRANCH_DIR}/DKCMake" CACHE PATH "" FORCE)
 			endif()
 		endif()
 		dk_printVar(DKCMAKE_DIR)
+			
+			if(NOT DEFINED DKCMAKE_FUNCTIONS_DIR)
+				if(EXISTS "${DKCMAKE_DIR}/functions")
+					set(DKCMAKE_FUNCTIONS_DIR "${DKCMAKE_DIR}/functions" CACHE PATH "" FORCE)
+				endif()
+			endif()
+			dk_printVar(DKCMAKE_FUNCTIONS_DIR)
 		
 		if(NOT DEFINED DKCPP_DIR)
 			if(EXISTS "${DKBRANCH_DIR}/DKCpp")
@@ -418,12 +451,14 @@ function(dk_getDKPaths)
 			set(DIGITALKNOB_DIR "${DIGITALKNOB_DIR}" CACHE PATH "" FORCE)
 		endif()
 	endif()
+	dk_assertPath(DIGITALKNOB_DIR)
 	dk_printVar(DIGITALKNOB_DIR)
 	
 	if(NOT DEFINED DIGITALKNOB)
 		dk_basename(${DIGITALKNOB_DIR} DIGITALKNOB)
 		set(DIGITALKNOB "${DIGITALKNOB}" CACHE INTERNAL "" FORCE)
 	endif()
+	dk_assert(DIGITALKNOB)
 	dk_printVar(DIGITALKNOB)
 	
 		if(NOT DEFINED DKTOOLS_DIR)
@@ -431,6 +466,7 @@ function(dk_getDKPaths)
 				set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools" CACHE PATH "" FORCE)
 			endif()
 		endif()
+		dk_assertPath(DKTOOLS_DIR)
 		dk_printVar(DKTOOLS_DIR)
 		
 		if(NOT DEFINED DKDOWNLOAD_DIR)
@@ -438,6 +474,7 @@ function(dk_getDKPaths)
 				set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download" CACHE PATH "" FORCE)
 			endif()
 		endif()
+		dk_assertPath(DKDOWNLOAD_DIR)
 		dk_printVar(DKDOWNLOAD_DIR)
 	
 	

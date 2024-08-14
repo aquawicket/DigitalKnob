@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #	@msg	- The message to print
 #
-function(dk_fixme msg)
+function(dk_fixme) #msg
 	dk_debugFunc(${ARGV})
 
 	dk_log(FIXME "${ARGV0}")

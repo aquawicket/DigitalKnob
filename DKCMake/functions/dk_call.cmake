@@ -24,7 +24,8 @@ function(dk_call)
 		endif()
 	endif()
 	
-	dk_eval("${ARGV)")
+	dk_echo("${ARGV0}(${ARGV1})")
+	dk_eval("${ARGV0}(${ARGV1})")
 endfunction()
 
 
@@ -35,5 +36,6 @@ endfunction()
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
-	dk_call(dk_info "test message using dk_call")
+	dk_call(dk_debug "\"test message using dk_call\"")
+	dk_call(dk_pause)
 endfunction()
