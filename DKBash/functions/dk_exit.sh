@@ -1,18 +1,22 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
+[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1
 ##################################################################################
 # dk_exit(rtn_code)
 #
 #
 dk_exit() {
-	dk_debugFunc 1
+	dk_debugFunc 0 1
 
 	# TODO: when open with icon, we can use exec to keep the window open
-	#[ $SHLVL -gt 1 ] && dk_call dk_echo "exec ${SHELL}" || dk_call dk_echo "exit ${*}"
-	#[ $SHLVL -eq 1 ] && read -rp 'Press enter to exit...' key
+	#[ $SHLVL -gt 1 ] && dk_call dk_echo "exec ${SHELL}"
+	#[ $SHLVL -eq 1 ] && dk_call dk_pause
 	
 	[ ${1-} -eq 0 ] && trap '' EXIT
+	
+	dk_call dk_echo "dk_exit ${1-}"
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT ***" && dk_call dk_pause
 	builtin exit ${1-}
 }
 

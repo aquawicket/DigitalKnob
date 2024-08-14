@@ -29,7 +29,6 @@ function Global:dk_echo($message) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	
 	echo "This is a normal echo commmand"
 	dk_call dk_echo
 	dk_call dk_echo ""

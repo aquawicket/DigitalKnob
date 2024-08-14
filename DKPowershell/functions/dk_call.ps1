@@ -6,7 +6,7 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 #
 #
 function Global:dk_call(){
-	#dk_debugFunc 1 99
+	#dk_debugFunc 1 9
 
 	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args}
 	

@@ -7,7 +7,6 @@ if(!$dk_logo){ $dk_logo = 1 } else{ return }
 function Global:dk_logo() {
 	dk_debugFunc 0
 
-
 	dk_call dk_echo "${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______  "
 	dk_call dk_echo "${lblue}   |     \   |   |  ____   |      |    |_____| |      |____/  | \  | |     | |_____] "
 	dk_call dk_echo "${blue}   |_____/ __|__ |_____| __|__    |    |     | |_____ |    \_ |  \_| |_____| |_____]  "
