@@ -30,5 +30,6 @@ goto:eof
 	
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	cmd /V:ON /K call "%DKBATCH_FILE%"
+	cmd /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
+	echo ERRORLEVEL = %ERRORLEVEL% & pause
 goto:eof
