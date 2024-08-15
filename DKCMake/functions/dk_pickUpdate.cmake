@@ -61,7 +61,6 @@ function(dk_pickUpdate)
 		dk_echo("${clr}")
 	endif()
 	
-	#read input
 	dk_keyboardInput(input)
 	if("${input}" EQUAL "0")
 		dk_echo("repeating last selection")

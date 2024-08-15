@@ -50,6 +50,7 @@ function(dk_buildMain)
 	endif()
 	
 	while(1)
+		dk_echo("loop ${UPDATE} ${APP} ${TARGET_OS} ${TYPE}")
 		if(NOT DEFINED UPDATE)
 			dk_pickUpdate()
 			continue()
