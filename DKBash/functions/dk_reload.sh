@@ -13,6 +13,7 @@ dk_reload() {
 	dk_call dk_clearScreen
 	dk_call dk_info "reloading ${DKSCRIPT_PATH}. . ."
 	
+	
 	###### METHOD 1 ######
 	dk_call dk_fileWrite "${DKBASH_DIR}/reload" "${DKSCRIPT_PATH}"
 	dk_call dk_exit 0
@@ -41,6 +42,6 @@ dk_reload() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pause
+	dk_call dk_pause "Press any key to test dk_reload"
 	dk_call dk_reload
 }

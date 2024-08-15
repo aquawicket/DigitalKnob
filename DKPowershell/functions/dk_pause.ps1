@@ -26,9 +26,9 @@ function GLOBAL:dk_pause() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_pause
-	dk_pause "Pause with a custom message"
-	dk_pause "${red}Pause ${green}with ${blue}colorful ${yellow}message${clr}"
-	dk_echo  "pause with no message"
-	dk_pause " "
+	dk_call dk_pause
+	dk_call dk_pause "Pause with a custom message"
+	dk_call dk_pause "${red}Pause ${green}with ${blue}colorful ${yellow}message${clr}"
+	dk_call dk_echo  "pause with no message"
+	dk_call dk_pause " "
 }

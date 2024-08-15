@@ -15,8 +15,8 @@ function Global:dk_reload() {
 	
 	
 	###### Method 1 ######
-	dk_fileWrite "${DKPOWERSHELL_DIR}/reload" "${DKSCRIPT_PATH}" 
-	dk_exit 0 
+	dk_call dk_fileWrite "${DKPOWERSHELL_DIR}/reload" "${DKSCRIPT_PATH}" 
+	dk_call dk_exit 0 
 	
 
     ###### Method 2 ######
@@ -29,6 +29,6 @@ function Global:dk_reload() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_pause
+	dk_call dk_pause "Press any key to test dk_reload"
 	dk_call dk_reload
 }

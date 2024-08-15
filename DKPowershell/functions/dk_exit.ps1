@@ -12,17 +12,13 @@ function Global:dk_exit() { # $exit_code
 	#$allArgs = $PsBoundParameters.Values + ${args}
 	#exit $allArgs
 	
-	# TODO: when open with icon, we can use exec to keep the window open
-	#[ $SHLVL -gt 1 ] -and dk_call dk_echo "exec $SHELL" -or dk_call dk_echo "exit $*"
-	#[ $SHLVL -eq 1 ] -and read -rp 'Press enter to exit...' key
-	
 	if(!($args[0])){ 
 		$exit_code = 0 	## default exit code is 0
 	} else {
 		$exit_code = $args[0]
 	}
 	dk_call dk_echo "dk_exit $exit_code"
-	if(${PAUSE_ON_EXIT} -eq 1){ dk_call dk_echo "*** PAUSE_ON_EXIT ***"; dk_call dk_pause }
+	if(${PAUSE_ON_EXIT} -eq 1){ dk_call dk_echo "*** PAUSE_ON_EXIT exit_code:${exit_code} ***"; dk_call dk_pause }
 	exit $exit_code
 }
 

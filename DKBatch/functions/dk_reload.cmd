@@ -32,6 +32,6 @@ goto:
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_pause
+	%dk_call% dk_pause "Press any key to test dk_reload"
 	%dk_call% dk_reload
 goto:eof

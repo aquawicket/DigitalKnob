@@ -32,6 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_echo 
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
 	%dk_call% dk_keyboardInput choice
+	::set /p "choice=" 
 	
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%

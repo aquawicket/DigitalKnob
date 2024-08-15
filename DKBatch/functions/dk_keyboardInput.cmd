@@ -1,4 +1,3 @@
-@if (@X) == (@Y) @end /*
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
@@ -8,8 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_keyboardInput
 	call dk_debugFunc 1
+	echo dk_keyboardInput
 	
-	::%dk_call% dk_unset %~1
+	%dk_call% dk_unset %~1
     set /p "%~1=" 
 goto:eof
 
@@ -26,4 +26,3 @@ goto:eof
 	%dk_call% dk_keyboardInput input
 	%dk_call% dk_echo "you typed '%input%'"
 goto:eof
-*/
