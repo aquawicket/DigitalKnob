@@ -9,7 +9,7 @@ if(!$dk_pause){ $dk_pause = 1 } else{ return }
 function GLOBAL:dk_pause() {
 	dk_debugFunc 0 1
 
-	if(!($args[0])){
+	if(!($args)){
 		$pause_msg = "Press and any to continue...";
 	} else {
 		$pause_msg = "$args";
