@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #	@msg	- The message to print
 #
-function(dk_todo msg)
+function(dk_todo)
 	dk_debugFunc(${ARGV})
 
 	dk_log(TODO "${ARGV0}")
