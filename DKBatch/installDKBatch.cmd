@@ -27,10 +27,13 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "DKBATCH_FILE=%~2"
 	
+	
+	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
 	cmd /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
 	
+	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
 	::###### reload ######

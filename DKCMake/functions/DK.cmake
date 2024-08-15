@@ -57,6 +57,8 @@ function(DKINIT)
 
 	############ LOAD FUNCTION FILES ############
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	include(${DKCMAKE_FUNCTIONS_DIR}/dk_dirname.cmake)
+	include(${DKCMAKE_FUNCTIONS_DIR}/dk_basename.cmake)
 	#dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
 	dk_load(dk_createOsMacros)

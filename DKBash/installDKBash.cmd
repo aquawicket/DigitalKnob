@@ -26,14 +26,19 @@ goto:eof
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
 	set "DKBASH_FILE=%~3"
+	
+	
+	::###### run script ######
 	%GITBASH_EXE% %DKBASH_FILE% && (echo returned TRUE) || (echo returned FALSE)
 	
+	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
-	pause    &:: FIXME:  bash only returns 0
+	&:: FIXME:  bash only returns 0
 	
 	::###### reload ######
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload
 	cls
 	goto:runDKBash
+	
 goto:eof

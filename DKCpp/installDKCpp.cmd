@@ -100,9 +100,9 @@ goto:eof
 	set "COMPILER_EXE=%~1"
 	set "DKCPP_FILE=%~2"
 	
+	::###### Compile Code ######
 	echo compiling ...
 	if exist temp.exe  del temp.exe
-	
 	::### Clang/Clang++ ###
 	%COMPILER_EXE% -DDKTEST=1 -o temp -static "%DKCPP_FILE%"
 	
@@ -118,7 +118,6 @@ goto:eof
 	::libzstd.dll
 	::zlib1.dll
 	
-	
 	if not exist "temp.exe" (
 		echo: 
 		echo ERROR: compilation of %DKCPP_FILE% failed.
@@ -126,7 +125,16 @@ goto:eof
 		goto:eof
 	)
 	
+	::###### run executable ######
 	title %DKCPP_FILE%
-	::cls
-    cmd /v:on /k "temp.exe" && echo success: return value: !errorLevel! || echo failed: return value: !errorLevel!
+    cmd /v:on /k "temp.exe" && (echo returned TRUE) || (echo returned FALSE)
+	
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKCpp
 goto:eof

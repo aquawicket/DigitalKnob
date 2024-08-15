@@ -27,8 +27,12 @@ goto:eof
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
 	set "POWERSHELL_EXE=%~2"
 	set "DKPOWERSHELL_FILE=%~3"
+	
+	
+	::###### run script ######
 	call %POWERSHELL_EXE% -Command %DKPOWERSHELL_FILE%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
+	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
 	::###### reload ######
