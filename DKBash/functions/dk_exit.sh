@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "dk_exit"
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 [ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1
@@ -17,9 +18,10 @@ dk_exit() {
 	#[ "${exit_code}" = "0" ] && trap '' EXIT
 	trap '' EXIT
 	
-	dk_call dk_echo "dk_exit ${exit_code}"
+	dk_call dk_echo "BASH: dk_exit ${exit_code}"
 	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT ***" && dk_call dk_pause
-	builtin exit ${exit_code}
+	
+	exit ${exit_code}
 }
 
 
@@ -32,5 +34,6 @@ DKTEST() {
 	
 	#dk_call dk_exit
 	#dk_call dk_exit 0
-	dk_call dk_exit 123
+	#dk_call dk_exit 123
+	dk_exit 123
 }

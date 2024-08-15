@@ -14,7 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_command)
 	dk_debugFunc(${ARGV})
 	
-	dk_getOptionValue(RESULT_VARIABLE		${ARGV})
+	dk_getOptionValue(RESULT_VARIABLE       ${ARGV})
 	dk_getOptionValue(RESULTS_VARIABLE    	${ARGV})
 	dk_getOptionValue(OUTPUT_VARIABLE    	${ARGV})
 	dk_getOptionValue(ERROR_VARIABLE 		${ARGV})

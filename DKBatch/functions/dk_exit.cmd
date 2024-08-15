@@ -12,6 +12,8 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 	if "%~1"=="" (set "exit_code=0") else (set "exit_code=%~1")
 	%dk_call% dk_echo "dk_exit %exit_code%"
 	if "%PAUSE_ON_EXIT%" == "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT ***" && %dk_call% dk_pause
+	
+	echo exit %exit_code%
 	exit %exit_code%
 goto:eof
 

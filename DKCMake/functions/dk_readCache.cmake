@@ -21,7 +21,7 @@ function(dk_readCache)
 	dk_echo("reading cache...")
 	set(count 0)
 	
-	dk_fixme()
+	dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 #	while read p; do
 #		if [ "${count}" = "0" ]; then 
 #			_APP_=$(builtin echo "${p}" | tr -d '\r')

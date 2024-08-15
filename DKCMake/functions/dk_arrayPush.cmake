@@ -23,7 +23,7 @@ function(dk_arrayPush array element1)
 		dk_error("arguments invalid: ${_array_}")
 	endif()
 	
-	#dk_fixme()
+	#dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 	#list(APPEND ${name} ${element1})
 	dk_append(${name} ${element1})
 endfunction()
