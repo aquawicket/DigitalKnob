@@ -8,21 +8,36 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_pause) 
 	dk_debugFunc(${ARGV})
-
 #	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
+
+
+	###### ${pause_msg} ######
+	if(ARGV0)
+		set(pause_msg "${ARGV0}")
+	else()
+		set(pause_msg "Press and any to continue...")
+	endif()
+	dk_echo("${pause_msg}")
+	
+	###### Cmd ######
 	find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
-		execute_process(COMMAND cmd /c pause)
-		#dk_validate(DKBATCH_DIR "dk_getDKPaths()")
-		#execute_process(COMMAND cmd /c ${DKBATCH_FUNCTIONS_DIR}/dk_pause.cmd)
+		dk_replaceAll(${CMD_EXE} "/" "\\" CMD_EXE)   # convert to windows path delimiters
+		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
 		return()
 	endif()
 	
+	###### Powershell ######
+	find_program(POWERSHELL_EXE powershell.exe)
+	if(POWERSHELL_EXE)
+		execute_process(COMMAND ${POWERSHELL_EXE} Read-Host)
+		return()
+	endif()
+	
+	###### Bash ######
 	find_program(BASH_EXE bash)
 	if(BASH_EXE)
-		dk_validate(DKBASH_DIR "dk_getDKPaths()")
-		#execute_process(COMMAND bash -c 'source ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh; dk_pause')
-		execute_process(COMMAND ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh & dk_pause)
+		execute_process(COMMAND ${BASH_EXE} read -p)
 		return()
 	endif()
 		
@@ -39,4 +54,8 @@ function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_pause()
+	dk_pause("Pause with a custom message")
+	dk_pause("${red}Pause ${green}with ${blue}colorful ${yellow}message${clr}")
+	dk_echo("pause with no message")
+	dk_pause(" ")
 endfunction()
