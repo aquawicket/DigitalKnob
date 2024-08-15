@@ -33,6 +33,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_executeProcess)
 	dk_debugFunc(${ARGV})
 	
+	
 	dk_getOptionValues(COMMAND 						${ARGV})
 	dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})
 	dk_getOptionValue(TIMEOUT 						${ARGV})

@@ -71,6 +71,7 @@ if(NOT GIT_EXE)
 endif()
 
 dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
+
 dk_set(GIT_VERSION ${GIT_VERSION})
 dk_info("###### git ######")
 dk_info("${GIT_EXE}")

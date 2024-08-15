@@ -45,7 +45,7 @@ function(dk_command)
 	else()
 		dk_executeProcess(${MERGED})
 	endif()
-	
+
 	if(${RESULT_VARIABLE})
 		set(${RESULT_VARIABLE} ${${RESULT_VARIABLE}} PARENT_SCOPE)
 	endif()
