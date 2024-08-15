@@ -9,7 +9,6 @@
 dk_pickOs() {
 	dk_debugFunc 0
 
-
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
 	dk_echo	""
@@ -140,6 +139,7 @@ dk_pickOs() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-
+	dk_debugFunc 0
+	
 	dk_pickOs
 }
