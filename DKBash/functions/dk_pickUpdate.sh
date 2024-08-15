@@ -9,19 +9,20 @@
 dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache APP TARGET_OS TYPE
+	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	#dk_call dk_printVar _APP_
+	#dk_call dk_printVar _TARGET_OS_ 
+	#dk_call dk_printVar _TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
 	dk_call dk_echo
 	
-	#dk_call dk_printVar _APP_
-	#dk_call dk_printVar _TARGET_OS_ 
-	#dk_call dk_printVar _TYPE_
+	
 	
 	if [ $behind -lt 1 ]; then
-		if [ -n "${APP-}" ] && [ -n "${TARGET_OS-}" ] && [ -n "${TYPE-}s" ]; then
-			dk_call dk_echo " 0) Repeat cache [$APP - $TARGET_OS - $TYPE]"
+		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
 		fi
 		dk_call dk_echo " 1) Git Update"   
 		dk_call dk_echo " 2) Git Commit"
