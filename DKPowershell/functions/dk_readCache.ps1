@@ -17,13 +17,13 @@ function Global:dk_readCache($APP, $TARGET_OS, $TYPE) {
 	
 	foreach($line in Get-Content "${DKBRANCH_DIR}/cache") {
 		if("${count}" -eq "0"){
-			Set-Variable -scope 1 -Name "$APP" -Value $line
+			Set-Variable -scope global -Name "$APP" -Value $line
 		}
 		if("${count}" -eq "1"){
-			Set-Variable -scope 1 -Name "$TARGET_OS" -Value $line
+			Set-Variable -scope global -Name "$TARGET_OS" -Value $line
 		}
 		if("${count}" -eq "2"){
-			Set-Variable -scope 1 -Name "$TYPE" -Value $line
+			Set-Variable -scope global -Name "$TYPE" -Value $line
 		}
 		$count++
 	}
@@ -35,9 +35,9 @@ function Global:dk_readCache($APP, $TARGET_OS, $TYPE) {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-    dk_readCache APP TARGET_OS TYPE
+    dk_readCache _APP_ _TARGET_OS_ _TYPE_
 	
-	dk_printVar $APP
-	dk_printVar $TARGET_OS
-	dk_printVar $TYPE
+	dk_printVar $_APP_
+	dk_printVar $_TARGET_OS_
+	dk_printVar $_TYPE_
 }

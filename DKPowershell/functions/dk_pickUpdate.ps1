@@ -9,6 +9,9 @@ function Global:dk_pickUpdate() {
 	dk_debugFunc 0
 
 	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	dk_printVar $_APP_
+	dk_printVar $_TARGET_OS_
+	dk_printVar $_TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
