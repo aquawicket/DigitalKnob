@@ -35,6 +35,7 @@ function(dk_gitCheckRemote)
 		execute_process(COMMAND ${GIT_EXE} rev-list --count ${branch}..origin/${branch} WORKING_DIRECTORY ${WORKING_DIRECTORY} OUTPUT_VARIABLE behind OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ECHO STDOUT)
 		
 		dk_info("${ahead} commits ahead, ${behind} commits behind")
+		dk_set(behind ${behind})
 	endif()
 endfunction()
 

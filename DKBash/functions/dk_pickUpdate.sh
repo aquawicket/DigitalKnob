@@ -18,7 +18,6 @@ dk_pickUpdate() {
 	dk_call dk_gitCheckRemote
 	dk_call dk_echo
 
-	
 	if [ $behind -lt 1 ]; then
 		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
 			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"

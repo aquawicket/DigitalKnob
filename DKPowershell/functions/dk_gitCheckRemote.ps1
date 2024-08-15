@@ -9,7 +9,7 @@ function Global:dk_gitCheckRemote() {
 	dk_debugFunc 0
 
 	$ahead=0
-	$behind=0
+	$global:behind=0
 	if(dk_call dk_pathExists "${DKBRANCH_DIR}/.git"){
 		cd "${DKBRANCH_DIR}"
 		dk_call $GIT_EXE remote update
