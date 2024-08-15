@@ -36,12 +36,12 @@ dk_arrayIndexOf() {
 		
 			# return value
 			[ ${#} -gt 2 ] && eval ${3}=${arrayIndexOf} && return 
-			dk_call dk_return ${arrayIndexOf} && return
+			dk_return ${arrayIndexOf} && return
 		fi
 	done
 	local arrayIndexOf=-1
 	[ ${#} -gt 2 ] && eval ${3}=${arrayIndexOf} && return
-	dk_call dk_return ${arrayIndexOf} && return
+	dk_return ${arrayIndexOf} && return
 }
 
 

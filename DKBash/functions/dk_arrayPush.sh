@@ -33,7 +33,7 @@ dk_arrayPush() {
 	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	dk_call dk_return ${#array[@]} && return				# command substitution return
+	dk_return ${#array[@]} && return				# command substitution return
 }
 
 

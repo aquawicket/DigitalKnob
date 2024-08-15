@@ -27,8 +27,8 @@ dk_arrayAt() {
 	### return value ###
 	#[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
 	[ ${#} -gt 2 ] && eval ${3}='${'${1}'[${2}]}' && return	# return value using return variable
-	dk_call dk_return "${arrayAt}" && return						# return value using command substitution
-	#dk_call dk_return "${"${1}"[${2}]}" && return					# return value using command substitution
+	dk_return "${arrayAt}" && return						# return value using command substitution
+	#dk_return "${"${1}"[${2}]}" && return					# return value using command substitution
 }
 
 

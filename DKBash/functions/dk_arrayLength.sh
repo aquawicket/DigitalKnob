@@ -19,7 +19,7 @@ dk_arrayLength() {
 	local arrayLength=${#array[@]}
 	
 	[ ${#} -gt 1 ] && eval ${2}=${arrayLength} && return
-	dk_call dk_return ${arrayLength} && return
+	dk_return ${arrayLength} && return
 }
 
 

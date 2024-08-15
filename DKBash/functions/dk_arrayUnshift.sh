@@ -28,7 +28,7 @@ dk_arrayUnshift() {
 	### return value ###
 	eval ${1}='("${array[@]}")'	# FIXME: command substitution cannot alter parent variables
 	[ ${#} -gt 2 ] && eval ${3}=${_length_} && return	# return value using return variable
-	dk_call dk_return ${_length_} && return					# return value using command substitution
+	dk_return ${_length_} && return					# return value using command substitution
 }
 
 

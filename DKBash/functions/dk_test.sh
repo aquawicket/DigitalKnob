@@ -46,9 +46,9 @@ dk_test() {
 	
 	if [ ${#} -eq 2 ]; then
 		local ret_val="${2-}"
-		dk_call dk_return "sending back: $_input_"; return
+		dk_return "sending back: $_input_"; return
 	else
-		dk_call dk_return "sending back: $_input_"; return
+		dk_return "sending back: $_input_"; return
 	fi
 }
 

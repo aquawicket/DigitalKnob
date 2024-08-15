@@ -11,14 +11,14 @@ dk_getNativePath() {
 	dk_call dk_validate HOST_OS "dk_call dk_getHostTriple"
 	if [ "${HOST_OS}" = "win" ]; then
 		dk_call dk_getWindowsPath ${1} _winpath_
-		#dk_call dk_return "${_winpath_//\\/\\\\}"; return
+		#dk_return "${_winpath_//\\/\\\\}"; return
 		local ret_val="${2-}"
 		dk_call dk_printVar ret_val
-		dk_call dk_return "${_winpath_}"; return
+		dk_return "${_winpath_}"; return
 	else
 		local ret_val="${2-}"
 		dk_call dk_printVar ret_val
-		dk_call dk_return "$(dk_readlink -f "${1}")"; return
+		dk_return "$(dk_readlink -f "${1}")"; return
 	fi
 }
 

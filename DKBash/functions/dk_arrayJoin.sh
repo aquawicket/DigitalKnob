@@ -32,7 +32,7 @@ dk_arrayJoin() {
 	done
 	
 	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' && return
-	dk_call dk_return "${arrayJoin}" && return	
+	dk_return "${arrayJoin}" && return	
 }
 
 

@@ -14,7 +14,7 @@ dk_dirname() {
 	### return value ###
 	dk_call dk_printVar _dirname_
 	[ ${#} -gt 1 ] && eval "${2}=${_dirname_}" && return  # return value when using rtn_var parameter 
-	dk_call dk_return ${_dirname_}; return						  # return value when using command substitution 
+	dk_return ${_dirname_}; return						  # return value when using command substitution 
 }
 
 
