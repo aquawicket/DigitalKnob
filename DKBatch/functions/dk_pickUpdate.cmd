@@ -32,9 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_echo 
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
 	%dk_call% dk_keyboardInput choice
-	::set /p "choice=" 
 	
-    ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%
     if "%choice%"=="1" %dk_call% dk_gitUpdate
     if "%choice%"=="2" %dk_call% dk_gitCommit
@@ -46,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%choice%"=="8" %dk_call% dk_clearScreen
     if "%choice%"=="9" %dk_call% dk_clearCmakeCache & %dk_call% dk_deleteTempFiles
     if "%choice%"=="10" %dk_call% dk_reload
-    if "%choice%"=="11" %dk_call% dk_exit
+    if "%choice%"=="11" %dk_call% dk_exit 0
         
     set UPDATE=true
 goto:eof
