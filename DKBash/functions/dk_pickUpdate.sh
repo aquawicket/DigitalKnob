@@ -60,7 +60,7 @@ dk_pickUpdate() {
 		dk_call dk_echo "${clr}"
 	fi
 	
-	read input
+	dk_call dk_keyboardInput input
 	if [ "${input}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
 		APP=${_APP_}

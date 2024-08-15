@@ -26,7 +26,7 @@ dk_pickApp() {
 	dk_call dk_echo "12) Exit"
     dk_call dk_echo
 	
-	read input
+	dk_call dk_keyboardInput input
 	if [ "${input}" = "1" ]; then
 		APP="HelloWorld"
 	elif [ "${input}" = "2" ]; then

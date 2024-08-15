@@ -54,7 +54,7 @@ dk_pickOs() {
 	dk_echo "38) Exit"
 	dk_echo
 	
-	read input
+	dk_call dk_keyboardInput input
 	if [ "${input}" = "1" ]; then
 		TARGET_OS="${HOST_TRIPLE-}"
 	elif [ "${input}" = "2" ]; then

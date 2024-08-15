@@ -19,7 +19,7 @@ dk_pickType() {
 	dk_call dk_echo " 6) Exit"
 	dk_call dk_echo
 	
-	read input
+	dk_call dk_keyboardInput input
 	if [ "${input}" = "1" ]; then
 		TYPE="Debug"
 	elif [ "${input}" = "2" ]; then

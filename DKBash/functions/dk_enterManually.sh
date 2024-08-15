@@ -9,7 +9,7 @@ dk_enterManually() {
 	dk_debugFunc 0
 	
 	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
-	read input
+	dk_call dk_keyboardInput input
 	
 	APP="_${input}_"
 	

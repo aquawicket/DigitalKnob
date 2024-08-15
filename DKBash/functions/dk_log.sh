@@ -111,10 +111,10 @@ dk_log() {
 	dk_echo "${!level_COLOR}${!level_TAG-}${_message_}${clr}"
 	#[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 	
-	[ ${!level_PAUSE} -eq 1 ] && dk_echo "${!level_COLOR}*** PAUSE_ON_${_level_} ***${clr}" && dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
-	[ ${!level_TRACE} -eq 1 ] && dk_echo "${!level_COLOR}*** TRACE_ON_${_level_} ***${clr}" && dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
-	[ ${!level_LINE} -eq 1 ]  && dk_echo "${!level_COLOR}*** LINE_ON_${_level_} ***${clr}"  && dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true #OR HALT AND NOT NO_HALT)
-	[ ${!level_HALT} -eq 1 ]  && dk_echo "${!level_COLOR}*** HALT_ON_${_level_} ***${clr}"  && dk_exit 0; true #OR HALT AND NOT NO_HALT)
+	[ ${!level_PAUSE} -eq 1 ] && dk_echo "${!level_COLOR}*** PAUSE_ON_${_level_} ***${clr}" && dk_call dk_pause; true #OR PAUSE AND NOT NO_PAUSE)
+	[ ${!level_TRACE} -eq 1 ] && dk_echo "${!level_COLOR}*** TRACE_ON_${_level_} ***${clr}" && dk_call dk_stacktrace; true #OR TRACE AND NOT NO_TRACE)
+	[ ${!level_LINE} -eq 1 ]  && dk_echo "${!level_COLOR}*** LINE_ON_${_level_} ***${clr}"  && dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; true #OR HALT AND NOT NO_HALT)
+	[ ${!level_HALT} -eq 1 ]  && dk_echo "${!level_COLOR}*** HALT_ON_${_level_} ***${clr}"  && dk_call dk_exit 0; true #OR HALT AND NOT NO_HALT)
 }
 
 
