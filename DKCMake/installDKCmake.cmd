@@ -29,9 +29,13 @@ goto:eof
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
 	set "CMAKE_FILE=%~3"
 	set "CMAKE_FILE=%CMAKE_FILE:\=/%"
-    "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%CMAKE_FILE%" && (echo returned TRUE) || (echo returned FALSE)
-	echo ERRORLEVEL = %ERRORLEVEL% & pause
+    "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%CMAKE_FILE%"
 	
-	::echo pause installDKCmake.cmd:34
-	::pause
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::### reload ###
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKCMake
 goto:eof

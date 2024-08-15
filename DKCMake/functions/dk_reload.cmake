@@ -8,7 +8,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_reload)
 	dk_debugFunc(${ARGV})
 
-	dk_todo()
+	dk_info("reloading ${DKSCRIPT_NAME}. . .")
+	dk_fileWrite(${DKCMAKE_DIR}/reload "${DKSCRIPT_PATH}")
+	dk_exit(0)
 endfunction()
 
 
@@ -16,5 +18,6 @@ endfunction()
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	dk_debugFunc(${ARGV})
 	
+	dk_pause()
 	dk_reload()
 endfunction()
