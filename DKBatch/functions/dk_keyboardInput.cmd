@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_keyboardInput
 	call dk_debugFunc 1
 	
-	%dk_call% dk_unset %~1
+	::%dk_call% dk_unset %~1
     set /p "%~1=" 
 goto:eof
 

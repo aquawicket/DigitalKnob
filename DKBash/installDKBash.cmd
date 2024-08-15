@@ -27,6 +27,12 @@ goto:eof
 	set "GITBASH_EXE=%~2"
 	set "DKBASH_FILE=%~3"
 	%GITBASH_EXE% %DKBASH_FILE% && (echo returned TRUE) || (echo returned FALSE)
-	echo ERRORLEVEL = %ERRORLEVEL%
+	
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	pause
+	::### reload ###
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKBash
 goto:eof

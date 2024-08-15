@@ -9,17 +9,13 @@ echo "dk_exit"
 #
 dk_exit() {
 	dk_debugFunc 0 1
-
-	# TODO: when open with icon, we can use exec to keep the window open
-	#[ $SHLVL -gt 1 ] && dk_call dk_echo "exec ${SHELL}"
-	#[ $SHLVL -eq 1 ] && dk_call dk_pause
 	
-	[ -n "${1-}" ] && exit_code=${1} || exit_code=0  ## default exit code is 0
-	#[ "${exit_code}" = "0" ] && trap '' EXIT
 	trap '' EXIT
+	[ -z "${exit_code-}" ] && export exit_code=0
+	[ $? -gt ${exit_code} ] && export exit_code=$?
+	[ ${1-} -gt ${exit_code} ] && export exit_code=$1
 	
-	dk_call dk_echo "BASH: dk_exit ${exit_code}"
-	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT ***" && dk_call dk_pause
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause
 	
 	exit ${exit_code}
 }
@@ -35,5 +31,5 @@ DKTEST() {
 	#dk_call dk_exit
 	#dk_call dk_exit 0
 	#dk_call dk_exit 123
-	dk_exit 123
+	dk_exit 13
 }

@@ -22,7 +22,7 @@ dk_onError() {
 	#[ "$(command -v d k_stacktrace)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/d k_stacktrace.sh
 	#d k_stacktrace
 	
-	dk_call dk_error "### dk_onError ###"
+	dk_call dk_error "### dk_onError: $1:$2 ###"
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 

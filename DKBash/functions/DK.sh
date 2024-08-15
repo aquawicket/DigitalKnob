@@ -77,7 +77,7 @@ DK(){
 			dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
 			dk_call dk_echo
 			dk_call dk_pause
-			dk_call dk_exit 0
+			dk_call dk_exit $?
 		fi
 	fi
 }

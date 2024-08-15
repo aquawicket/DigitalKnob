@@ -9,11 +9,12 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 :dk_exit
 	call dk_debugFunc 0 1
 	
-	if "%~1"=="" (set "exit_code=0") else (set "exit_code=%~1")
-	%dk_call% dk_echo "dk_exit %exit_code%"
-	if "%PAUSE_ON_EXIT%" == "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT ***" && %dk_call% dk_pause
+	if "%exit_code%" equ "" set "exit_code=0"
+	if %errorlevel% gtr %exit_code% set "exit_code=%errorlevel%"
+	if %~1 gtr %exit_code% set "exit_code=%~1"
 	
-	echo exit %exit_code%
+	if "%PAUSE_ON_EXIT%" == "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT: exit_code:%exit_code% ***" && %dk_call% dk_pause
+	
 	exit %exit_code%
 goto:eof
 
@@ -26,5 +27,5 @@ goto:eof
 	
 	::%dk_call% dk_exit
 	::%dk_call% dk_exit 0
-	%dk_call% dk_exit 123
+	%dk_call% dk_exit 13
 goto:eof
