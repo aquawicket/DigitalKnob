@@ -8,9 +8,10 @@
 dk_keyboardInput() {
 	dk_debugFunc 1
 	
-	dk_call dk_unset $1
+	#dk_call dk_unset ${1-}
     read input
-	eval "${1}=${input}"
+	dk_echo "input = ${input-}"
+	eval $1='"${input}"'
 }
 
 
