@@ -36,6 +36,8 @@ dk_readCache() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_readCache APP TARGET_OS TYPE
-	dk_echo "APP = ${APP}, TARGET_OS = ${TARGET_OS}, TYPE = ${TYPE}"
+	dk_call dk_readCache APP TARGET_OS TYPE
+	dk_call dk_printVar APP
+	dk_call dk_printVar TARGET_OS
+	dk_call dk_printVar TYPE
 }

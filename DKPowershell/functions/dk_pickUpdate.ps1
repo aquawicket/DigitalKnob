@@ -8,7 +8,7 @@ if(!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
 function Global:dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache
+	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
