@@ -11,6 +11,7 @@ function(dk_readCache)
 		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
+	dk_validate(DKBRANCH_DIR "dk_validateBranch()")
 	if(NOT EXISTS "${DKBRANCH_DIR}/cache")
 		return()
 	endif()
@@ -20,27 +21,30 @@ function(dk_readCache)
 	
 	dk_echo("reading cache...")
 	set(count 0)
-	
-	dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 #	while read p; do
-#		if [ "${count}" = "0" ]; then 
-#			_APP_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _APP_
-#		fi
-#		if [ "${count}" = "1" ]; then
-#			_TARGET_OS_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _TARGET_OS_ 
-#		fi
-#		if [ "${count}" = "2" ]; then
-#			_TYPE_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _TYPE_
-#		fi
-#		#if [ "${count}" = "3" ]; then
-#		#	_DKENV_=$(echo ${p} | tr -d '\r')
-#		#	#dk_printVar _DKENV_
-#		#fi
+#		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "1" ] && _TARGET_OS_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "2" ] &&	_TYPE_=$(builtin echo "${p}" | tr -d '\r')
+#		#[ "${count}" = "3" ] && _DKENV_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
 #	done < "${DKBRANCH_DIR}"/cache
+
+	file(STRINGS "${DKBRANCH_DIR}/cache" lines)
+	foreach(line ${lines})
+		if(${count} EQUAL 0)
+			set(_APP_ ${line})
+		endif()
+		if(${count} EQUAL 1)
+			set(_TARGET_OS_ ${line})
+		endif()
+		if(${count} EQUAL 2)
+			set(_TYPE_ ${line})
+		endif()
+		math(EXPR count "${count}+1")
+	endforeach()
+	
+	dk_echo("_APP_ = ${_APP_}, _TARGET_OS_ = ${_TARGET_OS_}, _TYPE_ = ${_TYPE_}")
+
 endfunction()
 
 

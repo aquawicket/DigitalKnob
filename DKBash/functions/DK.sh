@@ -60,7 +60,7 @@ DK(){
 	dk_source dk_onError   	# ERR handler
 	dk_call dk_color
 	dk_call dk_logo
-	. "${DKSCRIPT_PATH}"
+	dk_call dk_load "${DKSCRIPT_PATH}"
 
 	
 	###### DKTEST MODE ######

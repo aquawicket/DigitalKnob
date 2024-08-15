@@ -16,8 +16,6 @@ function(dk_gitCheckRemote)
 		#set(ahead -1)
 		#set(behind -1)
 		
-		dk_fixme("${CMAKE_CURRENT_FUNCTION}")
-		
 #		cd "${DKBRANCH_DIR}"
 		set(WORKING_DIRECTORY "${DKBRANCH_DIR}")
 		

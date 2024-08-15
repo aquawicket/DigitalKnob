@@ -26,7 +26,7 @@ goto:eof
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
 	set "DKBASH_FILE=%~3"
-	%GITBASH_EXE% "%DKBASH_FILE% && (echo returned TRUE) || (echo returned FALSE)
+	%GITBASH_EXE% %DKBASH_FILE% && (echo returned TRUE) || (echo returned FALSE)
 	echo ERRORLEVEL = %ERRORLEVEL%
 	pause
 goto:eof
