@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ##############################################################################
-# dk_pause()
+# dk_pause(pause_msg)
 # 
 #	Pause execution and wait for keypress to continue
 #
