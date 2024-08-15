@@ -8,10 +8,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_reload
 	call dk_debugFunc 0
 	
-	if not exist "%DKSCRIPT_PATH%" dk_error "DKSCRIPT_PATH is invalid"; goto:eof
+	if not exist "%DKSCRIPT_PATH%" %dk_call% dk_error "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && goto:eof
 	
-    dk_echo
-    dk_echo "reloading %DKSCRIPT_PATH%"
+	%dk_call% dk_clearScreen
+	%dk_call% dk_info "reloading %DKSCRIPT_PATH%. . ."
+	
+	
+	::###### METHOD 1 ######
+	%dk_call% dk_fileWrite "%DKBATCH_DIR%\reload" "%DKSCRIPT_PATH%"
+	%dk_call% dk_exit 0
+	
+	
+    ::###### METHOD 2 ######
     start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
 goto:
 
@@ -24,5 +32,6 @@ goto:
 :DKTEST
 	call dk_debugFunc 0
 	
+	%dk_call% dk_pause
 	%dk_call% dk_reload
 goto:eof

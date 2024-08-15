@@ -28,5 +28,13 @@ goto:eof
 	set "POWERSHELL_EXE=%~2"
 	set "DKPOWERSHELL_FILE=%~3"
 	call %POWERSHELL_EXE% -Command %DKPOWERSHELL_FILE%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
-	echo ERRORLEVEL = %ERRORLEVEL% & pause
+	
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKPowershell
+	
 goto:eof

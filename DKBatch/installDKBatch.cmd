@@ -22,7 +22,6 @@ if "%~1" neq "" goto:runDKBatch
 goto:eof
 
 
-
 :runDKBatch
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
@@ -31,5 +30,13 @@ goto:eof
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
 	cmd /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
-	echo ERRORLEVEL = %ERRORLEVEL% & pause
+	
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKBatch
+	
 goto:eof

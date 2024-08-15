@@ -10,8 +10,16 @@ function Global:dk_reload() {
 
 	if(!(dk_call dk_pathExists "${DKSCRIPT_PATH}")){ dk_call dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
 	
-	#dk_call dk_echo
-    dk_call dk_echo "reloading ${DKSCRIPT_PATH}"
+	dk_call dk_clearScreen
+	dk_call dk_echo "reloading ${DKSCRIPT_PATH}"
+	
+	
+	###### Method 1 ######
+	dk_fileWrite "${DKPOWERSHELL_DIR}/reload" "${DKSCRIPT_PATH}" 
+	dk_exit 0 
+	
+
+    ###### Method 2 ######
 	. "${DKSCRIPT_PATH}" #& dk_call dk_exit & dk_call dk_exit & dk_call dk_exit
 }
 
@@ -21,5 +29,6 @@ function Global:dk_reload() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
+	dk_call dk_pause
 	dk_call dk_reload
 }
