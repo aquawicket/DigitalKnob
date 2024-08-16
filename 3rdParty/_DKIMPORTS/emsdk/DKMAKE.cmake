@@ -6,30 +6,36 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 #dk_depend(python)
 dk_depend(python3)
+dk_assert(PYTHON3)
 
-
+dk_validate(HOST "dk_getHostTriple()")
 #dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main) # TAG ce74ca2)
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
 dk_import(https://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip)
+dk_assert(EMSDK)
 
+set(bat ".bat")
+dk_assert(bat)
 
 dk_command(${EMSDK}/emsdk${bat} install latest)
 
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
 dk_command(${EMSDK}/emsdk${bat} activate latest --permanent)
 
-dk_command(set PATH=%PATH%;${PYTHON} & ${EMSDK}/emsdk_env${bat})
+dk_prependEnvPath(${PYTHON3})
+dk_command(${EMSDK}/emsdk_env${bat})
 
 WIN_HOST_dk_command(${EMSDK}/emsdk${bat} install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk${bat} activate mingw-4.6.2-32bit)
 
-
+if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 		"var USE_SDL_IMAGE = false;"	NO_HALT)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 		"var USE_SDL_TTF = false;"		NO_HALT)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 		"var USE_SDL_NET = false;"		NO_HALT)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 		"var USE_SDL_MIXER = false;"	NO_HALT)
 dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;"	"var USE_PTHREADS = true;"		NO_HALT)
+endif()
 
 dk_set(EMSDK_ENV 	${EMSDK}/emsdk_env${bat})
 dk_set(EMAR			${EMSDK}/upstream/emscripten/emar${bat})
@@ -65,3 +71,5 @@ dk_printVar(EMSCRIPTEN_MAKE_PROGRAM)
 #dk_prependEnvPath(${EMSDK})
 #dk_prependEnvPath(${EMSDK}/node/16.20.0_64bit/bin)
 #dk_prependEnvPath(${EMSDK}/upstream/emscripten)
+
+dk_pause()

@@ -4,11 +4,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://wiki.termux.com/wiki/Python
 
 
+dk_validate(HOST "dk_getHostTriple()")
 WIN_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
 MAC_HOST_dk_set (PYTHON_DL ttps://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
+dk_assert(PYTHON_DL)
 
-
-dk_findProgram(PYTHON3_EXE python3 ${PYTHON3})
+dk_findProgram(PYTHON3_EXE python "${PYTHON3}")
 
 if(NOT EXISTS ${PYTHON3_EXE})
 	ANDROID_HOST_dk_command(pkg install python -y)
@@ -16,7 +17,8 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	MAC_HOST_dk_import(${PYTHON_DL})
 	WIN_HOST_dk_import(${PYTHON_DL})
 	
-	dk_findProgram(PYTHON3_EXE python ${PYTHON3})
+
+	dk_findProgram(PYTHON3_EXE python "${PYTHON3}")
 endif()
 
 

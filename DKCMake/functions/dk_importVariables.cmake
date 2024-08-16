@@ -114,7 +114,9 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(PLUGIN_URL_LENGTH)
 	endif()
 
-	dk_validate(DKIMPORTS_DIR "dk_getDKPaths()") 
+	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_assert(CMAKE_CURRENT_LIST_DIR)
+	dk_assert(DKIMPORTS_DIR)
 	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		# PLUGIN_IMPORT
 	#if(${DKIMPORTS_DIR} IN_LIST CMAKE_CURRENT_LIST_DIR)
 	#	set(PLUGIN_IMPORT 1)
