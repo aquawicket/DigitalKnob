@@ -47,18 +47,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
 	:: Try dk_powershellEval
-	if not exist "%destination%_DOWNLOADING" dk_powershellEval ^
+	%dk_call% dk_echo "Downloading via dk_powershellEval"
+	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershellEval ^
         "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 		
 	:: Try powershell
+	%dk_call% dk_echo "Downloading via powershell"
 	if not exist "%destination%_DOWNLOADING" powershell -Command ^
         "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 		
 	:: Try curl
+	%dk_call% dk_echo "Downloading via dk_powershellEval"
 	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
 	
 	:: Try certutil
@@ -81,6 +84,6 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"
+	::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
+	::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"
 goto:eof
