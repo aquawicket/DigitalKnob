@@ -1,0 +1,20 @@
+@echo off
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+
+::#################################################################################
+:: dk_buildAll()
+::
+::
+:dk_buildAll
+	call dk_debugFunc 0
+	
+goto:eof
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+	call dk_debugFunc 0
+	
+	%dk_call% build_all
+goto:eof
