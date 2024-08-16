@@ -16,7 +16,7 @@ function(dk_logo)
 	dk_echo("${clr}")
                                                                         
 endfunction()
-
+dk_logo()
 
 
 

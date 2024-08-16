@@ -139,7 +139,7 @@ dk_buildMain() {
 		
 		dk_createCache
 		dk_generate	
-		dk_build
+		dk_buildApp
 		
 		unset UPDATE
 		unset APP
@@ -696,11 +696,11 @@ dk_generate() {
 	
 
 ##################################################################################
-# dk_build()
+# dk_buildApp()
 #
 #
-dk_build() {
-	dk_verbose "dk_build(${*})"
+dk_buildApp() {
+	dk_verbose "dk_buildApp(${*})"
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo

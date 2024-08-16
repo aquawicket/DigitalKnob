@@ -206,7 +206,7 @@ dk_getHostTriple() {
 	dk_call dk_printVar HOST_OS
 
 
-	### Get the HOST_ARCH ###
+	### Set HOST_ARCH ###
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)

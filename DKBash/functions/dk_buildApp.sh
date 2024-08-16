@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
-# dk_build()
+# dk_buildApp()
 #
 #
-dk_build() {
+dk_buildApp() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -49,5 +49,5 @@ dk_build() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_build
+	dk_call dk_buildApp
 }

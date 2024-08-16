@@ -55,7 +55,7 @@ dk_buildMain() {
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
-		dk_call dk_build
+		dk_call dk_buildApp
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset APP

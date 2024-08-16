@@ -171,7 +171,7 @@ dk_color() {
 		dk_call dk_echo "${clr} COLOR OFF"
 	fi
 }
-dk_call dk_color 1
+#dk_call dk_color 1
 
 
 
