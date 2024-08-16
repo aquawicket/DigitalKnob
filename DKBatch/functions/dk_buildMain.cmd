@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 		%dk_call% dk_createCache
 		%dk_call% dk_generate
-		%dk_call% dk_build
+		%dk_call% dk_buildAll
 
 		%dk_call% dk_unset UPDATE
 		%dk_call% dk_unset APP

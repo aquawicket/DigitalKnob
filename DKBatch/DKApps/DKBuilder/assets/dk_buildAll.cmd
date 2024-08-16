@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::#################################################################################
-:: dk_build()
+:: dk_buildAll()
 ::
 ::
-:build_all
+:dk_buildAll
 	call dk_debugFunc 0
 	
 goto:eof

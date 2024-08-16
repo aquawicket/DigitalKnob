@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::#####################################################################
-::# dk_build()
+::# dk_buildApp()
 ::#
 ::#
-:dk_build
+:dk_buildApp
 	call dk_debugFunc 0
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
@@ -35,5 +35,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_build
+	%dk_call% dk_buildApp
 goto:eof
