@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_build){ $dk_build = 1 } else{ return }
+if(!$dk_buildApp){ $dk_buildApp = 1 } else{ return }
 
 ##################################################################################
-# dk_build()
+# dk_buildApp()
 #
 #
-function Global:dk_build() {
+function Global:dk_buildApp() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
@@ -52,5 +52,5 @@ function Global:dk_build() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_build
+	dk_call dk_buildApp
 }
