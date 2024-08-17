@@ -8,8 +8,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_createShortcut
 	call dk_debugFunc 2
 	
-	::powershell /? 1>nul || %dk_call% dk_error "dk_createShortcut requires powershell"
-	
 	set "shortcut_path=%~1"
 	set "target_path=%~2"
 	

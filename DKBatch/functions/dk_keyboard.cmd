@@ -23,6 +23,7 @@ goto:eof
 	
 	:: Read keys via PowerShell
 	powershell ^
+	dk_powershell ^
 	   Write-Host 0; ^
 	   while ($key -ne 27) { ^
 		  $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode; ^

@@ -69,8 +69,8 @@ call dk_set VERSION_dk_messageBox 3
 	goto:eof
 		
 	:messageBox_4
-		:: with powershell
-		powershell [Reflection.Assembly]::LoadWithPartialName("""System.Windows.Forms""");[Windows.Forms.MessageBox]::show("""%~1""", """My PopUp Message Box""")
+		:: with dk_powershell
+		%dk_call% dk_powershell [Reflection.Assembly]::LoadWithPartialName("""System.Windows.Forms""");[Windows.Forms.MessageBox]::show("""%~1""", """My PopUp Message Box""")
 		echo errorlevel = %errorlevel%
 	goto:eof
 goto:eof

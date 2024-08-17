@@ -13,7 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	
 	:: https://stackoverflow.com/a/4732316/688352
-	cmd /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+	::cmd /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+	%dk_call% cmd /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 	
     ::for /f "usebackq delims=" %%Z in (`powershell . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1; %~1 "%~2"`) do echo %%Z
 	echo "%DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1"

@@ -63,7 +63,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if not defined DKPLUGINS_DIR set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
 		:: /DKPowershell
 		if not defined DKPOWERSHELL_DIR set "DKPOWERSHELL_DIR=%DKBRANCH_DIR%\DKPowershell"
-			if not defined DKPOWERSHELL_FUNCTIONS_DIR set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPowershell_DIR%\functions"
+			if not defined DKPOWERSHELL_FUNCTIONS_DIR set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_DIR%\functions"
 		:: /DKPython
 		if not defined DKPYTHON_DIR set "DKPYTHON_DIR=%DKBRANCH_DIR%\DKPython"
 			if not defined DKPYTHON_FUNCTIONS_DIR set "DKPYTHON_FUNCTIONS_DIR=%DKPYTHON_DIR%\functions"

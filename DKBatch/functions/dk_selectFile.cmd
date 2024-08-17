@@ -10,6 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
 	for /f "delims=" %%I in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
+	for /f "delims=" %%I in ('%dk_call% dk_powershell -noprofile "iex (${%~f0} | out-string)"') do (
 		endlocal & set %1=%%~I
 	)
 goto:eof
