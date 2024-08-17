@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::if not defined DIGITALKNOB set "DIGITALKNOB=D i g i t a l K n o b"
 	if not defined DIGITALKNOB set "DIGITALKNOB=digitalknob"
 
-   set "DIGITALKNOB_DIR=%DKHOME_DIR%\%DIGITALKNOB%"
+    set "DIGITALKNOB_DIR=%DKHOME_DIR%\%DIGITALKNOB%"
 
     :: create directory if it does not exist
     if not exist "%DIGITALKNOB_DIR%" %dk_call% dk_makeDirectory "%DIGITALKNOB_DIR%"

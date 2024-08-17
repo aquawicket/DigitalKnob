@@ -55,6 +55,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	::set "dk_call=call dk_call"
 	set "dk_call=call"
     call dk_source dk_debugFunc
+	call dk_exception init
 	%dk_call% dk_color
 	%dk_call% dk_logo
 	
