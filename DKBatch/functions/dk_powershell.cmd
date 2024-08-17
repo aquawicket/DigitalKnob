@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_powershell
-	if defined dk_powershell (goto:eof) else (set "dk_powershell=1")
+	if defined dk_powershell (goto:eof) else (set "dk_powershell=1")   &::disallow recursion for this function
 	call dk_debugFunc 1 99
 	
 	setlocal
@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	"%POWERSHELL_EXE%" -Command %*
 	
 	endlocal
-	set "dk_powershell="
+	set "dk_powershell="  &::function complete, remove recursion block
 goto:eof
 
 
