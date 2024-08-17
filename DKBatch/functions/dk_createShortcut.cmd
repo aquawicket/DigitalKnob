@@ -6,12 +6,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_createShortcut
-	call dk_debugFunc 2
+	call dk_debugFunc 2 3
 	
 	set "shortcut_path=%~1"
 	set "target_path=%~2"
+	if "%~3" equ "OVERWRITE" ( set "OVERWRITE=1" ) else ( set "OVERWRITE=0" )
 	
-	if exist %shortcut_path% dk_warning "%shortcut_path% already exists" && goto:eof
+	if exist "%shortcut_path%" if "%OVERWRITE%" neq "1" (
+		%dk_call% dk_error "dk_createShortcut Cannot create shortcut. Destiantion exists and OVERWRITE is not set"
+	) 
+	if exist "%shortcut_path%" dk_warning "%shortcut_path% already exists" && goto:eof
 	
 	%dk_call% dk_powershell %NO_STD% && %dk_call% dk_powershell ^
         "$shortcut_path = '%shortcut_path%'; "^

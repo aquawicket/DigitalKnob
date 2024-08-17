@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if defined DKDOWNLOAD_DIR %dk_call% dk_warning "DKDOWNLOAD_DIR already set to %DKDOWNLOAD_DIR%" && goto:eof
 	
-	if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
+	::if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
 	set "DKDOWNLOAD_DIR=%DIGITALKNOB_DIR%\download"
 	if not exist "%DKDOWNLOAD_DIR%" %dk_call% dk_makeDirectory "%DKDOWNLOAD_DIR%"
 goto:eof
