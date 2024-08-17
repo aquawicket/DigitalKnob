@@ -10,12 +10,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::call dk_validateArgs PSFunction array array
 	
 	setlocal
-	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate DKPwsh_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	
 	:: https://stackoverflow.com/a/4732316/688352
 	cmd /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 	
-    for /f "usebackq delims=" %%Z in (`powershell . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1; %~1 "%~2"`) do echo %%Z
+    for /f "usebackq delims=" %%Z in (`powershell . %DKPwsh_FUNCTIONS_DIR%\%~1.ps1; %~1 "%~2"`) do echo %%Z
 	::%dk_call% dk_echo "PSValue received from Powershell : %PSValue%"
 	endlocal
 goto:eof

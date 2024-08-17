@@ -22,8 +22,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_error "POWERSHELL_EXE command invalid"
 
 ::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
-::	%dk_call% dk_validate DKPOWERSHELL_DIR "%dk_call% dk_validateBranch"
-::	if not exist "%DKPOWERSHELL_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKPOWERSHELL_DIR"
+::	%dk_call% dk_validate DKPwsh_DIR "%dk_call% dk_validateBranch"
+::	if not exist "%DKPwsh_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKPwsh_DIR"
 	
 ::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 ::	if not exist "%POWERSHELL_EXE%"   %dk_call% dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
