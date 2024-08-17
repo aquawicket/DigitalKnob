@@ -32,5 +32,5 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
-	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 goto:eof

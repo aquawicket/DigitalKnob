@@ -18,8 +18,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 ::	Example
 ::		%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
-::   	ftype dkpwsh=%PWSH_EXE% "%%1"
-::  	assoc .ps1=dkpwsh
+::   	ftype DKPowershell=%POWERSHELL_EXE% "%%1"
+::  	assoc .ps1=DKPowershell
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%"
 	
 	

@@ -23,8 +23,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	:: install pwsh.exe and try again
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
-	%dk_call% %DKIMPORTS_DIR%\pwsh\dk_installPwsh.cmd"
-	set "POWERSHELL_EXE=%PWSH_EXE%"
+	%dk_call% %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
+	set "POWERSHELL_EXE=%POWERSHELL_EXE%"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	
@@ -46,5 +46,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	%dk_call% dk_powershell "$PSVAR='this is a pwsh variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"
+	%dk_call% dk_powershell "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"
 goto:eof

@@ -27,7 +27,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 
-	::FIXME: kill pwsh.exe peocess
+	::FIXME: kill pwsh.exe process
 	call dk_delete "%CMAKE%"
 goto:eof
 
