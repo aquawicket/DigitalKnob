@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	) 
 	if exist "%shortcut_path%" dk_warning "%shortcut_path% already exists" && goto:eof
 	
-	%dk_call% dk_powershell %NO_STD% && %dk_call% dk_powershell ^
+	%dk_call% dk_powershell ^
         "$shortcut_path = '%shortcut_path%'; "^
         "$target_path = '%target_path%'; "^
 		"$WshShell = New-Object -comObject WScript.Shell; "^
