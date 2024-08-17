@@ -15,13 +15,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if exist %shortcut_path% dk_warning "%shortcut_path% already exists" && goto:eof
 	
-	%dk_call% dk_powershellEval ^
+	%dk_call% dk_powershell %NO_STD% && %dk_call% dk_powershell ^
         "$shortcut_path = '%shortcut_path%'; "^
         "$target_path = '%target_path%'; "^
 		"$WshShell = New-Object -comObject WScript.Shell; "^
 		"$Shortcut = $WshShell.CreateShortcut(${shortcut_path}); "^
 		"$Shortcut.TargetPath = ${target_path}; "^
 		"$Shortcut.Save();"
+	
+::	powershell /? %NO_STD% && powershell ^
+::		"$shortcut_path = '%shortcut_path%'; "^
+::      "$target_path = '%target_path%'; "^
+::		"$WshShell = New-Object -comObject WScript.Shell; "^
+::		"$Shortcut = $WshShell.CreateShortcut(${shortcut_path}); "^
+::		"$Shortcut.TargetPath = ${target_path}; "^
+::		"$Shortcut.Save();"
 	
 	if not exist %shortcut_path% dk_error "Failed to create shortcut:%shortcut_path%"
 goto:eof

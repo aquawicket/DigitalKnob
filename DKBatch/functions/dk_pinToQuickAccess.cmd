@@ -11,8 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: METHOD 1:  call the DKPwsh function (FIXME: ERROR: runs twice)
 	::%dk_call% dk_callPowershell dk_pinToQuickAccess "%~1"
 	
-	:: METHOD 2:  use dk_powershellEval
-	%dk_call% dk_powershellEval "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
+	:: METHOD 2:  use dk_pwsh
+	%dk_call% dk_powershell "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
 	
 	:: METHOD 3:  use powershell directly (fastest)
 	::powershell /? 1>nul || %dk_call% dk_error "dk_createShortcut requires powershell"

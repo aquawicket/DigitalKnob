@@ -2,33 +2,29 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::################################################################################
-::# dk_powershellEval(commands)
+::# dk_powershell(commands)
 ::#
 ::#
-:dk_powershellEval
+:dk_powershell
 	call dk_debugFunc 1 99
 	
 	setlocal
-	
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
+	:: try pwsh.exe
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
+	:: try powershell.exe
 	set "POWERSHELL_EXE=powershell.exe"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
+	:notfound
 	%dk_call% dk_error "POWERSHELL_EXE command invalid"
-
-::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
-::	%dk_call% dk_validate DKPwsh_DIR "%dk_call% dk_validateBranch"
-::	if not exist "%DKPwsh_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKPwsh_DIR"
-	
-::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-::	if not exist "%POWERSHELL_EXE%"   %dk_call% dk_error "%__FUNCTION__%(): could not locate POWERSHELL_EXE" 
 	
 	:found
+	%dk_call% dk_printVar POWERSHELL_EXE
 	"%POWERSHELL_EXE%" -Command %*
 	
 	endlocal
@@ -41,5 +37,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	%dk_call% dk_powershellEval "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershellEval(): ${PSVAR}'"
+	%dk_call% dk_powershell "$PSVAR='this is a pwsh variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"
 goto:eof

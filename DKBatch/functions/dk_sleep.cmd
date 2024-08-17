@@ -12,9 +12,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set /a "milliseconds=%~1-100"
 	cscript /nologo /e:JScript "%~f0" "%milliseconds%" 2>nul && goto:eof || (call )
 	
-	:: Method 2 - dk_powershellEval
+	:: Method 2 - dk_powershell
 	set /a "milliseconds=%~1-300"
-	dk_powershellEval "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
+	dk_powershell "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
 	
 	:: Method 3 - powershell directly
 	set /a "milliseconds=%~1-300"

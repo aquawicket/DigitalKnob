@@ -1,7 +1,7 @@
 @echo off
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-call dk_source dk_powershellEval
+call dk_source dk_powershell
 ::####################################################################
 ::# dk_installWsl()
 ::#
@@ -12,7 +12,7 @@ call dk_source dk_powershellEval
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
 	call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-	call dk_powershellEval "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux"
+	call dk_powershell "Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux"
 	
 	:: Step 2 - Check requirements for running WSL 2
 	:: TODO
@@ -38,7 +38,7 @@ call dk_source dk_powershellEval
 	::call dk_echo   
     ::call dk_info "Installing Wsl_Ubuntu . . ."
     ::call dk_download %UBUNTU_DL%
-	::call dk_powershellEval "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
+	::call dk_powershell "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
 	
 	::wsl --install --distribution Debian
 goto:eof

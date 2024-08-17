@@ -46,9 +46,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
-	:: Try dk_powershellEval
-	%dk_call% dk_echo "Downloading via dk_powershellEval"
-	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershellEval ^
+	:: Try dk_powershell
+	%dk_call% dk_echo "Downloading via dk_powershell"
+	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell ^
         "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
@@ -61,7 +61,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 		
 	:: Try curl
-	%dk_call% dk_echo "Downloading via dk_powershellEval"
+	%dk_call% dk_echo "Downloading via dk_curl"
 	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
 	
 	:: Try certutil
