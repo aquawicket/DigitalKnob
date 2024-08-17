@@ -65,6 +65,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
 	
 	:: Try certutil
+	%dk_call% dk_echo "Downloading via certutil"
 	if not exist "%destination%_DOWNLOADING" certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
 	
 	:: download as temporary name like myFile.txt_DOWNLOADING

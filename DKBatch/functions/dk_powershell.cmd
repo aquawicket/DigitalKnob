@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_powershell
+	if defined dk_powershell (goto:eof) else (set "dk_powershell=1")
 	call dk_debugFunc 1 99
 	
 	setlocal
@@ -17,9 +18,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	:: try powershell.exe
-	set "POWERSHELL_EXE=powershell.exe"
+	set "POWERSHELL_EXE=123powershell.exe"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
+	:: install pwsh.exe and try again
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% %DKIMPORTS_DIR%\pwsh\dk_installPwsh.cmd"
+	set "POWERSHELL_EXE=%PWSH_EXE%"
+	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
+	
+	
 	:notfound
 	%dk_call% dk_error "POWERSHELL_EXE command invalid"
 	
@@ -28,6 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	"%POWERSHELL_EXE%" -Command %*
 	
 	endlocal
+	set "dk_powershell="
 goto:eof
 
 
