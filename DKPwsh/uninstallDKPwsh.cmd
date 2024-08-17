@@ -1,11 +1,11 @@
 @echo off
 
-:uninstallDKPowershell
+:uninstallDKPwsh
 	::###### DKINIT ######
 	call "..\DKBatch\functions\DK.cmd"
 	
-	ftype DKPowershell=
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
+	ftype DKPwsh=
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPwsh"
 	
 	assoc .ps1=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
