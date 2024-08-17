@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	:: try powershell.exe
-	set "POWERSHELL_EXE=123powershell.exe"
+	set "POWERSHELL_EXE=powershell.exe"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
 	:: install pwsh.exe and try again
