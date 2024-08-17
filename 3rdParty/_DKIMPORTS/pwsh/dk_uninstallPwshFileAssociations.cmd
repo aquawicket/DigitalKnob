@@ -2,9 +2,9 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
-::# dk_uninstallPowershellFileAssociations()
+::# dk_uninstallPwshFileAssociations()
 ::#
-:dk_uninstallPowershellFileAssociations
+:dk_uninstallPwshFileAssociations
 	call dk_debugFunc 0
 	
 	call dk_uninstallFileAssoc .ps1
@@ -19,5 +19,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_uninstallPowershellFileAssociations
+	call dk_uninstallPwshFileAssociations
 goto:eof

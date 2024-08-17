@@ -2,42 +2,42 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
-::# dk_installPowershell()
+::# dk_installPwsh()
 ::#
-:dk_installPowershell
+:dk_installPwsh
 	call dk_debugFunc 0
 	
 	call dk_validate HOST_OS "call dk_getHostTriple"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x86.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
-	if not defined POWERSHELL_DL call dk_error "POWERSHELL_DL is invalid"
+	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"   call dk_set PWSH_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set PWSH_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x86.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set PWSH_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
+	if not defined PWSH_DL call dk_error "PWSH_DL is invalid"
 	
-	call dk_basename %POWERSHELL_DL% POWERSHELL_DL_FILE
-	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
-	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
-	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
+	call dk_basename %PWSH_DL% PWSH_DL_FILE
+	call dk_removeExtension %PWSH_DL_FILE% PWSH_FOLDER
+	call dk_convertToCIdentifier %PWSH_FOLDER% PWSH_FOLDER
+	call dk_toLower %PWSH_FOLDER% PWSH_FOLDER
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
-	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
-	call dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
+	call dk_set PWSH_DIR "%DKTOOLS_DIR%\%PWSH_FOLDER%"
+	call dk_set PWSH_EXE "%PWSH_DIR%\pwsh.exe"
 	
-	if exist "%POWERSHELL_EXE%" goto:powershell_installed
+	if exist "%PWSH_EXE%" goto:pwsh_installed
 	call dk_echo   
-    call dk_info "Installing powershell . . ."
-    call dk_download %POWERSHELL_DL%
-    call dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
-	if NOT exist "%POWERSHELL_EXE%" call dk_error "cannot find pwsh.exe"
-	:powershell_installed
+    call dk_info "Installing pwsh . . ."
+    call dk_download %PWSH_DL%
+    call dk_smartExtract "%DKDOWNLOAD_DIR%\%PWSH_DL_FILE%" "%PWSH_DIR%"
+	if NOT exist "%PWSH_EXE%" call dk_error "cannot find pwsh.exe"
+	:pwsh_installed
 	
 	
 	::### Add File Associations ###
 	::call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	::call "%DKIMPORTS_DIR%\powershell\dk_installPowershellFileAssociations.cmd"
+	::call "%DKIMPORTS_DIR%\pwsh\dk_installPwshFileAssociations.cmd"
 	
 :: install via CMake
 ::	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/powershell/DKMAKE.cmake')" "POWERSHELL_EXE"
-::	call dk_printVar POWERSHELL_EXE
+::	call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/pwsh/DKMAKE.cmake')" "PWSH_EXE"
+::	call dk_printVar PWSH_EXE
 
 	::call dk_checkError
 goto:eof
@@ -48,6 +48,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 
-	call dk_installPowershell
+	call dk_installPwsh
 goto:eof
 

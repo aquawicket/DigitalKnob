@@ -2,15 +2,15 @@
 call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::####################################################################
-::# dk_installPowershellFileAssociations()
+::# dk_installPwshFileAssociations()
 ::#
-:dk_installPowershellFileAssociations
+:dk_installPwshFileAssociations
 	call dk_debugFunc 0
 	
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
-	call dk_installFileAssoc .ps1 %POWERSHELL_EXE%
-	call dk_installFileAssoc .psm1 %POWERSHELL_EXE%
+	call dk_validate PWSH_EXE "call %DKIMPORTS_DIR%\pwsh\dk_installPwsh"
+	call dk_installFileAssoc .ps1 %PWSH_EXE%
+	call dk_installFileAssoc .psm1 %PWSH_EXE%
 goto:eof
 
 
@@ -22,5 +22,5 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_installPowershellFileAssociations
+	call dk_installPwshFileAssociations
 goto:eof
