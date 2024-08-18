@@ -17,7 +17,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_printVar outputFile
 	if "%~2" neq "" set "outputFile=%~2"
 	%dk_call% dk_printVar outputFile
-	pause
 	
 	if not exist "%inputFile%" %dk_call% dk_error "%inputFile% not found"
 	if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
