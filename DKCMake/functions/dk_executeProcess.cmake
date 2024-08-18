@@ -76,11 +76,11 @@ function(dk_executeProcess)
 	endif()
 	
 	if(NOT WORKING_DIRECTORY)
-		if(NOT CURRENT_DIR)
+		if(NOT WORKING_DIRECTORY)
 			dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
-			dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
+			dk_set(WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		endif()
-		set(WORKING_DIRECTORY ${CURRENT_DIR})
+		set(WORKING_DIRECTORY ${WORKING_DIRECTORY})
 		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
 	endif()
 	
@@ -182,7 +182,7 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 #	string(REPLACE " " "\\\\ " MSYS2_DL_PATH "${MSYS2_DL_PATH}")
 	
 	dk_getNativePath("${MSYS2}" MSYS2)
-	set(CURRENT_DIR "${MSYS2}")
+	set(WORKING_DIRECTORY "${MSYS2}")
 	string(REPLACE "\\" "//" MSYS2 "${MSYS2}")
 #	string(REPLACE " " "\\ " MSYS2 "${MSYS2}")
 #	dk_makeDirectory("${MSYS2}")

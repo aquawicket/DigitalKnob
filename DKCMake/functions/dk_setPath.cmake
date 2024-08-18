@@ -21,7 +21,7 @@ function(dk_setPath path)
 		dk_makeDirectory(${path})
 	endif()
 	
-	dk_set(CURRENT_DIR ${path})
+	dk_set(WORKING_DIRECTORY ${path})
 	
 	# TODO https://stackoverflow.com/a/6595001/688352
 	# NOTE: Some 3rdParty projects break when their binary output path is changed. It may be better to compile the project normally, then do a library install to a final common location 
@@ -48,8 +48,8 @@ function(dk_setPath path)
 #				list(REMOVE_ITEM DKCMAKE_BUILD ${item})
 #			endif()
 #		endforeach()
-#		#dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
-#		dk_append(DKCMAKE_BUILD -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
+#		#dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${WORKING_DIRECTORY} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${WORKING_DIRECTORY} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${WORKING_DIRECTORY})
+#		dk_append(DKCMAKE_BUILD -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${WORKING_DIRECTORY} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${WORKING_DIRECTORY} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${WORKING_DIRECTORY})
 #	endif()
 endfunction()
 dk_createOsMacros("dk_setPath")

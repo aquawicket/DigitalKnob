@@ -5,5 +5,5 @@ if(NOT LINUX_HOST)
 endif()
 
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
+dk_set(WORKING_DIRECTORY /usr)
 dk_command(sudo apt -y install libgtkglext1-dev)

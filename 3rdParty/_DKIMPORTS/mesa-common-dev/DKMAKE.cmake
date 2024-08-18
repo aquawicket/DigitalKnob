@@ -8,5 +8,5 @@ endif()
 
 
 ### INSTALL ###
-#dk_set(CURRENT_DIR /usr)
+#dk_set(WORKING_DIRECTORY /usr)
 dk_command(sudo apt -y install mesa-common-dev)

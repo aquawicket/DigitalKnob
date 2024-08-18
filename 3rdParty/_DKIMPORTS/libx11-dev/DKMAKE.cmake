@@ -10,7 +10,7 @@ if(MAC)
 endif()
 
 if(LINUX OR RASPBERRY)
-	#dk_set(CURRENT_DIR /usr)
+	#dk_set(WORKING_DIRECTORY /usr)
 	
 	if(EXISTS /usr/include/X11)
 		### LINK ###

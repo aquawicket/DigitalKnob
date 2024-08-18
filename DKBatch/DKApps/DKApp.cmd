@@ -71,8 +71,9 @@ goto:eof
 	::echo DKApp.onKeyDown %*
 	
 	echo keyCode: %~1
+	if %~1 equ 27 set "callback="
 	if "%~1" == "" (call) & goto:eof
-	if %~1 equ 27 echo "Esc" && set "callback="
+	
 	::echo %ESC%[21;0HDKApp_onKeyDown %*
 	::echo %ESC%[19;70H            &::
 	::echo %ESC%[19;70HKeyCode:%~1
