@@ -29,7 +29,8 @@ function(test_function)
 	dk_info("...")
 endfunction()
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_echo("testing dk_isFunction(test_function)")

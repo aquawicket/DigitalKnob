@@ -60,7 +60,8 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	list(APPEND myList "myList item 0")

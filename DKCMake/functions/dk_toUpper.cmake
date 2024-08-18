@@ -21,7 +21,8 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >

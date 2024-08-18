@@ -27,7 +27,8 @@ endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
 	#dk_debugFunc
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
 	dk_echo("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
