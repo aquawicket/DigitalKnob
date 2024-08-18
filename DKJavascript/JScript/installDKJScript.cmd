@@ -27,10 +27,9 @@ goto:eof
 	set "CSCRIPT_EXE=%~1"
 	set "WSCRIPT_EXE=%~2"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
-	set "DKJAVASCRIPT_FILE=%~4"
-	::for %%Z in ("%DKJAVASCRIPT_FILE%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
+	set "DKJAVASCRIPT_FILE=%~4"	
 	
-	
-    cmd /c %CSCRIPT_EXE% //nologo //e:javascript "%DKJAVASCRIPT_FILE%"
+    cmd /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FILE%"
+	::cmd /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKJAVASCRIPT_FILE%"
 	pause
 goto:eof

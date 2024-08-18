@@ -1,1 +1,1 @@
-WScript.Echo("hello world");
+WScript.Echo("Hello World");
