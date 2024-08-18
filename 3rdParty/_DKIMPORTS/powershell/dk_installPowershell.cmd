@@ -22,11 +22,11 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
 	
 	if exist "%POWERSHELL_EXE%" goto:powershell_installed
-	call dk_echo   
-    call dk_info "Installing powershell . . ."
-    call dk_download %POWERSHELL_DL%
-    call dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
-	if NOT exist "%POWERSHELL_EXE%" call dk_error "cannot find pwsh.exe"
+		call dk_echo   
+		call dk_info "Installing powershell . . ."
+		call dk_download %POWERSHELL_DL%
+		call dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
+		if NOT exist "%POWERSHELL_EXE%" call dk_error "cannot find pwsh.exe"
 	:powershell_installed
 	
 	

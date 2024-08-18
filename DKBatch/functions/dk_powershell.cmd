@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_powershell
-	if defined dk_powershell (goto:eof) else (set "dk_powershell=1")   &::disallow recursion for this function
+	if defined dk_powershell (echo dk_powershell blocked && goto:eof) else (set "dk_powershell=1")   &::disallow recursion for this function
 	call dk_debugFunc 0 99
 	
 	
@@ -18,13 +18,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	:: try powershell.exe
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
-	if exist "%POWERSHELL_EXE%" goto:found
+::	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+::	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
 	:: install pwsh.exe and try again
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
 	%dk_call% %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
-	set "POWERSHELL_EXE=%POWERSHELL_EXE%"
+	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 	

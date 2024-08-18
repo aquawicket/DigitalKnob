@@ -41,7 +41,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_delete "%src_dirname%\UNZIPPED"
 	%dk_call% dk_extract "%src_realpath%" "%src_dirname%\UNZIPPED"
 	
-	
 	%dk_call% dk_getDirectories "%src_dirname%\UNZIPPED" directories
 	::%dk_call% dk_printVar directories
 	%dk_call% dk_arrayLength directories dir_count

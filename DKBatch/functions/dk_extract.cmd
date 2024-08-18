@@ -29,8 +29,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 :twoParams
 	::### handle 2 parameters
-	%dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
-	goto:eof
+	
+	:: try dk_powershell
+	if not exist "%~2" %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
+	
+	:: try tar
+	if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"
+
 goto:eof
 
 
