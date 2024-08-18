@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1
+[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=0
 ##################################################################################
 # dk_exit(exit_code)
 #
@@ -30,5 +30,5 @@ DKTEST() {
 	#dk_call dk_exit
 	#dk_call dk_exit 0
 	#dk_call dk_exit 123
-	dk_exit 13
+	dk_call dk_exit 13
 }

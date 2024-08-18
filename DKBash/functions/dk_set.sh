@@ -7,11 +7,10 @@
 #
 #
 dk_set() {
-	dk_debugFunc 1
+	dk_debugFunc 2
 
-
-	dk_export ${1} "${2-}"
-	dk_printVar ${1}
+	dk_call dk_export ${1} "${2-}"
+	dk_call dk_printVar ${1}
 }
 
 
@@ -22,6 +21,6 @@ dk_set() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_set myVar "value assigned with dk_set"	
-	dk_echo "myVar = ${myVar}"
+	dk_call dk_set myVar "value assigned with dk_set"	
+	dk_call dk_echo "myVar = ${myVar}"
 }

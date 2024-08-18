@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::### handle 1 parameter
 	%dk_call% dk_basename "%~1" basename
 	%dk_call% dk_removeExtension "%basename%" basename
-	%dk_call% dk_getParentDir "%~1" destination      &:: extract contents to same directoy
+	%dk_call% dk_dirname "%~1" destination      &:: extract contents to same directoy
 	set "destination=%destination%\%basename%"  &:: extract contents to folder within same directory
 	%dk_call% dk_echo "destination = %destination%"
 	%dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%destination%"'

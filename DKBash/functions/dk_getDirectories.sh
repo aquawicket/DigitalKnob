@@ -23,5 +23,7 @@ dk_getDirectories() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_getDirectories /c/Windows/System32 output
+	dk_call dk_set myPath "/c/Windows"
+	dk_call dk_getDirectories "${myPath}" directories
+	dk_call dk_printVar directories
 }
