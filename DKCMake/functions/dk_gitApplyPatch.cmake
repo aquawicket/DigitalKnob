@@ -2,24 +2,23 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_applyPatch(<directory> <patch_file>)
+# dk_gitApplyPatch(<directory> <patch_file>)
 #
 #	<directory>		- The directory to patch from
 #   <patch_file>	- Full path to the patch file
 #
 #	https://stackoverflow.com/a/66755317/688352
 #
-function(dk_applyPatch directory patch_file)
+function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(${ARGV})
 	
 	## First run a check 
 	set(COMMAND_ARGS "")
-	set(COMMAND_ARGS ${COMMAND_ARGS} git)
-	set(COMMAND_ARGS ${COMMAND_ARGS} apply)
-	set(COMMAND_ARGS ${COMMAND_ARGS} --check)
-	set(COMMAND_ARGS ${COMMAND_ARGS} --verbose)
-	set(COMMAND_ARGS ${COMMAND_ARGS} ${patch_file})
-	dk_printVar("${COMMAND_ARGS}")
+	dk_append(COMMAND_ARGS git)
+	dk_append(COMMAND_ARGS apply)
+	dk_append(COMMAND_ARGS --check)
+	dk_append(COMMAND_ARGS --verbose)
+	dk_append(COMMAND_ARGS ${patch_file})
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${directory}
 					RESULT_VARIABLE result
@@ -31,14 +30,13 @@ function(dk_applyPatch directory patch_file)
 	endif()
 	dk_printVar(output)
 	
-	## THen do the actual patch 
+	## Then do the actual patch 
 	set(COMMAND_ARGS "")
-	set(COMMAND_ARGS ${COMMAND_ARGS} git)
-	set(COMMAND_ARGS ${COMMAND_ARGS} apply)
-	#set(COMMAND_ARGS ${COMMAND_ARGS} --check)
-	set(COMMAND_ARGS ${COMMAND_ARGS} --verbose)
-	set(COMMAND_ARGS ${COMMAND_ARGS} ${patch_file})
-	dk_printVar(COMMAND_ARGS)
+	dk_append(COMMAND_ARGS git)
+	dk_append(COMMAND_ARGS apply)
+	#dk_append(COMMAND_ARGS --check)
+	dk_append(COMMAND_ARGS --verbose)
+	dk_append(COMMAND_ARGS ${patch_file})
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${directory}
 					RESULT_VARIABLE result
@@ -55,10 +53,9 @@ endfunction()
 
 
 
-
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-
 endfunction()
