@@ -5,7 +5,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_buildMain()
 ::#
 ::#
-echo dk_buildMain
 :dk_buildMain
 	call dk_debugFunc 0
 	
