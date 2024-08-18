@@ -20,7 +20,7 @@ dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/libx264.a)
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_setPath			(${X264}/${OS}/${DEBUG_DIR})
+DEBUG_dk_cd			(${X264}/${OS}/${DEBUG_DIR})
 if(EMSCRIPTEN)
 	DEBUG_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
 	DEBUG_dk_queueCommand	(${EMMAKE} make)
@@ -29,7 +29,7 @@ else()
 	DEBUG_dk_build			(${X264})
 endif()
 
-RELEASE_dk_setPath			(${X264}/${OS}/${RELEASE_DIR})
+RELEASE_dk_cd			(${X264}/${OS}/${RELEASE_DIR})
 if(EMSCRIPTEN)
 	RELEASE_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli)
 	RELEASE_dk_queueCommand	(${EMMAKE} make)

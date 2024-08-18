@@ -23,7 +23,7 @@ function(dk_configure path) #ARGN
 			dk_toUpper(${plugin} PLUGIN_NAME)
 			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
 			dk_assert(SINGLE_CONFIG_BUILD_DIR)
-			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
+			dk_cd(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR})
 		endif()
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
@@ -42,8 +42,8 @@ function(dk_configure path) #ARGN
 	# Configure with Autotools	(single_config)
 	elseif(EXISTS ${path}/configure.ac)
 		dk_info("Configuring with Autotools")
-		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
-		
+		dk_cd(${path}/${SINGLE_CONFIG_BUILD_DIR})
+			
 		dk_fileAppend(${WORKING_DIRECTORY}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${path}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
@@ -63,8 +63,8 @@ function(dk_configure path) #ARGN
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
 		dk_notice("configure type not detected. just run arguments")
-		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
-		
+		dk_cd(${path}/${SINGLE_CONFIG_BUILD_DIR})
+			
 		dk_fileAppend(${WORKING_DIRECTORY}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#dk_replaceAll("${ARGN}"  ";"  " "  BASH_COMMANDS)

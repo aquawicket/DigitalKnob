@@ -170,7 +170,7 @@ function(dk_install plugin) #PATCH
 			endif() 
 		endif()
 	elseif(${FILETYPE} STREQUAL "Executable")
-		dk_setPath(${DKDOWNLOAD_DIR})
+		dk_cd(${DKDOWNLOAD_DIR})
 		dk_set(QUEUE_BUILD ON)
 		dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
 	elseif(${FILETYPE} STREQUAL "BYPASS")

@@ -52,9 +52,9 @@ dk_configure(${OGG}
 			-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON
 
 #else()
-#	DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
+#	DEBUG_dk_cd		(${OGG}/${OS}/${DEBUG_DIR})
 #	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#	RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
+#	RELEASE_dk_cd		(${OGG}/${OS}/${RELEASE_DIR})
 #	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #endif()
 

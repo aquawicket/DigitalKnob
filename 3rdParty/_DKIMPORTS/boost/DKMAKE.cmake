@@ -123,7 +123,7 @@ dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib) 
 
 
 ### GENERATE ###
-dk_setPath(${BOOST})
+dk_cd(${BOOST})
 if(MSVC)
 	if(NOT EXISTS ${BOOST}/b2.exe)
 		WIN_HOST_dk_queueCommand(${BOOST}/bootstrap.bat vc143)
@@ -497,7 +497,7 @@ if(SHARED)
 #	WIN_X86_dk_libRelease(${BOOST}/${OS}/lib/boost_system.lib)
 #endif()
 
-#WIN_dk_setPath(${BOOST})
+#WIN_dk_cd(${BOOST})
 #WIN_X86_dk_queueCommand(${BOOST}/bootstrap.bat)
 #WIN_dk_queueCommand(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 #WIN_dk_queueCommand(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})

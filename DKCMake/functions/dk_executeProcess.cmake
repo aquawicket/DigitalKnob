@@ -35,7 +35,7 @@ function(dk_executeProcess)
 	
 	
 	dk_getOptionValues(COMMAND 						${ARGV})
-	dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})
+	#dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})   # this is now set with   dk_cd(<directory>)
 	dk_getOptionValue(TIMEOUT 						${ARGV})
 	dk_getOptionValue(RESULT_VARIABLE 				${ARGV})
 	dk_getOptionValue(RESULTS_VARIABLE 				${ARGV})
@@ -75,14 +75,20 @@ function(dk_executeProcess)
 		endif()
 	endif()
 	
-	if(NOT WORKING_DIRECTORY)
-		if(NOT WORKING_DIRECTORY)
-			dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
-			dk_set(WORKING_DIRECTORY ${DIGITALKNOB_DIR})
-		endif()
-		set(WORKING_DIRECTORY ${WORKING_DIRECTORY})
-		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
-	endif()
+#	if(NOT WORKING_DIRECTORY)
+#		if(NOT WORKING_DIRECTORY)
+#			dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
+#			dk_set(WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+#		endif()
+#		set(WORKING_DIRECTORY ${WORKING_DIRECTORY})
+#		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
+#	endif()
+
+	# WORKING_DIRECTORY is set by dk_cd(directory)
+	# since CMAKE doesn't use a default PWD or CD current directory, we make out own by keeping
+	# the WORKING_DIRECTORY variable updated with the desired path. Any calls to execute_process
+	# will use value of that variable. We may infact change the variable name to PWD in the future.
+	list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
 	
 	if(NOT RESULT_VARIABLE)
 		set(RESULT_VARIABLE result_variable)

@@ -18,7 +18,7 @@ function(dk_cd directory)
 		dk_error("directory:${directory} does not exist")
 		return()
 	endif()
-	dk_set(WORKING_DIRECTORY ${directory})
+	
 	dk_set(WORKING_DIRECTORY ${directory})
 endfunction()
 

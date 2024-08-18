@@ -46,7 +46,7 @@ else()
 	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 	
 	### GENERATE / CONFIGURE ###
-	dk_setPath			(${GIFLIB})
+	dk_cd			(${GIFLIB})
 	dk_queueCommand		(bash -c "autoreconf -f -i")
 
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")

@@ -60,7 +60,7 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 
 ### GENERATE / COMPILE ###
 
-#DEBUG_dk_setPath(${FFMPEG}/${OS}/${DEBUG_DIR})
+#DEBUG_dk_cd(${FFMPEG}/${OS}/${DEBUG_DIR})
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
 EMSCRIPTEN_DEBUG_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
@@ -147,7 +147,7 @@ WIN_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-
 #endif()
 
 
-#RELEASE_dk_setPath(${FFMPEG}/${OS}/${RELEASE_DIR})
+#RELEASE_dk_cd(${FFMPEG}/${OS}/${RELEASE_DIR})
 #EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure
 EMSCRIPTEN_RELEASE_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 

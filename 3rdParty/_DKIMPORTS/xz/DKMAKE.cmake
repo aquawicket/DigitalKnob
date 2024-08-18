@@ -124,35 +124,35 @@ WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA
 
 
 ### GENERATE / COMPILE ###
-ANDROID_dk_setPath				(${XZ}/${OS})
+ANDROID_dk_cd				(${XZ}/${OS})
 ANDROID_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
 ANDROID_dk_visualStudio			(${XZ} liblzma)
 
-dk_setPath						(${XZ})
+dk_cd						(${XZ})
 dk_queueCommand					(autoreconf -f -i)
 		
-UNIX_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
+UNIX_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
 UNIX_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
 
-UNIX_RELEASE_dk_setPath			(${XZ}/${OS}/${RELEASE_DIR})
+UNIX_RELEASE_dk_cd			(${XZ}/${OS}/${RELEASE_DIR})
 UNIX_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 UNIX_dk_build					(${XZ})
 
 
-WIN_X86_DEBUG_dk_setPath		(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_DEBUG_dk_cd		(${XZ}/${OS}/${DEBUG_DIR})
 WIN_X86_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
-WIN_X86_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
 WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 WIN_X86_dk_build				(${XZ})
 
 # look at xz/windows/build.bash for details
-WIN_X86_64_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_64_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
 WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-WIN_X86_64_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_64_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
 WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 WIN_X86_64_dk_build					(${XZ})

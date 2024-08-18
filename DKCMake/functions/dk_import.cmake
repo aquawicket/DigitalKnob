@@ -74,7 +74,7 @@ function(dk_import url)
 	
 	# Set the current build output directory
 	dk_verbose("setting current build directory to ${${plugin_var}}/${BUILD_DIR}")
-	dk_setPath(${${plugin_var}}/${BUILD_DIR})
+	dk_cd(${${plugin_var}}/${BUILD_DIR})
 	
 endfunction()
 dk_createOsMacros("dk_import")

@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "dk_exit"
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 [ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=1

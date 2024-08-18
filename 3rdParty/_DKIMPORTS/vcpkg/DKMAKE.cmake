@@ -7,5 +7,5 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_import(https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip)
 
 
-dk_setPath(${VCPKG})
+dk_cd(${VCPKG})
 WIN_dk_queueCommand(bootstrap-vcpkg.bat)

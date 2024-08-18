@@ -191,7 +191,7 @@ foreach(plugin ${dkdepend_list})
 			if(PREBUILD)
 				dk_set(QUEUE_BUILD ON)
 				dk_info("************* Building ${plugin} *************")
-				dk_setPath(${plugin_path}/${BUILD_DIR})
+				dk_cd(${plugin_path}/${BUILD_DIR})
 				
 				if(MULTI_CONFIG)
 					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})

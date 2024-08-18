@@ -71,6 +71,8 @@ function(DKINIT)
 	
 	dk_load(dk_color)
 	dk_load(dk_logo)
+	dk_load(dk_watch)
+	dk_watch(WORKING_DIRECTORY)
 	
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 
