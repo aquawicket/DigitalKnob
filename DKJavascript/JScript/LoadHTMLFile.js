@@ -14,13 +14,24 @@ dk_source = function(url){
 
 
 // Instantiate the DOM object.
-var document = new ActiveXObject("Msxml2.DOMDocument.6.0");  
-document.async = false;
-document.validateOnParse = true;
-document.resolveExternals = true;
-document.load("blank.html");
+var objXMLDoc = new ActiveXObject("Msxml2.DOMDocument.6.0");  
+objXMLDoc.async = false;
+objXMLDoc.setProperty("ProhibitDTD", false);
+objXMLDoc.validateOnParse = false;
+objXMLDoc.load("blank.html")
+if(objXMLDoc.parseError.errorCode !== 0){
+	WScript.StdOut.Write("ERROR when loading " + strFileName + ": " + objXMLDoc.parseError.reason);
+}
+
+var document = objXMLDoc.documentElement;
+WScript.StdOut.Write("document: "+document.xml+"\n\n");
+
+
+
+
+
+
 var assets = "file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/JScript";
-WScript.StdOut.Write("document: "+document.xml);
 
 dk_source(assets+"/console.js");
 console.log("console.log test\n");
@@ -28,7 +39,5 @@ console.log("console.log test\n");
 dk_source(assets+"/alert.js");
 alert("test");
 
-console.log("document: "+document.xml);
 
-document.validate();
-document.save("output.xml");
+//document.save("output.xml");
