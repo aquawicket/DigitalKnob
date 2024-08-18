@@ -8,6 +8,6 @@ if(NOT UNIX_HOST OR ANDROID)
 endif()
 
 ### INSTALL ###
-dk_set(WORKING_DIRECTORY /usr)
+dk_cd(/usr)
 dk_command(sudo apt -y install mlocate)
 dk_command(sudo updatedb)

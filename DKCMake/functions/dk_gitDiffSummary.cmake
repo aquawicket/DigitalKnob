@@ -14,7 +14,7 @@ function(dk_gitDiffSummary)
 	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 
-    execute_process(COMMAND "${GIT_EXE}" --no-pager diff --compact-summary WORKING_DIRECTORY ${WORKING_DIRECTORY})
+    execute_process(COMMAND "${GIT_EXE}" --no-pager diff --compact-summary WORKING_DIRECTORY ${PWD})
 endfunction()
 
 

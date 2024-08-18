@@ -1,7 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ### INSTALL ###
 if(LINUX)
-	dk_set(WORKING_DIRECTORY /usr)
+	dk_cd(/usr)
 	dk_command(sudo apt -y install libgnutls)
 endif()
 if(MAC)

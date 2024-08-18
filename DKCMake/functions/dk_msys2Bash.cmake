@@ -29,7 +29,7 @@ function(dk_msys2Bash)
 	endif()
 
 	set(bash "#!/bin/bash")
-	list(APPEND bash "cd ${WORKING_DIRECTORY}")
+	list(APPEND bash "cd ${PWD}")
 	if("${MSYSTEM}" STREQUAL "CLANG32")
 		list(APPEND bash "export PATH=${MSYS2}/clang32/bin:$PATH")
 	elseif("${MSYSTEM}" STREQUAL "CLANG64")

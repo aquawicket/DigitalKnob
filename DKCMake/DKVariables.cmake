@@ -31,7 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ###############################################################
 dk_validate(DIGITALKNOB_DIR  "dk_getDKPaths()")
 
-dk_set(WORKING_DIRECTORY ${DIGITALKNOB_DIR})
+dk_cd(${DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 

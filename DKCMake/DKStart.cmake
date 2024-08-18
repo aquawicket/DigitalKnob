@@ -48,8 +48,8 @@ endif()
 
 
 ###### Get WORKING_DIRECTORY ######
-#if(NOT WORKING_DIRECTORY)
-#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} WORKING_DIRECTORY)
+#if(NOT PWD)
+#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} PWD)
 #endif()
 	
 if(NOT CMAKE_SCRIPT_MODE_FILE)

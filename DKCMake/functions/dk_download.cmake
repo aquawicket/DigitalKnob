@@ -74,7 +74,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		dk_notice("dest_dir:(${dest_dir}) does not exists. It will be created")
 		dk_makeDirectory("${dest_dir}")
 	endif()
-	dk_set(WORKING_DIRECTORY "${dest_dir}")
+	dk_cd("${dest_dir}")
 	dk_printVar(dest_dir)
 	
 	dk_basename("${dest_path}" dest_filename)

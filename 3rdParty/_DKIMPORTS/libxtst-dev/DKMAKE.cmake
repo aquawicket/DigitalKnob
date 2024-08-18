@@ -6,7 +6,7 @@ endif()
 
 
 ### INSTALL ###
-#dk_set(WORKING_DIRECTORY /usr)
+#dk_cd(/usr)
 if(TINYCORE)
 	dk_command(tce-load -wi libXtst-dev.tcz)
 else()

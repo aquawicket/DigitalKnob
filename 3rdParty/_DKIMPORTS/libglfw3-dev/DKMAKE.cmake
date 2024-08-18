@@ -6,7 +6,7 @@ endif()
 
 ### INSTALL ###
 if(LINUX)
-	dk_set(WORKING_DIRECTORY /usr)
+	dk_cd(/usr)
 	dk_command(sudo apt -y install libglfw3-dev)
 endif()
 if(MAC)

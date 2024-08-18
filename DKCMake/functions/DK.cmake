@@ -1,5 +1,6 @@
-
 include_guard()		# include_guard
+
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 #cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
@@ -72,7 +73,6 @@ function(DKINIT)
 	dk_load(dk_color)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
-	dk_watch(WORKING_DIRECTORY)
 	
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 

@@ -19,7 +19,8 @@ function(dk_cd directory)
 		return()
 	endif()
 	
-	dk_set(WORKING_DIRECTORY ${directory})
+	#dk_set(WORKING_DIRECTORY ${directory})
+	dk_set(PWD ${directory})
 endfunction()
 
 

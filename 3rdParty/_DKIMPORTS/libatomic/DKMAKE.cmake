@@ -6,7 +6,7 @@ endif()
 
 ### INSTALL ###
 if(LINUX OR RASPBERRY)
-	#dk_set(WORKING_DIRECTORY /usr)
+	#dk_cd(/usr)
 	#dk_command(sudo apt -y install libatomic)
 
 	### LINK ###

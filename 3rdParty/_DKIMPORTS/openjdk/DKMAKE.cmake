@@ -57,7 +57,7 @@ endif()
 
 if(LINUX_HOST)
 	#if(EXISTS /usr)
-	#	dk_set(WORKING_DIRECTORY /usr)
+	#	dk_cd(/usr)
 	#endif()
 	
 	#if(ANDROID_HOST)

@@ -5,5 +5,5 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_set(WORKING_DIRECTORY /usr)
+dk_cd(/usr)
 dk_command(sudo apt -y install libglu1-mesa-dev)
