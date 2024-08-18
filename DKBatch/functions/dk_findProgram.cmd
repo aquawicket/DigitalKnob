@@ -11,15 +11,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	setlocal
 	set "VAR=%~1"
 	set "VAL=!%VAR%!"
-	set "name=%~2"
-	if "%~3" equ "" set "pattern=C:\"
-	if "%~3" neq "" set "pattern=%~3" 
+	if exist "%VAL%" %dk_call% dk_debug "already FOUND %name% at %VAL%" && goto:eof
 	
-	if exist "%VAL%" %dk_call% dk_debug("already FOUND %name% at %VAL%") && goto:eof
-
-	%dk_call% dk_commandToVariable "where /R %pattern% %name% %NO_STDERR%" %VAR%
-	%dk_call% dk_printVar %VAR%
-	endlocal & set "%2=!%VAR%!"
+	set "name=%~2"
+	if "%~3" equ "" set "pattern=" && set "recursive="
+	if "%~3" neq "" set "pattern=%~3" && set "recursive=/R" 
+	
+	%dk_call% dk_commandToVariable "where %recursive% %pattern% %name% %NO_STDERR%" value
+	%dk_call% dk_printVar value
+	endlocal & set "%1=%value%"
 goto:eof
 
 
@@ -30,6 +30,9 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
+	
+	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+	%dk_call% dk_printVar POWERSHELL_EXE
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"

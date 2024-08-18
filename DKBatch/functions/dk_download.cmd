@@ -23,10 +23,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
 	::%dk_call% dk_printVar DKDOWNLOAD_DIR
-	
+
 	if not defined destination set "destination=%DKDOWNLOAD_DIR%\%url_filename%"
 	::%dk_call% dk_printVar destination
-	
+
 	if not defined destination %dk_call% dk_error "destination is invalid"
 	::%dk_call% dk_printVar destination
 	
@@ -46,27 +46,46 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     
+	
+	::set "DISABLE_powershell=1"
+	::set "DISABLE_curl=1"
+	::set "DISABLE_certutil=1"
+	
 	:: Try dk_powershell
+	:powershell_dl
+	if defined DISABLE_powershell goto:end_powershell_dl
 	%dk_call% dk_echo "Downloading via dk_powershell"
-	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell ^
-        "$cli = New-Object System.Net.WebClient; "^
+	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
-		
+	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
+	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	:end_powershell_dl
+	
 	:: Try curl
+	:curl_dl
+	if defined DISABLE_curl goto:end_curl_dl
 	%dk_call% dk_echo "Downloading via dk_curl"
-	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"
+	if not exist "%destination%_DOWNLOADING" curl --help %NO_STD% && curl -L "%url%" -o "%destination%_DOWNLOADING"
+	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
+	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	:end_curl_dl
 	
 	:: Try certutil
+	:certitil_dl
+	if defined DISABLE_certutil goto:end_certutil_dl
 	%dk_call% dk_echo "Downloading via certutil"
-	if not exist "%destination%_DOWNLOADING" certutil.exe /? 1>nul && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
+	if not exist "%destination%_DOWNLOADING" certutil.exe %NO_STD% && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
+	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
+	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	:end_certutil_dl
 	
-	:: download as temporary name like myFile.txt_DOWNLOADING
-	:: then rename it to it's original upon completion
+	:: If Dowload Failed
 	if not exist "%destination%_DOWNLOADING" %dk_call% dk_error "failed to download %DL_FILE%"
 	
+	:: downloaded as temporary name like myFile.txt_DOWNLOADING
+	:: then rename it to it's original upon completion
 	%dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
-	
 	if not exist "%destination%" %dk_call% dk_error "failed to rename %destination%_DOWNLOADING"
 goto:eof
 
