@@ -14,10 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: METHOD 2:  use dk_powershell
 	%dk_call% dk_powershell "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
-	
-	:: METHOD 3:  use powershell directly (fastest)
-	::powershell /? 1>nul || %dk_call% dk_error "dk_createShortcut requires powershell"
-	::powershell -command "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
+
 goto:eof
 
 

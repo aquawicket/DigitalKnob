@@ -53,13 +53,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 		
-::	:: Try powershell
-::	%dk_call% dk_echo "Downloading via powershell"
-::	if not exist "%destination%_DOWNLOADING" powershell -Command ^
-::        "$cli = New-Object System.Net.WebClient; "^
-::	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
-::	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
-		
 	:: Try curl
 	%dk_call% dk_echo "Downloading via dk_curl"
 	if not exist "%destination%_DOWNLOADING" curl --help 1>nul && curl "%url%" -o "%destination%_DOWNLOADING"

@@ -7,10 +7,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_selectFile
 	call dk_debugFunc 1
-	
 	setlocal
+	
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_powershell"
 	for /f "delims=" %%I in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
-	for /f "delims=" %%I in ('%dk_call% dk_powershell -noprofile "iex (${%~f0} | out-string)"') do (
+	rem for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
 		endlocal & set %1=%%~I
 	)
 goto:eof

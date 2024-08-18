@@ -8,9 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 echo dk_powershell
 :dk_powershell
 	if defined dk_powershell (goto:eof) else (set "dk_powershell=1")   &::disallow recursion for this function
-	call dk_debugFunc 1 99
+	call dk_debugFunc 0 99
 	
-	setlocal
+	
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
 ::	:: try pwsh.exe
@@ -31,8 +31,13 @@ echo dk_powershell
 	
 	:notfound
 	%dk_call% dk_error "POWERSHELL_EXE command invalid"
+	goto:eof
+	
 	
 	:found
+	if "%~1"=="" goto:eof
+	setlocal
+	
 	%dk_call% dk_printVar POWERSHELL_EXE
 	"%POWERSHELL_EXE%" -Command %*
 	

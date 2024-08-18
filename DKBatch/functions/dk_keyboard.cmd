@@ -22,7 +22,6 @@ goto:eof
 	::echo dk_keyboard.Keyboard_Loop %*
 	
 	:: Read keys via PowerShell
-	powershell ^
 	dk_powershell ^
 	   Write-Host 0; ^
 	   while ($key -ne 27) { ^
