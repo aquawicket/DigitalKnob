@@ -1,4 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple()")
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
 

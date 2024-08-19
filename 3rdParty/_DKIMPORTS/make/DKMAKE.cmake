@@ -4,9 +4,11 @@ dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple()")
 # https://packages.msys2.org/base/make
 
 dk_depend(cmake)
+dk_depend(msys2)
+dk_depend(pacman)
 
 #if(MSYSTEM)
-	dk_depend(msys2)
+	
 	
 	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	
