@@ -25,21 +25,21 @@ if(MSYSTEM)
 		dk_command(${CYGPATH_EXE} -m ${PERL_EXE} OUTPUT_VARIABLE PERL_EXE)
 	endif()
 	
-	#if(CLANG32)
+	#if(win_x86_clang)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
-	#elseif(CLANG64)
+	#elseif(win_x86_64_clang)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
 	#	#dk_download(https://mirror.msys2.org/mingw/clang64/mingw-w64-clang-x86_64-perl-5.38.2-1-any.pkg.tar.zst)
 	#	#dk_command(${PACMAN_EXE} -U ${DKDOWNLOAD_DIR}/mingw-w64-clang-x86_64-perl-5.38.2-1-any.pkg.tar.zst --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-	#elseif(CLANGARM64)
+	#elseif(win_arm64_clang)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANGARM64
-	#elseif(MINGW32)
+	#elseif(win_x86_mingw)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-i686-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
-	#elseif(MINGW64)
+	#elseif(win_x86_64_mingw)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 	#	#dk_download(https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-perl-5.38.2-1-any.pkg.tar.zst)
 	#	#dk_command(${PACMAN_EXE} -U ${DKDOWNLOAD_DIR}/mingw-w64-x86_64-perl-5.38.2-1-any.pkg.tar.zst --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-	#elseif(UCRT64)
+	#elseif(win_x86_64_ucrt)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	#endif()
 	dk_command(${PACMAN_EXE} -S perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})									# MSYS2

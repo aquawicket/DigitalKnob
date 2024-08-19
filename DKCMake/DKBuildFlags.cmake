@@ -642,7 +642,7 @@ if(RASPBERRY_ARM64)
 endif()
 
 ### Windows x86 - MSVC ###
-if(WIN_X86 AND MSVC)
+if(win_x86_msvc)
 	dk_set(CMAKE_GENERATOR 					${VISUALSTUDIO_GENERATOR})
 	dk_set(CMAKE_GENERATOR_PLATFORM			Win32)
 	dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_C_COMPILER})
@@ -652,7 +652,7 @@ if(WIN_X86 AND MSVC)
 endif()
 
 ### Windows x86 - MINGW32 ###
-if(WIN_X86 AND MINGW32)
+if(win_x86_mingw)
 	dk_set(MSYSTEM MINGW32)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
 	dk_set(CMAKE_C_COMPILER					${GCC_EXE})
@@ -667,7 +667,7 @@ if(WIN_X86 AND MINGW32)
 endif()
 
 ### Windows x86 - CLANG32 ###
-if(WIN_X86 AND CLANG32)
+if(win_x86_clang)
 	dk_set(MSYSTEM CLANG32)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
 	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
@@ -682,7 +682,7 @@ if(WIN_X86 AND CLANG32)
 endif()
 
 ### Windows x86_64 - MSVC ###
-if(WIN_X86_64 AND MSVC)
+if(win_x86_64_msvc)
 	dk_set(CMAKE_GENERATOR_PLATFORM			x64)
 	dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_C_COMPILER})
 	dk_set(CMAKE_CXX_COMPILER				${VISUALSTUDIO_CXX_COMPILER})
@@ -691,7 +691,7 @@ if(WIN_X86_64 AND MSVC)
 endif()
 
 ### Windows x86_64 - CLANG64 ###
-if(WIN_X86_64 AND CLANG64)
+if(win_x86_64_clang)
 	dk_set(MSYSTEM CLANG64)
 	dk_append(DKFLAGS 						-DMSYSTEM=CLANG64)
 	dk_validate(MSYS2_GENERATOR "dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)")
@@ -708,7 +708,7 @@ if(WIN_X86_64 AND CLANG64)
 endif()
 
 ### Windows x86_64 - MINGW64 ###
-if(WIN_X86_64 AND MINGW64)
+if(win_x86_64_mingw)
 	dk_set(MSYSTEM MINGW64)
 	dk_append(DKFLAGS 						-DMSYSTEM=MINGW64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
@@ -724,7 +724,7 @@ if(WIN_X86_64 AND MINGW64)
 endif()
 
 ### Windows x86_64 - UCRT64 ###
-if(WIN_X86_64 AND UCRT64)
+if(win_x86_64_ucrt)
 	dk_set(MSYSTEM UCRT64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
 	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
@@ -739,7 +739,7 @@ if(WIN_X86_64 AND UCRT64)
 endif()
 
 ### Windows arm64 - CLANGARM64 ###
-if(WIN_ARM64 AND CLANGARM64)
+if(win_arm64_clang)
 	dk_set(MSYSTEM CLANGARM64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR}) 
 	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})

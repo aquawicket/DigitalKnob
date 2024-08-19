@@ -110,6 +110,8 @@ endif()
 
 
 ########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
+dk_getHostTriple()
+dk_getTargetTriple()
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKApps/" index)
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")

@@ -3,6 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 dk_validate(HOST "dk_getHostTriple()")
+dk_validate(DK_TARGET_TRIPLE  "dk_getTargetTriple()")
 
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
@@ -62,7 +63,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_toLower(${MSYSTEM} msystem)
 		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
 	
-		if("${MSYSTEM}" STREQUAL "CLANG32")					
+		if(win_x86_clang)					
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 			#mingw-w64-clang-i686-clang
 			#mingw-w64-clang-i686-clang-analyzer
@@ -85,15 +86,15 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#mingw-w64-clang-i686-tools-git
 			#mingw-w64-clang-i686-winstorecompat-git
 			#mingw-w64-clang-i686-llvm-openmp
-		elseif("${MSYSTEM}" STREQUAL "CLANG64")
+		elseif(win_x86_64_clang)	
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		elseif("${MSYSTEM}" STREQUAL "CLANGARM64")
+		elseif(win_arm64_clang)
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		elseif("${MSYSTEM}" STREQUAL "MINGW32")
+		elseif(win_x86_mingw)
 			dk_command(${PACMAN_EXE} -S mingw-w64-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		elseif("${MSYSTEM}" STREQUAL "MINGW64")
+		elseif(win_x86_64_mingw)
 			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		elseif("${MSYSTEM}" STREQUAL "UCRT64")
+		elseif(win_x86_64_ucrt)
 			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		endif()
 	else()
