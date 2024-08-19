@@ -1,6 +1,6 @@
 include_guard()		# include_guard
 
-set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 #cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
@@ -40,10 +40,6 @@ function(DKINIT)
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
-	dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
-	#dk_echo("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
-	#dk_echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
-	#dk_echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
 	
 	############ Setup KeepOpen ############
 	#dk_setupKeepOpen()
@@ -106,11 +102,11 @@ endfunction()
 function(dk_init)
 	set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_echo("")
+		dk_echo()
 		dk_echo("########################################################")
 		dk_echo("################# CMAKE SCRIPT MODE ####################")
 		dk_echo("########################################################")
-		dk_echo("")
+		dk_echo()
 	endif()
 endfunction()
 
