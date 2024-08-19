@@ -55,7 +55,3 @@ if(LINUX_HOST)
 	endif()
 endif()
 
-
-
-#dk_set(LINUX_GENERATOR			"Unix Makefiles")
-#dk_set(RASPBERRY_GENERATOR		"Unix Makefiles")

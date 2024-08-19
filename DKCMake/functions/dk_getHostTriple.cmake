@@ -6,9 +6,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #	set the cached host variables 
 #
-#	<HOST> 			= WIN, APPLE, LINUX, ANDROID
-#	<HOST>_HOST 	= WIN_HOST, UNIX_HOST, MAC_HOST, ANDROID_HOST
-#	HOST_ARCH		= arm32, arm64, x86, x86_64
+#	DK_HOST_OS 		= WIN, APPLE, LINUX, ANDROID
+#	DK_HOST_ARCH	= arm32, arm64, x86, x86_64
+#	DK_HOST_ENV		= clang, mingw, ucrt
+#	<OS>_HOST 		= ANDROID_HOST, MAC_HOST, UNIX_HOST, WIN_HOST, ect..
+
 
 function(dk_getHostTriple)
 	dk_debugFunc(${ARGV})
@@ -25,7 +27,7 @@ function(dk_getHostTriple)
 		dk_unset(CMAKE_HOST_APPLE)
 	endif()
 	
-	###### Set <HOST>_HOST variables ######
+	###### Set OS_HOST variables ######
 	if(CMAKE_HOST_WIN32)
 		dk_set(WIN_HOST 		TRUE)
 	endif()
@@ -34,6 +36,7 @@ function(dk_getHostTriple)
 		dk_set(MAC_HOST 		TRUE)
 	endif()
 	if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
+		dk_set(DK_HOST_OS      linux)
 		dk_set(UNIX_HOST 		TRUE)
 		dk_set(LINUX_HOST 		TRUE)	
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
@@ -41,22 +44,26 @@ function(dk_getHostTriple)
 		endif()
 	endif()
 	
-	###### Set HOST variable ######
+	###### Set DK_HOST_OS variable ######
 	if(CMAKE_HOST_WIN32)
-		dk_set(HOST		WIN)
+		dk_set(DK_HOST_OS		win)
+		dk_set(HOST		    	WIN)
 	elseif(CMAKE_HOST_APPLE)
-		dk_set(HOST		APPLE)
+		dk_set(DK_HOST_OS		mac)
+		dk_set(HOST				APPLE)
 	elseif(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
+			dk_set(DK_HOST_OS	android)
 			dk_set(HOST	ANDROID)
 		else()
+			dk_set(DK_HOST_OS	linux)
 			dk_set(HOST	LINUX)
 		endif()
 	else()
 		dk_error("CMAKE_HOST: Unknown host")
 	endif()
 	
-	### Set HOST_ARCH
+	### Set DK_HOST_ARCH
 	if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
 		if(CMAKE_HOST_WIN32)
 			if (DEFINED ENV{PROCESSOR_ARCHITEW6432})
@@ -72,48 +79,41 @@ function(dk_getHostTriple)
 	#dk_printVar(CMAKE_HOST_SYSTEM_PROCESSOR)
 	
 	if("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "aarch64")
-		dk_set(ARM64 TRUE)
-		dk_set(HOST_ARCH arm64)
+		dk_set(DK_HOST_ARCH arm64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "AMD64")
-		dk_set(X86_64 TRUE)
-		dk_set(HOST_ARCH x86_64)
+		dk_set(DK_HOST_ARCH x86_64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "ARM64")
-		dk_set(ARM64 TRUE)
-		dk_set(HOST_ARCH arm64)
+		dk_set(DK_HOST_ARCH arm64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "EM64T")
-		dk_set(X86_64 TRUE)
-		dk_set(HOST_ARCH x86_64)
+		dk_set(DK_HOST_ARCH x86_64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "IA64")
-		dk_set(X86_64 TRUE)
-		dk_set(HOST_ARCH x86_64)
+		dk_set(DK_HOST_ARCH x86_64)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "x86")
-		dk_set(X86 TRUE)
-		dk_set(HOST_ARCH x86)
+		dk_set(DK_HOST_ARCH x86)
 	elseif("${CMAKE_HOST_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
-		dk_set(X86_64 TRUE)
-		dk_set(HOST_ARCH x86_64)
+		dk_set(DK_HOST_ARCH x86_64)
 	else()
 		dk_error("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 	endif()
 	
-	### set [HOST]_[HOST_ARCH] variable
-	dk_toUpper(${HOST} HOST_UPPER)
-	dk_toUpper(${HOST_ARCH} HOST_ARCH_UPPER)
-	dk_set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
+	dk_toUpper(${DK_HOST_OS}   DK_HOST_OS_UPPER)
+	dk_toUpper(${DK_HOST_ARCH} DK_HOST_ARCH_UPPER)
 	
+	dk_set(${DK_HOST_ARCH_UPPER} TRUE) # set ARCH to TRUE
 	
+	### set [HOST]_[DK_HOST_ARCH] variable
+	dk_set(${DK_HOST_OS_UPPER}_${DK_HOST_ARCH_UPPER}_HOST TRUE)
 	
-	### set HOST_TRIPLE ###
-	dk_toLower(${HOST} HOST_LOWER)
-	dk_toLower(${HOST_ARCH} HOST_ARCH_LOWER)
-	# get default HOST_ENV
-	if("${HOST_LOWER}" STREQUAL "win")
-		dk_set(HOST_ENV "clang")
+	#### Set Default DK_HOST_ENV ###
+	if("${DK_HOST_OS}" STREQUAL "win")
+		dk_set(DK_HOST_ENV "clang")
 	endif()
-	if(HOST_ENV)
-		dk_set(HOST_TRIPLE ${HOST_LOWER}_${HOST_ARCH_LOWER}_${HOST_ENV})
+	
+	### set DK_HOST_TRIPLE ###
+	if(DK_HOST_ENV)
+		dk_set(DK_HOST_TRIPLE ${DK_HOST_OS}_${DK_HOST_ARCH}_${DK_HOST_ENV})
 	else()
-		dk_set(HOST_TRIPLE ${HOST_LOWER}_${HOST_ARCH_LOWER})
+		dk_set(DK_HOST_TRIPLE ${DK_HOST_OS}_${DK_HOST_ARCH})
 	endif()
 	
 endfunction()

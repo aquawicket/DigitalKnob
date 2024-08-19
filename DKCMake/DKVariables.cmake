@@ -109,9 +109,16 @@ if(${DKCEF} STREQUAL "ON")
 endif()
 
 
-########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
+
+###########################################################################
+## Get DK_HOST_TRIPLE and DK_TARGET_TRIPLE
+###########################################################################
 dk_getHostTriple()
 dk_getTargetTriple()
+
+
+
+########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKApps/" index)
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")
@@ -145,14 +152,14 @@ dk_getTargetTriple()
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
-#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
+#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm32")
 #	dk_set(RPI ON)
 #	dk_set(RPI32 ON)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI32)
 #endif()
 # RPI and RPI64
-#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm64")
+#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm64")
 #	dk_set(RPI ON)
 #	dk_set(RPI64 ON)
 #	dk_printVar(RPI)

@@ -1,5 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-# https://learn.microsoft.com/en-us/windows/win32/api/wincrypt/
+# https://learn.microsoft.com/en-us/windows/win32/api/wincrypt
+
 if(NOT WIN)
 	dk_undepend(crypt32)
 	dk_return()

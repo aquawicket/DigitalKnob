@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
 # https://github.com/emscripten-core/emsdk.git
 # https://emscripten.org/index.html
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
@@ -8,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_depend(python3)
 dk_assert(PYTHON3)
 
-dk_validate(HOST "dk_getHostTriple()")
+
 dk_import(https://github.com/emscripten-core/emscripten/archive/refs/heads/main.zip)
 dk_assert(EMSCRIPTEN)
 

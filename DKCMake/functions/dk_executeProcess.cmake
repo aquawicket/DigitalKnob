@@ -172,11 +172,9 @@ dk_createOsMacros("dk_executeProcess")
 function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
-
-	
-	set(DKDOWNLOAD_DIR "C:/Users/Administrator/D i g i t a l K n o b/download")
+	set(DKDOWNLOAD_DIR "C:/Users/Administrator/DigitalKnob/download")
 	set(MSYS2_DL_FILE "msys2-x86_64-20231026.exe")
-	set(MSYS2 "C:/Users/Administrator/D i g i t a l K n o b/download/msys2-x86_64-20231026")
+	set(MSYS2 "C:/Users/Administrator/DigitalKnob/download/msys2-x86_64-20231026")
 
 	
 #	set(MSYS2_DL_PATH "${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}")
@@ -201,7 +199,6 @@ function(DKTEST)
 #	set(args "${MSYS2_DL_PATH}";install;--confirm-command;--root;"${MSYS2}")
 #	set(args "${MSYS2_DL_PATH}")
 	#set(args notepad.exe)
-#	dk_printVar(args)
 	execute_process(COMMAND ${MSYS2_DL_PATH} "${args}" "${MSYS2}" WORKING_DIRECTORY "${MSYS2}")
 #	dk_executeProcess(${MSYS2_DL_PATH} "${args}" "${MSYS2}")
 endfunction()

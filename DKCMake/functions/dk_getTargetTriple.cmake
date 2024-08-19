@@ -24,12 +24,12 @@ function(dk_getTargetTriple)
 		### Get DK_TARGET_OS_DIR
 		### Get DK_TARGET_TYPE ###
 		if(${DK_TARGET_DIR} MATCHES "Debug")
-			dk_set(DK_TARGET_TYPE Debug)
+			dk_set(DK_TARGET_TYPE DEBUG)
 			dk_set(DEBUG ON)
 			dk_set(RELEASE OFF)
 			dk_dirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
 		elseif(${DK_TARGET_DIR} MATCHES "Release")
-			dk_set(DK_TARGET_TYPE Release)
+			dk_set(DK_TARGET_TYPE RELEASE)
 			dk_set(DEBUG OFF)
 			dk_set(RELEASE ON)
 			dk_dirname(${DK_TARGET_DIR} DK_TARGET_OS_DIR)
@@ -40,7 +40,7 @@ function(dk_getTargetTriple)
 		### Get DK_TARGET_OS_FOLDER
 		dk_basename(${DK_TARGET_OS_DIR} DK_TARGET_OS_FOLDER)     
 		
-		
+		### Set DK_TARGET_TRIPLE ###
 		dk_set(DK_TARGET_TRIPLE ${DK_TARGET_OS_FOLDER})
 		dk_set(${DK_TARGET_TRIPLE} ON)
 		
@@ -153,13 +153,13 @@ function(dk_getTargetTriple)
 			dk_set(RELEASE_DIR Release)
 		endif()
 		
-		### Set DK_TARGET_TRIPLE ###
-#		if(DK_TARGET_ENV)
-#			dk_set(DK_TARGET_TRIPLE "${DK_TARGET_OS}_${DK_TARGET_ARCH}_${DK_TARGET_ENV}")
-#		else()
-#			dk_set(DK_TARGET_TRIPLE "${DK_TARGET_OS}_${DK_TARGET_ARCH}")
-#		endif()
 		
+		###### CHECK VARIABLES ######
+		dk_assert(DK_TARGET_DIR)
+		dk_assert(DK_TARGET_TRIPLE)
+		dk_assert(DK_TARGET_OS)
+		dk_assert(DK_TARGET_ARCH)
+		dk_assert(DK_PROJECT_DIR)
 	endif()
 endfunction()
 

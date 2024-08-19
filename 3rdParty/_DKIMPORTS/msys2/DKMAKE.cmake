@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-dk_validate(HOST "dk_getHostTriple()")
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
 dk_validate(DK_TARGET_TRIPLE  "dk_getTargetTriple()")
 
 if(NOT WIN_HOST)
@@ -12,7 +12,8 @@ endif()
 
 
 ### INSTALL ###
-dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
+#dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
+dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 
 if(NOT MSYS2_DL)
 	dk_error("MSYS2_DL is invalid")

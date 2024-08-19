@@ -1,10 +1,10 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
 # https://docs.python.org/3/using/windows.html
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python
 
 
-dk_validate(HOST "dk_getHostTriple()")
 WIN_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
 MAC_HOST_dk_set (PYTHON_DL ttps://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
 dk_assert(PYTHON_DL)

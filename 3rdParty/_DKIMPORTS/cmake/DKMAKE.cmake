@@ -1,4 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple()")
 # https://cmake.org
 # https://github.com/Kitware/CMake
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
@@ -9,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/Kitware/CMake/releases
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-dk_validate					(HOST "dk_getHostTriple()")
+
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
@@ -20,10 +22,8 @@ WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/downlo
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
-if(NOT CMAKE_DL)
-	dk_error("CMAKE_DL is invalid")
-	return()
-endif()
+dk_assert(CMAKE_DL)
+
 
 dk_basename(${CMAKE_DL} CMAKE_DL_FILE)
 dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
@@ -50,11 +50,11 @@ elseif(MSYSTEM)
 		if(win_x86_clang)
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 		elseif(win_x86_64_clang)
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
+			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
 		elseif(win_arm64_clang)
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 		elseif(win_x86_mingw)
-			dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
+			dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
 		elseif(win_x86_64_mingw)
 			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 		elseif(win_x86_64_ucrt)
@@ -73,19 +73,17 @@ else()
 		dk_findProgram(CMAKE_EXE cmake ${CMAKE}/CMake.app/Contents/bin)
 	else()
 		dk_set(CMAKE ${DKTOOLS_DIR}/${CMAKE_FOLDER})
-		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})#${CMAKE}/bin)
+		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})
 		
 		if(NOT EXISTS ${CMAKE_EXE})
 			dk_import(${CMAKE_DL} PATH ${DKTOOLS_DIR}/${CMAKE_FOLDER})
-			dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})#${CMAKE}/bin)
+			dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})
 		endif()
 	endif()
-	
-	
 endif()
 
-### VALIDATE ### (second check)
 
+### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
 	dk_error("COULD NOT FIND CMAKE_EXE" NO_HALT)
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})

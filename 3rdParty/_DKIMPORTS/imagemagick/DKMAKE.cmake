@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
 # https://github.com/ImageMagick/ImageMagick.git
 # https://imagemagick.org/index.php
 
@@ -6,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #dk_depend(ghostscript)
 dk_depend(vc_redist)
 
-dk_validate(HOST "dk_getHostTriple()")
+
 if(WIN_HOST)
 	dk_load			(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
 	dk_assert		(VCCOMP140_DLL)
