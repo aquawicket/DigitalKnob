@@ -123,7 +123,7 @@ function(dk_getTargetTriple)
 
 		### Set OS ###
 		#dk_set(OS "${DK_TARGET_OS_ARCH}")
-		dk_set(OS "${DK_TARGET_OS_FOLDER}")
+		dk_set(OS "${DK_TARGET_TRIPLE}")
 
 		### Set ${OS} variable ON ##
 		dk_toUpper(${DK_TARGET_OS} DK_TARGET_OS_UPPER)

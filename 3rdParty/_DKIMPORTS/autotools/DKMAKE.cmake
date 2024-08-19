@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple")
 # https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html
 # http://autogen.sourceforge.net
 # https://macappstore.org/autogen/
@@ -9,7 +10,7 @@ MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
-dk_validate(DK_TARGET_TRIPLE "dk_getTargetTriple")
+
 if( ("${DK_TARGET_ENV}" STREQUAL "clang") OR ("${DK_TARGET_ENV}" STREQUAL "mingw") OR ("${DK_TARGET_ENV}" STREQUAL "ucrt") )
 	dk_depend(msys2)
 	

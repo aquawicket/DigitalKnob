@@ -1,4 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple()")
 #include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -655,8 +657,8 @@ endif()
 if(win_x86_mingw)
 	dk_set(MSYSTEM MINGW32)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${GCC_EXE})
-	dk_set(CMAKE_CXX_COMPILER				${GXX_EXE})
+	#dk_set(CMAKE_C_COMPILER				${GCC_EXE})
+	#dk_set(CMAKE_CXX_COMPILER				${GXX_EXE})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DMSYSTEM=MINGW32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(DKCMAKE_EXE_LINKER_FLAGS		-static) # -s)
@@ -670,8 +672,8 @@ endif()
 if(win_x86_clang)
 	dk_set(MSYSTEM CLANG32)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
+	#dk_set(CMAKE_C_COMPILER				${CLANG_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
 	dk_append(CMAKE_CXX_FLAGS				-march=i686 -DMSYSTEM=CLANG32 -DWIN -DWIN_X86 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
 	dk_append(DKCMAKE_EXE_LINKER_FLAGS		-static) # -s)
@@ -727,8 +729,8 @@ endif()
 if(win_x86_64_ucrt)
 	dk_set(MSYSTEM UCRT64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR})
-	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
+	#dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS				-march=x86-64 -DMSYSTEM=UCRT64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) #-D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS		-static) # -s)
@@ -742,8 +744,8 @@ endif()
 if(win_arm64_clang)
 	dk_set(MSYSTEM CLANGARM64)
 	dk_set(CMAKE_GENERATOR					${MSYS2_GENERATOR}) 
-	dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
+	#dk_set(CMAKE_C_COMPILER					${CLANG_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER				${CLANG_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS				-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS		-static) # -s)
@@ -841,9 +843,7 @@ if(DEBUG)
 elseif(RELEASE)
 	dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${RELEASE_DIR})
 endif()
-
-
-
+dk_pause()
 
 
 ############## Setup continued by cmake from here ##############

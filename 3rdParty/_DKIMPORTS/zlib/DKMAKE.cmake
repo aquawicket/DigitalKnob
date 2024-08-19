@@ -4,7 +4,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/madler/zlib.git)
 dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
 
 
