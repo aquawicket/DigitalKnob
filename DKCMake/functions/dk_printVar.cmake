@@ -14,7 +14,6 @@ function(dk_printVar var)
 	#if(NOT "${var}" STREQUAL "${alphanum_var}")
 	#if(NOT "${var}" MATCHES "ENV{") # ENV variables
 	#	dk_error("${var} is not a valid variable name. It contains invalid characters.")
-	#	dk_pause()
 	#endif()
 	#endif()
 

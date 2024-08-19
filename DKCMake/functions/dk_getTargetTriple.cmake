@@ -65,7 +65,6 @@ function(dk_getTargetTriple)
 			dk_warning("The DK_TARGET_TRIPLE:${DK_TARGET_TRIPLE} does not contain info to set DK_TARGET_OS")
 		endif()
 		
-		
 		### Get DK_TARGET_ARCH
 		if(DK_TARGET_TRIPLE MATCHES "arm64")
 			dk_set(DK_TARGET_ARCH arm64)
@@ -112,7 +111,7 @@ function(dk_getTargetTriple)
 		endif()
 		
 		### Get DK_TARGET_OS
-		#dk_printVar(DK_TARGET_OS)
+		dk_printVar(DK_TARGET_OS)
 		
 		### Set DK_TARGET_OS_ARCH ###
 		dk_set(DK_TARGET_OS_ARCH "${DK_TARGET_OS}_${DK_TARGET_ARCH}")  

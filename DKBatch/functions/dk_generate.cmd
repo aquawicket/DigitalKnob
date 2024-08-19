@@ -20,13 +20,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    ::%dk_call% dk_printVar TARGET_PATH
     if not exist "%TARGET_PATH%\%TARGET_OS%" %dk_call% dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
-    ::cd "%TARGET_PATH%\%TARGET_OS%"
-    call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"			&:: FIXME: remove the need for call here
-    ::call dk_printVar CMAKE_SOURCE_DIR							
-    call set "CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%"			&:: FIXME: remove the need for call here
-    ::%dk_call% dk_printVar CMAKE_TARGET_PATH
+	::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"			&:: FIXME: remove the need for call here
+	set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"					
+	::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
+	set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"	
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set "DKLEVEL=RebuildAll"

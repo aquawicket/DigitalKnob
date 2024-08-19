@@ -9,15 +9,45 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_getMULTI_CONFIG)
 	dk_debugFunc(${ARGV})
 
+	if(NOT DEBUG AND NOT RELEASE)
+		dk_getBUILD_TYPE()
+	endif()
+	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 	if(MULTI_CONFIG)
-		dk_set(MULTI_CONFIG TRUE)
+		if(CMAKE_BUILD_TYPE)
+			dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
+		endif()
+		
+		dk_printVar(CMAKE_CONFIGURATION_TYPES)
+		dk_unset(SINGLE_CONFIG)
+		dk_set(MULTI_CONFIG 1)
+		dk_set(BUILD_DIR ${OS})
+		dk_set(MULTI_CONFIG_BUILD_DIR ${OS})
 		dk_info("*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
-	else()
-		dk_set(SINGLE_CONFIG TRUE)
-		dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
+	
+	else() # SINGLE_CONFIG
+		if(CMAKE_CONFIGURATION_TYPES)
+			dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
+		endif()
+		
+		dk_set(SINGLE_CONFIG 1)
+		dk_unset(MULTI_CONFIG)
+		
+		if(DEBUG)
+			dk_set	(CMAKE_BUILD_TYPE Debug)
+			dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
+			dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${DEBUG_DIR})
+			dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config (Debug) ***")
+		elseif(RELEASE)
+			dk_set	(CMAKE_BUILD_TYPE Release)
+			dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
+			dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${RELEASE_DIR})
+			dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config (Release) ***")
+		endif()
 	endif()
+		
 endfunction()
 
 

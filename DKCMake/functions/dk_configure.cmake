@@ -12,53 +12,44 @@ function(dk_configure path) #ARGN
 	dk_debugFunc(${ARGV})
 	
 	dk_assert(path)
-	dk_getOption(NO_HALT 					${ARGV})
+	dk_getOption(NO_HALT ${ARGV})
+	
+	if((NOT SINGLE_CONFIG) AND (NOT MULTI_CONFIG))
+		dk_getMULTI_CONFIG()
+	endif()
+	
+	if(SINGLE_CONFIG)
+		# Make sure the plugin variable is alpha-numeric and uppercase
+		#dk_assert(plugin)
+		#dk_toUpper(${plugin} PLUGIN_NAME)
+		#dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
+		set(BUILD_PATH "${path}/${SINGLE_CONFIG_BUILD_DIR}")
+		#if(NOT EXISTS "${BUILD_PATH}")
+		#	dk_error("BUILD_PATH:${BUILD_PATH} not found")
+		#endif()
+	elseif(MULTI_CONFIG)
+		set(BUILD_PATH "${path}/${MULTI_CONFIG_BUILD_DIR}")
+	else()
+		dk_error("Neither SINGLE_CONFIG or MULTI_CONFIG is set")
+	endif()
+	dk_printVar(BUILD_PATH)
 	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS "${path}/CMakeLists.txt")
 		dk_info("Configuring with CMake")
-		if(SINGLE_CONFIG)
-			# Make sure the plugin variable is alpha-numeric and uppercase
-			dk_assert(plugin)
-			dk_toUpper(${plugin} PLUGIN_NAME)
-			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
-			set(BUILD_PATH "${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}")
-			if(NOT EXISTS "${BUILD_PATH}")
-				dk_error("BUILD_PATH:${BUILD_PATH} not found")
-			endif()
-			#dk_cd("${BUILD_PATH}")
-		endif()
-		if(NOT BUILD_PATH)
-			set(BUILD_PATH "${path}/${BUILD_DIR}")
-		endif()
-		
-		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		set(command_list ${DKCMAKE_BUILD} ${ARGN} ${path})				
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		
 		dk_fileWrite("${BUILD_PATH}/DKBUILD.log" "\"${command_string}\"\n\n")
-		
 		#dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-		dk_printVar(BUILD_PATH)
 		dk_queueCommand(${command_list}                                               WORKING_DIRECTORY "${BUILD_PATH}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		dk_fileAppend("${BUILD_PATH}/DKBUILD.log" "${echo_output}\n\n\n")
-		
 		return()
 	
 	# Configure with Autotools	(single_config)
 	elseif(EXISTS ${path}/configure.ac)
-		dk_info("Configuring with Autotools")
-		set(BUILD_PATH "${path}/${SINGLE_CONFIG_BUILD_DIR}")
-		if(NOT EXISTS "${BUILD_PATH}")
-			dk_error("BUILD_PATH:${BUILD_PATH} not found")
-		endif()
-		#dk_cd(""${path}/${SINGLE_CONFIG_BUILD_DIR}"")
-		if(NOT BUILD_PATH)
-			set(BUILD_PATH "${path}/${BUILD_DIR}")
-		endif()
-			
+		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BUILD_PATH}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${path}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
@@ -75,16 +66,7 @@ function(dk_configure path) #ARGN
 		
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_notice("configure type not detected. just run arguments")
-		set(BUILD_PATH "${path}/${SINGLE_CONFIG_BUILD_DIR}")
-		if(NOT EXISTS "${BUILD_PATH}")
-			dk_error("BUILD_PATH:${BUILD_PATH} not found")
-		endif()
-		#dk_cd("${BUILD_PATH}")
-		if(NOT BUILD_PATH)
-			set(BUILD_PATH ${path}/${BUILD_DIR})
-		endif()
-			
+		dk_notice("configure type not detected. just run arguments")	
 		dk_fileAppend(${BUILD_PATH}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#dk_replaceAll("${ARGN}"  ";"  " "  BASH_COMMANDS)

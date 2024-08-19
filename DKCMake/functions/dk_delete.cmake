@@ -39,6 +39,5 @@ function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_fileWrite(removeMe.file "created file to test dk_delete")
-	#dk_pause()
 	dk_delete(removeMe.file)
 endfunction()

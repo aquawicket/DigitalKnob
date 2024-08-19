@@ -70,5 +70,3 @@ dk_printVar(EMSCRIPTEN_MAKE_PROGRAM)
 #dk_prependEnvPath(${EMSCRIPTEN})
 #dk_prependEnvPath(${EMSCRIPTEN}/node/16.20.0_64bit/bin)
 #dk_prependEnvPath(${EMSCRIPTEN}/upstream/emscripten)
-
-dk_pause()
