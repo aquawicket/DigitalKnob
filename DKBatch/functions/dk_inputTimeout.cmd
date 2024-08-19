@@ -22,16 +22,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo ^> %cache_file% echo %%var%%>> %thread_file%
 	start /b cmd /c %thread_file%
 	
-	::<nul set /p"=!BS!!CR!%message% (waiting %timeout% seconds) "
-	echo "%message% ..user input. will timeout in %timeout% seconds  "
+	setlocal enableextensions enabledelayedexpansion
+	for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
+
+	::<nul set /p .%timeout% <NUL
 	
 	:input_timeout_loop
 	set /a timeout-=1
-	::<nul set /p"=!BS!!CR!%message% (waiting %timeout% seconds) "
+	
+	<nul set /p "=.!ASCII_13!     %timeout% " <NUL
+
 	
 	ping -n 2 localhost > nul
 	if !timeout! GTR 0 (
-		%dk_call% dk_setTitle %timeout%
+		%dk_call% dk_setTitle      %timeout%
 		if not exist %cache_file% goto :input_timeout_loop
 	)
 		
@@ -57,6 +61,6 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_inputTimeout "this message will time out" 5 default
+	%dk_call% dk_inputTimeout "this message will time out" 9 default
 goto:eof
 
