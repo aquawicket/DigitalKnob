@@ -100,6 +100,7 @@ goto:eof
 	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%"  goto:eof
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	
 goto:eof
 
 
@@ -112,6 +113,8 @@ goto:eof
     if not defined DKBATCH_FUNCTIONS_DIR   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 	if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
 	if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+	if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp\") do set "DKTEMP_DIR=%%~dpZ"
+	echo DKTEMP_DIR = %DKTEMP_DIR%
 goto:eof
 
 

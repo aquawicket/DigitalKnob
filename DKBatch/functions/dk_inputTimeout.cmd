@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "message=%1"
 	set /a timeout=%2
 	set "default=%3"
-	set cache_file=%~dp0input_timeout_cache.tmp
-	set thread_file=%~dp0input_timeout_thread.cmd
+	set cache_file=%DKTEMP_DIR%\input_timeout_cache.tmp
+	set thread_file=%DKTEMP_DIR%\input_timeout_thread.cmd
 	%dk_call% dk_delete %cache_file% 2>nul >nul
 	
 	echo ^@echo off> %thread_file%
