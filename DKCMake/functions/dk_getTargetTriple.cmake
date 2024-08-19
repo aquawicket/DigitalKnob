@@ -133,6 +133,13 @@ function(dk_getTargetTriple)
 			dk_set(DEBUG_DIR Debug)
 			dk_set(RELEASE_DIR Release)
 		endif()
+		
+		### Set DK_TARGET_TRIPLE ###
+		if(DK_TARGET_ENV)
+			dk_set(DK_TARGET_TRIPLE "${DK_TARGET_OS}_${DK_TARGET_ARCH}_${DK_TARGET_ENV}")
+		else()
+			dk_set(DK_TARGET_TRIPLE "${DK_TARGET_OS}_${DK_TARGET_ARCH}")
+		endif()
 	endif()
 endfunction()
 
