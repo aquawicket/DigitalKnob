@@ -10,6 +10,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_printVar var)
 	dk_debugFunc(${ARGV})
 	
+	#string(MAKE_C_IDENTIFIER ${var} alphanum_var)
+	#if(NOT "${var}" STREQUAL "${alphanum_var}")
+	#if(NOT "${var}" MATCHES "ENV{") # ENV variables
+	#	dk_error("${var} is not a valid variable name. It contains invalid characters.")
+	#	dk_pause()
+	#endif()
+	#endif()
 
 	if("${var}" MATCHES "ENV{") # ENV variables
 		set(ENV_VAR ${var})
@@ -32,7 +39,6 @@ function(dk_printVar var)
 			endif()
 		else()
 			dk_echo("${cyan}${var} = ${red}UNDEFINED${clr}")
-			dk_warning()
 		endif()
 	endif()
 endfunction()

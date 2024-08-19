@@ -53,7 +53,6 @@ function(dk_mergeFlags args rtn_var)
 		endif()
 	endforeach()
 
-	dk_printVar(${args})
 	set(${rtn_var} ${args} PARENT_SCOPE)
 endfunction()
 
