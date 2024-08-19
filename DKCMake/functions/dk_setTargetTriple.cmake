@@ -211,8 +211,7 @@ function(dk_setTargetTriple)
 	dk_assert(DK_TARGET_OS)
 	dk_assert(DK_TARGET_ARCH)
 	dk_assert(DK_TARGET_TRIPLE)
-
-	#dk_printVar(DKSCRIPT_PATH)
+	
 endfunction()
 
 

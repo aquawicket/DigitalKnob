@@ -20,6 +20,10 @@ function Global:dk_getDKPaths() {
     $global:DKDOWNLOAD_DIR = "$DIGITALKNOB_DIR/download"
     dk_call dk_makeDirectory $DKDOWNLOAD_DIR
     dk_call dk_printVar DKDOWNLOAD_DIR
+	
+	$global:DKTEMP_DIR = "$DIGITALKNOB_DIR/temp"
+    dk_call dk_makeDirectory $DKTEMP_DIR
+    dk_call dk_printVar DKTEMP_DIR
 }
 
 
@@ -37,4 +41,5 @@ function Global:DKTEST() {
 	dk_call dk_echo "DIGITALKNOB_DIR = $DIGITALKNOB_DIR"
 	dk_call dk_echo "DKTOOLS_DIR = $DKTOOLS_DIR"
 	dk_call dk_echo "DKDOWNLOAD_DIR = $DKDOWNLOAD_DIR"
+	dk_call dk_echo "DKTEMP_DIR = $DKTEMP_DIR"
 }

@@ -13,6 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
     if not defined DKTOOLS_DIR     %dk_call% dk_setDKTOOLS_DIR
     if not defined DKDOWNLOAD_DIR  %dk_call% dk_setDKDOWNLOAD_DIR
+	if not defined DKTEMP_DIR      %dk_call% dk_setDKTEMP_DIR
 goto:eof
 
 

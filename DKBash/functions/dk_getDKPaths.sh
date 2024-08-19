@@ -29,6 +29,10 @@ dk_getDKPaths() {
 	DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
 	dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}"
 	dk_call dk_printVar DKDOWNLOAD_DIR
+	
+	DKTEMP_DIR="${DIGITALKNOB_DIR}/temt"
+	dk_call dk_makeDirectory "${DKTEMP_DIR}"
+	dk_call dk_printVar DKTEMP_DIR
 }
 
 
