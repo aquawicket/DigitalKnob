@@ -8,10 +8,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_getMULTI_CONFIG)
 	dk_debugFunc(${ARGV})
-
-	if(NOT DEBUG AND NOT RELEASE)
-		dk_getBUILD_TYPE()
-	endif()
+	
+	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")  # get DEBUG, RELEASE variables
+	dk_validate(OS           "dk_getTargetTriple()")
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -26,6 +25,10 @@ function(dk_getMULTI_CONFIG)
 		dk_set(BUILD_DIR ${OS})
 		dk_set(MULTI_CONFIG_BUILD_DIR ${OS})
 		dk_info("*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
+		
+		dk_assert(MULTI_CONFIG)
+		dk_assert(BUILD_DIR)
+		dk_assert(MULTI_CONFIG_BUILD_DIR)
 	
 	else() # SINGLE_CONFIG
 		if(CMAKE_CONFIGURATION_TYPES)
@@ -46,8 +49,12 @@ function(dk_getMULTI_CONFIG)
 			dk_set	(SINGLE_CONFIG_BUILD_DIR ${OS}/${RELEASE_DIR})
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config (Release) ***")
 		endif()
-	endif()
 		
+		dk_assert(SINGLE_CONFIG)
+		dk_assert(BUILD_DIR)
+		dk_assert(CMAKE_BUILD_TYPE)
+		dk_assert(SINGLE_CONFIG_BUILD_DIR)
+	endif()
 endfunction()
 
 

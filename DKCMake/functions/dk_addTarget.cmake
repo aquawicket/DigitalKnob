@@ -31,5 +31,5 @@ function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
 	dk_todo()
-
+	dk_addTarget(plugin target)
 endfunction()

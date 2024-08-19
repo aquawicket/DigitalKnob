@@ -72,5 +72,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
-	dk_assets()
+	dk_assets(DK)
 endfunction()

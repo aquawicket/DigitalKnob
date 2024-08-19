@@ -54,16 +54,14 @@ endif()
 	
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
-	if(NOT CMAKE_SOURCE_DIR)
-		dk_error("CMAKE_SOURCE_DIR invalid!")
-	endif()
+	dk_assert(CMAKE_SOURCE_DIR)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
+	dk_assert(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
-	if(NOT CMAKE_BINARY_DIR)
-		dk_error("CMAKE_BINARY_DIR invalid!")
-	endif()
+	dk_assert(CMAKE_BINARY_DIR)
 	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
+	dk_assert(CMAKE_BINARY_DIR)
 endif()
 
 
@@ -94,7 +92,9 @@ endif()
 
 
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
-dk_getMULTI_CONFIG()
+dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(DK_TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
 #get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 #if(MULTI_CONFIG)
 #	dk_set(MULTI_CONFIG TRUE)
@@ -107,6 +107,5 @@ dk_getMULTI_CONFIG()
 
 
 ##### Load Function files #################
-dk_getHostTriple()
-dk_getTargetTriple()
+dk_assert(DKCMAKE_DIR)
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)

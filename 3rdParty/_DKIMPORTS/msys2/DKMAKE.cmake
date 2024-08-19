@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(DK_TARGET_TRIPLE  "dk_setTargetTriple()")
+dk_validate(DK_TARGET_TRIPLE  "dk_getTargetTriple()")
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 

@@ -12,6 +12,7 @@ function(dk_getTargetTriple)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
+		dk_assert(CMAKE_BINARY_DIR)
 		dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 		#dk_printVar(CMAKE_BINARY_DIR)
 		
@@ -21,6 +22,7 @@ function(dk_getTargetTriple)
 		### Get DK_TARGET_FOLDER ###
 		dk_basename(${DK_TARGET_DIR} DK_TARGET_FOLDER)     
 		
+		dk_assert(DK_TARGET_DIR)
 		### Get DK_TARGET_OS_DIR
 		### Get DK_TARGET_TYPE ###
 		if(${DK_TARGET_DIR} MATCHES "Debug")
@@ -159,7 +161,11 @@ function(dk_getTargetTriple)
 		dk_assert(DK_TARGET_OS)
 		dk_assert(DK_TARGET_ARCH)
 		dk_assert(DK_PROJECT_DIR)
+		dk_assert(OS)
+	#else()
+		#dk_setTargetTriple()
 	endif()
+	
 endfunction()
 
 

@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(DK_TARGET_TRIPLE "dk_setTargetTriple()")
+dk_validate(DK_TARGET_TRIPLE "dk_getTargetTriple()")
 #include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -810,9 +810,7 @@ endif()
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
 # https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
 
-if(NOT SINGLE_CONFIG AND NOT MULTI_CONFIG)
-	dk_getMULTI_CONFIG()
-endif()
+
 
 ############## Setup continued by cmake from here ##############
 if(CMAKE_GENERATOR_PLATFORM)

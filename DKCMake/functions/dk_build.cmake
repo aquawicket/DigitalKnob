@@ -16,11 +16,8 @@ function(dk_build path) #target NO_HALT
 		return()
 	endif()
 	dk_getOption(NO_HALT ${ARGV})
-	
-	if(NOT EXISTS ${path})
-		dk_error("dk_build(${path}) path does not exist")
-	endif()
-	
+
+	#dk_assertPath(${path})	
 	set(target ${ARGV1})
 	
 	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
@@ -29,7 +26,7 @@ function(dk_build path) #target NO_HALT
 	#	list(APPEND BUILD_MODE multi_config)
 	#endif()
 	#list(APPEND BUILD_MODE single_config)
-		
+		#dk_assert(BUILD_DIR)
 		dk_cd(${path}/${BUILD_DIR})
 
 		# Build with CMake		(multi_config / single_config)
