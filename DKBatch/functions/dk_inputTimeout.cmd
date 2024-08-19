@@ -37,6 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if !timeout! GTR 0 (
 		%dk_call% dk_setTitle      %timeout%
 		if not exist %cache_file% goto :input_timeout_loop
+		echo after
 	)
 		
 	:input_timeout_result

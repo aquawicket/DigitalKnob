@@ -56,15 +56,10 @@ goto:eof
 	
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
 	
-	%dk_call% dk_fileWrite %DKDOWNLOAD_DIR%\copyMe.file "dk_copy test"
-	%dk_call% dk_copy %DKDOWNLOAD_DIR%\copyMe.file %DIGITALKNOB_DIR%\iWasCopied.txt OVERWRITE
+	%dk_call% dk_fileWrite %DKTEMP_DIR%\copyMe.file "dk_copy test"
+	%dk_call% dk_copy %DKTEMP_DIR%\copyMe.file %DKTEMP_DIR%\iWasCopied.txt OVERWRITE
 	
-	%dk_call% dk_fileWrite copyMe.file "dk_copy test"
-	%dk_call% dk_copy copyMe.file iWasCopied.txt OVERWRITE
 	
-	%dk_call% dk_makeDirectory %DKDOWNLOAD_DIR%\copyMe
-	%dk_call% dk_copy %DKDOWNLOAD_DIR%\copyMe %DIGITALKNOB_DIR%\iWasCopied OVERWRITE
-	
-	%dk_call% dk_makeDirectory copyMe
-	%dk_call% dk_copy copyMe iWasCopied OVERWRITE
+	%dk_call% dk_makeDirectory %DKTEMP_DIR%\copyMe
+	%dk_call% dk_copy %DKTEMP_DIR%\copyMe %DKTEMP_DIR%\iWasCopied OVERWRITE
 goto:eof

@@ -52,15 +52,9 @@ goto:eof
 	
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
 	
-	%dk_call% dk_fileWrite %DKDOWNLOAD_DIR%/renameMe.file "dk_rename test"
-	%dk_call% dk_rename %DKDOWNLOAD_DIR%/renameMe.file %DIGITALKNOB_DIR%/iWasRenamed.txt OVERWRITE
+	%dk_call% dk_fileWrite %DKTEMP_DIR%/renameMe.file "dk_rename test"
+	%dk_call% dk_rename %DKTEMP_DIR%/renameMe.file %DKTEMP_DIR%/iWasRenamed.txt OVERWRITE
 	
-	%dk_call% dk_fileWrite renameMe.file "dk_rename test"
-	%dk_call% dk_rename renameMe.file iWasRenamed.txt OVERWRITE
-	
-	%dk_call% dk_makeDirectory %DKDOWNLOAD_DIR%/renameMe
-	%dk_call% dk_rename %DKDOWNLOAD_DIR%/renameMe %DIGITALKNOB_DIR%/iWasRenamed OVERWRITE
-	
-	%dk_call% dk_makeDirectory renameMe
-	%dk_call% dk_rename renameMe iWasRenamed OVERWRITE
+	%dk_call% dk_makeDirectory %DKTEMP_DIR%/renameMe
+	%dk_call% dk_rename %DKTEMP_DIR%/renameMe %DKTEMP_DIR%/iWasRenamed OVERWRITE
 goto:eof
