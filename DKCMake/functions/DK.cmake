@@ -86,6 +86,7 @@ function(DKINIT)
 		dk_exit(0)
 	endif()
 	endif()
+	
 endfunction()
 
 
@@ -233,3 +234,5 @@ endfunction()
 
 
 DKINIT()
+
+
