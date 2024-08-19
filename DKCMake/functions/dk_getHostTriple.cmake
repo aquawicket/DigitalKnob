@@ -100,6 +100,22 @@ function(dk_getHostTriple)
 	dk_toUpper(${HOST} HOST_UPPER)
 	dk_toUpper(${HOST_ARCH} HOST_ARCH_UPPER)
 	dk_set(${HOST_UPPER}_${HOST_ARCH_UPPER}_HOST TRUE)
+	
+	
+	
+	### set HOST_TRIPLE ###
+	dk_toLower(${HOST} HOST_LOWER)
+	dk_toLower(${HOST_ARCH} HOST_ARCH_LOWER)
+	# get default HOST_ENV
+	if("${HOST_LOWER}" STREQUAL "win")
+		dk_set(HOST_ENV "clang")
+	endif()
+	if(HOST_ENV)
+		dk_set(HOST_TRIPLE ${HOST_LOWER}_${HOST_ARCH_LOWER}_${HOST_ENV})
+	else()
+		dk_set(HOST_TRIPLE ${HOST_LOWER}_${HOST_ARCH_LOWER})
+	endif()
+	
 endfunction()
 
 

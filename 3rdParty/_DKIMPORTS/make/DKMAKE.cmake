@@ -6,6 +6,7 @@ if(MSYSTEM)
 	
 	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	
+	
 	if("${MSYSTEM}" STREQUAL "CLANG32")
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# CLANG32
 		dk_findProgram(MAKE_PROGRAM mingw32-make "${MSYS2}/clang32/bin")
@@ -42,3 +43,5 @@ endif()
 #if(EMSCRIPTEN)
 #	dk_findProgram(MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
 #endif()
+
+dk_assert(CMAKE_MAKE_PROGRAM)

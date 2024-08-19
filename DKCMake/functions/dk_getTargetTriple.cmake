@@ -8,7 +8,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
-
 function(dk_getTargetTriple)
 	dk_debugFunc(${ARGV})
 	
@@ -18,11 +17,9 @@ function(dk_getTargetTriple)
 		
 		### Get DK_TARGET_DIR ###
 		dk_set(DK_TARGET_DIR ${CMAKE_BINARY_DIR})
-		#dk_printVar(DK_TARGET_DIR)
 		
 		### Get DK_TARGET_FOLDER ###
 		dk_basename(${DK_TARGET_DIR} DK_TARGET_FOLDER)     
-		#dk_printVar(DK_TARGET_FOLDER)
 		
 		### Get DK_TARGET_OS_DIR
 		### Get DK_TARGET_TYPE ###
@@ -39,12 +36,9 @@ function(dk_getTargetTriple)
 		else()
 			dk_set(DK_TARGET_OS_DIR ${CMAKE_BINARY_DIR})
 		endif()
-		#dk_printVar(DK_TARGET_OS_DIR)
-		#dk_printVar(DK_TARGET_TYPE)
 		
 		### Get DK_TARGET_OS_FOLDER
 		dk_basename(${DK_TARGET_OS_DIR} DK_TARGET_OS_FOLDER)     
-		#dk_printVar(DK_TARGET_OS_FOLDER)
 		
 		dk_set(DK_TARGET_OS ${DK_TARGET_OS_FOLDER})
 		### Get DK_TARGET_ENV
@@ -63,7 +57,6 @@ function(dk_getTargetTriple)
 		else()
 			dk_warning("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set DK_TARGET_ENV")
 		endif()
-		#dk_printVar(DK_TARGET_ENV)
 		
 		### Get DK_TARGET_ARCH
 		if(${DK_TARGET_OS} MATCHES "_arm64$")
@@ -81,7 +74,6 @@ function(dk_getTargetTriple)
 		else()
 			dk_error("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set DK_TARGET_ARCH")
 		endif()
-		#dk_printVar(DK_TARGET_ARCH)
 		
 		### Set MSYSTEM
 		if(DK_TARGET_ENV)
@@ -97,7 +89,6 @@ function(dk_getTargetTriple)
 			else()
 				dk_error("The CMAKE_BINARY_DIR:${CMAKE_BINARY_DIR} does not contain info to set MSYSTEM")
 			endif()
-			#dk_printVar(MSYSTEM)
 			dk_set(${MSYSTEM} ON)
 		endif()
 		
@@ -106,22 +97,18 @@ function(dk_getTargetTriple)
 		
 		### Set DK_TARGET_OS_ARCH ###
 		dk_set(DK_TARGET_OS_ARCH "${DK_TARGET_OS}_${DK_TARGET_ARCH}")  
-		#dk_printVar(DK_TARGET_OS_ARCH)
 
 		### Set DK_PROJECT_DIR ###
 		dk_dirname(${DK_TARGET_OS_DIR} DK_PROJECT_DIR)
 		dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
-		#dk_printVar(DK_PROJECT_DIR)
 
 		### Set OS ###
 		#dk_set(OS "${DK_TARGET_OS_ARCH}")
 		dk_set(OS "${DK_TARGET_OS_FOLDER}")
-		#dk_printVar(OS)
 
 		### Set ${OS} variable ON ##
 		dk_toUpper(${DK_TARGET_OS} DK_TARGET_OS_UPPER)
 		dk_set(${DK_TARGET_OS_UPPER} ON)
-		#dk_printVar(DK_TARGET_OS_UPPER)
 
 		### Set ARCH variable ON ##
 		if(DK_TARGET_ARCH)
@@ -131,11 +118,9 @@ function(dk_getTargetTriple)
 		if(DK_TARGET_ARCH_UPPER)
 			dk_set(${DK_TARGET_ARCH_UPPER} ON)
 		endif()
-		#dk_printVar(DK_TARGET_ARCH_UPPER)
 
 		### Set ${OS_ARCH} variable ON ##
 		dk_set(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER} ON)
-		#dk_printVar(${DK_TARGET_OS_UPPER}_${DK_TARGET_ARCH_UPPER})
 
 		### Set DEBUG_DIR and RELEASE_DIR variables
 		if(${DK_TARGET_OS} MATCHES "ios")
@@ -148,8 +133,6 @@ function(dk_getTargetTriple)
 			dk_set(DEBUG_DIR Debug)
 			dk_set(RELEASE_DIR Release)
 		endif()
-		#dk_printVar(DEBUG_DIR)
-		#dk_printVar(RELEASE_DIR)
 	endif()
 endfunction()
 
@@ -162,5 +145,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
-	dk_todo()
+	dk_getTargetTriple()
 endfunction()

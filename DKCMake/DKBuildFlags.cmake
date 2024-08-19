@@ -814,7 +814,8 @@ endif()
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
 # https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
 
-
+dk_getMULTI_CONFIG()
+dk_getBUILD_TYPE()
 if(MULTI_CONFIG)
 	if(CMAKE_BUILD_TYPE)
 		dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
@@ -823,7 +824,6 @@ if(MULTI_CONFIG)
 	dk_printVar(CMAKE_CONFIGURATION_TYPES)
 	
 	dk_set	(BUILD_DIR ${OS})
-	
 elseif(SINGLE_CONFIG)
 	if(CMAKE_CONFIGURATION_TYPES)
 		dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")

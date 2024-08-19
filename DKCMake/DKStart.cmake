@@ -94,6 +94,7 @@ endif()
 
 
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
+dk_getMULTI_CONFIG()
 #get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 #if(MULTI_CONFIG)
 #	dk_set(MULTI_CONFIG TRUE)
@@ -102,7 +103,7 @@ endif()
 #	dk_set(SINGLE_CONFIG TRUE)
 #	dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
 #endif()
-dk_getMULTI_CONFIG()
+
 
 
 ##### Load Function files #################
