@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	%dk_call% dk_keyboardInput input
 
-    set "APP=_%input%_"
+    set "APP=%input%"
   
     ::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
     ::cd %DIGITALKNOB_DIR%

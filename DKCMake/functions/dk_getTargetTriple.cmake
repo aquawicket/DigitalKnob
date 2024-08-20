@@ -162,8 +162,9 @@ function(dk_getTargetTriple)
 		dk_assert(DK_TARGET_ARCH)
 		dk_assert(DK_PROJECT_DIR)
 		dk_assert(OS)
-	#else()
-		#dk_setTargetTriple()
+	else()
+	
+		dk_setTargetTriple()
 	endif()
 	
 endfunction()

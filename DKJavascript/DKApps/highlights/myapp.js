@@ -25,5 +25,5 @@
 */
 
 // called from index.html
-var url = "index.html"
+var url = "ace/Editor.html"
 location.href = url

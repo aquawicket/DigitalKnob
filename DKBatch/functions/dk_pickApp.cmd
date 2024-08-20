@@ -31,6 +31,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_echo "Please select an app to build"
 	%dk_call% dk_keyboardInput choice
 
+	%dk_call% dk_getDirectories %DKAPPS_DIR% apps
+	%dk_call% dk_printVar apps
+	for %%Z in ("%apps%") do set "app=%%~nxZ"
+	%dk_call% dk_printVar app
+	
+::	set /a prev=count-1
+::	:dk_app_loop
+::	if %count% gtr 0 (
+::		set "%apps%[%count%]=!%apps%[%apps%]!"
+::		set /a count-=1
+::		goto:dk_app_loop
+::	)
+	::endlocal & set "%~1[0]=%~2"
+	
+	
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="0"  %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_% & goto:eof
     if "%choice%"=="1"  %dk_call% dk_set APP HelloWorld   & goto:eof
