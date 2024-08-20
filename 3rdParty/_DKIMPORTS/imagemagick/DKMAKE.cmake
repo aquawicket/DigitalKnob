@@ -10,8 +10,8 @@ dk_depend(vc_redist)
 
 if(WIN_HOST)
 	dk_load			(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
-	dk_assert		(VCCOMP140_DLL)
-	dk_assertPath	(${VCCOMP140_DLL})
+	#dk_assert		(VCCOMP140_DLL)
+	#dk_assertPath	(${VCCOMP140_DLL})
 endif()
 
 

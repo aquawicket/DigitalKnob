@@ -25,5 +25,5 @@
 */
 
 // called from index.html
-var url = "DKWebTest/index.html"
+var url = "index.html"
 location.href = url

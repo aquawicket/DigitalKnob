@@ -16,13 +16,13 @@
 		<script src="api/highlight.min.js"></script>
 		<script>hljs.highlightAll();</script>
 		<pre><code class="language-html">...</code></pre>
-		
+		<script> 
+		const highlightedCode = hljs.highlight('<span>Hello World!</span>',{ language: 'xml' }).value
+	</script>
 
 	</head>
 	<body onload="myapp.loadApp()">
-	<script> 
-		const highlightedCode = hljs.highlight('<span>Hello World!</span>',{ language: 'xml' }).value
-	</script>
+	
 	
 	</body>
 </html>
