@@ -8,6 +8,7 @@ if "%~1" neq "" goto:runDKBatch
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_findProgram TCC_EXE "tcc.exe" "%DKTOOLS_DIR%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
@@ -31,8 +32,8 @@ goto:eof
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	echo %TCC_EXE% /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
-	pause
+	"%TCC_EXE%" /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
+
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
 	
