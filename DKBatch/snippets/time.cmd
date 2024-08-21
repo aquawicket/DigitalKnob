@@ -1,4 +1,5 @@
 @echo off
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 for /L %%L in (0,1,2147483648) do @(
 	for /f "tokens=1-4 delims=:." %%A in ("!time!") do (
@@ -45,6 +46,7 @@ for /L %%L in (0,1,2147483648) do @(
 		
 		rem  ###### Print all in centiseconds (centiseconds appended) ######
 	    rem echo count:!count!   TA:!time!   h:!hour_in_seconds!      m:!minute_in_seconds!      s:!second_in_seconds!
+		call dk_sleep 1000
 		echo count:!count!   TA:!time!   TB:%%A:%%B:%%C.%%D   h:!hour_in_centiseconds!    m:!minute_in_centiseconds!    s:!second_in_centiseconds!    cs:!centisecond!
 		rem echo count:!count!   TA:!time!   h:!hour_in_milliseconds!   m:!minute_in_milliseconds!   s:!second_in_milliseconds!   cs:!centiseconds_in_milliseconds!
 	)
