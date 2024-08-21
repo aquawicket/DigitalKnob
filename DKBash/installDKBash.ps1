@@ -41,8 +41,8 @@ function Global:runDKBash() {
 	pause
 	$DKBASH_FUNCTIONS_DIR = $1
 	$GITBASH_EXE = $2
-	$SH_FILE = $3
+	$DKSCRIPT_PATH = $3
 
 	Write-Host "############### Digitalknob ##################"
-	start $GITBASH_EXE $SH_FILE
+	start $GITBASH_EXE $DKSCRIPT_PATH
 }
