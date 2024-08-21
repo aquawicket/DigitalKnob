@@ -17,6 +17,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if "!DE!" equ "" set "line[!i!]=%%Z"
 		if "!DE!" neq "" call set "line[%%i%%]=%%Z"
 	)
+	
+::	for /f "tokens=1* delims=	: " %%a in ('"%~1" %~2 & call echo %%ERRORLEVEL%%') do (
+::			set /A i+=1
+::			if "!DE!" equ "" set "line[!i!]=%%a"
+::			if "!DE!" neq "" call set "line[%%i%%]=%%a"
+::	)
+
 
 	set /A numLines=i-1
 	:: Final errorlevel is stored in last line

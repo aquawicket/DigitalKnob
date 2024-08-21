@@ -27,3 +27,5 @@
 // called from index.html
 var url = "DKWebTest/index.html"
 location.href = url
+
+alert("hello")
