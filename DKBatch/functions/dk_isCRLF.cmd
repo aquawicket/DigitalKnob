@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		) else (
 			rem echo File uses CRLF or has no line endings!
 			if defined "%~2" (endlocal & set "%2=true")
-			(call )
+			(call ) %NO_STD%
 			goto:eof
 		)
 	) else (
@@ -33,13 +33,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		) else (
 			rem echo File uses CR+LF line endings!
 			if defined "%~2" (endlocal & set "%2=true")
-			(call )
+			(call ) %NO_STD%
 			goto:eof
 		)
 	)
 	
 	if defined "%~2" (endlocal & set "%2=false")
-	(call)
+	(call) %NO_STD%
 	endlocal
 goto:eof
 

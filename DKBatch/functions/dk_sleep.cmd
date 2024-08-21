@@ -10,15 +10,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: Method 1 - javascript (fastest)
 	set /a "milliseconds=%~1-100"
-	cscript /nologo /e:JScript "%~f0" "%milliseconds%" 2>nul && goto:eof || (call )
+	cscript /nologo /e:JScript "%~f0" "%milliseconds%" 2>nul && goto:eof || (call ) %NO_STD%
 	
 	:: Method 2 - dk_powershell
 	set /a "milliseconds=%~1-300"
-	%dk_call% dk_powershell "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
+	%dk_call% dk_powershell "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call ) %NO_STD%
 	
 ::	:: Method 3 - powershell directly
 ::	set /a "milliseconds=%~1-300"
-::	%dk_call% powershell -Command "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call )
+::	%dk_call% powershell -Command "Start-Sleep -m %milliseconds%" 2>nul && goto:eof || (call ) %NO_STD%
 	
 	:: Method 4 - using ping
 	set /a "seconds=(%~1+1000)/1000"

@@ -14,12 +14,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_echo
 	if /I "%REPLY%" equ "Y" (
 		rem if defined "%~1" ( endlocal & %dk_call% dk_set %1 "true" )
-        (call )
+        (call ) %NO_STD%
 		goto:eof
 	) 
 	
 	rem if not defined "%~1" ( endlocal & %dk_call% dk_set %1 "false" )
-	(call)
+	(call) %NO_STD%
 	endlocal
 goto:eof
 

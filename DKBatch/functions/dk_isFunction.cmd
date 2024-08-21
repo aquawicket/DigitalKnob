@@ -17,12 +17,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	if %ERRORLEVEL% equ 0 (
 		if defined "%~2" (endlocal & set "%2=true")
-        (call )
+        (call ) %NO_STD%
 		goto:eof
 	)
 	
     if defined "%~2" (endlocal & set "%2=false")
-	(call)
+	(call) %NO_STD%
 goto:eof
 
 

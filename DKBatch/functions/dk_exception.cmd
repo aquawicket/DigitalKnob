@@ -54,7 +54,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
           set "exception.Stack=%%S"
         )
         set "exception.Try="
-        (CALL )
+        (call ) %NO_STD%
         goto :@Catch
       )
     ) else (

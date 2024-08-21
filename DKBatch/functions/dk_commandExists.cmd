@@ -15,14 +15,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if not defined "%~2" goto:eof
 		
 		endlocal & call set "%2=true"
-		(call )
+		(call ) %NO_STD%
 		goto:eof
 	)
 	
 	if not defined "%~2" goto:eof
 	
 	endlocal & set "%2=false"
-    (call)
+    (call) %NO_STD%
 goto:eof
 
 

@@ -10,12 +10,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		
 	>nul findstr /c:"%~2" "%~1" &&  (
 		if defined "%~3" (endlocal & set "%3=true")
-		(call )
+		(call ) %NO_STD%
 		goto:eof
 	)
 	
 	if defined "%~3" (endlocal & set "%3=false")
-    (call)
+    (call) %NO_STD%
 goto:eof
 
 

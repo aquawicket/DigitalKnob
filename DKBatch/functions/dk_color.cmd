@@ -171,7 +171,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif
 	
-	endlocal
 goto:eof
 %dk_call% dk_color 1
 

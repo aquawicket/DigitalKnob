@@ -55,7 +55,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	::set "dk_call=call dk_call"
 	set "dk_call=call"
     call dk_source dk_debugFunc
-	call dk_exception init
+	::call dk_exception init
 	%dk_call% dk_color
 	%dk_call% dk_logo
 	
@@ -114,7 +114,6 @@ goto:eof
 	if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
 	if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp\") do set "DKTEMP_DIR=%%~dpZ"
-	echo DKTEMP_DIR = %DKTEMP_DIR%
 goto:eof
 
 

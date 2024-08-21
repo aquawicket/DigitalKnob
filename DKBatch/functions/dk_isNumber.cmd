@@ -17,13 +17,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not defined non_numeric (
 		%dk_call% dk_unset non_numeric
 		if defined "%~2" (endlocal & set "%2=true")
-        (call )
+        (call ) %NO_STD%
 		goto:eof
 	)
 	
 	%dk_call% dk_unset non_numeric
     if defined "%~2" (endlocal & set "%2=false")
-	(call)
+	(call) %NO_STD%
 goto:eof
 
 

@@ -11,12 +11,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::%dk_call% dk_set variable "%1"
 	if defined %~1 (
 		if defined "%~2" (endlocal & call set "%2=true")
-		(call )
+		(call ) %NO_STD%
 		goto:eof
 	)
 	
 	if defined "%~2" (endlocal & call set "%2=false")
-    (call)
+    (call) %NO_STD%
 goto:eof
 
 

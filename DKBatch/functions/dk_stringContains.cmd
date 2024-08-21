@@ -15,12 +15,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     set "_needle_=%~2"
     if not "x!_haystack_:%_needle_%=!"=="x%_haystack_%" (
 		if defined "%~3" (endlocal & set "%3=true")
-		(call )
+		(call ) %NO_STD%
 		goto:eof
 	)
 	
     if defined "%~3" (endlocal & set "%3=false")
-    (call)
+    (call) %NO_STD%
 goto:eof
 
 
