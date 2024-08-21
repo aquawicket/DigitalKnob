@@ -9,18 +9,29 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 :dk_getParentPID
 	call dk_debugFunc 1
-
-	setlocal
+	
+	if exist "dk_getParentPID.exe .exe" goto:exe_exists
 	for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsoft.NET\Framework\*jsc.exe"') do (
 		set "jsc=%%v"
 	)
 
-	if not exist "%~n0.exe" (
-		"%jsc%" /nologo /out:"%~n0.exe" "%~dpsfnx0" 
-	)
+	::if not exist "%~n0.exe" (
+		"%jsc%" /nologo /out:"dk_getParentPID.exe" "%~dpsfnx0" 
+	::)
 
-	%~n0.exe
-	endlocal & "%1=%errorlevel%"
+	:exe_exists
+	for /F "tokens=* USEBACKQ" %%F IN (`dk_getParentPID.exe`) do (
+		set "PPID=%%F"
+	)
+	
+	
+	if not defined PPID dk_getParentPID.exe 
+	if not defined PPID set "PPID=%errorlevel%"
+	
+	if defined PPID echo PPID = %PPID%
+	
+	if not defined PPID %dk_call% dk_error "Could not get PPID"
+	endlocal & set "%1=%PPID%"
 goto:eof
 
 
@@ -30,6 +41,12 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
+	
+	%dk_call% dk_getParentPID PPID
+	%dk_call% dk_printVar PPID
+	
+	%dk_call% dk_getParentPID PPID
+	%dk_call% dk_printVar PPID
 	
 	%dk_call% dk_getParentPID PPID
 	%dk_call% dk_printVar PPID
@@ -56,3 +73,5 @@ var parentId = queryObj["ParentProcessId"];
 var parent = Process.GetProcessById(parentId);
 Console.WriteLine(parent.Id);
 Environment.Exit(parent.Id);
+
+
