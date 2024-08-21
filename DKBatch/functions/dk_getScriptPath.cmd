@@ -39,7 +39,7 @@ goto:eof
         call "%~d0\:Step3\..%~pnx0"
     ) else (
         set "_callertype=cmd-line"
-        cmd /c "call "%~d0\:Step3\..%~pnx0" "
+        %ComSpec% /c "call "%~d0\:Step3\..%~pnx0" "
     )
     endlocal
 )

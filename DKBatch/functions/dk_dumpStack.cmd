@@ -76,7 +76,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 			call "%~d0\:call_return\..%~pnx0" %*
 		) else (
 			set "caller[%frame%].type=cmd-line"
-			cmd /c "call "%~d0\:call_return\..%~pnx0" %*"
+			%ComSpec% /c "call "%~d0\:call_return\..%~pnx0" %*"
 		)
 		endlocal
 	)

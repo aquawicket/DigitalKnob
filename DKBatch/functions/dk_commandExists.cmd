@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
     ::%dk_call% dk_set command "%~1"
- 	cmd /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
+ 	%ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
     if %ERRORLEVEL% equ 0 (
 		if not defined "%~2" goto:eof

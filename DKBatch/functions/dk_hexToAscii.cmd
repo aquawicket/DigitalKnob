@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "hex=%~1"
 	%dk_call% dk_fileWrite hex.tmp %hex:~-2%
 	
-	::for /f %%b in ('forfiles /c "cmd /c echo 0x1b"') do set "ESC=%%b"
+	::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"
 	
 	%dk_call% certutil -decodehex hex.tmp ascii.tmp >nul
 	set "ascii="

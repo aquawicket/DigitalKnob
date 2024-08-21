@@ -20,8 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	set /A numLines=i-1
 	:: Final errorlevel is stored in last line
-	if "!!" equ "" if !line[%i%]! gtr 0 set /a lastline = !line[%i%]! 2>nul && cmd /c exit %lastline%
-	if "!!" neq "" call set /a lastline = %line[%%i%%]% 2>nul && cmd /c exit %lastline%
+	if "!!" equ "" if !line[%i%]! gtr 0 set /a lastline = !line[%i%]! 2>nul && %ComSpec% /c exit %lastline%
+	if "!!" neq "" call set /a lastline = %line[%%i%%]% 2>nul && %ComSpec% /c exit %lastline%
 	set "line[%i%]="           &:: delete the error line from the array
 	
 	:: WARNING

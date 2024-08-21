@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo ^@echo off> %thread_file%
 	echo set /p var=>> %thread_file%
 	echo ^> %cache_file% echo %%var%%>> %thread_file%
-	start /b cmd /c %thread_file%
+	start /b %ComSpec% /c %thread_file%
 	
 	setlocal enableextensions enabledelayedexpansion
 	for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"

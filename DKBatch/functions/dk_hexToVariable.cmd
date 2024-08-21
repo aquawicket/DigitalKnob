@@ -9,11 +9,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_hexToVariable
 	call dk_debugFunc 2
 	
-	::for /f %%b in ('forfiles /c "cmd /c echo 0x1b"') do set "ESC=%%b"    ::Test:  set ESC to 0x1b
+	::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"    ::Test:  set ESC to 0x1b
 
 	set "hex=%~2"
 	::set "hex=0x%hex:~-2%
-	for /f %%b in ('forfiles /c "cmd /c echo 0x%hex:~-2%"') do set "%~1=%%b"
+	for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x%hex:~-2%"') do set "%~1=%%b"
 goto:eof
 
 
