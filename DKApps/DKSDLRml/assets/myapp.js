@@ -25,7 +25,51 @@
 */
 
 // called from index.html
-var url = "DKWebTest/index.html"
-location.href = url
 
-alert("hello")
+//var url = "DKWebTest/index.html"
+//var url = "DKCodeRunner/index.html"
+//var url = "DKCodeRunner.html"
+//location.href = url
+var globalThis = (function () {  
+    return this || (1, eval)('this');  
+}());  
+
+var MyApp = function() {};
+var myapp = new MyApp;
+
+myapp.loadFiles = function myapp_loadFiles() {
+	alert("myapp_loadFiles()");
+	
+	DKPlugin("DK/DKTrace.js", "singleton")
+    DKPlugin("DK/DKErrorHandler.js", "singleton")
+    DKPlugin("DK/DKPhp.js", "singleton")
+    DKPlugin("DK/DKJson.js", "singleton")
+    DKPlugin("DKFile/DKFile.js", "singleton")
+    //DKPlugin("DK/DKValidate.js", "singleton")
+    DKPlugin("DK/DKTime.js", "singleton")
+    //DKPlugin("DK/DKMqtt.js")
+    //DKPlugin("DK/DKNotifications.js")
+    DKPlugin("DKDebug/DKDebug.js", "singleton")
+    DKPlugin("DKAudio/DKAudio.js")
+    DKPlugin("DKGui/DKConsole.js", "singleton")
+    DKPlugin("DKGui/DKGui.js", "singleton")
+    DKPlugin("DKGui/DKFrame.js")
+    //DKPlugin("DKGui/DKMenu.js")
+    DKPlugin("DKGui/DKMessageBox.js")
+    DKPlugin("DKGui/DKDrag.js")
+    //DKPlugin("DKGui/DKResize.js")
+    DKPlugin("DKGui/DKClipboard.js", "singleton")
+    DKPlugin("DKGui/DKTable.js")
+    DKPlugin("DKDevTools/DKDevToolsButton.js", "singleton")
+    DKPlugin("DKChart/DKChart.js")
+    //DKPlugin("DKCodeMirror/DKCodeMirror.js")
+    DKPlugin("DKTasmota/DKTasmota.js", "singleton")
+    DKPlugin("DKTasmota/Automation.js")
+    //DKPlugin("DKTasmota/VPDCalculator.js")
+    DKPlugin("DKTasmota/Chart.js")
+}
+myapp.loadFiles();
+
+myapp.loadApp = function myapp_loadApp() {
+	alert("myapp_loadApp()");
+}
