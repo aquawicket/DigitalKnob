@@ -27,6 +27,6 @@ goto:eof
 :runDKHta
 	set "DKHTA_FUNCTIONS_DIR=%~1"
 	set "MSHTA_EXE=%~2"
-	set "HTA_FILE=%~3"
-	start %MSHTA_EXE% %HTA_FILE%
+	set "DKSCRIPT_PATH=%~3"
+	start %MSHTA_EXE% %DKSCRIPT_PATH%
 goto:eof

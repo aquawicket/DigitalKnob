@@ -27,6 +27,6 @@ goto:eof
 :runDKVb
 	set "DKVB_FUNCTIONS_DIR=%~1"
 	set "WSCRIPT_EXE=%~2"
-	set "DKVB_FILE=%~3"
-	start %WSCRIPT_EXE% %DKVB_FILE%
+	set "DKSCRIPT_PATH=%~3"
+	start %WSCRIPT_EXE% %DKSCRIPT_PATH%
 goto:eof

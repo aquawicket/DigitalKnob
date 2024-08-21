@@ -27,8 +27,8 @@ goto:eof
 :runDKJavascript
 	set "NODEJS_EXE=%~1"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~2
-	set "DKJAVASCRIPT_FILE=%~3"
-	for %%Z in ("%DKJAVASCRIPT_FILE%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
+	set "DKSCRIPT_PATH=%~3"
+	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
     start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
 	explorer "http://127.0.0.1:8080/%JAVASCRIPT_FILE%"
 goto:eof

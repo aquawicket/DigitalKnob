@@ -26,11 +26,11 @@ goto:eof
 :runDKPowershell
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
 	set "POWERSHELL_EXE=%~2"
-	set "DKPOWERSHELL_FILE=%~3"
+	set "DKSCRIPT_PATH=%~3"
 	
 	
 	::###### run script ######
-	call %POWERSHELL_EXE% -Command %DKPOWERSHELL_FILE%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

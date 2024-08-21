@@ -25,11 +25,11 @@ goto:eof
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
 	set "GITBASH_EXE=%~2"
-	set "DKBASH_FILE=%~3"
+	set "DKSCRIPT_PATH=%~3"
 	
 	
 	::###### run script ######
-	%GITBASH_EXE% %DKBASH_FILE% && (echo returned TRUE) || (echo returned FALSE)
+	%GITBASH_EXE% %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

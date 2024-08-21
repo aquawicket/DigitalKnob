@@ -37,7 +37,8 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
-    if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
+    ::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
+	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
