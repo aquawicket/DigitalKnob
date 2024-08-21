@@ -8,9 +8,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_installQemu
     call dk_debugFunc 0
 
-    call dk_validate HOST_OS "call dk_getHostTriple"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
+    call dk_validate DK_HOST_OS "call dk_getHostTriple"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
     if not defined QEMU_DL call dk_error "QEMU_DL is invalid"
 
     call dk_basename %QEMU_DL% QEMU_DL_FILE

@@ -10,11 +10,11 @@ if "%~1" neq "" goto:runDKBatch
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_findProgram TCC_EXE "tcc.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_set ComSpec %TCC_EXE%
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
-	ftype DKBatch="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%TCC_EXE%" "%%1" %%*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%TCC_EXE%"
-	
+	ftype DKBatch="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
@@ -26,13 +26,13 @@ goto:eof
 :runDKBatch
 	set "DKBATCH_FUNCTIONS_DIR=%~1"
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
-	set "TCC_EXE=%~2"
+	set "ComSpec=%~2"
 	set "DKBATCH_FILE=%~3"
 	
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	"%TCC_EXE%" /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
+	"%ComSpec%" /V:ON /K call "%DKBATCH_FILE%" && (echo returned TRUE) || (echo returned FALSE)
 
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 	
 	setlocal enableDelayedExpansion
-	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	set /a "line=%~2" || for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%~f1"') do set "line=%%a"
 	

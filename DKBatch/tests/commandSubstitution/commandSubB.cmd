@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-if "!!" neq "" echo "delayed expansion is required" && pause && exit 
+if "!DE!" neq "" echo "delayed expansion is required" && pause && exit 
 
 set "first=0"
 set "middle=1"

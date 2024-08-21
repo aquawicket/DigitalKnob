@@ -1,7 +1,7 @@
 @echo off
 
 ::### OS ###
-::default = HOST_OS
+::default = DK_HOST_OS
 ::set "OS=Android"
 ::set "OS=Emscripten"
 ::set "OS=iOS"
@@ -12,7 +12,7 @@
 ::set "OS=Windows"
 
 ::### ARCH ###
-::default = HOST_ARCH
+::default = DK_HOST_ARCH
 ::set "ARCH=arm"
 ::set "ARCH=arm64"
 ::set "ARCH=x86"
@@ -51,13 +51,13 @@ if "%~1" neq "" goto:runDKCpp
 	call dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	if not defined OS call dk_validate HOST_OS "call dk_getHostTriple"
-	if not defined OS set "OS=%HOST_OS%"
+	if not defined OS call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	if not defined OS set "OS=%DK_HOST_OS%"
 	call dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH call dk_validate HOST_ARCH "call dk_getHostTriple"
-	if not defined ARCH set "ARCH=%HOST_ARCH%"
+	if not defined ARCH call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
+	if not defined ARCH set "ARCH=%DK_HOST_ARCH%"
 	call dk_printVar ARCH
 	
 	::###### COMPILER ######

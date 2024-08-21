@@ -59,8 +59,8 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	%dk_call% dk_color
 	%dk_call% dk_logo
 	
-    if "!!"==""    %dk_call% dk_echo "delayed expansion = ON"
-    if "!!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
+    if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
+    if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
     ::%DK% dk_load %DKSCRIPT_PATH%
 	
     ::###### DKTEST MODE ######

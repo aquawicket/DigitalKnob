@@ -12,10 +12,10 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_installPhp
     call dk_debugFunc 0
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
 	
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"    call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
 	if not defined PHP_DL call dk_error "PHP_DL is invalid"
 	
 	

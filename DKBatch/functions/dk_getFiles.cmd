@@ -12,8 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set /a i=0
 	setlocal
 	for %%a in ("%~1\*") do (
-		if "!!" equ "" set "%~2[!i!]=%%a"
-		if "!!" neq "" call set "%~2[%%i%%]=%%a"
+		if "!DE!" equ "" set "%~2[!i!]=%%a"
+		if "!DE!" neq "" call set "%~2[%%i%%]=%%a"
 		set /A i+=1
 	) 
 

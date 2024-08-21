@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
 		set "_lower_=%~1"
-		if "!!" equ "" for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do set "_lower_=!_lower_:%%#=%%#!")			&:: with delayed expansion ON
-		if "!!" neq "" for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do call set "_lower_=%%_lower_:%%#=%%#%%")	&:: with delayed expansion OFF
+		if "!DE!" equ "" for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do set "_lower_=!_lower_:%%#=%%#!")			&:: with delayed expansion ON
+		if "!DE!" neq "" for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do call set "_lower_=%%_lower_:%%#=%%#%%")	&:: with delayed expansion OFF
 	endlocal & set "%2=%_lower_%"
 goto:eof
 

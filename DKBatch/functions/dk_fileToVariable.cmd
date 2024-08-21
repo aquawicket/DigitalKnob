@@ -13,9 +13,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
     ::call set "file=%~1"
 	set "\n=\n"
-	::if "!!" neq "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"	&:: FIXME: remove the need for call here
+	::if "!DE!" neq "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"	&:: FIXME: remove the need for call here
 	for /f "delims=" %%x in (%~1) do call set "_fileVar_=%%_fileVar_%%%\n%%%x"	&:: FIXME: remove the need for call here
-	::if "!!" equ "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=!_fileVar_!%\n%%%x"
+	::if "!DE!" equ "" for /f "delims=" %%x in (%~1) do call set "_fileVar_=!_fileVar_!%\n%%%x"
 	::endlocal & %dk_call% dk_set %2 "%_fileVar_%"
 	endlocal & set "%2=%_fileVar_%"
 goto:eof

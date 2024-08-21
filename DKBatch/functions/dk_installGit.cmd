@@ -10,12 +10,13 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 :dk_installGit
     call dk_debugFunc 0
 	
-    %dk_call% dk_validate HOST_ARCH "%dk_call% dk_getHostTriple"
-    if "%HOST_ARCH%"=="arm32"  set "GIT_DL="
-    if "%HOST_ARCH%"=="arm64"  set "GIT_DL=%GIT_DL_WIN_ARM64%"
-    if "%HOST_ARCH%"=="x86"    set "GIT_DL=%GIT_DL_WIN_X86%"
-    if "%HOST_ARCH%"=="x86_64" set "GIT_DL=%GIT_DL_WIN_X86_64%"
+    %dk_call% dk_validate DK_HOST_ARCH "%dk_call% dk_getHostTriple"
+    if "%DK_HOST_ARCH%"=="arm32"  set "GIT_DL="
+    if "%DK_HOST_ARCH%"=="arm64"  set "GIT_DL=%GIT_DL_WIN_ARM64%"
+    if "%DK_HOST_ARCH%"=="x86"    set "GIT_DL=%GIT_DL_WIN_X86%"
+    if "%DK_HOST_ARCH%"=="x86_64" set "GIT_DL=%GIT_DL_WIN_X86_64%"
     if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
+	
 	
     %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
     %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME

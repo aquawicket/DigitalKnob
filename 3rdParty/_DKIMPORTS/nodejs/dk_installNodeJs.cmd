@@ -8,13 +8,13 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
-    if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz"
-    if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz"
-    if "%HOST_OS%_%HOST_ARCH%"=="mac_arm64"    call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="mac_x86_64"   call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86"      call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_arm64"  call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_x86_64" call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="mac_arm64"    call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="mac_x86_64"   call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"      call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip"
+    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"   call dk_set NODEJS_DL "https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip"
     if not defined NODEJS_DL call dk_error "NODEJS_DL is invalid"
 	
     call dk_basename %NODEJS_DL% NODEJS_DL_FILE

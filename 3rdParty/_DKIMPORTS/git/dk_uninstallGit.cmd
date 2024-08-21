@@ -13,11 +13,11 @@ call dk_source dk_validate
 :dk_uninstallGit
     call dk_debugFunc 0
 	
-    call dk_validate HOST_ARCH "call dk_getHostTriple"
-    ::if "%HOST_ARCH%"=="arm32"  call dk_set GIT_DL ""
-    ::if "%HOST_ARCH%"=="arm64"  call dk_set GIT_DL ""
-    if "%HOST_ARCH%"=="x86"    call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
-    if "%HOST_ARCH%"=="x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
+    call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
+    ::if "%DK_HOST_ARCH%"=="arm32"  call dk_set GIT_DL ""
+    ::if "%DK_HOST_ARCH%"=="arm64"  call dk_set GIT_DL ""
+    if "%DK_HOST_ARCH%"=="x86"    call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
+    if "%DK_HOST_ARCH%"=="x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
     if not defined GIT_DL call dk_error "GIT_DL is invalid"
 	
     call dk_basename %GIT_DL% GIT_DL_FILE

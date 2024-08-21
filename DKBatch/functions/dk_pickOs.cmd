@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
     %dk_call% dk_echo
-    echo  1) %HOST_TRIPLE%
+    echo  1) %DK_HOST_TRIPLE%
     %dk_call% dk_echo
     echo  2) Android arm32
     echo  3) Android arm64
@@ -60,7 +60,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_keyboardInput choice
         
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" %dk_call% dk_set TARGET_OS %HOST_TRIPLE%        & goto:eof
+    if "%choice%"=="1" %dk_call% dk_set TARGET_OS %DK_HOST_TRIPLE%        & goto:eof
     if "%choice%"=="2" %dk_call% dk_set TARGET_OS android_arm32        & goto:eof
     if "%choice%"=="3" %dk_call% dk_set TARGET_OS android_arm64        & goto:eof
     if "%choice%"=="4" %dk_call% dk_set TARGET_OS android_x86          & goto:eof

@@ -15,13 +15,13 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_installVC_Redist
     call dk_debugFunc 0
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe"
 	if not defined VC_REDIST_DL call dk_error "VC_REDIST_DL is invalid"
 
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"    set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"    set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll"
 	if not defined VCCOMP140_DLL call dk_error "VCCOMP140_DLL is invalid"
 pause
 	if exist "%VCCOMP140_DLL%" goto:eof

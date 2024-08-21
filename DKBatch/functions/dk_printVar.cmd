@@ -21,8 +21,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		setlocal
 		:loop1
 			if not defined %arry%[%n%] goto:eof
-			if "!!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]! %clr%"
-			if "!!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
+			if "!DE!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% !%arry%[%n%]! %clr%"
+			if "!DE!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%arry%[%n%] =%blue% %%%arry%[%n%]%% %clr%"
 			set /A n+=1
 			goto :loop1 
     endlocal
@@ -31,14 +31,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if not defined %~1 goto:undefined
 		setlocal
 		set "_ptr_=%~1"
-		if "!!" neq "" %dk_call% dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
-		if "!!" equ "" %dk_call% dk_isAlphanumeric "!_ptr_!" || goto:variable
-		if "!!" neq "" call set "_ptrB_=%%%_ptr_%%%"
-		if "!!" equ "" set "_ptrB_=!_ptr_!"
+		if "!DE!" neq "" %dk_call% dk_isAlphanumeric "%%%_ptr_%%%" || goto:variable
+		if "!DE!" equ "" %dk_call% dk_isAlphanumeric "!_ptr_!" || goto:variable
+		if "!DE!" neq "" call set "_ptrB_=%%%_ptr_%%%"
+		if "!DE!" equ "" set "_ptrB_=!_ptr_!"
 		::%dk_call% dk_isAlphanumeric "%%%_ptrB_%%%" || goto:variable
 		if not defined "%_ptrB_%" goto:variable
-		if "!!" neq "" call set "_ptrvalue_=%%%_ptrB_%%%"
-		if "!!" equ "" set "_ptrvalue_=!_ptrB_!"
+		if "!DE!" neq "" call set "_ptrvalue_=%%%_ptrB_%%%"
+		if "!DE!" equ "" set "_ptrvalue_=!_ptrB_!"
 		%dk_call% dk_echo "%cyan% POINTER:%_ptr_% = %_ptrB_% =%blue% %_ptrvalue_% %clr%"
 		endlocal
     goto:eof
@@ -46,8 +46,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     :variable
 		setlocal
 		set "_var_=%~1"
-		if "!!" neq "" call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
-		if "!!" equ "" set "_value_=!%_var_%!"
+		if "!DE!" neq "" call set "_value_=%%%_var_%%%"			&:: FIXME: remove the need for call here
+		if "!DE!" equ "" set "_value_=!%_var_%!"
 		%dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
 		endlocal
     goto:eof

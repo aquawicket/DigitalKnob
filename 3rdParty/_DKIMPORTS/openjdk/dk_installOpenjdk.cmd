@@ -8,12 +8,12 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
 	:: https://jdk.java.net/archive/
-	if "%HOST_OS%"=="android"                  call dk_set OPENJDK_DL "openjdk-17"
-	if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="mac_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
+	if "%DK_HOST_OS%"=="android"                  call dk_set OPENJDK_DL "openjdk-17"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_x86_64" call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="mac_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
 	if not defined OPENJDK_DL call dk_error "OPENJDK_DL is invalid"
 	
 	call dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
@@ -26,9 +26,9 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	call dk_getNativePath %OPENJDK% OPENJDK_NATIVE
 	
-	if "%HOST_OS%"=="win"   (call :dk_installOpenJdkWin)
-	if "%HOST_OS%"=="mac"   (call :dk_installOpenJdkMac)
-	if "%HOST_OS%"=="linux" (call :dk_installOpenJdkLinux)
+	if "%DK_HOST_OS%"=="win"   (call :dk_installOpenJdkWin)
+	if "%DK_HOST_OS%"=="mac"   (call :dk_installOpenJdkMac)
+	if "%DK_HOST_OS%"=="linux" (call :dk_installOpenJdkLinux)
 goto:eof	
 	
 :dk_installOpenJdkWin
@@ -67,7 +67,7 @@ goto:eof
 	::	call dk_set CURRENT_DIR /usr
 	::)
 	
-	::if "%HOST_OS%"=="android" (
+	::if "%DK_HOST_OS%"=="android" (
 	::	call dk_set SUDO ""
 	::	call dk_set APT "apt"
 	::) else (
@@ -75,7 +75,7 @@ goto:eof
 	::	call dk_set APT "apt-get"
 	::)
 	
-	if "%HOST_OS%"=="android" (
+	if "%DK_HOST_OS%"=="android" (
 		call dk_command pkg install openjdk-17 -y
 	) else (
 		call dk_command %SUDO% apt update

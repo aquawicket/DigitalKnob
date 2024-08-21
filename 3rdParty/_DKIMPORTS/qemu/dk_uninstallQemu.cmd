@@ -9,8 +9,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	
 	call dk_basename %QEMU_DL% QEMU_DL_NAME
 	call dk_convertToCIdentifier %QEMU_DL_NAME% QEMU_DL_NAME

@@ -29,8 +29,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:dk_arrayUnshift_loop
 	if %count% gtr 0 (
-		::if "!!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
-		if "!!" equ "" set "%_arry_%[%count%]=!%_arry_%[%prev%]!"
+		::if "!DE!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
+		if "!DE!" equ "" set "%_arry_%[%count%]=!%_arry_%[%prev%]!"
 		set /a count-=1
 		set /a prev-=1
 		goto:dk_arrayUnshift_loop

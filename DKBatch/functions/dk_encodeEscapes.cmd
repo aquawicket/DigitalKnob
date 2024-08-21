@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set org=%*
 	if defined %* call set "org=%%%org%%%"	&:: FIXME: remove the need for call here
 	setlocal enableDelayedExpansion
-		if "!!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!"	&:: remove any surrounding quotes
-		if "!!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%"	&:: remove any surrounding quotes
+		if "!DE!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!"	&:: remove any surrounding quotes
+		if "!DE!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%"	&:: remove any surrounding quotes
 	endlocal & set "org=%org%"
 	
 	set "org=%org:^=^^%"

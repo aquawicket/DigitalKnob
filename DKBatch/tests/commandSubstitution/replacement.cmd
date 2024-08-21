@@ -6,8 +6,8 @@
 
 setlocal enableDelayedExpansion
 
-if "!!" equ "" echo Delayed Expansion ON
-if "!!" neq "" echo Delayed Expansion OFF
+if "!DE!" equ "" echo Delayed Expansion ON
+if "!DE!" neq "" echo Delayed Expansion OFF
 
 set $time=^&call:getTime^&echo
 set $timeB=^&call:getTime^&echo %$timeB%

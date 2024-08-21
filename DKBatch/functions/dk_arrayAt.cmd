@@ -23,9 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	
 	::### return value ###
-	::if "!!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
-	if "!!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
-	if "!!" equ "" endlocal & set "%3=!%~1[%~2]!"
+	::if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
+	if "!DE!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
+	if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"
 	
 goto:eof
 

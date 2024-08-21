@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-if "!!" neq "" echo "delayed expansion is required" && pause && exit 
+if "!DE!" neq "" echo "delayed expansion is required" && pause && exit 
 
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%

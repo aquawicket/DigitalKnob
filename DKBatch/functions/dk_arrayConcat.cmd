@@ -45,8 +45,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	::### return value ###
-	if "!!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
-	if "!!" equ "" endlocal & set "%3=!_arrayC_!"
+	if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
+	if "!DE!" equ "" endlocal & set "%3=!_arrayC_!"
 goto:eof
 
 

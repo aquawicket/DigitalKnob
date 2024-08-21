@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: FIXME: requires delayed expansion
 	setlocal enabledelayedexpansion
-	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
     set "_input_=%~1"
 	set "_output_="
@@ -21,12 +21,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		
 		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (
 			rem FIXME: non delayed expansion broken
-			rem if "!!" neq "" call set "mapn=%%map:%%C=%%"
-			rem if "!!" neq "" if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
-            rem if "!!" neq "" if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
+			rem if "!DE!" neq "" call set "mapn=%%map:%%C=%%"
+			rem if "!DE!" neq "" if "%mapn%" neq "%map%" call set "_output_=%%_output_%%%%C"
+            rem if "!DE!" neq "" if "%mapn%" equ "%map%" call set "_output_=%%_output_%%_"
 			
-            if "!!" equ "" if "!map:%%C=!" neq "%map%" set "_output_=!_output_!%%C"
-            if "!!" equ "" if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"
+            if "!DE!" equ "" if "!map:%%C=!" neq "%map%" set "_output_=!_output_!%%C"
+            if "!DE!" equ "" if "!map:%%C=!" equ "%map%" set "_output_=!_output_!_"
         )
         set "_input_=%_input_:~1%"
         goto:c_identifier_loop

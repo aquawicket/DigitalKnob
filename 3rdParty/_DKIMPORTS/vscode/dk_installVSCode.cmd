@@ -9,13 +9,13 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 :dk_installVSCode
 	call dk_debugFunc 0
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
-	if "%HOST_OS%"=="mac" 			           call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip"
-	if "%HOST_OS%_%HOST_ARCH%"=="linux_arm32"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="linux_arm64"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="linux_x86_64" call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_arm64"    call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"   call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	if "%DK_HOST_OS%"=="mac" 			           call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_arm32"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_arm64"  call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_x86_64" call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_arm64"    call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"   call dk_set VSCODE_DL "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip"
 	if not defined VSCODE_DL call dk_error "VSCODE_DL is invalid"
 	
 	call dk_basename %VSCODE_DL% VSCODE_DL_FILE
@@ -25,7 +25,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
-	if "%HOST_OS%"=="win" (
+	if "%DK_HOST_OS%"=="win" (
 		call dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe
 	) else (
 		call dk_set VSCODE_EXE %VSCODE_DIR%\code

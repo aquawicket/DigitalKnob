@@ -75,7 +75,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
 	::3: ###### VALIDATE ARGUMENTS ######
 	if "%~1" == "" %dk_call% dk_error "%__FUNCTION__%(%__ARGS__%): dk_debugFunc ArgsMin ArgsMax is not set."
-	if not "%~1" == "" if %__ARGC__% lss %~1 %dk_call% dk_error "%__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"
+	if not "%~1" == "" if defined __ARGC__ if %__ARGC__% lss %~1 %dk_call% dk_error "%__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"
 	if "%~2" == "" if %__ARGC__% gtr %~1 %dk_call% dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~1, got %__ARGC__%"
 	if not "%~2" == "" if %__ARGC__% gtr %~2 %dk_call% dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~2, got %__ARGC__%"
 

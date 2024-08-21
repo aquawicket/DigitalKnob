@@ -35,7 +35,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
   for /l %%# in (1 1 10) do for /f "delims=" %%S in (" !exception.Stack!") do (
     (goto) 2>NUL
     setlocal enableDelayedExpansion
-    if "!!" equ "" (
+    if "!DE!" equ "" (
       endlocal
       setlocal disableDelayedExpansion
       call set "funcName=%%~0"	
@@ -46,7 +46,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
         endlocal
         endlocal
         set "exception.Code=%%1"
-        if "!!" equ "" (
+        if "!DE!" equ "" (
           call "%~f0" setDelayed
         ) else (
           set "exception.Msg=%%2"

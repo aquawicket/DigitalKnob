@@ -9,8 +9,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	
-	call dk_validate HOST_OS "call dk_getHostTriple"
-	if "%HOST_OS%"=="win"     call dk_set NUGET_DL "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	if "%DK_HOST_OS%"=="win"     call dk_set NUGET_DL "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 	if not defined NUGET_DL call dk_error "NUGET_DL is invalid"
 
 	call dk_basename %NUGET_DL% NUGET_DL_FILE

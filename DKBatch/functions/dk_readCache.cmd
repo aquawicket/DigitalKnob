@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not exist "%DKBRANCH_DIR%\cache" goto:eof
     
 	setlocal enableDelayedExpansion
-	if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
+	if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
 	
 	set /a count=0
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (

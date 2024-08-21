@@ -28,11 +28,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:dk_arrayJoin_loop
 	if defined %~1[%_count_%] (
 		if defined _string_ (
-			if "!!" equ "" set "_string_=%_string_%%~2!%~1[%_count_%]!"
-			if "!!" neq "" call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
+			if "!DE!" equ "" set "_string_=%_string_%%~2!%~1[%_count_%]!"
+			if "!DE!" neq "" call set "_string_=%_string_%%~2%%%~1[%_count_%]%%"
 		) else (
-			if "!!" equ "" set "_string_=!%~1[%_count_%]!"
-		    if "!!" neq "" call set "_string_=%%%~1[%_count_%]%%"
+			if "!DE!" equ "" set "_string_=!%~1[%_count_%]!"
+		    if "!DE!" neq "" call set "_string_=%%%~1[%_count_%]%%"
 		)
 		set /a _count_+=1
 		goto:dk_arrayJoin_loop

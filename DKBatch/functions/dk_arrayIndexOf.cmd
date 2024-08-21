@@ -37,8 +37,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			goto:eof
 		)
 		
-		if "!!" equ "" set "_value_=!%~1[%_count_%]!"
-		if "!!" neq "" call set "_value_=%%%~1[%_count_%]%%"
+		if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
+		if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
 		if "%~2" == "%_value_%" (
 			endlocal & set "%3=%_count_%"
 			goto:eof	

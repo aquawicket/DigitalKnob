@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
 	set "_var_=%~1"
-	if "!!" neq "" call set "_value_=%%%_var_%%%"	&:: FIXME: remove the need for call here
-	if "!!" equ "" set "_value_=!_var_!"
+	if "!DE!" neq "" call set "_value_=%%%_var_%%%"	&:: FIXME: remove the need for call here
+	if "!DE!" equ "" set "_value_=!_var_!"
 	if not exist "%_value_%" (
 		%dk_call% dk_error "Assertion failed: assertPath:  %__FILE__%:%__LINE__%  %__FUNCTION__%(%*): %_value_% is not found!"
 	)

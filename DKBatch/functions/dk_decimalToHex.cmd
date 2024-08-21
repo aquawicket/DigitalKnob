@@ -19,8 +19,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		:loop
 			set /a B=%A% %% 16 & set /a A=%A% / 16
 			
-			if "!!" equ "" set "_hex_=!_LOOKUP_:~%B%,1!%_hex_%"
-			if "!!" neq "" call set "_hex_=%%_LOOKUP_:~%B%,1%%%_hex_%"
+			if "!DE!" equ "" set "_hex_=!_LOOKUP_:~%B%,1!%_hex_%"
+			if "!DE!" neq "" call set "_hex_=%%_LOOKUP_:~%B%,1%%%_hex_%"
 			
 			if %A% gtr 0 goto :loop
 		:endlookup

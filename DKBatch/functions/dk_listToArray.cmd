@@ -10,13 +10,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal
 	set "_list=%~1"
-	if "!!" neq "" if defined %_list% call set _list=%%_list%%
-	if "!!" equ "" if defined !_list! set _list=!%_list%!
+	if "!DE!" neq "" if defined %_list% call set _list=%%_list%%
+	if "!DE!" equ "" if defined !_list! set _list=!%_list%!
 
 	set /A i=0
 	for %%a in (%_list%) do (
-		if "!!" neq "" call set "%~2[%%i%%]=%%a"
-		if "!!" equ "" set "%~2[!i!]=%%a"
+		if "!DE!" neq "" call set "%~2[%%i%%]=%%a"
+		if "!DE!" equ "" set "%~2[!i!]=%%a"
 		set /A i+=1
 	) 
 	

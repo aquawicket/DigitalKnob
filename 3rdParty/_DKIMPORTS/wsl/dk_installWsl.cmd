@@ -21,8 +21,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 	
 	:: Step 4 - Download the Linux kernel update package
-	call dk_validate HOST_ARCH "call dk_getHostTriple"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64" call dk_set WSL_DL "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
+	call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" call dk_set WSL_DL "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
 	call dk_basename %WSL_DL% WSL_DL_FILE
 	call dk_echo   
     call dk_info "Installing Wsl Update . . ."
