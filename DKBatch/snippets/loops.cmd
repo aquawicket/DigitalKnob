@@ -45,7 +45,7 @@ if %n% lss 10 (
 
 
 :: ###### infinate count loop ######
-:: Note:   the speed of this is dependant on the size of your screen buffer.
+:: Note:   the speed of this is dependant on the size of your screen buffer in cmd or windows terminal.
 :: if you have a screen buffer of 1000 in cmd, you will see the speed of console writes increase x10 once the buffer is full.
 echo:
 echo infinate count loop
