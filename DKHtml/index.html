@@ -10,12 +10,19 @@
 		<!-- <script id="globalThis.js" src="DKJavascript/functions/globalThis.js"></script> -->
 		<!-- <script id="window.js" src="DKJavascript/functions/window.js"></script> -->
 		<!-- <script id="alert.js" src="DKJavascript/functions/alert.js"></script> -->
+		
+		<script type="text/javascript" src="../DKJavascript/functions/DKHtmlConsole.js"></script>
 	</head>
 
 	<body>
 		DigitalKnob
 		<script>
-			alert("test");
+			dkconsole = new DKHtmlConsole;
+			dkconsole.create("0px","0px","100%","100%");
+			dkconsole.log("DIGITALKNOB");
+			
+			dkconsole.log("message2");
+			dkconsole.log("message3");
 		</script> 
 	</body>
 </html>
