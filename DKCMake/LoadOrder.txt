@@ -1,0 +1,13 @@
+DKCMake File call order
+
+ Cmake run as confiure        Cmake run as script
+
+   CMakeLists.txt        	    DKOther.cmake
+      DK.cmake				      DK.cmake
+   *DKStart.cmake			    DKEval.cmake
+  DKVariables.cmake
+ *DKBuildFlags.cmake
+  *DKGenerate.cmake
+  DKDisabled.cmake
+
+
