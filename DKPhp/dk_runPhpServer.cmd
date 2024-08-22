@@ -15,7 +15,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_copy %PHP%\php8ts.dll %DKPHP_DIR%\php8ts.dll OVERWRITE
 	
 	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-	cd %DKBRANCH_DIR%\DKApps\DKTasmota\Assets
+	cd %DKBRANCH_DIR%
 	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S 127.0.0.1:2393
 	TASKLIST | FINDSTR php_web.exe || start /min "" "%DKPHP_DIR%\php_web.exe" -S 192.168.1.210:2393
 goto:eof
