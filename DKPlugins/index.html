@@ -1,14 +1,15 @@
+<!DOCTYPE html>
 <html>
-    <head>
+	<head>
+		<meta name="referrer" content="no-referrer"></meta>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
-        <title>DigitalKnob</title>
 		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
-        <script id="DK/DK.js" src="DK/DK.js"></script>
-		<link rel="stylesheet" href="DK/DK.css"></link>
+		<title>digitalknob</title>
+		<script id="DK/DK.js" src="DK/DK.js"></script>
         <script id="DK/DKPlugin.js" src="DK/DKPlugin.js"></script>
-        <script id="DK/DKApp.js" src="DK/DKApp.js" onload="const dkapp = 1; dkapp.loadFiles(event)"></script>
-    </head>
-    <body onload="dkapp.runApp(event)"></body>
+        <script id="DKTasmota/myapp.js" src="DKTasmota/myapp.js" onload="myapp.loadFiles()"></script>
+	</head>
+	<body onload="myapp.loadApp()"></body>
 </html>
