@@ -23,7 +23,7 @@ goto:eof
 	call dk_debugFunc 0
 	
 	::%dk_call% dk_runAsTI regedit
-	%dk_call% dk_runAsTI services.msc
+	%dk_call% dk_runAsTI cmd.exe
 goto:eof
 
 

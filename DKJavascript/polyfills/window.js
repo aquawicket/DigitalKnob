@@ -1,6 +1,16 @@
 
-if(typeof window !== "object") {
-	var window = (function () {  
-		return this || (1, eval)('this');  
-	}());  
-}
+(function (Object) {
+  typeof window !== 'object' && (
+    this ?
+      get() :
+      (Object.defineProperty(Object.prototype, '_T_', {
+        configurable: true,
+        get: get
+      }), _T_)
+  );
+  function get() {
+    var global = this || self;
+    global.window = global;
+    delete Object.prototype._T_;
+  }
+}(Object));

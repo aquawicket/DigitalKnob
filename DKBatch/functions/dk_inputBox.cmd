@@ -39,7 +39,7 @@ goto:eof
 		<TITLE>dk_inputBox</TITLE>
 		<HTA:APPLICATION ID="dk_inputBox"
 			APPLICATIONNAME="dk_inputBox"
-			BORDER="none"
+			BORDER="thin"
 			BORDERSTYLE="normal"
 			CAPTION="yes"
 			ICON=""
@@ -53,8 +53,7 @@ goto:eof
 			VERSION="1.0"/>
 	</head>	
 <body onkeypress='keyPress(event)'>
-	<input type="text" id="input" value="">
-    <hr>
+	<input type="text" id="input" value="" style="width:100%">
     <button onclick='submit()'>Submit</button>
 	<button onclick='cancel()'>Cancel</button>
     <script language='javascript' >

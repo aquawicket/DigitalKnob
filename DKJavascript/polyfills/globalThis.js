@@ -1,3 +1,4 @@
+
 (function (Object) {
   typeof globalThis !== 'object' && (
     this ?

@@ -13,8 +13,11 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, left, width,
     dkhtmlconsole.style.left = left;
     dkhtmlconsole.style.width = width;
     dkhtmlconsole.style.height = height;
-	dkhtmlconsole.style.color = "black";
-	dkhtmlconsole.style.backgroundColor = "grey";
+	dkhtmlconsole.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
+	dkhtmlconsole.style.fontSize = "13.5px";
+	dkhtmlconsole.style.fontWeight = "350px";
+	dkhtmlconsole.style.color = "rgb(200,200,200,1)";
+	dkhtmlconsole.style.backgroundColor = "black";
 	if(!window.document.body){ alert("body is invalid"); return; }
 	window.document.body.appendChild(dkhtmlconsole);
 }
