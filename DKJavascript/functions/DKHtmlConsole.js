@@ -3,6 +3,8 @@
 function DKHtmlConsole() {}
 
 DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, left, width, height) {
+	if(!window){ alert("windows is invalid"); return; }
+	if(!window.document){ alert("document is invalid"); return; }
 	var dkhtmlconsole = window.document.createElement("div");
 	this.dkhtmlconsole = dkhtmlconsole;
 	dkhtmlconsole.setAttribute("id", "DKHtmlConsole");
@@ -13,8 +15,6 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, left, width,
     dkhtmlconsole.style.height = height;
 	dkhtmlconsole.style.color = "black";
 	dkhtmlconsole.style.backgroundColor = "grey";
-	if(!window){ alert("windows is invalid"); return; }
-	if(!window.document){ alert("document is invalid"); return; }
 	if(!window.document.body){ alert("body is invalid"); return; }
 	window.document.body.appendChild(dkhtmlconsole);
 }

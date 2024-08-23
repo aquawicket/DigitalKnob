@@ -35,13 +35,15 @@
 		<script type="text/javascript" src="../DKJavascript/functions/DKEventMonitor.js"></script>
 		<script type="text/javascript">
 			var DKHta = 1;
-			document.title = "DigitalKnob - " + location.href;
+			dkTitle = "DigitalKnob - " + location.href;
+			document.title = dkTitle;
 			
 			location.href = "http://127.0.0.1:2393/DKHtml/index.html";
 			
+			////////////////////////////////////////////////////
 			dkconsole = new DKHtmlConsole;
 			dkconsole.create("0px","0px","100%","100%");
-			dkconsole.log("DIGITALKNOB </br>");
+			dkconsole.log(dkTitle + "</br>");
 			
 			document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
 			function onDOMContentLoaded() {
