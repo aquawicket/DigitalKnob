@@ -25,96 +25,135 @@
 		<meta http-equiv="x-ua-compatible" content="ie=9">
 		<title>HTA Application</title>
 		<script type="text/javascript" src="../DKJavascript/functions/DKHtmlConsole.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript">				
+			
+			var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
 			
 			dkconsole = new DKHtmlConsole;
 			dkconsole.create("0px","0px","100%","100%");
 			dkconsole.log("DIGITALKNOB </br>");
 			
-			function monitorEvents(obj){
-				obj.onauxclick = function(event){ debugEvent(event) };
-				obj.onbeforeinput = function(event){ debugEvent(event) };
-				obj.onbeforematch = function(event){ debugEvent(event) };
-				obj.onbeforetoggle = function(event){ debugEvent(event) };
-				obj.onblur = function(event){ debugEvent(event) };
-				obj.oncancel = function(event){ debugEvent(event) };
-				obj.oncanplay = function(event){ debugEvent(event) };
-				obj.oncanplaythrough = function(event){ debugEvent(event) };
-				obj.onchange = function(event){ debugEvent(event) };
-				obj.onclick = function(event){ debugEvent(event) };
-				obj.onclose = function(event){ debugEvent(event) };
-				obj.oncontextlost = function(event){ debugEvent(event) };
-				obj.oncontextmenu = function(event){ debugEvent(event) };
-				obj.oncontextrestored = function(event){ debugEvent(event) };
-				obj.oncopy = function(event){ debugEvent(event) };
-				obj.oncuechange = function(event){ debugEvent(event) };
-				obj.oncut = function(event){ debugEvent(event) };
-				obj.ondblclick = function(event){ debugEvent(event) };
-				obj.ondrag = function(event){ debugEvent(event) };
-				obj.ondragend = function(event){ debugEvent(event) };
-				obj.ondragenter = function(event){ debugEvent(event) };
-				obj.ondragleave = function(event){ debugEvent(event) };
-				obj.ondragover = function(event){ debugEvent(event) };
-				obj.ondragstart = function(event){ debugEvent(event) };
-				obj.ondrop = function(event){ debugEvent(event) };
-				obj.ondurationchange = function(event){ debugEvent(event) };
-				obj.onemptied = function(event){ debugEvent(event) };
-				obj.onended = function(event){ debugEvent(event) };
-				obj.onerror = function(event){ debugEvent(event) };
-				obj.onfocus = function(event){ debugEvent(event) };
-				obj.onformdata = function(event){ debugEvent(event) };
-				obj.oninput = function(event){ debugEvent(event) };
-				obj.oninvalid = function(event){ debugEvent(event) };
-				obj.onkeydown = function(event){ debugEvent(event) };
-				obj.onkeypress = function(event){ debugEvent(event) };
-				obj.onkeyup = function(event){ debugEvent(event) };
-				obj.onload = function(event){ debugEvent(event) };
-				obj.onloadeddata = function(event){ debugEvent(event) };
-				obj.onloadedmetadata = function(event){ debugEvent(event) };
-				obj.onloadstart = function(event){ debugEvent(event) };
-				obj.onmousedown = function(event){ debugEvent(event) };
-				obj.onmouseenter = function(event){ debugEvent(event) };
-				obj.onmouseleave = function(event){ debugEvent(event) };
-				obj.onmousemove = function(event){ debugEvent(event) };
-				obj.onmouseout = function(event){ debugEvent(event) };
-				obj.onmouseover = function(event){ debugEvent(event) };
-				obj.onmouseup = function(event){ debugEvent(event) };
-				obj.onpaste = function(event){ debugEvent(event) };
-				obj.onpause = function(event){ debugEvent(event) };
-				obj.onplay = function(event){ debugEvent(event) };
-				obj.onplaying = function(event){ debugEvent(event) };
-				obj.onprogress = function(event){ debugEvent(event) };
-				obj.onratechange = function(event){ debugEvent(event) };
-				obj.onreset = function(event){ debugEvent(event) };
-				obj.onresize = function(event){ debugEvent(event) };
-				obj.onscroll = function(event){ debugEvent(event) };
-				obj.onscrollend = function(event){ debugEvent(event) };
-				obj.onsecuritypolicyviolation = function(event){ debugEvent(event) };
-				obj.onseeked = function(event){ debugEvent(event) };
-				obj.onseeking = function(event){ debugEvent(event) };
-				obj.onselect = function(event){ debugEvent(event) };
-				obj.onslotchange = function(event){ debugEvent(event) };
-				obj.onstalled = function(event){ debugEvent(event) };
-				obj.onsubmit = function(event){ debugEvent(event) };
-				obj.onsuspend = function(event){ debugEvent(event) };
-				obj.ontimeupdate = function(event){ debugEvent(event) };
-				obj.ontoggle = function(event){ debugEvent(event) };
-				obj.onvolumechange = function(event){ debugEvent(event) };
-				obj.onwaiting = function(event){ debugEvent(event) };
-				obj.onwheel = function(event){ debugEvent(event) };
-			}
-			monitorEvents(document.body);
+			document.addEventListener("DOMContentLoaded", function(event){ debugEvent(event, document); });
+			document.addEventListener("DOMContentLoaded", function(event){ onDOMContentLoaded(event); });
 			
-			var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
+			function onDOMContentLoaded(event) {
+				monitorEvents(window);
+				monitorEvents(document);
+				monitorEvents(document.body);
+			}
+			
+			function monitorEvents(obj){
+				// https://html.spec.whatwg.org/multipage/indices.html#events-2
+				
+				// GlobalEventHandlers
+				obj.addEventListener("abort", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("auxclick", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("beforeinput", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("beforematch", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("beforetoggle", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("blur", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("cancel", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("canplay", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("canplaythrough", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("change", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("click", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("close", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("contextlost", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("contextmenu", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("contextrestored", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("copy", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("cuechange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("cut", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dblclick", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("drag", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dragend", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dragenter", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dragleave", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dragover", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("dragstart", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("drop", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("durationchange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("emptied", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("ended", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("error", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("focus", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("formdata", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("input", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("invalid", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("keydown", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("keypress", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("keyup", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("load", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("loadeddata", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("loadedmetadata", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("loadstart", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mousedown", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mouseenter", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mouseleave", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mousemove", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mouseout", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mouseover", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("mouseup", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("paste", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("pause", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("play", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("playing", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("progress", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("ratechange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("reset", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("resize", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("scroll", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("scrollend", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("securitypolicyviolation", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("seeked", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("seeking", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("select", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("slotchange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("stalled", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("submit", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("suspend", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("timeupdate", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("toggle", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("volumechange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("waiting", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("webkitanimationend", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("webkitanimationiteration", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("webkitanimationstart", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("webkittransitionend", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("wheel", function(event){ debugEvent(event, obj) });
+				
+				// WindowEventHandlers
+				obj.addEventListener("afterprint", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("beforeprint", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("beforeunload", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("hashchange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("languagechange", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("message", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("messageerror", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("offline", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("online", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("pageswap", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("pagehide", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("pagereveal", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("pageshow", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("popstate", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("rejectionhandled", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("storage", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("unhandledrejection", function(event){ debugEvent(event, obj) });
+				obj.addEventListener("unload", function(event){ debugEvent(event, obj) });
+			}
+						
 			function supressed(str){
 				if(supress.indexOf(str) > -1) return true;
 			}
 			
-			function debugEvent(event){
+			function debugEvent(event, obj){
 				if(supressed(event.type)) return;
 
-				dkconsole.log(event.type);
-				document.title = event.type;
+				if(obj){ str = obj + " --> on" + event.type; }
+				else{ str = "??? --> on" + event.type; }
+				dkconsole.log(str);
+				document.title = str;
 			}
 			
 			function onLoad() {
@@ -124,83 +163,105 @@
 					alert('HTA mode requires Internet Explorer 5.5+ \n');
 					self.close();
 				}				
-				document.getElementById("main").click();
-			}	
+				//document.getElementById("main").click();
+			}
 		</script>
 	</head>
-	<body onload="onLoad(event);">
-<!--
-		onauxclick="debugEvent(event);"
-		onbeforeinput="debugEvent(event);"
-		onbeforematch="debugEvent(event);"
-		onbeforetoggle="debugEvent(event);"
-		onblur="debugEvent(event);"
-		oncancel="debugEvent(event);"
-		oncanplay="debugEvent(event);"
-		oncanplaythrough="debugEvent(event);"
-		onchange="debugEvent(event);"
-		onclick="debugEvent(event);"
-		onclose="debugEvent(event);"
-		oncontextlost="debugEvent(event);"
-		oncontextmenu="debugEvent(event);"
-		oncontextrestored="debugEvent(event);"
-		oncopy="debugEvent(event);"
-		oncuechange="debugEvent(event);"
-		oncut="debugEvent(event);"
-		ondblclick="debugEvent(event);"
-		ondrag="debugEvent(event);"
-		ondragend="debugEvent(event);"
-		ondragenter="debugEvent(event);"
-		ondragleave="debugEvent(event);"
-		ondragover="debugEvent(event);"
-		ondragstart="debugEvent(event);"
-		ondrop="debugEvent(event);"
-		ondurationchange="debugEvent(event);"
-		onemptied="debugEvent(event);"
-		onended="debugEvent(event);"
-		onerror="debugEvent(event);"
-		onfocus="debugEvent(event);"
-		onformdata="debugEvent(event);"
-		oninput="debugEvent(event);"
-		oninvalid="debugEvent(event);"
-		onkeydown="debugEvent(event);"
-		onkeypress="debugEvent(event);"
-		onkeyup="debugEvent(event);"
-		onload="debugEvent(event);onLoad(event);"
-		onloadeddata="debugEvent(event);"
-		onloadedmetadata="debugEvent(event);"
-		onloadstart="debugEvent(event);"
-		onmousedown="debugEvent(event);"
-		onmouseenter="debugEvent(event);"
-		onmouseleave="debugEvent(event);"
-		onmousemove="debugEvent(event);"
-		onmouseout="debugEvent(event);"
-		onmouseover="debugEvent(event);"
-		onmouseup="debugEvent(event);"
-		onpaste="debugEvent(event);"
-		onpause="debugEvent(event);"
-		onplay="debugEvent(event);"
-		onplaying="debugEvent(event);"
-		onprogress="debugEvent(event);"
-		onratechange="debugEvent(event);"
-		onreset="debugEvent(event);"
-		onresize="debugEvent(event);"
-		onscroll="debugEvent(event);"
-		onscrollend="debugEvent(event);"
-		onsecuritypolicyviolation="debugEvent(event);"
-		onseeked="debugEvent(event);"
-		onseeking="debugEvent(event);"
-		onselect="debugEvent(event);"
-		onslotchange="debugEvent(event);"
-		onstalled="debugEvent(event);"
-		onsubmit="debugEvent(event);"
-		onsuspend="debugEvent(event);"
-		ontimeupdate="debugEvent(event);"
-		ontoggle="debugEvent(event);"
-		onvolumechange="debugEvent(event);"
-		onwaiting="debugEvent(event);"
-		onwheel="debugEvent(event);"
--->
+	<body
+		onabort="debugEvent(event,'body');"
+		onauxclick="debugEvent(event,'body');"
+		onbeforeinput="debugEvent(event,'body');"
+		onbeforematch="debugEvent(event,'body');"
+		onbeforetoggle="debugEvent(event,'body');"
+		onblur="debugEvent(event,'body');"
+		oncancel="debugEvent(event,'body');"
+		oncanplay="debugEvent(event,'body');"
+		oncanplaythrough="debugEvent(event,'body');"
+		onchange="debugEvent(event,'body');"
+		onclick="debugEvent(event,'body');"
+		onclose="debugEvent(event,'body');"
+		oncontextlost="debugEvent(event,'body');"
+		oncontextmenu="debugEvent(event,'body');"
+		oncontextrestored="debugEvent(event,'body');"
+		oncopy="debugEvent(event,'body');"
+		oncuechange="debugEvent(event,'body');"
+		oncut="debugEvent(event,'body');"
+		ondblclick="debugEvent(event,'body');"
+		ondrag="debugEvent(event,'body');"
+		ondragend="debugEvent(event,'body');"
+		ondragenter="debugEvent(event,'body');"
+		ondragleave="debugEvent(event,'body');"
+		ondragover="debugEvent(event,'body');"
+		ondragstart="debugEvent(event,'body');"
+		ondrop="debugEvent(event,'body');"
+		ondurationchange="debugEvent(event,'body');"
+		onemptied="debugEvent(event,'body');"
+		onended="debugEvent(event,'body');"
+		onerror="debugEvent(event,'body');"
+		onfocus="debugEvent(event,'body');"
+		onformdata="debugEvent(event,'body');"
+		oninput="debugEvent(event,'body');"
+		oninvalid="debugEvent(event,'body');"
+		onkeydown="debugEvent(event,'body');"
+		onkeypress="debugEvent(event,'body');"
+		onkeyup="debugEvent(event,'body');"
+		onload="debugEvent(event,'body'); onLoad(event);"
+		onloadeddata="debugEvent(event,'body');"
+		onloadedmetadata="debugEvent(event,'body');"
+		onloadstart="debugEvent(event,'body');"
+		onmousedown="debugEvent(event,'body');"
+		onmouseenter="debugEvent(event,'body');"
+		onmouseleave="debugEvent(event,'body');"
+		onmousemove="debugEvent(event,'body');"
+		onmouseout="debugEvent(event,'body');"
+		onmouseover="debugEvent(event,'body');"
+		onmouseup="debugEvent(event,'body');"
+		onpaste="debugEvent(event,'body');"
+		onpause="debugEvent(event,'body');"
+		onplay="debugEvent(event,'body');"
+		onplaying="debugEvent(event,'body');"
+		onprogress="debugEvent(event,'body');"
+		onratechange="debugEvent(event,'body');"
+		onreset="debugEvent(event,'body');"
+		onresize="debugEvent(event,'body');"
+		onscroll="debugEvent(event,'body');"
+		onscrollend="debugEvent(event,'body');"
+		onsecuritypolicyviolation="debugEvent(event,'body');"
+		onseeked="debugEvent(event,'body');"
+		onseeking="debugEvent(event,'body');"
+		onselect="debugEvent(event,'body');"
+		onslotchange="debugEvent(event,'body');"
+		onstalled="debugEvent(event,'body');"
+		onsubmit="debugEvent(event,'body');"
+		onsuspend="debugEvent(event,'body');"
+		ontimeupdate="debugEvent(event,'body');"
+		ontoggle="debugEvent(event,'body');"
+		onvolumechange="debugEvent(event,'body');"
+		onwaiting="debugEvent(event,'body');"
+		onwebkitanimationend="debugEvent(event,'body');"
+		onwebkitanimationiteration="debugEvent(event,'body');"
+		onwebkitanimationstart="debugEvent(event,'body');"
+		onwebkittransitionend="debugEvent(event,'body');"
+		onwheel="debugEvent(event,'body');"
+
+		onafterprint="debugEvent(event,'body');"
+		onbeforeprint="debugEvent(event,'body');"
+		onbeforeunload="debugEvent(event,'body');"
+		onhashchange="debugEvent(event,'body');"
+		onlanguagechange="debugEvent(event,'body');"
+		onmessage="debugEvent(event,'body');"
+		onmessageerror="debugEvent(event,'body');"
+		onoffline="debugEvent(event,'body');"
+		ononline="debugEvent(event,'body');"
+		onpageswap="debugEvent(event,'body');"
+		onpagehide="debugEvent(event,'body');"
+		onpagereveal="debugEvent(event,'body');"
+		onpageshow="debugEvent(event,'body');"
+		onpopstate="debugEvent(event,'body');"
+		onrejectionhandled="debugEvent(event,'body');"
+		onstorage="debugEvent(event,'body');"
+		onunhandledrejection="debugEvent(event,'body');"
+		onunload="debugEvent(event,'body');">
 		<div>
 			<a id="main" href="http://127.0.0.1:2393/index.html">
 				Cannot connect to http://127.0.0.1:2393/index.html
