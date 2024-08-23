@@ -116,5 +116,5 @@ DKEventMonitor.prototype.debugEvent = function DKEventMonitor_debugEvent(event, 
 	if(obj){ str = obj + " --> on" + event.type; }
 	else{ str = "??? --> on" + event.type; }
 	dkconsole.log(str);
-	document.title = str;
+	//document.title = str;
 }
