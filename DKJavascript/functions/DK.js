@@ -1,10 +1,27 @@
 
-if(typeof WScript === "object"){
-	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
-	var DKSCRIPT_PATH = WScript.ScriptFullName;
-	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
+var HOST = "unknown"
+
+if(typeof ActiveXObject === "function"){
+	if(typeof WScript === "object"){
+		HOST = "jscript";
+	}
+	else{
+		HOST = "hta"
+	}
+} else {
+	HOST = "browser"
 }
 
+
+if(typeof ActiveXObject === "function"){
+	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
+}
+if(typeof WScript === "object"){
+	var DKSCRIPT_PATH = WScript.ScriptFullName;
+	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
+}else{
+	var DKSCRIPT_DIR = ".."
+}
 var DKBRANCH_DIR = DKSCRIPT_DIR;
 var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript";
 var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions";

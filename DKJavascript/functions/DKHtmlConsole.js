@@ -2,7 +2,7 @@
 
 function DKHtmlConsole() {}
 
-DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, left, width, height) {
+DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left, right, width, height) {
 	if(!window){ alert("windows is invalid"); return; }
 	if(!window.document){ alert("document is invalid"); return; }
 	var dkhtmlconsole = window.document.createElement("div");
@@ -10,14 +10,17 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, left, width,
 	dkhtmlconsole.setAttribute("id", "DKHtmlConsole");
 	dkhtmlconsole.style.position = "absolute";
 	dkhtmlconsole.style.top = top;
+	dkhtmlconsole.style.bottom = bottom;
     dkhtmlconsole.style.left = left;
+	dkhtmlconsole.style.right = right;
     dkhtmlconsole.style.width = width;
     dkhtmlconsole.style.height = height;
 	dkhtmlconsole.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
 	dkhtmlconsole.style.fontSize = "13.5px";
 	dkhtmlconsole.style.fontWeight = "350px";
-	dkhtmlconsole.style.color = "rgb(200,200,200,1)";
+	dkhtmlconsole.style.color = "rgb(200,200,200)";
 	dkhtmlconsole.style.backgroundColor = "black";
+	dkhtmlconsole.style.overflowY = "scroll";
 	if(!window.document.body){ alert("body is invalid"); return; }
 	window.document.body.appendChild(dkhtmlconsole);
 }

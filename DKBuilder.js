@@ -1,7 +1,7 @@
 // JScript polyfills
 var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
 dk_source = function(url){
-	var xmlHttpRequest = new XMLHttpRequest;
+	var xmlHttpRequest = new ActiveXObject("MSXML2.XMLHTTP.6.0");
 	xmlHttpRequest.open("GET", url, false);
 	xmlHttpRequest.send();
 	(1, eval)(xmlHttpRequest.responseText); 
@@ -42,9 +42,21 @@ if (!filesystem.FileExists(DK_JS)){ dk_download(DKHTTP_DK_JS, DK_JS); }
 if (!filesystem.FileExists(DK_JS)){ console.log("ERROR: failed to download DK.js \n"); }
 
 // ############ DKINIT ############
-dk_source(DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js");
-dk_source(DKJAVASCRIPT_FUNCTIONS_DIR+"/dk_download.js");
 
+dk_source(DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js");
+
+/*
+//dk_source(DKJAVASCRIPT_FUNCTIONS_DIR+"/dk_download.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
+*/
+console.log("test");
 
 
 
