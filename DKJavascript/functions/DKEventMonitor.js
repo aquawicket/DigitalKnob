@@ -1,12 +1,9 @@
+// supressed entries will not be logged.
+var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
 
 function DKEventMonitor() {
-	var supress = ["mousemove", "mouseover", "mouseout", "mouseleave"];
-	this.supress = supress;
 	document.addEventListener("DOMContentLoaded", function(event){ DKEventMonitor.prototype.debugEvent(event, document); });
 }
-
-
-
 
 DKEventMonitor.prototype.monitorEvents = function DKEventMonitor_monitorEvents(obj){
 	// https://html.spec.whatwg.org/multipage/indices.html#events-2
@@ -110,8 +107,7 @@ DKEventMonitor.prototype.monitorEvents = function DKEventMonitor_monitorEvents(o
 }
 
 DKEventMonitor.prototype.supressed = function DKEventMonitor_supressed(str){
-	if(!this.supress){ return; }
-	if(this.supress.indexOf(str) > -1) return true;
+	if(supress.indexOf(str) > -1) return true;
 }
 
 DKEventMonitor.prototype.debugEvent = function DKEventMonitor_debugEvent(event, obj){
