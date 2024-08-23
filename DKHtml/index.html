@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="referrer" content="no-referrer"></meta>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Expires" content="0" />
-		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
-		<title>DigitalKnob</title>
-		<!-- <script id="globalThis.js" src="DKJavascript/functions/globalThis.js"></script> -->
-		<!-- <script id="window.js" src="DKJavascript/functions/window.js"></script> -->
-		<!-- <script id="alert.js" src="DKJavascript/functions/alert.js"></script> -->
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="x-ua-compatible" content="ie=9">
+		<meta name="referrer" content="no-referrer"></meta>
 		
+		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
+		
+		<title>DigitalKnob</title>
 		<script type="text/javascript" src="../DKJavascript/functions/DKHtmlConsole.js"></script>
+		<script type="text/javascript" src="../DKJavascript/functions/DKEventMonitor.js"></script>
 	</head>
-
 	<body>
-		DigitalKnob
-		<script>
-			dkconsole = new DKHtmlConsole;
-			dkconsole.create("0px","0px","100%","100%");
-			dkconsole.log("DIGITALKNOB");
+		<script type="text/javascript">					
+			document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
+			function onDOMContentLoaded() {
+				dkconsole = new DKHtmlConsole;
+				dkconsole.create("0px","0px","100%","100%");
+				dkconsole.log("DIGITALKNOB </br>");
 			
-			dkconsole.log("message2");
-			dkconsole.log("message3");
-		</script> 
+				eventmonitor = new DKEventMonitor;
+				eventmonitor.monitorEvents(window);
+				eventmonitor.monitorEvents(document);
+				eventmonitor.monitorEvents(document.body);
+			}
+		</script>
 	</body>
 </html>
