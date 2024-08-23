@@ -26,24 +26,21 @@
 		<title>HTA Application</title>
 		<script type="text/javascript" src="../DKJavascript/functions/DKHtmlConsole.js"></script>
 		<script type="text/javascript" src="../DKJavascript/functions/DKEventMonitor.js"></script>
-		<script type="text/javascript">				
+		<script type="text/javascript">
+		
+			//location.href = "../DKHtml/index.html";
+			//location.href = "http://127.0.0.1:2393/index.html";
 			
 			dkconsole = new DKHtmlConsole;
 			dkconsole.create("0px","0px","100%","100%");
 			dkconsole.log("DIGITALKNOB </br>");
 			
-			eventmonitor = new DKEventMonitor;
-			
 			document.addEventListener("DOMContentLoaded", onDOMContentLoaded() );
-			
 			function onDOMContentLoaded() {
+				eventmonitor = new DKEventMonitor;
 				eventmonitor.monitorEvents(window);
 				eventmonitor.monitorEvents(document);
 				eventmonitor.monitorEvents(document.body);
-			}
-			
-			function onLoad() {			
-				//document.getElementById("main").click();
 			}
 		</script>
 	</head>
@@ -85,7 +82,7 @@
 		onkeydown="eventmonitor.debugEvent(event, document.body);"
 		onkeypress="eventmonitor.debugEvent(event, document.body);"
 		onkeyup="eventmonitor.debugEvent(event, document.body);"
-		onload="eventmonitor.debugEvent(event, document.body); onLoad(event);"
+		onload="eventmonitor.debugEvent(event, document.body);"
 		onloadeddata="eventmonitor.debugEvent(event, document.body);"
 		onloadedmetadata="eventmonitor.debugEvent(event, document.body);"
 		onloadstart="eventmonitor.debugEvent(event, document.body);"
