@@ -13,14 +13,6 @@ var console = function(){}
 console.log = function(msg){ WScript.StdOut.Write(msg+"\n"); }
 var DKSCRIPT_PATH = WScript.ScriptFullName;
 var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
-DKSCRIPT_DIR = DKSCRIPT_DIR.replace("\\", "/");
 
 
 var ENABLE_dk_debugFunc = 0;
@@ -49,13 +41,13 @@ dk_source = function(url){
 //dk_source(DKJAVASCRIPT_FUNCTIONS_DIR+"/dk_download.js");
 var filesystem = new FileSystem;
 dk_download = function(url, destination){
-	if (!filesystem.FolderExists(destination)){ return; }
+	if (filesystem.FileExists(destination)){ return; }
 	console.log("downloading "+url+"  to   "+destination+"\n");
 	var xmlHttpRequest = new XMLHttpRequest;
 	xmlHttpRequest.Open('GET', url, false);
 	xmlHttpRequest.Send();
 	if (xmlHttpRequest.Status == 200) {
-		var filestream = FileStream; //WScript.CreateObject('ADODB.Stream');
+		var filestream = new FileStream;
 		filestream.Open();
 		filestream.Type = 1; // adTypeBinary
 		filestream.Write(xmlHttpRequest.ResponseBody);
@@ -72,9 +64,9 @@ if (!filesystem.FolderExists(DKJAVASCRIPT_FUNCTIONS_DIR)){ filesystem.CreateFold
 if (!filesystem.FileExists(DK_JS)){ dk_download(DKHTTP_DK_JS, DK_JS); }
 if (!filesystem.FileExists(DK_JS)){ console.log("ERROR: failed to download DK.js \n"); }
 dk_source(DK_JS);
-//dk_source("file:///"+DK_JS);
+
 
 //################## DKBuilder ####################
 var wshshell = new WshShell;
 //wshshell.Run(DK_JS);  //we can probobly just run this as a javascript function instead.
-//wshshell.Run(DKBRANCH_DIR+"/DKBuilder.cmd"); // Use Batch temorarily until javascript api is complete.
+wshshell.Run(DKBRANCH_DIR+"/DKBuilder.cmd"); // Use Batch temorarily until javascript api is complete.
