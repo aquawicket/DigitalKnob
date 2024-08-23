@@ -30,11 +30,13 @@
 		
 		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
 		
-		<title>DigitalKnob - main_file_local.hta</title>
+		<title>DigitalKnob</title>
 		<script type="text/javascript" src="../DKJavascript/functions/DKHtmlConsole.js"></script>
 		<script type="text/javascript" src="../DKJavascript/functions/DKEventMonitor.js"></script>
 		<script type="text/javascript">
-		
+			var DKHta = 1;
+			document.title = "DigitalKnob - " + location.href;
+			
 			location.href = "../DKHtml/index.html";
 			
 			dkconsole = new DKHtmlConsole;
