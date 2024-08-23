@@ -5,37 +5,25 @@
 //#
 //#
 dk_download = function(url, destination){
-	//var Source = WScript.Arguments.Item(0);
-	//var Target = WScript.Arguments.Item(1);
-	var Source = url;
-	var Target = destination;
-	
-	var Object = WScript.CreateObject('MSXML2.XMLHTTP');
-
-	Object.Open('GET', Source, false);
-	Object.Send();
-
-	if (Object.Status == 200) {
-		// Create the Data Stream
-		var Stream = WScript.CreateObject('ADODB.Stream');
-
-		// Establish the Stream
-		Stream.Open();
-		Stream.Type = 1; // adTypeBinary
-		Stream.Write(Object.ResponseBody);
-		Stream.Position = 0;
-
-		// Create an Empty Target File
-		var File = WScript.CreateObject('Scripting.FileSystemObject');
-		if (File.FileExists(Target)) {
-			File.DeleteFile(Target);
-		}
-
-		// Write the Data Stream to the File
-		Stream.SaveToFile(Target, 2); // adSaveCreateOverWrite
-		Stream.Close();
+	if(typeof filesystem === "undefined") { var filesystem = new FileSystem; }
+	if (filesystem.FileExists(destination)){ return; }
+	console.log("downloading "+url+"  to   "+destination+"\n");
+	var xmlHttpRequest = new XMLHttpRequest;
+	xmlHttpRequest.Open('GET', url, false);
+	xmlHttpRequest.Send();
+	if (xmlHttpRequest.Status == 200) {
+		var filestream = new FileStream;
+		filestream.Open();
+		filestream.Type = 1; // adTypeBinary
+		filestream.Write(xmlHttpRequest.ResponseBody);
+		filestream.Position = 0;
+		if (filesystem.FileExists(destination)) { filesystem.DeleteFile(destination); }
+		filestream.SaveToFile(destination, 2); // adSaveCreateOverWrite
+		filestream.Close();
 	}
 }
+
+
 
 
 

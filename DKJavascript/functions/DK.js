@@ -1,12 +1,34 @@
 
+if(typeof WScript === "object"){
+	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
+	var DKSCRIPT_PATH = WScript.ScriptFullName;
+	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
+}
+
+var DKBRANCH_DIR = DKSCRIPT_DIR;
+var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript";
+var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions";
+var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
+
+dk_source = function(url){
+	var xmlHttpRequest = new XMLHttpRequest;
+	xmlHttpRequest.open("GET", url, false);
+	xmlHttpRequest.send();
+	(1, eval)(xmlHttpRequest.responseText); 
+}
+
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
 
 
 
-
-WScript.StdOut.Write("loaded DK.js \n");
-
-
-
+/*
 if(typeof WScript === "object"){
 	console.log("Using Windows Scriting Host")
 	var WshShell = function(){ return new ActiveXObject("WScript.Shell"); }
@@ -36,13 +58,4 @@ if(typeof WScript === "object"){
 		}
 	}
 }
-
-dk_func = function(url){
-		var xmlHttpRequest = new XMLHttpRequest;
-		xmlHttpRequest.open("GET", url, false);
-		xmlHttpRequest.send();
-		return xmlHttpRequest.responseText;
-	}
-	dk_source = function(url){ 
-		(1, eval)(dk_func(url)); 
-	};
+*/
