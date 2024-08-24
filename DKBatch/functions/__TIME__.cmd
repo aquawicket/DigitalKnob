@@ -11,6 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :__TIME__
+ setlocal
 	::call dk_debugFunc
 	
 ::    nanoseconds="$(date +%s%N)"
@@ -110,17 +111,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::	echo "        timestamp = ${timestamp}"
 	echo "%date_hours%:%date_minutes%:%date_seconds%.%date_milliseconds%"; return
+ endlocal
 goto:eof
 
 :dk_getHour
+ setlocal
 	set hour=%time:~0,2%
 	if "%hour:~0,1%" == " " set hour=0%hour:~1,1%
 	echo %hour%
+ endlocal
 goto:eof
 
 	
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST 
+:DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	echo date time = %date% %time%
@@ -174,4 +179,5 @@ goto:eof
 ::	set nanoseconds=%time:~9,2%
 ::	if "%nanoseconds:~0,1%" == " " set nanoseconds=0%nanoseconds:~1,1%
 ::	echo nanoseconds=%nanoseconds%
+ endlocal
 goto:eof

@@ -5,6 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# __ARGV__(<frame>
 ::#
 :__ARGV__
+ setlocal
 	::call dk_debugFunc
 	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
 	::set /A _FRAME_-=1
@@ -14,13 +15,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::		if not defined "%_ARGV_%" (set "_ARGV_=%BATCH_ARGV[%i%]%") else (set "_ARGV_=%_ARGV_%, %BATCH_ARGV[%i%]%")
 ::	done
 ::	call dk_return "%_ARGV_%"
+ endlocal
 goto:eof
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	::call dk_debugFunc
 	
 	echo %__ARGV__%
+ endlocal
 goto:eof
