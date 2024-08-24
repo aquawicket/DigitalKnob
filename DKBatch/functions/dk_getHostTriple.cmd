@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_getHostTriple
+ setlocal
 	call dk_debugFunc 0
 	
 	set "DK_HOST_OS=win"
@@ -26,6 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::set "DK_HOST_TRIPLE=%DK_HOST_ARCH%-%DK_HOST_VENDOR%-%DK_HOST_OS%
 	::%dk_call% dk_printVar DK_HOST_TRIPLE
 	::echo %DK_HOST_TRIPLE%
+ endlocal
 goto:eof
 
 
@@ -36,8 +38,10 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getHostTriple
 	%dk_call% dk_printVar DK_HOST_TRIPLE
+ endlocal
 goto:eof
