@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     :array
 		set "arry=%~1"
 		if not defined %arry%[0] goto:pointer
-		set /A "n=0"
+		set /a "n=0"
 		setlocal
 		:loop1
 			if not defined %arry%[%n%] goto:eof

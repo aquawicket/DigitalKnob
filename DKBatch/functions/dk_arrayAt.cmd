@@ -17,16 +17,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_arrayAt
+ setlocal
 	call dk_debugFunc 3
 	::%dk_call% dk_validateArgs array int optional:rtn_var
-	setlocal
-
 	
 	::### return value ###
 	::if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
 	if "!DE!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
 	if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"
-	
+ endlocal	
 goto:eof
 
 

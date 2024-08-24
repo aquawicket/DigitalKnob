@@ -19,6 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 ::#
 :dk_arrayConcat
+ setlocal
 	call dk_debugFunc 2 3
 	::#dk_validateArgs array array
 	
@@ -47,6 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::### return value ###
 	if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
 	if "!DE!" equ "" endlocal & set "%3=!_arrayC_!"
+ endlocal
 goto:eof
 
 

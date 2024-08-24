@@ -28,8 +28,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     call dk_download %TCC_RT_DL%
     
 	call dk_getNativePath %TCC_RT_DIR% TCC_RT_INSTALL_PATH
-	call %command_string% "%DKDOWNLOAD_DIR%\%TCC_RT_DL_FILE%" /extract %TCC_RT_DIR%
-	call MSIExec /i "%DKDOWNLOAD_DIR%\tcc-rt.msi" INSTALLDIR="%TCC_RT_DIR%"
+	call %command_string% "%DKDOWNLOAD_DIR%\%TCC_RT_DL_FILE%"
+	::call MSIExec /i "%DKDOWNLOAD_DIR%\tcc-rt.msi" INSTALLDIR="%TCC_RT_DIR%"
 	
 	::if NOT exist "%TCC_RT_EXE%" call dk_error "cannot find TCC_RT_EXE:%TCC_RT_EXE%"
 	:tcc_rt_installed

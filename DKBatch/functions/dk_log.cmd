@@ -93,11 +93,12 @@ if not defined FIXME_HALT      set "FIXME_HALT=0"
 ::#    @message	- The message to print
 ::#
 :dk_log
+	setlocal 
 	::call dk_debugFunc 1 2
 	
 	if "%ENABLE_dk_log%" neq "1"  goto:eof
 	
-	setlocal 
+	
 		if "%~2" equ "" set "_level_=DEFAULT" && set "_message_=%~1"
 		if "%~2" neq "" set "_level_=%~1"     && set "_message_=%~2"
 		if "!%_level_%_ENABLE!" neq "1"  goto:eof

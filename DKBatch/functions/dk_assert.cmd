@@ -5,13 +5,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_assert(expression)
 ::#
 :dk_assert
+ setlocal
     call dk_debugFunc 1
 	
-	setlocal
 	if not defined %~1 (
 		%dk_call% dk_error "Assertion failed: dk_assert():  %__FILE__%:%__LINE__%  %__FUNCTION__%(%__ARGS__%)"
 	)
-	endlocal
+ endlocal
 goto:eof
 
 
@@ -22,6 +22,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_set myVar string
@@ -40,4 +41,5 @@ goto:eof
 	%dk_call% dk_assert myVarE
 
 	%dk_call% dk_assert noVar
+ endlocal
 goto:eof

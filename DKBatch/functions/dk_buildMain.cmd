@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_buildMain
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_assert DKSCRIPT_PATH
@@ -38,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		%dk_call% dk_unset TARGET_OS
 		%dk_call% dk_unset TYPE
 	goto while_loop
-	endlocal
+ endlocal
 goto:eof
 
 
@@ -49,7 +50,9 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_buildMain
+ endlocal
 goto:eof

@@ -18,24 +18,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_arrayUnshift
+ setlocal
 	call dk_debugFunc 2
 	
-	setlocal
 	set "_arry_=%~1"
 	::set "_element_=%~2"
-	
 	%dk_call% dk_arrayLength %~1 count
-	set /a prev=count-1
+	set /a "prev=count-1"
 	
 	:dk_arrayUnshift_loop
 	if %count% gtr 0 (
-		::if "!DE!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
+		rem if "!DE!" neq "" call set "%_arry_%[%count%]=%%%_arry_%[%prev%]%%" &:: FIXME: remove the need for call here
 		if "!DE!" equ "" set "%_arry_%[%count%]=!%_arry_%[%prev%]!"
 		set /a count-=1
 		set /a prev-=1
 		goto:dk_arrayUnshift_loop
 	)
 	endlocal & set "%~1[0]=%~2"
+ endlocal
 goto:eof
 
 
@@ -43,6 +43,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_arrayUnshift myArrayA "a b c" ::new_lengthA
@@ -64,4 +65,6 @@ goto:eof
 	%dk_call% dk_arrayUnshift myArrayA "h i j" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
+	
+ endlocal
 goto:eof
