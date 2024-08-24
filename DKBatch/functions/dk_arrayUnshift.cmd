@@ -18,8 +18,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_arrayUnshift
- setlocal
-	call dk_debugFunc 2
+ ::setlocal
+	::call dk_debugFunc 2
 	
 	set "_arry_=%~1"
 	::set "_element_=%~2"
@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		goto:dk_arrayUnshift_loop
 	)
 	endlocal & set "%~1[0]=%~2"
- endlocal
+ ::endlocal
 goto:eof
 
 
@@ -46,22 +46,27 @@ goto:eof
  setlocal
 	call dk_debugFunc 0
 	
+	%dk_call% dk_echo
 	%dk_call% dk_arrayUnshift myArrayA "a b c" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
 	
+	%dk_call% dk_echo
 	%dk_call% dk_arrayUnshift myArrayA "1 2 3" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
 	
+	%dk_call% dk_echo
 	%dk_call% dk_arrayUnshift myArrayA "d e f" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
 	
+	%dk_call% dk_echo
 	%dk_call% dk_arrayUnshift myArrayA "4 5 6" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
 	
+	%dk_call% dk_echo
 	%dk_call% dk_arrayUnshift myArrayA "h i j" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA

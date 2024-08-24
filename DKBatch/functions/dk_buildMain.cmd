@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_buildMain
- setlocal
+ ::setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_assert DKSCRIPT_PATH
@@ -24,7 +24,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		%dk_call% dk_warning "DKBRANCH_DIR = %DKBRANCH_DIR%"
 	)
     
-    :while_loop             
+    :while_loop   
+		%dk_call% dk_echo "APP=%APP% - TARGET_OS=%TARGET_OS% - TYPE=%TYPE%"
+		
 		if "%UPDATE%"==""     %dk_call% dk_pickUpdate & goto:while_loop
 		if "%APP%"==""        %dk_call% dk_pickApp    & goto:while_loop
 		if "%TARGET_OS%"==""  %dk_call% dk_pickOs     & goto:while_loop
@@ -39,7 +41,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		%dk_call% dk_unset TARGET_OS
 		%dk_call% dk_unset TYPE
 	goto while_loop
- endlocal
+ ::endlocal
 goto:eof
 
 

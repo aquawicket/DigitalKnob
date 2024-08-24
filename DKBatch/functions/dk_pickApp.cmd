@@ -13,26 +13,67 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
-	:: print folder list in DKApps and display choices
-	%dk_call% dk_getDirectories %DKAPPS_DIR% apps
+
+
+	:: get a list of the directories in DKApps
+	%dk_call% dk_getDirectories %DKAPPS_DIR% options	
+	
+	:: rename the list elements to the folder basename and add a matching command
 	set /a "n=0"
 	:loop1
-		if not defined apps[%n%] goto:endloop1
-		if "!DE!" neq "" for %%Z in ("%%%apps%[%n%]%%") do set "apps[%n%]=%%~nxZ"
-		if "!DE!" equ "" for %%Z in ("!apps[%n%]!") do set "apps[%n%]=%%~nxZ"
-		echo %n%: !apps[%n%]!
-		set /A n+=1
-		goto :loop1 
+		if not defined options[%n%] goto:endloop1
+		::if "!DE!" neq "" for %%Z in ("%%%options%[%n%]%%") do set "basename=%%~nxZ"
+		if "!DE!" equ "" for %%Z in ("!options[%n%]!") do set "options[%n%]=%%~nxZ"
+		set "commands[%n%]=%dk_call% dk_set APP !options[%n%]!"
+		set /a n+=1
+		goto:loop1 
     :endloop1
+	
+	:: prepend cache selection if populated
+	if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" (
+		%dk_call% dk_arrayUnshift options "rerun [%_APP_% - %_TARGET_OS_% - %_TYPE_%]"
+		%dk_call% dk_arrayUnshift commands "%dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%"
+	)
+	
+	:: append remaining options with commands
+	%dk_call% dk_arrayPush options "Enter Manually"
+	%dk_call% dk_arrayPush commands "%dk_call% dk_enterManually"
+	
+	%dk_call% dk_arrayPush options "Clear Screen"
+	%dk_call% dk_arrayPush commands "%dk_call% dk_clearScreen"
+	
+	%dk_call% dk_arrayPush options "Reload"
+	%dk_call% dk_arrayPush commands "%dk_call% dk_reload"
+	
+	%dk_call% dk_arrayPush options "Go Back"
+	%dk_call% dk_arrayPush commands "%dk_call% dk_unset UPDATE"
+	
+	%dk_call% dk_arrayPush options "Exit"
+	%dk_call% dk_arrayPush commands "%dk_call% dk_exit"
+
+	:: Print the options list
+	set /a "n=0"
+	:loop2
+		if not defined options[%n%] goto:endloop2
+		echo %n%: !options[%n%]!
+		set /a n+=1
+		goto:loop2 
+    :endloop2
+	
 	%dk_call% dk_echo 
     %dk_call% dk_echo "Please select an app to build"
 	%dk_call% dk_keyboardInput choice
-	%dk_call% dk_echo !apps[%choice%]!
+	%dk_call% dk_echo "!options[%choice%]!"
 	
-	%dk_call% dk_set APP !apps[%choice%]! && goto:eof
+	::if "!DE!" equ "" %%%apps%[%n%]%% && goto:eof
+	if defined commands[%choice%] if "!DE!" equ "" (
+		!commands[%choice%]!
+		%dk_call% dk_deleteArray options
+		%dk_call% dk_deleteArray commands
+		goto:eof
+	)
 	%dk_call% dk_echo "%choice%: invalid selection, please try again"
 	%dk_call% dk_unset APP
-	
 	
 	
 ::    %dk_call% dk_echo

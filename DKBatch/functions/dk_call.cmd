@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_call
- setlocal
+ ::setlocal
 	::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1 99
 	
 	if "%~1"=="dk_debugFunc" echo [31m ERROR: dk_call cannot be used with dk_debugFunc [0m & goto:eof
@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::echo "call %*"
 	call %*
- endlocal
+ ::endlocal
 goto:eof
 
 
