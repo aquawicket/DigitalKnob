@@ -14,7 +14,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
 
-
 	:: get a list of the directories in DKApps
 	%dk_call% dk_getDirectories %DKAPPS_DIR% options	
 	
@@ -32,8 +31,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: prepend cache selection if populated
 	if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" (
 		%dk_call% dk_arrayUnshift options "rerun [%_APP_% - %_TARGET_OS_% - %_TYPE_%]"
-		%dk_call% dk_arrayUnshift commands "%dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%"
+		%dk_call% dk_arrayUnshift commands "%dk_call% :rerun_cache"
 	)
+	
+	goto:endrerun_cache
+	:rerun_cache
+		%dk_call% dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & goto:eof
+	:endrerun_cache
 	
 	:: append remaining options with commands
 	%dk_call% dk_arrayPush options "Enter Manually"
