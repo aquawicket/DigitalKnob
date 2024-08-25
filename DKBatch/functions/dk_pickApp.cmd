@@ -31,12 +31,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: prepend cache selection if available
 	if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" (
 		%dk_call% dk_arrayUnshift options "re-run [%_APP_% - %_TARGET_OS_% - %_TYPE_%]"
-		%dk_call% dk_arrayUnshift commands "%dk_call% :rerun_cache"
+		%dk_call% dk_arrayUnshift commands "%dk_call% :runCache"
 	)
-	goto:endrerun_cache
-	:rerun_cache
+	goto:end_runCache
+	:runCache
 		%dk_call% dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & goto:eof
-	:end_re_run_cache
+	:end_runCache
 	
 	:: append remaining options with commands
 	%dk_call% dk_arrayPush options "Enter Manually"
