@@ -13,9 +13,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "message=%1"
 	set /a timeout=%2
 	set "default=%3"
+	
 	set cache_file=%DKTEMP_DIR%\input_timeout_cache.tmp
 	set thread_file=%DKTEMP_DIR%\input_timeout_thread.cmd
-	%dk_call% dk_delete %cache_file% 2>nul >nul
+	%dk_call% dk_delete %cache_file% %NO_STD%
 	
 	echo ^@echo off> %thread_file%
 	echo set /p var=>> %thread_file%
@@ -24,32 +25,25 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	setlocal enableextensions enabledelayedexpansion
 	for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
-
-	::<nul set /p .%timeout% <NUL
 	
 	:input_timeout_loop
 	set /a timeout-=1
-	
 	<nul set /p "=.!ASCII_13!     %timeout% " <NUL
 
-	
-	ping -n 2 localhost > nul
+	ping -n 2 localhost %NO_STD%
 	if !timeout! GTR 0 (
-		%dk_call% dk_setTitle      %timeout%
+		%dk_call% dk_setTitle %timeout%
 		if not exist %cache_file% goto :input_timeout_loop
-		echo after
 	)
 		
 	:input_timeout_result
-	del %thread_file% 2>nul >nul
+	del %thread_file% %NO_STD%
 	if exist %cache_file% (
 		set /p result=<%cache_file%
-		%dk_call% dk_delete %cache_file% 2>nul >nul
-	) else (
-		set result=%default%
-	)
-	::<nul set /p"=!BS!!CR!result = %result%  	"
-	set /p"=result = %result% "
+		%dk_call% dk_delete %cache_file% %NO_STD%
+	) else ( set result=%default% )
+
+	echo RESULT=%result%
 goto:eof
 
 
@@ -62,6 +56,9 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_inputTimeout "this message will time out" 9 default
+	echo DKTEST_BEGIN
+	%dk_call% dk_inputTimeout "this message will time out" 3 default
+	echo DKTEST_END
+	
 goto:eof
 
