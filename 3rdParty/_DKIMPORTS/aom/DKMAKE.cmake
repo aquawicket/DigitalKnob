@@ -1,6 +1,8 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://aomedia.googlesource.com/aom.git
 
+dk_todo("aom is on the TODO list.")
+
 
 ### IMPORT ###
 dk_import(https://aomedia.googlesource.com/aom.git)
