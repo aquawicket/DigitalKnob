@@ -2,17 +2,18 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 ::#################################################################################
-::# dk_keyboardInputTimeout(input, timeout, default, result)
+::# dk_keyboardInputTimeout(result, default, timeout)
 ::#
 ::#	reference: https://stackoverflow.com/a/7703584/688352
 ::#            https://stackoverflow.com/a/33206814/688352
 ::#
-:dk_keyboardInputTimeout <timeout> <default> <result>
+:dk_keyboardInputTimeout <result> <default> <timeout>
  setlocal
 	call dk_debugFunc 3
 	
-	set /a "timeout=%1"
+	::set "result=%1"
 	set "default=%2"
+	set /a "timeout=%3"
 	
 	set "cache_file=%DKTEMP_DIR%\keyboardInputTimeout_cache.tmp"
 	set "thread_file=%DKTEMP_DIR%\keyboardInputTimeout_thread.cmd"
@@ -52,7 +53,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	::echo RESULT=%result%
-	if "%~3" neq "" endlocal & set "%3=%result%"
+	endlocal & set "%1=%result%"
  endlocal
 goto:eof
 

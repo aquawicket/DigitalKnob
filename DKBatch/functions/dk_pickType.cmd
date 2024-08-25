@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_echo 
     %dk_call% dk_echo "Please select a build type."
 	::%dk_call% dk_keyboardInput choice
-	%dk_call% dk_keyboardInputTimeout 10 1 choice
+	%dk_call% dk_keyboardInputTimeout choice 1 10 
 
     if "%choice%"=="1" %dk_call% dk_set TYPE "Debug"    & goto:eof
     if "%choice%"=="2" %dk_call% dk_set TYPE "Release"  & goto:eof

@@ -58,7 +58,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_echo 
     %dk_call% dk_echo "Please select an OS to build for"
 	::%dk_call% dk_keyboardInput choice
-	%dk_call% dk_keyboardInputTimeout 10 1 choice
+	%dk_call% dk_keyboardInputTimeout choice 1 10
         
     if "%choice%"=="1" %dk_call% dk_set TARGET_OS %DK_HOST_TRIPLE%     & goto:eof
     if "%choice%"=="2" %dk_call% dk_set TARGET_OS android_arm32        & goto:eof
