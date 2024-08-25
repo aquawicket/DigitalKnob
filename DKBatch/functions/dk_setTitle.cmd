@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_setTitle
-	call dk_debugFunc 1 99
+	call dk_debugFunc 0 99
 	
 	title %*
 goto:eof
