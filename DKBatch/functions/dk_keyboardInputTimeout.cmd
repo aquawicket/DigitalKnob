@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	reference: https://stackoverflow.com/a/7703584/688352
 ::#
 :dk_keyboardInputTimeout <input> <timeout> <default> <result>
+ setlocal
 	call dk_debugFunc 4
 	
-	setlocal EnableExtensions EnableDelayedExpansion
 	set "message=%1"
 	set /a timeout=%2
 	set "default=%3"
@@ -23,7 +23,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo ^> %cache_file% echo %%var%%>> %thread_file%
 	start /b %ComSpec% /c %thread_file%
 	
-	setlocal enableextensions enabledelayedexpansion
 	for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
 	
 	:keyboard_input_timeout_loop
@@ -36,9 +35,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		%dk_call% dk_setTitle %timeout%
 		if not exist %cache_file% goto:keyboard_input_timeout_loop
 	)
-	
-	
-	<nul set /p "=.!ASCII_13!      " <NUL
+
+	:: clear line and console title
+	<nul set /p "=.!ASCII_13!     " <NUL
 	%dk_call% dk_setTitle
 	
 	:keyboard_input_timeout_result
@@ -50,8 +49,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		set result=%default% 
 	)
 
-	echo RESULT=%result%
+	::echo RESULT=%result%
 	if "%~4" neq "" endlocal & set "%4=%result%"
+ endlocal
 goto:eof
 
 
@@ -64,9 +64,7 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	echo DKTEST_BEGIN
 	%dk_call% dk_keyboardInputTimeout "this message will time out" 3 default rtn_var
-	echo returned_result = %rtn_var%
-	echo DKTEST_END
+	echo result = %rtn_var%
 goto:eof
 
