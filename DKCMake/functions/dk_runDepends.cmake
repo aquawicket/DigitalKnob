@@ -130,7 +130,7 @@ function(dk_runDepends plugin)
 #		endif()
 #	endif()
 	if("${ARGV}" IN_LIST dkdepend_list)
-		dk_notice("already in dkdepend_list")
+		dk_verbose("already in dkdepend_list")
 		return()
 	endif()
 	

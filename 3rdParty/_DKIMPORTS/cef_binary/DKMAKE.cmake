@@ -75,12 +75,11 @@ if(IOS OR IOSSIM OR ANDROID)
 endif()
 
 
-if (WIN32)
+if(WIN32)
   set(CMAKE_OBJECT_PATH_MAX 275)
+endif()
 
-endif ()
-
-
+dk_depend(visualstudio)
 dk_depend(appkit)
 dk_depend(build-essential)
 dk_depend(libgtk2.0-dev)
