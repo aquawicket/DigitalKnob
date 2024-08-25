@@ -5,17 +5,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_keyboardInputTimeout(input, timeout, default, result)
 ::#
 ::#	reference: https://stackoverflow.com/a/7703584/688352
+::#            https://stackoverflow.com/a/33206814/688352
 ::#
-:dk_keyboardInputTimeout <input> <timeout> <default> <result>
+:dk_keyboardInputTimeout <timeout> <default> <result>
  setlocal
-	call dk_debugFunc 4
+	call dk_debugFunc 3
 	
-	set "message=%1"
-	set /a timeout=%2
-	set "default=%3"
+	set /a "timeout=%1"
+	set "default=%2"
 	
-	set cache_file=%DKTEMP_DIR%\keyboardInputTimeout_cache.tmp
-	set thread_file=%DKTEMP_DIR%\keyboardInputTimeout_thread.cmd
+	set "cache_file=%DKTEMP_DIR%\keyboardInputTimeout_cache.tmp"
+	set "thread_file=%DKTEMP_DIR%\keyboardInputTimeout_thread.cmd"
 	%dk_call% dk_delete %cache_file% %NO_STD%
 	
 	echo ^@echo off> %thread_file%
@@ -23,11 +23,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo ^> %cache_file% echo %%var%%>> %thread_file%
 	start /b %ComSpec% /c %thread_file%
 	
+	set "ESC="
 	for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
 	
 	:keyboard_input_timeout_loop
-	set /a timeout-=1
-	<nul set /p "=.!ASCII_13!     %timeout% " <NUL
+	set /a "timeout-=1"
+	::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
+	<nul set /p "="<NUL
 	%dk_call% dk_setTitle %timeout%
 
 	ping -n 2 localhost %NO_STD%
@@ -37,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	:: clear line and console title
-	<nul set /p "=.!ASCII_13!     " <NUL
+	::<nul set /p "=.!ASCII_13!    %timeout% " <NUL
 	%dk_call% dk_setTitle
 	
 	:keyboard_input_timeout_result
@@ -46,11 +48,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		set /p result=<%cache_file%
 		%dk_call% dk_delete %cache_file% %NO_STD%
 	) else ( 
-		set result=%default% 
+		set "result=%default%"
 	)
 
 	::echo RESULT=%result%
-	if "%~4" neq "" endlocal & set "%4=%result%"
+	if "%~3" neq "" endlocal & set "%3=%result%"
  endlocal
 goto:eof
 
@@ -64,7 +66,8 @@ goto:eof
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_keyboardInputTimeout "this message will time out" 3 default rtn_var
+	echo Type some input and press enter, this will time out in 5 seconds
+	%dk_call% dk_keyboardInputTimeout 10 "default" rtn_var
 	echo result = %rtn_var%
 goto:eof
 

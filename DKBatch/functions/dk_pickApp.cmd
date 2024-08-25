@@ -65,7 +65,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	%dk_call% dk_echo 
     %dk_call% dk_echo "Please select an app to build"
-	%dk_call% dk_keyboardInput choice
+	::%dk_call% dk_keyboardInput choice
+	%dk_call% dk_keyboardInputTimeout 10 23 choice
 	%dk_call% dk_echo "!options[%choice%]!"
 	
 	::if "!DE!" equ "" %%%apps%[%n%]%% && goto:eof
