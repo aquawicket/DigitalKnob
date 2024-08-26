@@ -2,21 +2,25 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
-# dk_gitUpdate(<NO_CONFIRM:optional>)
+# dk_gitUpdate(url, branch, NO_CONFIRM)
 #
 #
 dk_gitUpdate() {
-	dk_debugFunc 0 1
+	dk_debugFunc 2 3
 
-	if ! [ "${1-}" = "NO_CONFIRM" ]; then
+	[ -n $1 ] && url="$1"    || url="https://github.com/aquawicket/DigitalKnob.git"
+	[ -n $2 ] && branch="$2" || branch="Development"
+	
+	if ! [ "${3-}" = "NO_CONFIRM" ]; then
 		dk_call dk_info "Git Update? Any local changes will be lost."
 		dk_call dk_confirm || return 0
 	fi
 	
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR
-		dk_call dk_call ${dksudo} "${GIT_EXE}" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
+		dk_call dk_call ${dksudo} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
 		${dksudo} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
 	fi
 	dk_call dk_call cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
@@ -39,5 +43,5 @@ dk_gitUpdate() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_gitUpdate
+	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
 }
