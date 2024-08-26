@@ -53,82 +53,84 @@ dk_pickOs() {
 	dk_echo "38) Exit"
 	dk_echo
 	
-	dk_call dk_keyboardInput input
-	if [ "${input}" = "1" ]; then
+	#dk_call dk_keyboardInput choice
+	dk_call dk_keyboardInputTimeout choice 1 60
+	
+	if [ "${choice}" = "1" ]; then
 		TARGET_OS="${HOST_TRIPLE-}"
-	elif [ "${input}" = "2" ]; then
+	elif [ "${choice}" = "2" ]; then
 		TARGET_OS="android_arm32"
-	elif [ "${input}" = "3" ]; then
+	elif [ "${choice}" = "3" ]; then
 		TARGET_OS="android_arm64"
-	elif [ "${input}" = "4" ]; then
+	elif [ "${choice}" = "4" ]; then
 		TARGET_OS="android_x86"
-	elif [ "${input}" = "5" ]; then
+	elif [ "${choice}" = "5" ]; then
 		TARGET_OS="android_x86_64"
-	elif [ "${input}" = "6" ]; then
+	elif [ "${choice}" = "6" ]; then
 		TARGET_OS="emscripten"
-	elif [ "${input}" = "7" ]; then
+	elif [ "${choice}" = "7" ]; then
 		TARGET_OS="ios_arm32"
-	elif [ "${input}" = "8" ]; then
+	elif [ "${choice}" = "8" ]; then
 		TARGET_OS="ios_arm64"
-	elif [ "${input}" = "9" ]; then
+	elif [ "${choice}" = "9" ]; then
 		TARGET_OS="ios_x86"
-	elif [ "${input}" = "10" ]; then
+	elif [ "${choice}" = "10" ]; then
 		TARGET_OS="ios_x86_64"
-	elif [ "${input}" = "11" ]; then
+	elif [ "${choice}" = "11" ]; then
 		TARGET_OS="iossim_arm32"
-	elif [ "${input}" = "12" ]; then
+	elif [ "${choice}" = "12" ]; then
 		TARGET_OS="iossim_arm64"
-	elif [ "${input}" = "13" ]; then
+	elif [ "${choice}" = "13" ]; then
 		TARGET_OS="iossim_x86"
-	elif [ "${input}" = "14" ]; then
+	elif [ "${choice}" = "14" ]; then
 		TARGET_OS="iossim_x86_64"
-	elif [ "${input}" = "15" ]; then
+	elif [ "${choice}" = "15" ]; then
 		TARGET_OS="linux_arm32"
-	elif [ "${input}" = "16" ]; then
+	elif [ "${choice}" = "16" ]; then
 		TARGET_OS="linux_arm64"
-	elif [ "${input}" = "17" ]; then
+	elif [ "${choice}" = "17" ]; then
 		TARGET_OS="linux_x86"
-	elif [ "${input}" = "18" ]; then
+	elif [ "${choice}" = "18" ]; then
 		TARGET_OS="linux_x86_64"
-	elif [ "${input}" = "19" ]; then
+	elif [ "${choice}" = "19" ]; then
 		TARGET_OS="mac_arm32"
-	elif [ "${input}" = "20" ]; then
+	elif [ "${choice}" = "20" ]; then
 		TARGET_OS="mac_arm64"
-	elif [ "${input}" = "21" ]; then
+	elif [ "${choice}" = "21" ]; then
 		TARGET_OS="mac_x86"
-	elif [ "${input}" = "22" ]; then
+	elif [ "${choice}" = "22" ]; then
 		TARGET_OS="mac_x86_64"
-	elif [ "${input}" = "23" ]; then
+	elif [ "${choice}" = "23" ]; then
 		TARGET_OS="raspberry_arm32"
-	elif [ "${input}" = "24" ]; then
+	elif [ "${choice}" = "24" ]; then
 		TARGET_OS="raspberry_arm64"
-	elif [ "${input}" = "25" ]; then
+	elif [ "${choice}" = "25" ]; then
 		TARGET_OS="raspberry_x86"
-	elif [ "${input}" = "26" ]; then
+	elif [ "${choice}" = "26" ]; then
 		TARGET_OS="raspberry_x64"
-	elif [ "${input}" = "27" ]; then
+	elif [ "${choice}" = "27" ]; then
 		TARGET_OS="win_arm32"
-	elif [ "${input}" = "28" ]; then
+	elif [ "${choice}" = "28" ]; then
 		TARGET_OS="win_arm64_clang"
-	elif [ "${input}" = "29" ]; then
+	elif [ "${choice}" = "29" ]; then
 		TARGET_OS="win_x86_mingw"
-	elif [ "${input}" = "30" ]; then
+	elif [ "${choice}" = "30" ]; then
 		TARGET_OS="win_x86_clang"
-	elif [ "${input}" = "31" ]; then
+	elif [ "${choice}" = "31" ]; then
 		TARGET_OS="win_x86_msvc"
-	elif [ "${input}" = "32" ]; then
+	elif [ "${choice}" = "32" ]; then
 		TARGET_OS="win_x86_64_mingw"
-	elif [ "${input}" = "33" ]; then
+	elif [ "${choice}" = "33" ]; then
 		TARGET_OS="win_x86_64_clang"
-	elif [ "${input}" = "34" ]; then
+	elif [ "${choice}" = "34" ]; then
 		TARGET_OS="win_x86_64_ucrt"
-	elif [ "${input}" = "35" ]; then
+	elif [ "${choice}" = "35" ]; then
 		TARGET_OS="win_x86_64_msvc"
-	elif [ "${input}" = "36" ]; then
+	elif [ "${choice}" = "36" ]; then
 		dk_clearScreen
-	elif [ "${input}" = "37" ]; then
+	elif [ "${choice}" = "37" ]; then
 		APP=
-	elif [ "${input}" = "38" ]; then
+	elif [ "${choice}" = "38" ]; then
 		dk_exit 0
 	else
 		dk_warning "invalid selection"

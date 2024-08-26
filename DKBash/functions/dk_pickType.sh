@@ -9,7 +9,7 @@ dk_pickType() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
+	dk_call dk_echo "${APP-} ${TARGET_OS-} ${TYPE-}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) Debug"
 	dk_call dk_echo " 2) Release"
@@ -19,18 +19,20 @@ dk_pickType() {
 	dk_call dk_echo " 6) Exit"
 	dk_call dk_echo
 	
-	dk_call dk_keyboardInput input
-	if [ "${input}" = "1" ]; then
+	#dk_call dk_keyboardInput choice
+	dk_call dk_keyboardInputTimeout choice 1 60 
+	
+	if [ "${choice}" = "1" ]; then
 		TYPE="Debug"
-	elif [ "${input}" = "2" ]; then
+	elif [ "${choice}" = "2" ]; then
 		TYPE="Release"
-	elif [ "${input}" = "3" ]; then
+	elif [ "${choice}" = "3" ]; then
 		TYPE="All"
-	elif [ "${input}" = "4" ]; then
+	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
-	elif [ "${input}" = "5" ]; then
+	elif [ "${choice}" = "5" ]; then
 		TARGET_OS=
-	elif [ "${input}" = "6" ]; then
+	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0
 	else
 		dk_call dk_warning "invalid selection"

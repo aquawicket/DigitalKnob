@@ -1,6 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
+if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/download/"
 ::####################################################################
 ::# dk_download(url, destination)
 ::#

@@ -10,9 +10,6 @@ dk_pickUpdate() {
 	dk_debugFunc 0
 
 	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
-	#dk_call dk_printVar _APP_
-	#dk_call dk_printVar _TARGET_OS_ 
-	#dk_call dk_printVar _TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
@@ -60,37 +57,39 @@ dk_pickUpdate() {
 		dk_call dk_echo "${clr}"
 	fi
 	
-	dk_call dk_keyboardInput input
-	if [ "${input}" = "0" ]; then
+	dk_call dk_keyboardInput choice
+	#dk_call dk_keyboardInputTimeout choice 13 60
+	
+	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
 		APP=${_APP_}
 		TARGET_OS=${_TARGET_OS_}
 		TYPE=${_TYPE_}
 		UPDATE=1
-	elif [ "${input}" = "1" ]; then
+	elif [ "${choice}" = "1" ]; then
 		dk_call dk_gitUpdate
-	elif [ "${input}" = "2" ]; then
+	elif [ "${choice}" = "2" ]; then
 		dk_call dk_gitCommit
-	elif [ "${input}" = "3" ]; then
+	elif [ "${choice}" = "3" ]; then
 		dk_call dk_downloadDK
-	elif [ "${input}" = "4" ]; then
+	elif [ "${choice}" = "4" ]; then
 		dk_call dk_pushAssets
-	elif [ "${input}" = "5" ]; then
+	elif [ "${choice}" = "5" ]; then
 		dk_call dk_pullAssets
-	elif [ "${input}" = "6" ]; then
+	elif [ "${choice}" = "6" ]; then
 		dk_call dk_resetAll
-	elif [ "${input}" = "7" ]; then
+	elif [ "${choice}" = "7" ]; then
 		dk_call dk_removeAll
-	elif [ "${input}" = "8" ]; then
+	elif [ "${choice}" = "8" ]; then
 		dk_call dk_clearScreen
-	elif [ "${input}" = "9" ]; then
+	elif [ "${choice}" = "9" ]; then
 		dk_call dk_clearCmakeCache
 		dk_call dk_deleteTempFiles
-	elif [ "${input}" = "10" ]; then
+	elif [ "${choice}" = "10" ]; then
 		dk_call dk_reload
-	elif [ "${input}" = "11" ]; then
+	elif [ "${choice}" = "11" ]; then
 		dk_call dk_exit 0	
-	elif [ "${input}" = "" ]; then
+	elif [ "${choice}" = "" ]; then
 		UPDATE=1
 	else
 		dk_call dk_warning "invalid selection"
