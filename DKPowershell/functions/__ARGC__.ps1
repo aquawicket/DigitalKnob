@@ -8,8 +8,12 @@ if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 
 function GLOBAL:__ARGC__($_FRAME_=1) {
 	#$ubpc = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments.count
 	#$bpc = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count
-	#Write-Host "Bound = $bpc, Unbound = $ubpc"
-	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count; 
+	#$ARGC = $ubpc;
+	
+	#Write-Host "Bound = $bpc, Unbound = $ubpc, ARGC =" + $ARGC;
+	#return $ARGC;
+	
+	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
 	
 }
 

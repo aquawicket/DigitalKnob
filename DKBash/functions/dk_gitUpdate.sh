@@ -5,7 +5,7 @@
 # dk_gitUpdate(url, branch, NO_CONFIRM)
 #
 #
-dk_gitUpdate() {
+dk_gitUpdate($url, $branch) {
 	dk_debugFunc 2 3
 
 	[ -n $1 ] && url="$1"    || url="https://github.com/aquawicket/DigitalKnob.git"
