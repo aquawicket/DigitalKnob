@@ -63,7 +63,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
         
     if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
         
-    %dk_call% dk_gitUpdate NO_CONFIRM
+    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development NO_CONFIRM
         
     start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% & exit
 goto:eof
