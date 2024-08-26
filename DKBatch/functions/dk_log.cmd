@@ -48,6 +48,15 @@ if not defined NOTICE_TRACE    set "NOTICE_TRACE=0"
 if not defined NOTICE_LINE     set "NOTICE_LINE=0"
 if not defined NOTICE_HALT     set "NOTICE_HALT=0"
 
+:: SUCCESS
+if not defined SUCCESS_ENABLE   set "SUCCESS_ENABLE=1"
+if not defined SUCCESS_COLOR    set "SUCCESS_COLOR=%green%"
+if not defined SUCCESS_TAG      set "SUCCESS_TAG=SUCCESS: "
+if not defined SUCCESS_PAUSE    set "SUCCESS_PAUSE=0"
+if not defined SUCCESS_TRACE    set "SUCCESS_TRACE=0"
+if not defined SUCCESS_LINE     set "SUCCESS_LINE=0"
+if not defined SUCCESS_HALT     set "SUCCESS_HALT=0"
+
 :: WARNING
 if not defined WARNING_ENABLE  set "WARNING_ENABLE=1"
 if not defined WARNING_COLOR   set "WARNING_COLOR=%yellow%"
@@ -126,6 +135,7 @@ goto:eof
 	%dk_call% dk_log DEBUG   "test dk_log DEBUG message"
 	%dk_call% dk_log INFO    "test dk_log INFO message"
 	%dk_call% dk_log NOTICE  "test dk_log NOTICE message"
+	%dk_call% dk_log SUCCESS "test dk_log SUCCESS message"
 	%dk_call% dk_log WARNING "test dk_log WARNING message"
 	%dk_call% dk_log TODO    "test dk_log TODO message"
 	%dk_call% dk_log FIXME   "test dk_log FIXME message"

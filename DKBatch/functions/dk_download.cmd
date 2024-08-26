@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
-if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/download/"
+if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/download"
 ::####################################################################
 ::# dk_download(url, destination)
 ::#
@@ -36,7 +36,9 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	
     if exist "%destination%" %dk_call% dk_info "%destination% already exist" & goto:eof
 	
-	%dk_call% dk_info "Downloading %url_filename% . . ."
+	%dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%url_filename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
+	%dk_call% dk_urlExists "%url%" || %dk_call% dk_error "url:%url% NOT FOUND"
+	%dk_call% dk_info "Downloading %url%"
     
 	:: make sure the destination parent directory exists
 	%dk_call% dk_dirname "%destination%" destination_dir
@@ -44,9 +46,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	
 	if not defined destination_dir %dk_call% dk_error "destination_dir is invalid"
 	if not exist "%destination_dir%" %dk_call% dk_makeDirectory "%destination_dir%"
-	
-	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-    
+
 	
 	::set "DISABLE_powershell=1"
 	::set "DISABLE_curl=1"
@@ -56,11 +56,13 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	:powershell_dl
 	if defined DISABLE_powershell goto:end_powershell_dl
 	%dk_call% dk_echo "Downloading via dk_powershell"
+	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
 	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
 	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	if exist "%destination%_DOWNLOADING" goto:download_done
 	:end_powershell_dl
 	
 	:: Try curl
@@ -70,6 +72,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	if not exist "%destination%_DOWNLOADING" curl --help %NO_STD% && curl -L "%url%" -o "%destination%_DOWNLOADING"
 	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
 	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	if exist "%destination%_DOWNLOADING" goto:download_done
 	:end_curl_dl
 	
 	:: Try certutil
@@ -79,15 +82,19 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	if not exist "%destination%_DOWNLOADING" certutil.exe %NO_STD% && certutil.exe -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
 	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
 	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	if exist "%destination%_DOWNLOADING" goto:download_done
 	:end_certutil_dl
 	
+	:download_done
 	:: If Dowload Failed
-	if not exist "%destination%_DOWNLOADING" %dk_call% dk_error "failed to download %DL_FILE%"
+	if not exist "%destination%_DOWNLOADING" %dk_call% dk_error "url:%url% DOWNLOAD FAILED"
 	
 	:: downloaded as temporary name like myFile.txt_DOWNLOADING
 	:: then rename it to it's original upon completion
 	%dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
 	if not exist "%destination%" %dk_call% dk_error "failed to rename %destination%_DOWNLOADING"
+	
+	%dk_call% dk_log SUCCESS "Download complete"
 goto:eof
 
 
