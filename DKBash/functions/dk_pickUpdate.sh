@@ -67,7 +67,7 @@ dk_pickUpdate() {
 		TYPE=${_TYPE_}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then
-		dk_call dk_gitUpdate
+		dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
 	elif [ "${choice}" = "2" ]; then
 		dk_call dk_gitCommit
 	elif [ "${choice}" = "3" ]; then
