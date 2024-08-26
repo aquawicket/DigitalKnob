@@ -5,7 +5,7 @@ if(!$dk_gitUpdate){ $dk_gitUpdate = 1 } else{ return }
 # dk_gitUpdate(url, branch, NO_CONFIRM)
 #
 #
-function Global:dk_gitUpdate() {
+function Global:dk_gitUpdate($url, $branch) {
 	dk_debugFunc 2 3
 
 	if($args[0]){ $url="$args[0]" }    else { $url="https://github.com/aquawicket/DigitalKnob.git" }
