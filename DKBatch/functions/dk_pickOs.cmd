@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pickOs
+ setlocal
 	call dk_debugFunc 0
 	
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -101,6 +102,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%choice%"=="39" %dk_call% dk_exit                              & goto:eof
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset TARGET_OS
+ endlocal
 goto:eof
 
 
@@ -108,7 +110,9 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pickOs
+ endlocal
 goto:eof
