@@ -67,7 +67,7 @@ function Global:dk_pickUpdate() {
 		$global:TYPE = ${_TYPE_}
 		$global:UPDATE = 1
 	}
-	elseif($input -eq  "1"){ dk_call dk_gitUpdate }
+	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development }
 	elseif($input -eq  "2"){ dk_call dk_gitCommit }
 	elseif($input -eq  "3"){ dk_call dk_downloadDK }
 	elseif($input -eq  "4"){ dk_call dk_pushAssets }

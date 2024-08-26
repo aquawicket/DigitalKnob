@@ -44,7 +44,7 @@ function Global:dk_resetAll() {
 #	dk_call dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 #	rm -r -f "${DKBRANCH_DIR}" 2>nul
 	
-	dk_call dk_gitUpdate #NO_CONFIRM
+	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development #NO_CONFIRM
 	
 	dk_call dk_info "Restarting ${DKSCRIPT_NAME}. . ."
 	dk_call dk_sleep 3
