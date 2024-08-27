@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: the base directory of the %to% path must exist.    
 	%dk_call% dk_dirname "%_to_%" _parent_dir_
 	::%dk_call% dk_printVar _parent_dir_
-	%dk_call% dk_makeDirectory "%_parent_dir_%"
+	if not exist "%_parent_dir_%"  %dk_call% dk_makeDirectory "%_parent_dir_%"
 	
 	::rename "%_from_%" "%_to_%"
 	move /Y "%_from_%" "%_to_%" %NO_STDOUT%
