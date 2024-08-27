@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
  setlocal
 	call dk_debugFunc 1
 	
-	%dk_call% dk_isCRLF "%~1" && %dk_call% dk_echo "%~1 already CRLF" && goto:eof
+	%dk_call% dk_isCRLF "%~1" && %dk_call% dk_echo "%~1 is already CRLF" && goto:eof
 	%dk_call% dk_rename "%~1" "%~1_toCRLF" OVERWRITE
 	if not exist "%~1_toCRLF" %dk_call% dk_error "failed to rename %~1"
 	if exist "%~1" %dk_call% dk_error "cannot rename file, destination already exists"
