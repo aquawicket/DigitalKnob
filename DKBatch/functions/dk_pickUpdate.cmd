@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pickUpdate
- setlocal
+ ::setlocal
 	call dk_debugFunc 0
 	
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
@@ -49,7 +49,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%choice%"=="11" %dk_call% dk_exit 0
         
     set UPDATE=true
- endlocal
+ ::endlocal
 goto:eof
 
 

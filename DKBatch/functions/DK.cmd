@@ -11,7 +11,6 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 ::#
 ::#
 :DK
- 
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_STD=1>nul 2>nul"
@@ -103,6 +102,8 @@ goto:eof
 	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%"  goto:eof
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	
+	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
 goto:eof
 
 
