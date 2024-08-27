@@ -11,13 +11,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
-	%dk_call% dk_echo "14 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
-    %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
-	%dk_call% dk_echo "16 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
-	
     %dk_call% dk_echo
     %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
+	%dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE
 	
     %dk_call% dk_echo
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -32,8 +29,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     echo  9) Clear cmake cache and .tmp files
     echo  10) Reload
     echo  11) Exit
-	
-	
 	
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
 	%dk_call% dk_keyboardInput choice
