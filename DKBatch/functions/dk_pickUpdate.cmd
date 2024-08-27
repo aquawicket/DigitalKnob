@@ -34,8 +34,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_keyboardInput choice
 	::%dk_call% dk_keyboardInputTimeout choice 13 60
 	
-	%dk_call% dk_echo "39 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
-	
     ::if "%choice%"=="0" %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_%
     if "%choice%"=="1" %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
     if "%choice%"=="2" %dk_call% dk_gitCommit
@@ -49,7 +47,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%choice%"=="10" %dk_call% dk_reload
     if "%choice%"=="11" %dk_call% dk_exit 0
        
-	 %dk_call% dk_echo "52 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
     set "UPDATE=true"
 goto:eof
 
