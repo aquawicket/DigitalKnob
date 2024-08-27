@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_secondsToDate 
+ setlocal
 	call dk_debugFunc 1 7
 	
-	setlocal ENABLEEXTENSIONS
 	set /a i=%1
 	set /a ss=i%%60
 	set /a i/=60
@@ -63,6 +63,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getDate Day Month Year

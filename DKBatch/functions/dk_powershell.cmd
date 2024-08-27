@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_powershell
+ setlocal
 	if defined dk_powershell (echo dk_powershell blocked && goto:eof) else (set "dk_powershell=1")   &::disallow recursion for this function
 	call dk_debugFunc 0 99
-	
 	
 	"%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 	
@@ -46,6 +46,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_powershell "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"

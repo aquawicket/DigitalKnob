@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::
 ::
 :dk_registrySetKey
+ setlocal
 	call dk_debugFunc 4
 	
 	if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
@@ -22,6 +23,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"

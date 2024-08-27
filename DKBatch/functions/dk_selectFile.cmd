@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_selectFile(rtn_var)
 ::#
 :dk_selectFile
+ setlocal
 	call dk_debugFunc 1
-	setlocal
 	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_powershell"
 	for /f "delims=" %%I in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
@@ -22,6 +22,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_selectFile myFile

@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_removeExtension
+ setlocal
 	call dk_debugFunc 2
 	
-	setlocal
 	set "_filepath_=%~1"
 	%dk_call% dk_getExtension "%_filepath_%" _extension_
 	%dk_call% dk_replaceAll "%_filepath_%" "%_extension_%" "" _filepath_
@@ -24,6 +24,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_set myPath "/test/test2/xfile.extension"

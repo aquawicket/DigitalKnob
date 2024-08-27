@@ -38,6 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::    Deletes the registry value MTU under MyCo on ZODIAC
 ::
 :dk_registryDeleteKey
+ setlocal
 	call dk_debugFunc 1
 
 	%dk_call% dk_registryKeyExists "%~1" || %dk_call% dk_warning "%~1 does not exist"
@@ -51,6 +52,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"

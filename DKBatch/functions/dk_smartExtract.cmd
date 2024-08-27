@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_smartExtract
+ setlocal
 	call dk_debugFunc 2
 
-	setlocal
 	set "src=%~1"
 	set "dest=%~2"
 	
@@ -58,8 +58,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	:: rename/move UNZIPPED folder to dest path"
 	%dk_call% dk_move "%src_dirname%\UNZIPPED" "%dest_realpath%" OVERWRITE
-	
-	endlocal
 goto:eof
 
 
@@ -67,6 +65,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_getDKPaths"

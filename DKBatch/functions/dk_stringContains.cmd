@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_stringContains
+ setlocal enableDelayedExpansion
 	call dk_debugFunc 2 3
 	
-	setlocal enableDelayedExpansion
 	if "!d!" neq "" %dk_call% dk_error "%__FUNCTION__%: requires delayed expansion"
 	
     set "_haystack_=%~1"
@@ -29,6 +29,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
     ::###### Using if return value

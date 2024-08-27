@@ -7,6 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_printVariables
+ setlocal
 	call dk_debugFunc 0
 
 	setlocal enableextensions disabledelayedexpansion
@@ -61,6 +62,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_printVariables

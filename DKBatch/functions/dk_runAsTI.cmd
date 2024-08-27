@@ -8,6 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# Run as Trusted Installer
 ::#
 :dk_runAsTI
+ setlocal
 	call dk_debugFunc 1
 	
 	set ^ #=
@@ -20,6 +21,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	::%dk_call% dk_runAsTI regedit

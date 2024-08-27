@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_reload
+ setlocal
 	call dk_debugFunc 0
 	
 	if not exist "%DKSCRIPT_PATH%" %dk_call% dk_error "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && goto:eof
@@ -30,6 +31,7 @@ goto:
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pause "Press any key to test dk_reload"
