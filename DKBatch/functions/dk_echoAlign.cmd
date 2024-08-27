@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_echoAlign
+:: setlocal
 	call dk_debugFunc 2
 	
 	:: FIXME: requires delayed expansion
@@ -48,7 +49,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	echo %offset%%~2
-	endlocal
 goto:eof
 
 
@@ -56,9 +56,9 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
-	setlocal
 	%dk_call% dk_echoAlign center "centered text"
 	%dk_call% dk_echoAlign right "right aligned text"
 	%dk_call% dk_echo "text on the left side"

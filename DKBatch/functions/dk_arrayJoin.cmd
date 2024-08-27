@@ -39,7 +39,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		goto:dk_arrayJoin_loop
 	)
 	endlocal & set "%3=%_string_%"
- endlocal
 goto:eof
 
 
@@ -69,5 +68,4 @@ goto:eof
 	%dk_call% dk_arrayJoin myArrayB "," myStringB
 	::myStringB=$(dk_arrayJoin myArrayB ",")
 	%dk_call% dk_printVar myStringB
- endlocal
 goto:eof

@@ -23,7 +23,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     set "hex=0x%hex:~-2%"
 	
 	endlocal & set "%2=%hex%"
- endlocal
 goto:eof
 
 
@@ -37,5 +36,4 @@ goto:eof
 	%dk_call% dk_set myAscii x
 	%dk_call% dk_asciiToHex myAscii myHex
 	%dk_call% dk_info "myHex = %myHex%"
- endlocal
 goto:eof

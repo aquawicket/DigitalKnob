@@ -44,7 +44,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	if defined "%~3" (endlocal & set "%3=false")
 	(call) %NO_STD%
- endlocal
 goto:eof
 
 
@@ -83,5 +82,4 @@ goto:eof
 	%dk_call% dk_printVar array123q
 	%dk_call% dk_info "dk_arrayIncludes array123q 3"
 	%dk_call% dk_arrayIncludes array123q 3     && echo true || echo false  &::# false
- endlocal
 goto:eof

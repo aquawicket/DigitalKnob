@@ -11,7 +11,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not defined %~1 (
 		%dk_call% dk_error "Assertion failed: dk_assert():  %__FILE__%:%__LINE__%  %__FUNCTION__%(%__ARGS__%)"
 	)
- endlocal
 goto:eof
 
 
@@ -41,5 +40,4 @@ goto:eof
 	%dk_call% dk_assert myVarE
 
 	%dk_call% dk_assert noVar
- endlocal
 goto:eof

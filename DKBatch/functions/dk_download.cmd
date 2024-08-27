@@ -7,6 +7,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 ::#
 ::#
 :dk_download
+ setlocal
 	call dk_debugFunc 1 2
 	
 	set "url=%~1"
@@ -102,6 +103,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"

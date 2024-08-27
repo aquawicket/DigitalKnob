@@ -23,7 +23,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
         "%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS% --config Debug --verbose && %dk_call% dk_echo "CMake Build Successful" || %dk_call% dk_error "CMake Build Failed"
         goto:eof
     )
- endlocal
 goto:eof
 
 
@@ -34,5 +33,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_buildDebug
- endlocal
 goto:eof

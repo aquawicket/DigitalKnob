@@ -35,7 +35,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		goto:dk_arrayUnshift_loop
 	)
 	endlocal & set "%~1[0]=%~2"
- ::endlocal
 goto:eof
 
 
@@ -70,6 +69,4 @@ goto:eof
 	%dk_call% dk_arrayUnshift myArrayA "h i j" ::new_lengthA
 	%dk_call% dk_printVar myArrayA
 	::%dk_call% dk_printVar new_lengthA
-	
- endlocal
 goto:eof

@@ -12,8 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	for /f "tokens=1,* delims= " %%a in ("%*") do set "ALL_BUT_FIRST=%%b"
 	
 	if defined %~1 endlocal & call set "%~1=%%%~1%% %ALL_BUT_FIRST%"
-	if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%"
- endlocal
+	if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%
 goto:eof
 
 
@@ -31,5 +30,4 @@ goto:eof
 	
 	%dk_call% dk_appendArgs myVar 456 zyx
 	%dk_call% dk_printVar myVar
- endlocal
 goto:eof

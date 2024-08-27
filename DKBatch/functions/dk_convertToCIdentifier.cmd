@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_convertToCIdentifier
+::setlocal enabledelayedexpansion
 	call dk_debugFunc 2
 	
 	:: FIXME: requires delayed expansion

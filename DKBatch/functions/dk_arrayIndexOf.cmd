@@ -46,7 +46,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			
 		set /a _count_+=1
 	goto:dk_arrayIndexOf_loop
- endlocal
 goto:eof
 
 
@@ -80,5 +79,4 @@ goto:eof
 	
 	%dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
 	%dk_call% dk_printVar indexN
- endlocal
 goto:eof

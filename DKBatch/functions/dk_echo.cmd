@@ -9,18 +9,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#     @msg	- The message to print
 ::#
 :dk_echo
+ setlocal
     call dk_debugFunc 0 1
 	if "%~1" equ "" (echo: & goto:eof)
 	
-    setlocal
-        set "_message_=%~1"	
+    set "_message_=%~1"	
 		
-        :: if msg starts and ends with quotes, remove the first and last characters
-		::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
-        ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
+    :: if msg starts and ends with quotes, remove the first and last characters
+	::%if_NDE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=%_message_:~1,-1%"
+    ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
 		
-        echo %_message_%
-    endlocal
+    echo %_message_%
 goto:eof
 
 
@@ -29,6 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	echo This is a normal echo commmand

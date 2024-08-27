@@ -24,8 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::### return value ###
 	::if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
 	if "!DE!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
-	if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"
- endlocal	
+	if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"	
 goto:eof
 
 
@@ -61,5 +60,4 @@ goto:eof
 	%dk_call% dk_echo "dk_arrayAt(MyArrayB 3) = %arrayAtB%"
 	if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "dk_arrayAt() failed"
 	if "%arrayAtB%" equ "1 2 3" %dk_call% dk_success "dk_arrayAt() suceeded"
- endlocal
 goto:eof

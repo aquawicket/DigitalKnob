@@ -5,9 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_defined(<variable> rtn_var)
 ::#
 :dk_defined
+ setlocal
 	call dk_debugFunc 1 2
 
-	setlocal
 	::%dk_call% dk_set variable "%1"
 	if defined %~1 (
 		if defined "%~2" (endlocal & call set "%2=true")
@@ -26,6 +26,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
     ::###### Using if return value

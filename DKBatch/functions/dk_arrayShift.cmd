@@ -35,7 +35,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	endlocal & %dk_call% dk_unset %_arry_%[%prev%]
 	::endlocal & set "%_arry_%[%prev%]="
- endlocal
 goto:eof
 
 
@@ -46,6 +45,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"

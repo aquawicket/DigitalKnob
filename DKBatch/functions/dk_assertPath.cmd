@@ -14,7 +14,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not exist "%_value_%" (
 		%dk_call% dk_error "Assertion failed: assertPath:  %__FILE__%:%__LINE__%  %__FUNCTION__%(%*): %_value_% is not found!"
 	)
- endlocal
 goto:eof
 
 
@@ -32,5 +31,4 @@ goto:eof
 	%dk_call% dk_assertPath sys32path
 	
 	%dk_call% dk_assertPath "C:\NonExistentPath"
- endlocal
 goto:eof

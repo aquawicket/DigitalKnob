@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_extract
+ setlocal
 	call dk_debugFunc 1 2
 
 	set "dk_extract_argc=%__ARGC__%"
@@ -27,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%destination%"'
 	goto:eof
 	
-:twoParams
+	:twoParams
 	::### handle 2 parameters
 	
 	:: try dk_powershell
@@ -35,7 +36,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: try tar
 	if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"
-
 goto:eof
 
 
@@ -43,6 +43,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_getDKPaths"

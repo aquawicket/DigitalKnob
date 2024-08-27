@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_confirm
+ setlocal
 	call dk_debugFunc 0
 	
-	setlocal
 	set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
 	%dk_call% dk_echo
 	%dk_call% dk_echo
@@ -20,7 +20,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	rem if not defined "%~1" ( endlocal & %dk_call% dk_set %1 "false" )
 	(call) %NO_STD%
-	endlocal
 goto:eof
 
 
@@ -29,6 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	::###### Using && and || conditionals
