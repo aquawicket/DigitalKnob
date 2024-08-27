@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#     Example:  call dk_endProcess iexplore.exe
 ::#    
 :dk_killProcess
+ setlocal
 	call dk_debugFunc 1
-		
 		
 	set "process=%~1"
 
@@ -25,6 +25,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	start mspaint.exe

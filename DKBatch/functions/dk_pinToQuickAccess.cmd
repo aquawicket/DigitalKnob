@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pinToQuickAccess
-	setlocal
+ setlocal
 	call dk_debugFunc 1
 	
 	:: METHOD 1:  call the dk_callPowershell function (FIXME: ERROR: runs twice)
@@ -22,7 +22,8 @@ goto:eof
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST 
+:DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pinToQuickAccess "C:\Users\Administrator\digitalknob"

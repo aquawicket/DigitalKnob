@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_isCRLF
+ setlocal
 	call dk_debugFunc 1 2
-	setlocal
 
 	call type "%~1" | c:\Windows\System32\find.exe "" /v > "%~1.temp"
 	set size1=%~z1
@@ -40,7 +40,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if defined "%~2" (endlocal & set "%2=false")
 	(call) %NO_STD%
-	endlocal
 goto:eof
 
 :setsize2
@@ -51,6 +50,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_isCRLF DK.cmd && %dk_call% dk_echo "DK.cmd is CRLF" || %dk_call% dk_echo "DK.cmd is NOT CRLF"

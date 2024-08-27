@@ -54,7 +54,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
 	::echo RESULT=%result%
 	endlocal & set "%1=%result%"
- endlocal
 goto:eof
 
 
@@ -65,6 +64,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	echo Type some input and press enter, this will time out in 5 seconds

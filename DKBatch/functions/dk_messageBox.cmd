@@ -7,6 +7,7 @@ call dk_set VERSION_dk_messageBox 3
 ::#
 ::#
 :dk_messageBox
+ setlocal
 	call dk_debugFunc 3
 	
 	set "title=%~1"
@@ -80,6 +81,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result

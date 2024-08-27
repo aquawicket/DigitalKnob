@@ -102,7 +102,7 @@ if not defined FIXME_HALT      set "FIXME_HALT=0"
 ::#    @message	- The message to print
 ::#
 :dk_log
-	setlocal 
+ setlocal 
 	::call dk_debugFunc 1 2
 	
 	if "%ENABLE_dk_log%" neq "1"  goto:eof
@@ -127,6 +127,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_log "test dk_log message"

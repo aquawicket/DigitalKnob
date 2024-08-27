@@ -32,7 +32,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
         "%GIT_EXE%" checkout -b %branch% main
         "%GIT_EXE%" push --set-upstream origin %branch%
     )
- endlocal
 goto:eof
 
 
@@ -42,6 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	::%dk_call% dk_gitUpdate

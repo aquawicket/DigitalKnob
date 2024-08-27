@@ -8,6 +8,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 ::#
 ::#
 :dk_keyboard
+ setlocal
 	::echo dk_keyboard %*
 	
 	if "%~1" == "callback" set callback=%~2 %~3
@@ -19,6 +20,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 goto:eof
 
 :dk_keyboard.Keyboard_Loop
+ setlocal
 	::echo dk_keyboard.Keyboard_Loop %*
 	
 	:: Read keys via PowerShell
@@ -32,6 +34,7 @@ goto:eof
 goto:eof
 
 :dk_keyboard.BeginReceiving
+ setlocal
 	echo dk_keyboard.BeginReceiving %*
 	
 	:: Wait for Powershell code start signal
@@ -43,6 +46,7 @@ goto:eof
 goto:eof
 	
 :dk_keyboard.pollKeys
+ setlocal
 	::echo dk_keyboard.pollKeys %*
 
 	:: Process keys in Batch
@@ -57,6 +61,7 @@ goto:eof
 
 
 :dk_keyboard.onKeyDown
+ setlocal
 	::echo dk_keyboard.onKeyDown %*
 	
 	set "keyCode=%1"
@@ -80,6 +85,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0 || call dk_error "call dk_debugFunc failed!"
 	
 	dk_call dk_keyboard || call dk_error "call dk_keyboard failed!"

@@ -8,6 +8,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 ::#
 ::#
 :dk_installGit
+ setlocal
     call dk_debugFunc 0
 	
     %dk_call% dk_validate DK_HOST_ARCH "%dk_call% dk_getHostTriple"
@@ -40,6 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
     %dk_call% dk_installGit

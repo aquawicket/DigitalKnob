@@ -7,6 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToAscii
+ setlocal
 	call dk_debugFunc 2
 	
 	set "hex=%~1"
@@ -27,6 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 		
 	%dk_call% dk_hexToAscii 0x41 ascii

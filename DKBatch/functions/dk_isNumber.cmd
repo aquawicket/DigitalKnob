@@ -7,13 +7,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#	 https://stackoverflow.com/a/17584764
 ::#
 :dk_isNumber
+ setlocal
 	call dk_debugFunc 1 2
 
 	set "arg1=%~1"
 	if defined %~1 call set "arg1=%%%arg1%%%"
 	set "var="&for /f "delims=0123456789.-" %%i in ("%arg1%") do set non_numeric=%%i
 
-	
 	if not defined non_numeric (
 		%dk_call% dk_unset non_numeric
 		if defined "%~2" (endlocal & set "%2=true")
@@ -34,6 +34,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_isNumber 69         && %dk_call% dk_info "is a number" || %dk_call% dk_info "is NOT a number"

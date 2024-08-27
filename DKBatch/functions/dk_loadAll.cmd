@@ -7,6 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_loadAll()
+ setlocal
 	call dk_debugFunc 0
 	
 	:: if we are working from a local repository, all function files should be there. No need to loadAll
@@ -30,6 +31,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_loadAll

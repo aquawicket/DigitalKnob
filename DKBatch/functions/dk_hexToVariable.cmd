@@ -7,6 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_hexToVariable
+ setlocal
 	call dk_debugFunc 2
 	
 	::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"    ::Test:  set ESC to 0x1b
@@ -22,6 +23,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_hexToVariable var 0x41

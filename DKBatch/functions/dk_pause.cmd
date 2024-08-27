@@ -8,6 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    Pause execution and wait for <enter> keypress to continue
 ::#
 :dk_pause
+ setlocal
 	call dk_debugFunc 0 1
 	
 	if "%~1" equ "" (set "pause_msg=Press any key to continue...") else (set "pause_msg=%~1")
@@ -22,6 +23,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pause

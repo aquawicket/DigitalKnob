@@ -5,6 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_pathExists(path rtn_var)
 ::#
 :dk_pathExists
+ setlocal
 	call dk_debugFunc 1 2
 
 	::set "dk_pathExists=NOT ERRORLEVEL 1"
@@ -27,6 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	::###### Using if return value

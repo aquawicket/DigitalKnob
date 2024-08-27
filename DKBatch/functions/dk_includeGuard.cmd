@@ -10,6 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_includeGuard
+ setlocal
 	call dk_debugFunc 0
 	
 	:: since batch calls scripts by file and not by function, there is no need to use include guards
@@ -39,6 +40,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%
 	
