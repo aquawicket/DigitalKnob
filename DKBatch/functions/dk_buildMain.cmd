@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
     
     :while_loop   
-		::%dk_call% dk_echo "UPDATE=%UPDATE% - APP=%APP% - TARGET_OS=%TARGET_OS% - TYPE=%TYPE%"
+		%dk_call% dk_echo "UPDATE=%UPDATE% - APP=%APP% - TARGET_OS=%TARGET_OS% - TYPE=%TYPE%"
 		
 		if "%UPDATE%"==""     %dk_call% dk_pickUpdate  & goto:while_loop
 		if "%APP%"==""        %dk_call% dk_pickApp APP & goto:while_loop
