@@ -18,13 +18,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     
 	set /a count=0
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (
-		if !count! equ 0 set "APP=%%a"
-        if !count! equ 1 set "TARGET_OS=%%a"
-        if !count! equ 2 set "TYPE=%%a"
+		if !count! equ 0 set "_APP_=%%a"
+        if !count! equ 1 set "_TARGET_OS_=%%a"
+        if !count! equ 2 set "_TYPE_=%%a"
 		set /a count+=1
     )
 	
-	endlocal && set "%1=%APP%" && set "%2=%TARGET_OS%" && set "%3=%TYPE%"
+	endlocal && set "%1=%_APP_%" && set "%2=%_TARGET_OS_%" && set "%3=%_TYPE_%"
 	::%dk_call% dk_printVar APP
 	::%dk_call% dk_printVar TARGET_OS
 	::%dk_call% dk_printVar TYPE

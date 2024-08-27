@@ -6,10 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pickApp
- setlocal
+ setlocal enableDelayedExpansion
     call dk_debugFunc 1
 	
- ::setlocal enableDelayedExpansion
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
 
 
@@ -36,6 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	goto:end_runCache
 	:runCache
+		%dk_call% dk_info "re-running cached options..."
 		%dk_call% dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & goto:eof
 	:end_runCache
 	
