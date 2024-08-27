@@ -17,6 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::#
 :dk_timer
+ setlocal
 	setlocal enableDelayedExpansion
 	
 	::%dk_call% dk_getTime centisecond second minute hour
@@ -51,6 +52,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0	
 	
 	%dk_call% dk_timer t1

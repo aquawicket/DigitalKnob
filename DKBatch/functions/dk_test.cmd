@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 dk_test
+ setlocal
 	call dk_debugFunc 1 99
 	
 	echo dk_test_string
@@ -47,6 +48,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_test "functions can recieve strings as arguments"
