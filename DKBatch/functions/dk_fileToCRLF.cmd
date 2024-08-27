@@ -9,8 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
  setlocal
 	call dk_debugFunc 1
 	
-	echo "%~1"
-	if "%~1" equ "dk_echo.cmd" goto:eof
+	if "%~1" equ "%DKBATCH_FUNCTIONS_DIR%\dk_echo.cmd" goto:eof
 	
 	%dk_call% dk_isCRLF "%~1" && %dk_call% dk_echo "%~1 is already CRLF" && goto:eof
 	%dk_call% dk_rename "%~1" "%~1_toCRLF" OVERWRITE
