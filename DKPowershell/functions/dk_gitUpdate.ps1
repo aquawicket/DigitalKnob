@@ -19,7 +19,7 @@ function Global:dk_gitUpdate($url, $branch) {
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 	if(!(dk_call dk_pathExists "${DKBRANCH_DIR}/.git")){
 		dk_call dk_printVar DKBRANCH_DIR
-		dk_call "${GIT_EXE}" clone ${url} ${DKBRANCH_DIR}
+		dk_call "${GIT_EXE}" clone "${url}" "${DKBRANCH_DIR}"
 	}
 	dk_call cd "${DKBRANCH_DIR}" #-or dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
 	dk_call "${GIT_EXE}" pull --all

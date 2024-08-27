@@ -48,6 +48,15 @@ if(!(${NOTICE_TRACE}))   { $global:NOTICE_TRACE = 0 }
 if(!(${NOTICE_LINE}))    { $global:NOTICE_LINE = 0 }
 if(!(${NOTICE_HALT}))    { $global:NOTICE_HALT = 0 }
 
+# SUCCESS
+if(!(${SUCCESS_ENABLE}))  { $global:SUCCESS_ENABLE = 1 }
+if(!(${SUCCESS_COLOR}))   { $global:SUCCESS_COLOR = ${green} }
+if(!(${SUCCESS_TAG}))     { $global:SUCCESS_TAG = "SUCCESS: " }
+if(!(${SUCCESS_PAUSE}))   { $global:SUCCESS_PAUSE = 0 }
+if(!(${SUCCESS_TRACE}))   { $global:SUCCESS_TRACE = 0 }
+if(!(${SUCCESS_LINE}))    { $global:SUCCESS_LINE = 0 }
+if(!(${SUCCESS_HALT}))    { $global:SUCCESS_HALT = 0 }
+
 # WARNING
 if(!(${WARNING_ENABLE})) { $global:WARNING_ENABLE = 1 }
 if(!(${WARNING_COLOR}))  { $global:WARNING_COLOR = ${yellow} }
@@ -135,6 +144,7 @@ function Global:DKTEST() {
 	dk_call dk_log DEBUG   "test dk_log DEBUG message"
 	dk_call dk_log INFO    "test dk_log INFO message"
 	dk_call dk_log NOTICE  "test dk_log NOTICE message"
+	dk_call dk_log SUCCESS "test dk_log SUCCESS message"
 	dk_call dk_log WARNING "test dk_log WARNING message"
 	dk_call dk_log TODO    "test dk_log TODO message"
 	dk_call dk_log FIXME   "test dk_log FIXME message"

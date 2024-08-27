@@ -7,15 +7,19 @@ if(!$dk_call){ $dk_call = 1 } else{ return }
 #
 function Global:dk_call(){
 	#dk_debugFunc 1 9
-
+	
+	#Write-Host @args
+	
 	$1, $2, $3, $4, $5, $6, $7, $8, $9 = ${args}
 	
 	if("$1" -match "dk_[a-zA-Z0-9]+"){
 		dk_source $1
 	}
-	#Write-Host "$1, $2, $3, $4, $5, $6, $7, $8, $9"
+
 	& $1 $2 $3 $4 $5 $6 $7 $8 $9
-}
+	#Start-Process -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList @args
+
+} 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
