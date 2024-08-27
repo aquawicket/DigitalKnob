@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#   RtnVar. If called without any argument, then simply write the PID to stdout.
 ::#
 :dk_getPID  [RtnVar]
-
+:: setlocal
 	
 ::	title mycmd
 ::	tasklist /fo csv | findstr /i "mycmd"
@@ -86,6 +86,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getPID PID

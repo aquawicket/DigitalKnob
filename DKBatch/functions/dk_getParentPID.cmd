@@ -8,6 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    http://stackoverflow.com/questions/2531837/how-can-i-get-the-pid-of-the-parent-process-of-my-application
 ::#
 :dk_getParentPID
+ setlocal
 	call dk_debugFunc 1
 	
 	if exist "dk_getParentPID.exe .exe" goto:exe_exists
@@ -40,6 +41,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getParentPID PPID

@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_getParentFolder
+ setlocal
 	call dk_debugFunc 2
 	
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
@@ -20,6 +21,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getParentFolder

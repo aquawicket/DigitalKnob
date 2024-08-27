@@ -9,7 +9,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
  setlocal
 	call dk_debugFunc 2
 	
-	setlocal
 	set "_input_=%1"
 	set "_input_=%_input_:"=%"
 	if [%_input_:~-1,1%] == [\] set "_input_=%_input_:~0,-1%"
