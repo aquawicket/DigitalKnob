@@ -17,6 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_arrayPop
+ setlocal
 	call dk_debugFunc 1 2
 	::dk_validateArgs array
 	
@@ -26,6 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set "removedElement=!%~1[%_length_%]!"
 	%dk_call% dk_printVar removedElement
 	endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]
+ endlocal
 goto:eof
 
 
@@ -33,6 +35,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
@@ -75,4 +78,5 @@ goto:eof
 ::	%dk_call% dk_printVar removedA
 	%dk_call% dk_echo
 	%dk_call% dk_echo
+ endlocal
 goto:eof

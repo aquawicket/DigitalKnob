@@ -12,6 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
 :dk_arrayLength
+ setlocal
 	call dk_debugFunc 2
 	
 	setlocal
@@ -22,6 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	   goto :dk_arrayLength_loop 
 	)
 	endlocal & set "%2=%_length_%"
+ endlocal
 goto:eof
 
 
@@ -29,6 +31,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
@@ -39,4 +42,5 @@ goto:eof
 	
 	%dk_call% dk_arrayLength myArrayA myArrayLengthA
 	%dk_call% dk_printVar myArrayLengthA
+ endlocal
 goto:eof

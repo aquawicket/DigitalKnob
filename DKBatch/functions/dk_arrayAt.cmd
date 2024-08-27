@@ -35,6 +35,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
@@ -47,7 +48,7 @@ goto:eof
 	%dk_call% dk_printVar arrayAtA
 	%dk_call% dk_echo "dk_arrayAt(MyArrayA 2) = %arrayAtA%"
 	if "%arrayAtA%" neq "d e f" %dk_call% dk_error "dk_arrayAt() failed"
-	if "%arrayAtA%" equ "d e f" %dk_call% dk_info "dk_arrayAt() suceeded" 
+	if "%arrayAtA%" equ "d e f" %dk_call% dk_success "dk_arrayAt() suceeded" 
 	
 	set "myArrayB[0]=h i j"
 	set "myArrayB[1]=4 5 6"
@@ -59,5 +60,6 @@ goto:eof
 	%dk_call% dk_printVar arrayAtB
 	%dk_call% dk_echo "dk_arrayAt(MyArrayB 3) = %arrayAtB%"
 	if "%arrayAtB%" neq "1 2 3" %dk_call% dk_error "dk_arrayAt() failed"
-	if "%arrayAtB%" equ "1 2 3" %dk_call% dk_info "dk_arrayAt() suceeded" 
+	if "%arrayAtB%" equ "1 2 3" %dk_call% dk_success "dk_arrayAt() suceeded"
+ endlocal
 goto:eof

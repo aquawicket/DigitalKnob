@@ -27,9 +27,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
 :dk_arrayIndexOf
+ setlocal
 	call dk_debugFunc 3
 	
-	setlocal
 	set _count_=0
 	:dk_arrayIndexOf_loop
 		if not defined %~1[%_count_%] (
@@ -46,7 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 			
 		set /a _count_+=1
 	goto:dk_arrayIndexOf_loop
-	endlocal
+ endlocal
 goto:eof
 
 
@@ -54,6 +54,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ endlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
@@ -79,4 +80,5 @@ goto:eof
 	
 	%dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
 	%dk_call% dk_printVar indexN
+ endlocal
 goto:eof

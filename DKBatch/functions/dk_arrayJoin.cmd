@@ -18,6 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 ::#
 :dk_arrayJoin
+ setlocal
 	call dk_debugFunc 3
 	::%dk_call% dk_validateArgs array string optional:rtn_var
 	
@@ -38,6 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		goto:dk_arrayJoin_loop
 	)
 	endlocal & set "%3=%_string_%"
+ endlocal
 goto:eof
 
 
@@ -45,6 +47,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArrayA[0]=a b c"
@@ -66,4 +69,5 @@ goto:eof
 	%dk_call% dk_arrayJoin myArrayB "," myStringB
 	::myStringB=$(dk_arrayJoin myArrayB ",")
 	%dk_call% dk_printVar myStringB
+ endlocal
 goto:eof

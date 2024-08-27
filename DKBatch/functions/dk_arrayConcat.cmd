@@ -56,6 +56,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	set "myArray1[0]=a b c"
@@ -75,5 +76,6 @@ goto:eof
 	"%myNewArrayA[2]%" == "g h i" if ^
 	"%myNewArrayA[3]%" == "1 2 3" if ^
 	"%myNewArrayA[4]%" == "4 5 6" if ^
-	"%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_echo "dk_arrayConcat succeeded"
+	"%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_success "dk_arrayConcat succeeded"
+ endlocal
 goto:eof

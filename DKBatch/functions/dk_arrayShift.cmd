@@ -19,10 +19,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
 ::#
 :dk_arrayShift
+ setlocal
 	call dk_debugFunc 1 2
 	::dk_validateArgs array
 	
-	setlocal
 	set "_arry_=%~1"
 	set prev=0
 	set count=1
@@ -35,6 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	endlocal & %dk_call% dk_unset %_arry_%[%prev%]
 	::endlocal & set "%_arry_%[%prev%]="
+ endlocal
 goto:eof
 
 
