@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_buildApp
+ setlocal
 	call dk_debugFunc 0
 	
     TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
@@ -24,6 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_echo "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
     %dk_call% dk_echo "####################################################################"
     %dk_call% dk_echo
+ endlocal
 goto:eof
 
 
@@ -33,7 +35,9 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_buildApp
+ endlocal
 goto:eof
