@@ -7,6 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    Check if a variable is valid, otherwise run code to validate the variable
 ::#
 :dk_validate
+:: setlocal
 	call dk_debugFunc 2
 
 	if defined %~1 if "%~1" neq "" (goto:eof)     &:: if the variable is already valid, return
@@ -29,6 +30,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
     %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"

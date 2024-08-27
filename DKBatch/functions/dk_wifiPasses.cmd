@@ -5,6 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# dk_wifiPass()
 ::#
 :dk_wifiPass
+ setlocal
 	call dk_debugFunc 0
 
 	set "tempfile=%DKTEMP_DIR%temp.txt"

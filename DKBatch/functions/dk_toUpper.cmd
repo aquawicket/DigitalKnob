@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_toUpper
+ setlocal
 	call dk_debugFunc 2
 	
 	setlocal
@@ -20,6 +21,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	:: Can't handle these characters yet->    [ ] \ ' . / ~ " ? < >
