@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if not exist "%~1" %dk_call% dk_notice "failed to convert file to CRLF"
 	
 	%dk_call% dk_delete "%~1_toCRLF"
-	if exist "%~1_toCRLF" %dk_call% dk_notice "failed to delete temporary file"
+	if exist "%~1_toCRLF" %dk_call% dk_error "failed to delete temporary file"
 goto:eof
 
 
