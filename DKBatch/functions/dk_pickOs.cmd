@@ -99,11 +99,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if "%choice%"=="35" %dk_call% dk_set TARGET_OS win_x86_64_msvc     & goto:eof
 	if "%choice%"=="36" %dk_call% dk_set TARGET_OS none                & goto:eof
     if "%choice%"=="37" %dk_call% dk_clearScreen                       & goto:eof
-    if "%choice%"=="38" %dk_call% dk_set APP                           & goto:eof
+    if "%choice%"=="38" %dk_call% dk_unset APP                         & goto:eof
     if "%choice%"=="39" %dk_call% dk_exit                              & goto:eof
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset TARGET_OS
- endlocal
 goto:eof
 
 
@@ -115,5 +114,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pickOs
- endlocal
 goto:eof

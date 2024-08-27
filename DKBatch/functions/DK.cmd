@@ -75,7 +75,6 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     %dk_call% dk_echo
     pause
     exit
- endlocal
 goto:eof
 
 
