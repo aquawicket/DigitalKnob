@@ -6,17 +6,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pickApp
- setlocal
     call dk_debugFunc 0
-
+	
+ setlocal enableDelayedExpansion
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
+
 
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
-
 	:: get a list of the directories in DKApps
 	%dk_call% dk_getDirectories %DKAPPS_DIR% options	
-	
+ 	
 	:: rename the list elements to the folder basename and add a matching command
 	set /a "n=0"
 	:loop1
@@ -65,8 +65,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	%dk_call% dk_echo 
     %dk_call% dk_echo "Please select an app to build"
-	::%dk_call% dk_keyboardInput choice
-	%dk_call% dk_keyboardInputTimeout choice 23 60 
+	
+	%dk_call% dk_keyboardInput choice
+	::%dk_call% dk_keyboardInputTimeout choice 23 60 
+	
 	%dk_call% dk_echo "!options[%choice%]!"
 	
 	::if "!DE!" equ "" %%%apps%[%n%]%% && goto:eof
