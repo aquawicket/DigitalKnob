@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToArray
+ setlocal
 	call dk_debugFunc 2
 	
-	setlocal
     ::set "file=%~1"
 	set /a i=0
     for /F "usebackq delims=" %%a in ("%~f1") do (
@@ -26,7 +26,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	   if defined currentScope endlocal
 	   set "%%a"
 	)
-	endlocal
 goto:eof
 
 
@@ -36,6 +35,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	:: create the file

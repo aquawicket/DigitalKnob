@@ -6,6 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_fileWrite
+ setlocal
 	call dk_debugFunc 2
 	
 	setlocal
@@ -18,6 +19,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"

@@ -7,12 +7,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#   reference: https://stackoverflow.com/a/138581
 ::#
 :dk_getDirectories
+ setlocal
 	call dk_debugFunc 2
 	
 	%dk_call% dk_replaceAll "%~1" "/" "\" _path_
 	::set "folders="
 	set /A i=0
-	setlocal
+
 	for /d %%a in ("%_path_%\*") do (
 		if "!DE!" equ "" set "%~2[!i!]=%%a"
 		if "!DE!" neq "" call set "%~2[%%i%%]=%%a"
@@ -34,6 +35,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_set myPath "C:\Windows"

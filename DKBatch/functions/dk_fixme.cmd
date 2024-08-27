@@ -9,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    @message - The message to print
 ::#
 :dk_fixme
+ setlocal
 	call dk_debugFunc 1
 	
 	%dk_call% dk_log FIXME "%~1"
@@ -19,6 +20,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fixme "test dk_fixme message"

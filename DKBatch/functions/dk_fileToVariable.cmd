@@ -9,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToVariable
+ setlocal
 	call dk_debugFunc 2
 	
     ::call set "file=%~1"
@@ -27,6 +28,7 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
+ setlocal
 	call dk_debugFunc 0
 
 	%dk_call% dk_fileToVariable "DK.cmd" myVar
