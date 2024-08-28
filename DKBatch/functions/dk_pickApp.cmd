@@ -6,12 +6,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_pickApp
- setlocal enableDelayedExpansion
     call dk_debugFunc 1
+	%setlocal%
 	
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
-
-
+	
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
 
 	:: get a list of the directories in DKApps

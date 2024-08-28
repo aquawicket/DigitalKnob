@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#
 ::#
 :dk_buildMain
- setlocal
+ setlocal enableDelayedExpansion
 	call dk_debugFunc 0
 	
 	%dk_call% dk_assert DKSCRIPT_PATH

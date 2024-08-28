@@ -11,9 +11,15 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 ::#
 ::#
 :DK
+	:: HOME variable. For analogy with Unix systems.
+	if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
+	set "setlocal=setlocal enableDelayedExpansion"
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_STD=1>nul 2>nul"
+	::set "endfunction=goto:eof"
+	set "endfunction=exit /b %ERRORLEVEL%"
+	set "return=exit /b"
 	
     ::###### Initialize Language specifics ######
     call :dk_init
@@ -74,7 +80,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     %dk_call% dk_echo
     pause
     exit
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -82,7 +88,7 @@ goto:eof
 ::#
 :dk_echo
 	echo %~1
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -90,7 +96,7 @@ goto:eof
 ::#
 :dk_init
 	call :dk_echo "Loading DKBatch DigitalKnob . . ."
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -102,7 +108,7 @@ goto:eof
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -115,7 +121,7 @@ goto:eof
 	if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
 	if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
 	if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp\") do set "DKTEMP_DIR=%%~dpZ"
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -126,7 +132,7 @@ goto:eof
     if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
     if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
     if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
-goto:eof
+%endfunction%
 
 ::##################################################################################
 ::# dk_initFiles
@@ -134,7 +140,7 @@ goto:eof
 :dk_initFiles
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
-goto:eof
+%endfunction%
 
 
 ::##################################################################################
@@ -151,7 +157,7 @@ goto:eof
 	::### ASSETS ###
 	if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
 	if exist %DKASSETS_DIR%            set "PATH=%DKASSETS_DIR%;%PATH%"
-goto:eof
+%endfunction%
 
 
 
@@ -165,4 +171,4 @@ goto:eof
     call dk_debugFunc 0
 	
     %DKSCRIPT_NAME%
-goto:eof
+%endfunction%

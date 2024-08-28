@@ -78,7 +78,7 @@ goto:eof
 		set "SOURCE_TYPE_B=cmd-line"
 		%ComSpec% /c "call "%~d0\:Step4\..%~pnx0" %*"
 	)
-    endlocal
+    rem endlocal
 )
 goto:eof
 
@@ -127,7 +127,7 @@ goto:eof
 		pause
 		%ComSpec% /c "call "%~d0\:Step4\..%~pnx0" %*"
 	)
-    endlocal
+    rem endlocal
 )
 goto:eof
 
@@ -135,7 +135,7 @@ goto:eof
 
 :: *** STEP3 Restart the requester batch, jump to the label :dk_callStackReturn
 :Step4
-	endlocal
+	::endlocal
 	
 	if not defined FUNCNAME[0]     call set "FUNCNAME[0]=%%FUNCNAME_B%%"
 	if not defined BATCH_SOURCE[0] set "BATCH_SOURCE[0]=%BATCH_SOURCE_B%"
@@ -159,6 +159,6 @@ goto:eof
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_callStackReturn
-	endlocal
+	::endlocal
 	"%BATCH_SOURCE_A%" %BATCH_ARGV_A%
 goto:eof
