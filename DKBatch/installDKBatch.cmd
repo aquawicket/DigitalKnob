@@ -32,7 +32,7 @@ goto:eof
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
+	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" & pause & exit %ERRORLEVEL%
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

@@ -1,6 +1,8 @@
 @echo off
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
+echo 0 = %~0
+echo 1 = %~1
 
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
@@ -24,12 +26,12 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     ::###### Initialize Language specifics ######
     call :dk_init
 	
-    ::###### Reload Main Script with cmd ######
-    call :dk_reloadWithCmd %*
-
-    ::############ Get DKBATCH variables ############
+	::###### Reload Main Script with cmd ######
+    call :dk_reloadWithCmd
+	
+	::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
-
+	
     ::############ Get DKHTTP variables ############
     call :dk_DKHTTP_VARS
 
@@ -108,6 +110,14 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
+
+	if defined RELOADED goto:end_dk_reloadWithCmd
+		set "RELOADED=1"
+		set "DKINIT="
+		echo "reloading with delayed expansion . . ."
+		
+		cmd /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
+	:end_dk_reloadWithCmd
 %endfunction%
 
 

@@ -1,6 +1,6 @@
 @echo off
 if "%~1" == "dk_getHour" echo dk_getHour
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 
 

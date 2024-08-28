@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 if "%~1" equ "dk_keyboard.BeginReceiving" goto %1
 if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 

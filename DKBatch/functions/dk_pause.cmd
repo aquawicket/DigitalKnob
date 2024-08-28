@@ -1,6 +1,6 @@
 @if (@X) == (@Y) @end /*
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::##################################################################################
 ::# dk_pause(pause_msg)

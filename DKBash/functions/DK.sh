@@ -88,7 +88,7 @@ DK(){
 dkreloadWithBash(){
 	if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
 		export RELOAD_WITH_BASH=0
-		echo "reloading with bash . . ."
+		echo "reloading with bash . . . ${0}"
 		unset DKINIT
 		export DKINIT=""
 		dk_commandExists bash || dk_install bash

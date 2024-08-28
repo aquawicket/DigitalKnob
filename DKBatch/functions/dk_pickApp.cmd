@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::#####################################################################
 ::# dk_pickApp(rtn_var)
@@ -80,10 +80,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if "!DE!" neq "" %dk_call% dk_error "delayed expansion is required"
 	
-	endlocal & !commands[%choice%]!
+	endlocal & !commands[%choice%]! & set "%~1=%APP%"
 	%dk_call% dk_deleteArray options
 	%dk_call% dk_deleteArray commands
-	endlocal & set "%~1=%APP%"
 	goto:eof
 	
 	
