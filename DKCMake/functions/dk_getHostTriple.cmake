@@ -105,8 +105,13 @@ function(dk_getHostTriple)
 	dk_set(${DK_HOST_OS_UPPER}_${DK_HOST_ARCH_UPPER}_HOST TRUE)
 	
 	#### Set Default DK_HOST_ENV ###
-	if("${DK_HOST_OS}" STREQUAL "win")
+	
+	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		dk_set(DK_HOST_ENV "clang")
+	elseif("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
+		dk_set(DK_HOST_ENV "clang")
+	elseif(MSVC)
+		dk_set(DK_HOST_ENV "msvc")
 	endif()
 	
 	### set DK_HOST_TRIPLE ###

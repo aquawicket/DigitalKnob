@@ -1,0 +1,27 @@
+@echo off
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+
+::################################################################################
+::# dk_fatal(message)
+::#
+::#    Print a error message to the console
+::#
+::#    @message - The message to print
+::#
+:dk_fatal
+ setlocal
+	::call dk_debugFunc 1
+	
+	%dk_call% dk_fatal FATAL "%~1"
+goto:eof
+
+
+
+
+::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+ setlocal
+	call dk_debugFunc 0
+	
+	%dk_call% dk_fatal "test dk_fatal message"
+goto:eof
