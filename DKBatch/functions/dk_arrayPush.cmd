@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	setlocal
 	%dk_call% dk_arrayLength %~1 end_index
 	endlocal & set "%~1[%end_index%]=%~2"
-goto:eof
+%endfunction%
 
 
 
@@ -48,4 +48,4 @@ goto:eof
 	%dk_call% dk_printVar myArrayA
 	:: dk_printVar new_lengthA
 	%dk_call% dk_echo
-goto:eof
+%endfunction%

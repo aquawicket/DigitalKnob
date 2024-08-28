@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	echo "%DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1"
 	for /f "usebackq delims=" %%Z in (`set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_FUNCTIONS_DIR%" ^& powershell %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1 %~1 "%~2"`) do echo %%Z
 	::%dk_call% dk_echo "PSValue received from Powershell : %PSValue%"
-goto:eof
+%endfunction%
 
 
 
@@ -31,4 +31,4 @@ goto:eof
 	
 	%dk_call% dk_callPowershell dk_debug "string from DKBatch"
 	::%dk_call% dk_callPowershell dk_debug "string from DKBatch" rtnVar
-goto:eof
+%endfunction%

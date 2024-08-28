@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     if %ERRORLEVEL% equ 0 goto:eof
     %dk_call% dk_error "ERRORLEVEL = %ERRORLEVEL%"
 	::endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -26,4 +26,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_checkError
-goto:eof
+%endfunction%

@@ -19,7 +19,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 	set "NO_STD=1>nul 2>nul"
 	::set "endfunction=goto:eof"
 	set "endfunction=exit /b %ERRORLEVEL%"
-	set "return=exit /b"
+	set "return=exit /b %ERRORLEVEL%"
 	
     ::###### Initialize Language specifics ######
     call :dk_init
@@ -70,7 +70,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
     ::%DK% dk_load %DKSCRIPT_PATH%
 	
     ::###### DKTEST MODE ######
-    if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" goto:eof
+    if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" %return%
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_NAME% ###### DKTEST MODE ######%clr%"
     %dk_call% dk_echo
@@ -104,7 +104,7 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 ::#
 :dk_reloadWithCmd
 	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
-	if not exist "%DKSCRIPT_PATH%"  goto:eof
+	if not exist "%DKSCRIPT_PATH%"  %return%
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)

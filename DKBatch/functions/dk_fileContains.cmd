@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if defined "%~3" (endlocal & set "%3=false")
     (call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -38,4 +38,4 @@ goto:eof
 	%dk_call% dk_echo
 	%dk_call% dk_set substring "not_in_file"
 	%dk_call% dk_fileContains fileContains_TEST.txt "%substring%" && (echo file contains substring) || (echo file does NOT contain substring)
-goto:eof
+%endfunction%

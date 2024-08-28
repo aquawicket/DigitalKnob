@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::if defined USER set "DKUSERNAME=%USER% else set "DKUSERNAME=%USERNAME%"
 	takeown /F "%~1" /R /D "Y"
 	::endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_chown ${DIGITALKNOB_DIR}
-goto:eof
+%endfunction%

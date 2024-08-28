@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	rem if not defined "%~1" ( endlocal & %dk_call% dk_set %1 "false" )
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	::###### abort in not confirmed type code
 	%dk_call% dk_confirm || goto:eof
 	echo "passed the confirmation, executing code after confirm"
-goto:eof
+%endfunction%

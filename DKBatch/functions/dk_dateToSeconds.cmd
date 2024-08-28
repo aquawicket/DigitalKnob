@@ -29,7 +29,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	set /a "Years_ss=(%yy%*12*304/10)*24*60*60+%Months_ss%"
 	if %Years_ss% gtr 99999999 set /a "Years_ss=Years_ss+2160000"
 	endlocal & set %1=%Years_ss%
-goto:eof
+%endfunction%
 
 
 
@@ -57,4 +57,4 @@ goto:eof
 	echo %Minute%:%Second% = %seconds% seconds
 	%dk_call% dk_dateToSeconds seconds %Second%
 	echo :%Second% = %seconds% seconds
-goto:eof
+%endfunction%

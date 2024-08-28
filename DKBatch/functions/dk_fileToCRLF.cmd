@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	%dk_call% dk_delete "%~1_toCRLF"
 	if exist "%~1_toCRLF" %dk_call% dk_error "failed to delete temporary file"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fileToCRLF dk_appendArgs.cmd
-goto:eof
+%endfunction%

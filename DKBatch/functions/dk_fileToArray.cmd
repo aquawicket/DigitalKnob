@@ -26,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	   if defined currentScope endlocal
 	   set "%%a"
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -54,4 +54,4 @@ goto:eof
 	%dk_call% dk_printVar MyArray[5]
 	%dk_call% dk_printVar MyArray[6]
 	%dk_call% dk_printVar MyArray[7]
-goto:eof
+%endfunction%

@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if defined "%~2" (endlocal & call set "%2=false")
     (call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -64,4 +64,4 @@ goto:eof
 	%dk_call% dk_unset _variable_
 	%dk_call% dk_defined _variable_ && (echo _variable_ is defined) || (echo _variable_ is NOT defined)
 	::FIXME: ERRORLEVEL is still 1
-goto:eof
+%endfunction%

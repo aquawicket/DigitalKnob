@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::gcc -o [executable_name] [source_file].c
 	%GXX_EXE% -o %appname% -static "%filepath%"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
 	set "MSYSTEM=CLANG64"
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_validateBranch"
 	%dk_call% dk_compile "%DKAPPS_DIR%\HelloWorld\main.cpp"
-goto:eof
+%endfunction%

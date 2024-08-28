@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	setx PATH "%PATH%";"%_path_%" >nul
 	set "PATH=%PATH%;%_path_%"
 	if "%ERRORLEVEL%" neq "0" dk_error "ERROR: %ERRORLEVEL%"
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_ "%dk_call% dk_validateBranch"	
 	%dk_call% dk_appendEvnPath %DKBATCH_FUNCTIONS_DIR%
-goto:eof
+%endfunction%

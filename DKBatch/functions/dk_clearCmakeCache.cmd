@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     cd "%DIGITALKNOB_DIR%"
     for /r %%i in (CMakeCache.*) do del "%%i"
     for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_clearCmakeCache
-goto:eof
+%endfunction%

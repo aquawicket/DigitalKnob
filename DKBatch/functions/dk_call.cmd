@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::echo "call %*"
 	call %*
-goto:eof
+%endfunction%
 
 
 
@@ -43,4 +43,4 @@ goto:eof
 	%dk_call% dk_color
 	call dk_call dk_color
 	%dk_call% dk_color
-goto:eof
+%endfunction%

@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     for /r %%i in (*.tmp) do del "%%i"
     for /r %%i in (*.TMP) do del "%%i"
     ::%dk_call% dk_checkError
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     %dk_call% dk_deleteTempFiles
-goto:eof
+%endfunction%

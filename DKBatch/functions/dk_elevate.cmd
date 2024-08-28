@@ -31,5 +31,5 @@ if %ERRORLEVEL% equ 0 goto :elevated
 		for %%Z in (%*) do set "DKSCRIPT_DIR=%%~dpZ"             &:: get last argument
 		cd /d %DKSCRIPT_DIR%
 		call %DKSCRIPT_PATH% elevated
-goto:eof
+%endfunction%
 -->

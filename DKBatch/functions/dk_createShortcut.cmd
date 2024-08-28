@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	if not exist %shortcut_path% %dk_call% dk_error "Failed to create shortcut:%shortcut_path%"
 	endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -44,4 +44,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
-goto:eof
+%endfunction%

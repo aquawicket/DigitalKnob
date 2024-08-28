@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_commandToVariable "where %recursive% %pattern% %name% %NO_STDERR%" value
 	%dk_call% dk_printVar value
 	endlocal & set "%1=%value%"
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
-goto:eof
+%endfunction%

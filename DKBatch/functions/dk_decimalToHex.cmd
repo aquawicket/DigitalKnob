@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		if %A% gtr 0 goto :loop
 	:endlookup
 	endlocal & set "%2=0x%_prefix_%%_hex_%"
-goto:eof
+%endfunction%
 
 
 
@@ -40,4 +40,4 @@ goto:eof
 	%dk_call% dk_set myDecimal 45
 	%dk_call% dk_decimalToHex "%myDecimal%" myHex
 	%dk_call% dk_printVar myHex
-goto:eof
+%endfunction%

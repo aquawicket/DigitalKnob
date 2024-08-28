@@ -131,7 +131,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 	echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
 	::echo %indent%%blue%%__FUNCTION__%%clr%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
-goto:eof
+%endfunction%
 
 
 
@@ -139,5 +139,5 @@ goto:eof
 :DKTEST
  setlocal
 	call dk_debugFunc 0
-goto:eof
+%endfunction%
 

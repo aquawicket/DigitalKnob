@@ -121,7 +121,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	%dk_call% dk_unset replaceWith
 	
 	%dk_call% dk_unset var
-goto:eof
+%endfunction%
 
 :replaceEqualSign variable replaceWith
  setlocal enableDelayedExpansion
@@ -136,7 +136,7 @@ goto:eof
             )
         if defined _s goto _replaceEqualSign
     endlocal&set "%~1=%_r:~0,-1%"
-goto:eof
+%endfunction%
 
 
 
@@ -239,4 +239,4 @@ goto:eof
 	::%dk_call% dk_encodeEscapes imposible
 	::%dk_call% dk_echo "imposible = %imposible%"
 	
-goto:eof
+%endfunction%

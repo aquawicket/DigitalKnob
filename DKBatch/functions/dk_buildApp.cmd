@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_echo "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
     %dk_call% dk_echo "####################################################################"
     %dk_call% dk_echo
-goto:eof
+%endfunction%
 
 
 
@@ -38,4 +38,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_buildApp
-goto:eof
+%endfunction%

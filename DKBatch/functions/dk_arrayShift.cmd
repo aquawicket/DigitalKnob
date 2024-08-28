@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 	endlocal & %dk_call% dk_unset %_arry_%[%prev%]
 	::endlocal & set "%_arry_%[%prev%]="
-goto:eof
+%endfunction%
 
 
 
@@ -88,4 +88,4 @@ goto:eof
 ::	%dk_call% dk_printVar removedA
 	%dk_call% dk_echo
 	%dk_call% dk_echo
-goto:eof
+%endfunction%

@@ -46,7 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 		%dk_call% dk_unset TARGET_OS
 		%dk_call% dk_unset TYPE
 	goto while_loop
-goto:eof
+%endfunction%
 
 
 
@@ -60,4 +60,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_buildMain
-goto:eof
+%endfunction%

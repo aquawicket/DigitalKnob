@@ -49,7 +49,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	)
 
 	echo %offset%%~2
-goto:eof
+%endfunction%
 
 
 
@@ -71,4 +71,4 @@ goto:eof
 		if "!DE!" neq "" %dk_call% dk_echoAlign center "%%prep_text%%"
 	)
 	echo:
-goto:eof
+%endfunction%

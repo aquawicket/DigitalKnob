@@ -17,7 +17,7 @@ if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=0"
 	if "%PAUSE_ON_EXIT%" == "1" %dk_call% dk_echo "*** PAUSE_ON_EXIT: exit_code:%exit_code% ***" && %dk_call% dk_pause
 	
 	exit %exit_code%
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
 	::%dk_call% dk_exit
 	::%dk_call% dk_exit 0
 	%dk_call% dk_exit 13
-goto:eof
+%endfunction%

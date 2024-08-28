@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 2
 	
 	%dk_call% dk_todo "dk_arrayFlat"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_arrayFlat "array" "depth"
-goto:eof
+%endfunction%

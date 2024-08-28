@@ -28,7 +28,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
 	)
 	endlocal
 )
-goto:eof
+%endfunction%
 
 
 :: *** Get the caller of the caller
@@ -80,7 +80,7 @@ goto:eof
 	)
     rem endlocal
 )
-goto:eof
+%endfunction%
 
 
 :: *** Get the caller of the caller of the caller
@@ -129,7 +129,7 @@ goto:eof
 	)
     rem endlocal
 )
-goto:eof
+%endfunction%
 
 
 
@@ -154,11 +154,11 @@ goto:eof
 	
 	rem ### Return to :dk_caller_return label in calling function
 	call :dk_callStackReturn
-goto:eof
+%endfunction%
 
 
 :: *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_callStackReturn
 	::endlocal
 	"%BATCH_SOURCE_A%" %BATCH_ARGV_A%
-goto:eof
+%endfunction%

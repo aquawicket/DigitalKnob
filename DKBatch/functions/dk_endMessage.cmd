@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     set "APP="
     set "TARGET_OS="
     set "TYPE="
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_endMessage
-goto:eof
+%endfunction%

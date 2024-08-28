@@ -96,7 +96,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	if not exist "%destination%" %dk_call% dk_error "failed to rename %destination%_DOWNLOADING"
 	
 	%dk_call% dk_log SUCCESS "Download complete"
-goto:eof
+%endfunction%
 
 
 
@@ -109,4 +109,4 @@ goto:eof
 	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
 	::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
 	::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"
-goto:eof
+%endfunction%

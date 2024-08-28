@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
 	
 	certutil -decode "%inputFile%" "%outputFile%"
-goto:eof
+%endfunction%
 
 
 
@@ -42,4 +42,4 @@ goto:eof
 	%dk_call% dk_selectFile input
 	%dk_call% dk_fileB64Decode "%input%"
 	::%dk_call% dk_fileB64Decode "%input%"
-goto:eof
+%endfunction%

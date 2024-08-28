@@ -48,7 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::### return value ###
 	if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
 	if "!DE!" equ "" endlocal & set "%3=!_arrayC_!"
-goto:eof
+%endfunction%
 
 
 
@@ -76,4 +76,4 @@ goto:eof
 	"%myNewArrayA[3]%" == "1 2 3" if ^
 	"%myNewArrayA[4]%" == "4 5 6" if ^
 	"%myNewArrayA[5]%" == "7 8 9" %dk_call% dk_success "dk_arrayConcat succeeded"
-goto:eof
+%endfunction%

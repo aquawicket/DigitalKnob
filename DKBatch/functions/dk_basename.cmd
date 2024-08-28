@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if [%_input_:~-1,1%] == [\] set "_input=%_input_:~0,-1%"
 	if [%_input_:~-1,1%] == [/] set "_input=%_input_:~0,-1%"
 	endlocal & for %%Z in ("%_input_%") do set "%2=%%~nxZ"
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	set "myPathC=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
 	%dk_call% dk_basename "%myPathC%" basenameC
 	%dk_call% dk_printVar basenameC
-goto:eof
+%endfunction%

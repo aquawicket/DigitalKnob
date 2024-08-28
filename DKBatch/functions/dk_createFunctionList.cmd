@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     )
 	
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_error "_functionList_ is missing")
-goto:eof
+%endfunction%
 
 
 
@@ -36,4 +36,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_createFunctionList
-goto:eof
+%endfunction%

@@ -170,7 +170,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 		dk_echo "%clr% COLOR OFF"
 	:USE_COLOR_endif
-goto:eof
+%endfunction%
 %dk_call% dk_color 1
 
 
@@ -374,4 +374,4 @@ goto:eof
 	%dk_call% dk_echo "%bg_red%                                                     %clr%"
 	%dk_call% dk_echo "%bg_white%                                                     %clr%"
 	%dk_call% dk_echo "%bg_red%                                                     %clr%"
-goto:eof
+%endfunction%

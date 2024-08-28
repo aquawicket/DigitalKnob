@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	endlocal & set "%2=false"
     (call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -69,5 +69,5 @@ goto:eof
 	%dk_call% dk_set _command_ NonExistentCommand	
 	%dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exists)
 	::FIXME: ERRORLEVEL is still 1 
-goto:eof	
+%endfunction%	
 	

@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	certutil -encode -f "%inputFile%" "%outputFile%.tmp" 1>nul
 	type "%outputFile%.tmp"|find /v "CERTIFICATE-----">"%outputFile%"
 	del "%outputFile%.tmp"
-goto:eof
+%endfunction%
 
 
 
@@ -41,4 +41,4 @@ goto:eof
 	%dk_call% dk_selectFile input
 	%dk_call% dk_fileB64Encode "%input%"
 	::%dk_call% dk_fileB64Encode "%input%" "test.b64"
-goto:eof
+%endfunction%

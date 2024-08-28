@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	:: return the last line from the programs output
 	if "%~3" neq "" endlocal & set "%3=%lastElement%" && goto:eof
 	endlocal & set "%2=%lastElement%"
-goto:eof
+%endfunction%
 	
 	
 
@@ -56,4 +56,4 @@ goto:eof
 	%dk_call% dk_set myCommand ver
 	%dk_call% dk_commandToVariable "%myCommand%" myVariable
 	%dk_call% dk_printVar myVariable
-goto:eof
+%endfunction%

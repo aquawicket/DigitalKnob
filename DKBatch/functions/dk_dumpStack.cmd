@@ -81,16 +81,16 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 		endlocal
 	)
 )
-goto:eof
+%endfunction%
 
 :call_return
 	call :dk_dumpStackReturn
-goto:eof
+%endfunction%
 
 :dk_dumpStackReturn
 	endlocal
 	%caller[1].fullpath% %caller[1].args%
-goto:eof
+%endfunction%
 
 
 
@@ -101,11 +101,11 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call :DKTEST_main
-	goto:eof
+	%endfunction%
 
 	:DKTEST_main
 		call :DKTEST_dk_dumpStack
-	goto:eof
+	%endfunction%
 
 	:DKTEST_dk_dumpStack
 		%dk_call% dk_info ":DKTEST  %*"
@@ -122,7 +122,7 @@ goto:eof
 		%dk_call% dk_info "returned from :DKTEST"
 		
 		%dk_call% dk_exit
-	goto:eof
+	%endfunction%
 
 	:func1
 		%dk_call% dk_info ":func1 %*"
@@ -133,30 +133,30 @@ goto:eof
 		::	call echo 0 = %%~0
 		::	echo returned from func2
 		::)
-	goto:eof
+	%endfunction%
 
 	:func2
 		%dk_call% dk_info ":func2 %*"
 		call:func3
 		%dk_call% dk_info "returned from func3"
-	goto:eof
+	%endfunction%
 
 	:func3
 		%dk_call% dk_info ":func3 %*"
 		call:func4
 		%dk_call% dk_info "returned from func4"
-	goto:eof
+	%endfunction%
 
 	:func4
 		%dk_call% dk_info ":func4 %*"
 		call:func5 orange
 		%dk_call% dk_info "returned from func5"
-	goto:eof
+	%endfunction%
 
 	:func5
 		%dk_call% dk_info ":func5 %*"
 		%dk_call% dk_dumpStack
 		:dk_dumpStackReturn
 		%dk_call% dk_info "returned from dk_dumpStack dumpstack_caller"
-	goto:eof
-goto:eof
+	%endfunction%
+%endfunction%

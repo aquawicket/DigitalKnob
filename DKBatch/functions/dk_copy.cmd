@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	endlocal
 	::TODO
 	::[ ? = "success" ]
-goto:eof
+%endfunction%
 
 
 
@@ -63,4 +63,4 @@ goto:eof
 	
 	%dk_call% dk_makeDirectory %DKTEMP_DIR%\copyMe
 	%dk_call% dk_copy %DKTEMP_DIR%\copyMe %DKTEMP_DIR%\iWasCopied OVERWRITE
-goto:eof
+%endfunction%

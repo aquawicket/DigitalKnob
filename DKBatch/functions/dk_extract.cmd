@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	:: try tar
 	if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"
-goto:eof
+%endfunction%
 
 
 
@@ -52,4 +52,4 @@ goto:eof
 	
 	%dk_call% dk_selectFile input
 	%dk_call% dk_extract "%input%"
-goto:eof
+%endfunction%

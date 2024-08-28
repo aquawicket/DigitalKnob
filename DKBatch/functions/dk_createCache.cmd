@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     %dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %TARGET_OS%
     %dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %TYPE%
     ::%dk_call% dk_fileAppend "%DKBRANCH_DIR%\cache" %LEVEL%
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_createCache
-goto:eof
+%endfunction%

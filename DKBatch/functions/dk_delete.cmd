@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	if exist "%_path_%" (
 		%dk_call% dk_error "dk_delete failed to remove %_path_%"
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	
 	%dk_call% dk_fileWrite "removeMe.file" "created file to test dk_delete"
 	%dk_call% dk_delete "removeMe.file"
-goto:eof
+%endfunction%

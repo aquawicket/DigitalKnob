@@ -129,7 +129,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::%dk_call% dk_decimalToVariable US  31
 
 	%dk_call% dk_set clear      "%ESC%[2J"
-goto:eof
+%endfunction%
 
 :ASCII_ADD
  setlocal
@@ -154,14 +154,14 @@ goto:eof
 	set ASCII[%ID%].INFO=%6
 	
 	set /a ASCII_length+=1
-goto:eof
+%endfunction%
 
 :ASCII_SHOW
  setlocal
 	call dk_debugFunc 0
 	
 	%dk_call% dk_info "%%ASCII[%~1].DEC%%	%%ASCII[%~1].SYMBOL%%	%%ASCII[%~1].DEC%%	%%ASCII[%~1].OCT%%	%%ASCII[%~1].HEX%%	%%ASCII[%~1].HTML%%	%%ASCII[%~1].INFO%%"
-goto:eof
+%endfunction%
 
 
 
@@ -172,4 +172,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_escapeSequences
-goto:eof
+%endfunction%

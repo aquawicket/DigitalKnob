@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	) else (
 		echo %~2 > "%~1"
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -27,4 +27,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fileAppend "dk_fileAppend_TEST.txt" "string appended from dk_fileAppend"
-goto:eof
+%endfunction%

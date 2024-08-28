@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     ::%if_DE% if "" == %_message_:~0,1%%_message_:~-1% set "msg=!_message_:~1,-1!"
 		
     echo %_message_%
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	%dk_call% dk_echo "This is a dk_echo line"
 	::%dk_call% dk_echo ""This is a dk_echo line with quotes""
     %dk_call% dk_echo "%red%This is %white%dk_echo %blue%with color %clr%"
-goto:eof
+%endfunction%

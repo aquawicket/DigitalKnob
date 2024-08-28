@@ -87,7 +87,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	
     ::%dk_call% dk_checkError
-goto:eof
+%endfunction%
 
 
 
@@ -98,4 +98,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
-goto:eof
+%endfunction%

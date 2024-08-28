@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	setlocal
 	echo %~2 > "%~1"
 	endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fileWrite "dk_fileWrite_TEST.txt" "string written by dk_fileWrite"
-goto:eof
+%endfunction%
