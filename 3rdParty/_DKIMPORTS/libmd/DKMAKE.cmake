@@ -20,8 +20,8 @@ dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 dk_include			(${LIBMD}/include)
 UNIX_dk_libDebug	(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
 UNIX_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
-WIN_dk_libDebug		(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
-WIN_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
+WIN_TARGET_dk_libDebug		(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
+WIN_TARGET_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
 
 
 ### 3RDPARTY LINK ###

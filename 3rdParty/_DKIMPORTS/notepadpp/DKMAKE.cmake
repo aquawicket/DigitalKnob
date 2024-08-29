@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
 

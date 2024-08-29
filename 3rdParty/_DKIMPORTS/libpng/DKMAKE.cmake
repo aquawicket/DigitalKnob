@@ -4,7 +4,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-EMSCRIPTEN_dk_depend(m)
+EMSCRIPTEN_TARGET_dk_depend(m)
 dk_depend(zlib)
 
 
@@ -24,12 +24,12 @@ endif()
 dk_define					(PNG_STATIC)
 dk_include					(${LIBPNG}  																	PNG_INCLUDE_DIR)
 dk_include					(${LIBPNG}/${BUILD_DIR}															PNG_INCLUDE_DIR2)
-ANDROID_dk_include			(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
+ANDROID_TARGET_dk_include			(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
 if(MSVC)
-	ANDROID_dk_libDebug		(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	ANDROID_TARGET_dk_libDebug		(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
 	ANDROID_dk_libRelease	(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
-	WIN_dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
+	WIN_TARGET_dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
+	WIN_TARGET_dk_libRelease		(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
 elseif(APPLE)
 	dk_libDebug				(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)

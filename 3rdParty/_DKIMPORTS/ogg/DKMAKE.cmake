@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-WIN_dk_depend(msys2)
+WIN_TARGET_dk_depend(msys2)
 
 
 ### IMPORT ###

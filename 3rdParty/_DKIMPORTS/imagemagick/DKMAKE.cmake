@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://github.com/ImageMagick/ImageMagick.git
 # https://imagemagick.org/index.php
 
@@ -33,8 +33,8 @@ if(NOT WIN)
 
 	UNIX_HOST_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
 	UNIX_HOST_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-	#WIN_dk_libDebug		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-	#WIN_dk_libRelease		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+	#WIN_TARGET_dk_libDebug		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+	#WIN_TARGET_dk_libRelease		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
 
 
 	### GENERATE / COMPILE ###

@@ -28,8 +28,8 @@ dk_include			(${DUKTAPE}/src)
 
 #UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
 #UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
-#WIN_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
-#WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+#WIN_TARGET_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
+#WIN_TARGET_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
 ## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
 	dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)

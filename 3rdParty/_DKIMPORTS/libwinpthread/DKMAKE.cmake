@@ -18,8 +18,8 @@ endif()
 
 
 ### LINK ###
-WIN_dk_libDebug(${LIBWINPTHREAD}/libwinpthread.a)
-WIN_dk_libRelease(${LIBWINPTHREAD}/libwinpthread.a)
+WIN_TARGET_dk_libDebug(${LIBWINPTHREAD}/libwinpthread.a)
+WIN_TARGET_dk_libRelease(${LIBWINPTHREAD}/libwinpthread.a)
 
 
 ### 3RDPARTY LINK ###

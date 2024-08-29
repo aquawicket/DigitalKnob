@@ -1,15 +1,15 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
-WIN_dk_lib(opengl32.lib)
+WIN_TARGET_dk_lib(opengl32.lib)
 
 
 if(MAC)
 	dk_findLibrary(OpenGL)
 endif()
 
-IOS_dk_depend(opengles)
+IOS_TARGET_dk_depend(opengles)
 
-IOSSIM_dk_depend(opengles)
+IOSSIM_TARGET_dk_depend(opengles)
 
 if(LINUX)
 	dk_depend(mesa-common-dev)
@@ -50,4 +50,4 @@ if(EMSCRIPTEN)
 	EMSCRIPTEN_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
-ANDROID_dk_depend(opengles)
+ANDROID_TARGET_dk_depend(opengles)

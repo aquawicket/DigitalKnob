@@ -17,14 +17,14 @@ dk_import(https://github.com/kunpengcompute/gzip/archive/refs/heads/master.zip)
 # libversion
 UNIX_dk_libDebug	(${GZIP}/${OS}/${DEBUG_DIR}/libver.a)
 UNIX_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/libver.a)
-WIN_dk_libDebug		(${GZIP}/${OS}/${DEBUG_DIR}/ver.a)
-WIN_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/ver.a)
+WIN_TARGET_dk_libDebug		(${GZIP}/${OS}/${DEBUG_DIR}/ver.a)
+WIN_TARGET_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/ver.a)
 
 # libgzip
 UNIX_dk_libDebug	(${GZIP}/${OS}/${DEBUG_DIR}/lib/libgzip.a)
 UNIX_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/lib/libgzip.a)
-WIN_dk_libDebug		(${GZIP}/${OS}/${DEBUG_DIR}/lib/gzip.a)
-WIN_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/lib/gzip.a)
+WIN_TARGET_dk_libDebug		(${GZIP}/${OS}/${DEBUG_DIR}/lib/gzip.a)
+WIN_TARGET_dk_libRelease	(${GZIP}/${OS}/${RELEASE_DIR}/lib/gzip.a)
 
 
 ### 3RDPARTY LINK ###

@@ -13,7 +13,7 @@ dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main
 
 ### LINK ###
 dk_include					(${LIBJPEG_TURBO}												LIBJPEG_TURBO_INCLUDE_DIR)
-ANDROID_dk_include			(${LIBJPEG_TURBO}/${OS}/$(BUILD_TYPE)/jni)
+ANDROID_TARGET_dk_include			(${LIBJPEG_TURBO}/${OS}/$(BUILD_TYPE)/jni)
 if(MULTI_CONFIG)
 	dk_include				(${LIBJPEG_TURBO}/${OS}											LIBJPEG_TURBO_INCLUDE_DIR2)
 else()
@@ -23,9 +23,9 @@ endif()
 
 
 if(MSVC)
-	WIN_dk_libDebug			(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
-	ANDROID_dk_libDebug		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	WIN_TARGET_dk_libDebug			(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
+	WIN_TARGET_dk_libRelease		(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	ANDROID_TARGET_dk_libDebug		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
 	ANDROID_dk_libRelease	(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
 	dk_libDebug				(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)

@@ -18,8 +18,8 @@ endif()
 
 
 ### LINK ###
-WIN_dk_libDebug(${LIBMINGWEX}/libmingwex.a)
-WIN_dk_libRelease(${LIBMINGWEX}/libmingwex.a)
+WIN_TARGET_dk_libDebug(${LIBMINGWEX}/libmingwex.a)
+WIN_TARGET_dk_libRelease(${LIBMINGWEX}/libmingwex.a)
 
 
 ### 3RDPARTY LINK ###

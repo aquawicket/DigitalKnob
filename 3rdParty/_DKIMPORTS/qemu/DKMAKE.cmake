@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://www.qemu.org
 # https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe
 # https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi

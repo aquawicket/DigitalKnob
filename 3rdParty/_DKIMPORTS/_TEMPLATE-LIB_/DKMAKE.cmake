@@ -27,8 +27,8 @@ dk_import(https://github.com/organization/package/archive/refs/heads/master.zip)
 dk_include			(${_TEMPLATE_LIB_}/include)
 UNIX_dk_libDebug	(${_TEMPLATE_LIB_}/${OS}/${DEBUG_DIR}/libpackage.a)
 UNIX_dk_libRelease	(${_TEMPLATE_LIB_}/${OS}/${RELEASE_DIR}/libpackage.a)
-WIN_dk_libDebug		(${_TEMPLATE_LIB_}/${OS}/${DEBUG_DIR}/package.lib)
-WIN_dk_libRelease	(${_TEMPLATE_LIB_}/${OS}/${RELEASE_DIR}/package.lib)
+WIN_TARGET_dk_libDebug		(${_TEMPLATE_LIB_}/${OS}/${DEBUG_DIR}/package.lib)
+WIN_TARGET_dk_libRelease	(${_TEMPLATE_LIB_}/${OS}/${RELEASE_DIR}/package.lib)
 
 
 ### GENERATE ###

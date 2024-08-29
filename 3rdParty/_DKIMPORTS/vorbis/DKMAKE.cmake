@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### DEPEND ###
 dk_depend(libgcc)
-WIN_dk_depend(msys2)
+WIN_TARGET_dk_depend(msys2)
 dk_depend(ogg)
 
 

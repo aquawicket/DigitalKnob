@@ -13,8 +13,8 @@ dk_include				(${LIBCACA}/include)
 dk_include				(${LIBCACA}/${OS})
 UNIX_dk_libDebug		(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.a)
 UNIX_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.a)
-WIN_dk_libDebug			(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.lib)
-WIN_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
+WIN_TARGET_dk_libDebug			(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.lib)
+WIN_TARGET_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 
 
 ### GENERATE ####

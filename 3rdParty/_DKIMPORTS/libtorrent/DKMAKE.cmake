@@ -17,18 +17,18 @@ dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
 
 ### LINK ###
 dk_include				(${LIBTORRENT}/include)
-ANDROID_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+ANDROID_TARGET_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 ANDROID_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 EMSCRIPTEN_dk_libDebug	(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
 EMSCRIPTEN_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
-IOSSIM_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
-IOSSIM_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
-LINUX_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
-LINUX_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
-MAC_dk_libDebug			(${LIBTORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
-MAC_dk_libRelease		(${LIBTORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
-WIN_dk_libDebug			(${LIBTORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
-WIN_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
+IOSSIM_TARGET_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
+IOSSIM_TARGET_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
+LINUX_TARGET_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
+LINUX_TARGET_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
+MAC_TARGET_dk_libDebug			(${LIBTORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
+MAC_TARGET_dk_libRelease		(${LIBTORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
+WIN_TARGET_dk_libDebug			(${LIBTORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
+WIN_TARGET_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
 
 
 ### GENERATE ###

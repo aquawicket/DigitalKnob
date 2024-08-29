@@ -2,7 +2,7 @@ if(NOT HAVE_DKCef)
 	RETURN()
 endif()
 
-if(ANDROID)
+if(ANDROID_TARGET)
 	RETURN()
 endif()
 

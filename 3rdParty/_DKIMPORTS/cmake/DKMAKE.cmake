@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(DK_TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 # https://cmake.org
 # https://github.com/Kitware/CMake
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi

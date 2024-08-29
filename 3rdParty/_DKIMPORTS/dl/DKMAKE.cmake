@@ -4,7 +4,7 @@ if(NOT UNIX)
 	dk_return()
 endif()
 
-ANDROID_dk_depend(android-ndk)
+ANDROID_TARGET_dk_depend(android-ndk)
 
 dk_findLibrary(dl NO_HALT)
 

@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 # https://code.visualstudio.com/docs/editor/portable
 # https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip

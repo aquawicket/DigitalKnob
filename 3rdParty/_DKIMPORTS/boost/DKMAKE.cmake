@@ -11,8 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
 
-ANDROID_dk_depend(android-ndk)	#version 21e or newer required
-ANDROID_dk_depend(msys2)
+ANDROID_TARGET_dk_depend(android-ndk)	#version 21e or newer required
+ANDROID_TARGET_dk_depend(msys2)
 
 
 #dk_set(BOOST ${DK3RDPARTY_DIR}/boost_1_78_0)

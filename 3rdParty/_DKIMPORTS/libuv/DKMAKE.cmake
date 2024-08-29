@@ -19,8 +19,8 @@ dk_include			(${LIBUV}/include)
 dk_include			(${LIBUV}/${OS})
 UNIX_dk_libDebug	(${LIBUV}/${OS}/${DEBUG_DIR}/libuv_a.a)
 UNIX_dk_libRelease	(${LIBUV}/${OS}/${RELEASE_DIR}/libuv_a.a)
-WIN_dk_libDebug		(${LIBUV}/${OS}/${DEBUG_DIR}/uv_a.lib)
-WIN_dk_libRelease	(${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.lib)
+WIN_TARGET_dk_libDebug		(${LIBUV}/${OS}/${DEBUG_DIR}/uv_a.lib)
+WIN_TARGET_dk_libRelease	(${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.lib)
 
 
 ### 3RDPARTY LINK ###

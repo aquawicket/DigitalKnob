@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
 ### DEPEND ###
-WIN_dk_depend(msys2)
+WIN_TARGET_dk_depend(msys2)
 dk_depend(autotools)
 #dk_depend(gcc)
 

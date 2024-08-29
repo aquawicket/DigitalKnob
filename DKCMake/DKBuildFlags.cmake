@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(DK_TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 #include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution

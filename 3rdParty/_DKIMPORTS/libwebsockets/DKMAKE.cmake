@@ -18,8 +18,8 @@ dk_include			(${LIBWEBSOCKETS}/lib)
 dk_include			(${LIBWEBSOCKETS}/${OS})
 UNIX_dk_libDebug	(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
 UNIX_dk_libRelease	(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
-WIN_dk_libDebug		(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
-WIN_dk_libRelease	(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
+WIN_TARGET_dk_libDebug		(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
+WIN_TARGET_dk_libRelease	(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
 
 
 ### GENERATE ###

@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-WIN_dk_depend(winmm)
+WIN_TARGET_dk_depend(winmm)
 
 
 ### IMPORT ###
@@ -19,8 +19,8 @@ endif()
 dk_include				(${RTAUDIO})
 UNIX_dk_libDebug		(${RTAUDIO}/${OS}/${DEBUG_DIR}/librtaudio.a)
 UNIX_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/librtaudio.a)
-WIN_dk_libDebug			(${RTAUDIO}/${OS}/${DEBUG_DIR}/rtaudiod.lib)
-WIN_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/rtaudio.lib)
+WIN_TARGET_dk_libDebug			(${RTAUDIO}/${OS}/${DEBUG_DIR}/rtaudiod.lib)
+WIN_TARGET_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/rtaudio.lib)
 
 
 ### GENERATE ###

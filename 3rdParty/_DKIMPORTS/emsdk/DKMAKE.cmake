@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(DK_HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://github.com/emscripten-core/emsdk.git
 # https://emscripten.org/index.html
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/

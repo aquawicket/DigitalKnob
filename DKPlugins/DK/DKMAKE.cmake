@@ -1,6 +1,6 @@
 dk_info("DK/DKMAKE.cmake")
 
-if(ANDROID)
+if(ANDROID_TARGET)
 	dk_depend(log)
 	#dk_depend(sdl)		# SDL_AndroidGetExternalStorageState()
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422

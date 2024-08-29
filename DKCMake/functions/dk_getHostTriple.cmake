@@ -13,7 +13,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   <os>_<arch>_host		= android_arm64_host, emscripten_arm64_host, ios_arm64_host, iossim_arm64_host, linux_arm64_host, mac_arm64_host, raspberry_arm64_host, windows_arm64_host 
 #   <os>_<arch>_<env>_host	= android_arm64_clang_host, emscripten_arm64_clang_host, ios_arm64_clang_host, iossim_arm64_clang_host, linux_arm64_clang_host, 								
 #							  mac_arm64_clang_host, raspberry_arm64_clang_host, windows_arm64_clang_host 
-
 function(dk_getHostTriple)
 	dk_debugFunc(${ARGV})
 	

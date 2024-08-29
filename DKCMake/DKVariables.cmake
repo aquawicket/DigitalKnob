@@ -111,7 +111,7 @@ endif()
 
 
 ###########################################################################
-## Get DK_HOST_TRIPLE and DK_TARGET_TRIPLE
+## Get HOST_TRIPLE and TARGET_TRIPLE
 ###########################################################################
 dk_getHostTriple()
 dk_getTargetTriple()

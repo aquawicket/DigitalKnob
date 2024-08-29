@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### DEPENDS ###
 dk_depend(core_media)
-RASPBERRY_dk_depend(libatomic)
+RASPBERRY_TARGET_dk_depend(libatomic)
 dk_depend(libgcc)
 dk_depend(libmingwex)
 dk_depend(secur32)
