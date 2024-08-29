@@ -361,7 +361,7 @@ if(ANDROID_ARM32)
 endif()
 
 #### Android arm32 MSVC
-if(ANDROID_ARM32 AND MSVC)
+if(ANDROID_TARGET AND ARM32_TARGET AND MSVC_TARGET) #android_arm32_msvc_target
 	dk_set(CMAKE_GENERATOR_PLATFORM			ARM)
 endif()
 
