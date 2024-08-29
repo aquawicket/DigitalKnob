@@ -132,28 +132,28 @@ dk_cd						(${XZ})
 dk_queueCommand					(autoreconf -f -i)
 		
 UNIX_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
-UNIX_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
+UNIX_DEBUG_TARGET_dk_queueCommand		(${DKCONFIGURE_BUILD})
 
 UNIX_RELEASE_dk_cd			(${XZ}/${OS}/${RELEASE_DIR})
-UNIX_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+UNIX_RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 UNIX_dk_build					(${XZ})
 
 
 WIN_X86_DEBUG_dk_cd		(${XZ}/${OS}/${DEBUG_DIR})
-WIN_X86_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+WIN_X86_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 WIN_X86_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
-WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+WIN_X86_RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 WIN_X86_dk_build				(${XZ})
 
 # look at xz/windows/build.bash for details
 WIN_X86_64_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
-WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 WIN_X86_64_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
-WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 WIN_X86_64_dk_build					(${XZ})
 

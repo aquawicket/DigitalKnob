@@ -167,7 +167,7 @@ EMSCRIPTEN_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 	
-IOS_dk_configure(${LIBARCHIVE}
+IOS_TARGET_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -233,7 +233,7 @@ if(IOS)
 	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-IOSSIM_dk_configure(${LIBARCHIVE}
+IOSSIM_TARGET_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -299,7 +299,7 @@ if(IOSSIM)
 	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-LINUX_dk_configure(${LIBARCHIVE}
+LINUX_TARGET_dk_configure(${LIBARCHIVE}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON

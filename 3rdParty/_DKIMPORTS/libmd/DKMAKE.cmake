@@ -33,12 +33,12 @@ if(ANDROID)
 	ANDROID_dk_ndk(${LIBMD})
 else()
 	DEBUG_dk_cd		(${LIBMD})
-	DEBUG_dk_queueCommand	(aclocal)
+	DEBUG_TARGET_dk_queueCommand	(aclocal)
 	
 	#DEBUG_dk_cd		(${LIBMD}/${OS}/${DEBUG_DIR})
-	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	#RELEASE_dk_cd		(${LIBMD}/${OS}/${RELEASE_DIR})
-	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	dk_configure			(${LIBMD})
 	
 	

@@ -39,9 +39,9 @@ if(NOT WIN)
 
 	### GENERATE / COMPILE ###
 	#DEBUG_dk_cd		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	#RELEASE_dk_cd		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-	#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+	#RELEASE_TARGET_dk_queueCommand(${DKCONFIGURE_BUILD})
 	dk_configure			(${IMAGEMAGICK})
 	
 	dk_build				(${IMAGEMAGICK})

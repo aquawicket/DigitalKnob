@@ -28,8 +28,8 @@ function(dk_make path) #lib
 			dk_queueCommand(${EMMAKE} ${CMAKE_MAKE_PROGRAM})
 		endif()
 		
-		#DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
-		#RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
+		#DEBUG_TARGET_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
+		#RELEASE_TARGET_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
 		#dk_cd(${path}/${BUILD_DIR})

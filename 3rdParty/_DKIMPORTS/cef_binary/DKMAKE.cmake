@@ -163,7 +163,7 @@ WIN_TARGET_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}
 ### GENERATE ###
 ANDROID_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
 APPLE_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
-LINUX_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
+LINUX_TARGET_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
 RASPBERRY_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
 WIN_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
 

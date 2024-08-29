@@ -74,7 +74,7 @@ WIN_TARGET_dk_libRelease			(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-port.l
 ANDROID_dk_configure		(${JERRYSCRIPT})
 APPLE_dk_configure			(${JERRYSCRIPT})
 EMSCRIPTEN_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
-LINUX_dk_configure			(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+LINUX_TARGET_dk_configure			(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
 RASPBERRY_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
 WIN_dk_configure			(${JERRYSCRIPT})
 

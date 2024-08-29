@@ -21,9 +21,9 @@ WIN_TARGET_dk_libRelease	(${LIBX11}/${OS}/${RELEASE_DIR}/libx11.lib)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_cd		(${LIBX11}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 RELEASE_dk_cd		(${LIBX11}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 dk_build				(${LIBX11})
