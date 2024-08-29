@@ -36,8 +36,8 @@ endif()
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
+ANDROID_TARGET_dk_define(CHOBO_FLAT_MAP_NO_THROW)
+ANDROID_TARGET_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
 dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source)
