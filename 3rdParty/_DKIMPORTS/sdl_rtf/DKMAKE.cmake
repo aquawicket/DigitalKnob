@@ -23,10 +23,10 @@ elseif(APPLE)
 	MAC_TARGET_dk_libRelease		(${SDL_RTF}/${OS}/lib/${RELEASE_DIR}/SDL_rtf.a)
 elseif(ANDROID)
 	ANDROID_TARGET_dk_libDebug		(${SDL_RTF}/${OS}/lib/${DEBUG_DIR}/SDL_rtf.a)
-	ANDROID_dk_libRelease	(${SDL_RTF}/${OS}/lib/${RELEASE_DIR}/SDL_rtf.a)
+	ANDROID_TARGET_dk_libRelease	(${SDL_RTF}/${OS}/lib/${RELEASE_DIR}/SDL_rtf.a)
 else()
-	EMSCRIPTEN_dk_libDebug	(${SDL_RTF}/${OS}/${DEBUG_DIR}/lib/SDL_rtf.a)
-	EMSCRIPTEN_dk_libRelease(${SDL_RTF}/${OS}/${RELEASE_DIR}/lib/SDL_rtf.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SDL_RTF}/${OS}/${DEBUG_DIR}/lib/SDL_rtf.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SDL_RTF}/${OS}/${RELEASE_DIR}/lib/SDL_rtf.a)
 endif()
 
 

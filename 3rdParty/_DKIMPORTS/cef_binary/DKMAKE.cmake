@@ -125,7 +125,7 @@ dk_include	(${CEF_BINARY})
 
 # libcef
 ANDROID_TARGET_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.a)
-ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
+ANDROID_TARGET_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
 #APPLE_dk_libDebug		("${CEF_BINARY}${DEBUG_DIR}/Chromium Embedded Framework.framework")
 #APPLE_dk_libRelease	("${CEF_BINARY}/${RELEASE_DIR}/Chromium Embedded Framework.framework")
 LINUX_TARGET_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.so)
@@ -137,7 +137,7 @@ WIN_TARGET_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.lib)
 
 # libcef_dll_wrapper
 ANDROID_TARGET_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
-ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
+ANDROID_TARGET_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
 APPLE_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
 APPLE_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
 LINUX_TARGET_dk_libDebug		(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
@@ -161,11 +161,11 @@ WIN_TARGET_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}
 
 
 ### GENERATE ###
-ANDROID_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
+ANDROID_TARGET_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
 APPLE_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
 LINUX_TARGET_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
-RASPBERRY_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
-WIN_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
+RASPBERRY_TARGET_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
+WIN_TARGET_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
 
 
 ### COMPILE ###

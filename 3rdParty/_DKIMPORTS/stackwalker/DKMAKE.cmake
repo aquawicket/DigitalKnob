@@ -22,7 +22,7 @@ WIN_TARGET_dk_libRelease	(${STACKWALKER}/${OS}/${RELEASE_DIR}/stackwalker.lib)
 
 
 ### GENERATE ###
-WIN_dk_configure	(${STACKWALKER})
+WIN_TARGET_dk_configure	(${STACKWALKER})
 
 
 ### COMPILE ###

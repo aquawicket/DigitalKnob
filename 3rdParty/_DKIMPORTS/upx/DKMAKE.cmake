@@ -18,4 +18,4 @@ LINUX_X86_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-
 LINUX_X86_64_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz)
 RASPBERRY_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-arm_linux.tar.xz)
 #DOS_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-dos.zip)
-WIN_dk_set(UPX_EXE ${UPX}/upx.exe)
+WIN_TARGET_dk_set(UPX_EXE ${UPX}/upx.exe)

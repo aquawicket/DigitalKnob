@@ -69,9 +69,9 @@ dk_addTarget(sfml sfml-window)
 
 if(sfml_sfml-audio)
 	ANDROID_TARGET_dk_libDebug		(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
-	EMSCRIPTEN_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-audio-s-d.a)
-	EMSCRIPTEN_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-audio-s.a)
+	ANDROID_TARGET_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-audio-s-d.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-audio-s.a)
 	IOSSIM_TARGET_dk_libDebug		(${SFML}/${OS}/lib/Debug/libsfml-audio-s-d.a)
 	IOSSIM_TARGET_dk_libRelease	(${SFML}/${OS}/lib/Release/libsfml-audio-s.a)
 	IOS_TARGET_dk_libDebug			(${SFML}/${OS}/lib/Debug/libsfml-audio-s-d.a)
@@ -88,9 +88,9 @@ endif()
 
 if(sfml_sfml-graphics)
 	ANDROID_TARGET_dk_libDebug		(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
-	EMSCRIPTEN_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-graphics-s-d.a)
-	EMSCRIPTEN_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-graphics-s.a)
+	ANDROID_TARGET_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-graphics-s-d.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-graphics-s.a)
 	IOSSIM_TARGET_dk_libDebug		(${SFML}/${OS}/lib/Debug/libsfml-graphics-s-d.a)
 	IOSSIM_TARGET_dk_libRelease	(${SFML}/${OS}/lib/Release/libsfml-graphics-s.a)
 	IOS_TARGET_dk_libDebug			(${SFML}/${OS}/lib/Debug/libsfml-graphics-s-d.a)
@@ -112,9 +112,9 @@ endif()
 
 if(sfml_sfml-network)
 	ANDROID_TARGET_dk_libDebug		(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
-	EMSCRIPTEN_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-network-s-d.a)
-	EMSCRIPTEN_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-network-s.a)
+	ANDROID_TARGET_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-network-s-d.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-network-s.a)
 	IOSSIM_TARGET_dk_libDebug		(${SFML}/${OS}/lib/Debug/libsfml-network-s-d.a)
 	IOSSIM_TARGET_dk_libRelease	(${SFML}/${OS}/lib/Release/libsfml-network-s.a)
 	IOS_TARGET_dk_libDebug			(${SFML}/${OS}/lib/Debug/libsfml-network-s-d.a)
@@ -131,9 +131,9 @@ endif()
 
 if(sfml_sfml-system)
 	ANDROID_TARGET_dk_libDebug		(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
-	EMSCRIPTEN_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-system-s-d.a)
-	EMSCRIPTEN_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-system-s.a)
+	ANDROID_TARGET_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-system-s-d.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-system-s.a)
 	IOSSIM_TARGET_dk_libDebug		(${SFML}/${OS}/lib/Debug/libsfml-system-s-d.a)
 	IOSSIM_TARGET_dk_libRelease	(${SFML}/${OS}/lib/Release/libsfml-system-s.a)
 	IOS_TARGET_dk_libDebug			(${SFML}/${OS}/lib/Debug/libsfml-system-s-d.a)
@@ -150,9 +150,9 @@ endif()
 
 if(sfml_sfml-window)
 	ANDROID_TARGET_dk_libDebug		(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
-	ANDROID_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
-	EMSCRIPTEN_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-window-s-d.a)
-	EMSCRIPTEN_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-window-s.a)
+	ANDROID_TARGET_dk_libRelease	(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+	EMSCRIPTEN_TARGET_dk_libDebug	(${SFML}/${OS}/${DEBUG_DIR}/lib/libsfml-window-s-d.a)
+	EMSCRIPTEN_TARGET_dk_libRelease(${SFML}/${OS}/${RELEASE_DIR}/lib/libsfml-window-s.a)
 	IOSSIM_TARGET_dk_libDebug		(${SFML}/${OS}/lib/Debug/libsfml-window-s-d.a)
 	IOSSIM_TARGET_dk_libRelease	(${SFML}/${OS}/lib/Release/libsfml-window-s.a)
 	IOS_TARGET_dk_libDebug			(${SFML}/${OS}/lib/Debug/libsfml-window-s-d.a)
@@ -169,7 +169,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(SFML_CMAKE
+WIN_TARGET_dk_set(SFML_CMAKE
 	-DSFML_INCLUDE_DIR=${SFML}/include
 	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib
 	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-audio-s.lib
@@ -184,14 +184,14 @@ WIN_dk_set(SFML_CMAKE
 
 
 ### GENERATE ###
-ANDROID_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-EMSCRIPTEN_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+ANDROID_TARGET_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+EMSCRIPTEN_TARGET_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
 IOSSIM_TARGET_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
 IOS_TARGET_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
 LINUX_TARGET_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-MAC_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_MACOSX=1)
-RASPBERRY_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-WIN_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE)
+MAC_TARGET_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_MACOSX=1)
+RASPBERRY_TARGET_dk_configure	(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
+WIN_TARGET_dk_configure		(${SFML} ${LIBJPEG_TURBO_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE)
 
 
 ### COMPILE ###

@@ -68,7 +68,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${RMLUI}
+	WIN_TARGET_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
@@ -98,7 +98,7 @@ if(MSVC)
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 	
-	ANDROID_dk_configure(${RMLUI}
+	ANDROID_TARGET_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF

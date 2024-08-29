@@ -58,7 +58,7 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL}/${OS}/include/curl")
+	WIN_TARGET_dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL}/${OS}/include/curl")
 elseif()
 	dk_set			(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include")
 endif()
@@ -67,7 +67,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${CURL}
+	WIN_TARGET_dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
