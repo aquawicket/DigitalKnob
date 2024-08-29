@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_commandToVariable "%GIT_EXE%" "rev-list --count %branch%..origin/%branch%" behind
 
     echo %ahead% commits ahead, %behind% commits behind
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_gitCheckRemote
-goto:eof
+%endfunction%

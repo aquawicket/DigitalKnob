@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	for %%Z in ("%_input%") do set "_shortPath_=%%~sZ"
 	::endlocal & %dk_call% dk_set %2 "%_shortPath_%"
 	endlocal & set "%2=%_shortPath_%"
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
 
 	%dk_call% dk_getShortPath "%ProgramFiles%" shortPath
 	%dk_call% dk_echo "shortPath = %shortPath%"
-goto:eof
+%endfunction%

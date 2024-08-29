@@ -26,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	   if defined currentScope endlocal
 	   set "%%a"
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -41,5 +41,5 @@ goto:eof
 	%dk_call% dk_set myPath "C:\Windows"
 	%dk_call% dk_getDirectories "%myPath%" directories
 	%dk_call% dk_printVar directories
-goto:eof
+%endfunction%
 	

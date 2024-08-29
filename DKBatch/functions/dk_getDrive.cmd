@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 		if [%_input:~-1,1%] == [/] set "_input=%_input:~0,-1%"
 		for %%Z in ("%_input_%") do set "_drive_=%%~dZ"
 	endlocal & set "%2=%_drive_%"
-goto:eof
+%endfunction%
 
 
 
@@ -29,4 +29,4 @@ goto:eof
 	%dk_call% dk_set myPath "C:\Windows"
 	%dk_call% dk_getDrive "%myPath%" drive
 	%dk_call% dk_printVar drive
-goto:eof
+%endfunction%

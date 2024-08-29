@@ -115,7 +115,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     call "%CMAKE_EXE%" %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
-goto:eof
+%endfunction%
 
 
 
@@ -125,4 +125,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_generate
-goto:eof
+%endfunction%

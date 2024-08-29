@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo %APP% %TARGET_OS% %TYPE%
         
     %dk_call% dk_echo
-goto:eof
+%endfunction%
 
 
 
@@ -26,4 +26,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_postBuildMenu
-goto:eof
+%endfunction%

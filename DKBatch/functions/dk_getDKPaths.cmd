@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not defined DKTOOLS_DIR     %dk_call% dk_setDKTOOLS_DIR
     if not defined DKDOWNLOAD_DIR  %dk_call% dk_setDKDOWNLOAD_DIR
 	if not defined DKTEMP_DIR      %dk_call% dk_setDKTEMP_DIR
-goto:eof
+%endfunction%
 
 
 
@@ -29,4 +29,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_getDKPaths
-goto:eof
+%endfunction%

@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         "%GIT_EXE%" checkout -b %branch% main
         "%GIT_EXE%" push --set-upstream origin %branch%
     )
-goto:eof
+%endfunction%
 
 
 
@@ -46,4 +46,4 @@ goto:eof
 	
 	::%dk_call% dk_gitUpdate
 	%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-goto:eof
+%endfunction%

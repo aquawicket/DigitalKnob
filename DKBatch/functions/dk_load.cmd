@@ -84,7 +84,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 			endlocal
 		) || echo:
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -95,4 +95,4 @@ goto:eof
 	call dk_debugFunc
 	
 	call dk_load dk_printVar
-goto:eof
+%endfunction%

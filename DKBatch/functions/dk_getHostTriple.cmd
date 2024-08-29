@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	::%dk_call% dk_printVar DK_HOST_TRIPLE
 	::echo %DK_HOST_TRIPLE%
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -44,4 +44,4 @@ goto:eof
 	%dk_call% dk_getHostTriple
 	%dk_call% dk_printVar DK_HOST_TRIPLE
  endlocal
-goto:eof
+%endfunction%

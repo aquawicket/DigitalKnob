@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	( del hex.tmp & del ascii.tmp )>nul
 	
 	endlocal & set "%2=%ascii%"
-goto:eof
+%endfunction%
 
 
 
@@ -33,4 +33,4 @@ goto:eof
 		
 	%dk_call% dk_hexToAscii 0x41 ascii
 	%dk_call% dk_echo "ascii = %ascii%"
-goto:eof
+%endfunction%

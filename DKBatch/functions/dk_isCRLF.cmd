@@ -40,11 +40,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	if defined "%~2" (endlocal & set "%2=false")
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 :setsize2
 	set size2=%~z1
-goto:eof
+%endfunction%
 
 
 
@@ -57,4 +57,4 @@ goto:eof
 	
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	%dk_call% dk_isCRLF %DKBASH_FUNCTIONS_DIR%\DK.sh && %dk_call% dk_echo "DK.sh is CRLF" || %dk_call% dk_echo "DK.sh is NOT CRLF"
-goto:eof
+%endfunction%

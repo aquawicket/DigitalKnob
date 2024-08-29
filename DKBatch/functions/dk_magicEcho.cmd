@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 :dk_magicEcho.init
     set "dk_magicEcho=call :gn & REM # #"
-goto:eof
+%endfunction%
 
 :dk_magicEcho
     setlocal EnableDelayedExpansion
@@ -21,7 +21,7 @@ goto:eof
         endlocal
         goto:eof
     )
-goto:eof
+%endfunction%
 
 :gn
     setlocal EnableDelayedExpansion
@@ -95,7 +95,7 @@ for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
 )
 )
 echo FAIL
-goto:eof
+%endfunction%
 
 
 
@@ -106,4 +106,4 @@ goto:eof
 	
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?
-goto:eof   
+%endfunction%   

@@ -54,7 +54,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 	::echo RESULT=%result%
 	endlocal & set "%1=%result%"
-goto:eof
+%endfunction%
 
 
 
@@ -70,5 +70,5 @@ goto:eof
 	echo Type some input and press enter, this will time out in 5 seconds
 	%dk_call% dk_keyboardInputTimeout 10 "default" rtn_var
 	echo result = %rtn_var%
-goto:eof
+%endfunction%
 

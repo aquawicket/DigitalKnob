@@ -39,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	::TODO
 	::[ ? = "success" ]
-goto:eof
+%endfunction%
 
 
 
@@ -60,10 +60,10 @@ goto:eof
 	%dk_call% dk_move moveMe.file iWasMoved.txt OVERWRITE
 	
 	%dk_call% dk_makeDirectory %DKDOWNLOAD_DIR%/moveMe
-goto:eof
+%endfunction%
 
 	%dk_call% dk_move %DKDOWNLOAD_DIR%/moveMe %DIGITALKNOB_DIR%/iWasMoved OVERWRITE
 	
 	%dk_call% dk_makeDirectory moveMe
 	%dk_call% dk_move moveMe iWasMoved OVERWRITE
-goto:eof
+%endfunction%

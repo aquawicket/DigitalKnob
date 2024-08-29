@@ -11,7 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	%dk_call% dk_gitDiffSummary
 	
-    echo "Please enter some details about this commit, then press enter."
+	%dk_call% dk_echo
+    %dk_call% dk_echo "Please enter some details about this commit, then press enter."
 	%dk_call% dk_keyboardInput message
         
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
@@ -55,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
-goto:eof
+%endfunction%
 
 
 
@@ -66,4 +67,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_gitCommit
-goto:eof
+%endfunction%

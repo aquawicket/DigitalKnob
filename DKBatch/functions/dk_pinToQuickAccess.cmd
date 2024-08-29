@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:: METHOD 2:  use dk_powershell
 	%dk_call% dk_powershell "$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')"
 
-goto:eof
+%endfunction%
 
 
 
@@ -27,4 +27,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_pinToQuickAccess "C:\Users\Administrator\digitalknob"
-goto:eof
+%endfunction%

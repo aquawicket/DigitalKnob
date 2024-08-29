@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:: Ensure the hours have a leading zero
 	if 1%_hour% lss 20 set "_hour=0%_hour%"
 	endlocal & set "%1=%_centisecond%" & set "%2=%_second%" & set "%3=%_minute%" & set "%4=%_hour%"
-goto:eof
+%endfunction%
 
 
 
@@ -36,4 +36,4 @@ goto:eof
 	echo time = %time%
 	%dk_call% dk_getTime centisecond second minute hour
 	echo time = %hour%:%minute%:%second%.%centisecond%
-goto:eof	
+%endfunction%	

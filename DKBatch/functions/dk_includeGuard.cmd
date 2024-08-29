@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::		)
 ::	)
 ::	echo THIS IS NEVER REACHED
-goto:eof
+%endfunction%
 
 
 
@@ -47,4 +47,4 @@ goto:eof
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller% & goto:resume
 	:::resume
 	::echo :resume
-goto:eof
+%endfunction%

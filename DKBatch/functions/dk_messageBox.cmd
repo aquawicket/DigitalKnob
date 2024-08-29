@@ -74,7 +74,7 @@ call dk_set VERSION_dk_messageBox 3
 		%dk_call% dk_powershell [Reflection.Assembly]::LoadWithPartialName("""System.Windows.Forms""");[Windows.Forms.MessageBox]::show("""%~1""", """My PopUp Message Box""")
 		echo errorlevel = %errorlevel%
 	goto:eof
-goto:eof
+%endfunction%
 
 
 
@@ -94,5 +94,5 @@ goto:eof
 	if %messageBox_result%==6  (echo You Clicked Yes)
 	if %messageBox_result%==7  (echo You Clicked No)
 	if %messageBox_result%==-1 (echo The message timed out)
-goto:eof
+%endfunction%
 	

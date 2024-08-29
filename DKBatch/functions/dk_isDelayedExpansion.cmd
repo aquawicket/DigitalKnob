@@ -17,7 +17,7 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 	)  else (
 	  set "%1=OFF"
 	)
-goto:eof
+%endfunction%
 
 
 
@@ -29,4 +29,4 @@ goto:eof
 	
 	%dk_call% dk_isDelayedExpansion deylayedExpansion
 	echo deylayedExpansion = %deylayedExpansion%
-goto:eof
+%endfunction%

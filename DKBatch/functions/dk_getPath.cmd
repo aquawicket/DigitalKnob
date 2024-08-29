@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	for %%Z in ("%_input%") do set "_getPath_=%%~pZ"
 	::endlocal & %dk_call% dk_set %2 "%_getPath_:~0,-1%"
 	endlocal & set "%2=%_getPath_:~0,-1%"
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 
 	%dk_call% dk_getPath DK.cmd path
 	%dk_call% dk_echo "path = %path%"
-goto:eof
+%endfunction%

@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	if defined %~1 endlocal & call set "%~1=%ALL_BUT_FIRST% %%%~1%% "
 	if not defined %~1 endlocal & set "%~1=%ALL_BUT_FIRST%"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
 	
 	%dk_call% dk_prependArgs myVar xyz 789
 	%dk_call% dk_printVar myVar
-goto:eof
+%endfunction%

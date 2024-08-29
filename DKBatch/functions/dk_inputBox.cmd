@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	)
 	
 	endlocal & set "%~1=%input%"
-goto:eof
+%endfunction%
 
 
 
@@ -29,7 +29,7 @@ goto:eof
 	
 	%dk_call% dk_inputBox input
 	%dk_call% dk_echo "input = %input%"
-goto:eof
+%endfunction%
 
 -->
 

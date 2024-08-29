@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 		)
 	)
 	endlocal & set "%1=%dd%" & set "%2=%mm%" & set "%3=%yy%"
-goto:eof
+%endfunction%
 
 
 
@@ -33,4 +33,4 @@ goto:eof
 	echo date = %date%
 	%dk_call% dk_getDate day month year
 	echo date = %month%/%day%/%year%
-goto:eof	
+%endfunction%	

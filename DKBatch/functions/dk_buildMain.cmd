@@ -6,8 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_buildMain
- setlocal enableDelayedExpansion
 	call dk_debugFunc 0
+	%setlocal%
 	
 	%dk_call% dk_assert DKSCRIPT_PATH
 	%dk_call% dk_assert DKSCRIPT_DIR
@@ -32,10 +32,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     :while_loop   
 		::%dk_call% dk_echo "33 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
 		
-		if "%UPDATE%"==""     %dk_call% dk_pickUpdate  & goto:while_loop
-		if "%APP%"==""        %dk_call% dk_pickApp APP & goto:while_loop
-		if "%TARGET_OS%"==""  %dk_call% dk_pickOs      & goto:while_loop
-		if "%TYPE%"==""       %dk_call% dk_pickType    & goto:while_loop
+		if "%UPDATE%"==""     %dk_call% dk_pickUpdate  		& goto:while_loop
+		if "%APP%"==""        %dk_call% dk_pickApp APP 		& goto:while_loop
+		if "%TARGET_OS%"==""  %dk_call% dk_pickOs TARGET_OS & goto:while_loop
+		if "%TYPE%"==""       %dk_call% dk_pickType TYPE    & goto:while_loop
 
 		%dk_call% dk_createCache
 		%dk_call% dk_generate

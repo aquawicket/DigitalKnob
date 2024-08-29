@@ -55,7 +55,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
     :undefined
 		%dk_call% dk_echo "%cyan% %~1 =%red% UNDEFINED %clr%"
-goto:eof
+%endfunction%
 
 
 
@@ -87,4 +87,4 @@ goto:eof
 
     ::set "myVarF"
     %dk_call% dk_printVar myVarF
-goto:eof
+%endfunction%

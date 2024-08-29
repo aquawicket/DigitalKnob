@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "_getUnquoted_=%%~Z"
 	endlocal & set "%2=%_getUnquoted_%"
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 	
 	%dk_call% dk_getUnquoted "string" unquoted
 	%dk_call% dk_echo "unquoted = %unquoted%"
-goto:eof
+%endfunction%

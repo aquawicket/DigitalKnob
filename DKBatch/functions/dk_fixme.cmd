@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	call dk_debugFunc 1
 	
 	%dk_call% dk_log FIXME "%~1"
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_fixme "test dk_fixme message"
-goto:eof
+%endfunction%

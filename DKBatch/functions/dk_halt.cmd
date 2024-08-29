@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:HALT
 		%dk_call% dk_echo "%red%###### HALT ######%clr%"
 		()
-goto:eof
+%endfunction%
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
@@ -23,4 +23,4 @@ goto:eof
 	%dk_call% dk_echo "calling dk_halt on next line"
 	%dk_call% dk_halt
 	%dk_call% dk_echo "this is the line after halt"
-goto:eof
+%endfunction%

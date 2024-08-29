@@ -39,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	"%POWERSHELL_EXE%" -Command %*
 	
 	set "dk_powershell="  &::function complete, remove recursion block
-goto:eof
+%endfunction%
 
 
 
@@ -50,4 +50,4 @@ goto:eof
 	call dk_debugFunc 0
 
 	%dk_call% dk_powershell "$PSVAR='this is a powershell variable'; Write-Output 'testing dk_powershell(): ${PSVAR}'"
-goto:eof
+%endfunction%

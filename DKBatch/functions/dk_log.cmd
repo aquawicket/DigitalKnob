@@ -142,7 +142,7 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 		if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   & %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
 		if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   & %dk_call% dk_exit
 	endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -164,4 +164,4 @@ goto:eof
 	%dk_call% dk_log WARNING "test dk_log WARNING message"
 	%dk_call% dk_log ERROR   "test dk_log ERROR message"
 	%dk_call% dk_log FATAL   "test dk_log FATAL message"
-goto:eof
+%endfunction%

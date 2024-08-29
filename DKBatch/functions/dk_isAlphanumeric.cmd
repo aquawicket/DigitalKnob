@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	set "bad_characters="
     if defined "%~2" (endlocal & call set "%2=false")
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -51,4 +51,4 @@ goto:eof
 	%dk_call% dk_isAlphanumeric word       && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
 	%dk_call% dk_isAlphanumeric 123456789  && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
 	%dk_call% dk_isAlphanumeric myArray[0] && %dk_call% dk_info "is alphanumeric" || %dk_call% dk_info "is NOT alphanumeric"
-goto:eof
+%endfunction%

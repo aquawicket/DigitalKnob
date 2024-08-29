@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	set "bad_characters="
     if defined "%~2" (endlocal & call set "%2=false")
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -51,4 +51,4 @@ goto:eof
 	%dk_call% dk_isVariableName word       && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
 	%dk_call% dk_isVariableName 123456789  && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
 	%dk_call% dk_isVariableName myArray[0] && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
-goto:eof
+%endfunction%

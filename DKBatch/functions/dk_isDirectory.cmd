@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
     if defined "%~2" (endlocal & set "%2=false")
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
 	
 	%dk_call% dk_isDirectory "C:\Windows" && %dk_call% dk_info "'C:\Windows' is a directory" || %dk_call% dk_info "'C:\Windows' is NOT a directory"
 	%dk_call% dk_isDirectory "C:\NotADir" && %dk_call% dk_info "'C:\NotADir' is a directory" || %dk_call% dk_info "'C:\NotADir' is NOT a directory"
-goto:eof
+%endfunction%

@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
 	for %%Z in ("%_input_%") do set "_extension_=%%~xZ"
 	endlocal & set "%2=%_extension_%"
-goto:eof
+%endfunction%
 
 
 
@@ -31,4 +31,4 @@ goto:eof
 	%dk_call% dk_set myPath "/test/test2/xfile.extension"
 	%dk_call% dk_getExtension "%myPath%" extension
 	%dk_call% dk_printVar extension
-goto:eof
+%endfunction%

@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	if [%_input:~-1,1%] == [\] set _input=%_input:~0,-1%
 	if [%_input:~-1,1%] == [/] set _input=%_input:~0,-1%
 	endlocal & for %%Z in ("%_input%") do set "%2=%%~tZ"
-goto:eof
+%endfunction%
 
 
 
@@ -29,4 +29,4 @@ goto:eof
 	%dk_call% dk_set myPath "DK.cmd"
 	%dk_call% dk_getFileTime "%myPath%" fileTime
 	%dk_call% dk_printVar fileTime
-goto:eof
+%endfunction%

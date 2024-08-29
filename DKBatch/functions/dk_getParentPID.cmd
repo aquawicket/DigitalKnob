@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	if not defined PPID %dk_call% dk_error "Could not get PPID"
 	endlocal & set "%1=%PPID%"
-goto:eof
+%endfunction%
 
 
 
@@ -52,7 +52,7 @@ goto:eof
 	
 	%dk_call% dk_getParentPID PPID
 	%dk_call% dk_printVar PPID
-goto:eof
+%endfunction%
 */
 
 

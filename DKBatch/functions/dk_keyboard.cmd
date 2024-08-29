@@ -17,7 +17,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 	
 	rem Start Keyboard_Loop in a parallel process
 	start "" /B %ComSpec% /C "call dk_keyboard dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
-goto:eof
+%endfunction%
 
 :dk_keyboard.Keyboard_Loop
  setlocal
@@ -31,7 +31,7 @@ goto:eof
 		  Write-Host $key ^
 	   } ^
 	%End PowerShell% | call "%~f0" dk_keyboard.BeginReceiving %2 || echo BeginReceiving retrned error
-goto:eof
+%endfunction%
 
 :dk_keyboard.BeginReceiving
  setlocal
@@ -43,7 +43,7 @@ goto:eof
 	
 	:: enter keyboard polling loop
 	call :dk_keyboard.pollKeys || call dk_error "call :pollKeys failed!"
-goto:eof
+%endfunction%
 	
 :dk_keyboard.pollKeys
  setlocal
@@ -57,7 +57,7 @@ goto:eof
 	::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || call dk_error "call :onKeyDown %keyCode% failed!"
 	::if defined stopPollKeys goto:eof
 	goto:dk_keyboard.pollKeys
-goto:eof
+%endfunction%
 
 
 :dk_keyboard.onKeyDown
@@ -74,7 +74,7 @@ goto:eof
 	if %keyCode% equ 37 echo "LeftArrow" 
 	if %keyCode% equ 39 echo "RightArrow"
 	set "keyCode="
-goto:eof
+%endfunction%
 
 
 
@@ -91,4 +91,4 @@ goto:eof
 	dk_call dk_keyboard || call dk_error "call dk_keyboard failed!"
 	
 	call dk_echo "press escape to exit keyboard loop" || call dk_error "call dk_echo failed!"
-goto:eof
+%endfunction%

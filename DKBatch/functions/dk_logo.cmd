@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo %black%"%cyan%                                                                    |  \|_/|__) _ |_ _|_  
     echo %black%"%cyan%                                                                    |__/| \|__)(_||_(_| ) 
     echo %clr%
-goto:eof
+%endfunction%
 
 
 
@@ -29,4 +29,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_logo
-goto:eof
+%endfunction%

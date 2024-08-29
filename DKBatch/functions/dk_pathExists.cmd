@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
     if defined "%~2" (endlocal & set "%2=false")
 	(call) %NO_STD%
-goto:eof
+%endfunction%
 
 
 
@@ -79,4 +79,4 @@ goto:eof
 	::	%dk_call% dk_pathExists "%_path_%"
 	::	if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exists)
 	::	if not ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)
-goto:eof
+%endfunction%

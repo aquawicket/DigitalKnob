@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	set /A hexToDecimal=0x%hex:~-2%
 	
 	endlocal & set "%2=%hexToDecimal%"
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 
 	%dk_call% dk_hexToDecimal 0x1b decimal
 	%dk_call% dk_echo "decimal = %decimal%"
-goto:eof
+%endfunction%

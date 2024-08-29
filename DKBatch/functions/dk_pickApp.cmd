@@ -6,8 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_pickApp
+ %setlocal%
     call dk_debugFunc 1
-	%setlocal%
+	
 	
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
 	
@@ -80,7 +81,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	if "!DE!" neq "" %dk_call% dk_error "delayed expansion is required"
 	
-	endlocal & !commands[%choice%]! & set "%~1=%APP%"
+	endlocal & !commands[%choice%]!
+	endlocal & set "%1=%APP%"
 	%dk_call% dk_deleteArray options
 	%dk_call% dk_deleteArray commands
 	goto:eof
@@ -120,7 +122,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::
 ::    %dk_call% dk_echo "%choice%: invalid selection, please try again"
 ::    %dk_call% dk_unset APP
-goto:eof
+%endfunction%
 
 
 
@@ -130,4 +132,4 @@ goto:eof
 	call dk_debugFunc 0
 
 	%dk_call% dk_pickApp
-goto:eof
+%endfunction%

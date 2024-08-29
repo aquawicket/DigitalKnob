@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	set "hex=%~2"
 	::set "hex=0x%hex:~-2%
 	for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x%hex:~-2%"') do set "%~1=%%b"
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 
 	%dk_call% dk_hexToVariable var 0x41
 	%dk_call% dk_echo "var = %var%"
-goto:eof
+%endfunction%

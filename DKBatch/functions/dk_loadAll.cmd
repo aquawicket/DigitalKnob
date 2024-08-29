@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	for /F "usebackq delims=" %%a in ("%DKBATCH_FUNCTIONS_DIR_%_functionList_") do (
 		%dk_call% dk_load %%a
     )
-goto:eof
+%endfunction%
 
 
 
@@ -35,4 +35,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	%dk_call% dk_loadAll
-goto:eof
+%endfunction%

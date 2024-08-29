@@ -35,7 +35,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
 	   
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")
-goto:eof
+%endfunction%
 
 
 
@@ -45,4 +45,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     %dk_call% dk_installGit
-goto:eof
+%endfunction%
