@@ -98,7 +98,7 @@ dk_disable(Pyportable)
 dk_disable(visualstudio)
 
 # Disabled for Android targets
-if(ANDROID)
+if(ANDROID_TARGET)
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKHandles)			# could not find DKHandles
@@ -157,7 +157,7 @@ if(ANDROID)
 	dk_disable(wasm3)
 	dk_disable(x264)
 	dk_disable(x265)
-endif(ANDROID)
+endif(ANDROID_TARGET)
 
 
 # Disabled for Android 64bit targets

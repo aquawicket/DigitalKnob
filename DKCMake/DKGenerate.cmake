@@ -1093,7 +1093,7 @@ if(RASPBERRY)
 endif()
 
 ###########
-if(ANDROID)
+if(ANDROID_TARGET)
 	
 	################################ CMAKE_ANDROID_GUI ########################################
 	#set(CMAKE_ANDROID_GUI 1)
@@ -1474,7 +1474,7 @@ endforeach()
 # This needs to be a Post-Build after the executable is available
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
-#if(LINUX OR RASPBERRY OR ANDROID)
+#if(LINUX OR RASPBERRY OR ANDROID_TARGET)
 #	dk_command(ldd >> ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
 #elseif(MAC OR IOS)
 	# TODO

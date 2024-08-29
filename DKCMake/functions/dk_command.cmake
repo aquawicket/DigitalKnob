@@ -40,7 +40,7 @@ function(dk_command)
 	#	list(APPEND MERGED NOECHO)
 	#endif()
 	
-	if(BASH_ENV) #AND ((MINGW AND MSYSTEM) OR ANDROID))
+	if(BASH_ENV) #AND ((MINGW AND MSYSTEM) OR ANDROID_TARGET))
 		dk_bashEnv(${MERGED})
 	else()
 		dk_executeProcess(${MERGED})
