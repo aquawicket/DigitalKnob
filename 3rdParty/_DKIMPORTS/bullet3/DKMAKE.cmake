@@ -188,7 +188,7 @@ endif(LinearMath)
 
 
 ### 3RDPARTY LINK ###
-ANDROID_dk_set(BULLET3_CMAKE 
+ANDROID_TARGET_dk_set(BULLET3_CMAKE 
 	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
 	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/src/Bullet3Collision/${RELEASE_DIR}/libBulletCollision.a
 	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a

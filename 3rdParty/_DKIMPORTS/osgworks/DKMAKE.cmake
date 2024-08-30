@@ -127,7 +127,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-ANDROID_dk_set				(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
+ANDROID_TARGET_dk_set				(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
 APPLE_dk_set				(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
 EMSCRIPTEN_DEBUG_dk_set		(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
 EMSCRIPTEN_RELEASE_dk_set	(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Release/lib/x86_64-linux-gnu)

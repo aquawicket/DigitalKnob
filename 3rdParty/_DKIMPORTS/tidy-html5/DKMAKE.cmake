@@ -16,7 +16,7 @@ dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DLIBTIDY_VERSION
 dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DRELEASE_DATE" "#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
-EMSCRIPTEN_dk_define	(HAS_FUTIME=0)
+EMSCRIPTEN_TARGET_dk_define	(HAS_FUTIME=0)
 dk_include				(${TIDY_HTML5})
 dk_include				(${TIDY_HTML5}/include)
 dk_include				(${TIDY_HTML5}/${OS})

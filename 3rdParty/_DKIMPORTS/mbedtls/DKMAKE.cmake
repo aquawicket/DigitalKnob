@@ -30,7 +30,7 @@ WIN_TARGET_dk_libRelease	(${MBEDTLS}/${OS}/library/${RELEASE_DIR}/mbedx509.lib)
 
 
 ### 3RDPARTY LINK ###
-UNIX_dk_set(MBEDTLS_CMAKE 
+UNIX_TARGET_dk_set(MBEDTLS_CMAKE 
 	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
 	-DMBEDTLS_LIBRARY=${MBEDTLS}/${OS}/library/${RELEASE_DIR}/libmbedtls.a
 	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${OS}/library/${RELEASE_DIR}/libmbedcrypto.a

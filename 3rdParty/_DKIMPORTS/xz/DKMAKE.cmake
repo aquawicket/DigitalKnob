@@ -116,9 +116,9 @@ dk_return()
 #ANDROID_TARGET_dk_libRelease(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
 ### 3RDPARTY LINK ###
-ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
+ANDROID_TARGET_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+LINUX_TARGET_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 WIN_TARGET_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 
@@ -140,20 +140,20 @@ UNIX_RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 UNIX_dk_build					(${XZ})
 
 
-WIN_X86_DEBUG_dk_cd		(${XZ}/${OS}/${DEBUG_DIR})
-WIN_X86_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+WIN_X86_TARGET_DEBUG_dk_cd		(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_TARGET_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
-WIN_X86_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
-WIN_X86_RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+WIN_X86_TARGET_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_TARGET_RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 WIN_X86_dk_build				(${XZ})
 
 # look at xz/windows/build.bash for details
-WIN_X86_64_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
-WIN_X86_64_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_TARGET_DEBUG_dk_cd			(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-WIN_X86_64_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
-WIN_X86_64_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_TARGET_RELEASE_dk_cd		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 WIN_X86_64_dk_build					(${XZ})
 

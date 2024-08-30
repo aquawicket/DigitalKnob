@@ -137,7 +137,7 @@ endif()
 
 ### COMPILE ###
 ANDROID_dk_command(${BOOST}/SetupAndroid.sh)
-ANDROID_ARM32_DEBUG_TARGET_dk_queueCommand(
+ANDROID_ARM32_TARGET_DEBUG_TARGET_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-armeabiv7a
@@ -156,7 +156,7 @@ ANDROID_ARM32_DEBUG_TARGET_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID_ARM32_RELEASE_TARGET_dk_queueCommand(
+ANDROID_ARM32_TARGET_RELEASE_TARGET_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-armeabiv7a
@@ -175,7 +175,7 @@ ANDROID_ARM32_RELEASE_TARGET_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID_ARM64_DEBUG_TARGET_dk_queueCommand(
+ANDROID_ARM64_TARGET_DEBUG_TARGET_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-arm64v8a
@@ -195,7 +195,7 @@ ANDROID_ARM64_DEBUG_TARGET_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID_ARM64_RELEASE_TARGET_dk_queueCommand(
+ANDROID_ARM64_TARGET_RELEASE_TARGET_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-arm64v8a
@@ -215,7 +215,7 @@ ANDROID_ARM64_RELEASE_TARGET_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf )
-IOSSIM_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+IOSSIM_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin address-model=64
 	variant=debug
 	link=static
@@ -225,7 +225,7 @@ IOSSIM_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	--layout=system
 	${BOOST_WITH}
 	${BOOST_WITHOUT}) #--build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR}
-IOSSIM_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+IOSSIM_X86_64_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=release
@@ -236,7 +236,7 @@ IOSSIM_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	--layout=system
 	${BOOST_WITH}
 	${BOOST_WITHOUT}) #--build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR}
-LINUX_X86_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+LINUX_X86_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=debug
@@ -249,7 +249,7 @@ LINUX_X86_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-LINUX_X86_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+LINUX_X86_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc 
 	address-model=32 
 	variant=release 
@@ -262,7 +262,7 @@ LINUX_X86_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-LINUX_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+LINUX_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=debug
@@ -275,7 +275,7 @@ LINUX_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-LINUX_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+LINUX_X86_64_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=release
@@ -288,7 +288,7 @@ LINUX_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-MAC_X86_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+MAC_X86_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=32
 	variant=debug
@@ -301,7 +301,7 @@ MAC_X86_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-MAC_X86_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+MAC_X86_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=32
 	variant=release
@@ -314,7 +314,7 @@ MAC_X86_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-MAC_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+MAC_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=debug
@@ -327,7 +327,7 @@ MAC_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-MAC_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+MAC_X86_64_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=release
@@ -340,7 +340,7 @@ MAC_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-RASPBERRY_ARM32_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM32_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=debug
@@ -353,7 +353,7 @@ RASPBERRY_ARM32_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-RASPBERRY_ARM32_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM32_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=release
@@ -366,7 +366,7 @@ RASPBERRY_ARM32_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-RASPBERRY_ARM64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM64_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=debug
@@ -379,7 +379,7 @@ RASPBERRY_ARM64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-RASPBERRY_ARM64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+RASPBERRY_ARM64_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=release
@@ -393,7 +393,7 @@ RASPBERRY_ARM64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 if(MSVC)
-	WIN_X86_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=32
 		variant=debug
@@ -407,7 +407,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 		--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-	WIN_X86_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=32
 		variant=release
@@ -421,7 +421,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 		--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-	WIN_X86_64_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_64_TARGET_DEBUG_TARGET_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=64
 		variant=debug
@@ -435,7 +435,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 		--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-	WIN_X86_64_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
+	WIN_X86_64_TARGET_RELEASE_TARGET_dk_queueCommand(${BOOST}/b2
 		toolset=msvc-14.3
 		address-model=64
 		variant=release
