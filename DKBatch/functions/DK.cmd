@@ -2,8 +2,7 @@
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
 if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & pause & exit 1
-::echo 0 = %~0
-::echo 1 = %~1
+
 
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
@@ -20,9 +19,10 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 	set "NO_STDOUT=1>nul"
 	set "NO_STDERR=2>nul"
 	set "NO_STD=1>nul 2>nul"
-	::set "endfunction=goto:eof"
-	set "endfunction=exit /b %ERRORLEVEL%"
-	set "return=exit /b %ERRORLEVEL%"
+	if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
+	if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
+	if "!DE!" == ""   set "return=exit /b !errorlevel!"
+	if "!DE!" neq ""  set "return=exit /b %errorlevel%"
 	
     ::###### Initialize Language specifics ######
     call :dk_init
@@ -106,6 +106,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_reloadWithCmd
 ::#
 :dk_reloadWithCmd
+	if not exist "%~1" echo :dk_reloadWithCmd must be called with %%~0. I.E.  "call :dk_reloadWithCmd" %%~0 & pause & exit 1
 	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
 	if not exist "%DKSCRIPT_PATH%"  %return%
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
