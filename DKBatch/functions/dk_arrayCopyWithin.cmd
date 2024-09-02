@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::# dk_arrayCopyWithin(array, target, start)
 ::# dk_arrayCopyWithin(array, target, start, end)
 ::#
-::#	 The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
+::#  The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
 ::#
 ::#    PARAMETERS
 ::#    target
@@ -35,9 +35,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_arrayCopyWithin
  setlocal
-	call dk_debugFunc 4
-	
-	%dk_call% dk_todo %__FUNCTION__%
+    call dk_debugFunc 4
+
+    %dk_call% dk_todo %__FUNCTION__%
 %endfunction%
 
 
@@ -46,7 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
+    call dk_debugFunc 0
 
-	%dk_call% dk_arrayCopyWithin array target start end
+    %dk_call% dk_arrayCopyWithin array target start end
 %endfunction%

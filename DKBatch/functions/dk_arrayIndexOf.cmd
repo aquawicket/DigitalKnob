@@ -28,24 +28,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_arrayIndexOf
  setlocal
-	call dk_debugFunc 3
-	
-	set _count_=0
-	:dk_arrayIndexOf_loop
-		if not defined %~1[%_count_%] (
-			endlocal & %dk_call% dk_set %3 -1
-			goto:eof
-		)
-		
-		if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
-		if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
-		if "%~2" == "%_value_%" (
-			endlocal & set "%3=%_count_%"
-			goto:eof	
-		)
-			
-		set /a _count_+=1
-	goto:dk_arrayIndexOf_loop
+    call dk_debugFunc 3
+
+    set _count_=0
+    :dk_arrayIndexOf_loop
+        if not defined %~1[%_count_%] (
+            endlocal & %dk_call% dk_set %3 -1
+            goto:eof
+        )
+
+        if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
+        if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
+        if "%~2" == "%_value_%" (
+            endlocal & set "%3=%_count_%"
+            goto:eof    
+        )
+
+        set /a _count_+=1
+    goto:dk_arrayIndexOf_loop
 %endfunction%
 
 
@@ -54,29 +54,29 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  endlocal
-	call dk_debugFunc 0
-	
-	set "myArrayA[0]=a b c"
-	set "myArrayA[1]=1 2 3"
-	set "myArrayA[2]=d e f"
-	set "myArrayA[3]=4 5 6"
-	set "myArrayA[4]=h i j"
-	
-	%dk_call% dk_arrayIndexOf myArrayA "a b c" indexABC
-	%dk_call% dk_printVar indexABC
-	
-	%dk_call% dk_arrayIndexOf myArrayA "1 2 3" index123
-	%dk_call% dk_printVar index123
-	
-	%dk_call% dk_arrayIndexOf myArrayA "d e f" indexDEF
-	%dk_call% dk_printVar indexDEF
-	
-	%dk_call% dk_arrayIndexOf myArrayA "4 5 6" index456
-	%dk_call% dk_printVar index456
-	
-	%dk_call% dk_arrayIndexOf myArrayA "h i j" indexGHI
-	%dk_call% dk_printVar indexGHI
-	
-	%dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
-	%dk_call% dk_printVar indexN
+    call dk_debugFunc 0
+
+    set "myArrayA[0]=a b c"
+    set "myArrayA[1]=1 2 3"
+    set "myArrayA[2]=d e f"
+    set "myArrayA[3]=4 5 6"
+    set "myArrayA[4]=h i j"
+
+    %dk_call% dk_arrayIndexOf myArrayA "a b c" indexABC
+    %dk_call% dk_printVar indexABC
+
+    %dk_call% dk_arrayIndexOf myArrayA "1 2 3" index123
+    %dk_call% dk_printVar index123
+
+    %dk_call% dk_arrayIndexOf myArrayA "d e f" indexDEF
+    %dk_call% dk_printVar indexDEF
+
+    %dk_call% dk_arrayIndexOf myArrayA "4 5 6" index456
+    %dk_call% dk_printVar index456
+
+    %dk_call% dk_arrayIndexOf myArrayA "h i j" indexGHI
+    %dk_call% dk_printVar indexGHI
+
+    %dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
+    %dk_call% dk_printVar indexN
 %endfunction%

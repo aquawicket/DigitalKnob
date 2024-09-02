@@ -26,23 +26,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_arrayIncludes
  setlocal
-	call dk_debugFunc 2 3
-	::dk_validateArgs array string
-	
-	setlocal enableDelayedExpansion
-	set "_arry_=%~1"
-	set /a count=0
-	:dk_arrayIncludes_loop
-	if defined %_arry_%[%count%] (
-		if "!%_arry_%[%count%]!" == "%~2" (
-			if "%~3" neq "" (endlocal & set "%3=true")
-			exit /b 0
-		)
-		set /a count+=1
-		goto:dk_arrayIncludes_loop
-	)
-	if "%~3" neq "" (endlocal & set "%3=false")
-	exit /b 1
+    call dk_debugFunc 2 3
+    ::dk_validateArgs array string
+
+    setlocal enableDelayedExpansion
+    set "_arry_=%~1"
+    set /a count=0
+    :dk_arrayIncludes_loop
+    if defined %_arry_%[%count%] (
+        if "!%_arry_%[%count%]!" == "%~2" (
+            if "%~3" neq "" (endlocal & set "%3=true")
+            exit /b 0
+        )
+        set /a count+=1
+        goto:dk_arrayIncludes_loop
+    )
+    if "%~3" neq "" (endlocal & set "%3=false")
+    exit /b 1
 %endfunction%
 
 
@@ -52,33 +52,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_echo
-	set "array123[0]=1"
-	set "array123[1]=2"
-	set "array123[2]=3"
-	%dk_call% dk_printVar array123
-	%dk_call% dk_info "dk_arrayIncludes array123 2"
-	%dk_call% dk_arrayIncludes array123 2      && echo true || echo false  &:: true
-	%dk_call% dk_info "dk_arrayIncludes array123 4"
-	%dk_call% dk_arrayIncludes array123 4      && echo true || echo false  &:: false
-	::%dk_call% dk_arrayIncludes array123 3 3  && echo true || echo false  &:: false
-	::%dk_call% dk_arrayIncludes array123 3 -1 && echo true || echo false  &:: true
-	
-	%dk_call% dk_echo
-	set "array12NaN[0]=1"
-	set "array12Nan[1]=2"
-	set "array12Nan[2]=NaN"
-	%dk_call% dk_printVar array12Nan
-	%dk_call% dk_info "dk_arrayIncludes array12NaN NaN"
-	%dk_call% dk_arrayIncludes array12NaN NaN  && echo true || echo false  &:: true
-	
-	%dk_call% dk_echo
-	set "array123q[0]="1""
-	set "array123q[1]="2""
-	set "array123q[2]="3""
-	%dk_call% dk_printVar array123q
-	%dk_call% dk_info "dk_arrayIncludes array123q 3"
-	%dk_call% dk_arrayIncludes array123q 3     && echo true || echo false  &::# false
+    call dk_debugFunc 0
+
+    %dk_call% dk_echo
+    set "array123[0]=1"
+    set "array123[1]=2"
+    set "array123[2]=3"
+    %dk_call% dk_printVar array123
+    %dk_call% dk_info "dk_arrayIncludes array123 2"
+    %dk_call% dk_arrayIncludes array123 2      && echo true || echo false  &:: true
+    %dk_call% dk_info "dk_arrayIncludes array123 4"
+    %dk_call% dk_arrayIncludes array123 4      && echo true || echo false  &:: false
+    ::%dk_call% dk_arrayIncludes array123 3 3  && echo true || echo false  &:: false
+    ::%dk_call% dk_arrayIncludes array123 3 -1 && echo true || echo false  &:: true
+
+    %dk_call% dk_echo
+    set "array12NaN[0]=1"
+    set "array12Nan[1]=2"
+    set "array12Nan[2]=NaN"
+    %dk_call% dk_printVar array12Nan
+    %dk_call% dk_info "dk_arrayIncludes array12NaN NaN"
+    %dk_call% dk_arrayIncludes array12NaN NaN  && echo true || echo false  &:: true
+
+    %dk_call% dk_echo
+    set "array123q[0]="1""
+    set "array123q[1]="2""
+    set "array123q[2]="3""
+    %dk_call% dk_printVar array123q
+    %dk_call% dk_info "dk_arrayIncludes array123q 3"
+    %dk_call% dk_arrayIncludes array123q 3     && echo true || echo false  &::# false
 %endfunction%
