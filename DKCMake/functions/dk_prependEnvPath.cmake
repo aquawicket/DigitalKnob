@@ -8,8 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_prependEnvPath inputPath)
 	dk_debugFunc(${ARGV})
-
-
+	
 	if(NOT inputPath)
 		dk_warning("dk_prependEnvPath(): inputPath is invalid!")
 		return()
