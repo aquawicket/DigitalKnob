@@ -13,17 +13,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%~n1" equ "dk_log" goto:eof
     if "%~n1" equ "dk_info" goto:eof
     
-    %dk_call% dk_isCRLF "%~1" && echo %~1 is already CRLF && goto:eof
+    %dk_call% dk_isCRLF "%~1" && %dk_call% dk_echo "%~1 is already CRLF" && goto:eof
     %dk_call% dk_rename "%~1" "%~1_toCRLF" OVERWRITE
-    if not exist "%~1_toCRLF" echo failed to rename %~1
-    if exist "%~1" echo cannot rename file, destination already exists
+    if not exist "%~1_toCRLF" %dk_call% dk_error "failed to rename %~1"
+    if exist "%~1" %dk_call% dk_echo "cannot rename file, destination already exists"
     
-    %dk_call% echo Converting %~1 to CRLF line endings
+    %dk_call% dk_echo "Converting %~1 to CRLF line endings"
     type "%~1_toCRLF" | find /V "" > "%~1"
-    if not exist "%~1" echo failed to convert file to CRLF
+    if not exist "%~1" %dk_call% dk_error "failed to convert file to CRLF"
     
     %dk_call% dk_delete "%~1_toCRLF"
-    if exist "%~1_toCRLF" echo failed to delete temporary file
+    if exist "%~1_toCRLF" %dk_call% dk_error "failed to delete temporary file: %~1_toCRLF"
 %endfunction%
 
 
