@@ -27,7 +27,7 @@ echo 1 = %~1
     call :dk_init
 	
 	::###### Reload Main Script with cmd ######
-    call :dk_reloadWithCmd
+    call :dk_reloadWithCmd %~1
 	
 	::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
@@ -109,14 +109,12 @@ echo 1 = %~1
 	if not exist "%DKSCRIPT_PATH%"  %return%
 	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
-	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
-
 	if defined RELOADED goto:end_dk_reloadWithCmd
+		echo "reloading with delayed expansion . . ."
 		set "RELOADED=1"
 		set "DKINIT="
-		echo "reloading with delayed expansion . . ."
 		
-		cmd /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
+		"%ComSpec%" /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
 	:end_dk_reloadWithCmd
 %endfunction%
 
