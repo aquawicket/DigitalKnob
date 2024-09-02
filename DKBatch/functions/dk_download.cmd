@@ -53,6 +53,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
     ::set "DISABLE_curl=1"
     ::set "DISABLE_certutil=1"
     
+    goto:end_dk_powershell_dl
     :: Try dk_powershell
     :dk_powershell_dl
     if defined DISABLE_dk_powershell goto:end_dk_powershell_dl
@@ -65,7 +66,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
     %dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
     if exist "%destination%_DOWNLOADING" goto:download_done
-    :end_DK_powershell_dl
+    :end_dk_powershell_dl
     
     :: Try powershell
     :powershell_dl

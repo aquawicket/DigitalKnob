@@ -18,13 +18,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
     
     :: try powershell.exe
-::  %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
-::  "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
+    %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
+    "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
 
     :: install pwsh.exe and try again
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
     if not exist %DKIMPORTS_DIR% %dk_call% dk_notice "DKIMPORTS not found" & exit /b 1
-    %dk_call% "%DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
+    call "%DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
     %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
     "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
     
