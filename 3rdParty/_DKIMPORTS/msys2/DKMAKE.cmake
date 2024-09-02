@@ -5,7 +5,7 @@ dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 
-if(NOT WIN_HOST OR NOT WIN_TARGET)
+if(NOT WIN_HOST)# OR NOT WIN_TARGET)
 	dk_undepend(msys2)
 	dk_return()
 endif()
