@@ -6,23 +6,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_commandExists
  setlocal
-	call dk_debugFunc 1
+	call dk_debugFunc 1 2
 	
     ::%dk_call% dk_set command "%~1"
  	%ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
 	
     if %ERRORLEVEL% equ 0 (
-		if not defined "%~2" goto:eof
-		
-		endlocal & call set "%2=true"
-		(call ) %NO_STD%
-		goto:eof
+		if "%~2" neq "" (endlocal & set "%2=true")
+		exit /b 0
 	)
 	
-	if not defined "%~2" goto:eof
-	
-	endlocal & set "%2=false"
-    (call) %NO_STD%
+	if "%~2" neq "" (endlocal & set "%2=false")
+    exit /b 1
 %endfunction%
 
 

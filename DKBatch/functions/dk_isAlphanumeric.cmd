@@ -16,14 +16,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 	if not defined bad_characters (
 		set "bad_characters="
-		if defined "%~2" (endlocal & set "%2=true")
-        (call ) %NO_STD%
-		goto:eof
+		if "%~2" neq "" (endlocal & set "%2=true")
+        exit /b 0
 	)
 	
 	set "bad_characters="
-    if defined "%~2" (endlocal & call set "%2=false")
-	(call) %NO_STD%
+    if "%~2" neq "" (endlocal & call set "%2=false")
+	exit /b 1
 %endfunction%
 
 

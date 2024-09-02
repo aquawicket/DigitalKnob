@@ -35,15 +35,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:dk_arrayIncludes_loop
 	if defined %_arry_%[%count%] (
 		if "!%_arry_%[%count%]!" == "%~2" (
-			if defined "%~3" (endlocal & set "%3=true")
-			(call ) %NO_STD%
-			goto:eof
+			if "%~3" neq "" (endlocal & set "%3=true")
+			exit /b 0
 		)
 		set /a count+=1
 		goto:dk_arrayIncludes_loop
 	)
-	if defined "%~3" (endlocal & set "%3=false")
-	(call) %NO_STD%
+	if "%~3" neq "" (endlocal & set "%3=false")
+	exit /b 1
 %endfunction%
 
 

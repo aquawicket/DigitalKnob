@@ -22,13 +22,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 		
 		if !httpCode! equ 200 (
 			if "%~2" neq "" (endlocal & set "%2=true")
-			(call ) %NO_STD%
-			goto:eof
+			exit /b 0
 		)
 	:end_curl
 
 	if "%~2" neq "" (endlocal & set "%2=false")
-	(call) %NO_STD%
+	exit /b 1
  endlocal
 goto:eof
 

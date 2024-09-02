@@ -65,7 +65,7 @@ call dk_set VERSION_dk_messageBox 3
 		if %errorlevel%==-1 (echo Timeout)
 		set rtn_var=%errorlevel%
 		del %tmp%\tmp.vbs
-		::if defined "%~3" set "%3=%errorlevel%"
+		::if "%~3" neq "" set "%3=%errorlevel%"
 		set "%3=%rtn_var%"
 	goto:eof
 		

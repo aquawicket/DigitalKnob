@@ -12,13 +12,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	
 	::set "_path=%~1"
 	if exist "%~1" (
-		if defined "%~2" (endlocal & set "%2=true")
-        (call ) %NO_STD%
-		goto:eof
+		if "%~2" neq "" (endlocal & set "%2=true")
+        exit /b 0
 	)
 	
-    if defined "%~2" (endlocal & set "%2=false")
-	(call) %NO_STD%
+    if "%~2" neq "" (endlocal & set "%2=false")
+	exit /b 1
 %endfunction%
 
 

@@ -35,7 +35,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	%dk_call% dk_isDirectory "C:\NotADir" result
 	if "%result%" equ "true" (%dk_call% dk_info "'C:\Windows' is a directory") else (%dk_call% dk_info "'C:\Windows' is NOT a directory")
 	
-	
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isDirectory "C:\Windows"
 	if not ERRORLEVEL 1 (%dk_call% dk_info "'C:\Windows' is a directory") else (%dk_call% dk_info "'C:\Windows' is NOT a directory")

@@ -4,7 +4,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::##################################################################################
 ::# dk_confirm()
 ::#
-::#
 :dk_confirm
  setlocal
 	call dk_debugFunc 0
@@ -13,13 +12,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	%dk_call% dk_echo
 	%dk_call% dk_echo
 	if /I "%REPLY%" equ "Y" (
-		rem if defined "%~1" ( endlocal & %dk_call% dk_set %1 "true" )
-        (call ) %NO_STD%
-		goto:eof
+		rem if "%~1" neq "" ( endlocal & %dk_call% dk_set %1 "true" )
+        exit /b 0
 	) 
 	
-	rem if not defined "%~1" ( endlocal & %dk_call% dk_set %1 "false" )
-	(call) %NO_STD%
+	rem if "%~1" neq "" ( endlocal & %dk_call% dk_set %1 "false" )
+	exit /b 1
 %endfunction%
 
 
