@@ -53,9 +53,10 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	::set "DISABLE_curl=1"
 	::set "DISABLE_certutil=1"
 	
-	:: Try dk_powershell
-	:powershell_dl
-	if defined DISABLE_powershell goto:end_powershell_dl
+    :: Try dk_powershell
+	:dk_powershell_dl
+	if defined DISABLE_dk_powershell goto:end_dk_powershell_dl
+    if not defined POWERSHELL_EXE goto:end_dk_powershell_dl
 	%dk_call% dk_echo "Downloading via dk_powershell"
 	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 	if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
@@ -64,8 +65,21 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
 	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
 	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
 	if exist "%destination%_DOWNLOADING" goto:download_done
-	:end_powershell_dl
+	:end_DK_powershell_dl
 	
+    :: Try powershell
+	:powershell_dl
+	if defined DISABLE_powershell goto:end_powershell_dl
+	%dk_call% dk_echo "Downloading via powershell"
+	set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+	if not exist "%destination%_DOWNLOADING" powershell -Command "$cli = New-Object System.Net.WebClient; "^
+	    "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
+	    "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
+	%dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize
+	if "%fileSize%" equ "0" %dk_call% dk_delete "%destination%_DOWNLOADING"
+	if exist "%destination%_DOWNLOADING" goto:download_done
+	:end_powershell_dl
+    
 	:: Try curl
 	:curl_dl
 	if defined DISABLE_curl goto:end_curl_dl
