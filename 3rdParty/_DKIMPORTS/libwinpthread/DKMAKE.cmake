@@ -18,9 +18,9 @@ endif()
 
 
 ### LINK ###
-WIN_TARGET_dk_libDebug(${LIBWINPTHREAD}/libwinpthread.a)
-WIN_TARGET_dk_libRelease(${LIBWINPTHREAD}/libwinpthread.a)
+WIN_dk_libDebug(${LIBWINPTHREAD}/libwinpthread.a)
+WIN_dk_libRelease(${LIBWINPTHREAD}/libwinpthread.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_TARGET_dk_set(LIBWINPTHREAD_CMAKE -DLIBWINPTHREAD_LIBRARIES=${LIBWINPTHREAD})
+WIN_dk_set(LIBWINPTHREAD_CMAKE -DLIBWINPTHREAD_LIBRARIES=${LIBWINPTHREAD})

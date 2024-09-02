@@ -1,4 +1,4 @@
-if(NOT ANDROID_TARGET)
+if(NOT ANDROID)
 	return()
 endif()
 

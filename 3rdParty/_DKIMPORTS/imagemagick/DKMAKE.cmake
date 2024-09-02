@@ -33,15 +33,15 @@ if(NOT WIN)
 
 	UNIX_HOST_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
 	UNIX_HOST_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-	#WIN_TARGET_dk_libDebug		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-	#WIN_TARGET_dk_libRelease		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+	#WIN_dk_libDebug		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+	#WIN_dk_libRelease		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
 
 
 	### GENERATE / COMPILE ###
 	#DEBUG_dk_cd		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-	#DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	#RELEASE_dk_cd		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-	#RELEASE_TARGET_dk_queueCommand(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 	dk_configure			(${IMAGEMAGICK})
 	
 	dk_build				(${IMAGEMAGICK})

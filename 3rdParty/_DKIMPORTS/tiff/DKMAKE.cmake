@@ -29,8 +29,8 @@ DEBUG_dk_include			(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
 RELEASE_dk_include			(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
 if(MULTI_CONFIG)
 	if(MSVC)
-		WIN_TARGET_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib	TIFF_LIBRARY_DEBUG)
-		WIN_TARGET_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib	TIFF_LIBRARY_RELEASE)
+		WIN_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib	TIFF_LIBRARY_DEBUG)
+		WIN_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib	TIFF_LIBRARY_RELEASE)
 	else()
 		dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a	TIFF_LIBRARY_DEBUG)
 		dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a	TIFF_LIBRARY_RELEASE)
@@ -44,7 +44,7 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_TARGET_dk_set(TIFF_CMAKE
+	WIN_dk_set(TIFF_CMAKE
 		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
 		-DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2}
 		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
@@ -52,7 +52,7 @@ if(MSVC)
 		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR2}"
 		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR2}")
 	
-	ANDROID_TARGET_dk_set(TIFF_CMAKE
+	ANDROID_dk_set(TIFF_CMAKE
 		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
 		-DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2}
 		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}

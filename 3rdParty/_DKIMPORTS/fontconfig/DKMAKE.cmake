@@ -26,13 +26,13 @@ dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_cd		(${FONTCONFIG})
-DEBUG_TARGET_dk_queueCommand	(autoupdate)
-DEBUG_TARGET_dk_queueCommand	(autoconf)
+DEBUG_dk_queueCommand	(autoupdate)
+DEBUG_dk_queueCommand	(autoconf)
 
 #DEBUG_dk_cd		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
-#DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #RELEASE_dk_cd		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
-#RELEASE_TARGET_dk_queueCommand(${DKCONFIGURE_BUILD})
+#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure	(${FONTCONFIG})
 
 

@@ -16,5 +16,5 @@ if(LINUX OR RASPBERRY)
 	set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -latomic")
 	
 	#static linking
-	#RASPBERRY_TARGET_dk_lib(/usr/lib/arm-linux-gnueabihf/libatomic.a)
+	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libatomic.a)
 endif()

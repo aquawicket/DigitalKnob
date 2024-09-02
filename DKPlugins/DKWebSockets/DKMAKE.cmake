@@ -1,4 +1,4 @@
-if(ANDROID_TARGET)
+if(ANDROID)
 	RETURN()
 endif()
 if(LINUX)

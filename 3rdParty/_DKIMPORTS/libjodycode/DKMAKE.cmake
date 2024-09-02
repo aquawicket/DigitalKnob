@@ -10,8 +10,8 @@ dk_import(https://github.com/jbruchon/libjodycode.git)
 dk_include			(${LIBJODYCODE}/include)
 UNIX_dk_libDebug	(${LIBJODYCODE}/${OS}/${DEBUG_DIR}/libjodycode.a)
 UNIX_dk_libRelease	(${LIBJODYCODE}/${OS}/${RELEASE_DIR}/libjodycode.a)
-WIN_TARGET_dk_libDebug		(${LIBJODYCODE}/${OS}/${DEBUG_DIR}/libjodycode.lib)
-WIN_TARGET_dk_libRelease	(${LIBJODYCODE}/${OS}/${RELEASE_DIR}/libjodycode.lib)
+WIN_dk_libDebug		(${LIBJODYCODE}/${OS}/${DEBUG_DIR}/libjodycode.lib)
+WIN_dk_libRelease	(${LIBJODYCODE}/${OS}/${RELEASE_DIR}/libjodycode.lib)
 
 
 ### GENERATE ###

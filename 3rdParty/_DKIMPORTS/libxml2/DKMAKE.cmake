@@ -38,8 +38,8 @@ else()
 endif()
 
 if(MSVC)
-	WIN_TARGET_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib	LIBXML2_LIBRARY_DEBUG)
-	WIN_TARGET_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib	LIBXML2_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 else()
 	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a		LIBXML2_LIBRARY_DEBUG)
 	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
@@ -115,7 +115,7 @@ endif()
 #	${ZLIB_CMAKE} 
 #	${LIBXML2})
 
-##EMSCRIPTEN_TARGET_dk_queueCommand(${DKCONFIGURE_BUILD})
+##EMSCRIPTEN_dk_queueCommand(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 

@@ -163,7 +163,7 @@ if(LINUX_HOST)
 	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
 	#dk_load(${DKIMPORTS_DIR}/gdb/DKMAKE.cmake)
 endif()
-if(ANDROID_TARGET)
+if(ANDROID)
 	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
 endif()
 if(EMSCRIPTEN)
@@ -194,7 +194,7 @@ dk_set(WARNING_LEVEL 					4)
 #dk_set(SHARED							0)
 dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 
-if(ANDROID_TARGET)
+if(ANDROID)
 	dk_set(POSITION_INDEPENDENT_EXECUTABLE OFF) 
 endif()
 
@@ -361,7 +361,7 @@ if(ANDROID_ARM32)
 endif()
 
 #### Android arm32 MSVC
-if(ANDROID_TARGET AND ARM32_TARGET AND MSVC_TARGET) #android_arm32_msvc_target
+if(ANDROID AND ARM32 AND MSVC) #android_arm32_msvc
 	dk_set(CMAKE_GENERATOR_PLATFORM			ARM)
 endif()
 

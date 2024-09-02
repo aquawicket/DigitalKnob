@@ -18,9 +18,9 @@ endif()
 
 
 ### LINK ###
-WIN_TARGET_dk_libDebug(${LIBMINGWEX}/libmingwex.a)
-WIN_TARGET_dk_libRelease(${LIBMINGWEX}/libmingwex.a)
+WIN_dk_libDebug(${LIBMINGWEX}/libmingwex.a)
+WIN_dk_libRelease(${LIBMINGWEX}/libmingwex.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_TARGET_dk_set(LIBMINGWEX_CMAKE -DLIBMINGWEX_LIBRARIES=${LIBMINGWEX})
+WIN_dk_set(LIBMINGWEX_CMAKE -DLIBMINGWEX_LIBRARIES=${LIBMINGWEX})

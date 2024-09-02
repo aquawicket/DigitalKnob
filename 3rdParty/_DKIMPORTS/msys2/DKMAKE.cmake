@@ -5,7 +5,7 @@ dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 
-if(NOT WIN_HOST)# OR NOT WIN_TARGET)
+if(NOT WIN_HOST)# OR NOT WIN)
 	dk_undepend(msys2)
 	dk_return()
 endif()
@@ -43,7 +43,7 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 endif()	
 
 
-if(WIN_HOST AND (MSYSTEM OR ANDROID_TARGET OR EMSCRIPTEN_TARGET))
+if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")
 	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
 

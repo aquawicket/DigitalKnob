@@ -19,8 +19,8 @@ dk_define(FMT_HEADER_ONLY)
 dk_include(${FMT}/include)
 #UNIX_dk_libDebug	(${FMT}/${OS}/${DEBUG_DIR}/libfmtd.a)
 #UNIX_dk_libRelease	(${FMT}/${OS}/${RELEASE_DIR}/libfmt.a)
-#WIN_TARGET_dk_libDebug	(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
-#WIN_TARGET_dk_libRelease	(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
+#WIN_dk_libDebug	(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
+#WIN_dk_libRelease	(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
 
 
 ### GENERATE ###

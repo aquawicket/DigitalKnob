@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-WIN_TARGET_dk_depend(winmm)
+WIN_dk_depend(winmm)
 
 
 ### IMPORT ###
@@ -19,8 +19,8 @@ endif()
 dk_include			(${RTMIDI})
 UNIX_dk_libDebug	(${RTMIDI}/${OS}/${DEBUG_DIR}/librtmidi.a)
 UNIX_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/librtmidi.a)
-WIN_TARGET_dk_libDebug		(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
-WIN_TARGET_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
+WIN_dk_libDebug		(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
+WIN_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
 
 
 ### GENERATE ###

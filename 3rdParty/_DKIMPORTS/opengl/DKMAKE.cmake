@@ -1,15 +1,15 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
-WIN_TARGET_dk_lib(opengl32.lib)
+WIN_dk_lib(opengl32.lib)
 
 
 if(MAC)
 	dk_findLibrary(OpenGL)
 endif()
 
-IOS_TARGET_dk_depend(opengles)
+IOS_dk_depend(opengles)
 
-IOSSIM_TARGET_dk_depend(opengles)
+IOSSIM_dk_depend(opengles)
 
 if(LINUX)
 	dk_depend(mesa-common-dev)
@@ -22,7 +22,7 @@ if(LINUX)
 	if(NOT OPENGL_FOUND)
     	dk_warning("COULD NOT FIND OPENGL")
 	endif()
-	LINUX_TARGET_dk_lib(${OPENGL_LIBRARIES})
+	LINUX_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
 if(RASPBERRY)
@@ -36,7 +36,7 @@ if(RASPBERRY)
 	if(NOT OPENGL_FOUND)
     	dk_warning("COULD NOT FIND OPENGL")
 	endif()
-	RASPBERRY_TARGET_dk_lib(${OPENGL_LIBRARIES})
+	RASPBERRY_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
 if(EMSCRIPTEN)
@@ -50,4 +50,4 @@ if(EMSCRIPTEN)
 	EMSCRIPTEN_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
-ANDROID_TARGET_dk_depend(opengles)
+ANDROID_dk_depend(opengles)

@@ -36,8 +36,8 @@ endif()
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-ANDROID_TARGET_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-ANDROID_TARGET_dk_define(RMLUI_USE_CUSTOM_RTTI)
+ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
+ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
 dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source)
@@ -47,8 +47,8 @@ dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	if(MSVC)
-		WIN_TARGET_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-		WIN_TARGET_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
 	else()
 		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
 		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
@@ -58,8 +58,8 @@ endif()
 if(rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_TARGET_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
-		WIN_TARGET_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	else()
 		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
 		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
@@ -68,7 +68,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_TARGET_dk_configure(${RMLUI}
+	WIN_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
@@ -98,7 +98,7 @@ if(MSVC)
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 	
-	ANDROID_TARGET_dk_configure(${RMLUI}
+	ANDROID_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF

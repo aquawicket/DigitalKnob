@@ -49,8 +49,8 @@ dk_include(${OPENFRAMEWORKS}/libs/utf8cpp/include)
 dk_include(${OPENFRAMEWORKS}/libs/videoInput/include)
 UNIX_dk_libDebug	(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/libopenframeworks.a)
 UNIX_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/libopenframeworks.a)
-WIN_TARGET_dk_libDebug		(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
-WIN_TARGET_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
+WIN_dk_libDebug		(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
+WIN_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
 
 
 ### GENERATE ###

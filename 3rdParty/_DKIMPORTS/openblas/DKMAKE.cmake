@@ -11,8 +11,8 @@ dk_import(https://github.com/OpenMathLib/OpenBLAS/archive/refs/heads/develop.zip
 dk_include				(${OPENBLAS})
 UNIX_dk_libDebug		(${OPENBLAS}/${OS}/${DEBUG_DIR}/lib/libopenblas.a)
 UNIX_dk_libRelease		(${OPENBLAS}/${OS}/${RELEASE_DIR}/lib/libopenblas.a)
-WIN_TARGET_dk_libDebug			(${OPENBLAS}/${OS}/lib/DEBUG/openblas.lib)
-WIN_TARGET_dk_libRelease		(${OPENBLAS}/${OS}/lib/RELEASE/openblas.lib)
+WIN_dk_libDebug			(${OPENBLAS}/${OS}/lib/DEBUG/openblas.lib)
+WIN_dk_libRelease		(${OPENBLAS}/${OS}/lib/RELEASE/openblas.lib)
 
 
 ### 3RDPARTY LINK ###

@@ -1,7 +1,7 @@
 #if(LINUX)
 #	return()
 #endif()
-#if(ANDROID_TARGET)
+#if(ANDROID)
 #	return()
 #endif()
 

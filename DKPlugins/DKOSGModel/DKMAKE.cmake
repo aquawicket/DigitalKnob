@@ -1,6 +1,6 @@
 dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgdb_3dc)
-#if(NOT ANDROID_TARGET)
+#if(NOT ANDROID)
 #	dk_depend(openscenegraph osgdb_3ds)
 #	dk_depend(openscenegraph osgdb_ive)
 #	dk_depend(openscenegraph osgdb_lwo)

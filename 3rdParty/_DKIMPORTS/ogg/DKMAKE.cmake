@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-WIN_TARGET_dk_depend(msys2)
+WIN_dk_depend(msys2)
 
 
 ### IMPORT ###
@@ -53,9 +53,9 @@ dk_configure(${OGG}
 
 #else()
 #	DEBUG_dk_cd		(${OGG}/${OS}/${DEBUG_DIR})
-#	DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #	RELEASE_dk_cd		(${OGG}/${OS}/${RELEASE_DIR})
-#	RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #endif()
 
 

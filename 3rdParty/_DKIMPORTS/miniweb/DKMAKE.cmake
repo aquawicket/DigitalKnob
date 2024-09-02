@@ -5,4 +5,4 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 WIN_dk_import(https://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip)
-WIN_TARGET_dk_set(MINIWEB_EXE "${MINIWEB}/miniweb.exe")
+WIN_dk_set(MINIWEB_EXE "${MINIWEB}/miniweb.exe")

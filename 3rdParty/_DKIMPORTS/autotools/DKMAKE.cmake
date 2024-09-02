@@ -15,7 +15,7 @@ MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
 
-if( ("${DK_TARGET_ENV}" STREQUAL "clang") OR ("${DK_TARGET_ENV}" STREQUAL "mingw") OR ("${DK_TARGET_ENV}" STREQUAL "ucrt") )
+if(CLANG OR MINGW OR UCRT)
 	dk_depend(msys2)
 	
 	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)

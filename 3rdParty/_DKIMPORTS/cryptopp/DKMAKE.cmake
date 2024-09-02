@@ -21,22 +21,22 @@ endif()
 
 
 ### LINK ###
-ANDROID_TARGET_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-ANDROID_TARGET_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+ANDROID_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+ANDROID_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 APPLE_dk_libDebug		(${CRYPTOPP}/${OS}/cryptopp.build/${DEBUG_DIR}/cryptopp-object.build/libcryptopp-object.a)
 APPLE_dk_libRelease		(${CRYPTOPP}/${OS}/cryptopp.build/${RELEASE_DIR}/cryptopp-object.build/libcryptopp-object.a)
-EMSCRIPTEN_TARGET_dk_libDebug	(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-EMSCRIPTEN_TARGET_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-LINUX_TARGET_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-LINUX_TARGET_dk_libRelease		(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-RASPBERRY_TARGET_dk_libDebug	(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-RASPBERRY_TARGET_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+EMSCRIPTEN_dk_libDebug	(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+EMSCRIPTEN_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+LINUX_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+LINUX_dk_libRelease		(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+RASPBERRY_dk_libDebug	(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+RASPBERRY_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 if(MSVC)
-	WIN_TARGET_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
-	WIN_TARGET_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
+	WIN_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
+	WIN_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
 else()
-	WIN_TARGET_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-	WIN_TARGET_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+	WIN_dk_libDebug		(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+	WIN_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 endif()
 
 
@@ -46,16 +46,16 @@ string(REPLACE "-std=c++1z" "" CRYPTOPP_BUILD "${CRYPTOPP_BUILD}")
 string(REPLACE "  " " " CRYPTOPP_BUILD "${CRYPTOPP_BUILD}") 
 ANDROID_dk_queueCommand		(${CRYPTOPP_BUILD} "-DCMAKE_CXX_FLAGS=/I${ANDROID_NDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${CRYPTOPP})
 
-EMSCRIPTEN_TARGET_dk_configure		(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
-IOS_TARGET_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
-IOSSIM_TARGET_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
-LINUX_TARGET_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+EMSCRIPTEN_dk_configure		(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+IOS_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
+IOSSIM_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ${LIBMD_CMAKE})
+LINUX_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
 
 string(REPLACE "-DMAC " " " CRYPTOPP_BUILD "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp
-MAC_TARGET_dk_queueCommand			(${CRYPTOPP_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
+MAC_dk_queueCommand			(${CRYPTOPP_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
 
-RASPBERRY_TARGET_dk_configure		(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
-WIN_TARGET_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+RASPBERRY_dk_configure		(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
+WIN_dk_configure			(${CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF)
 
 
 ### COMPILE ###

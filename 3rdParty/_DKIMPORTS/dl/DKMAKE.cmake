@@ -4,9 +4,9 @@ if(NOT UNIX)
 	dk_return()
 endif()
 
-ANDROID_TARGET_dk_depend(android-ndk)
+ANDROID_dk_depend(android-ndk)
 
 dk_findLibrary(dl NO_HALT)
 
-LINUX_TARGET_dk_lib		(dl)
-RASPBERRY_TARGET_dk_lib	(dl)
+LINUX_dk_lib		(dl)
+RASPBERRY_dk_lib	(dl)

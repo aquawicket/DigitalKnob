@@ -20,8 +20,8 @@ dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 dk_include			(${LIBMD}/include)
 UNIX_dk_libDebug	(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
 UNIX_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
-WIN_TARGET_dk_libDebug		(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
-WIN_TARGET_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
+WIN_dk_libDebug		(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
+WIN_dk_libRelease	(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
 
 
 ### 3RDPARTY LINK ###
@@ -33,12 +33,12 @@ if(ANDROID)
 	ANDROID_dk_ndk(${LIBMD})
 else()
 	DEBUG_dk_cd		(${LIBMD})
-	DEBUG_TARGET_dk_queueCommand	(aclocal)
+	DEBUG_dk_queueCommand	(aclocal)
 	
 	#DEBUG_dk_cd		(${LIBMD}/${OS}/${DEBUG_DIR})
-	#DEBUG_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	#RELEASE_dk_cd		(${LIBMD}/${OS}/${RELEASE_DIR})
-	#RELEASE_TARGET_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	dk_configure			(${LIBMD})
 	
 	

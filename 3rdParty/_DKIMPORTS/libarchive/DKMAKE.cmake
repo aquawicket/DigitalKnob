@@ -35,12 +35,12 @@ dk_import(https://github.com/libarchive/libarchive/archive/refs/heads/master.zip
 dk_define					(LIBARCHIVE_STATIC)
 dk_include					(${LIBARCHIVE}/libarchive)
 dk_include					(${LIBARCHIVE}/${OS})
-ANDROID_TARGET_dk_include			(${LIBARCHIVE}/contrib/android/include)
+ANDROID_dk_include			(${LIBARCHIVE}/contrib/android/include)
 
 if(MULTI_CONFIG)
 	if(MSVC)
-		WIN_TARGET_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
-		WIN_TARGET_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
+		WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
+		WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
 	else()
 		dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
 		dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
@@ -52,7 +52,7 @@ endif()
 
 
 ### GENERATE ###
-ANDROID_TARGET_dk_configure(${LIBARCHIVE}
+ANDROID_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${OS} -I${LIBARCHIVE}/contrib/android/include"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -110,7 +110,7 @@ ANDROID_TARGET_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-EMSCRIPTEN_TARGET_dk_configure(${LIBARCHIVE}
+EMSCRIPTEN_dk_configure(${LIBARCHIVE}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -167,7 +167,7 @@ EMSCRIPTEN_TARGET_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 	
-IOS_TARGET_dk_configure(${LIBARCHIVE}
+IOS_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -233,7 +233,7 @@ if(IOS)
 	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-IOSSIM_TARGET_dk_configure(${LIBARCHIVE}
+IOSSIM_dk_configure(${LIBARCHIVE}
 	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
@@ -299,7 +299,7 @@ if(IOSSIM)
 	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-LINUX_TARGET_dk_configure(${LIBARCHIVE}
+LINUX_dk_configure(${LIBARCHIVE}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -356,7 +356,7 @@ LINUX_TARGET_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-MAC_TARGET_dk_configure(${LIBARCHIVE}
+MAC_dk_configure(${LIBARCHIVE}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -413,7 +413,7 @@ MAC_TARGET_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 	
-RASPBERRY_TARGET_dk_configure(${LIBARCHIVE}
+RASPBERRY_dk_configure(${LIBARCHIVE}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -471,7 +471,7 @@ RASPBERRY_TARGET_dk_configure(${LIBARCHIVE}
 	${ZSTD_CMAKE})
 
 if(MSVC)
-	WIN_TARGET_dk_configure(${LIBARCHIVE}
+	WIN_dk_configure(${LIBARCHIVE}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -528,7 +528,7 @@ if(MSVC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()
-	WIN_TARGET_dk_configure(${LIBARCHIVE}
+	WIN_dk_configure(${LIBARCHIVE}
 		"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 		-DCMAKE_FIND_USE_CMAKE_PATH=FALSE
 		-DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE

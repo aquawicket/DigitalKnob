@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### DEPEND ###
 dk_depend(libgcc)
-WIN_TARGET_dk_depend(msys2)
+WIN_dk_depend(msys2)
 dk_depend(ogg)
 
 
@@ -71,12 +71,12 @@ dk_configure(${VORBIS} ${OGG_CMAKE})
 #		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
 #	endif()
 #	DEBUG_dk_cd			(${VORBIS}/${OS}/${DEBUG_DIR})
-#	DEBUG_TARGET_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+#	DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
 #	if(RELEASE)
 #		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
 #	endif()
 #	RELEASE_dk_cd			(${VORBIS}/${OS}/${RELEASE_DIR})
-#	RELEASE_TARGET_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+#	RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
 #endif()
 
 

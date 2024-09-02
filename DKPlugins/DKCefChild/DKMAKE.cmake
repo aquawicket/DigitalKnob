@@ -29,10 +29,10 @@ if(MAC_X86_64)
 #		dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/DKCefChild.app/Contents/MacOS/DKCefChild "${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/DKCefChild.app/Contents/MacOS/${AppName} Helper")
 #		dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/DKCefChild.app "${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
 #	endif()
-#	MAC_TARGET_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
+#	MAC_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
 #	
 #	FIXME - command does not work because app does not exist yet
-#	MAC_TARGET_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/MacOS/${AppName}")
+#	MAC_dk_queueCommand(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/MacOS/${AppName}")
 endif()
 
 if(LINUX)
