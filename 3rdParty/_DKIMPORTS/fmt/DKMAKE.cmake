@@ -17,10 +17,10 @@ dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
 dk_include(${FMT}/include)
-#UNIX_dk_libDebug	(${FMT}/${OS}/${DEBUG_DIR}/libfmtd.a)
-#UNIX_dk_libRelease	(${FMT}/${OS}/${RELEASE_DIR}/libfmt.a)
-#WIN_dk_libDebug	(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
-#WIN_dk_libRelease	(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
+#UNIX_dk_libDebug	(${FMT}/${triple}/${DEBUG_DIR}/libfmtd.a)
+#UNIX_dk_libRelease	(${FMT}/${triple}/${RELEASE_DIR}/libfmt.a)
+#WIN_dk_libDebug	(${FMT}/${triple}/${DEBUG_DIR}/fmtd.lib)
+#WIN_dk_libRelease	(${FMT}/${triple}/${RELEASE_DIR}/fmt.lib)
 
 
 ### GENERATE ###

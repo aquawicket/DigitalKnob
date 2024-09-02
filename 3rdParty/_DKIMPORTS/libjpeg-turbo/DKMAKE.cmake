@@ -13,23 +13,23 @@ dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main
 
 ### LINK ###
 dk_include					(${LIBJPEG_TURBO}												LIBJPEG_TURBO_INCLUDE_DIR)
-ANDROID_dk_include			(${LIBJPEG_TURBO}/${OS}/$(BUILD_TYPE)/jni)
+ANDROID_dk_include			(${LIBJPEG_TURBO}/${triple}/$(BUILD_TYPE)/jni)
 if(MULTI_CONFIG)
 	dk_include				(${LIBJPEG_TURBO}/${OS}											LIBJPEG_TURBO_INCLUDE_DIR2)
 else()
-	DEBUG_dk_include		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
-	RELEASE_dk_include		(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
+	DEBUG_dk_include		(${LIBJPEG_TURBO}/${triple}/${DEBUG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
+	RELEASE_dk_include		(${LIBJPEG_TURBO}/${triple}/${RELEASE_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
 endif()
 
 
 if(MSVC)
-	WIN_dk_libDebug			(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
-	ANDROID_dk_libDebug		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${LIBJPEG_TURBO}/${triple}/${DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${LIBJPEG_TURBO}/${triple}/${RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	ANDROID_dk_libDebug		(${LIBJPEG_TURBO}/${triple}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${LIBJPEG_TURBO}/${triple}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBJPEG_TURBO}/${triple}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBJPEG_TURBO}/${triple}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
 
 

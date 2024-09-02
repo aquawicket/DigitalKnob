@@ -141,11 +141,11 @@ if(COMPILE_CMAKE)
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
 		dk_include				(${CMAKE}/${OS})
-		DEBUG_dk_include		(${CMAKE}/${OS}/${DEBUG_DIR})
-		RELEASE_dk_include		(${CMAKE}/${OS}/${RELEASE_DIR})
+		DEBUG_dk_include		(${CMAKE}/${triple}/${DEBUG_DIR})
+		RELEASE_dk_include		(${CMAKE}/${triple}/${RELEASE_DIR})
 
-		dk_libDebug		(${CMAKE}/${OS}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
-		dk_libRelease	(${CMAKE}/${OS}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
+		dk_libDebug		(${CMAKE}/${triple}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
+		dk_libRelease	(${CMAKE}/${triple}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
 		
 		string(REPLACE "--DDEBUG" 	""	CMAKE_BUILD "${DKCMAKE_BUILD}")
 		string(REPLACE "  " 		" " CMAKE_BUILD "${CMAKE_BUILD}")

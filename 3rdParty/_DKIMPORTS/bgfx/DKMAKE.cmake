@@ -13,10 +13,10 @@ dk_import(https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${BGFX}/include)
-UNIX_dk_libDebug	(${BGFX}/${OS}/${DEBUG_DIR}/libbgfx.a)
-UNIX_dk_libRelease	(${BGFX}/${OS}/${RELEASE_DIR}/libbgfx.a)
-WIN_dk_libDebug		(${BGFX}/${OS}/${DEBUG_DIR}/bgfx.lib)
-WIN_dk_libRelease	(${BGFX}/${OS}/${RELEASE_DIR}/bgfx.lib)
+UNIX_dk_libDebug	(${BGFX}/${triple}/${DEBUG_DIR}/libbgfx.a)
+UNIX_dk_libRelease	(${BGFX}/${triple}/${RELEASE_DIR}/libbgfx.a)
+WIN_dk_libDebug		(${BGFX}/${triple}/${DEBUG_DIR}/bgfx.lib)
+WIN_dk_libRelease	(${BGFX}/${triple}/${RELEASE_DIR}/bgfx.lib)
 
 
 ### GENERATE ###

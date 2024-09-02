@@ -23,21 +23,21 @@ dk_import(https://github.com/DanBloomberg/leptonica/archive/refs/heads/master.zi
 
 ### LINK ###
 dk_include					(${LEPTONICA})
-dk_include					(${LEPTONICA}/${OS}/src)
-dk_include					(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
+dk_include					(${LEPTONICA}/${triple}/src)
+dk_include					(${LEPTONICA}/${triple}/${RELEASE_DIR}/src)
 if(MULTI_CONFIG)
  if(MSVC)
-	WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
-	WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
-	ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-	ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+	WIN_dk_libDebug			(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
+	WIN_dk_libRelease		(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
+	ANDROID_dk_libDebug		(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/libleptonica.a)
+	ANDROID_dk_libRelease	(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/libleptonica.a)
  else()
-	dk_libDebug				(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-	dk_libRelease			(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+	dk_libDebug				(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/libleptonica.a)
+	dk_libRelease			(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/libleptonica.a)
  endif()
 else()
-	dk_libDebug				(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-	dk_libRelease			(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+	dk_libDebug				(${LEPTONICA}/${triple}/${DEBUG_DIR}/src/libleptonica.a)
+	dk_libRelease			(${LEPTONICA}/${triple}/${RELEASE_DIR}/src/libleptonica.a)
 endif()
 
 
@@ -49,7 +49,7 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${BUILD_DIR})
 
 ### GENERATE ###
 #dk_configure(${LEPTONICA} 
-#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff" 
+#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${triple}/libtiff" 
 #	-DSTATIC=ON 
 #	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
 #	-DSW_BUILD=OFF 

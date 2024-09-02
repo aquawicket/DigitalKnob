@@ -24,8 +24,8 @@ set(BZIP2_USE_CMAKE 1)
 if(BZIP2_USE_CMAKE)
 	dk_include(${BZIP2}/													BZIP2_INCLUDE_DIR)
 
-	dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2_static.a			BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2_static.a			BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${BZIP2}/${triple}/${DEBUG_DIR}/libbz2_static.a			BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2}/${triple}/${RELEASE_DIR}/libbz2_static.a			BZIP2_LIBRARY_RELEASE)
 
 
 	### 3RDPARTY LINK ###
@@ -45,13 +45,13 @@ else()
 	### LINK ###
 	dk_include(${BZIP2}/${OS}															BZIP2_INCLUDE_DIR)
 	if(MSVC)
-		WIN_X86_dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
-		WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
-		WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
-		WIN_X86_64_dk_libRelease(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+		WIN_X86_dk_libDebug		(${BZIP2}/${triple}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
+		WIN_X86_dk_libRelease	(${BZIP2}/${triple}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
+		WIN_X86_64_dk_libDebug	(${BZIP2}/${triple}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+		WIN_X86_64_dk_libRelease(${BZIP2}/${triple}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 	else()
-		dk_libDebug				(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_DEBUG)
-		dk_libRelease			(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_RELEASE)
+		dk_libDebug				(${BZIP2}/${triple}/libbz2.a								BZIP2_LIBRARY_DEBUG)
+		dk_libRelease			(${BZIP2}/${triple}/libbz2.a								BZIP2_LIBRARY_RELEASE)
 	endif()
 
 
@@ -69,16 +69,16 @@ else()
 		endif()
 
 		if(WIN_X86_64)
-			dk_copy		(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc) #copy project files that came with bzip
-			dk_copy		(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc)
-			dk_copy		(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h)
-			dk_copy		(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc)
+			dk_copy		(${BZIP2}/win32/bzip2.rc ${BZIP2}/${triple}/bzip2.rc) #copy project files that came with bzip
+			dk_copy		(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${triple}/bzip2recover.rc)
+			dk_copy		(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${triple}/bzip2_version.h)
+			dk_copy		(${BZIP2}/win32/libbz2.rc ${BZIP2}/${triple}/libbz2.rc)
 			dk_copy		(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
 			dk_cd	(${BZIP2}/${OS})
 			dk_build	(${BZIP2} libbz2-static x64)
 		endif()
 	else()
-		if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		if(NOT EXISTS ${BZIP2}/${triple}/bzip2.c)
 			dk_copy		(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
 			dk_sleep(2) # wait 2 seconds for files to copy over
 		endif()

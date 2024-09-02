@@ -10,10 +10,10 @@ dk_import(https://aomedia.googlesource.com/aom.git)
 
 ### LINK ###
 dk_include(${AOM})
-UNIX_dk_libDebug	(${AOM}/${OS}/${DEBUG_DIR}/libaom.a)
-UNIX_dk_libRelease	(${AOM}/${OS}/${RELEASE_DIR}/libaom.a)
-WIN_dk_libDebug		(${AOM}/${OS}/${DEBUG_DIR}/aom.lib)
-WIN_dk_libRelease	(${AOM}/${OS}/${RELEASE_DIR}/aom.lib)
+UNIX_dk_libDebug	(${AOM}/${triple}/${DEBUG_DIR}/libaom.a)
+UNIX_dk_libRelease	(${AOM}/${triple}/${RELEASE_DIR}/libaom.a)
+WIN_dk_libDebug		(${AOM}/${triple}/${DEBUG_DIR}/aom.lib)
+WIN_dk_libRelease	(${AOM}/${triple}/${RELEASE_DIR}/aom.lib)
 
 
 ### GENERATE ###

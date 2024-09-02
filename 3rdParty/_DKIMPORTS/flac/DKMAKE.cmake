@@ -18,11 +18,11 @@ dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz
 dk_include			(${FLAC}/include										FLAC_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC}/${triple}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${triple}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC}/${triple}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${triple}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
 endif()
 
 

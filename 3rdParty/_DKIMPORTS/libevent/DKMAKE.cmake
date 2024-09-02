@@ -13,10 +13,10 @@ dk_import(https://github.com/libevent/libevent/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${LIBEVENT}/include)
-UNIX_dk_libDebug	(${LIBEVENT}/${OS}/${DEBUG_DIR}/libevent.a)
-UNIX_dk_libRelease	(${LIBEVENT}/${OS}/${RELEASE_DIR}/libevent.a)
-WIN_dk_libDebug		(${LIBEVENT}/${OS}/${DEBUG_DIR}/event.lib)
-WIN_dk_libRelease	(${LIBEVENT}/${OS}/${RELEASE_DIR}/event.lib)
+UNIX_dk_libDebug	(${LIBEVENT}/${triple}/${DEBUG_DIR}/libevent.a)
+UNIX_dk_libRelease	(${LIBEVENT}/${triple}/${RELEASE_DIR}/libevent.a)
+WIN_dk_libDebug		(${LIBEVENT}/${triple}/${DEBUG_DIR}/event.lib)
+WIN_dk_libRelease	(${LIBEVENT}/${triple}/${RELEASE_DIR}/event.lib)
 
 
 ### GENERATE ###

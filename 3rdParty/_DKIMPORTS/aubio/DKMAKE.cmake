@@ -10,11 +10,11 @@ dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
 ### LINK ###
 dk_include				(${AUBIO}/src)
 if(MSVC)
-	WIN_dk_libDebug		(${AUBIO}/${OS}/${DEBUG_DIR}/aubio.lib)
-	WIN_dk_libRelease	(${AUBIO}/${OS}/${RELEASE_DIR}/aubio.lib)
+	WIN_dk_libDebug		(${AUBIO}/${triple}/${DEBUG_DIR}/aubio.lib)
+	WIN_dk_libRelease	(${AUBIO}/${triple}/${RELEASE_DIR}/aubio.lib)
 else()
-	dk_libDebug			(${AUBIO}/${OS}/${DEBUG_DIR}/libaubio.a)
-	dk_libRelease		(${AUBIO}/${OS}/${RELEASE_DIR}/libaubio.a)
+	dk_libDebug			(${AUBIO}/${triple}/${DEBUG_DIR}/libaubio.a)
+	dk_libRelease		(${AUBIO}/${triple}/${RELEASE_DIR}/libaubio.a)
 endif()
 
 

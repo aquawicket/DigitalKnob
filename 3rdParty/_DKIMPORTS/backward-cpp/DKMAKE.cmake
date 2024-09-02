@@ -10,10 +10,10 @@ dk_import(https://github.com/bombela/backward-cpp/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${BACKWARD_CPP})
-#UNIX_dk_libDebug	(${BACKWARD_CPP}/${OS}/${DEBUG_DIR}/libbackward.a)
-#UNIX_dk_libRelease	(${BACKWARD_CPP}/${OS}/${RELEASE_DIR}/libbackward.a)
-#WIN_dk_libDebug	(${BACKWARD_CPP}/${OS}/${DEBUG_DIR}/backward.lib)
-#WIN_dk_libRelease	(${BACKWARD_CPP}/${OS}/${RELEASE_DIR}/backward.lib)
+#UNIX_dk_libDebug	(${BACKWARD_CPP}/${triple}/${DEBUG_DIR}/libbackward.a)
+#UNIX_dk_libRelease	(${BACKWARD_CPP}/${triple}/${RELEASE_DIR}/libbackward.a)
+#WIN_dk_libDebug	(${BACKWARD_CPP}/${triple}/${DEBUG_DIR}/backward.lib)
+#WIN_dk_libRelease	(${BACKWARD_CPP}/${triple}/${RELEASE_DIR}/backward.lib)
 
 if(ANDROID)
 	dk_delete(${DKPLUGINS_DIR}/DK/backward.cpp NO_HALT)

@@ -12,10 +12,10 @@ dk_import(https://github.com/google/diff-match-patch/archive/refs/heads/master.z
 
 ### LINK ###
 #dk_include			(${DIFF_MATCH_PATCH}/include)
-#UNIX_dk_libDebug	(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-#UNIX_dk_libRelease	(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-#WIN_dk_libDebug	(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
-#WIN_dk_libRelease	(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
+#UNIX_dk_libDebug	(${DIFF_MATCH_PATCH}/${triple}/${DEBUG_DIR}/libdiff-match-patchd.a)
+#UNIX_dk_libRelease	(${DIFF_MATCH_PATCH}/${triple}/${RELEASE_DIR}/libdiff-match-patch.a)
+#WIN_dk_libDebug	(${DIFF_MATCH_PATCH}/${triple}/${DEBUG_DIR}/diff-match-patchd.lib)
+#WIN_dk_libRelease	(${DIFF_MATCH_PATCH}/${triple}/${RELEASE_DIR}/diff-match-patch.lib)
 
 
 ### GENERATE ###

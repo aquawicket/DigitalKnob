@@ -18,25 +18,25 @@ dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 ### LINK ###
 dk_include					(${OGG}/include									OGG_INCLUDE_DIR)
 if(MULTI_CONFIG)
-	dk_include				(${OGG}/${OS}/include							OGG_INCLUDE_DIR2)
+	dk_include				(${OGG}/${triple}/include							OGG_INCLUDE_DIR2)
 else()
-	DEBUG_dk_include		(${OGG}/${OS}/${DEBUG_DIR}/include				OGG_INCLUDE_DIR2)
-	RELEASE_dk_include		(${OGG}/${OS}/${RELEASE_DIR}/include			OGG_INCLUDE_DIR2)
+	DEBUG_dk_include		(${OGG}/${triple}/${DEBUG_DIR}/include				OGG_INCLUDE_DIR2)
+	RELEASE_dk_include		(${OGG}/${triple}/${RELEASE_DIR}/include			OGG_INCLUDE_DIR2)
 endif()
 
 #if(ANDROID)
-	dk_libDebug				(${OGG}/${OS}/${DEBUG_DIR}/libogg.a				OGG_LIBRARY_DEBUG)
-	dk_libRelease			(${OGG}/${OS}/${RELEASE_DIR}/libogg.a			OGG_LIBRARY_RELEASE)
+	dk_libDebug				(${OGG}/${triple}/${DEBUG_DIR}/libogg.a				OGG_LIBRARY_DEBUG)
+	dk_libRelease			(${OGG}/${triple}/${RELEASE_DIR}/libogg.a			OGG_LIBRARY_RELEASE)
 #else()
-#	dk_libDebug				(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a	OGG_LIBRARY_DEBUG)
-#	dk_libRelease			(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a	OGG_LIBRARY_RELEASE)
+#	dk_libDebug				(${OGG}/${triple}/${DEBUG_DIR}/src/.libs/libogg.a	OGG_LIBRARY_DEBUG)
+#	dk_libRelease			(${OGG}/${triple}/${RELEASE_DIR}/src/.libs/libogg.a	OGG_LIBRARY_RELEASE)
 #endif()
 
 
 
 ### 3RDPARTY AUTOCONF LINK ###
-#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
-#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${triple}/${DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${triple}/${RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
 
 ### 3RDPARTY CMAKE LINK ###
 DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_DEBUG}		"-DCMAKE_C_FLAGS=-I${OGG_INCLUDE_DIR2}" "-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
@@ -52,9 +52,9 @@ dk_configure(${OGG}
 			-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON
 
 #else()
-#	DEBUG_dk_cd		(${OGG}/${OS}/${DEBUG_DIR})
+#	DEBUG_dk_cd		(${OGG}/${triple}/${DEBUG_DIR})
 #	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#	RELEASE_dk_cd		(${OGG}/${OS}/${RELEASE_DIR})
+#	RELEASE_dk_cd		(${OGG}/${triple}/${RELEASE_DIR})
 #	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #endif()
 

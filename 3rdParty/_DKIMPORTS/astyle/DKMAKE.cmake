@@ -12,11 +12,11 @@ dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/ASty
 ### LINK ###
 dk_include				(${ASTYLE}/src)
 if(MSVC)
-	WIN_dk_libDebug		(${ASTYLE}/${OS}/${DEBUG_DIR}/AStyleLib.lib)
-	WIN_dk_libRelease	(${ASTYLE}/${OS}/${RELEASE_DIR}/AStyleLib.lib)
+	WIN_dk_libDebug		(${ASTYLE}/${triple}/${DEBUG_DIR}/AStyleLib.lib)
+	WIN_dk_libRelease	(${ASTYLE}/${triple}/${RELEASE_DIR}/AStyleLib.lib)
 else()
-	dk_libDebug			(${ASTYLE}/${OS}/${DEBUG_DIR}/libastyle.a)
-	dk_libRelease		(${ASTYLE}/${OS}/${RELEASE_DIR}/libastyle.a)
+	dk_libDebug			(${ASTYLE}/${triple}/${DEBUG_DIR}/libastyle.a)
+	dk_libRelease		(${ASTYLE}/${triple}/${RELEASE_DIR}/libastyle.a)
 endif()
 
 

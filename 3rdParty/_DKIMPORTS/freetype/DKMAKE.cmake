@@ -16,13 +16,13 @@ dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freety
 
 ### LINK ###
 dk_include				(${FREETYPE}/include								FREETYPE_INCLUDE_DIR)
-dk_include				(${FREETYPE}/${OS}/include/freetype2				FREETYPE_INCLUDE_DIR2)
+dk_include				(${FREETYPE}/${triple}/include/freetype2				FREETYPE_INCLUDE_DIR2)
 if(MSVC)
-	WIN_dk_libDebug		(${FREETYPE}/${OS}/${DEBUG_DIR}/freetype.lib		FREETYPE_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${FREETYPE}/${OS}/${RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${FREETYPE}/${triple}/${DEBUG_DIR}/freetype.lib		FREETYPE_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${FREETYPE}/${triple}/${RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
-	dk_libRelease		(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
+	dk_libDebug			(${FREETYPE}/${triple}/${DEBUG_DIR}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
+	dk_libRelease		(${FREETYPE}/${triple}/${RELEASE_DIR}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
 endif()
 
 
@@ -55,9 +55,9 @@ dk_build(${FREETYPE} freetype)
 
 
 # rmlui expects to find ftconfig.h here, so we just copy it for now.
-if(EXISTS ${FREETYPE}/${OS}/${DEBUG_DIR}/include AND NOT EXISTS ${FREETYPE}/${OS}/include)
-	dk_copy(${FREETYPE}/${OS}/${DEBUG_DIR}/include ${FREETYPE}/${OS}/include)
+if(EXISTS ${FREETYPE}/${triple}/${DEBUG_DIR}/include AND NOT EXISTS ${FREETYPE}/${triple}/include)
+	dk_copy(${FREETYPE}/${triple}/${DEBUG_DIR}/include ${FREETYPE}/${triple}/include)
 endif()
-if(EXISTS ${FREETYPE}/${OS}/${RELEASE_DIR}/include AND NOT EXISTS ${FREETYPE}/${OS}/include)
-	dk_copy(${FREETYPE}/${OS}/${RELEASE_DIR}/include ${FREETYPE}/${OS}/include)
+if(EXISTS ${FREETYPE}/${triple}/${RELEASE_DIR}/include AND NOT EXISTS ${FREETYPE}/${triple}/include)
+	dk_copy(${FREETYPE}/${triple}/${RELEASE_DIR}/include ${FREETYPE}/${triple}/include)
 endif()

@@ -16,12 +16,12 @@ dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fo
 
 ### LINK ###
 dk_include		(${FONTCONFIG}/fontconfig)
-dk_libDebug		(${FONTCONFIG}/${OS}/${DEBUG_DIR}/lib/.libs/libfontconfig.a)
-dk_libRelease	(${FONTCONFIG}/${OS}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
+dk_libDebug		(${FONTCONFIG}/${triple}/${DEBUG_DIR}/lib/.libs/libfontconfig.a)
+dk_libRelease	(${FONTCONFIG}/${triple}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
 
 
 ### 3RDPARTY LINK ###
-dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_LIBRARY=${FONTCONFIG}/${OS}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
+dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_LIBRARY=${FONTCONFIG}/${triple}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
 
 
 ### GENERATE / COMPILE ###
@@ -29,9 +29,9 @@ DEBUG_dk_cd		(${FONTCONFIG})
 DEBUG_dk_queueCommand	(autoupdate)
 DEBUG_dk_queueCommand	(autoconf)
 
-#DEBUG_dk_cd		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
+#DEBUG_dk_cd		(${FONTCONFIG}/${triple}/${DEBUG_DIR})
 #DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_cd		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
+#RELEASE_dk_cd		(${FONTCONFIG}/${triple}/${RELEASE_DIR})
 #RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure	(${FONTCONFIG})
 

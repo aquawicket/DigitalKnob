@@ -23,11 +23,11 @@ dk_include			(${BOXER}/include)
 dk_include			(${BOXER}/${OS})
 
 if(MSVC)
-	WIN_dk_libDebug		(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
-	WIN_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
+	WIN_dk_libDebug		(${BOXER}/${triple}/${DEBUG_DIR}/Boxer.lib)
+	WIN_dk_libRelease	(${BOXER}/${triple}/${RELEASE_DIR}/Boxer.lib)
 else()
-	dk_libDebug			(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
-	dk_libRelease		(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
+	dk_libDebug			(${BOXER}/${triple}/${DEBUG_DIR}/libBoxer.a)
+	dk_libRelease		(${BOXER}/${triple}/${RELEASE_DIR}/libBoxer.a)
 endif()
 
 

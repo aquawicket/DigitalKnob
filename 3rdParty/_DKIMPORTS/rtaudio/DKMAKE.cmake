@@ -17,10 +17,10 @@ if(LINUX OR RASPBERRY OR ANDROID)
 	dk_define			(__LINUX_ALSA__)
 endif()
 dk_include				(${RTAUDIO})
-UNIX_dk_libDebug		(${RTAUDIO}/${OS}/${DEBUG_DIR}/librtaudio.a)
-UNIX_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/librtaudio.a)
-WIN_dk_libDebug			(${RTAUDIO}/${OS}/${DEBUG_DIR}/rtaudiod.lib)
-WIN_dk_libRelease		(${RTAUDIO}/${OS}/${RELEASE_DIR}/rtaudio.lib)
+UNIX_dk_libDebug		(${RTAUDIO}/${triple}/${DEBUG_DIR}/librtaudio.a)
+UNIX_dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/librtaudio.a)
+WIN_dk_libDebug			(${RTAUDIO}/${triple}/${DEBUG_DIR}/rtaudiod.lib)
+WIN_dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/rtaudio.lib)
 
 
 ### GENERATE ###

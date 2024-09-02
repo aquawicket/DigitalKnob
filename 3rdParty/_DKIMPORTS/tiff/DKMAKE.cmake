@@ -24,20 +24,20 @@ dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip
 
 ### LINK ###
 dk_include					(${TIFF}/libtiff								TIFF_INCLUDE_DIR)
-dk_include					(${TIFF}/${OS}/libtiff							TIFF_INCLUDE_DIR2)
-DEBUG_dk_include			(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
-RELEASE_dk_include			(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
+dk_include					(${TIFF}/${triple}/libtiff							TIFF_INCLUDE_DIR2)
+DEBUG_dk_include			(${TIFF}/${triple}/libtiff/${DEBUG_DIR})
+RELEASE_dk_include			(${TIFF}/${triple}/libtiff/${RELEASE_DIR})
 if(MULTI_CONFIG)
 	if(MSVC)
-		WIN_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib	TIFF_LIBRARY_DEBUG)
-		WIN_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib	TIFF_LIBRARY_RELEASE)
+		WIN_dk_libDebug		(${TIFF}/${triple}/libtiff/${DEBUG_DIR}/tiffd.lib	TIFF_LIBRARY_DEBUG)
+		WIN_dk_libRelease	(${TIFF}/${triple}/libtiff/${RELEASE_DIR}/tiff.lib	TIFF_LIBRARY_RELEASE)
 	else()
-		dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a	TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a	TIFF_LIBRARY_RELEASE)
+		dk_libDebug			(${TIFF}/${triple}/libtiff/${DEBUG_DIR}/libtiff.a	TIFF_LIBRARY_DEBUG)
+		dk_libRelease		(${TIFF}/${triple}/libtiff/${RELEASE_DIR}/libtiff.a	TIFF_LIBRARY_RELEASE)
 	endif()
 else()	
-		dk_libDebug			(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a	TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a TIFF_LIBRARY_RELEASE)
+		dk_libDebug			(${TIFF}/${triple}/${DEBUG_DIR}/libtiff/libtiff.a	TIFF_LIBRARY_DEBUG)
+		dk_libRelease		(${TIFF}/${triple}/${RELEASE_DIR}/libtiff/libtiff.a TIFF_LIBRARY_RELEASE)
 endif()
 
 
@@ -70,19 +70,19 @@ elseif(APPLE)
 else()
 	DEBUG_dk_set(TIFF_CMAKE
 		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff
+		-DTIFF_INCLUDE_DIR2=${TIFF}/${triple}/${DEBUG_DIR}/libtiff
 		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
 		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/${DEBUG_DIR}/libtiff"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/${DEBUG_DIR}/libtiff"
+		"-DCMAKE_C_FLAGS=-I${TIFF}/${triple}/${DEBUG_DIR}/libtiff"
+		"-DCMAKE_CXX_FLAGS=-I${TIFF}/${triple}/${DEBUG_DIR}/libtiff"
 		"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARY_DEBUG}")
 	RELEASE_dk_set(TIFF_CMAKE
 		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${RELEASE_DIR}/libtiff
+		-DTIFF_INCLUDE_DIR2=${TIFF}/${triple}/${RELEASE_DIR}/libtiff
 		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
 		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/${RELEASE_DIR}/libtiff"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/${RELEASE_DIR}/libtiff"
+		"-DCMAKE_C_FLAGS=-I${TIFF}/${triple}/${RELEASE_DIR}/libtiff"
+		"-DCMAKE_CXX_FLAGS=-I${TIFF}/${triple}/${RELEASE_DIR}/libtiff"
 		"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARY_RELEASE}")
 endif()
 

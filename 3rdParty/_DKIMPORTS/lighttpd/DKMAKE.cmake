@@ -9,12 +9,12 @@ dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${LIGHTTPD}/lib)
-DEBUG_dk_include	(${LIGHTTPD}/${OS}/${DEBUG_DIR})
-RELEASE_dk_include	(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-UNIX_dk_libDebug	(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
-UNIX_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
-WIN_dk_libDebug		(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
+DEBUG_dk_include	(${LIGHTTPD}/${triple}/${DEBUG_DIR})
+RELEASE_dk_include	(${LIGHTTPD}/${triple}/${RELEASE_DIR})
+UNIX_dk_libDebug	(${LIGHTTPD}/${triple}/lib/${DEBUG_DIR}/liblighttpd.a)
+UNIX_dk_libRelease	(${LIGHTTPD}/${triple}/lib/${RELEASE_DIR}/liblighttpd.a)
+WIN_dk_libDebug		(${LIGHTTPD}/${triple}/lib/${DEBUG_DIR}/liblighttpd.lib)
+WIN_dk_libRelease	(${LIGHTTPD}/${triple}/lib/${RELEASE_DIR}/liblighttpd.lib)
 
 
 ### GENERATE ###

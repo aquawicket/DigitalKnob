@@ -9,10 +9,10 @@ dk_import(https://github.com/OpenMathLib/OpenBLAS/archive/refs/heads/develop.zip
 
 ### LINK ###
 dk_include				(${OPENBLAS})
-UNIX_dk_libDebug		(${OPENBLAS}/${OS}/${DEBUG_DIR}/lib/libopenblas.a)
-UNIX_dk_libRelease		(${OPENBLAS}/${OS}/${RELEASE_DIR}/lib/libopenblas.a)
-WIN_dk_libDebug			(${OPENBLAS}/${OS}/lib/DEBUG/openblas.lib)
-WIN_dk_libRelease		(${OPENBLAS}/${OS}/lib/RELEASE/openblas.lib)
+UNIX_dk_libDebug		(${OPENBLAS}/${triple}/${DEBUG_DIR}/lib/libopenblas.a)
+UNIX_dk_libRelease		(${OPENBLAS}/${triple}/${RELEASE_DIR}/lib/libopenblas.a)
+WIN_dk_libDebug			(${OPENBLAS}/${triple}/lib/DEBUG/openblas.lib)
+WIN_dk_libRelease		(${OPENBLAS}/${triple}/lib/RELEASE/openblas.lib)
 
 
 ### 3RDPARTY LINK ###

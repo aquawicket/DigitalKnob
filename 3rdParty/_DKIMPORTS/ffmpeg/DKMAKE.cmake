@@ -26,41 +26,41 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 ### LINK ###
 dk_include			(${FFMPEG})
-DEBUG_dk_include	(${FFMPEG}/${OS}/${DEBUG_DIR})
-RELEASE_dk_include	(${FFMPEG}/${OS}/${RELEASE_DIR})
+DEBUG_dk_include	(${FFMPEG}/${triple}/${DEBUG_DIR})
+RELEASE_dk_include	(${FFMPEG}/${triple}/${RELEASE_DIR})
 
 # libavdevice
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/libavdevice.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/libavdevice.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libavdevice/libavdevice.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libavdevice/libavdevice.a)
 
 # libswresample
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/libswresample.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/libswresample.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libswresample/libswresample.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libswresample/libswresample.a)
 
 # libavfilter
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/libavfilter.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/libavfilter.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libavfilter/libavfilter.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libavfilter/libavfilter.a)
 
 # libavutil
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/libavutil.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/libavutil.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libavutil/libavutil.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libavutil/libavutil.a)
 
 # libswscale
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/libswscale.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/libswscale.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libswscale/libswscale.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libswscale/libswscale.a)
 
 # libavcodec
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/libavcodec.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/libavcodec.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libavcodec/libavcodec.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libavcodec/libavcodec.a)
 
 # libavformat
-dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/libavformat.a)
-dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
+dk_libDebug		(${FFMPEG}/${triple}/${DEBUG_DIR}/libavformat/libavformat.a)
+dk_libRelease	(${FFMPEG}/${triple}/${RELEASE_DIR}/libavformat/libavformat.a)
 
 
 ### GENERATE / COMPILE ###
 
-#DEBUG_dk_cd(${FFMPEG}/${OS}/${DEBUG_DIR})
+#DEBUG_dk_cd(${FFMPEG}/${triple}/${DEBUG_DIR})
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
 EMSCRIPTEN_DEBUG_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
@@ -147,7 +147,7 @@ WIN_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-
 #endif()
 
 
-#RELEASE_dk_cd(${FFMPEG}/${OS}/${RELEASE_DIR})
+#RELEASE_dk_cd(${FFMPEG}/${triple}/${RELEASE_DIR})
 #EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure
 EMSCRIPTEN_RELEASE_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 

@@ -13,8 +13,8 @@ dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include		(${HARFBUZZ}/src									HARFBUZZ_INCLUDE_DIR)
-dk_libDebug		(${HARFBUZZ}/${OS}/${DEBUG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
-dk_libRelease	(${HARFBUZZ}/${OS}/${RELEASE_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
+dk_libDebug		(${HARFBUZZ}/${triple}/${DEBUG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
+dk_libRelease	(${HARFBUZZ}/${triple}/${RELEASE_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
 
 
 ### GENERATE ###

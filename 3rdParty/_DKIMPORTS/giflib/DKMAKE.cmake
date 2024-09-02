@@ -25,8 +25,8 @@ if(GIFLIB_USE_CMAKE)
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
 	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
+	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
 	
 	### 3RDPARTY LINK ###
 	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
@@ -38,8 +38,8 @@ else()
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
 	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
+	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
 
 	### 3RDPARTY LINK ###
 	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
