@@ -3,7 +3,6 @@ if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
 if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & pause & exit 1
 
-
 (set \n=^^^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
 )
@@ -13,41 +12,41 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::#
 ::#
 :DK
-	:: HOME variable. For analogy with Unix systems.
-	if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
-	set "setlocal=setlocal enableDelayedExpansion"
-	set "NO_STDOUT=1>nul"
-	set "NO_STDERR=2>nul"
-	set "NO_STD=1>nul 2>nul"
-	if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
-	if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
-	if "!DE!" == ""   set "return=exit /b !errorlevel!"
-	if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-	
+    :: HOME variable. For analogy with Unix systems.
+    if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
+    set "setlocal=setlocal enableDelayedExpansion"
+    set "NO_STDOUT=1>nul"
+    set "NO_STDERR=2>nul"
+    set "NO_STD=1>nul 2>nul"
+    if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
+    if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
+    if "!DE!" == ""   set "return=exit /b !errorlevel!"
+    if "!DE!" neq ""  set "return=exit /b %errorlevel%"
+
     ::###### Initialize Language specifics ######
     call :dk_init
-	
-	::###### Reload Main Script with cmd ######
+
+    ::###### Reload Main Script with cmd ######
     call :dk_reloadWithCmd %~1
-	
-	::############ Get DKBATCH variables ############
+
+    ::############ Get DKBATCH variables ############
     call :dk_DKBATCH_VARS
-	
+
     ::############ Get DKHTTP variables ############
     call :dk_DKHTTP_VARS
 
-	::############ get dk_source and dk_call ######
-	call :dk_initFiles
-	
+    ::############ get dk_source and dk_call ######
+    call :dk_initFiles
+
     ::############ Setup dk_callStack ############
-	call dk_source dk_callStack
+    call dk_source dk_callStack
     call dk_callStack
     :dk_callStackReturn
 
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
     ::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
-	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
+    ::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
@@ -60,18 +59,18 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 
     ::############ Set Options ############
     ::dk_setOptions
-	
+
     ::############ LOAD FUNCTION FILES ############
-	set "dk_call=call dk_call"
-	::set "dk_call=call"
+    set "dk_call=call dk_call"
+    ::set "dk_call=call"
     call dk_source dk_debugFunc
-	%dk_call% dk_color
-	%dk_call% dk_logo
-	
+    %dk_call% dk_color
+    %dk_call% dk_logo
+
     if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
     ::%DK% dk_load %DKSCRIPT_PATH%
-	
+
     ::###### DKTEST MODE ######
     if "%DKSCRIPT_DIR%" neq "%DKBATCH_FUNCTIONS_DIR%" %return%
     %dk_call% dk_echo
@@ -90,7 +89,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_echo
 ::#
 :dk_echo
-	echo %~1
+    echo %~1
 %endfunction%
 
 
@@ -98,7 +97,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_init
 ::#
 :dk_init
-	call :dk_echo "Loading DKBatch DigitalKnob . . ."
+    call :dk_echo "Loading DKBatch DigitalKnob . . ."
 %endfunction%
 
 
@@ -106,18 +105,18 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_reloadWithCmd
 ::#
 :dk_reloadWithCmd
-	if not exist "%~1" echo :dk_reloadWithCmd must be called with %%~0. I.E.  "call :dk_reloadWithCmd" %%~0 & pause & exit 1
-	if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
-	if not exist "%DKSCRIPT_PATH%"  %return%
-	if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
-	
-	if defined RELOADED goto:end_dk_reloadWithCmd
-		echo "reloading with delayed expansion . . ."
-		set "RELOADED=1"
-		set "DKINIT="
-		
-		"%ComSpec%" /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
-	:end_dk_reloadWithCmd
+    if not exist "%~1" echo :dk_reloadWithCmd must be called with %%~0. I.E.  "call :dk_reloadWithCmd" %%~0 & pause & exit 1
+    if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
+    if not exist "%DKSCRIPT_PATH%"  %return%
+    if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+
+    if defined RELOADED goto:end_dk_reloadWithCmd
+        echo "reloading with delayed expansion . . ."
+        set "RELOADED=1"
+        set "DKINIT="
+
+        "%ComSpec%" /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
+    :end_dk_reloadWithCmd
 %endfunction%
 
 
@@ -128,9 +127,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
     if not defined DKBATCH_DIR             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
     if defined DKBATCH_DIR                 set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     if not defined DKBATCH_FUNCTIONS_DIR   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-	if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-	if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-	if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp\") do set "DKTEMP_DIR=%%~dpZ"
+    if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
+    if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
+    if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp\") do set "DKTEMP_DIR=%%~dpZ"
 %endfunction%
 
 
@@ -148,7 +147,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_initFiles
 ::#
 :dk_initFiles
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
+    if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd')"
     if not exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd', '%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd')"
 %endfunction%
 
@@ -157,16 +156,16 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_DKSCRIPT_VARS
 ::#
 :dk_DKSCRIPT_VARS
-	if not defined DKSCRIPT_PATH       set "DKSCRIPT_PATH=%__FILE__%"
-	if not exist "%DKSCRIPT_PATH%"     set "DKSCRIPT_PATH=%0"
-	set "DKSCRIPT_ARGS=%__ARGS__%"
-	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_DIR=%%~dpZ"
-	set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
-	
-	::### ASSETS ###
-	if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
-	if exist %DKASSETS_DIR%            set "PATH=%DKASSETS_DIR%;%PATH%"
+    if not defined DKSCRIPT_PATH       set "DKSCRIPT_PATH=%__FILE__%"
+    if not exist "%DKSCRIPT_PATH%"     set "DKSCRIPT_PATH=%0"
+    set "DKSCRIPT_ARGS=%__ARGS__%"
+    for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_DIR=%%~dpZ"
+    set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+    for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
+
+    ::### ASSETS ###
+    if not defined DKASSETS_DIR        set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
+    if exist %DKASSETS_DIR%            set "PATH=%DKASSETS_DIR%;%PATH%"
 %endfunction%
 
 
@@ -179,6 +178,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
-	
+
     %DKSCRIPT_NAME%
 %endfunction%
