@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 
 ::####################################################################
 ::# test_comman_substitution.cmd

@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 
 %DKDOWNLOAD_DIR%\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
