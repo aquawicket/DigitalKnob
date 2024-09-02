@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1
     
     :: load if it's an existing full path file
-    if exist "%~1" goto:eof    &:: NOTE: whould we add the dirpath to the PATH environment variable here?
+    if exist "%~1" goto:eof    &:: NOTE: should we add the dirpath to the PATH environment variable here?
     
     
     :: If it's a dk_function, download if it doesn't exist then load it
