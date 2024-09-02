@@ -8,15 +8,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
 	call dk_debugFunc 1 2
 
-	::%dk_call% dk_set variable "%1"
 	if defined %~1 (
-		if defined "%~2" (endlocal & call set "%2=true")
-		(call ) %NO_STD%
-		goto:eof
+		if "%~2" neq "" (endlocal & call set "%2=true")
+		exit /b 0
 	)
 	
-	if defined "%~2" (endlocal & call set "%2=false")
-    (call) %NO_STD%
+	if "%~2" neq "" (endlocal & call set "%2=false")
+    exit /b 1
 %endfunction%
 
 
