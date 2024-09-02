@@ -51,7 +51,8 @@ function(dk_getTargetTriple)
 	
 	
 	### Set target_triple / TARGET_TRIPLE / <OS>_<ARCH>_<ENV> ###
-	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        = win_x86_64_clang	
+	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        = win_x86_64_clang
+	dk_set(triple ${triple})					# global cache the varible
 	dk_set(target_triple ${triple})				# target_triple = win_x86_64_clang							
 	dk_toUpper(${triple} TRIPLE)				# TRIPLE        = WIN_X86_64_CLANG
 	dk_set(TARGET_TRIPLE ${TRIPLE})				# TARGET_TRIPLE = WIN_X86_64_CLANG	
