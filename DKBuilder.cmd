@@ -1,6 +1,6 @@
 @echo off
 
-::set "ENABLE_dk_debugFunc=1"	
+::set "ENABLE_dk_debugFunc=1"
 
 ::###### DK_INIT ######
 set "DKHTTP_DK_CMD=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
