@@ -7,14 +7,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_generate
  setlocal
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+    
     %dk_call% dk_setTitle Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     %dk_call% dk_echo
-	%dk_call% dk_info "##################################################################"
-	%dk_call% dk_info "      Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL%"
-	%dk_call% dk_info "##################################################################"
-	%dk_call% dk_echo
+    %dk_call% dk_info "##################################################################"
+    %dk_call% dk_info "      Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL%"
+    %dk_call% dk_info "##################################################################"
+    %dk_call% dk_echo
     
     %dk_call% dk_clearCmakeCache
     %dk_call% dk_deleteTempFiles
@@ -22,10 +22,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     if not exist "%TARGET_PATH%\%TARGET_OS%" %dk_call% dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
-	::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"			&:: FIXME: remove the need for call here
-	set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"					
-	::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
-	set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"	
+    ::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"         &:: FIXME: remove the need for call here
+    set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"                    
+    ::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
+    set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"   
         
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set "DKLEVEL=RebuildAll"
@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "CMAKE_ARGS="
     ::if "%TYPE%"=="Debug"           %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=OFF
     if "%TYPE%"=="Debug"             %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-	::if "%TYPE%"=="Release"         %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=OFF & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
+    ::if "%TYPE%"=="Release"         %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=OFF & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="Release"           %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="All"               %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%DKLINK%"=="Static"          %dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON
     if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
-	
+    
     set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
     ::%dk_call% dk_printVar CMAKE_BINARY_DIR
         
@@ -66,52 +66,52 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::%dk_call% dk_appendArgs CMAKE_ARGS --warn-uninitialized
     %dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
     ::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
-	
-	if "%TARGET_OS%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
-	if "%TARGET_OS%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
-	if "%TARGET_OS%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
-	if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
-	if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
-	if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
-	
-	if "%TARGET_OS%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="emscripten"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"	
-	if "%TARGET_OS%"=="ios_arm32"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="ios_arm64"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="iossim_x86"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="iossim_x86_64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="linux_x86"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="linux_x86_64"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="mac_x86"            %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="mac_x86_64"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
-	if "%TARGET_OS%"=="raspberry_arm32"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="raspberry_arm64"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-	if "%TARGET_OS%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022"
-
-::	###### CMAKE_TOOLCHAIN_FILE ######
-::	%dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
-::	%dk_call% dk_assertPath TOOLCHAIN
-::	%dk_call% dk_printVar TOOLCHAIN
-::	%dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
-::	if exist %TOOLCHAIN% %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
     
-	
-::	###### WSL CMake Fix ######
+    if "%TARGET_OS%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANGARM64
+    if "%TARGET_OS%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG32
+    if "%TARGET_OS%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW32
+    if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
+    if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
+    if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
+    
+    if "%TARGET_OS%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="emscripten"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"  
+    if "%TARGET_OS%"=="ios_arm32"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="ios_arm64"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="iossim_x86"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="iossim_x86_64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="linux_x86"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="linux_x86_64"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="mac_x86"            %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="mac_x86_64"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
+    if "%TARGET_OS%"=="raspberry_arm32"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="raspberry_arm64"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+    if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022"
+
+::  ###### CMAKE_TOOLCHAIN_FILE ######
+::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
+::  %dk_call% dk_assertPath TOOLCHAIN
+::  %dk_call% dk_printVar TOOLCHAIN
+::  %dk_call% dk_set TOOLCHAIN_FILE "%%TOOLCHAIN:^\=^/%%"
+::  if exist %TOOLCHAIN% %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=%TOOLCHAIN_FILE%
+    
+    
+::  ###### WSL CMake Fix ######
 ::  if defined WSLENV; then 
-::		cd "$DKCMAKE_DIR"
-::		set -- "$@" "."
-::	fi
-	
-::	###### CMake Configure ######
-	if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
-	
+::      cd "$DKCMAKE_DIR"
+::      set -- "$@" "."
+::  fi
+    
+::  ###### CMake Configure ######
+    if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+    
     %dk_call% dk_info "****** CMAKE COMMAND ******"
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     call "%CMAKE_EXE%" %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
@@ -122,7 +122,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_generate
+    call dk_debugFunc 0
+    
+    %dk_call% dk_generate
 %endfunction%

@@ -61,7 +61,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
     ::2: ###### CREATE CALLSTACK ENTRY ######
     call dk_callStack
     :dk_callStackReturn
-	
+    
     set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
     set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
     ::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"

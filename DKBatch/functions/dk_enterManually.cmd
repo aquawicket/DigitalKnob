@@ -7,10 +7,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_enterManually
  setlocal
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+    
     %dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
-	%dk_call% dk_keyboardInput input
+    %dk_call% dk_keyboardInput input
 
     set "APP=%input%"
   
@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_enterManually
+    call dk_debugFunc 0
+    
+    %dk_call% dk_enterManually
 %endfunction%

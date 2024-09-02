@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_postBuildMenu
  setlocal
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+    
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     %dk_call% dk_echo
     echo %APP% %TARGET_OS% %TYPE%
@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_postBuildMenu
+    call dk_debugFunc 0
+    
+    %dk_call% dk_postBuildMenu
 %endfunction%

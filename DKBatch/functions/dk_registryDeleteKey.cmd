@@ -5,7 +5,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 :: dk_registryDeleteKey() <reg_path>
 ::
 :: reg.exe /? 
-::	REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
+::  REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
 ::
 ::  KeyName    [\\Machine\]FullKey
 ::    Machine  Name of remote machine - omitting defaults to the current machine.
@@ -39,12 +39,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::
 :dk_registryDeleteKey
  setlocal
-	call dk_debugFunc 1
+    call dk_debugFunc 1
 
-	%dk_call% dk_registryKeyExists "%~1" || %dk_call% dk_warning "%~1 does not exist"
-	
-	echo "%SystemRoot%\System32\reg.exe" delete "%~1" /f
-	"%SystemRoot%\System32\reg.exe" delete "%~1" /f
+    %dk_call% dk_registryKeyExists "%~1" || %dk_call% dk_warning "%~1 does not exist"
+    
+    echo "%SystemRoot%\System32\reg.exe" delete "%~1" /f
+    "%SystemRoot%\System32\reg.exe" delete "%~1" /f
 goto:eof
 
 
@@ -53,7 +53,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
+    call dk_debugFunc 0
 
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
+    %dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.txt"
 goto:eof

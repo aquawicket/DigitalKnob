@@ -18,33 +18,33 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_timer
  setlocal
-	setlocal enableDelayedExpansion
-	
-	::%dk_call% dk_getTime centisecond second minute hour
-	for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
-	for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (set "hour=%%A" & set "minute=%%B" & set "second=%%C" & set "centiseconds=%%D")
-	set /a "second=100%second%%%100,minute=100%minute%%%100,hour=100%hour: =%%%100"
-	::echo TIME = %hour%:%minute%:%second%.%centiseconds%
-	
-	::%dk_call% dk_dateToCentiSeconds seconds centiseconds %centisecond% %second% %minute% %hour%
-	set /a "seconds=(hour*60*60)+(minutes*60)+second"
-	set /a "currentTime=%seconds%%centiseconds%"	
+    setlocal enableDelayedExpansion
+    
+    ::%dk_call% dk_getTime centisecond second minute hour
+    for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
+    for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (set "hour=%%A" & set "minute=%%B" & set "second=%%C" & set "centiseconds=%%D")
+    set /a "second=100%second%%%100,minute=100%minute%%%100,hour=100%hour: =%%%100"
+    ::echo TIME = %hour%:%minute%:%second%.%centiseconds%
+    
+    ::%dk_call% dk_dateToCentiSeconds seconds centiseconds %centisecond% %second% %minute% %hour%
+    set /a "seconds=(hour*60*60)+(minutes*60)+second"
+    set /a "currentTime=%seconds%%centiseconds%"    
 
-	if {!%~1.startTime!}=={} endlocal & set %1.startTime=%currentTime% & set %1.lastTime=%currentTime% & goto:eof
-	set "startTime=!%~1.startTime!
-	set "lastTime=!%~1.lastTime!"
-	
-	::echo startTime = %startTime%
-	::echo lastTime = %lastTime%
-	::echo currentTime = %currentTime%
-		
-	set /a "lastElapsed=currentTime-lastTime"
-	set /a "elapsed.whole=%lastElapsed%/100, elapsed.fraction=%lastElapsed%%%100"
+    if {!%~1.startTime!}=={} endlocal & set %1.startTime=%currentTime% & set %1.lastTime=%currentTime% & goto:eof
+    set "startTime=!%~1.startTime!
+    set "lastTime=!%~1.lastTime!"
+    
+    ::echo startTime = %startTime%
+    ::echo lastTime = %lastTime%
+    ::echo currentTime = %currentTime%
+        
+    set /a "lastElapsed=currentTime-lastTime"
+    set /a "elapsed.whole=%lastElapsed%/100, elapsed.fraction=%lastElapsed%%%100"
 
-	endlocal & set "%1.lastTime=%currentTime%" & set "%1=%elapsed.whole%.%elapsed.fraction%"
-	
-	::echo %~1.startTime = !%~1.startTime!
-	::echo %~1.lastTime = !%~1.lastTime!
+    endlocal & set "%1.lastTime=%currentTime%" & set "%1=%elapsed.whole%.%elapsed.fraction%"
+    
+    ::echo %~1.startTime = !%~1.startTime!
+    ::echo %~1.lastTime = !%~1.lastTime!
 goto:eof
 
 
@@ -53,39 +53,39 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0	
-	
-	%dk_call% dk_timer t1
+    call dk_debugFunc 0 
+    
+    %dk_call% dk_timer t1
 
-	echo:
-	echo waiting about 1 millisecond
-	%dk_call% dk_sleep 1
-	%dk_call% dk_timer t1
-	echo Seconds since last call: = %t1%
+    echo:
+    echo waiting about 1 millisecond
+    %dk_call% dk_sleep 1
+    %dk_call% dk_timer t1
+    echo Seconds since last call: = %t1%
 
-	echo:
-	echo waiting about 10 milliseconds
-	%dk_call% dk_sleep 10
-	%dk_call% dk_timer t1
-	echo Seconds since last call: = %t1%
-	
-	echo:
-	echo waiting about 100 milliseconds
-	%dk_call% dk_sleep 100
-	%dk_call% dk_timer t1
-	echo Seconds since last call: = %t1%
-	
-	echo:
-	echo waiting about 1000 milliseconds
-	%dk_call% dk_sleep 1000
-	%dk_call% dk_timer t1
-	echo Seconds since last call: = %t1%
-	
-	:timerLoop
-		echo:
-		echo waiting about 1000 milliseconds
-		%dk_call% dk_sleep 1000
-		%dk_call% dk_timer t1
-		echo Seconds since last call: = %t1%
-	goto:timerLoop
-goto:eof	
+    echo:
+    echo waiting about 10 milliseconds
+    %dk_call% dk_sleep 10
+    %dk_call% dk_timer t1
+    echo Seconds since last call: = %t1%
+    
+    echo:
+    echo waiting about 100 milliseconds
+    %dk_call% dk_sleep 100
+    %dk_call% dk_timer t1
+    echo Seconds since last call: = %t1%
+    
+    echo:
+    echo waiting about 1000 milliseconds
+    %dk_call% dk_sleep 1000
+    %dk_call% dk_timer t1
+    echo Seconds since last call: = %t1%
+    
+    :timerLoop
+        echo:
+        echo waiting about 1000 milliseconds
+        %dk_call% dk_sleep 1000
+        %dk_call% dk_timer t1
+        echo Seconds since last call: = %t1%
+    goto:timerLoop
+goto:eof    

@@ -8,21 +8,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_asciiToHex
  setlocal
-	call dk_debugFunc 2
-	
+    call dk_debugFunc 2
+    
     :: Store the string in chr.tmp file
-	set /P "=%~1" < NUL > chr.tmp
+    set /P "=%~1" < NUL > chr.tmp
 
     :: Create zero.tmp file with the same number of Ascii zero characters
     for %%a in (chr.tmp) do fsutil file createnew zero.tmp %%~Za > NUL
 
     :: Compare both files with FC /B and get the differences
-	set "hex="
-	for /F "skip=1 tokens=2" %%a in ('fc /B chr.tmp zero.tmp') do set "hex=%%a"
+    set "hex="
+    for /F "skip=1 tokens=2" %%a in ('fc /B chr.tmp zero.tmp') do set "hex=%%a"
     del chr.tmp zero.tmp
     set "hex=0x%hex:~-2%"
-	
-	endlocal & set "%2=%hex%"
+    
+    endlocal & set "%2=%hex%"
 %endfunction%
 
 
@@ -31,9 +31,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_set myAscii x
-	%dk_call% dk_asciiToHex myAscii myHex
-	%dk_call% dk_info "myHex = %myHex%"
+    call dk_debugFunc 0
+    
+    %dk_call% dk_set myAscii x
+    %dk_call% dk_asciiToHex myAscii myHex
+    %dk_call% dk_info "myHex = %myHex%"
 %endfunction%

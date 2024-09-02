@@ -6,12 +6,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_endMessage
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_setTitle Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
+    call dk_debugFunc 0
+    
+    %dk_call% dk_setTitle Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
     %dk_call% dk_echo
     %dk_call% dk_info "####################################################################"
-	%dk_call% dk_info "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
+    %dk_call% dk_info "****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******"
     %dk_call% dk_info "####################################################################"
     %dk_call% dk_echo
         
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_endMessage
+    call dk_debugFunc 0
+    
+    %dk_call% dk_endMessage
 %endfunction%

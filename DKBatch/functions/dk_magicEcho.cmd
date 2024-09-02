@@ -102,8 +102,8 @@ echo FAIL
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+    
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?
 %endfunction%   

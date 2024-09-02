@@ -8,13 +8,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_decimalToAscii
  setlocal
-	call dk_debugFunc 2
-	
-	setlocal
-	%dk_call% dk_decimalToHex %~1 hex
-	%dk_call% dk_hexToAscii %hex% ascii
-	
-	endlocal & set "%2=%ascii%"
+    call dk_debugFunc 2
+    
+    setlocal
+    %dk_call% dk_decimalToHex %~1 hex
+    %dk_call% dk_hexToAscii %hex% ascii
+    
+    endlocal & set "%2=%ascii%"
 %endfunction%
 
 
@@ -26,9 +26,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_set myDecimal 123
-	%dk_call% dk_decimalToAscii "%myDecimal%" myAscii
-	%dk_call% dk_printVar myAscii
+    call dk_debugFunc 0
+    
+    %dk_call% dk_set myDecimal 123
+    %dk_call% dk_decimalToAscii "%myDecimal%" myAscii
+    %dk_call% dk_printVar myAscii
 %endfunction%

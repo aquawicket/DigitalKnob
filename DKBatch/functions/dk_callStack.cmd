@@ -69,7 +69,7 @@ if ":" == "%func:~0,1%" ( goto %func% )
           set /a "__ARGC__=%%a"
        )
     )
-	
+    
     call set "is_batch=%%BATCH_SOURCE_B:*%%~f0=%%"
     if defined is_batch (
         set "SOURCE_TYPE_B=batch"

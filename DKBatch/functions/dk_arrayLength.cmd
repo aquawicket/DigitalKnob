@@ -13,16 +13,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_arrayLength
  setlocal
-	call dk_debugFunc 2
-	
-	setlocal
-	set _length_=0
-	:dk_arrayLength_loop
-	if defined %~1[%_length_%] ( 
-	   set /a _length_+=1
-	   goto :dk_arrayLength_loop 
-	)
-	endlocal & set "%2=%_length_%"
+    call dk_debugFunc 2
+    
+    setlocal
+    set _length_=0
+    :dk_arrayLength_loop
+    if defined %~1[%_length_%] ( 
+       set /a _length_+=1
+       goto :dk_arrayLength_loop 
+    )
+    endlocal & set "%2=%_length_%"
 %endfunction%
 
 
@@ -31,14 +31,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	set "myArrayA[0]=a b c"
-	set "myArrayA[1]=1 2 3"
-	set "myArrayA[2]=d e f"
-	set "myArrayA[3]=4 5 6"
-	set "myArrayA[4]=h i j"
-	
-	%dk_call% dk_arrayLength myArrayA myArrayLengthA
-	%dk_call% dk_printVar myArrayLengthA
+    call dk_debugFunc 0
+    
+    set "myArrayA[0]=a b c"
+    set "myArrayA[1]=1 2 3"
+    set "myArrayA[2]=d e f"
+    set "myArrayA[3]=4 5 6"
+    set "myArrayA[4]=h i j"
+    
+    %dk_call% dk_arrayLength myArrayA myArrayLengthA
+    %dk_call% dk_printVar myArrayLengthA
 %endfunction%

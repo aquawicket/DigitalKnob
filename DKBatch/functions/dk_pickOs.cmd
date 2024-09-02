@@ -8,8 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 :dk_pickOs
  %setlocal%
     call dk_debugFunc 1
-	
-	%dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    
+    %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     %dk_call% dk_echo
     %dk_call% dk_echo %APP% %TARGET_OS% %TYPE%
        
@@ -51,16 +51,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo 33) Windows x86_64 (clang)
     echo 34) Windows x86_64 (ucrt)
     echo 35) Windows x86_64 (msvc)
-	echo 36) none
+    echo 36) none
     echo 37) Clear Screen
     echo 38) Go Back
     echo 39) Exit    
-	
-	%dk_call% dk_echo 
+    
+    %dk_call% dk_echo 
     %dk_call% dk_echo "Please select an OS to build for"
-	
-	%dk_call% dk_keyboardInput choice
-	::%dk_call% dk_keyboardInputTimeout choice 1 60
+    
+    %dk_call% dk_keyboardInput choice
+    ::%dk_call% dk_keyboardInputTimeout choice 1 60
         
     if "%choice%"=="1" endlocal & set "%1=%DK_HOST_TRIPLE%"     & goto:eof
     if "%choice%"=="2" endlocal & set "%1=android_arm32"        & goto:eof
@@ -97,7 +97,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%choice%"=="33" endlocal & set "%1=win_x86_64_clang"    & goto:eof
     if "%choice%"=="34" endlocal & set "%1=win_x86_64_ucrt"     & goto:eof
     if "%choice%"=="35" endlocal & set "%1=win_x86_64_msvc"     & goto:eof
-	if "%choice%"=="36" endlocal & set "%1=none"                & goto:eof
+    if "%choice%"=="36" endlocal & set "%1=none"                & goto:eof
     if "%choice%"=="37" %dk_call% dk_clearScreen                & goto:eof
     if "%choice%"=="38" %dk_call% dk_unset APP                  & goto:eof
     if "%choice%"=="39" %dk_call% dk_exit                       & goto:eof
@@ -112,7 +112,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_pickOs
+    call dk_debugFunc 0
+    
+    %dk_call% dk_pickOs
 %endfunction%

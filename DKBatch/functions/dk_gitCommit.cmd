@@ -7,18 +7,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_gitCommit
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_gitDiffSummary
-	
-	%dk_call% dk_echo
+    call dk_debugFunc 0
+    
+    %dk_call% dk_gitDiffSummary
+    
+    %dk_call% dk_echo
     %dk_call% dk_echo "Please enter some details about this commit, then press enter."
-	%dk_call% dk_keyboardInput message
+    %dk_call% dk_keyboardInput message
         
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
+    %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
     cd %DKBRANCH_DIR%
     
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
     %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global credential.helper" STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store
@@ -64,7 +64,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_gitCommit
+    call dk_debugFunc 0
+    
+    %dk_call% dk_gitCommit
 %endfunction%

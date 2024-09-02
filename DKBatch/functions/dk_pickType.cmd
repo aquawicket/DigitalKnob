@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_pickType
  setlocal
-	call dk_debugFunc 1
+    call dk_debugFunc 1
 
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     %dk_call% dk_echo
@@ -16,21 +16,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo 1) Debug
     echo 2) Release
     echo 3) All
-	echo 4) none
+    echo 4) none
     echo 5) Clear Screen
     echo 6) Go Back
     echo 7) Exit
-	
-	%dk_call% dk_echo 
+    
+    %dk_call% dk_echo 
     %dk_call% dk_echo "Please select a build type."
-	
-	%dk_call% dk_keyboardInput choice
-	::%dk_call% dk_keyboardInputTimeout choice 1 60 
+    
+    %dk_call% dk_keyboardInput choice
+    ::%dk_call% dk_keyboardInputTimeout choice 1 60 
 
-    if "%choice%"=="1" set "%1=Debug"   			 & goto:eof
-    if "%choice%"=="2" set "%1=Release"			     & goto:eof
-    if "%choice%"=="3" set "%1=All"     			 & goto:eof
-	if "%choice%"=="4" set "%1=none"    			 & goto:eof
+    if "%choice%"=="1" set "%1=Debug"                & goto:eof
+    if "%choice%"=="2" set "%1=Release"              & goto:eof
+    if "%choice%"=="3" set "%1=All"                  & goto:eof
+    if "%choice%"=="4" set "%1=none"                 & goto:eof
     if "%choice%"=="5" %dk_call% dk_clearScreen      & goto:eof
     if "%choice%"=="6" %dk_call% dk_unset TARGET_OS  & goto:eof
     if "%choice%"=="7" %dk_call% dk_exit             & goto:eof
@@ -46,8 +46,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
+    call dk_debugFunc 0
 
-	%dk_call% dk_pickType
+    %dk_call% dk_pickType
  endlocal
 %endfunction%

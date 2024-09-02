@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_setTitle
  setlocal
-	call dk_debugFunc 0 99
-	
-	title %*
+    call dk_debugFunc 0 99
+    
+    title %*
 goto:eof
 
 
@@ -18,7 +18,7 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	%dk_call% dk_setTitle "DKTEST()"
+    call dk_debugFunc 0
+    
+    %dk_call% dk_setTitle "DKTEST()"
 goto:eof

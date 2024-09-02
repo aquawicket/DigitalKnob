@@ -8,19 +8,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_hexToAscii
  setlocal
-	call dk_debugFunc 2
-	
-	set "hex=%~1"
-	%dk_call% dk_fileWrite hex.tmp %hex:~-2%
-	
-	::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"
-	
-	%dk_call% certutil -decodehex hex.tmp ascii.tmp >nul
-	set "ascii="
-	set /p ascii=<ascii.tmp
-	( del hex.tmp & del ascii.tmp )>nul
-	
-	endlocal & set "%2=%ascii%"
+    call dk_debugFunc 2
+    
+    set "hex=%~1"
+    %dk_call% dk_fileWrite hex.tmp %hex:~-2%
+    
+    ::for /f %%b in ('forfiles /c "%ComSpec% /c echo 0x1b"') do set "ESC=%%b"
+    
+    %dk_call% certutil -decodehex hex.tmp ascii.tmp >nul
+    set "ascii="
+    set /p ascii=<ascii.tmp
+    ( del hex.tmp & del ascii.tmp )>nul
+    
+    endlocal & set "%2=%ascii%"
 %endfunction%
 
 
@@ -29,8 +29,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-		
-	%dk_call% dk_hexToAscii 0x41 ascii
-	%dk_call% dk_echo "ascii = %ascii%"
+    call dk_debugFunc 0
+        
+    %dk_call% dk_hexToAscii 0x41 ascii
+    %dk_call% dk_echo "ascii = %ascii%"
 %endfunction%

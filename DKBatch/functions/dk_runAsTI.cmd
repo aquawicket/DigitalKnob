@@ -9,12 +9,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_runAsTI
  setlocal
-	call dk_debugFunc 1
-	
-	set ^ #=
-	set "0=%~f0"
-	set 1=%*
-	powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])
+    call dk_debugFunc 1
+    
+    set ^ #=
+    set "0=%~f0"
+    set 1=%*
+    powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])
 goto:eof
 
 
@@ -22,10 +22,10 @@ goto:eof
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
  setlocal
-	call dk_debugFunc 0
-	
-	::%dk_call% dk_runAsTI regedit
-	%dk_call% dk_runAsTI cmd.exe
+    call dk_debugFunc 0
+    
+    ::%dk_call% dk_runAsTI regedit
+    %dk_call% dk_runAsTI cmd.exe
 goto:eof
 
 
