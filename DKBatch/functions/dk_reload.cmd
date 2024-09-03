@@ -14,15 +14,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_clearScreen
     %dk_call% dk_info "reloading %DKSCRIPT_PATH%. . ."
     
-    
     ::###### METHOD 1 ######
-    %dk_call% dk_fileWrite "%DKBATCH_DIR%\reload" "%DKSCRIPT_PATH%"
-    %dk_call% dk_exit 0
-    
-    
+	%dk_call% dk_validate DKTEMP_DIR "%dk_call% dk_setDKTEMP_DIR"
+    %dk_call% dk_fileWrite "%DKTEMP_DIR%\reload" "%DKSCRIPT_PATH%"
+	%dk_call% dk_exit 0
+        
     ::###### METHOD 2 ######
-    start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
-goto:
+    ::start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
+goto:eof
 
 
 

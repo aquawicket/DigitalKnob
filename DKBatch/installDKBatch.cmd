@@ -28,19 +28,19 @@ goto:eof
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "ComSpec=%~2"
 	set "DKSCRIPT_PATH=%~3"
+	set "DKTEMP_DIR=%DKBATCH_FUNCTIONS_DIR%\..\..\..\temp"
 	
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
-	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" & exit %ERRORLEVEL%
+	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%"
 	
 	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% & pause
 	
 	::###### reload ######
-	if not exist %~dp0\reload goto:eof
-	del %~dp0\reload
-	cls
+	if not exist "%DKTEMP_DIR%\reload" pause & goto:eof
+	del "%DKTEMP_DIR%\reload"
 	goto:runDKBatch
 	
 goto:eof
