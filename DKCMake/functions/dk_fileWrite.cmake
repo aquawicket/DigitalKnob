@@ -7,9 +7,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_fileWrite filepath str) 
 	dk_debugFunc(${ARGV})
-	if(NOT ${ARGC} EQUAL 2)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+#	if(NOT ${ARGC} EQUAL 2)
+#		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+#	endif()
 	
 	
 	file(WRITE ${filepath} "${str}")
