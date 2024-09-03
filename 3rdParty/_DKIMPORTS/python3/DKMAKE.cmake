@@ -12,7 +12,7 @@ MAC_HOST_dk_set (PYTHON3_DL ttps://www.python.org/ftp/python/3.11.8/python-3.11.
 
 if(NOT EXISTS ${PYTHON3_EXE})
 	ANDROID_HOST_dk_command(pkg install python -y)
-	LINUX_HOST_dk_command(apt-get install python3)
+	LINUX_HOST_dk_command(sudo apt-get install python3)
 	MAC_HOST_dk_import(${PYTHON3_DL})
 	WIN_HOST_dk_import(${PYTHON3_DL})
 	
