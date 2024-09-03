@@ -19,22 +19,28 @@ dk_assert(EMSDK)
 
 if(WIN_HOST)
 	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat"  install latest COMMAND_ECHO STDOUT)
+else()
+	execute_process(COMMAND                                         "${EMSDK}/emsdk"      install latest COMMAND_ECHO STDOUT)
 endif()
-UNIX_HOST_dk_command(                                         		"${EMSDK}/emsdk"      install latest)
+
 
 
 if(WIN_HOST)
 	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat" activate latest --permanent COMMAND_ECHO STDOUT)
+else()
+	execute_process(COMMAND                                         "${EMSDK}/emsdk"     activate latest --permanent COMMAND_ECHO STDOUT)
 endif()
-UNIX_HOST_dk_command(                                      			"${EMSDK}/emsdk"     activate latest --permanent)
+
 
 
 if(WIN_HOST)
 	#execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}	"${EMSDK}/emsdk_env.bat" COMMAND_ECHO STDOUT)
 	execute_process(COMMAND cmd /c call								"${EMSDK}/emsdk_env.bat" COMMAND_ECHO STDOUT)
+else()
+	execute_process(COMMAND                               chmod 777 "${EMSDK}/emsdk_env.sh"  COMMAND_ECHO STDOUT)
+	execute_process(COMMAND                                         "${EMSDK}/emsdk_env"     COMMAND_ECHO STDOUT)
 endif()
-UNIX_HOST_dk_command(chmod 777 "${EMSDK}/emsdk_env.sh")
-UNIX_HOST_dk_command(                                      			"${EMSDK}/emsdk_env")
+
 
 
 if(WIN_HOST)
