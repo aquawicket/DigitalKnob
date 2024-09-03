@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     %dk_call% dk_commandToVariable "where %recursive% %pattern% %name% %NO_STDERR%" value
     if not defined value %dk_call% dk_notice "%~2 not found"
-    %dk_call% dk_printVar value
+    ::%dk_call% dk_printVar value
     endlocal & set "%1=%value%"
 %endfunction%
 
