@@ -32,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "line[%i%]="           &:: delete the error line from the array
     
     :: WARNING
-    %dk_call% dk_warning "dk_commandToVariable only returns the last line, or, array item from the command.
+    ::%dk_call% dk_todo "dk_commandToVariable only returns the last line, or, array item from the command.
     
     if "!DE!" equ "" set "lastElement=!line[%numLines%]!"
     if "!DE!" neq "" call set "lastElement=%%line[%numLines%]%%"
