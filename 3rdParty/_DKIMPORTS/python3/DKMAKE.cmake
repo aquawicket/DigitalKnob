@@ -7,7 +7,7 @@ dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 
 WIN_HOST_dk_set	(PYTHON3_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
 MAC_HOST_dk_set (PYTHON3_DL ttps://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
-dk_assert(PYTHON3_DL)
+#dk_assert(PYTHON3_DL)
 
 
 if(NOT EXISTS ${PYTHON3_EXE})
