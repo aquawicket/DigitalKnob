@@ -1,6 +1,10 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://packages.msys2.org/base/make
 
+if(CMAKE_MAKE_PROGRAM)
+	return()
+endif()
+
 
 dk_validate(HOST_TRIPLE   "dk_getHostTriple()")
 dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
@@ -19,7 +23,11 @@ if(android)
 	
 elseif(emscripten)
 	dk_validate(EMSDK "dk_depend(emsdk)")
-	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
+	if(WIN_HOST)
+		dk_set(CMAKE_MAKE_PROGRAM "${EMSDK}/mingw/4.6.2_32bit/mingw32-make.exe")
+	else()
+		dk_set(CMAKE_MAKE_PROGRAM "${EMSDK}/upstream/emscripten/emmake${bat}")
+	endif()
 	
 elseif(LINUX_HOST)
 	dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
