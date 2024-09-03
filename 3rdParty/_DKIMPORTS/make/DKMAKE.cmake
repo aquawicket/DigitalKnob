@@ -22,11 +22,10 @@ if(android)
 	endif()
 	
 elseif(emscripten)
-	dk_validate(EMSDK "dk_depend(emsdk)")
 	if(WIN_HOST)
-		dk_set(CMAKE_MAKE_PROGRAM "${EMSDK}/mingw/4.6.2_32bit/mingw32-make.exe")
+		dk_validate(EMSDK "dk_depend(emsdk)")
+		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
 	else()
-		#dk_set(CMAKE_MAKE_PROGRAM "${EMSDK}/upstream/emscripten/emmake")
 		dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
 	endif()
 	
@@ -85,7 +84,6 @@ else()
 	dk_error("Could not determine 'CMAKE_MAKE_PROGRAM'")
 	
 endif()
-
 
 
 dk_assert(CMAKE_MAKE_PROGRAM)

@@ -1361,10 +1361,9 @@ if(EMSCRIPTEN)
 			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
-				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
+				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.sh "${RUN_SCRIPT_DEBUG}")
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh)
 		endif()
 	endif()
