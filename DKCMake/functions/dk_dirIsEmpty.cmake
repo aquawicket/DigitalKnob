@@ -23,8 +23,9 @@ function(dk_dirIsEmpty path rtn_var)
 	else()
 		set(dirIsEmpty true)
 	endif()
-	dk_printVar(dirIsEmpty)
+	#dk_printVar(dirIsEmpty)
 	set(${rtn_var} ${dirIsEmpty} PARENT_SCOPE)
+	#dk_printVar(rtn_var)
 endfunction()
 
 

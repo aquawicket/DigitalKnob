@@ -19,7 +19,7 @@ function(dk_isFunction name rtn_var)
 		set(isFunction 0)
 	endif()
 	
-	dk_printVar(isFunction)
+	#dk_printVar(isFunction)
 	set(${rtn_var} ${isFunction} PARENT_SCOPE)
 endfunction()
 

@@ -28,7 +28,7 @@ function(dk_getTargetTriple)
 #	else()
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
 #	endif()
-	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	#dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 		
 	### Set target_type / TARGET_TYPE ###
 	if(${TARGET_DIR} MATCHES "Debug")	

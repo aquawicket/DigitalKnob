@@ -11,9 +11,8 @@ function(dk_arrayAt array index rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	list(GET ${array} ${index} arrayAt)
-	dk_printVar(arrayAt)
 	set(${rtn_var} ${arrayAt} PARENT_SCOPE)
-	
+	#dk_printVar(rtn_var)
 endfunction()
 
 

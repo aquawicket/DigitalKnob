@@ -32,7 +32,7 @@ function(dk_getExtension path rtn_var)
 			set(extension ${tarextension})
 		endif()
 	endif()
-	dk_printVar(extension)
+	#dk_printVar(extension)
     set(${rtn_var} ${extension} PARENT_SCOPE)
 endfunction()
 

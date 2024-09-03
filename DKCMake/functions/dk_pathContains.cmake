@@ -15,7 +15,7 @@ function(dk_pathContains expression rtn_var)
 		set(${pathContains} TRUE)
 	endif()
 	
-	dk_printVar(pathContains)
+	#dk_printVar(pathContains)
 	set(${rtn_var} ${pathContains} PARENT_SCOPE)
 endfunction()
 

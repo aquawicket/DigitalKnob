@@ -34,7 +34,7 @@ function(dk_getFilename path rtn_var)
 	endif()
 	
 	dk_assert(filename)
-	dk_printVar(filename)
+	#dk_printVar(filename)
     set(${rtn_var} ${filename} PARENT_SCOPE)
 endfunction()
 

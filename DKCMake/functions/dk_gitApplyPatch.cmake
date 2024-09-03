@@ -28,7 +28,7 @@ function(dk_gitApplyPatch directory patch_file)
 		#dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 		return()	# RETURN if the patch check failed, it may have already been patched
 	endif()
-	dk_printVar(output)
+	#dk_printVar(output)
 	
 	## Then do the actual patch 
 	set(COMMAND_ARGS "")

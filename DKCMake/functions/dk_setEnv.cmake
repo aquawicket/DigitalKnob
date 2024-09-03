@@ -28,7 +28,7 @@ function(dk_setEnv name value)
 	endif()
 	#dk_info("Setting ENV{${name}} environment variable to ${value}")
 	set(ENV{${name}} "${value}")
-	dk_printVar(ENV{${name}})
+	#dk_printVar(ENV{${name}})
 	#dk_debug(ENV{${name}})
 	
 	#dk_debug(ENV{${name}})

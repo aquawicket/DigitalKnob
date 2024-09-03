@@ -43,4 +43,4 @@ if(NOT EXISTS ${VSCODE_EXE})
 	dk_makeDirectory	(${VSCODE}/data)
 endif()
 
-dk_printVar(VSCODE_EXE)
+#dk_printVar(VSCODE_EXE)

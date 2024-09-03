@@ -20,7 +20,7 @@ function(dk_validateBranch)
 #			DKBRANCH="${FOLDER}"
 #		fi
 	endif()
-	dk_printVar(DKBRANCH)
+	#dk_printVar(DKBRANCH)
 	
 	dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
 		dk_set(DKCMAKE_DIR "${DKBRANCH_DIR}/DKCMake")

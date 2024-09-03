@@ -20,8 +20,8 @@ function(dk_arrayLength array rtn_var)
 	endif()
 	
 	list(LENGTH "${_array_}" arrayLength)
-	dk_printVar(arrayLength)
 	set(${rtn_var} ${arrayLength} PARENT_SCOPE)
+	#dk_printVar(rtn_var)
 endfunction()
 
 

@@ -31,8 +31,8 @@ function(dk_getCmakeCommandLine rtn_var)
 	dk_debug(cmakeCommandLine)
 	dk_wait()
 	
-	#dk_printVar()
 	set(${rtn_var} "${cmakeCommandLine}" PARENT_SCOPE) #return rtn_var
+	#dk_printVar(rtn_var)
 endfunction()
 
 

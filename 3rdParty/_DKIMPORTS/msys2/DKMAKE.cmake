@@ -22,9 +22,9 @@ dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
 dk_validate(DK3RDPARTY_DIR "dk_getDKPaths()")
 dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 
-dk_printVar(MSYS2_DL_FILE)
-dk_printVar(MSYS2_FOLDER)
-dk_printVar(MSYS2)
+#dk_printVar(MSYS2_DL_FILE)
+#dk_printVar(MSYS2_FOLDER)
+#dk_printVar(MSYS2)
 
 if(WIN_HOST)
 	dk_findProgram(CMD_EXE cmd.exe)

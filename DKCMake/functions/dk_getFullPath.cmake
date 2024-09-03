@@ -14,7 +14,7 @@ function(dk_getFullPath path rtn_var)
 	
 	get_filename_component(fullpath ${path} ABSOLUTE)    # ABSOLUTE = Full path to file
 	#get_filename_component(fullpath ${path} REALPATH)	 # REALPATH = Full path to existing file with symlinks resolved
-	dk_printVar(fullpath)
+	#dk_printVar(fullpath)
 	set(${rtn_var} ${fullpath} PARENT_SCOPE)
 endfunction()
 

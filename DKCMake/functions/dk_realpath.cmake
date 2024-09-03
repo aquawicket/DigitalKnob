@@ -13,7 +13,7 @@ function(dk_realpath path rtn_var)
 	endif()
 	
 	get_filename_component(_realpath_ ${path} REALPATH)
-	dk_printVar(_realpath_)
+	#dk_printVar(_realpath_)
 	set(${rtn_var} ${_realpath_} PARENT_SCOPE)
 endfunction()
 

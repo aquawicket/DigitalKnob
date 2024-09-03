@@ -34,25 +34,25 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	if(NOT src_path)
 		dk_error("src_path is invalid")
 	endif()
-	dk_printVar(src_path)
+	#dk_printVar(src_path)
 	
 	dk_dirname(${src_path} src_dir)
 	if(NOT src_dir)
 		dk_error("src_dir is invalid")
 	endif()
-	dk_printVar(src_dir)
+	#dk_printVar(src_dir)
 	
 	dk_basename(${src_path} src_filename)
 	if(NOT src_filename)
 		dk_error("src_filename is invalid")
 	endif()
-	dk_printVar(src_filename)
+	#dk_printVar(src_filename)
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
 		dk_error("src_ext is invalid")
 	endif()
-	dk_printVar(src_ext)
+	#dk_printVar(src_ext)
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
@@ -64,7 +64,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
 	endif()
-	dk_printVar(dest_path)
+	#dk_printVar(dest_path)
 	
 	dk_dirname("${dest_path}" dest_dir)
 	if(NOT dest_dir)
@@ -75,20 +75,20 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		dk_makeDirectory("${dest_dir}")
 	endif()
 	dk_cd("${dest_dir}")
-	dk_printVar(dest_dir)
+	#dk_printVar(dest_dir)
 	
 	dk_basename("${dest_path}" dest_filename)
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()
 	endif()
-	dk_printVar(dest_filename)
+	#dk_printVar(dest_filename)
 	
 	dk_getExtension(${dest_path} dest_ext)
 	if(NOT dest_ext)
 		dk_error("dest_ext is invalid")
 	endif()
-	dk_printVar(dest_ext)
+	#dk_printVar(dest_ext)
 	
 	if(EXISTS "${dest_path}")
 		if(NOT NO_HALT)
@@ -103,7 +103,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path "${dest_dir}/${temp_filename}")
-	dk_printVar(temp_path)
+	#dk_printVar(temp_path)
 	if(EXISTS "${temp_path}")
 		dk_delete("${temp_path}")
 	endif()

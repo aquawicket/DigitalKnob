@@ -86,17 +86,17 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	if(PLUGIN_URL)																# PLUGIN_URL
 		dk_printVar(PLUGIN_URL)
 		dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)						# PLUGIN_URL_FILENAME
-		dk_printVar(PLUGIN_URL_FILENAME)
+		#dk_printVar(PLUGIN_URL_FILENAME)
 		dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					# PLUGIN_URL_LIST
-		dk_printVar(PLUGIN_URL_LIST)
+		#dk_printVar(PLUGIN_URL_LIST)
 		dk_includes(${PLUGIN_URL} https://github.com PLUGIN_GIT)				# PLUGIN_GIT
-		dk_printVar(PLUGIN_GIT)
+		#dk_printVar(PLUGIN_GIT)
 	endif()
 	if(PLUGIN_URL_FILENAME)
 		dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)			# PLUGIN_URL_EXTENSION
-		dk_printVar(PLUGIN_URL_EXTENSION)
+		#dk_printVar(PLUGIN_URL_EXTENSION)
 		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				# PLUGIN_URL_FILE
-		dk_printVar(PLUGIN_URL_FILE)
+		#dk_printVar(PLUGIN_URL_FILE)
 	endif()
 	if(PLUGIN_URL_FILE)
 		dk_toLower(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_LOWER)				# PLUGIN_URL_FILE_LOWER
@@ -107,11 +107,11 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		set(index 0)
 		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})								# PLUGIN_URL_ITEM
 			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						# PLUGIN_URL_NODE(n)
-			dk_printVar(PLUGIN_URL_NODE${index})
+			#dk_printVar(PLUGIN_URL_NODE${index})
 			math(EXPR index ${index}+1)
 		endforeach()
 		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)							# PLUGIN_URL_LENGTH
-		dk_printVar(PLUGIN_URL_LENGTH)
+		#dk_printVar(PLUGIN_URL_LENGTH)
 	endif()
 
 	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
@@ -128,11 +128,11 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	
 	if(PLUGIN_IMPORT)
 		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						# PLUGIN_IMPORT_PATH
-		dk_printVar(PLUGIN_IMPORT_PATH)		
+		#dk_printVar(PLUGIN_IMPORT_PATH)		
 	endif()
 	if(PLUGIN_IMPORT_PATH)
 		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)	# PLUGIN_IMPORT_NAME
-		dk_printVar(PLUGIN_IMPORT_NAME)		
+		#dk_printVar(PLUGIN_IMPORT_NAME)		
 	endif()
 	if(PLUGIN_IMPORT_NAME)
 		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)			# PLUGIN_IMPORT_NAME_LOWER
@@ -142,9 +142,9 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	if(PLUGIN_GIT)
 		#list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
 		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
-		dk_printVar(PLUGIN_GIT_FILENAME)	
+		#dk_printVar(PLUGIN_GIT_FILENAME)	
 		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)		# PLUGIN_GIT_NAME
-		dk_printVar(PLUGIN_GIT_NAME)	
+		#dk_printVar(PLUGIN_GIT_NAME)	
 		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH
 		if(NOT PLUGIN_GIT_BRANCH)
 			set(PLUGIN_GIT_BRANCH master)
@@ -158,7 +158,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	### PLUGIN_INSTALL VARIABLES ###
 	if(NOT PLUGIN_INSTALL_URL)
 		set(PLUGIN_INSTALL_URL ${PLUGIN_URL})
-		dk_printVar(PLUGIN_INSTALL_URL)
+		#dk_printVar(PLUGIN_INSTALL_URL)
 	endif()
 	if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_IMPORT_NAME)
@@ -168,7 +168,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		elseif(PLUGIN_URL_NAME)
 			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
 		endif()
-		dk_printVar(PLUGIN_INSTALL_NAME)
+		#dk_printVar(PLUGIN_INSTALL_NAME)
 	endif()
 	
 	if(PLUGIN_INSTALL_NAME)
@@ -199,25 +199,25 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
 			endif()
 		endif()
-		dk_printVar(PLUGIN_INSTALL_VERSION)
+		#dk_printVar(PLUGIN_INSTALL_VERSION)
 	endif()																				# PLUGIN_INSTALL_VERSION
 	if(NOT PLUGIN_INSTALL_FOLDER)		
 		if(PLUGIN_INSTALL_VERSION)
 			set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	# PLUGIN_INSTALL_FOLDER
 		endif()
-		dk_printVar(PLUGIN_INSTALL_FOLDER)
+		#dk_printVar(PLUGIN_INSTALL_FOLDER)
 	endif()
 	if(NOT PLUGIN_INSTALL_URL)
 		if(DK3RDPARTY_DIR)
 			set(PLUGIN_INSTALL_URL ${PLUGIN_URL})										# PLUGIN_INSTALL_PATH
 		endif()
-		dk_printVar(PLUGIN_INSTALL_URL)
+		#dk_printVar(PLUGIN_INSTALL_URL)
 	endif()
 	if(NOT PLUGIN_INSTALL_PATH)
 		if(DK3RDPARTY_DIR)
 			set(PLUGIN_INSTALL_PATH ${DK3RDPARTY_DIR}/${PLUGIN_INSTALL_FOLDER})				# PLUGIN_INSTALL_PATH
 		endif()
-		dk_printVar(PLUGIN_INSTALL_PATH)
+		#dk_printVar(PLUGIN_INSTALL_PATH)
 	endif()
 	if(NOT PLUGIN_INSTALL_BRANCH)
 		if(PLUGIN_GIT_BRANCH)
@@ -225,14 +225,14 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		else()
 			set(PLUGIN_INSTALL_BRANCH master)
 		endif()
-		dk_printVar(PLUGIN_INSTALL_BRANCH)
+		#dk_printVar(PLUGIN_INSTALL_BRANCH)
 	endif()
 
 	if(NOT PLUGIN_INSTALL_TAG)
 		if(PLUGIN_GIT_TAG)
 			set(PLUGIN_INSTALL_TAG ${PLUGIN_GIT_TAG})
 		endif()
-		dk_printVar(PLUGIN_INSTALL_TAG)
+		#dk_printVar(PLUGIN_INSTALL_TAG)
 	endif()
 
 	#dk_printVar(PLUGIN_URL)

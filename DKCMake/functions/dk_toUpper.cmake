@@ -13,7 +13,7 @@ function(dk_toUpper str rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	string(TOUPPER "${str}" toUpper)
-	dk_printVar(toUpper)
+	#dk_printVar(toUpper)
 	set(${rtn_var} ${toUpper} PARENT_SCOPE)
 endfunction()
 

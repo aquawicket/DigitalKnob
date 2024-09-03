@@ -19,7 +19,7 @@ function(dk_isNumber variable rtn_var)
 		set(isNumber FALSE)
 	endif()
 	
-	dk_printVar(isNumber)
+	#dk_printVar(isNumber)
 	set(${rtn_var} ${isNumber} PARENT_SCOPE)
 endfunction()
 

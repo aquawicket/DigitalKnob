@@ -13,7 +13,7 @@ function(dk_toLower str rtn_var)
 	dk_debugFunc(${ARGV})
 	
 	string(TOLOWER "${str}" toLower)
-	dk_printVar(toLower)
+	#dk_printVar(toLower)
 	set(${rtn_var} "${toLower}" PARENT_SCOPE)
 endfunction()
 

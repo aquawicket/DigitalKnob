@@ -67,7 +67,7 @@ function(dk_getFileType path rtn_var)
 		set(fileType UNKNOWN)
 	endif()
 	
-	dk_printVar(fileType)
+	#dk_printVar(fileType)
 	set(${rtn_var} ${fileType} PARENT_SCOPE)
 endfunction()
 

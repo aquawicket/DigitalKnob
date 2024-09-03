@@ -16,9 +16,9 @@ function(dk_gitCheckRemote)
 		#set(ahead -1)
 		#set(behind -1)
 		
-		dk_printVar(DKBRANCH_DIR)
+		#dk_printVar(DKBRANCH_DIR)
 		dk_cd("${DKBRANCH_DIR}")
-		dk_printVar(PWD)
+		#dk_printVar(PWD)
 		
 		dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 		dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")

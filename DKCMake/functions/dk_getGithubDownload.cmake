@@ -15,12 +15,12 @@ function(dk_getGithubDownload url) #install_path #Patch
 	# must contain https://github.com/
 	# split into list converting / to divider ;
 	dk_replaceAll(${url}  "/"  ";"  url_list)
-	foreach(item ${url_list})
-		dk_printVar(item)
-	endforeach()
+	#foreach(item ${url_list})
+	#	dk_printVar(item)
+	#endforeach()
 
 	list(LENGTH url_list url_length)
-	dk_printVar(url_length)
+	#dk_printVar(url_length)
 	
 	if(${url_length} LESS 5)
 		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
@@ -37,12 +37,12 @@ function(dk_getGithubDownload url) #install_path #Patch
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(tag ${ARGV2})
-			dk_printVar(tag)
+			#dk_printVar(tag)
 		endif()
 	endif()
 	
 	if(NOT Lib)
-		dk_printVar(CMAKE_CURRENT_LIST_DIR)
+		#dk_printVar(CMAKE_CURRENT_LIST_DIR)
 		dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
 		#dk_printVar(Lib)
 		
@@ -55,21 +55,21 @@ function(dk_getGithubDownload url) #install_path #Patch
 			endif()
 		endif()
 		list(GET url_list 3 org)
-		dk_printVar(org)
+		#dk_printVar(org)
 		list(GET url_list 4 Lib)
-		dk_printVar(Lib)
+		#dk_printVar(Lib)
 	endif()
 	
 	dk_toUpper(${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
-	dk_printVar(LIBVAR)
+	#dk_printVar(LIBVAR)
 	
 	dk_toLower(${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_error("${LIBVAR}_FOLDER invalid")
 	endif()
-	dk_printVar(${LIBVAR}_FOLDER)
+	#dk_printVar(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_debug("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
@@ -148,7 +148,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		set(ZIP ${tag}.zip)
 		string(SUBSTRING ${ZIP} 0 7 TAG)
 		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-		dk_printVar(tag)
+		#dk_printVar(tag)
 		
 		## update DKMAKE.cmake file
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)

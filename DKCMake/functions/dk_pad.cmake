@@ -30,7 +30,7 @@ function(dk_pad str padchar length rtn_var)
 		string(APPEND pad ${_pad})
 	endif()
 
-	dk_printVar(pad)
+	#dk_printVar(pad)
   set(${rtn_var} "${pad}" PARENT_SCOPE)
 endfunction()
 

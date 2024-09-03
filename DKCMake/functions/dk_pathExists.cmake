@@ -16,7 +16,7 @@ function(dk_pathExists path rtn_var)
 		set(pathExists 0)
 	endif()
 	
-	dk_printVar(pathExists)
+	#dk_printVar(pathExists)
 	set(${rtn_var} ${pathExists} PARENT_SCOPE)
 endfunction()
 

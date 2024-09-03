@@ -18,7 +18,7 @@ function(dk_removeSubstring removethis fromthis rtn_var)
 
 
 	dk_replaceAll("${fromthis}" "${removethis}" "" removeSubstring)
-	dk_printVar(removeSubstring)
+	#dk_printVar(removeSubstring)
 	set("${rtn_var}" "${removeSubstring}" PARENT_SCOPE)
 endfunction()
 dk_createOsMacros("dk_removeSubstring")

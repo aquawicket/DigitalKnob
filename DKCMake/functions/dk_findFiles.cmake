@@ -25,8 +25,9 @@ function(dk_findFiles path pattern rtn_var)
 		dk_error("findFiles is invalid")
 		return()
 	endif()
-	dk_printVar(findFiles)
+	#dk_printVar(findFiles)
 	set(${rtn_var} ${findFiles} PARENT_SCOPE)
+	#dk_printVar(rtn_var)
 endfunction()
 
 

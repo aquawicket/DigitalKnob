@@ -19,7 +19,7 @@ function(dk_getMULTI_CONFIG)
 			dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
 		endif()
 		
-		dk_printVar(CMAKE_CONFIGURATION_TYPES)
+		#dk_printVar(CMAKE_CONFIGURATION_TYPES)
 		dk_unset(SINGLE_CONFIG)
 		dk_set(MULTI_CONFIG 1)
 		dk_set(BUILD_DIR ${OS})
