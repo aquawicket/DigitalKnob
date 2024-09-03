@@ -5,7 +5,7 @@ dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-
+dk_printVar(WIN_HOST)
 if(WIN_HOST)
 	dk_validate(PYTHON3 "dk_depend(python3)")
 	
