@@ -29,7 +29,7 @@ if(WIN_HOST)
 	#execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}	"${EMSDK}/emsdk.bat" activate latest --permanent COMMAND_ECHO STDOUT)
 	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat" activate latest COMMAND_ECHO STDOUT)
 else()
-	#execute_process(COMMAND                                         "${EMSDK}/emsdk"     activate latest --permanent COMMAND_ECHO STDOUT)
+	#execute_process(COMMAND                                         "${EMSDK}/emsdk"    activate latest --permanent COMMAND_ECHO STDOUT)
 	execute_process(COMMAND                                         "${EMSDK}/emsdk"     activate latest COMMAND_ECHO STDOUT)
 endif()
 
