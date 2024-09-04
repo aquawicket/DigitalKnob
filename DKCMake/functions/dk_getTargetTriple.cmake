@@ -99,9 +99,6 @@ function(dk_getTargetTriple)
 		dk_set(${OS}_TARGET 1)
 	endif()
 	
-	##### TEMPORARY FIX #####
-	dk_set(OS ${target_triple})
-	
 	
 	### Get arch / ARCH / <arch>_target / <ARCH>_TARGET
 	if(triple MATCHES "arm64")
