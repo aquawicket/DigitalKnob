@@ -66,22 +66,29 @@ endif()
 
 ### Environment Variables ###
 # EMSDK		 	= C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
-set(ENV{EMSDK} "${EMSDK}")
+#set(ENV{EMSDK} "${EMSDK}")
 
 # EMSDK_NODE	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin\node.exe
-set(ENV{EMSDK_NODE} "${EMSDK}/node/18.20.3_64bit/bin/node.exe")
+#set(ENV{EMSDK_NODE} "${EMSDK}/node/18.20.3_64bit/bin/node.exe")
 
 # EMSDK_PYTHON	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\python\3.9.2-nuget_64bit\python.exe
-set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+dk_set(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+set(ENV{EMSDK_PYTHON} "${EMSDK_PYTHON}")
+execute_process(COMMAND cmd /c set "EMSDK_PYTHON=${EMSDK_PYTHON}")
+execute_process(COMMAND cmd /c setx EMSDK_PYTHON ${EMSDK_PYTHON})
+
 
 # JAVA_HOME		= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\java\8.152_64bit
-set(ENV{JAVA_HOME} "${EMSDK}/java/8.152_64bit")
+#set(ENV{JAVA_HOME} "${EMSDK}/java/8.152_64bit")
 
 # PATH			= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main
 #                 C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\mingw\4.6.2_32bit
 #				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin
 #				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\upstream\emscripten	  
-set(ENV{PATH} "${EMSDK}/mingw/4.6.2_32bit;${EMSDK}/node/18.20.3_64bit/bin;${EMSDK}/upstream/emscripten;${EMSDK}/python/3.9.2-nuget_64bit")
+#set(ENV{PATH} "${EMSDK}/mingw/4.6.2_32bit;${EMSDK}/node/18.20.3_64bit/bin;${EMSDK}/upstream/emscripten;${EMSDK}/python/3.9.2-nuget_64bit")
+
+
+
 
 ### Set Build Flag Variables ###
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
@@ -92,8 +99,13 @@ dk_set			(CMAKE_TOOLCHAIN_FILE 		${EMSDK}/upstream/emscripten/cmake/Modules/Plat
 WIN_HOST_dk_set	(CMAKE_GENERATOR 			"MinGW Makefiles")
 UNIX_HOST_dk_set(CMAKE_GENERATOR 			"Unix Makefiles")
 dk_set			(CMAKE_AR 					"${EMSDK}/upstream/emscripten/emar${bat}")
-dk_set			(CMAKE_CXX_COMPILER	    	"${EMSDK}/upstream/emscripten/em++${bat}")
-dk_set			(CMAKE_C_COMPILER		    "${EMSDK}/upstream/emscripten/emcc${bat}")
+
+#dk_set			(CMAKE_C_COMPILER		    "${EMSDK}/upstream/emscripten/emcc${bat}")
+dk_set			(CMAKE_C_COMPILER		    "${EMSDK}/mingw/4.6.2_32bit/gcc.exe")
+
+#dk_set			(CMAKE_CXX_COMPILER	    	"${EMSDK}/upstream/emscripten/em++${bat}")
+dk_set			(CMAKE_CXX_COMPILER		    "${EMSDK}/mingw/4.6.2_32bit/g++.exe")
+
 dk_set			(CMAKE_NM 					"${EMSDK}/upstream/emscripten/emnm${bat}")	
 dk_set			(CMAKE_RANLIB 				"${EMSDK}/upstream/emscripten/emranlib${bat}")
 dk_set			(CMAKE_C_COMPILER_AR 		"${CMAKE_AR}")
