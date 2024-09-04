@@ -1,29 +1,28 @@
 @echo off
+set "input=%~dp0dk_polyglot"
+goto:main
+
+:copyTo .ext
+	set "output=%input%%~1"
+	if exist "%output%" del "%output%"
+	echo F|xcopy "%input%" "%output%" /H /Y 1>nul 2>nul
+goto:eof
 
 
-if exist %~d0dk_polyglot.bat del %~d0dk_polyglot.bat
-if exist %~d0dk_polyglot.cmd del %~d0dk_polyglot.cmd
-if exist %~d0dk_polyglot.ps1 del %~d0dk_polyglot.ps1
-if exist %~d0dk_polyglot.sh  del %~d0dk_polyglot.sh
-
-echo F|xcopy "%~d0dk_polyglot" "%~d0dk_polyglot.bat" /H /Y 1>nul 2>nul
-echo F|xcopy "%~d0dk_polyglot" "%~d0dk_polyglot.cmd" /H /Y 1>nul 2>nul
-echo F|xcopy "%~d0dk_polyglot" "%~d0dk_polyglot.ps1" /H /Y 1>nul 2>nul
-echo F|xcopy "%~d0dk_polyglot" "%~d0dk_polyglot.sh" /H /Y 1>nul 2>nul
-
-echo:
-echo ###### dk_polyglot.bat ######
-cmd /c call dk_polyglot.bat
-
-echo:
-echo ###### dk_polyglot.cmd ######
-call dk_polyglot.cmd
-
-echo:
-echo ###### dk_polyglot.cmd ######
-powershell ".\dk_polyglot.ps1"
+:main
 
 
-echo:
-echo ###### dk_polyglot.cmd ######
-bash dk_polyglot.sh
+echo: & echo ########################### BATCH .bat ##########################
+call :copyTo .bat && call dk_polyglot && del dk_polyglot.bat
+
+
+echo: & echo ########################### BATCH .cmd ##########################
+call :copyTo .cmd && call dk_polyglot && del dk_polyglot.cmd
+
+
+echo: & echo ######################## POWERSHELL ########################
+call :copyTo .ps1 && powershell ".\dk_polyglot" && del dk_polyglot.ps1
+
+
+echo: & echo ########################### BASH ###########################
+C:\Users\Administrator\digitalknob\DKTools\portablegit_2_44_0_64_bit_7z\bin\bash.exe dk_polyglot
