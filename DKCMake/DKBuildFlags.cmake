@@ -798,13 +798,13 @@ endif()
 
 
 
-# GENERATOR			BUILD_DIR		OUTPUT_DIR
+# GENERATOR			BUILD_DIR		    OUTPUT_DIR
 # -----------------------------------------------
-# Visual Studio  	${OS}			${OS}/${TYPE}		
-# XCODE			    ${OS}			${OS}/${TYPE} 
-# MinGW Makefiles   ${OS}/${TYPE}	${OS}/${TYPE} 
-# Unix Makefiles    ${OS}/${TYPE}   ${OS}/${TYPE}  
-# ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
+# Visual Studio  	${triple}			${triple}/${TYPE}		
+# XCODE			    ${triple}			${triple}/${TYPE} 
+# MinGW Makefiles   ${triple}/${TYPE}	${triple}/${TYPE} 
+# Unix Makefiles    ${triple}/${TYPE}   ${triple}/${TYPE}  
+# ./configure       ${triple}/${TYPE}   ${triple}/${TYPE}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html

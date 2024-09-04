@@ -177,7 +177,7 @@ endif()
 ### Display OS info to user ###
 dk_info("")
 dk_info("")
-dk_info("*** Creating ${OS} Project Files ***")
+dk_info("*** Creating ${triple} Project Files ***")
 dk_info("")
 
 
