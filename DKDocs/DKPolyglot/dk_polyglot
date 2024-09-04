@@ -1,0 +1,46 @@
+@{a="\"} >$null # " 2>/dev/null || true #" >NUL 2>&1 || type nul & echo off
+if (# neq x goto initialized
+"true" -ne "\`"); then { #") {
+function rem {
+    "true" -ne "\" >$null #"
+}
+function goto {
+    rem
+}
+}; "true" -ne "\`" ; fi #">$null
+rem '
+:initialized
+::################################# BATCH #########################################
+
+echo I AM A BATCH SCRIPT
+pause
+
+::################################# BATCH #########################################
+GOTO :end
+rem '
+if ("true" -ne "\") {
+#################################### POWERSHELL ###########################################
+
+
+echo "I AM A POWERSHELL SCRIPT"
+pause
+
+
+#################################### POWERSHELL ###########################################
+} <#"); then
+######################################### SHELL ##################################################
+
+
+echo "I AM A SHELL SCRIPT"
+read -rp ''
+
+
+######################################### SHELL ##################################################
+fi #>
+rem '
+:end
+rem '
+goto :eof
+exit
+
+# https://github.com/tingstad/polyscript

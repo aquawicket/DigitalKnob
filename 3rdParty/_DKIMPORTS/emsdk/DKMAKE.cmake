@@ -77,7 +77,7 @@ set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
 
 ###### EXPORT VARIABLES ######
 #dk_fileAppend("$ENV{TEMP}/DKEXPORT_VARS.cmd" "SET EMSDK_PYTHON=${EMSDK}/python/3.9.2-nuget_64bit/python.exe\n")
-dk_exportVar(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
 
 # JAVA_HOME		= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\java\8.152_64bit
 #set(ENV{JAVA_HOME} "${EMSDK}/java/8.152_64bit")

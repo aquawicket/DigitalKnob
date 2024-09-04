@@ -3,7 +3,7 @@
 if "%~1" neq "" (goto:runDKBash)
 :installDKBash	
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKBash . . ."
