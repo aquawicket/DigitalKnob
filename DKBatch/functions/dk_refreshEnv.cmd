@@ -6,17 +6,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::################################################################################
 ::# dk_refreshEnv()
 ::#
+::#	   This will pull un environment variable changed with setx or chenged from outside
+::#    of the context without restarting the ComSpec 
+::#
 ::#    Reference: https://stackoverflow.com/a/171737/688352
 ::#
 :dk_refreshEnv
+:: setloal
 	call dk_debugFunc 0
-
-	if exist "%TEMP%\refreshEnv.bat" del "%TEMP%\refreshEnv.bat"
+	
 	cscript.exe //nologo "%~f0?.wsf"
-	if exist "%TEMP%\refreshEnv.bat" call "%TEMP%\refreshEnv.bat"
-	if exist "%TEMP%\refreshEnv.bat" del "%TEMP%\refreshEnv.bat"
-	exit /b 0 
-goto:eof
+	if not exist "%TEMP%\refreshEnv.bat" call dk_error "%TEMP%\refreshEnv.bat does not exist"
+	call "%TEMP%\refreshEnv.bat"
+		
+	exit /b %errorlevel%
+%endfunction%
 
 
 
@@ -45,7 +49,7 @@ goto:eof
 	echo:
 	echo Now the variable should have value
 	echo MYVAR = %MYVAR%
-goto:eof
+%endfunction%
 
 
 
