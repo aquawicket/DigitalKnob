@@ -124,7 +124,7 @@ WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA
 
 
 ### GENERATE / COMPILE ###
-ANDROID_dk_cd				(${XZ}/${OS})
+ANDROID_dk_cd				(${XZ}/${triple})
 ANDROID_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
 ANDROID_dk_visualStudio			(${XZ} liblzma)
 

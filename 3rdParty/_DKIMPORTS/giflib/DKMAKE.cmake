@@ -24,7 +24,7 @@ if(GIFLIB_USE_CMAKE)
 
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB}/${triple}									GIF_INCLUDE_DIR2)
 	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
 	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
 	
@@ -37,7 +37,7 @@ if(GIFLIB_USE_CMAKE)
 else()
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB}/${triple}									GIF_INCLUDE_DIR2)
 	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
 	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
 

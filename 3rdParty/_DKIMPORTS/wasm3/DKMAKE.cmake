@@ -9,7 +9,7 @@ dk_import(https://github.com/wasm3/wasm3/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include				(${WASM3})
-dk_include				(${WASM3}/${OS})
+dk_include				(${WASM3}/${triple})
 APPLE_dk_libDebug		(${WASM3}/${triple}/source/${DEBUG_DIR}/libm3.a)
 APPLE_dk_libRelease		(${WASM3}/${triple}/source/${RELEASE_DIR}/libm3.a)
 if(NOT APPLE)

@@ -17,7 +17,7 @@ dk_import(https://github.com/creationix/dukluv/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include	(${DUKLUV}/include)
-dk_include	(${DUKLUV}/${OS})
+dk_include	(${DUKLUV}/${triple})
 if(MSVC)
 	WIN_dk_libDebug		(${DUKLUV}/${triple}/${DEBUG_DIR}/dukluv.lib)
 	WIN_dk_libRelease	(${DUKLUV}/${triple}/${RELEASE_DIR}/dukluv.lib)

@@ -8,7 +8,7 @@ dk_import(https://github.com/xiph/opus/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include			(${OPUS}/include)
-dk_include			(${OPUS}/${OS})
+dk_include			(${OPUS}/${triple})
 UNIX_dk_libDebug	(${OPUS}/${triple}/${DEBUG_DIR}/libopus.a)
 UNIX_dk_libRelease	(${OPUS}/${triple}/${RELEASE_DIR}/libopus.a)
 WIN_dk_libDebug		(${OPUS}/${triple}/${DEBUG_DIR}/opus.lib)

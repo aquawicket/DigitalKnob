@@ -10,7 +10,7 @@ dk_import(https://github.com/jerryscript-project/jerryscript/archive/refs/heads/
 
 ### LINK ###
 dk_include					(${JERRYSCRIPT}/jerry-core/include)
-dk_include					(${JERRYSCRIPT}/${OS})
+dk_include					(${JERRYSCRIPT}/${triple})
 
 # jerry-core
 if(MSVC)

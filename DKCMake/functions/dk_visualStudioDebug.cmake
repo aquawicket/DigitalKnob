@@ -19,7 +19,7 @@ function(dk_visualStudioDebug path) #target #arch
 		dk_error("dk_visualStudioDebug(${path}) path does not exist")
 	endif()
 	
-	dk_findFiles(${path}/${OS} *.sln sln_file)
+	dk_findFiles(${path}/${triple} *.sln sln_file)
 	dk_basename(${sln_file} sln_file)
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -37,7 +37,7 @@ function(dk_visualStudioDebug path) #target #arch
 		else()
 			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${triple}/${sln_file} /p:Configuration=Debug)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
+		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${triple})
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")

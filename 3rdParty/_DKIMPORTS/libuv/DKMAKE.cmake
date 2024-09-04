@@ -16,7 +16,7 @@ dk_import(https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f1
 
 ### LINK ###
 dk_include			(${LIBUV}/include)
-dk_include			(${LIBUV}/${OS})
+dk_include			(${LIBUV}/${triple})
 UNIX_dk_libDebug	(${LIBUV}/${triple}/${DEBUG_DIR}/libuv_a.a)
 UNIX_dk_libRelease	(${LIBUV}/${triple}/${RELEASE_DIR}/libuv_a.a)
 WIN_dk_libDebug		(${LIBUV}/${triple}/${DEBUG_DIR}/uv_a.lib)

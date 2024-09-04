@@ -15,7 +15,7 @@ function(dk_updateAndroidName app_name)
 	if(ANDROID)
 		# update all files and folders recursivley
 		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DK_PROJECT_DIR}/${triple}/" "${DK_PROJECT_DIR}/${triple}/*")
-		dk_verbose("Getting a list of files in ${DK_PROJECT_DIR}/${OS}")
+		dk_verbose("Getting a list of files in ${DK_PROJECT_DIR}/${triple}")
 		list(REVERSE allfiles)
 		foreach(each_file ${allfiles})
 			dk_verbose(each_file)

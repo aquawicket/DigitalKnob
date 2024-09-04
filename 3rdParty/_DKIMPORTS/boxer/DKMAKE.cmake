@@ -20,7 +20,7 @@ dk_import(https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${BOXER}/include)
-dk_include			(${BOXER}/${OS})
+dk_include			(${BOXER}/${triple})
 
 if(MSVC)
 	WIN_dk_libDebug		(${BOXER}/${triple}/${DEBUG_DIR}/Boxer.lib)

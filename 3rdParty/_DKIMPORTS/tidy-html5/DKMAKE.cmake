@@ -19,7 +19,7 @@ dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DRELEASE_DATE" "
 EMSCRIPTEN_dk_define	(HAS_FUTIME=0)
 dk_include				(${TIDY_HTML5})
 dk_include				(${TIDY_HTML5}/include)
-dk_include				(${TIDY_HTML5}/${OS})
+dk_include				(${TIDY_HTML5}/${triple})
 ANDROID_dk_include		(${TIDY_HTML5}/${triple}/$(BUILD_TYPE)/jni)
 
 if(MSVC)

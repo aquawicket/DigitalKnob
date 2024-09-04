@@ -9,7 +9,7 @@ dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zi
 
 ### LINK ###
 dk_include				(${JASPER}/include)
-dk_include				(${JASPER}/${OS})
+dk_include				(${JASPER}/${triple})
 ANDROID_dk_libDebug		(${JASPER}/${triple}/src/libjasper/jasperd.a)
 ANDROID_dk_libRelease	(${JASPER}/${triple}/src/libjasper/jasper.a)
 APPLE_dk_libDebug		(${JASPER}/${triple}/src/libjasper/libjasper.a)

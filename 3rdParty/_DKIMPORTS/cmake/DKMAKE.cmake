@@ -140,7 +140,7 @@ if(COMPILE_CMAKE)
 		endif()
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
-		dk_include				(${CMAKE}/${OS})
+		dk_include				(${CMAKE}/${triple})
 		DEBUG_dk_include		(${CMAKE}/${triple}/${DEBUG_DIR})
 		RELEASE_dk_include		(${CMAKE}/${triple}/${RELEASE_DIR})
 

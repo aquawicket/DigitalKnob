@@ -26,7 +26,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 function(generateAndroidMK)
 	if(ANDROID_LIBMK)
-		dk_set(PWD ${plugin_path}/${OS})
+		dk_set(PWD ${plugin_path}/${triple})
 		dk_makeDirectory(${PWD})
 		if(DEBUG)
 			message(STATUS "Creating DEBUG Application.mk file for ${plugin}....")

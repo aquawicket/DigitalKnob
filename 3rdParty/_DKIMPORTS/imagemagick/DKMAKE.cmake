@@ -29,7 +29,7 @@ if(DKAPP)
 if(NOT ANDROID)
 if(NOT WIN)
 	### LINK ###
-	dk_include				(${IMAGEMAGICK}/${OS})
+	dk_include				(${IMAGEMAGICK}/${triple})
 
 	UNIX_HOST_dk_libDebug	(${IMAGEMAGICK}/${triple}/${DEBUG_DIR}/libimagemagick.a)
 	UNIX_HOST_dk_libRelease	(${IMAGEMAGICK}/${triple}/${RELEASE_DIR}/libimagemagick.a)

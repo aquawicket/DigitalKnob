@@ -120,7 +120,7 @@ foreach(plugin ${dkdepend_list})
 		dk_toUpper(${plugin} PLUGIN_NAME)
 		if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
 			#if(MULTI_CONFIG)
-			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
+			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${triple})
 			#else()
 			#	if(DEBUG)
 			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
@@ -132,8 +132,8 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
 	
 	####################### DKPlugins #######################
 	# Libraries in the /DKPlugins folder
@@ -164,7 +164,7 @@ foreach(plugin ${dkdepend_list})
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			if(EXISTS "${plugin_path}/CMakeLists.txt")
 				#if(MULTI_CONFIG)
-				#	add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+				#	add_subdirectory(${plugin_path} ${plugin_path}/${triple})
 				#else()
 				#	if(DEBUG)
 				#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
@@ -460,7 +460,7 @@ if(WIN_X86)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_PROJECT_DIR}/${OS} --target ${APP_NAME}
+	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_PROJECT_DIR}/${triple} --target ${APP_NAME}
 	#)
 	
 	#add_custom_command(
@@ -723,7 +723,7 @@ if(MAC)
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
 		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/wrapper ${TERMINAL_SCRIPT})
-		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${triple}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS})
+		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${triple}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple})
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${triple}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	

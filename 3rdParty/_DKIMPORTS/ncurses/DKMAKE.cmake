@@ -15,7 +15,7 @@ dk_import(https://invisible-island.net/datafiles/release/ncurses.tar.gz)
 
 ### LINK ###
 dk_include			(${NCURSES}/include)
-dk_include			(${NCURSES}/${OS})
+dk_include			(${NCURSES}/${triple})
 DEBUG_dk_include	(${NCURSES}/${triple}/${DEBUG_DIR}/include)
 RELEASE_dk_include	(${NCURSES}/${triple}/${RELEASE_DIR}/include)
 dk_libDebug			(${NCURSES}/${triple}/${DEBUG_DIR}/lib/libncurses.a)

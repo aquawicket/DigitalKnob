@@ -23,7 +23,7 @@ dk_set(OPENCV_VERSION 470)
 
 ### LINK ###
 dk_include(${OPENCV})
-dk_include(${OPENCV}/${OS})
+dk_include(${OPENCV}/${triple})
 dk_include(${OPENCV}/${triple}/${DEBUG_DIR})
 dk_include(${OPENCV}/${triple}/${RELEASE_DIR})
 dk_include(${OPENCV}/modules/calib3d/include)

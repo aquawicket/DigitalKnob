@@ -21,7 +21,7 @@ dk_fileReplace(${POCO}/Net/src/SocketImpl.cpp "#if defined(POCO_HAVE_FD_EPOLL)" 
 
 ### LINK ###
 dk_include(${POCO}/include)
-dk_include(${POCO}/${OS})
+dk_include(${POCO}/${triple})
 dk_include(${POCO}/Net/include)
 dk_include(${POCO}/Foundation/include)
 dk_include(${POCO}/Util/include)

@@ -14,7 +14,7 @@ dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_C
 
 ### LINK ###
 dk_include				(${RLOTTIE}/inc						RLOTTIE_INCLUDE_DIR)
-dk_include				(${RLOTTIE}/${OS})
+dk_include				(${RLOTTIE}/${triple})
 if(MSVC)
 	WIN_dk_libDebug		(${RLOTTIE}/${triple}/${DEBUG_DIR}/rlottie.lib)
 	WIN_dk_libRelease	(${RLOTTIE}/${triple}/${RELEASE_DIR}/rlottie.lib)

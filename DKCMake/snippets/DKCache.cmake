@@ -45,28 +45,28 @@ endif()
 set(TIFF ${DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
 if(EXISTS ${TIFF}/${triple}/Release/tiff-static.lib)
 	set(TIFF_INCLUDE_DIR ${TIFF}/libtiff CACHE PATH "" FORCE)
-	set(TIFF_INCLUDE_DIR2 ${TIFF}/${OS} CACHE PATH "" FORCE)
+	set(TIFF_INCLUDE_DIR2 ${TIFF}/${triple} CACHE PATH "" FORCE)
 endif()
 
 
 set(PNG ${DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
 if(EXISTS ${PNG}/${triple}/Release/libpng17_static.lib)
 	set(PNG_INCLUDE_DIR ${PNG} CACHE PATH "" FORCE)
-	set(PNG_INCLUDE_DIR2 ${PNG}/${OS} CACHE PATH "" FORCE)
+	set(PNG_INCLUDE_DIR2 ${PNG}/${triple} CACHE PATH "" FORCE)
 endif()
 
 
 set(JPEG ${DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
 if(EXISTS ${JPEG}/${triple}/Release/turbojpeg-static.lib)
 	set(JPEG_INCLUDE_DIR ${JPEG} CACHE PATH "" FORCE)
-	set(JPEG_INCLUDE_DIR2 ${JPEG}/${OS} CACHE PATH "" FORCE)
+	set(JPEG_INCLUDE_DIR2 ${JPEG}/${triple} CACHE PATH "" FORCE)
 endif()
 
 
 set(GIF ${DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
 if(EXISTS ${GIF}/${triple}/Release/lib/.libs/libgif.lib)
 	set(GIF_INCLUDE_DIR ${GIF} CACHE PATH "" FORCE)
-	set(GIF_INCLUDE_DIR2 ${GIF}/${OS} CACHE PATH "" FORCE)
+	set(GIF_INCLUDE_DIR2 ${GIF}/${triple} CACHE PATH "" FORCE)
 endif()
 
 

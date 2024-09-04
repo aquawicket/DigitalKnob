@@ -13,7 +13,7 @@ dk_import(http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
 ### LINK ###
 dk_include				(${LIBICONV})
 dk_include				(${LIBICONV}/include 							LIBICONV_INCLUDE_DIR)
-dk_include				(${LIBICONV}/${OS})
+dk_include				(${LIBICONV}/${triple})
 dk_include				(${LIBICONV}/${triple}/${RELEASE_DIR})
 ANDROID_dk_include		(${LIBICONV}/${triple}/$(BUILD_TYPE)/jni)
 

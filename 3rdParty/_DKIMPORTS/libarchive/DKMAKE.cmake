@@ -34,7 +34,7 @@ dk_import(https://github.com/libarchive/libarchive/archive/refs/heads/master.zip
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
 dk_include					(${LIBARCHIVE}/libarchive)
-dk_include					(${LIBARCHIVE}/${OS})
+dk_include					(${LIBARCHIVE}/${triple})
 ANDROID_dk_include			(${LIBARCHIVE}/contrib/android/include)
 
 if(MULTI_CONFIG)
@@ -53,7 +53,7 @@ endif()
 
 ### GENERATE ###
 ANDROID_dk_configure(${LIBARCHIVE}
-	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${OS} -I${LIBARCHIVE}/contrib/android/include"
+	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${triple} -I${LIBARCHIVE}/contrib/android/include"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON

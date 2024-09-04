@@ -55,7 +55,7 @@ endif()
     
 ### Set Build Flag Variables ###
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
-dk_set(EMCMAKE		"${EMSDK}/upstream/emscripten/emcmake${bat}")
+#dk_set(EMCMAKE		"${EMSDK}/upstream/emscripten/emcmake${bat}")
 dk_set(EMCONFIGURE	"${EMSDK}/upstream/emscripten/emconfigure${bat}")   
 
 dk_set			(CMAKE_TOOLCHAIN_FILE 		${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)

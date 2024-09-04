@@ -13,7 +13,7 @@ dk_import(https://code.videolan.org/videolan/x264/-/archive/master/x264-master.z
 
 ### LINK ###
 dk_include		(${X264}/include)
-dk_include		(${X264}/${OS})
+dk_include		(${X264}/${triple})
 dk_libDebug		(${X264}/${triple}/${DEBUG_DIR}/libx264.a)
 dk_libRelease	(${X264}/${triple}/${RELEASE_DIR}/libx264.a)
 
