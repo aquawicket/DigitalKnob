@@ -17,6 +17,7 @@ endif()
 dk_import(https://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip)
 dk_assert(EMSDK)
 
+# https://storage.googleapis.com
 # https://storage.googleapis.com/webassembly
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/node-v18.20.3-win-x64.zip 									-> ${EMSDK}/node/18.20.3_64bit
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/python-3.9.2-4-amd64+pywin32.zip 							-> ${EMSDK}/python/3.9.2-nuget_64bit
@@ -25,28 +26,31 @@ dk_assert(EMSDK)
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/mingw_4.6.2_32bit.zip										-> ${EMSDK}/mingw/4.6.2_32bit
 
 
+# Download and install the latest SDK tools.
 if(WIN_HOST)
-	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat"  install latest 			COMMAND_ECHO STDOUT)
+	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)
 else()
-	execute_process(COMMAND                                         "${EMSDK}/emsdk"      install latest 			COMMAND_ECHO STDOUT)
+	execute_process(COMMAND                                         "${EMSDK}/emsdk"      install latest 				COMMAND_ECHO STDOUT)
+endif()
+
+# Make the "latest" SDK "active" for the current user. (writes .emscripten file)
+if(WIN_HOST)
+	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
+else()
+	execute_process(COMMAND                                         "${EMSDK}/emsdk"     activate latest 				COMMAND_ECHO STDOUT)
+endif()
+
+# Activate PATH and other environment variables in the current terminal
+if(WIN_HOST)
+	execute_process(COMMAND cmd /c call								"${EMSDK}/emsdk_env.bat" 							COMMAND_ECHO STDOUT)
+else()
+	execute_process(COMMAND chmod 777 								"${EMSDK}/emsdk_env.sh"  							COMMAND_ECHO STDOUT)
+	execute_process(COMMAND                                         "${EMSDK}/emsdk_env"     							COMMAND_ECHO STDOUT)
 endif()
 
 if(WIN_HOST)
-	execute_process(COMMAND ${CMAKE_EXE} -E env PATH=${PYTHON3}		"${EMSDK}/emsdk.bat" activate latest 			COMMAND_ECHO STDOUT)
-else()
-	execute_process(COMMAND                                         "${EMSDK}/emsdk"     activate latest 			COMMAND_ECHO STDOUT)
-endif()
-
-if(WIN_HOST)
-	execute_process(COMMAND cmd /c call								"${EMSDK}/emsdk_env.bat" 						COMMAND_ECHO STDOUT)
-else()
-	execute_process(COMMAND chmod 777 								"${EMSDK}/emsdk_env.sh"  						COMMAND_ECHO STDOUT)
-	execute_process(COMMAND                                         "${EMSDK}/emsdk_env"     						COMMAND_ECHO STDOUT)
-endif()
-
-if(WIN_HOST)
-	execute_process(COMMAND cmd /c call 							"${EMSDK}/emsdk.bat" install mingw-4.6.2-32bit  COMMAND_ECHO STDOUT)
-	execute_process(COMMAND cmd /c call 							"${EMSDK}/emsdk.bat" activate mingw-4.6.2-32bit COMMAND_ECHO STDOUT)
+	execute_process(COMMAND cmd /c call 							"${EMSDK}/emsdk.bat" install mingw-4.6.2-32bit		COMMAND_ECHO STDOUT)
+	execute_process(COMMAND cmd /c call 							"${EMSDK}/emsdk.bat" activate mingw-4.6.2-32bit		COMMAND_ECHO STDOUT)
 endif()
 
 
@@ -59,7 +63,26 @@ if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 	dk_fileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;"	"var USE_PTHREADS = true;"		NO_HALT)
 endif()
 
-    
+
+### Environment Variables ###
+# EMSDK		 	= C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
+set(ENV{EMSDK} "${EMSDK}")
+
+# EMSDK_NODE	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin\node.exe
+set(ENV{EMSDK_NODE} "${EMSDK}/node/18.20.3_64bit/bin/node.exe")
+
+# EMSDK_PYTHON	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\python\3.9.2-nuget_64bit\python.exe
+set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+
+# JAVA_HOME		= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\java\8.152_64bit
+set(ENV{JAVA_HOME} "${EMSDK}/java/8.152_64bit")
+
+# PATH			= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main
+#                 C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\mingw\4.6.2_32bit
+#				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin
+#				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\upstream\emscripten	  
+set(ENV{PATH} "${EMSDK}/mingw/4.6.2_32bit;${EMSDK}/node/18.20.3_64bit/bin;${EMSDK}/upstream/emscripten;${EMSDK}/python/3.9.2-nuget_64bit")
+
 ### Set Build Flag Variables ###
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
 #dk_set(EMCMAKE		"${EMSDK}/upstream/emscripten/emcmake${bat}")

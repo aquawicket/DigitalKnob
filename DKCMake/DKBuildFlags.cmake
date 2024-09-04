@@ -889,7 +889,13 @@ endif()
 
 
 ###### Set DKCMAKE_BUILD variable ######
-dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+if(EMSCRIPTEN)
+	#set(EMSDK_PYTHON "C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\python\3.9.2-nuget_64bit\python.exe
+	#${CMAKE_EXE} -E env EMSDK_PYTHON=${EMSDK_PYTHON}	
+	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+else()
+	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+endif()
 dk_printVar(DKCMAKE_BUILD)
 
 
