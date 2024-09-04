@@ -10,7 +10,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_exportVars var_name var_value)
 	dk_debugFunc(${ARGV})
 	
-	dk_fileAppend("$ENV{TEMP}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
+	if(WIN_HOST)
+		dk_fileAppend("$ENV{TMP}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
+	else()
+		dk_fileAppend("$ENV{TMP}/DKEXPORT_VARS" "export ${var_name}=${var_value}\n")
+	endif()
 endfunction()
 
 
@@ -20,5 +24,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(${ARGV})
 	
-	
+	dk_exportVars(TEST_VAR "value of Test_var variable")
 endfunction()
