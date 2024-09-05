@@ -3,7 +3,7 @@
 if not "%~1" == "" (goto:runDKCMake)
 :installDKCMake
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKCmake . . ."

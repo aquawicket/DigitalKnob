@@ -13,12 +13,13 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(${ARGV})
 	
 	## First run a check 
-	set(COMMAND_ARGS "")
+	#set(COMMAND_ARGS "")
 	dk_append(COMMAND_ARGS git)
 	dk_append(COMMAND_ARGS apply)
 	dk_append(COMMAND_ARGS --check)
 	dk_append(COMMAND_ARGS --verbose)
 	dk_append(COMMAND_ARGS ${patch_file})
+	dk_info(COMMAND ${COMMAND_ARGS})
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${directory}
 					RESULT_VARIABLE result
