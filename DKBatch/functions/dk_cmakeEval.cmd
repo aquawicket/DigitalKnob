@@ -51,12 +51,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     "%CMAKE_EXE%" %CMAKE_ARGS%
 
+
+
+::	###### IMPORT VARIABLES ######
     if not defined DKRETURN goto:eof
-    if not exist %DKCMAKE_DIR%\cmake_vars.cmd goto:eof
-    
-    endlocal
-    call %DKCMAKE_DIR%\cmake_vars.cmd
-    del %DKCMAKE_DIR%\cmake_vars.cmd
+	%dk_call% dk_importVars
+	
+	
+::  ## these lines are deprecated ###
+::  if not defined DKRETURN goto:eof
+::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd goto:eof
+::   
+::  endlocal
+::  call %DKCMAKE_DIR%\cmake_vars.cmd
+::  del %DKCMAKE_DIR%\cmake_vars.cmd
 
     ::%dk_call% dk_printVar ERRORLEVEL
 

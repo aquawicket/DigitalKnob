@@ -357,6 +357,7 @@ if(LINUX)
 	dk_disable(python)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
+	dk_disable(smpeg2)				# can't open patch
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 	dk_disable(x265)

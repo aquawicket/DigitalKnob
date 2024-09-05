@@ -33,10 +33,11 @@ if(DKRETURN)
 	#dk_info(STATUS "DKRETURN = ${DKRETURN}")
 	
 	## create windows cmd script to set the return variables
-	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+	#dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
 	foreach(item ${DKRETURN})
-		set(line "set \"${item}=${${item}}\" \n")
-		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+		# set(line "set \"${item}=${${item}}\" \n")
+		# dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+		dk_exportVars(${item} "${${item}}")
 	endforeach()
 	
 	## create unix shell script to set the return variables
