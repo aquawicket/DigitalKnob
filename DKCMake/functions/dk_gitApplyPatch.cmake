@@ -13,7 +13,6 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(${ARGV})
 	
 	## First run a check 
-	#set(COMMAND_ARGS "")
 	dk_append(COMMAND_ARGS git)
 	dk_append(COMMAND_ARGS apply)
 	dk_append(COMMAND_ARGS --check)
@@ -32,7 +31,6 @@ function(dk_gitApplyPatch directory patch_file)
 	#dk_printVar(output)
 	
 	## Then do the actual patch 
-	set(COMMAND_ARGS "")
 	dk_append(COMMAND_ARGS git)
 	dk_append(COMMAND_ARGS apply)
 	#dk_append(COMMAND_ARGS --check)
@@ -46,7 +44,7 @@ function(dk_gitApplyPatch directory patch_file)
 	if(NOT ${result} EQUAL 0)
 		dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
-	dk_info(output)
+	#dk_printVar(output)
 endfunction()
 
 
