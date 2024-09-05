@@ -20,7 +20,8 @@ function(dk_pause)
 	dk_echo("${pause_msg}")
 	
 	###### Cmd ######
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		dk_replaceAll(${CMD_EXE} "/" "\\" CMD_EXE)   # convert to windows path delimiters
 		execute_process(COMMAND ${CMD_EXE} /c pause >nul)

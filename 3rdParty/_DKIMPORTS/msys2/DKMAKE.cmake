@@ -1,10 +1,9 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 if(NOT WIN_HOST)# OR NOT WIN)
 	dk_undepend(msys2)
 	dk_return()
@@ -12,7 +11,6 @@ endif()
 
 
 ### INSTALL ###
-#dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe)
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_assert(MSYS2_DL)
 
@@ -26,13 +24,14 @@ dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 #dk_printVar(MSYS2_FOLDER)
 #dk_printVar(MSYS2)
 
-if(WIN_HOST)
-	dk_findProgram(CMD_EXE cmd.exe)
-endif()
+#if(WIN_HOST)
+#	dk_findProgram(CMD_EXE cmd.exe)
+#endif()
+dk_depend(cmd)
 if(CMD_EXE OR MINGW)
-	dk_set(MSYS2_GENERATOR		"MinGW Makefiles")	# if in cmd
+	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in cmd
 else()
-	dk_set(MSYS2_GENERATOR 		"MSYS Makefiles")	# if in Shell
+	dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in Shell
 endif()
 
 

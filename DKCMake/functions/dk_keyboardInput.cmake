@@ -8,7 +8,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_keyboardInput input) 
 	dk_debugFunc(${ARGV})
 
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		#	@echo off
 		#	set /p "input="

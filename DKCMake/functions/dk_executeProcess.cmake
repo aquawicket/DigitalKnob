@@ -67,7 +67,8 @@ function(dk_executeProcess)
 	endif()
 	
 	# FIXME:  only in valid cmd shell
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		list(FIND ARGV "cmd;/c" index)
 		if(${index} EQUAL -1)			# add cmd /c if missing
