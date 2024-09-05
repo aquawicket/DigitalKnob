@@ -54,7 +54,7 @@ endif()
 
 
 
-dk_return()
+
 dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")

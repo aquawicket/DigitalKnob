@@ -631,9 +631,14 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
+	dk_echo("TARET: RASPBERRY_ARM64")
 	#dk_set(CMAKE_GENERATOR					"Unix Makefiles")
-	dk_set(CMAKE_C_COMPILER					${GCC_EXE})
-	dk_set(CMAKE_CXX_COMPILER				${GXX_EXE})
+	
+	#dk_set(CMAKE_C_COMPILER					${GCC_EXE})
+	#dk_set(CMAKE_CXX_COMPILER				${GXX_EXE})
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
+	
+	
 	dk_append(CMAKE_C_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
 	
@@ -645,8 +650,8 @@ endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
-	#dk_set(CMAKE_GENERATOR 					${VISUALSTUDIO_GENERATOR})
-	#dk_set(CMAKE_GENERATOR_PLATFORM			Win32)
+	#dk_set(CMAKE_GENERATOR 				${VISUALSTUDIO_GENERATOR})
+	#dk_set(CMAKE_GENERATOR_PLATFORM		Win32)
 	dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_C_COMPILER})
 	dk_set(CMAKE_CXX_COMPILER				${VISUALSTUDIO_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS					/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600

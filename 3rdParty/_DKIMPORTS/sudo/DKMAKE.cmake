@@ -1,6 +1,9 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.sudo.ws
 
+if(WIN_HOST)
+	return()
+endif()
 
 if(EXISTS ${SUDO})
 	return()
