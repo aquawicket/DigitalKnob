@@ -11,12 +11,13 @@ if(WIN_HOST)
 endif()
 
 #dk_depend(openjdk)
+dk_depend(sudo)
 
 if(ANDROID_HOST)
 	dk_command(pkg install build-essential)
 elseif(NOT ANDROID)
 	dk_cd(/usr)
-	dk_command(sudo apt -y install build-essential)
+	dk_command(${SUDO} apt -y install build-essential)
 endif()
 
 dk_todo("tiny-core-lunux build-essential")

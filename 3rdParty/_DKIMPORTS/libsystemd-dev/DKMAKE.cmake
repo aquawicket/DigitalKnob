@@ -6,7 +6,7 @@ endif()
 
 ### INSTALL ###
 #dk_cd(/usr)
-dk_command(sudo apt -y install libsystemd-dev)
+dk_command(${SUDO} apt -y install libsystemd-dev)
 
 
 ### LINK ###

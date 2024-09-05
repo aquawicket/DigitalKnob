@@ -6,7 +6,7 @@ endif()
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_command(sudo apt -y install libglib2.0-dev)
+dk_command(${SUDO} apt -y install libglib2.0-dev)
 
 
 find_package(PkgConfig REQUIRED)

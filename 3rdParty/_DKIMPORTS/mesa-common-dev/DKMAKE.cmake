@@ -9,4 +9,4 @@ endif()
 
 ### INSTALL ###
 #dk_cd(/usr)
-dk_command(sudo apt -y install mesa-common-dev)
+dk_command(${SUDO} apt -y install mesa-common-dev)

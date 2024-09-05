@@ -9,7 +9,7 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi libsndfile-dev.tcz)
 else()
-	dk_command(sudo apt -y install libsndfile1-dev)
+	dk_command(${SUDO} apt -y install libsndfile1-dev)
 endif()
 
 

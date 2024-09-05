@@ -9,5 +9,5 @@ endif()
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_command(sudo apt -y install mlocate)
-dk_command(sudo updatedb)
+dk_command(${SUDO} apt -y install mlocate)
+dk_command(${SUDO} updatedb)

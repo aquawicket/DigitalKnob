@@ -6,7 +6,7 @@ endif()
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_command(sudo apt -y install libgtk2.0-dev)
+dk_command(${SUDO} apt -y install libgtk2.0-dev)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK REQUIRED gtk+-2.0)

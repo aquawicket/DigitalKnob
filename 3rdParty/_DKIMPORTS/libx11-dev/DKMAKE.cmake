@@ -23,7 +23,7 @@ if(LINUX OR RASPBERRY)
 		if(TINYCORE)
 			dk_command(tce-load -wi libX11-dev.tcz)
 		else()
-			dk_command(sudo apt -y install libx11-dev)
+			dk_command(${SUDO} apt -y install libx11-dev)
 		endif()
 	endif()
 	

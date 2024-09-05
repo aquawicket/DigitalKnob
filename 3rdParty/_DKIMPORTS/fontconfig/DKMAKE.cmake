@@ -4,7 +4,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 if(APPLE)
-	dk_command(sudo port install fontconfig)
+	dk_depend(sudo)
+	dk_command(${SUDO} port install fontconfig)
 	return()
 endif()
 

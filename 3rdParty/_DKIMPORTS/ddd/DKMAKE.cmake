@@ -9,4 +9,5 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 # TODO
 # sudo apt-get install ddd
-LINUX_HOST_dk_command(sudo apt -y install ddd) #FIXME sudo needed
+dk_depend(sudo)
+LINUX_HOST_dk_command(${SUDO} apt -y install ddd)

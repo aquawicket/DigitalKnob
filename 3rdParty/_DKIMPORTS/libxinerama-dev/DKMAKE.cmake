@@ -18,7 +18,7 @@ endif()
 	if(TINYCORE)
 		dk_command(tce-load -wi libXinerama-dev.tcz)
 	else()
-		dk_command(sudo apt -y install libxinerama-dev)
+		dk_command(${SUDO} apt -y install libxinerama-dev)
 	endif()
 #endif()
 

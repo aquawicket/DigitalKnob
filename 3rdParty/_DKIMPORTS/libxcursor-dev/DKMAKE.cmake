@@ -9,7 +9,7 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi libXcursor-dev.tcz)
 else()
-	dk_command(sudo apt -y install libxcursor-dev)
+	dk_command(${SUDO} apt -y install libxcursor-dev)
 endif()
 
 ### LINK ###

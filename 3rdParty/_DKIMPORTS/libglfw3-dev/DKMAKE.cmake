@@ -7,7 +7,7 @@ endif()
 ### INSTALL ###
 if(LINUX)
 	dk_cd(/usr)
-	dk_command(sudo apt -y install libglfw3-dev)
+	dk_command(${SUDO} apt -y install libglfw3-dev)
 endif()
 if(MAC)
 	dk_command(brew install glfw3)

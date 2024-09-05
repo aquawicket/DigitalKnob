@@ -3,6 +3,9 @@ dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 # https://git-scm.com
 # https://github.com/git-for-windows/git
 
+
+dk_depend(sudo)
+
 ### DOWNLOAD ###
 
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
@@ -48,8 +51,8 @@ if(NOT GIT_EXE)
 		dk_command(apt -y install git)
 	elseif(LINUX_HOST)
 		# https://stackoverflow.com/a/27469489
-		dk_command(sudo apt-get -y install git)
-		#dk_command(sudo apt-get install apt-rdepends)
+		dk_command(${SUDO} apt-get -y install git)
+		#dk_command(${SUDO} apt-get install apt-rdepends)
 		#dk_command(bash c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()
@@ -121,7 +124,7 @@ return()
 			elseif(ANDROID_HOST)
 				dk_command(apt -y install git)
 			elseif(LINUX_HOST)
-				dk_command(sudo apt-get -y install git)
+				dk_command(${SUDO} apt-get -y install git)
 			endif()
 			#dk_command(command -v git OUTPUT_VARIABLE GIT_EXE) # BASH_ENV)
 			dk_command(bash -c "command -v git" OUTPUT_VARIABLE GIT_EXE)

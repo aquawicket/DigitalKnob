@@ -10,7 +10,7 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi libXrandr-dev.tcz)
 else()
-	dk_command(sudo apt -y install libxrandr-dev)
+	dk_command(${SUDO} apt -y install libxrandr-dev)
 endif()
 
 ### LINK ###
