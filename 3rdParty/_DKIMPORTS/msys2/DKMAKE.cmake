@@ -41,13 +41,20 @@ dk_set(MSYS2_EXE "${MSYS2}/msys2.exe")
 
 
 ### Install Msys2 ###
-if(NOT EXISTS ${MSYS2}/msys2.exe)
+if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
 	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
 endif()	
 
 
+
+
+
+
+
+
+dk_return()
 dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")
