@@ -66,6 +66,7 @@ dk_load(dk_dumpAllVariables)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
+
 #Load all cmake flags prior to calling PROJECT()
 dk_load(${DKCMAKE_DIR}/DKStart.cmake)
 dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
