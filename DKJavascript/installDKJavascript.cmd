@@ -3,7 +3,7 @@
 if "%~1" neq "" (goto:runDKJavascript)
 :installDKJavascript
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKJavascript ######
 	call dk_echo "Installing DKJavascript . . ."

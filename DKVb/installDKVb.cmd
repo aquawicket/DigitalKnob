@@ -3,7 +3,7 @@
 if "%~1" neq "" (goto:runDKVb)
 :installDKVb
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKVb ######
 	call dk_echo "Installing DKVb . . ."

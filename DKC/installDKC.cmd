@@ -45,7 +45,7 @@
 if "%~1" neq "" goto:runDKC
 :installDKC
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKC ######
 	call dk_echo "Installing DKC . . ."

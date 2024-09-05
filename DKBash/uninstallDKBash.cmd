@@ -2,7 +2,7 @@
 
 :uninstallDKBash
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	ftype DKBash=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"

@@ -45,7 +45,7 @@
 if "%~1" neq "" goto:runDKCpp
 :installDKCpp
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKCpp ######
 	call dk_echo "Installing DKCpp . . ."

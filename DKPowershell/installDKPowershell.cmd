@@ -3,7 +3,7 @@
 if not "%*" == "" (goto:runDKPowershell)
 :installDKPowershell
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	::###### Install DKPowershell ######
 	%dk_call% dk_echo "Installing DKPowershell . . ."

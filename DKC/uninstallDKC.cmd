@@ -2,7 +2,7 @@
 
 :uninstallDKC
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	call "..\DKBatch\functions\DK.cmd" %~0
 	
 	ftype DKC=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKC"
