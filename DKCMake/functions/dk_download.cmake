@@ -96,17 +96,17 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Use BACKUP_DL_SERVER only
 	if(${TEST_BACKUP_DL_SERVER} EQUAL 1)
-		set(url "${BACKUP_DL_SERVER}/${src_filename}")
-		dk_info("Using Backup Server url:${url} . . .")
+		set(src_path "${BACKUP_DL_SERVER}/${src_filename}")
+		dk_info("Using Backup Server src_path:${src_path} . . .")
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
-		dk_assert(url)
-		dk_urlExists(${url} result)
+		dk_assert(src_path)
+		dk_urlExists(${src_path} result)
 		if(NOT result)
-			dk_warning("url:${url} NOT FOUND")
-			set(url "${BACKUP_DL_SERVER}/${src_filename}")
-			dk_info("Trying Backup Server url:${url} . . .")
+			dk_warning("src_path:${src_path} NOT FOUND")
+			set(src_path "${BACKUP_DL_SERVER}/${src_filename}")
+			dk_info("Trying Backup Server src_path:${src_path} . . .")
 		endif()
 	endif()
 
