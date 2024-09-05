@@ -30,7 +30,10 @@ elseif(emscripten)
 	endif()
 	
 elseif(LINUX_HOST)
-	dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
+	dk_findProgram(CMAKE_MAKE_PROGRAM make)
+	
+elseif(MAC_HOST)
+	dk_findProgram(CMAKE_MAKE_PROGRAM make)
 	
 elseif(win_arm64_clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
@@ -81,7 +84,7 @@ elseif(win_x86_64_ucrt)
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2}/ucrt64/bin")
 	
 else()
-	dk_error("Could not determine 'CMAKE_MAKE_PROGRAM'")
+	dk_findProgram(CMAKE_MAKE_PROGRAM make)
 	
 endif()
 
