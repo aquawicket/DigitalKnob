@@ -8,41 +8,42 @@ if(DEFINED ENV{MSYSTEM})
 endif()
 
 
-dk_validate(HOST_TRIPLE    "dk_getHostTriple()")
-dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
-dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
+#dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
 
 dk_depend(msys2)
 dk_depend(pacman)
 dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	
 if(win_x86_clang)
-	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
+	dk_command(${PACMAN_EXE}  -S mingw-w64-clang-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG32
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/clang32/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/clang32/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/clang32/bin/windres.exe)
 elseif(win_x86_64_clang)
-	dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
+	dk_command(${PACMAN_EXE}  -S mingw-w64-clang-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/clang64/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/clang64/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/clang64/bin/windres.exe)
 elseif(win_arm64_clang)
-	dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
+	dk_command(${PACMAN_EXE}  -S mingw-w64-clang-aarch64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/clangarm64/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/clangarm64/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/clangarm64/bin/windres.exe)
 elseif(win_x86_mingw)
-	dk_command(${PACMAN_EXE} -S mingw-w64-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
+	dk_command(${PACMAN_EXE}  -S mingw-w64-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/mingw32/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/mingw32/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/mingw32/bin/windres.exe)
 elseif(win_x86_64_mingw)
-	dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+	dk_command(${PACMAN_EXE}  -S mingw-w64-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# MINGW64
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/mingw64/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/mingw64/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/mingw64/bin/windres.exe)
 elseif(win_x86_64_ucrt)
-	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# UCRT64
+	dk_command(${PACMAN_EXE}  -S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# UCRT64
 	dk_set(CMAKE_C_COMPILER   ${MSYS2}/ucrt64/bin/gcc.exe)
 	dk_set(CMAKE_CXX_COMPILER ${MSYS2}/ucrt64/bin/g++.exe)
 	dk_set(CMAKE_RC_COMPILER  ${MSYS2}/ucrt64/bin/windres.exe)
