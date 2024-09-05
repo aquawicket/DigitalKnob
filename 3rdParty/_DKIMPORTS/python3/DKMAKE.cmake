@@ -16,7 +16,12 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	MAC_HOST_dk_import(${PYTHON3_DL})
 	WIN_HOST_dk_import(${PYTHON3_DL})
 	
-	dk_findProgram(PYTHON3_EXE python "${PYTHON3}")
+	if(LINUX_HOST OR ANDROID_HOST)
+		dk_findProgram(PYTHON3_EXE python)
+	else()
+		dk_assertPath(PYTHON3)
+		dk_findProgram(PYTHON3_EXE python "${PYTHON3}")
+	endif()
 endif()
 
 
