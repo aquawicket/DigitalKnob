@@ -18,7 +18,7 @@ if(android)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2}/clang64/bin")
 	else()
-		dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
+		dk_findProgram(CMAKE_MAKE_PROGRAM make)
 	endif()
 	
 elseif(emscripten)
