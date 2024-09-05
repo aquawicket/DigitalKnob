@@ -1,6 +1,12 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
+if(NOT BACKUP_DL_SERVER)
+	set(BACKUP_DL_SERVER "http://aquawicket.com/download")
+endif()
+if(NOT TEST_BACKUP_DL_SERVER)
+	set(TEST_BACKUP_DL_SERVER 0)
+endif()
 ###############################################################################
 # dk_download(src_path dest_path) #NO_HALT
 #

@@ -1,7 +1,8 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
-if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/download"
+if not defined BACKUP_DL_SERVER       set "BACKUP_DL_SERVER=http://aquawicket.com/download"
+if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
 ::####################################################################
 ::# dk_download(url, destination)
 ::#
@@ -37,6 +38,7 @@ if not defined BACKUP_DL_SERVER  set "BACKUP_DL_SERVER=http://aquawicket.com/dow
     
     if exist "%destination%" %dk_call% dk_info "%destination% already exist" & goto:eof
     
+	if "%TEST_BACKUP_DL_SERVER%"=="1"  set "url=%BACKUP_DL_SERVER%/%url_filename%"
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%url_filename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_error "url:%url% NOT FOUND"
     %dk_call% dk_info "Downloading %url%"
