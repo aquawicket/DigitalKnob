@@ -39,7 +39,8 @@ if(BZIP2_USE_CMAKE)
 	endif()
 	
 	### COMPILE ###
-	dk_build(${BZIP2} ${PYTHON3_CMAKE})
+	#dk_build(${BZIP2} ${PYTHON3_CMAKE})
+	dk_build(${BZIP2})
 	
 else()
 	if(NOT EXISTS ${BZIP2}/copy)
