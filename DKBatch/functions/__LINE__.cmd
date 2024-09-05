@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::set /A _FRAME_+=1
 ::  call dk_return "%BATCH_LINENO[%_FRAME_%]%"
  endlocal
-goto:eof
+%endfunction%
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
@@ -39,4 +39,4 @@ goto:eof
        echo Within loop iteration %%G: line %#=%%=#%
     )
  endlocal
-goto:eof
+%endfunction%

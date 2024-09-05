@@ -92,7 +92,7 @@ if "%~1" neq "" goto:runDKC
 	assoc .c=DKC
 	
 	call dk_echo "DKC install complete"
-goto:eof
+%endfunction%
 
 
 
@@ -129,4 +129,4 @@ goto:eof
 	title %DKC_FILE%
 	::cls
     cmd /v:on /k "temp.exe" && echo success: return value: !errorLevel! || echo failed: return value: !errorLevel!
-goto:eof
+%endfunction%

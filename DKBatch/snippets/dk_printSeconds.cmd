@@ -26,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	set "total_seconds=%hours_in_seconds%"
 
 	echo %total_seconds%.%centisecond%
-goto:eof
+%endfunction%
 
 
 
@@ -36,4 +36,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_printSeconds
-goto:eof
+%endfunction%

@@ -23,7 +23,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
 	echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
 	"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
-goto:eof
+%endfunction%
 
 :: find_dkbranch_dir
 :find_dkbranch_dir
@@ -36,5 +36,5 @@ goto:eof
 		if "%parent_folder%" neq "digitalknob" goto:find_dkbranch_dir_loop
 		set %1=%parent_dir:~0,-1%
 		set %2=%current_folder%
-goto:eof
+%endfunction%
 

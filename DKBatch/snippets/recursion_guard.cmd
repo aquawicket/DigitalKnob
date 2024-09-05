@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	
 	endlocal
 	set "myFunction="  &::function complete, remove recursion block
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
 	call dk_debugFunc 0
 
 	call myFunction
-goto:eof
+%endfunction%

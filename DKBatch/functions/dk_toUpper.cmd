@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         if "!DE!" equ "" for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "_upper_=!_upper_:%%#=%%#!")           &:: with delayed expansion ON
         if "!DE!" neq "" for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do call set "_upper_=%%_upper_:%%#=%%#%%")    &:: with delayed expansion OFF
     endlocal & set "%2=%_upper_%"
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
     
     %dk_call% dk_printVar myVar
     %dk_call% dk_printVar uppercase
-goto:eof
+%endfunction%

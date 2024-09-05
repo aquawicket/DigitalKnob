@@ -25,7 +25,7 @@ ping -n 5 -w 1 127.0.0.1 > NUL
 
 %SendKeys% "exit{ENTER}"
 
-goto :EOF
+goto:eof
 
 
 @end

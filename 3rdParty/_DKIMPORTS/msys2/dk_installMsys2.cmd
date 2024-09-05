@@ -11,7 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
 	call dk_printVar MSYS2
 	call dk_printVar MSYS2_GENERATOR
-goto:eof
+%endfunction%
 
 
 
@@ -22,4 +22,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installMsys2
-goto:eof
+%endfunction%

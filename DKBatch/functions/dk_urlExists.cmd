@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%~2" neq "" (endlocal & set "%2=false")
     exit /b 1
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -94,4 +94,4 @@ goto:eof
     ::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT exists)
     ::  if not ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)
  endlocal
-goto:eof
+%endfunction%

@@ -10,4 +10,4 @@
 	assoc .js=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js
-goto:eof
+%endfunction%

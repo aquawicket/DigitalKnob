@@ -11,7 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell"
 	call dk_installFileAssoc .ps1 %POWERSHELL_EXE%
 	call dk_installFileAssoc .psm1 %POWERSHELL_EXE%
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installPowershellFileAssociations
-goto:eof
+%endfunction%

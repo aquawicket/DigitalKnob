@@ -67,7 +67,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development NO_CONFIRM
         
     start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% & exit
-goto:eof
+%endfunction%
 
 
 
@@ -77,4 +77,4 @@ goto:eof
     call dk_debugFunc 0
 
     %dk_call% dk_resetAll
-goto:eof
+%endfunction%

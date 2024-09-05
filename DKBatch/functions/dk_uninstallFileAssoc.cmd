@@ -65,7 +65,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::[HKEY_CLASSES_ROOT\emeditor.txt\shell\print\command]
     ::@="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" /p \"%1\""
     ::%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\%_dkname_%\shell\print\command" "@" "REG_SZ" "\"%_exe_%\" /p \"%1\""
-goto:eof
+%endfunction%
 
 
 
@@ -79,5 +79,5 @@ goto:eof
     call dk_debugFunc 0
     
     %dk_call% dk_uninstallFileAssoc ".txt"
-goto:eof
+%endfunction%
     

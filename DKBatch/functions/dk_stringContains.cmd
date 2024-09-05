@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1
-goto:eof
+%endfunction%
 
 
 
@@ -72,4 +72,4 @@ goto:eof
     %dk_call% dk_set substring "straw"
     %dk_call% dk_stringContains "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1
-goto:eof
+%endfunction%

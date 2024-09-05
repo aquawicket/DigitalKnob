@@ -107,7 +107,7 @@ call ..\functions\DK.cmd
 	::echo 2 = %2
 	::for /f "usebackq tokens=*" %%a in (`%1`) do set "%2=%%a"
 	for /f "usebackq tokens=*" %%a in (`%1`) do set "cmnd_out=%%a"
-goto:eof
+%endfunction%
 
 
 	::set ver=&call :ver
@@ -136,7 +136,7 @@ goto:eof
 ::	call dk_echo "start = BEFORE... %start%dk_test%end% ...AFTER"
 	
 ::	pause
-::goto:eof
+::%endfunction%
 
 
 
@@ -148,11 +148,11 @@ goto:eof
 	::for /f "usebackq tokens=*" %%a in (`%1`) do set "start=start %%a"
 	::for /f "usebackq tokens=*" %%a in (`%1`) do set "start=%%a"
 	::set "start=&for /f "usebackq tokens=*" %%a in (`%1`) do set start=TEST
-goto:eof
+%endfunction%
 
 
 :end
 	for /f "usebackq tokens=*" %%a in (`%cmnd%`) do set "end=%%a"
-goto:eof
+%endfunction%
 
 

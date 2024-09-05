@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::  call dk_return "%FUNCNAME[%_FRAME_%]%"
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
     
     echo %__FUNCTION__%
  endlocal
-goto:eof
+%endfunction%

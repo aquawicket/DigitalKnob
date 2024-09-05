@@ -52,7 +52,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_installFileAssoc .ts %NOTEPADPP_EXE%
 	call dk_installFileAssoc .txt %NOTEPADPP_EXE%
 	call dk_installFileAssoc .xml %NOTEPADPP_EXE%
-goto:eof
+%endfunction%
 
 
 
@@ -61,4 +61,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_installNotepadppFileAssociations
-goto:eof
+%endfunction%

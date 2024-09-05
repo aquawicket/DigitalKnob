@@ -23,13 +23,13 @@ call dk_set VERSION_dk_messageBox 3
     :messageBox_1 
         mshta javascript:alert("%message%");close();
         echo errorlevel = %errorlevel%
-    goto:eof    
+    %endfunction%    
         
     :messageBox_2
         :: https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.msgboxstyle?view=net-8.0
         mshta.exe vbscript:Execute("MsgBox ""%message%"", vbOkCancel, ""%title%""")(window.close)
         echo errorlevel = %errorlevel%
-    goto:eof
+    %endfunction%
         
     :messageBox_3
         :: https://stackoverflow.com/a/12523614
@@ -67,13 +67,13 @@ call dk_set VERSION_dk_messageBox 3
         del %tmp%\tmp.vbs
         ::if "%~3" neq "" set "%3=%errorlevel%"
         set "%3=%rtn_var%"
-    goto:eof
+    %endfunction%
         
     :messageBox_4
         :: with dk_powershell
         %dk_call% dk_powershell [Reflection.Assembly]::LoadWithPartialName("""System.Windows.Forms""");[Windows.Forms.MessageBox]::show("""%~1""", """My PopUp Message Box""")
         echo errorlevel = %errorlevel%
-    goto:eof
+    %endfunction%
 %endfunction%
 
 

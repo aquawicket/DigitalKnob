@@ -20,7 +20,7 @@ if not "%~1" == "" (goto:runDKCMake)
 	assoc .cmake=DKCmake
 
 	%dk_call% dk_echo "DKCmake install complete"
-goto:eof
+%endfunction%
 
 
 :runDKCMake
@@ -43,4 +43,4 @@ goto:eof
 	cls
 	goto:runDKCMake
 	
-goto:eof
+%endfunction%

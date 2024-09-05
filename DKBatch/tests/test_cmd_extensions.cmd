@@ -13,14 +13,14 @@ goto CMDEXTV1
 :CMDEXTV1
 	echo Command extensions v1 available
 	pause
-goto:eof
+%endfunction%
 
 :CMDEXTV2
 	echo Command extensions v2 or later available
 	pause
-goto:eof
+%endfunction%
 
 :NOCMDEXT
 	echo Command extensions not available
 	pause
-goto:eof
+%endfunction%

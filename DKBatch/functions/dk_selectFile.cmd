@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     rem for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
         endlocal & set %1=%%~I
     )
-goto:eof
+%endfunction%
 
 
 
@@ -27,7 +27,7 @@ goto:eof
     
     %dk_call% dk_selectFile myFile
     %dk_call% dk_echo "myFile = %myFile%"
-goto:eof
+%endfunction%
 
 
 

@@ -63,9 +63,9 @@ set "DKDEBUGFUNC=call:DKDEBUGFUNC"
 :main
 	%DKDEBUGFUNC% %0 %*
 	call:test_function One 2 "three" FOUR "5"
-goto:eof
+%endfunction%
 
 
 :test_function <args>
 	%DKDEBUGFUNC% %0 %*
-goto:eof
+%endfunction%

@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     ::echo %~1.startTime = !%~1.startTime!
     ::echo %~1.lastTime = !%~1.lastTime!
-goto:eof
+%endfunction%
 
 
 
@@ -88,4 +88,4 @@ goto:eof
         %dk_call% dk_timer t1
         echo Seconds since last call: = %t1%
     goto:timerLoop
-goto:eof    
+%endfunction%    

@@ -44,7 +44,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	%DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
 	
 	::wsl --install --distribution Debian
-goto:eof
+%endfunction%
 
 
 
@@ -53,4 +53,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installWsl
-goto:eof
+%endfunction%

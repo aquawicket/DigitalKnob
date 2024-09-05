@@ -10,4 +10,4 @@
 	assoc .cpp=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
-goto:eof
+%endfunction%

@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if %dk_stacktrace_count% GEQ 0 goto:dk_stacktrace_Loop
     
     echo done
-goto:eof
+%endfunction%
 
 
 
@@ -49,7 +49,7 @@ goto:eof
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
     %dk_call% :func1 abc
-goto:eof
+%endfunction%
 
 :func1
     call dk_debugFunc 0
@@ -57,7 +57,7 @@ goto:eof
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
     %dk_call% :func2 123
-goto:eof
+%endfunction%
 
 :func2 
     call dk_debugFunc 0
@@ -65,7 +65,7 @@ goto:eof
     echo ~f0 = %~f0
     echo ~nx0 = %~nx0
     %dk_call% :func3 x y z
-goto:eof
+%endfunction%
 
 :func3
     call dk_debugFunc 0
@@ -74,4 +74,4 @@ goto:eof
     echo ~nx0 = %~nx0
     pause
     %dk_call% dk_stacktrace
-goto:eof
+%endfunction%

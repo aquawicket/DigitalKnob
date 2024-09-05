@@ -74,7 +74,7 @@ if NOT "%errorlevel%" == "0" goto Error
 	call dk_echo errorlevel = %errorlevel%
 	call dk_echo end
 	pause
-goto:eof
+%endfunction%
 ::****************************************
 
 ::****************************************
@@ -83,5 +83,5 @@ goto:eof
 	call dk_echo(
 	call dk_echo Failed with error code: %errorlevel%
 	Pause>nul
-goto:eof
+%endfunction%
 ::**************************************** 

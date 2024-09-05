@@ -9,7 +9,7 @@ goto :loop
 echo reached the end
 ::del quit.exe
 pause
-goto :EOF
+goto:eof
 
 
 :create_quit.exe

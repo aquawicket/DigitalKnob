@@ -34,7 +34,7 @@ pause
 	call dk_command %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE% /install /quiet /norestart 
 	
 	if not exist %VCCOMP140_DLL% dk_error "Unable to locate VCCOMP140_DLL:%VCCOMP140_DLL%"
-goto:eof
+%endfunction%
 
 
 
@@ -45,4 +45,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installVC_Redist
-goto:eof
+%endfunction%

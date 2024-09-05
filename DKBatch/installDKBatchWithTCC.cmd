@@ -20,7 +20,7 @@ if "%~1" neq "" goto:runDKBatch
 	assoc .cmd=DKBatch
 	
 	%dk_call% dk_echo "DKBatch install complete"
-goto:eof
+%endfunction%
 
 
 :runDKBatch
@@ -43,4 +43,4 @@ goto:eof
 	cls
 	goto:runDKBatch
 	
-goto:eof
+%endfunction%

@@ -3,4 +3,4 @@
 :main
 	echo in returnWithoutCallB
 	pause
-goto:eof
+%endfunction%

@@ -24,7 +24,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 
 	::FIXME: kill pwsh.exe peocess
 	call dk_delete "%POWERSHELL_DIR%"
-goto:eof
+%endfunction%
 
 
 
@@ -34,4 +34,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_uninstallPowershell
-goto:eof
+%endfunction%

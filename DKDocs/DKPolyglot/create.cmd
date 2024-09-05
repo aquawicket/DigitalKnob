@@ -6,7 +6,7 @@ goto:main
 	set "output=%input%%~1"
 	if exist "%output%" del "%output%"
 	echo F|xcopy "%input%" "%output%" /H /Y 1>nul 2>nul
-goto:eof
+%endfunction%
 
 
 :main

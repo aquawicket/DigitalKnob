@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not exist "%DKDESKTOP_DIR%\digitalknob.lnk" %dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%"
     
     %dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
-goto:eof
+%endfunction%
 
 
 
@@ -44,4 +44,4 @@ goto:eof
     
     %dk_call% dk_setDIGITALKNOB_DIR
     %dk_call% dk_printVar DIGITALKNOB_DIR
-goto:eof
+%endfunction%

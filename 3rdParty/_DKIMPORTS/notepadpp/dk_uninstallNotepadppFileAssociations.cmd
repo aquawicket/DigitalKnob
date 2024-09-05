@@ -53,7 +53,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_uninstallFileAssoc .ts
 	call dk_uninstallFileAssoc .txt
 	call dk_uninstallFileAssoc .xml
-goto:eof
+%endfunction%
 
 
 
@@ -65,4 +65,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_uninstallNotepadppFileAssociations
-goto:eof
+%endfunction%

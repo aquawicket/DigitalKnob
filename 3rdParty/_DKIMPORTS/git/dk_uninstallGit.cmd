@@ -41,7 +41,7 @@ call dk_source dk_validate
 	
 	::### Remove PATH variable
 	:: TODO
-goto:eof
+%endfunction%
 
 
 
@@ -53,4 +53,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_uninstallGit
-goto:eof
+%endfunction%

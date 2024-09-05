@@ -21,7 +21,7 @@ if "%~1" neq "" (goto:runDKVb)
 	assoc .vbs=DKVb
 	
 	call dk_echo "DKVb install complete"
-goto:eof
+%endfunction%
 
 
 :runDKVb
@@ -29,4 +29,4 @@ goto:eof
 	set "WSCRIPT_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	start %WSCRIPT_EXE% %DKSCRIPT_PATH%
-goto:eof
+%endfunction%

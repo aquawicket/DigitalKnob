@@ -11,7 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 	call dk_printVar MAKE_PROGRAM
-goto:eof
+%endfunction%
 
 
 
@@ -21,4 +21,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installMake
-goto:eof
+%endfunction%

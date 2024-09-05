@@ -19,7 +19,7 @@ if "%~1" neq "" (goto:runDKBash)
 	assoc .sh=DKBash
 	
 	%dk_call% dk_echo "DKBash install complete"
-goto:eof
+%endfunction%
 
 
 :runDKBash
@@ -41,4 +41,4 @@ goto:eof
 	cls
 	goto:runDKBash
 	
-goto:eof
+%endfunction%

@@ -40,7 +40,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	::### install DKCMake
 	::call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	::call "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
-goto:eof
+%endfunction%
 
 
 
@@ -51,4 +51,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installCmake
-goto:eof
+%endfunction%

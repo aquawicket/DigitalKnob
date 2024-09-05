@@ -20,7 +20,7 @@ if not "%*" == "" (goto:runDKPowershell)
 	assoc .ps1=DKPowershell
 	
 	%dk_call% dk_echo "DKPowershell install complete"
-goto:eof
+%endfunction%
 
 
 :runDKPowershell
@@ -41,4 +41,4 @@ goto:eof
 	cls
 	goto:runDKPowershell
 	
-goto:eof
+%endfunction%

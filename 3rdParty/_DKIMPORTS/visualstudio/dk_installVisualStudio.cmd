@@ -13,7 +13,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_printVar VISUALSTUDIO_GENERATOR
 	call dk_printVar VISUALSTUDIO_X86_CXX_COMPILER
 	call dk_printVar VISUALSTUDIO_X64_CXX_COMPILER
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installVisualStudio
-goto:eof
+%endfunction%

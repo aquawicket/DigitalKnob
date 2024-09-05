@@ -5,4 +5,4 @@
 	) || (
 	  echo %1 Failed
 	)	
-goto:eof
+%endfunction%

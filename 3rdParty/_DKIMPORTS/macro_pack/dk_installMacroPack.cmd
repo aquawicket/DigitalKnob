@@ -27,7 +27,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 
 	if NOT exist "%MACROPACK_EXE%" call dk_error "cannot find MACROPACK_EXE:%MACROPACK_EXE%"
 	:macropack_installed
-goto:eof
+%endfunction%
 
 
 
@@ -39,4 +39,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installMacroPack
-goto:eof
+%endfunction%

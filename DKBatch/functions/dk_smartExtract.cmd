@@ -58,7 +58,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
     :: rename/move UNZIPPED folder to dest path"
     %dk_call% dk_move "%src_dirname%\UNZIPPED" "%dest_realpath%" OVERWRITE
-goto:eof
+%endfunction%
 
 
 
@@ -72,4 +72,4 @@ goto:eof
     %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\test_file_0.0.1.zip" "%DKDOWNLOAD_DIR%\test_file_0.0.1"
     
     %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\test_file_0.0.2.zip" "%DKDOWNLOAD_DIR%\test_file_0.0.2"
-goto:eof
+%endfunction%

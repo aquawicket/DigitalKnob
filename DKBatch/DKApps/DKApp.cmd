@@ -38,7 +38,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	::echo DKApp.argv = %DKApp.argv%
 	call :DKApp.init
 	call :DKApp.Loop
-goto:eof
+%endfunction%
 
 :DKApp.init
 	::echo %ESC%[19;200H                     
@@ -47,7 +47,7 @@ goto:eof
 	
 	call dk_keyboard callback "%~d0\:DKApp.onKeyDown\..%~pnx0"
 	::echo %ESC%[?25l    &:: Hide Cursor
-goto:eof
+%endfunction%
 
 :DKApp.Loop
 	for /L %%G in (0) do (
@@ -56,7 +56,7 @@ goto:eof
 		rem echo %ESC%[0;0HT:%time%
 		rem if not defined DKApp.active goto:eof
 	)	
-goto:eof
+%endfunction%
 
 :DKApp.exit
 	::echo %ESC%[19;200H                  
@@ -64,7 +64,7 @@ goto:eof
 	
 	echo dk_exit
 	call dk_exit 0
-goto:eof
+%endfunction%
 
 
 :DKApp.onKeyDown
@@ -84,4 +84,4 @@ goto:eof
 	::if %~1 equ 37 echo "LeftArrow" 
 	::if %~1 equ 39 echo "RightArrow"
 	
-goto:eof
+%endfunction%

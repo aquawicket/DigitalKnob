@@ -92,7 +92,7 @@ if "%~1" neq "" goto:runDKCpp
 	assoc .cpp=DKCpp
 	
 	call dk_echo "DKCpp install complete"
-goto:eof
+%endfunction%
 
 
 
@@ -137,4 +137,4 @@ goto:eof
 	del %~dp0\reload
 	cls
 	goto:runDKCpp
-goto:eof
+%endfunction%

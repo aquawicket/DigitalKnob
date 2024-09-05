@@ -29,7 +29,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%NUGET_DL_FILE%" "%NUGET%"
 	if NOT exist "%NUGET_EXE%" call dk_error "cannot find NUGET_EXE:%NUGET_EXE%"
 	:notepadpp_installed
-goto:eof
+%endfunction%
 
 
 
@@ -41,4 +41,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installNuget
-goto:eof
+%endfunction%

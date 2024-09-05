@@ -77,7 +77,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set /a "hours=n/60"
     set /a "n%%=60"
     endlocal & set "%1=%days%" & set "%2=%hours%" & set "%3=%n%" & set "%4=%ss%"
-goto:eof
+%endfunction%
 
 
 
@@ -89,4 +89,4 @@ goto:eof
     
     %dk_call% dk_uptime d h m s
     echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%
-goto:eof    
+%endfunction%    

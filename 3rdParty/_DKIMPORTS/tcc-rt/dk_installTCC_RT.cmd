@@ -33,7 +33,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	
 	::if NOT exist "%TCC_RT_EXE%" call dk_error "cannot find TCC_RT_EXE:%TCC_RT_EXE%"
 	:tcc_rt_installed
-goto:eof
+%endfunction%
 
 
 
@@ -45,4 +45,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installTCC_RT
-goto:eof
+%endfunction%

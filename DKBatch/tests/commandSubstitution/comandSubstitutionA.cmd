@@ -42,25 +42,25 @@ set ")=echo :%subfunc%"
 ::	call dk_echo "startB = %start%:dk_test%end%"
 	
 	pause
-goto:eof
+%endfunction%
 
 
 	
 :funcA
 	set ver=&for /f "usebackq tokens=*" %%a in (`ver`) do set "ver=%%a"
-goto:eof
+%endfunction%
 
 :start
 	::set start=&for /f "usebackq tokens=*" %%a in (`%~1`) do set "end=%%a"
 	for /f "usebackq tokens=*" %%a in (`%1`) do set "start=%%a&"
-goto:eof
+%endfunction%
 
 
 
 :cmnd
 	set ver=&for /f "usebackq tokens=*" %%a in (`ver`) do set "ver=%%a"
-goto:eof
+%endfunction%
 
 :getversion
 	set varA=&for /f "usebackq tokens=*" %%a in (`ver`) do set "varA=%%a"
-goto:eof
+%endfunction%

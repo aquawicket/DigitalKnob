@@ -71,7 +71,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         :: /DKVb
         if not defined DKVB_DIR set "DKVB_DIR=%DKBRANCH_DIR%\DKVb"
             if not defined DKVB_FUNCTIONS_DIR set "DKVB_FUNCTIONS_DIR=%DKVB_DIR%\functions"
-goto:eof    
+%endfunction%    
     :: make sure script is running from DKBRANCH_DIR
     ::if not %DKSCRIPT_DIR% == %DKBRANCH_DIR% (
     ::      if not exist %DKBRANCH_DIR%\%DKSCRIPT_NAME% (
@@ -87,7 +87,7 @@ goto:eof
     ::      exit
     ::)
     ::%dk_call% dk_checkError
-goto:eof
+%endfunction%
 
 
 
@@ -98,4 +98,4 @@ goto:eof
     call dk_debugFunc 0
     
     %dk_call% dk_validateBranch
-goto:eof
+%endfunction%

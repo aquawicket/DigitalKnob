@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     %dk_call% dk_debug "dk_validate: %~1"
     %dk_call% dk_printVar "%~1"
-goto:eof
+%endfunction%
 
 
 
@@ -37,4 +37,4 @@ goto:eof
     %dk_call% dk_echo "DIGITALKNOB_DIR = %DIGITALKNOB_DIR%"
     %dk_call% dk_echo "DKTOOLS_DIR = %DKTOOLS_DIR%"
     %dk_call% dk_echo "DKDOWNLOAD_DIR = %DKDOWNLOAD_DIR%"
-goto:eof
+%endfunction%

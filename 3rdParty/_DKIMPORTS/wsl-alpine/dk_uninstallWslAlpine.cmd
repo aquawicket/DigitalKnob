@@ -16,7 +16,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	taskkill /f /im wslservice.exe
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_delete %DKTOOLS_DIR%\AlpineLinux
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_uninstallWslAlpine
-goto:eof
+%endfunction%

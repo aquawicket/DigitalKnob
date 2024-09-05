@@ -27,4 +27,4 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         netsh wlan show profile name="!list_%%i!" key=clear | findstr Content
         echo:
     )
-goto:eof
+%endfunction%

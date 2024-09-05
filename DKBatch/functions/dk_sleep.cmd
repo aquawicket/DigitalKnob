@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     :: Method 4 - using ping
     set /a "seconds=(%~1+1000)/1000"
     ping 127.0.0.1 -n %seconds% >null
-goto:eof
+%endfunction%
 
 
 
@@ -35,7 +35,7 @@ goto:eof
     
     %dk_call% dk_echo "sleeping for 1000 milliseconds . . ."
     %dk_call% dk_sleep 1000
-goto:eof
+%endfunction%
 */
 
 WSH.Sleep(WSH.Arguments(0));

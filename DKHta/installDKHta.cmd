@@ -21,7 +21,7 @@ if "%~1" neq "" (goto:runDKHta)
 	assoc .hta=DKHta
 	
 	call dk_echo "DKHta install complete"
-goto:eof
+%endfunction%
 
 
 :runDKHta
@@ -29,4 +29,4 @@ goto:eof
 	set "MSHTA_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	start %MSHTA_EXE% %DKSCRIPT_PATH%
-goto:eof
+%endfunction%

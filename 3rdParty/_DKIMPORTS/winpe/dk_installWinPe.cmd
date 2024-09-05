@@ -61,7 +61,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 			::call dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 			call dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 	endlocal
-goto:eof
+%endfunction%
 	
 
 
@@ -71,4 +71,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installWinPE
-goto:eof
+%endfunction%

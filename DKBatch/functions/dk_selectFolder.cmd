@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     )
     
     endlocal & set "%~1=%sFolderName%"
-goto:eof
+%endfunction%
 
 
 
@@ -33,4 +33,4 @@ goto:eof
     
     %dk_call% dk_selectFolder myFolder
     %dk_call% dk_echo "myFolder = %myFolder%"
-goto:eof
+%endfunction%

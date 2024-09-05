@@ -34,7 +34,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%PHP_DL_FILE%" "%PHP%"
 	
 	if NOT exist "%PHP_EXE%"  call dk_error "cannot find PHP_EXE:%PHP_EXE%"
-goto:eof
+%endfunction%
 
 
 
@@ -44,4 +44,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installPhp
-goto:eof
+%endfunction%

@@ -32,7 +32,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	if NOT exist "%WINDOWS_TERMINAL_EXE%" call dk_error "cannot find wt.exe"
 	:windows_terminal_installed
 
-goto:eof
+%endfunction%
 
 
 
@@ -44,5 +44,5 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installWindowsTerminal
-goto:eof
+%endfunction%
 

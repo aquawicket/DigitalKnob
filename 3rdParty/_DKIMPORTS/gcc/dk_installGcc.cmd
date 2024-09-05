@@ -11,7 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/gcc/DKMAKE.cmake')" "GCC_EXE;GXX_EXE"
 	call dk_printVar GCC_EXE
 	call dk_printVar GXX_EXE
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installGcc
-goto:eof
+%endfunction%

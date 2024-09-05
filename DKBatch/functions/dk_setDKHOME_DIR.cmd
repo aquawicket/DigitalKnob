@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not defined HOMEPATH %dk_call% dk_error "HOMEPATH is invalid"
     set "DKHOME_DIR=%HOMEDRIVE%%HOMEPATH%"
     if not exist %DKHOME_DIR% %dk_call% dk_error "DKHOME_DIR:%DKHOME_DIR% does not exist"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
     
     %dk_call% dk_setDKHOME_DIR
     %dk_call% dk_printVar DKHOME_DIR
-goto:eof
+%endfunction%

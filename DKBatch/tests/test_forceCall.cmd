@@ -6,4 +6,4 @@
 	
 	test_forceCallB & pause
 	pause
-goto:eof
+%endfunction%

@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::	#echo "$(basename %BATCH_SOURCE[%_FRAME_%]%"
 ::	call dk_return "$(basename %BATCH_SOURCE[%_FRAME_%]%"
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
 	
 	echo %__FILE__%
  endlocal
-goto:eof
+%endfunction%

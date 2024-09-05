@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         )
     )
     endlocal & set "%2=%len%"
-goto:eof
+%endfunction%
 
 
 
@@ -35,4 +35,4 @@ goto:eof
     %dk_call% dk_set _demo "some example string"
     %dk_call% dk_strlen _demo _length
     %dk_call% dk_info "String is %_length% characters long"
-goto:eof
+%endfunction%

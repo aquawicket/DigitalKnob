@@ -39,7 +39,7 @@ dk_test
     echo "_testvar_ = %_testvar_%"
     echo "_testvar_[0] = %_testvar_%[0]"
     
-goto:eof
+%endfunction%
 
 
 
@@ -63,4 +63,4 @@ goto:eof
     %dk_call% dk_set myVarC[1] "the name of an"
     %dk_call% dk_set myVarC[2] "array variable"
     %dk_call% dk_test myVarC
-goto:eof
+%endfunction%

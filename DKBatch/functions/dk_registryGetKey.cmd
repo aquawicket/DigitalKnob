@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     FOR /F "tokens=2* skip=2" %%a in ('reg query "%1" /v "%2"') do ( 
         endlocal & set "%3=%%b"
     )
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
     
     %dk_call% dk_todo
     %dk_call% dk_registryGetKey
-goto:eof
+%endfunction%

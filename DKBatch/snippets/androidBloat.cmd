@@ -23,7 +23,7 @@ for %%X in (
 
 
 
-goto :eof
+goto:eof
 ("android.autoinstalls.config.motorola.layout"
 "cci.usage"
 "com.LogiaGroup.LogiaDeck"

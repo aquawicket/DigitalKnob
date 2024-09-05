@@ -52,4 +52,4 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	"%CMAKE_EXE%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
 
 	::echo return code: %ERRORLEVEL%
-goto:eof
+%endfunction%

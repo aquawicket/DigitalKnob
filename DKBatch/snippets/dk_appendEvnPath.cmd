@@ -43,7 +43,7 @@ if not "%result%" == "1" (
 )
 
 if not "%ERRORLEVEL%" == "0" (
-	echo ERROR:%ERRORLEVEL% & goto :EOF
+	echo ERROR:%ERRORLEVEL% & goto:eof
 )
 
 if %DEBUG%==1 (

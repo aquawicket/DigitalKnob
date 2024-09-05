@@ -33,7 +33,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_smartExtract "%DKDOWNLOAD_DIR%\%NODEJS_DL_FILE%" "%NODEJS%"
     if NOT exist "%NODEJS_EXE%" call dk_error "cannot find NODEJS_EXE:%NODEJS_EXE%"
 	:nodejs_installed		
-goto:eof
+%endfunction%
 
 
 
@@ -44,4 +44,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installNodeJs
-goto:eof
+%endfunction%

@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "0=%~f0"
     set 1=%*
     powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])
-goto:eof
+%endfunction%
 
 
 
@@ -26,7 +26,7 @@ goto:eof
     
     ::%dk_call% dk_runAsTI regedit
     %dk_call% dk_runAsTI cmd.exe
-goto:eof
+%endfunction%
 
 
 

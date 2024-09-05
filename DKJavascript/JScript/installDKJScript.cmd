@@ -20,7 +20,7 @@ if "%~1" neq "" (goto:runDKJScript)
 	
 	call dk_echo "DKJScript install complete"
 	call dk_pause
-goto:eof
+%endfunction%
 
 
 :runDKJScript
@@ -32,4 +32,4 @@ goto:eof
     cmd /c %CSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	::cmd /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 	pause
-goto:eof
+%endfunction%

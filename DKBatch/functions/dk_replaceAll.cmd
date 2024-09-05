@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "!DE!" neq "" call set "_output_=%%_input_:%~2=%~3%%"
     
     endlocal & set "%4=%_output_%"
-goto:eof
+%endfunction%
 
 
 
@@ -35,4 +35,4 @@ goto:eof
     %dk_call% dk_printVar varB
     %dk_call% dk_replaceAll "%varB%" "\" "/" varB
     %dk_call% dk_printVar varB
-goto:eof
+%endfunction%

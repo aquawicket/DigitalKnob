@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not defined DKHOME_DIR %dk_call% dk_setDKHOME_DIR
     set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
     if not exist %DKDESKTOP_DIR% %dk_call% dk_error "DKDESKTOP_DIR:%DKDESKTOP_DIR% does not exist"
-goto:eof
+%endfunction%
 
 
 
@@ -31,4 +31,4 @@ goto:eof
     
     %dk_call% dk_setDKDESKTOP_DIR
     %dk_call% dk_printVar DKDESKTOP_DIR
-goto:eof
+%endfunction%

@@ -18,7 +18,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	cd %DKBRANCH_DIR%
 	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S 127.0.0.1:2393
 	TASKLIST | FINDSTR php_web.exe || start /min "" "%DKPHP_DIR%\php_web.exe" -S 192.168.1.210:2393
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_runPhpServer
-goto:eof
+%endfunction%

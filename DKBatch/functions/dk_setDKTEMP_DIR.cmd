@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_setDIGITALKNOB_DIR"
     set "DKTEMP_DIR=%DIGITALKNOB_DIR%\temp"
     if not exist "%DKTEMP_DIR%" %dk_call% dk_makeDirectory "%DKTEMP_DIR%"
-goto:eof
+%endfunction%
 
 
 
@@ -32,4 +32,4 @@ goto:eof
     
     %dk_call% dk_setDKTEMP_DIR
     %dk_call% dk_printVar DKTOOLS_DIR
-goto:eof
+%endfunction%

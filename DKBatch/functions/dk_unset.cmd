@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 1
     
     set "%~1="
-goto:eof
+%endfunction%
 
 
 
@@ -25,4 +25,4 @@ goto:eof
     echo myVar = %myVar%
     %dk_call% dk_unset myVar
     echo myVar = %myVar%
-goto:eof
+%endfunction%

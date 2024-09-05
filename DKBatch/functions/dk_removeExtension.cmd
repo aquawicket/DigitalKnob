@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     :: [ "${_filepath_##*.}" = "tar" ] &&   _filepath_="${_filepath_%.*}"   # if .tar remove everything past last dot
     endlocal & set "%2=%_filepath_%"
-goto:eof
+%endfunction%
 
 
 
@@ -30,4 +30,4 @@ goto:eof
     %dk_call% dk_set myPath "/test/test2/xfile.extension"
     %dk_call% dk_removeExtension "%myPath%" filepath
     %dk_call% dk_printVar filepath
-goto:eof
+%endfunction%

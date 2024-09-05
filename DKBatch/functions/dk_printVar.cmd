@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         if "!DE!" equ "" set "_ptrvalue_=!_ptrB_!"
         %dk_call% dk_echo "%cyan% POINTER:%_ptr_% = %_ptrB_% =%blue% %_ptrvalue_% %clr%"
         endlocal
-    goto:eof
+    %endfunction%
 
     :variable
         setlocal
@@ -51,7 +51,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         if "!DE!" equ "" set "_value_=!%_var_%!"
         %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% %_value_% %clr%"
         endlocal
-    goto:eof
+    %endfunction%
 
     :undefined
         %dk_call% dk_echo "%cyan% %~1 =%red% UNDEFINED %clr%"

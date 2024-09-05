@@ -10,4 +10,4 @@
 	assoc .vbs=
 	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.vbs"
 	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
-goto:eof
+%endfunction%

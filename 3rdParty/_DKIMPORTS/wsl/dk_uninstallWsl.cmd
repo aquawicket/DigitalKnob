@@ -41,7 +41,7 @@ call dk_source dk_powershell
 	::call dk_powershell "Add-AppxPackage %DKDOWNLOAD_DIR%\%UBUNTU_DL_FILE%"
 	
 	::wsl --install --distribution Debian
-goto:eof
+%endfunction%
 
 
 
@@ -50,5 +50,5 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installWsl
-goto:eof
+%endfunction%
 

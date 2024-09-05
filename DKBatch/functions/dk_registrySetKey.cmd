@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
     echo "%SystemRoot%\System32\reg.exe" ADD "%~1" %_key_% %_type_% /d "%_value_%" /f
     "%SystemRoot%\System32\reg.exe" ADD "%~1" %_key_% %_type_% /d "%_value_%" /f
-goto:eof
+%endfunction%
 
 
 
@@ -31,4 +31,4 @@ goto:eof
     %dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
     %dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++" "Icon" "REG_SZ" "\"%NOTEPADPP_EXE%\""
     %dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\*\shell\Edit with Notepad++\command" " " " " "\"%NOTEPADPP_EXE%\" \"%%%%^1\""
-goto:eof
+%endfunction%

@@ -5,7 +5,7 @@
 	call call_command :false
 
 	cmd /k
-goto:eof
+%endfunction%
 
 :call_command <command> <args>
 	call %1 && (
@@ -14,12 +14,12 @@ goto:eof
 	) || (
 	  echo Failed
 	)
-goto:eof
+%endfunction%
 
 :true
 	(call )
-goto:eof
+%endfunction%
 
 :false
 	(call)
-goto:eof
+%endfunction%

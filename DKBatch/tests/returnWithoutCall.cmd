@@ -17,7 +17,7 @@ goto:eof
 
 	echo before returnWithoutCallB
 	call:returnWithoutCallB
-goto:eof
+%endfunction%
 
 	
 
@@ -26,4 +26,4 @@ goto:eof
 	::returnWithoutCallB_return
 	echo after returnWithoutCallB
 	pause
-goto:eof
+%endfunction%

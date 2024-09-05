@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         
     ::###### METHOD 2 ######
     ::start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
-goto:eof
+%endfunction%
 
 
 
@@ -35,4 +35,4 @@ goto:eof
     
     %dk_call% dk_pause "Press any key to test dk_reload"
     %dk_call% dk_reload
-goto:eof
+%endfunction%

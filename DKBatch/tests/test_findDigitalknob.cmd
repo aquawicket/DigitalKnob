@@ -7,7 +7,7 @@
 	set DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%
 	echo DKBRANCH_DIR = %DKBRANCH_DIR%
 	pause
-goto:eof
+%endfunction%
 
 :find_dkbranch_dir
 	set "current_dir=%~dp0"
@@ -19,4 +19,4 @@ goto:eof
 		if "%parent_folder%" neq "digitalknob" goto:find_dkbranch_dir_loop
 		set "%1=%parent_dir:~0,-1%"
 		set "%2=%current_folder%"
-goto:eof
+%endfunction%

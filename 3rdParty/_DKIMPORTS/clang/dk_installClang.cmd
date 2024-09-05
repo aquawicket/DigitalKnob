@@ -11,7 +11,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
     call dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/clang/DKMAKE.cmake')" "CLANG_EXE;CLANGXX_EXE"
 	call dk_printVar CLANG_EXE
 	call dk_printVar CLANGXX_EXE
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installClang
-goto:eof
+%endfunction%

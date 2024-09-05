@@ -10,4 +10,4 @@
 	assoc .cmake=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmake"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake
-goto:eof
+%endfunction%

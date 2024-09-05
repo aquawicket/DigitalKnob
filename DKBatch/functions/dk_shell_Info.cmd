@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not defined DKSHELL_PATH set "DKSHELL_PATH=%SHELL%"
     if not defined DKSHELL_PATH set "DKSHELL_PATH=%ComSpec%"
     echo DKSHELL_PATH = %DKSHELL_PATH%
-goto:eof
+%endfunction%
 
 
 
@@ -35,5 +35,5 @@ goto:eof
     call dk_debugFunc 0
     
     %dk_call% dk_shell_Info
-goto:eof
+%endfunction%
 

@@ -21,7 +21,7 @@ if "%~1" neq "" (goto:runDKJavascript)
 	
 	call dk_echo "DKJavascript install complete"
 	call dk_pause
-goto:eof
+%endfunction%
 
 
 :runDKJavascript
@@ -31,4 +31,4 @@ goto:eof
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
     start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
 	explorer "http://127.0.0.1:8080/%JAVASCRIPT_FILE%"
-goto:eof
+%endfunction%

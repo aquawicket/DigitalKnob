@@ -56,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::  echo MonthB = %MonthB%
     ::  ::set /a "YearB=(%YearTime%-%MonthTime%)12/30/24/60/60/100"
     ::  ::echo YearB = %YearB%
-goto:eof
+%endfunction%
 
 
 
@@ -73,4 +73,4 @@ goto:eof
     %dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year%
     %dk_call% dk_secondsToDate %seconds% SecondB MinuteB HourB DayB MonthB YearB
     echo TIMESTAMP = %YearB%-%MonthB%-%DayB%T%HourB%:%MinuteB%:%SecondB%
-goto:eof
+%endfunction%

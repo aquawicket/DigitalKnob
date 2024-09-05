@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     )
     %dk_call% dk_echo
     endlocal
-goto :eof
+%endfunction%
 
 
 
@@ -46,4 +46,4 @@ goto :eof
     
     %dk_call% dk_showFileLine "../../README.md" 302
     %dk_call% dk_showFileLine "../../README.md" "How to build"
-goto:eof
+%endfunction%

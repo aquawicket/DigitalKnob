@@ -50,7 +50,7 @@ if not "%ERROR_CODE%"=="0" (
 	pause
 	exit /b %ERROR_CODE%
 )
-goto :eof
+goto:eof
 
 :ERROR
 echo [91m ERROR: %ERROR_CODE%   %3 [0m
@@ -68,7 +68,7 @@ if not "%ERROR_CODE%"=="0" (
 	pause >nul
 	exit %ERROR_CODE%
 )
-goto :eof
+goto:eof
 
 :FATAL
 echo [31m FATAL: %ERROR_CODE%   %3 [0m
@@ -104,4 +104,4 @@ exit %ERROR_CODE%
 	)
 	echo:
 	echo:
-goto :eof
+goto:eof

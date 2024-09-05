@@ -37,12 +37,12 @@ call :getCurrentFile _f0
         call "%_f0%" %*
     )
 )
-goto:eof
+%endfunction%
 
 
 :getCurrentFile returnVar
     set "%~1=%~f0"
-goto :eof
+%endfunction%
 
 
 :: Main batch code
@@ -50,4 +50,4 @@ goto :eof
     setlocal enableextensions disabledelayedexpansion
     echo Method invocation is [ %startMethod% ]
 	pause
-goto :eof
+%endfunction%

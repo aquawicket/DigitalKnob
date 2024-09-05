@@ -17,7 +17,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_info "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
 	call "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_uninstallQemu
-goto:eof
+%endfunction%

@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	::set /A _FRAME_+=2
 ::	call dk_return "%BATCH_ARGC[%_FRAME_%]%"
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -23,4 +23,4 @@ goto:eof
 	
 	echo %__ARGC__%
  endlocal
-goto:eof
+%endfunction%

@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::	done
 ::	call dk_return "%_ARGV_%"
  endlocal
-goto:eof
+%endfunction%
 
 
 
@@ -27,4 +27,4 @@ goto:eof
 	
 	echo %__ARGV__%
  endlocal
-goto:eof
+%endfunction%

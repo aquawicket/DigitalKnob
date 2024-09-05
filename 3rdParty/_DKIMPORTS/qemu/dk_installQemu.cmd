@@ -31,7 +31,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call %command_string%
 	
 	if NOT exist "%QEMU_IMG_EXE%"  call dk_error "cannot find qemu"
-goto:eof
+%endfunction%
 
 
 
@@ -41,4 +41,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installQemu
-goto:eof
+%endfunction%

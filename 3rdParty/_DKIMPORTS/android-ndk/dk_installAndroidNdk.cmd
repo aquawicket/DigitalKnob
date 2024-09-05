@@ -13,7 +13,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
     call dk_printVar ANDROID_API
     call dk_printVar ANDROID_NDK
     call dk_printVar ANDROID_TOOLCHAIN_FILE
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installAndroidNdk
-goto:eof
+%endfunction%

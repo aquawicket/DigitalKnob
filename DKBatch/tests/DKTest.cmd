@@ -172,7 +172,7 @@ call dk_printVar TEST_VAR
 ::	
 ::	print_stack
 ::	dk_stacktrace
-goto:eof
+%endfunction%
 ::
 ::::::::: print_stack() :::::::
 ::print_stack
@@ -186,7 +186,7 @@ goto:eof
 ::			(( n-- ))
 ::	    done
 ::    fi
-::goto:eof
+::%endfunction%
 ::
 ::::::::: evaluate() ::::::::
 ::evaluate
@@ -196,14 +196,14 @@ goto:eof
 ::	export _error="${red}!! SYNTAX ERROR !!${clr}"
 ::	$@ && $echo "evaluate($@) is $_true" || $echo "evaluate($@) is $_false"
 ::	return $?
-::goto:eof
+::%endfunction%
 ::
 ::test_function
 ::	dk_debug "test_function($@)"
 ::	#args=( "$@" )
 ::	loop_array "$@"
 ::	exit_code="$?"
-::goto:eof
+::%endfunction%
 ::
 ::loop_array
 ::	dk_debug "loop_array($@)"
@@ -211,14 +211,14 @@ goto:eof
 ::	do
 ::		echo "Param: $I"
 ::	done
-::goto:eof
+::%endfunction%
 ::
 ::escape_quotes
 ::	dk_debug "escape_quotes($@)"
 ::	input=$1
 ::	output=$(echo $input  | sed 's/"/\\"/g')
 ::	eval $2=$output
-::goto:eof
+::%endfunction%
 ::
 ::
 ::str='The dog is "very" beautiful'

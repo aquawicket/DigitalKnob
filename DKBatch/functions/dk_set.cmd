@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     set "%~1=%~2"
     %dk_call% dk_printVar "%~1"
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
     
     %dk_call% dk_set myVar "value assigned with dk_set"
     %dk_call% dk_echo "myVar = %myVar%"
-goto:eof
+%endfunction%

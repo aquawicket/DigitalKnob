@@ -12,7 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_validate GITBASH_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
 	call dk_installFileAssoc .sh %GITBASH_EXE%
 	call dk_installFileAssoc .bash %GITBASH_EXE%
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_installGitFileAssociations
-goto:eof
+%endfunction%

@@ -12,7 +12,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	call dk_validate NUGET_EXE "call %DKIMPORTS_DIR%\nuget\dk_installNuget.cmd"
 	
 	%NUGET_EXE% install Microsoft.UI.Xaml
-goto:eof
+%endfunction%
 
 
 
@@ -22,4 +22,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_install_Microsoft_Ui_Xaml
-goto:eof
+%endfunction%

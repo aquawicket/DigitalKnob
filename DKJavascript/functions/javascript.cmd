@@ -10,7 +10,7 @@ if not '%errorlevel%' == '0' (
   @rem otherwise run.
   goto :NODE_JS
 )
-goto :EOF
+goto:eof
 
 :UAC_ELEVATE
   @rem Pass this file's filename as command line arguments.

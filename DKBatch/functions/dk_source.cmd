@@ -47,7 +47,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
     
     if not exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" echo [31m failed to download %1.cmd [0m
-goto:eof
+%endfunction%
 
 
 
@@ -61,4 +61,4 @@ goto:eof
     
     %dk_call% dk_source dk_info
     %dk_call% dk_info "test message using dk_source to download it first"
-goto:eof
+%endfunction%

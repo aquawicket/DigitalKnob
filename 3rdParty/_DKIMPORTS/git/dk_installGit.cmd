@@ -44,7 +44,7 @@ call dk_set GIT_DL_WIN_X86_64 https://github.com/git-for-windows/git/releases/do
 	call dk_appendEvnPath %GIT_DIR%\bin
 	   
     if NOT exist "%GIT_EXE%" call dk_error "cannot find git")
-goto:eof
+%endfunction%
 
 
 
@@ -53,4 +53,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_installGit
-goto:eof
+%endfunction%

@@ -44,7 +44,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	
 	::###### dk_installVSCodeFileAssociations.cmd ######
 	call %DKIMPORTS_DIR%\vscode\dk_installVSCodeFileAssociations.cmd
-goto:eof
+%endfunction%
 
 
 
@@ -54,4 +54,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installVSCode
-goto:eof
+%endfunction%

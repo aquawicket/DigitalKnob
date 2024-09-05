@@ -39,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     ::TODO
     ::[ ? = "success" ]
-goto:eof
+%endfunction%
 
 
 
@@ -59,4 +59,4 @@ goto:eof
     
     %dk_call% dk_makeDirectory %DKTEMP_DIR%/renameMe
     %dk_call% dk_rename %DKTEMP_DIR%/renameMe %DKTEMP_DIR%/iWasRenamed OVERWRITE
-goto:eof
+%endfunction%

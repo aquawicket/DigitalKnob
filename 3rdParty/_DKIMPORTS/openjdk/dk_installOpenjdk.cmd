@@ -29,7 +29,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 	if "%DK_HOST_OS%"=="win"   (call :dk_installOpenJdkWin)
 	if "%DK_HOST_OS%"=="mac"   (call :dk_installOpenJdkMac)
 	if "%DK_HOST_OS%"=="linux" (call :dk_installOpenJdkLinux)
-goto:eof	
+%endfunction%	
 	
 :dk_installOpenJdkWin
 	call dk_set JAVA_VERSION 11
@@ -50,7 +50,7 @@ goto:eof
 	call dk_setEnv VS_JavaHome "%OPENJDK_8U41_WINPATH%"
 	call dk_setEnv STUDIO_JDK "%OPENJDK_8U41_WINPATH%"
 	call dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8U41_WINPATH%"
-goto:eof
+%endfunction%
 
 :dk_installOpenJdkMac
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
@@ -60,7 +60,7 @@ goto:eof
 	call dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
 	call dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	call dk_command java --version 
-goto:eof
+%endfunction%
 
 :dk_installOpenJdkLinux
 	::if exist /usr (
@@ -83,7 +83,7 @@ goto:eof
 	)
 	
 	call dk_command java --version
-goto:eof
+%endfunction%
 
 
 
@@ -98,4 +98,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installOpenjdk
-goto:eof
+%endfunction%

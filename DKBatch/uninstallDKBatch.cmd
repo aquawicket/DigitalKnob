@@ -24,4 +24,4 @@
 	assoc .cmd=cmdfile
 	::%dk_call% dk_registrySetKey "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.cmd" "" "REG_SZ" "cmdfile"
 	::%dk_call% dk_registrySetKey "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\cmdfile\shell\open\command" "" "REG_SZ" "\"%%1\" %*"
-goto:eof
+%endfunction%

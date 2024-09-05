@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     @echo args = Right("%*", (Len("%*") - Len("%1"))) >> %temp%\sudo.tmp.vbs
     @echo objShell.ShellExecute "%1", args, "", "runas" >> %temp%\sudo.tmp.vbs
     @cscript %temp%\sudo.tmp.vbs
-goto:eof
+%endfunction%
 
 
 
@@ -24,4 +24,4 @@ goto:eof
     call dk_debugFunc 0
     
     %dk_call% dk_sudo services.msc
-goto:eof
+%endfunction%
