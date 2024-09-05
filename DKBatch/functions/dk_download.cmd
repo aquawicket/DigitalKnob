@@ -38,6 +38,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     
     if exist "%destination%" %dk_call% dk_info "%destination% already exist" & goto:eof
     
+	:: Test that url exists, if not try BACKUP_DL_SERVER
 	if "%TEST_BACKUP_DL_SERVER%"=="1"  set "url=%BACKUP_DL_SERVER%/%url_filename%"
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%url_filename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_error "url:%url% NOT FOUND"

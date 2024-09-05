@@ -40,6 +40,7 @@ function(DKTEST)
 		dk_echo("${url} does NOT exists") 
 	endif()
     
+	
     dk_echo()
     set(url http://www.nonexisting.com/nofile.no)
     dk_urlExists(${url} url_exists)

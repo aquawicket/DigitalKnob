@@ -5,7 +5,7 @@ if(NOT BACKUP_DL_SERVER)
 	set(BACKUP_DL_SERVER "http://aquawicket.com/download")
 endif()
 if(NOT TEST_BACKUP_DL_SERVER)
-	set(TEST_BACKUP_DL_SERVER 0)
+	set(TEST_BACKUP_DL_SERVER 1)
 endif()
 ###############################################################################
 # dk_download(src_path dest_path) #NO_HALT
@@ -22,43 +22,32 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	dk_debugFunc(${ARGV})
 	
 	dk_getOption(NO_HALT ${ARGV})
-	
-	#FIXME: Will not download if only 1 argument
-	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
-	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
-	#      Also, we will treat the url variable like a list. If it has more one item, treat them as alternative download links
-#	if(NOT PrimaryDownloadServer)
-#		dk_info("TODO: just set PrimaryDownloadServer to your mirror location and all file downoads will attempt that location first")
-#	endif()
-#	if(NOT SecondaryDownloadServer)
-#		dk_info("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
-#	endif()
 
-	set(dest_path ${ARGV1})
+	set(dest_path ${ARGV1})						# C:/Users/Administrator/Downloads
 	
 	# Setup all src_path variables
 	if(NOT src_path)
 		dk_error("src_path is invalid")
 	endif()
-	#dk_printVar(src_path)
+	#dk_printVar(src_path)						# https://aquawicket.com/download/myFile.txt
 	
 	dk_dirname(${src_path} src_dir)
 	if(NOT src_dir)
 		dk_error("src_dir is invalid")
 	endif()
-	#dk_printVar(src_dir)
+	#dk_printVar(src_dir)						# https://aquawicket.com/download
 	
 	dk_basename(${src_path} src_filename)
 	if(NOT src_filename)
 		dk_error("src_filename is invalid")
 	endif()
-	#dk_printVar(src_filename)
+	#dk_printVar(src_filename)					# myFile.txt
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
 		dk_error("src_ext is invalid")
 	endif()
-	#dk_printVar(src_ext)
+	#dk_printVar(src_ext)						# .txt
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
@@ -70,9 +59,9 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
 	endif()
-	#dk_printVar(dest_path)
+	#dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
 	
-	dk_dirname("${dest_path}" dest_dir)
+	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
 	if(NOT dest_dir)
 		dk_error("dest_dir is invalid")
 	endif()
@@ -83,14 +72,14 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	dk_cd("${dest_dir}")
 	#dk_printVar(dest_dir)
 	
-	dk_basename("${dest_path}" dest_filename)
+	dk_basename("${dest_path}" dest_filename)	# myFile.txt
 	if(NOT dest_filename)
 		dk_error("dest_filename is invalid")
 		return()
 	endif()
 	#dk_printVar(dest_filename)
 	
-	dk_getExtension(${dest_path} dest_ext)
+	dk_getExtension(${dest_path} dest_ext)		# .txt
 	if(NOT dest_ext)
 		dk_error("dest_ext is invalid")
 	endif()
@@ -102,6 +91,26 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		endif()
 		return()
 	endif()
+	
+	
+	
+	# Use BACKUP_DL_SERVER only
+	if(${TEST_BACKUP_DL_SERVER} EQUAL 1)
+		set(url "${BACKUP_DL_SERVER}/${src_filename}")
+		dk_info("Using Backup Server url:${url} . . .")
+	
+	# Test that url exists, if not try BACKUP_DL_SERVER
+	else()
+		dk_urlExists(${url} result)
+		if(NOT result)
+			dk_warning("url:${url} NOT FOUND")
+			set(url "${BACKUP_DL_SERVER}/${src_filename}")
+			dk_info("Trying Backup Server url:${url} . . .")
+		endif()
+	endif()
+
+	
+	
 	
 	dk_debug("Downloading ${src_path}")
 	dk_debug("      To -> ${dest_path}")
