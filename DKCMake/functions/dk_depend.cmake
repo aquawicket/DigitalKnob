@@ -55,7 +55,7 @@ function(dk_depend plugin)
 #	endif()
 		
 	if(plugin IN_LIST dkdepend_list)
-		dk_verbose("${plugin} already in dkdepend_list")
+		#dk_verbose("${plugin} already in dkdepend_list")
 		return()  #library is already in the list
 	endif()
 	
