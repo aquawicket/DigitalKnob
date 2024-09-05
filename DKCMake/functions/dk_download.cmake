@@ -101,6 +101,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
+		dk_assert(url)
 		dk_urlExists(${url} result)
 		if(NOT result)
 			dk_warning("url:${url} NOT FOUND")
