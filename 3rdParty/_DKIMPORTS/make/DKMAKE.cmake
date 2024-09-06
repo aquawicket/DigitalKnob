@@ -74,6 +74,16 @@ elseif(win_x86_64_ucrt)
 	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2}/ucrt64/bin")
+
+elseif(win_x86_msvc)
+	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
+
+elseif(win_x86_64_msvc)
+	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
 	
 else()
 	dk_findProgram(CMAKE_MAKE_PROGRAM make)

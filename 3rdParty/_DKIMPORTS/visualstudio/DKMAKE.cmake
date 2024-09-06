@@ -11,11 +11,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
+dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
 endif()
-
+dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
 
 ### VERSION ###
 dk_set(VISUALSTUDIO_VERSION 	17)
@@ -93,22 +94,8 @@ if(ANDROID)
 endif()
 
 
-#dk_debug(VISUALSTUDIO)
-#dk_debug(VISUALSTUDIO_VERSION)
-#dk_debug(VISUALSTUDIO_YEAR)
-#dk_debug(VISUALSTUDIO_COMMUNITY)
-#dk_debug(VISUALSTUDIO_EDITION)
-#dk_debug(VISUALSTUDIO_GENERATOR)
-#dk_debug(VISUALSTUDIO_X86_C_COMPILER)
-#dk_debug(VISUALSTUDIO_X86_CXX_COMPILER)
-#dk_debug(VISUALSTUDIO_X64_C_COMPILER)
-#dk_debug(VISUALSTUDIO_X64_CXX_COMPILER)
-#dk_debug(VISUALSTUDIO_X86_LINKER)
-#dk_debug(VISUALSTUDIO_X64_LINKER)
-#dk_debug(VISUALSTUDIO_X86_DUMPBIN)
-#dk_debug(VISUALSTUDIO_X64_DUMPBIN)
-#dk_debug(VISUALSTUDIO_MAKE_PROGRAM)
 
+set(CMAKE_GENERATOR					${VISUALSTUDIO_GENERATOR})
 set(CMAKE_MAKE_PROGRAM 				${VISUALSTUDIO_MAKE_PROGRAM})
 if(win_arm64_msvc)
 	set(CMAKE_GENERATOR_PLATFORM	ARM64)

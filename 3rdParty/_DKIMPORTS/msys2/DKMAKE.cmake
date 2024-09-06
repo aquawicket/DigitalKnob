@@ -17,9 +17,12 @@ endif()
 ### Set CMAKE_GENERATOR ###
 dk_validate(CMD_EXE "dk_depend(cmd)")
 if(CMD_EXE OR MINGW)
-	dk_set(CMAKE_GENERATOR	"MinGW Makefiles")	# if in cmd
+	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in cmd
 else()
-	dk_set(CMAKE_GENERATOR 	"MSYS Makefiles")	# if in Shell
+	dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in Shell
+endif()
+if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
+	dk_set(CMAKE_GENERATOR ${MSYS2_GENERATOR})
 endif()
 
 ### Return if MSYS2_EXE is already set

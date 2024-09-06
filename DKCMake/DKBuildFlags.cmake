@@ -132,9 +132,9 @@ dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 ########### CORE DEPENDENCIES ############
 dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
 dk_assert(CMAKE_EXE)
-if(MSVC)
-	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
-endif()
+#if(MSVC)
+#	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+#endif()
 if(MINGW)
 	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
 	dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
@@ -601,10 +601,12 @@ endif()
 
 ### Windows x86 - MSVC ###
 if(win_x86_msvc)
+	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	
 	#dk_set(CMAKE_GENERATOR 					VISUALSTUDIO)
 	#dk_set(CMAKE_GENERATOR_PLATFORM			Win32)
-	dk_set(CMAKE_C_COMPILER						${VISUALSTUDIO_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER					${VISUALSTUDIO_CXX_COMPILER})
+	#dk_set(CMAKE_C_COMPILER					${VISUALSTUDIO_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER					${VISUALSTUDIO_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS						/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS					/DWIN /DWIN_X86 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) # /D_WIN32_WINNT=0x0600
 endif()
@@ -639,10 +641,12 @@ endif()
 
 ### Windows x86_64 - MSVC ###
 if(win_x86_64_msvc)
+	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
+	
 	#dk_set(CMAKE_GENERATOR							"TODO")
 	#dk_set(CMAKE_GENERATOR_PLATFORM				x64)
-	dk_set(CMAKE_C_COMPILER							${VISUALSTUDIO_C_COMPILER})
-	dk_set(CMAKE_CXX_COMPILER						${VISUALSTUDIO_CXX_COMPILER})
+	#dk_set(CMAKE_C_COMPILER							${VISUALSTUDIO_C_COMPILER})
+	#dk_set(CMAKE_CXX_COMPILER						${VISUALSTUDIO_CXX_COMPILER})
 	dk_append(CMAKE_C_FLAGS							/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_CXX_FLAGS						/DWIN /DWIN_X86_64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj) #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 endif()
