@@ -13,7 +13,7 @@ function(dk_depend plugin)
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
-			dk_debug("${plugin} is allready in init_list")
+			#dk_debug("${plugin} is allready in init_list")
 			return()  #plugin is already in the init_list
 		endif()
 		dk_append(init_list "${plugin}")

@@ -26,8 +26,10 @@ dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 dk_convertToCIdentifier(${CMAKE_FOLDER} CMAKE_FOLDER)
 
 
-### IMPORT ###
+
 dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+
+### IMPORT ###
 if(ANDROID_HOST)
 	dk_command(pkg install cmake -y)
 	dk_findProgram(CMAKE_EXE cmake)
@@ -61,7 +63,7 @@ elseif(WIN_HOST)
 			
 			dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
 		endif()
-	elseif(MSVC)
+	else()
 		dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})
 	endif()
