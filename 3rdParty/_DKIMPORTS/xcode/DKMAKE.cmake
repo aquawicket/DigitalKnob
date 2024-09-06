@@ -10,10 +10,11 @@ endif()
 
 
 # xcode Variables
-dk_set(XCODE_GENERATOR		"Xcode")
+dk_set(CMAKE_GENERATOR		"Xcode")
+dk_set(CMAKE_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+dk_set(CMAKE_CXX_COMPILER	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+
 dk_set(XCODE_DEVROOT		/Applications/Xcode.app/Contents/Developer)
-dk_set(XCODE_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-dk_set(XCODE_CXX_COMPILER	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
 dk_set(XCODE_LIBTOOL		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 
 # iOS variables

@@ -12,8 +12,8 @@ dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
 dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
 dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
 
-dk_depend(msys2)
-dk_depend(pacman)
+dk_validate(MSYS2			"dk_depend(msys2)")
+dk_validate(PACMAN_EXE		"dk_depend(pacman)")
 dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
 	
 if(win_x86_clang)
