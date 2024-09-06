@@ -1,17 +1,15 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 # https://cmake.org
 # https://github.com/Kitware/CMake
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
-
 # https://github.com/Kitware/CMake/releases
 
-### BINARY DISTRIBUTIONS (PORTABLE) ###
 
+### BINARY DISTRIBUTIONS (PORTABLE) ###
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
@@ -23,47 +21,49 @@ WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/down
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
 dk_assert(CMAKE_DL)
-
-
 dk_basename(${CMAKE_DL} CMAKE_DL_FILE)
 dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
 dk_convertToCIdentifier(${CMAKE_FOLDER} CMAKE_FOLDER)
 
 
 ### IMPORT ###
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 if(ANDROID_HOST)
 	dk_command(pkg install cmake -y)
 	dk_findProgram(CMAKE_EXE cmake)
-elseif(MSYSTEM)
-	dk_depend(msys2)
-	#dk_printVar(MSYSTEM)
-	dk_toLower(${MSYSTEM} msystem)
-	if(MSYSTEM STREQUAL "MSYS")
-		dk_set(msystem clang64)		
-	endif()
-	dk_debug(msystem)
-	
-	dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
-	
-	if(NOT EXISTS ${CMAKE_EXE})
-		dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
-		if(win_x86_clang)
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
-		elseif(win_x86_64_clang)
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
-		elseif(win_arm64_clang)
-			dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
-		elseif(win_x86_mingw)
-			dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
-		elseif(win_x86_64_mingw)
-			dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
-		elseif(win_x86_64_ucrt)
-			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
-		#elseif(MSYS)
-		#	dk_command(${PACMAN_EXE} -S cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# MSYS2
+#elseif(MSYSTEM)
+elseif(WIN_HOST)
+	if(CLANG OR MINGW OR UCRT)
+		dk_depend(msys2)
+		dk_toLower(${MSYSTEM} msystem)
+		if(MSYSTEM STREQUAL "MSYS")
+			dk_set(msystem clang64)		
 		endif()
-		
 		dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
+		
+		if(NOT EXISTS ${CMAKE_EXE})
+			dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+			if(win_x86_clang)
+				dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
+			elseif(win_x86_64_clang)
+				dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
+			elseif(win_arm64_clang)
+				dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
+			elseif(win_x86_mingw)
+				dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
+			elseif(win_x86_64_mingw)
+				dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+			elseif(win_x86_64_ucrt)
+				dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
+			#elseif(MSYS)
+			#	dk_command(${PACMAN_EXE} -S cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# MSYS2
+			endif()
+			
+			dk_findProgram(CMAKE_EXE cmake ${MSYS2}/${msystem}/bin)
+		endif()
+	elseif(MSVC)
+		dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
+		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})
 	endif()
 else()
 	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
@@ -91,7 +91,7 @@ if(NOT CMAKE_EXE)
 endif()
 
 
-dk_debug(CMAKE_EXE)
+
 dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
 string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 dk_set(CMAKE_VERSION ${CMAKE_VERSION})
