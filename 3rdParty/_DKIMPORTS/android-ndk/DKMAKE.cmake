@@ -139,7 +139,7 @@ else()
 endif()
 
 
-###### ANDROID VARIABLES ######
+###### CMAKE VARIABLES ######
 dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
 dk_set(CMAKE_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 dk_set(CMAKE_MAKE_PROGRAM 			"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
@@ -147,7 +147,13 @@ dk_set(CMAKE_C_COMPILER				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HO
 dk_set(CMAKE_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
 dk_set(CMAKE_AR						"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
 
+dk_set(DKCONFIGURE_CC				"${CMAKE_C_COMPILER}")
+dk_set(DKCONFIGURE_CXX				"${CMAKE_CXX_COMPILER}")
+	
+##### ANDROID VARIABLES #####
+#dk_set(ANDROID_NDK					${ANDROID_NDK})
 #dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+dk_set(ANDROID_NATIVE_API_LEVEL		31)
 dk_set(ANDROID_PLATFORM				31)
 dk_set(ANDROID_API 					31)
 dk_set(ANDROID_MIN_API 				19)
@@ -157,7 +163,7 @@ dk_set(ANDROID_BASH_EXPORTS			"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 
 
 ###### ANDROID ENVIRONMENT VARIABLES ######
-dk_setEnv					("AR"				"${ANDROID_AR}")
+dk_setEnv					("AR"				"${CMAKE_AR}")
 dk_setEnv					("CC" 				"clang")
 dk_setEnv					("CXX"				"clang++")
 dk_setEnv					("NDK_ROOT" 		"${ANDROID_NDK}")
