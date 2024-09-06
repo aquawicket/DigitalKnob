@@ -54,6 +54,8 @@ function(dk_assets plugin)
 		PATTERN linux_x86_64 EXCLUDE
 		PATTERN android_arm32 EXCLUDE
 		PATTERN android_arm64 EXCLUDE
+		PATTERN android_x86 EXCLUDE
+		PATTERN android_x86_64 EXCLUDE
 		PATTERN raspberry_arm32 EXCLUDE
 		PATTERN raspberry_arm64 EXCLUDE
 		PATTERN emscripten EXCLUDE
