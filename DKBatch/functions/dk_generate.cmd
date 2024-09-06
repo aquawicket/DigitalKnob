@@ -90,12 +90,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%TARGET_OS%"=="raspberry_arm32"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="raspberry_arm64"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="win_arm64_clang"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
+	if "%TARGET_OS%"=="win_arm64_msvc"     %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A ARM64
 	if "%TARGET_OS%"=="win_x86_clang"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
     if "%TARGET_OS%"=="win_x86_mingw"      %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-	if "%TARGET_OS%"=="win_x86_msvc"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022"
+	if "%TARGET_OS%"=="win_x86_msvc"       %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A Win32
     if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
     if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
-    if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022"
+    if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A x64
     if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
 
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
