@@ -64,36 +64,13 @@ if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 endif()
 
 
-### Environment Variables ###
-# EMSDK		 	= C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
-#set(ENV{EMSDK} "${EMSDK}")
 
-# EMSDK_NODE	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin\node.exe
-#set(ENV{EMSDK_NODE} "${EMSDK}/node/18.20.3_64bit/bin/node.exe")
-
-# EMSDK_PYTHON	= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\python\3.9.2-nuget_64bit\python.exe
 set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
-#execute_process(COMMAND setx EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
 
-###### EXPORT VARIABLES ######
-#dk_fileAppend("$ENV{TEMP}/DKEXPORT_VARS.cmd" "SET EMSDK_PYTHON=${EMSDK}/python/3.9.2-nuget_64bit/python.exe\n")
 dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
 
-# JAVA_HOME		= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\java\8.152_64bit
-#set(ENV{JAVA_HOME} "${EMSDK}/java/8.152_64bit")
-
-# PATH			= C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main
-#                 C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\mingw\4.6.2_32bit
-#				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\node\18.20.3_64bit\bin
-#				  C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\upstream\emscripten	  
-#set(ENV{PATH} "${EMSDK}/mingw/4.6.2_32bit;${EMSDK}/node/18.20.3_64bit/bin;${EMSDK}/upstream/emscripten;${EMSDK}/python/3.9.2-nuget_64bit")
-
-
-
-
-### Set Build Flag Variables ###
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
-#dk_set(EMCMAKE		"${EMSDK}/upstream/emscripten/emcmake${bat}")
+
 dk_set(EMCONFIGURE	"${EMSDK}/upstream/emscripten/emconfigure${bat}")   
 
 dk_set			(CMAKE_TOOLCHAIN_FILE 		${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
@@ -110,12 +87,4 @@ dk_set			(CMAKE_C_COMPILER_AR 		"${CMAKE_AR}")
 dk_set			(CMAKE_CXX_COMPILER_AR 		"${CMAKE_AR}")
 dk_set			(CMAKE_C_COMPILER_RANLIB 	"${CMAKE_RANLIB}")
 dk_set			(CMAKE_CXX_COMPILER_RANLIB	"${CMAKE_RANLIB}")
-
-###### Set CMAKE_MAKE_PROGRAM ######
-#if(WIN_HOST)
-#	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
-#else()
-#	dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
-#endif()
-
 
