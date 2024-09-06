@@ -76,6 +76,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     if "%TARGET_OS%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%TARGET_OS%"=="android_x86" 	   %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%TARGET_OS%"=="android_x86_64"     %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="emscripten"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"  
     if "%TARGET_OS%"=="ios_arm32"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
     if "%TARGET_OS%"=="ios_arm64"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
