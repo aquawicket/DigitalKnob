@@ -335,10 +335,10 @@ dk_printVar(ENABLE_EXCEPTIONS)
 if(ANDROID_ARM32)
 	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
 	
-	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM64 -std=c++1z)
+	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM32 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM32 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM32 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM32 -std=c++1z)
 	dk_set(ANDROID_ABI						armeabi-v7a)
 	dk_set(ANDROID_CPP_FEATURES				rtti exceptions)
 	dk_set(ANDROID_STL						c++_static)
@@ -399,10 +399,10 @@ endif()
 if(ANDROID_X86)
 	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
 	
-	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM64 -std=c++1z)
+	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_X86 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_X86 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_X86 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_X86 -std=c++1z)
 	dk_set(ANDROID_ABI						x86)
 	dk_set(ANDROID_CPP_FEATURES				rtti exceptions)
 	dk_set(ANDROID_STL						c++_static)
@@ -426,10 +426,10 @@ endif()
 if(ANDROID_X86_64)
 	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)	#(CMAKE_GENERATOR)
 	
-	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_ARM64 -std=c++1z)
-	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_ARM64 -std=c17)
-	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_ARM64 -std=c++1z)
+	dk_append(CMAKE_C_FLAGS					-DANDROID -DANDROID_X86_64 -std=c17)
+	dk_append(CMAKE_CXX_FLAGS				-DANDROID -DANDROID_X86_64 -std=c++1z)
+	dk_append(DKCONFIGURE_CFLAGS			-DANDROID -DANDROID_X86_64 -std=c17)
+	dk_append(DKCONFIGURE_CXXFLAGS			-DANDROID -DANDROID_X86_64 -std=c++1z)
 	dk_set(ANDROID_ABI						x86_64)
 	dk_set(ANDROID_CPP_FEATURES				rtti exceptions)
 	dk_set(ANDROID_STL						c++_static)
@@ -591,12 +591,12 @@ if(RASPBERRY_ARM64)
 	#dk_set(CMAKE_GENERATOR						"Unix Makefiles")
 	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake) 	#(CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
 	
-	dk_append(CMAKE_C_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
-	dk_append(CMAKE_CXX_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
+	dk_append(CMAKE_C_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l
+	dk_append(CMAKE_CXX_FLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
 	dk_set(DKCONFIGURE_CC						${GCC_EXE})
 	dk_set(DKCONFIGURE_CXX						${GXX_EXE})
-	dk_append(DKCONFIGURE_CFLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
-	dk_append(DKCONFIGURE_CXXFLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
+	dk_append(DKCONFIGURE_CFLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
+	dk_append(DKCONFIGURE_CXXFLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
 
 ### Windows x86 - MSVC ###
@@ -704,8 +704,8 @@ if(win_arm64_clang)
 	dk_set(MSYSTEM 									CLANGARM64)
 	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake) 	# (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
 
-	dk_append(CMAKE_C_FLAGS							-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
-	dk_append(CMAKE_CXX_FLAGS						-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_C_FLAGS							-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17) # -D_WIN32_WINNT=0x0600
+	dk_append(CMAKE_CXX_FLAGS						-march=aarch64 -DMSYSTEM=CLANGARM64 -DWIN -DWIN_ARM64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17) # -D_WIN32_WINNT=0x0600
 	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
 	dk_append(DKCONFIGURE_FLAGS						--build=aarch64-w64-mingw32)
 	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
