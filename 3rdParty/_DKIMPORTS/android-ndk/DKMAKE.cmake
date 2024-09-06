@@ -65,7 +65,6 @@ dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https:
 
 ###### INSTALL ######
 dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
-dk_debug(ANDROID_NDK)
 
 dk_makeDirectory			("${ANDROID_SDK}/ndk")
 WIN_HOST_dk_import			(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} PATCH)
@@ -141,6 +140,7 @@ endif()
 
 ###### CMAKE VARIABLES ######
 dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
+#dk_set(CMAKE_GENERATOR_PLATRORM 	ARM;ARM64;X86;X64)
 dk_set(CMAKE_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 dk_set(CMAKE_MAKE_PROGRAM 			"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
 dk_set(CMAKE_C_COMPILER				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
