@@ -43,28 +43,55 @@ endif()
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-#dk_printVar(CMAKE_CXX_COMPILER_ID)
+dk_printVar(CMAKE_C_COMPILER_ID)
+dk_printVar(CMAKE_CXX_COMPILER_ID)
+dk_printVar(CMAKE_GENERATOR)
+dk_printVar(CMAKE_GENERATOR_PLATFORM)
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	dk_set(GNU ON)
+	if(GNU)
+		dk_warning("GNU was allready set")
+	endif()
+	dk_set(GNU 1)
+
+elseif(CMAKE_GENERATOR MATCHES "Visual Studio")
+	if(MSVC)
+		dk_warning("MSVC was allready set")
+	endif()
+	dk_set(MSVC 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
+	if(MINGW)
+		dk_warning("MINGW was allready set")
+	endif()
+	dk_set(MINGW 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
+	if(MSYS)
+		dk_warning("MSYS was allready set")
+	endif()
+	dk_set(MSYS 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "Xcode")
+	if(XCODE)
+		dk_warning("XCODE was allready set")
+	endif()
+	dk_set(XCODE 1)
+	
+elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+	if(UNIX)
+		dk_warning("UNIX was allready set")
+	endif()
+	dk_set(UNIX 1)
+	
+else()
+	dk_fatal("Could not determin Environment Variable")
 endif()
 
-string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
-if(${index} GREATER -1)
-	dk_set(MSVC ON)
+math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} + ${UNIX} - 1" OUTPUT_FORMAT DECIMAL)
+if(error)
+	dk_fatal("More than one Environment Flags are set")
 endif()
-
-if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
-	dk_set(MINGW ON)
-endif()
-
-if(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
-	dk_set(MSYS ON)
-endif()
-
-if(CMAKE_GENERATOR STREQUAL "Xcode")
-	dk_set(XCODE ON)
-endif()
-
 
 ###########################################################################
 ## Get variables for Build Type

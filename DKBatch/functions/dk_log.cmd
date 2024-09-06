@@ -17,7 +17,7 @@ if not defined ENABLE_dk_log   set "ENABLE_dk_log=1"
 :: DEFAULT
 if not defined DEFAULT_ENABLE  set "DEFAULT_ENABLE=1"
 if not defined DEFAULT_COLOR   set "DEFAULT_COLOR=%white%"
-if not defined DEFAULT_TAG     set "DEFAULT_TAG="
+::if not defined DEFAULT_TAG     set "DEFAULT_TAG="
 ::if not defined DEFAULT_PAUSE   set "DEFAULT_PAUSE=0"
 ::if not defined DEFAULT_TRACE   set "DEFAULT_TRACE=0"
 ::if not defined DEFAULT_LINE    set "DEFAULT_LINE=0"

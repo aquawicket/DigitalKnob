@@ -10,7 +10,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	dk_return()
 #endif()
 
-
 ### DEPEND ###
 dk_depend(android-sdk)
 
