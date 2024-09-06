@@ -140,26 +140,20 @@ endif()
 
 
 ###### ANDROID VARIABLES ######
-dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
-dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
+dk_set(CMAKE_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+dk_set(CMAKE_MAKE_PROGRAM 			"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
+dk_set(CMAKE_C_COMPILER				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+dk_set(CMAKE_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
+dk_set(CMAKE_AR						"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
+
 #dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+dk_set(ANDROID_PLATFORM				31)
 dk_set(ANDROID_API 					31)
 dk_set(ANDROID_MIN_API 				19)
-dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${ANDROID_HOST_TAG}/bin/make${exe}")
-dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
-dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/clang${exe}")
-dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin/llvm-ar${exe}")
 dk_set(ANDROID_BASH_EXPORTS			"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH;"
 									"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/sysroot/usr/include:$PATH;")
-dk_debug(ANDROID_GENERATOR)
-dk_debug(ANDROID_TOOLCHAIN_FILE)
-dk_debug(ANDROID_API)
-dk_debug(ANDROID_MIN_API)
-dk_debug(ANDROID_MAKE_PROGRAM)
-dk_debug(ANDROID_C_COMPILER)
-dk_debug(ANDROID_CXX_COMPILER)
-dk_debug(ANDROID_AR)
 
 
 ###### ANDROID ENVIRONMENT VARIABLES ######
