@@ -34,7 +34,7 @@ else()
 endif()
 
 if(NOT EXISTS "${JAVA_EXE}")
-	dk_error("JAVA IS NOT FOUND OR INVALID")
+	dk_fatal("JAVA IS NOT FOUND OR INVALID")
 endif()
 
 dk_setEnv("JAVA_HOME" ${JAVA})

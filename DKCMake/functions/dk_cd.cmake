@@ -15,7 +15,7 @@ function(dk_cd directory)
 	endif()
 	
 	if(NOT EXISTS "${directory}")
-		dk_error("directory:${directory} does not exist")
+		dk_fatal("directory:${directory} does not exist")
 		return()
 	endif()
 	

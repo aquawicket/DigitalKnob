@@ -36,7 +36,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	##### Test that we dont have any non-alphanumeric characters ######
 	#dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL_TEST)
 	#if(NOT ${PLUGIN_URL} STREQUAL ${PLUGIN_URL_TEST})
-	#	dk_error("${PLUGIN_URL} contains non-alphanumeric characters")
+	#	dk_fatal("${PLUGIN_URL} contains non-alphanumeric characters")
 	#	dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL)
 	#endif()
 	###################################################################
@@ -123,7 +123,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#endif()
 	
 	if(NOT PLUGIN_IMPORT)
-		dk_error("PLUGIN_IMPORT invalid")
+		dk_fatal("PLUGIN_IMPORT invalid")
 	endif()
 	
 	if(PLUGIN_IMPORT)

@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #	@path				- TODO
 #	@ret_var			- TODO
-#   NO_HALT (optional)	- if one of the parameters is NO_HALT, dk_error() messages will not be displayed
+#   NO_HALT (optional)	- if one of the parameters is NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_removeExtension path ret_var)
 	dk_debugFunc(${ARGV})
@@ -19,7 +19,7 @@ function(dk_removeExtension path ret_var)
 	#dk_includes(${path} "." includes REVERSE)
 	#if(NOT includes)
 		if(NOT NO_HALT)
-			dk_error("dk_removeExtension(${path}): no extension found")
+			dk_fatal("dk_removeExtension(${path}): no extension found")
 		endif()
 		return()
 	endif()

@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@filePath	- TODO
 #	@find		- TODO
 #	@replace	- TODO
-#   NO_HALT (optional)	- if any of the parameters equals NO_HALT, dk_error() messages will not be displayed
+#   NO_HALT (optional)	- if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_fileReplace filePath find replace)
 	dk_debugFunc(${ARGV})
@@ -22,7 +22,7 @@ function(dk_fileReplace filePath find replace)
 		dk_fileWrite(${filePath} "${fileString}")
 	else()
 		if(NOT NO_HALT)
-			#dk_error("cannot find \"${find}\"  in  (${filePath})")
+			#dk_fatal("cannot find \"${find}\"  in  (${filePath})")
 		endif()
 		dk_warning("cannot find \"${find}\"  in  (${filePath})")
 	endif()

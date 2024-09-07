@@ -133,6 +133,6 @@ dk_build(${OPENSSL})
 # 	endif()
 # endif()
 # if(NOT EXISTS "${OPENSSL_BINARY_EXE}")
-# 	dk_error("openssl_binary IS NOT FOUND OR INVALID")
+# 	dk_fatal("openssl_binary IS NOT FOUND OR INVALID")
 # endif()
 ###################################################################

@@ -36,11 +36,11 @@ function(dk_install plugin) #PATCH
 	
 	#dk_toLower(${plugin} plugin_lower)
 	#if(NOT ${plugin} STREQUAL ${plugin_lower})
-	#	dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
+	#	dk_fatal("ERROR:  dk_install() (${plugin}) must be all lowercase")
 	#endif()
 	
 	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin})
-		dk_error("ERROR: dk_install() (${DKIMPORTS_DIR}/${plugin}) does not exist")
+		dk_fatal("ERROR: dk_install() (${DKIMPORTS_DIR}/${plugin}) does not exist")
 	endif()
 	
 	if(EXISTS ${dest_path}/installed)
@@ -98,7 +98,7 @@ function(dk_install plugin) #PATCH
 	# TODO: option to delete downloaded file after extraction to conserve disk space
 	
 	if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
-		dk_error("The download files does not exist")
+		dk_fatal("The download files does not exist")
 	endif()
 	
 	set(FILETYPE "UNKNOWN")

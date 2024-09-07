@@ -16,7 +16,7 @@ function(dk_assets plugin)
 	endif()	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_error("${plugin} plugin not found")
+		dk_fatal("${plugin} plugin not found")
 	endif()
 	dk_info("Importing ${plugin} assets...")
 	

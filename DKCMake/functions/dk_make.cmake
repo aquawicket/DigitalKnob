@@ -13,12 +13,12 @@ function(dk_make path) #lib
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_make(${path}) path does not exist")
+		dk_fatal("dk_make(${path}) path does not exist")
 	endif()
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
-		dk_error("No proper dk_make() implemented for emscripten" NO_HALT)
+		dk_fatal("No proper dk_make() implemented for emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 		dk_cd(${path}/${BUILD_DIR})
 		

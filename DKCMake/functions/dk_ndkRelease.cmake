@@ -12,7 +12,7 @@ function(dk_ndkRelease path)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_ndkRelease(${path}) path does not exist")
+		dk_fatal("dk_ndkRelease(${path}) path does not exist")
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)

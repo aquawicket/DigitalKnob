@@ -103,7 +103,7 @@ foreach(plugin ${dkdepend_list})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
-		dk_error("${plugin} variable is invalid")
+		dk_fatal("${plugin} variable is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
@@ -185,7 +185,7 @@ foreach(plugin ${dkdepend_list})
 					dk_warning("MISSING: ${lib}")
 					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
 				else()
-					dk_echo("${lgreen}FOUND: ${green}${lib} ${clr}")
+					dk_success("FOUND: ${lib}")
 				endif()
 			endforeach()
 		
@@ -259,7 +259,7 @@ foreach(plugin ${dkdepend_list})
 				## double check that the missing libs were built
 				foreach(lib ${LIBLIST})
 					if(NOT EXISTS ${lib})
-						dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n****************************")
+						dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n****************************")
 					else()
 					
 						# Install DKPlugin Libs
@@ -278,7 +278,7 @@ foreach(plugin ${dkdepend_list})
 	
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
-				dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+				dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 			endif()
 		endforeach()
 	endif(${isDKPlugin} GREATER -1) # isDKPlugin

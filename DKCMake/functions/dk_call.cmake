@@ -20,7 +20,7 @@ macro(dk_call func)
 		#	dk _install ${1}
 		#endif()
 		if(NOT COMMAND ${func})
-			dk_error("${func}: command not found")
+			dk_fatal("${func}: command not found")
 		endif()
 	endif()
 	

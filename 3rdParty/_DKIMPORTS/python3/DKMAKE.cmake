@@ -30,5 +30,5 @@ dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interprete
 
 
 if(NOT EXISTS ${PYTHON3_EXE})
-	dk_error("Could not find PYTHON3_EXE:${PYTHON3_EXE}")
+	dk_fatal("Could not find PYTHON3_EXE:${PYTHON3_EXE}")
 endif()

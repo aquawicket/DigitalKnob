@@ -16,7 +16,7 @@ function(dk_getMULTI_CONFIG)
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 	if(MULTI_CONFIG)
 		if(CMAKE_BUILD_TYPE)
-			dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
+			dk_fatal("multi-config generators don't use CMAKE_BUILD_TYPE")
 		endif()
 		
 		#dk_printVar(CMAKE_CONFIGURATION_TYPES)
@@ -32,7 +32,7 @@ function(dk_getMULTI_CONFIG)
 	
 	else() # SINGLE_CONFIG
 		if(CMAKE_CONFIGURATION_TYPES)
-			dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
+			dk_fatal("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
 		endif()
 		
 		dk_set(SINGLE_CONFIG 1)

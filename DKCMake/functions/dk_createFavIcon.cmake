@@ -14,7 +14,7 @@ function(dk_createFavIcon inpath outpath)
 	if(IMAGEMAGICK_CONVERT_EXE)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=16 ${outpath})
 	else()
-		dk_error("IMAGEMAGICK_CONVERT_EXE is invalid!")
+		dk_fatal("IMAGEMAGICK_CONVERT_EXE is invalid!")
 	endif()
 endfunction()
 

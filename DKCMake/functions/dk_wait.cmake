@@ -36,7 +36,7 @@ function(dk_wait)
 	elseif(CMD_EXE) #elseif(WIN_HOST OR WIN32)
 		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
 	else()
-		dk_error("dk_wait(): Not implemented for this platform")
+		dk_fatal("dk_wait(): Not implemented for this platform")
 	endif()	
 endfunction()
 

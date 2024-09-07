@@ -19,5 +19,5 @@ endif()
 
 
 if(NOT EXISTS ${CMD_EXE})
-	dk_error("Could not file CMD_EXE:${CMD_EXE}")
+	dk_fatal("Could not file CMD_EXE:${CMD_EXE}")
 endif()

@@ -14,7 +14,7 @@ function(dk_generateCmake plugin_name)
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_error("dk_generateCmake(${plugin_name}): plugin not found")
+		dk_fatal("dk_generateCmake(${plugin_name}): plugin not found")
 	endif()
 	# Create CmakeLists.txt file
 	dk_delete(${plugin_path}/CMakeLists.txt NO_HALT)

@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_pickUpdate) 
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
 	dk_readCache(_APP_ _TARGET_OS_ _TYPE_)

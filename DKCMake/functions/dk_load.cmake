@@ -83,7 +83,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 	elseif(EXISTS ${fpath})
 		set(${fn}_file ${fpath})
 	else()
-		dk_error("${fpath}: file not found")
+		dk_fatal("${fpath}: file not found")
 	endif()
 	
 	

@@ -14,7 +14,7 @@ endif()
 #
 #	@src_path	- The url of the file to download
 #	@dest_path	- The path to download the file to
-#   NO_HALT     - if any of the parameters equals NO_HALT, dk_error() messages will not be displayed
+#   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
@@ -27,25 +27,25 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Setup all src_path variables
 	if(NOT src_path)
-		dk_error("src_path is invalid")
+		dk_fatal("src_path is invalid")
 	endif()
 	#dk_printVar(src_path)						# https://aquawicket.com/download/myFile.txt
 	
 	dk_dirname(${src_path} src_dir)
 	if(NOT src_dir)
-		dk_error("src_dir is invalid")
+		dk_fatal("src_dir is invalid")
 	endif()
 	#dk_printVar(src_dir)						# https://aquawicket.com/download
 	
 	dk_basename(${src_path} src_filename)
 	if(NOT src_filename)
-		dk_error("src_filename is invalid")
+		dk_fatal("src_filename is invalid")
 	endif()
 	#dk_printVar(src_filename)					# myFile.txt
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
-		dk_error("src_ext is invalid")
+		dk_fatal("src_ext is invalid")
 	endif()
 	#dk_printVar(src_ext)						# .txt
 	
@@ -54,7 +54,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		set(dest_path "${DKDOWNLOAD_DIR}")
 	endif()
 	if(NOT dest_path)
-		dk_error("dest_path is invalid")
+		dk_fatal("dest_path is invalid")
 	endif()	
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
@@ -63,7 +63,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
 	if(NOT dest_dir)
-		dk_error("dest_dir is invalid")
+		dk_fatal("dest_dir is invalid")
 	endif()
 	if(NOT EXISTS ${dest_dir})
 		dk_notice("dest_dir:(${dest_dir}) does not exists. It will be created")
@@ -74,14 +74,14 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	dk_basename("${dest_path}" dest_filename)	# myFile.txt
 	if(NOT dest_filename)
-		dk_error("dest_filename is invalid")
+		dk_fatal("dest_filename is invalid")
 		return()
 	endif()
 	#dk_printVar(dest_filename)
 	
 	dk_getExtension(${dest_path} dest_ext)		# .txt
 	if(NOT dest_ext)
-		dk_error("dest_ext is invalid")
+		dk_fatal("dest_ext is invalid")
 	endif()
 	#dk_printVar(dest_ext)
 	
@@ -124,7 +124,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		dk_delete("${temp_path}")
 	endif()
 	if(EXISTS "${temp_path}")
-		dk_error("temp_path:(${temp_path}) could not be removed")
+		dk_fatal("temp_path:(${temp_path}) could not be removed")
 	endif()
 	
 	dk_info("Downloading ${src_filename}. . . please wait")
@@ -137,14 +137,14 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	list(GET status 1 status_string)
 	if(NOT status_code EQUAL 0)
 		dk_delete(${temp_path})
-		dk_error("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
+		dk_fatal("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
 	else()
 		if(NOT EXISTS ${temp_path})
-			dk_error("temp_path:(${temp_path}) could not locate temporary download file")
+			dk_fatal("temp_path:(${temp_path}) could not locate temporary download file")
 		endif()
 		dk_rename(${temp_path} ${dest_path})
 		if(NOT EXISTS ${dest_path})
-			dk_error("dest_path:(${dest_path}) Could not locate downloaded file")
+			dk_fatal("dest_path:(${dest_path}) Could not locate downloaded file")
 		endif()
 		dk_info("${clr}${green} Finnished downloading ${dest_filename}")
 	endif() 

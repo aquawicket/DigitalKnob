@@ -17,7 +17,7 @@ function(dk_xcodeRelease path)
 	endif()
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_xcodeDebug(${path}) path does not exist")
+		dk_fatal("dk_xcodeDebug(${path}) path does not exist")
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)

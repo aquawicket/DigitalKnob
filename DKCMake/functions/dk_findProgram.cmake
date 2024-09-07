@@ -23,7 +23,7 @@ function(dk_findProgram VAR name)
 	endif()
 	
 	if(${VAR})
-		dk_error("error {VAR} already set to ${VAR}")
+		dk_fatal("error {VAR} already set to ${VAR}")
 	endif()
 	
 	if(ARGN)
@@ -50,7 +50,7 @@ function(dk_findProgram VAR name)
 		set(${VAR} "${${VAR}}" PARENT_SCOPE)
 		return()
 	elseif(${VAR}_second_pass)
-		dk_error("COULD NOT FIND ${name}")
+		dk_fatal("COULD NOT FIND ${name}")
 		return()
 	endif()
 	

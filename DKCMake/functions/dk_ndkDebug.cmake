@@ -12,7 +12,7 @@ function(dk_ndkDebug path)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_ndkDebug(${path}) path does not exist")
+		dk_fatal("dk_ndkDebug(${path}) path does not exist")
 	endif()
 	
 	if(DEBUG AND QUEUE_BUILD)

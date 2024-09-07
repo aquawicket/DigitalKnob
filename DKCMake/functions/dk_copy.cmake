@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@from		- The source path to copy
 #	@to			- The destination path to copy to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
-#   NO_HALT     - if any of the parameters equals NO_HALT, dk_error() messages will not be displayed
+#   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_copy from to) # OVERWRITE NO_HALT
 	dk_debugFunc(${ARGV})
@@ -37,7 +37,7 @@ function(dk_copy from to) # OVERWRITE NO_HALT
 					elseif(compare_result EQUAL 0)
 #						dk_info("${sourcefile} No Copy, The files are identical.")
 					else()
-						dk_error( "dk_copy(${from} ${to} ${OVERWRITE}): \n ERROR: compare_result = ${compare_result}")
+						dk_fatal( "dk_copy(${from} ${to} ${OVERWRITE}): \n ERROR: compare_result = ${compare_result}")
 					endif()
 				elseif(NOT EXISTS ${destinationfile})
 					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
@@ -55,7 +55,7 @@ function(dk_copy from to) # OVERWRITE NO_HALT
 		endif()
 	else()
 		if(NOT NO_HALT)
-			dk_error("from:(${from}) The source path does not exist")
+			dk_fatal("from:(${from}) The source path does not exist")
 		endif()
 	endif()
 endfunction()

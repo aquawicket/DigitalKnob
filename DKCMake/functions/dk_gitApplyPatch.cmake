@@ -25,7 +25,7 @@ function(dk_gitApplyPatch directory patch_file)
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(NOT ${result} EQUAL 0)
-		#dk_error("ERROR: 'An error occured patching with ${patch_file}'")
+		#dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
 		return()	# RETURN if the patch check failed, it may have already been patched
 	endif()
 	#dk_printVar(output)
@@ -42,7 +42,7 @@ function(dk_gitApplyPatch directory patch_file)
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(NOT ${result} EQUAL 0)
-		dk_error("ERROR: 'An error occured patching with ${patch_file}'")
+		dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
 	#dk_printVar(output)
 endfunction()

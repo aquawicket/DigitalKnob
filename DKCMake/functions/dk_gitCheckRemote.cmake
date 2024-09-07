@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_gitCheckRemote)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
 	dk_validate(DKBRANCH_DIR "dk_validateBranch()")

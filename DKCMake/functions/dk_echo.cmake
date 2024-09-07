@@ -15,7 +15,7 @@ function(dk_echo)
 		return()
 	endif()
 	if(NOT ${ARGC} EQUAL 1)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
 #	if(NOT echo_fileline)

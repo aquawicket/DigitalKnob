@@ -10,7 +10,7 @@ function(dk_appendEnvPath inputPath)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT inputPath)
-		dk_error("dk_appendEnvPath(): inputPath is invalid!")
+		dk_fatal("dk_appendEnvPath(): inputPath is invalid!")
 		return()
 	endif()
 	if(NOT EXISTS ${inputPath})

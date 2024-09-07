@@ -26,9 +26,9 @@ function(dk_assertPath path)
 	dk_replaceAll("${path}"  " "  ""  var)
 		
 	if("${var}")
-		dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+		dk_fatal("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 	else()
-		dk_error("${bg_red} ${path} ${clr}")
+		dk_fatal("${bg_red} ${path} ${clr}")
 	endif()
 	
 	dk_printVar(CMAKE_SOURCE_DIR)

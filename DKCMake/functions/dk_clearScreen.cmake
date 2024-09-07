@@ -31,7 +31,7 @@ function(dk_clearScreen)
 		return()
 	endif()
 	
-	dk_error("no clear screen commands available")
+	dk_fatal("no clear screen commands available")
 	
 endfunction()
 

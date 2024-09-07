@@ -15,7 +15,7 @@ function(dk_createOsMacros func)
 	message("dk_createOsMacros(${ARGV})")
 	
 	if(ext_string)
-		dk_error("ext_string variable already in use")
+		dk_fatal("ext_string variable already in use")
 	endif()
 	
 	### HOST Prefix functions ###

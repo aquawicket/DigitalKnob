@@ -32,7 +32,7 @@ function(dk_keyboardInput input)
 		return()
 	endif()
 		
-	dk_error("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")
 endfunction()
 
 

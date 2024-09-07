@@ -16,7 +16,7 @@ function(dk_visualStudioRelease path) #target #arch
 	endif()
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_visualStudioRelease(${path}) path does not exist")
+		dk_fatal("dk_visualStudioRelease(${path}) path does not exist")
 	endif()
 	
 	dk_findFiles(${path}/${triple} *.sln sln_file)
@@ -24,12 +24,12 @@ function(dk_visualStudioRelease path) #target #arch
 	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
-		dk_error("extension does not equal .sln")
+		dk_fatal("extension does not equal .sln")
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${path}/${triple}/${sln_file})
-			dk_error("CANNOT FIND: ${path}/${triple}/${sln_file}")
+			dk_fatal("CANNOT FIND: ${path}/${triple}/${sln_file}")
 		endif()
 		if(${ARGC} GREATER 2)
 			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${triple}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})

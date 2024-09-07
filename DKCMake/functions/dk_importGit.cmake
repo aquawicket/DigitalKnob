@@ -28,7 +28,7 @@ function(dk_importGit url) #branch #id #PATCH
 
 	# GITHUB
 	if(${url_list_size} LESS 5)
-		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
+		dk_fatal("url_list doesn't contain enough elements to have a 'orginization/library'")
 	endif()	
 	
 	set(branch "master")
@@ -47,7 +47,7 @@ function(dk_importGit url) #branch #id #PATCH
 			if(${includes} EQUAL -1)
 			#dk_includes(${url} "gitlab.com" includes)
 			#if(NOT ${includes})
-				dk_error("The url does not contain 'github.com' OR 'gitlab.com'")
+				dk_fatal("The url does not contain 'github.com' OR 'gitlab.com'")
 			endif()
 		endif()
 	
@@ -84,36 +84,36 @@ function(dk_importGit url) #branch #id #PATCH
 	
 	# check current folder name
 	if(NOT "${DKIMPORTS_DIR}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_error("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${FOLDER}\n\n")
+		dk_fatal("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${FOLDER}\n\n")
 	endif()
 	
 	dk_toUpper(${Lib} LIBVAR)
 	if(NOT LIBVAR)
-		dk_error("$(LIBVAR) is invalid")
+		dk_fatal("$(LIBVAR) is invalid")
 	endif()
 	dk_verbose(LIBVAR)
 	
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		dk_error("${LIBVAR}_FOLDER is invalid")
+		dk_fatal("${LIBVAR}_FOLDER is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_FOLDER	)
 	
 	dk_set(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
-		dk_error("${LIBVAR}_BRANCH is invalid")
+		dk_fatal("${LIBVAR}_BRANCH is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_BRANCH	)
 	
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
-		dk_error("${LIBVAR}_NAME is invalid")
+		dk_fatal("${LIBVAR}_NAME is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_NAME)
 	
 	dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
-		dk_error("${${LIBVAR}} is invalid")
+		dk_fatal("${${LIBVAR}} is invalid")
 	endif()
 	dk_verbose(${${LIBVAR}})
 	

@@ -16,7 +16,7 @@ function(dk_arrayLength array rtn_var)
 		set(_array_ "array")
 		set(name ${_array_})
 	else()
-		dk_error("arguments invalid: ${_array_}")
+		dk_fatal("arguments invalid: ${_array_}")
 	endif()
 	
 	list(LENGTH "${_array_}" arrayLength)

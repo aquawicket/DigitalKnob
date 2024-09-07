@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ##################################################################################
 # dk_error(msg) HALT, NO_HALT, TRACE, NO_TRACE, PAUSE, NO_PAUSE
 #
-#	Print a error dk_echo to the console
+#	Print a error message to the console
 #
 #	@msg	- The dk_echo to print
 #

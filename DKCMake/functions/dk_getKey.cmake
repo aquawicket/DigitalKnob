@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_getKey rtn_var)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
 	dk_depend(cmd)
@@ -26,7 +26,7 @@ function(dk_getKey rtn_var)
 		return()
 	endif()
 		
-	dk_error("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
 endfunction()
 
 

@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Remove a file or directory
 #
 #	@path		- The full path to the file or direcotory to remove
-#   NO_HALT     - if NO_HALT is specified in the parameters, dk_error() messages will not be displayed
+#   NO_HALT     - if NO_HALT is specified in the parameters, dk_fatal() messages will not be displayed
 #
 function(dk_delete path)
 	dk_debugFunc(${ARGV})
@@ -25,7 +25,7 @@ function(dk_delete path)
 	dk_sleep(1)	# give the path a second to delete
 	if(EXISTS ${path})
 		if(NOT NO_HALT)
-			dk_error("failed to remove ${path}")
+			dk_fatal("failed to remove ${path}")
 		endif()
 	endif()
 endfunction()

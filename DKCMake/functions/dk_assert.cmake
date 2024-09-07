@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_assert expression)
 	dk_debugFunc(${ARGV})
 	if(NOT ${ARGC} EQUAL 1)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 	
 	
@@ -20,9 +20,9 @@ function(dk_assert expression)
 		dk_replaceAll("${expression}"  " "  ""  var)
 		
 		if("${var}")
-			dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+			dk_fatal("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
 		else()
-			dk_error("${bg_red} ${expression} ${clr}")
+			dk_fatal("${bg_red} ${expression} ${clr}")
 		endif()
 		
 		dk_printVar(CMAKE_SOURCE_DIR)

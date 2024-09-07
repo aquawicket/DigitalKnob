@@ -148,7 +148,7 @@ function(dk_build path) #target NO_HALT
 		
 	#endforeach()
 	
-	dk_error("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
+	dk_fatal("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
 endfunction()
 dk_createOsMacros("dk_build")
 

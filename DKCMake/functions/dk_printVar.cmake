@@ -13,7 +13,7 @@ function(dk_printVar var)
 	#string(MAKE_C_IDENTIFIER ${var} alphanum_var)
 	#if(NOT "${var}" STREQUAL "${alphanum_var}")
 	#if(NOT "${var}" MATCHES "ENV{") # ENV variables
-	#	dk_error("${var} is not a valid variable name. It contains invalid characters.")
+	#	dk_fatal("${var} is not a valid variable name. It contains invalid characters.")
 	#endif()
 	#endif()
 

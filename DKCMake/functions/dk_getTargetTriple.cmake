@@ -155,7 +155,7 @@ function(dk_getTargetTriple)
 		elseif(X86)
 			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
 		else()
-			dk_error("The target_triple:${target_triple} does not contain a valid ENV or MSYSTEM")
+			dk_fatal("The target_triple:${target_triple} does not contain a valid ENV or MSYSTEM")
 		endif()
 		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	endif()

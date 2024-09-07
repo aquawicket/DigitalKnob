@@ -20,7 +20,7 @@ function(dk_source func)
 		
 	endif()
 	if(NOT EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
-		dk_error("ERROR: failed to download ${func}") 
+		dk_fatal("ERROR: failed to download ${func}") 
 	endif()
 	include(${DKCMAKE_FUNCTIONS_DIR}/${func}.cmake)
 endfunction()

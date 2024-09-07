@@ -19,14 +19,14 @@ endif()
 WIN_X86_HOST_dk_set		(VC_REDIST_DL https://aka.ms/vs/16/release/vc_redist.x86.exe)
 WIN_X86_64_HOST_dk_set	(VC_REDIST_DL https://aka.ms/vs/16/release/vc_redist.x64.exe)
 if(NOT VC_REDIST_DL)
-	dk_error("VC_REDIST_DL is invalid")
+	dk_fatal("VC_REDIST_DL is invalid")
 	return()
 endif()
 
 WIN_X86_HOST_dk_set		(VCCOMP140_DLL "C:/Windows/SysWOW64/vcomp140.dll")
 WIN_X86_64_HOST_dk_set	(VCCOMP140_DLL "C:/Windows/System32/vcomp140.dll")
 if(NOT VCCOMP140_DLL)
-	dk_error("VCCOMP140_DLL is invalid")
+	dk_fatal("VCCOMP140_DLL is invalid")
 	return()
 endif()
 
@@ -41,5 +41,5 @@ endif()
 
 
 if(NOT EXISTS "${VCCOMP140_DLL}")
-	dk_error("Unable to locate VCCOMP140_DLL:${VCCOMP140_DLL}")
+	dk_fatal("Unable to locate VCCOMP140_DLL:${VCCOMP140_DLL}")
 endif()

@@ -124,7 +124,7 @@ dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 #elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
 #else()
-#	dk_error("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
+#	dk_fatal("NONE OF THE DKCMAKE TOOLCHAIN TYPES ARE SET")
 #endif()
 
 dk_validate(DKIMPORTS_DIR	"dk_validateBranch()")

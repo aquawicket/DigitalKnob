@@ -41,7 +41,7 @@ function(dk_getPathToPlugin plugin rtn_var)
   	#endforeach()
 	
 	set(${rtn_var} "")
-	dk_error("Could not find ${plugin} Plugin.")
+	dk_fatal("Could not find ${plugin} Plugin.")
 endfunction()
 
 

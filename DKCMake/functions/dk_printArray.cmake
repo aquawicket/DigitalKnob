@@ -15,7 +15,7 @@ function(dk_printArray)
 		set(array "ARGV")
 		set(name ${array})
 	else()
-		dk_error("arguments invalid: ${ARGV}")
+		dk_fatal("arguments invalid: ${ARGV}")
 	endif()
 
 	dk_echo("name = ${name}")

@@ -13,7 +13,7 @@ function(dk_compressAssets path)
 	
 	dk_info("Compressing: ${path}")
 	if(NOT EXISTS ${path})
-		dk_error("The path ${path} does not exist")
+		dk_fatal("The path ${path} does not exist")
 	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DK_PROJECT_DIR}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()

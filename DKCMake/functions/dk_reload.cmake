@@ -9,7 +9,7 @@ function(dk_reload)
 	dk_debugFunc(${ARGV})
 
 	if(NOT EXISTS "${DKSCRIPT_PATH}")
-		dk_error("DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist")
+		dk_fatal("DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist")
 		return()
 	endif()
 	

@@ -14,7 +14,7 @@ function(dk_set variable)# value)
 	dk_debugFunc(${ARGV})
 	
 	if(${ARGC} LESS 1)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
 	endif()
 	if(${ARGC} LESS 2)
 		dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): expecting more arguments")

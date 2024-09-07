@@ -18,7 +18,7 @@ function(dk_getFilename path rtn_var)
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
-		dk_error("No Path Dividers found")
+		dk_fatal("No Path Dividers found")
 	endif()
 	MATH(EXPR index "${index}+1")
 	string(LENGTH ${path} length)

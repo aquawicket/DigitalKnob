@@ -43,7 +43,7 @@ function(dk_msys2Bash)
 	elseif(win_x86_64_ucrt)
 		list(APPEND bash "export PATH=${MSYS2}/ucrt64/bin:$PATH")
 	else()
-		dk_error("dk_msys2Bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
+		dk_fatal("dk_msys2Bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
 	endif()
 		
 	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")

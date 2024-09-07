@@ -11,7 +11,7 @@ dk_depend(sudo)
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
 WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
 if(WIN_HOST AND NOT GIT_DL)
-	dk_error("GIT_DL is invalid!")
+	dk_fatal("GIT_DL is invalid!")
 	return()
 endif()
 
@@ -68,7 +68,7 @@ else()
 endif()
 
 if(NOT GIT_EXE)
-	dk_error("COULD NOT FIND GIT_EXE")
+	dk_fatal("COULD NOT FIND GIT_EXE")
 	return()
 endif()
 
@@ -84,7 +84,7 @@ return()
 #if(MSYSTEM)
 #	dk_depend(msys2)
 #	if(NOT EXISTS ${MSYS2})
-#		dk_error("MSYS2:${MSYS2} does not exist")
+#		dk_fatal("MSYS2:${MSYS2} does not exist")
 #	endif()
 #	
 #	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NO_HALT) # BASH_ENV)
@@ -134,10 +134,10 @@ return()
 
 ### validate GIT variables ###
 #if(NOT GIT_EXE)
-#	dk_error("GIT_EXE:${GIT_EXE} is empty")
+#	dk_fatal("GIT_EXE:${GIT_EXE} is empty")
 #endif()
 #if(NOT EXISTS ${GIT_EXE})
-#	dk_error("GIT_EXE:${GIT_EXE} does not exist")
+#	dk_fatal("GIT_EXE:${GIT_EXE} does not exist")
 #endif()
 #
 #dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent

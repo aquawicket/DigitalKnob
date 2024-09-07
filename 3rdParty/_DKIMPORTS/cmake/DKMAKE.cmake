@@ -87,7 +87,7 @@ endif()
 
 ### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
-	dk_error("COULD NOT FIND CMAKE_EXE" NO_HALT)
+	dk_fatal("COULD NOT FIND CMAKE_EXE")
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
 	return()
 endif()
@@ -262,7 +262,7 @@ endif()
 
 
 #if(NOT EXISTS ${CMAKE_COMMAND})
-#	dk_error("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
+#	dk_fatal("CMAKE_COMMAND:${CMAKE_COMMAND} does not exist")
 #endif()
 #if(NOT CMAKE_EXE)
 #	dk_notice("CMAKE_EXE:${CMAKE_EXE} is empty. setting to ${CMAKE_COMMAND}")
@@ -270,7 +270,7 @@ endif()
 #endif()
 #
 #if(NOT EXISTS ${CMAKE_EXE})
-#	dk_error("CMAKE_EXE:${CMAKE_EXE} does not exist")
+#	dk_fatal("CMAKE_EXE:${CMAKE_EXE} does not exist")
 #endif()
 #
 #dk_set(CMAKE_EXE ${CMAKE_EXE}) # make the variable persistent

@@ -12,7 +12,7 @@ function(dk_printUrlData url)
 	dk_debugFunc(${ARGV})
 	
 	if(NOT url)
-		dk_error("url invalid! ")
+		dk_fatal("url invalid! ")
 	endif()
 	dk_verbose("*** url Variables ***")
 	dk_verbose(url)

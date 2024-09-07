@@ -15,7 +15,7 @@ function(dk_runDepends plugin)
 	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_error("${plugin} plugin not found")
+		dk_fatal("${plugin} plugin not found")
 	endif()
 	dk_verbose("FOUND ${plugin} DKMAKE.cmake at ${plugin_path}")
 	

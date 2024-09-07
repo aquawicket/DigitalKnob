@@ -17,7 +17,7 @@ function(dk_getFileType path rtn_var)
 	
 	dk_getExtension(${path} extension)
 	if(NOT extension)
-		dk_error("The path does not contain an extension")
+		dk_fatal("The path does not contain an extension")
 		set(fileType ERROR)
 	elseif("${extension}" STREQUAL ".app")
 		set(fileType EXECUTABLE)
