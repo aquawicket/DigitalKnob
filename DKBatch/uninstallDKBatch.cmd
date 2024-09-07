@@ -1,15 +1,14 @@
 @echo off
+if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 :uninstallDKBatch
-	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd" %~0
-
 	ftype DKBatch=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
 	assoc .cmd=
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 
 	::###### RESTORE DEFAULTS (restore.reg) ######
 	
