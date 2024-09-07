@@ -137,7 +137,12 @@ else()
 endif()
 
 
-###### CMAKE VARIABLES ######
+
+
+
+
+
+###### set GLOBAL CMAKE VARIABLES ######
 dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
 #dk_set(CMAKE_GENERATOR_PLATRORM 	ARM;ARM64;X86;X64)
 dk_set(CMAKE_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")

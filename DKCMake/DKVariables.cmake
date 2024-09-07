@@ -95,47 +95,47 @@ if(error)
 	dk_printVar(MINGW)
 	dk_printVar(MSYS)
 	dk_printVar(XCODE)
-	dk_fatal("More than one Environment Flags are set")
+	dk_fatal("Either not enout, or too many compiler Flags are set")
 endif()
 
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
-option(DEBUG "Build Debug Output" OFF)
-option(RELEASE "Build Release Output" OFF)
+option(DEBUG "Build Debug Output" 0)
+option(RELEASE "Build Release Output" 0)
 if(NOT DEBUG AND NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
-	dk_set(DEBUG ON)
-	dk_set(RELEASE ON)
+	dk_set(DEBUG 1)
+	dk_set(RELEASE 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for Build Level
 ###########################################################################
-option(BUILD "Simpily build the app or library" OFF)
-option(REBUILD "Rebuild the app" OFF)
-option(REBUILDALL "Rebuild the app and all dependencies" ON)
+option(BUILD "Simpily build the app or library" 0)
+option(REBUILD "Rebuild the app" 0)
+option(REBUILDALL "Rebuild the app and all dependencies" 1)
 if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
-	dk_set(REBUILDALL ON)
+	dk_set(REBUILDALL 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for Library Build Type (STATIC or SHARED)
 ###########################################################################
-option(STATIC "Build Static Libraries and Plugins" OFF)
-option(SHARED "Build Shared Libraries and Plugins" OFF)
+option(STATIC "Build Static Libraries and Plugins" 0)
+option(SHARED "Build Shared Libraries and Plugins" 0)
 if(NOT STATIC AND NOT SHARED)
-	dk_set(STATIC ON)
+	dk_set(STATIC 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for CEF
 ###########################################################################
-option(DKCEF "Use Chromium Embeded Framework" OFF)
+option(DKCEF "Use Chromium Embeded Framework" 0)
 if(${DKCEF} STREQUAL "ON")
 	add_definitions(-DHAVE_DKCef)
 endif()
@@ -154,7 +154,7 @@ dk_getTargetTriple()
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKApps/" index)
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")
-#	dk_set(DKAPP ON)
+#	dk_set(DKAPP 1)
 #	dk_printVar(DKAPP)
 #	add_definitions(-DDKAPP)
 #endif()
@@ -185,15 +185,15 @@ dk_getTargetTriple()
 ### Set other OS Specific variables ###
 # RPI and RPI32
 #if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm32")
-#	dk_set(RPI ON)
-#	dk_set(RPI32 ON)
+#	dk_set(RPI 1)
+#	dk_set(RPI32 1)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI32)
 #endif()
 # RPI and RPI64
 #if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm64")
-#	dk_set(RPI ON)
-#	dk_set(RPI64 ON)
+#	dk_set(RPI 1)
+#	dk_set(RPI64 1)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI64)
 #endif()
@@ -202,7 +202,7 @@ dk_getTargetTriple()
 if(CMAKE_HOST_SYSTEM_VERSION)
 	string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
 	if(${contains_tinycore} GREATER -1)
-		dk_set(TINYCORE ON)
+		dk_set(TINYCORE 1)
 	endif()
 endif()
 
@@ -214,7 +214,7 @@ dk_info("")
 
 
 ### Set CMAKE_SKIP_RPATH ###
-dk_set(CMAKE_SKIP_RPATH ON)
+dk_set(CMAKE_SKIP_RPATH 1)
 
 if(WIN_HOST)
 	dk_set(exe .exe)

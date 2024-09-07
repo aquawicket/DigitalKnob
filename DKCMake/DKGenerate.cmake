@@ -70,8 +70,8 @@ endforeach()
 dk_buildLog("\n")
 
 foreach(plugin ${dkdepend_list})
-	dk_set(QUEUE_BUILD OFF)
-	dk_set(PREBUILD OFF)
+	dk_set(QUEUE_BUILD 0)
+	dk_set(PREBUILD 0)
 	dk_set(LIBLIST "") # used for double checking
 	
 	dk_info("############################################################")

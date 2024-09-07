@@ -104,9 +104,9 @@ dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 
 
 
-#set(DKCMAKE_COMMAND_LINE_TOOLCHAIN OFF)
-#set(DKCMAKE_LOAD_FILE_TOOLCHAIN OFF)
-#set(DKCMAKE_INTERNAL_TOOLCHAIN ON)
+#set(DKCMAKE_COMMAND_LINE_TOOLCHAIN 0)
+#set(DKCMAKE_LOAD_FILE_TOOLCHAIN 0)
+#set(DKCMAKE_INTERNAL_TOOLCHAIN 1)
 #dk_info("DKCMAKE_COMMAND_LINE_TOOLCHAIN = ${DKCMAKE_COMMAND_LINE_TOOLCHAIN}")
 #dk_info("DKCMAKE_LOAD_FILE_TOOLCHAIN = ${DKCMAKE_LOAD_FILE_TOOLCHAIN}")
 #dk_info("DKCMAKE_INTERNAL_TOOLCHAIN = ${DKCMAKE_INTERNAL_TOOLCHAIN}")
@@ -193,7 +193,7 @@ dk_set(WARNING_LEVEL 					4)
 dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 
 if(ANDROID)
-	dk_set(POSITION_INDEPENDENT_EXECUTABLE OFF) 
+	dk_set(POSITION_INDEPENDENT_EXECUTABLE 0) 
 endif()
 
 
@@ -234,7 +234,7 @@ dk_set(DKCONFIGURE_CXXFLAGS_RELEASE			-O3 -DNDEBUG)
 # https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
 if(WIN_HOST)
-	dk_set(POSITION_INDEPENDENT_CODE OFF)
+	dk_set(POSITION_INDEPENDENT_CODE 0)
 endif()
 if(POSITION_INDEPENDENT_CODE)
 	if(WIN AND MSVC)
@@ -460,19 +460,17 @@ if(EMSCRIPTEN)
 	dk_append(CMAKE_CXX_FLAGS						-DEMSCRIPTEN -std=gnu++17)
 	dk_append(DKCONFIGURE_CFLAGS					-DEMSCRIPTEN -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS					-DEMSCRIPTEN -std=gnu++17)
-	dk_append(DKCMAKE_FLAGS							-DEMSCRIPTEN=ON)
+	dk_append(DKCMAKE_FLAGS							-DEMSCRIPTEN=1)
 endif()
 
 
 ### iOS arm32 - XCODE ###
 if(IOS_ARM32)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_set		(CMAKE_TOOLCHAIN_FILE				${IOS_TOOLCHAIN_FILE})
 	dk_append	(CMAKE_C_FLAGS						-DIOS -DIOS_ARM32 -std=c17 -x objective-c)
 	dk_append	(CMAKE_CXX_FLAGS					-DIOS -DIOS_ARM32 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${XCODE_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS						--host arm-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm -DIOS -DIOS_ARM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
@@ -482,13 +480,11 @@ endif()
 
 ### iOS_ARM64 - XCODE ###
 if(IOS_ARM64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOS_ARM64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOS_ARM64 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${XCODE_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS						--host arm64-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS					-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT})
@@ -498,13 +494,11 @@ endif()
 
 ### iOS Simulator x86 - XCODE ###
 if(IOSSIM_X86)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOSSIM -DIOSSIM_X86 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${XCODE_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS						--host i686-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS					-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS					-arch i686 -DIOS -DIOSSIM -DIOSSIM_X86 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
@@ -514,13 +508,11 @@ endif()
 
 ### iOS Simulator x86_64 - XCODE ###
 if(IOSSIM_X86_64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_set(CMAKE_TOOLCHAIN_FILE						${IOS_TOOLCHAIN_FILE})
 	dk_append(CMAKE_C_FLAGS							-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DIOS -DIOSSIM -DIOSSIM_X86_64 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${IOS_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${IOS_CXX_COMPILER})
 	dk_append(DKCONFIGURE_FLAGS						--host x86_64-apple-${IOS_DARWIN})
 	dk_append(DKCONFIGURE_CFLAGS					-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
 	dk_append(DKCONFIGURE_CXXFLAGS					-arch x86_64 -DIOS -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT})
@@ -530,13 +522,10 @@ endif()
 
 ### Linux x86 ###
 if(LINUX_X86)
-	#dk_set(CMAKE_GENERATOR							"Unix Makefiles")
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake) 		#(CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
-	dk_set(DKCONFIGURE_CC							${GCC_EXE})
-	dk_set(DKCONFIGURE_CXX							${GXX_EXE})
 	dk_append(DKCONFIGURE_CFLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS					-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
 endif()
@@ -544,13 +533,10 @@ endif()
 
 #### Linux x86_64 ###
 if(LINUX_X86_64)
-	#dk_set(CMAKE_GENERATOR							"Unix Makefiles")
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake) 		#(CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
-	dk_set(DKCONFIGURE_CC							${GCC_EXE})
-	dk_set(DKCONFIGURE_CXX							${GXX_EXE})
 	dk_append(DKCONFIGURE_CFLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 	dk_append(DKCONFIGURE_CXXFLAGS					-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 endif()
@@ -558,12 +544,10 @@ endif()
 
 ### Mac x86 - XCODE ###
 if(MAC_X86)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC i686 -DMAC_X86 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${XCODE_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS					-arch i686 -DMAC -DMAC_X86 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCONFIGURE_CXXFLAGS					-arch i686 -DMAC -DMAC_X86 -std=c++17) #-x objective-c++) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCMAKE_FLAGS							-DCMAKE_OSX_ARCHITECTURES=x86)
@@ -572,12 +556,10 @@ endif()
 
 ### Mac x86_64 - XCODE ###
 if(MAC_X86_64)
-	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake) 	# (CMAKE_GENERATOR) (CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-DMAC -DMAC_X86_64 -std=c17 -x objective-c)
 	dk_append(CMAKE_CXX_FLAGS						-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++)
-	dk_set(DKCONFIGURE_CC							${XCODE_C_COMPILER})
-	dk_set(DKCONFIGURE_CXX							${XCODE_CXX_COMPILER})
 	dk_append(DKCONFIGURE_CFLAGS					-DMAC -DMAC_X86_64 -std=c17) #-x objective-c) # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCONFIGURE_CXXFLAGS					-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++) #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 	dk_append(DKCMAKE_FLAGS							-DCMAKE_OSX_ARCHITECTURES=x86_64)
@@ -586,13 +568,10 @@ endif()
 
 ### Raspbery arm32 ###
 if(RASPBERRY_ARM32)
-	#dk_set(CMAKE_GENERATOR							"Unix Makefiles")
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake) 		#(CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
-	dk_set(DKCONFIGURE_CC							${GCC_EXE})
-	dk_set(DKCONFIGURE_CXX							${GXX_EXE})
 	dk_append(DKCONFIGURE_CFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11) 				#-march=armv7l 
 	dk_append(DKCONFIGURE_CXXFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
@@ -600,13 +579,10 @@ endif()
 
 ### Raspbery arm64 ###
 if(RASPBERRY_ARM64)
-	#dk_set(CMAKE_GENERATOR						"Unix Makefiles")
-	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake) 	#(CMAKE_C_COMPILER) (CMAKE_CXX_COMPILER) (CMAKE_RC_COMPILER)
+	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
 	
 	dk_append(CMAKE_C_FLAGS							-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l
 	dk_append(CMAKE_CXX_FLAGS						-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l 
-	dk_set(DKCONFIGURE_CC							${GCC_EXE})
-	dk_set(DKCONFIGURE_CXX							${GXX_EXE})
 	dk_append(DKCONFIGURE_CFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu11) 				#-march=armv7l 
 	dk_append(DKCONFIGURE_CXXFLAGS					-DLINUX -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs) 	#-march=armv7l
 endif()
@@ -721,8 +697,6 @@ endif()
 #dk_printVar(MSYSTEM)
 #dk_printVar(CMAKE_GENERATOR)
 #dk_printVar(CMAKE_MAKE_PROGRAM)
-#dk_printVar(CMAKE_C_COMPILER)
-#dk_printVar(CMAKE_CXX_COMPILER)
 #dk_printVar(CMAKE_C_FLAGS)
 #dk_printVar(CMAKE_CXX_FLAGS)
 #dk_printVar(CMAKE_EXE_LINKER_FLAGS)
