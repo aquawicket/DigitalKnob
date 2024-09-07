@@ -65,9 +65,9 @@ endif()
 
 
 
-set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python")
 
-dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python")
 
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
 
