@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc("${ARGV}")
 	
 	dk_getOptionValue(${name} ${ARGN})
 	#dk_printVar(${name})
