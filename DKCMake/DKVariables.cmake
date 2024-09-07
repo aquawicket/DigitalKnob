@@ -43,10 +43,10 @@ endif()
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-dk_printVar(CMAKE_C_COMPILER_ID)
-dk_printVar(CMAKE_CXX_COMPILER_ID)
-dk_printVar(CMAKE_GENERATOR)
-dk_printVar(CMAKE_GENERATOR_PLATFORM)
+#dk_printVar(CMAKE_C_COMPILER_ID)
+#dk_printVar(CMAKE_CXX_COMPILER_ID)
+#dk_printVar(CMAKE_GENERATOR)
+#dk_printVar(CMAKE_GENERATOR_PLATFORM)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	if(GNU)
@@ -79,10 +79,7 @@ elseif(CMAKE_GENERATOR STREQUAL "Xcode")
 	dk_set(XCODE 1)
 	
 elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-	if(UNIX)
-		dk_error("UNIX was allready set")
-	endif()
-	dk_set(UNIX 1)
+	dk_fixme("Find a good variable name for Unix Makefiles. Don't use UNIX")
 	
 else()
 	dk_fatal("Could not determin Environment Variable")
@@ -95,7 +92,6 @@ if(error)
 	dk_printVar(MINGW)
 	dk_printVar(MSYS)
 	dk_printVar(XCODE)
-	dk_printVar(UNIX)
 	dk_fatal("More than one Environment Flags are set")
 endif()
 
