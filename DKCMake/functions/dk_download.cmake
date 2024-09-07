@@ -2,10 +2,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 if(NOT BACKUP_DL_SERVER)
-	set(BACKUP_DL_SERVER "http://aquawicket.com/download")
+	dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
 endif()
 if(NOT TEST_BACKUP_DL_SERVER)
-	set(TEST_BACKUP_DL_SERVER 0)
+	dk_set(TEST_BACKUP_DL_SERVER 0)
 endif()
 ###############################################################################
 # dk_download(src_path dest_path) #NO_HALT
@@ -95,7 +95,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	
 	# Use BACKUP_DL_SERVER only
-	if(${TEST_BACKUP_DL_SERVER} EQUAL 1)
+	if(TEST_BACKUP_DL_SERVER)
 		set(src_path "${BACKUP_DL_SERVER}/${src_filename}")
 		dk_info("Using Backup Server src_path:${src_path} . . .")
 	
