@@ -19,12 +19,14 @@ function(dk_exit) # exit_code)
 		set(exit_code ${ARGV0})
 	endif()
 	
-	if(PAUSE_ON_EXIT EQUAL 1)
+	if(PAUSE_ON_EXIT)
 		dk_echo("*** PAUSE_ON_EXIT exit_code:${exit_code} ***")
 		dk_pause()
 	endif()
 	
-	cmake_language(EXIT ${exit_code})  # => 3.29
+	if(CMAKE_SCRIPT_MODE_FILE)
+		cmake_language(EXIT ${exit_code})  # => 3.29
+	endif()
 	
 	### fallback methods ###
 	if(UNIX)
