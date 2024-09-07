@@ -85,7 +85,7 @@ else()
 	dk_fatal("Could not determin Environment Variable")
 endif()
 
-math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} + ${UNIX} - 1" OUTPUT_FORMAT DECIMAL)
+math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} - 1" OUTPUT_FORMAT DECIMAL)
 if(error)
 	dk_printVar(GNU)
 	dk_printVar(MSVC)
