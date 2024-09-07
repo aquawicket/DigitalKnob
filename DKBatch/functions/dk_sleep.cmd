@@ -6,9 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::# dk_sleep(milliseconds)
 ::#
 :dk_sleep
- setlocal
     call dk_debugFunc 1
-    
+ setlocal  
     :: Method 1 - javascript (fastest)
     set /a "milliseconds=%~1-100"
     cscript /nologo /e:JScript "%~f0" "%milliseconds%" 2>nul && goto:eof || (call ) %NO_STD%

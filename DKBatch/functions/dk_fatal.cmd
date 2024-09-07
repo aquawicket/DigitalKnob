@@ -9,9 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    @message - The message to print
 ::#
 :dk_fatal
- setlocal
-    ::call dk_debugFunc 1
-    
+    call dk_debugFunc 1
+ setlocal   
     %dk_call% dk_log FATAL "%~1"
 %endfunction%
 
@@ -23,5 +22,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
     call dk_debugFunc 0
     
+	%dk_call% dk_echo "test dk_echo message"
+	%dk_call% dk_sleep 1000
+	%dk_call% dk_echo "test dk_echo message"
     %dk_call% dk_fatal "test dk_fatal message"
+	%dk_call% dk_echo "test dk_echo message"
 %endfunction%

@@ -124,11 +124,9 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 ::#    @message - The message to print
 ::#
 :dk_log
- setlocal 
-    ::call dk_debugFunc 1 2
-    
+    call dk_debugFunc 1 2
     if "%ENABLE_dk_log%" neq "1"  goto:eof
-    
+  setlocal   
     
         if "%~2" equ "" set "_level_=DEFAULT" && set "_message_=%~1"
         if "%~2" neq "" set "_level_=%~1"     && set "_message_=%~2"
