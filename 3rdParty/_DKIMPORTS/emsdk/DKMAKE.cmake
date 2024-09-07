@@ -64,10 +64,10 @@ if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
 endif()
 
 
-
-set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python")
-
-dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python")
+if(WIN_HOST)
+	set(ENV{EMSDK_PYTHON} "${EMSDK}/python/3.9.2-nuget_64bit/python")
+	dk_exportVars(EMSDK_PYTHON "${EMSDK}/python/3.9.2-nuget_64bit/python.exe")
+endif()
 
 dk_set(EMSDK_ENV 	"${EMSDK}/emsdk_env${bat}")			
 
