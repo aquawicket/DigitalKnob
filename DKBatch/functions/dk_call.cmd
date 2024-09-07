@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         rem if exist "%DKBATCH_FUNCTIONS_DIR%\dk_isCRLF.cmd" call dk_isCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" || if exist "%DKBATCH_FUNCTIONS_DIR%\dk_fileToCRLF.cmd" call dk_fileToCRLF "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"
     )
 
-    ::echo "call %*"
+    title %*
     call %*
     exit /b %errorlevel%
 

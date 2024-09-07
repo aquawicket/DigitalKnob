@@ -1,5 +1,8 @@
 @echo off
+
+::echo DK.cmd %~1
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
+title %~n1
 
 if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & pause & exit 1
 
@@ -80,8 +83,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%########################## END TEST ###############################%clr%"
     %dk_call% dk_echo
-    pause
-    exit
+	exit %ERRORLEVEL%
 %endfunction%
 
 
@@ -105,9 +107,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_reloadWithCmd
 ::#
 :dk_reloadWithCmd
-    if not exist "%~1" echo :dk_reloadWithCmd must be called with %%~0. I.E.  "call :dk_reloadWithCmd" %%~0 & pause & exit 1
+    ::if not exist "%~1" (echo :dk_reloadWithCmd must be called with %%~0. I.E.  "call :dk_reloadWithCmd" %%~0 & pause & exit 1)
     if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
-    if not exist "%DKSCRIPT_PATH%"  %return%
+    if not exist "%DKSCRIPT_PATH%"  echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
     if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
 	::if not defined DKTEMP_DIR            for %%Z in ("%~dp0..\..\..\temp") do set "DKTEMP_DIR=%%~dpZ"
@@ -120,7 +122,17 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
         set "RELOADED=1"
         set "DKINIT="
 
-        "%ComSpec%" /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS% & pause & exit %ERRORLEVEL%
+		"%ComSpec%" /V:ON /K %DKSCRIPT_PATH% %DKSCRIPT_ARGS%
+		
+	::####################################
+	::############ EXIT POINT ############
+	::####################################
+		set "exit_code=%ERRORLEVEL%"
+		echo:
+		echo Exit code: %exit_code%
+		echo:
+		pause
+		exit %ERRORLEVEL%
     :end_dk_reloadWithCmd
 %endfunction%
 

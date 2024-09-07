@@ -140,7 +140,7 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
         if "!%_level_%_PAUSE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  & %dk_call% dk_pause
         if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  & %dk_call% dk_stacktrace
         if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   & %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
-        if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   & %dk_call% dk_exit
+        if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   & %dk_call% dk_exit 13
     endlocal
 %endfunction%
 
