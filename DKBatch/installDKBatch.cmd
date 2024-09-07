@@ -28,7 +28,7 @@ if "%~1" neq "" goto:runDKBatch
 	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
 	set "ComSpec=%~2"
 	set "DKSCRIPT_PATH=%~3"
-	set "DKTEMP_DIR=%DKBATCH_FUNCTIONS_DIR%\..\..\..\temp"
+	set "DKTEMP_DIR=%TMP%"
 	
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.

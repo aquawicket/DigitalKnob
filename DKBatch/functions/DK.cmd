@@ -109,7 +109,12 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
     if not defined DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
     if not exist "%DKSCRIPT_PATH%"  %return%
     if not defined DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
-
+	
+	::if not defined DKTEMP_DIR            for %%Z in ("%~dp0..\..\..\temp") do set "DKTEMP_DIR=%%~dpZ"
+	if not defined TMP %dk_call% dk_fatal "Windows TMP variable is not set"
+	if not exist %TMP% %dk_call% dk_fatal "TMP:%TMP% does not exist"
+	if not defined DKTEMP_DIR              set "DKTEMP_DIR=%TMP%"
+	
     if defined RELOADED goto:end_dk_reloadWithCmd
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"
@@ -129,7 +134,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
     if not defined DKBATCH_FUNCTIONS_DIR   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
     if not defined DKBATCH_FUNCTIONS_DIR_  set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
     if exist %DKBATCH_FUNCTIONS_DIR%       set "PATH=%DKBATCH_FUNCTIONS_DIR%;%PATH%"
-    if not defined DKTEMP_DIR              for %%Z in ("%~dp0..\..\..\temp") do set "DKTEMP_DIR=%%~dpZ"
 %endfunction%
 
 

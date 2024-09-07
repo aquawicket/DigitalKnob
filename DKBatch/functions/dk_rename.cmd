@@ -54,9 +54,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     
     %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
     
-    %dk_call% dk_fileWrite %DKTEMP_DIR%/renameMe.file "dk_rename test"
-    %dk_call% dk_rename %DKTEMP_DIR%/renameMe.file %DKTEMP_DIR%/iWasRenamed.txt OVERWRITE
+    %dk_call% dk_fileWrite %DKTEMP_DIR%\renameMe.file "dk_rename test"
+    %dk_call% dk_rename %DKTEMP_DIR%\renameMe.file %DKTEMP_DIR%\iWasRenamed.txt OVERWRITE
     
-    %dk_call% dk_makeDirectory %DKTEMP_DIR%/renameMe
-    %dk_call% dk_rename %DKTEMP_DIR%/renameMe %DKTEMP_DIR%/iWasRenamed OVERWRITE
+    %dk_call% dk_makeDirectory %DKTEMP_DIR%\renameMe
+    %dk_call% dk_rename %DKTEMP_DIR%\renameMe %DKTEMP_DIR%\iWasRenamed OVERWRITE
 %endfunction%
