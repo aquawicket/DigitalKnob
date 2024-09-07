@@ -17,7 +17,7 @@ endif()
 ### Set CMAKE_GENERATOR ###
 dk_validate(CMD_EXE "dk_depend(cmd)")
 if(CMD_EXE OR MINGW)
-	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in cmd
+	dk_set(MSYS2_GENERATOR	"MinGW Makefiles")	# if in Cmd
 else()
 	dk_set(MSYS2_GENERATOR 	"MSYS Makefiles")	# if in Shell
 endif()
@@ -60,9 +60,13 @@ endif()
 
 dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-	dk_prependEnvPath("${MSYS2}/usr/bin")
+	dk_prependEnvPath("${MSYS2}/usr/bin")	
 	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
- 
+	
+	### Update with pacman ###
+	dk_validate(PACMAN_EXE  "dk_depend(pacman)")
+	dk_command(${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+	
 	### Install toolchain ###
 	if(MSYSTEM)
 		# Set PATH environment  variables
@@ -70,8 +74,9 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
 		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
+		dk_exportVars(PATH "$ENV{PATH}")
+
 		
-		dk_validate(PACMAN_EXE  "dk_depend(pacman)")
 		if(win_x86_clang)					
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif(win_x86_64_clang)	
@@ -101,7 +106,13 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
 	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
 	
-	dk_set(CLANG64_EXE ${MSYS2}/clang64.exe)
+	dk_set(CLANG32_EXE "${MSYS2}/clang32.exe")
+	dk_set(CLANG64_EXE "${MSYS2}/clang64.exe")
+	dk_set(CLANGARM64_EXE "${MSYS2}/clangarm64.exe")
+	dk_set(MINGW32_EXE "${MSYS2}/mingw32.exe")
+	dk_set(MINGW64_EXE "${MSYS2}/mingw64.exe")
+	dk_set(UCRT64_EXE "${MSYS2}/ucrt64.exe")
+	dk_set(MSYS2_EXE "${MSYS2}/msys2.exe")
 endif()
 
 

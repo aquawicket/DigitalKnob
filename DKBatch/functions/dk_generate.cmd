@@ -51,7 +51,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 
     ::############ CMake Options ############
-    ::%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
+    %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
     ::%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_COLOR_DIAGNOSTICS=ON
     %dk_call% dk_appendArgs CMAKE_ARGS -Wdev
     ::%dk_call% dk_appendArgs CMAKE_ARGS -Werror=dev
@@ -59,7 +59,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::%dk_call% dk_appendArgs CMAKE_ARGS -Werror=deprecated
     ::%dk_call% dk_appendArgs CMAKE_ARGS --graphviz=graphviz.txt
     ::%dk_call% dk_appendArgs CMAKE_ARGS --system-information system_information.txt
-    ::%dk_call% dk_appendArgs CMAKE_ARGS --debug-trycompile
+    %dk_call% dk_appendArgs CMAKE_ARGS --debug-trycompile
     ::%dk_call% dk_appendArgs CMAKE_ARGS --debug-output
     ::%dk_call% dk_appendArgs CMAKE_ARGS --trace
     ::%dk_call% dk_appendArgs CMAKE_ARGS --trace-expand

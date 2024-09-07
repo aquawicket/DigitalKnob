@@ -8,17 +8,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 function(dk_exportVars var_name var_value)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc(${ARGV})
 	
 	if(WIN_HOST)
-		dk_fileAppend("$ENV{TMP}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
+		dk_fileAppend("${DKTEMP_DIR}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")
 	else()
-		if(NOT DEFINED ENV{TMP})
-			if(EXISTS "/tmp")
-				set(ENV{TMP} "/tmp")
-			endif()
-		endif()
-		dk_fileAppend("$ENV{TMP}/DKEXPORT_VARS" "export ${var_name}=${var_value}\n")
+		dk_fileAppend("${DKTEMP_DIR}/DKEXPORT_VARS" "export ${var_name}=${var_value}\n")
 	endif()
 endfunction()
 

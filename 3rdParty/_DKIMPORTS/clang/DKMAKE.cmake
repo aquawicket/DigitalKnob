@@ -4,11 +4,15 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
 dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
-dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
 
-dk_validate(MSYS2			"dk_depend(msys2)")
-dk_validate(PACMAN_EXE		"dk_depend(pacman)")
-dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+if(clang OR mingw OR ucrt)
+	dk_validate(MSYS2  			"dk_depend(msys2)")
+	dk_validate(PACMAN_EXE		"dk_depend(pacman)")
+	dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
+	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+endif()
+	
+	
 	
 if(win_x86_clang)
 	dk_command(${PACMAN_EXE}  -S mingw-w64-clang-i686-clang --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
@@ -60,7 +64,7 @@ endif()
 ###### set GLOBAL CMAKE VARIABLES ######
 dk_set(CMAKE_C_COMPILER		${CLANG_C_COMPILER})
 dk_set(CMAKE_CXX_COMPILER	${CLANG_CXX_COMPILER})
-dk_set(CLANG_RC_COMPILER	${CLANG_RC_COMPILER})		# TODO:  move to DKIMPORTS/windres
+dk_set(CMAKE_RC_COMPILER	${CLANG_RC_COMPILER})		# TODO:  move to DKIMPORTS/windres
 
 dk_set(DKCONFIGURE_CC		${CMAKE_C_COMPILER})
 dk_set(DKCONFIGURE_CXX		${CMAKE_CXX_COMPILER})
