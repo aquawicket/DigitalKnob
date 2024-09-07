@@ -42,8 +42,10 @@ function(dk_prependEnvPath inputPath)
 		endif()
 		#dk_info("prepended ${path_printable} to the PATH environment list\n")
 		dk_success("prepended \${nativePath} to the PATH environment list\n")
+		
+		#dk_printVar(ENV{PATH})
+		dk_exportVars(PATH "$ENV{PATH}")
 	endif()
-	dk_printVar(ENV{PATH})
 endfunction()
 
 

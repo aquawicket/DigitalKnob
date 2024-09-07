@@ -9,13 +9,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 :: setlocal
     call dk_debugFunc 0
 
-	if not exist "%TEMP%\DKEXPORT_VARS" %dk_call% dk_notice "DKEXPORT_VARS not found.  Nothing imported" && exit /b %errorlevel%
+	if not exist "%DKTEMP_DIR%\DKEXPORT_VARS" %dk_call% dk_notice "DKEXPORT_VARS not found.  Nothing imported" && exit /b %errorlevel%
 	
-	::%dk_call% dk_copy "%TEMP%\DKEXPORT_VARS" "%TEMP%\DKEXPORT_VARS.cmd"
-	%dk_call% dk_rename "%TEMP%\DKEXPORT_VARS" "%TEMP%\DKEXPORT_VARS.cmd"
-	call "%TEMP%\DKEXPORT_VARS.cmd"
-	del "%TEMP%\DKEXPORT_VARS.cmd"
-	::del "%TEMP%\DKEXPORT_VARS"
+	::%dk_call% dk_copy "%DKTEMP_DIR%\DKEXPORT_VARS" "%DKTEMP_DIR%\DKEXPORT_VARS.cmd"
+	%dk_call% dk_rename "%DKTEMP_DIR%\DKEXPORT_VARS" "%DKTEMP_DIR%\DKEXPORT_VARS.cmd"
+	call "%DKTEMP_DIR%\DKEXPORT_VARS.cmd"
+	del "%DKTEMP_DIR%\DKEXPORT_VARS.cmd"
+	::del "%DKTEMP_DIR%\DKEXPORT_VARS"
 %endfunction%
 
 
