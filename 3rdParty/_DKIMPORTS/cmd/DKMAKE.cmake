@@ -2,8 +2,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
 
 if(EXISTS ${CMD_EXE})
-	return()
+	dk_return()
 endif()
+
+### Windows Host Only ###
+if(NOT WIN_HOST)
+	dk_undepend(cmd)
+	dk_return()
+endif()
+
+
+
 
 
 dk_validate(HOST_TRIPLE "dk_getHostTriple()")
