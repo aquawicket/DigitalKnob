@@ -14,7 +14,7 @@ if "%~1" neq "" goto:runDKBatch
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
 	::ftype DKBatch="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*
-	ftype DKBatch="%ComSpec%" /k if exist "C:\Users\Administrator\digitalknob\Development\DKBatch\installDKBatch.cmd" ^
+	ftype DKBatch="%ComSpec%" /c if exist "C:\Users\Administrator\digitalknob\Development\DKBatch\installDKBatch.cmd" ^
 	(echo installed ^& "%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "C:\Windows\System32\cmd.exe" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
 	
