@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Delete all .tmp files recursivly thoughout the digitalknob directory
 #
 function(dk_deleteTempFiles)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	DKASSERT(DIGITALKNOB_DIR)
 	dk_info("Deleteing Temporary files . . .")
@@ -28,7 +28,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

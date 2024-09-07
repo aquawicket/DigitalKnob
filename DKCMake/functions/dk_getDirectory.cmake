@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var		- Returns the directory upon success: False upon error
 #
 function(dk_getDirectory path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
@@ -28,7 +28,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

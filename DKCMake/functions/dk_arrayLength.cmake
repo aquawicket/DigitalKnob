@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
 function(dk_arrayLength array rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(DEFINED "${array}")
 		set(_array_ "${array}")
@@ -28,7 +28,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "element 1")
 	list(APPEND myArray "element 2")

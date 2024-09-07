@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@RESULT_TYPE	- TODO
 #
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	## search up to 4 levels deep
 	file(GLOB children RELATIVE ${DIGITALKNOB_DIR}/ 
@@ -45,7 +45,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

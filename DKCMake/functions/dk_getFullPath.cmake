@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_getFullPath path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
@@ -21,7 +21,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getFullPath("bash" fullPath)
 	dk_info("fullPath = ${fullPath}")

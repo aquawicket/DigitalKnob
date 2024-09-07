@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   ID @id			- OPTIONAL: The commit-id to checkout
 #
 function(dk_importGit url) #branch #id #PATCH
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(PATCH ${ARGV})
 	
@@ -151,7 +151,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_fatal msg)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_log(FATAL "${ARGV0}")
 endfunction()
@@ -21,7 +21,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_fatal("test dk_fatal message")
 endfunction()

@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_verbose msg)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_log(VERBOSE "${ARGV0}")
 endfunction()
@@ -22,7 +22,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_verbose("test dk_verbose message")
 endfunction()

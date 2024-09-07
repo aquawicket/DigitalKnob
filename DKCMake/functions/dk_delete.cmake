@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   NO_HALT     - if NO_HALT is specified in the parameters, dk_fatal() messages will not be displayed
 #
 function(dk_delete path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(NO_HALT ${ARGV})
 
@@ -36,7 +36,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_fileWrite(removeMe.file "created file to test dk_delete")
 	dk_delete(removeMe.file)

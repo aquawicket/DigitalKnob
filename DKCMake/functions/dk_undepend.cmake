@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@target (optional)	- TODO
 #
 function(dk_undepend plugin)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(target ${ARGV1})
 	
@@ -47,7 +47,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

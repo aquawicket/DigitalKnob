@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@path - The path to the configure file to use, CMakeLists.txt for cmake, Configure for Unix, Etc.
 #
 function(dk_configure path) #ARGN
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(BUILD_PATH "${path}/${BUILD_DIR}")
 	dk_assert(path)
@@ -86,7 +86,7 @@ dk_createOsMacros("dk_configure")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

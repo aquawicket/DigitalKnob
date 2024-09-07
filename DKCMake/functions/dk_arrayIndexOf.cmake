@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 #
 function(dk_arrayIndexOf array searchElement rtn_val)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(FIND ${array} ${searchElement} output)
 	set(${rtn_val} ${output} PARENT_SCOPE)
@@ -18,7 +18,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

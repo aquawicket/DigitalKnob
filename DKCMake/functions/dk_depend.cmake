@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_depend plugin)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
@@ -78,7 +78,7 @@ dk_createOsMacros("dk_depend")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

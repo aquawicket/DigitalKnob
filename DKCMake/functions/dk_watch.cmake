@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
 #	@variable	- The variable to watch
 #
 macro(dk_watch variable)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc("\${ARGV}")
 	
 #	if(DEFINED ${variable})
 		variable_watch(${variable} dk_watchCallback)
@@ -27,7 +27,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)

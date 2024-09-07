@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_copy from to) # OVERWRITE NO_HALT
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
@@ -67,7 +67,7 @@ dk_createOsMacros("dk_copy")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

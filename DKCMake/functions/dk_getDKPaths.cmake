@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Fill the cache variables with DigitalKnob specfic directories
 #
 function(dk_getDKPaths)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	# digitalknob
 	if(NOT DEFINED DIGITALKNOB)
@@ -564,7 +564,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getDKPaths()
 endfunction()

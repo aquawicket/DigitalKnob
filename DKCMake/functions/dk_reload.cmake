@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_reload)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	if(NOT EXISTS "${DKSCRIPT_PATH}")
 		dk_fatal("DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist")
@@ -26,7 +26,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_pause("Press any key to test dk_reload")
 	dk_reload()

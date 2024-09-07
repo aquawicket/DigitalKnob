@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	TODO
 #
 function(dk_sleep seconds)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(ARGN)
 		dk_info("...${ARGN}")
@@ -20,7 +20,7 @@ endfunction(dk_sleep)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_sleep(5)
 endfunction()

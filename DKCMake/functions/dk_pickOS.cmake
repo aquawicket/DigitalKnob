@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_pickOS)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_echo()
 	dk_echo("${APP} ${TARGET_OS} ${TYPE}")
@@ -144,7 +144,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_pickOS()
 endfunction()

@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	<value>		- The value to add to the variable.
 #
 function(dk_append variable) #value
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT ARGN)
 		dk_warning("dk_append(${variable}) ARGN:${ARGN} is invalid")
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_append(MyVar "abc")
 	dk_append(MyVar "123")

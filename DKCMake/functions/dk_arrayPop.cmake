@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
 #function(dk_arrayPop array)# rtn_var)
-#	dk_debugFunc(${ARGV})
+#	dk_debugFunc("\${ARGV}")
 #	
 #	if(DEFINED "${array}")
 #		set(_array_ "${array}")
@@ -44,7 +44,7 @@ endmacro()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

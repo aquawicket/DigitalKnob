@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # 
 #
 function(dk_keyboardInput input) 
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_depend(cmd)
 	#find_program(CMD_EXE cmd.exe)
@@ -42,7 +42,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_keyboardInput(input)
 	dk_echo("you typed '${input}'")

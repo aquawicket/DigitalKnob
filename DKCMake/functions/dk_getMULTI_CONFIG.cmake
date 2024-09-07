@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_getMULTI_CONFIG)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")  # get DEBUG, RELEASE variables
 	dk_validate(OS           "dk_getTargetTriple()")
@@ -63,7 +63,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getMULTI_CONFIG()
 endfunction()

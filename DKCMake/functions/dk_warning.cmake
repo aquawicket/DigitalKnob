@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_warning msg)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_log(WARNING "${ARGV0}")
 endfunction()
@@ -21,7 +21,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_warning("test dk_warning message")
 endfunction()

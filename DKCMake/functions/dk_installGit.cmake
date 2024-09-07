@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_installGit()
 #
 function(dk_installGit)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	### DOWNLOAD ###
 	dk_validate(HOST_TRIPLE "dk_getHostTriple()")
@@ -150,7 +150,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_installGit()
 endfunction()

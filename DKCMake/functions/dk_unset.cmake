@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 #	@variable	- The name of the variable to unset
 #
 function(dk_unset variable)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#if(DEFINED ENV{${variable}})
 	#	unset(${variable} ENV)
@@ -33,7 +33,7 @@ dk_createOsMacros("dk_unset")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(myVar "value of myVar")
 	dk_printVar(myVar)

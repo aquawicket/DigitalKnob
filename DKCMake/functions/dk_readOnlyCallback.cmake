@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@stack:				- TODO
 #	 
 macro(dk_readOnlyCallback VAR access value current_list_file stack)   # Watcher for readonly property.
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
 		dk_notice("'${VAR}' is READONLY")
@@ -27,7 +27,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

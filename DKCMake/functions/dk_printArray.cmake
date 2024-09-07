@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_printArray)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(DEFINED "${ARGV}")
 		set(array "${ARGV}")
@@ -36,7 +36,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

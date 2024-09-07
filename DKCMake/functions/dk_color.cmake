@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #
 function(dk_color)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(USE_COLOR 1)
 	if(DEFINED ARGV0)
@@ -180,7 +180,7 @@ dk_color(1)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_echo()
 	dk_echo("${black}${bg_lblack}           Styles            ${clr}")

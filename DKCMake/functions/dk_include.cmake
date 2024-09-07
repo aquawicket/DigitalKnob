@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
@@ -45,7 +45,7 @@ dk_createOsMacros("dk_include")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

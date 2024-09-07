@@ -58,7 +58,7 @@
 #      result:(string)		A string representing the unicode character(s)
 #
 function(fromCharCode)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 endfunction()
 
@@ -71,7 +71,7 @@ endfunction()
 #      result:(boolean)		true if the string contains the value, otherwise false.
 #
 function(includes str searchvalue) #start #result
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	string(FIND "${${str}}" "${searchvalue}" index)
 	if(${ARGC} GREATER 3)
@@ -197,7 +197,7 @@ if(string_Ext)
 	#dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
 
 	function(CreateStringFunc str)
-		dk_debugFunc(${ARGV})
+		dk_debugFunc("\${ARGV}")
 		
 		dk_fileAppend(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake "${str}")
 		include(${DIGITALKNOB_DIR}/Development/DKCMake/string_Ext.cmake)
@@ -205,14 +205,14 @@ if(string_Ext)
 
 	set(stringified "test" CACHE INTERNAL "")
 	function(stringify str)
-		dk_debugFunc(${ARGV})
+		dk_debugFunc("\${ARGV}")
 		
 		CreateStringFunc("macro(${str}_includes searchstr)\n	includes(${str} \${searchstr} \${ARGN})\nendmacro()\n")
 	endfunction()
 
 	set(string_set TRUE)
 	macro(set)
-		dk_debugFunc(${ARGV})
+		dk_debugFunc("\${ARGV}")
 		
 		_set(${ARGV})
 		if(string_set)

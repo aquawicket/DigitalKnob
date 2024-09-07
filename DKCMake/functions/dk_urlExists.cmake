@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_urlExists(url rtn_var)
 #
 function(dk_urlExists url rtn_var)
-    dk_debugFunc(${ARGV})
+    dk_debugFunc("\${ARGV}")
     
     if(DISABLE_curl)
 		return()
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc(${ARGV})
+    dk_debugFunc("\${ARGV}")
 
     dk_echo()
     set(url http://www.google.com/index.html)

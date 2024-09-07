@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	<value>		- The value to add to the variable.
 #
 function(dk_prepend variable) #value
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT ARGN)
 		dk_warning("dk_prepend(${variable}) ARGN:${ARGN} is invalid")
@@ -30,7 +30,7 @@ dk_createOsMacros("dk_prepend")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

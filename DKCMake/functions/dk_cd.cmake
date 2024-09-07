@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_cd directory)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
   
 	if(NOT EXISTS ${directory})
 		dk_notice("directory:${directory} does not exist.")
@@ -31,7 +31,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 	dk_cd(${DKDOWNLOAD_DIR})

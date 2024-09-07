@@ -21,7 +21,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #		dk_bin2h(SOURCE_FILE "Logo.png" HEADER_FILE "Logo.h" VARIABLE_NAME "LOGO_PNG")
 #
 function(dk_bin2h)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
     set(options APPEND NULL_TERMINATE)
     set(oneValueArgs SOURCE_FILE VARIABLE_NAME HEADER_FILE)
@@ -61,7 +61,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

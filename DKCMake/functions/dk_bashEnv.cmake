@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	<args>	- TODO
 #
 function(dk_bashEnv)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(NO_HALT ${ARGV} REMOVE)
 	dk_getOption(NOECHO ${ARGV} REMOVE)
@@ -96,7 +96,7 @@ dk_createOsMacros("dk_bashEnv")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

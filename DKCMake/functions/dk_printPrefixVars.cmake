@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Example: dk_printPrefixVars("CMAKE_")
 #
 function(dk_printPrefixVars _prefix)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
     get_cmake_property(_vars VARIABLES)
     string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
@@ -27,7 +27,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

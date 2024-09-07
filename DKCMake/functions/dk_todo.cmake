@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_todo)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_log(TODO "${ARGV0}")
 	dk_log(TODO "CMAKE_PARENT_LIST_FILE = ${CMAKE_PARENT_LIST_FILE}")
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) 
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo("test dk_todo message")
 endfunction()

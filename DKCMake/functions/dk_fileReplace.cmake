@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   NO_HALT (optional)	- if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_fileReplace filePath find replace)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(NO_HALT ${ARGV})
 	file(READ ${filePath} fileString)
@@ -34,7 +34,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

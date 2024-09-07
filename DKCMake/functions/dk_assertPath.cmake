@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 function(dk_assertPath path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	
 	dk_assert(${path})
@@ -59,7 +59,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_assertPath("C:/Windows/System32")
 endfunction()

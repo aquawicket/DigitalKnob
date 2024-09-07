@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
 #
 function(dk_eval code)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc("\${ARGV}")
 	
 	dk_replaceAll("${code}"  ";"  "\n"  code)
 	dk_replaceAll("${code}"  "'"  "\""  code)
@@ -65,7 +65,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	dk_todo()
 endfunction()

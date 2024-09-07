@@ -31,7 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
 #
 function(dk_executeProcess)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	
 	dk_getOptionValues(COMMAND 						${ARGV})
@@ -171,7 +171,7 @@ dk_createOsMacros("dk_executeProcess")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(DKDOWNLOAD_DIR "C:/Users/Administrator/DigitalKnob/download")
 	set(MSYS2_DL_FILE "msys2-x86_64-20231026.exe")

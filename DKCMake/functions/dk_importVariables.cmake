@@ -31,7 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@url	- TODO
 #
 function(dk_importVariables PLUGIN_URL rtn_var)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc("\${ARGV}")
 	
 	##### Test that we dont have any non-alphanumeric characters ######
 	#dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL_TEST)
@@ -317,7 +317,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

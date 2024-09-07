@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@path	The path to add to the compiler library paths
 #
 function(dk_linkDir path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#foreach(item ${ARGV})
 		#list(FIND DKLINKDIRS_LIST "${item}" index)
@@ -31,7 +31,7 @@ dk_createOsMacros("dk_linkDir")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@new_value	- The new value to replace with
 #
 function(dk_listReplace LIST old_value new_value)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
     list(FIND ${LIST} ${old_value} old_value_INDEX)
     if(old_value_INDEX GREATER_EQUAL 0)
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

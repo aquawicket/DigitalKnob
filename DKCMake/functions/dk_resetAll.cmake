@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_resetAll)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 endfunction()
 
@@ -14,7 +14,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_resetAll()
 endfunction()

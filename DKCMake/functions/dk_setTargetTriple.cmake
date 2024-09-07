@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_setTargetTriple)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_validate(HOST_TRIPLE "dk_getHostTriple()")
@@ -228,7 +228,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_setTargetTriple()
 endfunction()

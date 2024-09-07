@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Pause execution and wait for keypress to continue
 #
 function(dk_pause) 
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 #	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
 
 
@@ -52,7 +52,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_pause()
 	dk_pause("Pause with a custom message")

@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   <os>_<arch>_<env>_target	= android_arm64_clang_target, emscripten_arm64_clang_target, ios_arm64_clang_target, iossim_arm64_clang_target, 
 #                                 linux_arm64_clang_target, mac_arm64_clang_target, raspberry_arm64_clang_target, windows_arm64_clang_target 
 function(dk_getTargetTriple)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	### Get TARGET_DIR ###
 #	if(ARGV0)
@@ -189,7 +189,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_getTargetTriple("C:/Users/Administrator/digitalknob/Development/DKApps/DKSDLRml/win_x86_64_clang/Debug")
 	dk_getTargetTriple()

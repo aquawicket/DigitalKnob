@@ -10,7 +10,7 @@ endif()
 #	Exit cmake
 #
 function(dk_exit) # exit_code)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT exit_code)
 		set(exit_code 0 CACHE INTERNAL "")
@@ -42,7 +42,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_exit()
 	#dk_exit(0)

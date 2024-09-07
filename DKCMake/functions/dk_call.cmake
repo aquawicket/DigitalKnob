@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 macro(dk_call func)
 #function(dk_call func)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	if(NOT COMMAND ${func})
 		#if("${ARGV0}" =~ ^dk_[a-zA-Z0-9]+ ]])
 			dk_source(${func})
@@ -40,7 +40,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_call( dk_debug("test message using dk_call") )
 endfunction()
