@@ -20,5 +20,5 @@ endif()
 
 
 if(NOT EXISTS ${SUDO})
-	dk_fatal("Could not file SUDO:${SUDO}")
+	dk_error("Could not file SUDO:${SUDO}")
 endif()
