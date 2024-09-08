@@ -230,6 +230,14 @@ dk_set(DKCONFIGURE_CFLAGS_RELEASE			-O3 -DNDEBUG)
 dk_set(DKCONFIGURE_CXXFLAGS_DEBUG			-DDEBUG -D_DEBUG -g)
 dk_set(DKCONFIGURE_CXXFLAGS_RELEASE			-O3 -DNDEBUG)
 
+
+###### Flags FMT LIBRARY ######
+if(MSVC)
+	dk_append(CMAKE_C_FLAGS /utf-8)
+	dk_append(CMAKE_CXX_FLAGS /utf-8)
+endif()
+
+
 ###### POSITION_INDEPENDENT_CODE ######
 # https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
