@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f96d0c5ee..82749c024 100644
+index f96d0c5ee..fcd005f2a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -11,7 +11,7 @@ project("RmlUi"
@@ -7,64 +7,7 @@ index f96d0c5ee..82749c024 100644
  
  if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 -	set(RMLUI_IS_ROOT_PROJECT TRUE)
-+	#set(RMLUI_IS_ROOT_PROJECT TRUE)
++#	set(RMLUI_IS_ROOT_PROJECT TRUE)
  endif()
  
  # Add lists of available options for those that support it
- 
- 
- 
- 
- 
- diff --git "a/Source/Core/CMakeLists.txt" "b/Source/Core/CMakeLists.txt"
-index 99bebaa98..8525eec87 100644
---- "a/Source/Core/CMakeLists.txt"
-+++ "b/Source/Core/CMakeLists.txt"
-@@ -458,11 +458,11 @@ endif()
- # We use default paths provided from GNUInstallDirs. From CMake 3.14 these paths (CMAKE_INSTALL_...) will be used
- # automatically and can be removed from the following call. The same applies to many other calls to install(TARGETS...).
- # Note that GNUInstallDirs should still be included in the project root.
--install(TARGETS rmlui_core
--	EXPORT RmlUiTargets
--	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
--	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
--	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
--)
--install_target_pdb(rmlui_core)
-+#install(TARGETS rmlui_core
-+#	EXPORT RmlUiTargets
-+#	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
-+#	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-+#	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+#	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+#)
-+#install_target_pdb(rmlui_core)
-
-
-
-
-diff --git "a/Source/Debugger/CMakeLists.txt" "b/Source/Debugger/CMakeLists.txt"
-index a56402971..f4c808231 100644
---- "a/Source/Debugger/CMakeLists.txt"
-+++ "b/Source/Debugger/CMakeLists.txt"
-@@ -59,11 +59,11 @@ set_target_properties(rmlui_debugger PROPERTIES
- 	EXPORT_NAME "Debugger"
- )
- 
--install(TARGETS rmlui_debugger
--	EXPORT RmlUiTargets
--	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
--	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
--	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
--)
--install_target_pdb(rmlui_debugger)
-+#install(TARGETS rmlui_debugger
-+#	EXPORT RmlUiTargets
-+#	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
-+#	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-+#	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+#	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+#)
-+#install_target_pdb(rmlui_debugger) 
