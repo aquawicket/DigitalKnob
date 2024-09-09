@@ -19,6 +19,7 @@ MAC_HOST_dk_import(https://dl.google.com/android/repository/f6d24b187cc6bd534c6c
 #if(NOT ANDROID_HOST)
     LINUX_HOST_dk_import(https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip PATH ${ANDROID_SDK}/build-tools/30.0.3)
 #endif()
+ANDROID_HOST_dk_import(https://dl.google.com/android/repository/build-tools_r30.0.3-linux.zip PATH ${ANDROID_SDK}/build-tools/30.0.3)
 
 # 31.0.0
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/09489e417c0a266f2862ddd82b4ac29a1b7af55e.build-tools_r31-windows.zip PATH ${ANDROID_SDK}/build-tools/31.0.0)
