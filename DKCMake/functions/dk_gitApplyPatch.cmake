@@ -12,31 +12,46 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(GIT_EXE "dk_installGit()")
-	## First run a check 
-	dk_append(COMMAND_ARGS ${GIT_EXE})
-	dk_append(COMMAND_ARGS apply)
-	dk_append(COMMAND_ARGS --check)
+#	dk_validate(GIT_EXE "dk_installGit()")
+#	## First run a check 
+#	dk_append(COMMAND_ARGS ${GIT_EXE})
+#	dk_append(COMMAND_ARGS apply)
+#	dk_append(COMMAND_ARGS --check)
+#	dk_append(COMMAND_ARGS --verbose)
+#	dk_append(COMMAND_ARGS ${patch_file})
+#	dk_info(COMMAND ${COMMAND_ARGS})
+#	execute_process(COMMAND ${COMMAND_ARGS}
+#					WORKING_DIRECTORY ${directory}
+#					RESULT_VARIABLE result
+#					OUTPUT_VARIABLE output
+#					OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	if(NOT ${result} EQUAL 0)
+#		#dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
+#		return()	# RETURN if the patch check failed, it may have already been patched
+#	endif()
+#	#dk_printVar(output)
+#	
+#	## Then do the actual patch 
+#	dk_append(COMMAND_ARGS ${GIT_EXE})
+#	dk_append(COMMAND_ARGS apply)
+#	#dk_append(COMMAND_ARGS --check)
+#	dk_append(COMMAND_ARGS --verbose)
+#	dk_append(COMMAND_ARGS ${patch_file})
+#	execute_process(COMMAND ${COMMAND_ARGS}
+#					WORKING_DIRECTORY ${directory}
+#					RESULT_VARIABLE result
+#					OUTPUT_VARIABLE output
+#					OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	if(NOT ${result} EQUAL 0)
+#		dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
+#	endif()
+#	#dk_printVar(output)
+
+	dk_validate(PATCH_EXE "dk_installGit()")
+	dk_append(COMMAND_ARGS ${PATCH_EXE})
+	dk_append(COMMAND_ARGS -p1)
 	dk_append(COMMAND_ARGS --verbose)
-	dk_append(COMMAND_ARGS ${patch_file})
-	dk_info(COMMAND ${COMMAND_ARGS})
-	execute_process(COMMAND ${COMMAND_ARGS}
-					WORKING_DIRECTORY ${directory}
-					RESULT_VARIABLE result
-					OUTPUT_VARIABLE output
-					OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(NOT ${result} EQUAL 0)
-		#dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
-		return()	# RETURN if the patch check failed, it may have already been patched
-	endif()
-	#dk_printVar(output)
-	
-	## Then do the actual patch 
-	dk_append(COMMAND_ARGS ${GIT_EXE})
-	dk_append(COMMAND_ARGS apply)
-	#dk_append(COMMAND_ARGS --check)
-	dk_append(COMMAND_ARGS --verbose)
-	dk_append(COMMAND_ARGS ${patch_file})
+	dk_append(COMMAND_ARGS --directory=${directory} < ${patch_file})
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${directory}
 					RESULT_VARIABLE result
@@ -45,7 +60,7 @@ function(dk_gitApplyPatch directory patch_file)
 	if(NOT ${result} EQUAL 0)
 		dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
-	#dk_printVar(output)
+	dk_printVar(output)
 endfunction()
 
 

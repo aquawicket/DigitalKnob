@@ -33,10 +33,13 @@ function(dk_installGit)
 	### First Check ###
 	if(WIN_HOST)
 		dk_findProgram(GIT_EXE git ${GIT}/bin)
+		dk_findProgram(PATCH_EXE git ${GIT}\usr\bin)
 	elseif(ANDROID_HOST)
 		dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
+		dk_findProgram(PATCH_EXE patch $ENV{PREFIX}/bin)
 	else()
 		dk_findProgram(GIT_EXE git /usr/bin)
+		dk_findProgram(PATCH_EXE patch /usr/bin)
 	endif()
 
 	### INSTALL ###
@@ -61,10 +64,13 @@ function(dk_installGit)
 	## Second Check ###
 	if(WIN_HOST)
 		dk_findProgram(GIT_EXE git ${GIT}/bin)
+		dk_findProgram(PATCH_EXE git ${GIT}\usr\bin)
 	elseif(ANDROID_HOST)
 		dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
+		dk_findProgram(PATCH_EXE patch $ENV{PREFIX}/bin)
 	else()
 		dk_findProgram(GIT_EXE git /usr/bin)
+		dk_findProgram(PATCH_EXE patch /usr/bin)
 	endif()
 
 	if(NOT GIT_EXE)
