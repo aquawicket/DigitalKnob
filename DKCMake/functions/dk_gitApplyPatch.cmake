@@ -12,8 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc("\${ARGV}")
 	
+	dk_validate(GIT_EXE "dk_installGit()")
 	## First run a check 
-	dk_append(COMMAND_ARGS git)
+	dk_append(COMMAND_ARGS ${GIT_EXE})
 	dk_append(COMMAND_ARGS apply)
 	dk_append(COMMAND_ARGS --check)
 	dk_append(COMMAND_ARGS --verbose)
@@ -31,7 +32,7 @@ function(dk_gitApplyPatch directory patch_file)
 	#dk_printVar(output)
 	
 	## Then do the actual patch 
-	dk_append(COMMAND_ARGS git)
+	dk_append(COMMAND_ARGS ${GIT_EXE})
 	dk_append(COMMAND_ARGS apply)
 	#dk_append(COMMAND_ARGS --check)
 	dk_append(COMMAND_ARGS --verbose)

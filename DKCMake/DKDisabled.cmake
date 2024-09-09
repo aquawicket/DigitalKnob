@@ -38,10 +38,7 @@ dk_disable(bgfx)					# TODO
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(libx11)					# TODO
-dk_disable(mingw32)					# DEPRECATED: migrated to msys2
-dk_disable(mingw64)					# DEPRECATED: migrated to msys2
 dk_disable(mpg123)					# TODO
-dk_disable(msys)					# DEPRECATED: migrated to msys2
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)			# DEPRECATED: kept for reference
@@ -357,7 +354,7 @@ if(LINUX)
 	dk_disable(python)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
-	dk_disable(smpeg2)				# can't open patch
+	#dk_disable(smpeg2)				# can't open patch
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 	dk_disable(x265)
@@ -524,7 +521,7 @@ if(MINGW)
 	dk_disable(flac)
 	dk_disable(libexpat)
 	dk_disable(libiconv)
-	dk_disable(smpeg2)	
+	#dk_disable(smpeg2)	
 	dk_disable(stackwalker)
 endif(MINGW)
 
