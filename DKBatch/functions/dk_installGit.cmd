@@ -26,6 +26,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
     set "GITBASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
+	set "PATCH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\usr\bin\patch.exe"
      
     if exist "%GIT_EXE%" goto:eof
     %dk_call% dk_echo   

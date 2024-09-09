@@ -80,7 +80,12 @@ set(rmlui_Benchmarks 0)
 
 ### IMPORT ###
 #dk_import(https://github.com/mikke89/RmlUi.git)
-dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip)
+dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip PATCH)
+
+
+### PATCH ###
+dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/termux.patch)
+#dk_gitApplyPatch(${RMLUI} termux.patch)
 
 
 # Version fix #

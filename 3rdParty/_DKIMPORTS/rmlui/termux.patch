@@ -1,6 +1,7 @@
-diff -aur CMakeLists.old CMakeLists.txt
---- CMakeLists.old 2024-09-09 08:45:38.227335000 +0800
-+++ CMakeLists.txt 2024-09-09 08:50:26.646311144 +0800
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f96d0c5ee..82749c024 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -11,7 +11,7 @@ project("RmlUi"
  set(RMLUI_VERSION_RELEASE FALSE)
  
@@ -13,9 +14,12 @@ diff -aur CMakeLists.old CMakeLists.txt
  
  
  
-diff -aur Source\Core\CMakeLists.old Source\Core\CMakeLists.txt
---- Source\Core\CMakeLists.old 2024-09-09 08:45:38.227335000 +0800
-+++ Source\Core\CMakeLists.txt 2024-09-09 08:50:26.646311144 +0800
+ 
+ 
+ diff --git "a/Source/Core/CMakeLists.txt" "b/Source/Core/CMakeLists.txt"
+index 99bebaa98..8525eec87 100644
+--- "a/Source/Core/CMakeLists.txt"
++++ "b/Source/Core/CMakeLists.txt"
 @@ -458,11 +458,11 @@ endif()
  # We use default paths provided from GNUInstallDirs. From CMake 3.14 these paths (CMAKE_INSTALL_...) will be used
  # automatically and can be removed from the following call. The same applies to many other calls to install(TARGETS...).
@@ -39,9 +43,11 @@ diff -aur Source\Core\CMakeLists.old Source\Core\CMakeLists.txt
 
 
 
-diff -aur Source\Debugger\CMakeLists.old Source\Debugger\CMakeLists.txt
---- Source\Debugger\CMakeLists.old 2024-09-09 08:45:38.227335000 +0800
-+++ Source\Debugger\CMakeLists.txt 2024-09-09 08:50:26.646311144 +0800
+
+diff --git "a/Source/Debugger/CMakeLists.txt" "b/Source/Debugger/CMakeLists.txt"
+index a56402971..f4c808231 100644
+--- "a/Source/Debugger/CMakeLists.txt"
++++ "b/Source/Debugger/CMakeLists.txt"
 @@ -59,11 +59,11 @@ set_target_properties(rmlui_debugger PROPERTIES
  	EXPORT_NAME "Debugger"
  )
@@ -61,4 +67,4 @@ diff -aur Source\Debugger\CMakeLists.old Source\Debugger\CMakeLists.txt
 +#	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +#	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +#)
-+#install_target_pdb(rmlui_debugger)
++#install_target_pdb(rmlui_debugger) 
