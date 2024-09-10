@@ -47,11 +47,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
     call dk_debugFunc 0
     
-	::%dk_call% dk_selectFile fileA
-	::%dk_call% dk_selectFile fileB
-	::%dk_call% dk_saveFile patchFile
-	::%dk_call% dk_gitCreatePatch "%fileA%" "%fileB%" "%patchFile%"
-	
-	%dk_call% dk_gitCreatePatch "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt" "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt.patch" "%DKIMPORTS_DIR%/rmlui/termux.patch"
+	%dk_call% dk_selectFile fileA
+	%dk_call% dk_selectFile fileB
+	%dk_call% dk_saveFile patchFile
+	%dk_call% dk_gitCreatePatch "%fileA%" "%fileB%" "%patchFile%"
+
+	::%dk_call% dk_gitCreatePatch "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt" "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt.patch" "%DKIMPORTS_DIR%/rmlui/termux.patch"
 
 %endfunction%

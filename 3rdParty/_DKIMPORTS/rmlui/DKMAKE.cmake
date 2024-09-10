@@ -85,6 +85,8 @@ dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip)
 
 ### PATCH ###
 dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/termux.patch)
+dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/termux2.patch)
+dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/termux3.patch)
 
 
 # Version fix #

@@ -1,0 +1,24 @@
+diff --git a/Source/Core/CMakeLists.txt b/Source/Core/CMakeLists.txt
+index 99bebaa98..8525eec87 100644
+--- a/Source/Core/CMakeLists.txt
++++ b/Source/Core/CMakeLists.txt
+@@ -458,11 +458,11 @@ endif()
+ # We use default paths provided from GNUInstallDirs. From CMake 3.14 these paths (CMAKE_INSTALL_...) will be used
+ # automatically and can be removed from the following call. The same applies to many other calls to install(TARGETS...).
+ # Note that GNUInstallDirs should still be included in the project root.
+-install(TARGETS rmlui_core
+-	EXPORT RmlUiTargets
+-	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-)
+-install_target_pdb(rmlui_core)
++#install(TARGETS rmlui_core
++#	EXPORT RmlUiTargets
++#	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
++#	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++#	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++#	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++#)
++#install_target_pdb(rmlui_core)

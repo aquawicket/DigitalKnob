@@ -1,0 +1,24 @@
+diff --git a/Source/Debugger/CMakeLists.txt b/Source/Debugger/CMakeLists.txt.patch
+index a56402971..f4c808231 100644
+--- a/Source/Debugger/CMakeLists.txt
++++ b/Source/Debugger/CMakeLists.txt.patch
+@@ -59,11 +59,11 @@ set_target_properties(rmlui_debugger PROPERTIES
+ 	EXPORT_NAME "Debugger"
+ )
+ 
+-install(TARGETS rmlui_debugger
+-	EXPORT RmlUiTargets
+-	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-)
+-install_target_pdb(rmlui_debugger)
++#install(TARGETS rmlui_debugger
++#	EXPORT RmlUiTargets
++#	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
++#	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++#	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++#	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++#)
++#install_target_pdb(rmlui_debugger)
