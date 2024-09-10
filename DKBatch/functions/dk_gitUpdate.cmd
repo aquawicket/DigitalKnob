@@ -12,10 +12,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%~1" neq "" (set "url=%~1") else (set "url=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "branch=%~2") else (set "branch=Development")
     
-    if "%3" neq "NO_CONFIRM" (
-        echo Git Update? Any local changes will be lost.
-        %dk_call% dk_confirm || goto:eof
-    )
+    ::if "%3" neq "NO_CONFIRM" (
+    ::    echo Git Update? Any local changes will be lost.
+    ::    %dk_call% dk_confirm || goto:eof
+    ::)
         
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
