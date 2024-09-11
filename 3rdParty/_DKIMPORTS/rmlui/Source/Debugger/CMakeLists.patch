@@ -1,0 +1,27 @@
+diff --git a/CMakeLists b/CMakeLists.txt
+index a56402971..0568d6c56 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -59,11 +59,13 @@ set_target_properties(rmlui_debugger PROPERTIES
+ 	EXPORT_NAME "Debugger"
+ )
+ 
+-install(TARGETS rmlui_debugger
+-	EXPORT RmlUiTargets
+-	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-)
+-install_target_pdb(rmlui_debugger)
++if(NOT "${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
++	install(TARGETS rmlui_debugger
++		EXPORT RmlUiTargets
++		${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
++		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++	)
++	install_target_pdb(rmlui_debugger)
++endif()
+\ No newline at end of file

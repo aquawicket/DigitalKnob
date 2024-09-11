@@ -1,13 +1,15 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f96d0c5ee..fcd005f2a 100644
+index f96d0c5ee..42e9332f0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -11,7 +11,7 @@ project("RmlUi"
+@@ -11,7 +11,9 @@ project("RmlUi"
  set(RMLUI_VERSION_RELEASE FALSE)
  
  if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 -	set(RMLUI_IS_ROOT_PROJECT TRUE)
-+#	set(RMLUI_IS_ROOT_PROJECT TRUE)
++	if(NOT "${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
++		set(RMLUI_IS_ROOT_PROJECT TRUE)
++	endif()
  endif()
  
  # Add lists of available options for those that support it
