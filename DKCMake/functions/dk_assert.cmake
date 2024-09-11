@@ -44,6 +44,8 @@ function(dk_assert expression)
 		
 		dk_exit(1)
 	endif()
+	
+	dk_printVar(${expression})
 endfunction()
 
 

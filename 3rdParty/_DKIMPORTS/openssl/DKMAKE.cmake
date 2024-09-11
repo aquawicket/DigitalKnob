@@ -5,6 +5,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
+dk_validate(HOST_OS 			"dk_getHostTriple()")
+dk_validate(OS 					"dk_getTargetTriple()")
+dk_validate(DKBUILD_TYPE 		"dk_getBUILD_TYPE()")
+dk_validate(CMAKE_C_COMPILER	"dk_depend(clang)")
+dk_validate(CMAKE_CXX_COMPILER	"dk_depend(clang)")
+
 ### DEPEND ###
 #dk_depend(openssl-cmake)
 #EMSCRIPTEN_dk_depend(python3)
@@ -22,20 +28,21 @@ dk_depend(nasm)
 #dk_import		(https://github.com/openssl/openssl.git)
 dk_import		(https://github.com/openssl/openssl/archive/refs/heads/master.zip)
 
-
 #if(EMSCRIPTEN)
 #	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
 #endif()
 
+
 ### LINK ###
-dk_include				(${OPENSSL}/include								OPENSSL_INCLUDE_DIR)
+dk_include				(${OPENSSL}/include									OPENSSL_INCLUDE_DIR)
 DEBUG_dk_include		(${OPENSSL}/${triple}/${DEBUG_DIR}/include			OPENSSL_DEBUG_INCLUDE_DIR)
 RELEASE_dk_include      (${OPENSSL}/${triple}/${RELEASE_DIR}/include		OPENSSL_RELEASE_INCLUDE_DIR)
 
-if(Debug)
+
+if(DEBUG)
 	set(OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR};${OPENSSL_DEBUG_INCLUDE_DIR}")
 endif()
-if(Release)
+if(RELEASE)
 	set(OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR};${OPENSSL_RELEASE_INCLUDE_DIR}")
 endif()
 
@@ -71,10 +78,10 @@ else()
 	DEBUG_dk_set		(OPENSSL_CMAKE -DOPENSSL_USE_STATIC_LIBS=ON -DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR} -DOPENSSL_INCLUDE_DIR=${OPENSSL_INCLUDE_DIR} -DOPENSSL_LIBRARIES=${OPENSSL}/${triple}/${DEBUG_DIR} -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_CRYPTO_DEBUG_LIBRARY} -DOPENSSL_SSL_LIBRARY=${OPENSSL_DEBUG_LIBRARY} "-DCMAKE_C_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_DEBUG_INCLUDE_DIR}" "-DCMAKE_CXX_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_DEBUG_INCLUDE_DIR}")
 	RELEASE_dk_set		(OPENSSL_CMAKE -DOPENSSL_USE_STATIC_LIBS=ON -DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR} -DOPENSSL_INCLUDE_DIR=${OPENSSL_INCLUDE_DIR} -DOPENSSL_LIBRARIES=${OPENSSL}/${triple}/${RELEASE_DIR} -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_CRYPTO_RELEASE_LIBRARY} -DOPENSSL_SSL_LIBRARY=${OPENSSL_RELEASE_LIBRARY} "-DCMAKE_C_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_RELEASE_INCLUDE_DIR}" "-DCMAKE_CXX_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_RELEASE_INCLUDE_DIR}")
 endif()
+dk_assert(OPENSSL_CMAKE)
 
 
-
-
+# https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
 #EMSCRIPTEN_DEBUG_dk_configure(${OPENSSL} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
 
@@ -87,8 +94,8 @@ ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug C
  LINUX_X86_64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug linux-x86_64-clang)
           MAC_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug)
     RASPBERRY_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug)
-      WIN_X86_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug mingw)
-   WIN_X86_64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug mingw64)
+      WIN_X86_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug mingw CC=clang)
+   WIN_X86_64_DEBUG_dk_configure	(${OPENSSL} ../../Configure no-shared --debug mingw64 CC=clang)
 
    EMSCRIPTEN_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 ANDROID_ARM32_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release android-arm -D__ANDROID_API__=${ANDROID_API})
@@ -99,8 +106,8 @@ ANDROID_ARM64_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --relea
  LINUX_X86_64_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release linux-x64)
           MAC_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release)
     RASPBERRY_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release)
-      WIN_X86_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release mingw)
-   WIN_X86_64_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release mingw64)
+      WIN_X86_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release mingw CC=clang)
+   WIN_X86_64_RELEASE_dk_configure	(${OPENSSL} ../../Configure no-shared --release mingw64 CC=clang)
 
 
 ### COMPILE ###

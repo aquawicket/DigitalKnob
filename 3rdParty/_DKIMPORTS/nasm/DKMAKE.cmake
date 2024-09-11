@@ -1,6 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.nasm.us
 
+dk_validate(HOST_OS "dk_getHostTriple()")
 if(ANDROID_HOST)
 	return()
 endif()
@@ -22,8 +23,10 @@ MAC_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/macosx/nas
 MAC_HOST_dk_set(NASM_EXE ${NASM}/nasm)
 
 #WIN_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win32/nasm-2.16.01-win32.zip)
-WIN_HOST_dk_import(https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip)
-WIN_HOST_dk_set(NASM_EXE ${NASM}/nasm.exe)
+if(WIN_HOST)
+	dk_import(https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip)
+	dk_set(NASM_EXE ${NASM}/nasm.exe)
+endif()
 
 #dk_setEnv("PATH" "${NASM_EXE}")
 #dk_info("NASM = ${NASM}")

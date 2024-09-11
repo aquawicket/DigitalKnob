@@ -11,11 +11,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_configure path) #ARGN
 	dk_debugFunc("\${ARGV}")
 	
+	dk_assert(path)
 	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")
 	dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
 	
-	set(BUILD_PATH "${path}/${BUILD_DIR}")
+	dk_set(BUILD_PATH "${path}/${BUILD_DIR}")
 	dk_assert(path)
+	dk_printVar(BUILD_PATH)
 	dk_getOption(NO_HALT 	${ARGV})
 	
 	# Configure with CMake		(multi_config / single_config)
@@ -23,13 +25,13 @@ function(dk_configure path) #ARGN
 		dk_info("Configuring with CMake")
 		if(SINGLE_CONFIG)
 			# Make sure the plugin variable is alpha-numeric and uppercase
-			dk_printVar(path)
-			dk_printVar(plugin)
 			dk_assert(plugin)
+			dk_printVar(plugin)
 			dk_toUpper(${plugin} PLUGIN_NAME)
 			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
 			dk_assert(SINGLE_CONFIG_BUILD_DIR)
-			dk_cd(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR})
+			#dk_cd(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR})
+			dk_cd(${path}/${SINGLE_CONFIG_BUILD_DIR})
 		endif()
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
@@ -46,7 +48,7 @@ function(dk_configure path) #ARGN
 		return()
 	
 	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${path}/configure.ac OR EXISTS ${path}/configure)
+	elseif(EXISTS ${path}/configure.ac) # OR EXISTS ${path}/configure)
 		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BUILD_PATH}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${path}/configure)
@@ -66,7 +68,12 @@ function(dk_configure path) #ARGN
 		
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_notice("configure type not detected. just run arguments")	
+		dk_notice("configure type not detected. just run arguments")
+		if(SINGLE_CONFIG)
+			# Make sure the plugin variable is alpha-numeric and uppercase
+			dk_assert(SINGLE_CONFIG_BUILD_DIR)
+			dk_cd(${path}/${SINGLE_CONFIG_BUILD_DIR})
+		endif()
 		dk_fileAppend(${BUILD_PATH}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#dk_replaceAll("${ARGN}"  ";"  " "  BASH_COMMANDS)
