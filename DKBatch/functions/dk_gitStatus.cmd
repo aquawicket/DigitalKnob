@@ -2,15 +2,15 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::################################################################################
-::# dk_gitDiffSummary()
+::# dk_gitStatus()
 ::#
 ::#
-:dk_gitDiffSummary
+:dk_gitStatus
     call dk_debugFunc 0
  setlocal
  
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-    "%GIT_EXE%" --no-pager diff --compact-summary
+    "%GIT_EXE%" status
 %endfunction%
 
 
@@ -24,5 +24,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
     call dk_debugFunc 0
     
-    %dk_call% dk_gitDiffSummary
+    %dk_call% dk_gitStatus
 %endfunction%

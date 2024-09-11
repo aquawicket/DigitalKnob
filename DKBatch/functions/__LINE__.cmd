@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::# __LINE__(frame)
 ::#
 :__LINE__
- setlocal
     ::call dk_debugFunc
-    
+ setlocal
+ 
     if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
     ::set /A _FRAME_+=1
 ::  call dk_return "%BATCH_LINENO[%_FRAME_%]%"

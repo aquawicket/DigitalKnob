@@ -11,9 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :__TIME__
- setlocal
     ::call dk_debugFunc
-    
+ setlocal
+ 
 ::    nanoseconds="$(date +%s%N)"
 ::    date_nanoseconds="$(( nanoseconds % 1000000000))"
 
