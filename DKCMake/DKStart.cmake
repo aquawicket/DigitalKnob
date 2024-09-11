@@ -92,8 +92,8 @@ endif()
 
 
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(host_triple "dk_getHostTriple()")
+dk_validate(triple "dk_getTargetTriple()")
 dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
 #get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 #if(MULTI_CONFIG)

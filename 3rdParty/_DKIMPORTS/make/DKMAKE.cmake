@@ -9,7 +9,7 @@ endif()
 
 
 dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
-dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
+dk_validate(triple   "dk_getTargetTriple()")
 dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
 
 dk_depend(msys2)

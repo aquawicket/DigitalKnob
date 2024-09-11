@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 ### We only accesp windows hosts
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(host_triple "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()
@@ -58,7 +58,7 @@ endif()
 
 
 
-dk_validate(TARGET_TRIPLE  "dk_getTargetTriple()")
+dk_validate(triple  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")	
 	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)

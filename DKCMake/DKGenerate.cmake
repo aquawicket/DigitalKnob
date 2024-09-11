@@ -34,7 +34,7 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(triple "dk_getTargetTriple()")
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
@@ -333,7 +333,7 @@ file(GLOB App_SRC
 	${DK_PROJECT_DIR}/*.hpp
 	${DK_PROJECT_DIR}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/assets/*")
-list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${target_triple}/*")
+list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${triple}/*")
 if(SRC_INCLUDE)
 	file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 	list(APPEND App_SRC ${App_SRC_INCLUDE})

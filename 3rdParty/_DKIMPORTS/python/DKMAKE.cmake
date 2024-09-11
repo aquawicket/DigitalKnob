@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(host_triple "dk_getHostTriple()")
 dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 # https://docs.python.org/3/using/windows.html
 # Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi

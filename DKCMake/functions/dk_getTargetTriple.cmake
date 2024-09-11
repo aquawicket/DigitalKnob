@@ -8,17 +8,15 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
-#	target_os, os   			= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
-#	TARGET_OS, OS   			= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-#	target_arch, arch			= arm32, arm64, x86, x86_64
-#	TARGET_ARCH, ARCH			= ARM32, ARM64, X86, X86_64
-#	target_env, env				= clang, mingw, msvc, ucrt
-#	TARGET_ENV, ENV				= CLANG, MINGW, MSVC, UCRT
-#	<os>_target					= android_target, emscripten_target, ios_target, iossim_target, linux_target, mac_target, raspberry_target, windows_target 
-#   <os>_<arch>_target			= android_arm64_target, emscripten_arm64_target, ios_arm64_target, iossim_arm64_target, linux_arm64_target, mac_arm64_target, 
-#                                 raspberry_arm64_target, windows_arm64_target 
-#   <os>_<arch>_<env>_target	= android_arm64_clang_target, emscripten_arm64_clang_target, ios_arm64_clang_target, iossim_arm64_clang_target, 
-#                                 linux_arm64_clang_target, mac_arm64_clang_target, raspberry_arm64_clang_target, windows_arm64_clang_target 
+#	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
+#	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
+#	arch				= arm32, arm64, x86, x86_64
+#	ARCH				= ARM32, ARM64, X86, X86_64
+#	env					= clang, mingw, msvc, ucrt
+#	ENV					= CLANG, MINGW, MSVC, UCRT
+#   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64 
+#   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang 
+#
 function(dk_getTargetTriple)
 	dk_debugFunc("\${ARGV}")
 	
@@ -28,17 +26,17 @@ function(dk_getTargetTriple)
 #	else()
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
 #	endif()
-	#dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
+	#dk_printVar(TARGET_DIR)							# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 		
 	### Set target_type / TARGET_TYPE ###
-	if(${TARGET_DIR} MATCHES "Debug")	
+	if(TARGET_DIR MATCHES "Debug")	
 		### Get DEBUG ###
 		dk_set(TYPE DEBUG)						        # TYPE = DEBUG
 		dk_set(${TYPE} 1)								# DEBUG = 1	
 		dk_set(TARGET_TYPE Debug)						# TARGET_TYPE = Debug
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	
-	elseif(${TARGET_DIR} MATCHES "Release")	
+	elseif(TARGET_DIR MATCHES "Release")	
 		### Get RELEASE ###
 		dk_set(TYPE RELEASE)						    # TYPE = RELEASE
 		dk_set(${TYPE} 1)								# RELEASE = 1	
@@ -54,12 +52,13 @@ function(dk_getTargetTriple)
 	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
 	dk_printVar(DK_PROJECT_DIR)
 	
-	### Set target_triple / TARGET_TRIPLE / <OS>_<ARCH>_<ENV> ###
+	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
 	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        = win_x86_64_clang
 	dk_set(triple ${triple})					# global cache the varible
-	dk_set(target_triple ${triple})				# target_triple = win_x86_64_clang							
+	#dk_set(target_triple ${triple})			# target_triple = win_x86_64_clang							
 	dk_toUpper(${triple} TRIPLE)				# TRIPLE        = WIN_X86_64_CLANG
-	dk_set(TARGET_TRIPLE ${TRIPLE})				# TARGET_TRIPLE = WIN_X86_64_CLANG	
+	dk_set(TRIPLE ${TRIPLE})
+	#dk_set(TARGET_TRIPLE ${TRIPLE})			# TARGET_TRIPLE = WIN_X86_64_CLANG	
 	dk_set(${triple} 1)					        # win_x86_64_clang = 1
 	dk_set(${TRIPLE} 1)					        # WIN_X86_64_CLANG = 1
 	dk_printVar(triple)
@@ -86,21 +85,24 @@ function(dk_getTargetTriple)
 	elseif(triple MATCHES "win")
 		dk_set(os win)
 	else()
-		dk_warning("The target_triple:${target_triple} does not contain a valid target_os")
+		dk_warning("The target triple:${triple} does not contain a valid os")
+		dk_unset(triple)
+		dk_unset(TRIPLE)
 		dk_setTargetTriple()
 	endif()
 	if(os)
 		dk_toUpper(${os} OS)
-		dk_set(target_os ${os})
-		dk_set(TARGET_OS ${OS})
+		dk_set(OS ${OS})
+		#dk_set(target_os ${os})
+		#dk_set(TARGET_OS ${OS})
 		dk_set(${os} 1)
 		dk_set(${OS} 1)
-		dk_set(${os}_target 1)
-		dk_set(${OS}_TARGET 1)
+		#dk_set(${os}_target 1)
+		#dk_set(${OS}_TARGET 1)
 	endif()
 	
 	
-	### Get arch / ARCH / <arch>_target / <ARCH>_TARGET
+	### Get arch / ARCH
 	if(triple MATCHES "arm64")
 		dk_set(arch arm64)
 	elseif(triple MATCHES "arm32")
@@ -110,21 +112,22 @@ function(dk_getTargetTriple)
 	elseif(triple MATCHES "x86")
 		dk_set(arch x86)
 	else()
-		dk_warning("The target_triple:${target_triple} does not contain a valid TARGET_ARCH")
+		dk_warning("The target triple:${triple} does not contain a valid arch")
 		dk_setTargetTriple()
 	endif()
 	if(arch)
 		dk_toUpper(${arch} ARCH)
-		dk_set(target_arch ${arch})
-		dk_set(TARGET_ARCH ${ARCH})
+		dk_set(ARCH ${ARCH})
+		#dk_set(target_arch ${arch})
+		#dk_set(TARGET_ARCH ${ARCH})
 		dk_set(${arch} 1)
 		dk_set(${ARCH} 1)
-		dk_set(${arch}_target 1)
-		dk_set(${ARCH}_TARGET 1)
+		#dk_set(${arch}_target 1)
+		#dk_set(${ARCH}_TARGET 1)
 	endif()
 	
 	
-	### Set evn / ENV / <env>_target / <ENV>_TARGET
+	### Set evn / ENV 
 	if(triple MATCHES "clang")
 		dk_set(env clang)
 	elseif(triple MATCHES "mingw")
@@ -134,16 +137,17 @@ function(dk_getTargetTriple)
 	elseif(triple MATCHES "msvc")
 		dk_set(env msvc)
 	else()
-		dk_warning("The target_triple:${target_triple} does not contain a valid TARGET_ENV")
+		dk_warning("The target triple:${triple} does not contain a valid env")
 	endif()
 	if(env)
 		dk_toUpper(${env} ENV)
-		dk_set(target_env ${env})
-		dk_set(TARGET_ENV ${ENV})
+		dk_set(ENV ${ENV})
+		#dk_set(target_env ${env})
+		#dk_set(TARGET_ENV ${ENV})
 		dk_set(${env} 1)
 		dk_set(${ENV} 1)
-		dk_set(${env}_target 1)
-		dk_set(${ENV}_TARGET 1)
+		#dk_set(${env}_target 1)
+		#dk_set(${ENV}_TARGET 1)
 	endif()
 	
 	### Set MSYSTEM
@@ -155,16 +159,16 @@ function(dk_getTargetTriple)
 		elseif(X86)
 			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
 		else()
-			dk_fatal("The target_triple:${target_triple} does not contain a valid ENV or MSYSTEM")
+			dk_fatal("The target triple:${triple} does not contain a valid env or msystem")
 		endif()
 		dk_set(${MSYSTEM} 1)				# CLANGARM64, CLANG64, CLANG32, MINGW64, MINGW32, UCRT64 = 1
 	endif()
 		
-	### Set os_arch / OS_ARCH / target_os_arch / TARGET_OS_ARCH ###
+	### Set os_arch / OS_ARCH ###
 	dk_set(os_arch "${os}_${arch}")
 	dk_set(OS_ARCH "${OS}_${ARCH}")
-	dk_set(target_os_arch "${os_arch}")  
-	dk_set(TARGET_OS_ARCH "${OS_ARCH}")  
+	#dk_set(target_os_arch "${os_arch}")  
+	#dk_set(TARGET_OS_ARCH "${OS_ARCH}")  
 	dk_set(${os_arch} 1)
 	dk_set(${OS_ARCH} 1)
 
