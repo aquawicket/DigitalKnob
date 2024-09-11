@@ -5,6 +5,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.roxlu.com/2019/062/compiling-ffmpeg-with-x264-on-windows-10-using-msvc
 # https://itnext.io/build-ffmpeg-webassembly-version-ffmpeg-js-part-2-compile-with-emscripten-4c581e8c9a16
 
+#dk_set(ENABLE_dk_debugFunc 1)
+
 ### DEPENDS ###
 dk_depend(core_media)
 RASPBERRY_dk_depend(libatomic)
@@ -138,7 +140,7 @@ RASPBERRY_ARM32_DEBUG_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disa
 RASPBERRY_ARM64_DEBUG_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 WIN_X86_DEBUG_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
 #WIN_X86_DEBUG_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
-WIN_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+WIN_X86_64_DEBUG_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64) # --cc=${CLANG_C_COMPILER} --cxx=${CLANG_CXX_COMPILER})
 
 
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)

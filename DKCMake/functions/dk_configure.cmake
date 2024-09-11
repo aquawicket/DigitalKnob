@@ -46,7 +46,7 @@ function(dk_configure path) #ARGN
 		return()
 	
 	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${path}/configure.ac)
+	elseif(EXISTS ${path}/configure.ac OR EXISTS ${path}/configure)
 		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BUILD_PATH}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${path}/configure)

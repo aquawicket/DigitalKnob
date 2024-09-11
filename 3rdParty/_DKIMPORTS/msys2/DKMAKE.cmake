@@ -64,7 +64,9 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
 	
 	### Update with pacman ###
-	dk_validate(PACMAN_EXE  "dk_depend(pacman)")
+	#dk_validate(PACMAN_EXE  "dk_depend(pacman)")
+	dk_findProgram(PACMAN_EXE pacman "${MSYS2}/usr/bin")
+	dk_assert(PACMAN_EXE)
 	dk_command(${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	
 	### Install toolchain ###

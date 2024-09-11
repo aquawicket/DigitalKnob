@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 0
  setlocal
  
-    ::%dk_call% dk_gitDiffSummary
-	%dk_call% dk_gitStatus
+    %dk_call% dk_gitDiffSummary
+	::%dk_call% dk_gitStatus
     
     %dk_call% dk_echo
     %dk_call% dk_echo "Please enter some details about this commit, then press enter."

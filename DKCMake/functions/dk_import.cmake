@@ -43,7 +43,7 @@ function(dk_import url)
 			dk_assert(GIT_EXE)
 			
 			if(NOT EXISTS ${${plugin_var}}/.git)
-				dk_cd(${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})
+				dk_cd(${DK3RDPARTY_DIR})
 				if(EXISTS ${${plugin_var}})
 					dk_delete(${${plugin_var}})
 				endif()
