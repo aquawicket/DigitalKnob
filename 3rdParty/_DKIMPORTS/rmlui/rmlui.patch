@@ -1,0 +1,74 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f96d0c5ee..42e9332f0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,7 +11,9 @@ project("RmlUi"
+ set(RMLUI_VERSION_RELEASE FALSE)
+ 
+ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+-	set(RMLUI_IS_ROOT_PROJECT TRUE)
++	if(NOT "${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
++		set(RMLUI_IS_ROOT_PROJECT TRUE)
++	endif()
+ endif()
+ 
+ # Add lists of available options for those that support it
+
+
+
+diff --git a/Source/Core/CMakeLists.txt b/Source/Core/CMakeLists.txt
+index 99bebaa98..dc2f9f74a 100644
+--- a/Source/Core/CMakeLists.txt
++++ b/Source/Core/CMakeLists.txt
+@@ -458,11 +458,13 @@ endif()
+ # We use default paths provided from GNUInstallDirs. From CMake 3.14 these paths (CMAKE_INSTALL_...) will be used
+ # automatically and can be removed from the following call. The same applies to many other calls to install(TARGETS...).
+ # Note that GNUInstallDirs should still be included in the project root.
+-install(TARGETS rmlui_core
+-	EXPORT RmlUiTargets
+-	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-)
+-install_target_pdb(rmlui_core)
++if(NOT "${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
++	install(TARGETS rmlui_core
++		EXPORT RmlUiTargets
++		${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
++		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++	)
++	install_target_pdb(rmlui_core)
++endif()
+
+
+
+diff --git a/Source/Debugger/CMakeLists b/Source/Debugger/CMakeLists.txt
+index a56402971..0568d6c56 100644
+--- a/Source/Debugger/CMakeLists.txt
++++ b/Source/Debugger/CMakeLists.txt
+@@ -59,11 +59,13 @@ set_target_properties(rmlui_debugger PROPERTIES
+ 	EXPORT_NAME "Debugger"
+ )
+ 
+-install(TARGETS rmlui_debugger
+-	EXPORT RmlUiTargets
+-	${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-)
+-install_target_pdb(rmlui_debugger)
++if(NOT "${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
++	install(TARGETS rmlui_debugger
++		EXPORT RmlUiTargets
++		${RMLUI_RUNTIME_DEPENDENCY_SET_ARG}
++		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++	)
++	install_target_pdb(rmlui_debugger)
++endif()
+\ No newline at end of file

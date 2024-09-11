@@ -84,9 +84,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH
 
 
 ### PATCH ###
-dk_gitApplyPatch(${RMLUI}					${DKIMPORTS_DIR}/rmlui/CMakeLists.patch)
-dk_gitApplyPatch(${RMLUI}/Source/Core		${DKIMPORTS_DIR}/rmlui/Source/Core/CMakeLists.patch)
-dk_gitApplyPatch(${RMLUI}/Source/Debugger	${DKIMPORTS_DIR}/rmlui/Source/Debugger/CMakeLists.patch)
+dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/rmlui.patch)
 
 
 # Version fix #
