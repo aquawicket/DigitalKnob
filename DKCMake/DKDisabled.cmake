@@ -26,6 +26,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # SOFTWARE.
 
 
+dk_disable(smpeg2)					# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
+
+
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO

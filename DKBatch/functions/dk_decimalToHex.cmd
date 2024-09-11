@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_decimalToHex
- setlocal
     call dk_debugFunc 2
-    
+ setlocal
+ 
     set "_LOOKUP_=0123456789abcdef"
     set "_hex_="
     set "_prefix_="
@@ -34,9 +34,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_set myDecimal 45
     %dk_call% dk_decimalToHex "%myDecimal%" myHex
     %dk_call% dk_printVar myHex

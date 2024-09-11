@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    reference: https://stackoverflow.com/a/5807218
 ::#
 :dk_commandToVariable
- setlocal
     call dk_debugFunc 2 3
-    
+ setlocal
+ 
     set i=-1
 
     for /f "usebackq delims=|" %%Z in (`"%~1" %~2 ^& call echo %%^^ERRORLEVEL%%`) do (
@@ -50,9 +50,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_set myCommand ver
     %dk_call% dk_commandToVariable "%myCommand%" myVariable
     %dk_call% dk_printVar myVariable

@@ -48,8 +48,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-:: setlocal
     ::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
+ ::setlocal
 
     ::###<TIMESTAMP> <ELAPSED_TIME>###
     ::call dk_timer timestamp
@@ -137,7 +137,8 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
+	:::::::::::::::::::::::::
 %endfunction%
 

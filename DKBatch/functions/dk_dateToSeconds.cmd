@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_dateToSeconds
- setlocal
     call dk_debugFunc 1 7
-    
+ setlocal
+ 
     setlocal
     if "%~2" equ "" (set "ss=0")    else (set /a "ss=100%~2%%100")
     if "%~3" equ "" (set "nn=0")    else (set /a "nn=100%~3%%100")
@@ -36,9 +36,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_getDate Day Month Year
     %dk_call% dk_getTime CentiSecond Second Minute Hour
     echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%

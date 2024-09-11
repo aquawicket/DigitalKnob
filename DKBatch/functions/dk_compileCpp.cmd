@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_compileCpp
- setlocal
     call dk_debugFunc 1 2
-
+ setlocal
+ 
     set "filepath=%~1"
     set "appname=%~2"
     if not defined appname set "appname=temp"
@@ -26,9 +26,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     set "MSYSTEM=CLANG64"
     %dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_validateBranch"
     %dk_call% dk_compile "%DKAPPS_DIR%\HelloWorld\main.cpp"
