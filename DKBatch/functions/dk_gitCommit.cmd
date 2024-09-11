@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_gitCommit
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     ::%dk_call% dk_gitDiffSummary
 	%dk_call% dk_gitStatus
     
@@ -64,8 +64,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_gitCommit
 %endfunction%
