@@ -11,6 +11,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_configure path) #ARGN
 	dk_debugFunc("\${ARGV}")
 	
+	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")
+	dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
+	
 	set(BUILD_PATH "${path}/${BUILD_DIR}")
 	dk_assert(path)
 	dk_getOption(NO_HALT 	${ARGV})
@@ -20,6 +23,8 @@ function(dk_configure path) #ARGN
 		dk_info("Configuring with CMake")
 		if(SINGLE_CONFIG)
 			# Make sure the plugin variable is alpha-numeric and uppercase
+			dk_printVar(path)
+			dk_printVar(plugin)
 			dk_assert(plugin)
 			dk_toUpper(${plugin} PLUGIN_NAME)
 			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)

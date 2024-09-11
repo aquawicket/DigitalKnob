@@ -20,6 +20,7 @@ function(dk_import url)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_importVariables(${url} plugin ${ARGN})
+	dk_set(plugin ${plugin})
 	dk_printVar(plugin)
 	
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)

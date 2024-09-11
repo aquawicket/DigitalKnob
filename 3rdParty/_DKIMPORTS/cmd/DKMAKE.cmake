@@ -6,6 +6,7 @@ if(EXISTS ${CMD_EXE})
 endif()
 
 ### Windows Host Only ###
+dk_validate(HOST_OS "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(cmd)
 	dk_return()

@@ -3,13 +3,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 dk_depend(freetype)
+dk_printVar(FREETYPE_CMAKE)
 dk_depend(python3)
 
 
 ### IMPORT ###
 #dk_import(https://github.com/harfbuzz/harfbuzz.git BRANCH main)
 dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
-
+dk_printVar(plugin)
 
 
 ### LINK ###

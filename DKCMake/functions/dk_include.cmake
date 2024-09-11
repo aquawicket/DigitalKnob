@@ -12,11 +12,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_include path)
 	dk_debugFunc("\${ARGV}")
 	
-	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_warning("${CMAKE_CURRENT_FUNCTION}() cannot run in script mode.")
-		return()
-	endif()
-	
 	list(FIND DKINCLUDES_LIST "${path}" index)
 	if(${index} GREATER -1)
 		dk_return()	# path is already in the list
@@ -29,7 +24,11 @@ function(dk_include path)
 	endif()
 		
 	dk_append(DKINCLUDES_LIST ${path})
-	include_directories(${path})
+	if(CMAKE_SCRIPT_MODE_FILE)
+		dk_warning("${include_directories}() cannot run in script mode.")
+	else()
+		include_directories(${path})
+	endif()
 		
 	if(ARGV1)
 		dk_set(${ARGV1} ${path}) # add the path to the supplied variable
