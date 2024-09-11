@@ -20,15 +20,35 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_append(COMMAND_ARGS --unsafe-paths)
 	dk_append(COMMAND_ARGS --directory=${directory})
 	dk_append(COMMAND_ARGS ${patch_file})
-	dk_info(COMMAND ${COMMAND_ARGS})
+	dk_append(COMMAND_ARGS -R)
+	dk_append(COMMAND_ARGS --check)
 	execute_process(COMMAND ${COMMAND_ARGS}
 					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
 					RESULT_VARIABLE result
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(NOT ${result} EQUAL 0)
-			dk_error("ERROR: 'An error occured patching with ${patch_file}'")
-			return()	# RETURN if the patch check failed, it may have already been patched
+			dk_error("${patch_file} was already applied")
+			return()
+	endif()
+	dk_unset(COMMAND_ARGS)
+	
+	
+	dk_validate(GIT_EXE "dk_installGit()")
+	dk_append(COMMAND_ARGS ${GIT_EXE})
+	dk_append(COMMAND_ARGS apply)
+	dk_append(COMMAND_ARGS --verbose)
+	dk_append(COMMAND_ARGS --no-index)
+	dk_append(COMMAND_ARGS --unsafe-paths)
+	dk_append(COMMAND_ARGS --directory=${directory})
+	dk_append(COMMAND_ARGS ${patch_file})
+	execute_process(COMMAND ${COMMAND_ARGS}
+					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
+					RESULT_VARIABLE result
+					OUTPUT_VARIABLE output
+					OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(NOT ${result} EQUAL 0)
+			dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
 endfunction()
 
