@@ -19,8 +19,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 ::#
 :dk_arrayConcat
- setlocal
     call dk_debugFunc 2 3
+ setlocal
     ::#dk_validateArgs array array
 
     set "_arrayA_=%~1"
@@ -55,9 +55,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     set "myArray1[0]=a b c"
     set "myArray1[1]=d e f"
     set "myArray1[2]=g h i"

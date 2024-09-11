@@ -11,10 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#              echo dk_appendEvnPath returned: %result%
 ::#
 :dk_appendEvnPath
- setlocal
     call dk_debugFunc 1
-
-    setlocal
+ setlocal
+ 
     set "_path_=%~1"
 
     %dk_call% dk_stringContains "%PATH%\" "%_path_%" result
@@ -32,9 +31,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     %dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_ "%dk_call% dk_validateBranch"
     %dk_call% dk_appendEvnPath %DKBATCH_FUNCTIONS_DIR%
 %endfunction%

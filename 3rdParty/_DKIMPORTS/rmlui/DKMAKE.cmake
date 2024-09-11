@@ -78,6 +78,7 @@ set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)
 
+
 ### IMPORT ###
 #dk_import(https://github.com/mikke89/RmlUi.git)
 dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH)
@@ -87,23 +88,10 @@ dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH
 dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/rmlui.patch)
 
 
-# Version fix #
-#dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
-
-# ANDROID FIX
-if(ANDROID)
-#	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
-endif()
-
-
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-#ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-#ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
-
 dk_include		(${RMLUI}/Include	RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source 	RML_INCLUDE_DIR2)
-
 dk_addTarget	(rmlui core)
 dk_addTarget	(rmlui debugger)
 dk_addTarget	(rmlui shell)
@@ -158,6 +146,7 @@ if(rmlui_invaders OR rmlui_all)
 	UNIX_dk_libDebug		(${RMLUI}/${triple}/${DEBUG_DIR}/rmlui_sample_invaders)
 	UNIX_dk_libRelease		(${RMLUI}/${triple}/${RELEASE_DIR}/rmlui_sample_invaders)
 endif()
+
 
 ### GENERATE ###								
 dk_configure(

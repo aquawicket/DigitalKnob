@@ -18,9 +18,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 ::#
 :dk_arrayUnshift
- ::setlocal
     ::call dk_debugFunc 2
-    
+ ::setlocal
+ 
     set "_arry_=%~1"
     ::set "_element_=%~2"
     %dk_call% dk_arrayLength %~1 count
@@ -42,9 +42,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_echo
     %dk_call% dk_arrayUnshift myArrayA "a b c" ::new_lengthA
     %dk_call% dk_printVar myArrayA

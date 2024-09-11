@@ -17,8 +17,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 ::#
 :dk_arrayAt
- setlocal
     call dk_debugFunc 3
+ setlocal
+ 
     ::%dk_call% dk_validateArgs array int optional:rtn_var
 
     ::### return value ###
@@ -34,9 +35,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     set "myArrayA[0]=a b c"
     set "myArrayA[1]=1 2 3"
     set "myArrayA[2]=d e f"

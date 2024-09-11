@@ -6,9 +6,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_callPowershell
- setlocal
     call dk_debugFunc 1 99
-    ::call dk_validateArgs PSFunction array array
+ setlocal
+	
+	::call dk_validateArgs PSFunction array array
     
     %dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
     
@@ -26,9 +27,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_callPowershell dk_debug "string from DKBatch"
     ::%dk_call% dk_callPowershell dk_debug "string from DKBatch" rtnVar
 %endfunction%

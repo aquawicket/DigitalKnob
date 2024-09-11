@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_buildMain
     call dk_debugFunc 0
-    %setlocal%
+ %setlocal%
     
     %dk_call% dk_assert DKSCRIPT_PATH
     %dk_call% dk_assert DKSCRIPT_DIR
@@ -56,8 +56,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_buildMain
 %endfunction%

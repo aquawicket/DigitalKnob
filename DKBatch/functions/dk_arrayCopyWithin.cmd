@@ -34,9 +34,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 ::#
 :dk_arrayCopyWithin
- setlocal
     call dk_debugFunc 4
-
+ setlocal
+ 
     %dk_call% dk_todo %__FUNCTION__%
 %endfunction%
 
@@ -45,8 +45,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     %dk_call% dk_arrayCopyWithin array target start end
 %endfunction%
