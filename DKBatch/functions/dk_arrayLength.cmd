@@ -22,6 +22,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
        goto :dk_arrayLength_loop 
     )
     endlocal & set "%2=%_length_%"
+	
+::debug	
+	%dk_call% dk_printVar %2
 %endfunction%
 
 
@@ -39,5 +42,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "myArrayA[4]=h i j"
     
     %dk_call% dk_arrayLength myArrayA myArrayLengthA
-    %dk_call% dk_printVar myArrayLengthA
+    %dk_call% dk_info "myArrayLengthA = %myArrayLengthA%"
 %endfunction%

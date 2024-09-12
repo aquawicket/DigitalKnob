@@ -11,7 +11,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
  
     %dk_call% dk_replaceAll "%~1" "/" "\" _path_
-    ::set "folders="
     set /A i=0
 
     for /d %%a in ("%_path_%\*") do (
@@ -26,6 +25,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
        if defined currentScope endlocal
        set "%%a"
     )
+
+::debug
+	::%dk_call% dk_printVar %2
 %endfunction%
 
 

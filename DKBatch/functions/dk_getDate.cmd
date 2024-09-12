@@ -19,6 +19,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         )
     )
     endlocal & set "%1=%dd%" & set "%2=%mm%" & set "%3=%yy%"
+	
+::debug
+::	%dk_call% dk_printVar %1
+::	%dk_call% dk_printVar %2
+::	%dk_call% dk_printVar %3
 %endfunction%
 
 
@@ -30,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
     call dk_debugFunc 0
     
-    echo date = %date%
+    %dk_call% dk_echo "date = %date%"
     %dk_call% dk_getDate day month year
-    echo date = %month%/%day%/%year%
+    %dk_call% dk_echo "date = %month%/%day%/%year%"
 %endfunction%   
