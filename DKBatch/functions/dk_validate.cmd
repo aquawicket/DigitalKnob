@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::call %~2
     %~2
     
-    if not defined %~1 dk_error "dk_validate was unable to set the variable with the code provided"
+    if not defined %~1 dk_error "dk_validate was unable to set the variable:%~1 with the code provided"
     if "%~1"=="" dk_error "dk_validate called the code requested, but the variable is still invalid"
     
     %dk_call% dk_debug "dk_validate: %~1"

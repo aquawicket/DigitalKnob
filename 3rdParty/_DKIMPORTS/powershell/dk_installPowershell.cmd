@@ -6,6 +6,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
 ::#
 :dk_installPowershell
 	call dk_debugFunc 0
+::setlocal
 	
 	call dk_validate DK_HOST_OS "call dk_getHostTriple"
 	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_arm64"   call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"

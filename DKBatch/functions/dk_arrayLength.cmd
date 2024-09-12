@@ -15,7 +15,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 2
  setlocal
  
-    setlocal
     set _length_=0
     :dk_arrayLength_loop
     if defined %~1[%_length_%] ( 
@@ -30,9 +29,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     set "myArrayA[0]=a b c"
     set "myArrayA[1]=1 2 3"
     set "myArrayA[2]=d e f"

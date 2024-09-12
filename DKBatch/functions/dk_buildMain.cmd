@@ -7,17 +7,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_buildMain
     call dk_debugFunc 0
- %setlocal%
-    
+ setlocal
+     
     %dk_call% dk_assert DKSCRIPT_PATH
     %dk_call% dk_assert DKSCRIPT_DIR
     %dk_call% dk_assert DKSCRIPT_NAME
 
     %dk_call% dk_getHostTriple
     %dk_call% dk_getDKPaths
+
+	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE
+	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
+
     %dk_call% dk_installGit
     %dk_call% dk_validateBranch
-    
+ 
     if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
         %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
         %dk_call% dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"

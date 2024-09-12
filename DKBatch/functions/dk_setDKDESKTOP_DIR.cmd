@@ -6,12 +6,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_setDKDESKTOP_DIR
-:: setlocal
     call dk_debugFunc 0
+:: setlocal
+   
+    if defined DKDESKTOP_DIR %return%
     
-    if defined DKDESKTOP_DIR %dk_call% dk_warning "DKDESKTOP_DIR already set to %DKDESKTOP_DIR%" && goto:eof
-    
-    if not defined DKHOME_DIR %dk_call% dk_setDKHOME_DIR
+    %dk_call% dk_setDKHOME_DIR
     set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
     if not exist %DKDESKTOP_DIR% %dk_call% dk_error "DKDESKTOP_DIR:%DKDESKTOP_DIR% does not exist"
 %endfunction%
@@ -23,9 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_setDKDESKTOP_DIR
     %dk_call% dk_printVar DKDESKTOP_DIR
     

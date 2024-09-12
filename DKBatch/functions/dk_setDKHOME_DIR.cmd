@@ -6,10 +6,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_setDKHOME_DIR
-:: setlocal
     call dk_debugFunc 0
-    
-    if defined DKHOME_DIR %dk_call% dk_warning "DKHOME_DIR already set to %DKHOME_DIR%" && goto:eof
+:: setlocal
+
+    if defined DKHOME_DIR %return%
     
     if not defined HOMEDRIVE %dk_call% dk_error "HOMEDRIVE is invalid"
     if not defined HOMEPATH %dk_call% dk_error "HOMEPATH is invalid"
@@ -24,9 +24,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_setDKHOME_DIR
     %dk_call% dk_printVar DKHOME_DIR
     

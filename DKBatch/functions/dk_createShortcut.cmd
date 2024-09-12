@@ -13,26 +13,21 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "target_path=%~2"
     set "OVERWRITE=%~3"
     
-    if exist "%shortcut_path%" %dk_call% dk_warning "%shortcut_path% already exists" && goto:eof
+    if not defined OVERWRITE if exist "%shortcut_path%" %dk_call% dk_warning "%shortcut_path% already exists" && %return%    
+	if exist "%shortcut_path%" %dk_call% dk_delete "%shortcut_path%"
+
+	powershell -Command "$shortcut_path = '%shortcut_path%'; $target_path = '%target_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${target_path}; $Shortcut.Save();"
+	::%dk_call% dk_powershell "$shortcut_path = '%shortcut_path%'; $target_path = '%target_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${target_path}; $Shortcut.Save();"	
+	
+::	%dk_call% dk_powershell ^
+::	$shortcut_path = '%shortcut_path%'; ^
+::	$target_path = '%target_path%'; ^
+::	$WshShell = New-Object -comObject WScript.Shell; ^
+::	$Shortcut = $WshShell.CreateShortcut(${shortcut_path});
+::	$Shortcut.TargetPath = ${target_path}; ^
+::	$Shortcut.Save();
     
-::  if exist "%shortcut_path%" (
-::      if defined OVERWRITE (
-::          %dk_call% dk_delete "%shortcut_path%"
-::      ) else (
-::          %dk_call% dk_error "dk_createShortcut Cannot create shortcut. Destiantion exists and no OVERWRITE specified"
-::      )
-::  )
-    
-    %dk_call% dk_powershell ^
-        "$shortcut_path = '%shortcut_path%'; "^
-        "$target_path = '%target_path%'; "^
-        "$WshShell = New-Object -comObject WScript.Shell; "^
-        "$Shortcut = $WshShell.CreateShortcut(${shortcut_path}); "^
-        "$Shortcut.TargetPath = ${target_path}; "^
-        "$Shortcut.Save();"
-    
-    if not exist %shortcut_path% %dk_call% dk_error "Failed to create shortcut:%shortcut_path%"
-    endlocal
+    if not exist %shortcut_path% %dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%"
 %endfunction%
 
 
