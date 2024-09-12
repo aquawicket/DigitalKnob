@@ -29,7 +29,7 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_debug("result = ${result}")
 	dk_debug("output = ${output}")
 	if(NOT ${result} EQUAL 0)
-			dk_fatal("ERROR: 'An error occured patching with ${patch_file}'")
+			dk_error("ERROR: 'An error occured patching with ${patch_file}'")
 	endif()
 	dk_success("Patch successful: ${patch_file}")
 	
