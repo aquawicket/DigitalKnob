@@ -23,15 +23,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_removeExtension "%basename%" basename
     %dk_call% dk_dirname "%~1" dest      &:: extract contents to same directoy
     set "dest=%dest%\%basename%"  &:: extract contents to folder within same directory
-    %dk_call% dk_echo "dest = %dest%"
+	
     %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%dest%"'
-    goto:eof
+	::%dk_call% dk_callPowershell dk_extract %*
+    %return%
     
     :twoParams
     ::### handle 2 parameters
     
     :: try dk_powershell
     if not exist "%~2" %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
+	::if not exist "%~2" %dk_call% dk_callPowershell dk_extract %*
     
     :: try tar
     if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"
