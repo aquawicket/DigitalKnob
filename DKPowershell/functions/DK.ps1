@@ -59,7 +59,7 @@ function DK() {
 	#if(!${ENABLE_DKTEST}){ return }
 	
 	###### DKTEST MODE ######
-	if("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}"){
+	if("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIRBBBBBBBBBBBBBBBBBBBB}"){
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
 		Write-Output ""
@@ -68,7 +68,7 @@ function DK() {
 		. ${DKSCRIPT_PATH}
 		DKTEST
 		Write-Output ""
-		Write-Output "${bg_magenta}${white}########################## END TEST ################################${clr}"
+		Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
 		Write-Output ""
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
@@ -90,7 +90,7 @@ function dk_echo(){
 # dk_init()
 #
 function dk_init(){
-	Write-Host "Loading DKBatch DigitalKnob . . ."
+	Write-Host "Loading DKPowershell DigitalKnob . . ."
 }
 
 ##################################################################################
