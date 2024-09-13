@@ -8,16 +8,48 @@
 dk_test() {
 	dk_debugFunc 1 2
 	
-	dk_call dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	dk_call dk_echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}"
-	dk_call dk_echo "__FILE__      = $(__FILE__)"
-	dk_call dk_echo "__LINE__      = $(__LINE__)"
-	dk_call dk_echo "__FUNCTION__  = $(__FUNCTION__)"
-	dk_call dk_echo "__ARGC__      = $(__ARGC__)"
-	#dk_call dk_echo "__ARGV__      = $(__ARGV__)"
-	#dk_call dk_echo "__CALLER__    = $(__CALLER__)"
+#	dk_call dk_info "test from dk_info"
+#	dk_call dk_debug "test from dk_debug"
+	
+#	echo "__FILE__     = $(__FILE__)"
+#	echo "__LINE__     = $(__LINE__)"
+#	echo "__FUNCTION__ = $(__FUNCTION__)"
+#	echo "__ARGC__     = $(__ARGC__)"
+#	echo "__ARGV__     = $(__ARGV__)"
+#	echo "__CALLER__   = $(__CALLER__)"
 
-
+	if [[ ${1} == *"[@]"* ]]; then
+		local _input_=(${!1})
+		echo "1 is an array variable"
+		local _size_=${#_input_[@]}
+		for ((i=0; i < $_size_; i++ )); do
+			echo "_input_[$i] = ${_input_[$i]}";
+		done
+		echo "_input_ = ${_input_[@]}"
+		echo "_size_ = ${_size_[@]}"
+	fi
+	
+	dk_call dk_convertToCIdentifier "${1}" var
+	if [ "${1}" = "${var}" ]; then
+		if [ -n "${!1}" ]; then
+			local _input_="${!1}"
+			echo "1 is a variable"
+		fi
+	fi
+	
+	if [ -z "${_input_-}" ]; then
+		local _input_="${1}"
+		echo "1 is a string"
+	fi
+	
+	echo "_input_ = $_input_"
+	
+	if [ ${#} -eq 2 ]; then
+		local ret_val="${2-}"
+		dk_return "sending back: $_input_"; return
+	else
+		dk_return "sending back: $_input_"; return
+	fi
 }
 
 
