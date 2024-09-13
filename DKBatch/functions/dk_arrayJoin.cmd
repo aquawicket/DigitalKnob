@@ -20,7 +20,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 :dk_arrayJoin
     call dk_debugFunc 3
  setlocal
-    ::%dk_call% dk_validateArgs array string optional:rtn_var
 
     ::set "_arry_=%~1"
     ::set "_separator_=%~2"
@@ -58,7 +57,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "myArrayA[4]=h i j"
 
     %dk_call% dk_arrayJoin myArrayA "," myStringA
-    %dk_call% dk_debug "myStringA = %myStringA%"
+    %dk_call% dk_info "myStringA = %myStringA%"
 
 
     set "myArrayB[0]=h i j"
@@ -69,5 +68,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
     %dk_call% dk_arrayJoin myArrayB "," myStringB
     ::myStringB=$(dk_arrayJoin myArrayB ",")
-    %dk_call% dk_debug "myStringB = %myStringB%"
+    %dk_call% dk_info "myStringB = %myStringB%"
 %endfunction%

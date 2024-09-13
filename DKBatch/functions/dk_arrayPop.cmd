@@ -19,14 +19,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 :dk_arrayPop
     call dk_debugFunc 1 2
  setlocal
-    ::dk_validateArgs array
     
-    setlocal
     %dk_call% dk_arrayLength %~1 _length_
     set /a _length_-=1
     set "removedElement=!%~1[%_length_%]!"
-    %dk_call% dk_printVar removedElement
     endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]
+
+::debug
+	%dk_call% dk_printVar %2
+	%dk_call% dk_printVar %1
 %endfunction%
 
 
@@ -35,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
- setlocal
+ ::setlocal
  
     set "myArrayA[0]=a b c"
     set "myArrayA[1]=1 2 3"

@@ -23,6 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     set "hex=0x%hex:~-2%"
     
     endlocal & set "%2=%hex%"
+
+:: debug
+	%dk_call% dk_printVar %2
 %endfunction%
 
 

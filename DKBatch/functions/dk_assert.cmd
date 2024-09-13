@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
  setlocal
  
     if not defined %~1 (
-        %dk_call% dk_error "Assertion failed: dk_assert():  %__FILE__%:%__LINE__%  %__FUNCTION__%(%__ARGS__%)"
+        %dk_call% dk_fatal "Assertion failed: dk_assert  %__FILE__%:%__LINE__%  %__FUNCTION__%[%__ARGS__%]"
     )
 %endfunction%
 

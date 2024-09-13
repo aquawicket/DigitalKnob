@@ -10,10 +10,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 2
  setlocal
  
-    setlocal
     %dk_call% dk_asciiToHex %~1 hex
     %dk_call% dk_hexToDecimal %hex% decimal
     endlocal & set "%2=%decimal%"
+	
+:: debug
+	%dk_call% dk_printVar %2
 %endfunction%
 
 

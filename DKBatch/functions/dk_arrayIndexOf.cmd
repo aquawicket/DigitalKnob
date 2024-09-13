@@ -34,18 +34,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     :dk_arrayIndexOf_loop
         if not defined %~1[%_count_%] (
             endlocal & %dk_call% dk_set %3 -1
-            goto:eof
+            rem %return%
+			goto:end_arrayIndexOf
         )
 
         if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
         if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
         if "%~2" == "%_value_%" (
             endlocal & set "%3=%_count_%"
-            goto:eof    
+            rem %return%
+			goto:end_arrayIndexOf
         )
 
         set /a _count_+=1
     goto:dk_arrayIndexOf_loop
+
+:end_arrayIndexOf
+::debug
+	%dk_call% dk_printVar %3
 %endfunction%
 
 

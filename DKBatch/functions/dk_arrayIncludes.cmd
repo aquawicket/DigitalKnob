@@ -43,6 +43,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     )
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1
+	
+::debug
+::	%dk_call% dk_printVar %3
 %endfunction%
 
 
