@@ -10,10 +10,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 1 99
  setlocal
 	
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
     %dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	
 	:: https://stackoverflow.com/a/4732316/688352
-    call %ComSpec% /c powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    call %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
 	:: get last argument
 	for %%a in (%*) do set LAST_ARG=%%a
