@@ -11,7 +11,10 @@ function Global:dk_extract($file, $destination) {
 	dk_call dk_info "Extracting $file to $destination . . ."
 	if(!(dk_call dk_pathExists $file)){ dk_call dk_error "cannot find $file"; return $false }
 	
-	Expand-Archive $file -DestinationPath $destination -Force
+	#Expand-Archive $file -DestinationPath $destination -Force
+	
+	Add-Type -Assembly "System.IO.Compression.Filesystem"
+	[System.IO.Compression.ZipFile]::ExtractToDirectory("$file", "$destination")
 }
 
 

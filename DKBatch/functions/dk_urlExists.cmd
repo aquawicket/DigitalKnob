@@ -5,9 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::# dk_urlExists(url rtn_var)
 ::#
 :dk_urlExists
- setlocal
     call dk_debugFunc 1 2
-    
+ setlocal
+ 
     :curl
         if defined DISABLE_curl goto:end_curl_exists
         for /f "usebackq tokens=*" %%f in (`curl -sI -o nul -w "%%{http_code}" "%~1"`) do set "httpCode=%%f"
@@ -42,9 +42,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     ::###### Using if return value
     %dk_call% dk_echo
     set "url=http://www.google.com/index.html"

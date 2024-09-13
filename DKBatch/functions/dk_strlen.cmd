@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_strlen
- setlocal
     call dk_debugFunc 2
-    
+ setlocal
+ 
     setlocal
     set "s=#!%~1!"
     set "len=0"
@@ -29,9 +29,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_set _demo "some example string"
     %dk_call% dk_strlen _demo _length
     %dk_call% dk_info "String is %_length% characters long"

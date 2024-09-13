@@ -12,9 +12,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
 ::# 
 :dk_uptime
- setlocal
     call dk_debugFunc 4
-    
+ setlocal
+ 
     setlocal enableExtensions
     set "c=net statistics work"
     set "t=2"
@@ -84,9 +84,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_uptime d h m s
     echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%
 %endfunction%    

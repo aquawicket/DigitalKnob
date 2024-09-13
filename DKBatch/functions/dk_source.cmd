@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    @function_name   - the function name of the file to source and download if needed
 ::#
 :dk_source
- setlocal
     if exist "%DKBATCH_FUNCTIONS_DIR%\dk_debugFunc.cmd" call dk_debugFunc 1
-    
+ setlocal
+ 
     :: load if it's an existing full path file
     if exist "%~1" goto:eof    &:: NOTE: should we add the dirpath to the PATH environment variable here?
     
@@ -56,9 +56,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST 
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_source dk_info
     %dk_call% dk_info "test message using dk_source to download it first"
 %endfunction%

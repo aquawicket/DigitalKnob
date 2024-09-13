@@ -6,9 +6,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 ::#
 :dk_shell_Info
- setlocal
     call dk_debugFunc 0
-
+ setlocal
     echo %PSModulePath% | findstr %USERPROFILE% >NUL
     if %ERRORLEVEL% equ 0 set "DKSHELL_NAME=powershell" & goto:done
     echo %PSModulePath% | findstr %USERPROFILE% >NUL
@@ -31,9 +30,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+  
     %dk_call% dk_shell_Info
 %endfunction%
 
