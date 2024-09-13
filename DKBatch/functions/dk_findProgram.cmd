@@ -17,10 +17,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if "%~3" equ "" set "pattern=" && set "recursive="
     if "%~3" neq "" set "pattern=%~3" && set "recursive=/R" 
     
-    %dk_call% dk_commandToVariable "where %recursive% %pattern% %name% %NO_STDERR%" value
+	%dk_call% dk_commandToVariable "where" "%recursive% %pattern% %name%" value %NO_STDERR%
     if not defined value %dk_call% dk_notice "%~2 not found"
-    ::%dk_call% dk_printVar value
     endlocal & set "%1=%value%"
+
+::debug
+::	%dk_call% printVar %1
 %endfunction%
 
 
