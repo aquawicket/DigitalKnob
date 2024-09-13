@@ -74,9 +74,10 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     :: Try powershell
     :powershell_dl
     if defined DISABLE_powershell goto:end_powershell_dl
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
     %dk_call% dk_echo "Downloading via powershell"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-    if not exist "%destination%_DOWNLOADING" powershell -Command "$cli = New-Object System.Net.WebClient; "^
+    if not exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^
         "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
         "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
     %dk_call% dk_getFileSize "%destination%_DOWNLOADING" fileSize

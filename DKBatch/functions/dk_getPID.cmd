@@ -18,7 +18,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::for /F "tokens=* USEBACKQ" %%F IN (`tasklist /fo csv | findstr /i "mycmd"`) do set "LINE=%%F"
     ::echo LINE = %LINE%
     
-    for /f "tokens=1* delims=   : " %%a in ('powershell.exe -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
+	
+    for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
             echo %%a, %%b
             if /I "%%a"=="ProcessId"       set "%%a=%%b"
             if /I "%%a"=="ParentProcessId" set "%%a=%%b"
@@ -29,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     echo ExecutablePath = %ExecutablePath%
     pause
 
-    for /f "tokens=1* delims=   : " %%a in ('powershell.exe -c "Get-WmiObject Win32_Process | Where-Object ParentProcessId -EQ "%ParentProcessId%""') do (
+    for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ParentProcessId -EQ "%ParentProcessId%""') do (
             echo %%a, %%b
             if /I "%%a"=="ProcessId"       set "%%a=%%b"
             if /I "%%a"=="ParentProcessId" set "%%a=%%b"
@@ -41,17 +43,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     pause
     
     
-    FOR /F "tokens=* USEBACKQ" %%F IN (`powershell -c "Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
+    FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
         set "PID=%%F"
     ) 
     echo PID = %PID%
 
-::  FOR /F "tokens=* USEBACKQ" %%F IN (`powershell -c "(Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
+::  FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE% -c "(Get-WmiObject Win32_Process -Filter ProcessId=$PID | Select-Object -Property ProcessId, ParentProcessId"`) DO (
 ::      set "PPID=%%F"
 ::  ) 
 ::  echo PPID = %PPID%
     
-    FOR /F "tokens=* USEBACKQ" %%F IN (`powershell  -c "(gwmi win32_process | ? processid -eq ((gwmi win32_process | ? processid -eq  $PID).parentprocessid)).parentprocessid"`) DO (
+    FOR /F "tokens=* USEBACKQ" %%F IN (`%POWERSHELL_EXE%  -c "(gwmi win32_process | ? processid -eq ((gwmi win32_process | ? processid -eq  $PID).parentprocessid)).parentprocessid"`) DO (
         echo %%a, %%b
         SET PPPID=%%F
     )

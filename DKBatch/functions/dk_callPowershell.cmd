@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 		set "rtn_value=%%Z"
 	)
 	
-::	for /f "delims=" %%Z in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
+::	for /f "delims=" %%Z in ('%POWERSHELL_EXE% -Command -noprofile "iex (${%~f0} | out-string)"') do (
 ::        ::endlocal & set %1=%%~Z
 ::    )
 	
