@@ -20,8 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_arrayConcat
     call dk_debugFunc 2 3
- setlocal
-    ::#dk_validateArgs array array
+:: setlocal
 
     set "_arrayA_=%~1"
     set "_arrayB_=%~2"
@@ -48,6 +47,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::### return value ###
     if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%_arrayC_%"
     if "!DE!" equ "" endlocal & set "%3=!_arrayC_!"
+	
+::debug
+	%dk_call% dk_printVar %3
 %endfunction%
 
 

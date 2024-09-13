@@ -26,6 +26,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     ::if "!DE!" neq "" endlocal & %dk_call% dk_set %3 "%%%~1[%~2]%%"
     if "!DE!" neq "" endlocal & call set "%3=%%%~1[%~2]%%"
     if "!DE!" equ "" endlocal & set "%3=!%~1[%~2]!"
+
+::debug
+	%dk_call% dk_printVar %3
 %endfunction%
 
 
