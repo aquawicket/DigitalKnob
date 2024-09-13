@@ -23,17 +23,16 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     %dk_call% dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
     %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
     %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
-	set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
-    set "GIT_EXE=%GIT_DIR%\bin\git.exe"
-    set "GITBASH_EXE=%GIT_DIR%\git-bash.exe"
-	set "PATCH_EXE=%GIT_DIR%\usr\bin\patch.exe"
+	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
+    set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
+    set "GITBASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
+	set "PATCH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\usr\bin\patch.exe"
      
     if exist "%GIT_EXE%" goto:eof
     %dk_call% dk_echo   
     %dk_call% dk_info "Installing git . . ."
     %dk_call% dk_download %GIT_DL%
-    %dk_call% dk_info "%DKDOWNLOAD_DIR%\%GIT_DL_FILE% -y -o %GIT_DIR%"
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT_DIR%"
+    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
        
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")
 %endfunction%

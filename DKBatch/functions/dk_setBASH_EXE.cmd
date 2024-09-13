@@ -12,8 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if defined BASH_EXE %return%
     
 	:: try Git for windows bash.exe
-	%dk_call% dk_validate GIT_DIR "%dk_call% dk_installGit"
-	%dk_call% dk_findProgram BASH_EXE "bash.exe" "%GIT_DIR%"
+	%dk_call% dk_validate GIT "%dk_call% dk_installGit"
+	%dk_call% dk_findProgram BASH_EXE "bash.exe" "%GIT%"
 	if defined BASH_EXE %return%
 
 %endfunction%

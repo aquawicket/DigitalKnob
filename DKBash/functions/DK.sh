@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "DK.sh"
 [ -n "${DKINIT-}" ] && return || export DKINIT=1	# include_guard
 
 [ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
@@ -7,6 +8,7 @@
 #
 #
 DK(){
+	echo "DK()"
 	###### Initialize Language specifics ######
 	dkinit
 	
