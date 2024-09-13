@@ -143,7 +143,6 @@ function dk_DKSCRIPT_VARS(){
 	$global:DKSCRIPT_DIR = ${DKSCRIPT_DIR} -replace '\\', '/';
 	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR not found!"; exit } 
 	$global:DKSCRIPT_NAME = Split-Path -Leaf ${DKSCRIPT_PATH}
-	#$global:DKSCRIPT_EXT = Split-Path ${DKSCRIPT_PATH} -Extension
 	$global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH")
 }
 
