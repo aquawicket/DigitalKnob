@@ -153,10 +153,10 @@ if not exist "%~1" echo DK.cmd must be called with %%~0. I.E.  "DK.cmd" %%~0 & p
 ::# dk_DKHTTP_VARS
 ::#
 :dk_DKHTTP_VARS
-    if not defined DKHTTP_DIGITALKNOB_DIR        set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-    if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
-    if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
-    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
+    if not defined DKHTTP_DIGITALKNOB_DIR             set "DKHTTP_DIGITALKNOB_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+    if not defined DKHTTP_DKBRANCH_DIR                set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
+    if not defined DKHTTP_DKBATCH_DIR                 set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
+    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR       set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
 %endfunction%
 
 ::##################################################################################

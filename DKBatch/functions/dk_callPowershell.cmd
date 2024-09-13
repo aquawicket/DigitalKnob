@@ -10,9 +10,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 1 99
  setlocal
 	
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
-    %dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	
+	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%\DKPowershell\functions"
+	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%"
+	if not defined DKHTTP_DKPOWERSHELL_DIR            set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell"
+	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR  set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions"
+	if not exist %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1 %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/$~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1"
+	
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
+    
 	:: https://stackoverflow.com/a/4732316/688352
     call %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
@@ -26,11 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 		echo %%Z
 		set "rtn_value=%%Z"
 	)
-	
-::	for /f "delims=" %%Z in ('%POWERSHELL_EXE% -Command -noprofile "iex (${%~f0} | out-string)"') do (
-::        ::endlocal & set %1=%%~Z
-::    )
-	
+
 	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%
 
