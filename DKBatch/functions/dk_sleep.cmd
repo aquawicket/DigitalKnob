@@ -17,8 +17,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_powershell "Start-Sleep -m %milliseconds%" %NO_STDERR% && %return% || (call ) %NO_STD%
     
 ::  :: Method 3 - powershell directly
+::  %dk_call% dk_printVar POWERSHELL_EXE
 ::  set /a "milliseconds=%~1-300"
-::  %dk_call% powershell -Command "Start-Sleep -m %milliseconds%" %NO_STDERR% && %return% || (call ) %NO_STD%
+::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -m %milliseconds%" %NO_STDERR% && %return% || (call ) %NO_STD%
     
     :: Method 4 - using ping
     set /a "seconds=(%~1+1000)/1000"
