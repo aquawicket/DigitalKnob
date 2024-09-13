@@ -58,8 +58,9 @@ function DK() {
 	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
 	
 	###### DKTEST MODE ######
-	#if(!${ENABLE_DKTEST}){ return }
-	if("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}"){
+	if(!("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}")){ return }
+	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
+		Write-Output "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
 		Write-Output ""
@@ -72,7 +73,6 @@ function DK() {
 		Write-Output ""
 		Read-Host -Prompt "Press Enter to exit" 
 		exit
-	}
 }
 
 
@@ -143,6 +143,8 @@ function dk_DKSCRIPT_VARS(){
 	$global:DKSCRIPT_DIR = ${DKSCRIPT_DIR} -replace '\\', '/';
 	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR not found!"; exit } 
 	$global:DKSCRIPT_NAME = Split-Path -Leaf ${DKSCRIPT_PATH}
+	#$global:DKSCRIPT_EXT = Split-Path ${DKSCRIPT_PATH} -Extension
+	$global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH")
 }
 
 ##################################################################################

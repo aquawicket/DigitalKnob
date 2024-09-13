@@ -64,22 +64,21 @@ DK(){
 
 	
 	###### DKTEST MODE ######
-	if [ "${ENABLE_DKTEST-1}" = "1" ]; then
-		if [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ]; then
-			dk_call dk_echo
-			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-			#dk_call dk_echo "${bg_RGB}20;20;20m"
-			dk_source "${DKSCRIPT_PATH}"
-			#dk_call dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
-			#dk_call dk_echo "${clr}"
-			DKTEST
-			dk_call dk_echo
-			dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-			dk_call dk_echo
-			dk_call dk_pause
-			dk_call dk_exit $?
-		fi
-	fi
+	echo DKSCRIPT_EXT = ${DKSCRIPT_EXT}
+	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return
+	[ "${DKSCRIPT_EXT}" = ".sh" ] || return
+		dk_call dk_echo
+		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
+		#dk_call dk_echo "${bg_RGB}20;20;20m"
+		dk_source "${DKSCRIPT_PATH}"
+		#dk_call dk_echo "$(type DKTEST | sed '1,1d')" 			# print DKTEST() code
+		#dk_call dk_echo "${clr}"
+		DKTEST
+		dk_call dk_echo
+		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
+		dk_call dk_echo
+		dk_call dk_pause
+		dk_call dk_exit $?
 }
 
 ##################################################################################
@@ -196,6 +195,7 @@ DKSCRIPT_VARS(){
 	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname ${DKSCRIPT_PATH})
 	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
 	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename ${DKSCRIPT_PATH})
+	dk_call dk_export        DKSCRIPT_EXT				 ".${DKSCRIPT_NAME##*.}"
 }
 
 ##################################################################################

@@ -10,7 +10,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     call dk_debugFunc 1 99
  setlocal
 	
-	
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%\DKPowershell\functions"
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%"

@@ -16,6 +16,7 @@ function GLOBAL:dk_test() {
 	dk_call dk_echo "__ARGC__      = $(__ARGC__)"
 	dk_call dk_echo "__ARGV__      = $(__ARGV__)"
 	dk_call dk_echo "__CALLER__    = $(__CALLER__)"
+	#if($args[0]){ dk_call dk_echo "args[0]      = ${args[0]}" }
 	if($args[0]){ $arg0 = $args[0]; dk_call dk_echo "args[0]      = $arg0" }
 	if($args[1]){ $arg1 = $args[1]; dk_call dk_echo "args[1]      = $arg1" }
 	if($args[2]){ $arg2 = $args[2]; dk_call dk_echo "args[2]      = $arg2" }
@@ -24,6 +25,7 @@ function GLOBAL:dk_test() {
 	
 	
 	return "rtr_value"
+	$env:TEST_RTN = "TEST_RTN"
 }
 
 
