@@ -8,8 +8,9 @@ if "%~1" neq "" goto:runDKPowershell
 	::###### Install DKPowershell ######
 	%dk_call% dk_echo "Installing DKPowershell . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
-	%dk_call% dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
-
+	::%dk_call% dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
+	%dk_call% dk_validate POWERSHELL_EXE "call dk_setPOWERSHELL_EXE"
+	
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
 	
