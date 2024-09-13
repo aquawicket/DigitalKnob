@@ -8,7 +8,7 @@ if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 function Global:dk_createShortcut($shortcut_path, $target_path) {
 	dk_debugFunc 2
 
-	$shortcut_path = "${shortcut_path}.lnk"
+	#$shortcut_path = "${shortcut_path}.lnk"
 	if(dk_call dk_pathExists "${shortcut_path}"){ dk_call dk_warning "${shortcut_path} already exists"; return; }
 	
 	$WshShell = New-Object -comObject WScript.Shell
