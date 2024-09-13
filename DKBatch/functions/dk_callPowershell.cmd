@@ -21,11 +21,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:: get all but fisrt argument
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
 	
-	echo 'powershell . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1^; %~1 %ALL_BUT_FIRST_ARGS%'
 	for /f "delims=" %%Z in ('powershell . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1^; %~1 %ALL_BUT_FIRST_ARGS%') do (
 		echo %%Z
 		set "rtn_value=%%Z"
 	)
+	
+::	for /f "delims=" %%Z in ('powershell -noprofile "iex (${%~f0} | out-string)"') do (
+::        ::endlocal & set %1=%%~Z
+::    )
 	
 	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%

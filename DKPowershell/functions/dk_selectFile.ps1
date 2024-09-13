@@ -6,7 +6,7 @@ if(!$dk_selectFile){ $dk_selectFile = 1 } else{ return }
 # 
 #
 function Global:dk_selectFile(){
-	dk_debugFunc 1
+	dk_debugFunc 0
 	
 	Add-Type -AssemblyName System.Windows.Forms
 	$f = new-object Windows.Forms.OpenFileDialog
@@ -35,4 +35,6 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	dk_selectFile
+	
+	dk_pause
 }

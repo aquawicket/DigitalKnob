@@ -1,6 +1,6 @@
 @echo off
 
-if not "%*" == "" (goto:runDKPowershell)
+if "%~1" neq "" goto:runDKPowershell
 :installDKPowershell
 	::###### DKINIT ######
 	call "..\DKBatch\functions\DK.cmd" %~0
@@ -12,6 +12,7 @@ if not "%*" == "" (goto:runDKPowershell)
 
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
+	
 	ftype DKPowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
