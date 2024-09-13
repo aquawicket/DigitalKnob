@@ -23,16 +23,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	:: Method 2: direct dk_powershell
 	::%dk_call% dk_powershell "$shortcut_path = '%shortcut_path%'; $target_path = '%target_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${target_path}; $Shortcut.Save();"
 	
+	:: Method 3: direct dk_powershell (multi-line)
+	::	%dk_call% dk_powershell ^
+	::	$shortcut_path = '%shortcut_path%'; ^
+	::	$target_path = '%target_path%'; ^
+	::	$WshShell = New-Object -comObject WScript.Shell; ^
+	::	$Shortcut = $WshShell.CreateShortcut(${shortcut_path});
+	::	$Shortcut.TargetPath = ${target_path}; ^
+	::	$Shortcut.Save();
+
 	:: Method 3: call powershell function
 	%dk_call% dk_callPowershell dk_createShortcut %*
-	
-::	%dk_call% dk_powershell ^
-::	$shortcut_path = '%shortcut_path%'; ^
-::	$target_path = '%target_path%'; ^
-::	$WshShell = New-Object -comObject WScript.Shell; ^
-::	$Shortcut = $WshShell.CreateShortcut(${shortcut_path});
-::	$Shortcut.TargetPath = ${target_path}; ^
-::	$Shortcut.Save();
     
     if not exist %shortcut_path% %dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%"
 %endfunction%
