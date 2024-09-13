@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 	::(cmd /c %BASH_EXE% -c "printenv")
 	::%BASH_EXE% -c "export DKINIT= && export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% && . C:/Users/Administrator/digitalknob/Development/DKBash/functions/dk_test.sh"
 	
-	for /f "delims=" %%Z in ('%BASH_EXE% -c "export DKINIT= && export RELOAD_WITH_BASH= && export DKSCRIPT_PATH=%DKSCRIPT_PATH% && export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% && . %DKBASH_FUNCTIONS_DIR%/DK.sh && . %DKBASH_FUNCTIONS_DIR%/%~1.sh && %~1 %ALL_BUT_FIRST_ARGS%"') do (
+	for /f "delims=" %%Z in ('%BASH_EXE% -c "export DKINIT= && export RELOAD_WITH_BASH=0 && export DKSCRIPT_PATH=%DKSCRIPT_PATH% && export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% && . %DKBASH_FUNCTIONS_DIR%/DK.sh && . %DKBASH_FUNCTIONS_DIR%/%~1.sh && %~1 %ALL_BUT_FIRST_ARGS%"') do (
 		echo %%Z
 		set "rtn_value=%%Z"
 	)
