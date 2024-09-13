@@ -12,7 +12,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 ::#
 :dk_arrayLength
-	echo %~0 %*
     call dk_debugFunc 2
  setlocal
  
