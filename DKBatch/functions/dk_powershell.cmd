@@ -23,26 +23,24 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
     :: install pwsh.exe and try again
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
-    if not exist %DKIMPORTS_DIR% %dk_call% dk_notice "DKIMPORTS not found" & exit /b 1
+    if not exist "%DKIMPORTS_DIR%" %dk_call% dk_notice "DKIMPORTS not found" && exit /b 1
     call "%DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
     %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
     "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
     
     
     :notfound
-    %dk_call% dk_error "POWERSHELL_EXE command invalid"
+    %dk_call% dk_fatal "POWERSHELL_EXE invalid"
     %return%
     
     
     :found
     if "%~1"=="" goto:eof
     %dk_call% dk_printVar POWERSHELL_EXE
-
-::	echo %POWERSHELL_EXE% -Command %*"
-::pause
     "%POWERSHELL_EXE%" -Command %*
     
-    set "dk_powershell="  &::function complete, remove recursion block
+	::function complete, remove recursion block
+    set "dk_powershell="
 %endfunction%
 
 
