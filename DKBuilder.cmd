@@ -3,6 +3,7 @@
 ::set "ENABLE_dk_debugFunc=1"
 
 ::###### DK_INIT ######
+if defined TMP copy "%~0" "%TMP%" 1>nul 2>nul
 set "DKHTTP_DK_CMD=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
 set "DKBATCH_FUNCTIONS_DIR=%CD%\DKBatch\functions"
 set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
