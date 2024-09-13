@@ -11,7 +11,8 @@
 #
 dk_load() {
 	dk_debugFunc 1
-	
+	echo "dk_load($*)"
+	[ "$*" = "/usr/bin/bash" ] && return
 	#dk_call dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
 	#return
 
@@ -105,7 +106,7 @@ dk_load() {
 
 		#dk_echo "if [ -f "${funcPath}" ]"
 		if [ -f "${funcPath}" ]; then
-			#dk_echo ". ${funcPath}"
+			dk_echo ". ${funcPath}"
 			. "${funcPath}"
 			return 0
 		fi

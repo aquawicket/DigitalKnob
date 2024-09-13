@@ -102,7 +102,7 @@
 [ -z ${ERROR_PAUSE-} ]    && ERROR_PAUSE=1
 [ -z ${ERROR_TRACE-} ]    && ERROR_TRACE=0
 [ -z ${ERROR_LINE-} ]     && ERROR_LINE=0
-[ -z ${ERROR_HALT-} ]     && ERROR_HALT=1
+[ -z ${ERROR_HALT-} ]     && ERROR_HALT=0
 
 # FATAL
 [ -z ${FATAL_ENABLE-} ]   && FATAL_ENABLE=1

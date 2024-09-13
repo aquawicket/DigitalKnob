@@ -102,7 +102,7 @@ dkreloadWithBash(){
 #	 default functions and variables
 #
 dkinit(){
-	echo "Loading DKBatch DigitalKnob . . ."
+	echo "Loading DKBash DigitalKnob . . ."
 	$(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
 	dk_commandExists builtin			 && builtin="builtin"
 	#dk_commandExists dk_defined          || dk_commandExists     eval   && dk_defined(){ ${builtin} eval value='$'{${1}+x}; [ -n "${value}" ]; }  # dk_defined variable
