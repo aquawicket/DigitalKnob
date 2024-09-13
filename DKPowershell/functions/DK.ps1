@@ -56,10 +56,10 @@ function DK() {
 	#$env:PATH += ";${DKPOWERSHELL_FUNCTIONS_DIR}"
 	
 	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
-	#if(!${ENABLE_DKTEST}){ return }
 	
 	###### DKTEST MODE ######
-	if("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIRBBBBBBBBBBBBBBBBBBBB}"){
+	#if(!${ENABLE_DKTEST}){ return }
+	if("${DKSCRIPT_DIR}" -eq "${DKPOWERSHELL_FUNCTIONS_DIR}"){
 		Write-Output ""
 		Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
 		Write-Output ""

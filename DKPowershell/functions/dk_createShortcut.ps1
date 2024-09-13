@@ -1,3 +1,4 @@
+Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 
@@ -28,5 +29,5 @@ function Global:dk_createShortcut($shortcut_path, $target_path) {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob" "C:\Users\Administrator\digitalknob"
+	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
 }

@@ -34,7 +34,7 @@ function Global:dk_selectFile(){
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_selectFile
+	dk_call dk_selectFile
 	
-	dk_pause
+	dk_call dk_pause
 }
