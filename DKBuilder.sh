@@ -5,6 +5,8 @@
 ###### DKINIT ######
 export DKSCRIPT_PATH="$0"
 [ -e "${TMP-}" ] && cp -r "${DKSCRIPT_PATH}" "${TMP}"
+[ -e "${TEMP-}" ] && cp -r "${DKSCRIPT_PATH}" "${TEMP}"
+[ -e "${TMPDIR-}" ] && cp -r "${DKSCRIPT_PATH}" "${TMPDIR}"
 export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
 export DKBASH_DIR="${PWD}/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
