@@ -51,8 +51,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 
     ::############ Get DKSCRIPT variables ############
     call :dk_DKSCRIPT_VARS
-    ::if "%~1" == "%DKBATCH_FUNCTIONS_DIR%\installDKBatch.cmd" for %%Z in (%*) do set "DKSCRIPT_PATH=%%~dpnxZ"      &:: get last argument for DKSCRIPT_PATH
-    ::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
