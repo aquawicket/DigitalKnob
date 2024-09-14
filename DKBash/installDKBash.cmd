@@ -3,7 +3,8 @@
 if "%~1" neq "" (goto:runDKBash)
 :installDKBash	
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd" %~0
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKBash . . ."
@@ -27,7 +28,6 @@ if "%~1" neq "" (goto:runDKBash)
 	set "GITBASH_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
 	
-	
 	::###### run script ######
 	%GITBASH_EXE% %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE)
 	
@@ -40,5 +40,4 @@ if "%~1" neq "" (goto:runDKBash)
 	del %~dp0\reload
 	cls
 	goto:runDKBash
-	
 %endfunction%

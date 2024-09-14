@@ -1,6 +1,5 @@
 @echo off
 
-::echo DKApp.cmd %~0 %*
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
@@ -18,7 +17,7 @@ for %%x in (%*) do (
 set "ESC="
 set "SPACE= "
 
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 

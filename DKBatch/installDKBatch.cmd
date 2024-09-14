@@ -1,14 +1,11 @@
 @echo off
-::echo installDKBatch.cmd %~0 %*
-::echo 0 = %~0
-::echo 1 = %~1
-::echo * = %*
 
 if "%~1" equ "%~0" goto:installDKBatch
-if "%~1" neq "" goto:runDKBatch
+if "%~1" neq ""    goto:runDKBatch
 :installDKBatch
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd" %~0
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
@@ -18,12 +15,12 @@ if "%~1" neq "" goto:runDKBatch
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
+	:: Set the registry entry for the exxtension
 	ftype DKBatch="%ComSpec%" /c if exist "%~f0" ^
-	(echo installed ^& "%ComSpec%" /k call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*) else ^
+	(echo installed ^& "%ComSpec%" /k call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%DKTEMP_DIR%" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
 	
 	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKBatch\DefaultIcon" "" "REG_SZ" "%ComSpec%"
-	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cmd"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
@@ -33,15 +30,16 @@ if "%~1" neq "" goto:runDKBatch
 
 
 :runDKBatch
-	set "DKBATCH_FUNCTIONS_DIR=%~1"
-	set "DKBATCH_FUNCTIONS_DIR_=%~1\"
-	set "ComSpec=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	set "DKTEMP_DIR=%TMP%"
-	
+	if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%~1"
+	if not exist "%DKBATCH_FUNCTIONS_DIR_%"  set "DKBATCH_FUNCTIONS_DIR_=%~1\"
+	if not exist "%ComSpec%"                 set "ComSpec=%~2"
+	if not exist "%DKTEMP_DIR%"              set "DKTEMP_DIR=%~3"
+	if not exist "%DKSCRIPT_PATH%"           set "DKSCRIPT_PATH=%~4"
+	::if not defined DKSCRIPT_ARGS           for /f "tokens=4,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion
+	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%"
 	
 	::###### exit_code ######

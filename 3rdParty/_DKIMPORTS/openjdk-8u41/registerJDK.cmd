@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 set "Folder=openjdk-8u41-b04-windows-i586-14_jan_2020"
 set "CurrentVersion=1.8.0_41"

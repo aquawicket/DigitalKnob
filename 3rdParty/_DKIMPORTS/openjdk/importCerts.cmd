@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html

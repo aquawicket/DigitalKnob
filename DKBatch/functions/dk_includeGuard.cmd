@@ -2,8 +2,7 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::if defined include_guard_dk_includeGuard (goto:eof) else set include_guard_dk_includeGuard=1
-::if not defined DKINIT (if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %* & call :TEST_dk_includeGuard)
-::if not defined DKINIT (if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*)
+::if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %* & call :TEST_dk_includeGuard
 
 ::##################################################################################
 ::# dk_includeGuard()
