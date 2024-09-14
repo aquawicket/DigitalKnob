@@ -4,7 +4,10 @@
 
 ::###### DK_INIT ######
 set "DKSCRIPT_PATH=%~f0"
-if defined TMP copy "%DKSCRIPT_PATH%" "%TMP%" 1>nul 2>nul
+if defined TMP set "DKTEMP_DIR=%TMP%"
+if defined TEMP set "DKTEMP_DIR=%TEMP%"
+if defined TMPDIR set "DKTEMP_DIR=%TMPDIR%"
+if defined DKTEMP_DIR copy "%DKSCRIPT_PATH%" "%DKTEMP_DIR%" 1>nul 2>nul
 set "DKHTTP_DK_CMD=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
 set "DKBATCH_FUNCTIONS_DIR=%CD%\DKBatch\functions"
 set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
