@@ -1,21 +1,24 @@
-@echo off
+::@echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::#####################################################################
 ::# dk_pickApp(rtn_var)
 ::#
 ::#
-:dk_pickApp
- %setlocal%
-    call dk_debugFunc 1
-    
+:dk_pickApp APP
+    call dk_debugFunc 0 1
+ ::setlocal 
     
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
-
+	::%dk_call% dk_printVar _APP_
+	::%dk_call% dk_printVar _TARGET_OS_
+	::%dk_call% dk_printVar _TYPE_
+	
     :: get a list of the directories in DKApps
-    %dk_call% dk_getDirectories %DKAPPS_DIR% options    
+    %dk_call% dk_getDirectories %DKAPPS_DIR% options
+	::%dk_call% dk_printVar options
     
     :: rename the list elements to the folder basename and add a matching command
     set /a "n=0"
@@ -27,7 +30,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
         set /a n+=1
         goto:loop1 
     :endloop1
-    
+    ::%dk_call% dk_printVar commands
+	
     :: prepend cache selection if available
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" (
         %dk_call% dk_arrayUnshift options "re-run [%_APP_% - %_TARGET_OS_% - %_TYPE_%]"
@@ -55,6 +59,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     %dk_call% dk_arrayPush options "Exit"
     %dk_call% dk_arrayPush commands "%dk_call% dk_exit"
 
+	::%dk_call% dk_printVar options
+	::%dk_call% dk_printVar commands
+	
     :: Print the options list
     set /a "n=0"
     :loop2
@@ -76,16 +83,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
     if not defined commands[%choice%] (
         %dk_call% dk_echo "%choice%: invalid selection, please try again"
         %dk_call% dk_unset APP
-        goto:eof
+        %return%
     )
     
     if "!DE!" neq "" %dk_call% dk_error "delayed expansion is required"
     
     endlocal & !commands[%choice%]!
-    endlocal & set "%1=%APP%"
+    if "%~1" neq "" endlocal & set "%1=%APP%"
     %dk_call% dk_deleteArray options
     %dk_call% dk_deleteArray commands
-    goto:eof
+    %return%
     
     
 ::    %dk_call% dk_echo
@@ -128,8 +135,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
+:: setlocal
     call dk_debugFunc 0
 
-    %dk_call% dk_pickApp
+    %dk_call% dk_pickApp APP
+	%dk_call% dk_echo "APP = %APP%"
 %endfunction%

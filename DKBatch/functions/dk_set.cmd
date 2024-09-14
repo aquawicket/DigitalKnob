@@ -7,10 +7,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
 ::#
 :dk_set
     call dk_debugFunc 1 2
- setlocal
+:: setlocal
  
     set "%~1=%~2"
-    %dk_call% dk_printVar "%~1"
+	
+::debug
+    %dk_call% dk_printVar %1
 %endfunction%
 
 
