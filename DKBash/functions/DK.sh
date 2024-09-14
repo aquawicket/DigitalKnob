@@ -12,40 +12,31 @@ DK(){
 	###### Initialize Language specifics ######
 	dkinit
 	
-	
 	###### Reload Main Script with bash ######
 	dkreloadWithBash ${*}
-
 
 	############ Get DKBASH variables ############
 	DKBASH_VARS
 	
-
 	############ Get DKHTTP variables ############
 	DKHTTP_VARS
 
-
 	############ get dk_source and dk_call ######
 	dk_initFiles
-	
 	
 	############ Setup dk_callStack ############
 	#dksetupCallstack
 	#dk_callStack
 	#:dk_callStackReturn
 
-
 	############ Get DKSCRIPT variables ############
 	DKSCRIPT_VARS
-
 
 	##### CD into the DKSCRIPT_DIR directory #####
 	#cd "${DKSCRIPT_DIR}"
 
-
 	############ Set Options ############
 	dksetOptions
-
 
 	############ LOAD FUNCTION FILES ############
 	dk_source dk_return
@@ -64,7 +55,6 @@ DK(){
 	dk_call dk_logo
 	dk_call dk_load "${DKSCRIPT_PATH}"
 
-	
 	###### DKTEST MODE ######
 	echo DKSCRIPT_EXT = ${DKSCRIPT_EXT}
 	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return
@@ -114,7 +104,8 @@ dkinit(){
 	#dk_commandExists dk_info             || dk_info()            { dk_echo "${clr}   INFO: ${1}${clr}"; }                                         # dk_info "test dk_info";
 	#dk_commandExists dk_debug            || dk_debug()           { dk_echo "${blue}  DEBUG: ${1}${clr}"; }                                        # dk_debug "test dk_debug";
 	#dk_commandExists dk_verbose          || dk_verbose()         { dk_echo "${cyan}VERBOSE: ${1}${clr}"; }                                        # dk_verbose "test dk_verbose";
-	#dk_commandExists dk_error            || dk_error()           { dk_echo "${red}  ERROR: ${1}${clr}"; dk_pause; exit; }                         # dk_error "test dk_error";
+	#dk_commandExists dk_error            || dk_error()           { dk_echo "${red}  ERROR: ${1}${clr}"; dk_pause; }                         # dk_error "test dk_error";
+	#dk_commandExists dk_fatal            || dk_fatal()           { dk_echo "${red}  FATAL: ${1}${clr}"; dk_pause; exit; }                         # dk_fatal "test dk_fatal";
 	#dk_commandExists dk_printVar         || dk_printVar()        { dk_echo "${cyan}${1} = ${blue}${!1-}${clr}"; }                                # dk_printVar variable
     #dk_commandExists dk_pathExists       || dk_pathExists()      { [ -e "${1}" ]; }                                                               # dk_pathExists "/usr/bin"
     #dk_commandExists dk_stringContains   || dk_stringContains()  { [ "${1#*"$2"}" != "${1}" ]; }                                                  # dk_stringContains string search
@@ -192,10 +183,10 @@ dksetupCallstack(){
 DKSCRIPT_VARS(){	
 	dk_call dk_pathExists    $(dk_call dk_realpath ${0}) && dk_call dk_export  DKSCRIPT_PATH  $(dk_call dk_realpath ${0})
 	dk_call dk_commandExists "cygpath"                   && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
-	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
+	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_call dk_export        DKSCRIPT_ARGS               $(${*})
 	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname ${DKSCRIPT_PATH})
-	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_error "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
+	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
 	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename ${DKSCRIPT_PATH})
 	dk_call dk_export        DKSCRIPT_EXT				 ".${DKSCRIPT_NAME##*.}"
 }
@@ -248,7 +239,7 @@ dk_install(){
 	dk_commandExists pacman    && pacman -S "${1}" --noconfirm
 	dk_commandExists pkg	   && pkg install "${1}"
 	dk_commandExists tce-load  && tce-load -wil "${1}"	            # TinyCoreLinux package installer: -l flag means don't add to boot
-	dk_commandExists ${1}      || dk_error "${1}: command not found"
+	dk_commandExists ${1}      || dk_fatal "${1}: command not found"
 }
 
 ##################################################################################
