@@ -1,9 +1,14 @@
 @echo off
+::echo installDKBatch.cmd %~0 %*
+::echo 0 = %~0
+::echo 1 = %~1
+::echo * = %*
 
+if "%~1" equ "%~0" goto:installDKBatch
 if "%~1" neq "" goto:runDKBatch
 :installDKBatch
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd" "%~0" %*
+	call "..\DKBatch\functions\DK.cmd" %~0
 
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
@@ -41,9 +46,6 @@ if "%~1" neq "" goto:runDKBatch
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% gtr 0 echo exit_code:%ERRORLEVEL% & pause
-	::echo AFTER_runDKBatch
-	::echo exit_code:%ERRORLEVEL%
-	::pause
 	
 	::###### reload ######
 	if not exist "%DKTEMP_DIR%\reload" goto:eof

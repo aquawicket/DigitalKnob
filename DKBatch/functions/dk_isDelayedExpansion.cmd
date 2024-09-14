@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
