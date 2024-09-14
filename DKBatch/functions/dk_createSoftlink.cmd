@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*
 
 ::####################################################################
 ::# dk_createSoftlink(softlink_path, pointed_to_path)

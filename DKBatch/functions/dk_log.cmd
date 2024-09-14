@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %0
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*
 
 if not defined ENABLE_dk_log   set "ENABLE_dk_log=1"
 
