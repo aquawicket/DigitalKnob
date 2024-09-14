@@ -3,8 +3,8 @@
 if "%~1" neq "" goto:runDKBatch
 :installDKBatch
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd" %~0
-	
+	call "..\DKBatch\functions\DK.cmd" "%~0" %*
+
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
@@ -13,7 +13,6 @@ if "%~1" neq "" goto:runDKBatch
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBatch"
 	
-	::ftype DKBatch="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*
 	ftype DKBatch="%ComSpec%" /c if exist "%~f0" ^
 	(echo installed ^& "%ComSpec%" /k call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%%1" %%*) else ^
 	(echo not installed ^& "%%1" %%*)
@@ -41,6 +40,7 @@ if "%~1" neq "" goto:runDKBatch
 	"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%"
 	
 	::###### exit_code ######
+	if %ERRORLEVEL% gtr 0 echo exit_code:%ERRORLEVEL% & pause
 	::echo AFTER_runDKBatch
 	::echo exit_code:%ERRORLEVEL%
 	::pause
