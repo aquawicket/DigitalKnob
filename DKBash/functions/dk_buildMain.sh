@@ -27,9 +27,7 @@ dk_buildMain() {
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_call dk_getHostTriple
-	
 	dk_call dk_getDKPaths
-
 	dk_call dk_installGit
 	dk_call dk_validateBranch
 
