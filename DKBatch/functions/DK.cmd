@@ -121,8 +121,8 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
         set "RELOADED=1"
         set "DKINIT="
 
-        echo "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+        ::"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+        "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%"
 
         ::####################################
         ::############ EXIT POINT ############
