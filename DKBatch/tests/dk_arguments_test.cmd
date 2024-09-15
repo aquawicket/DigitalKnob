@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 dk_test
- setlocal
     call dk_debugFunc 1 99
-    
+ ::setlocal
+  
     echo dk_test_string
     goto:eof
     
