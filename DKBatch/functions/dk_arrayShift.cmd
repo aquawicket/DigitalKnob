@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::endlocal & set "%_arry_%[%prev%]="
 	
 :: debug
-	if defined _arry_ %dk_call% dk_printVar %_arry_%
+::	if defined _arry_ %dk_call% dk_printVar %_arry_%
 %endfunction%
 
 

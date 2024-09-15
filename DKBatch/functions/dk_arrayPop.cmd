@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]
 
 ::debug
-	%dk_call% dk_printVar %2
-	%dk_call% dk_printVar %1
+::	%dk_call% dk_printVar %2
+::	%dk_call% dk_printVar %1
 %endfunction%
 
 

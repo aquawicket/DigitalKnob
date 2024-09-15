@@ -51,7 +51,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 :end_arrayIndexOf
 ::debug
-	%dk_call% dk_printVar %3
+::	%dk_call% dk_printVar %3
 %endfunction%
 
 
