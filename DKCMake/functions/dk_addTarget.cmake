@@ -22,6 +22,9 @@ function(dk_addTarget plugin target)
 		dk_set(${plugin}_${target} ON)
 		#dk_set(${plugin}::${target} ON) # TESTME
 	endif()
+	
+# DEBUG
+#	TODO
 endfunction()
 
 
@@ -31,5 +34,5 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
-	dk_addTarget(plugin target)
+	#dk_addTarget(plugin target)
 endfunction()

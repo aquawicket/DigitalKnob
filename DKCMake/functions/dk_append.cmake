@@ -19,9 +19,11 @@ function(dk_append variable) #value
 	else()
 		dk_set(${variable} ${ARGN})
 	endif()
-	
+
+# DEBUG
+#	dk_printVar(variable)
 endfunction()
-#dk_createOsMacros("dk_append")
+dk_createOsMacros("dk_append")
 
 
 

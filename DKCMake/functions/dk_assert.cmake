@@ -9,11 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 function(dk_assert expression)
-	dk_debugFunc("\${ARGV}")
-	if(NOT ${ARGC} EQUAL 1)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
-	
+	dk_debugFunc("\${ARGV}")	
 	
 	if(NOT ${expression})
 		dk_echo("\n\n${bg_red}Assertion failed: at ${expression}${clr}")
@@ -44,8 +40,9 @@ function(dk_assert expression)
 		
 		dk_exit(1)
 	endif()
-	
-	dk_printVar(${expression})
+
+# DEBUG	
+#	dk_printVar(${expression})
 endfunction()
 
 

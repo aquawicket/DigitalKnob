@@ -36,10 +36,10 @@ dk_download = function(url, destination){
 		filestream.Close();
 	}
 }
-if (!filesystem.FolderExists(DKJAVASCRIPT_DIR)){ filesystem.CreateFolder(DKJAVASCRIPT_DIR); }
-if (!filesystem.FolderExists(DKJAVASCRIPT_FUNCTIONS_DIR)){ filesystem.CreateFolder(DKJAVASCRIPT_FUNCTIONS_DIR); }
-if (!filesystem.FileExists(DK_JS)){ dk_download(DKHTTP_DK_JS, DK_JS); }
-if (!filesystem.FileExists(DK_JS)){ console.log("ERROR: failed to download DK.js \n"); }
+if(!filesystem.FolderExists(DKJAVASCRIPT_DIR)){ filesystem.CreateFolder(DKJAVASCRIPT_DIR); }
+if(!filesystem.FolderExists(DKJAVASCRIPT_FUNCTIONS_DIR)){ filesystem.CreateFolder(DKJAVASCRIPT_FUNCTIONS_DIR); }
+if(!filesystem.FileExists(DK_JS)){ dk_download(DKHTTP_DK_JS, DK_JS); }
+if(!filesystem.FileExists(DK_JS)){ console.log("ERROR: failed to download DK.js \n"); }
 
 // ############ DKINIT ############
 

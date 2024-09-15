@@ -24,19 +24,26 @@ if(GIFLIB_USE_CMAKE)
 
 	### LINK ###
 	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB}/${triple}									GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
+	dk_include			(${GIFLIB}/${triple}								GIF_INCLUDE_DIR2)
+	if(WIN AND MSVC)
+		dk_libDebug		(${GIFLIB}/${triple}/${DEBUG_DIR}/giflibd.lib		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB}/${triple}/${RELEASE_DIR}/giflib.lib		GIF_LIBRARY_RELEASE)
+	else()
+		dk_libDebug		(${GIFLIB}/${triple}/${DEBUG_DIR}/libgiflib.a		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB}/${triple}/${RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
+	endif()
 	
 	### 3RDPARTY LINK ###
-	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
-	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	dk_append			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2})
+	DEBUG_dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	RELEASE_dk_append	(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 
 	dk_configure		(${GIFLIB})
 	dk_build			(${GIFLIB} giflib)	
+	
 else()
 	### LINK ###
-	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB}/lib											GIF_INCLUDE_DIR)
 	dk_include			(${GIFLIB}/${triple}									GIF_INCLUDE_DIR2)
 	dk_libDebug			(${GIFLIB}/${triple}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
 	dk_libRelease		(${GIFLIB}/${triple}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)

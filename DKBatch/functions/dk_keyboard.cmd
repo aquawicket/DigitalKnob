@@ -1,4 +1,10 @@
 @echo off
+::echo dk_keyboard.cmd()
+::echo 0 = %~0
+::echo 1 = %~1
+::echo 2 = %~2
+::echo 3 - %~3
+
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 if "%~1" equ "dk_keyboard.BeginReceiving" goto %1
 if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
@@ -9,14 +15,14 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
 ::#
 :dk_keyboard
  setlocal
-    ::echo dk_keyboard %*
+    echo dk_keyboard %*
     
     if "%~1" == "callback" set callback=%~2 %~3
     ::if defined callback echo callback = %callback%
     call dk_debugFunc 0 3 || call dk_error "call dk_debugFunc failed!"
     
     rem Start Keyboard_Loop in a parallel process
-    start "" /B %ComSpec% /C "call dk_keyboard dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
+    start "" /B %ComSpec% /C "call dk_keyboard :dk_keyboard.Keyboard_Loop" || echo Keyboard_Loop returned error
 %endfunction%
 
 :dk_keyboard.Keyboard_Loop
@@ -30,7 +36,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
           $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode; ^
           Write-Host $key ^
        } ^
-    %End PowerShell% | call "%~f0" dk_keyboard.BeginReceiving %2 || echo BeginReceiving retrned error
+    %End PowerShell% | call "%~f0" :dk_keyboard.BeginReceiving %2 || echo BeginReceiving retrned error
 %endfunction%
 
 :dk_keyboard.BeginReceiving

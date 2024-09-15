@@ -15,6 +15,9 @@ function(dk_add_to_plugin_list plugin_name)
 	endif()
 	dk_include(${plugin_path})
 	dk_append(DKPLUGIN_LIST "${plugin_name}")
+	
+# DEBUG
+#	dk_printVar(DKPLUGIN_LIST)
 endfunction()
 
 
@@ -25,5 +28,4 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
-
 endfunction()
