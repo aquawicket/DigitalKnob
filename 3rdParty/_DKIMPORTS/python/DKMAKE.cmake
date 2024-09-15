@@ -120,6 +120,8 @@ if(WIN_HOST)
 		return()
 	endif()
 	#dk_printVar(PIP_EXE)
+	
+	dk_executeProcess(${PYTHON_EXE} -m pip install --upgrade pip)
 endif()
 
 

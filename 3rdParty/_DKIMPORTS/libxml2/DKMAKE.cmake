@@ -13,7 +13,7 @@ if(NOT EXISTS ${LIBXML2}/configure)
 	dk_depend(libtool)
 endif()
 dk_depend(libiconv)
-dk_depend(python)
+dk_depend(python3)
 dk_depend(xz)
 dk_depend(zlib)
 

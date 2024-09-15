@@ -38,7 +38,8 @@ function(dk_bashEnv)
 	endif()
 	
 	### BASH_COMMANDS ###
-	list(APPEND BASH_COMMANDS "cd ${PWD}")
+	#list(APPEND BASH_COMMANDS "cd ${PWD}")
+	list(APPEND BASH_COMMANDS "cd ${CURRENT_PLUGIN_DIR}/${BUILD_DIR}")
 	if(ANDROID)
 		dk_assert(ANDROID_BASH_EXPORTS)
 		list(APPEND BASH_COMMANDS ${ANDROID_BASH_EXPORTS})
@@ -79,7 +80,7 @@ function(dk_bashEnv)
 	endif()
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
-	dk_replaceAll("${BASH_COMMANDS}"  ";"  " & "  BASH_COMMANDS)
+	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
 	#dk_replaceAll("${BASH_COMMANDS}"  ";"  "\n"  BASH_COMMANDS)
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
