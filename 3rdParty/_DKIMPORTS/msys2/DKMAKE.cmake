@@ -11,9 +11,6 @@ endif()
 
 
 
-
-
-
 ### Set CMAKE_GENERATOR ###
 dk_validate(CMD_EXE "dk_depend(cmd)")
 if(CMD_EXE OR MINGW)
@@ -53,11 +50,6 @@ endif()
 
 
 
-
-
-
-
-
 dk_validate(triple  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2}/usr/bin")	
@@ -77,7 +69,6 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
 		dk_exportVars(PATH "$ENV{PATH}")
 
-		
 		if(win_x86_clang)					
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif(win_x86_64_clang)	
@@ -92,28 +83,28 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		endif()
 	else()
-		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
+		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2}/usr/bin:$PATH")
 	endif()
 	
 	### Create Bash Exports ###
 	dk_validate(CYGPATH_EXE  "dk_depend(cygpath)")
-	dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
+	dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
 	
-	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
-	dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
-	dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_CYGPATH}/clangarm64/bin:$PATH")
-	dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw32/bin:$PATH")
-	dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/mingw64/bin:$PATH")
-	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
-	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
+	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
+	dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
+	dk_set(CLANGARM64_BASH_EXPORTS	"export PATH=${MSYS2_UNIXPATH}/clangarm64/bin:$PATH")
+	dk_set(MINGW32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/mingw32/bin:$PATH")
+	dk_set(MINGW64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/mingw64/bin:$PATH")
+	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
+	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
 	
-	dk_set(CLANG32_EXE "${MSYS2}/clang32.exe")
-	dk_set(CLANG64_EXE "${MSYS2}/clang64.exe")
-	dk_set(CLANGARM64_EXE "${MSYS2}/clangarm64.exe")
-	dk_set(MINGW32_EXE "${MSYS2}/mingw32.exe")
-	dk_set(MINGW64_EXE "${MSYS2}/mingw64.exe")
-	dk_set(UCRT64_EXE "${MSYS2}/ucrt64.exe")
-	dk_set(MSYS2_EXE "${MSYS2}/msys2.exe")
+	dk_set(CLANG32_EXE 		"${MSYS2}/clang32.exe")
+	dk_set(CLANG64_EXE 		"${MSYS2}/clang64.exe")
+	dk_set(CLANGARM64_EXE 	"${MSYS2}/clangarm64.exe")
+	dk_set(MINGW32_EXE 		"${MSYS2}/mingw32.exe")
+	dk_set(MINGW64_EXE 		"${MSYS2}/mingw64.exe")
+	dk_set(UCRT64_EXE 		"${MSYS2}/ucrt64.exe")
+	dk_set(MSYS2_EXE 		"${MSYS2}/msys2.exe")
 endif()
 
 

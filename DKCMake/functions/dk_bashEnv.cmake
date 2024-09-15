@@ -27,7 +27,6 @@ function(dk_bashEnv)
 	### BASH_EXE ###
 	if(NOT EXISTS ${BASH_EXE})
 		if(WIN_HOST)
-			
 			if(NOT EXISTS ${MSYS2}/msys2.exe)
 				dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
 			endif()
@@ -38,7 +37,6 @@ function(dk_bashEnv)
 	endif()
 	
 	### BASH_COMMANDS ###
-	#list(APPEND BASH_COMMANDS "cd ${PWD}")
 	list(APPEND BASH_COMMANDS "cd ${CURRENT_PLUGIN_DIR}/${BUILD_DIR}")
 	if(ANDROID)
 		dk_assert(ANDROID_BASH_EXPORTS)
@@ -81,9 +79,7 @@ function(dk_bashEnv)
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
-	#dk_replaceAll("${BASH_COMMANDS}"  ";"  "\n"  BASH_COMMANDS)
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
-
 
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)
@@ -102,5 +98,5 @@ dk_createOsMacros("dk_bashEnv")
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_bashEnv(printenv)
 endfunction()

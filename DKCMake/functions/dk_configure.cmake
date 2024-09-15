@@ -49,12 +49,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 		
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_notice("configure type not detected. just run arguments")
-#		if(SINGLE_CONFIG)
-#			# Make sure the plugin variable is alpha-numeric and uppercase
-#			dk_assert(SINGLE_CONFIG_BUILD_DIR)
-#			dk_cd(${SOURCE_DIR}/${SINGLE_CONFIG_BUILD_DIR})
-#		endif()
+		dk_notice("configure type not detected. running argument in bash environment")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			#dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
