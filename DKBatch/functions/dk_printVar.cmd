@@ -7,8 +7,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 
 :dk_printVar
- setlocal
     call dk_debugFunc 1
+ setlocal
 
     if not defined ENABLE_dk_printVar set "ENABLE_dk_printVar=1"
     if "%ENABLE_dk_printVar%" neq "1" goto:eof
@@ -64,9 +64,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc
-
+ setlocal
+ 
     set "myVarA=This is a variable"
     %dk_call% dk_printVar myVarA
 

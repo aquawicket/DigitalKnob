@@ -9,7 +9,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 2
  setlocal
  
-    setlocal
     set "s=#!%~1!"
     set "len=0"
     for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (

@@ -8,9 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://www.robvanderwoude.com/escapechars.php
 ::#
 :dk_encodeEscapes
-:: setlocal
     call dk_debugFunc 1 2
-    
+:: setlocal
+   
     set org=%*
     if defined %* call set "org=%%%org%%%"  &:: FIXME: remove the need for call here
     setlocal enableDelayedExpansion

@@ -11,7 +11,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 4 5
  setlocal
  
-    setlocal
     set "spaces=                                        "
     set "col1=%~2%spaces%"
     set col1=%col1:~0,10%

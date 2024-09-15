@@ -16,7 +16,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
         %dk_call% dk_verbose "%CMAKE_EXE% --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose"
 		
-		rem setlocal
 		rem call dk_refreshEnv
 		"%CMAKE_EXE%" --build %TARGET_PATH%/%TARGET_OS%/Debug --config Debug --verbose && echo "CMake Build Successful" || echo "CMake Build Failed"
         rem endlocal

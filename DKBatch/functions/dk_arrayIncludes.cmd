@@ -25,11 +25,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_arrayIncludes
     call dk_debugFunc 2 3
- setlocal
+ setlocal enableDelayedExpansion
  
-    ::dk_validateArgs array string
-
-    setlocal enableDelayedExpansion
     set "_arry_=%~1"
     set /a count=0
     :dk_arrayIncludes_loop
