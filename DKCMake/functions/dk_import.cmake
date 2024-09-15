@@ -34,12 +34,11 @@ function(dk_import url)
 	dk_printVar(${plugin_var}_TAG)
 
 	if(NOT DKOFFLINE)
-		### .git
+		###### Import Git Repository ######
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
 			dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
-			dk_assert(GIT_EXE)
 			
 			if(NOT EXISTS ${${plugin_var}}/.git)
 				dk_cd(${DK3RDPARTY_DIR})
@@ -59,7 +58,8 @@ function(dk_import url)
 			if(${plugin_var}_TAG)
 				dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
 			endif()
-		### download
+			
+		###### Import Download File ######
 		else()
 			dk_verbose("dk_install(${plugin} ${ARGN})")
 			dk_install(${plugin} ${ARGN})
