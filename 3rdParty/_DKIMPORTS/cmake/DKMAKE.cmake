@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-dk_validate(host_triple "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
@@ -27,13 +27,12 @@ dk_convertToCIdentifier(${CMAKE_FOLDER} CMAKE_FOLDER)
 
 
 
-dk_validate(triple "dk_getTargetTriple()")
+dk_validate(TRIPLE "dk_getTargetTriple()")
 
 ### IMPORT ###
 if(ANDROID_HOST)
 	dk_command(pkg install cmake -y)
 	dk_findProgram(CMAKE_EXE cmake)
-#elseif(MSYSTEM)
 elseif(WIN_HOST)
 	if(CLANG OR MINGW OR UCRT)
 		dk_depend(msys2)
@@ -65,7 +64,8 @@ elseif(WIN_HOST)
 		endif()
 	else()
 		dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
-		dk_findProgram(CMAKE_EXE cmake ${DKTOOLS_DIR})
+		dk_set(CMAKE_DIR "${DKTOOLS_DIR}/${CMAKE_FOLDER}")
+		dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR})
 	endif()
 else()
 	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
