@@ -6,6 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 macro(__FILE__ file_rtn_var)
+	#dk_debugFunc(${ARGV})
+	
 	if(NOT DEFINED CMAKE_SOURCE)
 		set(${rtn_var} "CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}")
 	else()
@@ -22,13 +24,17 @@ macro(__FILE__ file_rtn_var)
 		endif()
 		list(GET CMAKE_SOURCE ${index} ${file_rtn_var})
 	endif()
+	
+# debug
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	#dk_debugFunc
+	#dk_debugFunc(${ARGV})
+	
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
 	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
 	__FILE__(_file_)
