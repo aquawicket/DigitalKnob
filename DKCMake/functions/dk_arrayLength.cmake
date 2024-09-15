@@ -2,9 +2,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ################################################################################
-# dk_arrayLength(array, rtn_var)
+# dk_arrayLength(array)
+# dk_arrayLength(array rtn_var)
 #
-#    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
+#    The length data property of an Array instance represents the number of elements in that array. 
+#    The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array.
+#
+#    REFERENCE
+#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 #
 function(dk_arrayLength array rtn_var)
 	dk_debugFunc("\${ARGV}")
@@ -21,13 +26,16 @@ function(dk_arrayLength array rtn_var)
 	
 	list(LENGTH "${_array_}" arrayLength)
 	set(${rtn_var} ${arrayLength} PARENT_SCOPE)
+	
+# DEBUG	
 	#dk_printVar(rtn_var)
 endfunction()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST) 
 	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "element 1")

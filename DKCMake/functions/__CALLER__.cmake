@@ -17,7 +17,7 @@ macro(__CALLER__ rtn_var)
 	
 	set(${rtn_var} "${CMAKE_CURRENT_FUNCTION}")
 	
-# debug
+# DEBUG
 #	dk_printVar(rtn_var)
 endmacro()
 

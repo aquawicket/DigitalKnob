@@ -10,6 +10,9 @@ function(dk_appendCmake str)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "${str}")
+	
+# DEBUG
+#	TODO
 endfunction()
 
 
@@ -23,5 +26,4 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
-
 endfunction()

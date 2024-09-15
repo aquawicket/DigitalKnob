@@ -2,9 +2,19 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ################################################################################
+# dk_arrayAt(array, index)
 # dk_arrayAt(array, index, rtn_var)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_at
+#	 Takes an array instance with an integer value and returns the item at that index, 
+#	 allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
+#
+#    PARAMETERS
+#    index
+#    Zero-based index of the array element to be returned, converted to an integer. Negative index counts back from the end of the array — if index < 0, index + array.length is accessed.
+#
+#    RETURN VALUE
+#    The element in the array matching the given index. Always returns undefined if index < -array.length or index >= array.length without attempting to access the corresponding property.
+#
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 function(dk_arrayAt array index rtn_var)
@@ -12,7 +22,9 @@ function(dk_arrayAt array index rtn_var)
 	
 	list(GET ${array} ${index} arrayAt)
 	set(${rtn_var} ${arrayAt} PARENT_SCOPE)
-	#dk_printVar(rtn_var)
+
+# DEBUG
+#	dk_printVar(rtn_var)
 endfunction()
 
 

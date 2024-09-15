@@ -23,7 +23,7 @@ macro(__FUNCTION__ rtn_var)
 		list(GET FUNCNAME ${index} ${rtn_var})
 	endif()
 	
-# debug
+# DEBUG	
 #	dk_printVar(rtn_var)
 endmacro()
 

@@ -16,7 +16,7 @@ macro(__ARGC__ rtn_var)
 
 	set(${rtn_var} ${ARGC})
 
-#debug
+# DEBUG
 #	dk_printVar(rtn_var)
 endmacro()
 

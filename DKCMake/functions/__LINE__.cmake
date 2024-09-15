@@ -25,7 +25,7 @@ macro(__LINE__ rtn_var)
 		list(GET CMAKE_LINENO ${index} ${rtn_var})
 	endif()
 	
-# debug
+# DEBUG
 #	dk_printVar(rtn_var)
 endmacro()
 

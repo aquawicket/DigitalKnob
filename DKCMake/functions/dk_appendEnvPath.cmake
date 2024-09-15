@@ -40,7 +40,9 @@ function(dk_appendEnvPath inputPath)
 		endif()
 		dk_info("appended \${nativePath} to the PATH environment list\n")
 	endif()
-	#dk_printVar(ENV{PATH})
+	
+# DEBUG
+#	dk_printVar(ENV{PATH})
 endfunction()
 
 
@@ -52,5 +54,4 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
-
 endfunction()

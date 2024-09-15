@@ -39,7 +39,7 @@ macro(__FRAME__ rtn_var)
 		set(${rtn_var} "${_file_}:${_line_}    ${_function_}()")
 	endif()
 	
-# debug
+# DEBUG
 #	dk_printVar(rtn_var)
 endmacro()
 
