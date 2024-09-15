@@ -517,17 +517,19 @@ endif()
 
 
 ### GENERATE ###
-ANDROID_dk_configure				(${OPENCV})
-EMSCRIPTEN_dk_configure				(${OPENCV})
-IOSSIM_dk_configure					(${OPENCV})
-IOS_dk_configure					(${OPENCV})
-LINUX_dk_configure					(${OPENCV})
-MAC_dk_configure					(${OPENCV}"-DCMAKE_CXX_FLAGS=-stdlib=libc++")
-RASPBERRY_dk_configure				(${OPENCV} -DWITH_IPP=ON)
-string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
-WIN_X86_dk_queueCommand				(${OPENCV_BUILD} ${OPENCV})
-WIN_X86_64_dk_queueCommand			(${OPENCV_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
+if(WIN)
+	string(REPLACE "/std:c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+	string(REPLACE "  " " " 		DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+endif()
+ANDROID_dk_configure		(${OPENCV})
+EMSCRIPTEN_dk_configure		(${OPENCV})
+IOSSIM_dk_configure			(${OPENCV})
+IOS_dk_configure			(${OPENCV})
+LINUX_dk_configure			(${OPENCV})
+MAC_dk_configure			(${OPENCV} "-DCMAKE_CXX_FLAGS=-stdlib=libc++")
+RASPBERRY_dk_configure		(${OPENCV} -DWITH_IPP=ON)
+WIN_X86_dk_configure		(${OPENCV})
+WIN_X86_64_dk_configure		(${OPENCV} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="")
 
 
 ### COMPILE ###

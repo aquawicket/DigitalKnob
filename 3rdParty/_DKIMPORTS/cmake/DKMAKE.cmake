@@ -149,9 +149,10 @@ if(COMPILE_CMAKE)
 		dk_libDebug		(${CMAKE}/${triple}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
 		dk_libRelease	(${CMAKE}/${triple}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
 		
-		string(REPLACE "--DDEBUG" 	""	CMAKE_BUILD "${DKCMAKE_BUILD}")
-		string(REPLACE "  " 		" " CMAKE_BUILD "${CMAKE_BUILD}")
-		dk_queueCommand(${DKCMAKE_BUILD} 
+		# Remove some flags for some builds
+		string(REPLACE "--DDEBUG" 	""	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+		string(REPLACE "  "			" " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+		dk_configure(${CMAKE} 
 			-DCMake_INSTALL_COMPONENTS=OFF 			# "Using components when installing" OFF
 			-DCMake_INSTALL_DEPENDENCIES=OFF		# "Whether to install 3rd-party runtime dependencies" OFF
 			-DCMake_BUILD_DEVELOPER_REFERENCE=OFF	# "Build CMake Developer Reference" OFF
@@ -170,10 +171,9 @@ if(COMPILE_CMAKE)
 			#-DCMake_USE_CLANG_TIDY_MODULE 			# "Use CMake's clang-tidy module." OFF
 			#-DCMake_RUN_IWYU 						# "Run include-what-you-use with the compiler." OFF
 			#-DCMake_IWYU_VERBOSE 					# "Run include-what-you-use in verbose mode" OFF
-			${CMAKE})
+		)
 			 
-		dk_build(${CMAKE}) # cmake)
-		#dk_command(${CMAKE_MAKE_PROGRAM})
+		dk_build(${CMAKE})
 		
 		return()
 	endif()

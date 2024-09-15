@@ -19,7 +19,7 @@ dk_import(https://github.com/google/diff-match-patch/archive/refs/heads/master.z
 
 
 ### GENERATE ###
-#dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
+#dk_configure(${DIFF_MATCH_PATCH})
 
 
 ### COMPILE ###

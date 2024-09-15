@@ -95,15 +95,6 @@ endif()
 dk_validate(host_triple "dk_getHostTriple()")
 dk_validate(triple "dk_getTargetTriple()")
 dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
-#get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-#if(MULTI_CONFIG)
-#	dk_set(MULTI_CONFIG TRUE)
-#	dk_info("*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
-#else()
-#	dk_set(SINGLE_CONFIG TRUE)
-#	dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
-#endif()
-
 
 
 ##### Load Function files #################

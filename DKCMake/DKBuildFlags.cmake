@@ -132,45 +132,17 @@ dk_validate(DKIMPORTS_DIR	"dk_validateBranch()")
 ########### CORE DEPENDENCIES ############
 dk_validate(CMAKE_EXE 		"dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
 
-#if(MSVC)
-#	dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)
-#endif()
 if(MINGW)
 #	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
-#	dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-#	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
-#	dk_load(${DKIMPORTS_DIR}/gdb/DKMAKE.cmake)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
 if(MSYS)
-	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
-#	dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-#	dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)
-#	dk_load(${DKIMPORTS_DIR}/gdb/DKMAKE.cmake)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
 endif()
-#if(MINGW32 OR MINGW64)
-#	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
-#endif()
-#if(CLANG32 OR CLANG64 OR CLANGARM64 OR UCRT64)
-	#dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
-#endif()
-#if(XCODE)
-#	dk_load(${DKIMPORTS_DIR}/xcode/DKMAKE.cmake)
-#endif()
 if(LINUX_HOST)
 	dk_load(${DKIMPORTS_DIR}/build-essential/DKMAKE.cmake)
 	dk_load(${DKIMPORTS_DIR}/gcc/DKMAKE.cmake)
-	#dk_load(${DKIMPORTS_DIR}/gdb/DKMAKE.cmake)
 endif()
-#if(ANDROID)
-#	dk_load(${DKIMPORTS_DIR}/android-ndk/DKMAKE.cmake)
-#endif()
-#if(EMSCRIPTEN)
-#	dk_load(${DKIMPORTS_DIR}/emsdk/DKMAKE.cmake)
-#endif()
-
-
 dk_validate(CMAKE_MAKE_PROGRAM		"dk_load(${DKIMPORTS_DIR}/make/DKMAKE.cmake)")
 
 
@@ -833,13 +805,7 @@ endif()
 
 
 ###### Set DKCMAKE_BUILD variable ######
-if(EMSCRIPTEN)
-	#set(EMSDK_PYTHON "C:\Users\Administrator\digitalknob\Development\3rdParty\emsdk-main\python\3.9.2-nuget_64bit\python.exe
-	#${CMAKE_EXE} -E env EMSDK_PYTHON=${EMSDK_PYTHON}	
-	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
-else()
-	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
-endif()
+dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 dk_printVar(DKCMAKE_BUILD)
 
 

@@ -26,6 +26,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  # restore any altered flags
 		return()
 	
 	# Configure with Autotools	(single_config)
