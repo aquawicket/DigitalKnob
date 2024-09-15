@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 dk_depend(sfml)
 #dk_depend(sfml_ttf)
 dk_depend(DK)

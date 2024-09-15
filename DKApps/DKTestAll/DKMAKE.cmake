@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 ## DKTestAll is the "include all plugins" app.
 ## Here we try to include all plugins and 3rd party libraries for all platforms.
 ## DKTestAll is handy for debugging purposes and adding new libraries and plugins

@@ -1,3 +1,5 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+
 dk_depend(openscenegraph)
 #dk_depend(osg_ttf)
 dk_depend(DK)
