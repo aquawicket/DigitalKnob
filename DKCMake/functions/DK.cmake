@@ -71,7 +71,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
-
+	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
 	
 	###### DKTEST MODE ######

@@ -22,13 +22,16 @@ function(dk_bashEnv)
 		dk_info("\n${clr}${magenta} bash> ${ARGV}\n")
 	endif()
 	
+	dk_validate(MSYS2 "dk_depend(msys2)")
+	
 	### BASH_EXE ###
 	if(NOT EXISTS ${BASH_EXE})
 		if(WIN_HOST)
+			
 			if(NOT EXISTS ${MSYS2}/msys2.exe)
 				dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
 			endif()
-			set(BASH_EXE ${MSYS2}/usr/bin/bash)
+			set(BASH_EXE "${MSYS2}/usr/bin/bash.exe")
 		else()
 			set(BASH_EXE bash)
 		endif()
