@@ -61,7 +61,7 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc("\${ARGV}")
 	
-	dk_gitApplyPatch("C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/termux.patch")
+	dk_gitApplyPatch("C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
 endfunction()
 
 
