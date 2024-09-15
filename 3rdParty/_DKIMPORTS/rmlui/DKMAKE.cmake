@@ -85,7 +85,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH
 
 
 ### PATCH ###
-dk_gitApplyPatch(${RMLUI} ${DKIMPORTS_DIR}/rmlui/rmlui.patch)
+dk_gitApplyPatch("${RMLUI}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
 
 
 ### LINK ###
