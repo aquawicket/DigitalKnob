@@ -8,19 +8,19 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_cd directory)
 	dk_debugFunc("\${ARGV}")
   
-	if(NOT EXISTS ${directory})
-		dk_notice("directory:${directory} does not exist.")
-		dk_notice("Creating directory: ${directory})")
-		dk_makeDirectory(${directory})
-	endif()
-	
 	if(NOT EXISTS "${directory}")
 		dk_fatal("directory:${directory} does not exist")
 		return()
 	endif()
 	
-	#dk_set(WORKING_DIRECTORY ${directory})
+	if("${PWD}" EQUAL "${directory}")
+		dk_error("dk_cd(${directory}): PWD is already set to ${directory}")
+	endif()
+	
 	dk_set(PWD ${directory})
+
+#debug
+#	dk_debug("Working Dirctory set to: ${PWD}")
 endfunction()
 
 

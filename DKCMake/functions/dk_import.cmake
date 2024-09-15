@@ -33,13 +33,12 @@ function(dk_import url)
 	dk_printVar(${plugin_var}_BRANCH)
 	dk_printVar(${plugin_var}_TAG)
 
-	
 	if(NOT DKOFFLINE)
 		### .git
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
-			dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
+			dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
 			dk_assert(GIT_EXE)
 			
 			if(NOT EXISTS ${${plugin_var}}/.git)
@@ -69,13 +68,11 @@ function(dk_import url)
 	
 	dk_getOption(PATCH ${ARGV})
 	if(PATCH)
-		#dk_debug("dk_patch(${plugin} ${${plugin_var}})")
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 	
 	# Set the current build output directory
-	dk_verbose("setting current build directory to ${${plugin_var}}/${BUILD_DIR}")
-	dk_cd(${${plugin_var}}/${BUILD_DIR})
+	dk_set(CURRENT_PLUGIN_DIR "${${plugin_var}}")
 	
 endfunction()
 dk_createOsMacros("dk_import")
