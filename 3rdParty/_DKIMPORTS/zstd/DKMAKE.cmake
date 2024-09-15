@@ -9,7 +9,7 @@ dk_import(https://github.com/facebook/zstd/archive/refs/heads/release.zip)
 
 
 ### LINK ###
-dk_include					(${ZSTD}/lib										ZSTD_INCLUDE_DIR)
+dk_include					(${ZSTD}/lib										    ZSTD_INCLUDE_DIR)
 if(MSVC)
 	ANDROID_dk_libDebug		(${ZSTD}/${triple}/lib/${DEBUG_DIR}/libzstd.a			ZSTD_LIBRARY_DEBUG)
 	ANDROID_dk_libRelease	(${ZSTD}/${triple}/lib/${RELEASE_DIR}/libzstd.a			ZSTD_LIBRARY_RELEASE)
@@ -23,6 +23,7 @@ else()
 	dk_libRelease			(${ZSTD}/${triple}/${RELEASE_DIR}/lib/libzstd.a			ZSTD_LIBRARY_RELEASE)
 endif()
 	
+
 
 ### 3RDPARTY LINK ###
 if(MULTI_CONFIG)
