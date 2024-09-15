@@ -2,10 +2,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/madler/zlib
 # http://www.zlib.net/
 
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(TRIPLE "dk_getTargetTriple()")
 
 ### IMPORT ###
 dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
-
 
 
 ### LINK ###
