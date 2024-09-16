@@ -7,20 +7,19 @@ if "%~1" neq "" goto:runDKJScript
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Install DKJScript ######
-	call dk_echo "Installing DKJScript . . ."
+	%dk_call% dk_echo "Installing DKJScript . . ."
 	set "CSCRIPT_EXE=cscript.exe"
 	set "WSCRIPT_EXE=wscript.exe"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKJScript"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKJScript"
 	ftype DKJScript=cmd /c call "%~f0" "%CSCRIPT_EXE%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKJScript\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.js"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"
 	assoc .js=DKJScript
 	
-	call dk_echo "DKJScript install complete"
-	call dk_pause
+	%dk_call% dk_success "DKJScript install complete"
 %endfunction%
 
 

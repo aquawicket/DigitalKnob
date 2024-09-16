@@ -22,7 +22,7 @@ if "%~1" neq "" goto:runDKPowershell
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1
 	assoc .ps1=DKPowershell
 	
-	%dk_call% dk_echo "DKPowershell install complete"
+	%dk_call% dk_success "DKPowershell install complete"
 %endfunction%
 
 
@@ -43,5 +43,4 @@ if "%~1" neq "" goto:runDKPowershell
 	del %~dp0\reload
 	cls
 	goto:runDKPowershell
-	
 %endfunction%

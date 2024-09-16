@@ -19,7 +19,7 @@ if "%~1" neq "" (goto:runDKBash)
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
 	assoc .sh=DKBash
 	
-	%dk_call% dk_echo "DKBash install complete"
+	%dk_call% dk_success "DKBash install complete"
 %endfunction%
 
 

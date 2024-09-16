@@ -20,7 +20,7 @@ if not "%~1" == "" (goto:runDKCMake)
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
 	assoc .cmake=DKCmake
 
-	%dk_call% dk_echo "DKCmake install complete"
+	%dk_call% dk_success "DKCmake install complete"
 %endfunction%
 
 
@@ -30,7 +30,6 @@ if not "%~1" == "" (goto:runDKCMake)
 	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	
 	
 	::###### run script ######
     ::"%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -DQUEUE_BUILD=ON -DCLANG64=ON -DWIN_X86_64=ON -DEBUG=ON -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%" -P "%DKSCRIPT_PATH%"
@@ -44,5 +43,4 @@ if not "%~1" == "" (goto:runDKCMake)
 	del %~dp0\reload
 	cls
 	goto:runDKCMake
-	
 %endfunction%

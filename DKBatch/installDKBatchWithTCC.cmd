@@ -20,7 +20,7 @@ if "%~1" neq "" goto:runDKBatch
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd"
 	assoc .cmd=DKBatch
 	
-	%dk_call% dk_echo "DKBatch install complete"
+	%dk_call% dk_success "DKBatch install complete"
 %endfunction%
 
 
