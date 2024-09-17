@@ -1,10 +1,10 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(host_triple "dk_getHostTriple()")
 # https://docs.python.org/3/using/windows.html
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python
 
 
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 WIN_HOST_dk_set	(PYTHON3_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
 MAC_HOST_dk_set (PYTHON3_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
 
@@ -18,8 +18,8 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	if(LINUX_HOST OR ANDROID_HOST)
 		dk_findProgram(PYTHON3_EXE python)
 	else()
-		dk_assertPath(PYTHON3)
-		dk_findProgram(PYTHON3_EXE python "${PYTHON3}")
+		dk_assertPath(PYTHON3_DIR)
+		dk_findProgram(PYTHON3_EXE python "${PYTHON3_DIR}")
 	endif()
 endif()
 
@@ -27,8 +27,8 @@ endif()
 ### 3RDPARTY LINK ###
 dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
 
-if(EXISTS ${PYTHON3})
-	dk_prependEnvPath("${PYTHON3}")
+if(EXISTS ${PYTHON3_DIR})
+	dk_prependEnvPath("${PYTHON3_DIR}")
 endif()
 
 if(NOT EXISTS ${PYTHON3_EXE})
