@@ -28,8 +28,8 @@ WIN_dk_set			(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG_INCLUDE_DIR} -DJPEG_INCLUDE_D
 
 
 ### GENERATE ###
-dk_configure		(${JPEG})
+dk_configure		(${JPEG_DIR})
 
 
 ### COMPILE ###
-dk_build			(${JPEG} jpeg-static)
+dk_build			(${JPEG_DIR} jpeg-static)

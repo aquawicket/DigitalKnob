@@ -20,7 +20,7 @@ dk_libRelease	(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
 
 
 ### GENERATE ###
-dk_configure(${HARFBUZZ} 
+dk_configure(${HARFBUZZ_DIR} 
 	-DHB_BUILD_SUBSET=ON			# "Build harfbuzz-subset" ON
 	-DHB_BUILD_UTILS=OFF			# "Build harfbuzz utils, needs cairo, freetype, and glib properly be installed" OFF
 	-DHB_HAVE_CAIRO=OFF 			# "Enable cairo interop helpers" OFF
@@ -44,5 +44,5 @@ RELEASE_dk_set	(HARFBUZZ_CMAKE -DHARFBUZZ_INCLUDE_DIR=${HARFBUZZ_INCLUDE_DIR} -D
 
 
 ### COMPILE ###
-dk_build(${HARFBUZZ})
+dk_build(${HARFBUZZ_DIR})
 

@@ -18,7 +18,7 @@ WIN_dk_libRelease		(${LIBCACA}/${triple}/${RELEASE_DIR}/libcaca.lib)
 
 
 ### GENERATE ####
-dk_configure(${LIBCACA})
+dk_configure(${LIBCACA_DIR})
 
 
 ### COMPILE ###

@@ -56,7 +56,7 @@ if(NOT EXISTS ${DUKTAPE_DIR}/src/duktape.c)
 endif()
 
 
-dk_configure(${DUKTAPE})
+dk_configure(${DUKTAPE_DIR})
 
 
 ### COMPILE ###

@@ -39,8 +39,8 @@ if(GIFLIB_USE_CMAKE)
 	DEBUG_dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
 	RELEASE_dk_append	(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 
-	dk_configure		(${GIFLIB})
-	dk_build			(${GIFLIB} giflib)	
+	dk_configure		(${GIFLIB_DIR})
+	dk_build			(${GIFLIB_DIR} giflib)	
 	
 	
 	

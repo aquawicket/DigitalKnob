@@ -20,7 +20,7 @@ WIN_dk_libRelease	(${LIBEVENT}/${triple}/${RELEASE_DIR}/event.lib)
 
 
 ### GENERATE ###
-dk_configure(${LIBEVENT} 
+dk_configure(${LIBEVENT_DIR}
 	-DEVENT_LIBRARY_STATIC=ON 
 	-DEVENT_LIBRARY_SHARED=OFF 
 	-DEVENT__DISABLE_TESTS=ON

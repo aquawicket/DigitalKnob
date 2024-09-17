@@ -29,7 +29,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${DUKLUV} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
+dk_configure(${DUKLUV_DIR} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
 
 
 ### COMPILE ###

@@ -60,7 +60,7 @@ endif()
 
 
 ### GENERATE ##
-dk_configure(${LIBJPEG_TURBO} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
+dk_configure(${LIBJPEG_TURBO_DIR} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
 
 
 #if(EXISTS "${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h")
@@ -69,7 +69,7 @@ dk_configure(${LIBJPEG_TURBO} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO
 
 
 ### COMPILE ###
-dk_build(${LIBJPEG_TURBO} turbojpeg-static)
+dk_build(${LIBJPEG_TURBO_DIR} turbojpeg-static)
 
 
 

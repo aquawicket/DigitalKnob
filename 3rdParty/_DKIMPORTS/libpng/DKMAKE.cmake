@@ -106,7 +106,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBPNG}
+dk_configure(${LIBPNG_DIR}
 	-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
 	-DPNG_STATIC=ON					# "Build shared lib" ON
 	-DPNG_SHARED=OFF				# "Build static lib" ON
@@ -125,5 +125,5 @@ dk_configure(${LIBPNG}
 
 
 ### COMPILE ###
-dk_build(${LIBPNG} png_static)
+dk_build(${LIBPNG_DIR} png_static)
 

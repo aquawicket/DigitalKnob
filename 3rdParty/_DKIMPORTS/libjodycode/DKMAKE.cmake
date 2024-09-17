@@ -15,8 +15,8 @@ WIN_dk_libRelease	(${LIBJODYCODE}/${triple}/${RELEASE_DIR}/libjodycode.lib)
 
 
 ### GENERATE ###
-dk_configure(${LIBJODYCODE})
+dk_configure(${LIBJODYCODE_DIR})
 
 
 ### COMPILE ###
-dk_build(${LIBJODYCODE} libjodycode)
+dk_build(${LIBJODYCODE_DIR} libjodycode)

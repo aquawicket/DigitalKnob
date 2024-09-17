@@ -161,14 +161,14 @@ WIN_dk_libRelease		(${CEF_CONFIG_DIR}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_d
 
 
 ### GENERATE ###
-ANDROID_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
-APPLE_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
-LINUX_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
-RASPBERRY_dk_configure	(${CEF_BINARY} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
-WIN_dk_configure		(${CEF_BINARY} -DUSE_SANDBOX=OFF)
+ANDROID_dk_configure	(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
+APPLE_dk_configure		(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
+LINUX_dk_configure		(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
+RASPBERRY_dk_configure	(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm")
+WIN_dk_configure		(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
 
 
 ### COMPILE ###
-dk_build(${CEF_BINARY} libcef_dll_wrapper)
-dk_build(${CEF_BINARY} cefsimple)
+dk_build(${CEF_BINARY_DIR} libcef_dll_wrapper)
+dk_build(${CEF_BINARY_DIR} cefsimple)
 #dk_build(${CEF_BINARY} cefsandbox)

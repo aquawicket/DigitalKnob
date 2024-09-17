@@ -40,17 +40,17 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	dk_configure(${FREEALUT} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE} ${MSINTTYPES_CMAKE})
+	dk_configure(${FREEALUT_DIR} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE} ${MSINTTYPES_CMAKE})
 else()
-	dk_configure(${FREEALUT} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE})
+	dk_configure(${FREEALUT_DIR} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE})
 endif()
 
 
 
 ### COMPILE ###
-ANDROID_dk_build	(${FREEALUT} alut_static)
-APPLE_dk_build		(${FREEALUT} alut_static)
-EMSCRIPTEN_dk_build	(${FREEALUT})
-LINUX_dk_build		(${FREEALUT})
-RASPBERRY_dk_build	(${FREEALUT})
-WIN_dk_build		(${FREEALUT} alut_static)
+ANDROID_dk_build	(${FREEALUT_DIR} alut_static)
+APPLE_dk_build		(${FREEALUT_DIR} alut_static)
+EMSCRIPTEN_dk_build	(${FREEALUT_DIR})
+LINUX_dk_build		(${FREEALUT_DIR})
+RASPBERRY_dk_build	(${FREEALUT_DIR})
+WIN_dk_build		(${FREEALUT_DIR} alut_static)

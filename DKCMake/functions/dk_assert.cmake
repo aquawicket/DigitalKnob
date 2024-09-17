@@ -15,12 +15,6 @@ function(dk_assert expression)
 		dk_echo("\n\n${bg_red}Assertion failed: at ${expression}${clr}")
 		dk_replaceAll("${expression}"  " "  ""  var)
 		
-		if("${var}")
-			dk_fatal("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
-		else()
-			dk_fatal("${bg_red} ${expression} ${clr}")
-		endif()
-		
 		dk_printVar(CMAKE_SOURCE_DIR)
 		dk_printVar(PROJECT_BINARY_DIR)
 		dk_printVar(PROJECT_SOURCE_DIR)
@@ -38,7 +32,11 @@ function(dk_assert expression)
 		dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
 		dk_pause()
 		
-		dk_exit(1)
+		if("${var}")
+			dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+		else()
+			dk_error("${bg_red} ${expression} ${clr}")
+		endif()
 	endif()
 
 # DEBUG	

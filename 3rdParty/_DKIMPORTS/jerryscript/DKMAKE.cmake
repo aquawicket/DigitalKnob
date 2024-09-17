@@ -71,13 +71,13 @@ WIN_dk_libRelease			(${JERRYSCRIPT}/${triple}/lib/${RELEASE_DIR}/jerry-port.lib)
 
 
 ### GENERATE ###
-ANDROID_dk_configure		(${JERRYSCRIPT})
-APPLE_dk_configure			(${JERRYSCRIPT})
-EMSCRIPTEN_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
-LINUX_dk_configure			(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
-RASPBERRY_dk_configure		(${JERRYSCRIPT} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
-WIN_dk_configure			(${JERRYSCRIPT})
+ANDROID_dk_configure		(${JERRYSCRIPT_DIR})
+APPLE_dk_configure			(${JERRYSCRIPT_DIR})
+EMSCRIPTEN_dk_configure		(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+LINUX_dk_configure			(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+RASPBERRY_dk_configure		(${JERRYSCRIPT_DIR} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized")
+WIN_dk_configure			(${JERRYSCRIPT_DIR})
 
 
 ### COMPILE ###
-dk_build					(${JERRYSCRIPT} jerry)
+dk_build					(${JERRYSCRIPT_DIR} jerry)

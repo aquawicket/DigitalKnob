@@ -18,7 +18,7 @@ WIN_dk_libRelease	(${LIBEXPAT}/${triple}/${RELEASE_DIR}/libexpat.lib	LIBEXPAT_LI
 
 
 ### GENERATE ###
-dk_configure(${LIBEXPAT}/expat)
+dk_configure(${LIBEXPAT_DIR}/expat)
 
 
 ### COMPILE ###

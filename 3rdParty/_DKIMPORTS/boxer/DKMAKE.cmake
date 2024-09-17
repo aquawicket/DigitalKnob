@@ -32,8 +32,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${BOXER})
+dk_configure(${BOXER_DIR})
 
 
 ### COMPILE ###
-dk_build(${BOXER} Boxer)
+dk_build(${BOXER_DIR} Boxer)

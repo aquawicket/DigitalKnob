@@ -72,8 +72,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBICONV})
+dk_configure(${LIBICONV_DIR})
 
 
 ### COMPILE ###
-dk_build(${LIBICONV} iconv)
+dk_build(${LIBICONV_DIR} iconv)

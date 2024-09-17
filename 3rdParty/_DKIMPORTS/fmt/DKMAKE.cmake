@@ -32,8 +32,8 @@ dk_include(${FMT_DIR}/include)
 
 
 ### GENERATE ###
-#dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
+#dk_configure(${FMT_DIR} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
 
 
 ### COMPILE ###
-#dk_build(${FMT} fmt)
+#dk_build(${FMT_DIR} fmt)

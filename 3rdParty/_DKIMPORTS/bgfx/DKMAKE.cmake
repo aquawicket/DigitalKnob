@@ -20,8 +20,8 @@ WIN_dk_libRelease	(${BGFX_RELEASE_DIR}/bgfx.lib)
 
 
 ### GENERATE ###
-dk_configure(${BGFX})
+dk_configure(${BGFX_DIR})
 
 
 ### COMPILE ###
-dk_build(${BGFX})
+dk_build(${BGFX_DIR})

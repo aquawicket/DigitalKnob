@@ -39,8 +39,8 @@ else()
 	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	#RELEASE_dk_cd		(${LIBMD}/${triple}/${RELEASE_DIR})
 	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	dk_configure			(${LIBMD})
+	dk_configure			(${LIBMD_DIR})
 	
 	
-	dk_build				(${LIBMD})
+	dk_build				(${LIBMD_DIR})
 endif()

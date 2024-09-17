@@ -20,7 +20,7 @@ dk_include(${JSON}/include/nlohmann)
 #dk_set(JSON_TESTS ON)
 if(JSON_TESTS)
 	### GENERATE ###
-	dk_configure(${JSON})
+	dk_configure(${JSON_DIR})
 
 
 	### COMPILE ###

@@ -2,6 +2,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/aubio/aubio.git
 
 
+dk_validate(HOST_TRIPLE   "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(CONFIG_PATH   "dk_getMULTI_CONFIG()")
 ### IMPORT ###
 dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
 
@@ -19,8 +22,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${AUBIO})
+dk_configure(${AUBIO_DIR})
 
 
 ### COMPILE ###
-dk_build	(${AUBIO})
+dk_build	(${AUBIO_DIR})

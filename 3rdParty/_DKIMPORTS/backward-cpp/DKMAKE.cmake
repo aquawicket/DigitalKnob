@@ -23,8 +23,8 @@ endif()
 
 
 ### GENERATE ###
-#dk_configure(${BACKWARD_CPP})
+#dk_configure(${BACKWARD_CPP_DIR})
 
 
 ### COMPILE ###
-#dk_build(${BACKWARD_CPP})
+#dk_build(${BACKWARD_CPP_DIR})

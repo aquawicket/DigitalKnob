@@ -68,7 +68,7 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${CURL}
+	WIN_dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -146,7 +146,7 @@ if(MSVC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(ANDROID)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -161,7 +161,7 @@ elseif(ANDROID)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(IOS OR IOSSIM)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
@@ -180,7 +180,7 @@ elseif(IOS OR IOSSIM)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(MAC)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -253,7 +253,7 @@ elseif(MAC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(LINUX)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -326,7 +326,7 @@ elseif(LINUX)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF

@@ -17,8 +17,8 @@ WIN_dk_libRelease	(${AOM_RELEASE_DIR}/aom.lib)
 
 
 ### GENERATE ###
-dk_configure(${AOM} -DAOM_TARGET_CPU=generic)
+dk_configure(${AOM_DIR} -DAOM_TARGET_CPU=generic)
 
 
 ### COMPILE ###
-dk_build(${AOM})
+dk_build(${AOM_DIR})

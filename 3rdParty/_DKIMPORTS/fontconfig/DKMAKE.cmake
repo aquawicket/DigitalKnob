@@ -34,7 +34,7 @@ DEBUG_dk_queueCommand	(autoconf)
 #DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #RELEASE_dk_cd		(${FONTCONFIG}/${triple}/${RELEASE_DIR})
 #RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-dk_configure	(${FONTCONFIG})
+dk_configure	(${FONTCONFIG_DIR})
 
 
-dk_build		(${FONTCONFIG})
+dk_build		(${FONTCONFIG_DIR})

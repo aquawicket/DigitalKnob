@@ -24,8 +24,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${ASTYLE})
+dk_configure(${ASTYLE_DIR})
 
 
 ### COMPILE ###
-dk_build(${ASTYLE})
+dk_build(${ASTYLE_DIR})

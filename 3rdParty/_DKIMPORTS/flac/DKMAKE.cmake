@@ -56,7 +56,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${FLAC}
+dk_configure(${FLAC_DIR}
 	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
 	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
 	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
@@ -72,5 +72,5 @@ dk_configure(${FLAC}
 
 
 ### BUILD ###
-dk_build(${FLAC})
+dk_build(${FLAC_DIR})
 

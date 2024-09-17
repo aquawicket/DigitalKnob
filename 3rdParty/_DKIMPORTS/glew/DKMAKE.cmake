@@ -53,7 +53,7 @@ endif()
 
 	
 ### GENERATE ###
-dk_configure(${GLEW}/build/cmake)
+dk_configure(${GLEW_DIR}/build/cmake)
 #dk_copy(${GLEW}/${triple}/lib/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${triple}/lib/${RELEASE_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${triple}/bin/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/bin/ OVERWRITE)
@@ -61,4 +61,4 @@ dk_configure(${GLEW}/build/cmake)
 
 
 ### COMPILE ###
-dk_build(${GLEW} glew_s)
+dk_build(${GLEW_DIR} glew_s)

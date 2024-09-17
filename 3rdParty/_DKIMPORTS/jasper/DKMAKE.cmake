@@ -25,8 +25,8 @@ WIN_dk_libRelease		(${JASPER}/${triple}/src/libjasper/jasper.lib)
 
 
 ### GENERATE ###
-dk_configure(${JASPER})
+dk_configure(${JASPER_DIR})
 
 
 ### COMPILE ###
-dk_build(${JASPER})
+dk_build(${JASPER_DIR})

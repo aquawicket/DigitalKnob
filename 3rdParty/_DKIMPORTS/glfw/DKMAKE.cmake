@@ -36,8 +36,8 @@ dk_set(GLFW_CMAKE -Dglfw3_DIR=${GLFW_DIR}) #-DGLFW_INCLUDE_DIR=${GLFW_INCLUDE_DI
 
 	
 ### GENERATE ###
-dk_configure(${GLFW})
+dk_configure(${GLFW_DIR})
 
 
 ### COMPILE ###
-dk_build(${GLFW} glfw)
+dk_build(${GLFW_DIR} glfw)

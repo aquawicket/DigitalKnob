@@ -35,9 +35,9 @@ if(NOT WIN)
 
 
 	### GENERATE / COMPILE ###
-	dk_configure			(${IMAGEMAGICK})
+	dk_configure			(${IMAGEMAGICK_DIR})
 	
-	dk_build				(${IMAGEMAGICK})
+	dk_build				(${IMAGEMAGICK_DIR})
 endif()
 endif()
 endif()

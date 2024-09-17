@@ -285,12 +285,12 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	endif()
 	
 	# LIB
-	if(NOT ${PLUGIN_VAR_PREFIX})
+	#if(NOT ${PLUGIN_VAR_PREFIX})
 		if(PLUGIN_INSTALL_PATH)
 			dk_set(${PLUGIN_VAR_PREFIX} ${PLUGIN_INSTALL_PATH})
 			dk_printVar(${PLUGIN_VAR_PREFIX})
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_DIR
 	if(NOT ${PLUGIN_VAR_PREFIX}_DIR)
