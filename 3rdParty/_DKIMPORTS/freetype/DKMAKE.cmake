@@ -10,7 +10,7 @@ dk_depend(zlib)
 
 ### IMPORT ###
 #dk_import(https://github.com/freetype/freetype.git)
-dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz PATCH)
+dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)# PATCH)
 
 
 
@@ -50,11 +50,11 @@ endif()
 
 	
 ### GENERATE ###
-dk_configure(${FREETYPE})
+dk_configure(${FREETYPE_DIR})
 
 
 ### COMPILE ###
-dk_build(${FREETYPE} freetype)
+dk_build(${FREETYPE_DIR} freetype)
 
 
 

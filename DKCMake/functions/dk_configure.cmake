@@ -13,7 +13,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(CONFIG_PATH "dk_getMULTI_CONFIG()")
 	
 	#dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
+	dk_assertPath(CURRENT_PLUGIN_DIR)
 	dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
+	#dk_assertPath(BINARY_DIR)
 	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)

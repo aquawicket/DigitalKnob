@@ -21,7 +21,8 @@ function(dk_install plugin) #PATCH
 	# set PLUGIN_URL variable
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
 	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
-	set(dest_path ${${plugin_var}})			
+	set(dest_path ${${plugin_var}_DIR})
+	dk_printVar(dest_path)
 	set(url_path ${${plugin_var}_URL})
 	
 	#if(NOT "${ARGV2}" STREQUAL "PATCH")
@@ -38,10 +39,7 @@ function(dk_install plugin) #PATCH
 	#if(NOT ${plugin} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${plugin}) must be all lowercase")
 	#endif()
-	
-	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin})
-		dk_fatal("ERROR: dk_install() (${DKIMPORTS_DIR}/${plugin}) does not exist")
-	endif()
+	dk_assertPath(${DKIMPORTS_DIR}/${plugin})
 	
 	if(EXISTS ${dest_path}/installed)
 		dk_info("${plugin} already installed")
@@ -97,9 +95,10 @@ function(dk_install plugin) #PATCH
 	dk_download(${url_path} ${DKDOWNLOAD_DIR}/${dl_filename} NO_HALT)
 	# TODO: option to delete downloaded file after extraction to conserve disk space
 	
-	if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
-		dk_fatal("The download files does not exist")
-	endif()
+	#if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
+	#	dk_fatal("The download files does not exist")
+	#endif()
+	dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${url_extension} STREQUAL "")
@@ -172,10 +171,12 @@ function(dk_install plugin) #PATCH
 	elseif(${FILETYPE} STREQUAL "Executable")
 		dk_cd(${DKDOWNLOAD_DIR})
 		dk_set(QUEUE_BUILD ON)
+		dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
 		dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
+		dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
 		dk_copy(${DKDOWNLOAD_DIR}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)
 		dk_debug("dk_copy(${DKDOWNLOAD_DIR}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)")
 	endif()

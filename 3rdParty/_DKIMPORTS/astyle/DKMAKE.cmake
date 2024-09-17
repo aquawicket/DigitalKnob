@@ -5,6 +5,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 
+dk_validate(HOST_TRIPLE   "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(CONFIG_PATH   "dk_getMULTI_CONFIG()")
 ### IMPORT ###
 dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip)
 

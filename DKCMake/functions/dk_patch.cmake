@@ -11,10 +11,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_patch import_name dest_path)
 	dk_debugFunc("\${ARGV}")
-	
+
 	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
 	dk_notice("located in ${DKIMPORTS_DIR}/${import_name}/DKMAKE.cmake")
+	
+	dk_assertPath(${DKIMPORTS_DIR}/${import_name})
+	dk_assertPath(${dest_path})
 	dk_copy(${DKIMPORTS_DIR}/${import_name}/ ${dest_path}/ OVERWRITE)
 endfunction()
 

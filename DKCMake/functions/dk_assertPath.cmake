@@ -11,8 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_assertPath path)
 	dk_debugFunc("\${ARGV}")
 	
-	
-	dk_assert(${path})
+	dk_assert(path)
 	if(EXISTS ${path})
 		return()
 	endif()
@@ -22,14 +21,10 @@ function(dk_assertPath path)
 		endif()
 	endif()
 	
-	dk_echo("\n\n${bg_red}Assertion failed: at path:${path}:${${path}}, ${STACK_HEADER}${clr}")
+	dk_echo("\n\n${bg_red}Assertion failed:  Invalid path:${path}:${${path}} ${STACK_HEADER}${clr}")
 	dk_replaceAll("${path}"  " "  ""  var)
 		
-	if("${var}")
-		dk_fatal("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
-	else()
-		dk_fatal("${bg_red} ${path} ${clr}")
-	endif()
+	
 	
 	dk_printVar(CMAKE_SOURCE_DIR)
 	dk_printVar(PROJECT_BINARY_DIR)
@@ -48,7 +43,12 @@ function(dk_assertPath path)
 	dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
 	dk_pause()
 			
-	dk_exit(1)
+			
+	if("${var}")
+		dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+	else()
+		dk_error("${bg_red} ${path} ${clr}")
+	endif()
 endfunction()
 
 

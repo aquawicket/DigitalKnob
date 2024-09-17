@@ -65,7 +65,7 @@ function(dk_import url)
 	endif()
 	
 	# Set the current build output directory
-	dk_set(CURRENT_PLUGIN_DIR "${${plugin_var}}")
+	#dk_set(CURRENT_PLUGIN_DIR "${${plugin_var}}")
 	
 endfunction()
 dk_createOsMacros("dk_import")
