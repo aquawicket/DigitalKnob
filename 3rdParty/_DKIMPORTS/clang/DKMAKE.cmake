@@ -2,8 +2,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
 
-dk_validate(host_triple     "dk_getHostTriple()")
-dk_validate(triple   		"dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE   "dk_getTargetTriple()")
 
 if(clang OR mingw OR ucrt)
 	dk_validate(MSYS2  			"dk_depend(msys2)")

@@ -20,10 +20,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined CMAKE_DL call dk_error "CMAKE_DL is invalid"
 	
 	call dk_basename %CMAKE_DL% CMAKE_DL_FILE
-	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_DL_NAME
-    call dk_convertToCIdentifier %CMAKE_DL_NAME% CMAKE_FOLDER
+	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
+    ::call dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
-
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 

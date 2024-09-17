@@ -9,7 +9,7 @@ endif()
 
 
 
-dk_validate(host_triple "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(cygpath)
 	dk_return()

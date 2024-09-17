@@ -16,7 +16,7 @@ if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
 endif()
-dk_validate(triple   "dk_getTargetTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 
 
 ### VERSION ###

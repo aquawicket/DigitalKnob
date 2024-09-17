@@ -14,8 +14,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined NUGET_DL call dk_error "NUGET_DL is invalid"
 
 	call dk_basename %NUGET_DL% NUGET_DL_FILE
-	call dk_removeExtension %NUGET_DL_FILE% NUGET_NAME
-	call dk_convertToCIdentifier %NUGET_NAME% NUGET_FOLDER
+	call dk_removeExtension %NUGET_DL_FILE% NUGET_FOLDER
+	::call dk_convertToCIdentifier %NUGET_FOLDER% NUGET_FOLDER
 	call dk_toLower %NUGET_FOLDER% NUGET_FOLDER
 	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"

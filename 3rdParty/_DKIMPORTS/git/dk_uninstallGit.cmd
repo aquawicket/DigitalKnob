@@ -21,10 +21,9 @@ call dk_source dk_validate
     if not defined GIT_DL call dk_error "GIT_DL is invalid"
 	
     call dk_basename %GIT_DL% GIT_DL_FILE
-    call dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
-    call dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
+    call dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
+    ::call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     call dk_toLower %GIT_FOLDER% GIT_FOLDER
-    
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set GIT_DIR "%DKTOOLS_DIR%\%GIT_FOLDER%"
 

@@ -5,8 +5,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
-dk_validate(HOST_OS 			"dk_getHostTriple()")
-dk_validate(OS 					"dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE 		"dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE		"dk_getTargetTriple()")
 dk_validate(DKBUILD_TYPE 		"dk_getBUILD_TYPE()")
 dk_validate(CMAKE_C_COMPILER	"dk_depend(clang)")
 dk_validate(CMAKE_CXX_COMPILER	"dk_depend(clang)")

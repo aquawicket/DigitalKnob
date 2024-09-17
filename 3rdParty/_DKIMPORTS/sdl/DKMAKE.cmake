@@ -65,11 +65,11 @@ dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip
 
 
 ### LINK ###
-dk_include				(${SDL}/include											SDL2_INCLUDE_DIR)
+dk_include				(${SDL_DIR}/include						SDL2_INCLUDE_DIR)
 ANDROID_dk_include		(${ANDROID_NDK}/sources/android/cpufeatures)
-ANDROID_dk_include		(${SDL}/src)
-DEBUG_dk_include		(${SDL}/${triple}/${DEBUG_DIR}/include)
-RELEASE_dk_include		(${SDL}/${triple}/${RELEASE_DIR}/include)
+ANDROID_dk_include		(${SDL_DIR}/src)
+DEBUG_dk_include		(${SDL_DEBUG_DIR}/include)
+RELEASE_dk_include		(${SDL_RELEASE_DIR}/include)
 RASPBERRY_dk_include	(/opt/vc/lib)
 
 #dk_addTarget(sdl SDL2static)	# TODO
@@ -77,36 +77,36 @@ RASPBERRY_dk_include	(/opt/vc/lib)
 
 #if(sdl_SDL2static)
 if(MSVC)
-	WIN_dk_libDebug		(${SDL}/${triple}/${DEBUG_DIR}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${SDL}/${triple}/${RELEASE_DIR}/SDL2-static.lib	SDL2_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${SDL_RELEASE_DIR}/SDL2-static.lib		SDL2_LIBRARY_RELEASE)
 else()
  if(ANDROID)
-	ANDROID_dk_libDebug	(${SDL}/${triple}/${DEBUG_DIR}/libSDL2.a			SDL2_LIBRARY_DEBUG)
+	ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2.a				SDL2_LIBRARY_DEBUG)
  else()
-	dk_libDebug			(${SDL}/${triple}/${DEBUG_DIR}/libSDL2d.a			SDL2_LIBRARY_DEBUG)
+	dk_libDebug			(${SDL_DEBUG_DIR}/libSDL2d.a			SDL2_LIBRARY_DEBUG)
  endif()
-	dk_libRelease		(${SDL}/${triple}/${RELEASE_DIR}/libSDL2.a			SDL2_LIBRARY_RELEASE)
+	dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2.a			SDL2_LIBRARY_RELEASE)
 endif()
 #endif()
 
-#ANDROID_dk_libDebug(${SDL}/${triple}/${DEBUG_DIR}/libhidapi.a)
-#ANDROID_dk_libRelease(${SDL}/${triple}/${RELEASE_DIR}/libhidapi.a)
+#ANDROID_dk_libDebug(${SDL_DEBUG_DIR}/libhidapi.a)
+#ANDROID_dk_libRelease(${SDL_RELEASE_DIR}/libhidapi.a)
 
 #if(SDL_SDL2main)
-	#ANDROID_dk_libDebug	(${SDL}/${triple}/${DEBUG_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_DEBUG)
-	#ANDROID_dk_libRelease	(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
-	#LINUX_dk_libDebug		(${SDL}/${triple}/${DEBUG_DIR}/libSDL2maind.a			SDL2MAIN_LIBRARY_DEBUG)
-	#LINUX_dk_libRelease	(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
-	#MAC_dk_libDebug		(${SDL}/${triple}/${DEBUG_DIR}/libSDL2maind.a			SDL2MAIN_LIBRARY_DEBUG)
-	#MAC_dk_libRelease		(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
-	#RASPBERRY_dk_libDebug	(${SDL}/${triple}/${DEBUG_DIR}/libSDL2maind.a			SDL2MAIN_LIBRARY_DEBUG)
-	#RASPBERRY_dk_libRelease(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
-	#WIN_dk_libDebug		(${SDL}/${triple}/${DEBUG_DIR}/SDL2maind.lib			SDL2MAIN_LIBRARY_DEBUG)
-	#WIN_dk_libRelease		(${SDL}/${triple}/${RELEASE_DIR}/SDL2main.lib			SDL2MAIN_LIBRARY_RELEASE)
-	IOSSIM_dk_libDebug		(${SDL}/${triple}/${DEBUG_DIR}/libSDL2maind.a			SDL2MAIN_LIBRARY_DEBUG)
-	IOSSIM_dk_libRelease	(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
-	IOS_dk_libDebug			(${SDL}/${triple}/${DEBUG_DIR}/libSDL2maind.a			SDL2MAIN_LIBRARY_DEBUG)
-	IOS_dk_libRelease		(${SDL}/${triple}/${RELEASE_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_RELEASE)
+	#ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a			SDL2MAIN_LIBRARY_DEBUG)
+	#ANDROID_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+	#LINUX_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+	#LINUX_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+	#MAC_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+	#MAC_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+	#RASPBERRY_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+	#RASPBERRY_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+	#WIN_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2maind.lib			SDL2MAIN_LIBRARY_DEBUG)
+	#WIN_dk_libRelease		(${SDL_RELEASE_DIR}/SDL2main.lib		SDL2MAIN_LIBRARY_RELEASE)
+	IOSSIM_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+	IOSSIM_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+	IOS_dk_libDebug			(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+	IOS_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
 #endif()
 
 
@@ -114,7 +114,7 @@ endif()
 #ANDROID_dk_set(SDL_CMAKE
 #	"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 #	"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
-#	-DSDL2_DIR=${SDL}/cmake
+#	-DSDL2_DIR=${SDL_DIR}/cmake
 #	-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 #	-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_DEBUG}
 #	-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
@@ -127,7 +127,7 @@ if(MULTI_CONFIG)
 		dk_set(SDL_CMAKE
 			"-DCMAKE_C_FLAGS=/I${SDL2_INCLUDE_DIR}"
 			"-DCMAKE_CXX_FLAGS=/I${SDL2_INCLUDE_DIR}" 
-			-DSDL2_DIR=${SDL}/${CONFIG_PATH}
+			-DSDL2_DIR=${SDL_CONFIG_DIR}
 			-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 			-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
 			-DSDL2_LIBRARY=${SDL2_LIBRARY_RELEASE}
@@ -141,7 +141,7 @@ if(MULTI_CONFIG)
 		dk_set(SDL_CMAKE
 			"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 			"-DCMAKE_CXX_FLAGS=-${SDL2_INCLUDE_DIR}" 
-			-DSDL2_DIR=${SDL}/${CONFIG_PATH}
+			-DSDL2_DIR=${SDL_CONFIG_DIR}
 			-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 			-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
 			-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
@@ -157,7 +157,7 @@ else()
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_LIBRARY_DEBUG}"
-		-DSDL2_DIR=${SDL}/${CONFIG_PATH}
+		-DSDL2_DIR=${SDL_CONFIG_DIR}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_DEBUG}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
@@ -170,7 +170,7 @@ else()
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_LIBRARY_RELEASE}"
-		-DSDL2_DIR=${SDL}/${CONFIG_PATH}
+		-DSDL2_DIR=${SDL_CONFIG_DIR}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY_RELEASE}

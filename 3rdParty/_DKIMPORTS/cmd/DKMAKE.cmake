@@ -6,7 +6,7 @@ if(EXISTS ${CMD_EXE})
 endif()
 
 ### Windows Host Only ###
-dk_validate(HOST_OS "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 if(NOT WIN_HOST)
 	dk_undepend(cmd)
 	dk_return()
@@ -14,9 +14,6 @@ endif()
 
 
 
-
-
-dk_validate(host_triple "dk_getHostTriple()")
 if(WIN_HOST)
 	dk_findProgram(CMD_EXE cmd.exe)
 	

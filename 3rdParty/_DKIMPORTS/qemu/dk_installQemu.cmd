@@ -14,12 +14,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined QEMU_DL call dk_error "QEMU_DL is invalid"
 
     call dk_basename %QEMU_DL% QEMU_DL_FILE
-    call dk_removeExtension %QEMU_DL_FILE% QEMU_NAME
-    call dk_convertToCIdentifier %QEMU_NAME% QEMU_FOLDER
+    call dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
+    ::call dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
     call dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
+	
 	call dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
 	call dk_set QEMU_SYSTEM_X86_64_EXE %QEMU_DIR%\qemu-system-x86_64.exe
 	

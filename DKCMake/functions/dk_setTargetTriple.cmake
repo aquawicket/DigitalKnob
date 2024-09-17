@@ -9,8 +9,7 @@ function(dk_setTargetTriple)
 	dk_debugFunc("\${ARGV}")
 
 	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_validate(host_triple "dk_getHostTriple()")
-		dk_assert(host_triple)
+		dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 		
 		dk_echo()
 		dk_echo(" 1) ${host_triple}")

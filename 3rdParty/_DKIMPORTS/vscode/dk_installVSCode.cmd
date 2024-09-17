@@ -20,11 +20,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	call dk_basename %VSCODE_DL% VSCODE_DL_FILE
 	call dk_removeExtension %VSCODE_DL_FILE% VSCODE_FOLDER
-	call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
+	::call dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
 	call dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
-	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
+	
+	
 	if "%DK_HOST_OS%"=="win" (
 		call dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe
 	) else (

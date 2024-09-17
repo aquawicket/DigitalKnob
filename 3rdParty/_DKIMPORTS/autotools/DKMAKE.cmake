@@ -1,5 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(triple "dk_getTargetTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 # https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html
 # http://autogen.sourceforge.net
 # https://macappstore.org/autogen/

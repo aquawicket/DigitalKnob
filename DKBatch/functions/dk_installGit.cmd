@@ -19,11 +19,13 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
     
     %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
-    %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_DL_NAME
-    %dk_call% dk_convertToCIdentifier %GIT_DL_NAME% GIT_FOLDER
+    %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
+    ::%dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
     %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
+	
+	
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
     set "GITBASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
 	set "PATCH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\usr\bin\patch.exe"

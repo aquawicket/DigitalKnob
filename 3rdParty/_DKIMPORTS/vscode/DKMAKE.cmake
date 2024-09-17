@@ -1,6 +1,4 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(host_triple "dk_getHostTriple()")
-dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 # https://code.visualstudio.com/docs/editor/portable
 # https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip
 
@@ -10,7 +8,8 @@ if(EXISTS ${VSCODE_EXE})
 	return()
 endif()
 
-
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 ### DOWNLOAD ###
 MAC_HOST_dk_set				(VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip)
 LINUX_ARM32_HOST_dk_set	    (VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz)

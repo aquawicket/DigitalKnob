@@ -17,8 +17,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined OPENJDK_DL call dk_error "OPENJDK_DL is invalid"
 	
 	call dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
-	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_DL_NAME
-	call dk_convertToCIdentifier %OPENJDK_DL_NAME% OPENJDK_FOLDER
+	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_FOLDER
+	::call dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
 	call dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
 	call dk_validate DK3RDPARTY_DIR "call dk_validateBranch"

@@ -1,7 +1,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.nasm.us
 
-dk_validate(HOST_OS "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 if(ANDROID_HOST)
 	return()
 endif()

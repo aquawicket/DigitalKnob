@@ -15,11 +15,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	call dk_basename %TCC_RT_DL% TCC_RT_DL_FILE
 	call dk_removeExtension %TCC_RT_DL_FILE% TCC_RT_FOLDER
-	call dk_convertToCIdentifier %TCC_RT_FOLDER% TCC_RT_FOLDER
+	::call dk_convertToCIdentifier %TCC_RT_FOLDER% TCC_RT_FOLDER
 	call dk_toLower %TCC_RT_FOLDER% TCC_RT_FOLDER
-	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set TCC_RT_DIR "%DKTOOLS_DIR%\%TCC_RT_FOLDER%"
+	
+	
 	call dk_set TCC_RT_EXE "%TCC_RT_DIR%\tcc.exe"
 	
 	if exist "%TCC_RT_EXE%" goto:tcc_rt_installed

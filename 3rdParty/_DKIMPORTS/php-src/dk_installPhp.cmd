@@ -20,8 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	
 	call dk_basename %PHP_DL% PHP_DL_FILE
-    call dk_removeExtension %PHP_DL_FILE% PHP_NAME
-    call dk_convertToCIdentifier %PHP_NAME% PHP_FOLDER
+    call dk_removeExtension %PHP_DL_FILE% PHP_FOLDER
+    ::call dk_convertToCIdentifier %PHP_FOLDER% PHP_FOLDER
     call dk_toLower %PHP_FOLDER% PHP_FOLDER
 	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"

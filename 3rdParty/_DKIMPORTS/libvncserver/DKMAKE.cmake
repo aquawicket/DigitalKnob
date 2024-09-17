@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(host_triple "dk_getHostTriple()")
-dk_validate(triple "dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE   "dk_getHostTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 # https://github.com/LibVNC/libvncserver.git
 
 

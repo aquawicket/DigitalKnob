@@ -17,13 +17,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	call dk_basename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE
 	call dk_removeExtension %WINDOWS_TERMINAL_DL_FILE% WINDOWS_TERMINAL_FOLDER
-	call dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
+	::call dk_convertToCIdentifier %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
 	call dk_toLower %WINDOWS_TERMINAL_FOLDER% WINDOWS_TERMINAL_FOLDER
-	
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set WINDOWS_TERMINAL_DIR "%DKTOOLS_DIR%\%WINDOWS_TERMINAL_FOLDER%"
-	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL_DIR%\wt.exe"
 	
+	
+	call dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL_DIR%\wt.exe"
 	if exist "%WINDOWS_TERMINAL_EXE%" goto:windows_terminal_installed
 	call dk_echo   
     call dk_info "Installing Windows Terminal . . ."

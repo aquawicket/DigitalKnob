@@ -14,12 +14,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  call dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
 	if not defined POWERSHELL_DL call dk_error "POWERSHELL_DL is invalid"
 	
+	::::::::: POWERSHELL_DL -> TO -> POWERSHELL_DIR :::::::::::::
 	call dk_basename %POWERSHELL_DL% POWERSHELL_DL_FILE
 	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
-	call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
+	::call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
+	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	call dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
 	
 	if exist "%POWERSHELL_EXE%" goto:powershell_installed

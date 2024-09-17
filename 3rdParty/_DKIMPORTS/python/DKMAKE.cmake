@@ -18,7 +18,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 #WIN_HOST_dk_set	(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
 
-dk_validate(host_triple "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE    "dk_getHostTriple()")
 dk_validate(DKDOWNLOAD_DIR "dk_getDKPaths()")
 
 LINUX_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)

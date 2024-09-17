@@ -19,15 +19,15 @@ dk_import(https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-dk_include			(${BOXER}/include)
-dk_include			(${BOXER}/${triple})
+dk_include			(${BOXER_DIR}/include)
+dk_include			(${BOXER_CONFIG_DIR})
 
 if(MSVC)
-	WIN_dk_libDebug		(${BOXER}/${triple}/${DEBUG_DIR}/Boxer.lib)
-	WIN_dk_libRelease	(${BOXER}/${triple}/${RELEASE_DIR}/Boxer.lib)
+	WIN_dk_libDebug		(${BOXER_DEBUG_DIR}/Boxer.lib)
+	WIN_dk_libRelease	(${BOXER_RELEASE_DIR}/Boxer.lib)
 else()
-	dk_libDebug			(${BOXER}/${triple}/${DEBUG_DIR}/libBoxer.a)
-	dk_libRelease		(${BOXER}/${triple}/${RELEASE_DIR}/libBoxer.a)
+	dk_libDebug			(${BOXER_DEBUG_DIR}/libBoxer.a)
+	dk_libRelease		(${BOXER_RELEASE_DIR}/libBoxer.a)
 endif()
 
 

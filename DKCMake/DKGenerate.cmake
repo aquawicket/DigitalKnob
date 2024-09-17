@@ -34,7 +34,7 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_validate(triple "dk_getTargetTriple()")
+dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
