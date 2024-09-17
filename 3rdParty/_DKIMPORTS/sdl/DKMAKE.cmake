@@ -68,8 +68,8 @@ dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip
 dk_include				(${SDL}/include											SDL2_INCLUDE_DIR)
 ANDROID_dk_include		(${ANDROID_NDK}/sources/android/cpufeatures)
 ANDROID_dk_include		(${SDL}/src)
-EMSCRIPTEN_dk_include	(${SDL}/${triple}/${DEBUG_DIR}/include)
-LINUX_dk_include		(${SDL}/${triple}/${RELEASE_DIR}/include)
+DEBUG_dk_include		(${SDL}/${triple}/${DEBUG_DIR}/include)
+RELEASE_dk_include		(${SDL}/${triple}/${RELEASE_DIR}/include)
 RASPBERRY_dk_include	(/opt/vc/lib)
 
 #dk_addTarget(sdl SDL2static)	# TODO

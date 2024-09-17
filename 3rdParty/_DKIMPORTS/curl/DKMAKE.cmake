@@ -32,10 +32,11 @@ endif()
 
 ### LINK ###
 dk_define				(CURL_STATICLIB)
-dk_include				(${CURL}/include 								CURL_INCLUDE_DIR)
-dk_include				(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
-DEBUG_dk_include		(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
-RELEASE_dk_include		(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+dk_include				(${CURL}/include 									CURL_INCLUDE_DIR)
+#dk_include				(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
+#DEBUG_dk_include		(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
+#RELEASE_dk_include		(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+dk_include				(${CURL}/${BUILD_DIR}/lib							CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
 	set(CURL_DEBUG_DIR ${CURL}/${triple}/lib/${DEBUG_DIR})
