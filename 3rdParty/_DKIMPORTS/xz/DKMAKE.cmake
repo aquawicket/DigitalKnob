@@ -24,14 +24,14 @@ dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar
 #if(NOT WIN)
 ### LINK ###
 dk_define			(LZMA_API_STATIC)
-dk_include			(${XZ}/src/liblzma/api 						LIBLZMA_INCLUDE_DIR)
+dk_include			(${XZ_DIR}/src/liblzma/api 			LIBLZMA_INCLUDE_DIR)
 
 if(MSVC)
-	dk_libDebug		(${XZ}/${triple}/${DEBUG_DIR}/liblzma.lib		LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ}/${triple}/${RELEASE_DIR}/liblzma.lib		LIBLZMA_LIBRARY_RELEASE)
+	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.lib		LIBLZMA_LIBRARY_DEBUG)
+	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.lib		LIBLZMA_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${XZ}/${triple}/${DEBUG_DIR}/liblzma.a			LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ}/${triple}/${RELEASE_DIR}/liblzma.a		LIBLZMA_LIBRARY_RELEASE)
+	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.a			LIBLZMA_LIBRARY_DEBUG)
+	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.a		LIBLZMA_LIBRARY_RELEASE)
 endif()
 
 

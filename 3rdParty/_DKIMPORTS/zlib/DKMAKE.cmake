@@ -7,14 +7,11 @@ dk_validate(TRIPLE "dk_getTargetTriple()")
 
 ### IMPORT ###
 dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
-dk_makeDirectory(${ZLIB}/${BUILD_DIR})
 
 ### LINK ###
-dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
-dk_include				(${ZLIB}/${BUILD_DIR}					ZLIB_INCLUDE_DIR2)
+dk_include				(${ZLIB_DIR}							ZLIB_INCLUDE_DIR)
+dk_include				(${ZLIB_CONFIG_DIR}						ZLIB_INCLUDE_DIR2)
 
-dk_set(ZLIB_DEBUG_DIR	${ZLIB}/${triple}/${DEBUG_DIR})
-dk_set(ZLIB_RELEASE_DIR ${ZLIB}/${triple}/${RELEASE_DIR})
 if(MSVC)
 	WIN_dk_libDebug		(${ZLIB_DEBUG_DIR}/zlibstaticd.lib		ZLIB_LIBRARY_DEBUG)
 	WIN_dk_libRelease	(${ZLIB_RELEASE_DIR}/zlibstatic.lib		ZLIB_LIBRARY_RELEASE)

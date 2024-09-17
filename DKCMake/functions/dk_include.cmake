@@ -13,7 +13,7 @@ function(dk_include path)
 	dk_debugFunc("\${ARGV}")
 	
 	if(NOT EXISTS "${path}")
-		dk_fatal("dk_include(): path:${path} does not exist")
+		dk_warning("dk_include(): path:${path} does not exist")
 	endif()
 	
 	list(FIND DKINCLUDES_LIST "${path}" index)

@@ -20,7 +20,7 @@ function(dk_printSettings)
 	dk_buildLog(DKIMPORTS_DIR)
 	dk_buildLog(DKAPPS_DIR)
 	dk_buildLog(DKPLUGINS_DIR)
-	dk_buildLog(BUILD_DIR)
+	dk_buildLog(CONFIG_PATH)
 	
 	dk_buildLog("#################  CMAKE VARIABLES  ################")
 	#dk_getCmakeCommandLine(CMAKE_COMMAND_LINE)

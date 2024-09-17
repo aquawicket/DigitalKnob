@@ -24,27 +24,27 @@ if(MSVC)
 	WIN_dk_define	(DUK_F_VBCC)
 endif()
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
-dk_include			(${DUKTAPE}/src)
+dk_include			(${DUKTAPE_DIR}/src)
 
-#UNIX_dk_libDebug	(${DUKTAPE}/${triple}/${DEBUG_DIR}/libduktape.a)
-#UNIX_dk_libRelease	(${DUKTAPE}/${triple}/${RELEASE_DIR}/libduktape.a)
-#WIN_dk_libDebug	(${DUKTAPE}/${triple}/${DEBUG_DIR}/duktape.lib)
-#WIN_dk_libRelease	(${DUKTAPE}/${triple}/${RELEASE_DIR}/duktape.lib)
+#UNIX_dk_libDebug	(${DUKTAPE_DEBUG_DIR}/libduktape.a)
+#UNIX_dk_libRelease	(${DUKTAPE_RELEASE_DIR}/libduktape.a)
+#WIN_dk_libDebug	(${DUKTAPE_DEBUG_DIR}/duktape.lib)
+#WIN_dk_libRelease	(${DUKTAPE_RELEASE_DIR}/duktape.lib)
 ## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
-	dk_libDebug		(${DUKTAPE}/${triple}/${DEBUG_DIR}/duktape.lib)
-	dk_libRelease	(${DUKTAPE}/${triple}/${RELEASE_DIR}/duktape.lib)
+	dk_libDebug		(${DUKTAPE_DEBUG_DIR}/duktape.lib)
+	dk_libRelease	(${DUKTAPE_RELEASE_DIR}/duktape.lib)
 else()
-	dk_libDebug		(${DUKTAPE}/${triple}/${DEBUG_DIR}/libduktape.a)
-	dk_libRelease	(${DUKTAPE}/${triple}/${RELEASE_DIR}/libduktape.a)
+	dk_libDebug		(${DUKTAPE_DEBUG_DIR}/libduktape.a)
+	dk_libRelease	(${DUKTAPE_RELEASE_DIR}/libduktape.a)
 endif()
 
 
 ### GENERATE ###
-if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
-	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator	
-	dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/src
+if(NOT EXISTS ${DUKTAPE_DIR}/src/duktape.c)
+	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE_DIR}/util/dist.py)  # default generator	
+	dk_executeProcess(${PYTHON_EXE} ${DUKTAPE_DIR}/tools/configure.py
+		--output-directory ${DUKTAPE_DIR}/src
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT
 		-DDUK_USE_DEBUGGER_DUMPHEAP
 		-DDUK_USE_DEBUGGER_INSPECT
@@ -52,7 +52,7 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 		-DDUK_USE_FATAL_HANDLER
 		-DDUK_USE_GLOBAL_BINDING
 		-DDUK_USE_INTERRUPT_COUNTER)
-	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+	#dk_executeProcess(${NODE_EXE} ${DUKTAPE_DIR}/src-tools/index.js configure --output-directory ${DUKTAPE_DIR}/src --source-directory ${DUKTAPE_DIR}/src-input --config-directory ${DUKTAPE_DIR}/config)
 endif()
 
 

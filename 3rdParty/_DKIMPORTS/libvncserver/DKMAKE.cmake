@@ -83,8 +83,8 @@ endif()
 
 ### PATCH ###
 if(APPLE OR EMSCRIPTEN)
-	dk_fileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dk_fileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 

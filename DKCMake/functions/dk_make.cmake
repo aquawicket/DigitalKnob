@@ -20,7 +20,7 @@ function(dk_make path) #lib
 	if(EMSCRIPTEN)
 		dk_fatal("No proper dk_make() implemented for emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-		dk_cd(${path}/${BUILD_DIR})
+		dk_cd(${path}/${CONFIG_PATH})
 		
 		if(${ARGC} GREATER 1)
 			dk_queueCommand(${EMMAKE} ${CMAKE_MAKE_PROGRAM} ${lib})
@@ -32,7 +32,7 @@ function(dk_make path) #lib
 		#RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
-		#dk_cd(${path}/${BUILD_DIR})
+		#dk_cd(${path}/${CONFIG_PATH})
 		dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
 		dk_assert(CMAKE_MAKE_PROGRAM)
 		dk_printVar(CMAKE_MAKE_PROGRAM)

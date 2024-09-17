@@ -13,7 +13,7 @@ dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main
 #dk_validate(MULTI_CONFIG "dk_getMULTI_CONFIG()")
 ### LINK ###
 dk_include			(${LIBJPEG_TURBO}													LIBJPEG_TURBO_INCLUDE_DIR)
-dk_include			(${LIBJPEG_TURBO}/${BUILD_DIR}										LIBJPEG_TURBO_INCLUDE_DIR2)
+dk_include			(${LIBJPEG_TURBO}/${CONFIG_PATH}										LIBJPEG_TURBO_INCLUDE_DIR2)
 dk_include			(${LIBJPEG_TURBO}/src												LIBJPEG_TURBO_INCLUDE_DIR3)
 ANDROID_dk_include	(${LIBJPEG_TURBO}/${triple}/$(BUILD_TYPE)/jni)
 

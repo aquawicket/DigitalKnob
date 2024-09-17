@@ -7,11 +7,6 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_depend(autoconf)
-	dk_depend(automake)
-	dk_depend(libtool)
-endif()
 dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
@@ -22,27 +17,31 @@ dk_depend(zlib)
 #dk_import(https://github.com/GNOME/libxml2.git)
 #dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
 dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
-
+if(NOT EXISTS ${LIBXML2}/configure)
+	dk_depend(autoconf)
+	dk_depend(automake)
+	dk_depend(libtool)
+endif()
 
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${LIBXML2})
-dk_include				(${LIBXML2}/include 							LIBXML2_INCLUDE_DIR)
+dk_include				(${LIBXML2_DIR})
+dk_include				(${LIBXML2_DIR}/include 							LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2}/${triple}								LIBXML2_INCLUDE_DIR2)
+	dk_include			(${LIBXML2_TRIPLE_DIR}								LIBXML2_INCLUDE_DIR2)
 else()
-	DEBUG_dk_include    (${LIBXML2}/${triple}/${DEBUG_DIR}					LIBXML2_INCLUDE_DIR2)
-	RELEASE_dk_include  (${LIBXML2}/${triple}/${RELEASE_DIR}				LIBXML2_INCLUDE_DIR2)
+	DEBUG_dk_include    (${LIBXML2_DEBUG_DIR}								LIBXML2_INCLUDE_DIR2)
+	RELEASE_dk_include  (${LIBXML2_RELEASE_DIR}								LIBXML2_INCLUDE_DIR2)
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug		(${LIBXML2}/${triple}/${DEBUG_DIR}/libxml2sd.lib	LIBXML2_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${LIBXML2}/${triple}/${RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${LIBXML2_DEBUG_DIR}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBXML2_RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBXML2}/${triple}/${DEBUG_DIR}/libxml2.a		LIBXML2_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBXML2}/${triple}/${RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
+	dk_libDebug			(${LIBXML2_DEBUG_DIR}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBXML2_RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
 endif()
 
 

@@ -25,13 +25,6 @@ function(dk_import url)
 	
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
 	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
-	
-	dk_printVar(${plugin_var})
-	dk_printVar(${plugin_var}_URL)
-	dk_printVar(${plugin_var}_VERSION)
-	dk_printVar(${plugin_var}_FOLDER)
-	dk_printVar(${plugin_var}_BRANCH)
-	dk_printVar(${plugin_var}_TAG)
 
 	if(NOT DKOFFLINE)
 		###### Import Git Repository ######

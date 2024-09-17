@@ -43,12 +43,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%DKLINK%"=="Static"          %dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON
     if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
-    
-    set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
-    ::%dk_call% dk_printVar CMAKE_BINARY_DIR
-        
-    %dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
-    %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 
     ::############ CMake Options ############
     %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
@@ -73,7 +67,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%TARGET_OS%"=="win_x86_64_clang"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=CLANG64
     if "%TARGET_OS%"=="win_x86_64_mingw"   %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=MINGW64
     if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -DMSYSTEM=UCRT64
-    
+   
+	if "%TARGET_OS%"=="ios_arm32"          set "MULTI_CONFIG=1"
+	if "%TARGET_OS%"=="ios_arm64"          set "MULTI_CONFIG=1"
+    if "%TARGET_OS%"=="iossim_x86"         set "MULTI_CONFIG=1"
+    if "%TARGET_OS%"=="iossim_x86_64"      set "MULTI_CONFIG=1"
+	if "%TARGET_OS%"=="mac_x86"            set "MULTI_CONFIG=1"
+    if "%TARGET_OS%"=="mac_x86_64"         set "MULTI_CONFIG=1"
+	if "%TARGET_OS%"=="win_arm64_msvc"     set "MULTI_CONFIG=1"
+	if "%TARGET_OS%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
+	if "%TARGET_OS%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
+	if not defined MULTI_CONFIG            set "SINGLE_CONFIG=1"
+	if defined MULTI_CONFIG   set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
+	if defined SINGLE_CONFIG  set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
+	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
+	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
+    %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
+	
     if "%TARGET_OS%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%TARGET_OS%"=="android_x86" 	   %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
@@ -99,6 +109,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A x64
     if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
 
+	
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
 ::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN

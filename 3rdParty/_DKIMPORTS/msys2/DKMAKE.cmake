@@ -30,21 +30,21 @@ endif()
 
 ### INSTALL ###
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
+dk_importVariables(${MSYS2_DL} rtn_val)
 
-
-### Get MSYS2 and MSYS2_EXE variables ###
-dk_basename(${MSYS2_DL} MSYS2_DL_FILE)
-dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
-dk_validate(DK3RDPARTY_DIR "dk_validateBranch()")
-dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
-dk_set(MSYS2_EXE "${MSYS2}/msys2.exe")
+### Get MSYS2_DIR and MSYS2_EXE variables ###
+#dk_basename(${MSYS2_DL} MSYS2_DL_FILE)
+#dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
+#dk_validate(DK3RDPARTY_DIR "dk_validateBranch()")
+#dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
+dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 
 
 ### Install Msys2 ###
 if(NOT EXISTS ${MSYS2_EXE})
 	dk_info("Installing ${MSYS2_FOLDER}")
 	dk_download(${MSYS2_DL} ${DKDOWNLOAD_DIR})
-	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2}" --confirm-command)
+	dk_command("${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}" install --root "${MSYS2_DIR}" --confirm-command)
 endif()	
 
 
@@ -52,11 +52,11 @@ endif()
 
 dk_validate(triple  "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-	dk_prependEnvPath("${MSYS2}/usr/bin")	
-	dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
+	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
+	dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 	
 	### Update with pacman ###
-	dk_findProgram(PACMAN_EXE pacman "${MSYS2}/usr/bin")
+	dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 	dk_assert(PACMAN_EXE)
 	dk_command(${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	
@@ -66,7 +66,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
-		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
+		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 		dk_exportVars(PATH "$ENV{PATH}")
 
 		if(win_x86_clang)					
@@ -83,12 +83,12 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		endif()
 	else()
-		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2}/usr/bin:$PATH")
+		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
 	endif()
 	
 	### Create Bash Exports ###
 	dk_validate(CYGPATH_EXE  "dk_depend(cygpath)")
-	dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
+	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
 	
 	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")
 	dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang64/bin:$PATH")
@@ -98,13 +98,13 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/ucrt64/bin:$PATH")
 	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/usr/bin:$PATH")
 	
-	dk_set(CLANG32_EXE 		"${MSYS2}/clang32.exe")
-	dk_set(CLANG64_EXE 		"${MSYS2}/clang64.exe")
-	dk_set(CLANGARM64_EXE 	"${MSYS2}/clangarm64.exe")
-	dk_set(MINGW32_EXE 		"${MSYS2}/mingw32.exe")
-	dk_set(MINGW64_EXE 		"${MSYS2}/mingw64.exe")
-	dk_set(UCRT64_EXE 		"${MSYS2}/ucrt64.exe")
-	dk_set(MSYS2_EXE 		"${MSYS2}/msys2.exe")
+	dk_set(CLANG32_EXE 		"${MSYS2_DIR}/clang32.exe")
+	dk_set(CLANG64_EXE 		"${MSYS2_DIR}/clang64.exe")
+	dk_set(CLANGARM64_EXE 	"${MSYS2_DIR}/clangarm64.exe")
+	dk_set(MINGW32_EXE 		"${MSYS2_DIR}/mingw32.exe")
+	dk_set(MINGW64_EXE 		"${MSYS2_DIR}/mingw64.exe")
+	dk_set(UCRT64_EXE 		"${MSYS2_DIR}/ucrt64.exe")
+	dk_set(MSYS2_EXE 		"${MSYS2_DIR}/msys2.exe")
 endif()
 
 

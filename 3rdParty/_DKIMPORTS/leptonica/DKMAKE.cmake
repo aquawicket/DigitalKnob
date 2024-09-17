@@ -44,7 +44,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${BUILD_DIR})
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
 
 
 ### GENERATE ###

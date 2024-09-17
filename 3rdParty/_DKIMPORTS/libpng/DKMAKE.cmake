@@ -23,7 +23,7 @@ endif()
 ### LINK ###
 dk_define					(PNG_STATIC)
 dk_include					(${LIBPNG}  																	PNG_INCLUDE_DIR)
-dk_include					(${LIBPNG}/${BUILD_DIR}															PNG_INCLUDE_DIR2)
+dk_include					(${LIBPNG}/${CONFIG_PATH}															PNG_INCLUDE_DIR2)
 ANDROID_dk_include			(${LIBPNG}/${triple}/$(BUILD_TYPE)/jni)
 if(MSVC)
 	ANDROID_dk_libDebug		(${LIBPNG}/${triple}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)

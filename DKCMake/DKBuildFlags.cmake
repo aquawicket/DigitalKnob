@@ -714,7 +714,7 @@ endif()
 
 
 
-# GENERATOR			BUILD_DIR		    OUTPUT_DIR
+# GENERATOR			CONFIG_PATH		    BUILD_PATH
 # -----------------------------------------------
 # Visual Studio  	${triple}			${triple}/${TYPE}		
 # XCODE			    ${triple}			${triple}/${TYPE} 

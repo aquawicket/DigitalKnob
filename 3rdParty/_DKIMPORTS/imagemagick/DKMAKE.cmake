@@ -1,17 +1,14 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-dk_validate(host_triple "dk_getHostTriple()")
 # https://github.com/ImageMagick/ImageMagick.git
 # https://imagemagick.org/index.php
 
 ### DEPEND ###
 #dk_depend(ghostscript)
-dk_depend(vc_redist)
 
-
+dk_validate(HOST_TRIPLE "dk_getHostTriple()")
 if(WIN_HOST)
-	dk_load			(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
-	#dk_assert		(VCCOMP140_DLL)
-	#dk_assertPath	(${VCCOMP140_DLL})
+	#dk_load	(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
+	dk_depend	(vc_redist)
 endif()
 
 
@@ -21,7 +18,7 @@ UNIX_HOST_dk_import			(https://github.com/ImageMagick/ImageMagick/archive/refs/t
 ### IMPORT BINARY ###
 WIN_X86_HOST_dk_import		(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x86.zip)
 WIN_X86_64_HOST_dk_import	(https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-38-portable-Q16-x64.zip)
-WIN_HOST_dk_set				(IMAGEMAGICK_CONVERT_EXE ${IMAGEMAGICK}/magick.exe)
+WIN_HOST_dk_set				(IMAGEMAGICK_CONVERT_EXE ${IMAGEMAGICK_DIR}/magick.exe)
 
 
 
@@ -29,19 +26,15 @@ if(DKAPP)
 if(NOT ANDROID)
 if(NOT WIN)
 	### LINK ###
-	dk_include				(${IMAGEMAGICK}/${triple})
+	dk_include				(${IMAGEMAGICK_TRIPLE_DIR})
 
-	UNIX_HOST_dk_libDebug	(${IMAGEMAGICK}/${triple}/${DEBUG_DIR}/libimagemagick.a)
-	UNIX_HOST_dk_libRelease	(${IMAGEMAGICK}/${triple}/${RELEASE_DIR}/libimagemagick.a)
-	#WIN_dk_libDebug		(${IMAGEMAGICK}/${triple}/${DEBUG_DIR}/imagemagickd.lib)
-	#WIN_dk_libRelease		(${IMAGEMAGICK}/${triple}/${RELEASE_DIR}/imagemagick.lib)
+	UNIX_dk_libDebug		(${IMAGEMAGICK_DEBUG_DIR}/libimagemagick.a)
+	UNIX_dk_libRelease		(${IMAGEMAGICK_RELEASE_DIR}/libimagemagick.a)
+	#WIN_dk_libDebug		(${IMAGEMAGICK_DEBUG_DIR}/imagemagickd.lib)
+	#WIN_dk_libRelease		(${IMAGEMAGICK_RELEASE_DIR}/imagemagick.lib)
 
 
 	### GENERATE / COMPILE ###
-	#DEBUG_dk_cd		(${IMAGEMAGICK}/${triple}/${DEBUG_DIR})
-	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	#RELEASE_dk_cd		(${IMAGEMAGICK}/${triple}/${RELEASE_DIR})
-	#RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 	dk_configure			(${IMAGEMAGICK})
 	
 	dk_build				(${IMAGEMAGICK})

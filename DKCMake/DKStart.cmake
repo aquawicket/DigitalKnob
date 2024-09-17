@@ -94,7 +94,7 @@ endif()
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 dk_validate(host_triple "dk_getHostTriple()")
 dk_validate(triple "dk_getTargetTriple()")
-dk_validate(BUILD_DIR "dk_getMULTI_CONFIG()")
+dk_validate(CONFIG_PATH "dk_getMULTI_CONFIG()")
 
 
 ##### Load Function files #################
