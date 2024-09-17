@@ -37,6 +37,7 @@ function(dk_bashEnv)
 	endif()
 	
 	### BASH_COMMANDS ###
+	dk_fixme("dk_bashEnv(${ARGV}:${CMAKE_CURRENT_LIST_LINE})")
 	list(APPEND BASH_COMMANDS "cd ${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
 	if(ANDROID)
 		dk_assert(ANDROID_BASH_EXPORTS)

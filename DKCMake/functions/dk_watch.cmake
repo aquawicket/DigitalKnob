@@ -30,7 +30,7 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE)
-	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)
-	dk_watch(CMAKE_CURRENT_FUNCTION)
+	dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)
+	#dk_watch(CMAKE_CURRENT_FUNCTION)
 
 endfunction()
