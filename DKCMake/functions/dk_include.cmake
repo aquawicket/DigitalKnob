@@ -12,6 +12,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_include path)
 	dk_debugFunc("\${ARGV}")
 	
+	if(NOT EXISTS "${path}")
+		dk_fatal("dk_include(): path:${path} does not exist")
+	endif()
+	
 	list(FIND DKINCLUDES_LIST "${path}" index)
 	if(${index} GREATER -1)
 		dk_return()	# path is already in the list
@@ -47,4 +51,5 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
+	dk_include("TODO")
 endfunction()
