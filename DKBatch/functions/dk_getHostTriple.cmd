@@ -23,9 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: Variable names are not case sensitive in batch
 	set "host_os=win"
 	%dk_call% dk_assert host_os
-	set "%host_os%_host=1"
+::	set "%host_os%_host=1"
 	%dk_call% dk_toUpper %host_os% HOST_OS
-	set "HOST_OS=%HOST_OS%"
+::	set "HOST_OS=%HOST_OS%"
 	set "%HOST_OS%_HOST=1"
 ::	%dk_call% dk_printVar host_os
 	%dk_call% dk_printVar HOST_OS
@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "host_arch=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "host_arch=arm64"
 	%dk_call% dk_assert host_arch
-	set "%host_arch%_host=1"
+::	set "%host_arch%_host=1"
 	%dk_call% dk_toUpper %host_arch% HOST_ARCH
 	set "HOST_ARCH=%HOST_ARCH%"
 	set "%HOST_ARCH%_HOST=1"             
@@ -62,18 +62,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::### set host_triple ###
 	if not defined host_arch goto:end_host_arch
-		set "host_triple=%host_os%_%host_arch%"
+::		set "host_triple=%host_os%_%host_arch%"
 		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%"
-		set "%host_triple%_host=1"
+::		set "%host_triple%_host=1"
 		set "%HOST_TRIPLE%_HOST=1"
 ::		%dk_call% dk_printVar %host_triple%_host
 ::		%dk_call% dk_printVar %HOST_TRIPLE%_HOST
 	:end_host_arch
 	
 	if not defined host_env goto:end_host_env
-		set "host_triple=%host_os%_%host_arch%_%host_env%"
+::		set "host_triple=%host_os%_%host_arch%_%host_env%"
 		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%_%HOST_ENV%"
-		set "%host_triple%_host=1"	
+::		set "%host_triple%_host=1"	
 		set "%HOST_TRIPLE%_HOST=1"
 ::		%dk_call% dk_printVar %host_triple%_host
 ::		%dk_call% dk_printVar %HOST_TRIPLE%_HOST
