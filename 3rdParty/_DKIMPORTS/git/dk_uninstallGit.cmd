@@ -20,15 +20,17 @@ call dk_source dk_validate
     if "%DK_HOST_ARCH%"=="x86_64" call dk_set GIT_DL "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
     if not defined GIT_DL call dk_error "GIT_DL is invalid"
 	
-    call dk_basename %GIT_DL% GIT_DL_FILE
-    call dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-    ::call dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-    call dk_toLower %GIT_FOLDER% GIT_FOLDER
-	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
-	call dk_set GIT_DIR "%DKTOOLS_DIR%\%GIT_FOLDER%"
+    %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
+    %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
+	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
+    ::%dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
+    %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
+    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	::set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
+	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 
 	::FIXME: kill git.exe process
-    call dk_delete "%GIT_DIR%"
+    call dk_delete "%GIT%"
         
 	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	

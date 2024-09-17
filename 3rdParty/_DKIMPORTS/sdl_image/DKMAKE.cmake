@@ -40,7 +40,7 @@ dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include					(${SDL_IMAGE}											SDL2_IMAGE_INCLUDE_DIR)
+dk_include					(${SDL_IMAGE_DIR}											SDL2_IMAGE_INCLUDE_DIR)
 if(MSVC)
 	ANDROID_dk_libDebug		(${SDL_IMAGE}/${triple}/lib/${DEBUG_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
 	ANDROID_dk_libRelease	(${SDL_IMAGE}/${triple}/lib/${RELEASE_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
