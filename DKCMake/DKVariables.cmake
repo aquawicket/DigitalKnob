@@ -145,8 +145,8 @@ endif()
 ###########################################################################
 ## Get HOST_TRIPLE and TARGET_TRIPLE
 ###########################################################################
-dk_getHostTriple()
-dk_getTargetTriple()
+dk_HOST_TRIPLE()
+dk_TARGET_TRIPLE()
 
 
 
@@ -179,7 +179,7 @@ dk_getTargetTriple()
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
-dk_getTargetTriple()
+dk_TARGET_TRIPLE()
 
 
 ### Set other OS Specific variables ###

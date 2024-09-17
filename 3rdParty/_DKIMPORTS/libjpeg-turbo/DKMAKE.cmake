@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
 
 
-#dk_validate(MULTI_CONFIG "dk_getMULTI_CONFIG()")
+#dk_validate(MULTI_CONFIG "dk_MULTI_CONFIG()")
 ### LINK ###
 dk_include			(${LIBJPEG_TURBO_DIR}									LIBJPEG_TURBO_INCLUDE_DIR)
 dk_include			(${LIBJPEG_TURBO_CONFIG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)

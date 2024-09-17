@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
@@ -27,7 +27,7 @@ dk_importVariables(${CMAKE_DL} rtn_var)
 
 
 
-dk_validate(TRIPLE "dk_getTargetTriple()")
+dk_validate(TRIPLE "dk_TARGET_TRIPLE()")
 
 ### IMPORT ###
 if(ANDROID_HOST)

@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 if(WIN_HOST)
 	dk_validate(PYTHON3_DIR "dk_depend(python3)")
 	set(bat ".bat")

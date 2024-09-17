@@ -7,7 +7,7 @@ if(EXISTS ${PACMAN_EXE})
 	dk_return()
 endif()
 
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 if(NOT WIN_HOST)
 	dk_undepend(pacman)
 	dk_return()

@@ -11,12 +11,12 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
-dk_validate(HOST_TRIPLE     "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE     "dk_HOST_TRIPLE()")
 if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
 endif()
-dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
 
 
 ### VERSION ###

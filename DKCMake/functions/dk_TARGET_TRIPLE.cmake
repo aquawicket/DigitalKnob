@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_getTargetTriple()
+# dk_TARGET_TRIPLE()
 #
 #	Set the cached target variables
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
@@ -17,7 +17,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64 
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang 
 #
-function(dk_getTargetTriple)
+function(dk_TARGET_TRIPLE)
 	dk_debugFunc("\${ARGV}")
 	
 	### Get TARGET_DIR ###
@@ -197,6 +197,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	#dk_getTargetTriple("C:/Users/Administrator/digitalknob/Development/DKApps/DKSDLRml/win_x86_64_clang/Debug")
-	dk_getTargetTriple()
+	#dk_TARGET_TRIPLE("C:/Users/Administrator/digitalknob/Development/DKApps/DKSDLRml/win_x86_64_clang/Debug")
+	dk_TARGET_TRIPLE()
 endfunction()

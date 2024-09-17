@@ -3,14 +3,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ##################################################################################
-# dk_getMULTI_CONFIG()
+# dk_MULTI_CONFIG()
 #
 #
-function(dk_getMULTI_CONFIG)
+function(dk_MULTI_CONFIG)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")  # get DEBUG, RELEASE variables
-	dk_validate(OS           "dk_getTargetTriple()")
+	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")  # get DEBUG, RELEASE variables
+	dk_validate(OS           "dk_TARGET_TRIPLE()")
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -68,5 +68,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_getMULTI_CONFIG()
+	dk_MULTI_CONFIG()
 endfunction()

@@ -290,6 +290,9 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 			dk_set(${PLUGIN_VAR_PREFIX} ${PLUGIN_INSTALL_PATH})
 			dk_printVar(${PLUGIN_VAR_PREFIX})
 		endif()
+		if(EXISTS ${${PLUGIN_VAR_PREFIX}})
+			dk_set(CURRENT_PLUGIN ${PLUGIN_VAR_PREFIX})
+		endif()
 	#endif()
 	
 	# LIB_DIR
@@ -299,8 +302,11 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 			dk_printVar(${PLUGIN_VAR_PREFIX}_DIR)
 		endif()
 	endif()
-	dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_VAR_PREFIX}_DIR})
-	dk_assertPath(CURRENT_PLUGIN_DIR)
+	#dk_assertPath(CURRENT_PLUGIN_DIR)
+	if(EXISTS ${${PLUGIN_VAR_PREFIX}_DIR})
+		dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_VAR_PREFIX}_DIR})
+	endif()
+	
 	
 	# LIB_URL
 	if(NOT ${PLUGIN_VAR_PREFIX}_URL)

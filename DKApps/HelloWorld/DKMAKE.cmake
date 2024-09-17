@@ -2,8 +2,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 return()
 # NOTE: HelloWorld requires no DK libs
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
-dk_validate(TRIPLE "dk_getTargetTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
+dk_validate(TRIPLE "dk_TARGET_TRIPLE()")
 
 
 set(APP_NAME "HelloWorld")

@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.msys2.org
 
 ### We only accesp windows hosts
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()
@@ -14,7 +14,7 @@ endif()
 #endif()
 
 
-dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")
 	

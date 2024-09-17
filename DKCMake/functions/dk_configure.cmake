@@ -9,8 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DKBUILD_TYPE "dk_getBUILD_TYPE()")
-	dk_validate(CONFIG_PATH "dk_getMULTI_CONFIG()")
+	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
+	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
 	#dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	dk_assertPath(CURRENT_PLUGIN_DIR)

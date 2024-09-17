@@ -29,7 +29,7 @@ function(dk_buildMain)
 #	#dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_getHostTriple()
+	dk_HOST_TRIPLE()
 	
 	dk_getDKPaths()
 

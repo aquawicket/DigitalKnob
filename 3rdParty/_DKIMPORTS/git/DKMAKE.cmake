@@ -5,7 +5,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 dk_depend(sudo)
-dk_validate(HOST_TRIPLE "dk_getHostTriple()")
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 
 ### DOWNLOAD ###
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
