@@ -15,7 +15,6 @@ dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main
 dk_include			(${LIBJPEG_TURBO_DIR}									LIBJPEG_TURBO_INCLUDE_DIR)
 dk_include			(${LIBJPEG_TURBO_CONFIG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
 dk_include			(${LIBJPEG_TURBO_DIR}/src								LIBJPEG_TURBO_INCLUDE_DIR3)
-#ANDROID_dk_include	(${LIBJPEG_TURBO}/${triple}/$(BUILD_TYPE)/jni)
 
 if(WIN AND MSVC)
 	dk_libDebug		(${LIBJPEG_TURBO_DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)

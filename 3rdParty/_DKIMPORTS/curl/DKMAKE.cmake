@@ -31,27 +31,27 @@ endif()
 
 
 ### LINK ###
-dk_define				(CURL_STATICLIB)
-dk_include				(${CURL}/include 									CURL_INCLUDE_DIR)
-#dk_include				(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
-#DEBUG_dk_include		(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
-#RELEASE_dk_include		(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
-dk_include				(${CURL_CONFIG_DIR}/lib							CURL_INCLUDE_DIR2)
+dk_define					(CURL_STATICLIB)
+dk_include					(${CURL_DIR}/include 								CURL_INCLUDE_DIR)
+#dk_include					(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
+#DEBUG_dk_include			(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
+#RELEASE_dk_include			(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+dk_include					(${CURL_CONFIG_DIR}/lib								CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
-	set(CURL_DEBUG_DIR ${CURL}/${triple}/lib/${DEBUG_DIR})
-	set(CURL_RELEASE_DIR ${CURL}/${triple}/lib/${RELEASE_DIR})
+	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
+	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/lib/${RELEASE_DIR})
 else()
-	set(CURL_DEBUG_DIR ${CURL}/${triple}/${DEBUG_DIR}/lib)
-	set(CURL_RELEASE_DIR ${CURL}/${triple}/${RELEASE_DIR}/lib)
+	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/${DEBUG_DIR}/lib)
+	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/${RELEASE_DIR}/lib)
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug		(${CURL_DEBUG_DIR}/libcurl.lib					CURL_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${CURL_RELEASE_DIR}/libcurl.lib				CURL_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${CURL_DEBUG_DIR}/libcurl.lib						CURL_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.lib					CURL_LIBRARY_RELEASE)
 else()	
-	dk_libDebug		(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
-	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a					CURL_LIBRARY_RELEASE)
+	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
+	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a						CURL_LIBRARY_RELEASE)
 endif()
 
 
@@ -59,9 +59,9 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL}/${triple}/include/curl")
+	WIN_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL_TRIPLE_DIR}/include/curl")
 elseif()
-	dk_set			(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL}/${triple}/include")
+	dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
 endif()
 
 

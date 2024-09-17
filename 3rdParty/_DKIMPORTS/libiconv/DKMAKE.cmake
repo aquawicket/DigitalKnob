@@ -16,7 +16,6 @@ dk_include				(${LIBICONV_DIR}/include 				LIBICONV_INCLUDE_DIR)
 dk_include				(${LIBICONV_CONFIG_DIR})
 DEBUG_dk_include		(${LIBICONV_DEBUG_DIR})
 RELEASE_dk_include		(${LIBICONV_RELEASE_DIR})
-#ANDROID_dk_include		(${LIBICONV}/${triple}/$(BUILD_TYPE)/jni)
 
 # libcharset
 if(MSVC)

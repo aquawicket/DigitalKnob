@@ -24,7 +24,7 @@ endif()
 dk_define					(PNG_STATIC)
 dk_include					(${LIBPNG_DIR}  														PNG_INCLUDE_DIR)
 dk_include					(${LIBPNG_CONFIG_DIR}													PNG_INCLUDE_DIR2)
-#ANDROID_dk_include			(${LIBPNG}/${triple}/$(BUILD_TYPE)/jni)
+
 if(MSVC)
 	ANDROID_dk_libDebug		(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
 	ANDROID_dk_libRelease	(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
