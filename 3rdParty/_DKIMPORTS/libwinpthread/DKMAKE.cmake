@@ -9,11 +9,11 @@ dk_depend(msys2)
 
 if(WIN_X86)
 	#dk_set(LIBWINPTHREAD ${MINGW32}/i686-w64-mingw32/lib)
-	dk_set(LIBWINPTHREAD ${MSYS2}/mingw32/lib)
+	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/mingw32/lib)
 endif()
 if(WIN_X86_64)
 	#dk_set(LIBWINPTHREAD ${MINGW64}/x86_64-w64-mingw32/lib)
-	dk_set(LIBWINPTHREAD ${MSYS2}/mingw64/lib)
+	dk_set(LIBWINPTHREAD ${MSYS2_DIR}/mingw64/lib)
 endif()
 
 

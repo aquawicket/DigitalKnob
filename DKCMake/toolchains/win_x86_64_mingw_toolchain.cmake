@@ -16,7 +16,7 @@ if(NOT DKCMAKE_DIR)
 endif()
 
 dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-set(MINGW64_DIR "${MSYS2}/mingw64")
+set(MINGW64_DIR "${MSYS2_DIR}/mingw64")
 set(CMAKE_MAKE_PROGRAM ${MINGW64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
 set(CMAKE_C_COMPILER ${MINGW64_DIR}/bin/gcc.exe)
 set(CMAKE_CXX_COMPILER ${MINGW64_DIR}/bin/g++.exe)

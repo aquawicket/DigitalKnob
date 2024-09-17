@@ -4,7 +4,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 if(MSYSTEM)
 	dk_depend(msys2)
 	
-	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 	
 	if(win_x86_clang)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-yasm --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32

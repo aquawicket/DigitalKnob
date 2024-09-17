@@ -16,7 +16,7 @@ if(NOT DKCMAKE_DIR)
 endif()
 
 dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-set(CLANGARM64_DIR "${MSYS2}/clangarm64")
+set(CLANGARM64_DIR "${MSYS2_DIR}/clangarm64")
 set(CMAKE_MAKE_PROGRAM ${CLANGARM64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
 set(CMAKE_C_COMPILER ${CLANGARM64_DIR}/bin/clang.exe)
 set(CMAKE_CXX_COMPILER ${CLANGARM64_DIR}/bin/clang++.exe)

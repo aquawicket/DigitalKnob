@@ -14,7 +14,7 @@ dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
 
 dk_depend(msys2)
 dk_depend(pacman)
-dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 
 if(win_x86_clang)
 	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-gdb --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32

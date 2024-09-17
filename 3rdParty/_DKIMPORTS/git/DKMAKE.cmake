@@ -83,8 +83,8 @@ return()
 
 #if(MSYSTEM)
 #	dk_depend(msys2)
-#	if(NOT EXISTS ${MSYS2})
-#		dk_fatal("MSYS2:${MSYS2} does not exist")
+#	if(NOT EXISTS ${MSYS2_DIR})
+#		dk_fatal("MSYS2:${MSYS2_DIR} does not exist")
 #	endif()
 #	
 #	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NO_HALT) # BASH_ENV)
@@ -93,7 +93,7 @@ return()
 #	endif()
 #	
 #	if(NOT EXISTS ${GIT_EXE})
-#		dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+#		dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 #		dk_command(${PACMAN_EXE} -S git --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 #	endif()
 #	

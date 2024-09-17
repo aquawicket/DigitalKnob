@@ -17,7 +17,7 @@ endif()
 
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-dk_findProgram(CYGPATH_EXE cygpath "${MSYS2}/usr/bin")
+dk_findProgram(CYGPATH_EXE cygpath "${MSYS2_DIR}/usr/bin")
 
 	
 dk_assert(CYGPATH_EXE)  # change to assertPath

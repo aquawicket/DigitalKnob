@@ -18,7 +18,7 @@ MAC_HOST_dk_queueCommand(brew install automake)
 if(CLANG OR MINGW OR UCRT)
 	dk_depend(msys2)
 	
-	dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 	
 	if(win_x86_clang)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
@@ -34,6 +34,6 @@ if(CLANG OR MINGW OR UCRT)
 		dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	endif()
 	
-	set(ENV{ACLOCAL_PATH} "${MSYS2}/usr/share/aclocal")
+	set(ENV{ACLOCAL_PATH} "${MSYS2_DIR}/usr/share/aclocal")
 endif()
 

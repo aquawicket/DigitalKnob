@@ -16,7 +16,7 @@ endif()
 
 dk_validate(TARGET_TRIPLE "dk_getTargetTriple()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-	dk_prependEnvPath("${MSYS2}/usr/bin")
+	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")
 	
 	### Install toolchain ###
 	if(MSYSTEM)
@@ -24,10 +24,10 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
-		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
+		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 		
 		dk_validate(PACMAN_EXE  "dk_depend(pacman)")
-		dk_delete("${MSYS2}/var/lib/pacman/db.lck" NO_HALT)
+		dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 		if(win_x86_clang)					
 			dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		elseif(win_x86_64_clang)	
@@ -42,12 +42,12 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		endif()
 	else()
-		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2}/usr/bin:$PATH")
+		dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
 	endif()
 	
 	### Create Bash Exports ###
 	dk_validate(CYGPATH_EXE  "dk_depend(cygpath)")
-	dk_command(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
+	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
 	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
 	dk_set(CLANG64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
@@ -57,5 +57,5 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_set(UCRT64_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
 	dk_set(MSYS2_BASH_EXPORTS		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
 	
-	dk_set(CLANG64_EXE ${MSYS2}/clang64.exe)
+	dk_set(CLANG64_EXE ${MSYS2_DIR}/clang64.exe)
 endif()
