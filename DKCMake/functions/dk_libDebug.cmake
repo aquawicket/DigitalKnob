@@ -16,15 +16,12 @@ function(dk_libDebug lib_path)
 		return()
 	endif()	
 	
-	#dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
 		dk_set(QUEUE_BUILD ON) 
 	endif()
 	
-	#string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	#if(${index} GREATER -1)
 	if(lib_path IN_LIST DEBUG_LIBS)
 		return() # The library is already in the list
 	endif()

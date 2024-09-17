@@ -7,7 +7,7 @@ dk_validate(TRIPLE "dk_getTargetTriple()")
 
 ### IMPORT ###
 dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
-
+dk_makeDirectory(${ZLIB}/${BUILD_DIR})
 
 ### LINK ###
 dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
