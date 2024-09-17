@@ -18,21 +18,21 @@ WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x
 
 if(WIN_HOST)
 	set(JAVA_VERSION 11)
-	set(registerJDK11 ${OPENJDK}/registerJDK.cmd)
+	set(registerJDK11 ${OPENJDK_DIR}/registerJDK.cmd)
 
-	dk_getNativePath("${OPENJDK}" OPENJDK_WINPATH)
+	dk_getNativePath("${OPENJDK_DIR}" OPENJDK_WINDIR)
 	
 	dk_fileWrite(${registerJDK11} "@echo off\n")
 	dk_fileAppend(${registerJDK11} "set JAVA_VERSION=${JAVA_VERSION}\n")
 	dk_fileAppend(${registerJDK11} "setx JAVA_VERSION ${JAVA_VERSION}\n")
-	dk_fileAppend(${registerJDK11} "set JAVA_HOME=${OPENJDK_WINPATH}\n")
-	dk_fileAppend(${registerJDK11} "setx JAVA_HOME ${OPENJDK_WINPATH}\n")
-	dk_fileAppend(${registerJDK11} "setx VS_JavaHome ${OPENJDK_WINPATH}\n")
-	dk_fileAppend(${registerJDK11} "setx STUDIO_JDK ${OPENJDK_WINPATH}\n")
-	dk_fileAppend(${registerJDK11} "setx STUDIO_GRADLE_JDK ${OPENJDK_WINPATH}\n")
+	dk_fileAppend(${registerJDK11} "set JAVA_HOME=${OPENJDK_WINDIR}\n")
+	dk_fileAppend(${registerJDK11} "setx JAVA_HOME ${OPENJDK_WINDIR}\n")
+	dk_fileAppend(${registerJDK11} "setx VS_JavaHome ${OPENJDK_WINDIR}\n")
+	dk_fileAppend(${registerJDK11} "setx STUDIO_JDK ${OPENJDK_WINDIR}\n")
+	dk_fileAppend(${registerJDK11} "setx STUDIO_GRADLE_JDK ${OPENJDK_WINDIR}\n")
 	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d ${JAVA_VERSION} /f\n")
-	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"${OPENJDK_WINPATH}\" /f\n")
-	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"${OPENJDK_WINPATH}\\bin\\server\\jvm.dll\" /f\n")
+	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"${OPENJDK_WINDIR}\" /f\n")
+	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"${OPENJDK_WINDIR}\\bin\\server\\jvm.dll\" /f\n")
 	dk_executeProcess(${registerJDK11})
 	
 	### Set Environment Variables ###

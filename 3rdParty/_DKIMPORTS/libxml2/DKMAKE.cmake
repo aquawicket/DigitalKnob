@@ -30,7 +30,7 @@ dk_include				(${LIBXML2_DIR})
 dk_include				(${LIBXML2_DIR}/include 							LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2_TRIPLE_DIR}								LIBXML2_INCLUDE_DIR2)
+	dk_include			(${LIBXML2_CONFIG_DIR}								LIBXML2_INCLUDE_DIR2)
 else()
 	DEBUG_dk_include    (${LIBXML2_DEBUG_DIR}								LIBXML2_INCLUDE_DIR2)
 	RELEASE_dk_include  (${LIBXML2_RELEASE_DIR}								LIBXML2_INCLUDE_DIR2)

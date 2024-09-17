@@ -16,16 +16,16 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include					(${SDL_MIXER}/include										SDL_MIXER_INCLUDE_DIR)
+dk_include					(${SDL_MIXER_DIR}/include										SDL_MIXER_INCLUDE_DIR)
 if(MSVC)
-	WIN_dk_libDebug			(${SDL_MIXER}/${triple}/${DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${SDL_MIXER}/${triple}/${RELEASE_DIR}/SDL2_mixer-static.lib	SDL_MIXER_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib	SDL_MIXER_LIBRARY_RELEASE)
 elseif(ANDROID)
-	ANDROID_dk_libDebug		(${SDL_MIXER}/${triple}/${DEBUG_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${SDL_MIXER}/${triple}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	ANDROID_dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${SDL_MIXER}/${triple}/${DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease			(${SDL_MIXER}/${triple}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug				(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease			(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 

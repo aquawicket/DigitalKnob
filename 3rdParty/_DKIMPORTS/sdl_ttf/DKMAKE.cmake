@@ -17,16 +17,16 @@ dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1
 
 
 ### LINK ###
-dk_include				(${SDL_TTF})
+dk_include				(${SDL_TTF_DIR})
 if(MSVC)
-	dk_libDebug			(${SDL_TTF}/${triple}/lib/${DEBUG_DIR}/SDL_ttf.lib)
-	dk_libRelease		(${SDL_TTF}/${triple}/lib/${RELEASE_DIR}/SDL_ttf.lib)
+	dk_libDebug			(${SDL_TTF_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_ttf.lib)
+	dk_libRelease		(${SDL_TTF_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_ttf.lib)
 elseif(XCODE)
-	dk_libDebug			(${SDL_TTF}/${triple}/lib/${DEBUG_DIR}/SDL_ttf.a)
-	dk_libRelease		(${SDL_TTF}/${triple}/lib/${RELEASE_DIR}/SDL_ttf.a)
+	dk_libDebug			(${SDL_TTF_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_ttf.a)
+	dk_libRelease		(${SDL_TTF_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_ttf.a)
 else()
-	dk_libDebug			(${SDL_TTF}/${triple}/${DEBUG_DIR}/lib/SDL_ttf.a)
-	dk_libRelease		(${SDL_TTF}/${triple}/${RELEASE_DIR}/lib/SDL_ttf.a)
+	dk_libDebug			(${SDL_TTF_CONFIG_DIR}/lib/SDL_ttf.a)
+	dk_libRelease		(${SDL_TTF_CONFIG_DIR}/lib/SDL_ttf.a)
 endif()
 
 

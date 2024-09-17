@@ -10,7 +10,7 @@ function(dk_deleteTempFiles)
 	dk_debugFunc("\${ARGV}")
 	
 	DKASSERT(DIGITALKNOB_DIR)
-	dk_info("Deleteing Temporary files . . .")
+	dk_info("Deleting Temporary files . . .")
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%Z in (*.tmp) do @if %%~xZ==.tmp del "%%Z" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_executeProcess(for /r %%Z in (*.TMP) do @if %%~xZ==.TMP del "%%Z" WORKING_DIRECTORY ${DIGITALKNOB_DIR})

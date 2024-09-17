@@ -21,8 +21,8 @@ dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7
 
 
 ### LINK ###
-dk_include				(${PODOFO})
-dk_include				(${PODOFO}/podofo)
+dk_include				(${PODOFO_DIR})
+dk_include				(${PODOFO_DIR}/podofo)
 dk_include				(${PODOFO}/${triple})
 DEBUG_dk_include		(${PODOFO}/${triple}/${DEBUG_DIR})
 RELEASE_dk_include		(${PODOFO}/${triple}/${RELEASE_DIR})

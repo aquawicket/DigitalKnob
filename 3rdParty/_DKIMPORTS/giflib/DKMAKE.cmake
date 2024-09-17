@@ -23,8 +23,8 @@ set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)
 
 	### LINK ###
-	dk_include			(${GIFLIB_DIR}/lib						GIF_INCLUDE_DIR)
-	#dk_include			(${GIFLIB}/${triple}					GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB_DIR}							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB_DIR}/lib						GIF_INCLUDE_DIR)
 	dk_include			(${GIFLIB_CONFIG_DIR}					GIF_INCLUDE_DIR2)
 	if(WIN AND MSVC)
 		dk_libDebug		(${GIFLIB_DEBUG_DIR}/giflibd.lib		GIF_LIBRARY_DEBUG)
