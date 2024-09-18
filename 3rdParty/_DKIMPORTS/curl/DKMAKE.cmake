@@ -38,6 +38,8 @@ dk_include					(${CURL_DIR}/include 								CURL_INCLUDE_DIR)
 #RELEASE_dk_include			(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
 dk_include					(${CURL_CONFIG_DIR}/lib								CURL_INCLUDE_DIR2)
 
+
+
 if(MULTI_CONFIG)
 	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
 	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/lib/${RELEASE_DIR})
@@ -47,8 +49,8 @@ else()
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug			(${CURL_DEBUG_DIR}/libcurl.lib						CURL_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.lib					CURL_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}				CURL_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}				CURL_LIBRARY_RELEASE)
 else()	
 	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
 	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a						CURL_LIBRARY_RELEASE)
