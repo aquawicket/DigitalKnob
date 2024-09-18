@@ -13,7 +13,7 @@ function(dk_build path) #target NO_HALT
 	dk_debugFunc("\${ARGV}")
 	dk_debug("dk_build(${ARGV})")
 	dk_debug("dk_build(${path})")
-	dk_assertPath(${path})
+	#dk_assertPath(${path})
 	
 	if(NOT QUEUE_BUILD)
 		return()

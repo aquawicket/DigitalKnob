@@ -2,22 +2,32 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configure(SOURCE_DIR) #ARGN
+# dk_configure(LIB_ROOT) SOURCE_DIR <source> #ARGN
 #
 #	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
-function(dk_configure SOURCE_DIR) #ARGN
+function(dk_configure LIB_ROOT) #ARGN
 	dk_debugFunc("\${ARGV}")
-	dk_assertPath(SOURCE_DIR)
+	dk_debug("dk_configure(${ARGV})")
+	dk_assertPath(LIB_ROOT)
+	
+	dk_getOptionValue(SOURCE_DIR ${ARGV})
+	dk_printVar(SOURCE_DIR)
+	if(NOT SOURCE_DIR)
+		dk_set(SOURCE_DIR "${LIB_ROOT}")
+	endif()
 	
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
-	dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
+	
+	
+	
+	dk_set(BINARY_DIR "${LIB_ROOT}/${CONFIG_PATH}")
 	#dk_assertPath(BINARY_DIR)
 	
 	# Configure with CMake		(multi_config / single_config)
-	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
+	if(EXISTS ${LIB_ROOT}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
@@ -32,10 +42,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 		return()
 	
 	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${SOURCE_DIR}/configure.ac) # OR EXISTS ${SOURCE_DIR}/configure)
+	elseif(EXISTS ${LIB_ROOT}/configure.ac) # OR EXISTS ${LIB_ROOT}/configure)
 		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
-		if(EXISTS ${SOURCE_DIR}/configure)
+		if(EXISTS ${LIB_ROOT}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 				dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
