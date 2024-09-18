@@ -25,9 +25,9 @@ dk_depend(appkit)
 dk_depend(build-essential)
 dk_depend(libgtk2.0-dev)
 
-#dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)	# oldest
-#dk_set(CEF_BINARY_VERSION	81.3.3+g072a5f5+chromium-81.0.4044.138)
-dk_set(CEF_BINARY_VERSION	128.4.12+g1d7a1f9+chromium-128.0.6613.138)	# newest
+# oldest to newest
+#dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)						
+dk_set(CEF_BINARY_VERSION	128.4.12+g1d7a1f9+chromium-128.0.6613.138)
 
 LINUX_ARM32_dk_set	(CEF_BINARY_OS linuxarm)
 LINUX_ARM64_dk_set	(CEF_BINARY_OS linuxarm64)
@@ -38,12 +38,12 @@ MAC_X86_64_dk_set	(CEF_BINARY_OS macosx64)
 WIN_ARM64_dk_set	(CEF_BINARY_OS windowsarm64)
 WIN_X86_dk_set		(CEF_BINARY_OS windows32)
 WIN_X86_64_dk_set	(CEF_BINARY_OS windows64)
-	
-dk_import				(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}.tar.bz2)					### .tar.bz2 ###
-dk_import				(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_minimal.tar.bz2)			### _minimal.tar.bz2 ###
-dk_import				(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_client.tar.bz2)			### _client.tar.bz2 ###
-dk_import				(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_release_symbols.tar.bz2)	### _release_symbols.tar.bz2 ###
-dk_import				(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_debug_symbols.tar.bz2)		### _debug_symbols.tar.bz2 ###
+
+dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}.tar.bz2)					### .tar.bz2 ###
+dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_minimal.tar.bz2)			### _minimal.tar.bz2 ###
+dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_client.tar.bz2)			### _client.tar.bz2 ###
+dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_release_symbols.tar.bz2)	### _release_symbols.tar.bz2 ###
+dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_debug_symbols.tar.bz2)		### _debug_symbols.tar.bz2 ###
 
 
 
@@ -105,4 +105,6 @@ WIN_dk_configure		(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
 ### COMPILE ###
 dk_build(${CEF_BINARY_DIR} libcef_dll_wrapper)
 dk_build(${CEF_BINARY_DIR} cefsimple)
+dk_build(${CEF_BINARY_DIR} cefclient)
+dk_build(${CEF_BINARY_DIR} cef_gtest)
 #dk_build(${CEF_BINARY} cefsandbox)
