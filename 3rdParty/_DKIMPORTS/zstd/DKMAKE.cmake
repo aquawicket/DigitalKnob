@@ -23,9 +23,9 @@ else()
 	dk_libDebug				(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_DEBUG)
 	dk_libRelease			(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_RELEASE)
 endif()
-DEBUG_dk_set				(ZSTD_LIBRARY		${ZSTD_LIBRARY_DEBUG})
+DEBUG_dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_DEBUG})
 RELEASE_dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_RELEASE})
-dk_set						(Zstd_LIBRARIES		${ZSTD_LIBRARY_DEBUG} ${ZSTD_LIBRARY_RELEASE})
+dk_set						(Zstd_LIBRARIES		${Zstd_LIBRARY_DEBUG} ${Zstd_LIBRARY_RELEASE})
 dk_set						(Zstd_INCLUDE_DIR	${ZSTD_INCLUDE_DIR})
 
 

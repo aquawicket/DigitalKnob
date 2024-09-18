@@ -723,10 +723,11 @@ if(MAC)
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(MAC_TERMINAL_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
-		set(TERMINAL_SCRIPT 
-			"\#!/bin/bash\n"
-			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
-			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
+		set(TERMINAL_SCRIPT
+			"\#!/bin/bash \ndir=$(cd \"$( dirname \"\${0}\")\" && pwd ) \nOpen -a \"Terminal\" \"\${dir}/${APP_NAME}\""
+			#"\#!/bin/bash \n"
+			#"dir=$(cd \"$( dirname \"\${0}\")\" && pwd ) \n"
+			#"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
 		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/wrapper ${TERMINAL_SCRIPT})
 		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${triple}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple})
