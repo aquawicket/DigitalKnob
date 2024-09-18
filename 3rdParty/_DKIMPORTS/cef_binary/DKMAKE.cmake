@@ -25,17 +25,9 @@ dk_depend(appkit)
 dk_depend(build-essential)
 dk_depend(libgtk2.0-dev)
 
-dk_set(CEF_BINARY_VERSION	81.3.3+g072a5f5+chromium-81.0.4044.138)
-#dk_set(CEF_BINARY_VERSION	83.5.0+gbf03589+chromium-83.0.4103.106)
-#dk_set(CEF_BINARY_VERSION	84.4.1+gfdc7504+chromium-84.0.4147.105)
-#dk_set(CEF_BINARY_VERSION	85.3.13+gcd6cbe0+chromium-85.0.4183.121)
-#dk_set(CEF_BINARY_VERSION	86.0.24+g85e79d4+chromium-86.0.4240.198)
-#dk_set(CEF_BINARY_VERSION	88.1.4+g5a6ab23+chromium-88.0.4324.96)
-#dk_set(CEF_BINARY_VERSION	88.1.6+g4fe33a1+chromium-88.0.4324.96)
-#dk_set(CEF_BINARY_VERSION	90.6.7+g19ba721+chromium-90.0.4430.212)
-#dk_set(CEF_BINARY_VERSION	97.1.9+ga00bca5+chromium-97.0.4692.99)
-#dk_set(CEF_BINARY_VERSION	111.2.6+g491d238+chromium-111.0.5563.65)
-#dk_set(CEF_BINARY_VERSION	126.2.12%2Bg162c3d6%2Bchromium-126.0.6478.127)
+#dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)	# oldest
+#dk_set(CEF_BINARY_VERSION	81.3.3+g072a5f5+chromium-81.0.4044.138)
+dk_set(CEF_BINARY_VERSION	128.4.12+g1d7a1f9+chromium-128.0.6613.138)	# newest
 
 LINUX_ARM32_dk_set	(CEF_BINARY_OS linuxarm)
 LINUX_ARM64_dk_set	(CEF_BINARY_OS linuxarm64)
