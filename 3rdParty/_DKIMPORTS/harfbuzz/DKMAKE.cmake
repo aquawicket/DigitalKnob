@@ -14,9 +14,14 @@ dk_printVar(plugin)
 
 
 ### LINK ###
-dk_include		(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
-dk_libDebug		(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
-dk_libRelease	(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
+dk_include				(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
+if(MSVC)
+	WIN_dk_libDebug		(${HARFBUZZ_DEBUG_DIR}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
+	WIN)dk_libRelease	(${HARFBUZZ_REEASE_DIR}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
+else()
+	dk_libDebug			(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
+	dk_libRelease		(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
+endif()
 
 
 ### GENERATE ###
