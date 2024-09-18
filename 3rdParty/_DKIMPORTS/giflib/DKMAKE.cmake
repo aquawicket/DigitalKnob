@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # http://giflib.sourceforge.net
 # https://github.com/mirrorer/giflib
 # https://github.com/mirrorer/giflib.git

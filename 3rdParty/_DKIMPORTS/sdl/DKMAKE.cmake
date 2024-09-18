@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/libsdl-org/SDL
 # https://www.libsdl.org/
 # https://www.libsdl.org/release/SDL2-2.0.18.zip

@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://wiki.archlinux.org/title/Pacman
 # https://walterteng.com/using-zsh-on-windows
 

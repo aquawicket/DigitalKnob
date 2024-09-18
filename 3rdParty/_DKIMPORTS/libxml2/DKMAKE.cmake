@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://gitlab.gnome.org/GNOME/libxml2
 # https://github.com/GNOME/libxml2
 # http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz

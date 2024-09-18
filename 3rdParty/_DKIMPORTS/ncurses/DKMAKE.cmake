@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/mirror/ncurses.git
 # https://invisible-island.net/ncurses/ncurses.html
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz

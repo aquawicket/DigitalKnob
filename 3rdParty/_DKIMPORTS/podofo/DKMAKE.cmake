@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # http://podofo.sourceforge.net
 # https://github.com/mekentosj/podofo
 

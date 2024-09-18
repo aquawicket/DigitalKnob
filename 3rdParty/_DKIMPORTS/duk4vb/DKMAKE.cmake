@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/dzzie/duk4vb.git
 # http://sandsprite.com/tools.php?id=23
 

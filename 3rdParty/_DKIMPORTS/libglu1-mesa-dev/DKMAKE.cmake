@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libglu1-mesa-dev)
 	dk_return()

@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.nasm.us
 
 dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")

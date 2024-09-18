@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/xiph/ogg.git
 # https://gitlab.xiph.org/xiph/ogg.git
 # https://ftp.osuosl.org/pub/xiph/releases/ogg

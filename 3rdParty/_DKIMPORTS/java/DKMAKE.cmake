@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.java.com/en/download
 # https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245479_4d5417147a92418ea8b615e228bb6935
 # http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe

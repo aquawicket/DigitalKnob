@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip

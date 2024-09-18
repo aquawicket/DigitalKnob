@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://duktape.org/duktape-2.6.0.tar.xz
 # https://github.com/Squareys/duktape/tree/let-support
 # https://github.com/aquawicket/duktape/archive/refs/heads/let-support.zip

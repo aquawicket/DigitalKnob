@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/xiph/flac.git
 # https://ftp.osuosl.org/pub/xiph/releases/flac
 

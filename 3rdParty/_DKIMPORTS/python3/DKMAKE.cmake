@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://docs.python.org/3/using/windows.html
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python

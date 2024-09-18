@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://openal.org/
 # https://openal-soft.org/
 # https://github.com/native-toolkit/openal-android

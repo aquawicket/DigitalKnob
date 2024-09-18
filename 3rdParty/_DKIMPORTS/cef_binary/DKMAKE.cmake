@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://en.wikipedia.org/wiki/Google_Chrome_version_history
 # https://cef-builds.spotifycdn.com/index.html
 #
@@ -79,7 +80,7 @@ if(WIN32)
   set(CMAKE_OBJECT_PATH_MAX 275)
 endif()
 
-dk_depend(visualstudio)
+#dk_depend(visualstudio)
 dk_depend(appkit)
 dk_depend(build-essential)
 dk_depend(libgtk2.0-dev)

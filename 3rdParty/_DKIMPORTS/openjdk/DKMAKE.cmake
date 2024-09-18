@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://docs.microsoft.com/en-us/java/openjdk/download
 # https://jdk.java.net/archive/
 # https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip

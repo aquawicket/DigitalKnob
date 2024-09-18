@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.gnu.org/software/libiconv/
 # https://savannah.gnu.org/projects/libiconv
 # https://stackoverflow.com/a/57734435/688352

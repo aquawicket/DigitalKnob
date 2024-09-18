@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://guide.macports.org/#installing.macports
 # https://github.com/macports/macports-base
 # https://github.com/macports/macports-base/releases

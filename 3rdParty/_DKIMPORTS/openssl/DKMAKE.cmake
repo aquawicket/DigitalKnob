@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/openssl/openssl.git
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z

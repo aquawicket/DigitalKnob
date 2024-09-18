@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/tukaani-project/xz.git
 # https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
 

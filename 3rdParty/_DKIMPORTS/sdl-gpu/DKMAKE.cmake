@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/grimfang4/sdl-gpu.git
 # https://github.com/grimfang4/sdl-gpu/issues/77   rmlui with sdl-gpu
 

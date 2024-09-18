@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/theMealena/SDL2_giflib_sa.git
 # https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip
 

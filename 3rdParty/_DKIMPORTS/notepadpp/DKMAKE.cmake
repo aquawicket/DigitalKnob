@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
 

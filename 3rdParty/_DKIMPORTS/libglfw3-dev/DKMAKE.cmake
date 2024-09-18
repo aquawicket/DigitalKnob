@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 if(NOT UNIX_HOST)
 	dk_undepend(libglfw3-dev)
 	dk_return()

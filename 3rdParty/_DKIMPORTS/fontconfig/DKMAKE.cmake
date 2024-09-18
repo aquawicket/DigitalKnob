@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://gitlab.freedesktop.org/fontconfig/fontconfig.git
 # https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/main/INSTALL
 

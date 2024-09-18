@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/mirror/libX11.git
 # https://www.x.org/
 # https://www.x.org/releases/individual/lib/

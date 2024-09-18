@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/php/php-src.git
 # https://www.php.net
 # https://windows.php.net/downloads/releases

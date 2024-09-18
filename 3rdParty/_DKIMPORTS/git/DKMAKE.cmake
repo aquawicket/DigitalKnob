@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 
 # https://git-scm.com
 # https://github.com/git-for-windows/git

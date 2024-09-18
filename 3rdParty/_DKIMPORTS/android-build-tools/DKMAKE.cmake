@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://developer.android.com/tools/releases/build-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
 # https://mirrors.cloud.tencent.com/AndroidSDK/
