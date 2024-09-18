@@ -13,13 +13,14 @@ dk_depend(ogg)
 dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz)
 
 
-
 ### LINK ###
 dk_include			(${FLAC}/include										FLAC_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_libDebug		(${FLAC}/${triple}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${triple}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
+	(MSVC)
+		dk_libDebug		(${FLAC}/src/libFLAC/${DEBUG_DIR}/FLAC.lib					FLAC_LIBRARY_DEBUG)
+		dk_libRelease	(${FLAC}/src/libFLAC/${RELEASE_DIR}/FLAC.lib				FLAC_LIBRARY_RELEASE)
+	endif()
 else()
 	dk_libDebug		(${FLAC}/${triple}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
 	dk_libRelease	(${FLAC}/${triple}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
