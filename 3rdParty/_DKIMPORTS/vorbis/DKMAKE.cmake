@@ -3,6 +3,7 @@ dk_load(dk_builder)
 # https://github.com/xiph/vorbis
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
+# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
 
 ### DEPEND ###
 dk_depend(libgcc)
@@ -11,7 +12,6 @@ dk_depend(ogg)
 
 
 ### IMPORT ###
-#dk_import(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
 #dk_import(https://github.com/xiph/vorbis.git)
 dk_import(https://github.com/xiph/vorbis/releases/download/v1.3.7/libvorbis-1.3.7.zip)
 

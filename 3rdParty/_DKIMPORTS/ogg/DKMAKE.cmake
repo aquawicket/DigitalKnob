@@ -4,14 +4,13 @@ dk_load(dk_builder)
 # https://gitlab.xiph.org/xiph/ogg.git
 # https://ftp.osuosl.org/pub/xiph/releases/ogg
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
-
+# https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 
 ### DEPEND ###
 WIN_dk_depend(msys2)
 
 
 ### IMPORT ###
-#dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 #dk_import(https://github.com/xiph/ogg.git)
 dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 
@@ -19,10 +18,12 @@ dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 ### LINK ###
 dk_include			(${OGG_DIR}/include				OGG_INCLUDE_DIR)
 dk_include			(${OGG_CONFIG_DIR}/include		OGG_INCLUDE_DIR2)
-
 if(MSVC)
-	dk_libDebug			(${OGG_DEBUG_DIR}/ogg.lib		OGG_LIBRARY_DEBUG)
-	dk_libRelease		(${OGG_RELEASE_DIR}/ogg.lib		OGG_LIBRARY_RELEASE)
+	dk_libDebug		(${OGG_DEBUG_DIR}/ogg.lib		OGG_LIBRARY_DEBUG)
+	dk_libRelease	(${OGG_RELEASE_DIR}/ogg.lib		OGG_LIBRARY_RELEASE)
+else()
+	dk_libDebug		(${OGG_DEBUG_DIR}/libogg.a		OGG_LIBRARY_DEBUG)
+	dk_libRelease	(${OGG_RELEASE_DIR}/libogg.a	OGG_LIBRARY_RELEASE)
 endif()
 
 
@@ -37,7 +38,7 @@ RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${O
 
 ### GENERATE ###
 #if(ANDROID)
-dk_configure(${OGG} 
+dk_configure(${OGG_DIR} 
 	-DBUILD_FRAMEWORK=OFF				# "Build Framework bundle for OSX" OFF
 	-DINSTALL_CMAKE_PACKAGE_MODULE=ON	# "Install CMake package configuration module" ON
 	-DINSTALL_DOCS=OFF					# "Install documentation" ON
@@ -52,5 +53,5 @@ dk_configure(${OGG}
 
 
 ### BUILD ###
-dk_build			(${OGG})
+dk_build			(${OGG_DIR})
 
