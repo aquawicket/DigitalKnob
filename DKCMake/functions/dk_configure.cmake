@@ -2,21 +2,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configure(SOURCE_DIR) SOURCE_DIR <source> #ARGN
+# dk_configure(SOURCE_DIR) #ARGN
 #
 #	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc("\${ARGV}")
-	dk_debug("dk_configure(${ARGV})")
-	dk_assertPath(SOURCE_DIR)
-	
-	dk_set(SOURCE_DIR "${SOURCE_DIR}")
 
+	dk_assertPath(SOURCE_DIR)	
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
-	
-	
 	
 	if(PWD)
 		dk_includes(${SOURCE_DIR} ${PWD} isSubDirectory)
