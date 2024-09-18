@@ -19,10 +19,10 @@ dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 dk_include			(${OGG_DIR}/include				OGG_INCLUDE_DIR)
 dk_include			(${OGG_CONFIG_DIR}/include		OGG_INCLUDE_DIR2)
 
-
-dk_libDebug			(${OGG_DEBUG_DIR}/libogg.a		OGG_LIBRARY_DEBUG)
-dk_libRelease		(${OGG_RELEASE_DIR}/libogg.a	OGG_LIBRARY_RELEASE)
-
+if(MSVC)
+	dk_libDebug			(${OGG_DEBUG_DIR}/ogg.lib		OGG_LIBRARY_DEBUG)
+	dk_libRelease		(${OGG_RELEASE_DIR}/ogg.lib		OGG_LIBRARY_RELEASE)
+endif()
 
 
 ### 3RDPARTY AUTOCONF LINK ###
