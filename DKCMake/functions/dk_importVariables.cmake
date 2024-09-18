@@ -84,7 +84,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
-		dk_printVar(PLUGIN_URL)
+		#dk_printVar(PLUGIN_URL)
 		dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)							# PLUGIN_URL_FILENAME
 		#dk_printVar(PLUGIN_URL_FILENAME)
 		dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					# PLUGIN_URL_LIST

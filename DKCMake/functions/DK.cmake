@@ -41,14 +41,11 @@ function(DKINIT)
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
 	
-	############ Setup KeepOpen ############
-	#dk_setupKeepOpen()
-	
-	##### CD into the DKSCRIPT_DIR directory #####
-	#cd("${DKSCRIPT_DIR}")
-	
 	############ Set Options ############
 	#dk_setOptions()
+	
+	############ Set Variables ###########
+	dk_setVariables()
 	
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
@@ -225,10 +222,26 @@ function(dk_DKSCRIPT_VARS)
 endfunction()
 
 ##################################################################################
-# dk_setupKeepOpen()
+# dk_setVariables()
 #
-function(dk_setupKeepOpen)
-	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
+function(dk_setVariables)
+
+	##### Set ProgramFiles_<> variables ######
+	if(DEFINED "ENV{HOMEDRIVE}")
+		# TODO
+	endif()
+	if(DEFINED "ENV{ProgramW6432}")
+		file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
+		set(ProgramFiles "${ProgramFiles}" CACHE INTERNAL "")
+	elseif(DEFINED "ENV{ProgramFiles}")
+		file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
+		set(ProgramFiles "${ProgramFiles}" CACHE INTERNAL "")
+	endif()
+	#if(DEFINED "ENV{ProgramFiles\(x86\)}")
+	#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
+	#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
+	#endif()
+	
 endfunction()
 
 

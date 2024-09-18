@@ -3,9 +3,6 @@ dk_load(dk_builder)
 # https://github.com/aubio/aubio.git
 
 
-dk_validate(HOST_TRIPLE   "dk_HOST_TRIPLE()")
-dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
-dk_validate(CONFIG_PATH   "dk_MULTI_CONFIG()")
 ### IMPORT ###
 dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
 

@@ -8,11 +8,6 @@ if(DEFINED ENV{MSYSTEM})
 	dk_set($ENV{MSYSTEM} 1)
 endif()
 
-
-dk_validate(HOST_TRIPLE     "dk_HOST_TRIPLE()")
-dk_validate(TARGET_TRIPLE   "dk_TARGET_TRIPLE()")
-dk_validate(DKDOWNLOAD_DIR  "dk_getDKPaths()")
-
 dk_depend(msys2)
 dk_depend(pacman)
 dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)

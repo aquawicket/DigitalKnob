@@ -12,17 +12,17 @@ dk_load(dk_builder)
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
-dk_validate(HOST_TRIPLE     "dk_HOST_TRIPLE()")
+
 if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
 endif()
-dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
 
 
 ### VERSION ###
 dk_set(VISUALSTUDIO_VERSION 	17)
 dk_set(VISUALSTUDIO_DL 			"https://aka.ms/vs/${VISUALSTUDIO_VERSION}/release/vs_community.exe")
+dk_assert(ProgramFiles)
 dk_set(VISUALSTUDIO 			"${ProgramFiles}/Microsoft Visual Studio")
 dk_printVar(VISUALSTUDIO)
 

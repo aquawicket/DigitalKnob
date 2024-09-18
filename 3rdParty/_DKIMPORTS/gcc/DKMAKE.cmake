@@ -3,9 +3,6 @@ dk_load(dk_builder)
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 
 
-dk_validate(HOST_TRIPLE     "dk_HOST_TRIPLE()")
-dk_validate(TARGET_TRIPLE   "dk_TARGET_TRIPLE()")
-
 if(clang OR mingw OR ucrt)
 	dk_validate(MSYS2  			"dk_depend(msys2)")
 	dk_validate(PACMAN_EXE		"dk_depend(pacman)")

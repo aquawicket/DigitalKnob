@@ -1,29 +1,9 @@
 include_guard()	
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
-#include_guard()
 
-dk_validate(HOST_TRIPLE		"dk_HOST_TRIPLE()")
-dk_validate(TARGET_TRIPLE 	"dk_TARGET_TRIPLE()")
-dk_validate(CONFIG_PATH   	"dk_MULTI_CONFIG()")
-
-
-###############################################################################
-# dk_builder()
-#
-#
-#function(dk_builder)
-#	dk_debugFunc("\${ARGV}")
-#	
-#endfunction()
-
-
-
-
-
-
-###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#function(DKTEST)
-#	dk_debugFunc("\${ARGV}")
-#	
-#	dk_builder()
-#endfunction()
+dk_validate(HOST_TRIPLE   		"dk_HOST_TRIPLE()")
+dk_validate(TARGET_TRIPLE 		"dk_TARGET_TRIPLE()")
+dk_validate(DKBUILD_TYPE		"dk_BUILD_TYPE()")
+dk_validate(CONFIG_PATH   		"dk_MULTI_CONFIG()")
+#dk_validate(CMAKE_C_COMPILER	"dk_depend(clang)")
+#dk_validate(CMAKE_CXX_COMPILER	"dk_depend(clang)")

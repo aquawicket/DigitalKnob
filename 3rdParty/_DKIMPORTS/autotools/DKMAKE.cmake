@@ -1,15 +1,14 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
-dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
 # https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html
 # http://autogen.sourceforge.net
 # https://macappstore.org/autogen/
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
 # https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
+
+
 dk_depend(pacman)
-
-
 
 MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)

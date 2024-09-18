@@ -50,8 +50,6 @@ endif()
 
 
 
-
-dk_validate(TARGET_TRIPLE  "dk_TARGET_TRIPLE()")
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
 	dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)

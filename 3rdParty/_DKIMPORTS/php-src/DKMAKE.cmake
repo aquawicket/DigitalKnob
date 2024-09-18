@@ -4,10 +4,7 @@ dk_load(dk_builder)
 # https://www.php.net
 # https://windows.php.net/downloads/releases
 
-dk_validate(HOST_TRIPLE   		"dk_HOST_TRIPLE()")
-dk_validate(TARGET_TRIPLE 		"dk_TARGET_TRIPLE()")
-dk_validate(DKBUILD_TYPE		"dk_BUILD_TYPE()")
-dk_validate(CONFIG_PATH   		"dk_MULTI_CONFIG()")
+
 if(NOT WIN_HOST)
 	dk_undepend(php-src)
 	dk_return()

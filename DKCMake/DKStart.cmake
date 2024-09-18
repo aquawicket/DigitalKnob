@@ -74,21 +74,7 @@ if(MSYSTEM)
 endif()
 
 
-##### Set ProgramFiles_<> variables ######
-if(DEFINED "ENV{HOMEDRIVE}")
-	# TODO
-endif()
-if(DEFINED "ENV{ProgramW6432}")
-	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
-	dk_set(ProgramFiles "${ProgramFiles}")
-elseif(DEFINED "ENV{ProgramFiles}")
-	file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
-	dk_set(ProgramFiles "${ProgramFiles}")
-endif()
-#if(DEFINED "ENV{ProgramFiles\(x86\)}")
-#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
-#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
-#endif()
+
 
 
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
