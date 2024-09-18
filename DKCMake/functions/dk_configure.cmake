@@ -2,32 +2,38 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configure(LIB_ROOT) LIB_ROOT <source> #ARGN
+# dk_configure(SOURCE_DIR) SOURCE_DIR <source> #ARGN
 #
-#	@LIB_ROOT - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
+#	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
-function(dk_configure LIB_ROOT) #ARGN
+function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc("\${ARGV}")
 	dk_debug("dk_configure(${ARGV})")
-	dk_assertPath(LIB_ROOT)
+	dk_assertPath(SOURCE_DIR)
 	
-	dk_set(LIB_ROOT "${LIB_ROOT}")
+	dk_set(SOURCE_DIR "${SOURCE_DIR}")
 
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
 	
 	
-	
-	dk_set(BINARY_DIR "${LIB_ROOT}/${CONFIG_PATH}")
-	#dk_assertPath(BINARY_DIR)
+	if(PWD)
+		dk_includes(${SOURCE_DIR} ${PWD} isSubDirectory)
+	endif()
+	if(isSubDirectory)
+		dk_set(BINARY_DIR "${PWD}/${CONFIG_PATH}")		# only use PWD as the BINARY_DIR if it is a parent directory of SOURCE_DIR
+	else()
+		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
+	endif()
+	#dk_debug("dk_configure(${SOURCE_DIR}) -> ${BINARY_DIR}")
 	
 	# Configure with CMake		(multi_config / single_config)
-	if(EXISTS ${LIB_ROOT}/CMakeLists.txt)
+	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S=${LIB_ROOT}" "-B=${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S=${SOURCE_DIR}" "-B=${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
@@ -38,10 +44,10 @@ function(dk_configure LIB_ROOT) #ARGN
 		return()
 	
 	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${LIB_ROOT}/configure.ac) # OR EXISTS ${LIB_ROOT}/configure)
+	elseif(EXISTS ${SOURCE_DIR}/configure.ac) # OR EXISTS ${SOURCE_DIR}/configure)
 		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
-		if(EXISTS ${LIB_ROOT}/configure)
+		if(EXISTS ${SOURCE_DIR}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 				dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")

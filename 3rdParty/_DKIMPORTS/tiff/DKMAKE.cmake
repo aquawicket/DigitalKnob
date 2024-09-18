@@ -5,6 +5,8 @@ dk_load(dk_builder)
 # https://download.osgeo.org/libtiff/
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
+# https://cmake.org/cmake/help/latest/module/FindTIFF.html
+
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
@@ -12,6 +14,7 @@ dk_depend(libjpeg-turbo)
 dk_depend(xz)
 dk_depend(zlib)
 dk_depend(zstd)
+
 #-- Could NOT find Deflate (missing: Deflate_LIBRARY Deflate_INCLUDE_DIR)
 #-- Could NOT find JBIG (missing: JBIG_LIBRARY JBIG_INCLUDE_DIR)
 #-- Could NOT find LERC (missing: LERC_LIBRARY LERC_INCLUDE_DIR)
@@ -25,9 +28,9 @@ dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip
 
 ### LINK ###
 dk_include					(${TIFF_DIR}/libtiff									TIFF_INCLUDE_DIR)
-dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIR2)
-DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_DEBUG_INCLUDE)
-RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_RELEASE_INCLUDE)
+dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIRS)
+DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_INCLUDE_DIRS)
+RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
 if(MULTI_CONFIG)
 	if(MSVC)
 		WIN_dk_libDebug		(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/tiffd.lib		TIFF_LIBRARY_DEBUG)
@@ -40,57 +43,34 @@ else()
 		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/libtiff.a					TIFF_LIBRARY_DEBUG)
 		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/libtiff.a					TIFF_LIBRARY_RELEASE)
 endif()
+dk_set						(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
 
 
 
 ### 3RDPARTY LINK ###
+# https://cmake.org/cmake/help/latest/module/FindTIFF.html
+dk_set(TIFF_CMAKE
+	-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
+	-DTIFF_INCLUDE_DIRS=${TIFF_INCLUDE_DIRS}
+	-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
+	-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
+	-DTIFF_LIBRARIES=${TIFF_LIBRARIES}
+	"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARIES}")	
 if(MSVC)
-	WIN_dk_set(TIFF_CMAKE
-		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2}
-		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
-		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR2}"
-		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR2}")
-	
-	ANDROID_dk_set(TIFF_CMAKE
-		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2}
-		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
-		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF_INCLUDE_DIR2}"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR2}")
-elseif(APPLE)
-	APPLE_dk_set(TIFF_CMAKE
-		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2}
-		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
-		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF_INCLUDE_DIR2}"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR2}")
-else()
-	DEBUG_dk_set(TIFF_CMAKE
-		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF_CONFIG_DIR}/libtiff
-		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
-		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF_CONFIG_DIR}/libtiff"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF_CONFIG_DIR}/libtiff"
-		"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARY_DEBUG}")
-	RELEASE_dk_set(TIFF_CMAKE
-		-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
-		-DTIFF_INCLUDE_DIR2=${TIFF_CONFIG_DIR}/libtiff
-		-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
-		-DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE}
-		"-DCMAKE_C_FLAGS=-I${TIFF_CONFIG_DIR}/libtiff"
-		"-DCMAKE_CXX_FLAGS=-I${TIFF_CONFIG_DIR}/libtiff"
-		"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARY_RELEASE}")
+	WIN_dk_append(TIFF_CMAKE
+		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}"
+		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}")
+else()	
+	dk_append(TIFF_CMAKE
+		"-DCMAKE_C_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}"
+		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}")
 endif()
 
 
 
+
 ### GENERATE ###
-dk_configure(${TIFF}
+dk_configure(${TIFF_DIR}
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
 	-Dtiff-tests=OFF				# "build TIFF tests" ON
@@ -105,4 +85,4 @@ dk_configure(${TIFF}
 
 
 ### COMPILE ###
-dk_build(${TIFF} tiff)
+dk_build(${TIFF_DIR} tiff)

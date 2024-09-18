@@ -52,7 +52,9 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${ZSTD_DIR} SOURCE_DIR ${ZSTD_DIR}/build/cmake
+dk_cd(${ZSTD_DIR})
+#dk_configure(${ZSTD_DIR} SOURCE_DIR ${ZSTD_DIR}/build/cmake
+dk_configure(${ZSTD_DIR}/build/cmake
 	-DZSTD_BUILD_CONTRIB=OFF		# "BUILD CONTRIB" OFF
 	-DZSTD_BUILD_PROGRAMS=OFF		# "BUILD PROGRAMS" ON
 	-DZSTD_BUILD_SHARED=OFF			# "BUILD SHARED LIBRARIES" ON
@@ -65,4 +67,4 @@ dk_configure(${ZSTD_DIR} SOURCE_DIR ${ZSTD_DIR}/build/cmake
 
 
 ### COMPILE ###
-dk_build(${ZSTD})
+dk_build(${ZSTD_DIR})

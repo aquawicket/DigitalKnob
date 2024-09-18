@@ -2,14 +2,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://github.com/tukaani-project/xz.git
 # https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
-
+# https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
 
 ### IMPORT ###
 #dk_import(https://github.com/tukaani-project/xz.git)
-#dk_import(https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz)
-#dk_import(https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz)
 dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz)
-
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
@@ -22,49 +19,40 @@ dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar
 #dk_set(XZ ${DK3RDPARTY_DIR}/${XZ_FOLDER})
 #dk_import(${XZ_DL} ${XZ})
 
-#if(NOT WIN)
+
 ### LINK ###
 dk_define			(LZMA_API_STATIC)
-dk_include			(${XZ_DIR}/src/liblzma/api 			LIBLZMA_INCLUDE_DIR)
-
+dk_include			(${XZ_DIR}/src/liblzma/api 		LIBLZMA_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.lib		LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.lib		LIBLZMA_LIBRARY_RELEASE)
+	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.lib	LIBLZMA_LIBRARY_DEBUG)
+	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.lib	LIBLZMA_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.a			LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.a		LIBLZMA_LIBRARY_RELEASE)
+	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.a		LIBLZMA_LIBRARY_DEBUG)
+	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.a	LIBLZMA_LIBRARY_RELEASE)
 endif()
+DEBUG_dk_set		(LIBLZMA_LIBRARY  				${LIBLZMA_LIBRARY_DEBUG})
+RELEASE_dk_set		(LIBLZMA_LIBRARY				${LIBLZMA_LIBRARY_RELEASE})
 
 
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	dk_set	(XZ_CMAKE 
+	dk_set(XZ_CMAKE 
 		-DCMAKE_C_FLAGS=/DLZMA_API_STATIC 
 		-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC 
-		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR} 
+		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
 		-DLIBLZMA_LIBRARY_DEBUG=${LIBLZMA_LIBRARY_DEBUG} 
 		-DLIBLZMA_LIBRARY_RELEASE=${LIBLZMA_LIBRARY_RELEASE})
 else()
-	DEBUG_dk_set	(XZ_CMAKE
+	dk_set(XZ_CMAKE
 		"-DCMAKE_C_FLAGS=-DLZMA_API_STATIC"
 		"-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC"
 		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
-		-DLIBLZMA_LIBRARY=${LIBLZMA_LIBRARY_DEBUG}
+		-DLIBLZMA_LIBRARY=${LIBLZMA_LIBRARY}
 		-DLIBLZMA_HAS_AUTO_DECODER=ON
 		-DLIBLZMA_HAS_EASY_ENCODER=ON
 		-DLIBLZMA_HAS_LZMA_PRESET=ON
-		"-DCMAKE_EXE_LINKER_FLAGS=${LIBLZMA_LIBRARY_DEBUG}")
-		
-	RELEASE_dk_set	(XZ_CMAKE 
-		"-DCMAKE_C_FLAGS=-DLZMA_API_STATIC" 
-		"-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC" 
-		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR} 
-		-DLIBLZMA_LIBRARY=${LIBLZMA_LIBRARY_RELEASE} 
-		-DLIBLZMA_HAS_AUTO_DECODER=ON 
-		-DLIBLZMA_HAS_EASY_ENCODER=ON 
-		-DLIBLZMA_HAS_LZMA_PRESET=ON
-		"-DCMAKE_EXE_LINKER_FLAGS=${LIBLZMA_LIBRARY_RELEASE}")
+		"-DCMAKE_EXE_LINKER_FLAGS=${LIBLZMA_LIBRARY}")
 endif()
 
 # TODO
@@ -81,9 +69,9 @@ endif()
 
 ### GENERATE ###
 if(MSVC)
-	dk_configure(${XZ} "-DCMAKE_C_FLAGS=/DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC")
+	dk_configure(${XZ_DIR} "-DCMAKE_C_FLAGS=/DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC")
 else()
-	dk_configure(${XZ} "-DCMAKE_C_FLAGS=-DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC")
+	dk_configure(${XZ_DIR} "-DCMAKE_C_FLAGS=-DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC")
 endif()
 
 
@@ -93,7 +81,7 @@ if(MSVC)
 	list(APPEND DEBUG_LINK_FLAGS /ignore:4217)
 	list(APPEND RELEASE_LINK_FLAGS /ignore:4217)
 endif()
-dk_build(${XZ} liblzma)
+dk_build(${XZ_DIR} liblzma)
 
 
 #FIXME
