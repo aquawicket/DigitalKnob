@@ -600,4 +600,4 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE} archive_static)
+dk_build(${LIBARCHIVE_DIR} archive_static)

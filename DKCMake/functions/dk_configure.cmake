@@ -2,21 +2,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configure(LIB_ROOT) SOURCE_DIR <source> #ARGN
+# dk_configure(LIB_ROOT) LIB_ROOT <source> #ARGN
 #
-#	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
+#	@LIB_ROOT - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
 function(dk_configure LIB_ROOT) #ARGN
 	dk_debugFunc("\${ARGV}")
 	dk_debug("dk_configure(${ARGV})")
 	dk_assertPath(LIB_ROOT)
 	
-	dk_getOptionValue(SOURCE_DIR ${ARGV})
-	dk_printVar(SOURCE_DIR)
-	if(NOT SOURCE_DIR)
-		dk_set(SOURCE_DIR "${LIB_ROOT}")
-	endif()
-	
+	dk_set(LIB_ROOT "${LIB_ROOT}")
+
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
@@ -31,7 +27,7 @@ function(dk_configure LIB_ROOT) #ARGN
 		dk_info("Configuring with CMake")
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S=${SOURCE_DIR}" "-B=${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S=${LIB_ROOT}" "-B=${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")

@@ -25,6 +25,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+dk_disable(openssl)
 dk_disable(zstd)
 dk_disable(smpeg2)					# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
 
