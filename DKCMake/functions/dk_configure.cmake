@@ -13,11 +13,11 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
-	if(PWD)
-		dk_includes(${SOURCE_DIR} ${PWD} isSubDirectory)
+	if(CURRENT_PLUGIN_DIR)
+		dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_DIR} isSubDirectory)
 	endif()
 	if(isSubDirectory)
-		dk_set(BINARY_DIR "${PWD}/${CONFIG_PATH}")		# only use PWD as the BINARY_DIR if it is a parent directory of SOURCE_DIR
+		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use PWD as the BINARY_DIR if it is a parent directory of SOURCE_DIR
 	else()
 		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	endif()

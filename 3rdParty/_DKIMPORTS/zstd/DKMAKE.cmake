@@ -44,7 +44,8 @@ dk_set(ZSTD_CMAKE
 
 
 ### GENERATE ###
-dk_cd(${ZSTD_DIR})
+#dk_cd(${ZSTD_DIR})
+#dk_set(CURRENT_PLUGIN_DIR ${ZSTD_DIR})
 dk_configure(${ZSTD_DIR}/build/cmake
 	-DZSTD_BUILD_CONTRIB=OFF		# "BUILD CONTRIB" OFF
 	-DZSTD_BUILD_PROGRAMS=OFF		# "BUILD PROGRAMS" ON

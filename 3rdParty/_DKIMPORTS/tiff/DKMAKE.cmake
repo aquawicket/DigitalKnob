@@ -29,8 +29,8 @@ dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip
 ### LINK ###
 dk_include					(${TIFF_DIR}/libtiff									TIFF_INCLUDE_DIR)
 dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIRS)
-DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_INCLUDE_DIRS)
-RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
+#DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_INCLUDE_DIRS)
+#RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
 if(MULTI_CONFIG)
 	if(MSVC)
 		WIN_dk_libDebug		(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/tiffd.lib		TIFF_LIBRARY_DEBUG)
