@@ -339,6 +339,10 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 			dk_set(${PLUGIN_VAR_PREFIX}_FOLDER ${PLUGIN_INSTALL_FOLDER})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_FOLDER)
 		endif()
+		if(EXISTS ${${PLUGIN_VAR_PREFIX}})
+			dk_set(CURRENT_PLUGIN_FOLDER ${${PLUGIN_VAR_PREFIX}_FOLDER})
+			dk_printVar(CURRENT_PLUGIN_FOLDER)
+		endif()
 	endif()
 	
 	# LIB_NAME
