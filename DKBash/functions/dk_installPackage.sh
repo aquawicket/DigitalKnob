@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
-# dk_install(package)
+# dk_installPackage(package)
 #
 #
-dk_install() {
+dk_installPackage() {
 	dk_debugFunc 1
 
 	[ -n "$(command -v "${1}")" ] && return    # 
@@ -61,5 +61,5 @@ dk_install() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_install wget
+	dk_call dk_installPackage wget
 }

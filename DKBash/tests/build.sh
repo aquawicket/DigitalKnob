@@ -852,7 +852,7 @@ dk_installCmake() {
 		CMAKE_EXE=$(command -v cmake)
 		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
-			dk_install ${CMAKE_IMPORT}
+			dk_installPackage ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
 		dk_printVar CMAKE_EXE
@@ -1354,7 +1354,7 @@ dk_installGit() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if ! dk_commandExists git; then
-		dk_install git
+		dk_installPackage git
 	fi
 	
 	GIT_EXE=$(command -v git)
@@ -1378,7 +1378,7 @@ dk_installHomebrew() {
 		
 	if ! dk_commandExists brew; then
 		dk_info "dk_installing Homebrew"
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/dk_install/master/dk_install)"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		# https://github.com/Homebrew/brew/issues/10368
 		rm -fr $(brew --repo homebrew/core)
 		brew tap homebrew/core
@@ -1427,11 +1427,11 @@ dk_packageInstalled() {
 
 
 ##################################################################################
-# dk_install(package)
+# dk_installPackage(package)
 #
 #
-dk_install() {
-	dk_verbose "dk_install(${*})"
+dk_installPackage() {
+	dk_verbose "dk_installPackage(${*})"
 	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	#if dk_packageInstalled ${1}; then
@@ -1442,13 +1442,13 @@ dk_install() {
 	dk_info "dk_installing ${1}"
 
 	if dk_commandExists brew; then
-		dk_call brew dk_install "${1}"
+		dk_call brew install "${1}"
 	elif dk_commandExists apt; then
-		dk_call apt -y dk_install "${1}"
+		dk_call apt -y install "${1}"
 	elif dk_commandExists apt-get; then
-		dk_call apt-get -y dk_install "${1}"
+		dk_call apt-get -y install "${1}"
 	elif dk_commandExists pkg; then
-		dk_call pkg dk_install "${1}"
+		dk_call pkg install "${1}"
 	elif dk_commandExists pacman; then
 		dk_call pacman -S "${1}" --noconfirm
 	elif dk_commandExists tce-load; then
@@ -1468,7 +1468,7 @@ dk_validatePackage() {
 	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists "${1}"; then
-		dk_install "${2}"
+		dk_installPackage "${2}"
 	fi
 }
 

@@ -81,7 +81,7 @@ dk_installCmake() {
 		#dk_call dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		#dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		#dk_call dk_printVar CMAKE_EXE
-		dk_call dk_commandExists cmake || dk_call dk_install ${CMAKE_IMPORT}
+		dk_call dk_commandExists cmake || dk_call dk_installPackage ${CMAKE_IMPORT}
 		CMAKE_EXE=$(command -v cmake)
 		CMAKE_EXE=$(dk_call dk_realpath "${CMAKE_EXE}")
 		dk_call dk_assert CMAKE_EXE

@@ -9,7 +9,7 @@ dk_validatePackage() {
 	dk_debugFunc 2
 	
 	if ! dk_call dk_commandExists "${1}"; then
-		dk_call dk_install "${2}"
+		dk_call dk_installPackage "${2}"
 	fi
 }
 

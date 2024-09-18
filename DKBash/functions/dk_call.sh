@@ -15,8 +15,8 @@ dk_call(){
 			#dk_load ${1}
 			dk_source ${1}
 		else										# Not a dk_ prefixed function
-			dk_commandExists dk_install  || dk_source dk_install
-			dk_install ${1}
+			dk_commandExists dk_installPackage  || dk_source dk_installPackage
+			dk_installPackage ${1}
 		fi
 		dk_commandExists ${1} || dk_error "${1}: command not found"
 	fi

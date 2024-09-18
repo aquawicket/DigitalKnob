@@ -8,7 +8,7 @@
 dk_fileContains() {
 	dk_debugFunc 2
 
-	dk_call dk_commandExists grep || dk_call dk_install grep
+	dk_call dk_commandExists grep || dk_call dk_installPackage grep
 	grep -q "${2}" "${1}"
 }
 

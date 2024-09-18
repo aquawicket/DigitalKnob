@@ -9,7 +9,7 @@ dk_installGit() {
 	dk_debugFunc 0
 
 	if ! dk_call dk_commandExists git; then
-		dk_call dk_install git
+		dk_call dk_installPackage git
 	fi
 	
 	GIT_EXE=$(command -v git)

@@ -82,7 +82,7 @@ dkreloadWithBash(){
 		echo "reloading with bash . . . ${0}"
 		unset DKINIT
 		export DKINIT=""
-		dk_commandExists bash || dk_install bash
+		dk_commandExists bash || dk_installPackage bash
 		exec bash "${0}" #dk_call bash "${0}"
 	fi
 }
@@ -226,11 +226,11 @@ dksetOptions(){
 }
 
 ##################################################################################
-# dk_install()
+# dk_installPackage()
 #
 #	install a package
 #
-dk_install(){
+dk_installPackage(){
 	dk_commandExists ${1}      && return 0					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
