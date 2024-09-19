@@ -11,13 +11,16 @@ function(dk_bashEnv)
 	
 	###### set WORKING DIRECTORY ######
 	if(CURRENT_PLUGIN_DIR)
-		list(APPEND BASH_COMMANDS "cd ${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
-	elseif(PWD)
-		list(APPEND BASH_COMMANDS "cd ${PWD}")
+		set(BASH_WORKING_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
+	#elseif(PWD)
+	#	list(APPEND BASH_COMMANDS "cd ${PWD}")
 	else()
 		dk_warning("No working dirctory set. Use dk_cd() to he working directory before running Bash commands.")
 	endif()
 	
+	list(APPEND BASH_COMMANDS "cd ${BASH_WORKING_DIR}")
+	#dk_printVar(BASH_WORKING_DIR)
+	#dk_pause()
 	
 	dk_getOption(NO_HALT ${ARGV} REMOVE)
 	dk_getOption(NOECHO ${ARGV} REMOVE)
