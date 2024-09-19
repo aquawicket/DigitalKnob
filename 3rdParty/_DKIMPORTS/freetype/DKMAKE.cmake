@@ -6,6 +6,7 @@ dk_load(dk_builder)
 
 
 ### DEPEND ###
+#dk_depend(gzip)
 dk_depend(zlib)
 
 
@@ -51,7 +52,7 @@ endif()
 
 	
 ### GENERATE ###
-dk_configure(${FREETYPE_DIR})
+dk_configure(${FREETYPE_DIR} ${ZLIB_CMAKE})
 
 
 ### COMPILE ###
