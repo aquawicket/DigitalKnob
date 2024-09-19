@@ -177,8 +177,9 @@ function(dk_install plugin) #PATCH
 		
 		if(${url_extension} STREQUAL ".pkg")
 			if(MAC_HOST)
+				dk_validate(SUDO "dk_depend(sudo)")
 				dk_executeProcess(chmod 777 ${DKDOWNLOAD_DIR}/${dl_filename})
-				dk_executeProcess(${SUDO} installer -pkg ${DKDOWNLOAD_DIR}/${dl_filename} -target /)
+				dk_executeProcess(${SUDO} -s installer -pkg ${DKDOWNLOAD_DIR}/${dl_filename} -target /)
 			endif()
 		else()
 			dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
