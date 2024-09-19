@@ -35,7 +35,13 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
-		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  # restore any altered flags
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
 		return()
 	
 	# Configure with Autotools	(single_config)
@@ -53,6 +59,14 @@ function(dk_configure SOURCE_DIR) #ARGN
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
 		endif()
+		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
 		return()
 		
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
@@ -66,7 +80,16 @@ function(dk_configure SOURCE_DIR) #ARGN
 			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
 			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		endif()
+		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
 		return()
+		
 	endif()
 endfunction()
 dk_createOsMacros("dk_configure")

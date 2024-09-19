@@ -40,6 +40,7 @@ function(dk_createOsMacros func)
 	
 	### TARGET Prefix functions ###
 	dk_createPrefixMacro(${func} ANDROID)
+	dk_createPrefixMacro(${func} ANDROID_DEBUG)
 	dk_createPrefixMacro(${func} ANDROID_ARM32)
 	dk_createPrefixMacro(${func} ANDROID_ARM64)
 	dk_createPrefixMacro(${func} ANDROID_X86)
