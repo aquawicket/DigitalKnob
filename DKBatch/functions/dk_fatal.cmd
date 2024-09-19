@@ -19,9 +19,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
 	%dk_call% dk_echo "test dk_echo message"
 	%dk_call% dk_sleep 1000
 	%dk_call% dk_echo "test dk_echo message"

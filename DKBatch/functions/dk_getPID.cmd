@@ -88,9 +88,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_getPID PID
     %dk_call% dk_printVar PID
     

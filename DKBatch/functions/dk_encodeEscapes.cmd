@@ -124,6 +124,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :replaceEqualSign variable replaceWith
+    ::call dk_debugFunc 0
  setlocal enableDelayedExpansion
         set "equal=="
         set "with=%~2"
@@ -142,8 +143,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
+
     
     %dk_call% dk_echo
 
@@ -238,5 +240,4 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "imposible=### This is impossible %path% ^& | <> "^& | <>" ^ ###"
     ::%dk_call% dk_encodeEscapes imposible
     ::%dk_call% dk_echo "imposible = %imposible%"
-    
 %endfunction%

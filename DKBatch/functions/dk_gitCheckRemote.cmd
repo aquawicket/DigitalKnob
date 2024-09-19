@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_gitCheckRemote
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
     if not exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_warning "%DKBRANCH_DIR%\.git does not exist" && goto:eof )
 
@@ -33,8 +33,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_gitCheckRemote
 %endfunction%

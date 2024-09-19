@@ -11,8 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_echo
     call dk_debugFunc 0 1
  setlocal
-    if "%~1" equ "" (echo: & goto:eof)
-    
+ 
+    if "%~1" equ "" (echo: & goto:eof)   
     set "_message_=%~1" 
         
     :: if msg starts and ends with quotes, remove the first and last characters
@@ -28,9 +28,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     echo This is a normal echo commmand
     %dk_call% dk_echo
     %dk_call% dk_echo ""

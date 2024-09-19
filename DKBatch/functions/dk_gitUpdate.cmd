@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_gitUpdate
- setlocal
     call dk_debugFunc 2 3
-    
+ setlocal
+ 
     if "%~1" neq "" (set "url=%~1") else (set "url=https://github.com/aquawicket/DigitalKnob.git")
     if "%~2" neq "" (set "branch=%~2") else (set "branch=Development")
     
@@ -41,9 +41,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     ::%dk_call% dk_gitUpdate
     %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
 %endfunction%

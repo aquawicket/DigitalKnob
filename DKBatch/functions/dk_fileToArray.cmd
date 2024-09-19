@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  reference: https://stackoverflow.com/a/49042678
 ::#
 :dk_fileToArray
- setlocal
     call dk_debugFunc 2
-    
+ setlocal
+ 
     ::set "file=%~1"
     set /a i=0
     for /F "usebackq delims=" %%a in ("%~f1") do (
@@ -35,9 +35,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     :: create the file
     dir /b /a-d > array.cmd
 

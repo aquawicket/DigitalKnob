@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
 ::#
 :dk_getTime
- setlocal
     call dk_debugFunc 4
-    
+ setlocal
+ 
     for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c" 
     for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (
         set "_hour=%%A"
@@ -30,9 +30,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     echo time = %time%
     %dk_call% dk_getTime centisecond second minute hour
     echo time = %hour%:%minute%:%second%.%centisecond%

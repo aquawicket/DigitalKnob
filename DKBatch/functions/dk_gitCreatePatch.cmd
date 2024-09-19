@@ -32,8 +32,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "fileA=%~nx1"
 	set "fileB=%~nx1.patch"
 	"%GIT_EXE%" diff --relative --no-index --unified --default-prefix --output=%~3 %fileA% %fileB%
-	
-	
 %endfunction%
 
 
@@ -44,14 +42,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
 	%dk_call% dk_selectFile fileA
 	%dk_call% dk_selectFile fileB
 	%dk_call% dk_saveFile patchFile
 	%dk_call% dk_gitCreatePatch "%fileA%" "%fileB%" "%patchFile%"
 
 	::%dk_call% dk_gitCreatePatch "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt" "%DKIMPORTS_DIR%/rmlui/CMakeLists.txt.patch" "%DKIMPORTS_DIR%/rmlui/termux.patch"
-
 %endfunction%

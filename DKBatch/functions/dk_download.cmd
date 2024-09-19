@@ -8,9 +8,9 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
 ::#
 ::#
 :dk_download
- setlocal
     call dk_debugFunc 1 2
-    
+ setlocal
+ 
     set "url=%~1"
     ::%dk_call% dk_printVar url
     
@@ -122,9 +122,9 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd"
     ::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "DKBuilder.cmd"
     ::%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.cmd" "%DKDOWNLOAD_DIR%\dk_download_batch_test\DKBuilder.cmd"

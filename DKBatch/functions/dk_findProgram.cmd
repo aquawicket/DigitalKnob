@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_findProgram
- setlocal
     call dk_debugFunc 2 9 
-    
+ setlocal
+ 
     set "VAR=%~1"
     set "VAL=!%VAR%!"
     if exist "%VAL%" %dk_call% dk_debug "already FOUND %name% at %VAL%" && goto:eof
@@ -32,9 +32,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
     %dk_call% dk_printVar POWERSHELL_EXE
     

@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_fileContains
- setlocal
     call dk_debugFunc 2
-        
+ setlocal
+ 
     >nul findstr /c:"%~2" "%~1" &&  (
         if "%~3" neq "" (endlocal & set "%3=true")
         exit /b 0
@@ -25,9 +25,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-
+ setlocal
+ 
     :: create test
     %dk_call% dk_fileAppend fileContains_TEST.txt "find the needle in the haystack"
     

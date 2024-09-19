@@ -54,9 +54,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_echoAlign center "centered text"
     %dk_call% dk_echoAlign right "right aligned text"
     %dk_call% dk_echo "text on the left side"

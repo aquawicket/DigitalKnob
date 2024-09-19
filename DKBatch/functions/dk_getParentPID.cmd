@@ -8,9 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    http://stackoverflow.com/questions/2531837/how-can-i-get-the-pid-of-the-parent-process-of-my-application
 ::#
 :dk_getParentPID
- setlocal
     call dk_debugFunc 1
-    
+ setlocal
+ 
     if exist "dk_getParentPID.exe .exe" goto:exe_exists
     for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsoft.NET\Framework\*jsc.exe"') do (
         set "jsc=%%v"
@@ -41,9 +41,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_getParentPID PPID
     %dk_call% dk_printVar PPID
     

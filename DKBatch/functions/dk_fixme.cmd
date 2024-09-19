@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#    @message - The message to print
 ::#
 :dk_fixme
- setlocal
     call dk_debugFunc 1
-    
+ setlocal
+ 
     %dk_call% dk_log FIXME "%~1"
 %endfunction%
 
@@ -20,8 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_fixme "test dk_fixme message"
 %endfunction%
