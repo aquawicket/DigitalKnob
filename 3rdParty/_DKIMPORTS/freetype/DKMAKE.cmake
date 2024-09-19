@@ -6,8 +6,6 @@ dk_load(dk_builder)
 
 
 ### DEPEND ###
-#dk_depend(gzip)
-dk_depend(zlib)
 
 
 ### IMPORT ###
@@ -47,7 +45,7 @@ dk_append(FREETYPE_CMAKE
 
 	
 ### GENERATE ###
-dk_configure(${FREETYPE_DIR} ${ZLIB_CMAKE})
+dk_configure(${FREETYPE_DIR})
 
 
 ### COMPILE ###
