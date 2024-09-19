@@ -174,10 +174,15 @@ function(dk_install plugin) #PATCH
 		dk_cd(${DKDOWNLOAD_DIR})
 		dk_set(QUEUE_BUILD ON)
 		dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
-		if(NOT WIN_HOST)
-			dk_executeProcess(chmod 777 ${DKDOWNLOAD_DIR}/${dl_filename})
+		
+		if(${url_extension} STREQUAL ".pkg")
+			if(MAC_HOST)
+				dk_executeProcess(chmod 777 ${DKDOWNLOAD_DIR}/${dl_filename})
+				dk_executeProcess(${SUDO} installer -pkg ${DKDOWNLOAD_DIR}/${dl_filename} -target /)
+			endif()
+		else()
+			dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
 		endif()
-		dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
