@@ -10,13 +10,13 @@ dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/freetype/freetype.git)
-dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)# PATCH)
+dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)
 
 
 
 ### LINK ###
 dk_include				(${FREETYPE_DIR}/include					FREETYPE_INCLUDE_DIR)
-dk_include				(${FREETYPE_CONFIG_DIR}/include/freetype2	FREETYPE_INCLUDE_DIRS)
+dk_include				(${FREETYPE_CONFIG_DIR}/include/freetype2	DFREETYPE_INCLUDE_DIR_freetype2)
 
 if(MSVC)
 	WIN_dk_libDebug		(${FREETYPE_DEBUG_DIR}/freetype.lib			FREETYPE_DEBUG_LIBRARY)
@@ -25,17 +25,18 @@ else()
 	dk_libDebug			(${FREETYPE_DEBUG_DIR}/libfreetype.a		FREETYPE_DEBUG_LIBRARY)
 	dk_libRelease		(${FREETYPE_RELEASE_DIR}/libfreetype.a		FREETYPE_RELEASE_LIBRARY)
 endif()
-DEBUG_dk_set			(FREETYPE_LIBRARY							FREETYPE_DEBUG_LIBRARY)
-RELEASE_dk_set			(FREETYPE_LIBRARY							FREETYPE_RELEASE_LIBRARY)
+dk_set					(DFREETYPE_INCLUDE_DIR_ft2build				${FREETYPE_INCLUDE_DIR})
+DEBUG_dk_set			(FREETYPE_LIBRARY							${FREETYPE_DEBUG_LIBRARY})
+RELEASE_dk_set			(FREETYPE_LIBRARY							${FREETYPE_RELEASE_LIBRARY})
 
 
 ### 3RDPARTY LINK ###
 dk_append(FREETYPE_CMAKE
 	-DFREETYPE_DIR=${FREETYPE_DIR}
 	-DFREETYPE_INCLUDE_DIR=${FREETYPE_INCLUDE_DIR}
-	-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIRS}
-	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE_INCLUDE_DIR2}
-	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE_INCLUDE_DIR}
+	-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
+	-DFREETYPE_INCLUDE_DIR_freetype2=${DFREETYPE_INCLUDE_DIR_freetype2}
+	-DFREETYPE_INCLUDE_DIR_ft2build=${DFREETYPE_INCLUDE_DIR_ft2build}
 	-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY}
 	-DFREETYPE_LIBRARY_DEBUG=${FREETYPE_DEBUG_LIBRARY}
 	-DFREETYPE_LIBRARY_RELEASE=${FREETYPE_RELEASE_LIBRARY})
