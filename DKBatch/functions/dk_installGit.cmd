@@ -8,9 +8,9 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 ::#
 ::#
 :dk_installGit
- setlocal
     call dk_debugFunc 0
-    
+:: setlocal
+ 
     %dk_call% dk_validate DK_HOST_ARCH "%dk_call% dk_getHostTriple"
     if "%DK_HOST_ARCH%"=="arm32"  set "GIT_DL="
     if "%DK_HOST_ARCH%"=="arm64"  set "GIT_DL=%GIT_DL_WIN_ARM64%"
@@ -44,8 +44,8 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
-    
+ setlocal
+ 
     %dk_call% dk_installGit
 %endfunction%
