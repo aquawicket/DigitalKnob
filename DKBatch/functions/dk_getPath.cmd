@@ -12,11 +12,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "_input=%1"
     set "_input=%_input:"=%"
-    if [%_input:~-1,1%] == [\] set "_input=%_input:~0,-1%"
-    if [%_input:~-1,1%] == [/] set "_input=%_input:~0,-1%"
+    if [%_input:~-1%] == [\] set "_input=%_input:~0,-1%"
+    if [%_input:~-1%] == [/] set "_input=%_input:~0,-1%"
     for %%Z in ("%_input%") do set "_getPath_=%%~pZ"
-    ::endlocal & %dk_call% dk_set %2 "%_getPath_:~0,-1%"
-    endlocal & set "%2=%_getPath_:~0,-1%"
+	if [%_getPath_:~-1%] == [\] set "_getPath_=%_getPath_:~0,-1%"
+	if [%_getPath_:~-1%] == [/] set "_getPath_=%_getPath_:~0,-1%"
+    endlocal & set "%2=%_getPath_%"
 %endfunction%
 
 
