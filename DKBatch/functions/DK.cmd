@@ -85,6 +85,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     %dk_call% dk_echo
     %dk_call% dk_echo "%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_NAME%.cmd ######## END TEST #######%clr%"
     %dk_call% dk_echo
+	pause
     exit %ERRORLEVEL%
 %endfunction%
 
@@ -132,7 +133,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
             echo:
             echo Exit code: %exit_code%
             echo:
-            pause
+            ::pause
             exit %ERRORLEVEL%
     :end_dk_reloadWithCmd
 %endfunction%
