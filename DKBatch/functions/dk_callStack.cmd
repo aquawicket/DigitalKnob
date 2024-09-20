@@ -52,6 +52,8 @@ if ":" == "%func:~0,1%" ( goto %func% )
     rem call set "__LINE__=???"
     call set "__FUNCTION__=%%~n0"
     call set "__ARGS__=%%*"
+	call set "__ARGV__=%%*"
+	call set "ARGV[0]=%time%"
     call set "ARGV[1]=%%~1"
     call set "ARGV[2]=%%~2"
     call set "ARGV[3]=%%~3"
