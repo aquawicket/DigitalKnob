@@ -25,6 +25,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
 	if [%DKSCRIPT_DIR:~-1%] == [\] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	if [%DKSCRIPT_DIR:~-1%] == [/] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	set "RELOADED="
+	
 	::set "DKSCRIPT_DIR=%DKBRANCH_DIR%"
 	::set "DKSCRIPT_NAME="
 	::set "DKSCRIPT_EXT="
@@ -32,7 +34,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::set "DKBATCH_FUNCTIONS_DIR=%DKBRANCH_DIR%\DKBatch\functions"
 	::set "DKBATCH_FUNCTIONS_DIR_="
 	::set "DKASSETS_DIR="
-	set "RELOADED="
 	
 	exit /b 1
 %endfunction%

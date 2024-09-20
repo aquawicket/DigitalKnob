@@ -1,5 +1,5 @@
 @echo off
-echo ---^> %~0 %*
+::echo ---^> %~0 %*
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
