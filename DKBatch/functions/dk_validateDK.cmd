@@ -6,14 +6,27 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_validateDK
- setlocal
+ ::setlocal
     call dk_debugFunc 0
-    
-    if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
-
-    set "DKBRANCH=Development"                                     &:: set the default branch
+	
+	if not defined DIGITALKNOB_DIR   %dk_call% dk_setDIGITALKNOB_DIR
+	if not defined DKBRANCH          set "DKBRANCH=Development"
+	if not defined DKBRANCH_DIR      set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
+    if exist "%DKBRANCH_DIR%\.git" %return%
+	
     if not defined GIT_EXE %dk_call% dk_installGit
-    if not exist "%DIGITALKNOB_DIR%\%DKBRANCH%\.git"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+    if not exist "%DKBRANCH_DIR%\.git"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+
+	echo DKSCRIPT_PATH %DKSCRIPT_PATH%
+	echo DKSCRIPT_DIR %DKSCRIPT_DIR%
+	echo DKBRANCH_DIR %DKBRANCH_DIR%
+	
+	echo "%DKBRANCH_DIR%\%DKSCRIPT_NAME%"
+	echo "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%"
+	::set "RELOADED="
+	::set "DKINIT="
+	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %~1
+
 %endfunction%
 
 
