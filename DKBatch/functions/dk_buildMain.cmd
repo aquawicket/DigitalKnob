@@ -13,6 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_assert DKSCRIPT_DIR
     %dk_call% dk_assert DKSCRIPT_NAME
 
+	%dk_call% dk_validateDK
+
     %dk_call% dk_getHostTriple
     %dk_call% dk_getDKPaths
 
