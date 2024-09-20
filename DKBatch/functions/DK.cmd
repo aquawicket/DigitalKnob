@@ -1,5 +1,5 @@
 @echo off
-
+set "DKBATCH_FUNCTIONS_DIR=%DKF%"
 ::echo DK.cmd %~1
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 title %~n1
