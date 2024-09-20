@@ -147,7 +147,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 :dk_DKBATCH_VARS
     if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
-    if exist     "%DKBATCH_DIR%"             set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
+	if [%DKBATCH_DIR:~-1%] == [\]            set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
 
     if not exist "%DKBATCH_FUNCTIONS_DIR%"   set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
@@ -185,7 +185,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if not exist   "%DKSCRIPT_PATH%"  echo ERROR: DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & pause & exit 1
     if not defined  DKSCRIPT_ARGS     set "DKSCRIPT_ARGS=%__ARGS__%"
     if not exist   "%DKSCRIPT_DIR%"   for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
-    if exist       "%DKSCRIPT_DIR%"   set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	if [%DKSCRIPT_DIR:~-1%] == [\]    set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
     if not exist   "%DKSCRIPT_DIR%"   echo ERROR: DKSCRIPT_DIR:%DKSCRIPT_DIR% does not exist & pause & exit 1
     if not defined  DKSCRIPT_NAME     for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_NAME=%%~nZ"
     if not defined  DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_EXT=%%~xZ"

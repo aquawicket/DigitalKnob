@@ -15,7 +15,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if [%_input_:~-1,1%] == [\] set "_input_=%_input_:~0,-1%"
     if [%_input_:~-1,1%] == [/] set "_input_=%_input_:~0,-1%"
     for %%Z in ("%_input_%") do set "_dirname_=%%~dpZ"
-    endlocal & set "%2=%_dirname_:~0,-1%"
+	if [%_dirname_:~-1,1%] == [\] set "_dirname_=%_dirname_:~0,-1%"
+	if [%_dirname_:~-1,1%] == [/] set "_dirname_=%_dirname_:~0,-1%"
+    endlocal & set "%2=%_dirname_%"
 %endfunction%
 
 
