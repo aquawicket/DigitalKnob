@@ -20,8 +20,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
     
     %dk_call% dk_echo "Type some input and press enter when done"
     %dk_call% dk_keyboardInput input

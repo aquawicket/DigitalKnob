@@ -34,8 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
 
     %dk_call% dk_set myList "a,b,c,d,e,f,g"
     %dk_call% dk_listToArray "%myList%" myArray

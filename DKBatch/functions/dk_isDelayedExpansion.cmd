@@ -9,9 +9,9 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 ::#
 ::#
 :dk_isDelayedExpansion
- setlocal
     call dk_debugFunc 1
-    
+ setlocal
+ 
     if "!DE!" == "" (
       set "%1=ON"
     )  else (
@@ -24,8 +24,9 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
+
     
     %dk_call% dk_isDelayedExpansion deylayedExpansion
     echo deylayedExpansion = %deylayedExpansion%

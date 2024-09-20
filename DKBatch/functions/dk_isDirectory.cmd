@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_isDirectory
- setlocal
     call dk_debugFunc 1 2
-    
+ setlocal
+ 
     if exist %~1\* (
         if "%~2" neq "" (endlocal & set "%2=true")
         exit /b 0
@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
     
     ::###### Using if return value
     %dk_call% dk_isDirectory "C:\Windows" result

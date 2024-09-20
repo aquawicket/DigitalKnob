@@ -48,8 +48,8 @@ dk_test
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
     
     %dk_call% dk_test "functions can recieve strings as arguments"
 

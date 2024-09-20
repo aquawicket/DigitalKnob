@@ -33,8 +33,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
 
     %dk_call% dk_isVariableName 69         && %dk_call% dk_info "is a valid variable name" || %dk_call% dk_info "is NOT a valid variable name"
     set "myNumber=42"

@@ -147,8 +147,8 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
     
     %dk_call% dk_log "test dk_log message"
     

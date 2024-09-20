@@ -81,8 +81,8 @@ call dk_set VERSION_dk_messageBox 3
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
- setlocal
     call dk_debugFunc 0
+ setlocal
 
     %dk_call% dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
     echo messageBox_result = %messageBox_result%
