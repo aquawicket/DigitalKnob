@@ -25,7 +25,8 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
     if "!DE!" == ""   set "return=exit /b !errorlevel!"
     if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-
+	if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
+    if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
     ::###### Initialize Language specifics ######
     call :dk_init
 

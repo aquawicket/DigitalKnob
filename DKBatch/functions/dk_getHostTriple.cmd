@@ -27,10 +27,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_toUpper %host_os% HOST_OS
 ::	set "HOST_OS=%HOST_OS%"
 	set "%HOST_OS%_HOST=1"
-::	%dk_call% dk_printVar host_os
-	%dk_call% dk_printVar HOST_OS
-::	%dk_call% dk_printVar %host_os%_host
-	%dk_call% dk_printVar %HOST_OS%_HOST
 	
 	if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "host_arch=x86"
     if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "host_arch=x86_64"
@@ -42,10 +38,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_toUpper %host_arch% HOST_ARCH
 	set "HOST_ARCH=%HOST_ARCH%"
 	set "%HOST_ARCH%_HOST=1"             
-::	%dk_call% dk_printVar host_arch
-	%dk_call% dk_printVar HOST_ARCH 
-::	%dk_call% dk_printVar %host_arch%_host 
-	%dk_call% dk_printVar %HOST_ARCH%_HOST
 	
 	set "host_env=clang"
 	::%dk_call% dk_assert host_env
@@ -54,10 +46,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_toUpper %host_env% HOST_ENV
 		set "HOST_ENV=%HOST_ENV%"
 		set "%HOST_ENV%_HOST=1"
-::		%dk_call% dk_printVar host_env
-		%dk_call% dk_printVar HOST_ENV
-::		%dk_call% dk_printVar %host_env%_host
-		%dk_call% dk_printVar %HOST_ENV%_HOST
     :end_host_env
 	
 	::### set host_triple ###
@@ -66,8 +54,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%"
 ::		set "%host_triple%_host=1"
 		set "%HOST_TRIPLE%_HOST=1"
-::		%dk_call% dk_printVar %host_triple%_host
-::		%dk_call% dk_printVar %HOST_TRIPLE%_HOST
 	:end_host_arch
 	
 	if not defined host_env goto:end_host_env
@@ -75,35 +61,45 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%_%HOST_ENV%"
 ::		set "%host_triple%_host=1"	
 		set "%HOST_TRIPLE%_HOST=1"
-::		%dk_call% dk_printVar %host_triple%_host
-::		%dk_call% dk_printVar %HOST_TRIPLE%_HOST
 	:end_host_env
 	
-::	%dk_call% dk_printVar host_triple
-	%dk_call% dk_printVar HOST_TRIPLE
-::	%dk_call% dk_printVar %host_triple%_host
-	%dk_call% dk_printVar %HOST_TRIPLE%_HOST	
-	
-	
-	
     set "DK_HOST_OS=win"
-    ::%dk_call% dk_printVar DK_HOST_OS
     
     if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "DK_HOST_ARCH=x86"
     if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "DK_HOST_ARCH=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="IA64"  set "DK_HOST_ARCH=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "DK_HOST_ARCH=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "DK_HOST_ARCH=arm64"
-    ::%dk_call% dk_printVar DK_HOST_ARCH
-    
     set "DK_HOST_TRIPLE=%DK_HOST_OS%_%DK_HOST_ARCH%"
-    ::%dk_call% dk_printVar DK_HOST_TRIPLE
     
     set "DK_HOST_ENV=clang"
     set "DK_HOST_TRIPLE=%DK_HOST_TRIPLE%_%DK_HOST_ENV%"
-    ::set "DK_HOST_TRIPLE=%DK_HOST_ARCH%-%DK_HOST_VENDOR%-%DK_HOST_OS%
-    ::%dk_call% dk_printVar DK_HOST_TRIPLE
-    ::echo %DK_HOST_TRIPLE%
+    
+%DEBUG%
+	%dk_call% dk_printVar host_os
+	%dk_call% dk_printVar HOST_OS
+	%dk_call% dk_printVar %host_os%_host
+	%dk_call% dk_printVar %HOST_OS%_HOST
+	%dk_call% dk_printVar host_arch
+	%dk_call% dk_printVar HOST_ARCH 
+	%dk_call% dk_printVar %host_arch%_host 
+	%dk_call% dk_printVar %HOST_ARCH%_HOST
+	%dk_call% dk_printVar host_env
+	%dk_call% dk_printVar HOST_ENV
+	%dk_call% dk_printVar %host_env%_host
+	%dk_call% dk_printVar %HOST_ENV%_HOST
+	%dk_call% dk_printVar %host_triple%_host
+	%dk_call% dk_printVar %HOST_TRIPLE%_HOST
+	%dk_call% dk_printVar %host_triple%_host
+	%dk_call% dk_printVar %HOST_TRIPLE%_HOST
+	%dk_call% dk_printVar host_triple
+	%dk_call% dk_printVar HOST_TRIPLE
+	%dk_call% dk_printVar %host_triple%_host
+	%dk_call% dk_printVar %HOST_TRIPLE%_HOST
+	%dk_call% dk_printVar DK_HOST_OS
+	%dk_call% dk_printVar DK_HOST_ARCH
+	%dk_call% dk_printVar DK_HOST_TRIPLE
+	%dk_call% dk_printVar DK_HOST_TRIPLE
 %endfunction%
 
 
