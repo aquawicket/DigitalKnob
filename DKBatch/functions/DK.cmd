@@ -149,6 +149,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 :dk_DKBATCH_VARS
 	::echo ---^> %~0 %*
+	if defined DKF                           for %%Z in ("%DKF%") do set "DKBATCH_DIR=%%~dpZ"
     if not exist "%DKBATCH_DIR%"             for %%Z in ("%~dp0..\") do set "DKBATCH_DIR=%%~dpZ"
 	if [%DKBATCH_DIR:~-1%] == [\]            set "DKBATCH_DIR=%DKBATCH_DIR:~0,-1%"
     if not exist "%DKBATCH_DIR%"             echo ERROR: DKBATCH_DIR:%DKBATCH_DIR% does not exist & pause & exit 1
