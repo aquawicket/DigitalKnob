@@ -34,6 +34,7 @@ set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/
     if exist "%GIT_EXE%" goto:eof
     %dk_call% dk_echo   
     %dk_call% dk_info "Installing git . . ."
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
     %dk_call% dk_download %GIT_DL%
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
        
