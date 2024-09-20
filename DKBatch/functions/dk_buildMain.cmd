@@ -18,7 +18,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
-
     %dk_call% dk_installGit
     %dk_call% dk_validateBranch
 	
@@ -40,7 +39,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if "%APP%"==""        %dk_call% dk_pickApp APP      & goto:while_loop
         if "%TARGET_OS%"==""  %dk_call% dk_pickOs TARGET_OS & goto:while_loop
         if "%TYPE%"==""       %dk_call% dk_pickType TYPE    & goto:while_loop
-
+		
         %dk_call% dk_createCache
         %dk_call% dk_generate
         %dk_call% dk_buildApp

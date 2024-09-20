@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_generate
     call dk_debugFunc 0
- setlocal
+ ::setlocal
  
     %dk_call% dk_setTitle Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     %dk_call% dk_echo
@@ -133,7 +133,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 ::	###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars
-	
 %endfunction%
 
 
