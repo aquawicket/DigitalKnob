@@ -9,14 +9,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  ::setlocal
     call dk_debugFunc 0
 	
-	if not defined DIGITALKNOB_DIR   %dk_call% dk_setDIGITALKNOB_DIR
+	if not defined DIGITALKNOB_DIR   set "C:\Users\Administrator\digitalknob"
 	if not defined DKBRANCH          set "DKBRANCH=Development"
 	if not defined DKBRANCH_DIR      set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 	
-	if exist "%DKBRANCH_DIR%\.git" if "%DKSCRIPT_NAME%" neq "DKBuilder" %return%
-	if exist "%DKBRANCH_DIR%\.git" if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%
+	if exist "C:\Users\Administrator\digitalknob\Development\.git" if "%DKSCRIPT_NAME%" neq "DKBuilder" %return%
+	if exist "C:\Users\Administrator\digitalknob\Development\.git" if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%
 	
-    if not exist "%DKBRANCH_DIR%\.git"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
+    if not exist "C:\Users\Administrator\digitalknob\Development\.git"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
 	
 	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
 	if not exist %DKSCRIPT_PATH%  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && %return%
