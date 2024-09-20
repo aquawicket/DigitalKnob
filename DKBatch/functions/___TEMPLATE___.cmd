@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-::####################################################################
+::############################################################################
 ::# dk_function()
 ::#
 ::#
@@ -10,7 +10,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_todo
- endlocal
 %endfunction%
 
 
@@ -24,5 +23,4 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_function
- endlocal
 %endfunction%
