@@ -1,4 +1,5 @@
 @echo off
+echo ---^> %~0 %*
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
@@ -8,10 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_buildMain
     call dk_debugFunc 0
  setlocal
-     
-    %dk_call% dk_assert DKSCRIPT_PATH
-    %dk_call% dk_assert DKSCRIPT_DIR
-    %dk_call% dk_assert DKSCRIPT_NAME
+    
+	%dk_call% dk_printVar DKSCRIPT_PATH
+    %dk_call% dk_printVar DKSCRIPT_DIR
+    %dk_call% dk_printVar DKSCRIPT_NAME
 
     %dk_call% dk_getHostTriple
     %dk_call% dk_getDKPaths

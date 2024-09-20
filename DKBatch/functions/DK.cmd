@@ -1,9 +1,8 @@
 @echo off
-
 echo ---^> %~0 %*
-echo DK = !DK!
-echo DKF = !DKF!
-pause
+echo DK = %DK%
+echo DKF = %DKF%
+::pause
 
 ::echo DK.cmd %~1
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
@@ -79,8 +78,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
 	
-	::%dk_call% dk_validateDK && %return% || %return%
-	::set "RELOADED=" && call :dk_setDKSCRIPT_PATH "%~1" %*
+	echo DKSCRIPT_DIR = %DKSCRIPT_DIR%
+	%dk_call% dk_validateDK && %return%
+	set "RELOADED=" && call :dk_setDKSCRIPT_PATH "%~1" %*
 	
 ::	if not defined TEST_RELOAD    %dk_call% dk_setDIGITALKNOB_DIR
 ::	if not defined TEST_RELOAD    set "DKBRANCH=Development"
@@ -142,7 +142,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	if not defined  DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
-	pause
+	::pause
 %endfunction%
 
 ::##################################################################################
@@ -156,9 +156,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
         set "DKINIT="
 
         ::"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-		pause
         "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%"
-		pause
 
         ::####################################
         ::############ EXIT POINT ############
@@ -190,7 +188,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
 	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	echo PATH = %PATH%
-	pause
+	::pause
 %endfunction%
 
 
@@ -203,7 +201,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if not defined DKHTTP_DKBRANCH_DIR           set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development"
     if not defined DKHTTP_DKBATCH_DIR            set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch"
     if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR  set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions"
-	pause
+	::pause
 %endfunction%
 
 ::##################################################################################
@@ -249,7 +247,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if exist       "%DKASSETS_DIR%"   set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
     if exist       "%DKASSETS_DIR%"   set "PATH=%DKASSETS_DIR%;%PATH%"
 	echo DKASSETS_DIR = %DKASSETS_DIR%
-	pause
+	::pause
 %endfunction%
 
 

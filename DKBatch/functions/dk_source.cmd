@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause
     if exist "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd" goto:eof
     
-    echo downloading %~1 . . .
+    echo downloading %~1 to %DKBATCH_FUNCTIONS_DIR%\%~1
     
     :: FIXME: causes infinate recursion loop
     :: Try dk_download
