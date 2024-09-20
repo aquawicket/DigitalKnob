@@ -71,7 +71,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     %dk_call% dk_color
     %dk_call% dk_logo
 	
-	call dk_validateDK
+	%dk_call% dk_validateDK
 
     if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
