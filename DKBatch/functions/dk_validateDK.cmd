@@ -14,19 +14,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined DKBRANCH_DIR      set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
     if exist "%DKBRANCH_DIR%\.git" %return%
 	
-    if not defined GIT_EXE %dk_call% dk_installGit
     if not exist "%DKBRANCH_DIR%\.git"  %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development
-
-	echo DKSCRIPT_PATH %DKSCRIPT_PATH%
-	echo DKSCRIPT_DIR %DKSCRIPT_DIR%
-	echo DKBRANCH_DIR %DKBRANCH_DIR%
-	
-	echo "%DKBRANCH_DIR%\%DKSCRIPT_NAME%"
-	echo "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%"
-	::set "RELOADED="
-	::set "DKINIT="
-	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %~1
-
+	exit /b 1
+::	echo DKSCRIPT_PATH %DKSCRIPT_PATH%
+::	echo DKSCRIPT_DIR %DKSCRIPT_DIR%
+::	echo DKBRANCH_DIR %DKBRANCH_DIR%
+::	
+::	echo "%DKBRANCH_DIR%\%DKSCRIPT_NAME%"
+::	echo "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%"
+::	::set "RELOADED="
+::	::set "DKINIT="
+::	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %~1
 %endfunction%
 
 
