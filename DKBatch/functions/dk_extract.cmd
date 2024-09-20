@@ -9,30 +9,30 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 2
  setlocal
  
-    set "dk_extract_argc=%__ARGC__%"
-    
-    if %dk_extract_argc% equ 1 (%dk_call% dk_info "Extracting %~1 . . .")
-    if %dk_extract_argc% equ 2 (%dk_call% dk_info "Extracting %~1 to %~2. . .")
-    
+	if not exist "%~1" %dk_call% dk_error "%~1 does not exist"
+	 
     :: if the dest isn't provided, we should extract to a folder named the same as the file
     :: in the same diretory the archive file is in.    
-    if not exist "%~1" %dk_call% dk_error "%~1 does not exist"
-    
-    if "%dk_extract_argc%" equ "2" goto:twoParams
+    if "%__ARGC__%" equ "2" goto:twoParams
+
     ::### handle 1 parameter
     %dk_call% dk_basename "%~1" basename
     %dk_call% dk_removeExtension "%basename%" basename
     %dk_call% dk_dirname "%~1" dest      &:: extract contents to same directoy
-    set "dest=%dest%\%basename%"  &:: extract contents to folder within same directory
+    set "dest=%dest%\%basename%"         &:: extract contents to folder within same directory
 	
+	%dk_call% dk_info "Extracting %~1 to %dest%. . ."
+	if exist "%dest%" %dk_call% dk_error "%~2 already exists"
     %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%dest%"'
 	::%dk_call% dk_callPowershell dk_extract %*
     %return%
     
+	::### handle 2 parameters
     :twoParams
-    ::### handle 2 parameters
     
     :: try dk_powershell
+	%dk_call% dk_info "Extracting %~1 to %~2. . ."
+	if exist "%~2" %dk_call% dk_error "%~2 already exists"
     if not exist "%~2" %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
 	::if not exist "%~2" %dk_call% dk_callPowershell dk_extract %*
     

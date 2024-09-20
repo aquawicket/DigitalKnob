@@ -33,11 +33,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_basename "%dest_realpath%" dest_folder
 	::%dk_call% dk_printVar dest_folder
 
-::  if not exist "%dest_realpath%" (
-::      %dk_call% dk_makeDirectory "%dest_realpath%"
-::  )
-    
-    %dk_call% dk_info "Extracting %src_basename% . . ."
+::  if not exist "%dest_realpath%" %dk_call% dk_makeDirectory "%dest_realpath%"
+
+    ::%dk_call% dk_info "Extracting %src_realpath%  to  %src_dirname%\UNZIPPED"
     %dk_call% dk_delete "%src_dirname%\UNZIPPED"
     %dk_call% dk_extract "%src_realpath%" "%src_dirname%\UNZIPPED"
     %dk_call% dk_getDirectories "%src_dirname%\UNZIPPED" directories

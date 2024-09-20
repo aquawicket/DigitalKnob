@@ -20,13 +20,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
 	call dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	
-	
 	call dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	
 	if exist "%NOTEPADPP_EXE%" goto:notepadpp_installed
 	call dk_echo   
     call dk_info "Installing notepad++ . . ."
     call dk_download %NOTEPADPP_DL%
+	call dk_validate DKDOWNLOAD_DIR "call dk_setDKDOWNLOAD_DIR"
     call dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP_DIR%"
 	if NOT exist "%NOTEPADPP_EXE%" call dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%"
 	:notepadpp_installed
