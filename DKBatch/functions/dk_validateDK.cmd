@@ -24,6 +24,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not exist %DKSCRIPT_PATH%  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && %return%
 	
 	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
+	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
+	if [%DKSCRIPT_DIR:~-1%] == [\] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	if [%DKSCRIPT_DIR:~-1%] == [/] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
 	::set "DKSCRIPT_DIR=%DKBRANCH_DIR%"
 	::set "DKSCRIPT_NAME="
 	::set "DKSCRIPT_EXT="

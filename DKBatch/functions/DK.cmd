@@ -1,13 +1,7 @@
 @echo off
-echo ---^> %~0 %*
-echo DK = %DK%
-echo DKF = %DKF%
-::pause
-
-::echo DK.cmd %~1
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
-title %~n1
 
+title %~n1
 if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 
 (set \n=^^^
@@ -78,28 +72,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
 	
-	echo DKSCRIPT_DIR = %DKSCRIPT_DIR%
-	%dk_call% dk_validateDK && %return%
-	set "RELOADED=" && call :dk_setDKSCRIPT_PATH "%~1" %*
-	
-::	if not defined TEST_RELOAD    %dk_call% dk_setDIGITALKNOB_DIR
-::	if not defined TEST_RELOAD    set "DKBRANCH=Development"
-::	if not defined TEST_RELOAD    set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
-::	if not defined TEST_RELOAD    set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
-::	if not defined TEST_RELOAD 	  set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
-::	if not defined TEST_RELOAD 	  set "DKSCRIPT_DIR="
-::	if not defined TEST_RELOAD 	  set "DKSCRIPT_NAME="
-::	if not defined TEST_RELOAD 	  set "DKSCRIPT_EXT="
-::	if not defined TEST_RELOAD    set "DKBATCH_DIR="
-::	if not defined TEST_RELOAD    set "DKBATCH_FUNCTIONS_DIR="
-::	if not defined TEST_RELOAD    set "DKBATCH_FUNCTIONS_DIR_="
-::	if not defined TEST_RELOAD    set "DKASSETS_DIR="
-::	if not defined TEST_RELOAD    set "RELOADED="
-::	if not defined TEST_RELOAD echo ### TEST RELOAD ### ^
-::	    && set "TEST_RELOAD=1" ^
-::	    && call :dk_reloadWithCmd
-
-	
+	%dk_call% dk_validateDK || set "RELOADED=" && call :dk_setDKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
