@@ -6,9 +6,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::
 ::
 :dk_registrySetKey
- setlocal
     call dk_debugFunc 4
-    
+  setlocal
+  
     if "%~1" equ "" %dk_call% dk_error "%__FUNCTION__%(): argument 1 is invalid"
     if "%~2" equ "" (set "_key_=/ve") else (set "_key_=/v %~2")
     if "%~3" equ "" (set "_type_=") else (set "_type_=/t %~3")
