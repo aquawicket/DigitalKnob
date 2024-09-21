@@ -13,10 +13,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     if %ERRORLEVEL% equ 0 (
         if "%~2" neq "" (endlocal & set "%2=true")
+		echo TRUE
         exit /b 0
     )
     
     if "%~2" neq "" (endlocal & set "%2=false")
+	echo FALSE
     exit /b 1
 %endfunction%
 

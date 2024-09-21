@@ -59,7 +59,7 @@ dk_build(${FREETYPE} freetype)
 
 
 # rmlui expects to find ftconfig.h here, so we just copy it for now.
-dk_fixme("freetype/DKMAKE.cmake:62")
+dk_debug("Look at freetype/DKMAKE.cmake:62")
 if(EXISTS ${FREETYPE_DEBUG_DIR}/include AND NOT EXISTS ${FREETYPE_DIR}/${triple}/include)
 	dk_copy(${FREETYPE_DEBUG_DIR}/include ${FREETYPE_DIR}/${triple}/include)
 endif()
