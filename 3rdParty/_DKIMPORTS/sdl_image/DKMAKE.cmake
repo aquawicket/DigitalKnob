@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/libsdl-org/SDL_image
 #
 # https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
@@ -40,18 +41,18 @@ dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include					(${SDL_IMAGE}											SDL2_IMAGE_INCLUDE_DIR)
+dk_include					(${SDL_IMAGE_DIR}											SDL2_IMAGE_INCLUDE_DIR)
 if(MSVC)
-	ANDROID_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
-	WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib		SDL2_IMAGE_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib	SDL2_IMAGE_LIBRARY_RELEASE)
+	ANDROID_dk_libDebug		(${SDL_IMAGE_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${SDL_IMAGE_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${SDL_IMAGE_CONFIG_DIR}/lib/${DEBUG_DIR}/SDL_image.lib		SDL2_IMAGE_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${SDL_IMAGE_CONFIG_DIR}/lib/${RELEASE_DIR}/SDL_image.lib	SDL2_IMAGE_LIBRARY_RELEASE)
 elseif(APPLE)
-	dk_libDebug				(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a				SDL2_IMAGE_LIBRARY_DEBUG)
-	dk_libRelease			(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a				SDL2_IMAGE_LIBRARY_RELEASE)
+	dk_libDebug				(${SDL_IMAGE_CONFIG_DIR}/lib/Debug/SDL_image.a				SDL2_IMAGE_LIBRARY_DEBUG)
+	dk_libRelease			(${SDL_IMAGE_CONFIG_DIR}/lib/Release/SDL_image.a			SDL2_IMAGE_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
-	dk_libRelease			(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
+	dk_libDebug				(${SDL_IMAGE_CONFIG_DIR}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_DEBUG)
+	dk_libRelease			(${SDL_IMAGE_CONFIG_DIR}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_RELEASE)
 endif()
 
 
@@ -81,7 +82,7 @@ RELEASE_dk_set(SDL_IMAGE_CMAKE
 
 
 ### GENERATE ###
-dk_configure(${SDL_IMAGE}
+dk_configure(${SDL_IMAGE_DIR}
 	-DSDLIMAGE_SUPPORT_GIF=${GIFLIB}
 	-DSDLIMAGE_SUPPORT_JPEG=${LIBJPEG_TURBO}
 	-DSDLIMAGE_SUPPORT_PNG=${LIBPNG}
@@ -95,4 +96,4 @@ dk_configure(${SDL_IMAGE}
 
 
 ### COMPILE ###
-dk_build(${SDL_IMAGE} SDLIMAGE)
+dk_build(${SDL_IMAGE_DIR} SDLIMAGE)

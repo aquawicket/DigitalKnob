@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@install_path (optional)	- TODO 
 #
 function(dk_importDownload url) #install_path #PATCH
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_debug("dk_importDownload(${ARGV})")
 	#dk_wait()
@@ -46,14 +46,14 @@ function(dk_importDownload url) #install_path #PATCH
 	dk_toLower(${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		dk_error("${LIBVAR}_FOLDER invalid")
+		dk_fatal("${LIBVAR}_FOLDER invalid")
 	endif()
 	dk_verbose(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_verbose("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS_DIR}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
+		dk_fatal("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
 	endif()
 	
 	math(EXPR last "${url_length}-1")
@@ -133,19 +133,19 @@ function(dk_importDownload url) #install_path #PATCH
 	endif()
 	
 	if(NOT ${LIBVAR})
-		dk_error("LIBVAR invalid")
+		dk_fatal("LIBVAR invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_BRANCH)
-		dk_error("${LIBVAR}_BRANCH invalid")
+		dk_fatal("${LIBVAR}_BRANCH invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_NAME)
-		dk_error("${LIBVAR}_NAME invalid")
+		dk_fatal("${LIBVAR}_NAME invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_DL)
-		dk_error("${LIBVAR}_DL invalid")
+		dk_fatal("${LIBVAR}_DL invalid")
 	endif()
 	
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
@@ -155,8 +155,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

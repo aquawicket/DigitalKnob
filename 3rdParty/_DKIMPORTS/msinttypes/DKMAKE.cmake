@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 if(NOT WIN_HOST)
 	dk_undepend(msinttypes)
 	dk_return()

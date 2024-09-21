@@ -6,8 +6,8 @@
 #
 #
 dk_resetAll() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_clearScreen
 	dk_echo
@@ -29,7 +29,7 @@ dk_resetAll() {
 		dk_echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 		dk_echo "${clr}"			
 		dk_printVar DKBRANCH_DIR
-		return ${false};
+		return $(false);
 	fi
 		
 	# Backup main script file to digitalknob/
@@ -45,7 +45,7 @@ dk_resetAll() {
 	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
 	
-	dk_gitUpdate #NO_CONFIRM
+	dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development #NO_CONFIRM
 	
 	dk_info "Restarting ${DKSCRIPT_NAME}. . ."
 	dk_sleep 3
@@ -55,7 +55,8 @@ dk_resetAll() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	dk_resetAll
 }

@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_asciiToDecimal(ascii, rtn_var)
@@ -7,13 +7,16 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://www.ascii-code.com
 ::#
 :dk_asciiToDecimal
-	call dk_debugFunc 2
+    call dk_debugFunc 2
+ setlocal
+ 
+    %dk_call% dk_asciiToHex %~1 hex
+    %dk_call% dk_hexToDecimal %hex% decimal
+    endlocal & set "%2=%decimal%"
 	
-	setlocal
-	call dk_asciiToHex %~1 hex
-	call dk_hexToDecimal %hex% decimal
-	endlocal & set "%2=%decimal%"
-goto:eof
+:: debug
+	%dk_call% dk_printVar %2
+%endfunction%
 
 
 
@@ -22,9 +25,10 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_set myAscii x
-	call dk_asciiToDecimal myAscii myDecimal
-	call dk_info "myDecimal = %myDecimal%"
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_set myAscii x
+    %dk_call% dk_asciiToDecimal myAscii myDecimal
+    %dk_call% dk_info "myDecimal = %myDecimal%"
+%endfunction%

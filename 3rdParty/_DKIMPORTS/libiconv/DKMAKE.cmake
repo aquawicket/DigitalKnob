@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.gnu.org/software/libiconv/
 # https://savannah.gnu.org/projects/libiconv
 # https://stackoverflow.com/a/57734435/688352
@@ -11,28 +12,28 @@ dk_import(http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
 
 
 ### LINK ###
-dk_include				(${LIBICONV})
-dk_include				(${LIBICONV}/include 							LIBICONV_INCLUDE_DIR)
-dk_include				(${LIBICONV}/${OS})
-dk_include				(${LIBICONV}/${OS}/${RELEASE_DIR})
-ANDROID_dk_include		(${LIBICONV}/${OS}/$(BUILD_TYPE)/jni)
+dk_include				(${LIBICONV_DIR})
+dk_include				(${LIBICONV_DIR}/include 				LIBICONV_INCLUDE_DIR)
+dk_include				(${LIBICONV_CONFIG_DIR})
+DEBUG_dk_include		(${LIBICONV_DEBUG_DIR})
+RELEASE_dk_include		(${LIBICONV_RELEASE_DIR})
 
 # libcharset
 if(MSVC)
-	WIN_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${LIBICONV_DEBUG_DIR}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBICONV_RELEASE_DIR}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a	LIBICONV_CHARSET_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a	LIBICONV_CHARSET_LIBRARY_RELEASE)
+	dk_libDebug			(${LIBICONV_DEBUG_DIR}/libcharset.a		LIBICONV_CHARSET_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBICONV_RELEASE_DIR}/libcharset.a	LIBICONV_CHARSET_LIBRARY_RELEASE)
 endif()
 
 #libiconv
 if(MSVC)
-	WIN_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${LIBICONV_DEBUG_DIR}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBICONV_RELEASE_DIR}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a		LIBICONV_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a	LIBICONV_LIBRARY_RELEASE)
+	dk_libDebug			(${LIBICONV_DEBUG_DIR}/libiconv.a		LIBICONV_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBICONV_RELEASE_DIR}/libiconv.a		LIBICONV_LIBRARY_RELEASE)
 endif()
 
 
@@ -72,8 +73,8 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBICONV})
+dk_configure(${LIBICONV_DIR})
 
 
 ### COMPILE ###
-dk_build(${LIBICONV} iconv)
+dk_build(${LIBICONV_DIR} iconv)

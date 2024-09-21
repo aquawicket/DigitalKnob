@@ -6,19 +6,34 @@ if(!$dk_pinToQuickAccess){ $dk_pinToQuickAccess = 1 } else{ return }
 #
 #
 function Global:dk_pinToQuickAccess() {
-	dk_debugFunc
-	#if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0 99
 	
 	$path = $args[0];
-	$o = New-object -com shell.application;
-	$o.Namespace("$path").Self.InvokeVerb("pintohome");
+	dk_echo "dk_pinToQuickAccess($path)"
+	
+	$quickAccess = New-object -com shell.application;
+	#$quickAccess.Namespace("$path").Self.InvokeVerb("pintohome");
+	if(-not ($quickAccess.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | ? {$_.Path -eq $path})){
+		$quickAccess.Namespace($path).Self.InvokeVerb('pintohome');
+	}
 }
 
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+
+
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	dk_pinToQuickAccess("C:\Users\Administrator\digitalknob")
+	dk_call dk_pinToQuickAccess("C:\Users\Administrator\digitalknob");
 }

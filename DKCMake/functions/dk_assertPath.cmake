@@ -9,18 +9,45 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 function(dk_assertPath path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
-	if(NOT EXISTS ${path})
-		dk_echo("\n\n${bg_red}Assertion failed: at ${path}, ${STACK_HEADER}${clr}")
-		dk_replaceAll("${path}"  " "  ""  var)
-		
-		if("${var}")
-			dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
-		else()
-			dk_error("${bg_red} ${path} ${clr}")
+	dk_assert(path)
+	if(EXISTS ${path})
+		return()
+	endif()
+	if(DEFINED "${path}")
+		if(EXISTS "${${path}}")
+			return()
 		endif()
-		dk_exit() #FIXME:  is this needed?
+	endif()
+	
+	dk_echo("\n\n${bg_red}Assertion failed:  Invalid path:${path}:${${path}} ${STACK_HEADER}${clr}")
+	dk_replaceAll("${path}"  " "  ""  var)
+		
+	
+	
+	dk_printVar(CMAKE_SOURCE_DIR)
+	dk_printVar(PROJECT_BINARY_DIR)
+	dk_printVar(PROJECT_SOURCE_DIR)
+	dk_printVar(CMAKE_TOOLCHAIN_FILE)
+	dk_printVar(CMAKE_PARENT_LIST_FILE)
+	dk_printVar(CMAKE_CURRENT_BINARY_DIR)
+	dk_printVar(CMAKE_CURRENT_FUNCTION)
+	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_DIR)
+	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_FILE)
+	dk_printVar(CMAKE_CURRENT_FUNCTION_LIST_LINE)
+	dk_printVar(CMAKE_CURRENT_LIST_DIR)
+	dk_printVar(CMAKE_CURRENT_LIST_FILE)
+	dk_printVar(CMAKE_CURRENT_LIST_LINE)
+	dk_printVar(CMAKE_SCRIPT_MODE_FILE)
+	dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
+	dk_pause()
+			
+			
+	if("${var}")
+		dk_error("${bg_red} { \"${var}\" : \"${${var}}\" } ${clr}")
+	else()
+		dk_error("${bg_red} ${path} ${clr}")
 	endif()
 endfunction()
 
@@ -30,8 +57,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_assertPath("C:/Windows/System32")
 endfunction()

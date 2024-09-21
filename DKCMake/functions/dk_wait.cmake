@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@msg:(Optional)		- default = "press and key to continue."
 #
 function(dk_wait) 
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_isNumber("${ARGV0}" isNumber)
 	if(isNumber)
@@ -27,14 +27,16 @@ function(dk_wait)
 	# yet, still be in a unix environment.. and timeout wont work, and vice versa. 
 	# We need to find a true way to determine if we are in a cmd, powershell or unix sh / bash type shell.
 	math(EXPR timeout_p1 ${timeout}+1)
+	
 	find_program(BASH_EXE bash)
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(BASH_EXE) #if(UNIX_HOST OR MINGW)
 		execute_process(COMMAND bash -c "read -n 1 -r -s -t ${timeout}" TIMEOUT ${timeout_p1})
 	elseif(CMD_EXE) #elseif(WIN_HOST OR WIN32)
 		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
 	else()
-		dk_error("dk_wait(): Not implemented for this platform")
+		dk_fatal("dk_wait(): Not implemented for this platform")
 	endif()	
 endfunction()
 
@@ -42,8 +44,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

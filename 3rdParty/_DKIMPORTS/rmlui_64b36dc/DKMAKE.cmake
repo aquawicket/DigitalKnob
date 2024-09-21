@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
 
@@ -47,22 +48,22 @@ dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+		WIN_dk_libDebug		(${RMLUI}/${triple}/${DEBUG_DIR}/RmlCore.lib)
+		WIN_dk_libRelease	(${RMLUI}/${triple}/${RELEASE_DIR}/RmlCore.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+		dk_libDebug			(${RMLUI}/${triple}/${DEBUG_DIR}/libRmlCore.a)
+		dk_libRelease		(${RMLUI}/${triple}/${RELEASE_DIR}/libRmlCore.a)
 	endif()
 endif()
 
 if(rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+		WIN_dk_libRelease	(${RMLUI}/${triple}/${RELEASE_DIR}/RmlDebugger.lib)
+		WIN_dk_libDebug		(${RMLUI}/${triple}/${DEBUG_DIR}/RmlDebugger.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+		dk_libDebug			(${RMLUI}/${triple}/${DEBUG_DIR}/libRmlDebugger.a)
+		dk_libRelease		(${RMLUI}/${triple}/${RELEASE_DIR}/libRmlDebugger.a)
 	endif()
 endif()
 

@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # http://giflib.sourceforge.net
 # https://github.com/mirrorer/giflib
 # https://github.com/mirrorer/giflib.git
@@ -23,54 +24,65 @@ set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)
 
 	### LINK ###
-	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a			GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a			GIF_LIBRARY_RELEASE)
+	dk_include			(${GIFLIB_DIR}							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB_DIR}/lib						GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB_CONFIG_DIR}					GIF_INCLUDE_DIR2)
+	if(WIN AND MSVC)
+		dk_libDebug		(${GIFLIB_DEBUG_DIR}/giflibd.lib		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB_RELEASE_DIR}/giflib.lib		GIF_LIBRARY_RELEASE)
+	else()
+		dk_libDebug		(${GIFLIB_DEBUG_DIR}/libgiflib.a		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB_RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
+	endif()
 	
 	### 3RDPARTY LINK ###
-	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
-	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	dk_append			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2})
+	DEBUG_dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	RELEASE_dk_append	(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 
-	dk_configure		(${GIFLIB})
-	dk_build			(${GIFLIB} giflib)	
+	dk_configure		(${GIFLIB_DIR})
+	dk_build			(${GIFLIB_DIR} giflib)	
+	
+	
+	
+	
+	
+	
 else()
 	### LINK ###
-	dk_include			(${GIFLIB}/lib										GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB}/${OS}									GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
+	dk_include			(${GIFLIB_DIR}/lib							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB}/${triple}						GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB_CONFIG_DIR}						GIF_INCLUDE_DIR2)
+	dk_libDebug			(${GIFLIB_DEBUG_DIR}/lib/.libs/libgif.a		GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB_RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
 
 	### 3RDPARTY LINK ###
 	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
 	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 	
 	### GENERATE / CONFIGURE ###
-	dk_setPath			(${GIFLIB})
-	dk_queueCommand		(bash -c "autoreconf -f -i")
+	dk_cd			(${GIFLIB_DIR})
+	dk_queueCommand	(bash -c "autoreconf -f -i")
 
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 
+	dk_configure		(${GIFLIB})
 	if(ANDROID)
 		if(MSVC)
-			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
 			dk_visualStudio		(${GIFLIB} giflib)
 		else()
-			dk_configure		(${GIFLIB})
 			dk_queueCommand		(make -C lib)
 		endif()
 	else()
 		if(EMSCRIPTEN)
-			dk_queueCommand		(${DKCMAKE_BUILD} ${GIFLIB})
 			dk_build			(${GIFLIB})
 		else()
-			dk_configure		(${GIFLIB})
 			dk_queueCommand		(make -C lib)
 		endif()
 	endif()
 endif()
 
 # FIX for other searchers
-dk_copy(${GIFLIB}/gif_lib.h ${GIFLIB}/lib/gif_lib.h)
+#dk_copy(${GIFLIB_DIR}/gif_lib.h ${GIFLIB_DIR}/lib/gif_lib.h)

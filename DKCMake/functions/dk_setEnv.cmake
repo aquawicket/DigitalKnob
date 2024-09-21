@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 function(dk_setEnv name value)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_debug("dk_setEnv(${ARGV})")
 	if(EXISTS "${value}")
@@ -28,7 +28,7 @@ function(dk_setEnv name value)
 	endif()
 	#dk_info("Setting ENV{${name}} environment variable to ${value}")
 	set(ENV{${name}} "${value}")
-	dk_printVar(ENV{${name}})
+	#dk_printVar(ENV{${name}})
 	#dk_debug(ENV{${name}})
 	
 	#dk_debug(ENV{${name}})
@@ -55,8 +55,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

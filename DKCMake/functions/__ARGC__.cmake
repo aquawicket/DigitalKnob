@@ -6,6 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 macro(__ARGC__ rtn_var)
+	#dk_debugFunc(${ARGV})
+	
 	if(${ARGV1})
 		set(_FRAME_ ${ARGV1})
 	else()
@@ -13,12 +15,16 @@ macro(__ARGC__ rtn_var)
 	endif()
 
 	set(${rtn_var} ${ARGC})
+
+# DEBUG
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	#dk_debugFunc(${ARGV})
 	
 	__ARGC__(ARGC)
 	dk_info("\${ARGC} = ${ARGC}")
@@ -28,5 +34,4 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	
 	__ARGC__(ARGC_1 1)
 	dk_info("\${ARGC_1} = ${ARGC_1}")
-
 endfunction()

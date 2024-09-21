@@ -7,8 +7,8 @@ ESC=
 #
 #
 dk_keyboard() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_echo "Press any key. Press Ctrl + C to exit."
 	ReadKey() {
@@ -324,8 +324,9 @@ dk_keyboard() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_keyboard
 }

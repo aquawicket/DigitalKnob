@@ -6,15 +6,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_keyboard)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		dk_validate(DKBATCH_FUNCTIONS_DIR "dk_validateBranch()")
-		dk_setPath(${DKBATCH_FUNCTIONS_DIR})
+		dk_cd(${DKBATCH_FUNCTIONS_DIR})
 		execute_process(COMMAND cmd /c ${DKBATCH_FUNCTIONS_DIR}/dk_keyboard.cmd OUTPUT_VARIABLE rtn_var ECHO_OUTPUT_VARIABLE)
 		dk_info("rtn_var = ${rtn_var}")
 		return()
@@ -27,15 +28,16 @@ function(dk_keyboard)
 		return()
 	endif()
 		
-	dk_error("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
 endfunction()
 
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_keyboard()
 endfunction()

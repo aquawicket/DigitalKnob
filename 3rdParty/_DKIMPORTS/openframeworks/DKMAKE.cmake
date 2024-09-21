@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/openframeworks/openFrameworks
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 # https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_vs2017_release.zip  # WINDOWS
@@ -47,10 +48,10 @@ dk_include(${OPENFRAMEWORKS}/libs/poco/include)
 dk_include(${OPENFRAMEWORKS}/libs/tess2/include)
 dk_include(${OPENFRAMEWORKS}/libs/utf8cpp/include)
 dk_include(${OPENFRAMEWORKS}/libs/videoInput/include)
-UNIX_dk_libDebug	(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/libopenframeworks.a)
-UNIX_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/libopenframeworks.a)
-WIN_dk_libDebug		(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
-WIN_dk_libRelease	(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
+UNIX_dk_libDebug	(${OPENFRAMEWORKS}/${triple}/lib/${DEBUG_DIR}/libopenframeworks.a)
+UNIX_dk_libRelease	(${OPENFRAMEWORKS}/${triple}/lib/${RELEASE_DIR}/libopenframeworks.a)
+WIN_dk_libDebug		(${OPENFRAMEWORKS}/${triple}/lib/${DEBUG_DIR}/openFrameworks.lib)
+WIN_dk_libRelease	(${OPENFRAMEWORKS}/${triple}/lib/${RELEASE_DIR}/openFrameworks.lib)
 
 
 ### GENERATE ###

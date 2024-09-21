@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/libsdl-org/SDL_mixer
 # https://www.libsdl.org/projects/SDL_mixer
 
@@ -16,21 +17,41 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include					(${SDL_MIXER}/include										SDL_MIXER_INCLUDE_DIR)
+dk_include				(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
 if(MSVC)
-	WIN_dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/SDL2_mixer-static.lib	SDL_MIXER_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
 elseif(ANDROID)
-	ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug			(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease		(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease			(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug			(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease		(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_MIXER} 
+if(MSVC)
+	dk_configure(${SDL_MIXER_DIR} 
+	-DCMAKE_POSITION_INDEPENDENT_CODE=OFF	# "Build static libraries with -fPIC" ON
+	-DSDL2MIXER_CMD=OFF						# "Support an external music player" ${sdl2mixer_cmd_default}
+	-DSDL2MIXER_DEPS_SHARED=OFF				# "Default value for loading dependencies dynamically" ON
+	-DSDL2MIXER_FLAC=OFF 					# "Enable FLAC music" ON
+	-DSDL2MIXER_INSTALL=OFF					# "Enable SDL2mixer install target" ON
+	-DSDL2MIXER_MIDI=OFF 					# "Enable MIDI music" ON
+	-DSDL2MIXER_MOD=OFF						# "Support loading MOD music" ON
+	-DSDL2MIXER_MP3=OFF						# "Enable MP3 music" ON
+	-DSDL2MIXER_OPUS=OFF 					# "Enable Opus music" ON
+	-DSDL2MIXER_SAMPLES=OFF					# "Build the SDL2_mixer sample program(s)" ON
+	-DSDL2MIXER_VENDORED=OFF				# "Use vendored third-party libraries" ${vendored_default}
+	-DSDL2MIXER_WAVE=OFF					# "Enable streaming WAVE music" ON
+	#${FLAC_CMAKE} 
+	#${OGG_CMAKE} 
+	${SDL_CMAKE}) 
+	#${SMPEG2_CMAKE} 
+	#${VORBIS_CMAKE})
+else()
+	dk_configure(${SDL_MIXER_DIR} 
 	#-DCMAKE_POSITION_INDEPENDENT_CODE=ON	# "Build static libraries with -fPIC" ON
 	#-DSDL2MIXER_CMD=OFF					# "Support an external music player" ${sdl2mixer_cmd_default}
 	-DSDL2MIXER_DEPS_SHARED=OFF				# "Default value for loading dependencies dynamically" ON
@@ -48,7 +69,7 @@ dk_configure(${SDL_MIXER}
 	${SDL_CMAKE} 
 	${SMPEG2_CMAKE} 
 	${VORBIS_CMAKE})
-
+endif()
 
 ### COMPILE ###
-dk_build(${SDL_MIXER} SDL2_mixer)
+dk_build(${SDL_MIXER_DIR} SDL2_mixer)

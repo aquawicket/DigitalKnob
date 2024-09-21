@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   ID @id			- OPTIONAL: The commit-id to checkout
 #
 function(dk_importGit url) #branch #id #PATCH
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(PATCH ${ARGV})
 	
@@ -28,7 +28,7 @@ function(dk_importGit url) #branch #id #PATCH
 
 	# GITHUB
 	if(${url_list_size} LESS 5)
-		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
+		dk_fatal("url_list doesn't contain enough elements to have a 'orginization/library'")
 	endif()	
 	
 	set(branch "master")
@@ -47,7 +47,7 @@ function(dk_importGit url) #branch #id #PATCH
 			if(${includes} EQUAL -1)
 			#dk_includes(${url} "gitlab.com" includes)
 			#if(NOT ${includes})
-				dk_error("The url does not contain 'github.com' OR 'gitlab.com'")
+				dk_fatal("The url does not contain 'github.com' OR 'gitlab.com'")
 			endif()
 		endif()
 	
@@ -84,51 +84,51 @@ function(dk_importGit url) #branch #id #PATCH
 	
 	# check current folder name
 	if(NOT "${DKIMPORTS_DIR}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_error("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${FOLDER}\n\n")
+		dk_fatal("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${FOLDER}\n\n")
 	endif()
 	
 	dk_toUpper(${Lib} LIBVAR)
 	if(NOT LIBVAR)
-		dk_error("$(LIBVAR) is invalid")
+		dk_fatal("$(LIBVAR) is invalid")
 	endif()
 	dk_verbose(LIBVAR)
 	
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		dk_error("${LIBVAR}_FOLDER is invalid")
+		dk_fatal("${LIBVAR}_FOLDER is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_FOLDER	)
 	
 	dk_set(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
-		dk_error("${LIBVAR}_BRANCH is invalid")
+		dk_fatal("${LIBVAR}_BRANCH is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_BRANCH	)
 	
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
-		dk_error("${LIBVAR}_NAME is invalid")
+		dk_fatal("${LIBVAR}_NAME is invalid")
 	endif()
 	dk_verbose(${LIBVAR}_NAME)
 	
 	dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
-		dk_error("${${LIBVAR}} is invalid")
+		dk_fatal("${${LIBVAR}} is invalid")
 	endif()
 	dk_verbose(${${LIBVAR}})
 	
 	if(NOT EXISTS ${${LIBVAR}}/.git)
-		dk_set(CURRENT_DIR ${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})
+		dk_cd(${DIGITALKNOB_DIR}/${DK3RDPARTY_DIR})
 		if(EXISTS ${${LIBVAR}})
 			dk_delete(${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
 			dk_makeDirectory(${${LIBVAR}})
 		endif()
-		dk_set(CURRENT_DIR ${${LIBVAR}})
+		dk_cd(${${LIBVAR}})
 		dk_command(${GIT_EXE} clone ${url} ${${LIBVAR}})
 	endif()
-	dk_set(CURRENT_DIR ${${LIBVAR}})
+	dk_cd(${${LIBVAR}})
 	dk_command(${GIT_EXE} checkout -- .)
 	dk_command(${GIT_EXE} checkout ${branch} ${id})
 	dk_command(${GIT_EXE} pull)
@@ -149,8 +149,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

@@ -11,6 +11,7 @@ function GLOBAL:__CALLER__($_FRAME_=1) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
 	Write-Host -Fore cyan "CALLER = $(__CALLER__ 0)";
 }

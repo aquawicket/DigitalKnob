@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # Multi-format archive and compression library
 #
 # https://libarchive.org/
@@ -33,27 +34,27 @@ dk_import(https://github.com/libarchive/libarchive/archive/refs/heads/master.zip
 
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
-dk_include					(${LIBARCHIVE}/libarchive)
-dk_include					(${LIBARCHIVE}/${OS})
-ANDROID_dk_include			(${LIBARCHIVE}/contrib/android/include)
+dk_include					(${LIBARCHIVE_DIR}/libarchive)
+dk_include					(${LIBARCHIVE_TRIPLE_DIR})
+ANDROID_dk_include			(${LIBARCHIVE_DIR}/contrib/android/include)
 
 if(MULTI_CONFIG)
 	if(MSVC)
-		WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
-		WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
+		WIN_dk_libDebug		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/archive.lib)
+		WIN_dk_libRelease	(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/archive.lib)
 	else()
-		dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
+		dk_libDebug			(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/libarchive.a)
+		dk_libRelease		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
+	dk_libDebug				(${LIBARCHIVE_TRIPLE_DIR}/${DEBUG_DIR}/libarchive/libarchive.a)
+	dk_libRelease			(${LIBARCHIVE_TRIPLE_DIR}/${RELEASE_DIR}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
-ANDROID_dk_configure(${LIBARCHIVE}
-	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${OS} -I${LIBARCHIVE}/contrib/android/include"
+ANDROID_dk_configure(${LIBARCHIVE_DIR}
+	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TRIPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -110,7 +111,7 @@ ANDROID_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-EMSCRIPTEN_dk_configure(${LIBARCHIVE}
+EMSCRIPTEN_dk_configure(${LIBARCHIVE_DIR}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -167,8 +168,8 @@ EMSCRIPTEN_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 	
-IOS_dk_configure(${LIBARCHIVE}
-	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
+IOS_dk_configure(${LIBARCHIVE_DIR}
+	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive" 
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -225,16 +226,16 @@ IOS_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 if(IOS)
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-IOSSIM_dk_configure(${LIBARCHIVE}
-	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive"
+IOSSIM_dk_configure(${LIBARCHIVE_DIR}
+	"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive"
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -291,15 +292,15 @@ IOSSIM_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 if(IOSSIM)
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE}/${OS}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-LINUX_dk_configure(${LIBARCHIVE}
+LINUX_dk_configure(${LIBARCHIVE_DIR}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -356,7 +357,7 @@ LINUX_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 
-MAC_dk_configure(${LIBARCHIVE}
+MAC_dk_configure(${LIBARCHIVE_DIR}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -413,7 +414,7 @@ MAC_dk_configure(${LIBARCHIVE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
 	
-RASPBERRY_dk_configure(${LIBARCHIVE}
+RASPBERRY_dk_configure(${LIBARCHIVE_DIR}
 	-DENABLE_ACL=ON
 	-DENABLE_BZip2=${BZIP2}
 	-DENABLE_CAT=ON
@@ -471,7 +472,7 @@ RASPBERRY_dk_configure(${LIBARCHIVE}
 	${ZSTD_CMAKE})
 
 if(MSVC)
-	WIN_dk_configure(${LIBARCHIVE}
+	WIN_dk_configure(${LIBARCHIVE_DIR}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -528,7 +529,7 @@ if(MSVC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()
-	WIN_dk_configure(${LIBARCHIVE}
+	WIN_dk_configure(${LIBARCHIVE_DIR}
 		"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 		-DCMAKE_FIND_USE_CMAKE_PATH=FALSE
 		-DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE
@@ -600,4 +601,4 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE} archive_static)
+dk_build(${LIBARCHIVE_DIR} archive_static)

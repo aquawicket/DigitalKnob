@@ -28,4 +28,4 @@ set "DKBATCH_DIR=%~dp0"
 set "DKBATCH=@echo off & call %DKBATCH_DIR%dkbatch.cmd %%~f0 %%* & @setlocal enableextensions enabledelayedexpansion"
 setx DKBATCH "%DKBATCH%"
 echo DKBATCH = "%DKBATCH%"
-goto :EOF
+goto:eof

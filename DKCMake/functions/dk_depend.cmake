@@ -9,11 +9,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_depend plugin)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		if(plugin IN_LIST init_list)
-			dk_debug("${plugin} is allready in init_list")
+			#dk_debug("${plugin} is allready in init_list")
 			return()  #plugin is already in the init_list
 		endif()
 		dk_append(init_list "${plugin}")
@@ -55,7 +55,7 @@ function(dk_depend plugin)
 #	endif()
 		
 	if(plugin IN_LIST dkdepend_list)
-		dk_notice("${plugin} already in dkdepend_list")
+		#dk_verbose("${plugin} already in dkdepend_list")
 		return()  #library is already in the list
 	endif()
 	
@@ -76,8 +76,9 @@ dk_createOsMacros("dk_depend")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

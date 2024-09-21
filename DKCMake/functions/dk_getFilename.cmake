@@ -11,14 +11,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var:	- Returns the file name upon success: False upon error
 #
 function(dk_getFilename path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_assert(path)
 	dk_assert(rtn_var)
 	
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
-		dk_error("No Path Dividers found")
+		dk_fatal("No Path Dividers found")
 	endif()
 	MATH(EXPR index "${index}+1")
 	string(LENGTH ${path} length)
@@ -34,15 +34,16 @@ function(dk_getFilename path rtn_var)
 	endif()
 	
 	dk_assert(filename)
-	dk_printVar(filename)
+	#dk_printVar(filename)
     set(${rtn_var} ${filename} PARENT_SCOPE)
 endfunction()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

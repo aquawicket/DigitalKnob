@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_pathExists path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	
 	if(EXISTS "${path}")
@@ -16,7 +16,7 @@ function(dk_pathExists path rtn_var)
 		set(pathExists 0)
 	endif()
 	
-	dk_printVar(pathExists)
+	#dk_printVar(pathExists)
 	set(${rtn_var} ${pathExists} PARENT_SCOPE)
 endfunction()
 
@@ -24,7 +24,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	
 	dk_pathExists("dk_debug.cmake" dk_pathExists_dk_debug_sh)

@@ -6,13 +6,12 @@
 #
 #
 dk_gitDiffSummary() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-        
-	dk_validate DKBRANCH_DIR "dk_validateBranch"
+	dk_debugFunc 0
+  
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
     cd ${DKBRANCH_DIR}
     
-	dk_validate GIT_EXE "dk_installGit"
+	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 
     "${GIT_EXE}" --no-pager diff --compact-summary
 }
@@ -23,8 +22,9 @@ dk_gitDiffSummary() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
-	dk_gitDiffSummary
+	dk_call dk_gitDiffSummary
 }

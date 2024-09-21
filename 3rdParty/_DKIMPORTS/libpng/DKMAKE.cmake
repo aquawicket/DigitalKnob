@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/glennrp/libpng
 # http://www.libpng.org/pub/png/libpng.html
 
@@ -22,20 +23,20 @@ endif()
 
 ### LINK ###
 dk_define					(PNG_STATIC)
-dk_include					(${LIBPNG}  																	PNG_INCLUDE_DIR)
-dk_include					(${LIBPNG}/${BUILD_DIR}															PNG_INCLUDE_DIR2)
-ANDROID_dk_include			(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
+dk_include					(${LIBPNG_DIR}  														PNG_INCLUDE_DIR)
+dk_include					(${LIBPNG_CONFIG_DIR}													PNG_INCLUDE_DIR2)
+
 if(MSVC)
-	ANDROID_dk_libDebug		(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
-	WIN_dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
+	ANDROID_dk_libDebug		(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
 elseif(APPLE)
-	dk_libDebug				(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
 endif()
 
 
@@ -106,7 +107,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBPNG}
+dk_configure(${LIBPNG_DIR}
 	-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
 	-DPNG_STATIC=ON					# "Build shared lib" ON
 	-DPNG_SHARED=OFF				# "Build static lib" ON
@@ -125,5 +126,5 @@ dk_configure(${LIBPNG}
 
 
 ### COMPILE ###
-dk_build(${LIBPNG} png_static)
+dk_build(${LIBPNG_DIR} png_static)
 

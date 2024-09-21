@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var		- TODO
 #
 function(dk_getPathToPlugin plugin rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(FIND dk_disabled_list "${ARGV}" index)
 	if(${index} GREATER -1)
@@ -41,15 +41,16 @@ function(dk_getPathToPlugin plugin rtn_var)
   	#endforeach()
 	
 	set(${rtn_var} "")
-	dk_error("Could not find ${plugin} Plugin.")
+	dk_fatal("Could not find ${plugin} Plugin.")
 endfunction()
 
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

@@ -9,10 +9,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@url	- The url to print
 #
 function(dk_printUrlData url)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT url)
-		dk_error("url invalid! ")
+		dk_fatal("url invalid! ")
 	endif()
 	dk_verbose("*** url Variables ***")
 	dk_verbose(url)
@@ -35,8 +35,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

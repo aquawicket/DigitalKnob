@@ -1,31 +1,46 @@
 @echo off
 
-if not "%*" == "" (goto:runDKPowershell)
+if "%~1" neq "" goto:runDKPowershell
 :installDKPowershell
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Install DKPowershell ######
-	call dk_echo "Installing DKPowershell . . ."
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
-
+	%dk_call% dk_echo "Installing DKPowershell . . ."
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+	::%dk_call% dk_validate POWERSHELL_EXE "call %DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
+	%dk_call% dk_validate POWERSHELL_EXE "call dk_setPOWERSHELL_EXE"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
+	
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKPowershell"
+	
 	ftype DKPowershell=cmd /c call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%POWERSHELL_EXE%" "%%1" %*
-	call dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKPowershell\DefaultIcon" "" "REG_SZ" "%POWERSHELL_EXE%"
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.ps1"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1
 	assoc .ps1=DKPowershell
 	
-	call dk_echo "DKPowershell install complete"
-goto:eof
+	%dk_call% dk_success "DKPowershell install complete"
+%endfunction%
 
 
 :runDKPowershell
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
 	set "POWERSHELL_EXE=%~2"
-	set "DKPOWERSHELL_FILE=%~3"
-	start /b %POWERSHELL_EXE% %DKPOWERSHELL_FILE%
-goto:eof
+	set "DKSCRIPT_PATH=%~3"
+	
+	
+	::###### run script ######
+	call %POWERSHELL_EXE% -Command %DKSCRIPT_PATH%; exit $LASTEXITCODE && (echo returned TRUE) || (echo returned FALSE)
+	
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKPowershell
+%endfunction%

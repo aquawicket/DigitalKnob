@@ -1,26 +1,27 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_deleteTempFiles()
 ::#
 ::#
 :dk_deleteTempFiles
-	call dk_debugFunc 0
-	
-    call dk_info "Deleteing .tmp files . . ."
-	call dk_validate DIGITALKNOB_DIR "call dk_getDKPaths"
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_info "Deleting .tmp files . . ."
+    %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_getDKPaths"
     cd "%DIGITALKNOB_DIR%"
-    for /r %%i in (*.tmp) do del "%%i"
-    for /r %%i in (*.TMP) do del "%%i"
-    ::call dk_checkError
-goto:eof
+	for /r %%Z in (*.tmp) do @if %%~xZ==.tmp del "%%Z"
+	for /r %%Z in (*.TMP) do @if %%~xZ==.TMP del "%%Z"
+%endfunction%
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-    call dk_deleteTempFiles
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_deleteTempFiles
+%endfunction%

@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://gitlab.gnome.org/GNOME/libxml2
 # https://github.com/GNOME/libxml2
 # http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
@@ -7,13 +8,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 
 ### DEPEND ###
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_depend(autoconf)
-	dk_depend(automake)
-	dk_depend(libtool)
-endif()
 dk_depend(libiconv)
-dk_depend(python)
+dk_depend(python3)
 dk_depend(xz)
 dk_depend(zlib)
 
@@ -22,27 +18,31 @@ dk_depend(zlib)
 #dk_import(https://github.com/GNOME/libxml2.git)
 #dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
 dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
-
+if(NOT EXISTS ${LIBXML2}/configure)
+	dk_depend(autoconf)
+	dk_depend(automake)
+	dk_depend(libtool)
+endif()
 
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${LIBXML2})
-dk_include				(${LIBXML2}/include 							LIBXML2_INCLUDE_DIR)
+dk_include				(${LIBXML2_DIR})
+dk_include				(${LIBXML2_DIR}/include 							LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2}/${OS}								LIBXML2_INCLUDE_DIR2)
+	dk_include			(${LIBXML2_CONFIG_DIR}								LIBXML2_INCLUDE_DIR2)
 else()
-	DEBUG_dk_include    (${LIBXML2}/${OS}/${DEBUG_DIR}					LIBXML2_INCLUDE_DIR2)
-	RELEASE_dk_include  (${LIBXML2}/${OS}/${RELEASE_DIR}				LIBXML2_INCLUDE_DIR2)
+	DEBUG_dk_include    (${LIBXML2_DEBUG_DIR}								LIBXML2_INCLUDE_DIR2)
+	RELEASE_dk_include  (${LIBXML2_RELEASE_DIR}								LIBXML2_INCLUDE_DIR2)
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib	LIBXML2_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${LIBXML2_DEBUG_DIR}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBXML2_RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a		LIBXML2_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
+	dk_libDebug			(${LIBXML2_DEBUG_DIR}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBXML2_RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
 endif()
 
 
@@ -97,48 +97,42 @@ endif()
 #endif()
 
 
-##ANDROID_dk_queueCommand(${DKCONFIGURE_BUILD})
-#ANDROID_dk_queueCommand(${DKCMAKE_BUILD} 
+#ANDROID_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE} 
-#	${LIBXML2})
+#	${ZLIB_CMAKE})
 
 ##APPLE_dk_queueCommand(${DKCONFIGURE_BUILD})
-#APPLE_dk_queueCommand(${DKCMAKE_BUILD} 
+#APPLE_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE} 
-#	${LIBXML2})
+#	${ZLIB_CMAKE})
 
 ##EMSCRIPTEN_dk_queueCommand(${DKCONFIGURE_BUILD})
-#E#MSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} 
+#E#MSCRIPTEN_dk_configure(${LIBXML2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE} 
-#	${LIBXML2})
+#	${ZLIB_CMAKE})
 
 ##LINUX_dk_queueCommand(${DKCONFIGURE_BUILD} --with-python=no)
-#LINUX_dk_queueCommand(${DKCMAKE_BUILD} 
+#LINUX_dk_configure(${LIBXML2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE} 
-#	${LIBXML2})
+#	${ZLIB_CMAKE})
 
 ##RASPBERRY_dk_queueCommand(${DKCONFIGURE_BUILD})
-#RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD}
+#RASPBERRY_dk_configure(${LIBXML2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE} 
-#	${LIBXML2})
+#	${ZLIB_CMAKE})
 
 #WIN_dk_queueCommand(${DKCONFIGURE_BUILD})
 dk_configure(${LIBXML2} 

@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_printArray)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(DEFINED "${ARGV}")
 		set(array "${ARGV}")
@@ -15,7 +15,7 @@ function(dk_printArray)
 		set(array "ARGV")
 		set(name ${array})
 	else()
-		dk_error("arguments invalid: ${ARGV}")
+		dk_fatal("arguments invalid: ${ARGV}")
 	endif()
 
 	dk_echo("name = ${name}")
@@ -36,7 +36,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

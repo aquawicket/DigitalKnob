@@ -1,18 +1,5 @@
-@echo off
-
-::set "ENABLE_dk_debugFunc=1"	
-::################## DKBuilder ####################
-::###### DK_INIT ######
-set "DKHTTP_DKBATCH_FUNCTIONS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"
-set "DKBATCH_DIR=%CD%\DKBatch"
-set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
-set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%\"
-if not exist "%DKBATCH_FUNCTIONS_DIR%" mkdir "%DKBATCH_FUNCTIONS_DIR%"
-if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" powershell /? 1>nul && powershell -command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', '%DKBATCH_FUNCTIONS_DIR%/DK.cmd')"
-if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" curl --help 1>nul && curl %DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd -o %DKBATCH_FUNCTIONS_DIR%/DK.cmd
-if not exist "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" certutil /? 1>nul && certutil -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd" "%DKBATCH_FUNCTIONS_DIR%/DK.cmd"
-call "%DKBATCH_FUNCTIONS_DIR%\DK.cmd" %0
-
-::###### Load Main Program ######
-call dk_source dk_buildMain
-call dk_buildMain
+@echo off&setlocal enableDelayedExpansion&set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"&set "DKF=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKBatch\functions"&set "DK=!DKF!\DK.cmd"&if not exist "!DKF!" set "DKF=%CD%\DK\functions"&mkdir "!DKF!"&set "DK=!DKF!\DK.cmd"&powershell -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1||certutil -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1||curl -f "!HDK!" -o "!DK!" >nul 2>&1||echo [31m DKINIT Failed :([0m
+endlocal&set "DK=%DK%"&set "DKF=%DKF%"
+call "%DK%" %~0 %*
+::####################
+%dk_call% dk_buildMain

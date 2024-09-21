@@ -8,22 +8,20 @@ if(!$dk_arrayFlat){ $dk_arrayFlat = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 #
 function Global:dk_arrayFlat($array, $depth) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	
+	dk_debugFunc 2
+
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo
+	dk_call dk_todo
 }
 
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_arrayFlat array depth
+	dk_call dk_arrayFlat array depth
 }

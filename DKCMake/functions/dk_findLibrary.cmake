@@ -9,14 +9,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@name	- The name of the library
 #
 function(dk_findLibrary name)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(NO_HALT ${ARGV})
 	
 	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
-				dk_error("Could not locate ${name} Library" ${NO_HALT})
+				dk_fatal("Could not locate ${name} Library" ${NO_HALT})
 				if(NO_HALT)
 					set(${name}_LIBRARY ${name})
 				endif()
@@ -34,8 +34,9 @@ dk_createOsMacros("dk_findLibrary")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

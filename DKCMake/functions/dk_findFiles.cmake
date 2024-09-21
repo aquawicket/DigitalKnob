@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOption(RECURSE ${ARGV})
 
@@ -22,11 +22,12 @@ function(dk_findFiles path pattern rtn_var)
 		file(GLOB findFiles "${path}/" "${path}/${pattern}")
 	endif()
 	if(NOT findFiles)
-		dk_error("findFiles is invalid")
+		dk_fatal("findFiles is invalid")
 		return()
 	endif()
-	dk_printVar(findFiles)
+	#dk_printVar(findFiles)
 	set(${rtn_var} ${findFiles} PARENT_SCOPE)
+	#dk_printVar(rtn_var)
 endfunction()
 
 
@@ -34,8 +35,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

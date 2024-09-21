@@ -52,18 +52,18 @@
 		)
 	  )
 	)
-goto:eof
+%endfunction%
 
 
 :retrieveLineNumber  RtnVar
 	set ^"#=set ^^^"#=move /y "%~f0" "%~f0.#"^^^>nul^^^&move /y "%~f0.0" "%~f0"^^^>nul^^^&set #=^^^&set %1=?^^^"^&goto :?^"
 	move /y "%~f0" "%~f0.0" >nul & move /y "%~f0.#" "%~f0" >nul & exit /b
-goto:eof
+%endfunction%
 
 :quitRetrieveLineNumber
 	setlocal disableDelayedExpansion
 	del "%~f0.0" "%~f0.#"
-goto:eof
+%endfunction%
 
 
 :strlen  StrVar  [RtnVar]
@@ -77,4 +77,4 @@ goto:eof
 	  )
 	)
 	endlocal&if "%~2" neq "" (set %~2=%len%) else echo %len%
-goto:eof
+%endfunction%

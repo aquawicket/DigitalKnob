@@ -31,7 +31,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ###############################################################
 dk_validate(DIGITALKNOB_DIR  "dk_getDKPaths()")
 
-dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
+dk_cd(${DIGITALKNOB_DIR})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
@@ -43,77 +43,118 @@ endif()
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-dk_printVar(CMAKE_CXX_COMPILER_ID)
+#dk_printVar(CMAKE_C_COMPILER_ID)
+#dk_printVar(CMAKE_CXX_COMPILER_ID)
+#dk_printVar(CMAKE_GENERATOR)
+#dk_printVar(CMAKE_GENERATOR_PLATFORM)
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-	dk_set(GNU ON)
+	if(GNU)
+		dk_warning("GNU was allready set")
+	endif()
+	dk_set(GNU 1)
+
+elseif(CMAKE_GENERATOR MATCHES "Visual Studio")
+	if(MSVC)
+		dk_warning("MSVC was allready set")
+	endif()
+	dk_set(MSVC 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
+	if(MINGW)
+		dk_warning("MINGW was allready set")
+	endif()
+	dk_set(MINGW 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
+	if(MSYS)
+		dk_warning("MSYS was allready set")
+	endif()
+	dk_set(MSYS 1)
+
+elseif(CMAKE_GENERATOR STREQUAL "Xcode")
+	if(XCODE)
+		dk_warning("XCODE was allready set")
+	endif()
+	dk_set(XCODE 1)
+	
+elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+	if(GNU)
+		dk_warning("GNU was allready set")
+	endif()
+	dk_set(GNU 1)
+else()
+	dk_fatal("Could not determin Environment Variable")
 endif()
 
-string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
-if(${index} GREATER -1)
-	dk_set(MSVC ON)
+math(EXPR error "${GNU} + ${MSVC} + ${MINGW} + ${MSYS} + ${XCODE} - 1" OUTPUT_FORMAT DECIMAL)
+if(error)
+	dk_printVar(error)
+	dk_printVar(GNU)
+	dk_printVar(MSVC)
+	dk_printVar(MINGW)
+	dk_printVar(MSYS)
+	dk_printVar(XCODE)
+	dk_fatal("Either not enout, or too many compiler Flags are set")
 endif()
-
-if(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
-	dk_set(MINGW ON)
-endif()
-
-if(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
-	dk_set(MSYS ON)
-endif()
-
-if(CMAKE_GENERATOR STREQUAL "Xcode")
-	dk_set(XCODE ON)
-endif()
-
 
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
-option(DEBUG "Build Debug Output" OFF)
-option(RELEASE "Build Release Output" OFF)
+option(DEBUG "Build Debug Binaries" 0)
+option(RELEASE "Build Release Binaries" 0)
 if(NOT DEBUG AND NOT RELEASE)
 	dk_info("No Build type selected. Defaulting to DEBUG and RELEASE")
-	dk_set(DEBUG ON)
-	dk_set(RELEASE ON)
+	dk_set(DEBUG 1)
+	dk_set(RELEASE 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for Build Level
 ###########################################################################
-option(BUILD "Simpily build the app or library" OFF)
-option(REBUILD "Rebuild the app" OFF)
-option(REBUILDALL "Rebuild the app and all dependencies" ON)
+option(BUILD "Simpily build the app or library" 0)
+option(REBUILD "Rebuild the app" 0)
+option(REBUILDALL "Rebuild the app and all dependencies" 1)
 if(NOT BUILD AND NOT REBUILD AND NOT REBUILDALL)
 	dk_info("No Build level selected, defaulting to REBUILDALL")
-	dk_set(REBUILDALL ON)
+	dk_set(REBUILDALL 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for Library Build Type (STATIC or SHARED)
 ###########################################################################
-option(STATIC "Build Static Libraries and Plugins" OFF)
-option(SHARED "Build Shared Libraries and Plugins" OFF)
+option(STATIC "Build Static Libraries and Plugins" 0)
+option(SHARED "Build Shared Libraries and Plugins" 0)
 if(NOT STATIC AND NOT SHARED)
-	dk_set(STATIC ON)
+	dk_set(STATIC 1)
 endif()
 
 
 ###########################################################################
 ## Get variables for CEF
 ###########################################################################
-option(DKCEF "Use Chromium Embeded Framework" OFF)
+option(DKCEF "Use Chromium Embeded Framework" 0)
 if(${DKCEF} STREQUAL "ON")
 	add_definitions(-DHAVE_DKCef)
 endif()
+
+
+
+###########################################################################
+## Get HOST_TRIPLE and TARGET_TRIPLE
+###########################################################################
+dk_HOST_TRIPLE()
+dk_TARGET_TRIPLE()
+
 
 
 ########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
 #string(FIND "${CMAKE_BINARY_DIR}" "/DKApps/" index)
 #if(${index} GREATER -1)
 #	dk_info("Building DKApp . . .")
-#	dk_set(DKAPP ON)
+#	dk_set(DKAPP 1)
 #	dk_printVar(DKAPP)
 #	add_definitions(-DDKAPP)
 #endif()
@@ -138,42 +179,43 @@ endif()
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
-dk_getTargetTriple()
+dk_TARGET_TRIPLE()
 
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
-#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm32")
-#	dk_set(RPI ON)
-#	dk_set(RPI32 ON)
+#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm32")
+#	dk_set(RPI 1)
+#	dk_set(RPI32 1)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI32)
 #endif()
 # RPI and RPI64
-#if(${DK_BINARY_OS_ARCH} MATCHES "raspberry_arm64")
-#	dk_set(RPI ON)
-#	dk_set(RPI64 ON)
+#if(DK_BINARY_OS_ARCH MATCHES "raspberry_arm64")
+#	dk_set(RPI 1)
+#	dk_set(RPI64 1)
 #	dk_printVar(RPI)
 #	dk_printVar(RPI64)
 #endif()
 
 # TINYCORE
 if(CMAKE_HOST_SYSTEM_VERSION)
-	string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
-	if(${contains_tinycore} GREATER -1)
-		dk_set(TINYCORE ON)
+	#string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
+	#if(${contains_tinycore} GREATER -1)
+	if(CMAKE_HOST_SYSTEM_VERSION MATCHES "tinycore")
+		dk_set(TINYCORE 1)
 	endif()
 endif()
 
 ### Display OS info to user ###
 dk_info("")
 dk_info("")
-dk_info("*** Creating ${OS} Project Files ***")
+dk_info("*** Creating ${triple} Project Files ***")
 dk_info("")
 
 
 ### Set CMAKE_SKIP_RPATH ###
-dk_set(CMAKE_SKIP_RPATH ON)
+dk_set(CMAKE_SKIP_RPATH 1)
 
 if(WIN_HOST)
 	dk_set(exe .exe)
@@ -185,9 +227,9 @@ endif()
 
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
-	if(NOT OS)
-		dk_printVar(CMAKE_BINARY_DIR)	
-		dk_error("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
+	if(NOT triple)
+		#dk_printVar(CMAKE_BINARY_DIR)	
+		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 		#dk_delete(${CMAKE_BINARY_DIR})
 	endif()
 endif()

@@ -1,17 +1,18 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_getParentFolder(<input> rtn_var)
 ::#
 ::#
 :dk_getParentFolder
-	call dk_debugFunc 2
-	
+    call dk_debugFunc 2
+ setlocal
+ 
     for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
     set "%2=%parent%"
-	call dk_printVar "%2"
-goto:eof
+    %dk_call% dk_printVar "%2"
+%endfunction%
 
 
 
@@ -20,7 +21,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_getParentFolder
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_getParentFolder
+%endfunction%

@@ -6,8 +6,7 @@ if(!$dk_unset){ $dk_unset = 1 } else{ return }
 #
 #
 function Global:dk_unset($variable) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
 
 	if(!(Test-Path variable:$variable)){ return }
 	Remove-Variable $variable -Scope Global
@@ -22,13 +21,12 @@ function Global:dk_unset($variable) {
 
 
 
-
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
 	$global:myVar = "initial value assigned with dk_unset"
-	dk_echo "myVar = ${myVar}"
-	dk_unset myVar
-	dk_echo "myVar = ${myVar}"
+	dk_call dk_echo "myVar = ${myVar}"
+	dk_call dk_unset myVar
+	dk_call dk_echo "myVar = ${myVar}"
 }

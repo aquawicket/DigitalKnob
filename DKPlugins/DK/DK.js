@@ -1,19 +1,20 @@
 //"use strict";
 
-const DEBUG = true;
+var DEBUG = true;
 window.dk = new Object;
-var DUKTAPE = window.DUKTAPE
+var DUKTAPE = window.DUKTAPE;
 dk.useCPP = false;
 
-//Keep a object reference to the old console
+/*
+Keep an object reference to the old console
 if(!DUKTAPE){
     dk.xconsole = new Object;
-    //Create a logger for console
     dk.x = new Object;
-    dk.xconsole.debug = console.debug;
-    dk.xconsole.error = console.error;
-    dk.xconsole.log = console.log;
-    dk.xconsole.warn = console.warn;
+	dk.xconsole.debug = console.debug;
+	dk.xconsole.error = console.error;
+	dk.xconsole.log = console.log;
+	dk.xconsole.warn = console.warn;
+	
     dk.x.record = [];
     dk.x.logger = function(lvl, args){
         !DUKTAPE && dk.xconsole[lvl] && dk.xconsole[lvl].apply(this, Array.prototype.slice.call(args));
@@ -21,6 +22,7 @@ if(!DUKTAPE){
         var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
     }
+
     console.debug = function(){
         dk.x && dk.x.logger("debug", arguments);
     }
@@ -34,9 +36,10 @@ if(!DUKTAPE){
         dk.x && dk.x.logger("warn", arguments);
     }
 }
+*/
 
 // required({args})
-const required = function required(){
+var required = function required(){
     for (var n = 0; n < arguments.length; n++){
         if (typeof arguments[n] !== "object")
             throw new Error(" Must use {} around variables when using require. EXAMPLE: required({var1}, {var2})");
@@ -48,12 +51,12 @@ const required = function required(){
 }
 
 // byId(id)
-const byId = function byId(id){
+var byId = function byId(id){
     return document.getElementById(id);
 }
 
 // error(str, callback, result)
-const error = function error(str, callback, result){
+var error = function error(str, callback, result){
     !result && (result = false);
     console.error(str);
     callback && callback(result);
@@ -66,7 +69,7 @@ const error = function error(str, callback, result){
 }
 
 // warn(str, callback, result)
-const warn = function warn(str, callback, result){
+var warn = function warn(str, callback, result){
     !result && (result = false);
     console.warn(str);
     callback && callback(result);
@@ -74,28 +77,28 @@ const warn = function warn(str, callback, result){
 }
 
 // ok(callback, result)
-const ok = function ok(callback, result){
+var ok = function ok(callback, result){
     !result && (result = true);
     callback && callback(result);
     return result;
 }
 
 // DUMP({variable})
-const DUMP = function dk_dumpVariable(variable){
+var DUMP = function dk_dumpVariable(variable){
 	if (typeof variable !== "object")
             throw new Error(" Must use {} around variables when using dump. EXAMPLE: dk.dump({myVariable})");
 		
-    const pink = "color:rgb(220,120,220);"
-    const white = "color:rgb(213.213.213);"
-    const blue = "color:rgb(113,113,263); font-style:italic;"
-    const color = "color:rgb(100,100,250);"
-    const lightBlue = "color:rgb(91,171,209);"
-    const grey = "color:rgb(142,142,142);"
-    const orange = "color:rgb(226,131,81);"
+    var pink = "color:rgb(220,120,220);"
+    var white = "color:rgb(213.213.213);"
+    var blue = "color:rgb(113,113,263); font-style:italic;"
+    var color = "color:rgb(100,100,250);"
+    var lightBlue = "color:rgb(91,171,209);"
+    var grey = "color:rgb(142,142,142);"
+    var orange = "color:rgb(226,131,81);"
     var name;
     if (typeof variable === "object"){
-        console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
-        //const type = Object.prototype.toString.call(variable).slice(8, -1);
+        console.group("%c" + variable.varructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
+        //var type = Object.prototype.toString.call(variable).slice(8, -1);
         //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
         //console.log("%c typeof: %c" + typeof variable, pink, color);
         for (var key in variable){
@@ -134,7 +137,7 @@ const DUMP = function dk_dumpVariable(variable){
 
     //for(var key in variable.__proto__.constructor)
     //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
-	const variable_name = Object.keys({variable})[0]
+	var variable_name = Object.keys(variable)[0]
     console.log(variable_name+" = "+variable)
     /*
     if (typeof variable === "object")
@@ -156,8 +159,8 @@ document.onselectstart = function document_onselectstart(){
 document.addEventListener("mousemove", function document_addEventListener(event){
     if (dk.iE()){
         // grab the x-y pos.s if browser is IE
-        window.mouseX = event.clientX + document.body.scrollLeft
-        window.mouseY = event.clientY + document.body.scrollTop
+//        window.mouseX = event.clientX + document.body.scrollLeft
+//        window.mouseY = event.clientY + document.body.scrollTop
     }
     //FIXME
     if (dk.getBrowser() === "Rml"){
@@ -182,12 +185,12 @@ document.addEventListener("mousemove", function document_addEventListener(event)
 // dk.init()
 dk.init = function dk_init(){
 	!DUKTAPE && eval("var __temp = null");
-	const use_strict = (typeof __temp === "undefined");
-    console.debug("*** DigitalKnob ***");
-    console.debug("use_strict: " + use_strict);
-    console.debug("Browser: " + dk.getBrowser());
-    console.debug("JSEngine: " + dk.getJSEngine());
-    dk.create("DK/DK.css");
+	var use_strict = (typeof __temp === "undefined");
+//    console.debug("*** DigitalKnob ***");
+//    console.debug("use_strict: " + use_strict);
+//    console.debug("Browser: " + dk.getBrowser());
+//    console.debug("JSEngine: " + dk.getJSEngine());
+//    dk.create("DK/DK.css");
 }
 
 // dk.hasCPP()
@@ -263,9 +266,9 @@ dk.create = function dk_create(data, dk_create_callback){
 
 // dk.close(data)
 dk.close = function dk_close(data){
-    required({
-        data
-    });
+//    required({
+//       data
+//    });
     data = data.split(",");
     if (data[0].includes(".css"))
         data.splice(0, 0, "DKCss");
@@ -282,7 +285,7 @@ dk.close = function dk_close(data){
         //    console.log("running dk." + plugin.name + ".end()");
         //    plugin.end();
         //}
-        const scripts = document.getElementsByTagName("script");
+        var scripts = document.getElementsByTagName("script");
         for (var n = 0; n < scripts.length; n++){
             if (scripts[n].src.includes(data[1])){
                 scripts[n].parentNode.removeChild(scripts[n]);
@@ -300,7 +303,7 @@ dk.close = function dk_close(data){
         return true;
     }
     if (data[0] === "DKCss"){
-        const links = document.getElementsByTagName("link");
+        var links = document.getElementsByTagName("link");
         for (var n = 0; n < links.length; n++){
             if (links[n].href.includes(data[1])){
                 links[n].parentNode.removeChild(links[n]);
@@ -315,9 +318,9 @@ dk.close = function dk_close(data){
 
 // dk.getPlugin(url)
 dk.getPlugin = function dk_getPlugin(url){
-    required({
-        url
-    });
+//    required({
+//        url
+//    });
     var file = url;
     file = file.substring(file.lastIndexOf("/") + 1);
     if (!file)
@@ -356,9 +359,9 @@ dk.getPlugin = function dk_getPlugin(url){
 // dk.loadJs(url, callback)
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback){
     console.warn("Use DKPlugin() instead of dk.create to load .js files now");
-    required({
-        url
-    });
+//    required({
+//        url
+//    });
     //if (dk.getObjects().indexOf(url) > -1){
     //    console.log(url + " script already loaded...");
     //    dk_loadJs_callback(true);
@@ -425,9 +428,9 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback){
 
 // dk.loadHtml(url, parent, callback)
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback){
-    required({
-        url
-    });
+//    required({
+//        url
+//    });
     if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file", dk_loadHtml_callback(false));
 
@@ -466,10 +469,10 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback){
 
 // dk.loadCss(url, calback)
 dk.loadCss = function dk_loadCss(url, dk_loadCss_callback){
-    required({
-        url
-    });
-    const links = document.getElementsByTagName("link");
+//    required({
+//        url
+//    });
+    var links = document.getElementsByTagName("link");
     if (!links)
         return false;
     for (var n = 0; n < links.length; n++){
@@ -502,7 +505,7 @@ dk.checkFileSupport = function dk_checkFileSupport(){
 /*
 // dk.preventDefault(event)
 dk.preventDefault = function dk_preventDefault(event){
-    required({event});
+//    required({event});
 	if(event.stopPropagation){
         event.preventDefault();
     } else {
@@ -512,7 +515,7 @@ dk.preventDefault = function dk_preventDefault(event){
 
 // dk.stopPropagation(event)
 dk.stopPropagation = function dk_stopPropagation(event){
-    required({event});
+//    required({event});
 	if(event.stopPropagation){
         event.stopPropagation();
     } else {
@@ -523,13 +526,13 @@ dk.stopPropagation = function dk_stopPropagation(event){
 
 // dk.setCookie(cname, cvalue, exdays)
 dk.setCookie = function dk_setCookie(cname, cvalue, exdays){
-    required({
-        cname
-    }, {
-        cvalue
-    }, {
-        exdays
-    });
+//    required({
+//        cname
+//    }, {
+//        cvalue
+//    }, {
+//        exdays
+//    });
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
@@ -538,9 +541,9 @@ dk.setCookie = function dk_setCookie(cname, cvalue, exdays){
 
 // dk.getCookie(cname)
 dk.getCookie = function dk_getCookie(cname){
-    required({
-        cname
-    });
+//    required({
+//        cname
+//    });
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++){
@@ -555,9 +558,9 @@ dk.getCookie = function dk_getCookie(cname){
 
 // dk.makeStruct(names)
 dk.makeStruct = function dk_makeStruct(names){
-    required({
-        names
-    });
+//    required({
+//        names
+//    });
     var names = names.split(' ');
     var count = names.length;
     function constructor(){
@@ -604,7 +607,7 @@ dk.isLocal = function dk_isLocal(){
 // dk.available(name)
 // FIXME: This function needs to be investigated
 dk.available = function dk_available(name){
-    required({name});
+//    required({name});
     if (name === "DKWidget")
         return true;
     if (name === "DKWidgetJS"){
@@ -765,17 +768,17 @@ if(typeof CPP_DKFile_FileToString === "function"){
 	dk.fileToString = function DKFile_fileToString(path, callback){
 		console.log("dk.fileToString()")
         //path = dk.validatepath(path);
-        const str = CPP_DKFile_FileToString(path);
+        var str = CPP_DKFile_FileToString(path);
         return callback(str);
     }
 } else {
     dk.fileToString = function dk_fileToString(url, dk_fileToString_callback){
 		console.log("dk_fileToString("+url+")");
-		required({
-			url
-		}, {
-			dk_fileToString_callback
-		});
+//		required({
+//			url
+//		}, {
+//			dk_fileToString_callback
+//		});
 		dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data){
 			return dk_fileToString_callback(data);
 		});
@@ -784,9 +787,9 @@ if(typeof CPP_DKFile_FileToString === "function"){
 
 // dk.sleep()
 dk.sleep = function dk_sleep(milliseconds){
-    required({
-        milliseconds
-    });
+//    required({
+//        milliseconds
+//    });
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++){
         if ((new Date().getTime() - start) > milliseconds){
@@ -807,9 +810,9 @@ dk.clearSelection = function dk_clearSelection(){
 
 // dk.getElements()
 dk.getElements = function dk_getElements(element){
-    required({
-        element
-    });
+//    required({
+//        element
+//    });
     var string;
     //var nodes = element.getElementsByTagName('*'); //all children recursively    
     var nodes = element.childNodes;
@@ -826,9 +829,9 @@ dk.getElements = function dk_getElements(element){
 
 // dk.getAvailableId()
 dk.getAvailableId = function dk_getAvailableId(id){
-    required({
-        id
-    });
+//    required({
+//        id
+//    });
     var out = id;
     var i = 0;
     while (byId(out)){
@@ -850,9 +853,9 @@ dk.getAvailableId = function dk_getAvailableId(id){
 
 // dk.getInnerHtmlString()
 dk.getInnerHtmlString = function dk_getInnerHtmlString(id){
-    required({
-        id
-    });
+//    required({
+//        id
+//    });
     var element = byId(id);
     for (var i = 0; i < element.childNodes.length; i++){
         var curNode = element.childNodes[i];
@@ -864,11 +867,11 @@ dk.getInnerHtmlString = function dk_getInnerHtmlString(id){
 
 // dk.setInnerHtmlString()
 dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string){
-    required({
-        id
-    }, {
-        string
-    });
+//    required({
+//        id
+//    }, {
+//        string
+//    });
     var element = byId(id);
     for (var i = 0; i < element.childNodes.length; i++){
         var curNode = element.childNodes[i];
@@ -1017,9 +1020,9 @@ dk.getValue = function dk_getValue(variable){
 
 // dk.preloadFile()
 dk.preloadFile = function dk_preloadFile(url){
-    required({
-        url
-    });
+//    required({
+//        url
+//    });
     var file = new Object();
     file.src = url;
     return file;
@@ -1027,9 +1030,9 @@ dk.preloadFile = function dk_preloadFile(url){
 
 // dk.preloadImage()
 dk.preloadImage = function dk_preloadImage(url){
-    required({
-        url
-    });
+//    required({
+//        url
+//    });
     if (!DUKTAPE){
         var img = new Image();
         img.src = url;
@@ -1039,27 +1042,27 @@ dk.preloadImage = function dk_preloadImage(url){
 
 // dk.saveToLocalStorage()
 dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string){
-    required({
-        name
-    }, {
-        string
-    });
+//    required({
+//        name
+//    }, {
+//        string
+//    });
     localStorage.setItem(name, string);
 }
 
 // dk.loadFromLocalStorage()
 dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name){
-    required({
-        name
-    });
+//    required({
+//        name
+//    });
     return localStorage.getItem(name);
 }
 
 // dk.removeFromLocalStorage()
 dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name){
-    required({
-        name
-    });
+//    required({
+//        name
+//    });
     localStorage.removeItem(name);
 }
 
@@ -1071,13 +1074,13 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name){
 
 // dk.sendRequest()
 dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback){
-    required({
-        httpMethod
-    }, {
-        url
-    }, {
-        dk_sendRequest_callback
-    });
+//    required({
+//        httpMethod
+//    }, {
+//        url
+//    }, {
+//        dk_sendRequest_callback
+//    });
     if (httpMethod){
         switch (httpMethod){
         case "GET":
@@ -1171,9 +1174,9 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
 
 // dk.checkForUNICODE()
 dk.checkForUNICODE = function dk_checkForUNICODE(str){
-    required({
-        str
-    });
+//    required({
+//        str
+//    });
     for (var i = 0, n = str.length; i < n; i++){
         if (str.charCodeAt(i) > 255){
             console.warn("Found UNICODE character at " + i);
@@ -1186,9 +1189,9 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str){
 
 // dk.validateStrict()
 dk.validateStrict = function dk_validateStrict(str){
-    required({
-        str
-    });
+//    required({
+//        str
+//    });
     return str;
 }
 
@@ -1198,7 +1201,7 @@ dk.validateStrict = function dk_validateStrict(str){
 dk.stringToBinary = function dk_sringToBinary(string){
     //for BINARY maxBytes = 255
     //for VARBINARY maxBytes = 65535
-    const maxBytes = 255;
+    var maxBytes = 255;
     var binaryOutput = '';
     if (string.length > maxBytes)
         string = string.substring(0, maxBytes);
@@ -1209,7 +1212,7 @@ dk.stringToBinary = function dk_sringToBinary(string){
 
 // dk.binaryToString
 dk.binaryToString = function dk_binaryToString(binary){
-    const arrayOfBytes = binary.split(' ');
+    var arrayOfBytes = binary.split(' ');
     var stringOutput = '';
     for (var i = 0; i < arrayOfBytes.length; i++)
         stringOutput += String.fromCharCode(parseInt(arrayOfBytes[i], 2));
@@ -1261,9 +1264,9 @@ if (typeof String.prototype.trim !== 'function'){
 if (!Array.prototype.includes){
     Array.prototype.includes = function(searchElement /*, fromIndex*/
     ){
-        required({
-            searchElement
-        });
+//        required({
+//            searchElement
+//        });
         if (this == null){
             throw new TypeError('Array.prototype.includes called on null or undefined');
         }
@@ -1308,11 +1311,11 @@ if (!Array.prototype.includes){
  * @type Number
  */
 Number.prototype.clamp = function Number_clamp(min, max){
-    required({
-        min
-    }, {
-        max
-    });
+//    required({
+//        min
+//    }, {
+//        max
+//    });
     return Math.min(Math.max(this, min), max);
 }
 
@@ -1338,9 +1341,9 @@ Object.prototype.clone = Array.prototype.clone = function(){
 // dk.errorCatcher(obj, name)
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name){
-    required({
-        obj
-    });
+//    required({
+//        obj
+//    });
     dk.errorCatcher.bypass = ["init", "end", "create", "close"]
     !name && (name = obj.constructor.name);
     for (var func in obj){
@@ -1350,7 +1353,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name){
             continue;
         if (obj[func] == DKPlugin.prototype[func])
             continue;
-        const method = obj[func];
+        var method = obj[func];
         if (typeof method === "function"){
             if (dk.errorCatcher.bypass.includes(func))
                 continue;
@@ -1363,7 +1366,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name){
                     try {
                         return method.apply(this, arguments);
                     } catch (err){
-                        //const stack = dk.trace.stackToConsoleString(err);
+                        //var stack = dk.trace.stackToConsoleString(err);
                         //if (dk.console && dk.console.error){
                             //dk.console.error(err);
                             //dk.xconsole && dk.dk.xconsole.error(err);
@@ -1379,9 +1382,9 @@ dk.errorCatcher = function dk_errorCatcher(obj, name){
 // dk.testSyntax(code)
 // https://stackoverflow.com/a/63785848/688352
 dk.testSyntax = function dk_testSyntax(code){
-    required({
-        code
-    });
+//    required({
+//        code
+//    });
     try {
         new Function([],code)
     } catch (err){
@@ -1392,9 +1395,9 @@ dk.testSyntax = function dk_testSyntax(code){
 //dk.getNewFuncs()
 dk.getNewFuncs = function dk_getNewFuncs(){
     !dk.windowfuncs && (dk.windowfuncs = new Array)
-    const newfuncs = new Array
-    const removedfuncs = new Array
-    const obj = globalThis//window
+    var newfuncs = new Array
+    var removedfuncs = new Array
+    var obj = globalThis//window
     //remove any function that have been removed from obj
     for (var i in dk.windowfuncs){
         if (!obj[dk.windowfuncs[i]]){
@@ -1441,13 +1444,13 @@ dk.insert = function dk_insert(str, index, value){
 // dk.renameFunction(func, name)
 // https://stackoverflow.com/a/24032179/688352
 dk.renameFunction = function dk_renameFunction(func, name){
-    const oldName = func.name;
+    var oldName = func.name;
     var funcString = func.toString();
     funcString = funcString.replace("function(", "function " + name + "(")
     funcString = funcString.replace("function (", "function " + name + "(")
     funcString = funcString.replace("function " + oldName + "(", "function " + name + "(")
     funcString += "\nreturn " + name + ";"
-    const parent = window;
+    var parent = window;
     var scope = parent;
     var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)){
@@ -1467,12 +1470,12 @@ dk.renameFunction = function dk_renameFunction(func, name){
 // dk.editFunctionBody(func, newBody)
 // https://stackoverflow.com/a/24032179/688352
 dk.editFunctionBody = function dk_editFunctionBody(func, newBody){
-    const name = func.name;
+    var name = func.name;
     newBody = newBody.replace("function(", "function " + name + "(")
     newBody = newBody.replace("function (", "function " + name + "(")
     newBody = newBody.replace("function " + name + "(", "function " + name + "(")
     newBody += "\nreturn " + name + ";"
-    const parent = window;
+    var parent = window;
     var scope = parent;
     var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)){
@@ -1496,7 +1499,7 @@ dk.StringToFunction = function dk_StringToFunction(name, str){
     str = str.replace("function (", "function " + name + "(")
     str = str.replace("function " + name + "(", "function " + name + "(")
     str += "\nreturn " + name + ";"
-    const parent = window;
+    var parent = window;
     var scope = parent;
     var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)){
@@ -1516,8 +1519,8 @@ dk.StringToFunction = function dk_StringToFunction(name, str){
 // dk.classExtends(child_class, parent_class)
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
 dk.classExtends = function dk_classExtends(child_class, parent_class){
-    const child_prototype = child_class.prototype;
-    const funcString = "function " + child_class.name + "(){\n\tconsole.log('" + child_class.name + "() constructor')\n\t" + parent_class.name + ".call(this, arguments)\n}";
+    var child_prototype = child_class.prototype;
+    var funcString = "function " + child_class.name + "(){\n\tconsole.log('" + child_class.name + "() constructor')\n\t" + parent_class.name + ".call(this, arguments)\n}";
     var child = dk.StringToFunction(child_class.name, funcString)
     child.prototype = Object.create(parent_class.prototype)
     child.prototype.constructor = child
@@ -1527,5 +1530,8 @@ dk.classExtends = function dk_classExtends(child_class, parent_class){
 }
 
 
-// initialize an instance of dk
+
 dk.init();
+
+
+

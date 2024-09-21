@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@entry			- TODO
 #
 function(dk_buildLog entry)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getOptionValue(PATH ${ARGV})
 	
@@ -17,7 +17,7 @@ function(dk_buildLog entry)
 	set(msg "${entry} = ${${entry}}")
 	dk_info("${msg}")
 	
-	dk_fileAppend(${DK_PROJECT_DIR}/${BUILD_DIR}/DKBUILD.log "${msg}\n")
+	dk_fileAppend(${DK_PROJECT_DIR}/${CONFIG_PATH}/DKBUILD.log "${msg}\n")
 endfunction()
 
 
@@ -26,8 +26,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

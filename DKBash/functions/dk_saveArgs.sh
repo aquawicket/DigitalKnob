@@ -14,7 +14,7 @@
 #	echo "${1} ${2} ${3} ${4}"
 #
 dk_saveArgs() {
-	dk_debugFunc
+	dk_debugFunc 1 99
 
 	for i do 
 		printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/"
@@ -74,8 +74,9 @@ test_func() {
 }
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_echo
 	dk_echo "clearing positional args 'set --'"

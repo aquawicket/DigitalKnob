@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.xquartz.org/
 # https://www.xquartz.org/releases/index.html
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
@@ -18,9 +19,9 @@ dk_depend(homebrew)
 #endif()
 
 # Other install methods
-# sudo port -v install xorg-server
+# ${SUDO} port -v install xorg-server
 # or
-# sudo port -v install xorg
+# ${SUDO} port -v install xorg
 # or
 # brew install --cask xquartz
 

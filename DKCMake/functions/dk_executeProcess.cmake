@@ -31,7 +31,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
 #
 function(dk_executeProcess)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
+	
 	
 	dk_getOptionValues(COMMAND 						${ARGV})
 	dk_getOptionValue(WORKING_DIRECTORY 			${ARGV})
@@ -66,7 +67,8 @@ function(dk_executeProcess)
 	endif()
 	
 	# FIXME:  only in valid cmd shell
-	find_program(CMD_EXE cmd.exe)
+	dk_depend(cmd)
+	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		list(FIND ARGV "cmd;/c" index)
 		if(${index} EQUAL -1)			# add cmd /c if missing
@@ -74,13 +76,15 @@ function(dk_executeProcess)
 		endif()
 	endif()
 	
+	# WORKING_DIRECTORY defaults to ${PWD} set by dk_cd(directory)
+	# since CMAKE doesn't use a default PWD or CD current directory, we make our own by keeping
+	# the PWD variable updated with the desired path. Any calls to execute_process
+	# will use value of that variable unless WORKING_DIRECTORY is specified in the function call.
 	if(NOT WORKING_DIRECTORY)
-		if(NOT CURRENT_DIR)
-			dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
-			dk_set(CURRENT_DIR ${DIGITALKNOB_DIR})
+		if(NOT PWD)
+			dk_cd(${DIGITALKNOB_DIR})
 		endif()
-		set(WORKING_DIRECTORY ${CURRENT_DIR})
-		list(APPEND ARGV WORKING_DIRECTORY ${WORKING_DIRECTORY}) # add WORKING_DIRECTORY if missing
+		list(APPEND ARGV WORKING_DIRECTORY ${PWD}) # add WORKING_DIRECTORY if missing
 	endif()
 	
 	if(NOT RESULT_VARIABLE)
@@ -116,7 +120,6 @@ function(dk_executeProcess)
 	
 	#dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
-	dk_printVar(ARGV)
 	execute_process(${ARGV})
 	
 	
@@ -128,11 +131,11 @@ function(dk_executeProcess)
 		dk_echo("${cyan-}result_variable =${blue-} '${result_variable}'${clr-}")
 		dk_echo("${cyan-}output_variable =${white-} '${output_variable}'${clr-}")
 		dk_echo("${cyan-}error_variable =${red-} '${error_variable}'${clr-}")
-		dk_error(" " ${NO_HALT})
+		dk_fatal(" " ${NO_HALT})
 #	else()
 #		dk_verbose(" ")
 #		dk_verbose(cmd1)
-#		dk_verbose(WORKING_DIRECTORY)
+#		dk_verbose(PWD)
 #		dk_verbose(RESULT_VARIABLE)
 #		dk_verbose(OUTPUT_VARIABLE)
 #		dk_verbose(ERROR_VARIABLE)
@@ -166,14 +169,13 @@ dk_createOsMacros("dk_executeProcess")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
-
-	
-	set(DKDOWNLOAD_DIR "C:/Users/Administrator/D i g i t a l K n o b/download")
+	set(DKDOWNLOAD_DIR "C:/Users/Administrator/DigitalKnob/download")
 	set(MSYS2_DL_FILE "msys2-x86_64-20231026.exe")
-	set(MSYS2 "C:/Users/Administrator/D i g i t a l K n o b/download/msys2-x86_64-20231026")
+	set(MSYS2 "C:/Users/Administrator/DigitalKnob/download/msys2-x86_64-20231026")
 
 	
 #	set(MSYS2_DL_PATH "${DKDOWNLOAD_DIR}/${MSYS2_DL_FILE}")
@@ -181,11 +183,11 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	string(REPLACE "\\" "//" MSYS2_DL_PATH "${MSYS2_DL_PATH}")
 #	string(REPLACE " " "\\\\ " MSYS2_DL_PATH "${MSYS2_DL_PATH}")
 	
-	dk_getNativePath("${MSYS2}" MSYS2)
-	set(CURRENT_DIR "${MSYS2}")
-	string(REPLACE "\\" "//" MSYS2 "${MSYS2}")
-#	string(REPLACE " " "\\ " MSYS2 "${MSYS2}")
-#	dk_makeDirectory("${MSYS2}")
+	dk_getNativePath("${MSYS2_DIR}" MSYS2)
+	dk_cd("${MSYS2_DIR}")
+	string(REPLACE "\\" "//" MSYS2 "${MSYS2_DIR}")
+#	string(REPLACE " " "\\ " MSYS2 "${MSYS2_DIR}")
+#	dk_makeDirectory("${MSYS2_DIR}")
 	
 #	list(APPEND args cmd)
 #	list(APPEND args /c)
@@ -193,12 +195,11 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	list(APPEND args install)
 	list(APPEND args --confirm-command)
 	list(APPEND args --root)
-#	list(APPEND args "${MSYS2}")
-#	set(args "${MSYS2_DL_PATH};install;--confirm-command;--root;${MSYS2}")
-#	set(args "${MSYS2_DL_PATH}";install;--confirm-command;--root;"${MSYS2}")
+#	list(APPEND args "${MSYS2_DIR}")
+#	set(args "${MSYS2_DL_PATH};install;--confirm-command;--root;${MSYS2_DIR}")
+#	set(args "${MSYS2_DL_PATH}";install;--confirm-command;--root;"${MSYS2_DIR}")
 #	set(args "${MSYS2_DL_PATH}")
 	#set(args notepad.exe)
-#	dk_printVar(args)
-	execute_process(COMMAND ${MSYS2_DL_PATH} "${args}" "${MSYS2}" WORKING_DIRECTORY "${MSYS2}")
-#	dk_executeProcess(${MSYS2_DL_PATH} "${args}" "${MSYS2}")
+	execute_process(COMMAND ${MSYS2_DL_PATH} "${args}" "${MSYS2_DIR}" WORKING_DIRECTORY "${MSYS2_DIR}")
+#	dk_executeProcess(${MSYS2_DL_PATH} "${args}" "${MSYS2_DIR}")
 endfunction()

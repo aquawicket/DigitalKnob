@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var		- Returns true if the str contains the substr. Otherwise returns false
 #
 function(dk_includes variable find rtn_var)
-	dk_debugFunc(${ARGV})
+	#dk_debugFunc("\${ARGV}")
 	
 	string(FIND "${variable}" "${find}" index)
 	if(${index} GREATER -1)
@@ -28,8 +28,23 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	set(myString "There is a needle in this haystack")
+	set(mySubstring "needle")
+	dk_includes(${myString} ${mySubstring} result)
+	if(result)
+		dk_info("myString contains mySubstring")
+	else()
+		dk_info("myString does NOT contain mySubstring")
+	endif()
+	
+	dk_includes(${myString} "nonexistant" result)
+	if(result)
+		dk_info("myString contains nonexistant")
+	else()
+		dk_info("myString does NOT contain nonexistant")
+	endif()
 endfunction()

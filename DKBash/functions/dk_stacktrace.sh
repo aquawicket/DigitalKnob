@@ -7,8 +7,7 @@
 #
 #
 dk_stacktrace() {
-    dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+    dk_debugFunc 0
 	#ENABLE_dk_debugFunc=0
 
 	### VERSION 1 ###
@@ -57,8 +56,9 @@ dk_stacktrace() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_stacktrace
 }

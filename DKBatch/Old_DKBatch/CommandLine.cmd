@@ -45,7 +45,7 @@ goto:end
 :enter_command
    echo Enter a command:
    set /p command=
-goto:eof
+%endfunction%
 
 :run_command
    ::call ListToArray "%command%" command_arry length
@@ -57,6 +57,6 @@ goto:eof
    echo:
    set "command_arry="
    set "length="
-goto:eof
+%endfunction%
 
 :end

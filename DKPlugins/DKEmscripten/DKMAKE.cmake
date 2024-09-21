@@ -5,7 +5,7 @@ dk_depend(emsdk)
 ##dk_generateCmake(DKEmscripten)
 ##dk_assets(DKEmscripten)
 
-dk_set(CURRENT_DIR ${DKPLUGINS_DIR}/DKEmscripten)
+dk_cd(${DKPLUGINS_DIR}/DKEmscripten)
 dk_set(QUEUE_BUILD ON)
 ##WIN_X86_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS_DIR}/DKEmscripten/hello.c -o hello.html)
 

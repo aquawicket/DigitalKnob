@@ -30,21 +30,26 @@ dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
-	#dk_echo(STATUS "DKRETURN = ${DKRETURN}")
+	#dk_info(STATUS "DKRETURN = ${DKRETURN}")
 	
-	## create windows cmd script to set the return variables
-	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+#	## create windows cmd script to set the return variables
+#	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+#	foreach(item ${DKRETURN})
+#		set(line "set \"${item}=${${item}}\" \n")
+#		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+#		dk_exportVars(${item} "${${item}}")
+#	endforeach()
+	
+#	## create unix shell script to set the return variables
+#	dk_delete(${DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
+#	dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
+#	foreach(var ${DKRETURN})
+#		dk_convertToCIdentifier(${var} var_)
+#		set(line "export ${var_}=\"${${var}}\" \n")
+#       dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+#	endforeach()
+
 	foreach(item ${DKRETURN})
-		set(line "set \"${item}=${${item}}\" \n")
-		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
-	endforeach()
-	
-	## create unix shell script to set the return variables
-	dk_delete(${DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
-	dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
-	foreach(var ${DKRETURN})
-		dk_convertToCIdentifier(${var} var_)
-		set(line "export ${var_}=\"${${var}}\" \n")
-        dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+		dk_exportVars(${item} "${${item}}")
 	endforeach()
 endif()

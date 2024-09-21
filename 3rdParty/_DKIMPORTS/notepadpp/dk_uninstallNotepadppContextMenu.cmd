@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_uninstallNotepadppContextMenu()
@@ -8,7 +8,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	call dk_uninstallContextMenu "Edit with Notepad++"
-goto:eof
+%endfunction%
 
 
 
@@ -21,4 +21,4 @@ goto:eof
 	call dk_debugFunc 0
 	
     call dk_uninstallNotepadppContextMenu
-goto:eof
+%endfunction%

@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_uninstallPowershellFileAssociations()
@@ -9,7 +9,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	call dk_uninstallFileAssoc .ps1
 	call dk_uninstallFileAssoc .psm1
-goto:eof
+%endfunction%
 
 
 
@@ -20,4 +20,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_uninstallPowershellFileAssociations
-goto:eof
+%endfunction%

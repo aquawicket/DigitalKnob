@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.gnu.org/software/ddd/
 # https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz
 
@@ -9,4 +10,5 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 # TODO
 # sudo apt-get install ddd
-LINUX_HOST_dk_command(sudo apt -y install ddd) #FIXME sudo needed
+dk_depend(sudo)
+LINUX_HOST_dk_command(${SUDO} apt -y install ddd)

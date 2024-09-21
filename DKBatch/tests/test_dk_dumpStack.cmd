@@ -16,7 +16,7 @@
 	::	call echo 0 = %%~0
 	::	echo returned from func2
 	::)
-goto:eof
+%endfunction%
 
 :func2
 	echo :func2 %*
@@ -27,7 +27,7 @@ goto:eof
 	::	call echo 0 = %%~0
 	::	echo returned from func3
 	::)
-goto:eof
+%endfunction%
 
 :func3
 	echo :func3 %*
@@ -38,16 +38,16 @@ goto:eof
 	::	call echo 0 = %%~0
 	::	echo returned from func4
 	::)
-goto:eof
+%endfunction%
 
 :func4
 	echo :func4 %*
 	call:func5 orange
 	echo returned from func5
-goto:eof
+%endfunction%
 
 :func5
 	echo :func5 %*
 <:dk_dumpStackReturn <nul call dk_dumpStack
 	echo returned from dk_dumpStack
-goto:eof
+%endfunction%

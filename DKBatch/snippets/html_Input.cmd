@@ -31,20 +31,20 @@ exit /b
 <!-- https://learn.microsoft.com/en-us/previous-versions/ms536495(v=vs.85) -->
 <html>
 	<head>
-		<TITLE>HTA Demo</TITLE>
-		<HTA:APPLICATION ID="htaInput"
-			APPLICATIONNAME="htaInput"
-			BORDER="thin"
+		<TITLE>DKInputBox</TITLE>
+		<HTA:APPLICATION ID="DKInputBox"
+			APPLICATIONNAME="DKInputBox"
+			BORDER="none"
 			BORDERSTYLE="normal"
 			CAPTION="yes"
 			ICON=""
-			MAXIMIZEBUTTON="yes"
-			MINIMIZEBUTTON="yes"
-			NAVIGABLE="yes"
+			MAXIMIZEBUTTON="no"
+			MINIMIZEBUTTON="no"
+			NAVIGABLE="no"
 			SCROLL="no"
 			SHOWINTASKBAR="no"
 			SINGLEINSTANCE="yes"
-			SYSMENU="yes"
+			SYSMENU="no"
 			VERSION="1.0"/>
 	</head>	
 <body onkeypress='keyPress(event)'>
@@ -65,7 +65,6 @@ exit /b
             close(fso.Write(pass));
         }
 		document.getElementById("input").focus
-		stop
     </script>
 </body>
 </html> 

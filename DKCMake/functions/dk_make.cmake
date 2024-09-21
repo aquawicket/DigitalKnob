@@ -10,17 +10,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@lib (optional)		- TODO
 #
 function(dk_make path) #lib
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT EXISTS ${path})
-		dk_error("dk_make(${path}) path does not exist")
+		dk_fatal("dk_make(${path}) path does not exist")
 	endif()
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
-		dk_error("No proper dk_make() implemented for emscripten" NO_HALT)
+		dk_fatal("No proper dk_make() implemented for emscripten" NO_HALT)
 		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+		dk_cd(${path}/${CONFIG_PATH})
 		
 		if(${ARGC} GREATER 1)
 			dk_queueCommand(${EMMAKE} ${CMAKE_MAKE_PROGRAM} ${lib})
@@ -32,9 +32,10 @@ function(dk_make path) #lib
 		#RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
-		#dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+		#dk_cd(${path}/${CONFIG_PATH})
+		dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
 		dk_assert(CMAKE_MAKE_PROGRAM)
-		dk_debug(CMAKE_MAKE_PROGRAM)
+		dk_printVar(CMAKE_MAKE_PROGRAM)
 		if(XCODE)
 			if(${ARGC} GREATER 1)
 				dk_queueCommand(make ${lib})
@@ -55,8 +56,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

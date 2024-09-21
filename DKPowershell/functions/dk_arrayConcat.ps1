@@ -8,22 +8,22 @@ if(!$dk_arrayConcat){ $dk_arrayConcat = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
 function Global:dk_arrayConcat($array, $value1) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+	dk_debugFunc 2 99
 	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
 	
-	dk_todo
+	dk_call dk_todo
 }
 
 
 
 
+
+
+
 function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+	dk_debugFunc 0
 	
-	
-	dk_arrayConcat array value1
+	dk_call dk_arrayConcat array value1
 }

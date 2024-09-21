@@ -35,10 +35,10 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
   for /l %%# in (1 1 10) do for /f "delims=" %%S in (" !exception.Stack!") do (
     (goto) 2>NUL
     setlocal enableDelayedExpansion
-    if "!!" equ "" (
+    if "!DE!" equ "" (
       endlocal
       setlocal disableDelayedExpansion
-      call set "funcName=%%~0"	
+      call set "funcName=%%~0"  
       call set "batName=%%~f0"
       if defined exception.Restart (set "exception.Restart=") else call set "exception.Stack=%%funcName%%%%S"
       setlocal EnableDelayedExpansion
@@ -46,7 +46,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
         endlocal
         endlocal
         set "exception.Code=%%1"
-        if "!!" equ "" (
+        if "!DE!" equ "" (
           call "%~f0" setDelayed
         ) else (
           set "exception.Msg=%%2"
@@ -54,7 +54,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
           set "exception.Stack=%%S"
         )
         set "exception.Try="
-        (CALL )
+        (call ) %NO_STD%
         goto :@Catch
       )
     ) else (
@@ -96,7 +96,7 @@ setlocal disableDelayedExpansion
 if not exist "%temp%\Kill.Yes" call :buildYes
 call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
 :CtrlC
-@cmd /c exit -1073741510
+@%ComSpec% /c exit -1073741510
 
 :buildYes - Establish a Yes file for the language used by the OS
 pushd "%temp%"

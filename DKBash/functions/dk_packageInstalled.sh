@@ -7,16 +7,16 @@
 #
 #
 dk_packageInstalled() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 
 	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "${1}" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists brew; then
 		if brew list "${1}" &>/dev/null; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists apt; then
 		dk_error "dk_packageInstalled() apt-get not implemented"
@@ -27,20 +27,21 @@ dk_packageInstalled() {
 	elif dk_commandExists pacman; then
 		if pacman -Qs "${1}" >/dev/null; then
 			#FIXME: this doesn't always work
-			return ${false};
+			return $(false);
 		fi
 	elif dk_commandExists tce-load; then
 		#dk_error "dk_packageInstalled() tce-load not implemented"
-		return ${false}
+		return $(false)
 	else
 		dk_error "ERROR: no package managers found"
 	fi
-	return ${false}
+	return $(false)
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	if dk_packageInstalled bash; then
 		echo "The package is installed"

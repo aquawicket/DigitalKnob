@@ -11,18 +11,19 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("${ARGV}")
 	
 	dk_getOptionValue(${name} ${ARGN})
-	dk_printVar(${name})
+	#dk_printVar(${name})
 	set(${rtn_var} ${${name}})
 endmacro()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

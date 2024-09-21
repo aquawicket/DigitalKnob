@@ -6,24 +6,24 @@ echo This is never seen
 	echo:
 	echo This is test_jumpToLabelB :main
 	pause
-goto:eof
+%endfunction%
 
 :method1
 	echo:
 	echo This is test_jumpToLabelB :method1
-goto:eof
+%endfunction%
 
 :method2
 	echo:
 	echo This is test_jumpToLabelB :method2
-goto:eof
+%endfunction%
 
 :method3
 	echo:
 	echo This is test_jumpToLabelB :method3
-goto:eof
+%endfunction%
 
 :method4
 	echo:
 	echo This is test_jumpToLabelB :method4
-goto:eof
+%endfunction%

@@ -1,11 +1,11 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_arrayCopyWithin(array, target, start)
 ::# dk_arrayCopyWithin(array, target, start, end)
 ::#
-::#	 The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
+::#  The copyWithin() method of Array instances shallow copies part of this array to another location in the same array and returns this array without modifying its length.
 ::#
 ::#    PARAMETERS
 ::#    target
@@ -34,17 +34,19 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 ::#
 :dk_arrayCopyWithin
-	call dk_debugFunc 4
-	
-	call dk_todo %__FUNCTION__%
-goto:eof
+    call dk_debugFunc 4
+ setlocal
+ 
+    %dk_call% dk_todo %__FUNCTION__%
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-
-	call dk_arrayCopyWithin array target start end
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_arrayCopyWithin array target start end
+%endfunction%

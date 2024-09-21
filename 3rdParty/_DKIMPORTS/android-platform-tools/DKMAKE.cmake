@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://androidsdkoffline.blogspot.com/p/android-sdk-platform-tools.html
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # https://github.com/lzhiyong/android-sdk-tools
@@ -44,7 +45,6 @@ if(ANDROID_HOST)
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)
 		dk_info("Patching Gradle aapt2 .......")
-		#dk_set(CURRENT_DIR ${AAPT2})
 		dk_executeProcess(unzip -o aapt2-7.0.3-7396180-linux.jar WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm aapt2 WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(cp ${ANDROID_SDK}/build-tools/30.0.3/aapt2 . WORKING_DIRECTORY ${AAPT2})

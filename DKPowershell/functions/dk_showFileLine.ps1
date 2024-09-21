@@ -8,9 +8,8 @@ if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 #
 #
 function Global:dk_showFileLine($filepath, $goto) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 2){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+	dk_debugFunc 2
+
 	$lineno = $goto
 #	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
 #	[ -n "${lastErrorLine-}" ] && _lineno="${lastErrorLine}"   || _matchString="$2"
@@ -18,7 +17,7 @@ function Global:dk_showFileLine($filepath, $goto) {
 #	unset lastErrorLine
 #	
 #	#_filepath=$(realpath $_errfile)
-#	dk_load dk_realpath; dk_realpath $_errfile _filepath
+#	dk_call dk_load dk_call dk_realpath; dk_call dk_realpath $_errfile _filepath
 #	[[ ${_matchString} =~ ^[0-9]+$ ]] && _lineno=${_matchString}
 #	
 #	if [ -z ${_lineno-} ]; then
@@ -30,8 +29,8 @@ function Global:dk_showFileLine($filepath, $goto) {
 #		_lineno=$((${line} + 0))
 #	fi
 #	
-	dk_echo " File: ${filepath}: ${lineno}"
-	dk_echo
+	dk_call dk_echo " File: ${filepath}: ${lineno}"
+	dk_call dk_echo
 	
 	$half = $MAX_LINES / 2
 	$min = ($lineno - $half)
@@ -39,18 +38,18 @@ function Global:dk_showFileLine($filepath, $goto) {
 	$max = ($half + $lineno)
 	$n = 1
 	
-	#dk_echo "MAX_LINES = $MAX_LINES"
-	#dk_echo "min = $min"
-	#dk_echo "lineno = $lineno"
-	#dk_echo "max = $max"
+	#dk_call dk_echo "MAX_LINES = $MAX_LINES"
+	#dk_call dk_echo "min = $min"
+	#dk_call dk_echo "lineno = $lineno"
+	#dk_call dk_echo "max = $max"
 	
 	foreach($line in Get-Content "${filepath}") {
 		if($n -lt $max){
 			if($n -gt $min){
 				if($n -eq $lineno){
-					dk_echo "${bg_white}${black}> ${n}: $line${clr}"
+					dk_call dk_echo "${bg_white}${black}> ${n}: $line${clr}"
 				} else {
-					dk_echo "  ${n}: $line"
+					dk_call dk_echo "  ${n}: $line"
 				}
 			}
 		}
@@ -66,10 +65,10 @@ function Global:dk_showFileLine($filepath, $goto) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_showFileLine "../../README.md" "37"
-	dk_showFileLine $(__FILE__ 0) 5
+	dk_call dk_showFileLine "../../README.md" "37"
+	dk_call dk_showFileLine $(__FILE__ 0) 5
 }

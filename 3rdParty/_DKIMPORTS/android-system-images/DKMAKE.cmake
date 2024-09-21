@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://androidsdkoffline.blogspot.com/p/android-sysimg-arm-v7a-direct-download.html
 # https://androidsdkoffline.blogspot.com/p/android-sysimg-arm-v8a-direct-download.html
 

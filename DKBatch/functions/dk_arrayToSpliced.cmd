@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_arrayToSpliced(array, start, deleteCount, item1, item2, /* …, */ itemN)
@@ -8,17 +8,19 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced
 ::#
 :dk_arrayToSpliced
-	call dk_debugFunc 2
-	
-	call dk_todo "dk_arrayToSpliced"
-goto:eof
+    call dk_debugFunc 2
+ setlocal
+ 
+    %dk_call% dk_todo "dk_arrayToSpliced"
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_todo
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_todo
+%endfunction%

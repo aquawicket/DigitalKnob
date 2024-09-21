@@ -1,8 +1,8 @@
 @echo off
 
 :: display the delayed expansion state
-set "if_DE=if "!!" equ """
-set "if_NDE=if "!!" neq """
+set "if_DE=if "!DE!" equ """
+set "if_NDE=if "!DE!" neq """
 set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)" 
 
 

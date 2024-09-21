@@ -7,17 +7,18 @@
 #
 #
 dk_isUrl() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	
-	dk_stringContains "${1}" "://" && return ${true}
-	return ${false}
+	dk_stringContains "${1}" "://" && return $(true)
+	return $(false)
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	test_url="http://www.aquawicket.com"
 	

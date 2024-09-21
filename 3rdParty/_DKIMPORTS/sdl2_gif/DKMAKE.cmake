@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # sdl2_gif
 
 
@@ -20,11 +21,11 @@ ENDIF()
 dk_define				(USE_SDL2_gif)
 dk_include				(${SDL2_GIF})
 if(MSVC)
-	WIN_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
-	WIN_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
+	WIN_dk_libDebug		(${SDL2_GIF}/${triple}/${DEBUG_DIR}/SDL2_gif.lib)
+	WIN_dk_libRelease	(${SDL2_GIF}/${triple}/${RELEASE_DIR}/SDL2_gif.lib)
 else()
-	UNIX_dk_libDebug	(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-	UNIX_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
+	UNIX_dk_libDebug	(${SDL2_GIF}/${triple}/${DEBUG_DIR}/libSDL2_gif.a)
+	UNIX_dk_libRelease	(${SDL2_GIF}/${triple}/${RELEASE_DIR}/libSDL2_gif.a)
 endif()
 
 

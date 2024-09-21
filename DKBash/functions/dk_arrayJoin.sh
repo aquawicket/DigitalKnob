@@ -19,10 +19,8 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 dk_arrayJoin() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
-	#dk_validateArgs array string optional:rtn_var
+	dk_debugFunc 2 3
+	#dk_call dk_validateArgs array string optional:rtn_var
 
 	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
 	for ((i=0; i < ${#_array_[@]}; i++ )); do
@@ -42,7 +40,7 @@ dk_arrayJoin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"
@@ -50,8 +48,8 @@ DKTEST() {
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
 	
-	dk_arrayJoin myArrayA "," myStringA
-	dk_printVar myStringA
+	dk_call dk_arrayJoin myArrayA "," myStringA
+	dk_call dk_printVar myStringA
 	
 	
 	myArrayB[0]="h i j"
@@ -60,6 +58,6 @@ DKTEST() {
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
 	
-	myStringB=$(dk_arrayJoin myArrayB ",")
-	dk_printVar myStringB
+	myStringB=$(dk_call dk_arrayJoin myArrayB ",")
+	dk_call dk_printVar myStringB
 }

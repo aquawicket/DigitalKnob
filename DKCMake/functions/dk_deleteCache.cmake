@@ -7,10 +7,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Delete all CMake cache files thoughout the digitalknob directory
 #
 function(dk_clearCmakeCache)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	DKASSERT(DIGITALKNOB_DIR)
-	dk_info("Deleteing CMake cache . . .")
+	dk_info("Deleting CMake cache . . .")
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
 		dk_executeProcess(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB_DIR})
@@ -24,8 +24,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

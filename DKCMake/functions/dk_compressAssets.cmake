@@ -9,11 +9,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@path	- The full path to add to the archive file
 #
 function(dk_compressAssets path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_info("Compressing: ${path}")
 	if(NOT EXISTS ${path})
-		dk_error("The path ${path} does not exist")
+		dk_fatal("The path ${path} does not exist")
 	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DK_PROJECT_DIR}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()
@@ -22,8 +22,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

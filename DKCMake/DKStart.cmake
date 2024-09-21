@@ -47,23 +47,21 @@ endif()
 
 
 
-###### Get CURRENT_DIRECTORY ######
-#if(NOT CURRENT_DIR)
-#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} CURRENT_DIR)
+###### Get WORKING_DIRECTORY ######
+#if(NOT PWD)
+#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} PWD)
 #endif()
 	
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
-	if(NOT CMAKE_SOURCE_DIR)
-		dk_error("CMAKE_SOURCE_DIR invalid!")
-	endif()
+	dk_assert(CMAKE_SOURCE_DIR)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
+	dk_assert(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
-	if(NOT CMAKE_BINARY_DIR)
-		dk_error("CMAKE_BINARY_DIR invalid!")
-	endif()
+	dk_assert(CMAKE_BINARY_DIR)
 	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
+	dk_assert(CMAKE_BINARY_DIR)
 endif()
 
 
@@ -76,35 +74,15 @@ if(MSYSTEM)
 endif()
 
 
-##### Set ProgramFiles_<> variables ######
-if(DEFINED "ENV{HOMEDRIVE}")
-	# TODO
-endif()
-if(DEFINED "ENV{ProgramW6432}")
-	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
-	dk_set(ProgramFiles "${ProgramFiles}")
-elseif(DEFINED "ENV{ProgramFiles}")
-	file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
-	dk_set(ProgramFiles "${ProgramFiles}")
-endif()
-#if(DEFINED "ENV{ProgramFiles\(x86\)}")
-#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
-#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
-#endif()
+
 
 
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
-get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-if(MULTI_CONFIG)
-	dk_set(MULTI_CONFIG TRUE)
-	dk_info("*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
-else()
-	dk_set(SINGLE_CONFIG TRUE)
-	dk_info("*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
-endif()
+dk_validate(HOST_TRIPLE   "dk_HOST_TRIPLE()")
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+dk_validate(CONFIG_PATH   "dk_MULTI_CONFIG()")
 
 
 ##### Load Function files #################
-dk_getHostTriple()
-dk_getTargetTriple()
+dk_assert(DKCMAKE_DIR)
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)

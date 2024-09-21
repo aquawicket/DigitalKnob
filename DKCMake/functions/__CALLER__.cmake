@@ -6,6 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 macro(__CALLER__ rtn_var)
+	#dk_debugFunc(${ARGV})
+	
 	if(${ARGV1})
 		set(_FRAME_ ${ARGV1})
 	else()
@@ -14,12 +16,16 @@ macro(__CALLER__ rtn_var)
 	math(EXPR _FRAME_ "${_FRAME_}+1" OUTPUT_FORMAT DECIMAL)
 	
 	set(${rtn_var} "${CMAKE_CURRENT_FUNCTION}")
+	
+# DEBUG
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	#dk_debugFunc(${ARGV})
 	
 	__CALLER__(CALLER)
 	dk_info("\${CALLER} = ${CALLER}")

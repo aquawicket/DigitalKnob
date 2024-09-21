@@ -1,83 +1,91 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/xiph/vorbis
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
+# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
 
 ### DEPEND ###
 dk_depend(libgcc)
-WIN_dk_depend(msys2)
+dk_depend(msys2)
 dk_depend(ogg)
 
 
 ### IMPORT ###
-#dk_import(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
 #dk_import(https://github.com/xiph/vorbis.git)
 dk_import(https://github.com/xiph/vorbis/releases/download/v1.3.7/libvorbis-1.3.7.zip)
 
 
 ### LINK ###
-dk_include			(${VORBIS}/include											VORBIS_INCLUDE_DIR)
+dk_include					(${VORBIS_DIR}/include										VORBIS_INCLUDE_DIR)
+dk_include					(${VORBIS_DIR}/include										VORBIS_INCLUDE_DIR2)
 
 #if(ANDROID)
 if(MULTI_CONFIG)
-	dk_libDebug		(${VORBIS}/${OS}/lib/${DEBUG_DIR}/libvorbis.a				VORBIG_DEBUG_LIBRARY)
-	dk_libDebug		(${VORBIS}/${OS}/lib/${DEBUG_DIR}/libvorbisenc.a			VORBIG_ENC_DEBUG_LIBRARY)
-	dk_libDebug		(${VORBIS}/${OS}/lib/${DEBUG_DIR}/libvorbisfile.a			VORBIG_FILE_DEBUG_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/lib/${RELEASE_DIR}/libvorbis.a				VORBIG_RELEASE_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/lib/${RELEASE_DIR}/libvorbisenc.a			VORBIG_ENC_RELEASE_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/lib/${RELEASE_DIR}/libvorbisfile.a			VORBIG_FILE_RELEASE_LIBRARY)
+	if(MSVC)
+		WIN_dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbis.lib			VORBIS_DEBUG_LIB)
+		WIN_dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbisenc.lib		VORBISENC_DEBUG_LIB)
+		WIN_dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbisfile.lib		VORBISFILE_DEBUG_LIB)
+		WIN_dk_libRelease	(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/vorbis.lib			VORBIS_RELEASE_LIB)
+		WIN_dk_libRelease	(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/vorbisenc.lib		VORBISENC_RELEASE_LIB)
+		WIN_dk_libRelease	(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/vorbisfile.lib		VORBISFILE_RELEASE_LIB)
+	else()
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/libvorbis.a			VORBIS_DEBUG_LIB)
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/libvorbisenc.a		VORBISENC_DEBUG_LIB)
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/libvorbisfile.a		VORBISFILE_DEBUG_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/libvorbis.a		VORBIS_RELEASE_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/libvorbisenc.a		VORBISENC_RELEASE_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/${RELEASE_DIR}/libvorbisfile.a	VORBISFILE_RELEASE_LIB)
+	endif()
 else()
-	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbis.a				VORBIG_DEBUG_LIBRARY)
-	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisenc.a			VORBIG_ENC_DEBUG_LIBRARY)
-	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisfile.a			VORBIG_FILE_DEBUG_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbis.a				VORBIG_RELEASE_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisenc.a			VORBIG_ENC_RELEASE_LIBRARY)
-	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisfile.a			VORBIG_FILE_RELEASE_LIBRARY)
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/libvorbis.a						VORBIS_DEBUG_LIB)
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/libvorbisenc.a					VORBISENC_DEBUG_LIB)
+		dk_libDebug			(${VORBIS_CONFIG_DIR}/lib/libvorbisfile.a					VORBISFILE_DEBUG_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/libvorbis.a						VORBIS_RELEASE_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/libvorbisenc.a					VORBISENC_RELEASE_LIB)
+		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/libvorbisfile.a					VORBISFILE_RELEASE_LIB)
 endif()
 #else()
-#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a			VORBIG_DEBUG_LIBRARY)
-#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a		VORBIG_ENC_DEBUG_LIBRARY)
-#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a		VORBIG_FILE_DEBUG_LIBRARY)
-#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a		VORBIG_RELEASE_LIBRARY)
-#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a	VORBIG_ENC_RELEASE_LIBRARY)
-#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a	VORBIG_FILE_RELEASE_LIBRARY)
-#endif()
-
-
+#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbis.a			VORBIS_DEBUG_LIB)
+#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a		VORBISENC_DEBUG_LIB)
+#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a		VORBISFILE_DEBUG_LIB)
+#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbis.a		VORBIS_RELEASE_LIB)
+#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a	VORBISENC_RELEASE_LIB)
+#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a	VORBISFILE_RELEASE_LIB)
+#endif()			
+DEBUG_dk_set(VORBIS_LIBRARY			${VORBIS_DEBUG_LIB})
+RELEASE_dk_set(VORBIS_LIBRARY		${VORBISENC_DEBUG_LIB})
+DEBUG_dk_set(DVORBISENC_LIBRARY		${VORBISFILE_DEBUG_LIB})
+RELEASE_dk_set(DVORBISENC_LIBRARY	${VORBIS_RELEASE_LIB})
+DEBUG_dk_set(VORBISFILE_LIBRARY		${VORBISENC_RELEASE_LIB})
+RELEASE_dk_set(VORBISFILE_LIBRARY	${VORBISFILE_RELEASE_LIB})
+dk_set(VORBIS_LIBRARIES				${VORBIS_LIBRARY})
 
 ### 3RDPARTY LINK ###
-DEBUG_dk_set(VORBIS_CMAKE 
+dk_set(VORBIS_CMAKE 
 	-DVORBIS_INCLUDE_DIR=${VORBIS_INCLUDE_DIR} 
-	-DVORBIS_INCLUDE_DIRS=${VORBIS_INCLUDE_DIR} 
-	-DVORBIS_LIBRARY=${VORBIG_DEBUG_LIBRARY}
-	-DVORBIS_LIBRARIES=${VORBIG_DEBUG_LIBRARY}
-	-DVORBISFILE_LIBRARY=${VORBIG_FILE_DEBUG_LIBRARY}
-	-DVORBISENC_LIBRARY=${VORBIG_ENC_DEBUG_LIBRARY})
-	
-RELEASE_dk_set(VORBIS_CMAKE 
-	-DVORBIS_INCLUDE_DIR=${VORBIS_INCLUDE_DIR}
-	-DVORBIS_INCLUDE_DIRS=${VORBIS_INCLUDE_DIR}
-	-DVORBIS_LIBRARY=${VORBIG_RELEASE_LIBRARY}
-	-DVORBIS_LIBRARIES=${VORBIG_RELEASE_LIBRARY}
-	-DVORBISFILE_LIBRARY=${VORBIG_FILE_RELEASE_LIBRARY}
-	-DVORBISENC_LIBRARY=${VORBIG_ENC_RELEASE_LIBRARY})
+	-DVORBIS_INCLUDE_DIRS=${VORBIS_INCLUDE_DIR2} 
+	-DVORBIS_LIBRARY=${VORBIS_LIBRARY}
+	-DVORBIS_LIBRARIES=${DVORBIS_LIBRARIES}
+	-DVORBISFILE_LIBRARY=${VORBISFILE_LIBRARY}
+	-DVORBISENC_LIBRARY=${VORBISENC_LIBRARY})
 
 	
 ### GENERATE ###
 #if(ANDROID)
-dk_configure(${VORBIS} ${OGG_CMAKE})
+dk_configure(${VORBIS_DIR} ${OGG_CMAKE})
 #else()
 #	if(DEBUG)
-#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
+#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${triple}/${DEBUG_DIR}")
 #	endif()
-#	DEBUG_dk_setPath			(${VORBIS}/${OS}/${DEBUG_DIR})
+#	DEBUG_dk_cd			(${VORBIS}/${triple}/${DEBUG_DIR})
 #	DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
 #	if(RELEASE)
-#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
+#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${triple}/${RELEASE_DIR}")
 #	endif()
-#	RELEASE_dk_setPath			(${VORBIS}/${OS}/${RELEASE_DIR})
+#	RELEASE_dk_cd			(${VORBIS}/${triple}/${RELEASE_DIR})
 #	RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
 #endif()
 
 
-dk_build		(${VORBIS})
+dk_build		(${VORBIS_DIR})

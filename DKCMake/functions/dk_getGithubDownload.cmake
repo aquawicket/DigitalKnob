@@ -9,21 +9,21 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@url	- TODO
 #
 function(dk_getGithubDownload url) #install_path #Patch
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 	# must contain https://github.com/
 	# split into list converting / to divider ;
 	dk_replaceAll(${url}  "/"  ";"  url_list)
-	foreach(item ${url_list})
-		dk_printVar(item)
-	endforeach()
+	#foreach(item ${url_list})
+	#	dk_printVar(item)
+	#endforeach()
 
 	list(LENGTH url_list url_length)
-	dk_printVar(url_length)
+	#dk_printVar(url_length)
 	
 	if(${url_length} LESS 5)
-		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
+		dk_fatal("url_list doesn't contain enough elements to have a 'orginization/library'")
 		return()
 	endif()	
 	
@@ -37,12 +37,12 @@ function(dk_getGithubDownload url) #install_path #Patch
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(tag ${ARGV2})
-			dk_printVar(tag)
+			#dk_printVar(tag)
 		endif()
 	endif()
 	
 	if(NOT Lib)
-		dk_printVar(CMAKE_CURRENT_LIST_DIR)
+		#dk_printVar(CMAKE_CURRENT_LIST_DIR)
 		dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
 		#dk_printVar(Lib)
 		
@@ -50,31 +50,31 @@ function(dk_getGithubDownload url) #install_path #Patch
 		if(${includes} EQUAL -1)
 			string(FIND ${url} "gitlab.com" includes)
 			if(${includes} EQUAL -1)
-				dk_error("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
+				dk_fatal("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
 				return()
 			endif()
 		endif()
 		list(GET url_list 3 org)
-		dk_printVar(org)
+		#dk_printVar(org)
 		list(GET url_list 4 Lib)
-		dk_printVar(Lib)
+		#dk_printVar(Lib)
 	endif()
 	
 	dk_toUpper(${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
-	dk_printVar(LIBVAR)
+	#dk_printVar(LIBVAR)
 	
 	dk_toLower(${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		dk_error("${LIBVAR}_FOLDER invalid")
+		dk_fatal("${LIBVAR}_FOLDER invalid")
 	endif()
-	dk_printVar(${LIBVAR}_FOLDER)
+	#dk_printVar(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_debug("\${DKIMPORTS_DIR}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS_DIR}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
+		dk_fatal("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS_DIR}/${${LIBVAR}_FOLDER}}")
 	endif()
 	
 	math(EXPR last "${url_length}-1")
@@ -128,19 +128,19 @@ function(dk_getGithubDownload url) #install_path #Patch
 		if(${includes} EQUAL -1)
 			string(FIND ${url} "gitlab.com" includes)
 			if(${includes} EQUAL -1)
-				dk_error("The url is not a 'github.com' address")
+				dk_fatal("The url is not a 'github.com' address")
 				return()
 			endif()
 		endif()
 		
-		dk_error("The url doesn't end in .zip or .tar.gz")
+		dk_fatal("The url doesn't end in .zip or .tar.gz")
 		dk_info("We will try to get the master commit id from the page")
 		dk_download(${url} ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
 		file(READ ${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html PAGE)
 		dk_delete(${DKDOWNLOAD_DIR}/TEMP/${FOLDER}.html)
 		string(FIND "${PAGE}" "spoofed_commit_check" index)
 		if(${index} EQUAL -1)
-			dk_error("The page doesn't contain a 'spoofed_commit_check' variable")
+			dk_fatal("The page doesn't contain a 'spoofed_commit_check' variable")
 			return()
 		endif()
 		math(EXPR value "${index} + 21") #OUTPUT_FORMAT DECIMAL) # CMake 3.13+
@@ -148,7 +148,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		set(ZIP ${tag}.zip)
 		string(SUBSTRING ${ZIP} 0 7 TAG)
 		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-		dk_printVar(tag)
+		#dk_printVar(tag)
 		
 		## update DKMAKE.cmake file
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
@@ -173,19 +173,19 @@ function(dk_getGithubDownload url) #install_path #Patch
 	endif()
 	
 	if(NOT ${LIBVAR})
-		dk_error("${LIBVAR} invalid")
+		dk_fatal("${LIBVAR} invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_BRANCH)
-		dk_error("${LIBVAR}_BRANCH invalid")
+		dk_fatal("${LIBVAR}_BRANCH invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_NAME)
-		dk_error("${LIBVAR}_NAME invalid")
+		dk_fatal("${LIBVAR}_NAME invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_DL)
-		dk_error("${LIBVAR}_DL invalid")
+		dk_fatal("${LIBVAR}_DL invalid")
 	endif()
 	
 	
@@ -197,8 +197,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

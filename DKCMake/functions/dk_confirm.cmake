@@ -6,35 +6,35 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_confirm rtn_var)
-	dk_debugFunc(${ARGV})
-	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+	dk_debugFunc("\${ARGV}")
 
 	dk_echo("${yellow} Are you sure ? [Y/N] ${clr}")
 	
-	dk_fixme()
-#	read -rp $" " REPLY
+	dk_keyboardInput(REPLY)
 	dk_echo()
-	dk_echo()
+
 	if("${REPLY}" STREQUAL "y") 
-		return(PROPAGATE 1)
+		#return(PROPAGATE 1)
+		set(${rtn_var} TRUE PARENT_SCOPE)
+	elseif("${REPLY}" STREQUAL "Y")
+		#return(PROPAGATE 1)
+		set(${rtn_var} TRUE PARENT_SCOPE)
+	else()
+		#return(PROPAGATE 0)
+		set(${rtn_var} FALSE PARENT_SCOPE)
 	endif()
-	if("${REPLY}" STREQUAL "Y")
-		return(PROPAGATE 1)
-	endif()
-	return(PROPAGATE 0)
 endfunction()
 
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_confirm(result)
-	if(result) 
+	if(result)
 		dk_echo("the confimation has passed")
 	else()
 		dk_echo("the confimation has failed")

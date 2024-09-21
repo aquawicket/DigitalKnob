@@ -1,15 +1,16 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_pushAssets()
 ::#
 ::#
 :dk_pushAssets
-	call dk_debugFunc 0
-	
+ setlocal
+    call dk_debugFunc 0
+    
     echo not implemented,  TODO
-goto:eof
+%endfunction%
 
 
 
@@ -18,7 +19,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_pushAssets
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+    
+    %dk_call% dk_pushAssets
+%endfunction%

@@ -6,8 +6,8 @@
 
 setlocal enableDelayedExpansion
 
-if "!!" equ "" echo Delayed Expansion ON
-if "!!" neq "" echo Delayed Expansion OFF
+if "!DE!" equ "" echo Delayed Expansion ON
+if "!DE!" neq "" echo Delayed Expansion OFF
 
 set $first=^&call:first
 set $middle=^&call:middle
@@ -18,20 +18,20 @@ set $last=^&call:last
 	echo %$first:!$middle!=!$last!%
 
 	goto:main
-goto:eof
+%endfunction%
 
 
 :first
 	echo ###%0###
-goto:eof
+%endfunction%
 
 :middle
 	echo ###%0###
-goto:eof
+%endfunction%
 
 :last
 	echo ###%0###
-goto:eof
+%endfunction%
   
 
 

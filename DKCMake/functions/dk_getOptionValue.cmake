@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	EXAMPLE: dk_getOptionValue(MY_ARG ${ARGV})
 #
 function(dk_getOptionValue name)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})
@@ -26,7 +26,8 @@ function(dk_getOptionValue name)
 			dk_notice("${name} REMOVED")
 		endif()
 	else()
-		dk_unset(${name})
+		# FIXME: this will unset any global variables that might be needed
+		#dk_unset(${name}) 
 		#dk_debug("${CMAKE_CURRENT_FUNCTION}(): ${name}=OFF")
 	endif()
 endfunction()
@@ -34,8 +35,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

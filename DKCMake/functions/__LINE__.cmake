@@ -6,6 +6,8 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 macro(__LINE__ rtn_var)
+	#dk_debugFunc(${ARGV})
+	
 	if(NOT DEFINED CMAKE_LINENO)
 		set(${rtn_var} "CMAKE_CURRENT_LIST_LINE: ${CMAKE_CURRENT_LIST_LINE}")
 	else()
@@ -22,12 +24,17 @@ macro(__LINE__ rtn_var)
 		endif()
 		list(GET CMAKE_LINENO ${index} ${rtn_var})
 	endif()
+	
+# DEBUG
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	#dk_debugFunc(${ARGV})
+	
 	list(LENGTH CMAKE_LINENO CMAKE_LINENO_LENGTH)
 	dk_echo("CMAKE_LINENO:${CMAKE_LINENO_LENGTH} = ${CMAKE_LINENO}")
 	__LINE__(_line_)

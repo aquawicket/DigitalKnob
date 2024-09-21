@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_arrayPop(array)
@@ -10,69 +10,72 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    PARAMETERS
 ::#    array
 ::#
-::#	   RETURN VALUE
+::#    RETURN VALUE
 ::#    The removed element from the array; undefined if the array is empty.
 ::#
 ::#    REFERENCE
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 ::#
 :dk_arrayPop
-	call dk_debugFunc 1 2
-	::dk_validateArgs array
-	
-	setlocal
-	call dk_arrayLength %~1 _length_
-	set /a _length_-=1
-	set "removedElement=!%~1[%_length_%]!"
-	call dk_printVar removedElement
-	endlocal & set "%~2=%removedElement%" & call dk_unset %~1[%_length_%]
-goto:eof
+    call dk_debugFunc 1 2
+ setlocal
+    
+    %dk_call% dk_arrayLength %~1 _length_
+    set /a _length_-=1
+    set "removedElement=!%~1[%_length_%]!"
+    endlocal & set "%~2=%removedElement%" & %dk_call% dk_unset %~1[%_length_%]
+
+::debug
+::	%dk_call% dk_printVar %2
+::	%dk_call% dk_printVar %1
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	set "myArrayA[0]=a b c"
-	set "myArrayA[1]=1 2 3"
-	set "myArrayA[2]=d e f"
-	set "myArrayA[3]=4 5 6"
-	set "myArrayA[4]=h i j"
-	
-	call dk_printVar myArrayA 
-	call dk_echo
-	
-	call dk_arrayPop myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
-	
-	call dk_arrayPop myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
-	
-	call dk_arrayPop myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
-	
-	call dk_arrayPop myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
-	
-	call dk_arrayPop myArrayA removedA
-	call dk_printVar myArrayA
-	call dk_printVar removedA
-	call dk_echo
-	
+    call dk_debugFunc 0
+ ::setlocal
+ 
+    set "myArrayA[0]=a b c"
+    set "myArrayA[1]=1 2 3"
+    set "myArrayA[2]=d e f"
+    set "myArrayA[3]=4 5 6"
+    set "myArrayA[4]=h i j"
+    
+    %dk_call% dk_printVar myArrayA 
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% dk_printVar myArrayA
+    %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% dk_printVar myArrayA
+    %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% dk_printVar myArrayA
+    %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% dk_printVar myArrayA
+    %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPop myArrayA removedA
+    %dk_call% dk_printVar myArrayA
+    %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    
 ::  FIXME:  out of array bounds past here
-::	call dk_arrayPop myArrayA removedA
-::	call dk_printVar myArrayA
-::	call dk_printVar removedA
-	call dk_echo
-	call dk_echo
-goto:eof
+::  %dk_call% dk_arrayPop myArrayA removedA
+::  %dk_call% dk_printVar myArrayA
+::  %dk_call% dk_printVar removedA
+    %dk_call% dk_echo
+    %dk_call% dk_echo
+%endfunction%

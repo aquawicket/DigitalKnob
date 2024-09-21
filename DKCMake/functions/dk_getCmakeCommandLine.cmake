@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var			- TODO
 #
 function(dk_getCmakeCommandLine rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT CMAKE_ARGC)
 		dk_info("dk_getCmakeCommandLine(): CMAKE_ARGC not set")
@@ -31,16 +31,17 @@ function(dk_getCmakeCommandLine rtn_var)
 	dk_debug(cmakeCommandLine)
 	dk_wait()
 	
-	#dk_printVar()
 	set(${rtn_var} "${cmakeCommandLine}" PARENT_SCOPE) #return rtn_var
+	#dk_printVar(rtn_var)
 endfunction()
 
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

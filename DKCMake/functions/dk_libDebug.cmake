@@ -10,21 +10,18 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@variable (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libDebug lib_path)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT DEBUG)
 		return()
 	endif()	
 	
-	#dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
 		dk_set(QUEUE_BUILD ON) 
 	endif()
 	
-	#string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	#if(${index} GREATER -1)
 	if(lib_path IN_LIST DEBUG_LIBS)
 		return() # The library is already in the list
 	endif()
@@ -38,7 +35,7 @@ function(dk_libDebug lib_path)
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})
 			dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Debug)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple}/Debug)
 		endif()
 	endif()
 	
@@ -53,8 +50,9 @@ dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

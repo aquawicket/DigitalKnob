@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # http://www.ijg.org/
 # https://www.ijg.org/files/jpegsr9d.zip
 
@@ -9,13 +10,13 @@ dk_import(https://www.ijg.org/files/jpegsr9d.zip)
 
 ### LINK ###
 dk_include			(${JPEG}										JPEG_INCLUDE_DIR)
-dk_include			(${JPEG}/${OS}									JPEG_INCLUDE_DIR2)
-dk_include			(${JPEG}/${OS}/${RELEASE_DIR})
-ANDROID_dk_include	(${JPEG}/${OS}/${BUILD_TYPE}/jni)
-UNIX_dk_libDebug	(${JPEG}/${OS}/${DEBUG_DIR}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
-UNIX_dk_libRelease	(${JPEG}/${OS}/${RELEASE_DIR}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
-WIN_dk_libDebug		(${JPEG}/${OS}/${DEBUG_DIR}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
-WIN_dk_libRelease	(${JPEG}/${OS}/${RELEASE_DIR}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
+dk_include			(${JPEG}/${triple}									JPEG_INCLUDE_DIR2)
+dk_include			(${JPEG}/${triple}/${RELEASE_DIR})
+ANDROID_dk_include	(${JPEG}/${triple}/${BUILD_TYPE}/jni)
+UNIX_dk_libDebug	(${JPEG}/${triple}/${DEBUG_DIR}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
+UNIX_dk_libRelease	(${JPEG}/${triple}/${RELEASE_DIR}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
+WIN_dk_libDebug		(${JPEG}/${triple}/${DEBUG_DIR}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
+WIN_dk_libRelease	(${JPEG}/${triple}/${RELEASE_DIR}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
 
 
 ### 3RDPARTY LINK ###
@@ -28,8 +29,8 @@ WIN_dk_set			(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG_INCLUDE_DIR} -DJPEG_INCLUDE_D
 
 
 ### GENERATE ###
-dk_configure		(${JPEG})
+dk_configure		(${JPEG_DIR})
 
 
 ### COMPILE ###
-dk_build			(${JPEG} jpeg-static)
+dk_build			(${JPEG_DIR} jpeg-static)

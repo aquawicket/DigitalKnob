@@ -6,8 +6,8 @@
 #
 #
 dk_printVar() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
+
 	[ -z ${echo_fileline-} ] && dk_export echo_fileline "$(__FILE__ 1):$(__LINE__ 1)   "
 	
 	varname=${1}
@@ -146,8 +146,9 @@ dk_printVar() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_set myVariable "this is the value of myVariable"
 	dk_printVar myVariable

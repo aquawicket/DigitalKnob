@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 if(NOT UNIX_HOST)
 	dk_undepend(libglfw3-dev)
 	dk_return()
@@ -6,8 +7,8 @@ endif()
 
 ### INSTALL ###
 if(LINUX)
-	dk_set(CURRENT_DIR /usr)
-	dk_command(sudo apt -y install libglfw3-dev)
+	dk_cd(/usr)
+	dk_command(${SUDO} apt -y install libglfw3-dev)
 endif()
 if(MAC)
 	dk_command(brew install glfw3)

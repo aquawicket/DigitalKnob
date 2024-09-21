@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 #include_guard()
 
 ###############################################################################
@@ -10,9 +11,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@value		- The value to set the variable to. 
 #
 function(dk_set variable)# value)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
+	
 	if(${ARGC} LESS 1)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
 	endif()
 	if(${ARGC} LESS 2)
 		dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): expecting more arguments")
@@ -22,7 +24,7 @@ function(dk_set variable)# value)
 	#endif()
 	
 	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
-	dk_printVar(${ARGV0})
+	#dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")
 
@@ -30,8 +32,9 @@ dk_createOsMacros("dk_set")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_set(myVariable "this is the string value of myVariable")
 	dk_info("myVariable = ${myVariable}")

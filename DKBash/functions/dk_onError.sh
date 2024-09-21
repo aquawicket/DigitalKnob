@@ -8,8 +8,8 @@
 #  https://stackoverflow.com/a/26261518
 #
 dk_onError() {
-	#dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#dk_debugFunc 2
+	[ ${#} -ne 2 ] && dk_call dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#filepath=${1}
 	#lineno=${2}
@@ -22,7 +22,7 @@ dk_onError() {
 	#[ "$(command -v d k_stacktrace)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/d k_stacktrace.sh
 	#d k_stacktrace
 	
-	dk_error "### dk_onError ###"
+	dk_call dk_error "### dk_onError: $1:$2 ###"
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 

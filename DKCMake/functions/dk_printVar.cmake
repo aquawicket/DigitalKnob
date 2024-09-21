@@ -8,8 +8,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@var	- The variable name to print
 #
 function(dk_printVar var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
+	#string(MAKE_C_IDENTIFIER ${var} alphanum_var)
+	#if(NOT "${var}" STREQUAL "${alphanum_var}")
+	#if(NOT "${var}" MATCHES "ENV{") # ENV variables
+	#	dk_fatal("${var} is not a valid variable name. It contains invalid characters.")
+	#endif()
+	#endif()
 
 	if("${var}" MATCHES "ENV{") # ENV variables
 		set(ENV_VAR ${var})
@@ -39,8 +45,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	set(myVariable "this is the value of myVariable")
 	dk_printVar(myVariable)

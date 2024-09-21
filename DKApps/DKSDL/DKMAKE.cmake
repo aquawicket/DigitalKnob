@@ -1,3 +1,6 @@
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
+
 dk_depend(sdl)
 dk_depend(sdl_ttf)
 dk_depend(DK)

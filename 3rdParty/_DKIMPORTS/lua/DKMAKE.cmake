@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/lua/lua.git
 # https://www.lua.org/ftp/lua-5.4.3.tar.gz
 # https://github.com/lubgr/lua-cmake.git
@@ -11,16 +12,16 @@ dk_import(https://github.com/lua/lua/archive/refs/heads/master.zip PATCH)
 
 ### LINK ###
 dk_include			(${LUA}/include							LUA_INCLUDE_DIR)
-dk_include			(${LUA}/${OS}							LUA_INCLUDE_DIR2)
-DEBUG_dk_include	(${LUA}/${OS}/${DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
-RELEASE_dk_include	(${LUA}/${OS}/${RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
+dk_include			(${LUA}/${triple}							LUA_INCLUDE_DIR2)
+DEBUG_dk_include	(${LUA}/${triple}/${DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
+RELEASE_dk_include	(${LUA}/${triple}/${RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
 
 if(MSVC)
-	WIN_dk_libDebug		(${LUA}/${OS}/${DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
-	WIN_dk_libRelease	(${LUA}/${OS}/${RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
+	WIN_dk_libDebug		(${LUA}/${triple}/${DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
+	WIN_dk_libRelease	(${LUA}/${triple}/${RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
 else()
-	dk_libDebug			(${LUA}/${OS}/${DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
-	dk_libRelease		(${LUA}/${OS}/${RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
+	dk_libDebug			(${LUA}/${triple}/${DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
+	dk_libRelease		(${LUA}/${triple}/${RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
 endif()
 
 

@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@arg		- The input argument(s) to be examined 
 #
 function(dk_isList rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	math(EXPR ARGC "${ARGC}-1")  
 
@@ -26,7 +26,7 @@ function(dk_isList rtn_var)
 			set(isList FALSE)
 		endif()
 		
-		dk_printVar(isList)
+		#dk_printVar(isList)
 		set(${rtn_var} ${isList} PARENT_SCOPE)
 		return()
 	endif()
@@ -45,13 +45,13 @@ function(dk_isList rtn_var)
 			set(isList FALSE)
 		endif()
 		
-		dk_printVar(isList)
+		#dk_printVar(isList)
 		set(${rtn_var} ${isList} PARENT_SCOPE)
 		return()
 	else()
 		dk_debug("${ARGN} is invalid")
 		set(isList FALSE)
-		dk_printVar(isList)
+		#dk_printVar(isList)
 		set(${rtn_var} ${isList} PARENT_SCOPE)
 	endif()
 endfunction()
@@ -60,8 +60,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myList "myList item 0")
 	list(APPEND myList "myList item 1")

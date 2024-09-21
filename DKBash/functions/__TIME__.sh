@@ -1,5 +1,4 @@
 #!/bin/sh
-
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 
@@ -11,7 +10,7 @@
 #
 #
 __TIME__() {
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
     nanoseconds="$(date +%s%N)"
     date_nanoseconds="$(( nanoseconds % 1000000000))"
@@ -114,7 +113,8 @@ __TIME__() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 	#dk_debugFunc
 	
 	echo "$(__TIME__)"

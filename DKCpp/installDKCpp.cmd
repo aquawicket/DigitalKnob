@@ -1,7 +1,7 @@
 @echo off
 
 ::### OS ###
-::default = HOST_OS
+::default = DK_HOST_OS
 ::set "OS=Android"
 ::set "OS=Emscripten"
 ::set "OS=iOS"
@@ -12,7 +12,7 @@
 ::set "OS=Windows"
 
 ::### ARCH ###
-::default = HOST_ARCH
+::default = DK_HOST_ARCH
 ::set "ARCH=arm"
 ::set "ARCH=arm64"
 ::set "ARCH=x86"
@@ -45,24 +45,25 @@
 if "%~1" neq "" goto:runDKCpp
 :installDKCpp
 	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### Install DKCpp ######
-	call dk_echo "Installing DKCpp . . ."
+	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	if not defined OS call dk_validate HOST_OS "call dk_getHostTriple"
-	if not defined OS set "OS=%HOST_OS%"
-	call dk_printVar OS
+	if not defined OS call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	if not defined OS set "OS=%DK_HOST_OS%"
+	%dk_call% dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH call dk_validate HOST_ARCH "call dk_getHostTriple"
-	if not defined ARCH set "ARCH=%HOST_ARCH%"
-	call dk_printVar ARCH
+	if not defined ARCH call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
+	if not defined ARCH set "ARCH=%DK_HOST_ARCH%"
+	%dk_call% dk_printVar ARCH
 	
 	::###### COMPILER ######
 	if not defined COMPILER set "COMPILER=clang"
-	call dk_printVar COMPILER
+	%dk_call% dk_printVar COMPILER
 	
 	::###### MSYSTEM ######
 	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="x86"    set "MSYSTEM=CLANG32"
@@ -70,10 +71,10 @@ if "%~1" neq "" goto:runDKCpp
 	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="arm64"  set "MSYSTEM=CLANGARM64"
 	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86"    set "MSYSTEM=MINGW32"
 	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86_64" set "MSYSTEM=MINGW64"
-	call dk_printVar MSYSTEM
+	%dk_call% dk_printVar MSYSTEM
 	
 	::###### COMPILER_EXE ######
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	%dk_call% dk_validate DKIMPORTS_DIR "call dk_validateBranch"
 	if "%COMPILER%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%COMPILER%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 	:: C
@@ -82,17 +83,17 @@ if "%~1" neq "" goto:runDKCpp
 	:: C++
 	if "%COMPILER%"=="clang"  set "COMPILER_EXE=%CLANGXX_EXE%"
 	if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GXX_EXE%"
-	call dk_printVar COMPILER_EXE
+	%dk_call% dk_printVar COMPILER_EXE
 
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
 	
-	call dk_echo "DKCpp install complete"
-goto:eof
+	%dk_call% dk_success "DKCpp install complete"
+%endfunction%
 
 
 
@@ -100,9 +101,9 @@ goto:eof
 	set "COMPILER_EXE=%~1"
 	set "DKCPP_FILE=%~2"
 	
+	::###### Compile Code ######
 	echo compiling ...
 	if exist temp.exe  del temp.exe
-	
 	::### Clang/Clang++ ###
 	%COMPILER_EXE% -DDKTEST=1 -o temp -static "%DKCPP_FILE%"
 	
@@ -118,7 +119,6 @@ goto:eof
 	::libzstd.dll
 	::zlib1.dll
 	
-	
 	if not exist "temp.exe" (
 		echo: 
 		echo ERROR: compilation of %DKCPP_FILE% failed.
@@ -126,7 +126,16 @@ goto:eof
 		goto:eof
 	)
 	
+	::###### run executable ######
 	title %DKCPP_FILE%
-	::cls
-    cmd /v:on /k "temp.exe" && echo success: return value: !errorLevel! || echo failed: return value: !errorLevel!
-goto:eof
+    cmd /v:on /k "temp.exe" && (echo returned TRUE) || (echo returned FALSE)
+	
+	::###### exit_code ######
+	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	
+	::###### reload ######
+	if not exist %~dp0\reload goto:eof
+	del %~dp0\reload
+	cls
+	goto:runDKCpp
+%endfunction%

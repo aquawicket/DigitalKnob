@@ -1,6 +1,5 @@
 @echo off
 
-::echo DKApp.cmd %~0 %*
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" == "%func:~0,1%" ( goto %func% )
@@ -18,7 +17,7 @@ for %%x in (%*) do (
 set "ESC="
 set "SPACE= "
 
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 
@@ -38,7 +37,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	::echo DKApp.argv = %DKApp.argv%
 	call :DKApp.init
 	call :DKApp.Loop
-goto:eof
+%endfunction%
 
 :DKApp.init
 	::echo %ESC%[19;200H                     
@@ -47,32 +46,33 @@ goto:eof
 	
 	call dk_keyboard callback "%~d0\:DKApp.onKeyDown\..%~pnx0"
 	::echo %ESC%[?25l    &:: Hide Cursor
-goto:eof
+%endfunction%
 
 :DKApp.Loop
 	for /L %%G in (0) do (
 		title %time%
 		rem echo %ESC%[0;0HT:
 		rem echo %ESC%[0;0HT:%time%
-		rem if not defined DKApp.active goto:eof
+		rem if not defined DKApp.active %return%
 	)	
-goto:eof
+%endfunction%
 
 :DKApp.exit
 	::echo %ESC%[19;200H                  
 	::echo %ESC%[19;20HF:%~nx0 %*
 	
-	echo DKExit
+	echo dk_exit
 	call dk_exit 0
-goto:eof
+%endfunction%
 
 
 :DKApp.onKeyDown
 	::echo DKApp.onKeyDown %*
 	
 	echo keyCode: %~1
-	if "%~1" == "" (call) & goto:eof
-	if %~1 equ 27 echo "Esc" && set "callback="
+	if %~1 equ 27 set "callback="
+	if "%~1" == "" (call) & %return%
+	
 	::echo %ESC%[21;0HDKApp_onKeyDown %*
 	::echo %ESC%[19;70H            &::
 	::echo %ESC%[19;70HKeyCode:%~1
@@ -83,4 +83,4 @@ goto:eof
 	::if %~1 equ 37 echo "LeftArrow" 
 	::if %~1 equ 39 echo "RightArrow"
 	
-goto:eof
+%endfunction%

@@ -5,8 +5,7 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 # installDKBash()
 #
 #function Global:installDKBash() {
-	#dk_debugFunc
-	#if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	#dk_debugFunc 0
 
 	if(${args}.count -ne 0){ 
 		runBash ${args}
@@ -22,9 +21,8 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	#$global:DKPOWERSHELL_FUNCTION_DIR_ = "$DKPOWERSHELL_FUNCTION_DIR\"
 	. $DKPOWERSHELL_FUNCTION_DIR\DK.ps1
 
-	dk_load dk_validate
-	dk_validate DKIMPORTS_DIR "dk_validateBranch"
-	dk_validate GITBASH_EXE "dk_installGit"
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate GITBASH_EXE "dk_call dk_installGit"
 
 	Write-Host "PSCommandPath = $PSCommandPath"
 	$global:DKBASH_FUNCTIONS_DIR = "$DKBRANCH_DIR\DKBash\functions"
@@ -43,8 +41,8 @@ function Global:runDKBash() {
 	pause
 	$DKBASH_FUNCTIONS_DIR = $1
 	$GITBASH_EXE = $2
-	$SH_FILE = $3
+	$DKSCRIPT_PATH = $3
 
 	Write-Host "############### Digitalknob ##################"
-	start $GITBASH_EXE $SH_FILE
+	start $GITBASH_EXE $DKSCRIPT_PATH
 }

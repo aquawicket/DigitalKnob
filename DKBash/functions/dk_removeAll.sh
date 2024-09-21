@@ -6,8 +6,8 @@
 #
 #
 dk_removeAll() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_clearScreen
 	dk_echo
@@ -27,7 +27,7 @@ dk_removeAll() {
 		dk_echo "${clr}"
         dk_printVar DKSCRIPT_DIR
 		dk_printVar DKBRANCH_DIR
-		return ${false};
+		return $(false);
 	fi
 		
 	# Backup main script file to digitalknob/
@@ -40,7 +40,8 @@ dk_removeAll() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	dk_removeAll
 }

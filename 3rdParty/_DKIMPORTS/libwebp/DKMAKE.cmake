@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/webmproject/libwebp
  
 
@@ -17,35 +18,35 @@ dk_import(https://github.com/webmproject/libwebp/archive/refs/heads/main.zip)
 
 
 ### LINK ###
-dk_include					(${LIBWEBP}																	WEBP_INCLUDE_DIR)
+dk_include					(${LIBWEBP_DIR}							LIBWEBP_INCLUDE_DIR)
 if(MSVC)
-	WIN_dk_libDebug			(${LIBWEBP}/${OS}/${DEBUG_DIR}/libwebp.lib									WEBP_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${LIBWEBP}/${OS}/${RELEASE_DIR}/libwebp.lib								WEBP_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${LIBWEBP_DEBUG_DIR}/libwebp.lib		LIBWEBP_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${LIBWEBP_RELEASE_DIR}/libwebp.lib		LIBWEBP_LIBRARY_RELEASE)
 #elseif(APPLE)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpdecode.a)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdsp.build/libwebpdsp.a)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpencode.build/libwebpencode.a)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webputils.build/libwebputils.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpdecode.build/libwebpdecode.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpdsp.build/libwebpdsp.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpencode.build/libwebpencode.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/WebP.build/${RELEASE_DIR}/webputils.build/libwebputils.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpdecode.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${DEBUG_DIR}/webpdsp.build/libwebpdsp.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${DEBUG_DIR}/webpencode.build/libwebpencode.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${DEBUG_DIR}/webputils.build/libwebputils.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${RELEASE_DIR}/webpdecode.build/libwebpdecode.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${RELEASE_DIR}/webpdsp.build/libwebpdsp.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${RELEASE_DIR}/webpencode.build/libwebpencode.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_TRIPLE_DIR}/WebP.build/${RELEASE_DIR}/webputils.build/libwebputils.a)
 #	
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/${DEBUG_DIR}/libwebp.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/${RELEASE_DIR}/libwebp.a)
-#	APPLE_dk_libDebug		(${LIBWEBP}/${OS}/${DEBUG_DIR}/libsharpyuv.a)
-#	APPLE_dk_libRelease		(${LIBWEBP}/${OS}/${RELEASE_DIR}/libsharpyuv.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_DEBUG_DIR}/libwebp.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_RELEASE_DIR}/libwebp.a)
+#	APPLE_dk_libDebug		(${LIBWEBP_DEBUG_DIR}/libsharpyuv.a)
+#	APPLE_dk_libRelease		(${LIBWEBP_RELEASE_DIR}/libsharpyuv.a)
 else()
-	dk_libDebug				(${LIBWEBP}/${OS}/${DEBUG_DIR}/libwebp.a)
-	dk_libRelease			(${LIBWEBP}/${OS}/${RELEASE_DIR}/libwebp.a)
+	dk_libDebug				(${LIBWEBP_DEBUG_DIR}/libwebp.a)
+	dk_libRelease			(${LIBWEBP_RELEASE_DIR}/libwebp.a)
 endif()
 
 
 ### 3RDPARTY LINK ###
 dk_set(LIBWEBP_CMAKE 
-	-DWEBP_INCLUDE_DIR=${WEBP_INCLUDE_DIR}
-	-DWEBP_LIBRARY_DEBUG=${WEBP_LIBRARY_DEBUG}
-	-DWEBP_LIBRARY_RELEASE=${WEBP_LIBRARY_RELEASE})
+	-DWEBP_INCLUDE_DIR=${LIBWEBP_INCLUDE_DIR}
+	-DWEBP_LIBRARY_DEBUG=${LIBWEBP_LIBRARY_DEBUG}
+	-DWEBP_LIBRARY_RELEASE=${LIBWEBP_LIBRARY_RELEASE})
 
 
 

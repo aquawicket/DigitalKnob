@@ -1,5 +1,6 @@
-
 include_guard()		# include_guard
+
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
 #cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
@@ -39,36 +40,35 @@ function(DKINIT)
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
-	#dk_echo("DKSCRIPT_PATH = ${DKSCRIPT_PATH}")
-	#dk_echo("DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}")
-	#dk_echo("DKSCRIPT_DIR = ${DKSCRIPT_DIR}")
-	#dk_echo("DKSCRIPT_NAME = ${DKSCRIPT_NAME}")
-	
-	############ Setup KeepOpen ############
-	#dk_setupKeepOpen()
-	
-	##### CD into the DKSCRIPT_DIR directory #####
-	#cd("${DKSCRIPT_DIR}")
 	
 	############ Set Options ############
 	#dk_setOptions()
+	
+	############ Set Variables ###########
+	dk_setVariables()
 	
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	include(${DKCMAKE_FUNCTIONS_DIR}/dk_dirname.cmake)
+	include(${DKCMAKE_FUNCTIONS_DIR}/dk_basename.cmake)
+	#dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
+	dk_load(dk_createOsMacros)
 	dk_load(__FILE__)
 	dk_load(__LINE__)
 	dk_load(__FUNCTION__)
 	dk_load(__ARGC__)
 	dk_load(__ARGV__)
 	dk_load(__CALLER__)
+	
 	dk_load(dk_color)
 	dk_load(dk_logo)
+	dk_load(dk_watch)
 	
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
-
+	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
 	
 	###### DKTEST MODE ######
@@ -79,11 +79,11 @@ function(DKINIT)
 		dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 		include(${DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 		DKTEST()
-		
 		dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
-		dk_pause()
+		dk_exit(0)
 	endif()
 	endif()
+	
 endfunction()
 
 
@@ -100,11 +100,11 @@ endfunction()
 function(dk_init)
 	set(CMAKE_MESSAGE_LOG_LEVEL "TRACE")
 	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_echo("")
+		dk_echo()
 		dk_echo("########################################################")
 		dk_echo("################# CMAKE SCRIPT MODE ####################")
 		dk_echo("########################################################")
-		dk_echo("")
+		dk_echo()
 	endif()
 endfunction()
 
@@ -206,7 +206,7 @@ endfunction()
 function(dk_DKSCRIPT_VARS)
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_PATH})
-		dk_error("DKSCRIPT_PATH not found!")
+		dk_fatal("DKSCRIPT_PATH not found!")
 	endif()
 	
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
@@ -214,7 +214,7 @@ function(dk_DKSCRIPT_VARS)
 	get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY)
 	set(DKSCRIPT_DIR ${DKSCRIPT_DIR} CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_DIR})
-		dk_error("DKSCRIPT_DIR not found!")
+		dk_fatal("DKSCRIPT_DIR not found!")
 	endif()
 	
 	get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME)
@@ -222,12 +222,30 @@ function(dk_DKSCRIPT_VARS)
 endfunction()
 
 ##################################################################################
-# dk_setupKeepOpen()
+# dk_setVariables()
 #
-function(dk_setupKeepOpen)
-	#if "%KEEP_CONSOLE_OPEN%" equ "1" if not defined in_subprocess (cmd /k set in_subprocess=y ^& set "DKINIT=" ^& "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%) & set "DKINIT=1" & exit )
+function(dk_setVariables)
+
+	##### Set ProgramFiles_<> variables ######
+	if(DEFINED "ENV{HOMEDRIVE}")
+		# TODO
+	endif()
+	if(DEFINED "ENV{ProgramW6432}")
+		file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
+		set(ProgramFiles "${ProgramFiles}" CACHE INTERNAL "")
+	elseif(DEFINED "ENV{ProgramFiles}")
+		file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
+		set(ProgramFiles "${ProgramFiles}" CACHE INTERNAL "")
+	endif()
+	#if(DEFINED "ENV{ProgramFiles\(x86\)}")
+	#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
+	#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
+	#endif()
+	
 endfunction()
 
 
 
 DKINIT()
+
+

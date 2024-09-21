@@ -6,8 +6,8 @@
 
 setlocal enableDelayedExpansion
 
-if "!!" equ "" echo Delayed Expansion ON
-if "!!" neq "" echo Delayed Expansion OFF
+if "!DE!" equ "" echo Delayed Expansion ON
+if "!DE!" neq "" echo Delayed Expansion OFF
 
 set $time=^&call:getTime^&echo
 set $timeB=^&call:getTime^&echo %$timeB%
@@ -71,21 +71,21 @@ set $SECOND=!%$_SECOND:%$SECOND%=%second%!
 	
 	::echo the time is !$time:%$time%:%second%! seconds
 	goto:main
-goto:eof
+%endfunction%
 
 
 :first
 	echo ###%0### first=%first% middle=%middle% last=%last%
 	set "last=9"
-goto:eof
+%endfunction%
 	
 :middle
 	echo ###%0### first=%first% middle=%middle% last=%last%
-goto:eof
+%endfunction%
 
 :last
 	echo ###%0### first=%first% middle=%middle% last=%last%
-goto:eof
+%endfunction%
   
   
   
@@ -95,7 +95,7 @@ goto:eof
 	echo :getTime
 	:: https://stackoverflow.com/a/42199181/688352
 	for /F "skip=1 usebackq delims=" %%A in (`wmic Path Win32_LocalTime Get Second`) do for /F "delims=" %%B in ("%%A") do (set "second=%%A")
-goto:eof
+%endfunction%
 
 
 

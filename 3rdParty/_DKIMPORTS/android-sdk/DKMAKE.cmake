@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 ### android-sdk ###
 # https://androidsdkoffline.blogspot.com/
 
@@ -12,15 +13,16 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #dk_depend(openjdk-8u41)
 #dk_depend(android-cmdline-tools)
 
-dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")
-if(NOT EXISTS ${ANDROID_SDK})
+dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")			#TODO: phase out
+dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
+if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_info("Installing android-sdk")
-	dk_makeDirectory("${ANDROID_SDK}")
-	dk_patch(android-sdk "${ANDROID_SDK}")
+	dk_makeDirectory("${ANDROID_SDK_DIR}")
+	dk_patch(android-sdk "${ANDROID_SDK_DIR}")
 	
 	# https://developer.android.com/tools/variables#envar
-	dk_setEnv("ANDROID_HOME" "${ANDROID_SDK}")
-	execute_process(COMMAND cmd /c setx ANDROID_HOME "${ANDROID_SDK}")
+	dk_setEnv("ANDROID_HOME" "${ANDROID_SDK_DIR}")
+	execute_process(COMMAND cmd /c setx ANDROID_HOME "${ANDROID_SDK_DIR}")
 	
 	dk_setEnv("ANDROID_USER_HOME" "${DIGITALKNOB_DIR}/.android")
 	execute_process(COMMAND cmd /c setx ANDROID_USER_HOME "${DIGITALKNOB_DIR}/.android")
@@ -28,12 +30,12 @@ if(NOT EXISTS ${ANDROID_SDK})
 	dk_setEnv("ANDROID_SDK_HOME" "${DIGITALKNOB_DIR}")
 	execute_process(COMMAND cmd /c setx ANDROID_SDK_HOME "${DIGITALKNOB_DIR}")
 	
-	dk_setEnv("VS_AndroidHome" "${ANDROID_SDK}")
-	execute_process(COMMAND cmd /c setx VS_AndroidHome "${ANDROID_SDK}")
+	dk_setEnv("VS_AndroidHome" "${ANDROID_SDK_DIR}")
+	execute_process(COMMAND cmd /c setx VS_AndroidHome "${ANDROID_SDK_DIR}")
 endif()
 
 
-if(NOT EXISTS "${ANDROID_SDK}/licenses")
+if(NOT EXISTS "${ANDROID_SDK_DIR}/licenses")
 	# FIXME:  more work to be done on killing tasks
 	#if(WIN_HOST)
 	#	dk_killProcess(java.exe NO_HALT)

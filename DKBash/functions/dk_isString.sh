@@ -10,8 +10,7 @@
 #	${rtn_var}: 	- True if the argument is string or a string variable
 #
 dk_isString() {
-	dk_debugFunc 
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	re='^[0-9]+$'
 	dk_isVariable ${1} && local var=${!1} || local var=${1}
@@ -22,8 +21,9 @@ dk_isString() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	myString1="test string"
 	dk_isString myString1        && dk_echo "myString1 is a string"       || dk_echo "myString1 is NOT a string"

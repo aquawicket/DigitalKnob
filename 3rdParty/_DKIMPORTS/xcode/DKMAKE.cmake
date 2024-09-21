@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://developer.apple.com/xcode/
 # https://pewpewthespells.com/blog/buildsettings.html
 # Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
@@ -8,31 +9,33 @@ if(NOT MAC_HOST)
 	dk_return()
 endif()
 
-
-# xcode Variables
+# Xcode variables
 dk_set(XCODE_GENERATOR		"Xcode")
-dk_set(XCODE_DEVROOT		/Applications/Xcode.app/Contents/Developer)
-dk_set(XCODE_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-dk_set(XCODE_CXX_COMPILER	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-dk_set(XCODE_LIBTOOL		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+dk_set(XCODE_DEVROOT		"/Applications/Xcode.app/Contents/Developer")
+dk_set(XCODE_C_COMPILER		"${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
+dk_set(XCODE_CXX_COMPILER	"${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+dk_set(XCODE_LIBTOOL		"${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool")
+find_program(XCODEBUILD_EXE xcodebuild)
+if(NOT XCODEBUILD_EXE)
+	dk_fatal("xcodebuild not found. Please install either the standalone commandline tools or Xcode.")
+endif()
 
 # iOS variables
-dk_set(IOS_TOOLCHAIN_FILE	${DKCMAKE_DIR}/ios.toolchain.cmake)
+dk_set(IOS_TOOLCHAIN_FILE	"${DKCMAKE_DIR}/ios.toolchain.cmake")
 dk_set(IOS_DARWIN			darwin20.6.0)
 dk_set(IOS_SDK				15.0)
 dk_set(IOS_MIN_SDK			13.0)
-dk_set(IOS_SYSROOT			${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
-dk_set(IOSSIM_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+dk_set(IOS_SYSROOT			"${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${IOS_SDK}.sdk")
+dk_set(IOSSIM_SYSROOT		"${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IOS_SDK}.sdk")
 
 
 
-### VERSION ###
-#dk_set(XCODE_VERSION ???)
-#dk_set(XCODE_NAME ???)
-#dk_set(XCODE_DL ???)
-#dk_set(XCODE ???)
-#dk_set(XCODE_EXE ???)
 
-### INSTALL ###
-#dk_import(${XCODE_DL} ${XCODE})
-#dk_import(${XCODE_DL})
+###### set GLOBAL CMAKE VARIABLES ######
+dk_set(CMAKE_GENERATOR		${XCODE_GENERATOR})
+dk_set(CMAKE_MAKE_PROGRAM	${XCODEBUILD_EXE})
+dk_set(CMAKE_C_COMPILER		${XCODE_C_COMPILER})
+dk_set(CMAKE_CXX_COMPILER	${XCODE_CXX_COMPILER})
+
+dk_set(DKCONFIGURE_CC		${CMAKE_C_COMPILER})
+dk_set(DKCONFIGURE_CXX		${CMAKE_CXX_COMPILER})

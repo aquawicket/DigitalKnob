@@ -2,24 +2,39 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ################################################################################
+# dk_arrayJoin(array, separator)
 # dk_arrayJoin(array, separator, rtn_var)
 #
-#    https://www.w3schools.com/js/js_array_methods.asp#mark_join
+#    The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string. 
+#    If the array has only one item, then that item will be returned without using the separator.
+#
+#    PARAMETERS
+#    separator :optional
+#        A string to separate each pair of adjacent elements of the array. If omitted, the array elements are separated with a comma (",").
+#
+#    RETURN VALUE
+#    A string with all array elements joined. If array.length is 0, the empty string is returned.
+#
+#    REFERENCE
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 function(dk_arrayJoin array separator rtn_val)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	list(JOIN ${array} "," arrayJoin)
-	dk_printVar(arrayJoin)
 	set(${rtn_val} ${arrayJoin} PARENT_SCOPE)
+
+# debug
+	#dk_printVar(rtn_val)
 endfunction()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	list(APPEND myArray "a")
 	list(APPEND myArray "b")

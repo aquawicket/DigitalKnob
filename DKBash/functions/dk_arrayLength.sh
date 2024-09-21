@@ -12,10 +12,8 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 #
 dk_arrayLength() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
-	#dk_validateArgs array optional:rtn_var
+	dk_debugFunc 1 2
+	#dk_call dk_validateArgs array optional:rtn_var
 	
 	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
 	local arrayLength=${#array[@]}
@@ -30,15 +28,15 @@ dk_arrayLength() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"
 	myArrayA[2]="d e f"
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
-	dk_arrayLength myArrayA myArrayLengthA
-	dk_printVar myArrayLengthA
+	dk_call dk_arrayLength myArrayA myArrayLengthA
+	dk_call dk_printVar myArrayLengthA
 	
 	
 	myArrayB[0]="h i j"
@@ -46,6 +44,6 @@ DKTEST() {
 	myArrayB[2]="d e f"
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
-	myArrayLengthB=$(dk_arrayLength myArrayB)
-	dk_printVar myArrayLengthB
+	myArrayLengthB=$(dk_call dk_arrayLength myArrayB)
+	dk_call dk_printVar myArrayLengthB
 }

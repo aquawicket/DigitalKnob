@@ -1,12 +1,6 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
 if(!$dk_todo){ $dk_todo = 1 } else{ return }
 
-if(!$ENABLE_dk_todo){ $global:ENABLE_dk_todo = 1 }
-if(!$TRACE_ON_TODO) { $global:TRACE_ON_TODO = 0  }
-if(!$LINE_ON_TODO)  { $global:LINE_ON_TODO = 0   }
-if(!$PAUSE_ON_TODO) { $global:PAUSE_ON_TODO = 0  }
-if(!$HALT_ON_TODO)  { $global:HALT_ON_TODO = 0   }
-$global:TODO_TAG = "  TODO: "
 ##################################################################################
 # dk_todo(message)
 #
@@ -15,18 +9,9 @@ $global:TODO_TAG = "  TODO: "
 #	@msg	- The message to print
 #
 function Global:dk_todo() {
-	dk_debugFunc	
-	$allArgs = $PsBoundParameters.Values + ${args}
+	dk_debugFunc 0 1
 	
-	
-	if($ENABLE_dk_todo -ne 1){ return }
-	
-	if(!(Test-Path variable:echo_fileline)){ $global:echo_fileline = "$(__FILE__ 1):$(__LINE__ 1)   " }
-	dk_echo "${yellow}${TODO_TAG}  `"${allArgs}`" ${clr}"
-	if($TRACE_ON_TODO){ dk_echo "${yellow}*** TRACE_ON_TODO ***${clr}"; dk_stacktrace }
-	if($LINE_ON_TODO) { dk_echo "${yellow}*** LINE_ON_TODO ***${clr}";  dk_showFileLine $(__FILE__ 1) $(__LINE__ 1) }
-	if($PAUSE_ON_TODO){ dk_echo "${yellow}*** PAUSE_ON_TODO ***${clr}"; dk_pause }
-	if($HALT_ON_TODO) { dk_echo "${yellow}*** HALT_ON_TODO ***${clr}";  dk_exit }
+	dk_call dk_log TODO "${message}"
 }
 
 
@@ -35,9 +20,15 @@ function Global:dk_todo() {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_todo "test dk_todo message"
+	dk_call dk_todo "test dk_todo message"
 }

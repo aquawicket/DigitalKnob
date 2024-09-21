@@ -14,14 +14,15 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	PATCH				-Patch the install directory with files from the _DKIMPORTS path
 #
 function(dk_install plugin) #PATCH
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_debug("dk_install(${plugin})")
 	
 	# set PLUGIN_URL variable
 	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
 	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
-	set(dest_path ${${plugin_var}})			
+	set(dest_path ${${plugin_var}_DIR})
+	dk_printVar(dest_path)
 	set(url_path ${${plugin_var}_URL})
 	
 	#if(NOT "${ARGV2}" STREQUAL "PATCH")
@@ -36,12 +37,9 @@ function(dk_install plugin) #PATCH
 	
 	#dk_toLower(${plugin} plugin_lower)
 	#if(NOT ${plugin} STREQUAL ${plugin_lower})
-	#	dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
+	#	dk_fatal("ERROR:  dk_install() (${plugin}) must be all lowercase")
 	#endif()
-	
-	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin})
-		dk_error("ERROR: dk_install() (${DKIMPORTS_DIR}/${plugin}) does not exist")
-	endif()
+	dk_assertPath(${DKIMPORTS_DIR}/${plugin})
 	
 	if(EXISTS ${dest_path}/installed)
 		dk_info("${plugin} already installed")
@@ -97,16 +95,21 @@ function(dk_install plugin) #PATCH
 	dk_download(${url_path} ${DKDOWNLOAD_DIR}/${dl_filename} NO_HALT)
 	# TODO: option to delete downloaded file after extraction to conserve disk space
 	
-	if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
-		dk_error("The download files does not exist")
-	endif()
+	#if(NOT EXISTS ${DKDOWNLOAD_DIR}/${dl_filename})
+	#	dk_fatal("The download files does not exist")
+	#endif()
+	dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${url_extension} STREQUAL "")
-		if(${url_extension} STREQUAL ".bz")
+		if(${url_extension} STREQUAL ".AppImage")
+			set(FILETYPE "Executable")
+		elseif(${url_extension} STREQUAL ".bz")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
+		elseif(${url_extension} STREQUAL ".dmg")
+			set(FILETYPE "BYPASS")
 		elseif(${url_extension} STREQUAL ".exe")
 			dk_includes(${url_filename} ".sfx.exe" result)
 			if(${result})
@@ -114,12 +117,12 @@ function(dk_install plugin) #PATCH
 			else()
 				set(FILETYPE "Executable")
 			endif()
-		elseif(${url_extension} STREQUAL ".dmg")
-			set(FILETYPE "BYPASS")
 		elseif(${url_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".js")
 			set(FILETYPE "Javascript")
+		elseif(${url_extension} STREQUAL ".pkg")
+			set(FILETYPE "Executable")
 		elseif(${url_extension} STREQUAL ".rar")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".tar")
@@ -132,8 +135,6 @@ function(dk_install plugin) #PATCH
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".zip")
 			set(FILETYPE "Archive")
-		elseif(${url_extension} STREQUAL ".AppImage")
-			set(FILETYPE "Executable")
 		endif()
 	endif()
 	# If the file type is unknown, we'll still try to extract it like a compressed file anyway
@@ -170,12 +171,23 @@ function(dk_install plugin) #PATCH
 			endif() 
 		endif()
 	elseif(${FILETYPE} STREQUAL "Executable")
-		dk_setPath(${DKDOWNLOAD_DIR})
+		dk_cd(${DKDOWNLOAD_DIR})
 		dk_set(QUEUE_BUILD ON)
-		dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
+		dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
+		
+		if(${url_extension} STREQUAL ".pkg")
+			if(MAC_HOST)
+				dk_validate(SUDO "dk_depend(sudo)")
+				dk_executeProcess(chmod 777 ${DKDOWNLOAD_DIR}/${dl_filename})
+				dk_executeProcess(${SUDO} -s installer -pkg ${DKDOWNLOAD_DIR}/${dl_filename} -target /)
+			endif()
+		else()
+			dk_executeProcess(${DKDOWNLOAD_DIR}/${dl_filename})
+		endif()
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
+		dk_assertPath(${DKDOWNLOAD_DIR}/${dl_filename})
 		dk_copy(${DKDOWNLOAD_DIR}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)
 		dk_debug("dk_copy(${DKDOWNLOAD_DIR}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)")
 	endif()
@@ -205,8 +217,9 @@ dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

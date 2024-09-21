@@ -8,5 +8,5 @@ setlocal
 set "xLine=-1"
 for /f "usebackq tokens=1 delims=:" %%i in (`findstr /n /c:" %~2 " "%~f0"`) do set /a xLine=%~3 + %%i
 endlocal & if not "%~1"=="" set "%~1=%xLine%"
-goto :eof
+goto:eof
 :: by David Ruhmann

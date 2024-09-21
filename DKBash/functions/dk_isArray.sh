@@ -13,8 +13,7 @@
 #	https://stackoverflow.com/a/27254437
 #
 dk_isArray() {
-	dk_debugFunc 
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	[[ "$(declare -p ${1})" =~ "declare -a" ]] && return $(true)
 	return $(false)
@@ -23,8 +22,9 @@ dk_isArray() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	myVar1=(1 2 3)
 	dk_isArray myVar1 && dk_echo "myVar1 is an array" || dk_echo "myVar1 is NOT an array"

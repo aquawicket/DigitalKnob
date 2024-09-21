@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/triblatron/osgRmlUi
 
 
@@ -10,11 +11,11 @@ dk_import(https://github.com/triblatron/osgRmlUi/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${OSGRMLUI}/include)
-dk_include			(${OSGRMLUI}/${OS})
-UNIX_dk_libDebug	(${OSGRMLUI}/${OS}/${DEBUG_DIR}/libosgrmlui.a)
-UNIX_dk_libRelease	(${OSGRMLUI}/${OS}/${RELEASE_DIR}/libosgrmlui.a)
-WIN_dk_libDebug		(${OSGRMLUI}/${OS}/${DEBUG_DIR}/osgrmlui.lib)
-WIN_dk_libRelease	(${OSGRMLUI}/${OS}/${RELEASE_DIR}/osgrmlui.lib)
+dk_include			(${OSGRMLUI}/${triple})
+UNIX_dk_libDebug	(${OSGRMLUI}/${triple}/${DEBUG_DIR}/libosgrmlui.a)
+UNIX_dk_libRelease	(${OSGRMLUI}/${triple}/${RELEASE_DIR}/libosgrmlui.a)
+WIN_dk_libDebug		(${OSGRMLUI}/${triple}/${DEBUG_DIR}/osgrmlui.lib)
+WIN_dk_libRelease	(${OSGRMLUI}/${triple}/${RELEASE_DIR}/osgrmlui.lib)
 
 
 ### GENERATE ###

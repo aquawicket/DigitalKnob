@@ -9,11 +9,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@plugin_name	- TODO
 #
 function(dk_dll plugin_name)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_error("${plugin_name} plugin not found")
+		dk_fatal("${plugin_name} plugin not found")
 	endif()
 	dk_include(${plugin_path})
 	# Create CmakeLists.txt file
@@ -68,7 +68,7 @@ function(dk_dll plugin_name)
 		dk_replaceAll(${LIBS} ".lib" ".lib " DLL_LIBS)
 	endif()
 	if(DLL_DEBUG_LIBS AND DLL_RELEASE_LIBS)
-		#dk_fileAppend(${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin_name} debug ${DKPLUGINS_DIR}/DK/${OS}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS_DIR}/DK/${OS}/${RELEASE_DIR}/DK.lib) \n")
+		#dk_fileAppend(${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin_name} debug ${DKPLUGINS_DIR}/DK/${triple}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS_DIR}/DK/${triple}/${RELEASE_DIR}/DK.lib) \n")
 		dk_fileAppend(${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin_name} ${DLL_DEBUG_LIBS} ${DLL_RELEASE_LIBS} ${DLL_LIBS}) \n")
 	endif()
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "if(WIN_HOST)\n")
@@ -83,8 +83,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

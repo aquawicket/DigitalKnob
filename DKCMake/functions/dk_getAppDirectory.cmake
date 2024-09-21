@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var		- TODO
 #
 function(dk_getAppDirectory rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	set(USE_32BIT 1)
 	if(WIN_HOST)
@@ -33,8 +33,9 @@ function(dk_getAppDirectory rtn_var)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
-	dk_printVar(appDirectory)
+	#dk_printVar(appDirectory)
 	set(${rtn_var} ${appDirectory} PARENT_SCOPE)
+	#dk_printVar(rtn_var)
 endfunction()
 
 
@@ -42,8 +43,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

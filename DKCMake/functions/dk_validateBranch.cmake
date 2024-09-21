@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_validateBranch)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -20,7 +20,7 @@ function(dk_validateBranch)
 #			DKBRANCH="${FOLDER}"
 #		fi
 	endif()
-	dk_printVar(DKBRANCH)
+	#dk_printVar(DKBRANCH)
 	
 	dk_set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}")
 		dk_set(DKCMAKE_DIR "${DKBRANCH_DIR}/DKCMake")
@@ -42,8 +42,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_validateBranch()
 endfunction()

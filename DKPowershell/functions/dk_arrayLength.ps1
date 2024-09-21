@@ -7,9 +7,7 @@ if(!$dk_arrayLength){ $dk_arrayLength = 1 } else{ return }
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
 function Global:dk_arrayLength ($array){
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
+	dk_debugFunc 1
 	
 	if($null -eq $array){ $arrayLength = 0; dk_printVar arrayLength; return $arrayLength }
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly -ErrorAction SilentlyContinue } 
@@ -30,8 +28,9 @@ function Global:dk_arrayLength ($array){
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 	
 	
 	$myArray = @('element 1', 'element 2', 'element 3')

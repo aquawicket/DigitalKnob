@@ -1,25 +1,23 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_getExtension(<path> <output>)
 #
 #
 dk_getExtension() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	
-	_filename_=$(dk_basename "${1}")
+	dk_debugFunc 2
+
+	_filename_=$(dk_call dk_basename "${1}")
 	eval "${2}=${_filename_##*.}"
-	dk_printVar "${2}"
+	dk_call dk_printVar "${2}"
 }
 
 
-
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
-	dk_getExtension "TestFile.txt" extension
-	dk_echo "extension = ${extension}"
+	dk_call dk_getExtension "TestFile.txt" extension
+	dk_call dk_echo "extension = ${extension}"
 }

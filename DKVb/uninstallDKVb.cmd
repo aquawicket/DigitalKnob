@@ -1,13 +1,12 @@
 @echo off
+if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 :uninstallDKVb
-	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
-	
 	ftype DKVb=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKVb"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKVb"
 	
 	assoc .vbs=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.vbs"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
-goto:eof
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.vbs"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
+%endfunction%

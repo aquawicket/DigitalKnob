@@ -1,15 +1,13 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_getUsername(<output>)
 #
 #
 dk_getUsername() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	
+	dk_debugFunc 1
+
 	if [ -n "${USER-}" ]; then
 		DKUSERNAME=${USER}
 	elif [ -n "${USERNAME-}" ]; then
@@ -17,14 +15,18 @@ dk_getUsername() {
 	fi
 	
 	eval "${1}=${DKUSERNAME}"
-	dk_printVar "${1}"
+	dk_call dk_printVar "${1}"
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
-	dk_getUsername _username
-	dk_echo "_username = ${_username}"
+	dk_call dk_getUsername _username
+	dk_call dk_echo "_username = ${_username}"
 }

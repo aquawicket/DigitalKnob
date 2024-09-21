@@ -7,8 +7,8 @@
 #
 #
 dk_stringContains() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	# https://stackoverflow.com/a/8811800/688352
 	# [[ ${1} == *"${2}"* ]]    							# NON-POSIX    # [[ ${string} == *"${substring}"* ]]
@@ -20,8 +20,9 @@ dk_stringContains() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 
 	if dk_stringContains "1one1" "one"; then
 		dk_echo "1one1 contains one"

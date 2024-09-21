@@ -6,21 +6,29 @@ if(!$dk_getFullPath){ $dk_getFullPath = 1 } else{ return }
 #
 #
 function Global:dk_getFullPath($path) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	
-	$fullpath = dk_realpath $path 
-	dk_printVar fullpath
+	dk_debugFunc 1
+
+	$fullpath = dk_call dk_realpath $path 
+	dk_call dk_printVar fullpath
 	return $fullpath
 }
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+
+
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	$fullpath = dk_getFullPath "bash"
-	dk_echo "fullpath = ${fullpath}"
+	$fullpath = dk_call dk_getFullPath "bash"
+	dk_call dk_echo "fullpath = ${fullpath}"
 }

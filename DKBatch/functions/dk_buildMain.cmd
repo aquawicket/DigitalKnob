@@ -1,66 +1,66 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+::echo ---^> %~0 %*
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-call dk_source dk_assert
-call dk_source dk_build
-call dk_source dk_createCache
-call dk_source dk_createShortcut
-call dk_source dk_debugFunc
-call dk_source dk_defined
-call dk_source dk_error
-call dk_source dk_generate
-call dk_source dk_getDKPaths
-call dk_source dk_getHostTriple
-call dk_source dk_info
-call dk_source dk_installGit
-call dk_source dk_pickApp
-call dk_source dk_pickOs
-call dk_source dk_pickType
-call dk_source dk_pickUpdate
-call dk_source dk_printVar
-call dk_source dk_unset
-call dk_source dk_validateBranch
-call dk_source dk_warning
 ::####################################################################
 ::# dk_buildMain()
 ::#
 ::#
 :dk_buildMain
-	call dk_debugFunc 0
-
-	call dk_assert DKSCRIPT_PATH
-	call dk_assert DKSCRIPT_DIR
-	call dk_assert DKSCRIPT_NAME
-
-	call dk_getHostTriple
-	call dk_getDKPaths
+    call dk_debugFunc 0
+ setlocal
+    
+	%dk_call% dk_printVar DIGITALKNOB_DIR
+	%dk_call% dk_printVar DKTOOLS_DIR
+	%dk_call% dk_printVar DKDOWNLOAD_DIR
+	%dk_call% dk_printVar DKSCRIPT_PATH
+    %dk_call% dk_printVar DKSCRIPT_DIR
+    %dk_call% dk_printVar DKSCRIPT_NAME
+	%dk_call% dk_printVar DKSCRIPT_EXT
+	%dk_call% dk_printVar DKBRANCH_DIR
+	%dk_call% dk_printVar DKBATCH_DIR
+	%dk_call% dk_printVar DKBATCH_FUNCTIONS_DIR
+	%dk_call% dk_printVar DKBATCH_FUNCTIONS_DIR_
+	%dk_call% dk_printVar DKTEMP_DIR
 	
-    call dk_installGit
-    call dk_validateBranch
-    
-	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
-		call dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		call dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
-		call dk_warning "DKBRANCH_DIR = %DKBRANCH_DIR%"
-	)
-    
-    :while_loop             
-		if "%UPDATE%"==""     call dk_pickUpdate & goto:while_loop
-		if "%APP%"==""        call dk_pickApp    & goto:while_loop
-		if "%TARGET_OS%"==""  call dk_pickOs     & goto:while_loop
-		if "%TYPE%"==""       call dk_pickType   & goto:while_loop
 
-		call dk_createCache
-		call dk_generate
-		call dk_build
+    %dk_call% dk_getHostTriple
+    %dk_call% dk_getDKPaths
 
-		call dk_unset UPDATE
-		call dk_unset APP
-		call dk_unset TARGET_OS
-		call dk_unset TYPE
-	goto while_loop
-	endlocal
-goto:eof
+	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE
+	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
+    %dk_call% dk_installGit
+    %dk_call% dk_validateBranch
+	
+    if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
+        %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+        %dk_call% dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
+        %dk_call% dk_warning "DKBRANCH_DIR = %DKBRANCH_DIR%"
+    )
+    
+    %dk_call% dk_unset UPDATE
+    %dk_call% dk_unset APP
+    %dk_call% dk_unset TARGET_OS
+    %dk_call% dk_unset TYPE
+        
+    :while_loop   
+        ::%dk_call% dk_echo "33 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
+        
+        if "%UPDATE%"==""     %dk_call% dk_pickUpdate       & goto:while_loop
+        if "%APP%"==""        %dk_call% dk_pickApp APP      & goto:while_loop
+        if "%TARGET_OS%"==""  %dk_call% dk_pickOs TARGET_OS & goto:while_loop
+        if "%TYPE%"==""       %dk_call% dk_pickType TYPE    & goto:while_loop
+		
+        %dk_call% dk_createCache
+        %dk_call% dk_generate
+        %dk_call% dk_buildApp
+
+        %dk_call% dk_unset UPDATE
+        %dk_call% dk_unset APP
+        %dk_call% dk_unset TARGET_OS
+        %dk_call% dk_unset TYPE
+    goto while_loop
+%endfunction%
 
 
 
@@ -70,7 +70,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_buildMain
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_buildMain
+%endfunction%

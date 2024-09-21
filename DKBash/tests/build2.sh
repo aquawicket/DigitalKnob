@@ -145,7 +145,7 @@ load_dkenv() {
 set_dkroot(){
 	if [ -z "${1}" ]; then
 		dk_error "set_dkroot <path> requires 1 parameter"
-		return ${false}
+		return $(false)
 	fi
 	
 	DKROOT=${1}

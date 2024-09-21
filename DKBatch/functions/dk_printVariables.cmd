@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
 ::# dk_printVariables(msg)
@@ -7,9 +7,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    reference: https://stackoverflow.com/a/41872317/688352
 ::#
 :dk_printVariables
-	call dk_debugFunc 0
-
-	setlocal enableextensions disabledelayedexpansion
+    call dk_debugFunc 0
+ setlocal enableextensions disabledelayedexpansion
 
     rem We need a temporary file to store the original environment
     for %%f in ("original_%random%%random%%random%.tmp") do (
@@ -52,8 +51,8 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 
     rem Cleanup temporary file
     ) & del "%%~ff"
-	
-goto:eof
+    
+%endfunction%
 
 
 
@@ -61,7 +60,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_printVariables
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_printVariables
+%endfunction%

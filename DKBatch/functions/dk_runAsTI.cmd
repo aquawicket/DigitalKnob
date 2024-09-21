@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::##################################################################################
@@ -8,23 +8,25 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::# Run as Trusted Installer
 ::#
 :dk_runAsTI
-	call dk_debugFunc 1
-	
-	set ^ #=
-	set "0=%~f0"
-	set 1=%*
-	powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])
-goto:eof
+    call dk_debugFunc 1
+ setlocal
+ 
+    set ^ #=
+    set "0=%~f0"
+    set 1=%*
+    powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])
+%endfunction%
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	::call dk_runAsTI regedit
-	call dk_runAsTI services.msc
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    ::%dk_call% dk_runAsTI regedit
+    %dk_call% dk_runAsTI cmd.exe
+%endfunction%
 
 
 

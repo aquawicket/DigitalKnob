@@ -9,9 +9,9 @@
 #    C: 	https://pubs.opengroup.org/onlinepubs/9699919799/functions/realpath.html
 #
 dk_realpath(){
-	#dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${*}): not enough arguments"
-	[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${*}): too many arguments"
+	dk_debugFunc 1 2
+	#[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${*}): not enough arguments"
+	#[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${*}): too many arguments"
 	
 	local _realpath_=""
 	if dk_commandExists realpath; then
@@ -34,7 +34,7 @@ dk_realpath(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST(){
-	#dk_debugFunc
+	#dk_debugFunc 0
 	
 	realpathA=$(dk_realpath "dk_load.sh")
 	dk_echo "realpathA = ${realpathA}"

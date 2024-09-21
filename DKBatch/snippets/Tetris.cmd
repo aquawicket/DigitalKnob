@@ -46,7 +46,7 @@ if %errorlevel% neq 0 (
    echo You must select a font size that allows to set
    echo a text window of %col% columns X %lin% lines
    pause
-   goto :EOF
+   goto:eof
 )
 
 chcp 850 > NUL
@@ -54,7 +54,7 @@ cd . > pipeFile.txt
 "%~F0" Input >> pipeFile.txt  |  "%~F0" Main < pipeFile.txt
 ping localhost -n 2 > NUL
 del pipeFile.txt
-goto :EOF
+goto:eof
 
 
 

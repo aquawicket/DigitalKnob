@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libx11-dev)
 	dk_return()
@@ -10,7 +11,7 @@ if(MAC)
 endif()
 
 if(LINUX OR RASPBERRY)
-	#dk_set(CURRENT_DIR /usr)
+	#dk_cd(/usr)
 	
 	if(EXISTS /usr/include/X11)
 		### LINK ###
@@ -23,7 +24,7 @@ if(LINUX OR RASPBERRY)
 		if(TINYCORE)
 			dk_command(tce-load -wi libX11-dev.tcz)
 		else()
-			dk_command(sudo apt -y install libx11-dev)
+			dk_command(${SUDO} apt -y install libx11-dev)
 		endif()
 	endif()
 	

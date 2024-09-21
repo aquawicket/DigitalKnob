@@ -10,13 +10,13 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_watchCallback.cmake)
 #	@variable	- The variable to watch
 #
 macro(dk_watch variable)
-	#dk_debugFunc(${ARGV})
+	#dk_debugFunc("\${ARGV}")
 	
-	if(DEFINED ${variable})
+#	if(DEFINED ${variable})
 		variable_watch(${variable} dk_watchCallback)
-	else()
-		dk_error("variable:${variable} is undefined")
-	endif()
+#	else()
+#		dk_warning("variable:${variable} is undefined")
+#	endif()
 	
 endmacro()
 
@@ -24,11 +24,13 @@ endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE)
-	#dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)
-	dk_watch(CMAKE_CURRENT_FUNCTION)
+	dk_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE)
+	#dk_watch(CMAKE_CURRENT_FUNCTION)
 
 endfunction()

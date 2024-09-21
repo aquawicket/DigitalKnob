@@ -2,83 +2,96 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_configure(path) #ARGN
+# dk_configure(SOURCE_DIR) #ARGN
 #
-#	TODO
+#	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
-#	@path - The path to the configure file to use, CMakeLists.txt for cmake, Configure for Unix, Etc.
-#
-function(dk_configure path) #ARGN
-	dk_debugFunc(${ARGV})
+function(dk_configure SOURCE_DIR) #ARGN
+	dk_debugFunc("\${ARGV}")
+
+	dk_assertPath(SOURCE_DIR)	
+	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
+	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
-	dk_assert(path)
-	dk_getOption(NO_HALT 					${ARGV})
+	if(CURRENT_PLUGIN_DIR)
+		dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
+	endif()
+	if(isSubDirectory)
+		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use PWD as the BINARY_DIR if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
+	else()
+		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
+	endif()
+	#dk_debug("dk_configure(${SOURCE_DIR}) -> ${BINARY_DIR}")
 	
 	# Configure with CMake		(multi_config / single_config)
-	if(EXISTS ${path}/CMakeLists.txt)
+	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
-		if(SINGLE_CONFIG)
-			# Make sure the plugin variable is alpha-numeric and uppercase
-			dk_assert(plugin)
-			dk_toUpper(${plugin} PLUGIN_NAME)
-			dk_convertToCIdentifier(${PLUGIN_NAME} PLUGIN_NAME)
-			dk_assert(SINGLE_CONFIG_BUILD_DIR)
-			dk_setPath(${${PLUGIN_NAME}}/${SINGLE_CONFIG_BUILD_DIR}) 
-		endif()
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} ${path})				
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S=${SOURCE_DIR}" "-B=${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		
-		dk_fileWrite(${CURRENT_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
-		
-		#dk_queueCommand(${DKCMAKE_BUILD} ${ARGN} ${path} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
 		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-		dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+		endif()
 		return()
 	
 	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${path}/configure.ac)
-		dk_info("Configuring with Autotools")
-		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
-		
-		dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
-		if(EXISTS ${path}/configure)
+	elseif(EXISTS ${SOURCE_DIR}/configure.ac) # OR EXISTS ${SOURCE_DIR}/configure)
+		dk_info("Configuring with Autotools")			
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
+		if(EXISTS ${SOURCE_DIR}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-				#dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}")
 				dk_queueCommand(bash -c "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}" OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-				dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 			else()
-				#dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN})
 				dk_queueCommand(../../configure ${DKCONFIGURE_FLAGS} ${ARGN} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-				dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 			endif()
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
+		endif()
+		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 		endif()
 		return()
 		
 	# No Specific configure type. Just pass the arguments to dk_queueCommand to run
 	else()
-		dk_notice("configure type not detected. just run arguments")
-		dk_setPath(${path}/${SINGLE_CONFIG_BUILD_DIR})
+		dk_notice("configure type not detected. running argument in bash environment")
+		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
+		#dk_printVar(BINARY_DIR)
 		
-		dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${ARGN}\n")
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
-			#dk_replaceAll("${ARGN}"  ";"  " "  BASH_COMMANDS)
-			#dk_queueCommand(bash -c "${ANDROID_BASH_EXPORTS} ${BASH_COMMANDS}")
-			#dk_queueCommand(${ARGN} BASH_ENV)
-			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output)# ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		else()
-			dk_info("dk_queueCommand(${ARGN})")
-			#dk_queueCommand(${ARGN})
-			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output)# ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${CURRENT_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
+			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		endif()
+		
+		#### restore any altered flags ####
+		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+		if(EMSCRIPTEN)
+			dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+		else()
+			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 		endif()
 		return()
+		
 	endif()
 endfunction()
 dk_createOsMacros("dk_configure")
@@ -87,8 +100,9 @@ dk_createOsMacros("dk_configure")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

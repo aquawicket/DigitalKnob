@@ -1,11 +1,12 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.gnu.org/software/bash/
 # https://packages.msys2.org/package/bash
 
 ### Msys2 ###
 if(MSYSTEM)
 	#dk_command(${PACMAN_EXE} -S bash)
-	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
+	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 endif()
 
 

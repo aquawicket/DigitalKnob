@@ -8,19 +8,22 @@ if(!$dk_arraySlice){ $dk_arraySlice = 1 } else{ return }
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 #
 function Global:dk_arraySlice($array, $start, $end) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 3){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-	
-	
-	dk_todo
+	dk_debugFunc 3
+
+	dk_call dk_todo
 }
 
 
 
 
-function Global:DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function Global:DKTEST 
+	dk_debugFunc 0
 	
-	
-	dk_arraySlice array start end_
+	dk_call dk_arraySlice array start end_
 }

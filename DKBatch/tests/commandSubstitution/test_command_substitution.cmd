@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# test_comman_substitution.cmd
@@ -14,7 +14,7 @@ setlocal enabledelayedexpansion
 	%funcA%
 	echo funcA = %funcA%
 	call dk_pause
-goto:eof
+%endfunction%
 
 
 :funcA
@@ -23,13 +23,13 @@ goto:eof
 	set /p VV=<bla.txt
 	set funcA=%VV%
 	::FOR /F "usebackq" %%x IN (`%*`) DO set "funcA=%%x"
-goto:eof
+%endfunction%
 
 
 :funcB
 	echo 1 = %1
 	!%1!
 	echo funcB(%*)
-goto:eof
+%endfunction%
 
 call DK_pause

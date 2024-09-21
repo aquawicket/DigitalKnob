@@ -6,53 +6,51 @@ if(!$dk_pickOs){ $dk_pickOs = 1 } else{ return }
 #
 #
 function Global:dk_pickOs() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
 
-
-	dk_echo
-	dk_echo "${APP} ${TARGET_OS} ${TYPE}"
-	dk_echo	
-    dk_echo " 1) ${HOST_TRIPLE}"
-	dk_echo
-	dk_echo " 2) Android arm32"
-	dk_echo " 3) Android arm64"
-	dk_echo " 4) Android x86"
-	dk_echo " 5) Android x86_64"
-	dk_echo " 6) Emscripten"
-	dk_echo " 7) Ios arm32"
-	dk_echo " 8) Ios arm64"
-	dk_echo " 9) Ios x86"
-	dk_echo "10) Ios x86_64"
-	dk_echo "11) Iossim arm32"
-	dk_echo "12) Iossim arm64"
-	dk_echo "13) Iossim x86"
-	dk_echo "14) Iossim x86_64"
-	dk_echo "15) Linux arm32"
-	dk_echo "16) Linux arm64"
-	dk_echo "17) Linux x86"
-	dk_echo "18) Linux x86_64"
-	dk_echo "19) Mac arm32"
-	dk_echo "20) Mac arm64"
-	dk_echo "21) Mac x86"
-	dk_echo "22) Mac x86_64"
-	dk_echo "23) Raspberry arm32"
-	dk_echo "24) Raspberry arm64"
-	dk_echo "25) Raspberry x86"
-	dk_echo "26) Raspberry x86_64"
-	dk_echo "27) Windows arm32"
-	dk_echo "28) Windows arm64 (clang)"
-	dk_echo "29) Windows x86 (gcc)"
-	dk_echo "30) Windows x86 (clang)"
-	dk_echo "31) Windows x86 (msvc)"
-	dk_echo "32) Windows x86_64 (gcc)"
-    dk_echo "33) Windows x86_64 (clang)"
-    dk_echo "34) Windows x86_64 (ucrt)"
-    dk_echo "35) Windows x86_64 (msvc)"
-	dk_echo "36) Clear Screen"
-	dk_echo "37) Go Back"
-	dk_echo "38) Exit"
-	dk_echo
+	dk_call dk_echo
+	dk_call dk_echo "${APP} ${TARGET_OS} ${TYPE}"
+	dk_call dk_echo	
+    dk_call dk_echo " 1) ${HOST_TRIPLE}"
+	dk_call dk_echo
+	dk_call dk_echo " 2) Android arm32"
+	dk_call dk_echo " 3) Android arm64"
+	dk_call dk_echo " 4) Android x86"
+	dk_call dk_echo " 5) Android x86_64"
+	dk_call dk_echo " 6) Emscripten"
+	dk_call dk_echo " 7) Ios arm32"
+	dk_call dk_echo " 8) Ios arm64"
+	dk_call dk_echo " 9) Ios x86"
+	dk_call dk_echo "10) Ios x86_64"
+	dk_call dk_echo "11) Iossim arm32"
+	dk_call dk_echo "12) Iossim arm64"
+	dk_call dk_echo "13) Iossim x86"
+	dk_call dk_echo "14) Iossim x86_64"
+	dk_call dk_echo "15) Linux arm32"
+	dk_call dk_echo "16) Linux arm64"
+	dk_call dk_echo "17) Linux x86"
+	dk_call dk_echo "18) Linux x86_64"
+	dk_call dk_echo "19) Mac arm32"
+	dk_call dk_echo "20) Mac arm64"
+	dk_call dk_echo "21) Mac x86"
+	dk_call dk_echo "22) Mac x86_64"
+	dk_call dk_echo "23) Raspberry arm32"
+	dk_call dk_echo "24) Raspberry arm64"
+	dk_call dk_echo "25) Raspberry x86"
+	dk_call dk_echo "26) Raspberry x86_64"
+	dk_call dk_echo "27) Windows arm32"
+	dk_call dk_echo "28) Windows arm64 (clang)"
+	dk_call dk_echo "29) Windows x86 (gcc)"
+	dk_call dk_echo "30) Windows x86 (clang)"
+	dk_call dk_echo "31) Windows x86 (msvc)"
+	dk_call dk_echo "32) Windows x86_64 (gcc)"
+    dk_call dk_echo "33) Windows x86_64 (clang)"
+    dk_call dk_echo "34) Windows x86_64 (ucrt)"
+    dk_call dk_echo "35) Windows x86_64 (msvc)"
+	dk_call dk_echo "36) Clear Screen"
+	dk_call dk_echo "37) Go Back"
+	dk_call dk_echo "38) Exit"
+	dk_call dk_echo
 	
 	$input = Read-Host
 	    if(${input} -eq  "1"){ $global:TARGET_OS = "${HOST_TRIPLE}" }
@@ -90,17 +88,17 @@ function Global:dk_pickOs() {
 	elseif(${input} -eq "33"){ $global:TARGET_OS = "win_x86_64_clang" }
 	elseif(${input} -eq "34"){ $global:TARGET_OS = "win_x86_64_ucrt" }
 	elseif(${input} -eq "35"){ $global:TARGET_OS = "win_x86_64_msvc" }
-	elseif(${input} -eq "36"){ dk_clearScreen }
-	elseif(${input} -eq "37"){ dk_unset APP }
-	elseif(${input} -eq "38"){ dk_exit 0 }
-	else{ dk_warning "invalid selection" }
+	elseif(${input} -eq "36"){ dk_call dk_clearScreen }
+	elseif(${input} -eq "37"){ dk_call dk_unset APP }
+	elseif(${input} -eq "38"){ dk_call dk_exit 0 }
+	else{ dk_call dk_warning "invalid selection" }
 }
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_pickOs
+	dk_call dk_pickOs
 }

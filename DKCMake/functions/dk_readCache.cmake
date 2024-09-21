@@ -5,48 +5,58 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_readCache()
 #
 #
-function(dk_readCache)
-	dk_debugFunc(${ARGV})
-	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
-	endif()
+function(dk_readCache APP target_triple TYPE)
+	dk_debugFunc("\${ARGV}")
+#	if(NOT ${ARGC} EQUAL 3)
+#		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+#	endif()
 	
+	dk_validate(DKBRANCH_DIR "dk_validateBranch()")
 	if(NOT EXISTS "${DKBRANCH_DIR}/cache")
 		return()
 	endif()
 	dk_unset(_APP_)
-	dk_unset(_TARGET_OS_)
+	dk_unset(_target_triple_)
 	dk_unset(_TYPE_)
 	
 	dk_echo("reading cache...")
 	set(count 0)
-	
-	dk_fixme()
 #	while read p; do
-#		if [ "${count}" = "0" ]; then 
-#			_APP_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _APP_
-#		fi
-#		if [ "${count}" = "1" ]; then
-#			_TARGET_OS_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _TARGET_OS_ 
-#		fi
-#		if [ "${count}" = "2" ]; then
-#			_TYPE_=$(builtin echo "${p}" | tr -d '\r')
-#			#dk_printVar _TYPE_
-#		fi
-#		#if [ "${count}" = "3" ]; then
-#		#	_DKENV_=$(echo ${p} | tr -d '\r')
-#		#	#dk_printVar _DKENV_
-#		#fi
+#		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "1" ] && _target_triple_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "2" ] &&	_TYPE_=$(builtin echo "${p}" | tr -d '\r')
+#		#[ "${count}" = "3" ] && _DKENV_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
 #	done < "${DKBRANCH_DIR}"/cache
+
+	file(STRINGS "${DKBRANCH_DIR}/cache" lines)
+	foreach(line ${lines})
+		if(${count} EQUAL 0)
+			set(_APP_ ${line})
+		endif()
+		if(${count} EQUAL 1)
+			set(_target_triple_ ${line})
+		endif()
+		if(${count} EQUAL 2)
+			set(_TYPE_ ${line})
+		endif()
+		math(EXPR count "${count}+1")
+	endforeach()
+	
+	#dk_echo("_APP_ = ${_APP_}, _target_triple_ = ${_target_triple_}, _TYPE_ = ${_TYPE_}")
+	set(${APP}		${_APP_}	PARENT_SCOPE)
+	set(${target_triple} 	${_target_triple_}	PARENT_SCOPE)
+	set(${TYPE}		${_TYPE_}	PARENT_SCOPE)
 endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
-	dk_readCache()
+	dk_readCache(APP target_triple TYPE)
+	#dk_printVar(APP)
+	#dk_printVar(target_triple)
+	#dk_printVar(TYPE)
 endfunction()

@@ -6,28 +6,35 @@ if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return }
 #
 #
 function Global:dk_isUrl($str) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
 	
-	
-	if(dk_stringContains $str "://"){ $isUrl = $true }
+	if(dk_call dk_stringContains $str "://"){ $isUrl = $true }
 	else{ $isUrl = $false }
-	dk_printVar isUrl
+	dk_call dk_printVar isUrl
 	return $isUrl
 }
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
-	
+
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
 	$test_url = "http://www.aquawicket.com"
 	
-	if(dk_isUrl "${test_url}"){ dk_echo "variable is a url" } 
-	else { dk_echo "variable is NOT a url" }
+	if(dk_call dk_isUrl "${test_url}"){ dk_call dk_echo "variable is a url" } 
+	else { dk_call dk_echo "variable is NOT a url" }
 	
 	$test_not_url = "readme.txt"
-	if(dk_isUrl "${test_not_url}"){ dk_echo "variable is a url" } 
-	else { dk_echo "variable is NOT a url" }
+	if(dk_call dk_isUrl "${test_not_url}"){ dk_call dk_echo "variable is a url" } 
+	else { dk_call dk_echo "variable is NOT a url" }
 }

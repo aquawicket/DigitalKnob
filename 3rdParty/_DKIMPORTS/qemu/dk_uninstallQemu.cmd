@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 ::####################################################################
@@ -9,15 +9,19 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	call dk_debugFunc 0
 	
 	
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
-	if "%HOST_OS%_%HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"     call dk_set QEMU_DL "https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  call dk_set QEMU_DL "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
 	
-	call dk_basename %QEMU_DL% QEMU_DL_NAME
-	call dk_convertToCIdentifier %QEMU_DL_NAME% QEMU_DL_NAME
+	call dk_basename %QEMU_DL% QEMU_DL_FILE
+    call dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
+    ::call dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
+    call dk_toLower %QEMU_FOLDER% QEMU_FOLDER
 	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
-	call dk_info "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
-	call "%DKTOOLS_DIR%\%QEMU_DL_NAME%\qemu-uninstall.exe"
-goto:eof
+	call dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
+	
+	call dk_info "%QEMU_DIR%\qemu-uninstall.exe"
+	call "%QEMU_DIR%\qemu-uninstall.exe"
+%endfunction%
 
 
 
@@ -28,4 +32,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_uninstallQemu
-goto:eof
+%endfunction%

@@ -1,13 +1,11 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
 ##################################################################################
 # dk_chown(path)
 #
 dk_chown() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
+	dk_debugFunc 1
 	
 	[ -n "${USER-}" ] && DKUSERNAME=${USER} || DKUSERNAME=${USERNAME}	
 	${dksudo} chown -R ${DKUSERNAME} "${1}"
@@ -16,9 +14,10 @@ dk_chown() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
-	dk_validate DIGITALKNOB_DIR "dk_getDKPaths"
-	dk_chown ${DIGITALKNOB_DIR}
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"
+	dk_call dk_chown ${DIGITALKNOB_DIR}
 }

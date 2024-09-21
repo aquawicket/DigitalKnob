@@ -14,9 +14,7 @@
 #	 OSX:   https://www.unix.com/man-page/osx/1/readlink/
 #
 dk_readlink() {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 1 3
 	
 	# we expect to use a -f parameter, so use ${2} as the input path.
 	[ "${1}" = "-f" ] && local target_file=${2} || local target_file=${1}  
@@ -46,8 +44,9 @@ dk_readlink() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	readlinkA=$(dk_readlink -f "dk_load.sh")
 	dk_echo "readlinkA = ${readlinkA}"

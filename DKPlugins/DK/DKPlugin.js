@@ -9,7 +9,7 @@
 // DKPlugin(MyClass)
 //   This will creat an instance of the class. MyClass must be available. 
 //
-const DKPlugin = function DKPlugin(){
+var DKPlugin = function DKPlugin(){
     //DKPlugin.dumpInfo.apply(this, arguments);
     var DKPlugin_callback = null;
     if (arguments && typeof (arguments[arguments.length - 1]) === "function")
@@ -37,8 +37,8 @@ const DKPlugin = function DKPlugin(){
 }
 
 DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback){
-    const url = args[0]
-    const color = "color:rgb(200,100,200)"
+    var url = args[0]
+    var color = "color:rgb(200,100,200)"
     console.log("%c *** DKPlugin.fromFile(" + url + ") ***", color);
     //update the current list of functions
     dk.getNewFuncs();
@@ -70,14 +70,14 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
                 klassName = DKPlugin.info[url]
 			}
             else {
-                const newfuncs = dk.getNewFuncs()
+                var newfuncs = dk.getNewFuncs()
                 klassName = newfuncs[newfuncs.length - 1]
             }
             if (!globalThis[klassName]){
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
             }
-            const klass = globalThis[klassName]
+            var klass = globalThis[klassName]
             Object.setPrototypeOf(klass, DKPlugin.prototype)
             //klass.prototype = DKPlugin.prototype;// = {};
             //Object.assign(klass.prototype, DKPlugin)
@@ -111,10 +111,10 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callback){
-    const color = "color:rgb(100,190,190)"
+    var color = "color:rgb(100,190,190)"
     console.log("%c *** DKPlugin.fromClass(" + args[0].name + ") ***", color);
-    const klass = args[0]
-    const klassName = klass.name
+    var klass = args[0]
+    var klassName = klass.name
     //console.log("%c DKPlugin.fromClass(): this = "+this, color);
     //console.log("%c DKPlugin.fromClass(): this.constructor.name = " + this.constructor.name, color);
     //console.log("%c DKPlugin.fromClass(): this.singleton = " + this.singleton, color);
@@ -145,9 +145,9 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     this[klassName] = {
         [klassName]: function(){
     */
-    const instance = new klass;
+    var instance = new klass;
     //dk.dump(instance)
-    const instance2 = Object.create(klass);
+    var instance2 = Object.create(klass);
     //dk.dump(instance2)
     //console.log("%c new "+instance.constructor.name, color)
     //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color)
@@ -162,7 +162,7 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
         console.error("instances of " + klassName + " must be constucted with the " + klassName + " class scope");
         return false;
     }
-    const result = DKPlugin.createInstance.call(instance, arguments);
+    var result = DKPlugin.createInstance.call(instance, arguments);
     if (result != instance)
         return error("instance !== result");
     !instance.supervised && DKPlugin.prototype.superviseFuncs(instance);
@@ -175,18 +175,18 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
 }
 
 DKPlugin.createInstance = function DKPlugin_createInstance(){
-    const color = "color:rgb(250,200,200);"
+    var color = "color:rgb(250,200,200);"
     console.log("%c *** DKPlugin.createInstance() ***", color);
     //console.log("%c DKPlugin.createInstance(): this = " + this.toString(), color);
     //console.log("%c DKPlugin.createInstance(): this.constructor.name = " + this.constructor.name, color);
     //console.log("%c DKPlugin.createInstance(): this.singleton = " + this.singleton, color);
-    const klassName = this.constructor.name;
-    const klass = window[klassName];
+    var klassName = this.constructor.name;
+    var klass = window[klassName];
     //console.log("%c DKPlugin.createInstance(): klass.singleton = " + klass.singleton, color)
     //console.log("%c DKPlugin.createInstance(): klass.prototype.singleton = " + klass.prototype.singleton, color)
     this.klassName = this.constructor.name;
     //Is this instance already running?
-    const i = DKPlugin.instances.indexOf(this);
+    var i = DKPlugin.instances.indexOf(this);
     if (i > -1){
         console.warn("Returning already existing instance with id: " + this.id + " @index " + i);
         DKPlugin.instances[i].ok = false;
@@ -214,7 +214,7 @@ DKPlugin.createInstance = function DKPlugin_createInstance(){
     
 	
 	//Add the new instance to the plugin stack
-    const newIndex = DKPlugin.instances.push(this) - 1;
+    var newIndex = DKPlugin.instances.push(this) - 1;
     //DKPlugin.instances[newIndex].ok = true;
     this.dkplugin = true;
     return DKPlugin.instances[newIndex];
@@ -238,7 +238,7 @@ DKPlugin.prototype.init = function DKPlugin_init(){
     }
     if (this.xinit && this.xinit !== this.init){
         console.group(this.constructor.name + ".xinit()");
-        const rval = this.xinit.apply(this, arguments);
+        var rval = this.xinit.apply(this, arguments);
         console.groupEnd();
         console.groupEnd();
         return rval;
@@ -253,8 +253,8 @@ DKPlugin.prototype.end = function DKPlugin_end(){
     //console.log("%c DKPlugin.prototype.end(): this = " + this.toString(), color);
     //console.log("%c DKPlugin.prototype.end(): this.constructor.name = " + this.constructor.name, color);
     //console.log("%c DKPlugin.prototype.end(): this.singleton = " + this.singleton, color);
-    const klassName = this.constructor.name;
-    const klass = window[klassName];
+    var klassName = this.constructor.name;
+    var klass = window[klassName];
     //console.log("%c DKPlugin.prototype.end(): klass.singleton = " + klass.singleton, color)
     //console.log("%c DKPlugin.prototype.end(): klass.prototype.singleton = " + klass.prototype.singleton, color)
     if (this.xend){
@@ -303,7 +303,7 @@ DKPlugin.prototype.create = function DKPlugin_create(klass){
         klass.prototype.create()
     } else if (this.xcreate){
         console.group(this.constructor.name + ".xcreate()");
-        const rval = this.xcreate.apply(this, arguments);
+        var rval = this.xcreate.apply(this, arguments);
         console.groupEnd();
         console.groupEnd();
         return rval;
@@ -356,7 +356,7 @@ DKPlugin.prototype.close = function DKPlugin_close(){
 
 DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance){
     console.log("DKPlugin.prototype.removeInstance(): " + instance.constructor.name);
-    const index = DKPlugin.instances.indexOf(instance);
+    var index = DKPlugin.instances.indexOf(instance);
     if (index <= -1){
         console.error("Unable to find instance in DKPlugin");
         return;

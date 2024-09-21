@@ -90,10 +90,10 @@ DKFrame.prototype.close = function DKFrame_close() {
 }
 
 DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
-    const instance = this;
+    var instance = this;
     if (typeof title !== "string")
         return error("title invalid\n");
-    const scale = 200;
+    var scale = 200;
     (width === "100%") && (width = window.innerWidth - scale);
     (height === "100%") && (height = window.innerHeight - 21 - scale);
     !width && (width = window.innerWidth / 2);
@@ -225,7 +225,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
         this.frame.close.style.visibility = "hidden";
         this.frame.resize.image.style.visibility = "hidden";
         this.frame.resize.corner.style.visibility = "hidden";
-        const instance = this;
+        var instance = this;
         this.frame.titlebar.onclick = function DKFrame_titlebar_onclick(event) {
             event.stopPropagation();
             instance.minimize(instance.frame.minimize);
@@ -246,13 +246,13 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
 
 DKFrame.prototype.reload = function DKFrame_reload() {
     console.log("DKFrame.prototype.reload()");
-    const url = this.dkplugin.prototype.url
+    var url = this.dkplugin.prototype.url
     this.dkplugin.close();
     this.frame.parentNode.removeChild(this.frame);
     DKPlugin.prototype.close.call(this);
 
     //open everything back up
-    const instance = this;
+    var instance = this;
     DKPlugin(url, function() {
         instance.dkplugin.create();
     });
@@ -290,7 +290,7 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    const instance = DKPlugin(DKFrame, title)
+    var instance = DKPlugin(DKFrame, title)
     //if (!instance.ok) {
     //    instance.frame && DKFrame.prototype.bringToFront(instance.frame);
     //    return false;

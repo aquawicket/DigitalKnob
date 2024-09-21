@@ -1,13 +1,12 @@
 @echo off
-
-:uninstallDKBash
-	::###### DKINIT ######
-	call "..\DKBatch\functions\DK.cmd"
+if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
+:uninstallDKBash
 	ftype DKBash=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"
 	
 	assoc .sh=
-	call dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
-	call dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
-goto:eof
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.sh"
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.sh
+%endfunction%

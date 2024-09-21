@@ -9,14 +9,14 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_assets plugin)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	if(NOT DKAPP)
 		return()
 	endif()	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_error("${plugin} plugin not found")
+		dk_fatal("${plugin} plugin not found")
 	endif()
 	dk_info("Importing ${plugin} assets...")
 	
@@ -54,6 +54,8 @@ function(dk_assets plugin)
 		PATTERN linux_x86_64 EXCLUDE
 		PATTERN android_arm32 EXCLUDE
 		PATTERN android_arm64 EXCLUDE
+		PATTERN android_x86 EXCLUDE
+		PATTERN android_x86_64 EXCLUDE
 		PATTERN raspberry_arm32 EXCLUDE
 		PATTERN raspberry_arm64 EXCLUDE
 		PATTERN emscripten EXCLUDE
@@ -68,8 +70,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_assets(DK)
 endfunction()

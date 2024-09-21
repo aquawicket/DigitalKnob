@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_getSubdirectories input_dir dir_list)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 
 
 	file(GLOB_RECURSE children LIST_DIRECTORIES true ${input_dir}/*) # This was changed
@@ -25,8 +25,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

@@ -1,12 +1,16 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
+
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libasound2-dev)
 	dk_return()
 endif()
 
+dk_depend(sudo)
+
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
-dk_command(sudo apt -y install libasound2-dev)
+dk_cd(/usr)
+dk_command(${SUDO} apt -y install libasound2-dev)
 
 ### Tiny Core Linux ###
 if(TINYCORE)

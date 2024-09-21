@@ -10,9 +10,12 @@
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.sh" file, or a full filepath to a .sh file.
 #
 dk_load() {
-	dk_debugFunc
-	#dk_echo "dk_load($*)"
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments" && return 1
+	dk_debugFunc 1
+	echo "dk_load($*)"
+	[ "$*" = "/usr/bin/bash" ] && return
+	#dk_call dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
+	#return
+
 	EXCLUDE_LIST="dk_whatever,dk_depend,dk_DontLoadMe"
 	[[ ${EXCLUDE_LIST} =~ "${1}" ]] && dk_warning "${1} is excluded" && return 0  #FIXME: need to better handle non-existant files
 	
@@ -103,7 +106,7 @@ dk_load() {
 
 		#dk_echo "if [ -f "${funcPath}" ]"
 		if [ -f "${funcPath}" ]; then
-			#dk_echo ". ${funcPath}"
+			dk_echo ". ${funcPath}"
 			. "${funcPath}"
 			return 0
 		fi
@@ -112,8 +115,9 @@ dk_load() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_load dk_debug
 }

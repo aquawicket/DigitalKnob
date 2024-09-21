@@ -1,28 +1,34 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
-
+[ -z ${PAUSE_ON_EXIT-} ] && PAUSE_ON_EXIT=0
 ##################################################################################
-# dk_exit(rtn_code)
+# dk_exit(exit_code)
 #
 #
 dk_exit() {
-	dk_debugFunc
-	[ ${#} -ne 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0 1
 	
-	# TODO: when open with icon, we can use exec to keep the window open
-	#[ $SHLVL -gt 1 ] && dk_echo "exec ${SHELL}" || dk_echo "exit ${*}"
-	#[ $SHLVL -eq 1 ] && read -rp 'Press enter to exit...' key
+	trap '' EXIT
+	[ -z "${exit_code-}" ] && export exit_code=0
+	[ $? -gt ${exit_code} ] && export exit_code=$?
+	[ ${1-} -gt ${exit_code} ] && export exit_code=$1
 	
-	[ ${1} -eq 0 ] && trap '' EXIT
-	builtin exit ${1}
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause
+	
+	exit ${exit_code}
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
-	# Only 'dk_exit 0' will turn the dk_onExit trap off
-	dk_exit 0
+	#Note: Only 'dk_exit 0' will turn the dk_onExit trap off
+	
+	#dk_call dk_exit
+	#dk_call dk_exit 0
+	#dk_call dk_exit 123
+	dk_call dk_exit 13
 }

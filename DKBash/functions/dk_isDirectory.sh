@@ -6,22 +6,22 @@
 #
 #
 dk_isDirectory () {
-	dk_debugFunc
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	if [[ -d ${1} ]]; then
 		#if defined ${2} (dk_set ${2} true)
-		return ${true}
+		return $(true)
 	fi
 	
 	#if defined "${2}" (dk_set ${2} true)
-	return ${false}
+	return $(false)
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_isDirectory "C:\Windows" && dk_info "'C:\Windows' is a directory" || dk_info "'C:\Windows' is NOT a directory"
 	dk_isDirectory "C:\NotADir" && dk_info "'C:\NotADir' is a directory" || dk_info "'C:\NotADir' is NOT a directory"

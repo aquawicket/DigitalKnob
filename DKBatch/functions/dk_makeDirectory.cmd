@@ -1,19 +1,19 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-call dk_source dk_replaceAll
 ::####################################################################
 ::# dk_makeDirectory(path)
 ::#
 ::#
 :dk_makeDirectory
+ setlocal
     call dk_debugFunc 1
 
-    call dk_replaceAll "%~1" "/" "\" _path_
-    if exist "%_path_%" call dk_warning "%_path_% already exists" && goto:eof
+    %dk_call% dk_replaceAll "%~1" "/" "\" _path_
+    if exist "%_path_%" %dk_call% dk_warning "%_path_% already exists" && %return%
 
     mkdir "%_path_%"
-goto:eof
+%endfunction%
 
 
 
@@ -23,7 +23,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
+    call dk_debugFunc 0
+ setlocal
 
-	call dk_makeDirectory "CreatedDirectory"
-goto:eof
+    %dk_call% dk_makeDirectory "CreatedDirectory"
+%endfunction%

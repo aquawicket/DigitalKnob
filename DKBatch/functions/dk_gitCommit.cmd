@@ -1,78 +1,72 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-call dk_source dk_debugFunc
-call dk_source dk_error
-call dk_source dk_gitDiffSummary
-call dk_source dk_validate
-call dk_source dk_validateBranch
-call dk_source dk_installGit
-call dk_source dk_commandToVariable
-call dk_source dk_commandToVariable
-call dk_source dk_echo
-call dk_source dk_confirm
 ::################################################################################
 ::# dk_gitCommit()
 ::#
 ::#
 :dk_gitCommit
-	call dk_debugFunc 0
-	
-	call dk_gitDiffSummary
-	
-    echo "Please enter some details about this commit, then press enter."
-    set /p message=">" 
-        
-	call dk_validate DKBRANCH_DIR "call dk_validateBranch"
-    cd %DKBRANCH_DIR%
+    call dk_debugFunc 0
+ setlocal
+ 
+	cd %DKBRANCH_DIR%
+ 
+	%dk_call% dk_gitDiffSummary
+	::%dk_call% dk_gitStatus
     
-	call dk_validate GIT_EXE "call dk_installGit"
-    call dk_commandToVariable "%GIT_EXE%" "config --global credential.helper" STORE
+    %dk_call% dk_echo
+    %dk_call% dk_echo "Please enter some details about this commit, then press enter."
+    %dk_call% dk_keyboardInput message
+        
+    %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
+    
+    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+    %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global credential.helper" STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" config --global credential.helper store
         echo "git credential.helper is now set to store"
     )
         
-    call dk_commandToVariable "%GIT_EXE%" "config --global user.email" USER_EMAIL
+    %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global user.email" USER_EMAIL
     if "%USER_EMAIL%"=="" (
-        call dk_echo
+        %dk_call% dk_echo
         echo please enter an email address
-        set /p input=">" 
+        %dk_call% dk_keyboardInput input
         "%GIT_EXE%" config --global user.email "%input%"
-        call dk_echo
+        %dk_call% dk_echo
         echo "git user.email %input% saved"
-        call dk_echo
+        %dk_call% dk_echo
     )
         
-    call dk_commandToVariable "%GIT_EXE%" "config --global user.email" USER_NAME
+    %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global user.email" USER_NAME
     if "%USER_NAME%"=="" (
-        call dk_echo
+        %dk_call% dk_echo
         echo please enter a username
-        set /p input=">" 
+        %dk_call% dk_keyboardInput input
         "%GIT_EXE%" config --global user.name "%input%"
-        call dk_echo
+        %dk_call% dk_echo
         echo "git user.name %input% saved"
-        call dk_echo
+        %dk_call% dk_echo
     )
         
     if "%message%"=="" set "message=git commit"
         
-    call dk_echo
+    %dk_call% dk_echo
     echo git commit "%message%"
 
-    call dk_confirm || goto:eof
+    %dk_call% dk_confirm || %return%
     
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push
-
-goto:eof
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_gitCommit
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_gitCommit
+%endfunction%

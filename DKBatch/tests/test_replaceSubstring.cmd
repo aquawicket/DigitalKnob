@@ -20,7 +20,7 @@
 	echo variableB = %variableB%
 
 	pause
-goto:eof
+%endfunction%
 
 
 
@@ -38,10 +38,10 @@ goto:eof
    
    ::set "output=%4"
    ::call set "output=%%input:%replace%=%with%%%"
-goto:eof
+%endfunction%
 
 :replace_in_variable <variable> <replace> <with>
    set "var_name=%~1"
    call set "__variable__=%%%var_name%%%"
    call set "%1=%%__variable__:%2=%3%%"
-goto:eof
+%endfunction%

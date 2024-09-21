@@ -5,16 +5,18 @@
 # dk_getAttributes(<path> <output>)
 #
 dk_getAttributes() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
-	
-	dk_todo
+	dk_debugFunc 2
+
+	dk_call dk_todo
 }
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 
-	dk_fileToArray
 
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
+	
+	dk_call dk_fileToArray
 }	

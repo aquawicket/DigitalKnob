@@ -1,20 +1,21 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_resetApps()
 ::#
 ::#
 :dk_resetApps
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+ setlocal
+ 
     echo Resetting Apps . . .
 
-	call dk_confirm || goto:eof
-	
+    %dk_call% dk_confirm || %return%
+    
     cd %DKAPPS_DIR%
     "%GIT_EXE%" clean -f -d
-goto:eof
+%endfunction%
 
 
 
@@ -22,7 +23,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_resetApps
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_resetApps
+%endfunction%

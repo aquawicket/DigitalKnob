@@ -11,11 +11,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_runDepends plugin)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_error("${plugin} plugin not found")
+		dk_fatal("${plugin} plugin not found")
 	endif()
 	dk_verbose("FOUND ${plugin} DKMAKE.cmake at ${plugin_path}")
 	
@@ -130,7 +130,7 @@ function(dk_runDepends plugin)
 #		endif()
 #	endif()
 	if("${ARGV}" IN_LIST dkdepend_list)
-		dk_notice("already in dkdepend_list")
+		#dk_verbose("already in dkdepend_list")
 		return()
 	endif()
 	
@@ -146,8 +146,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

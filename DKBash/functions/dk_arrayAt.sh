@@ -18,10 +18,8 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 #
 dk_arrayAt() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
-	#dk_validateArgs array int optional:rtn_var
+	dk_debugFunc 2 3
+	#dk_call dk_validateArgs array int optional:rtn_var
 	
 	#eval local arrayAt='("${'${1}'[${2}]}")'
 	eval local arrayAt='${'${1}'[${2}]}'
@@ -40,29 +38,29 @@ dk_arrayAt() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 	myArrayA[0]="a b c"
 	myArrayA[1]="1 2 3"
 	myArrayA[2]="d e f"
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
-	dk_printVar myArrayA
-	dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
-	dk_printVar arrayAtA
-	dk_echo "dk_arrayAt(MyArrayA 2) = ${arrayAtA}"
-	[ "${arrayAtA}" = "d e f" ] || dk_error "dk_arrayAt() failed"
-	[ "${arrayAtA}" = "d e f" ] && dk_info "dk_arrayAt() suceeded" 
+	dk_call dk_printVar myArrayA
+	dk_call dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
+	dk_call dk_printVar arrayAtA
+	dk_call dk_echo "dk_arrayAt(MyArrayA 2) = ${arrayAtA}"
+	[ "${arrayAtA}" = "d e f" ] || dk_call dk_error "dk_arrayAt() failed"
+	[ "${arrayAtA}" = "d e f" ] && dk_call dk_info "dk_arrayAt() suceeded" 
 	
 	myArrayB[0]="h i j"
 	myArrayB[1]="4 5 6"
 	myArrayB[2]="d e f"
 	myArrayB[3]="1 2 3"
 	myArrayB[4]="a b c"
-	dk_printVar myArrayB
-	arrayAtB=$(dk_arrayAt myArrayB 3)	# returned value using command substitution
-	dk_printVar arrayAtB
-	dk_echo "dk_arrayAt(MyArrayB 3) = ${arrayAtB}"
-	[ "${arrayAtB}" = "1 2 3" ] || dk_error "dk_arrayAt() failed"
-	[ "${arrayAtB}" = "1 2 3" ] && dk_info "dk_arrayAt() suceeded"
+	dk_call dk_printVar myArrayB
+	arrayAtB=$(dk_call dk_arrayAt myArrayB 3)	# returned value using command substitution
+	dk_call dk_printVar arrayAtB
+	dk_call dk_echo "dk_arrayAt(MyArrayB 3) = ${arrayAtB}"
+	[ "${arrayAtB}" = "1 2 3" ] || dk_call dk_error "dk_arrayAt() failed"
+	[ "${arrayAtB}" = "1 2 3" ] && dk_call dk_info "dk_arrayAt() suceeded"
 }

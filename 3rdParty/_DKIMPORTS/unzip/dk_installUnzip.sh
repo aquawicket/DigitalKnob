@@ -6,9 +6,9 @@
 #
 #
 dk_installUnzip() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
 
-	dk_install unzip
+
+	dk_installPackage unzip
 	#dk_cmakeEval "include('$DKIMPORTS_DIR/gcc/DKMAKE.cmake')"
 }

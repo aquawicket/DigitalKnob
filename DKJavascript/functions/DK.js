@@ -1,27 +1,78 @@
-if(typeof DK !== 'function'){ 
-	console.log("DK.js")
+
+var HOST = "unknown"
+
+if(typeof ActiveXObject === "function"){
+	if(typeof WScript === "object"){
+		HOST = "jscript";
+	}
+	else{
+		HOST = "hta"
+	}
+} else {
+	HOST = "browser"
+}
+
+
+if(typeof ActiveXObject === "function"){
+	var XMLHttpRequest = function(){ return new ActiveXObject("MSXML2.XMLHTTP.6.0"); }
+}
+if(typeof WScript === "object"){
+	var DKSCRIPT_PATH = WScript.ScriptFullName;
+	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
+}else{
+	var DKSCRIPT_DIR = ".."
+}
+var DKBRANCH_DIR = DKSCRIPT_DIR;
+var DKJAVASCRIPT_DIR = DKBRANCH_DIR+"/DKJavascript";
+var DKJAVASCRIPT_FUNCTIONS_DIR = DKJAVASCRIPT_DIR+"/functions";
+var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
+
+dk_source = function(url){
+	var xmlHttpRequest = new XMLHttpRequest;
+	xmlHttpRequest.open("GET", url, false);
+	xmlHttpRequest.send();
+	(1, eval)(xmlHttpRequest.responseText); 
+}
+
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/console.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
+dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
+
+
+
+/*
+if(typeof WScript === "object"){
+	console.log("Using Windows Scriting Host")
+	var WshShell = function(){ return new ActiveXObject("WScript.Shell"); }
+	var Document = function(){ return new ActiveXObject("Msxml2.DOMDocument.6.0"); 
+		objXMLDoc.async = false;
+		objXMLDoc.setProperty("ProhibitDTD", false);
+		objXMLDoc.validateOnParse = false;
+		return objXMLDoc;
+	}
 	
-	window.DK = function DK(){
-		console.log("DK()")
-
-		dk_load("dk_debugFunc", function(){
-		dk_load("dk_set", function(){
-		dk_load("dk_unset", function(){
-		dk_load("dk_color", function(){
-		dk_load("dk_echo", function(){
-		dk_load("dk_echo", function(){
-			console.log("done loading dk functions");
-			DKTEST()
-		});
-		});
-		});	
-		});	
-		});
-		});
-	};
-
-	var script = document.createElement('script');
-	script.src = "dk_load.js";
-	script.onreadystatechange = script.onload = DK;
-	document.head.appendChild(script);
-};
+	dk_download = function(url, destination){
+		var filesystem = new FileSystem;
+		if (filesystem.FileExists(destination)){ return; }
+		console.log("downloading "+url+"  to   "+destination+"\n");
+		var xmlHttpRequest = new XMLHttpRequest;
+		xmlHttpRequest.Open('GET', url, false);
+		xmlHttpRequest.Send();
+		if (xmlHttpRequest.Status == 200) {
+			var filestream = new FileStream;
+			filestream.Open();
+			filestream.Type = 1; // adTypeBinary
+			filestream.Write(xmlHttpRequest.ResponseBody);
+			filestream.Position = 0;
+			if (filesystem.FileExists(destination)) { filesystem.DeleteFile(destination); }
+			filestream.SaveToFile(destination, 2); // adSaveCreateOverWrite
+			filestream.Close();
+		}
+	}
+}
+*/

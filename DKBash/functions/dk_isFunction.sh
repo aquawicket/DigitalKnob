@@ -12,8 +12,7 @@
 #	https://stackoverflow.com/a/85932/688352
 #
 dk_isFunction() {
-	dk_debugFunc 
-	[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 1
 	
 	 $(declare -F "${1}" > /dev/null)	
 }
@@ -24,8 +23,9 @@ test_function() {
 	dk_info "..."
 }
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
+	dk_debugFunc 0
 	
 	dk_echo "testing dk_isFunction(test_function)"
 	dk_isFunction "test_function" && dk_echo "true" || dk_echo "false"

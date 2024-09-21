@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build
@@ -22,36 +23,41 @@ dk_import(https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.zip)
 
 set(BZIP2_USE_CMAKE 1)
 if(BZIP2_USE_CMAKE)
-	dk_include(${BZIP2}/													BZIP2_INCLUDE_DIR)
+	dk_include(${BZIP2_DIR}/									BZIP2_INCLUDE_DIR)
 
-	dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2_static.a			BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2_static.a			BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2_static.a			BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2_static.a		BZIP2_LIBRARY_RELEASE)
 
 
 	### 3RDPARTY LINK ###
 	dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	
 	### CONFIGURE ###
-	dk_configure(${BZIP2} -DENABLE_SHARED_LIB=OFF -DPython3_EXECUTABLE=${PYTHON3_EXE} -DENABLE_STATIC_LIB=ON)
+	if(LINUX_HOST)
+		dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON)
+	else()
+		dk_configure(${BZIP2_DIR} -DENABLE_SHARED_LIB=OFF -DENABLE_STATIC_LIB=ON ${PYTHON3_CMAKE}) #-DPython3_EXECUTABLE=${PYTHON3_EXE})
+	endif()
 	
 	### COMPILE ###
-	dk_build(${BZIP2} ${PYTHON3_CMAKE})
+	#dk_build(${BZIP2} ${PYTHON3_CMAKE})
+	dk_build(${BZIP2_DIR})
 	
 else()
-	if(NOT EXISTS ${BZIP2}/copy)
-		dk_copy(${BZIP2} ${BZIP2}/copy OVERWRITE)
+	if(NOT EXISTS ${BZIP2_DIR}/copy)
+		dk_copy(${BZIP2_DIR} ${BZIP2_DIR}/copy OVERWRITE)
 	endif()
 
 	### LINK ###
-	dk_include(${BZIP2}/${OS}															BZIP2_INCLUDE_DIR)
+	dk_include(${BZIP2_TRIPLE_DIR}															BZIP2_INCLUDE_DIR)
 	if(MSVC)
-		WIN_X86_dk_libDebug		(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
-		WIN_X86_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
-		WIN_X86_64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
-		WIN_X86_64_dk_libRelease(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+		WIN_X86_dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2-static.lib						BZIP2_LIBRARY_DEBUG)
+		WIN_X86_dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2-static.lib						BZIP2_LIBRARY_RELEASE)
+		WIN_X86_64_dk_libDebug	(${BZIP2_TRIPLE_DIR}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+		WIN_X86_64_dk_libRelease(${BZIP2_TRIPLE_DIR}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 	else()
-		dk_libDebug				(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_DEBUG)
-		dk_libRelease			(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_RELEASE)
+		dk_libDebug				(${BZIP2_TRIPLE_DIR}/libbz2.a								BZIP2_LIBRARY_DEBUG)
+		dk_libRelease			(${BZIP2_TRIPLE_DIR}/libbz2.a								BZIP2_LIBRARY_RELEASE)
 	endif()
 
 
@@ -63,26 +69,26 @@ else()
 	if(MSVC)
 		if(WIN_X86)
 			dk_define	(BZ_NO_STDIO)
-			dk_copy		(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
-			dk_setPath	(${BZIP2}/${OS})
-			dk_build	(${BZIP2} libbz2-static)
+			dk_copy		(${BZIP2_DIR}/build-VS2019 ${BZIP2_TRIPLE_DIR})
+			dk_cd		(${BZIP2_TRIPLE_DIR})
+			dk_build	(${BZIP2_DIR} libbz2-static)
 		endif()
 
 		if(WIN_X86_64)
-			dk_copy		(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc) #copy project files that came with bzip
-			dk_copy		(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc)
-			dk_copy		(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h)
-			dk_copy		(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc)
-			dk_copy		(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
-			dk_setPath	(${BZIP2}/${OS})
-			dk_build	(${BZIP2} libbz2-static x64)
+			dk_copy		(${BZIP2_DIR}/win32/bzip2.rc ${BZIP2_TRIPLE_DIR}/bzip2.rc) #copy project files that came with bzip
+			dk_copy		(${BZIP2_DIR}/win32/bzip2recover.rc ${BZIP2_TRIPLE_DIR}/bzip2recover.rc)
+			dk_copy		(${BZIP2_DIR}/win32/bzip2_version.h ${BZIP2_TRIPLE_DIR}/bzip2_version.h)
+			dk_copy		(${BZIP2_DIR}/win32/libbz2.rc ${BZIP2_TRIPLE_DIR}/libbz2.rc)
+			dk_copy		(${BZIP2_DIR}/build-VS2019 ${BZIP2_TRIPLE_DIR})
+			dk_cd		(${BZIP2_TRIPLE_DIR})
+			dk_build	(${BZIP2_DIR} libbz2-static x64)
 		endif()
 	else()
-		if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-			dk_copy		(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
+		if(NOT EXISTS ${BZIP2}/${triple}/bzip2.c)
+			dk_copy		(${BZIP2_DIR}/copy ${BZIP2_TRIPLE_DIR} OVERWRITE)
 			dk_sleep(2) # wait 2 seconds for files to copy over
 		endif()
-		dk_setPath		(${BZIP2}/${OS})
-		dk_build		(${BZIP2} libbz2.a)
+		dk_cd			(${BZIP2_TRIPLE_DIR})
+		dk_build		(${BZIP2_DIR} libbz2.a)
 	endif()
 endif()

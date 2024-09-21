@@ -9,17 +9,17 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@app_name	- TODO
 #
 function(dk_updateAndroidName app_name)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_toLower(${app_name} app_name)
 	if(ANDROID)
 		# update all files and folders recursivley
-		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DK_PROJECT_DIR}/${OS}/" "${DK_PROJECT_DIR}/${OS}/*")
-		dk_verbose("Getting a list of files in ${DK_PROJECT_DIR}/${OS}")
+		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DK_PROJECT_DIR}/${triple}/" "${DK_PROJECT_DIR}/${triple}/*")
+		dk_verbose("Getting a list of files in ${DK_PROJECT_DIR}/${triple}")
 		list(REVERSE allfiles)
 		foreach(each_file ${allfiles})
 			dk_verbose(each_file)
-			set(filepath "${DK_PROJECT_DIR}/${OS}/${each_file}")
+			set(filepath "${DK_PROJECT_DIR}/${triple}/${each_file}")
 			if(NOT IS_DIRECTORY ${filepath})
 				string(FIND "${each_file}" "opendb" indexD)
 				if(${indexD} GREATER -1)
@@ -51,7 +51,7 @@ function(dk_updateAndroidName app_name)
 				set(new_name ${each_file})
 				dk_replaceAll("${new_name}" "dkapp" "${app_name}" new_name)
 				dk_info("Renaming ${each_file} to ${new_name}")
-				dk_rename(${DK_PROJECT_DIR}/${OS}/${each_file} ${DK_PROJECT_DIR}/${OS}/${new_name} OVERWRITE)
+				dk_rename(${DK_PROJECT_DIR}/${triple}/${each_file} ${DK_PROJECT_DIR}/${triple}/${new_name} OVERWRITE)
 			endif()
 		endforeach()
 	endif()
@@ -62,8 +62,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

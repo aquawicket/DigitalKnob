@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
 ::# dk_installEmsdk()
@@ -16,7 +16,7 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
     call dk_printVar EMSDK_TOOLCHAIN_FILE
     call dk_printVar EMSDK_C_COMPILER
     call dk_printVar EMSDK_CXX_COMPILER
-goto:eof
+%endfunction%
 
 
 
@@ -28,4 +28,4 @@ goto:eof
 	call dk_debugFunc 0
 	
 	call dk_installEmsdk
-goto:eof
+%endfunction%

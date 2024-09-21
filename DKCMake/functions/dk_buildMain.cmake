@@ -6,9 +6,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 #
 function(dk_buildMain)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	if(NOT ${ARGC} EQUAL 0)
-		dk_error("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
 
 	# log to stdout and file
@@ -29,7 +29,7 @@ function(dk_buildMain)
 #	#dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_getHostTriple()
+	dk_HOST_TRIPLE()
 	
 	dk_getDKPaths()
 
@@ -58,7 +58,7 @@ function(dk_buildMain)
 			dk_pickApp()
 			continue()
 		endif()
-		if(NOT DEFINED TARGET_OS)
+		if(NOT DEFINED target_triple)
 			dk_pickOs()
 			continue()
 		endif()
@@ -73,7 +73,7 @@ function(dk_buildMain)
 		
 		dk_unset(UPDATE)
 		dk_unset(APP)
-		dk_unset(TARGET_OS)
+		dk_unset(target_triple)
 		dk_unset(TYPE)
 	endwhile()
 endfunction()
@@ -84,7 +84,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_buildMain()
 endfunction()

@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 ## https://github.com/icculus/smpeg.git
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
@@ -12,20 +13,20 @@ dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATC
 
 
 ### PATCH ###
-dk_applyPatch(${SMPEG2} ${DKIMPORTS_DIR}/smpeg2/gcc6.patch.txt)
+dk_gitApplyPatch(${SMPEG2} ${DKIMPORTS_DIR}/smpeg2/gcc6.patch)
 
 
 ### LINK ###
 dk_include				(${SMPEG2})
 if(MSVC)
-	WIN_dk_libDebug		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
-	WIN_dk_libRelease	(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
+	WIN_dk_libDebug		(${SMPEG2}/${triple}/lib/${DEBUG_DIR}/libsmpeg2.lib)
+	WIN_dk_libRelease	(${SMPEG2}/${triple}/lib/${RELEASE_DIR}/libsmpeg2.lib)
 elseif(APPLE)
-	APPLE_dk_libDebug	(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
-	APPLE_dk_libRelease	(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
+	APPLE_dk_libDebug	(${SMPEG2}/${triple}/lib/${DEBUG_DIR}/libsmpeg2.a)
+	APPLE_dk_libRelease	(${SMPEG2}/${triple}/lib/${RELEASE_DIR}/libsmpeg2.a)
 else()
-	dk_libDebug			(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-	dk_libRelease		(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
+	dk_libDebug			(${SMPEG2}/${triple}/${DEBUG_DIR}/lib/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2}/${triple}/${RELEASE_DIR}/lib/libsmpeg2.a)
 endif()
 
 

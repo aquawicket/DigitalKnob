@@ -9,8 +9,11 @@ if(!$dk_load){ $dk_load = 1 } else{ return }
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.ps1" file, or a full filepath to a .ps1 file.
 #
 function Global:dk_load ($var) {
-	dk_debugFunc	
-	if($(__ARGC__) -ne 1){ echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_call dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions."
+	return
+	
+	dk_debugFunc 1	
+
 	if("${var}" -eq "dk_depend"){ return }  #FIXME: need to better handle non-existant files
 
 	${funcName} = ""
@@ -93,7 +96,8 @@ function Global:dk_load ($var) {
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0
 
 }

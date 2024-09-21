@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 #
 function(dk_printSettings)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_buildLog("#############  DigitalKnob  ############")
 	dk_buildLog(DKBRANCH)
@@ -20,7 +20,7 @@ function(dk_printSettings)
 	dk_buildLog(DKIMPORTS_DIR)
 	dk_buildLog(DKAPPS_DIR)
 	dk_buildLog(DKPLUGINS_DIR)
-	dk_buildLog(BUILD_DIR)
+	dk_buildLog(CONFIG_PATH)
 	
 	dk_buildLog("#################  CMAKE VARIABLES  ################")
 	#dk_getCmakeCommandLine(CMAKE_COMMAND_LINE)
@@ -55,6 +55,7 @@ function(dk_printSettings)
 	dk_buildLog(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
 	dk_buildLog(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 	dk_buildLog(CMAKE_GENERATOR)
+	dk_buildLog(CMAKE_GENERATOR_PLATFORM)
 	dk_buildLog(CMAKE_MAKE_PROGRAM)
 	dk_buildLog(CMAKE_TOOLCHAIN_FILE)
 	dk_buildLog(CMAKE_C_COMPILER)
@@ -103,6 +104,8 @@ function(dk_printSettings)
 	dk_buildLog(ANDROID)
 	dk_buildLog(ANDROID_ARM32)
 	dk_buildLog(ANDROID_ARM64)
+	dk_buildLog(ANDROID_X86)
+	dk_buildLog(ANDROID_X86_64)
 	dk_buildLog(RASPBERRY)
 	dk_buildLog(RASPBERRY_ARM32)
 	dk_buildLog(RASPBERRY_ARM64)
@@ -114,8 +117,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

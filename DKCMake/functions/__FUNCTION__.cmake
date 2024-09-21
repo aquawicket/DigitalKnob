@@ -22,13 +22,18 @@ macro(__FUNCTION__ rtn_var)
 		endif()
 		list(GET FUNCNAME ${index} ${rtn_var})
 	endif()
+	
+# DEBUG	
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	#dk_debugFunc(${ARGV})
+	
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
 	dk_echo("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
 	__FUNCTION__(_func_)
@@ -45,5 +50,4 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 
 	list(LENGTH FUNCNAME FUNCNAME_LENGTH)
 	dk_echo("FUNCNAME:${FUNCNAME_LENGTH} = ${FUNCNAME}")
-
 endfunction()

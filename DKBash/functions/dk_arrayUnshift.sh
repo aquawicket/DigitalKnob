@@ -18,9 +18,7 @@
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
 #
 dk_arrayUnshift() {
-	dk_debugFunc
-	[ ${#} -lt 2 ] && dk_error "${FUNCNAME}(${#}): not enough arguments"
-	#[ ${#} -gt 3 ] && dk_error "${FUNCNAME}(${#}): too many arguments"
+	dk_debugFunc 2 99
 	#dk_validateArgs array element optional:rtn_var
 	
 	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
@@ -38,47 +36,47 @@ dk_arrayUnshift() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
-	dk_debugFunc
+	dk_debugFunc 0
 	
-	dk_arrayUnshift myArrayA "a b c" #new_lengthA
-	dk_printVar myArrayA
-	#dk_printVar new_lengthA
+	dk_call dk_arrayUnshift myArrayA "a b c" #new_lengthA
+	dk_call dk_printVar myArrayA
+	#dk_call dk_printVar new_lengthA
 	
-	dk_arrayUnshift myArrayA "1 2 3" #new_lengthA
-	dk_printVar myArrayA
-	#dk_printVar new_lengthA
+	dk_call dk_arrayUnshift myArrayA "1 2 3" #new_lengthA
+	dk_call dk_printVar myArrayA
+	#dk_call dk_printVar new_lengthA
 	
-	dk_arrayUnshift myArrayA "d e f" #new_lengthA
-	dk_printVar myArrayA
-	#dk_printVar new_lengthA
+	dk_call dk_arrayUnshift myArrayA "d e f" #new_lengthA
+	dk_call dk_printVar myArrayA
+	#dk_call dk_printVar new_lengthA
 	
-	dk_arrayUnshift myArrayA "4 5 6" #new_lengthA
-	dk_printVar myArrayA
-	#dk_printVar new_lengthA
+	dk_call dk_arrayUnshift myArrayA "4 5 6" #new_lengthA
+	dk_call dk_printVar myArrayA
+	#dk_call dk_printVar new_lengthA
 	
-	dk_arrayUnshift myArrayA "h i j" #new_lengthA
-	dk_printVar myArrayA
-	#dk_printVar new_lengthA
+	dk_call dk_arrayUnshift myArrayA "h i j" #new_lengthA
+	dk_call dk_printVar myArrayA
+	#dk_call dk_printVar new_lengthA
 	
 	
 	# FIXME: command substitution cannot alter parent variables
-	new_lengthB=$(dk_arrayUnshift myArrayB "h i j")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "h i j")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayUnshift myArrayB "4 5 6")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "4 5 6")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayUnshift myArrayB "d e f")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "d e f")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayUnshift myArrayB "1 2 3")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "1 2 3")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 	
-	new_lengthB=$(dk_arrayUnshift myArrayB "a b c")
-	dk_printVar myArrayB
-	dk_printVar new_lengthB
+	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "a b c")
+	dk_call dk_printVar myArrayB
+	dk_call dk_printVar new_lengthB
 }

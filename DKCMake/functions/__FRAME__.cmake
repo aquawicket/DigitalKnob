@@ -15,6 +15,8 @@ endif()
 #
 #
 macro(__FRAME__ rtn_var)
+	#dk_debugFunc(${ARGV})
+	
 	if(NOT DEFINED CMAKE_SOURCE)
 		set(${rtn_var} "CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}")
 	else()
@@ -36,26 +38,16 @@ macro(__FRAME__ rtn_var)
 		#list(GET CALLER ${index} _caller_)
 		set(${rtn_var} "${_file_}:${_line_}    ${_function_}()")
 	endif()
+	
+# DEBUG
+#	dk_printVar(rtn_var)
 endmacro()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	#dk_debugFunc
-	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
-	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
-	__FRAME__(_frame_)
-	dk_info("\${_frame_} = ${_frame_}")
-	
-	__FRAME__(_frame0_ 0)
-	dk_info("\${_frame0_} = ${_frame0_}")
-
-	__FRAME__(_frame1_ 1)
-	dk_info("\${_frame1_} = ${_frame1_}")
-	
-	__FRAME__(_frame2_ 2)
-	dk_info("\${_frame2_} = ${_frame2_}")
-	
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	#dk_debugFunc(${ARGV})
 	
 	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
 	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
@@ -70,5 +62,19 @@ function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 	
 	__FRAME__(_frame2_ 2)
 	dk_info("\${_frame2_} = ${_frame2_}")
+	
+	
+	list(LENGTH CMAKE_SOURCE CMAKE_SOURCE_LENGTH)
+	dk_echo("CMAKE_SOURCE:${CMAKE_SOURCE_LENGTH} = ${CMAKE_SOURCE}")
+	__FRAME__(_frame_)
+	dk_info("\${_frame_} = ${_frame_}")
+	
+	__FRAME__(_frame0_ 0)
+	dk_info("\${_frame0_} = ${_frame0_}")
 
+	__FRAME__(_frame1_ 1)
+	dk_info("\${_frame1_} = ${_frame1_}")
+	
+	__FRAME__(_frame2_ 2)
+	dk_info("\${_frame2_} = ${_frame2_}")
 endfunction()

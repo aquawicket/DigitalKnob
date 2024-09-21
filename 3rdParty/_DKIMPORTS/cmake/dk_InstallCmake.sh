@@ -16,8 +16,8 @@ CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/c
 #
 #
 dk_installCmake() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_validate HOST_OS "dk_getHostTriple"
 	######################################################################################################
@@ -59,7 +59,7 @@ dk_installCmake() {
 		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
-		[ dk_pathExists "${CMAKE_EXE}" ] && return ${true}
+		[ dk_pathExists "${CMAKE_EXE}" ] && return $(true)
 
 		dk_echo
 		dk_info "Installing cmake . . ."
@@ -78,7 +78,7 @@ dk_installCmake() {
 		dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
-			dk_install ${CMAKE_IMPORT}
+			dk_installPackage ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
 		dk_realpath ${CMAKE_EXE} CMAKE_EXE

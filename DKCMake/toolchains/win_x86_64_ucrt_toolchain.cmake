@@ -16,7 +16,7 @@ if(NOT DKCMAKE_DIR)
 endif()
 
 dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-set(UCRT64_DIR "${MSYS2}/ucrt64")
+set(UCRT64_DIR "${MSYS2_DIR}/ucrt64")
 set(CMAKE_MAKE_PROGRAM ${UCRT64_DIR}/bin/mingw32-make.exe CACHE FILEPATH "")
 set(CMAKE_C_COMPILER ${UCRT64_DIR}/bin/gcc.exe)
 set(CMAKE_CXX_COMPILER ${UCRT64_DIR}/bin/g++.exe)

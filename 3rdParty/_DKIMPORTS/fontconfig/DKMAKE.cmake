@@ -1,10 +1,12 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://gitlab.freedesktop.org/fontconfig/fontconfig.git
 # https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/main/INSTALL
 
 
 if(APPLE)
-	dk_command(sudo port install fontconfig)
+	dk_depend(sudo)
+	dk_command(${SUDO} port install fontconfig)
 	return()
 endif()
 
@@ -16,24 +18,24 @@ dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fo
 
 ### LINK ###
 dk_include		(${FONTCONFIG}/fontconfig)
-dk_libDebug		(${FONTCONFIG}/${OS}/${DEBUG_DIR}/lib/.libs/libfontconfig.a)
-dk_libRelease	(${FONTCONFIG}/${OS}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
+dk_libDebug		(${FONTCONFIG}/${triple}/${DEBUG_DIR}/lib/.libs/libfontconfig.a)
+dk_libRelease	(${FONTCONFIG}/${triple}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
 
 
 ### 3RDPARTY LINK ###
-dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_LIBRARY=${FONTCONFIG}/${OS}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
+dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_LIBRARY=${FONTCONFIG}/${triple}/${RELEASE_DIR}/lib/.libs/libfontconfig.a)
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_setPath		(${FONTCONFIG})
+DEBUG_dk_cd		(${FONTCONFIG})
 DEBUG_dk_queueCommand	(autoupdate)
 DEBUG_dk_queueCommand	(autoconf)
 
-#DEBUG_dk_setPath		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
+#DEBUG_dk_cd		(${FONTCONFIG}/${triple}/${DEBUG_DIR})
 #DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_setPath		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
+#RELEASE_dk_cd		(${FONTCONFIG}/${triple}/${RELEASE_DIR})
 #RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-dk_configure	(${FONTCONFIG})
+dk_configure	(${FONTCONFIG_DIR})
 
 
-dk_build		(${FONTCONFIG})
+dk_build		(${FONTCONFIG_DIR})

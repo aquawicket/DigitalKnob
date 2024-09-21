@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
 
@@ -16,7 +17,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 # freetype also needed a folder moved up one heirarchy level
 # 
-# -DSDL2_DIR=${SDL}/${OS}/Debug
+# -DSDL2_DIR=${SDL}/${triple}/Debug
 ######################################################################################################################## 
  
  
@@ -78,28 +79,20 @@ set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)
 
+
 ### IMPORT ###
 #dk_import(https://github.com/mikke89/RmlUi.git)
-dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip)
+dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH)
 
 
-# Version fix #
-#dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
-
-# ANDROID FIX
-if(ANDROID)
-#	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
-endif()
+### PATCH ###
+dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
 
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
-#ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
-#ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
-
-dk_include		(${RMLUI}/Include	RML_INCLUDE_DIR)
-dk_include		(${RMLUI}/Source 	RML_INCLUDE_DIR2)
-
+dk_include		(${RMLUI_DIR}/Include	RML_INCLUDE_DIR)
+dk_include		(${RMLUI_DIR}/Source 	RML_INCLUDE_DIR2)
 dk_addTarget	(rmlui core)
 dk_addTarget	(rmlui debugger)
 dk_addTarget	(rmlui shell)
@@ -108,11 +101,11 @@ dk_addTarget	(rmlui invaders)
 
 if(rmlui_core OR rmlui_all)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Core/librmlui.lib)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Core/librmlui.lib)
+		WIN_dk_libDebug		(${RMLUI_CONFIG_DIR}/Source/Core/${DEBUG_DIR}/rmlui.lib)
+		WIN_dk_libRelease	(${RMLUI_CONFIG_DIR}/Source/Core/${RELEASE_DIR}/rmlui.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Core/librmlui.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Core/librmlui.a)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/Source/Core/librmlui.a)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/Source/Core/librmlui.a)
 	endif()
 endif()
 
@@ -120,40 +113,41 @@ if(rmlui_debugger OR rmlui_all)
 	dk_define				(HAVE_rmlui_RmlDebugger)
 	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Debugger/librmlui_debugger.lib)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Debugger/librmlui_debugger.lib)
+		WIN_dk_libDebug		(${RMLUI_CONFIG_DIR}/Source/Debugger/${DEBUG_DIR}/rmlui_debugger.lib)
+		WIN_dk_libRelease	(${RMLUI_CONFIG_DIR}/Source/Debugger/${RELEASE_DIR}/rmlui_debugger.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Source/Debugger/librmlui_debugger.a)
-        dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Source/Debugger/librmlui_debugger.a)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/Source/Debugger/librmlui_debugger.a)
+        dk_libRelease		(${RMLUI_RELEASE_DIR}/Source/Debugger/librmlui_debugger.a)
 	endif()
 endif()
 
 if(rmlui_shell OR rmlui_all)
 	dk_define				(HAVE_rmlui_shell)
 	if(MSVC)
-		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/Samples/shell/librmlui_shell.lib)
-		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/Samples/shell/librmlui_shell.lib)
+		WIN_dk_libDebug		(${RMLUI_DEBUG_DIR}/Samples/shell/librmlui_shell.lib)
+		WIN_dk_libRelease	(${RMLUI_RELEASE_DIR}/Samples/shell/librmlui_shell.lib)
 	else()
-		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/Samples/shell/librmlui_shell.a)
-		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/Samples/shell/librmlui_shell.a)
+		dk_libDebug			(${RMLUI_DEBUG_DIR}/Samples/shell/librmlui_shell.a)
+		dk_libRelease		(${RMLUI_RELEASE_DIR}/Samples/shell/librmlui_shell.a)
 	endif()
 endif()
 
 if(rmlui_treeview OR rmlui_all)
 	dk_define				(HAVE_rmlui_treeview)
-	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_tree_view.exe)
-	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_tree_view.exe)
-	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_tree_view)
-	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_tree_view)
+	WIN_dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view.exe)
+	WIN_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view.exe)
+	UNIX_dk_libDebug		(${RMLUI_DEBUG_DIR}/rmlui_sample_tree_view)
+	UNIX_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_tree_view)
 endif()
 
 if(rmlui_invaders OR rmlui_all)
 	dk_define				(HAVE_rmlui_invaders)
-	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_invaders.exe)
-	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_invaders.exe)
-	UNIX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/rmlui_sample_invaders)
-	UNIX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/rmlui_sample_invaders)
+	WIN_dk_libDebug			(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders.exe)
+	WIN_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders.exe)
+	UNIX_dk_libDebug		(${RMLUI_DEBUG_DIR}/rmlui_sample_invaders)
+	UNIX_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders)
 endif()
+
 
 ### GENERATE ###								
 dk_configure(

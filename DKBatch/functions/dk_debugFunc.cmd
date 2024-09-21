@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::BATCH_SOURCE
 ::BATCH_ARGC[]
@@ -21,7 +21,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   This function is placed at the entry point of every function in the library. It provides debugging information for the parent function at execution time when enabled.
 ::#   This function also implements a managed callstack for languages that do not have a implemented debugging callstack. Various other debugging tasks can be preformed 
 ::#   such as argument count and type checking, parameter variable value watching, function execution timing and trigger breakpoints before and after function calls.
-::#	  Any functions named in the breakpoint list will pause execution when execution encounters the function call. Breakpoints may pause execution at the function entry point,
+::#   Any functions named in the breakpoint list will pause execution when execution encounters the function call. Breakpoints may pause execution at the function entry point,
 ::#   before the function is entered into the callstack, after entry and the trace is printed, or at the start of the next call, before the next calls callstack is entered.
 ::#
 ::#   <TIMESTAMP> <ELAPSED_TIME>
@@ -48,96 +48,98 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 ::#   <TIMESTAMP>
 ::#   
 :dk_debugFunc
-	if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments"
-	
-	::###<TIMESTAMP> <ELAPSED_TIME>###
-	::call dk_timer timestamp
-	::echo timestamp = %timestamp%
-	
-	::1: ###### PREVIOUS FUNCTION EXIT BREAKPOINT / CURRENT FUNCTION PRE-INIT BREAKPOINT ######
-	::     TODO
-	
-	
-	::2: ###### CREATE CALLSTACK ENTRY ######
-	call dk_callStack
-	:dk_callStackReturn
-	
-	set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
-	set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
-	::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
-	set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
+    ::if "%~3" neq "" call dk_error "dk_debugFunc: too many arguments (%*)"
+ ::setlocal
+
+    ::###<TIMESTAMP> <ELAPSED_TIME>###
+    ::call dk_timer timestamp
+    ::echo timestamp = %timestamp%
+
+    ::1: ###### PREVIOUS FUNCTION EXIT BREAKPOINT / CURRENT FUNCTION PRE-INIT BREAKPOINT ######
+    ::     TODO
+
+    ::2: ###### CREATE CALLSTACK ENTRY ######
+    call dk_callStack
+    :dk_callStackReturn
+    
+    set "DKSTACK[%DKSTACK_marker%].__TIME__=%__TIME__%"
+    set "DKSTACK[%DKSTACK_marker%].__FILE__=%__FILE__%"
+    ::set "DKSTACK[%DKSTACK_marker%].__LINE__=%__LINE__%"
+    set "DKSTACK[%DKSTACK_marker%].__FUNCTION__=%__FUNCTION__%"
+    set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
 	set "DKSTACK[%DKSTACK_marker%].__ARGS__=%__ARGS__%"
-	set "DKSTACK[%DKSTACK_marker%].__ARGC__=%__ARGC__%"
-	set /a DKSTACK_length+=1
-	set /a DKSTACK_marker=%DKSTACK_length%	
-	::echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
+	set "DKSTACK[%DKSTACK_marker%].__ARGV__=%__ARGV__%"
+    set /a DKSTACK_length+=1
+    set /a DKSTACK_marker=%DKSTACK_length%  
+    ::echo %__TIME__%:%__FILE__%: %__FUNCTION__%:%__ARGC__%(%__ARGS__%)
 
 
-	::3: ###### VALIDATE ARGUMENTS ######
-	if "%~1" == "" call dk_error "%__FUNCTION__%(%__ARGS__%): dk_debugFunc ArgsMin ArgsMax is not set."
-	if not "%~1" == "" if %__ARGC__% lss %~1 call dk_error "%__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"
-	if "%~2" == "" if %__ARGC__% gtr %~1 call dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~1, got %__ARGC__%"
-	if not "%~2" == "" if %__ARGC__% gtr %~2 call dk_error "%__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~2, got %__ARGC__%"
+    ::3: ###### VALIDATE ARGUMENTS ######
+    if "%~1" == ""                                                echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): dk_debugFunc ArgsMin ArgsMax is not set."%clr%               && %dk_call% dk_exit 13
+    if not "%~1" == "" if defined __ARGC__ if %__ARGC__% lss %~1  echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): not enough arguments. Minimum is %~1, got %__ARGC__%"%clr%   && %dk_call% dk_exit 13
+    if "%~2" == "" if %__ARGC__% gtr %~1                          echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~1, got %__ARGC__%"%clr%     && %dk_call% dk_exit 13
+    if not "%~2" == "" if %__ARGC__% gtr %~2                      echo %red%"ERROR: %__FUNCTION__%(%__ARGS__%): too many arguments. Maximum is %~2, got %__ARGC__%"%clr%     && %dk_call% dk_exit 13
 
-	::NOTE: determin when we need to remove the topmost DKStack_marker 
-	::Example
-	::
-	::	main()				0
-	::  	func1()			1
-	::			func2()     2
-	::				func3() 3
-	::				funcA() 4	<-- THIS is where we need to drop func3() from the call stack
-	::			funcB()     5   <-- THIS is where we need to drop func2() from the call stack
-	::		funcC()         6   <-- THIS is where we need to drop func1() from the call stack
-	::
-	::Example
-	::
-	::	main()				0
-	::  	func1()			1
-	::			func2()     2
-	::				func3() 3
-	::		funcC()         6   <-- THIS is where we need to replace func1() with funcC() and remove everything after
-	::
+    ::NOTE: determin when we need to remove the topmost DKStack_marker 
+    ::Example
+    ::
+    ::  main()              0
+    ::      func1()         1
+    ::          func2()     2
+    ::              func3() 3
+    ::              funcA() 4   <-- THIS is where we need to drop func3() from the call stack
+    ::          funcB()     5   <-- THIS is where we need to drop func2() from the call stack
+    ::      funcC()         6   <-- THIS is where we need to drop func1() from the call stack
+    ::
+    ::Example
+    ::
+    ::  main()              0
+    ::      func1()         1
+    ::          func2()     2
+    ::              func3() 3
+    ::      funcC()         6   <-- THIS is where we need to replace func1() with funcC() and remove everything after
+    ::
 
-		
-	
-::	if %DKSTACK_length% LSS %MAX_STACK_LINES% (
-::		set /a DKSTACK_length+=1
-::		echo "growing DKSTACK_length to %DKSTACK_length%"
-::	) else (
-::		echo "DKSTACK_length is capped at %DKSTACK_length%"
-::	)
-::	if %DKSTACK_marker% LSS %DKSTACK_length% (
-::		set /a DKSTACK_marker+=1
-::		echo "advancing DKSTACK_marker to %DKSTACK_marker%"
-::	) else (
-::		set /a DKSTACK_marker=0
-::		echo "resetting DKSTACK_marker to %DKSTACK_marker%"
+        
+    
+::  if %DKSTACK_length% LSS %MAX_STACK_LINES% (
+::      set /a DKSTACK_length+=1
+::      echo "growing DKSTACK_length to %DKSTACK_length%"
+::  ) else (
+::      echo "DKSTACK_length is capped at %DKSTACK_length%"
+::  )
+::  if %DKSTACK_marker% LSS %DKSTACK_length% (
+::      set /a DKSTACK_marker+=1
+::      echo "advancing DKSTACK_marker to %DKSTACK_marker%"
+::  ) else (
+::      set /a DKSTACK_marker=0
+::      echo "resetting DKSTACK_marker to %DKSTACK_marker%"
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::@echo on
-	if not defined ENABLE_dk_debugFunc goto:eof
-	
-	::set "indent="%indent% L "
-	set "indent=-^> "
-	
-	set "ESC="
-	set "cyan=%ESC%[36m"
-	set "blue=%ESC%[34m"
-	set "clr=%ESC%[0m"
-	
-	set "__LINE__=0"
-	for %%Z in ("%__FILE__%") do set "basename=%%~nxZ"
-	echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
-	::echo %indent%%blue%%__FUNCTION__%%clr%
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
-goto:eof
+    if not defined ENABLE_dk_debugFunc %return%
+
+    ::set "indent="%indent% L "
+    set "indent=-^> "
+
+    set "ESC="
+    set "cyan=%ESC%[36m"
+    set "blue=%ESC%[34m"
+    set "clr=%ESC%[0m"
+
+    set "__LINE__=0"
+    for %%Z in ("%__FILE__%") do set "basename=%%~nxZ"
+    echo %indent%%cyan%%basename%:%__LINE__%    %blue%%__FUNCTION__%:%__ARGS__%%clr%
+    ::echo %indent%%blue%%__FUNCTION__%%clr%
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::  
+%endfunction%
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+	:::::::::::::::::::::::::
+%endfunction%
 

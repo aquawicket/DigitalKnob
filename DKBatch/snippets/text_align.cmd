@@ -15,7 +15,7 @@ for /l %%a in (1 1 7) do (
 )
 
 echo. & pause >nul
-goto :eof
+goto:eof
 
 :echo-align <align> <text>
 	setlocal EnableDelayedExpansion

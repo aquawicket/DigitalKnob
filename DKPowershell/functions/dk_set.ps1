@@ -6,23 +6,30 @@ if(!$dk_set){ $dk_set = 1 } else{ return }
 #
 #
 function Global:dk_set($variable, $value) {
-	dk_debugFunc
-	if($(__ARGC__) -lt 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
-
+	dk_debugFunc 2
 
 	Set-Variable -Name $variable -Value $value -Scope Global
-	
-	dk_printVar $variable
+	dk_call dk_printVar $variable
 }
 
 
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+
+
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_set myVar "value assigned with dk_set"	
-	dk_info "myVar = ${myVar}"
+	dk_call dk_set myVar "value assigned with dk_set"	
+	dk_call dk_info "myVar = ${myVar}"
 }

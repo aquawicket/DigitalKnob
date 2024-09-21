@@ -90,7 +90,7 @@ GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/dk_download/v2
 #
 #
 dk_buildMain() {
-	dk_debugFunc
+	dk_debugFunc 0
 
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
@@ -139,7 +139,7 @@ dk_buildMain() {
 		
 		dk_createCache
 		dk_generate	
-		dk_build
+		dk_buildApp
 		
 		unset UPDATE
 		unset APP
@@ -154,8 +154,8 @@ dk_buildMain() {
 #
 #
 dk_pickUpdate() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_readCache
 	
@@ -248,8 +248,8 @@ dk_pickUpdate() {
 #
 #
 dk_pickApp() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP-}  ${TARGET_OS-} ${TYPE-}"
@@ -304,8 +304,8 @@ dk_pickApp() {
 #
 #
 dk_pickOs() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS-} ${TYPE-}"
@@ -439,8 +439,8 @@ dk_pickOs() {
 #
 #
 dk_pickType() {
-	dk_debugFunc
-	[ ${#} -gt 0 ] && dk_error "too many arguments"
+	dk_debugFunc 0
+
 
 	dk_echo
 	dk_echo "${APP} ${TARGET_OS} ${TYPE-}"
@@ -696,11 +696,11 @@ dk_generate() {
 	
 
 ##################################################################################
-# dk_build()
+# dk_buildApp()
 #
 #
-dk_build() {
-	dk_verbose "dk_build(${*})"
+dk_buildApp() {
+	dk_verbose "dk_buildApp(${*})"
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 
 	dk_echo
@@ -773,8 +773,8 @@ dk_getDKPaths() {
 #
 #
 dk_url() {
-	dk_stringContains ${1} "://" && return ${true}
-	return ${false}
+	dk_stringContains ${1} "://" && return $(true)
+	return $(false)
 }
 
 ##################################################################################
@@ -836,7 +836,7 @@ dk_installCmake() {
 		dk_printVar CMAKE_EXE
 		
 		if dk_pathExists "${CMAKE_EXE}"; then 
-			return ${true};
+			return $(true);
 		fi
 
 		dk_echo
@@ -852,7 +852,7 @@ dk_installCmake() {
 		CMAKE_EXE=$(command -v cmake)
 		dk_printVar CMAKE_EXE
 		if ! dk_commandExists cmake; then
-			dk_install ${CMAKE_IMPORT}
+			dk_installPackage ${CMAKE_IMPORT}
 		fi	
 		CMAKE_EXE=$(command -v cmake)
 		dk_printVar CMAKE_EXE
@@ -956,9 +956,9 @@ dk_error() {
 dk_variable_info() {
 	echo "dk_variable_info(${*})"
 	
-	[ ${#} -ne 2 ] && return ${false}										# if not exactly 2 parameters
-	$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
-	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return ${false}		# if not valid variable name
+	[ ${#} -ne 2 ] && return $(false)										# if not exactly 2 parameters
+	$(expr "${1}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)		# if not valid variable name
+	$(expr "${2}" : "^[A-Za-z0-9_]\+$" 1>/dev/null) || return $(false)		# if not valid variable name
 	
 	if dk_defined ${1}; then
 		eval value='$'{${1}}
@@ -1027,7 +1027,7 @@ dk_stacktrace() {
 #
 dk_defined() {
 	dk_verbose "dk_defined(${*})"
-	[ ${#} -ne 1 ] && return ${false} # Incorrect number of parameters
+	[ ${#} -ne 1 ] && return $(false) # Incorrect number of parameters
 	
 	eval value='$'{${1}+x} # value will = 'x' if the variable is defined
 	[ -n "${value}" ]
@@ -1125,9 +1125,9 @@ dk_confirm() {
 	dk_echo
 	dk_echo
 	#result=$(echo ${REPLY} | grep "^[Yy]$")
-	[ "${REPLY}" = "y" ] && return ${true}
-	[ "${REPLY}" = "Y" ] && return ${true}
-	return ${false};
+	[ "${REPLY}" = "y" ] && return $(true)
+	[ "${REPLY}" = "Y" ] && return $(true)
+	return $(false);
 }
 
 
@@ -1354,7 +1354,7 @@ dk_installGit() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if ! dk_commandExists git; then
-		dk_install git
+		dk_installPackage git
 	fi
 	
 	GIT_EXE=$(command -v git)
@@ -1378,7 +1378,7 @@ dk_installHomebrew() {
 		
 	if ! dk_commandExists brew; then
 		dk_info "dk_installing Homebrew"
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/dk_install/master/dk_install)"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		# https://github.com/Homebrew/brew/issues/10368
 		rm -fr $(brew --repo homebrew/core)
 		brew tap homebrew/core
@@ -1399,11 +1399,11 @@ dk_packageInstalled() {
 
 	if dk_commandExists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' "${1}" 2>/dev/null | grep -c "ok dk_installed") -ne 0 ]; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists brew; then
 		if brew list "${1}" &>/dev/null; then
-			return ${true}
+			return $(true)
 		fi
 	elif dk_commandExists apt; then
 		dk_error "dk_packageInstalled() apt-get not implemented"
@@ -1414,41 +1414,41 @@ dk_packageInstalled() {
 	elif dk_commandExists pacman; then
 		if pacman -Qs "${1}" >/dev/null; then
 			#FIXME: this doesn't always work
-			return ${false};
+			return $(false);
 		fi
 	elif dk_commandExists tce-load; then
 		#dk_error "dk_packageInstalled() tce-load not implemented"
-		return ${false}
+		return $(false)
 	else
 		dk_error "ERROR: no package managers found"
 	fi
-	return ${false}
+	return $(false)
 }
 
 
 ##################################################################################
-# dk_install(package)
+# dk_installPackage(package)
 #
 #
-dk_install() {
-	dk_verbose "dk_install(${*})"
+dk_installPackage() {
+	dk_verbose "dk_installPackage(${*})"
 	[ ${#} -ne 1 ] && dk_error "Incorrect number of parameters"
 
 	#if dk_packageInstalled ${1}; then
 	#	dk_warning "${1} already dk_installed"
-	#	return ${false};
+	#	return $(false);
 	#fi
 	
 	dk_info "dk_installing ${1}"
 
 	if dk_commandExists brew; then
-		dk_call brew dk_install "${1}"
+		dk_call brew install "${1}"
 	elif dk_commandExists apt; then
-		dk_call apt -y dk_install "${1}"
+		dk_call apt -y install "${1}"
 	elif dk_commandExists apt-get; then
-		dk_call apt-get -y dk_install "${1}"
+		dk_call apt-get -y install "${1}"
 	elif dk_commandExists pkg; then
-		dk_call pkg dk_install "${1}"
+		dk_call pkg install "${1}"
 	elif dk_commandExists pacman; then
 		dk_call pacman -S "${1}" --noconfirm
 	elif dk_commandExists tce-load; then
@@ -1468,7 +1468,7 @@ dk_validatePackage() {
 	[ ${#} -ne 2 ] && dk_error "Incorrect number of parameters"
 	
 	if ! dk_commandExists "${1}"; then
-		dk_install "${2}"
+		dk_installPackage "${2}"
 	fi
 }
 
@@ -1787,7 +1787,7 @@ dk_resetAll() {
 			dk_echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
 			dk_echo "${clr}"			
 			dk_printVar DKBRANCH_DIR
-			return ${false};
+			return $(false);
 		fi
 		
 		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_NAME"
@@ -2003,7 +2003,7 @@ dk_enterManually() {
 	fi
 	if test -f "${DKAPPS_DIR}"/"${input}"/DKMAKE.cmake; then
 		TARGET_PATH=${DKAPPS_DIR}/${input}
-		return ${true}
+		return $(true)
 	fi
 	dk_printVar TARGET_PATH
 	

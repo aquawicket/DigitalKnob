@@ -6,7 +6,7 @@
 #
 #
 dk_function() {
-	dk_debugFunc
+	dk_debugFunc 0
 	
 }
 
@@ -17,5 +17,5 @@ dk_function() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc
+	dk_debugFunc 0
 }

@@ -34,7 +34,8 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_getTargetTriple()
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+#dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
 set(APP_NAME ${APP_NAME}_APP)
@@ -51,26 +52,26 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-dk_delete(${DK_PROJECT_DIR}/${OS}/DKBUILD.log NO_HALT)
+dk_delete(${DK_PROJECT_DIR}/${triple}/DKBUILD.log NO_HALT)
 dk_printSettings()
 
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")
 dk_buildLog("##############################################")
-dk_printVar(dkdepend_list)
+#dk_printVar(dkdepend_list)
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	if(NOT ${plugin} IN_LIST dk_disabled_list)
-		dk_info("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
+		#dk_verbose("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
 		dk_buildLog("${plugin}")
 	endif()
 endforeach()
 dk_buildLog("\n")
 
 foreach(plugin ${dkdepend_list})
-	dk_set(QUEUE_BUILD OFF)
-	dk_set(PREBUILD OFF)
+	dk_set(QUEUE_BUILD 0)
+	dk_set(PREBUILD 0)
 	dk_set(LIBLIST "") # used for double checking
 	
 	dk_info("############################################################")
@@ -102,7 +103,7 @@ foreach(plugin ${dkdepend_list})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
-		dk_error("${plugin} variable is invalid")
+		dk_fatal("${plugin} variable is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
@@ -119,20 +120,20 @@ foreach(plugin ${dkdepend_list})
 		dk_toUpper(${plugin} PLUGIN_NAME)
 		if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
 			#if(MULTI_CONFIG)
-			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
+			#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${triple})
 			#else()
 			#	if(DEBUG)
-			#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
 			#	elseif(RELEASE)
-			#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+			#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Release)
 			#	endif()
 			#endif()
-			add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${BUILD_DIR})
+			add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${CONFIG_PATH})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${OS})
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${triple})
 	
 	####################### DKPlugins #######################
 	# Libraries in the /DKPlugins folder
@@ -144,8 +145,8 @@ foreach(plugin ${dkdepend_list})
 	# Install 3rd Party Libs
 	if(INSTALL_DKLIBS)
 		if(${isDKPlugin} EQUAL -1)
-			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+			if(EXISTS ${plugin_path}/${CONFIG_PATH}/cmake_install.cmake)
+				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${CONFIG_PATH})
 			endif()
 		endif()
 	endif(INSTALL_DKLIBS)
@@ -163,15 +164,15 @@ foreach(plugin ${dkdepend_list})
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			if(EXISTS "${plugin_path}/CMakeLists.txt")
 				#if(MULTI_CONFIG)
-				#	add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+				#	add_subdirectory(${plugin_path} ${plugin_path}/${triple})
 				#else()
 				#	if(DEBUG)
-				#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Debug)
 				#	elseif(RELEASE)
-				#		add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+				#		add_subdirectory(${plugin_path} ${plugin_path}/${triple}/Release)
 				#	endif()
 				#endif()
-				add_subdirectory(${plugin_path} ${plugin_path}/${BUILD_DIR})
+				add_subdirectory(${plugin_path} ${plugin_path}/${CONFIG_PATH})
 			endif()
 		endif()
 		
@@ -184,18 +185,20 @@ foreach(plugin ${dkdepend_list})
 					dk_warning("MISSING: ${lib}")
 					dk_set(PREBUILD ON)	## Only prebuild if the library binaries are missing
 				else()
-					dk_echo("${lgreen}FOUND: ${green}${lib} ${clr}")
+					dk_success("FOUND: ${lib}")
 				endif()
 			endforeach()
 		
 			if(PREBUILD)
 				dk_set(QUEUE_BUILD ON)
 				dk_info("************* Building ${plugin} *************")
-				dk_setPath(${plugin_path}/${BUILD_DIR})
+				dk_cd(${plugin_path}/${CONFIG_PATH})
 				
 				if(MULTI_CONFIG)
 					ANDROID_ARM32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 					ANDROID_ARM64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
+					ANDROID_X86_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
+					ANDROID_X86_64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
 					EMSCRIPTEN_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
 					IOS_ARM32_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
 					IOS_ARM64_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
@@ -215,6 +218,8 @@ foreach(plugin ${dkdepend_list})
 					if(DEBUG)
 						ANDROID_ARM32_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 						ANDROID_ARM64_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
+						ANDROID_X86_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
+						ANDROID_X86_64_DEBUG_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
 						EMSCRIPTEN_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
 						IOS_ARM32_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
 						IOS_ARM64_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} -DDEBUG=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
@@ -232,6 +237,8 @@ foreach(plugin ${dkdepend_list})
 					elseif(RELEASE)
 						ANDROID_ARM32_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM32=ON ${plugin_path})
 						ANDROID_ARM64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_ARM64=ON ${plugin_path})
+						ANDROID_X86_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86=ON ${plugin_path})
+						ANDROID_X86_64_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DANDROID_X86_64=ON ${plugin_path})
 						EMSCRIPTEN_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
 						IOS_ARM32_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM32=ON ${plugin_path})
 						IOS_ARM64_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} -DRELEASE=ON -DREBUILD=ON -DIOS_ARM64=ON ${plugin_path})
@@ -252,13 +259,13 @@ foreach(plugin ${dkdepend_list})
 				## double check that the missing libs were built
 				foreach(lib ${LIBLIST})
 					if(NOT EXISTS ${lib})
-						dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n****************************")
+						dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n****************************")
 					else()
 					
 						# Install DKPlugin Libs
 						if(INSTALL_DKLIBS)
-							if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-								dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+							if(EXISTS ${plugin_path}/${CONFIG_PATH}/cmake_install.cmake)
+								dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${CONFIG_PATH})
 							endif()
 						endif()
 						
@@ -271,7 +278,7 @@ foreach(plugin ${dkdepend_list})
 	
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
-				dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+				dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 			endif()
 		endforeach()
 	endif(${isDKPlugin} GREATER -1) # isDKPlugin
@@ -288,9 +295,9 @@ if(NOT DKAPP)
 endif()	
 
 dk_info("\n")
-dk_info("***************************************")
-dk_info("********** Creating ${APP_NAME} **********")
-dk_info("***************************************\n")
+dk_info("##############################################")
+dk_info("############ Creating ${APP_NAME} ############")
+dk_info("##############################################\n")
 
 # Create version from date
 string(TIMESTAMP year "%y")
@@ -326,7 +333,7 @@ file(GLOB App_SRC
 	${DK_PROJECT_DIR}/*.hpp
 	${DK_PROJECT_DIR}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/assets/*")
-list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${OS}/*")
+list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${triple}/*")
 if(SRC_INCLUDE)
 	file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 	list(APPEND App_SRC ${App_SRC_INCLUDE})
@@ -370,10 +377,10 @@ if(WIN_X86)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -409,7 +416,7 @@ if(WIN_X86)
 	if(MULTI_CONFIG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
-		target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
+		#target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
 		if(DEBUG)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
 		elseif(RELEASE)
@@ -459,7 +466,7 @@ if(WIN_X86)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_PROJECT_DIR}/${OS} --target ${APP_NAME}
+	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_PROJECT_DIR}/${triple} --target ${APP_NAME}
 	#)
 	
 	#add_custom_command(
@@ -505,10 +512,10 @@ if(WIN_X86_64)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -544,7 +551,7 @@ if(WIN_X86_64)
 	if(MULTI_CONFIG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
-		target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
+		#target_link_libraries(${APP_NAME} -static -static-libgcc -static-libstdc++ winpthread)# -dynamic)
 		if(DEBUG)
 			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
 		elseif(RELEASE)
@@ -599,10 +606,10 @@ if(MAC)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 		if(RELEASE)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 		
@@ -706,24 +713,25 @@ if(MAC)
 	endif()
 	
 	# Copy the DKCefChild.app into the app bundle as "DKAppName Helper.app"
-	if(EXISTS "${DKPLUGINS_DIR}/DKCefChild/${OS}/Release/DKCefChild.app")
+	if(EXISTS "${DKPLUGINS_DIR}/DKCefChild/${triple}/Release/DKCefChild.app")
 		dk_info("Adding ${APP_NAME} Helper to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS_DIR}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS_DIR}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS_DIR}/DKCefChild/${triple}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS_DIR}/DKCefChild/${triple}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
 	endif()
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(MAC_TERMINAL_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
-		set(TERMINAL_SCRIPT 
-			"\#!/bin/bash\n"
-			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
-			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
+		set(TERMINAL_SCRIPT
+			"\#!/bin/bash \ndir=$(cd \"$( dirname \"\${0}\")\" && pwd ) \nOpen -a \"Terminal\" \"\${dir}/${APP_NAME}\""
+			#"\#!/bin/bash \n"
+			#"dir=$(cd \"$( dirname \"\${0}\")\" && pwd ) \n"
+			#"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
-		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/wrapper ${TERMINAL_SCRIPT})
-		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${OS}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS})
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
+		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/wrapper ${TERMINAL_SCRIPT})
+		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${triple}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple})
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${triple}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
 	#CPP_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -768,15 +776,15 @@ if(IOS OR IOSSIM)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			if(EXISTS ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
-				dk_delete(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app)
+				dk_delete(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 		if(RELEASE)
-			if(EXISTS ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
-				dk_delete(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app)
+				dk_delete(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 	endif()
@@ -909,9 +917,9 @@ if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_copy(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -959,10 +967,10 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
+			"Exec=${DK_PROJECT_DIR}/${triple}/Debug/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-		dk_fileWrite("${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop" "${DESKTOP_FILE}")
+		dk_fileWrite("${DK_PROJECT_DIR}/${triple}/Debug/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	elseif(RELEASE)
 		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
@@ -971,14 +979,14 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
+			"Exec=${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-		dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
 		if(NOT TINYCORE)
-			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS}/Release)
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/Release)
 		endif()
 	endif()
 	
@@ -1023,9 +1031,9 @@ if(RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1054,10 +1062,10 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
+		"Exec=${DK_PROJECT_DIR}/${triple}/Debug/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_PROJECT_DIR}/${triple}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	if(RELEASE)
 	# Create .desktop file for Release
@@ -1068,15 +1076,15 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
+		"Exec=${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}\n"
 		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-	dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+	dk_fileWrite(${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
 	if(RELEASE)
-		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS}/Release)
+		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/Release)
 	endif()
 		
 	####################### Do Post Build Stuff #######################
@@ -1104,20 +1112,20 @@ if(ANDROID)
 		if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 			dk_info("Creating android icons for ${APP_NAME} . . .")
 			if(DEBUG)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 			endif()
 			if(RELEASE)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 			endif()
 		
 			dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
@@ -1126,11 +1134,11 @@ if(ANDROID)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(MULTI_CONFIG)
-				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
-				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${triple}/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${triple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${triple}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${triple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 			else()
-				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
-				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${triple}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${triple}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${triple}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${triple}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
 			endif()
 		endif()
 	
@@ -1148,23 +1156,23 @@ if(ANDROID)
 	
 		####### Import Android Gui Build files ############################################
 		if(DEBUG)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Debug)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
-			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/assets OVERWRITE)
-			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
-			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Debug/gradlew)
-			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Debug/gradlew")
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${triple}/Debug)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${triple}/ ${DK_PROJECT_DIR}/${triple}/Debug)
+			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/assets OVERWRITE)
+			dk_fileWrite(${DK_PROJECT_DIR}/${triple}/Debug/local.properties ${localProperties})
+			dk_fileReplace(${DK_PROJECT_DIR}/${triple}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${triple}/Debug/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${triple}/Debug/gradlew")
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		if(RELEASE)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
-			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
-			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/assets OVERWRITE)
-			dk_fileWrite(${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
-			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Release/gradlew)
-			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Release/gradlew")
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${triple}/Release)
+			dk_copy(${DKPLUGINS_DIR}/_DKIMPORT/${triple}/ ${DK_PROJECT_DIR}/${triple}/Release)
+			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${triple}/Release/app/src/main/assets OVERWRITE)
+			dk_fileWrite(${DK_PROJECT_DIR}/${triple}/Release/local.properties ${localProperties})
+			dk_fileReplace(${DK_PROJECT_DIR}/${triple}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NO_HALT)
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${triple}/Release/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${triple}/Release/gradlew")
 			#TODO: set GRADLE_USER_HOME environment variable. Location of .gradle cache
 		endif()
 		
@@ -1236,7 +1244,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_PROJECT_DIR}/${OS}/Debug/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${OS}/Debug --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${triple}/Debug/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${triple}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -1246,7 +1254,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DK_PROJECT_DIR}/${OS}/Release/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${OS}/Release --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${triple}/Release/gradlew --gradle-user-home ${GRADLE_USER_HOME} --project-dir ${DK_PROJECT_DIR}/${triple}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -1269,7 +1277,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/Debug/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(RELEASE)
 		endif()
@@ -1277,7 +1285,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${triple}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
@@ -1311,15 +1319,15 @@ if(EMSCRIPTEN)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		elseif(RELEASE)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
-			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NO_HALT)
 		endif()
 	endif()
 	
@@ -1360,10 +1368,9 @@ if(EMSCRIPTEN)
 			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
-				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
+				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_fileWrite(${DK_PROJECT_DIR}/emscripten/Debug/Run.sh "${RUN_SCRIPT_DEBUG}")
 			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh)
 		endif()
 	endif()
@@ -1475,16 +1482,16 @@ endforeach()
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
 #if(LINUX OR RASPBERRY OR ANDROID)
-#	dk_command(ldd >> ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
+#	dk_command(ldd >> ${DK_PROJECT_DIR}/${triple}/DKBUILD.log)
 #elseif(MAC OR IOS)
 	# TODO
-	#dk_command(otool -L ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+	#dk_command(otool -L ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.app)
 #elseif(WIN)	
 	# TODO
-	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe
+	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.exe
 #endif()
 
 dk_info("\n\n")
-dk_info("**************************************************")
-dk_info("****** Generated ${APP_NAME} - ${OS}  ************")
-dk_info("**************************************************\n")
+dk_info("******************************************************")
+dk_info("****** Generated ${APP_NAME} - ${triple}  ************")
+dk_info("******************************************************\n")

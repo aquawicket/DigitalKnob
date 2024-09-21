@@ -13,11 +13,11 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Reference: https://en.wikipedia.org/wiki/List_of_file_formats
 #
 function(dk_getFileType path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_getExtension(${path} extension)
 	if(NOT extension)
-		dk_error("The path does not contain an extension")
+		dk_fatal("The path does not contain an extension")
 		set(fileType ERROR)
 	elseif("${extension}" STREQUAL ".app")
 		set(fileType EXECUTABLE)
@@ -67,15 +67,16 @@ function(dk_getFileType path rtn_var)
 		set(fileType UNKNOWN)
 	endif()
 	
-	dk_printVar(fileType)
+	#dk_printVar(fileType)
 	set(${rtn_var} ${fileType} PARENT_SCOPE)
 endfunction()
 
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

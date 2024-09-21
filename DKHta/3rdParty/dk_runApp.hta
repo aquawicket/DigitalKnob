@@ -1,7 +1,7 @@
 <html>
 <head>
-    <title>Application Executer</title>
-    <HTA:APPLICATION ID="oMyApp" 
+    <title>dk_runApp</title>
+    <HTA:APPLICATION ID="dk_runApp" 
         APPLICATIONNAME="Application Executer" 
         BORDER="no"
         CAPTION="no"
@@ -10,10 +10,15 @@
         SYSMENU="yes"
         SCROLL="no"
         WINDOWSTATE="normal">
+	<script type="text/javascript" language="javascript" src="file:///C:/Users/Administrator/digitalknob/Development/DKJavascript/functions/dk_executeProcess.js">
+	</script>
     <script type="text/javascript" language="javascript">
+		window.resizeTo(350, 350);
+		window.moveTo(10, 10);
+		
         function RunFile() {
-        WshShell = new ActiveXObject("WScript.Shell");
-        WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
+			WshShell = new ActiveXObject("WScript.Shell");
+			WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
         }
     </script>
 </head>

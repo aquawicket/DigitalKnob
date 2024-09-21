@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_arrayPush(array, element1, element2, /* …, */ elementN)
@@ -18,32 +18,36 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 ::#
 :dk_arrayPush
-	call dk_debugFunc 2 3
-	
-	setlocal
-	call dk_arrayLength %~1 end_index
-	endlocal & set "%~1[%end_index%]=%~2"
-goto:eof
+    call dk_debugFunc 2 3
+ setlocal
+
+    %dk_call% dk_arrayLength %~1 end_index
+    endlocal & set "%~1[%end_index%]=%~2"
+
+:: debug
+::	%dk_call% dk_printVar %1
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_arrayPush myArrayA "a b c"          &:: new_lengthA
-	call dk_printVar myArrayA
-	:: dk_printVar new_lengthA
-	call dk_echo
-	
-	call dk_arrayPush myArrayA "1 2 3" "d e f"  &:: new_lengthA
-	call dk_printVar myArrayA
-	:: dk_printVar new_lengthA
-	call dk_echo
-	
-	call dk_arrayPush myArrayA "4 5 6" "h i j"  &:: new_lengthA
-	call dk_printVar myArrayA
-	:: dk_printVar new_lengthA
-	call dk_echo
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    %dk_call% dk_arrayPush myArrayA "a b c"          &:: new_lengthA
+    %dk_call% dk_printVar myArrayA
+    :: dk_printVar new_lengthA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPush myArrayA "1 2 3" "d e f"  &:: new_lengthA
+    %dk_call% dk_printVar myArrayA
+    :: dk_printVar new_lengthA
+    %dk_call% dk_echo
+    
+    %dk_call% dk_arrayPush myArrayA "4 5 6" "h i j"  &:: new_lengthA
+    %dk_call% dk_printVar myArrayA
+    :: dk_printVar new_lengthA
+    %dk_call% dk_echo
+%endfunction%

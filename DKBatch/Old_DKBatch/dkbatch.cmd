@@ -43,7 +43,7 @@ set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0
 
 ::################## %DKEND% ##################
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
-if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto: eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto :eof ) )
+if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!"=="1" ( goto: eof ) else ( if "!DKLOADED!"=="%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
 ::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -99,9 +99,9 @@ set "IF_FATAL=call DKERROR IF_FATAL %1 "
 ::: %FATAL% :::::::::::::::::
 set "FATAL=DKERROR ERROR %1 "
 
-::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto :EOF"
-::set "REQUIRED_2=if [%%2]==[] echo [91m	%~n0(%*): argument 2 is invalid [0m & goto :EOF"
-::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto :EOF"
+::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto:eof"
+::set "REQUIRED_2=if [%%2]==[] echo [91m	%~n0(%*): argument 2 is invalid [0m & goto:eof"
+::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto:eof"
 
 set caller=%0
 if not "%1"=="" set "caller=%~1"

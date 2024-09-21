@@ -8,11 +8,11 @@
 #
 #
 dk_onExit() {
-	dk_debugFunc
+	dk_debugFunc 0
 
 #	[ ${KEY_WAIT_ON_EXIT} -eq 1 ] && [ $SHLVL -eq 1 ] && dk_pause
 #	[ ${STAY_OPEN_ON_EXIT} -eq 1 ] && [ $SHLVL -eq 1 ] && exec ${SHELL}
-	[ ${KEY_WAIT_ON_EXIT} -eq 1 ] && dk_pause
+	[ ${KEY_WAIT_ON_EXIT} -eq 1 ] && dk_call dk_pause
 	[ ${STAY_OPEN_ON_EXIT} -eq 1 ] && exec ${SHELL}
 }
 trap 'dk_onExit' EXIT

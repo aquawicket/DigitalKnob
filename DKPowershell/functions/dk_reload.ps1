@@ -6,22 +6,29 @@ if(!$dk_reload){ $dk_reload = 1 } else{ return }
 #
 #
 function Global:dk_reload() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 0
+
+	if(!(dk_call dk_pathExists "${DKSCRIPT_PATH}")){ dk_call dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
+	
+	dk_call dk_clearScreen
+	dk_call dk_echo "reloading ${DKSCRIPT_PATH}"
 	
 	
-	if(!(dk_pathExists "${DKSCRIPT_PATH}")){ dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
+	###### Method 1 ######
+	dk_call dk_fileWrite "${DKPOWERSHELL_DIR}/reload" "${DKSCRIPT_PATH}" 
+	dk_call dk_exit 0 
 	
-	#dk_echo
-    dk_echo "reloading ${DKSCRIPT_PATH}"
-	. "${DKSCRIPT_PATH}" #& dk_exit & dk_exit & dk_exit
+
+    ###### Method 2 ######
+	. "${DKSCRIPT_PATH}" #& dk_call dk_exit & dk_call dk_exit & dk_call dk_exit
 }
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_reload
+	dk_call dk_pause "Press any key to test dk_reload"
+	dk_call dk_reload
 }

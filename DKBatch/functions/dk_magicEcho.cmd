@@ -1,12 +1,12 @@
 @echo off
 call :dk_magicEcho.init
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
 
 :dk_magicEcho.init
     set "dk_magicEcho=call :gn & REM # #"
-goto:eof
+%endfunction%
 
 :dk_magicEcho
     setlocal EnableDelayedExpansion
@@ -21,7 +21,7 @@ goto:eof
         endlocal
         goto:eof
     )
-goto:eof
+%endfunction%
 
 :gn
     setlocal EnableDelayedExpansion
@@ -95,15 +95,15 @@ for /F "usebackq delims=:" %%O in (`findstr /o "^" "%~f0"`) DO (
 )
 )
 echo FAIL
-goto:eof
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
+    call dk_debugFunc 0
+    
     %dk_magicEcho% This is impossible %path% ^& | <> "^& | <>" ^
     echo Or not?
-goto:eof   
+%endfunction%   

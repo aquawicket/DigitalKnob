@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
-
+return()
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -29,7 +29,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 
 ### Get CMAKE_SOURCE_DIR ###
 if(NOT CMAKE_SOURCE_DIR)
-	dk_error("CMAKE_SOURCE_DIR invalid!")
+	dk_fatal("CMAKE_SOURCE_DIR invalid!")
 endif()
 dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 dk_info("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
@@ -37,7 +37,7 @@ dk_info("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
 
 ### Get CMAKE_BINARY_DIR ###
 if(NOT CMAKE_BINARY_DIR)
-	dk_error("CMAKE_BINARY_DIR invalid!")
+	dk_fatal("CMAKE_BINARY_DIR invalid!")
 endif()
 dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
 dk_info("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")

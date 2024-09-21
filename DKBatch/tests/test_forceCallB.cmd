@@ -20,10 +20,10 @@
 			call "%_f0%" %*
 		)
 	)
-goto:eof
+%endfunction%
 
 
 :test_forceCallB
 	echo test_forceCallB
     echo Method invocation is [ %startMethod% ]
-goto:eof
+%endfunction%

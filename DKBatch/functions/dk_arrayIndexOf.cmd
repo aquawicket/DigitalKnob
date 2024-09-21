@@ -1,5 +1,5 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
 ::# dk_arrayIndexOf(array, searchElement)
@@ -27,56 +27,62 @@ call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 ::#    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 ::#
 :dk_arrayIndexOf
-	call dk_debugFunc 3
-	
-	setlocal
-	set _count_=0
-	:dk_arrayIndexOf_loop
-		if not defined %~1[%_count_%] (
-			endlocal & call dk_set %3 -1
-			goto:eof
-		)
-		
-		if "!!" equ "" set "_value_=!%~1[%_count_%]!"
-		if "!!" neq "" call set "_value_=%%%~1[%_count_%]%%"
-		if "%~2" == "%_value_%" (
-			endlocal & set "%3=%_count_%"
-			goto:eof	
-		)
-			
-		set /a _count_+=1
-	goto:dk_arrayIndexOf_loop
-	endlocal
-goto:eof
+    call dk_debugFunc 3
+ setlocal
+ 
+    set _count_=0
+    :dk_arrayIndexOf_loop
+        if not defined %~1[%_count_%] (
+            endlocal & %dk_call% dk_set %3 -1
+            rem %return%
+			goto:end_arrayIndexOf
+        )
+
+        if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
+        if "!DE!" neq "" call set "_value_=%%%~1[%_count_%]%%"
+        if "%~2" == "%_value_%" (
+            endlocal & set "%3=%_count_%"
+            rem %return%
+			goto:end_arrayIndexOf
+        )
+
+        set /a _count_+=1
+    goto:dk_arrayIndexOf_loop
+
+:end_arrayIndexOf
+::debug
+::	%dk_call% dk_printVar %3
+%endfunction%
 
 
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	set "myArrayA[0]=a b c"
-	set "myArrayA[1]=1 2 3"
-	set "myArrayA[2]=d e f"
-	set "myArrayA[3]=4 5 6"
-	set "myArrayA[4]=h i j"
-	
-	call dk_arrayIndexOf myArrayA "a b c" indexABC
-	call dk_printVar indexABC
-	
-	call dk_arrayIndexOf myArrayA "1 2 3" index123
-	call dk_printVar index123
-	
-	call dk_arrayIndexOf myArrayA "d e f" indexDEF
-	call dk_printVar indexDEF
-	
-	call dk_arrayIndexOf myArrayA "4 5 6" index456
-	call dk_printVar index456
-	
-	call dk_arrayIndexOf myArrayA "h i j" indexGHI
-	call dk_printVar indexGHI
-	
-	call dk_arrayIndexOf myArray "nonExistant" indexN
-	call dk_printVar indexN
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+ 
+    set "myArrayA[0]=a b c"
+    set "myArrayA[1]=1 2 3"
+    set "myArrayA[2]=d e f"
+    set "myArrayA[3]=4 5 6"
+    set "myArrayA[4]=h i j"
+
+    %dk_call% dk_arrayIndexOf myArrayA "a b c" indexABC
+    %dk_call% dk_printVar indexABC
+
+    %dk_call% dk_arrayIndexOf myArrayA "1 2 3" index123
+    %dk_call% dk_printVar index123
+
+    %dk_call% dk_arrayIndexOf myArrayA "d e f" indexDEF
+    %dk_call% dk_printVar indexDEF
+
+    %dk_call% dk_arrayIndexOf myArrayA "4 5 6" index456
+    %dk_call% dk_printVar index456
+
+    %dk_call% dk_arrayIndexOf myArrayA "h i j" indexGHI
+    %dk_call% dk_printVar indexGHI
+
+    %dk_call% dk_arrayIndexOf myArray "nonExistant" indexN
+    %dk_call% dk_printVar indexN
+%endfunction%

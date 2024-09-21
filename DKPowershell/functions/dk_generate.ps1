@@ -6,31 +6,29 @@ if(!$dk_generate){ $dk_generate = 1 } else{ return }
 #
 #
 function Global:dk_generate() {
-	dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"}
+	dk_debugFunc 0
 	
-	
-	dk_echo
-	dk_echo "##################################################################"
-	dk_echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
-	dk_echo "##################################################################"
-	dk_echo
+	dk_call dk_echo
+	dk_call dk_echo "##################################################################"
+	dk_call dk_echo "     Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL"
+	dk_call dk_echo "##################################################################"
+	dk_call dk_echo
 
-	dk_clearCmakeCache
-	dk_deleteTempFiles
+	dk_call dk_clearCmakeCache
+	dk_call dk_deleteTempFiles
 
 	$TARGET_PATH = "$DKAPPS_DIR/$APP"
-	dk_printVar TARGET_PATH
-	dk_makeDirectory "$TARGET_PATH/$TARGET_OS"
+	dk_call dk_printVar TARGET_PATH
+	dk_call dk_makeDirectory "$TARGET_PATH/$TARGET_OS"
 	cd "$TARGET_PATH/$TARGET_OS"
 	$CMAKE_SOURCE_DIR = "$DKCMAKE_DIR"
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
-	dk_printVar CMAKE_SOURCE_DIR
-	if(!(dk_pathExists "$CMAKE_SOURCE_DIR")){
-		dk_error "CMAKE_SOURCE_DIR does not exist"
+	dk_call dk_printVar CMAKE_SOURCE_DIR
+	if(!(dk_call dk_pathExists "$CMAKE_SOURCE_DIR")){
+		dk_call dk_error "CMAKE_SOURCE_DIR does not exist"
 	}
 	$CMAKE_TARGET_PATH = $TARGET_PATH
-	dk_printVar CMAKE_TARGET_PATH
+	dk_call dk_printVar CMAKE_TARGET_PATH
 	$CMAKE_TARGET_PATH = $CMAKE_TARGET_PATH -replace '\\', '/';
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
@@ -86,7 +84,7 @@ function Global:dk_generate() {
 		$CMAKE_ARGS += "-G Visual Studio 17 2022"
 	}
 	else{
-		dk_error "Unrecognized TARGET_OS:${TARGET_OS}"	
+		dk_call dk_error "Unrecognized TARGET_OS:${TARGET_OS}"	
 	}
 
 	
@@ -120,7 +118,7 @@ if($TYPE -eq "Debug"){
 	
 	$CMAKE_BINARY_DIR = "$CMAKE_TARGET_PATH\$TARGET_OS\$TYPE"
 	$CMAKE_BINARY_DIR = $CMAKE_BINARY_DIR -replace '\\', '/';
-	dk_printVar CMAKE_BINARY_DIR
+	dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	#if(!($WSLENV)){ 
 		$CMAKE_ARGS += "-S=$CMAKE_SOURCE_DIR"
@@ -147,8 +145,8 @@ if($TYPE -eq "Debug"){
 #	###### CMAKE_TOOLCHAIN_FILE ######
 #	$TOOLCHAIN = "${DKCMAKE_DIR}\toolchains\${TARGET_OS}_toolchain.cmake"
 #	$TOOLCHAIN = $TOOLCHAIN -replace '\\', '/';
-#	dk_echo "TOOLCHAIN = $TOOLCHAIN"
-#	if(dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }
+#	dk_call dk_echo "TOOLCHAIN = $TOOLCHAIN"
+#	if(dk_call dk_pathExists "$TOOLCHAIN"){ $CMAKE_ARGS += "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN" }
 	
 	###### WSL CMake Fix ######
 	if($WSLENV){ 
@@ -157,14 +155,14 @@ if($TYPE -eq "Debug"){
 	}
 	
 	###### CMake Configure ######
-	dk_load $DKIMPORTS_DIR/cmake/dk_installCmake.ps1
-	dk_installCmake
+	dk_call dk_source $DKIMPORTS_DIR/cmake/dk_installCmake.ps1
+	dk_call dk_installCmake
 	
-	dk_echo
-	dk_echo "****** CMAKE COMMAND ******"
-	dk_echo "$CMAKE_EXE $CMAKE_ARGS ${clr}"
-	dk_call "$CMAKE_EXE" @CMAKE_ARGS
-	dk_echo
+	dk_call dk_echo
+	dk_call dk_echo "****** CMAKE COMMAND ******"
+	dk_call dk_echo "$CMAKE_EXE $CMAKE_ARGS ${clr}"
+	dk_call dk_call "$CMAKE_EXE" @CMAKE_ARGS
+	dk_call dk_echo
 }
 
 
@@ -172,9 +170,9 @@ if($TYPE -eq "Debug"){
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_generate
+	dk_call dk_generate
 }

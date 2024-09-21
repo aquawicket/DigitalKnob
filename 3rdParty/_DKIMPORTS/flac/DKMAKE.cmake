@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/xiph/flac.git
 # https://ftp.osuosl.org/pub/xiph/releases/flac
 
@@ -13,16 +14,18 @@ dk_depend(ogg)
 dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz)
 
 
-
 ### LINK ###
-dk_include			(${FLAC}/include										FLAC_INCLUDE_DIR)
+dk_include			(${FLAC}/include												FLAC_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_libDebug		(${FLAC}/${OS}/src/libFLAC/${DEBUG_DIR}/libFLAC.a		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/src/libFLAC/${RELEASE_DIR}/libFLAC.a		FLAC_LIBRARY_RELEASE)
+	if(MSVC)
+		dk_libDebug		(${FLAC_CONFIG_DIR}/src/libFLAC/${DEBUG_DIR}/FLAC.lib		FLAC_LIBRARY_DEBUG)
+		dk_libRelease	(${FLAC_CONFIG_DIR}/src/libFLAC/${RELEASE_DIR}/FLAC.lib		FLAC_LIBRARY_RELEASE)
+
+	endif()
 else()
-	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC}/${triple}/${DEBUG_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${triple}/${RELEASE_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_RELEASE)
 endif()
 
 
@@ -56,7 +59,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${FLAC}
+dk_configure(${FLAC_DIR}
 	-DBUILD_CXXLIBS=ON					# "Build libFLAC++" ON
 	-DBUILD_DOCS=OFF					# "Build and install doxygen documents" ON
 	-DBUILD_EXAMPLES=OFF				# "Build and install examples" ON
@@ -72,5 +75,5 @@ dk_configure(${FLAC}
 
 
 ### BUILD ###
-dk_build(${FLAC})
+dk_build(${FLAC_DIR})
 

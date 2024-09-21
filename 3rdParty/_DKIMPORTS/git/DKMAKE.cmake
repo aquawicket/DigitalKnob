@@ -1,14 +1,18 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
+
 # https://git-scm.com
 # https://github.com/git-for-windows/git
 
 
+dk_depend(sudo)
+dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
+
 ### DOWNLOAD ###
-dk_validate(HOST "dk_getHostTriple()")
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
 WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
 if(WIN_HOST AND NOT GIT_DL)
-	dk_error("GIT_DL is invalid!")
+	dk_fatal("GIT_DL is invalid!")
 	return()
 endif()
 
@@ -17,7 +21,7 @@ endif()
 if(GIT_DL)
 	dk_basename(${GIT_DL} GIT_DL_FILE)
 	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
+	#string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
 	dk_toLower(${GIT_FOLDER} GIT_FOLDER)
 	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
@@ -47,8 +51,8 @@ if(NOT GIT_EXE)
 		dk_command(apt -y install git)
 	elseif(LINUX_HOST)
 		# https://stackoverflow.com/a/27469489
-		dk_command(sudo apt-get -y install git)
-		#dk_command(sudo apt-get install apt-rdepends)
+		dk_command(${SUDO} apt-get -y install git)
+		#dk_command(${SUDO} apt-get install apt-rdepends)
 		#dk_command(bash c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()
@@ -57,6 +61,7 @@ endif()
 ## Second Check ###
 if(WIN_HOST)
 	dk_findProgram(GIT_EXE git ${GIT}/bin)
+	dk_findProgram(BASH_EXE bash ${GIT}/bin)
 elseif(ANDROID_HOST)
 	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
 else()
@@ -64,11 +69,12 @@ else()
 endif()
 
 if(NOT GIT_EXE)
-	dk_error("COULD NOT FIND GIT_EXE")
+	dk_fatal("COULD NOT FIND GIT_EXE")
 	return()
 endif()
 
 dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
+
 dk_set(GIT_VERSION ${GIT_VERSION})
 dk_info("###### git ######")
 dk_info("${GIT_EXE}")
@@ -78,8 +84,8 @@ return()
 
 #if(MSYSTEM)
 #	dk_depend(msys2)
-#	if(NOT EXISTS ${MSYS2})
-#		dk_error("MSYS2:${MSYS2} does not exist")
+#	if(NOT EXISTS ${MSYS2_DIR})
+#		dk_fatal("MSYS2:${MSYS2_DIR} does not exist")
 #	endif()
 #	
 #	dk_command(command -v git.exe OUTPUT_VARIABLE GIT_EXE NO_HALT) # BASH_ENV)
@@ -88,7 +94,7 @@ return()
 #	endif()
 #	
 #	if(NOT EXISTS ${GIT_EXE})
-#		dk_delete(${MSYS2}/var/lib/pacman/db.lck NO_HALT)
+#		dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 #		dk_command(${PACMAN_EXE} -S git --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 #	endif()
 #	
@@ -119,7 +125,7 @@ return()
 			elseif(ANDROID_HOST)
 				dk_command(apt -y install git)
 			elseif(LINUX_HOST)
-				dk_command(sudo apt-get -y install git)
+				dk_command(${SUDO} apt-get -y install git)
 			endif()
 			#dk_command(command -v git OUTPUT_VARIABLE GIT_EXE) # BASH_ENV)
 			dk_command(bash -c "command -v git" OUTPUT_VARIABLE GIT_EXE)
@@ -129,10 +135,10 @@ return()
 
 ### validate GIT variables ###
 #if(NOT GIT_EXE)
-#	dk_error("GIT_EXE:${GIT_EXE} is empty")
+#	dk_fatal("GIT_EXE:${GIT_EXE} is empty")
 #endif()
 #if(NOT EXISTS ${GIT_EXE})
-#	dk_error("GIT_EXE:${GIT_EXE} does not exist")
+#	dk_fatal("GIT_EXE:${GIT_EXE} does not exist")
 #endif()
 #
 #dk_set(GIT_EXE ${GIT_EXE}) # make the variable persistent

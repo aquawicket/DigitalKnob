@@ -6,8 +6,8 @@
 #
 #
 installDKCmake() {
-	dk_debugFunc
-	[ ${#} -ne 0 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 0
+
 	
 	dk_validate DKCMAKE_FUNCTIONS_DIR "dk_validateBranch"
 	echo "export DKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR}" >> /etc/profile

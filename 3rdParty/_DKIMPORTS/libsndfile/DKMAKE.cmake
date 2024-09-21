@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/libsndfile/libsndfile.git
 
 
@@ -20,11 +21,11 @@ dk_import(https://github.com/libsndfile/libsndfile/archive/refs/heads/master.zip
 
 ### LINK ###
 dk_include			(${LIBSNDFILE}/include)
-dk_include			(${LIBSNDFILE}/${OS})
-UNIX_dk_libDebug	(${LIBSNDFILE}/${OS}/${DEBUG_DIR}/libsndfile.a)
-UNIX_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/libsndfile.a)
-WIN_dk_libDebug		(${LIBSNDFILE}/${OS}/${DEBUG_DIR}/sndfile.lib)
-WIN_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/sndfile.lib)
+dk_include			(${LIBSNDFILE}/${triple})
+UNIX_dk_libDebug	(${LIBSNDFILE}/${triple}/${DEBUG_DIR}/libsndfile.a)
+UNIX_dk_libRelease	(${LIBSNDFILE}/${triple}/${RELEASE_DIR}/libsndfile.a)
+WIN_dk_libDebug		(${LIBSNDFILE}/${triple}/${DEBUG_DIR}/sndfile.lib)
+WIN_dk_libRelease	(${LIBSNDFILE}/${triple}/${RELEASE_DIR}/sndfile.lib)
 
 
 ### GENERATE ###

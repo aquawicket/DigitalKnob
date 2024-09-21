@@ -12,9 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	[NOMERGE]
 #
 function(dk_command)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
-	dk_getOptionValue(RESULT_VARIABLE		${ARGV})
+	dk_getOptionValue(RESULT_VARIABLE       ${ARGV})
 	dk_getOptionValue(RESULTS_VARIABLE    	${ARGV})
 	dk_getOptionValue(OUTPUT_VARIABLE    	${ARGV})
 	dk_getOptionValue(ERROR_VARIABLE 		${ARGV})
@@ -45,7 +45,7 @@ function(dk_command)
 	else()
 		dk_executeProcess(${MERGED})
 	endif()
-	
+
 	if(${RESULT_VARIABLE})
 		set(${RESULT_VARIABLE} ${${RESULT_VARIABLE}} PARENT_SCOPE)
 	endif()
@@ -73,8 +73,9 @@ dk_createOsMacros("dk_command")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

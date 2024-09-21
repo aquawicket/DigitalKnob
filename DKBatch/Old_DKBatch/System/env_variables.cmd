@@ -21,4 +21,4 @@ call ..\functions\DK.cmd
 	::call dk_registrySetKey HKCU\Environment PATH REG_EXPAND_SZ %PATH_VALUE%
 	echo:
 	pause
-goto:eof
+%endfunction%

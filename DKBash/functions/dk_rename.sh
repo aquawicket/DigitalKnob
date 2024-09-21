@@ -12,8 +12,8 @@
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #
 dk_rename() {
-	dk_debugFunc
-	[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	dk_debugFunc 2
+
 	
 	_from_="${1}"
 	_to_="${2}"
@@ -44,7 +44,8 @@ dk_rename() {
 
 
 
-DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+DKTEST() {
 
 	echo "rename this file" > renameMe.txt
 	dk_rename renameMe.txt iWasRenamed.txt

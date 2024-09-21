@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@rtn_var:	- Returns the extension upon success: False upon error
 #
 function(dk_getExtension path rtn_var)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	# WHY A NEW GET EXTENSION FUNCTION ?
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
@@ -32,7 +32,7 @@ function(dk_getExtension path rtn_var)
 			set(extension ${tarextension})
 		endif()
 	endif()
-	dk_printVar(extension)
+	#dk_printVar(extension)
     set(${rtn_var} ${extension} PARENT_SCOPE)
 endfunction()
 
@@ -41,8 +41,9 @@ endfunction()
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

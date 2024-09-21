@@ -1,4 +1,5 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+dk_load(dk_builder)
 # https://github.com/curl/curl
 # https://curl.se/
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
@@ -31,26 +32,29 @@ endif()
 
 
 ### LINK ###
-dk_define				(CURL_STATICLIB)
-dk_include				(${CURL}/include 								CURL_INCLUDE_DIR)
-dk_include				(${CURL}/${OS}/include/curl						CURL_INCLUDE_DIR2)
-DEBUG_dk_include		(${CURL}/${OS}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
-RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+dk_define					(CURL_STATICLIB)
+dk_include					(${CURL_DIR}/include 								CURL_INCLUDE_DIR)
+#dk_include					(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
+#DEBUG_dk_include			(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
+#RELEASE_dk_include			(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+dk_include					(${CURL_CONFIG_DIR}/lib								CURL_INCLUDE_DIR2)
+
+
 
 if(MULTI_CONFIG)
-	set(CURL_DEBUG_DIR ${CURL}/${OS}/lib/${DEBUG_DIR})
-	set(CURL_RELEASE_DIR ${CURL}/${OS}/lib/${RELEASE_DIR})
+	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
+	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/lib/${RELEASE_DIR})
 else()
-	set(CURL_DEBUG_DIR ${CURL}/${OS}/${DEBUG_DIR}/lib)
-	set(CURL_RELEASE_DIR ${CURL}/${OS}/${RELEASE_DIR}/lib)
+	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/${DEBUG_DIR}/lib)
+	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/${RELEASE_DIR}/lib)
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug		(${CURL_DEBUG_DIR}/libcurl.lib					CURL_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${CURL_RELEASE_DIR}/libcurl.lib				CURL_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}				CURL_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}				CURL_LIBRARY_RELEASE)
 else()	
-	dk_libDebug		(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
-	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a					CURL_LIBRARY_RELEASE)
+	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
+	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a						CURL_LIBRARY_RELEASE)
 endif()
 
 
@@ -58,16 +62,16 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL}/${OS}/include/curl")
+	WIN_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL_TRIPLE_DIR}/include/curl")
 elseif()
-	dk_set			(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include")
+	dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
 endif()
 
 
 
 ### GENERATE ###
 if(MSVC)
-	WIN_dk_configure(${CURL}
+	WIN_dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -145,7 +149,7 @@ if(MSVC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(ANDROID)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -160,7 +164,7 @@ elseif(ANDROID)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(IOS OR IOSSIM)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
@@ -179,7 +183,7 @@ elseif(IOS OR IOSSIM)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(MAC)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -252,7 +256,7 @@ elseif(MAC)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(LINUX)
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -325,7 +329,7 @@ elseif(LINUX)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()
-	dk_configure(${CURL}
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF

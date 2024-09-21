@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	Print the current cmake file and return
 #
 macro(dk_return)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("${ARGV}")
 	
 	if(PRINT_DKRETURNS)
 		dk_debug("${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
@@ -20,8 +20,9 @@ dk_createOsMacros("dk_return")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 	
 	dk_todo()
 endfunction()

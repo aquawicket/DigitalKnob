@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #	@target:(optional)	- TODO
 #
 function(dk_xcode)
-	dk_debugFunc(${ARGV})
+	dk_debugFunc("\${ARGV}")
 	
 	dk_xcodeDebug(${ARGV})
 	dk_xcodeRelease(${ARGV})
@@ -20,8 +20,9 @@ dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 
-function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	dk_debugFunc(${ARGV})
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc("\${ARGV}")
 
 	dk_todo()
 endfunction()

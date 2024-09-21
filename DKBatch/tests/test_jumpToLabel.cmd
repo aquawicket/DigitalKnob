@@ -25,9 +25,9 @@ test_jumpToLabelB
 
 
 	pause
-goto:eof
+%endfunction%
 
 
 :method1
 	test_jumpToLabelB
-goto:eof
+%endfunction%

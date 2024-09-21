@@ -1,20 +1,20 @@
 @echo off
-call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-call dk_source dk_setTitle
 ::#################################################################################
 ::# dk_postBuildMenu()
 ::#
 ::#
 :dk_postBuildMenu
-	call dk_debugFunc 0
-	
-    call dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    call dk_echo
+ setlocal
+    call dk_debugFunc 0
+    
+    %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    %dk_call% dk_echo
     echo %APP% %TARGET_OS% %TYPE%
         
-    call dk_echo
-goto:eof
+    %dk_call% dk_echo
+%endfunction%
 
 
 
@@ -22,7 +22,8 @@ goto:eof
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	call dk_debugFunc 0
-	
-	call dk_postBuildMenu
-goto:eof
+    call dk_debugFunc 0
+ setlocal
+    
+    %dk_call% dk_postBuildMenu
+%endfunction%

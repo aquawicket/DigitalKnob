@@ -6,13 +6,11 @@ if(!$dk_stacktrace){ $dk_stacktrace = 1 } else{ return }
 #
 #
 function Global:dk_stacktrace() {
-    dk_debugFunc
-	if($(__ARGC__) -ne 0){ dk_echo "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments"; return }
-
+    dk_debugFunc 0
 
 	### VERSION 1 ###
 	$stack_size = $(Get-PSCallStack).count
-	dk_echo "STACKTRACE[${stack_size}]" 
+	dk_call dk_echo "STACKTRACE[${stack_size}]" 
 	$i = 0
 
     while($i -lt $stack_size) {
@@ -20,7 +18,7 @@ function Global:dk_stacktrace() {
         $i=$i+1
         $frame = $i - 2
         if($i -eq 2){
-			dk_echo "  [${frame}] $(__FILE__ $i)}:$(__LINE__ $i):  $(__FUNCTION__ $i)($(__ARGV__ $i))"
+			dk_call dk_echo "  [${frame}] $(__FILE__ $i)}:$(__LINE__ $i):  $(__FUNCTION__ $i)($(__ARGV__ $i))"
 			continue
         }
     }
@@ -30,10 +28,10 @@ function Global:dk_stacktrace() {
 #		frame=$(( i - 2 ))
 #		if [ $i -eq 2 ]; then
 #			fileline=$(sed -n ${BASH_LINENO[${i}-1]-}p ${BASH_SOURCE[${i}]:-})
-#			dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${bg_white-}${black-}${BASH_LINENO[${i}-1]-}: > ${fileline}${clr-}"
+#			dk_call dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${bg_white-}${black-}${BASH_LINENO[${i}-1]-}: > ${fileline}${clr-}"
 #			continue
 #		fi
-#		[ $i -gt 2 ] && dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]-} ${FUNCNAME[${i}-1]-}()" # && continue
+#		[ $i -gt 2 ] && dk_call dk_echo "  [${frame}] ${BASH_SOURCE[${i}]:-}:${BASH_LINENO[${i}-1]-} ${FUNCNAME[${i}-1]-}()" # && continue
 #	done 
 
 
@@ -54,22 +52,22 @@ function Global:dk_stacktrace() {
 #	    stack+=("${indent} └ ${src}:${line} (${func})")
 #	    indent="${indent}    "
 #	done
-#	(IFS=$'\n'; dk_echo "${stack[*]}")
+#	(IFS=$'\n'; dk_call dk_echo "${stack[*]}")
 
 
 #	### VERSION 3 ###
 #	local i=1 line file func
 #	while read -r line func file < <(caller ${i}); do
-#		dk_echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
+#		dk_call dk_echo >&2 [${i}] ${file}:${line} ${func}(): $(sed -n ${line}p ${file})
 #		((i++))
 #	done
 }
 
 
 
-function Global:DKTEST() { ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() {
+	dk_debugFunc 0
 	
-	
-	dk_stacktrace
+	dk_call dk_stacktrace
 }

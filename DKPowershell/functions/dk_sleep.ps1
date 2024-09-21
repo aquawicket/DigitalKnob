@@ -5,8 +5,7 @@ if(!$dk_toLower){ $dk_toLower = 1 } else{ return }
 # dk_sleep(milliseconds)
 #
 function Global:dk_sleep($milliseconds) {
-	dk_debugFunc
-	if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
+	dk_debugFunc 1
 	
 	Start-Sleep -m $milliseconds
 }
@@ -15,7 +14,7 @@ function Global:dk_sleep($milliseconds) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 function Global:DKTEST() { 
-	dk_debugFunc
+	dk_debugFunc 0
 	
-	dk_sleep 5000
+	dk_call dk_sleep 5000
 }
