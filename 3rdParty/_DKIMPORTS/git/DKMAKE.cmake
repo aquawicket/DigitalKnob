@@ -20,9 +20,8 @@ endif()
 ### Get GIT variables ###
 if(GIT_DL)
 	dk_basename(${GIT_DL} GIT_DL_FILE)
-	
 	dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-	string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
+	#string(MAKE_C_IDENTIFIER ${GIT_FOLDER} GIT_FOLDER)
 	dk_toLower(${GIT_FOLDER} GIT_FOLDER)
 	dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
 	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
@@ -62,6 +61,7 @@ endif()
 ## Second Check ###
 if(WIN_HOST)
 	dk_findProgram(GIT_EXE git ${GIT}/bin)
+	dk_findProgram(BASH_EXE bash ${GIT}/bin)
 elseif(ANDROID_HOST)
 	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
 else()
