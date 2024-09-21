@@ -45,14 +45,8 @@ else()
 		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/libvorbisenc.a					VORBISENC_RELEASE_LIB)
 		dk_libRelease		(${VORBIS_CONFIG_DIR}/lib/libvorbisfile.a					VORBISFILE_RELEASE_LIB)
 endif()
-#else()
-#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbis.a			VORBIS_DEBUG_LIB)
-#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a		VORBISENC_DEBUG_LIB)
-#	dk_libDebug		(${VORBIS}/${triple}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a		VORBISFILE_DEBUG_LIB)
-#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbis.a		VORBIS_RELEASE_LIB)
-#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a	VORBISENC_RELEASE_LIB)
-#	dk_libRelease	(${VORBIS}/${triple}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a	VORBISFILE_RELEASE_LIB)
-#endif()			
+
+		
 DEBUG_dk_set(VORBIS_LIBRARY			${VORBIS_DEBUG_LIB})
 RELEASE_dk_set(VORBIS_LIBRARY		${VORBISENC_DEBUG_LIB})
 DEBUG_dk_set(DVORBISENC_LIBRARY		${VORBISFILE_DEBUG_LIB})
@@ -72,20 +66,10 @@ dk_set(VORBIS_CMAKE
 
 	
 ### GENERATE ###
-#if(ANDROID)
 dk_configure(${VORBIS_DIR} ${OGG_CMAKE})
-#else()
-#	if(DEBUG)
-#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${triple}/${DEBUG_DIR}")
-#	endif()
-#	DEBUG_dk_cd			(${VORBIS}/${triple}/${DEBUG_DIR})
-#	DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
-#	if(RELEASE)
-#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${triple}/${RELEASE_DIR}")
-#	endif()
-#	RELEASE_dk_cd			(${VORBIS}/${triple}/${RELEASE_DIR})
-#	RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
-#endif()
 
 
-dk_build		(${VORBIS_DIR})
+
+### BUILD ###
+dk_build(${VORBIS_DIR})
+
