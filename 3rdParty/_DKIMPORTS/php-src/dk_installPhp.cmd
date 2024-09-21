@@ -12,28 +12,29 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installPhp
     call dk_debugFunc 0
 	
-	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	%dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
 	
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"    call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" call dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
-	if not defined PHP_DL call dk_error "PHP_DL is invalid"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"    %dk_call% dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64" %dk_call% dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
+	if not defined PHP_DL %dk_call% dk_error "PHP_DL is invalid"
 	
 	
-	call dk_basename %PHP_DL% PHP_DL_FILE
-    call dk_removeExtension %PHP_DL_FILE% PHP_FOLDER
-    ::call dk_convertToCIdentifier %PHP_FOLDER% PHP_FOLDER
-    call dk_toLower %PHP_FOLDER% PHP_FOLDER
+	%dk_call% dk_basename %PHP_DL% PHP_DL_FILE
+    %dk_call% dk_removeExtension %PHP_DL_FILE% PHP_FOLDER
+    ::%dk_call% dk_convertToCIdentifier %PHP_FOLDER% PHP_FOLDER
+    %dk_call% dk_toLower %PHP_FOLDER% PHP_FOLDER
 	
-	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
-	call dk_set PHP "%DKTOOLS_DIR%\%PHP_FOLDER%"
-	call dk_set PHP_EXE "%PHP%\php.exe"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_set PHP "%DKTOOLS_DIR%\%PHP_FOLDER%"
+	%dk_call% dk_set PHP_EXE "%PHP%\php.exe"
 
 	if exist "%PHP_EXE%" goto:eof
 	
-	call dk_download "%PHP_DL%"
-	call dk_smartExtract "%DKDOWNLOAD_DIR%\%PHP_DL_FILE%" "%PHP%"
+	%dk_call% dk_download "%PHP_DL%"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%PHP_DL_FILE%" "%PHP%"
 	
-	if NOT exist "%PHP_EXE%"  call dk_error "cannot find PHP_EXE:%PHP_EXE%"
+	if NOT exist "%PHP_EXE%"  %dk_call% dk_error "cannot find PHP_EXE:%PHP_EXE%"
 %endfunction%
 
 
@@ -43,5 +44,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_installPhp
+	%dk_call% dk_installPhp
 %endfunction%

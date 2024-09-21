@@ -8,81 +8,82 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	
-	call dk_validate DK_HOST_OS "call dk_getHostTriple"
+	%dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
 	:: https://jdk.java.net/archive/
-	if "%DK_HOST_OS%"=="android"                  call dk_set OPENJDK_DL "openjdk-17"
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_x86_64" call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="mac_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"   call dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
-	if not defined OPENJDK_DL call dk_error "OPENJDK_DL is invalid"
+	if "%DK_HOST_OS%"=="android"                  %dk_call% dk_set OPENJDK_DL "openjdk-17"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="linux_x86_64" %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="mac_x86_64"   %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
+	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"   %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
+	if not defined OPENJDK_DL %dk_call% dk_error "OPENJDK_DL is invalid"
 	
-	call dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
-	call dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_FOLDER
-	::call dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
-	call dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
+	%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
+	%dk_call% dk_removeExtension %OPENJDK_DL_FILE% OPENJDK_FOLDER
+	::%dk_call% dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
+	%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
-	call dk_validate DK3RDPARTY_DIR "call dk_validateBranch"
-	call dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
-	call dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
-	call dk_getNativePath %OPENJDK% OPENJDK_NATIVE
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
+	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
+	%dk_call% dk_getNativePath %OPENJDK% OPENJDK_NATIVE
 	
-	if "%DK_HOST_OS%"=="win"   (call :dk_installOpenJdkWin)
-	if "%DK_HOST_OS%"=="mac"   (call :dk_installOpenJdkMac)
-	if "%DK_HOST_OS%"=="linux" (call :dk_installOpenJdkLinux)
+	if "%DK_HOST_OS%"=="win"   (%dk_call% :dk_installOpenJdkWin)
+	if "%DK_HOST_OS%"=="mac"   (%dk_call% :dk_installOpenJdkMac)
+	if "%DK_HOST_OS%"=="linux" (%dk_call% :dk_installOpenJdkLinux)
 %endfunction%	
 	
 :dk_installOpenJdkWin
-	call dk_set JAVA_VERSION 11
-	call dk_set JAVA_VERSION %JAVA_VERSION%
-	call dk_set JAVA_HOME %OPENJDK%
+	%dk_call% dk_set JAVA_VERSION 11
+	%dk_call% dk_set JAVA_VERSION %JAVA_VERSION%
+	%dk_call% dk_set JAVA_HOME %OPENJDK%
 	setx JAVA_VERSION %JAVA_VERSION%
 	setx JAVA_HOME %OPENJDK%
 	setx VS_JavaHome %OPENJDK%
 	setx STUDIO_JDK %OPENJDK%
 	setx STUDIO_GRADLE_JDK %OPENJDK%
-	call dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" "CurrentVersion" "REG_SZ" "%JAVA_VERSION%"
-	call dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK%\""
-	call dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK%\\bin\\server\\jvm.dll\""
+	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" "CurrentVersion" "REG_SZ" "%JAVA_VERSION%"
+	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK%\""
+	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK%\\bin\\server\\jvm.dll\""
 	
 	:::::: Set Environment Variables ::::::
-	call dk_setEnv JAVA_VERSION %JAVA_VERSION%
-	call dk_setEnv JAVA_HOME "%OPENJDK_8U41_WINPATH%"
-	call dk_setEnv VS_JavaHome "%OPENJDK_8U41_WINPATH%"
-	call dk_setEnv STUDIO_JDK "%OPENJDK_8U41_WINPATH%"
-	call dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8U41_WINPATH%"
+	%dk_call% dk_setEnv JAVA_VERSION %JAVA_VERSION%
+	%dk_call% dk_setEnv JAVA_HOME "%OPENJDK_8U41_WINPATH%"
+	%dk_call% dk_setEnv VS_JavaHome "%OPENJDK_8U41_WINPATH%"
+	%dk_call% dk_setEnv STUDIO_JDK "%OPENJDK_8U41_WINPATH%"
+	%dk_call% dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8U41_WINPATH%"
 %endfunction%
 
 :dk_installOpenJdkMac
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
 
-	call dk_download %OPENJDK_DL%
-	call dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
-	call dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
-	call dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
-	call dk_command java --version 
+	%dk_call% dk_download %OPENJDK_DL%
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
+	%dk_call% dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
+	%dk_call% dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
+	%dk_call% dk_command java --version 
 %endfunction%
 
 :dk_installOpenJdkLinux
 	::if exist /usr (
-	::	call dk_set CURRENT_DIR /usr
+	::	%dk_call% dk_set CURRENT_DIR /usr
 	::)
 	
 	::if "%DK_HOST_OS%"=="android" (
-	::	call dk_set SUDO ""
-	::	call dk_set APT "apt"
+	::	%dk_call% dk_set SUDO ""
+	::	%dk_call% dk_set APT "apt"
 	::) else (
-	::	call dk_set SUDO "sudo"
-	::	call dk_set APT "apt-get"
+	::	%dk_call% dk_set SUDO "sudo"
+	::	%dk_call% dk_set APT "apt-get"
 	::)
 	
 	if "%DK_HOST_OS%"=="android" (
-		call dk_command pkg install openjdk-17 -y
+		%dk_call% dk_command pkg install openjdk-17 -y
 	) else (
-		call dk_command %SUDO% apt update
-		call dk_command %SUDO% apt -y install openjdk-11-jdk
+		%dk_call% dk_command %SUDO% apt update
+		%dk_call% dk_command %SUDO% apt -y install openjdk-11-jdk
 	)
 	
-	call dk_command java --version
+	%dk_call% dk_command java --version
 %endfunction%
 
 
@@ -97,5 +98,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	call dk_installOpenjdk
+	%dk_call% dk_installOpenjdk
 %endfunction%
