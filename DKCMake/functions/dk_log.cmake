@@ -2,7 +2,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 dk_if(NOT DEFINED ENABLE_dk_log   "set(ENABLE_dk_log  1            CACHE INTERNAL '')")
-
+dk_if(NOT DEFINED NOHALT_dk_log   "set(ENABLE_dk_log  1            CACHE INTERNAL '')")
 # 0 VERBOSE    dk_verbose
 # 1 DEBUG      dk_debug
 # 2 INFO       dk_info
@@ -158,9 +158,12 @@ function(dk_log)
 		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***${clr}")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}") #OR HALT AND NOT NO_HALT)
 	endif()
+	
 	if(${_level_}_HALT)
-		dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
-		dk_exit(0) #OR HALT AND NOT NO_HALT)
+		if(NOT NOHALT_dk_log)
+			dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
+			dk_exit(0) #OR HALT AND NOT NO_HALT)
+		endif()
 	endif()
 	
 endfunction()

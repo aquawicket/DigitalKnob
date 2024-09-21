@@ -554,7 +554,7 @@ function(dk_getDKPaths)
 #
 	###### Set DKWEB ######
 	set(DKWEB "http://127.0.0.1" CACHE INTERNAL "" FORCE)
-	dk_printVar(DKWEB)
+	#dk_printVar(DKWEB)
 	
 endfunction()
 
