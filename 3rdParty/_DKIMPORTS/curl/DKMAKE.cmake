@@ -33,11 +33,8 @@ endif()
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${CURL_DIR}/include 								CURL_INCLUDE_DIR)
-#dk_include					(${CURL}/${triple}/include/curl						CURL_INCLUDE_DIR2)
-#DEBUG_dk_include			(${CURL}/${triple}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
-#RELEASE_dk_include			(${CURL}/${triple}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
-dk_include					(${CURL_CONFIG_DIR}/lib								CURL_INCLUDE_DIR2)
+dk_include					(${CURL_DIR}/include 						CURL_INCLUDE_DIR)
+dk_include					(${CURL_CONFIG_DIR}/lib						CURL_INCLUDE_DIR2)
 
 
 
@@ -45,26 +42,29 @@ if(MULTI_CONFIG)
 	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
 	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/lib/${RELEASE_DIR})
 else()
-	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/${DEBUG_DIR}/lib)
-	set(CURL_RELEASE_DIR 	${CURL_TRIPLE_DIR}/${RELEASE_DIR}/lib)
+	set(CURL_DEBUG_DIR 		${CURL_DEBUG_DIR}/lib)
+	set(CURL_RELEASE_DIR 	${CURL_RELEASE_DIR}/lib)
 endif()
 
 if(MSVC)
-	WIN_dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}				CURL_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}				CURL_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}		CURL_DEBUG_LIBRARY)
+	WIN_dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}		CURL_RELEASE_LIBRARY)
 else()	
-	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a						CURL_LIBRARY_DEBUG)
-	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a						CURL_LIBRARY_RELEASE)
+	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a				CURL_DEBUG_LIBRARY)
+	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a				CURL_RELEASE_LIBRARY)
 endif()
-
-
+DEBUG_dk_set				(CURL_LIBRARY								${CURL_DEBUG_LIBRARY})
+RELEASE_dk_set				(CURL_LIBRARY								${CURL_RELEASE_LIBRARY})
 
 
 ### 3RDPARTY LINK ###
+dk_set(CURL_CMAKE 
+	-DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} 
+	-DCURL_LIBRARY=${CURL_LIBRARY})
 if(MSVC)
-	WIN_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=/I${CURL_TRIPLE_DIR}/include/curl")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL_TRIPLE_DIR}/include/curl")
 elseif()
-	dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} -DCURL_LIBRARY=${CURL_LIBRARY_RELEASE} "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
 endif()
 
 
