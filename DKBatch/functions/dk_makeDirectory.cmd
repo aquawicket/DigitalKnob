@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1
 
     %dk_call% dk_replaceAll "%~1" "/" "\" _path_
-    if exist "%_path_%" %dk_call% dk_warning "%_path_% already exists" && goto:eof
+    if exist "%_path_%" %dk_call% dk_warning "%_path_% already exists" && %return%
 
     mkdir "%_path_%"
 %endfunction%

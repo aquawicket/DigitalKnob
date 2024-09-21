@@ -1,17 +1,18 @@
 @echo off
+set "ENABLE_dk_log=0"
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 call dk_set VERSION_dk_messageBox 3
 ::################################################################################
-::# dk_messageBox(<title> <message> rtn_var)
+::# dk_messageBox(<title> rtn_var <message>)
 ::#
 ::#
 :dk_messageBox
- setlocal
     call dk_debugFunc 3
-    
+ setlocal  
+ 
     set "title=%~1"
-    set "message=%~2"
+    set "message=%~3"
     
     if %VERSION_dk_messageBox% equ 1 goto:messageBox_1
     if %VERSION_dk_messageBox% equ 2 goto:messageBox_2 
@@ -66,7 +67,7 @@ call dk_set VERSION_dk_messageBox 3
         set rtn_var=%errorlevel%
         del %tmp%\tmp.vbs
         ::if "%~3" neq "" set "%3=%errorlevel%"
-        set "%3=%rtn_var%"
+        set "%2=%rtn_var%"
     %endfunction%
         
     :messageBox_4
@@ -84,7 +85,7 @@ call dk_set VERSION_dk_messageBox 3
     call dk_debugFunc 0
  setlocal
 
-    %dk_call% dk_messageBox "MessageBox Title" "Testing dk_messageBox" messageBox_result
+    %dk_call% dk_messageBox messageBox_result "MessageBox Title" "Testing dk_messageBox"
     echo messageBox_result = %messageBox_result%
     if %messageBox_result%==1  (echo You Clicked OK)
     if %messageBox_result%==2  (echo You Clicked Cancel)

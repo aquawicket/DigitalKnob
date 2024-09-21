@@ -65,9 +65,9 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     set /P "keyCode="
     set /P "="  
     
-    if defined callback call %callback% %keyCode% || echo callback returned error && goto:eof
+    if defined callback call %callback% %keyCode% || echo callback returned error && %return%
     ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || call dk_error "call :onKeyDown %keyCode% failed!"
-    ::if defined stopPollKeys goto:eof
+    ::if defined stopPollKeys %return%
     goto:dk_keyboard.pollKeys
 %endfunction%
 
@@ -79,7 +79,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     
     set "keyCode=%1"
     echo keyCode = %keyCode%
-    if %keyCode% equ 27 echo "Esc" && set "%2=1" && goto:eof
+    if %keyCode% equ 27 echo "Esc" && set "%2=1" && %return%
     
     if %keyCode% equ 13 echo "Enter"
     if %keyCode% equ 35 echo "End" 

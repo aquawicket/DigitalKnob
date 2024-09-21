@@ -33,7 +33,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         set /a n+=1
     )
     %dk_call% dk_echo
-    endlocal
 %endfunction%
 
 

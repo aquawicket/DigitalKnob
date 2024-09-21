@@ -8,9 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    if %ERRORLEVEL% equ 0 goto:eof
+    if %ERRORLEVEL% equ 0 %return%
     %dk_call% dk_error "ERRORLEVEL = %ERRORLEVEL%"
-    ::endlocal
 %endfunction%
 
 

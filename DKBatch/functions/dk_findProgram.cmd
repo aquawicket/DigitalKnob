@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "VAR=%~1"
     set "VAL=!%VAR%!"
-    if exist "%VAL%" %dk_call% dk_debug "already FOUND %name% at %VAL%" && goto:eof
+    if exist "%VAL%" %dk_call% dk_debug "already FOUND %name% at %VAL%" && %return%
     
     set "name=%~2"
     if "%~3" equ "" set "pattern=" && set "recursive="

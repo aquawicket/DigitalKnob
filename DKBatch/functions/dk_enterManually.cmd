@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_getParentFolder "%TARGET_PATH%" parent
     ::%dk_call% dk_printVar parent
     
-    if "%parent%"=="DKApps" goto:eof
+    if "%parent%"=="DKApps" %return%
     %dk_call% dk_makeDirectory "%DKAPPS_DIR%\%APP%"
     
     :: create DKApps/<APP>/DKMAKE.cmake 

@@ -117,7 +117,7 @@ if not defined DKSTACK_marker          set /a "DKSTACK_marker=1"
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::@echo on
-    if not defined ENABLE_dk_debugFunc goto:eof
+    if not defined ENABLE_dk_debugFunc %return%
 
     ::set "indent="%indent% L "
     set "indent=-^> "

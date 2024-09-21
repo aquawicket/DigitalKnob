@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
     call dk_debugFunc 0
     
-    if not exist "%DKSCRIPT_PATH%" %dk_call% dk_error "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && goto:eof
+    if not exist "%DKSCRIPT_PATH%" %dk_call% dk_error "DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist" && %return%
     
     %dk_call% dk_clearScreen
     %dk_call% dk_info "reloading %DKSCRIPT_PATH%. . ."

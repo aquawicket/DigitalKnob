@@ -54,7 +54,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo
     echo git commit "%message%"
 
-    %dk_call% dk_confirm || goto:eof
+    %dk_call% dk_confirm || %return%
     
     "%GIT_EXE%" commit -a -m "%message%"
     "%GIT_EXE%" push

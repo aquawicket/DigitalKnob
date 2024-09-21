@@ -422,6 +422,7 @@ if(RASPBERRY)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(fontconfig)
 	dk_disable(gdal)
+	dk_disable(glew)
 	dk_disable(glfw)				# cannot find wayland-scanner
 	dk_disable(gzip)
 	dk_disable(imagemagick)

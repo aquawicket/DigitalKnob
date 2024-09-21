@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     ::if "%3" neq "NO_CONFIRM" (
     ::    echo Git Update? Any local changes will be lost.
-    ::    %dk_call% dk_confirm || goto:eof
+    ::    %dk_call% dk_confirm || %return%
     ::)
         
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"

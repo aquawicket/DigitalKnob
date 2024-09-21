@@ -11,7 +11,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     ::if defined USER set "DKUSERNAME=%USER% else set "DKUSERNAME=%USERNAME%"
     takeown /F "%~1" /R /D "Y"
-    ::endlocal
 %endfunction%
 
 

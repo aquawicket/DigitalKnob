@@ -36,7 +36,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     %dk_call% dk_isDirectory "%destination%" && set "destination=%destination%\%url_filename%"
     ::%dk_call% dk_printVar destination
     
-    if exist "%destination%" %dk_call% dk_info "%destination% already exist" & goto:eof
+    if exist "%destination%" %dk_call% dk_info "%destination% already exist" & %return%
     
 	:: Test that url exists, if not try BACKUP_DL_SERVER
 	if "%TEST_BACKUP_DL_SERVER%"=="1"  set "url=%BACKUP_DL_SERVER%/%url_filename%"

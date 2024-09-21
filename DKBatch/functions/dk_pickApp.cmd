@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     goto:end_runCache
     :runCache
         %dk_call% dk_info "re-running cached options..."
-        %dk_call% dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & goto:eof
+        %dk_call% dk_set APP %_APP_% & call dk_set TARGET_OS %_TARGET_OS_% & call dk_set TYPE %_TYPE_% & %return%
     :end_runCache
     
     :: append remaining options with commands
@@ -79,7 +79,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_echo "!options[%choice%]!"
     
-    ::if "!DE!" equ "" %%%apps%[%n%]%% && goto:eof
+    ::if "!DE!" equ "" %%%apps%[%n%]%% && %return%
     if not defined commands[%choice%] (
         %dk_call% dk_echo "%choice%: invalid selection, please try again"
         %dk_call% dk_unset APP
@@ -113,19 +113,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::  %dk_call% dk_echo 
 ::    %dk_call% dk_echo "Please select an app to build"
 ::  %dk_call% dk_keyboardInput choice
-::   if "%choice%"=="0"  %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_% & goto:eof
-::    if "%choice%"=="1"  %dk_call% dk_set APP HelloWorld   & goto:eof
-::    if "%choice%"=="2"  %dk_call% dk_set APP DKCore       & goto:eof
-::    if "%choice%"=="3"  %dk_call% dk_set APP DKJavascript & goto:eof
-::    if "%choice%"=="4"  %dk_call% dk_set APP DKSDL        & goto:eof
-::    if "%choice%"=="5"  %dk_call% dk_set APP DKSDLRml     & goto:eof
-::    if "%choice%"=="6"  %dk_call% dk_set APP DKDomTest    & goto:eof
-::    if "%choice%"=="7"  %dk_call% dk_set APP DKTestAll    & goto:eof
-::    if "%choice%"=="8"  %dk_call% dk_enterManually        & goto:eof
-::    if "%choice%"=="9"  %dk_call% dk_clearScreen          & goto:eof
-::    if "%choice%"=="10" %dk_call% dk_reload               & goto:eof
-::    if "%choice%"=="11" %dk_call% dk_unset UPDATE         & goto:eof
-::    if "%choice%"=="12" %dk_call% dk_exit                 & goto:eof
+::   if "%choice%"=="0"  %dk_call% dk_set APP %_APP_% & %dk_call% dk_set TARGET_OS %_TARGET_OS_% & %dk_call% dk_set TYPE %_TYPE_% & %return%
+::    if "%choice%"=="1"  %dk_call% dk_set APP HelloWorld   & %return%
+::    if "%choice%"=="2"  %dk_call% dk_set APP DKCore       & %return%
+::    if "%choice%"=="3"  %dk_call% dk_set APP DKJavascript & %return%
+::    if "%choice%"=="4"  %dk_call% dk_set APP DKSDL        & %return%
+::    if "%choice%"=="5"  %dk_call% dk_set APP DKSDLRml     & %return%
+::    if "%choice%"=="6"  %dk_call% dk_set APP DKDomTest    & %return%
+::    if "%choice%"=="7"  %dk_call% dk_set APP DKTestAll    & %return%
+::    if "%choice%"=="8"  %dk_call% dk_enterManually        & %return%
+::    if "%choice%"=="9"  %dk_call% dk_clearScreen          & %return%
+::    if "%choice%"=="10" %dk_call% dk_reload               & %return%
+::    if "%choice%"=="11" %dk_call% dk_unset UPDATE         & %return%
+::    if "%choice%"=="12" %dk_call% dk_exit                 & %return%
 ::
 ::    %dk_call% dk_echo "%choice%: invalid selection, please try again"
 ::    %dk_call% dk_unset APP

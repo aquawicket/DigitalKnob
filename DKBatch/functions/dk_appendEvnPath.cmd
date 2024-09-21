@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_path_=%~1"
     %dk_call% dk_stringContains "%PATH%\" "%_path_%" result
 
-    if "%result%" equ "true" dk_info "path already in list" && endlocal & goto:oef
+    if "%result%" equ "true" dk_info "path already in list" && endlocal & %return%
 
     setx PATH "%PATH%";"%_path_%" >nul
     set "PATH=%PATH%;%_path_%"

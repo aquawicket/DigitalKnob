@@ -39,8 +39,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ) else (
         echo F|xcopy "%_from_%" "%_to_%" /H /Y
     )
-
-    endlocal
     ::TODO
     ::[ ? = "success" ]
 %endfunction%

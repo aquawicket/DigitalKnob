@@ -125,12 +125,12 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
 ::#
 :dk_log
     call dk_debugFunc 1 2
-    if "%ENABLE_dk_log%" neq "1"  goto:eof
+    if "%ENABLE_dk_log%" neq "1"  %return%
   setlocal   
     
         if "%~2" equ "" set "_level_=DEFAULT" && set "_message_=%~1"
         if "%~2" neq "" set "_level_=%~1"     && set "_message_=%~2"
-        if "!%_level_%_ENABLE!" neq "1"  goto:eof
+        if "!%_level_%_ENABLE!" neq "1"  %return%
       
         ::if "" == %_message_:~0,1%%_message_:~-1% %dk_call% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
 
@@ -139,7 +139,6 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
         if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && %dk_call% dk_stacktrace
         if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   && %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
         if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   && %dk_call% dk_exit 13
-    endlocal
 %endfunction%
 
 

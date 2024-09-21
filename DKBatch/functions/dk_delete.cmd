@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_replaceAll "%~1" "/" "\" _path_
     if not exist "%_path_%" (
         %dk_call% dk_warning "dk_delete %_path_% does not exist"
-        goto:eof
+        %return%
     )
 
     %dk_call% dk_getFullPath "%_path_%" _path_ 

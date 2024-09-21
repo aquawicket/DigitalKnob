@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     if not defined DKBRANCH_DIR %dk_call% dk_validateBranch
     ::%dk_call% dk_printVar DKBRANCH_DIR
-    ::if not exist "%DKBRANCH_DIR%\cache" %dk_call% dk_warning "%DKBRANCH_DIR%\cache does not exist" && goto:eof
-    if not exist "%DKBRANCH_DIR%\cache" goto:eof
+    ::if not exist "%DKBRANCH_DIR%\cache" %dk_call% dk_warning "%DKBRANCH_DIR%\cache does not exist" && %return%
+    if not exist "%DKBRANCH_DIR%\cache" %return%
     
     set /a count=0
     for /f "tokens=*" %%a in (%DKBRANCH_DIR%\cache) do (

@@ -38,7 +38,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "!DE!" neq "" call set "lastElement=%%line[%numLines%]%%"
 
     :: return the last line from the programs output
-    if "%~3" neq "" endlocal & set "%3=%lastElement%" && goto:eof
+    if "%~3" neq "" endlocal & set "%3=%lastElement%" && %return%
     endlocal & set "%2=%lastElement%"
 %endfunction%
     
