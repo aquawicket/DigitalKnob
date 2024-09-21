@@ -339,6 +339,7 @@ if(LINUX)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
+	dk_disable(glew)				
 	dk_disable(gnutls)
 	dk_disable(gzip)
 	dk_disable(imagemagick)			# libimagemagik.a not found
