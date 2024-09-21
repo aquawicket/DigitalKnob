@@ -8,10 +8,9 @@ if(!$dk_messageBox){ $dk_messageBox = 1 } else{ return }
 function Global:dk_messageBox() {
 	dk_debugFunc 0
 
-	$message = "$args[0]" 
+	$message = $args[0]
 	Add-Type -AssemblyName PresentationCore,PresentationFramework
-	$msgBody = "$message"
-	[System.Windows.MessageBox]::Show($msgBody)
+	[System.Windows.MessageBox]::Show($message)
 }
 
 
@@ -22,5 +21,5 @@ function Global:dk_messageBox() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_messageBox "the confimation has passed" 
+	dk_call dk_messageBox "dk_messageBox test message" 
 }
