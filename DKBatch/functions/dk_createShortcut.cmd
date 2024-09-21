@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::	$Shortcut.Save();
 
 	:: Method 3: call powershell function
-	%dk_call% dk_callPowershell dk_createShortcut %*
+	%dk_call% dk_callDKPowershell dk_createShortcut %*
     
     if not exist %shortcut_path% %dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%"
 %endfunction%

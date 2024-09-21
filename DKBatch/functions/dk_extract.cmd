@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_info "Extracting %~1 to %dest%. . ."
 	if exist "%dest%" %dk_call% dk_error "%~2 already exists"
     %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%dest%"'
-	::%dk_call% dk_callPowershell dk_extract %*
+	::%dk_call% dk_callDKPowershell dk_extract %*
     %return%
     
 	::### handle 2 parameters
@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_info "Extracting %~1 to %~2. . ."
 	if exist "%~2" %dk_call% dk_error "%~2 already exists"
     if not exist "%~2" %dk_call% dk_powershell Expand-Archive '"%1"' -DestinationPath '"%2"'
-	::if not exist "%~2" %dk_call% dk_callPowershell dk_extract %*
+	::if not exist "%~2" %dk_call% dk_callDKPowershell dk_extract %*
     
     :: try tar
     if not exist "%~2" %dk_call% dk_makeDirectory "%2" && tar --help && tar -xf "%~1" -C "%~2"

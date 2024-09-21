@@ -2,11 +2,11 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_callBash(function, arguments..., return_args...)
+::# dk_callDKBash(function, arguments..., return_args...)
 ::#
 ::#   Reference: https://stackoverflow.com/questions/34451444/how-to-get-a-returned-value-from-powershell-and-get-it-in-a-batch-file
 ::#
-:dk_callBash
+:dk_callDKBash
     call dk_debugFunc 1 99
  setlocal
 	
@@ -49,9 +49,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_callBash dk_test "parameter1" "parameter2" rtn_var
+	%dk_call% dk_callDKBash dk_test "parameter1" "parameter2" rtn_var
 	echo rtn_var = %rtn_var%
-	::%dk_call% dk_callPowershell dk_confirm
-    ::%dk_call% dk_callPowershell dk_debug "string from DKBatch"
+	::%dk_call% dk_callDKBash dk_confirm
+    ::%dk_call% dk_callDKBash dk_debug "string from DKBatch"
 
 %endfunction%

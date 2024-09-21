@@ -12,8 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: METHOD 1:  use dk_powershell
 	::%dk_call" dk_powershell "if(-not ($(New-Object -ComObject:Shell.Application).Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | ? {$_.Path -eq '%~1'})){$(New-Object -ComObject:Shell.Application).Namespace('%~1').Self.InvokeVerb('pintohome')}"
 
-    :: METHOD 2:  call the dk_callPowershell function
-    %dk_call% dk_callPowershell dk_pinToQuickAccess %*
+    :: METHOD 2:  call the dk_callDKPowershell function
+    %dk_call% dk_callDKPowershell dk_pinToQuickAccess %*
 	
 %endfunction%
 

@@ -11,7 +11,7 @@ dk_callDKBatch() {
 	#dk_validate CMD_EXE "??"
 	dk_validate DKBATCH_FUNCTIONS_DIR "dk_validateBranch()"
 	cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} 
-	dk_debug("output_variable = ${output_variable}")
+	dk_debug "output_variable = ${output_variable}"
 	$2="${output_variable}"
 }
 
