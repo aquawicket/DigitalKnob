@@ -19,6 +19,7 @@ function(dk_bashEnv)
 	endif()
 	
 	list(APPEND BASH_COMMANDS "cd ${BASH_WORKING_DIR}")
+	dk_cd(${BASH_WORKING_DIR})
 	#dk_printVar(BASH_WORKING_DIR)
 	#dk_pause()
 	
