@@ -29,13 +29,8 @@ WIN_X86_64_HOST_dk_set (PYTHON_DL https://www.python.org/ftp/python/2.7.18/pytho
 
 
 ## Get PYTHON_DL_FILE, PYTHON_FOLDER and PYTHON variables
-
 if(PYTHON_DL)
 	dk_importVariables(${PYTHON_DL} rtn_var)
-#	dk_basename(${PYTHON_DL} PYTHON_DL_FILE)
-#	dk_removeExtension(${PYTHON_DL_FILE} PYTHON_FOLDER)
-#	string(MAKE_C_IDENTIFIER ${PYTHON_FOLDER} PYTHON_FOLDER)
-#	dk_set(PYTHON ${DK3RDPARTY_DIR}/${PYTHON_FOLDER})
 endif()
 
 

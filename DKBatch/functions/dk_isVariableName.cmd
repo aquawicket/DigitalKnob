@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://stackoverflow.com/a/17584764
 ::#
 :dk_isVariableName
- setlocal
     call dk_debugFunc 1 2
-
+ setlocal
+ 
     ::set "arg1=%~1"
     ::if defined "%~1" call set "arg1=%%%arg1%%%"
     set "var="&for /f "delims=0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ[]" %%i in ("%~1") do set "bad_characters=%%i"

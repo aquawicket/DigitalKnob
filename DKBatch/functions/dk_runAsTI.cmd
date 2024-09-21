@@ -25,7 +25,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     ::%dk_call% dk_runAsTI regedit
-    %dk_call% dk_runAsTI cmd.exe
+    ::%dk_call% dk_runAsTI cmd.exe
+	%dk_call% dk_runAsTi services.msc
 %endfunction%
 
 

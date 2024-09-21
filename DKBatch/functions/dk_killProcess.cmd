@@ -10,9 +10,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#     Example:  call dk_endProcess iexplore.exe
 ::#    
 :dk_killProcess
- setlocal
     call dk_debugFunc 1
-        
+ setlocal
+ 
     set "process=%~1"
 
     tasklist /fi "imagename eq %process%" |find ":" >nul

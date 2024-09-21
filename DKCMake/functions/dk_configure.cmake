@@ -17,11 +17,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
 	endif()
 	if(isSubDirectory)
-		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use PWD as the BINARY_DIR if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
+		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
 	else()
 		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	endif()
-	#dk_debug("dk_configure(${SOURCE_DIR}) -> ${BINARY_DIR}")
 	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
@@ -73,7 +72,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 	else()
 		dk_notice("configure type not detected. running argument in bash environment")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${ARGN}\n")
-		#dk_printVar(BINARY_DIR)
 		
 		if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 			dk_queueCommand(${ARGN} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
@@ -104,5 +102,6 @@ dk_createOsMacros("dk_configure")
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_depend(zlib)
+	dk_configure(${ZLIB_DIR})
 endfunction()

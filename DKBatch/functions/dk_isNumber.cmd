@@ -7,9 +7,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#  https://stackoverflow.com/a/17584764
 ::#
 :dk_isNumber
- setlocal
     call dk_debugFunc 1 2
-
+ setlocal
+ 
     set "arg1=%~1"
     if defined %~1 call set "arg1=%%%arg1%%%"
     set "var="&for /f "delims=0123456789.-" %%i in ("%arg1%") do set non_numeric=%%i

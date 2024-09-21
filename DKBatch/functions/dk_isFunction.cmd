@@ -12,9 +12,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# https://stackoverflow.com/a/85932/688352
 ::#
 :dk_isFunction
- setlocal
     call dk_debugFunc 1
-    
+ setlocal
+ 
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
     if %ERRORLEVEL% equ 0 (
         if "%~2" neq "" (endlocal & set "%2=true")
