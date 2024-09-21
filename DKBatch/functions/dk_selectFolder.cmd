@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ) do set "sFolderName=%%i"
     if not defined sFolderName (
         %dk_call% dk_echo "no folder selected"
-        goto:eof
+        %return%
     )
     
     endlocal & set "%~1=%sFolderName%"

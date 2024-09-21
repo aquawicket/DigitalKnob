@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     echo Resetting Apps . . .
 
-    %dk_call% dk_confirm || goto:eof
+    %dk_call% dk_confirm || %return%
     
     cd %DKAPPS_DIR%
     "%GIT_EXE%" clean -f -d

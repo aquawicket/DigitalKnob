@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set /a "seconds=(hour*60*60)+(minutes*60)+second"
     set /a "currentTime=%seconds%%centiseconds%"    
 
-    if {!%~1.startTime!}=={} endlocal & set %1.startTime=%currentTime% & set %1.lastTime=%currentTime% & goto:eof
+    if {!%~1.startTime!}=={} endlocal & set %1.startTime=%currentTime% & set %1.lastTime=%currentTime% & %return%
     set "startTime=!%~1.startTime!
     set "lastTime=!%~1.lastTime!"
     

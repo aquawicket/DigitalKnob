@@ -53,7 +53,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		title %time%
 		rem echo %ESC%[0;0HT:
 		rem echo %ESC%[0;0HT:%time%
-		rem if not defined DKApp.active goto:eof
+		rem if not defined DKApp.active %return%
 	)	
 %endfunction%
 
@@ -71,7 +71,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	echo keyCode: %~1
 	if %~1 equ 27 set "callback="
-	if "%~1" == "" (call) & goto:eof
+	if "%~1" == "" (call) & %return%
 	
 	::echo %ESC%[21;0HDKApp_onKeyDown %*
 	::echo %ESC%[19;70H            &::

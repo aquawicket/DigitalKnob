@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_info "you wish to commit or save beforehand."
     %dk_call% dk_echo
         
-    %dk_call% dk_confirm || goto:eof
+    %dk_call% dk_confirm || %return%
     
     :: first we need to relocate this file up one directory
     :: make sure script is running from DKBRANCH_DIR
@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_echo "%clr%"
         %dk_call% dk_printVar DKSCRIPT_DIR
         %dk_call% dk_printVar DKBRANCH_DIR
-        goto:eof
+        %return%
     )
     
     %dk_call% dk_killProcess java.exe
