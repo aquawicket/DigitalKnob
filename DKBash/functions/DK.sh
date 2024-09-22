@@ -154,12 +154,12 @@ dk_initFiles(){
 #
 #
 dk_download() {
-	if [ -e "${2}" ]; then
+	if [ -e "${2-}" ]; then
 		echo "WARNING: dk_download(): ${2} already exists"
 		return 0
 	fi
 	echo "Downloading $(dk_basename ${1}) . . ."
-	parentdir="$(dk_dirname "${2}")"
+	parentdir="$(dk_dirname "${2-}")"
 	OLDPWD=${PWD}
 	cd "${parentdir}"
 	
