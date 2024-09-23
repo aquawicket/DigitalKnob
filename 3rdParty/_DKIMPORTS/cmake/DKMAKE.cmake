@@ -22,9 +22,6 @@ WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/down
 
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
 dk_importVariables(${CMAKE_DL} rtn_var)
-#dk_basename(${CMAKE_DL} CMAKE_DL_FILE)
-#dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-#dk_convertToCIdentifier(${CMAKE_FOLDER} CMAKE_FOLDER)
 
 
 

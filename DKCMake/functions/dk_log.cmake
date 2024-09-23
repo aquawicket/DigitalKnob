@@ -1,8 +1,8 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
-dk_if(NOT DEFINED ENABLE_dk_log   "set(ENABLE_dk_log  1            CACHE INTERNAL '')")
-dk_if(NOT DEFINED NOHALT_dk_log   "set(ENABLE_dk_log  1            CACHE INTERNAL '')")
+dk_if(NOT DEFINED ENABLE_dk_log "set(ENABLE_dk_log  1				CACHE INTERNAL '')")
+dk_if(NOT DEFINED NOHALT_dk_log	"set(NOHALT_dk_log 1				CACHE INTERNAL '')")
 # 0 VERBOSE    dk_verbose
 # 1 DEBUG      dk_debug
 # 2 INFO       dk_info
@@ -101,7 +101,7 @@ dk_if(NOT DEFINED ERROR_ENABLE    "set(ERROR_ENABLE 1 CACHE INTERNAL '')")
 dk_if(NOT DEFINED ERROR_COLOR     "set(ERROR_COLOR '${lred}' CACHE INTERNAL '')")
 dk_if(NOT DEFINED ERROR_TAG       "set(ERROR_TAG 'ERROR: ' CACHE INTERNAL '')")
 dk_if(NOT DEFINED ERROR_PAUSE     "set(ERROR_PAUSE 1 CACHE INTERNAL '')")
-dk_if(NOT DEFINED ERROR_TRACE     "set(ERROR_TRACE 0 CACHE INTERNAL '')")
+dk_if(NOT DEFINED ERROR_TRACE     "set(ERROR_TRACE 1 CACHE INTERNAL '')")
 dk_if(NOT DEFINED ERROR_LINE      "set(ERROR_LINE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED ERROR_HALT      "set(ERROR_HALT 0 CACHE INTERNAL '')")
 
@@ -110,11 +110,9 @@ dk_if(NOT DEFINED FATAL_ENABLE    "set(FATAL_ENABLE 1 CACHE INTERNAL '')")
 dk_if(NOT DEFINED FATAL_COLOR     "set(FATAL_COLOR '${red}' CACHE INTERNAL '')")
 dk_if(NOT DEFINED FATAL_TAG       "set(FATAL_TAG 'FATAL: ' CACHE INTERNAL '')")
 dk_if(NOT DEFINED FATAL_PAUSE     "set(FATAL_PAUSE 1 CACHE INTERNAL '')")
-dk_if(NOT DEFINED FATAL_TRACE     "set(FATAL_TRACE 0 CACHE INTERNAL '')")
+dk_if(NOT DEFINED FATAL_TRACE     "set(FATAL_TRACE 1 CACHE INTERNAL '')")
 dk_if(NOT DEFINED FATAL_LINE      "set(FATAL_LINE 0 CACHE INTERNAL '')")
 dk_if(NOT DEFINED FATAL_HALT      "set(FATAL_HALT 1 CACHE INTERNAL '')")
-
-
 
 
 ################################################################################
@@ -146,23 +144,26 @@ function(dk_log)
 	
 	
 	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
-	if(${_level_}_PAUSE)
+	
+	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
 		dk_echo("${${_level_}_COLOR}*** PAUSE_ON_${_level_} ***${clr}")
-		dk_pause() #OR PAUSE AND NOT NO_PAUSE)
+		dk_pause()
 	endif()
-	if(${_level_}_TRACE)
-		dk_echo("${${_level_}_COLOR}*** TRACE_ON_${_level_} ***${clr}")
-		dk_stacktrace() #OR TRACE AND NOT NO_TRACE)
+	if(${_level_}_TRACE) #OR TRACE AND NOT NO_TRACE)
+		dk_echo("${${_level_}_COLOR}*** TRACE_ON_${_level_} ***")
+		dk_builtinStacktrace()
+		#dk_stacktrace()
+		message("${clr}")
 	endif()
-	if(${_level_}_LINE)
+	if(${_level_}_LINE) #OR HALT AND NOT NO_HALT)
 		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***${clr}")
-		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}") #OR HALT AND NOT NO_HALT)
+		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
 	endif()
 	
-	if(${_level_}_HALT)
+	if(${_level_}_HALT) #OR HALT AND NOT NO_HALT)
 		if(NOT NOHALT_dk_log)
 			dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
-			dk_exit(0) #OR HALT AND NOT NO_HALT)
+			dk_exit(0)
 		endif()
 	endif()
 	

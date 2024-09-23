@@ -33,7 +33,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_importVariables PLUGIN_URL rtn_var)
 	#dk_debugFunc("\${ARGV}")
 	
-	##### Test that we dont have any non-alphanumeric characters ######
+	##### Test if we have any non-alphanumeric characters ######
 	#dk_convertToCIdentifier(${PLUGIN_URL} PLUGIN_URL_TEST)
 	#if(NOT ${PLUGIN_URL} STREQUAL ${PLUGIN_URL_TEST})
 	#	dk_fatal("${PLUGIN_URL} contains non-alphanumeric characters")
@@ -297,44 +297,44 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#endif()
 	
 	# LIB_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_DIR)
 		if(PLUGIN_INSTALL_PATH)
 			dk_set(${PLUGIN_VAR_PREFIX}_DIR ${PLUGIN_INSTALL_PATH})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_DIR)
 		endif()
-	endif()
-	if(EXISTS ${${PLUGIN_VAR_PREFIX}_DIR})
+	#endif()
+	#if(EXISTS ${${PLUGIN_VAR_PREFIX}_DIR})
 		dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_VAR_PREFIX}_DIR})
 		dk_printVar(CURRENT_PLUGIN_DIR)
-	endif()
+	#endif()
 	
 	
 	# LIB_URL
-	if(NOT ${PLUGIN_VAR_PREFIX}_URL)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_URL)
 		if(PLUGIN_INSTALL_URL)
 			dk_set(${PLUGIN_VAR_PREFIX}_URL ${PLUGIN_INSTALL_URL})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_URL)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_DL_FILE
-	if(NOT ${PLUGIN_VAR_PREFIX}_DL_FILE)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_DL_FILE)
 		if(PLUGIN_URL_FILENAME)
 			dk_set(${PLUGIN_VAR_PREFIX}_DL_FILE ${PLUGIN_URL_FILENAME})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_DL_FILE)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_VERSION
-	if(NOT ${PLUGIN_VAR_PREFIX}_VERSION)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_VERSION)
 		if(PLUGIN_INSTALL_VERSION)
 			dk_set(${PLUGIN_VAR_PREFIX}_VERSION ${PLUGIN_INSTALL_VERSION})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_VERSION)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_FOLDER
-	if(NOT ${PLUGIN_VAR_PREFIX}_FOLDER)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_FOLDER)
 		if(PLUGIN_INSTALL_FOLDER)
 			dk_set(${PLUGIN_VAR_PREFIX}_FOLDER ${PLUGIN_INSTALL_FOLDER})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_FOLDER)
@@ -343,69 +343,69 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 			dk_set(CURRENT_PLUGIN_FOLDER ${${PLUGIN_VAR_PREFIX}_FOLDER})
 			dk_printVar(CURRENT_PLUGIN_FOLDER)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_NAME
-	if(NOT ${PLUGIN_VAR_PREFIX}_NAME)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_NAME)
 		if(PLUGIN_INSTALL_FOLDER)
 			dk_set(${PLUGIN_VAR_PREFIX}_NAME ${PLUGIN_INSTALL_FOLDER})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_NAME)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_BRANCH
-	if(NOT ${PLUGIN_VAR_PREFIX}_BRANCH)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_BRANCH)
 		if(PLUGIN_INSTALL_BRANCH)
 			dk_set(${PLUGIN_VAR_PREFIX}_BRANCH ${PLUGIN_INSTALL_BRANCH})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_BRANCH)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_TAG
-	if(NOT ${PLUGIN_VAR_PREFIX}_TAG)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_TAG)
 		if(PLUGIN_INSTALL_TAG)
 			dk_set(${PLUGIN_VAR_PREFIX}_TAG ${PLUGIN_INSTALL_TAG})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_TAG)
 		endif()
-	endif()
+	#endif()
 	
 	# LIB_TRIPLE_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_TRIPLE_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_TRIPLE_DIR)
 		dk_assert(triple)
 		dk_set(${PLUGIN_VAR_PREFIX}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${triple})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_TRIPLE_DIR)
-	endif()
+	#endif()
 	
 	# LIB_CONFIG_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_CONFIG_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_CONFIG_DIR)
 		dk_assert(CONFIG_PATH)
 		dk_set(${PLUGIN_VAR_PREFIX}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_CONFIG_DIR)
-	endif()
+	#endif()
 	
 	# LIB_BUILD_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_BUILD_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_BUILD_DIR)
 		dk_assert(BUILD_PATH)
 		dk_set(${PLUGIN_VAR_PREFIX}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_BUILD_DIR)
-	endif()
+	#endif()
 	
 	# LIB_DEBUG_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_DEBUG_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_DEBUG_DIR)
 		dk_assert(DEBUG_DIR)
 		dk_set(${PLUGIN_VAR_PREFIX}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_DEBUG_DIR)
-	endif()
+	#endif()
 	
 	# LIB_RELEASE_DIR
-	if(NOT ${PLUGIN_VAR_PREFIX}_RELEASE_DIR)
+	#if(NOT ${PLUGIN_VAR_PREFIX}_RELEASE_DIR)
 		dk_assert(RELEASE_DIR)
 		dk_set(${PLUGIN_VAR_PREFIX}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_RELEASE_DIR)
-	endif()
+	#endif()
 	
-	set(${rtn_var} ${PLUGIN_IMPORT_NAME_LOWER} PARENT_SCOPE)
-	dk_printVar(PLUGIN_IMPORT_NAME_LOWER)
+	set(${rtn_var} ${PLUGIN_IMPORT_NAME_UPPER} PARENT_SCOPE)
+	dk_printVar(PLUGIN_IMPORT_NAME_UPPER)
 endfunction()
 
 

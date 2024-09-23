@@ -19,15 +19,15 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_import url)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_importVariables(${url} plugin ${ARGN})
-	dk_set(plugin ${plugin})
-	dk_printVar(plugin)
+	dk_importVariables(${url} plugin_var ${ARGN})
+	#dk_set(plugin ${plugin})
+	#dk_printVar(plugin)
 	
-	dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
-	dk_toUpper(${plugin_alpha_numeric} plugin_var)	
+	#dk_convertToCIdentifier(${plugin} plugin_alpha_numeric)
+	#dk_toUpper(${plugin_alpha_numeric} plugin_var)	
 
 	if(NOT DKOFFLINE)
-		###### Import Git Repository ######
+		###### Import from Git Repository ######
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
@@ -52,7 +52,7 @@ function(dk_import url)
 				dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
 			endif()
 			
-		###### Import Download File ######
+		###### Import from Download File ######
 		else()
 			dk_verbose("dk_install(${plugin} ${ARGN})")
 			dk_install(${plugin} ${ARGN})
@@ -63,9 +63,6 @@ function(dk_import url)
 	if(PATCH)
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
-	
-	# Set the current build output directory
-	dk_set(CURRENT_PLUGIN_DIR "${${plugin_var}}")
 	
 endfunction()
 dk_createOsMacros("dk_import")

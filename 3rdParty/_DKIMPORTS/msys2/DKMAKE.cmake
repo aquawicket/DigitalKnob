@@ -33,11 +33,6 @@ endif()
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
 dk_importVariables(${MSYS2_DL} rtn_val)
 
-### Get MSYS2_DIR and MSYS2_EXE variables ###
-#dk_basename(${MSYS2_DL} MSYS2_DL_FILE)
-#dk_removeExtension(${MSYS2_DL_FILE} MSYS2_FOLDER)
-#dk_validate(DK3RDPARTY_DIR "dk_validateBranch()")
-#dk_set(MSYS2 "${DK3RDPARTY_DIR}/${MSYS2_FOLDER}")
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 
 

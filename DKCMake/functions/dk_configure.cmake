@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc("\${ARGV}")
 
-	dk_assertPath(SOURCE_DIR)	
+	dk_assertPath(SOURCE_DIR)
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
@@ -24,6 +24,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	else()
 		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	endif()
+	dk_makeDirectory(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	
 	# Configure with CMake		(multi_config / single_config)
