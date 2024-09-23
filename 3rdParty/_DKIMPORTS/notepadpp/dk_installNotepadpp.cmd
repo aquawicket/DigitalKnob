@@ -37,10 +37,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_copy %DKIMPORTS_DIR%\notepadpp\dark_config.xml %NOTEPADPP_DIR%\config.xml OVERWRITE
 	
 	::### Add Context Menu ###
-	%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppContextMenu.cmd
+	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppContextMenu.cmd
 	
 	::### Add File Associations ###
-	%dk_call% %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
+	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
 %endfunction%
 
 
