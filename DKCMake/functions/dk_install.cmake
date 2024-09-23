@@ -129,7 +129,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_debug("We will try to extract it in case it's an archive, but it may fail.")
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
-		#dk_todo("replace this section with dk_smartExtract() function")
+		#dk_todo("replace this section with dk _smartExtract() function")
 		dk_info("Extracting ${PLUGIN_DL_FILENAME}")
 		
 		set(src_extractPath "${PLUGIN_DL_DIR}/UNZIPPED")
