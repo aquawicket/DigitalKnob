@@ -142,7 +142,6 @@ function(dk_log)
 		return()
 	endif()
 	
-	
 	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")
 	
 	if(${_level_}_PAUSE) #OR PAUSE AND NOT NO_PAUSE)
@@ -156,15 +155,13 @@ function(dk_log)
 		message("${clr}")
 	endif()
 	if(${_level_}_LINE) #OR HALT AND NOT NO_HALT)
-		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***${clr}")
+		dk_echo("${${_level_}_COLOR}*** LINE_ON_${_level_} ***")
 		#d_k_showFileLine("${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}")
+		message("${clr}")
 	endif()
-	
 	if(${_level_}_HALT) #OR HALT AND NOT NO_HALT)
-		if(NOT NOHALT_dk_log)
-			dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
-			dk_exit(0)
-		endif()
+		dk_echo("${${_level_}_COLOR}*** HALT_ON_${_level_} ***${clr}")
+		dk_exit(0)
 	endif()
 	
 endfunction()
@@ -177,7 +174,6 @@ function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_log("test dk_log message")
-	
 	dk_log(VERBOSE "test dk_log VERBOSE message")
 	dk_log(DEBUG   "test dk_log DEBUG message")
 	dk_log(INFO    "test dk_log INFO message")

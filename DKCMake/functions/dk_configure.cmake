@@ -16,14 +16,13 @@ function(dk_configure SOURCE_DIR) #ARGN
 	if(NOT CURRENT_PLUGIN_DIR)
 		dk_error("CURRENT_PLUGIN_DIR is invalid")
 	endif()
-	if(CURRENT_PLUGIN_DIR)
-		dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
-	endif()
-	if(isSubDirectory)
+
+	#dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
+	#if(isSubDirectory)
 		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
-	else()
-		dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
-	endif()
+	#else()
+	#	dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
+	#endif()
 	dk_makeDirectory(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	

@@ -55,7 +55,8 @@ function(dk_import url)
 		###### Import from Download File ######
 		else()
 			dk_verbose("dk_install(${plugin} ${ARGN})")
-			dk_install(${plugin} ${ARGN})
+			#dk_install(${plugin} ${ARGN})
+			dk_install(${plugin_var} ${ARGN})
 		endif()
 	endif()
 	
