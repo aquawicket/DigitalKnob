@@ -6,7 +6,6 @@ dk_load(dk_builder)
 ### DEPEND ###
 #dk_depend(ghostscript)
 
-dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 if(WIN_HOST)
 	#dk_load	(${DKIMPORTS_DIR}/vc_redist/DKMAKE.cmake)
 	dk_depend	(vc_redist)

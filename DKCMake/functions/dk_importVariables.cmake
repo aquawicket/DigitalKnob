@@ -353,6 +353,11 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		endif()
 	#endif()
 	
+	if(PLUGIN_IMPORT_NAME_LOWER)
+		dk_set(${PLUGIN_VAR_PREFIX}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
+		dk_printVar(${PLUGIN_VAR_PREFIX}_IMPORT_NAME)
+	endif()
+		
 	# LIB_BRANCH
 	#if(NOT ${PLUGIN_VAR_PREFIX}_BRANCH)
 		if(PLUGIN_INSTALL_BRANCH)
@@ -404,8 +409,8 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(${PLUGIN_VAR_PREFIX}_RELEASE_DIR)
 	#endif()
 	
-	set(${rtn_var} ${PLUGIN_IMPORT_NAME_UPPER} PARENT_SCOPE)
-	dk_printVar(PLUGIN_IMPORT_NAME_UPPER)
+	set(${rtn_var} ${PLUGIN_VAR_PREFIX} PARENT_SCOPE)
+	dk_printVar(PLUGIN_VAR_PREFIX)
 endfunction()
 
 
