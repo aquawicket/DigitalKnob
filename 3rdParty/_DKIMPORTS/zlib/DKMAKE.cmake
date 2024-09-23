@@ -1,6 +1,6 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
-# https://github.com/madler/zlib
+# https://github.com/madler/zlib.git
 # http://www.zlib.net/
 
 

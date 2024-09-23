@@ -60,7 +60,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_toLower(${PLUGIN_URL_FILENAME} plugin_url_filename)
 	string(FIND ${plugin_url_filename} ${PLUGIN_IMPORT_NAME} index)
 	if(${index} EQUAL -1)
-		dk_debug("The download filename ${PLUGIN_URL_FILENAME} does not contaian the import name ${PLUGIN_IMPORT_NAME}")
+		dk_debug("The download filename:${PLUGIN_URL_FILENAME} does not contaian the import name:${PLUGIN_IMPORT_NAME}")
 		dk_toLower(${dest_filename} dest_filename_lower)
 		string(FIND ${dest_filename_lower} ${PLUGIN_IMPORT_NAME} index)
 		if(${index} EQUAL -1)

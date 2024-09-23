@@ -82,110 +82,112 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
 
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
-	
-	if(PLUGIN_URL)																# PLUGIN_URL
-		#dk_printVar(PLUGIN_URL)
-		dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)							# PLUGIN_URL_FILENAME
-		#dk_printVar(PLUGIN_URL_FILENAME)
-		dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					# PLUGIN_URL_LIST
-		#dk_printVar(PLUGIN_URL_LIST)
-		dk_includes(${PLUGIN_URL} https://github.com PLUGIN_GIT)				# PLUGIN_GIT
-		#dk_printVar(PLUGIN_GIT)
+																				################################# EXAMPLE ##########################
+	if(PLUGIN_URL)																
+		dk_printVar(PLUGIN_URL)													# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
+		dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)							
+		dk_printVar(PLUGIN_URL_FILENAME)										# PLUGIN_URL_FILENAME		: master.zip
+		dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					
+		dk_printVar(PLUGIN_URL_LIST)											# PLUGIN_URL_LIST			: https:;;github.com;madler;zlib;archive;refs;heads;master.zip
+		dk_includes(${PLUGIN_URL} https://github.com PLUGIN_GIT)				
+		dk_printVar(PLUGIN_GIT)													# PLUGIN_GIT				: 1
 	endif()
 	if(PLUGIN_URL_FILENAME)
-		dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)			# PLUGIN_URL_EXTENSION
-		#dk_printVar(PLUGIN_URL_EXTENSION)
-		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				# PLUGIN_URL_FILE
-		#dk_printVar(PLUGIN_URL_FILE)
+		dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)			
+		dk_printVar(PLUGIN_URL_EXTENSION)										# PLUGIN_URL_EXTENSION		: .zip
+		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				
+		dk_printVar(PLUGIN_URL_FILE)											# PLUGIN_URL_FILE			: master
 	endif()
 	if(PLUGIN_URL_FILE)
-		dk_toLower(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_LOWER)				# PLUGIN_URL_FILE_LOWER
-		dk_toUpper(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_UPPER)				# PLUGIN_URL_FILE_UPPER
+		dk_toLower(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_LOWER)					
+		dk_printVar(PLUGIN_URL_FILE_LOWER)										# PLUGIN_URL_FILE_LOWER		: master
+		dk_toUpper(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_UPPER)					
+		dk_printVar(PLUGIN_URL_FILE_UPPER)										# PLUGIN_URL_FILE_UPPER		: MASTER
 	endif()
 	if(PLUGIN_URL_LIST)
 		# split the url into list converting / to divider ;
 		set(index 0)
-		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})								# PLUGIN_URL_ITEM
-			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						# PLUGIN_URL_NODE(n)
-			#dk_printVar(PLUGIN_URL_NODE${index})
+		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
+			dk_printVar(PLUGIN_URL_ITEM)										# PLUGIN_URL_ITEM			: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
+			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						
+			dk_printVar(PLUGIN_URL_NODE${index})								# PLUGIN_URL_NODE(n)		: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 			math(EXPR index ${index}+1)
 		endforeach()
-		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)							# PLUGIN_URL_LENGTH
-		#dk_printVar(PLUGIN_URL_LENGTH)
+		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)							
+		dk_printVar(PLUGIN_URL_LENGTH)											# PLUGIN_URL_LENGTH			: 8
 	endif()
 
 	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
 	dk_assert(CMAKE_CURRENT_LIST_DIR)
 	dk_assert(DKIMPORTS_DIR)
-	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		# PLUGIN_IMPORT
-	#if(${DKIMPORTS_DIR} IN_LIST CMAKE_CURRENT_LIST_DIR)
-	#	set(PLUGIN_IMPORT 1)
-	#endif()
+	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		
+	dk_printVar(PLUGIN_IMPORT)													# PLUGIN_IMPORT			 	: 1
 	
 	if(NOT PLUGIN_IMPORT)
 		dk_fatal("PLUGIN_IMPORT invalid")
 	endif()
 	
 	if(PLUGIN_IMPORT)
-		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						# PLUGIN_IMPORT_PATH
-		#dk_printVar(PLUGIN_IMPORT_PATH)		
+		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})						
+		dk_printVar(PLUGIN_IMPORT_PATH)											# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 	endif()
 	if(PLUGIN_IMPORT_PATH)
-		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)	# PLUGIN_IMPORT_NAME
-		#dk_printVar(PLUGIN_IMPORT_NAME)
+		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)					
+		dk_printVar(PLUGIN_IMPORT_NAME)											# PLUGIN_IMPORT_NAME		: zlib
 	endif()
 	if(PLUGIN_IMPORT_NAME)
-		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)			# PLUGIN_IMPORT_NAME_LOWER
-		dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)			    # PLUGIN_IMPORT_NAME_UPPER
+		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)				# PLUGIN_IMPORT_NAME_LOWER	: zlib
+		dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)			   	# PLUGIN_IMPORT_NAME_UPPER	: ZLIB
 	endif()
 
-	if(PLUGIN_GIT)
-		#list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
-		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
+	if(PLUGIN_GIT)																# PLUGIN_GIT				: https://github.com/madler/zlib.git
+		#list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)						# PLUGIN_GIT_FILENAME
+		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME		: zlib.git			
 		#dk_printVar(PLUGIN_GIT_FILENAME)	
-		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)		# PLUGIN_GIT_NAME
+		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)			# PLUGIN_GIT_NAME			: zlib
 		#dk_printVar(PLUGIN_GIT_NAME)	
-		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH
+		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH			: develop
 		if(NOT PLUGIN_GIT_BRANCH)
 			set(PLUGIN_GIT_BRANCH master)
 		endif()
 	endif()
 	if(PLUGIN_GIT_NAME)
-		dk_toLower(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)				# PLUGIN_GIT_NAME_LOWER
-		dk_toUpper(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_UPPER)				# PLUGIN_GIT_NAME_UPPER
+		dk_toLower(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)					# PLUGIN_GIT_NAME_LOWER		: zlib
+		dk_toUpper(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_UPPER)					# PLUGIN_GIT_NAME_UPPER		: ZLIB
 	endif()
 	
 	### PLUGIN_INSTALL VARIABLES ###
 	if(NOT PLUGIN_INSTALL_URL)
-		set(PLUGIN_INSTALL_URL ${PLUGIN_URL})
+		set(PLUGIN_INSTALL_URL ${PLUGIN_URL})									# PLUGIN_INSTALL_URL		: ???
 		#dk_printVar(PLUGIN_INSTALL_URL)
 	endif()
 	if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_IMPORT_NAME)
-			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})						# PLUGIN_INSTALL_NAME		: zlib
 		elseif(PLUGIN_GIT_NAME)
-			set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})							# PLUGIN_INSTALL_NAME		: zlib
 		elseif(PLUGIN_URL_NAME)
-			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})							# PLUGIN_INSTALL_NAME		: ???
 		endif()
 		#dk_printVar(PLUGIN_INSTALL_NAME)
 	endif()
 	
 	if(PLUGIN_INSTALL_NAME)
-		dk_toLower(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_LOWER)			# PLUGIN_INSTALL_NAME_LOWER
-		dk_toUpper(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_UPPER)				# PLUGIN_INSTALL_NAME_UPPER
+		dk_toLower(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_LOWER)			# PLUGIN_INSTALL_NAME_LOWER	: zlib
+		dk_toUpper(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_UPPER)			# PLUGIN_INSTALL_NAME_UPPER	: ZLIB
 	endif()
 	if(NOT PLUGIN_INSTALL_VERSION)
 		if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_URL_FILE_LOWER)
 			# deduct the plugin version		
-			dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)
+			dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)	
+																				# PLUGIN_INSTALL_VERSION	:
 			if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
 				if(PLUGIN_GIT_TAG)
-					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_TAG})
+					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_TAG})				# PLUGIN_INSTALL_VERSION	:
 				elseif(PLUGIN_GIT_BRANCH)
-					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})
+					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})			# PLUGIN_INSTALL_VERSION	:
 				else()
-					set(PLUGIN_INSTALL_VERSION master)
+					set(PLUGIN_INSTALL_VERSION master)							# PLUGIN_INSTALL_VERSION	: master
 				endif()
 			endif()
 			
@@ -215,7 +217,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	endif()
 	if(NOT PLUGIN_INSTALL_PATH)
 		if(DK3RDPARTY_DIR)
-			set(PLUGIN_INSTALL_PATH ${DK3RDPARTY_DIR}/${PLUGIN_INSTALL_FOLDER})				# PLUGIN_INSTALL_PATH
+			set(PLUGIN_INSTALL_PATH ${DK3RDPARTY_DIR}/${PLUGIN_INSTALL_FOLDER})			# PLUGIN_INSTALL_PATH
 		endif()
 		#dk_printVar(PLUGIN_INSTALL_PATH)
 	endif()
