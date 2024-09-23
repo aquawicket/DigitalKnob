@@ -4,14 +4,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::####################################################################
 ::# dk_installWsl()
 ::#
+::#    Troubleshooting: https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 :dk_installWsl
 	call dk_debugFunc 0
 	
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
-	%dk_call% dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-	%dk_call% dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+	call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+	call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
 
 	
 	:: Step 2 - Check requirements for running WSL 2
@@ -33,6 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: Step 5 - Set WSL 2 as your default version
 	wsl --set-default-version 2
 	
+	
 	goto:eof
 	:: Install your Linux distribution of choice
 	%dk_call% dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
@@ -53,5 +55,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :DKTEST
 	call dk_debugFunc 0
 	
-	%dk_call% dk_installWsl
+	call dk_installWsl
 %endfunction%
