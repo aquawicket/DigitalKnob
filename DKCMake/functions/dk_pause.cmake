@@ -12,8 +12,8 @@ function(dk_pause)
 
 
 	###### ${pause_msg} ######
-	if(ARGV0)
-		set(pause_msg "${ARGV0}")
+	if(ARGN)
+		set(pause_msg "${ARGN}")
 	else()
 		set(pause_msg "Press and any to continue...")
 	endif()

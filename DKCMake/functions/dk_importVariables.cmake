@@ -108,7 +108,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		# split the url into list converting / to divider ;
 		set(index 0)
 		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
-			dk_printVar(PLUGIN_URL_ITEM)										# PLUGIN_URL_ITEM			: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						
 			dk_printVar(PLUGIN_URL_NODE${index})								# PLUGIN_URL_NODE(n)		: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 			math(EXPR index ${index}+1)
@@ -219,7 +218,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		if(DK3RDPARTY_DIR)
 			set(PLUGIN_INSTALL_URL ${PLUGIN_URL})										
 		endif()
-		dk_printVar(PLUGIN_INSTALL_URL)											# PLUGIN_INSTALL_URL		:
+		dk_printVar(PLUGIN_INSTALL_URL)											# PLUGIN_INSTALL_URL		: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	endif()
 	if(NOT PLUGIN_INSTALL_PATH)
 		if(DK3RDPARTY_DIR)

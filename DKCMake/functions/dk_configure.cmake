@@ -17,6 +17,9 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_error("CURRENT_PLUGIN_DIR is invalid")
 	endif()
 
+	dk_printVar(SOURCE_DIR)
+	dk_printVar(CURRENT_PLUGIN_FOLDER)
+	
 	#dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
 	#if(isSubDirectory)
 		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
@@ -25,7 +28,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 	#endif()
 	dk_makeDirectory(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
-	
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
 		dk_info("Configuring with CMake")
