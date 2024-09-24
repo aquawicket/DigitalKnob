@@ -54,9 +54,9 @@ DK(){
 	dk_call dk_load "${DKSCRIPT_PATH}"
 
 	###### DKTEST MODE ######
-	echo DKSCRIPT_EXT = ${DKSCRIPT_EXT}
-	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return
-	[ "${DKSCRIPT_EXT}" = ".sh" ] || return
+	dk_call dk_echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
+	[ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		#dk_call dk_echo "${bg_RGB}20;20;20m"
@@ -68,7 +68,7 @@ DK(){
 		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
 		dk_call dk_echo
 		dk_call dk_pause
-		dk_call dk_exit $?
+		dk_call dk_exit ${?}
 }
 
 ##################################################################################
@@ -81,7 +81,7 @@ dkreloadWithBash(){
 		unset DKINIT
 		export DKINIT=""
 		dk_commandExists bash || dk_installPackage bash
-		exec bash "${0}" #dk_call bash "${0}"
+		exec bash "${0}"
 	fi
 }
 
