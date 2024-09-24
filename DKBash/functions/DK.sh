@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "DK.sh"
-[ -n "${DKINIT-}" ] && return || export DKINIT=1	# include_guard
+[ -n "${DKINIT-}" ] && return ${?} || export DKINIT=1	# include_guard
 
 [ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
 ##################################################################################
@@ -8,7 +8,8 @@ echo "DK.sh"
 #
 #
 DK(){
-	echo "DK()"
+	#echo "DK()"
+
 	###### Initialize Language specifics ######
 	dkinit
 	
@@ -31,9 +32,6 @@ DK(){
 
 	############ Get DKSCRIPT variables ############
 	DKSCRIPT_VARS
-
-	##### CD into the DKSCRIPT_DIR directory #####
-	#cd "${DKSCRIPT_DIR}"
 
 	############ Set Options ############
 	dksetOptions
