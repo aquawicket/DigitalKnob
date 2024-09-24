@@ -154,7 +154,7 @@ dk_initFiles(){
 dk_download() {
 	if [ -e "${2-}" ]; then
 		echo "WARNING: dk_download(): ${2} already exists"
-		return 0
+		return ${?}
 	fi
 	echo "Downloading $(dk_basename ${1}) . . ."
 	parentdir="$(dk_dirname "${2-}")"
@@ -183,9 +183,9 @@ DKSCRIPT_VARS(){
 	dk_call dk_commandExists "cygpath"                   && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_call dk_export        DKSCRIPT_ARGS               $(${*})
-	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname ${DKSCRIPT_PATH})
+	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
-	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename ${DKSCRIPT_PATH})
+	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename "${DKSCRIPT_PATH}")
 	dk_call dk_export        DKSCRIPT_EXT				 ".${DKSCRIPT_NAME##*.}"
 }
 
@@ -229,7 +229,7 @@ dksetOptions(){
 #	install a package
 #
 dk_installPackage(){
-	dk_commandExists ${1}      && return 0					        # if the command already exists, return
+	dk_commandExists ${1}      && return $(true)					        # if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
 	dk_commandExists apt-get   && apt-get -y install "${1}"
