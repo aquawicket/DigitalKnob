@@ -19,6 +19,9 @@ function(dk_getSubdirectories input_dir dir_list)
         endif()
     endforeach()
     set(${result} ${dir_list} PARENT_SCOPE)
+	
+# DEBUG
+	dk_printVar(dir_list)
 endfunction()
 
 
