@@ -201,10 +201,12 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 	if not defined  DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_EXT=%%~xZ"
 	
     ::### DKTEMP_DIR ###
-    if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMPDIR%"
-    if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TEMP%"
     if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMP%"
-    if not exist   "%DKTEMP_DIR%"     for %%Z in ("%~dp0..\..\..\temp") do set "DKTEMP_DIR=%%~dpZ"
+    if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMPDIR%"
+    if not exist   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%TMP_DIR%"
+	::if not exist "%DKTEMP_DIR%"     set "DKTEMP_DIR=%DIGITALKNOB_DIR%"
+	::if exist	   "%DKTEMP_DIR%"     set "DKTEMP_DIR=%DKTEMP_DIR%\.dk" & mkdir %DKTEMP_DIR%
+    if not exist   "%DKTEMP_DIR%"     for %%Z in ("%~dp0..\..\..\.dk") do set "DKTEMP_DIR=%%~dpZ"
     if not exist   "%DKTEMP_DIR%"     mkdir %DKTEMP_DIR%
     if not exist   "%DKTEMP_DIR%"     echo ERROR: DKTEMP_DIR:%DKTEMP_DIR% does not exist & pause & exit 1
     if exist       "%DKTEMP_DIR%"     copy "%DKSCRIPT_PATH%" "%DKTEMP_DIR%" 1>nul 2>nul
