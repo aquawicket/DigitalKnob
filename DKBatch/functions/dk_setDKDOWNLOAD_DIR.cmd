@@ -29,7 +29,4 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     %dk_call% dk_setDKDOWNLOAD_DIR
     %dk_call% dk_printVar DKDOWNLOAD_DIR
-    
-    %dk_call% dk_setDKDOWNLOAD_DIR
-    %dk_call% dk_printVar DKDOWNLOAD_DIR
 %endfunction%
