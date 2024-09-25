@@ -28,7 +28,7 @@ function(dk_findProgram VAR filename)
 	endif()
 	
 	if(ARGN)
-		dk_getSubdirectories("${ARGN}" SEARCH_DIRS) # Recursive search
+		dk_getDirectories("${ARGN}" SEARCH_DIRS RECURSIVE)
 		list(REMOVE_DUPLICATES SEARCH_DIRS)
 	endif()
 	if(SEARCH_DIRS)
