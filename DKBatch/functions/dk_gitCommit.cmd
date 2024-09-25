@@ -37,7 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_echo
     )
         
-    %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global user.email" USER_NAME
+    %dk_call% dk_commandToVariable "%GIT_EXE%" "config --global user.name" USER_NAME
     if "%USER_NAME%"=="" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter a username"
