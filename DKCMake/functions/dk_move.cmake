@@ -46,7 +46,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DIGITALKNOB_DIR "dk_getDKPaths()")
+	dk_validate(DIGITALKNOB_DIR "dk_setDIGITALKNOB_DIR()")
     
 	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
     dk_fileWrite("${DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")

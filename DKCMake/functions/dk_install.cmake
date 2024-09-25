@@ -140,37 +140,28 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		#dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DL_DIR}/UNZIPPED)
 		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath})
 		
-		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
-		#file(GLOB items RELATIVE "${PLUGIN_DL_DIR}/UNZIPPED/" "${PLUGIN_DL_DIR}/UNZIPPED/*")
-		file(GLOB items RELATIVE "${src_extractPath}/" "${src_extractPath}/*")
-		list(LENGTH items count)
-		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
-			#vZip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			#dk_rename(${PLUGIN_DL_DIR}/UNZIPPED ${PLUGIN_DIR} OVERWRITE)
-			dk_rename(${src_extractPath} ${PLUGIN_DIR} OVERWRITE)
-		else()
-			#if(EXISTS ${PLUGIN_DL_DIR}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-			if(EXISTS ${src_extractPath}/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				#dk_rename(${PLUGIN_DL_DIR}/UNZIPPED/${dest_filename} ${PLUGIN_DIR} OVERWRITE)
-				dk_rename(${src_extractPath}/${dest_filename} ${PLUGIN_DIR} OVERWRITE)
-				#dk_delete(${PLUGIN_DL_DIR}/UNZIPPED)
-				dk_delete(${src_extractPath})
-			else() #vZip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-				foreach(item ${items})
-					#if(NOT IS_DIRECTORY ${PLUGIN_DL_DIR}/UNZIPPED/${item})
-					if(NOT IS_DIRECTORY ${src_extractPath}/${item})
-						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
-					endif()
-				endforeach()
-				#dk_printVar(PLUGIN_DIR)
-				#dk_wait()
-				#dk_rename(${PLUGIN_DL_DIR}/UNZIPPED/${items} ${PLUGIN_DIR} OVERWRITE)
-				dk_rename(${src_extractPath}/${items} ${PLUGIN_DIR} OVERWRITE)
-				
-				#dk_delete(${PLUGIN_DL_DIR}/UNZIPPED)
-				dk_delete(${src_extractPath})
-			endif() 
-		endif()
+#		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
+#		file(GLOB items RELATIVE "${src_extractPath}/" "${src_extractPath}/*")
+#		list(LENGTH items count)
+#		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
+#			#vZip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
+#			dk_rename(${src_extractPath} ${PLUGIN_DIR} OVERWRITE)
+#		else()
+#			if(EXISTS ${src_extractPath}/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+#				dk_rename(${src_extractPath}/${dest_filename} ${PLUGIN_DIR} OVERWRITE)
+#				dk_delete(${src_extractPath})
+#			else() #vZip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
+#				foreach(item ${items})
+#					if(NOT IS_DIRECTORY ${src_extractPath}/${item})
+#						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
+#					endif()
+#				endforeach()
+#				dk_rename(${src_extractPath}/${items} ${PLUGIN_DIR} OVERWRITE)
+#				dk_delete(${src_extractPath})
+#			endif() 
+#		endif()
+		dk_smartExtract("${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}" "${PLUGIN_DIR}")
+
 	elseif(${FILETYPE} STREQUAL "Executable")
 		dk_cd(${PLUGIN_DL_DIR})
 		dk_set(QUEUE_BUILD ON)
