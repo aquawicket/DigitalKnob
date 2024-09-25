@@ -31,9 +31,9 @@ dk_getDKPaths() {
 	dk_call dk_printVar DKDOWNLOAD_DIR
 	
 	
-	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP}"
-    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR}"
-    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP_DIR}"
+	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP-}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR-}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP_DIR-}"
 	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
 	[ -e "${DKTEMP_DIR}" ] &&     DKTEMP_DIR="${DKTEMP_DIR}/.dk"
     [ -e "${DKTEMP_DIR}" ] ||     mkdir "${DKTEMP_DIR}"

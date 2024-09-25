@@ -8,6 +8,15 @@ echo "DK.sh"
 #
 #
 DK(){
+	[ -n "${WSLENV+1}" ] && echo "WSLENV is on" || echo "WSLENV is off"
+	if [ -n "${WSLENV+1}" ]; then
+		echo "WSLENV is on"
+		#echo "0 = ${0}"
+		#echo "basename = $(basename ${0})"
+		#echo "dirname = $(dirname ${0})"
+		#echo "realpath = $(realpath ${0})"
+	fi
+	
 	###### Initialize Language specifics ######
 	dkinit
 	
@@ -176,29 +185,77 @@ dksetupCallstack(){
 ##################################################################################
 # DKSCRIPT_VARS()
 #
-DKSCRIPT_VARS(){	
+DKSCRIPT_VARS(){
+	### DKSCRIPT_PATH ###
 	dk_call dk_pathExists    $(dk_call dk_realpath ${0}) && dk_call dk_export  DKSCRIPT_PATH  $(dk_call dk_realpath ${0})
 	dk_call dk_commandExists "cygpath"                   && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
+	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+	
+	### DKSCRIPT_ARGS ###
 	dk_call dk_export        DKSCRIPT_ARGS               $(${*})
+	dk_call dk_defined		 DKSCRIPT_ARGS				 && echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+	
+	### DKSCRIPT_DIR ###
 	dk_call dk_export        DKSCRIPT_DIR                $(dk_call dk_dirname "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
+	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           && echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	
+	### DKSCRIPT_NAME ###
 	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename "${DKSCRIPT_PATH}")
+	dk_call dk_defined		 DKSCRIPT_NAME				 && echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+	
+	### DKSCRIPT_EXT ###
 	dk_call dk_export        DKSCRIPT_EXT				 ".${DKSCRIPT_NAME##*.}"
+	dk_call dk_defined		 DKSCRIPT_EXT				 && echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+	
+	### DKBRANCH_DIR ###
+	dk_call dk_export        DKBRANCH_DIR                $(dk_call dk_dirname "${DKBASH_DIR}")
+	dk_call dk_pathExists    "${DKBRANCH_DIR}"           && echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
+	
+	### DKBRANCH ###
+	dk_call dk_export        DKBRANCH                    $(dk_call dk_basename "${DKBRANCH_DIR}")
+	dk_call dk_pathExists    "${DKBRANCH}"           && echo "DKBRANCH = ${DKBRANCH}"
+	
+	### DIGITALKNOB_DIR ###
+	dk_call dk_export        DIGITALKNOB_DIR             $(dk_call dk_dirname "${DKBRANCH_DIR}")
+	dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
+	
+	### DIGITALKNOB ###
+	dk_call dk_export        DIGITALKNOB  			     $(dk_call dk_basename "${DIGITALKNOB_DIR}")
+	dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB = ${DIGITALKNOB}"
+	
+	### DKDOWNLOAD_DIR ###
+	dk_call dk_export        DKDOWNLOAD_DIR             "${DIGITALKNOB_DIR}/download"
+	dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"        && echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
+	
+	### DKHOME_DIR ###
+	dk_call dk_export        DKHOME_DIR            		 $(dk_call dk_dirname "${DIGITALKNOB_DIR}")
+	dk_call dk_pathExists    "${DKHOME_DIR}"       		 && echo "DKHOME_DIR = ${DKHOME_DIR}"
+	
+	### HOME ###
+	dk_call dk_export        HOME            		 	 "${DKHOME_DIR}"
+	dk_call dk_pathExists    "${HOME}"       		     && echo "HOME = ${HOME}"
+	
+	### DKCACHE_DIR ###
+	dk_call dk_pathExists    "${DKCACHE_DIR}"       	 || DKCACHE_DIR="${DKHOME_DIR}/.dk"
+	dk_call dk_pathExists    "${DKCACHE_DIR}"       	 || mkdir "${DKCACHE_DIR}"
+	dk_call dk_pathExists    "${DKCACHE_DIR}"       	 && echo "DKCACHE_DIR = ${DKCACHE_DIR}"
 	
 	### DKTEMP_DIR ###
     [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP}"
     [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR}"
     [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP_DIR}"
-	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${HOME}/digitalknob/.dk"
+	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
 	[ -e "${DKTEMP_DIR}" ] &&     DKTEMP_DIR="${DKTEMP_DIR}/.dk"
     [ -e "${DKTEMP_DIR}" ] ||     mkdir "${DKTEMP_DIR}"
     [ -e "${DKTEMP_DIR}" ] ||     echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
     [ -e "${DKTEMP_DIR}" ] &&     cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
+	dk_call dk_pathExists    "${DKTEMP_DIR}"       	 	&& echo "DKTEMP_DIR = ${DKTEMP_DIR}"
 	
 	### ASSETS ###
-    #if exist       "%DKASSETS_DIR%"   set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
-    #if exist       "%DKASSETS_DIR%"   set "PATH=%DKASSETS_DIR%;%PATH%"
+    #[ -e "${DKASSETS_DIR}" ] &&   DKASSETS_DIR="${DKSCRIPT_DIR}/assets"
+    #[ -e "${DKASSETS_DIR}" ] &&   PATH="${DKASSETS_DIR}:${PATH}"
 }
 
 ##################################################################################
@@ -241,10 +298,10 @@ dksetOptions(){
 #	install a package
 #
 dk_installPackage(){
-	dk_commandExists ${1}      && return $(true)					        # if the command already exists, return
+	dk_commandExists ${1}      && return $(true)					# if the command already exists, return
 	dk_commandExists apk       && apk add "${1}"				    # AlpineLinux package installer
 	dk_commandExists apt	   && apt -y install "${1}"
-	dk_commandExists apt-get   && apt-get -y install "${1}"
+	dk_commandExists apt-get   && apt-get -y install "${1}"			# Debian
 	dk_commandExists brew 	   && brew install "${1}"
 	dk_commandExists pacman    && pacman -S "${1}" --noconfirm
 	dk_commandExists pkg	   && pkg install "${1}"

@@ -1,10 +1,13 @@
-###	Fix write access of wsl mnt drive from windows ### https://stackoverflow.com/a/73449375   and   https://stackoverflow.com/a/65293474/688352
+###	Fix write access of wsl mnt drive from windows 
+### https://stackoverflow.com/a/73449375 
+https://stackoverflow.com/a/65293474/688352
 
 	sudo chown -R my_username my_folder
 	
 	
 	
-###	Fix WSL retaining file permissions ### https://superuser.com/a/1392722/600216
+###	Fix WSL retaining file permissions 
+### https://superuser.com/a/1392722/600216
 
 	/etc/wsl.conf
 
@@ -15,3 +18,13 @@
 	enabled  = true
 	root     = /mnt/
 	options  = "metadata,umask=22,fmask=11"
+	
+	
+	
+### Fix internet access
+
+	sudo nano /etc/resolv.conf
+	
+	nameserver 8.8.8.8
+	
+	

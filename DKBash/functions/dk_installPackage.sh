@@ -22,6 +22,7 @@ dk_installPackage() {
 	if dk_call dk_commandExists apk; then
 		dk_call apk add "${1}"					# Alpine Package Keeper (alpine linux)
 	elif dk_call dk_commandExists apt-get; then
+		dk_call dk_echo "sudo apt-get -y install '${1}'"
 		dk_call apt-get -y install "${1}"		# Apt-get (debian)
 	elif dk_call dk_commandExists apt; then	
 		dk_call apt -y install "${1}"			# Apt (debian)
