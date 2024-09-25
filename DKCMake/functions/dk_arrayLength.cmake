@@ -53,4 +53,7 @@ function(DKTEST)
 	
 	dk_arrayLength("${myArray}" lengthD)
 	dk_info("lengthD = ${lengthD}")
+	
+	dk_arrayLength("${nonExistent}" lengthE)
+	dk_info("lengthE = ${lengthE}")
 endfunction()

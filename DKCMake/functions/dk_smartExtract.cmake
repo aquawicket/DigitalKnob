@@ -48,19 +48,20 @@ function(dk_smartExtract src dest)
 	dk_getDirectories("${src_extractPath}" directories)
     #dk_printVar(directories)
 	
-    dk_arrayLength(directories dir_count)
+    dk_arrayLength("${directories}" dir_count)
     #dk_printVar(dir_count)
     
 	dk_getFiles("${src_extractPath}" files)
 	#dk_printVar(files)
 	
-    dk_arrayLength(files file_count)
+    dk_arrayLength("${files}" file_count)
     #dk_printVar(file_count)
-    
+	
     if(${dir_count} EQUAL 1) 
-		if(${file_count} EQUAL 0)
+		if(${file_count} LESS 2)
 			# rename/move EXTRACTED/root folder to dest path"
-			dk_move("${directories[0]}" "${dest_realpath}" OVERWRITE)
+			list(GET directories 0 directories_0)
+			dk_move("${directories_0}" "${dest_realpath}" OVERWRITE)
 			if(EXISTS "${src_extractPath}")
 				dk_delete("${src_extractPath}")
 			endif()
@@ -82,11 +83,11 @@ endfunction()
 function(DKTEST)
     dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR")
-	dk_download("https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}\sdl-release-2.26.1.zip")
-	dk_smartExtract("${DKDOWNLOAD_DIR}\sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}\sdl-release-2.26.1")
+	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+	dk_download("https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip")
+	dk_smartExtract("${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1")
 	
-	#dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR")
-	#dk_download("https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}\xz-5.4.6.tar.gz")
-    #dk_smartExtract("${DKDOWNLOAD_DIR}\xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}\xz-5.4.6")
+	#dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+	#dk_download("https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz")
+    #dk_smartExtract("${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6")
 endfunction()
