@@ -9,20 +9,25 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_printVar var)
 	dk_debugFunc("\${ARGV}")
-	
-	dk_convertToCIdentifier(${var} alphanum_var)
-	if(NOT "${var}" STREQUAL "${alphanum_var}")
-	if(NOT "${var}" MATCHES "ENV{") # ENV variables
-		dk_error("${var} is not a valid variable name. It contains invalid characters.")
-	endif()
-	endif()
 
 	if("${var}" MATCHES "ENV{") # ENV variables
 		set(ENV_VAR ${var})
 		dk_replaceAll("${ENV_VAR}"  "ENV{"  ""  ENV_VAR)
 		dk_replaceAll("${ENV_VAR}"  "}"  ""  ENV_VAR)
+		
+		dk_convertToCIdentifier(${ENV_VAR} alphanum_var)
+		if(NOT "${ENV_VAR}" STREQUAL "${alphanum_var}")
+			dk_error("${ENV_VAR} is not a valid variable name. It contains invalid characters.")
+		endif()
+	
 		dk_echo("${cyan}ENV:${var} = ${blue}'$ENV{${ENV_VAR}}'${clr}")
+		
 	else()	# regular variables
+		dk_convertToCIdentifier(${var} alphanum_var)
+		if(NOT "${var}" STREQUAL "${alphanum_var}")
+			dk_error("${var} is not a valid variable name. It contains invalid characters.")
+		endif()
+		
 		if(DEFINED "${${${${var}}}}")
 			dk_echo("${cyan}POINTER:${var} = ${blue}${${var}} = ${${${var}}} = ${${${${var}}}} = '${${${${${var}}}}}'${clr}")
 		elseif(DEFINED "${${${var}}}")
