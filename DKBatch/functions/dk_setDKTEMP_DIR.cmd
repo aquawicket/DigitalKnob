@@ -11,14 +11,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	if defined DKTEMP_DIR %return%
 	
-    ::if defined DKTEMP_DIR %dk_call% dk_warning "DKTEMP_DIR already set to %DKTEMP_DIR%" && %return%
-    ::%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_setDIGITALKNOB_DIR"
-    ::set "DKTEMP_DIR=%DIGITALKNOB_DIR%\temp"
-    ::if not exist "%DKTEMP_DIR%" %dk_call% dk_makeDirectory "%DKTEMP_DIR%"
+    if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMP%"
+	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMPDIR%"
+	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMP_DIR%"
+	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_validate DIGITALKNOB_DIR "dk_setDIGITALKNOB_DIR" & %dk_call% dk_set DKTEMP_DIR "%DIGITALKNOB_DIR%"
+	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_fatal "unable to set .dk directory"
 	
-	if not defined TMP %dk_call% dk_fatal "Windows TMP variable is not set"
-	if not exist %TMP% %dk_call% dk_fatal "TMP:%TMP% does not exist"
-	set "DKTEMP_DIR=%TMP%"
+	dk_set DKTEMP_DIR "%DKTEMP_DIR%\.dk"
+	dk_makeDirectory "%DKTEMP_DIR%"
+	
 %endfunction%
 
 
