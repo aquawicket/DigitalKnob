@@ -40,10 +40,10 @@ WIN_X86_dk_set		(CEF_BINARY_OS windows32)
 WIN_X86_64_dk_set	(CEF_BINARY_OS windows64)
 
 dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}.tar.bz2)					### .tar.bz2 ###
-dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_minimal.tar.bz2)			### _minimal.tar.bz2 ###
-dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_client.tar.bz2)			### _client.tar.bz2 ###
-dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_release_symbols.tar.bz2)	### _release_symbols.tar.bz2 ###
-dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_debug_symbols.tar.bz2)		### _debug_symbols.tar.bz2 ###
+#dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_minimal.tar.bz2)			### _minimal.tar.bz2 ###
+#dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_client.tar.bz2)			### _client.tar.bz2 ###
+#dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_release_symbols.tar.bz2)	### _release_symbols.tar.bz2 ###
+#dk_import			(https://cef-builds.spotifycdn.com/cef_binary_${CEF_BINARY_VERSION}_${CEF_BINARY_OS}_debug_symbols.tar.bz2)		### _debug_symbols.tar.bz2 ###
 
 
 
