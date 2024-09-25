@@ -112,7 +112,7 @@ dkinit(){
     dk_commandExists dk_dirname          || dk_commandExists     dirname  && dk_dirname() { ${builtin} echo $(dirname ${1}); }                    # dk_dirname path
     dk_commandExists dk_realpath         || dk_commandExists     realpath && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
     dk_commandExists dk_debugFunc        || dk_debugFunc(){
-		[ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return 0
+		[ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
 	}
 }
 
