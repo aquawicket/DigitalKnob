@@ -3,6 +3,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe"
 set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
+
+:: https://stackoverflow.com/a/67714373
+if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%\.gitSystem" && setx GIT_CONFIG_SYSTEM "%GIT_CONFIG_SYSTEM%"
+if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGlobal" && setx GIT_CONFIG_GLOBAL "%GIT_CONFIG_GLOBAL%"
+
 ::####################################################################
 ::# dk_installGit()
 ::#
