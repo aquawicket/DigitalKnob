@@ -30,9 +30,16 @@ dk_getDKPaths() {
 	dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}"
 	dk_call dk_printVar DKDOWNLOAD_DIR
 	
-	#DKTEMP_DIR="${DIGITALKNOB_DIR}/temp"
-	#dk_call dk_makeDirectory "${DKTEMP_DIR}"
-	DKTEMP_DIR="/tmp"
+	
+	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP_DIR}"
+	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
+	[ -e "${DKTEMP_DIR}" ] &&     DKTEMP_DIR="${DKTEMP_DIR}/.dk"
+    [ -e "${DKTEMP_DIR}" ] ||     mkdir "${DKTEMP_DIR}"
+    [ -e "${DKTEMP_DIR}" ] ||     echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
+    [ -e "${DKTEMP_DIR}" ] &&     cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
+	dk_call dk_makeDirectory "${DKTEMP_DIR}"
 	dk_call dk_printVar DKTEMP_DIR
 }
 

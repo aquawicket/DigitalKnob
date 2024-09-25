@@ -3,7 +3,7 @@ if(${DKINIT}){return} else{ $global:DKINIT=1 }	# include_guard
 
 
 #####################################################################
-# DK()
+# DKINIT()
 #
 #	# Reference: https://ss64.com/ps
 #

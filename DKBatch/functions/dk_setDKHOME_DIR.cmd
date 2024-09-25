@@ -29,7 +29,4 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     %dk_call% dk_setDKHOME_DIR
     %dk_call% dk_printVar DKHOME_DIR
-    
-    %dk_call% dk_setDKHOME_DIR
-    %dk_call% dk_printVar DKHOME_DIR
 %endfunction%

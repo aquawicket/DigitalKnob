@@ -8,8 +8,6 @@ echo "DK.sh"
 #
 #
 DK(){
-	#echo "DK()"
-
 	###### Initialize Language specifics ######
 	dkinit
 	
@@ -187,6 +185,20 @@ DKSCRIPT_VARS(){
 	dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
 	dk_call dk_export        DKSCRIPT_NAME               $(dk_call dk_basename "${DKSCRIPT_PATH}")
 	dk_call dk_export        DKSCRIPT_EXT				 ".${DKSCRIPT_NAME##*.}"
+	
+	### DKTEMP_DIR ###
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR}"
+    [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP_DIR}"
+	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${HOME}/digitalknob/.dk"
+	[ -e "${DKTEMP_DIR}" ] &&     DKTEMP_DIR="${DKTEMP_DIR}/.dk"
+    [ -e "${DKTEMP_DIR}" ] ||     mkdir "${DKTEMP_DIR}"
+    [ -e "${DKTEMP_DIR}" ] ||     echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
+    [ -e "${DKTEMP_DIR}" ] &&     cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
+	
+	### ASSETS ###
+    #if exist       "%DKASSETS_DIR%"   set "DKASSETS_DIR=%DKSCRIPT_DIR%\assets"
+    #if exist       "%DKASSETS_DIR%"   set "PATH=%DKASSETS_DIR%;%PATH%"
 }
 
 ##################################################################################
