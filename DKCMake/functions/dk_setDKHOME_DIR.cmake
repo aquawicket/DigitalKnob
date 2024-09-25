@@ -1,35 +1,42 @@
-@echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+#include_guard()
 
-::####################################################################
-::# dk_setDKHOME_DIR()
-::#
-::#
-:dk_setDKHOME_DIR
-    call dk_debugFunc 0
-:: setlocal
+####################################################################
+# dk_setDKHOME_DIR()
+#
+#
+function(dk_setDKHOME_DIR)
+    dk_debugFunc("\${ARGV}")
 
-    if defined DKHOME_DIR %return%
+    if(DEFINED DKHOME_DIR)
+		return()
+	endif()
     
-    if not defined HOMEDRIVE %dk_call% dk_error "HOMEDRIVE is invalid"
-    if not defined HOMEPATH %dk_call% dk_error "HOMEPATH is invalid"
-    set "DKHOME_DIR=%HOMEDRIVE%%HOMEPATH%"
-    if not exist %DKHOME_DIR% %dk_call% dk_error "DKHOME_DIR:%DKHOME_DIR% does not exist"
-%endfunction%
+    if(NOT DEFINED ENV{HOMEDRIVE})
+		dk_error("HOMEDRIVE is invalid")
+	endif()
+	
+    if(NOT DEFINED ENV{HOMEPATH})
+		dk_error("HOMEPATH is invalid")
+	endif()
+	
+    dk_set(DKHOME_DIR "$ENV{HOMEDRIVE}$ENV{HOMEPATH}")
+	dk_replaceAll("${DKHOME_DIR}" "\\" "/" DKHOME_DIR)
+	dk_set(DKHOME_DIR "${DKHOME_DIR}")
+    if(NOT EXISTS "${DKHOME_DIR}")
+		dk_error("DKHOME_DIR:${DKHOME_DIR} does not exist")
+	endif()
+endfunction()
 
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-    call dk_debugFunc 0
- setlocal
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+    dk_debugFunc("\${ARGV}")
  
-    %dk_call% dk_setDKHOME_DIR
-    %dk_call% dk_printVar DKHOME_DIR
-    
-    %dk_call% dk_setDKHOME_DIR
-    %dk_call% dk_printVar DKHOME_DIR
-%endfunction%
+    dk_setDKHOME_DIR()
+    dk_printVar(DKHOME_DIR)
+endfunction()

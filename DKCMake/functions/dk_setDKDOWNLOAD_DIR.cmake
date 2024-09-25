@@ -13,7 +13,7 @@ function(dk_setDKDOWNLOAD_DIR)
 	endif()
     
     dk_setDIGITALKNOB_DIR()
-    dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}\download")
+    dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
     if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
 		dk_makeDirectory("${DKDOWNLOAD_DIR}")
 	endif()
