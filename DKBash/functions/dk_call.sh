@@ -17,7 +17,7 @@ dk_call(){
 			dk_commandExists dk_installPackage  || dk_source dk_installPackage
 			dk_installPackage ${1}
 		fi
-		dk_commandExists ${1} || dk_error "${1}: command not found"
+		dk_commandExists ${1} || dk_fatal "${1}: command not found"
 	fi
 	
 	"${@}"
