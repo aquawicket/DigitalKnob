@@ -30,7 +30,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 
 
     ::###### set DKSCRIPT_PATH ######
-    call :dk_setDKSCRIPT_PATH "%~1" %*
+    call :dk_DKSCRIPT_PATH "%~1" %*
 	echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	
 	::###### set DKSCRIPT_DIR ######
@@ -83,7 +83,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
 	
-	%dk_call% dk_validateDK || set "RELOADED=" && call :dk_setDKSCRIPT_PATH "%~1" %*
+	%dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%
 
     ::###### DKTEST MODE ######
@@ -116,11 +116,11 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 %endfunction%
 
 ::##################################################################################
-::# dk_setDKSCRIPT_PATH
+::# dk_DKSCRIPT_PATH
 ::#
-:dk_setDKSCRIPT_PATH
+:dk_DKSCRIPT_PATH
 	::echo ---^> %~0 %*
-    if not exist   "%~1"             echo :dk_setDKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_setDKSCRIPT_PATH" %%~0 %%* & pause & exit 1
+    if not exist   "%~1"             echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
     if not defined  DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
     if not exist   "%DKSCRIPT_PATH%" echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
 	if not defined  DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
