@@ -11,7 +11,7 @@ dk_callDKBatch() {
 	#builtin echo "last argument = ${@: -1}"
 	
 	#dk_validate CMD_EXE "??"
-	dk_validate DKBATCH_FUNCTIONS_DIR "dk_validateBranch"
+	dk_call dk_validate DKBATCH_FUNCTIONS_DIR "dk_validateBranch"
 	export DKBATCH_FUNCTIONS_DIR="C:/Users/Administrator/digitalknob/Development/DKBatch/functions"
 	export DKBATCH_FUNCTIONS_DIR_="C:/Users/Administrator/digitalknob/Development/DKBatch/functions/"
 
@@ -19,10 +19,10 @@ dk_callDKBatch() {
 	
 	#builtin echo "call ${DKBATCH_FUNCTIONS_DIR}/$1.cmd ${@:2}"
 
-	export last_arg="${@: -1}"
+	last_arg="${@: -1}"
 	if [ "${last_arg}" = "rtn_var" ]; then
 		rtn_var=$(cmd.exe /c "(set "DKSCRIPT_PATH=${DKSCRIPT_PATH_WIN}"&& set "DKBATCH_FUNCTIONS_DIR_=${DKBATCH_FUNCTIONS_DIR_}"&& call "${DKBATCH_FUNCTIONS_DIR}/${1}.cmd" ${@:2})")
-		#rtn_var="${rtn_var##*$'\n'}"  # get the last line of the variable
+		rtn_var="${rtn_var##*$'\n'}"  # get the last line of the variable
 		#echo "rtn_var = ${rtn_var}"
 	else
 		cmd.exe /c "(set "DKSCRIPT_PATH=${DKSCRIPT_PATH_WIN}"&& set "DKBATCH_FUNCTIONS_DIR_=${DKBATCH_FUNCTIONS_DIR_}"&& call "${DKBATCH_FUNCTIONS_DIR}/${1}.cmd" ${@:2})"
@@ -40,5 +40,6 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_callDKBatch dk_test "arg1" "arg2" rtn_var
+	#dk_callDKBatch dk_getDefaultGateway rtn_var
 	echo "rtn_var = ${rtn_var}"
 }
