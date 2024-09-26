@@ -123,8 +123,8 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 :dk_reloadWithCmd
 	::echo ---^> %~0 %*
+	if "%~x0" neq ".cmd" goto:end_dk_reloadWithCmd
     if defined RELOADED goto:end_dk_reloadWithCmd
-		echo DKSCRIPT_EXT = %DKSCRIPT_EXT%
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"
         set "DKINIT="
