@@ -2,20 +2,20 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ####################################################################
-# dk_DKDOWNLOAD_DIR()
+# dk_DKCACHE_DIR()
 #
 #
-function(dk_DKDOWNLOAD_DIR)
+function(dk_DKCACHE_DIR)
     dk_debugFunc("\${ARGV}")
-   
-    if(DEFINED DKDOWNLOAD_DIR)
+
+	if(DEFINED DKCACHE_DIR)
 		return()
 	endif()
-    
-    dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-    dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
-    if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
-		dk_makeDirectory("${DKDOWNLOAD_DIR}")
+	
+	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
+	dk_set(DKCACHE_DIR "${DKHOME_DIR}/.dk")
+	if(NOT EXISTS "${DKCACHE_DIR}")
+		dk_makeDirectory("${DKCACHE_DIR}")
 	endif()
 endfunction()
 
@@ -28,7 +28,7 @@ endfunction()
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
     dk_debugFunc("\${ARGV}")
- 
-    dk_DKDOWNLOAD_DIR()
-    dk_printVar(DKDOWNLOAD_DIR)
+
+    dk_DKCACHE_DIR()
+    dk_printVar(DKCACHE_DIR)
 endfunction()

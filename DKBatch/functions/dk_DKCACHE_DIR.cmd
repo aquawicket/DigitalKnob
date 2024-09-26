@@ -11,9 +11,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	if defined DKCACHE_DIR %return%
 	
-	%dk_call% dk_validate DKHOME_DIR "dk_DKHOME_DIR"
+	%dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
 	%dk_call% dk_set DKCACHE_DIR "%DKHOME_DIR%\.dk"
-	%dk_call% dk_makeDirectory "%DKCACHE_DIR%"
+	if not exist "%DKCACHE_DIR%"    %dk_call% dk_makeDirectory "%DKCACHE_DIR%"
 %endfunction%
 
 
