@@ -9,14 +9,17 @@ dk_download() {
 	dk_debugFunc 1 2
 
 	url="${1}"
-	#dk_call dk_printVar url
+	dk_call dk_printVar url
 	
     destination="${2-}"
     #dk_call dk_printVar destination
 	
-	dk_call dk_basename "${url}" url_filename
-	#dk_call dk_printVar url_filename
-	[ -z ${url_filename} ] && dk_call dk_error "url_filename invalid"
+	#dk_call dk_echo "dk_basename "${url}" url_filename"
+	
+	dk_call dk_basename ${url} url_filename
+	#dk_basename ${url} url_filename
+	dk_call dk_printVar url_filename
+	[ -z "${url_filename-}" ] && dk_call dk_error "url_filename invalid"
 	
 #	[ -n ${destination} ] && dk_call dk_realpath "${destination}" destination
 #	dk_call dk_printVar destination
@@ -36,7 +39,7 @@ dk_download() {
 	
 	[ -e "${destination}" ] && dk_call dk_info "${destination} already exist" && return
 	
-	dk_call dk_info "Downloading ${url_filename} . . ."
+	dk_call dk_info "Downloading ${url_filename}  to  ${destination}"
 	
 	# make sure the destination parent directory exists
 	dk_call dk_dirname "${destination}" destination_dir
@@ -70,7 +73,7 @@ dk_download() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh"
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"
+	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.sh"
+	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "DKBuilder.sh"
 	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh" "${DKDOWNLOAD_DIR}/dk_download_batch_test/DKBuilder.sh"
 }

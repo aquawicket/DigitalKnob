@@ -8,13 +8,15 @@
 #
 dk_basename() {
 	dk_debugFunc 1 2
-
-	local _basename_=$(basename "${1}")
+	#builtin echo "dk_basename($*)"
 	
+	#local _basename_=$(basename "${1}")
+	_basename_=$(basename "${1}")
+	builtin echo "_basename_ = ${_basename_}"
 	### return value ###
 	#dk_call dk_printVar _basename_ 	# ERROR: causes infinate loop
-	[ ${#} -gt 1 ] && eval "${2}=${_basename_}" && return	# return value when using rtn_var parameter 
-	dk_return ${_basename_}; return					        # return value when using command substitution 
+	[ ${#} -gt 1 ] && eval "${2}=${_basename_}" && return $?	# return value when using rtn_var parameter 
+	dk_return ${_basename_}; return	$?				      		 # return value when using command substitution 
 }
 
 
