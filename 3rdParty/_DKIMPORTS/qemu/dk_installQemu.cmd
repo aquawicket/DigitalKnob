@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
     ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
     %dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
 	
 	%dk_call% dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_download %QEMU_DL%
 	%dk_call% dk_getNativePath %QEMU_DIR% QEMU_INSTALL_PATH
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /D=%QEMU_INSTALL_PATH%"
 	%dk_call% %command_string%
 	

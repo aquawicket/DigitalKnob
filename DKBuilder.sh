@@ -1,8 +1,6 @@
 #!/bin/sh
 ###### DKBuilder ######
-[ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
-echo "dksudo = ${dksudo}"
-#${dksudo} -s
+[ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export dksudo=" "
 
 ###### DKINIT ######
 export DKSCRIPT_PATH="$0"
@@ -17,17 +15,16 @@ echo "DKBASH_DIR = ${DKBASH_DIR}"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
 
-[ -e "${DKBASH_DIR}" ] || ${dksudo} mkdir "${DKBASH_DIR}"
+[ -e "${DKBASH_DIR}" ] || ${SUDO_EXE} mkdir "${DKBASH_DIR}"
 export DKUSERNAME="${USER-}"
 [ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
 [ -n "${DKUSERNAME-}" ] || echo "ERROR: unable to set DKUSERNAME"
 echo "DKUSERNAME = ${DKUSERNAME}"
 
-[ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
+[ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 
 [ -e "${DKBASH_FUNCTIONS_DIR}" ] || mkdir ${DKBASH_FUNCTIONS_DIR}
-
 
 if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 	# https://en.wikipedia.org/wiki/Package_manager

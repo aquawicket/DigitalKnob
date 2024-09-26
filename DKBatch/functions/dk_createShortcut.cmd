@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if exist "%shortcut_path%" %dk_call% dk_delete "%shortcut_path%"
 
 	:: Method 1: direct powershell
-	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
+	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 	::%POWERSHELL_EXE% -Command "$shortcut_path = '%shortcut_path%'; $target_path = '%target_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${target_path}; $Shortcut.Save();"
 	
 	:: Method 2: direct dk_powershell

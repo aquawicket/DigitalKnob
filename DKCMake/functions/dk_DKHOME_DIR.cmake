@@ -2,10 +2,10 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
 ####################################################################
-# dk_setDKHOME_DIR()
+# dk_DKHOME_DIR()
 #
 #
-function(dk_setDKHOME_DIR)
+function(dk_DKHOME_DIR)
     dk_debugFunc("\${ARGV}")
 
     if(DEFINED DKHOME_DIR)
@@ -37,6 +37,6 @@ endfunction()
 function(DKTEST)
     dk_debugFunc("\${ARGV}")
  
-    dk_setDKHOME_DIR()
+    dk_DKHOME_DIR()
     dk_printVar(DKHOME_DIR)
 endfunction()

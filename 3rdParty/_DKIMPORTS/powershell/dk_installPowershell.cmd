@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
 	::%dk_call% dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	%dk_call% dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
@@ -28,8 +28,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_echo   
 		%dk_call% dk_info "Installing powershell . . ."
 		%dk_call% dk_download %POWERSHELL_DL%
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%POWERSHELL_DL_FILE%" "%POWERSHELL_DIR%"
 		if NOT exist "%POWERSHELL_EXE%" %dk_call% dk_error "cannot find pwsh.exe"
 	:powershell_installed

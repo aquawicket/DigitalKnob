@@ -13,7 +13,6 @@ WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/dow
 WIN_X86_64_HOST_dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe)
 if(WIN_HOST AND NOT GIT_DL)
 	dk_fatal("GIT_DL is invalid!")
-	return()
 endif()
 
 
@@ -22,14 +21,6 @@ if(GIT_DL)
 	dk_importVariables(${GIT_DL} rtn_var)
 	dk_removeExtension(${GIT_DIR} GIT_FOLDER)
 	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
-	
-	#dk_basename(${GIT_DL} GIT_DL_FILE)
-	#dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-	#dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
-	#dk_convertToCIdentifier(${GIT_FOLDER} GIT_FOLDER)
-	#dk_toLower(${GIT_FOLDER} GIT_FOLDER)
-	#dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
-	#dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
 endif()
 
 

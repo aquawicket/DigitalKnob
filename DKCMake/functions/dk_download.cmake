@@ -160,6 +160,6 @@ dk_createOsMacros("dk_download")
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
 endfunction()

@@ -46,9 +46,9 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DIGITALKNOB_DIR "dk_setDIGITALKNOB_DIR()")
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
     
-	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
     dk_fileWrite("${DKDOWNLOAD_DIR}/moveMe.file" "dk_move test")
     dk_move("${DKDOWNLOAD_DIR}/moveMe.file" "${DIGITALKNOB_DIR}/iWasMoved.txt" OVERWRITE)
     

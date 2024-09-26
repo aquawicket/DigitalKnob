@@ -9,11 +9,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
 :: setlocal
 
-	%dk_call% dk_setDIGITALKNOB_DIR
-    %dk_call% dk_setDKTOOLS_DIR
-    %dk_call% dk_setDKDOWNLOAD_DIR
-    %dk_call% dk_setDKTEMP_DIR
-	%dk_call% dk_setDKDESKTOP_DIR
+	%dk_call% dk_DIGITALKNOB_DIR
+    %dk_call% dk_DKTOOLS_DIR
+    %dk_call% dk_DKDOWNLOAD_DIR
+    %dk_call% dk_DKTEMP_DIR
+	%dk_call% dk_DKDESKTOP_DIR
 %endfunction%
 
 

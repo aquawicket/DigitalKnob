@@ -40,7 +40,7 @@ endfunction()
 function(DKTEST)
     dk_debugFunc("\${ARGV}")
  
-	dk_validate(DIGITALKNOB_DIR "dk_setDIGITALKNOB_DIR()")
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
     dk_getDirectories("${DIGITALKNOB_DIR}" directories)# RECURSIVE)
     dk_printVar(directories)
 endfunction()

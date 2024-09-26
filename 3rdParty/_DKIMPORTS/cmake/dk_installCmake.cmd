@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
     ::%dk_call% dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     %dk_call% dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 	
 	
@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if exist "%CMAKE_EXE%" goto:cmake_installed
     %dk_call% dk_echo
     %dk_call% dk_info "Installing CMake . . ."
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     ::%dk_call% dk_echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     %dk_call% dk_download "%CMAKE_DL%"

@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
     ::call dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
     call dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
+	call dk_validate DKTOOLS_DIR "call dk_DKTOOLS_DIR"
 	call dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
 	
 	call dk_info "%QEMU_DIR%\qemu-uninstall.exe"

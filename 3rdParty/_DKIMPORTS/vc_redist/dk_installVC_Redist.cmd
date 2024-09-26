@@ -29,7 +29,7 @@ pause
 	::### INSTALL ###
 	%dk_call% dk_basename %VC_REDIST_DL% VC_REDIST_DL_FILE
 	%dk_call% dk_info "Installing Visual C Redistributable - %VC_REDIST_DL_FILE%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_getDKPaths"
 	%dk_call% dk_download %VC_REDIST_DL% %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE%
 	%dk_call% dk_command %DKDOWNLOAD_DIR%/%VC_REDIST_DL_FILE% /install /quiet /norestart 

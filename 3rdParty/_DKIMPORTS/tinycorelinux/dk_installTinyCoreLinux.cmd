@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "TINYCORELINUX_X86_64=http://www.tinycorelinux.net/15.x/x86_64/release/CorePure64-current.iso"
 	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
 	%dk_call% dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
@@ -48,7 +48,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%QEMU_IMG_EXE% create -f qcow2 %TINYCORELINUX_IMG% 10G
 		
 		:: Launching the VM
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		:: create TinyCoreLinux Launcher

@@ -48,7 +48,7 @@ dk_installCmake() {
 		
 		dk_basename "${CMAKE_DL}" CMAKE_DL_FILE
 		dk_removeExtension "${CMAKE_DL_FILE}" CMAKE_FOLDER
-		dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
+		#dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_validate DKTOOLS_DIR "dk_getDKPaths"

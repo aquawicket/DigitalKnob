@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not exist %DKBASH_FUNCTIONS_DIR%\DK.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh"
 	if not exist %DKBASH_FUNCTIONS_DIR%\%~1.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh"
 	
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_setBASH_EXE"
+	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 
 	:: get last argument
 	for %%a in (%*) do set LAST_ARG=%%a

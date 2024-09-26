@@ -38,7 +38,7 @@ dk_installPwsh() {
 	
 	dk_basename "${PWSH_DL}" PWSH_DL_FILE
 	dk_removeExtension "${PWSH_DL_FILE}" PWSH_FOLDER
-	dk_convertToCIdentifier "${PWSH_FOLDER}" PWSH_FOLDER
+	#dk_convertToCIdentifier "${PWSH_FOLDER}" PWSH_FOLDER
 	dk_toLower "${PWSH_FOLDER}" PWSH_FOLDER
 	dk_validate DKTOOLS_DIR "dk_getDKPaths"
 	PWSH=${DKTOOLS_DIR}/${PWSH_FOLDER}

@@ -21,7 +21,7 @@ if(NOT EXISTS ${PYTHON3_EXE})
 	else()
 		dk_assertPath(PYTHON3_DIR)
 		#dk_findProgram(PYTHON3_EXE python3 "${PYTHON3_DIR}")
-		dk_findProgram(PYTHON3_EXE python3 "/usr/bin")
+		dk_findProgram(PYTHON3_EXE python3 "${DKHOME_DIR}")
 	endif()
 endif()
 

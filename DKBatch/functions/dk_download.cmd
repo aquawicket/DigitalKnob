@@ -24,8 +24,8 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     if defined destination %dk_call% dk_realpath "%destination%" destination
     ::%dk_call% dk_printVar destination
     
-	call dk_validate DKDOWNLOAD_DIR "call dk_setDKDOWNLOAD_DIR"
-    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	call dk_validate DKDOWNLOAD_DIR "call dk_DKDOWNLOAD_DIR"
+    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     ::%dk_call% dk_printVar DKDOWNLOAD_DIR
 
     if not defined destination set "destination=%DKDOWNLOAD_DIR%\%url_filename%"
@@ -75,7 +75,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     :: Try powershell
     :powershell_dl
     if defined DISABLE_powershell goto:end_powershell_dl
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_setPOWERSHELL_EXE"
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     %dk_call% dk_echo "Downloading via powershell"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     if not exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^

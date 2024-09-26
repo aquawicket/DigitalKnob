@@ -2,10 +2,10 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_setDKHOME_DIR()
+::# dk_DKHOME_DIR()
 ::#
 ::#
-:dk_setDKHOME_DIR
+:dk_DKHOME_DIR
     call dk_debugFunc 0
 :: setlocal
 
@@ -27,6 +27,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_setDKHOME_DIR
+    %dk_call% dk_DKHOME_DIR
     %dk_call% dk_printVar DKHOME_DIR
 %endfunction%

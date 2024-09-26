@@ -20,7 +20,7 @@ dk_load(dk_builder)
 #WIN_HOST_dk_set	(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
 
 dk_validate(HOST_TRIPLE    "dk_HOST_TRIPLE()")
-dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
 LINUX_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 MAC_HOST_dk_set		   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)

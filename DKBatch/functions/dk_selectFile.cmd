@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1
  setlocal
   
-	%dk_call% dk_validate POWERSHELL_EXE "call dk_setPOWERSHELL_EXE"
+	%dk_call% dk_validate POWERSHELL_EXE "call dk_POWERSHELL_EXE"
     for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
         endlocal & set %1=%%~I
     )

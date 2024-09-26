@@ -25,6 +25,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_setDKDOWNLOAD_DIR()")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 	dk_cd(${DKDOWNLOAD_DIR})
 endfunction()

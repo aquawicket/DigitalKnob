@@ -27,7 +27,7 @@ function(dk_installGit)
 		dk_removeExtension(${GIT_DL_FILE} GIT_FOLDER)
 		#dk_convertToCIdentifier(${GIT_FOLDER} GIT_FOLDER)
 		dk_toLower(${GIT_FOLDER} GIT_FOLDER)
-		dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
+		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
 	endif()
 

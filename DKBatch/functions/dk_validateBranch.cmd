@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
     
-    if not defined DIGITALKNOB_DIR %dk_call% dk_setDIGITALKNOB_DIR
+    if not defined DIGITALKNOB_DIR %dk_call% dk_DIGITALKNOB_DIR
     for %%I in (.) do set "FOLDER=%%~nxI"                          &:: get the current folder
 
     set "DKBRANCH=Development"                                     &:: set the default branch

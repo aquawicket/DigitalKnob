@@ -22,7 +22,7 @@ call dk_load dk_getExtension
 call dk_load dk_removeExtension
 call dk_load dk_makeDirectory
 call dk_load dk_replaceAll
-call dk_load dk_convertToCIdentifier
+::call dk_load dk_convertToCIdentifier
 call dk_load dk_toLower
 call dk_load dk_pause
 call dk_load dk_exit

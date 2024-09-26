@@ -6,23 +6,19 @@ dk_load(dk_builder)
 
 dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
 WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe)
-
-dk_validate(DKTOOLS_DIR "dk_getDKPaths()")
-	
-## Get QEMU_DL_FILE, QEMU_FOLDER
 dk_assert(QEMU_DL)
-dk_basename(${QEMU_DL} QEMU_DL_FILE)
-dk_removeExtension(${QEMU_DL_FILE} QEMU_FOLDER)
-dk_convertToCIdentifier(${QEMU_FOLDER} QEMU_FOLDER)
-dk_set(QEMU ${DKTOOLS_DIR}/${QEMU_FOLDER})
-dk_set(QEMU_IMG_EXE ${QEMU}/qemu-img.exe)
-dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU}/qemu-system-x86_64.exe)
+dk_importVariables(${NOTEPADPP_DL} rtn_var)
+
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_set(QEMU_DIR ${DKTOOLS_DIR}/${QEMU_FOLDER})
+dk_set(QEMU_IMG_EXE ${QEMU_DIR}/qemu-img.exe)
+dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU_DIR}/qemu-system-x86_64.exe)
 
 ### INSTALL ###
 if(NOT EXISTS ${QEMU_IMG_EXE})
 	dk_download(${QEMU_DL} ${DKDOWNLOAD_DIR})
-	dk_getNativePath(${QEMU} QEMU_INSTALL_PATH)
-	dk_set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /D=${QEMU_INSTALL_PATH})
+	dk_getNativePath(${QEMU_DIR} QEMU_DIR_NATIVE)
+	dk_set(command_string "${DKDOWNLOAD_DIR}/${QEMU_DL_FILE}" /D=${QEMU_DIR_NATIVE})
 	dk_executeProcess(echo ${command_string})
 	dk_executeProcess(${command_string})
 endif()

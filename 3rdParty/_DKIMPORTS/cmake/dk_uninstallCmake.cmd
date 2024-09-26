@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
     ::call dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
     call dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
-	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
+	call dk_validate DKTOOLS_DIR "call dk_DKTOOLS_DIR"
 	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
 
 	::FIXME: kill pwsh.exe process

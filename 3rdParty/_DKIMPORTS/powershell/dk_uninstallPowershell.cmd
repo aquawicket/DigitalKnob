@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_removeExtension %POWERSHELL_DL_FILE% POWERSHELL_FOLDER
 	::call dk_convertToCIdentifier %POWERSHELL_FOLDER% POWERSHELL_FOLDER
 	call dk_toLower %POWERSHELL_FOLDER% POWERSHELL_FOLDER
-	call dk_validate DKTOOLS_DIR "call dk_setDKTOOLS_DIR"
+	call dk_validate DKTOOLS_DIR "call dk_DKTOOLS_DIR"
 	call dk_set POWERSHELL_DIR "%DKTOOLS_DIR%\%POWERSHELL_FOLDER%"
 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	

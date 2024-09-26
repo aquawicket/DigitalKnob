@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
 	::%dk_call% dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
 	%dk_call% dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_setDKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	
 	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
@@ -26,8 +26,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing notepad++ . . ."
     %dk_call% dk_download %NOTEPADPP_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_setDKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_DL_FILE%" "%NOTEPADPP_DIR%"
 	if NOT exist "%NOTEPADPP_EXE%" %dk_call% dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%"
 	:notepadpp_installed

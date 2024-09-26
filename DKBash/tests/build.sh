@@ -818,7 +818,7 @@ dk_installCmake() {
 			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
 		
-		dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
+		#dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
 		dk_toLower CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
@@ -1306,7 +1306,7 @@ dk_extract() {
 	cd "$parentdir" #|| dk_error "cd $$parentdir failed!"
 	tar -xf "$filename" -C "${2}"
 	cd "$oldpwd" #|| dk_error "cd $$oldpwd failed!"
-	dk_convertToCIdentifier "$destFolder" destFolder_
+	#dk_convertToCIdentifier "$destFolder" destFolder_
 	dk_printVar destFolder_
 	mv "${2}"/"$destFolder" "${2}"/"$destFolder_"
 

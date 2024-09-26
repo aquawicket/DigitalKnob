@@ -3,7 +3,7 @@ dk_load(dk_builder)
 # http://tinycorelinux.net/downloads.html
 # http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
 
-dk_validate(DKTOOLS_DIR "dk_getDKPaths()") 
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()") 
 
 dk_depend(qemu)
 

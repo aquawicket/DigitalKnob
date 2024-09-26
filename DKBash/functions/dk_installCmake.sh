@@ -48,7 +48,7 @@ dk_installCmake() {
 		dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
 		dk_call dk_assert CMAKE_FOLDER
 		
-		dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
+		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
 		dk_call dk_assert CMAKE_FOLDER
 		
