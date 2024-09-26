@@ -25,6 +25,6 @@ https://stackoverflow.com/a/65293474/688352
 
 	sudo nano /etc/resolv.conf
 	
-	nameserver 8.8.8.8
+	nameserver 192.168.1.1
 	
 	

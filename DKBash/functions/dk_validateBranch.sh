@@ -47,6 +47,8 @@ dk_validateBranch() {
 	
 	DKBATCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKBatch"
 	dk_call dk_printVar DKBATCH_DIR
+		DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
+		dk_call dk_printVar DKBATCH_FUNCTIONS_DIR
 	
 	DKPOWERSHELL_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKPowershell"
 	dk_call dk_printVar DKPOWERSHELL_DIR

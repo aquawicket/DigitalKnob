@@ -2,15 +2,15 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_test(args)
+::# dk_test(args1 arg2 rtn_var)
 ::#
 ::#
 :dk_test
-    call dk_debugFunc 2
+    call dk_debugFunc 3
  setlocal
  
-	%dk_call% dk_echo "1 = %~1"
-    
+	echo "dk_test(%*)"
+    endlocal & set "%3=return value"
 %endfunction%
 
 
@@ -23,6 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_test "test argument"
+    %dk_call% dk_test "arg 1" "arg 2" output
+	echo output = '%output%'
 
 %endfunction%

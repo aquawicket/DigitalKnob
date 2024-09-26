@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "DK.sh"
 [ -n "${DKINIT-}" ] && return ${?} || export DKINIT=1	# include_guard
 
 [ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
@@ -8,14 +7,7 @@ echo "DK.sh"
 #
 #
 DK(){
-	[ -n "${WSLENV+1}" ] && echo "WSLENV is on" || echo "WSLENV is off"
-	if [ -n "${WSLENV+1}" ]; then
-		echo "WSLENV is on"
-		#echo "0 = ${0}"
-		#echo "basename = $(basename ${0})"
-		#echo "dirname = $(dirname ${0})"
-		#echo "realpath = $(realpath ${0})"
-	fi
+	[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
 	
 	###### Initialize Language specifics ######
 	dkinit

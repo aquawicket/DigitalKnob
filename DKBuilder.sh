@@ -1,21 +1,32 @@
 #!/bin/sh
 ###### DKBuilder ######
 [ -n "$(command -v "sudo")" ] && export dksudo="sudo" || export dksudo=" "
+echo "dksudo = ${dksudo}"
+#${dksudo} -s
 
 ###### DKINIT ######
 export DKSCRIPT_PATH="$0"
-[ -e "${TMP-}" ] && DKTEMP_DIR=${TMP}
-[ -e "${TEMP-}" ] && DKTEMP_DIR=${TEMP}
-[ -e "${TMPDIR-}" ] && DKTEMP_DIR=${TMPDIR}
+echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+
 export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-export DKBASH_FUNCTIONS_DIR="${PWD}/DKBash/functions"
-[ -e ${DKBASH_DIR} ] || ${dksudo} mkdir ${DKBASH_DIR}
-[ -n "${USER-}" ] && DKUSERNAME=${USER-} || DKUSERNAME=${USERNAME-}	
-#echo "DKUSERNAME = ${DKUSERNAME}"
-[ -n "${DKUSERNAME-}" ] && ${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
+echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
+
+export DKBASH_DIR="${PWD}/DKBash"
+echo "DKBASH_DIR = ${DKBASH_DIR}"
+
+export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+
+[ -e "${DKBASH_DIR}" ] || ${dksudo} mkdir "${DKBASH_DIR}"
+export DKUSERNAME="${USER-}"
+[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
+[ -n "${DKUSERNAME-}" ] || echo "ERROR: unable to set DKUSERNAME"
+echo "DKUSERNAME = ${DKUSERNAME}"
+
+[ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${dksudo} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 
-[ -e ${DKBASH_FUNCTIONS_DIR} ] || mkdir ${DKBASH_FUNCTIONS_DIR}
+[ -e "${DKBASH_FUNCTIONS_DIR}" ] || mkdir ${DKBASH_FUNCTIONS_DIR}
 
 
 if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
