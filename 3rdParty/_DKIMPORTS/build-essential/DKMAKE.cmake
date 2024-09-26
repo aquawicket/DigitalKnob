@@ -21,4 +21,4 @@ elseif(NOT ANDROID)
 	dk_command(${SUDO} apt -y install build-essential)
 endif()
 
-dk_todo("tiny-core-lunux build-essential")
+#dk_todo("tiny-core-lunux build-essential")
