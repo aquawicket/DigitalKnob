@@ -11,11 +11,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     if defined DIGITALKNOB_DIR %return%
             
-    %dk_call% dk_validate DKHOME_DIR "%dk_call% dk_DKHOME_DIR"
-    ::if not defined DIGITALKNOB set "DIGITALKNOB=D i g i t a l K n o b"
-    if not defined DIGITALKNOB set "DIGITALKNOB=digitalknob"
+    %dk_call% dk_validate DKHOME_DIR    "%dk_call% dk_DKHOME_DIR"
+    ::if not defined DIGITALKNOB        set "DIGITALKNOB=D i g i t a l K n o b"
+    if not defined DIGITALKNOB          set "DIGITALKNOB=digitalknob"
     set "DIGITALKNOB_DIR=%DKHOME_DIR%\%DIGITALKNOB%"
-    if not exist "%DIGITALKNOB_DIR%" %dk_call% dk_makeDirectory "%DIGITALKNOB_DIR%"
+    if not exist "%DIGITALKNOB_DIR%"    %dk_call% dk_makeDirectory "%DIGITALKNOB_DIR%"
 %endfunction%
 
 
@@ -26,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
     call dk_debugFunc 0
-:: setlocal
+ setlocal
    
     %dk_call% dk_DIGITALKNOB_DIR
     %dk_call% dk_printVar DIGITALKNOB_DIR

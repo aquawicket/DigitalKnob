@@ -7,11 +7,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_installGitFileAssociations
 	call dk_debugFunc 0
-	
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate GITBASH_EXE "call %DKIMPORTS_DIR%\git\dk_installGit"
-	call dk_installFileAssoc .sh %GITBASH_EXE%
-	call dk_installFileAssoc .bash %GITBASH_EXE%
+:: setlocal	
+
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate GITBASH_EXE   "%dk_call% dk_installGit"
+	%dk_call% dk_installFileAssoc .sh %GITBASH_EXE%
+	%dk_call% dk_installFileAssoc .bash %GITBASH_EXE%
 %endfunction%
 
 
@@ -22,6 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
-	
+ setlocal
+ 
     call dk_installGitFileAssociations
 %endfunction%
