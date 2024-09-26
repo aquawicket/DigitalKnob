@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal enableextensions disabledelayedexpansion
 
-    rem We need a temporary file to store the original environment
+    :: We need a temporary file to store the original environment
     for %%f in ("original_%random%%random%%random%.tmp") do (
 
         rem Retrieve the original environment to the temporary file
@@ -50,7 +50,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         ) & set "%%d=" & set "%%e="
 
     rem Cleanup temporary file
-    ) & del "%%~ff"
+    ) &:: del "%%~ff"
     
 %endfunction%
 

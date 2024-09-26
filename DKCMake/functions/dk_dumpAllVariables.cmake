@@ -1,6 +1,9 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #include_guard()
 
+############################################################################
+# dk_dumpAllVariables(file)
+#
 function(dk_dumpAllVariables file)
 	dk_debugFunc("\${ARGV}")
 	
