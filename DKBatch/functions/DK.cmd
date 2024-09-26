@@ -28,10 +28,21 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     ::###### Initialize Language specifics ######
     call :dk_init
 
+
     ::###### set DKSCRIPT_PATH ######
     call :dk_setDKSCRIPT_PATH "%~1" %*
-
+	echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	
+	::###### set DKSCRIPT_DIR ######
+    call :dk_setDKSCRIPT_DIR	
+	echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
+	
+	::###### set DKSCRIPT_DIR ######
+    call :dk_setDKSCRIPT_EXT
+	echo "DKSCRIPT_EXT = %DKSCRIPT_EXT%" 
+	
     ::###### Reload Main Script with cmd ######
+	echo "line = %~0 %~1 %*" 
     call :dk_reloadWithCmd 
 
     ::############ Get DKBATCH variables ############
@@ -113,9 +124,29 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if not defined  DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
     if not exist   "%DKSCRIPT_PATH%" echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
 	if not defined  DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+	
 	::echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	::echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
 	::pause
+%endfunction%
+
+::##################################################################################
+::# dk_setDKSCRIPT_DIR
+::#
+:dk_setDKSCRIPT_DIR
+	if not exist "%DKSCRIPT_PATH%"   echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+	if not exist "%DKSCRIPT_DIR%"    for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
+	if [%DKSCRIPT_DIR:~-1%] == [\]   set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	if not exist "%DKSCRIPT_DIR%"    echo DKSCRIPT_DIR:%DKSCRIPT_DIR% not found & pause & exit 1
+%endfunction%
+
+::##################################################################################
+::# dk_setDKSCRIPT_EXT
+::#
+:dk_setDKSCRIPT_EXT
+	if not exist "%DKSCRIPT_PATH%"   echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
+	if not defined DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ"
+	if not defined DKSCRIPT_EXT    	 echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit 1
 %endfunction%
 
 ::##################################################################################
@@ -123,7 +154,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 :dk_reloadWithCmd
 	::echo ---^> %~0 %*
-	if "%~x0" neq ".cmd" goto:end_dk_reloadWithCmd
+	if "%DKSCRIPT_EXT%" neq ".cmd" goto:end_dk_reloadWithCmd
     if defined RELOADED goto:end_dk_reloadWithCmd
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"

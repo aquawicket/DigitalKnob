@@ -8,8 +8,8 @@
 dk_getDefaultGateway() {
     dk_debugFunc 1
  
-	dk_getDefaultGateway DKGATEWAY
-	$1="${DKGATEWAY}"
+	dk_callDKBatch dk_getDefaultGateway rtn_var
+	$1="${rtn_var}"
 }
 
 
@@ -19,6 +19,6 @@ dk_getDefaultGateway() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_getDefaultGateway "dk_getDefaultGateway" DKGATEWAY
+	dk_getDefaultGateway DKGATEWAY
 	dk_debug "DKGATEWAY = ${DKGATEWAY}"
 }

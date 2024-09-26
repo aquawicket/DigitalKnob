@@ -22,7 +22,7 @@ dk_callDKBatch() {
 	export last_arg="${@: -1}"
 	if [ "${last_arg}" = "rtn_var" ]; then
 		rtn_var=$(cmd.exe /c "(set "DKSCRIPT_PATH=${DKSCRIPT_PATH_WIN}"&& set "DKBATCH_FUNCTIONS_DIR_=${DKBATCH_FUNCTIONS_DIR_}"&& call "${DKBATCH_FUNCTIONS_DIR}/${1}.cmd" ${@:2})")
-		rtn_var="${rtn_var##*$'\n'}"  # get the last line of the variable
+		#rtn_var="${rtn_var##*$'\n'}"  # get the last line of the variable
 		#echo "rtn_var = ${rtn_var}"
 	else
 		cmd.exe /c "(set "DKSCRIPT_PATH=${DKSCRIPT_PATH_WIN}"&& set "DKBATCH_FUNCTIONS_DIR_=${DKBATCH_FUNCTIONS_DIR_}"&& call "${DKBATCH_FUNCTIONS_DIR}/${1}.cmd" ${@:2})"

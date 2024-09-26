@@ -30,6 +30,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_test "arg 1" "arg 2" rtn_var
+	
+	::%dk_call% dk_getDefaultGateway rtn_var
+
+	
 	echo rtn_var = '%rtn_var%'
 
 %endfunction%
