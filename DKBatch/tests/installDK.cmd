@@ -17,7 +17,7 @@ call dk_load dk_validateBranch
 call dk_load dk_installGit
 call dk_load dk_stringContains
 call dk_load dk_getDKPaths
-call dk_load dk_getHostTriple
+call dk_load dk_HOST_TRIPLE
 call dk_load dk_getExtension
 call dk_load dk_removeExtension
 call dk_load dk_makeDirectory

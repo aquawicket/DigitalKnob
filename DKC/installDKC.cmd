@@ -1,7 +1,7 @@
 @echo off
 
 ::### OS ###
-::default = DK_HOST_OS
+::default = HOST_OS
 ::set "OS=Android"
 ::set "OS=Emscripten"
 ::set "OS=iOS"
@@ -12,7 +12,7 @@
 ::set "OS=Windows"
 
 ::### ARCH ###
-::default = DK_HOST_ARCH
+::default = HOST_ARCH
 ::set "ARCH=arm"
 ::set "ARCH=arm64"
 ::set "ARCH=x86"
@@ -52,13 +52,13 @@ if "%~1" neq "" goto:runDKC
 	%dk_call% dk_echo "Installing DKC . . ."
 	
 	::###### OS ######
-	if not defined OS                        %dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
-	if not defined OS                        set "OS=%DK_HOST_OS%"
+	if not defined OS                        %dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
+	if not defined OS                        set "OS=%HOST_OS%"
 	%dk_call% dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH                      %dk_call% dk_validate DK_HOST_ARCH "%dk_call% dk_getHostTriple"
-	if not defined ARCH                      set "ARCH=%DK_HOST_ARCH%"
+	if not defined ARCH                      %dk_call% dk_validate HOST_ARCH "%dk_call% dk_HOST_TRIPLE"
+	if not defined ARCH                      set "ARCH=%HOST_ARCH%"
 	%dk_call% dk_printVar ARCH
 	
 	::###### COMPILER ######
@@ -75,9 +75,7 @@ if "%~1" neq "" goto:runDKC
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_validateBranch"
-echo ### DEBUG_BEGIN ###
 	if "%COMPILER%"=="clang"                 call "%DKIMPORTS_DIR%\clang\dk_installClang.cmd"
-echo ### DEBUG_END ###
 	if "%COMPILER%"=="gcc"                   call "%DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
 	:: C
 	if not defined COMPILER_EXE  if "%COMPILER%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"

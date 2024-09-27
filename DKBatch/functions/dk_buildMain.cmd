@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_printVar DKTEMP_DIR
 	
 
-    %dk_call% dk_getHostTriple
+    %dk_call% dk_HOST_TRIPLE
     %dk_call% dk_getDKPaths
 
 	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE

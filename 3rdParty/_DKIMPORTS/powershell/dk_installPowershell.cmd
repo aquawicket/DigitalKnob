@@ -8,10 +8,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 ::setlocal
 	
-	%dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
-	if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_arm64"   %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"
-    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"     %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x86.zip"
-    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
+	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
+	if "%HOST_OS%_%HOST_ARCH%"=="WIN_ARM64"   %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-arm64.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"     %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x86.zip"
+    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64"  %dk_call% dk_set POWERSHELL_DL "https://github.com/PowerShell/PowerShell/releases/download/v7.4.2/PowerShell-7.4.2-win-x64.zip"
 	if not defined POWERSHELL_DL %dk_call% dk_error "POWERSHELL_DL is invalid"
 	
 	::::::::: POWERSHELL_DL -> TO -> POWERSHELL_DIR :::::::::::::

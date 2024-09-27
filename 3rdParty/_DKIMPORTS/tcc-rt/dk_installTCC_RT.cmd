@@ -8,9 +8,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	https://jpsoft.com/downloads/v32/tcc-rt.exe
-	%dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
-    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86"     %dk_call% dk_set TCC_RT_DL "https://jpsoft.com/downloads/v32/tcc-rt.exe"
-    if "%DK_HOST_OS%_%DK_HOST_ARCH%"=="win_x86_64"  %dk_call% dk_set TCC_RT_DL "https://jpsoft.com/downloads/v32/tcc-rt.exe"
+	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
+    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"     %dk_call% dk_set TCC_RT_DL "https://jpsoft.com/downloads/v32/tcc-rt.exe"
+    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64"  %dk_call% dk_set TCC_RT_DL "https://jpsoft.com/downloads/v32/tcc-rt.exe"
 	if not defined TCC_RT_DL %dk_call% dk_error "TCC_RT_DL is invalid"
 	
 	%dk_call% dk_basename %TCC_RT_DL% TCC_RT_DL_FILE

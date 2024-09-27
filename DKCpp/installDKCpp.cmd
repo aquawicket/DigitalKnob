@@ -1,7 +1,7 @@
 @echo off
 
 ::### OS ###
-::default = DK_HOST_OS
+::default = HOST_OS
 ::set "OS=Android"
 ::set "OS=Emscripten"
 ::set "OS=iOS"
@@ -12,7 +12,7 @@
 ::set "OS=Windows"
 
 ::### ARCH ###
-::default = DK_HOST_ARCH
+::default = HOST_ARCH
 ::set "ARCH=arm"
 ::set "ARCH=arm64"
 ::set "ARCH=x86"
@@ -42,7 +42,8 @@
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
 
-if "%~1" neq "" goto:runDKCpp
+if "%~1" equ "%~0" goto:installDKCpp
+if "%~1" neq ""    goto:runDKCpp
 :installDKCpp
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -52,13 +53,13 @@ if "%~1" neq "" goto:runDKCpp
 	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	if not defined OS call dk_validate DK_HOST_OS "call dk_getHostTriple"
-	if not defined OS set "OS=%DK_HOST_OS%"
+	if not defined OS %dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
+	if not defined OS set "OS=%HOST_OS%"
 	%dk_call% dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
-	if not defined ARCH set "ARCH=%DK_HOST_ARCH%"
+	if not defined ARCH %dk_call% dk_validate HOST_ARCH "%dk_call% dk_HOST_TRIPLE"
+	if not defined ARCH set "ARCH=%HOST_ARCH%"
 	%dk_call% dk_printVar ARCH
 	
 	::###### COMPILER ######
@@ -74,7 +75,7 @@ if "%~1" neq "" goto:runDKCpp
 	%dk_call% dk_printVar MSYSTEM
 	
 	::###### COMPILER_EXE ######
-	%dk_call% dk_validate DKIMPORTS_DIR "call dk_validateBranch"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
 	if "%COMPILER%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%COMPILER%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 	:: C
@@ -100,6 +101,8 @@ if "%~1" neq "" goto:runDKCpp
 :runDKCpp
 	set "COMPILER_EXE=%~1"
 	set "DKCPP_FILE=%~2"
+	
+	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
 	
 	::###### Compile Code ######
 	echo compiling ...

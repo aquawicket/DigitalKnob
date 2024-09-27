@@ -1080,9 +1080,10 @@ endif(MAC)
 #############
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-		dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
-	endif()
+	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
+	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+	#	dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
+	#endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1176,14 +1177,6 @@ endif(RASPBERRY)
 if(WIN_X86)
 	########################## CREATE ICONS ###############################
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
-	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-	#	dk_info("Building icons for ${APP_NAME} . . .")
-	#	dk_makeDirectory(${DK_PROJECT_DIR}/icons/windows)
-	#	dk_createWindowsIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/icons/windows/icon.ico)
-	#	dk_makeDirectory(${DK_PROJECT_DIR}/assets)
-	#	dk_copy(${DK_PROJECT_DIR}/icons/windows/icon.ico ${DK_PROJECT_DIR}/assets/icon.ico OVERWRITE)
-	#	dk_createFavIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/favicon.ico)
-	#endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -1311,14 +1304,6 @@ endif(WIN_X86)
 if(WIN_X86_64)
 	########################## CREATE ICONS ###############################
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
-	#if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
-	#	dk_info("Building icons for ${APP_NAME} . . .")
-	#	dk_makeDirectory(${DK_PROJECT_DIR}/icons/windows)
-	#	dk_createWindowsIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/icons/windows/icon.ico)
-	#	dk_makeDirectory(${DK_PROJECT_DIR}/assets)
-	#	dk_copy(${DK_PROJECT_DIR}/icons/windows/icon.ico ${DK_PROJECT_DIR}/assets/icon.ico OVERWRITE)
-	#	dk_createFavIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/favicon.ico)
-	#endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
