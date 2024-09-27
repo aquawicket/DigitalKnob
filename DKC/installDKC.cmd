@@ -74,7 +74,7 @@ if "%~1" neq "" goto:runDKC
 	%dk_call% dk_printVar MSYSTEM
 
 	::###### COMPILER_EXE ######
-	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
 	if "%COMPILER%"=="clang"                 call "%DKIMPORTS_DIR%\clang\dk_installClang.cmd"
 	if "%COMPILER%"=="gcc"                   call "%DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
 	:: C
