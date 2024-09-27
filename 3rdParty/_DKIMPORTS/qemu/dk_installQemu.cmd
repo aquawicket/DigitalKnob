@@ -9,8 +9,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
 
     %dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"     set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
-    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64"  set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
+    if defined WIN_X86_HOST     set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe"
+    if defined WIN_X86_64_HOST  set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe"
     if not defined QEMU_DL %dk_call% dk_error "QEMU_DL is invalid"
 
     %dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
