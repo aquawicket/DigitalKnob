@@ -34,9 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "DKLINK=Static"
 
     set "CMAKE_ARGS="
-    ::if "%TYPE%"=="Debug"           %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=OFF
     if "%TYPE%"=="Debug"             %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON
-    ::if "%TYPE%"=="Release"         %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=OFF & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="Release"           %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%TYPE%"=="All"               %dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON & %dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON
     if "%DKLEVEL%"=="Build"          %dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON
@@ -55,7 +53,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_appendArgs CMAKE_ARGS -Werror=deprecated
     ::%dk_call% dk_appendArgs CMAKE_ARGS --graphviz=graphviz.txt
     ::%dk_call% dk_appendArgs CMAKE_ARGS --system-information system_information.txt
-    %dk_call% dk_appendArgs CMAKE_ARGS --debug-trycompile
+    ::%dk_call% dk_appendArgs CMAKE_ARGS --debug-trycompile
     ::%dk_call% dk_appendArgs CMAKE_ARGS --debug-output
     ::%dk_call% dk_appendArgs CMAKE_ARGS --trace
     ::%dk_call% dk_appendArgs CMAKE_ARGS --trace-expand

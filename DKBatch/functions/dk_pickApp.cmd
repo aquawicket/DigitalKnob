@@ -2,24 +2,20 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickApp(rtn_var)
+::# dk_pickApp(rtn_var:APP)
 ::#
 ::#
 :dk_pickApp APP
     call dk_debugFunc 0 1
- ::setlocal 
+ setlocal 
     
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
-	::%dk_call% dk_printVar _APP_
-	::%dk_call% dk_printVar _TARGET_OS_
-	::%dk_call% dk_printVar _TYPE_
 	
     :: get a list of the directories in DKApps
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
     %dk_call% dk_getDirectories "%DKAPPS_DIR%" options
-	::%dk_call% dk_printVar options
   
     :: rename the list elements to the folder basename and add a matching command
     set /a "n=0"
@@ -80,7 +76,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_echo "!options[%choice%]!"
     
-    ::if "!DE!" equ "" %%%apps%[%n%]%% && %return%
     if not defined commands[%choice%] (
         %dk_call% dk_echo "%choice%: invalid selection, please try again"
         %dk_call% dk_unset APP

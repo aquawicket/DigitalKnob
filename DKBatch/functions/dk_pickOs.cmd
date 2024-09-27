@@ -2,13 +2,12 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_pickOs()
+::# dk_pickOs(rtn_var:TARGET_OS)
 ::#
 ::#
-:dk_pickOs
- %setlocal%
+:dk_pickOs TARGET_OS
     call dk_debugFunc 1
-    
+ setlocal    
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     %dk_call% dk_echo
     %dk_call% dk_echo %APP% %TARGET_OS% %TYPE%

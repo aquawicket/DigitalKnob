@@ -14,7 +14,7 @@ function(dk_createIcons image)
 		dk_warning("dk_createIcons(): image:${image} not found.")
 		return()
 	endif()
-	dk_assertPath(image)
+
 	dk_assert(APP_NAME)
 	dk_assert(OS)
 	dk_info("Building ${OS} icons for ${APP_NAME} . . .")

@@ -2,13 +2,12 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_pickUpdate()
+::# dk_pickUpdate(rtn_var:UPDATE)
 ::#
 ::#
-:dk_pickUpdate
- setlocal
+:dk_pickUpdate UPDATE
     call dk_debugFunc 0
-    
+ setlocal  
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
     %dk_call% dk_echo
@@ -47,7 +46,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="10" %dk_call% dk_reload
     if "%choice%"=="11" %dk_call% dk_exit 0
        
-    set "UPDATE=true"
+    endlocal & set "UPDATE=1"
 %endfunction%
 
 
