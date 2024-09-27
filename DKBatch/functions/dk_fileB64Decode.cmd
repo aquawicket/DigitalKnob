@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_validateBranch"
+    ::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     ::set "input=%DKBRANCH_DIR%\DKBuilder.cmd.b64"
     ::set "output=%DKBRANCH_DIR%\DKBuilder_decoded.cmd"
     ::%dk_call% dk_fileB64Decode "%input%" "%output%"
