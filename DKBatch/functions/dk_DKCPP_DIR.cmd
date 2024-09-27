@@ -2,20 +2,20 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_DKCMAKE_DIR()
+::# dk_DKCPP_DIR()
 ::#
 ::#
-:dk_DKCMAKE_DIR
+:dk_DKCPP_DIR
     call dk_debugFunc 0
  ::setlocal
    
-    if defined DKCMAKE_DIR %return%
+    if defined DKCPP_DIR %return%
     
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    set "DKCMAKE_DIR=%DKBRANCH_DIR%\DKCMake"
-	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_DIR%\functions"
-	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_DIR%\functions\"
-    ::if not exist "%DKCMAKE_DIR%" %dk_call% dk_makeDirectory "%DKCMAKE_DIR%"
+    set "DKCPP_DIR=%DKBRANCH_DIR%\DKCpp"
+	set "DKCPP_FUNCTIONS_DIR=%DKCPP_DIR%\functions"
+	set "DKCPP_FUNCTIONS_DIR_=%DKCPP_DIR%\functions\"
+    ::if not exist "%DKCPP_DIR%" %dk_call% dk_makeDirectory "%DKCPP_DIR%"
 %endfunction%
 
 
@@ -29,6 +29,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_DKCMAKE_DIR
-    %dk_call% dk_printVar DKCMAKE_DIR
+    %dk_call% dk_DKCPP_DIR
+    %dk_call% dk_printVar DKCPP_DIR
 %endfunction%

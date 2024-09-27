@@ -16,7 +16,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
     call dk_debugFunc 0
 :: setlocal
  
-    %dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
+    %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
     if defined win_arm32_host  set "GIT_DL="
     if defined win_arm64_host  set "GIT_DL=%GIT_DL_WIN_ARM64%"
     if defined win_x86_host    set "GIT_DL=%GIT_DL_WIN_X86%"

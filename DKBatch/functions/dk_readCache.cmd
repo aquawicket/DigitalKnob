@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     
-    if not defined DKBRANCH_DIR %dk_call% dk_validateBranch
+    %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     ::%dk_call% dk_printVar DKBRANCH_DIR
     ::if not exist "%DKBRANCH_DIR%\cache" %dk_call% dk_warning "%DKBRANCH_DIR%\cache does not exist" && %return%
     if not exist "%DKBRANCH_DIR%\cache" %return%

@@ -57,7 +57,7 @@ if "%~1" neq "" goto:runDKC
 	%dk_call% dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH                      %dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
+	if not defined ARCH                      %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if not defined ARCH                      set "ARCH=%host_arch%"
 	%dk_call% dk_printVar ARCH
 	

@@ -36,6 +36,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+    %dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBATCH_DIR"
     %dk_call% dk_appendEvnPath "%DKBATCH_FUNCTIONS_DIR%"
 %endfunction%

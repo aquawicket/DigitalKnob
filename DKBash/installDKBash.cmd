@@ -8,7 +8,7 @@ if "%~1" neq "" (goto:runDKBash)
 	
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKBash . . ."
-	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_BASH_DIR"
 	%dk_call% dk_validate GITBASH_EXE "%dk_call% dk_installGit"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKBash"

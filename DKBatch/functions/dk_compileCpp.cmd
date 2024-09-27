@@ -30,6 +30,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     set "MSYSTEM=CLANG64"
-    %dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_validateBranch"
+    %dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
     %dk_call% dk_compile "%DKAPPS_DIR%\HelloWorld\main.cpp"
 %endfunction%

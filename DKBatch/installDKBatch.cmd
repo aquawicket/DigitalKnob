@@ -9,7 +9,7 @@ if "%~1" neq ""    goto:runDKBatch
 
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBATCH_DIR"
 	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%\system32"
 	%dk_call% dk_set ComSpec %CMD_EXE%
 	

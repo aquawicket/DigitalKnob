@@ -21,10 +21,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::%dk_call% dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
 	%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_validateBranch"
-	%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
-	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
-	%dk_call% dk_getNativePath %OPENJDK% OPENJDK_NATIVE
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	%dk_call% dk_set OPENJDK_DIR %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
+	%dk_call% dk_set registerJDK11 %OPENJDK_DIR%\registerJDK.cmd
+	%dk_call% dk_getNativePath %OPENJDK_DIR% OPENJDK_NATIVE
 	
 	if defined win_host   (%dk_call% :dk_installOpenJdkWin)
 	if defined mac_host   (%dk_call% :dk_installOpenJdkMac)
@@ -34,15 +34,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installOpenJdkWin
 	%dk_call% dk_set JAVA_VERSION 11
 	%dk_call% dk_set JAVA_VERSION %JAVA_VERSION%
-	%dk_call% dk_set JAVA_HOME %OPENJDK%
+	%dk_call% dk_set JAVA_HOME %OPENJDK_DIR%
 	setx JAVA_VERSION %JAVA_VERSION%
-	setx JAVA_HOME %OPENJDK%
-	setx VS_JavaHome %OPENJDK%
-	setx STUDIO_JDK %OPENJDK%
-	setx STUDIO_GRADLE_JDK %OPENJDK%
+	setx JAVA_HOME %OPENJDK_DIR%
+	setx VS_JavaHome %OPENJDK_DIR%
+	setx STUDIO_JDK %OPENJDK_DIR%
+	setx STUDIO_GRADLE_JDK %OPENJDK_DIR%
 	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" "CurrentVersion" "REG_SZ" "%JAVA_VERSION%"
-	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK%\""
-	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK%\\bin\\server\\jvm.dll\""
+	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK_DIR%\""
+	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK_DIR%\\bin\\server\\jvm.dll\""
 	
 	:::::: Set Environment Variables ::::::
 	%dk_call% dk_setEnv JAVA_VERSION %JAVA_VERSION%

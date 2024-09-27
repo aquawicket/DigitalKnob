@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 	
 	:: Step 4 - Download the Linux kernel update package
-	%dk_call% dk_validate host_arch "%dk_call% dk_host_triple"
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if defined win_x86_64_host  set "WSL_DL=https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
 	%dk_call% dk_basename %WSL_DL% WSL_DL_FILE
 	%dk_call% dk_echo   
