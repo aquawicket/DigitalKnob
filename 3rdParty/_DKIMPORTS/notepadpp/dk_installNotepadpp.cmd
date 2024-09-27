@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppContextMenu.cmd
 	
 	::### Add File Associations ###
-	call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
+	::call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadppFileAssociations.cmd
 %endfunction%
 
 
