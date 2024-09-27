@@ -11,7 +11,7 @@ dk_callDKBatch() {
 	#builtin echo "last argument = ${@: -1}"
 	
 	#dk_validate CMD_EXE "??"
-	dk_call dk_validate DKBATCH_FUNCTIONS_DIR "dk_validateBranch"
+	dk_call dk_validate DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR"
 	export DKBATCH_FUNCTIONS_DIR="C:/Users/Administrator/digitalknob/Development/DKBatch/functions"
 	export DKBATCH_FUNCTIONS_DIR_="C:/Users/Administrator/digitalknob/Development/DKBatch/functions/"
 

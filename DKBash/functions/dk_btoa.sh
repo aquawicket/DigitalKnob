@@ -24,7 +24,7 @@ dk_btoa() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	input="${DKBRANCH_DIR}\DKBuilder.sh"
 	output="${DKBRANCH_DIR}\DKBuilder.sh.base64"
 	dk_call dk_btoa "${input}" "${output}"

@@ -13,7 +13,7 @@ dk_gitCommit() {
 	dk_call dk_info "Please enter some details about this commit, Then press ENTER."
 	dk_call dk_keyboardInput commit_msg
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd \${DKBRANCH_DIR} failed!"
 	
 	if ! STORE=$(${GIT_EXE} config credential.helper); then

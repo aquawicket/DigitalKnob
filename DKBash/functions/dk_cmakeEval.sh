@@ -9,7 +9,7 @@ dk_cmakeEval() {
 	dk_debugFunc 1 3
 	
 	dk_call dk_validate CMAKE_EXE "dk_call dk_installCmake"
-	dk_call dk_validate DKCMAKE_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKCMAKE_DIR "dk_call dk_DKBRANCH_DIR"
 	
 	DKCOMMAND="${1}"
 	DKRETURN="${2-}"

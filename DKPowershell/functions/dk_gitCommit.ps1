@@ -13,7 +13,7 @@ function Global:dk_gitCommit() {
 	dk_call dk_info "Please enter some details about this commit, Then press ENTER."
 	$message = Read-Host
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}" #-or dk_call dk_error "cd \${DKBRANCH_DIR} failed!"
 	
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"

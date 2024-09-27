@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
 
 ##################################################################################
-# dk_validateBranch()
+# dk_DKBRANCH_DIR()
 #
 #
-dk_validateBranch() {
+dk_DKBRANCH_DIR() {
 	dk_debugFunc 0
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development
@@ -83,5 +83,5 @@ dk_validateBranch() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_validateBranch
+	dk_call dk_DKBRANCH_DIR
 }

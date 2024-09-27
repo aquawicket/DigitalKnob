@@ -31,7 +31,7 @@ function Global:dk_buildMain() {
 	dk_call dk_getHostTriple
 	dk_call dk_getDKPaths
 	dk_call dk_installGit
-	dk_call dk_validateBranch
+	dk_call dk_DKBRANCH_DIR
 	
 	if("${DKSCRIPT_DIR}" -ne "${DKBRANCH_DIR}"){
 		dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"

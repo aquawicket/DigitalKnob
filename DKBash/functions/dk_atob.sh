@@ -25,7 +25,7 @@ dk_atob() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	input="${DKBRANCH_DIR}\DKBuilder.sh.base64"
 	output="${DKBRANCH_DIR}\DKBuilder_decoded.sh"
 	dk_call dk_atob "${input}" "${output}"

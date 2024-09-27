@@ -13,7 +13,6 @@ call "DKBatch/functions/DK.cmd" %*
 
 ::###### Load Main Program ######
 call dk_load dk_validate
-call dk_load dk_validateBranch
 call dk_load dk_installGit
 call dk_load dk_stringContains
 call dk_load dk_getDKPaths

@@ -22,7 +22,7 @@ fi
 ###### Load Main Program ######
 dk_load dk_validate
 dk_load dk_installGit
-dk_load dk_validateBranch
+dk_load dk_DKBRANCH_DIR
 dk_load dk_stringContains
 dk_load dk_getDKPaths
 dk_load dk_getHostTriple
@@ -37,7 +37,7 @@ dk_load dk_exit
 
 ###### Run Program ######
 dk_validate GIT_EXE "dk_installGit"
-dk_validate DKBRANCH_DIR "dk_validateBranch"
+dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
 if [ ! -e "$DKBRANCH_DIR/.git" ]; then
 	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR

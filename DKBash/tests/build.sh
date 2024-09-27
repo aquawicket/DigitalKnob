@@ -115,7 +115,7 @@ dk_buildMain() {
 	dk_getDKPaths
 
 	dk_installGit
-	dk_validateBranch
+	dk_DKBRANCH_DIR
 
 	dk_printVar DKBRANCH_DIR
 	dk_printVar DKAPPS_DIR
@@ -1506,11 +1506,11 @@ dk_validatePackage() {
 
 
 ##################################################################################
-# dk_validateBranch()
+# dk_DKBRANCH_DIR()
 #
 #
-dk_validateBranch() {
-	dk_verbose "dk_validateBranch(${*})"
+dk_DKBRANCH_DIR() {
+	dk_verbose "dk_DKBRANCH_DIR(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 
 	# If the current folder matches the current branch set DKBRANCH, default to Development

@@ -16,7 +16,7 @@ dk_gitUpdate() {
 		dk_call dk_confirm || return 0
 	fi
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR

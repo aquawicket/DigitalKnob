@@ -8,7 +8,7 @@ if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 function Global:dk_readCache($APP, $TARGET_OS, $TYPE) {
 	dk_debugFunc 3
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_validateBranch"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 
 	if(!(dk_call dk_pathExists "${DKBRANCH_DIR}/cache")){ return }
 	

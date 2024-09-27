@@ -9,7 +9,7 @@
 dk_readCache() {
 	dk_debugFunc 3
 
-	dk_validate DKBRANCH_DIR "dk_validateBranch"
+	dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
 	dk_pathExists "${DKBRANCH_DIR-}"/cache || return 0
 	#_APP_=
 	#_TARGET_OS_=
