@@ -1,3 +1,4 @@
+#!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64

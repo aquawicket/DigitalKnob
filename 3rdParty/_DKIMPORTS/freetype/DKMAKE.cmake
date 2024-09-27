@@ -1,3 +1,4 @@
+#!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # https://www.freetype.org/
 # https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz

@@ -1,3 +1,4 @@
+#!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://www.transmissionzero.co.uk/computing/win32-apps-with-mingw/

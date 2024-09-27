@@ -1,3 +1,4 @@
+#!/usr/bin/cmake -P
 include_guard()		# include_guard
 
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
