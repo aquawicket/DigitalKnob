@@ -19,15 +19,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	set "host_os=win"
 	set "%host_os%_host=1"
 	
-	::###### host_arch and <ARCH>_HOST ######
-	if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "host_arch=x86"
+	::###### host_arch and <arch>_host ######
+	if "%PROCESSOR_ARCHITECTURE%"=="X86"   set "host_arch=x86"
     if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "host_arch=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="IA64"  set "host_arch=x86_64"
     if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "host_arch=x86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="arm64" set "host_arch=arm64"
+    if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "host_arch=arm64"
 	set "%host_arch%_host=1"             
 	
-	::###### HOST_env and <ENV>_HOST ######
+	::###### HOST_env and <env>_host ######
 	set "host_env=clang"
 	if not defined host_env goto:end_host_env
 		set "%host_env%_host=1"
