@@ -15,13 +15,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installVC_Redist
     call dk_debugFunc 0
 	
-	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	if defined WIN_X86_HOST    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"
-	if defined WIN_X86_64_HOST set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe"
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	if defined win_x86_host    set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x86.exe"
+	if defined win_x86_64_host set "VC_REDIST_DL=https://aka.ms/vs/16/release/vc_redist.x64.exe"
 	if not defined VC_REDIST_DL %dk_call% dk_error "VC_REDIST_DL is invalid"
 
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"    set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll"
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64" set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll"
+	if defined win_x86_host    set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll"
+	if defined win_x86_64_host set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll"
 	if not defined VCCOMP140_DLL %dk_call% dk_error "VCCOMP140_DLL is invalid"
 pause
 	if exist "%VCCOMP140_DLL%" goto:eof

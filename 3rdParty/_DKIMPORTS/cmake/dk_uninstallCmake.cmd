@@ -7,15 +7,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_uninstallCmake
 	call dk_debugFunc 0
 	
-	%dk_call% dk_validate HOST_TRIPLE   "%dk_call% dk_HOST_TRIPLE.cmd"
-  ::if defined WIN_ARM32    	 set "CMAKE_DL="
-    if defined WIN_ARM64_HOST    set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"
-    if defined WIN_X86_HOST      set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"
-    if defined WIN_X86_64_HOST   set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"
-    if defined MAC_HOST          set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"
-  ::if defined MAC_HOST          set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"
-    if defined LINUX_X86_64_HOST set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"
-    if defined LINUX_ARM64_HOST  set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"
+	%dk_call% dk_validate host_triple   "%dk_call% dk_host_triple.cmd"
+  ::if defined win_arm32    	 set "CMAKE_DL="
+    if defined win_arm64_host    set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"
+    if defined win_x86_host      set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"
+    if defined win_x86_64_host   set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"
+    if defined mac_host          set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"
+  ::if defined mac_host          set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"
+    if defined linux_x86_64_host set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"
+    if defined linux_arm64_host  set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"
     if not defined CMAKE_DL      %dk_call% dk_error "CMAKE_DL is invalid"
 	
 	::%dk_call% dk_importVariables %CMAKE_DL% rtn_var

@@ -77,7 +77,7 @@ set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
 
 if "%ABI%"=="armeabi-v7a" (	set "CMAKE_GENERATOR_ARCH=ARM" & goto :end )
-if "%ABI%"=="arm64-v8a" ( set "CMAKE_GENERATOR_ARCH=ARM64" & goto :end )
+if "%ABI%"=="arm64-v8a" ( set "CMAKE_GENERATOR_ARCH=arm64" & goto :end )
 %FATAL% "ABI is invalid"
 :end
 

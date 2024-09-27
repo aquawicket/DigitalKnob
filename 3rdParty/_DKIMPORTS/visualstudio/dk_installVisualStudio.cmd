@@ -89,15 +89,15 @@ call:     get_visualstudio_edition 						VISUALSTUDIO_EDITION
 %dk_call% dk_set VISUALSTUDIO_X64_LINKER 				"%VISUALSTUDIO_COMMUNITY%\VC\Tools\MSVC\%VISUALSTUDIO_EDITION%\bin\Hostx64\x64\link.exe"
 %dk_call% dk_set VISUALSTUDIO_X86_DUMPBIN 				"%VISUALSTUDIO_COMMUNITY%\VC\Tools\MSVC\%VISUALSTUDIO_EDITION%\bin\Hostx86\x86\dumpbin.exe"
 %dk_call% dk_set VISUALSTUDIO_X64_DUMPBIN 				"%VISUALSTUDIO_COMMUNITY%\VC\Tools\MSVC\%VISUALSTUDIO_EDITION%\bin\Hostx86\x64\dumpbin.exe"
-if defined ARM64  %dk_call% dk_set VISUALSTUDIO_GENERATOR_PLATFORM   ARM64
-if defined X86 (
+if defined arm64  %dk_call% dk_set VISUALSTUDIO_GENERATOR_PLATFORM   arm64
+if defined x86 (
 	%dk_call% dk_set VISUALSTUDIO_GENERATOR_PLATFORM	Win32)
 	%dk_call% dk_set VISUALSTUDIO_C_COMPILER			"%VISUALSTUDIO_X86_COMPILER%"
 	%dk_call% dk_set VISUALSTUDIO_CXX_COMPILER			"%VISUALSTUDIO_X86_COMPILER%"
 	%dk_call% dk_set VISUALSTUDIO_LINKER				"%VISUALSTUDIO_X86_LINKER%"
 	%dk_call% dk_set VISUALSTUDIO_DUMPBIN				"%VISUALSTUDIO_X86_DUMPBIN%"
 )
-if defeind X86_64 {
+if defeind x86_64 {
 	%dk_call% dk_set VISUALSTUDIO_GENERATOR_PLATFORM	x64)
 	%dk_call% dk_set VISUALSTUDIO_C_COMPILER			"%VISUALSTUDIO_X64_COMPILER%"
 	%dk_call% dk_set VISUALSTUDIO_CXX_COMPILER			"%VISUALSTUDIO_X64_COMPILER%"
@@ -109,7 +109,7 @@ if defeind X86_64 {
 
 
 ::###### Patch Android Files ######
-if defined ANDROID (
+if defined android (
 	if exist "%VISUALSTUDIO_COMMUNITY%\MSBuild\Microsoft\MDD\Android\V150\Android.Common.targets" (
 		%dk_call% dk_info "Patching Android.Common.targets. . ."
 		%dk_call% dk_fileReplace "%VISUALSTUDIO_COMMUNITY%\MSBuild\Microsoft\MDD\Android\V150\Android.Common.targets" ">ARM7</GradlePlatform>" "></GradlePlatform>")

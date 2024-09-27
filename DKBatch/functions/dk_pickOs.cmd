@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
     %dk_call% dk_echo
-    echo  1) %HOST_TRIPLE%
+    echo  1) %host_triple%
     %dk_call% dk_echo
     echo  2) Android arm32
     echo  3) Android arm64
@@ -62,7 +62,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_keyboardInput choice
     ::%dk_call% dk_keyboardInputTimeout choice 1 60
         
-    if "%choice%"=="1" endlocal & set "%1=%HOST_TRIPLE%"     & %return%
+    if "%choice%"=="1" endlocal & set "%1=%host_triple%"     & %return%
     if "%choice%"=="2" endlocal & set "%1=android_arm32"        & %return%
     if "%choice%"=="3" endlocal & set "%1=android_arm64"        & %return%
     if "%choice%"=="4" endlocal & set "%1=android_x86"          & %return%

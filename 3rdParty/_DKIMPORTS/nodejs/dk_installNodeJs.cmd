@@ -8,13 +8,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	
-	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-    if defined LINUX_ARM64_HOST       set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz"
-    if defined LINUX_X86_64_HOST      set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz"
-    if defined MAC_ARM64_HOST         set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz"
-	if defined MAC_X86_64_HOST        set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz"
-    if defined WIN_X86_HOST           set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip"
-    if defined WIN_X86_64_HOST        set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip"
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+    if defined linux_arm64_host       set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz"
+    if defined linux_x86_64_host      set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz"
+    if defined mac_arm64_host         set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz"
+	if defined mac_x86_64_host        set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz"
+    if defined win_x86_host           set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip"
+    if defined win_x86_64_host        set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip"
     if not defined NODEJS_DL          %dk_call% dk_error "NODEJS_DL is invalid"
 	
     %dk_call% dk_basename %NODEJS_DL% NODEJS_DL_FILE

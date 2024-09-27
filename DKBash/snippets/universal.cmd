@@ -1,6 +1,6 @@
 :<<"::UNIX"
 @ECHO OFF
-GOTO :WINDOWS
+GOTO :windows
 
 
 ::UNIX
@@ -8,6 +8,6 @@ echo "This universal script is running on Unix"
 exit $?
 
 
-:WINDOWS
+:windows
 ECHO This universal script is running on Windows
 pause

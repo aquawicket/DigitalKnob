@@ -2,57 +2,57 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::#####################################################################
-::# dk_HOST_TRIPLE()
+::# dk_host_triple()
 ::#
-::#	  HOST_OS 				  = ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
-::#	  HOST_ARCH				  = ARM32, ARM64, X86, X86_64
-::#	  HOST_ENV				  = CLANG, MINGW, MSVC, UCRT
-::#	  <OS>_HOST 			  = ANDROID_HOST, EMSCRIPTEN_HOST, IOS_HOST, IOSSIM_HOST, LINUX_HOST, MAC_HOST, RASPBERRY_HOST, WINDOWS_HOST 
-::#   <OS>_<ARCH>_HOST		  = ANDROID_ARM64_HOST, EMSCRIPTEN_ARM64_HOST, IOS_ARM64_HOST, IOSSIM_ARM64_HOST, LINUX_ARM64_HOST, MAC_ARM64_HOST, RASPBERRY_ARM64_HOST, WINDOWS_ARM64_HOST 
-::#   <OS>_<ARCH>_<ENV>_HOST  = ANDROID_ARM64_CLANG_HOST, EMSCRIPTEN_ARM64_CLANG_HOST, IOS_ARM64_CLANG_HOST, IOSSIM_ARM64_CLANG_HOST, LINUX_ARM64_CLANG_HOST, MAC_ARM64_CLANG_HOST, RASPBERRY_ARM64_CLANG_HOST, WINDOWS_ARM64_CLANG_HOST 
+::#	  host_os 				  = android, emscripten, ios, iossim, linux, mac, raspberry, windows
+::#	  host_arch				  = arm32, arm64, x86, x86_64
+::#	  host_env				  = clang, mingw, msvc, ucrt
+::#	  <os>_host 			  = android_host, emscripten_host, ios_host, iossim_host, linux_host, mac_host, raspberry_host, windows_host 
+::#   <os>_<arch>_host		  = android_arm64_host, emscripten_arm64_host, ios_arm64_host, iossim_arm64_host, linux_arm64_host, mac_arm64_host, raspberry_arm64_host, windows_arm64_host 
+::#   <os>_<arch>_<env>_host  = android_arm64_clang_host, emscripten_arm64_clang_host, ios_arm64_clang_host, iossim_arm64_clang_host, linux_arm64_clang_host, mac_arm64_clang_host, raspberry_arm64_clang_host, windows_arm64_clang_host 
 ::#
-:dk_HOST_TRIPLE
+:dk_host_triple
     call dk_debugFunc 0
 :: setlocal
  
-	::###### HOST_OS and <OS>_HOST ######
-	set "HOST_OS=WIN"
-	set "%HOST_OS%_HOST=1"
+	::###### host_os and <os>_host ######
+	set "host_os=win"
+	set "%host_os%_host=1"
 	
-	::###### HOST_ARCH and <ARCH>_HOST ######
-	if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "HOST_ARCH=X86"
-    if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "HOST_ARCH=X86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="IA64"  set "HOST_ARCH=X86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "HOST_ARCH=X86_64"
-    if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "HOST_ARCH=ARM64"
-	set "%HOST_ARCH%_HOST=1"             
+	::###### host_arch and <ARCH>_HOST ######
+	if "%PROCESSOR_ARCHITECTURE%"=="x86"   set "host_arch=x86"
+    if "%PROCESSOR_ARCHITECTURE%"=="AMD64" set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%"=="IA64"  set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%"=="EM64T" set "host_arch=x86_64"
+    if "%PROCESSOR_ARCHITECTURE%"=="arm64" set "host_arch=arm64"
+	set "%host_arch%_host=1"             
 	
-	::###### HOST_ENV and <ENV>_HOST ######
-	set "HOST_ENV=CLANG"
-	if not defined HOST_ENV goto:END_HOST_ENV
-		set "%HOST_ENV%_HOST=1"
-    :END_HOST_ENV
+	::###### HOST_env and <ENV>_HOST ######
+	set "host_env=clang"
+	if not defined host_env goto:end_host_env
+		set "%host_env%_host=1"
+    :end_host_env
 	
-	::###### HOST_TRIPLE and <TRIPLE>_HOST ######
-	if not defined HOST_ARCH goto:END_HOST_ARCH
-		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%"
-		set "%HOST_TRIPLE%_HOST=1"
-	:END_HOST_ARCH
+	::###### host_triple and <TRIPLE>_HOST ######
+	if not defined host_arch goto:end_host_arch
+		set "host_triple=%host_os%_%host_arch%"
+		set "%host_triple%_host=1"
+	:end_host_arch
 	
-	if not defined HOST_ENV goto:END_HOST_ENV
-		set "HOST_TRIPLE=%HOST_OS%_%HOST_ARCH%_%HOST_ENV%"
-		set "%HOST_TRIPLE%_HOST=1"
-	:END_HOST_ENV
+	if not defined host_env goto:end_host_env
+		set "host_triple=%host_os%_%host_arch%_%host_env%"
+		set "%host_triple%_host=1"
+	:end_host_env
     
 ::%DEBUG%
-	%dk_call% dk_printVar HOST_OS
-	%dk_call% dk_printVar %HOST_OS%_HOST
-	%dk_call% dk_printVar HOST_ARCH 
-	%dk_call% dk_printVar %HOST_ARCH%_HOST
-	%dk_call% dk_printVar HOST_ENV
-	%dk_call% dk_printVar %HOST_ENV%_HOST
-	%dk_call% dk_printVar HOST_TRIPLE
-	%dk_call% dk_printVar %HOST_TRIPLE%_HOST
+	%dk_call% dk_printVar host_os
+	%dk_call% dk_printVar %host_os%_host
+	%dk_call% dk_printVar host_arch 
+	%dk_call% dk_printVar %host_arch%_host
+	%dk_call% dk_printVar host_env
+	%dk_call% dk_printVar %host_env%_host
+	%dk_call% dk_printVar host_triple
+	%dk_call% dk_printVar %host_triple%_host
 %endfunction%
 
 
@@ -65,6 +65,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_HOST_TRIPLE
-	%dk_call% dk_printVar HOST_TRIPLE
+    %dk_call% dk_host_triple
+	%dk_call% dk_printVar host_triple
 %endfunction%

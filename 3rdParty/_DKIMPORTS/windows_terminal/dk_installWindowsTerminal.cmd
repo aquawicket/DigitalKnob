@@ -9,10 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installWindowsTerminal
 	call dk_debugFunc 0	
 	
-	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	if defined WIN_ARM64_HOST   set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip"
-    if defined WIN_X86_HOST     set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip"
-    if defined WIN_X86_64_HOST  set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip"
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	if defined win_arm64_host   set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip"
+    if defined win_x86_host     set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip"
+    if defined win_x86_64_host  set "WINDOWS_TERMINAL_DL=https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip"
 	if not defined WINDOWS_TERMINAL_DL %dk_call% dk_error "WINDOWS_TERMINAL_DL is invalid"
 	
 	%dk_call% dk_basename %WINDOWS_TERMINAL_DL% WINDOWS_TERMINAL_DL_FILE
