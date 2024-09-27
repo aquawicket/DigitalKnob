@@ -40,7 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:cmake_installed	
 	
 	::### install DKCMake
-	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	::%dk_call% "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
 %endfunction%
 
