@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_uninstallNotepadppContextMenu
 	call dk_debugFunc 0
 	
-	call dk_uninstallContextMenu "Edit with Notepad++"
+	%dk_call% dk_uninstallContextMenu "Edit with Notepad++"
 %endfunction%
 
 

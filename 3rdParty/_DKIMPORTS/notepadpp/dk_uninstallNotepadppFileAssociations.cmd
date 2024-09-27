@@ -7,52 +7,52 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_uninstallNotepadppFileAssociations
 	call dk_debugFunc 0
 	
-	call dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	call dk_validate NOTEPADPP_EXE "call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadpp"
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_validateBranch"
+	%dk_call% dk_validate NOTEPADPP_EXE "call %DKIMPORTS_DIR%\notepadpp\dk_installNotepadpp"
 
-	call dk_uninstallFileAssoc .1
-	call dk_uninstallFileAssoc .2
-	call dk_uninstallFileAssoc .3
-	call dk_uninstallFileAssoc .
-	call dk_uninstallFileAssoc .androidproj
-	call dk_uninstallFileAssoc .backup
-	call dk_uninstallFileAssoc .bak
-	call dk_uninstallFileAssoc .c
-	call dk_uninstallFileAssoc .cmake
-	call dk_uninstallFileAssoc .cpp
-	call dk_uninstallFileAssoc .css
-	call dk_uninstallFileAssoc .data
-	call dk_uninstallFileAssoc .gitattributes
-	call dk_uninstallFileAssoc .gitconfig
-	call dk_uninstallFileAssoc .glsl
-	call dk_uninstallFileAssoc .gradle
-	call dk_uninstallFileAssoc .h
-	call dk_uninstallFileAssoc .htm
-	call dk_uninstallFileAssoc .html
-	call dk_uninstallFileAssoc .java
-	call dk_uninstallFileAssoc .js
-	call dk_uninstallFileAssoc .json
-	call dk_uninstallFileAssoc .make
-	call dk_uninstallFileAssoc .marks
-	call dk_uninstallFileAssoc .md
-	call dk_uninstallFileAssoc .mk
-	call dk_uninstallFileAssoc .php
-	call dk_uninstallFileAssoc .plist
-	call dk_uninstallFileAssoc .pro
-	call dk_uninstallFileAssoc .properties
-	::call dk_uninstallFileAssoc .ps1
-	call dk_uninstallFileAssoc .rc
-	call dk_uninstallFileAssoc .reference
-	call dk_uninstallFileAssoc .rsp
-	call dk_uninstallFileAssoc .sed
-	::call dk_uninstallFileAssoc .sh
-	call dk_uninstallFileAssoc .storyboard
-	call dk_uninstallFileAssoc .targets
-	call dk_uninstallFileAssoc .traineddata
-	call dk_uninstallFileAssoc .ts
-	call dk_uninstallFileAssoc .ts
-	call dk_uninstallFileAssoc .txt
-	call dk_uninstallFileAssoc .xml
+	%dk_call% dk_uninstallFileAssoc .1
+	%dk_call% dk_uninstallFileAssoc .2
+	%dk_call% dk_uninstallFileAssoc .3
+	%dk_call% dk_uninstallFileAssoc .
+	%dk_call% dk_uninstallFileAssoc .androidproj
+	%dk_call% dk_uninstallFileAssoc .backup
+	%dk_call% dk_uninstallFileAssoc .bak
+	%dk_call% dk_uninstallFileAssoc .c
+	%dk_call% dk_uninstallFileAssoc .cmake
+	%dk_call% dk_uninstallFileAssoc .cpp
+	%dk_call% dk_uninstallFileAssoc .css
+	%dk_call% dk_uninstallFileAssoc .data
+	%dk_call% dk_uninstallFileAssoc .gitattributes
+	%dk_call% dk_uninstallFileAssoc .gitconfig
+	%dk_call% dk_uninstallFileAssoc .glsl
+	%dk_call% dk_uninstallFileAssoc .gradle
+	%dk_call% dk_uninstallFileAssoc .h
+	%dk_call% dk_uninstallFileAssoc .htm
+	%dk_call% dk_uninstallFileAssoc .html
+	%dk_call% dk_uninstallFileAssoc .java
+	%dk_call% dk_uninstallFileAssoc .js
+	%dk_call% dk_uninstallFileAssoc .json
+	%dk_call% dk_uninstallFileAssoc .make
+	%dk_call% dk_uninstallFileAssoc .marks
+	%dk_call% dk_uninstallFileAssoc .md
+	%dk_call% dk_uninstallFileAssoc .mk
+	%dk_call% dk_uninstallFileAssoc .php
+	%dk_call% dk_uninstallFileAssoc .plist
+	%dk_call% dk_uninstallFileAssoc .pro
+	%dk_call% dk_uninstallFileAssoc .properties
+	::%dk_call% dk_uninstallFileAssoc .ps1
+	%dk_call% dk_uninstallFileAssoc .rc
+	%dk_call% dk_uninstallFileAssoc .reference
+	%dk_call% dk_uninstallFileAssoc .rsp
+	%dk_call% dk_uninstallFileAssoc .sed
+	::%dk_call% dk_uninstallFileAssoc .sh
+	%dk_call% dk_uninstallFileAssoc .storyboard
+	%dk_call% dk_uninstallFileAssoc .targets
+	%dk_call% dk_uninstallFileAssoc .traineddata
+	%dk_call% dk_uninstallFileAssoc .ts
+	%dk_call% dk_uninstallFileAssoc .ts
+	%dk_call% dk_uninstallFileAssoc .txt
+	%dk_call% dk_uninstallFileAssoc .xml
 %endfunction%
 
 
