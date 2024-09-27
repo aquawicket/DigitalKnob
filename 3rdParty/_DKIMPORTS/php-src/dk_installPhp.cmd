@@ -13,10 +13,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
 	
 	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"    %dk_call% dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64" %dk_call% dk_set PHP_DL "https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
-	if not defined PHP_DL %dk_call% dk_error "PHP_DL is invalid"
+	if defined WIN_X86_HOST           set "PHP_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip"
+	if defined WIN_X86_64_HOST        set "PHP_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip"
+	if not defined PHP_DL             %dk_call% dk_error "PHP_DL is invalid"
 	
 	
 	%dk_call% dk_basename %PHP_DL% PHP_DL_FILE

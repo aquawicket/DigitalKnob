@@ -26,9 +26,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	%dk_call% dk_getNativePath %OPENJDK% OPENJDK_NATIVE
 	
-	if "%HOST_OS%"=="WIN"   (%dk_call% :dk_installOpenJdkWin)
-	if "%HOST_OS%"=="MAC"   (%dk_call% :dk_installOpenJdkMac)
-	if "%HOST_OS%"=="LINUX" (%dk_call% :dk_installOpenJdkLinux)
+	if defined WIN_HOST   (%dk_call% :dk_installOpenJdkWin)
+	if defined MAC_HOST   (%dk_call% :dk_installOpenJdkMac)
+	if defined LINUX_HOST (%dk_call% :dk_installOpenJdkLinux)
 %endfunction%	
 	
 :dk_installOpenJdkWin
@@ -68,7 +68,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::	%dk_call% dk_set CURRENT_DIR /usr
 	::)
 	
-	::if "%HOST_OS%"=="ANDROID" (
+	::if defined ANDROID_HOST (
 	::	%dk_call% dk_set SUDO ""
 	::	%dk_call% dk_set APT "apt"
 	::) else (
@@ -76,7 +76,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::	%dk_call% dk_set APT "apt-get"
 	::)
 	
-	if "%HOST_OS%"=="ANDROID" (
+	if defined ANDROID_HOST (
 		%dk_call% dk_command pkg install openjdk-17 -y
 	) else (
 		%dk_call% dk_command %SUDO% apt update
