@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_pickApp APP
     call dk_debugFunc 0 1
- setlocal 
+ ::setlocal 
     
     %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
     
