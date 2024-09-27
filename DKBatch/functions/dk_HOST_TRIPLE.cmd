@@ -27,13 +27,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "host_arch=arm64"
 	set "%host_arch%_host=1"             
 	
-	::###### HOST_env and <env>_host ######
+	::###### host_env and <env>_host ######
 	set "host_env=clang"
 	if not defined host_env goto:end_host_env
 		set "%host_env%_host=1"
     :end_host_env
 	
-	::###### host_triple and <TRIPLE>_HOST ######
+	::###### host_triple and <triple>_host ######
 	if not defined host_arch goto:end_host_arch
 		set "host_triple=%host_os%_%host_arch%"
 		set "%host_triple%_host=1"

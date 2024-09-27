@@ -14,6 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 	dk_debugFunc("\${ARGV}")
 	
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	## search up to 4 levels deep
 	file(GLOB children RELATIVE ${DIGITALKNOB_DIR}/ 
 		${DIGITALKNOB_DIR}/${target}/DKMAKE.cmake 

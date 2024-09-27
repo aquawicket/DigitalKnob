@@ -35,7 +35,8 @@ dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
 
-dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
+dk_assertPath(${DK_PROJECT_DIR})
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
@@ -52,7 +53,11 @@ endif()
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
+
+
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
+
+dk_assert(triple)
 dk_delete(${DK_PROJECT_DIR}/${triple}/DKBUILD.log NO_HALT)
 dk_printSettings()
 

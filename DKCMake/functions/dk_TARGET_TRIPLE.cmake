@@ -26,6 +26,7 @@ function(dk_TARGET_TRIPLE)
 #		dk_getFullPath("${ARGV0}" TARGET_DIR)  			
 #	else()
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
+	dk_printVar(TARGET_DIR)
 #	endif()
 	#dk_printVar(TARGET_DIR)							# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 		
@@ -46,12 +47,12 @@ function(dk_TARGET_TRIPLE)
 	else()
 		dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()
-	dk_printVar(TARGET_TRIPLE_DIR)
+	dk_assertPath(TARGET_TRIPLE_DIR)
 	
 	### Set DK_PROJECT_DIR ###
 	dk_dirname(${TARGET_TRIPLE_DIR} DK_PROJECT_DIR)
 	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
-	dk_printVar(DK_PROJECT_DIR)
+	dk_assertPath(DK_PROJECT_DIR)
 	
 	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
 	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        = win_x86_64_clang

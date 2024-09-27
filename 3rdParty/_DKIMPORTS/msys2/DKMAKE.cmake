@@ -35,7 +35,7 @@ dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-
 dk_importVariables(${MSYS2_DL} rtn_val)
 
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
-
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 
 ### Install Msys2 ###
 if(NOT EXISTS ${MSYS2_EXE})

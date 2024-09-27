@@ -36,6 +36,8 @@ function(dk_buildMain)
 	dk_installGit()
 	dk_DKBRANCH_DIR()
 
+	dk_assertPath(DKSCRIPT_DIR)
+	dk_assertPath(DKBRANCH_DIR)
 	#dk_printVar DKBRANCH_DIR
 	#dk_printVar DKAPPS_DIR
 	#dk_printVar DKCMAKE_DIR
