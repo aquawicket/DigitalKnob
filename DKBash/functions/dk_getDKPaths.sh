@@ -8,7 +8,13 @@
 dk_getDKPaths() {
 	dk_debugFunc 0
 
-	if [ -n "${USERPROFILE-}" ]; then
+	if dk_call dk_defined WSLENV; then
+		HOMEDRIVE="/mnt/c"
+		HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
+		dk_call dk_replaceAll "${HOMEPATH}" "\\" "/" HOMEPATH
+		HOME="${HOMEDRIVE}${HOMEPATH}"
+		echo HOME = ${HOME}
+	elif [ -n "${USERPROFILE-}" ]; then
 		dk_call dk_printVar USERPROFILE
 		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
 		dk_call dk_commandExists "cygpath" && DIGITALKNOB_DIR=$(cygpath -u "${DIGITALKNOB_DIR}")

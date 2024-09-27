@@ -179,8 +179,10 @@ dksetupCallstack(){
 #
 DKSCRIPT_VARS(){
 	### DKSCRIPT_PATH ###
-	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || $(dk_call dk_realpath ${0}) && dk_call dk_export  DKSCRIPT_PATH  $(dk_call dk_realpath ${0})
-	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_commandExists "cygpath"  && DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
+	echo "export DKSCRIPT_PATH='$(dk_call dk_realpath ${0})'"
+	export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
+	#dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
+	#dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
 	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
 	dk_call dk_pathExists    "${DKSCRIPT_PATH}"          && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 	
