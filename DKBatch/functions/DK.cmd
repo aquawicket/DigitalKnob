@@ -31,18 +31,14 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 
     ::###### set DKSCRIPT_PATH ######
     call :dk_DKSCRIPT_PATH "%~1" %*
-	echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
 	
 	::###### set DKSCRIPT_DIR ######
     call :dk_setDKSCRIPT_DIR	
-	echo "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
 	
 	::###### set DKSCRIPT_DIR ######
     call :dk_setDKSCRIPT_EXT
-	echo "DKSCRIPT_EXT = %DKSCRIPT_EXT%" 
 	
     ::###### Reload Main Script with cmd ######
-	echo "line = %~0 %~1 %*" 
     call :dk_reloadWithCmd 
 
     ::############ Get DKBATCH variables ############

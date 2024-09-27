@@ -52,17 +52,17 @@ if "%~1" neq "" goto:runDKC
 	%dk_call% dk_echo "Installing DKC . . ."
 	
 	::###### OS ######
-	if not defined OS call dk_validate DK_HOST_OS "call dk_getHostTriple"
-	if not defined OS set "OS=%DK_HOST_OS%"
+	if not defined OS                        %dk_call% dk_validate DK_HOST_OS "%dk_call% dk_getHostTriple"
+	if not defined OS                        set "OS=%DK_HOST_OS%"
 	%dk_call% dk_printVar OS
 	
 	::###### ARCH ######
-	if not defined ARCH call dk_validate DK_HOST_ARCH "call dk_getHostTriple"
-	if not defined ARCH set "ARCH=%DK_HOST_ARCH%"
+	if not defined ARCH                      %dk_call% dk_validate DK_HOST_ARCH "%dk_call% dk_getHostTriple"
+	if not defined ARCH                      set "ARCH=%DK_HOST_ARCH%"
 	%dk_call% dk_printVar ARCH
 	
 	::###### COMPILER ######
-	if not defined COMPILER set "COMPILER=clang"
+	if not defined COMPILER                  set "COMPILER=clang"
 	%dk_call% dk_printVar COMPILER
 	
 	::###### MSYSTEM ######
@@ -72,11 +72,13 @@ if "%~1" neq "" goto:runDKC
 	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86"    set "MSYSTEM=MINGW32"
 	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86_64" set "MSYSTEM=MINGW64"
 	%dk_call% dk_printVar MSYSTEM
-	
+
 	::###### COMPILER_EXE ######
-	%dk_call% dk_validate DKIMPORTS_DIR "call dk_validateBranch"
-	if "%COMPILER%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%COMPILER%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_validateBranch"
+echo ### DEBUG_BEGIN ###
+	if "%COMPILER%"=="clang"                 call "%DKIMPORTS_DIR%\clang\dk_installClang.cmd"
+echo ### DEBUG_END ###
+	if "%COMPILER%"=="gcc"                   call "%DKIMPORTS_DIR%\gcc\dk_installGcc.cmd"
 	:: C
 	if not defined COMPILER_EXE  if "%COMPILER%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
 	if not defined COMPILER_EXE  if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
@@ -89,7 +91,7 @@ if "%~1" neq "" goto:runDKC
 	ftype DKC=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
-	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c
+	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.c"
 	assoc .c=DKC
 	
 	%dk_call% dk_success "DKC install complete"
@@ -123,7 +125,7 @@ if "%~1" neq "" goto:runDKC
 		echo: 
 		echo ERROR: compilation of %DKC_FILE% failed.
 		pause
-		goto:eof
+		%return%
 	)
 	
 	title %DKC_FILE%

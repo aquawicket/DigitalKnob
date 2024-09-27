@@ -6,13 +6,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 ::#
 :dk_set
-    call dk_debugFunc 1 2
+::    call dk_debugFunc 1 2
 :: setlocal
  
     set "%~1=%~2"
 	
 ::debug
-    %dk_call% dk_printVar %1
+::    %dk_call% dk_printVar %1
 %endfunction%
 
 
@@ -26,4 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     %dk_call% dk_set myVar "value assigned with dk_set"
     %dk_call% dk_echo "myVar = %myVar%"
+	
+	%dk_call% dk_set myVarB "dk_info('test dk_info message')"
+	%dk_call% dk_echo "myVarB = %myVarB%"
 %endfunction%
