@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set PHP "%DKTOOLS_DIR%\%PHP_FOLDER%"
 	%dk_call% dk_set PHP_EXE "%PHP%\php.exe"
 
-	if exist "%PHP_EXE%" goto:eof
+	if exist "%PHP_EXE%" %return%
 	
 	%dk_call% dk_download "%PHP_DL%"
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
