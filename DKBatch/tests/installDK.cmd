@@ -39,5 +39,5 @@ if NOT exist "%DKBRANCH_DIR%\.git" (
 	echo DigitalKnob is already installed at %DKBRANCH_DIR%
 )
 
-dk_pause
-dk_exit
+call dk_pause
+call dk_exit

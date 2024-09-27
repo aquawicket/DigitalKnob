@@ -9,29 +9,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_buildMain
     call dk_debugFunc 0
  setlocal
-    
-	%dk_call% dk_printVar DIGITALKNOB_DIR
-	%dk_call% dk_printVar DKTOOLS_DIR
-	%dk_call% dk_printVar DKDOWNLOAD_DIR
-	%dk_call% dk_printVar DKSCRIPT_PATH
-    %dk_call% dk_printVar DKSCRIPT_DIR
-    %dk_call% dk_printVar DKSCRIPT_NAME
-	%dk_call% dk_printVar DKSCRIPT_EXT
-	%dk_call% dk_printVar DKBRANCH_DIR
-	%dk_call% dk_printVar DKBATCH_DIR
-	%dk_call% dk_printVar DKBATCH_FUNCTIONS_DIR
-	%dk_call% dk_printVar DKBATCH_FUNCTIONS_DIR_
-	%dk_call% dk_printVar DKTEMP_DIR
-	
 
-    %dk_call% dk_host_triple
-    %dk_call% dk_getDKPaths
-
+	%dk_call% dk_validate DKDESKTOP_DIR    "%dk_call% dk_DKDESKTOP_DIR"
+	%dk_call% dk_validate DIGITALKNOB_DIR  "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
     %dk_call% dk_installGit
-    %dk_call% dk_validateBranch
 	
+	%dk_call% dk_validate DKSCRIPT_DIR    "%dk_call% dk_DKSCRIPT_DIR"
+	%dk_call% dk_validate DKBRANCH_DIR    "%dk_call% dk_DKBRANCH_DIR"
     if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
         %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
         %dk_call% dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
