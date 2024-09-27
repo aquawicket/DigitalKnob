@@ -21,8 +21,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
-    if not exist "%TARGET_PATH%\%TARGET_OS%" %dk_call% dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
+    if not exist "%TARGET_PATH%\%TARGET_OS%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"         &:: FIXME: remove the need for call here
+	
+	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKCMAKE_DIR"
     set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"                    
     ::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
     set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"   
@@ -78,8 +80,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%TARGET_OS%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
 	if "%TARGET_OS%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
 	if not defined MULTI_CONFIG            set "SINGLE_CONFIG=1"
-	if defined MULTI_CONFIG   set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
-	if defined SINGLE_CONFIG  set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
+	if defined MULTI_CONFIG                set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
+	if defined SINGLE_CONFIG               set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
@@ -125,6 +127,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::  fi
     
 ::  ###### CMake Configure ######
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
     %dk_call% dk_info "****** CMAKE COMMAND ******"
