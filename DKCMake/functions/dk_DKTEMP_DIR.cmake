@@ -29,6 +29,7 @@ function(dk_DKTEMP_DIR)
 	
 	if(EXISTS "${DKTEMP_DIR}")
 		dk_set(DKTEMP_DIR "${DKTEMP_DIR}/.dk")
+		set(ENV{DKTEMP_DIR} "${DKTEMP_DIR}/.dk")
 		dk_makeDirectory("${DKTEMP_DIR}")
 	endif()
 	

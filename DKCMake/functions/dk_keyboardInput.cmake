@@ -27,7 +27,7 @@ function(dk_keyboardInput input)
 	
 	find_program(BASH_EXE bash)
 	if(BASH_EXE)
-		dk_validate(DKBASH_DIR "dk_getDKPaths()")
+		dk_validate(DKBASH_DIR "dk_DKBRANCH_DIR()")
 		#execute_process(COMMAND bash -c 'source ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh; dk_pause')
 		execute_process(COMMAND ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh & dk_pause)
 		return()

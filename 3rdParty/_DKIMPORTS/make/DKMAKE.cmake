@@ -73,12 +73,12 @@ elseif(win_x86_64_ucrt)
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
 
 elseif(win_x86_msvc)
-	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
 
 elseif(win_x86_64_msvc)
-	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
 	

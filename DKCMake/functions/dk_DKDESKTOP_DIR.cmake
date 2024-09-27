@@ -15,6 +15,8 @@ function(dk_DKDESKTOP_DIR)
     
 	dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
 	dk_set(DKDESKTOP_DIR "${DKHOME_DIR}/Desktop")
+	set(ENV{DKDESKTOP_DIR} "${DKHOME_DIR}/Desktop")
+	
 	if(NOT EXISTS "${DKDESKTOP_DIR}") 
 		dk_makeDirectory("${DKDESKTOP_DIR}")
 	endif()

@@ -30,7 +30,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_validate(DIGITALKNOB_DIR  "dk_getDKPaths()")
+dk_validate(DIGITALKNOB_DIR  "dk_DIGITALKNOB_DIR()")
 
 dk_cd(${DIGITALKNOB_DIR})
 

@@ -15,6 +15,8 @@ function(dk_DKDOWNLOAD_DIR)
     
     dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
     dk_set(DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download")
+	set(ENV{DKDOWNLOAD_DIR} "${DIGITALKNOB_DIR}/download")
+	
     if(NOT EXISTS "${DKDOWNLOAD_DIR}") 
 		dk_makeDirectory("${DKDOWNLOAD_DIR}")
 	endif()

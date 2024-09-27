@@ -24,6 +24,8 @@ function(dk_DKHOME_DIR)
     dk_set(DKHOME_DIR "$ENV{HOMEDRIVE}$ENV{HOMEPATH}")
 	dk_replaceAll("${DKHOME_DIR}" "\\" "/" DKHOME_DIR)
 	dk_set(DKHOME_DIR "${DKHOME_DIR}")
+	set(ENV{DKHOME_DIR} "${DKHOME_DIR}")
+	
     if(NOT EXISTS "${DKHOME_DIR}")
 		dk_error("DKHOME_DIR:${DKHOME_DIR} does not exist")
 	endif()

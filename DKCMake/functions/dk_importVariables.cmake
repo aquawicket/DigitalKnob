@@ -117,7 +117,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(PLUGIN_URL_LENGTH)											# PLUGIN_URL_LENGTH			: 8
 	endif()
 
-	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 	dk_assert(CMAKE_CURRENT_LIST_DIR)
 	dk_assert(DKIMPORTS_DIR)
 	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		

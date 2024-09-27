@@ -10,7 +10,7 @@ function(dk_callDKBatch func rtn_var)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_validate(CMD_EXE "dk_depend(cmd)")
-	dk_validate(DKBATCH_FUNCTIONS_DIR "dk_validateBranch()")
+	dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 	execute_process(COMMAND cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} & echo %rtn_var% WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output_variable)
 	dk_debug("output_variable = ${output_variable}")
 	set(${rtn_var} "${output_variable}" PARENT_SCOPE)

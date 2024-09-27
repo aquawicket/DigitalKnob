@@ -33,9 +33,8 @@ function(dk_buildMain)
 	dk_HOST_TRIPLE()
 	
 	dk_getDKPaths()
-
 	dk_installGit()
-	dk_validateBranch()
+	dk_DKBRANCH_DIR()
 
 	#dk_printVar DKBRANCH_DIR
 	#dk_printVar DKAPPS_DIR

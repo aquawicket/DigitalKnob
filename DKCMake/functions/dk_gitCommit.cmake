@@ -14,7 +14,7 @@ function(dk_gitCommit)
 	dk_info("Please enter some details about this commit, Then press ENTER.")
 	dk_keyboardInput(commit_msg)
 	
-	dk_validate(DKBRANCH_DIR "dk_validateBranch()")
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 	dk_cd("${DKBRANCH_DIR}")
 	
 	execute_process(COMMAND "${GIT_EXE}" config credential.helper WORKING_DIRECTORY ${PWD} OUTPUT_VARIABLE STORE)

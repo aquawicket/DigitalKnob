@@ -12,7 +12,7 @@ function(dk_readCache APP target_triple TYPE)
 #		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 #	endif()
 	
-	dk_validate(DKBRANCH_DIR "dk_validateBranch()")
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 	if(NOT EXISTS "${DKBRANCH_DIR}/cache")
 		return()
 	endif()

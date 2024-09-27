@@ -18,7 +18,7 @@ function(dk_getPathToPlugin plugin rtn_var)
 		return()
 	endif()
 
-	dk_validate(DKIMPORTS_DIR "dk_validateBranch()")
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 	#file(GLOB children RELATIVE ${DIGITALKNOB_DIR} ${DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
 		#dk_printVar(child)
