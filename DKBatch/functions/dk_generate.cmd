@@ -44,6 +44,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
 
+	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKCMAKE_DIR"
+	set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_:\=/!"   
+	%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
+	
     ::############ CMake Options ############
     %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
     ::%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_COLOR_DIAGNOSTICS=ON
@@ -126,6 +130,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
 ::  ###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
     %dk_call% dk_info "****** CMAKE COMMAND ******"

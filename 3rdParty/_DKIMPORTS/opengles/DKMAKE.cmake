@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 if(ANDROID)
 	#dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)

@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
+[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
 ##################################################################################
 # dk_cd(directory)

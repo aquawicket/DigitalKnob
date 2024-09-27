@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 # https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip

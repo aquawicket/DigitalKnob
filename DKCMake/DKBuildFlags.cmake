@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(HOST_TRIPLE   "dk_HOST_TRIPLE()")
 dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
 #include_guard()

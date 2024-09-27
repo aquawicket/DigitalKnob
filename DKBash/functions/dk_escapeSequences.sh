@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
+[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
 # https://www.ascii-code.com
 # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797

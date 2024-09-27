@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "$(dirname ${0})/DK.sh"
+[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
 [ -z ${KEY_WAIT_ON_EXIT-} ]  && dk_export KEY_WAIT_ON_EXIT 1
 [ -z ${STAY_OPEN_ON_EXIT-} ] && dk_export STAY_OPEN_ON_EXIT 0
