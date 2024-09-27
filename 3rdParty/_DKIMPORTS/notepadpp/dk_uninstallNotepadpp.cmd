@@ -10,10 +10,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::setlocal
 	
 	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_ARM64"   %dk_call% dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86"     %dk_call% dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
-    if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64"  %dk_call% dk_set NOTEPADPP_DL "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip"
-	if not defined NOTEPADPP_DL %dk_call% dk_error "NOTEPADPP_DL is invalid"
+	if defined WIN_ARM64_HOST         set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip"
+    if defined WIN_X86_HOST           set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip"
+    if defined WIN_X86_64_HOST        set "NOTEPADPP_DL=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip"
+	if not defined NOTEPADPP_DL       %dk_call% dk_error "NOTEPADPP_DL is invalid"
 	
 	%dk_call% dk_basename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	%dk_call% dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER

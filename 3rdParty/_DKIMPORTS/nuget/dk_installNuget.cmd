@@ -10,8 +10,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	
 	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	if "%HOST_OS%"=="WIN"     %dk_call% dk_set NUGET_DL "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-	if not defined NUGET_DL %dk_call% dk_error "NUGET_DL is invalid"
+	if defined WIN_HOST               set "NUGET_DL=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+	if not defined NUGET_DL           %dk_call% dk_error "NUGET_DL is invalid"
 
 	%dk_call% dk_basename %NUGET_DL% NUGET_DL_FILE
 	%dk_call% dk_removeExtension %NUGET_DL_FILE% NUGET_FOLDER

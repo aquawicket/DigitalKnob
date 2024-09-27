@@ -17,10 +17,10 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
 :: setlocal
  
     %dk_call% dk_validate HOST_ARCH "%dk_call% dk_HOST_TRIPLE"
-    if "%HOST_ARCH%"=="ARM32"  set "GIT_DL="
-    if "%HOST_ARCH%"=="ARM64"  set "GIT_DL=%GIT_DL_WIN_ARM64%"
-    if "%HOST_ARCH%"=="X86"    set "GIT_DL=%GIT_DL_WIN_X86%"
-    if "%HOST_ARCH%"=="X86_64" set "GIT_DL=%GIT_DL_WIN_X86_64%"
+    if defined WIN_ARM32_HOST  set "GIT_DL="
+    if defined WIN_ARM64_HOST  set "GIT_DL=%GIT_DL_WIN_ARM64%"
+    if defined WIN_X86_HOST    set "GIT_DL=%GIT_DL_WIN_X86%"
+    if defined WIN_X86_64_HOST set "GIT_DL=%GIT_DL_WIN_X86_64%"
     if not defined GIT_DL %dk_call% dk_error "GIT_DL is invalid"
     
     %dk_call% dk_basename %GIT_DL% GIT_DL_FILE

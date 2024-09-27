@@ -8,9 +8,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 :: setlocal
  
-	%dk_call% dk_validate HOST_TRIPLE    "%dk_call% dk_HOST_TRIPLE"
-    %dk_call% dk_set MACROPACK_DL "https://github.com/sevagas/macro_pack/releases/download/v2.2.0/macro_pack.exe"
-	if not defined MACROPACK_DL         %dk_call% dk_error "MACROPACK_DL is invalid"
+    set "MACROPACK_DL=https://github.com/sevagas/macro_pack/releases/download/v2.2.0/macro_pack.exe"
+	if not defined MACROPACK_DL   %dk_call% dk_error "MACROPACK_DL is invalid"
 	
 	%dk_call% dk_basename %MACROPACK_DL% MACROPACK_DL_FILE
 	%dk_call% dk_removeExtension %MACROPACK_DL_FILE% MACROPACK_FOLDER

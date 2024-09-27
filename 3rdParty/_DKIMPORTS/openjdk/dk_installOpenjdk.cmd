@@ -4,16 +4,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::####################################################################
 ::# dk_installOpenjdk()
 ::#
+::#    Reference: https://jdk.java.net/archive/
+::#
 :dk_installOpenjdk
 	call dk_debugFunc 0
 	
-	
 	%dk_call% dk_validate HOST_TRIPLE "%dk_call% dk_HOST_TRIPLE"
-	:: https://jdk.java.net/archive/
-	if "%HOST_OS%"=="ANDROID"                  %dk_call% dk_set OPENJDK_DL "openjdk-17"
-	if "%HOST_OS%_%HOST_ARCH%"=="LINUX_X86_64" %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="MAC_X86_64"   %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
-	if "%HOST_OS%_%HOST_ARCH%"=="WIN_X86_64"   %dk_call% dk_set OPENJDK_DL "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
+	if defined ANDROID_HOST      set "OPENJDK_DL=openjdk-17"
+	if defined LINUX_X86_64_HOST set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz"
+	if defined MAC_X86_64_HOST   set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz"
+	if defined WIN_X86_64_HOST   set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip"
 	if not defined OPENJDK_DL %dk_call% dk_error "OPENJDK_DL is invalid"
 	
 	%dk_call% dk_basename %OPENJDK_DL% OPENJDK_DL_FILE
