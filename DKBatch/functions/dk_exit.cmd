@@ -1,7 +1,7 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
-if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=0"
+if not defined PAUSE_ON_EXIT set "PAUSE_ON_EXIT=1"
 ::################################################################################
 ::# dk_exit(exit_code)
 ::#
