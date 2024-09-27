@@ -17,9 +17,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::%dk_call% dk_printVar _TYPE_
 	
     :: get a list of the directories in DKApps
-    %dk_call% dk_getDirectories %DKAPPS_DIR% options
+	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
+    %dk_call% dk_getDirectories "%DKAPPS_DIR%" options
 	::%dk_call% dk_printVar options
-    
+  
     :: rename the list elements to the folder basename and add a matching command
     set /a "n=0"
     :loop1
@@ -31,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         goto:loop1 
     :endloop1
     ::%dk_call% dk_printVar commands
-	
+
     :: prepend cache selection if available
     if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_TARGET_OS_%" neq "" if "%_TYPE_%" neq "" (
         %dk_call% dk_arrayUnshift options "re-run [%_APP_% - %_TARGET_OS_% - %_TYPE_%]"
