@@ -30,9 +30,9 @@ goto:main
 :console
 	TITLE DigitalKnob - CONSOLE
 	cls
-	call dk_echo You are in a Windows console environment
-	call dk_echo
-	call dk_echo PATH = %PATH%
+	%dk_call% dk_echo You are in a Windows console environment
+	%dk_call% dk_echo
+	%dk_call% dk_echo PATH = %PATH%
 	pause
 %endfunction% 
 
@@ -44,8 +44,8 @@ goto:main
 
 ::###### Main ######
 :main
-	call dk_echo This will alernate between different shell environments
-	call dk_echo
+	%dk_call% dk_echo This will alernate between different shell environments
+	%dk_call% dk_echo
 	pause
 	
 	call:console

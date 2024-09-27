@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0
 	
 	call dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
-	call dk_echo   
+	%dk_call% dk_echo   
     call dk_info "UnInstalling WSL-Alpine Linux . . ."
 
 	wslconfig /t Alpine

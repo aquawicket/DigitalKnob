@@ -105,5 +105,5 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     
     dk_call dk_keyboard || call dk_error "call dk_keyboard failed!"
     
-    call dk_echo "press escape to exit keyboard loop" || call dk_error "call dk_echo failed!"
+    %dk_call% dk_echo "press escape to exit keyboard loop" || call dk_error "%dk_call% dk_echo failed!"
 %endfunction%

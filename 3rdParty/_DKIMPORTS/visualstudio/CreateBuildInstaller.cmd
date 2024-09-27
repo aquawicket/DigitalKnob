@@ -26,12 +26,12 @@ if not exist "%vs_community%" (
 )
 
 set /A i=0
-call dk_echo i = %i%
+%dk_call% dk_echo i = %i%
 
 :: Loop through file and store lines into an array
 for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
 	set /A i+=1
-	call dk_echo i = !i!
+	%dk_call% dk_echo i = !i!
 	set item=%%a
 	
 	::remove " 
@@ -49,30 +49,30 @@ for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
 set /a length=%length%-2  
 
 for /L %%i in (1,1,%length%) do (
-	call dk_echo !array[%%i]!
+	%dk_call% dk_echo !array[%%i]!
 )
 
 :: We have the variables we need, so preform the task
 ::******************* BuildInstaller.cmd *********************
-(call dk_echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
+(%dk_call% dk_echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do (call dk_echo --add !array[%%i]! !LF!) >> BuildInstaller.cmd
-(call dk_echo --lang en-US --passive --wait) >> BuildInstaller.cmd
+for /L %%i in (1,1,%length%) do (%dk_call% dk_echo --add !array[%%i]! !LF!) >> BuildInstaller.cmd
+(%dk_call% dk_echo --lang en-US --passive --wait) >> BuildInstaller.cmd
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::******************* Install.cmd *********************
 set "vs_setup=%dkdownload%\VisualStudio\vs_setup.exe"
-(call dk_echo %vs_setup% --noweb --noUpdateInstaller ^^) > Install.cmd
+(%dk_call% dk_echo %vs_setup% --noweb --noUpdateInstaller ^^) > Install.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do (call dk_echo --add !array[%%i]! !LF!) >> Install.cmd
+for /L %%i in (1,1,%length%) do (%dk_call% dk_echo --add !array[%%i]! !LF!) >> Install.cmd
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::****************************************
 :End
-	call dk_echo errorlevel = %errorlevel%
-	call dk_echo end
+	%dk_call% dk_echo errorlevel = %errorlevel%
+	%dk_call% dk_echo end
 	pause
 %endfunction%
 ::****************************************
@@ -80,8 +80,8 @@ if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 :Error
 	cls & Color 0c
-	call dk_echo(
-	call dk_echo Failed with error code: %errorlevel%
+	%dk_call% dk_echo(
+	%dk_call% dk_echo Failed with error code: %errorlevel%
 	Pause>nul
 %endfunction%
 ::**************************************** 

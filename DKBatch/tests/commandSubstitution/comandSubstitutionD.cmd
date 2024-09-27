@@ -23,7 +23,7 @@ call ..\functions\DK.cmd
 	:: MACRO
 	setlocal enableDelayedExpansion
 	set Macro=&(%\n%
-		call dk_echo "Macro()" %\n%
+		%dk_call% dk_echo "Macro()" %\n%
 	)
 
 	%Macro%
@@ -31,7 +31,7 @@ call ..\functions\DK.cmd
 	:: MACRO One Argument
 	setlocal enableDelayedExpansion
 	set MacroWithOneArg=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
-		call dk_echo "MacroWithOneArg(%%~1)" %\n%
+		%dk_call% dk_echo "MacroWithOneArg(%%~1)" %\n%
 		echo ARG1 = %%~1 %\n%
 	)) else set args=
 
@@ -41,7 +41,7 @@ call ..\functions\DK.cmd
 	:: MACRO Two Arguments
 	setlocal enableDelayedExpansion
 	set MacroWithArgs=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
-		call dk_echo "MacroWithArgs(%%~1, %%~2)" %\n%
+		%dk_call% dk_echo "MacroWithArgs(%%~1, %%~2)" %\n%
 		echo ARG1 = %%~1 %\n%
 		echo ARG2 = %%~2 %\n%
 	)) else set args=
@@ -54,7 +54,7 @@ call ..\functions\DK.cmd
 	set cmndA=dk_test
 	for /f "usebackq tokens=*" %%a in (`%cmndA%`) do set "%cmndA%=%%a"
 	    call echo %cmndA% = BEFORE... %%%cmndA%%% ...AFTER
-	call dk_echo "%cmndA% = BEFORE... %%%cmndA%%% ...AFTER"
+	%dk_call% dk_echo "%cmndA% = BEFORE... %%%cmndA%%% ...AFTER"
 	echo .
 	echo .
 	echo .
@@ -63,7 +63,7 @@ call ..\functions\DK.cmd
 	set cmndB=ver
 	call :echo_cmnd %cmndB%
 	    call echo %cmndB% = BEFORE... %%cmnd_out%% ...AFTER
-	call dk_echo "%cmndB% = BEFORE... %%cmnd_out%% ...AFTER"
+	%dk_call% dk_echo "%cmndB% = BEFORE... %%cmnd_out%% ...AFTER"
 	echo .
 	echo .
 	echo .
@@ -73,7 +73,7 @@ call ..\functions\DK.cmd
 	set echo_cmndC=call :echo_cmnd %cmndC%
 		%echo_cmndC%
 	    call echo %cmndC% = BEFORE...%%cmnd_out%% ...AFTER
-	call dk_echo "%cmndC% = BEFORE...%%cmnd_out%% ...AFTER"
+	%dk_call% dk_echo "%cmndC% = BEFORE...%%cmnd_out%% ...AFTER"
 	echo .
 	echo .
 	echo .
@@ -82,7 +82,7 @@ call ..\functions\DK.cmd
 	set cmndD=ver
 	set echo_cmndD=&call :echo_cmnd %cmndD%
 	    call echo %cmndD% = BEFORE.. %echo_cmndD% %%cmnd_out%% ...AFTER
-	call dk_echo "%cmndD% = BEFORE... %echo_cmndD% %%cmnd_out%% ...AFTER"
+	%dk_call% dk_echo "%cmndD% = BEFORE... %echo_cmndD% %%cmnd_out%% ...AFTER"
 	echo .
 	echo .
 	echo .
@@ -92,7 +92,7 @@ call ..\functions\DK.cmd
 	set cmndE=dk_test
 	set echo_cmndC=&call :echo_cmnd %cmndE%
 	    call echo %cmndE% = BEFORE... %echo_cmndC% %cmnd_out% ...AFTER
-	call dk_echo "%cmndE% = BEFORE... %echo_cmndC% %cmnd_out% ...AFTER"
+	%dk_call% dk_echo "%cmndE% = BEFORE... %echo_cmndC% %cmnd_out% ...AFTER"
 	echo .
 	echo .
 	echo .
@@ -114,7 +114,7 @@ call ..\functions\DK.cmd
 ::	set cmnd=dk_test
 ::	for /f "usebackq tokens=*" %%a in (`%cmnd%`) do set "%cmnd%=%%a"
 ::	    call echo ver = BEFORE... %%%cmnd%%% ...AFTER
-::	call dk_echo "ver = BEFORE... %%%cmnd%%% ...AFTER"
+::	%dk_call% dk_echo "ver = BEFORE... %%%cmnd%%% ...AFTER"
 	
 	
 	
@@ -126,14 +126,14 @@ call ..\functions\DK.cmd
 	::set start=call set end=
 	::set end= & echo cmnd = ,%cmnd%,
 ::	echo ver = BEFORE... %start% ver %end% ...AFTER
-	::call dk_echo "start = BEFORE... %start%ver%end% ...AFTER"
+	::%dk_call% dk_echo "start = BEFORE... %start%ver%end% ...AFTER"
 	
 ::	pause
 	
 ::	set "start=&set cmnd= "
 	::set "start=&call %~d0\:start\..%~pnx0 %*"
 ::	echo loading %start%dk_test%end%
-::	call dk_echo "start = BEFORE... %start%dk_test%end% ...AFTER"
+::	%dk_call% dk_echo "start = BEFORE... %start%dk_test%end% ...AFTER"
 	
 ::	pause
 ::%endfunction%

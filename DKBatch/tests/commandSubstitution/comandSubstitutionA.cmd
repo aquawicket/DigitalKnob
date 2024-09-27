@@ -17,14 +17,14 @@ set ")=echo :%subfunc%"
 :main
 ::	call :getversion
 ::	call echo ver = %ver%
-::	call dk_echo "text before ,%ver%, text after"
+::	%dk_call% dk_echo "text before ,%ver%, text after"
 	
 ::	set "command=ver"
 ::	call echo %command% = %%%command%%%
-::	call dk_echo "text before ,%%%command%%%, text after"
+::	%dk_call% dk_echo "text before ,%%%command%%%, text after"
 	
 ::	set "myVar=%ver%"
-::	call dk_echo "myVar = %myVar%"
+::	%dk_call% dk_echo "myVar = %myVar%"
 	
 ::	set var=%$(%cmnd%)%
 ::	echo var = ,%var%, 
@@ -39,7 +39,7 @@ set ")=echo :%subfunc%"
 ::	set "start=&call :start "
 
 ::	echo loading %start%dk_test%end%
-::	call dk_echo "startB = %start%:dk_test%end%"
+::	%dk_call% dk_echo "startB = %start%:dk_test%end%"
 	
 	pause
 %endfunction%
