@@ -9,7 +9,7 @@ if not "%~1" == "" (goto:runDKCMake)
 	::###### Install DKBash ######
 	%dk_call% dk_echo "Installing DKCmake . . ."
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmake"
-	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR     "%dk_call% dk_DKBRANCH_DIR"
 	if not defined CMAKE_EXE                 call "%DKIMPORTS_DIR%\cmake\dk_installCmake"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCmake"

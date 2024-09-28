@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_readCache _APP_ _TARGET_OS_ _TYPE_
 	
     :: get a list of the directories in DKApps
-	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKAPPS_DIR"
+	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_getDirectories "%DKAPPS_DIR%" options
   
     :: rename the list elements to the folder basename and add a matching command

@@ -20,6 +20,8 @@ dk_enterManually() {
 	if test -f "${DKPLUGINS_DIR}/${input}/DKMAKE.cmake"; then
 		TARGET_PATH=${DKPLUGINS_DIR}/${input}
 	fi
+	
+	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
 	if test -f "${DKAPPS_DIR}/${input}/DKMAKE.cmake"; then
 		TARGET_PATH=${DKAPPS_DIR}/${input}
 		return $(true)

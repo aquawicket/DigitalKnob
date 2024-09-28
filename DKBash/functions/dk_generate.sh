@@ -17,6 +17,7 @@ dk_generate() {
 	dk_call dk_clearCmakeCache
 	dk_call dk_deleteTempFiles
 
+	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
 	TARGET_PATH="${DKAPPS_DIR}"/"${APP}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}"/"${TARGET_OS}"
