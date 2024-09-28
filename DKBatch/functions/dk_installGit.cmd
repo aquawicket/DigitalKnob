@@ -33,6 +33,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	
     set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
+	set "BASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\bash.exe"
     set "GITBASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
 	set "PATCH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\usr\bin\patch.exe"
      
