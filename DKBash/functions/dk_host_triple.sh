@@ -10,7 +10,7 @@ try() {
 }
 
 ##################################################################################
-# dk_getHostTriple()
+# dk_host_triple()
 #
 #	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
 #	and build the accoring HOST_TRIPLE variable.  I.E. x86_64_windows_msys2
@@ -53,7 +53,7 @@ try() {
 #              https://llvm-swift.github.io/LLVMSwift/Structs/Triple.html
 #              https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target
 #
-dk_getHostTriple() {
+dk_host_triple() {
 	dk_debugFunc 0
 
 	# currently, our host triple consists of only 2 variable needed
@@ -335,6 +335,6 @@ dk_getHostTriple() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_getHostTriple
+	dk_call dk_host_triple
 	dk_call dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"
 }

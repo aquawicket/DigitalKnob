@@ -110,7 +110,7 @@ dk_buildMain() {
 	dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_getHostTriple
+	dk_host_triple
 	
 	dk_getDKPaths
 
@@ -2120,13 +2120,13 @@ try() {
 
 
 ##################################################################################
-# dk_getHostTriple(input)
+# dk_host_triple(input)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
 #	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
-dk_getHostTriple() {
-	dk_verbose "dk_getHostTriple(${*})"
+dk_host_triple() {
+	dk_verbose "dk_host_triple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed

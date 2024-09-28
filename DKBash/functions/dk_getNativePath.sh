@@ -8,7 +8,7 @@
 dk_getNativePath() {
 	dk_debugFunc 1 2
 	
-	dk_call dk_validate HOST_OS "dk_call dk_getHostTriple"
+	dk_call dk_validate HOST_OS "dk_call dk_host_triple"
 	if [ "${HOST_OS}" = "win" ]; then
 		dk_call dk_getWindowsPath ${1} _winpath_
 		#dk_return "${_winpath_//\\/\\\\}"; return

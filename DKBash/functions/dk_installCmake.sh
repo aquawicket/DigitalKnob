@@ -15,7 +15,7 @@ CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/
 dk_installCmake() {
 	dk_debugFunc 0
 	
-	dk_call dk_validate HOST_OS "dk_call dk_getHostTriple"	
+	dk_call dk_validate HOST_OS "dk_call dk_host_triple"	
 	######################################################################################################
 	#[ "${HOST_OS}" = "android" ]                && CMAKE_IMPORT=cmake;						
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}

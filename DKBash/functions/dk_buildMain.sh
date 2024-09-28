@@ -26,7 +26,7 @@ dk_buildMain() {
 	#dk_call dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_call dk_getHostTriple
+	dk_call dk_host_triple
 	dk_call dk_getDKPaths
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR

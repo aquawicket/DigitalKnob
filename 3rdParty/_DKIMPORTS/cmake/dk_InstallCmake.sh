@@ -19,7 +19,7 @@ dk_installCmake() {
 	dk_debugFunc 0
 
 	
-	dk_validate HOST_OS "dk_getHostTriple"
+	dk_validate HOST_OS "dk_host_triple"
 	######################################################################################################
 	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
 	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}

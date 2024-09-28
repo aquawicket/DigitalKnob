@@ -4,7 +4,7 @@
 . ../../../DKBash/functions/DK.sh
 
 SHELLCHECK_VERSION="v0.10.0"
-dk_validate HOST_OS "dk_getHostTriple"
+dk_validate HOST_OS "dk_host_triple"
 dk_printVar HOST_OS
 dk_printVar HOST_ARCH
 [ "${HOST_OS}_${HOST_ARCH}" == "linux_arm" ]    && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.linux.armv6hf.tar.xz"
