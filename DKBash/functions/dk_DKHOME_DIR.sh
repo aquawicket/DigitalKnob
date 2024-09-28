@@ -8,7 +8,7 @@
 dk_DKHOME_DIR() {
     dk_debugFunc 0
 
-    [ -n "${DKHOME_DIR}" ] && return 0
+    #[ -n "${DKHOME_DIR}" ] && return 0
     
 	### DKHOME_DIR ###
 	if dk_call dk_defined WSLENV; then

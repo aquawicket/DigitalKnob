@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # http://miniweb.sourceforge.net/
 # https://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip (binary)

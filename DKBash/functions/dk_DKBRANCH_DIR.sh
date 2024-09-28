@@ -8,7 +8,7 @@
 dk_DKBRANCH_DIR() {
 	dk_debugFunc 0
 
-	[ -n "${DKBRANCH_DIR}" ] && return 0
+	#[ -n "${DKBRANCH_DIR}" ] && return 0
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(dk_call dk_basename $(pwd))"
@@ -31,7 +31,7 @@ dk_DKBRANCH_DIR() {
 			DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
 			dk_call dk_printVar DKIMPORTS_DIR
 		
-		DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
+		export DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
 		dk_call dk_printVar DKAPPS_DIR
 		
 		DKBASH_DIR="${DKBRANCH_DIR}/DKBash"

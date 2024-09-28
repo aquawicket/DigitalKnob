@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://github.com/arvidn/libtorrent
 # https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz

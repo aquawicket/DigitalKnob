@@ -9,13 +9,13 @@
 dk_readCache() {
 	dk_debugFunc 3
 
-	dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
-	dk_pathExists "${DKBRANCH_DIR-}"/cache || return 0
+	dk_call dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
+	dk_call dk_pathExists "${DKBRANCH_DIR-}"/cache || return 0
 	#_APP_=
 	#_TARGET_OS_=
 	#_TYPE_=
 	
-	dk_echo "reading cache..."
+	dk_call dk_echo "reading cache..."
 	count=0
 	while read p; do
 		[ "${count}" = "0" ] && _APP_=$(builtin echo "${p}" | tr -d '\r')

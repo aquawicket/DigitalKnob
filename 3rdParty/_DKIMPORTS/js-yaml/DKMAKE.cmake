@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://github.com/nodeca/js-yaml.git
 # https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 

@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html
 # http://autogen.sourceforge.net

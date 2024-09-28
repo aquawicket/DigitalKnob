@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://www.xquartz.org/
 # https://www.xquartz.org/releases/index.html

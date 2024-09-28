@@ -8,7 +8,7 @@
 dk_DIGITALKNOB_DIR() {
 	dk_debugFunc 0
 
-	[ -n "${DIGITALKNOB_DIR}" ] && return 0
+	#[ -n "${DIGITALKNOB_DIR}" ] && return 0
 	
 	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
 	

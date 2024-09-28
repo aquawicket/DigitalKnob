@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://developer.android.com/studio/releases/sdk-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html

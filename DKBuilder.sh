@@ -21,7 +21,7 @@ export DKUSERNAME="${USER-}"
 [ -n "${DKUSERNAME-}" ] || echo "ERROR: unable to set DKUSERNAME"
 echo "DKUSERNAME = ${DKUSERNAME}"
 
-[ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} ${DKBASH_DIR}
+[ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE-} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 
 [ -e "${DKBASH_FUNCTIONS_DIR}" ] || mkdir ${DKBASH_FUNCTIONS_DIR}

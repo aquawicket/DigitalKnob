@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 # https://docs.python.org/3/using/windows.html
 # Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
