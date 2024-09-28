@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_info "Installing %MSYS2_FOLDER%"
 	%dk_call% dk_download %MSYS2_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%DKDOWNLOAD_DIR%\%MSYS2_DL_FILE%" install --root "%MSYS2%" --confirm-command
 	
 	%dk_call% dk_printVar MSYS2

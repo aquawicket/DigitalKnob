@@ -56,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
 
 	%dk_call% dk_download %OPENJDK_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%
 	%dk_call% dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
 	%dk_call% dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_DL_FILE%

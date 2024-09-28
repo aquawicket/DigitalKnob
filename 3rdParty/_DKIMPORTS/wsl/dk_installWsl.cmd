@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing Wsl Update . . ."
     %dk_call% dk_download %WSL_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	"%DKDOWNLOAD_DIR%\%WSL_DL_FILE%"
 	
 	:: Step 5 - Set WSL 2 as your default version

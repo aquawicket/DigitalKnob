@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			set "WINPE_DL=https://UseTheAddressAbove/Win10TinyPEx64.iso"
 			
 
-			%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+			%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 			%dk_call% dk_set WINPE_DIR "%DKTOOLS_DIR%\WindowsPE"
 			%dk_call% dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"
 			%dk_call% dk_set WINPE_QCOW "%WINPE_DIR%\winpe.qcow"
@@ -49,7 +49,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			%QEMU_IMG_EXE% create -f qcow2 %WINPE_IMG% 5G
 		
 			:: Launching the VM
-			%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+			%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 			%QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 			
 			::%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl

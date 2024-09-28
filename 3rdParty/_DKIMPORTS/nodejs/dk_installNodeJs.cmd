@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %NODEJS_DL_FILE% NODEJS_FOLDER
     ::%dk_call% dk_convertToCIdentifier %NODEJS_FOLDER% NODEJS_FOLDER
     %dk_call% dk_toLower %NODEJS_FOLDER% NODEJS_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_set NODEJS_DIR %DKTOOLS_DIR%\%NODEJS_FOLDER%
 	
 	
@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_info " "
     %dk_call% dk_info "Installing NodeJS . . ."
     %dk_call% dk_download "%NODEJS_DL%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NODEJS_DL_FILE%" "%NODEJS_DIR%"
     if NOT exist "%NODEJS_EXE%" %dk_call% dk_error "cannot find NODEJS_EXE:%NODEJS_EXE%"
 	:nodejs_installed		

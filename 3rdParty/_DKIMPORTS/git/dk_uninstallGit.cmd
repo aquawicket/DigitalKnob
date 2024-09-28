@@ -26,7 +26,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
     ::%dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	::set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 

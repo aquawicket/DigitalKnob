@@ -28,7 +28,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
 	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
     ::%dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
     %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	::set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	
@@ -39,8 +39,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%\.gitGloba
     if exist "%GIT_EXE%" %return%
     %dk_call% dk_echo   
     %dk_call% dk_info "Installing git . . ."
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     %dk_call% dk_download %GIT_DL%
     "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
        

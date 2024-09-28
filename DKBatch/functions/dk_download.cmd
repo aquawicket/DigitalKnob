@@ -24,8 +24,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     if defined destination %dk_call% dk_realpath "%destination%" destination
     ::%dk_call% dk_printVar destination
     
-	%dk_call% dk_validate DKDOWNLOAD_DIR "call dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     ::%dk_call% dk_printVar DKDOWNLOAD_DIR
 
     if not defined destination set "destination=%DKDOWNLOAD_DIR%\%url_filename%"

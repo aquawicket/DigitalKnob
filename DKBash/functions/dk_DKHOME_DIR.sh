@@ -10,6 +10,7 @@ dk_DKHOME_DIR() {
 
     [ -n "${DKHOME_DIR}" ] && return 0
     
+	### DKHOME_DIR ###
 	if dk_call dk_defined WSLENV; then
 		#HOMEDRIVE="$(cmd.exe /c echo %HOMEDRIVE%)"   # TODO: extract drive letter and convert to /mnt/L
 		HOMEDRIVE="/mnt/c"
@@ -25,8 +26,24 @@ dk_DKHOME_DIR() {
 	else
 		dk_call dk_error "dk_DKHOME_DIR(): unable to locate HOME directory"
 	fi
+	[ -e "${DKHOME_DIR}" ]     || dk_call dk_fatal "DKHOME_DIR not found"
+
+	### DKCACHE_DIR ###
+	DKCACHE_DIR="${DKHOME_DIR}/.dk"
+	[ -e "${DKCACHE_DIR}" ]    || dk_call dk_makeDirectory "${DKCACHE_DIR}"
 	
-	[ -e "${DKHOME_DIR}" ] || dk_call dk_fatal "DKHOME_DIR not found"
+	### DKDESKTOP_DIR ###
+	DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
+    [ -e "${DKDESKTOP_DIR}" ]  || dk_call dk_fatal "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
+	
+	### DKTEMP_DIR ###
+#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"
+#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMPDIR}"
+#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP_DIR%}"
+#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR" && dk_call dk_set DKTEMP_DIR "${DIGITALKNOB_DIR}"
+#	[ -e "${DKTEMP_DIR}" ] || dk_call dk_fatal "unable to set .dk directory"
+#	DKTEMP_DIR="${DKTEMP_DIR}/.dk"
+#	[ -e "${DKTEMP_DIR}" ] ||  dk_makeDirectory "${DKTEMP_DIR}"
 
 #${DKDEBUG}
 	#dk_call dk_printVar DKHOME_DIR

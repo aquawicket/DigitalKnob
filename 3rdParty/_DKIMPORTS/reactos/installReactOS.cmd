@@ -12,7 +12,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	set "REACTOS_DL=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_set REACTOS_DIR "%DKTOOLS_DIR%\ReactOS"
 	%dk_call% dk_set REACTOS_IMG %REACTOS_DIR%\reactos.img
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_info "Installing ReactOS . . ."
 		%dk_call% dk_basename %REACTOS_DL% REACTOS_DL_FILE
 		%dk_call% dk_download %REACTOS_DL%
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 		%dk_call% dk_extract %DKDOWNLOAD_DIR%/%REACTOS_DL_FILE%
 		
 		:: create and cd into install directory
