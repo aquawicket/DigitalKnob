@@ -28,6 +28,7 @@ if "%~1" neq "" (goto:runDKBash)
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
+	set "DKBASH_FUNCTIONS_DIR_=%~1\"
 	::set "GITBASH_EXE=%~2"
 	set "BASH_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
