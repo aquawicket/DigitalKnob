@@ -283,14 +283,14 @@ function(dk_getDKPaths)
 		#dk_printVar(DKDOWNLOAD_DIR)
 		
 		# /digitalknob/temp
-		if(NOT DEFINED DKTEMP_DIR)
-			if(DEFINED ENV{DKTEMP_DIR})
-				set(DKTEMP_DIR $ENV{DKTEMP_DIR} CACHE PATH "" FORCE)
+		if(NOT DEFINED DKCACHE_DIR)
+			if(DEFINED ENV{DKCACHE_DIR})
+				set(DKCACHE_DIR $ENV{DKCACHE_DIR} CACHE PATH "" FORCE)
 			else()
-				dk_DKTEMP_DIR()
+				dk_DKCACHE_DIR()
 			endif()
 		endif()
-		#dk_printVar(DKTEMP_DIR)
+		#dk_printVar(DKCACHE_DIR)
 
 
 
@@ -488,9 +488,9 @@ function(dk_getDKPaths)
 		dk_assertPath(DKDOWNLOAD_DIR)
 		#dk_printVar(DKDOWNLOAD_DIR)
 		
-		if(NOT DEFINED DKTEMP_DIR)
-			if(EXISTS "${DIGITALKNOB_DIR}/temp")
-				set(DKTEMP_DIR "${DIGITALKNOB_DIR}/temp" CACHE PATH "" FORCE)
+		if(NOT DEFINED DKCACHE_DIR)
+			if(EXISTS "${DIGITALKNOB_DIR}/cache")
+				set(DKCACHE_DIR "${DIGITALKNOB_DIR}/cache" CACHE PATH "" FORCE)
 			endif()
 		endif()
 	

@@ -21,9 +21,13 @@ function Global:dk_getDKPaths() {
     dk_call dk_makeDirectory $DKDOWNLOAD_DIR
     dk_call dk_printVar DKDOWNLOAD_DIR
 	
-	$global:DKTEMP_DIR = "$DIGITALKNOB_DIR/temp"
-    dk_call dk_makeDirectory $DKTEMP_DIR
-    dk_call dk_printVar DKTEMP_DIR
+	$global:DKCACHE_DIR = "$DIGITALKNOB_DIR/cache"
+    dk_call dk_makeDirectory $DKCACHE_DIR
+    dk_call dk_printVar DKCACHE_DIR
+	
+	#$global:DKTEMP_DIR = "$DIGITALKNOB_DIR/temp"
+    #dk_call dk_makeDirectory $DKTEMP_DIR
+    #dk_call dk_printVar DKTEMP_DIR
 }
 
 
