@@ -13,7 +13,7 @@ WIN_X86_64_HOST_dk_set	(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepa
 dk_importVariables(${NOTEPADPP_DL} rtn_var)
 
 ### IMPORT ###
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
 dk_set(NOTEPADPP_DIR ${DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
 dk_import(${NOTEPADPP_DL} PATH ${NOTEPADPP_DIR})
 dk_set(NOTEPADPP_EXE "${NOTEPADPP_DIR}/notepad++.exe")

@@ -10,7 +10,7 @@ WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.ex
 dk_assert(QEMU_DL)
 dk_importVariables(${NOTEPADPP_DL} rtn_var)
 
-dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
 dk_set(QEMU_DIR ${DKTOOLS_DIR}/${QEMU_FOLDER})
 dk_set(QEMU_IMG_EXE ${QEMU_DIR}/qemu-img.exe)
 dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU_DIR}/qemu-system-x86_64.exe)
