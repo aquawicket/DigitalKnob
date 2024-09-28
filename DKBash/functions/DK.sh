@@ -160,8 +160,8 @@ dk_download() {
 	OLDPWD=${PWD}
 	cd "${parentdir}"
 	
-	[ -e "${1}" ] || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
-	[ -e "${1}" ] || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
+	[ -e "${2}" ] || dk_commandExists "wget" && ${dksudo} wget -P "${parentdir}" "${1}"
+	[ -e "${2}" ] || dk_commandExists "curl" && ${dksudo} curl --silent -Lo "${2}" "${1}"
 	
 	cd "${OLDPWD}"
 }
@@ -236,16 +236,16 @@ DKSCRIPT_VARS(){
 	dk_call dk_pathExists    "${DKCACHE_DIR}"       	 || mkdir "${DKCACHE_DIR}"
 	dk_call dk_pathExists    "${DKCACHE_DIR}"       	 && echo "DKCACHE_DIR = ${DKCACHE_DIR}"
 	
-	### DKTEMP_DIR ###
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP}"
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMPDIR}"
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP_DIR}"
-	dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
-	dk_call dk_pathExists   "${DKTEMP_DIR}"              && DKTEMP_DIR="${DKTEMP_DIR}/.dk"
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              || mkdir "${DKTEMP_DIR}"
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              || echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
-    dk_call dk_pathExists   "${DKTEMP_DIR}"              && cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
-	dk_call dk_pathExists   "${DKTEMP_DIR}"       	 	 && echo "DKTEMP_DIR = ${DKTEMP_DIR}"
+#	### DKTEMP_DIR ###
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP}"
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMPDIR}"
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP_DIR}"
+#	dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
+#	dk_call dk_pathExists   "${DKTEMP_DIR}"              && DKTEMP_DIR="${DKTEMP_DIR}/.dk"
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              || mkdir "${DKTEMP_DIR}"
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              || echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
+#   dk_call dk_pathExists   "${DKTEMP_DIR}"              && cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
+#	dk_call dk_pathExists   "${DKTEMP_DIR}"       	 	 && echo "DKTEMP_DIR = ${DKTEMP_DIR}"
 	
 	### ASSETS ###
     #[ -e "${DKASSETS_DIR}" ] &&   DKASSETS_DIR="${DKSCRIPT_DIR}/assets"

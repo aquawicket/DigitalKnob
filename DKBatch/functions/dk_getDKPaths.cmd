@@ -12,7 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_DIGITALKNOB_DIR
     %dk_call% dk_DKTOOLS_DIR
     %dk_call% dk_DKDOWNLOAD_DIR
-    %dk_call% dk_DKTEMP_DIR
+	%dk_call% dk_DKCACHE_DIR
+    ::%dk_call% dk_DKTEMP_DIR
 	%dk_call% dk_DKDESKTOP_DIR
 %endfunction%
 

@@ -15,8 +15,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "default=%2"
     set /a "timeout=%3"
     
-    set "cache_file=%DKTEMP_DIR%\keyboardInputTimeout_cache.tmp"
-    set "thread_file=%DKTEMP_DIR%\keyboardInputTimeout_thread.cmd"
+    set "cache_file=%DKCACHE_DIR%\keyboardInputTimeout_cache.tmp"
+    set "thread_file=%DKCACHE_DIR%\keyboardInputTimeout_thread.cmd"
     %dk_call% dk_delete %cache_file% %NO_STD%
     
     echo ^@echo off> %thread_file%

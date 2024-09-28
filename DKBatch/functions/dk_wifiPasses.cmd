@@ -8,7 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    set "tempfile=%DKTEMP_DIR%\temp.txt"
+    set "tempfile=%DKCACHE_DIR%\temp.txt"
     if exist !tempfile! call dk_delete !tempfile!
     netsh wlan show profile | findstr All>> "!tempfile!"
 

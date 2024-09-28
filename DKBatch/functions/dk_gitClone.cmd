@@ -16,14 +16,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set DKBATCH_FUNCTIONS_DIR_ "%DKBATCH_FUNCTIONS_DIR%\"
 	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
-	cd %DKTEMP_DIR%
-	%dk_call% dk_fileWrite %DKTEMP_DIR%\test.cmd "@echo off"
-	%dk_call% dk_fileAppend %DKTEMP_DIR%\test.cmd "rmdir %~2 /s /q"
-	%dk_call% dk_fileAppend %DKTEMP_DIR%\test.cmd "%GIT_EXE% clone %~1 %~2"
+	cd %DKCACHE_DIR%
+	%dk_call% dk_fileWrite %DKCACHE_DIR%\test.cmd "@echo off"
+	%dk_call% dk_fileAppend %DKCACHE_DIR%\test.cmd "rmdir %~2 /s /q"
+	%dk_call% dk_fileAppend %DKCACHE_DIR%\test.cmd "%GIT_EXE% clone %~1 %~2"
 	
 	(goto) 2>nul & (
-	cd %DKTEMP_DIR%
-	start %DKTEMP_DIR%\test.cmd & exit
+	cd %DKCACHE_DIR%
+	start %DKCACHE_DIR%\test.cmd & exit
 	)
 %endfunction%
 
