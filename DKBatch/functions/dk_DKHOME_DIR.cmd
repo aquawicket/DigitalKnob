@@ -13,8 +13,23 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     if not defined HOMEDRIVE        %dk_call% dk_fatal "HOMEDRIVE is invalid"
     if not defined HOMEPATH         %dk_call% dk_fatal "HOMEPATH is invalid"
+	
     set "DKHOME_DIR=%HOMEDRIVE%%HOMEPATH%"
     if not exist "%DKHOME_DIR%"     %dk_call% dk_fatal "DKHOME_DIR:%DKHOME_DIR% does not exist"
+	
+	set "DKCACHE_DIR=%DKHOME_DIR%\.dk"
+	if not exist "%DKCACHE_DIR%"    %dk_call% dk_makeDirectory "%DKCACHE_DIR%"
+	
+	set "DKDESKTOP_DIR=%DKHOME_DIR%\Desktop"
+    if not exist %DKDESKTOP_DIR%    %dk_call% dk_fatal "DKDESKTOP_DIR:%DKDESKTOP_DIR% does not exist"
+	
+::	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMP%"
+::	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMPDIR%"
+::	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_set DKTEMP_DIR "%TMP_DIR%"
+::	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR" && %dk_call% dk_set DKTEMP_DIR "%DIGITALKNOB_DIR%"
+::	if NOT exist "%DKTEMP_DIR%"    %dk_call% dk_fatal "unable to set .dk directory"
+::	set "DKTEMP_DIR=%DKTEMP_DIR%\.dk"
+::	if NOT exist "%DKTEMP_DIR%"    dk_makeDirectory "%DKTEMP_DIR%"
 %endfunction%
 
 

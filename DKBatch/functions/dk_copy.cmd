@@ -53,7 +53,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+    %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKHOME_DIR"
     
     %dk_call% dk_fileWrite %DKCACHE_DIR%\copyMe.file "dk_copy test"
     %dk_call% dk_copy %DKCACHE_DIR%\copyMe.file %DKCACHE_DIR%\iWasCopied.txt OVERWRITE
