@@ -13,8 +13,8 @@ dk_DKHOME_DIR() {
 	### DKHOME_DIR ###
 	if dk_call dk_defined WSLENV; then
 		#HOMEDRIVE="$(cmd.exe /c echo %HOMEDRIVE%)"   # TODO: extract drive letter and convert to /mnt/L
-		HOMEDRIVE="/mnt/c"
-		HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
+		export HOMEDRIVE="/mnt/c"
+		export HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
 		dk_call dk_replaceAll "${HOMEPATH}" "\\" "/" HOMEPATH
 		DKHOME_DIR="${HOMEDRIVE}${HOMEPATH}"
 	elif [ -n "${USERPROFILE-}" ]; then
