@@ -25,46 +25,107 @@ function Global:dk_DKBRANCH_DIR() {
 	$global:DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 	dk_call dk_printVar DKBRANCH_DIR
 	
-	$global:DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
-	dk_call dk_printVar DKCMAKE_DIR
-	
-	$global:DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
-	dk_call dk_printVar DK3RDPARTY_DIR
-	
-	$global:DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
-	dk_call dk_printVar DKIMPORTS_DIR
-	
-	$global:DKAPPS_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKApps"
-	dk_call dk_printVar DKAPPS_DIR
-	
-	$global:DKPLUGINS_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKPlugins"
-	dk_call dk_printVar DKPLUGINS_DIR
-	
-	$global:DKBASH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKBash"
-	dk_call dk_printVar DKBASH_DIR
-	
-	$global:DKBATCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKBatch"
-	dk_call dk_printVar DKBATCH_DIR
-	
-	$global:DKPOWERSHELL_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}/DKPowershell"
-	dk_call dk_printVar DKPOWERSHELL_DIR
-
-	# make sure script is running from DKBRANCH_DIR
-	#if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
-	#	if ! dk_call dk_pathExists ${DKBRANCH_DIR}/${DKSCRIPT_NAME}; then
-	#		dk_call dk_debug "${DKBRANCH_DIR}/${DKSCRIPT_NAME}"
-	#		cp ${DKSCRIPT_DIR}/${DKSCRIPT_NAME} ${DKBRANCH_DIR}/${DKSCRIPT_NAME}
-	#	fi
-	#	dk_call dk_echo
-	#	dk_call dk_info "RELOADING SCRIPT TO -> ${DKBRANCH_DIR}/${DKSCRIPT_NAME}"
-	#	read -p "Press enter to continue"
-	#	dk_call dk_clearScreen
-	#	if dk_call dk_pathExists ${DKBRANCH_DIR}/${DKSCRIPT_NAME}; then
-	#		rm ${DKSCRIPT_DIR}/${DKSCRIPT_NAME}
-	#	fi
-	#	${DKBRANCH_DIR}/${DKSCRIPT_NAME}
-	#	dk_call dk_exit
-	#fi
+		$global:DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
+		dk_call dk_printVar DK3RDPARTY_DIR
+			$global:DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
+			dk_call dk_printVar DKIMPORTS_DIR
+		
+		$global:DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
+		dk_call dk_printVar DKAPPS_DIR
+		
+		$global:DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
+		dk_call dk_printVar DKBASH_DIR
+			$global:DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+			dk_call dk_printVar DKBASH_FUNCTIONS_DIR
+			$global:DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
+			dk_call dk_printVar DKBASH_FUNCTIONS_DIR_
+			
+		$global:DKBATCH_DIR="${DKBRANCH_DIR}/DKBatch"
+		dk_call dk_printVar DKBATCH_DIR
+			$global:DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
+			dk_call dk_printVar DKBATCH_FUNCTIONS_DIR
+			$global:DKBATCH_FUNCTIONS_DIR_="${DKBATCH_DIR}/functions/"
+			dk_call dk_printVar DKBATCH_FUNCTIONS_DIR_
+			
+		$global:DKC_DIR="${DKBRANCH_DIR}/DKC"
+		dk_call dk_printVar DKC_DIR
+			$global:DKC_FUNCTIONS_DIR="${DKC_DIR}/functions"
+			dk_call dk_printVar DKC_FUNCTIONS_DIR
+			$global:DKC_FUNCTIONS_DIR_="${DKC_DIR}/functions/"
+			dk_call dk_printVar DKC_FUNCTIONS_DIR_
+		
+		$global:DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
+		dk_call dk_printVar DKCMAKE_DIR
+			$global:DKCMAKE_FUNCTIONS_DIR="${DKCMAKE_DIR}/functions"
+			dk_call dk_printVar DKCMAKE_FUNCTIONS_DIR
+			$global:DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_DIR}/functions/"
+			dk_call dk_printVar DKCMAKE_FUNCTIONS_DIR_
+			
+		$global:DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
+		dk_call dk_printVar DKCPP_DIR
+			$global:DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
+			dk_call dk_printVar DKCPP_FUNCTIONS_DIR
+			$global:DKCPP_FUNCTIONS_DIR_="${DKCPP_DIR}/functions/"
+			dk_call dk_printVar DKCPP_FUNCTIONS_DIR_
+			
+		$global:DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
+		dk_call dk_printVar DKCSHARP_DIR
+			$global:DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
+			dk_call dk_printVar DKCSHARP_FUNCTIONS_DIR
+			$global:DKCSHARP_FUNCTIONS_DIR_="${DKCSHARP_DIR}/functions/"
+			dk_call dk_printVar DKCSHARP_FUNCTIONS_DIR_
+			
+		$global:DKHTA_DIR="${DKBRANCH_DIR}/DKHta"
+		dk_call dk_printVar DKHTA_DIR
+			$global:DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
+			dk_call dk_printVar DKHTA_FUNCTIONS_DIR
+			$global:DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
+			dk_call dk_printVar DKHTA_FUNCTIONS_DIR_
+		
+		$global:DKHTML_DIR="${DKBRANCH_DIR}/DKHta"
+		dk_call dk_printVar DKHTML_DIR
+			$global:DKHTML_FUNCTIONS_DIR="${DKHTML_DIR}/functions"
+			dk_call dk_printVar DKHTML_FUNCTIONS_DIR
+			$global:DKHTML_FUNCTIONS_DIR_="${DKHTML_DIR}/functions/"
+			dk_call dk_printVar DKHTML_FUNCTIONS_DIR_
+		
+		$global:DKJAVA_DIR="${DKBRANCH_DIR}/DKJava"
+		dk_call dk_printVar DKJAVA_DIR
+			$global:DKJAVA_FUNCTIONS_DIR="${DKJAVA_DIR}/functions"
+			dk_call dk_printVar DKJAVA_FUNCTIONS_DIR
+			$global:DKJAVA_FUNCTIONS_DIR_="${DKJAVA_DIR}/functions/"
+			dk_call dk_printVar DKJAVA_FUNCTIONS_DIR_
+		
+		$global:DKJAVASCRIPT_DIR="${DKBRANCH_DIR}/DKJavascript"
+		dk_call dk_printVar DKJAVASCRIPT_DIR
+			$global:DKJAVASCRIPT_FUNCTIONS_DIR="${DKJAVASCRIPT_DIR}/functions"
+			dk_call dk_printVar DKJAVASCRIPT_FUNCTIONS_DIR
+			$global:DKJAVASCRIPT_FUNCTIONS_DIR_="${DKJAVASCRIPT_DIR}/functions/"
+			dk_call dk_printVar DKJAVASCRIPT_FUNCTIONS_DIR_
+		
+		$global:DKPHP_DIR="${DKBRANCH_DIR}/DKPhp"
+		dk_call dk_printVar DKPHP_DIR
+			$global:DKPHP_FUNCTIONS_DIR="${DKPHP_DIR}/functions"
+			dk_call dk_printVar DKPHP_FUNCTIONS_DIR
+			$global:DKPHP_FUNCTIONS_DIR_="${DKPHP_DIR}/functions/"
+			dk_call dk_printVar DKPHP_FUNCTIONS_DIR_
+			
+		$global:DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
+		dk_call dk_printVar DKPOWERSHELL_DIR
+			$global:DKPOWERSHELL_FUNCTIONS_DIR="${DKPOWERSHELL_DIR}/functions"
+			dk_call dk_printVar DKPOWERSHELL_FUNCTIONS_DIR
+			$global:DKPOWERSHELL_FUNCTIONS_DIR_="${DKPOWERSHELL_DIR}/functions/"
+			dk_call dk_printVar DKPOWERSHELL_FUNCTIONS_DIR_
+		
+		$global:DKPYTHON_DIR="${DKBRANCH_DIR}/DKPython"
+		dk_call dk_printVar DKPYTHON_DIR
+			$global:DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
+			dk_call dk_printVar DKPYTHON_FUNCTIONS_DIR
+			$global:DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_DIR}/functions/"
+			dk_call dk_printVar DKPYTHON_FUNCTIONS_DIR_
+			
+		$global:DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
+		dk_call dk_printVar DKPLUGINS_DIR
 }
 
 
