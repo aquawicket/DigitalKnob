@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_HOST_TRIPLE()
+# dk_host_triple()
 #
 #	set the cached host variables 
 #
@@ -19,7 +19,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <OS>_<ARCH>_HOST		= ANDROID_ARM64_HOST, EMSCRIPTEN_ARM64_HOST, IOS_ARM64_HOST, IOSSIM_ARM64_HOST, LINUX_ARM64_HOST, MAC_ARM64_HOST, RASPBERRY_ARM64_HOST, WINDOWS_ARM64_HOST 
 #   <OS>_<ARCH>_<ENV>_HOST	= ANDROID_ARM64_CLANG_HOST, EMSCRIPTEN_ARM64_CLANG_HOST, IOS_ARM64_CLANG_HOST, IOSSIM_ARM64_CLANG_HOST, LINUX_ARM64_CLANG_HOST, MAC_ARM64_CLANG_HOST, RASPBERRY_ARM64_CLANG_HOST, WINDOWS_ARM64_CLANG_HOST 
 #
-function(dk_HOST_TRIPLE)
+function(dk_host_triple)
 	dk_debugFunc("\${ARGV}")
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
@@ -159,5 +159,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_HOST_TRIPLE()
+	dk_host_triple()
 endfunction()

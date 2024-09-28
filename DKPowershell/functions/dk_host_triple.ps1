@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '.\DK.ps1' }
-if(!$dk_getHostTriple){ $dk_getHostTriple = 1 } else{ return }
+if(!$dk_host_triple){ $dk_host_triple = 1 } else{ return }
 
 #####################################################################
-# dk_getHostTriple()
+# dk_host_triple()
 #
 #
-function Global:dk_getHostTriple() {
+function Global:dk_host_triple() {
 	dk_debugFunc 0
 
 	$global:HOST_OS = "win"
@@ -37,5 +37,5 @@ function Global:dk_getHostTriple() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_getHostTriple
+	dk_call dk_host_triple
 }

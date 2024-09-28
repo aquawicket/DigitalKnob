@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # https://www.nasm.us
 
-dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
+dk_validate(HOST_TRIPLE "dk_host_triple()")
 if(ANDROID_HOST)
 	return()
 endif()

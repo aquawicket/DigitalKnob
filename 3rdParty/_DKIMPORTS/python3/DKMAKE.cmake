@@ -6,7 +6,7 @@ dk_load(dk_builder)
 # https://wiki.termux.com/wiki/Python
 
 
-dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
+dk_validate(HOST_TRIPLE "dk_host_triple()")
 WIN_HOST_dk_set	(PYTHON3_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
 MAC_HOST_dk_set (PYTHON3_DL https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
 

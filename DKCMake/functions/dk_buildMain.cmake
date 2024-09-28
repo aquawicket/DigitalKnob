@@ -30,7 +30,7 @@ function(dk_buildMain)
 #	#dk_printVar DKSCRIPT_NAME
 	
 	### Get the HOST_TRIPLE and other HOST variables
-	dk_HOST_TRIPLE()
+	dk_host_triple()
 	
 	dk_getDKPaths()
 	dk_installGit()

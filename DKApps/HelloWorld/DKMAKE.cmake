@@ -4,7 +4,7 @@ dk_load(dk_builder)
 
 return()
 # NOTE: HelloWorld requires no DK libs
-dk_validate(HOST_TRIPLE "dk_HOST_TRIPLE()")
+dk_validate(HOST_TRIPLE "dk_host_triple()")
 dk_validate(TRIPLE "dk_TARGET_TRIPLE()")
 
 

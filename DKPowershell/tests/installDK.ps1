@@ -16,7 +16,7 @@ dk_load dk_installGit
 dk_load dk_DKBRANCH_DIR
 dk_load dk_stringContains
 dk_load dk_getDKPaths
-dk_load dk_getHostTriple
+dk_load dk_host_triple
 dk_load dk_getExtension
 dk_load dk_removeExtension
 dk_load dk_makeDirectory
