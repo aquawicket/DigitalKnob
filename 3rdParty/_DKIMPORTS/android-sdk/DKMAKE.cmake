@@ -14,6 +14,7 @@ dk_load(dk_builder)
 #dk_depend(openjdk-8u41)
 #dk_depend(android-cmdline-tools)
 
+dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")			#TODO: phase out
 dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
 if(NOT EXISTS ${ANDROID_SDK_DIR})

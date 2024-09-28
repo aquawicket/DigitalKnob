@@ -12,6 +12,7 @@ endif()
 ### VERSION ###
 dk_set(METAL_CPP_FOLDER metal-cpp_macOS12_iOS15)
 dk_set(METAL_CPP_DL https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip)
+dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 dk_set(METAL_CPP ${DK3RDPARTY_DIR}/${METAL_CPP_FOLDER})
 
 

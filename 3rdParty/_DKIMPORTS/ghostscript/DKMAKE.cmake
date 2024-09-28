@@ -13,6 +13,7 @@ endif()
 ### IMPORT ###
 #dk_set(GHOSTSCRIPT "${ProgramFiles}/gs/gs9.22/bin")
 #dk_import(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
+dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 dk_set(GHOSTSCRIPT ${DK3RDPARTY_DIR}/ghostscript-9.22)
 if(NOT EXISTS ${GHOSTSCRIPT}/bin)
 	dk_download(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe ${DKDOWNLOAD_DIR}/gs922w64.exe)

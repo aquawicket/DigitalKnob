@@ -130,6 +130,7 @@ function(dk_importDownload url) #install_path #PATCH
 	if(install_path)
 		dk_set(${LIBVAR} ${install_path})
 	else()
+		dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 		dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	endif()
 	

@@ -9,6 +9,7 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
+dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 dk_set			(SDL2_GIF_NAME SDL2_gif)
 dk_set			(SDL2_GIF ${DK3RDPARTY_DIR}/${SDL2_GIF_NAME})
 IF(NOT EXISTS ${SDL2_GIF})

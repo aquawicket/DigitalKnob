@@ -13,7 +13,7 @@ dk_callDKPowershell() {
 	dk_debug "ARGV_LAST = ${ARGV_LAST}" 
 	
 	find_program POWERSHELL_EXE powershell.exe 
-	dk_validate DKPOWERSHELL_FUNCTIONS_DIR "dk_DKBRANCH_DIR()" 
+	dk_validate DKPOWERSHELL_FUNCTIONS_DIR "dk_DKBRANCH_DIR" 
 	set ALL_BUT_FIRST_ARGS ${ARGN}
 	execute_process(COMMAND "${POWERSHELL_EXE}" -Command . '${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1'; ${func} ${ARGN} WORKING_DIRECTORY "${DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output_variable)
 	dk_debug "output_variable = ${output_variable}"

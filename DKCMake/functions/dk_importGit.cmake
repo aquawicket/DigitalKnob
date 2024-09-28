@@ -112,6 +112,7 @@ function(dk_importGit url) #branch #id #PATCH
 	endif()
 	dk_verbose(${LIBVAR}_NAME)
 	
+	dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 	dk_set(${LIBVAR} ${DK3RDPARTY_DIR}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
 		dk_fatal("${${LIBVAR}} is invalid")

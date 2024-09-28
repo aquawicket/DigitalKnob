@@ -50,32 +50,38 @@ function Global:dk_generate() {
 	elseif($TARGET_OS -eq "raspberry_arm32"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($TARGET_OS -eq "raspberry_arm64"){ $CMAKE_ARGS += "-G Unix Makefiles" }
 	elseif($TARGET_OS -eq "win_arm64_clang"){ 
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 	    $env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clangarm64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANGARM64"
 	}
-	elseif($TARGET_OS -eq "win_x86_clang"){ 
+	elseif($TARGET_OS -eq "win_x86_clang"){
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG32"
 	}
-	elseif($TARGET_OS -eq "win_x86_mingw"){ 
+	elseif($TARGET_OS -eq "win_x86_mingw"){
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw32\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW32"
 	}
-	elseif($TARGET_OS -eq "win_x86_64_clang"){ 
+	elseif($TARGET_OS -eq "win_x86_64_clang"){
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\clang64\bin;$env:PATH"
 		#$CMAKE_ARGS += "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=CLANG64"
 	}
-	elseif($TARGET_OS -eq "win_x86_64_mingw"){ 
+	elseif($TARGET_OS -eq "win_x86_64_mingw"){
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\mingw64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=MINGW64"
 	}
-	elseif($TARGET_OS -eq "win_x86_64_ucrt"){ 
+	elseif($TARGET_OS -eq "win_x86_64_ucrt"){
+		dk_validate DK3RDPARTY_DIR "dk_BRANCH_DIR()"
 		$env:PATH = "${DK3RDPARTY_DIR}\msys2-x86_64-20231026\ucrt64\bin;$env:PATH"
 		$CMAKE_ARGS += "-G MinGW Makefiles"
 		$CMAKE_ARGS += "-DMSYSTEM=UCRT64"

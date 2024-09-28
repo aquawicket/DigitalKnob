@@ -37,6 +37,7 @@ if(MAC_HOST)
 endif()
 
 if(LINUX_HOST)
+	dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 	if(NOT EXISTS "${DK3RDPARTY_DIR}/android-studio/bin/studio.sh")
 		dk_download("https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.3.1.17/android-studio-2021.3.1.17-linux.tar.gz" ${DKDOWNLOAD_DIR}/android-studio-2021.3.1.17-linux.tar.gz)
 		dk_extract(${DKDOWNLOAD_DIR}/android-studio-2021.3.1.17-linux.tar.gz ${DK3RDPARTY_DIR})

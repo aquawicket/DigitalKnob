@@ -12,6 +12,6 @@ endif()
 
 dk_depend(visualstudio)
 
-
+dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 #dk_import(https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage PATH ${DK3RDPARTY_DIR}/androoidjavatools-2.8)
 dk_import(https://visualcppteam.gallerycdn.vsassets.io/extensions/visualcppteam/javatoolsforandroidprojvs2019/2.8/1561139034309/AndroidJavaTools28.vsix PATH ${DK3RDPARTY_DIR}/androoidjavatools-2.8)

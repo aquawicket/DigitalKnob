@@ -6,6 +6,7 @@ set "CurrentVersion=1.8.0_41"
 
 set "JAVA_VERSION=%CurrentVersion%"
 setx JAVA_VERSION %CurrentVersion%
+%dk_call% dk_validate DK3RDPARTY_DIR "dk_DKBRANCH_DIR"
 set "JAVA_HOME=%DK3RDPARTY_DIR%\%Folder%"
 setx JAVA_HOME %JAVA_HOME%
 setx VS_JavaHome %JAVA_HOME%

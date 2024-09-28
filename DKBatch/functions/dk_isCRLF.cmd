@@ -54,6 +54,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_isCRLF DK.cmd && %dk_call% dk_echo "DK.cmd is CRLF" || %dk_call% dk_echo "DK.cmd is NOT CRLF"
     
-    %dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBASH_DIR"
+    %dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_isCRLF %DKBASH_FUNCTIONS_DIR%\DK.sh && %dk_call% dk_echo "DK.sh is CRLF" || %dk_call% dk_echo "DK.sh is NOT CRLF"
 %endfunction%

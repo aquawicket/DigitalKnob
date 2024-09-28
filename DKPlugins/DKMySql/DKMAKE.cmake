@@ -1,3 +1,7 @@
+#!/usr/bin/cmake -P
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+#include_guard()
+
 dk_depend(DKAssets)
 dk_depend(DKCurl)
 if(HAVE_DKDuktape)
@@ -13,6 +17,7 @@ dk_assets(DKMySql)
 
 #DKENABLE(mysql) ##MySql library
 if(mysql)
+	dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 	SET(PATH_MYSQL_WIN32 ${DK3RDPARTY_DIR}/mysql-5.6.16-win32)
 	SET(PATH_MYSQL_WIN64 ${DK3RDPARTY_DIR}/mysql-5.6.16-winx64)
 	SET(PATH_MYSQL_MAC ${DK3RDPARTY_DIR}/mysql-5.6.16-osx10.7-x86_64)

@@ -31,13 +31,6 @@ dk_buildMain() {
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR
 
-	#dk_call dk_printVar DKBRANCH_DIR
-	#dk_call dk_printVar DKAPPS_DIR
-	#dk_call dk_printVar DKCMAKE_DIR
-	#dk_call dk_printVar DK3RDPARTY_DIR
-	#dk_call dk_printVar DKIMPORTS_DIR
-	#dk_call dk_printVar DKPLUGINS_DIR
-
 	if [ "${DKSCRIPT_DIR}" != "${DKBRANCH_DIR}" ]; then
 		dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
 		dk_call dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"

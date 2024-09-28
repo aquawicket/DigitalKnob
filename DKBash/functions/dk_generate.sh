@@ -143,6 +143,7 @@ dk_generate() {
 	fi
 	
 	if [ "${TARGET_OS}" = "win_arm64_clang" ]; then
+		dk_call dk_validate DK3RDPARTY_DIR "dk_DKBRANCH_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 	fi

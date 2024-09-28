@@ -61,6 +61,7 @@ endmacro()
 if(NOT EXISTS ${VISUALSTUDIO})
 	dk_info("Installing Visual Studio . . .")
 	if(EXISTS ${DKDOWNLOAD_DIR}/VisualStudio/vs_setup.exe)
+		dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 		dk_command(${DK3RDPARTY_DIR}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)	# offline installer
 	else()
 		dk_download(${VISUALSTUDIO_DL} ${DKDOWNLOAD_DIR}/vs_Community.exe)				# online installer

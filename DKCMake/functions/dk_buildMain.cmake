@@ -38,12 +38,6 @@ function(dk_buildMain)
 
 	dk_assertPath(DKSCRIPT_DIR)
 	dk_assertPath(DKBRANCH_DIR)
-	#dk_printVar DKBRANCH_DIR
-	#dk_printVar DKAPPS_DIR
-	#dk_printVar DKCMAKE_DIR
-	#dk_printVar DK3RDPARTY_DIR
-	#dk_printVar DKIMPORTS_DIR
-	#dk_printVar DKPLUGINS_DIR
 
 	if(NOT "${DKSCRIPT_DIR}" STREQUAL "${DKBRANCH_DIR}")
 		dk_warning("${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!")

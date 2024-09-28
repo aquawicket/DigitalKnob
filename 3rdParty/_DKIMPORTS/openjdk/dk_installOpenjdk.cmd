@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::%dk_call% dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
 	%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_set OPENJDK_DIR %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
 	%dk_call% dk_set registerJDK11 %OPENJDK_DIR%\registerJDK.cmd
 	%dk_call% dk_getNativePath %OPENJDK_DIR% OPENJDK_NATIVE

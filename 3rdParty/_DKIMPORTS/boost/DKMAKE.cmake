@@ -16,7 +16,7 @@ dk_load(dk_builder)
 ANDROID_dk_depend(android-ndk)	#version 21e or newer required
 ANDROID_dk_depend(msys2)
 
-
+#dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 #dk_set(BOOST ${DK3RDPARTY_DIR}/boost_1_78_0)
 #dk_import(https://github.com/boostorg/boost.git)
 dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)

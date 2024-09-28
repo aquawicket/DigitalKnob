@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not exist "%TARGET_PATH%\%TARGET_OS%"   %dk_call% dk_makeDirectory "%TARGET_PATH%\%TARGET_OS%"
     ::call set "CMAKE_SOURCE_DIR=%%DKCMAKE_DIR:^\=^/%%"         &:: FIXME: remove the need for call here
 	
-	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKCMAKE_DIR"
+	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
     set "CMAKE_SOURCE_DIR=!DKCMAKE_DIR:\=/!"                    
     ::call set "CMAKE_TARGET_PATH=%TARGET_PATH:^\=^/%"          &:: FIXME: remove the need for call here
     set "CMAKE_TARGET_PATH=!TARGET_PATH:\=/!"   
@@ -45,7 +45,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%DKLINK%"=="Shared"          %dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF
     ::if "%TARGET_OS%==emscripten" %dk_call% dk_appendArgs CMAKE_ARGS -DEMSCRIPTEN=ON
 
-	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKCMAKE_DIR"
+	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
 	set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_:\=/!"   
 	%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
 	
