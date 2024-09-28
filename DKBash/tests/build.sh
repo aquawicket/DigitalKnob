@@ -112,7 +112,7 @@ dk_buildMain() {
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_host_triple
 	
-	dk_getDKPaths
+	dk_DIGITALKNOB_DIR
 
 	dk_installGit
 	dk_DKBRANCH_DIR
@@ -742,11 +742,11 @@ dk_buildApp() {
 #####################################################################
 
 #####################################################################
-# dk_getDKPaths()
+# dk_DIGITALKNOB_DIR()
 #
 #
-dk_getDKPaths() {
-	dk_verbose "dk_getDKPaths(${*})"
+dk_DIGITALKNOB_DIR() {
+	dk_verbose "dk_DIGITALKNOB_DIR(${*})"
 	
 	if [ -n "${USERPROFILE-}" ]; then
 		dk_printVar USERPROFILE

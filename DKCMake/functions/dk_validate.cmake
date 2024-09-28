@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_validate(variable "code")
 #
 #	@variable  - The name of a variable to test
-#	@code	   - The code to run if the variable is invalid. Like a function "dk_getDKPaths()"
+#	@code	   - The code to run if the variable is invalid. Like a function "dk_DIGITALKNOB_DIR()"
 #
 function(dk_validate variable code)
 	dk_debugFunc("\${ARGV}")

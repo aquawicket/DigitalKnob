@@ -29,7 +29,7 @@ function Global:dk_buildMain() {
 	
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_call dk_host_triple
-	dk_call dk_getDKPaths
+	dk_call dk_DIGITALKNOB_DIR
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR
 	

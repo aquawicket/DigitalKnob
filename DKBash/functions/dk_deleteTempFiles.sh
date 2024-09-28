@@ -10,7 +10,7 @@ dk_deleteTempFiles() {
 
 	dk_call dk_info "Deleting .TMP files . . ."
 	
-	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"	
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"	
 	rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.tmp)
 	rm -rf $(find "${DIGITALKNOB_DIR}" -type d -name *.TMP)
 	find "${DIGITALKNOB_DIR}" -name "*.tmp" -delete

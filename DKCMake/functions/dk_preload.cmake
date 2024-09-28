@@ -124,8 +124,8 @@ endif()
 #	dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 #endif()
 	
-#dk_preload(dk_getDKPaths)
-#dk_getDKPaths()
+#dk_preload(dk_DIGITALKNOB_DIR)
+#dk_DIGITALKNOB_DIR()
 
 
 

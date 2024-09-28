@@ -24,8 +24,7 @@ dk_download() {
 #	[ -n ${destination} ] && dk_call dk_realpath "${destination}" destination
 #	dk_call dk_printVar destination
 	
-	dk_call dk_getDKPaths
-	#dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_getDKPaths"
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
 	#dk_call dk_printVar DKDOWNLOAD_DIR
 	
 	[ -z ${destination} ] && destination="${DKDOWNLOAD_DIR}/${url_filename}"

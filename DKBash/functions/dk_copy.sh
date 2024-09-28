@@ -52,7 +52,7 @@ dk_copy() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	
 	dk_call dk_echo "dk_copy test" > ${DKDOWNLOAD_DIR}/copyMe.file
 	dk_call dk_copy ${DKDOWNLOAD_DIR}/copyMe.file ${DIGITALKNOB_DIR}/iWasCopied.txt OVERWRITE

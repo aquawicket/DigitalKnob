@@ -14,7 +14,7 @@ dk_DKBRANCH_DIR() {
 	FOLDER="$(dk_call dk_basename $(pwd))"
 	DKBRANCH="Development"
 	
-	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	if dk_call dk_pathExists "${DIGITALKNOB_DIR}"/"${FOLDER}"/.git; then
 		BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 		if [ "${BRANCH}" = "${FOLDER}" ]; then

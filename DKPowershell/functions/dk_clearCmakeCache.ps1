@@ -10,7 +10,7 @@ function Global:dk_clearCmakeCache() {
 
 	# TODO: replace ${DIGITALKNOB_DIR} with $1 and call this functions while suplying the directory 
 	dk_call dk_info "Clearing CMake cache . . ."
-	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_getDKPaths"
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	cd "${DIGITALKNOB_DIR}"
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" CMakeCache.* -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }
 	Get-ChildItem -Path "$DIGITALKNOB_DIR" *CMakeFiles* -Recurse | foreach { Remove-Item -Path $_.FullName -Recurse }

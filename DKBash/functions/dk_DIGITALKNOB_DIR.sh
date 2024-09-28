@@ -2,10 +2,10 @@
 [ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
 #####################################################################
-# dk_getDKPaths()
+# dk_DIGITALKNOB_DIR()
 #
 #
-dk_getDKPaths() {
+dk_DIGITALKNOB_DIR() {
 	dk_debugFunc 0
 
 	[ -n "${DIGITALKNOB_DIR}" ] && return 0
@@ -44,5 +44,5 @@ dk_getDKPaths() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_getDKPaths
+	dk_call dk_DIGITALKNOB_DIR
 }

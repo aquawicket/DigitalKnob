@@ -32,7 +32,7 @@ function(dk_buildMain)
 	### Get the HOST_TRIPLE and other HOST variables
 	dk_host_triple()
 	
-	dk_getDKPaths()
+	dk_DIGITALKNOB_DIR()
 	dk_installGit()
 	dk_DKBRANCH_DIR()
 
