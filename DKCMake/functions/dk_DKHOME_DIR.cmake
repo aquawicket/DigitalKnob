@@ -13,6 +13,7 @@ function(dk_DKHOME_DIR)
 		return()
 	endif()
     
+	### DKHOME_DIR ###
 	if(DEFINED ENV{WSLENV})
 		dk_echo("Using WSL")
 		#execute_process(COMMAND cmd.exe /c "echo %HOMEDRIVE%" OUTPUT_VARIABLE HOMEDRIVE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
@@ -22,14 +23,13 @@ function(dk_DKHOME_DIR)
 		dk_set(DKHOME_DIR "${HOMEDRIVE}${HOMEPATH}")
 	elseif(DEFINED ENV{USERPROFILE})
 		dk_set(DKHOME_DIR "$ENV{USERPROFILE}")
-		#dk_call dk_commandExists "cygpath" && DKHOME_DIR=$(cygpath -u "${DKHOME_DIR}")
+		#execute_process(COMMAND cygpath -u "${DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 	elseif(DEFINED ENV{HOME})
 		dk_set(DKHOME_DIR "$ENV{HOME}")
 	else()
 		dk_fatal("dk_DKHOME_DIR(): unable to locate HOME directory")
 	endif()
 	
-	### DKHOME_DIR ###
 	dk_replaceAll("${DKHOME_DIR}" "\\" "/" DKHOME_DIR)
 	dk_set(DKHOME_DIR "${DKHOME_DIR}")
 	set(ENV{DKHOME_DIR} "${DKHOME_DIR}")

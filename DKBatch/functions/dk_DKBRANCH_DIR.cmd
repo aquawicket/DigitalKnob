@@ -22,7 +22,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             set "DKBRANCH=%FOLDER%"
         )
     )
-	
 	::%dk_call% dk_printVar DKBRANCH
 	
 	set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
@@ -112,7 +111,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			::%dk_call% dk_printVar DKPHP_FUNCTIONS_DIR
 			set "DKPHP_FUNCTIONS_DIR_=%DKPHP_DIR%\functions\"
 			::%dk_call% dk_printVar DKPHP_FUNCTIONS_DIR_
-			
+		
+		set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
+		::%dk_call% dk_printVar DKPLUGINS_DIR
+		
 		set "DKPOWERSHELL_DIR=%DKBRANCH_DIR%\DKPowershell"
 		::%dk_call% dk_printVar DKPOWERSHELL_DIR
 			set "DKPOWERSHELL_FUNCTIONS_DIR=%DKPOWERSHELL_DIR%\functions"
@@ -126,9 +128,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			::%dk_call% dk_printVar DKPYTHON_FUNCTIONS_DIR
 			set "DKPYTHON_FUNCTIONS_DIR_=%DKPYTHON_DIR%\functions\"
 			::%dk_call% dk_printVar DKPYTHON_FUNCTIONS_DIR_
-			
-		set "DKPLUGINS_DIR=%DKBRANCH_DIR%\DKPlugins"
-		::%dk_call% dk_printVar DKPLUGINS_DIR
 %endfunction%
 
 
