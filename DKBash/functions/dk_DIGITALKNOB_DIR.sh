@@ -8,26 +8,15 @@
 dk_getDKPaths() {
 	dk_debugFunc 0
 
-	if dk_call dk_defined WSLENV; then
-		#HOMEDRIVE="$(cmd.exe /c echo %HOMEDRIVE%)"
-		HOMEDRIVE="/mnt/c"
-		HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
-		dk_call dk_replaceAll "${HOMEPATH}" "\\" "/" HOMEPATH
-		HOME="${HOMEDRIVE}${HOMEPATH}"
-		#DIGITALKNOB_DIR="${HOME}/digitalknob"
-	elif [ -n "${USERPROFILE-}" ]; then
-		dk_call dk_printVar USERPROFILE
-		DIGITALKNOB_DIR="${USERPROFILE}\digitalknob"
-		dk_call dk_commandExists "cygpath" && DIGITALKNOB_DIR=$(cygpath -u "${DIGITALKNOB_DIR}")
-		dk_call dk_replaceAll "${DIGITALKNOB_DIR}" "\\" "/" DIGITALKNOB_DIR
-	elif [ -n "${HOME-}" ]; then
-		dk_call dk_printVar HOME
-		DIGITALKNOB_DIR="${HOME}/digitalknob"
-	else
-		dk_call dk_error "dk_getDKPaths(): unable to locate user root directory"
-	fi
-	dk_call dk_printVar DIGITALKNOB_DIR
+	[ -n "${DIGITALKNOB_DIR}" ] && return 0
+	
+	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
+	
+	### DIGITALKNOB_DIR ###
+	[ -n "${DIGITALKNOB}" ] || DIGITALKNOB="digitalknob"
+	DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
 	dk_call dk_makeDirectory "${DIGITALKNOB_DIR}"
+	dk_call dk_printVar DIGITALKNOB_DIR
 	
 	DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
 	dk_call dk_makeDirectory "${DKTOOLS_DIR}"
