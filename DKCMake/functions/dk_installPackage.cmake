@@ -40,7 +40,7 @@ function(dk_installPackage)
 #	elseif(dk_commandExists ohpm)
 #		ohpm install "${package}"				# Ohpm
 #	elseif(dk_commandExists pkg)
-#		pkg install "${package}"				# Termux
+#		pkg install "${package}" -y				# Termux
 #	elseif(dk_commandExists pacman)
 #		pacman -S "${package}" --noconfirm		# Pacman
 #	elseif(dk_commandExists swupd)

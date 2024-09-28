@@ -8,18 +8,15 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_commandExists shell commandName rtn_var)
 	dk_debugFunc("\${ARGV}")
-	
-	## Test for command in CMAKE
-	if("${shell}" STREQUAL "CMAKE")
-		if(COMMAND ${commandName})
-			set(output_variable TRUE)
-		else()
-			set(output_variable FALSE)
-		endif()
+		
+	## Test for command in BASH	
+	if("${shell}" STREQUAL "BASH")
+		dk_validate(BASH_EXE "dk_depend(git)")
+		dk_command(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE output_variable)
 		set(${rtn_var} ${output_variable} PARENT_SCOPE)
 		dk_printVar(output_variable)
 		return()
-		
+	
 	## Test for command in CMD
 	elseif("${shell}" STREQUAL "CMD")
 		dl_validate(CMD_EXE "dk_depend(cmd)")
@@ -29,17 +26,20 @@ function(dk_commandExists shell commandName rtn_var)
 		dk_printVar(output_variable)
 		return()
 		
-	## Test for command in BASH	
-	elseif("${shell}" STREQUAL "BASH")
-		dl_validate(BASH_EXE "dk_depend(git)")
-		dk_command(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE output_variable)
+	## Test for command in CMAKE
+	elseif("${shell}" STREQUAL "CMAKE")
+		if(COMMAND ${commandName})
+			set(output_variable TRUE)
+		else()
+			set(output_variable FALSE)
+		endif()
 		set(${rtn_var} ${output_variable} PARENT_SCOPE)
 		dk_printVar(output_variable)
 		return()
 		
 	## Error
 	else()
-		dk_error("arg1:${shell} invalid. Choices are CMAKE, CMD and BASH")
+		dk_error("arg1:${shell} invalid. Choices are BASH, CMD and CMAKE")
 	endif()
 endfunction()
 

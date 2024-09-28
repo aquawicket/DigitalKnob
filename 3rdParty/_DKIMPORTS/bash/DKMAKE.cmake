@@ -5,9 +5,15 @@ dk_load(dk_builder)
 # https://packages.msys2.org/package/bash
 
 ### Msys2 ###
-if(MSYSTEM)
-	#dk_command(${PACMAN_EXE} -S bash)
-	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
+if(WIN_HOST)
+	if(MSYSTEM)
+		dk_depend(msys)
+		#dk_command(${PACMAN_EXE} -S bash)
+		dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
+	else()
+		dk_depend(git)
+		dk_findProgram(BASH_EXE bash "${GIT}/bin")
+	endif()
 endif()
 
 
@@ -15,5 +21,6 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi bash)
 	dk_findProgram(BASH_EXE bash)
-	dk_debug(BASH_EXE)
 endif()
+
+dk_assertPath(${BASH_EXE})
