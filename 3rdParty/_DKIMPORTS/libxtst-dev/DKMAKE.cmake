@@ -12,7 +12,8 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi libXtst-dev.tcz)
 else()
-	dk_command(${SUDO} apt -y install libxtst-dev)
+	dk_depend(sudo)
+	dk_command(${SUDO_EXE} apt -y install libxtst-dev)
 endif()
 
 ### LINK ###

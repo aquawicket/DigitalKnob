@@ -20,9 +20,11 @@ dk_depend(homebrew)
 #endif()
 
 # Other install methods
-# ${SUDO} port -v install xorg-server
+# dk_depend(sudo)
+# ${SUDO_EXE} port -v install xorg-server
 # or
-# ${SUDO} port -v install xorg
+# dk_depend(sudo)
+# ${SUDO_EXE} port -v install xorg
 # or
 # brew install --cask xquartz
 

@@ -11,7 +11,8 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi libXcursor-dev.tcz)
 else()
-	dk_command(${SUDO} apt -y install libxcursor-dev)
+	dk_depend(sudo)
+	dk_command(${SUDO_EXE} apt -y install libxcursor-dev)
 endif()
 
 ### LINK ###

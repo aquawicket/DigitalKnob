@@ -5,5 +5,6 @@ dk_load(dk_builder)
 
 
 #LINUX_HOST_dk_cd(/usr)
-LINUX_HOST_dk_command(${SUDO} apt -y install terminator) #FIXME sudo needed
+dk_depend(sudo)
+LINUX_HOST_dk_command(${SUDO_EXE} apt -y install terminator) #FIXME sudo needed
 MAC_HOST_dk_command(brew install terminator)

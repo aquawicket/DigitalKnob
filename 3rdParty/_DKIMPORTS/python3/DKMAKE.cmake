@@ -26,7 +26,8 @@ endif()
 
 if(NOT EXISTS ${PYTHON3_EXE})
 	ANDROID_HOST_dk_command	(pkg install ${PYTHON3_IMPORT} -y)
-	LINUX_HOST_dk_command	(${SUDO} apt-get install ${PYTHON3_IMPORT})
+	dk_depend(sudo)
+	LINUX_HOST_dk_command	(${SUDO_EXE} apt-get install ${PYTHON3_IMPORT})
 	MAC_HOST_dk_import		("${PYTHON3_IMPORT}")
 	WIN_HOST_dk_import		("${PYTHON3_IMPORT}")
 	

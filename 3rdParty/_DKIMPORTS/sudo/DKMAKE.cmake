@@ -7,20 +7,20 @@ if(WIN_HOST)
 	return()
 endif()
 
-if(EXISTS ${SUDO})
+if(EXISTS ${SUDO_EXE})
 	return()
 endif()
 
 
-dk_findProgram(SUDO sudo)
-if(EXISTS ${SUDO})
-	dk_set(SUDO ${SUDO})   # set it globally
+dk_findProgram(SUDO_EXE sudo)
+if(EXISTS ${SUDO_EXE})
+	dk_set(SUDO_EXE ${SUDO_EXE})   # set it globally
 	return()
 endif()
 
 
 
 
-if(NOT EXISTS ${SUDO})
-	dk_error("Could not file SUDO:${SUDO}")
+if(NOT EXISTS ${SUDO_EXE})
+	dk_error("Could not file SUDO_EXE:${SUDO_EXE}")
 endif()

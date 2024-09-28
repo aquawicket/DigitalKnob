@@ -7,11 +7,11 @@ if(NOT LINUX AND NOT RASPBERRY)
 	dk_return()
 endif()
 
-dk_depend(sudo)
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_command(${SUDO} apt -y install libasound2-dev)
+dk_depend(sudo)
+dk_command(${SUDO_EXE} apt -y install libasound2-dev)
 
 ### Tiny Core Linux ###
 if(TINYCORE)

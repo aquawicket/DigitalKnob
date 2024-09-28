@@ -12,4 +12,4 @@ dk_load(dk_builder)
 # TODO
 # sudo apt-get install ddd
 dk_depend(sudo)
-LINUX_HOST_dk_command(${SUDO} apt -y install ddd)
+LINUX_HOST_dk_command(${SUDO_EXE} apt -y install ddd)

@@ -170,9 +170,9 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")
 			if(MAC_HOST)
-				dk_validate(SUDO "dk_depend(sudo)")
 				dk_executeProcess(chmod 777 ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
-				dk_executeProcess(${SUDO} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)
+				dk_depend(sudo)
+				dk_executeProcess(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} -target /)
 			endif()
 		else()
 			dk_executeProcess(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})

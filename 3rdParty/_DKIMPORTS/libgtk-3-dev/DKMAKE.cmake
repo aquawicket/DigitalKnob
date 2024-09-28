@@ -8,7 +8,8 @@ endif()
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_command(${SUDO} apt -y install libgtk-3-dev)
+dk_depend(sudo)
+dk_command(${SUDO_EXE} apt -y install libgtk-3-dev)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK REQUIRED gtk+-3.0)

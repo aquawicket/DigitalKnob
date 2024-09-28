@@ -2,12 +2,12 @@
 include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 dk_load(dk_builder)
 
-dk_depend(sudo)
 
 ### INSTALL ###
 if(LINUX)
 	dk_cd(/usr)
-	dk_command(${SUDO} apt -y install libgnutls)
+	dk_depend(sudo)
+	dk_command(${SUDO_EXE} apt -y install libgnutls)
 endif()
 if(MAC)
 	dk_command(brew install gnutls)

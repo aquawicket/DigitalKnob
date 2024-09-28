@@ -7,7 +7,7 @@ dk_load(dk_builder)
 
 if(APPLE)
 	dk_depend(sudo)
-	dk_command(${SUDO} port install fontconfig)
+	dk_command(${SUDO_EXE} port install fontconfig)
 	return()
 endif()
 
