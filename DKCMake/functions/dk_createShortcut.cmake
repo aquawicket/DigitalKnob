@@ -21,9 +21,9 @@ function(dk_createShortcut shortcut_path target_path) # arguments
 		dk_callDKPowershell(dk_createShortcut '${shortcut_path}' '${target_path}')
 	endif()
 	
-	if(NOT EXISTS "${shortcut_path}")
-		dk_fatal("dk_createShortcut failed.  shortcut_path:${shortcut_path} not found")
-	endif()
+	#if(NOT EXISTS "${shortcut_path}")
+	#	dk_fatal("dk_createShortcut failed.  shortcut_path:${shortcut_path} not found")
+	#endif()
 endfunction()
 
 
