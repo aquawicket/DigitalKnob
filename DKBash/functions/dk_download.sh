@@ -53,7 +53,7 @@ dk_download() {
 	dk_call dk_pathExists "${destination}" || dk_call dk_commandExists "wget" && wget -P "${destination_dir}" "${url}" || $(true)
 	
 	# try curl
-	dk_call dk_pathExists "${destination}" || dk_call dk_commandExists "curl" && curl --silent -Lo "${destination}" "${url}" || $(true)
+	#dk_call dk_pathExists "${destination}" || dk_call dk_commandExists "curl" && curl --silent -Lo "${destination}" "${url}" || $(true)
 	
 	
 	[ -e "${destination}" ] || dk_call dk_error "failed to download ${url_filename}"

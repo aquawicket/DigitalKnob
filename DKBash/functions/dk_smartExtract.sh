@@ -24,9 +24,8 @@ dk_smartExtract() {
 	if ! dk_call dk_pathExists "${dest_fullpath}"; then
 		dk_call dk_makeDirectory "${dest_fullpath}"
 	fi
-	
+
 	dk_call dk_info "Extracting $src_filename . . ."
-	
 	[ -e "${src_extractPath}" ] && dk_call dk_delete "${src_extractPath}"
 	
 	dk_call dk_extract "$src_fullpath" "${src_extractPath}"
@@ -45,15 +44,15 @@ dk_smartExtract() {
 	
 	if [ ${dir_count} -lt 2 ]; then 
 		if [ ${file_count} -lt 2 ]; then
-			#rename/move EXTRACTED/root folder to dest path"
 			dk_call dk_move "${directories[0]}" "$dest_fullpath" OVERWRITE
-			#[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
+			[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
+			return $(true)
 		fi
 	fi
 	
 	# rename/move EXTRACTED folder to dest path
 	dk_call dk_move "${src_extractPath}" "$dest_fullpath" OVERWRITE
-	#[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
+	[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
 }
 
 
