@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 #
 function(dk_callDKPowershell func) #args
 	dk_debugFunc("\${ARGV}")
-	#dk_debug("dk_callDKPowershell(${ARGV})")
+	dk_debug("dk_callDKPowershell(${ARGV})")
 	
 	math(EXPR ARGC_LAST "${ARGC}-1")
 	set(ARGV_LAST ${ARGV${ARGC_LAST}})
@@ -25,7 +25,7 @@ function(dk_callDKPowershell func) #args
 	
 	dk_printVar(output)
 	#if("${ARGV_LAST}" EQUAL "rtn_var")
-		dk_debug("returning ARGV_LAST = ${ARGV_LAST}")
+		#dk_debug("returning ARGV_LAST = ${ARGV_LAST}")
 		set(${rtn_var} "${output}" PARENT_SCOPE)
 	#endif()
 endfunction()
@@ -40,6 +40,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_callDKPowershell(dk_messageBox "\"Testing dk_messageBox\"" rtn_var)
-	dk_debug("rtn_var = ${rtn_var}")
+	dk_callDKPowershell(dk_messageBox "\"Testing dk_messageBox\"")
+	
 endfunction()
