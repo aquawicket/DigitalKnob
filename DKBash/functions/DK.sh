@@ -183,7 +183,6 @@ dksetupCallstack(){
 #
 DKSCRIPT_VARS(){
 	### DKSCRIPT_PATH ###
-	echo "export DKSCRIPT_PATH='$(dk_call dk_realpath ${0})'"
 	export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
 	#dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
 	#dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")

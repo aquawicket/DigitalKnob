@@ -17,11 +17,7 @@ function(dk_removeExtension path ret_var)
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
-	#dk_includes(${path} "." includes REVERSE)
-	#if(NOT includes)
-		if(NOT NO_HALT)
-			dk_fatal("dk_removeExtension(${path}): no extension found")
-		endif()
+		dk_warning("dk_removeExtension(${path}): no extension found")
 		return()
 	endif()
 	
