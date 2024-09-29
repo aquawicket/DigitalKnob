@@ -24,10 +24,6 @@ WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/down
 ## Get CMAKE_DL_FILE, CMAKE_FOLDER
 dk_importVariables(${CMAKE_DL} rtn_var)
 
-
-
-dk_validate(TRIPLE "dk_TARGET_TRIPLE()")
-
 ### IMPORT ###
 if(ANDROID_HOST)
 	dk_command(pkg install cmake -y)

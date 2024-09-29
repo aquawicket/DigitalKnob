@@ -1,6 +1,7 @@
 
 if(${DKINIT}){return} else{ $global:DKINIT=1 }	# include_guard
 
+Write-Output "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 
 #####################################################################
 # DKINIT()
@@ -144,7 +145,7 @@ function dk_DKSCRIPT_VARS(){
 	$global:DKSCRIPT_DIR = ${DKSCRIPT_DIR} -replace '\\', '/';
 	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR not found!"; exit } 
 	$global:DKSCRIPT_NAME = Split-Path -Leaf ${DKSCRIPT_PATH}
-	$global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH")
+	if(!${DKSCRIPT_EXT}){ $global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH") }
 }
 
 ##################################################################################

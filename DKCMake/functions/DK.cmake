@@ -205,21 +205,29 @@ endfunction()
 # dk_DKSCRIPT_VARS()
 #
 function(dk_DKSCRIPT_VARS)
+	###### DKSCRIPT_PATH ######
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_PATH})
 		dk_fatal("DKSCRIPT_PATH not found!")
 	endif()
 	
+	###### DKSCRIPT_ARGS ######
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
 
+	###### DKSCRIPT_DIR ######
 	get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY)
 	set(DKSCRIPT_DIR ${DKSCRIPT_DIR} CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_DIR})
 		dk_fatal("DKSCRIPT_DIR not found!")
 	endif()
 	
+	###### DKSCRIPT_NAME ######
 	get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME)
 	set(DKSCRIPT_NAME ${DKSCRIPT_NAME} CACHE INTERNAL "")
+	
+	###### DKSCRIPT_EXT ######
+	get_filename_component(DKSCRIPT_EXT ${DKSCRIPT_PATH} LAST_EXT)
+	set(DKSCRIPT_EXT ${DKSCRIPT_EXT} CACHE INTERNAL "")
 endfunction()
 
 ##################################################################################

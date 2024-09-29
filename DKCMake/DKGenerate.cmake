@@ -892,26 +892,29 @@ if(NOT RASPBERRY)
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
+	endif()
 	
-		# Install shortcut of Release build to the apps menu
-		if(NOT TINYCORE)
-			if(DEBUG)
-				dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR})
-			elseif(RELEASE)
-				dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR})
-			endif()
-		endif()
-		
-		if(DEFINED ENV{WSLENV})
-			dk_info("creating WSL shortcut")
-			if(DEBUG)
-				dk_callDKPowershell(dk_createShortcut "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
-			elseif(RELEASE)
-				dk_callDKPowershell(dk_createShortcut "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}")
-			endif()
+	# Create windows shortcut for WSL
+	if(DEFINED ENV{WSLENV})
+		dk_info("creating WSL shortcut")
+		if(DEBUG)
+			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+			dk_callDKPowershell(dk_createShortcut "${SHORTCUT_PATH}" "wsl ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
+		elseif(RELEASE)
+			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+			dk_callDKPowershell(dk_createShortcut "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" "wsl ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}")
 		endif()
 	endif()
 	
+	# Install shortcut of Release build to the apps menu
+	if(NOT TINYCORE)
+		if(DEBUG)
+			#dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR})
+		elseif(RELEASE)
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR})
+		endif()
+	endif()
+		
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
