@@ -25,7 +25,7 @@ endif()
 if(NOT WSL_EXE)
 	dk_set(WSL_EXE "C:/Windows/System32/wsl.exe")
 endif()
-dk_assertPath("${WSL_EXE}")
+dk_assert(WSL_EXE)
 
 
 dk_findProgram(WSLPATH_EXE wslpath)
