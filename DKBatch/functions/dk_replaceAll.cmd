@@ -2,18 +2,21 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::##################################################################################
-::# dk_replaceAll(input searchValue newValue trn_var)
+::# dk_replaceAll(input searchValue newValue rtn_var)
 ::#
 ::#
 :dk_replaceAll
     call dk_debugFunc 4
- setlocal
+ ::setlocal
  
     set "_input_=%~1"
     if "!DE!" equ "" set "_output_=!_input_:%~2=%~3!"
     if "!DE!" neq "" call set "_output_=%%_input_:%~2=%~3%%"
 
-    endlocal & set "%~4=%_output_%"
+    endlocal & set "%4=%_output_%"
+
+::DEBUG
+	%dk_call% dk_printVar _output_
 %endfunction%
 
 

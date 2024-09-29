@@ -83,6 +83,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%TARGET_OS%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
 	if "%TARGET_OS%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
 	if not defined MULTI_CONFIG            set "SINGLE_CONFIG=1"
+	
+	if "%TARGET_OS%"=="linux_x86"          set "DK_SHELL=wsl"
+    if "%TARGET_OS%"=="linux_x86_64"       set "DK_SHELL=wsl"
+	
 	if defined MULTI_CONFIG                set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
 	if defined SINGLE_CONFIG               set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
@@ -114,7 +118,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%TARGET_OS%"=="win_x86_64_msvc"    %dk_call% dk_prependArgs CMAKE_ARGS -G "Visual Studio 17 2022" -A x64
     if "%TARGET_OS%"=="win_x86_64_ucrt"    %dk_call% dk_prependArgs CMAKE_ARGS -G "MinGW Makefiles"
 
-	
 ::  ###### CMAKE_TOOLCHAIN_FILE ######
 ::  %dk_call% dk_set TOOLCHAIN "%DKCMAKE_DIR%\toolchains\%TARGET_OS%_toolchain.cmake"
 ::  %dk_call% dk_assertPath TOOLCHAIN
@@ -128,15 +131,25 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::      cd "$DKCMAKE_DIR"
 ::      set -- "$@" "."
 ::  fi
-    
+	::if defined DK_SHELL (
+	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
+	::	%dk_call% dk_replaceAll "!WSL_CMAKE_ARGS!" "\" "/" WSL_CMAKE_ARGS
+	::)
+	
+	::###### linux_x86_64 (WSL) ######
+	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
+	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
+	if defined DK_SHELL %DK_SHELL% bash -c "export UPDATE=1 && export APP=%APP% && export TARGET_OS=%TARGET_OS% && export TYPE=%TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
+	if defined DK_SHELL %return%
+	
 ::  ###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
     %dk_call% dk_info "****** CMAKE COMMAND ******"
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    call "%CMAKE_EXE%" %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
+    echo %DK_SHELL% %CMAKE_EXE% %CMAKE_ARGS%
+    call %DK_SHELL% %CMAKE_EXE% %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
 	
 ::	###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars
