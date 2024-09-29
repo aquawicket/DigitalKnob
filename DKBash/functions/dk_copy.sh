@@ -15,7 +15,7 @@ dk_copy() {
 
 	local _from_="${1}"
 	local _to_="${2}"
-	if [ "${3}" = "OVERWRITE" ]; then
+	if [ "${3-}" = "OVERWRITE" ]; then
 		OVERWRITE=1
 	else 
 		OVERWRITE=0 
@@ -35,7 +35,7 @@ dk_copy() {
 	fi
 	
 	# the base directory of the ${_to_} path must exist.    
-	dk_call dk_dirname "${_to_}" _parent_dir_
+	_parent_dir_=$(dk_call dk_dirname "${_to_}")
 	dk_call dk_makeDirectory "${_parent_dir_}"
 	
 	cp -r "${_from_}" "${_to_}"

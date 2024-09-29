@@ -162,6 +162,8 @@ dk_download() {
 	OLDPWD=${PWD}
 	cd "${parentdir}"
 	
+	dk_commandExists "wget" || dk_installPackage wget
+	dk_commandExists "curl" || dk_installPackage curl
 	[ -e "${2}" ] || dk_commandExists "wget" && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
 	[ -e "${2}" ] || dk_commandExists "curl" && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
 	
