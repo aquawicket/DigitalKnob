@@ -16,10 +16,10 @@ dk_extract() {
 	
 	if [ "${extension}" = "zip" ]; then
 		dk_call dk_commandExists unzip || dk_call dk_installPackage unzip
-		unzip "${1}" -d "${2}"
+		unzip ${1} -d ${2}
 	else
 		dk_call dk_commandExists tar || dk_call dk_installPackage tar
-		tar -xf "${1}" -C "${2}"
+		tar -xf ${1} -C ${2}
 	fi
 }
 

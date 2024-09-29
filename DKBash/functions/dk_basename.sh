@@ -8,7 +8,7 @@
 #
 dk_basename() {
 	dk_debugFunc 1 2
-	#builtin echo "dk_basename($*)"
+	dk_call dk_debug "dk_basename($*)"
 	
 	#local _basename_=$(basename "${1}")
 	_basename_=$(basename "${1}")

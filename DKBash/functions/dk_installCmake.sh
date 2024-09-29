@@ -38,25 +38,18 @@ dk_installCmake() {
 	
 	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_call dk_info "Installing CMake from file download"
-		dk_call dk_printVar CMAKE_IMPORT
 		
-		CMAKE_DL=${CMAKE_IMPORT}
-		
-		CMAKE_DL_FILE=$(dk_call dk_basename "${CMAKE_DL}")
-		dk_call dk_assert CMAKE_DL_FILE
-		
+		CMAKE_DL_FILE=$(dk_call dk_basename "${CMAKE_IMPORT}")
 		dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_FOLDER
-		dk_call dk_assert CMAKE_FOLDER
-		
 		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
 		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
-		dk_call dk_assert CMAKE_FOLDER
+		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
+		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
+		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
+		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake found for this OS"
 		dk_call dk_assert CMAKE_EXE
 		
@@ -64,13 +57,14 @@ dk_installCmake() {
 		
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
-		dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
-		dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
+		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_DL_FILE}"
+		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${DKTOOLS_DIR}"
+		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_DL_FILE}" "${CMAKE_DIR}"
 		
-		dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
-		dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${DKTOOLS_DIR}/${CMAKE_FOLDER}"
+		#dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
+		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_DIR}"
 		
-		#dk_call dk_fileWrite "${DKTOOLS_DIR}/${CMAKE_FOLDER}/installed" "${CMAKE_FOLDER}"
+		#dk_call dk_fileWrite "${CMAKE_DIR}/installed" "${CMAKE_FOLDER}"
         
 		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake"
 

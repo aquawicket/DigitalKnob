@@ -16,8 +16,8 @@ dk_download() {
 	
 	#dk_call dk_echo "dk_basename "${url}" url_filename"
 	
-	dk_call dk_basename ${url} url_filename
-	#dk_basename ${url} url_filename
+	url_filename=$(dk_basename ${url})
+
 	dk_call dk_printVar url_filename
 	[ -z "${url_filename-}" ] && dk_call dk_error "url_filename invalid"
 	
@@ -41,7 +41,7 @@ dk_download() {
 	dk_call dk_info "Downloading ${url_filename}  to  ${destination}"
 	
 	# make sure the destination parent directory exists
-	dk_call dk_dirname "${destination}" destination_dir
+	destination_dir=$(dk_dirname "${destination}")
 	#dk_call dk_printVar destination_dir
 	
 	[ -n ${destination_dir} ] || dk_call dk_error "destination_dir is invalid"

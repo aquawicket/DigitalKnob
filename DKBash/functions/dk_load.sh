@@ -33,7 +33,7 @@ dk_load() {
 	fi
 	
 	#### download if missing ####
-	if [ ! -e ${funcPath} ]; then
+	if [ ! -e "${funcPath}" ]; then
 		if [[ "${funcName}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
 			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_call wget -P ${DKBASH_FUNCTIONS_DIR} ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
 			[ -e "${DKBASH_FUNCTIONS_DIR}/dk_download.sh" ] || dk_call curl -Lo ${DKBASH_FUNCTIONS_DIR}/dk_download.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_download.sh
@@ -41,7 +41,7 @@ dk_load() {
 			dk_download "$DKHTTP_DKBASH_FUNCTIONS_DIR/${funcName}.sh" "$DKBASH_FUNCTIONS_DIR/${funcName}.sh"
 			[ -e ${funcPath} ] || dk_error "ERROR: ${funcPath}: file not found"
 		else
-			dk_warning "'${funcName}' does not match the dk_ regex pattern"
+			dk_call dk_warning "'${funcName}' does not match the dk_ regex pattern"
 		fi
 	fi
 	

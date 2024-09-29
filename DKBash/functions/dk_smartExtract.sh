@@ -9,51 +9,50 @@
 dk_smartExtract() {
 	dk_debugFunc 2
 
-
 	src="${1}"
 	dest="${2}"
 	
-	dk_realpath "${src}" src_fullpath 
-	src_directory="$(dk_dirname "${src_fullpath}")"
-	src_filename="$(dk_basename "${src_fullpath}")"
+	src_fullpath=$(dk_call dk_realpath "${src}")
+	src_directory="$(dk_call dk_dirname "${src_fullpath}")"
+	src_filename="$(dk_call dk_basename "${src_fullpath}")"
 	src_folder="${src_filename%.*}"
 	src_extractPath="${src_directory}/${src_filename}_EXTRACTED"
 	
 	#dk_realpath "${dest}" dest_fullpath
 	dest_fullpath="${dest}"
-	dest_folder="$(dk_basename "${dest_fullpath}")"
-	if ! dk_pathExists "${dest_fullpath}"; then
-		dk_makeDirectory "${dest_fullpath}"
+	dest_folder="$(dk_call dk_basename "${dest_fullpath}")"
+	if ! dk_call dk_pathExists "${dest_fullpath}"; then
+		dk_call dk_makeDirectory "${dest_fullpath}"
 	fi
 	
-	dk_info "Extracting $src_filename . . ."
+	dk_call dk_info "Extracting $src_filename . . ."
 	
-	[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
+	[ -e "${src_extractPath}" ] && dk_call dk_delete "${src_extractPath}"
 	
-	dk_extract "$src_fullpath" "${src_extractPath}"
+	dk_call dk_extract "$src_fullpath" "${src_extractPath}"
 	
-	dk_getDirectories "${src_extractPath}" directories
-	dk_printVar directories
+	dk_call dk_getDirectories "${src_extractPath}" directories
+	dk_call dk_printVar directories
 	
-	dk_arrayLength directories dir_count
-	dk_printVar dir_count
+	dk_call dk_arrayLength directories dir_count
+	dk_call dk_printVar dir_count
 	
-	dk_getFiles "${src_extractPath}" files
-	dk_printVar files
+	dk_call dk_getFiles "${src_extractPath}" files
+	dk_call dk_printVar files
 	
-	dk_arrayLength files file_count
-	dk_printVar file_count
+	dk_call dk_arrayLength files file_count
+	dk_call dk_printVar file_count
 	
 	if [ ${dir_count} -lt 2 ]; then 
-		if [ ${file_count} -lt 1 ]; then
+		if [ ${file_count} -lt 2 ]; then
 			#rename/move EXTRACTED/root folder to dest path"
-			dk_move "${directories[0]}" "$dest_fullpath" OVERWRITE
+			dk_call dk_move "${directories[0]}" "$dest_fullpath" OVERWRITE
 			#[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
 		fi
 	fi
 	
 	# rename/move EXTRACTED folder to dest path
-	dk_move "${src_extractPath}" "$dest_fullpath" OVERWRITE
+	dk_call dk_move "${src_extractPath}" "$dest_fullpath" OVERWRITE
 	#[ -e "${src_extractPath}" ] && dk_delete "${src_extractPath}"
 }
 
@@ -63,11 +62,11 @@ dk_smartExtract() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
-	dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
-	dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
 	
-	dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
-	dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"
-	dk_smartExtract "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6"
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6"
 }
