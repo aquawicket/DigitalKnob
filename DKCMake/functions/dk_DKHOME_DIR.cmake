@@ -16,8 +16,15 @@ function(dk_DKHOME_DIR)
 	### DKHOME_DIR ###
 	if(DEFINED ENV{WSLENV})
 		dk_echo("Using WSL")
-		#execute_process(COMMAND cmd.exe /c "echo %HOMEDRIVE%" OUTPUT_VARIABLE HOMEDRIVE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
+		execute_process(COMMAND cmd.exe /c "echo %HOMEDRIVE%" OUTPUT_VARIABLE HOMEDRIVE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
 		set(HOMEDRIVE "/mnt/c")
+		
+		#### TODO ####
+		#string(SUBSTRING "${HOMEDRIVE}" 0 1 DRIVE)
+		#dk_toLower(${DRIVE} drive)
+		#dk_set(HOMEDRIVE "/mnt/${drive}")
+		##############
+		
 		execute_process(COMMAND cmd.exe /c "echo %HOMEPATH%" OUTPUT_VARIABLE HOMEPATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 		dk_replaceAll("${HOMEPATH}" "\\" "/" HOMEPATH)
 		dk_set(DKHOME_DIR "${HOMEDRIVE}${HOMEPATH}")
