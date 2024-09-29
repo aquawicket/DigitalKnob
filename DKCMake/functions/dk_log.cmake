@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 dk_if(NOT DEFINED ENABLE_dk_log "set(ENABLE_dk_log  1				CACHE INTERNAL '')")

@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 return()
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution

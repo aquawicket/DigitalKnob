@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -897,12 +897,13 @@ if(NOT RASPBERRY)
 	# Create windows shortcut for WSL
 	if(DEFINED ENV{WSLENV})
 		dk_info("creating WSL shortcut")
+		set(WSL_EXE "C:/Windows/System32/wsl.exe")
 		if(DEBUG)
 			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
-			dk_callDKPowershell(dk_createShortcut "${SHORTCUT_PATH}" "wsl ${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
+			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
 		elseif(RELEASE)
 			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
-			dk_callDKPowershell(dk_createShortcut "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" "wsl ${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}")
+			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}")
 		endif()
 	endif()
 	

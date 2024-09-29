@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 ## https://github.com/icculus/smpeg.git
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz

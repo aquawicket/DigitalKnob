@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
@@ -40,7 +40,5 @@ function(DKTEST)
 	dk_validate(DKDOWNLOAD_DIR  "dk_DIGITALKNOB_DIR()")
 	
 	#dk_createShortcut("${DKDESKTOP_DIR}/digitalknob.lnk" "C:/Users/Administrator/digitalknob")
-	#dk_createShortcut("${DKDESKTOP_DIR}/HelloWorld.lnk" "C:/Users/Administrator/digitalknob")
 	dk_createShortcut("${DKDESKTOP_DIR}/HelloWorld.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP")
-	#dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
 endfunction()
