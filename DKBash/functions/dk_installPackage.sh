@@ -4,25 +4,24 @@
 ##################################################################################
 # dk_installPackage(package)
 #
+#   https://en.wikipedia.org/wiki/List_of_software_package_management_systems
+#   https://en.wikipedia.org/wiki/Package_manager
+#   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
 	dk_debugFunc 1
-
-	[ -n "$(command -v "${1}")" ] && return    # 
+	
 	#if dk_call dk_packageInstalled ${1}; then
 	#	dk_call dk_warning "${1} already installed"
-	#	return $(false);
+	#	return $(true);
 	#fi
 	
-	dk_call dk_info "installing ${1}. . ."
-	# https://en.wikipedia.org/wiki/List_of_software_package_management_systems
-	# https://en.wikipedia.org/wiki/Package_manager
-	# https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
+	dk_call dk_commandExists ${1} && return $(true)
 	
+	dk_call dk_info "installing ${1}. . ."
 	if dk_call dk_commandExists apk; then
 		dk_call apk add "${1}"					# Alpine Package Keeper (alpine linux)
 	elif dk_call dk_commandExists apt-get; then
-		dk_call dk_echo "sudo apt-get -y install '${1}'"
 		dk_call apt-get -y install "${1}"		# Apt-get (debian)
 	elif dk_call dk_commandExists apt; then	
 		dk_call apt -y install "${1}"			# Apt (debian)
@@ -53,6 +52,8 @@ dk_installPackage() {
 	else
 		dk_call dk_error "ERROR: no package managers found"
 	fi
+	
+	dk_commandExists ${1} || dk_fatal "${1}: command not found"
 }
 
 

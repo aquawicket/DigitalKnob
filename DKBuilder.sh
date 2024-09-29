@@ -1,6 +1,6 @@
 #!/bin/sh
 ###### DKBuilder ######
-[ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export dksudo=" "
+[ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 
 ###### DKINIT ######
 export DKSCRIPT_PATH="$0"

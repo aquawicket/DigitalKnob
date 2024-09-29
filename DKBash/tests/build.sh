@@ -100,7 +100,7 @@ dk_buildMain() {
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-		${dksudo} chown -R "$LOGNAME" "$HOME"
+		${SUDO_EXE} chown -R "$LOGNAME" "$HOME"
 	fi
 
 	dk_printVar SHLVL			# https://stackoverflow.com/a/4511483/688352
@@ -1092,9 +1092,9 @@ dk_validate_sudo() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if command -v "sudo" >/dev/null; then
-		dksudo="sudo"
+		SUDO_EXE="sudo"
 	fi
-	${dksudo} echo
+	${SUDO_EXE} echo
 }
 
 

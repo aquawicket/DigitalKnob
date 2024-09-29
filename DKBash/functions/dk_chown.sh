@@ -8,7 +8,7 @@ dk_chown() {
 	dk_debugFunc 1
 	
 	[ -n "${USER-}" ] && DKUSERNAME=${USER} || DKUSERNAME=${USERNAME}	
-	${dksudo} chown -R ${DKUSERNAME} "${1}"
+	${SUDO_EXE} chown -R ${DKUSERNAME} "${1}"
 }
 
 

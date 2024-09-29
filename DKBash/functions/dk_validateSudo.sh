@@ -9,9 +9,9 @@ dk_validateSudo() {
 	dk_debugFunc 0
 
 	if command -v "sudo" >/dev/null 2>&1; then
-		dksudo="sudo"
+		SUDO_EXE="sudo"
 	fi
-	${dksudo-} echo
+	${SUDO_EXE-} echo
 }
 
 

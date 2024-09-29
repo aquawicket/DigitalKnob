@@ -8,8 +8,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installPackage
     call dk_debugFunc 0
  setlocal
- 
-	%dk_call% dk_todo "dk_installPackage[%*]"
+	%dk_call% dk_debug "dk_installPackage[%*]"
 	
 ::  [ -n "$(command -v "${1}")" ] && return    # 
 ::  #if dk_call dk_packageInstalled ${1}; then

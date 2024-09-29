@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_getDirectories
     call dk_debugFunc 2
  setlocal
+	::%dk_call% dk_debug "dk_getDirectories[%~1, %~2]"
 	%dk_call% dk_assertPath "%~1"
  
-	::%dk_call% dk_verbose "dk_getDirectories[%~1, %~2]"
     %dk_call% dk_replaceAll "%~1" "/" "\" _path_
     set /A i=0
 
