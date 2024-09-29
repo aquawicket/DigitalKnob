@@ -9,7 +9,6 @@ function Global:dk_DKBRANCH_DIR() {
 	dk_debugFunc 0
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
-	
 	$FOLDER = dk_call dk_basename "$(pwd)"
 	$global:DKBRANCH="Development"
 	

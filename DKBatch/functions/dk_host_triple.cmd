@@ -44,13 +44,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "%host_triple%_host=1"
 	:end_host_env
     
-::%DEBUG%
+%DEBUG%
 	%dk_call% dk_printVar host_os
 	%dk_call% dk_printVar %host_os%_host
+	
 	%dk_call% dk_printVar host_arch 
 	%dk_call% dk_printVar %host_arch%_host
+	%dk_call% dk_printVar %host_os%_%host_arch%_host
+	
 	%dk_call% dk_printVar host_env
 	%dk_call% dk_printVar %host_env%_host
+	%dk_call% dk_printVar %host_os%_%host_arch%_%host_env%_host
+	
 	%dk_call% dk_printVar host_triple
 	%dk_call% dk_printVar %host_triple%_host
 %endfunction%
@@ -66,5 +71,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_host_triple
+	
+	
+	%dk_call% dk_printVar host_os
+	%dk_call% dk_printVar %host_os%_host
+	
+	%dk_call% dk_printVar host_arch 
+	%dk_call% dk_printVar %host_arch%_host
+	%dk_call% dk_printVar %host_os%_%host_arch%_host
+	
+	%dk_call% dk_printVar host_env
+	%dk_call% dk_printVar %host_env%_host
+	%dk_call% dk_printVar %host_os%_%host_arch%_%host_env%_host
+	
 	%dk_call% dk_printVar host_triple
+	%dk_call% dk_printVar %host_triple%_host
 %endfunction%
