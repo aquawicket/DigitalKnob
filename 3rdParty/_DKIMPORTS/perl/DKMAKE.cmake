@@ -14,17 +14,18 @@ if(ANDROID_HOST)
 		dk_debug(PERL_EXE)
 		dk_command(${PERL_EXE} --version)
 	endif()
-	
 endif()
 
 
 if(MSYSTEM)
 	dk_depend(msys2)
-	
 	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
+	
 	dk_depend(bash)
 	dk_command(${BASH_EXE} -c "command -v perl" OUTPUT_VARIABLE PERL_EXE NO_HALT) # BASH_ENV)
+	
 	if(PERL_EXE)
+		dk_depend(cygpath)
 		dk_command(${CYGPATH_EXE} -m ${PERL_EXE} OUTPUT_VARIABLE PERL_EXE)
 	endif()
 	

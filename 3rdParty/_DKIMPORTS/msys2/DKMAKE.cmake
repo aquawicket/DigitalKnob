@@ -82,7 +82,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	endif()
 	
 	### Create Bash Exports ###
-	dk_validate(CYGPATH_EXE  "dk_depend(cygpath)")
+	dk_depend(cygpath)
 	dk_command(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_UNIXPATH)
 	
 	dk_set(CLANG32_BASH_EXPORTS		"export PATH=${MSYS2_UNIXPATH}/clang32/bin:$PATH")

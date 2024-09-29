@@ -36,6 +36,7 @@ dk_generate() {
 	#declare -a CMAKE_ARGS
 	#set --											#clear the positional parameters
 	CMAKE_ARGS=()
+	dk_call dk_arrayPush CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_}"
 	if [ "${TYPE}" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		#set -- "${@}" "-DDEBUG=ON"

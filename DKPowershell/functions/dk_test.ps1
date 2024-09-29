@@ -6,7 +6,7 @@ if(!$dk_test){ $dk_test = 1 } else{ return }
 #
 #
 function GLOBAL:dk_test() {
-	dk_debugFunc 0
+	dk_debugFunc 0 99
 
 	dk_call dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 	dk_call dk_echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}"
@@ -17,11 +17,16 @@ function GLOBAL:dk_test() {
 	dk_call dk_echo "__ARGV__      = $(__ARGV__)"
 	dk_call dk_echo "__CALLER__    = $(__CALLER__)"
 	#if($args[0]){ dk_call dk_echo "args[0]      = ${args[0]}" }
-	if($args[0]){ $arg0 = $args[0]; dk_call dk_echo "args[0]      = $arg0" }
-	if($args[1]){ $arg1 = $args[1]; dk_call dk_echo "args[1]      = $arg1" }
-	if($args[2]){ $arg2 = $args[2]; dk_call dk_echo "args[2]      = $arg2" }
-	if($args[3]){ $arg3 = $args[3]; dk_call dk_echo "args[3]      = $arg3" }
-	if($args[4]){ $arg4 = $args[4]; dk_call dk_echo "args[4]      = $arg4" }
+	
+	$all_args = $PsBoundParameters.Values + ${args}
+	if($all_args){ dk_call dk_debug "all_args = $all_args"   }
+	if($args)    { dk_call dk_debug "args     = $args"       }
+	if($args[0]) { dk_call dk_debug "args[0]  = $($args[0])" }
+	if($args[1]) { dk_call dk_debug "args[1]  = $($args[1])" }
+	if($args[2]) { dk_call dk_debug "args[2]  = $($args[2])" }
+	if($args[3]) { dk_call dk_debug "args[3]  = $($args[3])" }
+	if($args[4]) { dk_call dk_debug "args[4]  = $($args[4])" }
+	if($args[5]) { dk_call dk_debug "args[5]  = $($args[5])" }
 	
 	
 	return "rtr_value"
@@ -35,5 +40,5 @@ function GLOBAL:dk_test() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_test
+	dk_call dk_test abc 123 "def" "456" 'ghi' '789'
 }

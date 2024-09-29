@@ -11,16 +11,19 @@ function(dk_createShortcut shortcut_path target_path) # arguments
 	#dk_debug("dk_createShortcut(${ARGV})")
 	
 	set(arguments ${ARGN})
-	if(DEFINED ENV{WSLENV})
-		execute_process(COMMAND wslpath -m "${shortcut_path}" OUTPUT_VARIABLE shortcut_path COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(WSL)
+		#execute_process(COMMAND ${WSLPATH_EXE} -m "${shortcut_path}" OUTPUT_VARIABLE shortcut_path COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+		#dk_replaceAll("${shortcut_path}" "/mnt/c" "C:" shortcut_path)
+		#dk_replaceAll("${target_path}" "/mnt/c" "C:" target_path)
 	endif()
 
 	if(arguments)
-		dk_callDKPowershell(dk_createShortcut '${shortcut_path}' '${target_path}' '${arguments}')
+		dk_callDKPowershell(dk_createShortcut "${shortcut_path}" "${target_path}" ${arguments})
 	else()
-		dk_callDKPowershell(dk_createShortcut '${shortcut_path}' '${target_path}')
+		dk_callDKPowershell(dk_createShortcut "${shortcut_path}" "${target_path}")
 	endif()
 	
+	#FIXME: This does not work
 	#if(NOT EXISTS "${shortcut_path}")
 	#	dk_fatal("dk_createShortcut failed.  shortcut_path:${shortcut_path} not found")
 	#endif()

@@ -1,5 +1,5 @@
 Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . 'DK.ps1' }
+if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR\DK.ps1 } else { . '\DK.ps1' }
 if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 
 ##################################################################################
@@ -8,25 +8,25 @@ if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 #
 function Global:dk_createShortcut() {
 	dk_debugFunc 0 99
-	dk_call dk_debug("dk_createShortcut(${args})")
-	#$all_args = $PsBoundParameters.Values + ${args} 
-
-#	dk_call dk_debug("args = $args")
-#	dk_call dk_debug("args[0] = $($args[0])")
-#	dk_call dk_debug("args[1] = $($args[1])")
-#	dk_call dk_debug("args[2] = $($args[2])")
+	#dk_call dk_debug("dk_createShortcut(${args})")
 	
 	$shortcut_path=$args[0]
 	$target_path=$args[1]
 	$arguments=$args[2]
 	
+	$shortcut_path = $shortcut_path -replace "/mnt/c", "C:"
 	$shortcut_path = $shortcut_path -replace "/", "\\"
+	
+	$target_path = $target_path -replace "/mnt/c", "C:"
 	$target_path = $target_path -replace "/", "\\"
 	
-	if(dk_call dk_pathExists "${shortcut_path}"){ dk_call dk_warning "${shortcut_path} already exists"; return; }
+	if(dk_call dk_pathExists "${shortcut_path}"){ 
+		dk_call dk_warning "${shortcut_path} already exists, deleting..."
+		dk_call dk_delete "${shortcut_path}"
+	}
 	
 	$WshShell = New-Object -comObject WScript.Shell
-	$Shortcut = $WshShell.CreateShortcut(${shortcut_path})
+	$Shortcut = $WshShell.CreateShortcut("${shortcut_path}")
 	
 	$Shortcut.Arguments = ${arguments}
 #	$Shortcut.Description = "Shortcut Script";

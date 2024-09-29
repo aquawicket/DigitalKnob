@@ -90,9 +90,11 @@ endif()
 
 
 
-dk_command(${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION)
+execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
-dk_set(CMAKE_VERSION ${CMAKE_VERSION})
+dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
+
+
 
 return()
 
@@ -190,6 +192,7 @@ if(MSYSTEM)
 	dk_command(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)
 	#dk_findProgram(CMAKE_EXE cmake)
 	if(CMAKE_EXE)
+		dk_depend(cygpath)
 		dk_command(${CYGPATH_EXE} -m ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE)
 	endif()
 	

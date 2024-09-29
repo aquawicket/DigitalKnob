@@ -236,6 +236,10 @@ endfunction()
 function(dk_setVariables)
 
 	##### Set ProgramFiles_<> variables ######
+	if(DEFINED "ENV{WSLENV}")
+		set(WSL 1 CACHE INTERNAL "")
+		dk_echo("CMake using WSL")
+	endif()
 	if(DEFINED "ENV{HOMEDRIVE}")
 		# TODO
 	endif()
@@ -250,7 +254,6 @@ function(dk_setVariables)
 	#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
 	#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
 	#endif()
-	
 endfunction()
 
 

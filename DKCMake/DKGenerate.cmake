@@ -869,7 +869,7 @@ if(NOT RASPBERRY)
 	
 	############# Create .desktop Icon Files / Install ################
 	if(DEBUG)
-		dk_set(DESKTOP_FILE
+		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
 			"Version=1.0\n"
@@ -881,7 +881,7 @@ if(NOT RASPBERRY)
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
 		dk_fileWrite("${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	elseif(RELEASE)
-		dk_set(DESKTOP_FILE
+		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
 			"Version=1.0\n"
@@ -891,18 +891,18 @@ if(NOT RASPBERRY)
 			"Exec=${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}\n"
 			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
 		list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-		dk_fileWrite(${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop ${DESKTOP_FILE})
+		dk_fileWrite("${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.desktop" "${DESKTOP_FILE}")
 	endif()
 	
 	# Create windows shortcut for WSL
-	if(DEFINED ENV{WSLENV})
+	if(WSL)
 		dk_info("creating WSL shortcut")
-		set(WSL_EXE "C:/Windows/System32/wsl.exe")
+		dk_depend(wsl)
 		if(DEBUG)
-			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
 			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
 		elseif(RELEASE)
-			execute_process(COMMAND wslpath -m "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
 			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}")
 		endif()
 	endif()
