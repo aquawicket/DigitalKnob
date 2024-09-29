@@ -63,7 +63,8 @@ else()
 	
 	### GENERATE / CONFIGURE ###
 	dk_cd			(${GIFLIB_DIR})
-	dk_queueCommand	(bash -c "autoreconf -f -i")
+	dk_depend(bash)
+	dk_queueCommand	(${BASH_EXE} -c "autoreconf -f -i")
 
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")

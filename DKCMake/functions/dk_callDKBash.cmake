@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 function(dk_callDKBash func rtn_var)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_validate(BASH_EXE "dk_depend(git)")
+	dk_depend(bash)
 	dk_validate(DKBASH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 	execute_process(COMMAND ${BASH_EXE} -c "dk_messageBox.cmd" rtn_var ${ARGN} & echo %rtn_var% WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output_variable)
 	dk_debug("output_variable = ${output_variable}")

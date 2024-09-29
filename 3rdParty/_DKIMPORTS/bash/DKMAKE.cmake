@@ -20,7 +20,8 @@ endif()
 ### Tiny Core Linux ###
 if(TINYCORE)
 	dk_command(tce-load -wi bash)
-	dk_findProgram(BASH_EXE bash)
 endif()
 
+
+dk_findProgram(BASH_EXE bash)
 dk_assertPath(${BASH_EXE})

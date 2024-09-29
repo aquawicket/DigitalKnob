@@ -6,7 +6,7 @@ dk_load(dk_builder)
 ### Msys2 ###
 if(MSYSTEM)
 	#dk_command(${PACMAN_EXE} -S wget --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-	dk_findProgram(WGET_EXE bash "${MSYS2_DIR}/usr/bin")
+	dk_findProgram(WGET_EXE wget "${MSYS2_DIR}/usr/bin")
 endif()
 
 
@@ -14,5 +14,4 @@ endif()
 if(TINYCORE)
 	dk_command(tce-load -wi wget)
 	dk_findProgram(WGET_EXE wget)
-	dk_debug(WGET_EXE)
 endif()

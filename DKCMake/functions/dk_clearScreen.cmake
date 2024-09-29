@@ -26,7 +26,8 @@ function(dk_clearScreen)
 	endif()
 	
 	### Bash ###
-	find_program(BASH_EXE bash)
+	#find_program(BASH_EXE bash)
+	dk_depend(bash)
 	if(BASH_EXE)
 		execute_process(COMMAND clear)
 		return()

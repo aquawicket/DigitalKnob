@@ -37,7 +37,8 @@ function(dk_pause)
 	endif()
 	
 	###### Bash ######
-	find_program(BASH_EXE bash)
+	dk_depend(bash)
+	#find_program(BASH_EXE bash)
 	if(BASH_EXE)
 		execute_process(COMMAND ${BASH_EXE} read -p)
 		return()

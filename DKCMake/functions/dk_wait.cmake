@@ -29,7 +29,8 @@ function(dk_wait)
 	# We need to find a true way to determine if we are in a cmd, powershell or unix sh / bash type shell.
 	math(EXPR timeout_p1 ${timeout}+1)
 	
-	find_program(BASH_EXE bash)
+	dk_depend(bash)
+	#find_program(BASH_EXE bash)
 	dk_depend(cmd)
 	#find_program(CMD_EXE cmd.exe)
 	if(BASH_EXE) #if(UNIX_HOST OR MINGW)

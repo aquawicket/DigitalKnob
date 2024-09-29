@@ -11,30 +11,30 @@ function(dk_commandExists shell commandName rtn_var)
 		
 	## Test for command in BASH	
 	if("${shell}" STREQUAL "BASH")
-		dk_validate(BASH_EXE "dk_depend(git)")
-		dk_command(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE output_variable)
-		set(${rtn_var} ${output_variable} PARENT_SCOPE)
-		dk_printVar(output_variable)
+		dk_depend(bash)
+		execute_process(COMMAND ${BASH_EXE} -c "command -v ${commandName}" OUTPUT_VARIABLE output)
+		set(${rtn_var} ${output} PARENT_SCOPE)
+		#dk_printVar(output)
 		return()
 	
 	## Test for command in CMD
 	elseif("${shell}" STREQUAL "CMD")
-		dl_validate(CMD_EXE "dk_depend(cmd)")
+		dk_depend(cmd)
 		dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
-		dk_command(${CMD_EXE} /c call "${DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output_variable)
-		set(${rtn_var} ${output_variable} PARENT_SCOPE)
-		dk_printVar(output_variable)
+		execute_process(COMMAND ${CMD_EXE} /c call "${DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
+		set(${rtn_var} ${output} PARENT_SCOPE)
+		#dk_printVar(output)
 		return()
 		
 	## Test for command in CMAKE
 	elseif("${shell}" STREQUAL "CMAKE")
 		if(COMMAND ${commandName})
-			set(output_variable TRUE)
+			set(output TRUE)
 		else()
-			set(output_variable FALSE)
+			set(output FALSE)
 		endif()
-		set(${rtn_var} ${output_variable} PARENT_SCOPE)
-		dk_printVar(output_variable)
+		set(${rtn_var} ${output} PARENT_SCOPE)
+		#dk_printVar(output)
 		return()
 		
 	## Error

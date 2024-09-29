@@ -35,16 +35,16 @@ function(dk_bashEnv)
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	
 	### BASH_EXE ###
-	if(NOT EXISTS ${BASH_EXE})
-		if(WIN_HOST)
-			if(NOT EXISTS ${MSYS2_DIR}/msys2.exe)
-				dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
-			endif()
-			set(BASH_EXE "${MSYS2_DIR}/usr/bin/bash.exe")
-		else()
-			set(BASH_EXE bash)
-		endif()
-	endif()
+#	if(NOT EXISTS ${BASH_EXE})
+#		if(WIN_HOST)
+#			if(NOT EXISTS ${MSYS2_DIR}/msys2.exe)
+#				dk_load(${DKIMPORTS_DIR}/msys2/DKMAKE.cmake)
+#			endif()
+#			set(BASH_EXE "${MSYS2_DIR}/usr/bin/bash.exe")
+#		else()
+#			set(BASH_EXE bash)
+#		endif()
+#	endif()
 	
 	### BASH_COMMANDS ###
 #	if(CURRENT_PLUGIN_DIR)
@@ -95,6 +95,7 @@ function(dk_bashEnv)
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
+	dk_depend(bash)
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 	if(OUTPUT_VARIABLE)
