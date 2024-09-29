@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 # dk_callDKPowershell(func, args)
 #
 #
-function(dk_callDKPowershell func)
+function(dk_callDKPowershell func) #args
 	dk_debugFunc("\${ARGV}")
 	math(EXPR ARGC_LAST "${ARGC}-1")
 	set(ARGV_LAST ${ARGV${ARGC_LAST}})
