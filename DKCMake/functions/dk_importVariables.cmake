@@ -69,7 +69,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	# PLUGIN_GIT_NAME			- from PLUGIN_GIT_FILENAME											: zlib
 	# PLUGIN_GIT_BRANCH			- from default:master OR arg:BRANCH									: master
 	
-	# PLUGIN_INSTALL_URL        - from PLUGIN_URL													: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
 	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
 	# PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
@@ -81,7 +80,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# <CURRENT_PLUGIN_DIR>		- from PLUGIN_DIR								:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
-	# <PLUGIN>_URL				- from PLUGIN_INSTALL_URL						:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
 	# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
 	# <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
@@ -174,10 +173,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 
 	
 	### PLUGIN_INSTALL VARIABLES ###
-	if(NOT PLUGIN_INSTALL_URL)
-		set(PLUGIN_INSTALL_URL ${PLUGIN_URL})									
-		dk_printVar(PLUGIN_INSTALL_URL)											# PLUGIN_INSTALL_URL		: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	endif()
 	if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_IMPORT_NAME)
 			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
@@ -222,12 +217,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 			set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	
 		endif()
 		dk_printVar(PLUGIN_INSTALL_FOLDER)										# PLUGIN_INSTALL_FOLDER		: zlib-master
-	endif()
-	if(NOT PLUGIN_INSTALL_URL)
-		if(DK3RDPARTY_DIR)
-			set(PLUGIN_INSTALL_URL ${PLUGIN_URL})										
-		endif()
-		dk_printVar(PLUGIN_INSTALL_URL)											# PLUGIN_INSTALL_URL		: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	endif()
 	if(NOT PLUGIN_INSTALL_ROOT)
 		if(DK3RDPARTY_DIR)
@@ -279,7 +268,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#dk_printVar(PLUGIN_GIT_BRANCH)
 	#dk_printVar(PLUGIN_GIT_TAG)
 	#dk_printVar(PLUGIN_INSTALL)
-	#dk_printVar(PLUGIN_INSTALL_URL)
 	#dk_printVar(PLUGIN_INSTALL_NAME)
 	#dk_printVar(PLUGIN_INSTALL_VERSION)
 	#dk_printVar(PLUGIN_INSTALL_FOLDER)
@@ -331,8 +319,8 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	
 	# <PLUGIN>_URL
 	#if(NOT ${PLUGIN_VAR_PREFIX}_URL)
-		if(PLUGIN_INSTALL_URL)
-			dk_set(${PLUGIN_VAR_PREFIX}_URL ${PLUGIN_INSTALL_URL})
+		if(PLUGIN_URL)
+			dk_set(${PLUGIN_VAR_PREFIX}_URL ${PLUGIN_URL})
 			dk_printVar(${PLUGIN_VAR_PREFIX}_URL)								# ZLIB_URL					: https://github.com/madler/zlib/archive/refs/heads/master.zip
 		endif()
 	#endif()
