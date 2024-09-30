@@ -84,7 +84,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
 	# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
 	# <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
-	# <PLUGIN>_NAME				- from PLUGIN_INSTALL_FOLDER					:ZLIB_NAME			: zlib-master
 	# <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	# <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
 	# <PLUGIN>_TAG				- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
@@ -97,7 +96,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	
 	##############################################
 	############ PLUGIN_URL VARIABLES ############
-	##############################################							################################# EXAMPLE ##########################
+	##############################################						################################# EXAMPLE ##########################
 	# PLUGIN_URL
 	dk_assert(PLUGIN_URL)
 	dk_printVar(PLUGIN_URL)												# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
@@ -309,9 +308,9 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(CURRENT_PLUGIN_FOLDER)								# CURRENT_PLUGIN_FOLDER		: zlib-master
 	endif()
 	
-	# <PLUGIN>_NAME
-	dk_set(${PLUGIN_PREFIX}_NAME ${PLUGIN_INSTALL_FOLDER})
-	dk_printVar(${PLUGIN_PREFIX}_NAME)									# ZLIB_NAME					: zlib-master
+#	# <PLUGIN>_NAME
+#	dk_set(${PLUGIN_PREFIX}_NAME ${PLUGIN_INSTALL_FOLDER})
+#	dk_printVar(${PLUGIN_PREFIX}_NAME)									# ZLIB_NAME					: zlib-master
 
 	# <PLUGIN>_IMPORT_NAME
 	dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)		
@@ -319,12 +318,16 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_printVar(${PLUGIN_PREFIX}_IMPORT_NAME)							# ZLIB_IMPORT_NAME			: zlib
 		
 	# <PLUGIN>_BRANCH
-	dk_set(${PLUGIN_PREFIX}_BRANCH ${PLUGIN_GIT_BRANCH})
-	dk_printVar(${PLUGIN_PREFIX}_BRANCH)								# ZLIB_BRANCH				: master
+	if(PLUGIN_GIT_BRANCH)
+		dk_set(${PLUGIN_PREFIX}_BRANCH ${PLUGIN_GIT_BRANCH})
+		dk_printVar(${PLUGIN_PREFIX}_BRANCH)							# ZLIB_BRANCH				: master
+	endif()
 	
 	# <PLUGIN>_TAG
-	dk_set(${PLUGIN_PREFIX}_TAG ${PLUGIN_GIT_TAG})
-	dk_printVar(${PLUGIN_PREFIX}_TAG)									# ZLIB_TAG					:
+	if(PLUGIN_GIT_TAG)
+		dk_set(${PLUGIN_PREFIX}_TAG ${PLUGIN_GIT_TAG})
+		dk_printVar(${PLUGIN_PREFIX}_TAG)								# ZLIB_TAG					:
+	endif()
 	
 	
 	
