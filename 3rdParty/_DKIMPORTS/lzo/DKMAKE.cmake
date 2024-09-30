@@ -9,5 +9,5 @@ dk_load(dk_builder)
 # https://github.com/eyeseaevan/lzo-2.10.git
 
 
-#dk_import(https://github.com/eyeseaevan/lzo-2.10.git)
-dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/refs/heads/master.zip)
+dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/f289550313cd59695f238990846cd7f9cefed8cd.zip)
+#dk_import(https://github.com/SyntaxSnack/lzo-2.10/archive/refs/heads/master.zip)

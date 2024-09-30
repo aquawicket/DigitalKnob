@@ -16,8 +16,6 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/GNOME/libxml2.git)
-#dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
 dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
 if(NOT EXISTS ${LIBXML2}/configure)
 	dk_depend(autoconf)
@@ -29,13 +27,13 @@ endif()
 ### LINK ###
 dk_define				(LIBXML_STATIC)
 dk_include				(${LIBXML2_DIR})
-dk_include				(${LIBXML2_DIR}/include 							LIBXML2_INCLUDE_DIR)
+dk_include				(${LIBXML2_DIR}/include 				LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2_CONFIG_DIR}								LIBXML2_INCLUDE_DIR2)
+	dk_include			(${LIBXML2_CONFIG_DIR}					LIBXML2_INCLUDE_DIR2)
 else()
-	DEBUG_dk_include    (${LIBXML2_DEBUG_DIR}								LIBXML2_INCLUDE_DIR2)
-	RELEASE_dk_include  (${LIBXML2_RELEASE_DIR}								LIBXML2_INCLUDE_DIR2)
+	DEBUG_dk_include    (${LIBXML2_DEBUG_DIR}					LIBXML2_INCLUDE_DIR2)
+	RELEASE_dk_include  (${LIBXML2_RELEASE_DIR}					LIBXML2_INCLUDE_DIR2)
 endif()
 
 if(MSVC)

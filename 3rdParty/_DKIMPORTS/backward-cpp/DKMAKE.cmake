@@ -5,8 +5,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/bombela/backward-cpp.git)
-dk_import(https://github.com/bombela/backward-cpp/archive/refs/heads/master.zip)
+dk_import(https://github.com/bombela/backward-cpp/archive/51f0700452cf71c57d43c2d028277b24cde32502.zip)
+#dk_import(https://github.com/bombela/backward-cpp/archive/refs/heads/master.zip)
 
 
 

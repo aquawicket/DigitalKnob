@@ -6,7 +6,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
+dk_import(https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip)
+#dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include				(${ZLIB_DIR}							ZLIB_INCLUDE_DIR)
