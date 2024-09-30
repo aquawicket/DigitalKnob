@@ -42,66 +42,60 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#endif()
 	###################################################################
 	
-	#dk_printVar(ARGV)
-	### POPULATE VARIABLES ###
-	# PLUGIN_URL				- from arguments
-	# PLUGIN_URL_LIST			- from PLUGIN_URL
-	# PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST
-	# PLUGIN_URL_NODE(n)		- from PLUGIN_URL_LIST
-	# PLUGIN_URL_FILENAME   	- from PLUGIN_URL
-	# PLUGIN_URL_EXTENSION  	- from PLUGIN_URL_FILENAME
-	# PLUGIN_URL_FILE      		- from PLUGIN_URL_FILENAME
-	# PLUGIN_URL_FILE_LOWER 	- from PLUGIN_URL_FILE
-	# PLUGIN_URL_FILE_UPPER 	- from PLUGIN_URL_FILE
-	
-	# PLUGIN_IMPORT				- from CMAKE_CURRENT_LIST_DIR
-	# PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR
-	# PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH
-	# PLUGIN_IMPORT_NAME_LOWER	- from PLUGIN_IMPORT_NAME
-	# PLUGIN_IMPORT_NAME_UPPER	- from PLUGIN_IMPORT_NAME
-	
-	# PLUGIN_GIT				- from PLUGIN_URL
-	# PLUGIN_GIT_FILENAME		- from PLUGIN_URL
-	# PLUGIN_GIT_NAME			- from PLUGIN_GIT_FILENAME
-	# PLUGIN_GIT_NAME_LOWER 	- from PLUGIN_GIT_NAME
-	# PLUGIN_GIT_NAME_UPPER 	- from PLUGIN_GIT_NAME
-	
-	# PLUGIN_INSTALL_URL        - from PLUGIN_URL
-	# PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME
-	# PLUGIN_INSTALL_NAME_LOWER - from PLUGIN_INSTALL_NAME
-	# PLUGIN_INSTALL_NAME_UPPER - from PLUGIN_INSTALL_NAME
-	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE_LOWER and PLUGIN_IMPORT_NAME_LOWER
-	# PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION
-	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_FILE and PLUGIN_INSTALL_VERSION
-	
-	# <PLUGIN>					- from PLUGIN_IMPORT_NAME_UPPER
-	# <CURRENT_PLUGIN>			- from <PLUGIN>
-	# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH
-	# CURRENT_PLUGIN_DIR		- from PLUGIN_DIR
-	# <PLUGIN>_URL				- from PLUGIN_INSTALL_URL
-	# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME
-	# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION
-	# <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER
-	# <PLUGIN>_NAME				- from PLUGIN_INSTALL_FOLDER
-	# <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME_LOWER
-	# <PLUGIN>_BRANCH			- from PLUGIN_INSTALL_BRANCH
-	# <PLUGIN>_TAG				- from PLUGIN_INSTALL_TAG
-	# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH, triple
-	# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH, CONFIG_DIR
-	# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH,	BUILD_DIR
-	# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH,	DEBUG_DIR
-	# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH,	RELEASE_DIR
-	
-	dk_getParameter(NAME PLUGIN_INSTALL_NAME ${ARGV})			# myLibrary
-	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION ${ARGV})		# 1.0
-	dk_getParameter(FOLDER PLUGIN_INSTALL_FOLDER ${ARGV})		# myLibrary_1.0
-	dk_getParameter(ROOT PLUGIN_INSTALL_ROOT ${ARGV})			# C:\Users\Administrator\digitalknob\3rdParty
-	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})			# C:\Users\Administrator\digitalknob\3rdParty\myLibrary_1.0
+	dk_getParameter(NAME PLUGIN_INSTALL_NAME ${ARGV})			# zlib
+	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION ${ARGV})		# master
+	dk_getParameter(FOLDER PLUGIN_INSTALL_FOLDER ${ARGV})		# zlib-master
+	dk_getParameter(ROOT PLUGIN_INSTALL_ROOT ${ARGV})			# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})			# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})			# master
-	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})					# develop_bug_fix100
-
+	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})					# Release-1.0
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
-
+	
+	### POPULATE VARIABLES ###
+	# PLUGIN_URL				- from arg:PLUGIN_URL												: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
+	# PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST												: 8
+	# PLUGIN_URL_NODE(n)		- from PLUGIN_URL_LIST												: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
+	# PLUGIN_URL_FILENAME   	- from PLUGIN_URL													: master.zip
+	# PLUGIN_URL_EXTENSION  	- from PLUGIN_URL_FILENAME											: .zip
+	# PLUGIN_URL_FILE      		- from PLUGIN_URL_FILENAME											: master
+	
+	# PLUGIN_IMPORT				- from CMAKE_CURRENT_LIST_DIR										: 1
+	# PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	# PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH											: zlib
+	
+	# PLUGIN_GIT				- from PLUGIN_URL													: 1
+	# PLUGIN_GIT_FILENAME		- from PLUGIN_URL													: zlib
+	# PLUGIN_GIT_NAME			- from PLUGIN_GIT_FILENAME											: zlib
+	# PLUGIN_GIT_BRANCH			- from default:master OR arg:BRANCH									: master
+	
+	# PLUGIN_INSTALL_URL        - from PLUGIN_URL													: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
+	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
+	# PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
+	# PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:/Users/Administrator/digitalknob/Development/3rdParty
+	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_FILE and PLUGIN_INSTALL_VERSION					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	# PLUGIN_INSTALL_TAG		: from default: OR arg:TAG											: UNDEFINED
+	
+	# <PLUGIN>					- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	# <CURRENT_PLUGIN_DIR>		- from PLUGIN_DIR								:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	# <PLUGIN>_URL				- from PLUGIN_INSTALL_URL						:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
+	# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
+	# <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
+	# <PLUGIN>_NAME				- from PLUGIN_INSTALL_FOLDER					:ZLIB_NAME			: zlib-master
+	# <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
+	# <PLUGIN>_BRANCH			- from PLUGIN_INSTALL_BRANCH					:ZLIB_BRANCH		: master
+	# <PLUGIN>_TAG				- from PLUGIN_INSTALL_TAG						:ZLIB_TAG			: UNDEFINED
+	# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and triple			:ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
+	
+	
 
 	##############################################
 	###### VARIABLES PULLED FROM PLUGIN_URL ######
@@ -121,12 +115,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(PLUGIN_URL_EXTENSION)										# PLUGIN_URL_EXTENSION		: .zip
 		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				
 		dk_printVar(PLUGIN_URL_FILE)											# PLUGIN_URL_FILE			: master
-	endif()
-	if(PLUGIN_URL_FILE)
-		dk_toLower(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_LOWER)					
-		dk_printVar(PLUGIN_URL_FILE_LOWER)										# PLUGIN_URL_FILE_LOWER		: master
-		dk_toUpper(${PLUGIN_URL_FILE} PLUGIN_URL_FILE_UPPER)					
-		dk_printVar(PLUGIN_URL_FILE_UPPER)										# PLUGIN_URL_FILE_UPPER		: MASTER
 	endif()
 	if(PLUGIN_URL_LIST)
 		# split the url into list converting / to divider ;
@@ -164,12 +152,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)					
 		dk_printVar(PLUGIN_IMPORT_NAME)											# PLUGIN_IMPORT_NAME		: zlib
 	endif()
-	if(PLUGIN_IMPORT_NAME)
-		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)				
-		dk_printVar(PLUGIN_IMPORT_NAME_LOWER)									# PLUGIN_IMPORT_NAME_LOWER	: zlib
-		dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)
-		dk_printVar(PLUGIN_IMPORT_NAME_UPPER)									# PLUGIN_IMPORT_NAME_UPPER	: ZLIB
-	endif()
 
 
 
@@ -189,15 +171,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		endif()
 		dk_printVar(PLUGIN_GIT_BRANCH)											# PLUGIN_GIT_BRANCH			: master
 	endif()
-	if(PLUGIN_GIT_NAME)
-		dk_toLower(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)					
-		dk_printVar(PLUGIN_GIT_NAME_LOWER)										# PLUGIN_GIT_NAME_LOWER		: zlib
-		dk_toUpper(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_UPPER)					
-		dk_printVar(PLUGIN_GIT_NAME_UPPER)										# PLUGIN_GIT_NAME_UPPER		: ZLIB
-	endif()
-	
-	
-	
+
 	
 	### PLUGIN_INSTALL VARIABLES ###
 	if(NOT PLUGIN_INSTALL_URL)
@@ -215,14 +189,10 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		dk_printVar(PLUGIN_INSTALL_NAME)										# PLUGIN_INSTALL_NAME		: zlib
 	endif()
 	
-	if(PLUGIN_INSTALL_NAME)
-		dk_toLower(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_LOWER)			
-		dk_printVar(PLUGIN_INSTALL_NAME_LOWER)									# PLUGIN_INSTALL_NAME_LOWER	: zlib
-		dk_toUpper(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME_UPPER)			
-		dk_printVar(PLUGIN_INSTALL_NAME_LOWER)									# PLUGIN_INSTALL_NAME_UPPER	: ZLIB
-	endif()
 	if(NOT PLUGIN_INSTALL_VERSION)
-		if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_URL_FILE_LOWER)
+		if(PLUGIN_IMPORT_NAME AND PLUGIN_URL_FILE)
+			dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)	
+			dk_toLower(${PLUGIN_URL_FILE}    PLUGIN_URL_FILE_LOWER)
 			# deduct the plugin version		
 			dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)	
 			if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
@@ -245,7 +215,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
 			endif()
 		endif()
-		dk_printVar(PLUGIN_INSTALL_VERSION)										# PLUGIN_INSTALL_VERSION	:
+		dk_printVar(PLUGIN_INSTALL_VERSION)										# PLUGIN_INSTALL_VERSION	: master
 	endif()																				
 	if(NOT PLUGIN_INSTALL_FOLDER)		
 		if(PLUGIN_INSTALL_VERSION)
@@ -263,7 +233,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		if(DK3RDPARTY_DIR)
 			set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})			
 		endif()
-		dk_printVar(PLUGIN_INSTALL_ROOT)										# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+		dk_printVar(PLUGIN_INSTALL_ROOT)										# PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
 	endif()
 	if(NOT PLUGIN_INSTALL_PATH)
 		if(PLUGIN_INSTALL_ROOT)
@@ -299,19 +269,13 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#dk_printVar(PLUGIN_URL_FILENAME)
 	#dk_printVar(PLUGIN_URL_EXTENSION)
 	#dk_printVar(PLUGIN_URL_FILE)
-	#dk_printVar(PLUGIN_URL_FILE_LOWER)
-	#dk_printVar(PLUGIN_URL_FILE_UPPER)
 	#dk_printVar(PLUGIN_URL_LENGTH)
 	#dk_printVar(PLUGIN_IMPORT)
 	#dk_printVar(PLUGIN_IMPORT_PATH)
 	#dk_printVar(PLUGIN_IMPORT_NAME)
-	#dk_printVar(PLUGIN_IMPORT_NAME_LOWER)
-	#dk_printVar(PLUGIN_IMPORT_NAME_UPPER)
 	#dk_printVar(PLUGIN_GIT)
 	#dk_printVar(PLUGIN_GIT_FILENAME)
 	#dk_printVar(PLUGIN_GIT_NAME)
-	#dk_printVar(PLUGIN_GIT_NAME_LOWER)
-	#dk_printVar(PLUGIN_GIT_NAME_UPPER)
 	#dk_printVar(PLUGIN_GIT_BRANCH)
 	#dk_printVar(PLUGIN_GIT_TAG)
 	#dk_printVar(PLUGIN_INSTALL)
@@ -322,12 +286,15 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#dk_printVar(PLUGIN_INSTALL_PATH)
 	
 	if(PLUGIN_IMPORT AND PLUGIN_GIT)
+		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)
+		dk_toLower(${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)
 		if(NOT ${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_GIT_NAME_LOWER})
 			dk_warning("PLUGIN_IMPORT_NAME_LOWER:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME_LOWER:${PLUGIN_GIT_NAME_LOWER} do not match ")
 		endif()
 	endif()
 
 	## Setup the PLUGIN_VAR_PREFIX
+	dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)
 	dk_set(PLUGIN_VAR_PREFIX ${PLUGIN_IMPORT_NAME_UPPER})
 	
 	##### Warn if there are any non-alphanumeric characters in the PLUGIN_IMPORT_NAME ######
@@ -407,7 +374,8 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	#endif()
 	
 	# <PLUGIN>_IMPORT_NAME
-	if(PLUGIN_IMPORT_NAME_LOWER)
+	if(PLUGIN_IMPORT_NAME)
+		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)		
 		dk_set(${PLUGIN_VAR_PREFIX}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
 		dk_printVar(${PLUGIN_VAR_PREFIX}_IMPORT_NAME)							# ZLIB_IMPORT_NAME			: zlib
 	endif()
