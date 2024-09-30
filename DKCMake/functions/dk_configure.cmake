@@ -14,16 +14,18 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
-	if(NOT CURRENT_PLUGIN_DIR)
-		dk_error("CURRENT_PLUGIN_DIR is invalid")
+	#if(NOT CURRENT_PLUGIN_DIR)
+	if(NOT ${CURRENT_PLUGIN}_DIR)
+		dk_error("${CURRENT_PLUGIN}_DIR is invalid")
 	endif()
 
 	dk_printVar(SOURCE_DIR)
-	dk_printVar(CURRENT_PLUGIN_FOLDER)
+	#dk_printVar(CURRENT_PLUGIN_FOLDER)
+	dk_printVar(${CURRENT_PLUGIN}_FOLDER)
 	
-	#dk_includes(${SOURCE_DIR} ${CURRENT_PLUGIN_FOLDER} isSubDirectory)
+	#dk_includes(${SOURCE_DIR} ${${CURRENT_PLUGIN}_FOLDER} isSubDirectory)
 	#if(isSubDirectory)
-		dk_set(BINARY_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")		# only use if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
+		dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")			# only use if CURRENT_PLUGIN_FOLDER is a parent directory of SOURCE_DIR
 	#else()
 	#	dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	#endif()

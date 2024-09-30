@@ -39,7 +39,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	VERSION (optional)
 #															master
 #
-function(dk_importVariables PLUGIN_URL rtn_var)
+function(dk_importVariables url rtn_var)
 	#dk_debugFunc("\${ARGV}")
 	
 	dk_getParameter(BRANCH 	PLUGIN_GIT_BRANCH 		${ARGV}) 	# master
@@ -52,7 +52,7 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 	
 	### POPULATE VARIABLES ###
-	# PLUGIN_URL				- from arg:PLUGIN_URL												: https://github.com/madler/zlib/archive/refs/heads/master.zip
+	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	# PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST												: 8
 	# PLUGIN_URL_NODE(n)		- from PLUGIN_URL_LIST												: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
@@ -79,7 +79,6 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	# <PLUGIN>					- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
-	# <CURRENT_PLUGIN_DIR>		- from PLUGIN_DIR								:ZLIB_DIR			: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	# <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
 	# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
@@ -98,7 +97,8 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	############ PLUGIN_URL VARIABLES ############
 	##############################################						################################# EXAMPLE ##########################
 	# PLUGIN_URL
-	dk_assert(PLUGIN_URL)
+	dk_assert(url)
+	set(PLUGIN_URL ${url})	
 	dk_printVar(PLUGIN_URL)												# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	# PLUGIN_URL_FILENAME
@@ -273,18 +273,18 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_printVar(${PLUGIN_PREFIX})										# ZLIB						: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
 	# CURRENT_PLUGIN
-	if(EXISTS ${${PLUGIN_PREFIX}})
-		dk_set(CURRENT_PLUGIN ${PLUGIN_PREFIX})
-		dk_printVar(CURRENT_PLUGIN)										# CURRENT_PLUGIN			: ZLIB
-	endif()
+#	if(EXISTS ${${PLUGIN_PREFIX}})
+	dk_set(CURRENT_PLUGIN ${PLUGIN_PREFIX})
+	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN			: ZLIB
+#	endif()
 	
 	# <PLUGIN>_DIR
 	dk_set(${PLUGIN_PREFIX}_DIR ${PLUGIN_INSTALL_PATH})
 	dk_printVar(${PLUGIN_PREFIX}_DIR)									# ZLIB_DIR					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
-	# CURRENT_PLUGIN_DIR
-	dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_PREFIX}_DIR})
-	dk_printVar(CURRENT_PLUGIN_DIR)										# CURRENT_PLUGIN_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+#	# CURRENT_PLUGIN_DIR
+#	dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_PREFIX}_DIR})
+#	dk_printVar(CURRENT_PLUGIN_DIR)										# CURRENT_PLUGIN_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
 	# <PLUGIN>_URL
 	dk_set(${PLUGIN_PREFIX}_URL ${PLUGIN_URL})
@@ -302,11 +302,11 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	dk_set(${PLUGIN_PREFIX}_FOLDER ${PLUGIN_INSTALL_FOLDER})
 	dk_printVar(${PLUGIN_PREFIX}_FOLDER)								# ZLIB_FOLDER				: zlib-master
 
-	# CURRENT_PLUGIN_FOLDER
-	if(EXISTS ${${PLUGIN_PREFIX}})
-		dk_set(CURRENT_PLUGIN_FOLDER ${${PLUGIN_PREFIX}_FOLDER})
-		dk_printVar(CURRENT_PLUGIN_FOLDER)								# CURRENT_PLUGIN_FOLDER		: zlib-master
-	endif()
+#	# CURRENT_PLUGIN_FOLDER
+#	if(EXISTS ${${PLUGIN_PREFIX}})
+#		dk_set(CURRENT_PLUGIN_FOLDER ${${PLUGIN_PREFIX}_FOLDER})
+#		dk_printVar(CURRENT_PLUGIN_FOLDER)								# CURRENT_PLUGIN_FOLDER		: zlib-master
+#	endif()
 	
 #	# <PLUGIN>_NAME
 #	dk_set(${PLUGIN_PREFIX}_NAME ${PLUGIN_INSTALL_FOLDER})

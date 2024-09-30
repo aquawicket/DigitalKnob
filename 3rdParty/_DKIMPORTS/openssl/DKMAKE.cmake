@@ -90,7 +90,6 @@ endif()
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
 #EMSCRIPTEN_DEBUG_dk_configure(${OPENSSL_DIR} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
-						  #dk_set	(${CURRENT_PLUGIN_DIR} ${OPENSSL_DIR})
    EMSCRIPTEN_DEBUG_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --debug linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 ANDROID_ARM32_DEBUG_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --debug android-arm -D__ANDROID_API__=${ANDROID_API})
 ANDROID_ARM64_DEBUG_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --debug CC=clang android-arm64 -D__ANDROID_API__=${ANDROID_API})

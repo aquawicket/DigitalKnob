@@ -11,8 +11,10 @@ function(dk_bashEnv)
 	dk_debugFunc("\${ARGV}")
 	
 	###### set WORKING DIRECTORY ######
-	if(CURRENT_PLUGIN_DIR)
-		set(BASH_WORKING_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
+	#if(CURRENT_PLUGIN_DIR)
+	if(${CURRENT_PLUGIN}_DIR)
+		#set(BASH_WORKING_DIR "${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
+		set(BASH_WORKING_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		list(APPEND BASH_COMMANDS "cd ${BASH_WORKING_DIR}")
 		dk_cd(${BASH_WORKING_DIR})
 	else()
@@ -47,8 +49,8 @@ function(dk_bashEnv)
 #	endif()
 	
 	### BASH_COMMANDS ###
-#	if(CURRENT_PLUGIN_DIR)
-#		list(APPEND BASH_COMMANDS "cd ${CURRENT_PLUGIN_DIR}/${CONFIG_PATH}")
+#	if(${CURRENT_PLUGIN}_DIR)
+#		list(APPEND BASH_COMMANDS "cd ${${CURRENT_PLUGIN}_CONFIG_DIR}")
 #	elseif(PWD)
 #		list(APPEND BASH_COMMANDS "cd ${PWD}")
 #	else()
