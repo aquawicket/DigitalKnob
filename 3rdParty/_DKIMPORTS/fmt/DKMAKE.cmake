@@ -11,7 +11,8 @@ dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
-dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
+dk_import(https://github.com/fmtlib/fmt/archive/891c9a73ae9a23ed8bffffb8753504b1f6f399d0.zip)
+#dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
 
 
 
