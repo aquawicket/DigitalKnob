@@ -16,15 +16,16 @@ endif()
 
 ### Get GIT variables ###
 if(GIT_DL)
-	dk_importVariables(${GIT_DL} rtn_var)
+	dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+	dk_importVariables(${GIT_DL} ROOT ${DKTOOLS_DIR} rtn_var)
 	dk_removeExtension(${GIT_DIR} GIT_FOLDER)
-	dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
+	dk_set(GIT_DIR ${DKTOOLS_DIR}/${GIT_FOLDER})
 endif()
-
 
 ### First Check ###
 if(WIN_HOST)
-	dk_findProgram(GIT_EXE git ${GIT}/bin)
+	dk_debug("dk_findProgram(GIT_EXE git.exe ${GIT}/bin)")
+	dk_findProgram(GIT_EXE git.exe ${GIT}/bin)
 elseif(ANDROID_HOST)
 	dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
 else()

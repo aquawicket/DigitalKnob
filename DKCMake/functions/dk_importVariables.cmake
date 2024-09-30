@@ -75,12 +75,13 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 	
 	# PLUGIN_VAR_PREFIX			- from PLUGIN_IMPORT_NAME
 	
-	dk_getParameter(NAME PLUGIN_INSTALL_NAME ${ARGV})
-	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION ${ARGV})
-	dk_getParameter(FOLDER PLUGIN_INSTALL_FOLDER ${ARGV})
-	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})
-	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})
-	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})
+	dk_getParameter(NAME PLUGIN_INSTALL_NAME ${ARGV})			# myLibrary
+	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION ${ARGV})		# 1.0
+	dk_getParameter(FOLDER PLUGIN_INSTALL_FOLDER ${ARGV})		# myLibrary_1.0
+	dk_getParameter(ROOT PLUGIN_INSTALL_ROOT ${ARGV})			# C:\Users\Administrator\digitalknob\3rdParty
+	dk_getParameter(PATH PLUGIN_INSTALL_PATH ${ARGV})			# C:\Users\Administrator\digitalknob\3rdParty\myLibrary_1.0
+	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH ${ARGV})			# master
+	dk_getParameter(TAG PLUGIN_GIT_TAG ${ARGV})					# develop_bug_fix100
 
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 																				################################# EXAMPLE ##########################
@@ -221,9 +222,15 @@ function(dk_importVariables PLUGIN_URL rtn_var)
 		endif()
 		dk_printVar(PLUGIN_INSTALL_URL)											# PLUGIN_INSTALL_URL		: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	endif()
-	if(NOT PLUGIN_INSTALL_PATH)
+	if(NOT PLUGIN_INSTALL_ROOT)
 		if(DK3RDPARTY_DIR)
-			set(PLUGIN_INSTALL_PATH ${DK3RDPARTY_DIR}/${PLUGIN_INSTALL_FOLDER})			
+			set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})			
+		endif()
+		dk_printVar(PLUGIN_INSTALL_ROOT)										# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	endif()
+	if(NOT PLUGIN_INSTALL_PATH)
+		if(PLUGIN_INSTALL_ROOT)
+			set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
 		endif()
 		dk_printVar(PLUGIN_INSTALL_PATH)										# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	endif()
