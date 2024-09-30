@@ -1,7 +1,7 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
-# https://github.com/fmtlib/fmt
+# https://github.com/fmtlib/fmt.git
 # https://fmt.dev/latest/index.html
 
 
@@ -10,9 +10,9 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
-dk_import(https://github.com/fmtlib/fmt/archive/891c9a73ae9a23ed8bffffb8753504b1f6f399d0.zip)
-#dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)
+dk_import(https://github.com/fmtlib/fmt/archive/fade652ade6e9ba4b16e7484cbda5ee4c9178918.zip)
+#dk_import(https://github.com/fmtlib/fmt/archive/cacc3108c5b74020dba7bf3c6d3a7e58cdc085b2.zip)	# BROKEN
+#dk_import(https://github.com/fmtlib/fmt/archive/refs/heads/master.zip)							# BROKEN
 
 
 
