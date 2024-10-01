@@ -1,5 +1,5 @@
 @echo off
-if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
+if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 
 ::#################################################################################
 ::# dk_importVariables PLUGIN_URL rtn_var  BRANCH FOLDER NAME PATH ROOT TAG VERSION
@@ -41,6 +41,8 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 :dk_importVariables url rtn_var
 	::dk_debugFunc 1 9
 	
+	set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
+	
 ::	!dk_call! dk_getParameter  BRANCH 	PLUGIN_GIT_BRANCH 		!ARGV!  &:: master
 ::	!dk_call! dk_getParameter  FOLDER	PLUGIN_INSTALL_FOLDER 	!ARGV! 	&:: zlib-master
 ::	!dk_call! dk_getParameter  NAME 	PLUGIN_INSTALL_NAME 	!ARGV! 	&:: zlib
@@ -53,25 +55,25 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	::### POPULATE VARIABLES ###
 	:: PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	:: PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
-	:: PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST											: 8
+	:: PLUGIN_URL_LENGTH		- from PLUGIN_URL_LIST												: 8
 	:: PLUGIN_URL_NODE n 		- from PLUGIN_URL_LIST												: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 	:: PLUGIN_URL_FILENAME   	- from PLUGIN_URL													: master.zip
 	:: PLUGIN_URL_EXTENSION  	- from PLUGIN_URL_FILENAME											: .zip
-	:: PLUGIN_URL_FILE      		- from PLUGIN_URL_FILENAME										: master
+	:: PLUGIN_URL_FILE      	- from PLUGIN_URL_FILENAME											: master
 	
-	:: PLUGIN_IMPORT				- from CMAKE_CURRENT_LIST_DIR									: 1
+	:: PLUGIN_IMPORT			- from CMAKE_CURRENT_LIST_DIR										: 1
 	:: PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 	:: PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH											: zlib
 	
 	:: PLUGIN_GIT				- from PLUGIN_URL													: 1
 	:: PLUGIN_GIT_FILENAME		- from PLUGIN_URL													: zlib
 	:: PLUGIN_GIT_NAME			- from PLUGIN_GIT_FILENAME											: zlib
-	:: PLUGIN_GIT_BRANCH			- from default:master OR arg:BRANCH								: master
+	:: PLUGIN_GIT_BRANCH		- from default:master OR arg:BRANCH									: master
 	:: PLUGIN_GIT_TAG			- from default: OR arg:TAG
 	
 	:: PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
 	:: PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
-	:: PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
+	:: PLUGIN_INSTALL_FOLDER    - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
 	:: PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:\Users\Administrator\digitalknob\Development\3rdParty
 	:: PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 	
@@ -80,7 +82,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	:: <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 	:: <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	:: <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
-	:: <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
+	:: <PLUGIN>_VERSION         - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
 	:: <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
 	:: <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
 	:: <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
@@ -109,8 +111,8 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	!dk_call! dk_printVar PLUGIN_URL_LIST 										&:: PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	::# PLUGIN_GIT
-	!dk_call! dk_includes !PLUGIN_URL! https:\\github.com PLUGIN_GIT 				
-::	!dk_call! dk_printVar PLUGIN_GIT 											&:: PLUGIN_GIT				: 1
+	!dk_call! dk_includes !PLUGIN_URL! "https:\\github.com" PLUGIN_GIT 				
+	!dk_call! dk_printVar PLUGIN_GIT 											&:: PLUGIN_GIT				: 1
 	
 	::# PLUGIN_URL_EXTENSION
 	!dk_call! dk_getExtension !PLUGIN_URL_FILENAME! PLUGIN_URL_EXTENSION 			
@@ -137,9 +139,10 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	::#######################################################
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
-	!dk_call! dk_assertPath CMAKE_CURRENT_LIST_DIR
+::	!dk_call! dk_assert CMAKE_CURRENT_LIST_DIR
 	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
-	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
+::	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
+	set "PLUGIN_IMPORT=1"
 	
 	::# PLUGIN_IMPORT
 	!dk_call! dk_assert PLUGIN_IMPORT 
@@ -150,7 +153,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	!dk_call! dk_printVar PLUGIN_IMPORT_PATH 									&:: PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 	::# PLUGIN_IMPORT_NAME
-	!dk_call! dk_basename !PLUGIN_IMPORT_PATH! PLUGIN_IMPORT_NAME 					
+	!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
 	!dk_call! dk_printVar PLUGIN_IMPORT_NAME 									&:: PLUGIN_IMPORT_NAME		: zlib
 
 
@@ -160,16 +163,17 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	if defined PLUGIN_GIT (
 		rem # PLUGIN_GIT_FILENAME
 rem		list GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME 										
+		set "PLUGIN_GIT_FILENAME=%PLUGIN_URL_FILENAME%"
 		!dk_call! dk_printVar PLUGIN_GIT_FILENAME 								&rem PLUGIN_GIT_FILENAME		: zlib
 		
 		rem # PLUGIN_GIT_NAME
-		!dk_call! dk_replaceAll !PLUGIN_GIT_FILENAME! ".git" "" PLUGIN_GIT_NAME 			
+		!dk_call! dk_replaceAll "!PLUGIN_GIT_FILENAME!" ".git" "" PLUGIN_GIT_NAME 			
 		!dk_call! dk_printVar PLUGIN_GIT_NAME 									&rem PLUGIN_GIT_NAME			: zlib
 		
 		rem # PLUGIN_GIT_BRANCH
 		rem !dk_call! dk_getGitBranchName !PLUGIN_URL! PLUGIN_GIT_BRANCH 					
 		if NOT defined PLUGIN_GIT_BRANCH (
-			set PLUGIN_GIT_BRANCH master 
+			set "PLUGIN_GIT_BRANCH=master" 
 		)
 		!dk_call! dk_printVar PLUGIN_GIT_BRANCH 								&rem PLUGIN_GIT_BRANCH		: master
 		
@@ -364,7 +368,8 @@ rem				string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 	call dk_debugFunc 0
-	
+ ::setlocal
+ 
 	set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
 	!dk_call! dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" PLUGIN 
 !endfunction!
