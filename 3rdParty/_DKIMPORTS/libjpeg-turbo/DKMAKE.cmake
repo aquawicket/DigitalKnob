@@ -8,8 +8,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git BRANCH main)
-dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
+dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489e22dffa309f3f617005c0cebaf8fc00c.zip)
+#dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
 
 
 #dk_validate(MULTI_CONFIG "dk_MULTI_CONFIG()")
