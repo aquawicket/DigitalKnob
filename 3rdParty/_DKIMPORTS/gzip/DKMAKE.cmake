@@ -7,8 +7,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/kunpengcompute/gzip.git)
-dk_import(https://github.com/kunpengcompute/gzip/archive/refs/heads/master.zip)
+dk_import(https://github.com/kunpengcompute/gzip/archive/6a3ebab7e475fb5ca9b01c344eb45c27ea81ef89.zip)
+#dk_import(https://github.com/kunpengcompute/gzip/archive/refs/heads/master.zip)
 
 
 ### LINK ###
