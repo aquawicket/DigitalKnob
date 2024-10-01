@@ -12,11 +12,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_input_=%~1"
     if "!DE!" equ "" set "_output_=!_input_:%~2=%~3!"
     if "!DE!" neq "" call set "_output_=%%_input_:%~2=%~3%%"
-
     endlocal & set "%4=%_output_%"
 
-::DEBUG
-	%dk_call% dk_printVar _output_
+%DEBUG%
+	%dk_call% dk_printVar %4
 %endfunction%
 
 

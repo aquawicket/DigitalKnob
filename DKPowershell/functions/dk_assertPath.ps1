@@ -13,13 +13,12 @@ function Global:dk_assertPath($path) {
 		$_path_ = $path								# from variable
 	}
 	
-	if(!(dk_call dk_pathExists $_path_)){		
-		dk_call dk_error "Assertion failed: $_path_ is not found!"
-		$assertPath = ${false}
+	if((dk_call dk_pathExists $_path_)){		
+		return #${true}
 	} 
-	else { $assertPath = $true }
-	dk_call dk_printVar assertPath
-	return $assertPath
+	
+	dk_call dk_error "Assertion failed: $_path_ is not found!"
+	return ${false}
 }
 
 
@@ -30,7 +29,11 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$sys32path = "C:/Windows/System32"
+	dk_call dk_assertPath "C:/Windows/System32"
 	dk_call dk_assertPath sys32path
+	dk_call dk_assertPath $sys32path
+	dk_call dk_assertPath "$sys32path"
+	dk_call dk_assertPath "sys32path"
 	
 	dk_call dk_assertPath "C:/NonExistentPath"
 }

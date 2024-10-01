@@ -9,18 +9,20 @@ function Global:dk_DKHOME_DIR() {
 	dk_debugFunc 0
 
 	### DKHOME_DIR ###
-	$global:DKHOME_DIR = "$env:HOMEDRIVE$env:HOMEPATH/digitalknob"
+	$global:DKHOME_DIR = "$env:HOMEDRIVE$env:HOMEPATH"
 	$global:DKHOME_DIR = $DKHOME_DIR -replace '\\', '/';
-    dk_call dk_printVar DKHOME_DIR
+	dk_call dk_assertPath DKHOME_DIR
+    #dk_call dk_printVar DKHOME_DIR
 	
 	### DKCACHE_DIR ###
-	$global:DKCACHE_DIR = "$DKHOME_DIR/.dk"
+	$global:DKCACHE_DIR = "${DKHOME_DIR}/.dk"
     dk_call dk_makeDirectory $DKCACHE_DIR
-    dk_call dk_printVar DKCACHE_DIR
+	dk_call dk_assertPath DKCACHE_DIR
+    #dk_call dk_printVar DKCACHE_DIR
 	
 	### DKDESKTOP_DIR ###
-	$global:DKDESKTOP_DIR = "$DKHOME_DIR/Desktop"
-    dk_call dk_printVar DKDESKTOP_DIR
+	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop"
+    #dk_call dk_printVar DKDESKTOP_DIR
 	
 	### DKTEMP_DIR ###
 #	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"
@@ -44,8 +46,8 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_DKHOME_DIR
-	dk_call dk_echo "DIGITALKNOB_DIR = $DIGITALKNOB_DIR"
-	dk_call dk_echo "DKTOOLS_DIR = $DKTOOLS_DIR"
-	dk_call dk_echo "DKDOWNLOAD_DIR = $DKDOWNLOAD_DIR"
-	dk_call dk_echo "DKTEMP_DIR = $DKTEMP_DIR"
+	dk_call dk_echo "DKHOME_DIR = $DKHOME_DIR"
+	dk_call dk_echo "DKCACHE_DIR = $DKCACHE_DIR"
+	dk_call dk_echo "DKDESKTOP_DIR = $DKDESKTOP_DIR"
+	#dk_call dk_echo "DKTEMP_DIR = $DKTEMP_DIR"
 }
