@@ -12,27 +12,28 @@ function Global:dk_installGit() {
 	$GIT_DL_WIN_X86_64 = "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"
 
 	dk_call dk_validate "HOST_ARCH" "dk_call dk_host_triple"
-    if($HOST_ARCH -eq "arm32") { $GIT_DL = "" }
-    if($HOST_ARCH -eq "arm64") { $GIT_DL = $GIT_DL_WIN_ARM64 }
-    if($HOST_ARCH -eq "x86")   { $GIT_DL = $GIT_DL_WIN_X86 }
-    if($HOST_ARCH -eq "x86_64"){ $GIT_DL = $GIT_DL_WIN_X86_64 }
+    if($HOST_ARCH -eq "arm32") { ${GIT_DL} = "" }
+    if($HOST_ARCH -eq "arm64") { ${GIT_DL} = $GIT_DL_WIN_ARM64 }
+    if($HOST_ARCH -eq "x86")   { ${GIT_DL} = $GIT_DL_WIN_X86 }
+    if($HOST_ARCH -eq "x86_64"){ ${GIT_DL} = $GIT_DL_WIN_X86_64 }
     if(!$GIT_DL){ dk_call dk_error "GIT_DL is invalid"; return ${false} }
 	  
-    $GIT_DL_FILE = dk_call dk_basename $GIT_DL
-	$GIT_DL_NAME = dk_call dk_removeExtension $GIT_DL_FILE
-    $GIT_FOLDER = dk_call dk_convertToCIdentifier $GIT_DL_NAME 
-    $GIT_FOLDER = dk_call dk_toLower $GIT_FOLDER GIT_FOLDER
+    $GIT_DL_FILE = dk_call dk_basename ${GIT_DL}
+	$GIT_FOLDER = dk_call dk_removeExtension $GIT_DL_FILE
+    #$GIT_FOLDER = dk_call dk_convertToCIdentifier $GIT_FOLDER 
+    #$GIT_FOLDER = dk_call dk_toLower $GIT_FOLDER
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
-    $global:GIT_EXE = "$DKTOOLS_DIR/$GIT_FOLDER/bin/git.exe"
-	$global:GITBASH_EXE = "$DKTOOLS_DIR/$GIT_FOLDER/git-bash.exe"
+	$global:GIT = "$DKTOOLS_DIR/$GIT_FOLDER"
+    $global:GIT_EXE = "$GIT/bin/git.exe"
+	$global:GITBASH_EXE = "$GIT/git-bash.exe"
         
     if(dk_call dk_pathExists $GIT_EXE){ return }
         
     dk_call dk_info ""  
     dk_call dk_info "Installing git . . ."
-    dk_call dk_download $GIT_DL $DKDOWNLOAD_DIR/$GIT_DL_FILE
-	dk_call dk_info "$DKDOWNLOAD_DIR/$GIT_DL_FILE -y -o $DKTOOLS_DIR/$GIT_FOLDER"
-    dk_call dk_call cmd /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $DKTOOLS_DIR/$GIT_FOLDER
+    dk_call dk_download ${GIT_DL} $DKDOWNLOAD_DIR/$GIT_DL_FILE
+	dk_call dk_info "$DKDOWNLOAD_DIR/$GIT_DL_FILE -y -o $GIT"
+    dk_call dk_call cmd /c "$DKDOWNLOAD_DIR/$GIT_DL_FILE" -y -o $GIT
 	   
     if(!(dk_call dk_pathExists $GIT_EXE)){ dk_call dk_error "cannot find git" }
 }
