@@ -20,12 +20,18 @@ function Global:dk_installGit() {
 	  
     $GIT_DL_FILE = dk_call dk_basename ${GIT_DL}
 	$GIT_FOLDER = dk_call dk_removeExtension $GIT_DL_FILE
+	$GIT_FOLDER = dk_call dk_removeExtension $GIT_FOLDER
     #$GIT_FOLDER = dk_call dk_convertToCIdentifier $GIT_FOLDER 
     #$GIT_FOLDER = dk_call dk_toLower $GIT_FOLDER
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
+	#$global:GIT_DIR = "$DKTOOLS_DIR/$GIT_FOLDER"
 	$global:GIT = "$DKTOOLS_DIR/$GIT_FOLDER"
+	
     $global:GIT_EXE = "$GIT/bin/git.exe"
+	$global:BASH_EXE = "$GIT/bin/bash.exe"
 	$global:GITBASH_EXE = "$GIT/git-bash.exe"
+	$global:PATCH_EXE = "$GIT/usr/bin/patch.exe"
+
         
     if(dk_call dk_pathExists $GIT_EXE){ return }
         

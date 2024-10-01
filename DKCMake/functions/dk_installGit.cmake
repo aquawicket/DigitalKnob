@@ -29,6 +29,7 @@ function(dk_installGit)
 		#dk_convertToCIdentifier(${GIT_FOLDER} GIT_FOLDER)
 		dk_toLower(${GIT_FOLDER} GIT_FOLDER)
 		dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+		#dk_set(GIT_DIR ${DKTOOLS_DIR}/${GIT_FOLDER})
 		dk_set(GIT ${DKTOOLS_DIR}/${GIT_FOLDER})
 	endif()
 

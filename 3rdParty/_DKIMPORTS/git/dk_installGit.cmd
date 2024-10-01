@@ -33,17 +33,17 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	::set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
 	
-    set "GIT_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\git.exe"
-	set "BASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\bin\bash.exe"
-    set "GITBASH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\git-bash.exe"
-	set "PATCH_EXE=%DKTOOLS_DIR%\%GIT_FOLDER%\usr\bin\patch.exe"
+    set "GIT_EXE=%GIT%\bin\git.exe"
+	set "BASH_EXE=%GIT%\bin\bash.exe"
+    set "GITBASH_EXE=%GIT%\git-bash.exe"
+	set "PATCH_EXE=%GIT%\usr\bin\patch.exe"
      
     if exist "%GIT_EXE%" %return%
     %dk_call% dk_echo   
     %dk_call% dk_info "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
     %dk_call% dk_download %GIT_DL%
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%DKTOOLS_DIR%\%GIT_FOLDER%"
+    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
        
     if NOT exist "%GIT_EXE%" %dk_call% dk_error "cannot find git")
 %endfunction%
