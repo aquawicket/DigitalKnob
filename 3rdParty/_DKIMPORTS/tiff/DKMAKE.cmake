@@ -23,8 +23,8 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-#dk_import(https://gitlab.com/libtiff/libtiff.git)
-dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip)
+dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c73260e52ad8e6db9f6184615669a7bd6f752/libtiff-685c73260e52ad8e6db9f6184615669a7bd6f752.zip)
+#dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip)
 
 
 ### LINK ###
