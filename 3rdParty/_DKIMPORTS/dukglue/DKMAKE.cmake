@@ -7,8 +7,8 @@ dk_load(dk_builder)
 dk_depend(duktape)
 
 
-#dk_import(https://github.com/Aloshi/dukglue.git PATCH)
-dk_import(https://github.com/Aloshi/dukglue/archive/refs/heads/master.zip)
+dk_import(https://github.com/Aloshi/dukglue/archive/c3ec2a463a03a4fa34715aa75273537d39900edb.zip)
+#dk_import(https://github.com/Aloshi/dukglue/archive/refs/heads/master.zip)
 
 
 dk_include(${DUKGLUE}/include)

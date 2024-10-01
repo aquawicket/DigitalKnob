@@ -14,8 +14,8 @@ dk_depend(ncurses)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/nowres/conio-for-linux.git)
-dk_import(https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip)
+dk_import(https://github.com/nowres/conio-for-linux/archive/c2ee58efcb93a4b13826f5a9f2361a27b22d65ce.zip)
+#dk_import(https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip)
 
 
 

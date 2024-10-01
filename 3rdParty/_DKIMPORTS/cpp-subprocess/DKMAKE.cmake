@@ -7,8 +7,8 @@ dk_load(dk_builder)
 #			Use #include "subprocess.hpp"
 
 ### IMPORT ###
-#dk_import(https://github.com/tsaarni/cpp-subprocess.git)
-dk_import(https://github.com/tsaarni/cpp-subprocess/archive/refs/heads/master.zip)
+dk_import(https://github.com/tsaarni/cpp-subprocess/archive/3bb89565c83183a5f404617cd422a34117b3d54e.zip)
+#dk_import(https://github.com/tsaarni/cpp-subprocess/archive/refs/heads/master.zip)
 
 
 

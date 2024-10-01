@@ -1,14 +1,13 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
-# https://github.com/google/diff-match-patch
+# https://github.com/google/diff-match-patch.git
 # https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip
 
 
 ### IMPORT ###
-#dk_import(https://github.com/google/diff-match-patch.git)
-#dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
-dk_import(https://github.com/google/diff-match-patch/archive/refs/heads/master.zip)
+dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
+#dk_import(https://github.com/google/diff-match-patch/archive/refs/heads/master.zip)
 
 
 

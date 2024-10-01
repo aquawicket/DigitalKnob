@@ -8,8 +8,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/bulletphysics/bullet3.git)
-dk_import(https://github.com/bulletphysics/bullet3/archive/refs/heads/master.zip)
+dk_import(https://github.com/bulletphysics/bullet3/archive/e9c461b0ace140d5c73972760781d94b7b5eee53.zip)
+#dk_import(https://github.com/bulletphysics/bullet3/archive/refs/heads/master.zip)
 
 
 

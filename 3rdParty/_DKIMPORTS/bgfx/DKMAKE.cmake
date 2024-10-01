@@ -8,8 +8,8 @@ dk_load(dk_builder)
 
 
 ### INSTALL ###
-#dk_import(https://github.com/bkaradzic/bgfx.git)
-dk_import(https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip)
+dk_import(https://github.com/bkaradzic/bgfx/archive/f8b20616def6ee7e82a3c14361c8a432b5bd15da.zip)
+#dk_import(https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip)
 
 
 

@@ -5,8 +5,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/FFTW/fftw3.git)
-dk_import(https://github.com/FFTW/fftw3/archive/refs/heads/master.zip)
+dk_import(https://github.com/FFTW/fftw3/archive/187045ea647ba19c55db5f503d11bd811ee6b56e.zip)
+#dk_import(https://github.com/FFTW/fftw3/archive/refs/heads/master.zip)
 
 
 

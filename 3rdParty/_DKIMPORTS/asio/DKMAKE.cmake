@@ -5,8 +5,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/chriskohlhoff/asio.git)
-dk_import(https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip)
+dk_import(https://github.com/chriskohlhoff/asio/archive/efdc25ab99786101351a5afb39f01dfaf0781401.zip)
+#dk_import(https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip)
 
 
 

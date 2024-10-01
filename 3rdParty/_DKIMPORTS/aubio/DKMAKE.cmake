@@ -5,7 +5,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
+dk_import(https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip)
+#dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
 
 
 
