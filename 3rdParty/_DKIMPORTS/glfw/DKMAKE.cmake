@@ -11,8 +11,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/glfw/glfw.git)
-dk_import(https://github.com/glfw/glfw/archive/refs/heads/master.zip)
+dk_import(https://github.com/glfw/glfw/archive/b35641f4a3c62aa86a0b3c983d163bc0fe36026d.zip)
+#dk_import(https://github.com/glfw/glfw/archive/refs/heads/master.zip)
 
 
 ### LINK ###
