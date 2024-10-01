@@ -82,8 +82,8 @@ set(rmlui_Benchmarks 0)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/mikke89/RmlUi.git)
-dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip) #PATCH)
+#dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f724b5c829cb3840f4b062286b242d7f6a.zip)
+dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip)
 
 
 ### PATCH ###

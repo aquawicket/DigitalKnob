@@ -5,14 +5,12 @@ dk_load(dk_builder)
 
 
 dk_depend(freetype)
-dk_printVar(FREETYPE_CMAKE)
 dk_depend(python3)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/harfbuzz/harfbuzz.git BRANCH main)
-dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
-dk_printVar(plugin)
+dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e3f50fcd582f2ee1667da6cde2e8562c3.zip)
+#dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
 
 
 ### LINK ###

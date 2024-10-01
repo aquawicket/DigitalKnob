@@ -336,29 +336,34 @@ function(dk_importVariables url rtn_var)
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 	# <PLUGIN>_TRIPLE_DIR
-	#dk_assert(triple)
-	dk_set(${PLUGIN_PREFIX}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${triple})
-	dk_printVar(${PLUGIN_PREFIX}_TRIPLE_DIR)							# ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	if(triple)
+		dk_set(${PLUGIN_PREFIX}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${triple})
+		dk_printVar(${PLUGIN_PREFIX}_TRIPLE_DIR)							# ZLIB_TRIPLE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	endif()
 	
 	# <PLUGIN>_CONFIG_DIR
-	#dk_assert(CONFIG_PATH)
-	dk_set(${PLUGIN_PREFIX}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
-	dk_printVar(${PLUGIN_PREFIX}_CONFIG_DIR)							# ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	if(CONFIG_PATH)
+		dk_set(${PLUGIN_PREFIX}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
+		dk_printVar(${PLUGIN_PREFIX}_CONFIG_DIR)							# ZLIB_CONFIG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	endif()
 	
 	# <PLUGIN>_BUILD_DIR
-	#dk_assert(BUILD_PATH)
-	dk_set(${PLUGIN_PREFIX}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
-	dk_printVar(${PLUGIN_PREFIX}_BUILD_DIR)								# ZLIB_BUILD_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	if(BUILD_PATH)
+		dk_set(${PLUGIN_PREFIX}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
+		dk_printVar(${PLUGIN_PREFIX}_BUILD_DIR)								# ZLIB_BUILD_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	endif()
 	
 	# <PLUGIN>_DEBUG_DIR
-	#dk_assert(DEBUG_DIR)
-	dk_set(${PLUGIN_PREFIX}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
-	dk_printVar(${PLUGIN_PREFIX}_DEBUG_DIR)								# ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	if(DEBUG_DIR)
+		dk_set(${PLUGIN_PREFIX}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${DEBUG_DIR})
+		dk_printVar(${PLUGIN_PREFIX}_DEBUG_DIR)								# ZLIB_DEBUG_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	endif()
 	
 	# <PLUGIN>_RELEASE_DIR
-	#dk_assert(RELEASE_DIR)
-	dk_set(${PLUGIN_PREFIX}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR})
-	dk_printVar(${PLUGIN_PREFIX}_RELEASE_DIR)							# ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
+	if(RELEASE_DIR)
+		dk_set(${PLUGIN_PREFIX}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${triple}/${RELEASE_DIR})
+		dk_printVar(${PLUGIN_PREFIX}_RELEASE_DIR)							# ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
+	endif()
 	
 	set(${rtn_var} ${PLUGIN_PREFIX} PARENT_SCOPE)
 	dk_printVar(PLUGIN_PREFIX)
