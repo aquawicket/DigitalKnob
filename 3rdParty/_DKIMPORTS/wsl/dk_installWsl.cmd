@@ -5,9 +5,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::# dk_installWsl()
 ::#
 ::#    Troubleshooting: https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
+::#    Custom Distro:   https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
 :dk_installWsl
 	call dk_debugFunc 0
 	
+	%dk_call% dk_findProgram WSL_EXE wsl.exe
+	if exist "%WSL_EXE%" %dk_call% dk_info "WSL already installed"
+	%WSL_EXE% --status && %return%
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
@@ -34,19 +38,20 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: Step 5 - Set WSL 2 as your default version
 	wsl --set-default-version 2
 	
-	
-	goto:eof
-	:: Install your Linux distribution of choice
-	%dk_call% dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
-	%dk_call% dk_echo   
-    %dk_call% dk_info "Installing WSL-Alpine Linux . . ."
-	%dk_call% dk_download %LAUNCHER_DL%
-	%dk_call% dk_makeDirectory %DKTOOLS_DIR%\AlpineLinux
-	%dk_call% dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
-	%dk_call% dk_copy %DKDOWNLOAD_DIR%\%LAUNCHER_DL_FILE% %DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE% OVERWRITE
-	%DKTOOLS_DIR%\AlpineLinux\%LAUNCHER_DL_FILE%
-	
-	::wsl --install --distribution Debian
+	::wsl --install --web-download --distribution Ubuntu                          
+	::wsl --install --web-download --distribution Debian
+	::wsl --install --web-download --distribution kali-linux
+	::wsl --install --web-download --distribution Ubuntu-18.04
+	::wsl --install --web-download --distribution Ubuntu-20.04
+	::wsl --install --web-download --distribution Ubuntu-22.04
+	::wsl --install --web-download --distribution Ubuntu-24.04
+	::wsl --install --web-download --distribution OracleLinux_7_9
+	::wsl --install --web-download --distribution OracleLinux_8_7
+	::wsl --install --web-download --distribution OracleLinux_9_1
+	::wsl --install --web-download --distribution openSUSE-Leap-15.6
+	::wsl --install --web-download --distribution SUSE-Linux-Enterprise-15-SP5
+	::wsl --install --web-download --distribution SUSE-Linux-Enterprise-15-SP6
+	::wsl --install --web-download --distribution openSUSE-Tumbleweed
 %endfunction%
 
 

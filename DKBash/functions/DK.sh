@@ -82,7 +82,7 @@ dkreloadWithBash(){
 		echo "reloading with bash . . . ${0}"
 		unset DKINIT
 		export DKINIT=""
-		dk_commandExists bash || dk_installPackage bash
+		dk_call dk_commandExists bash || dk_call dk_installPackage bash
 		exec bash "${0}"
 	fi
 }
