@@ -109,7 +109,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	!dk_call! dk_printVar PLUGIN_URL_LIST 										&:: PLUGIN_URL_LIST			: https:;github.com;madler;zlib;archive;refs;heads;master.zip
 	
 	::# PLUGIN_GIT
-::	!dk_call! dk_includes !PLUGIN_URL! https:\\github.com PLUGIN_GIT 				
+	!dk_call! dk_includes !PLUGIN_URL! https:\\github.com PLUGIN_GIT 				
 ::	!dk_call! dk_printVar PLUGIN_GIT 											&:: PLUGIN_GIT				: 1
 	
 	::# PLUGIN_URL_EXTENSION
@@ -137,9 +137,9 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" !~0 !*
 	::#######################################################
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
-::	!dk_call! dk_assertPath !CD! 
+	!dk_call! dk_assertPath CMAKE_CURRENT_LIST_DIR
 	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
-	!dk_call! dk_includes !CD! !DKIMPORTS_DIR! PLUGIN_IMPORT 		
+	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 	
 	::# PLUGIN_IMPORT
 	!dk_call! dk_assert PLUGIN_IMPORT 

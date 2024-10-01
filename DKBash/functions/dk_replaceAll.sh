@@ -7,29 +7,32 @@
 #
 #
 dk_replaceAll() {
-	dk_debugFunc 4
+	dk_debugFunc 3 4
 	
     input="${1}"
 	searchValue="${2}"
 	newValue="${3}"
-    output=
+    _replaceAll_=
 		
     while [ -n "${input}" ]; do
         LEFT=${input%%"${searchValue}"*}
 
         if [ "${LEFT}" = "${input}" ]; then
-            output=${output}${input}
+            _replaceAll_=${_replaceAll_}${input}
 			break
         fi
 
-        output=${output}${LEFT}${newValue}
+        _replaceAll_=${_replaceAll_}${LEFT}${newValue}
         input=${input#*"$searchValue"}
     done
 	
-	eval "${4}='${output}'"
+	### return value ###
+	dk_call dk_printVar _replaceAll_
+	[ ${#} -gt 3 ] && eval "${4}='${_replaceAll_}'" && return  # return value when using rtn_var parameter 
+	dk_return ${_replaceAll_}; return						  # return value when using command substitution
 	
 #DEBUG
-#	dk_printVar output
+#	dk_printVar _replaceAll_
 }
 
 

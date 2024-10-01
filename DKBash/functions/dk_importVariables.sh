@@ -140,17 +140,16 @@ dk_importVariables() {
 	#######################################################
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
-	dk_call dk_assertPath "${PWD}" 
+	dk_call dk_assertPath CMAKE_CURRENT_LIST_DIR
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKBRANCH_DIR" 
-#	PLUGIN_IMPORT=$(dk_call dk_includes ${PWD} ${DKIMPORTS_DIR}) 		
+	$(dk_call dk_includes "${CMAKE_CURRENT_LIST_DIR}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT=1 || PLUGIN_IMPORT=0		
 	
 	# PLUGIN_IMPORT
-	PLUGIN_IMPORT=1
-#	dk_call dk_assert PLUGIN_IMPORT 
-#	dk_call dk_printVar PLUGIN_IMPORT 											# PLUGIN_IMPORT			 	: 1
+	dk_call dk_assert PLUGIN_IMPORT 
+	dk_call dk_printVar PLUGIN_IMPORT 											# PLUGIN_IMPORT			 	: 1
 	
 	# PLUGIN_IMPORT_PATH
-	PLUGIN_IMPORT_PATH="${PWD}"						
+	PLUGIN_IMPORT_PATH="${CMAKE_CURRENT_LIST_DIR}"						
 	dk_call dk_printVar PLUGIN_IMPORT_PATH 										# PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 	# PLUGIN_IMPORT_NAME
@@ -161,24 +160,26 @@ dk_importVariables() {
 	##############################################
 	############ PLUGIN_GIT VARIABLES ############
 	##############################################
-#	if [ -n "${PLUGIN_GIT}" ]; then 
-#		# PLUGIN_GIT_FILENAME
-#		list GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME 										
-#		dk_call dk_printVar PLUGIN_GIT_FILENAME 								# PLUGIN_GIT_FILENAME		: zlib
-#		
-#		# PLUGIN_GIT_NAME
-#		dk_call dk_replaceAll ${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME 			
-#		dk_call dk_printVar PLUGIN_GIT_NAME 									# PLUGIN_GIT_NAME			: zlib
-#		
-#		# PLUGIN_GIT_BRANCH
-#		#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_BRANCH 					
-#		if ! [ -n "${PLUGIN_GIT_BRANCH}" ]; then
-#			PLUGIN_GIT_BRANCH="master"
-#		fi  
-#		dk_call dk_printVar PLUGIN_GIT_BRANCH 									# PLUGIN_GIT_BRANCH			: master
-#		
-#		# PLUGIN_GIT_TAG
-#	fi  
+	if [ ${PLUGIN_GIT} -eq 1 ]; then 
+		# PLUGIN_GIT_FILENAME
+#		list GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME 		
+#		dk_call dk_basename "${PLUGIN_URL}" PLUGIN_GIT_FILENAME
+		PLUGIN_GIT_FILENAME="${PLUGIN_URL_FILENAME}"
+		dk_call dk_printVar PLUGIN_GIT_FILENAME 								# PLUGIN_GIT_FILENAME		: zlib
+		
+		# PLUGIN_GIT_NAME
+		dk_call dk_replaceAll "${PLUGIN_GIT_FILENAME}" ".git" "" PLUGIN_GIT_NAME 			
+		dk_call dk_printVar PLUGIN_GIT_NAME 									# PLUGIN_GIT_NAME			: zlib
+		
+		# PLUGIN_GIT_BRANCH
+		#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_BRANCH 					
+		if ! [ -n "${PLUGIN_GIT_BRANCH-}" ]; then
+			PLUGIN_GIT_BRANCH="master"
+		fi  
+		dk_call dk_printVar PLUGIN_GIT_BRANCH 									# PLUGIN_GIT_BRANCH			: master
+		
+		# PLUGIN_GIT_TAG
+	fi  
 
 	
 	##################################################
@@ -259,13 +260,13 @@ dk_importVariables() {
 	##############################################
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
-#	if [ -n "${PLUGIN_IMPORT-}" && -n "${PLUGIN_GIT-}" ]; then  
-#		PLUGIN_IMPORT_NAME_LOWER=$(dk_call dk_toLower "${PLUGIN_IMPORT_NAME}")
-#		PLUGIN_GIT_NAME_LOWER=$(dk_call dk_toLower "${PLUGIN_GIT_NAME-}") 		 
-#		if ! [ "${PLUGIN_IMPORT_NAME_LOWER}" = "${PLUGIN_GIT_NAME_LOWER}" ]; then
-#			dk_call dk_warning "PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match " 
-#		fi  
-#	fi  
+	if [ -n "${PLUGIN_IMPORT-}" && -n "${PLUGIN_GIT-}" ]; then  
+		dk_call dk_toLower "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_LOWER
+		dk_call dk_toLower "${PLUGIN_GIT_NAME-}" PLUGIN_GIT_NAME_LOWER	 
+		if ! [ "${PLUGIN_IMPORT_NAME_LOWER}" = "${PLUGIN_GIT_NAME_LOWER}" ]; then
+			dk_call dk_warning "PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match " 
+		fi  
+	fi  
 
 	# PLUGIN_PREFIX
 	dk_call dk_toUpper ${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER
@@ -371,6 +372,6 @@ dk_importVariables() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	CMAKE_CURRENT_LIST_DIR="C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git"
+	CMAKE_CURRENT_LIST_DIR="/c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git"
 	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" PLUGIN
 }
