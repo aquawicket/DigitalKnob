@@ -6,11 +6,15 @@
 #
 #
 dk_getExtension() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
 	_filename_=$(dk_call dk_basename "${1}")
-	eval "${2}=${_filename_##*.}"
-	dk_call dk_printVar "${2}"
+	eval "_extension_=${_filename_##*.}"
+	
+	### return value ###
+	dk_call dk_printVar _extension_
+	[ ${#} -gt 1 ] && eval "${2}=${_extension_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_extension_}; return						  # return value when using command substitution 
 }
 
 

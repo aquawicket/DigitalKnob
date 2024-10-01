@@ -26,8 +26,10 @@ dk_replaceAll() {
         input=${input#*"$searchValue"}
     done
 	
-	dk_printVar output
 	eval "${4}='${output}'"
+	
+#DEBUG
+#	dk_printVar output
 }
 
 

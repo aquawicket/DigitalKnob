@@ -28,14 +28,21 @@ if "%~1" neq "" (goto:runDKBash)
 
 :runDKBash
 	set "DKBASH_FUNCTIONS_DIR=%~1"
-	set "DKBASH_FUNCTIONS_DIR_=%~1\"
+	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
+	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:/=/c/%"
+	set "DKBASH_FUNCTIONS_DIR_=%~1/"
+	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
+	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
 	::set "GITBASH_EXE=%~2"
 	set "BASH_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
+	
 	
 	::###### run script ######
 	::"%GITBASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
-	"%BASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
+	"%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause

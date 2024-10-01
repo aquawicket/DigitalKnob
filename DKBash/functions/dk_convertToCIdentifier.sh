@@ -6,9 +6,9 @@
 #
 #
 dk_convertToCIdentifier() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
-	output="${1//[^[:alnum:]]/_}"			    # BASH alpha_numeric_replace
+	_convertToCIdentifier_="${1//[^[:alnum:]]/_}"		    # BASH alpha_numeric_replace
 #	dk_call dk_replaceAll "${input}" "-" "_" input		# POSIX replace
 #	dk_call dk_replaceAll "${input}" "." "_" output		# POSIX replace
 #	dk_call dk_replaceAll "${input}" " " "_" output		# POSIX replace
@@ -44,9 +44,11 @@ dk_convertToCIdentifier() {
 #	dk_call dk_replaceAll "${input}" "}" "_" output		# POSIX replace
 #	dk_call dk_replaceAll "${input}" "`" "_" output		# POSIX replace
 	
-	eval "${2}='${output}'"
-	dk_call dk_printVar "${2}"
-	#[ ${input} = "" ]
+	
+	### return value ###
+	dk_call dk_printVar _convertToCIdentifier_
+	[ ${#} -gt 1 ] && eval "${2}=${_convertToCIdentifier_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_convertToCIdentifier_}; return						  # return value when using command substitution
 }
 
 

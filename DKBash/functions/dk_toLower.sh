@@ -6,11 +6,14 @@
 #
 #
 dk_toLower() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
-	local output=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]')
-	eval "${2}='${output}'"
-	dk_call dk_printVar "${2}"
+	local _toLower_=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]')
+	
+	### return value ###
+	dk_call dk_printVar _toLower_
+	[ ${#} -gt 1 ] && eval "${2}=${_toLower_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_toLower_}; return						  # return value when using command substitution
 }
 
 

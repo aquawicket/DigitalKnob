@@ -12,7 +12,7 @@ dk_pause() {
 
 	[ -z "${1-}" ] && pause_msg="Press and any to continue..." || pause_msg="${1}"
 	#read -rp 'Press enter to continue...'; # key; echo ${key}
-	dk_echo "${pause_msg}"
+	echo "${pause_msg}"
 	read -rp ''
 }
 

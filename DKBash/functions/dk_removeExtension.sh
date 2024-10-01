@@ -7,14 +7,17 @@
 #
 #
 dk_removeExtension() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
 	
 	_filepath_="${1}"
 	_filepath_="${_filepath_%.*}"									    # remove everything past last dot
 	[ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
-	eval "${2}='${_filepath_}'"
-	dk_printVar ${2}
+
+	### return value ###
+	dk_call dk_printVar _filepath_
+	[ ${#} -gt 1 ] && eval "${2}=${_filepath_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_filepath_}; return						  # return value when using command substitution 
 }
 
 

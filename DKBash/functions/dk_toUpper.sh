@@ -6,11 +6,14 @@
 #
 #
 dk_toUpper() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
-	local output=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]')
-	eval "${2}='${output}'"
-	dk_call dk_printVar "${2}"
+	local _toUpper_=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]')
+	
+	### return value ###
+	dk_call dk_printVar _toUpper_
+	[ ${#} -gt 1 ] && eval "${2}=${_toUpper_}" && return  # return value when using rtn_var parameter 
+	dk_return ${_toUpper_}; return						  # return value when using command substitution
 }
 
 

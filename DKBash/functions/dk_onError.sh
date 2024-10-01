@@ -9,7 +9,7 @@
 #
 dk_onError() {
 	#dk_debugFunc 2
-	[ ${#} -ne 2 ] && dk_call dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
+	#[ ${#} -ne 2 ] && dk_error "${FUNCNAME}(${#}): incorrect number of arguments"
 	
 	#filepath=${1}
 	#lineno=${2}
@@ -22,7 +22,18 @@ dk_onError() {
 	#[ "$(command -v d k_stacktrace)" = "" ]  &&  . ${DKBASH_FUNCTIONS_DIR}/d k_stacktrace.sh
 	#d k_stacktrace
 	
-	dk_call dk_error "### dk_onError: $1:$2 ###"
+	#dk_call dk_error "### dk_onError: $1:$2 ###"
+	#echo "### dk_onError: $1:$2 ###"
+	echo "### dk_onError: $(__FILE__ 0):$(__LINE__ 0) ###"
+	echo "### dk_onError: $(__FILE__ 1):$(__LINE__ 1) ###"
+	echo "### dk_onError: $(__FILE__ 2):$(__LINE__ 2) ###"
+	echo "### dk_onError: $(__FILE__ 3):$(__LINE__ 3) ###"
+	echo "### dk_onError: $(__FILE__ 4):$(__LINE__ 4) ###"
+	echo "### dk_onError: $(__FILE__ 5):$(__LINE__ 5) ###"
+	echo "### dk_onError: $(__FILE__ 6):$(__LINE__ 6) ###"
+	echo "### dk_onError: $(__FILE__ 7):$(__LINE__ 7) ###"
+	echo "### dk_onError: $(__FILE__ 8):$(__LINE__ 8) ###"
+	echo "### dk_onError: $(__FILE__ 9):$(__LINE__ 9) ###"
 }
 trap 'dk_onError $BASH_SOURCE $LINENO' ERR
 

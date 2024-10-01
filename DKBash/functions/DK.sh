@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -n "${DKINIT-}" ] && return ${?} || export DKINIT=1	# include_guard
+[ -n "${DKINIT-}" ] && return  || export DKINIT=1	# include_guard
 
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 ##################################################################################
@@ -56,6 +56,8 @@ DK(){
 
 	###### DKTEST MODE ######
 	#dk_call dk_echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
 	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
 	[ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
 		dk_source dk_call
@@ -110,7 +112,7 @@ dkinit(){
     #dk_commandExists dk_pathExists       || dk_pathExists()      { [ -e "${1}" ]; }                                                               # dk_pathExists "/usr/bin"
     #dk_commandExists dk_stringContains   || dk_stringContains()  { [ "${1#*"$2"}" != "${1}" ]; }                                                  # dk_stringContains string search
     #dk_commandExists dk_unset            || dk_commandExists     unset    && dk_unset()   { ${builtin} unset "${1}"; }                            # dk_unset variable
-    dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin} echo $(basename ${1}); }                       # dk_basename path
+    dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }                       # dk_basename path
     dk_commandExists dk_dirname          || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }                        # dk_dirname path
     dk_commandExists dk_realpath         || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
     dk_commandExists dk_debugFunc        || dk_debugFunc(){
