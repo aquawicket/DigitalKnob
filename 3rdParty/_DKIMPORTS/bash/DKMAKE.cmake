@@ -26,14 +26,6 @@ if(EXISTS ${BASH_EXE})
 endif()
 
 
-### Git bash ###
-dk_depend(git)
-dk_findProgram(BASH_EXE bash "${GIT}/bin")
-if(EXISTS ${BASH_EXE})
-	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-	return()
-endif()
-
 
 ### Msys2 bash ###
 dk_depend(msys2)
@@ -51,6 +43,13 @@ if(EXISTS ${BASH_EXE})
 	return()
 endif()
 
+### Git bash ###
+#dk_depend(git)
+#dk_findProgram(BASH_EXE bash "${GIT}/bin")
+#if(EXISTS ${BASH_EXE})
+#	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+#	return()
+#endif()
 
 ### Tiny Core Linux ###
 if(TINYCORE)

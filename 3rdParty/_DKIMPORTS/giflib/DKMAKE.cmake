@@ -14,7 +14,7 @@ dk_depend(autotools)
 
 
 ### IMPORT ###
-dk_import(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
+dk_import(https://github.com/nesbox/giflib/archive/1aa11b06d0025eda77b56aec8254130654d4397b.zip PATCH)
 #dk_import(https://github.com/nesbox/giflib/archive/refs/heads/master.zip PATCH)
 
 set(GIFLIB_USE_CMAKE ON)

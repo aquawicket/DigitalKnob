@@ -24,11 +24,11 @@ if(CLANG OR MINGW OR UCRT)
 	if(win_x86_clang)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 	elseif(win_x86_64_clang)	
-		dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
+		dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
 	elseif(win_arm64_clang)
 		dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 	elseif(win_x86_mingw)
-		dk_command(${PACMAN_EXE} -S mingw-w64-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
+		dk_command(${PACMAN_EXE} -S mingw-w64-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
 	elseif(win_x86_64_mingw)
 		dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 	elseif(win_x86_64_ucrt)
