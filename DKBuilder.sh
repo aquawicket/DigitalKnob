@@ -1,26 +1,32 @@
 #!/bin/sh
-###### DKBuilder ######
+#HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
+#DKF="${HOMEDRIVE}${HOMEPATH}/digitalknob/Development/DKBash/functions"
+#[ -e "${DKF}" ] || DKF="${PWD}/DKBash/functions"
+#mkdir "$(dirname ${DKF})"
+#mkdir "${DKF}"
+#DK="${DKF}/DK.sh"
+#[ ! -e "${DK}" ] && [ -n "$(command -v "wget")" ] && wget -P "${DKF}" "${HDK}"
+#[ ! -e "${DK}" ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DK}" "${HDK}"
+#. ${DK}
+#[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_call dk_buildMain
+#exit $?
+
+
+
+
+
+
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 
 ###### DKINIT ######
-export DKSCRIPT_PATH="$0"
-echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-
+$(command -v realpath 1>/dev/null) && export DKSCRIPT_PATH="$(realpath ${0})"
 export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
-
 export DKBASH_DIR="${PWD}/DKBash"
-echo "DKBASH_DIR = ${DKBASH_DIR}"
-
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
-
 [ -e "${DKBASH_DIR}" ] || ${SUDO_EXE} mkdir "${DKBASH_DIR}"
 export DKUSERNAME="${USER-}"
 [ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
 [ -n "${DKUSERNAME-}" ] || echo "ERROR: unable to set DKUSERNAME"
-echo "DKUSERNAME = ${DKUSERNAME}"
-
 [ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE-} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
 

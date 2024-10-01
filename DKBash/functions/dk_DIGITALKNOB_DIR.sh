@@ -14,17 +14,17 @@ dk_DIGITALKNOB_DIR() {
 	
 	### DIGITALKNOB_DIR ###
 	[ -n "${DIGITALKNOB}" ] || DIGITALKNOB="digitalknob"
-	DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
+	export DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
 	dk_call dk_makeDirectory "${DIGITALKNOB_DIR}"
-	dk_call dk_printVar DIGITALKNOB_DIR
+	#dk_call dk_printVar DIGITALKNOB_DIR
 	
-	DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
+	export DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
 	dk_call dk_makeDirectory "${DKTOOLS_DIR}"
-	dk_call dk_printVar DKTOOLS_DIR
+	#dk_call dk_printVar DKTOOLS_DIR
 	
-	DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
+	export DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
 	dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}"
-	dk_call dk_printVar DKDOWNLOAD_DIR
+	#dk_call dk_printVar DKDOWNLOAD_DIR
 	
 #	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP-}"
 #   [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR-}"
@@ -45,4 +45,8 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_DIGITALKNOB_DIR
+	
+	dk_call dk_printVar DIGITALKNOB_DIR
+	dk_call dk_printVar DKTOOLS_DIR
+	dk_call dk_printVar DKDOWNLOAD_DIR
 }

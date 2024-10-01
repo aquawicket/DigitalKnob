@@ -24,6 +24,7 @@ dk_DKBRANCH_DIR() {
 	#dk_call dk_printVar DKBRANCH
 	
 	DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
+	dk_call dk_assertPath DKBRANCH_DIR
 	#dk_call dk_printVar DKBRANCH_DIR
 	
 		DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"

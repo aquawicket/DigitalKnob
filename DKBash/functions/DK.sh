@@ -7,7 +7,7 @@
 #
 #
 DK(){
-	[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
+	#[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
 	
 	###### Initialize Language specifics ######
 	dkinit
@@ -52,12 +52,13 @@ DK(){
 	dk_call dk_logo
 	dk_source dk_download
 	#dk_source dk_basename
-	dk_call dk_load "${DKSCRIPT_PATH}"
+	dk_source "${DKSCRIPT_PATH}"
 
 	###### DKTEST MODE ######
-	dk_call dk_echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+	#dk_call dk_echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 	[ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
 	[ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
+		dk_source dk_call
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		#dk_call dk_echo "${bg_RGB}20;20;20m"
