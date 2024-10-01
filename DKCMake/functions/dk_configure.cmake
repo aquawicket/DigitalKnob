@@ -14,13 +14,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_MULTI_CONFIG()")
 	
-	#if(NOT CURRENT_PLUGIN_DIR)
-	if(NOT ${CURRENT_PLUGIN}_DIR)
-		dk_error("${CURRENT_PLUGIN}_DIR is invalid")
-	endif()
-
+	dk_assertPath(${CURRENT_PLUGIN}_DIR)
 	dk_printVar(SOURCE_DIR)
-	#dk_printVar(CURRENT_PLUGIN_FOLDER)
 	dk_printVar(${CURRENT_PLUGIN}_FOLDER)
 	
 	#dk_includes(${SOURCE_DIR} ${${CURRENT_PLUGIN}_FOLDER} isSubDirectory)
@@ -30,6 +25,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	#	dk_set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	#endif()
 	dk_makeDirectory(${BINARY_DIR})
+	dk_assertPath(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	# Configure with CMake		(multi_config / single_config)
 	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)

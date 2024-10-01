@@ -21,10 +21,8 @@ WIN_HOST_dk_depend(msys2)
 dk_depend(nasm)
 
 ### IMPORT ###
-#WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
-#dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
-#dk_import		(https://github.com/openssl/openssl.git)
-dk_import		(https://github.com/openssl/openssl/archive/refs/heads/master.zip)
+dk_import(https://github.com/openssl/openssl/archive/2f362e99a1178263c7102474f0190836166f416d.zip)
+#dk_import(https://github.com/openssl/openssl/archive/refs/heads/master.zip)
 
 #if(EMSCRIPTEN)
 #	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
@@ -116,7 +114,7 @@ ANDROID_ARM64_RELEASE_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --r
           MAC_RELEASE_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --release)
     RASPBERRY_RELEASE_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --release)
       WIN_X86_RELEASE_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --release mingw CC=clang)
-   WIN_X86_64_RELEASE_dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --release mingw64 CC=clang)
+   WIN_X86_64_RELEASE_dk_configure	(${OPENSSL_DIR} "../../Configure no-shared --release mingw64 CC=clang")
 
 
 ### COMPILE ###
