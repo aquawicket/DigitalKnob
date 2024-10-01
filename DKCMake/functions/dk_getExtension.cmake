@@ -25,14 +25,15 @@ function(dk_getExtension path rtn_var)
 	endif()
 	string(SUBSTRING ${path} ${index} -1 extension)
 
-	#look for .tar
-	math(EXPR tar ${index}-4)
-	if(${tar} GREATER -1)
-		string(SUBSTRING ${path} ${tar} -1 tarextension)
-		if("${tarextension}" STREQUAL ".tar${extension}")
-			set(extension ${tarextension})
+	list(APPEND multiexts ".tar.gz")
+	list(APPEND multiexts ".tar.xz")
+	list(APPEND multiexts ".7z.exe")
+	foreach(ext ${multiexts})
+		if(path MATCHES "\\${ext}$")
+			set(extension "${ext}")
 		endif()
-	endif()
+	endforeach()
+	
 	#dk_printVar(extension)
     set(${rtn_var} ${extension} PARENT_SCOPE)
 endfunction()
@@ -46,5 +47,28 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_set(myPath "/test/test2/xfile.exten")
+    dk_getExtension("${myPath}" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.zip" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.tar.gz" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.tar.xz.tar.gz.tar.xz" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.tar.x.gz" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.tar.xz" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.7z.exe.b" extension)
+    dk_printVar(extension)
+	
+	dk_getExtension("test.7z.exe" extension)
+    dk_printVar(extension)
 endfunction()
