@@ -5,8 +5,8 @@ dk_load(dk_builder)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/rockdaboot/libpsl.git)
-dk_import(https://github.com/rockdaboot/libpsl/archive/refs/heads/master.zip)
+dk_import(https://github.com/rockdaboot/libpsl/archive/490bd6f98a2addcade55028ea60c36cce07e21e4.zip)
+#dk_import(https://github.com/rockdaboot/libpsl/archive/refs/heads/master.zip)
 
 
 

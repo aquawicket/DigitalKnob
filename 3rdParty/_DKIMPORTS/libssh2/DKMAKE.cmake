@@ -4,8 +4,8 @@ dk_load(dk_builder)
 # https://github.com/libssh2/libssh2.git
 
 
-#dk_import(https://github.com/libssh2/libssh2.git)
-dk_import(https://github.com/libssh2/libssh2/archive/refs/heads/master.zip)
+dk_import(https://github.com/libssh2/libssh2/archive/a8bc96c79491bd26d1e3e206dbba2cf4fc65baf8.zip)
+#dk_import(https://github.com/libssh2/libssh2/archive/refs/heads/master.zip)
 
 
 # TODO
