@@ -12,7 +12,7 @@ function Global:dk_createCache() {
 	
 	# write variable values line by line
 	echo "$APP">"${DKBRANCH_DIR}/cache"
-	echo "$TARGET_OS">>"${DKBRANCH_DIR}/cache"
+	echo "$triple">>"${DKBRANCH_DIR}/cache"
 	echo "$TYPE">>"${DKBRANCH_DIR}/cache"
 	#echo "$DKENV">>"${DKBRANCH_DIR}/cache"
 }

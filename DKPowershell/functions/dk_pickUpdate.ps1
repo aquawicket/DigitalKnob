@@ -8,9 +8,9 @@ if(!$dk_pickUpdate){ $dk_pickUpdate = 1 } else{ return }
 function Global:dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	dk_call dk_readCache _APP_ _triple_ _TYPE_
 	dk_printVar $_APP_
-	dk_printVar $_TARGET_OS_
+	dk_printVar $_triple_
 	dk_printVar $_TYPE_
 	
 	dk_call dk_echo
@@ -18,8 +18,8 @@ function Global:dk_pickUpdate() {
 	dk_call dk_echo
 	
 	if($behind -lt 1){
-		if(${_APP_} -and ${_TARGET_OS_} -and ${_TYPE_}){
-			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		if(${_APP_} -and ${_triple_} -and ${_TYPE_}){
+			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
 		}
 		dk_call dk_echo " 1) Git Update"   
 		dk_call dk_echo " 2) Git Commit"
@@ -38,8 +38,8 @@ function Global:dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update"
 		dk_call dk_echo
 		dk_call dk_echo "${red}" 
-		if(${_APP_} -and ${_TARGET_OS_} -and ${_TYPE_}){
-			dk_call dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
+		if(${_APP_} -and ${_triple_} -and ${_TYPE_}){
+			dk_call dk_echo " 0) Repeat cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
 		}
 		dk_call dk_echo "${green}"
 		dk_call dk_echo " 1) Git Update"
@@ -63,7 +63,7 @@ function Global:dk_pickUpdate() {
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection"
 		$global:APP = ${_APP_}
-		$global:TARGET_OS = ${_TARGET_OS_}
+		$global:triple = ${_triple_}
 		$global:TYPE = ${_TYPE_}
 		$global:UPDATE = 1
 	}

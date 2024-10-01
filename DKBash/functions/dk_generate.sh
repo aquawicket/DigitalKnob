@@ -10,7 +10,7 @@ dk_generate() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating ${APP} - ${TARGET_OS} - ${TYPE} - ${DKLEVEL-}"
+	dk_call dk_echo "     Generating ${APP} - ${triple} - ${TYPE} - ${DKLEVEL-}"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
@@ -20,8 +20,8 @@ dk_generate() {
 	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
 	TARGET_PATH="${DKAPPS_DIR}"/"${APP}"
 	#dk_call dk_printVar TARGET_PATH
-	dk_call dk_makeDirectory "${TARGET_PATH}"/"${TARGET_OS}"
-	cd "${TARGET_PATH}"/"${TARGET_OS}"
+	dk_call dk_makeDirectory "${TARGET_PATH}"/"${triple}"
+	cd "${TARGET_PATH}"/"${triple}"
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
@@ -66,7 +66,7 @@ dk_generate() {
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${TARGET_OS}/${TYPE}"
+	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${triple}/${TYPE}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_call dk_defined WSLENV; then
@@ -91,98 +91,98 @@ dk_generate() {
 	#dk_call dk_arrayPush CMAKE_ARGS "--warn-unused-vars"
 	#dk_call dk_arrayPush CMAKE_ARGS "--check-system-vars"
 	
-	if [ "${TARGET_OS}" = "android_arm32" ]; then
+	if [ "${triple}" = "android_arm32" ]; then
 		#set -- "-G Unix Makefiles" "${@}"
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 
-	if [ "${TARGET_OS}" = "android_arm64" ]; then
+	if [ "${triple}" = "android_arm64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles"
 	fi
 	
-	if [ "${TARGET_OS}" = "emscripten" ]; then
+	if [ "${triple}" = "emscripten" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${TARGET_OS}" = "ios_arm32" ]; then
+	if [ "${triple}" = "ios_arm32" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "ios_arm64" ]; then
+	if [ "${triple}" = "ios_arm64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "iossim_x86" ]; then
+	if [ "${triple}" = "iossim_x86" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "iossim_x86_64" ]; then
+	if [ "${triple}" = "iossim_x86_64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "linux_x86" ]; then
+	if [ "${triple}" = "linux_x86" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${TARGET_OS}" = "linux_x86_64" ]; then
+	if [ "${triple}" = "linux_x86_64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${TARGET_OS}" = "mac_x86" ]; then
+	if [ "${triple}" = "mac_x86" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "mac_x86_64" ]; then
+	if [ "${triple}" = "mac_x86_64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Xcode"
 	fi
 	
-	if [ "${TARGET_OS}" = "raspberry_arm32" ]; then
+	if [ "${triple}" = "raspberry_arm32" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${TARGET_OS}" = "raspberry_arm64" ]; then
+	if [ "${triple}" = "raspberry_arm64" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Unix Makefiles" 
 	fi
 	
-	if [ "${TARGET_OS}" = "win_arm64_clang" ]; then
+	if [ "${triple}" = "win_arm64_clang" ]; then
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DKBRANCH_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_clang" ]; then
+	if [ "${triple}" = "win_x86_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_mingw" ]; then
+	if [ "${triple}" = "win_x86_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_64_clang" ]; then
+	if [ "${triple}" = "win_x86_64_clang" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
 		export MSYSTEM=CLANG64
 		#set -- "-DCMAKE_EXE_LINKER_FLAGS=-static -mconsole"
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_64_mingw" ]; then
+	if [ "${triple}" = "win_x86_64_mingw" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_64_ucrt" ]; then
+	if [ "${triple}" = "win_x86_64_ucrt" ]; then
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 	fi
 	
-	if [ "${TARGET_OS}" = "win_x86_64_msvc" ]; then
+	if [ "${triple}" = "win_x86_64_msvc" ]; then
 		dk_call dk_arrayUnshift CMAKE_ARGS "-G" "Visual Studio 17 2022"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${TARGET_OS}_toolchain.cmake"
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${triple}_toolchain.cmake"
 #	dk_call dk_echo "TOOLCHAIN = ${TOOLCHAIN}"
 #	if dk_call dk_pathExists "${TOOLCHAIN}"; then
 #		dk_call dk_arrayPush CMAKE_ARGS "-DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}"

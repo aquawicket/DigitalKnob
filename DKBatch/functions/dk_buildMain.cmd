@@ -26,15 +26,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_unset UPDATE
     %dk_call% dk_unset APP
-    %dk_call% dk_unset TARGET_OS
+    %dk_call% dk_unset triple
     %dk_call% dk_unset TYPE
         
     :while_loop   
-        ::%dk_call% dk_echo "33 UPDATE-%UPDATE% - APP-%APP% - TARGET_OS-%TARGET_OS% - TYPE-%TYPE%"
+        ::%dk_call% dk_echo "33 UPDATE-%UPDATE% - APP-%APP% - triple-%triple% - TYPE-%TYPE%"
         
         if not defined UPDATE     %dk_call% dk_pickUpdate UPDATE    && goto:while_loop
         if not defined APP        %dk_call% dk_pickApp APP          && goto:while_loop
-        if not defined TARGET_OS  %dk_call% dk_pickOs TARGET_OS     && goto:while_loop
+        if not defined triple     %dk_call% dk_pickOs triple     && goto:while_loop
         if not defined TYPE       %dk_call% dk_pickType TYPE        && goto:while_loop
 		
         %dk_call% dk_createCache
@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
         %dk_call% dk_unset UPDATE
         %dk_call% dk_unset APP
-        %dk_call% dk_unset TARGET_OS
+        %dk_call% dk_unset triple
         %dk_call% dk_unset TYPE
     goto while_loop
 %endfunction%

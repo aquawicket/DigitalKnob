@@ -9,7 +9,7 @@ dk_pickApp() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP-} ${TARGET_OS-} ${TYPE-}"
+	dk_call dk_echo "${APP-} ${triple-} ${TYPE-}"
 	
 	dk_call dk_echo
     dk_call dk_echo " 1) HelloWorld"

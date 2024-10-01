@@ -41,7 +41,7 @@ dk_buildMain() {
 	do
 		if [ -z "${UPDATE-}" ];     then dk_call dk_pickUpdate;  continue; fi
 		if [ -z "${APP-}" ];        then dk_call dk_pickApp;     continue; fi
-		if [ -z "${TARGET_OS-}" ];  then dk_call dk_pickOs;      continue; fi
+		if [ -z "${triple-}" ];  then dk_call dk_pickOs;      continue; fi
 		if [ -z "${TYPE-}" ];       then dk_call dk_pickType;    continue; fi
 		
 		dk_call dk_createCache
@@ -50,7 +50,7 @@ dk_buildMain() {
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset APP
-		dk_call dk_unset TARGET_OS
+		dk_call dk_unset triple
 		dk_call dk_unset TYPE
 	done
 }

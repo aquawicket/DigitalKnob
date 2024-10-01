@@ -21,8 +21,8 @@ function Global:dk_buildMain() {
 #		sudo chown -R "${LOGNAME}" "${HOME}"
 #	fi
 
-	dk_call dk_printVar SHLVL
-	dk_call dk_printVar MSYSTEM
+	#dk_call dk_printVar SHLVL
+	#dk_call dk_printVar MSYSTEM
 	#dk_call dk_printVar DKSCRIPT_PATH
 	#dk_call dk_printVar DKSCRIPT_DIR
 	#dk_call dk_printVar DKSCRIPT_NAME
@@ -43,7 +43,7 @@ function Global:dk_buildMain() {
 	while($running){  
 		if(!${UPDATE})    { dk_call dk_pickUpdate;  continue; }
 		if(!${APP})       { dk_call dk_pickApp;     continue; }
-		if(!${TARGET_OS}) { dk_call dk_pickOs;      continue; }
+		if(!${triple}) { dk_call dk_pickOs;      continue; }
 		if(!${TYPE})      { dk_call dk_pickType;    continue; }
 		
 		dk_call dk_createCache
@@ -52,7 +52,7 @@ function Global:dk_buildMain() {
 		
 		dk_call dk_unset UPDATE
 		dk_call dk_unset APP
-		dk_call dk_unset TARGET_OS
+		dk_call dk_unset triple
 		dk_call dk_unset TYPE
 	}  
 }

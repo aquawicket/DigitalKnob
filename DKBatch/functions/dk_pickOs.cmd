@@ -2,16 +2,16 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::####################################################################
-::# dk_pickOs(rtn_var:TARGET_OS)
+::# dk_pickOs(rtn_var:triple)
 ::#
 ::#
-:dk_pickOs TARGET_OS
+:dk_pickOs triple
     call dk_debugFunc 0 1
  ::setlocal
  
-    %dk_call% dk_setTitle DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    %dk_call% dk_setTitle DigitalKnob - %APP% %triple% %TYPE%
     %dk_call% dk_echo
-    %dk_call% dk_echo %APP% %TARGET_OS% %TYPE%
+    %dk_call% dk_echo %APP% %triple% %TYPE%
        
     :: TODO: this list can be created using the DKCMake/toolchains files.
     %dk_call% dk_echo
@@ -103,7 +103,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="39" %dk_call% dk_exit                       & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
-    %dk_call% dk_unset TARGET_OS
+    %dk_call% dk_unset triple
 %endfunction%
 
 

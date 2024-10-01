@@ -9,7 +9,7 @@ dk_pickType() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP-} ${TARGET_OS-} ${TYPE-}"
+	dk_call dk_echo "${APP-} ${triple-} ${TYPE-}"
 	dk_call dk_echo	
     dk_call dk_echo " 1) Debug"
 	dk_call dk_echo " 2) Release"
@@ -31,7 +31,7 @@ dk_pickType() {
 	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then
-		TARGET_OS=
+		triple=
 	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0
 	else

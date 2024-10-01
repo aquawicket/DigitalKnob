@@ -9,15 +9,15 @@
 dk_pickUpdate() {
 	dk_debugFunc 0
 
-	dk_call dk_readCache _APP_ _TARGET_OS_ _TYPE_
+	dk_call dk_readCache _APP_ _triple_ _TYPE_
 	
 	dk_call dk_echo
 	dk_call dk_gitCheckRemote
 	dk_call dk_echo
 
 	if [ $behind -lt 1 ]; then
-		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_TARGET_OS_ - $_TYPE_]"
+		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_call dk_echo " 0) Repeat cache [$_APP_ - $_triple_ - $_TYPE_]"
 		fi
 		dk_call dk_echo " 1) Git Update"   
 		dk_call dk_echo " 2) Git Commit"
@@ -36,8 +36,8 @@ dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update"
 		dk_call dk_echo
 		dk_call dk_echo "${red}" 
-		if [ -n "${_APP_-}" ] && [ -n "${_TARGET_OS_-}" ] && [ -n "${_TYPE_-}" ]; then
-			dk_call dk_echo " 0) Repeat cache [${_APP_} - ${_TARGET_OS_} - ${_TYPE_}]"
+		if [ -n "${_APP_-}" ] && [ -n "${_triple_-}" ] && [ -n "${_TYPE_-}" ]; then
+			dk_call dk_echo " 0) Repeat cache [${_APP_} - ${_triple_} - ${_TYPE_}]"
 		fi
 		dk_call dk_echo "${green}"
 		dk_call dk_echo " 1) Git Update"
@@ -63,7 +63,7 @@ dk_pickUpdate() {
 	if [ "${choice}" = "0" ]; then
 		dk_call dk_echo "repeating last selection"
 		APP=${_APP_}
-		TARGET_OS=${_TARGET_OS_}
+		triple=${_triple_}
 		TYPE=${_TYPE_}
 		UPDATE=1
 	elif [ "${choice}" = "1" ]; then
