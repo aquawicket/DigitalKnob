@@ -56,7 +56,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayA[3]=4 5 6"
     set "myArrayA[4]=h i j"
 
-    %dk_call% dk_arrayJoin myArrayA "," myStringA
+    %dk_call% dk_arrayJoin myArrayA ";" myStringA
     %dk_call% dk_info "myStringA = %myStringA%"
 
 
@@ -66,7 +66,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "myArrayB[3]=1 2 3"
     set "myArrayB[4]=a b c"
 
-    %dk_call% dk_arrayJoin myArrayB "," myStringB
+    %dk_call% dk_arrayJoin myArrayB ";" myStringB
     ::myStringB=$(dk_arrayJoin myArrayB ",")
     %dk_call% dk_info "myStringB = %myStringB%"
 %endfunction%

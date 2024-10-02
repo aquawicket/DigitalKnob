@@ -15,11 +15,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_basename %NOTEPADPP_DL% NOTEPADPP_DL_FILE
 	%dk_call% dk_removeExtension %NOTEPADPP_DL_FILE% NOTEPADPP_FOLDER
-	::%dk_call% dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	%dk_call% dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
+    %dk_call% dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
+	::%dk_call% dk_importVariables %CMAKE_DL%
 	
+	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"	
+	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	
 	if exist "%NOTEPADPP_EXE%" goto:notepadpp_installed
