@@ -15,7 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     echo dk_gitCreatePatch %*
 	
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    %dk_call% dk_cd %DKBRANCH_DIR%
+    ::%dk_call% dk_cd %DKBRANCH_DIR%
     
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
 	
