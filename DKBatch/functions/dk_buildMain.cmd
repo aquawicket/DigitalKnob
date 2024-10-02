@@ -1,7 +1,5 @@
 @echo off
-::echo ---^> %~0 %*
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
-::if not defined dk_buildMain (set "dk_buildMain=1") else (goto:eof)
 
 ::####################################################################
 ::# dk_buildMain()
@@ -11,14 +9,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
 
-	%dk_call% dk_validate DKBRANCH_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_assertPath DKDESKTOP_DIR
+	%dk_call% dk_assertPath DIGITALKNOB_DIR
 	%dk_call% dk_createShortcut "%DKDESKTOP_DIR%\digitalknob.lnk" "%DIGITALKNOB_DIR%" OVERWRITE
 	%dk_call% dk_pinToQuickAccess "%DIGITALKNOB_DIR%"
-    %dk_call% dk_installGit
-	
-	%dk_call% dk_validate DKSCRIPT_DIR    "%dk_call% dk_DKSCRIPT_DIR"
-	%dk_call% dk_validate DKBRANCH_DIR    "%dk_call% dk_DKBRANCH_DIR"
-    if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
+
+	%dk_call% dk_assertPath DKSCRIPT_DIR
+	%dk_call% dk_assertPath DKBRANCH_DIR
+	if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
         %dk_call% dk_warning "Not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
         %dk_call% dk_warning "DKSCRIPT_DIR = %DKSCRIPT_DIR%"
         %dk_call% dk_warning "DKBRANCH_DIR = %DKBRANCH_DIR%"
@@ -34,7 +32,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         
         if not defined UPDATE     %dk_call% dk_pickUpdate UPDATE    && goto:while_loop
         if not defined APP        %dk_call% dk_pickApp APP          && goto:while_loop
-        if not defined triple     %dk_call% dk_pickOs triple     && goto:while_loop
+        if not defined triple     %dk_call% dk_pickOs triple        && goto:while_loop
         if not defined TYPE       %dk_call% dk_pickType TYPE        && goto:while_loop
 		
         %dk_call% dk_createCache
