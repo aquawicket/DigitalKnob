@@ -52,7 +52,7 @@ function(dk_host_triple)
 	else()
 		dk_fatal("CMAKE_HOST: Unknown host")
 	endif()
-	dk_assert(host_os)
+	dk_assertVar(host_os)
 	dk_set(${host_os}_host 1)			# win_host = 1
 	dk_toUpper(${host_os} HOST_OS)      # HOST_OS = WIN
 	dk_set(HOST_OS ${HOST_OS})
@@ -93,7 +93,7 @@ function(dk_host_triple)
 	else()
 		dk_fatal("CMAKE_HOST_SYSTEM_PROCESSOR: Unknown arch: \"${CMAKE_HOST_SYSTEM_PROCESSOR}\"")
 	endif()
-	dk_assert(host_arch)
+	dk_assertVar(host_arch)
 	dk_set(${host_arch}_host 1)				# arm64_host = 1
 	dk_toUpper(${host_arch} HOST_ARCH)      # HOST_ARCH = ARM64
 	dk_set(HOST_ARCH ${HOST_ARCH})
@@ -114,7 +114,7 @@ function(dk_host_triple)
 	else()
 		dk_set(host_env 	"clang")
 	endif()
-	#dk_assert(host_env)
+	#dk_assertVar(host_env)
 	if(host_env)
 		dk_set(${host_env}_host 1)				# msvc_host = 1
 		dk_toUpper(${host_env} HOST_ENV)		# HOST_ENV = MSVC

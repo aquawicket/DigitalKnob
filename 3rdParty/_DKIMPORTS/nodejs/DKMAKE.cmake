@@ -10,7 +10,7 @@ dk_validate(HOST_TRIPLE "dk_host_triple()")
 LINUX_ARM64_HOST_dk_set	(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz)
 WIN_X86_HOST_dk_set		(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip)
 WIN_X86_64_HOST_dk_set	(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip)
-dk_assert(NODEJS_DL)
+dk_assertVar(NODEJS_DL)
 
 dk_importVariables(${NODEJS_DL} rtn_var)
 

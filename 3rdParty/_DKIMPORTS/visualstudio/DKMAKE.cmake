@@ -23,7 +23,7 @@ endif()
 ### VERSION ###
 dk_set(VISUALSTUDIO_VERSION 	17)
 dk_set(VISUALSTUDIO_DL 			"https://aka.ms/vs/${VISUALSTUDIO_VERSION}/release/vs_community.exe")
-dk_assert(ProgramFiles)
+dk_assertPath(ProgramFiles)
 dk_set(VISUALSTUDIO 			"${ProgramFiles}/Microsoft Visual Studio")
 dk_printVar(VISUALSTUDIO)
 

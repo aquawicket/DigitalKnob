@@ -11,7 +11,7 @@ dk_validate(HOST_TRIPLE "dk_host_triple()")
 if(WIN_HOST)
 	dk_validate(PYTHON3_DIR "dk_depend(python3)")
 	set(bat ".bat")
-	dk_assert(bat)
+	dk_assertVar(bat)
 endif()
 
 

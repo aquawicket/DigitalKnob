@@ -35,7 +35,7 @@ function(dk_make path) #lib
 		set(lib ${ARGV1})
 		#dk_cd(${path}/${CONFIG_PATH})
 		dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
-		dk_assert(CMAKE_MAKE_PROGRAM)
+		dk_assertVar(CMAKE_MAKE_PROGRAM)
 		dk_printVar(CMAKE_MAKE_PROGRAM)
 		if(XCODE)
 			if(${ARGC} GREATER 1)

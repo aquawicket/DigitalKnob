@@ -21,4 +21,4 @@ dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 #dk_printVar(PACMAN_EXE)
 #dk_firewallAllow("pacman" "${PACMAN_EXE}")
 	
-dk_assert(PACMAN_EXE)  # change to assertPath
+dk_assertPath(PACMAN_EXE)  # change to assertPath

@@ -186,7 +186,7 @@ endif()
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_depend(msys2)
-	dk_assert(MSYS2_DIR)
+	dk_assertPath(MSYS2_DIR)
 	
 	dk_depend(bash)
 	dk_command(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)

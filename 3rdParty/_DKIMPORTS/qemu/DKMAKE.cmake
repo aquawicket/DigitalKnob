@@ -7,7 +7,7 @@ dk_load(dk_builder)
 
 dk_validate(HOST_TRIPLE "dk_host_triple()")
 WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe)
-dk_assert(QEMU_DL)
+dk_assertVar(QEMU_DL)
 dk_importVariables(${NOTEPADPP_DL} rtn_var)
 
 dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")

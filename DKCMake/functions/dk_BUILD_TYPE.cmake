@@ -48,9 +48,9 @@ function(dk_BUILD_TYPE)
 			dk_warning("invalid selection")
 		endif()
 		
-		dk_assert(dkbuild_type)
-		dk_assert(DKBuild_Type)
-		dk_assert(DKBUILD_TYPE)
+		dk_assertVar(dkbuild_type)
+		dk_assertVar(DKBuild_Type)
+		dk_assertVar(DKBUILD_TYPE)
 	endif()
 endfunction()
 

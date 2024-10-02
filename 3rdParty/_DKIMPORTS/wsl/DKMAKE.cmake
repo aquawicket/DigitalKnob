@@ -25,14 +25,14 @@ endif()
 if(NOT WSL_EXE)
 	dk_set(WSL_EXE "C:/Windows/System32/wsl.exe")
 endif()
-dk_assert(WSL_EXE)
+dk_assertVar(WSL_EXE)
 
 
 dk_findProgram(WSLPATH_EXE wslpath)
 if(NOT WSLPATH_EXE)
 	dk_set(WSLPATH_EXE wslpath)
 endif()
-dk_assert(WSLPATH_EXE)
+dk_assertVar(WSLPATH_EXE)
 #execute_process(COMMAND ${WSLPATH_EXE} -m ${DKPOWERSHELL_FUNCTIONS_DIR} OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR)
 
 

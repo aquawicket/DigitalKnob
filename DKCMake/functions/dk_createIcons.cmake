@@ -16,8 +16,8 @@ function(dk_createIcons image)
 		return()
 	endif()
 
-	dk_assert(APP_NAME)
-	dk_assert(OS)
+	dk_assertVar(APP_NAME)
+	dk_assertVar(OS)
 	dk_info("Building ${OS} icons for ${APP_NAME} . . .")
 	
 	dk_assertPath(${DK_PROJECT_DIR})

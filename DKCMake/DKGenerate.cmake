@@ -57,7 +57,7 @@ endif()
 
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
 
-dk_assert(triple)
+dk_assertVar(triple)
 dk_delete(${DK_PROJECT_DIR}/${triple}/DKBUILD.log NO_HALT)
 dk_printSettings()
 

@@ -55,14 +55,14 @@ endif()
 	
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
-	dk_assert(CMAKE_SOURCE_DIR)
+	dk_assertVar(CMAKE_SOURCE_DIR)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
-	dk_assert(CMAKE_SOURCE_DIR)
+	dk_assertPath(CMAKE_SOURCE_DIR)
 
 	###### Get CMAKE_BINARY_DIR ######
-	dk_assert(CMAKE_BINARY_DIR)
+	dk_assertVar(CMAKE_BINARY_DIR)
 	dk_getFullPath(${CMAKE_BINARY_DIR} CMAKE_BINARY_DIR)
-	dk_assert(CMAKE_BINARY_DIR)
+	dk_assertPath(CMAKE_BINARY_DIR)
 endif()
 
 
@@ -85,5 +85,5 @@ dk_validate(CONFIG_PATH   "dk_MULTI_CONFIG()")
 
 
 ##### Load Function files #################
-dk_assert(DKCMAKE_DIR)
+dk_assertPath(DKCMAKE_DIR)
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)

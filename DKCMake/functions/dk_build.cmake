@@ -30,7 +30,7 @@ function(dk_build path) #target NO_HALT
 	#	list(APPEND BUILD_MODE multi_config)
 	#endif()
 	#list(APPEND BUILD_MODE single_config)
-		#dk_assert(CONFIG_PATH)
+		#dk_assertVar(CONFIG_PATH)
 		dk_cd(${path}/${CONFIG_PATH})
 
 		# Build with CMake		(multi_config / single_config)

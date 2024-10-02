@@ -88,4 +88,4 @@ else()
 endif()
 
 
-dk_assert(CMAKE_MAKE_PROGRAM)
+dk_assertVar(CMAKE_MAKE_PROGRAM)
