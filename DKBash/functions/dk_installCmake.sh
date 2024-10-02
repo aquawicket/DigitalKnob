@@ -34,7 +34,7 @@ dk_installCmake() {
 	#[ "${triple-}" = "win_x86_64_mingw" ]    && CMAKE_IMPORT=mingw-w64-x86_64-cmake
 	#[ "${triple-}" = "win_x86_64_ucrt" ]     && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	[ -z ${CMAKE_IMPORT-} ] 						 && CMAKE_IMPORT=cmake  #Default
-	dk_call dk_assert CMAKE_IMPORT
+	dk_call dk_assertVar CMAKE_IMPORT
 	
 	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then
 		dk_call dk_info "Installing CMake from file download"
@@ -51,7 +51,7 @@ dk_installCmake() {
 		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
 		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake found for this OS"
-		dk_call dk_assert CMAKE_EXE
+		dk_call dk_assertVar CMAKE_EXE
 		
 		dk_call dk_pathExists "${CMAKE_EXE}" && return $(true);
 		
@@ -78,7 +78,7 @@ dk_installCmake() {
 		dk_call dk_commandExists cmake || dk_call dk_installPackage ${CMAKE_IMPORT}
 		CMAKE_EXE=$(command -v cmake)
 		CMAKE_EXE=$(dk_call dk_realpath "${CMAKE_EXE}")
-		dk_call dk_assert CMAKE_EXE
+		dk_call dk_assertVar CMAKE_EXE
 	fi
 }
 

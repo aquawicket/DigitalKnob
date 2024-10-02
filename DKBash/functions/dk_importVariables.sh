@@ -97,7 +97,7 @@ dk_importVariables() {
 	##############################################						################################# EXAMPLE ##########################
 	# PLUGIN_URL
 	PLUGIN_URL="${1}"
-	dk_call dk_assert PLUGIN_URL 
+	dk_call dk_assertVar PLUGIN_URL 
 	dk_call dk_printVar PLUGIN_URL 												# PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 
 	# PLUGIN_URL_FILENAME
@@ -145,7 +145,7 @@ dk_importVariables() {
 	$(dk_call dk_includes "${CMAKE_CURRENT_LIST_DIR}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT=1 || PLUGIN_IMPORT=0		
 	
 	# PLUGIN_IMPORT
-	dk_call dk_assert PLUGIN_IMPORT 
+	dk_call dk_assertVar PLUGIN_IMPORT 
 	dk_call dk_printVar PLUGIN_IMPORT 											# PLUGIN_IMPORT			 	: 1
 	
 	# PLUGIN_IMPORT_PATH
@@ -248,7 +248,7 @@ dk_importVariables() {
 	# PLUGIN_INSTALL_PATH
 	if ! [ "${PLUGIN_INSTALL_PATH-}" ]; then 
 		dk_call dk_assertPath PLUGIN_INSTALL_ROOT 
-		dk_call dk_assert PLUGIN_INSTALL_FOLDER 
+		dk_call dk_assertVar PLUGIN_INSTALL_FOLDER 
 		PLUGIN_INSTALL_PATH="${PLUGIN_INSTALL_ROOT-}/${PLUGIN_INSTALL_FOLDER-}"		
 	fi  
 	dk_call dk_printVar PLUGIN_INSTALL_PATH 									# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
