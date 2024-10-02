@@ -18,14 +18,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if defined linux_arm64_host       set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"
     if not defined CMAKE_DL           %dk_call% dk_error "CMAKE_DL is invalid"
 	
-    %dk_call% dk_basename %CMAKE_DL% CMAKE_DL_FILE
-	%dk_call% dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %CMAKE_FOLDER% CMAKE_FOLDER
-    %dk_call% dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
+    ::%dk_call% dk_basename %CMAKE_DL% CMAKE_DL_FILE
+	::%dk_call% dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
+    ::%dk_call% dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
+	
+	%dk_call% dk_importVariables %CMAKE_DL% PLUGIN_PREFIX
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	set "CMAKE=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
-	
-	
+	set "CMAKE_DIR=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
     set "CMAKE_EXE=%CMAKE%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto:cmake_installed
@@ -35,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_echo MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     ::MsiExec.exe /i "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" INSTALL_ROOT="%DKTOOLS_DIR%\%CMAKE_FOLDER%" /qn
     %dk_call% dk_download "%CMAKE_DL%"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE%"
+	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%CMAKE_DL_FILE%" "%CMAKE_DIR%"
     if NOT exist "%CMAKE_EXE%" %dk_call% dk_error "cannot find CMAKE_EXE:%CMAKE_EXE%"
 	:cmake_installed	
 	
