@@ -1,38 +1,44 @@
 @echo off
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+if exist !%1!  %return%
 ::################################################################################
 ::# dk_assertPath(path)
 ::#
 :dk_assertPath
     call dk_debugFunc 0 99
  setlocal
+	
 	if "!DE!" neq "" %dk_call% dk_fatal "dk_assertPath(%*): requires delayed expansion"
 	
 	:: check that ARG1 is valid
 	if "%~1" equ "" %dk_call% dk_fatal "dk_assertPath(%*): ARG1 is invalid"
 	
 	:: get the name of the variable
-	if defined %~1 (set "_name_=%~1:") else (set "_name_=path:")
+	if defined %~1 (set "_name_=%1:") else (set "_name_=path:")
 	
 	:: check that the path has quotes
 	set "_path_=%1"
 	if "" neq %_path_:~0,1%%_path_:~-1% (
-		if not defined !_path_! (
-			!dk_call! dk_error "!_name_!!_path_%! - path is not quoted"
+		if not defined %~1 (
+			!dk_call! dk_error "dk_assertPath(%*): path is not quoted"
+		)
+	) else (
+		if defined %~1 (
+			!dk_call! dk_error "dk_assertPath(%*): don't quote variable names"
 		)
 	)
 	
 	:: check that we only recieved 1 argument
-	if "%~2" neq "" %dk_call% dk_fatal "dk_assertPath(%*): too many arguments"
+	if "%~2" neq "" (
+		!dk_call! dk_error "dk_assertPath(%*): too many arguments"
+	)
 	
 	:: Without Delayed Expansion
     ::set "_var_=%~1"
     ::if "!DE!" neq "" call set "_value_=%%%_var_%%%"
-    set "_value_=!%~1!"
-	
 	::echo dk_assertPath %_value_%
-    if not exist "!_value_!" !dk_call! dk_error "ASSERTION: dk_assertPath: !_name_!'!_value_!' is not found!"
+    !dk_call! dk_error "ASSERTION: dk_assertPath(%*): path not found!"
 %endfunction%
 
 
@@ -62,13 +68,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_assertPath "!myPath!"								&::OK
 	::# As a variable name
     %dk_call% dk_assertPath myPath									&::OK
+	
+::	%return%
 	::# As a variable name quoted
-    %dk_call% dk_assertPath "myPath"								&::OK
-
+    %dk_call% dk_assertPath "myPath"								&::NOT OK
 	::# unquoted
-::	%dk_call% dk_assertPath C:\Windows							    &::NOT OK
+	%dk_call% dk_assertPath C:\Windows							    &::NOT OK
 	::# As a variable unquoted
-::  %dk_call% dk_assertPath %myPath%								&::NOT OK
+    %dk_call% dk_assertPath %myPath%								&::NOT OK
 	::# Non Existent Path
-::  %dk_call% dk_assertPath "C:\NonExistentPath"					&::ASSERT
+    %dk_call% dk_assertPath "C:\NonExistentPath"					&::ASSERT
 %endfunction%
