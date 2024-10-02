@@ -10,7 +10,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
-    "%GIT_EXE%" --no-pager diff --compact-summary
+    "%GIT_EXE%" -C %DKBRANCH_DIR% --no-pager diff --compact-summary
 %endfunction%
 
 

@@ -13,8 +13,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     %dk_call% dk_confirm || %return%
     
-    cd %DKPLUGINS_DIR%
-    "%GIT_EXE%" clean -f -d
+    %dk_call% dk_cd %DKPLUGINS_DIR%
+    "%GIT_EXE%" -C %DKBRANCH_DIR% clean -f -d
 %endfunction%
 
 

@@ -44,15 +44,15 @@ if NOT exist "%GIT_EXE%" (
 cd %DKBRANCH_DIR%
 pause
 echo Merging %branch% into %destination% and pushing to remote
-"%GIT_EXE%" checkout %branch%
+"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %branch%
 pause
-"%GIT_EXE%" pull
+"%GIT_EXE%" -C %DKBRANCH_DIR% pull
 pause
-"%GIT_EXE%" checkout %destination%
+"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %destination%
 pause
-"%GIT_EXE%" pull origin %destination%
+"%GIT_EXE%" -C %DKBRANCH_DIR% pull origin %destination%
 pause
-"%GIT_EXE%" merge --no-ff --no-commit %branch%
+"%GIT_EXE%" -C %DKBRANCH_DIR% merge --no-ff --no-commit %branch%
 pause
 
 if NOT "%ERRORLEVEL%" == "0" (
@@ -67,7 +67,7 @@ goto eof:
 :conflicts
 echo You will need to fix any existing conflicts to complete the merge.
 pause
-CPP_DK_Execute(GIT_EXE + " git status")
+CPP_DK_Execute(GIT_EXE + " -C %DKBRANCH_DIR% git status")
 
 echo AFTER ALL CONFLICTS ARE RESOLVED, CONTINUE.
 pause 
@@ -78,18 +78,18 @@ goto :resolved
 :resolved
 :: push merge to %destination%
 echo Pushing merge to %destination%
-"%GIT_EXE%" commit -a -m "Merge %branch% Branch in to %destination%"
+"%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "Merge %branch% Branch in to %destination%"
 if NOT "%ERRORLEVEL%" == "0" (
 	echo THERE WAN AN ERROR COMMITING.
 	goto :conflicts
 ) 
-"%GIT_EXE%" push origin %destination%
+"%GIT_EXE%" -C %DKBRANCH_DIR% push origin %destination%
 
 :: Bring branch up to date with %destination%
 echo Bringing %branch% up to date with %destination%
-"%GIT_EXE%" checkout %branch%
-"%GIT_EXE%" merge %destination%
-"%GIT_EXE%" push
+"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %branch%
+"%GIT_EXE%" -C %DKBRANCH_DIR% merge %destination%
+"%GIT_EXE%" -C %DKBRANCH_DIR% push
  
 echo THE MERGE IS COMPLETE.
 %DKEND% 

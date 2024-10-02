@@ -1,5 +1,6 @@
 @echo off
 if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
+::if not defined dk_importVariables (set "dk_importVariables=1") else (goto:eof)
 
 ::#################################################################################
 ::# dk_importVariables PLUGIN_URL rtn_var  BRANCH FOLDER NAME PATH ROOT TAG VERSION
@@ -41,6 +42,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 :dk_importVariables url rtn_var
 	::dk_debugFunc 1 9
 	
+	!dk_call! dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
 	
 ::	!dk_call! dk_getParameter  BRANCH 	PLUGIN_GIT_BRANCH 		!ARGV!  &:: master
@@ -140,7 +142,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
 ::	!dk_call! dk_assert CMAKE_CURRENT_LIST_DIR
-	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
+::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
 ::	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 	set "PLUGIN_IMPORT=1"
 	
@@ -238,7 +240,6 @@ rem				string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 
 	::# PLUGIN_INSTALL_ROOT
 	if NOT defined PLUGIN_INSTALL_ROOT (
-		!dk_call! dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
 		set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
 	)  
 	!dk_call! dk_printVar PLUGIN_INSTALL_ROOT 									&:: PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
@@ -269,7 +270,7 @@ rem				string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 	!dk_call! dk_toUpper !PLUGIN_IMPORT_NAME! PLUGIN_IMPORT_NAME_UPPER 
 	!dk_call! dk_set PLUGIN_PREFIX !PLUGIN_IMPORT_NAME_UPPER! 
 	!dk_call! dk_convertToCIdentifier !PLUGIN_IMPORT_NAME_UPPER! PLUGIN_PREFIX 
-	if NOT defined !PLUGIN_IMPORT_NAME_UPPER! STREQUAL !PLUGIN_PREFIX! (
+	if not "!PLUGIN_IMPORT_NAME_UPPER!" == "!PLUGIN_PREFIX!" (
 		!dk_call! dk_notice "!PLUGIN_IMPORT_NAME_UPPER! contains non-alphanumeric characters and is changed to !PLUGIN_PREFIX!" 
 	)  
 	!dk_call! dk_printVar PLUGIN_PREFIX 										&:: PLUGIN_PREFIX			: ZLIB

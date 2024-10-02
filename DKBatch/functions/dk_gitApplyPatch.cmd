@@ -16,7 +16,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	:: NOTE: We must cd out of the .git local repository, or git apply wont work.
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	cd %DIGITALKNOB_DIR%
+	%dk_call% dk_cd %DIGITALKNOB_DIR%
 	
 ::	%dk_call% dk_validate PATCH_EXE "%dk_call% dk_installGit"
 ::	"%PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run

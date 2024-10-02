@@ -9,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0 1
  setlocal
  
+	title %~1
     cd "%~1"
 %endfunction%
 
@@ -20,5 +21,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_cd todo
+    %dk_call% dk_cd %DIGITALKNOB_DIR%
 %endfunction%

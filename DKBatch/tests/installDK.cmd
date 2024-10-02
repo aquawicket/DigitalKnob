@@ -32,7 +32,7 @@ call dk_load dk_exit
 if NOT exist "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 	cd "%DKBRANCH_DIR%"
-	"%GIT_EXE%" checkout "%DKBRANCH%"
+	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout "%DKBRANCH%"
 	echo Digitalknob installation complete
 ) else (
 	echo DigitalKnob is already installed at %DKBRANCH_DIR%

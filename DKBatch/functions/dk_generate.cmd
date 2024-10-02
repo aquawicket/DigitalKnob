@@ -128,7 +128,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
 ::  ###### WSL CMake Fix ######
 ::  if defined WSLENV; then 
-::      cd "$DKCMAKE_DIR"
+::      %dk_call% dk_cd "$DKCMAKE_DIR"
 ::      set -- "$@" "."
 ::  fi
 	::if defined DK_SHELL (

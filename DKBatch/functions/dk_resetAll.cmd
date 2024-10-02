@@ -52,7 +52,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::do we need to uninstall any apps?
     ::do we need to remove any environment variables?
       
-    cd %DIGITALKNOB_DIR%
+    %dk_call% dk_cd %DIGITALKNOB_DIR%
 
     %dk_call% dk_echo
     %dk_call% dk_info DELETING %DKBRANCH_DIR% . . . .

@@ -37,7 +37,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 			:: create and cd into install directory
 			if not exist %WINPE_DIR% %dk_call% dk_makeDirectory "%WINPE_DIR%" 
-			cd "%WINPE_DIR%"
+			%dk_call% dk_cd "%WINPE_DIR%"
 
 			:::::: Install the OS to the .img file
 			:: (Install from the running virtual OS)
