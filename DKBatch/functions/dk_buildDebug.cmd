@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %return%
     )
 	
-	%dk_call% dk_assert TARGET_PATH
+	%dk_call% dk_assertVar TARGET_PATH
     if exist "%TARGET_PATH%\%triple%\CMakeCache.txt" (
 
         %dk_call% dk_verbose "%CMAKE_EXE% --build %TARGET_PATH%/%triple% --config Debug --verbose"

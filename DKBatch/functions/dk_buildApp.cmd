@@ -16,10 +16,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo "###############################################################"
     %dk_call% dk_echo
 
-    %dk_call% dk_assert TYPE
-    if %TYPE%==All      %dk_call% dk_buildAll
-    if %TYPE%==Release  %dk_call% dk_buildRelease
-    if %TYPE%==Debug    %dk_call% dk_buildDebug
+    %dk_call% dk_assertVar TYPE
+    if %TYPE%==All         %dk_call% dk_buildAll
+    if %TYPE%==Release     %dk_call% dk_buildRelease
+    if %TYPE%==Debug       %dk_call% dk_buildDebug
 
     %dk_call% dk_echo
     %dk_call% dk_echo "####################################################################"

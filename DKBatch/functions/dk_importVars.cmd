@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
 :: setlocal
 
-	%dk_call% dk_assert DKCACHE_DIR
+	%dk_call% dk_assertPath DKCACHE_DIR
 	if not exist "%DKCACHE_DIR%\DKEXPORT_VARS" %dk_call% dk_notice "DKEXPORT_VARS not found.  Nothing imported" && exit /b %errorlevel%
 	
 	::%dk_call% dk_copy "%DKCACHE_DIR%\DKEXPORT_VARS" "%DKCACHE_DIR%\DKEXPORT_VARS.cmd"

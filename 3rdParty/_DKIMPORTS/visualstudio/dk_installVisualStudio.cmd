@@ -9,10 +9,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dk_debugFunc 0	
 	
 	::### VERSION ###
-	%dk_call% dk_set 	VISUALSTUDIO_VERSION 	17
-	%dk_call% dk_set 	VISUALSTUDIO_DL 		"https://aka.ms/vs/%VISUALSTUDIO_VERSION%/release/vs_community.exe"
-	%dk_call% dk_assert ProgramFiles
-	%dk_call% dk_set 	VISUALSTUDIO 			"%ProgramFiles%/Microsoft Visual Studio"
+	%dk_call% dk_set 	   VISUALSTUDIO_VERSION 17
+	%dk_call% dk_set 	   VISUALSTUDIO_DL 		"https://aka.ms/vs/%VISUALSTUDIO_VERSION%/release/vs_community.exe"
+	%dk_call% dk_assertVar ProgramFiles
+	%dk_call% dk_set 	   VISUALSTUDIO 		"%ProgramFiles%/Microsoft Visual Studio"
 
 %endfunction%
 

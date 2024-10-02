@@ -101,7 +101,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::# PLUGIN_URL
 	set "PLUGIN_URL="
 	set "PLUGIN_URL=%~1"
-	!dk_call! dk_assert PLUGIN_URL 
+	!dk_call! dk_assertVar PLUGIN_URL 
 	!dk_call! dk_printVar PLUGIN_URL 											&:: PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	::# PLUGIN_URL_FILENAME
@@ -142,7 +142,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::#######################################################
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
-::	!dk_call! dk_assert CMAKE_CURRENT_LIST_DIR
+::	!dk_call! dk_assertPath CMAKE_CURRENT_LIST_DIR
 ::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
 ::	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 	
@@ -249,8 +249,8 @@ rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 
 	::# PLUGIN_INSTALL_PATH
 	set "PLUGIN_INSTALL_PATH="
-	!dk_call! dk_assert PLUGIN_INSTALL_ROOT 
-	!dk_call! dk_assert PLUGIN_INSTALL_FOLDER 
+	!dk_call! dk_assertVar PLUGIN_INSTALL_ROOT 
+	!dk_call! dk_assertVar PLUGIN_INSTALL_FOLDER 
 	set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!\!PLUGIN_INSTALL_FOLDER!"			
 	!dk_call! dk_printVar PLUGIN_INSTALL_PATH 									&:: PLUGIN_INSTALL_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 
