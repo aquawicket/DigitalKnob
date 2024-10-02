@@ -2,15 +2,13 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 if exist !%1!  %return%
-if "!DE!" neq "" %dk_call% dk_fatal "dk_assertPath(): requires delayed expansion"
+if "!DE!" neq "" %dk_call% dk_fatal "%~0 requires delayed expansion"
 ::################################################################################
 ::# dk_assertPath(path)
 ::#
 :dk_assertPath
     call dk_debugFunc 0 99
  setlocal
-	
-	
 	
 	:: check that ARG1 is valid
 	if "%~1" equ "" %dk_call% dk_fatal "dk_assertPath(%*): ARG1 is invalid"
