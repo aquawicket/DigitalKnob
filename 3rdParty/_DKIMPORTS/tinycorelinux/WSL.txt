@@ -1,0 +1,61 @@
+https://forum.tinycorelinux.net/index.php/topic,25374.0.html
+
+Here are some preliminary results of my attempt to get TinyCore running on Windows Subsystem for Linux (WSL)
+This can be an alternative to the other Virtual-Machine options.
+For more information on this technique https://docs.microsoft.com/en-us/windows/wsl/
+
+What I did, was making a tar file from a running (live) TinyCore system, including installed tce extensions by running this command:
+
+$ sudo su
+# cd /
+# tar -cvpf tinycore.tar --exclude=tinycore.tar --exclude=proc --exclude=dev --exclude=sys /
+
+This file is needed to 'install' it on the WSL system.
+First have the Windows WSL system up and running, this is a trickey part because there are so many Windows distributions out there, after some experiments this was my summary of actions:
+Search for PowerShell, richt click and run as Administrator and execute these 2 commands:
+
+Code: [Select]
+> Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+> Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+
+After this, you have to reboot your windows system.
+
+In the process of importing the tar file (later on) i got an error 'FATAL: kernel to old'
+I did some of these things (not sure which solved it) and the error went away:
+
+Download the 'kernel' update package from
+https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+
+Execute on windows:
+
+Code: [Select]
+wsl_update_x64.msi
+
+In PowerShell execute:
+
+Code: [Select]
+> wsl --set-default-version 2
+
+If all goes well, it is time to 'import' our tar file into the WSL system.
+Choose your destination directory, for me it was c:\temp\TinyCore
+Execute this command in PowerShell:
+
+Code: [Select]
+> wsl --import TinyCore c:\temp\TinyCore .\tinycore.tar
+
+Make sure to use the new WSL kernel on our TinyCore distribution.
+Execute this command in PowerShell:
+
+Code: [Select]
+> wsl --set-version TinyCore 2
+(takes some minutes....)
+
+Time to 'boot' your TinyCore system, execute in PowerShell:
+
+Code: [Select]
+> wsl -d TinyCore
+
+For the result see the attachement. All works, including tce-load etc.
+The backup / restore features of TinyCore are a bit crippled,
+and my 'sda1' user disk is turned into a directory.
+So keep in mind it has some caveats.
