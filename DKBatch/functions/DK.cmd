@@ -1,4 +1,6 @@
 @echo off
+if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
+
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
 title %~n1
@@ -13,20 +15,22 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 ::#
 :DK
-    :: HOME variable. For analogy with Unix systems.
-    if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
-    set "setlocal=setlocal enableDelayedExpansion"
+	set "setlocal=setlocal enableDelayedExpansion"
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
     set "NO_STD=1>nul 2>nul"
+	
+	::if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
     if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
-    if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
-    if "!DE!" == ""   set "return=exit /b !errorlevel!"
-    if "!DE!" neq ""  set "return=exit /b %errorlevel%"
+	if "!DE!" == ""   set "return=exit /b !errorlevel!"
 	if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
-    if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
 	if "!DE!" == ""   set "DKDEBUG=exit /b !errorlevel!"
-    if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
+	
+	::if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
+    ::if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
+    ::if "!DE!" neq ""  set "return=exit /b %errorlevel%"
+    ::if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
+    ::if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
     
 	::###### Initialize Language specifics ######
     call :dk_init
@@ -77,9 +81,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     call dk_source dk_debugFunc
     %dk_call% dk_color
     %dk_call% dk_logo
-
-    if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
-    if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
 	
 	%dk_call% dk_validateDK || set "RELOADED=" && call :dk_DKSCRIPT_PATH "%~1" %*
     ::%DK% dk_load %DKSCRIPT_PATH%

@@ -11,8 +11,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     set "%~1=%~2"
 	
-::debug
-::    %dk_call% dk_printVar %1
+::DEBUG
+::    %dk_call% dk_printVar %~1
 %endfunction%
 
 
