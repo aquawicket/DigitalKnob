@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_installCmake
 	call dk_debugFunc 0
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple.cmd"
+	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
     if defined win_arm32_host         set "CMAKE_DL="
     if defined win_arm64_host         set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"
     if defined win_x86_host           set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"

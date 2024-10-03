@@ -16,7 +16,7 @@ dk_test() {
     echo "__LINE__      = $(__LINE__)"
     echo "__FUNCTION__  = $(__FUNCTION__)"
     echo "__ARGC__      = $(__ARGC__)"
-#    echo "__ARGV__      = $(__ARGV__)"
+#    echo "__ARGV__     = $(__ARGV__)"
     echo "__CALLER__    = $(__CALLER__)"
 
     #return "return value from dk_test.ps1"
