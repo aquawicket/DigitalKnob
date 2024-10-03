@@ -65,13 +65,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::set "DKSCRIPT_EXT=.sh"
     ::set "DKSCRIPT_ARGS=%ALL_BUT_FIRST_ARGS%"
     
-    
+    :: Call DKBash function
     set DKBASH_COMMAND="%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST_ARGS%'"
+    ::echo %DKBASH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
-		echo %%Z
-		set "rtn_value=%%Z"
+        echo %%Z                &rem  Display the other shell's stdout
+        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
 	)
-
+    ::echo rtn_value = !rtn_value!
+    
 	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%
 
@@ -83,7 +85,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	call dk_callDKBash dk_test "arg 1" "arg 2" rtn_var
-	echo rtn_var = %rtn_var%
+	%dk_call% dk_callDKBash dk_test "FROM DKBatch" "dk_callDKBash.cmd" rtn_var
+    %dk_call% dk_echo
+	%dk_call% dk_echo rtn_var = %rtn_var%
 
 %endfunction%
