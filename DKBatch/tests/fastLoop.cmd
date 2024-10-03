@@ -40,7 +40,7 @@ echo Number e = !whileResult:~0,-%DIGITS%!.!whileResult:~-%DIGITS%!
 echo/
 echo/
 pause
-goto:eof
+goto eof
 
 :factorial
 setlocal

@@ -1,6 +1,6 @@
 @echo off
 
-if "%~1" neq "" goto:runDKPowershell
+if "%~1" neq "" goto runDKPowershell
 :installDKPowershell
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -42,5 +42,5 @@ if "%~1" neq "" goto:runDKPowershell
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload
 	cls
-	goto:runDKPowershell
+	goto runDKPowershell
 %endfunction%

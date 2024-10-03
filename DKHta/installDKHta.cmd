@@ -1,6 +1,6 @@
 @echo off
 
-if "%~1" neq "" (goto:runDKHta)
+if "%~1" neq "" (goto runDKHta)
 :installDKHta
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"

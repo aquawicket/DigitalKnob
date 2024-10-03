@@ -1,6 +1,6 @@
 @echo off
 
-if "%~1" neq "" (goto:runDKVb)
+if "%~1" neq "" (goto runDKVb)
 :installDKVb
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"

@@ -1,7 +1,7 @@
 @echo off
 
-if "%~1" equ "%~0" goto:installDKBatch
-if "%~1" neq ""    goto:runDKBatch
+if "%~1" equ "%~0" goto installDKBatch
+if "%~1" neq ""    goto runDKBatch
 :installDKBatch
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -56,6 +56,5 @@ if "%~1" neq ""    goto:runDKBatch
 	::###### reload ######
 	if not exist "%DKCACHE_DIR%\reload" goto:eof
 	del "%DKCACHE_DIR%\reload"
-	goto:runDKBatch
-	
+	goto runDKBatch
 %endfunction%

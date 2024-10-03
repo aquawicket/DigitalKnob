@@ -1,6 +1,6 @@
 @echo off
 set "input=%~dp0dk_polyglot"
-goto:main
+goto main
 
 :copyTo .ext
 	set "output=%input%%~1"

@@ -10,7 +10,7 @@ if %count% lss 10 (
 	
 	echo %count%
 	
-	set /a "count+=1" & goto:loop
+	set /a "count+=1" & goto loop
 )
 
 
@@ -18,7 +18,7 @@ if %count% lss 10 (
 
 
 set "while=if not defined n set /a n=0"
-set "endwhile=set /a "n+=1" & goto:while"
+set "endwhile=set /a "n+=1" & goto while"
 
 
 

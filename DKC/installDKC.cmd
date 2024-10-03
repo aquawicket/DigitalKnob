@@ -42,7 +42,7 @@
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
 
-if "%~1" neq "" goto:runDKC
+if "%~1" neq "" goto runDKC
 :installDKC
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"

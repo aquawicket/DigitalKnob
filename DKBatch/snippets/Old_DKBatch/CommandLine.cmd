@@ -39,8 +39,8 @@
 :main
 	call:enter_command
     call:run_command
-	goto:main
-goto:end
+	goto main
+goto end
 
 :enter_command
    echo Enter a command:

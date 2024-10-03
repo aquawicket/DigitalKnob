@@ -10,7 +10,7 @@
 
 	
 	:: This method allows us to place all code inline
-	call :method2 & goto:endMethod2
+	call :method2 & goto endMethod2
 	:method2
 	test_jumpToLabelB
 	:endMethod2
@@ -18,7 +18,7 @@
 
 	
 	:: This method also allows us to place all code inline
-<:method3 <nul call :method3 & goto:endMethod3
+<:method3 <nul call :method3 & goto endMethod3
 test_jumpToLabelB
 <:endMethod3
 	echo returned from test_jumpToLabelB :method3

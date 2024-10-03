@@ -10,7 +10,7 @@ echo calling main
 :main
 	echo time = >%$time:#=!second!% seconds
 	::echo time is %$test:#=!second!%
-goto:main
+goto main
 
 
 

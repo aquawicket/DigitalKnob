@@ -18,7 +18,7 @@ dk_test
     if defined %1 (
         %dk_call% dk_set _testvar_ "!!%1!!"
         echo isVariable
-        goto:printTestVar
+        goto printTestVar
     )
     if defined %1[0] (
         ::echo !!%1[0]!!
@@ -27,7 +27,7 @@ dk_test
         %dk_call% dk_set _testvar_ "!!%~1[0]!!"
         %dk_call% dk_set _testvar_[0] "!!%~1[0]!!"
         echo isArray
-        goto:printTestVar
+        goto printTestVar
     )
     endlocal
     if not defined _testvar_ (

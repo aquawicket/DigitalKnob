@@ -14,7 +14,7 @@ set $time=0^&call:getTime
 	set sec=%$time:0=!second!%
 	call:printTime "%sec%"
 	echo %sec% > file.txt
-goto:main
+goto main
 
 
 

@@ -4,7 +4,7 @@
 	if defined __callTest__ (
 		set "startMethod=%__callTest__%" 
 		set "__callTest__=" 
-		goto:test_forceCallB
+		goto test_forceCallB
 	)
 	
 	set _f0=%~f0

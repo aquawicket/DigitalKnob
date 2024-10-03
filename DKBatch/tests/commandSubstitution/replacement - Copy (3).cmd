@@ -17,7 +17,7 @@ set $last=^&call:last
 	echo --------------------------
 	echo %$first:!$middle!=!$last!%
 
-	goto:main
+	goto main
 %endfunction%
 
 

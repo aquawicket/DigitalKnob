@@ -33,7 +33,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 		for %%x in ("%current_dir%\..\") do set parent_dir=%%~dpx
 		for %%a in ("%parent_dir%") do for %%b in ("%%~dpa\.") do set "parent_folder=%%~nxb"
 		set current_dir=%parent_dir%
-		if "%parent_folder%" neq "digitalknob" goto:find_dkbranch_dir_loop
+		if "%parent_folder%" neq "digitalknob" goto find_dkbranch_dir_loop
 		if [%parent_dir:~-1%] == [\] set "parent_dir=%parent_dir:~0,-1%"
 		if [%parent_dir:~-1%] == [/] set "parent_dir=%parent_dir:~0,-1%"
 		set %1=%parent_dir%

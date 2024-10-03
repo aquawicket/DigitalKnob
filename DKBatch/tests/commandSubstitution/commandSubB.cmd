@@ -34,7 +34,7 @@ echo FIRST LOOP
 	
 	echo:
 
-goto:main
+goto main
 
 
 

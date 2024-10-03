@@ -42,8 +42,8 @@
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
 
-if "%~1" equ "%~0" goto:installDKCpp
-if "%~1" neq ""    goto:runDKCpp
+if "%~1" equ "%~0" goto installDKCpp
+if "%~1" neq ""    goto runDKCpp
 :installDKCpp
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -140,5 +140,5 @@ if "%~1" neq ""    goto:runDKCpp
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload
 	cls
-	goto:runDKCpp
+	goto runDKCpp
 %endfunction%

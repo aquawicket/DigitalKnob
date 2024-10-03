@@ -1,7 +1,7 @@
 @echo off
 
 call:main
-goto:eof
+goto eof
 
 :main
 	::echo before call returnWithoutCallB
@@ -22,7 +22,7 @@ goto:eof
 	
 
 :returnWithoutCallB
-	:returnWithoutCallB_return & returnWithoutCallB & goto:returnWithoutCallB_return & call %~f0
+	:returnWithoutCallB_return & returnWithoutCallB & goto returnWithoutCallB_return & call %~f0
 	::returnWithoutCallB_return
 	echo after returnWithoutCallB
 	pause

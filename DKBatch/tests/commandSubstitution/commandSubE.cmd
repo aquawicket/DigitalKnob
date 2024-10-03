@@ -7,7 +7,7 @@ set $time=0^&call:getTime
 	set /p sec=%$time:0=!second!%
 	echo sec = '%sec%'
 
-goto:main
+goto main
 
 
 

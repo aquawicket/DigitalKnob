@@ -1,6 +1,6 @@
 @echo off
 
-if not "%~1" == "" (goto:runDKCMake)
+if not "%~1" == "" (goto runDKCMake)
 :installDKCMake
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_    set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
@@ -43,5 +43,5 @@ if not "%~1" == "" (goto:runDKCMake)
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload
 	cls
-	goto:runDKCMake
+	goto runDKCMake
 %endfunction%

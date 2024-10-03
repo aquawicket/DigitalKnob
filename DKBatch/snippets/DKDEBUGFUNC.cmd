@@ -3,7 +3,7 @@ setlocal EnableDelayedExpansion
 ::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
-goto:END_DKDEBUGFUNC
+goto END_DKDEBUGFUNC
 :DKDEBUGFUNC
 	setlocal
 	::echo :DKDEBUGFUNC(%0 %1 %2 %3 %4 %5 %6 %7 %8 %9)

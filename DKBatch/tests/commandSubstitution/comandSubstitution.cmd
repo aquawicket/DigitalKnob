@@ -15,7 +15,7 @@ set $time=^&call:getTime^&echo
 	::echo time is &call:getTime
 	echo ^> !$time:%$time%=%second%! ^<
 	::echo the time is !$time:%$time%:%second%! seconds
-	goto:main
+	goto main
 %endfunction%
 
 
