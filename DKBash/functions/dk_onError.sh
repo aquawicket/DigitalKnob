@@ -35,7 +35,7 @@ dk_onError() {
 	echo "### dk_onError: $(__FILE__ 8):$(__LINE__ 8) ###"
 	echo "### dk_onError: $(__FILE__ 9):$(__LINE__ 9) ###"
 }
-trap 'dk_onError $BASH_SOURCE $LINENO' ERR
+trap 'dk_onError ${BASH_SOURCE-} ${LINENO}' ERR
 
 
 
