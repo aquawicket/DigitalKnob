@@ -29,9 +29,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 	if "!DE!" == ""   set "return=exit /b !errorlevel!"
 	if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
 	if "!DE!" == ""   set "DKDEBUG=exit /b !errorlevel!"
-    
-	::###### Initialize Language specifics ######
-    call :dk_init
 
     ::###### set DKSCRIPT_PATH ######
     call :dk_DKSCRIPT_PATH "%~1" %*
@@ -104,13 +101,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 :dk_echo
     echo %~1
-%endfunction%
-
-::##################################################################################
-::# dk_init
-::#
-:dk_init
-    call :dk_echo "Loading DKBatch DigitalKnob . . ."
 %endfunction%
 
 ::##################################################################################
