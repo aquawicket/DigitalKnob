@@ -37,13 +37,6 @@ if "%~1" neq ""    goto runDKBatch
 	if not exist "%DKSCRIPT_PATH%"           set "DKSCRIPT_PATH=%~4"
 	if not defined DKSCRIPT_ARGS             for /f "tokens=4,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
 	
-	::echo DKBATCH_FUNCTIONS_DIR  = %DKBATCH_FUNCTIONS_DIR%
-	::echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
-	::echo ComSpec                = %ComSpec%
-	::echo DKCACHE_DIR            = %DKCACHE_DIR%
-	::echo DKSCRIPT_PATH          = %DKSCRIPT_PATH%
-	::echo DKSCRIPT_ARGS          = %DKSCRIPT_ARGS%
-	
 	::###### run script ######
 	:: /K		keep the window open at the CMD prompt.
 	:: /V:ON	enable delayed expansion

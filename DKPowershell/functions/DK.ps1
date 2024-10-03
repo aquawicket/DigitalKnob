@@ -1,7 +1,4 @@
-
 if(${DKINIT}){return} else{ $global:DKINIT=1 }	# include_guard
-
-Write-Output "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 
 #####################################################################
 # DKINIT()
