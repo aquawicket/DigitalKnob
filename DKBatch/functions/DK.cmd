@@ -13,10 +13,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::#
 ::#
 :DK
-	set "setlocal=setlocal enableDelayedExpansion"
     set "NO_STDOUT=1>nul"
     set "NO_STDERR=2>nul"
-    set "NO_STD=1>nul 2>nul"
+    set "NO_OUTPUT=1>nul 2>nul"
 	
 	::if "!DE!" neq ""  echo delayed expansion = OFF
     if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"

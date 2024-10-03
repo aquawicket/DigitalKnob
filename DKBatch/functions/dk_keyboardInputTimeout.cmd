@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     set "cache_file=%DKCACHE_DIR%\keyboardInputTimeout_cache.tmp"
     set "thread_file=%DKCACHE_DIR%\keyboardInputTimeout_thread.cmd"
-    %dk_call% dk_delete %cache_file% %NO_STD%
+    %dk_call% dk_delete %cache_file% %NO_OUTPUT%
     
     echo ^@echo off> %thread_file%
     echo set /p var=>> %thread_file%
@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     <nul set /p "="<NUL
     %dk_call% dk_setTitle %timeout%
 
-    ping -n 2 localhost %NO_STD%
+    ping -n 2 localhost %NO_OUTPUT%
     if !timeout! GTR 0 (
         %dk_call% dk_setTitle %timeout%
         if not exist %cache_file% goto keyboard_input_timeout_loop
@@ -44,10 +44,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_setTitle
     
     :keyboard_input_timeout_result
-    del %thread_file% %NO_STD%
+    del %thread_file% %NO_OUTPUT%
     if exist %cache_file% (
         set /p result=<%cache_file%
-        %dk_call% dk_delete %cache_file% %NO_STD%
+        %dk_call% dk_delete %cache_file% %NO_OUTPUT%
     ) else ( 
         set "result=%default%"
     )
