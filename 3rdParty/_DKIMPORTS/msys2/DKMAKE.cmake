@@ -52,7 +52,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	
 	### Update with pacman ###
 	dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
-	dk_assertPath(PACMAN_EXE)
+	dk_assert(PACMAN_EXE)
 	dk_command(${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	
 	### Install toolchain ###

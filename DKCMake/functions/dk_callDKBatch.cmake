@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ##################################################################################
-# dk_callDKBatch(func) args
+# dk_callDKBatch(function, arguments..., rtn_var)
 #
 #
 function(dk_callDKBatch func rtn_var)
@@ -41,7 +41,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-    dk_callDKBatch(dk_test rtn_var "FROM DKBatch" "dk_callDKBash.cmd")
+    dk_callDKBatch(dk_test rtn_var "FROM DKCmake" "dk_callDKBatch.cmake")
     dk_echo()
 	dk_echo("rtn_var = ${rtn_var}")
 endfunction()
