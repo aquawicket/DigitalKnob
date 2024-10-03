@@ -52,12 +52,10 @@ DK(){
     dk_call dk_logo
     dk_source dk_download
     #dk_source dk_basename
-    dk_source "${DKSCRIPT_PATH}"
+    #dk_source "${DKSCRIPT_PATH}"
+    #${DKSCRIPT_NAME} ${DKSCRIPT_ARGS}
 
     ###### DKTEST MODE ######
-    #dk_call dk_echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
-    echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-    echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
     [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
         dk_source dk_call
@@ -84,7 +82,7 @@ dkreloadWithBash(){
         echo "reloading with bash . . . ${0}"
         unset DKINIT
         export DKINIT=""
-        dk_call dk_commandExists bash || dk_call dk_installPackage bash
+        dk_commandExists bash || dk_installPackage bash
         exec bash "${0}"
     fi
 }
@@ -186,7 +184,7 @@ dksetupCallstack(){
 #
 DKSCRIPT_VARS(){
     ### DKSCRIPT_PATH ###
-    export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
+    dk_call dk_defined           DKSCRIPT_PATH          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"

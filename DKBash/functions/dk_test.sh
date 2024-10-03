@@ -1,4 +1,15 @@
 #!/bin/sh
+echo "########## dk_test.sh ##########"
+echo "                    0 = $0"
+echo "                    * = $*"
+echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
+echo "        DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+    
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR-}/DK.sh"
 
 ##################################################################################
@@ -17,6 +28,7 @@ dk_test() {
     echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     echo "             __TIME__ = $(__TIME__)"
     echo "             __FILE__ = $(__FILE__)"
     echo "             __LINE__ = $(__LINE__)"
@@ -25,7 +37,8 @@ dk_test() {
     echo "             __ARGV__ = $(__ARGV__ 1)"
     echo "           __CALLER__ = $(__CALLER__)"
 
-    #return "return value from dk_test.ps1"
+    #dk_return "return value from dk_test.sh"
+    builtin echo "return value from dk_test.sh"
 }
 
 
@@ -37,7 +50,8 @@ DKTEST() {
     dk_debugFunc 0
 
     rtn_var=$(dk_call dk_test "arg 1" "arg 2")
-    echo "rtn_var = ${rtn_var}"	
+    dk_call dk_echo
+    dk_call dk_echo "rtn_var = ${rtn_var}"	
 
 
     return

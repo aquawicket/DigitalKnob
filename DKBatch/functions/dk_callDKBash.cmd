@@ -33,17 +33,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
     set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
     set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:=/c%"
+    
     set "DKSCRIPT_PATH=%DKBASH_FUNCTIONS_DIR%/%~1.sh"
     set "DKSCRIPT_DIR=%DKBASH_FUNCTIONS_DIR%"
     set "DKSCRIPT_NAME=%~1"
     set "DKSCRIPT_EXT=.sh"
+    set "DKSCRIPT_ARGS=%ALL_BUT_FIRST_ARGS%"
     set "DKINIT="
-    set "RELOAD_WITH_BASH=1"
+    set "RELOAD_WITH_BASH=0"
+    set "DKCOMMAND=%func% %ALL_BUT_FIRST_ARGS%"
     
     ::set DKBASH_COMMAND="%BASH_EXE% -c 'export DKINIT=0 ^& export RELOAD_WITH_BASH=0 ^& export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% ^& . %DKBASH_FUNCTIONS_DIR%/%~1.sh ^& %~1'"
     set DKBASH_COMMAND="%BASH_EXE% '%DKBASH_FUNCTIONS_DIR%/%~1.sh'"
-    
-    echo %DKBASH_COMMAND%
+    ::echo %DKBASH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
 		echo %%Z
 		set "rtn_value=%%Z"
