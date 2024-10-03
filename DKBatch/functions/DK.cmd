@@ -20,17 +20,17 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     set "NO_STDERR=2>nul"
     set "NO_STD=1>nul 2>nul"
 	
-	::if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
-    if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
+	if "!DE!" == ""  %dk_call% dk_echo "delayed expansion = ON"
+        if "!DE!" == ""   set "endfunction=exit /b !errorlevel!"
 	if "!DE!" == ""   set "return=exit /b !errorlevel!"
 	if "!DE!" == ""   set "DEBUG=exit /b !errorlevel!"
 	if "!DE!" == ""   set "DKDEBUG=exit /b !errorlevel!"
 	
-	::if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
-    ::if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
-    ::if "!DE!" neq ""  set "return=exit /b %errorlevel%"
-    ::if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
-    ::if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
+	if "!DE!" neq "" %dk_call% dk_echo "delayed expansion = OFF"
+        if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
+        if "!DE!" neq ""  set "return=exit /b %errorlevel%"
+        if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
+        if "!DE!" neq ""  set "DKDEBUG=exit /b %errorlevel%"
     
 	::###### Initialize Language specifics ######
     call :dk_init
