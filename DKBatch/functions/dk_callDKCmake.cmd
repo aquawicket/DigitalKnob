@@ -41,10 +41,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%return%
     ::echo %CMAKE_COMMAND%
     for /f "delims=" %%Z in ('%CMAKE_COMMAND%') do (
-    rem for /f "usebackq delims=" %%Z in (`%CMAKE_COMMAND%`) do (  
         echo %%Z                &rem  Display the other shell's stdout
         set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
     )
+    ::echo rtn_value = !rtn_value!
     
 	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%
@@ -58,5 +58,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_callDKCmake dk_test "arg 1" "arg 2" rtn_var
-	echo rtn_var = %rtn_var%
+	%dk_call% dk_echo
+    %dk_call% dk_echo "rtn_var = %rtn_var%"
 %endfunction%

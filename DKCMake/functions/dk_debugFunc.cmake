@@ -17,18 +17,19 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #		endfunction()
 #
 macro(dk_debugFunc)
-	get_filename_component(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" NAME CACHE INTERNAL "")
 
-	#set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
+	set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
+    get_filename_component(__FILE__ "${__FILE__}" NAME CACHE INTERNAL "")
 	set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}" CACHE INTERNAL "")
 	set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}"       CACHE INTERNAL "")
-	
+    set(__ARGC__ "${ARGC}"                             CACHE INTERNAL "")
 	if(ARGV)
 		string(STRIP "${ARGV}" __ARGV__)
 		string(REPLACE ";" "', '" __ARGV__ "${ARGV}")
 		#string(REGEX REPLACE "([][+.*()^])" "\\\\\\1" __ARGV__ "${ARGV}")
 		set(__ARGV__ "${__ARGV__}" CACHE INTERNAL "")
 	endif()
+    
 	#message("${__FUNCTION__}(${__ARGV__})")
 
 	list(GET STACK_LEVEL 0 __LEVEL__)
