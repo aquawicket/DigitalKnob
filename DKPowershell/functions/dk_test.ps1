@@ -18,7 +18,6 @@ function GLOBAL:dk_test() {
 	dk_call dk_echo "__ARGC__      = $(__ARGC__)"
 	dk_call dk_echo "__ARGV__      = $(__ARGV__)"
 	dk_call dk_echo "__CALLER__    = $(__CALLER__)"
-	#if($args[0]){ dk_call dk_echo "args[0]      = ${args[0]}" }
 	
 	$all_args = $PsBoundParameters.Values + ${args}
 	if($all_args){ dk_call dk_debug "all_args = $all_args"   }
@@ -41,8 +40,7 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$rtn_var = dk_call dk_test "arg 1" "arg 2"
-	
-	dk_call dk_echo
-	dk_call dk_echo "##### DKTEST() ###############"
 	dk_call dk_echo "rtn_var = ${rtn_var}"
+	
+	return
 }

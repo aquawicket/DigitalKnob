@@ -9,14 +9,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0 99
  setlocal
  
-	echo "dk_test(%*)"
+	%dk_call% dk_echo "DKSCRIPT_PATH = %DKSCRIPT_PATH%"
+	%dk_call% dk_echo "DKSCRIPT_DIR  = %DKSCRIPT_DIR%"
+	%dk_call% dk_echo "DKSCRIPT_NAME = %DKSCRIPT_NAME%"
+	%dk_call% dk_echo "DKSCRIPT_EXT  = %DKSCRIPT_EXT%"
+	%dk_call% dk_echo "__FILE__      = %__FILE__%"
+	%dk_call% dk_echo "__LINE__      = %__LINE__%"
+	%dk_call% dk_echo "__FUNCTION__  = %__FUNCTION__%"
+	%dk_call% dk_echo "__ARGC__      = %__ARGC__%"
+::	%dk_call% dk_echo "__ARGV__      = %__ARGV__%"
+	%dk_call% dk_echo "__CALLER__    = %__CALLER__%"
 	
-	::set count=0
-	::for %%a in (%*) do set /a count+=1
-	set "rtn_value=return value from dk_test.cmd"
-	
-	for %%a in (%*) do set last_arg=%%a
-	if "%last_arg%" == "rtn_var" endlocal & set "%last_arg%=%rtn_value%" && echo %rtn_value%
+	endlocal & set "rtn_var=value from dk_test.cmd"
 %endfunction%
 
 
@@ -30,5 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     %dk_call% dk_test "arg 1" "arg 2" rtn_var
-	echo rtn_var = '%rtn_var%'
+	%dk_call% dk_echo "rtn_var = '%rtn_var%'"
+	
+	%return%
 %endfunction%
