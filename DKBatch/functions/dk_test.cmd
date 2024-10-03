@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo "         DKSCRIPT_DIR = %DKSCRIPT_DIR%"
     %dk_call% dk_echo "        DKSCRIPT_NAME = %DKSCRIPT_NAME%"
     %dk_call% dk_echo "         DKSCRIPT_EXT = %DKSCRIPT_EXT%"
-    %dk_call% dk_echo "        DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
+                 echo "        DKSCRIPT_ARGS = %DKSCRIPT_ARGS%"
     %dk_call% dk_echo "           DKHOME_DIR = %DKHOME_DIR%"
     %dk_call% dk_echo "          DKCACHE_DIR = %DKCACHE_DIR%"
     %dk_call% dk_echo "        DKDESKTOP_DIR = %DKDESKTOP_DIR%"
@@ -41,9 +41,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_echo "DKBASH_FUNCTIONS_DIR_ = %DKBASH_FUNCTIONS_DIR_%"
     
     set "return_value=return value from dk_test.cmd"
-    
-    endlocal & set "rtn_var=%return_value%"
-    echo "%return_value%"
+    echo %return_value%
+    endlocal & set "%3=%return_value%"
 %endfunction%
 
 
@@ -58,5 +57,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
     %dk_call% dk_test "arg 1" "arg 2" rtn_var
     %dk_call% dk_echo
-	%dk_call% dk_echo "rtn_var = '%rtn_var%'"
+	%dk_call% dk_echo "rtn_var = %rtn_var%"
 %endfunction%
