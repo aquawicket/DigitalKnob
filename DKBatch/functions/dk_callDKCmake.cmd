@@ -2,21 +2,21 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::################################################################################
-::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
+::# dk_callDKCmake(function, arguments..., rtn_var)
 ::#
 ::#
-:dk_cmakeEval
+:dk_callDKCmake
     call dk_debugFunc 1 4
  setlocal
  
     %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-    if not exist "%DKIMPORTS_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKIMPORTS_DIR"
+    %dk_call% dk_assertPath DKIMPORTS_DIR
     
     %dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-    if not exist "%DKCMAKE_DIR%" %dk_call% dk_error "%__FUNCTION__%(): could not locate DKCMAKE_DIR"
+    %dk_call% dk_assertPath DKCMAKE_DIR
     
     %dk_call% dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake"
-    if not exist "%CMAKE_EXE%"   %dk_call% dk_error "%__FUNCTION__%(): could not locate CMAKE_EXE" 
+    %dk_call% dk_assertPath CMAKE_EXE
     
     %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
     ::%dk_call% dk_printVar DKCOMMAND
@@ -105,5 +105,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_cmakeEval "dk_info('test dk_info message'); dk_warning('test dk_info message')"
+    %dk_call% dk_callDKCmake dk_test "arg 1" "arg 2" rtn_var
+	echo rtn_var = %rtn_var%
 %endfunction%
