@@ -9,7 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_callDKBash
     call dk_debugFunc 1 99
  setlocal
-	
+
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKBASH_FUNCTIONS_DIR%" set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"
 	if not exist "%DKBASH_FUNCTIONS_DIR%" mkdir "%DKBASH_FUNCTIONS_DIR%"
@@ -17,23 +17,29 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if not defined DKHTTP_DKBASH_FUNCTIONS_DIR  set "DKHTTP_DKBASH_FUNCTIONS_DIR=%DKHTTP_DKBASH_DIR%/functions"
 	if not exist %DKBASH_FUNCTIONS_DIR%\DK.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh"
 	if not exist %DKBASH_FUNCTIONS_DIR%\%~1.sh %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh"
-	
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 
-	:: get last argument
-	for %%a in (%*) do set LAST_ARG=%%a
+	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 	
-	:: get all but fisrt argument
+	:: get ALL_BUT_FIRST_ARGS
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
 	
+    :: get LAST_ARG
+	for %%a in (%*) do set LAST_ARG=%%a
+    
 	set DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%
+    set DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%
 	set DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%
-	::for /f "delims=" %%Z in (". %BASH_EXE% %DKBASH_FUNCTIONS_DIR%/%~1.sh %ALL_BUT_FIRST_ARGS%") do (
-	
-	::(cmd /c %BASH_EXE% -c "printenv")
-	::%BASH_EXE% -c "export DKINIT= && export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% && . C:/Users/Administrator/digitalknob/Development/DKBash/functions/dk_test.sh"
-	
-	for /f "delims=" %%Z in ('%BASH_EXE% -c "export DKINIT= && export RELOAD_WITH_BASH=0 && export DKSCRIPT_PATH=%DKSCRIPT_PATH% && export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% && . %DKBASH_FUNCTIONS_DIR%/DK.sh && . %DKBASH_FUNCTIONS_DIR%/%~1.sh && %~1 %ALL_BUT_FIRST_ARGS%"') do (
+    set DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:=/c%
+    set "DKINIT="
+    set "RELOAD_WITH_BASH=0"
+    
+    set DKBASH_COMMAND="%BASH_EXE% -c 'export DKINIT=0 ^& export RELOAD_WITH_BASH=0 ^& export DKSCRIPT_PATH=%DKSCRIPT_PATH% ^& export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% ^& . %DKBASH_FUNCTIONS_DIR%/%~1.sh ^& %~1'"
+    ::set "DKBASH_COMMAND=%BASH_EXE% -c "export DKINIT=" ^&^& export RELOAD_WITH_BASH=0 ^&^& export DKSCRIPT_PATH=%DKSCRIPT_PATH% ^&^& export DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR% ^&^& . %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %ALL_BUT_FIRST_ARGS%"
+    ::set "DKBASH_COMMAND=%BASH_EXE% "export DKSCRIPT_PATH=!DKSCRIPT_PATH!!\n! %DKBASH_FUNCTIONS_DIR%/%~1.sh!\n! %~1 %ALL_BUT_FIRST_ARGS%""
+    ::%DKBASH_COMMAND%
+    ::%return%
+    echo %DKBASH_COMMAND%
+	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
 		echo %%Z
 		set "rtn_value=%%Z"
 	)
@@ -49,7 +55,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_callDKBash dk_test "arg 1" "arg 2" rtn_var
+	call dk_callDKBash dk_test "arg 1" "arg 2" rtn_var
 	echo rtn_var = %rtn_var%
 
 %endfunction%

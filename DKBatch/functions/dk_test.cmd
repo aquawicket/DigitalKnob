@@ -9,6 +9,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0 99
  setlocal
  
+    echo ########## dk_test.cmd ##########
     echo  0 = %0
     echo  * = %*
 	echo  DKSCRIPT_PATH = %DKSCRIPT_PATH%

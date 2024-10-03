@@ -1,4 +1,7 @@
 #!/bin/sh
+echo "###### dk_test.sh ######"
+echo "DKBASH_FUNCTIONS_DIR = '${DKBASH_FUNCTIONS_DIR}'"
+echo "DKINIT = '${DKINIT}'"
 [ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR}/DK.sh"
 
 ##################################################################################
@@ -7,7 +10,8 @@
 #
 dk_test() {
     dk_debugFunc 0 99
-
+    
+    echo "########## dk_test.sh ##########"
     echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}"
     echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"

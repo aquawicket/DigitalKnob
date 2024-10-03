@@ -40,6 +40,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%CMAKE_COMMAND%
     ::%return%
     ::echo %CMAKE_COMMAND%
+    
     for /f "delims=" %%Z in ('%CMAKE_COMMAND%') do (
         echo %%Z                &rem  Display the other shell's stdout
         set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
