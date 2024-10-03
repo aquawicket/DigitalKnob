@@ -103,16 +103,6 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 %endfunction%
 
 ::##################################################################################
-::# dk_DKSCRIPT_PATH
-::#
-:dk_DKSCRIPT_PATH
-    if not exist   "%~1"             echo :dk_DKSCRIPT_PATH must be called with %%~0 %%*. I.E.  "call :dk_DKSCRIPT_PATH" %%~0 %%* & pause & exit 1
-    if not defined  DKSCRIPT_PATH    set "DKSCRIPT_PATH=%~1"
-    if not exist   "%DKSCRIPT_PATH%" echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
-	if not defined  DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
-%endfunction%
-
-::##################################################################################
 ::# dk_DKSCRIPT_DIR
 ::#
 :dk_DKSCRIPT_DIR
@@ -137,7 +127,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 :dk_reload
 	if "%DKSCRIPT_EXT%" neq ".cmd" goto end_dk_reload
     if defined RELOADED goto end_dk_reload
-        echo "reloading with delayed expansion . . ."
+        echo reloading with delayed expansion . . .
         set "RELOADED=1"
         set "DKINIT="
 
@@ -192,13 +182,28 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 
 
 ::##################################################################################
+::# dk_DKSCRIPT_PATH
+::#
+:dk_DKSCRIPT_PATH
+	if not exist   "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%__FILE__%"
+    if not exist   "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%~1"
+	::if not exist   "%DKSCRIPT_PATH%" set "DKSCRIPT_PATH=%0"
+    if not exist   "%DKSCRIPT_PATH%" echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist && goto:eof
+	
+	if not defined  DKSCRIPT_ARGS     set "DKSCRIPT_ARGS=%__ARGS__%"
+	if not defined  DKSCRIPT_ARGS    for /f "tokens=1,* delims= " %%a in ("%*") do set DKSCRIPT_ARGS=%%b
+%endfunction%
+
+
+::##################################################################################
 ::# dk_DKSCRIPT_VARS
 ::#
 :dk_DKSCRIPT_VARS
     if not exist   "%DKSCRIPT_PATH%"  set "DKSCRIPT_PATH=%__FILE__%"
-    if not exist   "%DKSCRIPT_PATH%"  set "DKSCRIPT_PATH=%0"
+    ::if not exist   "%DKSCRIPT_PATH%"  set "DKSCRIPT_PATH=%0"
     if not exist   "%DKSCRIPT_PATH%"  echo ERROR: DKSCRIPT_PATH:%DKSCRIPT_PATH% does not exist & pause & exit 1
 	if not defined  DKSCRIPT_ARGS     set "DKSCRIPT_ARGS=%__ARGS__%"
+	
 	if not exist   "%DKSCRIPT_DIR%"   for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
 	if [%DKSCRIPT_DIR:~-1%] == [\]    set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
     if not exist   "%DKSCRIPT_DIR%"   echo ERROR: DKSCRIPT_DIR:%DKSCRIPT_DIR% does not exist & pause & exit 1

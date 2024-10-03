@@ -25,6 +25,6 @@ function Global:dk_callDKBatch() {
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	#dk_callDKBatch dk_messageBox rtn_var "MessageBox Title" "Testing dk_messageBox"
+	dk_callDKBatch dk_debug "Testing dk_messageBox"
 	#dk_debug "rtn_var = ${rtn_var}"
 }

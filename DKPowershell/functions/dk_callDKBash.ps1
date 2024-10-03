@@ -22,7 +22,7 @@ function Global:dk_callDKBash() {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-function Global:dk_callDKBash() {
+function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	#dk_callDKBash dk_messageBox rtn_var "MessageBox Title" "Testing dk_messageBox"

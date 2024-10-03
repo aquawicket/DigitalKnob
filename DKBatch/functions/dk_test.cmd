@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::set count=0
 	::for %%a in (%*) do set /a count+=1
-	set "rtn_value=return value"
+	set "rtn_value=return value from dk_test.cmd"
 	
 	for %%a in (%*) do set last_arg=%%a
 	if "%last_arg%" == "rtn_var" endlocal & set "%last_arg%=%rtn_value%" && echo %rtn_value%
