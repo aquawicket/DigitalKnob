@@ -75,7 +75,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         'wmic process where "name='cmd.exe' and CommandLine like '%%<%uid%>%%'" get ParentProcessID'
       ) do for %%B in (%%A) do set "PID=%%B"
       (call )
-    ))||goto :getLock
+    ))||goto getLock
     del "%lock%" 2>nul
     endlocal & if "%~1" equ "" (echo(%PID%) else set "%~1=%PID%"
 %endfunction%

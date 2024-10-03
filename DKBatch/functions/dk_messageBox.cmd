@@ -14,12 +14,12 @@ call dk_set VERSION_dk_messageBox 3
     set "title=%~1"
     set "message=%~3"
     
-    if %VERSION_dk_messageBox% equ 1 goto:messageBox_1
-    if %VERSION_dk_messageBox% equ 2 goto:messageBox_2 
-    if %VERSION_dk_messageBox% equ 3 goto:messageBox_3
-    if %VERSION_dk_messageBox% equ 4 goto:messageBox_4 
-    if %VERSION_dk_messageBox% equ 5 goto:messageBox_5 
-    if %VERSION_dk_messageBox% equ 6 goto:messageBox_6 
+    if %VERSION_dk_messageBox% equ 1 goto messageBox_1
+    if %VERSION_dk_messageBox% equ 2 goto messageBox_2 
+    if %VERSION_dk_messageBox% equ 3 goto messageBox_3
+    if %VERSION_dk_messageBox% equ 4 goto messageBox_4 
+    if %VERSION_dk_messageBox% equ 5 goto messageBox_5 
+    if %VERSION_dk_messageBox% equ 6 goto messageBox_6 
     
     :messageBox_1 
         mshta javascript:alert("%message%");close();

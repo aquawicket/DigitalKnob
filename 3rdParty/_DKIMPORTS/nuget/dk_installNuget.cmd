@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set NUGET %DKTOOLS_DIR%\%NUGET_FOLDER%
 	%dk_call% dk_set NUGET_EXE %NUGET%\nuget.exe
 	
-	if exist "%NUGET_EXE%" goto:nuget_installed
+	if exist "%NUGET_EXE%" goto nuget_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing nuget . . ."
     %dk_call% dk_download %NUGET_DL%

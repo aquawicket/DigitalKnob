@@ -68,7 +68,7 @@ if "%~1" equ "dk_keyboard.Keyboard_Loop" goto %1
     if defined callback call %callback% %keyCode% || echo callback returned error && %return%
     ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || call dk_error "call :onKeyDown %keyCode% failed!"
     ::if defined stopPollKeys %return%
-    goto:dk_keyboard.pollKeys
+    goto dk_keyboard.pollKeys
 %endfunction%
 
 

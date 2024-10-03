@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
 	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU_DIR%\qemu-system-x86_64.exe
 	
-	if exist "%QEMU_IMG_EXE%" goto:eof
+	if exist "%QEMU_IMG_EXE%" %return%
 	
 	%dk_call% dk_download %QEMU_DL%
 	%dk_call% dk_getNativePath %QEMU_DIR% QEMU_INSTALL_PATH

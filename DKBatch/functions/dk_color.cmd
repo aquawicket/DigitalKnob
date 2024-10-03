@@ -21,7 +21,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
     :USE_COLOR_if
-    if not defined USE_COLOR goto:USE_COLOR_else
+    if not defined USE_COLOR goto USE_COLOR_else
         set "ESC="                         &:: escape character
 
         ::# Attributes on
@@ -100,7 +100,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 
         %dk_call% dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
-    goto:USE_COLOR_endif    
+    goto USE_COLOR_endif    
     :USE_COLOR_else
         ::%dk_call% dk_unset ESC
         ::%dk_call% dk_unset clr

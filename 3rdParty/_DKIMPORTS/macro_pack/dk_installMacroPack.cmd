@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_set MACROPACK_EXE "%MACROPACK_DIR%\%MACROPACK_DL_FILE%"
 	
-	if exist "%MACROPACK_EXE%" goto:macropack_installed
+	if exist "%MACROPACK_EXE%" goto macropack_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing macropack . . ."
     %dk_call% dk_download %MACROPACK_DL% %MACROPACK_EXE%

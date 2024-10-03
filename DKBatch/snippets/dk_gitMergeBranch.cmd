@@ -62,7 +62,7 @@ if NOT "%ERRORLEVEL%" == "0" (
 	echo THE MERGE WAS SUCCESSFUL
 	goto :resolved
 )
-goto eof:
+goto:eof:
 
 :conflicts
 echo You will need to fix any existing conflicts to complete the merge.

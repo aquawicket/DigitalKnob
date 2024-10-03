@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ping -n 2 localhost %NO_STD%
     if !timeout! GTR 0 (
         %dk_call% dk_setTitle %timeout%
-        if not exist %cache_file% goto:keyboard_input_timeout_loop
+        if not exist %cache_file% goto keyboard_input_timeout_loop
     )
 
     :: clear line and console title

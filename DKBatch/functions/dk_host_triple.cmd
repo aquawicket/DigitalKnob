@@ -30,17 +30,17 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::###### host_env and <env>_host ######
 	set "host_env=clang"
-	if not defined host_env goto:end_host_env
+	if not defined host_env goto end_host_env
 		set "%host_env%_host=1"
     :end_host_env
 	
 	::###### host_triple and <triple>_host ######
-	if not defined host_arch goto:end_host_arch
+	if not defined host_arch goto end_host_arch
 		set "host_triple=%host_os%_%host_arch%"
 		set "%host_triple%_host=1"
 	:end_host_arch
 	
-	if not defined host_env goto:end_host_env
+	if not defined host_env goto end_host_env
 		set "host_triple=%host_os%_%host_arch%_%host_env%"
 		set "%host_triple%_host=1"
 	:end_host_env

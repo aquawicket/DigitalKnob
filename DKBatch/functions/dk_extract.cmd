@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	 
     :: if the dest isn't provided, we should extract to a folder named the same as the file
     :: in the same diretory the archive file is in.    
-    if "%__ARGC__%" equ "2" goto:twoParams
+    if "%__ARGC__%" equ "2" goto twoParams
 
     ::### handle 1 parameter
     %dk_call% dk_basename "%~1" basename

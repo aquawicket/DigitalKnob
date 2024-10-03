@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		set "_input_=!_input_:*.=!"
 		for /L %%i in (1,1,3) do if /I "!_input_!" equ "!ext[%%i]!" (
 			set "_extension_=.!ext[%%i]!"
-			goto:endloop
+			goto endloop
 		)
 	)
 	:endloop

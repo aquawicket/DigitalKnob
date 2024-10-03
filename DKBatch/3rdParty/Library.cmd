@@ -109,10 +109,10 @@
 :#                      goto :MyFunc.End                                      #
 :#                      :MyFunc.Init                                          #
 :#                      ...                                                   #
-:#                      goto :eof                                             #
+:#                      goto:eof                                             #
 :#                      :MyFunc                                               #
 :#                      ...                                                   #
-:#                      goto :eof                                             #
+:#                      goto:eof                                             #
 :#                      :MyFunc.End                                           #
 :#                                                                            #
 :#                  Gotcha:                                                   #
@@ -295,11 +295,11 @@ exit /b
 
 :Err9X
 echo Error: Does not work on Windows 9x
-goto eof
+goto:eof
 
 :ErrNT
 >&2 echo Error: Works only on Windows 2000 and later
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -324,7 +324,7 @@ set FOREACHLINE=for /f "delims="
 :# HOME variable. For analogy with Unix systems.
 if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
 
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -468,7 +468,7 @@ set  "@cr=!CR!"		&:# One carrier return
 set  "@lf=!LF!"		&:# One line feed
 set  "@bs=!BS!"		&:# One backspace
 set  "@ff=!FF!"		&:# One form feed
-goto :eof
+goto:eof
 
 :PopArg
 if "!!"=="" goto :PopArg.Eon
@@ -493,7 +493,7 @@ call :PopArg.Helper %PopArg.ARGS% >NUL 2>NUL &:# Output redirections ensure the 
 :# Note that we can not systematically do this /? enquoting, else it's "/?" that would break the call.
 if "%ARG%"=="Yes" if [%"ARG"%]==[No] call :PopArg.Helper %PopArg.ARGS:/?="/?"%
 set "PopArg.ARGS="
-goto :eof
+goto:eof
 :PopArg.Helper
 set "ARG=%~1"		&:# Remove quotes from the argument
 set ^""ARG"=%1^"	&:# The same with quotes, if any, should we need them
@@ -505,7 +505,7 @@ set ARGS=%2
 :PopArg.GetNext
 shift
 if defined ARGS set ^"ARGS=%ARGS:^^=^%^"
-if [%2]==[] goto :eof
+if [%2]==[] goto:eof
 :# Leave quotes in the tail of the argument line
 set ARGS=%ARGS% %2
 goto :PopArg.GetNext
@@ -525,7 +525,7 @@ for /f %%a in ("-!ARG!") do for /f %%b in ("-!"ARG"!") do for /f %%c in ("-!ARGS
   set ^"ARGS=%%c^"
   set "ARGS=!ARGS:~1!"
 )
-goto :eof
+goto:eof
 
 :# Prepare one variable, in a local scope with !expansion! either on or off, for %expansion% in another scope with !expansion! on
 :Prep2ExpandVar     INVAR [OUTVAR]
@@ -572,7 +572,7 @@ if "!!"=="" (	:# The local scope has expansion on
 :PrepArgVars
 set "%~1=!%~1:%%=%%%%!"				&:# Escape percent signs
 if not [%2]==[] shift & goto :PrepArgVars
-goto :eof
+goto:eof
 
 :# Indirect call, with the label and arguments in a variable
 :CallVar CMDVAR
@@ -704,7 +704,7 @@ set "/ON_MACRO_EXIT=') do %ENDMACRO% %&% %%r"		&:# End the return variables defi
 set "XDLEVEL=0" &:# 0=No macro debug; 1=medium debug; 2=full debug; 3=Even more debug
 set "IF_XDLEVEL=for /f %%' in ('call echo.%%XDLEVEL%%') do if %%' GEQ"
 
-goto :eof
+goto:eof
 :Macro.end
 
 :#----------------------------------------------------------------------------#
@@ -988,7 +988,7 @@ if not defined LOGFILE set "ECHO.D=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHO.D=echo >NUL"
 if not defined LOGFILE set "ECHOVARS.D=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHOVARS.D=echo >NUL"
-goto :eof
+goto:eof
 
 :Debug.On
 :Debug.1
@@ -1028,7 +1028,7 @@ set "EXEC.ARGS=%EXEC.ARGS:~1%"
 :# Reverse the above optimization
 set "ECHO.D=%LCALL% :Echo.Debug"
 set "ECHOVARS.D=%LCALL% :EchoVars.Debug"
-goto :eof
+goto:eof
 
 :Debug.Entry0
 setlocal DisableDelayedExpansion
@@ -1037,7 +1037,7 @@ if defined LOGFILE %>>LOGFILE% echo %INDENT%call %*
 endlocal
 :Debug.IncIndent
 set "INDENT=%INDENT%  "
-goto :eof
+goto:eof
 
 :Debug.Entry
 setlocal DisableDelayedExpansion
@@ -1045,7 +1045,7 @@ setlocal DisableDelayedExpansion
 if defined LOGFILE %>>LOGFILE% echo %INDENT%call %FUNCTION.NAME% %ARGS%
 endlocal
 set "INDENT=%INDENT%  "
-goto :eof
+goto:eof
 
 :Debug.Return0 %1=Exit code
 %>DEBUGOUT% echo %INDENT%return %1
@@ -1059,7 +1059,7 @@ setlocal DisableDelayedExpansion
 %>DEBUGOUT% echo %INDENT%return %RETURN.ERR% ^&:#%MACRO.ARGS%
 if defined LOGFILE %>>LOGFILE% echo %INDENT%return %RETURN.ERR% ^&:#%MACRO.ARGS%
 endlocal
-goto :eof &:# %RETURN.ERR% will be processed in the %DEBUG#% macro.
+goto:eof &:# %RETURN.ERR% will be processed in the %DEBUG#% macro.
 
 :# A lightweight alternative for the %RETURN% macro.
 :# Only traces the %ERRORLEVEL%, but not the variables returned.
@@ -1084,7 +1084,7 @@ if not defined LOGFILE set "ECHO.V=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHO.V=echo >NUL"
 if not defined LOGFILE set "ECHOVARS.V=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHOVARS.V=echo >NUL"
-goto :eof
+goto:eof
 
 :Verbose.On
 :Verbose.1
@@ -1096,14 +1096,14 @@ set "EXEC.ARGS=%EXEC.ARGS:~1%"
 :# Reverse the above optimization
 set "ECHO.V=%LCALL% :Echo.Verbose"
 set "ECHOVARS.V=%LCALL% :EchoVars.Verbose"
-goto :eof
+goto:eof
 
 :# Echo and log a string, indented at the same level as the debug output.
 :Echo
 echo.%INDENT%%*
 :Echo.Log
 if defined LOGFILE %>>LOGFILE% echo.%INDENT%%*
-goto :eof
+goto:eof
 
 :Echo.Verbose
 :Echo.V
@@ -1119,23 +1119,23 @@ goto :Echo.Log
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
 set "STRING=!%1!" &:# !variables! not yet expanded; They will be on next line
 %>DEBUGOUT% echo.%INDENT%%STRING%
-goto :eof
+goto:eof
 
 :Echo.2DebugOut	%1=Name of string to output to the DEBUGOUT stream
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
 %>DEBUGOUT% echo.%INDENT%!%1!
-goto :eof
+goto:eof
 
 :Echo.Eval2LogFile %1=Name of string, with variables that need to be evaluated first
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
 set "STRING=!%1!" &:# !variables! not yet expanded; They will be on next line
 %>>LOGFILE% echo.%INDENT%%STRING%
-goto :eof
+goto:eof
 
 :Echo.2LogFile %1=Name of string to output to the LOGFILE
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
 %>>LOGFILE% echo.%INDENT%!%1!
-goto :eof
+goto:eof
 
 :# Echo and log variable values, indented at the same level as the debug output.
 :EchoStringVars %1=string %2=VARNAME %3=VARNAME ...
@@ -1146,7 +1146,7 @@ goto :EchoVars.loop
 :EchoVars	%1=VARNAME %2=VARNAME %3=VARNAME ...
 setlocal EnableExtensions EnableDelayedExpansion
 :EchoVars.loop
-if "%~1"=="" endlocal & goto :eof
+if "%~1"=="" endlocal & goto:eof
 %>DEBUGOUT% echo %INDENT%set "%~1=!%~1!"
 if defined LOGFILE %>>LOGFILE% echo %INDENT%set "%~1=!%~1!"
 shift
@@ -1158,7 +1158,7 @@ goto EchoVars.loop
 ) else ( :# Make sure the variables are logged
   call :EchoVars %* >NUL 2>NUL
 )
-goto :eof
+goto:eof
 
 :EchoVars.Debug
 %IF_DEBUG% (
@@ -1166,7 +1166,7 @@ goto :eof
 ) else ( :# Make sure the variables are logged
   call :EchoVars %* >NUL 2>NUL
 )
-goto :eof
+goto:eof
 
 :EchoStringVars.Verbose
 %IF_VERBOSE% (
@@ -1174,7 +1174,7 @@ goto :eof
 ) else ( :# Make sure the variables are logged
   call :EchoStringVars %* >NUL 2>NUL
 )
-goto :eof
+goto:eof
 
 :EchoStringVars.Debug
 %IF_DEBUG% (
@@ -1182,14 +1182,14 @@ goto :eof
 ) else ( :# Make sure the variables are logged
   call :EchoStringVars %* >NUL 2>NUL
 )
-goto :eof
+goto:eof
 
 :# Echo a list of arguments.
 :EchoArgs
 setlocal EnableExtensions DisableDelayedExpansion
 set N=0
 :EchoArgs.loop
-if .%1.==.. endlocal & goto :eof
+if .%1.==.. endlocal & goto:eof
 set /a N=N+1
 %>DEBUGOUT% echo %INDENT%set "ARG%N%=%1"
 shift
@@ -1390,7 +1390,7 @@ set "IF_EXEC=if .%NOEXEC%.==.0."
 set "EXEC.ARGS= %EXEC.ARGS%"
 set "EXEC.ARGS=%EXEC.ARGS: -X=%"
 set "EXEC.ARGS=%EXEC.ARGS:~1%"
-goto :eof
+goto:eof
 
 :# Routine to set the NOEXEC mode, in response to the -X argument.
 :Exec.Off
@@ -1401,7 +1401,7 @@ set "IF_EXEC=if .%NOEXEC%.==.0."
 set "EXEC.ARGS= %EXEC.ARGS%"
 set "EXEC.ARGS=%EXEC.ARGS: -X=% -X"
 set "EXEC.ARGS=%EXEC.ARGS:~1%"
-goto :eof
+goto:eof
 
 :Echo.XVD
 %IF_VERBOSE% goto :Echo
@@ -1599,7 +1599,7 @@ echo.
 %$reflect% more "inline functions"
 echo set "RETVAL=%RETVAL%"
 echo set "LOCALVAR=%LOCALVAR%"
-goto :eof
+goto:eof
 
 :Return#.Test1
 %FUNCTION0%
@@ -1613,7 +1613,7 @@ call :Return#.Test1 1
 %ECHO% :# ERRORLEVEL=%ERRORLEVEL% Expected 1
 call :Return#.Test1 0
 %ECHO% :# ERRORLEVEL=%ERRORLEVEL% Expected 0
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# From: http://www.dostips.com/forum/viewtopic.php?f=3&t=5411
@@ -1668,12 +1668,12 @@ call :check && (echo '%%\\n%%'   == '^^!/n^^!^^^^') || (echo ???)
 set "ddx=!\\\n!" & set "edx=!//n!^"
 call :check && (echo '%%\\\n%%'  == '^^!//n^^!^^^^') || (echo ???)
 
-endlocal & endlocal & goto :eof
+endlocal & endlocal & goto:eof
 
 :check
 set ^"dvar='%ddx%'"
 set ^"evar='!edx!'"
-if "!dvar!" equ "!evar!" (call;) else (call) & goto :eof
+if "!dvar!" equ "!evar!" (call;) else (call) & goto:eof
 
 :#----------------------------------------------------------------------------#
 :#  batchTee.bat  OutputFile  [+]
@@ -1817,7 +1817,7 @@ echo :# Third attempt after setlocal EnableDelayedExpansion
 set "X=Initial value"
 set "X=Modified value" & echo X=!X!
 endlocal
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -1918,7 +1918,7 @@ setlocal
 if defined LOGFILE %>>LOGFILE% <NUL set /P =%~1
                                <NUL set /P =%~1
 endlocal
-goto :eof
+goto:eof
 
 :Echo-n.End
 
@@ -1994,10 +1994,10 @@ for /l %%n in (1,1,24) do if not "!ECHO.FILE:~%%n!"=="" <nul set /p "=%ECHO.DEL%
 <nul set /p "=%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%"
 :# Append the optional CRLF
 if not "%~3"=="" echo.&if defined LOGFILE %>>LOGFILE% echo.
-endlocal & endlocal & goto :eof
+endlocal & endlocal & goto:eof
 
 :Echo.Color.Var %1=Color %2=StrVar [%3=/n]
-if not defined %~2 goto :eof
+if not defined %~2 goto:eof
 setlocal enableDelayedExpansion
 set "str=!%~2!"
 goto :Echo.Color.2
@@ -2008,7 +2008,7 @@ set "ECHO.DIR=%~dp0"
 set "ECHO.FILE=%~nx0"
 :# Use prompt to store a backspace into a variable. (Actually backspace+space+backspace)
 for /F "tokens=1 delims=#" %%a in ('"prompt #$H# & echo on & for %%b in (1) do rem"') do set "ECHO.DEL=%%a"
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -2035,7 +2035,7 @@ set "txt=^" & %ECHO.COLOR%.Var 0c txt
 echo.
 set complex="c:\hello world!/.\..\\a//^<%%>&|!" /^^^<%%^>^&^|!\
 %ECHO.COLOR%.Var 74 complex /n
-goto :eof
+goto:eof
 
 :# Experimental code that does not work...
 :# Check if this script contains a trailing :eof. If not, add one.
@@ -2043,7 +2043,7 @@ set "ECHO.FULL=%ECHO.DIR%%ECHO.FILE%"
 findstr /r "^^-" "%ECHO.FULL%" >NUL 2>&1
 if errorlevel 1 (
   >&2 echo Notice: Adding the missing - at the end of this script
-  >>"%ECHO.FULL%" echo goto :eof
+  >>"%ECHO.FULL%" echo goto:eof
   >>"%ECHO.FULL%" <nul set /p "=-"
 ) else (
 echo three
@@ -2063,7 +2063,7 @@ set "strvar=str"
 goto :Echo.Color1.2
 
 :Echo.Color1.Var %1=Color %2=StrVar [%3=/n]
-if not defined %~2 goto :eof
+if not defined %~2 goto:eof
 setlocal enableDelayedExpansion
 set "strvar=%~2"
 :Echo.Color1.2
@@ -2075,7 +2075,7 @@ pushd "%TEMP%"
 findstr /P /L /A:%~1 "%ECHO.BS%" "!str!\..\x" nul
 popd
 if not "%~3"=="" echo.
-endlocal & goto :eof
+endlocal & goto:eof
 
 :Echo.Color1.Init
 set "ECHO.COLOR=call :Echo.Color"
@@ -2084,25 +2084,25 @@ for /F "tokens=1 delims=#" %%a in ('"prompt #$H# & echo on & for %%b in (1) do r
 set "ECHO.BS=%ECHO.DEL:~0,1%"
 :# Generate a temp file containing backspaces. This content will be used later to post-process the findstr output.
 <nul >"%TEMP%\x" set /p "=%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%"
-goto :eof
+goto:eof
 
 :Echo.Color1.Cleanup
 del "%TEMP%\x"
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 
 :Echo.Success	[%1=Suffix string] [%2=/n]
 %ECHO.COLOR% 0A "[Success]%~1" %2
-goto :eof
+goto:eof
 
 :Echo.Warning	[%1=Suffix string] [%2=/n]
 %ECHO.COLOR% 0E "[Warning]%~1" %2
-goto :eof
+goto:eof
 
 :Echo.Failure	[%1=Suffix string] [%2=/n]
 %ECHO.COLOR% 0C "[Failure]%~1" %2
-goto :eof
+goto:eof
 
 :Echo.Color.End
 
@@ -2140,7 +2140,7 @@ goto :eof
 
 :EchoF.Init
 set "ECHOF=call :EchoF"
-goto :eof
+goto:eof
 
 :EchoF fmt str1 str2 ... -- outputs columns of strings right or left aligned
 ::                       -- fmt [in] - format string specifying column width and alignment. Ex: "[-10] / [10] / []"
@@ -3065,7 +3065,7 @@ endlocal & exit /b
 
 :IsAdmin
 >NUL 2>&1 net session
-goto :eof
+goto:eof
 
 :RunAsAdmin
 :# adaptation of https://sites.google.com/site/eneerge/home/BatchGotAdmin and http://stackoverflow.com/q/4054937
@@ -3083,7 +3083,7 @@ if '%errorlevel%' neq '0' (
   pushd "%cd%"
   cd /d "%~dp0"
 )
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3105,19 +3105,19 @@ goto :eof
 :# Get the current console code page.
 :GetCP %1=variable name
 for /f "tokens=2 delims=:" %%n in ('chcp') do for %%p in (%%n) do set "%1=%%p"
-goto :eof
+goto:eof
 
 :# Get the default console code page
 :GetOEMCP %1=variable name
 set "CP_KEY=HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
 for /f "tokens=3" %%p in ('reg query "%CP_KEY%" /v "OEMCP" ^| findstr REG_SZ') do set "%1=%%p"
-goto :eof
+goto:eof
 
 :# Get the default system code page
 :GetACP %1=variable name
 set "CP_KEY=HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\CodePage"
 for /f "tokens=3" %%p in ('reg query "%CP_KEY%" /v "ACP" ^| findstr REG_SZ') do set "%1=%%p"
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3282,7 +3282,7 @@ set ARGS="%ARGS:\=" "%"
 set ARGS=%ARGS:""=%
 set RETVAL=0
 for %%i in (%ARGS%) do @set /a RETVAL=RETVAL+1
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# First implementation, 50% slower.
@@ -3293,7 +3293,7 @@ for /f "tokens=1* delims=\" %%i in ("%~1") do (
   if not "%%j"=="" call :path_depth1 "%%j"
   if not "%%i"=="" set /a RETVAL=RETVAL+1
 )
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3553,7 +3553,7 @@ if "%~a1"=="%_ATTRIBUTES:r=%" (copy "%~1"+,,) else attrib -r "%~1" & copy "%~1"+
 :# Simpler version without read-only file support
 :touch
 type nul >>"%~1" & copy "%~1",,
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3583,7 +3583,7 @@ set EXTENSIONS=DisableExtensions
 set DELAYEDEXPANSION=DisableDelayedExpansion
 set "EXTENSIONS=EnableExtensions" 2>NUL &:# Fails if extensions are disabled
 if "!!"=="" set DELAYEDEXPANSION=EnableDelayedExpansion
-goto %EXTENSIONS.RETURN% :eof 2>NUL &:# goto :eof will work, but report an error if extensions are disabled
+goto %EXTENSIONS.RETURN% :eof 2>NUL &:# goto:eof will work, but report an error if extensions are disabled
 
 :# Display cmd extensions and delayed expansion settings
 :extensions.show
@@ -3593,7 +3593,7 @@ goto :extensions.get &:# call :extensions.get will not work if extensions are di
 :extensions.show.ret
 %ECHO% SetLocal %EXTENSIONS% %DELAYEDEXPANSION%
 endlocal &:# Restore the parent environment
-goto :eof 2>NUL &:# This goto will work, but report an error if extensions are disabled
+goto:eof 2>NUL &:# This goto will work, but report an error if extensions are disabled
 
 :# Test if cmd extensions work (They don't in Windows 2000 and older)
 :extensions.test
@@ -3602,7 +3602,7 @@ setlocal enableextensions enabledelayedexpansion
 if errorlevel 1 (
   >&2 echo Error: Unable to enable command extensions.
   >&2 echo This script requires Windows XP or later.
-  endlocal & set "RETVAL=1" & goto :eof
+  endlocal & set "RETVAL=1" & goto:eof
 )
 set VAR=before
 if "%VAR%" == "before" (
@@ -3610,10 +3610,10 @@ if "%VAR%" == "before" (
   if not "!VAR!" == "after" (
     >&2 echo Error: Failed to enable delayed environment variable expansion.
     >&2 echo This script requires Windows XP or later.
-    endlocal & set "RETVAL=1" & goto :eof
+    endlocal & set "RETVAL=1" & goto:eof
   )
 )
-endlocal & set "RETVAL=0" & goto :eof
+endlocal & set "RETVAL=0" & goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3728,7 +3728,7 @@ for /f "tokens=1-8 delims=." %%a in ("%1.%2") do (
   set /A a=%%e-%%a,b=%%f-%%b,c=%%g-%%c,d=%%h-%%d
   for %%e in (b c d) do set /A a=256*a + !%%e!
 )
-endlocal & set "RETVAL=%a%" & goto :eof
+endlocal & set "RETVAL=%a%" & goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -3804,7 +3804,7 @@ for /f "tokens=1,2,3 delims=:" %%a in ("%T%") do (
   set "MS=!MS!000"  & set "MS=!MS:~0,3!"
 )
 if .%DEBUG%.==.1. echo set "YEAR=%YEAR%" ^& set "MONTH=%MONTH%" ^& set "DAY=%DAY%" ^& set "HOUR=%HOUR%" ^& set "MINUTE=%MINUTE%" ^& set "SECOND=%SECOND%" ^& set "MS=%MS%"
-endlocal & set "YEAR=%YEAR%" & set "MONTH=%MONTH%" & set "DAY=%DAY%" & set "HOUR=%HOUR%" & set "MINUTE=%MINUTE%" & set "SECOND=%SECOND%" & set "MS=%MS%" & goto :eof
+endlocal & set "YEAR=%YEAR%" & set "MONTH=%MONTH%" & set "DAY=%DAY%" & set "HOUR=%HOUR%" & set "MINUTE=%MINUTE%" & set "SECOND=%SECOND%" & set "MS=%MS%" & goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -3824,7 +3824,7 @@ for /f "tokens=1-3 delims=:" %%a in ("%T%") do (
 set T=%HH%h%MM%m%SS%
 :# Build the DATE_TIME string
 set NOW=%DATE:/=-%_%T%
-endlocal & set "RETVAL=%NOW%" & set "NOW=%NOW%" & goto :eof
+endlocal & set "RETVAL=%NOW%" & set "NOW=%NOW%" & goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -3845,7 +3845,7 @@ for /f %%d in ('for %%a in ^(%D%^) do @^(echo %%a ^| findstr /r [0-9]^)') do set
 SET %first%=%D:~0,2%
 SET %second%=%D:~3,2%
 SET %third%=%D:~6,4%
-endlocal & SET "YEAR=%yy%" & SET "MONTH=%mm%" & SET "DAY=%dd%" & goto :eof
+endlocal & SET "YEAR=%yy%" & SET "MONTH=%mm%" & SET "DAY=%dd%" & goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -3963,7 +3963,7 @@ exit /b
 for /f "tokens=*" %%v in ('ver') do @set WINVER=%%v
 for /f "delims=[]" %%v in ('for %%a in ^(%WINVER%^) do @^(echo %%a ^| findstr [0-9]^)') do @set WINVER=%%v
 for /f "tokens=1,2,3 delims=." %%v in ("%WINVER%") do @(set "WINMAJOR=%%v" & set "WINMINOR=%%w" & set "WINBUILD=%%x")
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
@@ -4427,11 +4427,11 @@ setlocal disabledelayedexpansion
 echo %%W%%=%W%
 endlocal
 echo %%W%%=%W%
-goto :eof
+goto:eof
 
 :ExecHello
 %EXEC% echo "Hello world^!"
-goto :eof
+goto:eof
 
 :TestDelayedExpansion
 if .%USERNAME%.==.!USERNAME!. (
@@ -4439,7 +4439,7 @@ if .%USERNAME%.==.!USERNAME!. (
 ) else (
   echo Delayed Expansion is OFF
 )
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Factorial routine, to test the tracing framework indentation
@@ -4468,7 +4468,7 @@ call :Fact %*
 :# Test routines to measure the overhead of call/return
 
 :noop
-goto :eof
+goto:eof
 
 :noop1
 %FUNCTION0%
@@ -4702,7 +4702,7 @@ for /f "tokens=2" %%e in ("!! 0 1") do setlocal EnableDelayedExpansion & set "Ca
 call :ConvertEntities.internal %1 %2
 call :EscapeCmdString ARG ARG 1 %CallerExp%
 endlocal & set ^"%OUTVAR%=%ARG%^" ! &:# The ! forces always having !escaping ^ removal in delayed expansion mode
-goto :eof
+goto:eof
 
 :ConvertEntitiesNoDebug %1=INPUTVAR [%2=OUTPUTVAR]
 %IF_DEBUG% (	 :# Temporarily disable debugging
@@ -4767,7 +4767,7 @@ for /l %%n in (1,1,%NLOOPS%) do %EXEC% !CMDLINE!
 if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
 if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test call one command line. Display start/end time if looping.
@@ -4783,7 +4783,7 @@ for /l %%n in (1,1,%NLOOPS%) do call !CMDLINE!
 if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
 if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
-goto :eof
+goto:eof
 
 :call_macro_line
 %CMD_BEFORE%
@@ -4796,7 +4796,7 @@ for /l %%n in (1,1,%NLOOPS%) do call !CMDLINE!
 if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
 if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test call N command lines. Display start/end time if looping.
@@ -4830,18 +4830,18 @@ for /l %%n in (1,1,%NLOOPS%) do for /l %%c in (1,1,%NCMDS%) do call %%CMD[%%c]%%
 if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
 if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 if defined CMD_AFTER !CMD_AFTER!
-goto :eof
+goto:eof
 
 :# Short aliases for common before & after commands
 :EDE
 :EDX
 setlocal EnableDelayedExpansion
-goto :eof
+goto:eof
 
 :DDE
 :DDX
 setlocal DisableDelayedExpansion
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test %FUNCTION0% / %RETURN0%
@@ -5046,15 +5046,15 @@ set STRING
 
 :call_set
 call set "X=%%windir%%"
-goto :eof
+goto:eof
 
 :call_:set
 call :set "X=%%windir%%"
-goto :eof
+goto:eof
 
 :set
 set %*
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 
@@ -5099,14 +5099,14 @@ set "VAR=AFTER"
 %_DO% popd
 %ECHOVARS% CD
 
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test relative performances of various ways to return
 :# (And the conclusion is that they're all pretty equivalent)
 
 :gotoeof
-goto :eof
+goto:eof
 
 :exit
 exit /b
@@ -5299,7 +5299,7 @@ echo Notes:
 echo 1) The following html entity names, within brackets, will be converted to their
 echo    corresponding character:
 echo    [percnt]=%% [excl]=^^^! [quot]=" [Hat]=^^ [lt]=< [gt]=> [amp]=& [vert]=| [lpar]=( [rpar]=) [lbrack]=[ [rbrack]=]
-goto :eof
+goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Main routine
@@ -5329,14 +5329,14 @@ if "!ARG!"=="-l" %POPARG% & call :Debug.SetLog "!ARG!" & goto next_arg
 if "!ARG!"=="-M" goto :call_macro_line
 if "!ARG!"=="-n" %POPARG% & set "NLOOPS=!ARG!" & goto next_arg
 if "!ARG!"=="-qe" endlocal & (set ECHO=echo) & goto :extensions.show
-if "!ARG!"=="-r" call :Debug.Setlog test.log & %EXEC% cmd /c %SCRIPT% -? ">"exec.log & goto :eof
-if "!ARG!"=="-R" call :Debug.Setlog test.log & %EXEC% cmd /c %SCRIPT% -? & goto :eof
+if "!ARG!"=="-r" call :Debug.Setlog test.log & %EXEC% cmd /c %SCRIPT% -? ">"exec.log & goto:eof
+if "!ARG!"=="-R" call :Debug.Setlog test.log & %EXEC% cmd /c %SCRIPT% -? & goto:eof
 if "!ARG!"=="-tc" goto :TestConvertEntities &:# Test routine :ConvertEntities
 if "!ARG!"=="-tca" call :test_CArg %ARGS% & exit /b
 if "!ARG!"=="-te" goto :TestEscapeCmdString &:# Test routine :EscapeCmdString
-if "!ARG!"=="-tg" %POPARG% & call :GetServerAddress !ARG! & %ECHOVARS% ADDRESS & goto :eof &:# Test routine GetServerAddress
+if "!ARG!"=="-tg" %POPARG% & call :GetServerAddress !ARG! & %ECHOVARS% ADDRESS & goto:eof &:# Test routine GetServerAddress
 if "!ARG!"=="-v" call :Verbose.On & goto next_arg
-if "!ARG!"=="-V" (echo.%VERSION%) & goto :eof
+if "!ARG!"=="-V" (echo.%VERSION%) & goto:eof
 if "!ARG!"=="-X" call :Exec.Off & goto next_arg
 if "!ARG!"=="-xd" %POPARG% & set "XDLEVEL=!ARG!" & goto next_arg
 if "!ARG:~0,1!"=="-" (

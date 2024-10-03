@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if not defined directories[%n%] %return%
 		if exist !directories[%n%]!\Community endlocal & set %1=!directories[%n%]!
         set /A n+=1
-    goto :loop1 
+    goto loop1 
 %endfunction%
 
 :get_visualstudio_edition result
@@ -59,7 +59,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if not defined directoriesB[%n%] %return%
 		if exist !directories[%n%]!\bin\Hostx86 endlocal & set %1=!directoriesB[%n%]!
         set /A n+=1
-    goto :loop2
+    goto loop2
 %endfunction%
 
 

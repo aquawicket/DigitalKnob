@@ -9,9 +9,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
     echo %PSModulePath% | findstr %USERPROFILE% >NUL
-    if %ERRORLEVEL% equ 0 set "DKSHELL_NAME=powershell" & goto:done
+    if %ERRORLEVEL% equ 0 set "DKSHELL_NAME=powershell" & goto done
     echo %PSModulePath% | findstr %USERPROFILE% >NUL
-    if %ERRORLEVEL% equ 0 set "DKSHELL_NAME=powershell" & goto:done
+    if %ERRORLEVEL% equ 0 set "DKSHELL_NAME=powershell" & goto done
     if not defined DKSHELL_NAME for %%Z in ("%SHELL%") do set "DKSHELL_NAME=%%~nZ"
     if not defined DKSHELL_NAME for %%Z in ("%ComSpec%") do set "DKSHELL_NAME=%%~nZ"
     

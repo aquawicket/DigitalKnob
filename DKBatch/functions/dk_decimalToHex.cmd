@@ -13,7 +13,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     set "_LOOKUP_=0123456789abcdef"
     set "_hex_="
     set "_prefix_="
-    if "%~1"=="" set "_hex_=00" & goto :endlookup
+    if "%~1"=="" set "_hex_=00" & goto endlookup
     set /a A=%~1
     if %A% lss 0 set /a A=0xfffffff + %A% + 1 & set "_prefix_=f"
     :loop
@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if "!DE!" equ "" set "_hex_=!_LOOKUP_:~%B%,1!%_hex_%"
         if "!DE!" neq "" call set "_hex_=%%_LOOKUP_:~%B%,1%%%_hex_%"
         
-        if %A% gtr 0 goto :loop
+        if %A% gtr 0 goto loop
     :endlookup
     endlocal & set "%2=0x%_prefix_%%_hex_%"
 %endfunction%

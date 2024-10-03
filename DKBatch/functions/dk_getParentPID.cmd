@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1
  setlocal
  
-    if exist "dk_getParentPID.exe .exe" goto:exe_exists
+    if exist "dk_getParentPID.exe .exe" goto exe_exists
     for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsoft.NET\Framework\*jsc.exe"') do (
         set "jsc=%%v"
     )

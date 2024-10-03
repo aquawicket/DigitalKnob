@@ -34,7 +34,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             if "!DE!" neq "" call set "_string_=%%%~1[%_count_%]%%"
         )
         set /a _count_+=1
-        goto:dk_arrayJoin_loop
+        goto dk_arrayJoin_loop
     )
     endlocal & set "%3=%_string_%"
 	

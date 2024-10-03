@@ -28,7 +28,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         ::) else (
         ::  set /a dk_stacktrace_marker-=1
         ::)
-    if %dk_stacktrace_count% GEQ 0 goto:dk_stacktrace_Loop
+    if %dk_stacktrace_count% GEQ 0 goto dk_stacktrace_Loop
     
     echo done
 %endfunction%

@@ -74,7 +74,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             setlocal enableDelayedExpansion
             for %%i in (!temp!) do (
                 call set "temp=%%i"
-                goto:done
+                goto done
             )
             :done
             set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%temp%;"           &:: Add to list

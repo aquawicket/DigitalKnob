@@ -25,12 +25,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 ::		if not exist "%WINPE_QCOW%" %QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "%WINPE_QCOW%"
 ::		%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_QCOW% -m 1G -cpu max -smp 2 -vga virtio -display sdl
-::		goto:eof
+::		%return%
 		
 		
 		
 		::###### WINPE_IMG ######
-        if exist "%WINPE_IMG%" %dk_call% dk_info "%WINPE_IMG% already exists" && goto:end_WIN_IMG
+        if exist "%WINPE_IMG%" %dk_call% dk_info "%WINPE_IMG% already exists" && goto end_WIN_IMG
 			%dk_call% dk_info "Installing Windows PE . . ."
 			%dk_call% dk_basename %WINPE_DL% WINPE_DL_FILE
 			%dk_call% dk_download "%WINPE_DL%"
@@ -58,7 +58,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		
 		::###### WINPE_launcher ######
 		set "WINPE_launcher=%WINPE_DIR%\LAUNCH.cmd"
-			if exist "%WINPE_launcher%" %dk_call% dk_info "%WINPE_launcher% already exists" && goto:eof	
+			if exist "%WINPE_launcher%" %dk_call% dk_info "%WINPE_launcher% already exists" && %return%	
 			::%dk_call% dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" -boot menu=on -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 			%dk_call% dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_DL_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%

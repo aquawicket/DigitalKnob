@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	
 	%dk_call% dk_set WINDOWS_TERMINAL_EXE "%WINDOWS_TERMINAL_DIR%\wt.exe"
-	if exist "%WINDOWS_TERMINAL_EXE%" goto:windows_terminal_installed
+	if exist "%WINDOWS_TERMINAL_EXE%" goto windows_terminal_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing Windows Terminal . . ."
     %dk_call% dk_download %WINDOWS_TERMINAL_DL%

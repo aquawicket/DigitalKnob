@@ -27,7 +27,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
     %dk_call% dk_set NODEJS_EXE "%NODEJS_DIR%\node.exe"
         
-    if exist "%NODEJS_EXE%" goto:nodejs_installed
+    if exist "%NODEJS_EXE%" goto nodejs_installed
     %dk_call% dk_info " "
     %dk_call% dk_info "Installing NodeJS . . ."
     %dk_call% dk_download "%NODEJS_DL%"

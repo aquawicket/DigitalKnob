@@ -19,7 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :dk_arrayLength_loop
     if defined %~1[%_length_%] ( 
        set /a _length_+=1
-       goto :dk_arrayLength_loop 
+       goto dk_arrayLength_loop 
     )
     endlocal & set "%2=%_length_%"
 	

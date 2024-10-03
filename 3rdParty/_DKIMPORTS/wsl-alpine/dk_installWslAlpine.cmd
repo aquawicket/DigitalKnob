@@ -20,7 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_set ALPINE_DIR "%DKTOOLS_DIR%\AlpineLinux"
 	
-	if exist "%LAUNCHER_DL_FILE%" goto:alpine_installed
+	if exist "%LAUNCHER_DL_FILE%" goto alpine_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing Alpine Linux . . ."
 	%dk_call% dk_download %LAUNCHER_DL%

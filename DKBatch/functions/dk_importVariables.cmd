@@ -41,12 +41,9 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 :dk_importVariables url rtn_var
 	::dk_debugFunc 1 9
 	
-	!dk_call! dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
-	
 ::	!dk_call! dk_getParameter  BRANCH 	PLUGIN_GIT_BRANCH 		!ARGV!  &:: master
 ::	!dk_call! dk_getParameter  FOLDER	PLUGIN_INSTALL_FOLDER 	!ARGV! 	&:: zlib-master
-::	!dk_call! dk_getParameter  NAME 	PLUGIN_INSTALL_NAME 	!ARGV! 	&:: zlib
+::	!dk_call! dk_getParameter  NAME 	PLUGIN_INSTALL_NAME 	%* 	&:: zlib
 ::	!dk_call! dk_getParameter  PATH 	PLUGIN_INSTALL_PATH 	!ARGV! 	&:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 ::	!dk_call! dk_getParameter  ROOT 	PLUGIN_INSTALL_ROOT 	!ARGV! 	&:: C:\Users\Administrator\digitalknob\Development\3rdParty
 ::	!dk_call! dk_getParameter  TAG 	    PLUGIN_GIT_TAG 			!ARGV! 	&:: v1.3.1
@@ -155,12 +152,12 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 		rem # PLUGIN_IMPORT_PATH
 		set "PLUGIN_IMPORT_PATH="
 		set "PLUGIN_IMPORT_PATH=!CMAKE_CURRENT_LIST_DIR!" 						
-		!dk_call! dk_printVar PLUGIN_IMPORT_PATH 									& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+		!dk_call! dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
 		rem # PLUGIN_IMPORT_NAME
 		set "PLUGIN_IMPORT_NAME="
 		!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
-		!dk_call! dk_printVar PLUGIN_IMPORT_NAME 									& rem PLUGIN_IMPORT_NAME		: zlib
+		!dk_call! dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
 	)
 
 	::##############################################
@@ -287,8 +284,10 @@ pause
 	!dk_call! dk_printVar CURRENT_PLUGIN 										&:: CURRENT_PLUGIN			: ZLIB
 
 	::# <PLUGIN>_DIR
-	!dk_call! dk_set !PLUGIN_PREFIX!_DIR !PLUGIN_INSTALL_PATH! 
-	!dk_call! dk_printVar !PLUGIN_PREFIX!_DIR 									&:: ZLIB_DIR				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	if "!PLUGIN_PREFIX!" neq "GIT" (
+		!dk_call! dk_set !PLUGIN_PREFIX!_DIR !PLUGIN_INSTALL_PATH! 
+		!dk_call! dk_printVar !PLUGIN_PREFIX!_DIR 								&:: ZLIB_DIR				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	)
 	
 	::# <PLUGIN>_URL
 	!dk_call! dk_set !PLUGIN_PREFIX!_URL !PLUGIN_URL! 
@@ -374,6 +373,6 @@ pause
 	call dk_debugFunc 0
  ::setlocal
  
-	set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
+	::set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
 	!dk_call! dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" PLUGIN 
 !endfunction!

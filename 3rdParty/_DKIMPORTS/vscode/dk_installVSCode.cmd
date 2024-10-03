@@ -31,7 +31,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%\code
 	)	
 
-	if exist %VSCODE_EXE% goto :vscodeInstalled
+	if exist %VSCODE_EXE% goto vscodeInstalled
 	%dk_call% dk_echo 
     %dk_call% dk_info "Installing VSCode . . ."
 	%dk_call% dk_makeDirectory %DKTOOLS_DIR%

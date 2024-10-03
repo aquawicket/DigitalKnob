@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         call set "%_arry_%[%prev%]=%%%_arry_%[%count%]%%"  &:: FIXME: remove the need for call here
         set /a count+=1
         set /a prev+=1
-        goto:dk_arrayShift_loop
+        goto dk_arrayShift_loop
     )
     endlocal & %dk_call% dk_unset %_arry_%[%prev%]
     ::endlocal & set "%_arry_%[%prev%]="

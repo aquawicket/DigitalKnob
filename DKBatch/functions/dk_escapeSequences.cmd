@@ -51,7 +51,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     :::ASCII_length_Loop
     ::if defined ASCII[%ASCII_length%] (
     ::  set /a ASCII_length+=1
-    ::  GOTO :ASCII_length_Loop
+    ::  goto ASCII_length_Loop
     ::)
     
 ::  %dk_call% dk_echo

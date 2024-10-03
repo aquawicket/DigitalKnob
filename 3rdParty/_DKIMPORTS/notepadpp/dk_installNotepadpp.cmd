@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%\%NOTEPADPP_FOLDER%"
 	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%\notepad++.exe"
 	
-	if exist "%NOTEPADPP_EXE%" goto:notepadpp_installed
+	if exist "%NOTEPADPP_EXE%" goto notepadpp_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing notepad++ . . ."
     %dk_call% dk_download %NOTEPADPP_DL%

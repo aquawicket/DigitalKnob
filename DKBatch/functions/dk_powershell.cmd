@@ -16,18 +16,18 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::    :: try pwsh.exe
 ::    %dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
-::	if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto:found	
+::	if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto found	
     
 ::    :: try powershell.exe
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe"
-::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
+::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto found
 
 ::    :: install pwsh.exe and try again
 ::    %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 ::    if not exist "%DKIMPORTS_DIR%" %dk_call% dk_notice "DKIMPORTS not found" && exit /b 1
 ::    call "%DKIMPORTS_DIR%\powershell\dk_installPowershell.cmd"
 ::    %dk_call% dk_findProgram POWERSHELL_EXE "pwsh.exe" "%DKTOOLS_DIR%"
-::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto:found
+::    if defined POWERSHELL_EXE "%POWERSHELL_EXE%" /? %NO_STD% && goto found
     
 ::    :notfound
 ::    %dk_call% dk_fatal "POWERSHELL_EXE invalid"

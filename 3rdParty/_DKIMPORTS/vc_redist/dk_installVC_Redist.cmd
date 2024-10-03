@@ -23,9 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined win_x86_host    set "VCCOMP140_DLL=C:/Windows/SysWOW64/vcomp140.dll"
 	if defined win_x86_64_host set "VCCOMP140_DLL=C:/Windows/System32/vcomp140.dll"
 	if not defined VCCOMP140_DLL %dk_call% dk_error "VCCOMP140_DLL is invalid"
-pause
-	if exist "%VCCOMP140_DLL%" goto:eof
-pause
+
+	if exist "%VCCOMP140_DLL%" %return%
+
 	::### INSTALL ###
 	%dk_call% dk_basename %VC_REDIST_DL% VC_REDIST_DL_FILE
 	%dk_call% dk_info "Installing Visual C Redistributable - %VC_REDIST_DL_FILE%"

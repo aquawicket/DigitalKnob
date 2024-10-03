@@ -1,6 +1,6 @@
 :<<"::UNIX"
 @ECHO OFF
-GOTO :windows
+GOTO windows
 
 
 ::UNIX

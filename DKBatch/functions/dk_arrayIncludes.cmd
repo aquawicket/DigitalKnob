@@ -36,7 +36,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
             exit /b 0
         )
         set /a count+=1
-        goto:dk_arrayIncludes_loop
+        goto dk_arrayIncludes_loop
     )
     if "%~3" neq "" (endlocal & set "%3=false")
     exit /b 1

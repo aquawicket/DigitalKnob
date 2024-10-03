@@ -62,27 +62,27 @@
 
 if "%~1" == "" (
 	call :print-usage U
-	goto :EOF
+	goto:eof
 )
 
 if /i "%~1" == "/HELP" (
 	call :print-usage UH
-	goto :EOF
+	goto:eof
 )
 
 if /i "%~1" == "/HELP-MORE" (
 	call :print-usage UHD
-	goto :EOF
+	goto:eof
 )
 
 if /i "%~1" == "/HELP-DEVEL" (
 	call :print-usage UHDG
-	goto :EOF
+	goto:eof
 )
 
 if /i "%~1" == "/L" (
 	call :print-extension-list
-	goto :EOF
+	goto:eof
 )
 
 setlocal
@@ -175,7 +175,7 @@ for %%e in ( "%CMDIZE_ENGINE%" ) do for %%s in (
 	type "%~f1"
 )
 
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -199,7 +199,7 @@ if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
 if defined CMDIZE_WRAP (
 	call :print-script-wsf-bat "%~f1" vbscript
-	goto :EOF
+	goto:eof
 )
 
 copy /y nul + nul /a "%TEMP%\%~n0.$$" /a 1>nul
@@ -250,7 +250,7 @@ for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
 		)
 	)
 )
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -263,13 +263,13 @@ goto :EOF
 :cmdize.pl	[/e cmdonly]
 if /i "%CMDIZE_ENGINE%" == "cmdonly" (
 	call :print-prolog "perl -x -S" "" "" "@" "dpn0.pl"
-	goto :EOF
+	goto:eof
 )
 
 call :print-prolog "perl -x -S" "@rem = '--*-Perl-*--" "@rem ';"
 echo:#!perl
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -282,7 +282,7 @@ goto :EOF
 :cmdize.bash
 call :print-prolog bash ": << '____CMD____'" "____CMD____"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -303,10 +303,10 @@ echo:set "PS1_ISB="
 echo:set "PS1_FILE=%%~f0"
 echo:set "PS1_ARGS=%%*"
 echo:powershell -NoLogo -NoProfile -Command "$a=($Env:PS1_ARGS|sls -Pattern '\"(.*?)\"(?=\s|$)|(\S+)' -AllMatches).Matches;$a=@(@(if($a.count){$a})|%%%%{$_.value -Replace '^\"','' -Replace '\"$',''});$f=gc $Env:PS1_FILE -Raw;if($Env:PS1_ISB){$input|&{[ScriptBlock]::Create('rv f,a -Scope Script;'+$f).Invoke($a)}}else{$i=$input;iex $('$input=$i;$args=$a;rv i,f,a;'+$f)}"
-echo:goto :EOF
+echo:goto:eof
 echo:#^>
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -319,12 +319,12 @@ goto :EOF
 if /i "%CMDIZE_ENGINE%" == "short" (
 	call :print-prolog "python -x" "" "" "@" "f0"
 	type "%~f1"
-	goto :EOF
+	goto:eof
 )
 echo:0^<0# : ^^
 call :print-prolog python "'''" "'''"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -336,7 +336,7 @@ goto :EOF
 echo:@break #^^
 call :print-prolog ruby "=begin" "=end"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -349,7 +349,7 @@ goto :EOF
 :cmdize.html
 call :print-prolog "start mshta" "<!-- :" ": -->"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -395,12 +395,12 @@ for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do
 	for /f "tokens=1,* delims=:" %%a in ( 'findstr /n /r "^" "%~f1"' ) do (
 		if %%a gtr 1 echo:%%b
 	)
-	goto :EOF
+	goto:eof
 )
 
 call :print-prolog "%CMDIZE_ENGINE% //nologo" "<!-- :" ": -->" "" "?.wsf"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -409,7 +409,7 @@ goto :EOF
 :cmdize.kix
 call :print-prolog kix32 "" "" ";"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -419,7 +419,7 @@ goto :EOF
 :cmdize.a3x
 call :print-prolog AutoIt3 "" "" ";"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -428,7 +428,7 @@ goto :EOF
 :cmdize.ahk
 call :print-prolog AutoHotKey "" "" ";"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -439,7 +439,7 @@ goto :EOF
 :cmdize.php
 call :print-prolog "php -n -q" "<?php/* :" "*/ ?>"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -452,7 +452,7 @@ goto :EOF
 :cmdize.jl
 call :print-prolog julia "0<#= :" "=#0;"
 type "%~f1"
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -478,7 +478,7 @@ goto :EOF
 ::G>
 :print-usage
 for /f "tokens=1,* delims=>" %%a in ( 'findstr /r "^::[%~1]>" "%~f0"' ) do echo:%%b
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -492,7 +492,7 @@ goto :EOF
 ::G>
 :warn
 >&2 echo:%~n0: %*
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -502,7 +502,7 @@ goto :EOF
 ::G>
 :print-extension-list
 for /f "tokens=1,* delims=." %%x in ( 'findstr /i /r "^:cmdize[.][0-9a-z_][0-9a-z_]*\>" "%~f0"' ) do echo:.%%~y
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -523,7 +523,7 @@ for %%f in ( "%TEMP%\%~n1.wsf" ) do (
 	call :cmdize.wsf "%%~ff"
 	del /f /q "%%~ff"
 )
-goto :EOF
+goto:eof
 
 ::G>## `:print-script-wsf`
 ::G>
@@ -539,7 +539,7 @@ echo:^<?xml version="1.0" ?^>
 echo:^<package^>^<job id="cmdized"^>^<script language="%~2"^>^<^![CDATA[
 type "%~f1"
 echo:]]^>^</script^>^</job^>^</package^>
-goto :EOF
+goto:eof
 
 :: ========================================================================
 
@@ -565,7 +565,7 @@ goto :EOF
 ::G>    tag1
 ::G>    @echo off
 ::G>    engine %~f0 %*
-::G>    goto :EOF
+::G>    goto:eof
 ::G>    tag2
 ::G>
 ::G>Common case (prefixed)
@@ -576,7 +576,7 @@ goto :EOF
 ::G>
 ::G>    prefix @echo off
 ::G>    prefix engine %~f0 %*
-::G>    prefix goto :EOF
+::G>    prefix goto:eof
 ::G>
 ::G>Special case (`.wsf`)
 ::G>
@@ -587,7 +587,7 @@ goto :EOF
 ::G>    tag1
 ::G>    @echo off
 ::G>    engine %~f0?.wsf %*
-::G>    goto :EOF
+::G>    goto:eof
 ::G>    tag2
 ::G>
 ::G>Special case (prefix = `@`)
@@ -596,12 +596,12 @@ goto :EOF
 ::G>
 ::G>It has higher priority and is processed prior others producing a code similar to:
 ::G>
-::G>    @engine pattern %* & @goto :EOF
+::G>    @engine pattern %* & @goto:eof
 ::G>
 :print-prolog
 if "%~4" == "@" (
-	echo:@%~1 "%%~%~5" %%* ^& @goto :EOF
-	goto :EOF
+	echo:@%~1 "%%~%~5" %%* ^& @goto:eof
+	goto:eof
 )
 
 setlocal
@@ -625,7 +625,7 @@ if defined tag (
 )
 
 endlocal
-goto :EOF
+goto:eof
 
 :: ========================================================================
 

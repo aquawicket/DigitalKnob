@@ -44,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	::(goto) 2>nul & call set caller=%%~0 & echo %caller%
     
-    ::(goto) 2>nul & call set caller=%%~0 & echo %caller% & goto:resume
+    ::(goto) 2>nul & call set caller=%%~0 & echo %caller% & goto resume
     :::resume
     ::echo :resume
 %endfunction%

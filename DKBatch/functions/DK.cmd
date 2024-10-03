@@ -66,9 +66,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 
     ::############ Elevate Permissions ############
     ::set "ENABLE_dk_elevate=1"
-    if "%ENABLE_dk_elevate%" neq "1" goto :skip_elevate
+    if "%ENABLE_dk_elevate%" neq "1" goto skip_elevate
         net session >nul 2>&1
-        if %ERRORLEVEL% equ 0 (goto:skip_elevate)
+        if %ERRORLEVEL% equ 0 (goto skip_elevate)
             if "%2" == "elevated" elevated=1
             if not defined elevated (set "elevated=1" & call "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%)
     :skip_elevate
@@ -147,8 +147,8 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 ::# dk_reloadWithCmd
 ::#
 :dk_reloadWithCmd
-	if "%DKSCRIPT_EXT%" neq ".cmd" goto:end_dk_reloadWithCmd
-    if defined RELOADED goto:end_dk_reloadWithCmd
+	if "%DKSCRIPT_EXT%" neq ".cmd" goto end_dk_reloadWithCmd
+    if defined RELOADED goto end_dk_reloadWithCmd
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"
         set "DKINIT="

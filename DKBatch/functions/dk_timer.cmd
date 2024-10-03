@@ -88,5 +88,5 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_sleep 1000
         %dk_call% dk_timer t1
         echo Seconds since last call: = %t1%
-    goto:timerLoop
+    goto timerLoop
 %endfunction%    

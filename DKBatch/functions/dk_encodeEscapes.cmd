@@ -41,7 +41,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::endlocal & set "org=%org%"
     
 ::  set "replaceWith=_"
-::  goto:rtn
+::  goto rtn
     
 ::  set "var=%var:""=_%"
 ::  set "org=%var%"

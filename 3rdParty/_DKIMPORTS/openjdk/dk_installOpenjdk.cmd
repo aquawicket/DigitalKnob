@@ -53,7 +53,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 %endfunction%
 
 :dk_installOpenJdkMac
-	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" goto:eof
+	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" %return%
 
 	%dk_call% dk_download %OPENJDK_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"

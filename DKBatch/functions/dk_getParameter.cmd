@@ -11,10 +11,10 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
     :getParameter_loop
 	if "%~1" == "%~3" (
 		set "_value_=%~4"
-		goto:end_getParameter_loop
+		goto end_getParameter_loop
 	)
     shift /3 
-    goto :getParameter_loop 
+    goto getParameter_loop 
 	:end_getParameter_loop
 
     endlocal & set "%2=%_value_%"

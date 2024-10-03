@@ -24,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	%dk_call% dk_set POWERSHELL_EXE "%POWERSHELL_DIR%\pwsh.exe"
 	
-	if exist "%POWERSHELL_EXE%" goto:powershell_installed
+	if exist "%POWERSHELL_EXE%" goto powershell_installed
 		%dk_call% dk_echo   
 		%dk_call% dk_info "Installing powershell . . ."
 		%dk_call% dk_download %POWERSHELL_DL%

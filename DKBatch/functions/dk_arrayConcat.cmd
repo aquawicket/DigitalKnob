@@ -33,7 +33,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         call set "%_arrayC_%[%countB%]=%%%_arrayA_%[%countA%]%%"  &:: FIXME: remove the need for call here
         set /a countA+=1
         set /a countB+=1
-        goto:dk_arrayConcat_loop1
+        goto dk_arrayConcat_loop1
     )
     set /a countA=0
     :dk_arrayConcat_loop2
@@ -41,7 +41,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         call set "%_arrayC_%[%countB%]=%%%_arrayB_%[%countA%]%%"  &:: FIXME: remove the need for call here
         set /a countA+=1
         set /a countB+=1
-        goto:dk_arrayConcat_loop2
+        goto dk_arrayConcat_loop2
     )
 
     ::### return value ###

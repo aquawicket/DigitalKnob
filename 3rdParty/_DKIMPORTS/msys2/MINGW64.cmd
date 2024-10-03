@@ -6,7 +6,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
 
-goto:main
+goto main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
 :: /usr/bin/bash -li 	 
 

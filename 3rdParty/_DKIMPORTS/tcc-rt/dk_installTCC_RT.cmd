@@ -23,7 +23,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_set TCC_RT_EXE "%TCC_RT_DIR%\tcc.exe"
 	
-	if exist "%TCC_RT_EXE%" goto:tcc_rt_installed
+	if exist "%TCC_RT_EXE%" goto tcc_rt_installed
 	%dk_call% dk_echo   
     %dk_call% dk_info "Installing tcc . . ."
     %dk_call% dk_download %TCC_RT_DL%

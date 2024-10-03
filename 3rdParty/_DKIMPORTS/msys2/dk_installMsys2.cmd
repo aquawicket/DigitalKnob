@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_set MSYS2 "%DK3RDPARTY_DIR%/%MSYS2_FOLDER%"
 	
 	
-	if exist %MSYS2%\msys2.exe" echo "msys2 already installed" && goto:eof
+	if exist %MSYS2%\msys2.exe" echo "msys2 already installed" && %return%
 	
 	%dk_call% dk_info "Installing %MSYS2_FOLDER%"
 	%dk_call% dk_download %MSYS2_DL%

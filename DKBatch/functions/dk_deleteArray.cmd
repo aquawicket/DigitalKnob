@@ -14,7 +14,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if defined %~1[%n%] (
         set "%~1[%n%]="
         set /A n+=1
-        goto :loop1 
+        goto loop1 
     )
 
     if defined %~1[0] %dk_call% dk_error "%__FUNCTION__%(): failed to delete array"

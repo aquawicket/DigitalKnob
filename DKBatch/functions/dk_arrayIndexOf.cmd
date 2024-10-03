@@ -35,7 +35,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if not defined %~1[%_count_%] (
             endlocal & %dk_call% dk_set %3 -1
             rem %return%
-			goto:end_arrayIndexOf
+			goto end_arrayIndexOf
         )
 
         if "!DE!" equ "" set "_value_=!%~1[%_count_%]!"
@@ -43,11 +43,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         if "%~2" == "%_value_%" (
             endlocal & set "%3=%_count_%"
             rem %return%
-			goto:end_arrayIndexOf
+			goto end_arrayIndexOf
         )
 
         set /a _count_+=1
-    goto:dk_arrayIndexOf_loop
+    goto dk_arrayIndexOf_loop
 
 :end_arrayIndexOf
 ::debug

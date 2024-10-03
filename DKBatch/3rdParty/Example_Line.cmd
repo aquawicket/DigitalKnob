@@ -24,7 +24,7 @@ goto End
 setlocal
 set "xResult=false"
 endlocal & if not "%~1"=="" set "%~1=%xResult%"
-goto :eof
+goto:eof
 
 
 :End

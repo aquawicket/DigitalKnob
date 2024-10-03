@@ -10,19 +10,19 @@ setlocal enabledelayedexpansion
 set "dkdownload=%HOMEDRIVE%%HOMEPATH%\digitalknob\Download"
 if not exist "%dkdownload%" (
 	set "errorlevel=The folder %dkdownload% does not exist" 
-	Goto :Error
+	goto Error
 )
 
 set "vsconfig=2022.vsconfig"
 if not exist "%vsconfig%" (
 	set "errorlevel=The file %vsconfig% does not exist" 
-	Goto :Error
+	goto Error
 )
 
 set "vs_community=%dkdownload%\vs_Community.exe"
 if not exist "%vs_community%" (
 	set "errorlevel=The file %vs_community% does not exist" 
-	Goto :Error
+	goto Error
 )
 
 set /A i=0
