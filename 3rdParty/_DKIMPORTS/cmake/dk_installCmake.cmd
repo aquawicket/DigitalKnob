@@ -25,7 +25,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	set "CMAKE_DIR=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
-    set "CMAKE_EXE=%CMAKE%\bin\cmake.exe"
+    set "CMAKE_EXE=%CMAKE_DIR%\bin\cmake.exe"
         
     if exist "%CMAKE_EXE%" goto cmake_installed
     %dk_call% dk_echo
