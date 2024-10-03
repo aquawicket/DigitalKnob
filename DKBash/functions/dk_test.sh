@@ -19,7 +19,7 @@ echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
 dk_test() {
     dk_debugFunc 0 99
     
-    echo "########## dk_test.sh ##########"
+    echo "################ dk_test.sh ################"
     echo "                    0 = $0"
     echo "                    * = $*"
     echo "             __TIME__ = $(__TIME__)"
@@ -48,8 +48,12 @@ dk_test() {
     echo "           DKBASH_DIR = ${DKBASH_DIR-}"
     echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR-}"
     echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_-}"
-    #dk_return "return value from dk_test.sh"
-    builtin echo "return value from dk_test.sh"
+    
+    return_value="return value from dk_test.sh"
+    
+    #dk_return "${return_value}"
+    #eval "rtn_var=${return_value}"
+    builtin echo "${return_value}"
 }
 
 
@@ -60,7 +64,7 @@ dk_test() {
 DKTEST() { 
     dk_debugFunc 0
 
-    rtn_var=$(dk_call dk_test "arg 1" "arg 2")
+    rtn_var="$(dk_call dk_test "arg 1" "arg 2")"
     dk_call dk_echo
     dk_call dk_echo "rtn_var = ${rtn_var}"	
 

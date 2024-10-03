@@ -87,6 +87,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  
 	%dk_call% dk_callDKBash dk_test "FROM DKBatch" "dk_callDKBash.cmd" rtn_var
     %dk_call% dk_echo
-	%dk_call% dk_echo rtn_var = %rtn_var%
+	%dk_call% dk_echo "rtn_var = %rtn_var%"
 
 %endfunction%

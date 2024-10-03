@@ -19,6 +19,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
 	
+    :: Call DKBatch function
     set DKBATCH_COMMAND="%CMD_EXE% /c "set "DKINIT=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST_ARGS%"
     ::echo %DKBATCH_COMMAND%
 	for /f "delims=" %%Z in ('%DKBATCH_COMMAND%') do (
