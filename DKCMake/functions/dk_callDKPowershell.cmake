@@ -3,36 +3,54 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ##################################################################################
-# dk_callDKPowershell(func, args)
+# dk_callDKPowershell(function, arguments..., rtn_var)
 #
 #
-function(dk_callDKPowershell func) #args
+function(dk_callDKPowershell func rtn_var) #args
 	dk_debugFunc("\${ARGV}")
-	#dk_debug("dk_callDKPowershell(${ARGV})")
 	
-	math(EXPR ARGC_LAST "${ARGC}-1")
-	set(ARGV_LAST ${ARGV${ARGC_LAST}})
-	
-	find_program(POWERSHELL_EXE powershell.exe)
+    ### get required variables ###
+    find_program(POWERSHELL_EXE powershell.exe)
 	dk_validate(DKPOWERSHELL_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
-	if(WSL)
+    if(DEFINED ENV{WSLENV})
 		# execute_process(COMMAND ${WSLPATH_EXE} -m "${DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		# set(ENV{DKPOWERSHELL_FUNCTIONS_DIR} "${DKPOWERSHELL_FUNCTIONS_DIR}")
 		dk_replaceAll("${DKPOWERSHELL_FUNCTIONS_DIR}" "/mnt/c" "C:" DKPOWERSHELL_FUNCTIONS_DIR)
 	endif()
+    
+    
+    ### get ALL_BUT_FIRST_ARGS ###
+	#set(ALL_BUT_FIRST_ARGS              ${ARGN})
+    
+    ### get LAST_ARG ###
+    #list(GET ARGN -1 LAST_ARG)
+	#math(EXPR ARGC_LAST "${ARGC}-1")
+	#set(ARGV_LAST ${ARGV${ARGC_LAST}})
 	
-	#dk_replaceAll("${DKPOWERSHELL_FUNCTIONS_DIR_WIN}" "/" "\\" DKPOWERSHELL_FUNCTIONS_DIR_WIN)
+    
+    ### Call DKCmake function ###
+    set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command \$env:DKPOWERSHELL_FUNCTIONS_DIR=${DKPOWERSHELL_FUNCTIONS_DIR}; $global:DKSCRIPT_EXT=${DKSCRIPT_EXT}; . ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" ${func} ${ARGN})
+	#dk_echo("${DKCMAKE_COMMAND}")
+    execute_process(COMMAND ${DKPOWERSHELL_COMMAND} WORKING_DIRECTORY "${DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
-	set(args ${ARGN})
-	execute_process(COMMAND "${POWERSHELL_EXE}" -Command "\$env:DKPOWERSHELL_FUNCTIONS_DIR='${DKPOWERSHELL_FUNCTIONS_DIR}'; \${DKSCRIPT_EXT}='${DKSCRIPT_EXT}'; . ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" ${func} ${args} OUTPUT_VARIABLE output COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-#	if("${ARGV_LAST}" EQUAL "rtn_var")
-#		dk_debug("returning ARGV_LAST = ${ARGV_LAST}")
-#		set(${rtn_var} "${output}" PARENT_SCOPE)
-#	endif()
-	
+
+    ### process the return value ###
+    #dk_echo("output = ${output}")
+    #if("${LAST_ARG}" STREQUAL "rtn_var")
+        string(FIND "${output}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
+        if(last_newline_pos GREATER -1)
+            string(SUBSTRING "${output}" ${last_newline_pos} -1 rtn_value) # Extract the last line
+        else()
+            set(rtn_value "${output}") # If no newline character was found, the whole string is the last line
+        endif()
+        string(STRIP "${rtn_value}" rtn_value)
+        
+        set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
+        execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
+    #endif()
+    
 # DEBUG
-	dk_printVar(output)
+#	dk_printVar(rtn_value)
 endfunction()
 
 

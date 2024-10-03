@@ -27,9 +27,10 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	set(dest_path ${ARGV1})						# C:/Users/Administrator/Downloads
 	
 	# Setup all src_path variables
-	if(NOT src_path)
-		dk_fatal("src_path is invalid")
-	endif()
+	#if(NOT src_path)
+	#	dk_fatal("src_path is invalid")
+	#endif()
+    #dk_assertVar(src_path)
 	#dk_printVar(src_path)						# https://aquawicket.com/download/myFile.txt
 	
 	dk_dirname(${src_path} src_dir)
@@ -102,7 +103,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
-		dk_assertPath(src_path)
+		dk_assertVar(src_path)
 		dk_urlExists(${src_path} result)
 		if(NOT result)
 			dk_warning("src_path:${src_path} NOT FOUND")
@@ -111,9 +112,6 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 		endif()
 	endif()
 
-	
-	
-	
 	dk_debug("Downloading ${src_path}")
 	dk_debug("      To -> ${dest_path}")
 	

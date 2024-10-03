@@ -42,7 +42,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     set "return_value=return value from dk_test.cmd"
     echo %return_value%
-    endlocal & set "%3=%return_value%"
+    endlocal & set "%~3=%return_value%"
 %endfunction%
 
 
