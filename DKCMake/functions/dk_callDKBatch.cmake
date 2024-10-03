@@ -10,10 +10,15 @@ function(dk_callDKBatch func rtn_var)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_validate(CMD_EXE "dk_depend(cmd)")
+    dk_replaceAll("${CMD_EXE}" "/" "\\" CMD_EXE_WIN)
 	dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
-	execute_process(COMMAND cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} & echo %rtn_var% WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output_variable)
-	dk_debug("output_variable = ${output_variable}")
-	set(${rtn_var} "${output_variable}" PARENT_SCOPE)
+    dk_replaceAll("${DKBATCH_FUNCTIONS_DIR}" "/" "\\" DKBATCH_FUNCTIONS_DIR_WIN)
+    
+           dk_echo("COMMAND '${CMD_EXE_WIN}' /V:ON /c '${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd' '${ARGN}' WORKING_DIRECTORY '${DKBATCH_FUNCTIONS_DIR}' OUTPUT_VARIABLE rtn_value ECHO_OUTPUT_VARIABLE")
+	execute_process(COMMAND "${CMD_EXE_WIN}" /V:ON /c "${DKBATCH_FUNCTIONS_DIR_WIN}\\${func}.cmd" '${ARGN}' WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}" OUTPUT_VARIABLE rtn_value ECHO_OUTPUT_VARIABLE)
+    
+    execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${return_value}")
+	set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
 endfunction()
 
 
@@ -26,6 +31,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_callDKBatch(dk_messageBox rtn_var "MessageBox Title" "Testing dk_messageBox")
-	dk_debug("rtn_var = ${rtn_var}")
+    dk_callDKBatch(dk_test "FROM DKBatch" "dk_callDKBash.cmd" rtn_var)
+    dk_echo()
+	dk_echo("rtn_var = ${rtn_var}")
 endfunction()
