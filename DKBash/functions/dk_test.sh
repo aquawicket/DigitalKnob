@@ -1,8 +1,5 @@
 #!/bin/sh
-echo "###### dk_test.sh ######"
-echo "DKBASH_FUNCTIONS_DIR = '${DKBASH_FUNCTIONS_DIR}'"
-echo "DKINIT = '${DKINIT}'"
-[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR}/DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR-}/DK.sh"
 
 ##################################################################################
 # dk_test(<arg1> <ret_val>)
@@ -12,17 +9,21 @@ dk_test() {
     dk_debugFunc 0 99
     
     echo "########## dk_test.sh ##########"
-    echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-    echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}"
-    echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
-    echo "DKSCRIPT_EXT  = ${DKSCRIPT_EXT}"
-    echo "__TIME__      = $(__TIME__)"
-    echo "__FILE__      = $(__FILE__)"
-    echo "__LINE__      = $(__LINE__)"
-    echo "__FUNCTION__  = $(__FUNCTION__ 1)"
-    echo "__ARGC__      = $(__ARGC__ 1)"
-    echo "__ARGV__      = $(__ARGV__ 1)"
-    echo "__CALLER__    = $(__CALLER__)"
+    echo "                    0 = $0"
+    echo "                    * = $*"
+    echo " DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+    echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
+    echo "        DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+    echo "         DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+    echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+    echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    echo "             __TIME__ = $(__TIME__)"
+    echo "             __FILE__ = $(__FILE__)"
+    echo "             __LINE__ = $(__LINE__)"
+    echo "         __FUNCTION__ = $(__FUNCTION__ 1)"
+    echo "             __ARGC__ = $(__ARGC__ 1)"
+    echo "             __ARGV__ = $(__ARGV__ 1)"
+    echo "           __CALLER__ = $(__CALLER__)"
 
     #return "return value from dk_test.ps1"
 }
