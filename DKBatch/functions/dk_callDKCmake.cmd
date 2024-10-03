@@ -9,92 +9,44 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 1 4
  setlocal
 
-    %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-    %dk_call% dk_assertPath DKIMPORTS_DIR
-    
-    %dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-    %dk_call% dk_assertPath DKCMAKE_DIR
-
-    %dk_call% dk_validate CMAKE_EXE "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake.cmd"
-    %dk_call% dk_assertPath CMAKE_EXE
-    
-    %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
-    ::%dk_call% dk_printVar DKCOMMAND
-    
-    %dk_call% dk_set DKRETURN "%~2"
-    ::%dk_call% dk_printVar DKRETURN
-    
-    %dk_call% dk_set DKVARS "%~3"
-    ::%dk_call% dk_printVar DKVARS
-    
-    %dk_call% dk_replaceAll "%DKCMAKE_DIR%\DKEval.cmake" "\" "/" DK_EVAL
-    ::%dk_call% dk_printVar DK_EVAL
-    
-    ::### build CMAKE_ARGS ###
-    :: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
-    if defined DKCOMMAND  call set "CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""  
-    
-    :: append %DKRETURN% to CMAKE_ARGS with quotes removed
-    if defined DKRETURN   call set "CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%%DKRETURN:"=%%""
-    
-    :: append %DKVARS% to CMAKE_ARGS with quotes removed
-    if defined DKVARS     call set "CMAKE_ARGS=%CMAKE_ARGS% "%%DKVARS:"=%%""
-    
-    set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
-    set "CMAKE_ARGS=%CMAKE_ARGS% "-P""
-    set "CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%""
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
-    
-    ::### call the cmake command ###
-    echo "%CMAKE_EXE%" %CMAKE_ARGS%
-    "%CMAKE_EXE%" %CMAKE_ARGS%
-
-
-
-::	###### IMPORT VARIABLES ######
-    if not defined DKRETURN %return%
-	%dk_call% dk_importVars
+    %dk_call% dk_validate DKIMPORTS_DIR         "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_validate CMAKE_EXE             "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	set "DKCMAKE_FUNCTIONS_DIR=%DKCMAKE_FUNCTIONS_DIR:\=/%"
+	set "DKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR%/"
+	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	
-	
-::  ## these lines are deprecated ###
-::  if not defined DKRETURN %return%
-::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
-::   
-::  endlocal
-::  call %DKCMAKE_DIR%\cmake_vars.cmd
-::  del %DKCMAKE_DIR%\cmake_vars.cmd
-
-    ::%dk_call% dk_printVar ERRORLEVEL
-
-    :::: work with cmake return code files ::::
-    :: std::out
-::    set "out="
-::    if exist "cmake_eval.out" (
-::        for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-::            set "out=!out!%%x"
-::            echo %%x
-::        )
-::    )
-    ::out contains all of the lines
-    ::del cmake_eval.out
-    ::echo %out%    
-
-    :: std::err
-::    set "err="
-::    if exist "cmake_eval.err" (
-::        for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-::            set "err=!err!%%x"
-::            echo [91m %%x [0m
-::        )
-::    )
-    ::del cmake_eval.out
-    ::err contains all of the lines
-    ::echo %err%
+    :: function()
+    set "func=%~1"
     
+    :: get ALL_BUT_FIRST_ARGS
+	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
+    set "ALL_BUT_FIRST_ARGS=%ALL_BUT_FIRST_ARGS:"='%"
     
-    ::%dk_call% dk_checkError
+    :: get LAST_ARG
+	for %%a in (%*) do set LAST_ARG=%%a
+    
+    ::Create Run function Script
+    set "DKCOMMAND=%func%(%ALL_BUT_FIRST_ARGS%)"
+    
+	::###### run script ######
+	::"%CMAKE_EXE%" -DDKSCRIPT_PATH=%DKSCRIPT_PATH% -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%" -P "%DKCMAKE_FUNCTIONS_DIR_%/%~1.cmake"
+    :: call DKPowershell function
+::echo for /f "delims=" %%Z in ('"%CMAKE_EXE%" "-DDKCOMMAND=%DKCOMMAND% -DDKSCRIPT_PATH=%DKSCRIPT_PATH% -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_% -P "%DKCMAKE_DIR%/DKEval.cmake"') do (
+
+
+    set "CMAKE_COMMAND=%CMAKE_EXE% "-DDKCOMMAND=%DKCOMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DQUEUE_BUILD=ON" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" -P %DKCMAKE_DIR%/DKEval.cmake"
+    ::%CMAKE_COMMAND%
+    ::%return%
+    ::echo %CMAKE_COMMAND%
+    for /f "delims=" %%Z in ('%CMAKE_COMMAND%') do (
+    rem for /f "usebackq delims=" %%Z in (`%CMAKE_COMMAND%`) do (  
+        echo %%Z                &rem  Display the other shell's stdout
+        set "rtn_value=%%Z"     &rem  Set the return value to the last line of output
+    )
+    
+	if "%LAST_ARG%" == "rtn_var" endlocal & set "%LAST_ARG%=%rtn_value%"
 %endfunction%
 
 
