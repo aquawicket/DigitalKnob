@@ -125,6 +125,7 @@ DKBASH_VARS(){
     export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE")"; pwd -P )
     export DKBASH_DIR=$( cd -- "$(dk_dirname "$BASH_SOURCE_DIR")" &>/dev/null; pwd -P )
     export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+    export DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
     [ -e "${DKBASH_FUNCTIONS_DIR}/DK.sh" ] || echo "ERROR: ${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
     #export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
 }
@@ -184,7 +185,7 @@ dksetupCallstack(){
 #
 DKSCRIPT_VARS(){
     ### DKSCRIPT_PATH ###
-    dk_call dk_defined           DKSCRIPT_PATH          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
+    dk_call dk_defined           DKSCRIPT_PATH           || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
@@ -195,16 +196,16 @@ DKSCRIPT_VARS(){
     #dk_call dk_defined         DKSCRIPT_ARGS                 && echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     
     ### DKSCRIPT_DIR ###
-    dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_export DKSCRIPT_DIR $(dk_call dk_dirname "${DKSCRIPT_PATH}")
+    dk_call dk_export DKSCRIPT_DIR $(dk_call dk_dirname "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
     #dk_call dk_pathExists    "${DKSCRIPT_DIR}"           && echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     
     ### DKSCRIPT_NAME ###
-    dk_call dk_defined         DKSCRIPT_NAME                 || dk_call dk_export DKSCRIPT_NAME $(dk_call dk_basename "${DKSCRIPT_PATH}")
+    dk_call dk_export DKSCRIPT_NAME $(dk_call dk_basename "${DKSCRIPT_PATH}")
     #dk_call dk_defined         DKSCRIPT_NAME                 && echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     
     ### DKSCRIPT_EXT ###
-    dk_call dk_defined         DKSCRIPT_EXT                 || dk_call dk_export DKSCRIPT_EXT ".${DKSCRIPT_NAME##*.}"
+    dk_call dk_export DKSCRIPT_EXT ".${DKSCRIPT_NAME##*.}"
     #dk_call dk_defined         DKSCRIPT_EXT                 && echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
     
     ### DKBRANCH_DIR ###
