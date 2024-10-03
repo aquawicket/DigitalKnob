@@ -16,8 +16,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
 	
+	:: call DKBatch function
 	set "CMD_EXE=cmd.exe"
-	::echo '%CMD_EXE% /c "set "DKINIT=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST_ARGS%"'
 	for /f "delims=" %%Z in ('%CMD_EXE% /c "set "DKINIT=" && set "DKSCRIPT_PATH=%DKSCRIPT_PATH%" && set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%" && %~1 %ALL_BUT_FIRST_ARGS%"') do (
 		set "rtn_value=%%Z"
 	)
@@ -34,5 +34,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
 	%dk_call% dk_callDKBatch dk_test "arg 1" "arg 2" rtn_var
-	echo rtn_var = '%rtn_var%'
+	
+	dk_call dk_echo
+	dk_call dk_echo "##### DKTEST() ###############"
+	dk_call dk_echo "rtn_var = '%rtn_var%'"
 %endfunction%

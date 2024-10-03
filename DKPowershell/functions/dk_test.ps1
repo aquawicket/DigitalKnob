@@ -10,6 +10,8 @@ function GLOBAL:dk_test() {
 
 	dk_call dk_echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 	dk_call dk_echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}"
+	dk_call dk_echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+	dk_call dk_echo "DKSCRIPT_EXT  = ${DKSCRIPT_EXT}"
 	dk_call dk_echo "__FILE__      = $(__FILE__)"
 	dk_call dk_echo "__LINE__      = $(__LINE__)"
 	dk_call dk_echo "__FUNCTION__  = $(__FUNCTION__)"
@@ -28,9 +30,7 @@ function GLOBAL:dk_test() {
 	if($args[4]) { dk_call dk_debug "args[4]  = $($args[4])" }
 	if($args[5]) { dk_call dk_debug "args[5]  = $($args[5])" }
 	
-	
-	return "rtr_value"
-	$env:TEST_RTN = "TEST_RTN"
+	return "return value from dk_test.ps1"
 }
 
 
@@ -40,5 +40,9 @@ function GLOBAL:dk_test() {
 function Global:DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_test abc 123 "def" "456" 'ghi' '789'
+	$rtn_var = dk_call dk_test "arg 1" "arg 2"
+	
+	dk_call dk_echo
+	dk_call dk_echo "##### DKTEST() ###############"
+	dk_call dk_echo "rtn_var = ${rtn_var}"
 }

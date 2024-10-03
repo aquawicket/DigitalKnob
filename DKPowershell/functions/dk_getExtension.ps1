@@ -18,7 +18,7 @@ function Global:dk_getExtension ($path) {
 	
 	$extension = [System.IO.Path]::GetExtension("$path")
 	
-	dk_call dk_printVar extension
+	#dk_call dk_printVar extension
 	return $extension
 }
 
@@ -39,5 +39,7 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	$extension = dk_call dk_getExtension "/path/to/a/filename.txt"
+	
+	
 	dk_call dk_echo "extension = ${extension}"
 }

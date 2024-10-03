@@ -25,12 +25,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: https://stackoverflow.com/a/4732316/688352
     call %ComSpec% /c %POWERSHELL_EXE% -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
 	
-	:: get last argument
+	:: get LAST_ARG
 	for %%a in (%*) do set LAST_ARG=%%a
 	
-	:: get all but fisrt argument
+	:: get ALL_BUT_FIRST_ARGS
 	for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST_ARGS=%%b
 	
+	:: call DKPowershell function
 	for /f "delims=" %%Z in ('%POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH ^= '%DKSCRIPT_PATH%'^; . %DKPOWERSHELL_FUNCTIONS_DIR%\%~1.ps1^; %~1 %ALL_BUT_FIRST_ARGS%') do (
 		echo %%Z
 		set "rtn_value=%%Z"
@@ -47,9 +48,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_callPowershell dk_test "parameter1" "parameter2" rtn_var
+	%dk_call% dk_callDKPowershell dk_test "arg 1" "arg 2" rtn_var
 	echo rtn_var = %rtn_var%
-	::%dk_call% dk_callPowershell dk_confirm
-    ::%dk_call% dk_callPowershell dk_debug "string from DKBatch"
-
 %endfunction%
