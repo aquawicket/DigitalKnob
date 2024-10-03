@@ -37,7 +37,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     call :dk_DKSCRIPT_DIR	
 	
 	::###### set DKSCRIPT_DIR ######
-    call :dk_setDKSCRIPT_EXT
+    call :dk_DKSCRIPT_EXT
 	
     ::###### Reload Main Script with cmd ######
     if "!DE!" neq "" call :dk_reload 
@@ -124,9 +124,9 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 %endfunction%
 
 ::##################################################################################
-::# dk_setDKSCRIPT_EXT
+::# dk_DKSCRIPT_EXT
 ::#
-:dk_setDKSCRIPT_EXT
+:dk_DKSCRIPT_EXT
 	if not exist "%DKSCRIPT_PATH%"   echo DKSCRIPT_PATH:%DKSCRIPT_PATH% not found & pause & exit 1
 	if not defined DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ"
 	if not defined DKSCRIPT_EXT    	 echo DKSCRIPT_EXT:%DKSCRIPT_EXT% not defined & pause & exit 1
