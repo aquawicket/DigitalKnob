@@ -1,5 +1,5 @@
 @echo off
-if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
+::if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
 
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
