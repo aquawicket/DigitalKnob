@@ -18,7 +18,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     set "NO_STDERR=2>nul"
     set "NO_STD=1>nul 2>nul"
 	
-	if "!DE!" neq ""  echo delayed expansion = OFF
+	::if "!DE!" neq ""  echo delayed expansion = OFF
     if "!DE!" neq ""  set "endfunction=exit /b %errorlevel%"
     if "!DE!" neq ""  set "return=exit /b %errorlevel%"
     if "!DE!" neq ""  set "DEBUG=exit /b %errorlevel%"
@@ -43,7 +43,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     call :dk_setDKSCRIPT_EXT
 	
     ::###### Reload Main Script with cmd ######
-    if "!DE!" neq "" call :dk_reloadWithCmd 
+    if "!DE!" neq "" call :dk_reload 
 	if "!DE!" neq "" echo ERROR: DKBatch requires delayed expansion && pause && exit 13
 	
     ::############ Get DKBATCH variables ############
@@ -143,11 +143,11 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
 %endfunction%
 
 ::##################################################################################
-::# dk_reloadWithCmd
+::# dk_reload
 ::#
-:dk_reloadWithCmd
-	if "%DKSCRIPT_EXT%" neq ".cmd" goto end_dk_reloadWithCmd
-    if defined RELOADED goto end_dk_reloadWithCmd
+:dk_reload
+	if "%DKSCRIPT_EXT%" neq ".cmd" goto end_dk_reload
+    if defined RELOADED goto end_dk_reload
         echo "reloading with delayed expansion . . ."
         set "RELOADED=1"
         set "DKINIT="
@@ -164,7 +164,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
             echo:
             ::pause
             exit %ERRORLEVEL%
-    :end_dk_reloadWithCmd
+    :end_dk_reload
 %endfunction%
 
 
