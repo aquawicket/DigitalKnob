@@ -25,7 +25,7 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
     
 	%dk_call% dk_basename %GIT_DL% GIT_DL_FILE
 	%dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-    %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
+    ::%dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
 	::%dk_call% dk_importVariables %GIT_DL%
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
