@@ -29,8 +29,9 @@ function(dk_callDKPowershell func rtn_var) #args
 	
     
     ### Call DKCmake function ###
-    set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command \$env:DKPOWERSHELL_FUNCTIONS_DIR=${DKPOWERSHELL_FUNCTIONS_DIR}; $global:DKSCRIPT_EXT=${DKSCRIPT_EXT}; . ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" ${func} ${ARGN})
-	#dk_echo("${DKCMAKE_COMMAND}")
+    #set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=${DKPOWERSHELL_FUNCTIONS_DIR};" "\$env:DKSCRIPT_EXT=${DKSCRIPT_EXT};" . "\${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
+	set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$env:DKSCRIPT_EXT='${DKSCRIPT_EXT}';\n . ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1; ${func} ${ARGN}")
+    dk_echo("${DKCMAKE_COMMAND}")
     execute_process(COMMAND ${DKPOWERSHELL_COMMAND} WORKING_DIRECTORY "${DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
 
@@ -63,6 +64,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_callDKPowershell(dk_messageBox "\"Testing dk_messageBox\"")
-	
+	dk_callDKPowershell(dk_test rtn_var "FROM DKCmake" "dk_callDKPowershell.cmake")
+    dk_echo()
+	dk_echo("rtn_var = ${rtn_var}")
 endfunction()

@@ -27,6 +27,23 @@ endif()
 
 
 
+
+### Default bash ###
+dk_findProgram(BASH_EXE bash.exe "C:/Windows/System32")
+if(EXISTS ${BASH_EXE})
+	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+	return()
+endif()
+
+
+### Git bash ###
+dk_depend(git)
+dk_findProgram(BASH_EXE bash "${GIT}/bin")
+if(EXISTS ${BASH_EXE})
+	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+	return()
+endif()
+
 ### Msys2 bash ###
 dk_depend(msys2)
 dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
@@ -34,22 +51,6 @@ if(EXISTS ${BASH_EXE})
 	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
 	return()
 endif()
-
-
-### Default bash ###
-dk_findProgram(BASH_EXE bash)
-if(EXISTS ${BASH_EXE})
-	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-	return()
-endif()
-
-### Git bash ###
-#dk_depend(git)
-#dk_findProgram(BASH_EXE bash "${GIT}/bin")
-#if(EXISTS ${BASH_EXE})
-#	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-#	return()
-#endif()
 
 ### Tiny Core Linux ###
 if(TINYCORE)
