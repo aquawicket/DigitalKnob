@@ -10,8 +10,8 @@ dk_assertPath() {
     [ -e ${1-} ] && return 0
     [ -e ${!1} ] && return 0
     
-	local arg1="${path//[^[:alnum:]]/_}"
-	[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}
+	#local arg1="${path//[^[:alnum:]]/_}"
+	#[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}
 	
 	dk_call dk_error "Assertion failed: ${1} : ${_path_} is not found!"
 }
