@@ -10,6 +10,14 @@ dk_callDKBatch() {
 	#builtin echo "all but first = ${@:2}"
 	#builtin echo "last argument = ${@: -1}"
 	
+    
+    ### get required variables ###
+    ### get ALL_BUT_FIRST_ARGS ###
+    ### get LAST_ARG ###
+    ### Call DKPowershell function ###
+    ### process the return value ###
+    
+    
 	#dk_validate CMD_EXE "??"
 	dk_call dk_validate DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR"
 	export DKBATCH_FUNCTIONS_DIR="C:/Users/Administrator/digitalknob/Development/DKBatch/functions"

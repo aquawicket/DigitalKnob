@@ -8,9 +8,23 @@ if(!$dk_callDKBash){ $dk_callDKBash = 1 } else{ return }
 function Global:dk_callDKBash() {
 	dk_debugFunc 2 99
 	
-	#dk_validate CMD_EXE "??"
+    
+    ### get required variables ###
+    #dk_validate CMD_EXE "??"
 	#dk_validate DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()"
-	#cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} 
+    
+    
+    ### get ALL_BUT_FIRST_ARGS ###
+    
+    
+    ### get LAST_ARG ###
+    
+    
+    ### Call DKPowershell function ###
+    #cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} 
+    
+    
+    ### process the return value ###
 	#dk_debug "output_variable = ${output_variable}"
 	#$2="${output_variable}"
 }

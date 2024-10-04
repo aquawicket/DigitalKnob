@@ -8,7 +8,11 @@
 dk_callDKCmake() {
 	dk_debugFunc 2
 	
-	# TODO
+	### get required variables ###
+    ### get ALL_BUT_FIRST_ARGS ###
+    ### get LAST_ARG ###
+    ### Call DKPowershell function ###
+    ### process the return value ###
 }
 
 

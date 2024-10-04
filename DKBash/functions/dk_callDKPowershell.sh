@@ -8,6 +8,13 @@
 dk_callDKPowershell() {
 	dk_debugFunc 2
 	
+    ### get required variables ###
+    ### get ALL_BUT_FIRST_ARGS ###
+    ### get LAST_ARG ###
+    ### Call DKPowershell function ###
+    ### process the return value ###
+    
+    
 	math(EXPR ARGC_LAST "${ARGC}-1"
 	ARGV_LAST=${ARGV${ARGC_LAST}} 
 	dk_debug "ARGV_LAST = ${ARGV_LAST}" 
