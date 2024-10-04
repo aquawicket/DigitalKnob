@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -n "${DKINIT-}" ] && return  || export DKINIT=1    # include_guard
+[ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 ##################################################################################
@@ -51,8 +51,10 @@ DK(){
     dk_call dk_color
     dk_call dk_logo
     dk_source dk_download
+
+
     #dk_source dk_basename
-    #dk_source "${DKSCRIPT_PATH}"
+    dk_source "${DKSCRIPT_PATH}"
     #${DKSCRIPT_NAME} ${DKSCRIPT_ARGS}
 
     ###### DKTEST MODE ######

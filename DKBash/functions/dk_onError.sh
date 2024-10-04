@@ -24,6 +24,7 @@ dk_onError() {
 	
 	#dk_call dk_error "### dk_onError: $1:$2 ###"
 	#echo "### dk_onError: $1:$2 ###"
+    echo "error code: $?"
 	echo "### dk_onError: $(__FILE__ 0):$(__LINE__ 0) ###"
 	echo "### dk_onError: $(__FILE__ 1):$(__LINE__ 1) ###"
 	echo "### dk_onError: $(__FILE__ 2):$(__LINE__ 2) ###"
