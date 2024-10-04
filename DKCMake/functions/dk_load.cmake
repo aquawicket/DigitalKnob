@@ -219,5 +219,5 @@ endfunction(dk_parseFunctionsAndLoadFromString)
 function(DKTEST) 
 	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_load(msys2)
 endfunction()
