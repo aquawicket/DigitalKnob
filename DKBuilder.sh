@@ -1,18 +1,34 @@
 #!/bin/sh
 echo "DKBuilder.sh()"
 
-#HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
+HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
 
-#DKF="${HOMEDRIVE}${HOMEPATH}/digitalknob/Development/DKBash/functions"
-#[ -e "${DKF}" ] || DKF="${PWD}/DKBash/functions"
-#mkdir "$(dirname ${DKF})"
-#mkdir "${DKF}"
-#DK="${DKF}/DK.sh"
-#[ ! -e "${DK}" ] && [ -n "$(command -v "wget")" ] && wget -P "${DKF}" "${HDK}"
-#[ ! -e "${DK}" ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DK}" "${HDK}"
-#. ${DK}
-#[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_call dk_buildMain
-#exit $?
+[ ! -e "${DRIVE}" ]			&& export DRIVE="/c"
+[ ! -e "${DRIVE}" ]			&& export DRIVE="/mnt/c"
+[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE=$(command -v cmd.exe)
+[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DRIVE}/Windows/System32/cmd.exe"
+[ ! -e "${CYGPATH_EXE}" ]	&& export CYGPATH_EXE=$(command -v "cygpath")
+[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+[ ! -e "${WSLPATH_EXE}" ]	&& export WSLPATH_EXE=$(command -v "wslpath")
+[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${USERPROFILE}
+[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${HOME}
+[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${PWD}	
+[ ! -e "${DKHOME_DIR}" ] 	&& echo "ERROR: DKHOME_DIR:${DKHOE_DIR} not found" && exit 13
+[ ! -e "${DKCACHE_DIR}" ] && export DKCACHE_DIR="${DKHOME_DIR}/.dk"
+[ ! -e "${DKCACHE_DIR}" ] && mkdir "${DKCACHE_DIR}"
+[ ! -e "${DKCACHE_DIR}" ] && echo "ERROR: DKCACHE_DIR:${DKCACHE_DIR} not found" && exit 13
+
+DKF="${DKHOME_DIR}/digitalknob/Development/DKBash/functions"
+[ ! -e "${DKF}" ] && DKF="${DKCACHE_DIR}/DKBash/functions"
+mkdir "$(dirname ${DKF})"
+mkdir "${DKF}"
+DK="${DKF}/DK.sh"
+[ ! -e "${DK}" ] && [ -n "$(command -v "wget")" ] && wget -P "${DKF}" "${HDK}"
+[ ! -e "${DK}" ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DK}" "${HDK}"
+. ${DK}
+[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_call dk_buildMain
+exit $?
 
 
 
@@ -30,14 +46,23 @@ echo "DKBuilder.sh()"
 #
 #
 
-
+### SUDO_EXE ###
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 
-###### DKINIT ######
+### DKSCRIPT_PATH ###
 $(command -v realpath 1>/dev/null) && export DKSCRIPT_PATH="$(realpath ${0})"
-export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-export DKBASH_DIR="${PWD}/DKBash"
+
+### DKHTTP_DIR ###
+export DKHOME_DIR=""
+export DIGITALKNOB_DIR="${DKHOME_DIR}/digitalknob"
+export DKHTTP="https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+export DKBRANCH="Development"
+export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP}/${DKBRANCH}/DKBash/functions"
+
+#### TODO - get DKHOME_DIR
+export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+
 [ -e "${DKBASH_DIR}" ] || ${SUDO_EXE} mkdir "${DKBASH_DIR}"
 export DKUSERNAME="${USER-}"
 [ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
