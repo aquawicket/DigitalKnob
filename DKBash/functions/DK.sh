@@ -54,7 +54,8 @@ DK(){
     dk_call dk_logo
     dk_source dk_download
 
-
+	dk_call dk_validateDK || export RELOADED="" && dk_DKSCRIPT_PATH "$1" $*
+	
     #dk_source dk_basename
     #dk_source "${DKSCRIPT_PATH}"
     #${DKSCRIPT_NAME} ${DKSCRIPT_ARGS}

@@ -18,12 +18,10 @@ dk_validateDK() {
     [ ! -e "${DKBRANCH_DIR}\.git" ] && dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git ${DKBRANCH}
 	
 	[ "${DKSCRIPT_NAME}" = "DKBuilder" ] && export DKSCRIPT_PATH="${DKBRANCH_DIR}/${DKSCRIPT_NAME}/${DKSCRIPT_EXT}"
-	if [ ! -e "${DKSCRIPT_PATH}" ] dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist" && return
+	[ ! -e "${DKSCRIPT_PATH}" ] dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist" && return
 	
-	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
-	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"
-	if [%DKSCRIPT_DIR:~-1%] == [\] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
-	if [%DKSCRIPT_DIR:~-1%] == [/] set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%"
+	[ "${DKSCRIPT_NAME}" = "DKBuilder" ] export DKSCRIPT_ARGS="${DKSCRIPT_PATH}"
+	export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")
 	export RELOADED=""
 	
 	#set "DKSCRIPT_DIR=%DKBRANCH_DIR%"
