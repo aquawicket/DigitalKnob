@@ -12,7 +12,7 @@ dk_validateDK() {
 	[ ! -n "${DKBRANCH}" ] 		&& export DKBRANCH="Development"
 	[ ! -n "${DKBRANCH_DIR}" ] 	&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
 	
-	[ -e "${DKBRANCH_DIR}/.git" ] && [ "${DKSCRIPT_NAME}" neq "DKBuilder" ] && return
+	[ -e "${DKBRANCH_DIR}/.git" ] && [ ! "${DKSCRIPT_NAME}" = "DKBuilder" ] && return
 	[ -e "${DKBRANCH_DIR}/.git" ] && [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ] && return
 
     [ ! -e "${DKBRANCH_DIR}\.git" ] && dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git ${DKBRANCH}
