@@ -11,21 +11,20 @@ dk_DKHOME_DIR() {
     #[ -n "${DKHOME_DIR}" ] && return 0
     
 	### DKHOME_DIR ###
-	if dk_call dk_defined WSLENV; then
-		#HOMEDRIVE="$(cmd.exe /c echo %HOMEDRIVE%)"   # TODO: extract drive letter and convert to /mnt/L
-		HOMEDRIVE="/mnt/c"
-		HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
-		dk_call dk_replaceAll "${HOMEPATH}" "\\" "/" HOMEPATH
-		DKHOME_DIR="${HOMEDRIVE}${HOMEPATH}"
-	elif [ -n "${USERPROFILE-}" ]; then
-		DKHOME_DIR="${USERPROFILE}"
-		dk_call dk_commandExists "cygpath" && DKHOME_DIR=$(cygpath -u "${DKHOME_DIR}")
-		dk_call dk_replaceAll "${DKHOME_DIR}" "\\" "/" DKHOME_DIR
-	elif [ -n "${HOME-}" ]; then
-		DKHOME_DIR="${HOME}"
-	else
-		dk_call dk_error "dk_DKHOME_DIR(): unable to locate HOME directory"
-	fi
+	[ ! -e "${DRIVE}" ]			&& export DRIVE="/c"
+	[ ! -e "${DRIVE}" ]			&& export DRIVE="/mnt/c"
+	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE=$(command -v cmd.exe)
+	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DRIVE}/Windows/System32/cmd.exe"
+	[ ! -e "${CYGPATH_EXE}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
+	[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	[ ! -e "${WSLPATH_EXE}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
+	[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${USERPROFILE}
+	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${HOME}
+	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${PWD}	
+	[ ! -e "${DKHOME_DIR}" ] 	&& dk_call dk_error "dk_DKHOME_DIR(): unable to locate HOME directory"
+	
+	
 	[ -e "${DKHOME_DIR}" ]     || dk_call dk_fatal "DKHOME_DIR not found"
 	#dk_call dk_printVar DKHOME_DIR
 	
