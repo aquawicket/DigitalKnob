@@ -3,16 +3,19 @@
 
 
 ##################################################################################
-# dk_removeCarrageReturns(<input>)
+# dk_removeCarrageReturns(<input> <output>)
 #
 #
 dk_removeCarrageReturns() {
-	dk_debugFunc 0
-
-
-	in=${1}
-	out=$(builtin echo "${in}" | tr -d '\r')
-	# carrage returns are removed
+	dk_debugFunc 1 2
+	
+	if [ -n "$2" ]; then 
+		eval "$2='${1//$'\r'}'"
+		#eval "$2='$(builtin echo "${1}" | tr -d '\r')'"
+	else
+		builtin echo "${1//$'\r'}"
+		#builtin echo $1 | tr -d '\r'
+	fi
 }
 
 
@@ -21,5 +24,8 @@ dk_removeCarrageReturns() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_removeCarrageReturns
+	MyVar="String with some '' carage '' returns"
+	echo "MyVar = ${MyVar}"
+	dk_removeCarrageReturns "${MyVar}" MyVarB
+	echo "MyVarB = ${MyVarB}"
 }

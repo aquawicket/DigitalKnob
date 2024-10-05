@@ -2,6 +2,7 @@
 echo "DKBuilder.sh()"
 
 #HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
+
 #DKF="${HOMEDRIVE}${HOMEPATH}/digitalknob/Development/DKBash/functions"
 #[ -e "${DKF}" ] || DKF="${PWD}/DKBash/functions"
 #mkdir "$(dirname ${DKF})"
@@ -15,7 +16,19 @@ echo "DKBuilder.sh()"
 
 
 
-
+### SHELL Environment variables ###
+#	DKOS	    DKHOST		DKSHELL		DKHOME								<ENV>							
+#	Android		Termux 		bash		/data/data/com.termux/files/home	${HOME}									
+#	Windows		11			Cmd			C:\Users\<username>					%USERPROFILE%
+#	Windows 	Git 		bash		/c/Users/<username>					cygpath $USERPROFILE,   ${HOME}
+#	Windows		Msys2		bash		/c/Users/<username>					cygpath $USERPROFILE
+#	Windows		Wsl 		bash		/mnt/c/Users/<username>				wslpath /mnt/c/Windows/System32/cmd.exe /c "echo %USERPROFILE%"
+#	Linux		Lxle 		bash		/home/<username>					${HOME}
+#	Mac			Osx			bash		/home/<username>					${HOME}
+#	Raspberry	Pi OS		bash		/home/<username>					${HOME}
+#
+#
+#
 
 
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
