@@ -13,18 +13,18 @@ dk_DIGITALKNOB_DIR() {
 	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
 	
 	### DIGITALKNOB_DIR ###
-	[ -n "${DIGITALKNOB}" ] || DIGITALKNOB="digitalknob"
+	[ -n "${DIGITALKNOB}" ] || export DIGITALKNOB="digitalknob"
 	export DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
 	dk_call dk_makeDirectory "${DIGITALKNOB_DIR}"
-	#dk_call dk_printVar DIGITALKNOB_DIR
+	dk_call dk_printVar DIGITALKNOB_DIR
 	
 	export DKTOOLS_DIR="${DIGITALKNOB_DIR}/DKTools"
 	dk_call dk_makeDirectory "${DKTOOLS_DIR}"
-	#dk_call dk_printVar DKTOOLS_DIR
+	dk_call dk_printVar DKTOOLS_DIR
 	
 	export DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
 	dk_call dk_makeDirectory "${DKDOWNLOAD_DIR}"
-	#dk_call dk_printVar DKDOWNLOAD_DIR
+	dk_call dk_printVar DKDOWNLOAD_DIR
 	
 #	[ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMP-}"
 #   [ -e "${DKTEMP_DIR}" ] ||     DKTEMP_DIR="${TMPDIR-}"
