@@ -1,5 +1,6 @@
 #!/bin/sh
-[ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
+echo "DK.h()"
+[ -n "${DKINIT-}" ] && return 0 || export DKINIT=1  # include_guard
 
 [ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 ##################################################################################
@@ -12,8 +13,9 @@ DK(){
     ###### Initialize Language specifics ######
     dkinit
     
+	# TODO: reload if not in bash shell
     ###### Reload Main Script with bash ######
-    dkreloadWithBash ${*}
+#    dkreloadWithBash ${*}
 
     ############ Get DKBASH variables ############
     DKBASH_VARS
@@ -54,12 +56,12 @@ DK(){
 
 
     #dk_source dk_basename
-    dk_source "${DKSCRIPT_PATH}"
+    #dk_source "${DKSCRIPT_PATH}"
     #${DKSCRIPT_NAME} ${DKSCRIPT_ARGS}
 
     ###### DKTEST MODE ######
-    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
-    [ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
+    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
+    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
         dk_source dk_call
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"

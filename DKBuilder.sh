@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "DKBuilder.sh()"
+
 #HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
 #DKF="${HOMEDRIVE}${HOMEPATH}/digitalknob/Development/DKBash/functions"
 #[ -e "${DKF}" ] || DKF="${PWD}/DKBash/functions"
@@ -60,7 +62,8 @@ if [ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ]; then
 	[ ! -e ${DKBASH_FUNCTIONS_DIR}/DK.sh ] && echo "ERROR: Unable to aquire DK.sh, please git clone the repository https://github.com/aquawicket/DigitalKnob.git" && read -rp "Press enter to exit..." && exit 1
 	chmod 777 ${DKBASH_FUNCTIONS_DIR}/DK.sh
 fi
-. ${DKBASH_FUNCTIONS_DIR}/DK.sh
+. ${DKBASH_FUNCTIONS_DIR}/DK.sh && echo "sourced DK successful" || echo "sourcing DK failed" 
+echo "after"
 
 
 ###### Load Main Program ######
