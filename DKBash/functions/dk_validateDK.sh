@@ -9,8 +9,10 @@ dk_validateDK() {
     dk_debugFunc 0
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
-	[ ! -n "${DKBRANCH}" ] 		&& export DKBRANCH="Development"
-	[ ! -n "${DKBRANCH_DIR}" ] 	&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
+	#[ ! -n "${DKBRANCH}" ] 		&& export DKBRANCH="Development"
+	export DKBRANCH="Development"
+	#[ ! -n "${DKBRANCH_DIR}" ] 	&& export DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
+	export DKBRANCH_DIR="${DIGITALKNOB_DIR}\${DKBRANCH}"
 	
 	[ -e "${DKBRANCH_DIR}/.git" ] && [ ! "${DKSCRIPT_NAME}" = "DKBuilder" ] && return
 	[ -e "${DKBRANCH_DIR}/.git" ] && [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ] && return
