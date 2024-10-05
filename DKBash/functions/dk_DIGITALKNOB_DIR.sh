@@ -13,7 +13,7 @@ dk_DIGITALKNOB_DIR() {
 	dk_call dk_validate DKHOME_DIR  "dk_call dk_DKHOME_DIR"
 	
 	### DIGITALKNOB_DIR ###
-	[ -n "${DIGITALKNOB}" ] || export DIGITALKNOB="digitalknob"
+	export DIGITALKNOB="digitalknob"
 	export DIGITALKNOB_DIR="${DKHOME_DIR}/${DIGITALKNOB}"
 	dk_call dk_makeDirectory "${DIGITALKNOB_DIR}"
 	dk_call dk_printVar DIGITALKNOB_DIR
