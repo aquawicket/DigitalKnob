@@ -19,24 +19,24 @@ dk_installCmake() {
 	dk_debugFunc 0
 
 	
-	dk_validate HOST_OS "dk_host_triple"
+	dk_validate host_os "dk_host_triple"
 	######################################################################################################
-	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
-	[ "${HOST_TRIPLE}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
-	[ "${HOST_TRIPLE}" = "win_arm64" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
-	[ "${HOST_TRIPLE}" = "win_x86" ]             && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
-	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
-	[ "${HOST_OS}" = "mac" ]                     && CMAKE_IMPORT=${CMAKE_DL_MAC}
-	[ "${HOST_TRIPLE}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
-	[ "${HOST_TRIPLE}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	[ "${HOST_TRIPLE}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	#[ "${triple}" = "android_arm32" ]        && CMAKE_IMPORT=cmake
-	[ "${triple}" = "win_arm64_clang" ]       && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	[ "${triple}" = "win_x86_clang" ]         && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	[ "${triple}" = "win_x86_mingw" ]         && CMAKE_IMPORT=mingw-w64-i686-cmake
-	[ "${triple}" = "win_x86_64_clang" ]      && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	[ "${triple}" = "win_x86_64_mingw" ]      && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	[ "${triple}" = "win_x86_64_ucrt" ]       && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	[ "${host_os}"     = "android" ]             && CMAKE_IMPORT=cmake;						
+	[ "${host_triple}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
+	[ "${host_triple}" = "win_arm64" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
+	[ "${host_triple}" = "win_x86" ]             && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
+	[ "${host_os}_${host_arch}" = "win_x86_64" ] && CMAKE_IMPORT=${CMAKE_DL_WIN_X86_64}
+	[ "${host_os}"     = "mac" ]                 && CMAKE_IMPORT=${CMAKE_DL_MAC}
+	[ "${host_triple}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
+	[ "${host_triple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	[ "${host_triple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
+	#[ "${triple}" = "android_arm32" ]           && CMAKE_IMPORT=cmake
+	[ "${triple}" = "win_arm64_clang" ]          && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	[ "${triple}" = "win_x86_clang" ]            && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	[ "${triple}" = "win_x86_mingw" ]            && CMAKE_IMPORT=mingw-w64-i686-cmake
+	[ "${triple}" = "win_x86_64_clang" ]         && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	[ "${triple}" = "win_x86_64_mingw" ]         && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	[ "${triple}" = "win_x86_64_ucrt" ]          && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
 	dk_printVar CMAKE_IMPORT
 	
 	[ -z "${CMAKE_IMPORT}" ] && dk_error "CMAKE_IMPORT is invalid"
@@ -52,10 +52,10 @@ dk_installCmake() {
 		dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_validate DKTOOLS_DIR "dk_DIGITALKNOB_DIR"
-		[ "${HOST_OS}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${HOST_OS}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${HOST_OS}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${HOST_OS}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${host_os}" = "win" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
+		[ "${host_os}" = "mac" ]       && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
+		[ "${host_os}" = "linux" ]     && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${host_os}" = "raspberry" ] && CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
 		[ -z ${CMAKE_EXE} ]            && dk_error "no cmake for this OS"
 		dk_printVar CMAKE_EXE
 		
