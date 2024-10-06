@@ -10,22 +10,36 @@ dk_DKHOME_DIR() {
 
     #[ -n "${DKHOME_DIR}" ] && return 0
     
-	### DKHOME_DIR ###
-	[ ! -e "${DRIVE}" ]			&& export DRIVE="/c"
-	[ ! -e "${DRIVE}" ]			&& export DRIVE="/mnt/c"
-	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE=$(command -v cmd.exe)
-	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DRIVE}/Windows/System32/cmd.exe"
-	[ ! -e "${CYGPATH_EXE}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
+	### DKDRIVE ###
+	[ ! -e "${DKDRIVE-}" ]		&& export DKDRIVE="/c"
+	[ ! -e "${DKDRIVE}" ]		&& export DKDRIVE="/mnt/c"
+	[ ! -e "${DKDRIVE}" ]		&& unset DKDRIVE
+	[   -e "${DKDRIVE}" ]		&& dk_call dk_printVar DKDRIVE
+	
+	### CMD_EXE ###
+	[ ! -e "${CMD_EXE-}" ]		&& export CMD_EXE=$(command -v cmd.exe)
+	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DKDRIVE}/Windows/System32/cmd.exe"
+	[ ! -e "${CMD_EXE}" ]		&& unset CMD_EXE
+	[   -e "${CMD_EXE}" ]		&& dk_call dk_printVar CMD_EXE
+	
+	### CYGPATH_EXE ###
+	[ ! -e "${CYGPATH_EXE-}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
 	[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
-	[ ! -e "${WSLPATH_EXE}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
+	[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
+	[   -e "${CYGPATH_EXE}" ]	&& dk_call dk_printVar CYGPATH_EXE
+	
+	### WSLPATH_EXE ###
+	[ ! -e "${WSLPATH_EXE-}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
 	[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
-	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${USERPROFILE}
+	[ ! -e "${WSLPATH_EXE}" ]	&& unset WSLPATH_EXE
+	[   -e "${WSLPATH_EXE-}" ]	&& dk_call dk_printVar WSLPATH_EXE
+	
+	### DKHOME_DIR ###
+	[ ! -e "${DKHOME_DIR-}" ]	&& export DKHOME_DIR=${USERPROFILE}
 	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${HOME}
 	[ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${PWD}	
 	[ ! -e "${DKHOME_DIR}" ] 	&& dk_call dk_error "dk_DKHOME_DIR(): unable to locate HOME directory"
-	
-	
-	[ -e "${DKHOME_DIR}" ]     || dk_call dk_fatal "DKHOME_DIR not found"
+	[ ! -e "${DKHOME_DIR}" ]    && dk_call dk_fatal "DKHOME_DIR not found"
 	dk_call dk_printVar DKHOME_DIR
 	
 	### DKCACHE_DIR ###
@@ -60,8 +74,13 @@ dk_DKHOME_DIR() {
 DKTEST() {
     dk_debugFunc 0
  
-    dk_call dk_DKHOME_DIR
+	dk_call dk_DKHOME_DIR
 	
+	dk_call dk_printVar DKDRIVE
+    dk_call dk_printVar CMD_EXE
+	dk_call dk_printVar CYGPATH_EXE
+	dk_call dk_printVar WSLPATH_EXE
+	dk_call dk_printVar WSLPATH_EXE
     dk_call dk_printVar DKHOME_DIR
 	dk_call dk_printVar DKCACHE_DIR
 	dk_call dk_printVar DKDESKTOP_DIR

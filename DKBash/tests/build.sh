@@ -97,7 +97,8 @@ dk_buildMain() {
 	
 	dk_validateSudo
 	
-	if dk_defined WSLENV; then 
+	#if dk_defined WSLENV; then 
+	if dk_defined WSLPATH_EXE; then
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		${SUDO_EXE} chown -R "$LOGNAME" "$HOME"
@@ -566,7 +567,8 @@ dk_generate() {
 	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${triple}/${TYPE}
 	dk_printVar CMAKE_BINARY_DIR
 	
-	if ! dk_defined WSLENV; then 
+	#if ! dk_defined WSLENV; then 
+	if ! dk_defined WSLPATH_EXE; then
 		set -- "${@}" "-S=${CMAKE_SOURCE_DIR}"
 	fi
 	set -- "${@}" "-B=${CMAKE_BINARY_DIR}"
@@ -679,7 +681,8 @@ dk_generate() {
 #	fi
 	
 	###### WSL CMake Fix ######
-	if dk_defined WSLENV; then 
+	#if dk_defined WSLENV; then 
+	if dk_defined WSLPATH_EXE; then
 		cd "${DKCMAKE_DIR}"
 		set -- "${@}" "."
 	fi

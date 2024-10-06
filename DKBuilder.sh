@@ -21,65 +21,70 @@ HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash
 #	Raspberry	Pi OS		bash		/home/<username>					${HOME}
 #
 
-[ ! -e "${DRIVE}" ]			&& export DRIVE="/c"
-[ ! -e "${DRIVE}" ]			&& export DRIVE="/mnt/c"
-[ ! -e "${DRIVE}" ]			&& export DRIVE=""
-echo "DRIVE  = ${DRIVE}"
+### DKDRIVE ###
+[ ! -e "${DKDRIVE}" ]			&& export DKDRIVE="/c"
+[ ! -e "${DKDRIVE}" ]			&& export DKDRIVE="/mnt/c"
+[ ! -e "${DKDRIVE}" ]			&& unset DKDRIVE
+echo "DKDRIVE  = ${DKDRIVE}"
 
+### CMD_EXE ###
 [ ! -e "${CMD_EXE}" ]		&& export CMD_EXE=$(command -v cmd.exe)
-[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DRIVE}/Windows/System32/cmd.exe"
-[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE=""
+[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="${DKDRIVE}/Windows/System32/cmd.exe"
+[ ! -e "${CMD_EXE}" ]		&& unset CMD_EXE
 echo "CMD_EXE  = ${CMD_EXE}"
 
+### CYGPATH_EXE ###
 [ ! -e "${CYGPATH_EXE}" ]	&& export CYGPATH_EXE=$(command -v "cygpath")
 [   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
-[ ! -e "${CYGPATH_EXE}" ]	&& export CYGPATH_EXE=""
+[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
 echo "CYGPATH_EXE  = ${CYGPATH_EXE}"
 
+### WSLPATH_EXE ###
 [ ! -e "${WSLPATH_EXE}" ]	&& export WSLPATH_EXE=$(command -v "wslpath")
 [   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
-[ ! -e "${WSLPATH_EXE}" ]	&& export WSLPATH_EXE=""
+[   -e "${WSLPATH_EXE}" ]	&& export DKWSL=1
+[ ! -e "${WSLPATH_EXE}" ]	&& unset WSLPATH_EXE
 echo "WSLPATH_EXE  = ${WSLPATH_EXE}"
 
+### DKHOME_DIR ###
 [ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${USERPROFILE}
 [ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${HOME}
 [ ! -e "${DKHOME_DIR}" ]	&& export DKHOME_DIR=${PWD}	
 [ ! -e "${DKHOME_DIR}" ] 	&& echo "ERROR: DKHOME_DIR:${DKHOME_DIR} not found" && exit 13
 echo "DKHOME_DIR = ${DKHOME_DIR}"
 
-[ ! -e "${DKCACHE_DIR}" ]	&& export DKCACHE_DIR="${DKHOME_DIR}/dk"
+### DKCACHE_DIR ###
+[ ! -e "${DKCACHE_DIR}" ]	&& export DKCACHE_DIR="${DKHOME_DIR}/.dk"
 [ ! -e "${DKCACHE_DIR}" ]	&& mkdir "${DKCACHE_DIR}"
 [ ! -e "${DKCACHE_DIR}" ]	&& echo "ERROR: DKCACHE_DIR:${DKCACHE_DIR} not found" && exit 13
 echo "DKCACHE_DIR  = ${DKCACHE_DIR}"
 
+### DKUSERNAME ###
 [   -n "${DKUSERNAME-}" ]	|| export DKUSERNAME="${USER-}"
 [   -n "${DKUSERNAME-}" ]	|| export DKUSERNAME="${USERNAME-}"
 [   -n "${DKUSERNAME-}" ]	|| echo "ERROR: unable to set DKUSERNAME"
 echo "DKUSERNAME  = ${DKUSERNAME}"
 
-export DKF="${DKHOME_DIR}/digitalknob/Development/DKBash/functions/"
-[  ! -e "${DKF}" ] && export DKF="${DKCACHE_DIR}/DKBash/functions"
-[ ! -e "${DKF}" ] && mkdir "${DKF}"
-echo "DKF  = ${DKF}"
-
-export DKBASH_DIR="${DKCACHE_DIR}/DKBash"
+### DKBASH_DIR ###
+[ ! -e "${DKBASH_DIR}" ] && export DKBASH_DIR="${DKHOME_DIR}/digitalknob/Development/DKBash"
+[ ! -e "${DKBASH_DIR}" ] && export DKBASH_DIR="${DKCACHE_DIR}/DKBash"
 [ ! -e "${DKBASH_DIR}" ] && mkdir "${DKBASH_DIR}"
 echo "DKBASH_DIR  = ${DKBASH_DIR}"
 
+### DKF ###
+[ ! -e "${DKBASH_FUNCTIONS_DIR}" ] && export DKF="${DKBASH_DIR}/functions"
+[ ! -e "${DKBASH_FUNCTIONS_DIR}" ] && echo "ERROR: ${DKBASH_FUNCTIONS_DIR} does not exist"
+[ ! -e "${DKBASH_FUNCTIONS_DIR}" ] && mkdir "${DKBASH_FUNCTIONS_DIR}"
+echo "DKBASH_FUNCTIONS_DIR  = ${DKBASH_FUNCTIONS_DIR}"
+
+
+
 
 [ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE-} chown -R ${DKUSERNAME} ${DKBASH_DIR}
-export DK="${DKF}/DK.sh"
-[ ! -e "${DK}" ] && [ -n "$(command -v "wget")" ] && wget -P "${DKF}" "${HDK}"
-[ ! -e "${DK}" ] && [ -n "$(command -v "curl")" ] && curl -Lo "${DK}" "${HDK}"
+
+### DK ###
+export DK="${DKBASH_FUNCTIONS_DIR}/DK.sh"
 echo "DK  = ${DK}"
-chmod 777 ${DK}
-
-. ${DK}
-exit
-[ -z "$(command -v "dk_buildMain")" ] && [ $# -gt 0 ] && "$@" || dk_call dk_buildMain
-exit $?
-
-
 if [ ! -e ${DK} ]; then
 	# https://en.wikipedia.org/wiki/Package_manager
 	if [ -z "$(command -v "wget")" ] && [ -z "$(command -v "curl")" ]; then

@@ -69,7 +69,8 @@ dk_generate() {
 	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${triple}/${TYPE}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
-	if ! dk_call dk_defined WSLENV; then
+	#if ! dk_call dk_defined WSLENV; then
+	if ! dk_call dk_defined WSLPATH_EXE; then
 		dk_call dk_arrayPush CMAKE_ARGS "-S=${CMAKE_SOURCE_DIR}"
 	fi
 	dk_call dk_arrayPush CMAKE_ARGS "-B=${CMAKE_BINARY_DIR}"
@@ -189,7 +190,8 @@ dk_generate() {
 #	fi
 	
 	###### WSL CMake Fix ######
-	if dk_call dk_defined WSLENV; then 
+	#if dk_call dk_defined WSLENV; then 
+	if dk_call dk_defined WSLPATH_EXE; then
 		cd "${DKCMAKE_DIR}"
 		dk_call dk_arrayPush CMAKE_ARGS "."
 	fi

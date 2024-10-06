@@ -35,18 +35,18 @@ dk_DKBRANCH_DIR() {
 		#dk_call dk_printVar DKAPPS_DIR
 		
 		DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
-		#dk_call dk_printVar DKBASH_DIR
+		dk_call dk_printVar DKBASH_DIR
 			DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-			#dk_call dk_printVar DKBASH_FUNCTIONS_DIR
+			dk_call dk_printVar DKBASH_FUNCTIONS_DIR
 			DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
-			#dk_call dk_printVar DKBASH_FUNCTIONS_DIR_
+			dk_call dk_printVar DKBASH_FUNCTIONS_DIR_
 			
 		DKBATCH_DIR="${DKBRANCH_DIR}/DKBatch"
-		dk_call dk_printVar DKBATCH_DIR
+		#dk_call dk_printVar DKBATCH_DIR
 			DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
-			dk_call dk_printVar DKBATCH_FUNCTIONS_DIR
+			#dk_call dk_printVar DKBATCH_FUNCTIONS_DIR
 			DKBATCH_FUNCTIONS_DIR_="${DKBATCH_DIR}/functions/"
-			dk_call dk_printVar DKBATCH_FUNCTIONS_DIR_
+			#dk_call dk_printVar DKBATCH_FUNCTIONS_DIR_
 			
 		DKC_DIR="${DKBRANCH_DIR}/DKC"
 		#dk_call dk_printVar DKC_DIR

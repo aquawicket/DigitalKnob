@@ -14,8 +14,9 @@ dk_buildMain() {
 	
 	dk_call dk_validateSudo
 	
-	if dk_call dk_defined WSLENV; then 
-		dk_call dk_info "WSLENV is on"
+	#if dk_call dk_defined WSLENV; then
+	if dk_call dk_defined WSLPATH_EXE; then
+		dk_call dk_info "WSL is on"
 		#dk_call dk_info "calling sudo chown -R ${LOGNAME} ${HOME} to allow windows write access to \\\wsl.localhost\DISTRO\home\\${LOGNAME}"
 		#${SUDO_EXE} chown -R "${LOGNAME}" "${HOME}"
 	fi

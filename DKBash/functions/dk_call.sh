@@ -20,7 +20,8 @@ dk_call(){
 		dk_commandExists ${1} || dk_fatal "${1}: command not found"
 	fi
 	
-	#echo "dk_call $*"
+	
+	echo "dk_call $*"
 	"${@}"
 }
 

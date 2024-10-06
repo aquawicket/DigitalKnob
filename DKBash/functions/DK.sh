@@ -10,7 +10,8 @@ echo "DK.h()"
 DK() {
 	echo "DK($*)"
     #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
-    
+    #if dk_call dk_defined WSLPATH_EXE; then
+	
     ###### Initialize Language specifics ######
     dkinit
     
@@ -225,15 +226,15 @@ dk_DKSCRIPT_VARS(){
     #dk_call dk_defined         DKSCRIPT_EXT                 && echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
     
     ### DKBRANCH_DIR ###
-    dk_call dk_pathExists    "${DKBRANCH_DIR}"           || export DKBRANCH_DIR $(dk_dirname "${DKBASH_DIR}")
+    dk_call dk_pathExists    "${DKBRANCH_DIR}"           || export DKBRANCH_DIR=$(dk_dirname "${DKBASH_DIR}")
     #dk_call dk_pathExists    "${DKBRANCH_DIR}"           && echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
     
     ### DKBRANCH ###
-    dk_call dk_pathExists    "${DKBRANCH}"               || export DKBRANCH $(dk_call dk_basename "${DKBRANCH_DIR}")
+    dk_call dk_pathExists    "${DKBRANCH}"               || export DKBRANCH=$(dk_call dk_basename "${DKBRANCH_DIR}")
     #dk_call dk_pathExists    "${DKBRANCH}"               && echo "DKBRANCH = ${DKBRANCH}"
     
     ### DIGITALKNOB_DIR ###
-    dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        || export DIGITALKNOB_DIR $(dk_call dk_dirname "${DKBRANCH_DIR}")
+    dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        || export DIGITALKNOB_DIR=$(dk_call dk_dirname "${DKBRANCH_DIR}")
     #dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
     
     ### DIGITALKNOB ###
@@ -241,7 +242,7 @@ dk_DKSCRIPT_VARS(){
     #dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB = ${DIGITALKNOB}"
     
     ### DKDOWNLOAD_DIR ###
-    dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         || export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"
+    dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         || export DKDOWNLOAD_DIR="${DIGITALKNOB_DIR}/download"
     #dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         && echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
     
     ### DKHOME_DIR ###
