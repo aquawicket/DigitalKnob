@@ -11,7 +11,7 @@ function Global:dk_pickOs() {
 	dk_call dk_echo
 	dk_call dk_echo "${APP} ${triple} ${TYPE}"
 	dk_call dk_echo	
-    dk_call dk_echo " 1) ${HOST_TRIPLE}"
+    dk_call dk_echo " 1) ${host_triple}"
 	dk_call dk_echo
 	dk_call dk_echo " 2) Android arm32"
 	dk_call dk_echo " 3) Android arm64"
@@ -53,7 +53,7 @@ function Global:dk_pickOs() {
 	dk_call dk_echo
 	
 	$input = Read-Host
-	    if(${input} -eq  "1"){ $global:triple = "${HOST_TRIPLE}" }
+	    if(${input} -eq  "1"){ $global:triple = "${host_triple}" }
 	elseif(${input} -eq  "2"){ $global:triple = "android_arm32" }
 	elseif(${input} -eq  "3"){ $global:triple = "android_arm64" }
 	elseif(${input} -eq  "4"){ $global:triple = "android_x86" }

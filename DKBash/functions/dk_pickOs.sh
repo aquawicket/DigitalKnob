@@ -12,7 +12,7 @@ dk_pickOs() {
 	dk_echo
 	dk_echo "${APP} ${triple-} ${TYPE-}"
 	dk_echo	""
-    dk_echo " 1) ${HOST_TRIPLE-}"
+    dk_echo " 1) ${host_triple-}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
@@ -57,7 +57,7 @@ dk_pickOs() {
 	dk_call dk_keyboardInputTimeout choice 1 60
 	
 	if [ "${choice}" = "1" ]; then
-		triple="${HOST_TRIPLE-}"
+		triple="${host_triple-}"
 	elif [ "${choice}" = "2" ]; then
 		triple="android_arm32"
 	elif [ "${choice}" = "3" ]; then

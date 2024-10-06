@@ -5,7 +5,7 @@ dk_load(dk_builder)
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 ### We only accesp windows hosts
-dk_validate(HOST_TRIPLE "dk_host_triple()")
+dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()

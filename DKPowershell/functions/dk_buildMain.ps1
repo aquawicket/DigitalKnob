@@ -27,7 +27,7 @@ function Global:dk_buildMain() {
 	#dk_call dk_printVar DKSCRIPT_DIR
 	#dk_call dk_printVar DKSCRIPT_NAME
 	
-	### Get the HOST_TRIPLE and other HOST variables
+	### Get the host_triple and other HOST variables
 	dk_call dk_host_triple
 	dk_call dk_DIGITALKNOB_DIR
 	dk_call dk_installGit

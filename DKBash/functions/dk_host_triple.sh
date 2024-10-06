@@ -13,7 +13,7 @@ try() {
 # dk_host_triple()
 #
 #	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
-#	and build the accoring HOST_TRIPLE variable.  I.E. x86_64_windows_msys2
+#	and build the accoring host_triple variable.  I.E. x86_64_windows_msys2
 #
 #   TRIPLE:
 #   architecture	The target’s architecture. If none is specified, an unknown architecture is assumed.
@@ -57,7 +57,7 @@ dk_host_triple() {
 	dk_debugFunc 0
 
 	# currently, our host triple consists of only 2 variable needed
-	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
+	# host_triple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -85,7 +85,7 @@ dk_host_triple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=${CLANG_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
@@ -107,7 +107,7 @@ dk_host_triple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=${GCC_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
@@ -130,7 +130,7 @@ dk_host_triple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar BASH_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${BASH_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=${BASH_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
@@ -179,7 +179,7 @@ dk_host_triple() {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TRIPLE
 
-		[ -z ${HOST_TRIPLE} ] && HOST_TRIPLE=${UNAME_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
+		[ -z ${host_triple} ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
 		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS} ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
@@ -317,14 +317,14 @@ dk_host_triple() {
 		dk_call dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
-	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	dk_call dk_printVar HOST_TRIPLE
+	host_triple=${HOST_OS}_${HOST_ARCH}
+	dk_call dk_printVar host_triple
 	
 	if [ "${HOST_OS}" = "win" ]; then
 		HOST_ENV=clang
-		HOST_TRIPLE=${HOST_TRIPLE}_${HOST_ENV}
-		#HOST_TRIPLE=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
-		dk_call dk_printVar HOST_TRIPLE
+		host_triple=${host_triple}_${HOST_ENV}
+		#host_triple=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
+		dk_call dk_printVar host_triple
 	fi
 }
 
@@ -336,5 +336,5 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_host_triple
-	dk_call dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"
+	dk_call dk_info "host_triple = ${host_triple}"
 }

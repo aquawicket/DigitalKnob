@@ -7,7 +7,7 @@ dk_load(dk_builder)
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_validate(HOST_TRIPLE "dk_host_triple()")
+dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
 	dk_validate(PYTHON3_DIR "dk_depend(python3)")
 	set(bat ".bat")

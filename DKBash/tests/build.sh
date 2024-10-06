@@ -109,7 +109,7 @@ dk_buildMain() {
 	dk_printVar DKSCRIPT_DIR
 	dk_printVar DKSCRIPT_NAME
 	
-	### Get the HOST_TRIPLE and other HOST variables
+	### Get the host_triple and other HOST variables
 	dk_host_triple
 	
 	dk_DIGITALKNOB_DIR
@@ -310,7 +310,7 @@ dk_pickOs() {
 	dk_echo
 	dk_echo "${APP} ${triple-} ${TYPE-}"
 	dk_echo	""
-    dk_echo " 1) ${HOST_TRIPLE-}"
+    dk_echo " 1) ${host_triple-}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
@@ -353,7 +353,7 @@ dk_pickOs() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		triple="${HOST_TRIPLE-}"
+		triple="${host_triple-}"
 	elif [ "${input}" = "2" ]; then
 		triple="android_arm32"
 	elif [ "${input}" = "3" ]; then
@@ -787,14 +787,14 @@ dk_installCmake() {
 	
 	######################################################################################################
 	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
-	if [ "${HOST_TRIPLE}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${HOST_TRIPLE}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${HOST_TRIPLE}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${HOST_TRIPLE}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
+	if [ "${host_triple}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
+	if [ "${host_triple}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
+	if [ "${host_triple}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
+	if [ "${host_triple}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
 	if [ "${HOST_OS}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${host_triple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
+	if [ "${host_triple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${host_triple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
 	if [ "${triple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
 	if [ "${triple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
 	if [ "${triple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
@@ -2123,14 +2123,14 @@ try() {
 # dk_host_triple(input)
 #
 #	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
-#	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
+#	and build the accoring host_triple variable.  I.E. windows_x86_64_msys2
 #
 dk_host_triple() {
 	dk_verbose "dk_host_triple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
-	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
+	# host_triple=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -2158,7 +2158,7 @@ dk_host_triple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=${CLANG_TRIPLE} && dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${CLANG_ARCH} && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=${CLANG_OS} && dk_printVar HOST_OS
@@ -2177,7 +2177,7 @@ dk_host_triple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=${GCC_TRIPLE} && dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${GCC_ARCH} && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=${GCC_OS} && dk_printVar HOST_OS
@@ -2197,7 +2197,7 @@ dk_host_triple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ENV
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z ${host_triple-} ] && host_triple=$BASH_TRIPLE && dk_printVar host_triple
 		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
 		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
 		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_printVar HOST_OS
@@ -2248,7 +2248,7 @@ dk_host_triple() {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_printVar UNAME_TRIPLE
 
-		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z $host_triple ] && host_triple=$UNAME_TRIPLE && dk_printVar host_triple
 		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
 		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
 		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_printVar HOST_OS
@@ -2387,8 +2387,8 @@ dk_host_triple() {
 		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
-	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	dk_printVar HOST_TRIPLE
+	host_triple=${HOST_OS}_${HOST_ARCH}
+	dk_printVar host_triple
 }
 
 

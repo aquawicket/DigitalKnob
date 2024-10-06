@@ -49,7 +49,7 @@ function(dk_findProgram VAR filename)
 		dk_set(${VAR} "${${VAR}}")
 		return()
 	elseif(${VAR}_second_pass)
-		dk_fatal("COULD NOT FIND ${filename}")
+		dk_error("COULD NOT FIND ${filename}")
 		return()
 	endif()
 	

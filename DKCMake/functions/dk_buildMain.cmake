@@ -29,7 +29,7 @@ function(dk_buildMain)
 #	#dk_printVar DKSCRIPT_DIR
 #	#dk_printVar DKSCRIPT_NAME
 	
-	### Get the HOST_TRIPLE and other HOST variables
+	### Get the host_triple and other HOST variables
 	dk_host_triple()
 	
 	dk_DIGITALKNOB_DIR()
