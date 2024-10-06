@@ -24,7 +24,10 @@ function(dk_set variable)# value)
 	#	dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): expecting less arguments")
 	#endif()
 	
+	
 	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
+	#set(ENV{${ARGV0}} "${ARGV1}")	# Set as environment variable
+	
 	#dk_printVar(${ARGV0})
 endfunction()
 dk_createOsMacros("dk_set")

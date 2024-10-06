@@ -12,8 +12,8 @@ try() {
 ##################################################################################
 # dk_host_triple()
 #
-#	Get host variable such as 'HOST_ARCH', 'HOST_VENDOR', 'HOST_OS', 'HOST_ENV'
-#	and build the accoring HOST_TRIPLE variable.  I.E. x86_64_windows_msys2
+#	Get host variable such as 'host_arch', 'host_vendor', 'host_os', 'host_env'
+#	and build the accoring host_triple variable.  I.E. x86_64_windows_msys2
 #
 #   TRIPLE:
 #   architecture	The target’s architecture. If none is specified, an unknown architecture is assumed.
@@ -57,7 +57,7 @@ dk_host_triple() {
 	dk_debugFunc 0
 
 	# currently, our host triple consists of only 2 variable needed
-	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
+	# host_triple=${host_os}_${host_arch}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -73,68 +73,68 @@ dk_host_triple() {
 	#[ -e /proc/device-tree/model ] && dk_call dk_debug "\$(tr -d '\0' </proc/device-tree/model) = $(tr -d '\0' </proc/device-tree/model)"
 
 	if dk_call dk_commandExists clang; then  
-		CLANG_TRIPLE=$(try clang -dumpmachine) && dk_call dk_printVar CLANG_TRIPLE	
+		clang_triple=$(try clang -dumpmachine) && dk_call dk_printVar clang_triple	
 
-		remainder="${CLANG_TRIPLE}"
-		CLANG_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar CLANG_ARCH
-		CLANG_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar CLANG_VENDOR
-		CLANG_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar CLANG_OS
-		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar CLANG_ENV
+		remainder="${clang_triple}"
+		clang_arch="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar clang_arch
+		clang_vendor="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar clang_vendor
+		clang_os="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar clang_os
+		clang_env="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar clang_env
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${CLANG_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z ${host_triple-} ] && host_triple=${clang_triple} && dk_call dk_printVar host_triple
+		[ -z ${host_arch-} ]   && host_arch=${clang_arch}     && dk_call dk_printVar host_arch
+		[ -z ${host_vendor-} ] && host_vendor=${clang_vendor} && dk_call dk_printVar host_vendor
+		[ -z ${host_os-} ]     && host_os=${clang_os}         && dk_call dk_printVar host_os
+		[ -z ${host_env-} ]    && host_env=${clang_env}       && dk_call dk_printVar host_env
 	fi
 	if dk_call dk_commandExists gcc; then
-		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_call dk_printVar GCC_TRIPLE
+		gcc_triple=$(try gcc -dumpmachine) && dk_call dk_printVar gcc_triple
 
-		remainder="${GCC_TRIPLE}"
-		GCC_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar GCC_ARCH
+		remainder="${gcc_triple}"
+		gcc_arch="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar gcc_arch
 		
-		GCC_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar GCC_VENDOR
+		gcc_vendor="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar gcc_vendor
 		
-		GCC_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar GCC_OS
+		gcc_os="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar gcc_os
 		
-		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar GCC_ENV
+		gcc_env="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar gcc_env
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${GCC_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z ${host_triple-} ] && host_triple=${gcc_triple} && dk_call dk_printVar host_triple
+		[ -z ${host_arch-} ]   && host_arch=${gcc_arch}     && dk_call dk_printVar host_arch
+		[ -z ${host_vendor-} ] && host_vendor=${gcc_vendor} && dk_call dk_printVar host_vendor
+		[ -z ${host_os-} ]     && host_os=${gcc_os}         && dk_call dk_printVar host_os
+		[ -z ${host_env-} ]    && host_env=${gcc_env}       && dk_call dk_printVar host_env
 	fi
 	if dk_call dk_commandExists bash; then
-		BASH_TRIPLE=$(bash -c "builtin echo \${MACHTYPE}")
-		dk_call dk_printVar BASH_TRIPLE
+		bash_triple=$(bash -c "builtin echo \${MACHTYPE}")
+		dk_call dk_printVar bash_triple
 
-		remainder="${BASH_TRIPLE}"
-		BASH_ARCH="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar BASH_ARCH
+		remainder="${bash_triple}"
+		bash_arch="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar bash_arch
 		
-		BASH_VENDOR="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar BASH_VENDOR
+		bash_vendor="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar bash_vendor
 		
-		BASH_OS="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar BASH_OS
+		bash_os="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar bash_os
 		
-		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
-		dk_call dk_printVar BASH_ENV
+		bash_env="${remainder%%-*}"; remainder="${remainder#*-}"
+		dk_call dk_printVar bash_env
 
-		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${BASH_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${BASH_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z ${host_triple-} ] && host_triple=${bash_triple} && dk_call dk_printVar host_triple
+		[ -z ${host_arch-} ]   && host_arch=${bash_arch}     && dk_call dk_printVar host_arch
+		[ -z ${host_vendor-} ] && host_vendor=${bash_vendor} && dk_call dk_printVar host_vendor
+		[ -z ${host_os-} ]     && host_os=${bash_os}         && dk_call dk_printVar host_os
+		[ -z ${host_env-} ]    && host_env=${bash_env}       && dk_call dk_printVar host_env
 	fi	
 	
 	if dk_call dk_commandExists uname; then
@@ -179,34 +179,40 @@ dk_host_triple() {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TRIPLE
 
-		[ -z ${HOST_TRIPLE} ] && HOST_TRIPLE=${UNAME_TRIPLE} && dk_call dk_printVar HOST_TRIPLE
-		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS} ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV} ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z ${host_triple} ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
+		[ -z ${host_arch} ]   && host_arch=${UNAME_ARCH}     && dk_call dk_printVar host_arch
+		[ -z ${host_vendor} ] && host_vendor=${UNAME_VENDOR} && dk_call dk_printVar host_vendor
+		[ -z ${host_os} ]     && host_os=${UNAME_OS}         && dk_call dk_printVar host_os
+		[ -z ${host_env} ]    && host_env=${UNAME_ENV}       && dk_call dk_printVar host_env
 	fi
 	
 	
-	### Get the HOST_OS ###
+	
+	
+	
+	
+	
+	
+	###### host_os and <os>_host ######
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_call dk_stringContains "${UNAME_a}" "Android"; then			# android
-		HOST_OS="android"
+		export host_os="android"
 	elif dk_call dk_stringContains "${UNAME_a}" "Darwin"; then			# mac
-		HOST_OS="mac"
+		export host_os="mac"
 	elif dk_call dk_stringContains "${UNAME_a}" "raspberrypi"; then	# raspberry
-		HOST_OS="raspberry"
+		export host_os="raspberry"
  	elif dk_call dk_stringContains "${UNAME_a}" "Linux"; then			# linux
-		HOST_OS="linux"
+		export host_os="linux"
 	elif dk_call dk_stringContains "${UNAME_a}" "Msys"; then			# win
-		HOST_OS="win"
+		export host_os="win"
 	else
-		dk_call dk_error "Unsupported HOST_OS: ${UNAME_a}"
+		dk_call dk_error "Unsupported host_os: ${UNAME_a}"
 	fi
-	[ -z "$HOST_OS" ] && dk_call dk_error "Failed to get HOST_OS variable"
-	dk_call dk_printVar HOST_OS
+	[ -z "$host_os" ] && dk_call dk_error "Failed to get host_os variable"
+	dk_call dk_printVar host_os
 
 
-	### Set HOST_ARCH ###
+	###### host_arch and <arch>_host ######
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)
@@ -282,49 +288,51 @@ dk_host_triple() {
 	# xtensa		-
 	
 	if [ "${UNAME_m}" = "arm" ]; then
-		HOST_ARCH="arm"
+		export host_arch="arm"
 	elif [ "${UNAME_m}" = "armeb" ]; then
-		HOST_ARCH="arm"
+		export host_arch="arm"
 	elif [ "${UNAME_m}" = "armv7l" ]; then
-		HOST_ARCH="arm"
+		export host_arch="arm"
 	elif [ "${UNAME_m}" = "aarch64" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "aarch64_32" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "aarch64_be" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "arm64" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "arm64_32" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "armv8b" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "armv8l" ]; then
-		HOST_ARCH="arm64"
+		export host_arch="arm64"
 	elif [ "${UNAME_m}" = "x86" ]; then
-		HOST_ARCH="x86"
+		export host_arch="x86"
 	elif [ "${UNAME_m}" = "i386" ]; then
-		HOST_ARCH="x86"
+		export host_arch="x86"
 	elif [ "${UNAME_m}" = "i686" ]; then
-		HOST_ARCH="x86"
+		export host_arch="x86"
 	elif [ "${UNAME_m}" = "x86_64" ]; then
-		HOST_ARCH="x86_64"
+		export host_arch="x86_64"
 	elif [ "${UNAME_m}" = "x86-64" ]; then
-		HOST_ARCH="x86_64"
+		export host_arch="x86_64"
 	elif [ "${UNAME_m}" = "ia64" ]; then
-		HOST_ARCH="x86_64"
+		export host_arch="x86_64"
 	else
-		dk_call dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
+		dk_call dk_error "Unsupported host_arch: ${UNAME_m}"
 	fi
 
-	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
-	dk_call dk_printVar HOST_TRIPLE
+	###### host_triple and <triple>_host ######
+	export host_triple=${host_os}_${host_arch}
+	dk_call dk_printVar host_triple
 	
-	if [ "${HOST_OS}" = "win" ]; then
-		HOST_ENV=clang
-		HOST_TRIPLE=${HOST_TRIPLE}_${HOST_ENV}
-		#HOST_TRIPLE=${HOST_ARCH}-${HOST_VENDOR}-${HOST_OS}
-		dk_call dk_printVar HOST_TRIPLE
+	###### host_env and <env>_host ######
+	if [ "${host_os}" = "win" ]; then
+		export host_env=clang
+		export host_triple=${host_triple}_${host_env}
+		#export host_triple=${host_arch}-${host_vendor}-${host_os}
+		dk_call dk_printVar host_triple
 	fi
 }
 
@@ -336,5 +344,5 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_host_triple
-	dk_call dk_info "HOST_TRIPLE = ${HOST_TRIPLE}"
+	dk_call dk_info "host_triple = ${host_triple}"
 }
