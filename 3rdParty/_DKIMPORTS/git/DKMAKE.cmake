@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+include_guard()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
