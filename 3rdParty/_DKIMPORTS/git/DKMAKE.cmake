@@ -1,11 +1,11 @@
 #!/usr/bin/cmake -P
 include_guard()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 
 # https://git-scm.com
 # https://github.com/git-for-windows/git
 
+dk_validate(HOST_TRIPLE "dk_host_triple()")
 
 ### DOWNLOAD ###
 WIN_X86_HOST_dk_set		(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe)
@@ -50,7 +50,6 @@ if(NOT GIT_EXE)
 		dk_depend(sudo)
 		dk_command(${SUDO_EXE} apt-get -y install git)
 		#dk_command(${SUDO_EXE} apt-get install apt-rdepends)
-		#dk_depend(bash)
 		#dk_command(${BASH_EXE} c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	endif()
 endif()

@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#dk_load(dk_builder)
+
 # https://www.gnu.org/software/bash/
 # https://packages.msys2.org/package/bash
 
