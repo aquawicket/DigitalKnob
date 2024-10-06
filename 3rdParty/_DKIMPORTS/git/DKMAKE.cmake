@@ -18,9 +18,7 @@ endif()
 ### Get GIT variables ###
 if(GIT_DL)
 	dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
-	dk_importVariables(${GIT_DL} ROOT ${DKTOOLS_DIR} rtn_var)
-	dk_removeExtension(${GIT_DIR} GIT_FOLDER)
-	dk_set(GIT_DIR ${DKTOOLS_DIR}/${GIT_FOLDER})
+	dk_importVariables(${GIT_DL} ROOT ${DKTOOLS_DIR})
 endif()
 
 ### First Check ###
@@ -40,8 +38,8 @@ if(NOT GIT_EXE)
 	if(WIN_HOST)
 		dk_download(${GIT_DL} ${DKDOWNLOAD_DIR})			
 		dk_getNativePath("${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
-		dk_getNativePath("${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
-		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
+		dk_getNativePath("${GIT}" GIT_INSTALL_PATH)
+		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH} COMMAND_ECHO STDOUT)
 		# setx PATH
 	elseif(ANDROID_HOST)
 		dk_command(apt -y install git)
@@ -104,13 +102,13 @@ return()
 
 
 #	if(WIN_HOST)
-#		dk_set(GIT_EXE ${DKTOOLS_DIR}/${GIT_FOLDER}/bin/git.exe)
+#		dk_set(GIT_EXE ${GIT}/bin/git.exe)
 #		if(NOT EXISTS ${GIT_EXE})
 #			### INSTALL ###
 #			dk_info("Installing Git . . .")
 #			dk_download(${GIT_DL} ${DKDOWNLOAD_DIR})			
 #			dk_getNativePath("${DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_INSTALL_FILE)
-#			dk_getNativePath("${DKTOOLS_DIR}/${GIT_FOLDER}" GIT_INSTALL_PATH)
+#			dk_getNativePath("${GIT}" GIT_INSTALL_PATH)
 #			#dk_command(${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
 #			#execute_process(COMMAND ${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
 #			execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH})
