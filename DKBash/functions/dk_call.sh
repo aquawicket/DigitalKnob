@@ -21,7 +21,7 @@ dk_call(){
 	fi
 	
 	
-	echo "dk_call $*"
+	#echo "dk_call $*"
 	"${@}"
 }
 
