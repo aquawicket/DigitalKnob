@@ -12,8 +12,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	::%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" set "DKPOWERSHELL_FUNCTIONS_DIR=%CD%\DKPowershell\functions"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %HOMEDRIVE%%HOMEPATH%\digitalknob\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development\DKPowershell\functions"
-	if not defined DKPOWERSHELL_FUNCTIONS_DIR  set "DKPOWERSHELL_FUNCTIONS_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob\DKTools\DKPowershell\functions"
+	if not defined DKPOWERSHELL_FUNCTIONS_DIR  if exist %USERPROFILE%\digitalknob\Development\.git  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\Development\DKPowershell\functions"
+	if not defined DKPOWERSHELL_FUNCTIONS_DIR  set "DKPOWERSHELL_FUNCTIONS_DIR=%USERPROFILE%\digitalknob\DKTools\DKPowershell\functions"
 	if not exist "%DKPOWERSHELL_FUNCTIONS_DIR%" mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%"
 	if not defined DKHTTP_DKPOWERSHELL_DIR            set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell"
 	if not defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR  set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions"

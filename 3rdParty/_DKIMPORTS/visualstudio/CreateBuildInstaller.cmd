@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 setlocal enabledelayedexpansion
 
-set "dkdownload=%HOMEDRIVE%%HOMEPATH%\digitalknob\Download"
+set "dkdownload=%USERPROFILE%\digitalknob\Download"
 if not exist "%dkdownload%" (
 	set "errorlevel=The folder %dkdownload% does not exist" 
 	goto Error

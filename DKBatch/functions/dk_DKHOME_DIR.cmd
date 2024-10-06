@@ -11,11 +11,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     if defined DKHOME_DIR %return%
     
-    if not defined HOMEDRIVE        %dk_call% dk_fatal "HOMEDRIVE is invalid"
-    if not defined HOMEPATH         %dk_call% dk_fatal "HOMEPATH is invalid"
+    if not defined HOMEDRIVE        %dk_call% dk_warning "HOMEDRIVE is invalid"
+    if not defined HOMEPATH         %dk_call% dk_warning "HOMEPATH is invalid"
 	
 	::### DKHOME_DIR ###
-    set "DKHOME_DIR=%HOMEDRIVE%%HOMEPATH%"
+    set "DKHOME_DIR=%USERPROFILE%"
     if not exist "%DKHOME_DIR%"     %dk_call% dk_fatal "DKHOME_DIR:%DKHOME_DIR% does not exist"
 	
 	::### DKCACHE_DIR ###

@@ -9,7 +9,7 @@ function Global:dk_DKHOME_DIR() {
 	dk_debugFunc 0
 
 	### DKHOME_DIR ###
-	$global:DKHOME_DIR = "$env:HOMEDRIVE$env:HOMEPATH"
+	$global:DKHOME_DIR = "$env:USERPROFILE"
 	$global:DKHOME_DIR = $DKHOME_DIR -replace '\\', '/';
 	dk_call dk_assertPath DKHOME_DIR
     #dk_call dk_printVar DKHOME_DIR

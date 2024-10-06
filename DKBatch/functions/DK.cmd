@@ -206,7 +206,7 @@ if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0
     if not defined  DKSCRIPT_EXT      for %%Z in ("%DKSCRIPT_PATH%") do  set "DKSCRIPT_EXT=%%~xZ"
 
     ::### DKCACHE_DIR ###
-    if not exist   "%DKCACHE_DIR%"     set "DKCACHE_DIR=%HOMEDRIVE%%HOMEPATH%\.dk"
+    if not exist   "%DKCACHE_DIR%"     set "DKCACHE_DIR=%USERPROFILE%\.dk"
     if not exist   "%DKCACHE_DIR%"     mkdir %DKCACHE_DIR%
     if exist       "%DKCACHE_DIR%"     copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
 

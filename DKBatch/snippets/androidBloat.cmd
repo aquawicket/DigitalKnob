@@ -1,6 +1,6 @@
 @echo off
 
-set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
 set "ADB=%DIGITALKNOB_DIR%\Development\3rdParty\android-sdk\platform-tools\adb.exe"
 
 ::set /p Y=Enter adb.exe folder path:    

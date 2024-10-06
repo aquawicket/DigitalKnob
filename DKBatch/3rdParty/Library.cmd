@@ -322,7 +322,7 @@ call :Exec.Init			&:# Conditional execution routines
 set FOREACHLINE=for /f "delims="
 
 :# HOME variable. For analogy with Unix systems.
-if not defined HOME set "HOME=%HOMEDRIVE%%HOMEPATH%"
+if not defined HOME set "HOME=%USERPROFILE%"
 
 goto:eof
 

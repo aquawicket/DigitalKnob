@@ -8,36 +8,49 @@
 dk_DKHOME_DIR() {
     dk_debugFunc 0
 
-    #[ -n "${DKHOME_DIR}" ] && return 0
-    
-	### DKHOME_DIR ###
-	if dk_call dk_defined WSLENV; then
-		#HOMEDRIVE="$(cmd.exe /c echo %HOMEDRIVE%)"   # TODO: extract drive letter and convert to /mnt/L
-		HOMEDRIVE="/mnt/c"
-		HOMEPATH="$(cmd.exe /c echo %HOMEPATH%)"
-		dk_call dk_replaceAll "${HOMEPATH}" "\\" "/" HOMEPATH
-		DKHOME_DIR="${HOMEDRIVE}${HOMEPATH}"
-	elif [ -n "${USERPROFILE-}" ]; then
-		DKHOME_DIR="${USERPROFILE}"
-		dk_call dk_commandExists "cygpath" && DKHOME_DIR=$(cygpath -u "${DKHOME_DIR}")
-		dk_call dk_replaceAll "${DKHOME_DIR}" "\\" "/" DKHOME_DIR
-	elif [ -n "${HOME-}" ]; then
-		DKHOME_DIR="${HOME}"
-	else
-		dk_call dk_error "dk_DKHOME_DIR(): unable to locate HOME directory"
-	fi
-	[ -e "${DKHOME_DIR}" ]     || dk_call dk_fatal "DKHOME_DIR not found"
-	#dk_call dk_printVar DKHOME_DIR
+    [ -e "${DKHOME_DIR}" ] && return 0
+    	
+	###### CMD_EXE ######
+	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe)
+	[ ! -e "${CMD_EXE}" ]	&& export CMD_EXE="${DKDRIVE}/Windows/System32/cmd.exe"
+	[ ! -e "${CMD_EXE}" ]	&& unset CMD_EXE
+	[   -e "${CMD_EXE}" ]	&& dk_call dk_printVar CMD_EXE
+	
+	######  USERPROFILE -> CYGPATH_EXE -> DKHOME_DIR ######
+	[ ! -e "${CYGPATH_EXE-}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
+	[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
+	[   -e "${CYGPATH_EXE}" ]	&& dk_call dk_printVar CYGPATH_EXE
+	[   -e "${CYGPATH_EXE}" ]	&&	export DKHOME_DIR=$(cygpath -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	
+	######  USERPROFILE -> WSLPATH_EXE -> DKHOME_DIR ######
+	[ ! -e "${WSLPATH_EXE-}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
+	[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+	[ ! -e "${WSLPATH_EXE}" ]	&& unset WSLPATH_EXE
+	[   -e "${WSLPATH_EXE-}" ]	&& dk_call dk_printVar WSLPATH_EXE
+	[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+	
+	### HOME -> DKHOME_DIR ###
+	[ ! -e "${DKHOME_DIR}" ] 	&& export DKHOME_DIR="${HOME}"
+	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
+	dk_call dk_printVar DKHOME_DIR
+	
+	
 	
 	### DKCACHE_DIR ###
-	DKCACHE_DIR="${DKHOME_DIR}/.dk"
-	[ -e "${DKCACHE_DIR}" ]    || dk_call dk_makeDirectory "${DKCACHE_DIR}"
-	#dk_call dk_printVar DKCACHE_DIR
+	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
+	[ ! -e "${DKCACHE_DIR}" ]    && dk_call dk_makeDirectory "${DKCACHE_DIR}"
+	dk_call dk_printVar DKCACHE_DIR
+	
+	
 	
 	### DKDESKTOP_DIR ###
-	DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
-    [ -e "${DKDESKTOP_DIR}" ]  || dk_call dk_fatal "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
-	#dk_call dk_printVar DKDESKTOP_DIR
+	export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
+    [ ! -e "${DKDESKTOP_DIR}" ]  && dk_call dk_fatal "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
+	dk_call dk_printVar DKDESKTOP_DIR
+	
+	
+	
 	
 	### DKTEMP_DIR ###
 #	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"

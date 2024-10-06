@@ -1,6 +1,6 @@
 #!/bin/sh
 #HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
-#DKF="${HOMEDRIVE}${HOMEPATH}/digitalknob/Development/DKBash/functions"
+#DKF="${USERPROFILE}/digitalknob/Development/DKBash/functions"
 #[ -e "${DKF}" ] || DKF="${PWD}/DKBash/functions"
 #mkdir "$(dirname ${DKF})"
 #mkdir "${DKF}"

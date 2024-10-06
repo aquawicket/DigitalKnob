@@ -24,7 +24,7 @@
 @echo off
 
 :: Choose the repositoy and the branch to merge in to a destination(usually master)
-set "repository=%HOMEDRIVE%%HOMEPATH%\digitalknob\Development"
+set "repository=%USERPROFILE%\digitalknob\Development"
 set "branch=Development"
 set "destination=master"
 
@@ -34,7 +34,7 @@ echo     Branch: %branch%
 echo Merging To: %destination%
 
 set DKBRANCH=Development
-set "DIGITALKNOB_DIR=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
 set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 if exist "%ProgramFiles%\Git\bin\git.exe" set "GIT_EXE=%ProgramFiles%\Git\bin\git.exe"
 if exist "%ProgramFiles(x86)%\Git\bin\git.exe" set "GIT_EXE=%ProgramFiles(x86)%\Git\bin\git.exe"
