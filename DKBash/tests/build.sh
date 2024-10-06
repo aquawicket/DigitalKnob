@@ -97,8 +97,7 @@ dk_buildMain() {
 	
 	dk_validateSudo
 	
-	#if dk_defined WSLENV; then 
-	if dk_defined WSLPATH_EXE; then
+	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
 		${SUDO_EXE} chown -R "$LOGNAME" "$HOME"
@@ -110,7 +109,7 @@ dk_buildMain() {
 	dk_printVar DKSCRIPT_DIR
 	dk_printVar DKSCRIPT_NAME
 	
-	### Get the host_triple and other HOST variables
+	### Get the HOST_TRIPLE and other HOST variables
 	dk_host_triple
 	
 	dk_DIGITALKNOB_DIR
@@ -311,7 +310,7 @@ dk_pickOs() {
 	dk_echo
 	dk_echo "${APP} ${triple-} ${TYPE-}"
 	dk_echo	""
-    dk_echo " 1) ${host_triple-}"
+    dk_echo " 1) ${HOST_TRIPLE-}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
@@ -354,7 +353,7 @@ dk_pickOs() {
 	
 	read input
 	if [ "${input}" = "1" ]; then
-		triple="${host_triple-}"
+		triple="${HOST_TRIPLE-}"
 	elif [ "${input}" = "2" ]; then
 		triple="android_arm32"
 	elif [ "${input}" = "3" ]; then
@@ -567,8 +566,7 @@ dk_generate() {
 	CMAKE_BINARY_DIR=${CMAKE_TARGET_PATH}/${triple}/${TYPE}
 	dk_printVar CMAKE_BINARY_DIR
 	
-	#if ! dk_defined WSLENV; then 
-	if ! dk_defined WSLPATH_EXE; then
+	if ! dk_defined WSLENV; then 
 		set -- "${@}" "-S=${CMAKE_SOURCE_DIR}"
 	fi
 	set -- "${@}" "-B=${CMAKE_BINARY_DIR}"
@@ -681,8 +679,7 @@ dk_generate() {
 #	fi
 	
 	###### WSL CMake Fix ######
-	#if dk_defined WSLENV; then 
-	if dk_defined WSLPATH_EXE; then
+	if dk_defined WSLENV; then 
 		cd "${DKCMAKE_DIR}"
 		set -- "${@}" "."
 	fi
@@ -789,22 +786,22 @@ dk_installCmake() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################
-	if [ "${host_os}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
-	if [ "${host_triple}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
-	if [ "${host_triple}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
-	if [ "${host_triple}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
-	if [ "${host_triple}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
-	if [ "${host_os}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
-	if [ "${host_triple}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
-	if [ "${host_triple}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${host_triple}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
-	if [ "${triple}" 	    = "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
-	if [ "${triple}" 	    = "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${triple}" 	    = "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${triple}" 	    = "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
+	if [ "${HOST_OS}" 		= "android" ]; 			then CMAKE_IMPORT=cmake;							fi
+	if [ "${HOST_TRIPLE}" 	= "win_arm32" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM32;				fi
+	if [ "${HOST_TRIPLE}" 	= "win_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_ARM64;				fi
+	if [ "${HOST_TRIPLE}" 	= "win_x86" ];			then CMAKE_IMPORT=$CMAKE_DL_WIN_X86;				fi
+	if [ "${HOST_TRIPLE}"	= "win_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_WIN_X86_64;				fi
+	if [ "${HOST_OS}" 		= "mac" ];				then CMAKE_IMPORT=$CMAKE_DL_MAC;					fi
+	if [ "${HOST_TRIPLE}" 	= "linux_x86_64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_X86_64;			fi
+	if [ "${HOST_TRIPLE}" 	= "linux_arm64" ];		then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${HOST_TRIPLE}" 	= "raspberry_arm64" ];	then CMAKE_IMPORT=$CMAKE_DL_LINUX_ARM64;			fi
+	if [ "${triple}" 	= "android_arm32" ]; 	then CMAKE_IMPORT=cmake;							fi
+	if [ "${triple}" 	= "win_arm64_clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${triple}" 	= "win_x86_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
+	if [ "${triple}" 	= "win_x86_mingw" ]; 	then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
 	if [ "${triple}"		= "win_x86_64_clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${triple}" 	    = "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${triple}" 	    = "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	if [ "${triple}" 	= "win_x86_64_mingw" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
+	if [ "${triple}" 	= "win_x86_64_ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
 	
 	dk_printVar CMAKE_IMPORT
 	if dk_url ${CMAKE_IMPORT}; then
@@ -825,13 +822,13 @@ dk_installCmake() {
 		dk_toLower CMAKE_FOLDER
 		dk_printVar CMAKE_FOLDER
 		
-		if [ "${host_os}" = "win" ]; then
+		if [ "${HOST_OS}" = "win" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
-		elif [ "${host_os}" = "mac" ]; then
+		elif [ "${HOST_OS}" = "mac" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
-		elif [ "${host_os}" = "linux" ]; then
+		elif [ "${HOST_OS}" = "linux" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
-		elif [ "${host_os}" = "raspberry" ]; then
+		elif [ "${HOST_OS}" = "raspberry" ]; then
 			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
 		else
 			dk_error "no cmake for this OS"
@@ -2125,15 +2122,15 @@ try() {
 ##################################################################################
 # dk_host_triple(input)
 #
-#	Get host variable such as 'host_os', 'host_arch', 'host_env', 'host_vendor
-#	and build the accoring host_triple variable.  I.E. windows_x86_64_msys2
+#	Get host variable such as 'HOST_OS', 'HOST_ARCH', 'HOST_ENV', 'HOST_VENDOR
+#	and build the accoring HOST_TRIPLE variable.  I.E. windows_x86_64_msys2
 #
 dk_host_triple() {
 	dk_verbose "dk_host_triple(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
 	# currently, our host triple consists of only 2 variable needed
-	# host_triple=${host_os}_${host_arch}
+	# HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
 	
 	# https://unix.stackexchange.com/questions/225350/how-to-find-out-triplet-without-gcc
 	# https://en.wikipedia.org/wiki/Uname
@@ -2161,11 +2158,11 @@ dk_host_triple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar CLANG_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${CLANG_TRIPLE} && dk_printVar host_triple
-		[ -z ${host_arch-} ] && host_arch=${CLANG_ARCH} && dk_printVar host_arch
-		[ -z ${host_vendor-} ] && host_vendor=${CLANG_VENDOR} && dk_printVar host_vendor
-		[ -z ${host_os-} ] && host_os=${CLANG_OS} && dk_printVar host_os
-		[ -z ${host_env-} ] && host_env=${CLANG_ENV} && dk_printVar host_env
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${CLANG_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${CLANG_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=${CLANG_OS} && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${CLANG_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_printVar GCC_TRIPLE
@@ -2180,11 +2177,11 @@ dk_host_triple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar GCC_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${GCC_TRIPLE} && dk_printVar host_triple
-		[ -z ${host_arch-} ] && host_arch=${GCC_ARCH} && dk_printVar host_arch
-		[ -z ${host_vendor-} ] && host_vendor=${GCC_VENDOR} && dk_printVar host_vendor
-		[ -z ${host_os-} ] && host_os=${GCC_OS} && dk_printVar host_os
-		[ -z ${host_env-} ] && host_env=${GCC_ENV} && dk_printVar host_env
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=${GCC_TRIPLE} && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=${GCC_ARCH} && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=${GCC_OS} && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${GCC_ENV} && dk_printVar HOST_ENV
 	fi
 	if dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "echo \${MACHTYPE}")
@@ -2200,11 +2197,11 @@ dk_host_triple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_printVar BASH_ENV
 
-		[ -z ${host_triple-} ] && host_triple=$BASH_TRIPLE && dk_printVar host_triple
-		[ -z ${host_arch-} ] && host_arch=$BASH_ARCH && dk_printVar host_arch
-		[ -z ${host_vendor-} ] && host_vendor=$BASH_VENDOR && dk_printVar host_vendor
-		[ -z ${host_os-} ] && host_os=$BASH_OS && dk_printVar host_os
-		[ -z ${host_env-} ] && host_env=${BASH_ENV-} && dk_printVar host_env
+		[ -z ${HOST_TRIPLE-} ] && HOST_TRIPLE=$BASH_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z ${HOST_ARCH-} ] && HOST_ARCH=$BASH_ARCH && dk_printVar HOST_ARCH
+		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=$BASH_VENDOR && dk_printVar HOST_VENDOR
+		[ -z ${HOST_OS-} ] && HOST_OS=$BASH_OS && dk_printVar HOST_OS
+		[ -z ${HOST_ENV-} ] && HOST_ENV=${BASH_ENV-} && dk_printVar HOST_ENV
 	fi	
 	
 	if dk_commandExists uname; then
@@ -2251,35 +2248,35 @@ dk_host_triple() {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_printVar UNAME_TRIPLE
 
-		[ -z $host_triple ] && host_triple=$UNAME_TRIPLE && dk_printVar host_triple
-		[ -z $host_arch ] && host_arch=$UNAME_ARCH && dk_printVar host_arch
-		[ -z $host_vendor ] && host_vendor=$UNAME_VENDOR && dk_printVar host_vendor
-		[ -z $host_os ] && host_os=$UNAME_OS && dk_printVar host_os
-		[ -z $host_env ] && host_env=$UNAME_ENV && dk_printVar host_env
+		[ -z $HOST_TRIPLE ] && HOST_TRIPLE=$UNAME_TRIPLE && dk_printVar HOST_TRIPLE
+		[ -z $HOST_ARCH ] && HOST_ARCH=$UNAME_ARCH && dk_printVar HOST_ARCH
+		[ -z $HOST_VENDOR ] && HOST_VENDOR=$UNAME_VENDOR && dk_printVar HOST_VENDOR
+		[ -z $HOST_OS ] && HOST_OS=$UNAME_OS && dk_printVar HOST_OS
+		[ -z $HOST_ENV ] && HOST_ENV=$UNAME_ENV && dk_printVar HOST_ENV
 	fi
 	
 
 
-	### Get the host_os ###
+	### Get the HOST_OS ###
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	if dk_stringContains "${UNAME_a}" "Android"; then			# android
-		host_os="android"
+		HOST_OS="android"
 	elif dk_stringContains "${UNAME_a}" "Darwin"; then			# mac
-		host_os="mac"
+		HOST_OS="mac"
 	elif dk_stringContains "${UNAME_a}" "raspberrypi"; then	# raspberry
-		host_os="raspberry"
+		HOST_OS="raspberry"
  	elif dk_stringContains "${UNAME_a}" "Linux"; then			# linux
-		host_os="linux"
+		HOST_OS="linux"
 	elif dk_stringContains "${UNAME_a}" "Msys"; then			# win
-		host_os="win"
+		HOST_OS="win"
 	else
-		dk_error "Unsupported host_os: ${UNAME_a}"
+		dk_error "Unsupported HOST_OS: ${UNAME_a}"
 	fi
-	[ -z "$host_os" ] && dk_error "Failed to get host_os variable"
-	dk_printVar host_os
+	[ -z "$HOST_OS" ] && dk_error "Failed to get HOST_OS variable"
+	dk_printVar HOST_OS
 
 
-	### Get the host_arch ###
+	### Get the HOST_ARCH ###
 	# https://stackoverflow.com/a/45125525
 	# aarch64    	- AArch64 (little endian)
     # aarch64_32 	- AArch64 (little endian ILP32)
@@ -2355,43 +2352,43 @@ dk_host_triple() {
 	# xtensa		-
 	
 	if [ "$UNAME_m" = "arm" ]; then
-		host_arch="arm"
+		HOST_ARCH="arm"
 	elif [ "$UNAME_m" = "armeb" ]; then
-		host_arch="arm"
+		HOST_ARCH="arm"
 	elif [ "$UNAME_m" = "armv7l" ]; then
-		host_arch="arm"
+		HOST_ARCH="arm"
 	elif [ "$UNAME_m" = "aarch64" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "aarch64_32" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "aarch64_be" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "arm64" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "arm64_32" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "armv8b" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "armv8l" ]; then
-		host_arch="arm64"
+		HOST_ARCH="arm64"
 	elif [ "$UNAME_m" = "x86" ]; then
-		host_arch="x86"
+		HOST_ARCH="x86"
 	elif [ "$UNAME_m" = "i386" ]; then
-		host_arch="x86"
+		HOST_ARCH="x86"
 	elif [ "$UNAME_m" = "i686" ]; then
-		host_arch="x86"
+		HOST_ARCH="x86"
 	elif [ "$UNAME_m" = "x86_64" ]; then
-		host_arch="x86_64"
+		HOST_ARCH="x86_64"
 	elif [ "$UNAME_m" = "x86-64" ]; then
-		host_arch="x86_64"
+		HOST_ARCH="x86_64"
 	elif [ "$UNAME_m" = "ia64" ]; then
-		host_arch="x86_64"
+		HOST_ARCH="x86_64"
 	else
-		dk_error "Unsupported host_arch: ${UNAME_m}"
+		dk_error "Unsupported HOST_ARCH: ${UNAME_m}"
 	fi
 
-	host_triple=${host_os}_${host_arch}
-	dk_printVar host_triple
+	HOST_TRIPLE=${HOST_OS}_${HOST_ARCH}
+	dk_printVar HOST_TRIPLE
 }
 
 

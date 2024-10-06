@@ -9,123 +9,12 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_DKHOME_DIR)
     dk_debugFunc("\${ARGV}")
 
-    if(DEFINED ENV{DKHOME_DIR})
+    if(DEFINED DKHOME_DIR)
 		return()
 	endif()
     
-	
-#	###### DKDRIVE ######
-#	if(NOT EXISTS "$ENV{DKDRIVE}")
-#		dk_set(ENV{DKDRIVE} "/c")
-#	endif()
-#	if(NOT EXISTS "$ENV{DKDRIVE}")
-#		dk_set(ENV{DKDRIVE} "/mnt/c")
-#	endif()
-#	if(NOT EXISTS "$ENV{DKDRIVE}")
-#		dk_unset(ENV{DKDRIVE})
-#	endif()
-#	if(EXISTS "$ENV{DKDRIVE}")
-#		dk_printVar(ENV{DKDRIVE})
-#	endif()
-#	
-#	
-#	###### CMD_EXE ######
-#	if(NOT EXISTS "$ENV{CMD_EXE}")
-#		#dk_set(ENV{CMD_EXE} $(command -v cmd.exe)) 		#TODO
-#	endif()
-#	if(NOT EXISTS "$ENV{CMD_EXE}")
-#		dk_set(ENV{CMD_EXE} "${DKDRIVE}/Windows/System32/cmd.exe")
-#	endif()
-#	if(NOT EXISTS "$ENV{CMD_EXE}")
-#		dk_unset(ENV{CMD_EXE})
-#	endif()
-#	if(EXISTS "$ENV{CMD_EXE}")
-#		dk_printVar(ENV{CMD_EXE})
-#	endif()
-#	
-#	
-#	###### CYGPATH_EXE ######
-#	if(NOT EXISTS "$ENV{CYGPATH_EXE}")
-#		#dk_set(ENV{CYGPATH_EXE} "$(command -v "cygpath")") 		 #TODO
-#	endif()
-#	if(NOT EXISTS "$ENV{CYGPATH_EXE}")
-#		#dk_set(ENV{USERPROFILE} "$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))"   #TODO
-#		execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE USERPROFILE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
-#		execute_process(COMMAND ${CYGPATH_EXE} -u "${USERPROFILE}" OUTPUT_VARIABLE ENV{USERPROFILE} OUTPUT_STRIP_TRAILING_WHITESPACE) 
-#	endif()
-#	if(NOT EXISTS "$ENV{CYGPATH_EXE}")
-#		dk_unset(ENV{CYGPATH_EXE})
-#	endif()
-#	if(EXISTS "$ENV{CYGPATH_EXE}")
-#		dk_printVar(ENV{CYGPATH_EXE})
-#	endif()
-#	
-#	
-#	###### WSLPATH_EXE ######
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		#dk_set(ENV{WSLPATH_EXE} "$(command -v "wslpath")")	#TODO
-#	endif()
-#	if(EXISTS "$ENV{WSLPATH_EXE}")
-#		#dk_set(ENV{USERPROFILE} "$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))") 	#TODO
-#		execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE USERPROFILE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
-#		execute_process(COMMAND ${WSLPATH_EXE} -u "${USERPROFILE}" OUTPUT_VARIABLE ENV{USERPROFILE} OUTPUT_STRIP_TRAILING_WHITESPACE) 
-#	endif()
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_unset(ENV{WSLPATH_EXE})
-#	endif()
-#	if(EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_printVar(ENV{WSLPATH_EXE})
-#	endif()
-#	
-#	
-#	###### DKHOME_DIR ######
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_set(ENV{DKHOME_DIR} "$ENV{USERPROFILE}")
-#	endif()
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_set(ENV{DKHOME_DIR} "$ENV{HOME}")
-#	endif()
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_set(ENV{DKHOME_DIR} "$ENV{PWD}")
-#	endif()
-#	if(NOT EXISTS "$ENV{WSLPATH_EXE}")
-#		dk_error("dk_DKHOME_DIR(): unable to locate DKHOME_DIR directory")
-#	endif()
-#	dk_printVar(ENV{DKHOME_DIR})
-#	
-#	
-#	###### DKCACHE_DIR ######
-#	dk_set(ENV{DKCACHE_DIR} "$ENV{DKHOME_DIR}/.dk")
-#	if(NOT EXISTS "$ENV{DKCACHE_DIR}")
-#		dk_makeDirectory("$ENV{DKCACHE_DIR}")
-#	endif()
-#	dk_printVar(ENV{DKCACHE_DIR})
-#	
-#	
-#	###### DKDESKTOP_DIR ######
-#	dk_set(ENV{DKDESKTOP_DIR} "$ENV{DKHOME_DIR}/Desktop")
-#    if(NOT EXISTS "$ENV{DKDESKTOP_DIR}")
-#		dk_fatal("DKDESKTOP_DIR:$ENV{DKDESKTOP_DIR} does not exist")
-#	endif()
-#	dk_printVar(ENV{DKDESKTOP_DIR})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	#if(DEFINED ENV{WSLENV})
-	if(DEFINED ENV{WSLPATH_EXE})
+	### DKHOME_DIR ###
+	if(DEFINED ENV{WSLENV})
 		dk_echo("Using WSL")
 		execute_process(COMMAND cmd.exe /c "echo %HOMEDRIVE%" OUTPUT_VARIABLE HOMEDRIVE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
 		set(HOMEDRIVE "/mnt/c")

@@ -4,14 +4,14 @@
 . ../../../DKBash/functions/DK.sh
 
 SHELLCHECK_VERSION="v0.10.0"
-dk_validate host_os "dk_host_triple"
-dk_printVar host_os
-dk_printVar host_arch
-[ "${host_os}_${host_arch}" == "linux_arm" ]    && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.linux.armv6hf.tar.xz"
-[ "${host_os}_${host_arch}" == "linux_arm64" ]  && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.aarch64.tar.xz"
-[ "${host_os}_${host_arch}" == "linux_x86_64" ] && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
-[ "${host_os}_${host_arch}" == "mac_x86_64" ]   && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.x86_64.tar.xz"
-[ "${host_os}_${host_arch}" == "mac_arm64" ]    && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.aarch64.tar.xz"
+dk_validate HOST_OS "dk_host_triple"
+dk_printVar HOST_OS
+dk_printVar HOST_ARCH
+[ "${HOST_OS}_${HOST_ARCH}" == "linux_arm" ]    && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.linux.armv6hf.tar.xz"
+[ "${HOST_OS}_${HOST_ARCH}" == "linux_arm64" ]  && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.aarch64.tar.xz"
+[ "${HOST_OS}_${HOST_ARCH}" == "linux_x86_64" ] && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
+[ "${HOST_OS}_${HOST_ARCH}" == "mac_x86_64" ]   && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.x86_64.tar.xz"
+[ "${HOST_OS}_${HOST_ARCH}" == "mac_arm64" ]    && SHELLCHECK_DL_FILE="shellcheck-${SHELLCHECK_VERSION}.darwin.aarch64.tar.xz"
 dk_assertVar SHELLCHECK_DL_FILE
 dk_printVar SHELLCHECK_DL_FILE
 

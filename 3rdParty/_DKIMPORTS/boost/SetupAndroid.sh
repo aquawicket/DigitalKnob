@@ -7,44 +7,44 @@ BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 # ---------
 # HOST info
 # ---------
-host_arch=`uname -m`
-case "$host_arch" in
-    i?86) host_arch=x86
+HOST_ARCH=`uname -m`
+case "$HOST_ARCH" in
+    i?86) HOST_ARCH=x86
     ;;
-    amd64) host_arch=x86_64
+    amd64) HOST_ARCH=x86_64
     ;;
-    powerpc) host_arch=ppc
+    powerpc) HOST_ARCH=ppc
     ;;
 esac
 
-host_exe=""
-host_os=`uname -s`
-case "$host_os" in
+HOST_EXE=""
+HOST_OS=`uname -s`
+case "$HOST_OS" in
     Darwin)
-        host_os=darwin
+        HOST_OS=darwin
         ;;
     Linux)
-        host_os=linux
+        HOST_OS=linux
         ;;
     FreeBsd)  # not tested
-        host_os=freebsd
+        HOST_OS=freebsd
         ;;
     CYGWIN*|*_NT-*)
-        host_os=windows
-        host_exe=.exe
+        HOST_OS=windows
+        HOST_EXE=.exe
         if [ "x$OSTYPE" = xcygwin ] ; then
-            host_os=cygwin
+            HOST_OS=cygwin
         fi
         ;;
 esac
 
 compute_host_tag ()
 {
-    case "$host_os" in
+    case "$HOST_OS" in
         windows|cygwin)
-            host_tag="windows"
+            HOST_TAG="windows"
             ;;
-        *)  host_tag="${host_os}-${host_arch}"
+        *)  HOST_TAG="${HOST_OS}-${HOST_ARCH}"
     esac
 }
 compute_host_tag
