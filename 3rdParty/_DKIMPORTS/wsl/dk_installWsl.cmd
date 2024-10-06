@@ -11,7 +11,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
 	if exist "%WSL_EXE%" %dk_call% dk_info "WSL already installed"
-	%WSL_EXE% --status && %return%
+::	%WSL_EXE% --status && %return%
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux

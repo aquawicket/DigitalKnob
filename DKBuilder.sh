@@ -20,15 +20,25 @@
 
 ###### DKINIT ######
 $(command -v realpath 1>/dev/null) && export DKSCRIPT_PATH="$(realpath ${0})"
+echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+
 export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
+echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
+
 export DKBASH_DIR="${PWD}/DKBash"
+echo "DKBASH_DIR = ${DKBASH_DIR}"
+
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
+
 [ -e "${DKBASH_DIR}" ] || ${SUDO_EXE} mkdir "${DKBASH_DIR}"
+
 export DKUSERNAME="${USER-}"
 [ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
 [ -n "${DKUSERNAME-}" ] || echo "ERROR: unable to set DKUSERNAME"
 [ -n "${DKUSERNAME-}" ] && [ -e "${DKBASH_DIR}" ] && ${SUDO_EXE-} chown -R ${DKUSERNAME} ${DKBASH_DIR}
 #TAKEOWN /F ${DKBATCH_DIR} /R /D "Y"
+echo "DKUSERNAME = ${DKUSERNAME}"
 
 [ -e "${DKBASH_FUNCTIONS_DIR}" ] || mkdir ${DKBASH_FUNCTIONS_DIR}
 

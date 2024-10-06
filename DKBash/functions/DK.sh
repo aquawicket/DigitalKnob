@@ -125,9 +125,13 @@ dkinit(){
 #
 DKBASH_VARS(){
     export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE-}")"; pwd -P )
+	echo "BASH_SOURCE_DIR = ${BASH_SOURCE_DIR}"
     export DKBASH_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE_DIR}")" &>/dev/null; pwd -P )
+	echo "DKBASH_DIR = ${DKBASH_DIR}"
     export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
     export DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
+	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
     [ -e "${DKBASH_FUNCTIONS_DIR}/DK.sh" ] || echo "ERROR: ${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
     #export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
 }
@@ -137,9 +141,13 @@ DKBASH_VARS(){
 #
 DKHTTP_VARS(){
     export DKHTTP_DIGITALKNOB_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob"
+	echo "DKHTTP_DIGITALKNOB_DIR = ${DKHTTP_DIGITALKNOB_DIR}"
     export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/Development"
+	echo "DKHTTP_DKBRANCH_DIR = ${DKHTTP_DKBRANCH_DIR}"
     export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
+	echo "DKHTTP_DKBASH_DIR = ${DKHTTP_DKBASH_DIR}"
     export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
+	echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
 }
 
 ##################################################################################
@@ -191,57 +199,57 @@ DKSCRIPT_VARS(){
     #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
-    #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+    echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     
     ### DKSCRIPT_ARGS ###
     dk_call dk_defined         DKSCRIPT_ARGS                 || dk_call dk_export DKSCRIPT_ARGS $(${*})
-    #dk_call dk_defined         DKSCRIPT_ARGS                 && echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+    echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     
     ### DKSCRIPT_DIR ###
     dk_call dk_export DKSCRIPT_DIR $(dk_call dk_dirname "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
-    #dk_call dk_pathExists    "${DKSCRIPT_DIR}"           && echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+    echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     
     ### DKSCRIPT_NAME ###
     dk_call dk_export DKSCRIPT_NAME $(dk_call dk_basename "${DKSCRIPT_PATH}")
-    #dk_call dk_defined         DKSCRIPT_NAME                 && echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+    echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     
     ### DKSCRIPT_EXT ###
     dk_call dk_export DKSCRIPT_EXT ".${DKSCRIPT_NAME##*.}"
-    #dk_call dk_defined         DKSCRIPT_EXT                 && echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
     
     ### DKBRANCH_DIR ###
     dk_call dk_pathExists    "${DKBRANCH_DIR}"           || dk_call dk_export DKBRANCH_DIR $(dk_call dk_dirname "${DKBASH_DIR}")
-    #dk_call dk_pathExists    "${DKBRANCH_DIR}"           && echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
+    echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
     
     ### DKBRANCH ###
     dk_call dk_pathExists    "${DKBRANCH}"               || dk_call dk_export DKBRANCH $(dk_call dk_basename "${DKBRANCH_DIR}")
-    #dk_call dk_pathExists    "${DKBRANCH}"               && echo "DKBRANCH = ${DKBRANCH}"
+    echo "DKBRANCH = ${DKBRANCH}"
     
     ### DIGITALKNOB_DIR ###
     dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        || dk_call dk_export DIGITALKNOB_DIR $(dk_call dk_dirname "${DKBRANCH_DIR}")
-    #dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
+    echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
     
     ### DIGITALKNOB ###
     dk_call dk_defined         DIGITALKNOB                 || dk_call dk_export DIGITALKNOB $(dk_call dk_basename "${DIGITALKNOB_DIR}")
-    #dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        && echo "DIGITALKNOB = ${DIGITALKNOB}"
+    echo "DIGITALKNOB = ${DIGITALKNOB}"
     
     ### DKDOWNLOAD_DIR ###
     dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         || dk_call dk_export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"
-    #dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         && echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
+	echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
     
     ### DKHOME_DIR ###
     dk_call dk_pathExists    "${DKHOME_DIR}"                || dk_call dk_export DKHOME_DIR $(dk_call dk_dirname "${DIGITALKNOB_DIR}")
-    #dk_call dk_pathExists    "${DKHOME_DIR}"             && echo "DKHOME_DIR = ${DKHOME_DIR}"
+    echo "DKHOME_DIR = ${DKHOME_DIR}"
     
     ### HOME ###
     dk_call dk_pathExists    "${HOME}"                    || dk_call dk_export HOME "${DKHOME_DIR}"
-    #dk_call dk_pathExists    "${HOME}"                    && echo "HOME = ${HOME}"
+    echo "HOME = ${HOME}"
     
     ### DKCACHE_DIR ###
     dk_call dk_pathExists    "${DKCACHE_DIR}"            || DKCACHE_DIR="${DKHOME_DIR}/.dk"
     dk_call dk_pathExists    "${DKCACHE_DIR}"            || mkdir "${DKCACHE_DIR}"
-    #dk_call dk_pathExists    "${DKCACHE_DIR}"            && echo "DKCACHE_DIR = ${DKCACHE_DIR}"
+    echo "DKCACHE_DIR = ${DKCACHE_DIR}"
     
 #    ### DKTEMP_DIR ###
 #    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP}"
