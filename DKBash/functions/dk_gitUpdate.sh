@@ -20,21 +20,22 @@ dk_gitUpdate() {
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR
-		dk_call dk_call ${SUDO_EXE} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
+		${SUDO_EXE} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
 		
 		dk_call dk_validate DKUSERNAME "dk_call dk_DKUSERNAME"
-		${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
+		[ -n "${DKUSERNAME-}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
 	fi
-	dk_call dk_call cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
-	"${GIT_EXE}" pull --all
-	dk_call dk_call "${GIT_EXE}" checkout -- .
-	"${GIT_EXE}" checkout "${DKBRANCH}"
+	#dk_call dk_cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
+	
+	"${GIT_EXE}" -C "${DKBRANCH_DIR}" pull --all
+	"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -- .
+	"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout "${DKBRANCH}"
 	if [ "${?}" = "0" ]; then
 		dk_call dk_info "${DKBRANCH} branch selected"
 	else
-		dk_call dk_info "Remote has no ${DKBRANCH} branch. Creating..."
-		dk_call dk_call "${GIT_EXE}" checkout -b "${DKBRANCH}" main
-		dk_call dk_call "${GIT_EXE}" push --set-upstream origin "${DKBRANCH}"
+		dk_call dk_info "Remote has no branch named ${DKBRANCH}. Creating..."
+		"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -b "${DKBRANCH}" main
+		"${GIT_EXE}" -C "${DKBRANCH_DIR}" push --set-upstream origin "${DKBRANCH}"
 	fi
 	#dk_call dk_call chmod +x "${DKBRANCH_DIR}"/build
 }
