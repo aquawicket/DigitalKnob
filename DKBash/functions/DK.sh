@@ -286,10 +286,7 @@ dksetOptions(){
     # $(set -u) && set -u
     # $(set -v) && set -v
     # $(set -x) && set -x
-	 $(set -o posix)    && set -o posix
-	 
-	 
-if [ -n "${CATCH_ERRORS}" ]; then 
+	$(set -o posix)    && set -o posix
     $(set -o pipefail) && set -o pipefail      # trace ERR through pipes
     $(set -o errtrace) && set -o errtrace     # set -E : trace ERR through 'time command' and other functions
     $(set -o nounset)  && set -o nounset      # set -u : exit the script if you try to use an uninitialised variable
@@ -301,7 +298,7 @@ if [ -n "${CATCH_ERRORS}" ]; then
     
     # dk_call dk_echo "SHELLOPTS = ${SHELLOPTS}"
     # dk_call dk_echo "BASHOPTS = ${BASHOPTS-}"
-fi
+
 }
 
 ##################################################################################
