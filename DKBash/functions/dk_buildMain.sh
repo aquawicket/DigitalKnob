@@ -39,10 +39,15 @@ dk_buildMain() {
 	
 	while :
 	do
-		if [ -z "${UPDATE-}" ];     then dk_call dk_pickUpdate;  continue; fi
-		if [ -z "${APP-}" ];        then dk_call dk_pickApp;     continue; fi
-		if [ -z "${triple-}" ];  	then dk_call dk_pickOs;      continue; fi
-		if [ -z "${TYPE-}" ];       then dk_call dk_pickType;    continue; fi
+		[ -z "${UPDATE-}" ] && dk_call dk_pickUpdate
+		[ -z "${APP-}" ]    && dk_call dk_pickApp
+		[ -z "${triple-}" ] && dk_call dk_pickOs
+		[ -z "${TYPE-}" ]   && dk_call dk_pickType
+		
+		#if [ -z "${UPDATE-}" ];  then dk_call dk_pickUpdate;  continue; fi
+		#if [ -z "${APP-}" ];     then dk_call dk_pickApp;     continue; fi
+		#if [ -z "${triple-}" ];  then dk_call dk_pickOs;      continue; fi
+		#if [ -z "${TYPE-}" ];    then dk_call dk_pickType;    continue; fi
 		
 		dk_call dk_createCache
 		dk_call dk_generate	
