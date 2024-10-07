@@ -36,7 +36,6 @@ dk_DKHOME_DIR() {
 	dk_call dk_printVar DKHOME_DIR
 	
 	
-	
 	### DKCACHE_DIR ###
 	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
 	[ ! -e "${DKCACHE_DIR}" ]    && dk_call dk_makeDirectory "${DKCACHE_DIR}"
