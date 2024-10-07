@@ -21,6 +21,8 @@ dk_gitUpdate() {
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR
 		dk_call dk_call ${SUDO_EXE} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
+		
+		dk_call dk_validate DKUSERNAME "dk_call dk_DKUSERNAME"
 		${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
 	fi
 	dk_call dk_call cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
