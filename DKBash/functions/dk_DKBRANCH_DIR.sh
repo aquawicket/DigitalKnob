@@ -11,56 +11,56 @@ dk_DKBRANCH_DIR() {
 	#[ -n "${DKBRANCH_DIR}" ] && return 0
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
-	export FOLDER="$(dk_call dk_basename $(pwd))"
-	export DKBRANCH="Development"
+	FOLDER="$(dk_call dk_basename $(pwd))"
+	[ -z "${DKBRANCH-}" ] && export DKBRANCH="Development"
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	if dk_call dk_pathExists "${DIGITALKNOB_DIR}"/"${FOLDER}"/.git; then
 		dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-		export BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
-		if [ "${BRANCH}" = "${FOLDER}" ]; then
-			export DKBRANCH="${FOLDER}"
+		branch="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
+		if [ "${branch}" = "${FOLDER}" ]; then
+			[ -z "${DKBRANCH-}" ] && export DKBRANCH="${FOLDER}"
 		fi
 	fi
 	#dk_call dk_printVar DKBRANCH
 	
-	export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
+	[ -z "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="${DIGITALKNOB_DIR}/${DKBRANCH}"
 	#dk_call dk_printVar DKBRANCH_DIR
 	
-		export DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
+		[ -z "${DK3RDPARTY_DIR-}" ] && export DK3RDPARTY_DIR="${DKBRANCH_DIR}/3rdParty"
 		#dk_call dk_printVar DK3RDPARTY_DIR
-			export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
+			[ -z "${DKIMPORTS_DIR-}" ] && export DKIMPORTS_DIR="${DK3RDPARTY_DIR}/_DKIMPORTS"
 			#dk_call dk_printVar DKIMPORTS_DIR
 		
-		export DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
+		[ -z "${DKAPPS_DIR-}" ] && export DKAPPS_DIR="${DKBRANCH_DIR}/DKApps"
 		#dk_call dk_printVar DKAPPS_DIR
 		
-		export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
+		[ -z "${DKBASH_DIR-}" ] && export DKBASH_DIR="${DKBRANCH_DIR}/DKBash"
 		#dk_call dk_printVar DKBASH_DIR
-			export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
+			[ -z "${DKBASH_FUNCTIONS_DIR-}" ] && export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 			#dk_call dk_printVar DKBASH_FUNCTIONS_DIR
-			export DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
+			[ -z "${DKBASH_FUNCTIONS_DIR_-}" ] && export DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
 			#dk_call dk_printVar DKBASH_FUNCTIONS_DIR_
 			
-		export DKBATCH_DIR="${DKBRANCH_DIR}/DKBatch"
+		[ -z "${DKBATCH_DIR-}" ] && export DKBATCH_DIR="${DKBRANCH_DIR}/DKBatch"
 		#dk_call dk_printVar DKBATCH_DIR
-			export DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
+			[ -z "${DKBATCH_FUNCTIONS_DIR-}" ] && export DKBATCH_FUNCTIONS_DIR="${DKBATCH_DIR}/functions"
 			#dk_call dk_printVar DKBATCH_FUNCTIONS_DIR
-			export DKBATCH_FUNCTIONS_DIR_="${DKBATCH_DIR}/functions/"
+			[ -z "${DKBATCH_FUNCTIONS_DIR_-}" ] && export DKBATCH_FUNCTIONS_DIR_="${DKBATCH_DIR}/functions/"
 			#dk_call dk_printVar DKBATCH_FUNCTIONS_DIR_
 			
-		export DKC_DIR="${DKBRANCH_DIR}/DKC"
+		[ -z "${DKC_DIR-}" ] && export DKC_DIR="${DKBRANCH_DIR}/DKC"
 		#dk_call dk_printVar DKC_DIR
-			export DKC_FUNCTIONS_DIR="${DKC_DIR}/functions"
+			[ -z "${DKC_FUNCTIONS_DIR-}" ] && export DKC_FUNCTIONS_DIR="${DKC_DIR}/functions"
 			#dk_call dk_printVar DKC_FUNCTIONS_DIR
-			export DKC_FUNCTIONS_DIR_="${DKC_DIR}/functions/"
+			[ -z "${DKC_FUNCTIONS_DIR_-}" ] && export DKC_FUNCTIONS_DIR_="${DKC_DIR}/functions/"
 			#dk_call dk_printVar DKC_FUNCTIONS_DIR_
 		
-		export DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
+		[ -z "${DKCMAKE_DIR-}" ] && export DKCMAKE_DIR="${DKBRANCH_DIR}/DKCMake"
 		#dk_call dk_printVar DKCMAKE_DIR
-			export DKCMAKE_FUNCTIONS_DIR="${DKCMAKE_DIR}/functions"
+			[ -z "${DKCMAKE_FUNCTIONS_DIR-}" ] && export DKCMAKE_FUNCTIONS_DIR="${DKCMAKE_DIR}/functions"
 			#dk_call dk_printVar DKCMAKE_FUNCTIONS_DIR
-			export DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_DIR}/functions/"
+			[ -z "${DKCMAKE_FUNCTIONS_DIR_-}" ] && export DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_DIR}/functions/"
 			#dk_call dk_printVar DKCMAKE_FUNCTIONS_DIR_
 			
 		export DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
