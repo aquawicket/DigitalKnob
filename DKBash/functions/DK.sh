@@ -32,6 +32,11 @@ DK(){
     ############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
 
+	############ Get DK Environment variables ###########
+	#DK_VARS
+	#dk_call dk_DKHOME_DIR
+	#echo "DKHOME_DIR = ${HOME_DIR}"
+
     ############ Set Options ############
     dksetOptions
 
@@ -98,7 +103,7 @@ dkinit(){
     $(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
     dk_commandExists builtin             && export builtin="builtin"
     #dk_commandExists dk_defined          || dk_commandExists     eval   && dk_defined(){ ${builtin} eval value='$'{${1}+x}; [ -n "${value}" ]; }  # dk_defined variable
-    dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
+    #dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
     #dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
     #dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }     # dk_pause
     #dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                   # dk_warning "test dk_warning";
@@ -217,7 +222,15 @@ DKSCRIPT_VARS(){
     ### DKSCRIPT_EXT ###
     dk_call dk_export DKSCRIPT_EXT ".${DKSCRIPT_NAME##*.}"
     echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
-    
+} 
+
+
+	
+	
+##################################################################################
+# DK_VARS()
+#
+DK_VARS(){	
     ### DKBRANCH_DIR ###
     dk_call dk_pathExists    "${DKBRANCH_DIR}"           || dk_call dk_export DKBRANCH_DIR $(dk_call dk_dirname "${DKBASH_DIR}")
     echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
@@ -250,17 +263,6 @@ DKSCRIPT_VARS(){
     dk_call dk_pathExists    "${DKCACHE_DIR}"            || export DKCACHE_DIR="${DKHOME_DIR}/.dk"
     dk_call dk_pathExists    "${DKCACHE_DIR}"            || mkdir "${DKCACHE_DIR}"
     echo "DKCACHE_DIR = ${DKCACHE_DIR}"
-    
-#    ### DKTEMP_DIR ###
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP}"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMPDIR}"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${TMP_DIR}"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || DKTEMP_DIR="${DIGITALKNOB_DIR}/.dk"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              && DKTEMP_DIR="${DKTEMP_DIR}/.dk"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || mkdir "${DKTEMP_DIR}"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              || echo "ERROR: DKTEMP_DIR:${DKTEMP_DIR} does not exist"
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              && cp "${DKSCRIPT_PATH}" "${DKTEMP_DIR}" 1>nul 2>nul
-#    dk_call dk_pathExists   "${DKTEMP_DIR}"              && echo "DKTEMP_DIR = ${DKTEMP_DIR}"
     
     ### ASSETS ###
     #[ -e "${DKASSETS_DIR}" ] &&   DKASSETS_DIR="${DKSCRIPT_DIR}/assets"

@@ -8,7 +8,7 @@
 dk_DKHOME_DIR() {
     dk_debugFunc 0
 
-    [ -e "${DKHOME_DIR}" ] && return 0
+    [ -e "${DKHOME_DIR-}" ] && return 0
     	
 	###### CMD_EXE ######
 	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe)
@@ -31,7 +31,7 @@ dk_DKHOME_DIR() {
 	[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
 	
 	### HOME -> DKHOME_DIR ###
-	[ ! -e "${DKHOME_DIR}" ] 	&& export DKHOME_DIR="${HOME}"
+	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
 	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
 	dk_call dk_printVar DKHOME_DIR
 	
