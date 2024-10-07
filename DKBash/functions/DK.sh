@@ -96,9 +96,9 @@ dkreloadWithBash(){
 dkinit(){
     echo "Loading DKBash DigitalKnob . . ."
     $(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
-    dk_commandExists builtin             && builtin="builtin"
+    dk_commandExists builtin             && export builtin="builtin"
     #dk_commandExists dk_defined          || dk_commandExists     eval   && dk_defined(){ ${builtin} eval value='$'{${1}+x}; [ -n "${value}" ]; }  # dk_defined variable
-    #dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
+    dk_commandExists dk_export           || dk_commandExists     export && dk_export() { ${builtin} export ${1}="${2}"; }                         # dk_export variable value
     #dk_commandExists dk_echo             || dk_commandExists     echo   && dk_echo()   { ${builtin} echo "${*}"; }                                # dk_echo "test dk_echo"
     #dk_commandExists dk_pause            || dk_commandExists     read   && dk_pause()  { dk_echo "Press enter to continue..."; read -rp ''; }     # dk_pause
     #dk_commandExists dk_log              || dk_log()             { [ -n $2 ] && dk_echo "${2}${clr}" || dk_echo "${1}${clr}"; }                   # dk_warning "test dk_warning";
@@ -197,7 +197,7 @@ DKSCRIPT_VARS(){
     ### DKSCRIPT_PATH ###
     dk_call dk_defined           DKSCRIPT_PATH           || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
-    #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
+    #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
     dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
     echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     
@@ -247,7 +247,7 @@ DKSCRIPT_VARS(){
     echo "HOME = ${HOME}"
     
     ### DKCACHE_DIR ###
-    dk_call dk_pathExists    "${DKCACHE_DIR}"            || DKCACHE_DIR="${DKHOME_DIR}/.dk"
+    dk_call dk_pathExists    "${DKCACHE_DIR}"            || export DKCACHE_DIR="${DKHOME_DIR}/.dk"
     dk_call dk_pathExists    "${DKCACHE_DIR}"            || mkdir "${DKCACHE_DIR}"
     echo "DKCACHE_DIR = ${DKCACHE_DIR}"
     
