@@ -9,16 +9,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
- 
 	%dk_call% dk_gitDiffSummary
-	::%dk_call% dk_gitStatus
     
     %dk_call% dk_echo
     %dk_call% dk_echo "Please enter some details about this commit, then press enter."
-    %dk_call% dk_keyboardInput message
+    %dk_call% dk_keyboardInput commit_msg
         
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	
     %dk_call% dk_commandToVariable "%GIT_EXE%" "-C %DKBRANCH_DIR% config --global credential.helper" STORE
     if not "%STORE%"=="store" (
         "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper store
@@ -47,14 +46,14 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
         %dk_call% dk_echo
     )
         
-    if "%message%"=="" set "message=git commit %date%"
+    if "%commit_msg%"=="" set "commit_msg=git commit %date%"
         
     %dk_call% dk_echo
-    %dk_call% dk_echo "git commit '%message%'"
+    %dk_call% dk_echo "git commit '%commit_msg%'"
 
     %dk_call% dk_confirm || %return%
     
-    "%GIT_EXE%" commit -a -m "%message%"
+    "%GIT_EXE%" commit -a -m "%commit_msg%"
     "%GIT_EXE%" push
 %endfunction%
 
