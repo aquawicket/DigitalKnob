@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 
-[ -n "$(command -v "sudo")" ] && export SUDO_EXE="sudo" || export SUDO_EXE=" "
+(command -v sudo) && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 ##################################################################################
 # DKINIT()
 #
@@ -84,7 +84,7 @@ DK(){
 #
 dkinit(){
     echo "Loading DKBash DigitalKnob . . ."
-    $(command -v dk_commandExists)       || dk_commandExists(){ $(command -v ${1} 1>/dev/null); }
+    (command -v dk_commandExists)        || dk_commandExists(){ (command -v ${1} &>/dev/null); }
     dk_commandExists builtin             && export builtin="builtin"
     dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }                       # dk_basename path
     dk_commandExists dk_dirname          || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }                        # dk_dirname path
@@ -271,14 +271,14 @@ dksetOptions(){
     # $(set -u) && set -u
     # $(set -v) && set -v
     # $(set -x) && set -x
-	$(set -o posix)    && set -o posix
-    $(set -o pipefail) && set -o pipefail      # trace ERR through pipes
-    $(set -o errtrace) && set -o errtrace     # set -E : trace ERR through 'time command' and other functions
-    $(set -o nounset)  && set -o nounset      # set -u : exit the script if you try to use an uninitialised variable
-    $(set -o errexit)  && set -o errexit      # set -e : exit the script if any statement returns a non-true
+	(set -o posix)    	&& set -o posix			|| echo "(set -o posix) failed"
+    (set -o pipefail) 	&& set -o pipefail  	|| echo "(set -o pipefail) failed"  # trace ERR through pipes
+    (set -o errtrace) 	&& set -o errtrace  	|| echo "(set -o errtrace) failed" 	# set -E : trace ERR through 'time command' and other functions
+    (set -o nounset)  	&& set -o nounset   	|| echo "(set -o nounset) failed" 	# set -u : exit the script if you try to use an uninitialised variable
+    (set -o errexit)  	&& set -o errexit   	|| echo "(set -o errexit) failed" 	# set -e : exit the script if any statement returns a non-true
 
     ###### shopt ######
-    $(shopt -s extdebug) && shopt -s extdebug
+    (shopt -s extdebug) && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
     #shopt -s expand_aliases
     
     # dk_call dk_echo "SHELLOPTS = ${SHELLOPTS}"
