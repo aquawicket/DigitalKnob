@@ -63,70 +63,70 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKCMAKE_FUNCTIONS_DIR_-}" ] && export DKCMAKE_FUNCTIONS_DIR_="${DKCMAKE_DIR}/functions/"
 			#dk_call dk_printVar DKCMAKE_FUNCTIONS_DIR_
 			
-		export DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
+		[ -z "${DKCPP_DIR-}" ] && export DKCPP_DIR="${DKBRANCH_DIR}/DKCpp"
 		#dk_call dk_printVar DKCPP_DIR
-			export DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
+			[ -z "${DKCPP_FUNCTIONS_DIR-}" ] && export DKCPP_FUNCTIONS_DIR="${DKCPP_DIR}/functions"
 			#dk_call dk_printVar DKCPP_FUNCTIONS_DIR
-			export DKCPP_FUNCTIONS_DIR_="${DKCPP_DIR}/functions/"
+			[ -z "${DKCPP_FUNCTIONS_DIR_-}" ] && export DKCPP_FUNCTIONS_DIR_="${DKCPP_DIR}/functions/"
 			#dk_call dk_printVar DKCPP_FUNCTIONS_DIR_
 			
-		export DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
+		[ -z "${DKCSHARP_DIR-}" ] && export DKCSHARP_DIR="${DKBRANCH_DIR}/DKCSharp"
 		#dk_call dk_printVar DKCSHARP_DIR
-			export DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
+			[ -z "${DKCSHARP_FUNCTIONS_DIR-}" ] && export DKCSHARP_FUNCTIONS_DIR="${DKCSHARP_DIR}/functions"
 			#dk_call dk_printVar DKCSHARP_FUNCTIONS_DIR
-			export DKCSHARP_FUNCTIONS_DIR_="${DKCSHARP_DIR}/functions/"
+			[ -z "${DKCSHARP_FUNCTIONS_DIR_-}" ] && export DKCSHARP_FUNCTIONS_DIR_="${DKCSHARP_DIR}/functions/"
 			#dk_call dk_printVar DKCSHARP_FUNCTIONS_DIR_
 			
-		export DKHTA_DIR="${DKBRANCH_DIR}/DKHta"
+		[ -z "${DKHTA_DIR-}" ] && export DKHTA_DIR="${DKBRANCH_DIR}/DKHta"
 		#dk_call dk_printVar DKHTA_DIR
-			export DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
+			[ -z "${DKHTA_FUNCTIONS_DIR-}" ] && export DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
 			#dk_call dk_printVar DKHTA_FUNCTIONS_DIR
-			export DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
+			[ -z "${DKHTA_FUNCTIONS_DIR_-}" ] && export DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
 			#dk_call dk_printVar DKHTA_FUNCTIONS_DIR_
 		
-		export DKHTML_DIR="${DKBRANCH_DIR}/DKHta"
+		[ -z "${DKHTML_DIR-}" ] && export DKHTML_DIR="${DKBRANCH_DIR}/DKHta"
 		#dk_call dk_printVar DKHTML_DIR
-			export DKHTML_FUNCTIONS_DIR="${DKHTML_DIR}/functions"
+			[ -z "${DKHTML_FUNCTIONS_DIR-}" ] && export DKHTML_FUNCTIONS_DIR="${DKHTML_DIR}/functions"
 			#dk_call dk_printVar DKHTML_FUNCTIONS_DIR
-			export DKHTML_FUNCTIONS_DIR_="${DKHTML_DIR}/functions/"
+			[ -z "${DKHTML_FUNCTIONS_DIR_-}" ] && export DKHTML_FUNCTIONS_DIR_="${DKHTML_DIR}/functions/"
 			#dk_call dk_printVar DKHTML_FUNCTIONS_DIR_
 		
-		export DKJAVA_DIR="${DKBRANCH_DIR}/DKJava"
+		[ -z "${DKJAVA_DIR-}" ] && export DKJAVA_DIR="${DKBRANCH_DIR}/DKJava"
 		#dk_call dk_printVar DKJAVA_DIR
-			export DKJAVA_FUNCTIONS_DIR="${DKJAVA_DIR}/functions"
+			[ -z "${DKJAVA_FUNCTIONS_DIR-}" ] && export DKJAVA_FUNCTIONS_DIR="${DKJAVA_DIR}/functions"
 			#dk_call dk_printVar DKJAVA_FUNCTIONS_DIR
-			export DKJAVA_FUNCTIONS_DIR_="${DKJAVA_DIR}/functions/"
+			[ -z "${DKJAVA_FUNCTIONS_DIR_-}" ] && export DKJAVA_FUNCTIONS_DIR_="${DKJAVA_DIR}/functions/"
 			#dk_call dk_printVar DKJAVA_FUNCTIONS_DIR_
 		
-		export DKJAVASCRIPT_DIR="${DKBRANCH_DIR}/DKJavascript"
+		[ -z "${DKJAVASCRIPT_DIR-}" ] && export DKJAVASCRIPT_DIR="${DKBRANCH_DIR}/DKJavascript"
 		#dk_call dk_printVar DKJAVASCRIPT_DIR
-			export DKJAVASCRIPT_FUNCTIONS_DIR="${DKJAVASCRIPT_DIR}/functions"
+			[ -z "${DKJAVASCRIPT_FUNCTIONS_DIR-}" ] && export DKJAVASCRIPT_FUNCTIONS_DIR="${DKJAVASCRIPT_DIR}/functions"
 			#dk_call dk_printVar DKJAVASCRIPT_FUNCTIONS_DIR
-			export DKJAVASCRIPT_FUNCTIONS_DIR_="${DKJAVASCRIPT_DIR}/functions/"
+			[ -z "${DKJAVASCRIPT_FUNCTIONS_DIR_-}" ] && export DKJAVASCRIPT_FUNCTIONS_DIR_="${DKJAVASCRIPT_DIR}/functions/"
 			#dk_call dk_printVar DKJAVASCRIPT_FUNCTIONS_DIR_
 		
-		export DKPHP_DIR="${DKBRANCH_DIR}/DKPhp"
+		[ -z "${DKPHP_DIR-}" ] && export DKPHP_DIR="${DKBRANCH_DIR}/DKPhp"
 		#dk_call dk_printVar DKPHP_DIR
-			export DKPHP_FUNCTIONS_DIR="${DKPHP_DIR}/functions"
+			[ -z "${DKPHP_FUNCTIONS_DIR-}" ] && export DKPHP_FUNCTIONS_DIR="${DKPHP_DIR}/functions"
 			#dk_call dk_printVar DKPHP_FUNCTIONS_DIR
-			export DKPHP_FUNCTIONS_DIR_="${DKPHP_DIR}/functions/"
+			[ -z "${DKPHP_FUNCTIONS_DIR_-}" ] && export DKPHP_FUNCTIONS_DIR_="${DKPHP_DIR}/functions/"
 			#dk_call dk_printVar DKPHP_FUNCTIONS_DIR_
 		
-		export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
+		[ -z "${DKPLUGINS_DIR-}" ] && export DKPLUGINS_DIR="${DKBRANCH_DIR}/DKPlugins"
 		#dk_call dk_printVar DKPLUGINS_DIR
 		
-		export DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
+		[ -z "${DKPOWERSHELL_DIR-}" ] && export DKPOWERSHELL_DIR="${DKBRANCH_DIR}/DKPowershell"
 		#dk_call dk_printVar DKPOWERSHELL_DIR
-			export DKPOWERSHELL_FUNCTIONS_DIR="${DKPOWERSHELL_DIR}/functions"
+			[ -z "${DKPOWERSHELL_FUNCTIONS_DIR-}" ] && export DKPOWERSHELL_FUNCTIONS_DIR="${DKPOWERSHELL_DIR}/functions"
 			#dk_call dk_printVar DKPOWERSHELL_FUNCTIONS_DIR
-			export DKPOWERSHELL_FUNCTIONS_DIR_="${DKPOWERSHELL_DIR}/functions/"
+			[ -z "${DKPOWERSHELL_FUNCTIONS_DIR_-}" ] && export DKPOWERSHELL_FUNCTIONS_DIR_="${DKPOWERSHELL_DIR}/functions/"
 			#dk_call dk_printVar DKPOWERSHELL_FUNCTIONS_DIR_
 		
-		export DKPYTHON_DIR="${DKBRANCH_DIR}/DKPython"
+		[ -z "${DKPYTHON_DIR-}" ] && export DKPYTHON_DIR="${DKBRANCH_DIR}/DKPython"
 		#dk_call dk_printVar DKPYTHON_DIR
-			export DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
+			[ -z "${DKPYTHON_FUNCTIONS_DIR-}" ] && export DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
 			#dk_call dk_printVar DKPYTHON_FUNCTIONS_DIR
-			export DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_DIR}/functions/"
+			[ -z "${DKPYTHON_FUNCTIONS_DIR_-}" ] && export DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_DIR}/functions/"
 			#dk_call dk_printVar DKPYTHON_FUNCTIONS_DIR_	
 }
 
