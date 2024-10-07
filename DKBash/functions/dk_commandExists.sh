@@ -8,7 +8,7 @@
 dk_commandExists() {
 	dk_debugFunc 1
 	
-	[ -n "$(command -v "${1}")" ]
+	(command -v ${1} &>/dev/null)
 }
 
 
