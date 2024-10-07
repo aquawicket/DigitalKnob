@@ -10,7 +10,7 @@ dk_pickOs() {
 	dk_debugFunc 0
 
 	dk_echo
-	dk_echo "${APP} ${triple-} ${TYPE-}"
+	dk_echo "${APP-} ${triple-} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) ${host_triple-}"
 	dk_echo
