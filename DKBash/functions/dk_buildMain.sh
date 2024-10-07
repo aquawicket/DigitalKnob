@@ -31,17 +31,17 @@ dk_buildMain() {
 	dk_call dk_installGit
 	dk_call dk_DKBRANCH_DIR
 
-	if [ "${DKSCRIPT_DIR}" != "${DKBRANCH_DIR}" ]; then
-		dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		dk_call dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"
-		dk_call dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
-	fi
+	#if [ "${DKSCRIPT_DIR}" != "${DKBRANCH_DIR}" ]; then
+	#	dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+	#	dk_call dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"
+	#	dk_call dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
+	#fi
 	
 	while :
 	do
 		if [ -z "${UPDATE-}" ];     then dk_call dk_pickUpdate;  continue; fi
 		if [ -z "${APP-}" ];        then dk_call dk_pickApp;     continue; fi
-		if [ -z "${triple-}" ];  then dk_call dk_pickOs;      continue; fi
+		if [ -z "${triple-}" ];  	then dk_call dk_pickOs;      continue; fi
 		if [ -z "${TYPE-}" ];       then dk_call dk_pickType;    continue; fi
 		
 		dk_call dk_createCache
