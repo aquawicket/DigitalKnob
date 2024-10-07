@@ -22,7 +22,8 @@ if(MSYSTEM)
 	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 	
 	dk_depend(bash)
-	dk_command(${BASH_EXE} -c "command -v perl" OUTPUT_VARIABLE PERL_EXE NO_HALT) # BASH_ENV)
+	#dk_command(${BASH_EXE} -c "command -v perl" OUTPUT_VARIABLE PERL_EXE NO_HALT)
+	execute_process(COMMAND ${BASH_EXE} -c "command -v perl" OUTPUT_VARIABLE PERL_EXE COMMAND_ECHO STDOUT)
 	
 	if(PERL_EXE)
 		dk_depend(cygpath)

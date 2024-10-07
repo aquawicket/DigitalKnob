@@ -242,7 +242,7 @@ function(dk_importVariables url rtn_var)
 
 	# PLUGIN_INSTALL_PATH
 	if(NOT PLUGIN_INSTALL_PATH)
-		dk_assertPath(PLUGIN_INSTALL_ROOT)
+		dk_assertPath(${PLUGIN_INSTALL_ROOT})
 		dk_assertVar(PLUGIN_INSTALL_FOLDER)
 		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
 	endif()

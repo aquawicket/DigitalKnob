@@ -54,12 +54,12 @@ DK(){
 
 
     #dk_source dk_basename
-    dk_source "${DKSCRIPT_PATH}"
+    #dk_source "${DKSCRIPT_PATH}"
     #${DKSCRIPT_NAME} ${DKSCRIPT_ARGS}
 
     ###### DKTEST MODE ######
-    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return ${?}
-    [ "${DKSCRIPT_EXT}" = ".sh" ] || return ${?}
+    [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
+    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
         dk_source dk_call
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
@@ -72,7 +72,7 @@ DK(){
         dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
         dk_call dk_echo
         dk_call dk_pause
-        dk_call dk_exit ${?}
+        dk_call dk_exit 0
 }
 
 ##################################################################################
