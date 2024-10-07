@@ -12,6 +12,8 @@ dk_gitCheckRemote() {
 	behind=0
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		cd "${DKBRANCH_DIR}"
+		
+		dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 		${GIT_EXE} remote update
 		branch=$(${GIT_EXE} rev-parse --abbrev-ref HEAD)
 		ahead=$(${GIT_EXE} rev-list --count origin/${branch}..${branch})
