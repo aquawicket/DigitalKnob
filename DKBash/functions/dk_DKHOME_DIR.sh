@@ -21,7 +21,7 @@ dk_DKHOME_DIR() {
 	[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
 	[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
 	[   -e "${CYGPATH_EXE}" ]	&& dk_call dk_printVar CYGPATH_EXE
-	[   -e "${CYGPATH_EXE}" ]	&&	export DKHOME_DIR=$(cygpath -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	[   -e "${CYGPATH_EXE}" ]	&&export DKHOME_DIR=$(cygpath -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
 	
 	######  USERPROFILE -> WSLPATH_EXE -> DKHOME_DIR ######
 	[ ! -e "${WSLPATH_EXE-}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
