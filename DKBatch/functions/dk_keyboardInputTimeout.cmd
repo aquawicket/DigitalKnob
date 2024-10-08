@@ -68,7 +68,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
  setlocal
  
     echo Type some input and press enter, this will time out in 5 seconds
-    %dk_call% dk_keyboardInputTimeout 10 "default" rtn_var
+    %dk_call% dk_keyboardInputTimeout  rtn_var "default" 10
     echo result = %rtn_var%
 %endfunction%
 
