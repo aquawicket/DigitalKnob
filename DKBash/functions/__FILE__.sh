@@ -9,17 +9,20 @@ __FILE__() {
 	
 	[ -z ${1-} ] && _FRAME_=0 || _FRAME_=${1}
 	((_FRAME_=_FRAME_+1))
-	#echo "$(dk_basename ${BASH_SOURCE[${_FRAME_}]})"
+
 	FILE="${BASH_SOURCE[${_FRAME_-}]-}"
 	[ -z "${FILE}" ] && dk_return "nofile" && return
-	dk_return "$(dk_basename ${FILE})";
+	
+	dk_call dk_basename "${FILE}" FILE
+	
+	dk_return "${FILE}";
 }
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	#dk_debugFunc 0
+	dk_debugFunc 0
 	
 	echo "$(__FILE__)"
 }
