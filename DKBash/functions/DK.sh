@@ -9,12 +9,12 @@
 DK(){
     #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
     
+	###### Reload Main Script with bash ######
+    dkreloadWithBash ${*}
+	
     ###### Initialize Language specifics ######
     dkinit
     
-    ###### Reload Main Script with bash ######
-    dkreloadWithBash ${*}
-
 	############ Set Options ############
     dksetOptions
 	
@@ -74,6 +74,18 @@ DK(){
 }
 
 ##################################################################################
+# dkreloadWithBash()
+#
+dkreloadWithBash(){
+	if [ -z "${BASH}" ]; then
+		unset DKINIT
+		(command -v bash &>/dev/null) || dk_installPackage bash
+		(command -v bash &>/dev/null) && echo "Reloading ${0} with bash . . ."
+		(command -v bash &>/dev/null) && exec bash "${0}"
+	fi
+}
+
+##################################################################################
 # dkinit()
 #     default functions and variables
 #
@@ -87,22 +99,6 @@ dkinit(){
     dk_commandExists dk_debugFunc        || dk_debugFunc(){
         [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
     }
-}
-
-##################################################################################
-# dkreloadWithBash()
-#
-dkreloadWithBash(){
-    #if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
-	#	export RELOAD_WITH_BASH=0
-	
-	if [ -z "${BASH}" ]; then
-		unset DKINIT
-		(command -v bash &>/dev/null) || dk_installPackage bash
-		(command -v bash &>/dev/null) && echo "Reloading ${0} with bash . . ."
-		(command -v bash &>/dev/null) && exec bash "${0}"
-	fi
-    #fi
 }
 
 ##################################################################################
@@ -179,28 +175,26 @@ dksetupCallstack(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
+
     ### DKSCRIPT_PATH ###
-    dk_call dk_defined           DKSCRIPT_PATH           || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
-    #dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
-    #dk_call dk_commandExists "cygpath"                   && dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || export DKSCRIPT_PATH=$(cygpath -u "${DKSCRIPT_PATH}")
-    dk_call dk_pathExists    "${DKSCRIPT_PATH}"          || dk_call dk_fatal "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"
+    [ -n "${DKSCRIPT_PATH-}" ]	|| export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
+    [ -e "${DKSCRIPT_PATH}" ]	|| echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1
     echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     
     ### DKSCRIPT_ARGS ###
-    dk_call dk_defined         DKSCRIPT_ARGS                 || dk_call dk_export DKSCRIPT_ARGS $(${*})
+    export DKSCRIPT_ARGS=$(${*})
     echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     
     ### DKSCRIPT_DIR ###
-    dk_call dk_export DKSCRIPT_DIR $(dk_call dk_dirname "${DKSCRIPT_PATH}")
-    dk_call dk_pathExists    "${DKSCRIPT_DIR}"           || dk_call dk_fatal "DKSCRIPT_DIR:${DKSCRIPT_DIR} not found"
+    export DKSCRIPT_DIR=$(dk_call dk_dirname "${DKSCRIPT_PATH}")
     echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     
     ### DKSCRIPT_NAME ###
-    dk_call dk_export DKSCRIPT_NAME $(dk_call dk_basename "${DKSCRIPT_PATH}")
+    export DKSCRIPT_NAME=$(dk_call dk_basename "${DKSCRIPT_PATH}")
     echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     
     ### DKSCRIPT_EXT ###
-    dk_call dk_export DKSCRIPT_EXT ".${DKSCRIPT_NAME##*.}"
+    export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"
     echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 } 
 
