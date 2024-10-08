@@ -15,6 +15,9 @@ DK(){
     ###### Reload Main Script with bash ######
     dkreloadWithBash ${*}
 
+	############ Set Options ############
+    dksetOptions
+	
     ############ Get DKBASH variables ############
     DKBASH_VARS
     
@@ -32,15 +35,8 @@ DK(){
     ############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
 
-	############ Get DK Environment variables ###########
-	#DK_VARS
-	#dk_call dk_DKHOME_DIR
-	#echo "DKHOME_DIR = ${HOME_DIR}"
-
-    ############ Set Options ############
-    dksetOptions
-
     ############ LOAD FUNCTION FILES ############
+	dk_source dk_call
     dk_source dk_return
     dk_source __TIME__
     dk_source __FILE__
@@ -63,7 +59,6 @@ DK(){
     ###### DKTEST MODE ######
     [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-        dk_source dk_call
         dk_call dk_echo
         dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
         #dk_call dk_echo "${bg_RGB}20;20;20m"
@@ -86,8 +81,8 @@ dkinit(){
     echo "Loading DKBash DigitalKnob . . ."
     (command -v dk_commandExists)        || dk_commandExists(){ (command -v ${1} &>/dev/null); }
     dk_commandExists builtin             && export builtin="builtin"
-    dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }                       # dk_basename path
-    dk_commandExists dk_dirname          || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }                        # dk_dirname path
+    dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }
+    dk_commandExists dk_dirname          || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
     dk_commandExists dk_realpath         || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
     dk_commandExists dk_debugFunc        || dk_debugFunc(){
         [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
@@ -98,14 +93,16 @@ dkinit(){
 # dkreloadWithBash()
 #
 dkreloadWithBash(){
-    if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
-        export RELOAD_WITH_BASH=0
-        echo "reloading with bash . . . ${0}"
-        unset DKINIT
-        export DKINIT=""
-        dk_commandExists bash || dk_installPackage bash
-        exec bash "${0}"
-    fi
+    #if [ ${RELOAD_WITH_BASH-1} -eq 1 ]; then
+	#	export RELOAD_WITH_BASH=0
+	
+	if [ -z "${BASH}" ]; then
+		unset DKINIT
+		(command -v bash &>/dev/null) || dk_installPackage bash
+		(command -v bash &>/dev/null) && echo "Reloading ${0} with bash . . ."
+		(command -v bash &>/dev/null) && exec bash "${0}"
+	fi
+    #fi
 }
 
 ##################################################################################
