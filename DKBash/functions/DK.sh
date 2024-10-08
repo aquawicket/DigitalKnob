@@ -13,15 +13,15 @@ DK(){
     dkreloadWithBash ${*}
 	
     ###### Initialize Language specifics ######
-    dkinit
+    #dkinit
     
 	############ Set Options ############
     dksetOptions
 	
-    ############ Get DKBASH variables ############
+    ############ Get DKBASH_FUNCTIONS_DIR ############
     export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
     
-    ############ Get DKHTTP variables ############
+    ############ Get DKHTTP_DKBASH_FUNCTIONS_DIR ############
     export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
 
     ############ get dk_source and dk_call ######
@@ -84,7 +84,6 @@ dkreloadWithBash(){
 
 ##################################################################################
 # dkinit()
-#     default functions and variables
 #
 dkinit(){
     echo "Loading DKBash DigitalKnob . . ."
@@ -146,68 +145,66 @@ DKSCRIPT_VARS(){
     ### DKSCRIPT_PATH ###
     [ -n "${DKSCRIPT_PATH-}" ]	|| export DKSCRIPT_PATH="$(dk_call dk_realpath ${0})"
     [ -e "${DKSCRIPT_PATH}" ]	|| echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1
-    echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     
     ### DKSCRIPT_ARGS ###
     export DKSCRIPT_ARGS=$(${*})
-    echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     
     ### DKSCRIPT_DIR ###
     export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")
-    echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     
     ### DKSCRIPT_NAME ###
     export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")
-    echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     
     ### DKSCRIPT_EXT ###
     export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"
-    echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    
+return	
+	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+	echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
+	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+	echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 } 
 
 
-	
-	
+
+
 ##################################################################################
 # DK_VARS()
 #
 DK_VARS(){	
     ### DKBRANCH_DIR ###
-    dk_call dk_pathExists    "${DKBRANCH_DIR}"           || dk_call dk_export DKBRANCH_DIR $(dk_call dk_dirname "${DKBASH_DIR}")
+    [ -e "${DKBRANCH_DIR-}" ]       || dk_call dk_export DKBRANCH_DIR $(dk_call dk_dirname "${DKBASH_DIR}")
     echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
     
     ### DKBRANCH ###
-    dk_call dk_pathExists    "${DKBRANCH}"               || dk_call dk_export DKBRANCH $(dk_call dk_basename "${DKBRANCH_DIR}")
+    [ -e "${DKBRANCH-}" ]           || dk_call dk_export DKBRANCH $(dk_call dk_basename "${DKBRANCH_DIR}")
     echo "DKBRANCH = ${DKBRANCH}"
     
     ### DIGITALKNOB_DIR ###
-    dk_call dk_pathExists    "${DIGITALKNOB_DIR}"        || dk_call dk_export DIGITALKNOB_DIR $(dk_call dk_dirname "${DKBRANCH_DIR}")
+    [ -e "${DIGITALKNOB_DIR-}" ]    || dk_call dk_export DIGITALKNOB_DIR $(dk_call dk_dirname "${DKBRANCH_DIR}")
     echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
     
     ### DIGITALKNOB ###
-    dk_call dk_defined         DIGITALKNOB                 || dk_call dk_export DIGITALKNOB $(dk_call dk_basename "${DIGITALKNOB_DIR}")
+    [ -n "${DIGITALKNOB-}" ]        || dk_call dk_export DIGITALKNOB $(dk_call dk_basename "${DIGITALKNOB_DIR}")
     echo "DIGITALKNOB = ${DIGITALKNOB}"
     
     ### DKDOWNLOAD_DIR ###
-    dk_call dk_pathExists    "${DKDOWNLOAD_DIR}"         || dk_call dk_export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"
+    [ -e "${DKDOWNLOAD_DIR}" ]      || dk_call dk_export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"
 	echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
     
     ### DKHOME_DIR ###
-    dk_call dk_pathExists    "${DKHOME_DIR}"                || dk_call dk_export DKHOME_DIR $(dk_call dk_dirname "${DIGITALKNOB_DIR}")
+    [ -e "${DKHOME_DIR}" ]          || dk_call dk_export DKHOME_DIR $(dk_call dk_dirname "${DIGITALKNOB_DIR}")
     echo "DKHOME_DIR = ${DKHOME_DIR}"
     
-    ### HOME ###
-    dk_call dk_pathExists    "${HOME}"                    || dk_call dk_export HOME "${DKHOME_DIR}"
-    echo "HOME = ${HOME}"
-    
     ### DKCACHE_DIR ###
-    dk_call dk_pathExists    "${DKCACHE_DIR}"            || export DKCACHE_DIR="${DKHOME_DIR}/.dk"
-    dk_call dk_pathExists    "${DKCACHE_DIR}"            || mkdir "${DKCACHE_DIR}"
+    [ -e "${DKCACHE_DIR}" ]		    || export DKCACHE_DIR="${DKHOME_DIR}/.dk"
+    [ -e "${DKCACHE_DIR}" ] 		|| mkdir "${DKCACHE_DIR}"
     echo "DKCACHE_DIR = ${DKCACHE_DIR}"
     
     ### ASSETS ###
-    #[ -e "${DKASSETS_DIR}" ] &&   DKASSETS_DIR="${DKSCRIPT_DIR}/assets"
-    #[ -e "${DKASSETS_DIR}" ] &&   PATH="${DKASSETS_DIR}:${PATH}"
+    #[ -e "${DKASSETS_DIR}" ] 		&& DKASSETS_DIR="${DKSCRIPT_DIR}/assets"
+    #[ -e "${DKASSETS_DIR}" ] 		&& PATH="${DKASSETS_DIR}:${PATH}"
 }
 
 ##################################################################################
@@ -252,51 +249,29 @@ dksetOptions(){
 #   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
-    # dk_debugFunc 1
-    
-    #if dk_call dk_packageInstalled ${1}; then
-    #    dk_call dk_warning "${1} already installed"
-    #    return $(true);
-    #fi
-    
-    dk_commandExists ${1} && return $(true)
-    
+ 
+    (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    if dk_call dk_commandExists apk; then
-        dk_call apk add "${1}"                    # Alpine Package Keeper (alpine linux)
-    elif dk_call dk_commandExists apt-get; then
-        dk_call apt-get -y install "${1}"        # Apt-get (debian)
-    elif dk_call dk_commandExists apt; then    
-        dk_call apt -y install "${1}"            # Apt (debian)
-    elif dk_call dk_commandExists brew; then    
-        dk_call brew install "${1}"                # Homebrew (MacOS)
-    elif dk_call dk_commandExists dnf; then
-        dk_call dnf install "${1}"                # Dnf (yum)
-    elif dk_call dk_commandExists emerge; then    
-        dk_call emerge "${1}"                    # Portage
-    elif dk_call dk_commandExists nix-env; then    
-        dk_call nix-env -i "${1}"                # Nix
-    elif dk_call dk_commandExists ohpm; then    
-        dk_call ohpm install "${1}"                # Ohpm
-    elif dk_call dk_commandExists pkg; then
-        dk_call pkg install "${1}"                # Termux
-    elif dk_call dk_commandExists pacman; then
-        dk_call pacman -S "${1}" --noconfirm    # Pacman
-    elif dk_call dk_commandExists swupd; then
-        dk_call swupd bundle-add "${1}"            # Swupd
-    elif dk_call dk_commandExists tce-load; then
-        dk_call tce-load -wil "${1}"             # Tiny core linux
-    elif dk_call dk_commandExists winget; then
-        dk_call dk_call winget install "${1}"    # WinGet
-    elif dk_call dk_commandExists xbps-install; then
-        dk_call xbps-install "${1}"                # Xbps
-    elif dk_call dk_commandExists zypper; then
-        dk_call zypper in "${1}"                # Zypper
-    else
-        dk_call dk_error "ERROR: no package managers found"
-    fi
+    (command -v apk &>/dev/null)           		&& alias dk_installPackage='apk add'  	 		# Alpine Package Keeper (alpine linux)
+	(command -v apt-get &>/dev/null)       		&& alias dk_installPackage='apt-get -y install'	# Apt-get (debian)
+	(command -v apt &>/dev/null)           		&& alias dk_installPackage='apt -y install'		# Apt (debian)
+	(command -v brew &>/dev/null)          		&& alias dk_installPackage='brew install'		# Homebrew (MacOS)
+	(command -v dnf &>/dev/null)           		&& alias dk_installPackage='dnf install'		# Dnf (yum)
+	(command -v emerge &>/dev/null)        		&& alias dk_installPackage='emerge'				# Portage
+	(command -v nix-env &>/dev/null)       		&& alias dk_installPackage='nix-env -i'			# Nix
+	(command -v ohpm &>/dev/null)          		&& alias dk_installPackage='ohpm install'		# Ohpm
+	(command -v pkg &>/dev/null)           		&& alias dk_installPackage='pkg install'		# Termux
+	(command -v pacman &>/dev/null)        		&& alias dk_installPackage='pacman -S'			# Pacman
+	(command -v swupd &>/dev/null)         		&& alias dk_installPackage='swupd bundle-add'	# Swupd
+	(command -v tce-load &>/dev/null)      		&& alias dk_installPackage='tce-load -wil'     	# Tiny core linux
+	(command -v winget &>/dev/null)        		&& alias dk_installPackage='winget install'		# WinGet
+	(command -v xbps-install &>/dev/null)		&& alias dk_installPackage='xbps-install'		# Xbps
+	(command -v zypper &>/dev/null)				&& alias dk_installPackage='zypper in'			# Zypper
+	(command -v dk_installPackage &>/dev/null)  && echo "No package managers found." && exit 1
+	
+	${dk_installPackage} ${1}
     
-    dk_commandExists ${1} || dk_fatal "${1}: command not found"
+	(command -v ${1} &>/dev/null) || echo "ERROR: ${1}: command not found" 
 }
 
 ##################################################################################
