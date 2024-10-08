@@ -118,7 +118,7 @@ dk_download() {
         return 0
     fi
     echo "Downloading $(dk_basename ${1}) . . ."
-    parentdir="$(dk_dirname "${2-}")"
+    parentdir="$(dirname "${2}")"
     OLDPWD=${PWD}
     cd "${parentdir}"
     
