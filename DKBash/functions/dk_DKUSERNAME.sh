@@ -8,9 +8,9 @@
 dk_DKUSERNAME() {
     dk_debugFunc 0
 
-	[ -n "${DKUSERNAME-}" ] || [ -n "${USER-}" ] 		&& export DKUSERNAME="${USER}"
-	[ -n "${DKUSERNAME-}" ] || [ -n "${USERNAME-}" ] 	&& export DKUSERNAME="${USERNAME}"
-	[ -n "${DKUSERNAME-}" ] || echo "DKUSERNAME is invalid"
+	[ ! -n "${DKUSERNAME-}" ] && [ -n "${USER-}" ] 		&& export DKUSERNAME="${USER-}"
+	[ ! -n "${DKUSERNAME-}" ] && [ -n "${USERNAME-}" ] 	&& export DKUSERNAME="${USERNAME-}"
+	[ ! -n "${DKUSERNAME-}" ] && echo "DKUSERNAME is invalid"
 }
 
 
