@@ -8,9 +8,10 @@
 dk_DKUSERNAME() {
     dk_debugFunc 0
 
-	[ ! -n "${DKUSERNAME-}" ] && [ -n "${USER-}" ] 		&& export DKUSERNAME="${USER-}"
-	[ ! -n "${DKUSERNAME-}" ] && [ -n "${USERNAME-}" ] 	&& export DKUSERNAME="${USERNAME-}"
-	[ ! -n "${DKUSERNAME-}" ] && echo "DKUSERNAME is invalid"
+	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USER-}"
+	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${USERNAME-}"
+	[ -n "${DKUSERNAME-}" ] || export DKUSERNAME="${LOGNAME-}"
+	[ -n "${DKUSERNAME-}" ] || echo "DKUSERNAME is invalid"
 }
 
 
@@ -22,6 +23,6 @@ dk_DKUSERNAME() {
 DKTEST() {
     dk_debugFunc 0
  
-    dk_call dk_DKUSERNAME
+    dk_DKUSERNAME
     dk_call dk_printVar DKUSERNAME
 }

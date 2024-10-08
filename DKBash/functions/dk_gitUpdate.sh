@@ -23,7 +23,7 @@ dk_gitUpdate() {
 		${SUDO_EXE} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
 		
 		dk_call dk_validate DKUSERNAME "dk_call dk_DKUSERNAME"
-		[ -n "${DKUSERNAME-}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
+		#[ -n "${DKUSERNAME-}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
 	fi
 	#dk_call dk_cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
 	
