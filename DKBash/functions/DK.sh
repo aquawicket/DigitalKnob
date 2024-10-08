@@ -170,41 +170,47 @@ return
 
 
 ##################################################################################
-# DK_VARS()
+# dkDKHOME_DIR()
 #
-DK_VARS(){	
-    ### DKBRANCH_DIR ###
-    [ -e "${DKBRANCH_DIR-}" ]       || dk_call dk_export DKBRANCH_DIR $(dk_call dk_dirname "${DKBASH_DIR}")
-    echo "DKBRANCH_DIR = ${DKBRANCH_DIR}"
-    
-    ### DKBRANCH ###
-    [ -e "${DKBRANCH-}" ]           || dk_call dk_export DKBRANCH $(dk_call dk_basename "${DKBRANCH_DIR}")
-    echo "DKBRANCH = ${DKBRANCH}"
-    
-    ### DIGITALKNOB_DIR ###
-    [ -e "${DIGITALKNOB_DIR-}" ]    || dk_call dk_export DIGITALKNOB_DIR $(dk_call dk_dirname "${DKBRANCH_DIR}")
-    echo "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
-    
-    ### DIGITALKNOB ###
-    [ -n "${DIGITALKNOB-}" ]        || dk_call dk_export DIGITALKNOB $(dk_call dk_basename "${DIGITALKNOB_DIR}")
-    echo "DIGITALKNOB = ${DIGITALKNOB}"
-    
-    ### DKDOWNLOAD_DIR ###
-    [ -e "${DKDOWNLOAD_DIR}" ]      || dk_call dk_export DKDOWNLOAD_DIR "${DIGITALKNOB_DIR}/download"
-	echo "DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR}"
-    
-    ### DKHOME_DIR ###
-    [ -e "${DKHOME_DIR}" ]          || dk_call dk_export DKHOME_DIR $(dk_call dk_dirname "${DIGITALKNOB_DIR}")
-    echo "DKHOME_DIR = ${DKHOME_DIR}"
-    
-    ### DKCACHE_DIR ###
-    [ -e "${DKCACHE_DIR}" ]		    || export DKCACHE_DIR="${DKHOME_DIR}/.dk"
-    [ -e "${DKCACHE_DIR}" ] 		|| mkdir "${DKCACHE_DIR}"
-    echo "DKCACHE_DIR = ${DKCACHE_DIR}"
-    
-    ### ASSETS ###
-    #[ -e "${DKASSETS_DIR}" ] 		&& DKASSETS_DIR="${DKSCRIPT_DIR}/assets"
-    #[ -e "${DKASSETS_DIR}" ] 		&& PATH="${DKASSETS_DIR}:${PATH}"
+dkDKHOME_DIR() {
+    [ -e "${DKHOME_DIR-}" ] && return 0
+    	
+	###### CMD_EXE ######
+	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe)
+	[ ! -e "${CMD_EXE}" ]	&& export CMD_EXE="C:/Windows/System32/cmd.exe"
+	[ ! -e "${CMD_EXE}" ]	&& unset CMD_EXE
+	[   -e "${CMD_EXE-}" ]	&& echo "CMD_EXE = ${CMD_EXE}"
+	
+	######  USERPROFILE -> CYGPATH_EXE -> DKHOME_DIR ######
+	[ ! -e "${CYGPATH_EXE-}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
+	[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
+	[   -e "${CYGPATH_EXE-}" ]	&& echo "CYGPATH_EXE = ${CYGPATH_EXE}"
+	[   -e "${CYGPATH_EXE-}" ]	&& export DKHOME_DIR=$(cygpath -u $(${CMD_EXE} "/c echo %USERPROFILE% | tr -d '\r'"))
+	
+	######  USERPROFILE -> WSLPATH_EXE -> DKHOME_DIR ######
+	[ ! -e "${WSLPATH_EXE-}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true)
+	[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+	[ ! -e "${WSLPATH_EXE}" ]	&& unset WSLPATH_EXE
+	[   -e "${WSLPATH_EXE-}" ]	&& echo "WSLPATH_EXE = ${WSLPATH_EXE}"
+	[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
+	
+	### HOME -> DKHOME_DIR ###
+	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
+	[ ! -e "${DKHOME_DIR}" ] 	&& echo "ERROR: DKHOME_DIR not found"
+	echo "DKHOME_DIR = ${DKHOME_DIR}"
+	
+	
+	### DKCACHE_DIR ###
+	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
+	[ ! -e "${DKCACHE_DIR}" ]    && mkdir "${DKCACHE_DIR}"
+	echo "DKCACHE_DIR = ${DKCACHE_DIR}"
+	
+
+	### DKDESKTOP_DIR ###
+	export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
+    [ ! -e "${DKDESKTOP_DIR}" ]  && echo "WARNING: DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
+	echo "DKDESKTOP_DIR = ${DKDESKTOP_DIR}"
 }
 
 ##################################################################################
