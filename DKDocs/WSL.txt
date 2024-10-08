@@ -31,3 +31,28 @@ https://stackoverflow.com/a/65293474/688352
 	sudo chattr +i /etc/resolv.conf
 	
 	
+### Distro Links ###
+Ubuntu									https://aka.ms/wslubuntu	
+Ubuntu 24.04							https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2404-240425.AppxBundle
+Ubuntu 22.04 LTS						https://aka.ms/wslubuntu2204
+Ubuntu 20.04							https://aka.ms/wslubuntu2004
+Ubuntu 20.04 ARM						https://aka.ms/wslubuntu2004arm
+Ubuntu 18.04							https://aka.ms/wsl-ubuntu-1804
+Ubuntu 18.04 ARM						https://aka.ms/wsl-ubuntu-1804-arm
+Ubuntu 16.04							https://aka.ms/wsl-ubuntu-1604
+Debian GNU/Linux						https://aka.ms/wsl-debian-gnulinux
+Kali Linux								https://aka.ms/wsl-kali-linux-new
+SUSE Linux Enterprise Server 12			https://aka.ms/wsl-sles-12
+SUSE Linux Enterprise Server 15 SP2		https://aka.ms/wsl-SUSELinuxEnterpriseServer15SP2
+SUSE Linux Enterprise Server 15 SP3		https://aka.ms/wsl-SUSELinuxEnterpriseServer15SP3
+openSUSE Tumbleweed						https://aka.ms/wsl-opensuse-tumbleweed
+openSUSE Leap 15.3						https://aka.ms/wsl-opensuseleap15-3
+openSUSE Leap 15.2						https://aka.ms/wsl-opensuseleap15-2
+Oracle Linux 8.5						https://aka.ms/wsl-oraclelinux-8-5
+Oracle Linux 7.9						https://aka.ms/wsl-oraclelinux-7-9
+Fedora Remix for WSL					https://github.com/WhitewaterFoundry/Fedora-Remix-for-WSL/releases/download/40.1.0/Fedora-Remix-for-WSL-SL_40.1.0.0_x64_arm64.msixbundle
+	
+### Manually install distro ###
+https://gist.github.com/asalhani/4a8d3202d699012cad5d98bda40c763f
+https://gist.github.com/vheidari/04ea783384010aa1d66c23b0099dc949
+
