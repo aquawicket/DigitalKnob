@@ -36,9 +36,9 @@ dk_realpath(){
 DKTEST(){
 	#dk_debugFunc 0
 	
-	realpathA=$(dk_realpath "dk_load.sh")
+	realpathA=$(dk_realpath "DK.sh")
 	dk_echo "realpathA = ${realpathA}"
 	
-	dk_realpath "dk_load.sh" realpathB
+	dk_realpath "DK.sh" realpathB
 	dk_echo "realpathB = ${realpathB}"
 }

@@ -48,15 +48,15 @@ dk_readlink() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	readlinkA=$(dk_readlink -f "dk_load.sh")
+	readlinkA=$(dk_readlink -f "DK.sh")
 	dk_echo "readlinkA = ${readlinkA}"
 	
-	dk_readlink -f "dk_load.sh" readlinkB
+	dk_readlink -f "DK.sh" readlinkB
 	dk_echo "readlinkB = ${readlinkB}"
 	
-	readlinkC=$(dk_readlink "dk_load.sh")
+	readlinkC=$(dk_readlink "DK.sh")
 	dk_echo "readlinkC = ${readlinkC}"
 	
-	dk_readlink "dk_load.sh" readlinkD
+	dk_readlink "DK.sh" readlinkD
 	dk_echo "readlinkD = ${readlinkD}"
 }
