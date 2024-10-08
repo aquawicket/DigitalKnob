@@ -16,7 +16,6 @@ dk_validate() {
 	
 	#echo "2 = ${2}"
 	
-	#[ -e "${DKBASH_FUNCTIONS_DIR}/${2-}.sh" ] && dk_call dk_load ${2}
 	[ -e "${DKBASH_FUNCTIONS_DIR}/${2-}.sh" ] && dk_call dk_source ${2}
 	eval "${2}"
 	

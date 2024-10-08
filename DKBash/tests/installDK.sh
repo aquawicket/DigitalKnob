@@ -20,20 +20,20 @@ fi
 . ${DKBASH_FUNCTIONS_DIR}/DK.sh
 
 ###### Load Main Program ######
-dk_load dk_validate
-dk_load dk_installGit
-dk_load dk_DKBRANCH_DIR
-dk_load dk_stringContains
-dk_load dk_DIGITALKNOB_DIR
-dk_load dk_host_triple
-dk_load dk_getExtension
-dk_load dk_removeExtension
-dk_load dk_makeDirectory
-dk_load dk_replaceAll
-#dk_load dk_convertToCIdentifier
-dk_load dk_toLower
-dk_load dk_pause
-dk_load dk_exit
+dk_source dk_validate
+dk_source dk_installGit
+dk_source dk_DKBRANCH_DIR
+dk_source dk_stringContains
+dk_source dk_DIGITALKNOB_DIR
+dk_source dk_host_triple
+dk_source dk_getExtension
+dk_source dk_removeExtension
+dk_source dk_makeDirectory
+dk_source dk_replaceAll
+#dk_source dk_convertToCIdentifier
+dk_source dk_toLower
+dk_source dk_pause
+dk_source dk_exit
 
 ###### Run Program ######
 dk_validate GIT_EXE "dk_installGit"
