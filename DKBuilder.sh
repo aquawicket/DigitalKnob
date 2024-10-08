@@ -13,7 +13,8 @@ export DK="${DKF}/DK.sh"
 [ ! -e "${DK}" ] && (command -v curl &>/dev/null) && curl -Lo "${DK}" "${HDK}"
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
-chmod 777 "${DK}"
+(command -v sudo) && export SUDO_EXE="sudo" || export SUDO_EXE=" "
+${SUDO_EXE} chmod 777 "${DK}"
 . "${DK}"
 #"${DK}" $0 $*
 

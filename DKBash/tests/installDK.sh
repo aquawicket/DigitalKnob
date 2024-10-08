@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
-# chmod 777 installDK.sh
+# chmod sudo 777 installDK.sh
 # ./installDK.sh
 
 ###### install DK.sh ######

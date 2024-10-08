@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # to run this script requires privledges 
-# > chmod 777 build
+# > sudo chmod 777 build
 
 ### set DIGITALKNOB_DIR
 if [[ -n "$USERPROFILE" ]]; then

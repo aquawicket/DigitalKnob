@@ -1919,7 +1919,7 @@ dk_gitUpdate() {
 		dk_call "$GIT_EXE" checkout -b "$DKBRANCH" main
 		dk_call "$GIT_EXE" push --set-upstream origin "$DKBRANCH"
 	fi
-	#dk_call chmod +x "${DKBRANCH_DIR}"/build.sh
+	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build.sh
 }
 
 
