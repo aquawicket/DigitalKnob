@@ -22,12 +22,12 @@ dk_load() {
 	local funcName=
 	local funcPath=
 	if [ -e "${1}" ]; then
-		funcPath=$(dk_realpath "${1}")
-		funcName=$(dk_basename "${funcPath}")
+		funcPath=$(realpath "${1}")
+		funcName=$(basename "${funcPath}")
 	    funcName="${funcName%.*}"
 	else
 		funcName="${1}"
-		funcName=$(dk_basename ${funcName})
+		funcName=$(basename ${funcName})
 		funcName="${funcName%.*}"
 		funcPath=${DKBASH_FUNCTIONS_DIR}/${funcName}.sh
 	fi
@@ -48,7 +48,7 @@ dk_load() {
 	# Convert to unix line endings if CRLF found
 	#if builtin echo $(file -b - < ${funcPath}) | grep -q CRLF; then	# POSIX REGEX MATCH
 	#if [[ $(dk_call file -b - < ${funcPath}) =~ CRLF ]]; then		# BASH REGEX MATCH
-	if $(dk_commandExists file); then
+	if (command -v file); then
 		if [[ $(file -b - < ${funcPath}) =~ CRLF ]]; then		        # BASH REGEX MATCH
 			dk_echo "Converting file to Unix line endings"
 			sed -i -e 's/\r$//' ${funcPath}
