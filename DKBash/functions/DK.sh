@@ -249,24 +249,24 @@ dksetOptions(){
 #   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
- 
+	echo "instalPackage($*)"
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk &>/dev/null)           		&& alias dk_installPackage='apk add'  	 		# Alpine Package Keeper (alpine linux)
-	(command -v apt-get &>/dev/null)       		&& alias dk_installPackage='apt-get -y install'	# Apt-get (debian)
-	(command -v apt &>/dev/null)           		&& alias dk_installPackage='apt -y install'		# Apt (debian)
-	(command -v brew &>/dev/null)          		&& alias dk_installPackage='brew install'		# Homebrew (MacOS)
-	(command -v dnf &>/dev/null)           		&& alias dk_installPackage='dnf install'		# Dnf (yum)
-	(command -v emerge &>/dev/null)        		&& alias dk_installPackage='emerge'				# Portage
-	(command -v nix-env &>/dev/null)       		&& alias dk_installPackage='nix-env -i'			# Nix
-	(command -v ohpm &>/dev/null)          		&& alias dk_installPackage='ohpm install'		# Ohpm
-	(command -v pkg &>/dev/null)           		&& alias dk_installPackage='pkg install'		# Termux
-	(command -v pacman &>/dev/null)        		&& alias dk_installPackage='pacman -S'			# Pacman
-	(command -v swupd &>/dev/null)         		&& alias dk_installPackage='swupd bundle-add'	# Swupd
-	(command -v tce-load &>/dev/null)      		&& alias dk_installPackage='tce-load -wil'     	# Tiny core linux
-	(command -v winget &>/dev/null)        		&& alias dk_installPackage='winget install'		# WinGet
-	(command -v xbps-install &>/dev/null)		&& alias dk_installPackage='xbps-install'		# Xbps
-	(command -v zypper &>/dev/null)				&& alias dk_installPackage='zypper in'			# Zypper
+    (command -v apk)           		&& echo "apk add ${1}"   && apk add ${1}	# Alpine Package Keeper (alpine linux)
+	(command -v apt-get &>/dev/null)       		&& apt-get -y install ${1}		# Apt-get (debian)
+	(command -v apt &>/dev/null)           		&& apt -y install ${1}			# Apt (debian)
+	(command -v brew &>/dev/null)          		&& brew install ${1}			# Homebrew (MacOS)
+	(command -v dnf &>/dev/null)           		&& dnf install ${1}				# Dnf (yum)
+	(command -v emerge &>/dev/null)        		&& emerge ${1}					# Portage
+	(command -v nix-env &>/dev/null)       		&& nix-env -i ${1}				# Nix
+	(command -v ohpm &>/dev/null)          		&& ohpm install ${1}			# Ohpm
+	(command -v pkg &>/dev/null)           		&& pkg install ${1}				# Termux
+	(command -v pacman &>/dev/null)        		&& pacman -S ${1}				# Pacman
+	(command -v swupd &>/dev/null)         		&& swupd bundle-add ${1}		# Swupd
+	(command -v tce-load &>/dev/null)      		&& tce-load -wil ${1}     		# Tiny core linux
+	(command -v winget &>/dev/null)        		&& winget install ${1}			# WinGet
+	(command -v xbps-install &>/dev/null)		&& xbps-install ${1}			# Xbps
+	(command -v zypper &>/dev/null)				&& zypper in ${1}				# Zypper
 	(command -v dk_installPackage &>/dev/null)  && echo "No package managers found." && exit 1
 	
 	${dk_installPackage} ${1}

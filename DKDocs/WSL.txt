@@ -32,7 +32,7 @@ https://stackoverflow.com/a/65293474/688352
 	
 	
 ### Distro Links ###
-Ubuntu									https://aka.ms/wslubuntu	
+Ubuntu								https://aka.ms/wslubuntu	
 Ubuntu 24.04							https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2404-240425.AppxBundle
 Ubuntu 22.04 LTS						https://aka.ms/wslubuntu2204
 Ubuntu 20.04							https://aka.ms/wslubuntu2004

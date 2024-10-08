@@ -8,10 +8,14 @@
 #
 #	@msg	- The message to print
 #
-dk_warning() {
-	dk_debugFunc 1
+dk_wslFixNet() {
+	dk_debugFunc 0
 	
-	dk_call dk_log WARNING "$1"
+	${SUDO_EXE} rm /etc/resolv.conf
+	${SUDO_EXE} sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+	${SUDO_EXE} sh -c 'echo "[network]" > /etc/wsl.conf'
+	${SUDO_EXE} sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+	${SUDO_EXE} chattr +i /etc/resolv.conf
 }
 
 
@@ -25,5 +29,5 @@ dk_warning() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_warning "test dk_warning message"
+	dk_wslFixNet
 }
