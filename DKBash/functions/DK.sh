@@ -117,7 +117,7 @@ dk_download() {
         echo "WARNING: dk_download(): ${2} already exists"
         return 0
     fi
-    echo "Downloading $(dk_basename ${1}) . . ."
+    echo "Downloading $(basename ${1}) . . ."
     parentdir="$(dirname "${2}")"
     OLDPWD=${PWD}
     cd "${parentdir}"
