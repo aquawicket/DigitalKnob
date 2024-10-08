@@ -1,7 +1,7 @@
 #!/bin/sh
 export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
 
-if [ -n "${WSLENV}" ]; then
+if (command -v wslpath &>/dev/null); then
 	(command -v sudo) && export SUDO_EXE="sudo" || export SUDO_EXE=" "
 	${SUDO_EXE} rm /etc/resolv.conf
 	${SUDO_EXE} sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
