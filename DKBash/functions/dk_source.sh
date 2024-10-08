@@ -7,7 +7,7 @@
 #    @function_name	- the function name of the file to source and download if needed
 #
 dk_source(){
-	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_debugFunc.sh" ] && dk_debugFunc 1 && $(true)
+	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
 
 	# load if it's an existing full path file
 	[ -e ${1} ] && . ${1} && return ${?}

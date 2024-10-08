@@ -77,9 +77,9 @@ DK(){
 #
 dkreloadWithBash(){
 	if [ -z "${BASH}" ]; then
-		unset DKINIT
 		(command -v bash &>/dev/null) || dk_installPackage bash
 		(command -v bash &>/dev/null) && echo "Reloading ${0} with bash . . ."
+		unset DKINIT
 		(command -v bash &>/dev/null) && exec bash "${0}"
 	fi
 }
@@ -90,12 +90,12 @@ dkreloadWithBash(){
 #
 dkinit(){
     echo "Loading DKBash DigitalKnob . . ."
-    (command -v dk_commandExists)        || dk_commandExists(){ (command -v ${1} &>/dev/null); }
-    dk_commandExists builtin             && export builtin="builtin"
-    dk_commandExists dk_basename         || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }
-    dk_commandExists dk_dirname          || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
-    dk_commandExists dk_realpath         || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-    dk_commandExists dk_debugFunc        || dk_debugFunc(){
+    (command -v dk_commandExists &>/dev/null)   || dk_commandExists(){ (command -v ${1} &>/dev/null); }
+    (command -v builtin &>/dev/null)			&& export builtin="builtin"
+    (command -v dk_basename &>/dev/null)        || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }
+    (command -v dk_dirname &>/dev/null)         || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
+    (command -v dk_realpath &>/dev/null)        || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
+    (command -v dk_debugFunc &>/dev/null)       || dk_debugFunc(){
         [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
     }
 }
@@ -104,17 +104,7 @@ dkinit(){
 # DKBASH_VARS()
 #
 DKBASH_VARS(){
-	echo "BASH_SOURCE = ${BASH_SOURCE-}"
-    export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE-}")"; pwd -P )
-	echo "BASH_SOURCE_DIR = ${BASH_SOURCE_DIR}"
-    export DKBASH_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE_DIR}")" &>/dev/null; pwd -P )
-	echo "DKBASH_DIR = ${DKBASH_DIR}"
-    export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
-	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
-    export DKBASH_FUNCTIONS_DIR_="${DKBASH_DIR}/functions/"
-	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
-    [ -e "${DKBASH_FUNCTIONS_DIR}/DK.sh" ] || echo "ERROR: ${DKBASH_FUNCTIONS_DIR}/DK.sh not found"
-    #export PATH=${PATH}:${DKBASH_FUNCTIONS_DIR}
+    export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
 }
 
 ##################################################################################
@@ -179,11 +169,11 @@ DKSCRIPT_VARS(){
     echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
     
     ### DKSCRIPT_DIR ###
-    export DKSCRIPT_DIR=$(dk_call dk_dirname "${DKSCRIPT_PATH}")
+    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")
     echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     
     ### DKSCRIPT_NAME ###
-    export DKSCRIPT_NAME=$(dk_call dk_basename "${DKSCRIPT_PATH}")
+    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")
     echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
     
     ### DKSCRIPT_EXT ###
