@@ -12,18 +12,19 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_findProgram WSL_EXE wsl.exe
 	if exist "%WSL_EXE%" %dk_call% dk_info "WSL already installed"
 ::	%WSL_EXE% --status && %return%
+
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
 	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Disabled" && (
 		echo:
 		echo enabling Microsoft-Windows-Subsystem-Linux . . .
-		call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all    &rem /norestart
+		call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 	)
 	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Disabled" && (
 		echo:
 		echo enabling Microsoft-Hyper-V . . .
-		call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all     &rem /norestart
+		call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
 	)
 
 	
@@ -34,7 +35,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	call dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Disabled" && (
 		echo:
 		echo enabling VirtualMachinePlatform . . .
-		call dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all     &rem /norestart
+		call dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+		shutdown /r /t 0
 	)
 	
 	:: Step 4 - Download the Linux kernel update package
@@ -46,6 +48,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_download %WSL_DL%
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	"%DKDOWNLOAD_DIR%\%WSL_DL_FILE%"
+	
+	
+	
 	
 	:: Step 5 - Set WSL 2 as your default version
 	wsl --set-default-version 2
