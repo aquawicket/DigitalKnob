@@ -19,18 +19,16 @@ DK(){
     dksetOptions
 	
     ############ Get DKBASH variables ############
-    DKBASH_VARS
+    export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
     
     ############ Get DKHTTP variables ############
-    DKHTTP_VARS
+    export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
 
     ############ get dk_source and dk_call ######
     dkinitFiles
     
     ############ Setup dk_callStack ############
     #dksetupCallstack
-    #dk_callStack
-    #:dk_callStackReturn
 
     ############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
@@ -93,25 +91,11 @@ dkinit(){
     (command -v dk_commandExists &>/dev/null)   || dk_commandExists(){ (command -v ${1} &>/dev/null); }
     (command -v builtin &>/dev/null)			&& export builtin="builtin"
     (command -v dk_basename &>/dev/null)        || dk_commandExists basename  && dk_basename(){ ${builtin-} echo $(basename ${1-}); }
-    (command -v dk_dirname &>/dev/null)         || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
+#   (command -v dk_dirname &>/dev/null)         || dk_commandExists dirname   && dk_dirname() { ${builtin} echo $(dirname ${1}); }
 #   (command -v dk_realpath &>/dev/null)        || dk_commandExists realpath  && dk_realpath(){ ${builtin} echo $(realpath ${1}); } || dk_realpath(){ ${builtin} echo $(cd $(dk_dirname ${1}); pwd -P)/$(dk_basename ${1}); }
-#    (command -v dk_debugFunc &>/dev/null)       || dk_debugFunc(){
-#       [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
-#    }
-}
-
-##################################################################################
-# DKBASH_VARS()
-#
-DKBASH_VARS(){
-    export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
-}
-
-##################################################################################
-# DKHTTP_VARS()
-#
-DKHTTP_VARS(){
-    export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
+#   (command -v dk_debugFunc &>/dev/null)       || dk_debugFunc(){
+#        [ "${ENABLE_dk_debugFunc-0}" -eq "1" ] && echo "$(dk_basename ${BASH_SOURCE[1]-}):${BASH_LINENO[1]}  ${FUNCNAME[1]}(${BASH_ARGC[1]})" || return $(true)
+#   }
 }
 
 ##################################################################################
@@ -140,8 +124,8 @@ dk_download() {
     
     #dk_commandExists "wget" || dk_installPackage wget
     #dk_commandExists "curl" || dk_installPackage curl
-    [ ! -e "${2}" ] && dk_commandExists "wget" && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
-    [ ! -e "${2}" ] && dk_commandExists "curl" && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
+    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
+    [ ! -e "${2}" ] && (command -v curl &>/dev/null) && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
     
     cd "${OLDPWD}"
 }
@@ -150,8 +134,8 @@ dk_download() {
 # dksetupCallstack()
 #
 dksetupCallstack(){    
-    #[ -e "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" ] || dk_call curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
     [ -e "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_callStack.sh ${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh
+	[ -e "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh" ] && . "${DKBASH_FUNCTIONS_DIR}/dk_callStack.sh"
 }
 
 ##################################################################################
