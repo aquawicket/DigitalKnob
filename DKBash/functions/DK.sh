@@ -36,7 +36,6 @@ DK(){
     DKSCRIPT_VARS
 
     ############ LOAD FUNCTION FILES ############
-	dk_source dk_call
     dk_source dk_return
     dk_source __TIME__
     dk_source __FILE__
@@ -105,6 +104,7 @@ dkinit(){
 # DKBASH_VARS()
 #
 DKBASH_VARS(){
+	echo "BASH_SOURCE = ${BASH_SOURCE-}"
     export BASH_SOURCE_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE-}")"; pwd -P )
 	echo "BASH_SOURCE_DIR = ${BASH_SOURCE_DIR}"
     export DKBASH_DIR=$( cd -- "$(dk_dirname "${BASH_SOURCE_DIR}")" &>/dev/null; pwd -P )
@@ -121,14 +121,7 @@ DKBASH_VARS(){
 # DKHTTP_VARS()
 #
 DKHTTP_VARS(){
-    export DKHTTP_DIGITALKNOB_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	echo "DKHTTP_DIGITALKNOB_DIR = ${DKHTTP_DIGITALKNOB_DIR}"
-    export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/Development"
-	echo "DKHTTP_DKBRANCH_DIR = ${DKHTTP_DKBRANCH_DIR}"
-    export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
-	echo "DKHTTP_DKBASH_DIR = ${DKHTTP_DKBASH_DIR}"
-    export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
-	echo "DKHTTP_DKBASH_FUNCTIONS_DIR = ${DKHTTP_DKBASH_FUNCTIONS_DIR}"
+    export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
 }
 
 ##################################################################################
@@ -148,17 +141,17 @@ dkinitFiles(){
 dk_download() {
     if [ -e "${2-}" ]; then
         echo "WARNING: dk_download(): ${2} already exists"
-        return ${?}
+        return 0
     fi
     echo "Downloading $(dk_basename ${1}) . . ."
     parentdir="$(dk_dirname "${2-}")"
     OLDPWD=${PWD}
     cd "${parentdir}"
     
-    dk_commandExists "wget" || dk_installPackage wget
-    dk_commandExists "curl" || dk_installPackage curl
-    [ -e "${2}" ] || dk_commandExists "wget" && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
-    [ -e "${2}" ] || dk_commandExists "curl" && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
+    #dk_commandExists "wget" || dk_installPackage wget
+    #dk_commandExists "curl" || dk_installPackage curl
+    [ ! -e "${2}" ] && dk_commandExists "wget" && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
+    [ ! -e "${2}" ] && dk_commandExists "curl" && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
     
     cd "${OLDPWD}"
 }
@@ -292,9 +285,9 @@ dk_installPackage() {
     #    return $(true);
     #fi
     
-    dk_call dk_commandExists ${1} && return $(true)
+    dk_commandExists ${1} && return $(true)
     
-    dk_call dk_info "installing ${1}. . ."
+    echo "installing ${1}. . ."
     if dk_call dk_commandExists apk; then
         dk_call apk add "${1}"                    # Alpine Package Keeper (alpine linux)
     elif dk_call dk_commandExists apt-get; then
