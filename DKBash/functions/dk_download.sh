@@ -25,7 +25,6 @@ dk_download() {
 #	dk_call dk_printVar destination
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
-	#dk_call dk_printVar DKDOWNLOAD_DIR
 	
 	[ -z ${destination} ] && destination="${DKDOWNLOAD_DIR}/${url_filename}"
 	#dk_call dk_printVar destination
@@ -57,9 +56,6 @@ dk_download() {
 	
 	
 	[ -e "${destination}" ] || dk_call dk_error "failed to download ${url_filename}"
-	
-	#cd "${OLDPWD}" #|| dk_call dk_error "cd ${OLDPWD} failed!"
-
 }
 
 
