@@ -14,7 +14,7 @@ dk_call(){
 			#builtin echo "dk_source ${1}"
 			dk_source ${1}	
 		else	# Not a dk_ prefixed function								
-			dk_commandExists dk_installPackage  || dk_source dk_installPackage
+			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
 			dk_installPackage ${1}
 		fi
 		(command -v ${1} &>/dev/null) || dk_fatal "${1}: command not found"
