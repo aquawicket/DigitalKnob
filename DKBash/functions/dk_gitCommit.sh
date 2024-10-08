@@ -61,8 +61,8 @@ dk_gitCommit() {
 	dk_call dk_info "git commit \"${commit_msg}\""
 	dk_call dk_confirm || return 0
 	
-	dk_call "${GIT_EXE}" commit -a -m "${commit_msg}" || $(true)
-    dk_call "${GIT_EXE}" push
+	"${GIT_EXE}" -C ${DKBRANCH_DIR} commit -a -m "${commit_msg}" || $(true)
+    "${GIT_EXE}" -C ${DKBRANCH_DIR} push
 }
 
 

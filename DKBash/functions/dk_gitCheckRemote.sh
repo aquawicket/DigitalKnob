@@ -11,13 +11,11 @@ dk_gitCheckRemote() {
 	ahead=0
 	behind=0
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
-		cd "${DKBRANCH_DIR}"
-		
 		dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-		${GIT_EXE} remote update
-		branch=$(${GIT_EXE} rev-parse --abbrev-ref HEAD)
-		ahead=$(${GIT_EXE} rev-list --count origin/${branch}..${branch})
-		behind=$(${GIT_EXE} rev-list --count ${branch}..origin/${branch})
+		${GIT_EXE} -C ${DKBRANCH_DIR} remote update
+		branch=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
+		ahead=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count origin/${branch}..${branch})
+		behind=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count ${branch}..origin/${branch})
 		dk_call dk_info "${ahead} commits ahead, ${behind} commits behind"
 	fi
 }

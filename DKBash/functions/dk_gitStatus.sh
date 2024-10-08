@@ -9,8 +9,8 @@ dk_gitStatus() {
 	dk_debugFunc 0
   
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-
-    "${GIT_EXE}" status
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+    "${GIT_EXE}" -C ${DKBRANCH_DIR} status
 }
 
 

@@ -7,13 +7,10 @@
 #
 dk_gitDiffSummary() {
 	dk_debugFunc 0
-  
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-    cd ${DKBRANCH_DIR}
-    
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 
-    "${GIT_EXE}" --no-pager diff --compact-summary
+	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+    "${GIT_EXE}" -C ${DKBRANCH_DIR} --no-pager diff --compact-summary
 }
 
 

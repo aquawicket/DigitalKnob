@@ -20,12 +20,10 @@ dk_gitUpdate() {
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR
-		${SUDO_EXE} "${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
+		${SUDO_EXE} "${GIT_EXE}" -C ${DKBRANCH_DIR} clone ${url} "${DKBRANCH_DIR}"
 		
-		dk_call dk_validate DKUSERNAME "dk_call dk_DKUSERNAME"
 		#[ -n "${DKUSERNAME-}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
 	fi
-	#dk_call dk_cd "${DKBRANCH_DIR}" #|| dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
 	
 	"${GIT_EXE}" -C "${DKBRANCH_DIR}" pull --all
 	"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -- .
