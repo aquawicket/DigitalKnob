@@ -23,6 +23,6 @@ dk_DKUSERNAME() {
 DKTEST() {
     dk_debugFunc 0
  
-    dk_DKUSERNAME
+    dk_call dk_DKUSERNAME
     dk_call dk_printVar DKUSERNAME
 }
