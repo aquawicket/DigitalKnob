@@ -19,8 +19,9 @@ function(dk_createPrefixMacro func) #ARGN
 	string(REPLACE ";" " AND " prefix_if "${ARGN}")
 	set(MACRO_STRING "macro(${prefix_name}_${func})\n   if(${prefix_if})\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
-	#dk_eval(${MACRO_STRING})
-	cmake_language(EVAL CODE "${MACRO_STRING}")
+	if(CMAKE_VERSION VERSION_GREATER "3.18")
+		cmake_language(EVAL CODE "${MACRO_STRING}")
+	endif()
 endfunction()
 
 

@@ -41,7 +41,9 @@ macro(dk_load var)
 		list(APPEND dk_loading_list "${fn}")
 		
 		math(EXPR indent_count "${indent_count}+1")
-		string(REPEAT "-" ${indent_count} indent)
+		if(CMAKE_VERSION VERSION_GREATER "3.15")
+			string(REPEAT "-" ${indent_count} indent)
+		endif()
 		message("${indent}> dk_load(${var})")	
 		
 		#NOTE: Loading a file with the name of an existing function will cause this to fail
@@ -55,7 +57,9 @@ macro(dk_load var)
 		
 		message("${indent}< dk_load(${var})")
 		math(EXPR indent_count "${indent_count}-1")
-		string(REPEAT "-" ${indent_count} indent)
+		if(CMAKE_VERSION VERSION_GREATER "3.15")
+			string(REPEAT "-" ${indent_count} indent)
+		endif()
 		
 	else()
 		#message("${var} already loading")

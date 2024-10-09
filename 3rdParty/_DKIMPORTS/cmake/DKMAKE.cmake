@@ -11,7 +11,17 @@ dk_load(dk_builder)
 
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-dk_validate(host_triple "dk_host_triple()")
+
+if("$ENV{WSL_DISTRO_NAME}" STREQUAL "ALPINE")
+	dk_set(CMAKE_IMPORT cmake)
+	if(NOT EXIST ${CMAKE_EXE})
+		dk_command(apk add ${CMAKE_IMPORT})
+		dk_findProgram(CMAKE_EXE cmake)
+	endif()
+	return()
+endif()
+
+dk_validate					(host_triple "dk_host_triple()")
 ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
 LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
@@ -20,9 +30,7 @@ MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/
 WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip)
 WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip)
 WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)
-
-## Get CMAKE_DL_FILE, CMAKE_FOLDER
-dk_importVariables(${CMAKE_DL} rtn_var)
+dk_importVariables			(${CMAKE_DL} rtn_var)
 
 ### IMPORT ###
 if(ANDROID_HOST)

@@ -21,7 +21,8 @@ dk_installCmake() {
 	
 	dk_validate HOST_OS "dk_host_triple"
 	######################################################################################################
-	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake;						
+	[ "${HOST_OS}" = "android" ]                 && CMAKE_IMPORT=cmake
+	[ "${WSL_DISTRO_NAME}" = "${Alpine}" ]		 && CMAKE_IMPORT=cmake
 	[ "${host_triple}" = "win_arm32" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
 	[ "${host_triple}" = "win_arm64" ]           && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
 	[ "${host_triple}" = "win_x86" ]             && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}

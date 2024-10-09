@@ -1,13 +1,14 @@
 #!/bin/sh
 [ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
-CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
-CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
-CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
+
+CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
+CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
 CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
 #CMAKE_DL_MAC=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
-CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
-CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
+CMAKE_DL_WIN_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
+CMAKE_DL_WIN_X86=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
+CMAKE_DL_WIN_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
 ##################################################################################
 # dk_installCmake()
 #
@@ -17,7 +18,7 @@ dk_installCmake() {
 	
 	dk_call dk_validate HOST_OS "dk_call dk_host_triple"	
 	######################################################################################################
-	#[ "${HOST_OS}" = "android" ]                && CMAKE_IMPORT=cmake;						
+	#[ "${HOST_OS}" = "android" ]                && CMAKE_IMPORT=cmake
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm32" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM32}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_arm64" ]  && CMAKE_IMPORT=${CMAKE_DL_WIN_ARM64}
 	[ "${HOST_OS}_${HOST_ARCH}" = "win_x86" ]    && CMAKE_IMPORT=${CMAKE_DL_WIN_X86}
@@ -26,14 +27,15 @@ dk_installCmake() {
 	[ "${host_triple}" = "linux_x86_64" ]        && CMAKE_IMPORT=${CMAKE_DL_LINUX_X86_64}
 	[ "${host_triple}" = "linux_arm64" ]         && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
 	[ "${host_triple}" = "raspberry_arm64" ]     && CMAKE_IMPORT=${CMAKE_DL_LINUX_ARM64}
-	#[ "${triple}" = "android_arm32" ]        && CMAKE_IMPORT=cmake
-	#[ "${triple-}" = "win_arm64_clang" ]     && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	#[ "${triple-}" = "win_x86_clang" ]       && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	#[ "${triple-}" = "win_x86_mingw" ]       && CMAKE_IMPORT=mingw-w64-i686-cmake
-	#[ "${triple-}" = "win_x86_64_clang" ]    && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	#[ "${triple-}" = "win_x86_64_mingw" ]    && CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	#[ "${triple-}" = "win_x86_64_ucrt" ]     && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
-	[ -z ${CMAKE_IMPORT-} ] 						 && CMAKE_IMPORT=cmake  #Default
+	[ "${WSL_DISTRO_NAME}" = "Alpine" ]		 	 && CMAKE_IMPORT=cmake
+	#[ "${triple}" = "android_arm32" ]       	 && CMAKE_IMPORT=cmake
+	#[ "${triple-}" = "win_arm64_clang" ]    	 && CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
+	#[ "${triple-}" = "win_x86_clang" ]      	 && CMAKE_IMPORT=mingw-w64-clang-i686-cmake
+	#[ "${triple-}" = "win_x86_mingw" ]      	 && CMAKE_IMPORT=mingw-w64-i686-cmake
+	#[ "${triple-}" = "win_x86_64_clang" ]   	 && CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
+	#[ "${triple-}" = "win_x86_64_mingw" ]   	 && CMAKE_IMPORT=mingw-w64-x86_64-cmake
+	#[ "${triple-}" = "win_x86_64_ucrt" ]    	 && CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
+	[ -z ${CMAKE_IMPORT-} ] 					 && CMAKE_IMPORT=cmake  #Default
 	dk_call dk_assertVar CMAKE_IMPORT
 	
 	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then
@@ -71,13 +73,13 @@ dk_installCmake() {
 	else	# linux package
 		dk_call dk_info "Installing CMake from package managers"
 		
-		CMAKE_EXE=$(command -v cmake)
+		export CMAKE_EXE="$(command -v cmake)"
 		#dk_call dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
 		#dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
 		#dk_call dk_printVar CMAKE_EXE
 		dk_call dk_commandExists cmake || dk_call dk_installPackage ${CMAKE_IMPORT}
-		CMAKE_EXE=$(command -v cmake)
-		CMAKE_EXE=$(dk_call dk_realpath "${CMAKE_EXE}")
+		export CMAKE_EXE="$(command -v cmake)"
+		#CMAKE_EXE=$(dk_call dk_realpath "${CMAKE_EXE}")
 		dk_call dk_assertVar CMAKE_EXE
 	fi
 }
