@@ -1,6 +1,16 @@
 @echo off
 if defined DKINIT (goto:eof) else (set "DKINIT=1")
 
+::### Print Version Info ###
+echo:
+set "DKSHELL=CMD"
+for /f "tokens=2 delims=[]" %%v in ('ver') do set "DKSHELL_VERSION=%%v"
+set "DKSHELL_PATH=%ComSpec%"
+echo %DKSHELL% %DKSHELL_VERSION%
+echo %DKSHELL_PATH%
+echo:
+
+
 title %~n1
 if not exist "%~1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 

@@ -1,11 +1,3 @@
-Write-Host ""
-$DKSHELL = (Get-Process -Id $pid).Name
-$DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
-$DKSHELL_PATH = (get-command $DKSHELL).Path
-Write-Host "$DKSHELL Version $DKSHELL_VERSION"
-Write-Host "$DKSHELL_PATH"
-Write-Host ""
-
 ###### DKBuilder ######
 
 #$ENABLE_dk_debugFunc = 1

@@ -1,6 +1,16 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 
+### Print Version Info ###
+echo ""
+[ -n "${BASH}" ] && export DKSHELL_PATH=${BASH} || export DKSHELL_PATH=${SHELL}
+export DKSHELL=$(basename ${DKSHELL_PATH})
+export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
+echo "${DKSHELL} Version ${DKSHELL_VERSION}"
+echo "${DKSHELL_PATH}"
+echo ""
+
+
 ##################################################################################
 # DKINIT()
 #

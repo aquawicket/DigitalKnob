@@ -1,3 +1,5 @@
+#!/usr/bin/cmake -P
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ###### DKBuilder ######
 
@@ -16,5 +18,5 @@ include(DKCMake/functions/DK.cmake)
 
 ###### Load Main Program ######
 ## [ $# -gt 0 ] && "$@" || dk_buildMain
-dk_load(dk_buildMain)
+dk_source(dk_buildMain)
 dk_buildMain()

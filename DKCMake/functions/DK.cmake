@@ -1,17 +1,24 @@
-#!/usr/bin/cmake -P
 include_guard()		# include_guard
+
+### Print Version Info ###
+message("")
+set(DKSHELL "CMake")
+set(DKSHELL_VERSION ${CMAKE_VERSION})
+set(DKSHELL_PATH ${CMAKE_COMMAND})
+message("${DKSHELL} Version ${DKSHELL_VERSION}")
+message("${DKSHELL_PATH}")
+message("")
+
 
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 
-cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html	cmake 2.6.0
-cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html	cmake 2.6.0
-cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0011.html	cmake 2.6.3
-cmake_policy(SET CMP0012 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0012.html	cmake 2.8.0
-cmake_policy(SET CMP0054 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0054.html	cmake 3.1.0
-cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0057.html	cmake 3.3.0
-if(CMAKE_VERSION VERSION_GREATER "3.20.")
-cmake_policy(SET CMP0126 NEW)   # https://cmake.org/cmake/help/latest/policy/CMP0126.html   cmake 3.21.0
-endif()
+#cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html
+cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html
+cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0011.html
+cmake_policy(SET CMP0012 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0012.html
+cmake_policy(SET CMP0054 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0054.html
+cmake_policy(SET CMP0057 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0057.html
+cmake_policy(SET CMP0126 NEW)   # https://cmake.org/cmake/help/latest/policy/CMP0126.html
 
 # Note: Using DK() as the function name will cause DK/DKMAKE.cmake to fail in dk_load.cmake
 #####################################################################
@@ -20,7 +27,6 @@ endif()
 #
 function(DKINIT)
 	#dk_echo("DKINIT()")
-	message(STATUS "CMake version ${CMAKE_VERSION}")
 	
 	###### Initialize Language specifics ######
 	dk_init()
@@ -72,7 +78,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
-#	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
+	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
 	
 	###### DKTEST MODE ######
@@ -208,29 +214,21 @@ endfunction()
 # dk_DKSCRIPT_VARS()
 #
 function(dk_DKSCRIPT_VARS)
-	###### DKSCRIPT_PATH ######
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_PATH})
 		dk_fatal("DKSCRIPT_PATH not found!")
 	endif()
 	
-	###### DKSCRIPT_ARGS ######
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
 
-	###### DKSCRIPT_DIR ######
 	get_filename_component(DKSCRIPT_DIR ${DKSCRIPT_PATH} DIRECTORY)
 	set(DKSCRIPT_DIR ${DKSCRIPT_DIR} CACHE INTERNAL "")
 	if(NOT EXISTS ${DKSCRIPT_DIR})
 		dk_fatal("DKSCRIPT_DIR not found!")
 	endif()
 	
-	###### DKSCRIPT_NAME ######
 	get_filename_component(DKSCRIPT_NAME ${DKSCRIPT_PATH} NAME)
 	set(DKSCRIPT_NAME ${DKSCRIPT_NAME} CACHE INTERNAL "")
-	
-	###### DKSCRIPT_EXT ######
-	get_filename_component(DKSCRIPT_EXT ${DKSCRIPT_PATH} LAST_EXT)
-	set(DKSCRIPT_EXT ${DKSCRIPT_EXT} CACHE INTERNAL "")
 endfunction()
 
 ##################################################################################
@@ -239,10 +237,6 @@ endfunction()
 function(dk_setVariables)
 
 	##### Set ProgramFiles_<> variables ######
-	if(DEFINED "ENV{WSLENV}")
-		set(WSL 1 CACHE INTERNAL "")
-		dk_echo("CMake using WSL")
-	endif()
 	if(DEFINED "ENV{HOMEDRIVE}")
 		# TODO
 	endif()
@@ -257,6 +251,7 @@ function(dk_setVariables)
 	#	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
 	#	dk_set(ProgramFiles_x86 "${ProgramFiles_x86}")
 	#endif()
+	
 endfunction()
 
 

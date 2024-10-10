@@ -1,11 +1,4 @@
 @echo off
-echo:
-set "DKSHELL=CMD"
-for /f "tokens=2 delims=[]" %%v in ('ver') do set "DKSHELL_VERSION=%%v"
-set "DKSHELL_PATH=%ComSpec%"
-echo %DKSHELL% %DKSHELL_VERSION%
-echo %DKSHELL_PATH%
-echo:
 
 setlocal enableDelayedExpansion
 
