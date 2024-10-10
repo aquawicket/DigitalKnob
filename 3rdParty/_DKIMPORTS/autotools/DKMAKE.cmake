@@ -21,19 +21,20 @@ if(CLANG OR MINGW OR UCRT)
 	
 	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 	
-	if(win_x86_clang)
-		dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
-	elseif(win_x86_64_clang)	
-		dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
-	elseif(win_arm64_clang)
-		dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
-	elseif(win_x86_mingw)
-		dk_command(${PACMAN_EXE} -S mingw-w64-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
-	elseif(win_x86_64_mingw)
-		dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
-	elseif(win_x86_64_ucrt)
-		dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
-	endif()
+	#if(win_x86_clang)
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
+	#elseif(win_x86_64_clang)	
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
+	#elseif(win_arm64_clang)
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
+	#elseif(win_x86_mingw)
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-i686-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
+	#elseif(win_x86_64_mingw)
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+	#elseif(win_x86_64_ucrt)
+	#	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
+	#endif()
+	dk_installPackage(autotools)
 	
 	set(ENV{ACLOCAL_PATH} "${MSYS2_DIR}/usr/share/aclocal")
 endif()

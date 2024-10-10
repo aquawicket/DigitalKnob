@@ -51,9 +51,11 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	#dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 	
 	### Update with pacman ###
-	dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+	message("ENV{DKSHELL} = $ENV{DKSHELL}")
+	execute_process(COMMAND sh -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	dk_assertVar(PACMAN_EXE)
-	dk_command(${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+	execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	
 	### Install toolchain ###
 	if(MSYSTEM)

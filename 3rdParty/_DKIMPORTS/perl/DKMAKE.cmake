@@ -47,7 +47,8 @@ if(MSYSTEM)
 	#elseif(win_x86_64_ucrt)
 	#	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	#endif()
-	dk_command(${PACMAN_EXE} -S perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})									# MSYS2
+	#dk_command(${PACMAN_EXE} -S perl --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})									# MSYS2
+	dk_installPackage(perl)
 	
 	dk_command(bash -c "command -v perl" OUTPUT_VARIABLE PERL_EXE) # BASH_ENV)
 	if(PERL_EXE)

@@ -13,7 +13,7 @@ function(dk_installPackage package)
 
 	execute_process(COMMAND command -v ${package} OUTPUT_VARIABLE PACKAGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EXISTS ${PACKAGE_EXE})
-		message("${package}_EXE already exists")
+		message("${package}_EXE:${PACKAGE_EXE} already exists")
 		return()
 	endif()
 #	if(dk_packageInstalled ${package})
@@ -21,12 +21,15 @@ function(dk_installPackage package)
 #		return(${false});
 #	endif()
 #	
-	dk_info("installing ${package}. . .")
-
+	dk_info("dk_installPackage(): installing ${package}. . .")
+	dk_validate(MSYS2 "dk_depend(msys2)")
+	set(ENV{DKSHELL} sh)
 
 	### Alpine Package Keeper (alpine linux) ###
+	message("$ENV{DKSHELL} -c 'command -v apk'")
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apk" OUTPUT_VARIABLE APK_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APK_EXE)
+		dk_printVar(APK_EXE)
 		message("${APK_EXE} add ${package}")
 		execute_process(COMMAND ${SUDO_EXE} ${APK_EXE} add ${package})
 	endif()
@@ -34,6 +37,7 @@ function(dk_installPackage package)
 	### Apt-get (debian) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt-get" OUTPUT_VARIABLE APTGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APTGET_EXE)
+		dk_printVar(APTGET_EXE)
 		message("${APTGET_EXE} -y install ${package}")
 		execute_process(COMMAND ${SUDO_EXE} ${APTGET_EXE} -y install ${package})
 	endif()
@@ -41,68 +45,83 @@ function(dk_installPackage package)
 	### Apt (debian) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt" OUTPUT_VARIABLE APT_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APT_EXE)
+		dk_printVar(APT_EXE)
 		execute_process(COMMAND ${SUDO_EXE} ${APT_EXE} -y install ${package})
 	endif()
 	
 	### Homebrew (MacOS) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v brew" OUTPUT_VARIABLE BREW_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BREW_EXE)
+		dk_printVar(BREW_EXE)
 		execute_process(COMMAND ${SUDO_EXE} ${BREW_EXE} install ${package})
 	endif()
 
 	### Dnf (yum) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v dnf" OUTPUT_VARIABLE DNF_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(DNF_EXE)
+		dk_printVar(DNF_EXE)
 		execute_process(COMMAND ${SUDO_EXE} ${DNF_EXE} install ${package})
 	endif()
 	
 	### Portage ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v emerge" OUTPUT_VARIABLE EMERGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EMERGE_EXE)
+		dk_printVar(EMERGE_EXE)
 		execute_process(COMMAND ${SUDO_EXE} ${EMERGE_EXE} ${package})
 	endif()
 	
 	### Nix ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v nix-env" OUTPUT_VARIABLE NIX_ENV_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(NIX_ENV_EXE)
+		dk_printVar(NIX_ENV_EXE)
 		execute_process(COMMAND ${SUDO_EXE} ${NIX_ENV_EXE} -i ${package})
 	endif()
 	
 	### Ohpm ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ohpm" OUTPUT_VARIABLE OHPM_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(OHPM_EXE)
+		dk_printVar(OHPM_EXE)
 		execute_process(COMMAND ${OHPM_EXE} install ${package})
 	endif()
 	
 	### Termux ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(PKG_EXE)
+		dk_printVar(PKG_EXE)
 		execute_process(COMMAND ${PKG_EXE} install ${package} -y)
 	endif()
 
 	### Msys2 ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	dk_printVar(PACMAN_EXE)
+	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 	if(PACMAN_EXE)
+		dk_printVar(PACMAN_EXE)
 		if(win_x86_clang)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 		elseif(win_x86_64_clang)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 		elseif(win_arm64_clang)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 		elseif(win_x86_mingw)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 		elseif(win_x86_64_mingw)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 		elseif(win_x86_64_ucrt)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+			message("${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# UCRT64
 		else()
+			message("${PACMAN_EXE} -S ${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
 			execute_process(COMMAND ${PACMAN_EXE} -S ${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# DEFAULT
 		endif()
 	endif()
@@ -110,30 +129,35 @@ function(dk_installPackage package)
 	### Swupd ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v swupd" OUTPUT_VARIABLE SWUPD_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(SWUPD_EXE)
+		dk_printVar(SWUPD_EXE)
 		execute_process(COMMAND ${SWUPD_EXE} bundle-add ${package})
 	endif()
 	
 	### Tiny core linux ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v tce-load" OUTPUT_VARIABLE TCE_LOAD_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(TCE_LOAD_EXE)
+		dk_printVar(TCE_LOAD_EXE)
 		execute_process(COMMAND ${TCE_LOAD_EXE} -wil ${package})
 	endif()
 	
 	### WinGet ###
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(WINGET_EXE)
-		execute_process(COMMAND winget install ${package})
-	endif()
+#	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	if(WINGET_EXE)
+#		dk_printVar(WINGET_EXE)
+#		execute_process(COMMAND winget install ${package})
+#	endif()
 	
 	### Xbps ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v xbps-install" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(XBPS_INSTALL_EXE)
+		dk_printVar(XBPS_INSTALL_EXE)
 		execute_process(COMMAND xbps-install ${package})
 	endif()
 	
 	### Zypper ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v zypper" OUTPUT_VARIABLE ZYPPER_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(ZYPPER_EXE)
+		dk_printVar(ZYPPER_EXE)
 		execute_process(COMMAND zypper in ${package})
 	endif()
 	
@@ -141,6 +165,7 @@ function(dk_installPackage package)
 
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ${package}" OUTPUT_VARIABLE PACKAGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EXISTS ${PACKAGE_EXE})
+		dk_printVar(PACKAGE_EXE)
 		message("${package}_EXE installed successfully")
 		return()
 	endif()
