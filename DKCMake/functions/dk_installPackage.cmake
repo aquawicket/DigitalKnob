@@ -11,51 +11,44 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_installPackage)
 	dk_debugFunc("\${ARGV}")
 
-	dk_todo("dk_installPackage(${ARGV})")
-
-#	if(dk_commandExists ${package})
-#		return()
-#	endif()
+	if(dk_commandExists ${package})
+		return()
+	endif()
 #	if(dk_packageInstalled ${package})
 #		dk_warning "${package} already installed"
 #		return(${false});
 #	endif()
 #	
-#	dk_info("installing ${package}. . .")
+	dk_info("installing ${package}. . .")
 #
-#	if(dk_commandExists apk)
-#		apk add "${package}"					# Alpine Package Keeper (alpine linux)
-#	elseif(dk_commandExists apt-get)
-#		apt-get -y install "${package}"			# Apt-get (debian)
-#	elseif((dk_commandExists apt)
-#		apt -y install "${package}"				# Apt (debian)
-#	elseif(dk_commandExists brew)
-#		brew install "${package}"				# Homebrew (MacOS)
-#	elseif(dk_commandExists dnf)
-#		dnf install "${package}"				# Dnf (yum)
-#	elseif(dk_commandExists emerge)
-#		emerge "${package}"						# Portage
-#	elseif(dk_commandExists nix-env)
-#		nix-env -i "${package}"					# Nix
-#	elseif(dk_commandExists ohpm)
-#		ohpm install "${package}"				# Ohpm
-#	elseif(dk_commandExists pkg)
-#		pkg install "${package}" -y				# Termux
-#	elseif(dk_commandExists pacman)
-#		pacman -S "${package}" --noconfirm		# Pacman
-#	elseif(dk_commandExists swupd)
-#		swupd bundle-add "${package}"			# Swupd
-#	elseif(dk_commandExists tce-load)
-#		tce-load -wil "${package}"     			# Tiny core linux
-#	elseif(dk_commandExists winget)
-#		winget install "${package}"				# WinGet
-#	elseif(dk_commandExists xbps-install)
-#		xbps-install "${package}"				# Xbps
-#	elseif(dk_commandExists zypper)
-#		zypper in "${package}"					# Zypper
-#	else()
-#		dk_error "ERROR: no package managers found"
-#	endif()
+	execute_process(COMMAND command -v apk OUTPUT_VARIABLE APK_EXE)
+	if(APK_EXE)
+		execute_process(COMMAND ${APK_EXE} add ${package})				# Alpine Package Keeper (alpine linux)
+		return()
+	endif()
+	
+	execute_process(COMMAND command -v apt-get OUTPUT_VARIABLE APTGET_EXE)
+	if(APTGET_EXE)
+		execute_process(COMMAND ${APTGET_EXE} -y install ${package})	# Apt-get (debian)
+		return()
+	endif()
+	
+#		execute_process(COMMAND apt -y install ${package})				# Apt (debian)
+#		execute_process(COMMAND brew install ${package})				# Homebrew (MacOS)
+#		execute_process(COMMAND dnf install ${package})					# Dnf (yum)
+#		execute_process(COMMAND emerge ${package})						# Portage
+#		execute_process(COMMAND nix-env -i ${package})					# Nix
+#		execute_process(COMMAND ohpm install ${package})				# Ohpm
+#		execute_process(COMMAND pkg install ${package} -y)				# Termux
+#		execute_process(COMMAND pacman -S ${package} --noconfirm)		# Pacman
+#		execute_process(COMMAND swupd bundle-add ${package})			# Swupd
+#		execute_process(COMMAND tce-load -wil ${package})     			# Tiny core linux
+#		execute_process(COMMAND winget install ${package})				# WinGet
+#		execute_process(COMMAND xbps-install ${package})				# Xbps
+#		execute_process(COMMAND zypper in ${package})					# Zypper
+
+#		dk_error("ERROR: no package managers found")
+
 endfunction()
 
 

@@ -14,13 +14,14 @@ endif()
 
 #dk_depend(openjdk)
 
+dk_installPackage(build-essential)
 
 if(ANDROID_HOST)
-	dk_command(pkg install build-essential)
+	#dk_command(pkg install build-essential)
 elseif(NOT ANDROID)
-	dk_cd(/usr)
-	dk_depend(sudo)
-	dk_command(${SUDO_EXE} apt -y install build-essential)
+	#dk_cd(/usr)
+	#dk_depend(sudo)
+	#dk_command(${SUDO_EXE} apt -y install build-essential)
 endif()
 
 #dk_todo("tiny-core-lunux build-essential")
