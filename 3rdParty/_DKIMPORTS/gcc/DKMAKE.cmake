@@ -12,6 +12,7 @@ if(clang OR mingw OR ucrt)
 endif()
 
 dk_installPackage(gcc)
+dk_installPackage(g++)
 
 if(win_x86_clang)
 	#dk_command(${PACMAN_EXE}	-S mingw-w64-clang-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32

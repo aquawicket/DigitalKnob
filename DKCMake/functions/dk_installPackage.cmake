@@ -29,49 +29,49 @@ function(dk_installPackage package)
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apk" OUTPUT_VARIABLE APK_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APK_EXE)
 		message("${APK_EXE} add ${package}")
-		execute_process(COMMAND ${APK_EXE} add ${package})
+		execute_process(COMMAND ${SUDO_EXE} ${APK_EXE} add ${package})
 	endif()
 	
 	### Apt-get (debian) ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt-get" OUTPUT_VARIABLE APTGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APTGET_EXE)
 		message("${APTGET_EXE} -y install ${package}")
-		execute_process(COMMAND ${APTGET_EXE} -y install ${package})
+		execute_process(COMMAND ${SUDO_EXE} ${APTGET_EXE} -y install ${package})
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt" OUTPUT_VARIABLE APT_EXE)
 	if(APT_EXE)
-		execute_process(COMMAND ${APT_EXE} -y install ${package})		# Apt (debian)
+		execute_process(COMMAND ${SUDO_EXE} ${APT_EXE} -y install ${package})		# Apt (debian)
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v brew" OUTPUT_VARIABLE BREW_EXE)
 	if(BREW_EXE)
-		execute_process(COMMAND ${BREW_EXE} install ${package})			# Homebrew (MacOS)
+		execute_process(COMMAND ${SUDO_EXE} ${BREW_EXE} install ${package})			# Homebrew (MacOS)
 	endif()
 
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v dnf" OUTPUT_VARIABLE DNF_EXE)
 	if(DNF_EXE)
-		execute_process(COMMAND ${DNF_EXE} install ${package})			# Dnf (yum)
+		execute_process(COMMAND ${SUDO_EXE} ${DNF_EXE} install ${package})			# Dnf (yum)
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v emerge" OUTPUT_VARIABLE EMERGE_EXE)
 	if(EMERGE_EXE)
-		execute_process(COMMAND ${EMERGE_EXE} ${package})				# Portage
+		execute_process(COMMAND ${SUDO_EXE} ${EMERGE_EXE} ${package})				# Portage
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v nix-env" OUTPUT_VARIABLE NIX_ENV_EXE)
 	if(NIX_ENV_EXE)
-		execute_process(COMMAND ${NIX_ENV_EXE} -i ${package})					# Nix
+		execute_process(COMMAND ${SUDO_EXE} ${NIX_ENV_EXE} -i ${package})					# Nix
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ohpm" OUTPUT_VARIABLE OHPM_EXE)
 	if(OHPM_EXE)
-		execute_process(COMMAND ohpm install ${package})				# Ohpm
+		execute_process(COMMAND ${OHPM_EXE} install ${package})				# Ohpm
 	endif()
 	
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE)
 	if(PKG_EXE)
-		execute_process(COMMAND pkg install ${package} -y)				# Termux
+		execute_process(COMMAND ${PKG_EXE} install ${package} -y)				# Termux
 	endif()
 
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE)
