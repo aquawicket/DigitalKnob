@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+set(DKCMAKE_FUNCTIONS_DIR_ "/mnt/c/Users/Administrator/digitalknob/Development/DKCMake/functions/")
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://cmake.org
 # https://github.com/Kitware/CMake
@@ -10,8 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
-
-if("$ENV{WSL_DISTRO_NAME}" STREQUAL "ALPINE")
+if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_set(CMAKE_IMPORT cmake)
 	if(NOT EXIST ${CMAKE_EXE})
 		dk_command(apk add ${CMAKE_IMPORT})
