@@ -64,10 +64,8 @@ if(LINUX_HOST)
 	#endif()
 	
 	#if(ANDROID_HOST)
-	#	dk_set(SUDO "")
 	#	dk_set(APT "apt")
 	#else()
-	#	dk_set(SUDO "sudo")
 	#	dk_set(APT "apt-get")
 	#endif()
 	

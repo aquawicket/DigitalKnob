@@ -55,7 +55,8 @@ endif()
 ### Tiny Core Linux ###
 if(TINYCORE)
 	### TODO ###
-	dk_command(tce-load -wi bash)
+	#dk_command(tce-load -wi bash)
+	dk_installPackage(bash)
 endif()
 
 

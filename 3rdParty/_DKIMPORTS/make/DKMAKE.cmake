@@ -4,9 +4,9 @@ dk_load(dk_builder)
 # https://packages.msys2.org/base/make
 
 
-if(CMAKE_MAKE_PROGRAM)
-	return()
-endif()
+#if(CMAKE_MAKE_PROGRAM)
+#	return()
+#endif()
 
 
 if(WIN_HOST)
@@ -27,8 +27,8 @@ if(android)
 	endif()
 	
 elseif(emscripten)
+	dk_validate(EMSDK "dk_depend(emsdk)")
 	if(WIN_HOST)
-		dk_validate(EMSDK "dk_depend(emsdk)")
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${EMSDK}/mingw/4.6.2_32bit")
 	else()
 		dk_findProgram(CMAKE_MAKE_PROGRAM make /usr/bin)
@@ -54,12 +54,14 @@ elseif(win_x86_64_ucrt)
 
 elseif(win_x86_msvc)
 	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	#dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	dk_validate(VISUALSTUDIO "dk_depend(visualstudio)")
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
 	
 elseif(win_x86_64_msvc)
 	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-	dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	#dk_validate(VISUALSTUDIO "dk_load(${DKIMPORTS_DIR}/visualstudio/DKMAKE.cmake)")
+	dk_validate(VISUALSTUDIO "dk_depend(visualstudio)")
 	dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUALSTUDIO})
 	
 else()
@@ -68,4 +70,4 @@ else()
 endif()
 
 
-dk_assertVar(CMAKE_MAKE_PROGRAM)
+#dk_assertVar(CMAKE_MAKE_PROGRAM)
