@@ -22,7 +22,6 @@ function(dk_installPackage package)
 #	endif()
 #	
 	dk_info("installing ${package}. . .")
-#
 
 
 	### Alpine Package Keeper (alpine linux) ###
@@ -39,42 +38,51 @@ function(dk_installPackage package)
 		execute_process(COMMAND ${SUDO_EXE} ${APTGET_EXE} -y install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt" OUTPUT_VARIABLE APT_EXE)
+	### Apt (debian) ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt" OUTPUT_VARIABLE APT_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(APT_EXE)
-		execute_process(COMMAND ${SUDO_EXE} ${APT_EXE} -y install ${package})		# Apt (debian)
+		execute_process(COMMAND ${SUDO_EXE} ${APT_EXE} -y install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v brew" OUTPUT_VARIABLE BREW_EXE)
+	### Homebrew (MacOS) ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v brew" OUTPUT_VARIABLE BREW_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BREW_EXE)
-		execute_process(COMMAND ${SUDO_EXE} ${BREW_EXE} install ${package})			# Homebrew (MacOS)
+		execute_process(COMMAND ${SUDO_EXE} ${BREW_EXE} install ${package})
 	endif()
 
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v dnf" OUTPUT_VARIABLE DNF_EXE)
+	### Dnf (yum) ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v dnf" OUTPUT_VARIABLE DNF_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(DNF_EXE)
-		execute_process(COMMAND ${SUDO_EXE} ${DNF_EXE} install ${package})			# Dnf (yum)
+		execute_process(COMMAND ${SUDO_EXE} ${DNF_EXE} install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v emerge" OUTPUT_VARIABLE EMERGE_EXE)
+	### Portage ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v emerge" OUTPUT_VARIABLE EMERGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EMERGE_EXE)
-		execute_process(COMMAND ${SUDO_EXE} ${EMERGE_EXE} ${package})				# Portage
+		execute_process(COMMAND ${SUDO_EXE} ${EMERGE_EXE} ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v nix-env" OUTPUT_VARIABLE NIX_ENV_EXE)
+	### Nix ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v nix-env" OUTPUT_VARIABLE NIX_ENV_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(NIX_ENV_EXE)
-		execute_process(COMMAND ${SUDO_EXE} ${NIX_ENV_EXE} -i ${package})					# Nix
+		execute_process(COMMAND ${SUDO_EXE} ${NIX_ENV_EXE} -i ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ohpm" OUTPUT_VARIABLE OHPM_EXE)
+	### Ohpm ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ohpm" OUTPUT_VARIABLE OHPM_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(OHPM_EXE)
-		execute_process(COMMAND ${OHPM_EXE} install ${package})				# Ohpm
+		execute_process(COMMAND ${OHPM_EXE} install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE)
+	### Termux ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pkg" OUTPUT_VARIABLE PKG_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(PKG_EXE)
-		execute_process(COMMAND ${PKG_EXE} install ${package} -y)				# Termux
+		execute_process(COMMAND ${PKG_EXE} install ${package} -y)
 	endif()
 
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE)
+	### Msys2 ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_printVar(PACMAN_EXE)
 	if(PACMAN_EXE)
 		if(win_x86_clang)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
@@ -99,34 +107,39 @@ function(dk_installPackage package)
 		endif()
 	endif()
 
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v swupd" OUTPUT_VARIABLE SWUPD_EXE)
+	### Swupd ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v swupd" OUTPUT_VARIABLE SWUPD_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(SWUPD_EXE)
-		execute_process(COMMAND ${SWUPD_EXE} bundle-add ${package})			# Swupd
+		execute_process(COMMAND ${SWUPD_EXE} bundle-add ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v tce-load" OUTPUT_VARIABLE TCE_LOAD_EXE)
+	### Tiny core linux ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v tce-load" OUTPUT_VARIABLE TCE_LOAD_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(TCE_LOAD_EXE)
-		execute_process(COMMAND ${TCE_LOAD_EXE} -wil ${package})     			# Tiny core linux
+		execute_process(COMMAND ${TCE_LOAD_EXE} -wil ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE)
+	### WinGet ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(WINGET_EXE)
-		execute_process(COMMAND winget install ${package})				# WinGet
+		execute_process(COMMAND winget install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v xbps-install" OUTPUT_VARIABLE WINGET_EXE)
+	### Xbps ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v xbps-install" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(XBPS_INSTALL_EXE)
-		execute_process(COMMAND xbps-install ${package})				# Xbps
+		execute_process(COMMAND xbps-install ${package})
 	endif()
 	
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v zypper" OUTPUT_VARIABLE ZYPPER_EXE)
+	### Zypper ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v zypper" OUTPUT_VARIABLE ZYPPER_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(ZYPPER_EXE)
-		execute_process(COMMAND zypper in ${package})					# Zypper
+		execute_process(COMMAND zypper in ${package})
 	endif()
 	
 #	dk_error("ERROR: no package managers found")
 
-	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ${package}" OUTPUT_VARIABLE PACKAGE_EXE)
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ${package}" OUTPUT_VARIABLE PACKAGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EXISTS ${PACKAGE_EXE})
 		message("${package}_EXE installed successfully")
 		return()
