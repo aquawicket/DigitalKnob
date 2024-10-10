@@ -1,4 +1,8 @@
 #!/bin/sh
+echo ""
+$SHELL --help 2>&1 | head -n 1
+echo ""
+
 ############ dk_onError trap ############
 (set -o posix)			&& set -o posix			|| echo "(set -o posix) failed"
 (set -o pipefail) 		&& set -o pipefail  	|| echo "(set -o pipefail) failed"  	# trace ERR through pipes

@@ -1,4 +1,8 @@
 @echo off
+echo:
+for /f "tokens=2 delims=[]" %%v in ('ver') do echo CMD.exe %%v
+echo:
+
 setlocal enableDelayedExpansion
 
 set "HDK=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DK.cmd"
