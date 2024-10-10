@@ -36,7 +36,7 @@ dk_onError(){
 SUDO_EXE(){
 	[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
 	[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
-	echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
+	#echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
 }
 
 ###### CMD_EXE ######
@@ -44,21 +44,21 @@ CMD_EXE(){
 	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE=$(command -v cmd.exe) || true
 	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE="/mnt/c/Windows/System32/cmd.exe"
 	[ -e "${CMD_EXE-}" ]	&& echo "${CMD_EXE-}" || dk_onError "CMD_EXE:${CMD_EXE-} Not Found"
-	echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
+	#echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
 }
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
 	[ -e "${CYGPATH_EXE-}" ] || export CYGPATH_EXE=$(command -v cygpath) || true
 	[ -e "${CYGPATH_EXE-}" ] && echo "${CYGPATH_EXE}" || unset CYGPATH_EXE
-	echo "CYGPATH_EXE = '${CYGPATH_EXE-}'" &>/dev/tty
+	#echo "CYGPATH_EXE = '${CYGPATH_EXE-}'" &>/dev/tty
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
 	[ -e "${WSLPATH_EXE-}" ] || export WSLPATH_EXE=$(command -v wslpath) || true
 	[ -e "${WSLPATH_EXE-}" ] && echo "${WSLPATH_EXE}" || unset WSLPATH_EXE
-	echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
+	#echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
 }
 
 ###### DKHOME_DIR ######
@@ -67,7 +67,7 @@ DKHOME_DIR(){
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 && export DKHOME_DIR=${HOME}
 	[ -e "${DKHOME_DIR-}" ]	  && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
-	echo "DKHOME_DIR = '${DKHOME_DIR-}'" &>/dev/tty
+	#echo "DKHOME_DIR = '${DKHOME_DIR-}'" &>/dev/tty
 }
 
 ###### Net fix for WSL ######
@@ -82,7 +82,7 @@ fi
 
 
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
-[ -e "${DKF}" ] 					|| export DKF="${DKHOME_DIR}/.dk/DKBash/functions"
+[ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
 [ -e "$(DKHOME_DIR)/.dk" ] 			|| mkdir "$(DKHOME_DIR)/.dk"
 [ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	|| mkdir "$(DKHOME_DIR)/.dk/DKBash"
 [ -e "${DKF}" ] 					|| mkdir "${DKF}"
