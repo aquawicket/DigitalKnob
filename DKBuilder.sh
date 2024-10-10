@@ -1,6 +1,10 @@
 #!/bin/sh
 echo ""
-$SHELL --help 2>&1 | head -n 1
+[ -n "${BASH}" ] && export DKSHELL_PATH=${BASH} || export DKSHELL_PATH=${SHELL}
+export DKSHELL=$(basename ${DKSHELL_PATH})
+export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
+echo "${DKSHELL} Version ${DKSHELL_VERSION}"
+echo "${DKSHELL_PATH}"
 echo ""
 
 ############ dk_onError trap ############
