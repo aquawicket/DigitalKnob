@@ -7,7 +7,7 @@ $DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
 $DKSHELL_PATH = (get-command $DKSHELL).Path
 $global:ESC = "$([char]27)" 				# escape character
 Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m"
-Write-Host " $DKSHELL_PATH"
+Write-Host "  $DKSHELL_PATH"
 Write-Host ""
 
 

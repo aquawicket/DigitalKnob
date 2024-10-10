@@ -6,8 +6,9 @@ message("")
 set(DKSHELL "CMake")
 set(DKSHELL_VERSION ${CMAKE_VERSION})
 set(DKSHELL_PATH ${CMAKE_COMMAND})
-message("${DKSHELL} Version ${DKSHELL_VERSION}")
-message("${DKSHELL_PATH}")
+string(ASCII 27 ESC)
+message("${ESC}[46m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m")
+message("  ${DKSHELL_PATH}")
 message("")
 
 

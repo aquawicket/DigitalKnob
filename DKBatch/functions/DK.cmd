@@ -8,7 +8,7 @@ for /f "tokens=2 delims=[]" %%v in ('ver') do set "DKSHELL_VERSION=%%v"
 set "DKSHELL_PATH=%ComSpec%"
 set "ESC="                         &:: escape character
 echo %ESC%[42m %ESC%[30m %DKSHELL% %DKSHELL_VERSION% %ESC%[0m
-echo %DKSHELL_PATH%
+echo   %DKSHELL_PATH%
 echo:
 
 

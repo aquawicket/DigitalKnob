@@ -6,8 +6,9 @@ echo ""
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH} || export DKSHELL_PATH=${SHELL}
 export DKSHELL=$(basename ${DKSHELL_PATH})
 export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
-echo "${DKSHELL} Version ${DKSHELL_VERSION}"
-echo "${DKSHELL_PATH}"
+export ESC=""     		 		# escape character
+echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
+echo "  ${DKSHELL_PATH}"
 echo ""
 
 
