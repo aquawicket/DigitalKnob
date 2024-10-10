@@ -13,26 +13,37 @@ function(dk_DKHOME_DIR)
 		return()
 	endif()
     
+	###### CMD_EXE ######
+	dk_findProgram(CMD_EXE cmd.exe)
+	if(NOT EXISTS ${CMD_EXE})
+		dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
+	endif()
+	message("CMD_EXE = ${CMD_EXE}")
+
+	###### CYGPATH_EXE ######
+	dk_findProgram(CYGPATH_EXE cygpath)
+	message("CYGPATH_EXE = ${CYGPATH_EXE}")
+	
+	###### WSLPATH_EXE ######
+	dk_findProgram(WSLPATH_EXE wslpath)
+	message("WSLPATH_EXE = ${WSLPATH_EXE}")
+	
 	### DKHOME_DIR ###
-	if(DEFINED ENV{WSLENV})
+	if(DEFINED ENV{DKHOME_DIR})
+		message("getting DKHOME_DIR from DKHOME_DIR")
+		set(DKHOME_DIR $ENV{DKHOME_DIR})
+	elseif(WSLPATH_EXE)
 		dk_echo("Using WSL")
-		execute_process(COMMAND cmd.exe /c "echo %HOMEDRIVE%" OUTPUT_VARIABLE HOMEDRIVE OUTPUT_STRIP_TRAILING_WHITESPACE)  # TODO: extract drive letter and convert to /mnt/L
-		set(HOMEDRIVE "/mnt/c")
-		
-		#### TODO ####
-		#string(SUBSTRING "${HOMEDRIVE}" 0 1 DRIVE)
-		#dk_toLower(${DRIVE} drive)
-		#dk_set(HOMEDRIVE "/mnt/${drive}")
-		##############
-		
-		execute_process(COMMAND cmd.exe /c "echo %USERPROFILE%" OUTPUT_VARIABLE HOMEPATH OUTPUT_STRIP_TRAILING_WHITESPACE)
-		dk_replaceAll("${HOMEPATH}" "\\" "/" HOMEPATH)
-		dk_set(DKHOME_DIR "${USERPROFILE}")
+		execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		execute_process(COMMAND ${WSLPATH_EXE} -u "${DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+	elseif(CYGPATH_EXE)
+		set(DKHOME_DIR "$ENV{USERPROFILE}")
+		execute_process(COMMAND ${CMD_EXE} /c "echo %USERPROFILE%" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		execute_process(COMMAND ${CYGPATH_EXE} -u "${DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 	elseif(DEFINED ENV{USERPROFILE})
-		dk_set(DKHOME_DIR "$ENV{USERPROFILE}")
-		#execute_process(COMMAND cygpath -u "${DKHOME_DIR}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+		set(DKHOME_DIR "$ENV{USERPROFILE}")
 	elseif(DEFINED ENV{HOME})
-		dk_set(DKHOME_DIR "$ENV{HOME}")
+		set(DKHOME_DIR "$ENV{HOME}")
 	else()
 		dk_fatal("dk_DKHOME_DIR(): unable to locate HOME directory")
 	endif()
