@@ -20,10 +20,10 @@ dk_generate() {
 	dk_call dk_makeDirectory "${TARGET_PATH}"/"${triple}"
 	cd "${TARGET_PATH}"/"${triple}"
 	dk_call dk_assertPath DKCMAKE_DIR
-	dk_call dk_assertPath ${DKCMAKE_DIR}
+	#dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
 	dk_call dk_assertPath CMAKE_SOURCE_DIR
-	dk_call dk_assertPath ${CMAKE_SOURCE_DIR}
+	#dk_call dk_assertPath ${CMAKE_SOURCE_DIR}
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	#$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
