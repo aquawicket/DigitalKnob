@@ -18,7 +18,7 @@ function(dk_createWindowsIcon inpath outpath)
 	endif()
 	dk_dirname(${outpath} dirname)
 	dk_makeDirectory(${dirname})
-	dk_executeProcess(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=256,128,64,48,32,16 ${outpath})
+	execute_process(COMMAND ${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=256,128,64,48,32,16 ${outpath})
 endfunction()
 
 
@@ -29,5 +29,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_createWindowsIcon(${DK_PROJECT_DIR}/icons/icon.png)
+	dk_validate(DKAPPS_DIR "dk_DKBRANCH_DIR()")
+	dk_createWindowsIcon(${DKAPPS_DIR}/DKCore/icons/icon.png ${DKAPPS_DIR}/DKCore/icons/icon.ico)
 endfunction()
