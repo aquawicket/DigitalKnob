@@ -5,7 +5,7 @@ dk_load(dk_builder)
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
 ### We only accesp windows hosts
-dk_validate(host_triple "dk_host_triple()")
+#dk_validate(host_triple "dk_host_triple()")
 if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()
@@ -36,6 +36,7 @@ dk_importVariables(${MSYS2_DL} rtn_val)
 
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
+dk_assertPath(DKDOWNLOAD_DIR)
 
 ### Install Msys2 ###
 if(NOT EXISTS ${MSYS2_EXE})
@@ -51,10 +52,8 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	#dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 	
 	### Update with pacman ###
-	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
-	message("ENV{DKSHELL} = $ENV{DKSHELL}")
-	execute_process(COMMAND sh -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	dk_assertVar(PACMAN_EXE)
+	dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+	dk_assertPath(PACMAN_EXE)
 	execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 	
 	### Install toolchain ###
