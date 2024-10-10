@@ -20,16 +20,16 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "ALPINE")
 	return()
 endif()
 
-dk_validate					(host_triple "dk_host_triple()")
-ANDROID_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
-LINUX_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)
-LINUX_X86_64_HOST_dk_set	(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)
-#MAC_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz)	# macOS 10.10 or later
-MAC_HOST_dk_set				(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz)		# macOS 10.13 or later
-WIN_ARM64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip)
-WIN_X86_HOST_dk_set			(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip)
-WIN_X86_64_HOST_dk_set		(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)
-dk_importVariables			(${CMAKE_DL} rtn_var)
+dk_validate				(host_triple "dk_host_triple()")
+dk_if(ANDROID_HOST		"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)")
+dk_if(LINUX_ARM64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)")
+dk_if(LINUX_X86_64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)")
+#dk_if(MAC_HOST			"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz)")	# macOS 10.10 or later
+dk_if(MAC_HOST			"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz)")		# macOS 10.13 or later
+dk_if(WIN_ARM64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip)")
+dk_if(WIN_X86_HOST		"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip)")
+dk_if(WIN_X86_64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)")
+dk_importVariables		(${CMAKE_DL} rtn_var)
 
 ### IMPORT ###
 if(ANDROID_HOST)
