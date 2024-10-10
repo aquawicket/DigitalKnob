@@ -1,14 +1,15 @@
 #!/bin/sh
 ############ dk_onError trap ############
-(set -o posix)    	&& set -o posix			|| echo "(set -o posix) failed"
-(set -o pipefail) 	&& set -o pipefail  	|| echo "(set -o pipefail) failed"  # trace ERR through pipes
-(set -o errtrace) 	&& set -o errtrace  	|| echo "(set -o errtrace) failed" 	# set -E : trace ERR through 'time command' and other functions
-(set -o nounset)  	&& set -o nounset   	|| echo "(set -o nounset) failed" 	# set -u : exit the script if you try to use an uninitialised variable
-(set -o errexit)  	&& set -o errexit   	|| echo "(set -o errexit) failed" 	# set -e : exit the script if any statement returns a non-true
-(shopt -s extdebug) && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
+(set -o posix &>/dev/null)			&& set -o posix			|| echo "(set -o posix) failed"
+(set -o pipefail &>/dev/null) 		&& set -o pipefail  	|| echo "(set -o pipefail) failed"  	# trace ERR through pipes
+(set -E &>/dev/null) 				&& set -E  				|| echo "(set -E) failed" 				# set -E : trace ERR through 'time command' and other functions
+(set -u &>/dev/null) 		 		&& set -u			   	|| echo "(set -u) failed" 				# set -u : exit the script if you try to use an uninitialised variable
+(set -e &>/dev/null)  	 			&& set -e  				|| echo "(set -e) failed" 				# set -e : exit the script if any statement returns a non-true
+(shopt -s extdebug &>/dev/null)     && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
+
 #trap 'echo "Press Enter to continue..."; read' SIGUSR1
 #alias _pause='kill -s USR1 $$'
-trap dk_onError ERR
+(trap dk_onError ERR &>/dev/null)  && trap dk_onError ERR  || echo "(trap dk_onError ERR) failed"
 dk_onError(){
 	exitcode=$?
 	
@@ -37,6 +38,14 @@ SUDO_EXE(){
 	echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
 }
 
+###### CMD_EXE ######
+CMD_EXE(){
+	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE=$(command -v cmd.exe) || true
+	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE="/mnt/c/Windows/System32/cmd.exe"
+	[ -e "${CMD_EXE-}" ]	&& echo "${CMD_EXE-}" || dk_onError "CMD_EXE:${CMD_EXE-} Not Found"
+	echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
+}
+
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
 	[ -e "${CYGPATH_EXE-}" ] || export CYGPATH_EXE=$(command -v cygpath) || true
@@ -49,14 +58,6 @@ WSLPATH_EXE(){
 	[ -e "${WSLPATH_EXE-}" ] || export WSLPATH_EXE=$(command -v wslpath) || true
 	[ -e "${WSLPATH_EXE-}" ] && echo "${WSLPATH_EXE}" || unset WSLPATH_EXE
 	echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
-}
-
-###### CMD_EXE ######
-CMD_EXE(){
-	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE=$(command -v cmd.exe) || true
-	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE="/mnt/c/Windows/System32/cmd.exe"
-	[ -e "${CMD_EXE-}" ]	&& echo "${CMD_EXE-}" || dk_onError "CMD_EXE:${CMD_EXE-} Not Found"
-	echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
 }
 
 ###### DKHOME_DIR ######
@@ -76,17 +77,6 @@ if [ -e "$(WSLPATH_EXE)" ]; then
 	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
 	(command -v chattr &>/dev/null) && $(SUDO_EXE) chattr +i /etc/resolv.conf
 fi
-
-
-######  USERPROFILE -> WSLPATH_EXE -> DKHOME_DIR ######
-#[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(WSLPATH_EXE)" ] && export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r'))
-
-######  USERPROFILE -> CYGPATH_EXE -> DKHOME_DIR ######
-#[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))
-
-###### HOME -> DKHOME_DIR ######
-#[ -e "${DKHOME_DIR-}" ] 	|| export DKHOME_DIR="${HOME}"
-#[ -e "${DKHOME_DIR}" ] 		&& echo "DKHOME_DIR = '${DKHOME_DIR}'" || echo "ERROR: DKHOME_DIR not found"
 
 
 

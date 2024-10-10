@@ -5,13 +5,17 @@
 # DKINIT()
 #
 DK(){
-	[ -e "${SUDO_EXE-}" ] || export SUDO_EXE=$(command -v sudo &>/dev/null) || true
-	[ -e "${SUDO_EXE-}" ] && echo "SUDO_EXE = '${SUDO_EXE}'" || unset SUDO_EXE
+	###### SUDO_EXE ######
+	SUDO_EXE(){
+		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
+		[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
+		echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
+	}
 	
     #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
     
 	###### Reload Main Script with bash ######
-    [ -z "${BASH}" ] && dkreloadWithBash ${*}
+    [ -z "${BASH-}" ] && dkreloadWithBash ${*}
     
 	############ Set Options ############
     dksetOptions
@@ -107,8 +111,8 @@ dk_download() {
     
     #dk_commandExists "wget" || dk_installPackage wget
     #dk_commandExists "curl" || dk_installPackage curl
-    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && ${SUDO_EXE} wget -P "${parentdir}" "${1}"
-    [ ! -e "${2}" ] && (command -v curl &>/dev/null) && ${SUDO_EXE} curl --silent -Lo "${2}" "${1}"
+    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && $(SUDO_EXE) wget -P "${parentdir}" "${1}"
+    [ ! -e "${2}" ] && (command -v curl &>/dev/null) && $(SUDO_EXE) curl --silent -Lo "${2}" "${1}"
     
     cd "${OLDPWD}"
 }
