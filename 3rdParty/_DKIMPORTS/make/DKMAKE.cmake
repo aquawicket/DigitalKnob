@@ -3,9 +3,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # https://packages.msys2.org/base/make
 
-#dk_depend(pacman)
-#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-
 
 if(CMAKE_MAKE_PROGRAM)
 	return()
@@ -24,8 +21,6 @@ dk_installPackage(make)
 
 if(android)
 	if(WIN_HOST)
-		#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-		#dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 	else()
 		dk_findProgram(CMAKE_MAKE_PROGRAM make)
@@ -40,33 +35,21 @@ elseif(emscripten)
 	endif()
 	
 elseif(win_arm64_clang)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANGARM64
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clangarm64/bin")
 	
 elseif(win_x86_clang)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang32/bin")
 	
 elseif(win_x86_64_clang)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG64
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")
 	
 elseif(win_x86_mingw)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-i686-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})				# MINGW32
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw32/bin")
 	
 elseif(win_x86_64_mingw)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw64/bin")
 	
 elseif(win_x86_64_ucrt)
-	#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-	#dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-make --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
 
 elseif(win_x86_msvc)

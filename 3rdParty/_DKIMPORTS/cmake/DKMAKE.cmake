@@ -190,26 +190,6 @@ if(MSYSTEM)
 	endif()
 	
 	if(NOT EXISTS ${CMAKE_EXE})
-		#dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
-		#if(win_x86_clang)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/clang32/bin/cmake.exe)
-		#elseif(win_x86_64_clang)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/clang64/bin/cmake.exe)
-		#elseif(win_arm64_clang)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/clangarm64/bin/cmake.exe)
-		#elseif(win_x86_mingw)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-i686-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/mingw32/bin/cmake.exe)
-		#elseif(win_x86_64_mingw)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/mingw64/bin/cmake.exe)
-		#elseif(win_x86_64_ucrt)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
-		#	#dk_set(CMAKE_EXE ${MSYS2_DIR}/ucrt64/bin/cmake.exe)
-		#endif()
 		dk_installPackage(cmake)
 	endif()
 	
@@ -239,15 +219,6 @@ else()
 	else()
 		dk_findProgram(CMAKE_EXE cmake)
 		if(NOT EXISTS ${CMAKE_EXE})
-			#if(MAC_HOST)
-			#	dk_command(brew install cmake)
-			#elseif(ANDROID_HOST)
-			#	dk_command(apt -y install cmake)
-			#elseif(LINUX_HOST)
-			#	dk_depend(sudo)
-			#	dk_command(${SUDO_EXE} apt-get -y install cmake)
-				
-			#endif()
 			dk_installPackage(cmake)
 			dk_findProgram(CMAKE_EXE cmake)
 		endif()
