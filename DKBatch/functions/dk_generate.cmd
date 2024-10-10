@@ -16,9 +16,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_info "##################################################################"
     %dk_call% dk_echo
     
-    %dk_call% dk_clearCmakeCache
-    %dk_call% dk_deleteTempFiles
-    
     ::if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
 	%dk_call% dk_validate DKAPPS_DIR "%dk_call% dk_DKBRANCH_DIR"
     set "TARGET_PATH=%DKAPPS_DIR%\%APP%"
@@ -136,6 +133,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::	%dk_call% dk_replaceAll "!WSL_CMAKE_ARGS!" "\" "/" WSL_CMAKE_ARGS
 	::)
 	
+	
+	
 	::###### linux_x86_64 (WSL) ######
 	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
 	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
@@ -143,9 +142,12 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	echo returned from batch bash call
 	if defined DK_SHELL %return%
 	
+	::###### Delete Cmake Cache and .tmp files ######
+	%dk_call% dk_clearCmakeCache
+    %dk_call% dk_deleteTempFiles
+	
 ::  ###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
     %dk_call% dk_info "****** CMAKE COMMAND ******"

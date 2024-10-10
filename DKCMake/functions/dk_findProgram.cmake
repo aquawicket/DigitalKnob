@@ -46,15 +46,15 @@ function(dk_findProgram VAR filename)
 	if(EXISTS ${${VAR}})
 		dk_info("FOUND ${filename} at ${${VAR}}")
 		dk_set(${VAR} "${${VAR}}")
-		dk_set(${VAR} "${${VAR}}")
 		return()
 	elseif(${VAR}_second_pass)
 		dk_error("COULD NOT FIND ${filename}")
+		dk_unset(${VAR})
 		return()
 	endif()
 	
 	#dk_notice("COULD NOT FIND ${filename}")
-	dk_set(${VAR} "${${VAR}}")
+	#dk_set(${VAR} "${${VAR}}")
 endfunction()
 
 
