@@ -5,8 +5,9 @@ Write-Host ""
 $DKSHELL = (Get-Process -Id $pid).Name
 $DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
 $DKSHELL_PATH = (get-command $DKSHELL).Path
-Write-Host "$DKSHELL Version $DKSHELL_VERSION"
-Write-Host "$DKSHELL_PATH"
+$global:ESC = "$([char]27)" 				# escape character
+Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m"
+Write-Host " $DKSHELL_PATH"
 Write-Host ""
 
 
