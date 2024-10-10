@@ -1,11 +1,11 @@
 #!/bin/sh
 ############ dk_onError trap ############
-(set -o posix &>/dev/null)			&& set -o posix			|| echo "(set -o posix) failed"
-(set -o pipefail &>/dev/null) 		&& set -o pipefail  	|| echo "(set -o pipefail) failed"  	# trace ERR through pipes
-(set -E &>/dev/null) 				&& set -E  				|| echo "(set -E) failed" 				# set -E : trace ERR through 'time command' and other functions
-(set -u &>/dev/null) 		 		&& set -u			   	|| echo "(set -u) failed" 				# set -u : exit the script if you try to use an uninitialised variable
-(set -e &>/dev/null)  	 			&& set -e  				|| echo "(set -e) failed" 				# set -e : exit the script if any statement returns a non-true
-(shopt -s extdebug &>/dev/null)     && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
+(set -o posix)			&& set -o posix			|| echo "(set -o posix) failed"
+(set -o pipefail) 		&& set -o pipefail  	|| echo "(set -o pipefail) failed"  	# trace ERR through pipes
+(set -E) 				&& set -E  				|| echo "(set -E) failed" 				# set -E : trace ERR through 'time command' and other functions
+(set -u) 		 		&& set -u			   	|| echo "(set -u) failed" 				# set -u : exit the script if you try to use an uninitialised variable
+(set -e)  	 			&& set -e  				|| echo "(set -e) failed" 				# set -e : exit the script if any statement returns a non-true
+(shopt -s extdebug)     && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
 
 #trap 'echo "Press Enter to continue..."; read' SIGUSR1
 #alias _pause='kill -s USR1 $$'
@@ -71,7 +71,7 @@ DKHOME_DIR(){
 
 ###### Net fix for WSL ######
 if [ -e "$(WSLPATH_EXE)" ]; then	
-	$(SUDO_EXE) rm /etc/resolv.conf &>/dev/null
+	[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm /etc/resolv.conf
 	$(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
 	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
