@@ -206,7 +206,7 @@ dk_generate() {
 	dk_call dk_echo "****** CMAKE COMMAND ******"
 	#dk_call dk_getNativePath ${CMAKE_EXE} NATIVE_CMAKE_EXE
 	dk_call dk_printVar CMAKE_ARGS
-	dk_call dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_call dk_echo "CMake Generation Successful" || dk_call dk_error "CMake Generation Failed"
+	dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_call dk_echo "CMake Generation Successful" || dk_call dk_error "CMake Generation Failed"
 	dk_call dk_echo
 }
 

@@ -17,18 +17,18 @@ dk_buildApp() {
 	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
 	if [ "${TYPE}" = "Debug" ] || [ "${TYPE}" = "All" ]; then	
 		if dk_call dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/Debug/CMakeCache.txt"; then
-			dk_call dk_call ${CMAKE_EXE} "--build" "${DKAPPS_DIR}/${APP}/${triple}/Debug" "--config Debug" "--verbose"
+			${CMAKE_EXE} "--build" "${DKAPPS_DIR}/${APP}/${triple}/Debug" "--config Debug" "--verbose"
 		elif dk_call dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/CMakeCache.txt"; then
-			dk_call dk_call ${CMAKE_EXE} "--build" "${DKAPPS_DIR}/${APP}/${triple}" "--config Debug" "--verbose"
+			${CMAKE_EXE} "--build" "${DKAPPS_DIR}/${APP}/${triple}" "--config Debug" "--verbose"
 		else
 			dk_call dk_error "Could not find CMakeCache.txt in ${APP}/${triple}/Debug or ${APP}/${triple}"
 		fi
 	fi
 	if [ "${TYPE}" = "Release" ] || [ "${TYPE}" = "All" ]; then
 		if dk_call dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/Release/CMakeCache.txt"; then
-			dk_call dk_call ${CMAKE_EXE} --build "${DKAPPS_DIR}/${APP}/${triple}/Release" --config Release --verbose
+			${CMAKE_EXE} --build "${DKAPPS_DIR}/${APP}/${triple}/Release" --config Release --verbose
 		elif dk_call dk_pathExists "${DKAPPS_DIR}/${APP}/${triple}/CMakeCache.txt"; then
-			dk_call dk_call ${CMAKE_EXE} --build "${DKAPPS_DIR}/${APP}/${triple}" --config Release --verbose
+			${CMAKE_EXE} --build "${DKAPPS_DIR}/${APP}/${triple}" --config Release --verbose
 		else
 			dk_call dk_error "Could not find CMakeCache.txt in ${APP}/${triple}/Release or ${APP}/${triple}"
 		fi

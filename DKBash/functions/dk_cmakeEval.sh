@@ -25,7 +25,7 @@ dk_cmakeEval() {
 	set -- "${@}" "${DKCMAKE_DIR}/DKEval.cmake"
 	
 	### call the cmake command 
-	dk_call dk_call "${CMAKE_EXE}" "${@}"
+	dk_call "${CMAKE_EXE}" "${@}"
 	
 	### get the return variables
 	if [ -n "${DKRETURN}" ]; then 

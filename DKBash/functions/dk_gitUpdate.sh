@@ -36,7 +36,7 @@ dk_gitUpdate() {
 		"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -b "${DKBRANCH}" main
 		"${GIT_EXE}" -C "${DKBRANCH_DIR}" push --set-upstream origin "${DKBRANCH}"
 	fi
-	#dk_call dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build
+	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build
 }
 
 

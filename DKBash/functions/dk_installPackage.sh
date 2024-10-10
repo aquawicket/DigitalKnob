@@ -44,7 +44,7 @@ dk_installPackage() {
 	elif dk_call dk_commandExists tce-load; then
 		dk_call tce-load -wil "${1}"     		# Tiny core linux
 	elif dk_call dk_commandExists winget; then
-		dk_call dk_call winget install "${1}"	# WinGet
+		dk_call winget install "${1}"	# WinGet
 	elif dk_call dk_commandExists xbps-install; then
 		dk_call xbps-install "${1}"				# Xbps
 	elif dk_call dk_commandExists zypper; then
