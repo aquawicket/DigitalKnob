@@ -11,35 +11,35 @@ if(clang OR mingw OR ucrt)
 	dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 endif()
 
-
+dk_installPackage(gcc)
 
 if(win_x86_clang)
-	dk_command(${PACMAN_EXE}	-S mingw-w64-clang-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
+	#dk_command(${PACMAN_EXE}	-S mingw-w64-clang-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang32/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang32/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang32/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
 elseif(win_x86_64_clang)
-	dk_command(${PACMAN_EXE}  	-S mingw-w64-clang-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
+	#dk_command(${PACMAN_EXE}  	-S mingw-w64-clang-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clang64/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clang64/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clang64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
 elseif(win_arm64_clang)
-	dk_command(${PACMAN_EXE}	-S mingw-w64-clang-aarch64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
+	#dk_command(${PACMAN_EXE}	-S mingw-w64-clang-aarch64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/clangarm64/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/clangarm64/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/clangarm64/bin/windres.exe)	# TODO:  move to DKIMPORTS/windres
 elseif(win_x86_mingw)
-	dk_command(${PACMAN_EXE}	-S mingw-w64-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
+	#dk_command(${PACMAN_EXE}	-S mingw-w64-i686-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/mingw32/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/mingw32/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/mingw32/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
 elseif(win_x86_64_mingw)
-	dk_command(${PACMAN_EXE}	-S mingw-w64-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
+	#dk_command(${PACMAN_EXE}	-S mingw-w64-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/mingw64/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/mingw64/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/mingw64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
 elseif(win_x86_64_ucrt)
-	dk_command(${PACMAN_EXE}	-S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
+	#dk_command(${PACMAN_EXE}	-S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# UCRT64
 	dk_set(GCC_C_COMPILER   	${MSYS2_DIR}/ucrt64/bin/gcc.exe)
 	dk_set(GCC_CXX_COMPILER 	${MSYS2_DIR}/ucrt64/bin/g++.exe)
 	dk_set(GCC_RC_COMPILER  	${MSYS2_DIR}/ucrt64/bin/windres.exe)		# TODO:  move to DKIMPORTS/windres
