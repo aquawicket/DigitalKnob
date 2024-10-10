@@ -7,8 +7,9 @@
 dk_assertPath() {
     dk_debugFunc 1
 	
-    [ -e ${1-} ] && return 0
-    [ -e ${!1-} ] && return 0
+    [ -e ${1} ] && return 0
+    [ -e ${!1} ] && return 0
+	
     
 	#local arg1="${path//[^[:alnum:]]/_}"
 	#[ ! -z ${!arg1-} ] && _path_=${!arg1-} || _path_=${1-}

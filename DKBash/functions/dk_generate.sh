@@ -14,17 +14,18 @@ dk_generate() {
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
-	dk_call dk_clearCmakeCache
-	dk_call dk_deleteTempFiles
-
 	dk_call dk_validate DKAPPS_DIR "dk_call dk_DKBRANCH_DIR"
 	TARGET_PATH="${DKAPPS_DIR}"/"${APP}"
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}"/"${triple}"
 	cd "${TARGET_PATH}"/"${triple}"
+	dk_assertPath DKCMAKE_DIR
+	dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
+	dk_assertPath CMAKE_SOURCE_DIR
+	dk_assertPath ${CMAKE_SOURCE_DIR}
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
-	$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
+	#$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	CMAKE_TARGET_PATH="${TARGET_PATH}"
 	#dk_call dk_printVar CMAKE_TARGET_PATH
@@ -193,6 +194,10 @@ dk_generate() {
 		cd "${DKCMAKE_DIR}"
 		dk_call dk_arrayPush CMAKE_ARGS "."
 	fi
+	
+	
+	dk_call dk_clearCmakeCache
+	dk_call dk_deleteTempFiles
 	
 	###### CMake Configure ######
 	dk_call dk_installCmake
