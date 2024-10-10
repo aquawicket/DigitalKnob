@@ -42,13 +42,15 @@ if(NOT GIT_EXE)
 		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH} COMMAND_ECHO STDOUT)
 		# setx PATH
 	elseif(ANDROID_HOST)
-		dk_command(apt -y install git)
+		#dk_command(apt -y install git)
+		dk_installPackage(git)
 	elseif(LINUX_HOST)
 		# https://stackoverflow.com/a/27469489
-		dk_depend(sudo)
-		dk_command(${SUDO_EXE} apt-get -y install git)
+		#dk_depend(sudo)
+		#dk_command(${SUDO_EXE} apt-get -y install git)
 		#dk_command(${SUDO_EXE} apt-get install apt-rdepends)
 		#dk_command(${BASH_EXE} c- "cd ${DKDOWNLOAD_DIR} & apt-get download $(apt-rdepends git|grep -v '^ ' |grep -v '^debconf-2.0$')" WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
+		dk_installPackage(git)
 	endif()
 endif()
 

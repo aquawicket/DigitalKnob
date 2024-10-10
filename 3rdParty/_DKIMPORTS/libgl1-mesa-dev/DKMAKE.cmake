@@ -9,4 +9,5 @@ endif()
 ### INSTALL ###
 dk_cd(/usr)
 dk_depend(sudo)
-dk_command(${SUDO_EXE} apt -y install libgl1-mesa-dev)
+#dk_command(${SUDO_EXE} apt -y install libgl1-mesa-dev)
+dk_installPackage(libgl1-mesa-dev)

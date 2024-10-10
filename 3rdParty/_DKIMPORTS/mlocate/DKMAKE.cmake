@@ -11,6 +11,7 @@ endif()
 
 ### INSTALL ###
 dk_cd(/usr)
-dk_depend(sudo)
-dk_command(${SUDO_EXE} apt -y install mlocate)
+#dk_depend(sudo)
+#dk_command(${SUDO_EXE} apt -y install mlocate)
+dk_installPackage(mlocate)
 dk_command(${SUDO_EXE} updatedb)

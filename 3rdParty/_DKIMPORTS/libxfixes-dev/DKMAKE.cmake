@@ -8,8 +8,10 @@ endif()
 
 ### INSTALL ###
 if(TINYCORE)
-	dk_command(tce-load -wi libXfixes-dev.tcz)
+	#dk_command(tce-load -wi libXfixes-dev.tcz)
+	dk_installPackage(libXfixes-dev.tcz)
 else()
-	dk_depend(sudo)
-	dk_command(${SUDO_EXE} apt -y install libxfixes-dev)
+	#dk_depend(sudo)
+	#dk_command(${SUDO_EXE} apt -y install libxfixes-dev)
+	dk_installPackage(libxfixes-dev)
 endif()

@@ -10,7 +10,7 @@ endif()
 if(LINUX OR RASPBERRY)
 	#dk_cd(/usr)
 	#dk_depend(sudo)
-	#dk_command(${SUDO_EXE} apt -y install libatomic)
+	#dk_installPackage(libatomic)
 
 	### LINK ###
 	#dk_include(/usr/include/atomic)

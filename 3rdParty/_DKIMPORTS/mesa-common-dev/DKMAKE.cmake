@@ -11,5 +11,6 @@ endif()
 
 ### INSTALL ###
 #dk_cd(/usr)
-dk_depend(sudo)
-dk_command(${SUDO_EXE} apt -y install mesa-common-dev)
+#dk_depend(sudo)
+#dk_command(${SUDO_EXE} apt -y install mesa-common-dev)
+dk_installPackage(mesa-common-dev)

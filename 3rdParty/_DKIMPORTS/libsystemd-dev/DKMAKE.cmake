@@ -8,8 +8,9 @@ endif()
 
 ### INSTALL ###
 #dk_cd(/usr)
-dk_depend(sudo)
-dk_command(${SUDO_EXE} apt -y install libsystemd-dev)
+#dk_depend(sudo)
+#dk_command(${SUDO_EXE} apt -y install libsystemd-dev)
+dk_installPackage(libsystemd-dev)
 
 
 ### LINK ###

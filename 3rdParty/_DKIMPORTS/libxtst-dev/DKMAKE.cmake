@@ -10,10 +10,12 @@ endif()
 ### INSTALL ###
 #dk_cd(/usr)
 if(TINYCORE)
-	dk_command(tce-load -wi libXtst-dev.tcz)
+	#dk_command(tce-load -wi libXtst-dev.tcz)
+	dk_installPackage(libXtst-dev.tcz)
 else()
-	dk_depend(sudo)
-	dk_command(${SUDO_EXE} apt -y install libxtst-dev)
+	#dk_depend(sudo)
+	#dk_command(${SUDO_EXE} apt -y install libxtst-dev)
+	dk_installPackage(libxtst-dev)
 endif()
 
 ### LINK ###
