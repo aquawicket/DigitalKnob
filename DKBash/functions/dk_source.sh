@@ -17,7 +17,8 @@ dk_source(){
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || dk_call curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh || $(true)
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "ERROR: failed to download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh  TO  ${DKBASH_FUNCTIONS_DIR}/${1}.sh" || [$(read -rp 'press enter to exit')] || exit 127;
 	
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] && ${SUDO_EXE} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
+	#echo "${SUDO_EXE-} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh"
+	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] && ${SUDO_EXE-} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] && . ${DKBASH_FUNCTIONS_DIR}/${1}.sh
 }
 

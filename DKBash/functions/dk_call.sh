@@ -5,22 +5,29 @@
 ##################################################################################
 # dk_call(<command args>)
 #
-#
 dk_call(){
-	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1 99
+	dk_debugFunc 1 99
 	
 	if ! (command -v ${1} &>/dev/null); then
-		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then	# Is it a dk_ prefixed function?
-			#builtin echo "dk_source ${1}"
+		
+		# Is it a dk_ prefixed function?
+		if [[ "${1}" =~ ^dk_[a-zA-Z0-9]+ ]]; then
 			dk_source ${1}	
-		else	# Not a dk_ prefixed function								
+		
+		# Not a dk_ prefixed function
+		else								
 			(command -v dk_installPackage &>/dev/null) || dk_source dk_installPackage
 			dk_installPackage ${1}
 		fi
-		(command -v ${1} &>/dev/null) || dk_fatal "${1}: command not found"
+		
+		
+		if ! (command -v ${1} &>/dev/null); then
+			(command -v dk_fatal &>/dev/null) || dk_source dk_fatal
+			dk_fatal "${1}: command not found"
+		fi
 	fi
 	
-	#echo "dk_call $*"
+	#echo "dk_call: $*" &>2
 	"${@}"
 }
 

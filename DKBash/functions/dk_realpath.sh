@@ -9,23 +9,23 @@
 #    C: 	https://pubs.opengroup.org/onlinepubs/9699919799/functions/realpath.html
 #
 dk_realpath(){
-	(command -v dk_debugFunc) && dk_debugFunc 1 2
+	dk_debugFunc 1 2
 	#[ ${#} -lt 1 ] && dk_error "${FUNCNAME}(${*}): not enough arguments"
 	#[ ${#} -gt 2 ] && dk_error "${FUNCNAME}(${*}): too many arguments"
 	
 	local _realpath_=""
-	if (command -v realpath); then
+	if (command -v realpath &>/dev/null); then
 		_realpath_=$(realpath "${1}")
-	elif (command -v readlink); then
+	elif (command -v readlink &>/dev/null); then
 		$(dk_readlink -f "${1}") && _realpath_=$(dk_readlink -f "${1}") || _realpath_=$(dk_readlink "${1}") #dk_fixme("MacOS readlink has no -f parameter")
 	else	
 		_realpath_=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
 	fi
 	
 	### return value ###
-	dk_printVar _realpath_
+	#dk_call dk_printVar _realpath_
 	[ ${#} -gt 1 ] && eval "${2}=${_realpath_}" && return  # return value when using rtn_var parameter 
-	dk_return ${_realpath_}; return						  # return value when using command substitution 
+	dk_return ${_realpath_}; return			       		   # return value when using command substitution 
 }
 
 

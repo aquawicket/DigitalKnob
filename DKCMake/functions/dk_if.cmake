@@ -15,7 +15,16 @@ macro(dk_if)
 	set(n 0)
 	unset(argv)
 	list(APPEND argv ${ARGV})
-	list(POP_BACK argv code)
+	
+	if(CMAKE_VERSION VERSION_GREATER "3.15")
+		list(POP_BACK argv code)	# POP_BACK cmake 3.15.
+	else()
+		list(LENGTH argv argv_length)
+		math(EXPR argv_last_index "${argv_length} - 1")
+		list(GET argv ${argv_last_index} code)
+		list(REMOVE_AT argv ${argv_last_index})
+	endif()
+	
 	foreach(arg ${argv})
 		set(arg${n} ${arg})
 		math(EXPR n "${n}+1")
