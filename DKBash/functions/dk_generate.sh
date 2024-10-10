@@ -19,11 +19,11 @@ dk_generate() {
 	#dk_call dk_printVar TARGET_PATH
 	dk_call dk_makeDirectory "${TARGET_PATH}"/"${triple}"
 	cd "${TARGET_PATH}"/"${triple}"
-	dk_assertPath DKCMAKE_DIR
-	dk_assertPath ${DKCMAKE_DIR}
+	dk_call dk_assertPath DKCMAKE_DIR
+	dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
-	dk_assertPath CMAKE_SOURCE_DIR
-	dk_assertPath ${CMAKE_SOURCE_DIR}
+	dk_call dk_assertPath CMAKE_SOURCE_DIR
+	dk_call dk_assertPath ${CMAKE_SOURCE_DIR}
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	#$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
@@ -71,9 +71,9 @@ dk_generate() {
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
 	if ! dk_call dk_defined WSLENV; then
-		dk_call dk_arrayPush CMAKE_ARGS "-S=${CMAKE_SOURCE_DIR}"
+		dk_call dk_arrayPush CMAKE_ARGS "-S" "${CMAKE_SOURCE_DIR}"
 	fi
-	dk_call dk_arrayPush CMAKE_ARGS "-B=${CMAKE_BINARY_DIR}"
+	dk_call dk_arrayPush CMAKE_ARGS "-B" "${CMAKE_BINARY_DIR}"
 	
 	############ CMake Options ############
     #dk_call dk_arrayPush CMAKE_ARGS "-DCMAKE_VERBOSE_MAKEFILE=1"
