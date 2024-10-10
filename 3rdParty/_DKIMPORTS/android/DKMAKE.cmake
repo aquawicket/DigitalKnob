@@ -1,6 +1,5 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # not found on Android host devices the first time round. 
 # add hints to point to the library in the ndk
 

@@ -5,5 +5,6 @@ dk_load(dk_builder)
 
 # https://wiki.termux.com/wiki/ASM
 if(ANDROID_HOST)
-	dk_command(pkg install binutils)
+	#dk_command(pkg install binutils)
+	dk_installPackage(binutils)
 endif()

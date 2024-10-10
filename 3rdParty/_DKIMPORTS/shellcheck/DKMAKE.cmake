@@ -5,5 +5,6 @@ dk_load(dk_builder)
 # https://github.com/koalaman/shellcheck/archive/refs/heads/master.zip
 
 
-###### TERMUX ######
-pkg install shellcheck
+
+#pkg install shellcheck
+dk_installPackage(shellcheck)

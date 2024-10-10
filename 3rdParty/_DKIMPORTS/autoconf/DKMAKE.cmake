@@ -3,4 +3,5 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # https://www.gnu.org/software/autoconf
 
-ANDROID_HOST_dk_command(pkg install autoconf)
+#ANDROID_HOST_dk_command(pkg install autoconf)
+dk_installPackage(autoconf)
