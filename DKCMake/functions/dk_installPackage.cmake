@@ -77,16 +77,22 @@ function(dk_installPackage package)
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE)
 	if(PACMAN_EXE)
 		if(win_x86_clang)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})		# CLANG32
 		elseif(win_x86_64_clang)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANG64
 		elseif(win_arm64_clang)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-clang-aarch64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# CLANGARM64
 		elseif(win_x86_mingw)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW32
 		elseif(win_x86_64_mingw)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})			# MINGW64
 		elseif(win_x86_64_ucrt)
+			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			execute_process(COMMAND ${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})	# UCRT64
 		else()
 			execute_process(COMMAND ${PACMAN_EXE} -S ${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})							# DEFAULT

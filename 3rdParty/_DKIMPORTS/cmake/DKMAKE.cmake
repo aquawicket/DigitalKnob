@@ -1,5 +1,4 @@
 #!/usr/bin/cmake -P
-set(DKCMAKE_FUNCTIONS_DIR_ "/mnt/c/Users/Administrator/digitalknob/Development/DKCMake/functions/")
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://cmake.org
 # https://github.com/Kitware/CMake

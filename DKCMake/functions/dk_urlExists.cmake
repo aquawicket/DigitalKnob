@@ -9,7 +9,7 @@ function(dk_urlExists url rtn_var)
     dk_debugFunc("\${ARGV}")
     
 	#for /f "usebackq tokens=*" %%f in (`curl -sI -o nul -w "%%{http_code}" "%~1"`) do set "httpCode=%%f"
-	file(DOWNLOAD ${url} STATUS dl_status LOG dl_log)
+	file(DOWNLOAD ${url} STATUS dl_status) # LOG dl_log)
 	dk_printVar(dl_status)
 	dk_printVar(dl_log)
 	list(GET dl_status 0 httpCode)
