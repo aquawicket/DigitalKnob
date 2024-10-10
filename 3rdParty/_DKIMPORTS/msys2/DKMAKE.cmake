@@ -49,12 +49,10 @@ endif()
 
 if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")	
-	#dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
-	
 	### Update with pacman ###
-	dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
-	dk_assertPath(PACMAN_EXE)
-	execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+	#execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
+	#dk_installPackage(update)
 	
 	### Install toolchain ###
 	if(MSYSTEM)
@@ -65,21 +63,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 		dk_exportVars(PATH "$ENV{PATH}")
 
-		#if(win_x86_clang)					
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#elseif(win_x86_64_clang)	
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#elseif(win_arm64_clang)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#elseif(win_x86_mingw)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-i686-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#elseif(win_x86_64_mingw)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#elseif(win_x86_64_ucrt)
-		#	dk_command(${PACMAN_EXE} -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
-		#endif()
 		dk_installPackage(toolchain)
-		
 	else()
 		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
 	endif()

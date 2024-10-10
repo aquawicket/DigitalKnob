@@ -23,7 +23,7 @@ function(dk_installPackage package)
 #	
 	dk_info("dk_installPackage(): installing ${package}. . .")
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	set(ENV{DKSHELL} sh)
+	set(ENV{DKSHELL} sh) # HACK
 
 	### Alpine Package Keeper (alpine linux) ###
 	message("$ENV{DKSHELL} -c 'command -v apk'")
@@ -93,12 +93,15 @@ function(dk_installPackage package)
 
 	### Msys2 ###
 	if(NOT PACMAN_EXE)
-		execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+		#execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+		dk_validate(MSYS2 "dk_depend(msys2)")
+		dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 	endif()
-	#dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 	if(PACMAN_EXE)
-		dk_printVar(PACMAN_EXE)
+		dk_assertPath(PACMAN_EXE)
 		dk_validate(DKDONWLOAD_DIR "dk_DIGITALKNOB_DIR()")
+		#dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
+		execute_process(COMMAND ${PACMAN_EXE} -Syu --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 		if(win_x86_clang)
 			# dk_delete("${MSYS2_DIR}/var/lib/pacman/db.lck" NO_HALT)
 			message("${PACMAN_EXE} -S mingw-w64-clang-i686-${package} --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}")
