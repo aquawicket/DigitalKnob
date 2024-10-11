@@ -8,7 +8,7 @@
 dk_pickOs() {
 	dk_debugFunc 0
 
-	dk_echo
+	dk_call dk_echo
 	dk_echo "${APP-} ${triple-} ${TYPE-}"
 	dk_echo	""
     dk_echo " 1) ${host_triple-}"
@@ -126,13 +126,13 @@ dk_pickOs() {
 	elif [ "${choice}" = "35" ]; then
 		triple="win_x86_64_msvc"
 	elif [ "${choice}" = "36" ]; then
-		dk_clearScreen
+		dk_call dk_clearScreen
 	elif [ "${choice}" = "37" ]; then
 		APP=
 	elif [ "${choice}" = "38" ]; then
-		dk_exit 0
+		dk_call dk_exit 0
 	else
-		dk_warning "invalid selection"
+		dk_call dk_warning "invalid selection"
 	fi
 }
 
