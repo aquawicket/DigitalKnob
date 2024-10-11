@@ -8,15 +8,29 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_urlExists url rtn_var)
     dk_debugFunc("\${ARGV}")
     
-	#for /f "usebackq tokens=*" %%f in (`curl -sI -o nul -w "%%{http_code}" "%~1"`) do set "httpCode=%%f"
-	file(DOWNLOAD ${url} STATUS dl_status) # LOG dl_log)
-	dk_printVar(dl_status)
-	dk_printVar(dl_log)
-	list(GET dl_status 0 httpCode)
+	if(CMAKE_VERSION VERSION_LESS 3.19)
+		file(DOWNLOAD 
+			"${url}"
+			"${DKCACHE_DIR}/dk_urlExists.temp"
+			STATUS status
+			TIMEOUT 2
+		)
+		dk_delete("${DKCACHE_DIR}/dk_urlExists.temp")
+	else()
+		file(DOWNLOAD 
+			"${url}"
+			STATUS status
+			TIMEOUT 2
+		)
+	endif()
+	dk_printVar(status)
 
-	dk_echo("httpCode = ${httpCode}")
+	list(GET status 0 httpCode)
+	dk_printVar(httpCode)
     if(${httpCode} EQUAL 0)
-        set(${rtn_var} 1 PARENT_SCOPE)	
+        set(${rtn_var} 1 PARENT_SCOPE)
+	elseif(${httpCode} EQUAL 28)
+		set(${rtn_var} 1 PARENT_SCOPE)
     else()
 		set(${rtn_var} 0 PARENT_SCOPE)
 	endif()
@@ -32,7 +46,8 @@ function(DKTEST)
     dk_debugFunc("\${ARGV}")
 
     dk_echo()
-    set(url http://www.google.com/index.html)
+    #set(url http://www.google.com/index.html)
+	set(url https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
     dk_urlExists(${url} url_exists)
     if(url_exists)
 		dk_echo("${url} exists") 

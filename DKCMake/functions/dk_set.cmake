@@ -15,13 +15,13 @@ function(dk_set variable)# value)
 	dk_debugFunc("\${ARGV}")
 	
 	if(${ARGC} LESS 1)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): not enough arguments")
+		dk_fatal("dk_set(${ARGV}): not enough arguments")
 	endif()
 	if(${ARGC} LESS 2)
-		dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): expecting more arguments")
+		dk_warning("dk_set(${ARGV}): expecting more arguments")
 	endif()
 	#if(${ARGC} GREATER 2)
-	#	dk_warning("${CMAKE_CURRENT_FUNCTION}(${ARGV}): expecting less arguments")
+	#	dk_warning("dk_set(${ARGV}): expecting less arguments")
 	#endif()
 	
 	set(${ARGV} CACHE INTERNAL "" FORCE) # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
