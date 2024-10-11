@@ -10,7 +10,7 @@ dk_generate() {
 
 	dk_call dk_echo
 	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating ${APP} - ${triple} - ${TYPE} - ${DKLEVEL-}"
+	dk_call dk_echo "     Generating ${APP-} - ${triple-} - ${TYPE-} - ${DKLEVEL-}"
 	dk_call dk_echo "##################################################################"
 	dk_call dk_echo
 
