@@ -19,8 +19,10 @@ dk_installPackage() {
 	dk_call dk_commandExists ${1} && return $(true)
 	
 	dk_call dk_info "installing ${1}. . ."
-	if dk_call dk_commandExists apk; then
-		dk_call apk add "${1}"					# Alpine Package Keeper (alpine linux)
+	if (command -v apk); then
+		echo "apk add ${1}"
+		apk add "${1}"					# Alpine Package Keeper (alpine linux)
+		return
 	elif dk_call dk_commandExists apt-get; then
 		dk_call apt-get -y install "${1}"		# Apt-get (debian)
 	elif dk_call dk_commandExists apt; then	

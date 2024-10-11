@@ -26,7 +26,7 @@ DK(){
     #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
     
 	###### Reload Main Script with bash ######
-    [ -z "${BASH-}" ] && dkreloadWithBash ${*}
+    dkreloadWithBash ${*}
     
 	############ Set Options ############
     dksetOptions
@@ -81,11 +81,10 @@ DK(){
 # dkreloadWithBash()
 #
 dkreloadWithBash(){
+	[ -n "${BASH-}" ] && return
 	(command -v bash &>/dev/null) || dk_installPackage bash
 	(command -v bash &>/dev/null) || echo "ERROR: bash not found" || exit 1
-	
 	export BASH_EXE=$(command -v bash)
-	echo "BASH_EXE = ${BASH_EXE}"
 	echo "Reloading ${0} with ${BASH_EXE} . . ."
 	unset DKINIT
 	exec ${BASH_EXE} "${0}"
@@ -195,22 +194,22 @@ dksetOptions(){
 dk_installPackage() {
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk)           					&& dk_installPackage="apk add"				# Alpine Package Keeper (alpine linux)
-	(command -v apt-get &>/dev/null)       		&& dk_installPackage="apt-get -y install"	# Apt-get (debian)
-	(command -v apt &>/dev/null)           		&& dk_installPackage="apt -y install"		# Apt (debian)
-	(command -v brew &>/dev/null)          		&& dk_installPackage="brew install"			# Homebrew (MacOS)
-	(command -v dnf &>/dev/null)           		&& dk_installPackage="dnf install"			# Dnf (yum)
-	(command -v emerge &>/dev/null)        		&& dk_installPackage="emerge"				# Portage
-	(command -v nix-env &>/dev/null)       		&& dk_installPackage="nix-env -i"			# Nix
-	(command -v ohpm &>/dev/null)          		&& dk_installPackage="ohpm install"			# Ohpm
-	(command -v pkg &>/dev/null)           		&& dk_installPackage="pkg install"			# Termux
-	(command -v pacman &>/dev/null)        		&& dk_installPackage="pacman -S"			# Pacman
-	(command -v swupd &>/dev/null)         		&& dk_installPackage="swupd bundle-add"		# Swupd
-	(command -v tce-load &>/dev/null)      		&& dk_installPackage="tce-load -wil"    	# Tiny core linux
-	(command -v winget &>/dev/null)        		&& dk_installPackage="winget install"		# WinGet
-	(command -v xbps-install &>/dev/null)		&& dk_installPackage="xbps-install"			# Xbps
-	(command -v zypper &>/dev/null)				&& dk_installPackage="zypper in"			# Zypper
-	(command -v dk_installPackage &>/dev/null)  && echo "No package managers found." && exit 1 
+    (command -v apk)           					&& apk add ${1} && return				# Alpine Package Keeper (alpine linux)
+	(command -v apt-get &>/dev/null)       		&& apt-get -y install ${1} && return	# Apt-get (debian)
+	(command -v apt &>/dev/null)           		&& apt -y install ${1} && return		# Apt (debian)
+	(command -v brew &>/dev/null)          		&& brew install ${1} && return			# Homebrew (MacOS)
+	(command -v dnf &>/dev/null)           		&& dnf install ${1} && return			# Dnf (yum)
+	(command -v emerge &>/dev/null)        		&& merge ${1} && return					# Portage
+	(command -v nix-env &>/dev/null)       		&& nix-env -i ${1} && return			# Nix
+	(command -v ohpm &>/dev/null)          		&& ohpm install ${1} && return			# Ohpm
+	(command -v pkg &>/dev/null)           		&& pkg install ${1} && return			# Termux
+	(command -v pacman &>/dev/null)        		&& pacman -S ${1} && return				# Pacman
+	(command -v swupd &>/dev/null)         		&& swupd bundle-add ${1} && return		# Swupd
+	(command -v tce-load &>/dev/null)      		&& tce-load -wil ${1} && return 	   	# Tiny core linux
+	(command -v winget &>/dev/null)        		&& winget install ${1} && return		# WinGet
+	(command -v xbps-install &>/dev/null)		&& xbps-install ${1} && return			# Xbps
+	(command -v zypper &>/dev/null)				&& zypper in ${1} && return				# Zypper
+	(command -v dk_installPackage &>/dev/null)  && echo "ERROR: No package managers found." && exit 1 
 
 	${dk_installPackage} ${1}
 	(command -v ${1} &>/dev/null) || echo "ERROR: ${1}: command not found" || exit 1
