@@ -161,7 +161,7 @@ dk_configure(${LIBXML2}
 	-DLIBXML2_WITH_PATTERN=ON			# Add the xmlPattern selection interface ON
 	-DLIBXML2_WITH_PROGRAMS=OFF			# Build programs ON
 	-DLIBXML2_WITH_PUSH=ON				# Add the PUSH parser interfaces ON
-	-DLIBXML2_WITH_PYTHON=OFF	#${PYTHON}		# Build Python bindings ON
+	-DLIBXML2_WITH_PYTHON=OFF #${PYTHON}		# Build Python bindings ON
 	-DLIBXML2_WITH_READER=ON			# Add the xmlReader parsing interface ON
 	-DLIBXML2_WITH_REGEXPS=ON			# Add Regular Expressions support ON
 	-DLIBXML2_WITH_SAX1=ON				# Add the older SAX1 interface ON

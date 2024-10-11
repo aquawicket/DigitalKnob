@@ -26,6 +26,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
+	dk_disable(libxml2)
+endif()
 dk_disable(glfw)
 dk_disable(smpeg2)					# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
 
