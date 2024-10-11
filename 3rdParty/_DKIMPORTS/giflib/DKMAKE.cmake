@@ -8,7 +8,9 @@ dk_load(dk_builder)
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
 ### DEPEND ###
-WIN_dk_depend(msys2)
+if(WIN)
+	dk_depend(msys2)
+endif()
 dk_depend(autotools)
 #dk_depend(gcc)
 
@@ -32,11 +34,15 @@ if(GIFLIB_USE_CMAKE)
 		dk_libRelease	(${GIFLIB_RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
 	endif()
 	
+	
 	### 3RDPARTY LINK ###
 	dk_append			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2})
-	DEBUG_dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
-	RELEASE_dk_append	(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
-
+	if(DEBUG)
+		dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	endif()
+	if(RELEASE)
+		dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	endif()
 	dk_configure		(${GIFLIB_DIR})
 	dk_build			(${GIFLIB_DIR} giflib)	
 	
@@ -54,8 +60,12 @@ else()
 	dk_libRelease		(${GIFLIB_RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
 
 	### 3RDPARTY LINK ###
-	DEBUG_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
-	RELEASE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	if(DEBUG)
+		dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_DEBUG})
+	endif()
+	if(RELEASE)
+		dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2} -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
+	endif()
 	
 	### GENERATE / CONFIGURE ###
 	dk_cd			(${GIFLIB_DIR})
