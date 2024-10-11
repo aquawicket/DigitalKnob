@@ -11,10 +11,10 @@ dk_deleteTempFiles() {
 	dk_call dk_info "Deleting .TMP files . . ."
 	
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-#	rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.tmp)
-#	rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.TMP)
-#	find "${DKBRANCH_DIR}" -name "*.tmp" -delete
-#	find "${DKBRANCH_DIR}" -name "*.TMP" -delete
+	rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.tmp)
+	rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.TMP)
+	find "${DKBRANCH_DIR}" -name "*.tmp" -delete
+	find "${DKBRANCH_DIR}" -name "*.TMP" -delete
 }
 
 

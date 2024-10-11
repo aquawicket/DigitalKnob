@@ -133,11 +133,11 @@ function(dk_installPackage package)
 	endif()
 	
 	### WinGet ###
-#	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-#	if(WINGET_EXE)
-#		execute_process(COMMAND winget install ${package})
-#		return()
-#	endif()
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v winget" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(WINGET_EXE)
+		execute_process(COMMAND winget install ${package})
+		return()
+	endif()
 	
 	### Xbps ###
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v xbps-install" OUTPUT_VARIABLE WINGET_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)

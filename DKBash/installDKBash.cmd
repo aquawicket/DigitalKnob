@@ -39,7 +39,6 @@ if "%~1" neq "" (goto runDKBash)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
 	
-	
 	::###### run script ######
 	::"%GITBASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
 	"%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
