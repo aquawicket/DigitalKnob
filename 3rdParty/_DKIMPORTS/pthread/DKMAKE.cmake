@@ -2,8 +2,10 @@
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
-LINUX_dk_lib		(pthread)
-RASPBERRY_dk_lib	(pthread)
+
+if(LINUX OR RASPBERRY)
+	dk_lib(pthread)
+endif()
 
 
 # MSYS2 (-lpthread)
