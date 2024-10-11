@@ -5,10 +5,10 @@ dk_load(dk_builder)
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python
 
-ANDROID_HOST_dk_set (PYTHON3_IMPORT python)
-LINUX_HOST_dk_set	(PYTHON3_IMPORT python3)
-MAC_HOST_dk_set 	(PYTHON3_IMPORT https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)
-WIN_HOST_dk_set		(PYTHON3_IMPORT https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)
+dk_if(ANDROID_HOST  "dk_set(PYTHON3_IMPORT python)")
+dk_if(LINUX_HOST 	"dk_set(PYTHON3_IMPORT python3)")
+dk_if(MAC_HOST 		"dk_set(PYTHON3_IMPORT https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg)")
+dk_if(WIN_HOST 		"dk_set(PYTHON3_IMPORT https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip)")
 dk_importVariables	("${PYTHON3_IMPORT}" PLUGIN_VAR_PREFIX)
 
 if(ANDROID_HOST)

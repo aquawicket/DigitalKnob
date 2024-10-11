@@ -32,9 +32,12 @@ else()
 	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.a		LIBLZMA_LIBRARY_DEBUG)
 	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.a	LIBLZMA_LIBRARY_RELEASE)
 endif()
-DEBUG_dk_set		(LIBLZMA_LIBRARY  				${LIBLZMA_LIBRARY_DEBUG})
-RELEASE_dk_set		(LIBLZMA_LIBRARY				${LIBLZMA_LIBRARY_RELEASE})
-
+if(DEBUG)
+	dk_set			(LIBLZMA_LIBRARY  				${LIBLZMA_LIBRARY_DEBUG})
+endif()
+if(RELEASE)
+	dk_set			(LIBLZMA_LIBRARY				${LIBLZMA_LIBRARY_RELEASE})
+endif()
 
 
 ### 3RDPARTY LINK ###

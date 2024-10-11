@@ -6,7 +6,10 @@ if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libasound2-dev)
 	dk_return()
 endif()
-
+if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
+	dk_undepend(libasound2-dev)
+	dk_return()
+endif()
 
 ### INSTALL ###
 dk_cd(/usr)

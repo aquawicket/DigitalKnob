@@ -23,15 +23,16 @@ dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3
 
 ### LINK ###
 if(MSVC)
-	WIN_dk_define	(DUK_F_VBCC)
+	if(WIN)
+		dk_define	(DUK_F_VBCC)
+	endif()
 endif()
-ANDROID_dk_define	(DUK_F_32BIT_PTRS)
+if(ANDROID)
+	dk_define		(DUK_F_32BIT_PTRS)
+endif()
 dk_include			(${DUKTAPE_DIR}/src)
 
-#UNIX_dk_libDebug	(${DUKTAPE_DEBUG_DIR}/libduktape.a)
-#UNIX_dk_libRelease	(${DUKTAPE_RELEASE_DIR}/libduktape.a)
-#WIN_dk_libDebug	(${DUKTAPE_DEBUG_DIR}/duktape.lib)
-#WIN_dk_libRelease	(${DUKTAPE_RELEASE_DIR}/duktape.lib)
+
 ## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
 	dk_libDebug		(${DUKTAPE_DEBUG_DIR}/duktape.lib)
