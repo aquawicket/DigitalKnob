@@ -9,11 +9,11 @@ dk_load(dk_builder)
 
 
 
-dk_depend(pacman)
-
-MAC_HOST_dk_queueCommand(brew install autogen)
-MAC_HOST_dk_queueCommand(brew install autoconf)
-MAC_HOST_dk_queueCommand(brew install automake)
+if(MAC_HOST)
+	dk_queueCommand(brew install autogen)
+	dk_queueCommand(brew install autoconf)
+	dk_queueCommand(brew install automake)
+endif()
 
 
 if(CLANG OR MINGW OR UCRT)
