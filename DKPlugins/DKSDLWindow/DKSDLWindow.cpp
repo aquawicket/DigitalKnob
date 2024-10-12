@@ -77,7 +77,7 @@ bool DKSDLWindow::Init(){
     DKString sdl_renderer;
     DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[SDL_RENDERER]", sdl_renderer);
     DKINFO("settings.txt: [SDL_RENDERER] = " + sdl_renderer + "\n");
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0)  //| SDL_INIT_AUDIO
         return DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
     DKString title;
     DKFile::GetAppName(title);

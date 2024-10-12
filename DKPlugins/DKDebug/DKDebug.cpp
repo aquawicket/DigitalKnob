@@ -155,20 +155,12 @@ static void InitUnhandledExceptionFilter(){
 #endif //WIN
 
 // https://panthema.net/2008/0901-stacktrace-demangled/
-#if !WIN && !ANDROID
-#ifdef __has_include
-#	if __has_include(<execinfo.h>) // && __cplusplus >= 201703L 
-#		include <filesystem>
-#	else
-		static_assert(false, "filesystem unavalable");
-#	endif
-#else
-	static_assert(false, "__has_include not supported");
-#endif
+#if __has_include(<execinfo.h>)
+#include <execinfo.h>
+
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames = 63){
 	DKDEBUGFUNC(out, max_frames);
 	DKString logfile = DKFile::local_assets+"log.txt";
@@ -233,7 +225,7 @@ bool DKDebug::Init(){
 #endif
 	InitUnhandledExceptionFilter();
 #endif
-#if !WIN && !ANDROID
+#if __has_include(<execinfo.h>)
 	signal(SIGABRT, handler);
 	signal(SIGSEGV, handler);
 	signal(SIGBUS,  handler);

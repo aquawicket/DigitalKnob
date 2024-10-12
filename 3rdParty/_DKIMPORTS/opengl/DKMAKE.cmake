@@ -21,7 +21,7 @@ endif()
 
 
 if(LINUX OR RASPBERRY)
-	dk_depend(mesa3d)
+	dk_depend(mesa)
 	dk_depend(libgl1-mesa-dev)
 
 	find_package(OpenGL REQUIRED)
