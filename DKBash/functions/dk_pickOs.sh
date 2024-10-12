@@ -8,10 +8,12 @@
 dk_pickOs() {
 	dk_debugFunc 0
 
+	dk_call dk_validate host_triple "dk_call dk_host_triple" 
+	
 	dk_call dk_echo
 	dk_echo "${APP-} ${triple-} ${TYPE-}"
 	dk_echo	""
-    dk_echo " 1) ${host_triple-}"
+    dk_echo " 1) ${host_triple}"
 	dk_echo
 	dk_echo " 2) Android arm32"
 	dk_echo " 3) Android arm64"
