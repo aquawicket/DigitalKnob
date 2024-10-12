@@ -11,6 +11,7 @@ function(dk_callDKPowershell func rtn_var) #args
 	dk_debug("dk_callDKPowershell(${ARGV}).cmake")
 	
     ### get required variables ###
+	dk_printVar(POWERSHELL_EXE)
     find_program(POWERSHELL_EXE powershell.exe)
 	
 	
@@ -41,7 +42,7 @@ function(dk_callDKPowershell func rtn_var) #args
     ### Call DKCmake function ###
     #set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=${DKPOWERSHELL_FUNCTIONS_DIR};" "\$env:DKSCRIPT_EXT=${DKSCRIPT_EXT};" . "\${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
 	set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$DKSCRIPT_EXT='${DKSCRIPT_EXT}';\n . ${DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;\n ${func} ${ARGN}")
-    dk_echo("${DKCMAKE_COMMAND}")
+    dk_echo("${DKPOWERSHELL_COMMAND}")
     execute_process(COMMAND ${DKPOWERSHELL_COMMAND} WORKING_DIRECTORY "${DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
 
