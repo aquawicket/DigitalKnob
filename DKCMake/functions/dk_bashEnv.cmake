@@ -74,8 +74,14 @@ function(dk_bashEnv)
 	
 	### CALL BASH_EXE WITH BASH_COMMANDS ###
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
+	
 	dk_depend(bash)
+	#dk_assertVar(BASH_EXE)
+	if(NOT BASH_EXE)
+		set(BASH_EXE bash)
+	endif()
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
+	#execute_process(COMMAND ${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS})
 
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)

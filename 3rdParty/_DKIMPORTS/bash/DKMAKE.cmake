@@ -60,6 +60,11 @@ if(TINYCORE)
 endif()
 
 
-if(NOT EXISTS ${BASH_EXE})
-	dk_error("BASH_EXE is not found")
+if(NOT BASH_EXE)
+	set(BASH_EXE bash CACHE INTERNAL "")
+	dk_warning("BASH_EXE is not found. BASH_EXE set to 'bash'")
 endif()
+
+#if(NOT EXISTS ${BASH_EXE})
+#	dk_error("BASH_EXE is not found")
+#endif()
