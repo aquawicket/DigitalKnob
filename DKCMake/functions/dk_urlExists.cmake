@@ -13,14 +13,13 @@ function(dk_urlExists url rtn_var)
 			"${url}"
 			"${DKCACHE_DIR}/dk_urlExists.temp"
 			STATUS status
-			TIMEOUT 2
+			##TIMEOUT 2
 		)
 		dk_delete("${DKCACHE_DIR}/dk_urlExists.temp")
 	else()
 		file(DOWNLOAD 
 			"${url}"
 			STATUS status
-			TIMEOUT 2
 		)
 	endif()
 	dk_printVar(status)

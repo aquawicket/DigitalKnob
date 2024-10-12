@@ -43,8 +43,8 @@ dk_set(ANDROID_NDK_BUILD 		"23.2.8568313")
 dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
 dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
 dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
-dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
-
+#dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
+dk_set(ANDROID_NDK_ANDROID_DL https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip)
 ### r24 ###
 #dk_set(ANDROID_NDK_VERSION 	r24)
 #dk_set(ANDROID_NDK_BUILD 		24.0.8215888)
