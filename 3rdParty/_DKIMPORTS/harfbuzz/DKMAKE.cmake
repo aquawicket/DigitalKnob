@@ -14,17 +14,20 @@ dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e3f50fcd582f2ee166
 
 
 ### LINK ###
-dk_include				(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
-if(MSVC)
-	WIN_dk_libDebug		(${HARFBUZZ_DEBUG_DIR}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
-	WIN_dk_libRelease	(${HARFBUZZ_RELEASE_DIR}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
+dk_include			(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
+if(MSVC AND WIN)
+	dk_libDebug		(${HARFBUZZ_DEBUG_DIR}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
+	dk_libRelease	(${HARFBUZZ_RELEASE_DIR}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
 else()
-	dk_libDebug			(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
-	dk_libRelease		(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
+	dk_libDebug		(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
+	dk_libRelease	(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
 endif()
-DEBUG_dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_DEBUG_LIBRARY})
-RELEASE_dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_RELEASE_LIBRARY})
-
+if(DEBUG)
+	dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_DEBUG_LIBRARY})
+endif()
+if(RELEASE)
+	dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_RELEASE_LIBRARY})
+endif()
 
 ### GENERATE ###
 dk_configure(${HARFBUZZ_DIR} 
