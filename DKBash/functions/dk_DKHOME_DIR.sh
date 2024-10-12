@@ -11,7 +11,7 @@ dk_DKHOME_DIR() {
     [ -e "${DKHOME_DIR-}" ] && return 0
     	
 	###### CMD_EXE ######
-	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe)
+	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe) || $(true)
 	[ ! -e "${CMD_EXE}" ]	&& export CMD_EXE="C:/Windows/System32/cmd.exe"
 	[ ! -e "${CMD_EXE}" ]	&& unset CMD_EXE
 	[   -e "${CMD_EXE-}" ]	&& dk_call dk_printVar CMD_EXE
