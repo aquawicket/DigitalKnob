@@ -18,16 +18,16 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include				(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
-if(MSVC)
-	WIN_dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
-	WIN_dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
+dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
+if(WIN AND MSVC)
+	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
 elseif(ANDROID)
-	dk_libDebug			(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease		(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease		(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 
@@ -54,7 +54,7 @@ if(MSVC)
 else()
 	dk_configure(${SDL_MIXER_DIR} 
 	#-DCMAKE_POSITION_INDEPENDENT_CODE=ON	# "Build static libraries with -fPIC" ON
-	#-DSDL2MIXER_CMD=OFF					# "Support an external music player" ${sdl2mixer_cmd_default}
+	-DSDL2MIXER_CMD=OFF						# "Support an external music player" ${sdl2mixer_cmd_default}
 	-DSDL2MIXER_DEPS_SHARED=OFF				# "Default value for loading dependencies dynamically" ON
 	-DSDL2MIXER_FLAC=${FLAC} 				# "Enable FLAC music" ON
 	-DSDL2MIXER_INSTALL=OFF					# "Enable SDL2mixer install target" ON

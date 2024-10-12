@@ -156,7 +156,15 @@ static void InitUnhandledExceptionFilter(){
 
 // https://panthema.net/2008/0901-stacktrace-demangled/
 #if !WIN && !ANDROID
-#include <execinfo.h>
+#ifdef __has_include
+#	if __has_include(<execinfo.h>) // && __cplusplus >= 201703L 
+#		include <filesystem>
+#	else
+		static_assert(false, "filesystem unavalable");
+#	endif
+#else
+	static_assert(false, "__has_include not supported");
+#endif
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
