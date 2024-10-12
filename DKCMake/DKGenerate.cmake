@@ -868,6 +868,7 @@ if(NOT RASPBERRY)
 	endforeach()
 	
 	############# Create .desktop Icon Files / Install ################
+	## https://specifications.freedesktop.org
 	if(DEBUG)
 		set(DESKTOP_FILE
 			"[Desktop Entry]\n"
@@ -895,11 +896,12 @@ if(NOT RASPBERRY)
 	endif()
 	
 	# Create windows shortcut for WSL
-	if(WSL)
+	if(DEFINED ENV{WSL_DISTRO_NAME})
 		dk_info("creating WSL shortcut")
 		dk_depend(wsl)
 		if(DEBUG)
 			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+			dk_debug("WSL SHORTCUT_PATH = ${SHORTCUT_PATH}")
 			dk_createShortcut("${SHORTCUT_PATH}" "${WSL_EXE}" "${DK_PROJECT_DIR}/${triple}/${DEBUG_DIR}/${APP_NAME}")
 		elseif(RELEASE)
 			execute_process(COMMAND ${WSLPATH_EXE} -m "${DK_PROJECT_DIR}/${triple}/${RELEASE_DIR}/${APP_NAME}.lnk" OUTPUT_VARIABLE SHORTCUT_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -1148,6 +1150,7 @@ if(RASPBERRY)
 	endforeach()
 		
 	############# Create .desktop Icon Files and Install ##############
+	## https://specifications.freedesktop.org
 	if(DEBUG)
 	# Create .desktop file for Debug
 	dk_set(DESKTOP_FILE

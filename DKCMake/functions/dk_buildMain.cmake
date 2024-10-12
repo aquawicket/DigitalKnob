@@ -17,11 +17,11 @@ function(dk_buildMain)
 	
 #	dk_validateSudo
 	
-#	if dk_defined WSLENV; then 
+#	if(DEFINED ENV{WSL_DISTRO_NAME})
 #		dk_info "WSLENV is on"
 #		dk_info "calling sudo chown -R ${LOGNAME} ${HOME} to allow windows write access to \\\wsl.localhost\DISTRO\home\\${LOGNAME}"
 #		sudo chown -R "${LOGNAME}" "${HOME}"
-#	fi
+#	endif()
 
 #	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
 #	dk_printVar MSYSTEM

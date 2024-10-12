@@ -17,7 +17,7 @@ endif()
 #	dk_return()
 #endif()
 
-if(DEFINED ENV{WSLENV})
+if(DEFINED ENV{WSL_DISTRO_NAME})
 	dk_set(WSL 1)
 endif()
 

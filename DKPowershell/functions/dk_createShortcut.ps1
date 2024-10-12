@@ -20,8 +20,8 @@ function Global:dk_createShortcut() {
 	$target_path = $target_path -replace "/", "\\"
 	
 	if(dk_call dk_pathExists "${shortcut_path}"){ 
-		dk_call dk_warning "${shortcut_path} already exists, deleting..."
-		dk_call dk_delete "${shortcut_path}"
+		dk_call dk_warning "${shortcut_path} already exists."
+		#dk_call dk_delete "${shortcut_path}"
 	}
 	
 	$WshShell = New-Object -comObject WScript.Shell

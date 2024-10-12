@@ -250,7 +250,7 @@ endfunction()
 function(dk_setVariables)
 
 	##### Set ProgramFiles_<> variables ######
-	if(DEFINED "ENV{WSLENV}")
+	if(DEFINED ENV{WSL_DISTRO_NAME})
 		set(WSL 1 CACHE INTERNAL "")
 		dk_echo("CMake using WSL")
 	endif()
