@@ -47,16 +47,19 @@ else()
 	set(CURL_RELEASE_DIR 	${CURL_RELEASE_DIR}/lib)
 endif()
 
-if(MSVC)
-	WIN_dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}		CURL_DEBUG_LIBRARY)
-	WIN_dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}		CURL_RELEASE_LIBRARY)
+if(MSVC AND WIN)
+	dk_libDebug			(${CURL_CONFIG_DIR}/lib/${DEBUG_DIR}		CURL_DEBUG_LIBRARY)
+	dk_libRelease		(${CURL_CONFIG_DIR}/lib/${RELEASE_DIR}		CURL_RELEASE_LIBRARY)
 else()	
-	dk_libDebug				(${CURL_DEBUG_DIR}/libcurl-d.a				CURL_DEBUG_LIBRARY)
-	dk_libRelease			(${CURL_RELEASE_DIR}/libcurl.a				CURL_RELEASE_LIBRARY)
+	dk_libDebug			(${CURL_DEBUG_DIR}/libcurl-d.a				CURL_DEBUG_LIBRARY)
+	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a				CURL_RELEASE_LIBRARY)
 endif()
-DEBUG_dk_set				(CURL_LIBRARY								${CURL_DEBUG_LIBRARY})
-RELEASE_dk_set				(CURL_LIBRARY								${CURL_RELEASE_LIBRARY})
-
+if(DEBUG)
+	dk_set				(CURL_LIBRARY								${CURL_DEBUG_LIBRARY})
+endif()
+if(RELEASE)
+	dk_set				(CURL_LIBRARY								${CURL_RELEASE_LIBRARY})
+endif()
 
 ### 3RDPARTY LINK ###
 dk_set(CURL_CMAKE 
@@ -71,8 +74,8 @@ endif()
 
 
 ### GENERATE ###
-if(MSVC)
-	WIN_dk_configure(${CURL_DIR}
+if(MSVC AND WIN)
+	dk_configure(${CURL_DIR}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
