@@ -7,7 +7,7 @@ if(!$dk_createShortcut){ $dk_createShortcut = 1 } else{ return }
 #
 function Global:dk_createShortcut() {
 	dk_debugFunc 0 99
-	#dk_call dk_debug("dk_createShortcut(${args})")
+	dk_call dk_debug("dk_createShortcut(${args}).ps1")
 	
 	$shortcut_path=$args[0]
 	$target_path=$args[1]
@@ -52,5 +52,7 @@ function Global:DKTEST() {
 	dk_debugFunc 0
 	
 	#dk_call dk_createShortcut "C:\Users\Administrator\Desktop\digitalknob.lnk" "C:\Users\Administrator\digitalknob"
-	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+#	dk_call dk_createShortcut "C:\Users\Administrator\Desktop\HelloWorld.lnk" "C:\Windows\System32\wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
+	
+	dk_call dk_createShortcut "C:/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/digitalknob/Development/DKApps/HelloWorld/linux_x86_64/Debug/HelloWorld_APP"
 }
