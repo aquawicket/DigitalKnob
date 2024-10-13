@@ -24,7 +24,7 @@ function Global:dk_installGit() {
     #$GIT_FOLDER = dk_call dk_convertToCIdentifier $GIT_FOLDER 
     #$GIT_FOLDER = dk_call dk_toLower $GIT_FOLDER
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DIGITALKNOB_DIR"
-	#$global:GIT_DIR = "$DKTOOLS_DIR/$GIT_FOLDER"
+	### DO NOT USE GIT_DIR ###
 	$global:GIT = "$DKTOOLS_DIR/$GIT_FOLDER"
 	
     $global:GIT_EXE = "$GIT/bin/git.exe"

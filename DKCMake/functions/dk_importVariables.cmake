@@ -234,10 +234,10 @@ function(dk_importVariables url rtn_var)
 	dk_printVar(PLUGIN_INSTALL_FOLDER)									# PLUGIN_INSTALL_FOLDER		: zlib-master
 
 	# PLUGIN_INSTALL_ROOT
-	if(NOT PLUGIN_INSTALL_ROOT)
+	#if(NOT PLUGIN_INSTALL_ROOT)
 		dk_assertPath(DK3RDPARTY_DIR)
 		set(PLUGIN_INSTALL_ROOT ${DK3RDPARTY_DIR})
-	endif()
+	#endif()
 	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
 
 	# PLUGIN_INSTALL_PATH
@@ -276,18 +276,14 @@ function(dk_importVariables url rtn_var)
 	dk_printVar(${PLUGIN_PREFIX})										# ZLIB						: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
 	# CURRENT_PLUGIN
-#	if(EXISTS ${${PLUGIN_PREFIX}})
 	dk_set(CURRENT_PLUGIN ${PLUGIN_PREFIX})
 	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN			: ZLIB
-#	endif()
 	
 	# <PLUGIN>_DIR
-	dk_set(${PLUGIN_PREFIX}_DIR ${PLUGIN_INSTALL_PATH})
-	dk_printVar(${PLUGIN_PREFIX}_DIR)									# ZLIB_DIR					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
-	
-#	# CURRENT_PLUGIN_DIR
-#	dk_set(CURRENT_PLUGIN_DIR ${${PLUGIN_PREFIX}_DIR})
-#	dk_printVar(CURRENT_PLUGIN_DIR)										# CURRENT_PLUGIN_DIR		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	if(NOT "${PLUGIN_PREFIX}" STREQUAL "GIT") ### DO NOT USE GIT_DIR ###
+		dk_set(${PLUGIN_PREFIX}_DIR ${PLUGIN_INSTALL_PATH})
+		dk_printVar(${PLUGIN_PREFIX}_DIR)								# ZLIB_DIR					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	endif()
 	
 	# <PLUGIN>_URL
 	dk_set(${PLUGIN_PREFIX}_URL ${PLUGIN_URL})
@@ -304,12 +300,6 @@ function(dk_importVariables url rtn_var)
 	# <PLUGIN>_FOLDER
 	dk_set(${PLUGIN_PREFIX}_FOLDER ${PLUGIN_INSTALL_FOLDER})
 	dk_printVar(${PLUGIN_PREFIX}_FOLDER)								# ZLIB_FOLDER				: zlib-master
-
-#	# CURRENT_PLUGIN_FOLDER
-#	if(EXISTS ${${PLUGIN_PREFIX}})
-#		dk_set(CURRENT_PLUGIN_FOLDER ${${PLUGIN_PREFIX}_FOLDER})
-#		dk_printVar(CURRENT_PLUGIN_FOLDER)								# CURRENT_PLUGIN_FOLDER		: zlib-master
-#	endif()
 	
 #	# <PLUGIN>_NAME
 #	dk_set(${PLUGIN_PREFIX}_NAME ${PLUGIN_INSTALL_FOLDER})
@@ -370,6 +360,10 @@ function(dk_importVariables url rtn_var)
 	
 	set(${rtn_var} ${PLUGIN_PREFIX} PARENT_SCOPE)
 	dk_printVar(PLUGIN_PREFIX)
+	
+	if("${PLUGIN_PREFIX}"	STREQUAL "OPENSSL")
+		dk_pause()
+	endif()
 endfunction()
 
 

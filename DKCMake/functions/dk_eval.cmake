@@ -29,7 +29,8 @@ function(dk_eval code)
 		#fwrite_temp("" ".cmake")
 		#ans(__eval_temp_file)
 		# speedup: statically write filename so eval boils down to 3 function calls
-		set(__eval_temp_file ${DKCMAKE_DIR}/__eval_temp_file.cmake)
+		dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
+		set(__eval_temp_file ${DKCACHE_DIR}/__eval_temp_file.cmake)
 		dk_fileWrite("${__eval_temp_file}" "
 			function(eval code)
 			dk_fileWrite(${__eval_temp_file} \"\${code}\")

@@ -29,11 +29,13 @@ if not defined GIT_CONFIG_GLOBAL  set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGloba
 	::%dk_call% dk_importVariables %GIT_DL%
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	set "GIT_DIR="
+	::### DO NOT USE GIT_DIR ###
+	if defined GIT_DIR  %dk_call% dk_fatal "ERROR: GIT_DIR should not be set."
+	::### DO NOT USE GIT_DIR ###
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
-	::set "GIT_DIR=%DKTOOLS_DIR%\%GIT_FOLDER%"
+	::### DO NOT USE GIT_DIR ###
 	
     set "GIT_EXE=%GIT%\bin\git.exe"
 	set "BASH_EXE=%GIT%\bin\bash.exe"

@@ -10,17 +10,27 @@ dk_deleteTempFiles() {
 
 	dk_call dk_info "Deleting .TMP files . . ."
 	
-	#dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	#rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.tmp)
-	#rm -rf $(find "${DKBRANCH_DIR}" -type d -name *.TMP)
-	#find "${DKBRANCH_DIR}" -name "*.tmp" -delete
-	#find "${DKBRANCH_DIR}" -name "*.TMP" -delete
+	dk_call dk_validate DK3RDPARTY_DIR	"dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKAPPS_DIR		"dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKPLUGINS_DIR	"dk_call dk_DKBRANCH_DIR"
 	
-	[ ! -e "${CMAKE_BINARY_DIR}" ] && return
-	rm -rf $(find "${CMAKE_BINARY_DIR}" -type d -name *.tmp)
-	rm -rf $(find "${CMAKE_BINARY_DIR}" -type d -name *.TMP)
-	find "${CMAKE_BINARY_DIR}" -name "*.tmp" -delete
-	find "${CMAKE_BINARY_DIR}" -name "*.TMP" -delete
+	[ ! -e "${DK3RDPARTY_DIR}" ] && return
+	rm -rf $(find "${DK3RDPARTY_DIR}" -type d -name *.tmp)
+	rm -rf $(find "${DK3RDPARTY_DIR}" -type d -name *.TMP)
+	find "${DK3RDPARTY_DIR}" -name "*.tmp" -delete
+	find "${DK3RDPARTY_DIR}" -name "*.TMP" -delete
+	
+	[ ! -e "${DKAPPS_DIR}" ] && return
+	rm -rf $(find "${DKAPPS_DIR}" -type d -name *.tmp)
+	rm -rf $(find "${DKAPPS_DIR}" -type d -name *.TMP)
+	find "${DKAPPS_DIR}" -name "*.tmp" -delete
+	find "${DKAPPS_DIR}" -name "*.TMP" -delete
+	
+	[ ! -e "${DKPLUGINS_DIR}" ] && return
+	rm -rf $(find "${DKPLUGINS_DIR}" -type d -name *.tmp)
+	rm -rf $(find "${DKPLUGINS_DIR}" -type d -name *.TMP)
+	find "${DKPLUGINS_DIR}" -name "*.tmp" -delete
+	find "${DKPLUGINS_DIR}" -name "*.TMP" -delete
 }
 
 

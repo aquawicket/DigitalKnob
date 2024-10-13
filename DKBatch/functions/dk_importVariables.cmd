@@ -283,7 +283,7 @@ pause
 	!dk_call! dk_set CURRENT_PLUGIN !PLUGIN_PREFIX! 
 	!dk_call! dk_printVar CURRENT_PLUGIN 										&:: CURRENT_PLUGIN			: ZLIB
 
-	::# <PLUGIN>_DIR
+	::# <PLUGIN>_DIR     ### DO NOT USE GIT_DIR ###
 	if "!PLUGIN_PREFIX!" neq "GIT" (
 		!dk_call! dk_set !PLUGIN_PREFIX!_DIR !PLUGIN_INSTALL_PATH! 
 		!dk_call! dk_printVar !PLUGIN_PREFIX!_DIR 								&:: ZLIB_DIR				: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
