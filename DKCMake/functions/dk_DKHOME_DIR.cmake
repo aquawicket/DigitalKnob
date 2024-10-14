@@ -66,7 +66,7 @@ function(dk_DKHOME_DIR)
 	dk_set(DKDESKTOP_DIR "${DKHOME_DIR}/Desktop")
 	set(ENV{DKDESKTOP_DIR} "${DKHOME_DIR}/Desktop")
 	if(NOT EXISTS "${DKDESKTOP_DIR}") 
-		dk_makeDirectory("${DKDESKTOP_DIR}")
+		dk_warning("DKDESKTOP_DIR does not exist")
 	endif()
 	
 #	### DKTEMP_DIR ###
@@ -108,4 +108,6 @@ function(DKTEST)
  
     dk_DKHOME_DIR()
     dk_printVar(DKHOME_DIR)
+	dk_printVar(DKCACHE_DIR)
+	dk_printVar(DKDESKTOP_DIR)
 endfunction()
