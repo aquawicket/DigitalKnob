@@ -19,19 +19,26 @@ dk_reload() {
 	#       Or better yet, we need to clear the entire environment
 	dk_call dk_unset DKINIT
 	dk_call dk_unset DKBASH_DIR
-	printenv
+	dk_call dk_unset SUDO_EXE
+	dk_call dk_unset CMD_EXE
+	dk_call dk_unset CYGPATH_EXE
+	dk_call dk_unset WSLPATH_EXE
+	dk_call dk_unset DKHOME_DIR
+	dk_call dk_unset DKCACHE_DIR
 
-	if (command -v bash); then
+printenv
+
+#	if (command -v bash); then
 		dk_call dk_clearScreen
 		exec /bin/bash "${DKSCRIPT_PATH}"
-	else
-		dk_call dk_clearScreen
-		exec "${DKSCRIPT_PATH}"
-	fi
+#	else
+#		dk_call dk_clearScreen
+#		exec "${DKSCRIPT_PATH}"
+#	fi
 	
 	###### METHOD 1 ######
-	dk_call dk_fileWrite "${DKBASH_DIR}/reload" "${DKSCRIPT_PATH}"
-	dk_call dk_exit 0
+#	dk_call dk_fileWrite "${DKBASH_DIR}/reload" "${DKSCRIPT_PATH}"
+#	dk_call dk_exit 0
 }
 
 
