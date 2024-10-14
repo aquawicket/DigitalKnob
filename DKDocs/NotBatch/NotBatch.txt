@@ -1,0 +1,43 @@
+@echo off
+
+rem NotBatch.txt: Simulate GOTO/CALL commands in a text file redirected to cmd.exe
+rem Antonio Perez Ayala
+
+rem Requires FilePointer.exe auxiliary program; download it from:
+rem http://www.dostips.com/forum/viewtopic.php?f=3&t=5552&p=34051#p34051
+
+
+rem Get the offsets of the labels in this NotBatch.txt file
+for /F "tokens=1,2 delims=:" %a in ('findstr /O "^:.*" ^< NotBatch.txt') do set "%b=%a"
+
+echo.bat
+echo.bat Calling subroutine from first point
+call.bat :subroutine "First time"
+echo.bat Returned from subroutine
+echo.bat
+
+set.bat /P "line=Enter a few words: "
+set i=0
+:nextWord
+   set /A i+=1
+   for /F "tokens=1*" %a in ("%line%") do (
+      echo.bat Word %i%- %a
+      set "line=%b"
+   )
+if defined line goto.bat nextWord
+echo/> CON
+
+echo.bat Calling subroutine from second point
+call.bat :subroutine "Second time"
+echo.bat Returned from subroutine
+
+rem Use exit /B to terminate the main program
+exit /B
+
+
+:subroutine
+echo.bat --^^^> Greetings from the subroutine; my parameters are: %params%
+echo.bat --^^^> Returning to caller program
+rem Use goto.bat :EOF to return from a subroutine
+rem (if you use exit /B here, the main program is terminated)
+goto.bat :EOF

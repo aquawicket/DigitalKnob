@@ -33,6 +33,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_getShellType)
 	#dk_debugFunc("\${ARGV}")
+	execute_process(COMMAND dk_polyglot OUTPUT_VARIABLE RAW_ECHO)
+	message(STATUS "RAW_ECHO = ${RAW_ECHO}")
 	
 	execute_process(COMMAND cmd /c echo %COMSPEC% OUTPUT_VARIABLE CMD_PATH)
 	message(STATUS "CMD_PATH = ${CMD_PATH}")
