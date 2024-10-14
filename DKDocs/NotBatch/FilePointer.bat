@@ -1,9 +1,9 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-echo Extracting FilePointer.exe, please wait...
-call :ExtractBinaryFile FilePointer.exe
-echo FilePointer.exe file created
+echo Extracting FilePointer2.exe, please wait...
+call :ExtractBinaryFile FilePointer2.exe
+echo FilePointer2.exe file created
 goto :EOF
 
 
@@ -69,7 +69,7 @@ if %~1 neq 26 (
 exit /B
 
 
-<resource id="FilePointer.exe">
+<resource id="FilePointer2.exe">
 4d5a900003[3]04[3]ffff[2]b8[7]40[35]b0[3]0e1fba0e00b409cd21b8014ccd21546869732070726f6772616d2063616e6e6f74206265207275
 6e20696e20444f53206d6f64652e0d0d0a24[7]551e49c1117f2792117f2792117f27929f603492167f2792ed5f3592137f279252696368117f2792
 [8]5045[2]4c01020022e75a53[8]e0000f010b01050c0002[3]02[7]10[3]10[3]20[4]40[2]10[3]02[2]04[7]04[8]30[3]02[6]03[5]10[2]10
