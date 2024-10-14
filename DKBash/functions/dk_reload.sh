@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
 
 ##################################################################################
 # dk_reload()
@@ -21,7 +21,7 @@ dk_reload() {
 
 #	if (command -v bash); then
 		dk_call dk_clearScreen
-		env -i /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+		env /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 #	else
 #		dk_call dk_clearScreen
 #		exec "${DKSCRIPT_PATH}"
