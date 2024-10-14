@@ -45,6 +45,8 @@ dk_resetAll() {
 	
 	unset DKINIT
 	unset DKHOME_DIR
+	unset DK
+	unset DKF
 	exec /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 }
 
