@@ -21,7 +21,7 @@ dk_reload() {
 
 #	if (command -v bash); then
 		dk_call dk_clearScreen
-		env -i exec /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+		env -i /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 #	else
 #		dk_call dk_clearScreen
 #		exec "${DKSCRIPT_PATH}"
