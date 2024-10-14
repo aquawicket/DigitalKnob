@@ -16,13 +16,12 @@ function(dk_pause)
 	if(ARGN)
 		set(pause_msg "${ARGN}")
 	else()
-		set(pause_msg "Press and any to continue...")
+		set(pause_msg "Press any key to continue...")
 	endif()
 	dk_echo("${pause_msg}")
 	
 	###### Cmd ######
 	dk_depend(cmd)
-	#find_program(CMD_EXE cmd.exe)
 	if(CMD_EXE)
 		dk_replaceAll(${CMD_EXE} "/" "\\" CMD_EXE)   # convert to windows path delimiters
 		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
