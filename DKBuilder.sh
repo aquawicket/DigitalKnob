@@ -84,8 +84,11 @@ fi
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 [ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
 [ -e "$(DKHOME_DIR)/.dk" ] 			|| mkdir "$(DKHOME_DIR)/.dk"
-[ -e "$(DKHOME_DIR)/.dk" ] 			&& export > "$(DKHOME_DIR)/.dk/default_env.sh"
+if [ "$(DKHOME_DIR)/.dk" != "$(dirname "$0")" ]; then
+	[ -e "$(DKHOME_DIR)/.dk" ] 	&& cp "$0" "$(DKHOME_DIR)/.dk/$(basename $0)"
+fi
 [ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	|| mkdir "$(DKHOME_DIR)/.dk/DKBash"
+[ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	&& export > "$(DKHOME_DIR)/.dk/DKBash/default_env.sh"
 [ -e "${DKF}" ] 					|| mkdir "${DKF}"
 [ -e "${DKF}" ] 					|| echo "DKF:${DKF} does not exist" || exit 1
 

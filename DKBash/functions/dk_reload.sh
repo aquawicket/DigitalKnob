@@ -18,20 +18,10 @@ dk_reload() {
 	#FIXME: need to unset any and all include guards here.
 	#       Or better yet, we need to clear the entire environment
 	dk_call dk_unset DKINIT
-	dk_call dk_unset DKBASH_DIR
-	dk_call dk_unset SUDO_EXE
-	dk_call dk_unset CMD_EXE
-	dk_call dk_unset CYGPATH_EXE
-	dk_call dk_unset WSLPATH_EXE
-	dk_call dk_unset DKHOME_DIR
-	dk_call dk_unset DKCACHE_DIR
-
-printenv
-dk_call dk_pause
 
 #	if (command -v bash); then
 		dk_call dk_clearScreen
-		exec /bin/bash "${DKSCRIPT_PATH}"
+		exec /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 #	else
 #		dk_call dk_clearScreen
 #		exec "${DKSCRIPT_PATH}"
