@@ -27,6 +27,7 @@ dk_reload() {
 	dk_call dk_unset DKCACHE_DIR
 
 printenv
+dk_call dk_pause
 
 #	if (command -v bash); then
 		dk_call dk_clearScreen
