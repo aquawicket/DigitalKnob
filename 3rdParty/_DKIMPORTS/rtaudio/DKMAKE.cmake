@@ -1,12 +1,14 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # https://github.com/thestk/rtaudio
 
 
-### DEPEND ###
-WIN_dk_depend(winmm)
+dk_validate(triple "dk_TARGET_TRIPLE()")
 
+### DEPEND ###
+if(WIN)
+	dk_depend(winmm)
+endi()
 
 ### IMPORT ###
 #dk_import(https://github.com/thestk/rtaudio.git)
@@ -14,16 +16,21 @@ dk_import(https://github.com/thestk/rtaudio/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-APPLE_dk_define			(__MACOSX_CORE__)
+if(APPLE)
+	dk_define			(__MACOSX_CORE__)
+endif()
 if(LINUX OR RASPBERRY OR ANDROID)
 	dk_define			(__LINUX_ALSA__)
 endif()
 dk_include				(${RTAUDIO})
-UNIX_dk_libDebug		(${RTAUDIO}/${triple}/${DEBUG_DIR}/librtaudio.a)
-UNIX_dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/librtaudio.a)
-WIN_dk_libDebug			(${RTAUDIO}/${triple}/${DEBUG_DIR}/rtaudiod.lib)
-WIN_dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/rtaudio.lib)
-
+if(UNIX)
+	dk_libDebug			(${RTAUDIO}/${triple}/${DEBUG_DIR}/librtaudio.a)
+	dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/librtaudio.a)
+endif()
+if(WIN)
+	dk_libDebug			(${RTAUDIO}/${triple}/${DEBUG_DIR}/rtaudiod.lib)
+	dk_libRelease		(${RTAUDIO}/${triple}/${RELEASE_DIR}/rtaudio.lib)
+endif()
 
 ### GENERATE ###
 dk_configure(${RTAUDIO})

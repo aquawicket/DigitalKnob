@@ -11,7 +11,9 @@ dk_load(dk_builder)
 
 ### DEPENDS ###
 dk_depend(core_media)
-RASPBERRY_dk_depend(libatomic)
+if(RASPBERRY)
+	dk_depend(libatomic)
+endif()
 dk_depend(libgcc)
 dk_depend(libmingwex)
 dk_depend(secur32)

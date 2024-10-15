@@ -1,9 +1,13 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # https://sourceware.org/newlib/libm.html
 
-ANDROID_dk_depend(android-ndk)
-EMSCRIPTEN_dk_depend(emsdk)
+dk_validate(triple "dk_TARGET_TRIPLE()")
+if(ANDROID)
+	dk_depend(android-ndk)
+endif()
+if(EMSCRIPTEN)
+	dk_depend(emsdk)
+endif()
 
 dk_findLibrary(m)

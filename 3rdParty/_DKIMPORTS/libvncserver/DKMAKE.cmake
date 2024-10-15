@@ -5,7 +5,9 @@ dk_load(dk_builder)
 
 
 ### DEPEND ###
-APPLE_dk_depend(gnutls)
+if(APPLE)
+	dk_depend(gnutls)
+endif()
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(libsystemd-dev)

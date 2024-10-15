@@ -13,8 +13,10 @@ dk_load(dk_builder)
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
 
-ANDROID_dk_depend(android-ndk)	#version 21e or newer required
-ANDROID_dk_depend(msys2)
+if(ANDROID)
+	dk_depend(android-ndk)	#version 21e or newer required
+	dk_depend(msys2)
+endif()
 
 #dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 #dk_set(BOOST ${DK3RDPARTY_DIR}/boost_1_78_0)
