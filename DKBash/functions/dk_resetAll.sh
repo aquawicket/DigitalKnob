@@ -37,6 +37,8 @@ dk_resetAll() {
 	dk_call dk_cd "${DKCACHE_DIR}"
 	dk_call dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	dk_call dk_delete "${DKBRANCH_DIR}"
+	exit 0
+	
 	
 	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development #NO_CONFIRM
 	
