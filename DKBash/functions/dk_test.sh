@@ -10,7 +10,7 @@ echo "        DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
 echo "         DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
 
-[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ##################################################################################
 # dk_test(<arg1> <ret_val>)

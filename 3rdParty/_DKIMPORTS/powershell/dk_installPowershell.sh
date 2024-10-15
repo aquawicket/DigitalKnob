@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . ../../../DKBash/functions/DK.sh
+[ -z "${DKINIT-}" ] && . ../../../DKBash/functions/DK.sh
 
 # https://github.com/PowerShell/PowerShell/releases
 PWSH_DL_LINUX_ARM32=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-arm32.tar.gz

@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . ../../../DKBash/functions/DK.sh
+[ -z "${DKINIT-}" ] && . ../../../DKBash/functions/DK.sh
 
 CMAKE_DL_LINUX_ARM64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
 CMAKE_DL_LINUX_X86_64=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz

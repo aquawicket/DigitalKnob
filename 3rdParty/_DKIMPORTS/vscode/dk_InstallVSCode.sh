@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . ../../../DKBash/functions/DK.sh
+[ -z "${DKINIT-}" ] && . ../../../DKBash/functions/DK.sh
 
 ##################################################################################
 # dk_installVSCode()

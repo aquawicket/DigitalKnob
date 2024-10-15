@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "${DKINIT}" ] && . "${DKBASH_FUNCTIONS_DIR_}DK.sh"
+[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 # The reason we are overwriting echo is to try and keep junk echo's out of command substitution returns.
 #   result=$(myFunction thing) <- if anything writes to stdout durring this, it will junk up the result value.
