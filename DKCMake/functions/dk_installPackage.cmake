@@ -91,7 +91,6 @@ function(dk_installPackage package)
 
 	### Msys2 ###
 	if(NOT PACMAN_EXE)
-		#execute_process(COMMAND $ENV{DKSHELL} -c "command -v pacman" OUTPUT_VARIABLE PACMAN_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 		dk_validate(MSYS2 "dk_depend(msys2)")
 		dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
 	endif()
@@ -154,13 +153,6 @@ function(dk_installPackage package)
 	endif()
 	
 	dk_error("ERROR: no package managers found")
-
-#	execute_process(COMMAND $ENV{DKSHELL} -c "command -v ${package}" OUTPUT_VARIABLE PACKAGE_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-#	if(EXISTS ${PACKAGE_EXE})
-#		dk_printVar(PACKAGE_EXE)
-#		message("${package}_EXE installed successfully")
-#		return()
-#	endif()
 endfunction()
 
 

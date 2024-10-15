@@ -10,7 +10,7 @@ function(dk_pickType)
 	dk_debugFunc("\${ARGV}")
 
 	dk_echo()
-	dk_echo("${APP} ${target_triple} ${TYPE-}")
+	dk_echo("${APP} ${target_triple} ${TYPE}")
 	dk_echo()
     dk_echo(" 1) Debug")
 	dk_echo(" 2) Release")

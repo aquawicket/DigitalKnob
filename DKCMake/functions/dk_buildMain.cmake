@@ -38,12 +38,6 @@ function(dk_buildMain)
 
 	dk_assertPath(DKSCRIPT_DIR)
 	dk_assertPath(DKBRANCH_DIR)
-
-	if(NOT "${DKSCRIPT_DIR}" STREQUAL "${DKBRANCH_DIR}")
-		dk_warning("${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!")
-		dk_warning("${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}")
-		dk_warning("DKBRANCH_DIR path = ${DKBRANCH_DIR}")
-	endif()
 	
 	while(1)
 		if(NOT DEFINED UPDATE)

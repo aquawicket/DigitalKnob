@@ -361,9 +361,9 @@ function(dk_importVariables url rtn_var)
 	set(${rtn_var} ${PLUGIN_PREFIX} PARENT_SCOPE)
 	dk_printVar(PLUGIN_PREFIX)
 	
-	if("${PLUGIN_PREFIX}"	STREQUAL "OPENSSL")
-		dk_pause()
-	endif()
+#	if("${PLUGIN_PREFIX}"	STREQUAL "OPENSSL")
+#		dk_pause()
+#	endif()
 endfunction()
 
 

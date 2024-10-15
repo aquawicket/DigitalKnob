@@ -30,7 +30,15 @@ endif()
 
 
 
-
+if(MSYSTEM)
+	### Msys2 bash ###
+	dk_depend(msys2)
+	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
+	if(EXISTS ${BASH_EXE})
+		set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+		return()
+	endif()
+endif()
 
 
 ### Default bash ###
@@ -49,13 +57,7 @@ if(EXISTS ${BASH_EXE})
 	return()
 endif()
 
-### Msys2 bash ###
-dk_depend(msys2)
-dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
-if(EXISTS ${BASH_EXE})
-	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-	return()
-endif()
+
 
 ### Tiny Core Linux ###
 if(TINYCORE)

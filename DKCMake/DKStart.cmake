@@ -27,7 +27,7 @@ dk_set(DELETE_DOWNLOADS				0)  # delete downloads after they are extracted or in
 #dk_set(ENABLE_dk_verbose			1)	# enable dk_verbose() functions
 #dk_set(CONTINUE_ON_ERRORS			1)	# don't halt cmake build script on errors
 #dk_set(HALT_ON_WARNINGS			0)	# halt cmake build script on warnings
-dk_set(INSTALL_DKLIBS          		0)	# install header files and libraries to DKBIN directory
+dk_set(INSTALL_DKLIBS          		1)	# install header files and libraries to DKBIN directory
 dk_set(MAC_TERMINAL_WRAPPER     	1)	# open app with terminal
 dk_set(PRINT_CALL_DETAILS 			0)	# print function call details
 dk_set(PRINT_FILE_NAMES 			0)	# print function call file names
