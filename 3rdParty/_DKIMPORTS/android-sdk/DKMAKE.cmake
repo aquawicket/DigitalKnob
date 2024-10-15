@@ -23,17 +23,17 @@ if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_patch(android-sdk "${ANDROID_SDK_DIR}")
 	
 	# https://developer.android.com/tools/variables#envar
-	dk_setEnv("ANDROID_HOME" "${ANDROID_SDK_DIR}")
-	execute_process(COMMAND cmd /c setx ANDROID_HOME "${ANDROID_SDK_DIR}")
+	set(ANDROID_HOME "${ANDROID_SDK_DIR}")
+	execute_process(COMMAND cmd /c setx ANDROID_HOME "${ANDROID_HOME}")
 	
-	dk_setEnv("ANDROID_USER_HOME" "${DIGITALKNOB_DIR}/.android")
-	execute_process(COMMAND cmd /c setx ANDROID_USER_HOME "${DIGITALKNOB_DIR}/.android")
+	set(ANDROID_USER_HOME "${DKCACHE_DIR}/.android")
+	execute_process(COMMAND cmd /c setx ANDROID_USER_HOME "${ANDROID_USER_HOME}")
 	
-	dk_setEnv("ANDROID_SDK_HOME" "${DIGITALKNOB_DIR}")
-	execute_process(COMMAND cmd /c setx ANDROID_SDK_HOME "${DIGITALKNOB_DIR}")
+	set(ANDROID_SDK_HOME "${DIGITALKNOB_DIR}")
+	execute_process(COMMAND cmd /c setx ANDROID_SDK_HOME "${ANDROID_SDK_HOME}")
 	
-	dk_setEnv("VS_AndroidHome" "${ANDROID_SDK_DIR}")
-	execute_process(COMMAND cmd /c setx VS_AndroidHome "${ANDROID_SDK_DIR}")
+	set(VS_AndroidHome "${ANDROID_SDK_DIR}")
+	execute_process(COMMAND cmd /c setx VS_AndroidHome "${VS_AndroidHome}")
 endif()
 
 

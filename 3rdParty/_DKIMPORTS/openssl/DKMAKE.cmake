@@ -1,6 +1,5 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # https://github.com/openssl/openssl.git
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
@@ -8,7 +7,7 @@ dk_load(dk_builder)
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
 
-
+dk_validate(triple "dk_TARGET_TRIPLE()")
 ### DEPEND ###
 #dk_depend(openssl-cmake)
 #EMSCRIPTEN_dk_depend(python3)
@@ -125,7 +124,7 @@ if(DEBUG)
 		if(MSVC)
 			dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --debug msvc64 CC=clang)
 		else()
-			dk_configure	(${OPENSSL_DIR} ../../Configure no-shared --debug mingw64 CC=clang)
+			dk_configure	(${OPENSSL_DIR} ${PERL_EXE} ../../Configure no-shared --debug mingw64 CC=clang)
 		endif()
 	endif()
 endif()
@@ -163,6 +162,8 @@ if(RELEASE)
 		endif()
 	endif()
 endif()
+
+dk_bashEnv(perl configdata.pm --dump)
 
 ### COMPILE ###
 dk_build(${OPENSSL_DIR})

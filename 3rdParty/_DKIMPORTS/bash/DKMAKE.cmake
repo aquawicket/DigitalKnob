@@ -24,16 +24,40 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	windows 	wsl_debian	bash	linux
 #	windows 	wsl_ubuntu	bash	linux
 
-if(EXISTS ${BASH_EXE})
+if(EXISTS "${BASH_EXE}")
 	return()
 endif()
 
+dk_validate(triple "dk_TARGET_TRIPLE()")
 
 
-if(MSYSTEM)
-	### Msys2 bash ###
-	dk_depend(msys2)
-	dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
+### Msys2 bash ###
+if(NOT BASH_EXE)
+	if(MSYSTEM)
+		dk_validate(MSYS2 "dk_depend(msys2)")
+		dk_findProgram(BASH_EXE bash.exe "${MSYS2_DIR}/usr/bin")
+		if(EXISTS "${BASH_EXE}")
+			set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+			return()
+		endif()
+	endif()
+endif()
+
+
+### WSL bash ###
+if(NOT BASH_EXE)
+	dk_findProgram(BASH_EXE bash.exe "C:/Windows/System32")
+	if(EXISTS "${BASH_EXE}")
+		set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+		return()
+	endif()
+endif()
+
+
+### Git bash ###
+if(NOT BASH_EXE)
+	dk_validate(GIT "dk_depend(git)")
+	dk_findProgram(BASH_EXE bash "${GIT}/bin")
 	if(EXISTS ${BASH_EXE})
 		set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
 		return()
@@ -41,29 +65,14 @@ if(MSYSTEM)
 endif()
 
 
-### Default bash ###
-dk_findProgram(BASH_EXE bash.exe)# "C:/Windows/System32")
-if(EXISTS ${BASH_EXE})
-	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-	return()
-endif()
-
-
-### Git bash ###
-dk_depend(git)
-dk_findProgram(BASH_EXE bash "${GIT}/bin")
-if(EXISTS ${BASH_EXE})
-	set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
-	return()
-endif()
-
-
 
 ### Tiny Core Linux ###
-if(TINYCORE)
-	### TODO ###
-	#dk_command(tce-load -wi bash)
-	dk_installPackage(bash)
+if(NOT BASH_EXE)
+	if(TINYCORE)
+		### TODO ###
+		#dk_command(tce-load -wi bash)
+		dk_installPackage(bash)
+	endif()
 endif()
 
 

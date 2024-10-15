@@ -11,7 +11,8 @@ function(dk_bashEnv)
 	dk_debugFunc("\${ARGV}")
 	
 	###### set WORKING DIRECTORY ######
-	if(${CURRENT_PLUGIN}_DIR)
+	if(${CURRENT_PLUGIN})
+		dk_verbose("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 		set(BASH_WORKING_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 		list(APPEND BASH_COMMANDS "cd ${BASH_WORKING_DIR}")
 		dk_cd(${BASH_WORKING_DIR})
@@ -76,10 +77,10 @@ function(dk_bashEnv)
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
 	
 	dk_depend(bash)
-	if(NOT BASH_EXE)
-		dk_warning("DKBASH_EXE is undefined. setting to 'bash'")
-		set(BASH_EXE bash)
-	endif()
+#	if(NOT EXISTS "${BASH_EXE}")
+#		dk_warning("DKBASH_EXE is undefined. setting to 'bash'")
+#		set(BASH_EXE bash)
+#	endif()
 	dk_executeProcess(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 	if(OUTPUT_VARIABLE)
@@ -87,7 +88,7 @@ function(dk_bashEnv)
 	endif()
 
 endfunction()
-dk_createOsMacros("dk_bashEnv")
+#dk_createOsMacros("dk_bashEnv")
 
 
 

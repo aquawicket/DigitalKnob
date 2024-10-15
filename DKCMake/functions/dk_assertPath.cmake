@@ -11,6 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_assertPath path)
 	dk_debugFunc("\${ARGV}")
+	dk_info("dk_assertPath(${ARGV})")
 	
 	dk_varToString(path path_value)
 	#dk_debug("dk_assertPath(${path}) = ${path_value}")
@@ -18,7 +19,7 @@ function(dk_assertPath path)
 		return()
 	endif()
 	
-	dk_fatal("Assertion failed: Path Not Found ${path_value}")
+	dk_fatal("Assertion failed: Path Not Found ${path}:${path_value}  CMAKE_PARENT_LIST_FILE:${CMAKE_PARENT_LIST_FILE}")
 		
 #	dk_printVar(CMAKE_SOURCE_DIR)
 #	dk_printVar(PROJECT_BINARY_DIR)
