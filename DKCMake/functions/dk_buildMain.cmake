@@ -65,7 +65,7 @@ function(dk_buildMain)
 		
 		dk_createCache()
 		dk_generate()
-		dk_build()
+		dk_buildApp()
 		
 		dk_unset(UPDATE)
 		dk_unset(APP)
