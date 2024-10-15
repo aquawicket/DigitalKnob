@@ -24,24 +24,25 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	windows 	wsl_debian	bash	linux
 #	windows 	wsl_ubuntu	bash	linux
 
-if(EXISTS "${BASH_EXE}")
-	return()
-endif()
+#if(EXISTS "${BASH_EXE}")
+#	return()
+#endif()
 
 dk_validate(triple "dk_TARGET_TRIPLE()")
 
 
 ### Msys2 bash ###
-if(NOT BASH_EXE)
+#if(NOT BASH_EXE)
 	if(MSYSTEM)
 		dk_validate(MSYS2 "dk_depend(msys2)")
-		dk_findProgram(BASH_EXE bash.exe "${MSYS2_DIR}/usr/bin")
+		dk_findProgram(BASH_EXE bash "${MSYS2_DIR}/usr/bin")
 		if(EXISTS "${BASH_EXE}")
 			set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+			dk_printVar(BASH_EXE)
 			return()
 		endif()
 	endif()
-endif()
+#endif()
 
 
 ### WSL bash ###
@@ -49,6 +50,7 @@ if(NOT BASH_EXE)
 	dk_findProgram(BASH_EXE bash.exe "C:/Windows/System32")
 	if(EXISTS "${BASH_EXE}")
 		set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+		dk_printVar(BASH_EXE)
 		return()
 	endif()
 endif()
@@ -58,8 +60,9 @@ endif()
 if(NOT BASH_EXE)
 	dk_validate(GIT "dk_depend(git)")
 	dk_findProgram(BASH_EXE bash "${GIT}/bin")
-	if(EXISTS ${BASH_EXE})
+	if(EXISTS "${BASH_EXE}")
 		set(BASH_EXE ${BASH_EXE} CACHE INTERNAL "")
+		dk_printVar(BASH_EXE)
 		return()
 	endif()
 endif()
