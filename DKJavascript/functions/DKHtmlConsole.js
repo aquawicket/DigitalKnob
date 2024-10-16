@@ -23,9 +23,12 @@ DKHtmlConsole.prototype.create = function DKHtmlConsole_create(top, bottom, left
 	dkhtmlconsole.style.overflowY = "scroll";
 	if(!window.document.body){ alert("body is invalid"); return; }
 	window.document.body.appendChild(dkhtmlconsole);
+	
+	console = this //overwrite the console
 }
 
 DKHtmlConsole.prototype.log = function DKHtmlConsole_log(message) {
 	this.dkhtmlconsole.innerHTML = this.dkhtmlconsole.innerHTML + "<a>" + message + "</a></br>";
 	this.dkhtmlconsole.scrollTop = this.dkhtmlconsole.scrollHeight;
 }
+

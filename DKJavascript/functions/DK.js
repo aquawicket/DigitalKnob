@@ -1,6 +1,5 @@
 
 var HOST = "unknown"
-
 if(typeof ActiveXObject === "function"){
 	if(typeof WScript === "object"){
 		HOST = "jscript";
@@ -18,8 +17,6 @@ if(typeof ActiveXObject === "function"){
 //if(typeof WScript === "object"){
 //	var DKSCRIPT_PATH = WScript.ScriptFullName;
 //	var DKSCRIPT_DIR = new ActiveXObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName);
-//}else{
-	
 //}
 
 //###### DKSCRIPT variables ######
