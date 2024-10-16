@@ -3,10 +3,13 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### sdl_mixer ######
 # https://github.com/libsdl-org/SDL_mixer
 # https://www.libsdl.org/projects/SDL_mixer
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(flac)

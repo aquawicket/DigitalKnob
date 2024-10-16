@@ -3,8 +3,11 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### Secur32 ######
+
 dk_load(dk_builder)
-# Secur32
 
 if(NOT WIN)
 	dk_undepend(secur32)

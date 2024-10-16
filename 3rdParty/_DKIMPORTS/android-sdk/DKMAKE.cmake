@@ -3,8 +3,8 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-### android-sdk ###
+
+##### android-sdk ######
 # https://androidsdkoffline.blogspot.com/
 
 #if(NOT ANDROID)
@@ -16,6 +16,8 @@ dk_load(dk_builder)
 #dk_depend(openjdk)
 #dk_depend(openjdk-8u41)
 #dk_depend(android-cmdline-tools)
+
+dk_load(dk_builder)
 
 dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
 dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")			#TODO: phase out

@@ -3,9 +3,12 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### sdl_net ######
 # https://github.com/libsdl-org/SDL_net.git
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(sdl)

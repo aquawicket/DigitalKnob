@@ -3,10 +3,13 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### smpeg2 ######
 ## https://github.com/icculus/smpeg.git
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(sdl)

@@ -3,12 +3,15 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### sfml ######
 # https://github.com/SFML/SFML
 # https://www.sfml-dev.org
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip
 # https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 ANDROID_dk_depend(freetype)
