@@ -23,16 +23,29 @@ if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_patch(android-sdk "${ANDROID_SDK_DIR}")
 	
 	# https://developer.android.com/tools/variables#envar
-	set(ANDROID_HOME "${ANDROID_SDK_DIR}")
+	
+	###### ANDROID_HOME ######
+	dk_getNativePath("${ANDROID_SDK_DIR}" ANDROID_HOME)
+	dk_set(ANDROID_HOME ${ANDROID_HOME})
+	set(ENV{ANDROID_HOME} ${ANDROID_HOME})
 	execute_process(COMMAND cmd /c setx ANDROID_HOME "${ANDROID_HOME}")
 	
-	set(ANDROID_USER_HOME "${DKCACHE_DIR}/.android")
+	###### ANDROID_USER_HOME ######
+	dk_getNativePath("${DKCACHE_DIR}/.android" ANDROID_USER_HOME)
+	dk_set(ANDROID_USER_HOME ${ANDROID_USER_HOME})
+	set(ENV{ANDROID_USER_HOME} ${ANDROID_USER_HOME})
 	execute_process(COMMAND cmd /c setx ANDROID_USER_HOME "${ANDROID_USER_HOME}")
 	
-	set(ANDROID_SDK_HOME "${DIGITALKNOB_DIR}")
+	###### ANDROID_SDK_HOME ######
+	dk_getNativePath("${DIGITALKNOB_DIR}" ANDROID_SDK_HOME)
+	dk_set(ANDROID_SDK_HOME ${ANDROID_SDK_HOME})
+	set(ENV{ANDROID_SDK_HOME} ${ANDROID_SDK_HOME})
 	execute_process(COMMAND cmd /c setx ANDROID_SDK_HOME "${ANDROID_SDK_HOME}")
 	
-	set(VS_AndroidHome "${ANDROID_SDK_DIR}")
+	###### VS_AndroidHome ######
+	dk_getNativePath("${ANDROID_SDK_DIR}" VS_AndroidHome)
+	dk_set(VS_AndroidHome ${VS_AndroidHome})
+	set(ENV{VS_AndroidHome} ${VS_AndroidHome})
 	execute_process(COMMAND cmd /c setx VS_AndroidHome "${VS_AndroidHome}")
 endif()
 
@@ -44,24 +57,29 @@ if(NOT EXISTS "${ANDROID_SDK_DIR}/licenses")
 	#	dk_killProcess(adb.exe NO_HALT)
 	#endif()
 	
-	
 	### SignLicenses ###
-	if(EXISTS "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
-		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
+	if(WIN_HOST)
+		if(EXISTS "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
+			dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk_8u41/registerJDK.cmd")
+		endif()
+
+		if(EXISTS "${SDKMANAGER_BAT}")
+			dk_executeProcess("${SDKMANAGER_BAT} --licenses")
+		endif()
+		
+		if(EXISTS "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
+			dk_executeProcess(call "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
+		endif()
+		
+		if(EXISTS "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
+			dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
+		endif()
 	endif()
 	
-	
-	
-	if(EXISTS "${SDKMANAGER_BAT}")
-		WIN_HOST_dk_executeProcess("${SDKMANAGER_BAT} --licenses")
-	endif()
-	WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/android-sdk/SignLicenses.cmd")
-	UNIX_HOST_dk_executeProcess(chmod 777 "${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
-	UNIX_HOST_dk_executeProcess("${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
-	
-	
-	
-	if(EXISTS "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
-		WIN_HOST_dk_executeProcess(call "${DKIMPORTS_DIR}/openjdk/registerJDK.cmd")
+	if(UNIX_HOST)
+		if(EXISTS "${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
+			dk_executeProcess(chmod 777 "${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
+			dk_executeProcess("${DKIMPORTS_DIR}/android-sdk/SignLicenses.sh")
+		endif()
 	endif()
 endif()
