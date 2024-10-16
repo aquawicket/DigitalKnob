@@ -1,8 +1,11 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # https://packages.msys2.org/package/mingw-w64-x86_64-gcc?repo=mingw64
 
+dk_load(dk_builder)
 
 if(clang OR mingw OR ucrt)
 	dk_validate(MSYS2  			"dk_depend(msys2)")

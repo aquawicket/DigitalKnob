@@ -8,13 +8,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_getNativePath input output)
 	dk_debugFunc("\${ARGV}")
-	
 	if(NOT ${ARGC} EQUAL 2)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
 	endif()
-		
-	file(TO_NATIVE_PATH ${input} native_path)
-	set(${output} ${native_path} PARENT_SCOPE)
+	
+	file(TO_NATIVE_PATH "${input}" native_path)
+	
+	if("${output}" MATCHES "ENV{") 
+		set(${output} "${native_path}")				# ENV variable
+	else()
+		set(${output} "${native_path}" PARENT_SCOPE)	# regular variable
+	endif()
 
 #DEBUG
 #	dk_printVar(native_path)

@@ -1,4 +1,7 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 # https://docs.microsoft.com/en-us/java/openjdk/download
@@ -12,37 +15,51 @@ dk_load(dk_builder)
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java11/java110151/jdk-11.0.15.1_windows-x64_bin.zip
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
-#dk_set(OPENJDK_11_VERSION 11)
-
-WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip) # PATCH)
-#MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz PATCH)
-#LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
+WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+#MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz)
+#LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
 
 if(WIN_HOST)
-	set(JAVA_VERSION 11)
+	###### JAVA_VERSION ######
+	set(ENV{JAVA_VERSION} 11)
+	execute_process(COMMAND cmd /c setx JAVA_VERSION "$ENV{JAVA_VERSION}")
+	
+	###### JAVA_HOME ######
+	set(ENV{JAVA_HOME} "${OPENJDK_DIR}")
+	#dk_getNativePath("$ENV{JAVA_HOME}" ENV{JAVA_HOME})
+	dk_replaceAll("$ENV{JAVA_HOME}" "/" "\\" ENV{JAVA_HOME})
+	execute_process(COMMAND cmd /c setx JAVA_HOME "$ENV{JAVA_HOME}")
+	
+	###### VS_JavaHome ######
+	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
+	execute_process(COMMAND cmd /c setx VS_JavaHome "$ENV{VS_JavaHome}")
+	
+	###### STUDIO_JDK ######
+	set(ENV{STUDIO_JDK} "$ENV{JAVA_HOME}")
+	execute_process(COMMAND cmd /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
+	
+	###### STUDIO_GRADLE_JDK ######
+	set(ENV{STUDIO_GRADLE_JDK} "$ENV{JAVA_HOME}")
+	execute_process(COMMAND cmd /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
+	
+	
+	###### registerJDK.cmd ######
 	set(registerJDK11 ${OPENJDK_DIR}/registerJDK.cmd)
-
-	dk_getNativePath("${OPENJDK_DIR}" OPENJDK_WINDIR)
-	
 	dk_fileWrite(${registerJDK11} "@echo off\n")
-	dk_fileAppend(${registerJDK11} "set JAVA_VERSION=${JAVA_VERSION}\n")
-	dk_fileAppend(${registerJDK11} "setx JAVA_VERSION ${JAVA_VERSION}\n")
-	dk_fileAppend(${registerJDK11} "set JAVA_HOME=${OPENJDK_WINDIR}\n")
-	dk_fileAppend(${registerJDK11} "setx JAVA_HOME ${OPENJDK_WINDIR}\n")
-	dk_fileAppend(${registerJDK11} "setx VS_JavaHome ${OPENJDK_WINDIR}\n")
-	dk_fileAppend(${registerJDK11} "setx STUDIO_JDK ${OPENJDK_WINDIR}\n")
-	dk_fileAppend(${registerJDK11} "setx STUDIO_GRADLE_JDK ${OPENJDK_WINDIR}\n")
-	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d ${JAVA_VERSION} /f\n")
-	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"${OPENJDK_WINDIR}\" /f\n")
-	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\${JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"${OPENJDK_WINDIR}\\bin\\server\\jvm.dll\" /f\n")
+	dk_fileAppend(${registerJDK11} "set JAVA_VERSION=$ENV{JAVA_VERSION}\n")
+	dk_fileAppend(${registerJDK11} "setx JAVA_VERSION $ENV{JAVA_VERSION}\n")
+	dk_fileAppend(${registerJDK11} "set JAVA_HOME=$ENV{JAVA_HOME}\n")
+	dk_fileAppend(${registerJDK11} "setx JAVA_HOME $ENV{JAVA_HOME}\n")
+	dk_fileAppend(${registerJDK11} "set VS_JavaHome=$ENV{VS_JavaHome}\n")
+	dk_fileAppend(${registerJDK11} "setx VS_JavaHome $ENV{VS_JavaHome}\n")
+	dk_fileAppend(${registerJDK11} "set STUDIO_JDK=$ENV{STUDIO_JDK}\n")
+	dk_fileAppend(${registerJDK11} "setx STUDIO_JDK $ENV{STUDIO_JDK}\n")
+	dk_fileAppend(${registerJDK11} "set STUDIO_GRADLE_JDK=$ENV{STUDIO_GRADLE_JDK}\n")
+	dk_fileAppend(${registerJDK11} "setx STUDIO_GRADLE_JDK $ENV{STUDIO_GRADLE_JDK}\n")
+	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\" /v CurrentVersion /t REG_SZ /d $ENV{JAVA_VERSION} /f\n")
+	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}\" /v JavaHome /t REG_SZ /d \"$ENV{JAVA_HOME}\" /f\n")
+	dk_fileAppend(${registerJDK11} "reg add \"HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}\" /v RuntimeLib /t REG_SZ /d \"$ENV{JAVA_HOME}\\bin\\server\\jvm.dll\" /f\n")
 	dk_executeProcess(${registerJDK11})
-	
-	### Set Environment Variables ###
-	dk_setEnv(JAVA_VERSION ${JAVA_VERSION})
-	dk_setEnv(JAVA_HOME "${OPENJDK_8U41_WINPATH}")
-	dk_setEnv(VS_JavaHome "${OPENJDK_8U41_WINPATH}")
-	dk_setEnv(STUDIO_JDK "${OPENJDK_8U41_WINPATH}")
-	dk_setEnv(STUDIO_GRADLE_JDK "${OPENJDK_8U41_WINPATH}")
 endif()
 
 # MAC Install

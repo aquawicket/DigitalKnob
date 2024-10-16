@@ -10,12 +10,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_replaceAll input searchValue newValue rtn_var)
 	dk_debugFunc("\${ARGV}")
 	if(NOT ${ARGC} EQUAL 4)
-		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
+		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
 	endif()
 		
 	string(REPLACE "${searchValue}" "${newValue}" replaceAll "${input}")
-	#dk_printVar(replaceAll)
-	set(${rtn_var} ${replaceAll} PARENT_SCOPE)
+	
+	if("${rtn_var}" MATCHES "ENV{")
+		set(${rtn_var} ${replaceAll})
+	else()
+		set(${rtn_var} ${replaceAll} PARENT_SCOPE)
+	endif()
 endfunction()
 
 

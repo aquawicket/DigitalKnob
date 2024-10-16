@@ -3,7 +3,6 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-
 # https://www.gnu.org/software/bash/
 # https://packages.msys2.org/package/bash
 
@@ -68,12 +67,9 @@ if(NOT BASH_EXE)
 endif()
 
 
-
 ### Tiny Core Linux ###
 if(NOT BASH_EXE)
 	if(TINYCORE)
-		### TODO ###
-		#dk_command(tce-load -wi bash)
 		dk_installPackage(bash)
 	endif()
 endif()
