@@ -17,7 +17,7 @@ DKCodeRunner.prototype.end = function DKCodeRunner_end() {
 DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
 	console.log("DKCodeRunner.prototype.create()")
 	
-	const textareaDiv = document.createElement("div")
+	var textareaDiv = document.createElement("div")
 	textareaDiv.style.position = "absolute"
 	textareaDiv.style.top = "35rem"
 	textareaDiv.style.left = "5rem"
@@ -25,7 +25,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	textareaDiv.style.right = "5rem"
 	document.body.appendChild(textareaDiv)
 	
-	const textarea = document.createElement("textarea")
+	var textarea = document.createElement("textarea")
 	textarea.style.position = "absolute"
 	textarea.style.top = "0rem"
 	textarea.style.left = "0rem"
@@ -51,7 +51,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
-		const dkmenu = DKMenu.prototype.create(textarea)
+		var dkmenu = DKMenu.prototype.create(textarea)
 		dkmenu.addItem("Test", function dk_menu_test(){
 			console.log("clicked Test")
 		})
