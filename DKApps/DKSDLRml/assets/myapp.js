@@ -38,7 +38,7 @@ var MyApp = function() {};
 var myapp = new MyApp;
 
 myapp.loadFiles = function myapp_loadFiles() {
-	alert("myapp_loadFiles()");
+	//alert("myapp_loadFiles()");
 	
 	DKPlugin("DK/DKTrace.js", "singleton")
     DKPlugin("DK/DKErrorHandler.js", "singleton")
