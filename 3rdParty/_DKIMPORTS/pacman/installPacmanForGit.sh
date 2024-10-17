@@ -1,10 +1,14 @@
 #!/bin/sh
+
+# https://stackoverflow.com/a/65204171/688352
+[ -z "${DKBASH_FUNCTIONS_DIR_-}" ] && export DKBASH_FUNCTIONS_DIR_="../../../DKBash/functions/"
 [ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
 
 ################################################################################
 # installPacman()
 #
-#installPacman() {
+installPacman() {
+	[[ $SSH_ASKPASS =~ "git" ]] && echo "GitBash" || echo "NOT gitbash"
 	
 	#$(set +o posix)    && set +o posix
 	$(set +o pipefail) && set +o pipefail  	# trace ERR through pipes
@@ -26,22 +30,29 @@
 		zstd=zstd-1.5.0-1-i686.pkg.tar.xz
 	else
 		pacman="
-		pacman-6.0.1-26-x86_64.pkg.tar.zst
+		pacman-6.0.1-28-x86_64.pkg.tar.zst
 		pacman-mirrors-20221016-1-any.pkg.tar.zst
 		msys2-keyring-1~20221024-1-any.pkg.tar.zst
 		"
 		zstd=zstd-1.5.2-1-x86_64.pkg.tar.xz
 	fi
-	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDIGITALKNOB_DIR"
+	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
 	
-	echo "https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf"
 	dk_call dk_download https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf ${DKDOWNLOAD_DIR}/pacman.conf
 	dk_call dk_copy "${DKDOWNLOAD_DIR}/pacman.conf" "/etc/pacman.conf" OVERWRITE
 	#curl https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf -o /etc/pacman.conf
 	#curl https://raw.githubusercontent.com/msys2/MSYS2-packages/master/pacman/pacman.conf -o /etc/pacman.conf
 	
+	#https://repo.msys2.org/msys/x86_64/pacman-6.0.1-26-x86_64.pkg.tar.zst 
+	#https://repo.msys2.org/msys/x86_64/pacman-mirrors-20221016-1-any.pkg.tar.zst
+	
 	for f in $pacman; do echo "https://repo.msys2.org/msys/$HOSTTYPE/$f" && dk_call dk_download https://repo.msys2.org/msys/$HOSTTYPE/$f ${DKDOWNLOAD_DIR}/$f; done
+	#dk_call dk_download http://aquawicket.com/download/pacman-6.0.1-26-x86_64.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-6.0.1-26-x86_64.pkg.tar.zst
+	#dk_call dk_download http://aquawicket.com/download/pacman-mirrors-20221016-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-mirrors-20221016-1-any.pkg.tar.zst
+	#dk_call dk_download http://aquawicket.com/download/msys2-keyring-1~20221024-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/msys2-keyring-1~20221024-1-any.pkg.tar.zst
 	#for f in $pacman; do echo "https://repo.msys2.org/msys/$HOSTTYPE/$f" && curl https://repo.msys2.org/msys/$HOSTTYPE/$f -fo ~/Downloads/$f; done
+	
+	
 	
 	# https://github.com/mcgitty/pacman-for-git/raw/main/zstd-1.5.2-1-x86_64.pkg.tar.xz
 	echo "https://github.com/mcgitty/pacman-for-git/raw/main/$zstd"
@@ -88,14 +99,12 @@
 	$(set -o errexit)  && set -o errexit  	# set -e : exit the script if any statement returns a non-true
 	#$(shopt -s extdebug) && shopt -s extdebug
 	trap 'dk_onError $BASH_SOURCE $LINENO' ERR
-#}
+}
 
 
 
 
 
 
-###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-#DKTEST() {
-#	installPacman
-#}
+
+installPacman

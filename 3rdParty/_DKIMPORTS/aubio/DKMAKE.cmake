@@ -26,7 +26,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${AUBIO_DIR})
+#dk_configure(${AUBIO_DIR})
 
 
 ### COMPILE ###

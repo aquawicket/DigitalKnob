@@ -102,6 +102,12 @@ function(dk_build path) #target NO_HALT
 			dk_make(${ARGV})
 			return()
 		endif()
+		if(EXISTS ${path}/Makefile)
+			dk_info("Building with make")
+			dk_make(${ARGV})
+			return()
+		endif()
+		
 		if(MULTI_CONFIG)
 			if(DEBUG)
 				if(EXISTS ${path}/${triple}/${DEBUG_DIR}/Makefile)
