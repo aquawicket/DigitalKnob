@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT EXISTS "${path}")
 		dk_warning("dk_include(): path:${path} does not exist")
@@ -49,7 +49,7 @@ dk_createOsMacros("dk_include")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 	dk_include("TODO")

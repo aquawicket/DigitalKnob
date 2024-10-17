@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	https://stackoverflow.com/a/31919435
 #
 function(dk_getGitBranchName url rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)
 	dk_assertPath(GIT_EXE)
@@ -27,7 +27,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

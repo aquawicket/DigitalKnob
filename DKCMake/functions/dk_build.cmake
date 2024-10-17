@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	target (optional)	- The target of the project to build
 #
 function(dk_build path) #target NO_HALT
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_debug("dk_build(${ARGV})")
 	dk_debug("dk_build(${path})")
 	#dk_assertPath(${path})
@@ -164,7 +164,7 @@ dk_createOsMacros("dk_build")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

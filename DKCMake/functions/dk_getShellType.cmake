@@ -32,7 +32,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getShellType)
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	execute_process(COMMAND dk_polyglot OUTPUT_VARIABLE RAW_ECHO)
 	message(STATUS "RAW_ECHO = ${RAW_ECHO}")
 	
@@ -60,7 +60,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getShellType(ShellType)
 	#dk_printVar(ShellType)

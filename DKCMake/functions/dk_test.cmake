@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_test)
-	dk_debugFunc("\${ARGV}")   
+	dk_debugFunc()   
     
     dk_echo( "################# dk_test.cmake #################")
     dk_echo( "                    0 = $0")
@@ -52,7 +52,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_test("arg 1" "arg 2" rtn_var)
     dk_echo("rtn_var = ${rtn_var}")	

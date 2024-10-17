@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 #
 function(dk_arrayConcat array)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo("dk_arrayConcat")
 
@@ -33,7 +33,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_arrayConcat(MyArray)
 endfunction()

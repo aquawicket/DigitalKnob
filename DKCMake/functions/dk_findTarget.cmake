@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@RESULT_TYPE	- TODO
 #
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	## search up to 4 levels deep
@@ -47,7 +47,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

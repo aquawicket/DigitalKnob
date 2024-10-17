@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_urlExists(url rtn_var)
 #
 function(dk_urlExists url rtn_var)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
     
 	if(CMAKE_VERSION VERSION_LESS 3.19)
 		file(DOWNLOAD 
@@ -42,7 +42,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 
     dk_echo()
     #set(url http://www.google.com/index.html)

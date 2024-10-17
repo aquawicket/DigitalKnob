@@ -18,7 +18,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
 function(dk_import url)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_importVariables(${url} PLUGIN_PREFIX ${ARGN})
 
@@ -72,7 +72,7 @@ dk_createOsMacros("dk_import")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_import(https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip)
 endfunction()

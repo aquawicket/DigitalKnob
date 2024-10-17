@@ -18,7 +18,7 @@ set(indent_count 0 CACHE INTERNAL "")
 #	@var  - The name of an eisting function/file or a full file path to a .cmake file.
 #
 macro(dk_load var)
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	#dk_echo("dk_load(${var})")
 	
 	string(STRIP ${var} fn)
@@ -172,7 +172,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 endmacro()
 
 function(dk_parseFunctionsAndLoadFromString str)
-	#dk_echo("dk_debugFunc("\${ARGV}")") #dk_debugFunc("\${ARGV}")
+	#dk_echo("dk_debugFunc()") #dk_debugFunc()
 	
 	## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_function(,  MAC_X86_64_dk_function(  or  dk_function(
 	string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" matches "${str}")
@@ -221,7 +221,7 @@ endfunction(dk_parseFunctionsAndLoadFromString)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) 
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_load(msys2)
 endfunction()

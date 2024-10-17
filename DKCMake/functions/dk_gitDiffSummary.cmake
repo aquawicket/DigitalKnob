@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_gitDiffSummary)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
   
 	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
     dk_cd(${DKBRANCH_DIR})
@@ -26,7 +26,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_gitDiffSummary()
 endfunction()

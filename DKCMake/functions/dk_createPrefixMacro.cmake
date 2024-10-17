@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@func	- The func of the function to create aliases for
 #
 function(dk_createPrefixMacro func) #ARGN
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	
 	set(${ARGN})
 	string(REPLACE ";" "_" prefix_name "${ARGN}")
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

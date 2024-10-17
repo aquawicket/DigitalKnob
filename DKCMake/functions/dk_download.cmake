@@ -20,7 +20,7 @@ endif()
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
 function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOption(NO_HALT ${ARGV})
 
@@ -157,7 +157,7 @@ dk_createOsMacros("dk_download")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})

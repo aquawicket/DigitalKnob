@@ -48,7 +48,7 @@ dk_createOsMacros("dk_makeDirectory")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_makeDirectory("C:/test")
 endfunction()

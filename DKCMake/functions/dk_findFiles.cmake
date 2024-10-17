@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOption(RECURSE ${ARGV})
 
@@ -38,7 +38,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@target:(optional)	- TODO
 #
 function(dk_xcodeDebug path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT MAC_HOST)
 		return()
@@ -36,7 +36,7 @@ dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_todo()
 endfunction()

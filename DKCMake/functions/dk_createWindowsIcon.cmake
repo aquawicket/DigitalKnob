@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@outpath	- Full path of the output file to save to (.ico)
 #
 function(dk_createWindowsIcon inpath outpath)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_assertPath(inpath)
 	
 	dk_load(${DKIMPORTS_DIR}/imagemagick/DKMAKE.cmake)
@@ -27,7 +27,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DKAPPS_DIR "dk_DKBRANCH_DIR()")
 	dk_createWindowsIcon(${DKAPPS_DIR}/DKCore/icons/icon.png ${DKAPPS_DIR}/DKCore/icons/icon.ico)

@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@variable:  The variable to be evaluated. If this variable evaluates to false, this causes an assertion
 #
 function(dk_assertVar variable)
-	dk_debugFunc("\${ARGV}")	
+	dk_debugFunc()	
 	
 	if(NOT ${variable})
 		dk_echo("\n\n${bg_red}Assertion failed: at ${variable}${clr}")
@@ -51,7 +51,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

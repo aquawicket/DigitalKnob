@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@inputPath	- The CMake / style full path to append the the Environment Path variable
 #
 function(dk_prependEnvPath inputPath)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	#if(NOT inputPath)
 	#	dk_fatal("dk_prependEnvPath(): inputPath is invalid!")
@@ -47,7 +47,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

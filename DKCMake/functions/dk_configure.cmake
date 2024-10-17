@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@SOURCE_DIR - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #
 function(dk_configure SOURCE_DIR) #ARGN
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_assertPath(SOURCE_DIR)
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
@@ -106,7 +106,7 @@ dk_createOsMacros("dk_configure")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_depend(zlib)
 	dk_configure(${ZLIB_DIR})

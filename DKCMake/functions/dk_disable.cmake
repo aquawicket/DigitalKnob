@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@target:(optional)	- TODO
 #
 function(dk_disable plugin)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
@@ -56,7 +56,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

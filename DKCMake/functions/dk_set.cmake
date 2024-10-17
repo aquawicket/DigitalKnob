@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_createOsMacros.cmake)
 #	@value		- The value to set the variable to. 
 #
 function(dk_set variable)# value)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(${ARGC} LESS 1)
 		dk_fatal("dk_set(${ARGV}): not enough arguments")
@@ -35,7 +35,7 @@ dk_createOsMacros("dk_set")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_set(myVariable "this is the string value of myVariable")
 	dk_info("myVariable = ${myVariable}")

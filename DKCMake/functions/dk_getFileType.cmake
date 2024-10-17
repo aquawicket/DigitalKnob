@@ -14,7 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Reference: https://en.wikipedia.org/wiki/List_of_file_formats
 #
 function(dk_getFileType path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getExtension(${path} extension)
 	if(NOT extension)
@@ -77,7 +77,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

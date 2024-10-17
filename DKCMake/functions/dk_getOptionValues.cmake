@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	EXAMPLE: dk_getOptionValues(MY_ARG ${ARGV})
 #
 function(dk_getOptionValues name)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	cmake_parse_arguments(ARG "" "${name}" "" ${ARGN})
 	cmake_parse_arguments(ARG REMOVE "" "" ${ARGN})
@@ -39,7 +39,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

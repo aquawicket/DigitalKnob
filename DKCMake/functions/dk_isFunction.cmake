@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var: 	- True if the string is the name of a function, False if otherwise.
 #
 function(dk_isFunction name rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	if(COMMAND ${name})
@@ -32,7 +32,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_echo("testing dk_isFunction(test_function)")
 	dk_isFunction("test_function" isFunction)

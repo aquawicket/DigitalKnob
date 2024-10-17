@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKBRANCH_DIR)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	
@@ -181,7 +181,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_DKBRANCH_DIR()
 endfunction()

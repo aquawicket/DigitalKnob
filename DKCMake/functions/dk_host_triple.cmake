@@ -20,7 +20,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <OS>_<ARCH>_<ENV>_HOST	= ANDROID_ARM64_CLANG_HOST, EMSCRIPTEN_ARM64_CLANG_HOST, IOS_ARM64_CLANG_HOST, IOSSIM_ARM64_CLANG_HOST, LINUX_ARM64_CLANG_HOST, MAC_ARM64_CLANG_HOST, RASPBERRY_ARM64_CLANG_HOST, WINDOWS_ARM64_CLANG_HOST 
 #
 function(dk_host_triple)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		set(CMAKE_HOST_WIN32 1)
@@ -157,7 +157,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_host_triple()
 endfunction()

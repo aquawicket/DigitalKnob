@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var: 	- True if the variable is a number, False if otherwise.
 #
 function(dk_isNumber variable rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	if(${variable} MATCHES "^[0-9]+$")
@@ -30,7 +30,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_isNumber(1 result)
 	dk_info("${result}")

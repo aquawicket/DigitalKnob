@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@args	- TODO
 #
 function(dk_msys2Bash)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_assertVar(MINGW)
 	dk_assertVar(MSYSTEM)
@@ -79,7 +79,7 @@ dk_createOsMacros("dk_msys2Bash")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

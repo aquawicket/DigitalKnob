@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_clearCmakeCache)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
     dk_info("Deleting CMake cache files. . .")
 
@@ -51,7 +51,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_clearCmakeCache()
 endfunction()

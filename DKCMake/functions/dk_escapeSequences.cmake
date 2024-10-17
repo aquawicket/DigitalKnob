@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_escapeSequences)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	# ASCII control characters (character code 0-31)
 	#	      		SYMBOL	DEC		OCT		HEX		HTML		Description
@@ -124,7 +124,7 @@ function(dk_escapeSequences)
 endfunction()
 
 function(ASCII_ADD)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	#https://linuxsimply.com/bash-scripting-tutorial/array/array-of-arrays/
 	
@@ -159,7 +159,7 @@ function(ASCII_ADD)
 endfunction()
 
 function(ASCII_SHOW)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	#ITEM=(${ASCII[$1]})
 	dk_info("${ITEM[$DEC]}	${ITEM[$SYMBOL]}	${ITEM[$DEC]}	${ITEM[$OCT]}	${ITEM[$HEX]}	${ITEM[$HTML]}	${ITEM[$INFO]}")
@@ -176,7 +176,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

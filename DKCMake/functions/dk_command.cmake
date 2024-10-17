@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	[NOMERGE]
 #
 function(dk_command)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOptionValue(RESULT_VARIABLE       		${ARGV})
 	dk_getOptionValue(RESULTS_VARIABLE    			${ARGV})
@@ -87,7 +87,7 @@ dk_createOsMacros("dk_command")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

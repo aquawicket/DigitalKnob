@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path	- The path to remove all empty directories from
 #
 function(dk_deleteEmptyDirectories path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT EXISTS ${path})
 		dk_wait("path:${path} does not exist")
@@ -32,7 +32,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -14,7 +14,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@stack 		- List of absolute paths of all files currently on the stack of file inclusion, with the bottom-most file first.
 #
 macro(dk_watchCallback variable access value current_list_file stack)
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
 	#	dk_echo("${cyan}################################ VARIABLE WATCH: ${variable} ############################################${clr}")
 		dk_echo("")
@@ -36,7 +36,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

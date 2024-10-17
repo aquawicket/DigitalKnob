@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_createShortcut shortcut_path target_path) # arguments
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_debug("dk_createShortcut(${ARGV}).cmake")
 	
 	set(arguments ${ARGN})
@@ -36,7 +36,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DKDESKTOP_DIR   "dk_DKHOME_DIR()")
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")

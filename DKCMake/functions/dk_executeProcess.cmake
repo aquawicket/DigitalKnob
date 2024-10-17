@@ -32,7 +32,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #					[COMMAND_ERROR_IS_FATAL <ANY|LAST>])
 #
 function(dk_executeProcess)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	dk_getOptionValues(COMMAND 						${ARGV})
@@ -204,7 +204,7 @@ dk_createOsMacros("dk_executeProcess")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_executeProcess(cmd /c "echo Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
 	

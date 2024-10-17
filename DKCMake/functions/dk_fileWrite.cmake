@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_fileWrite filepath str) 
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGC}:${ARGV}): incorrect number of arguments")
 	endif()
@@ -19,7 +19,7 @@ endfunction()
 
 
 function(DKTEST) ########################################################################
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	#dk_fileWrite("dk_fileWrite_TEST.txt" "string written by dk_fileWrite")
 	

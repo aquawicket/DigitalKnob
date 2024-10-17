@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	https://stackoverflow.com/a/66755317/688352
 #
 function(dk_gitApplyPatch directory patch_file)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(GIT_EXE "dk_installGit()")
 	dk_append(COMMAND_ARGS ${GIT_EXE})
@@ -60,7 +60,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) 
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_gitApplyPatch("C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
 endfunction()

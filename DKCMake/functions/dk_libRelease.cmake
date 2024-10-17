@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@variable (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libRelease lib_path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT RELEASE)
 		return()
@@ -53,7 +53,7 @@ dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

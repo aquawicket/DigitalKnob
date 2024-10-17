@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_convertToCIdentifier input output)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
@@ -22,7 +22,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	# Can't handle these characters yet->    [ ] \ ' . / ~ " ? < > { } `
 	set(myVar "a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 - = ; , ! @ # $ % ^ & * ( ) _ + | :")

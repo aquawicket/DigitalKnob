@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
 #	@code	   - The code to run if the condition is true."
 #
 macro(dk_if)
-	dk_debugFunc("${ARGV}")
+	dk_debugFunc()
 	
 	set(n 0)
 	unset(argv)
@@ -48,7 +48,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(TEST_VAR 0)
 	dk_if(TRUE					"message('dk_if(TRUE) = true')")

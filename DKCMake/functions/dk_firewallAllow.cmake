@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @executable		- The path to the executable to allow
 #
 function(dk_firewallAllow name executable)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	return()	# this function is disabled for now
 	
@@ -30,7 +30,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

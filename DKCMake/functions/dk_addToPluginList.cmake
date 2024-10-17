@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<plugin_name>	- TODO
 #
 function(dk_add_to_plugin_list plugin_name)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
@@ -26,7 +26,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

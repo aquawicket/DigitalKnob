@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@outpath	- Full path of the output file to save to
 #
 function(dk_resizeImage inpath width height outpath)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_dirname(${outpath} outdir)
 	dk_assertVar(outdir)
@@ -36,7 +36,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

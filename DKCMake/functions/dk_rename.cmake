@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_rename from to) # FLAGS: OVERWRITE, NO_HALT
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
@@ -45,7 +45,7 @@ dk_createOsMacros("dk_rename")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

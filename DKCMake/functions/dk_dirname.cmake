@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://en.wikipedia.org/wiki/Dirname
 #
 function(dk_dirname path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 	endif()
@@ -24,7 +24,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	dk_dirname("C:/Windows/System32" dirname)

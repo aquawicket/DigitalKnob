@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_callDKPowershell func rtn_var) #args
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_debug("dk_callDKPowershell(${ARGV}).cmake")
 	
     ### get required variables ###
@@ -73,7 +73,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_callDKPowershell(dk_test rtn_var "FROM DKCmake" "dk_callDKPowershell.cmake")
     dk_echo()

@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_commandExists shell commandName rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 		
 	## Test for command in BASH	
 	if("${shell}" STREQUAL "BASH")
@@ -51,7 +51,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_commandExists(CMAKE "echo" cmake_echo)
 	if(cmake_echo)

@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@args	- TODO
 #
 function(dk_queueCommand)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_debug("dk_queueCommand(${ARGV})")
 	dk_getOptionValue(RESULT_VARIABLE		${ARGV})
@@ -62,7 +62,7 @@ dk_createOsMacros("dk_queueCommand")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

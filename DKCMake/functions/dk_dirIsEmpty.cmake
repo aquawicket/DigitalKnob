@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<rtn_var>	- Returns true if the directory is empty. False if the directory is not empty
 #
 function(dk_dirIsEmpty path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")
@@ -35,7 +35,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

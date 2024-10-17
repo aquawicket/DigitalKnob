@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_messageBox msg)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_callDKPowershell(dk_messageBox "\"${msg}\"")
 endfunction()
@@ -18,7 +18,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_messageBox("This is a test dk_messageBox")
 endfunction()

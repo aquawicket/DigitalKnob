@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_builtinStacktrace)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 
 	message(WARNING)
 endfunction()
@@ -17,7 +17,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_builtinStacktrace()
 endfunction()

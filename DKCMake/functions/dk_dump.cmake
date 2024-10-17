@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@variable	- The variable to print to the screen. Without variable brackets ${ }'
 #
 macro(dk_dump variable)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_echo(STATUS "\n${cyan}############################### Variable DUMP ##############################################${clr}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
@@ -44,7 +44,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

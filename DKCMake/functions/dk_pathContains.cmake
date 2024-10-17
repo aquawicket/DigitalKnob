@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @rtn_var		- Returns TRUE if the expression is found
 #
 function(dk_pathContains expression rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	file(GLOB glob_var "${expression}")
 	if(glob_var)
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

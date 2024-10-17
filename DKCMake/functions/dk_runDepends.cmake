@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@plugin		- TODO
 #
 function(dk_runDepends plugin)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
@@ -149,7 +149,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

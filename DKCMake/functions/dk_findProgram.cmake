@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # 	[path1 path2 ...]	- TODO
 #
 function(dk_findProgram VAR filename)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	#dk_debug("dk_findProgram(${VAR}, ${filename})")
 	
 	if(EXISTS ${${VAR}})
@@ -63,7 +63,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@plugin_name	- TODO
 #
 function(dk_generateCmake plugin_name)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_info("dk_generateCmake(${plugin_name})")
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
@@ -117,7 +117,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

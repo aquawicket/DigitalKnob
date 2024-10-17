@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@args	- TODO
 #
 function(dk_visualStudio)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_visualStudioDebug(${ARGV})
 	dk_visualStudioRelease(${ARGV})
@@ -24,7 +24,7 @@ dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

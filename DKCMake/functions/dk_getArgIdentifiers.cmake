@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
-	dk_debugFunc("\${ARGV}")		# called in dk_debugFunc
+	dk_debugFunc()		# called in dk_debugFunc
 
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
@@ -52,7 +52,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

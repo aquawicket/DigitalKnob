@@ -19,7 +19,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 #
 function(dk_arrayPush array element1) # rtn_length)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(DEFINED "${ARGV}")
 		set(_array_ "${ARGV}")
@@ -44,7 +44,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_append(myArray "a")
 	

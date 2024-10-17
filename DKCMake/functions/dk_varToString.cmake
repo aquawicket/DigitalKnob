@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_varToString(variable string)
 #
 function(dk_varToString var str)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	set(tmp ${var})
 	string(APPEND var_str "{${tmp}}")
@@ -28,7 +28,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(varC "string value")
 	dk_varToString(varC varC_str)

@@ -124,7 +124,7 @@ dk_if(NOT DEFINED FATAL_HALT      "set(FATAL_HALT 1 CACHE INTERNAL '')")
 #    @message	- The message to print
 #
 function(dk_log)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT ENABLE_dk_log)
 		return()
@@ -172,7 +172,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_log("test dk_log message")
 	dk_log(VERBOSE "test dk_log VERBOSE message")

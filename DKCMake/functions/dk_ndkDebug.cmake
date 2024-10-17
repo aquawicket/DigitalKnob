@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path		- TODO
 #
 function(dk_ndkDebug path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT EXISTS ${path})
 		dk_fatal("dk_ndkDebug(${path}) path does not exist")
@@ -33,7 +33,7 @@ dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

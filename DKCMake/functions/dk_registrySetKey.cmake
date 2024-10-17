@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@data	- TODO
 #
 function(dk_registrySetKey key value data)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	
 	if(WIN_HOST)
@@ -30,7 +30,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -2,28 +2,29 @@
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
-#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 ##################################################################################
-# dk_debugFunc("\${ARGV}")
+# dk_debugFunc()
 #
 #	Prints the current file name, line number, function or macro name, and argument names with values
 #	Place this at the first line of every function in DKCMake and your own functions
 # 
 #	Example:
 #		function(MyFunction myArg1 myArg2)
-#			dk_debugFunc("\${ARGV}")  <--------
+#			dk_debugFunc()  <--------
 #
 #			## user code
 #		endfunction()
 #
 macro(dk_debugFunc)
+	message("ARGC= ${ARGC}")
 	unset(DKARGC)
 	unset(DKARGV)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND DKARGV ${arg})
 	endforeach()
 	list(LENGTH DKARGV DKARGC)
-	#message("${DKARGC} ${DKARGV}")
+	#message("${DKARGC} ${DKARGV}")	
   
 	set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
     get_filename_component(__FILE__ "${__FILE__}" NAME CACHE INTERNAL "")
@@ -35,6 +36,20 @@ macro(dk_debugFunc)
 		string(REPLACE ";" "', '" __ARGV__ "${DKARGV}")
 		#string(REGEX REPLACE "([][+.*()^])" "\\\\\\1" __ARGV__ "${ARGV}")
 		set(__ARGV__ "${__ARGV__}" CACHE INTERNAL "")
+	endif()
+	
+	if(${ARGC} EQUAL 1)
+		if(${DKARGC} LESS ${ARGV0})
+			dk_fatal("${__FUNCTION__}(${__ARGV__}) requires at least ${ARGV0} argments: got ${DKARGC}")
+		elseif(${DKARGC} GREATER ${ARGV0})
+			dk_fatal("${__FUNCTION__}(${__ARGV__}) takes ${ARGV0} argments max: got ${DKARGC}")
+		endif()
+	elseif(${ARGC} EQUAL 2)
+		if(${DKARGC} LESS ${ARGV0})
+			dk_fatal("${__FUNCTION__}(${__ARGV__}) requires at least ${ARGV0} argments: got ${DKARGC}")
+		elseif(${DKARGC} GREATER ${ARGV1})
+			dk_fatal("${__FUNCTION__}(${__ARGV__}) takes ${ARGV1} argments max: got ${DKARGC}")
+		endif()
 	endif()
     
 	#message("${__FUNCTION__}(${__ARGV__})")

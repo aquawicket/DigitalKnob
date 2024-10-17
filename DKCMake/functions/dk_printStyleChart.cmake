@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	TODO
 #
 function(dk_printStyleChart)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_echo(" ")
 	dk_echo(       "Style Chart")
@@ -30,7 +30,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

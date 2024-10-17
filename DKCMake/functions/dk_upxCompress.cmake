@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path		- The full path to the binary file to compress with UPX
 #
 function(dk_upxCompress path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_info("UPX compressing ${path}...")
 	dk_info("Please wait...")
@@ -24,7 +24,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

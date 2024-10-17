@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   NO_HALT (optional)	- if one of the parameters is NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_removeExtension path ret_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	dk_getOption(NO_HALT ${ARGV})
 	
 	string(FIND ${path} "." includes REVERSE)
@@ -32,7 +32,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
 	dk_removeExtension("${myPath}" myPath)

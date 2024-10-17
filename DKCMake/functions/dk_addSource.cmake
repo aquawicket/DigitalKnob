@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@regex	- TODO
 #
 function(dk_addSource regex)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
 	
@@ -27,7 +27,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_addSource()
 endfunction()

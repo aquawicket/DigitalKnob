@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var		- TODO
 #
 function(dk_validatePath path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getFullPath(${path} path)
 	set(${rtn_var} ${path} PARENT_SCOPE)
@@ -23,7 +23,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

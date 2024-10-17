@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_cd directory)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
   
 	#dk_assertPath(directory)
 	if(NOT EXISTS ${directory})
@@ -30,7 +30,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_cd(${DKDOWNLOAD_DIR})

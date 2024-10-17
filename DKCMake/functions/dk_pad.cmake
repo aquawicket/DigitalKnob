@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var		- The returned string w/padding
 #
 function(dk_pad str padchar length rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 
 	string(LENGTH "${str}" strlen)
@@ -40,7 +40,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

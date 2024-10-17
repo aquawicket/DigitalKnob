@@ -40,7 +40,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #															master
 #
 function(dk_importVariables url rtn_var)
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	
 	dk_getParameter(BRANCH 	PLUGIN_GIT_BRANCH 		${ARGV}) 	# master
 	dk_getParameter(FOLDER	PLUGIN_INSTALL_FOLDER 	${ARGV})	# zlib-master
@@ -374,7 +374,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(CMAKE_CURRENT_LIST_DIR "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/git")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" PLUGIN)

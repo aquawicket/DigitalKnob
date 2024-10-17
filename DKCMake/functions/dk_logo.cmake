@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_logo()
 #
 function(dk_logo)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_echo("${lblue}   ______  _____ _______ ______ ______ ______        _     __ _   _   _____  ______        ")
 	dk_echo("${lblue}   |     \\   |   |  ____   |      |    |_____| |      |____/  | \\  | |     | |_____]     ")
@@ -22,7 +22,7 @@ dk_logo()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_logo()
 endfunction()

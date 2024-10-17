@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@dest	- The folder path to extract the archive to
 #
 function(dk_extract src dest)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

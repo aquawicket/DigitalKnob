@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path	- The full path to add to the archive file
 #
 function(dk_compressAssets path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_info("Compressing: ${path}")
 	if(NOT EXISTS ${path})
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

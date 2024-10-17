@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	TODO
 #
 function(dk_downloadAll3rdParty)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_dependAll()
 	
@@ -68,7 +68,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

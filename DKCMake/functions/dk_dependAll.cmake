@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	TODO
 #
 function(dk_dependAll)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(DEPENDALL_FILE "")
 	
@@ -49,7 +49,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_dumpAllVariables(file)
 #
 function(dk_dumpAllVariables file)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
 	get_cmake_property(vars VARIABLES)
@@ -21,7 +21,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

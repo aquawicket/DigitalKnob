@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@outpath	- Full path of the output file to save to (.ico)
 #
 function(dk_createIcons image)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT EXISTS ${image})
 		dk_warning("dk_createIcons(): image:${image} not found.")
@@ -97,7 +97,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
 endfunction()

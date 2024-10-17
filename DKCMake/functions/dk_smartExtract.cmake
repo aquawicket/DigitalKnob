@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_smartExtract src dest)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
     #set(src ${ARGV1})
     #set(dest ${ARGV2})
@@ -82,7 +82,7 @@ endfunction()
 
 ####### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 	
 	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 	dk_download("https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip")

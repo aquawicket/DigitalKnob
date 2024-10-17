@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Print all cmake varibles and save to /cmake_variables.temp 
 #
 function(dk_printAllVariables)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	get_cmake_property(varNames VARIABLES)
 	list(SORT varNames)
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_printAllVariables()
 endfunction()

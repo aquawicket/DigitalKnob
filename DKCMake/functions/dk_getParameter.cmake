@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name rtn_var)
-	dk_debugFunc("${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOptionValue(${name} ${ARGN})
 	set(${rtn_var} ${${name}})
@@ -26,7 +26,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getParameter(TODO value ${ARGV})
 	dk_printVar(value)

@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   reference: https://stackoverflow.com/a/138581
 #
 function(dk_getDirectories path rtn_var)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 	#dk_verbose("dk_getDirectories(${path}, ${rtn_var})")
     
 	dk_getOption(RECURSIVE ${ARGV})
@@ -39,7 +39,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
     dk_getDirectories("${DIGITALKNOB_DIR}" directories)# RECURSIVE)

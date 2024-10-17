@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@arg		- The input argument(s) to be examined 
 #
 function(dk_isList rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	math(EXPR ARGC "${ARGC}-1")  
 
@@ -63,7 +63,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	list(APPEND myList "myList item 0")
 	list(APPEND myList "myList item 1")

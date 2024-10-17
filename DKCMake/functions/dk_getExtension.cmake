@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var:	- Returns the extension upon success: False upon error
 #
 function(dk_getExtension path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	# WHY A NEW GET EXTENSION FUNCTION ?
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
@@ -45,7 +45,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_set(myPath "/test/test2/xfile.exten")
     dk_getExtension("${myPath}" extension)

@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR}/dk_createPrefixMacro.cmake)
 #	@func	- The func of the function to create aliases for
 #
 function(dk_createOsMacros func)
-	#dk_debugFunc("\${ARGV}")
+	#dk_debugFunc()
 	message("dk_createOsMacros(${ARGV})")
 	
 	if(ext_string)
@@ -143,7 +143,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

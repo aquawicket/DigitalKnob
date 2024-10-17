@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var: returns the current working directory upon success. False upon error
 #
 #function(dk_getCurrentDirectory rtn_var)
-#	dk_debugFunc("\${ARGV}")
+#	dk_debugFunc()
 
 #	if(WIN_HOST)
 #		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE currentDirectory WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
@@ -29,7 +29,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

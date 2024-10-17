@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@path		- TODO
 #
 function(dk_visualStudioRelease path) #target #arch
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
 		return()
@@ -50,7 +50,7 @@ dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

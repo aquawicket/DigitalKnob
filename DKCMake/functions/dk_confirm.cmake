@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_confirm rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_echo("${yellow} Are you sure ? [Y/N] ${clr}")
 	
@@ -32,7 +32,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_confirm(result)
 	if(result)

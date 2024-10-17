@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@var	- The variable name to print
 #
 function(dk_printVar var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	if("${var}" MATCHES "ENV{") # ENV variables
 		set(ENV_VAR ${var})
@@ -53,7 +53,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(myVariable "this is the value of myVariable")
 	dk_printVar(myVariable)

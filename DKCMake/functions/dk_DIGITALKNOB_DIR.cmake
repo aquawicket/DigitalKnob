@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DIGITALKNOB_DIR)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 
     if(DEFINED DIGITALKNOB_DIR)
 		return()
@@ -48,7 +48,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
    
 	dk_DIGITALKNOB_DIR()
     dk_printVar(DIGITALKNOB_DIR)

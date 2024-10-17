@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Clear the console
 #
 function(dk_clearScreen)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	### Powershell ###
 	find_program(POWERSHELL_EXE powershell.exe)
@@ -44,7 +44,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_clearScreen()
 endfunction()

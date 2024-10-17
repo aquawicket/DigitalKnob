@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var		- TODO
 #
 function(dk_getPathToPlugin plugin rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	list(FIND dk_disabled_list "${ARGV}" index)
 	if(${index} GREATER -1)
@@ -51,7 +51,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

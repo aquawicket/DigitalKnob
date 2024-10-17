@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@msg	- The message to print
 #
 function(dk_success msg)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_log(SUCCESS "${ARGV0}")
 endfunction()
@@ -22,7 +22,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_success("test dk_success message")
 endfunction()

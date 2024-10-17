@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@name	- The name of the library
 #
 function(dk_findLibrary name)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOption(NO_HALT ${ARGV})
 	
@@ -37,7 +37,7 @@ dk_createOsMacros("dk_findLibrary")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

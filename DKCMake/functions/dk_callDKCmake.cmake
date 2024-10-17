@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_callDKCmake func rtn_var)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
     
     ### get required variables ###
     dk_validate(DKIMPORTS_DIR           "dk_DKBRANCH_DIR()")
@@ -57,7 +57,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
     
     dk_callDKCmake(dk_test "FROM DKCmake" "dk_callDKCmake.cmake" rtn_var)
 	dk_echo()

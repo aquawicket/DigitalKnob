@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_installPackage(package)
 #
 function(dk_installPackage package)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_toUpper(${package} PACKAGE)
 	execute_process(COMMAND command -v ${package} OUTPUT_VARIABLE ${PACKAGE}_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -159,7 +159,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_installPackage(zlib)
 endfunction()

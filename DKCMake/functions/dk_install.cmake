@@ -15,7 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	PATCH				-Patch the install directory with files from the _DKIMPORTS path
 #
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
 	set(PLUGIN_URL 			${${PLUGIN_VAR_PREFIX}_URL})
@@ -212,7 +212,7 @@ dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

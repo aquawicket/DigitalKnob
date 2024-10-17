@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getNativePath input output)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	if(NOT ${ARGC} EQUAL 2)
 		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments:${ARGC}")
 	endif()
@@ -28,7 +28,7 @@ endfunction()
 
 
 function(DKTEST) ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getNativePath("C:/Windows/System32" native_path)
 	dk_printVar(native_path)

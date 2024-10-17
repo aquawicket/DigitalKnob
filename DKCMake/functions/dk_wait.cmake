@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@msg:(Optional)		- default = "press and key to continue."
 #
 function(dk_wait) 
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_isNumber("${ARGV0}" isNumber)
 	if(isNumber)
@@ -46,7 +46,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

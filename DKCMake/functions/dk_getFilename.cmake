@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@rtn_var:	- Returns the file name upon success: False upon error
 #
 function(dk_getFilename path rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_assertVar(path)
 	dk_assertVar(rtn_var)
@@ -44,7 +44,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

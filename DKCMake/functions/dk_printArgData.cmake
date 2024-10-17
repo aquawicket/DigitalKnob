@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Print the current CMake scripte path and ARG* variables
 #
 macro(dk_printArgData)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_debug(" ")
 	dk_debug("************************************************************")
@@ -33,7 +33,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKHOME_DIR)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 
 	if(EXISTS "${DKHOME_DIR}")
 		dk_debug("DKHOME_DIR:${DKHOME_DIR} already set")
@@ -161,7 +161,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
     dk_DKHOME_DIR()
     dk_printVar(DKHOME_DIR)

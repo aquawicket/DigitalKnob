@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	<args>	- TODO
 #
 function(dk_bashEnv)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	###### set WORKING DIRECTORY ######
 	if(${CURRENT_PLUGIN})
@@ -92,7 +92,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_bashEnv(printenv)
 endfunction()

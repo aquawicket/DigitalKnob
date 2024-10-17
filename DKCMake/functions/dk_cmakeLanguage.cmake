@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@code	- The code to evaluate
 #
 function(dk_cmakeLanguage code)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(${CMAKE_VERSION} GREATER 3.17)
 		cmake_language(CALL ${code})
@@ -29,7 +29,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

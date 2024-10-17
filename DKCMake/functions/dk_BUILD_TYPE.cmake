@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #  
 #
 function(dk_BUILD_TYPE)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_echo()
@@ -59,7 +59,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_BUILD_TYPE()
 endfunction()

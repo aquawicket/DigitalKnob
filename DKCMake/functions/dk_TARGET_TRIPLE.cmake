@@ -21,7 +21,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
 function(dk_TARGET_TRIPLE)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	### Get TARGET_DIR ###
 	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
@@ -192,7 +192,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_TARGET_TRIPLE()
 endfunction()

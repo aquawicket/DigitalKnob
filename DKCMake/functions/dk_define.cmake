@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@str	- TODO
 #
 function(dk_define str)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		return()
@@ -31,7 +31,7 @@ dk_createOsMacros("dk_define")
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

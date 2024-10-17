@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 # FIXME
 macro(dk_require plugin)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	#list(FIND dk_disabled_list ${plugin} index)
@@ -33,7 +33,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

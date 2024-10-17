@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 function(dk_setEnv name value)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	#dk_debug("dk_setEnv(${ARGV})")
 	if(EXISTS "${value}")
@@ -58,7 +58,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

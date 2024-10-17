@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_getFiles path rtn_var)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
 	#dk_verbose("dk_getDirectories(${path}, ${rtn_var})")
     
 	#file(GLOB_RECURSE children LIST_DIRECTORIES true ${path}/*)
@@ -33,7 +33,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
     set(myPath "C:/Windows")
     dk_getFiles("${myPath}" files)

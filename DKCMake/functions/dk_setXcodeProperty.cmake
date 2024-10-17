@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @value		- The value to set the property to
 #
 function(dk_setXcodeProperty TARGET property value)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
     set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
 endfunction()
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

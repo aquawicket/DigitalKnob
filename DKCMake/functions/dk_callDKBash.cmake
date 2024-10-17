@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_callDKBash func rtn_var)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
     ### get required variables ###
 	dk_validate(BASH_EXE                "dk_depend(bash)")
@@ -54,7 +54,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_callDKBash(dk_test rtn_var "FROM DKCmake" "dk_callDKBash.cmake")
     dk_echo()

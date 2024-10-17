@@ -35,7 +35,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
 #
 function(dk_arrayCopyWithin array target start end)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo("dk_arrayCopyWithin")
 	
@@ -48,7 +48,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_arrayCopyWithin(array target start end)
 endfunction()

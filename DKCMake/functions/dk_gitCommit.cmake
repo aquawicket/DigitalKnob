@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_gitCommit)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 
 	dk_gitDiffSummary()
 	
@@ -69,7 +69,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_gitCommit()
 endfunction()

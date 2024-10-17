@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
-	dk_debugFunc("\${ARGV}")  # called in dk_debugFunc
+	dk_debugFunc()  # called in dk_debugFunc
 	
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
@@ -47,7 +47,7 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

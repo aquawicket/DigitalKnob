@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   @unix_path		- The returned unix style path
 #
 function(dk_getUnixPath path unix_path)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	
 	if(WIN32)
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()

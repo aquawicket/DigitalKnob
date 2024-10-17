@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #  https://stackoverflow.com/a/17584764
 #
 function(dk_isAlphanumeric str rtn_var)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
 	dk_convertToCIdentifier("${str}" str_alphaNumeric)
 	#dk_debug("${str} -> ${str_alphaNumeric}")
@@ -27,7 +27,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc("\${ARGV}")
+    dk_debugFunc()
  
     dk_isAlphanumeric(69 result) 			#&& dk_call dk_info "is alphanumeric" || dk_call dk_info "is NOT alphanumeric"
 	dk_printVar(result)

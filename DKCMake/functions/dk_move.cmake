@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   NO_HALT     - if any of the parameters equals NO_HALT, dk_fatal() messages will not be displayed
 #
 function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_getOption(OVERWRITE ${ARGV})
 	dk_getOption(NO_HALT ${ARGV})
@@ -45,7 +45,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
     

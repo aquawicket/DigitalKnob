@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@str	- TODO
 #
 function(dk_undefine str)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	remove_definitions(${str})
 	if(NOT DKDEFINES_LIST)
@@ -25,7 +25,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_todo()
 endfunction()
