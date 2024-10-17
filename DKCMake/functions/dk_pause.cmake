@@ -9,8 +9,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_pause) 
 	dk_debugFunc()
-#	message(${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE})
-
 
 	###### ${pause_msg} ######
 	if(ARGN)
@@ -21,9 +19,9 @@ function(dk_pause)
 	dk_echo("${pause_msg}")
 	
 	###### Cmd ######
-	dk_depend(cmd)
-	if(CMD_EXE)
-		dk_replaceAll(${CMD_EXE} "/" "\\" CMD_EXE)   # convert to windows path delimiters
+	#dk_depend(cmd)
+	if(DEFINED ENV{COMSPEC})
+		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
 		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
 		return()
 	endif()

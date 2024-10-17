@@ -2,7 +2,7 @@
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
-set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
+#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 ##################################################################################
 # dk_debugFunc()
 #
@@ -17,7 +17,6 @@ set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
 #		endfunction()
 #
 macro(dk_debugFunc)
-	message("ARGC= ${ARGC}")
 	unset(DKARGC)
 	unset(DKARGV)
 	foreach(arg IN LISTS ARGV)
@@ -38,6 +37,7 @@ macro(dk_debugFunc)
 		set(__ARGV__ "${__ARGV__}" CACHE INTERNAL "")
 	endif()
 	
+	### Check Argument Count ###
 	if(${ARGC} EQUAL 1)
 		if(${DKARGC} LESS ${ARGV0})
 			dk_fatal("${__FUNCTION__}(${__ARGV__}) requires at least ${ARGV0} argments: got ${DKARGC}")

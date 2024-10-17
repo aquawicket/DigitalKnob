@@ -39,9 +39,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:cmake_installed	
 	
 	::### install DKCMake
-	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::%dk_call% "%DKIMPORTS_DIR%\cmake\DKCmake_Batch_Wrapper.cmd"
-%endfunction%
+	:: TODO
+	
+	:: Add cmake to git_bash (symlink)
+	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
+	::%BASH_EXE% -c "ln ${HOME}/digitalknob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
+	::%BASH_EXE% -c "ln -s ${HOME}/digitalknob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
+%endfun%%ction%
 
 
 
