@@ -9,6 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   This information is pulled from the folder name of the CMAKE_BINARY_DIR
 #   i.e.  win_x86_64_clang
 #
+#	If the CMAKE_BINARY_DIR is missing the <OS> or the <ARCH>, dk_setTargetTriple will be called to get those variables
+#
 #	os   				= android, emscripten, ios, iossim, linux, mac, raspberry, windows 
 #	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 #	arch				= arm32, arm64, x86, x86_64
@@ -28,18 +30,19 @@ function(dk_TARGET_TRIPLE)
 	### Set target_type / TARGET_TYPE ###
 	if(TARGET_DIR MATCHES "Debug")	
 		### Get DEBUG ###
-		dk_set(TYPE DEBUG)						        # TYPE = DEBUG
-		dk_set(${TYPE} 1)								# DEBUG = 1	
-		dk_set(TARGET_TYPE Debug)						# TARGET_TYPE = Debug
+		dk_set(TYPE DEBUG)						        # 			   TYPE	= DEBUG
+		dk_set(${TYPE} 1)								# 			  DEBUG = 1	
+		#dk_set(TARGET_TYPE Debug)						# 		TARGET_TYPE	= Debug
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 
 	elseif(TARGET_DIR MATCHES "Release")
 		### Get RELEASE ###
-		dk_set(TYPE RELEASE)						    # TYPE = RELEASE
-		dk_set(${TYPE} 1)								# RELEASE = 1	
-		dk_set(TARGET_TYPE Release)						# TARGET_TYPE = Release
+		dk_set(TYPE RELEASE)						    # 			   TYPE = RELEASE
+		dk_set(${TYPE} 1)								# 			RELEASE = 1	
+		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	else()
+	
 		dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	endif()
 	dk_assertPath(TARGET_TRIPLE_DIR)
@@ -50,14 +53,14 @@ function(dk_TARGET_TRIPLE)
 	dk_assertPath(DK_PROJECT_DIR)
 
 	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
-	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        = win_x86_64_clang
+	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        	= win_x86_64_clang
 	dk_set(triple ${triple})					# Globalize the variable
-	dk_set(target_triple ${triple})				# target_triple = win_x86_64_clang
-	dk_toUpper(${triple} TRIPLE)				# TRIPLE        = WIN_X86_64_CLANG
+	dk_set(target_triple ${triple})				# target_triple 	= win_x86_64_clang
+	dk_toUpper(${triple} TRIPLE)				# TRIPLE        	= WIN_X86_64_CLANG
 	dk_set(TRIPLE ${TRIPLE})					# Globalize the variable
-	dk_set(TARGET_TRIPLE ${TRIPLE})				# TARGET_TRIPLE = WIN_X86_64_CLANG
-	dk_set(${triple} 1)					        # win_x86_64_clang = 1
-	dk_set(${TRIPLE} 1)					        # WIN_X86_64_CLANG = 1
+	dk_set(TARGET_TRIPLE ${TRIPLE})				# TARGET_TRIPLE 	= WIN_X86_64_CLANG
+	dk_set(${triple} 1)					        # win_x86_64_clang 	= 1
+	dk_set(${TRIPLE} 1)					        # WIN_X86_64_CLANG 	= 1
 	dk_printVar(triple)
 	dk_printVar(TRIPLE)
 

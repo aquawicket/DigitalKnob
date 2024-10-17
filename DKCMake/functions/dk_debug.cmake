@@ -10,8 +10,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@msg	- The message to print
 #
-function(dk_debug msg)
-	dk_debugFunc("\${ARGV}")
+function(dk_debug)
+	#dk_debugFunc("\${ARGV}")
+	dk_debugFunc()
 	
 	dk_log(DEBUG "${ARGV0}")
 endfunction()

@@ -9,9 +9,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@path	- The full path to the direcotory to be created
 #
-function(dk_makeDirectory path)
-	dk_debugFunc("\${ARGV}")
+function(dk_makeDirectory)
+	dk_debugFunc()
+	if(NOT ${ARGC} EQUAL 1)
+		dk_error("dk_makeDirectory(${ARGV}): incorret numer of arguments:${ARGC}")
+	endif()
 	
+	set(path ${ARGV0})
 	make_directory("${path}")  # requires full path
 	return()
 	
@@ -46,5 +50,5 @@ dk_createOsMacros("dk_makeDirectory")
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_todo()
+	dk_makeDirectory("C:/test")
 endfunction()
