@@ -129,7 +129,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NO_HALT
 	dk_info("Downloading ${src_filename}. . . please wait")
 	file(DOWNLOAD ${src_path} "${temp_path}"
 		SHOW_PROGRESS 
-		INACTIVITY_TIMEOUT 70
+		#INACTIVITY_TIMEOUT 70
 		STATUS status 
 	)
 	list(GET status 0 status_code) 
