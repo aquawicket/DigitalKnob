@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### setipapi ######
 # https://learn.microsoft.com/en-us/windows/win32/api/setupapi
 
-dk_load(dk_builder)
+dk_validate(triple "dk_TARGET_TRIPLE()")
 
 if(NOT WIN)
 	dk_undepend(setupapi)

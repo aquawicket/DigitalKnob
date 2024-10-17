@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://github.com/theMealena/SDL2_giflib_sa.git
 # https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip
 
-dk_load(dk_builder)
+dk_validate(triple "dk_TARGET_TRIPLE()")
 
 ### DEPEND ###
 dk_depend(giflib)

@@ -81,7 +81,7 @@ endif()
 ###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 dk_validate(host_triple   "dk_host_triple()")
 dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
-dk_validate(CONFIG_PATH   "dk_MULTI_CONFIG()")
+dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
 
 
 ##### Load Function files #################

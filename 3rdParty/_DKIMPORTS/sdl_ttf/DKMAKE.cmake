@@ -10,7 +10,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://www.libsdl.org/projects/SDL_ttf
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
-dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(freetype)

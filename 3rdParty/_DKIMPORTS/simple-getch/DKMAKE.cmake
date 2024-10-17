@@ -9,8 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://github.com/mouuff/simple-getch
 # https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip
 
-dk_load(dk_builder)
 
+dk_validate(host_triple "dk_host_triple()")
 if(NOT UNIX_HOST)
 	dk_undepend(simple-getch)
 	dk_return()

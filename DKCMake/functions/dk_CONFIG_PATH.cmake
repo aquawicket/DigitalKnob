@@ -4,10 +4,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ##################################################################################
-# dk_MULTI_CONFIG()
+# dk_CONFIG_PATH()
 #
 #
-function(dk_MULTI_CONFIG)
+function(dk_CONFIG_PATH)
 	dk_debugFunc("\${ARGV}")
 	
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")  # get DEBUG, RELEASE variables
@@ -69,5 +69,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc("\${ARGV}")
 	
-	dk_MULTI_CONFIG()
+	dk_CONFIG_PATH()
 endfunction()
