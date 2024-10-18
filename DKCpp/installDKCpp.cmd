@@ -1,5 +1,8 @@
 @echo off
 
+echo 0 = %0
+echo 1 = %1
+echo * = %*
 ::### OS ###
 ::default = host_os
 ::set "OS=Android"
@@ -86,8 +89,9 @@ if "%~1" neq ""    goto runDKCpp
 	::if not defined COMPILER_EXE  if "%host_env%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
 	::if not defined COMPILER_EXE  if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
 	:: C++
-	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANGXX_EXE%"
-	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GXX_EXE%"
+	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
+	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_CXX_COMPILER%"
+	%dk_call% dk_assertVar COMPILER_EXE
 	%dk_call% dk_printVar COMPILER_EXE
 
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"

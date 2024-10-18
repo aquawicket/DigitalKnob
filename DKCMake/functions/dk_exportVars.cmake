@@ -9,6 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_exportVars var_name var_value)
 	dk_debugFunc()
 	
+    dk_echo("EXPORTING VARIABLES ......")
 	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
 	if(WIN_HOST)
 		dk_fileAppend("${DKCACHE_DIR}/DKEXPORT_VARS" "SET ${var_name}=${var_value}\n")

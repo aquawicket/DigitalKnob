@@ -7,7 +7,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::#
 :dk_cmakeEval
     call dk_debugFunc 1 4
- setlocal
+ ::setlocal
 
     %dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKBRANCH_DIR"
     if not exist "%DKIMPORTS_DIR%"          %dk_call% dk_error "%__FUNCTION__%: could not locate DKIMPORTS_DIR"
@@ -58,6 +58,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::	###### IMPORT VARIABLES ######
     if not defined DKRETURN %return%
 	%dk_call% dk_importVars
+	
 	
 	
 ::  ## these lines are deprecated ###
