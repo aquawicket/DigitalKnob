@@ -1,6 +1,6 @@
 @echo off
-if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
+if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 if not defined BACKUP_DL_SERVER       set "BACKUP_DL_SERVER=http://aquawicket.com/download"
 if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
 ::####################################################################
@@ -10,7 +10,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
 :dk_download
     call dk_debugFunc 1 2
  setlocal
- 
+    
     set "url=%~1"
     ::%dk_call% dk_printVar url
     
@@ -20,7 +20,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     %dk_call% dk_basename "%url%" url_filename
     ::%dk_call% dk_printVar url_filename
     if not defined url_filename %dk_call% dk_error "url_filename invalid"
-    
+   
     if defined destination %dk_call% dk_realpath "%destination%" destination
     ::%dk_call% dk_printVar destination
     
@@ -37,7 +37,7 @@ if not defined TEST_BACKUP_DL_SERVER  set "TEST_BACKUP_DL_SERVER=0"
     ::%dk_call% dk_printVar destination
     
     if exist "%destination%" %dk_call% dk_info "%destination% already exist" & %return%
-    
+ 
 	:: Test that url exists, if not try BACKUP_DL_SERVER
 	if "%TEST_BACKUP_DL_SERVER%"=="1"  set "url=%BACKUP_DL_SERVER%/%url_filename%"
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%BACKUP_DL_SERVER%/%url_filename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."

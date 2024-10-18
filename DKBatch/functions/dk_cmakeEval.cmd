@@ -14,10 +14,11 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_validate DKCMAKE_DIR      "%dk_call% dk_DKBRANCH_DIR"
     if not exist "%DKCMAKE_DIR%"            %dk_call% dk_error "%__FUNCTION__%: could not locate DKCMAKE_DIR"
-    
-    %dk_call% dk_validate CMAKE_EXE        "call %DKIMPORTS_DIR%\cmake\dk_InstallCmake"
-    if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
 	
+    %dk_call% dk_validate CMAKE_EXE        "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+
+    if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
+
     %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
     ::%dk_call% dk_printVar DKCOMMAND
  
@@ -42,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%""
-    set "CMAKE_ARGS=%CMAKE_ARGS% "-P""
+    set CMAKE_ARGS=%CMAKE_ARGS% -P
     set "CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%""
     ::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
     ::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
@@ -93,8 +94,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::del cmake_eval.out
     ::err contains all of the lines
     ::echo %err%
-    
-    
+      
     ::%dk_call% dk_checkError
 %endfunction%
 

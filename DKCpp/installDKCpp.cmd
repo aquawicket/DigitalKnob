@@ -11,18 +11,18 @@
 ::set "OS=Raspberry"
 ::set "OS=Windows"
 
-::### ARCH ###
+::### arch ###
 ::default = host_arch
-::set "ARCH=arm"
-::set "ARCH=arm64"
-::set "ARCH=x86"
-::set "ARCH=x86_64"
+::set "arch=arm"
+::set "arch=arm64"
+::set "arch=x86"
+::set "arch=x86_64"
 
 ::### COMPILER ###
 ::default = clang
-::set "COMPILER=clang"
-::set "COMPILER=gcc"
-::set "COMPILER=msvc"
+::set "host_env=clang"
+::set "host_env=gcc"
+::set "host_env=msvc"
 
 ::### MSYSTEM ###
 ::set "MSYSTEM=CLANG32"
@@ -53,37 +53,40 @@ if "%~1" neq ""    goto runDKCpp
 	%dk_call% dk_echo "Installing DKCpp . . ."
 	
 	::###### OS ######
-	if not defined OS %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	if not defined host_os %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
 	if not defined OS set "OS=%host_os%"
 	%dk_call% dk_printVar OS
 	
-	::###### ARCH ######
-	if not defined ARCH %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if not defined ARCH set "ARCH=%host_arch%"
-	%dk_call% dk_printVar ARCH
+	::###### arch ######
+	if not defined host_arch %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
+	if not defined arch set "arch=%host_arch%"
+	%dk_call% dk_printVar arch
 	
-	::###### COMPILER ######
-	if not defined COMPILER set "COMPILER=clang"
-	%dk_call% dk_printVar COMPILER
+	::###### host_env ######
+	if not defined host_env set "host_env=clang"
+	if not defined env set "env=%host_env%"
+	%dk_call% dk_printVar host_env
 	
 	::###### MSYSTEM ######
-	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="x86"    set "MSYSTEM=CLANG32"
-	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="x86_64" set "MSYSTEM=CLANG64"
-	if not defined MSYSTEM  if "%COMPILER%"=="clang" if "%ARCH%"=="arm64"  set "MSYSTEM=CLANGARM64"
-	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86"    set "MSYSTEM=MINGW32"
-	if not defined MSYSTEM  if "%COMPILER%"=="gcc"   if "%ARCH%"=="x86_64" set "MSYSTEM=MINGW64"
+	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86"    set "MSYSTEM=CLANG32"
+	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="x86_64" set "MSYSTEM=CLANG64"
+	if not defined MSYSTEM  if "%host_env%"=="clang" if "%host_arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
+	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
+	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
 	%dk_call% dk_printVar MSYSTEM
+	
 	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if "%COMPILER%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
-	if "%COMPILER%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
+
+	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 	:: C
-	::if not defined COMPILER_EXE  if "%COMPILER%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
-	::if not defined COMPILER_EXE  if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
+	::if not defined COMPILER_EXE  if "%host_env%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
+	::if not defined COMPILER_EXE  if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
 	:: C++
-	if "%COMPILER%"=="clang"  set "COMPILER_EXE=%CLANGXX_EXE%"
-	if "%COMPILER%"=="gcc"	  set "COMPILER_EXE=%GXX_EXE%"
+	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANGXX_EXE%"
+	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GXX_EXE%"
 	%dk_call% dk_printVar COMPILER_EXE
 
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"

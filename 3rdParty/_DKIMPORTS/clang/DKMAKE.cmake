@@ -5,7 +5,6 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
-
 dk_load(dk_builder)
 
 if(clang OR mingw OR ucrt)
