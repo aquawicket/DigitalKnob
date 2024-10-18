@@ -18,7 +18,7 @@ dk_depend(ogg)
 ### IMPORT ###
 #dk_import(https://github.com/xiph/vorbis.git)
 dk_getFileParam("${DKIMPORTS_DIR}/vorbis/vorbis.txt" VERSION)
-dk_import(https://github.com/xiph/vorbis/releases/download/v1.3.7/libvorbis-%VERSION%.zip)
+dk_import(https://github.com/xiph/vorbis/releases/download/v1.3.7/libvorbis-${VERSION}.zip)
 
 
 ### LINK ###

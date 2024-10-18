@@ -12,7 +12,7 @@ dk_load(dk_builder)
 
 #dk_import(https://github.com/tukaani-project/xz.git)
 dk_getFileParam("${DKIMPORTS_DIR}/xz/xz.txt" VERSION)
-dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-%VERSION%.tar.gz)
+dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-${VERSION}.tar.gz)
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")

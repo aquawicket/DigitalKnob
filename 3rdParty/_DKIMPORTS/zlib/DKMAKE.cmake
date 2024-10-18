@@ -12,7 +12,7 @@ dk_validate(host_triple "dk_host_triple()")
 dk_validate(triple "dk_target_triple()")
 ### IMPORT ###
 dk_getFileParam("${DKIMPORTS_DIR}/zlib/zlib.txt" VERSION)
-dk_import(https://github.com/madler/zlib/archive/%VERSION%.zip)
+dk_import(https://github.com/madler/zlib/archive/${VERSION}.zip)
 #dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
 
 ### LINK ###

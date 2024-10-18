@@ -9,7 +9,7 @@ dk_load(dk_builder)
 
 ### IMPORT ###
 dk_getFileParam("${DKIMPORTS_DIR}/zstd/zstd.txt" VERSION)
-dk_import(https://github.com/facebook/zstd/archive/%VERSION%.zip)
+dk_import(https://github.com/facebook/zstd/archive/${VERSION}.zip)
 #dk_import(https://github.com/facebook/zstd/archive/refs/heads/release.zip)
 
 
