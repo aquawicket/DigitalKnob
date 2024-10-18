@@ -9,15 +9,15 @@ dk_removeAll() {
 	dk_debugFunc 0
 
 	
-	dk_clearScreen
-	dk_echo
-	dk_echo
-	dk_info "Do you want to delete the entire local repository . . . ?"
-	dk_info "This will delete the local digitalknob branch repository"
-	dk_info "Save any un-commited changes first."
-	dk_echo
+	dk_call dk_clearScreen
+	dk_call dk_echo
+	dk_call dk_echo
+	dk_call dk_info "Do you want to delete the entire local repository . . . ?"
+	dk_call dk_info "This will delete the local digitalknob branch repository"
+	dk_call dk_info "Save any un-commited changes first."
+	dk_call dk_echo
 		
-	dk_confirm || return
+	dk_call dk_confirm || return
 		
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
@@ -40,6 +40,7 @@ dk_removeAll() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-
+	dk_debugFunc 0
+	
 	dk_removeAll
 }
