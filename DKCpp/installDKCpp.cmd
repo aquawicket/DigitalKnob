@@ -74,13 +74,14 @@ if "%~1" neq ""    goto runDKCpp
 	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86"    set "MSYSTEM=MINGW32"
 	if not defined MSYSTEM  if "%host_env%"=="gcc"   if "%host_arch%"=="x86_64" set "MSYSTEM=MINGW64"
 	%dk_call% dk_printVar MSYSTEM
-	
+
 	
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 
+	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
+
 	:: C
 	::if not defined COMPILER_EXE  if "%host_env%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
 	::if not defined COMPILER_EXE  if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"

@@ -22,7 +22,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_removeExtension %CMAKE_DL_FILE% CMAKE_FOLDER
     %dk_call% dk_toLower %CMAKE_FOLDER% CMAKE_FOLDER
 	::%dk_call% dk_importVariables %CMAKE_DL%
-	
+ 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	set "CMAKE_DIR=%DKTOOLS_DIR%\%CMAKE_FOLDER%"
     set "CMAKE_EXE=%CMAKE_DIR%\bin\cmake.exe"
@@ -43,7 +43,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
 	::%BASH_EXE% -c "ln ${HOME}/digitalknob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
 	::%BASH_EXE% -c "ln -s ${HOME}/digitalknob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
-%endfun%%ction%
+%endfunction%
 
 
 

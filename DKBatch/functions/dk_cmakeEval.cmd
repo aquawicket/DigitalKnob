@@ -14,9 +14,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     %dk_call% dk_validate DKCMAKE_DIR      "%dk_call% dk_DKBRANCH_DIR"
     if not exist "%DKCMAKE_DIR%"            %dk_call% dk_error "%__FUNCTION__%: could not locate DKCMAKE_DIR"
-	
-    %dk_call% dk_validate CMAKE_EXE        "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
 
+    %dk_call% dk_validate CMAKE_EXE        "call %DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
+ 	echo ##############TEST####################	
     if not exist "%CMAKE_EXE%"              %dk_call% dk_error "%__FUNCTION__%: could not locate CMAKE_EXE" 
 
     %dk_call% dk_replaceAll "%~1" "\" "/" DKCOMMAND
@@ -33,22 +33,22 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     ::### build CMAKE_ARGS ###
     :: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
-    if defined DKCOMMAND  call set "CMAKE_ARGS=%CMAKE_ARGS%"-DDKCOMMAND=%%DKCOMMAND:"=%%""  
+    if defined DKCOMMAND  call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%% 
     
     :: append %DKRETURN% to CMAKE_ARGS with quotes removed
-    if defined DKRETURN   call set "CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%%DKRETURN:"=%%""
+    if defined DKRETURN   call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%
     
     :: append %DKVARS% to CMAKE_ARGS with quotes removed
-    if defined DKVARS     call set "CMAKE_ARGS=%CMAKE_ARGS% "%%DKVARS:"=%%""
-    
-    set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_="%DKCMAKE_FUNCTIONS_DIR_%""
+    if defined DKVARS     call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%
+   
+    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
+	set CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
     set CMAKE_ARGS=%CMAKE_ARGS% -P
-    set "CMAKE_ARGS=%CMAKE_ARGS% "%DK_EVAL%""
+    set CMAKE_ARGS=%CMAKE_ARGS% %DK_EVAL%
     ::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
     ::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
     ::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
-    
+  
     ::### call the cmake command ###
     echo "%CMAKE_EXE%" %CMAKE_ARGS%
     "%CMAKE_EXE%" %CMAKE_ARGS%
