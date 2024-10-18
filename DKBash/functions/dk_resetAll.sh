@@ -39,10 +39,7 @@ dk_resetAll() {
 	dk_call dk_delete "${DKBRANCH_DIR}"
 	
 	dkcall dk_pause
-	unset DKHOME_DIR
-	unset DK
-	unset DKF
-	exit & exec "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
 	
 #	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development #NO_CONFIRM
 	
