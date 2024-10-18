@@ -9,8 +9,10 @@ dk_load(dk_builder)
 # https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
 
 ### IMPORT ###
+
 #dk_import(https://github.com/tukaani-project/xz.git)
-dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz)
+dk_getFileParam("${DKIMPORTS_DIR}/xz/xz.txt" VERSION)
+dk_import(https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-%VERSION%.tar.gz)
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
