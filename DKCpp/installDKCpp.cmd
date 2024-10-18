@@ -1,8 +1,5 @@
 @echo off
 
-echo 0 = %0
-echo 1 = %1
-echo * = %*
 ::### OS ###
 ::default = host_os
 ::set "OS=Android"

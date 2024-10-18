@@ -11,7 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(triple "dk_target_triple()")
 ### IMPORT ###
-dk_import(https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip)
+dk_getFileParam("${DKIMPORTS_DIR}/zlib/version.txt" VERSION)
+dk_import(https://github.com/madler/zlib/archive/%VERSION%.zip)
 #dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
 
 ### LINK ###
