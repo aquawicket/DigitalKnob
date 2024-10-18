@@ -2,8 +2,8 @@
 if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
-if not exist %DKIMPORTS_DIR%\git\version.txt %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/version.txt" %DKIMPORTS_DIR%\git\version.txt
-%dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\version.txt VERSION
+if not exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/git.txt" %DKIMPORTS_DIR%\git\git.txt
+%dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\git.txt VERSION
 set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%VERSION%.windows.1/PortableGit-%VERSION%-32-bit.7z.exe"
 set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%VERSION%.windows.1/PortableGit-%VERSION%-64-bit.7z.exe"
 
