@@ -8,7 +8,8 @@ dk_load(dk_builder)
 # https://github.com/facebook/folly/blob/main/CMake/FindZstd.cmake
 
 ### IMPORT ###
-dk_import(https://github.com/facebook/zstd/archive/27bf1362fe10481bfed1f92cc24a9972e702e691.zip)
+dk_getFileParam("${DKIMPORTS_DIR}/zstd/zstd.txt" VERSION)
+dk_import(https://github.com/facebook/zstd/archive/%VERSION%.zip)
 #dk_import(https://github.com/facebook/zstd/archive/refs/heads/release.zip)
 
 
