@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
-
+echo "SHLVL = $SHLVL"
 ### Print Version Info ###
 echo ""
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH} || export DKSHELL_PATH=${SHELL}

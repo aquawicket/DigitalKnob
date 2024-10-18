@@ -11,7 +11,7 @@ dk_validate(triple "dk_TARGET_TRIPLE()")
 ### DEPEND ###
 if(WIN)
 	dk_depend(winmm)
-endi()
+endif()
 
 ### IMPORT ###
 #dk_import(https://github.com/thestk/rtaudio.git)

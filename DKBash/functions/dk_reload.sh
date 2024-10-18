@@ -8,29 +8,24 @@
 dk_reload() {
 	dk_debugFunc 0
 
-	[ -e "${DKSCRIPT_PATH}" ] || dk_call dk_error "DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist" || return 1
-
-	#dk_call dk_clearScreen
+	dk_call dk_assertPath DKSCRIPT_PATH
 	dk_call dk_info "reloading ${DKSCRIPT_PATH}. . ."
-	
 
-	###### METHOD 2 ######
-	#FIXME: need to unset any and all include guards here.
-	#       Or better yet, we need to clear the entire environment
-	dk_call dk_unset DKINIT
-	dk_call dk_unset DKHOME_DIR
-
-#	if (command -v bash); then
-		#dk_call dk_clearScreen
-		exec /bin/bash "${DKSCRIPT_PATH}"
-#	else
-#		dk_call dk_clearScreen
-#		exec "${DKSCRIPT_PATH}"
-#	fi
+	dk_call dk_clearScreen
 	
 	###### METHOD 1 ######
-#	dk_call dk_fileWrite "${DKBASH_DIR}/reload" "${DKSCRIPT_PATH}"
-#	dk_call dk_exit 0
+	# Clear the environment and reload script
+	BASH_EXE=bash
+	${BASH_EXE} -c "env -i HOME="$HOME" PATH="$PATH" ${BASH_EXE} -l -c "${DKSCRIPT_PATH}""
+	
+	###### METHOD 2 ######
+	# Replace the current process
+	#exec /bin/bash "${DKSCRIPT_PATH}"
+	
+	###### METHOD 3 ######
+	# Exit and realod upon reload file detection
+	#dk_call dk_fileWrite "${DKBASH_DIR}/reload" "${DKSCRIPT_PATH}"
+	#dk_call dk_exit 0
 }
 
 

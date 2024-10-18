@@ -3,7 +3,7 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
 # Microsoft Visual Studio Comunity
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
 # https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
@@ -16,7 +16,7 @@ dk_load(dk_builder)
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
-
+dk_load(dk_builder)
 if(NOT WIN_HOST)
 	dk_undepend(visualstudio)
 	dk_return()
