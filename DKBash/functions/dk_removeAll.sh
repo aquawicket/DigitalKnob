@@ -20,22 +20,20 @@ dk_removeAll() {
 	dk_confirm || return
 		
 	# make sure script is running from DKBRANCH_DIR
-	if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
-		dk_echo "${yellow}"
-		dk_echo "WARNING: this file isn't running from the branch directory"
-		dk_echo "Is must be in the branch directory to continue."
-		dk_echo "${clr}"
-        dk_printVar DKSCRIPT_DIR
-		dk_printVar DKBRANCH_DIR
-		return $(false);
-	fi
+	#if ! [ "${DKSCRIPT_DIR}" = "${DKBRANCH_DIR}" ]; then
+	#	dk_echo "${yellow}"
+	#	dk_echo "WARNING: this file isn't running from the branch directory"
+	#	dk_echo "Is must be in the branch directory to continue."
+	#	dk_echo "${clr}"
+    #    dk_printVar DKSCRIPT_DIR
+	#	dk_printVar DKBRANCH_DIR
+	#	return $(false);
+	#fi
 		
-	# Backup main script file to digitalknob/
-	rm -r -f "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-	cp "${DKSCRIPT_PATH}" "${DIGITALKNOB_DIR}/${DKSCRIPT_NAME}"
-		
-	dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
-	rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
+	# Backup main script file to DKCACHE_DIR/
+	rm -r -f "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+	cp "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_NAME}" & dk_echo "DELETING ${DKBRANCH_DIR} . . . ." & rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
 }
 
 
