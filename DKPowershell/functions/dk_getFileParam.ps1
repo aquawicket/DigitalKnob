@@ -13,18 +13,18 @@ function Global:dk_getFileParam() {
 	
 	Get-Content $file | ForEach-Object {
 		$line = $_ -split '='
-		echo "$($line[0]) = $($line[1])"
-#		if ($line[0] -eq $args[1]) { 
-#			Remove-Variable -Name $args[1] -Scope Global
-#			echo "args1 = $($args[1])"
-#			Set-Variable -Name $${($args[1])} -Value "$($line[1])" -Scope Global
-#		}
+		
+		#echo "file = $file"
+		#echo "var_name = $var_name"
+		#echo "line0 = $($line[0])"
+		#echo "line1 = $($line[1])"
+		
+		if ("$($line[0])" -eq "$var_name") { 
+			#Remove-Variable -Name $args[1] -Scope Global
+			Set-Variable -Name "$var_name" -Value "$($line[1])" -Scope Global
+			return "$($line[1])"
+		}
 	}
-	
-	echo "args0 = $($args[0])"
-    echo "args1 = $($args[1])"
-	echo "line0 = $($line[0])"
-    echo "line1 = $($line[1])"
 }
 
 
@@ -35,6 +35,7 @@ function Global:DKTEST() {
     dk_debugFunc 0
   
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKBRANCH_DIR"
-    dk_call dk_getFileParam ${DKIMPORTS_DIR}/git/version.txt VERSION
+    $VERSION = $(dk_getFileParam ${DKIMPORTS_DIR}/git/version.txt VERSION)
+	#dk_call dk_getFileParam "${DKIMPORTS_DIR}/git/version.txt" VERSION
 	dk_call dk_printVar VERSION
 }
