@@ -1,6 +1,6 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
-echo "SHLVL = $SHLVL"
+
 ### Print Version Info ###
 echo ""
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH} || export DKSHELL_PATH=${SHELL}
@@ -88,6 +88,7 @@ dkreloadWithBash(){
 	echo "Reloading ${0} with ${BASH_EXE} . . ."
 	unset DKINIT
 	exec ${BASH_EXE} "${0}"
+	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
 }
 
 ##################################################################################

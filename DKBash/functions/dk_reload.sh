@@ -11,11 +11,11 @@ dk_reload() {
 	dk_call dk_assertPath DKSCRIPT_PATH
 	dk_call dk_info "reloading ${DKSCRIPT_PATH}. . ."
 
-	#dk_call dk_clearScreen
+	dk_call dk_clearScreen
 	
 	###### METHOD 1 ######
+	# https://superuser.com/a/1333539/600216
 	# Clear the environment and reload script
-	BASH_EXE=${BASH}
 	exec env -i HOME="$HOME" PATH="$PATH" DKSCRIPT_PATH="${DKSCRIPT_PATH}" bash -l -c '${DKSCRIPT_PATH}'
 
 	###### METHOD 2 ######
