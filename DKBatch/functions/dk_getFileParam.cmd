@@ -12,7 +12,6 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	for /f "delims== tokens=1,2" %%A in (%~1) do (
 		rem echo %%A = %%B
 		if "%%A" == "%~2" endlocal & set %~2=%%B
-		
 	)
 	
 %endfunction%
@@ -25,7 +24,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_getFileParam %CD%\dk_getFileParam.txt PARAM2
+    %dk_call% dk_getFileParam dk_getFileParam.txt PARAM2
 	%dk_call% dk_printVar PARAM2
 	
 %endfunction%

@@ -30,6 +30,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(triple "dk_TARGET_TRIPLE()")
 
 
+### Unix variable bash ###
+if(DEFINED ENV{BASH})
+	if(EXISTS $ENV{BASH})
+		set(BASH_EXE "$ENV{BASH}" CACHE INTERNAL "")
+		dk_printVar(BASH_EXE)
+		return()
+	endif()
+endif()
+
+
 ### Msys2 bash ###
 #if(NOT BASH_EXE)
 	if(MSYSTEM)
