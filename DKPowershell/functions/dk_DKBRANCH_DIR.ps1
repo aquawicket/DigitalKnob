@@ -106,22 +106,12 @@ function Global:dk_DKBRANCH_DIR() {
 		$global:DKHTA_DIR="${DKBRANCH_DIR}/DKHta"
 		dk_call dk_assertPath DKHTA_DIR
 		#dk_call dk_printVar DKHTA_DIR
-			$global:DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
-			dk_call dk_assertPath DKHTA_FUNCTIONS_DIR
+			#$global:DKHTA_FUNCTIONS_DIR="${DKHTA_DIR}/functions"
+			#dk_call dk_assertPath DKHTA_FUNCTIONS_DIR
 			#dk_call dk_printVar DKHTA_FUNCTIONS_DIR
-			$global:DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
-			dk_call dk_assertPath DKHTA_FUNCTIONS_DIR_
+			#$global:DKHTA_FUNCTIONS_DIR_="${DKHTA_DIR}/functions/"
+			#dk_call dk_assertPath DKHTA_FUNCTIONS_DIR_
 			#dk_call dk_printVar DKHTA_FUNCTIONS_DIR_
-		
-		$global:DKHTML_DIR="${DKBRANCH_DIR}/DKHta"
-		dk_call dk_assertPath DKHTML_DIR
-		#dk_call dk_printVar DKHTML_DIR
-			$global:DKHTML_FUNCTIONS_DIR="${DKHTML_DIR}/functions"
-			dk_call dk_assertPath DKHTML_FUNCTIONS_DIR
-			#dk_call dk_printVar DKHTML_FUNCTIONS_DIR
-			$global:DKHTML_FUNCTIONS_DIR_="${DKHTML_DIR}/functions/"
-			dk_call dk_assertPath DKHTML_FUNCTIONS_DIR_
-			#dk_call dk_printVar DKHTML_FUNCTIONS_DIR_
 		
 		$global:DKJAVA_DIR="${DKBRANCH_DIR}/DKJava"
 		dk_call dk_assertPath DKJAVA_DIR
