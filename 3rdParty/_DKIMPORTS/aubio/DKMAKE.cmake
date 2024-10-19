@@ -4,17 +4,14 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+###### aubio ######
 # https://github.com/aubio/aubio.git
 
-dk_load(dk_builder)
+dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam		(${DKIMPORTS_DIR}/aubio/aubio.txt AUBIO_IMPORT)
+dk_import			(${AUBIO_IMPORT})
 
-### IMPORT ###
-dk_import(https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip)
-#dk_import(https://github.com/aubio/aubio/archive/refs/heads/master.zip)
-
-
-
-### LINK ###
 dk_include			(${AUBIO_DIR}/src)
 if(WIN AND MSVC)
 	dk_libDebug		(${AUBIO_DEBUG_DIR}/aubio.lib)
@@ -24,10 +21,5 @@ else()
 	dk_libRelease	(${AUBIO_RELEASE_DIR}/libaubio.a)
 endif()
 
-
-### GENERATE ###
-#dk_configure(${AUBIO_DIR})
-
-
-### COMPILE ###
-dk_build(${AUBIO_DIR})
+#dk_configure		(${AUBIO_DIR})
+dk_build			(${AUBIO_DIR})
