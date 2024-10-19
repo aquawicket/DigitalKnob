@@ -1,21 +1,22 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### android-sources ######
 # https://github.com/AndroidSDKSources
 # https://androidsdkoffline.blogspot.com/p/android-sdk-sources-download.html
 
-if(NOT ANDROID)
-	dk_undepend(android-sources)
-	dk_return()
-endif()
-
 
 dk_depend(android-sdk)
-
 dk_makeDirectory(${ANDROID_SDK}/sources)
+dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam	(${DKIMPORTS_DIR}/android-sources/android-sources.txt ANDROID_SOURCES_DL)
+dk_getFileParam	(${DKIMPORTS_DIR}/android-sources/android-sources.txt ANDROID_SOURCES_VERSION)
+dk_import(${ANDROID_SOURCES_DL} PATH ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
 
-
-dk_import(https://dl.google.com/android/repository/sources-26_r01.zip PATH ${ANDROID_SDK}/sources/android-26)
 #dk_import(https://dl.google.com/android/repository/sources-27_r01.zip PATH ${ANDROID_SDK}/sources/android-27)
 #dk_import(https://dl.google.com/android/repository/sources-28_r01.zip PATH ${ANDROID_SDK}/sources/android-28)
 #dk_import(https://dl.google.com/android/repository/sources-29_r01.zip PATH ${ANDROID_SDK}/sources/android-29)
