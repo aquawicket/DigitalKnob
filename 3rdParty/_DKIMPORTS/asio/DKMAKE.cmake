@@ -1,13 +1,13 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-# https://github.com/chriskohlhoff/asio.git
 
 
-### IMPORT ###
-dk_import(https://github.com/chriskohlhoff/asio/archive/efdc25ab99786101351a5afb39f01dfaf0781401.zip)
-#dk_import(https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip)
-
-
+###### asio ######
+dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam	(${DKIMPORTS_DIR}/asio/asio.txt ASIO_IMPORT)
+dk_import		(${ASIO_IMPORT})
 
 # TODO
