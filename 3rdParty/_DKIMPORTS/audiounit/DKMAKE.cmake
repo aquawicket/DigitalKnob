@@ -1,11 +1,11 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-# https://developer.apple.com/documentation/audiounit?language=objc
-
-if(NOT APPLE)
-	dk_undepend(audiounit)
-	dk_return()
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### audiounit #######
+# https://developer.apple.com/documentation/audiounit?language=objc
 
 dk_findLibrary(AudioUnit)
