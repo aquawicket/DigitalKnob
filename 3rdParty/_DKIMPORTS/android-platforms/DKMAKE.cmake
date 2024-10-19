@@ -1,14 +1,16 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### android-platforms ######
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
-if(NOT ANDROID)
-	dk_undepend(android-platforms)
-	dk_return()
-endif()
-
 dk_depend(android-sdk)
-
 dk_makeDirectory(${ANDROID_SDK}/platforms)
-dk_import(https://dl.google.com/android/repository/platform-26_r02.zip PATH ${ANDROID_SDK}/platforms/android-26)
+
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-platforms/android-platforms.txt ANDROID_PLATFORMS_FOLDER)
+dk_import(${ANDROID_PLATFORMS_DL} PATH ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})
