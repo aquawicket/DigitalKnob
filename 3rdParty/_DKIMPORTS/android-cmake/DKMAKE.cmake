@@ -11,9 +11,16 @@ endif()
 dk_depend(android-sdk)
 
 # 3.18.1
-WIN_HOST_dk_import(https://dl.google.com/android/repository/7c386a739f915f5bd60051f2572c24782388e807.cmake-3.18.1-windows.zip PATH ${ANDROID_SDK}/cmake)
-MAC_HOST_dk_import(https://dl.google.com/android/repository/ba34c321f92f6e6fd696c8354c262c122f56abf8.cmake-3.18.1-darwin.zip PATH ${ANDROID_SDK}/cmake)
-LINUX_HOST_dk_import(https://dl.google.com/android/repository/cmake-3.18.1-linux.zip PATH ${ANDROID_SDK}/cmake)
+if(WIN_HOST)
+	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_WIN_DL)
+	WIN_HOST_dk_import(${ANDROID_CMAKE_WIN_DL} PATH ${ANDROID_SDK}/cmake)
+elseif(MAC_HOST)
+	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_MAC_DL)
+	MAC_HOST_dk_import(${ANDROID_CMAKE_MAC_DL} PATH ${ANDROID_SDK}/cmake)
+elseif(LINUX_DL)
+	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_LINUX_DL)
+	LINUX_HOST_dk_import(${ANDROID_CMAKE_LINUX_DL} PATH ${ANDROID_SDK}/cmake)
+endif()
 
 # 3.22.1
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/cmake-3.22.1-windows.zip PATH ${ANDROID_SDK}/cmake)

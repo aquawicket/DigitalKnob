@@ -1,0 +1,3 @@
+ANDROID_CMAKE_WIN_DL=https://dl.google.com/android/repository/7c386a739f915f5bd60051f2572c24782388e807.cmake-3.18.1-windows.zip
+ANDROID_CMAKE_MAC_DL=https://dl.google.com/android/repository/ba34c321f92f6e6fd696c8354c262c122f56abf8.cmake-3.18.1-darwin.zip
+ANDROID_CMAKE_LINUX_DL=https://dl.google.com/android/repository/cmake-3.18.1-linux.zip
