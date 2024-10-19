@@ -1,7 +1,8 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 # https://developer.apple.com/documentation/agl/agl?language=objc
+
+dk_validate(triple "dk_TARGET_TRIPLE()")
 if(NOT MAC)
 	dk_undepend(agl)
 	dk_return()

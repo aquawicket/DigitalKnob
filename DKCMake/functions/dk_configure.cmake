@@ -9,6 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_configure SOURCE_DIR) #ARGN
 	dk_debugFunc()
+	dk_debug("dk_configure(${ARGV})")
+	
 
 	dk_assertPath(SOURCE_DIR)
 	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
