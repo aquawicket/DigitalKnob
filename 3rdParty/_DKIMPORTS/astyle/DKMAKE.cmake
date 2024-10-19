@@ -12,15 +12,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 
-dk_load(dk_builder)
-
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_BRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt VERSION)
 dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%20${VERSION}/AStyle_${VERSION}_windows.zip)
 
 
 ### LINK ###
+dk_validate(triple "dk_TARGET_TRIPLE()")
 dk_include			(${ASTYLE_DIR}/src)
 if(WIN AND MSVC)
 	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.lib)

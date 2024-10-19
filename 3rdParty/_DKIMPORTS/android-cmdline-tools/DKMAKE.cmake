@@ -1,6 +1,10 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
 # Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
@@ -20,9 +24,13 @@ dk_makeDirectory(${ANDROID_SDK})
 dk_makeDirectory(${ANDROID_SDK}/cmdline-tools)
 
 # 7583922
-WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
-LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+if(WIN_HOST)
+	dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+elseif(MAC_HOST)
+	dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+elseif(LINUX_HOST)
+	dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)
+endif()
 
 # 8512546
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip PATH ${ANDROID_SDK}/cmdline-tools/latest)

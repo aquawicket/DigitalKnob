@@ -8,10 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### android-cmake ######
 # https://androidsdkoffline.blogspot.com/p/android-ndk-cmake-direct-download.html
 
-if(NOT ANDROID)
-	dk_undepend(android-cmake)
-	dk_return()
-endif()
+#if(NOT ANDROID)
+#	dk_undepend(android-cmake)
+#	dk_return()
+#endif()
 
 dk_depend(android-sdk)
 
