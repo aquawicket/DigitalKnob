@@ -15,7 +15,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
 ### IMPORT ###
-dk_getFileParam(astyle.txt VERSION)
+dk_validate(DKIMPORTS_DIR "dk_BRANCH_DIR()")
+dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt VERSION)
 dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%20${VERSION}/AStyle_${VERSION}_windows.zip)
 
 
