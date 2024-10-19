@@ -1,13 +1,12 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-# https://developer.apple.com/documentation/agl/agl?language=objc
-
-dk_validate(triple "dk_TARGET_TRIPLE()")
-if(NOT MAC)
-	dk_undepend(agl)
-	dk_return()
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+###### agl ######
+# https://developer.apple.com/documentation/agl/agl?language=objc
 
 dk_depend(carbon)
 dk_depend(opengl)

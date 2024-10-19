@@ -11,23 +11,23 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # Installed Build Tools revision NN.N.N is corrupted" https://stackoverflow.com/a/68430992/688352
 
-if(NOT ANDROID)
-	dk_undepend(android-build-tools)
-	dk_return()
-endif()
-
 dk_depend(android-sdk)
-
 dk_makeDirectory(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
-dk_getFileParam(android-build-tools.txt VERSION)
-WIN_HOST_dk_import(https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r${VERSION}-windows.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
-MAC_HOST_dk_import(https://dl.google.com/android/repository/f6d24b187cc6bd534c6c37604205171784ac5621.build-tools_r${VERSION}-macosx.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
-#if(NOT ANDROID_HOST)
-    LINUX_HOST_dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
-#endif()
-ANDROID_HOST_dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt VERSION)
+
+dk_validate(host_triple "dk_host_triple()")
+if(WIN_HOST)
+	dk_import(https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r${VERSION}-windows.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+elseif(MAC_HOST)
+	dk_import(https://dl.google.com/android/repository/f6d24b187cc6bd534c6c37604205171784ac5621.build-tools_r${VERSION}-macosx.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+elseif(LINUX_HOST)
+    dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+elseif(ANDROID_HOST)
+	dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+endif()
 
 # 31.0.0
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/09489e417c0a266f2862ddd82b4ac29a1b7af55e.build-tools_r31-windows.zip PATH ${ANDROID_SDK}/build-tools/31.0.0)

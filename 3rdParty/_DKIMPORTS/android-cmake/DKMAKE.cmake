@@ -8,23 +8,22 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### android-cmake ######
 # https://androidsdkoffline.blogspot.com/p/android-ndk-cmake-direct-download.html
 
-#if(NOT ANDROID)
-#	dk_undepend(android-cmake)
-#	dk_return()
-#endif()
-
 dk_depend(android-sdk)
 
 # 3.18.1
+dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
-	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_WIN_DL)
-	WIN_HOST_dk_import(${ANDROID_CMAKE_WIN_DL} PATH ${ANDROID_SDK}/cmake)
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_getFileParam(${DKIMPORTS_DIR}/android-cmake/android-cmake.txt ANDROID_CMAKE_WIN_DL)
+	dk_import(${ANDROID_CMAKE_WIN_DL} PATH ${ANDROID_SDK}/cmake)
 elseif(MAC_HOST)
-	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_MAC_DL)
-	MAC_HOST_dk_import(${ANDROID_CMAKE_MAC_DL} PATH ${ANDROID_SDK}/cmake)
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_getFileParam(${DKIMPORTS_DIR}/android-cmake/android-cmake.txt ANDROID_CMAKE_MAC_DL)
+	dk_import(${ANDROID_CMAKE_MAC_DL} PATH ${ANDROID_SDK}/cmake)
 elseif(LINUX_DL)
-	dk_getFileParam(android-cmake.txt ANDROID_CMAKE_LINUX_DL)
-	LINUX_HOST_dk_import(${ANDROID_CMAKE_LINUX_DL} PATH ${ANDROID_SDK}/cmake)
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_getFileParam(${DKIMPORTS_DIR}/android-cmake/android-cmake.txt ANDROID_CMAKE_LINUX_DL)
+	dk_import(${ANDROID_CMAKE_LINUX_DL} PATH ${ANDROID_SDK}/cmake)
 endif()
 
 # 3.22.1
