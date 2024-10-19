@@ -21,12 +21,12 @@ dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%20${VERSIO
 ### LINK ###
 dk_validate(triple "dk_TARGET_TRIPLE()")
 dk_include			(${ASTYLE_DIR}/src)
-if(WIN AND MSVC)
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.lib)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.lib)
+if(WIN)
+	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyle.exe)
+	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyle.exe)
 else()
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/libastyle.a)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/libastyle.a)
+	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyle)
+	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyle)
 endif()
 
 

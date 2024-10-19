@@ -7,11 +7,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ##### android-sdk ######
 # https://androidsdkoffline.blogspot.com/
 
-#if(NOT ANDROID)
-#	dk_undepend(android-sdk)
-#	dk_return()
-#endif()
-
 #NOTE: it's actually building android gui apps that depend on java. So we can push these further up the dependencies list. 
 #dk_depend(openjdk)
 #dk_depend(openjdk-8u41)

@@ -1,22 +1,26 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### android-sdk-tools ######
 # https://developer.android.com/studio/releases/sdk-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
 
-if(NOT ANDROID)
-	dk_undepend(android-sdk-tools)
-	dk_return()
-endif()
-
-
 dk_depend(android-sdk)
-
-# 4333796
-WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip PATH ${ANDROID_SDK}/tools PATCH)
-MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip PATH ${ANDROID_SDK}/tools PATCH)
-LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip PATH ${ANDROID_SDK}/tools PATCH)
-
+dk_validate(host_triple "dk_host_triple()")
+if(WIN_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_WIN_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)
+elseif(MAC_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_MAC_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/tools PATCH)
+elseif(LINUX_HOST)
+	dk_getFileParam	(${DKIMPORTS_DIR}/android-sdk-tools/android-sdk-tools.txt ANDROID_SDK_TOOLS_LINUX_DL)
+	dk_import		(${ANDROID_SDK_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/tools PATCH)
+endif()
 
 # TODO
 #In tools/bin/sdkmanager.bat
