@@ -1,14 +1,14 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### android-platform-tools ######
 # https://androidsdkoffline.blogspot.com/p/android-sdk-platform-tools.html
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # https://github.com/lzhiyong/android-sdk-tools
-
-if(NOT ANDROID)
-	dk_undepend(android-platform-tools)
-	dk_return()
-endif()
 
 dk_depend(android-sdk)
 
@@ -23,10 +23,15 @@ dk_depend(android-sdk)
 #LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.2-linux.zip PATH ${ANDROID_SDK}/platform-tools)
 
 # 33.0.3
-WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
-MAC_HOST_dk_import(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r33.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
-if(ANDROID_HOST)
-	dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)
+if(WIN_HOST)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_WIN_DL)
+	dk_import(${ANDROID_PLATFORM_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/platform-tools)
+elseif(MAC_HOST)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_MAC_DL)
+	dk_import(${ANDROID_PLATFORM_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/platform-tools)
+elseif(ANDROID_HOST)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_ANDROID_DL)
+	dk_import(${ANDROID_PLATFORM_TOOLS_ANDROID_DL} PATH ${ANDROID_SDK}/termux)
 	dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3 OVERWRITE)		# copy termux/build-tools to android-sdk
 	dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools OVERWRITE)		# copy termux/platform-tools to android-sdk
 	
@@ -54,8 +59,9 @@ if(ANDROID_HOST)
 		dk_executeProcess(jar cvf aapt2-7.0.3-7396180-linux.jar . WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
 	endif()
-else()
-	LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
+elseif(LINUX_HOST)
+	dk_getFileParam(${DKIMPORTS_DIR}/android-platform-tools/android-platform-tools.txt ANDROID_PLATFORM_TOOLS_LINUX_DL)
+	dk_import(${ANDROID_PLATFORM_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/platform-tools)
 endif()
 
 # 34.0.3

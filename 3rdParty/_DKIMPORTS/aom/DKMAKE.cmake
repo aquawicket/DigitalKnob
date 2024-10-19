@@ -7,11 +7,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ### IMPORT ###
-#dk_import(https://aomedia.googlesource.com/aom.git)
-dk_import(https://aomedia.googlesource.com/aom.git/+archive/c2fe6bf370f7c14fbaf12884b76244a3cfd7c5fc.tar.gz)
+dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam(${DKIMPORTS_DIR}/aom/aom.txt AOM_DL)
+dk_import(${AOM_DL})
 
 
 ### LINK ###
+dk_validate(triple "dk_TARGET_TRIPLE()")
 dk_include			(${AOM_DIR})
 if(MSVC)
 	dk_libDebug		(${AOM_DEBUG_DIR}/aom.lib)

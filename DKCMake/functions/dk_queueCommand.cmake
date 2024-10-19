@@ -53,5 +53,5 @@ dk_createOsMacros("dk_queueCommand")
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_todo()
+	dk_queueCommand("echo \"testing dk_queueCommand\"")
 endfunction()
