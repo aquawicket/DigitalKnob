@@ -1,11 +1,11 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-# https://developer.apple.com/documentation/appkit?language=objc
-
-if(NOT MAC)
-	dk_undepend(appkit)
-	dk_return()
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### appkit ######
+# https://developer.apple.com/documentation/appkit?language=objc
 
 dk_findLibrary(Appkit)

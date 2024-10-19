@@ -1,11 +1,11 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-# https://developer.apple.com/documentation/avfaudio?language=objc
-
-if(NOT APPLE)
-	dk_undepend(avf_audio)
-	dk_return()
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+###### avt_audio ######
+# https://developer.apple.com/documentation/avfaudio?language=objc
 
 dk_findLibrary(AVFAudio)

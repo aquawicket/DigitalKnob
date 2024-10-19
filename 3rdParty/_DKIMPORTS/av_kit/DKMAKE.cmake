@@ -1,12 +1,11 @@
 #!/usr/bin/cmake -P
-include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
-# https://developer.apple.com/documentation/AVKit?language=objc
-
-if(NOT APPLE)
-	dk_undepend(av_kit)
-	dk_return()
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+###### av_kit ######
+# https://developer.apple.com/documentation/AVKit?language=objc
 
 dk_findLibrary(AVKit)
