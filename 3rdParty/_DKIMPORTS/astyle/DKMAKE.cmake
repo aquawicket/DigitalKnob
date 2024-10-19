@@ -15,7 +15,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_load(dk_builder)
 
 ### IMPORT ###
-dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip)
+dk_getFileParam(astyle.txt VERSION)
+dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%20${VERSION}/AStyle_${VERSION}_windows.zip)
 
 
 ### LINK ###
