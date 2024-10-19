@@ -20,6 +20,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     
     echo downloading %~1 to %DKBATCH_FUNCTIONS_DIR%\%~1
     
+	if not exist %DKBATCH_FUNCTIONS_DIR% %dk_call% dk_fatal "The destination directory does not exist"
     :: FIXME: causes infinate recursion loop
     :: Try dk_download
     ::if exist "%DKBATCH_FUNCTIONS_DIR%\dk_download.cmd" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR%\%~1.cmd"

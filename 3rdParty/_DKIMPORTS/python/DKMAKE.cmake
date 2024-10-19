@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
 # https://docs.python.org/3/using/windows.html
 # Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
 # Mac		https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
@@ -35,40 +35,36 @@ if(PYTHON_DL)
 endif()
 
 
-###### PYTHON_EXE ######
-if(ANDROID_HOST)
-	dk_findProgram(PYTHON_EXE python)
-elseif(MAC_HOST)
-	dk_findProgram(PYTHON_EXE python /usr/local/bin)
+
+###### PYTHON_EXE (first check) ######
+if(EXISTS "${PYTHON_DIR}")
+	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
+elseif(EXISTS "/usr/local/bin")
+	dk_findProgram(PYTHON_EXE python "/usr/local/bin")
 else()
-	dk_findProgram(PYTHON_EXE python ${PYTHON_DIR})
+	dk_findProgram(PYTHON_EXE python)
+endif()
+if(EXISTS "${PYTHON_DIR}/include")
+	dk_set(Python_INCLUDE_DIRS "${PYTHON_DIR}/include")
+endif()
+if(EXISTS "${PYTHON_DIR}/libs")
+	dk_set(Python_LIBRARIES 	"${PYTHON_DIR}/libs")
 endif()
 
+
+
 ### INSTALL ###
-if(NOT EXISTS ${PYTHON_EXE})
+if(NOT EXISTS "${PYTHON_EXE}")
 	dk_info(" Installing python . . . . ")
 	if(WIN_HOST)
-		#dk_makeDirectory(${PYTHON_DIR})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
 		#dk_getNativePath(${DKDOWNLOAD_DIR} DKDOWNLOAD_DIR_WINPATH)
 		dk_replaceAll(${DKDOWNLOAD_DIR} "/" "\\" DKDOWNLOAD_DIR_WINPATH)
 		#dk_getNativePath(${PYTHON_DIR} PYTHON_WINPATH)
 		dk_replaceAll(${PYTHON_DIR} "/" "\\" PYTHON_WINPATH)
+		#dk_makeDirectory(${PYTHON_DIR})
 		dk_fileWrite("${PYTHON_DIR}\\python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
-		dk_executeProcess(${PYTHON_DIR}/python_install.cmd)
-		
-		if(ANDROID_HOST)
-			dk_findProgram(PYTHON_EXE python)
-		else()
-			dk_findProgram(PYTHON_EXE python ${PYTHON_DIR})
-		endif()
-
-		if(EXISTS ${PYTHON_DIR}/include)
-			dk_set(Python_INCLUDE_DIRS ${PYTHON_DIR}/include)
-		endif()
-		if(EXISTS ${PYTHON_DIR}/libs)
-			dk_set(Python_LIBRARIES 	${PYTHON_DIR}/libs)
-		endif()
+		dk_executeProcess(${PYTHON_DIR}/python_install.cmd)	
 	elseif(MAC_HOST)
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
 		dk_depend(sudo)
@@ -82,18 +78,27 @@ if(NOT EXISTS ${PYTHON_EXE})
 	elseif(LINUX_HOST)
 		#dk_import(${PYTHON_DL})
 	else()
-		dk_fatal("NONE OF THE HOST VARIABLES were found to install python")
+		dk_fatal("No methods found to install Python")
 	endif()
 endif()
 
-## Try to find it after the install
-if(ANDROID_HOST)
+
+###### PYTHON_EXE (second check) ######
+if(EXISTS "${PYTHON_DIR}")
+	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
+elseif(EXISTS "/usr/local/bin")
+	dk_findProgram(PYTHON_EXE python "/usr/local/bin")
+else()
 	dk_findProgram(PYTHON_EXE python)
-elseif(MAC_HOST)
-	dk_findProgram(PYTHON_EXE python /usr/local/bin)
-else ()
-	dk_findProgram(PYTHON_EXE python ${PYTHON_DIR})
-endif ()
+endif()
+if(EXISTS "${PYTHON_DIR}/include")
+	dk_set(Python_INCLUDE_DIRS "${PYTHON_DIR}/include")
+endif()
+if(EXISTS "${PYTHON_DIR}/libs")
+	dk_set(Python_LIBRARIES 	"${PYTHON_DIR}/libs")
+endif()
+
+
 
 if(NOT EXISTS ${PYTHON_EXE})
 	dk_fatal("COULD NOT FIND PYTHON_EXE:${PYTHON_EXE}")
