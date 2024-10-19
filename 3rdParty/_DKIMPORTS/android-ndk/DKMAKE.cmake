@@ -1,19 +1,22 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+###### android-ndk ######
 # https://developer.android.com/ndk
 # https://github.com/android/ndk
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # https://android.googlesource.com/platform/ndk/+/refs/heads/ndk-release-r21/docs/BuildSystemMaintainers.md
 # https://androidsdkoffline.blogspot.com/p/android-ndk-side-by-side-direct-download.html
 
-#if(NOT ANDROID)
-#	dk_undepend(android-ndk)
-#	dk_return()
-#endif()
 
 ### DEPEND ###
 dk_depend(android-sdk)
+
+
 
 
 ### r21e ###
@@ -38,13 +41,14 @@ dk_depend(android-sdk)
 #dk_set(ANDROID_NDK_LINUX_DL 	http://dl.google.com/android/repository/android-ndk-r23b-linux.zip)
 
 ### r23c ###
-dk_set(ANDROID_NDK_VERSION		r23c)
-dk_set(ANDROID_NDK_BUILD 		"23.2.8568313")
-dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
-dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
-dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
-#dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
-dk_set(ANDROID_NDK_ANDROID_DL https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip)
+#dk_set(ANDROID_NDK_VERSION		r23c)
+#dk_set(ANDROID_NDK_BUILD 		"23.2.8568313")
+#dk_set(ANDROID_NDK_WIN_DL 		https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
+#dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
+#dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
+dk_set(ANDROID_NDK_ANDROID_DL 	https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
+#dk_set(ANDROID_NDK_ANDROID_DL   https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip)
+
 ### r24 ###
 #dk_set(ANDROID_NDK_VERSION 	r24)
 #dk_set(ANDROID_NDK_BUILD 		24.0.8215888)
@@ -59,22 +63,26 @@ dk_set(ANDROID_NDK_ANDROID_DL https://www.aquawicket.com/downloads/android-ndk-r
 #dk_set(ANDROID_NDK_MAC_DL 		https://dl.google.com/android/repository/android-ndk-r25-darwin.zip)
 #dk_set(ANDROID_NDK_LINUX_DL 	https://dl.google.com/android/repository/android-ndk-r25-linux.zip)
 
-
-
-
-
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_VERSION)
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_BUILD)
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_WIN_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_MAC_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_LINUX_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_ANDROID_DL)
 
 ###### INSTALL ######
 dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")      # TODO: phase out
 #dk_set(ANDROID_NDK_DIR "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 
-dk_makeDirectory			("${ANDROID_SDK_DIR}/ndk")
-WIN_HOST_dk_import			(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} VERSION "${ANDROID_NDK_BUILD}" PATCH)
-MAC_HOST_dk_import			(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_NDK} PATCH)
-if(ANDROID_HOST OR LINUX_ARM64_HOST)
-	dk_import				(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK})
-else()
-	LINUX_HOST_dk_import	(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)
+dk_makeDirectory	("${ANDROID_SDK_DIR}/ndk")
+if(WIN_HOST)
+	dk_import		(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_NDK} VERSION "${ANDROID_NDK_BUILD}" PATCH)
+elseif(MAC_HOST)
+	dk_import		(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_NDK} PATCH)
+elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
+	dk_import		(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK})
+elseif(LINUX_HOST)
+	dk_import		(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)
 endif()
 
 if(APPLE_ARM32_HOST)
