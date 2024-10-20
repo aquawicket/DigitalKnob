@@ -5,7 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ filezilla ############
 # https://filezilla-project.org/
 
-
-dk_import("https://download.filezilla-project.org/client/FileZilla_3.67.1_win64_sponsored2-setup.exe")
+### IMPORT ###
+dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam 	("${DKIMPORTS_DIR}/filezilla/filezilla.txt" FILEZILLA_DL)
+dk_import			(${FILEZILLA_DL})
