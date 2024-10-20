@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ cmake ############
 # https://cmake.org
 # https://github.com/Kitware/CMake
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
@@ -12,7 +13,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 # https://github.com/Kitware/CMake/releases
-
 
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
@@ -25,18 +25,26 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	return()
 endif()
 
-dk_validate				(host_triple "dk_host_triple()")
-dk_if(ANDROID_HOST		"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)")
-dk_if(LINUX_ARM64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz)")
-dk_if(LINUX_X86_64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz)")
-#dk_if(MAC_HOST			"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz)")	# macOS 10.10 or later
-dk_if(MAC_HOST			"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz)")		# macOS 10.13 or later
-dk_if(WIN_ARM64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip)")
-dk_if(WIN_X86_HOST		"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip)")
-dk_if(WIN_X86_64_HOST	"dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip)")
-dk_importVariables		(${CMAKE_DL} rtn_var)
+###### DOWNLOAD ######
+dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam ("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_ANDROID_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_LINUX_ARM64_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_LINUX_X86_64_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_MAC_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_WIN_ARM64_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_WIN_X86_HOST_DL)
+dk_getFileParam	("${DKIMPORTS_DIR}/cmake/cmake.txt" CMAKE_WIN_X86_64_HOST_DL)
+dk_validate		(host_triple 		"dk_host_triple()")
+dk_if			(ANDROID_HOST		"dk_set(CMAKE_DL ${CMAKE_ANDROID_HOST_DL}")
+dk_if			(LINUX_ARM64_HOST	"dk_set(CMAKE_DL ${CMAKE_LINUX_ARM64_HOST_DL})")
+dk_if			(LINUX_X86_64_HOST	"dk_set(CMAKE_DL ${CMAKE_LINUX_X86_64_HOST_DL})")
+dk_if			(MAC_HOST			"dk_set(CMAKE_DL ${CMAKE_MAC_HOST_DL})")
+dk_if			(WIN_ARM64_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_ARM64_HOST_DL})")
+dk_if			(WIN_X86_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_X86_HOST_DL})")
+dk_if			(WIN_X86_64_HOST	"dk_set(CMAKE_DL ${CMAKE_WIN_X86_64_HOST_DL})")
+dk_importVariables(${CMAKE_DL} rtn_var)
 
-### IMPORT ###
+###### IMPORT ######
 if(ANDROID_HOST)
 	#dk_command(pkg install cmake -y)
 	dk_installPackage(cmake)
@@ -78,7 +86,6 @@ else()
 	endif()
 endif()
 
-
 ### VALIDATE ### (second check)
 if(NOT CMAKE_EXE)
 	dk_fatal("COULD NOT FIND CMAKE_EXE")
@@ -86,13 +93,9 @@ if(NOT CMAKE_EXE)
 	return()
 endif()
 
-
-
 execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
-
-
 
 return()
 

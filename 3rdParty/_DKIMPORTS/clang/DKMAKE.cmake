@@ -5,14 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ clang ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
 dk_load(dk_builder)
-
+#dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+#dk_getFileParam("${DKIMPORTS_DIR}/clang/clang.txt" VERSION)
 if(clang OR mingw OR ucrt)
-	dk_validate(MSYS2  			"dk_depend(msys2)")
+	dk_validate(MSYS2  		"dk_depend(msys2)")
 endif()
-	
 dk_installPackage(clang)
 	
 if(win_x86_clang)
@@ -59,7 +60,7 @@ endif()
 ###### set GLOBAL CMAKE VARIABLES ######
 dk_set(CMAKE_C_COMPILER		${CLANG_C_COMPILER})
 dk_set(CMAKE_CXX_COMPILER	${CLANG_CXX_COMPILER})
-dk_set(CMAKE_RC_COMPILER	${CLANG_RC_COMPILER})		# TODO:  move to DKIMPORTS/windres
+dk_set(CMAKE_RC_COMPILER	${CLANG_RC_COMPILER})	# TODO:  move to DKIMPORTS/windres
 
 dk_set(DKCONFIGURE_CC		${CMAKE_C_COMPILER})
 dk_set(DKCONFIGURE_CXX		${CMAKE_CXX_COMPILER})
