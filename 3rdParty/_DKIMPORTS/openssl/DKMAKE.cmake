@@ -3,6 +3,8 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 # https://github.com/openssl/openssl.git
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z

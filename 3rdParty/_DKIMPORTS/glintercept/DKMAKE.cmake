@@ -1,5 +1,10 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 dk_load(dk_builder)
 # https://github.com/dtrebilco/glintercept.git
 # https://github.com/dtrebilco/glintercept/archive/e204189eff4045c24d48b82c93d4f012ed44e166.zip

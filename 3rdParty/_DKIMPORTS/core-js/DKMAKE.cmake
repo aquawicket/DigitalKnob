@@ -1,3 +1,10 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 # https://github.com/zloirock/core-js.git
 
 dk_import(https://github.com/zloirock/core-js/archive/edb0539e209589ce21e3dd57ba14893ea6243a3e.zip)

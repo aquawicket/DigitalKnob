@@ -3,6 +3,8 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 dk_load(dk_builder)
 # https://git.ffmpeg.org/ffmpeg.git
 # https://trac.ffmpeg.org/wiki/CompilationGuide
