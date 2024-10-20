@@ -3,6 +3,8 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 dk_load(dk_builder)
 # https://code.visualstudio.com/docs/editor/portable
 # https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip

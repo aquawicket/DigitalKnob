@@ -4,7 +4,6 @@ dk_undepend(_TEMPLATE-APP_)
 dk_return()
 ########################################################################################
 
-
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)

@@ -1,5 +1,10 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 
 # https://docs.python.org/3/using/windows.html
 # Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi

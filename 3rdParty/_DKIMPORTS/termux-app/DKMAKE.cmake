@@ -1,5 +1,10 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
 dk_load(dk_builder)
 # https://github.com/termux/termux-app.git
 # https://www.macrodroidforum.com/index.php?threads/guide-setting-up-and-using-adb-commands-with-termux.5640/
