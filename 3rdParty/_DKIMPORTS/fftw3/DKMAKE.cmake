@@ -25,7 +25,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${FFTW3_DIR})
+dk_configure(${FFTW3_DIR}
 	-DBUILD_TESTS=OFF				# "Build tests" ON
 	-DENABLE_OPENMP=ON 				# "Use OpenMP for multithreading" OFF
 	-DENABLE_THREADS=ON 			# "Use pthread for multithreading" OFF
