@@ -34,7 +34,7 @@ endif()
 dk_configure(${ASTYLE_DIR}
 	-DBUILD_JAVA_LIBS=OFF 		# "Build java library"   OFF
 	-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
-	-DBUILD_STATIC_LIBS=OFF) 	# "Build static library" OFF
+	-DBUILD_STATIC_LIBS=ON) 	# "Build static library" OFF
 
 
 ### COMPILE ###
