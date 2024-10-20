@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ cmd ############
 #dk_load(dk_builder)
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
 
@@ -19,8 +20,6 @@ if(NOT WIN_HOST)
 	dk_return()
 endif()
 
-
-
 if(WIN_HOST)
 	dk_findProgram(CMD_EXE cmd.exe)
 	
@@ -29,8 +28,6 @@ if(WIN_HOST)
 		return()
 	endif()
 endif()
-
-
 
 if(NOT EXISTS ${CMD_EXE})
 	dk_fatal("Could not file CMD_EXE:${CMD_EXE}")

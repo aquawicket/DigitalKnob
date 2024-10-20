@@ -1,11 +1,17 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
+
+
+############ curl ############
 # https://github.com/curl/curl
 # https://curl.se/
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(dl)
@@ -19,23 +25,17 @@ dk_depend(ws2_32)
 dk_depend(zlib)
 dk_depend(zstd)
 
-
 ### IMPORT ###
-#if(MSVC)
-#	WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 if(WIN)
 	dk_import		(https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip)
 else()
 	dk_import		(https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip)
 endif()
 
-
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${CURL_DIR}/include 						CURL_INCLUDE_DIR)
-dk_include					(${CURL_CONFIG_DIR}/lib						CURL_INCLUDE_DIR2)
-
-
+dk_include					(${CURL_DIR}/include 					CURL_INCLUDE_DIR)
+dk_include					(${CURL_CONFIG_DIR}/lib					CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
 	set(CURL_DEBUG_DIR 		${CURL_TRIPLE_DIR}/lib/${DEBUG_DIR})
@@ -68,8 +68,6 @@ if(MSVC)
 elseif()
 	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_TRIPLE_DIR}/include")
 endif()
-
-
 
 ### GENERATE ###
 if(MSVC AND WIN)

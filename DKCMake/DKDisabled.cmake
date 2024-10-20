@@ -31,6 +31,7 @@ dk_disable(bzip2-win-build)
 if(NOT MSVC)
 	dk_disable(cef_binary)
 endif()
+dk_disable(dukluv)
 
 
 
