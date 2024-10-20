@@ -55,7 +55,7 @@ CYGPATH_EXE(){
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	[ -e "${WSLPATH_EXE-}" ] || export WSLPATH_EXE="$(command -v wslpath)" || true
+	(command -v wslpath) && WSLPATH_EXE=$(command -v wslpath) && export WSLPATH_EXE
 	[ -e "${WSLPATH_EXE-}" ] && echo "${WSLPATH_EXE}" || unset WSLPATH_EXE
 	#echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
 }
