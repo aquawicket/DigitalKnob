@@ -26,7 +26,7 @@ DK(){
     #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
     
 	###### Reload Main Script with bash ######
-    dkreloadWithBash ${*}
+    dkreloadWithBash ${*-}
     
 	############ Set Options ############
     dksetOptions
