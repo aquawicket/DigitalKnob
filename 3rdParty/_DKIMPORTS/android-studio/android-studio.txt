@@ -1,5 +1,5 @@
-#ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-windows.exe
-ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-windows.zip
+ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-windows.exe
+#ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-windows.zip
 ANDROID_STUDIO_MAC_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac.dmg
 ANDROID_STUDIO_MAC_ARM_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac_arm.dmg
 ANDROID_STUDIO_LINUX_DL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-linux.tar.gz
