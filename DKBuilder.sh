@@ -33,14 +33,14 @@ dk_onError(){
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
-	[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
+	(command -v sudo) && SUDO_EXE=$(command -v sudo) && export SUDO_EXE
 	[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
 	#echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
 }
 
 ###### CMD_EXE ######
 CMD_EXE(){
-	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE=$(command -v cmd.exe) || true
+	(command -v cmd.exe) && CMD_EXE=$(command -v cmd.exe) && export CMD_EXE
 	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE="/mnt/c/Windows/System32/cmd.exe"
 	[ -e "${CMD_EXE-}" ]	&& echo "${CMD_EXE-}" || dk_onError "CMD_EXE:${CMD_EXE-} Not Found"
 	#echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
@@ -48,7 +48,7 @@ CMD_EXE(){
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	[ -e "${CYGPATH_EXE-}" ] || export CYGPATH_EXE="$(command -v cygpath)" || true
+	(command -v cygpath) && CYGPATH_EXE=$(command -v cygpath) && export CYGPATH_EXE
 	[ -e "${CYGPATH_EXE-}" ] && echo "${CYGPATH_EXE}" || unset CYGPATH_EXE
 	#echo "CYGPATH_EXE = '${CYGPATH_EXE-}'" &>/dev/tty
 }

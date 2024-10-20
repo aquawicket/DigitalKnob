@@ -13,15 +13,20 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ### IMPORT ###
 dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt VERSION)
-dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%20${VERSION}/AStyle_${VERSION}_windows.zip)
+dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt ASTYLE_DL)
+dk_import(${ASTYLE_DL})
 
 ### LINK ###
 dk_validate(triple "dk_TARGET_TRIPLE()")
 dk_include			(${ASTYLE_DIR}/src)
 
-dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
-dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
+if(WIN)
+	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
+	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
+else()
+	dk_libDebug		(${ASTYLE_DEBUG_DIR}/libastyle.a)
+	dk_libRelease	(${ASTYLE_RELEASE_DIR}/libastyle.a)
+endif()
 
 
 ### GENERATE ###
