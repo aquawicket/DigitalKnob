@@ -32,35 +32,35 @@ if(NOT MSVC)
 	dk_disable(cef_binary)
 endif()
 dk_disable(dukluv)
-
-
+dk_disable(fontconfig)
+###########################
 
 
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_disable(libxml2)
 endif()
 dk_disable(glfw)
-dk_disable(smpeg2)					# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
+dk_disable(smpeg2)				# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
 
 
 # DISABLED FOR ALL TARGETS
-dk_disable(DKPlugin1)				# TODO
-dk_disable(DKPlugin2)				# TODO
-dk_disable(DKRmlAudio)				# build errors
-dk_disable(DKRmlIframe)				# build errors
-dk_disable(DKRmlTestElements)		# build errors
-dk_disable(DKTemplateEventTest)		# DEPRECATED: using DKEventTargetTest instead
-dk_disable(DKWidget)				# DEPRECATED
-dk_disable(bgfx)					# TODO
-dk_disable(java)					# TODO
-dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
-dk_disable(libx11)					# TODO
-dk_disable(mpg123)					# TODO
-dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
-dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
-dk_disable(simple-getch)			# DEPRECATED: kept for reference
-dk_disable(sw)						# DEPRECATED: requested by leptonica but not required
-dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
+dk_disable(DKPlugin1)			# TODO
+dk_disable(DKPlugin2)			# TODO
+dk_disable(DKRmlAudio)			# build errors
+dk_disable(DKRmlIframe)			# build errors
+dk_disable(DKRmlTestElements)	# build errors
+dk_disable(DKTemplateEventTest)	# DEPRECATED: using DKEventTargetTest instead
+dk_disable(DKWidget)			# DEPRECATED
+dk_disable(bgfx)				# TODO
+dk_disable(java)				# TODO
+dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
+dk_disable(libx11)				# TODO
+dk_disable(mpg123)				# TODO
+dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
+dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
+dk_disable(simple-getch)		# DEPRECATED: kept for reference
+dk_disable(sw)					# DEPRECATED: requested by leptonica but not required
+dk_disable(sw-client)			# DEPRECATED: requested by leptonica but not required
 
 # OpenSceneGraph (disabled)
 dk_disable(openscenegraph)

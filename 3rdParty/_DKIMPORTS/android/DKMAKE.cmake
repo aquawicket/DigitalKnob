@@ -4,6 +4,10 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+dk_validate(host_triple ${host_triple})
+if(NOT ANDROID)
+	return()
+endif()
 
 # not found on Android host devices the first time round. 
 # add hints to point to the library in the ndk
