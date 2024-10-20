@@ -5,43 +5,25 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-
+############ python ############
 # https://docs.python.org/3/using/windows.html
-# Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
-# Mac		https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
-# Linux		https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
 # https://silentinstallhq.com/python-2-7-silent-install-how-to-guide/
+# Uninstall: https://stackoverflow.com/a/3819829
 
-# Portable Python 2.7.17
-# https://sourceforge.net/projects/portable-python/
-# https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe/download
-
-# Portable Python 2.7.6.1
-# https://archive.org/download/portable-python-2.7.6.1
-
-# Uninstall
-# https://stackoverflow.com/a/3819829
-
-
-#WIN_HOST_dk_set	(PYTHON_DL https://sourceforge.net/projects/portable-python/files/Portable%20Python%202.7/Portable%20Python-2.7.17%20x64.exe)
-
-dk_validate(host_triple    "dk_host_triple()")
-dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
-
+###### IMPORT ######
+dk_validate(host_triple "dk_host_triple()")
 LINUX_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
 MAC_HOST_dk_set		   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 WIN_X86_HOST_dk_set	   (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
 WIN_X86_64_HOST_dk_set (PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi)
 
-
-## Get PYTHON_DL_FILE, PYTHON_FOLDER and PYTHON variables
+###### PYTHON_VARIABLES ######
 if(PYTHON_DL)
 	dk_importVariables(${PYTHON_DL} rtn_var)
 endif()
 
-
-
 ###### PYTHON_EXE (first check) ######
+dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
 if(EXISTS "${PYTHON_DIR}")
 	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
 elseif(EXISTS "/usr/local/bin")
@@ -53,12 +35,10 @@ if(EXISTS "${PYTHON_DIR}/include")
 	dk_set(Python_INCLUDE_DIRS "${PYTHON_DIR}/include")
 endif()
 if(EXISTS "${PYTHON_DIR}/libs")
-	dk_set(Python_LIBRARIES 	"${PYTHON_DIR}/libs")
+	dk_set(Python_LIBRARIES    "${PYTHON_DIR}/libs")
 endif()
 
-
-
-### INSTALL ###
+###### INSTALL ######
 if(NOT EXISTS "${PYTHON_EXE}")
 	dk_info(" Installing python . . . . ")
 	if(MAC_HOST)
@@ -80,7 +60,6 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		dk_installPackage(python)
 	endif()
 endif()
-
 
 ###### PYTHON_EXE (second check) ######
 if(EXISTS "${PYTHON_DIR}")
@@ -131,71 +110,4 @@ endif()
 
 
 
-### INSTALL ###
-#if(WIN_HOST)
-#	dk_set(PYTHON_EXE ${PYTHON_DIR}/python.exe)
-#	
-#	if(NOT EXISTS ${PYTHON_EXE})
-#		dk_makeDirectory(${PYTHON_DIR})
-#		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
-#		cmake_path(NATIVE_PATH DKDOWNLOAD_DIR NORMALIZE DKDOWNLOAD_DIR_WINPATH)
-#		cmake_path(NATIVE_PATH PYTHON NORMALIZE PYTHON_WINPATH)
-#		dk_fileWrite("${PYTHON_DIR}/python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
-#		dk_executeProcess(${PYTHON_DIR}/python_install.cmd)
-#		#dk_executeProcess(${DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
-#	endif()
-#
-#	if(NOT EXISTS ${PYTHON_DIR}/Scripts/pip.exe)
-#		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
-#	endif()
-#
-#	dk_set(Python_INCLUDE_DIRS ${PYTHON_DIR}/include)
-#	dk_debug(Python_INCLUDE_DIRS)
-#	dk_set(Python_LIBRARIES 	${PYTHON_DIR}/libs)
-#	dk_debug(Python_LIBRARIES)
-#elseif(MAC_HOST)
-#	dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	
-#	if(NOT EXISTS "/Applications/Python\ 2.7")
-#		dk_download(${PYTHON_DL} ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg)
-#		dk_depend(sudo)
-#		dk_executeProcess(${SUDO_EXE} installer -verbose -pkg ${DKDOWNLOAD_DIR}/python-2.7.18-macosx10.9.pkg -target /)
-#		dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	endif()
-#elseif(ANDROID_HOST)
-#	dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	
-#	if(NOT EXISTS ${PYTHON_EXE})
-#		dk_command(pkg install python)
-#		dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	endif()
-#	# https://stackoverflow.com/a/38121972
-#	#d_k_commandToVariable(PYTHON_VERSION "python" "--version")
-#	#d_k_commandToVariable(PYTHON_INCLUDE_DIR "python" -c "import sysconfig; print(sysconfig.get_path('include'))" )
-#	#d_k_commandToVariable(PYTHON_LIBRARY $(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"))
-#	#find_package(Python)
-#	#find_package(Python COMPONENTS Development)
-#
-#	# /data/data/com.termux/files/usr/include/python3.11
-#	dk_set(Python_INCLUDE_DIRS /data/data/com.termux/files/usr/include/python3.11)
-#	dk_debug(Python_INCLUDE_DIRS)
-#
-#	# /data/data/com.termux/files/usr/lib
-#	dk_set(Python_LIBRARIES /data/data/com.termux/files/usr/lib)
-#	dk_debug(Python_LIBRARIES)
-#
-#	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_EXE} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
-#elseif(RASPBERRY)
-#	dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	
-#	if(NOT EXISTS ${PYTHON_EXE})
-#		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-#		dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	endif()
-#elseif(LINUX)
-#	dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	if(NOT EXISTS ${PYTHON_EXE})
-#		dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-#		dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-#	endif()
-#endif()
+

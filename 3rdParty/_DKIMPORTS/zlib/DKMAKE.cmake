@@ -5,24 +5,25 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-#dk_load(dk_builder)
+############ zlib ############
 # https://github.com/madler/zlib.git
 # http://www.zlib.net/
 
-
+### IMPORT ###
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(triple "dk_target_triple()")
-### IMPORT ###
-dk_getFileParam("${DKIMPORTS_DIR}/zlib/zlib.txt" VERSION)
-dk_import(https://github.com/madler/zlib/archive/${VERSION}.zip)
-#dk_import(https://github.com/madler/zlib/archive/refs/heads/master.zip)
+dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam("${DKIMPORTS_DIR}/zlib/zlib.txt" ZLIB_DL)
+dk_import(${ZLIB_DL})
 
 ### LINK ###
 dk_include				(${ZLIB_DIR}							ZLIB_INCLUDE_DIR)
 dk_include				(${ZLIB_CONFIG_DIR}						ZLIB_INCLUDE_DIR2)
 if(MSVC)
-	dk_if(WIN	"dk_libDebug(${ZLIB_DEBUG_DIR}/zlibstaticd.lib		ZLIB_LIBRARY_DEBUG)")
-	dk_if(WIN	"dk_libRelease(${ZLIB_RELEASE_DIR}/zlibstatic.lib	ZLIB_LIBRARY_RELEASE)")
+	if(WIN)	
+		dk_libDebug		(${ZLIB_DEBUG_DIR}/zlibstaticd.lib		ZLIB_LIBRARY_DEBUG)
+		dk_libRelease	(${ZLIB_RELEASE_DIR}/zlibstatic.lib		ZLIB_LIBRARY_RELEASE)
+	endif()
 else()
 	if(MSYSTEM)
 		dk_libDebug		(${ZLIB_DEBUG_DIR}/libzlibstatic.a		ZLIB_LIBRARY_DEBUG)
@@ -32,10 +33,12 @@ else()
 		dk_libRelease	(${ZLIB_RELEASE_DIR}/libz.a				ZLIB_LIBRARY_RELEASE)
 	endif()
 endif()
-dk_if(DEBUG     "dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_DEBUG})")
-dk_if(RELEASE	"dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_RELEASE})")
-
-
+if(DEBUG)
+	dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_DEBUG})
+endif()
+if(RELEASE)
+	dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_RELEASE})
+endif()
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindZLIB.html
@@ -57,12 +60,8 @@ dk_append(ZLIB_CMAKE
 	-DZLIB_LIBRARIES=${ZLIB_LIBRARY}
 	"-DCMAKE_EXE_LINKER_FLAGS=${ZLIB_LIBRARY}")
 	
-
-
 ### GENERATE ###
 dk_configure(${ZLIB_DIR} -DZLIB_BUILD_EXAMPLES=OFF)
-
-
 
 ### COMPILE ###
 dk_build(${ZLIB_DIR} zlibstatic)
