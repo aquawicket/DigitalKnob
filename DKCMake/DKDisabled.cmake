@@ -27,6 +27,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # SOFTWARE.
 
 dk_disable(aubio)
+dk_disable(bzip2-win-build)
 
 
 
