@@ -14,6 +14,9 @@ function(dk_build path) #target NO_HALT
 	dk_debugFunc()
 	dk_debug("dk_build(${ARGV})")
 	dk_debug("dk_build(${path})")
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("PWD = ${PWD}")
+	
 	#dk_assertPath(${path})
 	
 	if(NOT QUEUE_BUILD)
