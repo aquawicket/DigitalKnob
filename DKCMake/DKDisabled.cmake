@@ -28,6 +28,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_disable(aubio)
 dk_disable(bzip2-win-build)
+if(NOT MSVC)
+	dk_disable(cef_binary)
+endif()
 
 
 

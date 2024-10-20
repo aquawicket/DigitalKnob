@@ -182,7 +182,7 @@ function(dk_importVariables url rtn_var)
 	############ PLUGIN_INSTALL VARIABLES ############
 	##################################################
 	# PLUGIN_INSTALL_NAME
-	if(NOT PLUGIN_INSTALL_NAME)
+	#if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_IMPORT_NAME)
 			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
 		elseif(PLUGIN_GIT_NAME)
@@ -190,11 +190,11 @@ function(dk_importVariables url rtn_var)
 		elseif(PLUGIN_URL_NAME)
 			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})							
 		endif()
-	endif()
+	#endif()
 	dk_printVar(PLUGIN_INSTALL_NAME)									# PLUGIN_INSTALL_NAME		: zlib
 
 	# PLUGIN_INSTALL_VERSION
-	if(NOT PLUGIN_INSTALL_VERSION)
+	#if(NOT PLUGIN_INSTALL_VERSION)
 		if(PLUGIN_IMPORT_NAME AND PLUGIN_URL_FILE)
 			dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)	
 			dk_toLower(${PLUGIN_URL_FILE}    PLUGIN_URL_FILE_LOWER)
@@ -220,17 +220,17 @@ function(dk_importVariables url rtn_var)
 				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
 			endif()
 		endif()
-	endif()
+	#endif()
 	dk_printVar(PLUGIN_INSTALL_VERSION)									# PLUGIN_INSTALL_VERSION	: master
 
 	# PLUGIN_INSTALL_FOLDER
-	if(NOT PLUGIN_INSTALL_FOLDER)
+	#if(NOT PLUGIN_INSTALL_FOLDER)
 		if(PLUGIN_INSTALL_VERSION)
 			set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})
 		else()
 			set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME})
 		endif()
-	endif()
+	#endif()
 	dk_printVar(PLUGIN_INSTALL_FOLDER)									# PLUGIN_INSTALL_FOLDER		: zlib-master
 
 	# PLUGIN_INSTALL_ROOT
@@ -241,11 +241,11 @@ function(dk_importVariables url rtn_var)
 	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT		: C:/Users/Administrator/digitalknob/Development/3rdParty
 
 	# PLUGIN_INSTALL_PATH
-	if(NOT PLUGIN_INSTALL_PATH)
+	#if(NOT PLUGIN_INSTALL_PATH)
 		dk_assertPath(${PLUGIN_INSTALL_ROOT})
 		dk_assertVar(PLUGIN_INSTALL_FOLDER)
 		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
-	endif()
+	#endif()
 	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH		: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 
 	
