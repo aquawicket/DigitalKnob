@@ -26,6 +26,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+dk_disable(aubio)
+
+
+
+
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_disable(libxml2)
 endif()
