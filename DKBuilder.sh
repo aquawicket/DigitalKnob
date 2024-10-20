@@ -48,14 +48,14 @@ CMD_EXE(){
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	[ -e "${CYGPATH_EXE-}" ] || export CYGPATH_EXE=$(command -v cygpath) || true
+	[ -e "${CYGPATH_EXE-}" ] || export CYGPATH_EXE="$(command -v cygpath)" || true
 	[ -e "${CYGPATH_EXE-}" ] && echo "${CYGPATH_EXE}" || unset CYGPATH_EXE
 	#echo "CYGPATH_EXE = '${CYGPATH_EXE-}'" &>/dev/tty
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	[ -e "${WSLPATH_EXE-}" ] || export WSLPATH_EXE=$(command -v wslpath) || true
+	[ -e "${WSLPATH_EXE-}" ] || export WSLPATH_EXE="$(command -v wslpath)" || true
 	[ -e "${WSLPATH_EXE-}" ] && echo "${WSLPATH_EXE}" || unset WSLPATH_EXE
 	#echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
 }
