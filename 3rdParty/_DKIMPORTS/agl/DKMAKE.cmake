@@ -4,13 +4,14 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+############ agl ############
+# https://developer.apple.com/documentation/agl/agl?language=objc
+
 dk_validate(host_triple ${host_triple})
 if(NOT MAC_HOST)
 	return()
 endif()
-
-###### agl ######
-# https://developer.apple.com/documentation/agl/agl?language=objc
 
 dk_depend(carbon)
 dk_depend(opengl)

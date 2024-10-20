@@ -43,10 +43,8 @@ string(REPLACE "--disable-shared" 	"" 	DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
 string(REPLACE "--enable-static" 	"" 	DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
 string(REPLACE "  " 				" " DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
 
-#ANDROID_DEBUG_dk_cd			(${GZIP_DEBUG_DIR})
-ANDROID_DEBUG_dk_configure		(${GZIP_DIR})
-#ANDROID_RELEASE_dk_cd			(${GZIP_RELEASE_DIR})
-ANDROID_RELEASE_dk_configure	(${GZIP_DIR})
+
+ANDROID_dk_configure			(${GZIP_DIR})
 ANDROID_dk_build				(${GZIP_DIR})
 
 #APPLE_dk_cd					(${GZIP_DIR})
