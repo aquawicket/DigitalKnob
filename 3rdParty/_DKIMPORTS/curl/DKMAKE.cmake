@@ -25,9 +25,7 @@ dk_depend(zstd)
 #	WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 if(WIN)
 	dk_import		(https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip)
-	#dk_import		(https://github.com/curl/curl/archive/refs/heads/master.zip)
 else()
-	#dk_import		(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
 	dk_import		(https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip)
 endif()
 
@@ -143,7 +141,7 @@ if(MSVC AND WIN)
 		-DUSE_NGTCP2=OFF								# "Use ngtcp2 and nghttp3 libraries for HTTP/3 support" OFF
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
-		-DUSE_WIN32_LDAP=OFF					# "Use Windows LDAP implementation" ON
+		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${LIBBCRYPT_CMAKE}
 		${LIBPSL_CMAKE}
 		${LIBSSH2_CMAKE}

@@ -12,6 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 ### IMPORT ###
+dk_load(dk_builder)
 dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 dk_getFileParam(${DKIMPORTS_DIR}/bullet3/bullet3.txt BULLET3_VERSION)
 dk_import(https://github.com/bulletphysics/bullet3/archive/${BULLET3_VERSION}.zip)
@@ -35,226 +36,212 @@ endif(ALL_LIBS)
 
 dk_include					(${BULLET3_LIB}/src																		BULLET_INCLUDE_DIR)
 
+dk_validate(triple "dk_TARGET_TRIPLE()")
 if(Bullet3Collision)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/Bullet3Collision_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3Collision.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Collision_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Collision.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3Collision/${DEBUG_DIR}//libBullet3Collision.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3Collision/${RELEASE_DIR}/libBullet3Collision.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Collision/libBullet3Collision.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Collision/libBullet3Collision.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3Collision/libBullet3Collision_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3Collision/libBullet3Collision.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet3Collision_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet3Collision.a)
 	endif()
 endif()
 if(Bullet3Common)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/Bullet3Common_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3Common.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/Bullet3Common_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/Bullet3Common.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3Common/${DEBUG_DIR}//libBullet3Common.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3Common/${RELEASE_DIR}/libBullet3Common.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Common/${DEBUG_DIR}//libBullet3Common.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Common/${RELEASE_DIR}/libBullet3Common.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3Common/libBullet3Common_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3Common/libBullet3Common.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet3Common_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet3Common.a)
 	endif()
 endif()
 if(Bullet3Dynamics)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/Bullet3Dynamics_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3Dynamics.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/Bullet3Dynamics_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/Bullet3Dynamics.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3Dynamics/${DEBUG_DIR}//libBullet3Dynamics.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3Dynamics/${RELEASE_DIR}/libBullet3Dynamics.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Dynamics/${DEBUG_DIR}//libBullet3Dynamics.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Dynamics/${RELEASE_DIR}/libBullet3Dynamics.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3Dynamics/libBullet3Dynamics_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3Dynamics/libBullet3Dynamics.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet3Dynamics_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet3Dynamics.a)
 	endif()
 endif()
 if(Bullet3Geometry)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/Bullet3Geometry_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3Geometry.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/Bullet3Geometry_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/Bullet3Geometry.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3Geometry/${DEBUG_DIR}//libBullet3Geometry.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3Geometry/${RELEASE_DIR}/libBullet3Geometry.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Geometry/${DEBUG_DIR}//libBullet3Geometry.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Geometry/${RELEASE_DIR}/libBullet3Geometry.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3Geometry/libBullet3Geometry_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3Geometry/libBullet3Geometry.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet3Geometry_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet3Geometry.a)
 	endif()	
 endif()
 if(Bullet3OpenCL)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/Bullet3OpenCL_clew_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3OpenCL_clew.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/Bullet3OpenCL_clew_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/Bullet3OpenCL_clew.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3OpenCL/${DEBUG_DIR}//libBullet3OpenCL_clew.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3OpenCL/${RELEASE_DIR}/libBullet3OpenCL_clew.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3OpenCL/${DEBUG_DIR}//libBullet3OpenCL_clew.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3OpenCL/${RELEASE_DIR}/libBullet3OpenCL_clew.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3OpenCL/libBullet3OpenCL_clew_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3OpenCL/libBullet3OpenCL_clew.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet3OpenCL_clew_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet3OpenCL_clew.a)
 	endif()
 endif()
 if(Bullet3Serialize)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/BulletFileLoader_Debug.lib)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletFileLoader.lib)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/BulletFileLoader_Debug.lib)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/BulletFileLoader.lib)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/Bullet3Serialize/Bullet2FileLoader/${DEBUG_DIR}/libBullet2FileLoader.a)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/Bullet3Serialize/Bullet2FileLoader/${RELEASE_DIR}/libBullet2FileLoader.a)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/Bullet3Serialize/Bullet2FileLoader/${DEBUG_DIR}/libBullet2FileLoader.a)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/Bullet3Serialize/Bullet2FileLoader/${RELEASE_DIR}/libBullet2FileLoader.a)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/Bullet3Serialize/Bullet2FileLoader/libBullet2FileLoader_Debug.a)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/Bullet3Serialize/Bullet2FileLoader/libBullet2FileLoader.a)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBullet2FileLoader_Debug.a)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBullet2FileLoader.a)
 	endif()
 endif()
 if(BulletCollision)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/BulletCollision_Debug.lib								BULLET_COLLISION_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletCollision.lib									BULLET_COLLISION_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/BulletCollision_Debug.lib								BULLET_COLLISION_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/BulletCollision.lib									BULLET_COLLISION_RELEASE_LIBRARY)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/BulletCollision/${DEBUG_DIR}//libBulletCollision.a					BULLET_COLLISION_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/BulletCollision/${RELEASE_DIR}/libBulletCollision.a					BULLET_COLLISION_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/BulletCollision/${DEBUG_DIR}//libBulletCollision.a					BULLET_COLLISION_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/BulletCollision/${RELEASE_DIR}/libBulletCollision.a					BULLET_COLLISION_RELEASE_LIBRARY)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision_Debug.a							BULLET_COLLISION_DEBUG_LIBRARY)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a									BULLET_COLLISION_RELEASE_LIBRARY)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/libBulletCollision_Debug.a											BULLET_COLLISION_DEBUG_LIBRARY)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/libBulletCollision.a												BULLET_COLLISION_RELEASE_LIBRARY)
 	endif()
 endif()
 if(BulletDynamics)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/BulletDynamics_Debug.lib								BULLET_DYNAMICS_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletDynamics.lib									BULLET_DYNAMICS_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/BulletDynamics_Debug.lib									BULLET_DYNAMICS_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/BulletDynamics.lib									BULLET_DYNAMICS_RELEASE_LIBRARY)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/BulletDynamics/${DEBUG_DIR}/libBulletDynamics.a						BULLET_DYNAMICS_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a					BULLET_DYNAMICS_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/BulletDynamics/${DEBUG_DIR}/libBulletDynamics.a						BULLET_DYNAMICS_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a					BULLET_DYNAMICS_RELEASE_LIBRARY)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics_Debug.a								BULLET_DYNAMICS_DEBUG_LIBRARY)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a									BULLET_DYNAMICS_RELEASE_LIBRARY)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/BulletDynamics/libBulletDynamics_Debug.a								BULLET_DYNAMICS_DEBUG_LIBRARY)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/BulletDynamics/libBulletDynamics.a									BULLET_DYNAMICS_RELEASE_LIBRARY)
 	endif()
 endif()
 if(BulletInverseDynamics)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/BulletInverseDynamics_Debug.lib							BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletInverseDynamics.lib								BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/BulletInverseDynamics_Debug.lib							BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/BulletInverseDynamics.lib							BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/BulletInverseDynamics/${DEBUG_DIR}/libBulletInverseDynamics_Debug.a	BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a		BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/BulletInverseDynamics/${DEBUG_DIR}/libBulletInverseDynamics_Debug.a	BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a		BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/BulletInverseDynamics/libBulletInverseDynamics.a						BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/BulletInverseDynamics/libBulletInverseDynamics.a						BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/BulletInverseDynamics/libBulletInverseDynamics.a						BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/BulletInverseDynamics/libBulletInverseDynamics.a					BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY)
 	endif()
 endif()
 if(BulletSoftBody)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/BulletSoftBody_Debug.lib								BULLET_SOFTBODY_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletSoftBody.lib									BULLET_SOFTBODY_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/BulletSoftBody_Debug.lib									BULLET_SOFTBODY_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/BulletSoftBody.lib									BULLET_SOFTBODY_RELEASE_LIBRARY)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/BulletSoftBody/${DEBUG_DIR}/libBulletSoftBody.a						BULLET_SOFTBODY_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a					BULLET_SOFTBODY_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/BulletSoftBody/${DEBUG_DIR}/libBulletSoftBody.a						BULLET_SOFTBODY_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a					BULLET_SOFTBODY_RELEASE_LIBRARY)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody_Debug.a								BULLET_SOFTBODY_DEBUG_LIBRARY)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a									BULLET_SOFTBODY_RELEASE_LIBRARY)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/BulletSoftBody/libBulletSoftBody_Debug.a								BULLET_SOFTBODY_DEBUG_LIBRARY)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/BulletSoftBody/libBulletSoftBody.a									BULLET_SOFTBODY_RELEASE_LIBRARY)
 	endif()
 endif()
 if(LinearMath)
 	if(MULTI_CONFIG)
 		if(MSVC)
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/lib/${DEBUG_DIR}/LinearMath_Debug.lib									BULLET_MATH_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/LinearMath.lib										BULLET_MATH_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/${DEBUG_DIR}/LinearMath_Debug.lib										BULLET_MATH_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/${RELEASE_DIR}/LinearMath.lib										BULLET_MATH_RELEASE_LIBRARY)
 		else()
-			dk_libDebug		(${BULLET3_CONFIG_DIR}/src/LinearMath/${DEBUG_DIR}/libLinearMath.a								BULLET_MATH_DEBUG_LIBRARY)
-			dk_libRelease	(${BULLET3_CONFIG_DIR}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a							BULLET_MATH_RELEASE_LIBRARY)
+			dk_libDebug		(${BULLET3_DEBUG_DIR}/lib/LinearMath/${DEBUG_DIR}/libLinearMath.a								BULLET_MATH_DEBUG_LIBRARY)
+			dk_libRelease	(${BULLET3_RELEASE_DIR}/lib/LinearMath/${RELEASE_DIR}/libLinearMath.a							BULLET_MATH_RELEASE_LIBRARY)
 		endif()
 	else()
-		dk_libDebug			(${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath_Debug.a										BULLET_MATH_DEBUG_LIBRARY)
-		dk_libRelease		(${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a											BULLET_MATH_RELEASE_LIBRARY)
+		dk_libDebug			(${BULLET3_DEBUG_DIR}/lib/LinearMath/libLinearMath_Debug.a										BULLET_MATH_DEBUG_LIBRARY)
+		dk_libRelease		(${BULLET3_RELEASE_DIR}/lib/LinearMath/libLinearMath.a											BULLET_MATH_RELEASE_LIBRARY)
 	endif()	
 endif(LinearMath)
-
+if(DEBUG)
+	set(BULLET_COLLISION_LIBRARY 		${BULLET_COLLISION_DEBUG_LIBRARY})
+	set(BULLET_DYNAMICS_LIBRARY 		${BULLET_DYNAMICS_DEBUG_LIBRARY})
+	set(BULLET_INVERSEDYNAMICS_LIBRARY	${BULLET_INVERSEDYNAMICS_DEBUG_LIBRARY})
+	set(BULLET_SOFTBODY_LIBRARY 		${BULLET_SOFTBODY_DEBUG_LIBRARY})
+	set(BULLET_MATH_LIBRARY 			${BULLET_MATH_DEBUG_LIBRARY})
+endif()
+if(RELEASE)
+	set(BULLET_COLLISION_LIBRARY 		${BULLET_COLLISION_RELEASE_LIBRARY})
+	set(BULLET_DYNAMICS_LIBRARY 		${BULLET_DYNAMICS_RELEASE_LIBRARY})
+	set(BULLET_INVERSEDYNAMICS_LIBRARY	${BULLET_INVERSEDYNAMICS_RELEASE_LIBRARY})
+	set(BULLET_SOFTBODY_LIBRARY 		${BULLET_SOFTBODY_RELEASE_LIBRARY})
+	set(BULLET_MATH_LIBRARY 			${BULLET_MATH_RELEASE_LIBRARY})
+endif()
 
 ### 3RDPARTY LINK ###
-ANDROID_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/Bullet3Collision/${RELEASE_DIR}/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-APPLE_dk_set(BULLET3_CMAKE
-	-DBULLET_COMMON_LIBRARY=${BULLET3_CONFIG_DIR}/src/Bullet3Common/${RELEASE_DIR}/libBullet3Common.a
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
-	-DBULLET_INVERSE_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/${RELEASE_DIR}/libBulletCollision.a 
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-EMSCRIPTEN_DEBUG_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-EMSCRIPTEN_RELEASE_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-LINUX_DEBUG_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-LINUX_RELEASE_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-RASPBERRY_DEBUG_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-RASPBERRY_RELEASE_dk_set(BULLET3_CMAKE 
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletDynamics/libBulletDynamics.a
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletCollision/libBulletCollision.a
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/src/LinearMath/libLinearMath.a
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-WIN_dk_set(BULLET3_CMAKE
-	-DBULLET3_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/Bullet3Collision_Debug.lib
-	-DBULLET_DYNAMICS_LIBRARY=${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletDynamics.lib 
-	-DBULLET_COLLISION_LIBRARY=${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletCollision.lib 
-	-DBULLET_MATH_LIBRARY=${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/LinearMath.lib 
-	-DBULLET_SOFTBODY_LIBRARY=${BULLET3_CONFIG_DIR}/lib/${RELEASE_DIR}/BulletSoftBody.lib 
-	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR})
-
+dk_set(BULLET3_CMAKE
+	-DBULLET_INCLUDE_DIR=${BULLET_INCLUDE_DIR}
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET_DYNAMICS_LIBRARY}
+	-DBULLET_COLLISION_LIBRARY=${BULLET_COLLISION_LIBRARY}
+	-DBULLET_MATH_LIBRARY=${BULLET_MATH_LIBRARY}
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET_SOFTBODY_LIBRARY})
 
 ### GENERATE ###
 #dk_configure(${BULLET3_DIR} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF)
 #UNIX_dk_configure(${BULLET3_DIR} -DBUILD_PYBULLET=ON -DBUILD_PYBULLET_NUMPY=ON -DUSE_DOUBLE_PRECISION=ON -DBT_USE_EGL=ON)
-dk_configure(${BULLET3_DIR})
+dk_configure(${BULLET3_DIR}
+			-DUSE_DOUBLE_PRECISION=OFF
+			-DCLAMP_VELOCITIES="0"
+			-DUSE_GRAPHICAL_BENCHMARK=ON
+			-DUSE_SOFT_BODY_MULTI_BODY_DYNAMICS_WORLD=ON
+			-DUSE_OPENVR=OFF
+			-DENABLE_VHACD=ON
+			-DBULLET2_MULTITHREADING=OFF
+			-DBULLET2_USE_OPEN_MP_MULTITHREADING=OFF
+			-DBULLET2_USE_TBB_MULTITHREADING=OFF
+			-DBULLET2_USE_PPL_MULTITHREADING=OFF
+			-DUSE_MSVC_INCREMENTAL_LINKING=OFF
+			-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON
+			-DUSE_MSVC_RELEASE_RUNTIME_ALWAYS=OFF
+			-DUSE_MSVC_SSE=OFF
+			-DUSE_MSVC_SSE2=ON
+			-DUSE_MSVC_AVX=OFF
+			-DUSE_MSVC_FAST_FLOATINGPOINT=ON
+			-DUSE_MSVC_STRING_POOLING=ON
+			-DUSE_MSVC_FUNCTION_LEVEL_LINKING=ON
+			-DUSE_MSVC_EXEPTIONS=OFF
+			-DUSE_MSVC_COMDAT_FOLDING=ON
+			-DUSE_MSVC_DISABLE_RTTI=ON
+			# MORE TO DO
+			)
 
 
 ### COMPILE ###
