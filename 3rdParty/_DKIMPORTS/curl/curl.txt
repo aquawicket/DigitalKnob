@@ -1,0 +1,2 @@
+CURL_WIN_DL=https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip
+CURL_UNIX_DL=https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip

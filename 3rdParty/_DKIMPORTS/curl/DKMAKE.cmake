@@ -4,7 +4,6 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-
 ############ curl ############
 # https://github.com/curl/curl
 # https://curl.se/
@@ -26,10 +25,13 @@ dk_depend(zlib)
 dk_depend(zstd)
 
 ### IMPORT ###
+dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_getFileParam ("${DKIMPORTS_DIR}/curl/curl.txt" CURL_WIN_DL)
+dk_getFileParam ("${DKIMPORTS_DIR}/curl/curl.txt" CURL_UNIX_DL)
 if(WIN)
-	dk_import		(https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip)
+	dk_import	(${CURL_WIN_DL})
 else()
-	dk_import		(https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip)
+	dk_import	(${CURL_UNIX_DL})
 endif()
 
 ### LINK ###
