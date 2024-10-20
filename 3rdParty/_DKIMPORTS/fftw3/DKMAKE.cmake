@@ -26,18 +26,18 @@ endif()
 
 ### GENERATE ###
 dk_configure(${FFTW3_DIR})
-	BUILD_TESTS=OFF				#"Build tests" ON
-	ENABLE_OPENMP=ON 			#"Use OpenMP for multithreading" OFF
-	ENABLE_THREADS=ON 			#"Use pthread for multithreading" OFF
-	WITH_COMBINED_THREADS=ON 	#"Merge thread library" OFF
-	ENABLE_FLOAT=ON 			#"single-precision" OFF
-	ENABLE_LONG_DOUBLE=ON 		#"long-double precision" OFF
-	ENABLE_QUAD_PRECISION=ON 	#"quadruple-precision" OFF
-	ENABLE_SSE=ON 				#"Compile with SSE instruction set support" OFF
-	ENABLE_SSE2=ON		 		#"Compile with SSE2 instruction set support" OFF
-	ENABLE_AVX=ON 				#"Compile with AVX instruction set support" OFF
-	ENABLE_AVX2=ON 				#"Compile with AVX2 instruction set support" OFF
-	DISABLE_FORTRAN=ON) 		#"Disable Fortran wrapper routines" OFF
+	-DBUILD_TESTS=OFF				# "Build tests" ON
+	-DENABLE_OPENMP=ON 				# "Use OpenMP for multithreading" OFF
+	-DENABLE_THREADS=ON 			# "Use pthread for multithreading" OFF
+	-DWITH_COMBINED_THREADS=ON 		# "Merge thread library" OFF
+	-DENABLE_FLOAT=ON 				# "single-precision" OFF
+	-DENABLE_LONG_DOUBLE=ON 		# "long-double precision" OFF
+	-DENABLE_QUAD_PRECISION=ON 		# "quadruple-precision" OFF
+	-DENABLE_SSE=ON 				# "Compile with SSE instruction set support" OFF
+	-DENABLE_SSE2=ON		 		# "Compile with SSE2 instruction set support" OFF
+	-DENABLE_AVX=ON 				# "Compile with AVX instruction set support" OFF
+	-DENABLE_AVX2=ON 				# "Compile with AVX2 instruction set support" OFF
+	-DDISABLE_FORTRAN=ON) 			# "Disable Fortran wrapper routines" OFF
 
 ### COMPILE ###
 dk_build(${FFTW3_DIR})# fftw3)

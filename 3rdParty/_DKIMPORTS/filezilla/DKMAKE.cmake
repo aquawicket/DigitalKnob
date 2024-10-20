@@ -8,7 +8,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ filezilla ############
 # https://filezilla-project.org/
 
+set(FILEZILLA_EXE "C:\Program Files\FileZilla FTP Client\filezilla.exe"
+
 ### IMPORT ###
-dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-dk_getFileParam 	("${DKIMPORTS_DIR}/filezilla/filezilla.txt" FILEZILLA_DL)
-dk_import			(${FILEZILLA_DL})
+if(NOT EXISTS ${FILEZILLA_EXE})
+	dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_getFileParam 	("${DKIMPORTS_DIR}/filezilla/filezilla.txt" FILEZILLA_DL)
+	dk_import			(${FILEZILLA_DL})
+endif()
