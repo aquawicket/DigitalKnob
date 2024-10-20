@@ -22,3 +22,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 dk_getFileParam	(${DKIMPORTS_DIR}/[app_name]/[app_name].txt [APP_NAME]_IMPORT)
 dk_import		(${[APP_NAME]})
+
+
+#											Single Config										MULTI_CONFIG
+#	     CONFIG_PATH  =			                  win_x86_64/Debug									  win_x86_64
+#         BUILD_PATH  =			                  win_x86_64/Debug									  win_x86_64/Debug
+#   MYLIB_CONFIG_DIR  =		....3rdParty/myLib-13/win_x86_64/Debug				....3rdParty/myLib-13/win_x86_64
+#    MYLIB_BUILD_DIR  =		....3rdParty/myLib-13/win_x86_64/Debug				....3rdParty/myLib-13/win_x86_64/Debug
+#    MYLIB_DEBUG_DIR  = 	....3rdParty/myLib-13/win_x86_64/Debug				....3rdParty/myLib-13/win_x86_64/Debug
+#  MYLIB_RELEASE_DIR  = 	....3rdParty/myLib-13/win_x86_64/Release			....3rdParty/myLib-13/win_x86_64/Release
+#   MYLIB_TRIPLE_DIR  = 	....3rdParty/myLib-13/win_x86_64					....3rdParty/myLib-13/win_x86_64

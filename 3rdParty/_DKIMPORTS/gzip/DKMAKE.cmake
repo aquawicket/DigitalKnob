@@ -5,20 +5,19 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gzip ############
 # https://git.savannah.gnu.org/cgit/gzip.git
 # git://git.savannah.gnu.org/gzip.git
 # https://github.com/kunpengcompute/gzip.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
 dk_import(https://github.com/kunpengcompute/gzip/archive/6a3ebab7e475fb5ca9b01c344eb45c27ea81ef89.zip)
-#dk_import(https://github.com/kunpengcompute/gzip/archive/refs/heads/master.zip)
-
 
 ### LINK ###
 dk_include			(${GZIP_DIR}				GZIP_INCLUDE_DIR)
-dk_include			(${GZIP_CONFIG_DIR}/lib		GZIP_INCLUDE_DIR2)
+dk_include			(${GZIP_BUILD_DIR}/lib		GZIP_INCLUDE_DIR2)
 
 # libversion
 UNIX_dk_libDebug	(${GZIP_DEBUG_DIR}/libver.a			VER_DEBUG_LIBRARY)
@@ -38,8 +37,6 @@ RELEASE_dk_set		(GZIP_LIBRARY						${GZIP_RELEASE_LIBRARY})
 dk_set(GZIP_CMAKE 
 	-DGZIP_INCLUDE_DIR=${GZIP_INCLUDE_DIR} 
 	-DGZIP_LIBRARY=${GZIP_LIBRARY})
-
-
 
 ### GENERATE / COMPILE ###
 string(REPLACE "--disable-shared" 	"" 	DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
