@@ -5,8 +5,8 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ rtmidi ############
 # https://github.com/thestk/rtmidi
-
 
 dk_validate(triple "dk_TARGET_TRIPLE()")
 
@@ -16,12 +16,10 @@ if(WIN)
 endif()
 
 ### IMPORT ###
-#dk_import(https://github.com/thestk/rtmidi.git)
-dk_import(https://github.com/thestk/rtmidi/archive/refs/heads/master.zip)
-
+dk_import(https://github.com/thestk/rtmidi/archive/24b3a3bf.zip)
 
 ### LINK ###
-if(APPLE
+if(APPLE)
 	dk_define		(__MACOSX_CORE__)
 endif()
 if(LINUX OR RASPBERRY OR ANDROID)
@@ -39,7 +37,6 @@ endif()
 
 ### GENERATE ###
 dk_configure(${RTMIDI})
-
 
 ### COMPILE ###
 dk_build(${RTMIDI} rtmidi)
