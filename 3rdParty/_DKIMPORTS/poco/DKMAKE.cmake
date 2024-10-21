@@ -5,26 +5,22 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ poco ############
 # https://github.com/pocoproject/poco.git
 
+dk_load(dk_builder)
 
 ### DEPENDS ###
 dk_depend(iphlpapi)
 dk_depend(ws2_32)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/pocoproject/poco.git)
-dk_import(https://github.com/pocoproject/poco/archive/refs/heads/main.zip)
-
-
+dk_import(https://github.com/pocoproject/poco/archive/c735162.zip)
 
 ### EMSCRIPTEN FIXES ###
-dk_fileReplace(${POCO}/Foundation/src/Thread_POSIX.cpp "#if POCO_OS == POCO_OS_LINUX" "#if (POCO_OS == POCO_OS_LINUX) && !defined(EMSCRIPTEN)")
-dk_fileReplace(${POCO}/Net/src/PollSet.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
-dk_fileReplace(${POCO}/Net/src/SocketImpl.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
-
+dk_fileReplace(${POCO}/Foundation/src/Thread_POSIX.cpp 	"#if POCO_OS == POCO_OS_LINUX" 		"#if (POCO_OS == POCO_OS_LINUX) && !defined(EMSCRIPTEN)")
+dk_fileReplace(${POCO}/Net/src/PollSet.cpp 				"#if defined(POCO_HAVE_FD_EPOLL)" 	"#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
+dk_fileReplace(${POCO}/Net/src/SocketImpl.cpp 			"#if defined(POCO_HAVE_FD_EPOLL)" 	"#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
 
 ### LINK ###
 dk_include(${POCO}/include)
@@ -32,7 +28,6 @@ dk_include(${POCO}/${triple})
 dk_include(${POCO}/Net/include)
 dk_include(${POCO}/Foundation/include)
 dk_include(${POCO}/Util/include)
-
 
 dk_enable(ALL_LIBS)
 if(ALL_LIBS)
@@ -51,7 +46,6 @@ if(ALL_LIBS)
 	dk_enable(PocoXML)
 	dk_enable(PocoZip)
 endif()
-
 
 if(PocoActiveRecord)
 	ANDROID_dk_libDebug		(${POCO}/${triple}/lib/${DEBUG_DIR}/PocoActiveRecordd.a)
@@ -263,14 +257,12 @@ if(PocoZip)
 	WIN_dk_libRelease		(${POCO}/${triple}/lib/${RELEASE_DIR}/PocoZipmt.lib)
 endif()
 
-
 ### GENERATE ###
 if(EMSCRIPTEN)
 	dk_configure(${POCO} -DPOCO_MT=ON "-DCMAKE_CXX_FLAGS=-DEMSCRIPTEN -DPOCO_NO_INOTIFY -DPOCO_NO_LINUX_IF_PACKET_H")
 else()
 	dk_configure(${POCO} -DPOCO_MT=ON)
 endif()
-
 
 ### COMPILE ###
 dk_build(${POCO})

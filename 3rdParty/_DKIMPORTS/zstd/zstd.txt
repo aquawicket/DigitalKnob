@@ -1,1 +1,1 @@
-VERSION=27bf1362fe10481bfed1f92cc24a9972e702e691
+ZSTD_DL=https://github.com/facebook/zstd/archive/27bf136.zip

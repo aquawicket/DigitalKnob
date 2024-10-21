@@ -1,1 +1,1 @@
-ASIO_IMPORT=https://github.com/chriskohlhoff/asio/archive/efdc25ab99786101351a5afb39f01dfaf0781401.zip
+ASIO_IMPORT=https://github.com/chriskohlhoff/asio/archive/efdc25a.zip
