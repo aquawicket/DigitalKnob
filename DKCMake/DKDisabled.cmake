@@ -39,6 +39,7 @@ dk_disable(gzip)
 dk_disable(jasper)
 dk_disable(jerryscript)
 dk_disable(libcaca)
+dk_disable(mbedtls)
 ###########################
 
 
@@ -47,7 +48,6 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 endif()
 dk_disable(glfw)
 dk_disable(smpeg2)				# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
-
 
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)			# TODO
@@ -179,12 +179,10 @@ if(ANDROID)
 	dk_disable(x265)
 endif(ANDROID)
 
-
 # Disabled for Android 64bit targets
 if(ANDROID_ARM64)
 	dk_disable(boost)
 endif(ANDROID_ARM64)
-
 
 # Disabled for Emscripten targets
 if(EMSCRIPTEN) 
