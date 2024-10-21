@@ -5,29 +5,31 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ libmingwex ############
 dk_load(dk_builder)
-#if(WIN_X86)
-#	dk_depend(mingw32)
-#elseif(WIN_X86_64)
-#	dk_depend(mingw64)
-#endif()
 dk_depend(msys2)
 
-
-if(WIN_X86)
-	#dk_set(LIBMINGWEX ${MINGW32}/i686-w64-mingw32/lib)
+if(WIN_X86_CLANG)
+	dk_set(LIBMINGWEX ${MSYS2_DIR}/clang32/lib)
+endif()
+if(WIN_X86_64_CLANG)
+	dk_set(LIBMINGWEX ${MSYS2_DIR}/clang64/lib)
+endif()
+if(WIN_X86_MINGW)
 	dk_set(LIBMINGWEX ${MSYS2_DIR}/mingw32/lib)
 endif()
-if(WIN_X86_64)
-	#dk_set(LIBMINGWEX ${MINGW64}/x86_64-w64-mingw32/lib)
+if(WIN_X86_64_MINGW)
 	dk_set(LIBMINGWEX ${MSYS2_DIR}/mingw64/lib)
 endif()
 
 
 ### LINK ###
-WIN_dk_libDebug(${LIBMINGWEX}/libmingwex.a)
-WIN_dk_libRelease(${LIBMINGWEX}/libmingwex.a)
-
+if(WIN)
+	dk_libDebug(${LIBMINGWEX}/libmingwex.a)
+	dk_libRelease(${LIBMINGWEX}/libmingwex.a)
+endif()
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(LIBMINGWEX_CMAKE -DLIBMINGWEX_LIBRARIES=${LIBMINGWEX})
+if(WIN)
+	dk_set(LIBMINGWEX_CMAKE -DLIBMINGWEX_LIBRARIES=${LIBMINGWEX})
+endif()
