@@ -41,6 +41,7 @@ dk_disable(jerryscript)
 dk_disable(libcaca)
 dk_disable(mbedtls)
 dk_disable(libevent)
+dk_disable(libjodycode)
 ###########################
 
 
