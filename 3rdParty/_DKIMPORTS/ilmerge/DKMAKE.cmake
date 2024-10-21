@@ -5,16 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ ilmerge ############
 # https://github.com/dotnet/ILMerge
 # https://www.nuget.org/packages/ilmerge
+dk_load(dk_builder)
 
-
-
-dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip)
-#dk_import(https://github.com/dotnet/ILMerge/archive/refs/heads/master.zip)
-
-#dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip)
+dk_import(https://github.com/dotnet/ILMerge/archive/9ec1b3f2.zip)
 
 #dk_set(ILMERGE_VERSION 3.0.41)
 #dk_set(ILMERGE_FOLDER ilmerge-${ILMERGE_VERSION})

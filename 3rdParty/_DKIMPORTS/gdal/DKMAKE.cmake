@@ -5,14 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gdal ############
 # https://github.com/OSGeo/gdal.git
-
+dk_load(dk_builder)
 
 ### IMPORT ###
-dk_import(https://github.com/OSGeo/gdal/archive/5deb12670d39b035d30d049a1602e444c329757b.zip)
-#dk_import(https://github.com/OSGeo/gdal/archive/refs/heads/master.zip)
-
-
+dk_import(https://github.com/OSGeo/gdal/archive/5deb1267.zip)
 
 # TODO

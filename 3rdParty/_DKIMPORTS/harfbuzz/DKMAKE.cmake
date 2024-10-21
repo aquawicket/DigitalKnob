@@ -5,18 +5,16 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ harfbuzz ############
 # https://github.com/harfbuzz/harfbuzz.git
 
+dk_load(dk_builder)
 
 dk_depend(freetype)
 dk_depend(python3)
 
-
 ### IMPORT ###
-dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e3f50fcd582f2ee1667da6cde2e8562c3.zip)
-#dk_import(https://github.com/harfbuzz/harfbuzz/archive/refs/heads/main.zip)
-
+dk_import(https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e.zip)
 
 ### LINK ###
 dk_include			(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
@@ -52,10 +50,8 @@ dk_configure(${HARFBUZZ_DIR}
 	${FREETYPE_CMAKE}
 	${PYTHON3_CMAKE})
 
-
 ### 3RDPARTY LINK ###
 dk_set(HARFBUZZ_CMAKE -DHARFBUZZ_INCLUDE_DIR=${HARFBUZZ_INCLUDE_DIR} -DHARFBUZZ_LIBRARY=${HARFBUZZ_LIBRARY})
-
 
 ### COMPILE ###
 dk_build(${HARFBUZZ_DIR})

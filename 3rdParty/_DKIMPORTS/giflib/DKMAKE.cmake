@@ -5,12 +5,14 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ giflib ############
 # http://giflib.sourceforge.net
 # https://github.com/mirrorer/giflib.git
 # https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
+
+dk_load(dk_builder)
 
 ### DEPEND ###
 if(WIN)
@@ -19,10 +21,8 @@ endif()
 dk_depend(autotools)
 #dk_depend(gcc)
 
-
 ### IMPORT ###
-dk_import(https://github.com/nesbox/giflib/archive/1aa11b06d0025eda77b56aec8254130654d4397b.zip PATCH)
-#dk_import(https://github.com/nesbox/giflib/archive/refs/heads/master.zip PATCH)
+dk_import(https://github.com/nesbox/giflib/archive/1aa11b06.zip PATCH)
 
 set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)
@@ -39,7 +39,6 @@ if(GIFLIB_USE_CMAKE)
 		dk_libRelease	(${GIFLIB_RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
 	endif()
 	
-	
 	### 3RDPARTY LINK ###
 	dk_append			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIF_INCLUDE_DIR} -DGIF_INCLUDE_DIR2=${GIF_INCLUDE_DIR2})
 	if(DEBUG)
@@ -50,10 +49,6 @@ if(GIFLIB_USE_CMAKE)
 	endif()
 	dk_configure		(${GIFLIB_DIR})
 	dk_build			(${GIFLIB_DIR} giflib)	
-	
-	
-	
-	
 	
 	
 else()
