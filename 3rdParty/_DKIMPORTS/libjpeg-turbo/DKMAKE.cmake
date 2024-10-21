@@ -5,17 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libjpeg-turbo ############
 # https://github.com/libjpeg-turbo/libjpeg-turbo
 # https://libjpeg-turbo.org/
 # For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz/download
-
+dk_load(dk_builder)
 
 ### IMPORT ###
-dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489e22dffa309f3f617005c0cebaf8fc00c.zip)
-#dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/heads/main.zip)
-
+dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489.zip)
 
 #dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 ### LINK ###
@@ -30,8 +28,6 @@ else()
 	dk_libDebug		(${LIBJPEG_TURBO_DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
 	dk_libRelease	(${LIBJPEG_TURBO_RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
-
-
 
 ### 3RDPARTY LINK ###
 dk_append(LIBJPEG_TURBO_CMAKE
@@ -63,24 +59,12 @@ else()
 	endif()
 endif()
 
-
-
-
-
-
-
-
 ### GENERATE ##
 dk_configure(${LIBJPEG_TURBO_DIR} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
-
 
 #if(EXISTS "${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h")
 #	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO_DIR}/jconfig.h" OVERWRITE)
 #endif()
 
-
 ### COMPILE ###
 dk_build(${LIBJPEG_TURBO_DIR} turbojpeg-static)
-
-
-

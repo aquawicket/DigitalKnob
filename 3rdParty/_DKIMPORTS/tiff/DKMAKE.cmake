@@ -5,14 +5,14 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ tiff ############
 # https://gitlab.com/libtiff/libtiff
 # http://www.simplesystems.org/libtiff/
 # https://download.osgeo.org/libtiff/
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
@@ -26,11 +26,8 @@ dk_depend(zstd)
 #-- Could NOT find LERC (missing: LERC_LIBRARY LERC_INCLUDE_DIR)
 #-- Could NOT find GLUT (missing: GLUT_glut_LIBRARY)
 
-
 ### IMPORT ###
-dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c73260e52ad8e6db9f6184615669a7bd6f752/libtiff-685c73260e52ad8e6db9f6184615669a7bd6f752.zip)
-#dk_import(https://gitlab.com/libtiff/libtiff/-/archive/master/libtiff-master.zip)
-
+dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c7326/libtiff-685c7326.zip)
 
 ### LINK ###
 dk_include					(${TIFF_DIR}/libtiff									TIFF_INCLUDE_DIR)
@@ -51,8 +48,6 @@ else()
 endif()
 dk_set						(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
 
-
-
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
 dk_set(TIFF_CMAKE
@@ -72,9 +67,6 @@ else()
 		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}")
 endif()
 
-
-
-
 ### GENERATE ###
 dk_configure(${TIFF_DIR}
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
@@ -88,7 +80,6 @@ dk_configure(${TIFF_DIR}
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE})
-
 
 ### COMPILE ###
 dk_build(${TIFF_DIR} tiff)

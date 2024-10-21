@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libwebp ############
 # https://github.com/webmproject/libwebp
- 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(giflib)
@@ -17,11 +17,8 @@ dk_depend(sdl)
 dk_depend(tiff)
 dk_depend(zlib)
 
-
 ### IMPORT ###
-dk_import(https://github.com/webmproject/libwebp/archive/84b118c9c32584442375f812732989553292fcbc.zip)
-#dk_import(https://github.com/webmproject/libwebp/archive/refs/heads/main.zip)
-
+dk_import(https://github.com/webmproject/libwebp/archive/84b118c9.zip)
 
 ### LINK ###
 dk_include					(${LIBWEBP_DIR}							LIBWEBP_INCLUDE_DIR)
@@ -47,18 +44,14 @@ else()
 	dk_libRelease			(${LIBWEBP_RELEASE_DIR}/libwebp.a)
 endif()
 
-
 ### 3RDPARTY LINK ###
 dk_set(LIBWEBP_CMAKE 
 	-DWEBP_INCLUDE_DIR=${LIBWEBP_INCLUDE_DIR}
 	-DWEBP_LIBRARY_DEBUG=${LIBWEBP_LIBRARY_DEBUG}
 	-DWEBP_LIBRARY_RELEASE=${LIBWEBP_LIBRARY_RELEASE})
 
-
-
 ### GENERATE ###
 dk_configure				(${LIBWEBP} ${GIFLIB_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${SDL_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE})
-
 
 ### COMPILE ###
 dk_build					(${LIBWEBP} webp)
