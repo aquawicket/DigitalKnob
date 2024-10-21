@@ -5,7 +5,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###############################################################################
 # dk_executeProcess(commands) NO_HALT NOECHO OUTPUT <output_variable>
 #
-#
 #	@commands	- TODO
 #	@NO_HALT	- don't halt cmake if an error occurs
 #
@@ -68,13 +67,12 @@ function(dk_executeProcess)
 	#endif()
 	
 	if(NOT COMMAND)
-		list(INSERT ARGV 0 COMMAND)  # add COMMAND if missing
+		list(INSERT ARGV 0 COMMAND)  # insert COMMAND if missing
 	endif()
 	
 	# FIXME:  only in valid cmd shell
-	dk_depend(cmd)
-	#find_program(CMD_EXE cmd.exe)
 	if(WIN32)
+		dk_depend(cmd)
 		if(CMD_EXE)
 			list(FIND ARGV "cmd;/c" index)
 			if(${index} EQUAL -1)			# add cmd /c if missing
@@ -110,8 +108,12 @@ function(dk_executeProcess)
 	endif()
 	
 	if(CMAKE_VERSION VERSION_GREATER "3.15")
-		list(APPEND ARGV COMMAND_ECHO STDOUT)
+		if(NOT COMMAND_ECHO)
+		set(COMMAND_ECHO STDOUT)
+			list(APPEND ARGV COMMAND_ECHO ${COMMAND_ECHO})
+		endif()
 	endif()
+	
 	#if(CMAKE_VERSION VERSION_GREATER "3.18")
 	#	if(NOT ECHO_OUTPUT_VARIABLE)
 	#		list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
@@ -125,7 +127,7 @@ function(dk_executeProcess)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	#dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
+#	dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
 	execute_process(${ARGV})
 	

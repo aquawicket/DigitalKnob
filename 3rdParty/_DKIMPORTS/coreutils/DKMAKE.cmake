@@ -5,8 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ coreutils ############
 # https://formulae.brew.sh/formula/coreutils
 
+if(NOT MAC_HOST)
+	return()
+endif()
 
-MAC_HOST_dk_command(brew install coreutils)
+dk_load(dk_builder)
+
+dk_installPackage(coreutils)
