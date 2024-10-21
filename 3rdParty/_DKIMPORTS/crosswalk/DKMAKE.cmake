@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ crosswalk ############
 # crosswalk
-
+dk_load(dk_builder)
 
 ### DEPEND ###
 #dk_depend(openjdk)
@@ -16,4 +16,6 @@ dk_depend(nodejs)
 
 
 ### INSTALL ###
-WIN_dk_queueCommand("npm install -g crosswalk-app-tools")
+if(WIN)
+	dk_queueCommand("npm install -g crosswalk-app-tools")
+endif()

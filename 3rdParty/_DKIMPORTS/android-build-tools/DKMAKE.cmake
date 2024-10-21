@@ -16,17 +16,18 @@ dk_makeDirectory(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
 dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt VERSION)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_VERSION)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_WIN_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_MAC_DL)
+dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_LINUX_DL)
 
 dk_validate(host_triple "dk_host_triple()")
 if(WIN_HOST)
-	dk_import(https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r${VERSION}-windows.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+	dk_import(${ANDROID_BUILD_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 elseif(MAC_HOST)
-	dk_import(https://dl.google.com/android/repository/f6d24b187cc6bd534c6c37604205171784ac5621.build-tools_r${VERSION}-macosx.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
-elseif(LINUX_HOST)
-    dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
-elseif(ANDROID_HOST)
-	dk_import(https://dl.google.com/android/repository/build-tools_r${VERSION}-linux.zip PATH ${ANDROID_SDK}/build-tools/${VERSION})
+	dk_import(${ANDROID_BUILD_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
+elseif(LINUX_HOST OR ANDROID_HOST)
+    dk_import(${ANDROID_BUILD_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/build-tools/${ANDROID_BUILD_TOOLS_VERSION})
 endif()
 
 # 31.0.0
