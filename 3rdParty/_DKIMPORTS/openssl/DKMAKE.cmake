@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ openssl ############
 # https://github.com/openssl/openssl.git
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
@@ -29,8 +30,7 @@ endif()
 dk_depend(nasm)
 
 ### IMPORT ###
-dk_import(https://github.com/openssl/openssl/archive/2f362e99a1178263c7102474f0190836166f416d.zip)
-#dk_import(https://github.com/openssl/openssl/archive/refs/heads/master.zip)
+dk_import(https://github.com/openssl/openssl/archive/2f362e9.zip)
 
 #if(EMSCRIPTEN)
 #	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
