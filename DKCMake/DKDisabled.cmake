@@ -37,6 +37,7 @@ dk_disable(openal)
 dk_disable(freealut)  # requires openal
 dk_disable(gzip)
 dk_disable(jasper)
+dk_disable(jerryscript)
 ###########################
 
 
