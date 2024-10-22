@@ -1,5 +1,3 @@
-print("DK.py")
-
 import __main__
 import os
 
@@ -11,3 +9,6 @@ print("DKSCRIPT_DIR = "+DKSCRIPT_DIR)
 
 DKSCRIPT_NAME = os.path.basename(DKSCRIPT_PATH)
 print("DKSCRIPT_NAME = "+DKSCRIPT_NAME)
+
+DKSCRIPT_EXT = os.path.splitext(DKSCRIPT_NAME)[1]
+print("DKSCRIPT_EXT = "+DKSCRIPT_EXT)

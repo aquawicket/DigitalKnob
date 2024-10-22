@@ -1,18 +1,22 @@
 import DK
 import os 
-#include_guard()
+
+ENABLE_dk_log=1
 
 ##################################################################################
-# dk_realpath(path) -> rtn_var
+# dk_log(message)
 #
-#    PYTHON: https://docs.python.org/3/library/os.path.html#os.path.realpath
+#	Print a debug message to the console
 #
-def dk_realpath(path):
+#	@msg	- The message to print
+#
+def dk_log(message):
     #dk_debugFunc()
     #if($(__ARGC__) -ne 1){ dk_error "$(__FUNCTION__)($(__ARGC__)): incorrect number of arguments" }
     
-    _realpath_ = os.path.realpath(path)
-    return _realpath_
+    if ENABLE_dk_log != 1:
+        return
+
     
     
     
@@ -21,9 +25,5 @@ def dk_realpath(path):
     
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######   
 def DKTEST():
-    rp = dk_realpath("../functions/DK.py")
-    print(rp)
-    
-    rp = dk_realpath(DK.DKSCRIPT_PATH)
-    print(rp)
+ 
 DKTEST()
