@@ -5,33 +5,31 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libwebsockets ############
 # https://libwebsockets.org
 # https://github.com/warmcat/libwebsockets
 # https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip
-
+dk_load(dk_builder)
 
 ### DEPEND ###
 #dk_depend(openssl)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
-dk_import(https://github.com/warmcat/libwebsockets/archive/refs/heads/main.zip)
-
+dk_import(https://github.com/warmcat/libwebsockets/archive/6b950e86.zip)
 
 ### LINK ###
 dk_include			(${LIBWEBSOCKETS}/lib)
 dk_include			(${LIBWEBSOCKETS}/${triple})
-UNIX_dk_libDebug	(${LIBWEBSOCKETS}/${triple}/${DEBUG_DIR}/lib/libwebsockets.a)
-UNIX_dk_libRelease	(${LIBWEBSOCKETS}/${triple}/${RELEASE_DIR}/lib/libwebsockets.a)
-WIN_dk_libDebug		(${LIBWEBSOCKETS}/${triple}/lib/${DEBUG_DIR}/websockets_static.lib)
-WIN_dk_libRelease	(${LIBWEBSOCKETS}/${triple}/lib/${RELEASE_DIR}/websockets_static.lib)
-
+if(MSVC)
+	dk_libDebug		(${LIBWEBSOCKETS}/${triple}/lib/${DEBUG_DIR}/websockets_static.lib)
+	dk_libRelease	(${LIBWEBSOCKETS}/${triple}/lib/${RELEASE_DIR}/websockets_static.lib)
+else()
+	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets.a)
+	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets.a)
+endif()
 
 ### GENERATE ###
 dk_configure(${LIBWEBSOCKETS} -DLWS_WITH_SSL=OFF)
-
 
 ### COMPILE ###
 dk_build(${LIBWEBSOCKETS} websockets)
