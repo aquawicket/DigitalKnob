@@ -48,6 +48,7 @@ dk_disable(llvm-project)
 dk_disable(luajit)
 dk_disable(netsurf)
 dk_disable(openblas)    # working
+dk_disable(opencv)
 ###########################
 
 

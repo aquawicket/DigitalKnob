@@ -5,10 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ xcode ############
 # https://developer.apple.com/xcode/
 # https://pewpewthespells.com/blog/buildsettings.html
 # Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
+
+dk_load(dk_builder)
 
 if(NOT MAC_HOST)
 	dk_undepend(xcode)
@@ -33,9 +35,6 @@ dk_set(IOS_SDK				15.0)
 dk_set(IOS_MIN_SDK			13.0)
 dk_set(IOS_SYSROOT			"${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${IOS_SDK}.sdk")
 dk_set(IOSSIM_SYSROOT		"${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IOS_SDK}.sdk")
-
-
-
 
 ###### set GLOBAL CMAKE VARIABLES ######
 dk_set(CMAKE_GENERATOR		${XCODE_GENERATOR})

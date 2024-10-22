@@ -5,16 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ lua ############
 # https://github.com/lua/lua.git
 # https://www.lua.org/ftp/lua-5.4.3.tar.gz
 # https://github.com/lubgr/lua-cmake.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://github.com/lua/lua.git PATCH)
-dk_import(https://github.com/lua/lua/archive/refs/heads/master.zip PATCH)
-
+dk_import(https://github.com/lua/lua/archive/fd0e1f53.zip PATCH)
 
 ### LINK ###
 dk_include			(${LUA}/include							LUA_INCLUDE_DIR)
@@ -30,16 +29,13 @@ else()
 	dk_libRelease		(${LUA}/${triple}/${RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
 endif()
 
-
 ### 3RDPARTY LINK ###
 #DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_DEBUG_LIBRARY} )
 DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR2} 	-DLUA_LIBRARIES=${LUA_DEBUG_LIBRARY} )
 RELEASE_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_RELEASE_LIBRARY} )
 
-
 ### GENERATE ###
 dk_configure(${LUA})
-
 
 ### COMPILE ###
 dk_build(${LUA} lua)

@@ -5,14 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ mbedtls ############
 # https://github.com/Mbed-TLS/mbedtls.git
-
+dk_load(dk_builder)
 
 ### IMPORT ###
 #dk_import(https://github.com/Mbed-TLS/mbedtls.git)
-dk_import(https://github.com/Mbed-TLS/mbedtls/archive/refs/heads/development.zip)
-
+dk_import(https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip)
 
 ### LINK ###
 dk_include			(${MBEDTLS}/include)
@@ -35,7 +34,6 @@ UNIX_dk_libRelease	(${MBEDTLS}/${triple}/library/${RELEASE_DIR}/libmbedx509.a)
 WIN_dk_libDebug		(${MBEDTLS}/${triple}/library/${DEBUG_DIR}/mbedx509.lib)
 WIN_dk_libRelease	(${MBEDTLS}/${triple}/library/${RELEASE_DIR}/mbedx509.lib)
 
-
 ### 3RDPARTY LINK ###
 UNIX_dk_set(MBEDTLS_CMAKE 
 	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
@@ -48,10 +46,8 @@ WIN_dk_set(MBEDTLS_CMAKE
 	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${triple}/library/${RELEASE_DIR}/mbedcrypto.lib
 	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${triple}/library/${RELEASE_DIR}/mbedx509.lib)
 
-
 ### GENERATE ###
 dk_configure(${MBEDTLS})
-
 
 ### COMPILE ###
 dk_build(${MBEDTLS})

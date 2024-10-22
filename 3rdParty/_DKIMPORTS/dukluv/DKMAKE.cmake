@@ -25,10 +25,10 @@ dk_include				(${DUKLUV}/include)
 dk_include				(${DUKLUV}/${triple})
 if(MSVC)
 	WIN_dk_libDebug		(${DUKLUV}/${triple}/${DEBUG_DIR}/dukluv.lib)
-	WIN_dk_libRelease	(${DUKLUV}/${triple}/${RELEASE_DIR}/dukluv.lib)
+	WIN_dk_libRelease	(${DUKLUV_RELEASE_DIR}/dukluv.lib)
 else()
 	dk_libDebug			(${DUKLUV}/${triple}/${DEBUG_DIR}/libdukluv.a)
-	dk_libRelease		(${DUKLUV}/${triple}/${RELEASE_DIR}/libdukluv.a)
+	dk_libRelease		(${DUKLUV_RELEASE_DIR}/libdukluv.a)
 endif()
 
 ### GENERATE ###

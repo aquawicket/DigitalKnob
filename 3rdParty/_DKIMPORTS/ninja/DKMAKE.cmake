@@ -5,13 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############# ninja ############
 # https://github.com/ninja-build/ninja.git
+dk_load(dk_builder)
 
-
-#dk_import(https://github.com/ninja-build/ninja.git)
-dk_import(https://github.com/ninja-build/ninja/archive/refs/heads/master.zip)
-
+dk_import(https://github.com/ninja-build/ninja/archive/f8ce3b32.zip)
 
 dk_include(${NINJA})
 

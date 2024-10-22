@@ -5,13 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libssh ############
 # https://github.com/libssh/libssh-mirror
 
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://github.com/libssh/libssh-mirror.git)
-dk_import(https://github.com/libssh/libssh-mirror/archive/refs/heads/master.zip)
+dk_import(https://github.com/libssh/libssh-mirror/archive/ac6d2fad.zip)
 
 
 # TODO

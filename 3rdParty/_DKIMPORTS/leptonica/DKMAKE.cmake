@@ -29,7 +29,7 @@ dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 ### LINK ###
 dk_include					(${LEPTONICA})
 dk_include					(${LEPTONICA}/${triple}/src)
-dk_include					(${LEPTONICA}/${triple}/${RELEASE_DIR}/src)
+dk_include					(${LEPTONICA_RELEASE_DIR}/src)
 if(MULTI_CONFIG)
  if(MSVC)
 	WIN_dk_libDebug			(${LEPTONICA}/${triple}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)

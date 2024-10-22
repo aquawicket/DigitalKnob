@@ -26,9 +26,9 @@ dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 ### LINK ###
 dk_include			(${LIBMD}/include)
 UNIX_dk_libDebug	(${LIBMD}/${triple}/${DEBUG_DIR}/liblibmdd.a)
-UNIX_dk_libRelease	(${LIBMD}/${triple}/${RELEASE_DIR}/liblibmd.a)
+UNIX_dk_libRelease	(${LIBMD_RELEASE_DIR}/liblibmd.a)
 WIN_dk_libDebug		(${LIBMD}/${triple}/${DEBUG_DIR}/libmdd.lib)
-WIN_dk_libRelease	(${LIBMD}/${triple}/${RELEASE_DIR}/libmd.lib)
+WIN_dk_libRelease	(${LIBMD_RELEASE_DIR}/libmd.lib)
 
 
 ### 3RDPARTY LINK ###
@@ -44,7 +44,7 @@ else()
 	
 	#DEBUG_dk_cd		(${LIBMD}/${triple}/${DEBUG_DIR})
 	#DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	#RELEASE_dk_cd		(${LIBMD}/${triple}/${RELEASE_DIR})
+	#RELEASE_dk_cd		(${LIBMD_RELEASE_DIR})
 	#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 	dk_configure			(${LIBMD_DIR})
 	

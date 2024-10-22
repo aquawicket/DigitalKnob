@@ -31,7 +31,7 @@ elseif(APPLE OR ANDROID)
 	dk_libRelease		(${FREEALUT}/${triple}/src/${RELEASE_DIR}/libalut_static.a	FREEALUT_LIBRARY_RELEASE)
 else()
 	dk_libDebug			(${FREEALUT}/${triple}/${DEBUG_DIR}/src/libalut_static.a	FREEALUT_LIBRARY_DEBUG)
-	dk_libRelease		(${FREEALUT}/${triple}/${RELEASE_DIR}/src/libalut_static.a	FREEALUT_LIBRARY_RELEASE)
+	dk_libRelease		(${FREEALUT_RELEASE_DIR}/src/libalut_static.a	FREEALUT_LIBRARY_RELEASE)
 endif()
 
 

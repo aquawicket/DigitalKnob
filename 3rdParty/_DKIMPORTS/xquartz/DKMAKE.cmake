@@ -5,10 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ xquartz ############
 # https://www.xquartz.org/
 # https://www.xquartz.org/releases/index.html
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
+
+dk_load(dk_builder)
 
 if(NOT MAC)
 	dk_undepend(xquartz)
@@ -17,10 +19,10 @@ endif()
 
 dk_depend(homebrew)
 
-
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
-	dk_command(brew install --cask xquartz)
+	#dk_command(brew install --cask xquartz)
+	dk_installPackage(xquartz)
 	dk_include(/opt/X11/include)
 #endif()
 

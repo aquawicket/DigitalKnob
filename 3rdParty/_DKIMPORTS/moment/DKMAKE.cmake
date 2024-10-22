@@ -5,12 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ moment ############
 # https://github.com/moment/moment
 # https://momentjs.com/
 
+dk_load(dk_builder)
 
-dk_import(https://github.com/moment/moment/raw/e96809208c9d1b1bbe22d605e76985770024de42/moment.js)
+dk_import(https://github.com/moment/moment/raw/e9680920/moment.js)
 
 #dk_set(MOMENTJS_VERSION 2.29.1)
 #dk_set(MOMENTJS_FOLDER moment.js-${MOMENTJS_VERSION})
