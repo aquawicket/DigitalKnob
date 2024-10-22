@@ -47,9 +47,10 @@ dk_disable(lighttpd)
 dk_disable(llvm-project)
 dk_disable(luajit)
 dk_disable(netsurf)
+dk_disable(notepadpp)
 dk_disable(openblas)    # working
 dk_disable(opencv)
-dk_disable(openframworks)
+dk_disable(openframeworks)
 ###########################
 
 
