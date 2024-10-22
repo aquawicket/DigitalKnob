@@ -44,6 +44,8 @@ dk_disable(libevent)
 dk_disable(libjodycode)
 dk_disable(libtorrent)
 dk_disable(lighttpd)
+dk_disable(llvm-project)
+dk_disable(luajit)
 ###########################
 
 
