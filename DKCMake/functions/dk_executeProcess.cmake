@@ -127,10 +127,29 @@ function(dk_executeProcess)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
+#	####### SUPPORT LONGER COMMAND LINES ######
+#	list(APPEND ${ARGV})
+#	string(LENGTH "${cmd_file}" cmd_length)
+#	dk_printVar(cmd_length)
+#	
+#	list(FIND cmd_file "${CMAKE_EXE}" pos)
+#	if(${pos} GREATER -1)
+#		list(SUBLIST cmd_length 0 ${pos} _CMND_)
+#		message("_CMMD_ = ${_CMND_}")
+#		list(SUBLIST cmd_length ${pos} -1 _ARGZ_)
+#		message("_ARGZ_ = ${_ARGZ_}")
+#		#if(${cmd_length} GREATER 8000)
+#			file(WRITE "${DKCACHE_DIR}/cmd1_temp.txt" "${_ARGZ_}")
+#		#endif()
+#		execute_process(COMMAND ${_CMND_} "${DKCACHE_DIR}/cmd1_temp.txt")
+#	else()
+#	##########################################
+	
+	
 #	dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
-	execute_process(${ARGV})
-	
+		execute_process(${ARGV})
+	endif()
 	
 	set(cmd1 ${ARGV})
 #	if(NOT ${result_variable} EQUAL 0)

@@ -41,6 +41,10 @@ if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB_DIR}/DKBIN)
 endif()
 
+
+dk_haveLongPaths(longPaths)
+dk_printVar(longPaths)
+
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
