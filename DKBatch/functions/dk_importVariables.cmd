@@ -139,13 +139,12 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::#######################################################
 	::############### PLUGIN_IMPORT VARIABLES ###############
 	::#######################################################
-::	!dk_call! dk_assertPath CMAKE_CURRENT_LIST_DIR
-::	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
-::	!dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
-	
+	set /a length=DKSTACK_length-11
+	set "CMAKE_CURRENT_LIST_DIR=!DKSTACK[%length%].__FILE__!"
 	
 	::# PLUGIN_IMPORT
-	::set "PLUGIN_IMPORT=1"
+	!dk_call! dk_validate DKIMPORTS_DIR "!dk_call! dk_DKBRANCH_DIR"
+	if defined CMAKE_CURRENT_LIST_DIR !dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 	!dk_call! dk_printVar PLUGIN_IMPORT 										&:: PLUGIN_IMPORT			 : 1
 		
 	if defined PLUGIN_IMPORT (	
@@ -240,7 +239,7 @@ rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 	!dk_call! dk_printVar PLUGIN_INSTALL_FOLDER 								&:: PLUGIN_INSTALL_FOLDER	: zlib-master
 
 	::# PLUGIN_INSTALL_ROOT
-	set "PLUGIN_INSTALL_ROOT="
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
 	set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
 	!dk_call! dk_printVar PLUGIN_INSTALL_ROOT 									&:: PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
 
@@ -373,6 +372,9 @@ pause
 	call dk_debugFunc 0
  ::setlocal
  
-	::set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git" 
+	!dk_call! dk_set CMAKE_CURRENT_LIST_DIR "C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\qemu"
+	!dk_call! dk_importVariables "https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe" PLUGIN 
+	
+	::set "CMAKE_CURRENT_LIST_DIR=C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\git"
 	!dk_call! dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" PLUGIN 
 !endfunction!

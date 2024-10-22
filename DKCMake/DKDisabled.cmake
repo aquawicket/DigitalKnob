@@ -52,6 +52,7 @@ dk_disable(openblas)    # working
 dk_disable(opencv)
 dk_disable(openframeworks)
 dk_disable(poco)
+dk_disable(podofo)
 ###########################
 
 

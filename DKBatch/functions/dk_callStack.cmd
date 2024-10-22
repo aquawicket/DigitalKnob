@@ -48,11 +48,13 @@ if ":" == "%func:~0,1%" ( goto %func% )
 
     call set "__TIME__=%time%"  
     rem call set "__FILEPATH__=%%~f0"
-    call set "__FILE__=%%~nx0"
+    call set "__FILE__=%%~0"
     rem call set "__LINE__=???"
     call set "__FUNCTION__=%%~n0"
     call set "__ARGS__=%%*"
 	call set "__ARGV__=%%*"
+	rem set /a length=DKSTACK_length-3
+	rem call set "__CALLER__=!DKSTACK[%length%].__FUNCTION__!"
 	call set "ARGV[0]=%time%"
     call set "ARGV[1]=%%~1"
     call set "ARGV[2]=%%~2"

@@ -5,10 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ rmlui ############
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
-
+dk_load(dk_builder)
 
 #################### NOTE ###########################################################################################
 #  To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 
@@ -25,8 +25,6 @@ dk_load(dk_builder)
 # 
 # -DSDL2_DIR=${SDL}/${triple}/Debug
 ######################################################################################################################## 
- 
- 
  
 ### rmlui dependencies ###
 dk_depend(freetype)
@@ -59,7 +57,6 @@ if(RMLUI_SAMPLES)
 	set(RMLUI_BACKEND "-DRMLUI_BACKEND=${RMLUI_BACKEND}")
 endif()
 
-
 set(rmlui_all 0)
 
 set(rmlui_core 1)
@@ -85,15 +82,11 @@ set(rmlui_UnitTests 0)
 set(rmlui_VisualTests 0)
 set(rmlui_Benchmarks 0)
 
-
 ### IMPORT ###
-dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f724b5c829cb3840f4b062286b242d7f6a.zip)
-#dk_import(https://github.com/mikke89/RmlUi/archive/refs/heads/master.zip)
-
+dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
 
 ### PATCH ###
 dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
-
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
@@ -154,7 +147,6 @@ if(rmlui_invaders OR rmlui_all)
 	UNIX_dk_libRelease		(${RMLUI_RELEASE_DIR}/rmlui_sample_invaders)
 endif()
 
-
 ### GENERATE ###								
 dk_configure(
 	${RMLUI}
@@ -183,8 +175,6 @@ dk_configure(
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE} 
 	NO_HALT)
-
-
 
 ### COMPILE ###
 if(rmlui_all)

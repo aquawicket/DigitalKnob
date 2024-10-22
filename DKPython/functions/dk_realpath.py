@@ -1,6 +1,5 @@
 import DK
 import os 
-#include_guard()
 
 ##################################################################################
 # dk_realpath(path) -> rtn_var
