@@ -43,6 +43,7 @@ dk_disable(mbedtls)
 dk_disable(libevent)
 dk_disable(libjodycode)
 dk_disable(libtorrent)
+dk_disable(lighttpd)
 ###########################
 
 
