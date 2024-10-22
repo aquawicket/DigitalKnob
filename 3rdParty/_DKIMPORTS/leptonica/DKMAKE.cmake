@@ -5,13 +5,14 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ leptonica ############
 # https://github.com/DanBloomberg/leptonica
 # README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 # http://www.leptonica.org
 # https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(giflib)
@@ -22,11 +23,8 @@ dk_depend(libwebp)
 dk_depend(tiff)
 dk_depend(zlib)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/DanBloomberg/leptonica.git)
-dk_import(https://github.com/DanBloomberg/leptonica/archive/refs/heads/master.zip)
-
+dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 
 ### LINK ###
 dk_include					(${LEPTONICA})
@@ -43,16 +41,12 @@ if(MULTI_CONFIG)
 	dk_libRelease			(${LEPTONICA}/${triple}/src/${RELEASE_DIR}/libleptonica.a)
  endif()
 else()
-	dk_libDebug				(${LEPTONICA}/${triple}/${DEBUG_DIR}/src/libleptonica.a)
-	dk_libRelease			(${LEPTONICA}/${triple}/${RELEASE_DIR}/src/libleptonica.a)
+	dk_libDebug				(${LEPTONICA_DEBUG_DIR}/src/libleptonica.a)
+	dk_libRelease			(${LEPTONICA_RELEASE_DIR}/src/libleptonica.a)
 endif()
-
-
-
 
 ### 3RDPARTY LINK ###
 dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
-
 
 ### GENERATE ###
 #dk_configure(${LEPTONICA_DIR} 
@@ -76,7 +70,6 @@ dk_configure(${LEPTONICA_DIR}
 	${LIBWEBP_CMAKE}
 	${TIFF_CMAKE}
 	${ZLIB_CMAKE})
-
 
 ### COMPILE ###
 dk_build(${LEPTONICA_DIR} leptonica)

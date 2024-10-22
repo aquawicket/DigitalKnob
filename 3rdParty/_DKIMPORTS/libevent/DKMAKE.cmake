@@ -5,18 +5,17 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libevent ############
 # https://github.com/libevent/libevent.git
 
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(mbedtls)
 dk_depend(openssl)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/libevent/libevent.git)
-dk_import(https://github.com/libevent/libevent/archive/refs/heads/master.zip)
+dk_import(https://github.com/libevent/libevent/archive/2a1ec766.zip)
 
 ### LINK ###
 dk_include			(${LIBEVENT}/include)
