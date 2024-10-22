@@ -46,6 +46,7 @@ dk_disable(libtorrent)
 dk_disable(lighttpd)
 dk_disable(llvm-project)
 dk_disable(luajit)
+dk_disable(netsurf)
 ###########################
 
 

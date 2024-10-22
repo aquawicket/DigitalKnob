@@ -5,7 +5,8 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ netsurf ############
 # https://git.netsurf-browser.org/netsurf.git
+dk_load(dk_builder)
 
 dk_import(https://git.netsurf-browser.org/netsurf.git)
