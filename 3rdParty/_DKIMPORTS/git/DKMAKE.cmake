@@ -12,7 +12,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" VERSION)
-message("Git VERSION = ${VERSION}")
 
 ### DOWNLOAD ###
 if(WIN_X86_HOST)
@@ -77,7 +76,7 @@ else()
 endif()
 
 if(NOT GIT_EXE)
-	dk_fatal("COULD NOT FIND GIT_EXE")
+	dk_fatal("COULD NOT FIND GIT_EXE:${GIT_EXE}")
 	return()
 endif()
 

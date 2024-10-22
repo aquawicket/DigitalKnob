@@ -5,10 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ notepadpp ############
 # https://notepad-plus-plus.org/
 # https://github.com/notepad-plus-plus.git
-
+dk_load(dk_builder)
 
 dk_validate(host_triple "dk_host_triple()")
 ### BINARY DISTRIBUTIONS (PORTABLE) ###

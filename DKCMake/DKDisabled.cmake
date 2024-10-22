@@ -49,6 +49,7 @@ dk_disable(luajit)
 dk_disable(netsurf)
 dk_disable(openblas)    # working
 dk_disable(opencv)
+dk_disable(openframworks)
 ###########################
 
 
