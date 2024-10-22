@@ -5,13 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gstreamer ############
 # https://gitlab.freedesktop.org/gstreamer/gstreamer.git
 
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://gitlab.freedesktop.org/gstreamer/gstreamer.git)
-dk_import(https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/main/gstreamer-main.zip)
+dk_import(https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/7c3ee65d/gstreamer-7c3ee65d.zip)
 
 
 # TODO
