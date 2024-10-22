@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ libsndfile ############
 # https://github.com/libsndfile/libsndfile.git
-
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(flac)
@@ -19,24 +19,22 @@ dk_depend(opus)
 #dk_depend(sqlite)
 dk_depend(vorbis)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/libsndfile/libsndfile.git)
-dk_import(https://github.com/libsndfile/libsndfile/archive/refs/heads/master.zip)
-
+dk_import(https://github.com/libsndfile/libsndfile/archive/58c05b87.zip)
 
 ### LINK ###
 dk_include			(${LIBSNDFILE}/include)
 dk_include			(${LIBSNDFILE}/${triple})
-UNIX_dk_libDebug	(${LIBSNDFILE}/${triple}/${DEBUG_DIR}/libsndfile.a)
-UNIX_dk_libRelease	(${LIBSNDFILE}/${triple}/${RELEASE_DIR}/libsndfile.a)
-WIN_dk_libDebug		(${LIBSNDFILE}/${triple}/${DEBUG_DIR}/sndfile.lib)
-WIN_dk_libRelease	(${LIBSNDFILE}/${triple}/${RELEASE_DIR}/sndfile.lib)
-
+if(MSVC)
+	dk_libDebug		(${LIBSNDFILE_DEBUG_DIR}/sndfile.lib)
+	dk_libRelease	(${LIBSNDFILE_RELEASE_DIR}/sndfile.lib)
+else()
+	dk_libDebug		(${LIBSNDFILE_DEBUG_DIR}/libsndfile.a)
+	dk_libRelease	(${LIBSNDFILE_RELEASE_DIR}/libsndfile.a)
+endif()
 
 ### GENERATE ###
 dk_configure(${LIBSNDFILE} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE})
-
 
 ### COMPILE ###
 dk_build(${LIBSNDFILE})
