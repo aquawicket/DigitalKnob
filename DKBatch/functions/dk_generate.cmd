@@ -143,10 +143,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined DK_SHELL %return%
 	
 	::###### Delete Cmake Cache and .tmp files ######
-	%dk_call% dk_clearCmakeCache
-    %dk_call% dk_deleteTempFiles
+::	%dk_call% dk_clearCmakeCache
+::  %dk_call% dk_deleteTempFiles
 	
-::  ###### CMake Configure ######
+	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     

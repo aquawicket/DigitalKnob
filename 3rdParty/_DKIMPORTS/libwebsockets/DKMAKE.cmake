@@ -24,12 +24,14 @@ if(MSVC)
 	dk_libDebug		(${LIBWEBSOCKETS}/${triple}/lib/${DEBUG_DIR}/websockets_static.lib)
 	dk_libRelease	(${LIBWEBSOCKETS}/${triple}/lib/${RELEASE_DIR}/websockets_static.lib)
 else()
-	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets.a)
-	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets.a)
+	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets_static.a)
+	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets_static.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${LIBWEBSOCKETS} -DLWS_WITH_SSL=OFF)
+dk_configure(${LIBWEBSOCKETS} 
+		-DLWS_WITH_MINIMAL_EXAMPLES=OFF
+		-DLWS_WITH_SSL=OFF)
 
 ### COMPILE ###
 dk_build(${LIBWEBSOCKETS} websockets)
