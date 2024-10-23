@@ -127,22 +127,8 @@ function(dk_executeProcess)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-#	####### SUPPORT LONGER COMMAND LINES ######
-#	list(APPEND cmd_file ${ARGV})
-	list(FIND ARGV "cmake.exe" has_cmake)
-	
-	# pull out all items that contain a =, and move them to a file
-	# the change them from -DVar=value to set(Var value)
-	if(${has_cmake} GREATER -1)
-		foreach(item IN LISTS ARGV)
-			if("${item}" MATCHES "=")
-				message("${item}")
-			endif()
-		endforeach()
-		dk_pause()
-	endif()
-	##########################################
-	
+#	####### SUPPORT LONGER CMAKE COMMAND LINES ######
+	dk_reparseCmakeCommand(ARGV)
 	
 #	dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
