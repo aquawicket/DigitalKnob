@@ -128,28 +128,26 @@ function(dk_executeProcess)
 	endif()
 	
 #	####### SUPPORT LONGER COMMAND LINES ######
-#	list(APPEND ${ARGV})
-#	string(LENGTH "${cmd_file}" cmd_length)
-#	dk_printVar(cmd_length)
-#	
-#	list(FIND cmd_file "${CMAKE_EXE}" pos)
-#	if(${pos} GREATER -1)
-#		list(SUBLIST cmd_length 0 ${pos} _CMND_)
-#		message("_CMMD_ = ${_CMND_}")
-#		list(SUBLIST cmd_length ${pos} -1 _ARGZ_)
-#		message("_ARGZ_ = ${_ARGZ_}")
-#		#if(${cmd_length} GREATER 8000)
-#			file(WRITE "${DKCACHE_DIR}/cmd1_temp.txt" "${_ARGZ_}")
-#		#endif()
-#		execute_process(COMMAND ${_CMND_} "${DKCACHE_DIR}/cmd1_temp.txt")
-#	else()
-#	##########################################
+#	list(APPEND cmd_file ${ARGV})
+	list(FIND ARGV "cmake.exe" has_cmake)
+	
+	# pull out all items that contain a =, and move them to a file
+	# the change them from -DVar=value to set(Var value)
+	if(${has_cmake} GREATER -1)
+		foreach(item IN LISTS ARGV)
+			if("${item}" MATCHES "=")
+				message("${item}")
+			endif()
+		endforeach()
+		dk_pause()
+	endif()
+	##########################################
 	
 	
 #	dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
 		execute_process(${ARGV})
-	endif()
+#	endif()
 	
 	set(cmd1 ${ARGV})
 #	if(NOT ${result_variable} EQUAL 0)
@@ -210,5 +208,4 @@ function(DKTEST)
 	dk_debugFunc()
 	
 	dk_executeProcess(cmd /c "echo Hello World" ERROR_VARIABLE test_error OUTPUT_VARIABLE test_output)
-	
 endfunction()
