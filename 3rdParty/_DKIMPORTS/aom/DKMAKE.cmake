@@ -8,6 +8,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ###### Alliance for Open Media ######
 # https://aomedia.googlesource.com/aom.git
 
+### DEPEND ###
+dk_depend			(nasm)
+
 ### IMPORT ###
 dk_validate			(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
 dk_getFileParam		(${DKIMPORTS_DIR}/aom/aom.txt AOM_DL)

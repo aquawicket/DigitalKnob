@@ -84,15 +84,15 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%triple%"=="linux_x86"          set "DK_SHELL=wsl"
     if "%triple%"=="linux_x86_64"       set "DK_SHELL=wsl"
 	
-	if defined MULTI_CONFIG                set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%"
-	if defined SINGLE_CONFIG               set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%TYPE%"
+	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%"
+	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%TYPE%"
 	if not defined CMAKE_BINARY_DIR  %dk_call% dk_fatal "CMAKE_BINARY_DIR:%CMAKE_BINARY_DIR% is invalid"
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
     if "%triple%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
-    if "%triple%"=="android_x86" 	   %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+    if "%triple%"=="android_x86" 	    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
 	if "%triple%"=="android_x86_64"     %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="emscripten"         %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"  
     if "%triple%"=="ios_arm32"          %dk_call% dk_prependArgs CMAKE_ARGS -G "Xcode"
@@ -141,17 +141,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if defined DK_SHELL %DK_SHELL% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export TYPE=%TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
 	if defined DK_SHELL %return%
 	
-	::###### Delete Cmake Cache and .tmp files ######
-	%dk_call% dk_clearCmakeCache
-    %dk_call% dk_deleteTempFiles
-	
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
     if not defined CMAKE_EXE call "%DKIMPORTS_DIR%\cmake\dk_installCmake.cmd"
     
+	::###### Delete Cmake Cache files ######
+	%dk_call% dk_clearCmakeCache %APP% %triple% %TYPE%
+	
     %dk_call% dk_info "****** CMAKE COMMAND ******"
-    echo %DK_SHELL% %CMAKE_EXE% %CMAKE_ARGS%
-    call %DK_SHELL% %CMAKE_EXE% %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
+    echo %CMAKE_EXE% %CMAKE_ARGS%
+    call %CMAKE_EXE% %CMAKE_ARGS% && %dk_call% dk_echo "CMake Generation Successful" || %dk_call% dk_error "CMake Generation Failed"
 	
 ::	###### IMPORT VARIABLES ######
 	%dk_call% dk_importVars
