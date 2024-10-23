@@ -8,10 +8,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_reparseCmakeCommand CMD_LIST)
 	set(ARGV "${${CMD_LIST}}")
+	
 	string(FIND "${ARGV}" "cmake.exe" cmake_pos)
 	if(${cmake_pos} LESS 0)
 		return()
 	endif()
+	
+	list(FIND ARGV "-G" g_pos)
+	if(${g_pos} LESS 0)
+		return()
+	endif()
+	
 	file(REMOVE ${DKCACHE_DIR}/cmake_reparsed.txt)
 	list(REMOVE_ITEM ARGV COMMAND)
 	foreach(item IN LISTS ARGV)
