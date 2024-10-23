@@ -128,14 +128,15 @@ function(dk_executeProcess)
 	endif()
 	
 #	####### SUPPORT LONGER CMAKE COMMAND LINES ######
-	dk_reparseCmakeCommand(ARGV)
+	set(cmd1 ${ARGV})
+	dk_reparseCmakeCommand(cmd1)
 	
 #	dk_replaceAll("${ARGV}"  ";"  " "  PRINT_ARGV)
 #	dk_info("\n${clr}${magenta} dk_executeProcess(${ARGV})")
-		execute_process(${ARGV})
+		execute_process(${cmd1})
 #	endif()
 	
-	set(cmd1 ${ARGV})
+	
 #	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(2) # wait 2 seconds for the stdout to flush before printing
 		dk_echo(" ")
