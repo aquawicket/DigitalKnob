@@ -442,7 +442,7 @@ function(dk_importVariables url rtn_var)
 		dk_printVar(${PLUGIN_PREFIX}_RELEASE_DIR)						# ZLIB_RELEASE_DIR	: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
 	endif()
 	
-	unset(${rtn_var})
+	#unset(${rtn_var})
 	set(${rtn_var} ${PLUGIN_PREFIX} PARENT_SCOPE)
 	dk_printVar(PLUGIN_PREFIX)
 	
