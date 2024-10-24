@@ -50,7 +50,7 @@ function(dk_importVariables url rtn_var)
 	dk_getParameter(TAG 	PLUGIN_ARG_TAG 		${ARGV})	# v1.3.1
 	dk_getParameter(VERSION PLUGIN_ARG_VERSION 	${ARGV})	# master
 	
-	#dk_set(PLUGIN_INSTALL_NAME "${NAME}")
+	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 	
 	### POPULATE VARIABLES ###
 	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
