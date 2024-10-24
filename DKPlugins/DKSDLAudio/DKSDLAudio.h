@@ -30,18 +30,23 @@
 #define DKSDLAudio_H
 
 //WARNING_DISABLE
-#include "SDL.h"
-#include "SDL_mixer.h"
+#ifdef HAVE_sdl2
+	#include "SDL.h"
+#endif
+#ifdef HAVE_sdl_mixer
+	#include "SDL_mixer.h"
+#endif
 //WARNING_ENABLE
 
 #include "DK/DK.h"
 
-
+#ifdef HAVE_sdl_mixer
 struct track{
 	DKString file;
 	Mix_Music* snd;
 	int position;
 };
+#endif
 
 class DKSDLAudio : public DKObjectT<DKSDLAudio>
 {

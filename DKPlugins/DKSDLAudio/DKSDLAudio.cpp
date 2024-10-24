@@ -33,10 +33,12 @@ bool DKSDLAudio::Init(){
 	DKDEBUGFUNC();
 	if(SDL_Init(SDL_INIT_AUDIO) < 0)
 		return DKERROR("Could not Init SDL_Audio\n");
+	
+#ifdef HAVE_sdl_mixer	
 	//Initialize SDL_mixer 
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 		return DKERROR("DKSDLAudio::Init(): could not load mixer\n");
-
+#endif
 	_volume = 128;
 
 	DKClass::RegisterFunc("DKSDLAudio::GetDuration", &DKSDLAudio::GetDuration, this);
@@ -57,7 +59,9 @@ bool DKSDLAudio::Init(){
 bool DKSDLAudio::End(){
 	DKDEBUGFUNC();
 	DKApp::RemoveLoopFunc(&DKSDLAudio::Process, this);
+#ifdef HAVE_sdl_mixer
 	Mix_CloseAudio();
+#endif
 	return true;
 }
 
@@ -87,22 +91,28 @@ bool DKSDLAudio::GetDuration(const void* input, void* output){
 
 bool DKSDLAudio::GetTime(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
+#ifdef HAVE_sdl_mixer
 	int val = trk.position;
 	*(int*)output = val;
+#endif
 	return true;
 }
 
 bool DKSDLAudio::GetVolume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
+#ifdef HAVE_sdl_mixer
 	int volume = Mix_VolumeMusic(-1);
 	*(int*)output = volume;
+#endif
 	return true;
 }
 
 bool DKSDLAudio::Mute(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
+#ifdef HAVE_sdl_mixer
 	_volume = Mix_VolumeMusic(-1);
 	Mix_VolumeMusic(0);
+#endif
 	return true;
 }
 
@@ -111,6 +121,7 @@ bool DKSDLAudio::OpenMusic(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path))
 		return DKERROR("DKFile::VerifyPath() failed! \n");
+#ifdef HAVE_sdl_mixer
 	trk.file = path;
 	trk.snd = Mix_LoadMUS(path.c_str());
 	trk.position = 0;
@@ -120,14 +131,16 @@ bool DKSDLAudio::OpenMusic(const void* input, void* output){
 	if(Mix_PlayMusic(trk.snd, 0) == -1)
 		return DKERROR("DKSDLAudio::OpenMusic(): error playing file\n");
 	Mix_PauseMusic();
-
+#endif
 	return true;
 }
 
 bool DKSDLAudio::Pause(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
+#ifdef HAVE_sdl_mixer
 	Mix_PauseMusic();
+#endif
 	return true;
 }
 
@@ -136,41 +149,51 @@ bool DKSDLAudio::PlaySound(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path))
 		return DKERROR("DKFile::VerifyPath() failed! \n");
+#ifdef HAVE_sdl_mixer
 	Mix_Chunk* snd = Mix_LoadWAV(path.c_str());
 	if(!snd)
 		return DKERROR("snd is invlid! \n");
 	if(Mix_PlayChannel(-1, snd, 0) == -1)
 		return DKERROR("Mix_PlayChannel() failed! \n");
+#endif
 	return true;
 }
 
 bool DKSDLAudio::Resume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
+#ifdef HAVE_sdl_mixer
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
 	Mix_RewindMusic();
 	Mix_ResumeMusic();
+#endif
 	return true;
 }
 
 bool DKSDLAudio::SetTime(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int time = *(int*)input;
+#ifdef HAVE_sdl_mixer
 	Mix_SetMusicPosition(time);
+#endif
 	return true;
 }
 
 bool DKSDLAudio::SetVolume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int volume = *(int*)input;
+#ifdef HAVE_sdl_mixer
 	Mix_VolumeMusic(volume);
+#endif
 	return true;
 }
 
 bool DKSDLAudio::UnMute(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
+#ifdef HAVE_sdl_mixer
 	Mix_VolumeMusic(_volume);
+#endif
 	return true;
 }
 
@@ -186,6 +209,7 @@ void DKSDLAudio::Process(){
 	}
 	else 
 	*/
+#ifdef HAVE_sdl_mixer
 	if(!Mix_PlayingMusic()){
 		//FIXME: !!!  PlaySound will call this constantly !!!
 		//DKINFO("!Mix_PlayingMusic()\n");
@@ -197,4 +221,5 @@ void DKSDLAudio::Process(){
 		lastTime = SDL_GetTicks();
 		DKEvents::SendEvent("window", "ended", "");
 	}
+#endif	
 }
