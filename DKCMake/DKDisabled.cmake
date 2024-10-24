@@ -60,7 +60,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_disable(libxml2)
 endif()
 dk_disable(glfw)
-dk_disable(smpeg2)				# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
+#dk_disable(smpeg2)				# smpeg2-2.0.0/MPEGaudio.h:133:7: error: ISO C++17 does not allow 'register' storage class specifier
 
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)			# TODO
@@ -339,7 +339,7 @@ if(IOS OR IOSSIM)
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sdl_rtf)
-	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
+	#dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(wasm3)				# CMake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executbale target "wasm3"
@@ -424,7 +424,7 @@ if(MAC)
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(sdl_rtf)
-	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
+	#dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
 	dk_disable(x265)
@@ -546,7 +546,7 @@ if(MSVC AND WIN_X86_64)
 	dk_disable(libvncserver)		# build errors
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
-	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
+	#dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif(MSVC AND WIN_X86_64)
 
 

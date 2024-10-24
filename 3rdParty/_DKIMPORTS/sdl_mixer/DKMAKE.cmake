@@ -19,7 +19,7 @@ dk_depend(smpeg2)
 dk_depend(vorbis)
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip) # PATCH)
+dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip PATCH)
 
 ### LINK ###
 dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
