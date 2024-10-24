@@ -81,7 +81,8 @@ function(dk_executeProcess)
 		endif()
 	endif()
 	
-	# WORKING_DIRECTORY defaults to ${PWD} set by dk_cd(directory)
+	### WORKING_DIRECTORY ###
+	# defaults to ${PWD} set by dk_cd(directory)
 	# since CMAKE doesn't use a default PWD or CD current directory, we make our own by keeping
 	# the PWD variable updated with the desired path. Any calls to execute_process
 	# will use value of that variable unless WORKING_DIRECTORY is specified in the function call.
@@ -92,40 +93,69 @@ function(dk_executeProcess)
 		list(APPEND ARGV WORKING_DIRECTORY ${PWD}) # add WORKING_DIRECTORY if missing
 	endif()
 	
+	### TIMEOUT ###
+	
+	### RESULT_VARIABLE ###
 	if(NOT RESULT_VARIABLE)
 		set(RESULT_VARIABLE result_variable)
 		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
-#	if(NOT OUTPUT_VARIABLE)
-#		set(OUTPUT_VARIABLE output_variable)
-#		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
-#	endif()
+	### RESULTS_VARIABLE ###
 	
+	### OUTPUT_VARIABLE ###
+	if(NOT OUTPUT_VARIABLE)
+		set(OUTPUT_VARIABLE output_variable)
+		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
+	endif()
+	
+	### ERROR_VARIABLE ###
 	if(NOT ERROR_VARIABLE)
 		set(ERROR_VARIABLE error_variable)
 		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
 	endif()
 	
+	### INPUT_FILE ###
+	
+	### OUTPUT_FILE ###
+	
+	### ERROR_FILE ###
+	
+	### OUTPUT_QUIET ###
+	
+	### ERROR_QUIET ###
+	
+	### COMMAND_ECHO ###
 	if(CMAKE_VERSION VERSION_GREATER "3.15")
 		if(NOT COMMAND_ECHO)
-		set(COMMAND_ECHO STDOUT)
+			set(COMMAND_ECHO STDOUT)
 			list(APPEND ARGV COMMAND_ECHO ${COMMAND_ECHO})
 		endif()
 	endif()
 	
-	#if(CMAKE_VERSION VERSION_GREATER "3.18")
-	#	if(NOT ECHO_OUTPUT_VARIABLE)
-	#		list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
-	#	endif()
-	#	if(NOT ECHO_ERROR_VARIABLE)
-	#		list(APPEND ARGV ECHO_ERROR_VARIABLE)
-	#	endif()
-	#endif()
-	
+	### OUTPUT_STRIP_TRAILING_WHITESPACE ###
 	if(NOT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
+	
+	### ERROR_STRIP_TRAILING_WHITESPACE ###
+	
+	### ENCODING ###
+	
+	### ECHO_OUTPUT_VARIABLE ###
+	
+	### ECHO_ERROR_VARIABLE ###
+	
+	if(CMAKE_VERSION VERSION_GREATER "3.18")
+		if(NOT ECHO_OUTPUT_VARIABLE)
+			list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
+		endif()
+		if(NOT ECHO_ERROR_VARIABLE)
+			list(APPEND ARGV ECHO_ERROR_VARIABLE)
+		endif()
+	endif()
+	
+	
 	
 #	####### SUPPORT LONGER CMAKE COMMAND LINES ######
 	set(cmd1 ${ARGV})

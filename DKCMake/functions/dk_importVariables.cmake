@@ -41,6 +41,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_importVariables url rtn_var)
 	#dk_debugFunc()
+	message("dk_importVariables(${ARGV})")
+	
 	unset(PLUGIN_ARG_BRANCH)
 	dk_getParameter(BRANCH 	PLUGIN_ARG_BRANCH 	${ARGV}) 	# master
 	dk_printVar(PLUGIN_ARG_BRANCH)
@@ -61,6 +63,12 @@ function(dk_importVariables url rtn_var)
 	dk_getParameter(ROOT 	PLUGIN_ARG_ROOT 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
 	dk_printVar(PLUGIN_ARG_ROOT)
 	
+	############# DEBUG ##################
+	if("${PLUGIN_ARG_ROOT}" STREQUAL "GIT")
+		dk_fatal("ERROR: linguring variable assignment!!")
+	endif()
+	#####################################
+	
 	unset(PLUGIN_ARG_TAG)
 	dk_getParameter(TAG 	PLUGIN_ARG_TAG 		${ARGV})	# v1.3.1
 	dk_printVar(PLUGIN_ARG_TAG)
@@ -68,7 +76,6 @@ function(dk_importVariables url rtn_var)
 	unset(PLUGIN_ARG_VERSION)
 	dk_getParameter(VERSION PLUGIN_ARG_VERSION 	${ARGV})	# master
 	dk_printVar(PLUGIN_ARG_VERSION)
-	
 	
 	unset(PLUGIN_INSTALL_NAME)
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")
@@ -185,9 +192,18 @@ function(dk_importVariables url rtn_var)
 	# PLUGIN_IMPORT_NAME
 	unset(PLUGIN_IMPORT_NAME)
 	dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)					
-	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zlib
+	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME		: zLib
 
-
+	# PLUGIN_IMPORT_NAME_LOWER
+	unset(PLUGIN_IMPORT_NAME_LOWER)
+	dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)
+	dk_printVar(PLUGIN_IMPORT_NAME_LOWER)								# PLUGIN_IMPORT_NAME_LOWER	: zlib
+	
+	# PLUGIN_IMPORT_NAME_UPPER
+	unset(PLUGIN_IMPORT_NAME_UPPER)
+	dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)
+	dk_printVar(PLUGIN_IMPORT_NAME_UPPER)								# PLUGIN_IMPORT_NAME_UPPER	: ZLIB
+	
 	##############################################
 	############ PLUGIN_GIT VARIABLES ############
 	##############################################
@@ -201,6 +217,11 @@ function(dk_importVariables url rtn_var)
 		unset(PLUGIN_GIT_NAME)
 		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)			
 		dk_printVar(PLUGIN_GIT_NAME)									# PLUGIN_GIT_NAME			: zlib
+		
+		# PLUGIN_GIT_NAME_LOWER
+		unset(PLUGIN_GIT_NAME_LOWER)
+		dk_toLower(${PLUGIN_GIT_NAME} 		PLUGIN_GIT_NAME_LOWER)
+		dk_printVar(PLUGIN_GIT_NAME_LOWER)								# PLUGIN_GIT_NAME_LOWER			: zlib
 		
 		# PLUGIN_GIT_BRANCH
 		unset(PLUGIN_GIT_BRANCH)
@@ -309,20 +330,14 @@ function(dk_importVariables url rtn_var)
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
 	
-	unset(PLUGIN_IMPORT_NAME_LOWER)
-	unset(PLUGIN_GIT_NAME_LOWER)
-	if(PLUGIN_IMPORT AND PLUGIN_GIT)
-		dk_toLower(${PLUGIN_IMPORT_NAME} 	PLUGIN_IMPORT_NAME_LOWER)
-		dk_toLower(${PLUGIN_GIT_NAME} 		PLUGIN_GIT_NAME_LOWER)
+	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
 		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
 			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
 		endif()
 	endif()
 
 	# PLUGIN_PREFIX
-	unset(PLUGIN_IMPORT_NAME_UPPER)
 	unset(PLUGIN_PREFIX)
-	dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)
 	dk_set(PLUGIN_PREFIX ${PLUGIN_IMPORT_NAME_UPPER})
 	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} PLUGIN_PREFIX)
 	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${PLUGIN_PREFIX})
@@ -365,12 +380,10 @@ function(dk_importVariables url rtn_var)
 	# <PLUGIN>_FOLDER
 	unset(${PLUGIN_PREFIX}_FOLDER)
 	dk_set(${PLUGIN_PREFIX}_FOLDER ${PLUGIN_INSTALL_FOLDER})
-	dk_printVar(${PLUGIN_PREFIX}_FOLDER)								# ZLIB_FOLDER				: zlib-master
-
+	dk_printVar(${PLUGIN_PREFIX}_FOLDER)								# ZLIB_FOLDER				: zlib-master	
+	
 	# <PLUGIN>_IMPORT_NAME
-	unset(PLUGIN_IMPORT_NAME_LOWER)
 	unset(${PLUGIN_PREFIX}_IMPORT_NAME)
-	dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)		
 	dk_set(${PLUGIN_PREFIX}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
 	dk_printVar(${PLUGIN_PREFIX}_IMPORT_NAME)							# ZLIB_IMPORT_NAME			: zlib
 		
@@ -432,6 +445,8 @@ function(dk_importVariables url rtn_var)
 	unset(${rtn_var})
 	set(${rtn_var} ${PLUGIN_PREFIX} PARENT_SCOPE)
 	dk_printVar(PLUGIN_PREFIX)
+	
+	#dk_pause()
 endfunction()
 
 
