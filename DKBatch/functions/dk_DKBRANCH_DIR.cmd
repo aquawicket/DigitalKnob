@@ -44,7 +44,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 			set "DKBASH_FUNCTIONS_DIR_=%DKBASH_DIR%\functions\"
 			::%dk_call% dk_printVar DKBASH_FUNCTIONS_DIR_
 			
-		set "DKBATCH_DIR=%DKBRANCH_DIR%\DKBatch"
+		if not defined DKBATCH_DIR set "DKBATCH_DIR=%DKBRANCH_DIR%\DKBatch"
 		::%dk_call% dk_printVar DKBATCH_DIR
 			set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%\functions"
 			::%dk_call% dk_printVar DKBATCH_FUNCTIONS_DIR
