@@ -34,7 +34,6 @@ function(dk_reparseCmakeCommand CMD_LIST)
 				string(SUBSTRING "${item}" ${d_pos_end} -1 second_part)
 				set(item "${first_part}set(${second_part}")
 			endif()
-			message("itemA = ${item}")
 			
 			string(FIND "${item}" "=" e_pos)
 			math(EXPR e_pos_end "${e_pos}+1")
