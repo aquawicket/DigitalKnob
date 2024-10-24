@@ -11,14 +11,14 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" VERSION)
+dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
 
 ### DOWNLOAD ###
 if(WIN_X86_HOST)
-	dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${VERSION}.windows.1/PortableGit-${VERSION}-32-bit.7z.exe)
+	dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-32-bit.7z.exe)
 endif()
 if(WIN_X86_64_HOST)
-	dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${VERSION}.windows.1/PortableGit-${VERSION}-64-bit.7z.exe)
+	dk_set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-64-bit.7z.exe)
 endif()
 if(WIN_HOST AND NOT GIT_DL)
 	dk_fatal("GIT_DL is invalid!")

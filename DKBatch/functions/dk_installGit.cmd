@@ -3,10 +3,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 if not exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/git.txt" %DKCACHE_DIR%\git.txt
-if not exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_getFileParam %DKCACHE_DIR%\git.txt VERSION
-if exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\git.txt VERSION
-set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%VERSION%.windows.1/PortableGit-%VERSION%-32-bit.7z.exe"
-set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%VERSION%.windows.1/PortableGit-%VERSION%-64-bit.7z.exe"
+if not exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_getFileParam %DKCACHE_DIR%\git.txt GIT_DL_VERSION
+if exist %DKIMPORTS_DIR%\git\git.txt %dk_call% dk_getFileParam %DKIMPORTS_DIR%\git\git.txt GIT_DL_VERSION
+set "GIT_DL_WIN_X86=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-32-bit.7z.exe"
+set "GIT_DL_WIN_X86_64=https://github.com/git-for-windows/git/releases/download/v%GIT_DL_VERSION%.windows.1/PortableGit-%GIT_DL_VERSION%-64-bit.7z.exe"
 
 :: https://stackoverflow.com/a/67714373
 if not defined GIT_CONFIG_SYSTEM  set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem" && setx GIT_CONFIG_SYSTEM "!GIT_CONFIG_SYSTEM!"
