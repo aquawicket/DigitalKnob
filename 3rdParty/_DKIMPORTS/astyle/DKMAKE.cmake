@@ -21,8 +21,8 @@ dk_validate(triple "dk_TARGET_TRIPLE()")
 dk_include			(${ASTYLE_DIR}/src)
 
 if(WIN)
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyle.exe)		# AStyleLib.a
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyle.exe)		# AStyleLib.a
+	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
+	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
 else()
 	dk_libDebug		(${ASTYLE_DEBUG_DIR}/libastyle.a)
 	dk_libRelease	(${ASTYLE_RELEASE_DIR}/libastyle.a)

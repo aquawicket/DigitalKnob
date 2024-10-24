@@ -15,9 +15,9 @@ function(dk_keyboardInput input)
 		#	@echo off
 		#	set /p "input="
 		#	echo %input%
-		dk_fileWrite($ENV{TMP}/keyboardInput.cmd "@echo off & set /p \"input=\"\necho %input%")
-		execute_process(COMMAND cmd /c $ENV{TMP}/keyboardInput.cmd OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
-		dk_delete(keyboardInput.cmd)
+		dk_fileWrite(${DKCACHE_DIR}/keyboardInput.cmd "@echo off & set /p \"input=\"\necho %input%")
+		execute_process(COMMAND cmd /c ${DKCACHE_DIR}/keyboardInput.cmd OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
+		dk_delete(${DKCACHE_DIR}/keyboardInput.cmd)
 		if("${output}" STREQUAL "ECHO is off.")
 			set(output "")
 		endif()

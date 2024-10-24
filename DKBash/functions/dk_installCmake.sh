@@ -65,8 +65,6 @@ dk_installCmake() {
 		
 		#dk_call dk_removeExtension ${CMAKE_DL_FILE} CMAKE_DL_NAME
 		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_DIR}"
-		
-		#dk_call dk_fileWrite "${CMAKE_DIR}/installed" "${CMAKE_FOLDER}"
         
 		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake"
 
