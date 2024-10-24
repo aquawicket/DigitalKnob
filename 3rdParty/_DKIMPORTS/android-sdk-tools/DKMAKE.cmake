@@ -28,10 +28,3 @@ endif()
 #%DEFAULT_JVM_OPTS%
 #with this
 #%DEFAULT_JVM_OPTS% --add-modules java.xml.bind %JAVA_OPTS%
-
-
-#license signing
-#if(EXISTS ${ANDROID_SDK_TOOLS}/installed)
-#dk_depend(java)
-#dk_command(${ANDROID_SDK_TOOLS}/bin/sdkmanager.bat --licenses)
-#endif()

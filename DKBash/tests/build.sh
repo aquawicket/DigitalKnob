@@ -1310,8 +1310,6 @@ dk_extract() {
 	dk_printVar destFolder_
 	mv "${2}"/"$destFolder" "${2}"/"$destFolder_"
 
-	#echo echo "$CMAKE_FOLDER">"${2}"/"$destFolder_"/dk_installed
-
 	#TODO
 	#[ "${input}" = "" ]
 }

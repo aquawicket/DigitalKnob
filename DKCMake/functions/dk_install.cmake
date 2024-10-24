@@ -41,17 +41,17 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		endif()
 		return()
 	endif()
-	dk_debug(" ")
-	dk_printVar(PLUGIN_URL)
+	#dk_echo(" ")
+	#dk_printVar(PLUGIN_URL)
 	dk_getDirectory(${PLUGIN_URL} PLUGIN_URL_DIR)
 	dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)
 	dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)
-	dk_debug(" ")
-	dk_printVar(PLUGIN_DIR)
+	#dk_echo(" ")
+	#dk_printVar(PLUGIN_DIR)
 	dk_getDirectory(${PLUGIN_DIR} dest_directory)
 	dk_basename(${PLUGIN_DIR} dest_filename)
 	dk_getExtension(${dest_filename} dest_extension)
-	dk_debug(" ")
+	#dk_echo(" ")
 	
 	### set the PLUGIN_DL_DIR
 	set(PLUGIN_DL_DIR ${DKDOWNLOAD_DIR})
@@ -204,7 +204,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_delete(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
 	endif()
 endfunction()
-dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
+#dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 
