@@ -59,15 +59,15 @@ function(dk_importVariables url rtn_var)
 	dk_getParameter(PATH 	PLUGIN_ARG_PATH 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	dk_printVar(PLUGIN_ARG_PATH)
 	
-	unset(PLUGIN_ARG_ROOT)
-	dk_getParameter(ROOT 	PLUGIN_ARG_ROOT 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
-	dk_printVar(PLUGIN_ARG_ROOT)
-	
 	############# DEBUG ##################
 	if("${PLUGIN_ARG_ROOT}" STREQUAL "GIT")
 		dk_fatal("ERROR: linguring variable assignment!!")
 	endif()
 	#####################################
+	
+	unset(PLUGIN_ARG_ROOT)
+	dk_getParameter(ROOT 	PLUGIN_ARG_ROOT 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_printVar(PLUGIN_ARG_ROOT)
 	
 	unset(PLUGIN_ARG_TAG)
 	dk_getParameter(TAG 	PLUGIN_ARG_TAG 		${ARGV})	# v1.3.1
