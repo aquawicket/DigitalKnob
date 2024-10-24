@@ -24,7 +24,6 @@ if(WIN_HOST AND NOT GIT_DL)
 	dk_fatal("GIT_DL is invalid!")
 endif()
 
-
 ### Get GIT variables ###
 if(GIT_DL)
 	dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
@@ -40,7 +39,6 @@ elseif(ANDROID_HOST)
 else()
 	dk_findProgram(GIT_EXE git /usr/bin)
 endif()
-
 
 ### INSTALL ###
 if(NOT GIT_EXE)
@@ -64,7 +62,6 @@ if(NOT GIT_EXE)
 	endif()
 endif()
 
-
 ## Second Check ###
 if(WIN_HOST)
 	dk_findProgram(GIT_EXE git ${GIT}/bin)
@@ -75,10 +72,7 @@ else()
 	dk_findProgram(GIT_EXE git /usr/bin)
 endif()
 
-if(NOT GIT_EXE)
-	dk_fatal("COULD NOT FIND GIT_EXE:${GIT_EXE}")
-	return()
-endif()
+dk_assertPath(GIT_EXE)
 
 dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
 
