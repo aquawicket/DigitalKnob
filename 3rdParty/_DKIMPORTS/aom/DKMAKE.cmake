@@ -28,7 +28,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure		(${AOM_DIR} -DAOM_TARGET_CPU=generic)
+dk_configure		(${AOM_DIR}) # -DAOM_TARGET_CPU=generic)
 
 ### COMPILE ###
 dk_build			(${AOM_DIR})
