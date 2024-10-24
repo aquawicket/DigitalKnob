@@ -19,7 +19,7 @@ WIN_X86_64_HOST_dk_set (PYTHON_DL https://www.python.org/ftp/python/2.7.18/pytho
 
 ###### PYTHON_VARIABLES ######
 if(PYTHON_DL)
-	dk_importVariables(${PYTHON_DL} rtn_var)
+	dk_importVariables(${PYTHON_DL})
 endif()
 
 ###### PYTHON_EXE (first check) ######

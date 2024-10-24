@@ -42,7 +42,7 @@ dk_if			(MAC_HOST			"dk_set(CMAKE_DL ${CMAKE_MAC_10_DL})")
 dk_if			(WIN_ARM64_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_ARM64_DL})")
 dk_if			(WIN_X86_HOST		"dk_set(CMAKE_DL ${CMAKE_WIN_X86_DL})")
 dk_if			(WIN_X86_64_HOST	"dk_set(CMAKE_DL ${CMAKE_WIN_X86_64_DL})")
-dk_importVariables(${CMAKE_DL} rtn_var)
+dk_importVariables(${CMAKE_DL})
 
 ###### IMPORT ######
 if(ANDROID_HOST)

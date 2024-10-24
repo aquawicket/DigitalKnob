@@ -38,7 +38,7 @@ endif()
 
 ### INSTALL ###
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
-dk_importVariables(${MSYS2_DL} rtn_val)
+dk_importVariables(${MSYS2_DL})
 
 dk_set(MSYS2_EXE "${MSYS2_DIR}/msys2.exe")
 dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")

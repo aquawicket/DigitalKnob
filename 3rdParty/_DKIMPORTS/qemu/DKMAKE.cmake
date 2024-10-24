@@ -13,7 +13,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(host_triple "dk_host_triple()")
 WIN_HOST_dk_set	(QEMU_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
 dk_assertVar(QEMU_DL)
-dk_importVariables(${QEMU_DL} rtn_var)
+dk_importVariables(${QEMU_DL})
 
 dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
 dk_set(QEMU_DIR ${DKTOOLS_DIR}/${QEMU_FOLDER})

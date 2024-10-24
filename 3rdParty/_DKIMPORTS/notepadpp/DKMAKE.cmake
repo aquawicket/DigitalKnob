@@ -15,7 +15,7 @@ dk_validate(host_triple "dk_host_triple()")
 WIN_ARM64_HOST_dk_set	(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip)
 WIN_X86_HOST_dk_set		(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip)
 WIN_X86_64_HOST_dk_set	(NOTEPADPP_DL https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip)
-dk_importVariables(${NOTEPADPP_DL} rtn_var)
+dk_importVariables(${NOTEPADPP_DL})
 
 ### IMPORT ###
 dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
