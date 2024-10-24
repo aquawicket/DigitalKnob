@@ -14,15 +14,19 @@ dk_load(dk_builder)
 dk_import(https://github.com/xiph/opus/archive/7db26934.zip)
 
 ### LINK ###
-dk_include			(${OPUS}/include)
+dk_include			(${OPUS}/include					opusfile_INCLUDE_PATH)
 dk_include			(${OPUS}/${triple})
 if(MSVC)
-	dk_libDebug		(${OPUS_DEBUG_DIR}/opus.lib)
-	dk_libRelease	(${OPUS_RELEASE_DIR}/opus.lib)
+	dk_libDebug		(${OPUS_DEBUG_DIR}/opus.lib			opusfile_LIBRARY)
+	dk_libRelease	(${OPUS_RELEASE_DIR}/opus.lib		opusfile_LIBRARY)
 else()
-	dk_libDebug		(${OPUS_DEBUG_DIR}/libopus.a)
-	dk_libRelease	(${OPUS_RELEASE_DIR}/libopus.a)
+	dk_libDebug		(${OPUS_DEBUG_DIR}/libopus.a		opusfile_LIBRARY)
+	dk_libRelease	(${OPUS_RELEASE_DIR}/libopus.a		opusfile_LIBRARY)
 endif()
+
+dk_set(OPUS_CMAKE -Dopusfile_INCLUDE_PATH=${opusfile_INCLUDE_PATH}  -Dopusfile_LIBRARY=${opusfile_LIBRARY}) 
+
+
 
 ### GENERATE ###
 dk_configure(${OPUS})
