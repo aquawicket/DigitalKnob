@@ -43,18 +43,32 @@ function(dk_importVariables url rtn_var)
 	#dk_debugFunc()
 	unset(PLUGIN_ARG_BRANCH)
 	dk_getParameter(BRANCH 	PLUGIN_ARG_BRANCH 	${ARGV}) 	# master
+	dk_printVar(PLUGIN_ARG_BRANCH)
+	
 	unset(PLUGIN_ARG_FOLDER)
 	dk_getParameter(FOLDER	PLUGIN_ARG_FOLDER 	${ARGV})	# zlib-master
+	dk_printVar(PLUGIN_ARG_FOLDER)
+	
 	unset(PLUGIN_ARG_NAME)
 	dk_getParameter(NAME 	PLUGIN_ARG_NAME		${ARGV})	# zlib
+	dk_printVar(PLUGIN_ARG_NAME)
+	
 	unset(PLUGIN_ARG_PATH)
 	dk_getParameter(PATH 	PLUGIN_ARG_PATH 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	dk_printVar(PLUGIN_ARG_PATH)
+	
 	unset(PLUGIN_ARG_ROOT)
 	dk_getParameter(ROOT 	PLUGIN_ARG_ROOT 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
+	dk_printVar(PLUGIN_ARG_ROOT)
+	
 	unset(PLUGIN_ARG_TAG)
 	dk_getParameter(TAG 	PLUGIN_ARG_TAG 		${ARGV})	# v1.3.1
+	dk_printVar(PLUGIN_ARG_TAG)
+	
 	unset(PLUGIN_ARG_VERSION)
 	dk_getParameter(VERSION PLUGIN_ARG_VERSION 	${ARGV})	# master
+	dk_printVar(PLUGIN_ARG_VERSION)
+	
 	
 	unset(PLUGIN_INSTALL_NAME)
 	dk_set(PLUGIN_INSTALL_NAME "${NAME}")

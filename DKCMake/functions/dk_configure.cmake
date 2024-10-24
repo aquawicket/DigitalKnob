@@ -12,7 +12,7 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_debug("dk_configure(${ARGV})")
 	
 	dk_assertPath(SOURCE_DIR)
-	dk_validate(DKBUILD_TYPE "dk_BUILD_TYPE()")
+	dk_validate(DKBUILD_TYPE "dk_DKBUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	dk_assertPath(${CURRENT_PLUGIN}_DIR)
 	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")

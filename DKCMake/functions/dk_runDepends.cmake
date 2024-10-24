@@ -151,5 +151,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_todo()
+	dk_runDepends(plugin) #TODO
 endfunction()

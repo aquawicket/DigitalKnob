@@ -3,10 +3,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ######################################################################
-# dk_BUILD_TYPE()
+# dk_DKBUILD_TYPE()
 #  
 #
-function(dk_BUILD_TYPE)
+function(dk_DKBUILD_TYPE)
 	dk_debugFunc()
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
@@ -61,5 +61,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_BUILD_TYPE()
+	dk_DKBUILD_TYPE()
 endfunction()
