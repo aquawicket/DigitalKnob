@@ -44,7 +44,7 @@ function(dk_reparseCmakeCommand CMD_LIST)
 				set(item "${firstC_part} \"${secondC_part}\" CACHE INTERNAL \"\" FORCE)")
 			endif()
 
-			message("itemC = ${item}")
+			#message("itemC = ${item}")
 			file(APPEND ${DKCACHE_DIR}/cmake_reparsed.txt "${item}\n")
 		endif() 
 	endforeach()
