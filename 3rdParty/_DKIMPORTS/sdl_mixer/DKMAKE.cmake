@@ -53,8 +53,8 @@ if(MSVC)
 		${FLAC_CMAKE} 
 		${OGG_CMAKE} 
 		${OPUS_CMAKE}
-		${SDL_CMAKE}) 
-		${SMPEG2_CMAKE} 
+		${SDL_CMAKE} 
+		${SMPEG2_CMAKE}
 		${VORBIS_CMAKE})
 else()
 	dk_configure(${SDL_MIXER_DIR} 
