@@ -29,7 +29,8 @@ function(dk_import url)
 		dk_getExtension(${url} extension)
 		if("${extension}" STREQUAL ".git")
 			
-			dk_validate(GIT_EXE "dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake)")
+			dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+			dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 			
 			if(NOT EXISTS ${${CURRENT_PLUGIN}_DIR}/.git)
 				dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")

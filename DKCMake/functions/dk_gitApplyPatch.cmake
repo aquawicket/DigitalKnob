@@ -13,7 +13,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc()
 	
-	dk_validate(GIT_EXE "dk_installGit()")
+	#dk_validate(GIT_EXE "dk_installGit()")
+	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
+	
 	dk_append(COMMAND_ARGS ${GIT_EXE})
 	dk_append(COMMAND_ARGS apply)
 	dk_append(COMMAND_ARGS --verbose)

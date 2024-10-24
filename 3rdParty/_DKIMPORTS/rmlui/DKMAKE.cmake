@@ -89,7 +89,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
 dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
 
 ### LINK ###
-dk_define(RMLUI_STATIC_LIB)
+dk_define		(RMLUI_STATIC_LIB)
 dk_include		(${RMLUI_DIR}/Include	RML_INCLUDE_DIR)
 dk_include		(${RMLUI_DIR}/Source 	RML_INCLUDE_DIR2)
 dk_addTarget	(rmlui core)
