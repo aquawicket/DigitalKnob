@@ -34,7 +34,7 @@ dk_validate(triple "dk_TARGET_TRIPLE()")
 
 ### Unix variable bash ###
 if(DEFINED ENV{BASH})
-	if(EXISTS $ENV{BASH})
+	if(EXISTS "$ENV{BASH}")
 		dk_set(BASH_EXE "$ENV{BASH}")
 		dk_printVar(BASH_EXE)
 		return()
