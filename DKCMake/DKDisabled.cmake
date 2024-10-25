@@ -59,6 +59,7 @@ dk_disable(rmlui-d3d11)
 dk_disable(sdl-gpu)
 dk_disable(sdl_net)
 dk_disable(tesseract)
+dk_disable(uwebsockets)
 ###########################
 
 
