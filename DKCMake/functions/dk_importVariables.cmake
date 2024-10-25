@@ -43,37 +43,34 @@ function(dk_importVariables url)
 	#dk_debugFunc()
 	message("dk_importVariables(${ARGV})")
 	
-	unset(PLUGIN_ARG_BRANCH)
-	dk_getParameter(BRANCH 	PLUGIN_ARG_BRANCH 	${ARGV}) 	# master
-	dk_printVar(PLUGIN_ARG_BRANCH)
+	unset(BRANCH)
+	dk_getOptionValue(BRANCH	${ARGV}) 	# master
+	dk_printVar(BRANCH)
 	
-	unset(PLUGIN_ARG_FOLDER)
-	dk_getParameter(FOLDER	PLUGIN_ARG_FOLDER 	${ARGV})	# zlib-master
-	dk_printVar(PLUGIN_ARG_FOLDER)
+	unset(FOLDER)
+	dk_getOptionValue(FOLDER	${ARGV})	# zlib-master
+	dk_printVar(FOLDER)
 	
-	unset(PLUGIN_ARG_NAME)
-	dk_getParameter(NAME 	PLUGIN_ARG_NAME		${ARGV})	# zlib
-	dk_printVar(PLUGIN_ARG_NAME)
+	unset(NAME)
+	dk_getOptionValue(NAME		${ARGV})	# zlib
+	dk_printVar(NAME)
 	
-	unset(PLUGIN_ARG_PATH)
-	dk_getParameter(PATH 	PLUGIN_ARG_PATH 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
-	dk_printVar(PLUGIN_ARG_PATH)
+	unset(PATH)
+	dk_getOptionValue(PATH 		${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
+	dk_printVar(PATH)
 	
-	#unset(PLUGIN_ARG_ROOT)
-	#dk_getParameter(ROOT 	PLUGIN_ARG_ROOT 	${ARGV})	# C:/Users/Administrator/digitalknob/Development/3rdParty
-	dk_getOptionValue(ROOT ${ARGV})
+	unset(ROOT)
+	dk_getOptionValue(ROOT		${ARGV})							# C:/Users/Administrator/digitalknob/Development/3rdParty
 	dk_printVar(ROOT)
 	
-	unset(PLUGIN_ARG_TAG)
-	dk_getParameter(TAG 	PLUGIN_ARG_TAG 		${ARGV})	# v1.3.1
-	dk_printVar(PLUGIN_ARG_TAG)
+	unset(TAG)
+	dk_getOptionValue(TAG		${ARGV})	# v1.3.1
+	dk_printVar(TAG)
 	
-	unset(PLUGIN_ARG_VERSION)
-	dk_getParameter(VERSION PLUGIN_ARG_VERSION 	${ARGV})	# master
-	dk_printVar(PLUGIN_ARG_VERSION)
+	unset(VERSION)
+	dk_getOptionValue(VERSION	${ARGV})	# master
+	dk_printVar(VERSION)
 	
-	#unset(PLUGIN_INSTALL_NAME)
-	#dk_set(PLUGIN_INSTALL_NAME "${NAME}")
 	
 	### POPULATE VARIABLES ###
 	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
@@ -220,8 +217,8 @@ function(dk_importVariables url)
 		
 		# PLUGIN_GIT_BRANCH
 		unset(PLUGIN_GIT_BRANCH)
-		if(PLUGIN_ARG_BRANCH)
-			set(PLUGIN_GIT_BRANCH ${PLUGIN_ARG_BRANCH})
+		if(BRANCH)
+			set(PLUGIN_GIT_BRANCH ${BRANCH})
 		endif()
 		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					
 		if(NOT PLUGIN_GIT_BRANCH)
@@ -231,8 +228,8 @@ function(dk_importVariables url)
 		
 		# PLUGIN_GIT_TAG
 		unset(PLUGIN_GIT_TAG)
-		if(PLUGIN_ARG_TAG)
-			set(PLUGIN_GIT_TAG ${PLUGIN_GIT_TAG})
+		if(TAG)
+			set(PLUGIN_GIT_TAG ${TAG})
 		endif()
 	endif()
 
@@ -242,8 +239,8 @@ function(dk_importVariables url)
 	##################################################
 	# PLUGIN_INSTALL_NAME
 	unset(PLUGIN_INSTALL_NAME)
-	if(PLUGIN_ARG_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_ARG_NAME})
+	if(NAME)
+		set(PLUGIN_INSTALL_NAME ${NAME})
 	elseif(PLUGIN_IMPORT_NAME)
 		set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
 	elseif(PLUGIN_GIT_NAME)
@@ -256,41 +253,39 @@ function(dk_importVariables url)
 
 	# PLUGIN_INSTALL_VERSION
 	unset(PLUGIN_INSTALL_VERSION)
-	if(PLUGIN_ARG_VERSION)
-		set(PLUGIN_INSTALL_VERSION ${PLUGIN_ARG_VERSION})
-	else()
-		if(PLUGIN_IMPORT_NAME AND PLUGIN_URL_FILE)
-			dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)	
-			dk_toLower(${PLUGIN_URL_FILE}    PLUGIN_URL_FILE_LOWER)
-			# calculate the plugin version		
-			dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)	
-			if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
-				if(PLUGIN_GIT_TAG)
-					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_TAG})
-				elseif(PLUGIN_GIT_BRANCH)
-					set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})
-				else()
-					set(PLUGIN_INSTALL_VERSION master)
-				endif()
+	if(VERSION)
+		set(PLUGIN_INSTALL_VERSION ${VERSION})
+	elseif(PLUGIN_IMPORT_NAME AND PLUGIN_URL_FILE)
+		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)	
+		dk_toLower(${PLUGIN_URL_FILE}    PLUGIN_URL_FILE_LOWER)
+		# calculate the plugin version		
+		dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)	
+		if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
+			if(PLUGIN_GIT_TAG)
+				set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_TAG})
+			elseif(PLUGIN_GIT_BRANCH)
+				set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})
+			else()
+				set(PLUGIN_INSTALL_VERSION master)
 			endif()
+		endif()
 
-			string(FIND ${PLUGIN_INSTALL_VERSION} - index)
-			if(${index} EQUAL 0)
-				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
-			endif()
+		string(FIND ${PLUGIN_INSTALL_VERSION} - index)
+		if(${index} EQUAL 0)
+			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
+		endif()
 			
-			string(FIND ${PLUGIN_INSTALL_VERSION} _ index)
-			if(${index} EQUAL 0)
-				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
-			endif()
+		string(FIND ${PLUGIN_INSTALL_VERSION} _ index)
+		if(${index} EQUAL 0)
+			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
 		endif()
 	endif()
 	dk_printVar(PLUGIN_INSTALL_VERSION)									# PLUGIN_INSTALL_VERSION	: master
 
 	# PLUGIN_INSTALL_FOLDER
 	unset(PLUGIN_INSTALL_FOLDER)
-	if(PLUGIN_ARG_FOLDER)
-		set(PLUGIN_INSTALL_FOLDER ${PLUGIN_ARG_FOLDER})
+	if(FOLDER)
+		set(PLUGIN_INSTALL_FOLDER ${FOLDER})
 	elseif(PLUGIN_INSTALL_VERSION)
 		set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})
 	else()
@@ -311,8 +306,8 @@ function(dk_importVariables url)
 
 	# PLUGIN_INSTALL_PATH
 	unset(PLUGIN_INSTALL_PATH)
-	if(PLUGIN_ARG_PATH)
-		set(PLUGIN_INSTALL_PATH ${PLUGIN_ARG_PATH})
+	if(PATH)
+		set(PLUGIN_INSTALL_PATH ${PATH})
 	else()
 		dk_assertPath(${PLUGIN_INSTALL_ROOT})
 		dk_assertVar(PLUGIN_INSTALL_FOLDER)

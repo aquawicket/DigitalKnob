@@ -40,16 +40,36 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 ::#
 :dk_importVariables url rtn_var
 	::dk_debugFunc 1 9
+	set "url=%~1"
 	
-::	!dk_call! dk_getParameter  BRANCH 	PLUGIN_GIT_BRANCH 		!ARGV!  &:: master
-::	!dk_call! dk_getParameter  FOLDER	PLUGIN_INSTALL_FOLDER 	!ARGV! 	&:: zlib-master
-::	!dk_call! dk_getParameter  NAME 	PLUGIN_INSTALL_NAME 	%* 	&:: zlib
-::	!dk_call! dk_getParameter  PATH 	PLUGIN_INSTALL_PATH 	!ARGV! 	&:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
-::	!dk_call! dk_getParameter  ROOT 	PLUGIN_INSTALL_ROOT 	!ARGV! 	&:: C:\Users\Administrator\digitalknob\Development\3rdParty
-::	!dk_call! dk_getParameter  TAG 	    PLUGIN_GIT_TAG 			!ARGV! 	&:: v1.3.1
-::	!dk_call! dk_getParameter  VERSION  PLUGIN_INSTALL_VERSION 	!ARGV! 	&:: master
-::	!dk_call! dk_set                    PLUGIN_INSTALL_NAME     "!NAME!" 
+	set "BRANCH="
+	!dk_call! dk_getOptionValue  BRANCH     %*      &:: master
+	!dk_call! dk_printVar BRANCH
 	
+	set "FOLDER="
+	!dk_call! dk_getOptionValue  FOLDER     %*      &:: zlib-master
+	!dk_call! dk_printVar FOLDER
+	
+	set "NAME="
+	!dk_call! dk_getOptionValue  NAME       %*      &:: zlib
+	!dk_call! dk_printVar NAME
+	
+	set "PATH="
+	!dk_call! dk_getOptionValue  PATH       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	!dk_call! dk_printVar PATH
+	
+	set "ROOT="
+	!dk_call! dk_getOptionValue  ROOT       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty
+	!dk_call! dk_printVar ROOT
+	
+	set "TAG="
+	!dk_call! dk_getOptionValue  TAG        %*      &:: v1.3.1
+	!dk_call! dk_printVar TAG
+	
+	set "VERSION="
+	!dk_call! dk_getOptionValue  VERSION    %*      &:: master
+	!dk_call! dk_printVar VERSION
+
 	::### POPULATE VARIABLES ###
 	:: PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	:: PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
@@ -97,8 +117,8 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::##############################################					################################# EXAMPLE ##########################
 	::# PLUGIN_URL
 	set "PLUGIN_URL="
-	set "PLUGIN_URL=%~1"
-	!dk_call! dk_assertVar PLUGIN_URL 
+	!dk_call! dk_assertVar(url)
+	set "PLUGIN_URL=%url%"
 	!dk_call! dk_printVar PLUGIN_URL 											&:: PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 	::# PLUGIN_URL_FILENAME
@@ -147,23 +167,30 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	if defined CMAKE_CURRENT_LIST_DIR !dk_call! dk_includes !CMAKE_CURRENT_LIST_DIR! !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1" || set "PLUGIN_IMPORT=0"
 	!dk_call! dk_printVar PLUGIN_IMPORT 										&:: PLUGIN_IMPORT			 : 1
 		
-	if defined PLUGIN_IMPORT (	
-		rem # PLUGIN_IMPORT_PATH
-		set "PLUGIN_IMPORT_PATH="
-		set "PLUGIN_IMPORT_PATH=!CMAKE_CURRENT_LIST_DIR!" 						
-		!dk_call! dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
+	rem # PLUGIN_IMPORT_PATH
+	set "PLUGIN_IMPORT_PATH="
+	set "PLUGIN_IMPORT_PATH=!CMAKE_CURRENT_LIST_DIR!" 						
+	!dk_call! dk_printVar PLUGIN_IMPORT_PATH 								& rem PLUGIN_IMPORT_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
 
-		rem # PLUGIN_IMPORT_NAME
-		set "PLUGIN_IMPORT_NAME="
-		!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
-		!dk_call! dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
-	)
+	rem # PLUGIN_IMPORT_NAME
+	set "PLUGIN_IMPORT_NAME="
+	!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
+	!dk_call! dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
 
+	rem # PLUGIN_IMPORT_NAME_LOWER
+	set "PLUGIN_IMPORT_NAME_LOWER="
+	!dk_call! dk_toLower "!PLUGIN_IMPORT_NAME!" PLUGIN_IMPORT_NAME_LOWER
+	!dk_call! dk_printVar PLUGIN_IMPORT_NAME_LOWER				         	& rem PLUGIN_IMPORT_NAME_LOWER	: zlib
+	
+	rem # PLUGIN_IMPORT_NAME_UPPER
+	set "PLUGIN_IMPORT_NAME_UPPER="
+	!dk_call! dk_toUpper "!PLUGIN_IMPORT_NAME!" PLUGIN_IMPORT_NAME_UPPER
+	!dk_call! dk_printVar PLUGIN_IMPORT_NAME_UPPER							& rem PLUGIN_IMPORT_NAME_UPPER	: ZLIB
+	
 	::##############################################
 	::############ PLUGIN_GIT VARIABLES ############
 	::##############################################
 	if defined PLUGIN_GIT (
-		
 		rem # PLUGIN_GIT_FILENAME
 		set "PLUGIN_GIT_FILENAME="
         !dk_call! dk_arrayAt PLUGIN_URL_ARRAY 3 PLUGIN_GIT_FILENAME									
@@ -174,8 +201,16 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 		!dk_call! dk_replaceAll "!PLUGIN_GIT_FILENAME!" ".git" "" PLUGIN_GIT_NAME 			
 		!dk_call! dk_printVar PLUGIN_GIT_NAME 									&rem PLUGIN_GIT_NAME			: zlib
 		
+		rem # PLUGIN_GIT_NAME_LOWER
+		set "PLUGIN_GIT_NAME_LOWER="
+		!dk_call! dk_toLower "!PLUGIN_GIT_NAME!" PLUGIN_GIT_NAME_LOWER
+		!dk_call! dk_printVar PLUGIN_GIT_NAME_LOW						        & rem PLUGIN_GIT_NAME_LOWER			: zlib
+		
 		rem # PLUGIN_GIT_BRANCH
 		set "PLUGIN_GIT_BRANCH="
+		if defined BRANCH (
+			set "PLUGIN_GIT_BRANCH=!BRANCH!"
+		)
 		rem !dk_call! dk_getGitBranchName !PLUGIN_URL! PLUGIN_GIT_BRANCH 					
 		if NOT defined PLUGIN_GIT_BRANCH (
 			set "PLUGIN_GIT_BRANCH=master" 
@@ -184,6 +219,9 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 		
 		rem # PLUGIN_GIT_TAG
 		set "PLUGIN_GIT_TAG="
+		if defined TAG (
+			set "PLUGIN_GIT_TAG=!TAG!"
+		)
 	)
 
 	
@@ -192,18 +230,23 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	::##################################################
 	::# PLUGIN_INSTALL_NAME
 	set "PLUGIN_INSTALL_NAME="
-	if defined PLUGIN_IMPORT_NAME (
+	if defined NAME (
+		set "PLUGIN_INSTALL_NAME=!NAME!"
+	) else if defined PLUGIN_IMPORT_NAME (
 		set "PLUGIN_INSTALL_NAME=!PLUGIN_IMPORT_NAME!"
 	) else if defined PLUGIN_GIT_NAME (
 		set "PLUGIN_INSTALL_NAME=!PLUGIN_GIT_NAME!"
 	) else if defined PLUGIN_URL_NAME (
 		set "PLUGIN_INSTALL_NAME=!PLUGIN_URL_NAME!"						
 	)  
+	::dk_convertToCIdentifier "!PLUGIN_INSTALL_NAME!" PLUGIN_INSTALL_NAME
 	!dk_call! dk_printVar PLUGIN_INSTALL_NAME 									&:: PLUGIN_INSTALL_NAME		: zlib
 
 	::# PLUGIN_INSTALL_VERSION
 	set "PLUGIN_INSTALL_VERSION="
-	if defined PLUGIN_IMPORT_NAME if defined PLUGIN_URL_FILE (
+	if defined VERSION (
+		set "PLUGIN_INSTALL_VERSION=!VERSION!"
+	) else if defined PLUGIN_IMPORT_NAME if defined PLUGIN_URL_FILE (
 		!dk_call! dk_toLower !PLUGIN_IMPORT_NAME! PLUGIN_IMPORT_NAME_LOWER 	
 		!dk_call! dk_toLower !PLUGIN_URL_FILE!    PLUGIN_URL_FILE_LOWER 
 		rem # deduce the plugin version		
@@ -217,6 +260,7 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 				set "PLUGIN_INSTALL_VERSION=master"
 			)  
 		)  
+		
 rem		string FIND !PLUGIN_INSTALL_VERSION! - index 
 		if !index! equ 0 (
 rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION 
@@ -231,7 +275,9 @@ rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 
 	::# PLUGIN_INSTALL_FOLDER
 	set "PLUGIN_INSTALL_FOLDER="
-	if defined PLUGIN_INSTALL_VERSION (
+	if defined FOLDER (
+		set "PLUGIN_INSTALL_FOLDER=!FOLDER!"
+	) else if defined PLUGIN_INSTALL_VERSION (
 		set "PLUGIN_INSTALL_FOLDER=!PLUGIN_INSTALL_NAME!-!PLUGIN_INSTALL_VERSION!"
 	) else ( 
 		set "PLUGIN_INSTALL_FOLDER=!PLUGIN_INSTALL_NAME!"
@@ -239,15 +285,25 @@ rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION
 	!dk_call! dk_printVar PLUGIN_INSTALL_FOLDER 								&:: PLUGIN_INSTALL_FOLDER	: zlib-master
 
 	::# PLUGIN_INSTALL_ROOT
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DKBRANCH_DIR"
-	set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
-	!dk_call! dk_printVar PLUGIN_INSTALL_ROOT 									&:: PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
-
+	set "PLUGIN_INSTALL_ROOT="
+	if defined ROOT (
+		set "PLUGIN_INSTALL_ROOT "!ROOT!"
+		set "ROOT="
+	) else (
+		%dk_call% dk_assertPath DK3RDPARTY_DIR
+		set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
+	)
+	!dk_call! dk_printVar PLUGIN_INSTALL_ROOT 					&:: PLUGIN_INSTALL_ROOT		: C:\Users\Administrator\digitalknob\Development\3rdParty
+	
 	::# PLUGIN_INSTALL_PATH
 	set "PLUGIN_INSTALL_PATH="
-	!dk_call! dk_assertVar PLUGIN_INSTALL_ROOT 
-	!dk_call! dk_assertVar PLUGIN_INSTALL_FOLDER 
-	set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!\!PLUGIN_INSTALL_FOLDER!"			
+	if defined PATH (
+		set "PLUGIN_INSTALL_PATH=!PATH!"
+	) else (
+		!dk_call! dk_assertVar PLUGIN_INSTALL_ROOT 
+		!dk_call! dk_assertVar PLUGIN_INSTALL_FOLDER
+		set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!\!PLUGIN_INSTALL_FOLDER!"	
+	)
 	!dk_call! dk_printVar PLUGIN_INSTALL_PATH 									&:: PLUGIN_INSTALL_PATH		: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
 
 	

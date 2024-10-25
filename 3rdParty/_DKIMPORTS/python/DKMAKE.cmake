@@ -9,6 +9,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://docs.python.org/3/using/windows.html
 # https://silentinstallhq.com/python-2-7-silent-install-how-to-guide/
 # Uninstall: https://stackoverflow.com/a/3819829
+#
+#   windows uninstall registry location
+#	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
+#
 
 ###### IMPORT ######
 dk_validate(host_triple "dk_host_triple()")

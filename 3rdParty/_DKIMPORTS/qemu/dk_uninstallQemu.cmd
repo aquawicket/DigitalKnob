@@ -5,6 +5,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::####################################################################
 ::# dk_uninstallQemu()
 ::#
+::#	  windows uninstall registry location
+::#   HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
+::#
 :dk_uninstallQemu
 	call dk_debugFunc 0
 	

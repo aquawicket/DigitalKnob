@@ -7,7 +7,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
-
+#
+#	windows uninstall registry location
+#	HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\{060aa283-cf16-4aad-9250-bd91ab4c3d2f}
+#
 dk_load(dk_builder)
 
 ### only accept windows hosts
