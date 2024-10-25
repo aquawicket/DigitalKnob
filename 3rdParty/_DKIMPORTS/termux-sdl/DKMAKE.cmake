@@ -11,7 +11,7 @@ dk_load(dk_builder)
 
 if(NOT ANDROID_HOST)
 	return()
-endf()
+endif()
 
 #dk_import(https://github.com/lzhiyong/termux-sdl.git)
 dk_import(https://github.com/lzhiyong/termux-sdl/archive/refs/heads/master.zip)

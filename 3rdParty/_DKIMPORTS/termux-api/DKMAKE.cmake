@@ -13,7 +13,7 @@ dk_load(dk_builder)
 
 if(NOT ANDROID_HOST)
 	return()
-endf()
+endif()
 
 #dk_import(https://github.com/termux/termux-api.git)
 dk_import(https://github.com/termux/termux-api/archive/refs/heads/master.zip)

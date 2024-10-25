@@ -11,7 +11,7 @@ dk_load(dk_builder)
 
 if(NOT ANDROID_HOST)
 	return()
-endf()
+endif()
 
 # apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && ${BASH_EXE} InstallTools.sh
 
