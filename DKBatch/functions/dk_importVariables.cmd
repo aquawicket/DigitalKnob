@@ -273,14 +273,11 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 			)  
 		)  
 		
-rem		string FIND !PLUGIN_INSTALL_VERSION! - index 
-		if !index! equ 0 (
-rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION 
+		if "!PLUGIN_INSTALL_VERSION:~0,1!" == "-" (
+			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
-		
-rem		string FIND !PLUGIN_INSTALL_VERSION! _ index 
-		if !index! equ 0 (
-rem			string SUBSTRING !PLUGIN_INSTALL_VERSION! 1 -1 PLUGIN_INSTALL_VERSION 
+		if "!PLUGIN_INSTALL_VERSION:~0,1!" == "_" (
+			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
 	)    
 	!dk_call! dk_printVar PLUGIN_INSTALL_VERSION 								&:: PLUGIN_INSTALL_VERSION	: master
