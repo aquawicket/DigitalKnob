@@ -343,17 +343,15 @@ function(dk_importVariables url)
 	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
 	dk_printVar(${CURRENT_PLUGIN})										# ZLIB						: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	
-	
-	
-	# <PLUGIN>_DIR
+	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###
 	unset(${CURRENT_PLUGIN}_DIR)
-	if(NOT "${CURRENT_PLUGIN}" STREQUAL "GIT") ### DO NOT USE GIT_DIR ###
+	if(NOT "${CURRENT_PLUGIN}" STREQUAL "GIT")
 		dk_set(${CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
 		dk_printVar(${CURRENT_PLUGIN}_DIR)								# ZLIB_DIR					: C:/Users/Administrator/digitalknob/Development/3rdParty/zlib-master
 	endif()
 	
 	# <PLUGIN>_URL
-	unset(${CURRENT_PLUGIN}_DIR)
+	unset(${CURRENT_PLUGIN}_URL)
 	dk_set(${CURRENT_PLUGIN}_URL ${PLUGIN_URL})
 	dk_printVar(${CURRENT_PLUGIN}_URL)									# ZLIB_URL					: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
@@ -390,7 +388,6 @@ function(dk_importVariables url)
 		dk_set(${CURRENT_PLUGIN}_TAG ${PLUGIN_GIT_TAG})
 		dk_printVar(${CURRENT_PLUGIN}_TAG)								# ZLIB_TAG					:
 	endif()
-	
 	
 	
 	

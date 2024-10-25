@@ -2,22 +2,21 @@
 if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 
 ::#################################################################################
-::# dk_getOptionValue(NAME)
+::# dk_getOptionValue(OPTION)
 ::#
-:dk_getOptionValue NAME
+:dk_getOptionValue OPTION
 	call dk_debugFunc 0 99
 	echo dk_getOptionValue
  setlocal
 	
     :getParameter_loop
-	echo %~1 == %~2
+	if "%~2" == "" (
+		%return%
+	)
 	if "%~1" == "%~2" (
 	
 		set "_value_=%~3"
 		
-	)
-	if "%~2" == "" (
-		%return%
 	)
     shift /2 
     goto getParameter_loop 
