@@ -272,7 +272,6 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 				set "PLUGIN_INSTALL_VERSION=master"
 			)  
 		)  
-		
 		if "!PLUGIN_INSTALL_VERSION:~0,1!" == "-" (
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		)  
