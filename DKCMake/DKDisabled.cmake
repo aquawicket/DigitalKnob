@@ -54,6 +54,9 @@ dk_disable(openframeworks)
 dk_disable(poco)
 dk_disable(podofo)
 dk_disable(sdl_mixer)
+dk_disable(rmlui_64b36dc)
+dk_disable(rmlui-d3d11)
+
 ###########################
 
 
