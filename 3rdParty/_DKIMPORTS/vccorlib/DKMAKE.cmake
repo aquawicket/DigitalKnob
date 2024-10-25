@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############## vccorlib ############
 # vccorlib
+dk_load(dk_builder)
 
 if(NOT WIN)
 	dk_undepend(vccorlib)
@@ -14,8 +15,6 @@ if(NOT WIN)
 endif()
 
 dk_findLibrary(vccorlib.lib)
-
-
 
 # MSYS2 (-lvccorlib)
 if(MSYSTEM)

@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ version ############
 # https://learn.microsoft.com/en-us/windows/win32/api/winver/nf-winver-getfileversioninfoa
+dk_load(dk_builder)
 
 if(NOT WIN)
 	dk_undepend(version)
@@ -14,8 +15,6 @@ if(NOT WIN)
 endif()
 
 dk_findLibrary(version.lib)
-
-
 
 # MSYS2 (-lversion)
 if(MSYSTEM)
