@@ -5,8 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ termux-sdl ############
 #https://github.com/lzhiyong/termux-sdl.git
+dk_load(dk_builder)
+
+if(NOT ANDROID_HOST)
+	return()
+endf()
 
 #dk_import(https://github.com/lzhiyong/termux-sdl.git)
 dk_import(https://github.com/lzhiyong/termux-sdl/archive/refs/heads/master.zip)

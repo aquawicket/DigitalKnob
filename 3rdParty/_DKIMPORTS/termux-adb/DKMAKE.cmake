@@ -5,8 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ termux-adb ############
 # https://github.com/MasterDevX/Termux-ADB
+dk_load(dk_builder)
+
+if(NOT ANDROID_HOST)
+	return()
+endf()
 
 # apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && ${BASH_EXE} InstallTools.sh
 
