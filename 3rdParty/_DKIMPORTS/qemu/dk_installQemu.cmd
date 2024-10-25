@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if not defined QEMU_DL %dk_call% dk_error "QEMU_DL is invalid"
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	%dk_call% dk_importVariables %QEMU_DL% ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables %QEMU_DL% ROOT %DKTOOLS_DIR% NAME qemu
 	
     ::%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
     ::%dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER

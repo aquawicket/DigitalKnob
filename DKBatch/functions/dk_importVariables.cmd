@@ -50,13 +50,13 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 	!dk_call! dk_getOptionValue  FOLDER     %*      &:: zlib-master
 	!dk_call! dk_printVar FOLDER
 	
-::	set "NAME="
-::	!dk_call! dk_getOptionValue  NAME       %*      &:: zlib
-::	!dk_call! dk_printVar NAME
+	set "NAME="
+	!dk_call! dk_getOptionValue  NAME       %*      &:: zlib
+	!dk_call! dk_printVar NAME
 	
-::	set "PATH="
-::	!dk_call! dk_getOptionValue  PATH       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
-::	!dk_call! dk_printVar PATH
+	set "DIR="
+	!dk_call! dk_getOptionValue  DIR       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty\zlib-master
+	!dk_call! dk_printVar DIR
 	
 	set "ROOT="
 	!dk_call! dk_getOptionValue  ROOT       %*      &:: C:\Users\Administrator\digitalknob\Development\3rdParty
@@ -173,7 +173,11 @@ if not defined DKINIT call "!DKBATCH_FUNCTIONS_DIR_!DK.cmd" %~0 %*
 
 	rem # PLUGIN_IMPORT_NAME
 	set "PLUGIN_IMPORT_NAME="
-	!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
+	if defined NAME (
+		set(PLUGIN_IMPORT_NAME "!NAME!")
+	) else (
+		!dk_call! dk_basename "!PLUGIN_IMPORT_PATH!" PLUGIN_IMPORT_NAME 					
+	)
 	!dk_call! dk_printVar PLUGIN_IMPORT_NAME 								& rem PLUGIN_IMPORT_NAME		: zlib
 
 	rem # PLUGIN_IMPORT_NAME_LOWER
