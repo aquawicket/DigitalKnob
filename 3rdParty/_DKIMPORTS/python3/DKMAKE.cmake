@@ -45,7 +45,7 @@ if(NOT EXISTS ${PYTHON3_EXE})
 endif()
 dk_assertPath(${PYTHON3_EXE})
 
-if(NOT PYTHON3_DIR)
+if(NOT EXISTS "${PYTHON3_DIR}")
 	dk_dirname("${PYTHON3_EXE}" PYTHON3_DIR)
 endif()
 dk_assertPath(${PYTHON3_DIR})
