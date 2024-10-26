@@ -1,5 +1,14 @@
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
+if(ANDROID OR IOS OR IOSSIM)
+	dk_undepend(DKCef)
+	dk_return()
+endif()
+if(NOT HAVE_cef_binary)
+	dk_undepend(DKCef)
+	dk_return()
+endif()
+
 dk_depend(DKCef)
 dk_assets(DKCefChild)
 
