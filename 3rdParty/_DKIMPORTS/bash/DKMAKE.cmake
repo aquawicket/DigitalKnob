@@ -102,4 +102,4 @@ endif()
 #	dk_error("BASH_EXE is not found")
 #endif()
 
-dk_pause()
+#dk_pause()
