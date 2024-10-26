@@ -32,6 +32,7 @@ dk_DKHOME_DIR() {
 	
 	### HOME -> DKHOME_DIR ###
 	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
+	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"     #ANDROID
 	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
 	dk_call dk_printVar DKHOME_DIR
 	

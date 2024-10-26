@@ -65,7 +65,7 @@ DKHOME_DIR(){
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r'))
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 && export DKHOME_DIR=${HOME}
-	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"
+	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"  #ANDROID
 	[ -e "${DKHOME_DIR-}" ]	  && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
 	#echo "DKHOME_DIR = '${DKHOME_DIR-}'" &>/dev/tty
 }
