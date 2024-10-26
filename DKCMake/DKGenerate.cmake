@@ -109,11 +109,11 @@ foreach(plugin ${dkdepend_list})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
-		if(${plugin} IN_LIST dk_disabled_list)
+		if(plugin IN_LIST dk_disabled_list)
 			#dk_verbose("if(NOT ${plugin} IN_LIST dk_disabled_list) = true")
 			dk_buildLog("${plugin}")
+			continue()
 		endif()
-		break()
 		dk_fatal("${plugin} variable is invalid")
 	endif()
 	
