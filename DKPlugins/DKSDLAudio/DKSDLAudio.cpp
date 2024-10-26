@@ -31,10 +31,11 @@
 
 bool DKSDLAudio::Init(){
 	DKDEBUGFUNC();
+	
+#ifdef HAVE_sdl_mixer	
 	if(SDL_Init(SDL_INIT_AUDIO) < 0)
 		return DKERROR("Could not Init SDL_Audio\n");
 	
-#ifdef HAVE_sdl_mixer	
 	//Initialize SDL_mixer 
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 		return DKERROR("DKSDLAudio::Init(): could not load mixer\n");
