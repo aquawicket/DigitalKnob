@@ -5,14 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ webref ############
 # https://github.com/w3c/webref.git
+dk_load(dk_builder)
 
 dk_depend(nodejs)
 
-#dk_import(https://github.com/w3c/webref.git BRANCH curated PATCH)
-dk_import(https://github.com/w3c/webref/archive/refs/heads/curated.zip PATCH)
-
+dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
 
 ### Build Interface Tree ###
 if(WIN)

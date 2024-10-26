@@ -5,13 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ webidlpedia ############
 # https://github.com/dontcallmedom/webidlpedia.git
+dk_load(dk_builder)
 
-
-#dk_import(https://github.com/dontcallmedom/webidlpedia.git BRANCH gh-pages)
-dk_import(https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip)
-
+#dk_import(https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip)
+dk_import(https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip)
 
 ### Build WebAPIs Tree ###
 dk_makeDirectory(${WEBIDLPEDIA}/DKWebAPIs)

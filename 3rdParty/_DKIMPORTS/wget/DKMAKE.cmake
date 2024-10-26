@@ -5,13 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ wget ############
 dk_load(dk_builder)
-# wget
-
-
 
 dk_installPackage(wget)
-
 
 ### Msys2 ###
 if(MSYSTEM)

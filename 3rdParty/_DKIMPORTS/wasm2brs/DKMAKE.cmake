@@ -5,12 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ wasm2brs ############
 # https://github.com/MotleyCoderDev/wasm2brs.git
-
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://github.com/MotleyCoderDev/wasm2brs.git BRANCH main)
-dk_import(https://github.com/MotleyCoderDev/wasm2brs/archive/refs/heads/main.zip)
+dk_import(https://github.com/MotleyCoderDev/wasm2brs/archive/671b23b8.zip)
 
 # TODO

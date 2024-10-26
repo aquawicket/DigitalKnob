@@ -61,6 +61,7 @@ dk_disable(sdl_net)
 dk_disable(tesseract)
 dk_disable(uwebsockets)
 dk_disable(waave)
+dk_disable(wasm3)
 ###########################
 
 

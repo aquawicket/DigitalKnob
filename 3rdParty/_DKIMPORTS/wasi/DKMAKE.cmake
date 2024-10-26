@@ -5,10 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ wasi ############
 # https://github.com/WebAssembly/WASI.git
-
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://github.com/WebAssembly/WASI.git BRANCH main)
-dk_import(https://github.com/WebAssembly/WASI/archive/refs/heads/main.zip)
+dk_import(https://github.com/WebAssembly/WASI/archive/dbe2733c.zip)

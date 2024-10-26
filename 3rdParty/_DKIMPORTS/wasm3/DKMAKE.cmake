@@ -5,14 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ wasm3 ############
 # https://github.com/wasm3/wasm3.git
-
+dk_load(dk_builder)
 
 ### IMPORT ###
-#dk_import(https://github.com/wasm3/wasm3.git BRANCH main)
-dk_import(https://github.com/wasm3/wasm3/archive/refs/heads/main.zip)
-
+dk_import(https://github.com/wasm3/wasm3/archive/79d412ea.zip)
 
 ### LINK ###
 dk_include				(${WASM3})
@@ -26,10 +24,8 @@ endif()
 WIN_dk_libDebug			(${WASM3}/${triple}/source/${DEBUG_DIR}/m3.lib)
 WIN_dk_libRelease		(${WASM3}/${triple}/source/${RELEASE_DIR}/m3.lib)
 
-
 ### GENERATE ###
 dk_configure(${WASM3})
-
 
 ### COMPILE ###
 dk_build(${WASM3})
