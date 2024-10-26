@@ -5,10 +5,11 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ glew #############
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
+dk_load(dk_builder)
 if(IOS OR IOSSIM OR ANDROID)
 	dk_undepend(glew)
 	dk_return()
@@ -17,28 +18,25 @@ endif()
 ### DEPEND ###
 dk_depend(libglu1-mesa-dev)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/nigels-com/glew.git)
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TRIPLE_DIR}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
-
 ### LINK ###
-dk_define				(GLEW_STATIC)
-dk_include				(${GLEW_DIR}/include									GLEW_INCLUDE_DIR)
+dk_define			(GLEW_STATIC)
+dk_include			(${GLEW_DIR}/include									GLEW_INCLUDE_DIR)
 if(MSVC)
-	WIN_dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
-	WIN_dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libglew32.lib	GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libglew32.lib	GLEW_RELEASE_LIBRARY)
 elseif(APPLE)
-	APPLE_dk_libDebug	(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
-	APPLE_dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libGLEW.a		GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libGLEW.a		GLEW_RELEASE_LIBRARY)
 else()
-	dk_libDebug			(${GLEW_CONFIG_DIR}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
-	dk_libRelease		(${GLEW_CONFIG_DIR}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
 endif()
-DEBUG_dk_set			(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
-RELEASE_dk_set			(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
+DEBUG_dk_set		(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
+RELEASE_dk_set		(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
 
 ### 3RDPARTY LINK ###
 # dk_set(GLEW_CMAKE
@@ -66,7 +64,6 @@ else()
 endif()
 
 
-	
 ### GENERATE ###
 dk_configure(${GLEW_DIR}/build/cmake)
 #dk_copy(${GLEW}/${triple}/lib/${DEBUG_DIR} ${GLEW}/${triple}/CMakeFiles/Export/lib/ OVERWRITE)

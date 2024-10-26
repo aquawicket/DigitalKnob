@@ -5,17 +5,17 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ homebrew ############
 # https://github.com/Homebrew/brew
-# https://brew.sh/
+# https://brew.sh
+dk_load(dk_builder)
 if(NOT MAC_HOST)
 	dk_undepend(homebrew)
 	dk_return()
 endif()
 
 #dk_import(https://github.com/Homebrew/brew)
-
-MAC_dk_queueCommand("ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"")
+dk_queueCommand("ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"")
 # https://github.com/Homebrew/brew/issues/10368
-MAC_dk_queueCommand(rm -fr "$(brew --repo homebrew/core)")
-MAC_dk_queueCommand(brew tap homebrew/core)
+dk_queueCommand(rm -fr "$(brew --repo homebrew/core)")
+dk_queueCommand(brew tap homebrew/core)

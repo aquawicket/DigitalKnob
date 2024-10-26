@@ -80,7 +80,7 @@ set(GIT_VERSION ${GIT_VERSION})
 dk_info("###### git ######")
 dk_info("${GIT_EXE}")
 dk_info("${GIT_VERSION}")
-return()
+dk_return()
 
 
 #if(MSYSTEM)

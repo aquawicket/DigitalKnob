@@ -5,13 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ game_controller ############
 # https://developer.apple.com/documentation/gamecontroller?language=objc
-
+dk_load(dk_builder)
 if(NOT APPLE)
 	dk_undepend(game_controller)
 	dk_return()
 endif()
-
 
 dk_findLibrary(GameController)

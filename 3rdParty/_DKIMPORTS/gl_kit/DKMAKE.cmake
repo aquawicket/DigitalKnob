@@ -5,13 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ gl_kit  ############
 # https://developer.apple.com/documentation/GLKit?language=objc
-
+dk_load(dk_builder)
 if(NOT APPLE)
 	dk_undepend(gl_kit)
 	dk_return()
 endif()
-
 
 dk_findLibrary(GLKit)

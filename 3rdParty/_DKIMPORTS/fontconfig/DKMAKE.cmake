@@ -15,7 +15,7 @@ if(APPLE)
 	#dk_depend(sudo)
 	#dk_command(${SUDO_EXE} port install fontconfig)
 	dk_installPackage(fontconfig)
-	return()
+	dk_return()
 endif()
 
 ### IMPORT ###
@@ -34,15 +34,12 @@ if(RELEASE)
 	set(FONTCONFIG_LIBRARY ${FONTCONFIG_RELEASE_LIBRARY})
 endif()
 
-
 ### 3RDPARTY LINK ###
-dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG_INCLUDE_DIR} -DFONTCONFIG_LIBRARY=${FONTCONFIG_LIBRARY})
+dk_set				(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG_INCLUDE_DIR} -DFONTCONFIG_LIBRARY=${FONTCONFIG_LIBRARY})
 
 ### GENERATE / COMPILE ###
 dk_cd				(${FONTCONFIG_DIR})
-#dk_queueCommand		(autoupdate)
-#dk_queueCommand		(autoconf)
-
-dk_configure			(${FONTCONFIG_DIR})
-
-dk_build				(${FONTCONFIG_DIR})
+#dk_queueCommand	(autoupdate)
+#dk_queueCommand	(autoconf)
+dk_configure		(${FONTCONFIG_DIR})
+dk_build			(${FONTCONFIG_DIR})

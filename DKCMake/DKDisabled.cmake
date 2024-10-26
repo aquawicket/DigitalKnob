@@ -64,6 +64,7 @@ dk_disable(waave)
 dk_disable(wasm3)
 dk_disable(webref)
 dk_disable(windows-sdk)
+dk_disable(wxwidgets)
 ###########################
 
 
