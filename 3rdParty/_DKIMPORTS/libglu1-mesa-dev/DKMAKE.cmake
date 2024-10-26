@@ -13,7 +13,4 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
-#dk_depend(sudo)
-#dk_command(${SUDO_EXE} apt -y install libglu1-mesa-dev)
 dk_installPackage(libglu1-mesa-dev)

@@ -13,7 +13,4 @@ if(NOT LINUX_HOST)
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
-dk_depend(sudo)
-#dk_command(${SUDO_EXE} apt -y install libgtkglext1-dev)
 dk_installPackage(libgtkglext1-dev)

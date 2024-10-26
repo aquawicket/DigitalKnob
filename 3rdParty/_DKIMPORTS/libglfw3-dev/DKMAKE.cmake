@@ -14,9 +14,6 @@ endif()
 
 ### INSTALL ###
 if(LINUX)
-	#dk_cd(/usr)
-	#dk_depend(sudo)
-	#dk_command(${SUDO_EXE} apt -y install libglfw3-dev)
 	dk_installPackage(libglfw3-dev)
 endif()
 if(MAC)

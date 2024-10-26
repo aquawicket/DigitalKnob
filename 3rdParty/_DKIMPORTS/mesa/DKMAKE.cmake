@@ -15,7 +15,6 @@ endif()
 
 
 ### INSTALL ###
-#dk_cd(/usr)
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_installPackage(mesa)
 	dk_installPackage(mesa-dri-gallium)

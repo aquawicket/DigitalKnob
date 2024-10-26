@@ -10,9 +10,6 @@ dk_load(dk_builder)
 
 ### INSTALL ###
 if(LINUX)
-	dk_cd(/usr)
-	dk_depend(sudo)
-	#dk_command(${SUDO_EXE} apt -y install libgnutls)
 	dk_installPackage(libgnutls)
 endif()
 if(MAC)

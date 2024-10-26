@@ -13,9 +13,6 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
-dk_depend(sudo)
-#dk_command(${SUDO_EXE} apt -y install libglib2.0-dev)
 dk_installPackage(libglib2.0-dev)
 
 find_package(PkgConfig REQUIRED)

@@ -5,28 +5,26 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ vorbis ############
 # https://github.com/xiph/vorbis
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(libgcc)
 dk_depend(msys2)
 dk_depend(ogg)
 
-
 ### IMPORT ###
 #dk_import(https://github.com/xiph/vorbis.git)
 dk_getFileParam("${DKIMPORTS_DIR}/vorbis/vorbis.txt" VORBIS_DL)
 dk_import("${VORBIS_DL}")
 
-
 ### LINK ###
 dk_include				(${VORBIS_DIR}/include										VORBIS_INCLUDE_DIR)
 
-#if(ANDROID)
 if(MULTI_CONFIG)
 	if(WIN AND MSVC)
 		dk_libDebug		(${VORBIS_CONFIG_DIR}/lib/${DEBUG_DIR}/vorbis.lib			VORBIS_DEBUG_LIB)
@@ -51,8 +49,7 @@ else()
 		dk_libRelease	(${VORBIS_CONFIG_DIR}/lib/libvorbisenc.a					VORBISENC_RELEASE_LIB)
 		dk_libRelease	(${VORBIS_CONFIG_DIR}/lib/libvorbisfile.a					VORBISFILE_RELEASE_LIB)
 endif()
-
-		
+	
 if(DEBUG)
 	dk_set(VORBIS_LIBRARY		${VORBIS_DEBUG_LIB})
 	dk_set(DVORBISENC_LIBRARY	${VORBISFILE_DEBUG_LIB})
@@ -73,13 +70,9 @@ dk_set(VORBIS_CMAKE
 	-DVORBIS_LIBRARIES=${DVORBIS_LIBRARIES}
 	-DVORBISFILE_LIBRARY=${VORBISFILE_LIBRARY}
 	-DVORBISENC_LIBRARY=${VORBISENC_LIBRARY})
-
 	
 ### GENERATE ###
 dk_configure(${VORBIS_DIR} ${OGG_CMAKE})
 
-
-
 ### BUILD ###
 dk_build(${VORBIS_DIR})
-

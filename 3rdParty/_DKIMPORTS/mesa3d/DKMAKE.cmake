@@ -5,17 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ mesa ############
 # https://www.mesa3d.org
-
+dk_load(dk_builder)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(mesa)
 	dk_return()
 endif()
 
-
 ### INSTALL ###
-#dk_cd(/usr)
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_installPackage(mesa-dev)
 else()

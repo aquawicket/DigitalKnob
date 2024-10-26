@@ -17,8 +17,6 @@ if(MAC)
 endif()
 
 if(LINUX OR RASPBERRY)
-	#dk_cd(/usr)
-	
 	if(EXISTS /usr/include/X11)
 		### LINK ###
 		dk_include(/usr/include/X11)
@@ -31,8 +29,6 @@ if(LINUX OR RASPBERRY)
 			#dk_command(tce-load -wi libX11-dev.tcz)
 			dk_installPackage(libX11-dev.tcz)
 		else()
-			#dk_depend(sudo)
-			#dk_command(${SUDO_EXE} apt -y install libx11-dev)
 			dk_installPackage(libx11-dev)
 		endif()
 	endif()

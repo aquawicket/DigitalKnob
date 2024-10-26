@@ -12,14 +12,10 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-#dk_cd(/usr)
-
 if(TINYCORE)
 	#dk_command(tce-load -wi libXrandr-dev.tcz)
 	dk_installPackage(libXrandr-dev.tcz)
 else()
-	#dk_depend(sudo)
-	#dk_command(${SUDO_EXE} apt -y install libxrandr-dev)
 	dk_installPackage(libxrandr-dev)
 endif()
 

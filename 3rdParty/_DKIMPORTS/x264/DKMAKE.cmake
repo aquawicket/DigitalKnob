@@ -24,8 +24,8 @@ dk_libRelease	(${X264_RELEASE_DIR}/libx264.a)
 
 ### GENERATE / COMPILE ###
 if(EMSCRIPTEN)
-	dk_configure(${X264} --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
+	dk_configure(${X264} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
 else()
-	dk_configure(${X264} --disable-asm)
+	dk_configure(${X264} ../../configure --disable-asm)
 endif()
 dk_build        (${X264})

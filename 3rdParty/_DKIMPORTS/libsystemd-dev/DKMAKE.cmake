@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ libsystemd-dev ############
 dk_load(dk_builder)
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libsystemd-dev)
@@ -12,11 +13,7 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-#dk_cd(/usr)
-#dk_depend(sudo)
-#dk_command(${SUDO_EXE} apt -y install libsystemd-dev)
 dk_installPackage(libsystemd-dev)
-
 
 ### LINK ###
 dk_include(/usr/include/systemd)

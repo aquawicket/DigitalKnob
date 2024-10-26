@@ -18,9 +18,6 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 endif()
 
 ### INSTALL ###
-dk_cd(/usr)
-dk_depend(sudo)
-#dk_command(${SUDO_EXE} apt -y install libasound2-dev)
 dk_installPackage(libasound2-dev)
 
 ### Tiny Core Linux ###

@@ -14,8 +14,6 @@ endif()
 
 ### INSTALL ###
 if(LINUX OR RASPBERRY)
-	#dk_cd(/usr)
-	#dk_depend(sudo)
 	#dk_installPackage(libatomic)
 
 	### LINK ###
