@@ -13,9 +13,8 @@ macro(dk_return)
 	if(PRINT_DKRETURNS)
 		dk_debug("${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
 	endif()
-	dk_return()
+	return()
 endmacro()
-dk_createOsMacros("dk_return")
 
 
 
