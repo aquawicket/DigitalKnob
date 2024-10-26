@@ -5,32 +5,34 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
-# FIXME:  Install to /3rdParty only
-
+############ doxygen ############
 # https://github.com/doxygen/doxygen.git
 # https://sourceforge.net/projects/doxygen
+# FIXME:  Install to /3rdParty only
+dk_load(dk_builder)
+
 if(NOT WIN_HOST)
 	dk_undepend(doxygen)
 	dk_return()
 endif()
 
-
 ### IMPORT ###
-LINUX_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
-if(NOT EXISTS ${DOXYGEN_EXE})
-	LINUX_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz)
-	#LINUX_HOST_dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
+if(WIN_HOST)
+	dk_set(DOXYGEN_EXE "${ProgramFiles}/doxygen/bin/doxygen.exe")
+else()
+	dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
 endif()
 
-MAC_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
-if(NOT EXISTS ${DOXYGEN_EXE})
-	MAC_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
-	MAC_HOST_dk_command(${DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
-endif()
 
-WIN_HOST_dk_set(DOXYGEN_EXE "${ProgramFiles}/doxygen/bin/doxygen.exe")
 if(NOT EXISTS ${DOXYGEN_EXE})
-	WIN_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
-	WIN_HOST_dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
+	if(WIN_HOST)
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
+		dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)
+	elseif(MAC_HOST)
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
+		dk_command(${DKDOWNLOAD_DIR}/Doxygen-1.9.6.dmg)
+	else()
+		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz)
+		#dk_command(${DKDOWNLOAD_DIR}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
+	endif()
 endif()

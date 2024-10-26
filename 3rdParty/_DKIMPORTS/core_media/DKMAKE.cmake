@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ core_media ############
 # https://developer.apple.com/documentation/coremedia?language=objc
-
+dk_load(dk_builder)
 if(NOT APPLE)
 	dk_undepend(core_media)
 	dk_return()

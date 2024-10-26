@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ core_video #############
 # https://developer.apple.com/documentation/corevideo
-
+dk_load(dk_builder)
 if(NOT APPLE)
 	dk_undepend(core_video)
 	dk_return()

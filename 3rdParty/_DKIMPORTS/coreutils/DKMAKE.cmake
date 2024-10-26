@@ -9,7 +9,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://formulae.brew.sh/formula/coreutils
 
 if(NOT MAC_HOST)
-	return()
+	dk_undepend(coreutils)
+	dk_return()
 endif()
 
 dk_load(dk_builder)

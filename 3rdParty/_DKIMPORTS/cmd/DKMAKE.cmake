@@ -25,7 +25,7 @@ if(WIN_HOST)
 	
 	if(EXISTS ${CMD_EXE})
 		dk_set(CMD_EXE ${CMD_EXE})   # set it globally
-		return()
+		dk_return()
 	endif()
 endif()
 

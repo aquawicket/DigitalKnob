@@ -22,7 +22,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 		dk_installPackage(${CMAKE_IMPORT})
 		dk_findProgram(CMAKE_EXE cmake)
 	endif()
-	return()
+	dk_return()
 endif()
 
 ###### DOWNLOAD ######
@@ -90,14 +90,14 @@ endif()
 if(NOT CMAKE_EXE)
 	dk_fatal("COULD NOT FIND CMAKE_EXE")
 	dk_set(CMAKE_EXE ${CMAKE_COMMAND})
-	return()
+	dk_return()
 endif()
 
 execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
 
-return()
+dk_return()
 
 
 
@@ -174,7 +174,7 @@ if(COMPILE_CMAKE)
 			 
 		dk_build(${CMAKE})
 		
-		return()
+		dk_return()
 	endif()
 endif()
 	

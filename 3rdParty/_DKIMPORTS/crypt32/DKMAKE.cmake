@@ -5,17 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ crypt32 ############
 # https://learn.microsoft.com/en-us/windows/win32/api/wincrypt
-
+dk_load(dk_builder)
 if(NOT WIN)
 	dk_undepend(crypt32)
 	dk_return()
 endif()
 
 dk_findLibrary(crypt32.lib)
-
-
 
 # MSYS2 (-lcrypt32)
 if(MSYSTEM)

@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ dl ############
 dk_load(dk_builder)
 
 if(NOT UNIX)
@@ -12,16 +13,13 @@ if(NOT UNIX)
 	dk_return()
 endif()
 
-
 if(ANDROID)
 	dk_depend(android-ndk)
 endif()
 
-
 dk_findLibrary(dl NO_HALT)
 if(LINUX)
 	dk_lib	(dl)
-endif()
-if(RASPBERRY)
+elseif(RASPBERRY)
 	dk_lib	(dl)
 endif()
