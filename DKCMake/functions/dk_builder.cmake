@@ -3,7 +3,7 @@ include_guard()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple   		"dk_host_triple()")
-#dk_validate(TARGET_TRIPLE 		"dk_TARGET_TRIPLE()")
+#dk_validate(TARGET_TRIPLE 		"dk_target_triple()")
 dk_validate(DKBUILD_TYPE		"dk_DKBUILD_TYPE()")
 dk_validate(CONFIG_PATH   		"dk_CONFIG_PATH()")
 #dk_validate(CMAKE_C_COMPILER	"dk_depend(clang)")

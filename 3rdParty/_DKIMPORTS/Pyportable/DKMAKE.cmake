@@ -5,15 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ pyportable ############
 # https://github.com/sganis/pyportable
-
+dk_load(dk_builder)
 
 ### INSTALL ###
 if(WIN_HOST)
 	dk_set(PYTHON_EXE ${pyportable}/python.exe)
 	
-	WIN_HOST_dk_import(https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip)
+	dk_import(https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip)
 
 	if(NOT EXISTS ${pyportable}/Scripts/pip.exe)
 		dk_executeProcess(${PYTHON_EXE} -m ensurepip)
@@ -26,7 +26,6 @@ if(WIN_HOST)
 	
 	dk_set(Python_LIBRARIES ${pyportable}/libs)
 	dk_debug(Python_LIBRARIES)
-
 endif()
 
 #dk_debug(PYTHON_EXE)
