@@ -17,8 +17,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://gsdview.appspot.com/chromium-browser-official/chromium-81.0.4044.138.tar.xz										### chromium source
 
 dk_load(dk_builder)
-if(IOS OR IOSSIM OR ANDROID)
+if(IOS OR IOSSIM OR ANDROID OR (WIN AND (NOT MSVC)))
 	dk_undepend(cef_binary)
+	dk_disable(cef_binary)
 	dk_return()
 endif()
 
@@ -84,13 +85,14 @@ WIN_dk_libRelease	(${CEF_CONFIG_DIR}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dl
 #LINUX_dk_libRelease(${CEF_BINARY_RELEASE_DIR}/cef_sandbox.a)
 #MAC_dk_libDebug	(${CEF_BINARY_DEBUG_DIR}/cef_sandbox.a)
 #MAC_dk_libRelease	(${CEF_BINARY_RELEASE_DIR}/cef_sandbox.a)
-WIN_dk_libDebug		(${CEF_BINARY_DEBUG_DIR}/cef_sandbox.lib)
-WIN_dk_libRelease	(${CEF_BINARY_RELEASE_DIR}/cef_sandbox.lib)
+if(WIN)
+	dk_libDebug		(${CEF_BINARY_DEBUG_DIR}/cef_sandbox.lib)
+	dk_libRelease	(${CEF_BINARY_RELEASE_DIR}/cef_sandbox.lib)
+endif()
 
 ### GENERATE ###
-LINUX_dk_configure	(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
-MAC_dk_configure	(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
-WIN_dk_configure	(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
+dk_configure		(${CEF_BINARY_DIR} -DUSE_SANDBOX=OFF)
+
 
 ### COMPILE ###
 dk_build			(${CEF_BINARY_DIR} libcef_dll_wrapper)

@@ -5,9 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ nasm ############
 # https://www.nasm.us
-
+dk_load(dk_builder)
 dk_validate(host_triple "dk_host_triple()")
 if(ANDROID_HOST)
 	return()

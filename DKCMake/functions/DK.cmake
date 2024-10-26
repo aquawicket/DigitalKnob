@@ -140,6 +140,7 @@ function(dk_DKCMAKE_VARS)
 	get_filename_component(DKCMAKE_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 	set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "")
 	set(DKCMAKE_FUNCTIONS_DIR ${DKCMAKE_DIR}/functions CACHE INTERNAL "")
+	set(DKCMAKE_FUNCTIONS_DIR_ ${DKCMAKE_FUNCTIONS_DIR}/ CACHE INTERNAL "")
 endfunction(dk_DKCMAKE_VARS)
 
 ##################################################################################

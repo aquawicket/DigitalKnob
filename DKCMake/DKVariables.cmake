@@ -184,8 +184,6 @@ dk_TARGET_TRIPLE()
 ## and we should be able to remove them once everythng is working.
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
-dk_TARGET_TRIPLE()
-
 
 ### Set other OS Specific variables ###
 # RPI and RPI32
