@@ -5,26 +5,21 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ bzip2-win-build ############
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
-
+dk_load(dk_builder)
 if(UNIX)
 	dk_undepend(bzip2-win-build)
 	dk_return()
 endif()
 
-
 ### DEPEND ###
 dk_depend(libgcc)
 dk_depend(msys2)
 
-
 ### IMPORT ###
-#dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
-dk_import(https://github.com/kiyolee/bzip2-win-build/archive/refs/heads/main.zip)
-
-
+dk_import(https://github.com/kiyolee/bzip2-win-build/archive/8baa40cf.zip)
 
 ### LINK ###
 dk_include				(${BZIP2_WIN_BUILD_DIR}												BZIP2_INCLUDE_DIR)
@@ -33,10 +28,8 @@ WIN_X86_dk_libRelease	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/${RELEASE_DIR}/libbz2-stati
 WIN_X86_64_dk_libDebug	(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
 WIN_X86_64_dk_libRelease(${BZIP2_WIN_BUILD_TRIPLE_DIR}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 
-
 ### 3RDPARTY LINK ###
 WIN_dk_set(BZIP2_WIN_BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
-	
 	
 ### COMPILE ###
 if(WIN_X86)
@@ -47,7 +40,6 @@ if(WIN_X86)
 	dk_cd			(${BZIP2_WIN_BUILD_TRIPLE_DIR})
 	dk_build		(${BZIP2_WIN_BUILD} libbz2-static)
 endif()
-
 
 if(WIN_X86_64)
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2.rc ${BZIP2_WIN_BUILD_TRIPLE_DIR}/bzip2.rc) #copy project files that came with bzip

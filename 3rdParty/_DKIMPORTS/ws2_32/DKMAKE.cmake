@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ ws2_32 ############
 # https://docs.microsoft.com/en-us/windows/win32/winsock/creating-a-basic-winsock-application
+dk_load(dk_builder)
 
 if(NOT WIN)
 	dk_undepend(ws2_32)
@@ -14,7 +15,6 @@ if(NOT WIN)
 endif()
 
 dk_findLibrary(ws2_32.lib)
-
 
 # MSYS2 (-lws2_32)
 if(MSYSTEM)

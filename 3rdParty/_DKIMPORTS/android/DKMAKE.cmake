@@ -4,9 +4,12 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+############ android ############
 dk_validate(host_triple ${host_triple})
 if(NOT ANDROID)
-	return()
+	dk_undepend(android)
+	dk_return()
 endif()
 
 # not found on Android host devices the first time round. 

@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ winmm ############
 # https://docs.microsoft.com/en-us/windows/win32/multimedia/windows-multimedia-start-page?redirectedfrom=MSDN
+dk_load(dk_builder)
 
 if(NOT WIN)
 	dk_undepend(winmm)
@@ -15,7 +16,6 @@ endif()
 
 dk_define(__WINDOWS_MM__)
 dk_findLibrary(winmm.lib)
-
 
 # MSYS2 (-lWinmm)
 if(MSYSTEM)

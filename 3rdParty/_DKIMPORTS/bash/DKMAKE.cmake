@@ -27,7 +27,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	windows 	wsl_ubuntu	bash	linux
 
 #if(EXISTS "${BASH_EXE}")
-#	return()
+#	dk_undepend(bash)
+#	dk_return()
 #endif()
 
 dk_validate(triple "dk_TARGET_TRIPLE()")

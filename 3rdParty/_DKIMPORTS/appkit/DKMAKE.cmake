@@ -10,7 +10,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_validate(host_triple ${host_triple})
 if(NOT MAC_HOST)
-	return()
+	dk_undepend(appkit)
+	dk_return()
 endif()
 
 dk_findLibrary(Appkit)
