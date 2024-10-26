@@ -67,9 +67,11 @@ public:
 	bool UnMute(const void* input, void* output);
 	void Process();
 
+	unsigned int lastTime;
+#ifdef HAVE_sdl_mixer
 	int _volume;
 	track trk;
-	unsigned int lastTime;
+#endif
 };
 
 
