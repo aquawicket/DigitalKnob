@@ -5,17 +5,16 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ openal ############
 # https://openal.org/
 # https://openal-soft.org/
 # https://github.com/native-toolkit/openal-android
 # https://openal.org/downloads/OpenAL11CoreSDK.zip
 # https://www.openal-soft.org/openal-releases/openal-soft-1.21.1.tar.bz2
-
+dk_load(dk_builder)
 
 ### DEPEND ###
 dk_depend(winmm)
-
 
 ### IMPORT ###
 if(ANDROID)	
