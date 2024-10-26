@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ filezilla ############
 # https://filezilla-project.org/
 
-set(FILEZILLA_EXE "C:\Program Files\FileZilla FTP Client\filezilla.exe")
+dk_set(FILEZILLA_EXE "C:\\Program Files\\FileZilla FTP Client\\filezilla.exe")
 
 ### IMPORT ###
 if(NOT EXISTS ${FILEZILLA_EXE})
