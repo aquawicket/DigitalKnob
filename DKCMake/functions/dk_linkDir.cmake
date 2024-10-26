@@ -16,7 +16,7 @@ function(dk_linkDir path)
 		#list(FIND DKLINKDIRS_LIST "${item}" index)
 		#list(FIND DKLINKDIRS_LIST "${path}" index)
 		if(path IN_LIST DKLINKDIRS_LIST)
-		if(${index} GREATER -1)
+		#if(${index} GREATER -1)
 			continue()  # already in the list
 		endif()
 		#dk_append(DKLINKDIRS_LIST ${item})

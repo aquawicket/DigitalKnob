@@ -15,7 +15,7 @@ function(dk_disable plugin)
 	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
-		return()
+		dk_return()
 	endif()
 	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE_DIR})
@@ -41,13 +41,15 @@ function(dk_disable plugin)
 		dk_convertToCIdentifier(${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 		dk_undefine(HAVE_${argv1_macro})
 		dk_undepend(${ARGV1})
+		dk_notice("${ARGV1} set to DISABLED")
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
 		dk_convertToCIdentifier(${plugin} plugin_macro)	   # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 		dk_undefine(HAVE_${plugin_macro})
 		dk_undepend(${plugin})
-	endif()
+		dk_notice("${plugin} set to DISABLED")
+	endif()	
 endfunction()
 
 
