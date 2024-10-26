@@ -34,7 +34,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 dk_validate(triple "dk_TARGET_TRIPLE()")
 
 ### shell command bash ###
-execute_process(command -v bash OUTPUT_VARIABLE SHELL_BASH)
+execute_process(COMMAND command -v bash OUTPUT_VARIABLE SHELL_BASH)
 if(EXISTS ${SHELL_BASH})
 	dk_printVar(SHELL_BASH)
 	dk_set(BASH_EXE "${SHELL_BASH}")
