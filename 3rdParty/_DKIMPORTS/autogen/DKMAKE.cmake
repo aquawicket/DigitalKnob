@@ -5,13 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-############ yasm ############
-# https://packages.msys2.org/base/yasm
+###### autogen ######
+# https://www.gnu.org/software/autogen
 
-dk_load(dk_builder)
-
-if(MSYSTEM)
-	dk_depend(msys2)
-	
-	dk_installPackage(yasm)
-endif()
+dk_installPackage(autogen)

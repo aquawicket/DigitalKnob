@@ -95,7 +95,6 @@ dk_return()
 #	endif()
 #	
 #	if(NOT EXISTS ${GIT_EXE})
-#		dk_delete(${MSYS2_DIR}/var/lib/pacman/db.lck NO_HALT)
 #		dk_command(${PACMAN_EXE} -S git --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR})
 #	endif()
 #	

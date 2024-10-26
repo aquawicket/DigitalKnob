@@ -5,14 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-# binutils
-
-
+############ binutils ############
 dk_load(dk_builder)
 
-
-# https://wiki.termux.com/wiki/ASM
 if(ANDROID_HOST)
-	#dk_command(pkg install binutils)
+	# https://wiki.termux.com/wiki/ASM
 	dk_installPackage(binutils)
 endif()
