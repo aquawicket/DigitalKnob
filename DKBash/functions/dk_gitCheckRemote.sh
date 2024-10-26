@@ -10,6 +10,7 @@ dk_gitCheckRemote() {
 	
 	ahead=0
 	behind=0
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_validate GIT_EXE "dk_call dk_installGit"
 		${GIT_EXE} -C ${DKBRANCH_DIR} remote update
