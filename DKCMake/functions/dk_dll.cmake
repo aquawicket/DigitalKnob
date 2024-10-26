@@ -76,7 +76,7 @@ function(dk_dll plugin_name)
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	dk_fileAppend(${plugin_path}/CMakeLists.txt "endif()\n")
 	endif()
-	dk_add_to_plugin_list(${plugin_name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 

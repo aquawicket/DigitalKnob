@@ -32,7 +32,7 @@ function(dk_testApp plugin_name)
 	dk_appendCmake("include_directories(${DKPLUGINS_DIR})\n")
 		
 	# TODO		
-	dk_add_to_plugin_list(${plugin_name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 

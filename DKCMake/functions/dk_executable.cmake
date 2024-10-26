@@ -27,7 +27,7 @@ function(dk_executable plugin_name)
 	#dk_fileAppend(${plugin_path}/CMakeLists.txt "include(${DKCMAKE_DIR}/DKVariables.cmake)\n")
 	#dk_fileAppend(${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 	endif()
-	dk_add_to_plugin_list(${plugin_name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 

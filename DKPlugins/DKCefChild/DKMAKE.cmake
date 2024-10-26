@@ -4,8 +4,8 @@ if(ANDROID OR IOS OR IOSSIM)
 	dk_undepend(DKCef)
 	dk_return()
 endif()
-if(NOT HAVE_cef_binary)
-	dk_undepend(DKCef)
+if(NOT HAVE_DKCef)
+	dk_undepend(DKCefChild)
 	dk_return()
 endif()
 
@@ -13,7 +13,7 @@ dk_depend(DKCef)
 dk_assets(DKCefChild)
 
 #dk_set(QUEUE_BUILD ON)
-dk_add_to_plugin_list(DKCefChild)
+dk_addToPluginList(DKCefChild)
 #dk_executable(DKCefChild)
 
 

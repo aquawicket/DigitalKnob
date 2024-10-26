@@ -3,11 +3,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_add_to_plugin_list(<plugin_name>)
+# dk_addToPluginList(<plugin_name>)
 #
 #	<plugin_name>	- TODO
 #
-function(dk_add_to_plugin_list plugin_name)
+function(dk_addToPluginList plugin_name)
 	dk_debugFunc()
 	
 	dk_getPathToPlugin(${plugin_name} plugin_path)
