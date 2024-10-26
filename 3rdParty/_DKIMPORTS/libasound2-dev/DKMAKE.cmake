@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ libasound2-dev ############
 dk_load(dk_builder)
 
 if(NOT LINUX AND NOT RASPBERRY)
@@ -26,7 +27,6 @@ dk_installPackage(libasound2-dev)
 #if(TINYCORE)
 #	dk_command(tce-load -wi libasound2-dev)
 #endif()
-
 
 ### LINK ###
 dk_include(/usr/include/alsa)

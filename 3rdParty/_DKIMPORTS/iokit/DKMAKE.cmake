@@ -5,13 +5,12 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ iokit ############
 # https://developer.apple.com/documentation/IOKit
-
+dk_load(dk_builder)
 if(NOT APPLE)
 	dk_undepend(iokit)
 	dk_return()
 endif()
-
 
 dk_findLibrary(IOKit)

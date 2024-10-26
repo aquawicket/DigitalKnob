@@ -5,14 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ java ############
 # https://www.java.com/en/download
 # https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245479_4d5417147a92418ea8b615e228bb6935
 # http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe
-
+dk_load(dk_builder)
 dk_undepend(java)
-dk_return() # disabled for now
-
+dk_return() ################ disabled for now
 
 ### VERSION ###
 # jre1.8.0_311
@@ -25,7 +24,6 @@ WIN_HOST_dk_set(JAVA ${DK3RDPARTY_DIR}/${JAVA_NAME})
 #dk_getShortPath(${JAVA} JAVA)
 #dk_set(JAVA "${JAVA}")
 WIN_HOST_dk_set(JAVA_EXE ${JAVA}/bin/java.exe)
-
 
 ### INSTALL ###
 dk_info("looking for java at ${JAVA_EXE}")

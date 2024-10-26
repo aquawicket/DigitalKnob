@@ -5,14 +5,13 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ imageio ###########
 # https://developer.apple.com/documentation/imageio
-
+dk_load(dk_builder)
 if(NOT MAC_HOST)
 	dk_undepend(imageio)
 	dk_return()
 endif()
-
 
 find_library(ImageIO_lib ImageIO)
 if(NOT ImageIO_lib)

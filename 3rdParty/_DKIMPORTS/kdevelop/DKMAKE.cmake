@@ -5,19 +5,18 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ kdevelop ############
 # https://github.com/KDE/kdevelop
 # https://www.kdevelop.org/
-
+dk_load(dk_builder)
 if(NOT LINUX_HOST)
+	dk_undepend(kdevelop)
 	dk_return()
 endif()
 
-
 ### IMPORT ###
-LINUX_dk_import(https://download.kde.org/stable/kdevelop/5.6.1/bin/linux/KDevelop-5.6.1-x86_64.AppImage)
-
+dk_import(https://download.kde.org/stable/kdevelop/5.6.1/bin/linux/KDevelop-5.6.1-x86_64.AppImage)
 
 ### INSTALL ###
-LINUX_dk_queueCommand(chmod 777 ${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
-LINUX_dk_queueCommand(${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
+dk_queueCommand(chmod 777 ${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)
+dk_queueCommand(${KDEVELOP}/KDevelop-5.6.1-x86_64.AppImage)

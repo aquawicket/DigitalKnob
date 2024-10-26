@@ -5,15 +5,15 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+############ iphlpapi ############
 # https://learn.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
+dk_load(dk_builder)
 if(NOT WIN)
 	dk_undepend(iphlpapi)
 	dk_return()
 endif()
 
 dk_findLibrary(Iphlpapi.lib)
-
 
 # MSYS2 (-lIphlpapi)
 if(MSYSTEM)
