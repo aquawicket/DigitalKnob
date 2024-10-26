@@ -14,6 +14,7 @@ function(dk_make path) #lib
 	dk_debugFunc()
 	
 	dk_assertPath(${path})
+	dk_printVar(CMAKE_MAKE_PROGRAM)
 	
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
@@ -32,7 +33,8 @@ function(dk_make path) #lib
 	else()
 		set(lib ${ARGV1})
 		#dk_cd(${path}/${CONFIG_PATH})
-		dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
+		#dk_validate(CMAKE_MAKE_PROGRAM "dk_depend(make)")
+		
 		dk_assertVar(CMAKE_MAKE_PROGRAM)
 		dk_printVar(CMAKE_MAKE_PROGRAM)
 		if(XCODE)
@@ -52,7 +54,6 @@ function(dk_make path) #lib
 				endif()
 			else()
 				if(EXISTS ${PWD}/Makefile)
-					
 					dk_queueCommand(${CMAKE_MAKE_PROGRAM} ECHO_OUTPUT_VARIABLE) # BASH_ENV)
 				elseif(EXISTS ${path}/Makefile)
 					dk_queueCommand(${CMAKE_MAKE_PROGRAM} -C ${path} ECHO_OUTPUT_VARIABLE)

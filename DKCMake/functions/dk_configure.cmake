@@ -21,7 +21,22 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_assertPath(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	# Configure with CMake		(multi_config / single_config)
-	if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
+	
+	
+	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, EXISTS ${SOURCE_DIR}/configure will return true.
+	# This will cause problems, so we need file Exists conditions to be case sensitive.
+	get_filename_component(cmakelists_path "${SOURCE_DIR}/CMakeLists.txt" REALPATH)
+	if(NOT "${cmakelists_path}" STREQUAL "${SOURCE_DIR}/CMakeLists.txt")
+		unset(cmakelists_path)
+	endif()
+	get_filename_component(configure_path "${SOURCE_DIR}/configure" REALPATH)
+	if(NOT "${configure_path}" STREQUAL "${SOURCE_DIR}/configure")
+		unset(configure_path)
+	endif()
+	
+	
+	#if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
+	if(EXISTS ${cmakelists_path})
 		dk_info("Configuring with CMake")
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
@@ -41,8 +56,11 @@ function(dk_configure SOURCE_DIR) #ARGN
 		endif()
 		return()
 	
-	# Configure with Autotools	(single_config)
-	elseif(EXISTS ${SOURCE_DIR}/configure.ac) # OR EXISTS ${SOURCE_DIR}/configure)
+	
+	
+	#elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${SOURCE_DIR}/configure)
+	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
+		# Configure with Autotools	(single_config)
 		dk_info("Configuring with Autotools")			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${SOURCE_DIR}/configure)
