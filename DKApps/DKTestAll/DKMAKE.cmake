@@ -6,8 +6,8 @@ dk_load(dk_builder)
 ## Here we try to include all plugins and 3rd party libraries for all platforms.
 ## DKTestAll is handy for debugging purposes and adding new libraries and plugins
 
-dk_enable(HAVE_DK)
-dk_enable(HAVE_DKCef) ##FIXME: Find a way to remove this requirement
+#dk_enable(HAVE_DK)
+#dk_enable(HAVE_DKCef) ##FIXME: Find a way to remove this requirement
 
 dk_dependAll() ## ADD any and all plugins
 

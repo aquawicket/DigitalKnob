@@ -25,6 +25,7 @@
 */
 
 #include "DK/stdafx.h"
+#include "SDL_timer.h"  //SDL_GetTicks
 #include "DK/DKFile.h"
 #include "DKSDLAudio/DKSDLAudio.h"
 
@@ -125,6 +126,7 @@ bool DKSDLAudio::OpenMusic(const void* input, void* output){
 	trk.file = path;
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
+	//lastTime = SDL_GetTicks64();  //SDL 2.0.18+
 #ifdef HAVE_sdl_mixer		
 	trk.snd = Mix_LoadMUS(path.c_str());
 	if(!trk.snd)
@@ -164,6 +166,7 @@ bool DKSDLAudio::Resume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
 	lastTime = SDL_GetTicks();
+	//lastTime = SDL_GetTicks64();   //SDL 2.0.18+
 	trk.position = 0;
 #ifdef HAVE_sdl_mixer	
 	Mix_RewindMusic();
@@ -220,6 +223,7 @@ void DKSDLAudio::Process(){
 		Mix_PauseMusic();
 		trk.position = 0;
 		lastTime = SDL_GetTicks();
+		//lastTime = SDL_GetTicks64();   //SDL 2.0.18+
 		DKEvents::SendEvent("window", "ended", "");
 	}
 #endif	
