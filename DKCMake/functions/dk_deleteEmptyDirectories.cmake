@@ -13,7 +13,7 @@ function(dk_deleteEmptyDirectories path)
 	dk_debugFunc()
 	
 	if(NOT EXISTS ${path})
-		dk_error("path:${path} does not exist")
+		dk_warning("dk_deleteEmptyDirectories(): path:${path} does not exist")
 		dk_return()
 	endif()
 	if(WIN_HOST)
