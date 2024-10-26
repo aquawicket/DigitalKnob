@@ -8,14 +8,14 @@ if(!$dk_readCache){ $dk_readCache = 1 } else{ return }
 function Global:dk_readCache($APP, $triple, $TYPE) {
 	dk_debugFunc 3
 	
-	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKHOME_DIR"
 
-	if(!(dk_call dk_pathExists "${DKBRANCH_DIR}/cache")){ return }
+	if(!(dk_call dk_pathExists "${DKCACHE_DIR}/cache")){ return }
 	
-	dk_call dk_echo "reading cache... in $DKBRANCH_DIR/cache"
+	dk_call dk_echo "reading cache... in $DKCACHE_DIR/cache"
 	$count = 0
 	
-	foreach($line in Get-Content "${DKBRANCH_DIR}/cache") {
+	foreach($line in Get-Content "${DKCACHE_DIR}/cache") {
 		if("${count}" -eq "0"){
 			Set-Variable -scope global -Name "$APP" -Value $line
 		}

@@ -2028,10 +2028,10 @@ dk_createCache() {
 	dk_echo "creating cache..."
 	
 	# write variable values line by line
-	echo "${APP}">"${DKBRANCH_DIR}/cache"
-	echo "${triple}">>"${DKBRANCH_DIR}/cache"
-	echo "${TYPE}">>"${DKBRANCH_DIR}/cache"
-	#echo "$DKENV">>"${DKBRANCH_DIR}/cache"
+	echo "${APP}">"${DKCACHE_DIR}/cache"
+	echo "${triple}">>"${DKCACHE_DIR}/cache"
+	echo "${TYPE}">>"${DKCACHE_DIR}/cache"
+	#echo "$DKENV">>"${DKCACHE_DIR}/cache"
 }
 
 
@@ -2043,7 +2043,7 @@ dk_readCache() {
 	dk_verbose "dk_readCache(${*})"
 	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 	
-	if ! dk_pathExists "${DKBRANCH_DIR}"/cache; then
+	if ! dk_pathExists "${DKCACHE_DIR}"/cache; then
 		return 0
 	fi
 	_APP_=
@@ -2070,7 +2070,7 @@ dk_readCache() {
 		#	#dk_printVar _DKENV_
 		#fi
 		count=$((count + 1))
-	done < "${DKBRANCH_DIR}"/cache
+	done < "${DKCACHE_DIR}"/cache
 }
 
 

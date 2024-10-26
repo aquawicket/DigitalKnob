@@ -30,7 +30,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     ::%dk_call% dk_printVar commands
 
     :: prepend cache selection if available
-    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_TYPE_%" neq "" (
+    if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_TYPE_%" neq "" (
         %dk_call% dk_arrayUnshift options "re-run [%_APP_% - %_triple_% - %_TYPE_%]"
         %dk_call% dk_arrayUnshift commands "call:runCache"
     )

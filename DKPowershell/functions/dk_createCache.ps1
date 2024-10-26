@@ -11,10 +11,10 @@ function Global:dk_createCache() {
 	dk_call dk_echo "creating cache..."
 	
 	# write variable values line by line
-	echo "$APP">"${DKBRANCH_DIR}/cache"
-	echo "$triple">>"${DKBRANCH_DIR}/cache"
-	echo "$TYPE">>"${DKBRANCH_DIR}/cache"
-	#echo "$DKENV">>"${DKBRANCH_DIR}/cache"
+	echo "$APP">"${DKCACHE_DIR}/cache"
+	echo "$triple">>"${DKCACHE_DIR}/cache"
+	echo "$TYPE">>"${DKCACHE_DIR}/cache"
+	#echo "$DKENV">>"${DKCACHE_DIR}/cache"
 }
 
 

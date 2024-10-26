@@ -17,7 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     %dk_call% dk_readCache _APP_ _triple_ _TYPE
     
     %dk_call% dk_echo
-    if exist "%DKBRANCH_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_triple_% - %_TYPE_%]
+    if exist "%DKCACHE_DIR%\cache" if "%_APP_%" neq "" if "%_triple_%" neq "" if "%_TYPE_%" neq "" echo  0) Repeat cache [%_APP_% - %_triple_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Download DigitalKnob

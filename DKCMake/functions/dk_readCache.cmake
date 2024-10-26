@@ -12,8 +12,8 @@ function(dk_readCache APP target_triple TYPE)
 #		dk_fatal("${CMAKE_CURRENT_FUNCTION}(${ARGV}): incorrect number of arguments")
 #	endif()
 	
-	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-	if(NOT EXISTS "${DKBRANCH_DIR}/cache")
+	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")
+	if(NOT EXISTS "${DKCACHE_DIR}/cache")
 		dk_return()
 	endif()
 	dk_unset(_APP_)
@@ -28,9 +28,9 @@ function(dk_readCache APP target_triple TYPE)
 #		[ "${count}" = "2" ] &&	_TYPE_=$(builtin echo "${p}" | tr -d '\r')
 #		#[ "${count}" = "3" ] && _DKENV_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
-#	done < "${DKBRANCH_DIR}"/cache
+#	done < "${DKCACHE_DIR}"/cache
 
-	file(STRINGS "${DKBRANCH_DIR}/cache" lines)
+	file(STRINGS "${DKCACHE_DIR}/cache" lines)
 	foreach(line ${lines})
 		if(${count} EQUAL 0)
 			set(_APP_ ${line})
