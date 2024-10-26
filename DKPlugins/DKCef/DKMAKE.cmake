@@ -2,9 +2,14 @@
 
 #dk_require(cef_binary)
 
-ANDROID_dk_return()
-IOS_dk_return()
-IOSSIM_dk_return()
+if(ANDROID OR IOS OR IOSSIM)
+	dk_undepend(DKCef)
+	dk_return()
+endif()
+if(NOT HAVE_cef_binary)
+	dk_undepend(DKCef)
+	dk_return()
+endif()
 
 if(WIN)
 	dk_depend(winmm)

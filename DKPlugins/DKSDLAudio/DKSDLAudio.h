@@ -40,13 +40,15 @@
 
 #include "DK/DK.h"
 
-#ifdef HAVE_sdl_mixer
+
 struct track{
 	DKString file;
-	Mix_Music* snd;
 	int position;
-};
+#ifdef HAVE_sdl_mixer
+	Mix_Music* snd;
 #endif
+};
+
 
 class DKSDLAudio : public DKObjectT<DKSDLAudio>
 {
@@ -68,10 +70,8 @@ public:
 	void Process();
 
 	unsigned int lastTime;
-#ifdef HAVE_sdl_mixer
 	int _volume;
 	track trk;
-#endif
 };
 
 

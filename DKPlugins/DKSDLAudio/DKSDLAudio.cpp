@@ -122,11 +122,11 @@ bool DKSDLAudio::OpenMusic(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path))
 		return DKERROR("DKFile::VerifyPath() failed! \n");
-#ifdef HAVE_sdl_mixer
 	trk.file = path;
-	trk.snd = Mix_LoadMUS(path.c_str());
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
+#ifdef HAVE_sdl_mixer		
+	trk.snd = Mix_LoadMUS(path.c_str());
 	if(!trk.snd)
 		return DKERROR("DKSDLAudio::OpenMusic(): could not load file\n");
 	if(Mix_PlayMusic(trk.snd, 0) == -1)
@@ -163,9 +163,9 @@ bool DKSDLAudio::PlaySound(const void* input, void* output){
 bool DKSDLAudio::Resume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
-#ifdef HAVE_sdl_mixer
-	trk.position = 0;
 	lastTime = SDL_GetTicks();
+	trk.position = 0;
+#ifdef HAVE_sdl_mixer	
 	Mix_RewindMusic();
 	Mix_ResumeMusic();
 #endif
