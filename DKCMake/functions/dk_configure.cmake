@@ -61,7 +61,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 	#elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${SOURCE_DIR}/configure)
 	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
 		# Configure with Autotools	(single_config)
-		dk_info("Configuring with Autotools")			
+		dk_info("Configuring with configure")
+		
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${ARGN}\n")
 		if(EXISTS ${SOURCE_DIR}/configure)
 			if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))

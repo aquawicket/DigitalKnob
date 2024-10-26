@@ -82,6 +82,7 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	
+	#variable_watch(CMAKE_MAKE_PROGRAM dk_variableWatch)
 	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
 #	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
@@ -101,6 +102,15 @@ function(DKINIT)
 	
 endfunction()
 
+##################################################################################
+# dk_variableWatch()
+#
+macro(dk_variableWatch variable access value current_list_file stack)
+	if("${access}" STREQUAL "MODIFIED_ACCESS")
+		message("dk_variableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
+		dk_pause()
+	endif()
+endmacro()
 
 ##################################################################################
 # dk_echo()
@@ -146,7 +156,7 @@ endfunction()
 # dk_onCallstack()
 #
 macro(dk_onCallstack variable access value current_list_file stack)
-	#dk_echo("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
+	#message("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
 		set(MAX_STACK_SIZE 99)
 		set(CMAKE_STACK ${stack} CACHE INTERNAL "")
@@ -210,7 +220,8 @@ endmacro()
 #
 function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
-	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE dk_onCallstack)
+	
+	
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onCallstack)
 	variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
 endfunction()

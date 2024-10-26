@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ visualstudio ############
 # Microsoft Visual Studio Comunity
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
 # https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
@@ -121,6 +122,9 @@ endif()
 
 
 ###### set GLOBAL CMAKE VARIABLES ######
+if(NOT MSVC)
+	dk_return()
+endif()
 dk_set(CMAKE_C_COMPILER				${VISUALSTUDIO_C_COMPILER})
 dk_set(CMAKE_CXX_COMPILER			${VISUALSTUDIO_CXX_COMPILER})
 dk_set(CMAKE_DUMPBIN				${VISUALSTUDIO_DUMPBIN})

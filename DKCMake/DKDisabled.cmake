@@ -65,6 +65,7 @@ dk_disable(wasm3)
 dk_disable(webref)
 dk_disable(windows-sdk)
 dk_disable(wxwidgets)
+dk_disable(x264)
 ###########################
 
 
