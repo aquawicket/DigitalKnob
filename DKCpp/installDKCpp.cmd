@@ -94,7 +94,7 @@ if "%~1" neq ""    goto runDKCpp
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKCpp"
 	ftype DKCpp=cmd /c call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	
-	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.c"
+	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.cpp"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp
 	assoc .cpp=DKCpp
 	

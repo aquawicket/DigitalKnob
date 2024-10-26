@@ -4,10 +4,12 @@
 
 if(ANDROID OR IOS OR IOSSIM)
 	dk_undepend(DKCef)
+	dk_disable(DKCef)
 	dk_return()
 endif()
 if(NOT HAVE_cef_binary)
 	dk_undepend(DKCef)
+	dk_disable(DKCef)
 	dk_return()
 endif()
 

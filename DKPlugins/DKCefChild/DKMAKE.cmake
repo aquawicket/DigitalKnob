@@ -6,6 +6,7 @@ if(ANDROID OR IOS OR IOSSIM)
 endif()
 if(NOT HAVE_DKCef)
 	dk_undepend(DKCefChild)
+	dk_disable(DKCefChild)
 	dk_return()
 endif()
 
