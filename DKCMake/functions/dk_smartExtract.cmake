@@ -66,7 +66,7 @@ function(dk_smartExtract src dest)
 			if(EXISTS "${src_extractPath}")
 				dk_delete("${src_extractPath}")
 			endif()
-			return()
+			dk_return()
 		endif()
     endif()
 

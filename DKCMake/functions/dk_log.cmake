@@ -127,7 +127,7 @@ function(dk_log)
 	dk_debugFunc()
 	
 	if(NOT ENABLE_dk_log)
-		return()
+		dk_return()
 	endif()
 	
 	if(${ARGC} EQUAL 1) 
@@ -140,7 +140,7 @@ function(dk_log)
 	endif()
 
 	if(NOT ${_level_}_ENABLE)
-		return()
+		dk_return()
 	endif()
 	
 	dk_echo("${${_level_}_COLOR}${${_level_}_TAG}${_message_}${clr}")

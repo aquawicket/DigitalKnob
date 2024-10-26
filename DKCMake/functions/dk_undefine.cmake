@@ -14,7 +14,7 @@ function(dk_undefine str)
 	
 	remove_definitions(${str})
 	if(NOT DKDEFINES_LIST)
-		return()
+		dk_return()
 	endif()
 	list(REMOVE_ITEM DKDEFINES_LIST ${str})
 endfunction()

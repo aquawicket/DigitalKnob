@@ -14,7 +14,7 @@ function(dk_readCache APP target_triple TYPE)
 	
 	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
 	if(NOT EXISTS "${DKBRANCH_DIR}/cache")
-		return()
+		dk_return()
 	endif()
 	dk_unset(_APP_)
 	dk_unset(_target_triple_)

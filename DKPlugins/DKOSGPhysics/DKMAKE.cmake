@@ -1,8 +1,8 @@
 #if(LINUX)
-#	return()
+#	dk_return()
 #endif()
 #if(ANDROID)
-#	return()
+#	dk_return()
 #endif()
 
 dk_depend(osgbullet)

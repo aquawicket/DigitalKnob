@@ -11,12 +11,12 @@ function(dk_reparseCmakeCommand CMD_LIST)
 	
 	string(FIND "${ARGV}" "cmake.exe" cmake_pos)
 	if(${cmake_pos} LESS 0)
-		return()
+		dk_return()
 	endif()
 	
 	list(FIND ARGV "-G" g_pos)
 	if(${g_pos} LESS 0)
-		return()
+		dk_return()
 	endif()
 	
 	dk_validate(DKCACHE_DIR "dk_DKHOME_DIR()")

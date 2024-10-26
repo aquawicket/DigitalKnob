@@ -11,7 +11,7 @@ function(dk_reload)
 
 	if(NOT EXISTS "${DKSCRIPT_PATH}")
 		dk_fatal("DKSCRIPT_PATH:${DKSCRIPT_PATH} does not exist")
-		return()
+		dk_return()
 	endif()
 	
 	dk_clearScreen()

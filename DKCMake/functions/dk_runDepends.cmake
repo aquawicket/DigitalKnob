@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_runDepends(plugin)
 #
 #	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
-#	Conditionals such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
+#	Conditionals such as if(), else(), elseif(), endif(), dk_return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
 #	@plugin		- TODO
@@ -122,17 +122,17 @@ function(dk_runDepends plugin)
 #	if(${ARGC} GREATER 1)
 #		list(FIND dkdepend_list "${plugin} ${ARGV1}" index)
 #		if(${index} GREATER -1)
-#			return()
+#			dk_return()
 #		endif()
 #	else()
 #		list(FIND dkdepend_list "${plugin}" index)
 #		if(${index} GREATER -1)
-#			return() # already on the list
+#			dk_return() # already on the list
 #		endif()
 #	endif()
 	if("${ARGV}" IN_LIST dkdepend_list)
 		#dk_verbose("already in dkdepend_list")
-		return()
+		dk_return()
 	endif()
 	
 	dk_append(dkdepend_list "${ARGV}")   # Add target to list

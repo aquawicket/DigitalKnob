@@ -1,5 +1,5 @@
 if(NOT ANDROID)
-	return()
+	dk_return()
 endif()
 
 dk_generateCmake(DKWebview)

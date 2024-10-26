@@ -13,7 +13,7 @@ function(dk_visualStudioRelease path) #target #arch
 	dk_debugFunc()
 	
 	if(NOT MSVC) #if(NOT VISUAL_STUDIO)
-		return()
+		dk_return()
 	endif()
 	
 	if(NOT EXISTS ${path})

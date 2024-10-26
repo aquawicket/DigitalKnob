@@ -16,15 +16,15 @@ function(dk_validate variable code)
 	
 #	if(NOT variable)
 #		dk_warning("dk_append(${variable} ${code}) variable is invalid")
-#		return()
+#		dk_return()
 #	endif()
 #	if(NOT code)
 #		dk_warning("dk_append(${variable} ${code}) code is invalid")
-#		return()
+#		dk_return()
 #	endif()
 	
 	if(${variable})
-		return()
+		dk_return()
 	endif()
 	
 	dk_eval("${code}")

@@ -12,12 +12,12 @@ function(dk_prependEnvPath inputPath)
 	
 	#if(NOT inputPath)
 	#	dk_fatal("dk_prependEnvPath(): inputPath is invalid!")
-	#	return()
+	#	dk_return()
 	#endif()
     
 	#if(NOT EXISTS ${inputPath})
 	#	dk_warning("dk_prependEnvPath(): inputPath does not exist")
-	#	return()
+	#	dk_return()
 	#endif()
     
     dk_assertPath(inputPath)

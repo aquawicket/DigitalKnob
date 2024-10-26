@@ -23,14 +23,14 @@ function(dk_pause)
 	if(DEFINED ENV{COMSPEC})
 		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
 		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
-		return()
+		dk_return()
 	endif()
 	
 	###### Powershell ######
 	find_program(POWERSHELL_EXE powershell.exe)
 	if(POWERSHELL_EXE)
 		execute_process(COMMAND ${POWERSHELL_EXE} Read-Host)
-		return()
+		dk_return()
 	endif()
 	
 	###### Bash ######
@@ -38,7 +38,7 @@ function(dk_pause)
 	#find_program(BASH_EXE bash)
 	if(BASH_EXE)
 		execute_process(COMMAND ${BASH_EXE} read -p)
-		return()
+		dk_return()
 	endif()
 		
 	dk_fatal("dk_pause() failed:   both CMD_EXE and BASH_EXE are invalid!")

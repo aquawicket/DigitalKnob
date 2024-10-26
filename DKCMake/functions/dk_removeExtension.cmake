@@ -18,7 +18,7 @@ function(dk_removeExtension path ret_var)
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
 		dk_warning("dk_removeExtension(${path}): no extension found")
-		return()
+		dk_return()
 	endif()
 	
 	dk_getExtension("${path}" ext)

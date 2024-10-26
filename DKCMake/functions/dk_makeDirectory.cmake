@@ -17,7 +17,7 @@ function(dk_makeDirectory)
 	
 	set(path ${ARGV0})
 	make_directory("${path}")  # requires full path
-	return()
+	dk_return()
 	
 	# build missing directory parents recursivley
 #	if(MAC_HOST)

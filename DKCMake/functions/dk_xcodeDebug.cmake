@@ -14,7 +14,7 @@ function(dk_xcodeDebug path)
 	dk_debugFunc()
 	
 	if(NOT MAC_HOST)
-		return()
+		dk_return()
 	endif()
 	
 	if(NOT EXISTS ${path})

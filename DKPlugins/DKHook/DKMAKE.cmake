@@ -1,5 +1,5 @@
 #if(NOT WIN AND NOT LINUX)
-#	return()
+#	dk_return()
 #endif()
 
 if(HAVE_DKCef)

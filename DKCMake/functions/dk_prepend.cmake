@@ -13,7 +13,7 @@ function(dk_prepend variable) #value
 	
 	if(NOT ARGN)
 		dk_warning("dk_prepend(${variable}) ARGN:${ARGN} is invalid")
-		return()
+		dk_return()
 	endif()
 	if(${variable})
 		dk_set(${variable} ${ARGN} ${${variable}})

@@ -4,11 +4,11 @@
 ##	-C${DKCMAKE_DIR}/DKCache.cmake
 ##
 ## Also note that cmake DOES accept multiple -C'cacheFile' commands at a time, so we can split these up later.
-return()
+dk_return()
 
 MESSAGE("################ DKCache.cmake ##################")
 message("WARNING: DKCache.cmake will be discontinued.")
-return()
+dk_return()
 MESSAGE("OS: ${OS}")
 if(NOT OS)
 	message(FATAL_ERROR "The OS variable has not been set for DKCache.cmake")

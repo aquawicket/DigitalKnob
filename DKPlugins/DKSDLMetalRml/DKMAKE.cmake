@@ -1,5 +1,5 @@
 if(NOT USE_metal)
-	return()
+	dk_return()
 endif()
 
 dk_depend(DKAssets)

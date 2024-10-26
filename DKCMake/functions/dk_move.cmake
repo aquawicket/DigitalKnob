@@ -23,7 +23,7 @@ function(dk_move from to) # FLAGS: OVERWRITE, NO_HALT
 		if(NOT NO_HALT)
 			dk_fatal("from:${from} not found")
 		endif()
-		return()
+		dk_return()
 	endif()
 	if(EXISTS ${to})
 		if(NOT OVERWRITE)
