@@ -32,8 +32,8 @@ elseif(APPLE)
 	dk_libDebug			(${SMPEG2}/${triple}/lib/${DEBUG_DIR}/libsmpeg2.a)
 	dk_libRelease		(${SMPEG2}/${triple}/lib/${RELEASE_DIR}/libsmpeg2.a)
 else()
-	dk_libDebug			(${SMPEG2}/${triple}/${DEBUG_DIR}/lib/libsmpeg2.a)
-	dk_libRelease		(${SMPEG2}/${triple}/${RELEASE_DIR}/lib/libsmpeg2.a)
+	dk_libDebug			(${SMPEG2_DEBUG_DIR}/lib/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2_RELEASE_DIR}/lib/libsmpeg2.a)
 endif()
 
 

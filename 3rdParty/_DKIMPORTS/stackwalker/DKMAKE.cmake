@@ -24,8 +24,8 @@ dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_en
 
 ### LINK ###
 WIN_dk_include		(${STACKWALKER}/StackWalker)
-WIN_dk_libDebug		(${STACKWALKER}/${triple}/${DEBUG_DIR}/stackwalker.lib)
-WIN_dk_libRelease	(${STACKWALKER}/${triple}/${RELEASE_DIR}/stackwalker.lib)
+WIN_dk_libDebug		(${STACKWALKER_DEBUG_DIR}/stackwalker.lib)
+WIN_dk_libRelease	(${STACKWALKER_RELEASE_DIR}/stackwalker.lib)
 
 
 ### GENERATE ###

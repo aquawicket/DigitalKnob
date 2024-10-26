@@ -56,7 +56,7 @@ APPLE_DEBUG_dk_configure		(${GZIP_DIR} --disable-dependency-tracking "CFLAGS=-I$
 #APPLE_DEBUG_dk_queueCommand	(make version)
 #APPLE_DEBUG_dk_queueCommand	(make gzip)
 #APPLE_RELEASE_dk_cd			(${GZIP_RELEASE_DIR})
-APPLE_RELEASE_dk_queueCommand	(${GZIP_CONFIGURE} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP}/${triple}/${RELEASE_DIR}/lib")
+APPLE_RELEASE_dk_queueCommand	(${GZIP_CONFIGURE} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP_RELEASE_DIR}/lib")
 #APPLE_RELEASE_dk_queueCommand	(make version)
 #APPLE_RELEASE_dk_queueCommand	(make gzip)
 APPLE_dk_build					(${GZIP_DIR})

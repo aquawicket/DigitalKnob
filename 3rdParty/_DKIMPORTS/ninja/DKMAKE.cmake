@@ -13,8 +13,8 @@ dk_import(https://github.com/ninja-build/ninja/archive/f8ce3b32.zip)
 
 dk_include(${NINJA})
 
-dk_libDebug(${NINJA}/${triple}/${DEBUG_DIR}/ninja.exe)
-dk_libRelease(${NINJA}/${triple}/${DEBUG_DIR}/ninja.exe)
+dk_libDebug(${NINJA_DEBUG_DIR}/ninja.exe)
+dk_libRelease(${NINJA_DEBUG_DIR}/ninja.exe)
 
 dk_configure(${NINJA})
 

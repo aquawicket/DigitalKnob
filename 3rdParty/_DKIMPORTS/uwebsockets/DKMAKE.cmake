@@ -25,11 +25,11 @@ dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.z
 dk_include				(${UWEBSOCKETS})
 dk_include				(${UWEBSOCKETS}/${triple})
 if(MSVC)
-	WIN_dk_libDebug		(${UWEBSOCKETS}/${triple}/${DEBUG_DIR}/uWS.lib)
-	WIN_dk_libRelease	(${UWEBSOCKETS}/${triple}/${RELEASE_DIR}/uWS.lib)
+	WIN_dk_libDebug		(${UWEBSOCKETS_DEBUG_DIR}/uWS.lib)
+	WIN_dk_libRelease	(${UWEBSOCKETS_RELEASE_DIR}/uWS.lib)
 else()
-	dk_libDebug			(${UWEBSOCKETS}/${triple}/${DEBUG_DIR}/libuWS.a)
-	dk_libRelease		(${UWEBSOCKETS}/${triple}/${RELEASE_DIR}/libuWS.a)
+	dk_libDebug			(${UWEBSOCKETS_DEBUG_DIR}/libuWS.a)
+	dk_libRelease		(${UWEBSOCKETS_RELEASE_DIR}/libuWS.a)
 endif()
 
 

@@ -30,8 +30,8 @@ if(MULTI_CONFIG)
 
 	endif()
 else()
-	dk_libDebug		(${FLAC}/${triple}/${DEBUG_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC}/${triple}/${RELEASE_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC_DEBUG_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC_RELEASE_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_RELEASE)
 endif()
 
 

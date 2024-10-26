@@ -35,8 +35,8 @@ endif()
 
 
 ### 3RDPARTY AUTOCONF LINK ###
-#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${triple}/${DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
-#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${triple}/${RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
 
 ### 3RDPARTY CMAKE LINK ###
 if(DEBUG)
@@ -55,9 +55,9 @@ dk_configure(${OGG_DIR}
 	-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON
 
 #else()
-#	DEBUG_dk_cd		(${OGG}/${triple}/${DEBUG_DIR})
+#	DEBUG_dk_cd		(${OGG_DEBUG_DIR})
 #	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#	RELEASE_dk_cd		(${OGG}/${triple}/${RELEASE_DIR})
+#	RELEASE_dk_cd		(${OGG_RELEASE_DIR})
 #	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 #endif()
 

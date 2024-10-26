@@ -142,11 +142,11 @@ if(COMPILE_CMAKE)
 		
 		dk_include				(${CMAKE}									CMAKE_INCLUDE_DIR)
 		dk_include				(${CMAKE}/${triple})
-		DEBUG_dk_include		(${CMAKE}/${triple}/${DEBUG_DIR})
-		RELEASE_dk_include		(${CMAKE}/${triple}/${RELEASE_DIR})
+		DEBUG_dk_include		(${CMAKE_DEBUG_DIR})
+		RELEASE_dk_include		(${CMAKE_RELEASE_DIR})
 
-		dk_libDebug		(${CMAKE}/${triple}/${DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
-		dk_libRelease	(${CMAKE}/${triple}/${RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
+		dk_libDebug		(${CMAKE_DEBUG_DIR}/libcmake.a				CMAKE_LIBRARY_DEBUG)
+		dk_libRelease	(${CMAKE_RELEASE_DIR}/libcmake.a			CMAKE_LIBRARY_RELEASE)
 		
 		# Remove some flags for some builds
 		string(REPLACE "--DDEBUG" 	""	DKCMAKE_BUILD "${DKCMAKE_BUILD}")

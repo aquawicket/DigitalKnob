@@ -17,9 +17,9 @@ dk_import(https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip)
 ### LINK ###
 dk_include			(${LIBCACA}/include)
 dk_include			(${LIBCACA}/${triple})
-UNIX_dk_libDebug	(${LIBCACA}/${triple}/${DEBUG_DIR}/libcacad.a)
+UNIX_dk_libDebug	(${LIBCACA_DEBUG_DIR}/libcacad.a)
 UNIX_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.a)
-WIN_dk_libDebug		(${LIBCACA}/${triple}/${DEBUG_DIR}/libcacad.lib)
+WIN_dk_libDebug		(${LIBCACA_DEBUG_DIR}/libcacad.lib)
 WIN_dk_libRelease	(${LIBCACA_RELEASE_DIR}/libcaca.lib)
 
 ### GENERATE ####

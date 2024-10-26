@@ -101,27 +101,27 @@ dk_return()
 #else()
 
 ################## autotools #################################################
-#WIN_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#WIN_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#MAC_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#MAC_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#IOS_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#IOS_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#IOSSIM_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#IOSSIM_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#LINUX_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#LINUX_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#RASPBERRY_dk_libDebug(${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#RASPBERRY_dk_libRelease(${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#WIN_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#WIN_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#MAC_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#MAC_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#IOS_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#IOS_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#IOSSIM_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#IOSSIM_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#LINUX_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#LINUX_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+#RASPBERRY_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#RASPBERRY_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 #ANDROID_dk_libDebug(${XZ}/${triple}/obj/local/armeabi-v7a/liblzma.a)
 #ANDROID_dk_libRelease(${XZ}/${triple}/obj/local/armeabi-v7a/liblzma.a)
 
 ### 3RDPARTY LINK ###
 ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${triple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${triple}/obj/local/armeabi-v7a/liblzma.a)
-APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${triple}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${triple}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
+WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 
 
 ### GENERATE / COMPILE ###
@@ -132,28 +132,28 @@ ANDROID_dk_visualStudio			(${XZ} liblzma)
 dk_cd						(${XZ})
 dk_queueCommand					(autoreconf -f -i)
 		
-UNIX_DEBUG_dk_cd			(${XZ}/${triple}/${DEBUG_DIR})
+UNIX_DEBUG_dk_cd			(${XZ_DEBUG_DIR})
 UNIX_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
 
-UNIX_RELEASE_dk_cd			(${XZ}/${triple}/${RELEASE_DIR})
+UNIX_RELEASE_dk_cd			(${XZ_RELEASE_DIR})
 UNIX_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 UNIX_dk_build					(${XZ})
 
 
-WIN_X86_DEBUG_dk_cd		(${XZ}/${triple}/${DEBUG_DIR})
+WIN_X86_DEBUG_dk_cd		(${XZ_DEBUG_DIR})
 WIN_X86_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
-WIN_X86_RELEASE_dk_cd		(${XZ}/${triple}/${RELEASE_DIR})
+WIN_X86_RELEASE_dk_cd		(${XZ_RELEASE_DIR})
 WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 
 WIN_X86_dk_build				(${XZ})
 
 # look at xz/windows/build.bash for details
-WIN_X86_64_DEBUG_dk_cd			(${XZ}/${triple}/${DEBUG_DIR})
+WIN_X86_64_DEBUG_dk_cd			(${XZ_DEBUG_DIR})
 WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-WIN_X86_64_RELEASE_dk_cd		(${XZ}/${triple}/${RELEASE_DIR})
+WIN_X86_64_RELEASE_dk_cd		(${XZ_RELEASE_DIR})
 WIN_X86_64_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
 WIN_X86_64_dk_build					(${XZ})
