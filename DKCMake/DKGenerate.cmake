@@ -291,6 +291,13 @@ foreach(plugin ${dkdepend_list})
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
 				dk_fatal("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+			else()	
+				# Install DKPlugin Libs
+				if(INSTALL_DKLIBS)
+					if(EXISTS ${plugin_path}/${CONFIG_PATH}/cmake_install.cmake)
+						dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${CONFIG_PATH})
+					endif()
+				endif()
 			endif()
 		endforeach()
 	endif(${isDKPlugin} GREATER -1) # isDKPlugin
