@@ -1,12 +1,12 @@
 #!/bin/sh
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 
-### Print Version Info ###
-echo ""
+### Print Shell Path ad Version ###
+export ESC=""     		 		# escape character
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
 export DKSHELL=$(basename ${DKSHELL_PATH})
 export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
-export ESC=""     		 		# escape character
+echo ""
 echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
 echo "  ${DKSHELL_PATH}"
 echo ""

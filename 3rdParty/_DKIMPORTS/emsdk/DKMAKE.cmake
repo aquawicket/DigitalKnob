@@ -78,8 +78,14 @@ dk_set			(CMAKE_TOOLCHAIN_FILE 		${EMSDK_DIR}/upstream/emscripten/cmake/Modules/
 WIN_HOST_dk_set	(CMAKE_GENERATOR 			"MinGW Makefiles")
 UNIX_HOST_dk_set(CMAKE_GENERATOR 			"Unix Makefiles")
 dk_set			(CMAKE_AR 					"${EMSDK_DIR}/upstream/emscripten/emar${bat}")				# Name of archiving tool for static libraries.
-dk_set			(CMAKE_C_COMPILER		    "${EMSDK_DIR}/upstream/emscripten/emcc${bat}")
-dk_set			(CMAKE_CXX_COMPILER	    	"${EMSDK_DIR}/upstream/emscripten/em++${bat}")
+
+if(NOT CMAKE_C_COMPILER)
+	dk_set		(CMAKE_C_COMPILER		    "${EMSDK_DIR}/upstream/emscripten/emcc${bat}")
+endif()
+if(NOT CMAKE_CXX_COMPILER)
+	dk_set		(CMAKE_CXX_COMPILER	    	"${EMSDK_DIR}/upstream/emscripten/em++${bat}")
+endif()
+
 dk_set			(CMAKE_NM 					"${EMSDK_DIR}/upstream/emscripten/emnm${bat}")	
 dk_set			(CMAKE_RANLIB 				"${EMSDK_DIR}/upstream/emscripten/emranlib${bat}")
 dk_set			(CMAKE_C_COMPILER_AR 		"${CMAKE_AR}")

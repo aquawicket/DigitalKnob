@@ -18,7 +18,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_load(dk_builder)
 if(IOS OR IOSSIM OR ANDROID OR (WIN AND (NOT MSVC)))
-	dk_undepend(cef_binary)
+	#dk_undepend(cef_binary)
 	dk_disable(cef_binary)
 	dk_return()
 endif()

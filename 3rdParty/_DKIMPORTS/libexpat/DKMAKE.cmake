@@ -19,7 +19,7 @@ if(MSVC)
 	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpat.lib		LIBEXPAT_LIBRARY_DEBUG)
 	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpat.lib	LIBEXPAT_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpatd.a		LIBEXPAT_LIBRARY_DEBUG
+	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpatd.a		LIBEXPAT_LIBRARY_DEBUG)
 	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpat.a		LIBEXPAT_LIBRARY_RELEASE)
 endif()
 
