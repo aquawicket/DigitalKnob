@@ -69,6 +69,7 @@ dk_disable(x265)
 dk_disable(DKDOM_Window)
 dk_disable(DKHook)
 dk_disable(DKRestart)
+dk_disable(DKWebSockets)
 ###########################
 
 
