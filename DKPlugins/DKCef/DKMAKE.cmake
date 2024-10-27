@@ -1,31 +1,30 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ DKCef ############
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
-
-#dk_require(cef_binary)
-
-if(ANDROID OR IOS OR IOSSIM)
-	dk_undepend(DKCef)
-	dk_disable(DKCef)
-	dk_return()
-endif()
-if(NOT HAVE_cef_binary)
-	dk_undepend(DKCef)
+dk_load(dk_builder)
+if(ANDROID OR IOS OR IOSSIM OR (WIN AND (NOT MSVC)))
 	dk_disable(DKCef)
 	dk_return()
 endif()
 
-if(WIN)
-	dk_depend(winmm)
-endif()
-if(MAC)
+
+elseif(LINUX)
+	#dk_depend(libglib2.0-dev)
+	#dk_depend(libgtk2.0-dev)
+elseif(MAC)
 	#dk_depend(appkit)
 	#dk_depend(foundation)
-endif()
-if(LINUX)
-	#dk_depend(libgtk2.0-dev)
-endif()
-if(RASPBERRY)
+elseif(RASPBERRY)
 	dk_depend(libglib2.0-dev)
 	dk_depend(libgtk2.0-dev)
+elseif(WIN)
+	dk_depend(winmm)
 endif()
 dk_depend(cef_binary)
 dk_depend(DK)
@@ -36,7 +35,7 @@ dk_generateCmake(DKCef)
 dk_assets(DKCef)
 
 
-if(WIN_X86)
+if(WIN_X86 AND MSVC)
 	dk_copy(${CEF_BINARY}/Resources/ ${DK_PROJECT_DIR}/assets/DKCef OVERWRITE)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug/ ${DK_PROJECT_DIR}/assets/DKCef/win_x86_Debug OVERWRITE)
@@ -60,7 +59,7 @@ if(WIN_X86)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
 endif()
 
-if(WIN_X86_64)
+if(WIN_X86_64 AND MSVC)
 	dk_copy(${CEF_BINARY}/Resources/ ${DK_PROJECT_DIR}/assets/DKCef OVERWRITE)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug/ ${DK_PROJECT_DIR}/assets/DKCef/win_x86_64_Debug OVERWRITE)

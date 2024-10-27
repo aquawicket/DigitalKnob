@@ -41,17 +41,17 @@ function(dk_disable plugin)
 	if(${ARGC} GREATER 1)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
-		dk_convertToCIdentifier(${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		dk_convertToCIdentifier(${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocessor or in macros. I.E.    - characters'smust be turned to _
 		dk_undefine(HAVE_${argv1_macro})
 		dk_undepend(${ARGV1})
-		dk_notice("${ARGV1} set to DISABLED")
+		#dk_notice("${ARGV1} set to DISABLED")
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
-		dk_convertToCIdentifier(${plugin} plugin_macro)	   # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		dk_convertToCIdentifier(${plugin} plugin_macro)	   # In c/c++ we can't use certian symbals in the preprocessor or in macros. I.E.     - characters's must be turned to _
 		dk_undefine(HAVE_${plugin_macro})
 		dk_undepend(${plugin})
-		dk_notice("${plugin} set to DISABLED")
+		#dk_notice("${plugin} set to DISABLED")
 	endif()	
 endfunction()
 
@@ -63,5 +63,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_todo()
+	dk_disable(zlib)
 endfunction()

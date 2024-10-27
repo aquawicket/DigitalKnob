@@ -4,7 +4,6 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
-
 ############ uwebsockets ############
 # https://github.com/uNetworking/uWebSockets
 dk_load(dk_builder)
@@ -14,11 +13,9 @@ dk_depend(libuv)
 dk_depend(openssl)
 dk_depend(zlib)
 
-
 ### IMPORT ###
 dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.zip PATCH)
 #dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v20.36.0.zip)
-
 
 ### LINK ###
 dk_include				(${UWEBSOCKETS})
@@ -31,21 +28,17 @@ else()
 	dk_libRelease		(${UWEBSOCKETS_RELEASE_DIR}/libuWS.a)
 endif()
 
-
-
 ### GENERATE ###
 dk_configure(${UWEBSOCKETS}
 	${LIBUV_CMAKE}
 	${OPENSSL_CMAKE}
 	${ZLIB_CMAKE})
 
-
 ### COMPILE ###
 dk_build(${UWEBSOCKETS} uWS)
 
-
-###### NON CMAKE #########
+###### WITHOUT CMAKE #########
 #DEBUG_dk_configure			(${UWEBSOCKETS})
 #DEBUG_dk_build				(${UWEBSOCKETS})
-##########################
+##############################
 

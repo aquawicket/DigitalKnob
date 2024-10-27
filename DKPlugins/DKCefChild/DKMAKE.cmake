@@ -1,3 +1,11 @@
+#!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ DKCefChild ############
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
 if(ANDROID OR IOS OR IOSSIM)
