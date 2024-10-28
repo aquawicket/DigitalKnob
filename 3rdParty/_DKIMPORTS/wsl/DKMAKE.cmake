@@ -5,6 +5,7 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+############ wsl ############
 #dk_load(dk_builder)
 # https://learn.microsoft.com/en-us/windows/wsl/
 # https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command
@@ -28,7 +29,9 @@ endif()
 
 #dk_findProgram(WSL_EXE wsl "C:/Windows/System32")
 if(NOT WSL_EXE)
-	dk_set(WSL_EXE "C:/Windows/System32/wsl.exe")
+	if(EXISTS "C:/Windows/System32/wsl.exe")
+		dk_set(WSL_EXE "C:/Windows/System32/wsl.exe")
+	endif()
 endif()
 dk_assertVar(WSL_EXE)
 

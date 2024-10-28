@@ -71,7 +71,8 @@ DKHOME_DIR(){
 }
 
 ###### Net fix for WSL ######
-if [ -e "$(WSLPATH_EXE)" ]; then	
+if [ -e "$(WSLPATH_EXE)" ]; then
+	echo "Applying WSL net fix"
 	#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
 	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'

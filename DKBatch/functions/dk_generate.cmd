@@ -79,10 +79,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	if "%triple%"=="win_arm64_msvc"     set "MULTI_CONFIG=1"
 	if "%triple%"=="win_x86_msvc"       set "MULTI_CONFIG=1"
 	if "%triple%"=="win_x86_64_msvc"    set "MULTI_CONFIG=1"
-	if not defined MULTI_CONFIG            set "SINGLE_CONFIG=1"
+	if not defined MULTI_CONFIG         set "SINGLE_CONFIG=1"
 	
-	if "%triple%"=="linux_x86"          set "DK_SHELL=wsl"
-    if "%triple%"=="linux_x86_64"       set "DK_SHELL=wsl"
+	if "%triple%"=="linux_x86"          set "WSL_EXE=wsl"
+    if "%triple%"=="linux_x86_64"       set "WSL_EXE=wsl"
 	
 	if defined MULTI_CONFIG             set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%"
 	if defined SINGLE_CONFIG            set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%triple%/%TYPE%"
@@ -128,7 +128,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 ::      %dk_call% dk_cd "$DKCMAKE_DIR"
 ::      set -- "$@" "."
 ::  fi
-	::if defined DK_SHELL (
+	::if defined WSL_EXE (
 	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
 	::	%dk_call% dk_replaceAll "!WSL_CMAKE_ARGS!" "\" "/" WSL_CMAKE_ARGS
 	::)
@@ -136,10 +136,10 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	
 	
 	::###### linux_x86_64 (WSL) ######
-	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
-	if defined DK_SHELL %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
-	if defined DK_SHELL %DK_SHELL% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export TYPE=%TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
-	if defined DK_SHELL %return%
+	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
+	if defined WSL_EXE %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "\" "/" DKSCRIPT_DIR
+	if defined WSL_EXE %WSL_EXE% sh -c "export UPDATE=1 && export APP=%APP% && export triple=%triple% && export TYPE=%TYPE% && %DKSCRIPT_DIR%/DKBuilder.sh && exit $(true)"
+	if defined WSL_EXE %return%
 	
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
