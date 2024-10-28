@@ -23,7 +23,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%POWERSHELL_EXE% -Command "Add-AppxPackage %DKDOWNLOAD_DIR%\TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
 	
 	:: https://superuser.com/a/1678974/600216
-	start shell:AppsFolder\TheDebianProject.DebianGNULinux_76v4gfsz19hv4!debian
+	:: start shell:AppsFolder\TheDebianProject.DebianGNULinux_76v4gfsz19hv4!debian
+	%dk_call% dk_startPackage "Debian"
+	
 %endfunction%
 
 

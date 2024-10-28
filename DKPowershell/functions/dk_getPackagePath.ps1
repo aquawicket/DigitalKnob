@@ -10,19 +10,13 @@ function Global:dk_getPackagePath (){
 	dk_debugFunc 0
 
 	$name = "$($args[0])"
-	#Write-Output "name = ${name}"
-	
 	Get-AppxPackage | ForEach-Object {
 	  $packageFamilyName = $_.PackageFamilyName
 	  $packageManifest = Get-AppxPackageManifest $_
 	  $displayName = $packageManifest.Package.Properties.DisplayName
 	  $appId = $packageManifest.Package.Applications.Application.Id
- 
 		if(${name} -eq ${displayName}){
-			#Write-Output "${displayName}: ${packageFamilyName}!${appId}"
-			$exec = "shell:AppsFolder\${packageFamilyName}!${appId}"
-			#Write-Output "exec = ${exec}"
-			
+			$exec = "shell:AppsFolder\${packageFamilyName}#33${appId}"	# '#33' = html escape code '!'
 			return ${exec}
 		}
 	}

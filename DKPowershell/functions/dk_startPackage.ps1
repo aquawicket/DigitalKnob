@@ -9,23 +9,14 @@ if(!$dk_startPackage){ $dk_startPackage = 1 } else{ return }
 function Global:dk_startPackage (){
 	dk_debugFunc 0
 
-	$name = "$($args[0])"
-	Write-Output "name = ${name}"
+	$name = "$($args[0])"	
+	$packagePath = dk_call dk_getPackagePath("$name")
 	
-	Get-AppxPackage | ForEach-Object {
-	  $packageFamilyName = $_.PackageFamilyName
-	  $packageManifest = Get-AppxPackageManifest $_
-	  $displayName = $packageManifest.Package.Properties.DisplayName
-	  $appId = $packageManifest.Package.Applications.Application.Id
- 
-		if(${name} -eq ${displayName}){
-			Write-Output "${displayName}: ${packageFamilyName}!${appId}"
-			$exec = "shell:AppsFolder\${packageFamilyName}!${appId}"
-			Write-Output "exec = ${exec}"
-			
-			start-process ${exec}
-		}
-	}
+	# expand html escape codes
+	$packagePath = dk_call dk_replaceAll $packagePath "#33" "!"
+	
+	Write-Output "packagePath = ${packagePath}"
+	start-process "${packagePath}"
 }
 
 
