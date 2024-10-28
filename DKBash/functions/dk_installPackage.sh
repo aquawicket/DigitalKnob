@@ -11,6 +11,7 @@
 dk_installPackage() {
 	dk_debugFunc 1
 	
+	dk_call dk_echo "dk_installGit()"
 	#if dk_call dk_packageInstalled ${1}; then
 	#	dk_call dk_warning "${1} already installed"
 	#	return $(true);
@@ -18,52 +19,53 @@ dk_installPackage() {
 	
 	(command -v ${1}) && return $(true)
 	
-	dk_call dk_info "installing ${1}. . ."
+	dk_call dk_info "dk_installPackage() installing ${1}. . ."
+	
 	if (command -v apk); then
-		apk add "${1}"					# Alpine Package Keeper (alpine linux)
+		dk_run ${SUDO_EXE} apk add "${1}"					# Alpine Package Keeper (alpine linux)
 		return
 	elif (command -v apt-get); then
-		apt-get -y install "${1}"		# Apt-get (debian)
+		dk_run ${SUDO_EXE} apt-get -y install "${1}"		# Apt-get (debian)
 		return
 	elif (command -v apt); then	
-		apt -y install "${1}"			# Apt (debian)
+		dk_run ${SUDO_EXE} apt -y install "${1}"			# Apt (debian)
 		return
 	elif (command -v brew); then	
-		brew install "${1}"				# Homebrew (MacOS)
+		dk_run ${SUDO_EXE} brew install "${1}"				# Homebrew (MacOS)
 		return
 	elif (command -v dnf); then
-		dnf install "${1}"				# Dnf (yum)
+		dk_run ${SUDO_EXE} dnf install "${1}"				# Dnf (yum)
 		return
 	elif (command -v emerge); then	
-		emerge "${1}"					# Portage
+		dk_run ${SUDO_EXE} emerge "${1}"					# Portage
 		return
 	elif (command -v nix-env); then	
-		nix-env -i "${1}"				# Nix
+		dk_run ${SUDO_EXE} nix-env -i "${1}"				# Nix
 		return
 	elif (command -v ohpm); then	
-		ohpm install "${1}"				# Ohpm
+		dk_run ${SUDO_EXE} ohpm install "${1}"				# Ohpm
 		return
 	elif (command -v pkg); then
-		pkg install "${1}"				# Termux
+		dk_run ${SUDO_EXE} pkg install "${1}"				# Termux
 		return
 	elif (command -v pacman); then
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DIGITALKNOB_DIR"
-		pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
+		dk_run ${SUDO_EXE} pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
 		return
 	elif (command -v swupd); then
-		swupd bundle-add "${1}"			# Swupd
+		dk_run ${SUDO_EXE} swupd bundle-add "${1}"			# Swupd
 		return
 	elif (command -v tce-load); then
-		tce-load -wil "${1}"     		# Tiny core linux
+		dk_run ${SUDO_EXE} tce-load -wil "${1}"     		# Tiny core linux
 		return
 	elif (command -v winget); then
-		winget install "${1}"			# WinGet
+		dk_run ${SUDO_EXE} winget install "${1}"			# WinGet
 		return
 	elif (command -v xbps-install); then
-		xbps-install "${1}"				# Xbps
+		dk_run ${SUDO_EXE} xbps-install "${1}"				# Xbps
 		return
 	elif (command -v zypper); then
-		zypper in "${1}"				# Zypper
+		dk_run ${SUDO_EXE} zypper in "${1}"				# Zypper
 		return
 	else
 		dk_call dk_error "ERROR: no package managers found"

@@ -195,21 +195,21 @@ dksetOptions(){
 dk_installPackage() {
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk)           					&& apk add ${1} && return				# Alpine Package Keeper (alpine linux)
-	(command -v apt-get &>/dev/null)       		&& apt-get -y install ${1} && return	# Apt-get (debian)
-	(command -v apt &>/dev/null)           		&& apt -y install ${1} && return		# Apt (debian)
-	(command -v brew &>/dev/null)          		&& brew install ${1} && return			# Homebrew (MacOS)
-	(command -v dnf &>/dev/null)           		&& dnf install ${1} && return			# Dnf (yum)
-	(command -v emerge &>/dev/null)        		&& merge ${1} && return					# Portage
-	(command -v nix-env &>/dev/null)       		&& nix-env -i ${1} && return			# Nix
-	(command -v ohpm &>/dev/null)          		&& ohpm install ${1} && return			# Ohpm
-	(command -v pkg &>/dev/null)           		&& pkg install ${1} && return			# Termux
-	(command -v pacman &>/dev/null)        		&& pacman -S ${1} && return				# Pacman
-	(command -v swupd &>/dev/null)         		&& swupd bundle-add ${1} && return		# Swupd
-	(command -v tce-load &>/dev/null)      		&& tce-load -wil ${1} && return 	   	# Tiny core linux
-	(command -v winget &>/dev/null)        		&& winget install ${1} && return		# WinGet
-	(command -v xbps-install &>/dev/null)		&& xbps-install ${1} && return			# Xbps
-	(command -v zypper &>/dev/null)				&& zypper in ${1} && return				# Zypper
+    (command -v apk)           					&& ${SUDO_EXE} apk add ${1} && return				# Alpine Package Keeper (alpine linux)
+	(command -v apt-get)       					&& ${SUDO_EXE} apt-get -y install ${1} && return	# Apt-get (debian)
+	(command -v apt)           					&& ${SUDO_EXE} apt -y install ${1} && return		# Apt (debian)
+	(command -v brew)          					&& ${SUDO_EXE} brew install ${1} && return			# Homebrew (MacOS)
+	(command -v dnf)           					&& ${SUDO_EXE} dnf install ${1} && return			# Dnf (yum)
+	(command -v emerge &>/dev/null)        		&& ${SUDO_EXE} merge ${1} && return					# Portage
+	(command -v nix-env &>/dev/null)       		&& ${SUDO_EXE} nix-env -i ${1} && return			# Nix
+	(command -v ohpm &>/dev/null)          		&& ${SUDO_EXE} ohpm install ${1} && return			# Ohpm
+	(command -v pkg &>/dev/null)           		&& ${SUDO_EXE} pkg install ${1} && return			# Termux
+	(command -v pacman &>/dev/null)        		&& ${SUDO_EXE} pacman -S ${1} && return				# Pacman
+	(command -v swupd &>/dev/null)         		&& ${SUDO_EXE} swupd bundle-add ${1} && return		# Swupd
+	(command -v tce-load &>/dev/null)      		&& ${SUDO_EXE} tce-load -wil ${1} && return 	   	# Tiny core linux
+	(command -v winget &>/dev/null)        		&& ${SUDO_EXE} winget install ${1} && return		# WinGet
+	(command -v xbps-install &>/dev/null)		&& ${SUDO_EXE} xbps-install ${1} && return			# Xbps
+	(command -v zypper &>/dev/null)				&& ${SUDO_EXE} zypper in ${1} && return				# Zypper
 	(command -v dk_installPackage &>/dev/null)  && echo "ERROR: No package managers found." && exit 1 
 
 	${dk_installPackage} ${1}

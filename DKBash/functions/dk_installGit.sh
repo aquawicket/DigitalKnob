@@ -7,8 +7,10 @@
 #
 dk_installGit() {
 	dk_debugFunc 0
-
+	dk_call dk_echo "dk_installGit()"
+	
 	if ! dk_call dk_commandExists git; then
+		dk_call dk_echo "dk_installPackage()"
 		dk_call dk_installPackage git
 	fi
 	

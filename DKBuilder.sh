@@ -1,28 +1,29 @@
 #!/bin/sh
 ############ dk_onError trap ############
-(set -o posix)			&& set -o posix			|| echo "(set -o posix) failed"
-(set -o pipefail) 		&& set -o pipefail  	|| echo "(set -o pipefail) failed"  	# trace ERR through pipes
-(set -E) 				&& set -E  				|| echo "(set -E) failed" 				# set -E : trace ERR through 'time command' and other functions
-(set -u) 		 		&& set -u			   	|| echo "(set -u) failed" 				# set -u : exit the script if you try to use an uninitialised variable
-(set -e)  	 			&& set -e  				|| echo "(set -e) failed" 				# set -e : exit the script if any statement returns a non-true
-(shopt -s extdebug)     && shopt -s extdebug	|| echo "(shopt -s extdebug) failed" 
+(set -o posix 		2> /dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
+(set -o pipefail 	2> /dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
+(set -E				2> /dev/null)	&& set -E  				|| echo "'set -E' failed" 				# set -E : trace ERR through 'time command' and other functions
+(set -u				2> /dev/null)	&& set -u			   	|| echo "'set -u' failed" 				# set -u : exit the script if you try to use an uninitialised variable
+(set -e				2> /dev/null)	&& set -e  				|| echo "'set -e' failed" 				# set -e : exit the script if any statement returns a non-true
+(shopt -s extdebug	2> /dev/null)	&& shopt -s extdebug	|| echo "'shopt -s extdebug' failed" 
 
 #trap 'echo "Press Enter to continue..."; read' SIGUSR1
 #alias _pause='kill -s USR1 $$'
-(trap dk_onError ERR &>/dev/null)  && trap dk_onError ERR  || echo "(trap dk_onError ERR) failed"
+(trap dk_onError ERR 2>/dev/null)  && trap dk_onError ERR  || echo "'trap dk_onError ERR' failed"
 dk_onError(){
 	exitcode=$?
 	
 	echo "" &>/dev/tty
 	if [ -n "${1-}" ];then
-		echo "ERROR: '${1-}'" &>/dev/tty
+		echo "ERROR: '${1-}'" >&2
 	else
-		echo "ERROR: '${BASH_COMMAND-}'" &>/dev/tty
+		echo "ERROR: '${BASH_COMMAND-}'" >&2
 	fi
-	echo "file: ${BASH_SOURCE[0]}" &>/dev/tty
-	echo "line: ${BASH_LINENO[0]}" &>/dev/tty
-	echo "exit_code: ${exitcode}" &>/dev/tty
-	echo "" &>/dev/tty
+	#echo "file: ${BASH_SOURCE[0]}" >&2
+	[ -n "${BASH_SOURCE-}" ] && echo "file: $BASH_SOURCE" >&2 || echo "file: $0" >&2
+	[ -n "${BASH_LINENO-}" ] && echo "line: $BASH_LINENO" >&2 || echo "line: ${LINENO-}" >&2
+	echo "exit_code: ${exitcode}" >&2
+	echo "" >&2
 
 	#_pause
 	read -rp 'Press Enter to continue...'
@@ -33,32 +34,24 @@ dk_onError(){
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
-	(command -v sudo) && SUDO_EXE=$(command -v sudo) && export SUDO_EXE
-	[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
-	#echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
+	(command -v sudo) || echo "sudo Not Found" >&2
 }
 
 ###### CMD_EXE ######
 CMD_EXE(){
-	(command -v cmd.exe) && CMD_EXE=$(command -v cmd.exe) && export CMD_EXE
-	[ -e "${CMD_EXE-}" ]	|| export CMD_EXE="/mnt/c/Windows/System32/cmd.exe"
-	[ -e "${CMD_EXE-}" ]	&& echo "${CMD_EXE-}" || dk_onError "CMD_EXE:${CMD_EXE-} Not Found"
-	#echo "CMD_EXE = '${CMD_EXE-}'" &>/dev/tty
+	(command -v cmd.exe) || echo "cmd.exe Not Found" >&2
 }
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	(command -v cygpath) && CYGPATH_EXE=$(command -v cygpath) && export CYGPATH_EXE
-	[ -e "${CYGPATH_EXE-}" ] && echo "${CYGPATH_EXE}" || unset CYGPATH_EXE
-	#echo "CYGPATH_EXE = '${CYGPATH_EXE-}'" &>/dev/tty
+	(command -v cygpath) || echo "cygpath Not Found"  >&2
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	(command -v wslpath) && WSLPATH_EXE=$(command -v wslpath) && export WSLPATH_EXE
-	[ -e "${WSLPATH_EXE-}" ] && echo "${WSLPATH_EXE}" || unset WSLPATH_EXE
-	#echo "WSLPATH_EXE = '${WSLPATH_EXE-}'" &>/dev/tty
+	(command -v wslpath) || echo "wslpath Not Found"  >&2
 }
+
 
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
@@ -67,20 +60,20 @@ DKHOME_DIR(){
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 && export DKHOME_DIR=${HOME}
 	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"  #ANDROID
 	[ -e "${DKHOME_DIR-}" ]	  && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
-	#echo "DKHOME_DIR = '${DKHOME_DIR-}'" &>/dev/tty
+	#echo "DKHOME_DIR = '${DKHOME_DIR-}'" >&2
 }
 
 ###### Net fix for WSL ######
-if [ -e "$(WSLPATH_EXE)" ]; then
-	echo "Applying WSL net fix"
-	#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
-	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
-	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
-	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-	(command -v chattr &>/dev/null) && $(SUDO_EXE) chattr +i /etc/resolv.conf
-fi
-
-
+dk_wslFixNet(){
+	if [ -e "$(WSLPATH_EXE)" ]; then
+		echo "Applying WSL net fix"
+		#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
+		($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+		$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
+		$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+		(command -v chattr &>/dev/null) && $(SUDO_EXE) chattr +i /etc/resolv.conf
+	fi
+}
 
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 [ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
