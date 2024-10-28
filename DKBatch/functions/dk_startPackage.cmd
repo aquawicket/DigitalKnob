@@ -15,6 +15,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	:: Expand html escape codes
 	setlocal disableDelayedExpansion
 	%dk_call% dk_replaceAll "%rtn_var%" "#33" "!" rtn_var
+	::echo %rtn_var%
 	start %rtn_var%
 %endfunction%
 
