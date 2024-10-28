@@ -19,7 +19,6 @@ function(dk_pause)
 	dk_echo("${pause_msg}")
 	
 	###### Cmd ######
-	#dk_depend(cmd)
 	if(DEFINED ENV{COMSPEC})
 		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
 		execute_process(COMMAND ${CMD_EXE} /c pause >nul)
@@ -34,10 +33,8 @@ function(dk_pause)
 	endif()
 	
 	###### Bash ######
-	dk_depend(bash)
-	#find_program(BASH_EXE bash)
-	if(BASH_EXE)
-		execute_process(COMMAND ${BASH_EXE} read -p)
+	if(DEFINED ENV{BASH})
+		execute_process(COMMAND $ENV{BASH} read -p)
 		dk_return()
 	endif()
 		
