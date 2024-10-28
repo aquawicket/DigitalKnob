@@ -8,10 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ############ DKCef ############
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 dk_load(dk_builder)
-if(ANDROID OR IOS OR IOSSIM OR (WIN AND (NOT MSVC)))
+#if(ANDROID OR IOS OR IOSSIM OR (WIN AND (NOT MSVC)))
 	dk_disable(DKCef)
 	dk_return()
-endif()
+#endif()
 
 
 if(LINUX)

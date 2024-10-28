@@ -1,13 +1,16 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+
+
+############ HellowWorld ############
 dk_load(dk_builder)
 
-return()
+#return()
+
 # NOTE: HelloWorld requires no DK libs
-dk_validate(host_triple "dk_host_triple()")
-dk_validate(TRIPLE "dk_TARGET_TRIPLE()")
-
-
 set(APP_NAME "HelloWorld")
 
 #dk_generateCmake(${APP_NAME})
