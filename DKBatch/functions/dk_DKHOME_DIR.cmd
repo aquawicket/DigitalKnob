@@ -11,11 +11,16 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
     if defined DKHOME_DIR %return%
     
+	::###### WSLPATH_EXE ######
+	::%dk_call% dk_set WSLPATH_EXE   "%WSL_EXE% wslpath"
+	::%dk_call% dk_printVar WSLPATH_EXE
+
     if not defined HOMEDRIVE        %dk_call% dk_warning "HOMEDRIVE is invalid"
     if not defined HOMEPATH         %dk_call% dk_warning "HOMEPATH is invalid"
 	
 	::### DKHOME_DIR ###
     set "DKHOME_DIR=%USERPROFILE%"
+	if exist "%WSLPATH_EXE%"        %dk_call% dk_commandToVariable "%WSLPATH_EXE% -u %DKHOME_DIR%" DKHOME_DIR
     if not exist "%DKHOME_DIR%"     %dk_call% dk_fatal "DKHOME_DIR:%DKHOME_DIR% does not exist"
 	
 	::### DKCACHE_DIR ###
