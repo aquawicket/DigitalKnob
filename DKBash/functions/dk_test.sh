@@ -19,6 +19,9 @@ echo "        DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
 dk_test() {
     dk_debugFunc 0 99
     
+	dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR"
+	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
     dk_call dk_echo "################ dk_test.sh ################"
     dk_call dk_echo "                    0 = $0"
     dk_call dk_echo "                    * = $*"
@@ -40,7 +43,7 @@ dk_test() {
     dk_call dk_echo "          DIGITALKNOB = ${DIGITALKNOB-}"
     dk_call dk_echo "      DIGITALKNOB_DIR = ${DIGITALKNOB_DIR-}"
     dk_call dk_echo "       DKDOWNLOAD_DIR = ${DKDOWNLOAD_DIR-}"
-    dk_call dk_echo "          DKTOOLD_DIR = ${DKTOOLD_DIR-}"
+    dk_call dk_echo "          DKTOOLS_DIR = ${DKTOOLS_DIR-}"
     dk_call dk_echo "             DKBRANCH = ${DKBRANCH-}"
     dk_call dk_echo "         DKBRANCH_DIR = ${DKBRANCH_DIR-}"
     dk_call dk_echo "       DK3RDPARTY_DIR = ${DK3RDPARTY_DIR-}"
