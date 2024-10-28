@@ -14,7 +14,7 @@ if(ANDROID OR IOS OR IOSSIM OR (WIN AND (NOT MSVC)))
 endif()
 
 
-elseif(LINUX)
+if(LINUX)
 	#dk_depend(libglib2.0-dev)
 	#dk_depend(libgtk2.0-dev)
 elseif(MAC)
