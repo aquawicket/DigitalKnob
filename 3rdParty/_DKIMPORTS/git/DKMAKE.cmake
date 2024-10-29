@@ -53,7 +53,7 @@ if(NOT GIT_EXE)
 		#dk_command(apt -y install git)
 		dk_installPackage(git)
 	elseif(LINUX_HOST)
-		# https://stackoverflow.com/a/27469489
+		# https://stackoverflow.com/a/27469489z
 		#dk_depend(sudo)
 		#dk_command(${SUDO_EXE} apt-get -y install git)
 		#dk_command(${SUDO_EXE} apt-get install apt-rdepends)
