@@ -18,6 +18,8 @@ function(dk_cd directory)
 	if("${PWD}" EQUAL "${directory}")
 		dk_error("dk_cd(${directory}): PWD is already set to ${directory}")
 	endif()
+	
+	dk_set(OLDPWD "${PWD}")
 	dk_set(PWD "${directory}")
 	dk_info("dk_cd(${directory}): working directory set to ${directory}")
 endfunction()

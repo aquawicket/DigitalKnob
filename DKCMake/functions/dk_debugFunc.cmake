@@ -29,7 +29,11 @@ macro(dk_debugFunc)
     get_filename_component(__FILE__ "${__FILE__}" NAME CACHE INTERNAL "")
 	set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}" CACHE INTERNAL "")
 	set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}"       CACHE INTERNAL "")
-    set(__ARGC__ "${DKARGC}"                           CACHE INTERNAL "")
+	
+	#set(__WATCH_FUNCTION__ "${CMAKE_CURRENT_FUNCTION}")
+	#variable_watch(__WATCH_FUNCTION__  dk_onCallstack)
+    
+	set(__ARGC__ "${DKARGC}"                           CACHE INTERNAL "")
 	if(DKARGV)
 		string(STRIP "${DKARGV}" __ARGV__)
 		string(REPLACE ";" "', '" __ARGV__ "${DKARGV}")

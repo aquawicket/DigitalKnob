@@ -13,7 +13,6 @@ message("")
 
 
 #set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
-
 cmake_policy(SET CMP0003 NEW) 	# https://cmake.org/cmake/help/latest/policy/CMP0003.html	cmake 2.6.0
 cmake_policy(SET CMP0007 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0007.html	cmake 2.6.0
 cmake_policy(SET CMP0011 NEW)	# https://cmake.org/cmake/help/latest/policy/CMP0011.html	cmake 2.6.3
@@ -82,10 +81,9 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	
-	#variable_watch(CMAKE_MAKE_PROGRAM dk_variableWatch)
-	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors on all builds
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE  dk_onCallstack)
+	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors
 #	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
-	
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
@@ -159,11 +157,23 @@ endfunction()
 macro(dk_onCallstack variable access value current_list_file stack)
 	#message("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
+		if("${value}" STREQUAL "dk_set")
+			return()
+		endif()
+		if("${value}" STREQUAL "dk_onCallstack")
+			return()
+		endif()
+		set(this_stack "${variable} ${access} ${value} ${current_list_file} ${stack}")
+		if("${this_stack}" STREQUAL "${prev_stack}")
+			return()
+		endif()
+		dk_set(prev_stack "${variable} ${access} ${value} ${current_list_file} ${stack}")
 		set(MAX_STACK_SIZE 99)
 		set(CMAKE_STACK ${stack} CACHE INTERNAL "")
 		list(LENGTH CMAKE_STACK CMAKE_STACK_SIZE)
 			
 		set(__FILE__ "${CMAKE_CURRENT_FUNCTION_LIST_FILE}" CACHE INTERNAL "")
+		get_filename_component(__FILE__ "${__FILE__}" NAME)
 		set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}" CACHE INTERNAL "")
 		set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}" CACHE INTERNAL "")
 		set(__ARGV__ "${ARGV}" CACHE INTERNAL "")
@@ -212,7 +222,16 @@ macro(dk_onCallstack variable access value current_list_file stack)
 		set(STACK_LEVEL ${STACK_LEVEL} CACHE INTERNAL "")
 		set(__LEVEL__ ${STACK_LEVEL_SIZE})
 		
-		#dk_echo("${cyan}  > ${__TIME__}${__FILE__}:${__LINE__}   ${__FUNCTION__}()")
+		unset(indent)
+		set(i 4)
+		while(${i} LESS ${__LEVEL__})
+			set(indent "${indent}-")
+			math(EXPR i "${i}+1")
+		endwhile(${i} LESS ${__LEVEL__})
+		set(indent "${indent}-> ")
+		
+		message("${indent}${__FUNCTION__}(${__ARGV__})")	
+		#dk_echo("${cyan}${indent}${__TIME__}${__FILE__}:${__LINE__}   ${__FUNCTION__}(${__ARGV__})")
 	endif()
 endmacro()
 
@@ -222,9 +241,8 @@ endmacro()
 function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
-	
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onCallstack)
-	variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
+	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onCallstack)
 endfunction()
 
 ##################################################################################
@@ -283,7 +301,4 @@ function(dk_setVariables)
 endfunction()
 
 
-
 DKINIT()
-
-
