@@ -25,12 +25,15 @@ dk_copy(${GLEW_DIR}/build/cmake ${GLEW_TRIPLE_DIR}/CMakeFiles/Export/lib/cmake/g
 ### LINK ###
 dk_define			(GLEW_STATIC)
 dk_include			(${GLEW_DIR}/include									GLEW_INCLUDE_DIR)
-if(MSVC)
-	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
-	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libglew32.lib	GLEW_RELEASE_LIBRARY)
-elseif(APPLE)
+if(APPLE)
 	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
 	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libGLEW.a		GLEW_RELEASE_LIBRARY)
+elseif(MSVC)
+	dk_libDebug		(${GLEW_CONFIG_DIR}/lib/${DEBUG_DIR}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_CONFIG_DIR}/lib/${RELEASE_DIR}/libglew32.lib	GLEW_RELEASE_LIBRARY)
+elseif(WIN)
+	dk_libDebug		(${GLEW_DEBUG_DIR}/lib/libglew32d.a						GLEW_DEBUG_LIBRARY)
+	dk_libRelease	(${GLEW_RELEASE_DIR}/lib/libglew32.a					GLEW_RELEASE_LIBRARY)
 else()
 	dk_libDebug		(${GLEW_DEBUG_DIR}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
 	dk_libRelease	(${GLEW_RELEASE_DIR}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
@@ -49,7 +52,6 @@ RELEASE_dk_set		(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
 #	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${triple}/lib/${DEBUG_DIR}/glew32d.lib
 #	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${triple}/lib/${RELEASE_DIR}/glew32.lib
 #	-DGLEW_LIBRARIES=${GLEW_LIBRARY_DEBUG} ${GLEW_LIBRARY_RELEASE})
-
 dk_set(GLEW_CMAKE 
 	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
 	-DGLEW_LIBRARY=${GLEW_LIBRARY})
