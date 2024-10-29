@@ -45,11 +45,12 @@ endif()
 if(WIN_HOST_X86)
 	dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/win32/nasm-2.16.01-win32.zip)
 	dk_set(NASM_EXE ${NASM_DIR}/nasm.exe)
+	dk_appendEnvPath(${NASM_DIR})
 endif()
 
 if(WIN_HOST_X86_64)
 	dk_import(https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip)
 	dk_set(NASM_EXE ${NASM_DIR}/nasm.exe)
+	dk_appendEnvPath(${NASM_DIR})
 endif()
 
-dk_appendEnvPath(${NASM_DIR})
