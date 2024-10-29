@@ -328,10 +328,22 @@ function(dk_importVariables url)
 		endif()
 	endif()
 
+	### NOTE:
+	#	We may wish to create a PLUGIN_STACK to hold a referece to out plugin order. If and when plugins are built nested inside eachother at 
+	#   multiple levels, we'll need to keep up with the current position in the stack. 
+	#	For example, libpng depends on zlib. We import libpng, CURRENT_PLUGIN is LIBPNG. Inside libpng's build script we depend on zlib. 
+	#   Now the CURRENT_PLUGIN is ZLIB. Zlib get's configured and built and returns back the libpng to configure, problem is CURRENT_PLUGIN is still ZLIB.
+	#   So we need to pop zlib off of the stack when it completes so out CURRENT_PLUGIN points back to libpng. Currently dk_importVariables is how we
+	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
+	
+	# PREV_PLUGIN
+	unset(PREV_PLUGIN)
+	dk_set(PREV_PLUGIN ${CURRENT_PLUGIN})
+	
 	# CURRENT_PLUGIN
 	unset(CURRENT_PLUGIN)
-	dk_set(CURRENT_PLUGIN ${PLUGIN_IMPORT_NAME_UPPER})
-	dk_convertToCIdentifier(${CURRENT_PLUGIN} CURRENT_PLUGIN)
+	#dk_set(CURRENT_PLUGIN ${PLUGIN_IMPORT_NAME_UPPER})
+	dk_convertToCIdentifier(${PLUGIN_IMPORT_NAME_UPPER} CURRENT_PLUGIN)
 	dk_set(CURRENT_PLUGIN ${CURRENT_PLUGIN})
 	if(NOT ${PLUGIN_IMPORT_NAME_UPPER} STREQUAL ${CURRENT_PLUGIN})
 		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${CURRENT_PLUGIN}")
