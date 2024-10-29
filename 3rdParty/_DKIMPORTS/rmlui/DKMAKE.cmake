@@ -87,7 +87,7 @@ dk_import(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip)
 
 ### PATCH ###
 dk_gitApplyPatch("${RMLUI_DIR}" "${DKIMPORTS_DIR}/rmlui/rmlui.patch")
-dk_importVariables(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip) # TEMPORARY HACK FIX - reimport variables that git just stole in the command above
+#dk_importVariables(https://github.com/mikke89/RmlUi/archive/a903d8f7.zip) # TEMPORARY HACK FIX - reimport variables that git just stole in the command above
 
 ### LINK ###
 dk_define		(RMLUI_STATIC_LIB)
