@@ -26,7 +26,7 @@ function(dk_reparseCmakeCommand CMD_LIST)
 		if(${item} MATCHES "=")
 			list(REMOVE_ITEM ARGV ${item})
 			
-			# Find the position of the first occurrence of "Hello"
+			# Find the position of the first occurrence of a "VARIABLE"
 			string(FIND "${item}" "-D" d_pos)
 			math(EXPR d_pos_end "${d_pos}+2")
 			if(d_pos GREATER_EQUAL 0)
@@ -40,10 +40,10 @@ function(dk_reparseCmakeCommand CMD_LIST)
 			if(e_pos GREATER_EQUAL 0)
 				string(SUBSTRING "${item}" 0 ${e_pos} firstC_part)
 				string(SUBSTRING "${item}" ${e_pos_end} -1 secondC_part)
+				dk_replaceAll("${secondC_part}" "\"" "" secondC_part) # remove any quotes in second_part, we will re-add then
 				set(item "${firstC_part} \"${secondC_part}\" CACHE INTERNAL \"\" FORCE)")
 			endif()
 
-			#message("itemC = ${item}")
 			file(APPEND ${DKCACHE_DIR}/cmake_reparsed.txt "${item}\n")
 		endif() 
 	endforeach()
