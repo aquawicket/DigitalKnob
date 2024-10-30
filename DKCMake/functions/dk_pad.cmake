@@ -3,27 +3,23 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_pad(str padchar left-length right-length align rtn_var)
+# dk_pad(str padchar left right align rtn_var)
 #
 #	Pad the end of a string to length with a given character
 #
 #   @str		- The string to pad
 #   @padchar	- The fill character to use
-#	@length		- The number of spaces to pad
-#	@rtn_var		- The returned string w/padding
+#	  @left		- The number of left spaces to pad
+#	  @right	- The number of right spaces to pad
+#	  @align	- Align text to either side  (L) or (R)
+#	  @rtn_var	- The returned string w/padding
 #
 function(dk_pad str padchar left right align rtn_var)
 	dk_debugFunc()
 	
 	string(LENGTH "${str}" strlen)
-	if("${align}" STREQUAL "L")
-		math(EXPR right_length "${right} - ${strlen}")
-		math(EXPR left_length "${left}")
-	else()
-		math(EXPR right_length "${right} - ${strlen}")
-		math(EXPR left_length "${left}")
-	endif()
-	#message("strlen = ${strlen}")
+	math(EXPR right_length "${right} - ${strlen}")
+	math(EXPR left_length "${left}")
 
 	if(left_length GREATER 0)
 		if(${CMAKE_VERSION} VERSION_LESS "3.14")
@@ -64,22 +60,22 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_pad("padded string A" "*" 3 16 L strA)
+	dk_pad("padded string A" " " 3 18 L strA)
 	message("${strA}")
 
-	dk_pad("string B" "*" 3 16 L strB)
+	dk_pad("string B" " " 3 18 L strB)
 	message("${strB}")
 	
-	dk_pad("str C" "*" 3 16 L strC)
+	dk_pad("str C" " " 3 18 L strC)
 	message("${strC}")
 	
-	dk_pad("padded string D" "*" 3 16 R strD)
+	dk_pad("padded string D" " " 3 18 R strD)
 	message("${strD}")
 
-	dk_pad("string E" "*" 3 16 R strE)
+	dk_pad("string E" " " 3 18 R strE)
 	message("${strE}")
 	
-	dk_pad("str F" "*" 3 16 R strF)
+	dk_pad("str F" " " 3 18 R strF)
 	message("${strF}")
 	
 	
