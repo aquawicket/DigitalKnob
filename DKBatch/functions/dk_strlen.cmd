@@ -31,7 +31,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     call dk_debugFunc 0
  setlocal
  
-    %dk_call% dk_set _demo "some example string"
-    %dk_call% dk_strlen _demo _length
-    %dk_call% dk_info "String is %_length% characters long"
+    %dk_call% dk_set str "some example string"
+    %dk_call% dk_strlen str length
+	%dk_call% dk_echo "%str%"
+    %dk_call% dk_echo "str is %length% characters long"
 %endfunction%
