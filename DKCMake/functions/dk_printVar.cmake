@@ -8,6 +8,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	If the msg is a defined variable, print it's name and value
 #	@variable	- The name of the variable to print
 #
+#	  $ENV{myVariable}:list  = "abc;123;456"
+#   $CACHE{myVariable}:string  = "abc123345"
+#        ${myVariable}:list         = "123;456;789"
 function(dk_printVar)
 	dk_debugFunc()
 
@@ -21,11 +24,11 @@ function(dk_printVar)
 	if(DEFINED "ENV{${ARGV}}")
 		dk_isList(isList "$ENV{${ARGV}}")
 		if(isList)
-			dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV LIST variable ${clr}")
-			dk_echo("${cyan}\$ENV{${ARGV}} = ${blue}'$ENV{${ARGV}}'${clr}")
+			#dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV LIST variable ${clr}")
+			dk_echo("  ${cyan}\$ENV{${ARGV}}:list = ${blue}'$ENV{${ARGV}}'${clr}")
 		else()
-			dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV STRING variable${clr}")
-			dk_echo("${cyan}\$ENV{${ARGV}} = ${blue}'$ENV{${ARGV}}'${clr}")
+			#dk_echo("${cyan}\$ENV{${ARGV}}${white} is a ENV STRING variable${clr}")
+			dk_echo("  ${cyan}\$ENV{${ARGV}}:string = ${blue}'$ENV{${ARGV}}'${clr}")
 		endif()
 	endif()	
 		
@@ -33,11 +36,11 @@ function(dk_printVar)
 	if(DEFINED "CACHE{${ARGV}}")
 		dk_isList(isList "$CACHE{${ARGV}}")
 		if(isList)
-			dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE LIST variable${clr}")
-			dk_echo("${cyan}\$CACHE{${ARGV}} = ${blue}'$CACHE{${ARGV}}'${clr}")
+			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE LIST variable${clr}")
+			dk_echo("${cyan}\$CACHE{${ARGV}}:list = ${blue}'$CACHE{${ARGV}}'${clr}")
 		else()
-			dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE STRING variable${clr}")
-			dk_echo("${cyan}\$CACHE{${ARGV}} = ${blue}'$CACHE{${ARGV}}'${clr}")
+			#dk_echo("${cyan}\$CACHE{${ARGV}}${white} is a CACHE STRING variable${clr}")
+			dk_echo("${cyan}\$CACHE{${ARGV}}:string = ${blue}'$CACHE{${ARGV}}'${clr}")
 		endif()
 	endif()
 		
@@ -45,24 +48,24 @@ function(dk_printVar)
 	if(DEFINED "${ARGV}")
 		dk_isList(isList "${ARGV}")
 		if(isList)
-			dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL LIST variable${clr}")
-			dk_echo("${cyan}\${${ARGV}} = ${blue}'${${ARGV}}'${clr}")
+			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL LIST variable${clr}")
+			dk_echo("     ${cyan}\${${ARGV}}:list = ${blue}'${${ARGV}}'${clr}")
 		else()
-			dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL STRING variable${clr}")
-			dk_echo("${cyan}\${${ARGV}} = ${blue}'${${ARGV}}'${clr}")
+			#dk_echo("${cyan}\${${ARGV}}${white} is a LOCAL STRING variable${clr}")
+			dk_echo("     ${cyan}\${${ARGV}}:string = ${blue}'${${ARGV}}'${clr}")
 		endif()	
 	endif()	
 		
 	###### MACRO ######
 	dk_isMacro(isMacro "${ARGV}")
 	if(isMacro)
-		dk_echo("${cyan}${ARGV}()${white} is a MACRO${clr}")
+		dk_echo("    ${cyan}MACRO:${ARGV}()${white} is a MACRO${clr}")
 	endif()
 	
 	###### FUNCTION ######
 	dk_isFunction(isFunction "${ARGV}")
 	if(isFunction)
-		dk_echo("${cyan}${ARGV}()${white} is a FUNCTION${clr}")
+		dk_echo("     ${cyan}FUNC:${ARGV}()${white} is a FUNCTION${clr}")
 	endif()		
 		
 

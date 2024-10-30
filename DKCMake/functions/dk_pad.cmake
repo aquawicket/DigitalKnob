@@ -15,9 +15,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_pad str padchar length rtn_var)
 	dk_debugFunc()
 	
-
 	string(LENGTH "${str}" strlen)
 	math(EXPR strlen "${length} - ${strlen}")
+	#message("strlen = ${strlen}")
 
 	if(strlen GREATER 0)
 		if(${CMAKE_VERSION} VERSION_LESS "3.14")
@@ -32,7 +32,7 @@ function(dk_pad str padchar length rtn_var)
 	endif()
 
 	#dk_printVar(pad)
-  set(${rtn_var} "${pad}" PARENT_SCOPE)
+  set(${rtn_var} "${pad}${str}" PARENT_SCOPE)
 endfunction()
 
 
@@ -42,5 +42,12 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_todo()
+	dk_pad("padded string A" " " 15 strA)
+	message("${strA}")
+
+	dk_pad("string B" " " 15 strB)
+	message("${strB}")
+	
+	dk_pad("str C" " " 15 strC)
+	message("${strC}")
 endfunction()
