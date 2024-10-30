@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 
-# TODO:  Turn this into a macro. Then, if we disable a plugin and that is the current list file, we can return.
+# TODO:  Turn this into a macro. Then, if we disable a plugin and while we are in that plugin's current list file, we can automatically return
 
 ###############################################################################
 # dk_disable(plugin) #target
