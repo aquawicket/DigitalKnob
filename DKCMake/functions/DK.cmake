@@ -36,7 +36,7 @@ function(DKINIT)
 	dk_init()
 
 	###### Reload Main Script with cmake ######
-	# dk_reloadWithCmake()
+	# d_k_reloadWithCmake()
 	
 	############ Get DKCMAKE variables ############
 	dk_DKCMAKE_VARS()
@@ -251,10 +251,12 @@ endfunction()
 function(dk_DKSCRIPT_VARS)
 	###### DKSCRIPT_PATH ######
 	set(DKSCRIPT_PATH "${CMAKE_PARENT_LIST_FILE}" CACHE INTERNAL "")
-	if(NOT EXISTS ${DKSCRIPT_PATH})
-		dk_fatal("DKSCRIPT_PATH not found!")
+	if(NOT EXISTS "${DKSCRIPT_PATH}")
+		set(DKSCRIPT_PATH "${CMAKE_CURRENT_LIST_FILE}" CACHE INTERNAL "")
 	endif()
-	
+	if(NOT EXISTS "${DKSCRIPT_PATH}")
+		message(FATAL_ERROR "DKSCRIPT_PATH:${DKSCRIPT_PATH} not found")
+	endif()	
 	###### DKSCRIPT_ARGS ######
 	set(DKSCRIPT_ARGS ${ARGS} CACHE INTERNAL "")
 
