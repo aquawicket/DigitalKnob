@@ -13,6 +13,7 @@ function(dk_getNativePath input output)
 	endif()
 	
 	file(TO_NATIVE_PATH "${input}" native_path)
+	dk_debug("Converted ${input} to NATIVE_PATH:${native_path}")
 	
 	if("${output}" MATCHES "ENV{") 
 		set(${output} "${native_path}")				# ENV variable
