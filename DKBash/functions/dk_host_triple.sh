@@ -85,11 +85,11 @@ dk_host_triple() {
 		CLANG_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar CLANG_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${CLANG_TRIPLE} && dk_call dk_printVar host_triple
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${CLANG_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${host_triple-}" ] && host_triple=${CLANG_TRIPLE} && dk_call dk_printVar host_triple
+		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${CLANG_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${CLANG_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${HOST_OS-}" ]     && HOST_OS=${CLANG_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${HOST_ENV-}" ]    && HOST_ENV=${CLANG_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
 	if dk_call dk_commandExists gcc; then
 		GCC_TRIPLE=$(try gcc -dumpmachine) && dk_call dk_printVar GCC_TRIPLE
@@ -107,11 +107,11 @@ dk_host_triple() {
 		GCC_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar GCC_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${GCC_TRIPLE} && dk_call dk_printVar host_triple
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${GCC_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${host_triple-}" ] && host_triple=${GCC_TRIPLE} && dk_call dk_printVar host_triple
+		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${GCC_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${GCC_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${HOST_OS-}" ]     && HOST_OS=${GCC_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${HOST_ENV-}"	]    && HOST_ENV=${GCC_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
 	if dk_call dk_commandExists bash; then
 		BASH_TRIPLE=$(bash -c "builtin echo \${MACHTYPE}")
@@ -130,11 +130,11 @@ dk_host_triple() {
 		BASH_ENV="${remainder%%-*}"; remainder="${remainder#*-}"
 		dk_call dk_printVar BASH_ENV
 
-		[ -z ${host_triple-} ] && host_triple=${BASH_TRIPLE} && dk_call dk_printVar host_triple
-		[ -z ${HOST_ARCH-} ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR-} ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS-} ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV-} ]    && HOST_ENV=${BASH_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${host_triple-}" ] && host_triple=${BASH_TRIPLE} && dk_call dk_printVar host_triple
+		[ -z "${HOST_ARCH-}" ]   && HOST_ARCH=${BASH_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${HOST_VENDOR-}" ] && HOST_VENDOR=${BASH_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${HOST_OS-}" ]     && HOST_OS=${BASH_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${HOST_ENV-}" ]    && HOST_ENV=${BASH_ENV}       && dk_call dk_printVar HOST_ENV
 	fi	
 	
 	if dk_call dk_commandExists uname; then
@@ -179,11 +179,11 @@ dk_host_triple() {
 		UNAME_TRIPLE=${UNAME_ARCH}${UNAME_SUBARCH}${UNAME_VENDOR}${UNAME_OS}${UNAME_ENV}
 		dk_call dk_printVar UNAME_TRIPLE
 
-		[ -z ${host_triple} ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
-		[ -z ${HOST_ARCH} ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
-		[ -z ${HOST_VENDOR} ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
-		[ -z ${HOST_OS} ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
-		[ -z ${HOST_ENV} ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
+		[ -z "${host_triple}" ] && host_triple=${UNAME_TRIPLE} && dk_call dk_printVar host_triple
+		[ -z "${HOST_ARCH}" ]   && HOST_ARCH=${UNAME_ARCH}     && dk_call dk_printVar HOST_ARCH
+		[ -z "${HOST_VENDOR}" ] && HOST_VENDOR=${UNAME_VENDOR} && dk_call dk_printVar HOST_VENDOR
+		[ -z "${HOST_OS}" ]     && HOST_OS=${UNAME_OS}         && dk_call dk_printVar HOST_OS
+		[ -z "${HOST_ENV}" ]    && HOST_ENV=${UNAME_ENV}       && dk_call dk_printVar HOST_ENV
 	fi
 	
 	
@@ -193,7 +193,7 @@ dk_host_triple() {
 		HOST_OS="android"
 	elif dk_call dk_stringContains "${UNAME_a}" "Darwin"; then			# mac
 		HOST_OS="mac"
-	elif dk_call dk_stringContains "${UNAME_a}" "raspberrypi"; then	# raspberry
+	elif dk_call dk_stringContains "${UNAME_a}" "raspberrypi"; then		# raspberry
 		HOST_OS="raspberry"
  	elif dk_call dk_stringContains "${UNAME_a}" "Linux"; then			# linux
 		HOST_OS="linux"

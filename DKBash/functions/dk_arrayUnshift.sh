@@ -19,6 +19,7 @@
 #
 dk_arrayUnshift() {
 	dk_debugFunc 2 99
+	echo "dk_arrayUnshift($*)"
 	
 	eval local array='("${'$1'[@]}")'					# typeset -n array=${1}
 	array=("${@:2}" "${array[@]}");
