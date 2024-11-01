@@ -68,7 +68,7 @@ dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_LINUX_D
 dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_ANDROID_DL)
 
 ###### INSTALL ######
-dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")      # TODO: phase out
+dk_set(ANDROID_NDK "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 #dk_set(ANDROID_NDK_DIR "${ANDROID_SDK_DIR}/ndk/${ANDROID_NDK_BUILD}")
 
 dk_makeDirectory	("${ANDROID_SDK_DIR}/ndk")
@@ -77,6 +77,8 @@ if(WIN_HOST)
 elseif(MAC_HOST)
 	dk_import		(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_NDK} PATCH)
 elseif(ANDROID_HOST OR LINUX_ARM64_HOST)
+	dk_import		(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK} NO_HALT) # NO_HALT because file fails to extact under sdcard storage
+elseif(LINUX_ARM64_HOST)
 	dk_import		(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_NDK})
 elseif(LINUX_HOST)
 	dk_import		(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_NDK} PATCH)

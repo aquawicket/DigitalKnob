@@ -17,6 +17,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	dk_debugFunc()
 	
+	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	
 	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
 	set(PLUGIN_URL 			${${PLUGIN_VAR_PREFIX}_URL})
 	set(PLUGIN_DIR 			${${PLUGIN_VAR_PREFIX}_DIR})
@@ -139,7 +141,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		dk_delete(${src_extractPath} NO_HALT)
 		
 		#dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DL_DIR}/UNZIPPED)
-		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath})
+		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath} ${NO_HALT})
 		
 #		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
 #		file(GLOB items RELATIVE "${src_extractPath}/" "${src_extractPath}/*")

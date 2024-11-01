@@ -20,6 +20,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_import url)
 	dk_debugFunc()
 	
+	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(CURRENT_PLUGIN)
 	#dk_printVar(CURRENT_PLUGIN)
@@ -58,7 +60,7 @@ function(dk_import url)
 			dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)
 			dk_verbose("dk_install(${${CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
 			
-			dk_install(${CURRENT_PLUGIN} ${ARGN})
+			dk_install(${CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
 		endif()
 	endif()
 	

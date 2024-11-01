@@ -13,13 +13,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_extract src dest)
 	dk_debugFunc()
 	
+	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
 	endif()
 	if(NOT EXISTS ${CMAKE_COMMAND})
 		dk_fatal("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
 	endif()
-	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
+	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest} ${NO_HALT})
 endfunction()
 
 
@@ -31,5 +33,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_todo()
+	dk_extract() # todo
 endfunction()
