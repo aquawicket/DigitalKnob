@@ -82,7 +82,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE  dk_onCallstack)
-	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this causes clang++ command errors
+	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this has causes clang++ compile errors in the past
 #	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
 	###### DKTEST MODE ######

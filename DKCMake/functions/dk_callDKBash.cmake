@@ -59,4 +59,6 @@ function(DKTEST)
 	dk_callDKBash(dk_test rtn_var "FROM DKCmake" "dk_callDKBash.cmake")
     dk_echo()
 	dk_echo("rtn_var = ${rtn_var}")
+	
+	dk_callDKBash(dk_extract "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${HOME}")
 endfunction()

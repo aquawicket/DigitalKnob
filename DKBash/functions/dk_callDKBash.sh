@@ -6,7 +6,7 @@
 #
 #
 dk_callDKCmake() {
-	dk_debugFunc 2
+	dk_debugFunc 0 99
 	
 	### get required variables ###
     ### get ALL_BUT_FIRST_ARGS ###

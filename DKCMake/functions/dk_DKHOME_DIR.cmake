@@ -30,18 +30,26 @@ function(dk_DKHOME_DIR)
 		dk_printVar(ENV{CMD_EXE})
 	endif()
 	
-	###### CYGPATH_EXE ######
-	if(NOT EXISTS "${CYGPATH_EXE}")
-		dk_findProgram(CYGPATH_EXE cygpath)
-	endif()
-	if(NOT EXISTS "${CYGPATH_EXE}")
-		dk_warning("CYGPATH_EXE:${CYGPATH_EXE} not found")
-	else()
-		dk_set(CYGPATH_EXE "${CYGPATH_EXE}")		# Globalize the variable
-		dk_printVar(CYGPATH_EXE)
-		set(ENV{CYGPATH_EXE} "${CYGPATH_EXE}")		# Set Environment Varible
-		dk_printVar(ENV{CYGPATH_EXE})
-	endif()
+#	###### CYGPATH_EXE ######
+#	if(NOT EXISTS "${CYGPATH_EXE}")
+#		if(CMD_EXE)
+#			execute_process(COMMAND where /R C:\\Users\\Administrator cygpath.exe OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#		endif()
+#	endif()
+#	if(NOT EXISTS "${CYGPATH_EXE}")
+#		execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	endif()
+#	if(NOT EXISTS "${CYGPATH_EXE}")
+#		dk_findProgram(CYGPATH_EXE cygpath.exe)
+#	endif()
+#	if(NOT EXISTS "${CYGPATH_EXE}")
+#		dk_warning("CYGPATH_EXE:${CYGPATH_EXE} not found")
+#	else()
+#		dk_set(CYGPATH_EXE "${CYGPATH_EXE}")		# Globalize the variable
+#		dk_printVar(CYGPATH_EXE)
+#		set(ENV{CYGPATH_EXE} "${CYGPATH_EXE}")		# Set Environment Varible
+#		dk_printVar(ENV{CYGPATH_EXE})
+#	endif()
 	
 	###### WSLPATH_EXE ######
 	if(NOT EXISTS "${WSLPATH_EXE}")
@@ -125,33 +133,6 @@ function(dk_DKHOME_DIR)
 		set(ENV{DKDESKTOP_DIR} "${DKDESKTOP_DIR}")		# Set Environment Varible
 		dk_printVar(ENV{DKDESKTOP_DIR})
 	endif()
-	
-#	### DKTEMP_DIR ###
-#	if(NOT EXISTS "${DKTEMP_DIR}")
-#		dk_set(DKTEMP_DIR "$ENV{TMP}")
-#	endif()
-#	if(NOT EXISTS "${DKTEMP_DIR}")     
-#		dk_set(DKTEMP_DIR "$ENV{TMPDIR}")
-#	endif()
-#	if(NOT EXISTS "${DKTEMP_DIR}")     
-#		dk_set(DKTEMP_DIR "$ENV{TMP_DIR}")
-#	endif()
-#	if(NOT EXISTS "${DKTEMP_DIR}")
-#		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-#		dk_set(DKTEMP_DIR "${DIGITALKNOB_DIR}/.dktemp")
-#	endif()
-#	
-#	if(EXISTS "${DKTEMP_DIR}")
-#		dk_set(DKTEMP_DIR "${DKTEMP_DIR}/.dktemp")
-#		set(ENV{DKTEMP_DIR} "${DKTEMP_DIR}/.dktemp")
-#		if(NOT EXISTS ${DKTEMP_DIR})
-#			dk_makeDirectory("${DKTEMP_DIR}")
-#		endif()
-#	endif()
-#	
-#	if(NOT EXISTS "${DKTEMP_DIR}")
-#		dk_fatal("unable to set DKTEMP_DIR")
-#	endif()
 endfunction()
 
 
@@ -167,5 +148,4 @@ function(DKTEST)
     dk_printVar(DKHOME_DIR)
 	dk_printVar(DKCACHE_DIR)
 	dk_printVar(DKDESKTOP_DIR)
-	#dk_printVar(DKTEMP_DIR)
 endfunction()
