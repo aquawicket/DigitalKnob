@@ -29,7 +29,7 @@ fi
 #
 #
 dk_echo() {
-	dk_debugFunc 0 1
+	dk_debugFunc 0 99
 	
 	[ ${#} -eq 0 ] && echo "" && return 0
 	
@@ -39,7 +39,7 @@ dk_echo() {
 	[ "${ESCAPES}" = "1" ]    && [ "$(echo -e)" = "" ] && export escapes="-e "
 	[ "${NO_NEWLINE}" = "1" ] && [ "$(echo -n)" = "" ] && export nonewline="-n "
 
-	msg=${1}
+	msg=${*}
 	msg=${msg//\\/\\\\}    # replace all exscapes
 	msg=${msg//\\\\x/\\x}  # put back all \x escapes for color
 	

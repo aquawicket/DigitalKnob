@@ -48,7 +48,7 @@ dk_pickApp() {
 	elif [ "${choice}" = "9" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "10" ]; then
-		UPDATE=
+		unset UPDATE
 	elif [ "${choice}" = "11" ]; then
 		dk_call dk_reload
 	elif [ "${choice}" = "12" ]; then

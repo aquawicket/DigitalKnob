@@ -130,7 +130,7 @@ dk_pickOs() {
 	elif [ "${choice}" = "36" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "37" ]; then
-		APP=
+		unset APP
 	elif [ "${choice}" = "38" ]; then
 		dk_call dk_exit 0
 	else

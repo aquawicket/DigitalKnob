@@ -31,7 +31,7 @@ dk_pickType() {
 	elif [ "${choice}" = "4" ]; then
 		dk_call dk_clearScreen
 	elif [ "${choice}" = "5" ]; then
-		triple=
+		unset triple
 	elif [ "${choice}" = "6" ]; then
 		dk_call dk_exit 0
 	else

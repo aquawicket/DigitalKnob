@@ -49,28 +49,43 @@ WSLPATH_EXE(){
 
 ###### WSLPATH_EXE ######
 ANDROID_SDCARD(){
-	(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"  >&2
+	(grep -o "/storage/....-...." /proc/mounts) && export ANDROID_SDCARD=$(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"  >&2
 }
 
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	# Windows subsystem for linux
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$(${WSLPATH_EXE} -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	# Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$(${CYGPATH_EXE} -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=${ANDROID_SDCARD} 															# Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR=${HOME}
-	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR Not Found"  >&2
+}
+
+###### CHATTR_EXE ######
+CHATTR_EXE(){
+	(command -v chattr) && export CHATTR_EXE=$(command -v chattr) || echo "chattr Not Found"  >&2
+}
+
+###### WGET_EXE ######
+WGET_EXE(){
+	(command -v wget) && export WGET_EXE=$(command -v wget) || echo "wget Not Found"  >&2
+}
+
+###### CURL_EXE ######
+CURL_EXE(){
+	(command -v curl) && export CURL_EXE=$(command -v curl) || echo "curl Not Found"  >&2
 }
 
 ###### Net fix for WSL ######
 dk_wslFixNet(){
-	if [ -e "$(WSLPATH_EXE)" ]; then
-		echo "Applying WSL internet fix"
-		[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
-		($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
-		$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
-		$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-		(command -v chattr &>/dev/null) && $(SUDO_EXE) chattr +i /etc/resolv.conf
-	fi
+	[ ! -e "$(WSLPATH_EXE)" ] && return
+		
+	echo "Applying WSL internet fix"
+	[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
+	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
+	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+	[ -e "$(CHATTR_EXE)" ] && $(SUDO_EXE) chattr +i /etc/resolv.conf
 }
 
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
@@ -84,8 +99,8 @@ export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 
 export DK="${DKF}/DK.sh"
 export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
-[ ! -e "${DK}" ] && (command -v wget &>/dev/null) && wget -P "${DKF}" "${HDK}"
-[ ! -e "${DK}" ] && (command -v curl &>/dev/null) && curl -Lo "${DK}" "${HDK}"
+[ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DKF}" "${HDK}"
+[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && $(CURL_EXE) -Lo "${DK}" "${HDK}"
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
 $(SUDO_EXE) chmod 777 "${DK}"
