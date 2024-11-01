@@ -33,10 +33,14 @@ function(dk_undepend plugin)
 	#if(${index} GREATER -1)
 	if(plugin IN_LIST dkdepend_list)
 		list(REMOVE_ITEM dkdepend_list ${plugin}) # it was found, now remove
+		dk_set(dkdepend_list ${dkdepend_list})
+		dk_printVar(dkdepend_list)
 	endif()
 	
 	dk_info("DISABLING ${ARGV}")
 	dk_append(dk_disabled_list "${ARGV}")
+	dk_set(dk_disabled_list ${dk_disabled_list})
+	dk_printVar(dk_disabled_list)
 	
 	if(${ARGC} GREATER 1)
 		dk_removeTarget(${plugin} ${ARGV1})

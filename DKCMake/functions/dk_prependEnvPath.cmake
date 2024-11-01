@@ -23,7 +23,7 @@ function(dk_prependEnvPath inputPath)
     dk_assertPath(inputPath)
 	#if(WIN_HOST)
 		cmake_path(NATIVE_PATH inputPath NORMALIZE nativePath)
-		dk_debug("Converted ${inputPath} to NATIVE_PATH"${nativePath}")
+		dk_debug("Converted ${inputPath} to NATIVE_PATH:${nativePath}")
 	#endif()
 
 	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)

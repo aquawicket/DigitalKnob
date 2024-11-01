@@ -22,12 +22,12 @@ endif()
 dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip FOLDER stackwalker-2014-12-28 PATCH)
 
 ### LINK ###
-WIN_dk_include		(${STACKWALKER}/StackWalker)
-WIN_dk_libDebug		(${STACKWALKER_DEBUG_DIR}/stackwalker.lib)
-WIN_dk_libRelease	(${STACKWALKER_RELEASE_DIR}/stackwalker.lib)
+dk_include		(${STACKWALKER}/StackWalker)
+dk_libDebug		(${STACKWALKER_DEBUG_DIR}/stackwalker.lib)
+dk_libRelease	(${STACKWALKER_RELEASE_DIR}/stackwalker.lib)
 
 ### GENERATE ###
-WIN_dk_configure	(${STACKWALKER})
+dk_configure	(${STACKWALKER})
 
 ### COMPILE ###
-WIN_dk_build		(${STACKWALKER})
+dk_build		(${STACKWALKER})

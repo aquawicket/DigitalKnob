@@ -17,6 +17,7 @@ function(dk_undefine str)
 		dk_return()
 	endif()
 	list(REMOVE_ITEM DKDEFINES_LIST ${str})
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})	# Globalize the variable
 endfunction()
 
 
