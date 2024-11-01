@@ -58,6 +58,8 @@ DK(){
     DKSCRIPT_VARS
 
     ###### DKTEST MODE ######
+	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+	echo "DKBASH_FUNCTIONS_DIR = ${DKBASH_FUNCTIONS_DIR}"
     [ "${DKSCRIPT_DIR}" = "${DKBASH_FUNCTIONS_DIR}" ] || return 0
     [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
         dk_call dk_echo
@@ -125,12 +127,29 @@ dk_download() {
 }
 
 ##################################################################################
+# WSLPATH_EXE()
+#
+WSLPATH_EXE(){
+	(command -v wslpath) || echo "wslpath Not Found"  >&2
+}
+
+##################################################################################
+# CYGPATH_EXE()
+#
+CYGPATH_EXE(){
+	(command -v cygpath) || echo "cygpath Not Found"  >&2
+}
+
+##################################################################################
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-
-    [ -n "${DKSCRIPT_PATH-}" ]	|| export DKSCRIPT_PATH=$(dk_realpath ${0}) && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-    [ -e "${DKSCRIPT_PATH}" ]	|| echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
+	#echo "0 = ${0}"
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0})) 	# Windows subsystem for linux
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))	# Git for Windows
+	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})													# Default
+	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+    [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
     export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
     export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
     export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
@@ -142,20 +161,20 @@ DKSCRIPT_VARS(){
 #
 dksetOptions(){
     # https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
-    # $(set -a) && set -a
-    # $(set -b) && set -b
-    # $(set -C) && set -C
-    # $(set -e) && set -e
-    # $(set -f) && set -f
-    # $(set -h) && set -h
-    # $(set -m) && set -m
-    # $(set -n) && set -n
-    # $(set -o) && set -o
-    # $(set -o) && set +o
-    # $(set -o) && set -o
-    # $(set -u) && set -u
-    # $(set -v) && set -v
-    # $(set -x) && set -x
+	# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+    # $(set -a) && set -a	# Each variable or function that is created or modified is given the export attribute and marked for export to the environment of subsequent commands.
+    # $(set -b) && set -b	# Cause the status of terminated background jobs to be reported immediately, rather than before printing the next primary prompt.
+    # $(set -C) && set -C	# Prevent output redirection using ‘>’, ‘>&’, and ‘<>’ from overwriting existing files.
+    # $(set -e) && set -e	# Exit immediately if a pipeline, which may consist of a single simple command, a list, or a compound command returns a non-zero status. 
+    # $(set -f) && set -f	# Disable filename expansion (globbing).
+    # $(set -h) && set -h	# Locate and remember (hash) commands as they are looked up for execution. This option is enabled by default.
+    # $(set -m) && set -m	# Job control is enabled. All processes run in a separate process group. When a background job completes, the shell prints a line containing its exit status.
+    # $(set -n) && set -n	# Read commands but do not execute them. This may be used to check a script for syntax errors. This option is ignored by interactive shells.
+    # $(set -o) && set -o	# Set the option corresponding to option-name:
+    # $(set -o) && set +o	# Unset the option corresponding to option-name:
+    # $(set -u) && set -u	# Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’, as an error when performing parameter expansion.
+    # $(set -v) && set -v	# Print shell input lines as they are read.
+    # $(set -x) && set -x	# Print a trace of simple commands, for commands, case commands, select commands, and arithmetic for commands and their arguments or associated word lists.
 	
 	###### set -o ######
 	(set -o posix)    	&& set -o posix			|| echo "(set -o posix) failed"
@@ -204,7 +223,7 @@ dk_installPackage() {
 }
 
 ##################################################################################
-# run DK() function
+# run DK()
 DK
 
 

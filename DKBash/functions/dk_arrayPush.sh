@@ -21,19 +21,19 @@ dk_arrayPush() {
 	dk_debugFunc 2 99
 	#dk_call dk_validateArgs array element optional:rtn_var
 	
-	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
+	eval local array='("${'$1'[@]}")'	#typeset -n array=${1}
 	array=("${array[@]}" "${@:2}");
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	# i.e.  new_length=${dk_arrayPush myArray "new item"} 
+	# i.e.  new_length=$(dk_arrayPush myArray "new item") 
 
 	### return value ###
 	eval ${1}='("${array[@]}")'
 
 	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
 	
-	# FIXME: the new array does not get assigned in command substitution.
-	dk_return ${#array[@]} && return				# command substitution return
+										# FIXME: the new array does not get assigned in command substitution.
+	dk_return ${#array[@]} && return	# command substitution return
 }
 
 

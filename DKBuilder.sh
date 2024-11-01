@@ -12,7 +12,7 @@
 
 dk_onError(){
 	exitcode=$?	
-	echo "" &>/dev/tty
+	echo "" >&2
 	if [ -n "${1-}" ];then
 		echo "ERROR: '${1-}'" >&2
 	else
@@ -29,22 +29,22 @@ dk_onError(){
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
-	(command -v sudo) || echo "sudo Not Found" >&2
+	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo Not Found" >&2
 }
 
 ###### CMD_EXE ######
 CMD_EXE(){
-	(command -v cmd.exe) || echo "cmd.exe Not Found" >&2
+	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe Not Found" >&2
 }
 
 ###### CYGPATH_EXE ######
 CYGPATH_EXE(){
-	(command -v cygpath) || echo "cygpath Not Found"  >&2
+	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath Not Found"  >&2
 }
 
 ###### WSLPATH_EXE ######
 WSLPATH_EXE(){
-	(command -v wslpath) || echo "wslpath Not Found"  >&2
+	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath Not Found"  >&2
 }
 
 ###### WSLPATH_EXE ######
