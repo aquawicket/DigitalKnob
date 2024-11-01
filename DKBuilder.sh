@@ -85,12 +85,13 @@ dk_wslFixNet(){
 	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
 	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-	[ -e "$(CHATTR_EXE)" ] && $(SUDO_EXE) chattr +i /etc/resolv.conf
+	$(SUDO_EXE) chattr +i /etc/resolv.conf
 }
 
 ###	Fix WSL retaining file permissions 
 ### https://superuser.com/a/1392722/600216
 dk_wslFixFileAccess(){
+	[ ! -e "$(WSLPATH_EXE)" ] && return
 	
 	[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"
 	[   -e "/etc/wsl.conf" ] && echo "/etc/wsl.conf already exists" && return
@@ -103,6 +104,9 @@ dk_wslFixFileAccess(){
 	$(SUDO_EXE) sh -c 'echo "enabled = true"							>> "/etc/wsl.conf"'
 	$(SUDO_EXE) sh -c 'echo "root = /mnt/"								>> "/etc/wsl.conf"'
 	$(SUDO_EXE) sh -c 'echo "options = \"metadata,umask=22,fmask=11\"" 	>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "[network]" 								>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" 				>> "/etc/wsl.conf"'
 }
 
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"

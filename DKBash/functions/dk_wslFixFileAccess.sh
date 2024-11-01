@@ -21,6 +21,9 @@ dk_wslFixFileAccess(){
 	$(dk_SUDO_EXE) sh -c 'echo "enabled = true"								>> "/etc/wsl.conf"'
 	$(dk_SUDO_EXE) sh -c 'echo "root = /mnt/"								>> "/etc/wsl.conf"'
 	$(dk_SUDO_EXE) sh -c 'echo "options = \"metadata,umask=22,fmask=11\"" 	>> "/etc/wsl.conf"'
+	$(dk_SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
+	$(dk_SUDO_EXE) sh -c 'echo "[network]" 									>> "/etc/wsl.conf"'
+	$(dk_SUDO_EXE) sh -c 'echo "generateResolvConf = false" 				>> "/etc/wsl.conf"'
 }
 
 
