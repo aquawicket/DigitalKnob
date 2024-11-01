@@ -8,15 +8,18 @@
 #
 dk_wslFixNet() {
 	dk_debugFunc 0
+	echo "dk_wslFixNet.sh()"
+	
+	[ ! -n "${WSLPATH_EXE-}" ] && return
 	
 	echo "Applying WSL internet fix"
 	[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"
-	[   -e "/etc/resolv.conf" ] && echo "/etc/resolv.conf already exists" && return
+	#[   -e "/etc/resolv.conf" ] && echo "/etc/resolv.conf already exists" && return
 	
 	$(dk_SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" 		 > /etc/resolv.conf'
 	$(dk_SUDO_EXE) sh -c 'echo "[network]" 					>> /etc/wsl.conf'
 	$(dk_SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-	$(dk_SUDO_EXE) sh -c 'chattr +i /etc/resolv.conf'
+	#$(dk_SUDO_EXE) sh -c 'chattr +i /etc/resolv.conf'
 }
 
 

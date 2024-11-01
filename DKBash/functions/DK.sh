@@ -54,6 +54,11 @@ DK(){
     dk_call dk_color
     dk_call dk_logo
     
+	echo "adding permission for /etc"
+	sudo chown aquawicket /etc
+	[ -e "$(WSLPATH_EXE)" ] && dk_wslFixNet
+	[ -e "$(WSLPATH_EXE)" ] && dk_wslFixFileAccess
+	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
 

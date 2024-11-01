@@ -81,11 +81,11 @@ dk_wslFixNet(){
 	[ ! -e "$(WSLPATH_EXE)" ] && return
 		
 	echo "Applying WSL internet fix"
-	[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
+	#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
 	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
 	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-	$(SUDO_EXE) chattr +i /etc/resolv.conf
+	#$(SUDO_EXE) chattr +i /etc/resolv.conf
 }
 
 ###	Fix WSL retaining file permissions 
@@ -107,6 +107,8 @@ dk_wslFixFileAccess(){
 	$(SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
 	$(SUDO_EXE) sh -c 'echo "[network]" 								>> "/etc/wsl.conf"'
 	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" 				>> "/etc/wsl.conf"'
+	echo "RELOADING WSL . . . " >&2
+	wsl --shutdown
 }
 
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
