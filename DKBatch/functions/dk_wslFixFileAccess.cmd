@@ -17,6 +17,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKBASH_FUNCTIONS_DIR%"       set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"
+	if not exist "%DKBASH_FUNCTIONS_DIR_%"       set "%DKBASH_FUNCTIONS_DIR%\"
 	if not exist "%DKBASH_FUNCTIONS_DIR%"       mkdir "%DKBASH_FUNCTIONS_DIR%"
 	if not defined DKHTTP_DKBASH_DIR            set "DKHTTP_DKBASH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBash"
 	if not defined DKHTTP_DKBASH_FUNCTIONS_DIR  set "DKHTTP_DKBASH_FUNCTIONS_DIR=%DKHTTP_DKBASH_DIR%/functions"
