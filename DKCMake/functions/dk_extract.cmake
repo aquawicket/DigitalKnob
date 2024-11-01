@@ -18,10 +18,15 @@ function(dk_extract src dest)
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
 	endif()
-	if(NOT EXISTS ${CMAKE_COMMAND})
-		dk_fatal("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
+	
+	if(CMAKE_VERSION VERSION_GREATER "3.18")
+		file(ARCHIVE_EXTRACT INPUT ${src} DESTINATION ${dest} VERBOSE)
+	else()
+		if(NOT EXISTS ${CMAKE_COMMAND})
+			dk_fatal("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
+		endif()
+		dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest}) # ${NO_HALT})
 	endif()
-	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest} ${NO_HALT})
 endfunction()
 
 
@@ -33,5 +38,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
-	dk_extract() # todo
+	dk_validate(DKDOWNLOAD_DIR "dk_DIGITALKNOB_DIR()")
+	dk_extract("${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64.zip" "${DKDOWNLOAD_DIR}/android-ndk-r23c-aarch64")
 endfunction()

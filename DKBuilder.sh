@@ -2,12 +2,12 @@
 
 
 ############ dk_onError trap ############
-(set -o posix 		2> /dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
-(set -o pipefail 	2> /dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
-(set -E				2> /dev/null)	&& set -E  				|| echo "'set -E' failed" 				# set -E : trace ERR through 'time command' and other functions
-(set -u				2> /dev/null)	&& set -u			   	|| echo "'set -u' failed" 				# set -u : exit the script if you try to use an uninitialised variable
-(set -e				2> /dev/null)	&& set -e  				|| echo "'set -e' failed" 				# set -e : exit the script if any statement returns a non-true
-(shopt -s extdebug	2> /dev/null)	&& shopt -s extdebug	|| echo "'shopt -s extdebug' failed" 
+(set -o posix 		 2>/dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
+(set -o pipefail 	 2>/dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
+(set -E				 2>/dev/null)	&& set -E  				|| echo "'set -E' failed" 				# set -E : trace ERR through 'time command' and other functions
+(set -u				 2>/dev/null)	&& set -u			   	|| echo "'set -u' failed" 				# set -u : exit the script if you try to use an uninitialised variable
+(set -e				 2>/dev/null)	&& set -e  				|| echo "'set -e' failed" 				# set -e : exit the script if any statement returns a non-true
+(shopt -s extdebug	 2>/dev/null)	&& shopt -s extdebug	|| echo "'shopt -s extdebug' failed" 
 (trap dk_onError ERR 2>/dev/null)   && trap dk_onError ERR  || echo "'trap dk_onError ERR' failed"
 
 dk_onError(){
@@ -47,20 +47,25 @@ WSLPATH_EXE(){
 	(command -v wslpath) || echo "wslpath Not Found"  >&2
 }
 
+###### WSLPATH_EXE ######
+ANDROID_SDCARD(){
+	(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"  >&2
+}
+
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	 # Windows subsystem for linux
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	 # Git for windows
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 && export DKHOME_DIR=${HOME}
-	[ -e "${DKHOME_DIR-}" ]   && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	# Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR=${HOME}
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
 }
 
 ###### Net fix for WSL ######
 dk_wslFixNet(){
 	if [ -e "$(WSLPATH_EXE)" ]; then
-		echo "Applying WSL net fix"
-		#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
+		echo "Applying WSL internet fix"
+		[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
 		($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 		$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
 		$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'

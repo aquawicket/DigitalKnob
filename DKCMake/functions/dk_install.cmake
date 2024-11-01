@@ -33,7 +33,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	#if(NOT ${PLUGIN_IMPORT_NAME} STREQUAL ${plugin_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_IMPORT_NAME}) must be all lowercase")
 	#endif()
-	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME})
+	dk_assertPath(${DKIMPORTS_DIR}/${PLUGIN_IMPORT_NAME}) # "dk_install():36")
 	
 	if(EXISTS ${PLUGIN_DIR}/installed)
 		dk_info("${PLUGIN_IMPORT_NAME} already installed")
@@ -81,11 +81,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	endif()
 	
 	dk_download(${PLUGIN_URL} ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} NO_HALT)
-	
-	#if(NOT EXISTS ${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
-	#	dk_fatal("The download file does not exist")
-	#endif()
-	dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+	dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "The download file does not exist")
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")
@@ -168,7 +164,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	elseif(${FILETYPE} STREQUAL "Executable")
 		dk_cd(${PLUGIN_DL_DIR})
 		dk_set(QUEUE_BUILD ON)
-		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():167")
 		
 		if(${PLUGIN_URL_EXTENSION} STREQUAL ".pkg")
 			if(MAC_HOST)
@@ -182,7 +178,7 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 	elseif(${FILETYPE} STREQUAL "BYPASS")
 		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME})
+		dk_assertPath(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME}) # "dk_install():181")
 		dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DIR}/${PLUGIN_DL_FILENAME} OVERWRITE)
 		dk_debug("dk_copy(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DIR}/${PLUGIN_DL_FILENAME} OVERWRITE)")
 	endif()

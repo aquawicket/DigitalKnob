@@ -24,7 +24,6 @@ function(dk_import url)
 	
 	dk_importVariables(${url} ${ARGN})
 	dk_assertVar(CURRENT_PLUGIN)
-	#dk_printVar(CURRENT_PLUGIN)
 
 	if(NOT DKOFFLINE)
 		###### Import from Git Repository ######
