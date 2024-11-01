@@ -8,13 +8,13 @@
 dk_DKHOME_DIR() {
     dk_debugFunc 0
 
-    [ -e "${DKHOME_DIR-}" ] && return 0
+    [ -e "${DKHOME_DIR-}" ] 	&& return 0 	# already exists
     	
 	###### CMD_EXE ######
-	[ ! -e "${CMD_EXE-}" ]	&& export CMD_EXE=$(command -v cmd.exe) || $(true)
-	[ ! -e "${CMD_EXE}" ]	&& export CMD_EXE="C:/Windows/System32/cmd.exe"
-	[ ! -e "${CMD_EXE}" ]	&& unset CMD_EXE
-	[   -e "${CMD_EXE-}" ]	&& dk_call dk_printVar CMD_EXE
+	[ ! -e "${CMD_EXE-}" ]		&& export CMD_EXE=$(command -v cmd.exe) || $(true)
+	[ ! -e "${CMD_EXE}" ]		&& export CMD_EXE="C:/Windows/System32/cmd.exe"
+	[ ! -e "${CMD_EXE}" ]		&& unset CMD_EXE
+	[   -e "${CMD_EXE-}" ]		&& dk_call dk_printVar CMD_EXE
 	
 	######  USERPROFILE -> CYGPATH_EXE -> DKHOME_DIR ######
 	[ ! -e "${CYGPATH_EXE-}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
@@ -30,25 +30,22 @@ dk_DKHOME_DIR() {
 	[   -e "${WSLPATH_EXE-}" ]	&& dk_call dk_printVar WSLPATH_EXE
 	[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${CMD_EXE} /c echo "%USERPROFILE%" | tr -d '\r'))
 	
-	### HOME -> DKHOME_DIR ###
+	### DKHOME_DIR ###
+	[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] 	&& export DKHOME_DIR="${HOME}"
-	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"     #ANDROID
 	[ ! -e "${DKHOME_DIR}" ] 	&& 	dk_call dk_fatal "DKHOME_DIR not found"
 	dk_call dk_printVar DKHOME_DIR
 	
-	
 	### DKCACHE_DIR ###
 	export DKCACHE_DIR="${DKHOME_DIR}/.dk"
-	[ ! -e "${DKCACHE_DIR}" ]    && dk_call dk_makeDirectory "${DKCACHE_DIR}"
+	[ ! -e "${DKCACHE_DIR}" ]	&& dk_call dk_makeDirectory "${DKCACHE_DIR}"
 	dk_call dk_printVar DKCACHE_DIR
-	
 	
 	### DKDESKTOP_DIR ###
 	export DKDESKTOP_DIR="${DKHOME_DIR}/Desktop"
-    [ ! -e "${DKDESKTOP_DIR}" ]  && dk_call dk_warning "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
+    [ ! -e "${DKDESKTOP_DIR}" ]	&& dk_call dk_warning "DKDESKTOP_DIR:${DKDESKTOP_DIR} does not exist"
 	dk_call dk_printVar DKDESKTOP_DIR
 
-	
 	### DKTEMP_DIR ###
 #	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMP}"
 #	[ -e "${DKTEMP_DIR}" ] || dk_call dk_set DKTEMP_DIR "${TMPDIR}"

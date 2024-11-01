@@ -2,7 +2,7 @@
 [ -n "${DKINIT-}" ] && return  || export DKINIT=1  # include_guard
 
 ### Print Shell Path ad Version ###
-export ESC=""     		 		# escape character
+export ESC=""  # escape character
 [ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
 export DKSHELL=$(basename ${DKSHELL_PATH})
 export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
@@ -10,7 +10,6 @@ echo ""
 echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
 echo "  ${DKSHELL_PATH}"
 echo ""
-
 
 ##################################################################################
 # DKINIT()
@@ -22,8 +21,6 @@ DK(){
 		[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
 		echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
 	}
-	
-    #[ -n "${WSLENV+1}" ] && echo "WSLENV is on"
     
 	###### Reload Main Script with bash ######
 	[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
@@ -83,8 +80,7 @@ DK(){
 dkreloadWithBash(){
 	[ -n "${BASH-}" ] && return
 	(command -v bash &>/dev/null) || dk_installPackage bash
-	(command -v bash &>/dev/null) || echo "ERROR: bash not found" || exit 1
-	export BASH_EXE=$(command -v bash)
+	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
 	echo "Reloading ${0} with ${BASH_EXE} . . ."
 	unset DKINIT
 	exec ${BASH_EXE} "${0}"
@@ -133,21 +129,13 @@ dk_download() {
 #
 DKSCRIPT_VARS(){
 
-    [ -n "${DKSCRIPT_PATH-}" ]	|| export DKSCRIPT_PATH=$(dk_realpath ${0})
+    [ -n "${DKSCRIPT_PATH-}" ]	|| export DKSCRIPT_PATH=$(dk_realpath ${0}) && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
     [ -e "${DKSCRIPT_PATH}" ]	|| echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
-    export DKSCRIPT_ARGS=$(${*})
-    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")
-    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")
-    export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"
-    
-return	
-	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-	echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
-	echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-	echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
-	echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
+    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
+    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+    export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"				&& echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
 } 
-
 
 ##################################################################################
 # dksetOptions()
@@ -182,7 +170,6 @@ dksetOptions(){
     
     # dk_call dk_echo "SHELLOPTS = ${SHELLOPTS}"
     # dk_call dk_echo "BASHOPTS = ${BASHOPTS-}"
-
 }
 
 ##################################################################################

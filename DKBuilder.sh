@@ -1,4 +1,6 @@
 #!/bin/sh
+
+
 ############ dk_onError trap ############
 (set -o posix 		2> /dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
 (set -o pipefail 	2> /dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
@@ -6,31 +8,24 @@
 (set -u				2> /dev/null)	&& set -u			   	|| echo "'set -u' failed" 				# set -u : exit the script if you try to use an uninitialised variable
 (set -e				2> /dev/null)	&& set -e  				|| echo "'set -e' failed" 				# set -e : exit the script if any statement returns a non-true
 (shopt -s extdebug	2> /dev/null)	&& shopt -s extdebug	|| echo "'shopt -s extdebug' failed" 
+(trap dk_onError ERR 2>/dev/null)   && trap dk_onError ERR  || echo "'trap dk_onError ERR' failed"
 
-#trap 'echo "Press Enter to continue..."; read' SIGUSR1
-#alias _pause='kill -s USR1 $$'
-(trap dk_onError ERR 2>/dev/null)  && trap dk_onError ERR  || echo "'trap dk_onError ERR' failed"
 dk_onError(){
-	exitcode=$?
-	
+	exitcode=$?	
 	echo "" &>/dev/tty
 	if [ -n "${1-}" ];then
 		echo "ERROR: '${1-}'" >&2
 	else
 		echo "ERROR: '${BASH_COMMAND-}'" >&2
 	fi
-	#echo "file: ${BASH_SOURCE[0]}" >&2
 	[ -n "${BASH_SOURCE-}" ] && echo "file: $BASH_SOURCE" >&2 || echo "file: $0" >&2
 	[ -n "${BASH_LINENO-}" ] && echo "line: $BASH_LINENO" >&2 || echo "line: ${LINENO-}" >&2
 	echo "exit_code: ${exitcode}" >&2
 	echo "" >&2
-
-	#_pause
 	read -rp 'Press Enter to continue...'
 	exit ${exitcode}
 }
 #########################################
-	
 
 ###### SUDO_EXE ######
 SUDO_EXE(){
@@ -52,15 +47,13 @@ WSLPATH_EXE(){
 	(command -v wslpath) || echo "wslpath Not Found"  >&2
 }
 
-
 ###### DKHOME_DIR ######
 DKHOME_DIR(){
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r'))
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	 # Windows subsystem for linux
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	 # Git for windows
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 && export DKHOME_DIR=${HOME}
-	[ -e "/sdcard" ] && export DKHOME_DIR="/sdcard"  #ANDROID
-	[ -e "${DKHOME_DIR-}" ]	  && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
-	#echo "DKHOME_DIR = '${DKHOME_DIR-}'" >&2
+	[ -e "${DKHOME_DIR-}" ]   && echo "${DKHOME_DIR-}"   || dk_onError "DKHOME_DIR:${DKHOME_DIR-} Not Found"
 }
 
 ###### Net fix for WSL ######
@@ -78,9 +71,7 @@ dk_wslFixNet(){
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 [ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
 [ -e "$(DKHOME_DIR)/.dk" ] 			|| mkdir "$(DKHOME_DIR)/.dk"
-if [ "$(DKHOME_DIR)/.dk/$(basename $0)" -ef "$0)" ]; then
-	[ -e "$(DKHOME_DIR)/.dk" ] 	&& cp "$0" "$(DKHOME_DIR)/.dk/$(basename $0)"
-fi
+[ "$(DKHOME_DIR)/.dk/$(basename $0)" -ef "$0)" ] && [ -e "$(DKHOME_DIR)/.dk" ] 	&& cp "$0" "$(DKHOME_DIR)/.dk/$(basename $0)"
 [ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	|| mkdir "$(DKHOME_DIR)/.dk/DKBash"
 [ -e "$(DKHOME_DIR)/.dk/DKBash" ] 	&& export > "$(DKHOME_DIR)/.dk/DKBash/default_env.sh"
 [ -e "${DKF}" ] 					|| mkdir "${DKF}"
@@ -93,8 +84,9 @@ export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development
 [ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
 
 $(SUDO_EXE) chmod 777 "${DK}"
-. "${DK}"
-#"${DK}" $0 $*
+. "${DK}" # $0 $*
+
+
 
 #####################
 dk_call dk_buildMain
