@@ -21,7 +21,7 @@ dk_gitUpdate() {
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		dk_call dk_printVar DKBRANCH_DIR
 		dk_call dk_makeDirectory "${DKBRANCH_DIR}"
-		"${GIT_EXE}" gonfig --global --add safe.directory "${DKBRANCH_DIR}"
+		"${GIT_EXE}" config --global --add safe.directory "${DKBRANCH_DIR}"
 		"${GIT_EXE}" clone ${url} "${DKBRANCH_DIR}"
 		
 		#[ -n "${DKUSERNAME-}" ] && ${SUDO_EXE} chown -R ${DKUSERNAME} "${DKBRANCH_DIR}"
