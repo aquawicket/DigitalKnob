@@ -19,7 +19,7 @@ DK(){
 	SUDO_EXE(){
 		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
 		[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
-		echo "SUDO_EXE = '${SUDO_EXE-}'" &>/dev/tty
+		echo "SUDO_EXE = '${SUDO_EXE-}'" >&2
 	}
     
 	###### Reload Main Script with bash ######

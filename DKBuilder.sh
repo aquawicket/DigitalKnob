@@ -88,6 +88,23 @@ dk_wslFixNet(){
 	[ -e "$(CHATTR_EXE)" ] && $(SUDO_EXE) chattr +i /etc/resolv.conf
 }
 
+###	Fix WSL retaining file permissions 
+### https://superuser.com/a/1392722/600216
+dk_wslFixFileAccess(){
+	
+	[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"
+	[   -e "/etc/wsl.conf" ] && echo "/etc/wsl.conf already exists" && return
+	
+	$(SUDO_EXE) sh -c 'echo "" 										 	 > "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "[boot]" 									>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "systemd=true"								>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "[automount]"								>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "enabled = true"							>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "root = /mnt/"								>> "/etc/wsl.conf"'
+	$(SUDO_EXE) sh -c 'echo "options = \"metadata,umask=22,fmask=11\"" 	>> "/etc/wsl.conf"'
+}
+
 export DKF="$(DKHOME_DIR)/digitalknob/Development/DKBash/functions"
 [ -e "${DKF}" ] 					|| export DKF="$(DKHOME_DIR)/.dk/DKBash/functions"
 [ -e "$(DKHOME_DIR)/.dk" ] 			|| mkdir "$(DKHOME_DIR)/.dk"
