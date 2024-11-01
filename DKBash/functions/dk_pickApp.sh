@@ -9,22 +9,21 @@ dk_pickApp() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "${APP-} ${triple-} ${TYPE-}"
-	
-	dk_call dk_echo
-    dk_call dk_echo " 1) HelloWorld"
-    dk_call dk_echo " 2) DKCore"
-    dk_call dk_echo " 3) DKJavascript"
-    dk_call dk_echo " 4) DKSDL"
-    dk_call dk_echo " 5) DKSDLRml"
-    dk_call dk_echo " 6) DKDomTest"
-    dk_call dk_echo " 7) DKTestAll"
-    dk_call dk_echo " 8) Enter Manually"
-    dk_call dk_echo " 9) Clear Screen"
-    dk_call dk_echo "10) Go Back"
-    dk_call dk_echo "11) Reload"
-	dk_call dk_echo "12) Exit"
-    dk_call dk_echo
+	dk_echo "${APP-} ${triple-} ${TYPE-}"
+	dk_echo
+    dk_echo " 1) HelloWorld"
+    dk_echo " 2) DKCore"
+    dk_echo " 3) DKJavascript"
+    dk_echo " 4) DKSDL"
+    dk_echo " 5) DKSDLRml"
+    dk_echo " 6) DKDomTest"
+    dk_echo " 7) DKTestAll"
+    dk_echo " 8) Enter Manually"
+    dk_echo " 9) Clear Screen"
+    dk_echo "10) Go Back"
+    dk_echo "11) Reload"
+	dk_echo "12) Exit"
+    dk_echo
 	
 	#dk_call dk_keyboardInput choice
 	dk_call dk_keyboardInputTimeout choice 23 60 
