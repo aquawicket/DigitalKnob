@@ -49,14 +49,14 @@ function(DKINIT)
 
 	############ Setup dk_callStack ############
 	dk_setupCallstack()
-	#dk_callStack()
+	#d k_callStack()
 	#:dk_callStackReturn
 	
 	############ Get DKSCRIPT variables ############
 	dk_DKSCRIPT_VARS()
 	
 	############ Set Options ############
-	#dk_setOptions()
+	#d k_setOptions()
 	
 	############ Set Variables ###########
 	dk_setVariables()
