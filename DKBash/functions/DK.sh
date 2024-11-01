@@ -54,10 +54,16 @@ DK(){
     dk_call dk_color
     dk_call dk_logo
     
+
+	
 	echo "adding permission for /etc"
-	sudo chown aquawicket /etc
-	[ -e "$(WSLPATH_EXE)" ] && dk_wslFixNet
-	[ -e "$(WSLPATH_EXE)" ] && dk_wslFixFileAccess
+	dk_call dk_wslFixNet
+	dk_call dk_wslFixFileAccess
+	sudo apt-get update
+	sudo apt-get upgrade
+#	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
+
+	
 	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
