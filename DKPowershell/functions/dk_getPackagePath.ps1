@@ -30,6 +30,6 @@ function Global:dk_getPackagePath (){
 function Global:DKTEST() {
 	dk_debugFunc 0
 	
-	$packagePath=dk_getPackagePath("Debian")
+	$packagePath = dk_getPackagePath("Debian")
 	Write-Output "packagePath = ${packagePath}"
 }

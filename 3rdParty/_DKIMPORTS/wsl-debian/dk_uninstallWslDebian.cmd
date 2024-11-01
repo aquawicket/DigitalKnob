@@ -18,7 +18,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	taskkill /f /im wslservice.exe
 	
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-	%POWERSHELL_EXE% -Command "Remove-AppxPackage -Package TheDebianProject.DebianGNULinux_1.16.0.0_x64__76v4gfsz19hv4"
+	%POWERSHELL_EXE% -Command "Remove-AppxPackage -Package TheDebianProject.DebianGNULinux_1.12.2.0_x64__76v4gfsz19hv4"
 %endfunction%
 
 
