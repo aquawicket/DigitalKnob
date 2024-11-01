@@ -12,7 +12,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_fatal msg)
 	dk_debugFunc()
 
-	dk_log(FATAL "${ARGV0}")
+	dk_getOption(NO_HALT  ${ARGV} REMOVE)
+	
+	dk_log(FATAL "${ARGV0}" ${NO_HALT})
 endfunction()
 
 
