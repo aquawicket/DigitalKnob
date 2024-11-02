@@ -1,11 +1,12 @@
-#include "dk_echo.h"
+#include "dk_color.hpp"
+
+
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
 int main() {
-	dk_echo("DKTEST()");
-	
+	dk_color();
     return 0;
 }
 #endif

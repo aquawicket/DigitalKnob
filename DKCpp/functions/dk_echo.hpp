@@ -1,18 +1,17 @@
 #pragma once
-#ifndef dk_echo_h
-#define dk_echo_h
+#ifndef dk_echo_hpp
+#define dk_echo_hpp
 
-#include "DK.h"
-#include <stdio.h>
+#include "DK.hpp"
+
 
 //################################################################################
 //# dk_echo(message)
 //#
-//#
-//void dk_echo(const char* message);
+#include <stdio.h>
 void dk_echo(const char* message){
 	printf("%s\n", message);
-}
+};
 
 
-#endif //dk_echo_h
+#endif //dk_echo_hpp

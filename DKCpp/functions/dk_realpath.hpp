@@ -1,5 +1,4 @@
-
-#include DKCPP_FUNCTIONS_DIR+"/DK.h"
+#include "DK.hpp"
 
 //##################################################################################
 //# dk_realpath(path) -> rtn_var
