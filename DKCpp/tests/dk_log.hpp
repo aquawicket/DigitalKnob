@@ -2,22 +2,8 @@
 #ifndef dk_log_hpp
 #define dk_log_hpp
 
-
-
-
 #include "DK.hpp"
-
-#define black  	"\x1B[30m"
-#define red  	"\x1B[31m"
-#define green  	"\x1B[32m"
-#define yellow  "\x1B[33m"
-#define blue  	"\x1B[34m"
-#define magenta "\x1B[35m"
-#define cyan    "\x1B[36m"
-#define white   "\x1B[37m"
-
-
-
+#include "dk_color.hpp"
 
 #ifndef ENABLE_dk_log
 	#define ENABLE_dk_log 1
@@ -44,7 +30,6 @@
 #define WARNING 7
 #define ERROR 8
 #define FATAL 9
-
 
 // DEFAULT
 #ifndef DEFAULT_ENABLE
@@ -101,12 +86,28 @@ void dk_log(int level, const char* message)
 	#if ENABLE_dk_log != 1
 		return;
 	#endif
-		
+	
+	int level_enable  = DEFAULT_ENABLE;
+	char* level_color = (char *)DEFAULT_COLOR;
+	char* level_tag   = (char *)DEFAULT_TAG;
+	int level_pause	  = DEFAULT_PAUSE;
+	int level_trace   = DEFAULT_TRACE;
+	int level_line    = DEFAULT_LINE;
+	int level_halt    = DEFAULT_HALT;
+	
+	if(level == VERBOSE){
+		level_enable  = VERBOSE_ENABLE;
+		level_color   = (char *)VERBOSE_COLOR;
+		level_tag     = (char *)VERBOSE_TAG;
+		level_pause	  = VERBOSE_PAUSE;
+		level_trace   = VERBOSE_TRACE;
+		level_line    = VERBOSE_LINE;
+		level_halt    = VERBOSE_HALT;
+	}
 
-	#if VERBOSE_ENABLE != 1
-		if(level == 0) return;
-	#endif
+	printf("%s", level_color);
 	dk_echo(message);
+	printf("%s", clr);
 };
 
 
