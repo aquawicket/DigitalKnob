@@ -7,9 +7,19 @@
 #include <iostream>
 #include <sstream>
 
+//################################################################################
+//# same(str, str2)
+//#
 bool same(const std::string& str, const std::string& str2);
-static void* addressToObject(const std::string& address);
-static std::string objectToAddress(void* element);
 
+//################################################################################
+//# addressToObject(address)
+//#
+static void* addressToObject(const std::string& address);
+
+//################################################################################
+//# objectToAddress(element)
+//#
+static std::string objectToAddress(void* object);
 
 #endif //dk_objAddress

@@ -1,15 +1,17 @@
 #pragma once
-#ifndef dk_test_hpp
-#define dk_test_hpp
+#ifndef dk_log_hpp
+#define dk_log_hpp
 
 #include "DK.hpp"
 
+
 //################################################################################
-//# dk_test()
+//# dk_log(message)
 //#
 #include "dk_echo.hpp"
-void dk_test() {
-	dk_echo("dk_test()\n");
-}
+void dk_log(const char* message){
+	dk_echo(message);
+};
 
-#endif //dk_test_hpp
+
+#endif //dk_log_hpp

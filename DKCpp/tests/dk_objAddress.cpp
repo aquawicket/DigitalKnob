@@ -3,6 +3,9 @@
 #include <string>
 #include <type_traits>
 
+//################################################################################
+//# same(str, str2)
+//#
 bool same(const std::string& str, const std::string& str2) {
 	//DKDEBUGFUNC(str, str2);
 	if(str.compare(str2) == 0)
@@ -10,9 +13,11 @@ bool same(const std::string& str, const std::string& str2) {
 	return false;
 }
 
-
-// assumes that the address stored in the string is valid and is in hex
-// assumes that T is an (optionally cv-qualified) object type or void
+//################################################################################
+//# as_pointer_to(address)
+//#
+//# assumes that the address stored in the string is valid and is in hex
+//# assumes that T is an (optionally cv-qualified) object type or void
 template < typename T = const void > T* as_pointer_to( const std::string& address )
 {
     static_assert( std::is_object<T>::value || std::is_void<T>::value, "invalid type" ) ;
@@ -62,6 +67,9 @@ void* addressToObject(const std::string& address) {
 	return object;
 }
 
+//################################################################################
+//# objectToAddress(element)
+//#
 std::string objectToAddress(void* object) {
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
 	if (!object) {

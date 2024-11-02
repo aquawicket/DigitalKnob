@@ -3,16 +3,15 @@
 #define dk_echo_hpp
 
 #include "DK.hpp"
-#include <stdio.h>
+
 
 //################################################################################
 //# dk_echo(message)
 //#
-//#
-//void dk_echo(const char* message);
+#include <stdio.h>
 void dk_echo(const char* message){
 	printf("%s\n", message);
-}
+};
 
 
 #endif //dk_echo_hpp

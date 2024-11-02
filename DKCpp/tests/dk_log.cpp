@@ -1,12 +1,12 @@
-#include "dk_echo.hpp"
+#include "dk_log.hpp"
 
 
 //################################################################################
-//# dk_echo(message)
+//# dk_log(message)
 //#
-//#include <stdio.h>
-//void dk_echo(const char* message){
-//	printf("%s\n", message);
+//#include "dk_log.hpp"
+//void dk_log(const char* message){
+//	dk_log(message);
 //}
 
 
@@ -14,7 +14,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
 int main() {
-	dk_echo("test dk_echo");
+	dk_log("test dk_log()");
     return 0;
 }
 #endif
