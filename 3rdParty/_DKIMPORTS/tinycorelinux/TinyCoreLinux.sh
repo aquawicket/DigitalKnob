@@ -76,4 +76,4 @@ function main() {
 	fi
 }
 main
-dk_pause	
+

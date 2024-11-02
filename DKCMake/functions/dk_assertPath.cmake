@@ -37,7 +37,6 @@ function(dk_assertPath path)
 #	dk_printVar(CMAKE_CURRENT_LIST_LINE)
 #	dk_printVar(CMAKE_SCRIPT_MODE_FILE)
 #	dk_printVar(CMAKE_CURRENT_SOURCE_DIR)
-#	dk_pause()
 endfunction()
 
 

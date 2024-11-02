@@ -49,7 +49,6 @@ if(DEFINED ENV{BASH})
 			dk_set(BASH_EXE "$ENV{BASH}")
 			dk_printVar(BASH_EXE)
 		endif()
-		#dk_return()
 	endif()
 endif()
 
@@ -97,9 +96,3 @@ if(NOT BASH_EXE)
 	set(BASH_EXE bash CACHE INTERNAL "")
 	dk_warning("BASH_EXE is not found. setting BASH_EXE to 'bash'")
 endif()
-
-#if(NOT EXISTS ${BASH_EXE})
-#	dk_error("BASH_EXE is not found")
-#endif()
-
-#dk_pause()

@@ -445,7 +445,6 @@ function(dk_importVariables url)
 	#set(${rtn_var} ${CURRENT_PLUGIN} PARENT_SCOPE)
 	#dk_printVar(CURRENT_PLUGIN)
 	
-	#dk_pause()
 endfunction()
 
 
