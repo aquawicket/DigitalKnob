@@ -115,10 +115,12 @@
 
 ##################################################################################
 # dk_log(message)
+# dk_log(level, message)
 #
-#	Print a debug message to the console
+#	Print a log message to the console
 #
-#	@msg	- The message to print
+#	@level		- The log level 
+#	@message	- The message to print
 #
 dk_log() {
 	dk_debugFunc 1 2
@@ -135,7 +137,6 @@ dk_log() {
 	level_LINE=${_level_}_LINE
 	level_HALT=${_level_}_HALT
 	[ -n "${!level_ENABLE+1}" ] && [ "${!level_ENABLE-}" -ne "1" ] && return
-	
 	
 	dk_echo "${!level_COLOR}${!level_TAG-}${_message_}${clr}"
 	#[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
