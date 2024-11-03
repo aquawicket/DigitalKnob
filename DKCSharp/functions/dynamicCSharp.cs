@@ -18,7 +18,7 @@ namespace ConsoleApplication2{
             if (results.Errors.Count != 0)
                 throw new Exception("Mission failed!");
             object o = results.CompiledAssembly.CreateInstance("Foo.Bar");
-            MethodInfo mi = o.GetType().GetMethod("SayHello");
+            MethodInfo mi = o.GetType().GetMethod("dk_helloWorld");
             mi.Invoke(o, null);
         }
     }

@@ -9,25 +9,21 @@ using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 
 namespace DK {
-	
-	public class Program{
-		
-			
+	public class App{
         static void Main(string[] args){
 			Console.WriteLine("DK.cs");
-			dk.dk_source();
+			dk_source("dk_helloWorld");
 		}
-	}
-	public class dk {
-		public static void dk_source(){ 
+
+		static void dk_source(string func){ 
 			Dictionary<string, string> providerOptions = new Dictionary<string, string>{ {"CompilerVersion", "v4.0"} };
 			CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
 			CompilerParameters compilerParams = new CompilerParameters{GenerateInMemory = true, GenerateExecutable = false};
-			CompilerResults results = provider.CompileAssemblyFromFile(compilerParams, "dk_helloWorld.cs");
+			CompilerResults results = provider.CompileAssemblyFromFile(compilerParams, func+".cs");
 			if (results.Errors.Count != 0)
 				throw new Exception("Mission failed!");
 			object o = results.CompiledAssembly.CreateInstance("Foo.Bar");
-			MethodInfo mi = o.GetType().GetMethod("SayHello");
+			MethodInfo mi = o.GetType().GetMethod(func);
 			mi.Invoke(o, null);
 		}
 	}
