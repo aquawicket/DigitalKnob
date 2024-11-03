@@ -44,7 +44,7 @@ function(dk_smartExtract src dest)
 		dk_delete("${src_extractPath}")
 	endif()
 	
-	dk_extract("${src_realpath}" "${src_extractPath}")
+	dk_extract("${src_realpath}" "${src_extractPath}" ${NO_HALT})
 	
 	dk_getDirectories("${src_extractPath}" directories)
     #dk_printVar(directories)

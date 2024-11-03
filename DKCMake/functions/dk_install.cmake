@@ -131,17 +131,18 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		#dk_todo("replace this section with dk _smartExtract() function")
 		dk_info("Extracting ${PLUGIN_DL_FILENAME}")
 		
-		if(ANDROID_HOST)
-			set(src_extractPath "$ENV{HOME}/.dkdownload")
-		else()
-			set(src_extractPath "${PLUGIN_DL_DIR}/UNZIPPED")
-		endif()
+#		if(ANDROID_HOST)
+#			set(src_extractPath "$ENV{HOME}/dkdownload")
+#		else()
+#			set(src_extractPath "${PLUGIN_DL_DIR}/UNZIPPED")
+#		endif()
 		#dk_delete(${PLUGIN_DL_DIR}/UNZIPPED NO_HALT)
-		dk_delete(${src_extractPath} NO_HALT)
+#		dk_delete(${src_extractPath} NO_HALT)
 		
 		#dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${PLUGIN_DL_DIR}/UNZIPPED)
-		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath} ${NO_HALT})
-		
+#		dk_extract(${PLUGIN_DL_DIR}/${PLUGIN_DL_FILENAME} ${src_extractPath} ${NO_HALT})
+#		dk_copy("${src_extractPath}" "${PLUGIN_DIR}")
+
 #		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
 #		file(GLOB items RELATIVE "${src_extractPath}/" "${src_extractPath}/*")
 #		list(LENGTH items count)
