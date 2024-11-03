@@ -16,4 +16,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-Call dk_messageBox("test dk_messageBox()")
+If DKSCRIPT_FILE = "dk_messageBox.vbs" Then
+	dk_messageBox("test dk_messageBox()")
+End If

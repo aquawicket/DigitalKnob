@@ -15,4 +15,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-Call dk_log("test dk_log()")
+If DKSCRIPT_FILE = "dk_log.vbs" Then
+	dk_log("test dk_log()")
+End If

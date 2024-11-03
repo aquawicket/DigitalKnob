@@ -16,6 +16,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-Call dk_echo("test dk_echo()")
-
-
+If DKSCRIPT_FILE = "dk_echo.vbs" Then
+	dk_echo("test dk_echo()")
+End If

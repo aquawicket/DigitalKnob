@@ -8,3 +8,18 @@ End Function
 Call ForceConsole()
 WScript.StdOut.Write Chr(27) & "[34A" 'move cursor to beggining of cmd screen
 WScript.StdOut.Write Chr(27) & "[2J"  'clear screen
+
+DKSCRIPT_PATH = WScript.ScriptFullName
+WScript.StdOut.WriteLine "DKSCRIPT_PATH = "+DKSCRIPT_PATH
+
+DKSCRIPT_DIR = CreateObject("Scripting.FileSystemObject").GetParentFolderName(DKSCRIPT_PATH)
+WScript.StdOut.WriteLine "DKSCRIPT_DIR = "+DKSCRIPT_DIR
+
+DKSCRIPT_FILE = CreateObject("Scripting.FileSystemObject").GetFileName(DKSCRIPT_PATH)
+WScript.StdOut.WriteLine "DKSCRIPT_FILE = "+DKSCRIPT_FILE
+
+DKSCRIPT_NAME = CreateObject("Scripting.FileSystemObject").GetBaseName(DKSCRIPT_PATH)
+WScript.StdOut.WriteLine "DKSCRIPT_NAME = "+DKSCRIPT_NAME
+
+DKSCRIPT_EXT = "."+CreateObject("Scripting.FileSystemObject").GetExtensionName(DKSCRIPT_PATH)
+WScript.StdOut.WriteLine "DKSCRIPT_EXT = "+DKSCRIPT_EXT
