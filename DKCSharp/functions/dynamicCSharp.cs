@@ -8,8 +8,8 @@ using System.Net;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 
-namespace ConsoleApplication2{
-    class Program{
+namespace DK{
+    class App{
         static void Main(string[] args){
             Dictionary<string, string> providerOptions = new Dictionary<string, string>{ {"CompilerVersion", "v4.0"} };
             CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
