@@ -1,9 +1,9 @@
 using System;
 
-//namespace DK {
-//	class dk {
-		static void dk_echo(string message){ 
-			Console.WriteLine(message); 
+namespace DK {
+	class dk {
+		static void dk_echo(){ 
+			Console.WriteLine("message"); 
 		}
-//	}
-//} 
+	}
+} 

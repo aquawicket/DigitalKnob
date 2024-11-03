@@ -8,32 +8,13 @@ using System.Net;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 
-namespace ConsoleApplication2
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string source =
-            @"
-namespace Foo
-{
-    public class Bar
-    {
-        public void SayHello()
-        {
-            System.Console.WriteLine(""Hello World"");
-        }
-    }
-}
-            ";
-
-            Dictionary<string, string> providerOptions = new Dictionary<string, string>{
-				{"CompilerVersion", "v4.0"}
-            };
+namespace ConsoleApplication2{
+    class Program{
+        static void Main(string[] args){
+            Dictionary<string, string> providerOptions = new Dictionary<string, string>{ {"CompilerVersion", "v4.0"} };
             CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
             CompilerParameters compilerParams = new CompilerParameters{GenerateInMemory = true, GenerateExecutable = false};
-            CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, source);
+            CompilerResults results = provider.CompileAssemblyFromFile(compilerParams, "dk_helloWorld.cs");
             if (results.Errors.Count != 0)
                 throw new Exception("Mission failed!");
             object o = results.CompiledAssembly.CreateInstance("Foo.Bar");
