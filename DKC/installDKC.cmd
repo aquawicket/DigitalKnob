@@ -82,10 +82,6 @@ if "%~1" neq ""    goto runDKC
 	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
-	:: C
-	::if not defined COMPILER_EXE  if "%host_env%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
-	::if not defined COMPILER_EXE  if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
-	:: C++
 	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_C_COMPILER%"
 	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_C_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
