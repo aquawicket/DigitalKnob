@@ -105,19 +105,23 @@ if "%~1" neq ""    goto runDKCpp
 
 :runDKCpp
 	set "COMPILER_EXE=%~1"
-	set "DKCPP_FILE=%~2"
-	
 	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	
+	set "DKCPP_FILE=%~2"
+	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
+
+	:: get the app name
+	for %%Z in ("%DKCPP_FILE%") do set "APP=%%~nZ"
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist temp.exe  del temp.exe
+	if exist %APP%.exe  del %APP%.exe
 	::### Clang/Clang++ ###
-	%COMPILER_EXE% -DDKTEST=1 -o temp -static "%DKCPP_FILE%"
+	%COMPILER_EXE% -DDKTEST=1 -o %APP% -static "%DKCPP_FILE%"
 	
 	::### GCC/G++ ###
-	::%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -o temp "%DKCPP_FILE%"
-	::%COMPILER_EXE% "%DKCPP_FILE%" -o temp -static -static-libgcc -static-libstdc++ -DDKTEST=1
+	::%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -o %APP% "%DKCPP_FILE%"
+	::%COMPILER_EXE% "%DKCPP_FILE%" -o %APP% -static -static-libgcc -static-libstdc++ -DDKTEST=1
 	::libisl-23.dll
 	::libgcc_s_dw2-1.dll
 	::libgmp-10.dll
@@ -127,7 +131,7 @@ if "%~1" neq ""    goto runDKCpp
 	::libzstd.dll
 	::zlib1.dll
 	
-	if not exist "temp.exe" (
+	if not exist "%APP%.exe" (
 		echo: 
 		echo ERROR: compilation of %DKCPP_FILE% failed.
 		pause
@@ -135,8 +139,9 @@ if "%~1" neq ""    goto runDKCpp
 	)
 	
 	::###### run executable ######
+	cls
 	title %DKCPP_FILE%
-    cmd /v:on /k "temp.exe" && (echo returned TRUE) || (echo returned FALSE)
+    cmd /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
