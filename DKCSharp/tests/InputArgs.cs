@@ -32,5 +32,3 @@ class DK {
 		return code;
     } 
 } 
-
-//} 
