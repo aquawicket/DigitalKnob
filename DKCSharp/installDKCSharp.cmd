@@ -44,7 +44,8 @@ if "%~1" neq ""    goto runDKCSharp
 	echo compiling ...
 	if exist %APP%.exe  del %APP%.exe
 
-	%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
+	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
+	%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
 	if not exist "%APP%.exe" (
 		echo: 
