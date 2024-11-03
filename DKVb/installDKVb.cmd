@@ -10,12 +10,13 @@ if "%~1" neq "" (goto runDKVb)
 	%dk_call% dk_echo "Installing DKVb . . ."
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs
 	set "DKVB_FUNCTIONS_DIR=..\DKVb\functions"
-	set "WSCRIPT_EXE=%SystemRoot%\System32\WScript.exe"
+	::set "WSCRIPT_EXE=%SystemRoot%\System32\WScript.exe"
+	set "CSCRIPT_EXE=%SystemRoot%\System32\CScript.exe"
 	
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\DKVb"
-	ftype DKVb=cmd /c call "%~f0" "%DKVB_FUNCTIONS_DIR%" "%WSCRIPT_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKVb\DefaultIcon" "" "REG_SZ" "%WSCRIPT_EXE%"
+	ftype DKVb=cmd /c call "%~f0" "%DKVB_FUNCTIONS_DIR%" "%CSCRIPT_EXE%" "%%1" %*
+	%dk_call% dk_registrySetKey "HKEY_CLASSES_ROOT\DKVb\DefaultIcon" "" "REG_SZ" "%CSCRIPT_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKEY_CLASSES_ROOT\.vbs"
 	%dk_call% dk_registryDeleteKey "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.vbs"
@@ -27,7 +28,7 @@ if "%~1" neq "" (goto runDKVb)
 
 :runDKVb
 	set "DKVB_FUNCTIONS_DIR=%~1"
-	set "WSCRIPT_EXE=%~2"
+	set "CSCRIPT_EXE=%~2"
 	set "DKSCRIPT_PATH=%~3"
-	start %WSCRIPT_EXE% %DKSCRIPT_PATH%
+	cmd.exe /V:ON /K %CSCRIPT_EXE% //E:vbscript //H:CScript %DKSCRIPT_PATH%
 %endfunction%

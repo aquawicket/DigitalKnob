@@ -1,9 +1,17 @@
 
-Function Hypotenuse(side1 As Double, side2 As Double) As Double
-    Return Math.Sqrt((side1 ^ 2) + (side2 ^ 2))
+Public Function myFunction(argA, argB)
+    myFunction = argA + " " + argB
 End Function
 
+varA = "test function"
+varB = "return string"
+myString = myFunction(varA, varB)
 
-Dim testLength, testHypotenuse As Double
-testHypotenuse = Hypotenuse(testLength, 10.7)
 
+Sub print(s) 
+  On Error Resume Next
+  WScript.stdout.WriteLine (s)  
+  If  err= &h80070006& Then WScript.Echo " Please run this script with CScript": WScript.quit
+End Sub
+ 
+print "hello"
