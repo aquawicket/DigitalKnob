@@ -1,5 +1,3 @@
-using dk_echo.cs;
-
 namespace DK {	
 	class dk {
 		static void dk_log(string message){ 
