@@ -1,7 +1,9 @@
-using System;
 
-namespace DK {	
-    public class dk {
+
+namespace DK {
+	using System;
+	
+    public class console {
         public static void dk_echo(string message) {
             Console.WriteLine(message);
         }
