@@ -1,4 +1,5 @@
 executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").readAll()
+'ForceConsole()
 
 '##################################################################################
 '# dk_messageBox(<message>)
