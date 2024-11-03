@@ -4,9 +4,9 @@ ForceConsole()
 '##################################################################################
 '# dk_echo(<message>)
 '#
-Public Function dk_echo(message)
+public function dk_echo(message)
 	WScript.Echo message
-End Function
+end function
 
 
 
@@ -17,6 +17,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-If DKSCRIPT_FILE = "dk_echo.vbs" Then
+if DKSCRIPT_FILE = "dk_echo.vbs" then
 	dk_echo("test dk_echo()")
-End If
+end if

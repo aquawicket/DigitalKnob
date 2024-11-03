@@ -4,10 +4,10 @@ ForceConsole()
 '##################################################################################
 '# dk_log(<message>)
 '#
-Public Function dk_log(message)
+public function dk_log(message)
 	dk_source("dk_echo")
 	dk_echo(message)
-End Function
+end function
 
 
 
@@ -16,6 +16,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-If DKSCRIPT_FILE = "dk_log.vbs" Then
+if DKSCRIPT_FILE = "dk_log.vbs" then
 	dk_log("test dk_log()")
-End If
+end if

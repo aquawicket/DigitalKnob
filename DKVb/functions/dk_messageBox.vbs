@@ -4,9 +4,9 @@ executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").
 '##################################################################################
 '# dk_messageBox(<message>)
 '#
-Public Function dk_messageBox(message)
+public function dk_messageBox(message)
 	MsgBox(message)
-End Function
+end function
 
 
 
@@ -17,6 +17,6 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-If DKSCRIPT_FILE = "dk_messageBox.vbs" Then
+if DKSCRIPT_FILE = "dk_messageBox.vbs" then
 	dk_messageBox("test dk_messageBox()")
-End If
+end if

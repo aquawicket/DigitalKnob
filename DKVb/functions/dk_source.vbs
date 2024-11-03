@@ -3,9 +3,9 @@ executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("DK.vbs").
 '##################################################################################
 '# dk_source(<message>)
 '#
-Public Function dk_source(file)
+public function dk_source(file)
 	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile(file+".vbs").readAll()
-End Function
+end function
 
 
 
@@ -16,7 +16,7 @@ End Function
 
 
 '###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-If DKSCRIPT_FILE = "dk_source.vbs" Then
+if DKSCRIPT_FILE = "dk_source.vbs" then
 	dk_source("dk_messageBox")
 	dk_messageBox("test dk_source() successful")
-End If
+end if

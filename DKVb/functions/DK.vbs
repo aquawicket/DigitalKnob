@@ -1,16 +1,16 @@
-If DKINIT = 1 Then
+if DKINIT = 1 then
 	'WScript.Echo "DK.vbs already loaded"
-Else
+else
 	'WScript.Echo "Loading DK.vbs"
 	DKINIT = 1
 
-	Function ForceConsole()	
+	function ForceConsole()	
 		If InStr(LCase(WScript.FullName), "cscript.exe") = 0 Then
 			Set oWSH = CreateObject("WScript.Shell")
 			oWSH.Run "cmd.exe /k cscript.exe" & " //NoLogo " & Chr(34) & WScript.ScriptFullName & Chr(34)
 			WScript.Quit
 		End If
-	End Function
+	end function
 	'Call ForceConsole()
 
 	executeGlobal CreateObject("Scripting.FileSystemObject").openTextFile("dk_source.vbs").readAll()
@@ -32,4 +32,4 @@ Else
 
 	DKSCRIPT_EXT = "."+CreateObject("Scripting.FileSystemObject").GetExtensionName(DKSCRIPT_PATH)
 	'WScript.StdOut.WriteLine "DKSCRIPT_EXT = "+DKSCRIPT_EXT
-End IF
+end if
