@@ -54,13 +54,10 @@ DK(){
     dk_call dk_color
     dk_call dk_logo
     
-
-	
-	echo "adding permission for /etc"
-	dk_call dk_wslFixNet
-	dk_call dk_wslFixFileAccess
-	sudo apt-get update
-	sudo apt-get upgrade
+#	dk_call dk_wslFixNet
+#	dk_call dk_wslFixFileAccess
+#	sudo apt-get update
+#	sudo apt-get upgrade
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
 
 	
