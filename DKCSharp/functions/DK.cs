@@ -1,13 +1,13 @@
-using System;
+using System;					// https://learn.microsoft.com/en-us/dotnet/api/system?view=net-8.0
+using System.CodeDom.Compiler;	// https://learn.microsoft.com/en-us/dotnet/api/system.codedom.compiler?view=net-8.0
+using Microsoft.CSharp;			// https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp?view=net-8.0
+using System.Reflection;		// https://learn.microsoft.com/en-us/dotnet/api/system.reflection?view=net-8.0
 
-using System.CodeDom.Compiler;
-using Microsoft.CSharp;
-using System.Reflection;
+
 
 namespace DKAPP{ 
-public class MAIN{
+public class APP{
 
-	//public MAIN myObj = new MAIN();
 	public static string DKSCRIPT_PATH = "";
 	public static string DKSCRIPT_DIR = "";
 	public static string DKSCRIPT_FILE = "";
@@ -15,9 +15,17 @@ public class MAIN{
 	public static string DKSCRIPT_EXT = "";
 
 	public static CompilerParameters CompilerParams = new CompilerParameters{
+		CompilerOptions = "/optimize",
+		GenerateExecutable = false,
 		GenerateInMemory = true,
+		IncludeDebugInformation = true,
+		//MainClass = "APP",
+		//OutputAssembly = exeFile,
+		//ReferencedAssemblies.Add( "System.dll" ),
+		//ReferencedAssemblies.Add( "mscorlib.dll" ),
+		//TempFiles = new TempFileCollection(".", true),
 		TreatWarningsAsErrors = false,
-		GenerateExecutable = false
+		WarningLevel = 3
 	};
 
 	public static string[] references = { "System.dll", "mscorlib.dll" };
@@ -30,25 +38,27 @@ public class MAIN{
 		string[] arguments = Environment.GetCommandLineArgs();
 		//System.Console.WriteLine("GetCommandLineArgs: {0}", string.Join(", ", arguments));
 
-		MAIN.DKSCRIPT_PATH = System.IO.Path.GetFullPath(arguments[0]);
-		System.Console.WriteLine("DKSCRIPT_PATH = "+MAIN.DKSCRIPT_PATH);
+		APP.DKSCRIPT_PATH = System.IO.Path.GetFullPath(arguments[0]);
+		System.Console.WriteLine("DKSCRIPT_PATH = "+APP.DKSCRIPT_PATH);
 
-		MAIN.DKSCRIPT_DIR = System.IO.Path.GetDirectoryName(MAIN.DKSCRIPT_PATH);
-		System.Console.WriteLine("DKSCRIPT_DIR = "+MAIN.DKSCRIPT_DIR);
+		APP.DKSCRIPT_DIR = System.IO.Path.GetDirectoryName(APP.DKSCRIPT_PATH);
+		System.Console.WriteLine("DKSCRIPT_DIR = "+APP.DKSCRIPT_DIR);
 
-		MAIN.DKSCRIPT_FILE = System.IO.Path.GetFileName(MAIN.DKSCRIPT_PATH);
-		System.Console.WriteLine("DKSCRIPT_FILE = "+MAIN.DKSCRIPT_FILE);
+		APP.DKSCRIPT_FILE = System.IO.Path.GetFileName(APP.DKSCRIPT_PATH);
+		System.Console.WriteLine("DKSCRIPT_FILE = "+APP.DKSCRIPT_FILE);
 
-		MAIN.DKSCRIPT_NAME = System.IO.Path.GetFileNameWithoutExtension(MAIN.DKSCRIPT_PATH);
-		System.Console.WriteLine("DKSCRIPT_NAME = "+MAIN.DKSCRIPT_NAME);
+		APP.DKSCRIPT_NAME = System.IO.Path.GetFileNameWithoutExtension(APP.DKSCRIPT_PATH);
+		System.Console.WriteLine("DKSCRIPT_NAME = "+APP.DKSCRIPT_NAME);
 
-		MAIN.DKSCRIPT_EXT = System.IO.Path.GetExtension(MAIN.DKSCRIPT_PATH);
-		System.Console.WriteLine("DKSCRIPT_EXT = "+MAIN.DKSCRIPT_EXT);
+		APP.DKSCRIPT_EXT = System.IO.Path.GetExtension(APP.DKSCRIPT_PATH);
+		System.Console.WriteLine("DKSCRIPT_EXT = "+APP.DKSCRIPT_EXT);
 
 		CompilerParams.ReferencedAssemblies.AddRange(references);
+		
 		//int returnValue = CompileAndRun(DKSCRIPT_NAME);
 		//System.Console.WriteLine("returnValue = "+returnValue);
-		CompileAndRunDKTEST(MAIN.DKSCRIPT_NAME);
+		
+		CompileAndRunDKTEST(APP.DKSCRIPT_NAME);
 		Console.ReadKey();
 	}
 
@@ -83,7 +93,7 @@ public class MAIN{
 		Console.WriteLine("");
 		Console.BackgroundColor = ConsoleColor.Magenta;
 		Console.ForegroundColor = ConsoleColor.White;
-		Console.WriteLine("###### DKTEST MODE ###### "+ MAIN.DKSCRIPT_FILE +" ###### DKTEST MODE ########");
+		Console.WriteLine("###### DKTEST MODE ###### "+ APP.DKSCRIPT_FILE +" ###### DKTEST MODE ########");
 		Console.BackgroundColor = ConsoleColor.Black;
 		Console.ForegroundColor = ConsoleColor.White;
 		Console.WriteLine("");
@@ -98,7 +108,7 @@ public class MAIN{
 			return;
 		} else {
 			Module module = compile.CompiledAssembly.GetModules()[0];
-			module.GetType("DK.APP").GetMethod("DKTEST").Invoke(null, new object[] {});
+			module.GetType("APP").GetMethod("DKTEST").Invoke(null, new object[] {});
 		}
 		DateTime executionFinished = DateTime.Now;
 		Console.WriteLine("");
@@ -107,7 +117,7 @@ public class MAIN{
 		Console.WriteLine("");
 		Console.BackgroundColor = ConsoleColor.Magenta;
 		Console.ForegroundColor = ConsoleColor.White;
-		Console.WriteLine("######## END TEST ####### "+ MAIN.DKSCRIPT_FILE +" ######## END TEST #########");
+		Console.WriteLine("######## END TEST ####### "+ APP.DKSCRIPT_FILE +" ######## END TEST #########");
 		Console.BackgroundColor = ConsoleColor.Black;
 		Console.ForegroundColor = ConsoleColor.White;
 		Console.WriteLine("");

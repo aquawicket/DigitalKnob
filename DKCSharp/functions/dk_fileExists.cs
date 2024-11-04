@@ -1,4 +1,4 @@
-namespace DK{ public static class APP{
+public static class APP{
         	
 //############################################################################
 //# dk_fileExists(file)
@@ -20,4 +20,4 @@ public static void DKTEST(){
 	System.Console.WriteLine("exists = "+exists);
 }
 
-}}
+}

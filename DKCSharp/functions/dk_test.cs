@@ -1,10 +1,10 @@
-public class APP {
+public class TEST_FUNC{
         	
 //############################################################################
-//# dk_echo(message)
+//# dk_test(level, message)
 //#
-public static int dk_echo(string message){
-	System.Console.WriteLine(message);
+public static void dk_test(){
+	TEST.test();
 	return 0;
 }
     
@@ -14,7 +14,7 @@ public static int dk_echo(string message){
 	
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 public static void DKTEST(){
-	dk_echo("DKTEST() dk_echo()");
+	dk_test("dk_test()");
 }
 
 }

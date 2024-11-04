@@ -1,11 +1,12 @@
-//namespace DK{ 
-public static class APP{
+using APP2;
+public class APP{
         	
 //############################################################################
 //# dk_log(level, message)
 //#
 public static int dk_log(string message){
-	MAIN.CompileAndRun("dk_echo");
+	APP2.test();
+	APP.CompileAndRun("dk_echo");
 	return 0;
 }
     
@@ -19,4 +20,3 @@ public static void DKTEST(){
 }
 
 }
-//}
