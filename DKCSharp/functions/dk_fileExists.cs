@@ -1,4 +1,4 @@
-namespace NAMESPACE{ public class CLASS{
+namespace DK{ public static class APP{
         	
 //############################################################################
 //# dk_fileExists(file)
@@ -18,4 +18,6 @@ public static bool dk_fileExists(string file){
 public static void DKTEST(){
 	bool exists = dk_fileExists("C:\\Windows\\System32\\cmd.exe");
 	System.Console.WriteLine("exists = "+exists);
-}}}
+}
+
+}}

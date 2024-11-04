@@ -1,13 +1,22 @@
-using dk_echo.cs;
-
-namespace DK {	
-	class dk {
-		static void dk_log(string message){ 
-			dk_echo(message); 
-		}
+//namespace DK{ 
+public static class APP{
+        	
+//############################################################################
+//# dk_log(level, message)
+//#
+public static int dk_log(string message){
+	MAIN.CompileAndRun("dk_echo");
+	return 0;
+}
+    
 	
-		static void Main(string[] args){ 
-			dk_echo("Hello World!"); 
-		}
-	}
-} 
+	
+	
+	
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+public static void DKTEST(){
+	dk_log("dk_log()");
+}
+
+}
+//}
