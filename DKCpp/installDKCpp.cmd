@@ -117,7 +117,10 @@ if "%~1" neq ""    goto runDKCpp
 	echo compiling ...
 	if exist %APP%.exe  del %APP%.exe
 	::### Clang/Clang++ ###
-	%COMPILER_EXE% -DDKTEST=1 -o %APP% -static "%DKCPP_FILE%"
+	::%COMPILER_EXE% -DDKTEST=1 -o %APP% -static "%DKCPP_FILE%"
+	echo clang++ -DDKTEST=1 -static -static-libgcc -static-libstdc++ -std=gnu++17 -o %APP% -static "%DKCPP_FILE%"
+	echo:
+	%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -std=gnu++17 -o %APP% -static "%DKCPP_FILE%"
 	
 	::### GCC/G++ ###
 	::%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -o %APP% "%DKCPP_FILE%"

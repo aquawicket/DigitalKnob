@@ -9,8 +9,10 @@
 //# dk_echo(message)
 //#
 #include <stdio.h>
-void dk_echo(const char* message){
-	printf("%s\n", message);
+#include <iostream>
+void dk_echo(const std::string message){
+	//printf("%s\n", message);
+	std::cout << message;
 };
 
 
