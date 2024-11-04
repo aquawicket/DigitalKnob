@@ -1,19 +1,21 @@
-// C# program to print Hello World! 
-using System; 
-using System.IO;
+namespace NAMESPACE{ public class CLASS{
+        	
+//############################################################################
+//# dk_fileExists(file)
+//#
 
-// Class declaration 
-class DK { 
-  
-    // Main Method 
-    static int Main(string[] args) { 
-        // string[] arguments = Environment.GetCommandLineArgs();
-        // Console.WriteLine("Main({0})", string.Join(", ", arguments));
-			
-		// Check if file exists
-		string file = "C:\\Windows\\System32\\cmd.exe";
-		bool exists = File.Exists(file);
-		Console.WriteLine("{0} exists = {1}", file, exists);
-		return 0;
-    } 
-} 
+public static bool dk_fileExists(string file){
+	bool exists = System.IO.File.Exists(file);
+	System.Console.WriteLine("{0} exists = {1}", file, exists);
+	return exists;
+}
+    
+	
+	
+	
+	
+//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+public static void DKTEST(){
+	bool exists = dk_fileExists("C:\\Windows\\System32\\cmd.exe");
+	System.Console.WriteLine("exists = "+exists);
+}}}
