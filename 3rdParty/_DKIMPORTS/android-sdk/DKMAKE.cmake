@@ -15,9 +15,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 dk_load(dk_builder)
 
-dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
-dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")			#TODO: phase out
-dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
+if(ANROID_HOST)
+	dk_set(ANDROID_SDK "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
+	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
+else()
+	dk_set(ANDROID_SDK "${DK3RDPARTY_DIR}/android-sdk")
+	dk_set(ANDROID_SDK_DIR "${DK3RDPARTY_DIR}/android-sdk")
+endif()
 if(NOT EXISTS ${ANDROID_SDK_DIR})
 	dk_info("Installing android-sdk")
 	dk_makeDirectory("${ANDROID_SDK_DIR}")

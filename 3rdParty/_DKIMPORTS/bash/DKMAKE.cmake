@@ -65,15 +65,18 @@ if(MSYSTEM)
 	endif()
 endif()
 
+
+## We should be able to find bash while inside a WSL instance
+## Using bash outside of WSL will cause problems
 ### WSL bash ###
-dk_findProgram(WSL_BASH_EXE bash.exe "C:/Windows/System32")
-if(EXISTS "${WSL_BASH_EXE}")
-	dk_printVar(WSL_BASH_EXE)
-	if(NOT BASH_EXE)
-		dk_set(BASH_EXE ${WSL_BASH_EXE})
-		dk_printVar(BASH_EXE)
-	endif()
-endif()
+#dk_findProgram(WSL_BASH_EXE bash.exe "C:/Windows/System32")
+#if(EXISTS "${WSL_BASH_EXE}")
+#	dk_printVar(WSL_BASH_EXE)
+#	if(NOT BASH_EXE)
+#		dk_set(BASH_EXE ${WSL_BASH_EXE})
+#		dk_printVar(BASH_EXE)
+#	endif()
+#endif()
 
 
 ### Git bash ###
