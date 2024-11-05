@@ -113,6 +113,8 @@ if "%~1" neq ""    goto runDKC
 	echo compiling ...
 	if exist %APP%.exe  del %APP%.exe
 	::### Clang/Clang++ ###
+	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP% -static %DKC_FILE%"
+	echo %COMPILE_COMMAND%
 	%COMPILER_EXE% -DDKTEST=1 -o %APP% -static "%DKC_FILE%"
 	
 	::### GCC/G++ ###

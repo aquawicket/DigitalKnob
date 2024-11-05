@@ -295,17 +295,17 @@ void dk_log(int level, const char* message)
 		return;
 	#endif
 	
-	int level_enable  = DEFAULT_ENABLE;
-	char* level_color = (char *)DEFAULT_COLOR;
-	char* level_tag   = (char *)DEFAULT_TAG;
-	int level_pause	  = DEFAULT_PAUSE;
-	int level_trace   = DEFAULT_TRACE;
-	int level_line    = DEFAULT_LINE;
-	int level_halt    = DEFAULT_HALT;
+	int level_enable        = DEFAULT_ENABLE;
+	std::string level_color = DEFAULT_COLOR;
+	std::string level_tag   = DEFAULT_TAG;
+	int level_pause	        = DEFAULT_PAUSE;
+	int level_trace         = DEFAULT_TRACE;
+	int level_line          = DEFAULT_LINE;
+	int level_halt          = DEFAULT_HALT;
 	if(level == VERBOSE){
 		level_enable  = VERBOSE_ENABLE;
-		level_color   = (char *)VERBOSE_COLOR;
-		level_tag     = (char *)VERBOSE_TAG;
+		level_color   = VERBOSE_COLOR;
+		level_tag     = VERBOSE_TAG;
 		level_pause	  = VERBOSE_PAUSE;
 		level_trace   = VERBOSE_TRACE;
 		level_line    = VERBOSE_LINE;
@@ -313,8 +313,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == DEBUG){
 		level_enable  = DEBUG_ENABLE;
-		level_color   = (char *)DEBUG_COLOR;
-		level_tag     = (char *)DEBUG_TAG;
+		level_color   = DEBUG_COLOR;
+		level_tag     = DEBUG_TAG;
 		level_pause	  = DEBUG_PAUSE;
 		level_trace   = DEBUG_TRACE;
 		level_line    = DEBUG_LINE;
@@ -322,8 +322,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == INFO){
 		level_enable  = INFO_ENABLE;
-		level_color   = (char *)INFO_COLOR;
-		level_tag     = (char *)INFO_TAG;
+		level_color   = INFO_COLOR;
+		level_tag     = INFO_TAG;
 		level_pause	  = INFO_PAUSE;
 		level_trace   = INFO_TRACE;
 		level_line    = INFO_LINE;
@@ -331,8 +331,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == SUCCESS){
 		level_enable  = SUCCESS_ENABLE;
-		level_color   = (char *)SUCCESS_COLOR;
-		level_tag     = (char *)SUCCESS_TAG;
+		level_color   = SUCCESS_COLOR;
+		level_tag     = SUCCESS_TAG;
 		level_pause	  = SUCCESS_PAUSE;
 		level_trace   = SUCCESS_TRACE;
 		level_line    = SUCCESS_LINE;
@@ -340,8 +340,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == TODO){
 		level_enable  = TODO_ENABLE;
-		level_color   = (char *)TODO_COLOR;
-		level_tag     = (char *)TODO_TAG;
+		level_color   = TODO_COLOR;
+		level_tag     = TODO_TAG;
 		level_pause	  = TODO_PAUSE;
 		level_trace   = TODO_TRACE;
 		level_line    = TODO_LINE;
@@ -349,8 +349,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == NOTICE){
 		level_enable  = NOTICE_ENABLE;
-		level_color   = (char *)NOTICE_COLOR;
-		level_tag     = (char *)NOTICE_TAG;
+		level_color   = NOTICE_COLOR;
+		level_tag     = NOTICE_TAG;
 		level_pause	  = NOTICE_PAUSE;
 		level_trace   = NOTICE_TRACE;
 		level_line    = NOTICE_LINE;
@@ -358,8 +358,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == FIXME){
 		level_enable  = FIXME_ENABLE;
-		level_color   = (char *)FIXME_COLOR;
-		level_tag     = (char *)FIXME_TAG;
+		level_color   = FIXME_COLOR;
+		level_tag     = FIXME_TAG;
 		level_pause	  = FIXME_PAUSE;
 		level_trace   = FIXME_TRACE;
 		level_line    = FIXME_LINE;
@@ -367,8 +367,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == WARNING){
 		level_enable  = WARNING_ENABLE;
-		level_color   = (char *)WARNING_COLOR;
-		level_tag     = (char *)WARNING_TAG;
+		level_color   = WARNING_COLOR;
+		level_tag     = WARNING_TAG;
 		level_pause	  = WARNING_PAUSE;
 		level_trace   = WARNING_TRACE;
 		level_line    = WARNING_LINE;
@@ -376,8 +376,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == ERROR){
 		level_enable  = ERROR_ENABLE;
-		level_color   = (char *)ERROR_COLOR;
-		level_tag     = (char *)ERROR_TAG;
+		level_color   = ERROR_COLOR;
+		level_tag     = ERROR_TAG;
 		level_pause	  = ERROR_PAUSE;
 		level_trace   = ERROR_TRACE;
 		level_line    = ERROR_LINE;
@@ -385,8 +385,8 @@ void dk_log(int level, const char* message)
 	}
 	if(level == FATAL){
 		level_enable  = FATAL_ENABLE;
-		level_color   = (char *)FATAL_COLOR;
-		level_tag     = (char *)FATAL_TAG;
+		level_color   = FATAL_COLOR;
+		level_tag     = FATAL_TAG;
 		level_pause	  = FATAL_PAUSE;
 		level_trace   = FATAL_TRACE;
 		level_line    = FATAL_LINE;
@@ -395,9 +395,10 @@ void dk_log(int level, const char* message)
 	if(level_enable != 1)
 		return;
 
-	printf("%s", level_color);
+	std::cout << level_color;
 	dk_echo(message);
-	printf("%s", clr);
+	std::cout << "\n";
+	std::cout << clr;
 };
 
 

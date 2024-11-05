@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <iostream>
 void dk_echo(const std::string message){
-	//printf("%s\n", message);
 	std::cout << message;
 };
 
