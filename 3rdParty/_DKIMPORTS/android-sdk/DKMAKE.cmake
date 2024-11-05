@@ -16,7 +16,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_load(dk_builder)
 dk_validate(host_triple "dk_host_triple()")
 
-if(ANROID_HOST)
+if(ANDROID_HOST)
 	dk_set(ANDROID_SDK "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 	dk_set(ANDROID_SDK_DIR "$ENV{HOME}/digitalknob/3rdParty/android-sdk")
 else()
