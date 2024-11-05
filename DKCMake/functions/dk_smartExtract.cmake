@@ -9,6 +9,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_smartExtract src dest)
     dk_debugFunc()
  
+	dk_getOptionValues(NO_HALT 			${ARGV})
+	#dk_getOptionValues(EXTRACT_PATH 	${ARGV})
+	
     #set(src ${ARGV1})
     #set(dest ${ARGV2})
     
@@ -24,7 +27,11 @@ function(dk_smartExtract src dest)
     dk_basename("${src_basename}" src_folder)
 	#dk_printVar(src_folder)
 	
-	dk_set(src_extractPath "${src_dirname}/${src_basename}_EXTRACTED")
+	#if(EXTRACT_PATH)
+	#	dk_set(src_extractPath "${EXTRACT_PATH}/${src_basename}_EXTRACTED")
+	#else)_
+	#	dk_set(src_extractPath "${src_dirname}/${src_basename}_EXTRACTED")
+	#endif()
 	#dk_printVar(src_extractPath)
     
     dk_realpath("${dest}" dest_realpath)
@@ -32,7 +39,10 @@ function(dk_smartExtract src dest)
     
     dk_dirname("${dest_realpath}" dest_dirname)
 	#dk_printVar(dest_dirname)
-    
+	
+    dk_set(src_extractPath "${dest_dirname}/${src_basename}_EXTRACTED")
+	#dk_printVar(src_extractPath)
+	
     dk_basename("${dest_realpath}" dest_folder)
 	#dk_printVar(dest_folder)
 
