@@ -104,18 +104,18 @@ if "%~1" neq ""    goto runDKCpp
 
 
 :runDKCpp
-	:: COMPILER_EXE
+	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
 	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
 	
-	:: DKCPP_FILE
+	::###### DKCPP_FILE ######
 	set "DKCPP_FILE=%~2"
 	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
 
-	:: APP_NAME
+	::###### APP_NAME ######
 	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"
 	
-	:: APP_FILE
+	::###### APP_FILE ######
 	set "APP_FILE=%APP_NAME%.exe"
 	
 	::###### Compile Code ######
@@ -128,7 +128,6 @@ if "%~1" neq ""    goto runDKCpp
 	
 	::### GCC/G++ ###
 	::%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -o %APP% "%DKCPP_FILE%"
-	::%COMPILER_EXE% "%DKCPP_FILE%" -o %APP% -static -static-libgcc -static-libstdc++ -DDKTEST=1
 	::libisl-23.dll
 	::libgcc_s_dw2-1.dll
 	::libgmp-10.dll
@@ -146,13 +145,20 @@ if "%~1" neq ""    goto runDKCpp
 	)
 	
 	::###### run executable ######
-	cls
+	::cls
 	title %DKCPP_FILE%
-    cmd /v:on /k "%APP_FILE%" && (echo returned TRUE) || (echo returned FALSE)
+	echo:
+	echo ######## start %APP_FILE% ############
+	echo:
+    cmd /v:on /c "%APP_FILE%"
+	echo:
+	echo ######### end %APP_FILE% ############
+	echo:
 	
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 echo ERROR:%ERRORLEVEL% && pause
+	set "return_code=%ERRORLEVEL%"
+	echo return_code = %return_code%
 	
+	pause
 	::###### reload ######
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload

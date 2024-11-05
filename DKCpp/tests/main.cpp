@@ -7,5 +7,5 @@ int main() {
 	
 	//std::cout << "(press enter to exit)" << std::endl;
 	//std::cin.get(); //wait for enter to exit
-    return -1;
+    return 13;
 }
