@@ -106,11 +106,11 @@ if "%~1" neq ""    goto runDKCpp
 :runDKCpp
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE    echo ERROR: COMPILER_EXE is invalid
+	if not defined COMPILER_EXE   echo ERROR: COMPILER_EXE is invalid
 	
 	::###### DKCPP_FILE ######
 	set "DKCPP_FILE=%~2"
-	if not defined DKCPP_FILE    echo ERROR: DKCPP_FILE is invalid
+	if not defined DKCPP_FILE     echo ERROR: DKCPP_FILE is invalid
 
 	::###### APP_NAME ######
 	for %%Z in ("%DKCPP_FILE%") do set "APP_NAME=%%~nZ"
@@ -125,17 +125,6 @@ if "%~1" neq ""    goto runDKCpp
 	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -static -o %APP_NAME% -static %DKCPP_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
-	
-	::### GCC/G++ ###
-	::%COMPILER_EXE% -DDKTEST=1 -static -static-libgcc -static-libstdc++ -o %APP% "%DKCPP_FILE%"
-	::libisl-23.dll
-	::libgcc_s_dw2-1.dll
-	::libgmp-10.dll
-	::libmpc-3.dll
-	::libmpfr-6.dll
-	::libwinpthread-1.dll
-	::libzstd.dll
-	::zlib1.dll
 	
 	if not exist "%APP_FILE%" (
 		echo: 
@@ -157,8 +146,8 @@ if "%~1" neq ""    goto runDKCpp
 	
 	set "return_code=%ERRORLEVEL%"
 	echo return_code = %return_code%
-	
 	pause
+	
 	::###### reload ######
 	if not exist %~dp0\reload goto:eof
 	del %~dp0\reload
