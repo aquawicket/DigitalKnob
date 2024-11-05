@@ -18,7 +18,11 @@ function(dk_createWindowsIcon inpath outpath)
 	endif()
 	dk_dirname(${outpath} dirname)
 	dk_makeDirectory(${dirname})
-	execute_process(COMMAND ${IMAGEMAGICK_CONVERT_EXE} ${inpath} -define icon:auto-resize=256,128,64,48,32,16 ${outpath})
+	
+	file(TO_NATIVE_PATH "${IMAGEMAGICK_CONVERT_EXE}" IMAGEMAGICK_CONVERT_EXE_WIN)
+	file(TO_NATIVE_PATH "${inpath}" inpath_WIN)
+	file(TO_NATIVE_PATH "${outpath}" outpath_WIN)
+	execute_process(COMMAND ${IMAGEMAGICK_CONVERT_EXE_WIN} ${inpath_WIN} -define icon:auto-resize=256,128,64,48,32,16 ${outpath_WIN})
 endfunction()
 
 
