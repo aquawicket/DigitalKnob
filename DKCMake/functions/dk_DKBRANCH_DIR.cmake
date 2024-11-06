@@ -8,18 +8,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_DKBRANCH_DIR)
 	dk_debugFunc()
-	
-	# If the current folder matches the current branch set DKBRANCH, default to Development
-	
-	dk_dirname(${CMAKE_CURRENT_LIST_DIR} FOLDER)
-	dk_set(DKBRANCH "Development")
-	
+
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+	
+	dk_set(DKBRANCH "Development")
 	if(EXISTS "${DIGITALKNOB_DIR}/${DKBRANCH}/.git")
-#		BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
-#		if [ "${BRANCH}" = "${FOLDER}" ]; then
-#			DKBRANCH="${FOLDER}"
-#		fi
+		# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
+		# If the current folder matches the current branch set DKBRANCH, otherwise default to Development
+		dk_dirname(${CMAKE_CURRENT_LIST_DIR} CURRENT_FOLDER)
+		if("${BRANCH}" STREQUAL "${CURRENT_FOLDER}")
+			set(DKBRANCH "${CURRENT_FOLDER}")
+		endif()
 	endif()
 	#dk_printVar(DKBRANCH)
 	
@@ -35,9 +34,9 @@ function(dk_DKBRANCH_DIR)
 #			set(ENV{DKIMPORTS_DIR} "${DK3RDPARTY_DIR}/_DKIMPORTS")
 #			#dk_printVar(DKIMPORTS_DIR)
 			
-		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
-		set(ENV{DKAPPS_DIR} "${DKBRANCH_DIR}/DKApps")
-		#dk_printVar(DKAPPS_DIR)
+#		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
+#		set(ENV{DKAPPS_DIR} "${DKBRANCH_DIR}/DKApps")
+#		#dk_printVar(DKAPPS_DIR)
 		
 		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
 		set(ENV{DKBASH_DIR} "${DKBRANCH_DIR}/DKBash")
