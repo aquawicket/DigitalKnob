@@ -37,3 +37,31 @@ endif()
 
 
 
+list(APPEND lines "test")
+#list(APPEND lines "if(some command)")
+#list(APPEND lines "#if (")
+list(APPEND lines "function(")
+list(APPEND lines "function (")
+ list(APPEND lines "function	(")
+ list(APPEND lines "abc(")
+list(APPEND lines "123 (")
+ list(APPEND lines "456	(")
+
+set(keepCommands "ZZZZZ;function;XXXXX")
+foreach(line ${lines})
+	foreach(keepCommand ${keepCommands})
+		if(line MATCHES "${keepCommand}\\(") # trailing (
+			message("'${line}' has 'function('")
+		endif()
+		if(line MATCHES "${keepCommand} ") # trailing (
+			message("'${line}' has 'function ('")
+		endif()
+		if(line MATCHES "${keepCommand}	") # trailing (
+			message("'${line}' has 'function	('")
+		endif()
+	endforeach()
+endforeach()
+
+
+
+

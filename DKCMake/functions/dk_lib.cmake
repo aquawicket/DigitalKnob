@@ -13,8 +13,6 @@ function(dk_lib lib_path)
 	dk_debugFunc()
 	
 	foreach(item ${ARGV})
-		#dk_includes("${LIBS}" "${item}" result)
-		#if(${result})
 		if(LIBS MATCHES "${item}")
 			continue() # item is already in the list
 		endif()

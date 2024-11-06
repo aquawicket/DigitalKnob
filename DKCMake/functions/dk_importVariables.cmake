@@ -135,7 +135,9 @@ function(dk_importVariables url)
 	
 	# PLUGIN_GIT
 	unset(PLUGIN_GIT)
-	dk_includes(${PLUGIN_URL} https://github.com PLUGIN_GIT)				
+	if(PLUGIN_URL MATCHES "https://github.com")
+		set(PLUGIN_GIT 1)
+	endif()		
 	dk_printVar(PLUGIN_GIT)												# PLUGIN_GIT				: 1
 	
 	# PLUGIN_URL_EXTENSION
@@ -172,7 +174,9 @@ function(dk_importVariables url)
 	
 	# PLUGIN_IMPORT
 	unset(PLUGIN_IMPORT)
-	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS_DIR} PLUGIN_IMPORT)		
+	if(CMAKE_CURRENT_LIST_DIR MATCHES "${DKIMPORTS_DIR}")
+		set(PLUGIN_IMPORT 1)
+	endif()	
 	dk_assertVar(PLUGIN_IMPORT)
 	dk_printVar(PLUGIN_IMPORT)											# PLUGIN_IMPORT			 	: 1
 	
