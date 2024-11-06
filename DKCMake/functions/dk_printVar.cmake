@@ -18,7 +18,7 @@ function(dk_printVar)
 	string(REPLACE "CACHE{" "" 	ARGV "${ARGV}")
 	string(REPLACE "}" "" 		ARGV "${ARGV}")
 
-	dk_echo("")
+	#dk_echo("")
 	
 	###### ENV ######
 	if(DEFINED "ENV{${ARGV}}")

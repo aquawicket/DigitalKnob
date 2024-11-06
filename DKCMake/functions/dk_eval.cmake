@@ -8,7 +8,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # 	evals the specified cmake code.
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
 #
-function(dk_eval code)
+macro(dk_eval code)
 	#dk_debugFunc()
 	
 	dk_replaceAll("${code}"  ";"  "\n"  code)
@@ -41,7 +41,7 @@ function(dk_eval code)
 		dk_load("${dk_evel_temp}")
 		eval("${code}")
 	endif()
-endfunction()
+endmacro()
 
 
 #function(dk_eval code)
