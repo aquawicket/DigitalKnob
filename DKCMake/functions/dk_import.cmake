@@ -34,7 +34,7 @@ function(dk_import url)
 			dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 			
 			if(NOT EXISTS ${${CURRENT_PLUGIN}_DIR}/.git)
-				dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
+				dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 				dk_cd(${DK3RDPARTY_DIR})
 				if(EXISTS ${${CURRENT_PLUGIN}_DIR})
 					dk_delete(${${CURRENT_PLUGIN}_DIR})

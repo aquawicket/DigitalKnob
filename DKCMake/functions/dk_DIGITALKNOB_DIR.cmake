@@ -33,12 +33,12 @@ function(dk_DIGITALKNOB_DIR)
 		dk_makeDirectory("${DKDOWNLOAD_DIR}")
 	endif()
 	
-	### DKTOOLS_DIR ###
-	dk_set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
-	set(ENV{DKTOOLS_DIR} "${DIGITALKNOB_DIR}/DKTools")
-	if(NOT EXISTS "${DKTOOLS_DIR}") 
-		dk_makeDirectory("${DKTOOLS_DIR}")
-	endif()
+#	### DKTOOLS_DIR ###
+#	dk_set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
+#	set(ENV{DKTOOLS_DIR} "${DIGITALKNOB_DIR}/DKTools")
+#	if(NOT EXISTS "${DKTOOLS_DIR}") 
+#		dk_makeDirectory("${DKTOOLS_DIR}")
+#	endif()
 endfunction()
 
 

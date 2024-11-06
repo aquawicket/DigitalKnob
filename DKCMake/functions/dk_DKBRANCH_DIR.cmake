@@ -27,9 +27,9 @@ function(dk_DKBRANCH_DIR)
 	set(ENV{DKBRANCH_DIR} "${DIGITALKNOB_DIR}/${DKBRANCH}")
 	#dk_printVar(DKBRANCH_DIR)
 		
-		dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
-		set(ENV{DK3RDPARTY_DIR} "${DKBRANCH_DIR}/3rdParty")
-		#dk_printVar(DK3RDPARTY_DIR)
+#		dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
+#		set(ENV{DK3RDPARTY_DIR} "${DKBRANCH_DIR}/3rdParty")
+#		#dk_printVar(DK3RDPARTY_DIR)
 			
 			dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
 			set(ENV{DKIMPORTS_DIR} "${DK3RDPARTY_DIR}/_DKIMPORTS")
@@ -184,4 +184,5 @@ function(DKTEST)
 	dk_debugFunc()
 	
 	dk_DKBRANCH_DIR()
+	dk_printVar(DKBRANCH_DIR)
 endfunction()

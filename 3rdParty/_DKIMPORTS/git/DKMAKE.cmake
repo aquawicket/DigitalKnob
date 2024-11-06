@@ -26,7 +26,7 @@ endif()
 
 ### Get GIT variables ###
 if(GIT_DL)
-	dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 	dk_importVariables(${GIT_DL} ROOT ${DKTOOLS_DIR})
 endif()
 

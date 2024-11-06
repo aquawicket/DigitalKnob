@@ -19,5 +19,5 @@ if(NOT WIN_HOST)
 endif()
 
 ### IMPORT ###
-dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 dk_import(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip ${DK3RDPARTY_DIR}/FAR-2.0.3-win)

@@ -23,7 +23,7 @@ if(ANDROID)
 	dk_depend(msys2)
 endif()
 
-#dk_validate(DK3RDPARTY_DIR "dk_DKBRANCH_DIR()")
+#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 #dk_set(BOOST ${DK3RDPARTY_DIR}/boost_1_78_0)
 #dk_import(https://github.com/boostorg/boost.git)
 dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)

@@ -12,7 +12,7 @@ if(EXISTS ${POWERSHELL_EXE})
 endif()
 
 # try pwsh.exe
-dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_findProgram(POWERSHELL_EXE "pwsh.exe" "${DKTOOLS_DIR}")
 if(EXISTS ${POWERSHELL_EXE})
 	return()

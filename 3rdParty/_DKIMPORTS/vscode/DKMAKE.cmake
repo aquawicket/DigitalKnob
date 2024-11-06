@@ -16,7 +16,7 @@ if(EXISTS ${VSCODE_EXE})
 endif()
 
 dk_validate(host_triple "dk_host_triple()")
-dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 ### DOWNLOAD ###
 MAC_HOST_dk_set				(VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip)
 LINUX_ARM32_HOST_dk_set	    (VSCODE_DL https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz)

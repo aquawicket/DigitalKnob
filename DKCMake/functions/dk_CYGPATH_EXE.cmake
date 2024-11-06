@@ -15,7 +15,7 @@ function(dk_CYGPATH_EXE)
 	endif()
 	
 	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_validate(DKTOOLS_DIR "dk_DIGITALKNOB_DIR()")
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 	
 	###### CYGPATH_EXE ######
 	if(NOT EXISTS "${CYGPATH_EXE}")
