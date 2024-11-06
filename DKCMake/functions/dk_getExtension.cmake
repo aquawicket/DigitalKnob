@@ -19,8 +19,6 @@ function(dk_getExtension path rtn_var)
 #	cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
 	string(FIND ${path} "." index REVERSE)
 	if(${index} EQUAL -1)
-	#dk_includes(${path} "." index REVERSE)
-	#if(NOT ${index})
 		return() # no extension found
 	endif()
 	string(SUBSTRING ${path} ${index} -1 extension)

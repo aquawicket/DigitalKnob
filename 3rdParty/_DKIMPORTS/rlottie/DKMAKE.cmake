@@ -13,8 +13,8 @@ dk_load(dk_builder)
 dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)
 
 ### PATCH ###
-dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "")
-dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_DEBUG} /MTd\")" "")
+dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "" NO_HALT)
+dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_DEBUG} /MTd\")" "" NO_HALT)
 
 ### LINK ###
 dk_include				(${RLOTTIE_DIR}/inc						RLOTTIE_INCLUDE_DIR)

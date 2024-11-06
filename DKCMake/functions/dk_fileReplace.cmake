@@ -16,16 +16,14 @@ function(dk_fileReplace filePath find replace)
 	dk_debugFunc()
 	
 	dk_getOption(NO_HALT ${ARGV})
+	
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
 	if(${index} GREATER -1)
 		dk_replaceAll("${fileString}"  "${find}"  "${replace}" fileString)
 		dk_fileWrite(${filePath} "${fileString}")
 	else()
-		if(NOT NO_HALT)
-			#dk_fatal("cannot find \"${find}\"  in  (${filePath})")
-		endif()
-		dk_warning("cannot find \"${find}\"  in  (${filePath})")
+		dk_fatal("cannot find \"${find}\"  in  (${filePath})" ${NO_HALT})
 	endif()
 endfunction()
 

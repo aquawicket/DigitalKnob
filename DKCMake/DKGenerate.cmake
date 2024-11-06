@@ -27,7 +27,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # SOFTWARE.
 
 dk_load(${DKCMAKE_DIR}/DKDisabled.cmake)
-
+dk_pause()
 
 dk_info("\n")
 dk_info("############################################################")

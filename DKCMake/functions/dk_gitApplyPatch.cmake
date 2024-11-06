@@ -14,7 +14,7 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc()
 	
 	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
-	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')") # dk_import will push to the PLUGIN stack
+	dk_validate(GIT_EXE [[ dk_load(${DKIMPORTS_DIR}/git/DKMAKE.cmake) ]]) # dk_import will push to the PLUGIN stack
 	if("${CURRENT_PLUGIN}" STREQUAL "GIT" AND PREV_PLUGIN)				
 		dk_set(CURRENT_PLUGIN ${PREV_PLUGIN})							# so we will pop the stack here
 	endif()

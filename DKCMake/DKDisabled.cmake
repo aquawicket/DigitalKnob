@@ -70,6 +70,7 @@ dk_disable(x265)
 dk_disable(DKDOM_Window)
 dk_disable(DKHook)
 dk_disable(DKRestart)
+dk_disable(DKRmlTestElements)	# build errors
 dk_disable(DKWebSockets)
 ###########################
 
@@ -85,7 +86,7 @@ dk_disable(DKPlugin1)			# TODO
 dk_disable(DKPlugin2)			# TODO
 dk_disable(DKRmlAudio)			# build errors
 dk_disable(DKRmlIframe)			# build errors
-dk_disable(DKRmlTestElements)	# build errors
+
 dk_disable(DKTemplateEventTest)	# DEPRECATED: using DKEventTargetTest instead
 dk_disable(DKWidget)			# DEPRECATED
 dk_disable(bgfx)				# TODO

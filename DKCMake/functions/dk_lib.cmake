@@ -13,9 +13,9 @@ function(dk_lib lib_path)
 	dk_debugFunc()
 	
 	foreach(item ${ARGV})
-#		dk_append(LIBLIST "${lib_path}") ## used for double checking
-		dk_includes("${LIBS}" "${item}" result)
-		if(${result})
+		#dk_includes("${LIBS}" "${item}" result)
+		#if(${result})
+		if(LIBS MATCHES "${item}")
 			continue() # item is already in the list
 		endif()
 		dk_append(LIBS "${item}")

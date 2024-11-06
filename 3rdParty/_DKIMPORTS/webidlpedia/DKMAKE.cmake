@@ -34,53 +34,45 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt)
 		if(${PROCESS_API_NAMES})
 		########################################################
 			## only " API" strings
-			dk_includes("${API}" " API" includes)
-			if(NOT ${includes})
+			if(NOT API MATCHES " API")
 				continue()
 			endif()
 			
 			##############################
 			## Web Authentication API
-			dk_includes("${API}" "Web Authentication" includes)
-			if(${includes})
+			if(API MATCHES "Web Authentication")
 				set(API "Web Authentication API")
 			endif()
 			
 			## WebCodecs API
-			dk_includes("${API}" "WebCodecs" includes)
-			if(${includes})
+			if(API MATCHES "WebCodecs")
 				set(API "WebCodecs API")
 			endif()
 			
 			## WebGL
-			dk_includes("${API}" "WebGL" includes)
-			if(${includes})
+			if(API MATCHES  "WebGL")
 				set(API "WebGL")
 			endif()
 			
 			## WebRTC
-			dk_includes("${API}" "WebRTC" includes)
-			if(${includes})
+			if(API MATCHES "WebRTC")
 				set(API "WebRTC")
 			endif()
 			
 			## WebXR Device API
-			dk_includes("${API}" "WebXR" includes)
-			if(${includes})
+			if(API MATCHES "WebXR")
 				set(API "WebXR Device API")
 			endif()
 			
 			## XMLHttpRequest
-			dk_includes("${API}" "XMLHttpRequest" includes)
-			if(${includes})
+			if(API MATCHES "XMLHttpRequest")
 				set(API "XMLHttpRequest")
 			endif()
 		########################################################
 		endif()
 		########################################################
 		
-		dk_includes("${APIS}" "${API}" includes)
-		if(${includes})
+		if(APIS MATCHES "${API}")
 		
 		else()
 			dk_set(APIS "${APIS};${API}")

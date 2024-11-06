@@ -31,6 +31,7 @@ function(dk_disable plugin)
 		endif()
 	endif()
 	
+	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
 	if(NOT EXISTS ${DKIMPORTS_DIR}/${plugin}/DKMAKE.cmake)
 		if(NOT EXISTS ${DKPLUGINS_DIR}/${plugin}/DKMAKE.cmake)
 			dk_warning("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")

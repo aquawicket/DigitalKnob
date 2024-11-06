@@ -31,23 +31,19 @@ function(dk_runDepends plugin)
 	#foreach(line ${lines})
 	#	
 	#	foreach(keepCommand ${keepCommands})
-	#		dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
-	#		if(${hasCommand})
+	#		if(line MATCHES "${keepCommand}(") # trailing (
 	#			set(KEEPLINE 1)
 	#		endif()
-	#		dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
-	#		if(${hasCommand})
+	#		if(line MATCHES "${keepCommand} ") # trailing space
 	#			set(KEEPLINE 1)
 	#		endif()
-	#		dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
-	#		if(${hasCommand})
+	#		if(line MATCHES "${keepCommand}	") # trailing tab
 	#			set(KEEPLINE 1)
 	#		endif()
 	#	endforeach()
 	#	
 	#	# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
-	#	#dk_includes("${line}" "#" hasCommentSign)
-	#	#if(${hasCommentSign})
+	#	#if(line MATCHES "#")
 	#	#	set(KEEPLINE 0)
 	#	#endif()
 	#	
@@ -56,8 +52,7 @@ function(dk_runDepends plugin)
 	#	endif()
 	#	
 	#	# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
-	#	dk_includes("${line}" ")" includes)
-	#	if(${includes})
+	#	if(line MATCHES ")")
 	#		set(KEEPLINE 0)
 	#	endif()
 	#endforeach()
@@ -83,8 +78,7 @@ function(dk_runDepends plugin)
 		endforeach()
 		
 		# FIXME: THIS iS UNTESTED! This will remove any lines that contain a #
-		#dk_includes("${line}" "#" hasCommentSign)
-		#if(${hasCommentSign})
+		#if(line "#")
 		#	set(KEEPLINE 0)
 		#endif()
 		
