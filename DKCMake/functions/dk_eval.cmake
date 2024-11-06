@@ -8,15 +8,18 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # 	evals the specified cmake code.
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
 #
-macro(dk_eval code)
+macro(dk_eval)
 	#dk_debugFunc()
+	set(code "${ARGV}")
+	message("DK_EVAL:\n${code}\n")
 	
-	dk_replaceAll("${code}"  ";"  "\n"  code)
-	dk_replaceAll("${code}"  "'"  "\""  code)
+	#dk_replaceAll("${code}"  ";"  "\n"  code)
+	#dk_replaceAll("${code}"  "'"  "\""  code)
+	
 	#dk_printVar(code)
 	if(COMMAND cmake_language)
 		#dk_printVar(code)
-		cmake_language(EVAL CODE "${code}")
+		cmake_language(EVAL CODE ${code})
 	else()
 		# Evaluate expression (faster version)
 		# Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
@@ -69,5 +72,6 @@ endmacro()
 function(DKTEST)
 	dk_debugFunc()
 
-	dk_todo()
+	set(test "test")
+	dk_eval([[message("test = ${test}")]])
 endfunction()

@@ -67,7 +67,9 @@ function(DKINIT)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_dirname.cmake)
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_basename.cmake)
-	#dk_load(${DKSCRIPT_PATH})
+	if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
+		include(${DKSCRIPT_PATH})
+	endif()
 	#dk_load(__TIME__)
 	dk_load(dk_createOsMacros)
 	dk_load(__FILE__)
@@ -82,7 +84,7 @@ function(DKINIT)
 	dk_load(dk_watch)
 	
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE  dk_onCallstack)
-	dk_load(${DKSCRIPT_PATH})  #FIXME:   for some reason this has causes clang++ compile errors in the past
+#	dk_load(${DKSCRIPT_PATH})
 #	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 	
 	###### DKTEST MODE ######

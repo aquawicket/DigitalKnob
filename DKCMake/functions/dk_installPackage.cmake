@@ -23,7 +23,7 @@ function(dk_installPackage package)
 #	endif()
 #	
 	dk_info("dk_installPackage(): installing ${package}. . .")
-	dk_if(WIN_HOST "dk_validate(MSYS2 'dk_depend(msys2)')")
+	dk_if(WIN_HOST [[ dk_validate(MSYS2 "dk_depend(msys2)") ]])
 	set(ENV{DKSHELL} sh) # HACK
 
 	### Alpine Package Keeper (alpine linux) ###

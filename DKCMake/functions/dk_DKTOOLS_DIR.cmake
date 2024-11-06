@@ -7,7 +7,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #
 function(dk_DKTOOLS_DIR)
-    dk_debugFunc()
+    dk_debugFunc(0 1)
 
 	if(ARGN) ############ SET ############
 		dk_set(DKTOOLS_DIR "${ARGN}")
@@ -31,7 +31,7 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-    dk_debugFunc()
+    dk_debugFunc(0)
    
 	###### GET ######
 	dk_DKTOOLS_DIR()
