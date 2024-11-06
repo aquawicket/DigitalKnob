@@ -26,7 +26,7 @@ function(dk_clearCmakeCache)
 		#dk_delete("${item}")
 	endforeach()
 	
-	dk_validate(DKPLUGINS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
 	file(GLOB_RECURSE cmakecache_files LIST_DIRECTORIES true "${DKPLUGINS_DIR}/" "*CMakeCache*")
 	foreach(item ${cmakecache_files})
 		message("deleting ${item}...")

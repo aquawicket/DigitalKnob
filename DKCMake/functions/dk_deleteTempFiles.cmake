@@ -36,7 +36,7 @@ function(dk_deleteTempFiles)
 		#dk_delete("${file}")
 	endforeach()
 	
-	dk_validate(DKPLUGINS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKPLUGINS_DIR "dk_DKPLUGINS_DIR()")
 	file(GLOB_RECURSE tmp_Files "${DKPLUGINS_DIR}" "*.tmp")
 	foreach(file ${tmp_Files})
 		message("deleting ${file}. . .")
