@@ -15,7 +15,6 @@ dk_load(dk_builder)
 ### IMPORT ###
 dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo/archive/a927b489.zip)
 
-#dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 ### LINK ###
 dk_include			(${LIBJPEG_TURBO_DIR}									LIBJPEG_TURBO_INCLUDE_DIR)
 dk_include			(${LIBJPEG_TURBO_CONFIG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)

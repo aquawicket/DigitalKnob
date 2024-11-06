@@ -99,5 +99,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc()
 	
+	
+	dk_validate(triple "dk_builder()")
 	dk_createIcons(${DK_PROJECT_DIR}/icons/icon.png)
 endfunction()

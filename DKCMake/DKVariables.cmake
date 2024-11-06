@@ -203,8 +203,6 @@ dk_TARGET_TRIPLE()
 
 # TINYCORE
 if(CMAKE_HOST_SYSTEM_VERSION)
-	#string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
-	#if(${contains_tinycore} GREATER -1)
 	if(CMAKE_HOST_SYSTEM_VERSION MATCHES "tinycore")
 		dk_set(TINYCORE 1)
 	endif()

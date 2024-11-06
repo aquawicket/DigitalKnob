@@ -53,14 +53,14 @@ function(dk_TARGET_TRIPLE)
 	dk_assertPath(DK_PROJECT_DIR)
 
 	### Set triple/TRIPLE, <os>_<arch>_<env>/<OS>_<ARCH>_<ENV> ###
-	dk_basename(${TARGET_TRIPLE_DIR} triple)	# triple        	= win_x86_64_clang
-	dk_set(triple ${triple})					# Globalize the variable
-	dk_set(target_triple ${triple})				# target_triple 	= win_x86_64_clang
-	dk_toUpper(${triple} TRIPLE)				# TRIPLE        	= WIN_X86_64_CLANG
-	dk_set(TRIPLE ${TRIPLE})					# Globalize the variable
-	dk_set(TARGET_TRIPLE ${TRIPLE})				# TARGET_TRIPLE 	= WIN_X86_64_CLANG
-	dk_set(${triple} 1)					        # win_x86_64_clang 	= 1
-	dk_set(${TRIPLE} 1)					        # WIN_X86_64_CLANG 	= 1
+	dk_basename(${TARGET_TRIPLE_DIR} triple)	# 			triple 	= win_x86_64_clang
+	dk_set(triple ${triple})					# 					  Globalize the variable
+	dk_set(target_triple ${triple})				# 	  target_triple	= win_x86_64_clang
+	dk_toUpper(${triple} TRIPLE)				# 			 TRIPLE	= WIN_X86_64_CLANG
+	dk_set(TRIPLE ${TRIPLE})					# 					  Globalize the variable
+	dk_set(TARGET_TRIPLE ${TRIPLE})				# 	  TARGET_TRIPLE = WIN_X86_64_CLANG
+	dk_set(${triple} 1)					        #  win_x86_64_clang = 1
+	dk_set(${TRIPLE} 1)					        #  WIN_X86_64_CLANG = 1
 	dk_printVar(triple)
 	dk_printVar(TRIPLE)
 
@@ -171,6 +171,8 @@ function(dk_TARGET_TRIPLE)
 	#dk_set(TARGET_OS_ARCH "${OS_ARCH}")
 	dk_set(${os_arch} 1)
 	dk_set(${OS_ARCH} 1)
+	#dk_set(${os_arch}_target 1)
+	#dk_set(${OS_ARCH}_TARGET 1)
 
 	### Set DEBUG_DIR and RELEASE_DIR variables
 	if(IOS)

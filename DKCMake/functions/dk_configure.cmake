@@ -14,14 +14,12 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_assertPath(SOURCE_DIR)
 	dk_validate(DKBUILD_TYPE "dk_DKBUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	#dk_assertPath(${CURRENT_PLUGIN}_DIR)
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_makeDirectory(${BINARY_DIR})
 	dk_assertPath(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
 	# Configure with CMake		(multi_config / single_config)
-	
 	
 	# FIXME: This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, EXISTS ${SOURCE_DIR}/configure will return true.
 	# This will cause problems, so we need file Exists conditions to be case sensitive.
@@ -34,8 +32,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 		unset(configure_path)
 	endif()
 	
-	
-	#if(EXISTS ${SOURCE_DIR}/CMakeLists.txt)
 	if(EXISTS ${cmakelists_path})
 		dk_info("Configuring with CMake")
 		

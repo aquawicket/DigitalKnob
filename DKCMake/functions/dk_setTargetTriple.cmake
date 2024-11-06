@@ -245,9 +245,6 @@ function(dk_setTargetTriple)
 		dk_assertVar(RELEASE_DIR)
 		dk_printVar(DEBUG_DIR)
 		dk_printVar(RELEASE_DIR)
-		
-		
-		
 	#else()
 	#	dk_TARGET_TRIPLE()
 	endif()

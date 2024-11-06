@@ -10,7 +10,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_CONFIG_PATH)
 	dk_debugFunc()
 	
-	dk_validate(DKBUILD_TYPE  "dk_DKBUILD_TYPE()")  		# get {DEBUG} {RELEASE}
+	dk_validate(DKBUILD_TYPE  "dk_DKBUILD_TYPE()")  	# get {DEBUG} {RELEASE}
 	dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")		# get {triple}
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
@@ -31,7 +31,6 @@ function(dk_CONFIG_PATH)
 		dk_info("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
 		
 		dk_assertVar(MULTI_CONFIG)
-		#dk_assertVar(CMAKE_CONFIGURATION_TYPES)
 		dk_assertVar(CONFIG_PATH)
 		dk_assertVar(BUILD_PATH)
 		
@@ -46,11 +45,15 @@ function(dk_CONFIG_PATH)
 			dk_set	(CMAKE_BUILD_TYPE Debug)
 			dk_set	(CONFIG_PATH ${triple}/${DEBUG_DIR})
 			dk_set	(BUILD_PATH ${triple}/${DEBUG_DIR})
+			
+			dk_assertVar(CMAKE_GENERATOR)
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
 		elseif(RELEASE)
 			dk_set	(CMAKE_BUILD_TYPE Release)
 			dk_set	(CONFIG_PATH ${triple}/${RELEASE_DIR})
 			dk_set	(BUILD_PATH ${triple}/${RELEASE_DIR})
+			
+			dk_assertVar(CMAKE_GENERATOR)
 			dk_info("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
 		endif()
 		
