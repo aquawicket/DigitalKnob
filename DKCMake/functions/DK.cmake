@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()		# include_guard
 
 ### Print Version Info ###

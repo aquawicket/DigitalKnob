@@ -15,8 +15,7 @@ function(dk_define str)
 	if(CMAKE_SCRIPT_MODE_FILE)
 		return()
 	endif()
-	list(FIND DKDEFINES_LIST "${str}" index)
-	if(${index} GREATER -1)
+	if(DKDEFINES_LIST MATCHES "${str}")
 		return() # already in the list
 	endif()
 

@@ -14,14 +14,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_includes variable find rtn_var)
 	#dk_debugFunc()
 	
-	string(FIND "${variable}" "${find}" index)
-	if(${index} GREATER -1)
-	#if(variable MATCHES "${find}")
+	if(variable MATCHES "${find}")
 		set(includes 1)
 	else()
 		set(includes 0)
 	endif()
-	
 	
 	#dk_printVar(includes)
 	set(${rtn_var} ${includes} PARENT_SCOPE)

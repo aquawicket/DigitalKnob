@@ -14,9 +14,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 macro(dk_require plugin)
 	dk_debugFunc()
 	
-	
-	#list(FIND dk_disabled_list ${plugin} index)
-	#if(${index} GREATER -1)
 	if(plugin IN_LIST dk_disabled_list)
 		dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
 		dk_notice("${Lib} requires ${plugin} which is DISABLED")

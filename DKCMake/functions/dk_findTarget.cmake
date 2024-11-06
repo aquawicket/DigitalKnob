@@ -28,8 +28,6 @@ function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 		set(${RESULT_PATH} ${path} PARENT_SCOPE)
 		
 		file(STRINGS ${path}/DKMAKE.cmake dkmake_string)
-		#string(FIND "${dkmake_string}" "DKAPP" index)
-		#if(${index} GREATER -1)
 		if(dkmake_string MATCHES "DKAPP")
 			set(${RESULT_TYPE} APP PARENT_SCOPE) 
 		else()

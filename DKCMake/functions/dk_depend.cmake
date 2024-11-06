@@ -30,8 +30,7 @@ function(dk_depend plugin)
 #	endif()
 
 	if(plugin IN_LIST dk_disabled_list)
-		list(FIND DISABLED_LIBS ${plugin} indexb)
-		if(${indexb} LESS 0)
+		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()
 		dk_notice("${plugin} IS DISABLED")
@@ -44,13 +43,11 @@ function(dk_depend plugin)
 	
 #	If dk_depend had second variable (a sub library), set that variable to ON
 #	if(${ARGC} GREATER 1)
-#	list(FIND dkdepend_list "${plugin} ${args}" index)
-#	if(${index} GREATER -1) #library is already in the list
-#		return()
+#	if(dkdepend_list MATCHES "${plugin} ${args}")
+#		return()  #library is already in the list
 #	endif()
 #	else()
-#		list(FIND dkdepend_list "${plugin}" index)
-#		if(${index} GREATER -1)
+#		if(dkdepend_list MATCHES "${plugin}")
 #			return() #library is already in the list
 #		endif()
 #	endif()
@@ -63,8 +60,7 @@ function(dk_depend plugin)
 	dk_enable(${plugin})
 	dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	else()
-#		list(FIND dkdepend_list "${plugin}" index)
-#		if(${index} GREATER -1)
+#		if(dkdepend_list MATCHES "${plugin}")
 #			return() #library is already in the list
 #		endif()
 #		dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.

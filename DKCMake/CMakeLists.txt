@@ -1,4 +1,3 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 include_guard()
 
@@ -49,11 +48,9 @@ include_guard()
 ###
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
-message(STATUS "##############################################################")
-message(STATUS "################# DigitalKnob CMakeLists.txt #################")
-message(STATUS "##############################################################")
-message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
-#CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+message("##############################################################")
+message("################# DigitalKnob CMakeLists.txt #################")
+message("##############################################################")
 
 if(CMAKE_HOST_UNIX)
 	message("calling sudo at beginning of script . . .")
@@ -68,14 +65,16 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 #Load all cmake flags prior to calling PROJECT()
-dk_load(${DKCMAKE_DIR}/DKStart.cmake)
+dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
-message(STATUS "################# PROJECT(DigitalKnob) #################")
+
+message("################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
+
 
 
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

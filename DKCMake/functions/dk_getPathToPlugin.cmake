@@ -12,13 +12,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_getPathToPlugin plugin rtn_var)
 	dk_debugFunc()
 	
-	list(FIND dk_disabled_list "${ARGV}" index)
-	if(${index} GREATER -1)
+	if(dk_disabled_list MATCHES "${ARGV}")
 		dk_info("${ARGV} IS DISABLED")
 		return()
 	endif()
 
-	
 	#file(GLOB children RELATIVE ${DIGITALKNOB_DIR} ${DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
 		#dk_printVar(child)

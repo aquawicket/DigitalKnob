@@ -1,8 +1,7 @@
 set(myHand "JackOfClubs;QueenOfHearts;Joker;2ofClubs;BaseballCard")
 
 
-string(FIND "${myHand}" "QueenOfHearts" index)
-if(${index} GREATER -1)
+if(myHand MATCHES "QueenOfHearts")
 	message(STATUS "Lady Luck!")
 else()
 	message(STATUS "no dice.")

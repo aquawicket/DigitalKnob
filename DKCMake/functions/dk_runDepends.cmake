@@ -6,7 +6,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # dk_runDepends(plugin)
 #
 #	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
-#	Conditionals such as if(), else(), elseif(), endif(), dk_return() will remain included during the sorting process. 
+#	Conditionals and flow control statements such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
 #	@plugin		- TODO

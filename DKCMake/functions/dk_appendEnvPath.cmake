@@ -19,6 +19,7 @@ function(dk_appendEnvPath inputPath)
 	#dk_printVar(ENV{PATH})
 	string(FIND "$ENV{PATH}" "${nativePath}" hasPath)
 	if(${hasPath} GREATER -1)
+	#if(ENV{PATH} MATCHED "${nativePath}")   # UNTESTED
 		dk_notice("${nativePath} is already in the PATH environment list\n")
 	else()
 		if(WIN_HOST)

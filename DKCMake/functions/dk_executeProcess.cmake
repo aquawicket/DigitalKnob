@@ -74,9 +74,8 @@ function(dk_executeProcess)
 	if(WIN32)
 		dk_depend(cmd)
 		if(CMD_EXE)
-			list(FIND ARGV "cmd;/c" index)
-			if(${index} EQUAL -1)			# add cmd /c if missing
-				list(INSERT ARGV 1 "cmd;/c")
+			if(ARGV MATCHES "cmd;/c")		
+				list(INSERT ARGV 1 "cmd;/c") # add cmd /c if missing
 			endif()
 		endif()
 	endif()
