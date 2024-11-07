@@ -81,9 +81,8 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	
-	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE  dk_onCallstack)
-#	dk_load(${DKSCRIPT_PATH})
-#	dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
+#	dk_load(dk_messageBox)
+#	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
@@ -101,10 +100,10 @@ endfunction()
 ##################################################################################
 # dk_variableWatch()
 #
-macro(dk_variableWatch variable access value current_list_file stack)
+macro(dk_onVariableWatch variable access value current_list_file stack)
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
 		message("dk_variableWatch(${variable} ${access} ${value} ${current_list_file} ${stack})")
-		dk_pause()
+		dk_messageBox("${variable} = ${value}")
 	endif()
 endmacro()
 
@@ -174,6 +173,7 @@ macro(dk_onCallstack variable access value current_list_file stack)
 		get_filename_component(__FILE__ "${__FILE__}" NAME)
 		set(__LINE__ "${CMAKE_CURRENT_FUNCTION_LIST_LINE}" CACHE INTERNAL "")
 		set(__FUNCTION__ "${CMAKE_CURRENT_FUNCTION}" CACHE INTERNAL "")
+		dk_messageBox("${__FUNCTION__}")
 		set(__ARGV__ "${ARGV}" CACHE INTERNAL "")
 		string(TIMESTAMP __TIME__ "%M:%S:%f")
 		string(SUBSTRING "${__TIME__}" 0 10 __TIME__)

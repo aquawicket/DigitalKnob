@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_messageBox msg)
 	dk_debugFunc()
 	
-	dk_callDKPowershell(dk_messageBox "\"${msg}\"")
+	dk_callDKPowershell(dk_messageBox rtn_var "\"${msg}\"")
 endfunction()
 
 
