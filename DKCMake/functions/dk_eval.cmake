@@ -11,7 +11,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 macro(dk_eval)
 	#dk_debugFunc()
 	set(code "${ARGV}")
-	message("DK_EVAL:\n${code}\n")
+	message("${lblue}dk_eval> ${lcyan}${code}\n ${clr}")
 	
 	#dk_replaceAll("${code}"  ";"  "\n"  code)
 	#dk_replaceAll("${code}"  "'"  "\""  code)
