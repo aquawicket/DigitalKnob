@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_fileReplace(filePath find replace) NO_HALT
+# dk_fileReplace("input" "searchValue" "newValue" rtn_var) NO_HALT
 #
 #	TODO
 #
@@ -19,8 +19,8 @@ function(dk_fileReplace filePath find replace)
 	
 	file(READ ${filePath} fileString)
 	if(fileString MATCHES "${find}")
-		#dk_replaceAll( "${find}" "${replace}" fileString "${fileString}")
-		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
+		dk_replaceAll("${fileString}" "${find}" "${replace}" fileString)
+		#string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		dk_fileWrite(${filePath} "${fileString}")
 	else()
 		dk_fatal("cannot find \"${find}\"  in  (${filePath})" ${NO_HALT})
