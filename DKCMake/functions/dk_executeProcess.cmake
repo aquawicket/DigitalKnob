@@ -232,11 +232,11 @@ function(dk_executeProcess)
 	
 	dk_reparseCmakeCommand(ARGV) # support longer command lines
 	
-	if(NOT ${NOECHO})
+#	if(NOT NOECHO)
 		dk_replaceAll("${cmd1}"  ";"  " "  cmd1)	
 		dk_echo("${lblue}exec> ${lcyan}${cmd1}${clr}")
 		execute_process(${ARGV})
-	endif()
+#	endif()
 	
 #	if(NOT ${result_variable} EQUAL 0)
 		dk_sleep(1) # wait 1 second1 for the stdout to flush before printing
