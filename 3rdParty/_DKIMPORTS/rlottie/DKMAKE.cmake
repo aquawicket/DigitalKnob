@@ -13,12 +13,17 @@ dk_load(dk_builder)
 dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)
 
 ### PATCH ###
-dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "" NO_HALT)
-dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_DEBUG} /MTd\")" "" NO_HALT)
+if(MSVC)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_DEBUG} /MTd\")" "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_RELEASE} /MTd\")" NO_HALT)
+else()	
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" "#set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} /MT\")" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_DEBUG} /MTd\")" "#set(CMAKE_CXX_FLAGS_DEBUG \"\${CMAKE_CXX_FLAGS_RELEASE} /MTd\")" NO_HALT)
+endif()
 
 ### LINK ###
-dk_include				(${RLOTTIE_DIR}/inc						RLOTTIE_INCLUDE_DIR)
-dk_include				(${RLOTTIE_CONFIG_DIR})
+dk_include				(${RLOTTIE_DIR}/inc						rlottie_DIR)
+dk_include				(${RLOTTIE_CONFIG_DIR}					rlottie_INCLUDE_DIR)
 if(MSVC)
 	WIN_dk_libDebug		(${RLOTTIE_DEBUG_DIR}/rlottie.lib)
 	WIN_dk_libRelease	(${RLOTTIE_RELEASE_DIR}/rlottie.lib)
@@ -28,7 +33,7 @@ else()
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(RLOTTIE_CMAKE -Drlottie_DIR=${RLOTTIE_CONFIG_DIR} -Drlottie_INCLUDE_DIR=${RLOTTIE_INCLUDE_DIR})
+dk_set(RLOTTIE_CMAKE -Drlottie_DIR=${rlottie_DIR} -Drlottie_INCLUDE_DIR=${rlottie_INCLUDE_DIR})
 
 ### GENERATE ###
 dk_configure(${RLOTTIE}
