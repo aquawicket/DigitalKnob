@@ -13,13 +13,12 @@ dk_load(dk_builder)
 dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)
 
 ### PATCH ###
-dk_printVar(MSVC)
 if(MSVC)
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "DISABLE_CMAKE_CXX_FLAGS_RELEASE" "CMAKE_CXX_FLAGS_RELEASE" NO_HALT)
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "DISABLE_CMAKE_CXX_FLAGS_DEBUG" "CMAKE_CXX_FLAGS_DEBUG" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE)" 	"set(CMAKE_CXX_FLAGS_RELEASE)" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG)" 		"set(CMAKE_CXX_FLAGS_DEBUG)" NO_HALT)
 else()	
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "CMAKE_CXX_FLAGS_RELEASE" "DISABLE_CMAKE_CXX_FLAGS_RELEASE" NO_HALT)
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "CMAKE_CXX_FLAGS_DEBUG" "DISABLE_CMAKE_CXX_FLAGS_DEBUG" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE)" 	"#set(CMAKE_CXX_FLAGS_RELEASE)" NO_HALT)
+	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG)" 		"#set(CMAKE_CXX_FLAGS_DEBUG)" NO_HALT)
 endif()
 
 ### LINK ###
