@@ -19,7 +19,7 @@ function(dk_fileReplace filePath find replace)
 	
 	file(READ ${filePath} fileString)
 	if(fileString MATCHES "${find}")
-		dk_replaceAll("${fileString}"  "${find}"  "${replace}" fileString)
+		dk_replaceAll("${fileString}" "${find}" "${replace}" fileString)
 		dk_fileWrite(${filePath} "${fileString}")
 	else()
 		dk_fatal("cannot find \"${find}\"  in  (${filePath})" ${NO_HALT})

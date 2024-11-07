@@ -1,0 +1,81 @@
+#!/usr/bin/cmake -P
+include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
+#include_guard()
+
+####################################################################
+# dk_CMAKE_GENERATOR()
+#
+#
+function(dk_CMAKE_GENERATOR)
+    dk_debugFunc()
+
+	dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE()")
+	
+	if(android_arm32)    
+		set(CMAKE_GENERATOR "Unix Makefiles")
+	elseif(android_arm64)
+		set(CMAKE_GENERATOR "Unix Makefiles")
+    elseif(android_x86)
+		set(CMAKE_GENERATOR "Unix Makefiles")
+	elseif(android_x86_64)
+		set(CMAKE_GENERATOR "Unix Makefiles")
+	elseif(emscripten)          
+		set(CMAKE_GENERATOR "Unix Makefiles") 
+    elseif(ios_arm32)           
+		set(CMAKE_GENERATOR "Xcode")
+    elseif(ios_arm64)           
+		set(CMAKE_GENERATOR "Xcode")
+    elseif(iossim_x86)          
+		set(CMAKE_GENERATOR "Xcode")
+    elseif(iossim_x86_64)       
+		set(CMAKE_GENERATOR "Xcode")
+    elseif(linux_x86)           
+		set(CMAKE_GENERATOR "Unix Makefiles")
+    elseif(linux_x86_64)        
+		set(CMAKE_GENERATOR "Unix Makefiles")
+	elseif(mac_x86)             
+		set(CMAKE_GENERATOR "Xcode")
+    elseif(mac_x86_64)          
+		set(CMAKE_GENERATOR "Xcode")
+	elseif(raspberry_arm32)     
+		set(CMAKE_GENERATOR "Unix Makefiles")
+    elseif(raspberry_arm64)     
+		set(CMAKE_GENERATOR "Unix Makefiles")
+    elseif(win_arm64_clang)     
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+	elseif(win_arm64_msvc)      
+		set(CMAKE_GENERATOR "Visual Studio 17 2022")
+		set(CMAKE_GENERATOR_PLATFORM ARM64)
+	elseif(win_x86_clang)       
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+	elseif(win_x86_mingw)       
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+	elseif(win_x86_msvc)        
+		set(CMAKE_GENERATOR "Visual Studio 17 2022")
+		set(CMAKE_GENERATOR_PLATFORM Win32)
+    elseif(win_x86_64_clang)    
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+    elseif(win_x86_64_mingw)   
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+    elseif(win_x86_64_msvc)     
+		set(CMAKE_GENERATOR "Visual Studio 17 2022")
+		set(CMAKE_GENERATOR_PLATFORM x64)
+    elseif(win_x86_64_ucrt)     
+		set(CMAKE_GENERATOR "MinGW Makefiles")
+	else()
+		dk_fatal("Could not get CMAKE_GENERATOR from triple:${triple}")
+	endif()
+endfunction()
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+    dk_debugFunc()
+ 
+    dk_CMAKE_GENERATOR()
+    dk_printVar(CMAKE_GENERATOR)
+endfunction()
