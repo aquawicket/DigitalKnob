@@ -72,6 +72,10 @@ function(DKINIT)
 
 	############ LOAD FUNCTION FILES ############
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	
+	dk_load(dk_dumpAllVariables)
+	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
+
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
 	dk_load(${DKSCRIPT_PATH})

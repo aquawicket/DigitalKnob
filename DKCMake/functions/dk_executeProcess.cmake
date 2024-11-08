@@ -230,12 +230,13 @@ function(dk_executeProcess)
 	
 	###################################################
 	
-	dk_reparseCmakeCommand(ARGV) # support longer command lines
+	set(exe_output ${ARGV})
+	dk_reparseCmakeCommand(exe_output) # support longer command lines
 	
 #	if(NOT NOECHO)
-		dk_replaceAll("${cmd1}"  ";"  " "  cmd1)	
+		dk_replaceAll("${exe_output}"  ";"  " "  cmd1)	
 		dk_echo("${lblue}exec> ${lcyan}${cmd1}${clr}")
-		execute_process(${ARGV})
+		execute_process(${exe_output})
 #	endif()
 	
 #	if(NOT ${result_variable} EQUAL 0)

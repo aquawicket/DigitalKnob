@@ -36,6 +36,9 @@ dk_info("\n")
 
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
+dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
+
+
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
 dk_replaceAll(${APP_NAME} " " "_" APP_NAME)
