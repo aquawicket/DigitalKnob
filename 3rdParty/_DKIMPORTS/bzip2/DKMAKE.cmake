@@ -20,7 +20,7 @@ dk_depend(python3)
 dk_depend(msys2)
 
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam("${DKIMPORTS_DIR}/bzip2/bzip2.txt" BZIP2_DL)
 dk_import(${BZIP2_DL})
 

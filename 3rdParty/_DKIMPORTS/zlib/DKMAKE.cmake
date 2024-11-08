@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ### IMPORT ###
 dk_validate(host_triple "dk_host_triple()")
 dk_validate(triple "dk_target_triple()")
-dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam("${DKIMPORTS_DIR}/zlib/zlib.txt" ZLIB_DL)
 dk_import(${ZLIB_DL})
 

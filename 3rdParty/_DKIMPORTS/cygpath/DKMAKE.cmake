@@ -21,7 +21,7 @@ dk_printVar(CYGPATH_EXE)
 
 dk_printVar(DKSHELL)
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_depend(msys2)
 	dk_debug("Looking in ${MSYS2_DIR}/usr/bin/cygpath.exe")
 	set(CYGPATH_EXE "${MSYS2_DIR}/usr/bin/cygpath.exe")

@@ -15,7 +15,7 @@ dk_depend(android-sdk)
 dk_makeDirectory(${ANDROID_SDK}/build-tools)
 
 # 30.0.3
-dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_VERSION)
 dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_WIN_DL)
 dk_getFileParam(${DKIMPORTS_DIR}/android-build-tools/android-build-tools.txt ANDROID_BUILD_TOOLS_MAC_DL)

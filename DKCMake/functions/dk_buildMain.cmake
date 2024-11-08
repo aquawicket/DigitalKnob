@@ -35,7 +35,7 @@ function(dk_buildMain)
 	dk_DIGITALKNOB_DIR()
 	
 	#dk_installGit()
-	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 	
 	dk_DKBRANCH_DIR()

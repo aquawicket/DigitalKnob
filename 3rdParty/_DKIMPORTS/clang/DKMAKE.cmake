@@ -9,7 +9,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
 
 dk_load(dk_builder)
-#dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+#dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_getFileParam("${DKIMPORTS_DIR}/clang/clang.txt" VERSION)
 if(clang OR mingw OR ucrt)
 	dk_validate(MSYS2  		"dk_depend(msys2)")

@@ -15,7 +15,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_getGitBranchName url rtn_var)
 	dk_debugFunc()
 	
-	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_validate(GIT_EXE "dk_load('${DKIMPORTS_DIR}/git/DKMAKE.cmake')")
 			
 	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE gitBranchName)

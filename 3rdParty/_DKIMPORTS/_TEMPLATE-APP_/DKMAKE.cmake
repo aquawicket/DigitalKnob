@@ -19,7 +19,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #dk_depend(depend_name)
 
 ### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam	(${DKIMPORTS_DIR}/[app_name]/[app_name].txt [APP_NAME]_IMPORT)
 dk_import		(${[APP_NAME]})
 

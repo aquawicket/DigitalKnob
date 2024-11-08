@@ -63,7 +63,7 @@ if "%~1" neq ""    goto runDKC
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
-	if not defined host_env set "host_env=clang"
+	if not defined host_env set "host_env=cosmo"
 	if not defined env set "env=%host_env%"
 	%dk_call% dk_printVar host_env
 	
@@ -79,9 +79,11 @@ if "%~1" neq ""    goto runDKC
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
+	if "%host_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
 	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
+	if "%host_env%"=="cosmo"  set "COMPILER_EXE=%COSMO_C_COMPILER%"
 	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_C_COMPILER%"
 	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_C_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
@@ -118,9 +120,9 @@ if "%~1" neq ""    goto runDKC
 	echo compiling ...
 	if exist %APP_FILE%  del %APP_FILE%
 
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_NAME% -static %DKC_FILE%"
+	set "COMPILE_COMMAND=sh.exe %COMPILER_EXE% -DDKTEST=1 -o %APP_FILE% -static %DKC_FILE%"
 	echo %COMPILE_COMMAND%
-	%COMPILER_EXE% -DDKTEST=1 -o %APP_NAME% -static "%DKC_FILE%"
+	%COMPILE_COMMAND%
 	
 	if not exist "%APP_FILE%" (
 		echo: 

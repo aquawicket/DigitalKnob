@@ -170,7 +170,7 @@ function(dk_importVariables url)
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
 	dk_assertPath(CMAKE_CURRENT_LIST_DIR)
-	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	
 	# PLUGIN_IMPORT
 	unset(PLUGIN_IMPORT)

@@ -14,7 +14,7 @@ function(dk_installGit)
 
 	### DOWNLOAD ###
 	dk_validate(host_triple "dk_host_triple()")
-	dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_getFileParam("${DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
 	
 	### DOWNLOAD ###

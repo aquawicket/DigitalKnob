@@ -12,7 +12,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 ### IMPORT ###
-dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam(${DKIMPORTS_DIR}/astyle/astyle.txt ASTYLE_DL)
 dk_import(${ASTYLE_DL})
 

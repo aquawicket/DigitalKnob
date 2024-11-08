@@ -59,7 +59,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 ### DEPEND ###
 dk_depend(android-sdk)
 
-dk_validate(DKIMPORTS_DIR "dk_DKBRANCH_DIR()")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_VERSION)
 dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_BUILD)
 dk_getFileParam(${DKIMPORTS_DIR}/android-ndk/android-ndk.txt ANDROID_NDK_WIN_DL)
