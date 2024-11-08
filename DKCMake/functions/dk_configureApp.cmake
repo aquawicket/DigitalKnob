@@ -3,10 +3,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_compileApp(DK_PROJECT_DIR)
+# dk_configureApp(DK_PROJECT_DIR)
 #
 #
-function(dk_compileApp)
+function(dk_configureApp)
 	dk_debugFunc()
 	
 	set(DK_PROJECT_DIR ${ARGV0})
@@ -178,5 +178,5 @@ function(DKTEST)
 	dk_debugFunc()
 	
 	dk_validate(DKAPPS_DIR "dk_DKAPPS_DIR()")
-	dk_compileApp("${DKAPPS_DIR}/DKCore")
+	dk_configureApp("${DKAPPS_DIR}/DKCore")
 endfunction()
