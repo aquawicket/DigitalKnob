@@ -33,6 +33,12 @@ function(DKINIT)
 	#dk_echo("DKINIT()")
 	message(STATUS "CMake version ${CMAKE_VERSION}")
 	
+	###### Get Privledges ahead of time ######
+	if(CMAKE_HOST_UNIX)
+		message("calling sudo at beginning of script . . .")
+		execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+	endif()
+
 	###### Initialize Language specifics ######
 	dk_init()
 

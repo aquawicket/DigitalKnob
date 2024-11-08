@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 # This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
@@ -25,7 +25,6 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 dk_info("****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
@@ -96,8 +95,10 @@ if(MSYSTEM)
 endif()
 
 
-###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
+############ Get Host Variables ############
 dk_validate(host_triple   "dk_host_triple()")
+
+############ Get Target Variables ############
 dk_validate(CONFIG_PATH   "dk_CONFIG_PATH()")
 
 ###############################################################
@@ -226,14 +227,6 @@ option(DKCEF "Use Chromium Embeded Framework" 0)
 if(${DKCEF} STREQUAL "ON")
 	add_definitions(-DHAVE_DKCef)
 endif()
-
-
-
-###########################################################################
-## Get host_triple and TARGET_TRIPLE
-###########################################################################
-dk_host_triple()
-dk_TARGET_TRIPLE()
 
 
 

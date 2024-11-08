@@ -2,7 +2,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 include_guard()
 
-
 ### CMakeLists.txt for DKCMake ###
 ###
 ### 	source_path = thisDirectory
@@ -53,29 +52,25 @@ message("##############################################################")
 message("################# DigitalKnob CMakeLists.txt #################")
 message("##############################################################")
 
-if(CMAKE_HOST_UNIX)
-	message("calling sudo at beginning of script . . .")
-	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
-endif()
-
-
 
 dk_load(dk_dumpAllVariables)
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
+
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 
 #Load all cmake flags prior to calling PROJECT()
 dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
 dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
+
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
 
 message("################# PROJECT(DigitalKnob) #################")
 PROJECT(DigitalKnob)
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
+
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
+
 dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
 
-
-
-dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
+		dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

@@ -10,16 +10,17 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_queueCommand)
 	dk_debugFunc()
-	dk_debug("dk_queueCommand(${ARGV})")
+	
+	if(NOT QUEUE_BUILD)
+		dk_return()
+	endif()
 	
 	dk_getOptionValue(RESULT_VARIABLE	${ARGV})
 	dk_getOptionValue(RESULTS_VARIABLE 	${ARGV})
 	dk_getOptionValue(OUTPUT_VARIABLE 	${ARGV})
 	dk_getOptionValue(ERROR_VARIABLE 	${ARGV})
 	
-	if(QUEUE_BUILD)
-		dk_command(${ARGV})
-	endif()
+	dk_command(${ARGV})
 	
 	if(${RESULT_VARIABLE})
 		set(${RESULT_VARIABLE} ${${RESULT_VARIABLE}} PARENT_SCOPE)

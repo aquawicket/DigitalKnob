@@ -26,27 +26,10 @@ function(dk_DKBRANCH_DIR)
 	set(ENV{DKBRANCH_DIR} "${DIGITALKNOB_DIR}/${DKBRANCH}")
 	#dk_printVar(DKBRANCH_DIR)
 		
-#		dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
-#		set(ENV{DK3RDPARTY_DIR} "${DKBRANCH_DIR}/3rdParty")
-#		#dk_printVar(DK3RDPARTY_DIR)
-			
-#			dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
-#			set(ENV{DKIMPORTS_DIR} "${DK3RDPARTY_DIR}/_DKIMPORTS")
-#			#dk_printVar(DKIMPORTS_DIR)
-			
-#		dk_set(DKAPPS_DIR "${DKBRANCH_DIR}/DKApps")
-#		set(ENV{DKAPPS_DIR} "${DKBRANCH_DIR}/DKApps")
-#		#dk_printVar(DKAPPS_DIR)
+
 		
-#		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
-#		set(ENV{DKBASH_DIR} "${DKBRANCH_DIR}/DKBash")
-#		#dk_printVar(DKBASH_DIR)
-#			dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
-#			set(ENV{DKBASH_FUNCTIONS_DIR} "${DKBASH_DIR}/functions")
-#			#dk_printVar(DKBASH_FUNCTIONS_DIR)
-#			dk_set(DKBASH_FUNCTIONS_DIR_ "${DKBASH_DIR}/functions/")
-#			set(ENV{DKBASH_FUNCTIONS_DIR_} "${DKBASH_DIR}/functions/")
-#			#dk_printVar(DKBASH_FUNCTIONS_DIR_)
+		
+		
 		
 		dk_set(DKBATCH_DIR "${DKBRANCH_DIR}/DKBatch")
 		set(ENV{DKBATCH_DIR} "${DKBRANCH_DIR}/DKBatch")
@@ -148,10 +131,6 @@ function(dk_DKBRANCH_DIR)
 			set(ENV{DKPHP_FUNCTIONS_DIR_} "${DKPHP_DIR}/functions/")
 			#dk_printVar(DKPHP_FUNCTIONS_DIR_)
 			
-#		dk_set(DKPLUGINS_DIR "${DKBRANCH_DIR}/DKPlugins")
-#		set(ENV{DKPLUGINS_DIR} "${DKBRANCH_DIR}/DKPlugins")
-#		#dk_printVar(DKPLUGINS_DIR)
-		
 		dk_set(DKPOWERSHELL_DIR "${DKBRANCH_DIR}/DKPowershell")
 		set(ENV{DKPOWERSHELL_DIR} "${DKBRANCH_DIR}/DKPowershell")
 		#dk_printVar(DKPOWERSHELL_DIR)
