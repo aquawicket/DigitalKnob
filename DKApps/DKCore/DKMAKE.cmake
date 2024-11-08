@@ -4,13 +4,16 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+dk_clearCmakeCache()
+dk_deleteTempFiles()
 
-############ HellowWorld ############
+
+############ Application ############
 set(APP_NAME "DKCore")
 dk_load(dk_builder)
 
-dk_depend(zlib)   #use for testing
-dk_depend(DK)
+#dk_depend(zlib)   #use for testing
+#dk_depend(DK)
 #dk_depend(DKDebug)
 
 #dk_generateCmake(${APP_NAME})
@@ -23,6 +26,10 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_set(APP_NAME 		${APP_NAME}) \n")	
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_set(DK_PROJECT_DIR \${CMAKE_CURRENT_LIST_DIR}) \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_depend(zlib)   #use for testing \n")
+dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "dk_depend(DK) \n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "\n")	
 dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "###### ${APP_NAME} ###### \n")
@@ -84,8 +91,8 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "endif() \n")
 
 
 
-dk_clearCmakeCache()
-dk_deleteTempFiles()
+
+
 dk_set(CURRENT_PLUGIN ${APP_NAME})
 dk_set(${CURRENT_PLUGIN} ${CMAKE_SOURCE_DIR})
 dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_SOURCE_DIR}/${CONFIG_PATH})
