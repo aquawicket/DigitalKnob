@@ -1,14 +1,34 @@
 #!/usr/bin/cmake -P
+if(NOT DKCMAKE_FUNCTIONS_DIR_)
+	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-dk_load(dk_builder)
 
-dk_depend(sdl)
-dk_depend(sdl_ttf)
-dk_depend(DK)
-dk_depend(DKAssets)
-dk_depend(DKDuktape)
-#dk_depend(DKDuktapeDom)
-dk_depend(DKFile)
-dk_depend(DKSDLText)
-dk_depend(DKSDLWindow)
-dk_depend(DKWindow)
+
+############ CLEAR CMAKE CACHE ############
+dk_clearCmakeCache()
+dk_deleteTempFiles()
+
+
+############ GENERATE APP CMAKE ############
+set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
+dk_generateAppCmake(${DK_PROJECT_DIR}
+	sdl
+	sdl_ttf
+	DK
+	DKAssets
+	DKDuktape
+	#DKDuktapeDom
+	DKFile
+	DKSDLText
+	DKSDLWindow
+	DKWindow
+)
+
+
+############ CONFIGURE APP ############
+dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+
+
+############ BUILD APP ############
+dk_build(${DK_PROJECT_DIR})
