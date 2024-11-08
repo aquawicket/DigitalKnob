@@ -47,7 +47,7 @@ dk_configure(${LIBEXPAT_DIR}/expat
 	-DEXPAT_DEV_URANDOM=ON           	# "Define to include code reading entropy from `/dev/urandom'." ON
 	-DEXPAT_WITH_GETRANDOM="AUTO"       # "Make use of getrandom function (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
 	-DEXPAT_WITH_SYS_GETRANDOM="AUTO"	# "Make use of syscall SYS_getrandom (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
-	-DEXPAT_CHAR_TYPE="char"            # "Character type to use (char|ushort|wchar_t) [default=char]" "char"
+	-DEXPAT_CHAR_TYPE=char            # "Character type to use (char|ushort|wchar_t) [default=char]" "char"
 	-DEXPAT_ATTR_INFO=OFF             	# "Define to allow retrieving the byte offsets for attribute names and values" OFF
 	-DEXPAT_LARGE_SIZE=OFF            	# "Make XML_GetCurrent* functions return <(unsigned) long long> rather than <(unsigned) long>" OFF
 	-DEXPAT_MIN_SIZE=OFF            	# "Get a smaller (but slower) parser (in particular avoid multiple copies of the tokenizer)" OFF
