@@ -8,9 +8,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	@image		- Full path of the image file to use (.png)
 #	@outpath	- Full path of the output file to save to (.ico)
 #
-function(dk_createIcons image)
-	dk_debugFunc()
+function(dk_createIcons)
+	dk_debugFunc(1)
 	
+	set(image ${ARGV0})
 	if(NOT EXISTS ${image})
 		dk_warning("dk_createIcons(): image:${image} not found.")
 		return()
