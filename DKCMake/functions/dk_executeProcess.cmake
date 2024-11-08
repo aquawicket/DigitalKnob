@@ -122,19 +122,19 @@ function(dk_executeProcess)
 		list(APPEND ARGV WORKING_DIRECTORY "${PWD}") # add WORKING_DIRECTORY if missing
 	endif()
 	
-	### TIMEOUT ###
+	############ TIMEOUT ############
 #	if(NOT TIMEOUT)
 #		set(TIMEOUT 5)
 #		list(APPEND ARGV TIMEOUT ${TIMEOUT})
 #	endif()
 	
-	### RESULT_VARIABLE ###
+	############ RESULT_VARIABLE ############
 	if(NOT RESULT_VARIABLE)
 		set(RESULT_VARIABLE result_variable)
 		list(APPEND ARGV RESULT_VARIABLE ${RESULT_VARIABLE})
 	endif()
 	
-	### RESULTS_VARIABLE ###
+	############ RESULTS_VARIABLE ############
 	if(CMAKE_VERSION VERSION_GREATER "3.10")
 		if(NOT RESULTS_VARIABLE)
 			set(RESULTS_VARIABLE results_variable)
@@ -142,47 +142,47 @@ function(dk_executeProcess)
 		endif()
 	endif()
 	
-	### OUTPUT_VARIABLE ###
+	############ OUTPUT_VARIABLE ############
 	if(NOT OUTPUT_VARIABLE)
 		set(OUTPUT_VARIABLE output_variable)
 		list(APPEND ARGV OUTPUT_VARIABLE ${OUTPUT_VARIABLE})
 	endif()
 	
-	### ERROR_VARIABLE ###
+	############ ERROR_VARIABLE ############
 	if(NOT ERROR_VARIABLE)
 		set(ERROR_VARIABLE error_variable)
 		list(APPEND ARGV ERROR_VARIABLE ${ERROR_VARIABLE})
 	endif()
 	
-#	### INPUT_FILE ###
+#	############ INPUT_FILE ############
 #	if(NOT INPUT_FILE)
 #		set(INPUT_FILE input_file,txt)
 #		list(APPEND ARGV INPUT_FILE ${INPUT_FILE})
 #	endif()
 	
-#	### OUTPUT_FILE ###
+#	############ OUTPUT_FILE ############
 #	if(NOT OUTPUT_FILE)
 #		set(OUTPUT_FILE output_file.txt)
 #		list(APPEND ARGV OUTPUT_FILE ${OUTPUT_FILE})
 #	endif()
 	
-	### ERROR_FILE ###
+	############ ERROR_FILE ############
 #	if(NOT ERROR_FILE)
 #		set(ERROR_FILE error_file.txt)
 #		list(APPEND ARGV ERROR_FILE ${ERROR_FILE})
 #	endif()
 	
-	### OUTPUT_QUIET ###
+	############ OUTPUT_QUIET ############
 #	if(NOT OUTPUT_QUIET)
 #		list(APPEND ARGV OUTPUT_QUIET)
 #	endif()
 	
-	### ERROR_QUIET ###
+	############ ERROR_QUIET ############
 #	if(NOT ERROR_QUIET)
 #		list(APPEND ARGV ERROR_QUIET)
 #	endif()
 	
-#	### COMMAND_ECHO ###
+#	############ COMMAND_ECHO ############
 #	if(CMAKE_VERSION VERSION_GREATER "3.15")
 #		if(NOT COMMAND_ECHO)
 #			set(COMMAND_ECHO STDOUT)
@@ -190,38 +190,38 @@ function(dk_executeProcess)
 #		endif()
 #	endif()
 	
-	### OUTPUT_STRIP_TRAILING_WHITESPACE ###
+	############ OUTPUT_STRIP_TRAILING_WHITESPACE ############
 	if(NOT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		list(APPEND ARGV OUTPUT_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	### ERROR_STRIP_TRAILING_WHITESPACE ###
+	############ ERROR_STRIP_TRAILING_WHITESPACE ############
 	if(NOT ERROR_STRIP_TRAILING_WHITESPACE)
 		list(APPEND ARGV ERROR_STRIP_TRAILING_WHITESPACE)
 	endif()
 	
-	### ENCODING ###
+	############ ENCODING ############
 #	if(CMAKE_VERSION VERSION_GREATER "3.8")
 #		if(NOT ENCODING)
 #			list(APPEND ARGV ENCODING UTF-8)
 #		endif()
 #	endif()
 	
-	### ECHO_OUTPUT_VARIABLE ###
+	############ ECHO_OUTPUT_VARIABLE ############
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		if(NOT ECHO_OUTPUT_VARIABLE)
 			list(APPEND ARGV ECHO_OUTPUT_VARIABLE)
 		endif()
 	endif()
 	
-	### ECHO_ERROR_VARIABLE ###
+	############ ECHO_ERROR_VARIABLE ############
 	if(CMAKE_VERSION VERSION_GREATER "3.18")
 		if(NOT ECHO_ERROR_VARIABLE)
 			list(APPEND ARGV ECHO_ERROR_VARIABLE)
 		endif()
 	endif()
 	
-	### VERSION_GREATER ###
+	############ VERSION_GREATER ############
 	if(CMAKE_VERSION VERSION_GREATER "3.19")
 		if(NOT COMMAND_ERROR_IS_FATAL)
 			list(APPEND ARGV COMMAND_ERROR_IS_FATAL ANY)
@@ -271,7 +271,10 @@ function(dk_executeProcess)
 	endif()
 	
 endfunction()
-#dk_createOsMacros("dk_executeProcess")
+
+
+
+
 
 
 
