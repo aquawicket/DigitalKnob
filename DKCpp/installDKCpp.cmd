@@ -63,7 +63,8 @@ if "%~1" neq ""    goto runDKCpp
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
-	if not defined host_env set "host_env=clang"
+	::if not defined host_env set "host_env=clang"
+	if not defined host_env set "host_env=cosmo"
 	if not defined env set "env=%host_env%"
 	%dk_call% dk_printVar host_env
 	
@@ -79,13 +80,11 @@ if "%~1" neq ""    goto runDKCpp
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
+	if "%host_env%"=="cosmo"  call %DKIMPORTS_DIR%\cosmocc\dk_installCosmoCC.cmd
 	if "%host_env%"=="clang"  call %DKIMPORTS_DIR%\clang\dk_installClang.cmd
 	if "%host_env%"=="gcc"    call %DKIMPORTS_DIR%\gcc\dk_installGcc.cmd
 
-	:: C
-	::if not defined COMPILER_EXE  if "%host_env%"=="clang" set "COMPILER_EXE=%CLANG_EXE%"
-	::if not defined COMPILER_EXE  if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_EXE%"
-	:: C++
+	if "%host_env%"=="cosmo"  set "COMPILER_EXE=%COSMO_CXX_COMPILER%"
 	if "%host_env%"=="clang"  set "COMPILER_EXE=%CLANG_CXX_COMPILER%"
 	if "%host_env%"=="gcc"	  set "COMPILER_EXE=%GCC_CXX_COMPILER%"
 	%dk_call% dk_assertVar COMPILER_EXE
@@ -118,11 +117,14 @@ if "%~1" neq ""    goto runDKCpp
 	::###### APP_FILE ######
 	set "APP_FILE=%APP_NAME%.exe"
 	
-	::###### Compile Code ######
+	::##### Remove lingering files ######
 	echo compiling ...
-	if exist %APP_FILE%  del %APP_FILE%
-
-	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -static -o %APP_NAME% -static %DKCPP_FILE%"
+	if exist %APP_FILE%				del %APP_FILE%
+	if exist %APP_FILE%.com.dbg 	del %APP_FILE%.com.dbg
+	if exist %APP_FILE%.aarch64.elf	del %APP_FILE%.aarch64.elf
+	
+	::###### Compile Code ######
+	set "COMPILE_COMMAND=sh.exe %COMPILER_EXE% -DDKTEST=1 -static -o %APP_FILE% -static %DKCPP_FILE%"
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 	
@@ -140,6 +142,7 @@ if "%~1" neq ""    goto runDKCpp
 	echo ######## start %APP_FILE% ############
 	echo:
     cmd /v:on /c "%APP_FILE%"
+	echo:
 	echo:
 	echo ######### end %APP_FILE% ############
 	echo:
