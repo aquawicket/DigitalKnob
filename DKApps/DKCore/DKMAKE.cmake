@@ -12,7 +12,7 @@ dk_deleteTempFiles()
 
 ############ GENERATE APP CMAKE ############
 set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
-dk_generateAppCmake(${DK_PROJECT_DIR})
+dk_generateAppCmake(${DK_PROJECT_DIR} "zlib;DK")
 
 
 ############ CONFIGURE APP ############

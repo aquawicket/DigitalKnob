@@ -3,15 +3,16 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_generateAppCmake(DK_PROJECT_DIR)
+# dk_generateAppCmake(DK_PROJECT_DIR) + DEPENDENCIES
 #
 #
-function(dk_generateAppCmake)
+function(dk_generateAppCmake DK_PROJECT_DIR) # + DEPENDENCIES
 	dk_debugFunc()
 	
 	dk_load(dk_builder)
 	
 	set(DK_PROJECT_DIR ${ARGV0})
+	set(DK_DEPENDENCIES ${ARGN})
 	dk_basename(${DK_PROJECT_DIR} APP_NAME)
 	
 dk_fileWrite(${CMAKE_SOURCE_DIR}/CMakeLists.txt
@@ -20,8 +21,9 @@ dk_fileWrite(${CMAKE_SOURCE_DIR}/CMakeLists.txt
 	include(\${DKCMAKE_FUNCTIONS_DIR}/DK.cmake)
 		
 	###### DEPENDENCIES ######
-	dk_depend(zlib)
-	dk_depend(DK)
+	foreach(dependency ${DK_DEPENDENCIES})
+		dk_depend(\${dependency})
+    endforeach()
 	##########################
 
 	dk_set(APP_NAME	${APP_NAME}) 
