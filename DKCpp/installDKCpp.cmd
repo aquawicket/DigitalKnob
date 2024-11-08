@@ -21,6 +21,7 @@
 ::### COMPILER ###
 ::default = clang
 ::set "host_env=clang"
+::set "host_env=cosmo"
 ::set "host_env=gcc"
 ::set "host_env=msvc"
 
@@ -37,8 +38,10 @@
 ::CLANG32		/clang32	llvm		i686		ucrt		libc++
 ::CLANG64		/clang64	llvm		x86_64		ucrt		libc++
 ::CLANGARM64	/clangarm64	llvm		aarch64		ucrt		libc++
+::COSMO			?			?			?			?			?
 ::MINGW32		/mingw32	gcc			i686		msvcrt		libstdc++
 ::MINGW64		/mingw64	gcc			x86_64		msvcrt		libstdc++
+::msvc			?			?			?			?			?
 ::MSYS			/usr		gcc			x86_64		cygwin		libstdc++
 ::UCRT64		/ucrt64		gcc			x86_64		ucrt		libstdc++
 

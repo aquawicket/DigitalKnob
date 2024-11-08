@@ -50,12 +50,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     echo 31) Windows x86 (msvc)
     echo 32) Windows x86_64 (gcc)
     echo 33) Windows x86_64 (clang)
-    echo 34) Windows x86_64 (ucrt)
-    echo 35) Windows x86_64 (msvc)
-    echo 36) none
-    echo 37) Clear Screen
-    echo 38) Go Back
-    echo 39) Exit    
+	echo 34) Windows x86_64 (cosmo)
+    echo 35) Windows x86_64 (ucrt)
+    echo 36) Windows x86_64 (msvc)
+    echo 37) none
+    echo 38) Clear Screen
+    echo 39) Go Back
+    echo 40) Exit    
     
     %dk_call% dk_echo 
     %dk_call% dk_echo "Please select an OS to build for"
@@ -96,12 +97,13 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%choice%"=="31" endlocal & set "%1=win_x86_msvc"        & %return%
     if "%choice%"=="32" endlocal & set "%1=win_x86_64_mingw"    & %return%
     if "%choice%"=="33" endlocal & set "%1=win_x86_64_clang"    & %return%
-    if "%choice%"=="34" endlocal & set "%1=win_x86_64_ucrt"     & %return%
-    if "%choice%"=="35" endlocal & set "%1=win_x86_64_msvc"     & %return%
-    if "%choice%"=="36" endlocal & set "%1=none"                & %return%
-    if "%choice%"=="37" %dk_call% dk_clearScreen                & %return%
-    if "%choice%"=="38" %dk_call% dk_unset APP                  & %return%
-    if "%choice%"=="39" %dk_call% dk_exit                       & %return%
+	if "%choice%"=="34" endlocal & set "%1=win_x86_64_cosmo"    & %return%
+    if "%choice%"=="35" endlocal & set "%1=win_x86_64_ucrt"     & %return%
+    if "%choice%"=="36" endlocal & set "%1=win_x86_64_msvc"     & %return%
+    if "%choice%"=="37" endlocal & set "%1=none"                & %return%
+    if "%choice%"=="38" %dk_call% dk_clearScreen                & %return%
+    if "%choice%"=="39" %dk_call% dk_unset APP                  & %return%
+    if "%choice%"=="40" %dk_call% dk_exit                       & %return%
 
     %dk_call% dk_echo %choice%: invalid selection, please try again
     %dk_call% dk_unset triple
