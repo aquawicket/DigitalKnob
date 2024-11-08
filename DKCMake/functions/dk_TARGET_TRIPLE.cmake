@@ -15,8 +15,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	OS   				= ANDROID, EMSCRIPTEN, IOS, IOSSIM, LINUX, MAC, RASPBERRY, WINDOWS
 #	arch				= arm32, arm64, x86, x86_64
 #	ARCH				= ARM32, ARM64, X86, X86_64
-#	env					= clang, mingw, msvc, ucrt
-#	ENV					= CLANG, MINGW, MSVC, UCRT
+#	env					= clang, cosmo, mingw, msvc, ucrt
+#	ENV					= CLANG, COSMO, MINGW, MSVC, UCRT
 #   <os>_<arch>			= android_arm64, emscripten_arm64, ios_arm64, iossim_arm64, linux_arm64, mac_arm64, raspberry_arm64, windows_arm64
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
@@ -78,7 +78,7 @@ function(dk_TARGET_TRIPLE)
 		dk_set(os linux)
 	elseif(triple MATCHES "mac")
 		dk_set(os mac)
-	elseif(triple MATCHES "rasp")
+	elseif(triple MATCHES "raspberry")
 		dk_set(os raspberry)
 	elseif(triple MATCHES "windows")
 		dk_set(os windows)
@@ -130,6 +130,8 @@ function(dk_TARGET_TRIPLE)
 	### Set evn / ENV 
 	if(triple MATCHES "clang")
 		dk_set(env clang)
+	elseif(triple MATCHES "cosmo")
+		dk_set(env mingw)
 	elseif(triple MATCHES "mingw")
 		dk_set(env mingw)
 	elseif(triple MATCHES "ucrt")

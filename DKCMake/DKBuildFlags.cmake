@@ -633,6 +633,19 @@ if(win_x86_64_clang)
 endif()
 
 
+### Windows x86_64 - COSMOPOLITAN ###
+if(win_x86_64_cosmo)
+	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+	
+	dk_append(CMAKE_C_FLAGS							-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17)
+	dk_append(CMAKE_CXX_FLAGS						-march=x86-64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17)
+	dk_append(CMAKE_EXE_LINKER_FLAGS				-static) # -s)
+	dk_append(DKCONFIGURE_FLAGS						--build=x86_64-w64)
+	dk_append(DKCONFIGURE_CFLAGS					${CMAKE_C_FLAGS})
+	dk_append(DKCONFIGURE_CXXFLAGS					${CMAKE_CXX_FLAGS})
+endif()
+
+
 ### Windows x86_64 - MINGW64 ###
 if(win_x86_64_mingw)
 	dk_set(MSYSTEM 									MINGW64)
