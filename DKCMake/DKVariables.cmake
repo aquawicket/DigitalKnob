@@ -121,46 +121,53 @@ dk_printVar(longPaths)
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-#dk_printVar(CMAKE_C_COMPILER_ID)
-#dk_printVar(CMAKE_CXX_COMPILER_ID)
-#dk_printVar(CMAKE_GENERATOR)
-#dk_printVar(CMAKE_GENERATOR_PLATFORM)
+dk_printVar(CMAKE_C_COMPILER_ID)
+dk_printVar(CMAKE_CXX_COMPILER_ID)
+dk_printVar(CMAKE_GENERATOR)
+dk_printVar(CMAKE_GENERATOR_PLATFORM)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	if(GNU)
 		dk_warning("GNU was allready set")
 	endif()
 	dk_set(GNU 1)
-
+	message(GNU)
+	
 elseif(CMAKE_GENERATOR MATCHES "Visual Studio")
 	if(MSVC)
 		dk_warning("MSVC was allready set")
 	endif()
 	dk_set(MSVC 1)
-
+	message(MSVC)
+	
 elseif(CMAKE_GENERATOR STREQUAL "MinGW Makefiles")
 	if(MINGW)
 		dk_warning("MINGW was allready set")
 	endif()
 	dk_set(MINGW 1)
-
+	message(MINGW)
+	
 elseif(CMAKE_GENERATOR STREQUAL "MSYS Makefiles")
 	if(MSYS)
 		dk_warning("MSYS was allready set")
 	endif()
 	dk_set(MSYS 1)
-
+	message(MSYS)
+	
 elseif(CMAKE_GENERATOR STREQUAL "Xcode")
 	if(XCODE)
 		dk_warning("XCODE was allready set")
 	endif()
 	dk_set(XCODE 1)
+	message(XCODE)
 	
 elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 	if(GNU)
 		dk_warning("GNU was allready set")
 	endif()
 	dk_set(GNU 1)
+	message(GNU)
+	
 else()
 	dk_fatal("Could not determin Environment Variable")
 endif()
@@ -173,7 +180,9 @@ if(error)
 	dk_printVar(MINGW)
 	dk_printVar(MSYS)
 	dk_printVar(XCODE)
-	dk_fatal("Either not enout, or too many compiler Flags are set")
+
+	dk_error("Either not enough, or too many compiler Flags are set")
+	dk_notice("FIXME: COSMO causes both GNU and MINGW flags to be set. we will let this error pass for now.")
 endif()
 
 ###########################################################################

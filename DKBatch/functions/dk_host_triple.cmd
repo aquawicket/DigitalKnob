@@ -15,6 +15,9 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 :dk_host_triple
     call dk_debugFunc 0
 :: setlocal
+	:: ###### DEFAULT ENVIRONMENT
+	set "default_host_env=clang"
+ 
  
 	::###### host_os and <os>_host ######
 	set "host_os=win"
@@ -28,9 +31,8 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
     if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "host_arch=arm64"
 	set "%host_arch%_host=1"             
 	
-	::###### host_env and <env>_host ######
-	::set "host_env=clang"
-	set "host_env=cosmo"
+	::###### host_env and <env>_host #######
+	set "host_env=%default_host_env%"
 	if not defined host_env goto end_host_env
 		set "%host_env%_host=1"
     :end_host_env

@@ -22,6 +22,9 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_host_triple)
 	dk_debugFunc()
 	
+	#### DEFAULT HOST ENVIRONMENT ###
+	dk_set(default_host_env "clang") # clang, cosmo, msvc, gcc
+	
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
 		set(CMAKE_HOST_WIN32 1)
 		dk_unset(CMAKE_HOST_UNIX)
@@ -105,14 +108,15 @@ function(dk_host_triple)
 	
 	
 	#### Set Default host_env, HOST_ENV ###
+	dk_printVar(CMAKE_HOST_SYSTEM_NAME)
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
-		dk_set(host_env 	"clang")
+		dk_set(host_env 	"${default_host_env}")
 	elseif("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
-		dk_set(host_env 	"clang")
+		dk_set(host_env 	"${default_host_env}")
 	elseif(MSVC)
 		dk_set(host_env 	"msvc")
 	else()
-		dk_set(host_env 	"clang")
+		dk_set(host_env 	"${default_host_env}")
 	endif()
 	#dk_assertVar(host_env)
 	if(host_env)

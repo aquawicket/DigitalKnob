@@ -47,6 +47,10 @@
 if "%~1" equ "%~0" goto installDKC
 if "%~1" neq ""    goto runDKC
 :installDKC
+	::###### DEFAULT ENVIRONMENT ######
+	:: clang, cosmo, gcc, msvc 
+	set "default_host_env=clang"
+	
 	::###### DKINIT ######
 	if not defined DKBATCH_FUNCTIONS_DIR_ set "DKBATCH_FUNCTIONS_DIR_=..\DKBatch\functions\"
 	if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
@@ -65,7 +69,7 @@ if "%~1" neq ""    goto runDKC
 	%dk_call% dk_printVar arch
 	
 	::###### host_env ######
-	if not defined host_env set "host_env=cosmo"
+	if not defined host_env set "host_env=%default_host_env%"
 	if not defined env set "env=%host_env%"
 	%dk_call% dk_printVar host_env
 	
