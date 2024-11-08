@@ -11,13 +11,12 @@ dk_deleteTempFiles()
 
 
 ############ GENERATE APP CMAKE ############
-set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
-dk_generateAppCmake(${DK_PROJECT_DIR})
+dk_generateAppCmake(${CMAKE_SOURCE_DIR})
 
 
 ############ CONFIGURE APP ############
-dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+dk_configure(${CMAKE_SOURCE_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
 
 
 ############ BUILD APP ############
-dk_build(${DK_PROJECT_DIR})
+dk_build(${CMAKE_SOURCE_DIR})
