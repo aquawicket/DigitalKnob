@@ -9,9 +9,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
-function(dk_assertPath path)
-	dk_debugFunc()
-	dk_debug("dk_assertPath(${ARGV})")
+function(dk_assertPath)
+	dk_debugFunc(1)
+
+	set(path ${ARGV0})
 	
 	dk_varToString(path path_value)
 	#dk_debug("dk_assertPath(${path}) = ${path_value}")

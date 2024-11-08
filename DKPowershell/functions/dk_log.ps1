@@ -124,9 +124,9 @@ function Global:dk_log($_level_, $_message_) {
 	if("${level_ENABLE}" -ne "1"){ return }
 
 	dk_call dk_echo "${level_COLOR}${level_TAG}${_message_}${clr}"
-	if(${level_PAUSE} -eq 1){ dk_call dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_call dk_pause }
 	if(${level_TRACE} -eq 1){ dk_call dk_echo "${level_COLOR}*** TRACE_ON_${_level_} ***${clr}"; dk_call dk_stacktrace } #OR TRACE AND NOT NO_TRACE)
 	if(${level_LINE} -eq 1){  dk_call dk_echo "${level_COLOR}*** LINE_ON_${_level_} ***${clr}"; dk_call dk_showFileLine "${BASH_SOURCE[1]}" "${BASH_LINENO[1-1]}"; } #OR HALT AND NOT NO_HALT)
+	if(${level_PAUSE} -eq 1){ dk_call dk_echo "${level_COLOR}*** PAUSE_ON_${_level_} ***${clr}"; dk_call dk_pause }
 	if(${level_HALT} -eq 1){  dk_call dk_echo "${level_COLOR}*** HALT_ON_${_level_} ***${clr}"; dk_call dk_exit 0 } #OR HALT AND NOT NO_HALT)
 }
 

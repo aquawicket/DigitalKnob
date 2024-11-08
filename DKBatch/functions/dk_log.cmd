@@ -135,9 +135,9 @@ if not defined FATAL_HALT      set "FATAL_HALT=1"
         ::if "" == %_message_:~0,1%%_message_:~-1% %dk_call% dk_set _message_ %_message_:~1,-1%    &:: if _message_ starts and ends with quotes, remove them
 
         %dk_call% dk_echo "!%_level_%_COLOR!!%_level_%_TAG!%_message_%%clr%"
-        if "!%_level_%_PAUSE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  && %dk_call% dk_pause
         if "!%_level_%_TRACE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** TRACE_ON_%_level_% ***%clr%"  && %dk_call% dk_stacktrace
         if "!%_level_%_LINE!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** LINE_ON_%_level_% ***%crl%"   && %dk_call% dk_showFileLine "%_callerpath%" "%_message_%"
+		if "!%_level_%_PAUSE!"=="1" %dk_call% dk_echo "!%_level_%_COLOR!*** PAUSE_ON_%_level_% ***%clr%"  && %dk_call% dk_pause
         if "!%_level_%_HALT!"=="1"  %dk_call% dk_echo "!%_level_%_COLOR!*** HALT_ON_%_level_% ***%clr%"   && %dk_call% dk_exit 13
 %endfunction%
 
