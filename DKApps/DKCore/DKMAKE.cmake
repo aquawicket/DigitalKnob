@@ -22,6 +22,8 @@ dk_deleteTempFiles()
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 dk_generateAppCmake(${DK_PROJECT_DIR}
+	psapi
+	pdh.lib
 	dxva2
 	zlib
 	DK
@@ -30,7 +32,12 @@ endif()
 
 
 ############ CONFIGURE APP ############
-dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+dk_configure(${DK_PROJECT_DIR} 
+	-DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
+	-DTRIPLE=${TRIPLE} 
+	${PSAPI_CMAKE} 
+	${PDHLIB_CMAKE} 
+	${DXVA2_CMAKE})
 
 
 ############ BUILD APP ############

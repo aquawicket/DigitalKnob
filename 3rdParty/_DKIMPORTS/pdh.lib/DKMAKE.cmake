@@ -17,5 +17,7 @@ dk_findLibrary(pdh.lib)
 
 # MSYS2 (-lpdh)
 if(MSYSTEM)
-	dk_set(PDH_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpdh")
+	#dk_set(PDH_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpdh")
+	#dk_append(CMAKE_CXX_LINK_EXECUTABLE -lpdh PARENT_SCOPE)
+	dk_append(CMAKE_EXE_LINKER_FLAGS -lpdh PARENT_SCOPE)
 endif()
