@@ -11,13 +11,12 @@ if(NOT DK_PROJECT_DIR)
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH")
 endif()
 dk_printVar(DK_PROJECT_DIR)
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 
 ############ CLEAR CMAKE CACHE ############
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 dk_clearCmakeCache()
 dk_deleteTempFiles()
-
 
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
@@ -26,10 +25,8 @@ dk_generateAppCmake(${DK_PROJECT_DIR}
 	pdh.lib
 	dxva2
 	zlib
-	DK
-)  
+	DK)
 endif()
-
 
 ############ CONFIGURE APP ############
 dk_configure(${DK_PROJECT_DIR} 
@@ -38,7 +35,6 @@ dk_configure(${DK_PROJECT_DIR}
 	${PSAPI_CMAKE} 
 	${PDHLIB_CMAKE} 
 	${DXVA2_CMAKE})
-
 
 ############ BUILD APP ############
 dk_build(${DK_PROJECT_DIR})

@@ -11,13 +11,12 @@ if(NOT DK_PROJECT_DIR)
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH")
 endif()
 dk_printVar(DK_PROJECT_DIR)
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
-dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 
 ############ CLEAR CMAKE CACHE ############
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 dk_clearCmakeCache()
 dk_deleteTempFiles()
-
 
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
@@ -31,20 +30,9 @@ dk_generateAppCmake(${DK_PROJECT_DIR}
 	DKDuktapeDebugger
 	DKArchive
 	DKAssets
-	DKFmt
-)  
+	DKFmt)
 endif()
 
-
-############ CONFIGURE APP ############
-dk_configure(${DK_PROJECT_DIR} 
-	-DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
-	-DTRIPLE=${TRIPLE} 
-	${PSAPI_CMAKE} 
-	${PDHLIB_CMAKE} 
-	${DXVA2_CMAKE})
-	
-	
 ############ CONFIGURE APP ############
 dk_configure(${DK_PROJECT_DIR} 
 	-DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
