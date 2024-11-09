@@ -6,11 +6,13 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
 ############ CLEAR CMAKE CACHE ############
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
+dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 dk_clearCmakeCache()
 dk_deleteTempFiles()
 
-
 ############ GENERATE APP CMAKE ############
+if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 dk_generateAppCmake(${CMAKE_SOURCE_DIR}
 	sdl			#FIX for DK/DKAndroid.cpp, line:35
 	DK
@@ -31,12 +33,16 @@ dk_generateAppCmake(${CMAKE_SOURCE_DIR}
 	DKWindow
 	#DKDuktapeDom
 	#DKRmlElement
-)
-
+	)
+endif()
 
 ############ CONFIGURE APP ############
-dk_configure(${CMAKE_SOURCE_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
-
+dk_configure(${DK_PROJECT_DIR} 
+	-DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
+	-DTRIPLE=${TRIPLE} 
+	${PSAPI_CMAKE} 
+	${PDHLIB_CMAKE} 
+	${DXVA2_CMAKE})
 
 ############ BUILD APP ############
-dk_build(${CMAKE_SOURCE_DIR})
+dk_build(${DK_PROJECT_DIR})

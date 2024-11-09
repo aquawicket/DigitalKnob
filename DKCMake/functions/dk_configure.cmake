@@ -54,7 +54,8 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
-		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
+		#dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
+		execute_proces(COMMAND ${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE ECHO_ERROR_VARIABLE)
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
 		#### restore any altered flags ####
@@ -65,8 +66,6 @@ function(dk_configure SOURCE_DIR) #ARGN
 			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 		endif()
 		return()
-	
-	
 	
 	#elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${SOURCE_DIR}/configure)
 	elseif(EXISTS ${SOURCE_DIR}/configure.ac OR EXISTS ${configure_path})
