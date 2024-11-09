@@ -4,7 +4,7 @@
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
 int main() {
-	dk_echo("test dk_echo");
+	dk_echo(compiler+" "+compiler_version);
     return 0;
 }
 #endif
