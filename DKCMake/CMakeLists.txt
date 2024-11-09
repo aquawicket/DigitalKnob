@@ -55,7 +55,7 @@ message("##############################################################")
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-
+PROJECT(DigitalKnob)
 
 
 
@@ -68,7 +68,7 @@ dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
 #
 #
 #			message("################# PROJECT(DigitalKnob) #################")
-			PROJECT(DigitalKnob)
+			
 #
 #			dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 #

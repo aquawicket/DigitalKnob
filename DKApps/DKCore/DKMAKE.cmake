@@ -4,14 +4,13 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+
+
 if(NOT DK_PROJECT_DIR)
 	dk_set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
+	dk_validate(CONFIG_PATH "dk_CONFIG_PATH")
 endif()
 dk_printVar(DK_PROJECT_DIR)
-
-dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE")
-dk_printVar(TARGET_TRIPLE)
-dk_pause()
 
 ############ CLEAR CMAKE CACHE ############
 dk_clearCmakeCache()
@@ -20,6 +19,8 @@ dk_deleteTempFiles()
 
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
+dk_error("about to overwrite ${DK_PROJECT_DIR}")
+dk_pause()
 dk_generateAppCmake(${DK_PROJECT_DIR}
 	zlib
 	DK

@@ -25,7 +25,7 @@ function(dk_TARGET_TRIPLE)
 
 
 	### Get TARGET_DIR ###
-	dk_getFullPath("${CMAKE_SOURCE_DIR}" TARGET_DIR)
+	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
 	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 
 	### Set target_type / TARGET_TYPE ###
@@ -42,7 +42,7 @@ function(dk_TARGET_TRIPLE)
 		dk_set(${TYPE} 1)								# 			RELEASE = 1	
 		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
-	else()
+	endif()
 		if( (TARGET_DIR MATCHES "android") 		OR
 			(TARGET_DIR MATCHES "emscripten") 	OR
 			(TARGET_DIR MATCHES "ios") 			OR
@@ -56,14 +56,13 @@ function(dk_TARGET_TRIPLE)
 			dk_setTargetTriple()
 			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR}/${triple})
 		endif()
-	endif()
+
 	if(NOT EXISTS ${TARGET_TRIPLE_DIR})
 		dk_warning("TARGET_TRIPLE_DIR:${TARGET_TRIPLE_DIR} does not exits.")
 		dk_debug("Creating directory . . .${TARGET_TRIPLE_DIR} ")
 		dk_makeDirectory(${TARGET_TRIPLE_DIR})
 	endif()
 	dk_assertPath(TARGET_TRIPLE_DIR)
-	dk_pause()
 		
 	### Set DK_PROJECT_DIR ###
 	dk_dirname(${TARGET_TRIPLE_DIR} DK_PROJECT_DIR)
