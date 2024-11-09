@@ -19,7 +19,7 @@ function(dk_generateAppCmake DK_PROJECT_DIR) # + DEPENDENCIES
 	set(DK_DEPENDENCIES ${ARGN})
 	dk_basename(${DK_PROJECT_DIR} APP_NAME)
 	
-dk_fileWrite(${CMAKE_SOURCE_DIR}/CMakeLists.txt
+dk_fileWrite(${DK_PROJECT_DIR}/CMakeLists.txt
 
 ####################################################
 ################## CMakeLists.txt ##################

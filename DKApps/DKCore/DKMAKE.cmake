@@ -19,12 +19,13 @@ dk_deleteTempFiles()
 
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
-dk_error("about to overwrite ${DK_PROJECT_DIR}")
+dk_warning("!!!! OVERWRITTING DK_PROJECT_DIR:${DK_PROJECT_DIR} !!!")
 dk_pause()
 dk_generateAppCmake(${DK_PROJECT_DIR}
 	zlib
 	DK
-)
+)  
+dk_pause()
 endif()
 
 

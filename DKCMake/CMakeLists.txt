@@ -24,7 +24,7 @@ include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
 ### *** building from the command line **
 ### DKCmake works a bit differenct than traditional CMake in that this CMakeFile.txt location is always used as the source directory.
 ### The app, platform and architecture are chosen by where the build directory is set to. For examples: say we want to build an app
-### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/Development ,
+### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Use  rs/username/digitalknob/Development ,
 ### and the build directy will be set to /Users/username/digitalknob/Development/DKApps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
 ### it needs to know to begine to process, acuire all dependencies and build the project. 
 ###
@@ -55,7 +55,7 @@ message("##############################################################")
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-PROJECT(DigitalKnob)
+
 
 
 
@@ -68,7 +68,7 @@ PROJECT(DigitalKnob)
 #
 #
 #			message("################# PROJECT(DigitalKnob) #################")
-			
+			PROJECT(DigitalKnob)
 #
 #			dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 #
