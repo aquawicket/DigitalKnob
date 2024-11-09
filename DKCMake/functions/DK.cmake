@@ -93,6 +93,14 @@ function(DKINIT)
 	
 #	dk_load(dk_messageBox)
 #	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+
+	############ DK_PROJECT_DIR ############
+	if(NOT DK_PROJECT_DIR)
+		dk_set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
+		dk_load(dk_CONFIG_PATH)
+		dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
+	endif()
+	dk_printVar(DK_PROJECT_DIR)
 	
 	###### DKTEST MODE ######
 	if(ENABLE_DKTEST)
