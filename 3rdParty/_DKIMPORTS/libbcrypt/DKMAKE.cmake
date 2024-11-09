@@ -12,11 +12,9 @@ if(NOT MINGW)
 #	dk_return()
 endif()
 
-#dynamic linking
-d#k_append(CMAKE_CXX_LINK_EXECUTABLE -lbcrypt)
-#dk_append(CMAKE_EXE_LINKER_FLAGS -lbcrypt PARENT_SCOPE)
 
+#dk_append(CMAKE_EXE_LINKER_FLAGS -lbcrypt)
 #if(MSYSTEM)
-	dk_set(LIBBCRYPT_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lbcrypt")
+	dk_appemd(LIBBCRYPT_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lbcrypt")
 #endif()
 

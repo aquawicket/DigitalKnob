@@ -5,8 +5,10 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-dk_load(dk_builder)
+##################################
 # https://learn.microsoft.com/en-us/windows/win32/psapi/psapi-functions
+dk_load(dk_builder)
+
 
 if(NOT WIN)
 #	dk_undepend(psapi)
@@ -17,7 +19,10 @@ dk_findLibrary(Psapi.lib)
 
 
 
-# MSYS2 (-lPsapi)
-#if(MSYSTEM)
+
+
+
+#dk_append(CMAKE_EXE_LINKER_FLAGS -lPsapi)
+if(MSYSTEM)
 	dk_set(PSAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lPsapi")
-#endif()
+endif()
