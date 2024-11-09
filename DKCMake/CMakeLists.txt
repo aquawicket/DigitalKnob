@@ -68,7 +68,7 @@ dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
 #
 #
 #			message("################# PROJECT(DigitalKnob) #################")
-#			PROJECT(DigitalKnob)
+			PROJECT(DigitalKnob)
 #
 #			dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 #

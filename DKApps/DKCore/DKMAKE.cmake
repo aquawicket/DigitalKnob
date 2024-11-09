@@ -4,6 +4,14 @@ if(NOT DKCMAKE_FUNCTIONS_DIR_)
 endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
+if(NOT DK_PROJECT_DIR)
+	dk_set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
+endif()
+dk_printVar(DK_PROJECT_DIR)
+
+dk_validate(TARGET_TRIPLE "dk_TARGET_TRIPLE")
+dk_printVar(TARGET_TRIPLE)
+dk_pause()
 
 ############ CLEAR CMAKE CACHE ############
 dk_clearCmakeCache()
@@ -11,15 +19,17 @@ dk_deleteTempFiles()
 
 
 ############ GENERATE APP CMAKE ############
-dk_generateAppCmake(${CMAKE_SOURCE_DIR}
+if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
+dk_generateAppCmake(${DK_PROJECT_DIR}
 	zlib
 	DK
 )
+endif()
 
 
 ############ CONFIGURE APP ############
-dk_configure(${CMAKE_SOURCE_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
+dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTRIPLE=${TRIPLE})
 
 
 ############ BUILD APP ############
-dk_build(${CMAKE_SOURCE_DIR})
+dk_build(${DK_PROJECT_DIR})

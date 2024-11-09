@@ -21,10 +21,11 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #   <os>_<arch>_<env>	= android_arm64_clang, emscripten_arm64_clang, ios_arm64_clang, iossim_arm64_clang, linux_arm64_clang, mac_arm64_clang, raspberry_arm64_clang, windows_arm64_clang
 #
 function(dk_TARGET_TRIPLE)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
+
 
 	### Get TARGET_DIR ###
-	dk_getFullPath("${CMAKE_BINARY_DIR}" TARGET_DIR)
+	dk_getFullPath("${CMAKE_SOURCE_DIR}" TARGET_DIR)
 	dk_printVar(TARGET_DIR)								# TARGET_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang/Debug
 
 	### Set target_type / TARGET_TYPE ###
@@ -42,11 +43,28 @@ function(dk_TARGET_TRIPLE)
 		#dk_set(TARGET_TYPE Release)					# 		TARGET_TYPE = Release
 		dk_dirname(${TARGET_DIR} TARGET_TRIPLE_DIR)		# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
 	else()
-	
-		dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		if( (TARGET_DIR MATCHES "android") 		OR
+			(TARGET_DIR MATCHES "emscripten") 	OR
+			(TARGET_DIR MATCHES "ios") 			OR
+			(TARGET_DIR MATCHES "iossim")		OR		 
+			(TARGET_DIR MATCHES "linux") 		OR
+			(TARGET_DIR MATCHES "mac") 			OR
+			(TARGET_DIR MATCHES "raspberry") 	OR
+			(TARGET_DIR MATCHES "windows"))
+			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR})			# TARGET_TRIPLE_DIR = C:/Users/Administrator/digitalknob/Development/DKApps/DKSample/win_x86_64_clang
+		else()
+			dk_setTargetTriple()
+			dk_set(TARGET_TRIPLE_DIR ${TARGET_DIR}/${triple})
+		endif()
+	endif()
+	if(NOT EXISTS ${TARGET_TRIPLE_DIR})
+		dk_warning("TARGET_TRIPLE_DIR:${TARGET_TRIPLE_DIR} does not exits.")
+		dk_debug("Creating directory . . .${TARGET_TRIPLE_DIR} ")
+		dk_makeDirectory(${TARGET_TRIPLE_DIR})
 	endif()
 	dk_assertPath(TARGET_TRIPLE_DIR)
-
+	dk_pause()
+		
 	### Set DK_PROJECT_DIR ###
 	dk_dirname(${TARGET_TRIPLE_DIR} DK_PROJECT_DIR)
 	dk_set(DK_PROJECT_DIR ${DK_PROJECT_DIR})
