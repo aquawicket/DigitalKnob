@@ -34,9 +34,9 @@ if(NOT CMAKE_GENERATOR AND MSYS2_GENERATOR)
 endif()
 
 ### Return if MSYS2_EXE is already set
-if(EXISTS ${MSYS2_EXE})
-	dk_return()
-endif()
+#if(EXISTS ${MSYS2_EXE})
+#	dk_return()
+#endif()
 
 
 ### INSTALL ###

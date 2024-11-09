@@ -9,6 +9,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 function(dk_generateAppCmake DK_PROJECT_DIR) # + DEPENDENCIES
 	dk_debugFunc()
 	
+	#dk_basename(${DK_PROJECT_DIR} APP_NAME)
+	if(DK_PROJECT_DIR MATCHES "DKCMake")
+		return()
+	endif()
 	dk_load(dk_builder)
 	
 	set(DK_PROJECT_DIR ${ARGV0})

@@ -37,7 +37,19 @@ dk_info("\n")
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
+return()
 
+
+
+
+
+dk_configureApp(${DK_PROJECT_DIR})
+
+
+
+
+#######################################################################################
+######################################################################################
 
 #dk_printVar(DK_PROJECT_DIR)
 dk_basename(${DK_PROJECT_DIR} APP_NAME)
