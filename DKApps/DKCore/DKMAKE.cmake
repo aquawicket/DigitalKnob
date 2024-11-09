@@ -22,6 +22,7 @@ dk_deleteTempFiles()
 ############ GENERATE APP CMAKE ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 dk_generateAppCmake(${DK_PROJECT_DIR}
+	dxva2
 	zlib
 	DK
 )  

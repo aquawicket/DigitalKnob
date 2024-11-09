@@ -21,9 +21,11 @@ function(dk_append variable) #value
 		return()
 	endif()
 	if(${variable})
-		dk_set(${variable} ${${variable}} ${ARGN})
+		#set(${variable} ${${variable}} ${ARGN})
+		list(APPEND ${variable} ${ARGN})
+		set(${variable} ${${variable}} PARENT_SCOPE)
 	else()
-		dk_set(${variable} ${ARGN})
+		set(${variable} ${ARGN} PARENT_SCOPE)
 	endif()
 
 # DEBUG
