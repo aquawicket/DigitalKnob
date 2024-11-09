@@ -5,13 +5,6 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
-############ DK_PROJECT_DIR ############
-if(NOT DK_PROJECT_DIR)
-	dk_set(DK_PROJECT_DIR ${CMAKE_SOURCE_DIR})
-	dk_validate(CONFIG_PATH "dk_CONFIG_PATH")
-endif()
-dk_printVar(DK_PROJECT_DIR)
-
 ############ CLEAR CMAKE CACHE ############
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
