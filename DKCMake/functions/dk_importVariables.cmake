@@ -353,7 +353,7 @@ function(dk_importVariables url)
 		dk_notice("${PLUGIN_IMPORT_NAME_UPPER} contains non-alphanumeric characters and is changed to ${CURRENT_PLUGIN}")
 	endif()
 	dk_printVar(CURRENT_PLUGIN)											# CURRENT_PLUGIN			: ZLIB
-	
+		
 	# <PLUGIN>
 	unset(${CURRENT_PLUGIN})
 	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
@@ -447,8 +447,6 @@ function(dk_importVariables url)
 	
 	#unset(${rtn_var})
 	#set(${rtn_var} ${CURRENT_PLUGIN} PARENT_SCOPE)
-	#dk_printVar(CURRENT_PLUGIN)
-	
 endfunction()
 
 

@@ -32,9 +32,10 @@ function(dk_generateAppCmake DK_PROJECT_DIR)
     endforeach()
 	##########################
 
-	dk_set(APP_NAME	${APP_NAME}) 
+	dk_set(APP_NAME	${APP_NAME})
 	dk_configureApp(${DK_PROJECT_DIR})
 	
+	project(${APP_NAME}_PROJECT)
 	###################################################
 	###################################################
 	\n")

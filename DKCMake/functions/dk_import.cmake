@@ -56,10 +56,11 @@ function(dk_import url)
 		###### Import from Download File ######
 		else()
 			dk_printVar(CURRENT_PLUGIN)
+			message("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)
 			dk_verbose("dk_install(${${CURRENT_PLUGIN}_IMPORT_NAME} ${ARGN})")
 			
-			dk_install(${CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
+			dk_install($CACHE{CURRENT_PLUGIN} ${ARGN} ${NO_HALT})
 		endif()
 	endif()
 	
