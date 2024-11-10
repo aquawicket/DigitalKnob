@@ -68,7 +68,7 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_toLower(${MSYSTEM} msystem)
 		
 		if(COSMO)
-		
+			# Temporary fix fpr cosmopoiltan
 		else()
 			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
 			dk_exportVars(PATH "$ENV{PATH}")

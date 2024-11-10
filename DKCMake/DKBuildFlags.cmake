@@ -133,6 +133,10 @@ dk_validate(DKIMPORTS_DIR	"dk_DKIMPORTS_DIR()")
 ########### CORE DEPENDENCIES ############
 dk_validate(CMAKE_EXE 		"dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
 
+if(COSMO)
+	dk_load(${DKIMPORTS_DIR}/cosmopolitan/DKMAKE.cmake)
+	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
+endif()
 if(MINGW)
 #	#dk_set(PROJECT_INCLUDE_DKPLUGINS 0)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
