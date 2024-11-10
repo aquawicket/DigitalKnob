@@ -1,6 +1,6 @@
 #!/usr/bin/cmake -P
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-include_guard()		# include_guard
+include_guard()	
 
 ### Print Version Info ###
 message("")
@@ -71,14 +71,20 @@ function(DKINIT)
 	set(ENABLE_DKTEST 1 CACHE INTERNAL "")
 
 	############ LOAD FUNCTION FILES ############
+	
 	include(${DKCMAKE_FUNCTIONS_DIR}/dk_load.cmake)
+	dk_load(${DKSCRIPT_PATH})
+	
+	if(ENABLE_DKTEST)
+		if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
+			include(${DKSCRIPT_PATH})
+		endif()
+	endif()
 	
 	dk_load(dk_dumpAllVariables)
 	dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
-
 	dk_load(dk_dirname)
 	dk_load(dk_basename)
-	dk_load(${DKSCRIPT_PATH})
 	#dk_load(__TIME__)
 	dk_load(dk_createOsMacros)
 	dk_load(__FILE__)

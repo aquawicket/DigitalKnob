@@ -1,15 +1,15 @@
 #!/usr/bin/cmake -P
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
-#include_guard()
+include_guard()
 
 ###############################################################################
 # dk_configureApp(DK_PROJECT_DIR)
 #
 #
 function(dk_configureApp)
-	dk_debugFunc()
-	
+	dk_debugFunc(1)
 	set(DK_PROJECT_DIR ${ARGV0})
+	
 	dk_basename(${DK_PROJECT_DIR} APP_NAME)
 	
 	dk_info("\n")

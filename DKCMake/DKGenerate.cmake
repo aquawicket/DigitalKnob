@@ -55,7 +55,7 @@ set(APP_NAME ${APP_NAME}_APP)
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 #if(NOT TARGET)
-	PROJECT(${APP_NAME})
+	PROJECT(${APP_NAME}_PROJECT)
 	dk_set(DKAPP ON)
 #endif()
 

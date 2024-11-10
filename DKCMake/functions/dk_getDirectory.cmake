@@ -8,19 +8,15 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #	Get the directory portion of a path
 #
 #	@path		- The path to use
-#	@rtn_var		- Returns the directory upon success: False upon error
+#	@rtn_var	- Returns the directory upon success: False upon error
 #
-function(dk_getDirectory path rtn_var)
-	dk_debugFunc()
+function(dk_getDirectory)
+	dk_debugFunc(2)
+	set(path ${ARGV0})
+	set(rtn_var ${ARGV1})
 	
-	string(FIND ${path} "/" index REVERSE)
-	if(${index} EQUAL -1)
-		return() # no path dividers found
-	endif()
-	string(SUBSTRING ${path} 0 ${index} directory)
-	#dk_printVar(directory)
-    set(${rtn_var} ${directory} PARENT_SCOPE)
-	#dk_printVar(rtn_var)
+	get_filename_component(dirname "${path}" DIRECTORY)
+	set(${rtn_var} "${dirname}" PARENT_SCOPE)
 endfunction()
 
 
@@ -29,7 +25,8 @@ endfunction()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_getDirectory("C:/Windows/System32" dirname)
+	dk_info("dirname = ${dirname}")
 endfunction()

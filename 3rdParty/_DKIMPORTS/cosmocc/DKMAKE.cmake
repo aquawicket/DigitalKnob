@@ -32,3 +32,6 @@ endif()
 
 dk_set(DKCONFIGURE_CC		${CMAKE_C_COMPILER})
 dk_set(DKCONFIGURE_CXX		${CMAKE_CXX_COMPILER})
+
+
+dk_set(COSMO_BASH_EXPORTS	"export PATH=${COSMOCC}/bin:$PATH;")

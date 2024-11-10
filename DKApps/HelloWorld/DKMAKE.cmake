@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+include_guard()	
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
 endif()
@@ -11,7 +12,7 @@ dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
 dk_clearCmakeCache()
 dk_deleteTempFiles()
 
-############ GENERATE APP CMAKE ############
+############ GENERATE CMakeLists.txt ############
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 	dk_generateAppCmake(${DK_PROJECT_DIR})
 endif()
