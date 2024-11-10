@@ -66,9 +66,13 @@ if(WIN_HOST AND (MSYSTEM OR ANDROID OR EMSCRIPTEN))
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
-		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
-		dk_exportVars(PATH "$ENV{PATH}")
-
+		
+		if(COSMO)
+		
+		else()
+			dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
+			dk_exportVars(PATH "$ENV{PATH}")
+		endif()
 		dk_installPackage(toolchain)
 	else()
 		dk_set(MSYS2_BASH_EXPORTS	"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
