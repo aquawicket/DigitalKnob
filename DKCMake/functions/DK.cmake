@@ -1,6 +1,8 @@
 #!/usr/bin/cmake -P
+
+#message("${ESC}[46m ${ESC}[30m ***${CMAKE_CURRENT_LIST_FILE}*** ${ESC}[0m")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-include_guard()	
+include_guard()
 
 ### Print Version Info ###
 message("")
@@ -97,8 +99,8 @@ function(DKINIT)
 	dk_load(dk_logo)
 	dk_load(dk_watch)
 	
-#	dk_load(dk_messageBox)
-#	variable_watch(CMAKE_GENERATOR dk_onVariableWatch)
+	#dk_load(dk_messageBox)
+	#variable_watch(CURRENT_PLUGIN dk_onVariableWatch)
 
 	############ DK_PROJECT_DIR ############
 	if(NOT DK_PROJECT_DIR)

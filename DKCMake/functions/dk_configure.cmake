@@ -15,18 +15,19 @@ function(dk_configure SOURCE_DIR) #ARGN
 	dk_validate(DKBUILD_TYPE "dk_DKBUILD_TYPE()")
 	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
 	
-	if(NOT CURRENT_PLUGIN)
-		if(NOT EXISTS ${SOURCE_DIR}/DKMAKE.cmake)
-			dk_fatal("dk_configure(): The SOURCE_DIR:${SOURCE_DIR} does not contain a DKMAKE.cmake file.")
-		endif()
-		dk_basename(${SOURCE_DIR} CURRENT_PLUGIN)
-		dk_set(CURRENT_PLUGIN ${CURRENT_PLUGIN})
-		dk_set(${CURRENT_PLUGIN} ${SOURCE_DIR})
-		dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${SOURCE_DIR}/${CONFIG_PATH})
+	###### Get the BINARY_DIR ######
+	if(${CURRENT_PLUGIN}_CONFIG_DIR)
+		set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	else()
+#		if(NOT EXISTS ${SOURCE_DIR}/DKMAKE.cmake)
+#			dk_fatal("dk_configure(): The SOURCE_DIR:${SOURCE_DIR} does not contain a DKMAKE.cmake file.")
+#		endif()
+#		dk_basename(${SOURCE_DIR} PLUGIN)
+#		set(${PLUGIN} ${SOURCE_DIR})
+#		set(${PLUGIN}_CONFIG_DIR ${SOURCE_DIR}/${CONFIG_PATH})
+		set(BINARY_DIR "${SOURCE_DIR}/${CONFIG_PATH}")
 	endif()
 	
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
 	dk_makeDirectory(${BINARY_DIR})
 	dk_assertPath(${BINARY_DIR})
 	dk_cd(${BINARY_DIR})
@@ -50,11 +51,21 @@ function(dk_configure SOURCE_DIR) #ARGN
 		dk_assertPath(BINARY_DIR)
 		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${ARGN} "-S" "${SOURCE_DIR}" "-B" "${BINARY_DIR}" "-DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_}" "--debug-trycompile")			
 		dk_mergeFlags("${command_list}" command_list)		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
-		dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
+		if(COSMO)
+			dk_validate(BASH_EXE "include(${DKIMPORTS_DIR}/bash/DKMAKE.cmake)")
+			list(APPEND command_list "-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/cosmocc/override.cmake")
+			dk_replaceAll("'${command_list}'" ";" "' '" command_list)
+			dk_fileWrite(${DKCACHE_DIR}/tmp.sh "${BASH_EXE} -c \"${command_list}\"")
+			dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+			execute_process(COMMAND ${BASH_EXE} ${DKCACHE_DIR}/tmp.sh)
+		else()
+			dk_queueCommand(${command_list} OUTPUT_VARIABLE echo_output ERROR_VARIABLE echo_output)
+		endif()
+			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
 		
 		#### restore any altered flags ####
@@ -121,6 +132,10 @@ function(dk_configure SOURCE_DIR) #ARGN
 	endif()
 endfunction()
 dk_createOsMacros("dk_configure")
+
+
+
+
 
 
 

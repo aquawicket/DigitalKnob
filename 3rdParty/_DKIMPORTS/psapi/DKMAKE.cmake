@@ -7,6 +7,10 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 ##################################
 # https://learn.microsoft.com/en-us/windows/win32/psapi/psapi-functions
+
+dk_depend(windows-sdk)
+
+
 dk_load(dk_builder)
 
 

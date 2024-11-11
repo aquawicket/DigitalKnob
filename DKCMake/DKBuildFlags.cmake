@@ -134,7 +134,6 @@ dk_validate(DKIMPORTS_DIR	"dk_DKIMPORTS_DIR()")
 dk_validate(CMAKE_EXE 		"dk_load(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)")
 
 if(COSMO)
-	dk_load(${DKIMPORTS_DIR}/cosmopolitan/DKMAKE.cmake)
 	dk_load(${DKIMPORTS_DIR}/cosmocc/DKMAKE.cmake)
 endif()
 if(MINGW)
@@ -826,7 +825,7 @@ endif()
 
 
 ###### Set DKCMAKE_BUILD variable ######
-dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} "${DKCMAKE_FLAGS}")
+dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 dk_printVar(DKCMAKE_BUILD)
 
 
@@ -838,5 +837,5 @@ else()
 endif()
 
 
-dk_printVar(CMAKE_C_FLAGS)
-dk_printVar(CMAKE_CXX_FLAGS)
+#dk_printVar(CMAKE_C_FLAGS)
+#dk_printVar(CMAKE_CXX_FLAGS)

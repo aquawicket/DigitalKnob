@@ -22,7 +22,7 @@ set(indent_count 0 CACHE INTERNAL "")
 #
 macro(dk_load var)
 	#dk_debugFunc()
-	#dk_echo("dk_load(${var})")
+	message("dk_load(${ARGV})")
 	
 	string(STRIP ${var} fn)
 	get_filename_component(name_we "${fn}" NAME_WE)

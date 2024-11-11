@@ -1,6 +1,6 @@
+include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include(${CMAKE_SOURCE_DIR}/functions/DK.cmake)
-#include_guard()
 
 ### CMakeLists.txt for DKCMake ###
 ###
@@ -56,27 +56,20 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_FLAG_VARIABLES.temp)
 
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
-dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
+#dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
 
 #dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)
 
 
-#			#Load all cmake flags prior to calling PROJECT()
-#			dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
-#			dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
-#
-#
-		
-#
-#
-#			message("################# PROJECT(DigitalKnob) #################")
-			PROJECT(DigitalKnob)
-#
-#			
-#
-#			dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
-#
-#			
+	#Load all cmake flags prior to calling PROJECT()
+	dk_load(${DKCMAKE_DIR}/DKVariables.cmake)
+	dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)
+
+	message("################# PROJECT(DigitalKnob) #################")
+	PROJECT(DigitalKnob)
+
+			
+	dk_load(${DKCMAKE_DIR}/DKGenerate.cmake)
 		

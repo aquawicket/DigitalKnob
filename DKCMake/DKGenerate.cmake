@@ -37,7 +37,7 @@ dk_info("\n")
 dk_validate(DK_PROJECT_DIR "dk_TARGET_TRIPLE()")
 dk_assertPath(${DK_PROJECT_DIR})
 dk_load(${DK_PROJECT_DIR}/DKMAKE.cmake)
-return()
+#return()
 
 
 
@@ -322,6 +322,7 @@ if(NOT DKAPP)
 	return()
 endif()	
 
+dk_load(dk_configureApp)
 dk_configureApp(${DK_PROJECT_DIR})
 
 #dk_info("\n")

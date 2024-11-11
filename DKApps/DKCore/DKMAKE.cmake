@@ -5,6 +5,23 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+dk_depend(psapi)
+dk_depend(pdh.lib)
+dk_depend(dxva2)
+dk_depend(zlib)
+dk_depend(DK)
+
+
+
+
+
+
+
+
+
+
+
+if(TODO__WORK_IN_PROGRESS)
 ############ CLEAR CMAKE CACHE ############
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
@@ -31,3 +48,4 @@ dk_configure(${DK_PROJECT_DIR}
 
 ############ BUILD APP ############
 dk_build(${DK_PROJECT_DIR})
+endif()
