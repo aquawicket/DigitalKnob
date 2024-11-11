@@ -5,8 +5,9 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+### Depends ###
 dk_depend(psapi)
-dk_depend(pdh.lib)
+dk_depend(pdh)
 dk_depend(dxva2)
 dk_depend(zlib)
 dk_depend(DK)
@@ -32,7 +33,7 @@ dk_deleteTempFiles()
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 dk_generateAppCmake(${DK_PROJECT_DIR}
 	psapi
-	pdh.lib
+	pdh
 	dxva2
 	zlib
 	DK)

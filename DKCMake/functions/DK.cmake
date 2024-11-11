@@ -78,7 +78,8 @@ function(DKINIT)
 	dk_load(${DKSCRIPT_PATH})
 	
 	if(ENABLE_DKTEST)
-		if("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}")
+		if(("${DKSCRIPT_DIR}" STREQUAL "${DKCMAKE_FUNCTIONS_DIR}") OR
+		   ("${DKSCRIPT_DIR}/" STREQUAL "${DKCMAKE_FUNCTIONS_DIR_}"))
 			include(${DKSCRIPT_PATH})
 		endif()
 	endif()

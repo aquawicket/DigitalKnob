@@ -623,6 +623,7 @@ endif()
 
 ### Windows x86_64 - CLANG64 ###
 if(win_x86_64_clang)
+	dk_set(msystem 									clang64)
 	dk_set(MSYSTEM 									CLANG64)
 	dk_load(${DKIMPORTS_DIR}/clang/DKMAKE.cmake)
 	

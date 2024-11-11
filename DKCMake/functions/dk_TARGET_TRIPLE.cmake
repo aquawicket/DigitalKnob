@@ -177,13 +177,20 @@ function(dk_TARGET_TRIPLE)
 	### Set MSYSTEM
 	if(${ENV})
 		if(CLANG AND ARM64)
+			dk_set(msystem "${env}${arch}")	# msystem = clangarm64
 			dk_set(MSYSTEM "${ENV}${ARCH}")	# MSYSTEM = CLANGARM64
 		elseif(X86_64)
+			dk_set(msystem "${env}64")		# msystem = clang64, mingw64, ucrt64
 			dk_set(MSYSTEM "${ENV}64")		# MSYSTEM = CLANG64, MINGW64, UCRT64
 		elseif(X86)
+			dk_set(msystem "${env}32")		# msystem = clang32, mingw32
 			dk_set(MSYSTEM "${ENV}32")		# MSYSTEM = CLANG32, MINGW32
-		elseif(cosmo)
-			dk_set(MSYSTEM "${ENV}32")		# COSMO
+		elseif(cosmo OR COSMO)
+		#	dk_set(msystem "${env}")		# cosmo
+		#	dk_set(MSYSTEM "${ENV}")		# COSMO
+		elseif(msvc OR MSVC)
+		#	dk_set(msystem "msvc")			# cosmo
+		#	dk_set(MSYSTEM "MSVC")			# COSMO
 		else()
 			dk_fatal("The target triple:${triple} does not contain a valid env or msystem")
 		endif()

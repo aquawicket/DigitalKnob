@@ -5,6 +5,33 @@ endif()
 include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 
 
+### Depends ###
+dk_depend(psapi)
+dk_depend(pdh)
+dk_depend(dxva2)
+dk_depend(duktape)
+dk_depend(sdl)
+dk_depend(sdl_ttf)
+dk_depend(DK)
+dk_depend(DKDuktape)
+dk_depend(DKDuktapeDebugger)
+dk_depend(DKArchive)
+dk_depend(DKAssets)
+dk_depend(DKFmt)
+#dk_depend(DKDuktapeDom)
+dk_depend(DKFile)
+dk_depend(DKSDLText)
+dk_depend(DKSDLWindow)
+dk_depend(DKWindow)
+
+
+
+
+
+
+
+
+if(TODO__WORK_IN_PROGRESS)
 ############ CLEAR CMAKE CACHE ############
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeCache.txt)
 dk_delete(${DK_PROJECT_DIR}/${BUILD_PATH}/CMakeFiles)
@@ -15,7 +42,7 @@ dk_deleteTempFiles()
 if(NOT DK_PROJECT_DIR MATCHES "DKCMake")
 dk_generateAppCmake(${DK_PROJECT_DIR}
 	psapi
-	pdh.lib
+	pdh
 	dxva2
 	duktape
 	sdl
@@ -43,3 +70,4 @@ dk_configure(${DK_PROJECT_DIR}
 
 ############ BUILD APP ############
 dk_build(${DK_PROJECT_DIR})
+endif()

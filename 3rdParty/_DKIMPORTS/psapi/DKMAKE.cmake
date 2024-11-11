@@ -19,14 +19,10 @@ if(NOT WIN)
 #	dk_return()
 endif()
 
-dk_findLibrary(Psapi.lib)
 
-
-
-
-
-
-#dk_append(CMAKE_EXE_LINKER_FLAGS -lPsapi)
-if(MSYSTEM)
+if(MSVC)
+	dk_findLibrary(Psapi.lib)
+elseif(MSYSTEM)
+	#dk_append(CMAKE_EXE_LINKER_FLAGS -lPsapi)
 	dk_set(PSAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lPsapi")
 endif()
