@@ -90,7 +90,7 @@ if not defined DKINIT call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" %~0 %*
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
     %dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	if "%triple%"=="cosmo"   			%dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
+	if "%triple%"=="cosmo"   			%dk_call% dk_prependArgs CMAKE_ARGS -G "Msys Makefiles"
     if "%triple%"=="android_arm32"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_arm64"      %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
     if "%triple%"=="android_x86" 	    %dk_call% dk_prependArgs CMAKE_ARGS -G "Unix Makefiles"
