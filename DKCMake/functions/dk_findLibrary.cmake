@@ -55,7 +55,7 @@ function(dk_findLibrary filename)
 	dk_success("FOUND ${filename} at ${${VAR}}")
 	dk_set(${VAR} "${${VAR}}")
 	
-	dk_lib(${VAR})
+	dk_lib(${${VAR}})
 	
 	
 	#find_library(${name}_LIBRARY ${name} ${ARGN})

@@ -3,7 +3,7 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #include_guard()
 
 ###############################################################################
-# dk_lib(lib_path)
+# dk_lib(lib_path) NO_HALT
 #
 #	TODO
 #
@@ -11,6 +11,8 @@ include(${DKCMAKE_FUNCTIONS_DIR_}DK.cmake)
 #
 function(dk_lib lib_path)
 	dk_debugFunc()
+	
+	dk_getOption(NO_HALT ${ARGV} REMOVE)
 	
 	foreach(item ${ARGV})
 		if(LIBS MATCHES "${item}")
@@ -23,7 +25,7 @@ function(dk_lib lib_path)
 				dk_basename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${triple})
 			else()
-				dk_warning("DKINSTALL: Could not locate ${lib_path}")
+				dk_error("DKINSTALL: Could not locate ${lib_path}" ${NO_HALT})
 			endif()
 		endif()	
 	endforeach()
