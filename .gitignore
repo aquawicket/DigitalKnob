@@ -9,4 +9,11 @@ DEPENDS.TMP
 */*/*.exe.com.dbg
 DKPlugins/DKXml/pugixml.cpp
 DKPlugins/*/CMakeLists.txt
+DKApps/*/assets.h
+DKApps/*/assets.zip
+DKApps/*/icons/windows
+DKApps/*/DKPlugins.h
+DKApps/*/win_x86_64_clang
+DKApps/*/DKApp.code-workspace
+DKApps/*/.vscode
 DKPlugins/*/win_x86_64_clang
