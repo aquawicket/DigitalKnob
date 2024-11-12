@@ -11,8 +11,11 @@ DKPlugins/DKXml/pugixml.cpp
 DKPlugins/*/CMakeLists.txt
 DKApps/*/assets.h
 DKApps/*/assets.zip
+DKApps/*/cosmo_cosmo_cosmo
 DKApps/*/icons/windows
 DKApps/*/DKPlugins.h
+DKApps/*/resource.h
+DKApps/*/resource.rc
 DKApps/*/win_x86_64_clang
 DKApps/*/DKApp.code-workspace
 DKApps/*/.vscode
