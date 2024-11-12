@@ -4,5 +4,9 @@
 
 DKCMAKE_START_VARIABLES.temp
 DEPENDS.TMP
-DKPlugins/DK/backward.cpp
+*/*/backward.cpp
 */*/*.exe.aarch64.elf
+*/*/*.exe.com.dbg
+DKPlugins/DKXml/pugixml.cpp
+DKPlugins/*/CMakeLists.txt
+DKPlugins/*/win_x86_64_clang
