@@ -1,10 +1,11 @@
-#include "dk_info.hpp"
+#include "dk_error.hpp"
+
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifdef DKTEST
 int main() {
-	dk_info("test dk_info()");
+	dk_error("test dk_error()");
     return 0;
 }
 #endif

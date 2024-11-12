@@ -1,15 +1,15 @@
 #pragma once
-#ifndef dk_info_hpp
-#define dk_info_hpp
+#ifndef dk_debug_hpp
+#define dk_debug_hpp
 
 #include "DK.hpp"
 
 //################################################################################
-//# dk_info(message)
+//# dk_debug(message)
 //#
 #include "dk_log.hpp"
-void dk_info(const char* message){
-	dk_log(INFO, message);
+void dk_debug(const char* message){
+	dk_log(DEBUG, message);
 };
 
-#endif //dk_info_hpp
+#endif //dk_debug_hpp
