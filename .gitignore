@@ -1,3 +1,8 @@
 *.exe
 *.lib
 *.a
+
+DKCMAKE_START_VARIABLES.temp
+DEPENDS.TMP
+DKPlugins/DK/backward.cpp
+*/*/*.exe.aarch64.elf
