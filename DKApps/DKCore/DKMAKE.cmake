@@ -1,3 +1,12 @@
+dk_depend(zlib)
+dk_depend(DK)
+
+
+
+
+
+
+#[[ Work In Progress
 #!/usr/bin/cmake -P
 if(NOT DKCMAKE_FUNCTIONS_DIR_)
 	set(DKCMAKE_FUNCTIONS_DIR_ ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
@@ -21,3 +30,4 @@ dk_configure(${DK_PROJECT_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} 
 
 ############ BUILD APP ############
 dk_build(${DK_PROJECT_DIR})
+]]
