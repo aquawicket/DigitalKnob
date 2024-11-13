@@ -15,6 +15,7 @@ dk_validate(triple "dk_target_triple()")
 dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 dk_getFileParam("${DKIMPORTS_DIR}/zlib/zlib.txt" ZLIB_DL)
 dk_import(${ZLIB_DL})
+#dk_import(https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz)
 
 ### LINK ###
 dk_include				(${ZLIB_DIR}							ZLIB_INCLUDE_DIR)
@@ -61,7 +62,7 @@ dk_append(ZLIB_CMAKE
 	"-DCMAKE_EXE_LINKER_FLAGS=${ZLIB_LIBRARY}")
 
 ### GENERATE ###
-dk_configure(${ZLIB_DIR} -DZLIB_BUILD_EXAMPLES=OFF)
+dk_configure(${ZLIB_DIR} -DZLIB_BUILD_EXAMPLES=OFF -DUNIX=1 -DWIN32=0 NO_HALT)
 
 ### COMPILE ###
 dk_build(${ZLIB_DIR} zlibstatic)
